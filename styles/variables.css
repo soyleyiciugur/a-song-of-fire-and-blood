@@ -1,0 +1,28 @@
+:root {
+  /* Backgrounds */
+  --background: #0b0b0f;
+  --surface: #141418;
+  --surface-hover: #1b1b21;
+
+  /* Borders */
+  --border: #2d2d33;
+
+  /* Colors */
+  --gold: #c9a227;
+  --text: #e5e5e5;
+  --muted: #8c8c8c;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  /* Layout */
+  --container-width: 1200px;
+
+  /* Shadow */
+  --shadow-card: 0 4px 14px rgba(0,0,0,.3);
+
+  /* Typography */
+  --font-body: Georgia, "Times New Roman", serif;
+}

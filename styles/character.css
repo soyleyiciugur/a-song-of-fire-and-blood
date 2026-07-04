@@ -1,0 +1,37 @@
+.character-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.character-item {
+  margin-bottom: 12px;
+}
+
+.character-link {
+  display: block;
+
+  padding: 16px 18px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--text);
+
+  text-decoration: none;
+
+  font-size: 18px;
+
+  transition: .2s ease;
+}
+
+.character-link:hover {
+  background: var(--surface-hover);
+}
+
+.character-nickname {
+  color: var(--muted);
+}

@@ -1,0 +1,19 @@
+.button-row {
+  display: flex;
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: var(--radius-md);
+  transition: .2s;
+}
+
+.button:hover {
+  background: var(--surface-hover);
+}

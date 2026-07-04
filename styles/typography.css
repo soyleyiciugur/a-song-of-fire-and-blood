@@ -1,0 +1,34 @@
+.page-title {
+  color: var(--gold);
+  font-size: 48px;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.page-subtitle {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: var(--gold);
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.chapter-title {
+  color: var(--gold);
+  font-size: 30px;
+  margin: 0 0 12px;
+}
+
+.chapter-synopsis {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}

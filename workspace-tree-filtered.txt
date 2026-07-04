@@ -1,0 +1,91 @@
+﻿a-song-of-fire-and-blood/
+|-- app
+   |-- chapters
+      |-- [id]
+         |-- page.tsx
+      |-- chapters.module.css
+      |-- page.tsx
+   |-- characters
+      |-- [id]
+         |-- page.tsx
+      |-- characters.module.css
+      |-- page.tsx
+   |-- favicon.ico
+   |-- globals.css
+   |-- layout.tsx
+   |-- page.tsx
+|-- components
+   |-- character
+      |-- CharacterBiography.tsx
+      |-- CharacterHeader.tsx
+      |-- CharacterInfoBox.tsx
+      |-- CharacterRelationships.tsx
+      |-- CharacterTraits.tsx
+      |-- RelationshipCard.tsx
+      |-- TraitBadge.tsx
+   |-- layout
+      |-- Breadcrumb.tsx
+   |-- ui
+      |-- Badge.tsx
+      |-- Card.tsx
+      |-- InfoRow.tsx
+      |-- SectionTitle.tsx
+|-- constants
+   |-- titles.ts
+|-- data
+   |-- chapters.ts
+   |-- characters.ts
+|-- lib
+   |-- chapters.ts
+   |-- characters.ts
+   |-- images.ts
+|-- public
+   |-- images
+      |-- chapters
+      |-- characters
+         |-- alester-dayne.webp
+         |-- baelenys-targaryen.webp
+         |-- derrin-hightower.webp
+         |-- gaelor-targaryen.webp
+         |-- jacaelon-targaryen.webp
+         |-- jaery-targaryen.webp
+         |-- lorenah-dayne.webp
+         |-- maela-targaryen.webp
+         |-- naella-velaryon.webp
+         |-- rhaella-targaryen.webp
+         |-- saathos-maris.webp
+         |-- saera-targaryen.webp
+         |-- vhaemys-targaryen.webp
+         |-- visenor-targaryen.webp
+      |-- ui
+   |-- file.svg
+   |-- globe.svg
+   |-- next.svg
+   |-- vercel.svg
+   |-- window.svg
+|-- styles
+   |-- buttons.css
+   |-- cards.css
+   |-- chapter.css
+   |-- character.css
+   |-- colors.ts
+   |-- layout.css
+   |-- typography.css
+   |-- variables.css
+|-- types
+   |-- chapter.ts
+   |-- character.ts
+|-- .gitignore
+|-- AGENTS.md
+|-- CLAUDE.md
+|-- eslint.config.mjs
+|-- next.config.ts
+|-- next-env.d.ts
+|-- package.json
+|-- package-lock.json
+|-- postcss.config.mjs
+|-- README.md
+|-- tsconfig.json
+|-- workspace-tree.txt
+|-- workspace-tree-filtered.txt
+|-- workspace-tree-utf8.txt

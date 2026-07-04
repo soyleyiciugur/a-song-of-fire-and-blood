@@ -1,0 +1,58 @@
+.page {
+  padding: 60px 20px;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.heading {
+  margin: 0 0 30px;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  margin-bottom: 12px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 16px 18px;
+
+  text-decoration: none;
+  color: var(--text);
+  font-size: 18px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.card:hover {
+  background: var(--surface-hover);
+  border-color: var(--gold);
+}
+
+.nickname {
+  color: var(--muted);
+}
