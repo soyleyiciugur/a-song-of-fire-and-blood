@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { getMiniPortraitSrc, getMiniPortraitAlt } from "@/lib/portraits";
+import { getSafeMiniPortrait } from "@/lib/portraits";
 
 type MiniPortraitProps = {
-  characterId: string;
+  characterId?: string;
   name: string;
   size?: number;
   className?: string;
@@ -16,8 +16,8 @@ export default function MiniPortrait({
 }: MiniPortraitProps) {
   return (
     <Image
-      src={getMiniPortraitSrc(characterId)}
-      alt={getMiniPortraitAlt(name)}
+      src={getSafeMiniPortrait(characterId)}
+      alt={name}
       width={size}
       height={size}
       className={className}
