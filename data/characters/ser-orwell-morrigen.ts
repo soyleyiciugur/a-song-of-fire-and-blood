@@ -1,7 +1,7 @@
 import type { Character } from "@/types/character";
 
 export const orwellMorrigen: Character = {
-  id: "orwell-morrigen",
+  id: "ser-orwell-morrigen",
 
   name: "Ser Orwell Morrigen",
   nickname: "-",

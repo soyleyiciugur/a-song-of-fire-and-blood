@@ -18,7 +18,7 @@ import { darrenDayne } from "./darren-dayne";
 import { steffonBaratheon } from "./steffon-baratheon";
 import { cordinPoole } from "./cordin-poole";
 import { brannynVance } from "./brannyn-vance";
-import { orwellMorrigen } from "./orwell-morrigen";
+import { orwellMorrigen } from "./ser-orwell-morrigen";
 import { timosHightower } from "./timos-hightower";
 import { alysanneHightower } from "./alysanne-hightower";
 import { baelorTargaryen } from "./baelor-targaryen";
@@ -48,7 +48,7 @@ export const characters = {
   "steffon-baratheon": steffonBaratheon,
   "cordin-poole": cordinPoole,
   "brannyn-vance": brannynVance,
-  "orwell-morrigen": orwellMorrigen,
+  "ser-orwell-morrigen": orwellMorrigen,
   "timos-hightower": timosHightower,
   "alysanne-hightower": alysanneHightower,
   "baelor-targaryen": baelorTargaryen,
