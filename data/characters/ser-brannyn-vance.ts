@@ -1,7 +1,7 @@
 import type { Character } from "@/types/character";
 
 export const brannynVance: Character = {
-  id: "brannyn-vance",
+  id: "ser-brannyn-vance",
 
   name: "Ser Brannyn Vance",
   nickname: "-",

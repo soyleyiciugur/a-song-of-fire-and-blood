@@ -50,7 +50,7 @@ export const maelaTargaryen: Character = {
     "jacaelon-targaryen":
       "Her twin and his greatest emotional vulnerability.",
 
-    "brannyn-vance":
+    "ser-brannyn-vance":
       "Her sworn Kingsguard shield; she took his honesty, then took far more than his opinion.",
 
     "steffon-baratheon":
