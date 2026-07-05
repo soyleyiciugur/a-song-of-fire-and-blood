@@ -20,7 +20,9 @@ export type CharacterId =
   | "malaenar-targaryen"
   | "vahaemon-targaryen"
   | "steffon-baratheon"
+  | "baelor-targaryen"
   | "curtass-whent";
+
 
 export interface Character {
   id: CharacterId;
