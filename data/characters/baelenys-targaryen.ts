@@ -15,12 +15,12 @@ export const baelenysTargaryen: Character = {
   age: 58,
   height: "185 cm",
 
-  father: "-",
-  mother: "-",
+  father: "Aenys Targaryen II",
+  mother: "Vhaemys Targaryen",
 
   spouse: "jaery-targaryen",
 
-  siblings: ["-"],
+  siblings: ["malaenar-targaryen", "vahaemon-targaryen"],
 
   children: [
     "saera-targaryen",
@@ -42,7 +42,7 @@ export const baelenysTargaryen: Character = {
     "Proud",
     "Calculating",
     "Ruthless",
-    "Paranoid (recently)"
+    "Paranoid"
   ],
 
   goals: [
@@ -57,24 +57,30 @@ export const baelenysTargaryen: Character = {
       "Trusts her more than most, but rarely lets her influence his decisions.",
 
     "visenor-targaryen":
-      "Formerly trusted heir. That trust has been shattered.",
+      "Formerly his most trusted heir. That trust has been shattered, and Visenor now faces exile or worse.",
 
     "gaelor-targaryen":
-      "Sees growing potential in him.",
+      "Sees growing potential in him and has named him heir should Visenor not return.",
 
     "jacaelon-targaryen":
-      "Respects his intelligence but despises his constant opposition.",
+      "Respects his intelligence and has made him Hand of the King, though he still despises his constant opposition.",
 
     "saera-targaryen":
-      "Increasingly distrustful.",
+      "Increasingly distrustful, though he still relies on her for delicate diplomatic errands.",
 
     "rhaella-targaryen":
-      "Considers her a political liability.",
+      "Considers her a political liability and the daughter of a traitor he has never forgiven.",
+
+    "vahaemon-targaryen":
+      "His exiled brother. Rhaella's secret letters to him reignited every suspicion Baelenys has ever carried about his own blood.",
+
+    "malaenar-targaryen":
+      "His steady, unambitious brother — the one Targaryen sibling he has never had reason to doubt.",
 
     "derrin-hightower":
-      "Old friend and trusted Hand."
+      "His oldest friend and, until his execution, his most trusted Hand — a betrayal that cut deeper than the poison itself."
   },
 
   summary:
-    "King Baelenys has ruled the realm through fear, strength and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence shattered his already fragile trust in his children, especially Visenor. Despite his cruelty, Baelenys remains a formidable ruler whose greatest strength is his ability to dominate every room he enters."
+    "King Baelenys has ruled the realm through fear, strength, and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence with his own exiled brother Vahaemon shattered his already fragile trust in his children, especially Visenor, whom he struck down before the entire court and gave an impossible choice: kill his wife, or lose everything. Having named Jacaelon his new Hand after Derrin Hightower's treason and secret execution, Baelenys now moves toward war with House Tyrell and Hightower with the same merciless certainty that has defined his reign."
 };

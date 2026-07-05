@@ -30,23 +30,36 @@ export const maelaTargaryen: Character = {
 
   mentor: "-",
 
-  dragon: "-",
+  dragon: "Unnamed Hatchling",
 
   traits: [
     "Manipulative",
     "Charismatic",
-    "Agile"
+    "Agile",
+    "Guarded",
+    "Unbothered by Convention"
   ],
 
   goals: [
-    "-"
+    "Keep control over her own future, marriage included",
+    "Protect Jace, even from himself",
+    "Enjoy herself without consequence"
   ],
 
   relationships: {
     "jacaelon-targaryen":
-      "Her twin and his greatest emotional vulnerability."
+      "Her twin and his greatest emotional vulnerability.",
+
+    "brannyn-vance":
+      "Her sworn Kingsguard shield; she took his honesty, then took far more than his opinion.",
+
+    "steffon-baratheon":
+      "Charmed by his awkward, oblivious chivalry at Storm's End, though she has no real interest in becoming his lady.",
+
+    "visenor-targaryen":
+      "Received his surviving dragon hatchling as a royal gift after his own three clutch-mates met tragedy."
   },
 
   summary:
-    "Born only two minutes before Jace, Maela shares an unusually close bond with her twin. Clever, charismatic and naturally manipulative, she exerts a quiet but persistent influence over those around her, especially Jace."
+    "Born only two minutes before Jace, Maela shares an unusually close bond with her twin. Clever, charismatic, and naturally manipulative, she was gifted the sole surviving hatchling from Visenor's ill-fated clutch after the other two died of grotesque birth defects. Pressured by her mother to consider suitors like the aging Lord Arryn and the earnest Steffon Baratheon, Maela used a visit to Storm's End to entertain the Young Stag while quietly seducing her own Kingsguard, Ser Brannyn Vance — then drank moon tea in secret to ensure the night left no trace behind it."
 };

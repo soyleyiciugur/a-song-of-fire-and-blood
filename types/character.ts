@@ -14,7 +14,13 @@ export type CharacterId =
   | "lorenah-dayne"
   | "ser-alester-dayne"
   | "derrin-hightower"
-  | "ser-saathos-maris";
+  | "ser-saathos-maris"
+  | "timos-hightower"
+  | "alysanne-hightower"
+  | "malaenar-targaryen"
+  | "vahaemon-targaryen"
+  | "steffon-baratheon"
+  | "curtass-whent";
 
 export interface Character {
   id: CharacterId;

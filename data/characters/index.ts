@@ -14,6 +14,20 @@ import { lorenahDayne } from "./lorenah-dayne";
 import { serAlesterDayne } from "./ser-alester-dayne";
 import { derrinHightower } from "./derrin-hightower";
 import { serSaathosMaris } from "./ser-saathos-maris";
+import { darrenDayne } from "./darren-dayne";
+import { steffonBaratheon } from "./steffon-baratheon";
+import { cordinPoole } from "./cordin-poole";
+import { brannynVance } from "./brannyn-vance";
+import { orwellMorrigen } from "./orwell-morrigen";
+import { timosHightower } from "./timos-hightower";
+import { alysanneHightower } from "./alysanne-hightower";
+import { baelorTargaryen } from "./baelor-targaryen";
+import { rickardStark } from "./rickard-stark";
+import { brandonStark } from "./brandon-stark";
+import { tionLannister } from "./tion-lannister";
+import { malaenarTargaryen } from "./malaenar-targaryen";
+import { vahaemonTargaryen } from "./vahaemon-targaryen";
+import { curtassWhent } from "./curtass-whent";
 
 export const characters = {
   "baelenys-targaryen": baelenysTargaryen,
@@ -30,4 +44,18 @@ export const characters = {
   "ser-alester-dayne": serAlesterDayne,
   "derrin-hightower": derrinHightower,
   "ser-saathos-maris": serSaathosMaris,
+  "darren-dayne": darrenDayne,
+  "steffon-baratheon": steffonBaratheon,
+  "cordin-poole": cordinPoole,
+  "brannyn-vance": brannynVance,
+  "orwell-morrigen": orwellMorrigen,
+  "timos-hightower": timosHightower,
+  "alysanne-hightower": alysanneHightower,
+  "baelor-targaryen": baelorTargaryen,
+  "rickard-stark": rickardStark,
+  "brandon-stark": brandonStark,
+  "tion-lannister": tionLannister,
+  "malaenar-targaryen": malaenarTargaryen,
+  "vahaemon-targaryen": vahaemonTargaryen,
+  "curtass-whent": curtassWhent,
 } as const;

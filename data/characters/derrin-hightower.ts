@@ -22,6 +22,8 @@ export const derrinHightower: Character = {
 
   siblings: [],
 
+  children: ["timos-hightower", "alysanne-hightower"],
+
   mentor: "-",
 
   dragon: "-",
@@ -30,7 +32,9 @@ export const derrinHightower: Character = {
     "Experienced",
     "Patient",
     "Political",
-    "Secretive"
+    "Secretive",
+    "Treasonous",
+    "Idealistic"
   ],
 
   goals: [
@@ -39,9 +43,15 @@ export const derrinHightower: Character = {
 
   relationships: {
     "baelenys-targaryen":
-      "Old friend and trusted Hand."
+      "Old friend and, until his fall, the King's most trusted Hand — a friendship he betrayed for a cause he believed was greater.",
+
+    "jacaelon-targaryen":
+      "The prince who exposed his treason, extracted his confession in a locked room at Driftmark, and executed him personally.",
+
+    "timos-hightower":
+      "His son, condemned and killed for a treason he never had any part in."
   },
 
   summary:
-    "For decades Derrin Hightower has served as Baelenys’ Hand and closest political adviser. After the poisoning attempt, he became the center of suspicion when the dying assassin allegedly whispered only two words: 'The Hand.' Whether innocent or guilty remains unclear, but Derrin now stands at the core of a growing investigation that threatens to destabilize the realm."
+    "For decades Derrin Hightower served as Baelenys' Hand and closest political adviser. After the poisoning attempt, he became the center of suspicion when the dying assassin allegedly whispered only two words: 'the Hand.' Confronted alone by Jacaelon at Driftmark, Derrin confessed everything: he had conspired with the Lord of Highgarden to poison the King, believing the realm could no longer survive Baelenys' wars and taxes, and that he acted for House Targaryen's future rather than against it. Jace executed him on the spot and disposed of his body at sea. To the realm, Derrin Hightower remains simply missing — his true fate known only to the King and his new Hand."
 };
