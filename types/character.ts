@@ -21,6 +21,7 @@ export type CharacterId =
   | "vahaemon-targaryen"
   | "steffon-baratheon"
   | "baelor-targaryen"
+  | "brandon-stark"
   | "curtass-whent";
 
 
