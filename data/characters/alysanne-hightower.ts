@@ -38,7 +38,7 @@ export const alysanneHightower: Character = {
 
   relationships: {
     "timos-hightower":
-      "Her younger brother; she watched him die in the Main Hall moments before the chaos below claimed her too.",
+      "Her younger brother; she watched him die in the Great Hall moments before the chaos below claimed her too.",
 
     "gaelor-targaryen":
       "Watched him arrive at Oldtown's gates from a window above, unaware it would be the last thing she ever saw of the outside world."

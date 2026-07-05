@@ -8,7 +8,7 @@ export const maelaTargaryen: Character = {
   aliases: [],
 
   house: "House Targaryen",
-  title: "Princess",
+  title: "Princess Maela of House Targaryen",
 
   status: "Alive",
 
@@ -57,7 +57,7 @@ export const maelaTargaryen: Character = {
       "Charmed by his awkward, oblivious chivalry at Storm's End, though she has no real interest in becoming his lady.",
 
     "visenor-targaryen":
-      "Received his surviving dragon hatchling as a royal gift after his own three clutch-mates met tragedy."
+      "Received his surviving dragon hatchling after the Crown Prince left the Red Keep without any trace."
   },
 
   summary:

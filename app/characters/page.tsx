@@ -1,15 +1,15 @@
 import Link from "next/link";
 
 import { getCharacters } from "@/lib/characters";
-import { TITLE_ORDER } from "@/constants/titles";
+import { getTitleRank } from "@/constants/titles";
 import MiniPortrait from "@/components/MiniPortrait";
 
 import styles from "./characters.module.css";
 
 export default function Characters() {
   const characters = getCharacters().sort((a, b) => {
-    const rankA = TITLE_ORDER.indexOf(a.title);
-    const rankB = TITLE_ORDER.indexOf(b.title);
+    const rankA = getTitleRank(a.title);
+    const rankB = getTitleRank(b.title);
 
     if (rankA !== rankB) return rankA - rankB;
 

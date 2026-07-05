@@ -8,7 +8,7 @@ export const visenorTargaryen: Character = {
   aliases: [],
 
   house: "House Targaryen",
-  title: "Crown Prince",
+  title: "Crown Prince Visenor of House Targaryen",
 
   status: "Missing",
 
@@ -58,7 +58,7 @@ export const visenorTargaryen: Character = {
       "His greatest love and the reason he gave up everything, including his claim to the throne, to flee the capital.",
 
     "jacaelon-targaryen":
-      "His opinion of Jace changed completely after learning of his secret help — and the price Jace's friend Ser Alester nearly paid for it.",
+      "His opinion of Jace changed completely after his secret help — and the price Jace's friend Ser Alester nearly paid for it.",
 
     "gaelor-targaryen":
       "Often disagrees with his methods, though it was Gaelor who first argued Visenor should never split his clutch of dragons among the family.",

@@ -8,7 +8,7 @@ export const rhaellaTargaryen: Character = {
   aliases: [],
 
   house: "House Targaryen",
-  title: "Princess",
+  title: "Princess Rhaella of House Targaryen",
 
   status: "Alive",
 

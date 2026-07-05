@@ -8,9 +8,9 @@ export const derrinHightower: Character = {
   aliases: [],
 
   house: "House Hightower",
-  title: "Hand of the King",
+  title: "Late Hand of the King",
 
-  status: "Missing",
+  status: "Dead",
 
   age: 68,
   height: "170 cm",

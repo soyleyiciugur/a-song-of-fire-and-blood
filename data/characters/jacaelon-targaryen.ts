@@ -8,7 +8,7 @@ export const jacaelonTargaryen: Character = {
   aliases: ["The Hand"],
 
   house: "House Targaryen",
-  title: "Hand of the King",
+  title: "Prince Jacaelon of House Targaryen and Hand of the King",
 
   status: "Alive",
 

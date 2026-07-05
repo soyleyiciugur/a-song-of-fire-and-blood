@@ -51,5 +51,5 @@ export const baelorTargaryen: Character = {
   },
 
   summary:
-    "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid rumors of Tyrell and Hightower treason, Baelor arrives too late to stop Gaelor's bloody campaign in the Reach and rides for the Red Keep in open alarm, desperate to find Jace before the realm's fragile peace unravels entirely."
+    "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid rumors of Tyrell and Hightower treason, Baelor arrives too late to stop Gaelor's bloody campaign in the Reach and rides for the Red Keep in open alarm."
 };

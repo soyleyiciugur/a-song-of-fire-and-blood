@@ -42,7 +42,7 @@ export const curtassWhent: Character = {
       "Summoned back into royal service and hired in secret to track down and retrieve Prince Visenor, dead or alive.",
 
     "ser-alester-dayne":
-      "Ambushed him and Visenor's party in the Dornish woods, leading a hunting party of sellswords against him in a brutal duel that nearly killed them both."
+      "Ambushed him and Visenor's party on the way to Dorne, leading a hunting party of sellswords against him."
   },
 
   summary:

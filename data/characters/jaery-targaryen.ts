@@ -53,7 +53,7 @@ export const jaeryTargaryen: Character = {
       "Often the last voice able to temper the king's fury, though even she has limits to her influence.",
 
     "jacaelon-targaryen":
-      "Pinned the Hand's badge to his chest herself, telling him plainly that she is proud of him — a rare moment of open warmth from a woman who shows little.",
+      "Pinned the Hand's badge to his chest herself, telling him plainly that she is proud of him — a rare moment of appreciation for the prince.",
 
     "gaelor-targaryen":
       "Reminds him constantly that he is heir now, and that a prince wandering the city until dawn reeking of wine is unacceptable.",

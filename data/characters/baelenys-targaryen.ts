@@ -72,7 +72,7 @@ export const baelenysTargaryen: Character = {
       "Considers her a political liability and the daughter of a traitor he has never forgiven.",
 
     "vahaemon-targaryen":
-      "His exiled brother. Rhaella's secret letters to him reignited every suspicion Baelenys has ever carried about his own blood.",
+      "His exiled brother. Rhaella's secret letters to her siblings reignited every suspicion Baelenys has ever carried about his own blood.",
 
     "malaenar-targaryen":
       "His steady, unambitious brother — the one Targaryen sibling he has never had reason to doubt.",

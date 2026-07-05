@@ -46,7 +46,7 @@ export const vahaemonTargaryen: Character = {
       "His brother and King, who exiled him for treason years before the poisoning crisis and has never forgiven him.",
 
     "rhaella-targaryen":
-      "His daughter. Her secret letters to her brothers beyond the realm's borders reignited the very suspicion that nearly destroyed her marriage, though the warning was never addressed to him."
+      "His daughter. Her secret letters to her siblings beyond the realm's borders reignited the very suspicion that nearly destroyed her marriage, though the warning was never addressed to him."
   },
 
   summary:
