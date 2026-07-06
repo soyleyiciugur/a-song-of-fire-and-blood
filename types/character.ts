@@ -42,6 +42,7 @@ export interface Character {
   title: string;
 
   status: CharacterStatus;
+  secret?: { status: CharacterStatus; note: string };
 
   age: number;
   height?: string;

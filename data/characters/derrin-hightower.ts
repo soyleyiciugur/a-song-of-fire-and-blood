@@ -8,9 +8,14 @@ export const derrinHightower: Character = {
   aliases: [],
 
   house: "House Hightower",
-  title: "Late Hand of the King",
+  title: "Former Hand of the King",
 
-  status: "Dead",
+  status: "Missing",
+
+  secret: {
+    status: "Dead",
+    note: "Executed by Jacaelon Targaryen in a locked chamber at Driftmark after confessing his treason. His body was given to the sea. Only the King and his new Hand know the truth.",
+  },
 
   age: 68,
   height: "170 cm",

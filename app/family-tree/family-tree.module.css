@@ -30,6 +30,7 @@
 
 .house {
   margin-bottom: 64px;
+  scroll-margin-top: 90px;
 }
 
 .house:last-child {

@@ -2,6 +2,7 @@
 import Image from "next/image";
 
 import { getChapter } from "@/data/chapters";
+import LinkedParagraph from "@/components/chapter/LinkedParagraph";
 
 type Props = {
   params: Promise<{
@@ -75,15 +76,7 @@ export default async function ChapterPage({ params }: Props) {
         </h1>
 
         {chapter.content.map((paragraph, index) => (
-          <p
-            key={index}
-            style={{
-              marginBottom: 18,
-              color: "var(--text)",
-            }}
-          >
-            {paragraph}
-          </p>
+          <LinkedParagraph key={index} text={paragraph} />
         ))}
       </div>
     </main>

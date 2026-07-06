@@ -1,0 +1,117 @@
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.labelStack {
+  position: relative;
+  display: inline-block;
+
+  min-height: 20px;
+  min-width: 70px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 600;
+  white-space: nowrap;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 14px;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.labelVisible {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+  pointer-events: auto;
+}
+
+.labelHidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  opacity: 0;
+  transform: translateY(3px) rotateX(40deg);
+  pointer-events: none;
+}
+
+.eyeButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  width: 26px;
+  height: 26px;
+
+  padding: 0;
+
+  font-family: inherit;
+  color: var(--muted);
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.eyeButton:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.eyeButton:active {
+  transform: scale(0.92);
+}
+
+.note {
+  margin: 10px 0 0;
+
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+
+  animation: noteIn 0.3s ease;
+}
+
+.noteSecret {
+  color: #e0a94a;
+}
+
+.noteConfirmed {
+  color: var(--muted);
+}
+
+@keyframes noteIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,6 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { characters } from "@/data/characters";
-import type { Character, CharacterStatus } from "@/types/character";
+import type { Character } from "@/types/character";
+import { slugifyHouse } from "@/lib/houses";
+import StatusReveal from "./StatusReveal";
 
 type Props = {
   character: Character;
@@ -18,63 +21,6 @@ function getCharacterName(id?: string | null) {
   const character = characters[id as keyof typeof characters];
 
   return character?.name ?? id;
-}
-
-const statusMap: Record<
-  CharacterStatus,
-  { label: string; color: string; icon: string }
-> = {
-  Alive: {
-    label: "Alive",
-    color: "#39d353",
-    icon: "●",
-  },
-  Dead: {
-    label: "Dead",
-    color: "#f85149",
-    icon: "✕",
-  },
-  Missing: {
-    label: "Missing",
-    color: "#f59e0b",
-    icon: "?",
-  },
-  Unknown: {
-    label: "Unknown",
-    color: "#8b949e",
-    icon: "–",
-  },
-};
-
-function StatusValue({ status }: { status: CharacterStatus }) {
-  const item = statusMap[status];
-
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 8,
-        color: item.color,
-        fontWeight: 600,
-      }}
-    >
-      <span
-        style={{
-          display: "inline-flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: 14,
-          fontSize: 15,
-          fontWeight: 700,
-        }}
-      >
-        {item.icon}
-      </span>
-
-      <span>{item.label}</span>
-    </span>
-  );
 }
 
 export default function CharacterInfoBox({ character }: Props) {
@@ -124,10 +70,29 @@ export default function CharacterInfoBox({ character }: Props) {
           Information
         </h2>
 
-        <InfoRow label="House" value={character.house} />
+        <InfoRow
+          label="House"
+          value={
+            isValidValue(character.house) ? (
+              <Link
+                href={`/houses/${slugifyHouse(character.house)}`}
+                style={{ color: "#c9a227", textDecoration: "none" }}
+              >
+                {character.house}
+              </Link>
+            ) : (
+              character.house
+            )
+          }
+        />
         <InfoRow
           label="Status"
-          value={<StatusValue status={character.status} />}
+          value={
+            <StatusReveal
+              status={character.status}
+              secret={character.secret}
+            />
+          }
         />
         <InfoRow label="Title" value={character.title} />
         <InfoRow label="Age" value={String(character.age)} />

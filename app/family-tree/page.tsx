@@ -16,7 +16,7 @@ export default function FamilyTree() {
         </p>
 
         {/* HOUSE TARGARYEN */}
-        <section className={styles.house}>
+        <section id="house-targaryen" className={styles.house}>
           <h2 className={styles.houseTitle}>House Targaryen</h2>
 
           <p className={styles.generationLabel}>The Old King&apos;s Children</p>
@@ -24,7 +24,7 @@ export default function FamilyTree() {
           <div className={styles.generationRow}>
             <FamilyUnit
               parentA={{ name: "Aenys Targaryen II" }}
-              parentB={{ name: "Vhaemys Targaryen" }}
+              parentB={{ name: "Vhaemys Targaryen (the Elder)" }}
               childrenLabel="Children"
             >
               <PersonNode id="baelenys-targaryen" />
@@ -72,7 +72,7 @@ export default function FamilyTree() {
         </section>
 
         {/* HOUSE HIGHTOWER */}
-        <section className={styles.house}>
+        <section id="house-hightower" className={styles.house}>
           <h2 className={styles.houseTitle}>House Hightower</h2>
 
           <div className={styles.generationRow}>
@@ -87,7 +87,7 @@ export default function FamilyTree() {
         </section>
 
         {/* HOUSE STARK */}
-        <section className={styles.house}>
+        <section id="house-stark" className={styles.house}>
           <h2 className={styles.houseTitle}>House Stark</h2>
 
           <div className={styles.generationRow}>
@@ -101,7 +101,7 @@ export default function FamilyTree() {
         </section>
 
         {/* HOUSE DAYNE */}
-        <section className={styles.house}>
+        <section id="house-dayne" className={styles.house}>
           <h2 className={styles.houseTitle}>House Dayne</h2>
 
           <div className={styles.generationRow}>

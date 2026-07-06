@@ -8,7 +8,7 @@ export const maelaTargaryen: Character = {
   aliases: [],
 
   house: "House Targaryen",
-  title: "Princess Maela of House Targaryen",
+  title: "Princess",
 
   status: "Alive",
 
@@ -30,7 +30,7 @@ export const maelaTargaryen: Character = {
 
   mentor: "-",
 
-  dragon: "Unnamed Hatchling",
+  dragon: "Jadefyre",
 
   traits: [
     "Manipulative",
@@ -50,16 +50,16 @@ export const maelaTargaryen: Character = {
     "jacaelon-targaryen":
       "Her twin and his greatest emotional vulnerability.",
 
-    "ser-brannyn-vance":
+    "brannyn-vance":
       "Her sworn Kingsguard shield; she took his honesty, then took far more than his opinion.",
 
     "steffon-baratheon":
       "Charmed by his awkward, oblivious chivalry at Storm's End, though she has no real interest in becoming his lady.",
 
     "visenor-targaryen":
-      "Received his surviving dragon hatchling after the Crown Prince left the Red Keep without any trace."
+      "Named his surviving hatchling Jadefyre before his flight from King's Landing; the dragon was later gifted to her by royal decree."
   },
 
   summary:
-    "Born only two minutes before Jace, Maela shares an unusually close bond with her twin. Clever, charismatic, and naturally manipulative, she was gifted the sole surviving hatchling from Visenor's ill-fated clutch after the other two died of grotesque birth defects. Pressured by her mother to consider suitors like the aging Lord Arryn and the earnest Steffon Baratheon, Maela used a visit to Storm's End to entertain the Young Stag while quietly seducing her own Kingsguard, Ser Brannyn Vance — then drank moon tea in secret to ensure the night left no trace behind it."
+    "Born only two minutes before Jace, Maela shares an unusually close bond with her twin. Clever, charismatic, and naturally manipulative, she was gifted Jadefyre, the sole surviving hatchling from Visenor's ill-fated clutch, after the other two died of grotesque birth defects. Pressured by her mother to consider suitors like the aging Lord Arryn and the earnest Steffon Baratheon, Maela used a visit to Storm's End to entertain the Young Stag while quietly seducing her own Kingsguard, Ser Brannyn Vance — then drank moon tea in secret to ensure the night left no trace behind it."
 };

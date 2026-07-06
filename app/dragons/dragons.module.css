@@ -1,0 +1,168 @@
+.page {
+  padding: 60px 20px;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.heading {
+  margin: 0;
+
+  font-size: 44px;
+  font-weight: 700;
+
+  color: var(--gold);
+}
+
+.subheading {
+  margin: 8px 0 40px;
+
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.group {
+  margin-bottom: 48px;
+  scroll-margin-top: 90px;
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+
+.groupHeading {
+  margin: 0 0 20px;
+
+  font-size: 22px;
+  font-weight: 600;
+
+  color: var(--gold);
+
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 20px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+
+  scroll-margin-top: 90px;
+}
+
+.cardDead {
+  opacity: 0.85;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dragonName {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  color: var(--text);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.statusAlive {
+  color: #39d353;
+}
+
+.statusDead {
+  color: #f85149;
+}
+
+.description {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.riders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.riderChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 6px 14px 6px 6px;
+
+  text-decoration: none;
+  color: var(--text);
+
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  transition: border-color 0.2s ease;
+}
+
+.riderChip:hover {
+  border-color: var(--gold);
+}
+
+.riderLabel {
+  display: block;
+
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+
+.riderName {
+  display: block;
+
+  font-size: 13px;
+  font-weight: 600;
+}

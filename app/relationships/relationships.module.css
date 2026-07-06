@@ -1,0 +1,155 @@
+.page {
+  padding: 60px 20px;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.heading {
+  margin: 0 0 8px;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.subheading {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 640px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filterLabel {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select {
+  padding: 8px 14px;
+
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  outline: none;
+}
+
+.select:focus {
+  border-color: var(--gold);
+}
+
+.graphLayout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.node {
+  cursor: pointer;
+}
+
+.nodeLabel {
+  font-size: 11px;
+  fill: var(--text);
+  pointer-events: none;
+  user-select: none;
+}
+
+.sidebar {
+  position: sticky;
+  top: 90px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+
+  min-height: 260px;
+}
+
+.sidebarName {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: var(--gold);
+}
+
+.sidebarHouse {
+  margin: 0 0 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sidebarEmpty {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.relationshipList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.relationshipItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.relationshipName {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.relationshipDescription {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .graphLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}

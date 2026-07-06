@@ -1,0 +1,297 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+.header {
+  padding: 20px 24px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.heading {
+  margin: 0 0 6px;
+  font-size: 24px;
+  color: var(--gold);
+}
+
+.subheading {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  min-height: 0;
+}
+
+.viewport {
+  position: relative;
+  overflow: hidden;
+  background: #050507;
+  cursor: grab;
+}
+
+.viewport:active {
+  cursor: grabbing;
+}
+
+.mapWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+.mapImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  cursor: crosshair;
+}
+
+.pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.pinDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid #1a1508;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.4);
+}
+
+.pinIndex {
+  font-size: 10px;
+  color: var(--gold);
+  background: rgba(11, 11, 15, 0.85);
+  padding: 1px 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.pendingForm {
+  position: absolute;
+  transform: translate(12px, -12px);
+  z-index: 20;
+
+  background: var(--surface);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  box-shadow: var(--shadow-card);
+}
+
+.pendingInput {
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  min-width: 160px;
+}
+
+.pendingInput:focus {
+  border-color: var(--gold);
+}
+
+.pendingActions {
+  display: flex;
+  gap: 6px;
+}
+
+.pendingConfirm,
+.pendingCancel {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.pendingConfirm {
+  background: var(--gold);
+  color: #1a1508;
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+.pendingCancel {
+  background: transparent;
+  color: var(--muted);
+}
+
+.zoomControls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.zoomControls button {
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.zoomControls button:hover {
+  border-color: var(--gold);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.sidebarHeader {
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebarTitle {
+  margin: 0;
+  font-size: 15px;
+  color: var(--gold);
+}
+
+.pointList {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+}
+
+.pointItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.pointItem:hover {
+  background: var(--surface-hover);
+}
+
+.pointIndex {
+  font-size: 11px;
+  color: var(--muted);
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.pointName {
+  flex: 1;
+  text-align: left;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pointName:hover {
+  color: var(--gold);
+}
+
+.pointCoords {
+  font-size: 11px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.pointRemove {
+  font-size: 15px;
+  line-height: 1;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.pointRemove:hover {
+  color: #e05252;
+}
+
+.pointEmpty {
+  padding: 16px 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sidebarActions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.copyButton,
+.clearButton {
+  flex: 1;
+  padding: 10px;
+  font-size: 13px;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.copyButton {
+  background: var(--gold);
+  color: #1a1508;
+  border: 1px solid var(--gold);
+  font-weight: 600;
+}
+
+.clearButton {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.clearButton:hover {
+  border-color: #e05252;
+  color: #e05252;
+}

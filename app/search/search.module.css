@@ -1,0 +1,98 @@
+.page {
+  padding: 60px 20px;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--text);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.heading {
+  margin: 0;
+
+  font-size: 44px;
+  font-weight: 700;
+
+  color: var(--gold);
+}
+
+.subheading {
+  margin: 8px 0 40px;
+
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.groupHeading {
+  margin: 0 0 16px;
+
+  font-size: 22px;
+  font-weight: 600;
+
+  color: var(--gold);
+
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  padding: 14px 18px;
+
+  text-decoration: none;
+  color: var(--text);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  background: var(--surface-hover);
+  border-color: var(--gold);
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.cardSubtitle {
+  margin-top: 4px;
+
+  font-size: 14px;
+  color: var(--muted);
+}
