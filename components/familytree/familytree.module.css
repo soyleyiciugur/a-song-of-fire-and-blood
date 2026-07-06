@@ -1,0 +1,119 @@
+.person {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 16px 8px 8px;
+
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+a.person:hover {
+  background: var(--surface-hover);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.person.dimmed {
+  opacity: 0.75;
+}
+
+.unlinked {
+  color: var(--muted);
+  font-weight: 400;
+  font-style: italic;
+  border-style: dashed;
+}
+
+.unlinkedAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+
+  flex-shrink: 0;
+}
+
+.personName {
+  white-space: nowrap;
+}
+
+.unionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.unionConnector {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.familyUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 22px 18px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.dropline {
+  width: 1px;
+  height: 22px;
+
+  margin: 4px 0;
+
+  background: var(--border);
+}
+
+.childrenLabel {
+  margin: 0 0 10px;
+
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.childrenRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.subUnion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}

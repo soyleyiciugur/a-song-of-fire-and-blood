@@ -32,6 +32,14 @@ export default function Home() {
           <Link href="/characters" className="button">
             Characters
           </Link>
+
+          <Link href="/family-tree" className="button">
+            Family Tree
+          </Link>
+
+          <Link href="/timeline" className="button">
+            Timeline
+          </Link>
         </div>
       </div>
     </main>
