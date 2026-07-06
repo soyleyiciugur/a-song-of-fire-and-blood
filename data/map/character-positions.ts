@@ -3,27 +3,17 @@ import type { CharacterId } from "@/types/character";
 /**
  * Where each character is standing during a given chapter.
  *
- * Shape: { [chapterSlug]: { [characterId]: locationName } }
- * `locationName` must match a `name` in data/map/locations.ts.
+ * A character may be in one location:
+ *   "gaelor-targaryen": "Oldtown"
  *
- * A character with no entry for a chapter simply doesn't get a pin for
- * that chapter — nothing is guessed or carried forward automatically,
- * so the map never shows someone somewhere we're not sure about.
- *
- * STATUS OF THIS DATA:
- * - "the-poison-beneath-the-crown" is fully read and confident — the whole
- *   chapter takes place during the lockdown at King's Landing.
- * - The other four chapters are a first-pass best guess based on the
- *   clearest textual signals (the Driftmark wedding, the Oldtown battle,
- *   characters explicitly placed in a room). They're a solid starting
- *   point, but please skim through and correct/expand them — especially
- *   anyone from House Hightower in "fathers-and-their-sins", since Oldtown
- *   is their seat and the text doesn't spell out exactly who's where
- *   during that fight.
+ * ...or multiple locations if they travel during the chapter:
+ *   "gaelor-targaryen": ["Oldtown", "King's Landing"]
  */
+export type CharacterLocation = string | string[];
+
 export const CHAPTER_CHARACTER_POSITIONS: Record<
   string,
-  Partial<Record<CharacterId, string>>
+  Partial<Record<CharacterId, CharacterLocation>>
 > = {
   "the-poison-beneath-the-crown": {
     "baelenys-targaryen": "King's Landing",
@@ -38,47 +28,45 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
   "the-price-of-trust": {
     "baelenys-targaryen": "King's Landing",
     "visenor-targaryen": "King's Landing",
-    "jacaelon-targaryen": "King's Landing",
+    "jacaelon-targaryen": ["Sunspear", "Starfall", "King's Landing"],
     "saera-targaryen": "King's Landing",
-    "gaelor-targaryen": "King's Landing",
+    "gaelor-targaryen": "Driftmark",
     "rhaella-targaryen": "King's Landing",
-    "ser-saathos-maris": "King's Landing",
-    "ser-alester-dayne": "King's Landing",
+    "ser-saathos-maris": "Driftmark",
+    "ser-alester-dayne": "Starfall",
     "derrin-hightower": "King's Landing",
-    "lorenah-dayne": "King's Landing",
+    "lorenah-dayne": "Starfall",
     "vhaemys-targaryen": "King's Landing",
   },
 
   "the-weight-of-loyalty": {
-    // Wedding party at Driftmark:
-    "gaelor-targaryen": "Driftmark",
+    "gaelor-targaryen": ["King's Landing", "Driftmark"],
     "naella-velaryon": "Driftmark",
-    "jacaelon-targaryen": "Driftmark",
-    "derrin-hightower": "Driftmark",
-    // Stayed at the capital:
-    "baelenys-targaryen": "King's Landing",
-    "visenor-targaryen": "King's Landing",
-    "saera-targaryen": "King's Landing",
-    "rhaella-targaryen": "King's Landing",
-    "ser-saathos-maris": "King's Landing",
-    "ser-alester-dayne": "King's Landing",
-    "curtass-whent": "King's Landing",
-    "vhaemys-targaryen": "King's Landing",
-    "jaery-targaryen": "King's Landing",
+    "jacaelon-targaryen": ["King's Landing", "Driftmark"],
+    "derrin-hightower": ["King's Landing", "Driftmark"],
+    "baelenys-targaryen": ["King's Landing", "Driftmark"],
+    "visenor-targaryen": "Bitterbridge",
+    "saera-targaryen": ["King's Landing", "Driftmark"],
+    "rhaella-targaryen": "Bitterbridge",
+    "ser-saathos-maris": "Driftmark",
+    "ser-alester-dayne": "Bitterbridge",
+    "curtass-whent": "Bitterbridge",
+    "vhaemys-targaryen": ["King's Landing", "Driftmark"],
+    "jaery-targaryen": ["King's Landing", "Driftmark"],
   },
 
   "the-broken-knight": {
     "jacaelon-targaryen": "King's Landing",
     "gaelor-targaryen": "King's Landing",
-    "baelor-targaryen": "King's Landing",
-    "visenor-targaryen": "King's Landing",
-    "saera-targaryen": "King's Landing",
-    "rhaella-targaryen": "King's Landing",
+    "baelor-targaryen": "Oldtown",
+    "visenor-targaryen": "Bitterbridge",
+    "saera-targaryen": ["King's Landing", "Winterfell"],
+    "rhaella-targaryen": "Bitterbridge",
     "ser-saathos-maris": "King's Landing",
-    "ser-alester-dayne": "King's Landing",
+    "ser-alester-dayne": "Bitterbridge",
     "derrin-hightower": "King's Landing",
     "cordin-poole": "King's Landing",
-    "curtass-whent": "King's Landing",
+    "curtass-whent": "Bitterbridge",
     "jaery-targaryen": "King's Landing",
     "maela-targaryen": "King's Landing",
     "vhaemys-targaryen": "King's Landing",
@@ -86,29 +74,29 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
   },
 
   "fathers-and-their-sins": {
-    // The vanguard that rode on Oldtown:
-    "gaelor-targaryen": "Oldtown",
-    "ser-saathos-maris": "Oldtown",
-    // Back at the capital:
+    // Example of multiple locations during one chapter:
+    // "gaelor-targaryen": ["Oldtown", "King's Landing"],
+
+    "gaelor-targaryen": ["King's Landing", "Oldtown"],
+    "ser-saathos-maris": ["King's Landing", "Oldtown"],
     "jacaelon-targaryen": "King's Landing",
-    "maela-targaryen": "King's Landing",
-    "visenor-targaryen": "King's Landing",
-    "rhaella-targaryen": "King's Landing",
-    "saera-targaryen": "King's Landing",
+    "maela-targaryen": ["King's Landing", "Storm's End"],
+    "visenor-targaryen": "Starfall",
+    "rhaella-targaryen": "Starfall",
+    "saera-targaryen": ["King's Landing", "Winterfell"],
     "baelor-targaryen": "King's Landing",
     "jaery-targaryen": "King's Landing",
-    "lorenah-dayne": "King's Landing",
-    "ser-alester-dayne": "King's Landing",
+    "lorenah-dayne": "Starfall",
+    "ser-alester-dayne": "Starfall",
     "cordin-poole": "King's Landing",
     "steffon-baratheon": "Storm's End",
     "timos-hightower": "Oldtown",
-    "derrin-hightower": "Oldtown",
     "vhaemys-targaryen": "King's Landing",
   },
 };
 
 export function getCharacterPositionsForChapter(
   chapterSlug: string
-): Partial<Record<CharacterId, string>> {
+): Partial<Record<CharacterId, CharacterLocation>> {
   return CHAPTER_CHARACTER_POSITIONS[chapterSlug] ?? {};
 }

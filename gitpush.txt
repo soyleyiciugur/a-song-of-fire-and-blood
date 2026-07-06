@@ -1,5 +1,5 @@
 git add .
 
-git commit -m "Added major updates (eg. Navigation bar, Relationships page etc.)" 
+git commit -m "Minor feature updates" 
 
 git push

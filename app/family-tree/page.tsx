@@ -24,7 +24,7 @@ export default function FamilyTree() {
           <div className={styles.generationRow}>
             <FamilyUnit
               parentA={{ name: "Aenys Targaryen II" }}
-              parentB={{ name: "Vhaemys Targaryen (the Elder)" }}
+              parentB={{ name: "Vhaemys Targaryen" }}
               childrenLabel="Children"
             >
               <PersonNode id="baelenys-targaryen" />

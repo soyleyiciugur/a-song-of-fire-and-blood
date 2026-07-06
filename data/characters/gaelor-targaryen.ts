@@ -28,7 +28,7 @@ export const gaelorTargaryen: Character = {
     "vhaemys-targaryen"
   ],
 
-  mentor: "ser-saathos-maris",
+  mentor: "-",
 
   dragon: "Bayle",
 

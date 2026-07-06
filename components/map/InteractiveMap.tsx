@@ -31,6 +31,11 @@ const ROMAN_VALUES: Record<string, number> = {
   I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9, X: 10,
 };
 
+type LocationEntry = { id: string; faded: boolean };
+
+const FADED_AVATAR_SIZE = 22;
+const NORMAL_AVATAR_SIZE = 32;
+
 function romanFromTitle(title: string): number {
   const match = title.match(/Chapter\s+([IVXLC]+)/i);
   if (!match) return 999;
@@ -46,7 +51,7 @@ function Avatar({
   name: string;
   size?: number;
 }) {
-  const [src, setSrc] = useState(`/images/miniportraits/${characterId}.png`);
+  const [src, setSrc] = useState(`/images/miniportraits/${characterId}.webp`);
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -116,19 +121,23 @@ export default function InteractiveMap() {
     [currentChapter]
   );
 
-  // location name -> character ids present in the current chapter, sorted by title rank
   const charactersByLocation = useMemo(() => {
-    const map = new Map<string, string[]>();
+    const map = new Map<string, LocationEntry[]>();
     Object.entries(currentPositions).forEach(([charId, location]) => {
       if (!location) return;
-      const list = map.get(location) ?? [];
-      list.push(charId);
-      map.set(location, list);
+      const locs = Array.isArray(location) ? location : [location];
+      locs.forEach((locName, idx) => {
+        const isLast = idx === locs.length - 1;
+        const faded = locs.length > 1 && !isLast;
+        const list = map.get(locName) ?? [];
+        list.push({ id: charId, faded });
+        map.set(locName, list);
+      });
     });
     map.forEach((list, key) => {
       list.sort((a, b) => {
-        const ca = charactersById.get(a);
-        const cb = charactersById.get(b);
+        const ca = charactersById.get(a.id);
+        const cb = charactersById.get(b.id);
         return getTitleRank(ca?.title ?? "") - getTitleRank(cb?.title ?? "");
       });
       map.set(key, list);
@@ -136,7 +145,6 @@ export default function InteractiveMap() {
     return map;
   }, [currentPositions, charactersById]);
 
-  // Events that have happened by the current chapter, filtered by active types
   const visibleEventsByLocation = useMemo(() => {
     const map = new Map<string, typeof MAP_EVENTS>();
     MAP_EVENTS.forEach((event) => {
@@ -150,7 +158,6 @@ export default function InteractiveMap() {
     return map;
   }, [activeEventTypes, chapters, chapterIndex]);
 
-  // Trail for the selected character: one point per chapter (up to current) where we know their location.
   const trailPoints = useMemo(() => {
     if (!selectedCharacterId) return [];
     const points: { xPct: number; yPct: number; chapterIdx: number; roman: string }[] = [];
@@ -159,16 +166,15 @@ export default function InteractiveMap() {
       const positions = getCharacterPositionsForChapter(chapter.slug);
       const location = positions[selectedCharacterId as keyof typeof positions];
       if (!location) continue;
-      const coords = getMapLocation(location);
-      if (!coords) continue;
-      const last = points[points.length - 1];
-      if (last && last.xPct === coords.xPct && last.yPct === coords.yPct) continue;
+      const locs = Array.isArray(location) ? location : [location];
       const romanMatch = chapter.title.match(/Chapter\s+([IVXLC]+)/i);
-      points.push({
-        xPct: coords.xPct,
-        yPct: coords.yPct,
-        chapterIdx: i,
-        roman: romanMatch ? romanMatch[1] : String(i + 1),
+      const roman = romanMatch ? romanMatch[1] : String(i + 1);
+      locs.forEach((locName) => {
+        const coords = getMapLocation(locName);
+        if (!coords) return;
+        const last = points[points.length - 1];
+        if (last && last.xPct === coords.xPct && last.yPct === coords.yPct) return;
+        points.push({ xPct: coords.xPct, yPct: coords.yPct, chapterIdx: i, roman });
       });
     }
     return points;
@@ -177,13 +183,14 @@ export default function InteractiveMap() {
   const selectedCharacterCurrentLocation = useMemo(() => {
     if (!selectedCharacterId) return null;
     const location = currentPositions[selectedCharacterId as keyof typeof currentPositions];
-    return location ? getMapLocation(location) : null;
+    if (!location) return null;
+    const locs = Array.isArray(location) ? location : [location];
+    return getMapLocation(locs[locs.length - 1]);
   }, [selectedCharacterId, currentPositions]);
 
   const selectedCharacter = selectedCharacterId ? charactersById.get(selectedCharacterId) : null;
 
   const handleMapClick = useCallback(() => {
-    // Clicking empty map area (not a drag) closes any open cluster popover.
     if (consumeDragFlag()) return;
     setOpenCluster(null);
   }, [consumeDragFlag]);
@@ -219,7 +226,8 @@ export default function InteractiveMap() {
               width: naturalSize?.width ?? "auto",
               height: naturalSize?.height ?? "auto",
               transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
-            }}
+              "--map-zoom": scale, // Anlık zoom değerini CSS'e iletiyoruz
+            } as React.CSSProperties}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -260,7 +268,7 @@ export default function InteractiveMap() {
               </svg>
             )}
 
-            {/* Trail waypoint markers (jump back to that chapter) */}
+            {/* Trail waypoint markers */}
             {trailPoints.slice(0, -1).map((p) => (
               <button
                 key={`waypoint-${p.chapterIdx}`}
@@ -279,12 +287,12 @@ export default function InteractiveMap() {
 
             {/* Location markers: characters + events */}
             {MAP_LOCATIONS.map((loc) => {
-              const charIds = charactersByLocation.get(loc.name) ?? [];
+              const charEntries = charactersByLocation.get(loc.name) ?? [];
               const events = visibleEventsByLocation.get(loc.name) ?? [];
-              if (charIds.length === 0 && events.length === 0) return null;
+              if (charEntries.length === 0 && events.length === 0) return null;
 
-              const visibleIds = charIds.slice(0, MAX_VISIBLE_AVATARS);
-              const overflowIds = charIds.slice(MAX_VISIBLE_AVATARS);
+              const visibleEntries = charEntries.slice(0, MAX_VISIBLE_AVATARS);
+              const overflowEntries = charEntries.slice(MAX_VISIBLE_AVATARS);
               const clusterKey = `chars-${loc.name}`;
               const eventClusterKey = `events-${loc.name}`;
 
@@ -297,19 +305,27 @@ export default function InteractiveMap() {
                   className={styles.locationMarker}
                   style={{ left: `${loc.xPct}%`, top: `${loc.yPct}%` }}
                 >
-                  {charIds.length > 0 && (
-                    <div className={styles.avatarRow}>
-                      {visibleIds.map((id) => {
+                  {charEntries.length > 0 && (
+                    <div
+                      className={styles.avatarRow}
+                      onMouseEnter={() => setOpenCluster(clusterKey)}
+                      onMouseLeave={() =>
+                        setOpenCluster((k) => (k === clusterKey ? null : k))
+                      }
+                    >
+                      {visibleEntries.map((entry) => {
+                        const id = entry.id;
                         const c = charactersById.get(id);
                         const isSelected = id === selectedCharacterId;
                         const isPulsing =
                           isSelected &&
+                          !entry.faded &&
                           selectedCharacterCurrentLocation?.name === loc.name;
                         return (
                           <button
                             key={id}
-                            className={`${styles.avatarButton} ${isSelected ? styles.avatarSelected : ""}`}
-                            title={c?.name ?? id}
+                            className={`${styles.avatarButton} ${isSelected ? styles.avatarSelected : ""} ${entry.faded ? styles.avatarFaded : ""}`}
+                            title={entry.faded ? `${c?.name ?? id} (passing by)` : c?.name ?? id}
                             onMouseDown={(e) => e.stopPropagation()}
                             onClick={(e) => {
                               e.stopPropagation();
@@ -317,19 +333,17 @@ export default function InteractiveMap() {
                             }}
                           >
                             {isPulsing && <span className={styles.pulseRing} />}
-                            <Avatar characterId={id} name={c?.name ?? id} />
+                            <Avatar
+                              characterId={id}
+                              name={c?.name ?? id}
+                              size={entry.faded ? FADED_AVATAR_SIZE : NORMAL_AVATAR_SIZE}
+                            />
                           </button>
                         );
                       })}
 
-                      {overflowIds.length > 0 && (
-                        <div
-                          className={styles.overflowWrap}
-                          onMouseEnter={() => setOpenCluster(clusterKey)}
-                          onMouseLeave={() =>
-                            setOpenCluster((k) => (k === clusterKey ? null : k))
-                          }
-                        >
+                      {overflowEntries.length > 0 && (
+                        <div className={styles.overflowWrap}>
                           <button
                             className={styles.overflowBadge}
                             onMouseDown={(e) => e.stopPropagation()}
@@ -338,34 +352,39 @@ export default function InteractiveMap() {
                               setOpenCluster((k) => (k === clusterKey ? null : clusterKey));
                             }}
                           >
-                            {overflowIds.length}+
+                            {overflowEntries.length}+
                           </button>
+                        </div>
+                      )}
 
-                          {openCluster === clusterKey && (
-                            <div
-                              className={styles.flyout}
-                              onMouseDown={(e) => e.stopPropagation()}
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <div className={styles.flyoutTitle}>{loc.name}</div>
-                              {overflowIds.map((id) => {
-                                const c = charactersById.get(id);
-                                return (
-                                  <button
-                                    key={id}
-                                    className={styles.flyoutRow}
-                                    onClick={() => {
-                                      setSelectedCharacterId(id);
-                                      setOpenCluster(null);
-                                    }}
-                                  >
-                                    <Avatar characterId={id} name={c?.name ?? id} size={22} />
-                                    <span>{c?.name ?? id}</span>
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          )}
+                      {openCluster === clusterKey && (
+                        <div
+                          className={styles.flyout}
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className={styles.flyoutTitle}>{loc.name}</div>
+                          {charEntries.map((entry) => {
+                            const c = charactersById.get(entry.id);
+                            return (
+                              <button
+                                key={entry.id}
+                                className={styles.flyoutRow}
+                                onClick={() => {
+                                  setSelectedCharacterId(entry.id);
+                                  setOpenCluster(null);
+                                }}
+                              >
+                                <Avatar characterId={entry.id} name={c?.name ?? entry.id} size={22} />
+                                <span>
+                                  {c?.name ?? entry.id}
+                                  {entry.faded && (
+                                    <span className={styles.flyoutFadedTag}> (passing by)</span>
+                                  )}
+                                </span>
+                              </button>
+                            );
+                          })}
                         </div>
                       )}
                     </div>
@@ -531,20 +550,24 @@ export default function InteractiveMap() {
           <p className={styles.summaryText}>{currentChapter.synopsis}</p>
           {charactersByLocation.size > 0 && (
             <div className={styles.summaryCharacters}>
-              {Array.from(charactersByLocation.entries()).map(([location, ids]) => (
+              {Array.from(charactersByLocation.entries()).map(([location, entries]) => (
                 <div key={location} className={styles.summaryLocationGroup}>
                   <span className={styles.summaryLocationName}>{location}</span>
                   <div className={styles.summaryAvatarRow}>
-                    {ids.map((id) => {
-                      const c = charactersById.get(id);
+                    {entries.map((entry) => {
+                      const c = charactersById.get(entry.id);
                       return (
                         <button
-                          key={id}
-                          className={styles.summaryAvatarButton}
-                          title={c?.name ?? id}
-                          onClick={() => setSelectedCharacterId(id)}
+                          key={entry.id}
+                          className={`${styles.summaryAvatarButton} ${entry.faded ? styles.avatarFaded : ""}`}
+                          title={entry.faded ? `${c?.name ?? entry.id} (passing by)` : c?.name ?? entry.id}
+                          onClick={() => setSelectedCharacterId(entry.id)}
                         >
-                          <Avatar characterId={id} name={c?.name ?? id} size={26} />
+                          <Avatar
+                            characterId={entry.id}
+                            name={c?.name ?? entry.id}
+                            size={entry.faded ? FADED_AVATAR_SIZE : 26}
+                          />
                         </button>
                       );
                     })}

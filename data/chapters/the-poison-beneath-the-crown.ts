@@ -23,7 +23,7 @@ const chapter: Chapter = {
 
   "That same night, suspicion spread through the Red Keep.",
 
-  "Believing Lady Rhaella, Visenor's wife, to be hiding something, Jace paid her an unexpected visit. His questions were calm, but carried the weight of veiled threats. Before dawn, however, it became clear that someone else had also taken an interest in Jace. A spy was discovered lurking near his chambers, captured by Ser Brandon Dayne before he could escape. Though subjected to brutal interrogation, the prisoner revealed nothing.",
+  "Believing Lady Rhaella, Visenor's wife, to be hiding something, Jace paid her an unexpected visit. His questions were calm, but carried the weight of veiled threats. Before dawn, however, it became clear that someone else had also taken an interest in Jace. A spy was discovered lurking near his chambers, captured by Ser Alester Dayne before he could escape. Though subjected to brutal interrogation, the prisoner revealed nothing.",
 
   "King Baelenys survived, but only barely. Pale and weakened, one eyelid hanging lower than the other, he returned to the Iron Throne with death still lingering in his eyes. The court expected justice.",
 
@@ -65,7 +65,7 @@ const chapter: Chapter = {
 
   "In killing him, Gaelor had silenced not only a traitor, but perhaps the only witness capable of proving who truly stood behind the poisoning.",
 
-  "Meanwhile, Ser Brandon Dayne uncovered another secret.",
+  "Meanwhile, Ser Alester Dayne uncovered another secret.",
 
   "A hidden letter revealed that Lady Rhaella had secretly warned her family beyond the kingdom's borders. Confronted with the evidence, the young woman broke into tears, insisting she had acted out of fear rather than treason.",
 

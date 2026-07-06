@@ -5,5 +5,5 @@ export const characterAssets = {
     `/images/characters/${id}.webp`,
 
   mini: (id: CharacterId) =>
-    `/images/miniportraits/${id}.png`,
+    `/images/miniportraits/${id}.webp`,
 };

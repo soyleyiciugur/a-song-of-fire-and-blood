@@ -74,7 +74,8 @@
 
 .waypoint {
   position: absolute;
-  transform: translate(-50%, -50%);
+  /* GÜNCELLENDİ: Zoom seviyesine ters orantılı scale */
+  transform: translate(-50%, -50%) scale(clamp(0.35, calc(1 / var(--map-zoom, 1)), 1.4));
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -88,6 +89,8 @@
   align-items: center;
   justify-content: center;
   z-index: 5;
+  /* EKLENDİ: Zoom değişirken yumuşak geçiş */
+  transition: transform 0.1s ease-out;
 }
 
 .waypoint:hover {
@@ -99,15 +102,19 @@
 
 .locationMarker {
   position: absolute;
-  transform: translate(-50%, -50%);
+  /* GÜNCELLENDİ: Zoom seviyesine ters orantılı scale */
+  transform: translate(-50%, -50%) scale(clamp(0.35, calc(1 / var(--map-zoom, 1)), 1.4));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   z-index: 8;
+  /* EKLENDİ: Zoom değişirken yumuşak geçiş */
+  transition: transform 0.1s ease-out;
 }
 
 .avatarRow {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -135,6 +142,15 @@
 .avatarSelected {
   border-color: #e8c85a;
   box-shadow: 0 0 0 2px rgba(232, 200, 90, 0.5);
+}
+
+.avatarFaded {
+  opacity: 0.5;
+  border-color: rgba(201, 162, 39, 0.55);
+}
+
+.avatarFaded:hover {
+  opacity: 0.8;
 }
 
 .avatarImg {
@@ -227,6 +243,11 @@
 .flyoutRow:hover {
   background: var(--surface-hover);
   color: var(--gold);
+}
+
+.flyoutFadedTag {
+  color: var(--muted);
+  font-style: italic;
 }
 
 /* ---------- Events ---------- */

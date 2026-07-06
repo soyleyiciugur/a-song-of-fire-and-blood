@@ -7,7 +7,7 @@ export const curtassWhent: Character = {
   nickname: "-",
   aliases: [],
 
-  house: "-",
+  house: "House Whent",
   title: "Former Sworn Brother of the Kingsguard",
 
   status: "Unknown",
