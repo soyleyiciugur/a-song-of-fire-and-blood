@@ -2,11 +2,18 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { useMapViewport } from "@/lib/useMapViewport";
+import { MAP_LOCATIONS } from "@/data/map/locations";
+
 import styles from "./map-locator.module.css";
 
 const MAP_SRC = "/images/map/known-world.webp";
 const STORAGE_KEY = "map-locator-points";
-const CLICK_DRAG_THRESHOLD = 5;
+
+// Where the real /map page opens by default — kept in sync so this tool
+// always previews the same default framing.
+const KINGS_LANDING = MAP_LOCATIONS.find((l) => l.name === "King's Landing")!;
+const DEFAULT_FOCUS_SCALE = 3.2;
 
 interface MapPoint {
   id: string;
@@ -23,38 +30,29 @@ interface PendingPoint {
 }
 
 export default function MapLocatorPage() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
 
   const [naturalSize, setNaturalSize] = useState<{
     width: number;
     height: number;
   } | null>(null);
 
-  const [scale, setScale] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const {
+    viewportRef,
+    scale,
+    setScale,
+    pan,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    consumeDragFlag,
+    centerOn,
+  } = useMapViewport({ minScale: 0.15, maxScale: 8 });
 
   const [points, setPoints] = useState<MapPoint[]>([]);
   const [pending, setPending] = useState<PendingPoint | null>(null);
   const [pendingName, setPendingName] = useState("");
   const [copied, setCopied] = useState(false);
-
-  const dragState = useRef<{
-    dragging: boolean;
-    moved: boolean;
-    startX: number;
-    startY: number;
-    panStartX: number;
-    panStartY: number;
-  }>({
-    dragging: false,
-    moved: false,
-    startX: 0,
-    startY: 0,
-    panStartX: 0,
-    panStartY: 0,
-  });
 
   // Load persisted points.
   useEffect(() => {
@@ -73,20 +71,28 @@ export default function MapLocatorPage() {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(points));
   }, [points]);
 
-  // Fit the map to the viewport once we know its natural size.
-  const fitToViewport = useCallback((width: number, height: number) => {
-    const viewport = viewportRef.current;
-    if (!viewport) return;
+  const fitToViewport = useCallback(
+    (width: number, height: number) => {
+      const viewport = viewportRef.current;
+      if (!viewport) return;
 
-    const rect = viewport.getBoundingClientRect();
-    const fitScale = Math.min(rect.width / width, rect.height / height) * 0.98;
+      const rect = viewport.getBoundingClientRect();
+      const fitScale = Math.min(rect.width / width, rect.height / height) * 0.98;
+      setScale(fitScale);
+      centerOn(50, 50, width, height, fitScale);
+    },
+    [viewportRef, setScale, centerOn]
+  );
 
-    setScale(fitScale);
-    setPan({
-      x: (rect.width - width * fitScale) / 2,
-      y: (rect.height - height * fitScale) / 2,
-    });
-  }, []);
+  const centerOnKingsLanding = useCallback(
+    (width?: number, height?: number) => {
+      const w = width ?? naturalSize?.width;
+      const h = height ?? naturalSize?.height;
+      if (!w || !h) return;
+      centerOn(KINGS_LANDING.xPct, KINGS_LANDING.yPct, w, h, DEFAULT_FOCUS_SCALE);
+    },
+    [centerOn, naturalSize]
+  );
 
   const handleImageLoad = useCallback(() => {
     const img = imgRef.current;
@@ -95,99 +101,34 @@ export default function MapLocatorPage() {
     const width = img.naturalWidth;
     const height = img.naturalHeight;
     setNaturalSize({ width, height });
-    fitToViewport(width, height);
-  }, [fitToViewport]);
 
-  // Zoom, keeping the point under the cursor fixed on screen.
-  const handleWheel = useCallback(
-    (event: React.WheelEvent) => {
-      event.preventDefault();
-      const viewport = viewportRef.current;
-      if (!viewport) return;
+    // Default view: zoomed in on King's Landing, same as the real map page.
+    centerOn(KINGS_LANDING.xPct, KINGS_LANDING.yPct, width, height, DEFAULT_FOCUS_SCALE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-      const rect = viewport.getBoundingClientRect();
-      const cursorX = event.clientX - rect.left;
-      const cursorY = event.clientY - rect.top;
-
-      const zoomFactor = event.deltaY < 0 ? 1.15 : 1 / 1.15;
-
-      setScale((prevScale) => {
-        const nextScale = Math.min(8, Math.max(0.15, prevScale * zoomFactor));
-
-        setPan((prevPan) => {
-          const mapX = (cursorX - prevPan.x) / prevScale;
-          const mapY = (cursorY - prevPan.y) / prevScale;
-
-          return {
-            x: cursorX - mapX * nextScale,
-            y: cursorY - mapY * nextScale,
-          };
-        });
-
-        return nextScale;
-      });
-    },
-    []
-  );
-
-  const handleMouseDown = useCallback(
+  const handleImageClick = useCallback(
     (event: React.MouseEvent) => {
-      dragState.current = {
-        dragging: true,
-        moved: false,
-        startX: event.clientX,
-        startY: event.clientY,
-        panStartX: pan.x,
-        panStartY: pan.y,
-      };
-    },
-    [pan]
-  );
+      // A drag ending shouldn't drop a pin.
+      if (consumeDragFlag()) return;
 
-  const handleMouseMove = useCallback((event: React.MouseEvent) => {
-    if (!dragState.current.dragging) return;
+      const img = imgRef.current;
+      if (!img) return;
 
-    const dx = event.clientX - dragState.current.startX;
-    const dy = event.clientY - dragState.current.startY;
+      const rect = img.getBoundingClientRect();
+      const xPct = ((event.clientX - rect.left) / rect.width) * 100;
+      const yPct = ((event.clientY - rect.top) / rect.height) * 100;
 
-    if (Math.abs(dx) > CLICK_DRAG_THRESHOLD || Math.abs(dy) > CLICK_DRAG_THRESHOLD) {
-      dragState.current.moved = true;
-    }
-
-    if (dragState.current.moved) {
-      setPan({
-        x: dragState.current.panStartX + dx,
-        y: dragState.current.panStartY + dy,
+      setPending({
+        xPct,
+        yPct,
+        screenX: event.clientX,
+        screenY: event.clientY,
       });
-    }
-  }, []);
-
-  const handleMouseUp = useCallback(() => {
-    dragState.current.dragging = false;
-  }, []);
-
-  const handleImageClick = useCallback((event: React.MouseEvent) => {
-    // A drag ending shouldn't drop a pin.
-    if (dragState.current.moved) {
-      dragState.current.moved = false;
-      return;
-    }
-
-    const img = imgRef.current;
-    if (!img) return;
-
-    const rect = img.getBoundingClientRect();
-    const xPct = ((event.clientX - rect.left) / rect.width) * 100;
-    const yPct = ((event.clientY - rect.top) / rect.height) * 100;
-
-    setPending({
-      xPct,
-      yPct,
-      screenX: event.clientX,
-      screenY: event.clientY,
-    });
-    setPendingName("");
-  }, []);
+      setPendingName("");
+    },
+    [consumeDragFlag]
+  );
 
   const confirmPending = useCallback(() => {
     if (!pending || !pendingName.trim()) return;
@@ -215,17 +156,20 @@ export default function MapLocatorPage() {
     setPoints((prev) => prev.filter((p) => p.id !== id));
   }, []);
 
-  const renamePoint = useCallback((id: string) => {
-    const current = points.find((p) => p.id === id);
-    if (!current) return;
+  const renamePoint = useCallback(
+    (id: string) => {
+      const current = points.find((p) => p.id === id);
+      if (!current) return;
 
-    const next = window.prompt("Rename location", current.name);
-    if (!next || !next.trim()) return;
+      const next = window.prompt("Rename location", current.name);
+      if (!next || !next.trim()) return;
 
-    setPoints((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, name: next.trim() } : p))
-    );
-  }, [points]);
+      setPoints((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, name: next.trim() } : p))
+      );
+    },
+    [points]
+  );
 
   const clearAll = useCallback(() => {
     if (points.length === 0) return;
@@ -260,9 +204,9 @@ export default function MapLocatorPage() {
       <div className={styles.header}>
         <h1 className={styles.heading}>Map Locator</h1>
         <p className={styles.subheading}>
-          Scroll to zoom, drag to pan, click to drop a pin and name a
-          location. Points are saved in your browser and you can copy them
-          out as JSON when you&apos;re done.
+          Scroll to zoom (anchored on your cursor), drag to pan, click to
+          drop a pin and name a location. Points are saved in your browser
+          and you can copy them out as JSON when you&apos;re done.
         </p>
       </div>
 
@@ -270,14 +214,12 @@ export default function MapLocatorPage() {
         <div
           ref={viewportRef}
           className={styles.viewport}
-          onWheel={handleWheel}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         >
           <div
-            ref={wrapperRef}
             className={styles.mapWrapper}
             style={{
               width: naturalSize?.width ?? "auto",
@@ -340,6 +282,9 @@ export default function MapLocatorPage() {
           )}
 
           <div className={styles.zoomControls}>
+            <button onClick={() => centerOnKingsLanding()} title="Center on King's Landing">
+              KL
+            </button>
             <button onClick={() => setScale((s) => Math.min(8, s * 1.25))}>+</button>
             <button onClick={() => setScale((s) => Math.max(0.15, s / 1.25))}>-</button>
             <button onClick={resetView}>Fit</button>

@@ -1,0 +1,537 @@
+.frameOuter {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Golden frame around the map itself */
+.frameInner {
+  border: 3px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, #f2d98a, var(--gold) 40%, #7a5c14 100%) border-box;
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.25),
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    inset 0 0 40px rgba(201, 162, 39, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.viewport {
+  position: relative;
+  overflow: hidden;
+  height: min(72vh, 780px);
+  min-height: 420px;
+  background: #050507;
+  border-radius: var(--radius-md);
+  cursor: grab;
+}
+
+.viewport:active {
+  cursor: grabbing;
+}
+
+.mapWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+.mapImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+/* ---------- Trail ---------- */
+
+.trailSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.trailPath {
+  stroke-dasharray: 1.2 0.8;
+  animation: trailFlow 18s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(201, 162, 39, 0.6));
+}
+
+@keyframes trailFlow {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.waypoint {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: rgba(11, 11, 15, 0.85);
+  color: var(--gold);
+  font-size: 8px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.waypoint:hover {
+  background: var(--gold);
+  color: #1a1508;
+}
+
+/* ---------- Location markers ---------- */
+
+.locationMarker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 8;
+}
+
+.avatarRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(11, 11, 15, 0.55);
+  padding: 3px;
+  border-radius: 999px;
+  backdrop-filter: blur(1px);
+}
+
+.avatarButton {
+  position: relative;
+  padding: 0;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.avatarButton:hover {
+  border-color: #f2d98a;
+}
+
+.avatarSelected {
+  border-color: #e8c85a;
+  box-shadow: 0 0 0 2px rgba(232, 200, 90, 0.5);
+}
+
+.avatarImg {
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--surface-hover);
+}
+
+.pulseRing {
+  position: absolute;
+  inset: -6px;
+  border-radius: 12px;
+  border: 2px solid #e8c85a;
+  animation: pulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.overflowWrap {
+  position: relative;
+}
+
+.overflowBadge {
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 2px solid var(--gold);
+  background: #1a1508;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.flyout {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  min-width: 170px;
+  box-shadow: var(--shadow-card);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.flyoutTitle {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  padding: 2px 6px 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.flyoutRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.flyoutRow:hover {
+  background: var(--surface-hover);
+  color: var(--gold);
+}
+
+/* ---------- Events ---------- */
+
+.eventCluster {
+  position: relative;
+}
+
+.eventIcon {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: rgba(11, 11, 15, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.eventIcon img {
+  width: 15px;
+  height: 15px;
+}
+
+.eventPulse {
+  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.6);
+  animation: eventGlow 1.6s ease-in-out infinite;
+}
+
+@keyframes eventGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(201, 162, 39, 0);
+  }
+}
+
+.eventCount {
+  position: absolute;
+  bottom: -4px;
+  right: -6px;
+  background: #8a1f1f;
+  color: #f4e6c9;
+  border-radius: 999px;
+  font-size: 9px;
+  padding: 1px 4px;
+  border: 1px solid #1a1508;
+}
+
+/* ---------- Legend / filters ---------- */
+
+.legend {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(11, 11, 15, 0.82);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 20;
+}
+
+.legendTitle {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* ---------- Selected character card ---------- */
+
+.characterCard {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(11, 11, 15, 0.9);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 10px 34px 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 240px;
+  z-index: 20;
+  box-shadow: var(--shadow-card);
+}
+
+.characterCardClose {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.characterCardClose:hover {
+  color: #e05252;
+}
+
+.characterCardName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.characterCardTitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.characterCardLink {
+  font-size: 11px;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.characterCardLink:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ---------- Zoom controls ---------- */
+
+.zoomControls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 20;
+}
+
+.zoomControls button {
+  width: 34px;
+  height: 34px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: rgba(20, 20, 24, 0.9);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.zoomControls button:hover {
+  background: var(--gold);
+  color: #1a1508;
+}
+
+/* ---------- Timeline / chapter slider ---------- */
+
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 2px;
+}
+
+.timelineArrow {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface-hover);
+  color: var(--gold);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.timelineArrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.timelineSliderWrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.timelineSlider {
+  width: 100%;
+  accent-color: var(--gold);
+}
+
+.timelineLabel {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Chapter summary card ---------- */
+
+.summaryCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 16px 18px;
+}
+
+.summaryHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.summaryHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--gold);
+}
+
+.summaryLink {
+  font-size: 12px;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+
+.summaryLink:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.summaryText {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.summaryCharacters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.summaryLocationGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summaryLocationName {
+  font-size: 11px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.summaryAvatarRow {
+  display: flex;
+  gap: 4px;
+}
+
+.summaryAvatarButton {
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.summaryAvatarButton:hover {
+  border-color: var(--gold);
+}
+
+@media (max-width: 720px) {
+  .characterCard {
+    max-width: 170px;
+    font-size: 11px;
+  }
+  .legend {
+    padding: 8px;
+  }
+}

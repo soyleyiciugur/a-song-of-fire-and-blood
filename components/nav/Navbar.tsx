@@ -25,6 +25,9 @@ export default function Navbar() {
           <Link href="/houses" className={styles.navLink}>
             Houses
           </Link>
+          <Link href="/map" className={styles.navLink}>
+            Map
+          </Link>
           <Link href="/relationships" className={styles.navLink}>
             Relationships
           </Link>
