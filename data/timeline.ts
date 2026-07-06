@@ -127,7 +127,7 @@ export const timeline: TimelineChapter[] = [
         title: "Maela at Storm's End",
         description:
           "Princess Maela visits Storm's End as a marriage prospect for Steffon Baratheon, but seduces her own sworn shield, Ser Brannyn Vance, instead.",
-        characters: ["maela-targaryen", "steffon-baratheon", "brannyn-vance"],
+        characters: ["maela-targaryen", "steffon-baratheon", "ser-brannyn-vance"],
       },
       {
         title: "Baelor's return",
