@@ -61,7 +61,7 @@ export interface Character {
   traits: string[];
   goals: string[];
 
-  relationships: Record<string, string>;
+  relationships: Partial<Record<CharacterId, string>>;
 
   summary: string;
 

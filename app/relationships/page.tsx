@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import type { CharacterId } from "@/types/character";
 
 import { getCharacters } from "@/lib/characters";
 import { computeGraphLayout, colorForHouse } from "@/lib/graph-layout";
@@ -12,8 +13,8 @@ const WIDTH = 960;
 const HEIGHT = 640;
 
 interface Edge {
-  source: string;
-  target: string;
+  source: CharacterId;
+  target: CharacterId;
   label: string;
 }
 
@@ -34,7 +35,7 @@ export default function RelationshipsPage() {
   );
 
   const [houseFilter, setHouseFilter] = useState<string>("all");
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<CharacterId | null>(null);
 
   const edges = useMemo<Edge[]>(() => {
     const list: Edge[] = [];
@@ -43,7 +44,7 @@ export default function RelationshipsPage() {
     for (const character of characters) {
       for (const [targetId, label] of Object.entries(
         character.relationships ?? {}
-      )) {
+      ) as [CharacterId, string][]) {
         if (!byId.has(targetId)) continue;
 
         const key = [character.id, targetId].sort().join("::");
@@ -87,7 +88,11 @@ export default function RelationshipsPage() {
 
   const hoveredRelationships = useMemo(() => {
     if (!hoveredCharacter) return [];
-    return Object.entries(hoveredCharacter.relationships ?? {})
+    return (
+      Object.entries(
+        hoveredCharacter.relationships ?? {}
+      ) as [CharacterId, string][]
+    )
       .map(([id, description]) => ({
         id,
         name: byId.get(id)?.name ?? id,
