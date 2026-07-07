@@ -37,6 +37,22 @@ export default function Home() {
             Family Tree
           </Link>
 
+          <Link href="/houses" className="button">
+            Houses
+          </Link>
+
+          <Link href="/map" className="button">
+            Map
+          </Link>
+
+          <Link href="/relationships" className="button">
+            Relationships
+          </Link>
+
+          <Link href="/dragons" className="button">
+            Dragons
+          </Link>
+
           <Link href="/timeline" className="button">
             Timeline
           </Link>

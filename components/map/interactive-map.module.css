@@ -60,24 +60,128 @@
   overflow: visible;
 }
 
-.trailPath {
-  stroke-dasharray: 1.2 0.8;
-  animation: trailFlow 18s linear infinite;
+.trailPathDraw {
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+  animation: trailDraw linear forwards;
+  animation-duration: calc(var(--hop-count, 1) * 0.9s);
   filter: drop-shadow(0 0 3px rgba(201, 162, 39, 0.6));
 }
 
-@keyframes trailFlow {
+@keyframes trailDraw {
   to {
-    stroke-dashoffset: -100;
+    stroke-dashoffset: 0;
+  }
+}
+
+.ghostMarker {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(clamp(0.35, calc(0.9 / var(--map-zoom, 1)), 1.4));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 6;
+  opacity: 0;
+  animation: ghostFadeIn 0.4s ease forwards;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
+.ghostMarker img {
+  border-radius: 8px;
+  border: 2px solid rgba(201, 162, 39, 0.55);
+  opacity: 0.55;
+  filter: grayscale(0.2);
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.ghostMarker:hover img {
+  opacity: 0.85;
+  border-color: var(--gold);
+  transform: scale(1.08);
+}
+
+.ghostMarkerActive img {
+  opacity: 1;
+  border-color: #e8c85a;
+  box-shadow: 0 0 0 2px rgba(232, 200, 90, 0.5);
+}
+
+.ghostRoman {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: #1a1508;
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes ghostFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(clamp(0.35, calc(0.9 / var(--map-zoom, 1)), 1.4))
+      translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(clamp(0.35, calc(0.9 / var(--map-zoom, 1)), 1.4))
+      translateY(0);
+  }
+}
+
+/*
+ * The traveling avatar's left/top are now written every animation frame
+ * from JS (in lockstep with the camera and the trail line), so there's no
+ * CSS animation driving its position anymore. Only a resting glow to signal
+ * "this is actively moving" remains.
+ */
+.travelingAvatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) scale(clamp(0.35, calc(0.9 / var(--map-zoom, 1)), 1.4));
+  z-index: 9;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.travelingAvatar img {
+  border-radius: 8px;
+  border: 2px solid var(--gold);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
+  animation: travelGlow 1.1s ease-in-out infinite;
+}
+
+@keyframes travelGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(201, 162, 39, 0.12);
   }
 }
 
 .waypoint {
   position: absolute;
-  /* GÜNCELLENDİ: Zoom seviyesine ters orantılı scale */
-  transform: translate(-50%, -50%) scale(clamp(0.35, calc(1 / var(--map-zoom, 1)), 1.4));
-  width: 16px;
-  height: 16px;
+  transform: translate(-50%, -50%) scale(clamp(0.25, calc(0.9 / var(--map-zoom, 1)), 1.6));
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 1px solid var(--gold);
   background: rgba(11, 11, 15, 0.85);
@@ -89,7 +193,6 @@
   align-items: center;
   justify-content: center;
   z-index: 5;
-  /* EKLENDİ: Zoom değişirken yumuşak geçiş */
   transition: transform 0.1s ease-out;
 }
 
@@ -102,14 +205,12 @@
 
 .locationMarker {
   position: absolute;
-  /* GÜNCELLENDİ: Zoom seviyesine ters orantılı scale */
-  transform: translate(-50%, -50%) scale(clamp(0.35, calc(1 / var(--map-zoom, 1)), 1.4));
+  transform: translate(-50%, -50%) scale(clamp(0.25, calc(0.9 / var(--map-zoom, 1)), 1.6));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   z-index: 8;
-  /* EKLENDİ: Zoom değişirken yumuşak geçiş */
   transition: transform 0.1s ease-out;
 }
 
@@ -117,7 +218,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: clamp(1px, calc(3px / var(--map-zoom, 1)), 6px);
   background: rgba(11, 11, 15, 0.55);
   padding: 3px;
   border-radius: 999px;
@@ -258,8 +359,8 @@
 
 .eventIcon {
   position: relative;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: 2px solid var(--gold);
   background: rgba(11, 11, 15, 0.8);
@@ -271,8 +372,8 @@
 }
 
 .eventIcon img {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
 }
 
 .eventPulse {
@@ -431,15 +532,32 @@
 }
 
 .timelineArrow {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--surface-hover);
+  border: 2px solid var(--gold);
+  background: rgba(20, 20, 24, 0.9);
   color: var(--gold);
-  font-size: 16px;
+  font-size: 20px;
+  line-height: 1;
   cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.timelineArrow:hover:not(:disabled) {
+  background: var(--gold);
+  color: #1a1508;
+}
+
+.timelineArrow:active:not(:disabled) {
+  transform: scale(0.92);
 }
 
 .timelineArrow:disabled {
@@ -453,8 +571,82 @@
 }
 
 .timelineSlider {
+  -webkit-appearance: none;
+  appearance: none;
   width: 100%;
-  accent-color: var(--gold);
+  height: 6px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ---- Track ---- */
+
+.timelineSlider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+}
+
+.timelineSlider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+}
+
+.timelineSlider::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px 0 0 999px;
+  background: var(--gold);
+}
+
+/* ---- Thumb ---- */
+
+.timelineSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: rgba(20, 20, 24, 0.95);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.timelineSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: rgba(20, 20, 24, 0.95);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.timelineSlider:hover::-webkit-slider-thumb,
+.timelineSlider:focus-visible::-webkit-slider-thumb {
+  background: var(--gold);
+  transform: scale(1.1);
+}
+
+.timelineSlider:hover::-moz-range-thumb,
+.timelineSlider:focus-visible::-moz-range-thumb {
+  background: var(--gold);
+  transform: scale(1.1);
+}
+
+.timelineSlider:focus-visible {
+  outline: none;
 }
 
 .timelineLabel {

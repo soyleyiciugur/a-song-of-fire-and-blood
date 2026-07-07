@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import type { CharacterId } from "@/types/character";
 
 import { getCharacters } from "@/lib/characters";
@@ -18,8 +18,11 @@ interface Edge {
   label: string;
 }
 
+function formatCharacterName(name: string) {
+  return name.replace(/^(Ser|Lady|Lord|King|Queen|Prince|Princess)\s+/i, "").trim();
+}
+
 export default function RelationshipsPage() {
-  const router = useRouter();
   const characters = useMemo(() => getCharacters(), []);
   const byId = useMemo(
     () => new Map(characters.map((c) => [c.id, c])),
@@ -35,6 +38,7 @@ export default function RelationshipsPage() {
   );
 
   const [houseFilter, setHouseFilter] = useState<string>("all");
+  const [selectedId, setSelectedId] = useState<CharacterId | null>(null);
   const [hoveredId, setHoveredId] = useState<CharacterId | null>(null);
 
   const edges = useMemo<Edge[]>(() => {
@@ -75,22 +79,22 @@ export default function RelationshipsPage() {
   }, [houseFilter, characters, nodeIds]);
 
   const connectedIds = useMemo(() => {
-    if (!hoveredId) return null;
-    const set = new Set<string>([hoveredId]);
+    if (!selectedId) return null;
+    const set = new Set<string>([selectedId]);
     for (const edge of edges) {
-      if (edge.source === hoveredId) set.add(edge.target);
-      if (edge.target === hoveredId) set.add(edge.source);
+      if (edge.source === selectedId) set.add(edge.target);
+      if (edge.target === selectedId) set.add(edge.source);
     }
     return set;
-  }, [hoveredId, edges]);
+  }, [selectedId, edges]);
 
-  const hoveredCharacter = hoveredId ? byId.get(hoveredId) : null;
+  const selectedCharacter = selectedId ? byId.get(selectedId) : null;
 
-  const hoveredRelationships = useMemo(() => {
-    if (!hoveredCharacter) return [];
+  const selectedRelationships = useMemo(() => {
+    if (!selectedCharacter) return [];
     return (
       Object.entries(
-        hoveredCharacter.relationships ?? {}
+        selectedCharacter.relationships ?? {}
       ) as [CharacterId, string][]
     )
       .map(([id, description]) => ({
@@ -99,15 +103,16 @@ export default function RelationshipsPage() {
         description,
       }))
       .filter((entry) => visibleIds.has(entry.id));
-  }, [hoveredCharacter, byId, visibleIds]);
+  }, [selectedCharacter, byId, visibleIds]);
 
   return (
     <main className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.heading}>Web of Loyalties</h1>
         <p className={styles.subheading}>
-          Every known bond, alliance, and rivalry in the story so far. Hover
-          a name to trace its threads, click to visit the character.
+          Every known bond, alliance, and rivalry in the story so far. Hover a
+          character to highlight them, click to pin their connections here, then
+          click the name to view their profile.
         </p>
 
         <div className={styles.controls}>
@@ -135,6 +140,10 @@ export default function RelationshipsPage() {
             className={styles.svg}
             role="img"
             aria-label="Character relationship graph"
+            onClick={() => {
+              setSelectedId(null);
+              setHoveredId(null);
+            }}
           >
             {edges.map((edge, index) => {
               const a = layout[edge.source];
@@ -158,7 +167,7 @@ export default function RelationshipsPage() {
                   x2={b.x}
                   y2={b.y}
                   stroke={isConnected ? "var(--gold)" : "var(--border)"}
-                  strokeWidth={isConnected && hoveredId ? 1.6 : 1}
+                  strokeWidth={isConnected && selectedId ? 1.6 : 1}
                   opacity={isConnected ? 0.85 : 0.2}
                 />
               );
@@ -171,7 +180,9 @@ export default function RelationshipsPage() {
               if (!visibleIds.has(id)) return null;
 
               const dimmed = connectedIds ? !connectedIds.has(id) : false;
+              const isSelected = selectedId === id;
               const isHovered = hoveredId === id;
+              const isHighlighted = isSelected || isHovered;
 
               return (
                 <g
@@ -180,21 +191,21 @@ export default function RelationshipsPage() {
                   className={styles.node}
                   opacity={dimmed ? 0.25 : 1}
                   onMouseEnter={() => setHoveredId(id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => router.push(`/characters/${id}`)}
+                  onMouseLeave={() => setHoveredId((current) => (current === id ? null : current))}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setSelectedId(id);
+                    setHoveredId(id);
+                  }}
                 >
                   <circle
-                    r={isHovered ? 10 : 7}
+                    r={isHighlighted ? 10 : 7}
                     fill={colorForHouse(character.house)}
-                    stroke={isHovered ? "var(--gold)" : "var(--background)"}
-                    strokeWidth={isHovered ? 2 : 1.5}
+                    stroke={isHighlighted ? "var(--gold)" : "var(--background)"}
+                    strokeWidth={isHighlighted ? 2 : 1.5}
                   />
-                  <text
-                    x={11}
-                    y={4}
-                    className={styles.nodeLabel}
-                  >
-                    {character.name.split(" ")[0]}
+                  <text x={11} y={4} className={styles.nodeLabel}>
+                    {formatCharacterName(character.name).split(" ")[0]}
                   </text>
                 </g>
               );
@@ -202,22 +213,23 @@ export default function RelationshipsPage() {
           </svg>
 
           <aside className={styles.sidebar}>
-            {hoveredCharacter ? (
+            {selectedCharacter ? (
               <>
-                <h2 className={styles.sidebarName}>
-                  {hoveredCharacter.name}
-                </h2>
+                <Link
+                  href={`/characters/${selectedCharacter.id}`}
+                  className={styles.sidebarNameLink}
+                >
+                  <h2 className={styles.sidebarName}>{formatCharacterName(selectedCharacter.name)}</h2>
+                </Link>
                 <p className={styles.sidebarHouse}>
-                  {hoveredCharacter.house} &middot; {hoveredCharacter.title}
+                  {selectedCharacter.house} &middot; {selectedCharacter.title}
                 </p>
 
-                {hoveredRelationships.length > 0 ? (
+                {selectedRelationships.length > 0 ? (
                   <ul className={styles.relationshipList}>
-                    {hoveredRelationships.map((rel) => (
+                    {selectedRelationships.map((rel) => (
                       <li key={rel.id} className={styles.relationshipItem}>
-                        <span className={styles.relationshipName}>
-                          {rel.name}
-                        </span>
+                        <span className={styles.relationshipName}>{rel.name}</span>
                         <span className={styles.relationshipDescription}>
                           {rel.description}
                         </span>
@@ -232,8 +244,8 @@ export default function RelationshipsPage() {
               </>
             ) : (
               <p className={styles.sidebarEmpty}>
-                Hover over a name in the graph to see their known
-                relationships here.
+                Click a character in the graph to pin their known relationships
+                here. Click empty space to clear the selection.
               </p>
             )}
           </aside>

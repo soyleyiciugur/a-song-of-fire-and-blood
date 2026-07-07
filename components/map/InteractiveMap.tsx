@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -26,20 +26,82 @@ const MAP_SRC = "/images/map/known-world.webp";
 const MINI_FALLBACK = "/images/miniportraits/default.png";
 const MAX_VISIBLE_AVATARS = 3;
 const ALL_EVENT_TYPES: MapEventType[] = ["battle", "feast", "tournament", "wedding"];
+const MIN_MARKER_DISTANCE_PX = 46;
+
+// Camera-follow timing. HOP_MS matches the previous per-hop CSS duration
+// (0.9s) so the trail line, the traveling avatar, and the camera all move
+// at the same pace as before — just synchronized now instead of running as
+// three independent animations.
+const CENTER_IN_MS = 100;
+const HOP_MS = 1500;
+
+function easeInOutCubic(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 
 const ROMAN_VALUES: Record<string, number> = {
   I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9, X: 10,
 };
 
 type LocationEntry = { id: string; faded: boolean };
+type DeclutteredLocation = (typeof MAP_LOCATIONS)[number] & {
+  offsetXPct: number;
+  offsetYPct: number;
+};
 
-const FADED_AVATAR_SIZE = 22;
-const NORMAL_AVATAR_SIZE = 32;
+const FADED_AVATAR_SIZE = 26;
+const NORMAL_AVATAR_SIZE = 36;
 
 function romanFromTitle(title: string): number {
   const match = title.match(/Chapter\s+([IVXLC]+)/i);
   if (!match) return 999;
   return ROMAN_VALUES[match[1].toUpperCase()] ?? 999;
+}
+
+function interpolateHexColor(startHex: string, endHex: string, ratio: number): string {
+  const clamp = (value: number) => Math.min(1, Math.max(0, value));
+  const toRgb = (hex: string) => {
+    const normalized = hex.replace("#", "");
+    const value = normalized.length === 3
+      ? normalized.split("").map((char) => `${char}${char}`).join("")
+      : normalized;
+    const intValue = Number.parseInt(value, 16);
+    return {
+      r: (intValue >> 16) & 255,
+      g: (intValue >> 8) & 255,
+      b: intValue & 255,
+    };
+  };
+  const from = toRgb(startHex);
+  const to = toRgb(endHex);
+  const t = clamp(ratio);
+  const r = Math.round(from.r + (to.r - from.r) * t);
+  const g = Math.round(from.g + (to.g - from.g) * t);
+  const b = Math.round(from.b + (to.b - from.b) * t);
+  return `#${[r, g, b].map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
+}
+
+function getTrailColorAtRatio(ratio: number): string {
+  const clamped = Math.min(1, Math.max(0, ratio));
+  const stops = [
+    { ratio: 0, color: "#f2d98a" },
+    { ratio: 0.5, color: "#c9a227" },
+    { ratio: 1, color: "#8a1f1f" },
+  ];
+
+  if (clamped <= 0) return stops[0].color;
+  if (clamped >= 1) return stops[stops.length - 1].color;
+
+  for (let i = 1; i < stops.length; i += 1) {
+    const prev = stops[i - 1];
+    const next = stops[i];
+    if (clamped <= next.ratio) {
+      const localRatio = (clamped - prev.ratio) / (next.ratio - prev.ratio);
+      return interpolateHexColor(prev.color, next.color, localRatio);
+    }
+  }
+
+  return stops[stops.length - 1].color;
 }
 
 function Avatar({
@@ -89,6 +151,17 @@ export default function InteractiveMap() {
     new Set(ALL_EVENT_TYPES)
   );
 
+  // --- Camera-follow state ---
+  // travelPos is the point (in map percent coordinates) the traveling
+  // avatar/camera is currently at while an auto-follow animation plays.
+  const [travelPos, setTravelPos] = useState<{ xPct: number; yPct: number } | null>(null);
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const followRafRef = useRef<number | null>(null);
+  const followGenerationRef = useRef(0);
+  const isDraggingRef = useRef(false);
+  const manualControlRef = useRef(false);
+
   const {
     viewportRef,
     scale,
@@ -99,7 +172,13 @@ export default function InteractiveMap() {
     consumeDragFlag,
     centerOn,
     zoomBy,
-  } = useMapViewport({ minScale: 0.5, maxScale: 8 });
+  } = useMapViewport({
+    minScale: 0.2,
+    maxScale: 8,
+    onManualInteractionStart: () => {
+      manualControlRef.current = true;
+    },
+  });
 
   const handleImageLoad = useCallback(
     (event: React.SyntheticEvent<HTMLImageElement>) => {
@@ -147,10 +226,19 @@ export default function InteractiveMap() {
 
   const visibleEventsByLocation = useMemo(() => {
     const map = new Map<string, typeof MAP_EVENTS>();
+    const currentSlug = chapters[chapterIndex]?.slug;
+    if (!currentSlug) return map;
+
     MAP_EVENTS.forEach((event) => {
       if (!activeEventTypes.has(event.type)) return;
-      const eventChapterIdx = chapters.findIndex((c) => c.slug === event.chapterSlug);
-      if (eventChapterIdx === -1 || eventChapterIdx > chapterIndex) return;
+
+      // Tek chapter'a bağlı eventler `chapterSlug`, birden fazla chapter'a
+      // yayılan eventler `chapterSlugs` kullanabilir.
+      const eventChapterSlugs =
+        (event as { chapterSlugs?: string[] }).chapterSlugs ?? [event.chapterSlug];
+
+      if (!eventChapterSlugs.includes(currentSlug)) return;
+
       const list = map.get(event.location) ?? [];
       list.push(event);
       map.set(event.location, list);
@@ -158,27 +246,114 @@ export default function InteractiveMap() {
     return map;
   }, [activeEventTypes, chapters, chapterIndex]);
 
-  const trailPoints = useMemo(() => {
+  const fullTrailPoints = useMemo(() => {
     if (!selectedCharacterId) return [];
-    const points: { xPct: number; yPct: number; chapterIdx: number; roman: string }[] = [];
+
+    const points: {
+      xPct: number;
+      yPct: number;
+      chapterIdx: number;
+      roman: string;
+      locationName: string;
+    }[] = [];
+
+    // Sadece şu an slider'ın gösterdiği chapter'a kadar (dahil)
     for (let i = 0; i <= chapterIndex; i++) {
       const chapter = chapters[i];
+      if (!chapter) continue;
+
       const positions = getCharacterPositionsForChapter(chapter.slug);
       const location = positions[selectedCharacterId as keyof typeof positions];
       if (!location) continue;
+
       const locs = Array.isArray(location) ? location : [location];
       const romanMatch = chapter.title.match(/Chapter\s+([IVXLC]+)/i);
       const roman = romanMatch ? romanMatch[1] : String(i + 1);
+
       locs.forEach((locName) => {
         const coords = getMapLocation(locName);
         if (!coords) return;
+
         const last = points[points.length - 1];
         if (last && last.xPct === coords.xPct && last.yPct === coords.yPct) return;
-        points.push({ xPct: coords.xPct, yPct: coords.yPct, chapterIdx: i, roman });
+
+        points.push({
+          xPct: coords.xPct,
+          yPct: coords.yPct,
+          chapterIdx: i,
+          roman,
+          locationName: locName,
+        });
       });
     }
+
     return points;
-  }, [selectedCharacterId, chapterIndex, chapters]);
+  }, [selectedCharacterId, chapters, chapterIndex]);
+
+  const trailPathD = useMemo(() => {
+    if (!naturalSize || fullTrailPoints.length < 2) return "";
+
+    return fullTrailPoints
+      .map((p, i) => {
+        const x = (p.xPct / 100) * naturalSize.width;
+        const y = (p.yPct / 100) * naturalSize.height;
+        return `${i === 0 ? "M" : "L"} ${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ");
+  }, [fullTrailPoints, naturalSize]);
+
+  const trailSegments = useMemo(() => {
+    if (!naturalSize || fullTrailPoints.length < 2) return [];
+
+    const pointsPx = fullTrailPoints.map((point) => ({
+      x: (point.xPct / 100) * naturalSize.width,
+      y: (point.yPct / 100) * naturalSize.height,
+    }));
+
+    let totalDistance = 0;
+    for (let i = 1; i < pointsPx.length; i += 1) {
+      const prev = pointsPx[i - 1];
+      const next = pointsPx[i];
+      totalDistance += Math.hypot(next.x - prev.x, next.y - prev.y);
+    }
+
+    let cumulativeDistance = 0;
+    return pointsPx.slice(1).map((point, index) => {
+      const startPoint = pointsPx[index];
+      const endPoint = point;
+      const lengthPx = Math.hypot(endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+      const startRatio = totalDistance > 0 ? cumulativeDistance / totalDistance : 0;
+      cumulativeDistance += lengthPx;
+      const endRatio = totalDistance > 0 ? cumulativeDistance / totalDistance : 0;
+
+      return {
+        id: `${index}-${startPoint.x.toFixed(1)}-${startPoint.y.toFixed(1)}`,
+        d: `M ${startPoint.x.toFixed(1)},${startPoint.y.toFixed(1)} L ${endPoint.x.toFixed(1)},${endPoint.y.toFixed(1)}`,
+        x1: startPoint.x,
+        y1: startPoint.y,
+        x2: endPoint.x,
+        y2: endPoint.y,
+        lengthPx,
+        startRatio,
+        endRatio,
+        startColor: getTrailColorAtRatio(startRatio),
+        endColor: getTrailColorAtRatio(endRatio),
+      };
+    });
+  }, [fullTrailPoints, naturalSize]);
+
+  const trailPathRef = useRef<SVGPathElement | null>(null);
+  const trailPathLengthRef = useRef(0);
+  const [trailPathLength, setTrailPathLength] = useState(0);
+  const [trailProgress, setTrailProgress] = useState(0);
+
+  useEffect(() => {
+    if (trailPathRef.current) {
+      const measuredLength = trailPathRef.current.getTotalLength();
+      trailPathLengthRef.current = measuredLength;
+      setTrailPathLength(measuredLength);
+    }
+  }, [trailPathD]);
 
   const selectedCharacterCurrentLocation = useMemo(() => {
     if (!selectedCharacterId) return null;
@@ -189,6 +364,173 @@ export default function InteractiveMap() {
   }, [selectedCharacterId, currentPositions]);
 
   const selectedCharacter = selectedCharacterId ? charactersById.get(selectedCharacterId) : null;
+
+  // ---------------------------------------------------------------------
+  // Camera-follow: whenever the selected character or the visible chapter
+  // changes, smoothly move the camera from wherever it currently is to the
+  // start of the trail, then — if there's more than one stop — glide it
+  // along the exact same path (and at the exact same pace) as the trail
+  // line being drawn and the traveling avatar being positioned. All three
+  // are driven from this single rAF loop so nothing can drift out of sync.
+  // ---------------------------------------------------------------------
+  const cancelFollow = useCallback(() => {
+    followGenerationRef.current += 1;
+    if (followRafRef.current !== null) {
+      cancelAnimationFrame(followRafRef.current);
+      followRafRef.current = null;
+    }
+    setIsFollowing(false);
+    setTrailProgress(0);
+  }, []);
+
+  useEffect(() => {
+    const resolvedNaturalSize = naturalSize;
+
+    if (
+      !selectedCharacterId ||
+      !resolvedNaturalSize ||
+      fullTrailPoints.length === 0 ||
+      !viewportRef.current ||
+      !scale
+    ) {
+      cancelFollow();
+      setTravelPos(null);
+      return;
+    }
+
+    cancelFollow();
+    const myGen = followGenerationRef.current + 1;
+    followGenerationRef.current = myGen;
+    manualControlRef.current = false;
+
+    const rect = viewportRef.current.getBoundingClientRect();
+    const lockedScale = scale;
+    const naturalSizeForAnimation = resolvedNaturalSize;
+
+    // Where the camera is centered right now, expressed in map percent
+    // coordinates, so we can ease *from* here rather than snapping.
+    const startCenterPxX = (rect.width / 2 - pan.x) / lockedScale;
+    const startCenterPxY = (rect.height / 2 - pan.y) / lockedScale;
+    const startXPct = (startCenterPxX / naturalSizeForAnimation.width) * 100;
+    const startYPct = (startCenterPxY / naturalSizeForAnimation.height) * 100;
+
+    const target = fullTrailPoints[0];
+    const hasPath = fullTrailPoints.length > 1;
+    const pathDuration = hasPath ? (fullTrailPoints.length - 1) * HOP_MS : 0;
+
+    setIsFollowing(true);
+    setTravelPos({ xPct: startXPct, yPct: startYPct });
+    setTrailProgress(0);
+
+    const start = performance.now();
+
+    function frame(now: number) {
+      if (followGenerationRef.current !== myGen) return; // superseded by a newer run
+
+      const elapsed = now - start;
+      const shouldFollowCamera = !manualControlRef.current && !isDraggingRef.current;
+
+      if (elapsed <= CENTER_IN_MS) {
+        const t = easeInOutCubic(Math.min(1, elapsed / CENTER_IN_MS));
+        const xPct = startXPct + (target.xPct - startXPct) * t;
+        const yPct = startYPct + (target.yPct - startYPct) * t;
+        if (shouldFollowCamera) {
+          centerOn(xPct, yPct, naturalSizeForAnimation.width, naturalSizeForAnimation.height, lockedScale);
+        }
+        setTravelPos({ xPct, yPct });
+        setTrailProgress(0);
+        followRafRef.current = requestAnimationFrame(frame);
+        return;
+      }
+
+      if (!hasPath) {
+        if (shouldFollowCamera) {
+          centerOn(target.xPct, target.yPct, naturalSizeForAnimation.width, naturalSizeForAnimation.height, lockedScale);
+        }
+        setTravelPos({ xPct: target.xPct, yPct: target.yPct });
+        setTrailProgress(1);
+        setIsFollowing(false);
+        return;
+      }
+
+      // Path-following phase. If the path element isn't measurable yet,
+      // snapshot its length on the first frame and keep going from there.
+      const pathEl = trailPathRef.current;
+      let length = trailPathLengthRef.current;
+
+      if (!pathEl) {
+        followRafRef.current = requestAnimationFrame(frame);
+        return;
+      }
+
+      if (length <= 0) {
+        length = pathEl.getTotalLength();
+        trailPathLengthRef.current = length;
+        setTrailPathLength(length);
+      }
+
+      if (length <= 0) {
+        followRafRef.current = requestAnimationFrame(frame);
+        return;
+      }
+
+      const pathElapsed = elapsed - CENTER_IN_MS;
+      const pathT = Math.min(1, pathElapsed / pathDuration);
+      const point = pathEl.getPointAtLength(pathT * length);
+      const xPct = (point.x / naturalSizeForAnimation.width) * 100;
+      const yPct = (point.y / naturalSizeForAnimation.height) * 100;
+
+      if (shouldFollowCamera) {
+        centerOn(xPct, yPct, naturalSizeForAnimation.width, naturalSizeForAnimation.height, lockedScale);
+      }
+      setTravelPos({ xPct, yPct });
+      setTrailProgress(pathT);
+
+      if (pathT < 1) {
+        followRafRef.current = requestAnimationFrame(frame);
+      } else {
+        setIsFollowing(false);
+      }
+    }
+
+    followRafRef.current = requestAnimationFrame(frame);
+
+    return () => {
+      if (followRafRef.current !== null) {
+        cancelAnimationFrame(followRafRef.current);
+      }
+    };
+    // We intentionally only restart this on character/chapter/natural-size
+    // changes — not on every pan/scale change, since those are often
+    // *caused* by this very effect.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCharacterId, chapterIndex, naturalSize]);
+
+  useEffect(() => cancelFollow, [cancelFollow]);
+
+  const handleViewportMouseDown = useCallback(
+    (event: React.MouseEvent) => {
+      isDraggingRef.current = true;
+      manualControlRef.current = true;
+      handleMouseDown(event);
+    },
+    [handleMouseDown]
+  );
+
+  const handleViewportMouseMove = useCallback(
+    (event: React.MouseEvent) => {
+      handleMouseMove(event);
+    },
+    [handleMouseMove]
+  );
+
+  const stopDragging = useCallback(
+    (event: React.MouseEvent) => {
+      isDraggingRef.current = false;
+      handleMouseUp(event);
+    },
+    [handleMouseUp]
+  );
 
   const handleMapClick = useCallback(() => {
     if (consumeDragFlag()) return;
@@ -204,9 +546,68 @@ export default function InteractiveMap() {
     });
   }, []);
 
-  const jumpToChapter = useCallback((idx: number) => {
-    setChapterIndex(Math.max(0, Math.min(chapters.length - 1, idx)));
-  }, [chapters.length]);
+  const jumpToChapter = useCallback(
+    (idx: number) => {
+      setChapterIndex(Math.max(0, Math.min(chapters.length - 1, idx)));
+    },
+    [chapters.length]
+  );
+
+  const declutteredLocations = useMemo<DeclutteredLocation[]>(() => {
+    if (!naturalSize) {
+      return MAP_LOCATIONS.map((loc) => ({
+        ...loc,
+        offsetXPct: loc.xPct,
+        offsetYPct: loc.yPct,
+      }));
+    }
+
+    const visible = MAP_LOCATIONS.filter((loc) => {
+      const hasChars = (charactersByLocation.get(loc.name)?.length ?? 0) > 0;
+      const hasEvents = (visibleEventsByLocation.get(loc.name)?.length ?? 0) > 0;
+      return hasChars || hasEvents;
+    });
+
+    const positioned = visible.map((loc) => ({
+      ...loc,
+      offsetXPct: loc.xPct,
+      offsetYPct: loc.yPct,
+    }));
+
+    for (let pass = 0; pass < 3; pass++) {
+      for (let i = 0; i < positioned.length; i++) {
+        for (let j = i + 1; j < positioned.length; j++) {
+          const a = positioned[i];
+          const b = positioned[j];
+
+          const axPx = (a.offsetXPct / 100) * naturalSize.width * scale;
+          const ayPx = (a.offsetYPct / 100) * naturalSize.height * scale;
+          const bxPx = (b.offsetXPct / 100) * naturalSize.width * scale;
+          const byPx = (b.offsetYPct / 100) * naturalSize.height * scale;
+
+          const dx = bxPx - axPx;
+          const dy = byPx - ayPx;
+          const dist = Math.hypot(dx, dy) || 0.0001;
+
+          if (dist < MIN_MARKER_DISTANCE_PX) {
+            const push = (MIN_MARKER_DISTANCE_PX - dist) / 2;
+            const nx = dx / dist;
+            const ny = dy / dist;
+
+            const pushXPct = ((nx * push) / (naturalSize.width * scale)) * 100;
+            const pushYPct = ((ny * push) / (naturalSize.height * scale)) * 100;
+
+            a.offsetXPct -= pushXPct;
+            a.offsetYPct -= pushYPct;
+            b.offsetXPct += pushXPct;
+            b.offsetYPct += pushYPct;
+          }
+        }
+      }
+    }
+
+    return positioned;
+  }, [naturalSize, scale, charactersByLocation, visibleEventsByLocation]);
 
   return (
     <div className={styles.frameOuter}>
@@ -214,20 +615,22 @@ export default function InteractiveMap() {
         <div
           ref={viewportRef}
           className={styles.viewport}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
+          onMouseDown={handleViewportMouseDown}
+          onMouseMove={handleViewportMouseMove}
+          onMouseUp={stopDragging}
+          onMouseLeave={stopDragging}
           onClick={handleMapClick}
         >
           <div
             className={styles.mapWrapper}
-            style={{
-              width: naturalSize?.width ?? "auto",
-              height: naturalSize?.height ?? "auto",
-              transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
-              "--map-zoom": scale, // Anlık zoom değerini CSS'e iletiyoruz
-            } as React.CSSProperties}
+            style={
+              {
+                width: naturalSize?.width ?? "auto",
+                height: naturalSize?.height ?? "auto",
+                transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
+                "--map-zoom": scale,
+              } as React.CSSProperties
+            }
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -238,55 +641,123 @@ export default function InteractiveMap() {
               onLoad={handleImageLoad}
             />
 
-            {/* Trail for selected character */}
-            {trailPoints.length > 1 && (
+            {selectedCharacterId && naturalSize && fullTrailPoints.length > 1 && trailPathD && (
               <svg
+                key={`trail-svg-${selectedCharacterId}-${chapterIndex}`}
                 className={styles.trailSvg}
-                viewBox="0 0 100 100"
+                viewBox={`0 0 ${naturalSize.width} ${naturalSize.height}`}
                 preserveAspectRatio="none"
               >
                 <defs>
-                  <linearGradient id="trailGradient" gradientUnits="userSpaceOnUse"
-                    x1={trailPoints[0].xPct} y1={trailPoints[0].yPct}
-                    x2={trailPoints[trailPoints.length - 1].xPct}
-                    y2={trailPoints[trailPoints.length - 1].yPct}>
-                    <stop offset="0%" stopColor="#f2d98a" />
-                    <stop offset="50%" stopColor="#c9a227" />
-                    <stop offset="100%" stopColor="#8a1f1f" />
-                  </linearGradient>
+                  {trailSegments.map((segment) => (
+                    <linearGradient
+                      key={`trail-gradient-${segment.id}`}
+                      id={`trail-gradient-${segment.id}`}
+                      gradientUnits="userSpaceOnUse"
+                      x1={segment.x1}
+                      y1={segment.y1}
+                      x2={segment.x2}
+                      y2={segment.y2}
+                    >
+                      <stop offset="0%" stopColor={segment.startColor} />
+                      <stop offset="100%" stopColor={segment.endColor} />
+                    </linearGradient>
+                  ))}
                 </defs>
-                <polyline
-                  points={trailPoints.map((p) => `${p.xPct},${p.yPct}`).join(" ")}
+
+                <path
+                  ref={trailPathRef}
+                  d={trailPathD}
                   fill="none"
-                  stroke="url(#trailGradient)"
-                  strokeWidth="0.35"
+                  stroke="transparent"
+                  strokeWidth={0}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                  className={styles.trailPath}
+                  aria-hidden="true"
                 />
+
+                {trailSegments.map((segment, index) => {
+                  const span = Math.max(0.0001, segment.endRatio - segment.startRatio);
+                  const visibleRatio = Math.min(
+                    1,
+                    Math.max(0, (trailProgress - segment.startRatio) / span)
+                  );
+
+                  return (
+                    <path
+                      key={`trail-segment-${selectedCharacterId}-${chapterIndex}-${index}`}
+                      d={segment.d}
+                      fill="none"
+                      stroke={`url(#trail-gradient-${segment.id})`}
+                      strokeWidth={Math.max(2, 3 / scale)}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={styles.trailPathDraw}
+                      style={
+                        {
+                          "--path-length": segment.lengthPx,
+                          strokeDasharray: `${segment.lengthPx} ${segment.lengthPx}`,
+                          strokeDashoffset: segment.lengthPx * (1 - visibleRatio),
+                          animation: "none",
+                        } as React.CSSProperties
+                      }
+                    />
+                  );
+                })}
               </svg>
             )}
 
-            {/* Trail waypoint markers */}
-            {trailPoints.slice(0, -1).map((p) => (
-              <button
-                key={`waypoint-${p.chapterIdx}`}
-                className={styles.waypoint}
-                style={{ left: `${p.xPct}%`, top: `${p.yPct}%` }}
-                title={`Chapter ${p.roman}`}
-                onMouseDown={(e) => e.stopPropagation()}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  jumpToChapter(p.chapterIdx);
+            {selectedCharacterId &&
+              fullTrailPoints.map((p, idx) => {
+                const isCurrentChapterStop = p.chapterIdx === chapterIndex;
+
+                return (
+                  <button
+                    key={`ghost-${selectedCharacterId}-${chapterIndex}-${idx}`}
+                    className={`${styles.ghostMarker} ${
+                      isCurrentChapterStop ? styles.ghostMarkerActive : ""
+                    }`}
+                    style={
+                      {
+                        left: `${p.xPct}%`,
+                        top: `${p.yPct}%`,
+                        "--reveal-delay": `${CENTER_IN_MS + idx * 250}ms`,
+                      } as React.CSSProperties
+                    }
+                    title={`${selectedCharacter?.name ?? ""} — Chapter ${p.roman}, ${p.locationName}`}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      jumpToChapter(p.chapterIdx);
+                    }}
+                  >
+                    {selectedCharacter && (
+                      <Avatar
+                        characterId={selectedCharacter.id}
+                        name={selectedCharacter.name}
+                        size={idx === fullTrailPoints.length - 1 ? 30 : 24}
+                      />
+                    )}
+                    <span className={styles.ghostRoman}>{p.roman}</span>
+                  </button>
+                );
+              })}
+
+            {isFollowing && travelPos && selectedCharacter && (
+              <div
+                key={`traveler-${selectedCharacterId}-${chapterIndex}`}
+                className={styles.travelingAvatar}
+                style={{
+                  left: `${travelPos.xPct}%`,
+                  top: `${travelPos.yPct}%`,
                 }}
               >
-                {p.roman}
-              </button>
-            ))}
+                <Avatar characterId={selectedCharacter.id} name={selectedCharacter.name} size={34} />
+              </div>
+            )}
 
             {/* Location markers: characters + events */}
-            {MAP_LOCATIONS.map((loc) => {
+            {declutteredLocations.map((loc) => {
               const charEntries = charactersByLocation.get(loc.name) ?? [];
               const events = visibleEventsByLocation.get(loc.name) ?? [];
               if (charEntries.length === 0 && events.length === 0) return null;
@@ -303,7 +774,7 @@ export default function InteractiveMap() {
                 <div
                   key={loc.name}
                   className={styles.locationMarker}
-                  style={{ left: `${loc.xPct}%`, top: `${loc.yPct}%` }}
+                  style={{ left: `${loc.offsetXPct}%`, top: `${loc.offsetYPct}%` }}
                 >
                   {charEntries.length > 0 && (
                     <div
@@ -375,7 +846,7 @@ export default function InteractiveMap() {
                                   setOpenCluster(null);
                                 }}
                               >
-                                <Avatar characterId={entry.id} name={c?.name ?? entry.id} size={22} />
+                                <Avatar characterId={entry.id} name={c?.name ?? entry.id} size={24} />
                                 <span>
                                   {c?.name ?? entry.id}
                                   {entry.faded && (
@@ -474,7 +945,7 @@ export default function InteractiveMap() {
               >
                 ×
               </button>
-              <Avatar characterId={selectedCharacter.id} name={selectedCharacter.name} size={44} />
+              <Avatar characterId={selectedCharacter.id} name={selectedCharacter.name} size={48} />
               <div>
                 <div className={styles.characterCardName}>{selectedCharacter.name}</div>
                 <div className={styles.characterCardTitle}>{selectedCharacter.title}</div>
@@ -487,10 +958,27 @@ export default function InteractiveMap() {
 
           {/* Zoom controls */}
           <div className={styles.zoomControls} onMouseDown={(e) => e.stopPropagation()}>
-            <button onClick={() => zoomBy(1.3)} title="Zoom in">+</button>
-            <button onClick={() => zoomBy(1 / 1.3)} title="Zoom out">-</button>
             <button
               onClick={() => {
+                manualControlRef.current = true;
+                zoomBy(1.3);
+              }}
+              title="Zoom in"
+            >
+              +
+            </button>
+            <button
+              onClick={() => {
+                manualControlRef.current = true;
+                zoomBy(1 / 1.3);
+              }}
+              title="Zoom out"
+            >
+              -
+            </button>
+            <button
+              onClick={() => {
+                manualControlRef.current = true;
                 const kl = getMapLocation(DEFAULT_MAP_LOCATION);
                 if (kl && naturalSize) {
                   centerOn(kl.xPct, kl.yPct, naturalSize.width, naturalSize.height, DEFAULT_MAP_FOCUS_SCALE);
@@ -504,7 +992,7 @@ export default function InteractiveMap() {
         </div>
 
         {/* Chapter slider */}
-        <div className={styles.timeline}>
+        <div className={styles.timeline} onMouseDown={(e) => e.stopPropagation()}>
           <button
             className={styles.timelineArrow}
             onClick={() => jumpToChapter(chapterIndex - 1)}

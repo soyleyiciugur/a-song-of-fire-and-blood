@@ -13,7 +13,7 @@ const STORAGE_KEY = "map-locator-points";
 // Where the real /map page opens by default — kept in sync so this tool
 // always previews the same default framing.
 const KINGS_LANDING = MAP_LOCATIONS.find((l) => l.name === "King's Landing")!;
-const DEFAULT_FOCUS_SCALE = 3.2;
+const DEFAULT_FOCUS_SCALE = 1;
 
 interface MapPoint {
   id: string;

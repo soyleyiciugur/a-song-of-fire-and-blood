@@ -14,6 +14,8 @@ interface UseMapViewportOptions {
   maxScale?: number;
   /** How strongly one wheel "tick" changes the scale. Lower = gentler. */
   zoomSensitivity?: number;
+  /** Called whenever the user begins an interaction that should take manual control. */
+  onManualInteractionStart?: () => void;
 }
 
 /**
@@ -36,6 +38,7 @@ export function useMapViewport({
   minScale = 0.4,
   maxScale = 8,
   zoomSensitivity = 0.0022,
+  onManualInteractionStart,
 }: UseMapViewportOptions = {}) {
   const viewportRef = useRef<HTMLDivElement | null>(null);
 
@@ -82,6 +85,7 @@ export function useMapViewport({
 
     const onWheel = (event: WheelEvent) => {
       event.preventDefault();
+      onManualInteractionStart?.();
 
       const rect = viewport.getBoundingClientRect();
       const cursorX = event.clientX - rect.left;
@@ -102,10 +106,11 @@ export function useMapViewport({
 
     viewport.addEventListener("wheel", onWheel, { passive: false });
     return () => viewport.removeEventListener("wheel", onWheel);
-  }, [zoomAt, zoomSensitivity]);
+  }, [onManualInteractionStart, zoomAt, zoomSensitivity]);
 
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {
+      onManualInteractionStart?.();
       dragState.current = {
         dragging: true,
         moved: false,
@@ -115,7 +120,7 @@ export function useMapViewport({
         panStartY: pan.y,
       };
     },
-    [pan]
+    [onManualInteractionStart, pan]
   );
 
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
@@ -139,7 +144,7 @@ export function useMapViewport({
     }
   }, []);
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUp = useCallback((_: React.MouseEvent | void) => {
     dragState.current.dragging = false;
   }, []);
 

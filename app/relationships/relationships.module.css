@@ -95,16 +95,35 @@
   min-height: 260px;
 }
 
-.sidebarName {
+.sidebarNameLink {
+  display: inline-block;
   margin: 0 0 6px;
+  text-decoration: none;
+}
+
+.sidebarName {
+  margin: 0;
   font-size: 20px;
   color: var(--gold);
+}
+
+.sidebarNameLink:hover .sidebarName {
+  text-decoration: underline;
 }
 
 .sidebarHouse {
   margin: 0 0 18px;
   font-size: 13px;
   color: var(--muted);
+}
+
+.sidebarLink {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.sidebarLink:hover {
+  text-decoration: underline;
 }
 
 .sidebarEmpty {

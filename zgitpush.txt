@@ -1,0 +1,5 @@
+git add .
+
+git commit -m "Major updates to new features" 
+
+git push

@@ -59,4 +59,4 @@ export function getMapLocation(name: string): MapLocation | undefined {
 }
 
 export const DEFAULT_MAP_LOCATION = "King's Landing";
-export const DEFAULT_MAP_FOCUS_SCALE = 3.2;
+export const DEFAULT_MAP_FOCUS_SCALE = 2.5;
