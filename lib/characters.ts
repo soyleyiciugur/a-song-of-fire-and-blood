@@ -1,5 +1,6 @@
 import { characters } from "@/data/characters";
-import type { Character } from "@/types/character";
+import { getQuotesByCharacterId, quotes } from "@/data/quotes";
+import type { Character, CharacterQuote } from "@/types/character";
 
 function portraitFromName(name: string) {
   return `/images/characters/${name
@@ -15,15 +16,29 @@ export function getCharacter(id: string): Character | undefined {
 
   if (!character) return undefined;
 
+  const quotes = getQuotesByCharacterId(character.id);
+
   return {
     ...character,
     portrait: character.portrait ?? portraitFromName(character.name),
+    quote: quotes[0],
+    quotes,
   };
 }
 
 export function getCharacters(): Character[] {
-  return Object.values(characters).map((c) => ({
-    ...c,
-    portrait: c.portrait ?? portraitFromName(c.name),
-  }));
+  return Object.values(characters).map((c) => {
+    const quotes = getQuotesByCharacterId(c.id);
+    return {
+      ...c,
+      portrait: c.portrait ?? portraitFromName(c.name),
+      quote: quotes[0],
+      quotes,
+    };
+  });
+}
+
+export function getRandomQuote(): CharacterQuote | undefined {
+  if (!quotes.length) return undefined;
+  return quotes[Math.floor(Math.random() * quotes.length)];
 }

@@ -1,45 +1,56 @@
 import Link from "next/link";
 
-import { getHouses } from "@/lib/houses";
+import { houses } from "@/data/houses";
+import { getCharacters } from "@/lib/characters";
+import SigilImage from "@/components/SigilImage";
+
 import styles from "./houses.module.css";
 
 export default function Houses() {
-  const houses = getHouses();
+  const characters = getCharacters();
 
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.heading}>Great Houses of the Realm</h1>
+        <h1 className={styles.heading}>Houses</h1>
 
         <p className={styles.subheading}>
-          The blood, banners, and rivalries that shape the Seven Kingdoms.
+          The great and lesser houses whose banners, words, and blood shape
+          the realm.
         </p>
 
-        <ul className={styles.list}>
-          {houses.map((house) => (
-            <li key={house.slug} className={styles.listItem}>
+        <div className={styles.grid}>
+          {houses.map((house) => {
+            const memberCount = characters.filter(
+              (c) => c.house === house.name
+            ).length;
+
+            return (
               <Link
-                href={`/houses/${house.slug}`}
+                key={house.id}
+                href={`/houses/${house.id}`}
                 className={styles.card}
+                style={{ "--house-color": house.color } as React.CSSProperties}
               >
-                <h2 className={styles.title}>{house.name}</h2>
+                <div className={styles.cardTop} />
 
-                <p className={styles.memberCount}>
-                  {house.members.length}{" "}
-                  {house.members.length === 1 ? "member" : "members"}
-                </p>
+                <SigilImage
+                  src={house.sigilSrc}
+                  alt={house.name}
+                  size={72}
+                  fallbackText={house.name.replace("House ", "").slice(0, 2)}
+                />
 
-                <p className={styles.memberPreview}>
-                  {house.members
-                    .slice(0, 4)
-                    .map((member) => member.name.split(" ")[0])
-                    .join(", ")}
-                  {house.members.length > 4 && ", ..."}
-                </p>
+                <h2 className={styles.houseName}>{house.name}</h2>
+                <p className={styles.houseWords}>&ldquo;{house.words}&rdquo;</p>
+
+                <span className={styles.memberCount}>
+                  {memberCount} {memberCount === 1 ? "member" : "members"}
+                </span>
               </Link>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
       </div>
     </main>
   );

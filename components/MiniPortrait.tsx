@@ -10,9 +10,7 @@ type Props = {
 };
 
 export default function MiniPortrait({ id, alt }: Props) {
-  const [src, setSrc] = useState(
-    `/images/miniportraits/${id}.webp`
-  );
+  const [src, setSrc] = useState(`/images/miniportraits/${id}.webp`);
 
   return (
     <img

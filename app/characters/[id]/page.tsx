@@ -1,5 +1,6 @@
 import { getCharacter } from "@/lib/characters";
 import CharacterInfoBox from "@/components/character/CharacterInfoBox";
+import CharacterQuote from "@/components/character/CharacterQuote";
 
 type Props = {
   params: Promise<{
@@ -169,7 +170,7 @@ export default async function CharacterPage({ params }: Props) {
 
             {/* Relationships */}
 
-            <section>
+            <section style={{ marginBottom: 40 }}>
               <h2
                 style={{
                   color: "var(--gold)",
@@ -227,6 +228,22 @@ export default async function CharacterPage({ params }: Props) {
                 )}
               </div>
             </section>
+
+            {(character.quote || character.quotes?.length) && (
+              <section>
+                <h2
+                  style={{
+                    color: "var(--gold)",
+                    marginBottom: 18,
+                    borderBottom: "1px solid var(--border)",
+                    paddingBottom: 10,
+                  }}
+                >
+                  Notable Quotes
+                </h2>
+                <CharacterQuote quote={character.quotes?.length ? character.quotes : character.quote} />
+              </section>
+            )}
           </div>
 
           {/* RIGHT */}

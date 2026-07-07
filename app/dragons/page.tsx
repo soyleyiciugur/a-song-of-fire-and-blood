@@ -3,6 +3,7 @@ import Link from "next/link";
 import { dragons } from "@/data/dragons";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
+import SigilImage from "@/components/SigilImage";
 
 import styles from "./dragons.module.css";
 
@@ -53,52 +54,59 @@ function DragonCard({ dragon }: { dragon: (typeof dragons)[number] }) {
     : undefined;
 
   return (
-    <article
-      id={dragon.id}
+    <Link
+      href={`/dragons/${dragon.id}`}
       className={`${styles.card} ${
         dragon.status === "Dead" ? styles.cardDead : ""
       }`}
     >
-      <div className={styles.cardHeader}>
-        <h3 className={styles.dragonName}>{dragon.name}</h3>
+      <SigilImage
+        src={dragon.image}
+        alt={dragon.name}
+        shape="rounded"
+        size={96}
+        fallbackText={dragon.name.slice(0, 2)}
+      />
 
-        <span
-          className={`${styles.statusBadge} ${
-            dragon.status === "Alive" ? styles.statusAlive : styles.statusDead
-          }`}
-        >
-          {dragon.status === "Alive" ? "●" : "✕"} {dragon.status}
-        </span>
-      </div>
+      <div className={styles.cardBody}>
+        <div className={styles.cardHeader}>
+          <h3 className={styles.dragonName}>{dragon.name}</h3>
 
-      <p className={styles.description}>{dragon.description}</p>
-
-      <div className={styles.riders}>
-        {rider && (
-          <Link href={`/characters/${rider.id}`} className={styles.riderChip}>
-            <MiniPortrait id={rider.id} alt={rider.name} />
-            <span>
-              <span className={styles.riderLabel}>Rider</span>
-              <span className={styles.riderName}>{rider.name}</span>
-            </span>
-          </Link>
-        )}
-
-        {previousRider && (
-          <Link
-            href={`/characters/${previousRider.id}`}
-            className={styles.riderChip}
+          <span
+            className={`${styles.statusBadge} ${
+              dragon.status === "Alive" ? styles.statusAlive : styles.statusDead
+            }`}
           >
-            <MiniPortrait id={previousRider.id} alt={previousRider.name} />
-            <span>
-              <span className={styles.riderLabel}>
-                {rider ? "Formerly" : "Once bonded to"}
+            {dragon.status === "Alive" ? "●" : "✕"} {dragon.status}
+          </span>
+        </div>
+
+        <p className={styles.description}>{dragon.description}</p>
+
+        <div className={styles.riders}>
+          {rider && (
+            <span className={styles.riderChip}>
+              <MiniPortrait id={rider.id} alt={rider.name} />
+              <span>
+                <span className={styles.riderLabel}>Rider</span>
+                <span className={styles.riderName}>{rider.name}</span>
               </span>
-              <span className={styles.riderName}>{previousRider.name}</span>
             </span>
-          </Link>
-        )}
+          )}
+
+          {previousRider && (
+            <span className={styles.riderChip}>
+              <MiniPortrait id={previousRider.id} alt={previousRider.name} />
+              <span>
+                <span className={styles.riderLabel}>
+                  {rider ? "Formerly" : "Once bonded to"}
+                </span>
+                <span className={styles.riderName}>{previousRider.name}</span>
+              </span>
+            </span>
+          )}
+        </div>
       </div>
-    </article>
+    </Link>
   );
 }

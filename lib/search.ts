@@ -1,6 +1,7 @@
 import { characters } from "@/data/characters";
 import { chapterList } from "@/data/chapters";
 import { dragons } from "@/data/dragons";
+import { houses } from "@/data/houses";
 
 export type SearchResultType = "character" | "chapter" | "house" | "dragon";
 
@@ -12,15 +13,6 @@ export type SearchResult = {
   href: string;
   keywords: string;
 };
-
-// Only houses that have their own section on the family tree page
-// get linked results, so search results never point at a dead anchor.
-const HOUSES_WITH_TREE_SECTION = [
-  "House Targaryen",
-  "House Hightower",
-  "House Stark",
-  "House Dayne",
-];
 
 function slugifyHouse(house: string) {
   return house
@@ -76,17 +68,16 @@ export function buildSearchIndex(): SearchResult[] {
     });
   }
 
-  for (const house of HOUSES_WITH_TREE_SECTION) {
-    results.push({
-      type: "house",
-      id: slugifyHouse(house),
-      title: house,
-      subtitle: "House",
-      href: `/family-tree#${slugifyHouse(house)}`,
-      keywords: normalize(house),
-    });
-  }
-
+  for (const house of houses) {
+  results.push({
+    type: "house",
+    id: house.id,
+    title: house.name,
+    subtitle: house.words,
+    href: `/houses/${house.id}`,
+    keywords: normalize(`${house.name} ${house.words}`),
+  });
+}
   for (const dragon of dragons) {
     const rider = dragon.riderId ? characters[dragon.riderId as keyof typeof characters] : undefined;
 
@@ -95,7 +86,7 @@ export function buildSearchIndex(): SearchResult[] {
       id: dragon.id,
       title: dragon.name,
       subtitle: rider ? `Ridden by ${rider.name}` : "Dragon",
-      href: `/dragons#${dragon.id}`,
+      href: `/dragons/${dragon.id}`,
       keywords: normalize(`${dragon.name} ${rider?.name ?? ""} dragon`),
     });
   }

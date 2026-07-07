@@ -57,21 +57,39 @@
 
 .card {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 
   padding: 20px;
+
+  text-decoration: none;
+  color: var(--text);
 
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
 
-  scroll-margin-top: 90px;
+  transition:
+    transform 0.15s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
 }
 
 .cardDead {
   opacity: 0.85;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  min-width: 0;
+  flex: 1;
 }
 
 .cardHeader {
@@ -137,14 +155,11 @@
 
   padding: 6px 14px 6px 6px;
 
-  text-decoration: none;
   color: var(--text);
 
   background: var(--surface-hover);
   border: 1px solid var(--border);
   border-radius: 999px;
-
-  transition: border-color 0.2s ease;
 }
 
 .riderChip:hover {

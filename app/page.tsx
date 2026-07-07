@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { getRandomQuote } from "@/lib/characters";
+import CharacterQuote from "@/components/character/CharacterQuote";
+
+export const dynamic = "force-dynamic";
+
 export default function Home() {
+  const featuredQuote = getRandomQuote();
   return (
     <main className="home-page">
       <div className="hero">
@@ -57,6 +63,12 @@ export default function Home() {
             Timeline
           </Link>
         </div>
+
+        {featuredQuote ? (
+          <div style={{ marginTop: 28, maxWidth: 760 }}>
+            <CharacterQuote quote={featuredQuote} compact showAttribution />
+          </div>
+        ) : null}
       </div>
     </main>
   );

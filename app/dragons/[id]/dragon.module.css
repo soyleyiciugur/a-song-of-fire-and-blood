@@ -1,0 +1,146 @@
+.page {
+  padding: 60px 20px;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--text);
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.dragonName {
+  margin: 0 0 10px;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  color: var(--gold);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  padding: 4px 12px;
+  border-radius: 999px;
+
+  border: 1px solid var(--border);
+}
+
+.statusAlive {
+  color: #39d353;
+}
+
+.statusDead {
+  color: #f85149;
+}
+
+.description {
+  margin: 0 0 32px;
+
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.sectionHeading {
+  margin: 0 0 14px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  color: var(--gold);
+}
+
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-bottom: 32px;
+}
+
+.traitChip {
+  padding: 6px 14px;
+
+  font-size: 13px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.riders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-bottom: 40px;
+}
+
+.riderChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 16px 8px 8px;
+
+  text-decoration: none;
+  color: var(--text);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  transition: border-color 0.2s ease;
+}
+
+.riderChip:hover {
+  border-color: var(--gold);
+}
+
+.riderLabel {
+  display: block;
+
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+
+.riderName {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.backLink {
+  display: inline-block;
+
+  font-size: 14px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: #e6c34a;
+}

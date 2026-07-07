@@ -31,6 +31,14 @@ export type CharacterId =
   | "visenor-targaryen";
 
 
+export interface CharacterQuote {
+  text: string;
+  speakerId?: CharacterId | string;
+  speakerName: string;
+  chapterSlug?: string;
+  chapterTitle?: string;
+}
+
 export interface Character {
   id: CharacterId;
 
@@ -64,6 +72,9 @@ export interface Character {
   relationships: Partial<Record<CharacterId, string>>;
 
   summary: string;
+
+  quote?: CharacterQuote;
+  quotes?: CharacterQuote[];
 
   // 🔥 UI layer (optional asset)
   portrait?: string;
