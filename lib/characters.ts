@@ -1,14 +1,17 @@
 import charactersData from "@/data/characters/characters.json";
 import quotesData from "@/data/quotes.json";
+import type { Character } from "@/types/character";
+
+const characters = charactersData as Character[];
 
 // Tüm karakterleri getiren fonksiyon
-export function getCharacters() {
-  return charactersData;
+export function getCharacters(): Character[] {
+  return characters;
 }
 
-// ID ile TEK bir karakter getiren fonksiyon (Hata veren yer burası)
+// ID ile TEK bir karakter getiren fonksiyon
 export function getCharacter(id: string) {
-  return charactersData.find((char) => char.id === id);
+  return characters.find((char) => char.id === id);
 }
 
 // Rastgele alıntı
