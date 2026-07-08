@@ -1,7 +1,7 @@
 import RelationshipCard from "./RelationshipCard";
 
 type Props = {
-  relationships?: Record<string, string> | null;
+  relationships: Record<string, string>;
 };
 
 export default function CharacterRelationships({ relationships }: Props) {
@@ -11,24 +11,10 @@ export default function CharacterRelationships({ relationships }: Props) {
 
   return (
     <section style={{ marginBottom: 40 }}>
-      <h2
-        style={{
-          color: "var(--gold)",
-          marginBottom: 20,
-          borderBottom: "1px solid var(--border)",
-          paddingBottom: 10,
-        }}
-      >
+      <h2 style={{ color: "var(--gold)", marginBottom: 20, borderBottom: "1px solid var(--border)", paddingBottom: 10 }}>
         Relationships
       </h2>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 18,
-        }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {entries.map(([id, description]) => (
           <RelationshipCard key={id} id={id} description={description} />
         ))}

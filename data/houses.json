@@ -1,0 +1,92 @@
+[
+  {
+    "id": "targaryen",
+    "name": "House Targaryen",
+    "words": "Fire and Blood",
+    "seat": "King's Landing",
+    "sigilSrc": "/images/houses/targaryen.webp",
+    "color": "#B22222",
+    "description": "The ruling house of the Seven Kingdoms, bound as much by dragonfire as by blood. King Baelenys' reign has grown harsher since the poisoning, and the loyalty of his own siblings and children has never been so openly tested."
+  },
+  {
+    "id": "hightower",
+    "name": "House Hightower",
+    "words": "We Light the Way",
+    "seat": "Oldtown",
+    "sigilSrc": "/images/houses/hightower.webp",
+    "color": "#009E60",
+    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown, has left the house's future in ruins."
+  },
+  {
+    "id": "stark",
+    "name": "House Stark",
+    "words": "Winter is Coming",
+    "seat": "Winterfell",
+    "sigilSrc": "/images/houses/stark.webp",
+    "color": "#4D495B",
+    "description": "Wardens of the North, bound to the Iron Throne by an old, uneasy loyalty sealed in blood generations ago. Lord Brandon Stark's death brought his son Rickard to Winterfell's seat, and House Targaryen back to its gates."
+  },
+  {
+    "id": "dayne",
+    "name": "House Dayne",
+    "words": "By the Sword, We Endure",
+    "seat": "Starfall",
+    "sigilSrc": "/images/houses/dayne.webp",
+    "color": "#DDA0DD",
+    "description": "A Dornish house quietly drawn into the heart of the realm's troubles, first through Ser Alester Dayne's sworn service to Prince Jacaelon, then through Lady Lorenah Dayne's decision to shelter a fugitive Crown Prince."
+  },
+  {
+    "id": "velaryon",
+    "name": "House Velaryon",
+    "words": "The Old, the True, the Brave",
+    "seat": "Driftmark",
+    "sigilSrc": "/images/houses/velaryon.webp",
+    "color": "#20B2AA",
+    "description": "Masters of Driftmark and the Crown's oldest maritime allies, tied now to the royal family directly through Naella Velaryon's marriage to Prince Gaelor."
+  },
+  {
+    "id": "baratheon",
+    "name": "House Baratheon",
+    "words": "Ours Is the Fury",
+    "seat": "Storm's End",
+    "sigilSrc": "/images/houses/baratheon.webp",
+    "color": "#F3CE1B",
+    "description": "Proud stormlanders who fought beside House Targaryen in the past and expect the debt remembered. The Young Stag, Steffon Baratheon, has learned that pride alone does not move a king."
+  },
+  {
+    "id": "vance",
+    "name": "House Vance",
+    "words": "True Through the Torrent",
+    "seat": "Unconfirmed",
+    "sigilSrc": "/images/houses/vance.webp",
+    "color": "#006400",
+    "description": "A lesser house known mainly through Ser Brannyn Vance's service in the Kingsguard, sworn to protect Princess Maela at any cost to himself."
+  },
+  {
+    "id": "morrigen",
+    "name": "House Morrigen",
+    "words": "Ever Vigilant",
+    "seat": "The Reach",
+    "sigilSrc": "/images/houses/morrigen.webp",
+    "color": "#4E7F4C",
+    "description": "A Reach house represented at court by Ser Orwell Morrigen, Lord Commander of the Kingsguard, who watches the realm's unraveling with growing unease."
+  },
+  {
+    "id": "whent",
+    "name": "House Whent",
+    "words": "From Darkness, Dominion",
+    "seat": "Harrenhal",
+    "sigilSrc": "/images/houses/whent.webp",
+    "color": "#FFD93D",
+    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretches from the Kingsguard to the woods south of King's Landing."
+  },
+  {
+    "id": "lannister",
+    "name": "House Lannister",
+    "words": "Hear Me Roar!",
+    "seat": "Casterly Rock",
+    "sigilSrc": "/images/houses/lannister.webp",
+    "color": "#86090A",
+    "description": "Represented at court by Tion Lannister, the Master of Coin, whose sound financial counsel is consistently overruled by princes eager for war."
+  }
+]

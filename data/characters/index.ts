@@ -1,61 +1,13 @@
-import { baelenysTargaryen } from "./baelenys-targaryen";
-import { jaeryTargaryen } from "./jaery-targaryen";
-import { maelaTargaryen } from "./maela-targaryen";
-import { jacaelonTargaryen } from "./jacaelon-targaryen";
-import { saeraTargaryen } from "./saera-targaryen";
-import { gaelorTargaryen } from "./gaelor-targaryen";
-import { visenorTargaryen } from "./visenor-targaryen";
-import { vhaemysTargaryen } from "./vhaemys-targaryen";
-import { rhaellaTargaryen } from "./rhaella-targaryen";
-import { naellaVelaryon } from "./naella-velaryon";
-import { lorenahDayne } from "./lorenah-dayne";
-import { serAlesterDayne } from "./ser-alester-dayne";
-import { derrinHightower } from "./derrin-hightower";
-import { serSaathosMaris } from "./ser-saathos-maris";
-import { darrenDayne } from "./darren-dayne";
-import { steffonBaratheon } from "./steffon-baratheon";
-import { cordinPoole } from "./cordin-poole";
-import { brannynVance } from "./ser-brannyn-vance";
-import { orwellMorrigen } from "./ser-orwell-morrigen";
-import { timosHightower } from "./timos-hightower";
-import { alysanneHightower } from "./alysanne-hightower";
-import { baelorTargaryen } from "./baelor-targaryen";
-import { rickardStark } from "./rickard-stark";
-import { brandonStark } from "./brandon-stark";
-import { tionLannister } from "./tion-lannister";
-import { malaenarTargaryen } from "./malaenar-targaryen";
-import { vahaemonTargaryen } from "./vahaemon-targaryen";
-import { curtassWhent } from "./curtass-whent";
-import { serBrantCostayne } from "./ser-brant-costayne";
+import { z } from "zod";
+import charactersData from "./characters.json";
+import { CharacterSchema, type CharacterFromSchema } from "../../schemas/character"; 
+// (Eğer schemas klasörünün yolu farklıysa "../../schemas/character" kısmını doğru yola göre düzeltmelisin)
 
-export const characters = {
-  "baelenys-targaryen": baelenysTargaryen,
-  "jaery-targaryen": jaeryTargaryen,
-  "maela-targaryen": maelaTargaryen,
-  "jacaelon-targaryen": jacaelonTargaryen,
-  "saera-targaryen": saeraTargaryen,
-  "gaelor-targaryen": gaelorTargaryen,
-  "visenor-targaryen": visenorTargaryen,
-  "vhaemys-targaryen": vhaemysTargaryen,
-  "rhaella-targaryen": rhaellaTargaryen,
-  "naella-velaryon": naellaVelaryon,
-  "lorenah-dayne": lorenahDayne,
-  "ser-alester-dayne": serAlesterDayne,
-  "derrin-hightower": derrinHightower,
-  "ser-saathos-maris": serSaathosMaris,
-  "darren-dayne": darrenDayne,
-  "steffon-baratheon": steffonBaratheon,
-  "cordin-poole": cordinPoole,
-  "ser-brannyn-vance": brannynVance,
-  "ser-orwell-morrigen": orwellMorrigen,
-  "timos-hightower": timosHightower,
-  "alysanne-hightower": alysanneHightower,
-  "baelor-targaryen": baelorTargaryen,
-  "rickard-stark": rickardStark,
-  "brandon-stark": brandonStark,
-  "tion-lannister": tionLannister,
-  "malaenar-targaryen": malaenarTargaryen,
-  "vahaemon-targaryen": vahaemonTargaryen,
-  "curtass-whent": curtassWhent,
-  "ser-brant-costayne": serBrantCostayne,
-} as const;
+// JSON'ı senin karakter kurallarına göre test edip içeri alıyoruz
+const parsedCharacters = z.array(CharacterSchema).parse(charactersData);
+
+// Sitenin alıştığı Record<string, Character> formatına geri çeviriyoruz
+export const characters: Record<string, CharacterFromSchema> = parsedCharacters.reduce((acc, char) => {
+  acc[char.id] = char;
+  return acc;
+}, {} as Record<string, CharacterFromSchema>);

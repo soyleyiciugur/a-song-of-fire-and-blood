@@ -9,7 +9,7 @@ type Props = {
   character: Character;
 };
 
-const DEFAULT_PORTRAIT = "/images/default.webp";
+const DEFAULT_PORTRAIT = "/images/characters/{id}.webp";
 
 function isValidValue(value?: string | null) {
   return value && value !== "-" ? value : null;
@@ -24,7 +24,7 @@ function getCharacterName(id?: string | null) {
 }
 
 export default function CharacterInfoBox({ character }: Props) {
-  const portraitSrc = character.portrait ?? DEFAULT_PORTRAIT;
+  const portraitSrc = character.portrait ?? DEFAULT_PORTRAIT .replace("{id}", character.id);
 
   return (
     <aside

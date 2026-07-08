@@ -1,22 +1,21 @@
 import { notFound } from "next/navigation";
-
-import { getCharacter } from "@/lib/characters";
+import { getCharacter, getQuotesByCharacterId } from "@/lib/characters";
 import CharacterInfoBox from "@/components/character/CharacterInfoBox";
 import CharacterQuote from "@/components/character/CharacterQuote";
 import CharacterHeader from "@/components/character/CharacterHeader";
 import CharacterBiography from "@/components/character/CharacterBiography";
 import CharacterTraits from "@/components/character/CharacterTraits";
 import CharacterRelationships from "@/components/character/CharacterRelationships";
+import type { Character } from "@/types/character";
 
 type Props = {
-  params: Promise<{
-    id: string;
-  }>;
+  params: Promise<{ id: string }>;
 };
 
 export default async function CharacterPage({ params }: Props) {
   const { id } = await params;
-  const character = getCharacter(id);
+  const character = getCharacter(id) as Character | undefined;
+  const quotes = getQuotesByCharacterId(id);
 
   if (!character) notFound();
 
@@ -25,34 +24,20 @@ export default async function CharacterPage({ params }: Props) {
       <div className="container">
         <CharacterHeader character={character} />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "minmax(0, 1fr) 340px",
-            gap: 40,
-            alignItems: "start",
-          }}
-        >
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 340px", gap: 40, alignItems: "start" }}>
           <div>
             <CharacterBiography summary={character.summary} />
             <CharacterTraits traits={character.traits} />
-            <CharacterRelationships relationships={character.relationships} />
+            
+            {/* Hata veren "as ComponentType" hack'i kaldırıldı, doğrudan kullanıldı */}
+            <CharacterRelationships relationships={character.relationships as Record<string, string>} />
 
-            {(character.quote || character.quotes?.length) && (
+            {quotes.length > 0 && (
               <section>
-                <h2
-                  style={{
-                    color: "var(--gold)",
-                    marginBottom: 18,
-                    borderBottom: "1px solid var(--border)",
-                    paddingBottom: 10,
-                  }}
-                >
+                <h2 style={{ color: "var(--gold)", marginBottom: 18, borderBottom: "1px solid var(--border)", paddingBottom: 10 }}>
                   Notable Quotes
                 </h2>
-                <CharacterQuote
-                  quote={character.quotes?.length ? character.quotes : character.quote}
-                />
+                {quotes.map((q, i) => <CharacterQuote key={i} quote={q} />)}
               </section>
             )}
           </div>

@@ -1,9 +1,9 @@
 import Link from "next/link";
-
 import { characters } from "@/data/characters";
 
 type Quote = {
   text: string;
+  note?: string | null; // Yeni alan eklendi
   speakerId?: string;
   speakerName: string;
   chapterSlug?: string;
@@ -67,6 +67,22 @@ export default function CharacterQuote({
             >
               <q>{entry.text}</q>
             </p>
+
+            {/* NOT ALANI BURADA: Tırnak dışı ve alt satır */}
+            {entry.note && (
+              <small
+                style={{
+                  display: "block",
+                  marginTop: 10,
+                  color: "var(--muted)",
+                  fontStyle: "normal",
+                  fontSize: compact ? 13 : 14,
+                }}
+              >
+                ({entry.note})
+              </small>
+            )}
+
             {(showAttribution && attribution) || hasChapter ? (
               <footer
                 style={{
