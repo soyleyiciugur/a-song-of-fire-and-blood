@@ -1,5 +1,5 @@
 git add .
 
-git commit -m "Added Chapter 6" 
+git commit -m "Added Admin Panel" 
 
 git push

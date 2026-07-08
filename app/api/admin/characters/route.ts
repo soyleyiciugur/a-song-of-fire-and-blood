@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 import { z } from "zod";
 import { CharacterSchema } from "../../../../schemas/character";
+import { updateJsonFileOnGithub } from "@/lib/github";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    // Gelen karakter listesini doğrula
     const validatedData = z.array(CharacterSchema).parse(body);
 
-    const filePath = path.join(process.cwd(), "data", "characters", "characters.json");
-    fs.writeFileSync(filePath, JSON.stringify(validatedData, null, 2), "utf-8");
+    await updateJsonFileOnGithub({
+      path: "data/characters/characters.json",
+      content: validatedData,
+      message: "Update characters via admin panel",
+    });
 
     return NextResponse.json({ success: true, message: "Characters updated successfully!" });
   } catch (error) {

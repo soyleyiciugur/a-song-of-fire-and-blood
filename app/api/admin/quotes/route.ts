@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { updateJsonFileOnGithub } from "@/lib/github";
 
 export async function POST(request: Request) {
   try {
     const quotes = await request.json();
-    
-    // Artık sadece saf JSON kaydediyoruz
-    const filePath = path.join(process.cwd(), "data", "quotes.json");
-    fs.writeFileSync(filePath, JSON.stringify(quotes, null, 2), "utf-8");
+
+    await updateJsonFileOnGithub({
+      path: "data/quotes.json",
+      content: quotes,
+      message: "Update quotes via admin panel",
+    });
 
     return NextResponse.json({ success: true, message: "Quotes updated successfully!" });
   } catch (error) {

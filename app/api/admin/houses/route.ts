@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 import { HouseListSchema } from "../../../../schemas/house";
+import { updateJsonFileOnGithub } from "@/lib/github";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const validatedData = HouseListSchema.parse(body);
 
-    const filePath = path.join(process.cwd(), "data", "houses.json");
-    fs.writeFileSync(filePath, JSON.stringify(validatedData, null, 2), "utf-8");
+    await updateJsonFileOnGithub({
+      path: "data/houses.json",
+      content: validatedData,
+      message: "Update houses via admin panel",
+    });
 
     return NextResponse.json({ success: true, message: "Houses updated successfully!" });
   } catch (error) {
