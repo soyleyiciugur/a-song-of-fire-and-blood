@@ -144,7 +144,7 @@ export function useMapViewport({
     }
   }, []);
 
-  const handleMouseUp = useCallback((_: React.MouseEvent | void) => {
+  const handleMouseUp = useCallback(() => {
     dragState.current.dragging = false;
   }, []);
 

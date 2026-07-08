@@ -22,6 +22,7 @@ export type CharacterId =
   | "rickard-stark"
   | "saera-targaryen"
   | "ser-alester-dayne"
+  | "ser-brant-costayne"
   | "ser-saathos-maris"
   | "steffon-baratheon"
   | "timos-hightower"

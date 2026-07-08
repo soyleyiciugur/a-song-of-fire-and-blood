@@ -5,6 +5,12 @@ import { houses } from "@/data/houses";
 
 export type SearchResultType = "character" | "chapter" | "house" | "dragon";
 
+export type SearchResultThumbnail = {
+  src: string;
+  alt: string;
+  kind: "character" | "dragon" | "house";
+};
+
 export type SearchResult = {
   type: SearchResultType;
   id: string;
@@ -12,14 +18,8 @@ export type SearchResult = {
   subtitle?: string;
   href: string;
   keywords: string;
+  thumbnail?: SearchResultThumbnail;
 };
-
-function slugifyHouse(house: string) {
-  return house
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
 
 function normalize(value: string) {
   return value
@@ -54,6 +54,11 @@ export function buildSearchIndex(): SearchResult[] {
           : character.house,
       href: `/characters/${character.id}`,
       keywords: normalize(keywordParts.join(" ")),
+      thumbnail: {
+        src: `/images/miniportraits/${character.id}.webp`,
+        alt: character.name,
+        kind: "character",
+      },
     });
   }
 
@@ -69,15 +74,20 @@ export function buildSearchIndex(): SearchResult[] {
   }
 
   for (const house of houses) {
-  results.push({
-    type: "house",
-    id: house.id,
-    title: house.name,
-    subtitle: house.words,
-    href: `/houses/${house.id}`,
-    keywords: normalize(`${house.name} ${house.words}`),
-  });
-}
+    results.push({
+      type: "house",
+      id: house.id,
+      title: house.name,
+      subtitle: house.words,
+      href: `/houses/${house.id}`,
+      keywords: normalize(`${house.name} ${house.words}`),
+      thumbnail: {
+        src: house.sigilSrc,
+        alt: house.name,
+        kind: "house",
+      },
+    });
+  }
   for (const dragon of dragons) {
     const rider = dragon.riderId ? characters[dragon.riderId as keyof typeof characters] : undefined;
 
@@ -88,6 +98,11 @@ export function buildSearchIndex(): SearchResult[] {
       subtitle: rider ? `Ridden by ${rider.name}` : "Dragon",
       href: `/dragons/${dragon.id}`,
       keywords: normalize(`${dragon.name} ${rider?.name ?? ""} dragon`),
+      thumbnail: {
+        src: dragon.image,
+        alt: dragon.name,
+        kind: "dragon",
+      },
     });
   }
 

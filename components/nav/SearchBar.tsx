@@ -15,12 +15,7 @@ const TYPE_LABELS: Record<SearchResult["type"], string> = {
   dragon: "Dragons",
 };
 
-const TYPE_ORDER: SearchResult["type"][] = [
-  "character",
-  "chapter",
-  "house",
-  "dragon",
-];
+const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon"];
 
 function groupResults(results: SearchResult[]) {
   const groups = new Map<SearchResult["type"], SearchResult[]>();
@@ -60,7 +55,7 @@ export default function SearchBar() {
         ref={inputRef}
         type="text"
         value={query}
-        placeholder="Search the realm…"
+        placeholder="Search the realm..."
         className={styles.searchInput}
         onChange={(e) => {
           setQuery(e.target.value);
@@ -84,8 +79,6 @@ export default function SearchBar() {
       {open && query.trim() && (
         <div
           className={styles.dropdown}
-          // Keep the input focused when clicking a suggestion, so onBlur
-          // doesn't close the dropdown before the click registers.
           onMouseDown={(e) => e.preventDefault()}
         >
           {grouped.length === 0 ? (
@@ -106,26 +99,18 @@ export default function SearchBar() {
                         setQuery("");
                       }}
                     >
-                      <span className={styles.resultTitle}>
-                        {item.title}
-                      </span>
+                      <span className={styles.resultTitle}>{item.title}</span>
 
                       {item.subtitle && (
-                        <span className={styles.resultSubtitle}>
-                          {item.subtitle}
-                        </span>
+                        <span className={styles.resultSubtitle}>{item.subtitle}</span>
                       )}
                     </Link>
                   ))}
                 </div>
               ))}
 
-              <button
-                type="button"
-                className={styles.seeAll}
-                onClick={goToSearchPage}
-              >
-                See all results for “{query.trim()}”
+              <button type="button" className={styles.seeAll} onClick={goToSearchPage}>
+                See all results for <q>{query.trim()}</q>
               </button>
             </>
           )}

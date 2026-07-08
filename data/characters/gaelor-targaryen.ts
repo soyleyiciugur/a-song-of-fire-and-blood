@@ -4,7 +4,7 @@ export const gaelorTargaryen: Character = {
   id: "gaelor-targaryen",
 
   name: "Gaelor Targaryen",
-  nickname: "-",
+  nickname: "Housebreaker",
   aliases: ["Heir Presumptive"],
 
   house: "House Targaryen",

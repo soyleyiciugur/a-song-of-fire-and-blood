@@ -9,7 +9,10 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "A Song of Fire and Blood",
+  title: {
+    default: "A Song of Fire and Blood",
+    template: "%s | A Song of Fire and Blood",
+  },
   description: "A living chronicle of House Targaryen.",
 };
 

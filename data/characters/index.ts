@@ -1,5 +1,3 @@
-import type { Character } from "@/types/character";
-
 import { baelenysTargaryen } from "./baelenys-targaryen";
 import { jaeryTargaryen } from "./jaery-targaryen";
 import { maelaTargaryen } from "./maela-targaryen";
@@ -28,6 +26,7 @@ import { tionLannister } from "./tion-lannister";
 import { malaenarTargaryen } from "./malaenar-targaryen";
 import { vahaemonTargaryen } from "./vahaemon-targaryen";
 import { curtassWhent } from "./curtass-whent";
+import { serBrantCostayne } from "./ser-brant-costayne";
 
 export const characters = {
   "baelenys-targaryen": baelenysTargaryen,
@@ -58,4 +57,5 @@ export const characters = {
   "malaenar-targaryen": malaenarTargaryen,
   "vahaemon-targaryen": vahaemonTargaryen,
   "curtass-whent": curtassWhent,
+  "ser-brant-costayne": serBrantCostayne,
 } as const;

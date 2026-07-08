@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import MiniPortrait from "@/components/MiniPortrait";
+import SigilImage from "@/components/SigilImage";
 import { searchIndex, type SearchResult } from "@/lib/search";
 
 import styles from "./search.module.css";
@@ -15,12 +17,32 @@ const TYPE_LABELS: Record<SearchResult["type"], string> = {
   dragon: "Dragons",
 };
 
-const TYPE_ORDER: SearchResult["type"][] = [
-  "character",
-  "chapter",
-  "house",
-  "dragon",
-];
+const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon"];
+
+function renderThumbnail(item: SearchResult) {
+  if (!item.thumbnail) return null;
+
+  if (item.thumbnail.kind === "character") {
+    return <MiniPortrait id={item.id} alt={item.thumbnail.alt} size={44} />;
+  }
+
+  if (item.thumbnail.kind === "house") {
+    return (
+      <SigilImage
+        src={item.thumbnail.src}
+        alt={item.thumbnail.alt}
+        size={44}
+        shape="rounded"
+      />
+    );
+  }
+
+  return (
+    <div className={styles.dragonThumb}>
+      <img src={item.thumbnail.src} alt={item.thumbnail.alt} width={44} height={44} />
+    </div>
+  );
+}
 
 function groupResults(results: SearchResult[]) {
   const groups = new Map<SearchResult["type"], SearchResult[]>();
@@ -50,14 +72,18 @@ export default async function SearchPage({ searchParams }: Props) {
         <h1 className={styles.heading}>Search</h1>
 
         <p className={styles.subheading}>
-          {q
-            ? `Results for “${q}”`
-            : "Type something in the search bar above to look through the realm."}
+          {q ? (
+            <>
+              Results for <q>{q}</q>
+            </>
+          ) : (
+            "Type something in the search bar above to look through the realm."
+          )}
         </p>
 
         {q && grouped.length === 0 && (
           <p className={styles.empty}>
-            Nothing in the records matches “{q}”.
+            Nothing in the records matches <q>{q}</q>.
           </p>
         )}
 
@@ -70,13 +96,17 @@ export default async function SearchPage({ searchParams }: Props) {
                 {group.items.map((item) => (
                   <li key={`${item.type}-${item.id}`}>
                     <Link href={item.href} className={styles.card}>
-                      <span className={styles.cardTitle}>{item.title}</span>
-
-                      {item.subtitle && (
-                        <span className={styles.cardSubtitle}>
-                          {item.subtitle}
-                        </span>
+                      {item.thumbnail && (
+                        <div className={styles.thumbnail}>{renderThumbnail(item)}</div>
                       )}
+
+                      <div className={styles.cardText}>
+                        <span className={styles.cardTitle}>{item.title}</span>
+
+                        {item.subtitle && (
+                          <span className={styles.cardSubtitle}>{item.subtitle}</span>
+                        )}
+                      </div>
                     </Link>
                   </li>
                 ))}

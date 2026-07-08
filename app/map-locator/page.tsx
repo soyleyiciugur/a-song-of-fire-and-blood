@@ -25,8 +25,8 @@ interface MapPoint {
 interface PendingPoint {
   xPct: number;
   yPct: number;
-  screenX: number;
-  screenY: number;
+  left: number;
+  top: number;
 }
 
 export default function MapLocatorPage() {
@@ -49,22 +49,21 @@ export default function MapLocatorPage() {
     centerOn,
   } = useMapViewport({ minScale: 0.15, maxScale: 8 });
 
-  const [points, setPoints] = useState<MapPoint[]>([]);
+  const [points, setPoints] = useState<MapPoint[]>(() => {
+    if (typeof window === "undefined") return [];
+
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
+  });
   const [pending, setPending] = useState<PendingPoint | null>(null);
   const [pendingName, setPendingName] = useState("");
   const [copied, setCopied] = useState(false);
-
-  // Load persisted points.
-  useEffect(() => {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      try {
-        setPoints(JSON.parse(raw));
-      } catch {
-        // ignore corrupted storage
-      }
-    }
-  }, []);
 
   // Persist points whenever they change.
   useEffect(() => {
@@ -122,8 +121,8 @@ export default function MapLocatorPage() {
       setPending({
         xPct,
         yPct,
-        screenX: event.clientX,
-        screenY: event.clientY,
+        left: event.clientX - rect.left,
+        top: event.clientY - rect.top,
       });
       setPendingName("");
     },
@@ -255,8 +254,8 @@ export default function MapLocatorPage() {
             <div
               className={styles.pendingForm}
               style={{
-                left: pending.screenX - (viewportRef.current?.getBoundingClientRect().left ?? 0),
-                top: pending.screenY - (viewportRef.current?.getBoundingClientRect().top ?? 0),
+                left: pending.left,
+                top: pending.top,
               }}
             >
               <input
@@ -271,10 +270,10 @@ export default function MapLocatorPage() {
                 }}
               />
               <div className={styles.pendingActions}>
-                <button className={styles.pendingConfirm} onClick={confirmPending}>
+                <button type="button" className={styles.pendingConfirm} onClick={confirmPending}>
                   Add
                 </button>
-                <button className={styles.pendingCancel} onClick={cancelPending}>
+                <button type="button" className={styles.pendingCancel} onClick={cancelPending}>
                   Cancel
                 </button>
               </div>
@@ -282,12 +281,12 @@ export default function MapLocatorPage() {
           )}
 
           <div className={styles.zoomControls}>
-            <button onClick={() => centerOnKingsLanding()} title="Center on King's Landing">
+            <button type="button" onClick={() => centerOnKingsLanding()} title="Center on King's Landing">
               KL
             </button>
-            <button onClick={() => setScale((s) => Math.min(8, s * 1.25))}>+</button>
-            <button onClick={() => setScale((s) => Math.max(0.15, s / 1.25))}>-</button>
-            <button onClick={resetView}>Fit</button>
+            <button type="button" onClick={() => setScale((s) => Math.min(8, s * 1.25))}>+</button>
+            <button type="button" onClick={() => setScale((s) => Math.max(0.15, s / 1.25))}>-</button>
+            <button type="button" onClick={resetView}>Fit</button>
           </div>
         </div>
 

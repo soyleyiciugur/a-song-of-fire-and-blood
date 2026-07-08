@@ -1,5 +1,5 @@
 git add .
 
-git commit -m "Major updates to new features" 
+git commit -m "Added House & Dragon pages, Added quotes, Minor updates" 
 
 git push

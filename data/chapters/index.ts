@@ -5,6 +5,7 @@ import ThePriceOfTrust from "./the-price-of-trust";
 import TheWeightOfLoyalty from "./the-weight-of-loyalty";
 import TheBrokenKnight from "./the-broken-knight";
 import FathersAndTheirSins from "./fathers-and-their-sins";
+import ACrownOfThorns from "./a-crown-of-thorns";
 
 export const chapters: Record<string, Chapter> = {
   [ThePoisonBeneathTheCrown.slug]: ThePoisonBeneathTheCrown,
@@ -12,6 +13,7 @@ export const chapters: Record<string, Chapter> = {
   [TheWeightOfLoyalty.slug]: TheWeightOfLoyalty,
   [TheBrokenKnight.slug]: TheBrokenKnight,
   [FathersAndTheirSins.slug]: FathersAndTheirSins,
+  [ACrownOfThorns.slug]: ACrownOfThorns,
 };
 
 export const chapterList = Object.values(chapters);

@@ -344,14 +344,12 @@ export default function InteractiveMap() {
 
   const trailPathRef = useRef<SVGPathElement | null>(null);
   const trailPathLengthRef = useRef(0);
-  const [trailPathLength, setTrailPathLength] = useState(0);
   const [trailProgress, setTrailProgress] = useState(0);
 
   useEffect(() => {
     if (trailPathRef.current) {
       const measuredLength = trailPathRef.current.getTotalLength();
       trailPathLengthRef.current = measuredLength;
-      setTrailPathLength(measuredLength);
     }
   }, [trailPathD]);
 
@@ -466,7 +464,6 @@ export default function InteractiveMap() {
       if (length <= 0) {
         length = pathEl.getTotalLength();
         trailPathLengthRef.current = length;
-        setTrailPathLength(length);
       }
 
       if (length <= 0) {
@@ -525,9 +522,9 @@ export default function InteractiveMap() {
   );
 
   const stopDragging = useCallback(
-    (event: React.MouseEvent) => {
+    () => {
       isDraggingRef.current = false;
-      handleMouseUp(event);
+      handleMouseUp();
     },
     [handleMouseUp]
   );

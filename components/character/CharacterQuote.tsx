@@ -1,5 +1,6 @@
-import { characters } from "@/data/characters";
 import Link from "next/link";
+
+import { characters } from "@/data/characters";
 
 type Quote = {
   text: string;
@@ -15,17 +16,21 @@ type Props = {
   showAttribution?: boolean;
 };
 
-export default function CharacterQuote({ quote, compact = false, showAttribution = false }: Props) {
+export default function CharacterQuote({
+  quote,
+  compact = false,
+  showAttribution = false,
+}: Props) {
   const quotes = Array.isArray(quote) ? quote : quote ? [quote] : [];
 
-  if (!quotes.length) {
-    return null;
-  }
+  if (!quotes.length) return null;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: compact ? 12 : 16 }}>
       {quotes.map((entry, index) => {
-        const speakerHasProfile = Boolean(entry.speakerId && Object.prototype.hasOwnProperty.call(characters, entry.speakerId));
+        const speakerHasProfile = Boolean(
+          entry.speakerId && Object.prototype.hasOwnProperty.call(characters, entry.speakerId)
+        );
         const attribution = showAttribution && entry.speakerId ? (
           speakerHasProfile ? (
             <Link href={`/characters/${entry.speakerId}`} style={{ color: "var(--gold)", textDecoration: "none" }}>
@@ -60,7 +65,7 @@ export default function CharacterQuote({ quote, compact = false, showAttribution
                 fontSize: compact ? 15 : 17,
               }}
             >
-              “{entry.text}”
+              <q>{entry.text}</q>
             </p>
             {(showAttribution && attribution) || hasChapter ? (
               <footer
@@ -76,19 +81,13 @@ export default function CharacterQuote({ quote, compact = false, showAttribution
               >
                 {showAttribution && attribution ? (
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span>—</span>
+                    <span>-</span>
                     {attribution}
                   </div>
                 ) : null}
                 {hasChapter ? (
                   <div style={{ fontSize: "0.9em" }}>
-                    <Link
-                      href={`/chapters/${entry.chapterSlug}`}
-                      style={{
-                        color: "var(--gold)",
-                        textDecoration: "none",
-                      }}
-                    >
+                    <Link href={`/chapters/${entry.chapterSlug}`} style={{ color: "var(--gold)", textDecoration: "none" }}>
                       {entry.chapterTitle}
                     </Link>
                   </div>

@@ -24,20 +24,14 @@ export default function Characters() {
         <ul className={styles.list}>
           {characters.map((character) => (
             <li key={character.id} className={styles.listItem}>
-              <Link
-                href={`/characters/${character.id}`}
-                className={styles.card}
-              >
-                <MiniPortrait
-                  id={character.id}
-                  alt={character.name}
-                />
+              <Link href={`/characters/${character.id}`} className={styles.card}>
+                <MiniPortrait id={character.id} alt={character.name} />
 
                 <span>
                   {character.name.split(" ")[0]}{" "}
                   {character.nickname !== "-" && (
                     <span className={styles.nickname}>
-                      "{character.nickname}"
+                      <q>{character.nickname}</q>
                     </span>
                   )}{" "}
                   {character.name.split(" ").slice(1).join(" ")}

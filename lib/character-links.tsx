@@ -15,11 +15,46 @@ function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+const TITLE_TERMS = new Set([
+  "king",
+  "queen",
+  "prince",
+  "princess",
+  "lord",
+  "lady",
+  "hand",
+  "maester",
+  "knight",
+  "ser",
+  "sworn",
+  "brother",
+  "sister",
+  "heir",
+  "warden",
+  "captain",
+  "master",
+  "grand",
+  "regent",
+  "consort",
+  "marshal",
+  "crown",
+]);
+
+function looksLikeTitle(value: string): boolean {
+  const normalized = value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
+  if (!normalized) return false;
+
+  return normalized
+    .split(/\s+/)
+    .some((word) => TITLE_TERMS.has(word));
+}
+
 /**
  * Builds the lookup table of every phrase (full name, first name, nickname,
- * alias) that should resolve to a character, and a single alternation regex
- * ordered from longest to shortest phrase so multi-word names are matched
- * before their component words.
+ * alias) that should resolve to a character, while excluding title-like
+ * phrases so chapter text does not link to characters based on mutable titles.
+ * The alternation regex is ordered from longest to shortest phrase so
+ * multi-word names are matched before their component words.
  */
 function buildPatternCache(): PatternCache {
   if (cache) return cache;
@@ -39,7 +74,9 @@ function buildPatternCache(): PatternCache {
     }
 
     for (const alias of character.aliases ?? []) {
-      if (alias && alias.length >= 4) candidates.add(alias);
+      if (alias && alias.length >= 4 && !looksLikeTitle(alias)) {
+        candidates.add(alias);
+      }
     }
 
     for (const candidate of candidates) {

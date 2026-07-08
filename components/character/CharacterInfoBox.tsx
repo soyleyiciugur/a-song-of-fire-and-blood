@@ -51,7 +51,7 @@ export default function CharacterInfoBox({ character }: Props) {
           src={portraitSrc}
           alt={character.name}
           fill
-          priority
+          preload
           sizes="340px"
           style={{ objectFit: "cover" }}
         />

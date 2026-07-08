@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# A Song of Fire and Blood
 
-## Getting Started
+A Next.js app for exploring a compact House Targaryen chronicle: chapters, characters, houses, dragons, a family tree, a map, relationships, and timeline views.
 
-First, run the development server:
+## Run It
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run dev` starts the app in development.
+- `npm run build` creates a production build.
+- `npm run start` serves the production build.
+- `npm run lint` runs ESLint.
+- `npm run validate:data` checks the core lore datasets for broken references.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Layout
 
-## Learn More
+- `app/` routes and top-level pages.
+- `components/` reusable UI, including character, nav, map, and family-tree pieces.
+- `data/` story content and map metadata.
+- `lib/` shared helpers for lookup, search, portraits, and map behavior.
+- `public/images/` artwork and assets.
+- `styles/` global design tokens and shared CSS.
+- `types/` domain types for chapters, characters, and map data.
 
-To learn more about Next.js, take a look at the following resources:
+## Data Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Character, chapter, dragon, and house content lives in `data/`.
+- Search indexes are built from those datasets.
+- The validation script catches missing references between characters, quotes, houses, dragons, chapters, and map events.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Keeping The Repo Clean
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `zgitpush.txt` and `a-song-of-fire-and-blood.zip` are intentionally kept.
+- Generated files like `.next/` and `tsconfig.tsbuildinfo` should stay out of source control unless you explicitly need them.

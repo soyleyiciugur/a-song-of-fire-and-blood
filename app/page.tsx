@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { NAV_ITEMS } from "@/constants/navigation";
 import { getRandomQuote } from "@/lib/characters";
 import CharacterQuote from "@/components/character/CharacterQuote";
 
@@ -15,7 +16,7 @@ export default function Home() {
           src="/images/home/a-song-of-fire-and-blood.webp"
           alt="A Song of Fire and Blood"
           fill
-          priority
+          preload
           className="hero-image"
         />
         <div className="hero-fade" />
@@ -31,37 +32,11 @@ export default function Home() {
         </p>
 
         <div className="button-row">
-          <Link href="/chapters" className="button">
-            Chapters
-          </Link>
-
-          <Link href="/characters" className="button">
-            Characters
-          </Link>
-
-          <Link href="/family-tree" className="button">
-            Family Tree
-          </Link>
-
-          <Link href="/houses" className="button">
-            Houses
-          </Link>
-
-          <Link href="/map" className="button">
-            Map
-          </Link>
-
-          <Link href="/relationships" className="button">
-            Relationships
-          </Link>
-
-          <Link href="/dragons" className="button">
-            Dragons
-          </Link>
-
-          <Link href="/timeline" className="button">
-            Timeline
-          </Link>
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.href} href={item.href} className="button">
+              {item.label}
+            </Link>
+          ))}
         </div>
 
         {featuredQuote ? (

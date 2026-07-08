@@ -37,6 +37,58 @@
   flex: 1;
 }
 
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.menuIcon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menuIcon span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+}
+
+.mobileNav {
+  display: none;
+  gap: 8px;
+
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px 12px;
+}
+
+.mobileNavOpen {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mobileNavLink {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
 .navLink {
   font-family: inherit;
   font-size: 14px;
@@ -195,6 +247,10 @@
 @media (max-width: 720px) {
   .navLinks {
     display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
   }
 
   .searchWrap {
