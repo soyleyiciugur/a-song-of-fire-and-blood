@@ -15,7 +15,7 @@ export const MAP_LOCATIONS: MapLocation[] = [
   { name: "Starfall", xPct: 12.69, yPct: 64.03 },
   { name: "Oldtown", xPct: 10.25, yPct: 62.08 },
   { name: "Highgarden", xPct: 12.56, yPct: 57.98 },
-  { name: "Sunspear", xPct: 24.23, yPct: 65.69 },
+  { name: "Sunspear", xPct: 23.50, yPct: 65.69 },
   { name: "Stepstones", xPct: 26.32, yPct: 61.88 },
   { name: "Harrenhal", xPct: 18.36, yPct: 45.62 },
   { name: "The Eyrie", xPct: 20.96, yPct: 40.96 },
@@ -48,6 +48,7 @@ export const MAP_LOCATIONS: MapLocation[] = [
   { name: "Yunkai", xPct: 53.54, yPct: 64.27 },
   { name: "Meereen", xPct: 54.86, yPct: 62.35 },
   { name: "Asshai", xPct: 90.64, yPct: 94.1 },
+  { name: "The Red Mountains", xPct: 12.67, yPct: 61.13 },  
 ];
 
 export const MAP_LOCATION_NAMES = MAP_LOCATIONS.map((l) => l.name);

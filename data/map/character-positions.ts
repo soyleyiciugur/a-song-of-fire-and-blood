@@ -34,7 +34,7 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
     "gaelor-targaryen": "Driftmark",
     "rhaella-targaryen": "King's Landing",
     "ser-saathos-maris": "Driftmark",
-    "ser-alester-dayne": ["King's Landing", "Starfall"],
+    "ser-alester-dayne": "King's Landing",
     "derrin-hightower": "King's Landing",
     "lorenah-dayne": "Starfall",
     "vhaemys-targaryen": "King's Landing",
@@ -62,7 +62,7 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
     "gaelor-targaryen": "King's Landing",
     "baelor-targaryen": "Oldtown",
     "visenor-targaryen": "Bitterbridge",
-    "saera-targaryen": ["King's Landing", "Winterfell"],
+    "saera-targaryen": ["King's Landing", "Winterfell", "Castle Black"],
     "rhaella-targaryen": "Bitterbridge",
     "ser-saathos-maris": "King's Landing",
     "ser-alester-dayne": "Bitterbridge",
@@ -72,7 +72,7 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
     "jaery-targaryen": "King's Landing",
     "maela-targaryen": "King's Landing",
     "vhaemys-targaryen": "King's Landing",
-    "rickard-stark": "Winterfell",
+    "rickard-stark": ["Winterfell", "Castle Black"],
   },
 
   "fathers-and-their-sins": {
@@ -83,7 +83,7 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
     "maela-targaryen": ["King's Landing", "Storm's End", "King's Landing"],
     "visenor-targaryen": "Starfall",
     "rhaella-targaryen": "Starfall",
-    "saera-targaryen": ["Winterfell", "King's Landing"],
+    "saera-targaryen": ["Castle Black", "Winterfell", "King's Landing"],
     "baelor-targaryen": "King's Landing",
     "jaery-targaryen": "King's Landing",
     "lorenah-dayne": "Starfall",
@@ -92,6 +92,7 @@ export const CHAPTER_CHARACTER_POSITIONS: Record<
     "steffon-baratheon": "Storm's End",
     "timos-hightower": "Oldtown",
     "vhaemys-targaryen": "King's Landing",
+    "rickard-stark": ["Castle Black", "Winterfell"],
   },
   
   "a-crown-of-thorns": {

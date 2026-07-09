@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";import { useState, useMemo, useEffect, useRef } from "react";
 import charactersData from "../../../data/characters/characters.json";
 import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json"; // Ayrı dosyadan alıntıları çekiyoruz
@@ -212,9 +212,38 @@ export default function AdminCharactersPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [hasDraft, setHasDraft] = useState(false);
 
+  useEffect(() => {
+    const draftChars = localStorage.getItem("draft-characters");
+    const draftQuotes = localStorage.getItem("draft-quotes");
+    if (draftChars) {
+      try {
+        setChars(JSON.parse(draftChars));
+        setHasDraft(true);
+      } catch {}
+    }
+    if (draftQuotes) {
+      try {
+        setAllQuotes(JSON.parse(draftQuotes));
+        setHasDraft(true);
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("draft-characters", JSON.stringify(chars));
+  }, [chars]);
+
+  useEffect(() => {
+    localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
+  }, [allQuotes]);
   const filteredChars = useMemo(() => chars.filter(c => c.name.toLowerCase().includes(listSearch.toLowerCase())), [chars, listSearch]);
   const activeChar = chars.find(c => c.id === selectedId);
+
+  useEffect(() => {
+    setHasDraft(hasAnyPendingDraft());
+  }, [chars, allQuotes]);
 
   // Aktif karakterin quote'larını (ana listedeki asıl indexleri ile) eşleştiriyoruz
   const activeCharQuotes = useMemo(() => {
@@ -236,29 +265,45 @@ export default function AdminCharactersPage() {
     setTimeout(() => setNotification(null), 3000);
   };
 
-  const handleSave = async () => {
+  const handlePublish = async () => {
     setIsSaving(true);
     try {
-      // Karakterleri characters.json'daki alan sırasına göre yeniden diz.
-      // secret.status? / secret.note?, "status" alanından hemen sonra eklenir;
-      // hiç kullanılmamışsa (varsayılan "-" / boş) dosyaya hiç yazılmaz,
-      // böylece düzenlenmemiş karakterlerin JSON'u kirlenmez.
+      // Bu sayfadaki mevcut değişiklikleri de taslağa yazdığımızdan emin ol
       const orderedChars = chars.map(orderCharacterForExport);
+      localStorage.setItem("draft-characters", JSON.stringify(orderedChars));
+      localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
 
-      // 1. Karakterleri kaydet
-      const resChars = await fetch("/api/admin/characters", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(orderedChars) });
-      const dataChars = await resChars.json();
-      
-      // 2. Alıntıları ayrı kaydet
-      const resQuotes = await fetch("/api/admin/quotes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(allQuotes) });
-      const dataQuotes = await resQuotes.json();
+      // localStorage'daki TÜM bekleyen taslakları topla (houses dahil, başka sayfada düzenlenmiş olabilir)
+      const pending = collectAllPendingDrafts();
 
-      if (dataChars.success && dataQuotes.success) showNotification("Saved successfully!", "success");
-      else showNotification("Error saving data.", "error");
+      const res = await fetch("/api/admin/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(pending),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        showNotification("Published! Site will update in ~1 minute.", "success");
+        clearAllDrafts();
+        setHasDraft(false);
+      } else {
+        showNotification("Error saving data.", "error");
+      }
     } catch {
       showNotification("A system error occurred while saving.", "error");
     }
     setIsSaving(false);
+  };
+
+  const handleDiscardDraft = () => {
+    if (!confirm("Discard all unpublished changes and reset to the live version?")) return;
+    localStorage.removeItem("draft-characters");
+    localStorage.removeItem("draft-quotes");
+    setChars(charactersData as any[]);
+    setAllQuotes(initialQuotes as any[]);
+    setHasDraft(false);
+    showNotification("Draft discarded.", "success");
   };
 
   const handleRelationshipChange = (charId: string, desc: string) => {
@@ -502,10 +547,18 @@ export default function AdminCharactersPage() {
                 </div>
               </div>
 
-              {/* STICKY SAVE BUTTON */}
+              {/* STICKY PUBLISH BUTTON */}
               <div style={{ position: "sticky", bottom: "0", background: "linear-gradient(to top, var(--background) 70%, transparent)", padding: "20px 0", marginTop: "-20px", zIndex: 40 }}>
-                <button onClick={handleSave} disabled={isSaving} style={{ width: "100%", padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1, transition: "all 0.2s" }}>
-                  {isSaving ? "Saving..." : "Save All Changes"}
+                {hasDraft && (
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", fontSize: "0.85rem", opacity: 0.8 }}>
+                    <span>⚠ You have unpublished changes (saved locally)</span>
+                    <button onClick={handleDiscardDraft} style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline" }}>
+                      Discard draft
+                    </button>
+                  </div>
+                )}
+                <button onClick={handlePublish} disabled={isSaving} style={{ width: "100%", padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1, transition: "all 0.2s" }}>
+                  {isSaving ? "Publishing..." : "Publish Changes"}
                 </button>
               </div>
             </div>

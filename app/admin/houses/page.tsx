@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";
+import { useState, useEffect } from "react";
 import housesData from "../../../data/houses.json";
 
 export default function AdminHousesPage() {
@@ -9,6 +10,26 @@ export default function AdminHousesPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
+  const [hasDraft, setHasDraft] = useState(false);
+
+  useEffect(() => {
+    const draft = localStorage.getItem("draft-houses");
+    if (draft) {
+      try {
+        setHouses(JSON.parse(draft));
+        setHasDraft(true);
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("draft-houses", JSON.stringify(houses));
+  }, [houses]);
+
+  useEffect(() => {
+    setHasDraft(hasAnyPendingDraft());
+  }, [houses]);
+  
   const activeHouse = houses[selectedIndex];
 
   const handleChange = (field: string, value: string) => {
@@ -24,17 +45,24 @@ export default function AdminHousesPage() {
     }, 3000);
   };
 
-  const handleSave = async () => {
+  const handlePublish = async () => {
     setIsSaving(true);
     try {
-      const res = await fetch("/api/admin/houses", {
+      localStorage.setItem("draft-houses", JSON.stringify(houses));
+
+      const pending = collectAllPendingDrafts();
+
+      const res = await fetch("/api/admin/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(houses),
+        body: JSON.stringify(pending),
       });
       const data = await res.json();
+
       if (data.success) {
-        showNotification("Houses saved successfully!", "success");
+        showNotification("Published! Site will update in ~1 minute.", "success");
+        clearAllDrafts();
+        setHasDraft(false);
       } else {
         showNotification("Error: " + data.message, "error");
       }
@@ -42,6 +70,14 @@ export default function AdminHousesPage() {
       showNotification("A system error occurred while saving.", "error");
     }
     setIsSaving(false);
+  };
+
+  const handleDiscardDraft = () => {
+    if (!confirm("Discard all unpublished changes and reset to the live version?")) return;
+    localStorage.removeItem("draft-houses");
+    setHouses(housesData);
+    setHasDraft(false);
+    showNotification("Draft discarded.", "success");
   };
 
   // Arkaplan rengine göre yazının siyah mı beyaz mı olacağını hesaplayan zeka
@@ -103,7 +139,7 @@ export default function AdminHousesPage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "700px" }}>
           <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>ID (Not recommended to change)</span>
+            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>ID</span>
             <input value={activeHouse.id} readOnly style={{ padding: "12px", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", borderRadius: "4px" }} />
           </label>
           
@@ -142,8 +178,16 @@ export default function AdminHousesPage() {
             <textarea value={activeHouse.description} onChange={(e) => handleChange("description", e.target.value)} style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", minHeight: "150px", fontFamily: "inherit", resize: "vertical", lineHeight: "1.5", outline: "none" }} />
           </label>
 
-          <button onClick={handleSave} disabled={isSaving} style={{ padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", marginTop: "10px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1 }}>
-            {isSaving ? "Saving..." : "Save All Changes"}
+          {hasDraft && (
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", fontSize: "0.85rem", opacity: 0.8 }}>
+              <span>⚠ You have unpublished changes (saved locally)</span>
+              <button onClick={handleDiscardDraft} style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline" }}>
+                Discard draft
+              </button>
+            </div>
+          )}
+          <button onClick={handlePublish} disabled={isSaving} style={{ padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", marginTop: "10px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1 }}>
+            {isSaving ? "Publishing..." : "Publish Changes"}
           </button>
         </div>
       </div>
