@@ -7,6 +7,8 @@ git push
 # Kod üzerinde çalışmaya başlamadan HER SEFERİNDE önce:
 git pull origin main
 
+# lokal daha güncelse
+git push origin main --force
 
 git status
 git pull origin main   # varsa uzaktaki yeni commit'leri çek
