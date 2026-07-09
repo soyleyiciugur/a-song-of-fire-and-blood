@@ -1,35 +1,31 @@
 "use client";
 
-import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";
 import { useState, useEffect } from "react";
 import housesData from "../../../data/houses.json";
+import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";
 
 export default function AdminHousesPage() {
   const [houses, setHouses] = useState(housesData);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isSaving, setIsSaving] = useState(false);
-  const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
-
   const [hasDraft, setHasDraft] = useState(false);
+  const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
     const draft = localStorage.getItem("draft-houses");
     if (draft) {
       try {
         setHouses(JSON.parse(draft));
-        setHasDraft(true);
       } catch {}
     }
+    setHasDraft(hasAnyPendingDraft());
   }, []);
 
   useEffect(() => {
     localStorage.setItem("draft-houses", JSON.stringify(houses));
-  }, [houses]);
-
-  useEffect(() => {
     setHasDraft(hasAnyPendingDraft());
   }, [houses]);
-  
+
   const activeHouse = houses[selectedIndex];
 
   const handleChange = (field: string, value: string) => {
@@ -58,7 +54,6 @@ export default function AdminHousesPage() {
         body: JSON.stringify(pending),
       });
       const data = await res.json();
-
       if (data.success) {
         showNotification("Published! Site will update in ~1 minute.", "success");
         clearAllDrafts();
@@ -76,7 +71,7 @@ export default function AdminHousesPage() {
     if (!confirm("Discard all unpublished changes and reset to the live version?")) return;
     localStorage.removeItem("draft-houses");
     setHouses(housesData);
-    setHasDraft(false);
+    setHasDraft(hasAnyPendingDraft());
     showNotification("Draft discarded.", "success");
   };
 
@@ -139,7 +134,7 @@ export default function AdminHousesPage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "700px" }}>
           <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>ID</span>
+            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>ID (Not recommended to change)</span>
             <input value={activeHouse.id} readOnly style={{ padding: "12px", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", borderRadius: "4px" }} />
           </label>
           
@@ -179,13 +174,14 @@ export default function AdminHousesPage() {
           </label>
 
           {hasDraft && (
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", fontSize: "0.85rem", opacity: 0.8 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.85rem", opacity: 0.8 }}>
               <span>⚠ You have unpublished changes (saved locally)</span>
               <button onClick={handleDiscardDraft} style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline" }}>
                 Discard draft
               </button>
             </div>
           )}
+
           <button onClick={handlePublish} disabled={isSaving} style={{ padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", marginTop: "10px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1 }}>
             {isSaving ? "Publishing..." : "Publish Changes"}
           </button>

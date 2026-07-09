@@ -1,9 +1,10 @@
 "use client";
 
-import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import charactersData from "../../../data/characters/characters.json";
 import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json"; // Ayrı dosyadan alıntıları çekiyoruz
+import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";
 
 // Özel Scrollbar ve Global Stiller
 const globalStyles = `
@@ -211,39 +212,39 @@ export default function AdminCharactersPage() {
   const [listSearch, setListSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [hasDraft, setHasDraft] = useState(false);
+  const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
+  // Sayfa açılışında localStorage'daki taslağı yükle
   useEffect(() => {
     const draftChars = localStorage.getItem("draft-characters");
     const draftQuotes = localStorage.getItem("draft-quotes");
     if (draftChars) {
       try {
         setChars(JSON.parse(draftChars));
-        setHasDraft(true);
       } catch {}
     }
     if (draftQuotes) {
       try {
         setAllQuotes(JSON.parse(draftQuotes));
-        setHasDraft(true);
       } catch {}
     }
+    setHasDraft(hasAnyPendingDraft());
   }, []);
 
+  // chars değiştikçe otomatik olarak taslağa yaz (network yok, sadece tarayıcı)
   useEffect(() => {
     localStorage.setItem("draft-characters", JSON.stringify(chars));
+    setHasDraft(hasAnyPendingDraft());
   }, [chars]);
 
   useEffect(() => {
     localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
+    setHasDraft(hasAnyPendingDraft());
   }, [allQuotes]);
+
   const filteredChars = useMemo(() => chars.filter(c => c.name.toLowerCase().includes(listSearch.toLowerCase())), [chars, listSearch]);
   const activeChar = chars.find(c => c.id === selectedId);
-
-  useEffect(() => {
-    setHasDraft(hasAnyPendingDraft());
-  }, [chars, allQuotes]);
 
   // Aktif karakterin quote'larını (ana listedeki asıl indexleri ile) eşleştiriyoruz
   const activeCharQuotes = useMemo(() => {
@@ -302,7 +303,7 @@ export default function AdminCharactersPage() {
     localStorage.removeItem("draft-quotes");
     setChars(charactersData as any[]);
     setAllQuotes(initialQuotes as any[]);
-    setHasDraft(false);
+    setHasDraft(hasAnyPendingDraft());
     showNotification("Draft discarded.", "success");
   };
 

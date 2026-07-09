@@ -28,7 +28,7 @@ export function clearDraft(key: keyof typeof DRAFT_KEYS) {
 }
 
 export function clearAllDrafts() {
-  Object.keys(DRAFT_KEYS).forEach((k) => clearDraft(k as keyof typeof DRAFT_KEYS));
+  (Object.keys(DRAFT_KEYS) as (keyof typeof DRAFT_KEYS)[]).forEach((k) => clearDraft(k));
 }
 
 // localStorage'daki TÜM bekleyen taslakları toplar (hangi admin sayfasında olursan ol)
