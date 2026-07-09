@@ -1,87 +1,55 @@
-interface FileToUpdate {
-  path: string;      // e.g. "data/characters/characters.json"
-  content: unknown;  // JS object/array
+const GITHUB_API = "https://api.github.com";
+
+interface GithubFileUpdateOptions {
+  path: string;        // e.g. "data/characters/characters.json"
+  content: unknown;    // JS object/array — will be JSON.stringified
+  message: string;      // commit message
 }
 
-export async function updateMultipleFilesOnGithub(
-  files: FileToUpdate[],
-  message: string
-) {
+export async function updateJsonFileOnGithub({
+  path,
+  content,
+  message,
+}: GithubFileUpdateOptions) {
   const owner = process.env.GITHUB_OWNER!;
   const repo = process.env.GITHUB_REPO!;
   const branch = process.env.GITHUB_BRANCH || "main";
   const token = process.env.GITHUB_TOKEN!;
+
+  const apiUrl = `${GITHUB_API}/repos/${owner}/${repo}/contents/${path}`;
 
   const headers = {
     Authorization: `Bearer ${token}`,
     Accept: "application/vnd.github+json",
   };
 
-  const base = `https://api.github.com/repos/${owner}/${repo}`;
+  // 1. Get current file SHA (required by GitHub to update a file)
+  const getRes = await fetch(`${apiUrl}?ref=${branch}`, { headers });
+  if (!getRes.ok) {
+    throw new Error(`Failed to fetch current file: ${getRes.status} ${await getRes.text()}`);
+  }
+  const currentFile = await getRes.json();
+  const sha = currentFile.sha;
 
-  // 1. Mevcut branch'in en son commit'ini ve tree SHA'sını al
-  const refRes = await fetch(`${base}/git/ref/heads/${branch}`, { headers });
-  if (!refRes.ok) throw new Error(`Failed to get ref: ${refRes.status} ${await refRes.text()}`);
-  const refData = await refRes.json();
-  const latestCommitSha = refData.object.sha;
+  // 2. Encode new content as base64
+  const jsonString = JSON.stringify(content, null, 2);
+  const base64Content = Buffer.from(jsonString, "utf-8").toString("base64");
 
-  const commitRes = await fetch(`${base}/git/commits/${latestCommitSha}`, { headers });
-  if (!commitRes.ok) throw new Error(`Failed to get commit: ${commitRes.status} ${await commitRes.text()}`);
-  const commitData = await commitRes.json();
-  const baseTreeSha = commitData.tree.sha;
-
-  // 2. Her dosya için bir blob oluştur
-  const blobs = await Promise.all(
-    files.map(async (file) => {
-      const content = Buffer.from(JSON.stringify(file.content, null, 2), "utf-8").toString("base64");
-      const blobRes = await fetch(`${base}/git/blobs`, {
-        method: "POST",
-        headers: { ...headers, "Content-Type": "application/json" },
-        body: JSON.stringify({ content, encoding: "base64" }),
-      });
-      if (!blobRes.ok) throw new Error(`Failed to create blob: ${blobRes.status} ${await blobRes.text()}`);
-      const blobData = await blobRes.json();
-      return { path: file.path, sha: blobData.sha };
-    })
-  );
-
-  // 3. Yeni tree oluştur (eski tree'nin üstüne, sadece değişen dosyalarla)
-  const treeRes = await fetch(`${base}/git/trees`, {
-    method: "POST",
-    headers: { ...headers, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      base_tree: baseTreeSha,
-      tree: blobs.map((b) => ({
-        path: b.path,
-        mode: "100644",
-        type: "blob",
-        sha: b.sha,
-      })),
-    }),
-  });
-  if (!treeRes.ok) throw new Error(`Failed to create tree: ${treeRes.status} ${await treeRes.text()}`);
-  const treeData = await treeRes.json();
-
-  // 4. Tek commit oluştur
-  const newCommitRes = await fetch(`${base}/git/commits`, {
-    method: "POST",
+  // 3. Push the update
+  const putRes = await fetch(apiUrl, {
+    method: "PUT",
     headers: { ...headers, "Content-Type": "application/json" },
     body: JSON.stringify({
       message,
-      tree: treeData.sha,
-      parents: [latestCommitSha],
+      content: base64Content,
+      sha,
+      branch,
     }),
   });
-  if (!newCommitRes.ok) throw new Error(`Failed to create commit: ${newCommitRes.status} ${await newCommitRes.text()}`);
-  const newCommitData = await newCommitRes.json();
 
-  // 5. Branch'i yeni commit'e işaret et
-  const updateRefRes = await fetch(`${base}/git/refs/heads/${branch}`, {
-    method: "PATCH",
-    headers: { ...headers, "Content-Type": "application/json" },
-    body: JSON.stringify({ sha: newCommitData.sha }),
-  });
-  if (!updateRefRes.ok) throw new Error(`Failed to update ref: ${updateRefRes.status} ${await updateRefRes.text()}`);
+  if (!putRes.ok) {
+    throw new Error(`Failed to update file: ${putRes.status} ${await putRes.text()}`);
+  }
 
-  return newCommitData;
+  return putRes.json();
 }
