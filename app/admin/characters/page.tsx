@@ -6,7 +6,6 @@ import { PromptModal, ConfirmModal } from "../_components/Modal";
 import charactersData from "../../../data/characters/characters.json";
 import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json";
-import { collectAllPendingDrafts, clearAllDrafts, isDraftDifferentFromOriginal } from "@/lib/adminDrafts";
 
 const globalStyles = `
   .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -142,7 +141,7 @@ const slugify = (text: string) =>
 const createBlankCharacter = (id: string, name: string) => ({
   id,
   name,
-  nickname: "",
+  nickname: "-",
   aliases: [],
   house: "-",
   title: "",
@@ -167,8 +166,6 @@ export default function AdminCharactersPage() {
   const [allQuotes, setAllQuotes] = useState<any[]>(initialQuotes as any[]);
   const [listSearch, setListSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isSaving, setIsSaving] = useState(false);
-  const [hasDraft, setHasDraft] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);  
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -192,24 +189,16 @@ export default function AdminCharactersPage() {
         setAllQuotes(loadedQuotes);
       } catch {}
     }
-
-    const charsChanged = isDraftDifferentFromOriginal(loadedChars, charactersData);
-    const quotesChanged = isDraftDifferentFromOriginal(loadedQuotes, initialQuotes);
-    setHasDraft(charsChanged || quotesChanged);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("draft-characters", JSON.stringify(chars));
-    const charsChanged = isDraftDifferentFromOriginal(chars, charactersData);
-    const quotesChanged = isDraftDifferentFromOriginal(allQuotes, initialQuotes);
-    setHasDraft(charsChanged || quotesChanged);
+    window.dispatchEvent(new Event("admin:draft-updated"));
   }, [chars]);
 
   useEffect(() => {
     localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
-    const charsChanged = isDraftDifferentFromOriginal(chars, charactersData);
-    const quotesChanged = isDraftDifferentFromOriginal(allQuotes, initialQuotes);
-    setHasDraft(charsChanged || quotesChanged);
+    window.dispatchEvent(new Event("admin:draft-updated"));
   }, [allQuotes]);
 
   const filteredChars = useMemo(() => chars.filter(c => c.name.toLowerCase().includes(listSearch.toLowerCase())), [chars, listSearch]);
@@ -261,46 +250,6 @@ export default function AdminCharactersPage() {
   setShowDeleteModal(false);
   showNotification("Character removed from draft.", "success");
 };
-
-  const handlePublish = async () => {
-    setIsSaving(true);
-    try {
-      const orderedChars = chars.map(orderCharacterForExport);
-      localStorage.setItem("draft-characters", JSON.stringify(orderedChars));
-      localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
-
-      const pending = collectAllPendingDrafts();
-
-      const res = await fetch("/api/admin/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pending),
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        showNotification("Published! Site will update in ~1 minute.", "success");
-        clearAllDrafts();
-        setHasDraft(false);
-      } else {
-        showNotification("Error saving data.", "error");
-      }
-    } catch {
-      showNotification("A system error occurred while saving.", "error");
-    }
-    setIsSaving(false);
-  };
-
-  const handleDiscardDraft = () => {
-    if (!confirm("Discard all unpublished changes and reset to the live version?")) return;
-    localStorage.removeItem("draft-characters");
-    localStorage.removeItem("draft-quotes");
-    setChars(charactersData as any[]);
-    setAllQuotes(initialQuotes as any[]);
-    setSelectedId(null);
-    setHasDraft(false);
-    showNotification("Draft discarded.", "success");
-  };
 
   const handleRelationshipChange = (charId: string, desc: string) => {
     if (!activeChar) return;
@@ -385,13 +334,19 @@ export default function AdminCharactersPage() {
         {activeChar ? (
           <>
             <div style={{ position: "sticky", top: 0, zIndex: 40, background: "var(--background)", padding: "0 15px 20px 0", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px", marginBottom: "30px", borderBottom: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 10px 15px -10px rgba(0,0,0,0.5)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <Link
+                href={`/characters/${activeChar.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View public profile"
+                style={{ display: "flex", alignItems: "center", gap: "20px", textDecoration: "none", color: "inherit", cursor: "pointer" }}
+              >
                 <Avatar id={activeChar.id} name={activeChar.name} size={70} border="2px solid var(--gold)" />
                 <div>
                   <h1 style={{ margin: 0, fontSize: "2rem", color: "var(--gold)" }}>{activeChar.name}</h1>
                   <div style={{ opacity: 0.6, fontSize: "0.9rem", marginTop: "4px" }}>ID: {activeChar.id}</div>
                 </div>
-              </div>
+              </Link>
               <button
                 onClick={() => setShowDeleteModal(true)}
                 style={{ background: "transparent", color: "#ff4c4c", border: "1px solid #ff4c4c", padding: "8px 16px", borderRadius: "4px", cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap" }}
@@ -532,20 +487,6 @@ export default function AdminCharactersPage() {
                   ))}
                   {activeCharQuotes.length === 0 && <div style={{ opacity: 0.5, fontStyle: "italic" }}>No quotes added yet.</div>}
                 </div>
-              </div>
-
-              <div style={{ position: "sticky", bottom: "0", background: "linear-gradient(to top, var(--background) 70%, transparent)", padding: "20px 0", marginTop: "-20px", zIndex: 40 }}>
-                {hasDraft && (
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", fontSize: "0.85rem", opacity: 0.8 }}>
-                    <span>⚠ You have unpublished changes (saved locally)</span>
-                    <button onClick={handleDiscardDraft} style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline" }}>
-                      Discard draft
-                    </button>
-                  </div>
-                )}
-                <button onClick={handlePublish} disabled={isSaving} style={{ width: "100%", padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1, transition: "all 0.2s" }}>
-                  {isSaving ? "Publishing..." : "Publish Changes"}
-                </button>
               </div>
             </div>
           </>

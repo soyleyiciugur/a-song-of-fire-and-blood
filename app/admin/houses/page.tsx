@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import housesData from "../../../data/houses.json";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
-import { collectAllPendingDrafts, clearAllDrafts, isDraftDifferentFromOriginal } from "@/lib/adminDrafts";
 
 const slugify = (text: string) =>
   text.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
@@ -11,8 +11,6 @@ const slugify = (text: string) =>
 export default function AdminHousesPage() {
   const [houses, setHouses] = useState(housesData);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isSaving, setIsSaving] = useState(false);
-  const [hasDraft, setHasDraft] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -28,12 +26,11 @@ export default function AdminHousesPage() {
       } catch {}
     }
 
-    setHasDraft(isDraftDifferentFromOriginal(loadedHouses, housesData));
   }, []);
 
   useEffect(() => {
     localStorage.setItem("draft-houses", JSON.stringify(houses));
-    setHasDraft(isDraftDifferentFromOriginal(houses, housesData));
+    window.dispatchEvent(new Event("admin:draft-updated"));
   }, [houses]);
 
   const activeHouse = houses[selectedIndex];
@@ -82,40 +79,6 @@ export default function AdminHousesPage() {
   showNotification("House removed from draft.", "success");
 };
 
-  const handlePublish = async () => {
-    setIsSaving(true);
-    try {
-      localStorage.setItem("draft-houses", JSON.stringify(houses));
-
-      const pending = collectAllPendingDrafts();
-
-      const res = await fetch("/api/admin/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pending),
-      });
-      const data = await res.json();
-      if (data.success) {
-        showNotification("Published! Site will update in ~1 minute.", "success");
-        clearAllDrafts();
-        setHasDraft(false);
-      } else {
-        showNotification("Error: " + data.message, "error");
-      }
-    } catch (error) {
-      showNotification("A system error occurred while saving.", "error");
-    }
-    setIsSaving(false);
-  };
-
-  const handleDiscardDraft = () => {
-    if (!confirm("Discard all unpublished changes and reset to the live version?")) return;
-    localStorage.removeItem("draft-houses");
-    setHouses(housesData);
-    setSelectedIndex(0);
-    setHasDraft(false);
-    showNotification("Draft discarded.", "success");
-  };
 
   const getContrastText = (hex: string) => {
     if (!hex) return "#ffffff";
@@ -173,12 +136,18 @@ export default function AdminHousesPage() {
       {/* Right Side: Edit Form */}
       <div style={{ flex: 1 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "15px", marginBottom: "30px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <Link
+            href={`/houses/${activeHouse.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="View public profile"
+            style={{ display: "flex", alignItems: "center", gap: "15px", textDecoration: "none", color: "inherit", cursor: "pointer" }}
+          >
             {activeHouse.sigilSrc && (
               <img src={activeHouse.sigilSrc} alt={activeHouse.name} style={{ width: "50px", height: "auto" }} />
             )}
             <h1 style={{ margin: 0 }}>{activeHouse.name}</h1>
-          </div>
+          </Link>
           <button
             onClick={() => setShowDeleteModal(true)}
             style={{ background: "transparent", color: "#ff4c4c", border: "1px solid #ff4c4c", padding: "8px 16px", borderRadius: "4px", cursor: "pointer", whiteSpace: "nowrap" }}
@@ -189,7 +158,7 @@ export default function AdminHousesPage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "700px" }}>
           <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>ID (Not recommended to change)</span>
+            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>ID</span>
             <input value={activeHouse.id} readOnly style={{ padding: "12px", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", borderRadius: "4px" }} />
           </label>
 
@@ -227,19 +196,6 @@ export default function AdminHousesPage() {
             <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Description</span>
             <textarea value={activeHouse.description} onChange={(e) => handleChange("description", e.target.value)} style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", minHeight: "150px", fontFamily: "inherit", resize: "vertical", lineHeight: "1.5", outline: "none" }} />
           </label>
-
-          {hasDraft && (
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.85rem", opacity: 0.8 }}>
-              <span>⚠ You have unpublished changes (saved locally)</span>
-              <button onClick={handleDiscardDraft} style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline" }}>
-                Discard draft
-              </button>
-            </div>
-          )}
-
-          <button onClick={handlePublish} disabled={isSaving} style={{ padding: "16px", background: "#B22222", color: "#fff", border: "none", borderRadius: "4px", cursor: isSaving ? "not-allowed" : "pointer", fontWeight: "bold", fontSize: "16px", marginTop: "10px", textTransform: "uppercase", letterSpacing: "2px", opacity: isSaving ? 0.7 : 1 }}>
-            {isSaving ? "Publishing..." : "Publish Changes"}
-          </button>
         </div>
       </div>
 

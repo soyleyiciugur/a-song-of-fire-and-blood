@@ -3,20 +3,20 @@ import { z } from "zod";
 export const CharacterStatusSchema = z.enum(["Alive", "Dead", "Unknown", "Missing"]);
 
 export const CharacterQuoteSchema = z.object({
-  text: z.string().min(1),
+  text: z.string(),
   speakerId: z.string().optional(),
-  speakerName: z.string().min(1),
+  speakerName: z.string(),
   chapterSlug: z.string().optional(),
   chapterTitle: z.string().optional(),
 }).strict();
 
 export const CharacterSchema = z.object({
-  id: z.string().min(1),
-  name: z.string().min(1),
+  id: z.string(),
+  name: z.string(),
   nickname: z.string().optional().default("-"),
   aliases: z.array(z.string()).default([]),
-  house: z.string().min(1).default("-"),
-  title: z.string().min(1).default("-"),
+  house: z.string().default("-"),
+  title: z.string().default("-"),
   status: CharacterStatusSchema.default("Unknown"),
   secret: z.object({
     status: CharacterStatusSchema,
