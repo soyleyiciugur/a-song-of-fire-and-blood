@@ -3,3 +3,33 @@ git add .
 git commit -m "Updated Admin Panel." 
 
 git push
+
+# Kod üzerinde çalışmaya başlamadan HER SEFERİNDE önce:
+git pull origin main
+
+
+git status
+git pull origin main   # varsa uzaktaki yeni commit'leri çek
+# ... kendi değişikliklerini yap ...
+git add .
+git commit -m "..."
+git push origin main
+
+Daha da güvenli bir alışkanlık
+Pratikte en güvenlisi şu ikisini asla aynı anda yapmamak:
+
+Ya admin panelden içerik düzenle (karakter, house, quote metinleri)
+Ya da local'de kod/yapı değişikliği yap (component, stil, yeni özellik)
+
+İkisini aynı gün/oturumda yapman gerekiyorsa, sıralama şu olsun:
+
+Önce local'de git pull yap (admin panelden gelmiş olabilecek her şeyi çek).
+Kod değişikliklerini yap, test et, commit'le, push'la.
+Sonra admin panelden içerik düzenlemesi yapacaksan yap (bu ayrı bir commit atacak, sorun değil).
+Bir sonraki local çalışmana başlamadan önce yine git pull yap.
+
+Özet
+
+Evet, admin panelden yayınladıktan sonra local'de çalışmaya devam edeceksen git pull yapman şart.
+Push etmeden önce her zaman git pull alışkanlığı edin — bu genel olarak da iyi bir Git pratiği, sadece senin durumunda özellikle kritik çünkü iki farklı yerden (senin bilgisayarın + Vercel/admin panel) aynı dosyalara yazılıyor.
+Vercel zaten her push/commit'te otomatik deploy ettiği için, local'de git pull çekip görsel olarak "her şey güncel mi" diye characters.json'a bir göz atmak da iyi bir alışkanlık olur.
