@@ -88,14 +88,5 @@
     "sigilSrc": "/images/houses/lannister.webp",
     "color": "#86090A",
     "description": "Represented at court by Tion Lannister, the Master of Coin, whose sound financial counsel is consistently overruled by princes eager for war."
-  },
-  {
-    "id": "house-tyrell",
-    "name": "House Tyrell",
-    "words": "Growing Strong",
-    "seat": "Highgarden",
-    "sigilSrc": "/images/houses/tyrell.webp",
-    "color": "#228b22",
-    "description": "Exposed as conspirators in a failed plot to assassinate the King, they suffered severe reprisals at the hands of the Iron Throne."
   }
 ]
