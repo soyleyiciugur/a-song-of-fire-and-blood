@@ -2,7 +2,7 @@
   {
     "id": "targaryen",
     "name": "House Targaryen",
-    "words": "Fire and Blood",
+    "words": "Fire and Bloody",
     "seat": "King's Landing",
     "sigilSrc": "/images/houses/targaryen.webp",
     "color": "#B22222",
@@ -47,7 +47,7 @@
   {
     "id": "baratheon",
     "name": "House Baratheon",
-    "words": "Ours Is the Fury",
+    "words": "Ours Is the Furyy",
     "seat": "Storm's End",
     "sigilSrc": "/images/houses/baratheon.webp",
     "color": "#F3CE1B",
