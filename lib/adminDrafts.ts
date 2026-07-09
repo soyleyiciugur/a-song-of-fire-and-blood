@@ -44,3 +44,12 @@ export function hasAnyPendingDraft() {
   const drafts = collectAllPendingDrafts();
   return !!(drafts.characters || drafts.quotes || drafts.houses);
 }
+
+// Taslak, orijinal (canlı) veriden gerçekten farklı mı diye kontrol eder.
+// Sadece localStorage'da veri OLMASI yeterli değil; içeriği orijinalle
+// aynıysa bu "değişiklik yok" demektir ve "unpublished changes" uyarısı
+// gösterilmemelidir.
+export function isDraftDifferentFromOriginal(draftValue: unknown, originalValue: unknown): boolean {
+  if (draftValue === null || draftValue === undefined) return false;
+  return JSON.stringify(draftValue) !== JSON.stringify(originalValue);
+}

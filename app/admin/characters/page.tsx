@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import charactersData from "../../../data/characters/characters.json";
 import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json"; // Ayrı dosyadan alıntıları çekiyoruz
-import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";
+import { collectAllPendingDrafts, clearAllDrafts, isDraftDifferentFromOriginal } from "@/lib/adminDrafts";
 
 // Özel Scrollbar ve Global Stiller
 const globalStyles = `
@@ -215,32 +215,46 @@ export default function AdminCharactersPage() {
   const [hasDraft, setHasDraft] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
-  // Sayfa açılışında localStorage'daki taslağı yükle
+  // Sayfa açılışında localStorage'daki taslağı yükle (varsa)
   useEffect(() => {
     const draftChars = localStorage.getItem("draft-characters");
     const draftQuotes = localStorage.getItem("draft-quotes");
+
+    let loadedChars = charactersData as any[];
+    let loadedQuotes = initialQuotes as any[];
+
     if (draftChars) {
       try {
-        setChars(JSON.parse(draftChars));
+        loadedChars = JSON.parse(draftChars);
+        setChars(loadedChars);
       } catch {}
     }
     if (draftQuotes) {
       try {
-        setAllQuotes(JSON.parse(draftQuotes));
+        loadedQuotes = JSON.parse(draftQuotes);
+        setAllQuotes(loadedQuotes);
       } catch {}
     }
-    setHasDraft(hasAnyPendingDraft());
+
+    const charsChanged = isDraftDifferentFromOriginal(loadedChars, charactersData);
+    const quotesChanged = isDraftDifferentFromOriginal(loadedQuotes, initialQuotes);
+    setHasDraft(charsChanged || quotesChanged);
   }, []);
 
   // chars değiştikçe otomatik olarak taslağa yaz (network yok, sadece tarayıcı)
+  // ve sadece GERÇEKTEN orijinalden farklıysa "hasDraft" uyarısını göster
   useEffect(() => {
     localStorage.setItem("draft-characters", JSON.stringify(chars));
-    setHasDraft(hasAnyPendingDraft());
+    const charsChanged = isDraftDifferentFromOriginal(chars, charactersData);
+    const quotesChanged = isDraftDifferentFromOriginal(allQuotes, initialQuotes);
+    setHasDraft(charsChanged || quotesChanged);
   }, [chars]);
 
   useEffect(() => {
     localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
-    setHasDraft(hasAnyPendingDraft());
+    const charsChanged = isDraftDifferentFromOriginal(chars, charactersData);
+    const quotesChanged = isDraftDifferentFromOriginal(allQuotes, initialQuotes);
+    setHasDraft(charsChanged || quotesChanged);
   }, [allQuotes]);
 
   const filteredChars = useMemo(() => chars.filter(c => c.name.toLowerCase().includes(listSearch.toLowerCase())), [chars, listSearch]);
@@ -303,7 +317,7 @@ export default function AdminCharactersPage() {
     localStorage.removeItem("draft-quotes");
     setChars(charactersData as any[]);
     setAllQuotes(initialQuotes as any[]);
-    setHasDraft(hasAnyPendingDraft());
+    setHasDraft(false);
     showNotification("Draft discarded.", "success");
   };
 

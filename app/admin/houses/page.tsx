@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import housesData from "../../../data/houses.json";
-import { collectAllPendingDrafts, clearAllDrafts, hasAnyPendingDraft } from "@/lib/adminDrafts";
+import { collectAllPendingDrafts, clearAllDrafts, isDraftDifferentFromOriginal } from "@/lib/adminDrafts";
 
 export default function AdminHousesPage() {
   const [houses, setHouses] = useState(housesData);
@@ -11,19 +11,26 @@ export default function AdminHousesPage() {
   const [hasDraft, setHasDraft] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
+  // Sayfa açılışında localStorage'daki taslağı yükle (varsa)
   useEffect(() => {
     const draft = localStorage.getItem("draft-houses");
+    let loadedHouses = housesData;
+
     if (draft) {
       try {
-        setHouses(JSON.parse(draft));
+        loadedHouses = JSON.parse(draft);
+        setHouses(loadedHouses);
       } catch {}
     }
-    setHasDraft(hasAnyPendingDraft());
+
+    setHasDraft(isDraftDifferentFromOriginal(loadedHouses, housesData));
   }, []);
 
+  // houses değiştikçe otomatik olarak taslağa yaz ve sadece GERÇEKTEN
+  // orijinalden farklıysa "hasDraft" uyarısını göster
   useEffect(() => {
     localStorage.setItem("draft-houses", JSON.stringify(houses));
-    setHasDraft(hasAnyPendingDraft());
+    setHasDraft(isDraftDifferentFromOriginal(houses, housesData));
   }, [houses]);
 
   const activeHouse = houses[selectedIndex];
@@ -71,7 +78,7 @@ export default function AdminHousesPage() {
     if (!confirm("Discard all unpublished changes and reset to the live version?")) return;
     localStorage.removeItem("draft-houses");
     setHouses(housesData);
-    setHasDraft(hasAnyPendingDraft());
+    setHasDraft(false);
     showNotification("Draft discarded.", "success");
   };
 
