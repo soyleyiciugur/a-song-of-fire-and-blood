@@ -2,7 +2,7 @@
   {
     "id": "targaryen",
     "name": "House Targaryen",
-    "words": "Fire and Bloody",
+    "words": "Fire and Blood",
     "seat": "King's Landing",
     "sigilSrc": "/images/houses/targaryen.webp",
     "color": "#B22222",
@@ -83,7 +83,7 @@
   {
     "id": "lannister",
     "name": "House Lannister",
-    "words": "Hear Me Roar! la",
+    "words": "Hear Me Roar!",
     "seat": "Casterly Rock",
     "sigilSrc": "/images/houses/lannister.webp",
     "color": "#86090A",
