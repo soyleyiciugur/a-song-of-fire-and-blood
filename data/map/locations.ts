@@ -7,13 +7,14 @@ export interface MapLocation {
 // Coordinates are percentages of the natural width/height of
 // /public/images/map/known-world.webp, so they stay correct at any
 // display size. Logged with the /map-locator tool.
+// x sol sağ - y yukarı aşağı
 export const MAP_LOCATIONS: MapLocation[] = [
   { name: "King's Landing", xPct: 19.31, yPct: 50.99 },
   { name: "Storm's End", xPct: 22.45, yPct: 56.03 },
   { name: "Dragonstone", xPct: 23.53, yPct: 47.61 },
-  { name: "Driftmark", xPct: 22.58, yPct: 48.23 },
-  { name: "Starfall", xPct: 12.69, yPct: 64.03 },
-  { name: "Oldtown", xPct: 10.25, yPct: 62.08 },
+  { name: "Driftmark", xPct: 22.25, yPct: 48.23 },
+  { name: "Starfall", xPct: 12.0, yPct: 64.03 },
+  { name: "Oldtown", xPct: 9.35, yPct: 62.08 },
   { name: "Highgarden", xPct: 12.56, yPct: 57.98 },
   { name: "Sunspear", xPct: 23.50, yPct: 65.69 },
   { name: "Stepstones", xPct: 26.32, yPct: 61.88 },
@@ -21,8 +22,8 @@ export const MAP_LOCATIONS: MapLocation[] = [
   { name: "The Eyrie", xPct: 20.96, yPct: 40.96 },
   { name: "The Twins", xPct: 15.86, yPct: 38.81 },
   { name: "Moat Cailin", xPct: 16.49, yPct: 32.2 },
-  { name: "Winterfell", xPct: 16.43, yPct: 24.54 },
-  { name: "Castle Black", xPct: 19.12, yPct: 14.84 },
+  { name: "Winterfell", xPct: 15.55, yPct: 24.60 },
+  { name: "Castle Black", xPct: 18.45, yPct: 14.95 },
   { name: "Riverrun", xPct: 15, yPct: 44 },
   { name: "Casterly Rock", xPct: 10.28, yPct: 48.38 },
   { name: "Braavos", xPct: 29.27, yPct: 37.1 },
@@ -33,7 +34,7 @@ export const MAP_LOCATIONS: MapLocation[] = [
   { name: "Gulltown", xPct: 24.67, yPct: 42.76 },
   { name: "Pyke", xPct: 10.53, yPct: 42.09 },
   { name: "Ashford", xPct: 16.29, yPct: 57.38 },
-  { name: "Bitterbridge", xPct: 15.76, yPct: 54.2 },
+  { name: "Bitterbridge", xPct: 14.95, yPct: 53.90 },
   { name: "Summerhall", xPct: 19.21, yPct: 57.09 },
   { name: "Rook's Rest", xPct: 22.22, yPct: 47.14 },
   { name: "Kingswood", xPct: 20.63, yPct: 52.7 },
@@ -60,4 +61,4 @@ export function getMapLocation(name: string): MapLocation | undefined {
 }
 
 export const DEFAULT_MAP_LOCATION = "King's Landing";
-export const DEFAULT_MAP_FOCUS_SCALE = 2.5;
+export const DEFAULT_MAP_FOCUS_SCALE = 0.7;

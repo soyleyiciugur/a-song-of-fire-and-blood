@@ -240,7 +240,7 @@ const chapter: Chapter = {
     `Vhaemys stared at the crushed shell on the floor. "But this is my space."`,
     `Jace looked into the boy's cold, dark eyes. "It is theirs, too."`,
     `✧ ✦ ✧`,
-    `Six days passed in suffocating silence.`,
+    `A week of suffocating silence descended upon the royal family, broken only by the scratching of quills and the distant, rhythmic tolling of the city bells. As the sixth moon waned into the seventh, the Red Keep fell into a grim, bureaucratic routine, the initial fire of the massacre settling into a cold, persistent ash.`,
     `No one in the royal family spoke to one another. The only conversations of note were between Jace and Baelor. They dispatched a raven to Highgarden: The toll has been paid in full. We are slightly easing the sanctions. It was a decree utterly devoid of apology.`,
     `The children had not seen the King in nearly a week. He remained in his chambers, sleeping beside Jaery, though the two never exchanged a word.`,
     `When the smallfolk came to air their grievances, it was the Hand who spoke for the Crown. The King merely sat on the Iron Throne, listening in a drunken stupor. It was the only time Jace and his father shared the same room.`,

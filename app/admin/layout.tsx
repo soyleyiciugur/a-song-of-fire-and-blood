@@ -1,8 +1,12 @@
 "use client";
 
+import charactersData from "@/data/characters/characters.json";
+import quotesData from "@/data/quotes.json";
+import housesData from "@/data/houses.json";
+import { ConfirmModal } from "./_components/Modal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   collectAllPendingDrafts,
   clearAllDrafts,
@@ -16,7 +20,8 @@ const ADMIN_NAV_ITEMS = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-
+  const [showDiscardConfirm, setShowDiscardConfirm] = useState(false);
+  const [showDraftTooltip, setShowDraftTooltip] = useState(false);
   const [status, setStatus] = useState({ characters: false, quotes: false, houses: false });
   const [isSaving, setIsSaving] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -66,12 +71,139 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     setIsSaving(false);
   };
 
-  const handleDiscardAll = () => {
-    if (!confirm("Discard ALL unpublished changes across every admin page and reset to the live version?")) return;
+  const handleDiscardAll = () => setShowDiscardConfirm(true);
+  
+  const confirmDiscard = () => {
+    setShowDiscardConfirm(false);
     clearAllDrafts();
     showNotification("All drafts discarded.", "success");
     setTimeout(() => window.location.reload(), 500);
   };
+
+  type DraftStatus = { characters: boolean; quotes: boolean; houses: boolean };
+
+  function DraftTooltip({ currentStatus }: { currentStatus: DraftStatus }) {
+    const sections = useMemo(() => {
+      const pending = collectAllPendingDrafts();
+      const result: { section: string; items: { name: string; fields: string[] }[] }[] = [];
+
+      // Characters
+      if (currentStatus.characters && Array.isArray(pending.characters)) {
+        const original = charactersData as { id: string; name?: string; [k: string]: unknown }[];
+        const draft = pending.characters as typeof original;
+        const changed: { name: string; fields: string[] }[] = [];
+
+        draft.forEach((dChar) => {
+          const orig = original.find((o) => o.id === dChar.id);
+          if (!orig) { changed.push({ name: dChar.name ?? dChar.id, fields: ["new"] }); return; }
+          const diffFields = Object.keys(dChar).filter(
+            (k) => JSON.stringify(dChar[k as keyof typeof dChar]) !== JSON.stringify(orig[k as keyof typeof orig])
+          );
+          if (diffFields.length > 0) changed.push({ name: dChar.name ?? dChar.id, fields: diffFields });
+        });
+
+        if (changed.length > 0) result.push({ section: "Characters", items: changed });
+      }
+
+      // Houses
+      if (currentStatus.houses && Array.isArray(pending.houses)) {
+        const original = housesData as { id: string; name?: string; [k: string]: unknown }[];
+        const draft = pending.houses as typeof original;
+        const changed: { name: string; fields: string[] }[] = [];
+
+        draft.forEach((dHouse) => {
+          const orig = original.find((o) => o.id === dHouse.id);
+          if (!orig) { changed.push({ name: dHouse.name ?? dHouse.id, fields: ["new"] }); return; }
+          const diffFields = Object.keys(dHouse).filter(
+            (k) => JSON.stringify(dHouse[k as keyof typeof dHouse]) !== JSON.stringify(orig[k as keyof typeof orig])
+          );
+          if (diffFields.length > 0) changed.push({ name: dHouse.name ?? dHouse.id, fields: diffFields });
+        });
+
+        if (changed.length > 0) result.push({ section: "Houses", items: changed });
+      }
+
+      // Quotes
+      if (currentStatus.quotes && Array.isArray(pending.quotes)) {
+        // "as unknown" eklenerek tip çakışması hatası (2352) çözüldü.
+        const original = quotesData as unknown as { id: string; text?: string; [k: string]: unknown }[];
+        const draft = pending.quotes as unknown as typeof original;
+        const changed: { name: string; fields: string[] }[] = [];
+
+        draft.forEach((dQuote) => {
+          const orig = original.find((o) => o.id === dQuote.id);
+          const label = (dQuote.text as string | undefined)?.slice(0, 32) ?? dQuote.id;
+          if (!orig) { changed.push({ name: `"${label}…"`, fields: ["new"] }); return; }
+          const diffFields = Object.keys(dQuote).filter(
+            (k) => JSON.stringify(dQuote[k as keyof typeof dQuote]) !== JSON.stringify(orig[k as keyof typeof orig])
+          );
+          if (diffFields.length > 0) changed.push({ name: `"${label}…"`, fields: diffFields });
+        });
+
+        if (changed.length > 0) result.push({ section: "Quotes", items: changed });
+      }
+
+      return result;
+    }, [currentStatus]);
+
+    if (sections.length === 0) return null;
+
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "calc(100% + 10px)",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "rgba(12, 10, 6, 0.97)",
+          border: "1px solid rgba(194, 162, 39, 0.25)",
+          borderRadius: "8px",
+          padding: "14px 16px",
+          minWidth: "280px",
+          maxWidth: "360px",
+          maxHeight: "400px",
+          overflowY: "auto",
+          boxShadow: "0 12px 32px rgba(0,0,0,0.75)",
+          zIndex: 500,
+          pointerEvents: "none",
+        }}
+      >
+        {sections.map(({ section, items }: { section: string; items: { name: string; fields: string[] }[] }, sIdx: number) => (
+          <div key={section} style={{ marginBottom: sIdx < sections.length - 1 ? "14px" : 0 }}>
+            {/* Section header */}
+            <div style={{
+              fontSize: "0.68rem",
+              color: "var(--gold)",
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              marginBottom: "8px",
+              opacity: 0.85,
+            }}>
+              {section}
+            </div>
+
+            {items.map((item: { name: string; fields: string[] }) => (
+              <div key={item.name} style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+                gap: "10px",
+                padding: "4px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.04)",
+              }}>
+                <span style={{ color: "#e8e0d0", fontSize: "0.82rem", fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "160px" }}>
+                  {item.name}
+                </span>
+                <span style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.72rem", textAlign: "right", flexShrink: 0 }}>
+                  {item.fields.join(", ")}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--background)", color: "var(--text)" }}>
@@ -118,12 +250,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "16px" }}>
           {hasAnyDraft && (
             <>
-              <span style={{ fontSize: "0.85rem", opacity: 0.85 }}>
+              <span
+              style={{ fontSize: "0.85rem", opacity: 0.85, position: "relative", cursor: "default" }}
+              onMouseEnter={() => setShowDraftTooltip(true)}
+              onMouseLeave={() => setShowDraftTooltip(false)}
+            >
                 ⚠ Unpublished:
                 {status.houses && " Houses"}
                 {status.characters && " Characters"}
                 {status.quotes && " Quotes"}
-              </span>
+                {showDraftTooltip && <DraftTooltip currentStatus={status} />}
+            </span>
               <button
                 onClick={handleDiscardAll}
                 style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline", fontSize: "0.85rem" }}
@@ -162,6 +299,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <span style={{ fontSize: "1.2rem" }}>{notification.type === "success" ? "✓" : "⚠"}</span>
           {notification.message}
         </div>
+      )}
+      {showDiscardConfirm && (
+        <ConfirmModal
+          title="Discard All Changes?"
+          message="Are you sure you want to discard all unpublished changes across every admin page and reset to the live version?"
+          confirmLabel="Discard All"
+          danger
+          onConfirm={confirmDiscard}
+          onCancel={() => setShowDiscardConfirm(false)}
+        />
       )}
     </div>
   );

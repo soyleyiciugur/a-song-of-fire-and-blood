@@ -6,7 +6,7 @@ const chapter: Chapter = {
   synopsis: "As Visenor braves the Dornish peaks for a dangerous birthright, unexpected bonds form within the Red Keep. While the Crown Prince finds rare hope, Jacaelon embraces the solemn vows of a knight.",
   image: "/images/chapters/the-climb-and-the-kneel.webp",
   content: [
-    `The Third Day of the Seventh Moon, 99 AC`,
+    // The Third Day of the Seventh Moon, 99 AC
     `The black walnut stain had settled well.`,
     `Visenor studied his reflection in the polished steel one last time before fastening his sword belt. Where silver-gold Valyrian hair had once betrayed him at a glance, a short, dark cut now framed his face. Beside him, Rhaella's own hair had taken on the deep copper-red hue of henna. They looked less like dragonlords and more like travelers from the marches, though their violet eyes remained impossible to disguise.`,
     `"The Red Mountains do not forgive fools," Rhaella said quietly.`,
@@ -210,7 +210,8 @@ const chapter: Chapter = {
     `Visenor stood there for a long while before allowing himself to breathe again.`,
     `That evening he built his camp within sight of the cave.`,
     `He did not attempt to enter again.`,
-    `He simply waited.`,
+    `The journey had taken him deep into the jagged heart of the Red Mountains, a three-day ride followed by two days of agonizing, breathless climbing.`,
+    `And now, he simply had to wait.`,
     `When the mountain winds grew quiet, he sang old Valyrian songs into the night—not loudly, nor as commands, but as one traveler might sing to another beside a lonely fire.`,
     `Whether Boneskin listened...`,
     `Only the dragon knew.`,
@@ -1060,7 +1061,7 @@ const chapter: Chapter = {
     `From farther down the gallery, unnoticed behind a stone pillar, Jace watched them disappear into the torchlit halls.`,
     `Only after they had vanished from sight did he turn away, wearing the quiet smile of a brother who believed, if only for one evening, that perhaps the gods had shown his family a small measure of mercy.`,
     `✧ ✦ ✧`,
-    `The Seventh Day of the Seventh Moon, 99 AC`,
+    // The Seventh Day of the Seventh Moon, 99 AC
     `For two days, the dragon never left his thoughts.`,
     `Visenor made no attempt to enter the cave again. Each morning he woke before dawn, tended his fire, and waited. Sometimes he spoke in High Valyrian. Sometimes he sang the old songs of the Freehold, letting the melodies drift through the mountain air without expectation of an answer. Other times he simply sat in silence, content to let the dragon know he had not come as a hunter.`,
     `The mountain remained patient.`,

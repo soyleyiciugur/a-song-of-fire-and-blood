@@ -28,10 +28,6 @@ const MAX_VISIBLE_AVATARS = 3;
 const ALL_EVENT_TYPES: MapEventType[] = ["battle", "feast", "tournament", "wedding"];
 const MIN_MARKER_DISTANCE_PX = 46;
 
-// Camera-follow timing. HOP_MS matches the previous per-hop CSS duration
-// (0.9s) so the trail line, the traveling avatar, and the camera all move
-// at the same pace as before — just synchronized now instead of running as
-// three independent animations.
 const CENTER_IN_MS = 100;
 const HOP_MS = 1500;
 
@@ -113,7 +109,14 @@ function Avatar({
   name: string;
   size?: number;
 }) {
-  const [src, setSrc] = useState(`/images/miniportraits/${characterId}.webp`);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [characterId]);
+
+  const src = hasError ? MINI_FALLBACK : `/images/miniportraits/${characterId}.webp`;
+
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -122,7 +125,7 @@ function Avatar({
       width={size}
       height={size}
       draggable={false}
-      onError={() => setSrc(MINI_FALLBACK)}
+      onError={() => setHasError(true)}
       className={styles.avatarImg}
       style={{ width: size, height: size }}
     />
@@ -131,6 +134,9 @@ function Avatar({
 
 export default function InteractiveMap() {
   const router = useRouter();
+
+  const [visibleCard, setVisibleCard] = useState<Character | null>(null);
+  const [cardVisible, setCardVisible] = useState(false);
 
   const chapters = useMemo(
     () => [...getAllChapters()].sort((a, b) => romanFromTitle(a.title) - romanFromTitle(b.title)),
@@ -146,14 +152,14 @@ export default function InteractiveMap() {
   const [naturalSize, setNaturalSize] = useState<{ width: number; height: number } | null>(null);
   const [chapterIndex, setChapterIndex] = useState(0);
   const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(null);
+  
   const [openCluster, setOpenCluster] = useState<string | null>(null);
+  const [lockedCluster, setLockedCluster] = useState<string | null>(null);
+
   const [activeEventTypes, setActiveEventTypes] = useState<Set<MapEventType>>(
     new Set(ALL_EVENT_TYPES)
   );
 
-  // --- Camera-follow state ---
-  // travelPos is the point (in map percent coordinates) the traveling
-  // avatar/camera is currently at while an auto-follow animation plays.
   const [travelPos, setTravelPos] = useState<{ xPct: number; yPct: number } | null>(null);
   const [isFollowing, setIsFollowing] = useState(false);
 
@@ -232,8 +238,6 @@ export default function InteractiveMap() {
     MAP_EVENTS.forEach((event) => {
       if (!activeEventTypes.has(event.type)) return;
 
-      // Tek chapter'a bağlı eventler `chapterSlug`, birden fazla chapter'a
-      // yayılan eventler `chapterSlugs` kullanabilir.
       const eventChapterSlugs =
         (event as { chapterSlugs?: string[] }).chapterSlugs ?? [event.chapterSlug];
 
@@ -257,7 +261,6 @@ export default function InteractiveMap() {
       locationName: string;
     }[] = [];
 
-    // Sadece şu an slider'ın gösterdiği chapter'a kadar (dahil)
     for (let i = 0; i <= chapterIndex; i++) {
       const chapter = chapters[i];
       if (!chapter) continue;
@@ -363,14 +366,21 @@ export default function InteractiveMap() {
 
   const selectedCharacter = selectedCharacterId ? charactersById.get(selectedCharacterId) : null;
 
-  // ---------------------------------------------------------------------
-  // Camera-follow: whenever the selected character or the visible chapter
-  // changes, smoothly move the camera from wherever it currently is to the
-  // start of the trail, then — if there's more than one stop — glide it
-  // along the exact same path (and at the exact same pace) as the trail
-  // line being drawn and the traveling avatar being positioned. All three
-  // are driven from this single rAF loop so nothing can drift out of sync.
-  // ---------------------------------------------------------------------
+  useEffect(() => {
+    if (selectedCharacter) {
+      setCardVisible(false);
+      const t = setTimeout(() => {
+        setVisibleCard(selectedCharacter);
+        setCardVisible(true);
+      }, 180);
+      return () => clearTimeout(t);
+    } else {
+      setCardVisible(false);
+      const t = setTimeout(() => setVisibleCard(null), 180);
+      return () => clearTimeout(t);
+    }
+  }, [selectedCharacter]);
+
   const cancelFollow = useCallback(() => {
     followGenerationRef.current += 1;
     if (followRafRef.current !== null) {
@@ -405,8 +415,6 @@ export default function InteractiveMap() {
     const lockedScale = scale;
     const naturalSizeForAnimation = resolvedNaturalSize;
 
-    // Where the camera is centered right now, expressed in map percent
-    // coordinates, so we can ease *from* here rather than snapping.
     const startCenterPxX = (rect.width / 2 - pan.x) / lockedScale;
     const startCenterPxY = (rect.height / 2 - pan.y) / lockedScale;
     const startXPct = (startCenterPxX / naturalSizeForAnimation.width) * 100;
@@ -423,7 +431,7 @@ export default function InteractiveMap() {
     const start = performance.now();
 
     function frame(now: number) {
-      if (followGenerationRef.current !== myGen) return; // superseded by a newer run
+      if (followGenerationRef.current !== myGen) return;
 
       const elapsed = now - start;
       const shouldFollowCamera = !manualControlRef.current && !isDraggingRef.current;
@@ -451,8 +459,6 @@ export default function InteractiveMap() {
         return;
       }
 
-      // Path-following phase. If the path element isn't measurable yet,
-      // snapshot its length on the first frame and keep going from there.
       const pathEl = trailPathRef.current;
       let length = trailPathLengthRef.current;
 
@@ -497,6 +503,8 @@ export default function InteractiveMap() {
         cancelAnimationFrame(followRafRef.current);
       }
     };
+    
+    // YANLIŞ OLANI DÜZELTTİĞİMİZ KISIM: 
     // We intentionally only restart this on character/chapter/natural-size
     // changes — not on every pan/scale change, since those are often
     // *caused* by this very effect.
@@ -532,6 +540,7 @@ export default function InteractiveMap() {
   const handleMapClick = useCallback(() => {
     if (consumeDragFlag()) return;
     setOpenCluster(null);
+    setLockedCluster(null);
   }, [consumeDragFlag]);
 
   const toggleEventType = useCallback((type: MapEventType) => {
@@ -776,10 +785,16 @@ export default function InteractiveMap() {
                   {charEntries.length > 0 && (
                     <div
                       className={styles.avatarRow}
-                      onMouseEnter={() => setOpenCluster(clusterKey)}
-                      onMouseLeave={() =>
-                        setOpenCluster((k) => (k === clusterKey ? null : k))
-                      }
+                      onMouseEnter={() => {
+                        if (overflowEntries.length > 0 && lockedCluster !== clusterKey) {
+                          setOpenCluster(clusterKey);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (lockedCluster !== clusterKey) {
+                          setOpenCluster((k) => (k === clusterKey ? null : k));
+                        }
+                      }}
                     >
                       {visibleEntries.map((entry) => {
                         const id = entry.id;
@@ -817,7 +832,13 @@ export default function InteractiveMap() {
                             onMouseDown={(e) => e.stopPropagation()}
                             onClick={(e) => {
                               e.stopPropagation();
-                              setOpenCluster((k) => (k === clusterKey ? null : clusterKey));
+                              if (lockedCluster === clusterKey) {
+                                setLockedCluster(null);
+                                setOpenCluster(null);
+                              } else {
+                                setLockedCluster(clusterKey);
+                                setOpenCluster(clusterKey);
+                              }
                             }}
                           >
                             {overflowEntries.length}+
@@ -825,7 +846,7 @@ export default function InteractiveMap() {
                         </div>
                       )}
 
-                      {openCluster === clusterKey && (
+                      {(openCluster === clusterKey || lockedCluster === clusterKey) && (
                         <div
                           className={styles.flyout}
                           onMouseDown={(e) => e.stopPropagation()}
@@ -838,9 +859,11 @@ export default function InteractiveMap() {
                               <button
                                 key={entry.id}
                                 className={styles.flyoutRow}
-                                onClick={() => {
+                                onClick={(e) => {
+                                  e.stopPropagation();
                                   setSelectedCharacterId(entry.id);
                                   setOpenCluster(null);
+                                  setLockedCluster(null); 
                                 }}
                               >
                                 <Avatar characterId={entry.id} name={c?.name ?? entry.id} size={24} />
@@ -861,10 +884,16 @@ export default function InteractiveMap() {
                   {events.length > 0 && (
                     <div
                       className={styles.eventCluster}
-                      onMouseEnter={() => events.length > 1 && setOpenCluster(eventClusterKey)}
-                      onMouseLeave={() =>
-                        setOpenCluster((k) => (k === eventClusterKey ? null : k))
-                      }
+                      onMouseEnter={() => {
+                        if (events.length > 1 && lockedCluster !== eventClusterKey) {
+                          setOpenCluster(eventClusterKey);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (lockedCluster !== eventClusterKey) {
+                          setOpenCluster((k) => (k === eventClusterKey ? null : k));
+                        }
+                      }}
                     >
                       <button
                         className={`${styles.eventIcon} ${
@@ -875,7 +904,13 @@ export default function InteractiveMap() {
                         onClick={(e) => {
                           e.stopPropagation();
                           if (events.length > 1) {
-                            setOpenCluster((k) => (k === eventClusterKey ? null : eventClusterKey));
+                            if (lockedCluster === eventClusterKey) {
+                              setLockedCluster(null);
+                              setOpenCluster(null);
+                            } else {
+                              setLockedCluster(eventClusterKey);
+                              setOpenCluster(eventClusterKey);
+                            }
                           } else {
                             router.push(`/chapters/${events[0].chapterSlug}`);
                           }
@@ -888,7 +923,7 @@ export default function InteractiveMap() {
                         )}
                       </button>
 
-                      {openCluster === eventClusterKey && events.length > 1 && (
+                      {(openCluster === eventClusterKey || lockedCluster === eventClusterKey) && events.length > 1 && (
                         <div
                           className={styles.flyout}
                           onMouseDown={(e) => e.stopPropagation()}
@@ -899,7 +934,10 @@ export default function InteractiveMap() {
                             <button
                               key={ev.id}
                               className={styles.flyoutRow}
-                              onClick={() => router.push(`/chapters/${ev.chapterSlug}`)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/chapters/${ev.chapterSlug}`);
+                              }}
                             >
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img src={MAP_EVENT_TYPE_ICONS[ev.type]} alt={ev.type} width={18} height={18} />
@@ -933,8 +971,16 @@ export default function InteractiveMap() {
           </div>
 
           {/* Selected character card */}
-          {selectedCharacter && (
-            <div className={styles.characterCard} onMouseDown={(e) => e.stopPropagation()}>
+          {visibleCard && (
+            <div
+              className={styles.characterCard}
+              style={{
+                opacity: cardVisible ? 1 : 0,
+                transform: cardVisible ? "translateY(0) scale(1)" : "translateY(-8px) scale(0.96)",
+                transition: "opacity 0.18s ease, transform 0.18s ease",
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+            >
               <button
                 className={styles.characterCardClose}
                 onClick={() => setSelectedCharacterId(null)}
@@ -942,11 +988,11 @@ export default function InteractiveMap() {
               >
                 ×
               </button>
-              <Avatar characterId={selectedCharacter.id} name={selectedCharacter.name} size={48} />
+              <Avatar characterId={visibleCard.id} name={visibleCard.name} size={48} />
               <div>
-                <div className={styles.characterCardName}>{selectedCharacter.name}</div>
-                <div className={styles.characterCardTitle}>{selectedCharacter.title}</div>
-                <Link href={`/characters/${selectedCharacter.id}`} className={styles.characterCardLink}>
+                <div className={styles.characterCardName}>{visibleCard.name}</div>
+                <div className={styles.characterCardTitle}>{visibleCard.title}</div>
+                <Link href={`/characters/${visibleCard.id}`} className={styles.characterCardLink}>
                   View character →
                 </Link>
               </div>
