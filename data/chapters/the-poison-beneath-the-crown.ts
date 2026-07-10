@@ -8,7 +8,7 @@ const chapter: Chapter = {
   image: "/images/chapters/the-poison-beneath-the-crown.webp",
   content: [
     "The reign of King Baelenys, later remembered by many as the Cruel, entered its darkest chapter not on a battlefield, but within the walls of his own castle.",
-    "It began on the sixteenth day of the fourth moon, the very day dragon eggs were set to hatch.",
+    "It began on the sixteenth day of the second moon, the very day dragon eggs were set to hatch.",
     "The court had gathered in celebration, unaware that before the dragons of House Targaryen would draw their first breath, death itself would reach for the king. During the feast, King Baelenys was poisoned. Chaos swept through the castle as the monarch collapsed, and before the source of the poison could be uncovered, the Red Keep was placed under lockdown. No one was permitted to leave. Every servant, guard, and noble suddenly became a suspect.",
     "Yet fate cared little for the fears of men.",
     "As the castle descended into suspicion, the dragon eggs began to crack.",

@@ -248,14 +248,6 @@
     "note": null
   },
   {
-    "text": "In the end... it was just a girl.",
-    "speakerId": "baelenys-targaryen",
-    "speakerName": "Baelenys Targaryen",
-    "chapterSlug": "a-crown-of-thorns",
-    "chapterTitle": "Chapter VI: A Crown of Thorns",
-    "note": "about the massacre at Oldtown"
-  },
-  {
     "text": "We murdered a lord! We murdered an innocent girl! We slaughtered two hundred knights! The sadistic imbecile you thrust into the council couldn't solve a simple conflict without a massacre!",
     "speakerId": "jacaelon-targaryen",
     "speakerName": "Jacaelon Targaryen",
@@ -325,7 +317,7 @@
     "speakerName": "Jacaelon Targaryen",
     "chapterSlug": "a-crown-of-thorns",
     "chapterTitle": "Chapter VI: A Crown of Thorns",
-    "note": null
+    "note": "about The Oldtown Massacre"
   },
   {
     "text": "Who could possibly love your father?",
@@ -334,5 +326,45 @@
     "chapterSlug": "a-crown-of-thorns",
     "chapterTitle": "Chapter VI: A Crown of Thorns",
     "note": "to Jace"
+  },
+  {
+    "text": "A prince without a dragon is merely another claimant with silver blood.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-climb-and-the-kneel",
+    "chapterTitle": "Chapter VII: The Climb and the Kneel",
+    "note": null
+  },
+  {
+    "text": "You stubborn bloody thing.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-climb-and-the-kneel",
+    "chapterTitle": "Chapter VII: The Climb and the Kneel",
+    "note": "to an aggressive mountain goat"
+  },
+  {
+    "text": "If you've figured out my father, I'd dearly love to hear the answer.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-climb-and-the-kneel",
+    "chapterTitle": "Chapter VII: The Climb and the Kneel",
+    "note": "to Ser Alester"
+  },
+  {
+    "text": "I've earned something of a reputation. For disagreeing.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-climb-and-the-kneel",
+    "chapterTitle": "Chapter VII: The Climb and the Kneel",
+    "note": "to Lorenah"
+  },
+  {
+    "text": "To kneel before Ser Alester Dayne is an honor; to be raised by my brother’s hand is the only blessing I require.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-mountain-and-the-vow",
+    "chapterTitle": "Chapter VII: The Mountain and the Vow",
+    "note": "to Ser Alester"
   }
 ]

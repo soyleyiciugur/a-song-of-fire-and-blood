@@ -34,13 +34,12 @@ export const dragons: Dragon[] = [
     riderId: "jacaelon-targaryen",
     image: "/images/dragons/jhagar.webp",
     traits: [
-      "Disciplined",
-      "Watchful",
-      "Reluctant Flyer",
-      "Bonded Young",
+      "Ill-Tempered",
+      "Difficult to Handle",
+      "Bonded Through Discipline, Not Ease",
     ],
     description:
-      "Bonded to Prince Jacaelon. Rarely flown for pleasure — Jace treats him more as an instrument of state than a companion.",
+      "Bonded to Prince Jacaelon. Jhagar is a genuinely unruly beast, hardly an easy dragon to handle — though he settles somewhat more readily for Jace than for anyone else, the product of hours spent drilling commands into him at the Dragonpit rather than any natural affection.",
   },
   {
     id: "cloudgazer",
@@ -64,13 +63,13 @@ export const dragons: Dragon[] = [
     riderId: "gaelor-targaryen",
     image: "/images/dragons/bayle.webp",
     traits: [
-      "Aggressive in Battle",
-      "Restless on the Ground",
+      "Savage Toward Others",
+      "Remarkably Obedient to Gaelor",
       "Flown into the Reach",
       "Young and Reckless",
     ],
     description:
-      "Prince Gaelor's dragon, flown into the Reach during the campaign that ended in the Oldtown Massacre.",
+      "Prince Gaelor's dragon, flown into the Reach during the campaign that ended in the Oldtown Massacre. Bayle has a vicious temper — burning birds, beetles, and anything else that moves before him — yet turns remarkably compliant and well-behaved around his own rider, as though the violence is simply another form of affection.",
   },
   {
     id: "jadefyre",
@@ -87,6 +86,22 @@ export const dragons: Dragon[] = [
     ],
     description:
       "Hatched in Visenor's clutch of three and named by him before his flight from King's Landing. The sole hatchling to survive, Jadefyre was gifted to Maela by royal decree after Visenor's disappearance.",
+  },
+  {
+    id: "boneskin",
+    name: "Boneskin",
+    status: "Alive",
+    riderId: "visenor-targaryen",
+    image: "/images/dragons/boneskin.webp",
+    traits: [
+      "Pale, Bone-Yellow Scales",
+      "Wings Thin Enough to Show the Bone Beneath",
+      "Unusually Intelligent",
+      "Avoids Humans by Choice, Not Fear",
+      "Newly Bonded — Not Yet Flown",
+    ],
+    description:
+      "A wild dragon Visenor found roosting alone in a cave in Dorne's Red Mountains. Small and lean rather than malnourished, Boneskin eats little and shuns human contact out of what maesters believe is a rare, near-human intelligence rather than aggression. After days of patient contact he accepted Visenor's presence and let himself be touched, but Visenor has not yet attempted to ride him.",
   },
   {
     id: "visenors-first-hatchling",

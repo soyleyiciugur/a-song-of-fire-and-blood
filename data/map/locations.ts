@@ -49,7 +49,9 @@ export const MAP_LOCATIONS: MapLocation[] = [
   { name: "Yunkai", xPct: 53.54, yPct: 64.27 },
   { name: "Meereen", xPct: 54.86, yPct: 62.35 },
   { name: "Asshai", xPct: 90.64, yPct: 94.1 },
-  { name: "The Red Mountains", xPct: 12.67, yPct: 61.13 },  
+  { name: "The Red Mountains", xPct: 12.67, yPct: 61.13 },
+  { name: "The Prince's Pass", xPct: 15.03, yPct: 61.47 },
+  { name: "The Dornish Marches", xPct: 15.09, yPct: 58.87 },
 ];
 
 export const MAP_LOCATION_NAMES = MAP_LOCATIONS.map((l) => l.name);
@@ -62,3 +64,4 @@ export function getMapLocation(name: string): MapLocation | undefined {
 
 export const DEFAULT_MAP_LOCATION = "King's Landing";
 export const DEFAULT_MAP_FOCUS_SCALE = 0.7;
+

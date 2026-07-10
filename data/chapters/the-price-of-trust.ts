@@ -14,7 +14,7 @@ const chapter: Chapter = {
     "Some wore a chain of office.",
     "✧ ✦ ✧",
     "Prince Gaelor was the first to move.",
-    "It was the twentieth day of the fourth moon, and the man who had confessed with his dying breath that the Hand had ordered the poisoning was already beyond questioning. Dead men told no tales. Yet the prince refused to let the trail end there. Hidden among the assassin's belongings was a scrap of parchment bearing the markings of the Iron Bank, account numbers and records of payments that no common cutthroat should ever possess.",
+    "It was the twentieth day of the second moon, and the man who had confessed with his dying breath that the Hand had ordered the poisoning was already beyond questioning. Dead men told no tales. Yet the prince refused to let the trail end there. Hidden among the assassin's belongings was a scrap of parchment bearing the markings of the Iron Bank, account numbers and records of payments that no common cutthroat should ever possess.",
     "It was not proof.",
     "But it was enough to weave a snare.",
     "A sellsword from the south, broad-shouldered and dark of skin, was bought with gold and silence. His head was covered with a hood, chains clasped around his wrists, and he was cast into the dungeons as though he were the very poisoner who had tried to kill the king.",

@@ -95,9 +95,26 @@
   min-height: 260px;
 }
 
+/* Updated to style the flex wrapper around Portrait + Name */
+.sidebarHeader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* Groups the portrait and name together on line 1 */
+.sidebarTopRow {
+  display: flex;
+  justify-content: center; /* Centers the portrait + name unit horizontally */
+  margin-bottom: 6px;
+}
+
+/* The Link component wrapping portrait + name */
 .sidebarNameLink {
-  display: inline-block;
-  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Controls space between portrait and name */
   text-decoration: none;
 }
 
@@ -107,11 +124,14 @@
   color: var(--gold);
 }
 
+/* Hover effect triggers when hovering anywhere over the portrait OR the name */
 .sidebarNameLink:hover .sidebarName {
   text-decoration: underline;
 }
 
+/* Centers house & title under the portrait/name block */
 .sidebarHouse {
+  text-align: center;
   margin: 0 0 18px;
   font-size: 13px;
   color: var(--muted);
@@ -145,16 +165,31 @@
 .relationshipItem {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px; /* Slightly widened for visual clarity */
 
   border-top: 1px solid var(--border);
   padding-top: 10px;
+}
+
+/* Updated: Now acts as the Link container for the relation item */
+.relationshipNameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  width: max-content; /* Keeps the click target limited to the row items */
 }
 
 .relationshipName {
   font-size: 14px;
   color: var(--text);
   font-weight: 600;
+}
+
+/* Hover effect for relation items */
+.relationshipNameRow:hover .relationshipName {
+  text-decoration: underline;
+  color: var(--gold); /* Optional subtle pop of color on hover */
 }
 
 .relationshipDescription {

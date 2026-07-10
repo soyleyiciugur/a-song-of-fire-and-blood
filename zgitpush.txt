@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "Updated Admin Panel." 
+git commit -m "Content updated." 
 
 git push
 

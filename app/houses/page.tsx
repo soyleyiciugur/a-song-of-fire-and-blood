@@ -20,7 +20,15 @@ export default function Houses() {
         </p>
 
         <div className={styles.grid}>
-          {houses.map((house) => {
+          {[...houses]
+            .sort((a, b) => {
+              const aIsTargaryen = a.name.toLowerCase().includes("targaryen");
+              const bIsTargaryen = b.name.toLowerCase().includes("targaryen");
+              if (aIsTargaryen) return -1;
+              if (bIsTargaryen) return 1;
+              return a.name.localeCompare(b.name);
+            })
+            .map((house) => {
             const memberCount = characters.filter(
               (c) => c.house === house.name
             ).length;

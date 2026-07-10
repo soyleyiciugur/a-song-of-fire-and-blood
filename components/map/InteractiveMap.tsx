@@ -208,17 +208,39 @@ export default function InteractiveMap() {
 
   const charactersByLocation = useMemo(() => {
     const map = new Map<string, LocationEntry[]>();
+    
     Object.entries(currentPositions).forEach(([charId, location]) => {
       if (!location) return;
       const locs = Array.isArray(location) ? location : [location];
+      
+      // Deduplicate locations for the SAME character in the SAME chapter.
+      // We track the 'faded' state so that if a character ends their journey 
+      // at a location they previously passed through, they are shown as active (not faded).
+      const uniqueLocs = new Map<string, boolean>();
+      
       locs.forEach((locName, idx) => {
         const isLast = idx === locs.length - 1;
         const faded = locs.length > 1 && !isLast;
+
+        if (uniqueLocs.has(locName)) {
+          // If we already recorded this location, only update it if they are ending here (not faded)
+          if (!faded) {
+            uniqueLocs.set(locName, false);
+          }
+        } else {
+          uniqueLocs.set(locName, faded);
+        }
+      });
+
+      // Now push the deduplicated character states to the main map
+      uniqueLocs.forEach((faded, locName) => {
         const list = map.get(locName) ?? [];
         list.push({ id: charId, faded });
         map.set(locName, list);
       });
     });
+
+    // Sort by title rank
     map.forEach((list, key) => {
       list.sort((a, b) => {
         const ca = charactersById.get(a.id);
@@ -227,6 +249,7 @@ export default function InteractiveMap() {
       });
       map.set(key, list);
     });
+    
     return map;
   }, [currentPositions, charactersById]);
 

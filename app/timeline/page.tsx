@@ -19,12 +19,12 @@ export default function Timeline() {
         <div className={styles.chapters}>
           {timeline.map((chapter) => (
             <section key={chapter.chapterSlug} className={styles.chapterBlock}>
-              <Link
-                href={`/chapters/${chapter.chapterSlug}`}
-                className={styles.chapterTitle}
-              >
+              <Link href={`/chapters/${chapter.chapterSlug}`} className={styles.chapterTitle}>
                 {chapter.chapterTitle}
               </Link>
+              {chapter.date && (
+                <p className={styles.chapterDate}>{chapter.date}</p>
+              )}
 
               <ol className={styles.eventList}>
                 {chapter.events.map((event) => (
@@ -33,6 +33,9 @@ export default function Timeline() {
 
                     <div className={styles.eventBody}>
                       <h3 className={styles.eventTitle}>{event.title}</h3>
+                      {event.date && (
+                        <p className={styles.eventDate}>{event.date}</p>
+                      )}
 
                       <p className={styles.eventDescription}>
                         {event.description}

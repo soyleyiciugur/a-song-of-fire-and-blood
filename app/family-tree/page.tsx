@@ -82,6 +82,7 @@ export default function FamilyTree() {
             >
               <PersonNode id="timos-hightower" />
               <PersonNode id="alysanne-hightower" />
+              <PersonNode id="melessa-hightower" />
             </FamilyUnit>
           </div>
         </section>

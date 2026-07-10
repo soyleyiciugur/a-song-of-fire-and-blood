@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { CharacterId } from "@/types/character";
+import MiniPortrait from "@/components/MiniPortrait";
 
 import { getCharacters } from "@/lib/characters";
 import { computeGraphLayout, colorForHouse } from "@/lib/graph-layout";
@@ -215,21 +216,30 @@ export default function RelationshipsPage() {
           <aside className={styles.sidebar}>
             {selectedCharacter ? (
               <>
-                <Link
-                  href={`/characters/${selectedCharacter.id}`}
-                  className={styles.sidebarNameLink}
-                >
-                  <h2 className={styles.sidebarName}>{formatCharacterName(selectedCharacter.name)}</h2>
-                </Link>
-                <p className={styles.sidebarHouse}>
-                  {selectedCharacter.house} &middot; {selectedCharacter.title}
-                </p>
+                <div className={styles.sidebarHeader}>
+                  {/* Top Row: MiniPortrait and Name wrapped in a single Link */}
+                  <div className={styles.sidebarTopRow}>
+                    <Link href={`/characters/${selectedCharacter.id}`} className={styles.sidebarNameLink}>
+                      <MiniPortrait id={selectedCharacter.id} alt={selectedCharacter.name} size={30} />
+                      <h2 className={styles.sidebarName}>{formatCharacterName(selectedCharacter.name)}</h2>
+                    </Link>
+                  </div>
+                  
+                  {/* Bottom Row: Centered House and Title */}
+                  <p className={styles.sidebarHouse}>
+                    {selectedCharacter.house} &middot; {selectedCharacter.title}
+                  </p>
+                </div>
 
                 {selectedRelationships.length > 0 ? (
                   <ul className={styles.relationshipList}>
                     {selectedRelationships.map((rel) => (
                       <li key={rel.id} className={styles.relationshipItem}>
-                        <span className={styles.relationshipName}>{rel.name}</span>
+                        {/* Interactive Row: Linked portrait and character name together */}
+                        <Link href={`/characters/${rel.id}`} className={styles.relationshipNameRow}>
+                          <MiniPortrait id={rel.id} alt={rel.name} size={24} />
+                          <span className={styles.relationshipName}>{rel.name}</span>
+                        </Link>
                         <span className={styles.relationshipDescription}>
                           {rel.description}
                         </span>

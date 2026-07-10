@@ -161,4 +161,20 @@
 .characterChip:hover {
   background: var(--surface-hover);
   border-color: var(--gold);
+
+  .chapterDate {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 2px 0 12px;
+  font-style: italic;
+}
+
+.eventDate {
+  font-size: 0.72rem;
+  color: var(--gold);
+  margin: 2px 0 6px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
 }

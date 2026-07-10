@@ -9,6 +9,15 @@
     "description": "The ruling house of the Seven Kingdoms, bound as much by dragonfire as by blood. King Baelenys' reign has grown harsher since the poisoning, and the loyalty of his own siblings and children has never been so openly tested."
   },
   {
+    "id": "tyrell",
+    "name": "House Tyrell",
+    "words": "Growing Strong",
+    "seat": "Highgarden",
+    "sigilSrc": "/images/houses/tyrell.webp",
+    "color": "#228B22",
+    "description": "Lords of the Reach and, alongside Derrin Hightower, the hidden hand behind the plot to poison King Baelenys. Exposed by the Iron Bank's records, House Tyrell now bears crippling Crown sanctions and a hatred for House Targaryen that only deepened after the Oldtown Massacre."
+  },
+  {
     "id": "hightower",
     "name": "House Hightower",
     "words": "We Light the Way",
@@ -78,7 +87,7 @@
     "seat": "Harrenhal",
     "sigilSrc": "/images/houses/whent.webp",
     "color": "#FFD93D",
-    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretches from the Kingsguard to the woods south of King's Landing."
+    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, in the King's service, has since reached the Red Keep."
   },
   {
     "id": "lannister",
