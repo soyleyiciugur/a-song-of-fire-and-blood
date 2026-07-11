@@ -34,6 +34,19 @@ export default function AdminHomePage() {
         >
           Houses
         </Link>
+        <Link
+          href="/admin/tools"
+          style={{
+            padding: "12px 24px",
+            background: "var(--gold)",
+            color: "var(--background)",
+            borderRadius: "6px",
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          Tools
+        </Link>
       </div>
     </div>
   );

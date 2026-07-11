@@ -1,0 +1,89 @@
+/* Baseline so every input/select/textarea/button looks consistent by
+   default, without needing to inline-style each one from scratch.
+   Inline styles (e.g. width, custom padding) still override these freely. */
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--gold);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+}
+
+input:read-only {
+  color: var(--muted);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Hide native number spinner arrows everywhere — replaced by the themed
+   NumberStepper component (app/admin/_components/NumberStepper.tsx). */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Themed increase/decrease stepper used in place of native number arrows. */
+.number-stepper {
+  position: relative;
+  display: flex;
+}
+.number-stepper input[type="number"] {
+  padding-right: 34px;
+}
+.number-stepper-buttons {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.number-stepper-buttons button {
+  flex: 1;
+  min-height: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.number-stepper-buttons button:hover {
+  background: var(--surface-hover);
+  color: var(--gold);
+}

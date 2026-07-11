@@ -3,17 +3,23 @@
 import charactersData from "../data/characters/characters.json";
 import quotesData from "../data/quotes.json";
 import housesData from "../data/houses.json";
+import worldDateData from "../data/worldDate.json";
+import scrollsData from "../data/scrolls.json";
 
 const DRAFT_KEYS = {
   characters: "draft-characters",
   quotes: "draft-quotes",
   houses: "draft-houses",
+  worldDate: "draft-worldDate",
+  scrolls: "draft-scrolls",
 } as const;
 
 const ORIGINAL_DATA: Record<keyof typeof DRAFT_KEYS, unknown> = {
   characters: charactersData,
   quotes: quotesData,
   houses: housesData,
+  worldDate: worldDateData,
+  scrolls: scrollsData,
 };
 
 export function getDraft<T = any>(key: keyof typeof DRAFT_KEYS): T | null {
@@ -52,6 +58,8 @@ export function collectAllPendingDrafts() {
     characters: getDraft("characters"),
     quotes: getDraft("quotes"),
     houses: getDraft("houses"),
+    worldDate: getDraft("worldDate"),
+    scrolls: getDraft("scrolls"),
   };
 }
 
@@ -67,10 +75,12 @@ export function getPendingDraftStatus() {
     characters: isDraftDifferentFromOriginal(getDraft("characters"), ORIGINAL_DATA.characters),
     quotes: isDraftDifferentFromOriginal(getDraft("quotes"), ORIGINAL_DATA.quotes),
     houses: isDraftDifferentFromOriginal(getDraft("houses"), ORIGINAL_DATA.houses),
+    worldDate: isDraftDifferentFromOriginal(getDraft("worldDate"), ORIGINAL_DATA.worldDate),
+    scrolls: isDraftDifferentFromOriginal(getDraft("scrolls"), ORIGINAL_DATA.scrolls),
   };
 }
 
 export function hasAnyPendingDraft(): boolean {
   const status = getPendingDraftStatus();
-  return status.characters || status.quotes || status.houses;
+  return status.characters || status.quotes || status.houses || status.worldDate || status.scrolls;
 }

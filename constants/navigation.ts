@@ -12,4 +12,5 @@ export const NAV_ITEMS: NavigationItem[] = [
   { label: "Relationships", href: "/relationships" },
   { label: "Dragons", href: "/dragons" },
   { label: "Timeline", href: "/timeline" },
+  { label: "Scrolls", href: "/scrolls" },
 ];

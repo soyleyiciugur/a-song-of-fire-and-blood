@@ -27,3 +27,53 @@ a {
   width: min(var(--container-width), 100%);
   margin: 0 auto;
 }
+
+/* Site-wide scrollbar (Firefox + WebKit) so the browser default
+   never shows through on any page, including the main window scroll. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--background);
+}
+html::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: var(--background);
+}
+html::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-sm);
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Utility for any inner scrollable panel (dropdown lists, tooltips, etc.)
+   so they share the same thin, themed scrollbar instead of the OS default. */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-sm);
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Shared open animation for dropdown panels (SearchableSelect, tooltips). */
+@keyframes dropdown-enter {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dropdown-enter {
+  animation: dropdown-enter 0.15s ease-out;
+}

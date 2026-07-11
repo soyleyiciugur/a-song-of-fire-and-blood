@@ -2,12 +2,14 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { CharacterSchema } from "../../../../schemas/character";
 import { HouseListSchema } from "../../../../schemas/house";
+import { WorldDateSchema } from "../../../../schemas/worldDate";
+import { ScrollListSchema } from "../../../../schemas/scroll";
 import { updateMultipleFilesOnGithub } from "@/lib/github";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { characters, quotes, houses } = body;
+    const { characters, quotes, houses, worldDate, scrolls } = body;
 
     const files: { path: string; content: unknown }[] = [];
 
@@ -23,6 +25,16 @@ export async function POST(request: Request) {
     if (houses) {
       const validatedHouses = HouseListSchema.parse(houses);
       files.push({ path: "data/houses.json", content: validatedHouses });
+    }
+
+    if (worldDate) {
+      const validatedDate = WorldDateSchema.parse(worldDate);
+      files.push({ path: "data/worldDate.json", content: validatedDate });
+    }
+
+    if (scrolls) {
+      const validatedScrolls = ScrollListSchema.parse(scrolls);
+      files.push({ path: "data/scrolls.json", content: validatedScrolls });
     }
 
     if (files.length === 0) {

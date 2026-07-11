@@ -3,6 +3,7 @@
 import charactersData from "@/data/characters/characters.json";
 import quotesData from "@/data/quotes.json";
 import housesData from "@/data/houses.json";
+import worldDateData from "@/data/worldDate.json";
 import { ConfirmModal } from "./_components/Modal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,13 +17,14 @@ import {
 const ADMIN_NAV_ITEMS = [
   { label: "Characters", href: "/admin/characters" },
   { label: "Houses", href: "/admin/houses" },
+  { label: "Tools", href: "/admin/tools" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [showDiscardConfirm, setShowDiscardConfirm] = useState(false);
   const [showDraftTooltip, setShowDraftTooltip] = useState(false);
-  const [status, setStatus] = useState({ characters: false, quotes: false, houses: false });
+  const [status, setStatus] = useState({ characters: false, quotes: false, houses: false, worldDate: false });
   const [isSaving, setIsSaving] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
@@ -40,7 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     };
   }, []);
 
-  const hasAnyDraft = status.characters || status.quotes || status.houses;
+  const hasAnyDraft = status.characters || status.quotes || status.houses || status.worldDate;
 
   const showNotification = (message: string, type: "success" | "error") => {
     setNotification({ message, type });
@@ -80,7 +82,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     setTimeout(() => window.location.reload(), 500);
   };
 
-  type DraftStatus = { characters: boolean; quotes: boolean; houses: boolean };
+  type DraftStatus = { characters: boolean; quotes: boolean; houses: boolean; worldDate: boolean };
 
   function DraftTooltip({ currentStatus }: { currentStatus: DraftStatus }) {
     const sections = useMemo(() => {
@@ -143,6 +145,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         if (changed.length > 0) result.push({ section: "Quotes", items: changed });
       }
 
+      // World Date (Tools > Calendar)
+      if (currentStatus.worldDate && pending.worldDate) {
+        const original = worldDateData as Record<string, unknown>;
+        const draft = pending.worldDate as Record<string, unknown>;
+        const diffFields = Object.keys(draft).filter(
+          (k) => JSON.stringify(draft[k]) !== JSON.stringify(original[k])
+        );
+        if (diffFields.length > 0) result.push({ section: "Calendar", items: [{ name: "Current Date", fields: diffFields }] });
+      }
+
       return result;
     }, [currentStatus]);
 
@@ -150,6 +162,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     return (
       <div
+        className="custom-scroll dropdown-enter"
         style={{
           position: "absolute",
           top: "calc(100% + 10px)",
@@ -259,6 +272,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 {status.houses && " Houses"}
                 {status.characters && " Characters"}
                 {status.quotes && " Quotes"}
+                {status.worldDate && " Calendar"}
                 {showDraftTooltip && <DraftTooltip currentStatus={status} />}
             </span>
               <button
