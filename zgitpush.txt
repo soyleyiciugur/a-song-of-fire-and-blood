@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "Added Scrolls page." 
+git commit -m "Minor updates to new features." 
 
 git push
 

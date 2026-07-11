@@ -7,6 +7,7 @@ import MiniPortrait from "@/components/MiniPortrait";
 
 import { getCharacters } from "@/lib/characters";
 import { computeGraphLayout, colorForHouse } from "@/lib/graph-layout";
+import SearchableSelect from "@/components/SearchableSelect";
 
 import styles from "./relationships.module.css";
 
@@ -120,19 +121,17 @@ export default function RelationshipsPage() {
           <label className={styles.filterLabel} htmlFor="house-filter">
             Filter by house
           </label>
-          <select
+          <SearchableSelect
             id="house-filter"
-            className={styles.select}
             value={houseFilter}
-            onChange={(event) => setHouseFilter(event.target.value)}
-          >
-            <option value="all">All houses</option>
-            {houses.map((house) => (
-              <option key={house} value={house}>
-                {house}
-              </option>
-            ))}
-          </select>
+            onChange={setHouseFilter}
+            placeholder="All houses"
+            searchPlaceholder="Search houses…"
+            options={[
+              { value: "all", label: "All houses" },
+              ...houses.map((house) => ({ value: house, label: house })),
+            ]}
+          />
         </div>
 
         <div className={styles.graphLayout}>
