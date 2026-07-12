@@ -1,13 +1,13 @@
 [
   {
     "id": "gallery-001",
-    "src": "/images/gallery/example.jpg",
-    "caption": "An example entry. Replace with real images.",
+    "src": "/images/gallery/example.jpeg",
+    "caption": "The Dragon Children",
     "characterIds": [],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
-    "uploadedAt": "2099-01-01"
+    "uploadedAt": "2026-07-12"
   }
 ]

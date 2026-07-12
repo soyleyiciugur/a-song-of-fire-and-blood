@@ -24,6 +24,10 @@ export const CharacterSchema = z.object({
     note: z.string().optional(),
   }).strict().optional(),
   age: z.number().int().nonnegative().default(0),
+  nameday: z.object({
+  day: z.number().int().min(1).max(30),
+  moon: z.number().int().min(1).max(12),
+}).nullable().optional(),
   height: z.string().optional().default("-"),
   father: z.string().default("-"),
   mother: z.string().default("-"),

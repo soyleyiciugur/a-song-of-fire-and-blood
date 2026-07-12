@@ -39,7 +39,7 @@ function ordinal(n: number) {
 }
 
 function formatDate(d: WorldDate) {
-  return `${ordinal(d.day)} of the ${d.moon}th Moon, ${d.year} ${d.era}`;
+  return `${ordinal(d.day)} of the ${ordinal(d.moon)} Moon, ${d.year} ${d.era}`;
 }
 
 function newId() {
@@ -514,6 +514,14 @@ export default function AdminRavensEyePage() {
                   <select
                     value={entry.chapterId ?? ""}
                     onChange={(e) => patch({ chapterId: e.target.value || null })}
+                    style={{
+                      background: "rgba(0,0,0,0.2)",
+                      border: "1px solid var(--border)",
+                      borderRadius: "var(--radius-sm)",
+                      color: "var(--text)",
+                      padding: "10px 12px",
+                      width: "100%",
+                    }}
                   >
                     <option value="">— None —</option>
                     {chapters.map((c) => (
@@ -567,8 +575,16 @@ export default function AdminRavensEyePage() {
                       <div>
                         <div style={labelStyle}>Era</div>
                         <select
-                          value={entry.worldDate.era}
-                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, era: e.target.value } })}
+                          value={entry.chapterId ?? ""}
+                          onChange={(e) => patch({ chapterId: e.target.value || null })}
+                          style={{
+                            background: "rgba(0,0,0,0.2)",
+                            border: "1px solid var(--border)",
+                            borderRadius: "var(--radius-sm)",
+                            color: "var(--text)",
+                            padding: "10px 12px",
+                            width: "100%",
+                          }}
                         >
                           <option value="AC">AC</option>
                           <option value="BC">BC</option>

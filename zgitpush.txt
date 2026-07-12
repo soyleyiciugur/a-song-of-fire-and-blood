@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\zgitpush.txt
 git add .
 
-git commit -m "Added all Admin Panel sections. Added The Raven's Eye. " 
+git commit -m "Hotfix." 
 
 git push
 
