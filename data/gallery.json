@@ -19,7 +19,8 @@
       "year": 99,
       "era": "AC"
     },
-    "uploadedAt": "2026-07-12"
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
   },
   {
     "id": "gallery-mri1czah",
@@ -39,7 +40,8 @@
       "year": 99,
       "era": "AC"
     },
-    "uploadedAt": "2026-07-12"
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
   },
   {
     "id": "gallery-001",
@@ -64,6 +66,7 @@
       "year": 99,
       "era": "AC"
     },
-    "uploadedAt": "2026-07-12"
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
   }
 ]

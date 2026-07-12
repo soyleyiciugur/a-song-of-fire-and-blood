@@ -8,6 +8,10 @@
     "title": "Lady Alysanne Hightower of Oldtown",
     "status": "Dead",
     "age": 17,
+    "nameday": {
+      "day": 24,
+      "moon": 1
+    },
     "height": "164 cm",
     "father": "derrin-hightower",
     "mother": "-",
@@ -33,12 +37,7 @@
       "melessa-hightower": "Her younger sister, who was pinned to the Great Hall floor beside her when the massacre began — and, unlike Alysanne, survived it."
     },
     "summary": "Alysanne Hightower appeared only briefly, a silhouette in a high window watching Prince Gaelor's vanguard arrive at her family's gates. She and her sister were pinned to the floor as the Great Hall dissolved into violence, and in the blind panic that followed, a soldier's blade found her. Her death, unintended and unremarked upon by the men who caused it, is one of Oldtown's quietest tragedies.",
-    "quotes": [],
-    "nameday": {
-      "day": 24,
-      "moon": 1,
-      "year": 82
-    }
+    "quotes": []
   },
   {
     "id": "baelenys-targaryen",
@@ -51,6 +50,10 @@
     "title": "King of the Seven Kingdoms",
     "status": "Alive",
     "age": 58,
+    "nameday": {
+      "day": 8,
+      "moon": 11
+    },
     "height": "185 cm",
     "father": "Aenys Targaryen II",
     "mother": "Vhaemys Targaryen",
@@ -101,12 +104,7 @@
       "steffon-baratheon": "Holds House Baratheon in high esteem for past military service, entirely unaware of the young lord's insolence before the Hand's throne."
     },
     "summary": "King Baelenys has ruled the realm through fear, strength, and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence with his own exiled brother Vahaemon shattered his already fragile trust in his children, especially Visenor, whom he struck down before the entire court and gave an impossible choice: kill his wife, or lose everything. Having named Jacaelon his new Hand after Derrin Hightower's treason and secret execution, Baelenys now moves toward war with House Tyrell and Hightower with the same merciless certainty that has defined his reign.",
-    "quotes": [],
-    "nameday": {
-      "day": 8,
-      "moon": 11,
-      "year": 40
-    }
+    "quotes": []
   },
   {
     "id": "baelor-targaryen",
@@ -117,6 +115,10 @@
     "title": "Grand Maester",
     "status": "Alive",
     "age": 67,
+    "nameday": {
+      "day": 5,
+      "moon": 4
+    },
     "height": "174 cm",
     "father": "-",
     "mother": "-",
@@ -143,12 +145,7 @@
       "cordin-poole": "Displaced him as Grand Maester, though the two continue to work together on the council's finances."
     },
     "summary": "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid rumors of Tyrell and Hightower treason, Baelor arrives too late to stop Gaelor's bloody campaign in the Reach and rides for the Red Keep in open alarm. The King names him Grand Maester in Cordin's place, and Baelor wastes no time clashing with his great-nephew over the massacre's aftermath.",
-    "quotes": [],
-    "nameday": {
-      "day": 5,
-      "moon": 4,
-      "year": 32
-    }
+    "quotes": []
   },
   {
     "id": "brandon-stark",
@@ -159,6 +156,10 @@
     "title": "Late Lord of Winterfell and Warden of the North",
     "status": "Dead",
     "age": 41,
+    "nameday": {
+      "day": 4,
+      "moon": 12
+    },
     "height": "180 cm",
     "father": "-",
     "mother": "-",
@@ -180,12 +181,7 @@
       "baelenys-targaryen": "Their houses shared an old, uneasy loyalty; his own father bled for the Iron Throne beside Baelenys' uncle."
     },
     "summary": "Lord Brandon Stark died quietly in his own bed while the royal court feasted at Driftmark, a small, undramatic death that nonetheless drew King's Landing's attention back to the North for the first time in years. His passing brought Princess Saera to Winterfell to pay the Crown's respects, and with her, the first real contact between Stark and Targaryen in a generation.",
-    "quotes": [],
-    "nameday": {
-      "day": 4,
-      "moon": 12,
-      "year": 57
-    }
+    "quotes": []
   },
   {
     "id": "cordin-poole",
@@ -196,6 +192,10 @@
     "title": "Maester",
     "status": "Alive",
     "age": 68,
+    "nameday": {
+      "day": 24,
+      "moon": 11
+    },
     "height": "168 cm",
     "father": "-",
     "mother": "-",
@@ -222,12 +222,7 @@
       "baelor-targaryen": "Displaced by his return; the two now work together on the council's finances despite the demotion."
     },
     "summary": "Maester Cordin Poole has served House Targaryen faithfully for decades, and it shows in every carefully hedged word he offers the small council. He rarely disagrees with the King and even more rarely survives an exchange with Jacaelon's tongue unscathed. Since the Oldtown Massacre, King Baelenys has replaced him as Grand Maester with the newly returned Baelor Targaryen, though Cordin remains on the small council. Yet beneath the sycophancy occasionally surfaces an uncomfortable truth, as when he coldly reminded the council that sons sometimes pay for their fathers' ambitions.",
-    "quotes": [],
-    "nameday": {
-      "day": 24,
-      "moon": 11,
-      "year": 30
-    }
+    "quotes": []
   },
   {
     "id": "curtass-whent",
@@ -238,6 +233,10 @@
     "title": "Former Sworn Brother of the Kingsguard",
     "status": "Dead",
     "age": 30,
+    "nameday": {
+      "day": 3,
+      "moon": 9
+    },
     "height": "201 cm",
     "father": "-",
     "mother": "-",
@@ -260,12 +259,7 @@
       "ser-alester-dayne": "Ambushed him and Visenor's party in the Dornish woods, leading a hunting party of sellswords against him in a brutal duel that nearly killed them both."
     },
     "summary": "Once a Kingsguard whose exploits were sung about before most knights would dare dream of it, Curtass Whent left the order under circumstances the realm no longer discusses openly. King Baelenys called him back for one purpose: find Visenor. He very nearly succeeded, cornering Ser Alester Dayne with five sellswords in the woods south of King's Landing. The fight cost him his life at the hooves of his own target's horse. His body was found alongside those of his five sellswords near a rural sept, and word of his death has since reached the King, who received the news with cold indifference.",
-    "quotes": [],
-    "nameday": {
-      "day": 3,
-      "moon": 9,
-      "year": 68
-    }
+    "quotes": []
   },
   {
     "id": "darren-dayne",
@@ -276,6 +270,10 @@
     "title": "Lord of Torrentine",
     "status": "Alive",
     "age": 38,
+    "nameday": {
+      "day": 14,
+      "moon": 10
+    },
     "height": "185 cm",
     "father": "-",
     "mother": "-",
@@ -301,12 +299,7 @@
       "lorenah-dayne": "His daughter, whom he has tried, and largely failed, to keep sheltered from the intrigues of the crown."
     },
     "summary": "The quiet Lord of Torrentine, Darren Dayne has stayed carefully out of King's Landing's politics for most of his life, content to let his daughter Lorenah manage House Dayne's more delicate affairs. Neither he nor his seat ever expected to become entangled in sheltering a fugitive Crown Prince, but that is precisely what his family's choices have made of them.",
-    "quotes": [],
-    "nameday": {
-      "day": 14,
-      "moon": 10,
-      "year": 60
-    }
+    "quotes": []
   },
   {
     "id": "derrin-hightower",
@@ -317,6 +310,10 @@
     "title": "Former Hand of the King",
     "status": "Dead",
     "age": 68,
+    "nameday": {
+      "day": 1,
+      "moon": 1
+    },
     "height": "170 cm",
     "father": "-",
     "mother": "-",
@@ -348,12 +345,7 @@
       "melessa-hightower": "His surviving daughter, whose life was spared only by chance in the Oldtown massacre."
     },
     "summary": "For decades Derrin Hightower served as Baelenys' Hand and closest political adviser. After the poisoning attempt, he became the center of suspicion when the dying assassin allegedly whispered only two words: 'the Hand.' Confronted alone by Jacaelon at Driftmark, Derrin confessed everything: he had conspired with the Lord of Highgarden to poison the King, believing the realm could no longer survive Baelenys' wars and taxes, and that he acted for House Targaryen's future rather than against it. Jace executed him on the spot and disposed of his body at sea. To the realm, Derrin Hightower remains simply missing — his true fate known only to the King and his new Hand.",
-    "quotes": [],
-    "nameday": {
-      "day": 1,
-      "moon": 1,
-      "year": 31
-    }
+    "quotes": []
   },
   {
     "id": "gaelor-targaryen",
@@ -366,6 +358,10 @@
     "title": "Prince Gaelor of House Targaryen",
     "status": "Alive",
     "age": 18,
+    "nameday": {
+      "day": 7,
+      "moon": 2
+    },
     "height": "188 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
@@ -405,12 +401,7 @@
       "saera-targaryen": "Rarely in open conflict, but her disgust after the Oldtown Massacre was plain; she called him a deranged psychopath before the King."
     },
     "summary": "A natural warrior rather than a statesman, Gaelor's courage often outruns his judgment. His brutal investigation into the poisoning uncovered the dying accusation against the Hand, yet he concealed that revelation even from his siblings. After King Baelenys stripped Blackfyre from Visenor and bestowed it upon him, Gaelor married Naella Velaryon at Driftmark and was named heir should his brother not return. Sent to Oldtown to demand Hightower blood for Derrin's treason, he beheaded young Lord Timos Hightower when the boy panicked, triggering a massacre that slaughtered every Hightower knight present and killed two innocent Hightower sisters in the chaos. He returned home covered in the blood of the Reach, already eyeing the Stepstones as his next campaign.",
-    "quotes": [],
-    "nameday": {
-      "day": 7,
-      "moon": 2,
-      "year": 81
-    }
+    "quotes": []
   },
   {
     "id": "jacaelon-targaryen",
@@ -423,6 +414,10 @@
     "title": "Prince Jacaelon of House Targaryen and Hand of the King",
     "status": "Alive",
     "age": 17,
+    "nameday": {
+      "day": 4,
+      "moon": 11
+    },
     "height": "175 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
@@ -469,12 +464,7 @@
       "steffon-baratheon": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown; the insult still burns on both sides."
     },
     "summary": "Prince Jacaelon has become one of the kingdom's sharpest political minds despite his young age. During the poisoning crisis he uncovered Rhaella's secret correspondence, orchestrated investigations against the Hand, protected Visenor despite publicly humiliating him, and secretly arranged his escape to Dorne through Ser Alester Dayne. He confirmed Derrin Hightower's treason with forged evidence and a confession extracted in a locked room at Driftmark — then executed the old Hand himself and hid the body at sea. Rewarded with the Hand's pin by his own mother, Jace now rules much of the realm's day-to-day business at his father's side, using fear, patience, and a growing spy network led by the pardoned whisperer Weylar Rocke to hold House Targaryen together while paranoia over what he has become quietly consumes him.",
-    "quotes": [],
-    "nameday": {
-      "day": 4,
-      "moon": 11,
-      "year": 81
-    }
+    "quotes": []
   },
   {
     "id": "jaery-targaryen",
@@ -485,6 +475,10 @@
     "title": "Queen of the Seven Kingdoms",
     "status": "Alive",
     "age": 48,
+    "nameday": {
+      "day": 17,
+      "moon": 4
+    },
     "height": "166 cm",
     "father": "-",
     "mother": "-",
@@ -523,12 +517,7 @@
       "baelor-targaryen": "Leaned on him during the worst of the family's fracturing; Baelor urged her gently to return to the King's side, and she listened."
     },
     "summary": "Queen Jaery rarely speaks during court, yet her presence is often the last barrier between Baelenys and complete fury. She quietly attempts to preserve what remains of the royal family's unity, steering her children's marriages and futures from behind the scenes even as the realm threatens to come apart around her. It was Jaery, not the King, who publicly recognized Jacaelon's new role as Hand — and who insisted the smallfolk, not the treasury, would not pay for Gaelor's wedding.",
-    "quotes": [],
-    "nameday": {
-      "day": 17,
-      "moon": 4,
-      "year": 51
-    }
+    "quotes": []
   },
   {
     "id": "lorenah-dayne",
@@ -539,6 +528,10 @@
     "title": "Lady Lorenah Dayne of Torrentine, currently a guest at King's Landing",
     "status": "Alive",
     "age": 16,
+    "nameday": {
+      "day": 1,
+      "moon": 10
+    },
     "height": "170 cm",
     "father": "darren-dayne",
     "mother": "-",
@@ -565,12 +558,7 @@
       "rhaella-targaryen": "Provided her sanctuary at Starfall and dispatched a maid and a maester to attend her at the scholars' retreat, asking nothing in return."
     },
     "summary": "Young daughter of House Dayne, Lorenah met Prince Jacaelon during his journey through Dorne shortly before the poisoning crisis in King's Landing. That connection became far more consequential than either of them expected when her distant cousin, Ser Alester Dayne, arrived at Starfall half-dead and escorting the fugitive Crown Prince and Princess Rhaella. Lorenah took them in without hesitation, fully aware that neither Sunspear nor the Iron Throne would forgive House Dayne easily if the truth ever surfaced. She has since traveled to King's Landing at the head of a diplomatic envoy, bringing a battered Ser Alester home and spending an evening in disguise with Jace through the streets of Flea Bottom.",
-    "quotes": [],
-    "nameday": {
-      "day": 1,
-      "moon": 10,
-      "year": 82
-    }
+    "quotes": []
   },
   {
     "id": "maela-targaryen",
@@ -581,6 +569,10 @@
     "title": "Princess",
     "status": "Alive",
     "age": 17,
+    "nameday": {
+      "day": 4,
+      "moon": 11
+    },
     "height": "165 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
@@ -615,12 +607,7 @@
       "jaery-targaryen": "Her mother actively arranged marriage prospects for her and ultimately sent her to Storm's End to meet the Young Stag, viewing the visit as both a diplomatic errand and a way to draw her out of the capital."
     },
     "summary": "Born only two minutes before Jace, Maela shares an unusually close bond with her twin. Clever, charismatic, and naturally manipulative, she was gifted Jadefyre, the sole surviving hatchling from Visenor's ill-fated clutch, after the other two died of grotesque birth defects. Pressured by her mother to consider suitors like the aging Lord Arryn and the earnest Steffon Baratheon, Maela used a visit to Storm's End to entertain the Young Stag while quietly seducing her own Kingsguard, Ser Brannyn Vance — then drank moon tea in secret to ensure the night left no trace behind it.",
-    "quotes": [],
-    "nameday": {
-      "day": 4,
-      "moon": 11,
-      "year": 81
-    }
+    "quotes": []
   },
   {
     "id": "malaenar-targaryen",
@@ -631,6 +618,10 @@
     "title": "Lord of Dragonstone",
     "status": "Alive",
     "age": 60,
+    "nameday": {
+      "day": 7,
+      "moon": 9
+    },
     "height": "177 cm",
     "father": "Aenys Targaryen II",
     "mother": "Vhaemys Targaryen",
@@ -658,12 +649,7 @@
       "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name."
     },
     "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar chose loyalty over ambition long ago and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor', Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust.",
-    "quotes": [],
-    "nameday": {
-      "day": 7,
-      "moon": 9,
-      "year": 38
-    }
+    "quotes": []
   },
   {
     "id": "naella-velaryon",
@@ -674,6 +660,10 @@
     "title": "Lady Naella Velaryon of Driftmark",
     "status": "Alive",
     "age": 15,
+    "nameday": {
+      "day": 21,
+      "moon": 12
+    },
     "height": "162 cm",
     "father": "-",
     "mother": "-",
@@ -696,12 +686,7 @@
       "baelenys-targaryen": "Told the King herself that she was with child; he received the news with an awkward but sincere paternal warmth — a pat on the cheek and two words of approval."
     },
     "summary": "Daughter of House Velaryon, Naella married Prince Gaelor in a lavish ceremony at Driftmark's High Tide, an alliance sealed in celebration even as the realm quietly held its breath over a missing Crown Prince. Warm where Gaelor is guarded, she was quick to see through his nerves on their wedding day and quicker still to earn his honest affection.",
-    "quotes": [],
-    "nameday": {
-      "day": 21,
-      "moon": 12,
-      "year": 83
-    }
+    "quotes": []
   },
   {
     "id": "rhaella-targaryen",
@@ -712,6 +697,10 @@
     "title": "Princess Rhaella of House Targaryen",
     "status": "Alive",
     "age": 16,
+    "nameday": {
+      "day": 18,
+      "moon": 12
+    },
     "height": "-",
     "father": "vahaemon-targaryen",
     "mother": "Naela Velaryon",
@@ -743,12 +732,7 @@
       "edmyn-uller": "The Dornish maester assigned to attend her at the scholars' retreat; she discovered her pregnancy under his care."
     },
     "summary": "Daughter of the king's own exiled brother, Vahaemon Targaryen, and wife of Crown Prince Visenor, Rhaella secretly wrote to warn her siblings beyond the realm's borders, a letter that triggered the greatest internal crisis within House Targaryen in a generation. Forced into the center of the poisoning investigation, she fled King's Landing with Visenor under Jace's protection, surviving bandits and a hired hunter before finding uneasy sanctuary at Starfall — all the while unsure whether her own blood makes her a traitor or simply a frightened daughter.",
-    "quotes": [],
-    "nameday": {
-      "day": 18,
-      "moon": 12,
-      "year": 82
-    }
+    "quotes": []
   },
   {
     "id": "rickard-stark",
@@ -759,6 +743,10 @@
     "title": "Lord of Winterfell and Warden of the North",
     "status": "Alive",
     "age": 23,
+    "nameday": {
+      "day": 8,
+      "moon": 7
+    },
     "height": "183 cm",
     "father": "brandon-stark",
     "mother": "-",
@@ -783,12 +771,7 @@
       "brandon-stark": "His late father, whose death brought the North and the Iron Throne back into contact after years of quiet distance."
     },
     "summary": "Newly burdened with Winterfell upon his father's death, Rickard Stark received Princess Saera's visit of condolence with the plain, unadorned courtesy the North is known for. What began as diplomacy became something warmer by the time he showed her the Wall, though neither of them dared name it. Rickard hopes the visit marks the beginning of a steadier peace between his house and the dragons who once fought beside his grandfather.",
-    "quotes": [],
-    "nameday": {
-      "day": 8,
-      "moon": 7,
-      "year": 76
-    }
+    "quotes": []
   },
   {
     "id": "saera-targaryen",
@@ -799,6 +782,10 @@
     "title": "Princess Saera of House Targaryen",
     "status": "Alive",
     "age": 20,
+    "nameday": {
+      "day": 19,
+      "moon": 8
+    },
     "height": "169 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
@@ -833,12 +820,7 @@
       "ser-alester-dayne": "Waited for him to come to her rather than going to him after his battered return to court; allowed herself a late-night walk with him, quietly resuming an old habit neither had named."
     },
     "summary": "Known throughout the realm as 'Cloud Eyes', Saera's mysterious gaze has only grown cloudier over time. Quiet yet perceptive, she commands unusual affection from dragons and smallfolk alike, and commands one of the realm's most valuable intelligence networks besides. Sent to Winterfell to honor Lord Brandon Stark's death, she lingered a full week longer than expected, drawn to the new Lord Rickard Stark and to a North quieter and more honest than anything she has known in King's Landing.",
-    "quotes": [],
-    "nameday": {
-      "day": 19,
-      "moon": 8,
-      "year": 78
-    }
+    "quotes": []
   },
   {
     "id": "ser-alester-dayne",
@@ -849,6 +831,10 @@
     "title": "Sworn Brother of the Kingsguard",
     "status": "Alive",
     "age": 18,
+    "nameday": {
+      "day": 26,
+      "moon": 3
+    },
     "height": "196 cm",
     "father": "-",
     "mother": "A Karstark of the North",
@@ -882,12 +868,7 @@
       "ser-orwell-morrigen": "His Lord Commander, whose patience with Alester's unauthorized absence from court has worn noticeably thin — and who has not yet decided what to do about it."
     },
     "summary": "Ser Alester Dayne is Prince Jacaelon's closest friend and sworn protector. Silent, observant, and highly capable in combat, he acted as the physical execution arm of Jace's plans throughout the poisoning crisis: uncovering Rhaella's secret correspondence, defying the Hand during the dungeon confrontation, and ultimately smuggling Visenor and Rhaella out of King's Landing toward Dorne. The journey nearly killed him. Ambushed in the woods by Curtass Whent and five hired sellswords, Alester fought through brutal, sustained violence — losing an eye's worth of vision, half his ribs, and nearly his life — before killing Whent in a final, desperate act. He now recovers at Starfall under his distant cousin Lorenah's protection, a Kingsguard whose unauthorized absence from the capital has not gone unnoticed by his own Lord Commander.",
-    "quotes": [],
-    "nameday": {
-      "day": 26,
-      "moon": 3,
-      "year": 81
-    }
+    "quotes": []
   },
   {
     "id": "ser-brannyn-vance",
@@ -898,6 +879,10 @@
     "title": "Sworn Brother of the Kingsguard",
     "status": "Alive",
     "age": 25,
+    "nameday": {
+      "day": 25,
+      "moon": 1
+    },
     "height": "188 cm",
     "father": "-",
     "mother": "-",
@@ -921,12 +906,7 @@
       "maela-targaryen": "Sworn to protect her with his life; broke his sacred vows for her in a single night he cannot forgive himself for."
     },
     "summary": "Ser Brannyn Vance has served as Princess Maela's sworn shield long enough to become someone she trusts with more than her safety. That trust turned into something far more dangerous the night she asked for his honest opinion of her suitors and then kissed him. Wracked with guilt over his broken vows, Vance now carries a secret that threatens both his honor and his life, kept quiet only by the Princess's word.",
-    "quotes": [],
-    "nameday": {
-      "day": 25,
-      "moon": 1,
-      "year": 74
-    }
+    "quotes": []
   },
   {
     "id": "ser-brant-costayne",
@@ -937,6 +917,10 @@
     "title": "Knight of the Reach",
     "status": "Dead",
     "age": 35,
+    "nameday": {
+      "day": 23,
+      "moon": 3
+    },
     "height": "192 cm",
     "father": "-",
     "mother": "-",
@@ -958,12 +942,7 @@
       "timos-hightower": "Swore to defend him under oath and screamed for his revenge the moment the boy was killed, triggering the massacre in which he himself died."
     },
     "summary": "A hard-edged knight of the Reach who appears in the record only in the worst moments, Brant Costayne is remembered chiefly for the violence he was willing to back with steel.",
-    "quotes": [],
-    "nameday": {
-      "day": 23,
-      "moon": 3,
-      "year": 64
-    }
+    "quotes": []
   },
   {
     "id": "ser-orwell-morrigen",
@@ -974,6 +953,10 @@
     "title": "Lord Commander of the Kingsguard",
     "status": "Alive",
     "age": 54,
+    "nameday": {
+      "day": 11,
+      "moon": 7
+    },
     "height": "185 cm",
     "father": "-",
     "mother": "-",
@@ -998,12 +981,7 @@
       "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence and openly assessed him ready for knighthood; Jace chose Alester's hand over Morrigen's for the ceremony itself."
     },
     "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told.",
-    "quotes": [],
-    "nameday": {
-      "day": 11,
-      "moon": 7,
-      "year": 44
-    }
+    "quotes": []
   },
   {
     "id": "ser-saathos-maris",
@@ -1014,6 +992,10 @@
     "title": "Knight",
     "status": "Alive",
     "age": 25,
+    "nameday": {
+      "day": 5,
+      "moon": 5
+    },
     "height": "-",
     "father": "-",
     "mother": "-",
@@ -1039,12 +1021,7 @@
       "baelor-targaryen": "Chosen by Baelor to ride south and investigate the deaths of Ser Curtass Whent and his men."
     },
     "summary": "Ser Saathos Maris is the sworn knight of Prince Gaelor Targaryen. Disciplined, dependable, and unwavering in duty, he represents the military backbone of Gaelor's authority. During the poisoning crisis, he assisted in tracking the assassin and later defied political pressure by refusing the Hand entry into the dungeon. He rode at Gaelor's side through the bloody march on Oldtown and the massacre that followed, and remains the one voice blunt enough to tell the prince exactly what he doesn't want to hear.",
-    "quotes": [],
-    "nameday": {
-      "day": 5,
-      "moon": 5,
-      "year": 74
-    }
+    "quotes": []
   },
   {
     "id": "steffon-baratheon",
@@ -1055,6 +1032,10 @@
     "title": "Lord of Storm's End",
     "status": "Alive",
     "age": 17,
+    "nameday": {
+      "day": 25,
+      "moon": 4
+    },
     "height": "187 cm",
     "father": "-",
     "mother": "-",
@@ -1081,12 +1062,7 @@
       "ser-alester-dayne": "Sought him out before leaving the Red Keep, hoping to wash away his humiliation before the Hand in a duel — only to be told the knight was absent from court."
     },
     "summary": "Already famous in tourneys and duels despite his youth, Steffon Baratheon marched into the Red Keep demanding the Crown repay House Baratheon's old debts in blood and coin, only to be cut down in front of the court by Hand Jacaelon Targaryen. Weeks later he hosted Princess Maela at Storm's End, showing an earnest, almost childlike chivalry that charmed her without ever earning her heart. He remains oblivious to both humiliations.",
-    "quotes": [],
-    "nameday": {
-      "day": 25,
-      "moon": 4,
-      "year": 82
-    }
+    "quotes": []
   },
   {
     "id": "timos-hightower",
@@ -1097,6 +1073,10 @@
     "title": "Lord of Oldtown",
     "status": "Dead",
     "age": 15,
+    "nameday": {
+      "day": 4,
+      "moon": 6
+    },
     "height": "169 cm",
     "father": "derrin-hightower",
     "mother": "-",
@@ -1127,12 +1107,7 @@
       "ser-brant-costayne": "The knight who stood in oath to defend him, called for his revenge the moment he was killed, and died in the chaos that followed."
     },
     "summary": "Thrust into Oldtown's lordship the moment his father vanished under suspicion, fifteen-year-old Timos Hightower tried desperately to comply with the Crown's demands. It was not enough. When Prince Gaelor arrived to claim his life as payment for a treason he had no part in, panic drove the boy to draw steel. He never had a chance to use it. His death, and the massacre it triggered, will be remembered in the Reach for a hundred years.",
-    "quotes": [],
-    "nameday": {
-      "day": 4,
-      "moon": 6,
-      "year": 84
-    }
+    "quotes": []
   },
   {
     "id": "tion-lannister",
@@ -1143,6 +1118,10 @@
     "title": "Master of Coin",
     "status": "Alive",
     "age": 50,
+    "nameday": {
+      "day": 13,
+      "moon": 2
+    },
     "height": "178 cm",
     "father": "Tygett Lannister",
     "mother": "Ella Lannister",
@@ -1168,12 +1147,7 @@
       "baelenys-targaryen": "Regularly rebuked for prioritizing the treasury over the King's pride."
     },
     "summary": "As Master of Coin, Tion Lannister spends most small council meetings being outvoted by princes eager for war and glory. He argued against pouring Highgarden's reparations straight into a campaign for the Stepstones, pointing out — correctly, and to no effect — that a war with no clear end is not an investment. His counsel is sound and almost never followed, which suits the realm's finances poorly and its wars well.",
-    "quotes": [],
-    "nameday": {
-      "day": 13,
-      "moon": 2,
-      "year": 49
-    }
+    "quotes": []
   },
   {
     "id": "vahaemon-targaryen",
@@ -1184,6 +1158,10 @@
     "title": "Traitor",
     "status": "Unknown",
     "age": 55,
+    "nameday": {
+      "day": 12,
+      "moon": 2
+    },
     "height": "180 cm",
     "father": "Aenys Targaryen II",
     "mother": "Vhaemys Targaryen",
@@ -1214,12 +1192,7 @@
       "rhaella-targaryen": "His daughter. Her secret letters to her siblings beyond the realm's borders reignited the very suspicion that nearly destroyed her marriage, though the warning was never addressed to him."
     },
     "summary": "Exiled from Westeros years before the events of the poisoning, Vahaemon Targaryen lives on beyond the Seven Kingdoms' reach, cut off from the family that once called him brother. His sons, Rhaella's brothers, remain in exile alongside him; it was to them, not to Vahaemon himself, that Rhaella secretly wrote her warning, a letter that became the spark that nearly unraveled House Targaryen from within — proof, as far as King Baelenys is concerned, that his mistrust of his own blood was never unfounded.",
-    "quotes": [],
-    "nameday": {
-      "day": 12,
-      "moon": 2,
-      "year": 44
-    }
+    "quotes": []
   },
   {
     "id": "vhaemys-targaryen",
@@ -1230,6 +1203,10 @@
     "title": "Princess Vhaemys of House Targaryen",
     "status": "Alive",
     "age": 7,
+    "nameday": {
+      "day": 20,
+      "moon": 4
+    },
     "height": "-",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
@@ -1262,12 +1239,7 @@
       "saera-targaryen": "Her older sister, toward whom she gravitates when the castle turns frightening and Jace or Alester are unavailable."
     },
     "summary": "The youngest child of King Baelenys Targaryen. Sheltered from court politics, Vhaemys still believes her father can never be defeated. During the disastrous royal dinner she witnessed the family fracture for the first time, clinging tightly to Jace in fear, and she has spent the weeks since asking everyone who will listen when Ser Alester Dayne, her favorite storyteller, is finally coming home.",
-    "quotes": [],
-    "nameday": {
-      "day": 20,
-      "moon": 4,
-      "year": 92
-    }
+    "quotes": []
   },
   {
     "id": "visenor-targaryen",
@@ -1282,6 +1254,10 @@
       "note": "Hiding at Starfall with Rhaella under Lorenah Dayne's protection. The wider realm still believes he has simply vanished."
     },
     "age": 24,
+    "nameday": {
+      "day": 26,
+      "moon": 5
+    },
     "height": "180 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
@@ -1324,12 +1300,7 @@
       "edmyn-uller": "The blunt Dornish maester at the scholars' retreat who tended to him, briefed him on events in the realm with startling frankness, and whose unfiltered honesty he found unexpectedly refreshing."
     },
     "summary": "Raised from childhood to inherit the Iron Throne, Visenor devoted his life to scholarship rather than warfare. The poisoning crisis destroyed his faith that diplomacy could solve almost anything. Forced to choose between his father's trust and his wife's life, he lost both: Baelenys stripped him of Blackfyre before the court and struck him bloody, then demanded he murder Rhaella to regain his place as heir. Visenor chose exile instead, fleeing King's Landing under Jace's protection with Rhaella and Ser Alester Dayne, surviving outlaws, a hired hunter, and a sept full of silent sisters before finding refuge at Starfall through Lady Lorenah Dayne. His three dragon hatchlings, meanwhile, never left the Red Keep: two died of grotesque birth defects, and the sole survivor, whom he had already named Jadefyre, was gifted by royal decree to his sister Maela, leaving him — for now — without a dragon of his own.",
-    "quotes": [],
-    "nameday": {
-      "day": 26,
-      "moon": 5,
-      "year": 75
-    }
+    "quotes": []
   },
   {
     "id": "weylar-rocke",
@@ -1340,6 +1311,10 @@
     "title": "Master of Whisperers to the Hand of the King",
     "status": "Alive",
     "age": 35,
+    "nameday": {
+      "day": 24,
+      "moon": 1
+    },
     "height": "170",
     "father": "-",
     "mother": "-",
@@ -1364,12 +1339,7 @@
       "jacaelon-targaryen": "The Prince who spared him when his early web of whispers proved dangerously hollow. Weylar recently secured his precarious station by dragging a ruinous secret concerning the Prince's bitterest rival out from the shadows."
     },
     "summary": "Jace's personal spymaster, and proof that terror makes for sturdier loyalty than trust ever could. Weylar once fed the Prince a report that turned out hollow and spent time in the black cells for it; the pardon that followed bought Jace an informant who now bows low enough to scrape the floor whenever he approaches. His network of 'little birds' has already paid off twice over — first when he brought Jace word that Gaelor had been seen leaving a brothel mere nights after his wedding, and again when his sources reached the Red Keep with news of the Oldtown Massacre, including the deaths of Timos and Alysanne Hightower, before the official reports arrived. Jace has since put him to quieter use as well, tasking him with finding a tutor equipped to handle young Vhaemys.",
-    "quotes": [],
-    "nameday": {
-      "day": 24,
-      "moon": 1,
-      "year": 64
-    }
+    "quotes": []
   },
   {
     "id": "edmyn-uller",
@@ -1380,6 +1350,10 @@
     "title": "Maester",
     "status": "Alive",
     "age": 60,
+    "nameday": {
+      "day": 18,
+      "moon": 8
+    },
     "height": "",
     "father": "-",
     "mother": "-",
@@ -1395,12 +1369,7 @@
       "rhaella-targaryen": "Attended the Princess at the scholars' retreat; was present when her pregnancy was discovered."
     },
     "summary": "Dornish Maester.",
-    "quotes": [],
-    "nameday": {
-      "day": 18,
-      "moon": 8,
-      "year": 38
-    }
+    "quotes": []
   },
   {
     "id": "melessa-hightower",
@@ -1411,6 +1380,10 @@
     "title": "-",
     "status": "Alive",
     "age": 13,
+    "nameday": {
+      "day": 30,
+      "moon": 2
+    },
     "height": "-",
     "father": "derrin-hightower",
     "mother": "-",
@@ -1435,11 +1408,6 @@
       "derrin-hightower": "Her father, whose treason condemned the entire family long before she ever understood what was happening."
     },
     "summary": "The second of the two Hightower sisters glimpsed watching from a high window as Prince Gaelor's vanguard arrived at Oldtown's gates. Never named in any account of that day, she was tackled to the floor of the Great Hall alongside Alysanne when the massacre began — and, unlike her sister, lived through it. What became of her afterward is not recorded.",
-    "quotes": [],
-    "nameday": {
-      "day": 30,
-      "moon": 2,
-      "year": 86
-    }
+    "quotes": []
   }
 ]
