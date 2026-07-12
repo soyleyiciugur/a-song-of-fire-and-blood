@@ -17,6 +17,9 @@ export const GalleryEntrySchema = z.object({
   chapterId: z.string().nullable().default(null),
   worldDate: WorldDateSchema.nullable().default(null),
   uploadedAt: z.string().default(""),
+  // Was missing — zod strips unknown keys by default, so "fleabottom" tags
+  // were silently deleted on publish and everything fell back into raven.
+  category: z.enum(["raven", "fleabottom"]).default("raven"),
 });
 
 export const GalleryListSchema = z.array(GalleryEntrySchema);

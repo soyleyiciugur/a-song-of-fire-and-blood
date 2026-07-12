@@ -53,6 +53,20 @@ const labelStyle: React.CSSProperties = {
   letterSpacing: "1px", marginBottom: "8px", display: "block", fontWeight: 600,
 };
 
+// Native <select> elements don't pick up the app's input/textarea styling
+// automatically — this matches them to the rest of the form (used for the
+// Chapter and Era dropdowns).
+const selectStyle: React.CSSProperties = {
+  background: "rgba(0,0,0,0.2)",
+  border: "1px solid var(--border)",
+  borderRadius: "var(--radius-sm)",
+  color: "var(--text)",
+  padding: "10px 12px",
+  width: "100%",
+  fontFamily: "inherit",
+  fontSize: "0.9rem",
+};
+
 // Themed checkbox to match the rest of the admin UI
 const Checkbox = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: React.ReactNode }) => (
   <div
@@ -261,6 +275,10 @@ export default function AdminRavensEyePage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [hasDateOverride, setHasDateOverride] = useState(false);
+  // Guards the initial hydration so it doesn't get treated as a user edit
+  // (see note below — without this, every fresh page load silently
+  // recreates a "draft" out of whatever data it just loaded).
+  const isInitialLoad = useRef(true);
 
   // Load from draft or source data
   useEffect(() => {
@@ -270,8 +288,18 @@ export default function AdminRavensEyePage() {
     if (loaded.length > 0) setSelectedId(loaded[0].id);
   }, []);
 
-  // Persist draft on every change
+  // Persist draft on every change — but skip the very first render's worth
+  // of "change" (the initial load above). Without this guard, loading the
+  // page with no draft present would immediately write the freshly-loaded
+  // (possibly stale, pre-deploy) data back into localStorage as a "draft".
+  // That phantom draft then diffs against a *later*, truly-updated
+  // gallery.json once the real deploy lands, making the admin bar show
+  // "Unpublished: Raven's Eye" for changes that were never actually made.
   useEffect(() => {
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false;
+      return;
+    }
     if (entries.length === 0) return;
     setDraft("gallery", entries);
   }, [entries]);
@@ -514,14 +542,7 @@ export default function AdminRavensEyePage() {
                   <select
                     value={entry.chapterId ?? ""}
                     onChange={(e) => patch({ chapterId: e.target.value || null })}
-                    style={{
-                      background: "rgba(0,0,0,0.2)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "var(--radius-sm)",
-                      color: "var(--text)",
-                      padding: "10px 12px",
-                      width: "100%",
-                    }}
+                    style={selectStyle}
                   >
                     <option value="">— None —</option>
                     {chapters.map((c) => (
@@ -553,7 +574,14 @@ export default function AdminRavensEyePage() {
                         <input
                           type="number" min={1} max={30}
                           value={entry.worldDate.day}
-                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, day: Math.min(30, Math.max(1, Number(e.target.value))) } })}
+                          onChange={(e) => {
+                            const v = e.target.value === "" ? 0 : Number(e.target.value);
+                            patch({ worldDate: { ...entry.worldDate!, day: v } });
+                          }}
+                          onBlur={(e) => {
+                            const v = Math.min(30, Math.max(1, Number(e.target.value) || 1));
+                            patch({ worldDate: { ...entry.worldDate!, day: v } });
+                          }}
                         />
                       </div>
                       <div>
@@ -561,7 +589,14 @@ export default function AdminRavensEyePage() {
                         <input
                           type="number" min={1} max={12}
                           value={entry.worldDate.moon}
-                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, moon: Math.min(12, Math.max(1, Number(e.target.value))) } })}
+                          onChange={(e) => {
+                            const v = e.target.value === "" ? 0 : Number(e.target.value);
+                            patch({ worldDate: { ...entry.worldDate!, moon: v } });
+                          }}
+                          onBlur={(e) => {
+                            const v = Math.min(12, Math.max(1, Number(e.target.value) || 1));
+                            patch({ worldDate: { ...entry.worldDate!, moon: v } });
+                          }}
                         />
                       </div>
                       <div>
@@ -569,22 +604,22 @@ export default function AdminRavensEyePage() {
                         <input
                           type="number" min={1}
                           value={entry.worldDate.year}
-                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, year: Math.max(1, Number(e.target.value)) } })}
+                          onChange={(e) => {
+                            const v = e.target.value === "" ? 0 : Number(e.target.value);
+                            patch({ worldDate: { ...entry.worldDate!, year: v } });
+                          }}
+                          onBlur={(e) => {
+                            const v = Math.max(1, Number(e.target.value) || 1);
+                            patch({ worldDate: { ...entry.worldDate!, year: v } });
+                          }}
                         />
                       </div>
                       <div>
                         <div style={labelStyle}>Era</div>
                         <select
-                          value={entry.chapterId ?? ""}
-                          onChange={(e) => patch({ chapterId: e.target.value || null })}
-                          style={{
-                            background: "rgba(0,0,0,0.2)",
-                            border: "1px solid var(--border)",
-                            borderRadius: "var(--radius-sm)",
-                            color: "var(--text)",
-                            padding: "10px 12px",
-                            width: "100%",
-                          }}
+                          value={entry.worldDate.era}
+                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, era: e.target.value } })}
+                          style={selectStyle}
                         >
                           <option value="AC">AC</option>
                           <option value="BC">BC</option>
