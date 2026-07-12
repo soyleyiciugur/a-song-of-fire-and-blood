@@ -1,13 +1,69 @@
 [
   {
-    "id": "gallery-001",
-    "src": "/images/gallery/example.jpeg",
-    "caption": "The Dragon Children",
-    "characterIds": [],
-    "houseIds": [],
+    "id": "gallery-mri1fb1a",
+    "src": "/images/gallery/boyle-baba-ve-varisin-amk.jpeg",
+    "caption": "- Jace, Kral Baelenys ve Prens Visenor hakkında.",
+    "characterIds": [
+      "baelenys-targaryen",
+      "jacaelon-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
-    "chapterId": null,
-    "worldDate": null,
+    "chapterId": "the-weight-of-loyalty",
+    "worldDate": {
+      "day": 3,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12"
+  },
+  {
+    "id": "gallery-mri1czah",
+    "src": "/images/gallery/alester-her-kadeh.jpeg",
+    "caption": "Bu mekânda içilen HER KADEH senin şerefine kalkar SER ALESTER DAYNE.",
+    "characterIds": [
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": {
+      "day": 3,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12"
+  },
+  {
+    "id": "gallery-001",
+    "src": "/images/gallery/the-dragon-children.jpeg",
+    "caption": "The Dragon Children",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 16,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-07-12"
   }
 ]
