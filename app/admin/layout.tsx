@@ -24,15 +24,13 @@ import {
 
 const ADMIN_NAV_ITEMS = [
   { label: "Chapters", href: "/admin/chapters" },
-  { label: "Characters", href: "/admin/characters" },
+  { label: "Characters", href: "/admin/characters" }, // now also holds Family Tree as a tab
   { label: "Dragons", href: "/admin/dragons" },
-  { label: "Family Tree", href: "/admin/family-tree" },
   { label: "Houses", href: "/admin/houses" },
   { label: "Map", href: "/admin/map" },
-  { label: "Raven's Eye", href: "/admin/ravens-eye" },
+  { label: "The Raven's Eye", href: "/admin/ravens-eye" },
   { label: "Timeline", href: "/admin/timeline" },
-  { label: "Scrolls", href: "/admin/scrolls" },
-  { label: "Book of Brothers", href: "/admin/book-of-brothers" },
+  { label: "Records", href: "/admin/records" }, // replaces Scrolls + Book of Brothers
   { label: "Tools", href: "/admin/tools" },
 ];
 
@@ -161,7 +159,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       if (currentStatus.bookOfBrothers && Array.isArray(pending.bookOfBrothers)) {
         const changed = diffById(bookOfBrothersData as any[], pending.bookOfBrothers as any[], (e) => e.manualName || e.characterId || e.id);
-        if (changed.length > 0) result.push({ section: "Book of Brothers", items: changed });
+        if (changed.length > 0) result.push({ section: "The Book of Brothers", items: changed });
       }
 
       if (currentStatus.dragons && Array.isArray(pending.dragons)) {
@@ -228,7 +226,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         const changed = diffById(galleryData as any[], pending.gallery as any[], (e) =>
           e.caption ? `"${(e.caption as string).slice(0, 32)}…"` : e.id
         );
-        if (changed.length > 0) result.push({ section: "Raven's Eye", items: changed });
+        if (changed.length > 0) result.push({ section: "The Raven's Eye", items: changed });
       }
 
       return result;
@@ -361,12 +359,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     status.quotes && "Quotes",
                     status.worldDate && "Calendar",
                     status.scrolls && "Scrolls",
-                    status.bookOfBrothers && "Book of Brothers",
+                    status.bookOfBrothers && "The Book of Brothers",
                     status.dragons && "Dragons",
                     status.timeline && "Timeline",
                     status.mapLocations && "Map",
                     status.characterPositions && "Character Positions",
-                    status.gallery && "Raven's Eye",
+                    status.gallery && "The Raven's Eye",
                   ]
                     .filter(Boolean)
                     .join(", ")

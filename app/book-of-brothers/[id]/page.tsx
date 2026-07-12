@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps) {
   const character = entry.characterId ? getCharacter(entry.characterId) : undefined;
   const name = character?.name ?? entry.manualName ?? "Unknown Knight";
   return {
-    title: `${name} — Book of Brothers`,
+    title: `${name} — The Book of Brothers`,
   };
 }
 

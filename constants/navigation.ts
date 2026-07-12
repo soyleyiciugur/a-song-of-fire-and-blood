@@ -38,7 +38,7 @@ export const NAV_ITEMS: NavigationEntry[] = [
     href: "/records", 
     items: [
       { label: "Scrolls", href: "/scrolls" },
-      { label: "Book of Brothers", href: "/book-of-brothers" },
+      { label: "The Book of Brothers", href: "/book-of-brothers" },
     ],
   },
 ];

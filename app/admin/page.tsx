@@ -3,14 +3,13 @@ import Link from "next/link";
 
 const SECTIONS = [
   { href: "/admin/chapters", label: "Chapters", description: "Write and edit the chronicle, chapter by chapter." },
-  { href: "/admin/characters", label: "Characters", description: "Profiles, relationships, quotes, and namedays." },
-  { href: "/admin/houses", label: "Houses", description: "Sigils, words, seats, and colors." },
+  { href: "/admin/characters", label: "Characters", description: "Profiles, relationships, quotes, namedays, and the Family Tree." },
   { href: "/admin/dragons", label: "Dragons", description: "Riders, status, and traits." },
-  { href: "/admin/family-tree", label: "Family Tree", description: "Bloodlines and unions across the realm." },
+  { href: "/admin/houses", label: "Houses", description: "Sigils, words, seats, and colors." },
   { href: "/admin/map", label: "Map", description: "Locations and coordinates on the known world." },
+  { href: "/admin/ravens-eye", label: "The Raven's Eye", description: "Watch over the realm's latest happenings." },
   { href: "/admin/timeline", label: "Timeline", description: "Dated events across every chapter." },
-  { href: "/admin/scrolls", label: "Scrolls", description: "The Citadel's archive of histories and studies." },
-  { href: "/admin/book-of-brothers", label: "Book of Brothers", description: "Every knight who has worn the white cloak." },
+  { href: "/admin/records", label: "Records", description: "Scrolls of the Citadel and The Book of Brothers." },
   { href: "/admin/tools", label: "Tools", description: "Calendar, travel calculator, and name generator." },
 ];
 

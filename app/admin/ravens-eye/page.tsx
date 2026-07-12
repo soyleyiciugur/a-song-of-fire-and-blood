@@ -469,8 +469,8 @@ export default function AdminRavensEyePage() {
                 <div style={labelStyle}>Section</div>
                 <SegmentedControl
                   options={[
-                    { id: "raven", label: "Raven's Eye" },
-                    { id: "fleabottom", label: "Flea Bottom Memes" },
+                    { id: "raven", label: "The Raven's Eye" },
+                    { id: "fleabottom", label: "Memes from the Gutters of Flea Bottom" },
                   ]}
                   value={entry.category === "fleabottom" ? "fleabottom" : "raven"}
                   onChange={(v) => patch({ category: v as GalleryEntry["category"] })}
