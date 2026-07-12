@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\types\character.ts
 export type CharacterStatus = "Alive" | "Dead" | "Unknown" | "Missing";
 
 export type CharacterId =
@@ -40,13 +41,15 @@ export interface CharacterQuote {
   chapterTitle?: string;
 }
 
-// Recurring yearly date (day + moon only) — matches CharacterSchema's
-// `nameday` in schemas/character.ts. No `year` field: a nameday isn't tied
-// to a specific year, unlike gallery.ts's WorldDate which marks a one-off
-// moment in time.
+// Full birth date (day + moon + year) — needed because computeAge() in
+// lib/age.ts derives the character's current in-world age from
+// (worldDate.year - nameday.year), adjusted for whether this year's
+// nameday has passed yet. Matches lib/age.ts's `Nameday` interface and
+// CharacterSchema's `nameday` in schemas/character.ts.
 export interface CharacterNameday {
   day: number;
   moon: number;
+  year: number;
 }
 
 export interface Character {
