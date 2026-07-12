@@ -43,7 +43,7 @@
   {
     "id": "baelenys-targaryen",
     "name": "Baelenys Targaryen",
-    "nickname": "the Cruel",
+    "nickname": "Baelenys the Cruel",
     "aliases": [
       "Baelenys the Formidable"
     ],
@@ -578,7 +578,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "Princess",
+    "title": "Princess Maela of House Targaryen",
     "status": "Alive",
     "age": 17,
     "nameday": {
@@ -1408,7 +1408,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Hightower",
-    "title": "-",
+    "title": "Lady of Oldtown",
     "status": "Alive",
     "age": 13,
     "nameday": {
