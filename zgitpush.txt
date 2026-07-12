@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\zgitpush.txt
 git add .
 
-git commit -m "Updated gallery." 
+git commit -m "Hotfix." 
 
 git push
 

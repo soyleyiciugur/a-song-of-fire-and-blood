@@ -9,12 +9,43 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://a-song-of-fire-and-blood.vercel.app";
+const siteName = "A Song of Fire and Blood";
+const siteDescription = "A living chronicle of House Targaryen.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "A Song of Fire and Blood",
+    default: siteName,
     template: "%s | A Song of Fire and Blood",
   },
-  description: "A living chronicle of House Targaryen.",
+  description: siteDescription,
+  openGraph: {
+    title: siteName,
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: siteName,
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
