@@ -8,6 +8,7 @@ import housesData from "@/data/houses.json";
 import dragonsData from "@/data/dragons.json";
 import chaptersData from "@/data/chapters/chapters.json";
 import { ConfirmModal } from "../_components/Modal";
+import { Select } from "../../_components/Select";
 import { getDraft, setDraft } from "@/lib/adminDrafts";
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -51,20 +52,6 @@ function newId() {
 const labelStyle: React.CSSProperties = {
   fontSize: "0.75rem", color: "var(--muted)", textTransform: "uppercase",
   letterSpacing: "1px", marginBottom: "8px", display: "block", fontWeight: 600,
-};
-
-// Native <select> elements don't pick up the app's input/textarea styling
-// automatically — this matches them to the rest of the form (used for the
-// Chapter and Era dropdowns).
-const selectStyle: React.CSSProperties = {
-  background: "rgba(0,0,0,0.2)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius-sm)",
-  color: "var(--text)",
-  padding: "10px 12px",
-  width: "100%",
-  fontFamily: "inherit",
-  fontSize: "0.9rem",
 };
 
 // Themed checkbox to match the rest of the admin UI
@@ -268,6 +255,17 @@ const characters = (charactersData as NamedItem[]);
 const houses = (housesData as NamedItem[]);
 const dragons = (dragonsData as NamedItem[]);
 const chapters = (chaptersData as { slug: string; title: string }[]);
+
+// Select expects { id, name } options — map chapters' { slug, title } shape,
+// with an explicit "no chapter" entry standing in for null.
+const chapterOptions = [
+  { id: "", name: "— None —" },
+  ...chapters.map((c) => ({ id: c.slug, name: c.title })),
+];
+const eraOptions = [
+  { id: "AC", name: "AC" },
+  { id: "BC", name: "BC" },
+];
 
 export default function AdminRavensEyePage() {
   const [entries, setEntries] = useState<GalleryEntry[]>([]);
@@ -539,16 +537,12 @@ export default function AdminRavensEyePage() {
                 {/* Chapter */}
                 <div>
                   <div style={labelStyle}>Chapter <span style={{ opacity: 0.5, textTransform: "none", fontWeight: "normal" }}>(optional)</span></div>
-                  <select
+                  <Select
                     value={entry.chapterId ?? ""}
-                    onChange={(e) => patch({ chapterId: e.target.value || null })}
-                    style={selectStyle}
-                  >
-                    <option value="">— None —</option>
-                    {chapters.map((c) => (
-                      <option key={c.slug} value={c.slug}>{c.title}</option>
-                    ))}
-                  </select>
+                    options={chapterOptions}
+                    onChange={(v) => patch({ chapterId: v || null })}
+                    searchable
+                  />
                 </div>
               </div>
 
@@ -566,10 +560,9 @@ export default function AdminRavensEyePage() {
                 {hasDateOverride && entry.worldDate && (
                   <>
                     <div style={{
-                      display: "grid", gridTemplateColumns: "1fr 1fr 1fr 80px",
-                      gap: "12px", marginBottom: "12px",
+                      display: "flex", gap: "12px", marginBottom: "12px",
                     }}>
-                      <div>
+                      <div style={{ flex: 1 }}>
                         <div style={labelStyle}>Day</div>
                         <input
                           type="number" min={1} max={30}
@@ -582,9 +575,10 @@ export default function AdminRavensEyePage() {
                             const v = Math.min(30, Math.max(1, Number(e.target.value) || 1));
                             patch({ worldDate: { ...entry.worldDate!, day: v } });
                           }}
+                          style={{ width: "100%", height: "46px", boxSizing: "border-box" }}
                         />
                       </div>
-                      <div>
+                      <div style={{ flex: 1 }}>
                         <div style={labelStyle}>Moon</div>
                         <input
                           type="number" min={1} max={12}
@@ -597,9 +591,10 @@ export default function AdminRavensEyePage() {
                             const v = Math.min(12, Math.max(1, Number(e.target.value) || 1));
                             patch({ worldDate: { ...entry.worldDate!, moon: v } });
                           }}
+                          style={{ width: "100%", height: "46px", boxSizing: "border-box" }}
                         />
                       </div>
-                      <div>
+                      <div style={{ flex: 1 }}>
                         <div style={labelStyle}>Year</div>
                         <input
                           type="number" min={1}
@@ -612,18 +607,22 @@ export default function AdminRavensEyePage() {
                             const v = Math.max(1, Number(e.target.value) || 1);
                             patch({ worldDate: { ...entry.worldDate!, year: v } });
                           }}
+                          style={{ width: "100%", height: "46px", boxSizing: "border-box" }}
                         />
                       </div>
-                      <div>
+                      <div className="era-select-wrap" style={{ flex: 1 }}>
                         <div style={labelStyle}>Era</div>
-                        <select
+                        <Select
                           value={entry.worldDate.era}
-                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, era: e.target.value } })}
-                          style={selectStyle}
-                        >
-                          <option value="AC">AC</option>
-                          <option value="BC">BC</option>
-                        </select>
+                          options={eraOptions}
+                          onChange={(v) => patch({ worldDate: { ...entry.worldDate!, era: v } })}
+                        />
+                        <style jsx>{`
+                          .era-select-wrap :global(.te-select-trigger) {
+                            height: 46px;
+                            box-sizing: border-box;
+                          }
+                        `}</style>
                       </div>
                     </div>
                     <div style={{ color: "var(--gold)", fontSize: "0.9rem", fontStyle: "italic" }}>
