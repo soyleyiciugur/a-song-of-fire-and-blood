@@ -1,5 +1,744 @@
 [
   {
+    "id": "gallery-mriadr0v",
+    "src": "/images/gallery/visenor-xeske-saygin-olabilsem.jpeg",
+    "caption": "çok zor amk çok zor güçlü dur lordum",
+    "characterIds": [
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mriabu5c",
+    "src": "/images/gallery/visenor-trying-to-gargle-daddy.jpeg",
+    "caption": "THINK MARK THINK",
+    "characterIds": [
+      "visenor-targaryen",
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mriaadun",
+    "src": "/images/gallery/visenor-teeth.jpeg",
+    "caption": "visenor after lying to dad for the first time",
+    "characterIds": [
+      "visenor-targaryen",
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 20,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mria6m2b",
+    "src": "/images/gallery/visenor-mjgoat.jpg",
+    "caption": "visenor mağaradayken duvara yansıyan gölge",
+    "characterIds": [
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
+    "chapterId": "the-climb-and-the-kneel",
+    "worldDate": {
+      "day": 6,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mria57fe",
+    "src": "/images/gallery/visenor-jace-oleceksin.jpeg",
+    "caption": "ragebait yiyen visenor",
+    "characterIds": [
+      "visenor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 19,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mria3lqb",
+    "src": "/images/gallery/targaryen-family-portrait1.jpeg",
+    "caption": "House of the Dragon.",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 16,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mria39tk",
+    "src": "/images/gallery/saera-double-portrait.jpeg",
+    "caption": "Princess Saera.",
+    "characterIds": [
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mria2tr6",
+    "src": "/images/gallery/saera-cool-portrait.jpeg",
+    "caption": "Cloud Eyes.",
+    "characterIds": [
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mria2bz8",
+    "src": "/images/gallery/maela-double-portrait.jpeg",
+    "caption": "Princess Maela.",
+    "characterIds": [
+      "maela-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mria1c10",
+    "src": "/images/gallery/jhagar-overlooking-kings-landing.png",
+    "caption": "Baby Jhagar overlooking King's Landing.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "jhagar"
+    ],
+    "chapterId": "the-climb-and-the-kneel",
+    "worldDate": {
+      "day": 3,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9zyf1",
+    "src": "/images/gallery/jace-yengeden-makas.jpeg",
+    "caption": "Yengeden makas alınca Jace",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 18,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri9yw60",
+    "src": "/images/gallery/jace-when-he-realized-curtahh.jpeg",
+    "caption": "smh",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "curtass-whent"
+    ],
+    "houseIds": [
+      "targaryen",
+      "whent"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-weight-of-loyalty",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri9y5u6",
+    "src": "/images/gallery/jace-visenor-getting-along.jpeg",
+    "caption": "the Manipulator & the Scholar.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9xkcb",
+    "src": "/images/gallery/jace-the-hand.jpeg",
+    "caption": "Jace the Hand.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-weight-of-loyalty",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9x0ro",
+    "src": "/images/gallery/jace-sicko-on-the-throne.jpeg",
+    "caption": "...yarın King?",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri9v7lk",
+    "src": "/images/gallery/jace-sicko.jpeg",
+    "caption": "Bugün Hand...",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri9qqj6",
+    "src": "/images/gallery/jace-saera-intimate.jpeg",
+    "caption": "Rebels.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9q1l1",
+    "src": "/images/gallery/jace-overthinking-alester-gift.jpeg",
+    "caption": "Jace missing Ser Alester.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9p5oh",
+    "src": "/images/gallery/jace-overthinking-alester.jpeg",
+    "caption": "Jace, worried about Ser Alester.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9nayi",
+    "src": "/images/gallery/jace-nightmares-alester.jpeg",
+    "caption": "Alester gidince Jace'in kâbuslar",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri9mqpp",
+    "src": "/images/gallery/jace-maela-chamber-bed.jpeg",
+    "caption": "Jace and Maela in their chambers.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "maela-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9lt6q",
+    "src": "/images/gallery/jace-lorenah-flirty.jpeg",
+    "caption": "Jace & Lorenah.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "lorenah-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-climb-and-the-kneel",
+    "worldDate": {
+      "day": 3,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9kl9h",
+    "src": "/images/gallery/jace-jhagar-grown.jpeg",
+    "caption": "Jace & Jhagar.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "jhagar"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9ivtq",
+    "src": "/images/gallery/jace-became-hand.jpeg",
+    "caption": "Jace becoming the Hand.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 1,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri9ihjh",
+    "src": "/images/gallery/jace-arm-on-face.jpeg",
+    "caption": "Jace.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9hjbo",
+    "src": "/images/gallery/jace-alester-dorne-wine.jpeg",
+    "caption": "Jace & Alester enjoying Dornish wine.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9cqw8",
+    "src": "/images/gallery/jace-alester-dorne-sunset.jpeg",
+    "caption": "Jace & Alester enjoying the Dornish meadows.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9bsbh",
+    "src": "/images/gallery/jace-alester-cool.jpeg",
+    "caption": "Prince Jacaelon Targaryen and Ser Alester Dayne ",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri9apme",
+    "src": "/images/gallery/hmd-grrm.jpeg",
+    "caption": "he's busy writing more lore",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri95xhy",
+    "src": "/images/gallery/gaelor-when-hes-not-torturing.jpeg",
+    "caption": "Gaylord fr",
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 18,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri95avc",
+    "src": "/images/gallery/gaelor-when-he-gets-to-torture.jpeg",
+    "caption": "Gaelor when he gets to torture someone",
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri900nu",
+    "src": "/images/gallery/gaelor-saathos-alehouse.jpeg",
+    "caption": "Gaelor and Ser Saathos Maris at an alehouse in King's Landing.",
+    "characterIds": [
+      "gaelor-targaryen",
+      "ser-saathos-maris"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": {
+      "day": 2,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri8yi7o",
+    "src": "/images/gallery/gaelor-naella-wedding-smiling.jpeg",
+    "caption": "Gaelor & Naella with Jace & Saera",
+    "characterIds": [
+      "naella-velaryon",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen",
+      "velaryon"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 30,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri8wt4w",
+    "src": "/images/gallery/gaelor-naella-wedding-serious.jpeg",
+    "caption": "Gaelor & Naella",
+    "characterIds": [
+      "gaelor-targaryen",
+      "naella-velaryon"
+    ],
+    "houseIds": [
+      "velaryon",
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 30,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri8tg1j",
+    "src": "/images/gallery/gaelor-naella-wedding-kiss.jpeg",
+    "caption": "Prince Gaelor Targaryen and Princess Naella Velaryon",
+    "characterIds": [
+      "gaelor-targaryen",
+      "naella-velaryon",
+      "jacaelon-targaryen",
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen",
+      "velaryon"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 30,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri8rwyg",
+    "src": "/images/gallery/boneskin-cave.png",
+    "caption": "Boneskin.",
+    "characterIds": [
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
+    "chapterId": "the-climb-and-the-kneel",
+    "worldDate": {
+      "day": 7,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri8qxl2",
+    "src": "/images/gallery/baelenys-overlooking-kings-landing.jpeg",
+    "caption": "Baelenys the Formidable",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mri8nlag",
+    "src": "/images/gallery/alester-i-fear-no-man.jpeg",
+    "caption": "Jace's enemies",
+    "characterIds": [
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mri8m3qz",
+    "src": "/images/gallery/alester-babam-yaziyor.jpeg",
+    "caption": "abart king abart hakkındır",
+    "characterIds": [
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": {
+      "day": 3,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-12",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-mri1fb1a",
     "src": "/images/gallery/jace-boyle-baba-ve-varisin-amk.jpeg",
     "caption": "- Jace, Kral Baelenys ve Prens Visenor hakkında.",
