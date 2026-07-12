@@ -77,7 +77,7 @@ const SORT_OPTIONS = [
 function tagsFor(entry: GalleryEntry) {
   return [
     ...entry.characterIds.map((id) => charMap[id] ?? id),
-    ...entry.houseIds.map((id) => `House ${houseMap[id] ?? id}`),
+    ...entry.houseIds.map((id) => `${houseMap[id] ?? id}`),
     ...entry.dragonIds.map((id) => dragonMap[id] ?? id),
   ];
 }
@@ -259,7 +259,7 @@ function GallerySection({
   const anyFilter = filterChar || filterHouse || filterDragon;
 
   const charOptions = [{ id: "", name: "All characters" }, ...characters];
-  const houseOptions = [{ id: "", name: "All houses" }, ...houses.map((h) => ({ id: h.id, name: `House ${h.name}` }))];
+  const houseOptions = [{ id: "", name: "All houses" }, ...houses.map((h) => ({ id: h.id, name: `${h.name}` }))];
   const dragonOptions = [{ id: "", name: "All dragons" }, ...dragons];
 
   return (
