@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\nameGenerator.ts
 import { getCulture, Gender } from "@/data/nameGenerator";
 
 export interface GeneratedName {

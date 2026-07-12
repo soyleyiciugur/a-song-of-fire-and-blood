@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\characters\[id]\page.tsx
 import { notFound } from "next/navigation";
 import { getCharacter, getQuotesByCharacterId } from "@/lib/characters";
 import CharacterInfoBox from "@/components/character/CharacterInfoBox";

@@ -1,0 +1,245 @@
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\bookOfBrothers\kingsguardEntry.module.css */
+/* House of the Dragon (personal use only — see license before shipping commercially: mansgreback.com/fonts/house-of-the-dragon).
+   Same font files already used by scrolls.module.css — declared again here
+   because Next.js bundles CSS Modules per-page, so a @font-face declared
+   only in scrolls.module.css never loads on pages that don't import it. */
+
+@font-face {
+  font-family: "House of the Dragon";
+  src: url("/fonts/HouseOfTheDragonPersonalRegular-BWnq8.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "House of the Dragon";
+  src: url("/fonts/HouseOfTheDragonPersonalBold-8MqRJ.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.page {
+  --shadow: rgba(0, 0, 0, 0.5);
+  position: relative;
+  max-width: 720px;
+  margin: 3rem auto;
+  background: linear-gradient(160deg, var(--surface), #1a1610 90%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 3rem 3rem 3.5rem 3.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4%;
+  bottom: 4%;
+  width: 4px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+/* Ana toka tanımında taşmaları önlemek için z-index ekleyelim */
+.clasp {
+  position: absolute;
+  top: -22px; /* Çizgiye tam oturması için hafifçe ayarlayabilirsiniz */
+  right: 40px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e6c34a, var(--gold) 60%, #7a5a1f 100%);
+  box-shadow: 0 4px 8px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10; /* Başlık ögelerinin arkasında kalmasın */
+}
+
+
+
+.claspIcon {
+  width: 24px;
+  height: 24px;
+  color: #241a08;
+}
+
+.header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.portrait {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  box-shadow: 0 3px 8px var(--shadow);
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-hover);
+}
+
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portraitFallback {
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: "House of the Dragon", serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  background: var(--surface-hover);
+}
+
+.eyebrow {
+  font-family: "House of the Dragon", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin: 0 0 0.35rem;
+}
+
+.nameLink {
+  text-decoration: none;
+}
+
+.name {
+  font-family: "House of the Dragon", serif;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  color: var(--gold);
+  margin: 0;
+}
+
+.nameLink:hover .name {
+  color: #e6c34a;
+}
+
+.title {
+  font-family: "House of the Dragon", serif;
+  font-style: italic;
+  color: var(--ink-soft, var(--muted));
+  margin: 0.2rem 0 0;
+}
+
+.dates {
+  font-family: "House of the Dragon", serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0.6rem 0 0;
+}
+
+.succession {
+  font-family: "House of the Dragon", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0.3rem 0 0;
+}
+
+.succession a {
+  color: var(--gold);
+}
+
+.oath {
+  font-family: "House of the Dragon", serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0 0 2.5rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--gold);
+}
+
+.oathMark {
+  font-family: "House of the Dragon", serif;
+  color: var(--gold);
+  font-size: 1.6rem;
+  margin-right: 0.15rem;
+}
+
+.deedsTitle {
+  font-family: "House of the Dragon", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin: 0 0 1.25rem;
+}
+
+.deedsList {
+  list-style: none;
+  font-family: "House of the Dragon", serif;
+  margin: 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.deedItem {
+  position: relative;
+  font-family: "House of the Dragon", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.deedItem::before {
+  content: "";
+  position: absolute;
+  font-family: "House of the Dragon", serif;
+  left: -1.56rem;
+  top: 0.4rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.deedDate {
+  display: block;
+  font-family: "EB Garamond", serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 0.2rem;
+}
+
+/* Mobil Medya Sorgusu (Çarpışmayı çözen kısım) */
+@media (max-width: 560px) {
+  .page {
+    padding: 2.25rem 1.5rem 2.5rem 2rem;
+    margin: 2rem 0.75rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem; /* Üstteki tokaya çarpmaması için güvenli alan */
+  }
+
+  .clasp {
+    right: 20px;
+  }
+
+  .oath {
+    padding-left: 1rem;
+  }
+}

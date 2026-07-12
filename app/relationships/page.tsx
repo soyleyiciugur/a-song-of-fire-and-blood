@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\relationships\page.tsx
 "use client";
 
 import { useMemo, useState } from "react";
@@ -6,7 +7,11 @@ import type { CharacterId } from "@/types/character";
 import MiniPortrait from "@/components/MiniPortrait";
 
 import { getCharacters } from "@/lib/characters";
-import { computeGraphLayout, colorForHouse } from "@/lib/graph-layout";
+import {
+  computeGraphLayout,
+  colorForHouse,
+  secondaryColorForHouse,
+} from "@/lib/graph-layout";
 import SearchableSelect from "@/components/SearchableSelect";
 
 import styles from "./relationships.module.css";
@@ -22,6 +27,26 @@ interface Edge {
 
 function formatCharacterName(name: string) {
   return name.replace(/^(Ser|Lady|Lord|King|Queen|Prince|Princess)\s+/i, "").trim();
+}
+
+// Deterministic pseudo-random color for characters with no house (or an
+// unrecognized one), so every node still gets a distinct, stable color.
+function fallbackColorForId(id: string) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = id.charCodeAt(i) + ((hash << 5) - hash);
+    hash |= 0;
+  }
+  const hue = Math.abs(hash) % 360;
+  return `hsl(${hue}, 55%, 55%)`;
+}
+
+function colorForCharacter(id: string, house: string) {
+  if (house && house !== "-") {
+    const houseColor = colorForHouse(house);
+    if (houseColor) return houseColor;
+  }
+  return fallbackColorForId(id);
 }
 
 export default function RelationshipsPage() {
@@ -200,8 +225,12 @@ export default function RelationshipsPage() {
                 >
                   <circle
                     r={isHighlighted ? 10 : 7}
-                    fill={colorForHouse(character.house)}
-                    stroke={isHighlighted ? "var(--gold)" : "var(--background)"}
+                    fill={colorForCharacter(character.id, character.house)}
+                    stroke={
+                      isHighlighted
+                        ? "var(--gold)"
+                        : secondaryColorForHouse(character.house) ?? "var(--background)"
+                    }
                     strokeWidth={isHighlighted ? 2 : 1.5}
                   />
                   <text x={11} y={4} className={styles.nodeLabel}>

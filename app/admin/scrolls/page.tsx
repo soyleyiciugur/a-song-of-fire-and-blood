@@ -1,6 +1,7 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\admin\scrolls\page.tsx
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
 import { SearchableSelect } from "../_components/SearchableSelect";
@@ -45,6 +46,31 @@ const createBlankScroll = (id: string, title: string) => ({
   published: false,
 });
 
+// Themed checkbox to match the admin UI
+const Checkbox = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) => (
+  <div
+    onClick={() => onChange(!checked)}
+    style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", userSelect: "none" }}
+  >
+    <div
+      style={{
+        width: "18px", height: "18px", borderRadius: "4px", flexShrink: 0,
+        border: checked ? "1px solid var(--gold)" : "1px solid rgba(255,255,255,0.3)",
+        background: checked ? "var(--gold)" : "rgba(0,0,0,0.2)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        transition: "all 0.15s",
+      }}
+    >
+      {checked && (
+        <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
+          <path d="M1 4.5L4 7.5L10 1.5" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
+    </div>
+    <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>{label}</span>
+  </div>
+);
+
 export default function AdminScrollsPage() {
   const [scrolls, setScrolls] = useState<any[]>(scrollsData as any[]);
   const [listSearch, setListSearch] = useState("");
@@ -52,6 +78,8 @@ export default function AdminScrollsPage() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
+
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const draftScrolls = localStorage.getItem("draft-scrolls");
@@ -63,6 +91,11 @@ export default function AdminScrollsPage() {
   }, []);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     localStorage.setItem("draft-scrolls", JSON.stringify(scrolls));
     window.dispatchEvent(new Event("admin:draft-updated"));
   }, [scrolls]);
@@ -148,7 +181,7 @@ export default function AdminScrollsPage() {
     <div style={{ display: "flex", gap: "2rem", padding: "2rem", maxWidth: "1200px", margin: "0 auto", position: "relative", fontFamily: "inherit" }}>
       <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
 
-      {/* Sol Taraf: Scroll Listesi */}
+      {/* Left Column: Scroll List */}
       <div style={{ width: "320px", borderRight: "1px solid rgba(255, 255, 255, 0.1)", paddingRight: "1rem", display: "flex", flexDirection: "column", maxHeight: "90vh" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255, 255, 255, 0.1)", paddingBottom: "10px", marginBottom: "15px" }}>
           <h2 style={{ margin: 0 }}>Scrolls</h2>
@@ -196,7 +229,7 @@ export default function AdminScrollsPage() {
         </ul>
       </div>
 
-      {/* Sağ Taraf: Düzenleme Formu */}
+      {/* Right Column: Edit Form */}
       <div className="custom-scroll" style={{ flex: 1, maxHeight: "90vh", overflowY: "auto", position: "relative" }}>
         {activeScroll ? (
           <>
@@ -257,10 +290,11 @@ export default function AdminScrollsPage() {
                 </label>
               </div>
 
-              <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
-                <input type="checkbox" checked={!!activeScroll.published} onChange={(e) => handleChange("published", e.target.checked)} />
-                <span style={labelTextStyle}>Published (visible on the public site)</span>
-              </label>
+              <Checkbox
+                checked={!!activeScroll.published}
+                onChange={(checked) => handleChange("published", checked)}
+                label="Published (visible on the public site)"
+              />
 
               <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 <span style={labelTextStyle}>Summary <span style={{ opacity: 0.6, textTransform: "none" }}>(shown on the archive list)</span></span>
@@ -320,7 +354,7 @@ export default function AdminScrollsPage() {
           </>
         ) : (
           <div style={{ display: "flex", height: "100%", alignItems: "center", justifyContent: "center", color: "var(--muted)", fontSize: "1.2rem", padding: "40px" }}>
-            ← Select a scroll from the list, or click &quot;+ Add New&quot; to create one.
+            &larr; Select a scroll from the list, or click &quot;+ Add New&quot; to create one.
           </div>
         )}
       </div>

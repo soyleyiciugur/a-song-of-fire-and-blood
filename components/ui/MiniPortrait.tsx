@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\ui\MiniPortrait.tsx
 import Image from "next/image";
 import { getSafeMiniPortrait } from "@/lib/portraits";
 

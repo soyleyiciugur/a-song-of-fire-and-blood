@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\nameGenerator.ts
 // Curated + procedural name pools for the Westeros Name Generator (admin tools).
 // Regional/culture pools below are original inventions styled after each
 // culture's real-world linguistic flavor — none are lifted from the source

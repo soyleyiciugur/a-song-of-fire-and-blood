@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\familytree\PersonNode.tsx
 import Link from "next/link";
 
 import { getCharacter } from "@/lib/characters";

@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\houses\[id]\page.tsx
 import Link from "next/link";
 import { notFound } from "next/navigation";
 

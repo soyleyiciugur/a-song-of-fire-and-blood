@@ -1,0 +1,294 @@
+[
+  {
+    "id": "aemon-the-dragonknight",
+    "manualName": "Prince Aemon Targaryen",
+    "manualTitle": "The Dragonknight",
+    "appointedDate": "in his seventeenth year",
+    "endDate": "later rose to Lord Commander",
+    "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
+    "deeds": [
+      {
+        "description": "Raised to the Kingsguard in his seventeenth year; in time rose to Lord Commander."
+      },
+      {
+        "description": "Wielded the ancestral Valyrian steel blade Dark Sister."
+      },
+      {
+        "description": "Pulled alive from a snakepit by his cousin, who would later be crowned — the vipers refused to strike him."
+      },
+      {
+        "description": "Fought Lord Cregan Stark to a narrow, hard-won victory."
+      },
+      {
+        "description": "Won the tourney at Riverrun in his twenty-first year, unhorsing Ser Terrence Toyne in the final tilt."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "duncan-the-tall",
+    "manualName": "Ser Duncan The Tall",
+    "manualTitle": "",
+    "appointedDate": "unknown — of common birth",
+    "endDate": "",
+    "oath": "",
+    "deeds": [
+      {
+        "description": "Born to obscure origins in a city's poorest quarter; squired to a wandering hedge knight who later knighted him in his sixteenth year."
+      },
+      {
+        "description": "Defended a Dornish lady's honor at a tourney and stood a trial by seven for it."
+      },
+      {
+        "description": "Took a young prince on as his own squire, though he chose to remain a hedge knight himself."
+      },
+      {
+        "description": "Uncovered a plot among certain lords to raise a pretender against the crown, and shielded a prince from the danger."
+      },
+      {
+        "description": "Rose to Lord Commander of the Kingsguard, raised to the post by the king he had once squired for."
+      },
+      {
+        "description": "Led the honor guard that escorted a royal uncle to take the black at the Wall."
+      },
+      {
+        "description": "Rescued a lord's daughter after her ship was seized by island raiders."
+      },
+      {
+        "description": "Defeated every challenger at a tourney held in his own honor, and crowned a commoner as Queen of Love and Beauty."
+      },
+      {
+        "description": "Died in the mysterious fire that claimed his king and a young prince alongside him."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "gerold-hightower",
+    "manualName": "Ser Gerold Hightower",
+    "manualTitle": "The White Bull",
+    "appointedDate": "unknown",
+    "endDate": "died in the Red Mountains of Dorne",
+    "oath": "",
+    "deeds": [
+      {
+        "description": "Defended the honor and property of a Dornish princess."
+      },
+      {
+        "description": "Broke three lances in a famed tourney and fought with distinction in its melee."
+      },
+      {
+        "description": "Commanded the Kingsguard for many years before yielding the post due to injury."
+      },
+      {
+        "description": "Sent by his king to find a fugitive prince in the wake of a rebellion."
+      },
+      {
+        "description": "Died in the Red Mountains of Dorne beside two sworn brothers, refusing to bend the knee to the new king."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "arthur-dayne",
+    "manualName": "Ser Arthur Dayne",
+    "manualTitle": "Sword of the Morning",
+    "appointedDate": "in his twentieth year",
+    "endDate": "died in the Red Mountains of Dorne",
+    "oath": "",
+    "deeds": [
+      {
+        "description": "Bore the ancestral greatsword said to be forged from a fallen star."
+      },
+      {
+        "description": "Broke a dozen lances against a crown prince in a famed tourney, standing undefeated by all but him."
+      },
+      {
+        "description": "Broke the siege of a northern port by sea-raiders and saved a northern lord from drowning."
+      },
+      {
+        "description": "Helped destroy a notorious outlaw brotherhood, slaying its most feared knight in single combat."
+      },
+      {
+        "description": "Knighted a young squire upon the field of battle."
+      },
+      {
+        "description": "Died in the Red Mountains of Dorne beside his sworn brothers, at the close of a rebellion."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "barristan-selmy",
+    "manualName": "Ser Barristan Selmy",
+    "manualTitle": "The Bold",
+    "appointedDate": "in his twenty-third year",
+    "endDate": "dismissed in his sixty-first year",
+    "oath": "",
+    "deeds": [
+      {
+        "description": "Fought as an unproven mystery knight at ten, and was unmasked after his defeat."
+      },
+      {
+        "description": "Knighted for valor after unhorsing a sitting Lord Commander of the Kingsguard while disguised as a mystery knight."
+      },
+      {
+        "description": "Slew the last of a line of pretenders in single combat during a war fought across the narrow sea."
+      },
+      {
+        "description": "Named to the Kingsguard in his twenty-third year."
+      },
+      {
+        "description": "Carried his king to safety through an arrow wound of his own."
+      },
+      {
+        "description": "Avenged the murder of a slain sworn brother."
+      },
+      {
+        "description": "Rescued a lady and her septa from outlaws, helping bring down their leaders."
+      },
+      {
+        "description": "Stood champion at a royal tourney, unhorsing half a dozen great lords and a crown prince in turn."
+      },
+      {
+        "description": "Raised to Lord Commander by the king who took the throne after the one he had served."
+      },
+      {
+        "description": "Dismissed from service in his old age by a boy-king."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "jaime-lannister",
+    "manualName": "Ser Jaime Lannister",
+    "manualTitle": "The Kingslayer",
+    "appointedDate": "in his fifteenth year",
+    "endDate": "died shielding his queen",
+    "oath": "",
+    "deeds": [
+      {
+        "description": "Squired against an outlaw brotherhood; knighted in the field at fifteen for valor."
+      },
+      {
+        "description": "Chosen for the Kingsguard that same year."
+      },
+      {
+        "description": "Slew the king he had sworn to protect during the sack of the capital, earning the name \"Kingslayer.\""
+      },
+      {
+        "description": "Pardoned for the killing by the king who took the throne after."
+      },
+      {
+        "description": "Captured in the field after a defeat, then released on an oath to protect two highborn sisters."
+      },
+      {
+        "description": "Lost his sword hand to his captors during that search."
+      },
+      {
+        "description": "Took back his family's ancestral river seat without further bloodshed."
+      },
+      {
+        "description": "Fought beyond the old kings' road against the army of the dead, holding a castle through impossible odds."
+      },
+      {
+        "description": "Died shielding his queen amid the ashes of a fallen city."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "ser-orwell-morrigen",
+    "characterId": "ser-orwell-morrigen",
+    "appointedDate": "many years past",
+    "endDate": "",
+    "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
+    "deeds": [
+      {
+        "description": "Rose to Lord Commander of the Kingsguard, and held it through decades of relative peace."
+      },
+      {
+        "description": "Trained Prince Jacaelon Targaryen rigorously during Ser Alester Dayne's unexplained absence from court, and judged him ready for knighthood, though the Prince ultimately chose Ser Alester to perform the ceremony."
+      },
+      {
+        "description": "Held the White Sword Tower together through a poisoning attempt on the King, a vanished Crown Prince, and a sworn brother's unsanctioned flight from the capital — all within a single turbulent season."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "ser-alester-dayne",
+    "characterId": "ser-alester-dayne",
+    "appointedDate": "recently",
+    "endDate": "",
+    "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
+    "deeds": [
+      {
+        "description": "Served as Prince Jacaelon Targaryen's closest protector and confidant."
+      },
+      {
+        "description": "Uncovered Princess Rhaella's secret correspondence with her exiled kin during the poisoning crisis."
+      },
+      {
+        "description": "Defied the Hand of the King himself to guard a secret entrusted to him."
+      },
+      {
+        "description": "Escorted Crown Prince Visenor and Princess Rhaella out of King's Landing under cover of darkness, smuggling them toward Dorne."
+      },
+      {
+        "description": "Ambushed in the woods south of the capital by the disgraced former knight Curtass Whent and five hired sellswords; fought through brutal, sustained violence—losing an eye's worth of vision and half his ribs—before killing Whent in a final, desperate act to win free."
+      },
+      {
+        "description": "Knighted Prince Jacaelon Targaryen in a private ceremony, witnessed by no other, after returning to court."
+      },
+      {
+        "description": "Sought out by Princess Saera upon his battered return to the capital, quietly resuming their old habit of walking the corridors together late at night."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "ser-brannyn-vance",
+    "characterId": "ser-brannyn-vance",
+    "appointedDate": "",
+    "endDate": "",
+    "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
+    "deeds": [
+      {
+        "description": "Sworn shield to Princess Maela Targaryen."
+      },
+      {
+        "description": "Broke his sacred vows for her in a single night neither has spoken of since."
+      },
+      {
+        "description": "Continues in her service, wracked with guilt, the secret kept by the Princess's word alone and a cup of moon tea."
+      }
+    ],
+    "notes": "",
+    "published": true
+  },
+  {
+    "id": "curtass-whent",
+    "characterId": "curtass-whent",
+    "appointedDate": "years past",
+    "endDate": "slain in disgrace",
+    "oath": "I shall keep the king I serve from harm...",
+    "deeds": [
+      { "description": "Served as a sworn brother of the Kingsguard with a fearsome reputation as a swordsman." },
+      { "description": "Left the order under clouded circumstances, his honor abandoned." },
+      { "description": "Summoned back by King Baelenys as a hired hunter to track down Crown Prince Visenor." },
+      { "description": "Ambushed Ser Alester Dayne and the fugitive Prince in the Dornish woods with five sellswords." },
+      { "description": "Slain by Ser Alester Dayne during the ambush, his body left near a rural sept." }
+    ],
+    "notes": "Struck from the White Book's place of honor; recorded here only as a warning.",
+    "published": true
+  }
+]

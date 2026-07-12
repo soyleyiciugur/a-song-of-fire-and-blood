@@ -1,0 +1,13 @@
+[
+  {
+    "id": "gallery-001",
+    "src": "/images/gallery/example.jpg",
+    "caption": "An example entry. Replace with real images.",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2099-01-01"
+  }
+]

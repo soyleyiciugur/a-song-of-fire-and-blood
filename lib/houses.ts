@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\houses.ts
 import { getCharacters } from "@/lib/characters";
 import type { Character } from "@/types/character";
 

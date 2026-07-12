@@ -1,11 +1,15 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\admin\characters\page.tsx
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
+import { NumberStepper } from "../_components/NumberStepper";
 import charactersData from "../../../data/characters/characters.json";
 import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json";
+import worldDate from "../../../data/worldDate.json";
+import { computeAge, formatNameday } from "../../../lib/age";
 
 const globalStyles = `
   .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -14,6 +18,11 @@ const globalStyles = `
   .custom-scroll::-webkit-scrollbar-thumb:hover { background: var(--muted); }
   .dropdown-enter { animation: fadeIn 0.2s ease-out forwards; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+  .number-stepper { display: flex; align-items: stretch; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; background: rgba(0,0,0,0.2); }
+  .number-stepper input { flex: 1; width: 100%; min-width: 0; padding: 12px; background: transparent; border: none; color: inherit; font-family: inherit; outline: none; }
+  .number-stepper-buttons { display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.1); }
+  .number-stepper-buttons button { flex: 1; background: transparent; border: none; color: inherit; opacity: 0.6; cursor: pointer; padding: 0 8px; font-size: 9px; line-height: 1; }
+  .number-stepper-buttons button:hover { opacity: 1; background: rgba(255,255,255,0.05); }
 `;
 
 const Avatar = ({ id, name, size = 32, border = "1px solid rgba(255,255,255,0.1)" }: { id: string, name: string, size?: number, border?: string }) => {
@@ -114,7 +123,7 @@ const SECRET_STATUS_OPTIONS = [
 
 const CHARACTER_FIELD_ORDER = [
   "id", "name", "nickname", "aliases", "house", "title", "status", "secret",
-  "age", "height", "father", "mother", "spouse", "siblings", "children",
+  "nameday", "age", "height", "father", "mother", "spouse", "siblings", "children",
   "mentor", "dragon", "traits", "goals", "relationships", "summary", "quotes",
 ];
 
@@ -146,6 +155,7 @@ const createBlankCharacter = (id: string, name: string) => ({
   house: "-",
   title: "",
   status: "Alive",
+  nameday: { day: worldDate.day, moon: worldDate.moon, year: worldDate.year },
   age: 0,
   height: "",
   father: "-",
@@ -167,7 +177,7 @@ export default function AdminCharactersPage() {
   const [listSearch, setListSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);  
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
@@ -218,38 +228,44 @@ export default function AdminCharactersPage() {
     setChars(chars.map(c => c.id === activeChar.id ? { ...c, [field]: value } : c));
   };
 
+  const handleNamedayChange = (part: "day" | "moon" | "year", value: number) => {
+    if (!activeChar) return;
+    const current = activeChar.nameday || { day: worldDate.day, moon: worldDate.moon, year: worldDate.year };
+    handleChange("nameday", { ...current, [part]: value });
+  };
+
   const showNotification = (message: string, type: "success" | "error") => {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 3000);
   };
 
   const handleAddNewCharacter = (name: string) => {
-  if (!name || !name.trim()) {
+    if (!name || !name.trim()) {
+      setShowAddModal(false);
+      return;
+    }
+
+    const id = slugify(name);
+    if (chars.some(c => c.id === id)) {
+      showNotification("A character with this name/ID already exists.", "error");
+      return;
+    }
+
+    const newChar = createBlankCharacter(id, name.trim());
+    setChars([...chars, newChar]);
+    setSelectedId(id);
+    setListSearch("");
     setShowAddModal(false);
-    return;
-  }
-
-  const id = slugify(name);
-  if (chars.some(c => c.id === id)) {
-    showNotification("A character with this name/ID already exists.", "error");
-    return;
-  }
-
-  const newChar = createBlankCharacter(id, name.trim());
-  setChars([...chars, newChar]);
-  setSelectedId(id);
-  setListSearch("");
-  setShowAddModal(false);
-};
+  };
 
   const handleDeleteCharacter = () => {
-  if (!activeChar) return;
-  setChars(chars.filter(c => c.id !== activeChar.id));
-  setAllQuotes(allQuotes.filter(q => q.speakerId !== activeChar.id));
-  setSelectedId(null);
-  setShowDeleteModal(false);
-  showNotification("Character removed from draft.", "success");
-};
+    if (!activeChar) return;
+    setChars(chars.filter(c => c.id !== activeChar.id));
+    setAllQuotes(allQuotes.filter(q => q.speakerId !== activeChar.id));
+    setSelectedId(null);
+    setShowDeleteModal(false);
+    showNotification("Character removed from draft.", "success");
+  };
 
   const handleRelationshipChange = (charId: string, desc: string) => {
     if (!activeChar) return;
@@ -378,13 +394,46 @@ export default function AdminCharactersPage() {
               <div style={{ display: "flex", gap: "20px" }}>
                 <SearchableSelect label="House" value={activeChar.house} options={houseOptions} onChange={(v: string) => handleChange("house", v)} />
                 <label style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Age</span>
-                  <input type="number" value={activeChar.age} onChange={(e) => handleChange("age", parseInt(e.target.value) || 0)} style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", outline: "none", fontFamily: "inherit" }} />
-                </label>
-                <label style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
                   <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Height</span>
                   <input value={activeChar.height || ""} onChange={(e) => handleChange("height", e.target.value)} style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", outline: "none", fontFamily: "inherit" }} />
                 </label>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Nameday</span>
+                <div style={{ display: "flex", gap: "15px" }}>
+                  <NumberStepper
+                    label="Day"
+                    value={activeChar.nameday?.day ?? worldDate.day}
+                    min={1}
+                    max={30}
+                    onChange={(v: number) => handleNamedayChange("day", v)}
+                  />
+                  <NumberStepper
+                    label="Moon"
+                    value={activeChar.nameday?.moon ?? worldDate.moon}
+                    min={1}
+                    max={12}
+                    onChange={(v: number) => handleNamedayChange("moon", v)}
+                  />
+                  <NumberStepper
+                    label="Year"
+                    value={activeChar.nameday?.year ?? worldDate.year}
+                    min={0}
+                    max={worldDate.year}
+                    onChange={(v: number) => handleNamedayChange("year", v)}
+                  />
+                </div>
+                <div style={{ fontSize: "0.85rem", opacity: 0.6 }}>
+                  {activeChar.nameday ? (
+                    <>
+                      {formatNameday(activeChar.nameday, worldDate.era)} — computed age:{" "}
+                      <strong style={{ color: "var(--gold)" }}>{computeAge(activeChar.nameday, worldDate)}</strong>
+                    </>
+                  ) : (
+                    <>No nameday set — falling back to legacy age field ({activeChar.age ?? "-"}).</>
+                  )}
+                </div>
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
@@ -497,23 +546,23 @@ export default function AdminCharactersPage() {
         )}
       </div>
       {showAddModal && (
-  <PromptModal
-    title="Add New Character"
-    placeholder="Full name"
-    onConfirm={handleAddNewCharacter}
-    onCancel={() => setShowAddModal(false)}
-  />
-)}
+        <PromptModal
+          title="Add New Character"
+          placeholder="Full name"
+          onConfirm={handleAddNewCharacter}
+          onCancel={() => setShowAddModal(false)}
+        />
+      )}
 
-{showDeleteModal && activeChar && (
-  <ConfirmModal
-    title="Delete Character"
-    message={`Are you sure you want to delete "${activeChar.name}"?\n\nThis cannot be undone once you Publish.`}
-    confirmLabel="Delete"
-    onConfirm={handleDeleteCharacter}
-    onCancel={() => setShowDeleteModal(false)}
-  />
-)}
+      {showDeleteModal && activeChar && (
+        <ConfirmModal
+          title="Delete Character"
+          message={`Are you sure you want to delete "${activeChar.name}"?\n\nThis cannot be undone once you Publish.`}
+          confirmLabel="Delete"
+          onConfirm={handleDeleteCharacter}
+          onCancel={() => setShowDeleteModal(false)}
+        />
+      )}
       {notification && (
         <div style={{ position: "fixed", bottom: "30px", right: "30px", background: notification.type === "success" ? "rgba(30, 80, 40, 0.95)" : "rgba(139, 0, 0, 0.95)", color: "#fff", padding: "16px 24px", borderRadius: "6px", border: `1px solid ${notification.type === "success" ? "#2e8b57" : "#ff4c4c"}`, boxShadow: "0 8px 24px rgba(0,0,0,0.5)", display: "flex", alignItems: "center", gap: "12px", zIndex: 1000, fontSize: "1rem", fontWeight: "bold", backdropFilter: "blur(4px)" }}>
           <span style={{ fontSize: "1.2rem" }}>{notification.type === "success" ? "✓" : "⚠"}</span>

@@ -1,0 +1,19 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\tsc_chk.txt
+components/character/CharacterQuote.tsx(2,28): error TS2307: Cannot find module '@/data/characters' or its corresponding type declarations.
+data/characters/old/index.ts(2,28): error TS2307: Cannot find module './characters.json' or its corresponding type declarations.
+data/characters/old/index.ts(3,59): error TS2307: Cannot find module '../../schemas/character' or its corresponding type declarations.
+lib/search.ts(1,28): error TS2307: Cannot find module '@/data/characters' or its corresponding type declarations.
+lib/search.ts(40,7): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(41,7): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(42,11): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(43,7): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(44,7): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(49,11): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(50,14): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(52,9): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(52,28): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(53,13): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(54,13): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(55,28): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(58,39): error TS18046: 'character' is of type 'unknown'.
+lib/search.ts(59,14): error TS18046: 'character' is of type 'unknown'.

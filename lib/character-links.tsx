@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\character-links.tsx
 import type { ReactNode } from "react";
 import Link from "next/link";
 

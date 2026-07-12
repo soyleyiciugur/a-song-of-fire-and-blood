@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\constants\titles.ts
 export const TITLE_ORDER = [
   "King of the Seven Kingdoms",
   "Queen of the Seven Kingdoms",

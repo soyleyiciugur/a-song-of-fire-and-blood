@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\page.tsx
 import Link from "next/link";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapters.module.css";

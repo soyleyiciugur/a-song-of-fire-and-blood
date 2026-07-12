@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { characters } from "@/data/characters";
-import type { Character } from "@/types/character";
-import { slugifyHouse } from "@/lib/houses";
+import charactersData from "@/data/characters/characters.json";
+import type { Character } from "../../types/character";
+import { slugifyHouse } from "../../lib/houses";
+import { computeAge, formatNameday } from "../../lib/age";
+import worldDate from "../../data/worldDate.json";
 import StatusReveal from "./StatusReveal";
 
 type Props = {
@@ -18,13 +20,21 @@ function isValidValue(value?: string | null) {
 function getCharacterName(id?: string | null) {
   if (!isValidValue(id)) return "-";
 
-  const character = characters[id as keyof typeof characters];
+  const character = (charactersData as Character[]).find((c) => c.id === id);
 
   return character?.name ?? id;
 }
 
 export default function CharacterInfoBox({ character }: Props) {
-  const portraitSrc = character.portrait ?? DEFAULT_PORTRAIT .replace("{id}", character.id);
+  const portraitSrc = character.portrait ?? DEFAULT_PORTRAIT.replace("{id}", character.id);
+
+  const age = character.nameday
+    ? computeAge(character.nameday, worldDate)
+    : character.age;
+
+  const namedayLabel = character.nameday
+    ? formatNameday(character.nameday, worldDate.era)
+    : "-";
 
   return (
     <aside
@@ -95,7 +105,8 @@ export default function CharacterInfoBox({ character }: Props) {
           }
         />
         <InfoRow label="Title" value={character.title} />
-        <InfoRow label="Age" value={String(character.age)} />
+        <InfoRow label="Age" value={String(age)} />
+        <InfoRow label="Nameday" value={namedayLabel} />
         <InfoRow label="Height" value={character.height ?? "-"} />
         <InfoRow label="Dragon" value={character.dragon ?? "-"} />
 

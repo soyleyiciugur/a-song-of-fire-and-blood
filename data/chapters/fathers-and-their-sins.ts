@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\chapters\fathers-and-their-sins.ts
 import type { Chapter } from "@/types/chapter";
 
 const chapter: Chapter = {

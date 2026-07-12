@@ -1,0 +1,9 @@
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\_template\template.module.css */
+/* Only put things HERE that are unique to this specific page. Anything
+   that repeats across pages (page shell, headings, selects, pills,
+   dividers) belongs in styles/common.css instead — see page.tsx for the
+   list of shared classes already available. */
+
+.content {
+  color: var(--muted);
+}

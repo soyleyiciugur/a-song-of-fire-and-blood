@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\scrolls\[id]\page.tsx
 import { notFound } from "next/navigation";
 import { getPublishedScrollById, getAllScrolls } from "@/lib/scrolls";
 import ScrollDisplay from "@/components/scroll/ScrollDisplay";

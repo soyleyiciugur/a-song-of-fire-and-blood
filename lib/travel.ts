@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\travel.ts
 import { getMapLocation } from "@/data/map/locations";
 
 // Scale calibrated against the wiki's "Basics": Westeros spans ~3000mi N-S

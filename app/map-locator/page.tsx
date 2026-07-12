@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\map-locator\page.tsx
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";

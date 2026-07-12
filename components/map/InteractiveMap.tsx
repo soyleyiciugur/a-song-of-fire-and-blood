@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\map\InteractiveMap.tsx
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -11,7 +12,7 @@ import {
   MAP_LOCATIONS,
   getMapLocation,
 } from "@/data/map/locations";
-import { MAP_EVENTS } from "@/data/map/events";
+import { MAP_EVENTS } from "@/data/map/map-events";
 import { getCharacterPositionsForChapter } from "@/data/map/character-positions";
 import { getAllChapters } from "@/data/chapters";
 import { getCharacters } from "@/lib/characters";
@@ -151,6 +152,12 @@ export default function InteractiveMap() {
 
   const [naturalSize, setNaturalSize] = useState<{ width: number; height: number } | null>(null);
   const [chapterIndex, setChapterIndex] = useState(0);
+
+  useEffect(() => {
+    if (chapters && chapters.length > 0) {
+      setChapterIndex(chapters.length - 1);
+    }
+  }, [chapters]); // chapters verisi geldiğinde veya değiştiğinde çalışır
   const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(null);
   
   const [openCluster, setOpenCluster] = useState<string | null>(null);
@@ -975,22 +982,43 @@ export default function InteractiveMap() {
               );
             })}
           </div>
-
           {/* Legend / event filters */}
           <div className={styles.legend} onMouseDown={(e) => e.stopPropagation()}>
             <div className={styles.legendTitle}>Events</div>
-            {ALL_EVENT_TYPES.map((type) => (
-              <label key={type} className={styles.legendRow}>
-                <input
-                  type="checkbox"
-                  checked={activeEventTypes.has(type)}
-                  onChange={() => toggleEventType(type)}
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={MAP_EVENT_TYPE_ICONS[type]} alt="" width={16} height={16} />
-                {MAP_EVENT_TYPE_LABELS[type]}
-              </label>
-            ))}
+            {ALL_EVENT_TYPES.map((type) => {
+              const isChecked = activeEventTypes.has(type);
+
+              return (
+                <div 
+                  key={type} 
+                  className={styles.legendRow}
+                  onClick={() => toggleEventType(type)}
+                  style={{ cursor: "pointer", userSelect: "none" }}
+                >
+                  {/* Yeni Temalı Checkbox */}
+                  <div
+                    style={{
+                      width: "12px", height: "12px", borderRadius: "4px", flexShrink: 0,
+                      border: isChecked ? "1px solid var(--gold)" : "1px solid rgba(255,255,255,0.3)",
+                      background: isChecked ? "var(--gold)" : "rgba(0,0,0,0.2)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      transition: "all 0.15s",
+                    }}
+                  >
+                    {isChecked && (
+                      <svg width="8" height="6" viewBox="0 0 11 9" fill="none">
+                        <path d="M1 4.5L4 7.5L10 1.5" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </div>
+
+                  {/* Orijinal İkon ve Metin */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={MAP_EVENT_TYPE_ICONS[type]} alt="" width={16} height={16} />
+                  {MAP_EVENT_TYPE_LABELS[type]}
+                </div>
+              );
+            })}
           </div>
 
           {/* Selected character card */}

@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\github.ts
 const GITHUB_API = "https://api.github.com";
 
 interface FileToUpdate {

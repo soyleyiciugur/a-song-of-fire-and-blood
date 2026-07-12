@@ -6,6 +6,7 @@
     "seat": "King's Landing",
     "sigilSrc": "/images/houses/targaryen.webp",
     "color": "#B22222",
+    "secondaryColor": "#000000",
     "description": "The ruling house of the Seven Kingdoms, bound as much by dragonfire as by blood. King Baelenys' reign has grown harsher since the poisoning, and the loyalty of his own siblings and children has never been so openly tested."
   },
   {
@@ -15,6 +16,7 @@
     "seat": "Highgarden",
     "sigilSrc": "/images/houses/tyrell.webp",
     "color": "#228B22",
+    "secondaryColor": "#F4C430",
     "description": "Lords of the Reach and, alongside Derrin Hightower, the hidden hand behind the plot to poison King Baelenys. Exposed by the Iron Bank's records, House Tyrell now bears crippling Crown sanctions and a hatred for House Targaryen that only deepened after the Oldtown Massacre."
   },
   {
@@ -24,6 +26,7 @@
     "seat": "Oldtown",
     "sigilSrc": "/images/houses/hightower.webp",
     "color": "#009E60",
+    "secondaryColor": "#FFFFFF",
     "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown, has left the house's future in ruins."
   },
   {
@@ -33,6 +36,7 @@
     "seat": "Winterfell",
     "sigilSrc": "/images/houses/stark.webp",
     "color": "#4D495B",
+    "secondaryColor": "#C0C0C0",
     "description": "Wardens of the North, bound to the Iron Throne by an old, uneasy loyalty sealed in blood generations ago. Lord Brandon Stark's death brought his son Rickard to Winterfell's seat, and House Targaryen back to its gates."
   },
   {
@@ -42,6 +46,7 @@
     "seat": "Starfall",
     "sigilSrc": "/images/houses/dayne.webp",
     "color": "#DDA0DD",
+    "secondaryColor": "#E6E6FA",
     "description": "A Dornish house quietly drawn into the heart of the realm's troubles, first through Ser Alester Dayne's sworn service to Prince Jacaelon, then through Lady Lorenah Dayne's decision to shelter a fugitive Crown Prince."
   },
   {
@@ -51,6 +56,7 @@
     "seat": "Driftmark",
     "sigilSrc": "/images/houses/velaryon.webp",
     "color": "#20B2AA",
+    "secondaryColor": "#B0E0E6",
     "description": "Masters of Driftmark and the Crown's oldest maritime allies, tied now to the royal family directly through Naella Velaryon's marriage to Prince Gaelor."
   },
   {
@@ -60,6 +66,7 @@
     "seat": "Storm's End",
     "sigilSrc": "/images/houses/baratheon.webp",
     "color": "#F3CE1B",
+    "secondaryColor": "#1C1C1C",
     "description": "Proud stormlanders who fought beside House Targaryen in the past and expect the debt remembered. The Young Stag, Steffon Baratheon, has learned that pride alone does not move a king."
   },
   {
@@ -69,6 +76,7 @@
     "seat": "Unconfirmed",
     "sigilSrc": "/images/houses/vance.webp",
     "color": "#006400",
+    "secondaryColor": "#FFFFFF",
     "description": "A lesser house known mainly through Ser Brannyn Vance's service in the Kingsguard, sworn to protect Princess Maela at any cost to himself."
   },
   {
@@ -78,6 +86,7 @@
     "seat": "The Reach",
     "sigilSrc": "/images/houses/morrigen.webp",
     "color": "#4E7F4C",
+    "secondaryColor": "#8FBC8F",
     "description": "A Reach house represented at court by Ser Orwell Morrigen, Lord Commander of the Kingsguard, who watches the realm's unraveling with growing unease."
   },
   {
@@ -87,6 +96,7 @@
     "seat": "Harrenhal",
     "sigilSrc": "/images/houses/whent.webp",
     "color": "#FFD93D",
+    "secondaryColor": "#000000",
     "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, in the King's service, has since reached the Red Keep."
   },
   {
@@ -96,6 +106,7 @@
     "seat": "Casterly Rock",
     "sigilSrc": "/images/houses/lannister.webp",
     "color": "#86090A",
+    "secondaryColor": "#FFD700",
     "description": "Represented at court by Tion Lannister, the Master of Coin, whose sound financial counsel is consistently overruled by princes eager for war."
   }
 ]

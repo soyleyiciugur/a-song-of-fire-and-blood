@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\schemas\scroll.ts
 import { z } from "zod";
 
 export const ScrollCategorySchema = z.enum([

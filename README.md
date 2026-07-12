@@ -1,3 +1,4 @@
+<!-- This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\README.md -->
 # A Song of Fire and Blood
 
 A Next.js app for exploring a compact House Targaryen chronicle: chapters, characters, houses, dragons, a family tree, a map, relationships, and timeline views.

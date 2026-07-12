@@ -1,3 +1,4 @@
+<!-- This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\AGENTS.md -->
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 

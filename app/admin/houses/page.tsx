@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\admin\houses\page.tsx
 "use client";
 
 import Link from "next/link";
@@ -60,7 +61,7 @@ export default function AdminHousesPage() {
     return;
   }
 
-  const newHouse = { id, name: name.trim(), words: "", seat: "", color: "#B22222", sigilSrc: "", description: "" };
+  const newHouse = { id, name: name.trim(), words: "", seat: "", color: "#B22222", secondaryColor: "#FFD700", sigilSrc: "", description: "" };
   const updated = [...houses, newHouse];
   setHouses(updated);
   setSelectedIndex(updated.length - 1);
@@ -118,7 +119,7 @@ export default function AdminHousesPage() {
                     background: isSelected ? house.color : "rgba(0, 0, 0, 0.2)",
                     color: isSelected ? getContrastText(house.color) : "inherit",
                     border: "1px solid",
-                    borderColor: isSelected ? house.color : "rgba(255, 255, 255, 0.1)",
+                    borderColor: isSelected ? (house as any).secondaryColor || house.color : "rgba(255, 255, 255, 0.1)",
                     borderRadius: "6px",
                     cursor: "pointer",
                     fontWeight: isSelected ? "bold" : "normal",
@@ -177,12 +178,27 @@ export default function AdminHousesPage() {
               <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Seat</span>
               <input value={activeHouse.seat} onChange={(e) => handleChange("seat", e.target.value)} style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", outline: "none" }} />
             </label>
+          </div>
 
+          <div style={{ display: "flex", gap: "20px" }}>
             <label style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
               <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>House Color</span>
               <div style={{ display: "flex", gap: "10px", alignItems: "center", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", padding: "4px 12px", borderRadius: "4px" }}>
                 <input type="color" value={activeHouse.color} onChange={(e) => handleChange("color", e.target.value)} style={{ width: "30px", height: "30px", cursor: "pointer", border: "none", background: "transparent", padding: 0 }} />
                 <span>{activeHouse.color}</span>
+              </div>
+            </label>
+
+            <label style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+              <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Secondary Color</span>
+              <div style={{ display: "flex", gap: "10px", alignItems: "center", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", padding: "4px 12px", borderRadius: "4px" }}>
+                <input
+                  type="color"
+                  value={(activeHouse as any).secondaryColor || "#000000"}
+                  onChange={(e) => handleChange("secondaryColor", e.target.value)}
+                  style={{ width: "30px", height: "30px", cursor: "pointer", border: "none", background: "transparent", padding: 0 }}
+                />
+                <span>{(activeHouse as any).secondaryColor || "—"}</span>
               </div>
             </label>
           </div>

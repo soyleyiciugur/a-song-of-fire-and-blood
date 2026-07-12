@@ -1,3 +1,4 @@
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\styles\forms.css */
 /* Baseline so every input/select/textarea/button looks consistent by
    default, without needing to inline-style each one from scratch.
    Inline styles (e.g. width, custom padding) still override these freely. */
@@ -44,6 +45,7 @@ button {
    NumberStepper component (app/admin/_components/NumberStepper.tsx). */
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

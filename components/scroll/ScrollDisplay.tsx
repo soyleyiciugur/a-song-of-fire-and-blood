@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\scroll\ScrollDisplay.tsx
 import Link from "next/link";
 import type { Scroll } from "@/types/scroll";
 import styles from "./scroll.module.css";

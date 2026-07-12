@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\layout.tsx
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";

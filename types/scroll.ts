@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\types\scroll.ts
 export type ScrollCategory =
   | "Natural History"
   | "Religion & Faith"

@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\map\page.tsx
 import InteractiveMap from "@/components/map/InteractiveMap";
 
 import styles from "./map.module.css";

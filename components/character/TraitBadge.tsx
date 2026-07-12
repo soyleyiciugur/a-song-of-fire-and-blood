@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\character\TraitBadge.tsx
 type Props = {
   children: React.ReactNode;
 };

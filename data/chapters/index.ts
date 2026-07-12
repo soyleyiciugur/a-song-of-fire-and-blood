@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\chapters\index.ts
 import type { Chapter } from "@/types/chapter";
 
 import ThePoisonBeneathTheCrown from "./the-poison-beneath-the-crown";

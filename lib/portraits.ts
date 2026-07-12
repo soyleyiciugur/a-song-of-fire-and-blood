@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\portraits.ts
 import type { CharacterId } from "@/types/character";
 
 const DEFAULT_MINI = "/images/miniportraits/default.png";

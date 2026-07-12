@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\scripts\validate-data.mjs
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";

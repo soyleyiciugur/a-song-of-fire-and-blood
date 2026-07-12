@@ -1,15 +1,16 @@
-import { characters } from "@/data/characters";
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\search.ts
+import characters from "@/data/characters/characters.json";
 import { chapterList } from "@/data/chapters";
 import { dragons } from "@/data/dragons";
 import { houses } from "@/data/houses";
 
 export type SearchResultType = "character" | "chapter" | "house" | "dragon";
 
-export type SearchResultThumbnail = {
-  src: string;
-  alt: string;
-  kind: "character" | "dragon" | "house";
-};
+export type SearchResultThumbnail =
+  | { kind: "character"; src: string; alt: string }
+  | { kind: "house"; src: string; alt: string }
+  | { kind: "dragon"; src: string; alt: string }
+  | { kind: "chapter"; alt: string; number: number };
 
 export type SearchResult = {
   type: SearchResultType;
@@ -62,7 +63,7 @@ export function buildSearchIndex(): SearchResult[] {
     });
   }
 
-  for (const chapter of chapterList) {
+  chapterList.forEach((chapter, index) => {
     results.push({
       type: "chapter",
       id: chapter.slug,
@@ -70,8 +71,13 @@ export function buildSearchIndex(): SearchResult[] {
       subtitle: chapter.synopsis,
       href: `/chapters/${chapter.slug}`,
       keywords: normalize(`${chapter.title} ${chapter.synopsis}`),
+      thumbnail: {
+        kind: "chapter",
+        alt: chapter.title,
+        number: index + 1,
+      },
     });
-  }
+  });
 
   for (const house of houses) {
     results.push({
@@ -89,7 +95,11 @@ export function buildSearchIndex(): SearchResult[] {
     });
   }
   for (const dragon of dragons) {
-    const rider = dragon.riderId ? characters[dragon.riderId as keyof typeof characters] : undefined;
+    const rider = dragon.riderId
+      ? (characters[dragon.riderId as keyof typeof characters] as
+          | { name: string }
+          | undefined)
+      : undefined;
 
     results.push({
       type: "dragon",

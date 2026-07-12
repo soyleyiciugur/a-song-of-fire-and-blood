@@ -1,6 +1,8 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\scrolls\page.tsx
 import Link from "next/link";
 import { getAllScrolls, getScrollCategories } from "@/lib/scrolls";
 import styles from "./scrolls.module.css";
+
 
 export const metadata = {
   title: "Scrolls from the Realm",

@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\quotes.ts
 import type { CharacterId, CharacterQuote } from "@/types/character";
 
 export const quotes: CharacterQuote[] = [

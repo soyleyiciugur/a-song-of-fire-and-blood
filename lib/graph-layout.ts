@@ -1,3 +1,7 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\graph-layout.ts
+import housesData from "@/data/houses.json";
+import { slugifyHouse } from "@/lib/houses";
+
 export interface GraphEdge {
   source: string;
   target: string;
@@ -112,15 +116,63 @@ export function computeGraphLayout(
   return positions;
 }
 
+interface HouseData {
+  id: string;
+  name: string;
+  color?: string;
+  secondaryColor?: string;
+  [key: string]: unknown;
+}
+
+// Built once at module load: house slug -> canonical color from houses.json.
+const houseColorBySlug = new Map<string, string>(
+  (housesData as HouseData[])
+    .filter((house) => Boolean(house.color))
+    .map((house) => [house.id, house.color as string])
+);
+
+// Built once at module load: house slug -> secondary/border color.
+const houseSecondaryColorBySlug = new Map<string, string>(
+  (housesData as HouseData[])
+    .filter((house) => Boolean(house.secondaryColor))
+    .map((house) => [house.id, house.secondaryColor as string])
+);
+
 /**
- * Deterministic, readable color per house name so the same house always
- * gets the same hue across renders without maintaining a manual palette.
+ * Deterministic, readable hash-based color, used only as a fallback when
+ * a house name doesn't have a canonical color defined in houses.json.
  */
-export function colorForHouse(house: string): string {
+function hashColor(seed: string): string {
   let hash = 0;
-  for (let i = 0; i < house.length; i++) {
-    hash = house.charCodeAt(i) + ((hash << 5) - hash);
+  for (let i = 0; i < seed.length; i++) {
+    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
   }
   const hue = Math.abs(hash) % 360;
   return `hsl(${hue}, 58%, 58%)`;
+}
+
+/**
+ * Looks up a house's canonical color from houses.json (matched by slug,
+ * e.g. "House Targaryen" -> "targaryen" -> "#B22222"). Falls back to a
+ * deterministic hash-based color for house names that aren't found there,
+ * so the graph never has to leave a node uncolored.
+ */
+export function colorForHouse(house: string): string {
+  if (!house || house === "-") return hashColor(house || "unaffiliated");
+
+  const slug = slugifyHouse(house);
+  return houseColorBySlug.get(slug) ?? hashColor(house);
+}
+
+/**
+ * Looks up a house's secondary/accent color from houses.json, for use as
+ * a node border in the relationships graph. Returns null when a house has
+ * no secondary color defined (or the character has no house), so callers
+ * can decide their own default border instead.
+ */
+export function secondaryColorForHouse(house: string): string | null {
+  if (!house || house === "-") return null;
+
+  const slug = slugifyHouse(house);
+  return houseSecondaryColorBySlug.get(slug) ?? null;
 }

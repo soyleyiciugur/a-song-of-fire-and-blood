@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\schemas\character.ts
 import { z } from "zod";
 
 export const CharacterStatusSchema = z.enum(["Alive", "Dead", "Unknown", "Missing"]);

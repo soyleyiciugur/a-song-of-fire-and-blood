@@ -1,5 +1,6 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\character\CharacterQuote.tsx
 import Link from "next/link";
-import { characters } from "@/data/characters";
+import characters from "@/data/characters/characters.json";
 
 type Quote = {
   text: string;

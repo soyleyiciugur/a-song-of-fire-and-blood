@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\[id]\page.tsx
 
 import Image from "next/image";
 

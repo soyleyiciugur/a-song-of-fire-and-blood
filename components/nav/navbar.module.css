@@ -1,7 +1,8 @@
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\nav\navbar.module.css */
 .banner {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 250; /* was 50 — must outrank admin panel nav's zIndex: 200 */
 
   background: rgba(11, 11, 15, 0.92);
   backdrop-filter: blur(6px);
@@ -35,6 +36,7 @@
   display: flex;
   gap: 18px;
   flex: 1;
+  align-items: center;
 }
 
 .menuButton {
@@ -87,6 +89,8 @@
   border-radius: 999px;
   color: var(--muted);
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .navLink {
@@ -95,11 +99,14 @@
   color: var(--muted);
   text-decoration: none;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 
   transition: color 0.2s ease;
 }
 
-.navLink:hover {
+.navLink:hover,
+.navLink.active {
   color: var(--text);
 }
 
@@ -244,6 +251,134 @@
   color: #e6c34a;
 }
 
+/* --- Records dropdown (desktop hover/click menu) --- */
+
+/* Group = [text link][caret button], treated as one nav item. The gap here
+   (text ↔ arrow) is intentionally smaller than .navLinks' 18px item gap —
+   it's an internal detail of one item, not the space between two items.
+   The caret button's own padding is symmetric (4px) so the visual gap on
+   its left (to the text) and its right (to the *next* nav item, via
+   .navLinks' gap) both come out even instead of the arrow sitting closer
+   to one side than the other. */
+.navGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navGroupCaretBtn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 4px;
+  margin-right: -16px;
+  cursor: pointer;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.navGroupCaretBtn:hover,
+.navGroupCaretBtn[aria-expanded="true"] {
+  color: var(--text);
+}
+
+.navGroupCaretBtn:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.navGroupCaret {
+  font-size: 1em;
+  opacity: 0.7;
+  transform: translateY(1px);
+}
+
+.navGroupMenu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+
+  min-width: 200px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  z-index: 60;
+  animation: dropdownIn 0.15s ease;
+}
+
+/* Invisible bridge so the menu doesn't close while moving the mouse from
+   the button down into the menu */
+.navGroupMenu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.navGroupMenuLink {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.navGroupMenuLink:hover {
+  background: var(--surface-hover);
+  color: var(--gold);
+}
+
+/* Mobile accordion */
+.mobileNavGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobileNavGroupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.mobileNavGroupItems {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 0 0 12px;
+}
+
 @media (max-width: 720px) {
   .navLinks {
     display: none;
@@ -256,4 +391,4 @@
   .searchWrap {
     width: 180px;
   }
-}
+} 

@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\scrolls.ts
 import scrollsData from "@/data/scrolls.json";
 import type { Scroll, ScrollCategory } from "@/types/scroll";
 

@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\chapter\LinkedParagraph.tsx
 import type { CSSProperties } from "react";
 
 import { linkifyCharacterNames } from "@/lib/character-links";

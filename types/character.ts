@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\types\character.ts
 export type CharacterStatus = "Alive" | "Dead" | "Unknown" | "Missing";
 
 export type CharacterId =
@@ -40,6 +41,12 @@ export interface CharacterQuote {
   chapterTitle?: string;
 }
 
+export interface CharacterNameday {
+  day: number;
+  moon: number;
+  year: number;
+}
+
 export interface Character {
   id: CharacterId;
 
@@ -53,7 +60,9 @@ export interface Character {
   status: CharacterStatus;
   secret?: { status: CharacterStatus; note: string };
 
-  age: number;
+  /** @deprecated legacy static age — superseded by `nameday` + computeAge(). Kept optional so old records don't break. */
+  age?: number;
+  nameday?: CharacterNameday;
   height?: string;
 
   father: string;

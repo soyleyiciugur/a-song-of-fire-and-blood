@@ -1,3 +1,4 @@
+// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\types\map.ts
 export type MapEventType = "battle" | "feast" | "tournament" | "wedding";
 
 export interface MapEvent {

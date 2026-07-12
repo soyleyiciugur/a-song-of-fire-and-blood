@@ -1,0 +1,171 @@
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\styles\common.css */
+/* Shared, reusable pieces used by 2+ pages, so we stop redefining the same
+   dropdown/pill/select styles inline on every page. Page-specific layout
+   (grids, hero sections, lightboxes, etc.) still belongs in that page's own
+   .module.css — this file is only for things that should look IDENTICAL
+   everywhere they appear. */
+
+/* ── Generic page shell ──────────────────────────────────────────────────
+   For a brand-new page that doesn't need a bespoke layout. See
+   app/_template/page.tsx for how to use this. Existing pages keep their
+   own .module.css (houses.module.css, dragons.module.css, etc.) — no need
+   to migrate those, they're already consistent with each other. */
+.page-shell {
+  padding: 60px 20px;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+.page-shell-inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.page-heading {
+  margin: 0 0 8px;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.page-subheading {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 640px;
+  line-height: 1.5;
+}
+
+/* ── Section divider ──────────────────────────────────────────────────────
+   For splitting one page into two distinct zones (e.g. Raven's Eye vs.
+   Flea Bottom memes) without it looking like a bug. */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 48px 0 28px;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+.section-divider-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Themed select ────────────────────────────────────────────────────────
+   Non-admin equivalent of app/admin/_components/SearchableSelect.tsx — same
+   gold/surface/border tokens, same radius, so admin and public dropdowns
+   finally look like the same product. Paired with app/_components/Select.tsx. */
+.te-select {
+  position: relative;
+  min-width: 160px;
+}
+
+.te-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.te-select-trigger:hover {
+  border-color: var(--gold);
+}
+.te-select-trigger-open {
+  border-color: var(--gold);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.te-select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.te-select-caret {
+  font-size: 10px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.te-select-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  max-height: 260px;
+  overflow-y: auto;
+  box-shadow: var(--shadow-card);
+  font-size: 0.85rem;
+}
+
+.te-select-search-wrap {
+  padding: 8px;
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.te-select-option {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.te-select-option:last-child {
+  border-bottom: none;
+}
+.te-select-option:hover {
+  background: var(--surface-hover);
+}
+.te-select-option-active {
+  color: var(--gold);
+}
+
+.te-select-empty {
+  padding: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── Tag pill ─────────────────────────────────────────────────────────────
+   Characters / houses / dragons / chapters wherever they show up as small
+   labels (gallery cards, lightboxes, search results, etc). */
+.te-pill {
+  display: inline-block;
+  padding: 3px 9px;
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.te-pill-sm {
+  padding: 2px 7px;
+  font-size: 0.68rem;
+}
