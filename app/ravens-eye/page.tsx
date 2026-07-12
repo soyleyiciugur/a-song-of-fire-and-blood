@@ -155,7 +155,7 @@ function Lightbox({
             {tags.map((t) => (
               <span key={t} className="te-pill">{t}</span>
             ))}
-            {chapter && <span className="te-pill">{`Ch: ${chapter}`}</span>}
+            {chapter && <span className="te-pill">{`${chapter}`}</span>}
           </div>
           {entry.worldDate && <div className={styles.lightboxDate}>{formatDate(entry.worldDate)}</div>}
         </div>
