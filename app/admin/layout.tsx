@@ -346,37 +346,47 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "16px" }}>
           {hasAnyDraft && (
             <>
-              <span
-                style={{ fontSize: "0.85rem", opacity: 0.85, position: "relative", cursor: "default" }}
+                <span
+                style={{
+                    fontSize: "0.8rem",
+                    opacity: 0.9,
+                    position: "relative",
+                    cursor: "default",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "6px 10px",
+                    border: "1px solid rgba(255,193,7,0.4)",
+                    borderRadius: "20px",
+                    background: "rgba(255,193,7,0.08)",
+                    whiteSpace: "nowrap",
+                    flexShrink: 0,
+                }}
                 onMouseEnter={() => setShowDraftTooltip(true)}
                 onMouseLeave={() => setShowDraftTooltip(false)}
-              >
-                ⚠ Unpublished: {
-                  [
-                    status.chapters && "Chapters",
-                    status.houses && "Houses",
-                    status.characters && "Characters",
-                    status.quotes && "Quotes",
-                    status.worldDate && "Calendar",
-                    status.scrolls && "Scrolls",
-                    status.bookOfBrothers && "The Book of Brothers",
-                    status.dragons && "Dragons",
-                    status.timeline && "Timeline",
-                    status.mapLocations && "Map",
-                    status.characterPositions && "Character Positions",
-                    status.gallery && "The Raven's Eye",
-                  ]
-                    .filter(Boolean)
-                    .join(", ")
-                }
+                >
+                ⚠ Unpublished
+                <span
+                    style={{
+                    background: "rgba(255,193,7,0.9)",
+                    color: "#1a1a1a",
+                    borderRadius: "10px",
+                    fontSize: "0.7rem",
+                    fontWeight: "bold",
+                    padding: "1px 7px",
+                    lineHeight: 1.4,
+                    }}
+                >
+                    {Object.values(status).filter(Boolean).length}
+                </span>
                 {showDraftTooltip && <DraftTooltip currentStatus={status} />}
-              </span>
-              <button
+                </span>
+                <button
                 onClick={handleDiscardAll}
-                style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline", fontSize: "0.85rem" }}
-              >
+                style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", textDecoration: "underline", fontSize: "0.85rem", flexShrink: 0 }}
+                >
                 Discard all
-              </button>
+                </button>
             </>
           )}
           <button
@@ -397,7 +407,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               whiteSpace: "nowrap",
             }}
           >
-            {isSaving ? "Publishing..." : "Publish All Changes"}
+            {isSaving ? "Publishing..." : "Publish"}
           </button>
         </div>
       </nav>

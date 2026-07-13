@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\zgitpush.txt
 git add .
 
-git commit -m "Added Gutter Reels." 
+git commit -m "Added Gallery card to home page." 
 
 git push
 

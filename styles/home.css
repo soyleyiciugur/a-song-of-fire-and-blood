@@ -121,3 +121,9 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+.home-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}

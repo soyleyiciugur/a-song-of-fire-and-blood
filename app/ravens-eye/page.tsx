@@ -9,6 +9,7 @@ import dragonsData from "@/data/dragons.json";
 import chaptersData from "@/data/chapters/chapters.json";
 import { Select } from "../_components/Select";
 import styles from "./ravens-eye.module.css";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -26,12 +27,23 @@ interface GalleryEntry {
   category?: "raven" | "fleabottom";
 }
 
+type TagType = "character" | "house" | "dragon" | "chapter";
+type Tag = { label: string; type: TagType; id: string };
+
 // ── Media type helper — derived from the src extension, never stored ───────
 
 const VIDEO_EXT = [".mp4", ".webm", ".mov"];
 function isVideo(src: string) {
   const lower = src.toLowerCase();
   return VIDEO_EXT.some((ext) => lower.endsWith(ext));
+}
+
+// A hack that gets iOS/desktop Safari (and most other browsers) to paint
+// an actual frame instead of a black rectangle for a <video> that hasn't
+// been played yet — without it, preview thumbnails in the reels grid were
+// invisible until tapped.
+function withPosterFrame(src: string) {
+  return `${src}#t=0.1`;
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -79,13 +91,21 @@ const SORT_OPTIONS = [
   { id: "worldDate-asc", name: "Date: oldest first" },
   { id: "worldDate-desc", name: "Date: newest first" },
 ];
+// Grouped so we can render "Characters: A, B" / "Houses: C" as separate
+// lines instead of one flat, mixed-up row of pills.
+function groupedTagsFor(entry: GalleryEntry): Record<TagType, Tag[]> {
+  const chapter = entry.chapterId ? chapterMap[entry.chapterId] : null;
+  return {
+    character: entry.characterIds.map((id) => ({ label: charMap[id] ?? id, type: "character", id })),
+    house: entry.houseIds.map((id) => ({ label: houseMap[id] ?? id, type: "house", id })),
+    dragon: entry.dragonIds.map((id) => ({ label: dragonMap[id] ?? id, type: "dragon", id })),
+    chapter: chapter ? [{ label: chapter, type: "chapter", id: entry.chapterId! }] : [],
+  };
+}
 
-function tagsFor(entry: GalleryEntry) {
-  return [
-    ...entry.characterIds.map((id) => ({ label: charMap[id] ?? id, type: "character" as const, id })),
-    ...entry.houseIds.map((id) => ({ label: houseMap[id] ?? id, type: "house" as const, id })),
-    ...entry.dragonIds.map((id) => ({ label: dragonMap[id] ?? id, type: "dragon" as const, id })),
-  ];
+function flatTagsFor(entry: GalleryEntry): Tag[] {
+  const g = groupedTagsFor(entry);
+  return [...g.character, ...g.house, ...g.dragon, ...g.chapter];
 }
 
 function filterOptionsFor(entries: GalleryEntry[]) {
@@ -101,25 +121,73 @@ function filterOptionsFor(entries: GalleryEntry[]) {
   return { characters, houses, dragons };
 }
 
-// ── Tag button — clickable, applies a filter and scrolls back to the grid ──
+// Where a tag click should navigate to. Adjust these paths if your actual
+// routes differ (dragons in particular — I haven't seen that route file).
+function pathForTag(tag: Tag): string {
+  switch (tag.type) {
+    case "character": 
+      return `/characters/${tag.id}`;
+      
+    case "house": 
+      return `/houses/${tag.id}`;
+      
+    case "dragon": 
+      return `/dragons/${tag.id}`;
+      
+    case "chapter": 
+      return `/chapters/${tag.id}`;
+  }
+}
 
-function TagButton({
-  tag,
-  onClick,
-  small = false,
-}: {
-  tag: { label: string; type: "character" | "house" | "dragon"; id: string };
-  onClick: (type: "character" | "house" | "dragon", id: string) => void;
-  small?: boolean;
-}) {
+// ── Tag button — now navigates to the entity's own page instead of
+//    filtering the gallery. ────────────────────────────────────────────────
+
+function TagButton({ tag, small = false }: { tag: Tag; small?: boolean }) {
+  const router = useRouter();
   return (
     <button
       type="button"
-      onClick={(e) => { e.stopPropagation(); onClick(tag.type, tag.id); }}
+      onClick={(e) => {
+        e.stopPropagation();
+        router.push(pathForTag(tag));
+      }}
       className={styles.tagBtn}
     >
       <span className={small ? "te-pill te-pill-sm" : "te-pill"}>{tag.label}</span>
     </button>
+  );
+}
+
+// Renders tags grouped by category, each on its own row with a small
+// kicker label — instead of one flat mixed row.
+function GroupedTags({ entry, small = false }: { entry: GalleryEntry; small?: boolean }) {
+  const g = groupedTagsFor(entry);
+  const rows: { label: string; tags: Tag[] }[] = [
+    { label: "Characters", tags: g.character },
+    { label: "Houses", tags: g.house },
+    { label: "Dragons", tags: g.dragon },
+    { label: "Chapter", tags: g.chapter },
+  ].filter((r) => r.tags.length > 0);
+
+  if (rows.length === 0) return null;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      {rows.map((row) => (
+        <div 
+          key={row.label} 
+          className={styles.tagGroup} 
+          style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px" }}
+        >
+          <span className={styles.tagGroupLabel} style={{ opacity: 0.6, fontSize: "0.8rem", marginRight: "4px" }}>
+            {row.label}:
+          </span>
+          {row.tags.map((t) => (
+            <TagButton key={`${t.type}-${t.id}`} tag={t} small={small} />
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -132,7 +200,6 @@ function Lightbox({
   onNext,
   hasPrev,
   hasNext,
-  onTagClick,
 }: {
   entry: GalleryEntry;
   onClose: () => void;
@@ -140,7 +207,6 @@ function Lightbox({
   onNext: () => void;
   hasPrev: boolean;
   hasNext: boolean;
-  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
 }) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -155,9 +221,6 @@ function Lightbox({
       document.body.style.overflow = "";
     };
   }, [onClose, onPrev, onNext, hasPrev, hasNext]);
-
-  const tags = tagsFor(entry);
-  const chapter = entry.chapterId ? chapterMap[entry.chapterId] : null;
 
   return (
     <div onClick={onClose} className={styles.lightboxBackdrop}>
@@ -179,10 +242,7 @@ function Lightbox({
         <div className={styles.lightboxMeta}>
           {entry.caption && <p className={styles.lightboxCaption}>{entry.caption}</p>}
           <div className={styles.lightboxTags}>
-            {tags.map((t) => (
-              <TagButton key={`${t.type}-${t.id}`} tag={t} onClick={(type, id) => { onClose(); onTagClick(type, id); }} />
-            ))}
-            {chapter && <span className="te-pill">{chapter}</span>}
+            <GroupedTags entry={entry} />
           </div>
           {entry.worldDate && <div className={styles.lightboxDate}>{formatDate(entry.worldDate)}</div>}
         </div>
@@ -205,20 +265,17 @@ function Lightbox({
   );
 }
 
-// ── Reels viewer — TikTok/Reels style vertical scroll-snap, works on both
-//    touch (mobile) and mouse-wheel/scrollbar (desktop) via native CSS
-//    scroll-snap, no extra JS needed for the scrolling itself. An
-//    IntersectionObserver just decides which <video> should be playing. ────
+// ── Reels viewer — TikTok/Reels style vertical scroll-snap. Native <video
+//    controls> is gone entirely (that's what was drawing the persistent
+//    10s-skip/scrub bar); play/pause is now a simple tap toggle with a
+//    center icon that fades in and out, never blocking the frame. ─────────
 
-function ReelSlide({
-  entry,
-  onTagClick,
-}: {
-  entry: GalleryEntry;
-  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
-}) {
+function ReelSlide({ entry }: { entry: GalleryEntry }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
+  const [showIcon, setShowIcon] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const iconTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -228,9 +285,10 @@ function ReelSlide({
     const observer = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting && e.intersectionRatio > 0.6) {
-          video.play().catch(() => {});
+          video.play().then(() => setIsPlaying(true)).catch(() => {});
         } else {
           video.pause();
+          setIsPlaying(false);
         }
       },
       { threshold: [0, 0.6, 1] }
@@ -239,7 +297,24 @@ function ReelSlide({
     return () => observer.disconnect();
   }, []);
 
-  const tags = tagsFor(entry);
+  const flashIcon = () => {
+    setShowIcon(true);
+    if (iconTimeout.current) clearTimeout(iconTimeout.current);
+    iconTimeout.current = setTimeout(() => setShowIcon(false), 500);
+  };
+
+  const handleTap = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+    flashIcon();
+  };
 
   return (
     <div ref={slideRef} className={styles.reelSlide}>
@@ -249,22 +324,29 @@ function ReelSlide({
         className={styles.reelVideo}
         loop
         playsInline
-        controls
-        // Sound is on by default per spec — most mobile browsers will still
-        // block un-muted autoplay until the user has interacted with the
-        // page at least once; that's a browser policy, not something we
-        // can override, but this stays un-muted so it plays with sound as
-        // soon as the browser allows it.
+        // Sound stays on by default — most mobile browsers still require
+        // one prior user interaction with the page before an un-muted
+        // video is allowed to autoplay; that's a browser policy, not
+        // something to work around here.
       />
 
-      {(entry.caption || tags.length > 0) && (
+      {/* Invisible full-slide tap target — toggles play/pause, doesn't
+          eat scroll-snap gestures since it's just a click/tap, not a
+          drag handler. */}
+      <div className={styles.reelTapCatcher} onClick={handleTap} />
+
+      <div className={`${styles.reelCenterIcon} ${showIcon ? styles.reelCenterIconVisible : ""}`}>
+        {isPlaying ? (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" /><rect x="14" y="5" width="4" height="14" /></svg>
+        ) : (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+        )}
+      </div>
+
+      {(entry.caption || flatTagsFor(entry).length > 0) && (
         <div className={styles.reelSlideMeta}>
           {entry.caption && <p className={styles.reelCaption}>{entry.caption}</p>}
-          <div className={styles.reelTags}>
-            {tags.map((t) => (
-              <TagButton key={`${t.type}-${t.id}`} tag={t} onClick={onTagClick} small />
-            ))}
-          </div>
+          <GroupedTags entry={entry} small />
         </div>
       )}
     </div>
@@ -275,18 +357,15 @@ function ReelsViewer({
   entries,
   startIndex,
   onClose,
-  onTagClick,
 }: {
   entries: GalleryEntry[];
   startIndex: number;
   onClose: () => void;
-  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    // Jump straight to the tapped video without an animated scroll.
     const el = containerRef.current;
     if (el) {
       const slide = el.children[startIndex] as HTMLElement | undefined;
@@ -306,7 +385,7 @@ function ReelsViewer({
   return (
     <div className={styles.reelsViewer} ref={containerRef}>
       {entries.map((entry) => (
-        <ReelSlide key={entry.id} entry={entry} onTagClick={(type, id) => { onClose(); onTagClick(type, id); }} />
+        <ReelSlide key={entry.id} entry={entry} />
       ))}
       <button onClick={onClose} className={styles.reelsCloseBtn} aria-label="Close">
         ✕
@@ -368,13 +447,11 @@ function GallerySection({
   emptyLabel,
   intro,
   onOpen,
-  onTagClick,
 }: {
   entries: GalleryEntry[];
   emptyLabel: string;
   intro: string;
   onOpen: (list: GalleryEntry[], idx: number) => void;
-  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
 }) {
   const [filterChar, setFilterChar] = useState<string>("");
   const [filterHouse, setFilterHouse] = useState<string>("");
@@ -398,15 +475,6 @@ function GallerySection({
     }
     return result;
   }, [entries, filterChar, filterHouse, filterDragon, sort]);
-
-  // Expose setters so tag clicks from the lightbox can drive these filters.
-  useEffect(() => {
-    (window as any).__ravensEyeSetFilter = (type: "character" | "house" | "dragon", id: string) => {
-      if (type === "character") setFilterChar(id);
-      if (type === "house") setFilterHouse(id);
-      if (type === "dragon") setFilterDragon(id);
-    };
-  }, []);
 
   const anyFilter = filterChar || filterHouse || filterDragon;
 
@@ -453,7 +521,7 @@ function GallerySection({
       ) : (
         <div className={styles.masonry}>
           {filtered.map((entry, idx) => {
-            const tags = tagsFor(entry);
+            const tags = flatTagsFor(entry);
             return (
               <div key={entry.id} onClick={() => onOpen(filtered, idx)} className={styles.card}>
                 <img src={entry.src} alt={entry.caption || "Gallery image"} loading="lazy" className={styles.cardImg} />
@@ -462,7 +530,7 @@ function GallerySection({
                     {entry.caption && <p className={styles.cardCaption}>{entry.caption}</p>}
                     <div className={styles.cardTags}>
                       {tags.slice(0, 3).map((t) => (
-                        <TagButton key={`${t.type}-${t.id}`} tag={t} onClick={onTagClick} small />
+                        <TagButton key={`${t.type}-${t.id}`} tag={t} small />
                       ))}
                       {tags.length > 3 && <span className="te-pill te-pill-sm">{`+${tags.length - 3}`}</span>}
                     </div>
@@ -477,7 +545,9 @@ function GallerySection({
   );
 }
 
-// ── Reels grid section (Gutter Reels tab) ───────────────────────────────────
+// ── Reels grid section (Gutter Reels tab) — now with the same filter/sort
+//    controls as the image tabs, and thumbnails that actually render a
+//    frame instead of a blank/black box. ───────────────────────────────────
 
 function ReelsGridSection({
   entries,
@@ -490,17 +560,85 @@ function ReelsGridSection({
   intro: string;
   onOpen: (idx: number) => void;
 }) {
+  const [filterChar, setFilterChar] = useState<string>("");
+  const [filterHouse, setFilterHouse] = useState<string>("");
+  const [filterDragon, setFilterDragon] = useState<string>("");
+  const [sort, setSort] = useState<SortKey>("uploadedAt");
+
+  const { characters, houses, dragons } = useMemo(() => filterOptionsFor(entries), [entries]);
+
+  const filtered = useMemo(() => {
+    let result = [...entries];
+    if (filterChar) result = result.filter((e) => e.characterIds.includes(filterChar));
+    if (filterHouse) result = result.filter((e) => e.houseIds.includes(filterHouse));
+    if (filterDragon) result = result.filter((e) => e.dragonIds.includes(filterDragon));
+
+    if (sort === "uploadedAt") {
+      result.sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
+    } else if (sort === "worldDate-asc") {
+      result.sort((a, b) => dateToSortKey(a.worldDate) - dateToSortKey(b.worldDate));
+    } else {
+      result.sort((a, b) => dateToSortKey(b.worldDate) - dateToSortKey(a.worldDate));
+    }
+    return result;
+  }, [entries, filterChar, filterHouse, filterDragon, sort]);
+
+  const anyFilter = filterChar || filterHouse || filterDragon;
+
+  const charOptions = [{ id: "", name: "All characters" }, ...characters];
+  const houseOptions = [{ id: "", name: "All houses" }, ...houses.map((h) => ({ id: h.id, name: `${h.name}` }))];
+  const dragonOptions = [{ id: "", name: "All dragons" }, ...dragons];
+
   return (
     <>
       <p className={styles.tabIntro}>{intro}</p>
-      {entries.length === 0 ? (
-        <div className={styles.emptyState}>{emptyLabel}</div>
+
+      <div className={styles.filterBar}>
+        {characters.length > 0 && (
+          <Select value={filterChar} options={charOptions} onChange={setFilterChar} searchable />
+        )}
+        {houses.length > 0 && (
+          <Select value={filterHouse} options={houseOptions} onChange={setFilterHouse} searchable />
+        )}
+        {dragons.length > 0 && (
+          <Select value={filterDragon} options={dragonOptions} onChange={setFilterDragon} searchable />
+        )}
+
+        <div className={styles.filterRight}>
+          {anyFilter && (
+            <button
+              onClick={() => { setFilterChar(""); setFilterHouse(""); setFilterDragon(""); }}
+              className={styles.clearBtn}
+            >
+              Clear filters
+            </button>
+          )}
+          <Select value={sort} options={SORT_OPTIONS} onChange={(v) => setSort(v as SortKey)} />
+        </div>
+      </div>
+
+      {anyFilter && (
+        <div className={styles.resultCount}>
+          {filtered.length} {filtered.length === 1 ? "result" : "results"}
+        </div>
+      )}
+
+      {filtered.length === 0 ? (
+        <div className={styles.emptyState}>{entries.length === 0 ? emptyLabel : "No clips match the current filters."}</div>
       ) : (
         <div className={styles.reelsGrid}>
-          {entries.map((entry, idx) => (
+          {filtered.map((entry, idx) => (
             <div key={entry.id} onClick={() => onOpen(idx)} className={styles.reelCard}>
-              <video src={entry.src} className={styles.reelThumb} muted playsInline preload="metadata" />
-              <div className={styles.reelPlayIcon}>▶</div>
+              <video
+                src={withPosterFrame(entry.src)}
+                className={styles.reelThumb}
+                muted
+                playsInline
+                preload="metadata"
+              />
+              <div className={styles.reelPlayIcon}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+              </div>
             </div>
           ))}
         </div>
@@ -511,11 +649,24 @@ function ReelsGridSection({
 
 // ── Main Page ──────────────────────────────────────────────────────────────
 
-export default function RavensEyePage() {
+  export default function RavensEyePage() {
   const [tab, setTab] = useState<Tab>("raven");
   const [lightboxList, setLightboxList] = useState<GalleryEntry[] | null>(null);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
   const [reelsStartIdx, setReelsStartIdx] = useState<number | null>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const itemId = searchParams.get("item");
+    if (!itemId) return;
+    const idx = ravenEntries.findIndex((e) => e.id === itemId);
+    if (idx !== -1) {
+      setTab("raven");
+      setLightboxList(ravenEntries);
+      setLightboxIdx(idx);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const openLightbox = useCallback((list: GalleryEntry[], idx: number) => {
     setLightboxList(list);
@@ -524,15 +675,6 @@ export default function RavensEyePage() {
   const closeLightbox = useCallback(() => {
     setLightboxList(null);
     setLightboxIdx(null);
-  }, []);
-
-  // Tag click: switch to the raven tab (that's where char/house/dragon
-  // filters live) and apply the filter once that section has mounted.
-  const handleTagClick = useCallback((type: "character" | "house" | "dragon", id: string) => {
-    setTab("raven");
-    requestAnimationFrame(() => {
-      (window as any).__ravensEyeSetFilter?.(type, id);
-    });
   }, []);
 
   const activeMeta = TAB_META[tab];
@@ -560,7 +702,6 @@ export default function RavensEyePage() {
           emptyLabel={activeMeta.emptyLabel}
           intro={activeMeta.intro(activeMeta.entries.length)}
           onOpen={openLightbox}
-          onTagClick={handleTagClick}
         />
       )}
 
@@ -572,7 +713,6 @@ export default function RavensEyePage() {
           onNext={() => setLightboxIdx((i) => (i! < lightboxList.length - 1 ? i! + 1 : i))}
           hasPrev={lightboxIdx > 0}
           hasNext={lightboxIdx < lightboxList.length - 1}
-          onTagClick={handleTagClick}
         />
       )}
 
@@ -581,7 +721,6 @@ export default function RavensEyePage() {
           entries={reelEntries}
           startIndex={reelsStartIdx}
           onClose={() => setReelsStartIdx(null)}
-          onTagClick={handleTagClick}
         />
       )}
     </div>

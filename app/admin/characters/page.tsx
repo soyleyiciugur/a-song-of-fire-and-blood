@@ -438,7 +438,37 @@ function CharactersTab({
                 <SearchableSelect label="Spouse" value={activeChar.spouse} options={charOptions} onChange={(v: string) => handleChange("spouse", v)} />
                 <SearchableSelect label="Dragon" value={activeChar.dragon} options={dragonOptions} onChange={(v: string) => handleChange("dragon", v)} />
               </div>
-
+              <div>
+                <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Traits</span>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "10px", marginBottom: "10px" }}>
+                  {(activeChar.traits || []).map((trait: string, i: number) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 6px 6px 12px", background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "20px", fontSize: "0.9rem" }}>
+                      <span>{trait}</span>
+                      <button
+                        onClick={() => handleChange("traits", (activeChar.traits || []).filter((_: string, idx: number) => idx !== i))}
+                        style={{ background: "rgba(178,34,34,0.2)", color: "#ff8080", border: "none", width: "18px", height: "18px", borderRadius: "50%", cursor: "pointer", lineHeight: 1, fontSize: "0.8rem" }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                  {(activeChar.traits || []).length === 0 && <div style={{ opacity: 0.5, fontStyle: "italic" }}>No traits added yet.</div>}
+                </div>
+                <input
+                  placeholder="Type a trait and press Enter..."
+                  onKeyDown={(e) => {
+                    const val = (e.target as HTMLInputElement).value.trim();
+                    if (e.key === "Enter" && val) {
+                      e.preventDefault();
+                      if (!(activeChar.traits || []).includes(val)) {
+                        handleChange("traits", [...(activeChar.traits || []), val]);
+                      }
+                      (e.target as HTMLInputElement).value = "";
+                    }
+                  }}
+                  style={{ width: "100%", padding: "10px 12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", outline: "none", fontFamily: "inherit" }}
+                />
+              </div>
               <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Summary</span>
                 <textarea value={activeChar.summary} onChange={(e) => handleChange("summary", e.target.value)} className="custom-scroll" style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", minHeight: "180px", fontFamily: "inherit", resize: "vertical", lineHeight: "1.6", outline: "none" }} />
@@ -1333,6 +1363,7 @@ export default function AdminCharactersPage() {
   const [tab, setTab] = useState<"characters" | "family-tree">("characters");
   const [chars, setChars] = useState<any[]>(charactersData as any[]);
   const [allQuotes, setAllQuotes] = useState<any[]>(initialQuotes as any[]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const draftChars = localStorage.getItem("draft-characters");
@@ -1348,17 +1379,20 @@ export default function AdminCharactersPage() {
         setAllQuotes(JSON.parse(draftQuotes));
       } catch {}
     }
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
+    if (!isLoaded) return;
     localStorage.setItem("draft-characters", JSON.stringify(chars));
     window.dispatchEvent(new Event("admin:draft-updated"));
-  }, [chars]);
+  }, [chars, isLoaded]);
 
   useEffect(() => {
+    if (!isLoaded) return;
     localStorage.setItem("draft-quotes", JSON.stringify(allQuotes));
     window.dispatchEvent(new Event("admin:draft-updated"));
-  }, [allQuotes]);
+  }, [allQuotes, isLoaded]);
 
   return (
     <div style={{ padding: "2rem", maxWidth: "1300px", margin: "0 auto", position: "relative", fontFamily: "inherit" }}>

@@ -6,6 +6,7 @@ import { FLAT_NAV_ITEMS } from "@/constants/navigation"; // NAV_ITEMS yerine
 import { getRandomQuote } from "@/lib/characters";
 import CharacterQuote from "@/components/character/CharacterQuote";
 import WorldDateCard from "@/components/home/WorldDateCard";
+import RavenEyeCard from "@/components/home/RavenEyeCard";
 
 export const dynamic = "force-dynamic";
 
@@ -48,13 +49,13 @@ export default function Home() {
         </div>
 
         <div className="home-grid">
-          <div className="card card-padding home-quote-card">
-            <span className="home-quote-label">From the Chronicle</span>
-            {featuredQuote ? (
-              <CharacterQuote quote={featuredQuote} compact showAttribution />
-            ) : null}
+          <div className="home-left-col">
+            <div className="card card-padding home-quote-card">
+              <span className="home-quote-label">From the Chronicle</span>
+              {featuredQuote ? <CharacterQuote quote={featuredQuote} compact showAttribution /> : null}
+            </div>
+            <RavenEyeCard />
           </div>
-
           <WorldDateCard />
         </div>
       </div>
