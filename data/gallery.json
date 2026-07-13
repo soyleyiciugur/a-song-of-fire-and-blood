@@ -1,5 +1,396 @@
 [
   {
+    "id": "gallery-mrj7mx6f",
+    "src": "/videos/reels/alester-jace-kavusma.mp4",
+    "caption": "BÜYÜK KAVUŞMA",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "a-crown-of-thorns",
+    "worldDate": {
+      "day": 3,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7mte4",
+    "src": "/videos/reels/alester-valla-huseyin.mp4",
+    "caption": "BABA GELİYOOOOOOOOOOO",
+    "characterIds": [
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "a-crown-of-thorns",
+    "worldDate": {
+      "day": 3,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7mp57",
+    "src": "/videos/reels/abdulhajaerys.mp4",
+    "caption": "gaelor vs. jace",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "a-crown-of-thorns",
+    "worldDate": {
+      "day": 2,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7mm4g",
+    "src": "/videos/reels/visenor-topuk.mp4",
+    "caption": "visenor demonstrating erkekliğin 1. kuralı",
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen",
+      "ser-alester-dayne",
+      "curtass-whent"
+    ],
+    "houseIds": [
+      "targaryen",
+      "whent",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-weight-of-loyalty",
+    "worldDate": {
+      "day": 3,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7miaa",
+    "src": "/videos/reels/gaelor-bruh-moment.mp4",
+    "caption": "işkence ediyorum abi",
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 19,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7mfdh",
+    "src": "/videos/reels/alester-sad-edit.mp4",
+    "caption": "-duygulandınız...\n+evet maalesef",
+    "characterIds": [
+      "ser-alester-dayne",
+      "curtass-whent"
+    ],
+    "houseIds": [
+      "dayne",
+      "whent"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-broken-knight",
+    "worldDate": {
+      "day": 3,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7ma4s",
+    "src": "/videos/reels/hmd-psikolojik-siddet.mp4",
+    "caption": "H.R.R.M",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": "the-weight-of-loyalty",
+    "worldDate": {
+      "day": 3,
+      "moon": 3,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7m7zs",
+    "src": "/videos/reels/kral-visenor-mektup-dis.mp4",
+    "caption": "visenor the eşşoleşşek",
+    "characterIds": [
+      "visenor-targaryen",
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 20,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7m2m0",
+    "src": "/videos/reels/chapter-2-ozet.mp4",
+    "caption": "chapter 2 in a nutshell",
+    "characterIds": [
+      "baelenys-targaryen",
+      "jacaelon-targaryen",
+      "saera-targaryen",
+      "visenor-targaryen",
+      "vhaemys-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 20,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7lxqx",
+    "src": "/videos/reels/jace-noldu-yarram.mp4",
+    "caption": "bro thought he could handle jace 💀",
+    "characterIds": [
+      "visenor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 19,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7ltqc",
+    "src": "/videos/reels/chapter-1-ozet.mp4",
+    "caption": "chapter 1 in a nutshell",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "visenor-targaryen",
+      "rhaella-targaryen",
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 16,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7lq16",
+    "src": "/videos/reels/aslinda-hic-fena-fikir-degil.mp4",
+    "caption": "jace when visenor offers to send him to dorne when he becomes king",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": null,
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7ljmc",
+    "src": "/videos/reels/babanin-amk.mp4",
+    "caption": "jace anytime visenor sucks up daddy",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7lesk",
+    "src": "/videos/reels/jace-dorneda-keyif.mp4",
+    "caption": "krallık tehlikedeyken dorneda keyif yapan jacein böceklik oçluk piçlik makaralık",
+    "characterIds": [
+      "gaelor-targaryen",
+      "visenor-targaryen",
+      "ser-saathos-maris",
+      "jacaelon-targaryen",
+      "ser-alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": null,
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7l9hy",
+    "src": "/videos/reels/targaryen-ya-ruh-ya.mp4",
+    "caption": "al ulukurt çöreğinden de ye kardeşim",
+    "characterIds": [],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7l6vl",
+    "src": "/videos/reels/gaelor-iskence-the-hand.mp4",
+    "caption": "torture and kill first, ask questions later #gaylord",
+    "characterIds": [
+      "gaelor-targaryen",
+      "ser-saathos-maris"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-price-of-trust",
+    "worldDate": {
+      "day": 19,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7l0a7",
+    "src": "/videos/reels/visenor-kralim-geldi.mp4",
+    "caption": "ooo babacım geldi hemen s",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "jaery-targaryen",
+      "maela-targaryen",
+      "rhaella-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "vahaemon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 17,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mrj7kjje",
+    "src": "/videos/reels/jace-yengeden-makas.mp4",
+    "caption": "oğlum o senin yengen yengen",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "rhaella-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-poison-beneath-the-crown",
+    "worldDate": {
+      "day": 16,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
     "id": "gallery-mriadr0v",
     "src": "/images/gallery/visenor-xeske-saygin-olabilsem.jpeg",
     "caption": "çok zor amk çok zor güçlü dur lordum",
