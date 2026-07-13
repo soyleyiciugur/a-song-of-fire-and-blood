@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\ravens-eye\page.tsx
 "use client";
 
-import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef, Suspense } from "react";
 import galleryData from "@/data/gallery.json";
 import charactersData from "@/data/characters/characters.json";
 import housesData from "@/data/houses.json";
@@ -649,7 +649,7 @@ function ReelsGridSection({
 
 // ── Main Page ──────────────────────────────────────────────────────────────
 
-  export default function RavensEyePage() {
+  function RavensEyePageInner() {
   const [tab, setTab] = useState<Tab>("raven");
   const [lightboxList, setLightboxList] = useState<GalleryEntry[] | null>(null);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -665,6 +665,7 @@ function ReelsGridSection({
       setLightboxList(ravenEntries);
       setLightboxIdx(idx);
     }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -724,5 +725,13 @@ function ReelsGridSection({
         />
       )}
     </div>
+  );
+}
+
+export default function RavensEyePage() {
+  return (
+    <Suspense fallback={null}>
+      <RavensEyePageInner />
+    </Suspense>
   );
 }
