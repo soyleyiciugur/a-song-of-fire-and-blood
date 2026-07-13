@@ -6,6 +6,35 @@ import { useState, useEffect } from "react";
 import housesData from "../../../data/houses.json";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
 
+
+// Dosyanın üstüne, component'lerin yanına ekle
+
+const HOUSE_IMAGE_PREFIX = "/images/houses/";
+
+function ImagePathInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const filename = value.startsWith(HOUSE_IMAGE_PREFIX)
+    ? value.slice(HOUSE_IMAGE_PREFIX.length)
+    : value.replace(/^\/images\/houses\//, "");
+
+  return (
+    <div style={{
+      display: "flex", alignItems: "center",
+      border: "1px solid rgba(255,255,255,0.2)", borderRadius: "4px",
+      background: "rgba(0,0,0,0.2)", overflow: "hidden",
+    }}>
+      <span style={{ padding: "0 0 0 12px", opacity: 0.6, fontSize: "0.85rem", whiteSpace: "nowrap" }}>
+        {HOUSE_IMAGE_PREFIX}
+      </span>
+      <input
+        value={filename}
+        onChange={(e) => onChange(`${HOUSE_IMAGE_PREFIX}${e.target.value}`)}
+        placeholder="example.webp"
+        style={{ padding: "12px", background: "transparent", border: "none", color: "inherit", outline: "none", flex: 1 }}
+      />
+    </div>
+  );
+}
+
 const slugify = (text: string) =>
   text.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
 
@@ -204,8 +233,8 @@ export default function AdminHousesPage() {
           </div>
 
           <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Sigil Image URL</span>
-            <input value={activeHouse.sigilSrc} onChange={(e) => handleChange("sigilSrc", e.target.value)} style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", outline: "none" }} />
+            <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Image Path</span>
+            <ImagePathInput value={activeHouse.sigilSrc} onChange={(v) => handleChange("sigilSrc", v)} />
           </label>
 
           <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>

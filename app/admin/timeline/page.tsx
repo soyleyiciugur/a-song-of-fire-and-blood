@@ -243,6 +243,10 @@ export default function AdminTimelinePage() {
           {notification.message}
         </div>
       )}
+
+      {/* Bottom spacer so the last card doesn't sit flush against the
+          viewport edge when scrolled all the way down. */}
+      <div style={{ height: "2100px" }} />
     </div>
   );
 }

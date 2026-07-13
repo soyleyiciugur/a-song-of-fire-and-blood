@@ -6,6 +6,34 @@ import { useState, useEffect } from "react";
 import chaptersData from "../../../data/chapters/chapters.json";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
 
+// Dosyanın üstüne, component'lerin yanına ekle
+
+const CHAPTER_IMAGE_PREFIX = "/images/chapters/";
+
+function ImagePathInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const filename = value.startsWith(CHAPTER_IMAGE_PREFIX)
+    ? value.slice(CHAPTER_IMAGE_PREFIX.length)
+    : value.replace(/^\/images\/chapters\//, "");
+
+  return (
+    <div style={{
+      display: "flex", alignItems: "center",
+      border: "1px solid rgba(255,255,255,0.2)", borderRadius: "4px",
+      background: "rgba(0,0,0,0.2)", overflow: "hidden",
+    }}>
+      <span style={{ padding: "0 0 0 12px", opacity: 0.6, fontSize: "0.85rem", whiteSpace: "nowrap" }}>
+        {CHAPTER_IMAGE_PREFIX}
+      </span>
+      <input
+        value={filename}
+        onChange={(e) => onChange(`${CHAPTER_IMAGE_PREFIX}${e.target.value}`)}
+        placeholder="example.webp"
+        style={{ padding: "12px", background: "transparent", border: "none", color: "inherit", outline: "none", flex: 1 }}
+      />
+    </div>
+  );
+}
+
 const slugify = (text: string) =>
   text
     .toLowerCase()
@@ -188,7 +216,7 @@ export default function AdminChaptersPage() {
 
             <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Image Path</span>
-              <input value={activeChapter.image} onChange={(e) => handleChange("image", e.target.value)} placeholder="/images/chapters/example.webp" style={{ padding: "12px", background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", borderRadius: "4px", outline: "none" }} />
+              <ImagePathInput value={activeChapter.image} onChange={(v) => handleChange("image", v)} />
             </label>
 
             <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -231,6 +259,10 @@ export default function AdminChaptersPage() {
           {notification.message}
         </div>
       )}
+
+      {/* Bottom spacer so the last card doesn't sit flush against the
+          viewport edge when scrolled all the way down. */}
+      <div style={{ height: "1100px" }} />
     </div>
   );
 }

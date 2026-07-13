@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\ravens-eye\page.tsx
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import galleryData from "@/data/gallery.json";
 import charactersData from "@/data/characters/characters.json";
 import housesData from "@/data/houses.json";
@@ -23,10 +23,15 @@ interface GalleryEntry {
   chapterId: string | null;
   worldDate: WorldDate | null;
   uploadedAt: string;
-  // Optional — entries without this (or with "raven") stay in the main
-  // archive. Set to "fleabottom" in gallery.json to move an image into the
-  // meme corner instead. Nothing breaks for old entries that don't have it.
   category?: "raven" | "fleabottom";
+}
+
+// ── Media type helper — derived from the src extension, never stored ───────
+
+const VIDEO_EXT = [".mp4", ".webm", ".mov"];
+function isVideo(src: string) {
+  const lower = src.toLowerCase();
+  return VIDEO_EXT.some((ext) => lower.endsWith(ext));
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -50,8 +55,9 @@ function dateToSortKey(d: WorldDate | null): number {
 // ── Data ───────────────────────────────────────────────────────────────────
 
 const allEntries = galleryData as unknown as GalleryEntry[];
-const ravenEntries = allEntries.filter((e) => e.category !== "fleabottom");
-const fleaEntries = allEntries.filter((e) => e.category === "fleabottom");
+const ravenEntries = allEntries.filter((e) => e.category !== "fleabottom" && !isVideo(e.src));
+const fleaEntries = allEntries.filter((e) => e.category === "fleabottom" && !isVideo(e.src));
+const reelEntries = allEntries.filter((e) => isVideo(e.src));
 
 const charMap = Object.fromEntries(
   (charactersData as { id: string; name: string }[]).map((c) => [c.id, c.name])
@@ -76,15 +82,12 @@ const SORT_OPTIONS = [
 
 function tagsFor(entry: GalleryEntry) {
   return [
-    ...entry.characterIds.map((id) => charMap[id] ?? id),
-    ...entry.houseIds.map((id) => `${houseMap[id] ?? id}`),
-    ...entry.dragonIds.map((id) => dragonMap[id] ?? id),
+    ...entry.characterIds.map((id) => ({ label: charMap[id] ?? id, type: "character" as const, id })),
+    ...entry.houseIds.map((id) => ({ label: houseMap[id] ?? id, type: "house" as const, id })),
+    ...entry.dragonIds.map((id) => ({ label: dragonMap[id] ?? id, type: "dragon" as const, id })),
   ];
 }
 
-// Builds the character/house/dragon filter option lists scoped to whatever
-// pool of entries is currently active (Raven's Eye or Flea Bottom) — so the
-// dropdowns never offer a filter that would return zero results.
 function filterOptionsFor(entries: GalleryEntry[]) {
   const characters = (charactersData as { id: string; name: string }[]).filter((c) =>
     entries.some((e) => e.characterIds.includes(c.id))
@@ -98,7 +101,29 @@ function filterOptionsFor(entries: GalleryEntry[]) {
   return { characters, houses, dragons };
 }
 
-// ── Lightbox ───────────────────────────────────────────────────────────────
+// ── Tag button — clickable, applies a filter and scrolls back to the grid ──
+
+function TagButton({
+  tag,
+  onClick,
+  small = false,
+}: {
+  tag: { label: string; type: "character" | "house" | "dragon"; id: string };
+  onClick: (type: "character" | "house" | "dragon", id: string) => void;
+  small?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => { e.stopPropagation(); onClick(tag.type, tag.id); }}
+      className={styles.tagBtn}
+    >
+      <span className={small ? "te-pill te-pill-sm" : "te-pill"}>{tag.label}</span>
+    </button>
+  );
+}
+
+// ── Lightbox (images only) ──────────────────────────────────────────────────
 
 function Lightbox({
   entry,
@@ -107,6 +132,7 @@ function Lightbox({
   onNext,
   hasPrev,
   hasNext,
+  onTagClick,
 }: {
   entry: GalleryEntry;
   onClose: () => void;
@@ -114,6 +140,7 @@ function Lightbox({
   onNext: () => void;
   hasPrev: boolean;
   hasNext: boolean;
+  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
 }) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -153,9 +180,9 @@ function Lightbox({
           {entry.caption && <p className={styles.lightboxCaption}>{entry.caption}</p>}
           <div className={styles.lightboxTags}>
             {tags.map((t) => (
-              <span key={t} className="te-pill">{t}</span>
+              <TagButton key={`${t.type}-${t.id}`} tag={t} onClick={(type, id) => { onClose(); onTagClick(type, id); }} />
             ))}
-            {chapter && <span className="te-pill">{`${chapter}`}</span>}
+            {chapter && <span className="te-pill">{chapter}</span>}
           </div>
           {entry.worldDate && <div className={styles.lightboxDate}>{formatDate(entry.worldDate)}</div>}
         </div>
@@ -178,9 +205,119 @@ function Lightbox({
   );
 }
 
+// ── Reels viewer — TikTok/Reels style vertical scroll-snap, works on both
+//    touch (mobile) and mouse-wheel/scrollbar (desktop) via native CSS
+//    scroll-snap, no extra JS needed for the scrolling itself. An
+//    IntersectionObserver just decides which <video> should be playing. ────
+
+function ReelSlide({
+  entry,
+  onTagClick,
+}: {
+  entry: GalleryEntry;
+  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const slideRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const slide = slideRef.current;
+    if (!video || !slide) return;
+
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && e.intersectionRatio > 0.6) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.6, 1] }
+    );
+    observer.observe(slide);
+    return () => observer.disconnect();
+  }, []);
+
+  const tags = tagsFor(entry);
+
+  return (
+    <div ref={slideRef} className={styles.reelSlide}>
+      <video
+        ref={videoRef}
+        src={entry.src}
+        className={styles.reelVideo}
+        loop
+        playsInline
+        controls
+        // Sound is on by default per spec — most mobile browsers will still
+        // block un-muted autoplay until the user has interacted with the
+        // page at least once; that's a browser policy, not something we
+        // can override, but this stays un-muted so it plays with sound as
+        // soon as the browser allows it.
+      />
+
+      {(entry.caption || tags.length > 0) && (
+        <div className={styles.reelSlideMeta}>
+          {entry.caption && <p className={styles.reelCaption}>{entry.caption}</p>}
+          <div className={styles.reelTags}>
+            {tags.map((t) => (
+              <TagButton key={`${t.type}-${t.id}`} tag={t} onClick={onTagClick} small />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ReelsViewer({
+  entries,
+  startIndex,
+  onClose,
+  onTagClick,
+}: {
+  entries: GalleryEntry[];
+  startIndex: number;
+  onClose: () => void;
+  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    // Jump straight to the tapped video without an animated scroll.
+    const el = containerRef.current;
+    if (el) {
+      const slide = el.children[startIndex] as HTMLElement | undefined;
+      slide?.scrollIntoView({ block: "start" });
+    }
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handler);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handler);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div className={styles.reelsViewer} ref={containerRef}>
+      {entries.map((entry) => (
+        <ReelSlide key={entry.id} entry={entry} onTagClick={(type, id) => { onClose(); onTagClick(type, id); }} />
+      ))}
+      <button onClick={onClose} className={styles.reelsCloseBtn} aria-label="Close">
+        ✕
+      </button>
+    </div>
+  );
+}
+
 // ── Tab bar ──────────────────────────────────────────────────────────────
 
-type Tab = "raven" | "flea";
+type Tab = "raven" | "flea" | "reels";
 
 const TAB_META: Record<Tab, { label: string; entries: GalleryEntry[]; emptyLabel: string; intro: (count: number) => string }> = {
   raven: {
@@ -194,6 +331,12 @@ const TAB_META: Record<Tab, { label: string; entries: GalleryEntry[]; emptyLabel
     entries: fleaEntries,
     emptyLabel: "Nothing here yet — check back once someone in Flea Bottom gets creative.",
     intro: () => "Whatever the smallfolk are passing around this week. Take it with a pinch of salt (and maybe a bath after).",
+  },
+  reels: {
+    label: "Gutter Reels",
+    entries: reelEntries,
+    emptyLabel: "No reels yet — check back once someone in the gutters starts filming.",
+    intro: (n) => `${n} ${n === 1 ? "clip" : "clips"} circulating the gutters.`,
   },
 };
 
@@ -218,20 +361,20 @@ function TabBar({ active, onChange }: { active: Tab; onChange: (t: Tab) => void 
   );
 }
 
-// ── One gallery section — identical behavior for both tabs: filters, sort,
-//    tags, masonry grid. The only thing that differs between "raven" and
-//    "flea" is which entries it's fed. ─────────────────────────────────────
+// ── Image gallery section (Raven's Eye / Flea Bottom tabs) ─────────────────
 
 function GallerySection({
   entries,
   emptyLabel,
   intro,
   onOpen,
+  onTagClick,
 }: {
   entries: GalleryEntry[];
   emptyLabel: string;
   intro: string;
   onOpen: (list: GalleryEntry[], idx: number) => void;
+  onTagClick: (type: "character" | "house" | "dragon", id: string) => void;
 }) {
   const [filterChar, setFilterChar] = useState<string>("");
   const [filterHouse, setFilterHouse] = useState<string>("");
@@ -255,6 +398,15 @@ function GallerySection({
     }
     return result;
   }, [entries, filterChar, filterHouse, filterDragon, sort]);
+
+  // Expose setters so tag clicks from the lightbox can drive these filters.
+  useEffect(() => {
+    (window as any).__ravensEyeSetFilter = (type: "character" | "house" | "dragon", id: string) => {
+      if (type === "character") setFilterChar(id);
+      if (type === "house") setFilterHouse(id);
+      if (type === "dragon") setFilterDragon(id);
+    };
+  }, []);
 
   const anyFilter = filterChar || filterHouse || filterDragon;
 
@@ -310,7 +462,7 @@ function GallerySection({
                     {entry.caption && <p className={styles.cardCaption}>{entry.caption}</p>}
                     <div className={styles.cardTags}>
                       {tags.slice(0, 3).map((t) => (
-                        <span key={t} className="te-pill te-pill-sm">{t}</span>
+                        <TagButton key={`${t.type}-${t.id}`} tag={t} onClick={onTagClick} small />
                       ))}
                       {tags.length > 3 && <span className="te-pill te-pill-sm">{`+${tags.length - 3}`}</span>}
                     </div>
@@ -325,12 +477,45 @@ function GallerySection({
   );
 }
 
+// ── Reels grid section (Gutter Reels tab) ───────────────────────────────────
+
+function ReelsGridSection({
+  entries,
+  emptyLabel,
+  intro,
+  onOpen,
+}: {
+  entries: GalleryEntry[];
+  emptyLabel: string;
+  intro: string;
+  onOpen: (idx: number) => void;
+}) {
+  return (
+    <>
+      <p className={styles.tabIntro}>{intro}</p>
+      {entries.length === 0 ? (
+        <div className={styles.emptyState}>{emptyLabel}</div>
+      ) : (
+        <div className={styles.reelsGrid}>
+          {entries.map((entry, idx) => (
+            <div key={entry.id} onClick={() => onOpen(idx)} className={styles.reelCard}>
+              <video src={entry.src} className={styles.reelThumb} muted playsInline preload="metadata" />
+              <div className={styles.reelPlayIcon}>▶</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
 // ── Main Page ──────────────────────────────────────────────────────────────
 
 export default function RavensEyePage() {
   const [tab, setTab] = useState<Tab>("raven");
   const [lightboxList, setLightboxList] = useState<GalleryEntry[] | null>(null);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const [reelsStartIdx, setReelsStartIdx] = useState<number | null>(null);
 
   const openLightbox = useCallback((list: GalleryEntry[], idx: number) => {
     setLightboxList(list);
@@ -341,33 +526,44 @@ export default function RavensEyePage() {
     setLightboxIdx(null);
   }, []);
 
+  // Tag click: switch to the raven tab (that's where char/house/dragon
+  // filters live) and apply the filter once that section has mounted.
+  const handleTagClick = useCallback((type: "character" | "house" | "dragon", id: string) => {
+    setTab("raven");
+    requestAnimationFrame(() => {
+      (window as any).__ravensEyeSetFilter?.(type, id);
+    });
+  }, []);
+
   const activeMeta = TAB_META[tab];
 
   return (
     <div style={{ padding: "2rem 1.25rem", maxWidth: "1200px", margin: "0 auto" }}>
-      {/* Hub header — stays put, doesn't change per tab. */}
       <div className={styles.header}>
         <h1 className={styles.title}>The Raven&apos;s Eye</h1>
         <p className={styles.subtitle}>Visions carried on black wings — and whatever else lands in the basket.</p>
       </div>
 
-      {/* Tabs — always both present, regardless of how many entries either
-          side has. This is a hub, not a page that hides half of itself. */}
       <TabBar active={tab} onChange={setTab} />
 
-      {/* Same component, same filters/sort/tags for both tabs — just fed a
-          different slice of the data. Key forces filter/sort state to reset
-          when switching tabs instead of leaking between the two pools. */}
-      <GallerySection
-        key={tab}
-        entries={activeMeta.entries}
-        emptyLabel={activeMeta.emptyLabel}
-        intro={activeMeta.intro(activeMeta.entries.length)}
-        onOpen={openLightbox}
-      />
+      {tab === "reels" ? (
+        <ReelsGridSection
+          entries={activeMeta.entries}
+          emptyLabel={activeMeta.emptyLabel}
+          intro={activeMeta.intro(activeMeta.entries.length)}
+          onOpen={setReelsStartIdx}
+        />
+      ) : (
+        <GallerySection
+          key={tab}
+          entries={activeMeta.entries}
+          emptyLabel={activeMeta.emptyLabel}
+          intro={activeMeta.intro(activeMeta.entries.length)}
+          onOpen={openLightbox}
+          onTagClick={handleTagClick}
+        />
+      )}
 
-      {/* Lightbox — shared between both tabs, scoped to whichever list was
-          clicked so prev/next doesn't jump between them. */}
       {lightboxList && lightboxIdx !== null && (
         <Lightbox
           entry={lightboxList[lightboxIdx]}
@@ -376,6 +572,16 @@ export default function RavensEyePage() {
           onNext={() => setLightboxIdx((i) => (i! < lightboxList.length - 1 ? i! + 1 : i))}
           hasPrev={lightboxIdx > 0}
           hasNext={lightboxIdx < lightboxList.length - 1}
+          onTagClick={handleTagClick}
+        />
+      )}
+
+      {reelsStartIdx !== null && (
+        <ReelsViewer
+          entries={reelEntries}
+          startIndex={reelsStartIdx}
+          onClose={() => setReelsStartIdx(null)}
+          onTagClick={handleTagClick}
         />
       )}
     </div>

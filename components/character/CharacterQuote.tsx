@@ -30,7 +30,8 @@ export default function CharacterQuote({
     <div style={{ display: "flex", flexDirection: "column", gap: compact ? 12 : 16 }}>
       {quotes.map((entry, index) => {
         const speakerHasProfile = Boolean(
-          entry.speakerId && Object.prototype.hasOwnProperty.call(characters, entry.speakerId)
+          entry.speakerId &&
+            (characters as { id: string }[]).some((c) => c.id === entry.speakerId)
         );
         const attribution = showAttribution && entry.speakerId ? (
           speakerHasProfile ? (

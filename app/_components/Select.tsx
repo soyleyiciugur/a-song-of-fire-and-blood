@@ -31,9 +31,17 @@ export function Select({
     [options, q, searchable]
   );
 
+  // Closing the dropdown — whether by selecting an option or by clicking
+  // away — always clears the search text too, so reopening it never shows
+  // a stale query from last time.
+  const close = () => {
+    setOpen(false);
+    setQ("");
+  };
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) close();
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -45,7 +53,7 @@ export function Select({
     <div ref={ref} className="te-select">
       <div
         className={`te-select-trigger${open ? " te-select-trigger-open" : ""}`}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => (open ? close() : setOpen(true))}
       >
         <span className="te-select-value">{current}</span>
         <span className="te-select-caret">▼</span>
@@ -65,8 +73,7 @@ export function Select({
                 className={`te-select-option${opt.id === value ? " te-select-option-active" : ""}`}
                 onClick={() => {
                   onChange(opt.id);
-                  setOpen(false);
-                  setQ("");
+                  close();
                 }}
               >
                 {opt.name}

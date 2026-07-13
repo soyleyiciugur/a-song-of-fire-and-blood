@@ -24,12 +24,36 @@ interface GalleryEntry {
   chapterId: string | null;
   worldDate: WorldDate | null;
   uploadedAt: string;
-  // Which section of /ravens-eye this shows up in. Undefined/"raven" = the
-  // serious archive (default). "fleabottom" = the meme section.
   category?: "raven" | "fleabottom";
 }
 
 type NamedItem = { id: string; name: string };
+type MediaTab = "image" | "video";
+
+// ── Media helpers — video vs image is derived from the src extension, not
+//    stored as a separate field. Prefix is implicit: images always live
+//    under /images/gallery/, videos under /videos/reels/. ─────────────────
+
+const IMAGE_PREFIX = "/images/gallery/";
+const VIDEO_PREFIX = "/videos/reels/";
+const VIDEO_EXT = [".mp4", ".webm", ".mov"];
+
+
+function isVideoSrc(src: string) {
+  // Prefix, dosya adı henüz girilmemiş olsa bile hangi tab'a ait olduğunu
+  // kesin olarak belirtir — yeni eklenen boş entry'ler bu sayede kaybolmaz.
+  if (src.startsWith(VIDEO_PREFIX)) return true;
+  if (src.startsWith(IMAGE_PREFIX)) return false;
+  // Prefix yoksa (eski veri, elle girilmiş src vs.) uzantıya bak.
+  const lower = src.toLowerCase();
+  return VIDEO_EXT.some((ext) => lower.endsWith(ext));
+}
+
+function stripKnownPrefix(src: string) {
+  if (src.startsWith(IMAGE_PREFIX)) return src.slice(IMAGE_PREFIX.length);
+  if (src.startsWith(VIDEO_PREFIX)) return src.slice(VIDEO_PREFIX.length);
+  return src;
+}
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -54,7 +78,6 @@ const labelStyle: React.CSSProperties = {
   letterSpacing: "1px", marginBottom: "8px", display: "block", fontWeight: 600,
 };
 
-// Themed checkbox to match the rest of the admin UI
 const Checkbox = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: React.ReactNode }) => (
   <div
     onClick={() => onChange(!checked)}
@@ -79,9 +102,6 @@ const Checkbox = ({ checked, onChange, label }: { checked: boolean; onChange: (v
   </div>
 );
 
-// Two-way segmented control — matches the Gender/Mode toggles on
-// admin/tools/page.tsx so this editor doesn't invent a third way to
-// present a binary choice.
 const SegmentedControl = ({
   options,
   value,
@@ -116,8 +136,6 @@ const SegmentedControl = ({
   </div>
 );
 
-// Small pill shown next to sidebar entries so Flea Bottom items are
-// distinguishable from the archive at a glance while browsing the list.
 const CategoryTag = ({ category }: { category?: GalleryEntry["category"] }) => {
   if (category !== "fleabottom") return null;
   return (
@@ -130,6 +148,32 @@ const CategoryTag = ({ category }: { category?: GalleryEntry["category"] }) => {
     </span>
   );
 };
+
+// ── Media path input — prefix-locked field. Type (image/video) is now
+//    decided by which top-level tab you're in, not chosen inline here. ────
+
+function SrcInput({ mediaType, value, onChange }: { mediaType: MediaTab; value: string; onChange: (v: string) => void }) {
+  const prefix = mediaType === "video" ? VIDEO_PREFIX : IMAGE_PREFIX;
+  const filename = stripKnownPrefix(value);
+
+  return (
+    <div style={{
+      display: "flex", alignItems: "center",
+      border: "1px solid var(--border)", borderRadius: "var(--radius-sm)",
+      background: "rgba(0,0,0,0.2)", overflow: "hidden",
+    }}>
+      <span style={{ padding: "0 0 0 12px", color: "var(--muted)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>
+        {prefix}
+      </span>
+      <input
+        value={filename}
+        onChange={(e) => onChange(`${prefix}${e.target.value}`)}
+        placeholder={mediaType === "video" ? "my-clip.mp4" : "my-image.jpg"}
+        style={{ border: "none", background: "transparent", flex: 1 }}
+      />
+    </div>
+  );
+}
 
 // ── Multi-select Tag Picker ────────────────────────────────────────────────
 
@@ -145,12 +189,16 @@ function TagPicker({
   onChange: (ids: string[]) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [q, setQ] = useState("");
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const h = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+        setQ("");
+      }
     };
     document.addEventListener("mousedown", h);
     return () => document.removeEventListener("mousedown", h);
@@ -165,14 +213,17 @@ function TagPicker({
       <div style={labelStyle}>{label}</div>
       <div
         onClick={() => setOpen((o) => !o)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
           display: "flex", flexWrap: "wrap", gap: "6px",
           minHeight: "46px", alignItems: "center", cursor: "pointer",
           background: "rgba(0,0,0,0.2)",
-          border: open ? "1px solid var(--gold)" : "1px solid var(--border)",
+          border: (open || hovered) ? "1px solid var(--gold)" : "1px solid var(--border)",
           borderRadius: "var(--radius-sm)",
           padding: "8px 12px",
           transition: "border-color 0.2s ease, background 0.2s ease",
+          boxSizing: "border-box",
         }}
       >
         {selected.length === 0 && (
@@ -249,15 +300,131 @@ function TagPicker({
   );
 }
 
-// ── Main Page ──────────────────────────────────────────────────────────────
+// TagPicker'ın hemen altına ekle — tek seçimli versiyon
+
+function SingleSelectPicker({
+  label,
+  options,
+  selected,
+  onChange,
+  allowNone = true,
+}: {
+  label: string;
+  options: NamedItem[];
+  selected: string;
+  onChange: (id: string) => void;
+  allowNone?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [q, setQ] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const h = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+        setQ("");
+      }
+    };
+    document.addEventListener("mousedown", h);
+    return () => document.removeEventListener("mousedown", h);
+  }, []);
+
+  const filtered = options.filter((o) => o.name.toLowerCase().includes(q.toLowerCase()));
+  const selectedName = options.find((o) => o.id === selected)?.name;
+
+  const pick = (id: string) => {
+    onChange(id);
+    setOpen(false);
+    setQ("");
+  };
+
+  return (
+    <div ref={ref} style={{ position: "relative" }}>
+      <div style={labelStyle}>{label}</div>
+      <div
+        onClick={() => setOpen((o) => !o)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex", alignItems: "center",
+          minHeight: "46px", cursor: "pointer",
+          background: "rgba(0,0,0,0.2)",
+          border: (open || hovered) ? "1px solid var(--gold)" : "1px solid var(--border)",
+          borderRadius: "var(--radius-sm)",
+          padding: "8px 12px",
+          transition: "border-color 0.2s ease, background 0.2s ease",
+          boxSizing: "border-box",
+        }}
+      >
+        <span style={{ color: selectedName ? "var(--text)" : "var(--muted)", fontSize: "0.9rem", flex: 1 }}>
+          {selectedName ?? "None selected…"}
+        </span>
+        <span style={{ color: "var(--muted)", fontSize: "10px", flexShrink: 0 }}>▼</span>
+      </div>
+      {open && (
+        <div style={{
+          position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, zIndex: 200,
+          background: "var(--surface)", border: `1px solid var(--border)`,
+          borderRadius: "var(--radius-sm)", maxHeight: "220px", overflowY: "auto",
+          boxShadow: "var(--shadow-card)",
+        }}>
+          <div style={{ padding: "8px", borderBottom: "1px solid var(--border)", position: "sticky", top: 0, background: "var(--surface)" }}>
+            <input
+              autoFocus value={q} onChange={(e) => setQ(e.target.value)}
+              placeholder="Search…"
+              style={{ padding: "8px 12px" }}
+            />
+          </div>
+          {allowNone && (
+            <div
+              onClick={() => pick("")}
+              style={{
+                padding: "10px 12px", cursor: "pointer", fontSize: "0.9rem",
+                borderBottom: "1px solid var(--border)",
+                color: selected === "" ? "var(--gold)" : "var(--muted)",
+                fontStyle: "italic",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--surface-hover)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+            >
+              — None —
+            </div>
+          )}
+          {filtered.length === 0 && (
+            <div style={{ padding: "12px", color: "var(--muted)", textAlign: "center", fontSize: "0.9rem" }}>No results</div>
+          )}
+          {filtered.map((o) => (
+            <div
+              key={o.id}
+              onClick={() => pick(o.id)}
+              style={{
+                padding: "10px 12px", cursor: "pointer", fontSize: "0.9rem",
+                display: "flex", alignItems: "center", gap: "10px",
+                borderBottom: "1px solid var(--border)",
+                background: selected === o.id ? "var(--surface-hover)" : "transparent",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--surface-hover)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = selected === o.id ? "var(--surface-hover)" : "transparent"; }}
+            >
+              <span style={{ color: selected === o.id ? "var(--gold)" : "var(--text)" }}>{o.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Shared data ──────────────────────────────────────────────────────────
 
 const characters = (charactersData as NamedItem[]);
 const houses = (housesData as NamedItem[]);
 const dragons = (dragonsData as NamedItem[]);
 const chapters = (chaptersData as { slug: string; title: string }[]);
 
-// Select expects { id, name } options — map chapters' { slug, title } shape,
-// with an explicit "no chapter" entry standing in for null.
 const chapterOptions = [
   { id: "", name: "— None —" },
   ...chapters.map((c) => ({ id: c.slug, name: c.title })),
@@ -267,47 +434,43 @@ const eraOptions = [
   { id: "BC", name: "BC" },
 ];
 
-export default function AdminRavensEyePage() {
-  const [entries, setEntries] = useState<GalleryEntry[]>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+// ── One tab's worth of UI (Images or Videos) — sidebar + edit panel,
+//    scoped to whichever slice of `entries` matches its mediaType. Mirrors
+//    LocationsTab / PositionsTab on admin/map/page.tsx: same component
+//    shape reused for both tabs, just fed a different pool + mediaType. ────
+
+function GalleryMediaTab({
+  mediaType,
+  entries,
+  setEntries,
+}: {
+  mediaType: MediaTab;
+  entries: GalleryEntry[];
+  setEntries: React.Dispatch<React.SetStateAction<GalleryEntry[]>>;
+}) {
+  const scoped = entries.filter((e) => isVideoSrc(e.src) === (mediaType === "video"));
+  const [selectedId, setSelectedId] = useState<string | null>(scoped[0]?.id ?? null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [hasDateOverride, setHasDateOverride] = useState(false);
-  // Guards the initial hydration so it doesn't get treated as a user edit
-  // (see note below — without this, every fresh page load silently
-  // recreates a "draft" out of whatever data it just loaded).
-  const isInitialLoad = useRef(true);
 
-  // Load from draft or source data
   useEffect(() => {
-    const draft = getDraft<GalleryEntry[]>("gallery");
-    const loaded = draft ?? (galleryData as unknown as GalleryEntry[]);
-    setEntries(loaded);
-    if (loaded.length > 0) setSelectedId(loaded[0].id);
-  }, []);
-
-  // Persist draft on every change — but skip the very first render's worth
-  // of "change" (the initial load above). Without this guard, loading the
-  // page with no draft present would immediately write the freshly-loaded
-  // (possibly stale, pre-deploy) data back into localStorage as a "draft".
-  // That phantom draft then diffs against a *later*, truly-updated
-  // gallery.json once the real deploy lands, making the admin bar show
-  // "Unpublished: Raven's Eye" for changes that were never actually made.
-  useEffect(() => {
-    if (isInitialLoad.current) {
-      isInitialLoad.current = false;
-      return;
+    if (!scoped.some((e) => e.id === selectedId)) {
+      setSelectedId(scoped[0]?.id ?? null);
     }
-    if (entries.length === 0) return;
-    setDraft("gallery", entries);
-  }, [entries]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mediaType]);
 
-  const entry = entries.find((e) => e.id === selectedId) ?? null;
+  const entry = scoped.find((e) => e.id === selectedId) ?? null;
 
-  // Sync date override toggle when switching entries
   useEffect(() => {
     setHasDateOverride(entry?.worldDate != null);
   }, [selectedId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const notify = (message: string, type: "success" | "error") => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 3000);
+  };
 
   const patch = (fields: Partial<GalleryEntry>) => {
     setEntries((prev) => prev.map((e) => (e.id === selectedId ? { ...e, ...fields } : e)));
@@ -318,7 +481,7 @@ export default function AdminRavensEyePage() {
     const now = new Date().toISOString().slice(0, 10);
     const newEntry: GalleryEntry = {
       id,
-      src: "",
+      src: mediaType === "video" ? VIDEO_PREFIX : IMAGE_PREFIX,
       caption: "",
       characterIds: [],
       houseIds: [],
@@ -334,14 +497,8 @@ export default function AdminRavensEyePage() {
 
   const handleDelete = () => {
     setEntries((prev) => prev.filter((e) => e.id !== selectedId));
-    setSelectedId(entries.find((e) => e.id !== selectedId)?.id ?? null);
     setShowDeleteModal(false);
     notify("Entry deleted from draft.", "success");
-  };
-
-  const notify = (message: string, type: "success" | "error") => {
-    setNotification({ message, type });
-    setTimeout(() => setNotification(null), 3000);
   };
 
   const toggleDate = (enabled: boolean) => {
@@ -350,10 +507,10 @@ export default function AdminRavensEyePage() {
     else patch({ worldDate: { day: 1, moon: 1, year: 99, era: "AC" } });
   };
 
-  if (entries.length === 0) {
+  if (scoped.length === 0) {
     return (
       <div style={{ padding: "3rem 2rem", textAlign: "center", color: "var(--muted)" }}>
-        No entries yet.{" "}
+        No {mediaType === "video" ? "videos" : "images"} yet.{" "}
         <button onClick={handleAdd} style={{ color: "var(--gold)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>
           Add the first one
         </button>
@@ -362,14 +519,15 @@ export default function AdminRavensEyePage() {
   }
 
   return (
-    <div style={{ display: "flex", height: "calc(100vh - 65px)", overflow: "hidden" }}>
+    <div style={{ display: "flex", minHeight: "calc(100vh - 140px)" }}>
 
       {/* ── Left sidebar: entry list ── */}
       <div style={{
         width: "260px", flexShrink: 0,
         borderRight: "1px solid var(--border)",
         background: "var(--background)",
-        display: "flex", flexDirection: "column", overflow: "hidden",
+        display: "flex", flexDirection: "column",
+        position: "sticky", top: "140px", height: "calc(100vh - 140px)", overflow: "hidden",
       }}>
         <div style={{
           padding: "16px", borderBottom: "1px solid var(--border)",
@@ -377,7 +535,7 @@ export default function AdminRavensEyePage() {
           flexShrink: 0,
         }}>
           <span style={{ fontSize: "0.8rem", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "1px" }}>
-            {entries.length} {entries.length === 1 ? "entry" : "entries"}
+            {scoped.length} {scoped.length === 1 ? "entry" : "entries"}
           </span>
           <button
             onClick={handleAdd}
@@ -391,7 +549,7 @@ export default function AdminRavensEyePage() {
         </div>
 
         <div style={{ overflowY: "auto", flex: 1 }}>
-          {entries.map((e) => (
+          {scoped.map((e) => (
             <button
               key={e.id}
               onClick={() => setSelectedId(e.id)}
@@ -405,14 +563,17 @@ export default function AdminRavensEyePage() {
                 transition: "background 0.15s",
               }}
             >
-              {/* Thumbnail */}
               <div style={{
                 width: "44px", height: "44px", flexShrink: 0, borderRadius: "var(--radius-sm)",
                 overflow: "hidden", background: "var(--surface)",
                 border: "1px solid var(--border)",
               }}>
                 {e.src && (
-                  <img src={e.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  mediaType === "video" ? (
+                    <video src={e.src} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  ) : (
+                    <img src={e.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  )
                 )}
               </div>
               <div style={{ minWidth: 0 }}>
@@ -437,10 +598,9 @@ export default function AdminRavensEyePage() {
 
       {/* ── Right: edit panel ── */}
       {entry ? (
-        <div style={{ flex: 1, overflowY: "auto", padding: "32px", background: "var(--surface)" }}>
+        <div style={{ flex: 1, padding: "32px", background: "var(--surface)" }}>
           <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-            
-            {/* Header row */}
+
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "32px", paddingBottom: "24px", borderBottom: "1px solid var(--border)" }}>
               <div>
                 <h2 style={{ margin: 0, fontSize: "1.5rem", color: "var(--gold)" }}>
@@ -464,39 +624,38 @@ export default function AdminRavensEyePage() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
 
-              {/* Section: Raven's Eye vs Flea Bottom */}
-              <div>
-                <div style={labelStyle}>Section</div>
-                <SegmentedControl
-                  options={[
-                    { id: "raven", label: "The Raven's Eye" },
-                    { id: "fleabottom", label: "Memes from the Gutters of Flea Bottom" },
-                  ]}
-                  value={entry.category === "fleabottom" ? "fleabottom" : "raven"}
-                  onChange={(v) => patch({ category: v as GalleryEntry["category"] })}
-                />
-              </div>
+              {mediaType === "image" && (
+                <div>
+                  <div style={labelStyle}>Section</div>
+                  <SegmentedControl
+                    options={[
+                      { id: "raven", label: "The Raven's Eye" },
+                      { id: "fleabottom", label: "Memes from the Gutters of Flea Bottom" },
+                    ]}
+                    value={entry.category === "fleabottom" ? "fleabottom" : "raven"}
+                    onChange={(v) => patch({ category: v as GalleryEntry["category"] })}
+                  />
+                </div>
+              )}
 
-              {/* Image path */}
               <div>
-                <div style={labelStyle}>Image path (relative to /public)</div>
-                <input
-                  value={entry.src}
-                  onChange={(e) => patch({ src: e.target.value })}
-                  placeholder="/images/gallery/my-image.jpg"
-                />
-                {entry.src && (
+                <div style={labelStyle}>{mediaType === "video" ? "Video file" : "Image path"} (relative to /public)</div>
+                <SrcInput mediaType={mediaType} value={entry.src} onChange={(v) => patch({ src: v })} />
+                {entry.src && stripKnownPrefix(entry.src) && (
                   <div style={{ marginTop: "16px", borderRadius: "var(--radius-sm)", overflow: "hidden", maxHeight: "280px", border: "1px solid var(--border)", background: "rgba(0,0,0,0.3)" }}>
-                    <img
-                      src={entry.src} alt="preview"
-                      style={{ display: "block", width: "100%", maxHeight: "280px", objectFit: "contain" }}
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                    />
+                    {mediaType === "video" ? (
+                      <video src={entry.src} controls style={{ display: "block", width: "100%", maxHeight: "280px" }} />
+                    ) : (
+                      <img
+                        src={entry.src} alt="preview"
+                        style={{ display: "block", width: "100%", maxHeight: "280px", objectFit: "contain" }}
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                      />
+                    )}
                   </div>
                 )}
               </div>
 
-              {/* Caption */}
               <div>
                 <div style={labelStyle}>Caption <span style={{ opacity: 0.5, textTransform: "none", fontWeight: "normal" }}>(optional)</span></div>
                 <textarea
@@ -508,73 +667,37 @@ export default function AdminRavensEyePage() {
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-                {/* Characters */}
-                <TagPicker
-                  label="Characters"
-                  options={characters}
-                  selected={entry.characterIds}
-                  onChange={(ids) => patch({ characterIds: ids })}
-                />
-
-                {/* Houses */}
-                <TagPicker
-                  label="Houses"
-                  options={houses}
-                  selected={entry.houseIds}
-                  onChange={(ids) => patch({ houseIds: ids })}
-                />
+                <TagPicker label="Characters" options={characters} selected={entry.characterIds} onChange={(ids) => patch({ characterIds: ids })} />
+                <TagPicker label="Houses" options={houses} selected={entry.houseIds} onChange={(ids) => patch({ houseIds: ids })} />
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-                {/* Dragons */}
-                <TagPicker
-                  label="Dragons"
-                  options={dragons}
-                  selected={entry.dragonIds}
-                  onChange={(ids) => patch({ dragonIds: ids })}
-                />
+                <TagPicker label="Dragons" options={dragons} selected={entry.dragonIds} onChange={(ids) => patch({ dragonIds: ids })} />
 
-                {/* Chapter */}
-                <div>
-                  <div style={labelStyle}>Chapter <span style={{ opacity: 0.5, textTransform: "none", fontWeight: "normal" }}>(optional)</span></div>
-                  <Select
-                    value={entry.chapterId ?? ""}
-                    options={chapterOptions}
-                    onChange={(v) => patch({ chapterId: v || null })}
-                    searchable
-                  />
-                </div>
+                <SingleSelectPicker
+                  label="Chapter (optional)"
+                  options={chapters.map((c) => ({ id: c.slug, name: c.title }))}
+                  selected={entry.chapterId ?? ""}
+                  onChange={(v) => patch({ chapterId: v || null })}
+                />
               </div>
 
-              {/* In-world date */}
               <div style={{ background: "rgba(0,0,0,0.15)", border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", padding: "20px" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: hasDateOverride ? "16px" : "0" }}>
                   <div style={{ ...labelStyle, marginBottom: 0 }}>In-World Date</div>
-                  <Checkbox
-                    checked={hasDateOverride}
-                    onChange={toggleDate}
-                    label={hasDateOverride ? "Enabled" : "Enable"}
-                  />
+                  <Checkbox checked={hasDateOverride} onChange={toggleDate} label={hasDateOverride ? "Enabled" : "Enable"} />
                 </div>
-                
+
                 {hasDateOverride && entry.worldDate && (
                   <>
-                    <div style={{
-                      display: "flex", gap: "12px", marginBottom: "12px",
-                    }}>
+                    <div style={{ display: "flex", gap: "12px", marginBottom: "12px" }}>
                       <div style={{ flex: 1 }}>
                         <div style={labelStyle}>Day</div>
                         <input
                           type="number" min={1} max={30}
                           value={entry.worldDate.day}
-                          onChange={(e) => {
-                            const v = e.target.value === "" ? 0 : Number(e.target.value);
-                            patch({ worldDate: { ...entry.worldDate!, day: v } });
-                          }}
-                          onBlur={(e) => {
-                            const v = Math.min(30, Math.max(1, Number(e.target.value) || 1));
-                            patch({ worldDate: { ...entry.worldDate!, day: v } });
-                          }}
+                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, day: e.target.value === "" ? 0 : Number(e.target.value) } })}
+                          onBlur={(e) => patch({ worldDate: { ...entry.worldDate!, day: Math.min(30, Math.max(1, Number(e.target.value) || 1)) } })}
                           style={{ width: "100%", height: "46px", boxSizing: "border-box" }}
                         />
                       </div>
@@ -583,14 +706,8 @@ export default function AdminRavensEyePage() {
                         <input
                           type="number" min={1} max={12}
                           value={entry.worldDate.moon}
-                          onChange={(e) => {
-                            const v = e.target.value === "" ? 0 : Number(e.target.value);
-                            patch({ worldDate: { ...entry.worldDate!, moon: v } });
-                          }}
-                          onBlur={(e) => {
-                            const v = Math.min(12, Math.max(1, Number(e.target.value) || 1));
-                            patch({ worldDate: { ...entry.worldDate!, moon: v } });
-                          }}
+                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, moon: e.target.value === "" ? 0 : Number(e.target.value) } })}
+                          onBlur={(e) => patch({ worldDate: { ...entry.worldDate!, moon: Math.min(12, Math.max(1, Number(e.target.value) || 1)) } })}
                           style={{ width: "100%", height: "46px", boxSizing: "border-box" }}
                         />
                       </div>
@@ -599,14 +716,8 @@ export default function AdminRavensEyePage() {
                         <input
                           type="number" min={1}
                           value={entry.worldDate.year}
-                          onChange={(e) => {
-                            const v = e.target.value === "" ? 0 : Number(e.target.value);
-                            patch({ worldDate: { ...entry.worldDate!, year: v } });
-                          }}
-                          onBlur={(e) => {
-                            const v = Math.max(1, Number(e.target.value) || 1);
-                            patch({ worldDate: { ...entry.worldDate!, year: v } });
-                          }}
+                          onChange={(e) => patch({ worldDate: { ...entry.worldDate!, year: e.target.value === "" ? 0 : Number(e.target.value) } })}
+                          onBlur={(e) => patch({ worldDate: { ...entry.worldDate!, year: Math.max(1, Number(e.target.value) || 1) } })}
                           style={{ width: "100%", height: "46px", boxSizing: "border-box" }}
                         />
                       </div>
@@ -632,7 +743,6 @@ export default function AdminRavensEyePage() {
                 )}
               </div>
 
-              {/* Upload date (meta) */}
               <div>
                 <div style={labelStyle}>Added on (YYYY-MM-DD)</div>
                 <input
@@ -651,11 +761,10 @@ export default function AdminRavensEyePage() {
         </div>
       )}
 
-      {/* Modals & notifications */}
       {showDeleteModal && (
         <ConfirmModal
           title="Delete Entry"
-          message={`Remove "${entry?.caption || "this entry"}" from the gallery?\n\nThe image file itself will not be deleted.`}
+          message={`Remove "${entry?.caption || "this entry"}" from the gallery?\n\nThe file itself will not be deleted.`}
           confirmLabel="Delete"
           danger
           onConfirm={handleDelete}
@@ -675,6 +784,67 @@ export default function AdminRavensEyePage() {
           {notification.type === "success" ? "✓" : "⚠"} {notification.message}
         </div>
       )}
+    </div>
+  );
+}
+
+// ── Main Page — top-level Images / Videos tab bar, matching the Locations /
+//    Character Positions switcher on admin/map/page.tsx. ───────────────────
+
+export default function AdminRavensEyePage() {
+  const [tab, setTab] = useState<MediaTab>("image");
+  const [entries, setEntries] = useState<GalleryEntry[]>([]);
+  const isInitialLoad = useRef(true);
+
+  useEffect(() => {
+    const draft = getDraft<GalleryEntry[]>("gallery");
+    const loaded = draft ?? (galleryData as unknown as GalleryEntry[]);
+    setEntries(loaded);
+  }, []);
+
+  useEffect(() => {
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false;
+      return;
+    }
+    if (entries.length === 0) return;
+    setDraft("gallery", entries);
+  }, [entries]);
+
+  if (entries.length === 0) {
+    return <div style={{ padding: "3rem 2rem", textAlign: "center", color: "var(--muted)" }}>Loading…</div>;
+  }
+
+  return (
+    <div style={{ padding: "2rem", maxWidth: "1400px", margin: "0 auto" }}>
+      <div style={{ display: "flex", gap: "10px", marginBottom: "24px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "16px" }}>
+        <button
+          onClick={() => setTab("image")}
+          style={{
+            padding: "10px 18px", borderRadius: "6px", cursor: "pointer", border: "1px solid",
+            background: tab === "image" ? "var(--gold)" : "transparent",
+            color: tab === "image" ? "#000" : "var(--text)",
+            borderColor: tab === "image" ? "var(--gold)" : "rgba(255,255,255,0.2)",
+            fontWeight: tab === "image" ? "bold" : "normal",
+          }}
+        >
+          Images
+        </button>
+        <button
+          onClick={() => setTab("video")}
+          style={{
+            padding: "10px 18px", borderRadius: "6px", cursor: "pointer", border: "1px solid",
+            background: tab === "video" ? "var(--gold)" : "transparent",
+            color: tab === "video" ? "#000" : "var(--text)",
+            borderColor: tab === "video" ? "var(--gold)" : "rgba(255,255,255,0.2)",
+            fontWeight: tab === "video" ? "bold" : "normal",
+          }}
+        >
+          Videos
+        </button>
+      </div>
+
+      <GalleryMediaTab key={tab} mediaType={tab} entries={entries} setEntries={setEntries} />
     </div>
   );
 }
