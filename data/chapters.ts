@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\chapters.ts
 //
 // Replaces the old data/chapters/ directory (index.ts, chapter1.ts, chapter2.ts, ...).
-// All chapters now live in a single data/chapters/chapters.json, edited via the admin panel.
+// All chapters now live in a single data/chapters.json, edited via the admin panel.
 //
 // You can safely delete the old data/chapters/ folder once this file is in place.
 

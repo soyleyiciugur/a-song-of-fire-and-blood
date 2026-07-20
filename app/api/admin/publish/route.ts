@@ -85,7 +85,7 @@ export async function POST(request: Request) {
 
     if (chapters) {
       const validatedChapters = ChapterListSchema.parse(chapters);
-      files.push({ path: "data/chapters/chapters.json", content: validatedChapters });
+      files.push({ path: "data/chapters.json", content: validatedChapters });
     }
 
     if (gallery) {

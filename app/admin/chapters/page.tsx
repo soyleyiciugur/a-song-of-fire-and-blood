@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import chaptersData from "../../../data/chapters/chapters.json";
+import chaptersData from "../../../data/chapters.json";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
 
 // Dosyanın üstüne, component'lerin yanına ekle

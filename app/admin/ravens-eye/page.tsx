@@ -6,7 +6,7 @@ import galleryData from "@/data/gallery.json";
 import charactersData from "@/data/characters/characters.json";
 import housesData from "@/data/houses.json";
 import dragonsData from "@/data/dragons.json";
-import chaptersData from "@/data/chapters/chapters.json";
+import chaptersData from "@/data/chapters.json";
 import { ConfirmModal } from "../_components/Modal";
 import { Select } from "../../_components/Select";
 import { getDraft, setDraft } from "@/lib/adminDrafts";

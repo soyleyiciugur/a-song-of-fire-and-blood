@@ -1,6 +1,6 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\search.ts
 import characters from "@/data/characters/characters.json";
-import { chapterList } from "@/data/chapters";
+import { chapterList } from "@/data/chapters/";
 import { dragons } from "@/data/dragons";
 import { houses } from "@/data/houses";
 
@@ -69,7 +69,7 @@ export function buildSearchIndex(): SearchResult[] {
       id: chapter.slug,
       title: chapter.title,
       subtitle: chapter.synopsis,
-      href: `/chapters/${chapter.slug}`,
+      href: `/${chapter.slug}`,
       keywords: normalize(`${chapter.title} ${chapter.synopsis}`),
       thumbnail: {
         kind: "chapter",

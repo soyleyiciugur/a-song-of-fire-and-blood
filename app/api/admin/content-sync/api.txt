@@ -1,0 +1,6 @@
+curl https://api.anthropic.com/v1/messages \
+  --header "x-api-key: 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" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data '{"model": "claude-sonnet-4-6", "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "Hello, world"}]}'

@@ -9,7 +9,7 @@ import dragonsData from "../data/dragons.json";
 import timelineData from "../data/timeline.json";
 import mapLocationsData from "../data/map/locations.json";
 import characterPositionsData from "../data/map/character-positions.json";
-import chaptersData from "../data/chapters/chapters.json";
+import chaptersData from "../data/chapters.json";
 import galleryData from "../data/gallery.json";
 
 const DRAFT_KEYS = {

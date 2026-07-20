@@ -6,7 +6,7 @@ import galleryData from "@/data/gallery.json";
 import charactersData from "@/data/characters/characters.json";
 import housesData from "@/data/houses.json";
 import dragonsData from "@/data/dragons.json";
-import chaptersData from "@/data/chapters/chapters.json";
+import chaptersData from "@/data/chapters.json";
 import { Select } from "../_components/Select";
 import styles from "./ravens-eye.module.css";
 import { useRouter, useSearchParams } from "next/navigation";

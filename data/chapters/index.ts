@@ -1,23 +1,11 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\chapters\index.ts
+// data/chapters/index.ts
 import type { Chapter } from "@/types/chapter";
+import chaptersData from "../chapters.json";
 
-import ThePoisonBeneathTheCrown from "./the-poison-beneath-the-crown";
-import ThePriceOfTrust from "./the-price-of-trust";
-import TheWeightOfLoyalty from "./the-weight-of-loyalty";
-import TheBrokenKnight from "./the-broken-knight";
-import FathersAndTheirSins from "./fathers-and-their-sins";
-import ACrownOfThorns from "./a-crown-of-thorns";
-import TheClimbAndTheKneel from "./the-climb-and-the-kneel";
-
-export const chapters: Record<string, Chapter> = {
-  [ThePoisonBeneathTheCrown.slug]: ThePoisonBeneathTheCrown,
-  [ThePriceOfTrust.slug]: ThePriceOfTrust,
-  [TheWeightOfLoyalty.slug]: TheWeightOfLoyalty,
-  [TheBrokenKnight.slug]: TheBrokenKnight,
-  [FathersAndTheirSins.slug]: FathersAndTheirSins,
-  [ACrownOfThorns.slug]: ACrownOfThorns,
-  [TheClimbAndTheKneel.slug]: TheClimbAndTheKneel,
-};
+const chapters: Record<string, Chapter> = Object.fromEntries(
+  (chaptersData as Chapter[]).map((c) => [c.slug, c])
+);
 
 export const chapterList = Object.values(chapters);
 

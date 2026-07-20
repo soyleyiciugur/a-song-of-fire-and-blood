@@ -1,0 +1,649 @@
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\admin\content-sync\content-sync.module.css*/
+
+.page {
+  padding: 2rem;
+  max-width: 860px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--foreground, #111);
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--muted-foreground, #6b7280);
+}
+
+/* API Key switcher */
+.keyRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.keyLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground, #6b7280);
+  margin-right: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.keyBtn {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground, #6b7280);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.keyBtn:hover {
+  background: var(--accent, #f3f4f6);
+  color: var(--foreground, #111);
+}
+
+.keyBtnActive {
+  background: var(--primary, #111);
+  color: var(--primary-foreground, #fff);
+  border-color: var(--primary, #111);
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--foreground, #111);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/*
+  Fix: inside the admin panel's dark theme, --foreground / --background are
+  sometimes only partially defined, so the previous fallback (#111 text on
+  #fff fallback background) rendered as near-black text on a near-black
+  real background — effectively invisible while typing. Pin both color and
+  background explicitly to the site's usual dark styling instead of
+  trusting fallbacks, and set color-scheme so native caret/selection
+  colors stay legible too.
+*/
+.textarea,
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #333333);
+  border-radius: 8px;
+  background: var(--input-background, #1a1a1a);
+  color: var(--input-foreground, #e5e7eb);
+  caret-color: var(--input-foreground, #e5e7eb);
+  color-scheme: dark;
+  font-size: 0.875rem;
+  font-family: inherit;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+
+.textarea:focus,
+.input:focus {
+  outline: none;
+  border-color: var(--primary, #111);
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--muted-foreground, #6b7280);
+}
+
+/* GitHub source */
+.githubToggleRow {
+  display: flex;
+}
+
+.githubFields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.githubFieldsRow {
+  display: flex;
+  gap: 8px;
+}
+
+.githubFieldsRow .input {
+  flex: 1;
+}
+
+.githubStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+  padding: 10px 14px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 8px;
+  background: var(--accent, #f9fafb);
+}
+
+.githubStatusLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground, #6b7280);
+}
+
+.githubStatusFiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.githubFileBadge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--border, #e5e7eb);
+  cursor: help;
+}
+
+.githubFileOk {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+.githubFileFail {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+/* Type chips */
+.typeGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.typeChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 8px;
+  background: transparent;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground, #6b7280);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.typeChip:hover {
+  background: var(--accent, #f3f4f6);
+  color: var(--foreground, #111);
+}
+
+.typeChipActive {
+  border-color: var(--primary, #111);
+  background: var(--primary, #111);
+  color: var(--primary-foreground, #fff);
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-top: 0.25rem;
+}
+
+.btnPrimary {
+  padding: 9px 20px;
+  border-radius: 8px;
+  background: var(--primary, #111);
+  color: var(--primary-foreground, #fff);
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.1s;
+}
+
+.btnPrimary:hover { opacity: 0.85; }
+.btnPrimary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btnSecondary {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--foreground, #111);
+  border: 1px solid var(--border, #e5e7eb);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.btnSecondary:hover { background: var(--accent, #f3f4f6); }
+
+.miniBtn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted-foreground, #6b7280);
+  border: 1px solid var(--border, #e5e7eb);
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.1s;
+  white-space: nowrap;
+}
+
+.miniBtn:hover {
+  background: var(--accent, #f3f4f6);
+  color: var(--foreground, #111);
+}
+
+.sectionHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.errorMsg {
+  font-size: 0.875rem;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+/* Results */
+.results {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border, #e5e7eb);
+  padding-top: 2rem;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.resultsHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.resultsTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground, #111);
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--accent, #f3f4f6);
+  color: var(--muted-foreground, #6b7280);
+  border: 1px solid var(--border, #e5e7eb);
+}
+
+.summary {
+  font-size: 0.875rem;
+  color: var(--muted-foreground, #6b7280);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.sectionTitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground, #6b7280);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sectionCount {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--accent, #f3f4f6);
+  border: 1px solid var(--border, #e5e7eb);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.pushSuccess {
+  font-size: 0.75rem;
+  color: #15803d;
+  margin-bottom: 8px;
+}
+
+.pushSuccess a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.pushError {
+  font-size: 0.75rem;
+  color: #dc2626;
+  margin-bottom: 8px;
+}
+
+/* Cards */
+.card {
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  transition: opacity 0.2s;
+}
+
+.cardRejected {
+  opacity: 0.35;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  background: var(--accent, #f9fafb);
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+}
+
+.cardHeader:hover {
+  background: var(--accent, #f3f4f6);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--foreground, #111);
+  flex-wrap: wrap;
+}
+
+.opBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.opNew {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.opUpdate {
+  background: #fef9c3;
+  color: #a16207;
+  border: 1px solid #fde68a;
+}
+
+.opNote {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+/* Confidence badges */
+.confBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  cursor: help;
+}
+
+.confHigh {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.confMedium {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.confLow {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.slug {
+  font-size: 0.75rem;
+  color: var(--muted-foreground, #9ca3af);
+  font-weight: 400;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.actionBtn {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: var(--background, #fff);
+  color: var(--muted-foreground, #6b7280);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.actionBtn:hover {
+  background: var(--accent, #f3f4f6);
+}
+
+.actionAccept {
+  border-color: #bbf7d0;
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.actionReject {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.expandIcon {
+  font-size: 0.6rem;
+  color: var(--muted-foreground, #9ca3af);
+  margin-left: 4px;
+}
+
+/* Card body */
+.cardBody {
+  padding: 10px 14px;
+  background: var(--background, #fff);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diffRow {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8125rem;
+  align-items: flex-start;
+}
+
+.diffKey {
+  color: var(--muted-foreground, #9ca3af);
+  min-width: 90px;
+  flex-shrink: 0;
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding-top: 6px;
+}
+
+.diffVals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.diffOld {
+  text-decoration: line-through;
+  color: #dc2626;
+  font-size: 0.8rem;
+}
+
+.diffNew {
+  color: #15803d;
+}
+
+.diffNote {
+  color: #1d4ed8;
+  font-style: italic;
+}
+
+.editInput {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--border, #333333);
+  border-radius: 6px;
+  background: var(--input-background, #1a1a1a);
+  color: var(--input-foreground, #e5e7eb);
+  caret-color: var(--input-foreground, #e5e7eb);
+  color-scheme: dark;
+  font-size: 0.8125rem;
+  font-family: inherit;
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: var(--primary, #111);
+}
+
+.editTextarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border, #333333);
+  border-radius: 6px;
+  background: var(--input-background, #1a1a1a);
+  color: var(--input-foreground, #e5e7eb);
+  caret-color: var(--input-foreground, #e5e7eb);
+  color-scheme: dark;
+  font-size: 0.8rem;
+  font-family: monospace;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.editTextarea:focus {
+  outline: none;
+  border-color: var(--primary, #111);
+}
+
+/* JSON output */
+.outputSection {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border, #e5e7eb);
+  padding-top: 1.5rem;
+}
+
+.outputHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.outputLabel {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground, #6b7280);
+}
+
+.jsonOutput {
+  background: var(--accent, #f9fafb);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 8px;
+  padding: 14px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--foreground, #111);
+  overflow-x: auto;
+  white-space: pre;
+  max-height: 340px;
+  overflow-y: auto;
+  line-height: 1.6;
+}
