@@ -1,5 +1,3 @@
-"use client";
-
 // ─── C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\page.tsx ───
 //
 // Requires: app/chapters/chapters-hub.module.css
@@ -25,8 +23,9 @@
 //     sends people back here with ?openToc=1 so Esc there lands on the ToC
 //     first, and a second Esc (from here) closes the book fully.
 //  #5(centering) book stays centered when open (see chapters-hub.module.css).
+"use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { Suspense, useEffect, useRef, useState, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapters-hub.module.css";
@@ -58,7 +57,7 @@ function chapterSynopsis(ch: Chapter, lang: Lang) {
 
 // ─── component ────────────────────────────────────────────────────────────────
 
-export default function ChaptersHub() {
+function ChaptersHubContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const chapters = getAllChapters() as Chapter[];
@@ -355,5 +354,13 @@ export default function ChaptersHub() {
         </p>
       )}
     </div>
+  );
+}
+
+export default function ChaptersHub() {
+  return (
+    <Suspense fallback={null}>
+      <ChaptersHubContent />
+    </Suspense>
   );
 }
