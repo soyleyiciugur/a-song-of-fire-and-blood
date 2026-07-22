@@ -1,0 +1,671 @@
+/* ─── C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\[id]\chapter-reader.module.css ─── */
+
+/* House of the Dragon (personal use only — see license before shipping
+   commercially: mansgreback.com/fonts/house-of-the-dragon).
+   Matches /scrolls and the chapters hub. */
+@font-face {
+  font-family: "House of the Dragon";
+  src: url("/fonts/HouseOfTheDragonPersonalRegular-BWnq8.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "House of the Dragon";
+  src: url("/fonts/HouseOfTheDragonPersonalBold-8MqRJ.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ════════════════════════════════════════════════════════════
+   LOCAL TOKENS
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* parchment */
+  --p-light:   #f5edd4;
+  --p-mid:     #ede1bf;
+  --p-dark:    #e2d2a4;
+  /* ink */
+  --ink:       #1a1208;
+  --ink-soft:  #3d2f1a;
+  --ink-faint: #7a6040;
+  /* gold */
+  --g-bright:  #d4a840;
+  --g-mid:     #b8892e;
+  --g-dark:    #7a5a1f;
+  --g-glow:    rgba(212,168,64,0.3);
+  /* leather */
+  --lth:       #1c0f05;
+  --lth-mid:   #2e1a08;
+  /* spine */
+  --spine-w:   52px;
+  /* page */
+  --pg-w:      420px;
+  --pg-h:      580px;
+  --pg-pad:    40px 44px 56px;
+
+  --hd-font: "House of the Dragon", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCENE
+   ══════════════════════════════════════════════════════════ */
+.scene {
+  width: 100%;                 /* add, in case a parent layout constrains it */
+  min-height: 100vh;
+  background: #090603;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px 60px;
+  position: relative;
+  perspective: 1800px;
+}
+
+.scene::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 70% at 50% 48%,
+    rgba(212,168,64,0.03) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── utility ── */
+.notFound {
+  color: var(--g-mid);
+  font-family: var(--hd-font);
+  font-size: 1.1rem;
+  padding: 80px 20px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   CONTROLS
+   ══════════════════════════════════════════════════════════ */
+/* language toggle — two independent pill buttons (bug #1, matches hub) */
+.langToggle {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.langBtn {
+  /* font-family: var(--hd-font);  ← removed, was overriding to HotD */
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  background: rgba(28,15,5,0.88);
+  border: 1px solid var(--g-dark);
+  border-radius: 4px;
+  padding: 7px 14px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.langBtn:hover {
+  border-color: var(--g-bright);
+}
+.langBtnActive {
+  color: var(--g-bright);
+  border-color: var(--g-bright);
+  background: rgba(46,26,8,0.92);
+}
+
+.backLink {
+  position: fixed;
+  top: 24px;
+  left: 28px;
+  z-index: 200;
+  /* font-family: var(--hd-font);  ← removed */
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--g-dark);
+  text-decoration: none;
+  padding: 7px 14px;
+  background: rgba(28,15,5,0.88);
+  border: 1px solid var(--g-dark);
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+  transition: color 0.2s, border-color 0.2s;
+}
+.backLink:hover { color: var(--g-bright); border-color: var(--g-bright); }
+
+/* ════════════════════════════════════════════════════════════
+   BOOK SHELL
+   ══════════════════════════════════════════════════════════ */
+.book {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: calc(var(--pg-w) * 2 + var(--spine-w));
+  max-width: min(920px, 100vw - 32px);
+  margin: 0 auto;              /* add — self-centers regardless of parent */
+  height: var(--pg-h);
+  max-height: calc(100vh - 140px);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.7),
+    0 8px 24px rgba(0,0,0,0.5);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ── spine ── */
+.spine {
+  width: var(--spine-w);
+  flex-shrink: 0;
+  background: linear-gradient(180deg,
+    #0e0803 0%,
+    var(--lth-mid) 15%,
+    var(--lth) 50%,
+    var(--lth-mid) 85%,
+    #0e0803 100%);
+  border-right: 1px solid rgba(0,0,0,0.6);
+  border-left: 1px solid rgba(212,168,64,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -3px 0 10px rgba(0,0,0,0.4);
+}
+
+.spineTitle {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--hd-font);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--g-dark);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  max-height: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PAGE SPREAD
+   ══════════════════════════════════════════════════════════ */
+.spread {
+  flex: 1;
+  display: flex;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* page-turn animation (next = right page curls left) */
+.turningNext {
+  animation: turnNext 0.48s cubic-bezier(0.4,0,0.2,1) both;
+}
+.turningPrev {
+  animation: turnPrev 0.48s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+@keyframes turnNext {
+  0%   { transform: rotateY(0deg);     opacity: 1; }
+  40%  { transform: rotateY(-8deg);    opacity: 0.6; }
+  100% { transform: rotateY(0deg);     opacity: 1; }
+}
+@keyframes turnPrev {
+  0%   { transform: rotateY(0deg);     opacity: 1; }
+  40%  { transform: rotateY(8deg);     opacity: 0.6; }
+  100% { transform: rotateY(0deg);     opacity: 1; }
+}
+
+/* gutter */
+.gutter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.18) 0%,
+    rgba(0,0,0,0.05) 35%,
+    rgba(0,0,0,0.05) 65%,
+    rgba(0,0,0,0.18) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ════════════════════════════════════════════════════════════
+   LEFT PAGE
+   ══════════════════════════════════════════════════════════ */
+.pageLeft {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(160deg, var(--p-light) 0%, var(--p-mid) 60%, var(--p-dark) 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* paper texture overlay */
+.pageTexture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* age vignette on left edge */
+.pageLeft::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.12), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── page content area ── */
+.pageContent {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: var(--pg-pad);
+  padding-bottom: 16px;   /* extra clearance above the footer */
+  overflow: hidden;
+}
+
+
+/* ── first-spread chapter header (image + title on the left page,
+      bug #11: always the first thing you see) ── */
+.chapterHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.chapterImageWrap {
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.chapterImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chapterTitle {
+  font-family: var(--hd-font);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 10px;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.chapterDivider {
+  font-size: 0.9rem;
+  color: var(--g-mid);
+  margin-bottom: 4px;
+}
+
+/* ── text ── */
+.paragraph {
+  font-family: var(--hd-font);
+  font-size: 0.93rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin: 0 0 0.85em;
+  text-align: justify;
+  hyphens: auto;
+}
+
+
+/* section divider (✧ ✦ ✧ lines in content) */
+.sectionDivider {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--g-dark);
+  letter-spacing: 0.3em;
+  margin: 0.6em 0;
+  opacity: 0.7;
+}
+
+/* inline image */
+.inlineImageWrap {
+  margin: 0.5em auto 1em;
+  max-width: 280px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+}
+
+.inlineImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── left page footer ── */
+.pageFooter {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px 18px;
+  gap: 12px;
+}
+
+/* bug #12: the page number is now an editable input — type a page and
+   press Enter (or blur) to jump straight there. */
+.pageNumForm {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.68rem;
+  font-style: italic;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.pageNumInput {
+  width: 2.2em;
+  text-align: center;
+  font: inherit;
+  color: var(--ink-soft);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ink-faint);
+  padding: 0 1px;
+}
+.pageNumInput:focus {
+  outline: none;
+  border-bottom-color: var(--g-dark);
+  color: var(--ink);
+}
+/* hide number input spinners */
+.pageNumInput::-webkit-outer-spin-button,
+.pageNumInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pageNumInput[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ════════════════════════════════════════════════════════════
+   RIGHT PAGE
+   ══════════════════════════════════════════════════════════ */
+.pageRight {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(200deg, var(--p-light) 0%, var(--p-mid) 55%, var(--p-dark) 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 4px 4px 0;
+}
+
+/* age vignette on right edge + bottom-right page-curl shadow */
+.pageRight::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 100% 100%,
+    rgba(0,0,0,0.06) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── right page content (bug #10: this used to be empty on every page
+      after the first — it now renders the second half of the spread's
+      paginated content, same as the left page) ── */
+
+.pageContentRight {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: var(--pg-pad);
+  padding-bottom: 16px;   /* extra clearance above the footer */
+  overflow: hidden;
+}
+
+/* synopsis panel (right side, first spread only — bug #11) */
+.synopsisBlock {
+  position: relative;
+  z-index: 1;
+  margin: auto 36px;
+  padding: 22px 24px;
+  border: 1px solid rgba(122, 90, 31, 0.3);
+  border-radius: 3px;
+  background: rgba(212,168,64,0.04);
+}
+
+
+
+/* .synopsisLabel — uppercase transform swapped for capitalize
+   (matches the bug #3 rule: never type/force true all-caps, only
+   title-case source text styled up) */
+.synopsisLabel {
+  font-family: var(--hd-font);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: capitalize;
+  color: var(--g-dark);
+  margin-bottom: 10px;
+}
+
+
+/* .synopsisText — was Palatino, now House of the Dragon */
+.synopsisText {
+  font-family: var(--hd-font);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* spacer */
+.pageRight > .pageTexture { z-index: 0; }
+
+/* ── right page footer ── */
+.pageFooterRight {
+  position: relative;
+  z-index: 3;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px 18px;
+  gap: 12px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PAGE CORNERS — real page-turn hit areas (bug #13)
+   The corner of the page itself curls on hover; there is no separate
+   button chrome, no hover-highlight box, just the cursor turning into a
+   pointer and the paper visually lifting at the corner. Works for both
+   in-chapter page turns and prev/next-chapter navigation, whichever
+   applies at that position.
+   ══════════════════════════════════════════════════════════ */
+.pageCorner {
+  position: absolute;
+  bottom: 0;
+  width: 52px;
+  height: 52px;
+  z-index: 6;
+  cursor: pointer;
+  transition: width 0.22s ease, height 0.22s ease;
+}
+
+.pageCornerLeft {
+  left: 0;
+  border-radius: 0 0 0 4px;
+  background: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.14) 50%);
+}
+.pageCornerLeft:hover {
+  width: 74px;
+  height: 74px;
+}
+
+.pageCornerRight {
+  right: 0;
+  border-radius: 0 0 4px 0;
+  background: linear-gradient(315deg, transparent 50%, rgba(0,0,0,0.14) 50%);
+}
+.pageCornerRight:hover {
+  width: 74px;
+  height: 74px;
+}
+
+.pageCornerDisabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+.pageCornerDisabled:hover {
+  width: 52px;
+  height: 52px;
+}
+
+.cornerLabel {
+  position: absolute;
+  bottom: 16px;
+  font-family: var(--hd-font);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--g-dark);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 6;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cornerLabelLeft {
+  left: 60px;
+}
+.cornerLabelRight {
+  right: 60px;
+  text-align: right;
+}
+
+/* drop cap on the first paragraph of a chapter's body text only */
+.dropCap {
+  float: left;
+  font-family: var(--hd-font);
+  font-size: 3.4rem;
+  line-height: 0.8;
+  padding: 0.1rem 0 0 0;
+  margin: 0 0.35rem 0.15rem 0;
+  color: var(--gold-mid);
+  text-shadow: 1px 1px 0 rgba(122, 90, 31, 0.4);
+}
+
+.chapterHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.chapterImageWrap {
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  mask-image:
+    linear-gradient(to right,  transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+  mask-composite: intersect;
+
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-composite: source-in, xor;
+}
+
+/* Soft diffuse ambient shadow behind the faded image */
+.chapterImageWrap::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 60% 60% at 50% 50%,
+    rgba(0,0,0,0.15),
+    transparent 70%
+  );
+  filter: blur(12px);
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  :root {
+    --pg-w:   260px;
+    --pg-h:   500px;
+    --pg-pad: 24px 20px 48px;
+    --spine-w: 32px;
+  }
+
+  .book {
+    border-radius: 0 3px 3px 0;
+  }
+
+  .paragraph      { font-size: 0.85rem; line-height: 1.75; }
+  .chapterTitle   { font-size: 1.05rem; }
+  .synopsisBlock  { margin: auto 18px; padding: 14px 16px; }
+  .synopsisText   { font-size: 0.8rem; }
+
+  .langToggle { top: 12px; right: 12px; }
+  .backLink   { top: 12px; left: 12px; padding: 5px 10px; }
+
+  .pageCorner { width: 40px; height: 40px; }
+  .pageCorner:hover { width: 56px; height: 56px; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --pg-w: 180px;
+    --pg-h: 440px;
+  }
+  .paragraph { font-size: 0.78rem; }
+}
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .turningNext,
+  .turningPrev { animation: none; }
+
+  .pageCorner { transition: none; }
+}
