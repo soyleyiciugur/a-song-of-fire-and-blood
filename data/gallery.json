@@ -1,5 +1,26 @@
 [
   {
+    "id": "gallery-mrj7mx6e",
+    "src": "/videos/reels/jace-beggars.mp4",
+    "caption": "jace when the blind girl wants his dih",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-brothers-tilt",
+    "worldDate": {
+      "day": 18,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-07-13",
+    "category": "raven"
+  },
+  {
     "id": "gallery-mrj7mx6f",
     "src": "/videos/reels/alester-jace-kavusma.mp4",
     "caption": "BÜYÜK KAVUŞMA",
