@@ -161,7 +161,7 @@
   },
   {
     "text": "Knights of Oldtown! Your Lord was murdered under a banner of peace! Kill Gaelor! Kill them all!",
-    "speakerId": "ser-brant-costayne",
+    "speakerId": "brant-costayne",
     "speakerName": "Ser Brant Costayne",
     "chapterSlug": "fathers-and-their-sins",
     "chapterTitle": "Chapter V: Fathers and Their Sins",
@@ -225,7 +225,7 @@
   },
   {
     "text": "The only reason I am alive is King Baelenys.",
-    "speakerId": "ser-alester-dayne",
+    "speakerId": "alester-dayne",
     "speakerName": "Alester Dayne",
     "chapterSlug": "the-weight-of-loyalty",
     "chapterTitle": "Chapter III: The Weight of Loyalty",
@@ -297,7 +297,7 @@
   },
   {
     "text": "Experience is everything. Experience triumphs over youth and speed. The men you truly must fear are the experienced ones.",
-    "speakerId": "ser-orwell-morrigen",
+    "speakerId": "orwell-morrigen",
     "speakerName": "Ser Orwell Morrigen",
     "chapterSlug": "a-crown-of-thorns",
     "chapterTitle": "Chapter VI: A Crown of Thorns",
@@ -363,8 +363,176 @@
     "text": "To kneel before Ser Alester Dayne is an honor; to be raised by my brother’s hand is the only blessing I require.",
     "speakerId": "jacaelon-targaryen",
     "speakerName": "Jacaelon Targaryen",
-    "chapterSlug": "the-mountain-and-the-vow",
-    "chapterTitle": "Chapter VII: The Mountain and the Vow",
+    "chapterSlug": "the-climb-and-the-kneel",
+    "chapterTitle": "Chapter VII: The Climb and the Kneel",
     "note": "to Ser Alester"
+  },
+  {
+    "text": "He knows how to end a war before the banners are even called.",
+    "speakerId": "maester-cordin",
+    "speakerName": "Maester Cordin",
+    "chapterSlug": "the-viper-in-silk",
+    "chapterTitle": "Chapter VIII: The Viper in Silk",
+    "note": "about King Baelenys"
+  },
+  {
+    "text": "Promise does not stop a lance from shattering my ribs.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-viper-in-silk",
+    "chapterTitle": "Chapter VIII: The Viper in Silk",
+    "note": "to Ser Alester"
+  },
+  {
+    "text": "I have heard a rumor. I heard that a Targaryen prince fucks better than any man in the Seven Kingdoms. Are you him, or is it the other Prince?",
+    "speakerId": "visenya-targaryen",
+    "speakerName": "Visenya Targaryen",
+    "chapterSlug": "the-viper-in-silk",
+    "chapterTitle": "Chapter VIII: The Viper in Silk",
+    "note": "to Jace"
+  },
+  {
+    "text": "The rumors were true. You are still rock hard.",
+    "speakerId": "visenya-targaryen",
+    "speakerName": "Visenya Targaryen",
+    "chapterSlug": "the-viper-in-silk",
+    "chapterTitle": "Chapter VIII: The Viper in Silk",
+    "note": "holding Dark Sister to Jace's throat while riding him"
+  },
+  {
+    "text": "We finally meet, cousin.",
+    "speakerId": "visenya-targaryen",
+    "speakerName": "Visenya Targaryen",
+    "chapterSlug": "the-viper-in-silk",
+    "chapterTitle": "Chapter VIII: The Viper in Silk",
+    "note": "revealing her Targaryen eyes to Jace"
+  },
+  {
+    "text": "May the gods forgive him, because I will not.",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "note": "speaking of Jace"
+  },
+  {
+    "text": "If you wish to win, you always go for the kill. Because the man across the list from you has the potential to end your life, and you will never know his intent until the lance shatters.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "note": "giving tourney advice to Jace"
+  },
+  {
+    "text": "What a jolly day for the peasants.",
+    "speakerId": "godfrey-blackwood",
+    "speakerName": "Ser Godfrey Blackwood",
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "note": "watching a knight break his neck in the lists"
+  },
+  {
+    "text": "The more the merrier.",
+    "speakerId": "alester-dayne",
+    "speakerName": "Ser Alester Dayne",
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "note": "joking about Ser Godfrey Blackwood's tastes"
+  },
+  {
+    "text": "I should have slaughtered every one of you.",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "note": "to Ser Brant Costayne after the assassination attempt"
+  },
+  {
+    "text": "You are one tough motherfucker, Ser Baratheon.",
+    "speakerId": "alester-dayne",
+    "speakerName": "Ser Alester Dayne",
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "note": "to Steffon Baratheon after their brutal joust"
+  },
+  {
+    "text": "He swore he would end me! I am the one standing, brother!",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "roaring at the fallen Jace"
+  },
+  {
+    "text": "I feel like a jar of wildfire.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "joking about his painful state"
+  },
+  {
+    "text": "I only played fair. If the gods decided he needed to die, he would be dead. But we are both here, I guess.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "about Gaelor"
+  },
+  {
+    "text": "I only tried to win.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "when Saera asks if he tried to kill Gaelor"
+  },
+  {
+    "text": "Let the little terror come. She amuses me. It is incredibly dull in here.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "about Princess Vhaemys visiting the infirmary"
+  },
+  {
+    "text": "If you managed to do anything today besides showing the realm what a fractured, wretched family we are, you proved to every lord in the Seven Kingdoms that you are a prince and a knight they should never dare to cross.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "to Jace"
+  },
+  {
+    "text": "I refuse to die seeing one of my sons lost to the world, and the other two tearing each other's throats out. You owe me this much.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "ordering Jace to make peace with Gaelor"
+  },
+  {
+    "text": "If I were you, I would stop placing wagers.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "teasing Ser Alester about his prediction of Jace's victory at the joust"
+  },
+  {
+    "text": "Disappointing.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "when Gaelor boasts that his head is still intact"
+  },
+  {
+    "text": "Next time, I will make sure to hide behind my shield as tightly as you do.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "note": "bantering with Gaelor before sleeping"
   }
 ]

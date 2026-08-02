@@ -102,7 +102,7 @@
       "baelor-targaryen": "His uncle, recalled to court and elevated to Grand Maester after the Oldtown Massacre — though the two clashed immediately over his handling of the affair.",
       "naella-velaryon": "Received news of her pregnancy with rare, genuine warmth — one of the few unguarded moments of tenderness in an otherwise bleak season.",
       "vhaemys-targaryen": "She admires him without understanding the fear he inspires in everyone else; he has shown her only the softest side of himself.",
-      "ser-orwell-morrigen": "Commands the Kingsguard in his name; Morrigen serves with rigid, unquestioning discipline.",
+      "orwell-morrigen": "Commands the Kingsguard in his name; Morrigen serves with rigid, unquestioning discipline.",
       "steffon-baratheon": "Holds House Baratheon in high esteem for past military service, entirely unaware of the young lord's insolence before the Hand's throne."
     },
     "summary": "King Baelenys has ruled the realm through fear, strength, and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence with his own exiled brother Vahaemon shattered his already fragile trust in his children, especially Visenor, whom he struck down before the entire court and gave an impossible choice: kill his wife, or lose everything. Having named Jacaelon his new Hand after Derrin Hightower's treason and secret execution, Baelenys now moves toward war with House Tyrell and Hightower with the same merciless certainty that has defined his reign.",
@@ -262,7 +262,7 @@
     ],
     "relationships": {
       "baelenys-targaryen": "Summoned back into royal service and hired in secret to track down and retrieve Prince Visenor, dead or alive.",
-      "ser-alester-dayne": "Ambushed him and Visenor's party in the Dornish woods, leading a hunting party of sellswords against him in a brutal duel that nearly killed them both."
+      "alester-dayne": "Ambushed him and Visenor's party in the Dornish woods, leading a hunting party of sellswords against him in a brutal duel that nearly killed them both."
     },
     "summary": "Once a Kingsguard whose exploits were sung about before most knights would dare dream of it, Curtass Whent left the order under circumstances the realm no longer discusses openly. King Baelenys called him back for one purpose: find Visenor. He very nearly succeeded, cornering Ser Alester Dayne with five sellswords in the woods south of King's Landing. The fight cost him his life at the hooves of his own target's horse. His body was found alongside those of his five sellswords near a rural sept, and word of his death has since reached the King, who received the news with cold indifference.",
     "quotes": []
@@ -402,7 +402,7 @@
       "baelenys-targaryen": "His loyalty has brought him closer to the king, who has named him heir should Visenor not return.",
       "jacaelon-targaryen": "Frequently clashes with him, especially now that Jace holds the Hand's pin and keeps him deliberately out of the loop.",
       "visenor-targaryen": "Frustrated by what he sees as weakness, though it was Gaelor who broke the poisoner's confession out of the assassin himself.",
-      "ser-saathos-maris": "Trusted knight, mentor, and drinking companion who indulges his temper more than he probably should.",
+      "saathos-maris": "Trusted knight, mentor, and drinking companion who indulges his temper more than he probably should.",
       "naella-velaryon": "His wife since their wedding at Driftmark; he has found unexpected comfort and honesty in their marriage. She is now carrying his child, the first genuinely joyful news he has had in months.",
       "timos-hightower": "Executed him personally at Oldtown to enforce the King's justice — a killing that spiraled into a massacre he did not fully intend.",
       "vhaemys-targaryen": "The little princess he has promised will always be his most loved, however many nieces and nephews may follow.",
@@ -440,7 +440,7 @@
       "vhaemys-targaryen"
     ],
     "children": [],
-    "mentor": "ser-alester-dayne",
+    "mentor": "alester-dayne",
     "dragon": "Jhagar",
     "traits": [
       "Manipulative",
@@ -465,12 +465,12 @@
       "saera-targaryen": "One of the few siblings he genuinely trusts.",
       "visenor-targaryen": "Once looked down on him and considered him weak; risking everything to save him and Rhaella changed that completely.",
       "gaelor-targaryen": "Their rivalry has only sharpened now that Jace holds the Hand's pin and Gaelor stands to inherit the throne.",
-      "ser-alester-dayne": "His closest friend, mentor, and the man he sent into mortal danger to save Visenor — a debt that haunts him. Alester knighted him in a private ceremony witnessed by no one else, a gesture Jace values more than any court honor.",
+      "alester-dayne": "His closest friend, mentor, and the man he sent into mortal danger to save Visenor — a debt that haunts him. Alester knighted him in a private ceremony witnessed by no one else, a gesture Jace values more than any court honor.",
       "derrin-hightower": "Exposed his treason, extracted his confession in private, and executed him himself. Only the King knows the truth of what happened that night at Driftmark.",
       "vhaemys-targaryen": "The little princess who feels safest in his hands, unaware of everything he has done to keep the family standing.",
       "weylar-rocke": "His personal spymaster, pardoned from the black cells to ensure loyalty born of terror; has since more than earned his place.",
       "baelor-targaryen": "Embraced him warmly on arrival and considers him the one voice at council that matches his own measured counsel.",
-      "ser-orwell-morrigen": "Trained under him rigorously during Alester's absence; Morrigen assessed him ready for knighthood, though it was Alester who ultimately performed the ceremony.",
+      "orwell-morrigen": "Trained under him rigorously during Alester's absence; Morrigen assessed him ready for knighthood, though it was Alester who ultimately performed the ceremony.",
       "steffon-baratheon": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown; the insult still burns on both sides."
     },
     "summary": "Prince Jacaelon has become one of the kingdom's sharpest political minds despite his young age. During the poisoning crisis he uncovered Rhaella's secret correspondence, orchestrated investigations against the Hand, protected Visenor despite publicly humiliating him, and secretly arranged his escape to Dorne through Ser Alester Dayne. He confirmed Derrin Hightower's treason with forged evidence and a confession extracted in a locked room at Driftmark — then executed the old Hand himself and hid the body at sea. Rewarded with the Hand's pin by his own mother, Jace now rules much of the realm's day-to-day business at his father's side, using fear, patience, and a growing spy network led by the pardoned whisperer Weylar Rocke to hold House Targaryen together while paranoia over what he has become quietly consumes him.",
@@ -565,7 +565,7 @@
     ],
     "relationships": {
       "jacaelon-targaryen": "Met him during his journey through Dorne and was later trusted enough to become his fugitive family's last resort. Now a guest at King's Landing, where a night spent together in disguise in Flea Bottom left them noticeably closer.",
-      "ser-alester-dayne": "A distant cousin from another branch of House Dayne; her household's protection and her own network of eyes and ears likely saved his life.",
+      "alester-dayne": "A distant cousin from another branch of House Dayne; her household's protection and her own network of eyes and ears likely saved his life.",
       "visenor-targaryen": "Granted him and Rhaella sanctuary at Starfall, fully aware of what it could cost House Dayne if discovered.",
       "rhaella-targaryen": "Provided her sanctuary at Starfall and dispatched a maid and a maester to attend her at the scholars' retreat, asking nothing in return."
     },
@@ -614,7 +614,7 @@
     ],
     "relationships": {
       "jacaelon-targaryen": "Her twin and his greatest emotional vulnerability.",
-      "ser-brannyn-vance": "Her sworn Kingsguard shield; she took his honesty, then took far more than his opinion.",
+      "brannyn-vance": "Her sworn Kingsguard shield; she took his honesty, then took far more than his opinion.",
       "steffon-baratheon": "Charmed by his awkward, oblivious chivalry at Storm's End, though she has no real interest in becoming his lady.",
       "visenor-targaryen": "Named his surviving hatchling Jadefyre before his flight from King's Landing; the dragon was later gifted to her by royal decree.",
       "jaery-targaryen": "Her mother actively arranged marriage prospects for her and ultimately sent her to Storm's End to meet the Young Stag, viewing the visit as both a diplomatic errand and a way to draw her out of the capital."
@@ -743,7 +743,7 @@
       "visenor-targaryen": "Loves him deeply despite everything her family's name has cost them both.",
       "baelenys-targaryen": "Lives in constant fear of him, and with good reason.",
       "vahaemon-targaryen": "Her exiled father, whose disgrace hangs over her at court, though it was not to him that her secret warning was sent.",
-      "ser-alester-dayne": "Watched him nearly die protecting her and Visenor, and has called him a true hero to the realm ever since.",
+      "alester-dayne": "Watched him nearly die protecting her and Visenor, and has called him a true hero to the realm ever since.",
       "lorenah-dayne": "Received sanctuary from her at Starfall and again at the scholars' retreat, where Lorenah had already dispatched a maid and maester to attend her. Rhaella owes her more than she can yet repay.",
       "edmyn-uller": "The Dornish maester assigned to attend her at the scholars' retreat; she discovered her pregnancy under his care."
     },
@@ -835,13 +835,13 @@
       "jacaelon-targaryen": "Works closely with him and is one of the few people able to see through his composure.",
       "visenor-targaryen": "Supported him during the Rhaella affair and helped shield the truth from their father as long as she could.",
       "rickard-stark": "Sent north to offer the Crown's condolences on his father's death, she found an unexpected, unspoken warmth in his company.",
-      "ser-alester-dayne": "Waited for him to come to her rather than going to him after his battered return to court; allowed herself a late-night walk with him, quietly resuming an old habit neither had named."
+      "alester-dayne": "Waited for him to come to her rather than going to him after his battered return to court; allowed herself a late-night walk with him, quietly resuming an old habit neither had named."
     },
     "summary": "Known throughout the realm as 'Cloud Eyes', Saera's mysterious gaze has only grown cloudier over time. Quiet yet perceptive, she commands unusual affection from dragons and smallfolk alike, and commands one of the realm's most valuable intelligence networks besides. Sent to Winterfell to honor Lord Brandon Stark's death, she lingered a full week longer than expected, drawn to the new Lord Rickard Stark and to a North quieter and more honest than anything she has known in King's Landing.",
     "quotes": []
   },
   {
-    "id": "ser-alester-dayne",
+    "id": "alester-dayne",
     "name": "Ser Alester Dayne",
     "nickname": "-",
     "aliases": [],
@@ -884,13 +884,13 @@
       "lorenah-dayne": "A distant cousin whose protection at Starfall likely saved both his life and the fugitive prince's.",
       "curtass-whent": "Ambushed by him and five sellswords in the Dornish woods; the fight nearly killed them both, and only Alester walked away.",
       "saera-targaryen": "Sought her out the night of his return and resumed their old habit of walking the corridors together; she had waited for him to find her rather than seeking him out herself.",
-      "ser-orwell-morrigen": "His Lord Commander, whose patience with Alester's unauthorized absence from court has worn noticeably thin — and who has not yet decided what to do about it."
+      "orwell-morrigen": "His Lord Commander, whose patience with Alester's unauthorized absence from court has worn noticeably thin — and who has not yet decided what to do about it."
     },
     "summary": "Ser Alester Dayne is Prince Jacaelon's closest friend and sworn protector. Silent, observant, and highly capable in combat, he acted as the physical execution arm of Jace's plans throughout the poisoning crisis: uncovering Rhaella's secret correspondence, defying the Hand during the dungeon confrontation, and ultimately smuggling Visenor and Rhaella out of King's Landing toward Dorne. The journey nearly killed him. Ambushed in the woods by Curtass Whent and five hired sellswords, Alester fought through brutal, sustained violence — losing an eye's worth of vision, half his ribs, and nearly his life — before killing Whent in a final, desperate act. He now recovers at Starfall under his distant cousin Lorenah's protection, a Kingsguard whose unauthorized absence from the capital has not gone unnoticed by his own Lord Commander.",
     "quotes": []
   },
   {
-    "id": "ser-brannyn-vance",
+    "id": "brannyn-vance",
     "name": "Ser Brannyn Vance",
     "nickname": "-",
     "aliases": [],
@@ -929,7 +929,7 @@
     "quotes": []
   },
   {
-    "id": "ser-brant-costayne",
+    "id": "brant-costayne",
     "name": "Ser Brant Costayne",
     "nickname": "-",
     "aliases": [],
@@ -966,7 +966,7 @@
     "quotes": []
   },
   {
-    "id": "ser-orwell-morrigen",
+    "id": "orwell-morrigen",
     "name": "Ser Orwell Morrigen",
     "nickname": "-",
     "aliases": [],
@@ -999,14 +999,14 @@
     ],
     "relationships": {
       "baelenys-targaryen": "Serves him with rigid, unquestioning discipline.",
-      "ser-alester-dayne": "One of his sworn brothers, whose unauthorized absence protecting Prince Visenor has not gone unnoticed — and will not go unpunished forever.",
+      "alester-dayne": "One of his sworn brothers, whose unauthorized absence protecting Prince Visenor has not gone unnoticed — and will not go unpunished forever.",
       "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence and openly assessed him ready for knighthood; Jace chose Alester's hand over Morrigen's for the ceremony itself."
     },
     "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told.",
     "quotes": []
   },
   {
-    "id": "ser-saathos-maris",
+    "id": "saathos-maris",
     "name": "Ser Saathos Maris",
     "nickname": "-",
     "aliases": [],
@@ -1083,7 +1083,7 @@
     "relationships": {
       "jacaelon-targaryen": "Demanded overdue debts from him before the whole court and was humiliated for his trouble; the insult still burns.",
       "maela-targaryen": "Hosted her at Storm's End and fell for her completely, entirely unaware of how little she returned his affection.",
-      "ser-alester-dayne": "Sought him out before leaving the Red Keep, hoping to wash away his humiliation before the Hand in a duel — only to be told the knight was absent from court."
+      "alester-dayne": "Sought him out before leaving the Red Keep, hoping to wash away his humiliation before the Hand in a duel — only to be told the knight was absent from court."
     },
     "summary": "Already famous in tourneys and duels despite his youth, Steffon Baratheon marched into the Red Keep demanding the Crown repay House Baratheon's old debts in blood and coin, only to be cut down in front of the court by Hand Jacaelon Targaryen. Weeks later he hosted Princess Maela at Storm's End, showing an earnest, almost childlike chivalry that charmed her without ever earning her heart. He remains oblivious to both humiliations.",
     "quotes": []
@@ -1129,7 +1129,7 @@
       "gaelor-targaryen": "Begged him for parley and mercy; was beheaded by his hand regardless.",
       "alysanne-hightower": "His older sister, killed in the same massacre that claimed his life moments later.",
       "melessa-hightower": "His younger sister; she survived the massacre in which he died.",
-      "ser-brant-costayne": "The knight who stood in oath to defend him, called for his revenge the moment he was killed, and died in the chaos that followed."
+      "brant-costayne": "The knight who stood in oath to defend him, called for his revenge the moment he was killed, and died in the chaos that followed."
     },
     "summary": "Thrust into Oldtown's lordship the moment his father vanished under suspicion, fifteen-year-old Timos Hightower tried desperately to comply with the Crown's demands. It was not enough. When Prince Gaelor arrived to claim his life as payment for a treason he had no part in, panic drove the boy to draw steel. He never had a chance to use it. His death, and the massacre it triggered, will be remembered in the Reach for a hundred years.",
     "quotes": []
@@ -1260,7 +1260,7 @@
     ],
     "relationships": {
       "baelenys-targaryen": "Admires her father without understanding the fear he inspires in everyone else.",
-      "ser-alester-dayne": "Deeply attached to him and often followed him around the castle before his disappearance; she misses him openly.",
+      "alester-dayne": "Deeply attached to him and often followed him around the castle before his disappearance; she misses him openly.",
       "jacaelon-targaryen": "Feels safest around him and clings to him whenever the family fractures in front of her.",
       "gaelor-targaryen": "He promises her she will always be his most loved, no matter how many nieces and nephews follow.",
       "jaery-targaryen": "Her mother, beside whom she sheltered during the worst of the family's public fracturing — clinging to the nearest adult whenever the adults she trusted began to shout.",
@@ -1323,7 +1323,7 @@
       "jacaelon-targaryen": "His opinion of Jace changed completely after learning of his secret help — and the price Jace's friend Ser Alester nearly paid for it.",
       "gaelor-targaryen": "Often disagrees with his methods, though it was Gaelor who first argued Visenor should never split his clutch of dragons among the family.",
       "saera-targaryen": "One of the siblings he trusts most.",
-      "ser-alester-dayne": "The knight who saved his and Rhaella's lives twice over in the woods south of King's Landing, at tremendous personal cost.",
+      "alester-dayne": "The knight who saved his and Rhaella's lives twice over in the woods south of King's Landing, at tremendous personal cost.",
       "lorenah-dayne": "Granted him and Rhaella sanctuary despite the very real danger it poses to her own house.",
       "maela-targaryen": "His sister now carries Jadefyre, the one hatchling of his own clutch to survive — a dragon he named himself before losing everything else.",
       "edmyn-uller": "The blunt Dornish maester at the scholars' retreat who tended to him, briefed him on events in the realm with startling frankness, and whose unfiltered honesty he found unexpectedly refreshing."
