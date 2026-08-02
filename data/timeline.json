@@ -74,16 +74,6 @@
           "jacaelon-targaryen",
           "derrin-hightower"
         ]
-      },
-      {
-        "title": "A wedding and a new Hand",
-        "description": "Gaelor marries Naella Velaryon at Driftmark, and Queen Jaery pins the Hand's badge to Jacaelon's chest before the court.",
-        "date": "Late 2nd Moon",
-        "characters": [
-          "gaelor-targaryen",
-          "naella-velaryon",
-          "jacaelon-targaryen"
-        ]
       }
     ]
   },
@@ -99,6 +89,16 @@
         "characters": [
           "jacaelon-targaryen",
           "derrin-hightower"
+        ]
+      },
+      {
+        "title": "A wedding and a new Hand",
+        "description": "Gaelor marries Naella Velaryon at Driftmark, and Queen Jaery pins the Hand's badge to Jacaelon's chest before the court.",
+        "date": "Early 3rd Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "naella-velaryon",
+          "jacaelon-targaryen"
         ]
       },
       {

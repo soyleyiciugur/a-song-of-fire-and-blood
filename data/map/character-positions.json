@@ -25,7 +25,16 @@
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
     "brant-costayne": "Oldtown",
-    "brannyn-vance": "King's Landing"
+    "brannyn-vance": "King's Landing",
+    "brandon-stark": "Winterfell",
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "King's Landing",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown"
   },
   "the-price-of-trust": {
     "baelenys-targaryen": "King's Landing",
@@ -54,10 +63,7 @@
     "derrin-hightower": "King's Landing",
     "lorenah-dayne": "Starfall",
     "vhaemys-targaryen": "King's Landing",
-    "naella-velaryon": [
-      "Driftmark",
-      "King's Landing"
-    ],
+    "naella-velaryon": "Driftmark",
     "baelor-targaryen": "Oldtown",
     "cordin-poole": "King's Landing",
     "curtass-whent": "-",
@@ -71,7 +77,16 @@
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
     "brant-costayne": "Oldtown",
-    "brannyn-vance": "King's Landing"
+    "brannyn-vance": "King's Landing",
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "Dragonstone",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "brandon-stark": "Dead"
   },
   "the-weight-of-loyalty": {
     "baelenys-targaryen": [
@@ -83,10 +98,7 @@
       "King's Landing",
       "Driftmark"
     ],
-    "naella-velaryon": [
-      "King's Landing",
-      "Driftmark"
-    ],
+    "naella-velaryon": "Driftmark",
     "jacaelon-targaryen": [
       "King's Landing",
       "Driftmark",
@@ -141,7 +153,28 @@
       "King's Landing",
       "Driftmark",
       "King's Landing"
-    ]
+    ],
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": [
+      "Dragonstone",
+      "Driftmark",
+      "Dragonstone"
+    ],
+    "orwell-morrigen": [
+      "King's Landing",
+      "Driftmark",
+      "King's Landing"
+    ],
+    "tion-lannister": [
+      "King's Landing",
+      "Driftmark",
+      "King's Landing"
+    ],
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "brandon-stark": "Dead"
   },
   "the-broken-knight": {
     "baelenys-targaryen": "King's Landing",
@@ -166,7 +199,6 @@
       "Winterfell",
       "Castle Black"
     ],
-    "derrin-hightower": "Dead",
     "naella-velaryon": "King's Landing",
     "steffon-baratheon": "King's Landing",
     "timos-hightower": "Oldtown",
@@ -175,7 +207,17 @@
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
     "brant-costayne": "Oldtown",
-    "brannyn-vance": "King's Landing"
+    "brannyn-vance": "King's Landing",
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "Dragonstone",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "derrin-hightower": "Dead",
+    "brandon-stark": "Dead"
   },
   "fathers-and-their-sins": {
     "baelenys-targaryen": "King's Landing",
@@ -223,13 +265,22 @@
       "Storm's End",
       "King's Landing"
     ],
-    "derrin-hightower": "Dead",
     "naella-velaryon": "King's Landing",
-    "curtass-whent": "Dead",
     "visenya-targaryen": "-",
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
-    "brant-costayne": "Oldtown"
+    "brant-costayne": "Oldtown",
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "Dragonstone",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "derrin-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "curtass-whent": "Dead"
   },
   "a-crown-of-thorns": {
     "baelenys-targaryen": "King's Landing",
@@ -253,17 +304,26 @@
     "cordin-poole": "King's Landing",
     "steffon-baratheon": "Storm's End",
     "vhaemys-targaryen": "King's Landing",
-    "derrin-hightower": "Dead",
-    "curtass-whent": "Dead",
-    "timos-hightower": "Dead",
-    "alysanne-hightower": "Dead",
     "rickard-stark": "Winterfell",
     "naella-velaryon": "King's Landing",
     "brannyn-vance": "King's Landing",
     "visenya-targaryen": "-",
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
-    "brant-costayne": "Dead"
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "Dragonstone",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "brant-costayne": "Dead",
+    "derrin-hightower": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "curtass-whent": "Dead"
   },
   "the-climb-and-the-kneel": {
     "baelenys-targaryen": "King's Landing",
@@ -286,16 +346,25 @@
     "steffon-baratheon": "Storm's End",
     "vhaemys-targaryen": "King's Landing",
     "naella-velaryon": "King's Landing",
-    "derrin-hightower": "Dead",
-    "curtass-whent": "Dead",
-    "timos-hightower": "Dead",
-    "alysanne-hightower": "Dead",
     "rickard-stark": "Winterfell",
     "brannyn-vance": "King's Landing",
     "visenya-targaryen": "-",
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
-    "brant-costayne": "Dead"
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "Dragonstone",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "brant-costayne": "Dead",
+    "derrin-hightower": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "curtass-whent": "Dead"
   },
   "the-viper-in-silk": {
     "baelenys-targaryen": "King's Landing",
@@ -320,14 +389,23 @@
     "naella-velaryon": "King's Landing",
     "steffon-baratheon": "King's Landing",
     "visenya-targaryen": "King's Landing",
-    "derrin-hightower": "Dead",
-    "curtass-whent": "Dead",
-    "timos-hightower": "Dead",
-    "alysanne-hightower": "Dead",
     "rickard-stark": "Winterfell",
     "naela-targaryen": "-",
     "godfrey-blackwood": "-",
-    "brant-costayne": "Dead"
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "King's Landing",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "brant-costayne": "Dead",
+    "derrin-hightower": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "curtass-whent": "Dead"
   },
   "the-brothers-tilt": {
     "baelenys-targaryen": "King's Landing",
@@ -350,12 +428,21 @@
     "rhaella-targaryen": "Starfall",
     "visenya-targaryen": "-",
     "brannyn-vance": "King's Landing",
+    "rickard-stark": "Winterfell",
+    "naela-targaryen": "-",
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "King's Landing",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
     "derrin-hightower": "Dead",
-    "curtass-whent": "Dead",
     "timos-hightower": "Dead",
     "alysanne-hightower": "Dead",
-    "rickard-stark": "Winterfell",
-    "naela-targaryen": "-"
+    "brandon-stark": "Dead",
+    "curtass-whent": "Dead"
   },
   "fireflies": {
     "jacaelon-targaryen": "King's Landing",
@@ -380,9 +467,18 @@
     "visenya-targaryen": "-",
     "naela-targaryen": "-",
     "brannyn-vance": "King's Landing",
+    "darren-dayne": "Starfall",
+    "malaenar-targaryen": "Dragonstone",
+    "orwell-morrigen": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vahaemon-targaryen": "-",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
     "derrin-hightower": "Dead",
-    "curtass-whent": "Dead",
     "timos-hightower": "Dead",
-    "alysanne-hightower": "Dead"
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "curtass-whent": "Dead"
   }
 }
