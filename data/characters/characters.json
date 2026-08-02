@@ -722,7 +722,8 @@
     "mother": "Naela Velaryon",
     "spouse": "visenor-targaryen",
     "siblings": [
-      "-"
+      "-",
+      "visenya-targaryen"
     ],
     "children": [],
     "mentor": "-",
@@ -1192,14 +1193,15 @@
     "height": "180 cm",
     "father": "Aenys Targaryen II",
     "mother": "Vhaemys Targaryen",
-    "spouse": "Naela Velaryon",
+    "spouse": "naela-targaryen",
     "siblings": [
       "baelenys-targaryen",
       "malaenar-targaryen"
     ],
     "children": [
       "rhaella-targaryen",
-      "-"
+      "-",
+      "visenya-targaryen"
     ],
     "mentor": "-",
     "dragon": "-",
@@ -1440,6 +1442,77 @@
       "derrin-hightower": "Her father, whose treason condemned the entire family long before she ever understood what was happening."
     },
     "summary": "The second of the two Hightower sisters glimpsed watching from a high window as Prince Gaelor's vanguard arrived at Oldtown's gates. Never named in any account of that day, she was tackled to the floor of the Great Hall alongside Alysanne when the massacre began — and, unlike her sister, lived through it. What became of her afterward is not recorded.",
+    "quotes": []
+  },
+  {
+    "id": "visenya-targaryen",
+    "name": "Visenya Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "",
+    "status": "Unknown",
+    "secret": {
+      "status": "Alive",
+      "note": ""
+    },
+    "age": 0,
+    "nameday": {
+      "day": 18,
+      "moon": 7,
+      "year": 99
+    },
+    "height": "",
+    "father": "vahaemon-targaryen",
+    "mother": "vahaemon-targaryen",
+    "spouse": "-",
+    "siblings": [
+      "rhaella-targaryen"
+    ],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {
+      "jacaelon-targaryen": "Had an interesting affair with him, thinking it was Prince Gaelor Targaryen."
+    },
+    "summary": "",
+    "quotes": []
+  },
+  {
+    "id": "naela-targaryen",
+    "name": "Naela Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "",
+    "status": "Unknown",
+    "secret": {
+      "status": "Alive",
+      "note": ""
+    },
+    "age": 0,
+    "nameday": {
+      "day": 18,
+      "moon": 7,
+      "year": 99
+    },
+    "height": "",
+    "father": "-",
+    "mother": "-",
+    "spouse": "vahaemon-targaryen",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {
+      "vahaemon-targaryen": "Spouse.",
+      "visenya-targaryen": "Daughter."
+    },
+    "summary": "",
     "quotes": []
   }
 ]
