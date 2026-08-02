@@ -128,7 +128,7 @@
       "year": 32
     },
     "height": "174 cm",
-    "father": "-", 
+    "father": "-",
     "mother": "-",
     "spouse": "-",
     "siblings": [],
@@ -1309,7 +1309,7 @@
       "visenya-targaryen"
     ],
     "mentor": "-",
-    "dragon": "Unknown", 
+    "dragon": "Unknown",
     "traits": [
       "Exiled",
       "Bitter",
@@ -1399,8 +1399,8 @@
     },
     "age": 24,
     "nameday": {
-      "day": 26,
-      "moon": 5,
+      "day": 19,
+      "moon": 7,
       "year": 75
     },
     "height": "180 cm",
@@ -1506,7 +1506,7 @@
       "moon": 8,
       "year": 38
     },
-    "height": "170 cm", 
+    "height": "170 cm",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -1561,7 +1561,7 @@
     "traits": [
       "Survivor of the Oldtown Massacre",
       "Unnamed in Every Account of That Day",
-      "Thirteen Years Old and Already Ruined" 
+      "Thirteen Years Old and Already Ruined"
     ],
     "goals": [
       "-"
@@ -1586,7 +1586,7 @@
       "status": "Alive",
       "note": "Was in King's Landing as of the seventeenth day of the seventh moon, 99 AC. Entered a Flea Bottom brothel, held Dark Sister to Prince Jacaelon's throat during a sexual encounter she initiated while believing him to be Gaelor. Fled before Alester Dayne could catch her. Current location unknown."
     },
-    "age": 20, 
+    "age": 20,
     "nameday": {
       "day": 18,
       "moon": 7,
