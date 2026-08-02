@@ -12,9 +12,7 @@ export interface ResolvedCharacterPosition {
   status: CharacterMapStatus;
 }
 
-export type ResolvedChapterPositions = Partial
-  Record<CharacterId, ResolvedCharacterPosition>
-;
+export type ResolvedChapterPositions = Partial<Record<CharacterId, ResolvedCharacterPosition>>;
 
 function lastStop(location: CharacterLocation): string {
   return Array.isArray(location) ? location[location.length - 1] : location;
