@@ -31,5 +31,16 @@
     "moon": 5,
     "year": 99,
     "description": "Prince Gaelor's vanguard clashes with Oldtown's knights in the castle courtyard — a slaughter the Citadel and the Reach will remember for a hundred years."
+  },
+  {
+    "id": "tourney-kings-landing",
+    "title": "The Grand Tourney at King's Landing",
+    "type": "tournament",
+    "location": "King's Landing",
+    "chapterSlug": "the-brothers-tilt",
+    "day": 18,
+    "moon": 7,
+    "year": 99,
+    "description": "A grand tourney meant to lift the city's spirits ends instead in bloodshed and scandal — an assassination attempt on Prince Gaelor by a disguised Oldtown survivor, and a brutal, inconclusive final tilt between the two Targaryen princes that leaves neither able to stand."
   }
 ]

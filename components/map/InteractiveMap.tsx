@@ -14,6 +14,10 @@ import {
 } from "@/data/map/locations";
 import { MAP_EVENTS } from "@/data/map/map-events";
 import { getCharacterPositionsForChapter } from "@/data/map/character-positions";
+import {
+  resolveCharacterPositionsInOrder,
+  type CharacterMapStatus,
+} from "@/data/map/resolve-character-status";
 import { getAllChapters } from "@/data/chapters";
 import { getCharacters } from "@/lib/characters";
 import { getTitleRank } from "@/constants/titles";
@@ -40,7 +44,9 @@ const ROMAN_VALUES: Record<string, number> = {
   I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9, X: 10,
 };
 
-type LocationEntry = { id: string; faded: boolean };
+// UPDATED: LocationEntry now carries the resolved status so markers can
+// render the dead/unknown overlay.
+type LocationEntry = { id: string; faded: boolean; status: CharacterMapStatus };
 type DeclutteredLocation = (typeof MAP_LOCATIONS)[number] & {
   offsetXPct: number;
   offsetYPct: number;
@@ -101,14 +107,20 @@ function getTrailColorAtRatio(ratio: number): string {
   return stops[stops.length - 1].color;
 }
 
+// UPDATED: Avatar now accepts an optional `status`. When it's "dead" or
+// "unknown" it applies a grayscale filter class to the wrapper and renders
+// a small overlay mark (red X for dead, black ? for unknown) on top of the
+// image, without needing every call site to hand-roll the overlay markup.
 function Avatar({
   characterId,
   name,
   size = 32,
+  status = "alive",
 }: {
   characterId: string;
   name: string;
   size?: number;
+  status?: CharacterMapStatus;
 }) {
   const [hasError, setHasError] = useState(false);
 
@@ -119,17 +131,43 @@ function Avatar({
   const src = hasError ? MINI_FALLBACK : `/images/miniportraits/${characterId}.webp`;
 
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={name}
-      width={size}
-      height={size}
-      draggable={false}
-      onError={() => setHasError(true)}
-      className={styles.avatarImg}
-      style={{ width: size, height: size }}
-    />
+    <span
+      style={{
+        position: "relative",
+        display: "inline-block",
+        width: size,
+        height: size,
+        lineHeight: 0,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={name}
+        width={size}
+        height={size}
+        draggable={false}
+        onError={() => setHasError(true)}
+        className={`${styles.avatarImg} ${
+          status === "dead"
+            ? styles.avatarDead
+            : status === "unknown"
+              ? styles.avatarUnknown
+              : ""
+        }`}
+        style={{ width: size, height: size }}
+      />
+      {status === "dead" && (
+        <span className={styles.statusOverlay} aria-hidden="true">
+          <span className={styles.deadMark}>✕</span>
+        </span>
+      )}
+      {status === "unknown" && (
+        <span className={styles.statusOverlay} aria-hidden="true">
+          <span className={styles.unknownMark}>?</span>
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -208,15 +246,30 @@ export default function InteractiveMap() {
 
   const currentChapter = chapters[chapterIndex];
 
-  const currentPositions = useMemo(
-    () => (currentChapter ? getCharacterPositionsForChapter(currentChapter.slug) : {}),
-    [currentChapter]
+  // NEW: Resolve every character's location + alive/dead/unknown status for
+  // every chapter, in one pass, by walking the chapters in order. This is
+  // what lets "Dead"/"-" characters freeze at their last real location
+  // instead of vanishing, and lets them snap back to "alive" automatically
+  // the moment a real location reappears for them in a later chapter.
+  const orderedSlugs = useMemo(() => chapters.map((c) => c.slug), [chapters]);
+  const resolvedPositionsByChapter = useMemo(
+    () => resolveCharacterPositionsInOrder(orderedSlugs),
+    [orderedSlugs]
+  );
+  const currentResolved = useMemo(
+    () => (currentChapter ? resolvedPositionsByChapter[currentChapter.slug] ?? {} : {}),
+    [resolvedPositionsByChapter, currentChapter]
   );
 
   const charactersByLocation = useMemo(() => {
     const map = new Map<string, LocationEntry[]>();
     
-    Object.entries(currentPositions).forEach(([charId, location]) => {
+    // UPDATED: iterate the resolved data (location + status) instead of the
+    // raw chapter positions, so dead/unknown characters still show up at
+    // their frozen last-known spot with the right status attached.
+    Object.entries(currentResolved).forEach(([charId, resolved]) => {
+      if (!resolved) return;
+      const { location, status } = resolved;
       if (!location) return;
       const locs = Array.isArray(location) ? location : [location];
       
@@ -242,7 +295,7 @@ export default function InteractiveMap() {
       // Now push the deduplicated character states to the main map
       uniqueLocs.forEach((faded, locName) => {
         const list = map.get(locName) ?? [];
-        list.push({ id: charId, faded });
+        list.push({ id: charId, faded, status });
         map.set(locName, list);
       });
     });
@@ -258,7 +311,7 @@ export default function InteractiveMap() {
     });
     
     return map;
-  }, [currentPositions, charactersById]);
+  }, [currentResolved, charactersById]);
 
   const visibleEventsByLocation = useMemo(() => {
     const map = new Map<string, typeof MAP_EVENTS>();
@@ -295,6 +348,11 @@ export default function InteractiveMap() {
       const chapter = chapters[i];
       if (!chapter) continue;
 
+      // NOTE: intentionally still uses the *raw* per-chapter positions here,
+      // not the resolved ones. "Dead"/"-" values won't match any real map
+      // location name, so they're naturally skipped — which is exactly what
+      // we want: no new trail point gets added while a character is
+      // dead/unknown, so the trail simply holds at their last real stop.
       const positions = getCharacterPositionsForChapter(chapter.slug);
       const location = positions[selectedCharacterId as keyof typeof positions];
       if (!location) continue;
@@ -386,13 +444,21 @@ export default function InteractiveMap() {
     }
   }, [trailPathD]);
 
+  // UPDATED: derive the pulse-ring location from the resolved (frozen-aware)
+  // position instead of the raw currentPositions, so a dead/unknown selected
+  // character still pulses correctly at their frozen last-known spot.
   const selectedCharacterCurrentLocation = useMemo(() => {
     if (!selectedCharacterId) return null;
-    const location = currentPositions[selectedCharacterId as keyof typeof currentPositions];
-    if (!location) return null;
-    const locs = Array.isArray(location) ? location : [location];
+    const resolved = currentResolved[selectedCharacterId as keyof typeof currentResolved];
+    if (!resolved?.location) return null;
+    const locs = Array.isArray(resolved.location) ? resolved.location : [resolved.location];
     return getMapLocation(locs[locs.length - 1]);
-  }, [selectedCharacterId, currentPositions]);
+  }, [selectedCharacterId, currentResolved]);
+
+  const selectedCharacterStatus: CharacterMapStatus = useMemo(() => {
+    if (!selectedCharacterId) return "alive";
+    return currentResolved[selectedCharacterId as keyof typeof currentResolved]?.status ?? "alive";
+  }, [selectedCharacterId, currentResolved]);
 
   const selectedCharacter = selectedCharacterId ? charactersById.get(selectedCharacterId) : null;
 
@@ -768,6 +834,10 @@ export default function InteractiveMap() {
                     }}
                   >
                     {selectedCharacter && (
+                      // NOTE: trail dots always represent confirmed real
+                      // sightings (see fullTrailPoints comment above), so
+                      // they never need the dead/unknown overlay — status
+                      // intentionally omitted here.
                       <Avatar
                         characterId={selectedCharacter.id}
                         name={selectedCharacter.name}
@@ -838,7 +908,15 @@ export default function InteractiveMap() {
                           <button
                             key={id}
                             className={`${styles.avatarButton} ${isSelected ? styles.avatarSelected : ""} ${entry.faded ? styles.avatarFaded : ""}`}
-                            title={entry.faded ? `${c?.name ?? id} (passing by)` : c?.name ?? id}
+                            title={
+                              entry.status === "dead"
+                                ? `${c?.name ?? id} (last seen here — presumed dead)`
+                                : entry.status === "unknown"
+                                  ? `${c?.name ?? id} (last seen here — whereabouts unknown)`
+                                  : entry.faded
+                                    ? `${c?.name ?? id} (passing by)`
+                                    : c?.name ?? id
+                            }
                             onMouseDown={(e) => e.stopPropagation()}
                             onClick={(e) => {
                               e.stopPropagation();
@@ -850,6 +928,7 @@ export default function InteractiveMap() {
                               characterId={id}
                               name={c?.name ?? id}
                               size={entry.faded ? FADED_AVATAR_SIZE : NORMAL_AVATAR_SIZE}
+                              status={entry.status}
                             />
                           </button>
                         );
@@ -896,10 +975,21 @@ export default function InteractiveMap() {
                                   setLockedCluster(null); 
                                 }}
                               >
-                                <Avatar characterId={entry.id} name={c?.name ?? entry.id} size={24} />
+                                <Avatar
+                                  characterId={entry.id}
+                                  name={c?.name ?? entry.id}
+                                  size={24}
+                                  status={entry.status}
+                                />
                                 <span>
                                   {c?.name ?? entry.id}
-                                  {entry.faded && (
+                                  {entry.status === "dead" && (
+                                    <span className={styles.flyoutFadedTag}> (presumed dead)</span>
+                                  )}
+                                  {entry.status === "unknown" && (
+                                    <span className={styles.flyoutFadedTag}> (whereabouts unknown)</span>
+                                  )}
+                                  {entry.status === "alive" && entry.faded && (
                                     <span className={styles.flyoutFadedTag}> (passing by)</span>
                                   )}
                                 </span>
@@ -1039,7 +1129,12 @@ export default function InteractiveMap() {
               >
                 ×
               </button>
-              <Avatar characterId={visibleCard.id} name={visibleCard.name} size={48} />
+              <Avatar
+                characterId={visibleCard.id}
+                name={visibleCard.name}
+                size={48}
+                status={selectedCharacterStatus}
+              />
               <div>
                 <div className={styles.characterCardName}>{visibleCard.name}</div>
                 <div className={styles.characterCardTitle}>{visibleCard.title}</div>
@@ -1142,13 +1237,22 @@ export default function InteractiveMap() {
                         <button
                           key={entry.id}
                           className={`${styles.summaryAvatarButton} ${entry.faded ? styles.avatarFaded : ""}`}
-                          title={entry.faded ? `${c?.name ?? entry.id} (passing by)` : c?.name ?? entry.id}
+                          title={
+                            entry.status === "dead"
+                              ? `${c?.name ?? entry.id} (presumed dead)`
+                              : entry.status === "unknown"
+                                ? `${c?.name ?? entry.id} (whereabouts unknown)`
+                                : entry.faded
+                                  ? `${c?.name ?? entry.id} (passing by)`
+                                  : c?.name ?? entry.id
+                          }
                           onClick={() => setSelectedCharacterId(entry.id)}
                         >
                           <Avatar
                             characterId={entry.id}
                             name={c?.name ?? entry.id}
                             size={entry.faded ? FADED_AVATAR_SIZE : 26}
+                            status={entry.status}
                           />
                         </button>
                       );

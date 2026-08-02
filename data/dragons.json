@@ -79,35 +79,64 @@
       "Pale, Bone-Yellow Scales",
       "Wings Thin Enough to Show the Bone Beneath",
       "Unusually Intelligent",
-      "Avoids Humans by Choice, Not Fear",
-      "Newly Bonded — Not Yet Flown"
+      "Avoided Humans by Choice, Not Fear",
+      "Now Ridden — Bareback, No Saddle or Chains",
+      "Relocated His Own Egg to a New Nest"
     ],
-    "description": "A wild dragon Visenor found roosting alone in a cave in Dorne's Red Mountains. Small and lean rather than malnourished, Boneskin eats little and shuns human contact out of what maesters believe is a rare, near-human intelligence rather than aggression. After days of patient contact he accepted Visenor's presence and let himself be touched, but Visenor has not yet attempted to ride him."
+    "description": "A wild dragon Visenor found roosting alone in a cave in Dorne's Red Mountains. Small and lean rather than malnourished, Boneskin ate little and shunned human contact out of what maesters believe is a rare, near-human intelligence rather than aggression. After days of patient contact, shared meals, and songs sung in High Valyrian, he accepted Visenor fully — carrying both the prince and his own egg in a night flight to a hidden sea cave along Dorne's coast, safe from men."
   },
   {
-    "id": "visenors-first-hatchling",
-    "name": "Unnamed hatchling",
+    "id": "boneskins-egg",
+    "name": "Boneskin's Egg",
+    "status": "Unhatched",
+    "image": "/images/dragons/boneskin-egg.webp",
+    "traits": [
+      "Recovered from a Cave in the Red Mountains",
+      "Carried by Boneskin Himself",
+      "Hidden in a Sea Cave in Dorne",
+      "Unclaimed"
+    ],
+    "description": "The dragon egg found alongside Boneskin in his mountain cave. Visenor and Boneskin relocated it together by night flight to a damp, salt-scented sea cave along the Dornish coast — safe from scorpions and, more importantly, from men. Its fate remains unclaimed."
+  },
+ {
+    "id": "ashfyre",
+    "name": "Ashfyre",
     "status": "Dead",
     "previousRiderId": "visenor-targaryen",
-    "image": "/images/dragons/hatchling-lost.webp",
+    "image": "/images/dragons/ashfyre.webp",
     "traits": [
       "Malformed Wings",
+      "Coughed Ash Instead of Flame",
       "Died Within Days",
       "Never Flew"
     ],
-    "description": "One of two hatchlings from Visenor's clutch of three. Died of grotesque birth defects within days of hatching, never named."
+    "description": "One of two hatchlings from Visenor's clutch of three. Named for the small puffs of ash it coughed up whenever it strained to breathe fire, a quirk Visenor found endearing before he understood it as an early sign of the grotesque birth defects that would kill it within days."
   },
   {
-    "id": "visenors-second-hatchling",
-    "name": "Unnamed hatchling",
+    "id": "palefyre",
+    "name": "Palefyre",
     "status": "Dead",
     "previousRiderId": "visenor-targaryen",
-    "image": "/images/dragons/hatchling-lost.webp",
+    "image": "/images/dragons/palefyre.webp",
     "traits": [
       "Twisted Growth",
+      "Unusually Pale Scales",
       "Died Within Days",
       "Never Flew"
     ],
-    "description": "The second of two hatchlings from Visenor's clutch of three to die of grotesque birth defects, leaving only Jadefyre alive."
+    "description": "The second of two hatchlings from Visenor's clutch of three. Named for the sickly pallor of its scales, which Visenor took as a harmless trait rather than the first mark of the twisted growth that would claim its life within days, leaving only Jadefyre alive."
+  },
+  {
+    "id": "vahaemons-dragon",
+    "name": "Unnamed",
+    "status": "Alive",
+    "riderId": "vahaemon-targaryen",
+    "image": "/images/dragons/vahaemon-unnamed.webp",
+    "traits": [
+      "Origin Unknown",
+      "Unconfirmed Sighting",
+      "Complicates the Crown's Pursuit of Vahaemon"
+    ],
+    "description": "A dragon reportedly bonded to the exiled Prince Vahaemon during his time in the Free Cities. How or when he acquired it remains unknown to the Crown, but its existence has forced the Small Council to reconsider any direct military action against him, including the proposed campaign toward Tyrosh."
   }
 ]

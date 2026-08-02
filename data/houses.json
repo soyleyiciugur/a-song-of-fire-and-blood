@@ -27,7 +27,7 @@
     "sigilSrc": "/images/houses/hightower.webp",
     "color": "#009E60",
     "secondaryColor": "#FFFFFF",
-    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown, has left the house's future in ruins."
+    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown — which claimed young Lord Timos and his sister Alysanne, along with two hundred of the house's knights — has left the house's future in ruins. Its few survivors, like Ser Brant Costayne, have not forgotten."
   },
   {
     "id": "stark",
@@ -73,7 +73,7 @@
     "id": "vance",
     "name": "House Vance",
     "words": "True Through the Torrent",
-    "seat": "Unconfirmed",
+    "seat": "-",
     "sigilSrc": "/images/houses/vance.webp",
     "color": "#006400",
     "secondaryColor": "#FFFFFF",
@@ -93,11 +93,11 @@
     "id": "whent",
     "name": "House Whent",
     "words": "From Darkness, Dominion",
-    "seat": "Harrenhal",
+    "seat": "-",
     "sigilSrc": "/images/houses/whent.webp",
     "color": "#FFD93D",
     "secondaryColor": "#000000",
-    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, in the King's service, has since reached the Red Keep."
+    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, killed in the King's service while hunting Prince Visenor, has since reached the Red Keep — received by the Crown with far more indifference than House Whent might have hoped for."
   },
   {
     "id": "lannister",
@@ -108,5 +108,15 @@
     "color": "#86090A",
     "secondaryColor": "#FFD700",
     "description": "Represented at court by Tion Lannister, the Master of Coin, whose sound financial counsel is consistently overruled by princes eager for war."
+  },
+  {
+    "id": "blackwood",
+    "name": "House Blackwood",
+    "words": "Home is the Heart",
+    "seat": "Raventree Hall",
+    "sigilSrc": "/images/houses/blackwood.webp",
+    "color": "#2F2F2F",
+    "secondaryColor": "#8B0000",
+    "description": "A Riverlands house represented at the grand tourney by Lord Godfrey Blackwood, whose easy charm and open unconventionality made him as memorable off the lists as on them. His quarter-final loss to Jacaelon cost him nothing but pride; his instincts in the semi-finals, when he tackled Brant Costayne mid-assassination, likely saved Prince Gaelor's life."
   }
 ]

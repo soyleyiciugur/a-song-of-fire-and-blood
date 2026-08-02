@@ -749,3 +749,54 @@
     padding: 8px;
   }
 }
+
+/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\map\interactive-map.module.css */
+/* ...existing rules above stay unchanged... */
+
+/* ---------- Dead / unknown status overlays ---------- */
+
+.avatarDead {
+  filter: grayscale(1) brightness(0.55);
+}
+
+.avatarDead:hover {
+  filter: grayscale(1) brightness(0.7);
+}
+
+.avatarUnknown {
+  filter: grayscale(0.85) brightness(0.75);
+}
+
+.avatarUnknown:hover {
+  filter: grayscale(0.85) brightness(0.9);
+}
+
+.statusOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.deadMark {
+  font-size: 14px;
+  font-weight: 900;
+  color: #e0342c;
+  text-shadow:
+    0 0 2px #000,
+    0 0 4px rgba(0, 0, 0, 0.8);
+  line-height: 1;
+}
+
+.unknownMark {
+  font-size: 13px;
+  font-weight: 900;
+  color: #0b0b0b;
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.35),
+    0 1px 1px rgba(0, 0, 0, 0.6);
+  line-height: 1;
+}

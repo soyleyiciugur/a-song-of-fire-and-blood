@@ -284,5 +284,116 @@
         ]
       }
     ]
+  },
+  {
+    "chapterSlug": "the-viper-in-silk",
+    "chapterTitle": "Chapter VIII: The Viper in Silk",
+    "date": "3rd–17th of 7th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Gaelor executes Ser Vance",
+        "description": "Gaelor discovers Maela in bed with her sworn shield, Ser Brannyn Vance. He drags the knight to the black cells and executes him in a brutal, forced duel, then swears his sister to silence.",
+        "date": "3rd of the 7th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "maela-targaryen",
+          "ser-brannyn-vance"
+        ]
+      },
+      {
+        "title": "The council turns toward Vahaemon",
+        "description": "Grand Maester Baelor reveals Vahaemon has been expelled from Braavos and is fleeing toward Pentos, now reportedly bonded to an unknown dragon. The council debates using Saera and her dragon to pursue him toward Tyrosh.",
+        "date": "8th of the 7th Moon",
+        "characters": [
+          "baelor-targaryen",
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "saera-targaryen"
+        ]
+      },
+      {
+        "title": "Visenor rides Boneskin",
+        "description": "Visenor mounts Boneskin for the first time and flies him south, relocating the dragon's egg to a hidden sea cave along the Dornish coast.",
+        "date": "8th of the 7th Moon",
+        "characters": [
+          "visenor-targaryen"
+        ]
+      },
+      {
+        "title": "Visenya's ambush in Flea Bottom",
+        "description": "A scarred, disguised woman lures Jace to a brothel in Flea Bottom and holds Dark Sister to his throat, revealing herself as Visenya, daughter of the exiled Vahaemon, before slipping away when Ser Alester intervenes.",
+        "date": "17th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "ser-alester-dayne",
+          "visenya-targaryen"
+        ]
+      }
+    ]
+  },
+  {
+    "chapterSlug": "the-brothers-tilt",
+    "chapterTitle": "Chapter IX: The Brothers' Tilt",
+    "date": "17th–18th of 7th Moon, 99 AC",
+    "events": [
+      {
+        "title": "The gates are doubled",
+        "description": "Following Visenya's intrusion, Jace and Alester alert King Baelenys and Grand Maester Baelor at dawn, and the guard is quietly doubled ahead of the tourney.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "baelenys-targaryen",
+          "baelor-targaryen",
+          "ser-alester-dayne"
+        ]
+      },
+      {
+        "title": "Ser Costayne's revenge",
+        "description": "Brant Costayne, a survivor of the Oldtown Massacre, is unmasked as Gaelor's disguised opponent in the lists and nearly kills him before Godfrey Blackwood tackles him into the mud and guards subdue him. He is thrown into the black cells.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "brant-costayne",
+          "godfrey-blackwood"
+        ]
+      },
+      {
+        "title": "The final tilt",
+        "description": "In the tourney's brutal semi-final, Jace and Gaelor batter each other into mutual collapse, neither able to rise, ending the tournament without a victor.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "gaelor-targaryen"
+        ]
+      }
+    ]
+  },
+  {
+    "chapterSlug": "fireflies",
+    "chapterTitle": "Chapter X: Fireflies",
+    "date": "18th–19th of 7th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Mending the broken",
+        "description": "Maesters cut Jace's fused, dented armor from his chest and stitch Gaelor's shattered leg and neck. King Baelenys orders both princes kept in the same infirmary chamber.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "gaelor-targaryen",
+          "baelenys-targaryen",
+          "cordin-poole"
+        ]
+      },
+      {
+        "title": "The King's command",
+        "description": "Beneath the glow of fireflies in the royal gardens, an exhausted King Baelenys demands his warring sons make peace, invoking both his authority as King and his plea as a father.",
+        "date": "19th of the 7th Moon",
+        "characters": [
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "gaelor-targaryen"
+        ]
+      }
+    ]
   }
 ]

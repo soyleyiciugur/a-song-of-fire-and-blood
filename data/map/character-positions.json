@@ -6,12 +6,26 @@
     "saera-targaryen": "King's Landing",
     "gaelor-targaryen": "King's Landing",
     "rhaella-targaryen": "King's Landing",
-    "ser-saathos-maris": "Driftmark",
-    "ser-alester-dayne": "King's Landing",
+    "saathos-maris": "Driftmark",
+    "alester-dayne": "King's Landing",
     "derrin-hightower": "King's Landing",
     "lorenah-dayne": "Starfall",
     "vhaemys-targaryen": "King's Landing",
-    "naella-velaryon": "Driftmark"
+    "naella-velaryon": "Driftmark",
+    "baelor-targaryen": "Oldtown",
+    "cordin-poole": "King's Landing",
+    "curtass-whent": "-",
+    "jaery-targaryen": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "rickard-stark": "Winterfell",
+    "steffon-baratheon": "Storm's End",
+    "timos-hightower": "Oldtown",
+    "alysanne-hightower": "Oldtown",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Oldtown",
+    "brannyn-vance": "King's Landing"
   },
   "the-price-of-trust": {
     "baelenys-targaryen": "King's Landing",
@@ -28,11 +42,11 @@
       "King's Landing"
     ],
     "rhaella-targaryen": "King's Landing",
-    "ser-saathos-maris": [
+    "saathos-maris": [
       "Driftmark",
       "King's Landing"
     ],
-    "ser-alester-dayne": [
+    "alester-dayne": [
       "Sunspear",
       "Starfall",
       "King's Landing"
@@ -40,7 +54,24 @@
     "derrin-hightower": "King's Landing",
     "lorenah-dayne": "Starfall",
     "vhaemys-targaryen": "King's Landing",
-    "naella-velaryon": "Driftmark"
+    "naella-velaryon": [
+      "Driftmark",
+      "King's Landing"
+    ],
+    "baelor-targaryen": "Oldtown",
+    "cordin-poole": "King's Landing",
+    "curtass-whent": "-",
+    "jaery-targaryen": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "rickard-stark": "Winterfell",
+    "steffon-baratheon": "Storm's End",
+    "timos-hightower": "Oldtown",
+    "alysanne-hightower": "Oldtown",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Oldtown",
+    "brannyn-vance": "King's Landing"
   },
   "the-weight-of-loyalty": {
     "baelenys-targaryen": [
@@ -52,7 +83,10 @@
       "King's Landing",
       "Driftmark"
     ],
-    "naella-velaryon": "Driftmark",
+    "naella-velaryon": [
+      "King's Landing",
+      "Driftmark"
+    ],
     "jacaelon-targaryen": [
       "King's Landing",
       "Driftmark",
@@ -69,18 +103,41 @@
       "King's Landing"
     ],
     "rhaella-targaryen": "The Dornish Marches",
-    "ser-saathos-maris": [
+    "saathos-maris": [
       "King's Landing",
       "Driftmark"
     ],
-    "ser-alester-dayne": "The Dornish Marches",
-    "curtass-whent": "The Dornish Marches",
+    "alester-dayne": "The Dornish Marches",
+    "curtass-whent": [
+      "King's Landing",
+      "The Dornish Marches"
+    ],
     "vhaemys-targaryen": [
       "King's Landing",
       "Driftmark",
       "King's Landing"
     ],
     "jaery-targaryen": [
+      "King's Landing",
+      "Driftmark",
+      "King's Landing"
+    ],
+    "baelor-targaryen": "Oldtown",
+    "cordin-poole": "King's Landing",
+    "maela-targaryen": [
+      "King's Landing",
+      "Driftmark",
+      "King's Landing"
+    ],
+    "rickard-stark": "Winterfell",
+    "steffon-baratheon": "Storm's End",
+    "timos-hightower": "Oldtown",
+    "alysanne-hightower": "Oldtown",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Oldtown",
+    "brannyn-vance": [
       "King's Landing",
       "Driftmark",
       "King's Landing"
@@ -98,8 +155,8 @@
       "Castle Black"
     ],
     "rhaella-targaryen": "The Dornish Marches",
-    "ser-saathos-maris": "King's Landing",
-    "ser-alester-dayne": "The Dornish Marches",
+    "saathos-maris": "King's Landing",
+    "alester-dayne": "The Dornish Marches",
     "cordin-poole": "King's Landing",
     "curtass-whent": "The Dornish Marches",
     "jaery-targaryen": "King's Landing",
@@ -108,7 +165,17 @@
     "rickard-stark": [
       "Winterfell",
       "Castle Black"
-    ]
+    ],
+    "derrin-hightower": "Dead",
+    "naella-velaryon": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "timos-hightower": "Oldtown",
+    "alysanne-hightower": "Oldtown",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Oldtown",
+    "brannyn-vance": "King's Landing"
   },
   "fathers-and-their-sins": {
     "baelenys-targaryen": "King's Landing",
@@ -117,7 +184,7 @@
       "Oldtown",
       "King's Landing"
     ],
-    "ser-saathos-maris": [
+    "saathos-maris": [
       "King's Landing",
       "Oldtown",
       "King's Landing"
@@ -141,7 +208,7 @@
     ],
     "jaery-targaryen": "King's Landing",
     "lorenah-dayne": "Starfall",
-    "ser-alester-dayne": "Starfall",
+    "alester-dayne": "Starfall",
     "cordin-poole": "King's Landing",
     "steffon-baratheon": "Storm's End",
     "timos-hightower": "Oldtown",
@@ -149,12 +216,25 @@
     "rickard-stark": [
       "Castle Black",
       "Winterfell"
-    ]
+    ],
+    "alysanne-hightower": "Oldtown",
+    "brannyn-vance": [
+      "King's Landing",
+      "Storm's End",
+      "King's Landing"
+    ],
+    "derrin-hightower": "Dead",
+    "naella-velaryon": "King's Landing",
+    "curtass-whent": "Dead",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Oldtown"
   },
   "a-crown-of-thorns": {
     "baelenys-targaryen": "King's Landing",
     "gaelor-targaryen": "King's Landing",
-    "ser-saathos-maris": "King's Landing",
+    "saathos-maris": "King's Landing",
     "jacaelon-targaryen": "King's Landing",
     "maela-targaryen": "King's Landing",
     "visenor-targaryen": "Starfall",
@@ -166,18 +246,29 @@
       "Starfall",
       "King's Landing"
     ],
-    "ser-alester-dayne": [
+    "alester-dayne": [
       "Starfall",
       "King's Landing"
     ],
     "cordin-poole": "King's Landing",
     "steffon-baratheon": "Storm's End",
-    "vhaemys-targaryen": "King's Landing"
+    "vhaemys-targaryen": "King's Landing",
+    "derrin-hightower": "Dead",
+    "curtass-whent": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "rickard-stark": "Winterfell",
+    "naella-velaryon": "King's Landing",
+    "brannyn-vance": "King's Landing",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Dead"
   },
   "the-climb-and-the-kneel": {
     "baelenys-targaryen": "King's Landing",
     "gaelor-targaryen": "King's Landing",
-    "ser-saathos-maris": "King's Landing",
+    "saathos-maris": "King's Landing",
     "jacaelon-targaryen": "King's Landing",
     "maela-targaryen": "King's Landing",
     "visenor-targaryen": [
@@ -190,10 +281,108 @@
     "baelor-targaryen": "King's Landing",
     "jaery-targaryen": "King's Landing",
     "lorenah-dayne": "King's Landing",
-    "ser-alester-dayne": "King's Landing",
+    "alester-dayne": "King's Landing",
     "cordin-poole": "King's Landing",
     "steffon-baratheon": "Storm's End",
     "vhaemys-targaryen": "King's Landing",
-    "naella-velaryon": "King's Landing"
+    "naella-velaryon": "King's Landing",
+    "derrin-hightower": "Dead",
+    "curtass-whent": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "rickard-stark": "Winterfell",
+    "brannyn-vance": "King's Landing",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Dead"
+  },
+  "the-viper-in-silk": {
+    "baelenys-targaryen": "King's Landing",
+    "gaelor-targaryen": "King's Landing",
+    "jacaelon-targaryen": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "brannyn-vance": "King's Landing",
+    "cordin-poole": "King's Landing",
+    "alester-dayne": "King's Landing",
+    "saathos-maris": "King's Landing",
+    "visenor-targaryen": [
+      "Starfall",
+      "The Red Mountains",
+      "The Dornish Coast"
+    ],
+    "rhaella-targaryen": "Starfall",
+    "baelor-targaryen": "King's Landing",
+    "jaery-targaryen": "King's Landing",
+    "lorenah-dayne": "King's Landing",
+    "saera-targaryen": "King's Landing",
+    "vhaemys-targaryen": "King's Landing",
+    "naella-velaryon": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "visenya-targaryen": "King's Landing",
+    "derrin-hightower": "Dead",
+    "curtass-whent": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "rickard-stark": "Winterfell",
+    "naela-targaryen": "-",
+    "godfrey-blackwood": "-",
+    "brant-costayne": "Dead"
+  },
+  "the-brothers-tilt": {
+    "baelenys-targaryen": "King's Landing",
+    "gaelor-targaryen": "King's Landing",
+    "jacaelon-targaryen": "King's Landing",
+    "alester-dayne": "King's Landing",
+    "saathos-maris": "King's Landing",
+    "baelor-targaryen": "King's Landing",
+    "lorenah-dayne": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "saera-targaryen": "King's Landing",
+    "jaery-targaryen": "King's Landing",
+    "vhaemys-targaryen": "King's Landing",
+    "naella-velaryon": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "cordin-poole": "King's Landing",
+    "godfrey-blackwood": "King's Landing",
+    "brant-costayne": "King's Landing",
+    "visenor-targaryen": "Starfall",
+    "rhaella-targaryen": "Starfall",
+    "visenya-targaryen": "-",
+    "brannyn-vance": "King's Landing",
+    "derrin-hightower": "Dead",
+    "curtass-whent": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead",
+    "rickard-stark": "Winterfell",
+    "naela-targaryen": "-"
+  },
+  "fireflies": {
+    "jacaelon-targaryen": "King's Landing",
+    "gaelor-targaryen": "King's Landing",
+    "baelenys-targaryen": "King's Landing",
+    "cordin-poole": "King's Landing",
+    "naella-velaryon": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "saera-targaryen": "King's Landing",
+    "alester-dayne": "King's Landing",
+    "saathos-maris": "King's Landing",
+    "lorenah-dayne": "King's Landing",
+    "brant-costayne": "King's Landing",
+    "visenor-targaryen": "Starfall",
+    "rhaella-targaryen": "Starfall",
+    "baelor-targaryen": "King's Landing",
+    "jaery-targaryen": "King's Landing",
+    "vhaemys-targaryen": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "godfrey-blackwood": "King's Landing",
+    "rickard-stark": "Winterfell",
+    "visenya-targaryen": "-",
+    "naela-targaryen": "-",
+    "brannyn-vance": "King's Landing",
+    "derrin-hightower": "Dead",
+    "curtass-whent": "Dead",
+    "timos-hightower": "Dead",
+    "alysanne-hightower": "Dead"
   }
 }
