@@ -383,7 +383,7 @@
       "Heir Presumptive"
     ],
     "house": "House Targaryen",
-    "title": "Prince Gaelor of House Targaryen, Heir to the Iron Throne",
+    "title": "Prince Gaelor of House Targaryen",
     "status": "Alive",
     "age": 18,
     "nameday": {
@@ -582,7 +582,7 @@
       "Dany"
     ],
     "house": "House Dayne",
-    "title": "Lady Lorenah Dayne of Torrentine, currently a guest at King's Landing",
+    "title": "Lady Lorenah Dayne of Torrentine",
     "status": "Alive",
     "age": 16,
     "nameday": {
@@ -727,7 +727,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Velaryon",
-    "title": "Princess Naella of House Velaryon, wife of Gaelor Targaryen",
+    "title": "Princess Naella of House Velaryon",
     "status": "Alive",
     "age": 15,
     "nameday": {
@@ -1633,7 +1633,7 @@
     "title": "-",
     "status": "Unknown",
     "secret": {
-      "status": "Unknown",
+      "status": "Alive",
       "note": "No information about Naela's current whereabouts or condition is known to the realm."
     },
     "age": 50,
@@ -1653,9 +1653,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Unknown"
-    ],
+    "traits": [],
     "goals": [
       "Unknown"
     ],

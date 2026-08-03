@@ -88,7 +88,7 @@
   {
     "id": "boneskins-egg",
     "name": "Boneskin's Egg",
-    "status": "Unhatched",
+    "status": "Alive",
     "image": "/images/dragons/boneskin-egg.webp",
     "traits": [
       "Recovered from a Cave in the Red Mountains",
@@ -98,7 +98,7 @@
     ],
     "description": "The dragon egg found alongside Boneskin in his mountain cave. Visenor and Boneskin relocated it together by night flight to a damp, salt-scented sea cave along the Dornish coast — safe from scorpions and, more importantly, from men. Its fate remains unclaimed."
   },
- {
+  {
     "id": "ashfyre",
     "name": "Ashfyre",
     "status": "Dead",
