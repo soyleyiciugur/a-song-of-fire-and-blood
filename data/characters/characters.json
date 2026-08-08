@@ -1705,5 +1705,61 @@
     },
     "summary": "A well-traveled lord from the Riverlands who arrived at the tourney with kind words for the Hand and a six-pass joust that lasted long enough to impress the stands before Jace's final lance throw sent him into the dirt. He congratulated Jace graciously, which cost him nothing; he then saved Gaelor Targaryen's life by tackling Brant Costayne mid-assassination, which cost him rather more. He makes no secret of his broader appetites, a fact Ser Alester noted with mild amusement from a roadside inn and relayed to Jace with more detail than was strictly necessary.",
     "quotes": []
+  },
+  {
+    "id": "renrose-tyrell",
+    "name": "Renrose Tyrell",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Tyrell",
+    "title": "Lord of Highgarden",
+    "status": "Alive",
+    "age": 0,
+    "nameday": {
+      "day": 18,
+      "moon": 10,
+      "year": 62
+    },
+    "height": "179 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {},
+    "summary": "",
+    "quotes": []
+  },
+  {
+    "id": "martyn-mullendore",
+    "name": "Ser Martyn Mullendore",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Mullendore",
+    "title": "Knight of the Reach",
+    "status": "Alive",
+    "age": 0,
+    "nameday": {
+      "day": 13,
+      "moon": 9,
+      "year": 69
+    },
+    "height": "184 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {},
+    "summary": "",
+    "quotes": []
   }
 ]

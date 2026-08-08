@@ -1,5 +1,22 @@
 [
   {
+    "id": "gallery-mskqis7u",
+    "src": "/images/gallery/jace-gaelor-atakent.png",
+    "caption": "what jace saw in the front camera during the tilt",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-brothers-tilt",
+    "worldDate": null,
+    "uploadedAt": "2026-08-08",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-mrj7mx6e",
     "src": "/videos/reels/jace-beggars.mp4",
     "caption": "jace when the blind girl wants his dih",
