@@ -90,16 +90,6 @@
     "description": "A Reach house represented at court by Ser Orwell Morrigen, Lord Commander of the Kingsguard, who watches the realm's unraveling with growing unease."
   },
   {
-    "id": "whent",
-    "name": "House Whent",
-    "words": "From Darkness, Dominion",
-    "seat": "-",
-    "sigilSrc": "/images/houses/whent.webp",
-    "color": "#FFD93D",
-    "secondaryColor": "#000000",
-    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, killed in the King's service while hunting Prince Visenor, has since reached the Red Keep — received by the Crown with far more indifference than House Whent might have hoped for."
-  },
-  {
     "id": "lannister",
     "name": "House Lannister",
     "words": "Hear Me Roar!",
@@ -128,5 +118,15 @@
     "color": "#4B0082",
     "secondaryColor": "#E6E6FA",
     "description": "A minor Reach house whose sigil bears butterflies and whose seat lies in the Uplands. House Mullendore has served the Hightowers loyally for generations, and it is through that loyalty that Ser Martyn Mullendore came to recognize a disguised Visenor Targaryen bleeding in an Oldtown alley — and chose to deliver him to Lady Melessa rather than the Watch."
+  },
+  {
+    "id": "whent",
+    "name": "House Whent",
+    "words": "From Darkness, Dominion",
+    "seat": "-",
+    "sigilSrc": "/images/houses/whent.webp",
+    "color": "#FFD93D",
+    "secondaryColor": "#000000",
+    "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, killed in the King's service while hunting Prince Visenor, has since reached the Red Keep — received by the Crown with far more indifference than House Whent might have hoped for."
   }
 ]

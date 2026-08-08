@@ -9,8 +9,9 @@ const TYPE_LABEL: Record<UpcomingEvent["type"], string> = {
   nameday: "Nameday",
   feast: "Feast",
   battle: "Battle",
-  other: "Event",
   wedding: "Wedding",
+  trial: "Trial",
+  other: "Event",
 };
 
 const TYPE_COLOR: Record<UpcomingEvent["type"], string> = {
@@ -18,6 +19,7 @@ const TYPE_COLOR: Record<UpcomingEvent["type"], string> = {
   feast: "#c9a227",
   wedding: "#c9a227",
   battle: "#B22222",
+  trial: "#8B6914",
   other: "#8a8a92",
 };
 
