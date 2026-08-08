@@ -306,6 +306,7 @@
 
 /* ════════════════════════════════════════════════════════════
    COVER CARD — one physical card, two faces
+   z-index: 6 so it renders above tocSpread (z-index: 5)
    ══════════════════════════════════════════════════════════ */
 .coverCard {
   position: absolute;
@@ -318,7 +319,7 @@
   transform: rotateY(0deg);
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
-  z-index: 6;               /* ← ADD THIS: sits above tocSpread (z-index 5) */
+  z-index: 6;
 }
 
 .coverCardFlipped {
@@ -533,25 +534,22 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   TABLE OF CONTENTS — single right-hand page.
-   Structural change: this used to be a flex row of TWO half-pages
-   (tocLeft / tocRight), each with its own vertical list and its own
-   Roman-numeral page number, which produced the "book split into
-   quarter-pages" look. .tocSpread now wraps exactly ONE page that
-   occupies the full right-hand side of the book (same footprint as
-   .coverBack on the left), with a single scrollable column of
-   chapters listed top-to-bottom, in order.
+   TABLE OF CONTENTS
+   Positioned at left: var(--spine-w) — same footprint as the cover
+   card. z-index: 5 so the cover card (z-index: 6) renders above it
+   and can flip away to reveal this single full-width page behind it.
+   One scrollable column, chapters top-to-bottom in natural order.
    ══════════════════════════════════════════════════════════ */
 .tocSpread {
   position: absolute;
-  left: var(--spine-w);     /* ← sits behind the cover card, same footprint */
+  left: var(--spine-w);
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease 0.3s;
-  z-index: 5;               /* ← behind coverCard (which is auto/higher) */
+  z-index: 5;
 }
 
 .bookOpen .tocSpread {
@@ -608,10 +606,6 @@
   flex-shrink: 0;
 }
 
-/* the ONE scrollable list — chapters flow top-to-bottom in natural
-   order (1, 2, 3, 4...), no left/right split. If there are more
-   chapters than fit the page height, this scrolls instead of
-   overflowing or clipping. */
 .tocList {
   list-style: none;
   margin: 0;
@@ -633,10 +627,6 @@
 }
 .tocList::-webkit-scrollbar-track { background: transparent; }
 
-/* ── individual ToC entry ──
-   Resting state: title only, compact single line.
-   Hover state: synopsis grows into view below the title, so the list
-   stays scannable at rest and only expands on demand. */
 .tocEntry {
   padding: 11px 12px;
   border-radius: 3px;
@@ -688,9 +678,6 @@
   color: var(--gold-bright);
 }
 
-/* synopsis: collapsed to 0 height at rest, expands open on hover, in
-   the same warm gold display-font style as the title so the whole
-   card reads as one consistent art style. */
 .tocSynopsis {
   display: block;
   max-height: 0;

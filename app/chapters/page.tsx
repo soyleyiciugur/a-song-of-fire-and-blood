@@ -61,22 +61,16 @@ function ChaptersHubContent() {
   const searchParams = useSearchParams();
   const chapters = getAllChapters() as Chapter[];
 
-  // ── state
   const [lang, setLang] = useState<Lang>("en");
-  // If we were sent here from the reader (Esc / "All chapters" link), open
-  // straight to the table of contents instead of showing the closed cover.
   const [phase, setPhase] = useState<Phase>(
     searchParams.get("openToc") === "1" ? "toc" : "cover"
   );
   const [hoveredChapter, setHoveredChapter] = useState<string | null>(null);
   const [pendingSlug, setPendingSlug] = useState<string | null>(null);
-
-  // bookmark
   const [bookmark, setBookmark] = useState<{ slug: string; page: number } | null>(null);
 
   const bookRef = useRef<HTMLDivElement>(null);
 
-  // ── init: read persisted lang & bookmark
   useEffect(() => {
     try {
       const saved = localStorage.getItem("asofiab-lang") as Lang | null;
@@ -86,27 +80,23 @@ function ChaptersHubContent() {
     } catch {}
   }, []);
 
-  // ── set + persist a specific language (bug #1: no more toggling/swapping)
   const selectLang = useCallback((next: Lang) => {
     setLang(next);
     try { localStorage.setItem("asofiab-lang", next); } catch {}
   }, []);
 
-  // ── open book on cover click
   const openBook = useCallback(() => {
     if (phase !== "cover") return;
     setPhase("opening");
     setTimeout(() => setPhase("toc"), 900);
   }, [phase]);
 
-  // ── close book (bug #4 background click, bug #5 Esc)
   const closeBook = useCallback(() => {
     if (phase !== "toc") return;
     setPhase("closing");
     setTimeout(() => setPhase("cover"), 700);
   }, [phase]);
 
-  // ── navigate to chapter with closing animation
   const goToChapter = useCallback((slug: string) => {
     setPendingSlug(slug);
     setPhase("closing");
@@ -116,19 +106,15 @@ function ChaptersHubContent() {
     }, 700);
   }, [router, lang]);
 
-  // ── continue reading shortcut
   const continueReading = useCallback(() => {
     if (!bookmark) return;
     router.push(`/chapters/${bookmark.slug}?lang=${lang}&page=${bookmark.page}`);
   }, [bookmark, lang, router]);
 
-  // ── bug #4: clicking the empty scene background (not the book itself)
-  // closes the book when it's open.
   const handleSceneClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) closeBook();
   }, [closeBook]);
 
-  // ── bug #5: Esc closes the book if it's open on this page.
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && phase === "toc") closeBook();
@@ -138,7 +124,6 @@ function ChaptersHubContent() {
   }, [phase, closeBook]);
 
   const bookmarkChapter = bookmark ? chapters.find(c => c.slug === bookmark.slug) : null;
-
   const coverOpen = phase !== "cover";
 
   return (
@@ -153,7 +138,7 @@ function ChaptersHubContent() {
         ))}
       </div>
 
-      {/* ── language toggle (bug #1: two independent buttons) ── */}
+      {/* ── language toggle ── */}
       <div className={styles.langToggle}>
         <button
           className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
@@ -190,13 +175,10 @@ function ChaptersHubContent() {
         className={[
           styles.bookWrap,
           phase === "opening" ? styles.bookOpening : "",
-          phase === "toc" ? styles.bookOpen : "",
+          phase === "toc"     ? styles.bookOpen    : "",
           phase === "closing" ? styles.bookClosing : "",
         ].filter(Boolean).join(" ")}
         onClick={(e) => {
-          // Only the closed cover itself opens the book; once open, clicks
-          // on the book (ToC entries etc.) must not bubble up and re-trigger
-          // the scene's background-click-to-close handler.
           if (phase === "cover") {
             openBook();
           } else {
@@ -208,13 +190,54 @@ function ChaptersHubContent() {
         tabIndex={phase === "cover" ? 0 : undefined}
         onKeyDown={phase === "cover" ? (e) => e.key === "Enter" && openBook() : undefined}
       >
+
+        {/* ── TABLE OF CONTENTS — FIRST child so it sits at the lowest
+              z-index inside bookWrap. Positioned at left: var(--spine-w)
+              so it occupies exactly the same footprint as the cover card.
+              The cover card (z-index 6) flips away to reveal this page
+              (z-index 5) behind it — one single full-width parchment
+              page, no split columns. ── */}
+        <div className={styles.tocSpread}>
+          <div className={styles.tocPage}>
+            <div className={styles.pageTexture} />
+            <div className={styles.tocPageInner}>
+              <div className={styles.tocHeader}>
+                {lang === "en" ? "Contents" : "İçindekiler"}
+              </div>
+              <div className={styles.tocDividerLine} />
+              <ul className={styles.tocList}>
+                {chapters.map((ch) => (
+                  <li
+                    key={ch.slug}
+                    className={[
+                      styles.tocEntry,
+                      hoveredChapter === ch.slug ? styles.tocEntryHovered : "",
+                      pendingSlug    === ch.slug ? styles.tocEntryActive  : "",
+                    ].filter(Boolean).join(" ")}
+                    onMouseEnter={() => setHoveredChapter(ch.slug)}
+                    onMouseLeave={() => setHoveredChapter(null)}
+                    onClick={() => goToChapter(ch.slug)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
+                  >
+                    <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
+                    <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* ── spine ── */}
         <div className={styles.spine}>
           <span className={styles.spineText}>A Song of Fire and Blood</span>
           <span className={styles.spineOrnament}>✦ ✦ ✦</span>
         </div>
 
-        {/* ── COVER CARD: one physical card, two faces ── */}
+        {/* ── COVER CARD: one physical card, two faces (z-index 6,
+              sits above tocSpread so it can flip away to reveal it) ── */}
         <div
           className={[styles.coverCard, coverOpen ? styles.coverCardFlipped : ""].filter(Boolean).join(" ")}
         >
@@ -241,9 +264,7 @@ function ChaptersHubContent() {
             <div className={styles.coverSheen} aria-hidden />
           </div>
 
-          {/* ── BACK FACE (inside-left page): same title + description,
-                no "open to begin" prompt. This is the permanent left
-                page of the open book — it never becomes the ToC. ── */}
+          {/* ── BACK FACE (inside-left page) ── */}
           <div className={styles.coverBack}>
             <div className={styles.pageTexture} />
             <div className={styles.insideLeft}>
@@ -253,45 +274,6 @@ function ChaptersHubContent() {
                   ? "A record of truth, betrayal, and blood"
                   : "Hakikat, ihanet ve kanın kaydı"}
               </p>
-            </div>
-          </div>
-        </div>
-
-        {/* ── TABLE OF CONTENTS: single right page, single scrollable
-              column, chapters listed top-to-bottom in natural order.
-              (No more left-half/right-half split — that was producing
-              the "two mini pages with I/II numbers" layout.) ── */}
-        <div className={styles.tocSpread}>
-          <div className={styles.tocPage}>
-            <div className={styles.pageTexture} />
-            <div className={styles.tocPageInner}>
-              <div className={styles.tocHeader}>
-                {lang === "en" ? "Contents" : "İçindekiler"}
-              </div>
-              <div className={styles.tocDividerLine} />
-              <ul className={styles.tocList}>
-                {chapters.map((ch) => (
-                  <li
-                    key={ch.slug}
-                    className={[
-                      styles.tocEntry,
-                      hoveredChapter === ch.slug ? styles.tocEntryHovered : "",
-                      pendingSlug === ch.slug ? styles.tocEntryActive : "",
-                    ].filter(Boolean).join(" ")}
-                    onMouseEnter={() => setHoveredChapter(ch.slug)}
-                    onMouseLeave={() => setHoveredChapter(null)}
-                    onClick={() => goToChapter(ch.slug)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
-                  >
-                    <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
-                    {/* synopsis only expands into view on hover — titles
-                        only is the resting state (see .tocSynopsis) */}
-                    <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
@@ -306,7 +288,7 @@ function ChaptersHubContent() {
       </div>
       {/* ════════════════ end book ════════════════ */}
 
-      {/* ── cover hint tooltip on hover ── */}
+      {/* ── cover hint ── */}
       {phase === "cover" && (
         <p className={styles.hint} aria-hidden>
           {lang === "en" ? "Click the book to open" : "Kitabı açmak için tıklayın"}
