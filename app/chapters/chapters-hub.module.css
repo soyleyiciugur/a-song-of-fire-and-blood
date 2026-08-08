@@ -318,6 +318,7 @@
   transform: rotateY(0deg);
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
+  z-index: 6;               /* ← ADD THIS: sits above tocSpread (z-index 5) */
 }
 
 .coverCardFlipped {
@@ -543,14 +544,14 @@
    ══════════════════════════════════════════════════════════ */
 .tocSpread {
   position: absolute;
-  left: calc(var(--spine-w) + var(--book-w));
+  left: var(--spine-w);     /* ← sits behind the cover card, same footprint */
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease 0.3s;
-  z-index: 10;
+  z-index: 5;               /* ← behind coverCard (which is auto/higher) */
 }
 
 .bookOpen .tocSpread {
