@@ -17,7 +17,7 @@
     "sigilSrc": "/images/houses/tyrell.webp",
     "color": "#228B22",
     "secondaryColor": "#F4C430",
-    "description": "Lords of the Reach and, alongside Derrin Hightower, the hidden hand behind the plot to poison King Baelenys. Exposed by the Iron Bank's records, House Tyrell now bears crippling Crown sanctions and a hatred for House Targaryen that only deepened after the Oldtown Massacre."
+    "description": "Lords of the Reach and, alongside Derrin Hightower, the hidden hand behind the plot to poison King Baelenys. Exposed by the Iron Bank's records, House Tyrell now bears crippling Crown sanctions and a simmering hatred that only deepened after the Oldtown Massacre. In secret, Lord Renrose Tyrell has pledged the full strength of the Reach behind Visenor's claim to the throne — in exchange for being named Hand of the King upon his coronation."
   },
   {
     "id": "hightower",
@@ -27,7 +27,7 @@
     "sigilSrc": "/images/houses/hightower.webp",
     "color": "#009E60",
     "secondaryColor": "#FFFFFF",
-    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown — which claimed young Lord Timos and his sister Alysanne, along with two hundred of the house's knights — has left the house's future in ruins. Its few survivors, like Ser Brant Costayne, have not forgotten."
+    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown — which claimed young Lord Timos and his sister Alysanne, along with two hundred of the house's knights — has left the house in ruins. The seat now falls to thirteen-year-old Lady Melessa Hightower, who received a wounded and disguised Prince Visenor in her hall and chose to send him on to Highgarden rather than hand him to the Watch."
   },
   {
     "id": "stark",
@@ -47,7 +47,7 @@
     "sigilSrc": "/images/houses/dayne.webp",
     "color": "#DDA0DD",
     "secondaryColor": "#E6E6FA",
-    "description": "A Dornish house quietly drawn into the heart of the realm's troubles, first through Ser Alester Dayne's sworn service to Prince Jacaelon, then through Lady Lorenah Dayne's decision to shelter a fugitive Crown Prince."
+    "description": "A Dornish house quietly drawn into the heart of the realm's troubles, first through Ser Alester Dayne's sworn service to Prince Jacaelon, then through Lady Lorenah Dayne's decision to shelter a fugitive Crown Prince. Visenor used Starfall's name as cover to enter the Citadel, claiming to be an acolyte sent by Lord Darren Dayne — a lie that has since gone unchallenged."
   },
   {
     "id": "velaryon",
@@ -57,7 +57,7 @@
     "sigilSrc": "/images/houses/velaryon.webp",
     "color": "#20B2AA",
     "secondaryColor": "#B0E0E6",
-    "description": "Masters of Driftmark and the Crown's oldest maritime allies, tied now to the royal family directly through Naella Velaryon's marriage to Prince Gaelor."
+    "description": "Masters of Driftmark and the Crown's oldest maritime allies, tied now to the royal family directly through Naella Velaryon's marriage to Prince Gaelor. Naella carries his heir."
   },
   {
     "id": "baratheon",
@@ -67,7 +67,7 @@
     "sigilSrc": "/images/houses/baratheon.webp",
     "color": "#F3CE1B",
     "secondaryColor": "#1C1C1C",
-    "description": "Proud stormlanders who fought beside House Targaryen in the past and expect the debt remembered. The Young Stag, Steffon Baratheon, has learned that pride alone does not move a king."
+    "description": "Proud stormlanders who fought beside House Targaryen in the past and expect the debt remembered. The Young Stag, Steffon Baratheon, has learned that pride alone does not move a king — though he won the grand tourney by default when neither Targaryen prince could stand."
   },
   {
     "id": "vance",
@@ -118,5 +118,15 @@
     "color": "#2F2F2F",
     "secondaryColor": "#8B0000",
     "description": "A Riverlands house represented at the grand tourney by Lord Godfrey Blackwood, whose easy charm and open unconventionality made him as memorable off the lists as on them. His quarter-final loss to Jacaelon cost him nothing but pride; his instincts in the semi-finals, when he tackled Brant Costayne mid-assassination, likely saved Prince Gaelor's life."
+  },
+  {
+    "id": "mullendore",
+    "name": "House Mullendore",
+    "words": "Ever Upward",
+    "seat": "Uplands",
+    "sigilSrc": "/images/houses/mullendore.webp",
+    "color": "#4B0082",
+    "secondaryColor": "#E6E6FA",
+    "description": "A minor Reach house whose sigil bears butterflies and whose seat lies in the Uplands. House Mullendore has served the Hightowers loyally for generations, and it is through that loyalty that Ser Martyn Mullendore came to recognize a disguised Visenor Targaryen bleeding in an Oldtown alley — and chose to deliver him to Lady Melessa rather than the Watch."
   }
 ]

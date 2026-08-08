@@ -534,5 +534,93 @@
     "chapterSlug": "fireflies",
     "chapterTitle": "Chapter X: Fireflies",
     "note": "bantering with Gaelor before sleeping"
+  },
+  {
+    "text": "You are in the absolute last place in the realm you should be, my Prince.",
+    "speakerId": "martyn-mullendore",
+    "speakerName": "Ser Martyn Mullendore",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "recognizing Visenor despite his disguise"
+  },
+  {
+    "text": "I am the rightful heir. As long as I draw breath, that remains the truth.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "to Ser Martyn on the road to Highgarden"
+  },
+  {
+    "text": "My father loved these gardens dearly. Before your father had him executed, of course.",
+    "speakerId": "renrose-tyrell",
+    "speakerName": "Lord Renrose Tyrell",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "welcoming Visenor to Highgarden"
+  },
+  {
+    "text": "May the gods grant long lives to princes who seek the good of the realm. But no matter how many madmen or peacemakers there are, there is only one Crown Prince.",
+    "speakerId": "renrose-tyrell",
+    "speakerName": "Lord Renrose Tyrell",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "to Visenor"
+  },
+  {
+    "text": "Maybe I should have aimed for your tongue.",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "sneering at Jace during the small council"
+  },
+  {
+    "text": "I do not recall asking for your opinion.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "silencing Maester Cordin, as one does"
+  },
+  {
+    "text": "Whose honor shall we discuss, then? The honor of the soldiers playing catch with a little girl's severed head in Oldtown?",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "shutting down Gaelor's complaints"
+  },
+  {
+    "text": "That was the prince's head.",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "correcting Jace about whose head was being used to play catch in the Oldtown Massacre"
+  },
+  {
+    "text": "I swore a sacred vow to protect my prince, and I failed. You call my actions treason. I call them a reckoning.",
+    "speakerId": "brant-costayne",
+    "speakerName": "Ser Brant Costayne",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "to Jace in the black cells"
+  },
+  {
+    "text": "If you truly wish to leave your fate to the justice of the gods, I suggest you demand a trial by combat. I assure you, Prince Gaelor will be the one to step into the circle.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "advising Ser Costayne"
+  },
+  {
+    "text": "Once you have bled for the Iron Throne, no lord in the Seven Kingdoms will have a single question left in their minds.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "note": "to Gaelor regarding his ascension"
   }
 ]

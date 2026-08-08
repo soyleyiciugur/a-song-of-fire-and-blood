@@ -63,7 +63,7 @@
         "characters": [
           "visenor-targaryen",
           "rhaella-targaryen",
-          "ser-alester-dayne"
+          "alester-dayne"
         ]
       },
       {
@@ -106,7 +106,7 @@
         "description": "Curtass Whent and five hired sellswords corner Ser Alester Dayne while he escorts Visenor and Rhaella south. Alester survives; none of his attackers do.",
         "date": "Early 3rd Moon",
         "characters": [
-          "ser-alester-dayne",
+          "alester-dayne",
           "curtass-whent",
           "visenor-targaryen"
         ]
@@ -171,7 +171,7 @@
         "characters": [
           "maela-targaryen",
           "steffon-baratheon",
-          "ser-brannyn-vance"
+          "brannyn-vance"
         ]
       },
       {
@@ -227,7 +227,7 @@
         "date": "3rd of the 7th Moon",
         "characters": [
           "lorenah-dayne",
-          "ser-alester-dayne",
+          "alester-dayne",
           "jacaelon-targaryen"
         ]
       }
@@ -262,7 +262,7 @@
         "date": "3rd of the 7th Moon",
         "characters": [
           "jacaelon-targaryen",
-          "ser-alester-dayne"
+          "alester-dayne"
         ]
       },
       {
@@ -297,12 +297,12 @@
         "characters": [
           "gaelor-targaryen",
           "maela-targaryen",
-          "ser-brannyn-vance"
+          "brannyn-vance"
         ]
       },
       {
         "title": "The council turns toward Vahaemon",
-        "description": "Grand Maester Baelor reveals Vahaemon has been expelled from Braavos and is fleeing toward Pentos, now reportedly bonded to an unknown dragon. The council debates using Saera and her dragon to pursue him toward Tyrosh.",
+        "description": "Grand Maester Baelor reveals Vahaemon has been expelled from Braavos and is fleeing toward Pentos, now reportedly bonded to an unknown dragon. The council debates chasing him away toward Tyrosh.",
         "date": "8th of the 7th Moon",
         "characters": [
           "baelor-targaryen",
@@ -325,7 +325,7 @@
         "date": "17th of the 7th Moon",
         "characters": [
           "jacaelon-targaryen",
-          "ser-alester-dayne",
+          "alester-dayne",
           "visenya-targaryen"
         ]
       }
@@ -344,7 +344,7 @@
           "jacaelon-targaryen",
           "baelenys-targaryen",
           "baelor-targaryen",
-          "ser-alester-dayne"
+          "alester-dayne"
         ]
       },
       {
@@ -392,6 +392,80 @@
           "baelenys-targaryen",
           "jacaelon-targaryen",
           "gaelor-targaryen"
+        ]
+      }
+    ]
+  },
+  {
+    "chapterSlug": "the-manders-pact",
+    "chapterTitle": "Chapter XI: The Mander's Pact",
+    "date": "19th–27th of 7th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Visenor's nameday at Starfall",
+        "description": "On his nameday, Rhaella gifts Visenor a carved ironwood dragon — a likeness of Boneskin. By midday he has packed for Oldtown.",
+        "date": "19th of the 7th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "rhaella-targaryen"
+        ]
+      },
+      {
+        "title": "Visenor infiltrates the Citadel",
+        "description": "Disguised as a Dornish acolyte and later a sleeping maester's borrowed robe, Visenor picks the lock on Baelor Targaryen's old chambers and recovers his uncle's private journal — including research on the dragonlord Aurion and rumours of indestructible petrified eggs found in the ashes of Valyria.",
+        "date": "19th of the 7th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "baelor-targaryen"
+        ]
+      },
+      {
+        "title": "Ambushed in Oldtown's streets",
+        "description": "The same thugs from the previous night, now reinforced by two burly sailors, ambush Visenor in the port alleys. He kills two and wounds another before City Watchmen intervene — led by Ser Martyn Mullendore, who recognises the disguised prince.",
+        "date": "20th of the 7th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "martyn-mullendore"
+        ]
+      },
+      {
+        "title": "Visenor before Lady Melessa",
+        "description": "Martyn delivers the wounded prince to Lady Melessa Hightower in the very hall where Timos was killed. Melessa grants him no warmth but does not turn him over to the Watch, instead commanding Mullendore to escort him immediately to Highgarden.",
+        "date": "20th of the 7th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "melessa-hightower",
+          "martyn-mullendore"
+        ]
+      },
+      {
+        "title": "The Mander's Pact",
+        "description": "At Highgarden, Lord Renrose Tyrell pledges the full strength of the Reach behind Visenor's claim in exchange for being named Hand of the King upon his coronation, and proposes their children marry to seal the alliance. Visenor accepts, and agrees to return to Oldtown to serve as Melessa Hightower's tutor as repayment of his family's debt.",
+        "date": "27th of the 7th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "renrose-tyrell",
+          "martyn-mullendore"
+        ]
+      },
+      {
+        "title": "Costayne's trial set and a hint of combat",
+        "description": "Jace visits Brant Costayne in the black cells, confirms he will likely lose his head in three days, and quietly plants the idea of a trial by combat — suggesting Gaelor would be the one to step into the circle.",
+        "date": "27th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "brant-costayne",
+          "alester-dayne"
+        ]
+      },
+      {
+        "title": "Gaelor asks to be named heir",
+        "description": "In the King's solar, Gaelor formally asks his father to name him heir in Visenor's continued absence. Baelenys defers, telling him to prove himself first in the coming war.",
+        "date": "27th of the 7th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "baelenys-targaryen",
+          "jaery-targaryen"
         ]
       }
     ]
