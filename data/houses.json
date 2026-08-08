@@ -10,14 +10,14 @@
     "description": "The ruling house of the Seven Kingdoms, bound as much by dragonfire as by blood. King Baelenys' reign has grown harsher since the poisoning, and the loyalty of his own siblings and children has never been so openly tested."
   },
   {
-    "id": "tyrell",
-    "name": "House Tyrell",
-    "words": "Growing Strong",
-    "seat": "Highgarden",
-    "sigilSrc": "/images/houses/tyrell.webp",
-    "color": "#228B22",
-    "secondaryColor": "#F4C430",
-    "description": "Lords of the Reach and, alongside Derrin Hightower, the hidden hand behind the plot to poison King Baelenys. Exposed by the Iron Bank's records, House Tyrell now bears crippling Crown sanctions and a simmering hatred that only deepened after the Oldtown Massacre. In secret, Lord Renrose Tyrell has pledged the full strength of the Reach behind Visenor's claim to the throne — in exchange for being named Hand of the King upon his coronation."
+  "id": "tyrell",
+  "name": "House Tyrell",
+  "words": "Growing Strong",
+  "seat": "Highgarden",
+  "sigilSrc": "/images/houses/tyrell.webp",
+  "color": "#228B22",
+  "secondaryColor": "#F4C430",
+  "description": "Lords of the Reach, whose previous lord — Renrose's father — was executed for his role in the plot to poison King Baelenys alongside Derrin Hightower. The sanctions levied against the house in the aftermath have since been lightened, in part because the Oldtown Massacre shifted the realm's attention and gave Renrose room to quietly rehabilitate his position. He has used that room shrewdly: in secret, he has pledged the full strength of the Reach behind Visenor's claim to the throne in exchange for being named Hand of the King upon his coronation. His first move after sealing the Mander's Pact was to send his fourteen-year-old son Leo to Oldtown, ostensibly to be educated alongside Lady Melessa Hightower. In practice, the boy is Renrose's eyes inside the Hightower — a foothold Visenor has already begun quietly working to limit."
   },
   {
     "id": "hightower",
@@ -27,7 +27,7 @@
     "sigilSrc": "/images/houses/hightower.webp",
     "color": "#009E60",
     "secondaryColor": "#FFFFFF",
-    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown — which claimed young Lord Timos and his sister Alysanne, along with two hundred of the house's knights — has left the house in ruins. The seat now falls to thirteen-year-old Lady Melessa Hightower, who received a wounded and disguised Prince Visenor in her hall and chose to send him on to Highgarden rather than hand him to the Watch."
+    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown — which claimed young Lord Timos and his sister Alysanne, along with two hundred of the house's knights — has left the house in ruins. The seat now falls to thirteen-year-old Lady Melessa Hightower, who received a wounded and disguised Prince Visenor in her hall and chose to send him on to Highgarden rather than hand him to the Watch. He has since returned — now embedded in the Hightower itself under the alias Maester Arthur Sand, serving as tutor to Melessa and to Leo Tyrell. Only four people within the castle walls know the truth: Melessa, Leo, Ser Martyn Mullendore, and Maester Almar Larchmont."
   },
   {
     "id": "stark",
