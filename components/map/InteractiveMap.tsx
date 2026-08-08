@@ -30,7 +30,7 @@ import styles from "./interactive-map.module.css";
 const MAP_SRC = "/images/map/known-world.webp";
 const MINI_FALLBACK = "/images/miniportraits/default.png";
 const MAX_VISIBLE_AVATARS = 3;
-const ALL_EVENT_TYPES: MapEventType[] = ["battle", "feast", "tournament", "wedding"];
+const ALL_EVENT_TYPES: MapEventType[] = ["battle", "feast", "tournament", "wedding", "trial"];
 const MIN_MARKER_DISTANCE_PX = 46;
 
 const CENTER_IN_MS = 100;

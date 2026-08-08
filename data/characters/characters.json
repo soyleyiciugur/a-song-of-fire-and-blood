@@ -1711,27 +1711,44 @@
     "name": "Renrose Tyrell",
     "nickname": "-",
     "aliases": [],
-    "house": "-",
-    "title": "",
+    "house": "House Tyrell",
+    "title": "Lord of Highgarden, Warden of the South",
     "status": "Alive",
-    "age": 0,
+    "age": 48,
     "nameday": {
-      "day": 30,
-      "moon": 7,
-      "year": 99
+      "day": "-",
+      "moon": "-",
+      "year": 51
     },
-    "height": "",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
     "siblings": [],
-    "children": [],
+    "children": [
+      "leo-tyrell"
+    ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [],
-    "goals": [],
-    "relationships": {},
-    "summary": "",
+    "traits": [
+      "Ambitious",
+      "Politically shrewd",
+      "Calculating",
+      "Patient"
+    ],
+    "goals": [
+      "Secure the position of Hand of the King under Visenor's future reign",
+      "Cement the Tyrell-Targaryen alliance through a marriage between their children",
+      "Maintain eyes on Visenor's movements through Leo's presence in Oldtown",
+      "Expand House Tyrell's influence across the Reach in the power vacuum left by the Hightower's collapse"
+    ],
+    "relationships": {
+      "visenor-targaryen": "Pledged the full strength of the Reach behind Visenor's claim at the Mander's Pact, extracting the promise of the Handship and a future marriage alliance in return; views Visenor as a means to an end as much as a true ally.",
+      "leo-tyrell": "Dispatched his fourteen-year-old son to Oldtown under the guise of education alongside Melessa Hightower — in practice, a political foothold and a pair of eyes inside the Hightower.",
+      "martyn-mullendore": "Relies on Mullendore as a trusted sword arm operating in Visenor's orbit; Martyn's loyalty to the prince rather than to Renrose directly is a variable he has not yet been forced to reckon with.",
+      "melessa-hightower": "Sees her as a piece to be positioned rather than a person; inserting Leo into her household is partly about influence over the last Hightower heir."
+    },
+    "summary": "Lord Renrose Tyrell is the calculating master of Highgarden, a man who weathered the Crown's punishment of his house — Derrin Hightower paid the price for the conspiracy, not the Tyrells — and emerged with his seat and his ambitions intact. At the Mander's Pact he bound himself to Visenor's cause in exchange for the Handship and a marriage between their children, making him the exiled prince's most powerful backer and most dangerous liability in equal measure. His decision to send Leo to Oldtown reveals his instinct to keep agents close to any power he cannot directly control — an instinct Visenor has already begun quietly working against.",
     "quotes": []
   },
   {
@@ -1739,16 +1756,16 @@
     "name": "Martyn Mullendore",
     "nickname": "-",
     "aliases": [],
-    "house": "-",
-    "title": "",
+    "house": "House Mullendore",
+    "title": "Ser",
     "status": "Alive",
-    "age": 0,
+    "age": 32,
     "nameday": {
-      "day": 30,
-      "moon": 7,
-      "year": 99
+      "day": "-",
+      "moon": "-",
+      "year": 67
     },
-    "height": "",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -1756,10 +1773,153 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [],
-    "goals": [],
-    "relationships": {},
-    "summary": "",
+    "traits": [
+      "Loyal",
+      "Composed under pressure",
+      "Perceptive",
+      "Discreet",
+      "Steady"
+    ],
+    "goals": [
+      "Protect Visenor and ensure his survival in the Reach",
+      "Navigate the competing interests of Renrose Tyrell and the prince without openly defying either"
+    ],
+    "relationships": {
+      "visenor-targaryen": "Recognised the disguised prince during the Oldtown street ambush and brought him to Melessa Hightower; has since ridden with him to Highgarden and now to Oldtown as part of his cover, making him one of the four people who know Visenor's true identity inside the Hightower.",
+      "melessa-hightower": "Delivered Visenor to her in the hall where her brother was killed; their relationship is defined by that single fraught moment.",
+      "renrose-tyrell": "Operates within Renrose's orbit but his demonstrated loyalty runs toward Visenor personally rather than to the Lord of Highgarden — a distinction that has not yet been tested openly.",
+      "leo-tyrell": "Rode alongside Leo on the journey from Highgarden to Oldtown; their dynamic is that of an experienced knight tolerating a haughty fourteen-year-old."
+    },
+    "summary": "Ser Martyn Mullendore is a knight of the Reach who stumbled into Visenor's orbit by chance and chose loyalty over convenience. He led the City Watch patrol that intervened in the Oldtown alley ambush, recognised the disguised prince, and delivered him to Lady Melessa rather than to the authorities — a decision that has since drawn him fully into the conspiracy. He now rides as part of Visenor's cover retinue in Oldtown, one of only four people inside the Hightower who know Maester Arthur Sand is a prince of the blood.",
+    "quotes": []
+  },
+  {
+    "id": "berholt-caswell",
+    "name": "Berholt Caswell",
+    "nickname": "-",
+    "aliases": [
+      "His High Holiness"
+    ],
+    "house": "House Caswell",
+    "title": "High Septon",
+    "status": "Alive",
+    "age": 74,
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": 25
+    },
+    "height": "168 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Genuinely pious",
+      "Well-meaning",
+      "Politically cautious — not cowardly, but deliberate",
+      "Diplomatic",
+      "Quietly principled",
+      "Capable of shame when his principles and his caution have not aligned"
+    ],
+    "goals": [
+      "Deliver verdicts and guidance that he can honestly believe the gods would sanction",
+      "Preserve the Faith's independence without provoking a confrontation he cannot win",
+      "Act justly within the limits of what he believes is survivable — and wrestle privately with where that line sits"
+    ],
+    "relationships": {
+      "jacaelon-targaryen": "Respects him as the steadiest hand in the room at the trial; aligned with his Wall verdict because it was the most just outcome he could honestly defend — not because Jace pressured him into it.",
+      "baelor-targaryen": "A tense, unequal antagonism. Baelor pushed hard; Berholt held his ground with a serenity that infuriated the Grand Maester, but he was also aware he was holding ground on a verdict rather than on the larger question — Gaelor's unpunished sin — where he had already failed to act.",
+      "gaelor-targaryen": "Never formally sanctioned him for Alysanne Hightower's murder — not from fear alone, but from a genuine uncertainty about whether an excommunication would serve the gods or simply detonate a crisis he could not contain. He is not sure he made the right call, and that uncertainty coloured everything he said at the trial.",
+      "brant-costayne": "Saw in him a man who did what Berholt himself had not: acted on his convictions regardless of cost. That recognition, more than theology, drove him toward mercy."
+    },
+    "summary": "High Septon Berholt Caswell is a man of genuine faith and genuine limits — and he is honest enough with himself to know the difference. He is not a villain and not a coward in the simple sense; he is a man who has spent seventy-four years learning how much justice the world will actually bear, and who has sometimes let that calculation shade into inaction. His failure to sanction Gaelor for Alysanne Hightower's murder was not pure timidity — it was a considered judgment that the fallout would cost more than the principle was worth — but he is no longer entirely sure he was right, and that doubt sat with him throughout the trial. At the antechamber recess he argued for the Wall with quiet conviction, not to defy Baelor or please Jace, but because it was the most honest answer he could give the gods. A good man. Not an especially brave one. Aware of the gap.",
+    "quotes": []
+  },
+  {
+    "id": "leo-tyrell",
+    "name": "Leo Tyrell",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Tyrell",
+    "title": "-",
+    "status": "Alive",
+    "age": 14,
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": 85
+    },
+    "height": "-",
+    "father": "renrose-tyrell",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Haughty",
+      "Eager to prove his worth",
+      "Politically aware beyond his years — though not beyond his father's instruction",
+      "Proud of his Highgarden name"
+    ],
+    "goals": [
+      "Prove himself useful to his father's alliance with Visenor",
+      "Receive the education his father sent him to Oldtown for",
+      "Earn the respect of the older men around him"
+    ],
+    "relationships": {
+      "renrose-tyrell": "Dispatched by his father to Oldtown ostensibly for his education alongside Melessa Hightower; in practice he is also his father's presence in the room, a role he is old enough to half-understand and young enough to play clumsily.",
+      "visenor-targaryen": "Knows him as Maester Arthur Sand, one of only four inside the Hightower aware of his true identity; volunteered to send for his father's swordsmen before Visenor quietly shut the idea down — his first lesson that the prince will not be managed.",
+      "melessa-hightower": "Sent to be educated alongside her; the dynamic between a grieving fourteen-year-old lady and a haughty fourteen-year-old lord has not yet been established.",
+      "martyn-mullendore": "Rode from Highgarden to Oldtown in his company; Martyn tolerates him."
+    },
+    "summary": "Leo Tyrell is fourteen years old and carries himself with the full weight of Highgarden behind him — which is to say, with a haughtiness that sits uneasily on his young shoulders. His father Renrose dispatched him to Oldtown under the banner of education alongside Melessa Hightower, but Leo is perceptive enough to sense the political dimension of the arrangement even if he cannot fully articulate it. His first instinct on arriving at the Hightower was to offer his father's swordsmen to Visenor — an offer that was politely and firmly declined, his first indication that the prince he is nominally serving has no intention of being dependent on House Tyrell.",
+    "quotes": []
+  },
+  {
+    "id": "almar-larchmont",
+    "name": "Almar Larchmont",
+    "nickname": "-",
+    "aliases": [],
+    "house": "-",
+    "title": "Maester",
+    "status": "Alive",
+    "age": "-",
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": "-"
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Sharp and protective",
+      "Decisive under pressure",
+      "Discreet",
+      "Fiercely loyal to Melessa Hightower"
+    ],
+    "goals": [
+      "Protect Melessa Hightower and see her established as the foremost lady of the Reach",
+      "Maintain Visenor's cover identity within the Hightower without fracture",
+      "Keep the knowledge of the prince's presence contained to the four who already hold it"
+    ],
+    "relationships": {
+      "visenor-targaryen": "One of only four people inside the Hightower who know Maester Arthur Sand is Prince Visenor; sharp enough to cut off Melessa mid-sentence on the first morning before she exposed the prince's identity to the room.",
+      "melessa-hightower": "His primary charge and loyalty; the speed with which he corrected her slip at breakfast suggests a long-established habit of protecting her from her own candour.",
+      "leo-tyrell": "Present at the first breakfast meeting; his relationship with the Tyrell boy is not yet defined, though his instinct to keep Renrose's reach limited aligns with Visenor's own."
+    },
+    "summary": "Maester Almar serves as castle healer at the Hightower and is one of the four people inside the castle walls who know that the man calling himself Maester Arthur Sand is in fact Prince Visenor Targaryen. His composure under pressure was evident from the first morning: when Melessa began to address the prince by his true title at the breakfast table, Almar cut her off mid-word with a voice sharp enough to silence the room. His loyalties run first to Melessa and second to the success of the arrangement that keeps her safe — which, for now, means keeping Visenor's cover intact.",
     "quotes": []
   }
 ]

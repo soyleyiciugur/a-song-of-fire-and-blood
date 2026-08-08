@@ -469,5 +469,37 @@
         ]
       }
     ]
+  },
+  {
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "date": "8th Moon, 99 AC",
+    "events": [
+      {
+        "title": "The trial of Ser Brant Costayne",
+        "description": "Jace chairs the trial in the King's absence, flanked by Grand Maester Baelor and High Septon Berholt. Costayne mounts a public defense rooted in his knightly vows and Gaelor's unpunished murder of Alysanne Hightower, forcing the panel into a heated antechamber recess where Baelor and Berholt clash bitterly. Jace brokers a compromise: Costayne is stripped of his knighthood and sentenced to the Wall. The verdict is immediately voided when Costayne, his chains raised above his head, demands a trial by combat.",
+        "date": "30th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "baelor-targaryen",
+          "berholt-caswell",
+          "brant-costayne",
+          "gaelor-targaryen"
+        ]
+      },
+      {
+        "title": "Maester Arthur Sand arrives at the Hightower",
+        "description": "Visenor reaches Oldtown under his cover identity as Maester Arthur Sand, establishing himself as tutor to Melessa Hightower and Leo Tyrell with only four people aware of his true identity: Melessa, Leo, Ser Martyn Mullendore, and Maester Almar. When Leo moves to send for Tyrell swordsmen, Visenor quietly shuts it down, insisting on a local knight — his first deliberate step to limit Renrose's eyes on his movements.",
+        "date": "8th of the 8th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "melessa-hightower",
+          "leo-tyrell",
+          "martyn-mullendore",
+          "almar-larchmont",
+          "renrose-tyrell"
+        ]
+      }
+    ]
   }
 ]

@@ -7,7 +7,7 @@ import { daysUntilNextNameday, type WorldDate } from "@/lib/age";
 const DAYS_PER_MOON = 30;
 const YEAR_LENGTH = 12 * DAYS_PER_MOON;
 
-export type UpcomingEventType = "nameday" | "feast" | "wedding" | "battle" | "other";
+export type UpcomingEventType = "nameday" | "feast" | "wedding" | "battle" | "trial" | "other";
 
 export interface UpcomingEvent {
   title: string;

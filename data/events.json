@@ -42,5 +42,16 @@
     "moon": 7,
     "year": 99,
     "description": "A grand tourney meant to lift the city's spirits ends instead in bloodshed and scandal — an assassination attempt on Prince Gaelor by a disguised Oldtown survivor, and a brutal, inconclusive final tilt between the two Targaryen princes that leaves neither able to stand."
+  },
+  {
+    "id": "trial-costayne",
+    "title": "The Trial of Ser Brant Costayne",
+    "type": "trial",
+    "location": "King's Landing",
+    "chapterSlug": "the-trial",
+    "day": 30,
+    "moon": 7,
+    "year": 99,
+    "description": "Ser Brant Costayne stands trial in the Great Hall of the Red Keep before the Hand of the King, the Grand Maester, and the High Septon. The panel sentences him to the Wall — a verdict he immediately voids by demanding trial by combat."
   }
 ]

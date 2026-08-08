@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\schemas\map.ts
 import { z } from "zod";
 
-export const MapEventTypeSchema = z.enum(["battle", "feast", "tournament", "wedding"]);
+export const MapEventTypeSchema = z.enum(["battle", "feast", "tournament", "wedding", "trial"]);
 
 export const MapLocationSchema = z.object({
   name: z.string().min(1),
