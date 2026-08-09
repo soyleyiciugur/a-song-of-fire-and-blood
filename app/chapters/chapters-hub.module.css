@@ -1,5 +1,3 @@
-/* ─── C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\chapters-hub.module.css ─── */
-
 @font-face {
   font-family: "House of the Dragon";
   src: url("/fonts/HouseOfTheDragonPersonalRegular-BWnq8.otf") format("opentype");
@@ -533,24 +531,23 @@
 
 /* ════════════════════════════════════════════════════════════
    TABLE OF CONTENTS — single right-hand page.
-   Structural change: this used to be a flex row of TWO half-pages
-   (tocLeft / tocRight), each with its own vertical list and its own
-   Roman-numeral page number, which produced the "book split into
-   quarter-pages" look. .tocSpread now wraps exactly ONE page that
-   occupies the full right-hand side of the book (same footprint as
-   .coverBack on the left), with a single scrollable column of
-   chapters listed top-to-bottom, in order.
+
+   FIX: left is now var(--spine-w) so the ToC page sits directly
+   beside the inside-cover (coverBack), occupying the right half
+   of the open book spread. The previous value
+   calc(var(--spine-w) + var(--book-w)) pushed it one full book-
+   width too far to the right, leaving a gap in the middle.
    ══════════════════════════════════════════════════════════ */
 .tocSpread {
   position: absolute;
-  left: var(--spine-w);    /* sits directly over the cover card — right page of open spread */
+  left: var(--spine-w);          /* ← FIXED: was calc(--spine-w + --book-w) */
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease 0.3s;
-  z-index: 10;
+  z-index: 20;                   /* above coverCard so it renders on top when open */
 }
 
 .bookOpen .tocSpread {
@@ -607,10 +604,6 @@
   flex-shrink: 0;
 }
 
-/* the ONE scrollable list — chapters flow top-to-bottom in natural
-   order (1, 2, 3, 4...), no left/right split. If there are more
-   chapters than fit the page height, this scrolls instead of
-   overflowing or clipping. */
 .tocList {
   list-style: none;
   margin: 0;
@@ -633,16 +626,16 @@
 .tocList::-webkit-scrollbar-track { background: transparent; }
 
 /* ── individual ToC entry ──
-   Resting state: title only, compact single line.
-   Hover state: synopsis grows into view below the title, so the list
-   stays scannable at rest and only expands on demand. */
+   Synopsis is now a floating parchment tooltip that appears to the
+   LEFT of the hovered entry (outside the list), so the list itself
+   never reflows or grows — entries stay compact at rest. */
 .tocEntry {
   padding: 11px 12px;
   border-radius: 3px;
   cursor: pointer;
   transition: background 0.18s ease;
   outline: none;
-  position: relative;
+  position: relative;   /* tooltip anchors here */
   flex-shrink: 0;
 }
 
@@ -687,27 +680,76 @@
   color: var(--gold-bright);
 }
 
-/* synopsis: collapsed to 0 height at rest, expands open on hover, in
-   the same warm gold display-font style as the title so the whole
-   card reads as one consistent art style. */
+/* ── SYNOPSIS TOOLTIP ──
+   Floats to the LEFT of the hovered entry. Arrow points right
+   toward the entry. Appears with a gentle fade + slight scale.
+   Never affects list layout — position: absolute takes it out
+   of flow entirely. */
 .tocSynopsis {
-  display: block;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
+  position: absolute;
+  right: calc(100% + 16px);   /* left of the entry, with a small gap */
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+  width: 210px;
+
+  background: linear-gradient(160deg, #f8f0da 0%, #ede1c0 100%);
+  border: 1px solid var(--gold-dark);
+  border-radius: 4px;
+  padding: 11px 14px;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.38),
+    0 1px 5px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+
   font-family: var(--hd-font);
   font-size: 0.76rem;
   font-style: italic;
-  color: var(--gold-mid);
-  line-height: 1.55;
-  transition: max-height 0.28s ease, opacity 0.22s ease, margin-top 0.28s ease;
-  margin-top: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+
+  /* keep it clipped within the book's overflow boundary */
+  max-height: 120px;
+  overflow: hidden;
+}
+
+/* arrow pointing right → toward the list entry */
+.tocSynopsis::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-left: 6px solid var(--gold-dark);
+  border-right: none;
+}
+
+/* inner arrow (slightly offset, parchment colour — gives a double-
+   border look matching the card's border style) */
+.tocSynopsis::before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-left: 5px solid #ede1c0;
+  border-right: none;
+  z-index: 1;
 }
 
 .tocEntryHovered .tocSynopsis {
-  max-height: 4.5em;
   opacity: 1;
-  margin-top: 5px;
+  transform: translateY(-50%) scale(1);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -753,7 +795,7 @@
   .coverTitle { font-size: 2.1rem; }
   .tocHeader  { font-size: 0.7rem; }
   .tocEntryTitle { font-size: 0.84rem; }
-  .tocSynopsis   { font-size: 0.72rem; }
+  .tocSynopsis   { font-size: 0.72rem; width: 160px; }
   .tocPageInner  { padding: 22px 18px 18px; }
   .tocEntry      { padding: 9px 10px; }
 
