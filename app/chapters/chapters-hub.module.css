@@ -824,11 +824,16 @@
   transform: translateZ(calc(-1 * var(--cover-depth)));
   background: linear-gradient(160deg, var(--leather-mid) 0%, var(--leather) 100%);
   border-radius: 0 3px 3px 0;
-  box-shadow:
-    0 8px 40px rgba(0,0,0,0.7),
-    0 2px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
+  transition: opacity 0.3s ease;   /* add */
 }
 
+/* add — only ever visible on the closed/turning book, never on the open spread */
+.bookOpen .backCover,
+.bookOpening .backCover {
+  opacity: 0;
+  pointer-events: none;
+}
 .backCoverInner {
   height: 100%;
   display: flex;
