@@ -6,26 +6,18 @@
 // Chapter data: pulls from data/chapters.json via getAllChapters().
 // TR fields used: chapter.titleTr, chapter.synopsisTr (optional; falls back to EN).
 //
-// Fixes in this revision:
-//  #1 lang toggle no longer swaps position — two independent pill buttons.
-//  #1(new) cover text no longer invisible until click: front/back cover
-//     faces are now ONE rotating unit (.coverCard), so backface-visibility
-//     actually has a rotating context to hide/show against. Previously
-//     .cover and .coverBack were separate siblings that never rotated
-//     themselves (only .bookWrap rotated, on a different axis/timeline),
-//     so the browser deferred painting the cover text until some other
-//     change (like the click) forced a repaint.
-//  #2 cover's inside face shows the same title/sub as the front (minus
-//     "open to begin"), right-reading rather than mirrored, because it's
-//     pre-rotated 180deg as a face of the same coverCard unit.
-//  #4 clicking the empty background while the book is open closes it.
-//  #5 Esc closes the book if it's open (table of contents); the reader page
-//     sends people back here with ?openToc=1 so Esc there lands on the ToC
-//     first, and a second Esc (from here) closes the book fully.
-//  #5(centering) book stays centered when open (see chapters-hub.module.css).
+// This revision replaces the split left/right ToC pages with the open
+// book showing exactly two real pages:
+//   left  = inside cover (title + short description — unchanged)
+//   right = one full, scrollable table of contents
+// Hovering a chapter title in the ToC opens a floating "bubble" to the
+// right of the page showing that chapter's synopsis. The bubble's
+// vertical position is computed from the hovered row's actual position
+// (via getBoundingClientRect) relative to the page, so it always lines
+// up with the row you're hovering even while the list is scrolled.
 "use client";
 
-import { Suspense, useEffect, useRef, useState, useCallback } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapters-hub.module.css";
@@ -43,6 +35,13 @@ type Chapter = {
   content: string[];
   titleTr?: string;
   synopsisTr?: string;
+};
+
+type BubbleState = {
+  slug: string;
+  title: string;
+  synopsis: string;
+  top: number; // px, relative to the ToC page container
 };
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -64,18 +63,17 @@ function ChaptersHubContent() {
 
   // ── state
   const [lang, setLang] = useState<Lang>("en");
-  // If we were sent here from the reader (Esc / "All chapters" link), open
-  // straight to the table of contents instead of showing the closed cover.
   const [phase, setPhase] = useState<Phase>(
     searchParams.get("openToc") === "1" ? "toc" : "cover"
   );
-  const [hoveredChapter, setHoveredChapter] = useState<string | null>(null);
   const [pendingSlug, setPendingSlug] = useState<string | null>(null);
+  const [bubble, setBubble] = useState<BubbleState | null>(null);
 
   // bookmark
   const [bookmark, setBookmark] = useState<{ slug: string; page: number } | null>(null);
 
   const bookRef = useRef<HTMLDivElement>(null);
+  const tocPageRef = useRef<HTMLDivElement>(null);
 
   // ── init: read persisted lang & bookmark
   useEffect(() => {
@@ -87,28 +85,26 @@ function ChaptersHubContent() {
     } catch {}
   }, []);
 
-  // ── set + persist a specific language (bug #1: no more toggling/swapping)
   const selectLang = useCallback((next: Lang) => {
     setLang(next);
     try { localStorage.setItem("asofiab-lang", next); } catch {}
   }, []);
 
-  // ── open book on cover click
   const openBook = useCallback(() => {
     if (phase !== "cover") return;
     setPhase("opening");
     setTimeout(() => setPhase("toc"), 900);
   }, [phase]);
 
-  // ── close book (bug #4 background click, bug #5 Esc)
   const closeBook = useCallback(() => {
     if (phase !== "toc") return;
+    setBubble(null);
     setPhase("closing");
     setTimeout(() => setPhase("cover"), 700);
   }, [phase]);
 
-  // ── navigate to chapter with closing animation
   const goToChapter = useCallback((slug: string) => {
+    setBubble(null);
     setPendingSlug(slug);
     setPhase("closing");
     setTimeout(() => {
@@ -117,19 +113,15 @@ function ChaptersHubContent() {
     }, 700);
   }, [router, lang]);
 
-  // ── continue reading shortcut
   const continueReading = useCallback(() => {
     if (!bookmark) return;
     router.push(`/chapters/${bookmark.slug}?lang=${lang}&page=${bookmark.page}`);
   }, [bookmark, lang, router]);
 
-  // ── bug #4: clicking the empty scene background (not the book itself)
-  // closes the book when it's open.
   const handleSceneClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) closeBook();
   }, [closeBook]);
 
-  // ── bug #5: Esc closes the book if it's open on this page.
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && phase === "toc") closeBook();
@@ -138,12 +130,30 @@ function ChaptersHubContent() {
     return () => window.removeEventListener("keydown", handler);
   }, [phase, closeBook]);
 
-  // ── split chapters into left/right pages of ToC
-  const leftChapters = chapters.filter((_, i) => i % 2 === 0);
-  const rightChapters = chapters.filter((_, i) => i % 2 === 1);
+  // ── hover bubble: compute the hovered row's vertical position
+  // relative to the page container, so the bubble lines up with it
+  // regardless of scroll position.
+  const showBubble = useCallback((ch: Chapter, rowEl: HTMLElement) => {
+    const pageEl = tocPageRef.current;
+    if (!pageEl) return;
+    const rowRect = rowEl.getBoundingClientRect();
+    const pageRect = pageEl.getBoundingClientRect();
+    const top = rowRect.top - pageRect.top + rowRect.height / 2;
+    setBubble({
+      slug: ch.slug,
+      title: chapterTitle(ch, lang),
+      synopsis: chapterSynopsis(ch, lang),
+      top,
+    });
+  }, [lang]);
+
+  const hideBubble = useCallback(() => setBubble(null), []);
+
+  // clear the bubble if the list is scrolled so it doesn't hang in a
+  // stale position
+  const handleListScroll = useCallback(() => setBubble(null), []);
 
   const bookmarkChapter = bookmark ? chapters.find(c => c.slug === bookmark.slug) : null;
-
   const coverOpen = phase !== "cover";
 
   return (
@@ -158,7 +168,7 @@ function ChaptersHubContent() {
         ))}
       </div>
 
-      {/* ── language toggle (bug #1: two independent buttons) ── */}
+      {/* ── language toggle ── */}
       <div className={styles.langToggle}>
         <button
           className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
@@ -199,9 +209,6 @@ function ChaptersHubContent() {
           phase === "closing" ? styles.bookClosing : "",
         ].filter(Boolean).join(" ")}
         onClick={(e) => {
-          // Only the closed cover itself opens the book; once open, clicks
-          // on the book (ToC entries etc.) must not bubble up and re-trigger
-          // the scene's background-click-to-close handler.
           if (phase === "cover") {
             openBook();
           } else {
@@ -219,14 +226,7 @@ function ChaptersHubContent() {
           <span className={styles.spineOrnament}>✦ ✦ ✦</span>
         </div>
 
-        {/* ── COVER CARD: one physical card, two faces (bug #1 / #2 fix).
-              .cover (front) and .coverBack (back) used to be independent
-              siblings, each toggled by its own class — neither ever
-              actually rotated on its own, so backface-visibility had
-              nothing to hide against and the browser deferred painting
-              the front face's text until a later repaint (the click).
-              Now this single wrapper rotates, and each face is
-              positioned inset:0 inside it. ── */}
+        {/* ── COVER CARD: front cover + inside-left page ── */}
         <div
           className={[styles.coverCard, coverOpen ? styles.coverCardFlipped : ""].filter(Boolean).join(" ")}
         >
@@ -253,8 +253,7 @@ function ChaptersHubContent() {
             <div className={styles.coverSheen} aria-hidden />
           </div>
 
-          {/* ── BACK FACE (inside-left page): same title + description,
-                no "open to begin" prompt ── */}
+          {/* ── BACK FACE (inside-left page) — unchanged: title + description ── */}
           <div className={styles.coverBack}>
             <div className={styles.pageTexture} />
             <div className={styles.insideLeft}>
@@ -268,72 +267,55 @@ function ChaptersHubContent() {
           </div>
         </div>
 
-        {/* ── TABLE OF CONTENTS spread ── */}
+        {/* ── TABLE OF CONTENTS: ONE full page to the right of the cover,
+              single scrollable list, hover synopsis bubble ── */}
         <div className={styles.tocSpread}>
-          {/* left page */}
-          <div className={[styles.tocPage, styles.tocLeft].join(" ")}>
+          <div className={styles.tocPage} ref={tocPageRef}>
             <div className={styles.pageTexture} />
             <div className={styles.tocPageInner}>
               <div className={styles.tocHeader}>
                 {lang === "en" ? "Contents" : "İçindekiler"}
               </div>
               <div className={styles.tocDividerLine} />
-              <ul className={styles.tocList}>
-                {leftChapters.map((ch) => (
+              <ul
+                className={styles.tocList}
+                onScroll={handleListScroll}
+              >
+                {chapters.map((ch) => (
                   <li
                     key={ch.slug}
                     className={[
                       styles.tocEntry,
-                      hoveredChapter === ch.slug ? styles.tocEntryHovered : "",
+                      bubble?.slug === ch.slug ? styles.tocEntryHovered : "",
                       pendingSlug === ch.slug ? styles.tocEntryActive : "",
                     ].filter(Boolean).join(" ")}
-                    onMouseEnter={() => setHoveredChapter(ch.slug)}
-                    onMouseLeave={() => setHoveredChapter(null)}
+                    onMouseEnter={(e) => showBubble(ch, e.currentTarget)}
+                    onMouseLeave={hideBubble}
+                    onFocus={(e) => showBubble(ch, e.currentTarget)}
+                    onBlur={hideBubble}
                     onClick={() => goToChapter(ch.slug)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
                   >
                     <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
-                    <span className={styles.tocDots} aria-hidden />
-                    <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className={styles.pageNumber}>I</div>
-          </div>
 
-          {/* right page */}
-          <div className={[styles.tocPage, styles.tocRight].join(" ")}>
-            <div className={styles.pageTexture} />
-            <div className={styles.tocPageInner}>
-              <div className={styles.tocHeader}>&nbsp;</div>
-              <div className={styles.tocDividerLine} />
-              <ul className={styles.tocList}>
-                {rightChapters.map((ch) => (
-                  <li
-                    key={ch.slug}
-                    className={[
-                      styles.tocEntry,
-                      hoveredChapter === ch.slug ? styles.tocEntryHovered : "",
-                      pendingSlug === ch.slug ? styles.tocEntryActive : "",
-                    ].filter(Boolean).join(" ")}
-                    onMouseEnter={() => setHoveredChapter(ch.slug)}
-                    onMouseLeave={() => setHoveredChapter(null)}
-                    onClick={() => goToChapter(ch.slug)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
-                  >
-                    <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
-                    <span className={styles.tocDots} aria-hidden />
-                    <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={[styles.pageNumber].join(" ")}>II</div>
+            {/* floating synopsis bubble — sibling of the scrolling list,
+                so its own overflow never clips it */}
+            {bubble && (
+              <div
+                className={styles.tocBubble}
+                style={{ top: bubble.top }}
+                aria-hidden
+              >
+                <div className={styles.tocBubbleTitle}>{bubble.title}</div>
+                <p className={styles.tocBubbleText}>{bubble.synopsis}</p>
+              </div>
+            )}
           </div>
         </div>
 
