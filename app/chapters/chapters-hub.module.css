@@ -52,8 +52,9 @@
   align-items: center;
   justify-content: center;
   background: var(--scene-bg);
-  overflow: hidden;
+  /* overflow: hidden;  ← remove this */
   perspective: 2200px;
+  perspective-origin: 50% 50%;
   user-select: none;
 }
 
@@ -77,7 +78,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;
+  overflow: hidden;   /* clip particles locally instead */
 }
 
 .particle {
