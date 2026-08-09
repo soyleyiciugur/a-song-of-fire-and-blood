@@ -1,0 +1,311 @@
+/* ─── C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\[id]\full-chapter.module.css ─── */
+/*
+   Full-chapter scroll reading view.
+
+   Visual language borrowed from app/scrolls/[id]/scroll.module.css
+   (parchment panel, wax seal, gold accents, dropcap) so this view feels
+   like part of the same archive rather than a bolted-on plain page.
+
+   Deliberately DOES NOT use "House of the Dragon" for body text — that
+   font is decorative/blackletter and hard to read at paragraph length.
+   Body copy here uses the site's default Geist font (already loaded
+   globally via app/layout.tsx's `geist.className` on <body>), which is
+   the whole point of offering this view: better readability for long
+   stretches of prose. House of the Dragon is reserved for the chapter
+   title only, to keep a thread of continuity with the book view.
+*/
+
+:root {
+  --fc-parchment-light: #efe3c4;
+  --fc-parchment-dark: #d9c69a;
+  --fc-ink: #241c12;
+  --fc-ink-soft: #4a3c28;
+  --fc-gold: #a67c3d;
+  --fc-gold-bright: #c99a4a;
+  --fc-shadow: rgba(30, 22, 12, 0.4);
+
+  --hd-font: "House of the Dragon", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCENE — full page behind the scroll panel
+   ══════════════════════════════════════════════════════════ */
+.fcScene {
+  width: 100%;
+  min-height: 100vh;
+  background: #090603;
+  position: relative;
+  padding: 100px 16px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.fcScene::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 70% at 50% 30%,
+    rgba(212,168,64,0.05) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PARCHMENT PANEL
+   ══════════════════════════════════════════════════════════ */
+.fcParchment {
+  position: relative;
+  isolation: isolate;
+  z-index: 1;
+  width: 100%;
+  max-width: 760px;
+  background: linear-gradient(
+    160deg,
+    var(--fc-parchment-light) 0%,
+    var(--fc-parchment-dark) 55%,
+    var(--fc-parchment-light) 100%
+  );
+  padding: 4rem 3.25rem 3.5rem;
+  box-shadow:
+    0 24px 60px -16px var(--fc-shadow),
+    inset 0 0 60px rgba(122, 90, 42, 0.18),
+    inset 0 0 2px rgba(43, 33, 24, 0.4);
+  border-radius: 4px;
+  animation: fcUnfurl 0.4s ease-out;
+  transform-origin: top center;
+}
+
+@keyframes fcUnfurl {
+  from { opacity: 0; transform: translateY(14px) scaleY(0.97); }
+  to   { opacity: 1; transform: translateY(0)     scaleY(1); }
+}
+
+.fcParchment::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 180px 120px at 12% 15%, rgba(122, 90, 42, 0.25), transparent 70%),
+    radial-gradient(ellipse 220px 160px at 88% 80%, rgba(122, 90, 42, 0.22), transparent 70%),
+    radial-gradient(ellipse 140px 100px at 70% 10%, rgba(90, 60, 20, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* wax seal, echoing /scrolls */
+.fcSeal {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #9a2b2b, #7a1f1f 55%, #5c1414 100%);
+  box-shadow: 0 4px 8px var(--fc-shadow), inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.fcSealGlyph {
+  font-family: var(--hd-font);
+  color: rgba(255, 235, 210, 0.85);
+  font-size: 1.3rem;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+/* ════════════════════════════════════════════════════════════
+   HEADER — image, eyebrow, title (HotD, matches book view),
+   synopsis
+   ══════════════════════════════════════════════════════════ */
+.fcHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.fcImageWrap {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 1.75rem;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+.fcImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fcEyebrow {
+  font-family: var(--hd-font);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: capitalize;
+  color: var(--fc-gold);
+  margin: 0 0 0.6rem;
+}
+
+.fcTitle {
+  font-family: var(--hd-font);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.25;
+  color: var(--fc-ink);
+  margin: 0;
+}
+
+.fcDivider {
+  color: var(--fc-gold);
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.fcSynopsis {
+  font-family: var(--hd-font);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--fc-ink-soft);
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+/* ════════════════════════════════════════════════════════════
+   BODY — Geist, the site's default readable sans, deliberately
+   NOT House of the Dragon. This is the readability upgrade the
+   whole view exists to offer.
+   ══════════════════════════════════════════════════════════ */
+.fcBody {
+  /* inherits font-family: Geist from <body> in app/layout.tsx;
+     set explicitly to `inherit` so this view is correct even if
+     it's ever rendered somewhere that doesn't have that class on
+     an ancestor. */
+  font-family: inherit;
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--fc-ink);
+  max-width: 66ch;
+  margin: 0 auto;
+}
+
+.fcParagraph {
+  margin: 0 0 1.3em;
+  text-align: left;
+}
+
+.fcDropCap {
+  float: left;
+  font-family: var(--hd-font);
+  font-size: 3.4rem;
+  line-height: 0.78;
+  padding: 0.08rem 0 0 0;
+  margin: 0 0.35rem 0.1rem 0;
+  color: #7a1f1f;
+  text-shadow: 1px 1px 0 rgba(166, 124, 61, 0.4);
+}
+
+.fcSectionDivider {
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--fc-gold);
+  margin: 1.6em 0;
+  opacity: 0.75;
+}
+
+.fcInlineImageWrap {
+  margin: 0.75em auto 1.4em;
+  max-width: 420px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+}
+.fcInlineImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ════════════════════════════════════════════════════════════
+   FOOTER NAV — prev/next chapter + back to book view
+   ══════════════════════════════════════════════════════════ */
+.fcFooter {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(90, 60, 20, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fcFooterLink {
+  font-family: var(--hd-font);
+  font-size: 0.9rem;
+  color: var(--fc-ink-soft);
+  text-decoration: none;
+  padding: 8px 4px;
+  transition: color 0.18s;
+}
+.fcFooterLink:hover {
+  color: #7a1f1f;
+}
+.fcFooterLinkDisabled {
+  visibility: hidden;
+}
+
+.fcBackToBook {
+  font-family: var(--hd-font);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: #241c12;
+  border: 1px solid var(--fc-gold);
+  border-radius: 4px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+.fcBackToBook:hover {
+  background: #33281a;
+  border-color: var(--fc-gold-bright);
+}
+
+/* ════════════════════════════════════════════════════════════
+   TOGGLE BUTTON — sits in the reader's persistent top controls row
+   ══════════════════════════════════════════════════════════ */
+.fcToggleBtn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--fc-gold, #b8892e);
+  background: rgba(28,15,5,0.88);
+  border: 1px solid var(--fc-gold, #7a5a1f);
+  border-radius: 4px;
+  padding: 7px 14px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.fcToggleBtn:hover {
+  color: #f0c050;
+  border-color: #f0c050;
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 560px) {
+  .fcScene { padding: 88px 10px 60px; }
+  .fcParchment { padding: 3rem 1.5rem 2.25rem; }
+  .fcDropCap { font-size: 2.7rem; }
+  .fcBody { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fcParchment { animation: none; }
+}

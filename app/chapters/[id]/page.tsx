@@ -31,6 +31,15 @@
 //      Enter jumps straight to that spread. (Now using real book numbering 1-2, 3-4)
 //  #13 prev/next (both in-chapter and chapter-to-chapter) are corner-curl
 //      hit areas layered over the page itself, not visible buttons.
+//  #NEW "Read full chapter" toggle: switches from the page-flip book
+//      view to a single scrollable parchment page with the whole
+//      chapter's text, set in Geist (the site's normal readable body
+//      font) instead of the decorative House of the Dragon face used
+//      by the book. Lives in the persistent top controls row, next to
+//      the language toggle, so it's reachable from any spread. Esc
+//      still returns to the hub from either view; toggling view mode
+//      does not lose your place in the book (spreadIndex is untouched).
+//      Styling for this view lives in ./full-chapter.module.css.
 
 import {
   useCallback,
@@ -44,10 +53,12 @@ import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapter-reader.module.css";
+import fc from "./full-chapter.module.css";
 
 // ─── types ────────────────────────────────────────────────────────────────────
 
 type Lang = "en" | "tr";
+type ViewMode = "book" | "scroll";
 
 type Chapter = {
   slug: string;
@@ -88,7 +99,7 @@ function chapterContent(ch: Chapter, lang: Lang): string[] {
 // Ornamental dividers already in chapter text — keep them as-is
 const DIVIDER_MARKER = "✧ ✦ ✧";
 
-// ─── pagination engine ────────────────────────────────────────────────────────
+// ─── pagination engine (book view only) ────────────────────────────────────────
 // Splits body paragraphs into single-column "pages" that each fit the
 // measured column height. Two of these columns make up one on-screen
 // spread (left + right), except for the fixed first spread (bug #11),
@@ -168,6 +179,49 @@ function renderBlocks(blocks: Block[]) {
   });
 }
 
+// ─── full-chapter scroll view renderer ─────────────────────────────────────────
+// Same block parsing as the book view, but rendered as one continuous
+// column in Geist, with a drop cap on the first real paragraph only.
+
+function renderFullChapterBlocks(blocks: Block[]) {
+  let usedDropCap = false;
+  return blocks.map((block, i) => {
+    if (block.type === "image") {
+      return (
+        <div key={i} className={fc.fcInlineImageWrap}>
+          <Image
+            src={block.src}
+            alt=""
+            width={420}
+            height={260}
+            className={fc.fcInlineImage}
+          />
+        </div>
+      );
+    }
+    if (block.text === DIVIDER_MARKER) {
+      return <div key={i} className={fc.fcSectionDivider}>{block.text}</div>;
+    }
+    if (!usedDropCap && block.text.trim().length > 0) {
+      usedDropCap = true;
+      const first = block.text.trim();
+      const dropChar = first.charAt(0);
+      const rest = first.slice(1);
+      return (
+        <p key={i} className={fc.fcParagraph}>
+          <span className={fc.fcDropCap}>{dropChar}</span>
+          {rest}
+        </p>
+      );
+    }
+    return (
+      <p key={i} className={fc.fcParagraph}>
+        {block.text}
+      </p>
+    );
+  });
+}
+
 // ─── component ────────────────────────────────────────────────────────────────
 
 export default function ChapterReader() {
@@ -195,7 +249,17 @@ export default function ChapterReader() {
     try { localStorage.setItem("asofiab-lang", next); } catch {}
   }, []);
 
-  // ── pagination state
+  // ── view mode: page-flip book vs. single-scroll full chapter.
+  // Not persisted to localStorage or the URL on purpose — reopening a
+  // chapter should default back to the book view; the scroll view is a
+  // one-off reading convenience for the current visit.
+  const [viewMode, setViewMode] = useState<ViewMode>("book");
+
+  const toggleViewMode = useCallback(() => {
+    setViewMode((m) => (m === "book" ? "scroll" : "book"));
+  }, []);
+
+  // ── pagination state (book view)
   // `columnPages` holds only BODY text, split into single-column chunks.
   // Spread 0 is always the fixed image/title/synopsis spread (bug #11);
   // spread N (N>=1) shows columnPages[2N-2] on the left and
@@ -212,67 +276,70 @@ export default function ChapterReader() {
   const totalSpreads = Math.max(1, 1 + Math.ceil(columnPages.length / 2));
   const totalPages = totalSpreads * 2;
 
-  // ── build pages whenever chapter  changes
+  // ── build pages whenever chapter changes (book view only — no need to
+  // paginate while in scroll view, but we still keep this running so the
+  // book view is ready the instant the user switches back)
   const prevChapterSlugRef = useRef<string | null>(null);
 
-useLayoutEffect(() => {
-  if (!chapter || !rulerRef.current || !pageAreaRef.current) return;
+  useLayoutEffect(() => {
+    if (viewMode !== "book") return;
+    if (!chapter || !rulerRef.current || !pageAreaRef.current) return;
 
-  const blocks = chapterContent(chapter, lang);
-  const h = pageAreaRef.current.getBoundingClientRect().height;
-  if (h < 50) return;
+    const blocks = chapterContent(chapter, lang);
+    const h = pageAreaRef.current.getBoundingClientRect().height;
+    if (h < 50) return;
 
-  const built = paginateContent(blocks, h * 0.92, rulerRef.current);
-  setColumnPages(built);
+    const built = paginateContent(blocks, h * 0.92, rulerRef.current);
+    setColumnPages(built);
 
-  const total = 1 + Math.ceil(built.length / 2);
-  const chapterChanged = prevChapterSlugRef.current !== chapter.slug;
-  prevChapterSlugRef.current = chapter.slug;
+    const total = 1 + Math.ceil(built.length / 2);
+    const chapterChanged = prevChapterSlugRef.current !== chapter.slug;
+    prevChapterSlugRef.current = chapter.slug;
 
-  const fromUrl = searchParams.get("page");
-  if (fromUrl) {
-    const n = parseInt(fromUrl, 10);
-    setSpreadIndex(isNaN(n) ? 0 : Math.max(0, Math.min(n, total - 1)));
-  } else if (chapterChanged) {
-    setSpreadIndex(0);
-  } else {
-    // lang-only change: clamp current position into the new total,
-    // but don't reset to page 1
-    setSpreadIndex((prev) => Math.max(0, Math.min(prev, total - 1)));
-  }
-}, [chapter, lang]); // eslint-disable-line react-hooks/exhaustive-deps
-  
-  // keep the editable page-number field in sync — now shows the LEFT page
+    const fromUrl = searchParams.get("page");
+    if (fromUrl) {
+      const n = parseInt(fromUrl, 10);
+      setSpreadIndex(isNaN(n) ? 0 : Math.max(0, Math.min(n, total - 1)));
+    } else if (chapterChanged) {
+      setSpreadIndex(0);
+    } else {
+      // lang-only change: clamp current position into the new total,
+      // but don't reset to page 1
+      setSpreadIndex((prev) => Math.max(0, Math.min(prev, total - 1)));
+    }
+  }, [chapter, lang, viewMode]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // keep the editable page-number field in sync — shows the LEFT page
   // number of the current spread
   useEffect(() => {
     setPageInputValue(String(spreadIndex * 2 + 1));
   }, [spreadIndex]);
 
-  // ── save bookmark on spread change
+  // ── save bookmark on spread change (book view only)
   useEffect(() => {
-    if (!chapter) return;
+    if (!chapter || viewMode !== "book") return;
     try {
       localStorage.setItem("asofiab-bookmark", JSON.stringify({
         slug: chapter.slug,
         page: spreadIndex,
       }));
     } catch {}
-  }, [chapter, spreadIndex]);
+  }, [chapter, spreadIndex, viewMode]);
 
   // ── spread turn logic
-const turnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const turnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-const goToSpread = useCallback((target: number) => {
-  if (target < 0 || target >= totalSpreads) return;
-  if (turnTimeoutRef.current) clearTimeout(turnTimeoutRef.current);
-  const dir = target > spreadIndex ? "next" : "prev";
-  setTurning(dir);
-  turnTimeoutRef.current = setTimeout(() => {
-    setSpreadIndex(target);
-    setTurning(null);
-    turnTimeoutRef.current = null;
-  }, 480);
-}, [spreadIndex, totalSpreads]);
+  const goToSpread = useCallback((target: number) => {
+    if (target < 0 || target >= totalSpreads) return;
+    if (turnTimeoutRef.current) clearTimeout(turnTimeoutRef.current);
+    const dir = target > spreadIndex ? "next" : "prev";
+    setTurning(dir);
+    turnTimeoutRef.current = setTimeout(() => {
+      setSpreadIndex(target);
+      setTurning(null);
+      turnTimeoutRef.current = null;
+    }, 480);
+  }, [spreadIndex, totalSpreads]);
 
   const goNextSpread = useCallback(() => goToSpread(spreadIndex + 1), [goToSpread, spreadIndex]);
   const goPrevSpread = useCallback(() => goToSpread(spreadIndex - 1), [goToSpread, spreadIndex]);
@@ -288,20 +355,23 @@ const goToSpread = useCallback((target: number) => {
     router.push(`/chapters/${slug}?lang=${lang}`);
   }, [router, lang]);
 
-  // ── bug #5: Esc sends you back to the hub with the ToC already open.
+  // ── Esc sends you back to the hub with the ToC already open, from
+  // either view mode. Arrow keys only drive page-turns in book view.
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") goNextSpread();
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") goPrevSpread();
+      if (viewMode === "book") {
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") goNextSpread();
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") goPrevSpread();
+      }
       if (e.key === "Escape") {
         router.push(`/chapters?openToc=1&lang=${lang}`);
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [goNextSpread, goPrevSpread, router, lang]);
+  }, [goNextSpread, goPrevSpread, router, lang, viewMode]);
 
-  // page-number input handlers (bug #12) — input is now a PAGE number,
+  // page-number input handlers (bug #12) — input is a PAGE number,
   // convert to spread by integer division
   const commitPageInput = useCallback(() => {
     const n = parseInt(pageInputValue, 10);
@@ -314,7 +384,7 @@ const goToSpread = useCallback((target: number) => {
     }
   }, [pageInputValue, totalPages, goToSpread, spreadIndex]);
 
-  // ── current spread's left/right blocks
+  // ── current spread's left/right blocks (book view)
   const { leftBlocks, rightBlocks } = useMemo(() => {
     if (isFirstSpread) return { leftBlocks: [] as Block[], rightBlocks: [] as Block[] };
     const colIdx = (spreadIndex - 1) * 2;
@@ -322,6 +392,12 @@ const goToSpread = useCallback((target: number) => {
     const right = (columnPages[colIdx + 1] || []).map(parseBlock);
     return { leftBlocks: left, rightBlocks: right };
   }, [columnPages, spreadIndex, isFirstSpread]);
+
+  // ── full chapter blocks (scroll view) — the whole chapter, unpaginated
+  const fullChapterBlocks: Block[] = useMemo(() => {
+    if (!chapter) return [];
+    return chapterContent(chapter, lang).map(parseBlock);
+  }, [chapter, lang]);
 
   // ── not found
   if (!chapter) {
@@ -334,6 +410,110 @@ const goToSpread = useCallback((target: number) => {
 
   const displayTitle = chapterTitle(chapter, lang);
 
+  // ── shared top controls (language toggle, back link, view toggle) ──
+  const topControls = (
+    <>
+      <div className={styles.langToggle}>
+        <button
+          className={fc.fcToggleBtn}
+          onClick={toggleViewMode}
+          aria-pressed={viewMode === "scroll"}
+        >
+          {viewMode === "book"
+            ? (lang === "en" ? "Click to read the full chapter" : "Bölümün tamamını oku")
+            : (lang === "en" ? "Back to book view" : "Kitap görünümüne dön")}
+        </button>
+        <button
+          className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
+          onClick={() => selectLang("en")}
+          aria-pressed={lang === "en"}
+        >
+          EN
+        </button>
+        <button
+          className={[styles.langBtn, lang === "tr" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
+          onClick={() => selectLang("tr")}
+          aria-pressed={lang === "tr"}
+        >
+          TR
+        </button>
+      </div>
+
+      <a href={`/chapters?openToc=1&lang=${lang}`} className={styles.backLink}>
+        ← {lang === "en" ? "All chapters" : "Tüm bölümler"}
+      </a>
+    </>
+  );
+
+  // ════════════════ SCROLL VIEW (full chapter, single page) ════════════════
+  if (viewMode === "scroll") {
+    return (
+      <div className={fc.fcScene}>
+        {topControls}
+
+        <article className={fc.fcParchment}>
+          <div className={fc.fcSeal} aria-hidden>
+            <span className={fc.fcSealGlyph}>✦</span>
+          </div>
+
+          <header className={fc.fcHeader}>
+            {chapter.image && (
+              <div className={fc.fcImageWrap}>
+                <Image
+                  src={chapter.image}
+                  alt={displayTitle}
+                  width={480}
+                  height={280}
+                  className={fc.fcImage}
+                  priority
+                />
+              </div>
+            )}
+            <div className={fc.fcEyebrow}>
+              {lang === "en" ? "A Song of Fire & Blood" : "Ateş ve Kanın Şarkısı"}
+            </div>
+            <h1 className={fc.fcTitle}>{displayTitle}</h1>
+            <div className={fc.fcDivider}>✦</div>
+            <p className={fc.fcSynopsis}>{chapterSynopsis(chapter, lang)}</p>
+          </header>
+
+          <div className={fc.fcBody}>
+            {renderFullChapterBlocks(fullChapterBlocks)}
+          </div>
+
+          <footer className={fc.fcFooter}>
+            {prevChapter ? (
+              <button
+                className={fc.fcFooterLink}
+                onClick={() => goChapter(prevChapter.slug)}
+              >
+                ← {chapterTitle(prevChapter as Chapter, lang)}
+              </button>
+            ) : (
+              <span className={fc.fcFooterLinkDisabled}>—</span>
+            )}
+
+            <button className={fc.fcBackToBook} onClick={toggleViewMode}>
+              {lang === "en" ? "Back to book view" : "Kitap görünümüne dön"}
+            </button>
+
+            {nextChapter ? (
+              <button
+                className={fc.fcFooterLink}
+                onClick={() => goChapter(nextChapter.slug)}
+              >
+                {chapterTitle(nextChapter as Chapter, lang)} →
+              </button>
+            ) : (
+              <span className={fc.fcFooterLinkDisabled}>—</span>
+            )}
+          </footer>
+        </article>
+      </div>
+    );
+  }
+
+  // ════════════════ BOOK VIEW (page-flip, default) ════════════════
   return (
     <div className={styles.scene}>
       {/* hidden ruler for measuring paragraph heights */}
@@ -351,28 +531,7 @@ const goToSpread = useCallback((target: number) => {
         }}
       />
 
-      {/* ── language toggle (bug #1) ── */}
-      <div className={styles.langToggle}>
-        <button
-          className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
-          onClick={() => selectLang("en")}
-          aria-pressed={lang === "en"}
-        >
-          EN
-        </button>
-        <button
-          className={[styles.langBtn, lang === "tr" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
-          onClick={() => selectLang("tr")}
-          aria-pressed={lang === "tr"}
-        >
-          TR
-        </button>
-      </div>
-
-      {/* ── back to hub — opens straight to the table of contents ── */}
-      <a href={`/chapters?openToc=1&lang=${lang}`} className={styles.backLink}>
-        ← {lang === "en" ? "All chapters" : "Tüm bölümler"}
-      </a>
+      {topControls}
 
       {/* ════════ THE OPEN BOOK ════════ */}
       <div className={styles.book}>
@@ -438,7 +597,7 @@ const goToSpread = useCallback((target: number) => {
                 <span>{lang === "en" ? `of ${totalPages}` : `/ ${totalPages}`}</span>
               </form>
             </div>
-            
+
             {/* bug #13: corner-curl hit area, embedded in the page itself.
                 First spread → previous chapter. Otherwise → previous spread. */}
             <div
@@ -512,7 +671,6 @@ const goToSpread = useCallback((target: number) => {
               </span>
             </div>
 
-
             {/* bug #13: corner-curl hit area for next page / next chapter */}
             <div
               className={[
@@ -547,7 +705,7 @@ const goToSpread = useCallback((target: number) => {
                 {lang === "en" ? "Next chapter" : "Sonraki bölüm"} →
               </span>
             )}
-            
+
           </div>
         </div>
         {/* end spread */}

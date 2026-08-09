@@ -622,5 +622,125 @@
     "chapterSlug": "the-manders-pact",
     "chapterTitle": "Chapter XI: The Mander's Pact",
     "note": "to Gaelor regarding his ascension"
+  },
+  {
+    "text": "From this day forth, we shall not refer to our guest as a prince. He is Maester Arthur. Do not forget it, my lady.",
+    "speakerId": "almar-larchmont",
+    "speakerName": "Maester Almar Larchmont",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "correcting Melessa Hightower"
+  },
+  {
+    "text": "It is a beautiful thing. To see our princes achieve such greatness, bearing the weight of the realm upon their chests. It fills the flock with pride.",
+    "speakerId": "berholt-caswell",
+    "speakerName": "High Septon Berholt Caswell",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "to Jace"
+  },
+  {
+    "text": "You will address me as Lord Hand only.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "shutting down Gaelor's mockery in court"
+  },
+  {
+    "text": "If the King's word is absolute, then was the murder of Lady Alysanne also the King's command?",
+    "speakerId": "brant-costayne",
+    "speakerName": "Ser Brant Costayne",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "challenging the court"
+  },
+  {
+    "text": "Since Prince Gaelor faced no justice for the murder of a seventeen-year-old girl, I decided to bring the justice myself.",
+    "speakerId": "brant-costayne",
+    "speakerName": "Ser Brant Costayne",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "admitting his intent to murder Gaelor"
+  },
+  {
+    "text": "You claim Prince Gaelor has the blood of a young lady on his hands. You, Ser, have the blood of two hundred Hightower knights on yours.",
+    "speakerId": "baelor-targaryen",
+    "speakerName": "Baelor Targaryen",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "to Ser Costayne"
+  },
+  {
+    "text": "Grand Maester, in this hall, nothing shapes my thoughts save the will of the gods. I am not obligated to listen to anyone else. I kindly ask that you cease trying to shape my mind.",
+    "speakerId": "berholt-caswell",
+    "speakerName": "High Septon Berholt Caswell",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "to Baelor"
+  },
+  {
+    "text": "If you want him to live, Septon, go out there and excommunicate Prince Gaelor right now. Throw him out of the Faith. Then we will see how our opinions shape up.",
+    "speakerId": "baelor-targaryen",
+    "speakerName": "Baelor Targaryen",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "arguing with the High Septon in private"
+  },
+  {
+    "text": "What madness is this?! This man tried to murder a Targaryen prince twice! The gods have always stood with the Targaryens!",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "outraged by the sentence to the Wall"
+  },
+  {
+    "text": "I stopped trusting the justice of the Seven Kingdoms a long time ago. I stand by what I have said from the beginning. I did what was fair, and I will continue to do what is fair until the end of my days.",
+    "speakerId": "brant-costayne",
+    "speakerName": "Ser Brant Costayne",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "rejecting the verdict"
+  },
+  {
+    "text": "I will not passively accept the justice of our Septon, nor the justice of the Targaryen family. I will be judged truly. By the gods. I demand a trial by combat!",
+    "speakerId": "brant-costayne",
+    "speakerName": "Ser Brant Costayne",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "demanding a trial by combat"
+  },
+  {
+    "text": "Prince Gaelor, fueled by the confidence of youth and immense strength, has sadly committed rather controversial acts within the realm. I pray that today, true justice will find its place.",
+    "speakerId": "berholt-caswell",
+    "speakerName": "High Septon Berholt Caswell",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "a veiled threat before the trial"
+  },
+  {
+    "text": "Many of you have sons and daughters. Which of you would turn a blind eye to the slaughter of a sinless child? Especially if you held a sword in your hand and a sacred vow in your heart?",
+    "speakerId": "brant-costayne",
+    "speakerName": "Ser Brant Costayne",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "appealing directly to the smallfolk"
+  },
+  {
+    "text": "You know an innocent girl was butchered. Do you want to cross the gods?",
+    "speakerId": "berholt-caswell",
+    "speakerName": "High Septon Berholt Caswell",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "warning Baelor in the private antechamber"
+  },
+  {
+    "text": "By the justice of His Grace, Baelenys Targaryen, and the Targaryen dynasty, it is decreed that Ser Brant Costayne shall be stripped of his knighthood. He shall be sent to the Wall, to continue his vows in service to the Night's Watch.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-trial",
+    "chapterTitle": "Chapter XII: The Trial",
+    "note": "delivering the controversial verdict"
   }
 ]
