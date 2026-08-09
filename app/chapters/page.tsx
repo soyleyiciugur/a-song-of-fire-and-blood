@@ -29,8 +29,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapters-hub.module.css";
 
-// ─── types ────────────────────────────────────────────────────────────────────
-
 type Lang = "en" | "tr";
 type Phase = "cover" | "opening" | "toc" | "closing";
 
@@ -44,8 +42,6 @@ type Chapter = {
   synopsisTr?: string;
 };
 
-// ─── helpers ──────────────────────────────────────────────────────────────────
-
 function chapterTitle(ch: Chapter, lang: Lang) {
   return lang === "tr" && ch.titleTr ? ch.titleTr : ch.title;
 }
@@ -53,8 +49,6 @@ function chapterTitle(ch: Chapter, lang: Lang) {
 function chapterSynopsis(ch: Chapter, lang: Lang) {
   return lang === "tr" && ch.synopsisTr ? ch.synopsisTr : ch.synopsis;
 }
-
-// ─── component ────────────────────────────────────────────────────────────────
 
 function ChaptersHubContent() {
   const router = useRouter();
@@ -68,8 +62,6 @@ function ChaptersHubContent() {
   const [hoveredChapter, setHoveredChapter] = useState<string | null>(null);
   const [pendingSlug, setPendingSlug] = useState<string | null>(null);
   const [bookmark, setBookmark] = useState<{ slug: string; page: number } | null>(null);
-
-  const bookRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -124,39 +116,38 @@ function ChaptersHubContent() {
   }, [phase, closeBook]);
 
   const bookmarkChapter = bookmark ? chapters.find(c => c.slug === bookmark.slug) : null;
-  const coverOpen = phase !== "cover";
+  const isOpen = phase === "toc" || phase === "opening" || phase === "closing";
 
   return (
     <div
-      className={[styles.scene, phase === "toc" ? styles.sceneClosable : ""].filter(Boolean).join(" ")}
+      className={[
+        styles.scene,
+        phase === "toc" ? styles.sceneClosable : "",
+      ].filter(Boolean).join(" ")}
       onClick={handleSceneClick}
     >
-      {/* ── ambient particles ── */}
+      {/* ambient particles */}
       <div className={styles.particles} aria-hidden="true">
         {Array.from({ length: 18 }).map((_, i) => (
           <span key={i} className={styles.particle} style={{ "--i": i } as React.CSSProperties} />
         ))}
       </div>
 
-      {/* ── language toggle ── */}
+      {/* language toggle */}
       <div className={styles.langToggle}>
         <button
           className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
           onClick={() => selectLang("en")}
           aria-pressed={lang === "en"}
-        >
-          EN
-        </button>
+        >EN</button>
         <button
           className={[styles.langBtn, lang === "tr" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
           onClick={() => selectLang("tr")}
           aria-pressed={lang === "tr"}
-        >
-          TR
-        </button>
+        >TR</button>
       </div>
 
-      {/* ── continue reading banner ── */}
+      {/* continue reading banner */}
       {bookmark && bookmarkChapter && phase === "cover" && (
         <div className={styles.continueBanner}>
           <span className={styles.continueLabel}>
@@ -169,9 +160,12 @@ function ChaptersHubContent() {
         </div>
       )}
 
-      {/* ════════════════ THE BOOK ════════════════ */}
+      {/* ══════════ THE BOOK ══════════
+          Closed: spine + one cover page (book-w + spine-w wide)
+          Open:   spine + inside-left page + toc right page (2×book-w + spine-w wide)
+          The width transition drives the "book spreading open" feel.
+      */}
       <div
-        ref={bookRef}
         className={[
           styles.bookWrap,
           phase === "opening" ? styles.bookOpening : "",
@@ -179,25 +173,67 @@ function ChaptersHubContent() {
           phase === "closing" ? styles.bookClosing : "",
         ].filter(Boolean).join(" ")}
         onClick={(e) => {
-          if (phase === "cover") {
-            openBook();
-          } else {
-            e.stopPropagation();
-          }
+          if (phase === "cover") openBook();
+          else e.stopPropagation();
         }}
         role={phase === "cover" ? "button" : undefined}
         aria-label={phase === "cover" ? (lang === "en" ? "Open the book" : "Kitabı aç") : undefined}
         tabIndex={phase === "cover" ? 0 : undefined}
         onKeyDown={phase === "cover" ? (e) => e.key === "Enter" && openBook() : undefined}
       >
+        {/* spine — always visible */}
+        <div className={styles.spine}>
+          <span className={styles.spineText}>A Song of Fire and Blood</span>
+          <span className={styles.spineOrnament}>✦ ✦ ✦</span>
+        </div>
 
-        {/* ── TABLE OF CONTENTS — FIRST child so it sits at the lowest
-              z-index inside bookWrap. Positioned at left: var(--spine-w)
-              so it occupies exactly the same footprint as the cover card.
-              The cover card (z-index 6) flips away to reveal this page
-              (z-index 5) behind it — one single full-width parchment
-              page, no split columns. ── */}
-        <div className={styles.tocSpread}>
+        {/* ── CLOSED STATE: leather front cover ── */}
+        <div className={[styles.frontCover, isOpen ? styles.frontCoverHidden : ""].filter(Boolean).join(" ")}>
+          <div className={styles.coverBorder} />
+          <div className={styles.coverInner}>
+            <div className={styles.coverEyebrow}>
+              {lang === "en" ? "The Chronicles" : "Vakayiname"}
+            </div>
+            <h1 className={styles.coverTitle}>
+              A Song of<br />Fire &amp; Blood
+            </h1>
+            <div className={styles.coverDivider}>✦</div>
+            <p className={styles.coverSub}>
+              {lang === "en"
+                ? "A record of truth, betrayal, and blood"
+                : "Hakikat, ihanet ve kanın kaydı"}
+            </p>
+            <div className={styles.coverPrompt}>
+              {lang === "en" ? "— open to begin —" : "— açmak için tıkla —"}
+            </div>
+          </div>
+          <div className={styles.coverSheen} aria-hidden />
+        </div>
+
+        {/* ── OPEN STATE: two-page spread ──
+            Left page = inside cover (title/subtitle)
+            Right page = full ToC, single scrollable column
+            Both hidden while closed, revealed as book swings open. */}
+        <div className={[styles.openSpread, isOpen ? styles.openSpreadVisible : ""].filter(Boolean).join(" ")}>
+
+          {/* LEFT: inside cover page */}
+          <div className={styles.insidePage}>
+            <div className={styles.pageTexture} />
+            <div className={styles.insidePageContent}>
+              <h2 className={styles.insideTitle}>A Song of Fire &amp; Blood</h2>
+              <div className={styles.insideDivider}>✦</div>
+              <p className={styles.insideSub}>
+                {lang === "en"
+                  ? "A record of truth, betrayal, and blood"
+                  : "Hakikat, ihanet ve kanın kaydı"}
+              </p>
+            </div>
+          </div>
+
+          {/* gutter shadow between pages */}
+          <div className={styles.gutter} aria-hidden />
+
+          {/* RIGHT: table of contents — one full page, no page number */}
           <div className={styles.tocPage}>
             <div className={styles.pageTexture} />
             <div className={styles.tocPageInner}>
@@ -218,11 +254,15 @@ function ChaptersHubContent() {
                     onMouseLeave={() => setHoveredChapter(null)}
                     onClick={() => goToChapter(ch.slug)}
                     role="button"
-                    tabIndex={0}
+                    tabIndex={phase === "toc" ? 0 : -1}
                     onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
                   >
-                    <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
-                    <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
+                    <span className={styles.tocEntryTitle}>
+                      {chapterTitle(ch, lang)}
+                    </span>
+                    <span className={styles.tocSynopsis}>
+                      {chapterSynopsis(ch, lang)}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -230,65 +270,15 @@ function ChaptersHubContent() {
           </div>
         </div>
 
-        {/* ── spine ── */}
-        <div className={styles.spine}>
-          <span className={styles.spineText}>A Song of Fire and Blood</span>
-          <span className={styles.spineOrnament}>✦ ✦ ✦</span>
-        </div>
-
-        {/* ── COVER CARD: one physical card, two faces (z-index 6,
-              sits above tocSpread so it can flip away to reveal it) ── */}
-        <div
-          className={[styles.coverCard, coverOpen ? styles.coverCardFlipped : ""].filter(Boolean).join(" ")}
-        >
-          {/* ── FRONT FACE ── */}
-          <div className={styles.cover}>
-            <div className={styles.coverBorder} />
-            <div className={styles.coverInner}>
-              <div className={styles.coverEyebrow}>
-                {lang === "en" ? "The Chronicles" : "Vakayiname"}
-              </div>
-              <h1 className={styles.coverTitle}>
-                A Song of<br />Fire &amp; Blood
-              </h1>
-              <div className={styles.coverDivider}>✦</div>
-              <p className={styles.coverSub}>
-                {lang === "en"
-                  ? "A record of truth, betrayal, and blood"
-                  : "Hakikat, ihanet ve kanın kaydı"}
-              </p>
-              <div className={styles.coverPrompt}>
-                {lang === "en" ? "— open to begin —" : "— açmak için tıkla —"}
-              </div>
-            </div>
-            <div className={styles.coverSheen} aria-hidden />
-          </div>
-
-          {/* ── BACK FACE (inside-left page) ── */}
-          <div className={styles.coverBack}>
-            <div className={styles.pageTexture} />
-            <div className={styles.insideLeft}>
-              <h2 className={styles.insideTitle}>A Song of Fire &amp; Blood</h2>
-              <p className={styles.insideSub}>
-                {lang === "en"
-                  ? "A record of truth, betrayal, and blood"
-                  : "Hakikat, ihanet ve kanın kaydı"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* ── back cover ── */}
+        {/* back cover — always behind everything */}
         <div className={styles.backCover}>
           <div className={styles.backCoverInner}>
             <span className={styles.backOrnament}>✦</span>
           </div>
         </div>
-
       </div>
-      {/* ════════════════ end book ════════════════ */}
 
-      {/* ── cover hint ── */}
+      {/* hint shown only on cover */}
       {phase === "cover" && (
         <p className={styles.hint} aria-hidden>
           {lang === "en" ? "Click the book to open" : "Kitabı açmak için tıklayın"}

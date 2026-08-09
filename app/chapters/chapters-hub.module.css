@@ -16,34 +16,33 @@
 }
 
 :root {
-  --book-w: 420px;
-  --book-h: 560px;
-  --spine-w: 52px;
+  --book-w:      420px;
+  --book-h:      560px;
+  --spine-w:     52px;
   --cover-depth: 22px;
 
-  --parchment:     #f0e8d0;
-  --parchment-mid: #e8dbbf;
-  --parchment-dark:#d4c59a;
-  --ink:           #1a1208;
-  --ink-soft:      #3d2f1a;
-  --ink-faint:     #6b5535;
+  --parchment:      #f0e8d0;
+  --parchment-mid:  #e8dbbf;
+  --parchment-dark: #d4c59a;
+  --ink:            #1a1208;
+  --ink-soft:       #3d2f1a;
+  --ink-faint:      #6b5535;
 
-  --leather:       #1c0f05;
-  --leather-mid:   #2e1a08;
-  --leather-edge:  #0d0704;
-  --gold-bright:   #d4a840;
-  --gold-mid:      #b8892e;
-  --gold-dark:     #7a5a1f;
-  --gold-glow:     rgba(212, 168, 64, 0.35);
+  --leather:      #1c0f05;
+  --leather-mid:  #2e1a08;
+  --gold-bright:  #d4a840;
+  --gold-mid:     #b8892e;
+  --gold-dark:    #7a5a1f;
+  --gold-glow:    rgba(212, 168, 64, 0.35);
 
-  --scene-bg:      #0a0704;
+  --scene-bg: #0a0704;
 
   --hd-font: "House of the Dragon", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
 }
 
-/* ════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    SCENE
-   ══════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .scene {
   position: relative;
   min-height: 100vh;
@@ -62,16 +61,14 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 70% 65% at 50% 45%,
-    transparent 0%,
-    rgba(0,0,0,0.55) 100%);
+    transparent 0%, rgba(0,0,0,0.55) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
-.sceneClosable {
-  cursor: pointer;
-}
+.sceneClosable { cursor: pointer; }
 
+/* particles */
 .particles {
   position: absolute;
   inset: 0;
@@ -79,7 +76,6 @@
   z-index: 0;
   overflow: hidden;
 }
-
 .particle {
   position: absolute;
   width: 2px;
@@ -92,17 +88,16 @@
   animation: drift calc(8s + var(--i, 0) * 1.3s) ease-in-out infinite;
   animation-delay: calc(var(--i, 0) * 0.6s);
 }
-
 @keyframes drift {
-  0%   { opacity: 0;    transform: translateY(0)    scale(1); }
+  0%   { opacity: 0;   transform: translateY(0)     scale(1); }
   20%  { opacity: 0.4; }
   60%  { opacity: 0.2; }
-  100% { opacity: 0;    transform: translateY(-60px) scale(0.6); }
+  100% { opacity: 0;   transform: translateY(-60px) scale(0.6); }
 }
 
-/* ════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    LANGUAGE TOGGLE
-   ══════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .langToggle {
   position: fixed;
   top: 24px;
@@ -112,13 +107,12 @@
   align-items: center;
   gap: 6px;
 }
-
 .langBtn {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--ink-faint);
-  background: rgba(28, 15, 5, 0.85);
+  background: rgba(28,15,5,0.85);
   border: 1px solid var(--gold-dark);
   border-radius: 4px;
   padding: 7px 14px;
@@ -126,22 +120,17 @@
   backdrop-filter: blur(6px);
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.langBtn:hover {
-  color: var(--parchment-dark);
-  border-color: var(--gold-bright);
-}
+.langBtn:hover { color: var(--parchment-dark); border-color: var(--gold-bright); }
 .langBtnActive {
   color: var(--gold-bright);
   border-color: var(--gold-bright);
-  background: rgba(46, 26, 8, 0.9);
+  background: rgba(46,26,8,0.9);
 }
-.langBtnActive:hover {
-  color: var(--gold-bright);
-}
+.langBtnActive:hover { color: var(--gold-bright); }
 
-/* ════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    CONTINUE READING BANNER
-   ══════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .continueBanner {
   position: fixed;
   bottom: 32px;
@@ -151,7 +140,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(28, 15, 5, 0.92);
+  background: rgba(28,15,5,0.92);
   border: 1px solid var(--gold-dark);
   border-radius: 6px;
   padding: 12px 22px;
@@ -189,9 +178,9 @@
 .continueBtn:hover { color: #f0c050; }
 .continueArrow { flex-shrink: 0; }
 
-/* ════════════════════════════════════════════════════════════
-   HINT TEXT
-   ══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   HINT
+   ══════════════════════════════════════════ */
 .hint {
   position: absolute;
   bottom: 40px;
@@ -210,81 +199,93 @@
   50%       { opacity: 0.9; }
 }
 
-/* ════════════════════════════════════════════════════════════
-   3-D BOOK WRAPPER
-   ══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   BOOK WRAPPER
+   ══════════════════════════════════════════
+
+   Closed:  spine-w + book-w  (one cover page)
+   Open:    spine-w + book-w×2 (two-page spread)
+
+   The width change is animated so the book
+   visually "spreads" as it swings open.
+   ══════════════════════════════════════════ */
 .bookWrap {
   position: relative;
   z-index: 10;
-  width: calc(var(--book-w) + var(--spine-w));
+  /* closed width — just spine + one cover */
+  width: calc(var(--spine-w) + var(--book-w));
   height: var(--book-h);
   margin: 0 auto;
-  perspective: 1600px;
+  display: flex;
   transform-style: preserve-3d;
   transform-origin: center center;
   transform: rotateX(4deg) rotateY(-28deg);
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, width 0.5s cubic-bezier(0.4,0,0.2,1);
   cursor: pointer;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.7),
+    0 8px 24px rgba(0,0,0,0.5);
+  border-radius: 0 4px 4px 0;
 }
 
 .bookWrap:not(.bookOpen):not(.bookOpening):not(.bookClosing):hover {
   transform: rotateX(2deg) rotateY(-18deg);
 }
 
-.bookOpening {
-  animation: bookSwingOpen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  cursor: default;
-}
-@keyframes bookSwingOpen {
-  0%   { transform: rotateX(4deg)  rotateY(-28deg) scale(1); }
-  30%  { transform: rotateX(6deg)  rotateY(-45deg) scale(1.04); }
-  100% { transform: rotateX(2deg)  rotateY(0deg)   scale(1.06); }
-}
-
+/* open: widen to fit both pages */
 .bookOpen {
-  transform: rotateX(2deg) rotateY(0deg) scale(1.06);
+  width: calc(var(--spine-w) + var(--book-w) * 2);
+  transform: rotateX(2deg) rotateY(0deg) scale(1.04);
   cursor: default;
   pointer-events: auto;
 }
 
+.bookOpening {
+  animation: bookSwingOpen 0.9s cubic-bezier(0.4,0,0.2,1) forwards;
+  cursor: default;
+}
+@keyframes bookSwingOpen {
+  0%   { width: calc(var(--spine-w) + var(--book-w));
+         transform: rotateX(4deg) rotateY(-28deg) scale(1); }
+  30%  { transform: rotateX(6deg) rotateY(-45deg) scale(1.04); }
+  100% { width: calc(var(--spine-w) + var(--book-w) * 2);
+         transform: rotateX(2deg) rotateY(0deg)   scale(1.04); }
+}
+
 .bookClosing {
-  animation: bookSwingClose 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: bookSwingClose 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
   cursor: default;
   pointer-events: none;
 }
 @keyframes bookSwingClose {
-  0%   { transform: rotateX(2deg)  rotateY(0deg)   scale(1.06); }
-  40%  { transform: rotateX(6deg)  rotateY(-45deg) scale(1.04); }
-  100% { transform: rotateX(12deg) rotateY(-70deg) scale(0.9); }
+  0%   { width: calc(var(--spine-w) + var(--book-w) * 2);
+         transform: rotateX(2deg) rotateY(0deg)   scale(1.04); }
+  40%  { transform: rotateX(6deg) rotateY(-45deg) scale(1.04); }
+  100% { width: calc(var(--spine-w) + var(--book-w));
+         transform: rotateX(12deg) rotateY(-70deg) scale(0.9); }
 }
 
-/* ════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    SPINE
-   ══════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .spine {
-  position: absolute;
-  left: 0;
-  top: 0;
+  flex-shrink: 0;
   width: var(--spine-w);
   height: var(--book-h);
-  transform-origin: right center;
-  transform: rotateY(-90deg) translateX(calc(-1 * var(--spine-w) / 2)) translateZ(calc(var(--spine-w) / 2));
   background: linear-gradient(180deg,
-    #0e0803 0%,
-    var(--leather-mid) 15%,
-    var(--leather) 50%,
-    var(--leather-mid) 85%,
-    #0e0803 100%);
-  box-shadow: inset -4px 0 10px rgba(0,0,0,0.6), inset 4px 0 8px rgba(212,168,64,0.08);
+    #0e0803 0%, var(--leather-mid) 15%,
+    var(--leather) 50%, var(--leather-mid) 85%, #0e0803 100%);
+  box-shadow:
+    inset -4px 0 10px rgba(0,0,0,0.6),
+    inset  4px 0  8px rgba(212,168,64,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  border-left: 1px solid var(--gold-dark);
+  border-left:  1px solid var(--gold-dark);
   border-right: 1px solid rgba(0,0,0,0.8);
 }
-
 .spineText {
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -296,7 +297,6 @@
   color: var(--gold-mid);
   text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
-
 .spineOrnament {
   writing-mode: vertical-rl;
   font-size: 0.55rem;
@@ -304,94 +304,46 @@
   color: var(--gold-dark);
 }
 
-/* ════════════════════════════════════════════════════════════
-   COVER CARD — one physical card, two faces
-   z-index: 6 so it renders above tocSpread (z-index: 5)
-   ══════════════════════════════════════════════════════════ */
-.coverCard {
-  position: absolute;
-  left: var(--spine-w);
-  top: 0;
-  width: var(--book-w);
-  height: var(--book-h);
-  transform-style: preserve-3d;
-  transform-origin: left center;
-  transform: rotateY(0deg);
-  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: auto;
-  z-index: 6;
-}
-
-.coverCardFlipped {
-  transform: rotateY(-180deg);
-  pointer-events: none;
-}
-
-.bookClosing .coverCard {
-  animation: coverClose 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  pointer-events: none;
-}
-@keyframes coverClose {
-  from { transform: rotateY(-180deg); }
-  to   { transform: rotateY(0deg); }
-}
-
-/* ── FRONT FACE ── */
-.cover {
-  position: absolute;
-  inset: 0;
+/* ══════════════════════════════════════════
+   FRONT COVER  (closed state only)
+   ══════════════════════════════════════════ */
+.frontCover {
+  flex: 0 0 var(--book-w);
+  position: relative;
   background: var(--leather);
   border-radius: 0 3px 3px 0;
   overflow: hidden;
-  box-shadow:
-    4px 0 12px rgba(0,0,0,0.5),
-    0 8px 32px rgba(0,0,0,0.6);
+  transition: opacity 0.25s ease;
 }
 
-.coverCard:not(.coverCardFlipped) .cover {
-  visibility: visible;
-}
-.coverCardFlipped .cover {
-  visibility: hidden;
-}
-
-.coverCard:not(.coverCardFlipped) .coverBack {
-  visibility: hidden;
-}
-.coverCardFlipped .coverBack {
-  visibility: visible;
-}
-
-.cover::before {
+/* leather grain */
+.frontCover::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0,0,0,0.07) 3px,
-      rgba(0,0,0,0.07) 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 5px,
-      rgba(0,0,0,0.04) 5px,
-      rgba(0,0,0,0.04) 6px
-    );
+    repeating-linear-gradient(0deg,
+      transparent, transparent 3px,
+      rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px),
+    repeating-linear-gradient(90deg,
+      transparent, transparent 5px,
+      rgba(0,0,0,0.04) 5px, rgba(0,0,0,0.04) 6px);
   pointer-events: none;
 }
-
-.cover::after {
+/* vignette */
+.frontCover::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 85% 80% at 50% 50%,
-    transparent 55%,
-    rgba(0,0,0,0.45) 100%);
+    transparent 55%, rgba(0,0,0,0.45) 100%);
   pointer-events: none;
+}
+
+.frontCoverHidden {
+  opacity: 0;
+  pointer-events: none;
+  /* keep it in the flex flow but invisible; openSpread takes over */
 }
 
 .coverBorder {
@@ -422,10 +374,7 @@
   align-items: center;
   justify-content: center;
   padding: 40px 36px;
-  gap: 0;
-  backface-visibility: hidden;
 }
-
 .coverEyebrow {
   font-family: var(--hd-font);
   font-size: 0.72rem;
@@ -434,7 +383,6 @@
   color: var(--gold-dark);
   margin-bottom: 18px;
 }
-
 .coverTitle {
   font-family: var(--hd-font);
   font-size: 2.9rem;
@@ -443,19 +391,15 @@
   text-align: center;
   color: var(--gold-bright);
   margin: 0;
-  text-shadow:
-    0 0 30px var(--gold-glow),
-    0 2px 8px rgba(0,0,0,0.8);
+  text-shadow: 0 0 30px var(--gold-glow), 0 2px 8px rgba(0,0,0,0.8);
   letter-spacing: 0.02em;
 }
-
 .coverDivider {
   margin: 22px 0;
   font-size: 1.1rem;
   color: var(--gold-mid);
   text-shadow: 0 0 12px var(--gold-glow);
 }
-
 .coverSub {
   font-family: var(--hd-font);
   font-size: 0.82rem;
@@ -466,12 +410,10 @@
   margin: 0;
   line-height: 1.5;
 }
-
 .coverPrompt {
   position: absolute;
   bottom: 48px;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   text-align: center;
   font-family: var(--hd-font);
   font-size: 0.72rem;
@@ -479,94 +421,46 @@
   color: var(--gold-dark);
   animation: pulse 3s ease-in-out infinite;
 }
-
 .coverSheen {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg,
-    rgba(255,255,255,0.06) 0%,
-    transparent 50%,
-    rgba(0,0,0,0.08) 100%);
+    rgba(255,255,255,0.06) 0%, transparent 50%, rgba(0,0,0,0.08) 100%);
   pointer-events: none;
   z-index: 3;
 }
 
-/* ── BACK FACE (permanent inside-left page) ── */
-.coverBack {
-  position: absolute;
-  inset: 0;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  background: linear-gradient(160deg, #f2e9d0 0%, #e8dbbf 60%, #ddd0ab 100%);
-  border-radius: 0 3px 3px 0;
-  overflow: hidden;
-}
-
-.insideLeft {
-  height: 100%;
+/* ══════════════════════════════════════════
+   OPEN SPREAD  (two-page layout)
+   Hidden while closed; revealed when open.
+   Left = inside cover, Right = ToC.
+   ══════════════════════════════════════════ */
+.openSpread {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 48px;
-  gap: 14px;
-}
-
-.insideTitle {
-  font-family: var(--hd-font);
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--ink);
-  text-align: center;
-  line-height: 1.25;
-  margin: 0;
-}
-
-.insideSub {
-  font-family: var(--hd-font);
-  font-size: 0.85rem;
-  font-style: italic;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  text-align: center;
-  margin: 0;
-}
-
-/* ════════════════════════════════════════════════════════════
-   TABLE OF CONTENTS
-   Positioned at left: var(--spine-w) — same footprint as the cover
-   card. z-index: 5 so the cover card (z-index: 6) renders above it
-   and can flip away to reveal this single full-width page behind it.
-   One scrollable column, chapters top-to-bottom in natural order.
-   ══════════════════════════════════════════════════════════ */
-.tocSpread {
+  flex: 1;
+  min-width: 0;
+  height: var(--book-h);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease 0.4s;
+  /* sits behind frontCover when closed */
   position: absolute;
   left: var(--spine-w);
   top: 0;
-  width: var(--book-w);
-  height: var(--book-h);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease 0.3s;
-  z-index: 5;
+  /* will expand to fill bookWrap when open */
+  width: calc(var(--book-w) * 2);
 }
 
-.bookOpen .tocSpread {
+.openSpreadVisible {
   opacity: 1;
   pointer-events: auto;
-}
-
-.tocPage {
   position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: linear-gradient(160deg, #f5ecd4 0%, #ece0c0 60%, #e2d4a8 100%);
-  border-radius: 0 3px 3px 0;
-  box-shadow: inset 2px 0 6px rgba(0,0,0,0.1);
+  left: auto;
+  top: auto;
+  flex: 1;
 }
 
+/* shared paper texture */
 .pageTexture {
   position: absolute;
   inset: 0;
@@ -574,16 +468,116 @@
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   opacity: 0.8;
+  z-index: 0;
+}
+
+/* ── LEFT: inside cover page ── */
+.insidePage {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(160deg, #f2e9d0 0%, #e8dbbf 60%, #ddd0ab 100%);
+  overflow: hidden;
+}
+/* left-edge shadow from spine */
+.insidePage::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 20px; height: 100%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.14), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.insidePageContent {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 48px;
+  gap: 14px;
+  text-align: center;
+}
+.insideTitle {
+  font-family: var(--hd-font);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  margin: 0;
+}
+.insideDivider {
+  font-size: 0.9rem;
+  color: var(--gold-mid);
+}
+.insideSub {
+  font-family: var(--hd-font);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* gutter between the two open pages */
+.gutter {
+  flex: 0 0 1px;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(0,0,0,0.18) 15%,
+    rgba(0,0,0,0.22) 50%,
+    rgba(0,0,0,0.18) 85%,
+    transparent);
+  position: relative;
+  z-index: 4;
+}
+/* soft glow either side of gutter */
+.gutter::before,
+.gutter::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.08), transparent);
+}
+.gutter::before { right: 0; }
+.gutter::after  { left: 0; transform: scaleX(-1); }
+
+/* ── RIGHT: table of contents ── */
+.tocPage {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(160deg, #f5ecd4 0%, #ece0c0 60%, #e2d4a8 100%);
+  border-radius: 0 3px 3px 0;
+  overflow: hidden;
+}
+/* right-edge page-curl shadow */
+.tocPage::after {
+  content: "";
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle at 100% 100%,
+    rgba(0,0,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .tocPageInner {
   position: relative;
   z-index: 2;
-  padding: 32px 30px 28px;
+  padding: 36px 32px 32px;
   height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .tocHeader {
@@ -606,13 +600,14 @@
   flex-shrink: 0;
 }
 
+/* single scrollable column — chapters in natural order */
 .tocList {
   list-style: none;
   margin: 0;
-  padding: 0 6px 4px 0;
+  padding: 0 4px 4px 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -620,15 +615,13 @@
   scrollbar-width: thin;
   scrollbar-color: var(--gold-dark) transparent;
 }
-.tocList::-webkit-scrollbar { width: 5px; }
-.tocList::-webkit-scrollbar-thumb {
-  background: var(--gold-dark);
-  border-radius: 3px;
-}
+.tocList::-webkit-scrollbar       { width: 4px; }
+.tocList::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
 .tocList::-webkit-scrollbar-track { background: transparent; }
 
+/* each entry: title only at rest, synopsis on hover */
 .tocEntry {
-  padding: 11px 12px;
+  padding: 10px 12px;
   border-radius: 3px;
   cursor: pointer;
   transition: background 0.18s ease;
@@ -637,70 +630,60 @@
   flex-shrink: 0;
 }
 
+/* gold left bar that slides in on hover */
 .tocEntry::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 50%;
+  left: 0; top: 50%;
   transform: translateY(-50%) scaleX(0);
-  width: 2px;
-  height: 60%;
+  width: 2px; height: 60%;
   background: var(--gold-bright);
   border-radius: 2px;
   transition: transform 0.2s ease;
   transform-origin: center;
 }
-
-.tocEntryHovered {
-  background: rgba(180, 140, 40, 0.14);
-}
-
-.tocEntryHovered::before {
-  transform: translateY(-50%) scaleX(1);
-}
-
-.tocEntryActive {
-  background: rgba(180, 140, 40, 0.22);
-}
+.tocEntryHovered { background: rgba(180,140,40,0.13); }
+.tocEntryHovered::before { transform: translateY(-50%) scaleX(1); }
+.tocEntryActive  { background: rgba(180,140,40,0.22); }
 
 .tocEntryTitle {
   display: block;
   font-family: var(--hd-font);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--gold-dark);
   line-height: 1.35;
   letter-spacing: 0.01em;
   transition: color 0.18s;
 }
+.tocEntryHovered .tocEntryTitle { color: var(--gold-bright); }
 
-.tocEntryHovered .tocEntryTitle {
-  color: var(--gold-bright);
-}
-
+/* synopsis: collapsed at rest, expands on hover */
 .tocSynopsis {
   display: block;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   font-family: var(--hd-font);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-style: italic;
   color: var(--gold-mid);
   line-height: 1.55;
-  transition: max-height 0.28s ease, opacity 0.22s ease, margin-top 0.28s ease;
+  transition:
+    max-height 0.28s ease,
+    opacity    0.22s ease,
+    margin-top 0.28s ease;
   margin-top: 0;
 }
-
 .tocEntryHovered .tocSynopsis {
   max-height: 4.5em;
   opacity: 1;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
-/* ════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    BACK COVER
-   ══════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 .backCover {
   position: absolute;
   left: var(--spine-w);
@@ -713,39 +696,48 @@
   box-shadow:
     0 8px 40px rgba(0,0,0,0.7),
     0 2px 8px rgba(0,0,0,0.5);
+  z-index: 0;
 }
-
 .backCoverInner {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .backOrnament {
   font-size: 1.4rem;
   color: var(--gold-dark);
   text-shadow: 0 0 8px var(--gold-glow);
 }
 
-/* ════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    RESPONSIVE
-   ══════════════════════════════════════════════════════════ */
-@media (max-width: 600px) {
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
   :root {
-    --book-w: 300px;
-    --book-h: 420px;
-    --spine-w: 38px;
+    --book-w:  300px;
+    --book-h:  480px;
+    --spine-w: 40px;
   }
+  .coverTitle      { font-size: 2.2rem; }
+  .insideTitle     { font-size: 1.4rem; }
+  .tocHeader       { font-size: 0.72rem; }
+  .tocEntryTitle   { font-size: 0.84rem; }
+  .tocSynopsis     { font-size: 0.72rem; }
+  .tocPageInner    { padding: 24px 20px 20px; }
+  .tocEntry        { padding: 8px 10px; }
+}
 
-  .coverTitle { font-size: 2.1rem; }
-  .tocHeader  { font-size: 0.7rem; }
-  .tocEntryTitle { font-size: 0.84rem; }
-  .tocSynopsis   { font-size: 0.72rem; }
-  .tocPageInner  { padding: 22px 18px 18px; }
-  .tocEntry      { padding: 9px 10px; }
-
-  .continueBanner {
+@media (max-width: 680px) {
+  :root {
+    --book-w:  220px;
+    --book-h:  420px;
+    --spine-w: 32px;
+  }
+  .coverTitle      { font-size: 1.7rem; }
+  .insidePageContent { padding: 36px 24px; }
+  .insideTitle     { font-size: 1.1rem; }
+  .continueBanner  {
     flex-direction: column;
     gap: 6px;
     width: calc(100vw - 40px);
@@ -753,16 +745,13 @@
   }
 }
 
-/* ── reduced motion ── */
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .particle    { animation: none; }
   .hint        { animation: none; opacity: 0.7; }
   .coverPrompt { animation: none; }
-
   .bookOpening,
   .bookClosing { animation: none; }
-  .bookOpen    { transform: rotateX(2deg) rotateY(0deg) scale(1.06); }
-
-  .coverCard { transition: transform 0.3s ease; }
+  .bookOpen    { transform: rotateX(2deg) rotateY(0deg) scale(1.04); }
   .tocSynopsis { transition: none; }
 }
