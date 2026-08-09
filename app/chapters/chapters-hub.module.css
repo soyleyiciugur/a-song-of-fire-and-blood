@@ -52,9 +52,8 @@
   align-items: center;
   justify-content: center;
   background: var(--scene-bg);
-  /* overflow: hidden;  ← remove this */
+  overflow: hidden;
   perspective: 2200px;
-  perspective-origin: 50% 50%;
   user-select: none;
 }
 
@@ -78,7 +77,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;   /* clip particles locally instead */
+  overflow: hidden;
 }
 
 .particle {
@@ -220,6 +219,7 @@
   width: calc(var(--book-w) + var(--spine-w));
   height: var(--book-h);
   margin: 0 auto;
+  perspective: 1600px;
   transform-style: preserve-3d;
   transform-origin: center center;
   transform: rotateX(4deg) rotateY(-28deg);
@@ -268,7 +268,10 @@
   width: var(--spine-w);
   height: var(--book-h);
   transform-origin: right center;
-  transform: rotateY(-90deg) translateX(calc(-1 * var(--spine-w) / 2)) translateZ(calc(var(--spine-w) / 2));
+  transform:
+    rotateY(-85deg)
+    translateX(calc(-1 * var(--spine-w) / 2))
+    translateZ(calc(var(--spine-w) / 2 * 0.996)); /* sin(85deg) ≈ 0.996, keeps the edge aligned with the cover */
   background: linear-gradient(180deg,
     #0e0803 0%,
     var(--leather-mid) 15%,
