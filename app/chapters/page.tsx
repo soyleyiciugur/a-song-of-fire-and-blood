@@ -9,19 +9,20 @@
 // Fixes in this revision:
 //  #1 lang toggle no longer swaps position — two independent pill buttons.
 //  #1(new) cover text no longer invisible until click: front/back cover
-//     faces are now ONE rotating unit (.coverCard).
+//     faces are now ONE rotating unit (.coverCard), so backface-visibility
+//     actually has a rotating context to hide/show against. Previously
+//     .cover and .coverBack were separate siblings that never rotated
+//     themselves (only .bookWrap rotated, on a different axis/timeline),
+//     so the browser deferred painting the cover text until some other
+//     change (like the click) forced a repaint.
 //  #2 cover's inside face shows the same title/sub as the front (minus
-//     "open to begin"), right-reading rather than mirrored.
+//     "open to begin"), right-reading rather than mirrored, because it's
+//     pre-rotated 180deg as a face of the same coverCard unit.
 //  #4 clicking the empty background while the book is open closes it.
-//  #5 Esc closes the book if it's open (table of contents).
-//  #5(centering) book stays centered when open.
-//  #NEW (ToC restructure): the spread used to be inside-cover (left) +
-//     ToC-left-half + ToC-right-half — three panels total, with chapters
-//     alternating left/right/left/right in reading order and confusing
-//     "I"/"II" page numbers on what looked like one page. Now the spread
-//     is exactly two panels: left = inside cover, right = ONE single
-//     scrollable column listing all chapters top-to-bottom in order,
-//     titles only, synopsis revealed on hover (see CSS .tocSynopsis).
+//  #5 Esc closes the book if it's open (table of contents); the reader page
+//     sends people back here with ?openToc=1 so Esc there lands on the ToC
+//     first, and a second Esc (from here) closes the book fully.
+//  #5(centering) book stays centered when open (see chapters-hub.module.css).
 "use client";
 
 import { Suspense, useEffect, useRef, useState, useCallback } from "react";
@@ -137,6 +138,10 @@ function ChaptersHubContent() {
     return () => window.removeEventListener("keydown", handler);
   }, [phase, closeBook]);
 
+  // ── split chapters into left/right pages of ToC
+  const leftChapters = chapters.filter((_, i) => i % 2 === 0);
+  const rightChapters = chapters.filter((_, i) => i % 2 === 1);
+
   const bookmarkChapter = bookmark ? chapters.find(c => c.slug === bookmark.slug) : null;
 
   const coverOpen = phase !== "cover";
@@ -214,7 +219,14 @@ function ChaptersHubContent() {
           <span className={styles.spineOrnament}>✦ ✦ ✦</span>
         </div>
 
-        {/* ── COVER CARD: one physical card, two faces ── */}
+        {/* ── COVER CARD: one physical card, two faces (bug #1 / #2 fix).
+              .cover (front) and .coverBack (back) used to be independent
+              siblings, each toggled by its own class — neither ever
+              actually rotated on its own, so backface-visibility had
+              nothing to hide against and the browser deferred painting
+              the front face's text until a later repaint (the click).
+              Now this single wrapper rotates, and each face is
+              positioned inset:0 inside it. ── */}
         <div
           className={[styles.coverCard, coverOpen ? styles.coverCardFlipped : ""].filter(Boolean).join(" ")}
         >
@@ -242,8 +254,7 @@ function ChaptersHubContent() {
           </div>
 
           {/* ── BACK FACE (inside-left page): same title + description,
-                no "open to begin" prompt. This is the permanent left
-                page of the open book — it never becomes the ToC. ── */}
+                no "open to begin" prompt ── */}
           <div className={styles.coverBack}>
             <div className={styles.pageTexture} />
             <div className={styles.insideLeft}>
@@ -257,12 +268,10 @@ function ChaptersHubContent() {
           </div>
         </div>
 
-        {/* ── TABLE OF CONTENTS: single right page, single scrollable
-              column, chapters listed top-to-bottom in natural order.
-              (No more left-half/right-half split — that was producing
-              the "two mini pages with I/II numbers" layout.) ── */}
+        {/* ── TABLE OF CONTENTS spread ── */}
         <div className={styles.tocSpread}>
-          <div className={styles.tocPage}>
+          {/* left page */}
+          <div className={[styles.tocPage, styles.tocLeft].join(" ")}>
             <div className={styles.pageTexture} />
             <div className={styles.tocPageInner}>
               <div className={styles.tocHeader}>
@@ -270,7 +279,7 @@ function ChaptersHubContent() {
               </div>
               <div className={styles.tocDividerLine} />
               <ul className={styles.tocList}>
-                {chapters.map((ch) => (
+                {leftChapters.map((ch) => (
                   <li
                     key={ch.slug}
                     className={[
@@ -286,13 +295,45 @@ function ChaptersHubContent() {
                     onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
                   >
                     <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
-                    {/* synopsis only expands into view on hover — titles
-                        only is the resting state (see .tocSynopsis) */}
+                    <span className={styles.tocDots} aria-hidden />
                     <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
                   </li>
                 ))}
               </ul>
             </div>
+            <div className={styles.pageNumber}>I</div>
+          </div>
+
+          {/* right page */}
+          <div className={[styles.tocPage, styles.tocRight].join(" ")}>
+            <div className={styles.pageTexture} />
+            <div className={styles.tocPageInner}>
+              <div className={styles.tocHeader}>&nbsp;</div>
+              <div className={styles.tocDividerLine} />
+              <ul className={styles.tocList}>
+                {rightChapters.map((ch) => (
+                  <li
+                    key={ch.slug}
+                    className={[
+                      styles.tocEntry,
+                      hoveredChapter === ch.slug ? styles.tocEntryHovered : "",
+                      pendingSlug === ch.slug ? styles.tocEntryActive : "",
+                    ].filter(Boolean).join(" ")}
+                    onMouseEnter={() => setHoveredChapter(ch.slug)}
+                    onMouseLeave={() => setHoveredChapter(null)}
+                    onClick={() => goToChapter(ch.slug)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
+                  >
+                    <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
+                    <span className={styles.tocDots} aria-hidden />
+                    <span className={styles.tocSynopsis}>{chapterSynopsis(ch, lang)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className={[styles.pageNumber].join(" ")}>II</div>
           </div>
         </div>
 
