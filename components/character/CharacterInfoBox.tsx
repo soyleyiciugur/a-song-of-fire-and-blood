@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import charactersData from "@/data/characters/characters.json";
 import type { Character } from "../../types/character";
 import { slugifyHouse } from "../../lib/houses";
@@ -11,14 +14,24 @@ type Props = {
   character: Character;
 };
 
-const DEFAULT_PORTRAIT = "/images/characters/{id}.{ext}";
+const PORTRAIT_EXTENSIONS = ["webp", "png", "jpg", "jpeg"];
 
-// Usage
-const getPortrait = (id: string, ext: string = 'webp') => {
-  return DEFAULT_PORTRAIT
-    .replace('{id}', id)
-    .replace('{ext}', ext); // Passes 'png', 'jpg', etc.
-};
+function usePortraitSrc(id: string, customPortrait?: string | null) {
+  const [extIndex, setExtIndex] = useState(0);
+
+  if (customPortrait) return { src: customPortrait, onError: undefined };
+
+  const src = `/images/characters/${id}.${PORTRAIT_EXTENSIONS[extIndex]}`;
+
+  const onError = () => {
+    setExtIndex((i) => i + 1);
+  };
+
+  return {
+    src,
+    onError: extIndex < PORTRAIT_EXTENSIONS.length - 1 ? onError : undefined,
+  };
+}
 
 function isValidValue(value?: string | null) {
   return value && value !== "-" ? value : null;
@@ -33,7 +46,10 @@ function getCharacterName(id?: string | null) {
 }
 
 export default function CharacterInfoBox({ character }: Props) {
-  const portraitSrc = character.portrait ?? DEFAULT_PORTRAIT.replace("{id}", character.id);
+  const { src: portraitSrc, onError: portraitOnError } = usePortraitSrc(
+    character.id,
+    character.portrait
+  );
 
   const age = character.nameday
     ? computeAge(character.nameday, worldDate)
@@ -68,9 +84,9 @@ export default function CharacterInfoBox({ character }: Props) {
           src={portraitSrc}
           alt={character.name}
           fill
-          preload
           sizes="340px"
           style={{ objectFit: "cover" }}
+          onError={portraitOnError}
         />
       </div>
 
@@ -116,7 +132,6 @@ export default function CharacterInfoBox({ character }: Props) {
         <InfoRow label="Nameday" value={namedayLabel} />
         <InfoRow label="Height" value={character.height ?? "-"} />
         <InfoRow label="Dragon" value={character.dragon ?? "-"} />
-
         <InfoRow label="Father" value={getCharacterName(character.father)} />
         <InfoRow label="Mother" value={getCharacterName(character.mother)} />
         <InfoRow label="Spouse" value={getCharacterName(character.spouse)} />
