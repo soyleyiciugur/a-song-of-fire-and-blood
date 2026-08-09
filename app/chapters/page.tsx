@@ -133,25 +133,60 @@ function ChaptersHubContent() {
   // ── hover bubble: compute the hovered row's vertical position
   // relative to the page container, so the bubble lines up with it
   // regardless of scroll position.
+  //
+  // The hide side is debounced: hovering near a row's inner edges (the
+  // gap between the row's own padding and its child <span>) can fire a
+  // spurious mouseleave/mouseenter pair even while the pointer never
+  // actually left the clickable box, which made the bubble flicker off
+  // and back on. Scheduling the hide a beat later — and cancelling that
+  // timeout if a new (or the same) row's mouseenter arrives first —
+  // means the bubble only ever disappears once the pointer has
+  // genuinely stayed outside every row for that beat.
+  const hideTimeoutRef = useRef<number | null>(null);
+
+  const clearHideTimeout = useCallback(() => {
+    if (hideTimeoutRef.current !== null) {
+      window.clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  }, []);
+
   const showBubble = useCallback((ch: Chapter, rowEl: HTMLElement) => {
+    clearHideTimeout();
     const pageEl = tocPageRef.current;
     if (!pageEl) return;
     const rowRect = rowEl.getBoundingClientRect();
     const pageRect = pageEl.getBoundingClientRect();
     const top = rowRect.top - pageRect.top + rowRect.height / 2;
-    setBubble({
-      slug: ch.slug,
-      title: chapterTitle(ch, lang),
-      synopsis: chapterSynopsis(ch, lang),
-      top,
+    setBubble((prev) => {
+      // skip the update (and the resulting re-render) if nothing
+      // actually changed — avoids restarting anything for no reason
+      if (prev && prev.slug === ch.slug && prev.top === top) return prev;
+      return {
+        slug: ch.slug,
+        title: chapterTitle(ch, lang),
+        synopsis: chapterSynopsis(ch, lang),
+        top,
+      };
     });
-  }, [lang]);
+  }, [lang, clearHideTimeout]);
 
-  const hideBubble = useCallback(() => setBubble(null), []);
+  const hideBubble = useCallback(() => {
+    clearHideTimeout();
+    hideTimeoutRef.current = window.setTimeout(() => {
+      setBubble(null);
+      hideTimeoutRef.current = null;
+    }, 60);
+  }, [clearHideTimeout]);
+
+  useEffect(() => clearHideTimeout, [clearHideTimeout]);
 
   // clear the bubble if the list is scrolled so it doesn't hang in a
   // stale position
-  const handleListScroll = useCallback(() => setBubble(null), []);
+  const handleListScroll = useCallback(() => {
+    clearHideTimeout();
+    setBubble(null);
+  }, [clearHideTimeout]);
 
   const bookmarkChapter = bookmark ? chapters.find(c => c.slug === bookmark.slug) : null;
   const coverOpen = phase !== "cover";
@@ -225,6 +260,12 @@ function ChaptersHubContent() {
           <span className={styles.spineText}>A Song of Fire and Blood</span>
           <span className={styles.spineOrnament}>✦ ✦ ✦</span>
         </div>
+
+        {/* ── right spine: mirrors the real spine so the open spread reads
+              as one bound book behind the ToC page too, not just the
+              cover. Purely decorative — no title text, just the same
+              leather. Only visible once open (see .bookOpen .spineRight). ── */}
+        <div className={styles.spineRight} aria-hidden />
 
         {/* ── COVER CARD: front cover + inside-left page ── */}
         <div

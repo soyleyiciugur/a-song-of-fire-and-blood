@@ -248,7 +248,7 @@
 .bookOpening,
 .bookOpen,
 .bookClosing {
-  width: calc(var(--book-w) * 2 + var(--spine-w));
+  width: calc(var(--book-w) * 2 + var(--spine-w) * 2);
 }
 
 /* Idle hover tilt — rotates FURTHER (not less) so the flat leather
@@ -322,6 +322,42 @@
   gap: 16px;
   border-left: 1px solid var(--gold-dark);
   border-right: 1px solid rgba(0,0,0,0.8);
+}
+
+/* ── RIGHT SPINE — a mirrored duplicate that sits behind/after the ToC
+   page, matching the real spine on the left so the whole open spread
+   reads as one bound book rather than a page trailing off into nothing.
+   Only shown once the book is open (it has no reason to exist on the
+   closed cover, and its `left` position is computed for the OPEN
+   spread's width). Purely decorative — no title text, just the same
+   leather + ornament so it doesn't visually compete with the real spine. ── */
+.spineRight {
+  position: absolute;
+  left: calc(var(--spine-w) + var(--book-w) * 2);
+  top: 0;
+  width: var(--spine-w);
+  height: var(--book-h);
+  transform-origin: left center;
+  transform: rotateY(90deg) translateX(calc(var(--spine-w) / 2)) translateZ(calc(var(--spine-w) / 2));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: linear-gradient(180deg,
+    #0e0803 0%,
+    var(--leather-mid) 15%,
+    var(--leather) 50%,
+    var(--leather-mid) 85%,
+    #0e0803 100%);
+  box-shadow: inset 4px 0 10px rgba(0,0,0,0.6), inset -4px 0 8px rgba(212,168,64,0.08);
+  border-left: 1px solid rgba(0,0,0,0.8);
+  border-right: 1px solid var(--gold-dark);
+  opacity: 0;
+  transition: opacity 0.3s ease 0.3s;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.bookOpen .spineRight {
+  opacity: 1;
 }
 
 .spineText {
