@@ -984,7 +984,7 @@ export default function InteractiveMap() {
                                 <span>
                                   {c?.name ?? entry.id}
                                   {entry.status === "dead" && (
-                                    <span className={styles.flyoutFadedTag}> (presumed dead)</span>
+                                    <span className={styles.flyoutFadedTag}> (dead)</span>
                                   )}
                                   {entry.status === "unknown" && (
                                     <span className={styles.flyoutFadedTag}> (whereabouts unknown)</span>

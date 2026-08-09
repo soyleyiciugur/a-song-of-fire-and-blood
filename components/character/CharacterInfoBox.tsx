@@ -11,7 +11,14 @@ type Props = {
   character: Character;
 };
 
-const DEFAULT_PORTRAIT = "/images/characters/{id}.webp";
+const DEFAULT_PORTRAIT = "/images/characters/{id}.{ext}";
+
+// Usage
+const getPortrait = (id: string, ext: string = 'webp') => {
+  return DEFAULT_PORTRAIT
+    .replace('{id}', id)
+    .replace('{ext}', ext); // Passes 'png', 'jpg', etc.
+};
 
 function isValidValue(value?: string | null) {
   return value && value !== "-" ? value : null;
