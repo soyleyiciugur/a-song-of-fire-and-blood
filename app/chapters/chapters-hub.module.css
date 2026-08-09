@@ -737,11 +737,30 @@
   pointer-events: none; /* never intercepts hover/click itself */
 }
 
+/* Native :hover/:focus-visible is the PRIMARY visual highlight — it's
+   driven directly by the browser's own hit-testing against the button's
+   actual box, so it's pixel-exact and has zero possible dead zones.
+   .tocEntryHovered (the React-state-driven class, tied to whichever row
+   the bubble is anchored to) stays in sync with this for the normal
+   case, but previously it was the ONLY source of the highlight — which
+   meant the highlight was only as responsive as React's render cycle,
+   and any timing hiccup there showed up as patches of the row that
+   didn't visually light up even though the button underneath was still
+   fully clickable. */
+.tocEntry:hover,
+.tocEntry:focus-visible,
 .tocEntryHovered {
   background: rgba(180, 140, 40, 0.14);
 }
+.tocEntry:hover::before,
+.tocEntry:focus-visible::before,
 .tocEntryHovered::before {
   transform: translateY(-50%) scaleX(1);
+}
+.tocEntry:hover .tocEntryTitle,
+.tocEntry:focus-visible .tocEntryTitle,
+.tocEntryHovered .tocEntryTitle {
+  color: var(--gold-bright);
 }
 .tocEntryActive {
   background: rgba(180, 140, 40, 0.22);
@@ -756,9 +775,6 @@
   line-height: 1.35;
   letter-spacing: 0.01em;
   transition: color 0.18s;
-}
-.tocEntryHovered .tocEntryTitle {
-  color: var(--gold-bright);
 }
 
 /* ── synopsis bubble — a floating card anchored to whichever entry is
