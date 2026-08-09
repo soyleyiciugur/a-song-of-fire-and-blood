@@ -316,7 +316,7 @@
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d;  ← remove */
   transform-origin: left center;
   transform: rotateY(0deg);
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
