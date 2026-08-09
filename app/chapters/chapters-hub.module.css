@@ -543,7 +543,7 @@
    ══════════════════════════════════════════════════════════ */
 .tocSpread {
   position: absolute;
-  left: calc(var(--spine-w) + var(--book-w));
+  left: var(--spine-w);    /* sits directly over the cover card — right page of open spread */
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
