@@ -1,5 +1,330 @@
 [
   {
+    "id": "gallery-mslvzlmt",
+    "src": "/images/gallery/targaryen-plaj.png",
+    "caption": "+çocuklar gelin su çok güzel\n-yok moruk biz voleybol oynucaz",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen",
+      "baelenys-targaryen",
+      "maela-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvvyhv",
+    "src": "/images/gallery/targaryen-piknik.png",
+    "caption": "amca sen bişe yiyemedin ama yaa ver biraz ben bakim mangala",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "baelor-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen",
+      "jaery-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvv0jd",
+    "src": "/images/gallery/targaryen-korfez.png",
+    "caption": "başka bir evrende...",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvt2d0",
+    "src": "/images/gallery/targaryen-kiz-isteme.png",
+    "caption": "father'ın emri, mother'ın kavliyle kızınız naella'yı oğlumuz gaelor'a istiyoruz",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvs4e3",
+    "src": "/images/gallery/targaryen-bulvar-avm.png",
+    "caption": "SAMSUN HATIRASI",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "visenor-targaryen",
+      "vhaemys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvqeek",
+    "src": "/images/gallery/targaryen-bandirma.png",
+    "caption": "atatürk'ün dragonstone'dan king's landing'e geldiği vapur, bandırma the black dread",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvp15b",
+    "src": "/images/gallery/targaryen-ataturk-aniti.png",
+    "caption": "Targaryen Hanesi, 99 AC (After Atatürk's Conquest)",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvnfjl",
+    "src": "/images/gallery/targaryen-amazon-koyu.png",
+    "caption": "ejderhalar daha iyi",
+    "characterIds": [
+      "baelenys-targaryen",
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "maela-targaryen",
+      "saera-targaryen",
+      "vhaemys-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvmmr9",
+    "src": "/images/gallery/naella-nightgown.png",
+    "caption": "Princess Naella Velaryon.",
+    "characterIds": [
+      "naella-velaryon"
+    ],
+    "houseIds": [
+      "velaryon"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mslvk81f",
+    "src": "/images/gallery/lorenah-nightgown.png",
+    "caption": "Lady Lorenah Dayne.",
+    "characterIds": [
+      "lorenah-dayne"
+    ],
+    "houseIds": [
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mslvf3sd",
+    "src": "/images/gallery/jace-baelor-trial.png",
+    "caption": "trial of six seven ",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-trial",
+    "worldDate": {
+      "day": 30,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvb2l8",
+    "src": "/images/gallery/jace-atakum.png",
+    "caption": "kraliyet adına atakum körfez sahiline ziyaretlerimizi gerçekleştirdik. atakum belediyesini kutlarım. mutlaka tekrar geleceğim. - westeros başbakanı ceyhun tarıkoğlu",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslvaimb",
+    "src": "/images/gallery/jace-adana.png",
+    "caption": "adana mı yesek",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslv7yau",
+    "src": "/images/gallery/gaelor-vs-jace-tourney.jpeg",
+    "caption": "The Tilt of the Dragons",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-brothers-tilt",
+    "worldDate": {
+      "day": 18,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-08-09",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mslv4ypi",
+    "src": "/images/gallery/gaelor-jace-bisiklet.png",
+    "caption": "agalarla incesu",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mslv2fqv",
+    "src": "/images/gallery/gaelor-jace-baelenys-infirmary.jpeg",
+    "caption": "güreşip bi taraflarımızı kırdıktan sonra aynı odada yatarken kardeşcanla",
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "fireflies",
+    "worldDate": {
+      "day": 19,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-08-09",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-mskqis7u",
     "src": "/images/gallery/jace-gaelor-atakent.png",
     "caption": "what jace saw in the front camera during the tilt",
