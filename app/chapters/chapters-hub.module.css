@@ -1,5 +1,9 @@
 /* ─── C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\chapters-hub.module.css ─── */
 
+/* House of the Dragon (personal use only — see license before shipping
+   commercially: mansgreback.com/fonts/house-of-the-dragon).
+   Matches the font used on /scrolls and /records so the hub feels consistent
+   with the rest of the archive. */
 @font-face {
   font-family: "House of the Dragon";
   src: url("/fonts/HouseOfTheDragonPersonalRegular-BWnq8.otf") format("opentype");
@@ -16,7 +20,7 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   DESIGN TOKENS
+   DESIGN TOKENS (local overrides — inherited from globals)
    ══════════════════════════════════════════════════════════ */
 :root {
   --book-w: 420px;
@@ -24,6 +28,7 @@
   --spine-w: 52px;
   --cover-depth: 22px;
 
+  /* aged parchment palette */
   --parchment:     #f0e8d0;
   --parchment-mid: #e8dbbf;
   --parchment-dark:#d4c59a;
@@ -31,6 +36,7 @@
   --ink-soft:      #3d2f1a;
   --ink-faint:     #6b5535;
 
+  /* leather cover */
   --leather:       #1c0f05;
   --leather-mid:   #2e1a08;
   --leather-edge:  #0d0704;
@@ -39,21 +45,15 @@
   --gold-dark:     #7a5a1f;
   --gold-glow:     rgba(212, 168, 64, 0.35);
 
+  /* scene */
   --scene-bg:      #0a0704;
 
+  /* shared display font stack, matches /scrolls & /records */
   --hd-font: "House of the Dragon", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --page-num-font: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
 }
 
 /* ════════════════════════════════════════════════════════════
-   SCENE — the ONLY element in this file that declares `perspective`.
-   Every 3D-transformed piece of the book (bookWrap, spine, coverCard)
-   shares this single projection. Do not add `perspective` anywhere
-   else in this file — a second perspective on a nested element is
-   what caused the spine to render as a pinched/bowtie shape earlier.
-   `overflow` is intentionally NOT hidden here either — clipping an
-   ancestor of a preserve-3d tree causes the same kind of distortion.
+   SCENE — full-viewport stage
    ══════════════════════════════════════════════════════════ */
 .scene {
   position: relative;
@@ -63,11 +63,12 @@
   align-items: center;
   justify-content: center;
   background: var(--scene-bg);
+  overflow: hidden;
   perspective: 2200px;
-  perspective-origin: 50% 50%;
   user-select: none;
 }
 
+/* radial vignette overlay */
 .scene::before {
   content: "";
   position: absolute;
@@ -79,16 +80,19 @@
   z-index: 1;
 }
 
+/* when the book is open, clicking anywhere on the empty scene closes it
+   (bug #4) — the cursor hints that this area is clickable */
 .sceneClosable {
   cursor: pointer;
 }
 
+/* ── ambient dust particles ── */
 .particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden; /* clipping lives HERE, not on .scene */
+  overflow: hidden;
 }
 
 .particle {
@@ -112,7 +116,8 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   LANGUAGE TOGGLE — usual site UI font, not the display font
+   LANGUAGE TOGGLE — two independent pill buttons (bug #1 [tsx]).
+   Clicking either one selects it; they never swap position.
    ══════════════════════════════════════════════════════════ */
 .langToggle {
   position: fixed;
@@ -125,10 +130,9 @@
 }
 
 .langBtn {
-  font-family: var(--ui-font);
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--ink-faint);
   background: rgba(28, 15, 5, 0.85);
   border: 1px solid var(--gold-dark);
@@ -147,7 +151,9 @@
   border-color: var(--gold-bright);
   background: rgba(46, 26, 8, 0.9);
 }
-.langBtnActive:hover { color: var(--gold-bright); }
+.langBtnActive:hover {
+  color: var(--gold-bright);
+}
 
 /* ════════════════════════════════════════════════════════════
    CONTINUE READING BANNER
@@ -167,7 +173,6 @@
   padding: 12px 22px;
   backdrop-filter: blur(8px);
   animation: slideUp 0.5s ease both;
-  font-family: var(--ui-font);
 }
 @keyframes slideUp {
   from { opacity: 0; transform: translateX(-50%) translateY(12px); }
@@ -175,8 +180,9 @@
 }
 .continueLabel {
   font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--ink-faint);
+  text-transform: uppercase;
 }
 .continueBtn {
   display: flex;
@@ -186,10 +192,9 @@
   border: none;
   cursor: pointer;
   color: var(--gold-bright);
-  font-family: var(--hd-font);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   padding: 0;
   transition: color 0.2s;
   max-width: 280px;
@@ -209,9 +214,9 @@
   left: 50%;
   transform: translateX(-50%);
   color: var(--ink-faint);
-  font-family: var(--ui-font);
   font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   animation: pulse 3s ease-in-out infinite;
   pointer-events: none;
   z-index: 10;
@@ -223,44 +228,40 @@
 
 /* ════════════════════════════════════════════════════════════
    3-D BOOK WRAPPER
-   Centering fix: instead of manually translating the wrapper to
-   compensate for the spine/second-page overflow, the wrapper's own
-   WIDTH now grows to match what's actually visible (closed = spine +
-   1 cover, open = spine + 2 full pages). Because that width feeds
-   directly into the flex parent's centering, the browser recenters it
-   correctly on its own — no magic-number transforms needed.
-   No `perspective` here — see note on .scene above.
+   Bug #5 (centering): the wrapper is centered via the flex parent
+   (.scene) and its own transform-origin is the center of the box, so
+   the rotate/scale during opening/closing never drags it off to one
+   side. Kept explicit here so nothing downstream re-introduces a
+   left-aligned transform-origin.
    ══════════════════════════════════════════════════════════ */
 .bookWrap {
   position: relative;
   z-index: 10;
   width: calc(var(--book-w) + var(--spine-w));
   height: var(--book-h);
+  margin: 0 auto;
+  perspective: 1600px;              /* add */
   transform-style: preserve-3d;
   transform-origin: center center;
   transform: rotateX(4deg) rotateY(-28deg);
-  transition: transform 0.4s ease, width 0.5s ease;
+  transition: transform 0.4s ease;
   cursor: pointer;
 }
 
-/* open/opening/closing all need the wider (2-page) footprint so the
-   spread is centered as a whole, not just the cover */
-.bookOpening,
-.bookOpen,
-.bookClosing {
-  width: calc(var(--book-w) * 2 + var(--spine-w));
+.bookOpen .cover,
+.bookClosing .cover {
+  visibility: hidden;
 }
 
-/* Idle hover tilt — rotates FURTHER (not less) so the flat leather
-   spine face actually turns toward the camera and reads clearly,
-   instead of hiding it. */
+/* Idle hover tilt (only on cover phase — pointer-events handled by JS but
+   we animate purely via CSS :hover when no class overrides exist) */
 .bookWrap:not(.bookOpen):not(.bookOpening):not(.bookClosing):hover {
-  transform: rotateX(2deg) rotateY(-38deg);
+  transform: rotateX(2deg) rotateY(-18deg);
 }
 
+/* ── Opening animation: book swings flat/open ── */
 .bookOpening {
   animation: bookSwingOpen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  transition: width 0.9s ease;
   cursor: default;
 }
 @keyframes bookSwingOpen {
@@ -269,16 +270,16 @@
   100% { transform: rotateX(2deg)  rotateY(0deg)   scale(1.06); }
 }
 
+/* ── Open/resting state ── */
 .bookOpen {
   transform: rotateX(2deg) rotateY(0deg) scale(1.06);
-  transition: width 0.3s ease;
   cursor: default;
   pointer-events: auto;
 }
 
+/* ── Closing animation ── */
 .bookClosing {
   animation: bookSwingClose 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  transition: width 0.7s ease;
   cursor: default;
   pointer-events: none;
 }
@@ -289,10 +290,7 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   SPINE — folded flat via a single rotateY(-90deg). This works
-   cleanly as long as it's projected through exactly ONE perspective
-   (see .scene). Do not add a second perspective anywhere upstream of
-   this element or it will distort.
+   SPINE
    ══════════════════════════════════════════════════════════ */
 .spine {
   position: absolute;
@@ -302,8 +300,6 @@
   height: var(--book-h);
   transform-origin: right center;
   transform: rotateY(-90deg) translateX(calc(-1 * var(--spine-w) / 2)) translateZ(calc(var(--spine-w) / 2));
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   background: linear-gradient(180deg,
     #0e0803 0%,
     var(--leather-mid) 15%,
@@ -340,9 +336,22 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   COVER CARD — one physical card, two faces (front cover / inside
-   cover). Nested preserve-3d here is fine — it's not what caused the
-   spine bug (that was a second `perspective`, now removed).
+   COVER CARD — one physical card, two faces (bug #2 fix)
+   The old markup had .cover (front) and .coverBack (back) as two
+   independent siblings, each getting its own rotateY(-180deg) toggle.
+   That's why the back read mirrored: two separately-spinning planes
+   don't behave like one card with a front and back.
+   Now .coverCard is the single element that actually rotates; .cover
+   and .coverBack are its two faces, positioned with inset:0 and each
+   marked backface-visibility:hidden so only the face currently facing
+   the viewer is shown. .coverBack is permanently pre-rotated 180deg in
+   its own local space, so once .coverCard flips to -180deg, the back
+   face lands right-side-up instead of mirrored (bug #2).
+   backface-visibility:hidden on .cover itself is also what fixes bug
+   #1 — previously the front cover had no backface-visibility rule, so
+   during the flip the browser kept rendering the (now backwards)
+   front face on top of/behind the back face inconsistently, which is
+   why the title text seemed to only "appear" partway through opening.
    ══════════════════════════════════════════════════════════ */
 .coverCard {
   position: absolute;
@@ -355,17 +364,17 @@
   transform: rotateY(0deg);
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
-  z-index: 6;
 }
 
+/* driven by phase !== "cover" in the component */
 .coverCardFlipped {
   transform: rotateY(-180deg);
-  pointer-events: none;
+  pointer-events: none;   /* add — can't block ToC clicks once open */
 }
 
 .bookClosing .coverCard {
   animation: coverClose 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  pointer-events: none;
+  pointer-events: none;   /* also disable mid-close, re-enabled once fully closed */
 }
 @keyframes coverClose {
   from { transform: rotateY(-180deg); }
@@ -384,36 +393,65 @@
     0 8px 32px rgba(0,0,0,0.6);
 }
 
-.coverCard:not(.coverCardFlipped) .cover { visibility: visible; }
-.coverCardFlipped .cover { visibility: hidden; }
+/* .cover is only ever visible while the book is closed */
+.coverCard:not(.coverCardFlipped) .cover {
+  visibility: visible;
+}
+.coverCardFlipped .cover {
+  visibility: hidden;
+}
 
-.coverCard:not(.coverCardFlipped) .coverBack { visibility: hidden; }
-.coverCardFlipped .coverBack { visibility: visible; }
+/* .coverBack is only ever visible while the book is open */
+.coverCard:not(.coverCardFlipped) .coverBack {
+  visibility: hidden;
+}
+.coverCardFlipped .coverBack {
+  visibility: visible;
+}
 
+/* leather texture via pseudo-element */
 .cover::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px),
-    repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(0,0,0,0.04) 5px, rgba(0,0,0,0.04) 6px);
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.07) 3px,
+      rgba(0,0,0,0.07) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 5px,
+      rgba(0,0,0,0.04) 5px,
+      rgba(0,0,0,0.04) 6px
+    );
   pointer-events: none;
 }
 
+/* worn edge vignette */
 .cover::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 85% 80% at 50% 50%, transparent 55%, rgba(0,0,0,0.45) 100%);
+  background: radial-gradient(ellipse 85% 80% at 50% 50%,
+    transparent 55%,
+    rgba(0,0,0,0.45) 100%);
   pointer-events: none;
 }
 
+/* gold border inset */
 .coverBorder {
   position: absolute;
   inset: 14px;
   border: 2px solid var(--gold-dark);
   border-radius: 2px;
-  box-shadow: inset 0 0 12px rgba(212,168,64,0.06), 0 0 0 1px rgba(212,168,64,0.15);
+  box-shadow:
+    inset 0 0 12px rgba(212,168,64,0.06),
+    0 0 0 1px rgba(212,168,64,0.15);
   pointer-events: none;
   z-index: 1;
 }
@@ -425,6 +463,7 @@
   border-radius: 1px;
 }
 
+/* cover content */
 .coverInner {
   position: relative;
   z-index: 2;
@@ -434,13 +473,17 @@
   align-items: center;
   justify-content: center;
   padding: 40px 36px;
+  gap: 0;
   backface-visibility: hidden;
 }
 
 .coverEyebrow {
   font-family: var(--hd-font);
   font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.28em;
+  /* bug #3: all-caps parts of House of the Dragon should be styled via
+     text-transform onto title case source text, not typed in caps */
+  text-transform: capitalize;
   color: var(--gold-dark);
   margin-bottom: 18px;
 }
@@ -453,7 +496,9 @@
   text-align: center;
   color: var(--gold-bright);
   margin: 0;
-  text-shadow: 0 0 30px var(--gold-glow), 0 2px 8px rgba(0,0,0,0.8);
+  text-shadow:
+    0 0 30px var(--gold-glow),
+    0 2px 8px rgba(0,0,0,0.8);
   letter-spacing: 0.02em;
 }
 
@@ -470,7 +515,7 @@
   font-style: italic;
   color: var(--ink-faint);
   text-align: center;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   margin: 0;
   line-height: 1.5;
 }
@@ -483,34 +528,40 @@
   text-align: center;
   font-family: var(--hd-font);
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   color: var(--gold-dark);
   animation: pulse 3s ease-in-out infinite;
 }
 
+/* sheen / gloss effect */
 .coverSheen {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%, rgba(0,0,0,0.08) 100%);
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.06) 0%,
+    transparent 50%,
+    rgba(0,0,0,0.08) 100%);
   pointer-events: none;
   z-index: 3;
 }
 
-/* ── BACK FACE (inside-left page) — already correct, unchanged ── */
+/* ── BACK FACE (inside-left page): same title + description as the
+      front, minus the "open to begin" prompt — pre-rotated 180deg so
+      it reads correctly once exposed (bug #2). ── */
 .coverBack {
   position: absolute;
   inset: 0;
   transform: rotateY(180deg);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+
+  /* aged paper */
   background: linear-gradient(160deg, #f2e9d0 0%, #e8dbbf 60%, #ddd0ab 100%);
   border-radius: 0 3px 3px 0;
   overflow: hidden;
 }
 
 .insideLeft {
-  position: relative;
-  z-index: 2;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -541,20 +592,19 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   TABLE OF CONTENTS — ONE full page, positioned to the RIGHT of the
-   cover card (a real second page of the open spread, not overlapping
-   it). Single scrollable list, no left/right split.
+   TABLE OF CONTENTS SPREAD
    ══════════════════════════════════════════════════════════ */
 .tocSpread {
   position: absolute;
-  left: calc(var(--spine-w) + var(--book-w));
+  left: var(--spine-w);
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
+  display: flex;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease 0.3s;
-  z-index: 5;
+  z-index: 10;             /* add */
 }
 
 .bookOpen .tocSpread {
@@ -562,29 +612,42 @@
   pointer-events: auto;
 }
 
-.tocPage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: linear-gradient(160deg, #f5ecd4 0%, #ece0c0 60%, #e2d4a8 100%);
-  border-radius: 0 3px 3px 0;
-  box-shadow: inset 2px 0 6px rgba(0,0,0,0.1);
-}
-
-/* left-edge gutter shadow where this page meets the inside cover */
-.tocPage::before {
+/* center gutter shadow */
+.tocSpread::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
   width: 18px;
   height: 100%;
-  background: linear-gradient(90deg, rgba(0,0,0,0.15) 0%, transparent 100%);
+  transform: translateX(-50%);
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.04) 40%,
+    rgba(0,0,0,0.04) 60%,
+    rgba(0,0,0,0.15) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
+.tocPage {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: linear-gradient(160deg, #f5ecd4 0%, #ece0c0 60%, #e2d4a8 100%);
+}
+
+.tocLeft {
+  border-radius: 0;
+  box-shadow: inset -2px 0 6px rgba(0,0,0,0.12);
+}
+
+.tocRight {
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 2px 0 6px rgba(0,0,0,0.1);
+}
+
+/* subtle aged paper texture */
 .pageTexture {
   position: absolute;
   inset: 0;
@@ -597,7 +660,7 @@
 .tocPageInner {
   position: relative;
   z-index: 2;
-  padding: 32px 30px 26px;
+  padding: 28px 24px 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -606,13 +669,13 @@
 
 .tocHeader {
   font-family: var(--hd-font);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.3em;
+  text-transform: capitalize;
   color: var(--ink-soft);
   text-align: center;
-  margin-bottom: 12px;
-  flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
 .tocDividerLine {
@@ -620,18 +683,21 @@
   background: linear-gradient(90deg, transparent, var(--ink-faint), transparent);
   margin-bottom: 16px;
   opacity: 0.5;
-  flex-shrink: 0;
 }
 
+/* bug #8 (legacy): overflow was `hidden` with no scrolling, so any
+   chapters that didn't fit the fixed page height were rendered
+   completely out of view and unreachable/unclickable. Scroll instead
+   of clip, with a slim themed scrollbar. */
 .tocList {
   list-style: none;
   margin: 0;
-  padding: 0 4px 4px 0;
+  padding: 0 2px 0 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   flex: 1;
-  min-height: 0;
+  min-height: 0;           /* add — lets flex+overflow compute correctly */
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
@@ -644,14 +710,17 @@
 }
 .tocList::-webkit-scrollbar-track { background: transparent; }
 
+/* ── individual ToC entry — the whole card (title + synopsis) is the
+   clickable hit area ── */
 .tocEntry {
-  padding: 10px 12px;
+  padding: 9px 10px;
   border-radius: 3px;
   cursor: pointer;
-  transition: background 0.18s ease;
+  transition: background 0.18s ease, transform 0.15s ease;
   outline: none;
   position: relative;
-  flex-shrink: 0;
+  z-index: 5;              /* add — lift above any overlay */
+  isolation: isolate;      /* add — own stacking context */
 }
 
 .tocEntry::before {
@@ -670,95 +739,77 @@
 
 .tocEntryHovered {
   background: rgba(180, 140, 40, 0.14);
+  transform: translateX(3px);
 }
+
 .tocEntryHovered::before {
   transform: translateY(-50%) scaleX(1);
 }
+
 .tocEntryActive {
   background: rgba(180, 140, 40, 0.22);
+  transform: translateX(5px);
 }
 
+/* bug #3 (contents font) + bug #6 (readability): the Contents entries
+   now use the House of the Dragon display font throughout, and use the
+   same warm gold tone as the cover title (instead of dark ink-on-ink)
+   so they're actually legible against the parchment. */
 .tocEntryTitle {
   display: block;
   font-family: var(--hd-font);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--gold-dark);
-  line-height: 1.35;
+  line-height: 1.3;
+  margin-bottom: 4px;
   letter-spacing: 0.01em;
   transition: color 0.18s;
 }
+
 .tocEntryHovered .tocEntryTitle {
   color: var(--gold-bright);
 }
 
-/* ── synopsis bubble — a floating card anchored to whichever entry is
-   hovered. It's a SIBLING of .tocList (not a descendant), so the
-   list's own vertical scroll-clipping never clips it; positioning
-   (top offset) is computed in JS and passed in as an inline style. ── */
-.tocBubble {
-  position: absolute;
-  left: calc(100% + 16px);
-  width: 240px;
-  transform: translateY(-50%);
-  background: rgba(20, 11, 4, 0.96);
-  border: 1px solid var(--gold-dark);
-  border-radius: 6px;
-  padding: 16px 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,168,64,0.08);
-  pointer-events: none;
-  z-index: 50;
-  animation: bubbleIn 0.16s ease both;
+.tocDots {
+  display: none; /* decorative only — kept for future use */
 }
 
-/* small pointer triangle aimed back at the page */
-.tocBubble::before {
-  content: "";
-  position: absolute;
-  left: -7px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  border-right: 7px solid var(--gold-dark);
-}
+/* bug #3 + #6: synopsis also switches to the display font and to the
+   warm gold-brown tone (still slightly darker/quieter than the title
+   so hierarchy reads clearly, but well above the old near-illegible
+   ink-faint-on-parchment contrast). */
+.tocSynopsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 
-@keyframes bubbleIn {
-  from { opacity: 0; transform: translateY(-50%) translateX(-4px); }
-  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
-}
-
-.tocBubbleTitle {
   font-family: var(--hd-font);
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: var(--gold-bright);
-  margin: 0 0 8px;
-  line-height: 1.3;
-}
-
-.tocBubbleText {
-  font-family: var(--hd-font);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-style: italic;
-  color: var(--parchment-mid);
-  line-height: 1.55;
-  margin: 0;
+  color: var(--gold-mid);
+  line-height: 1.5;
 }
 
-/* page numbers — the one place that keeps the Palatino/serif stack */
+/* page numbers — intentionally the ONLY text left on the non-display
+   serif stack (bug #3) */
 .pageNumber {
   position: absolute;
   bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--page-num-font);
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   font-size: 0.68rem;
   font-style: italic;
   color: var(--ink-faint);
   letter-spacing: 0.06em;
+}
+.pageNumberRight {
+  left: auto;
+  right: 24px;
+  transform: none;
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -773,7 +824,9 @@
   transform: translateZ(calc(-1 * var(--cover-depth)));
   background: linear-gradient(160deg, var(--leather-mid) 0%, var(--leather) 100%);
   border-radius: 0 3px 3px 0;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.7),
+    0 2px 8px rgba(0,0,0,0.5);
 }
 
 .backCoverInner {
@@ -790,14 +843,8 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   RESPONSIVE — on narrow screens the hover bubble has nowhere to go,
-   so it's disabled below 900px and the synopsis just isn't shown
-   inline (title-only list); everything still opens/navigates fine.
+   RESPONSIVE
    ══════════════════════════════════════════════════════════ */
-@media (max-width: 900px) {
-  .tocBubble { display: none; }
-}
-
 @media (max-width: 600px) {
   :root {
     --book-w: 300px;
@@ -806,10 +853,11 @@
   }
 
   .coverTitle { font-size: 2.1rem; }
-  .tocHeader  { font-size: 0.72rem; }
-  .tocEntryTitle { font-size: 0.84rem; }
-  .tocPageInner  { padding: 22px 18px 18px; }
-  .tocEntry      { padding: 8px 10px; }
+  .tocHeader  { font-size: 0.65rem; }
+  .tocEntryTitle { font-size: 0.8rem; }
+  .tocSynopsis   { font-size: 0.7rem; }
+  .tocPageInner  { padding: 20px 16px 16px; }
+  .tocEntry      { padding: 7px 8px; }
 
   .continueBanner {
     flex-direction: column;
@@ -829,6 +877,5 @@
   .bookClosing { animation: none; }
   .bookOpen    { transform: rotateX(2deg) rotateY(0deg) scale(1.06); }
 
-  .coverCard  { transition: transform 0.3s ease; }
-  .tocBubble  { animation: none; }
+  .coverCard { transition: transform 0.3s ease; }
 }
