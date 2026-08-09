@@ -266,11 +266,15 @@
 @keyframes bookSwingOpen {
   0%   { transform: rotateX(4deg)  rotateY(-28deg) scale(1); }
   30%  { transform: rotateX(6deg)  rotateY(-45deg) scale(1.04); }
-  100% { transform: rotateX(2deg)  rotateY(0deg)   scale(1.06); }
+  100% { transform: rotateX(2deg)  rotateY(-8deg)  scale(1.06); }
 }
 
 .bookOpen {
-  transform: rotateX(2deg) rotateY(0deg) scale(1.06);
+  /* -8deg, not 0deg: at a dead-flat 0deg the folded spine (rotateY(-90deg)
+     relative to this) is viewed exactly edge-on and disappears. Keeping a
+     small residual angle here, in the same direction as the resting/hover
+     tilt, keeps the spine visibly turned toward the camera. */
+  transform: rotateX(2deg) rotateY(-8deg) scale(1.06);
   transition: width 0.3s ease;
   cursor: default;
   pointer-events: auto;
@@ -283,7 +287,7 @@
   pointer-events: none;
 }
 @keyframes bookSwingClose {
-  0%   { transform: rotateX(2deg)  rotateY(0deg)   scale(1.06); }
+  0%   { transform: rotateX(2deg)  rotateY(-8deg)  scale(1.06); }
   40%  { transform: rotateX(6deg)  rotateY(-45deg) scale(1.04); }
   100% { transform: rotateX(12deg) rotateY(-70deg) scale(0.9); }
 }
@@ -351,7 +355,12 @@
   width: var(--book-w);
   height: var(--book-h);
   transform-style: preserve-3d;
-  transform-origin: left center;
+  /* center, not left — flipping around the left edge swings the whole
+     card out to the mirrored position on the OTHER side of that edge
+     (i.e. off into negative-x space, detached from the spine). Pivoting
+     on the card's own center makes it flip in place, staying flush
+     against the spine on one side and the ToC page on the other. */
+  transform-origin: center center;
   transform: rotateY(0deg);
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
@@ -838,7 +847,7 @@
 
   .bookOpening,
   .bookClosing { animation: none; }
-  .bookOpen    { transform: rotateX(2deg) rotateY(0deg) scale(1.06); }
+  .bookOpen    { transform: rotateX(2deg) rotateY(-8deg) scale(1.06); }
 
   .coverCard  { transition: transform 0.3s ease; }
   .tocBubble  { animation: none; }

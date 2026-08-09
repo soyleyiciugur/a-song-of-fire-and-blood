@@ -303,20 +303,26 @@ function ChaptersHubContent() {
                 ))}
               </ul>
             </div>
-
-            {/* floating synopsis bubble — sibling of the scrolling list,
-                so its own overflow never clips it */}
-            {bubble && (
-              <div
-                className={styles.tocBubble}
-                style={{ top: bubble.top }}
-                aria-hidden
-              >
-                <div className={styles.tocBubbleTitle}>{bubble.title}</div>
-                <p className={styles.tocBubbleText}>{bubble.synopsis}</p>
-              </div>
-            )}
           </div>
+
+          {/* floating synopsis bubble — a sibling of .tocPage, NOT a child
+              of it. .tocPage has overflow:hidden (for its rounded corner /
+              texture), which was silently clipping the bubble entirely
+              since it renders outside the page's own right edge. .tocSpread
+              has no overflow set, so positioning it here lets it actually
+              show up. Its "top" offset is still computed relative to
+              tocPageRef, so it lines up with the hovered row exactly as
+              before. */}
+          {bubble && (
+            <div
+              className={styles.tocBubble}
+              style={{ top: bubble.top }}
+              aria-hidden
+            >
+              <div className={styles.tocBubbleTitle}>{bubble.title}</div>
+              <p className={styles.tocBubbleText}>{bubble.synopsis}</p>
+            </div>
+          )}
         </div>
 
         {/* ── back cover ── */}
