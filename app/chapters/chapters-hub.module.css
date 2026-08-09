@@ -269,9 +269,11 @@
   height: var(--book-h);
   transform-origin: right center;
   transform:
-    rotateY(-85deg)
+    rotateY(-89.9deg)
     translateX(calc(-1 * var(--spine-w) / 2))
-    translateZ(calc(var(--spine-w) / 2 * 0.996)); /* sin(85deg) ≈ 0.996, keeps the edge aligned with the cover */
+    translateZ(calc(var(--spine-w) / 2));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background: linear-gradient(180deg,
     #0e0803 0%,
     var(--leather-mid) 15%,
@@ -316,7 +318,7 @@
   top: 0;
   width: var(--book-w);
   height: var(--book-h);
-  /* transform-style: preserve-3d;  ← remove */
+  transform-style: preserve-3d;
   transform-origin: left center;
   transform: rotateY(0deg);
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
