@@ -689,9 +689,32 @@
 }
 .tocList::-webkit-scrollbar-track { background: transparent; }
 
+/* the <li> is now just a flex/list wrapper — all padding, background,
+   and interactivity live on the <button> (.tocEntry) inside it */
+.tocEntryItem {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+}
+
 .tocEntry {
+  /* now applied to a real <button>, not a <li role="button"> — a native
+     button is inherently the whole padded box as one hit target, with
+     no gap between the "visual" row and the "actual" clickable area
+     for the pointer to slip through (which is what was causing the
+     hover to stutter). width:100% + box-sizing:border-box guarantees
+     it fills the row identically regardless of how much text is in it
+     (so EN vs TR renders the exact same hit area). */
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
   padding: 10px 12px;
+  margin: 0;
+  border: none;
   border-radius: 3px;
+  background: none;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
   transition: background 0.18s ease;
   outline: none;
@@ -711,6 +734,7 @@
   border-radius: 2px;
   transition: transform 0.2s ease;
   transform-origin: center;
+  pointer-events: none; /* never intercepts hover/click itself */
 }
 
 .tocEntryHovered {

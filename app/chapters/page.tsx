@@ -323,23 +323,22 @@ function ChaptersHubContent() {
                 onScroll={handleListScroll}
               >
                 {chapters.map((ch) => (
-                  <li
-                    key={ch.slug}
-                    className={[
-                      styles.tocEntry,
-                      bubble?.slug === ch.slug ? styles.tocEntryHovered : "",
-                      pendingSlug === ch.slug ? styles.tocEntryActive : "",
-                    ].filter(Boolean).join(" ")}
-                    onMouseEnter={(e) => showBubble(ch, e.currentTarget)}
-                    onMouseLeave={hideBubble}
-                    onFocus={(e) => showBubble(ch, e.currentTarget)}
-                    onBlur={hideBubble}
-                    onClick={() => goToChapter(ch.slug)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && goToChapter(ch.slug)}
-                  >
-                    <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
+                  <li key={ch.slug} className={styles.tocEntryItem}>
+                    <button
+                      type="button"
+                      className={[
+                        styles.tocEntry,
+                        bubble?.slug === ch.slug ? styles.tocEntryHovered : "",
+                        pendingSlug === ch.slug ? styles.tocEntryActive : "",
+                      ].filter(Boolean).join(" ")}
+                      onMouseEnter={(e) => showBubble(ch, e.currentTarget)}
+                      onMouseLeave={hideBubble}
+                      onFocus={(e) => showBubble(ch, e.currentTarget)}
+                      onBlur={hideBubble}
+                      onClick={() => goToChapter(ch.slug)}
+                    >
+                      <span className={styles.tocEntryTitle}>{chapterTitle(ch, lang)}</span>
+                    </button>
                   </li>
                 ))}
               </ul>
