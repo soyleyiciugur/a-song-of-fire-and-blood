@@ -57,11 +57,11 @@ export default function FamilyTree() {
 
             <FamilyUnit
               parentA={{ id: "vahaemon-targaryen" }}
-              parentB={{ name: "Naela Velaryon" }}
+              parentB={{ id: "naela-targaryen" }}
               childrenLabel="Children"
             >
               <PersonNode id="rhaella-targaryen" />
-              <PersonNode name="Unnamed sibling" />
+              <PersonNode id="visenya-targaryen" />
             </FamilyUnit>
           </div>
 
@@ -84,6 +84,20 @@ export default function FamilyTree() {
               <PersonNode id="timos-hightower" />
               <PersonNode id="alysanne-hightower" />
               <PersonNode id="melessa-hightower" />
+            </FamilyUnit>
+          </div>
+        </section>
+
+        {/* HOUSE TYRELL */}
+        <section id="house-tyrell" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Tyrell</h2>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit
+              parentA={{ id: "renrose-tyrell" }}
+              childrenLabel="Children"
+            >
+              <PersonNode id="leo-tyrell" />
             </FamilyUnit>
           </div>
         </section>
