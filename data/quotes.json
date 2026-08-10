@@ -742,5 +742,77 @@
     "chapterSlug": "the-trial",
     "chapterTitle": "Chapter XII: The Trial",
     "note": "delivering the controversial verdict"
+  },
+  {
+    "text": "Is that so terrible?",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "when Baelor accuses him of humiliating Gaelor"
+  },
+  {
+    "text": "Because if you reside within these walls, you do not adapt to the Faith. The Faith adapts to you!",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "berating Jace for appeasing the High Septon"
+  },
+  {
+    "text": "A Septon speaks loudly to the crowd, but when you look him in the eye, he stares at his own boots in fear!",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "ranting about the Faith"
+  },
+  {
+    "text": "If you do not accept it, you can take this brooch from my chest whenever you please. But know that I recognize no such king.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "defying Gaelor's claim"
+  },
+  {
+    "text": "All this idea of being just... we are the ones who define it. What is just and what is not is determined by two words leaving my mouth.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "to Jace, asserting absolute royal authority"
+  },
+  {
+    "text": "If this man actually manages to kill Gaelor, he will have done the Crown a favor!",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "spitting venom about his brother"
+  },
+  {
+    "text": "There is only one rule! One of you will be King, and the other will protect him, clean up his messes, no matter what! And you are that man!",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "King Baelenys Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "pinning Jace to the table by his throat"
+  },
+  {
+    "text": "If you can name someone other than your eldest child as heir, why name this talentless heap of muscle?",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "to his father, challenging Gaelor's ascension"
+  },
+  {
+    "text": "As a prince, my duty is to gather as much power in the realm as possible. When I am King, he will be dealt with if necessary.",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "note": "plotting against Jace in Flea Bottom"
   }
 ]

@@ -501,5 +501,54 @@
         ]
       }
     ]
+  },
+  {
+    "chapterSlug": "the-broken-oak",
+    "chapterTitle": "Chapter XIII: The Broken Oak",
+    "date": "30th of the 7th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Gaelor strikes Jace",
+        "description": "Gaelor reaches the King's solar ahead of Jace and Baelor, raging at Baelenys. When the two brothers meet in the doorway, Gaelor throws a brutal punch that caves Jace's cheekbone. Ser Alester drags Jace into the corridor before the fight can escalate further.",
+        "date": "30th of the 7th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "jacaelon-targaryen",
+          "alester-dayne",
+          "baelor-targaryen"
+        ]
+      },
+      {
+        "title": "Jace draws his line",
+        "description": "Freed from his father's grip, Jace tells Baelenys plainly that he did not act out of spite — and that if the King can name someone other than his eldest as heir, he should. He walks out of the solar with a split lip and a parting warning: if Gaelor ever sits the throne, Jace will not recognize him as king.",
+        "date": "30th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "baelenys-targaryen",
+          "baelor-targaryen"
+        ]
+      },
+      {
+        "title": "Gaelor plots in the dark",
+        "description": "Deep in Flea Bottom, Gaelor drinks with Saathos Maris and voices his fear that Jace will plunge the realm into civil war rather than accept him as king. Saathos quietly floats Maester Cordin as a potential ally — and Gaelor begins to think in terms of gathering power.",
+        "date": "30th of the 7th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "saathos-maris",
+          "cordin-poole"
+        ]
+      },
+      {
+        "title": "Weylar's intelligence: a dragon in the city's shadow",
+        "description": "Spymaster Weylar Rocke reports to Jace that Vahaemon has agents in Flea Bottom and that a blind woman — Visenya — was tracked meeting contacts outside the district. Her mission: to find and claim a dragon rumored to descend from the Cannibal, currently migrating back from the south.",
+        "date": "30th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "weylar-rocke",
+          "visenya-targaryen",
+          "vahaemon-targaryen"
+        ]
+      }
+    ]
   }
 ]
