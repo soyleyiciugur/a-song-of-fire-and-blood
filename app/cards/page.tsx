@@ -16,8 +16,8 @@ export default function CardsPage() {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.header}>
+    <div className={styles.wrapper}>
+      <div className={styles.headerRow}>
         <h1>Character Tier List</h1>
 
         <Link href="/duel" className={styles.duelButton}>

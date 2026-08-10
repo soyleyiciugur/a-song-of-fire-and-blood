@@ -1,14 +1,11 @@
 .card {
-  width: 180px;
-  height: 280px;
   border-radius: 12px;
   padding: 1rem;
   background: var(--surface);
   border: 2px solid transparent;
   position: relative;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  will-change: transform;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -18,8 +15,7 @@
 }
 
 .card:hover {
-  transform: translateY(-8px) scale(1.04);
-  z-index: 5;
+  transform: translateY(-4px);
 }
 
 .typeBadge {
@@ -35,23 +31,24 @@
   top: 8px;
   right: 8px;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   padding: 2px 8px;
   border-radius: 6px;
 }
 
 .portrait {
   width: 100%;
-  height: 110px;
-  flex-shrink: 0;
+  aspect-ratio: 3 / 4;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .name {
   font-family: var(--font-hotd, serif);
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin: 0;
   line-height: 1.2;
   white-space: nowrap;
@@ -60,7 +57,7 @@
 }
 
 .subtitle {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   opacity: 0.85;
   margin: 2px 0 6px;
   white-space: nowrap;
@@ -73,7 +70,6 @@
   gap: 0.75rem;
   font-size: 0.8rem;
   margin-bottom: 6px;
-  flex-shrink: 0;
 }
 
 .stat {
@@ -107,32 +103,29 @@
 .s-plus {
   border-color: #d4af37;
   background: linear-gradient(160deg, #8b1e2b, #3a0a10);
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
 }
 .s-plus .tierBadge { background: #d4af37; color: #2a1a00; }
-.s-plus:hover { box-shadow: 0 0 32px rgba(212, 175, 55, 0.6); border-color: #ffd75e; }
+.s-plus:hover { box-shadow: 0 0 28px rgba(212, 175, 55, 0.55); }
 
 .s {
   border-color: #c0c0c0;
   background: linear-gradient(160deg, #4b2e6f, #1f1330);
-  box-shadow: 0 0 10px rgba(192, 192, 192, 0.2);
+  box-shadow: 0 0 10px rgba(192, 192, 192, 0.25);
 }
 .s .tierBadge { background: #c0c0c0; color: #1f1330; }
-.s:hover { box-shadow: 0 0 22px rgba(192, 192, 192, 0.45); border-color: #e6e6e6; }
 
 .a {
   border-color: #a97142;
   background: linear-gradient(160deg, #2f4a3e, #14211c);
 }
 .a .tierBadge { background: #a97142; color: #14211c; }
-.a:hover { box-shadow: 0 0 16px rgba(169, 113, 66, 0.4); border-color: #c98d55; }
 
 .b {
   border-color: #8c8c8c;
   background: #3d3d3d;
 }
 .b .tierBadge { background: #8c8c8c; color: #1a1a1a; }
-.b:hover { box-shadow: 0 0 10px rgba(140, 140, 140, 0.3); }
 
 .c {
   border-color: #7a6a58;
@@ -140,15 +133,4 @@
   box-shadow: none;
 }
 .c .tierBadge { background: #7a6a58; color: #2a2016; }
-.c:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 8px rgba(122, 106, 88, 0.3); }
-
-.portrait {
-  width: 100%;
-  height: 110px;
-  flex-shrink: 0;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  position: relative;   /* ← add this */
-  overflow: hidden;     /* ← add this so image stays clipped */
-}
+.c:hover { transform: none; }
