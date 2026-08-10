@@ -6,8 +6,8 @@
     "name": "Jacaelon Targaryen",
     "subtitle": "Hand of the King",
     "houseId": "targaryen",
-    "power": 6,
-    "influence": 10,
+    "power": 7,
+    "influence": 9,
     "keywords": ["Hand of the King", "Knight", "Dragonrider", "Schemer"],
     "abilities": [
       {
@@ -56,7 +56,7 @@
     "name": "Gaelor Targaryen",
     "subtitle": "The Housebreaker",
     "houseId": "targaryen",
-    "power": 10,
+    "power": 9,
     "influence": 7,
     "keywords": ["Heir Presumptive", "Knight", "Dragonrider", "Butcher"],
     "abilities": [
@@ -81,8 +81,8 @@
     "name": "Visenor Targaryen",
     "subtitle": "Crown Prince in Exile",
     "houseId": "targaryen",
-    "power": 5,
-    "influence": 6,
+    "power": 6,
+    "influence": 9,
     "keywords": ["Fugitive", "Scholar", "Dragonrider", "Rightful Heir"],
     "abilities": [
       {
@@ -181,8 +181,8 @@
     "name": "Ser Alester Dayne",
     "subtitle": "Kingsguard",
     "houseId": "dayne",
-    "power": 9,
-    "influence": 5,
+    "power": 10,
+    "influence": 4,
     "keywords": ["Kingsguard", "Knight", "Nearly Unkillable", "Sworn Shield"],
     "abilities": [
       {
@@ -256,8 +256,8 @@
     "name": "Vahaemon Targaryen",
     "subtitle": "The Exiled Viper",
     "houseId": "targaryen",
-    "power": 7,
-    "influence": 6,
+    "power": 8,
+    "influence": 7,
     "keywords": ["Exile", "Dragonrider", "Claimant", "Traitor"],
     "abilities": [
       {
@@ -270,7 +270,7 @@
       }
     ],
     "nemesis": ["baelenys-targaryen"],
-    "allies": ["visenya-targaryen", "rhaella-targaryen"],
+    "allies": ["visenya-targaryen"],
     "flavorQuote": "",
     "linkedCharacterId": "vahaemon-targaryen"
   },
