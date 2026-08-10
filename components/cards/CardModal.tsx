@@ -1,40 +1,56 @@
-import { notFound } from "next/navigation";
+"use client";
+
 import Link from "next/link";
-import { getAllCards, getCardById, getCardsByIds, getTiers, CARD_TYPE_ICON } from "@/lib/cards";
-import { MiniCardLink } from "@/components/cards/MiniCardLink";
-import styles from "./page.module.css";
+import { useEffect } from "react";
+import styles from "./CardModal.module.css";
+import { CARD_TYPE_ICON, getCardById, getCardsByIds, getTiers, type Card } from "@/lib/cards";
+import { MiniCardButton } from "./MiniCardButton";
 
-export function generateStaticParams() {
-  return getAllCards().map((c) => ({ cardId: c.id }));
-}
+export function CardModal({
+  cardId,
+  onClose,
+  onSelectCard,
+}: {
+  cardId: string;
+  onClose: () => void;
+  onSelectCard: (id: string) => void;
+}) {
+  const card = getCardById(cardId);
 
-export default function CardDetailPage({ params }: { params: { cardId: string } }) {
-  const card = getCardById(params.cardId);
-  if (!card) return notFound();
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  if (!card) return null;
 
   const tier = getTiers().find((t) => t.id === card.tierId);
   const nemesisCards = getCardsByIds(card.nemesis);
   const allyCards = getCardsByIds(card.allies);
 
   return (
-    <div className={styles.wrapper}>
-      <Link href="/cards" className={styles.backLink}>
-        ← Back to Tier List
-      </Link>
+    <div className={styles.overlay} onClick={onClose}>
+      <div
+        className={`${styles.modal} ${styles[card.tierId]}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button type="button" className={styles.closeButton} onClick={onClose}>
+          ✕
+        </button>
 
-      <div className={`${styles.detailCard} ${styles[card.tierId]}`}>
         <div className={styles.header}>
           <span className={styles.typeBadge}>
             {CARD_TYPE_ICON[card.cardType]} {card.cardType.toUpperCase()}
           </span>
-          <span className={styles.tierBadge}>
-            {tier?.label ?? card.tierId}
-          </span>
+          <span className={styles.tierBadge}>{tier?.label ?? card.tierId}</span>
         </div>
 
         <div className={styles.portrait} aria-hidden />
 
-        <h1 className={styles.name}>{card.name}</h1>
+        <h2 className={styles.name}>{card.name}</h2>
         <p className={styles.subtitle}>{card.subtitle}</p>
 
         <div className={styles.statBlock}>
@@ -60,7 +76,7 @@ export default function CardDetailPage({ params }: { params: { cardId: string } 
 
         {card.abilities.length > 0 && (
           <div className={styles.section}>
-            <h2>Abilities</h2>
+            <h3>Abilities</h3>
             {card.abilities.map((ab) => (
               <div key={ab.name} className={styles.ability}>
                 <strong>{ab.name}</strong>
@@ -72,18 +88,22 @@ export default function CardDetailPage({ params }: { params: { cardId: string } 
 
         {nemesisCards.length > 0 && (
           <div className={styles.section}>
-            <h2>Nemesis</h2>
+            <h3>Nemesis</h3>
             <div className={styles.relRow}>
-              {nemesisCards.map((c) => <MiniCardLink key={c.id} card={c} />)}
+              {nemesisCards.map((c) => (
+                <MiniCardButton key={c.id} card={c} onSelect={onSelectCard} />
+              ))}
             </div>
           </div>
         )}
 
         {allyCards.length > 0 && (
           <div className={styles.section}>
-            <h2>Allies</h2>
+            <h3>Allies</h3>
             <div className={styles.relRow}>
-              {allyCards.map((c) => <MiniCardLink key={c.id} card={c} />)}
+              {allyCards.map((c) => (
+                <MiniCardButton key={c.id} card={c} onSelect={onSelectCard} />
+              ))}
             </div>
           </div>
         )}

@@ -5,11 +5,13 @@
   padding: 4px 10px;
   border-radius: 999px;
   border: 1.5px solid transparent;
-  text-decoration: none;
+  cursor: pointer;
   color: inherit;
-  font-size: 0.85rem;
   background: rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+  font-family: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
 }
 
 .mini:hover {
@@ -17,6 +19,7 @@
 }
 
 .icon { font-size: 0.9rem; }
+.name { overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
 
 .s-plus { border-color: #d4af37; }
 .s { border-color: #c0c0c0; }
