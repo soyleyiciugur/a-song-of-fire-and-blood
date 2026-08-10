@@ -1,0 +1,7 @@
+[
+  { "id": "s-plus", "label": "S+", "order": 0, "color": "#8b1e2b", "accentColor": "#d4af37" },
+  { "id": "s", "label": "S", "order": 1, "color": "#4b2e6f", "accentColor": "#c0c0c0" },
+  { "id": "a", "label": "A", "order": 2, "color": "#2f4a3e", "accentColor": "#a97142" },
+  { "id": "b", "label": "B", "order": 3, "color": "#3d3d3d", "accentColor": "#8c8c8c" },
+  { "id": "c", "label": "C", "order": 4, "color": "#5c4a3a", "accentColor": "#7a6a58" }
+]

@@ -1,0 +1,25 @@
+.mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mini:hover {
+  transform: translateY(-2px);
+}
+
+.icon { font-size: 0.9rem; }
+
+.s-plus { border-color: #d4af37; }
+.s { border-color: #c0c0c0; }
+.a { border-color: #a97142; }
+.b { border-color: #8c8c8c; }
+.c { border-color: #7a6a58; }

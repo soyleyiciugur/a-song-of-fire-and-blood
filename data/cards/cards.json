@@ -1,0 +1,144 @@
+[
+  {
+    "id": "jacaelon-targaryen",
+    "cardType": "character",
+    "tierId": "s-plus",
+    "name": "Jacaelon Targaryen",
+    "subtitle": "Hand of the King",
+    "houseId": "targaryen",
+    "power": 6,
+    "influence": 10,
+    "keywords": ["Hand of the King", "Knight", "Dragonrider", "Schemer"],
+    "abilities": [
+      {
+        "name": "Silent Verdict",
+        "description": "When judging a rival, weakens their standing at court without drawing blood."
+      },
+      {
+        "name": "Every Warning True",
+        "description": "Gains influence whenever a prior prediction is proven correct."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen", "derrin-hightower"],
+    "allies": ["alester-dayne", "saera-targaryen", "maela-targaryen"],
+    "flavorQuote": "The hardest lies were never told to enemies. Only to those one loved.",
+    "linkedCharacterId": "jacaelon-targaryen"
+  },
+  {
+    "id": "baelenys-targaryen",
+    "cardType": "character",
+    "tierId": "s-plus",
+    "name": "Baelenys Targaryen",
+    "subtitle": "King of the Seven Kingdoms",
+    "houseId": "targaryen",
+    "power": 9,
+    "influence": 10,
+    "keywords": ["King", "Dragonrider", "Tyrant", "Paranoid"],
+    "abilities": [
+      {
+        "name": "Iron Wrath",
+        "description": "Crushes dissent instantly; nearby rivals lose standing when he enters the room."
+      },
+      {
+        "name": "Formidable",
+        "description": "Survives what should have killed him — permanently scarred but unbroken."
+      }
+    ],
+    "nemesis": ["vahaemon-targaryen", "derrin-hightower"],
+    "allies": ["jaery-targaryen", "baelor-targaryen"],
+    "flavorQuote": "So many years...",
+    "linkedCharacterId": "baelenys-targaryen"
+  },
+  {
+    "id": "gaelor-targaryen",
+    "cardType": "character",
+    "tierId": "s-plus",
+    "name": "Gaelor Targaryen",
+    "subtitle": "The Housebreaker",
+    "houseId": "targaryen",
+    "power": 10,
+    "influence": 7,
+    "keywords": ["Heir Presumptive", "Knight", "Dragonrider", "Butcher"],
+    "abilities": [
+      {
+        "name": "Blackfyre's Weight",
+        "description": "Wielding the ancestral blade, deals devastating blows in single combat."
+      },
+      {
+        "name": "Housebreaker",
+        "description": "Massacres resistance entirely — at the cost of lasting infamy."
+      }
+    ],
+    "nemesis": ["jacaelon-targaryen", "brant-costayne"],
+    "allies": ["saathos-maris", "naella-velaryon"],
+    "flavorQuote": "My head is still intact.",
+    "linkedCharacterId": "gaelor-targaryen"
+  },
+  {
+    "id": "visenor-targaryen",
+    "cardType": "character",
+    "tierId": "s-plus",
+    "name": "Visenor Targaryen",
+    "subtitle": "Crown Prince in Exile",
+    "houseId": "targaryen",
+    "power": 5,
+    "influence": 6,
+    "keywords": ["Fugitive", "Scholar", "Dragonrider", "Rightful Heir"],
+    "abilities": [
+      {
+        "name": "Bond of Patience",
+        "description": "Tames the untamed — earned the trust of a wild, ancient dragon through patience alone."
+      },
+      {
+        "name": "Hidden Claim",
+        "description": "Gains hidden allies while believed dead or lost."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen"],
+    "allies": ["rhaella-targaryen", "alester-dayne", "lorenah-dayne", "renrose-tyrell"],
+    "flavorQuote": "I am supposed to want my throne, but for the first time in my life, I am at peace.",
+    "linkedCharacterId": "visenor-targaryen"
+  },
+  {
+    "id": "blackfyre",
+    "cardType": "artifact",
+    "tierId": "s",
+    "name": "Blackfyre",
+    "subtitle": "Ancestral Valyrian Steel Sword",
+    "houseId": "targaryen",
+    "power": 8,
+    "influence": 4,
+    "keywords": ["Valyrian Steel", "Symbol of Heirship"],
+    "abilities": [
+      {
+        "name": "Mark of the Heir",
+        "description": "Whoever wields it is seen by the realm as the King's chosen successor."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["gaelor-targaryen"],
+    "flavorQuote": "Steel changed hands. So too did favor.",
+    "linkedCharacterId": "gaelor-targaryen"
+  },
+  {
+    "id": "the-poison-beneath-the-crown",
+    "cardType": "event",
+    "tierId": "s",
+    "name": "The Poison Beneath the Crown",
+    "subtitle": "Chapter I — The Poisoning of the King",
+    "houseId": "targaryen",
+    "power": 0,
+    "influence": 9,
+    "keywords": ["Assassination Attempt", "Turning Point"],
+    "abilities": [
+      {
+        "name": "Realm-Shaking",
+        "description": "Fractures trust across House Targaryen; every noble becomes a suspect."
+      }
+    ],
+    "nemesis": [],
+    "allies": [],
+    "flavorQuote": "Before the dragons of House Targaryen would draw their first breath, death itself would reach for the king.",
+    "linkedCharacterId": "baelenys-targaryen"
+  }
+]

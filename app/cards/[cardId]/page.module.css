@@ -1,0 +1,76 @@
+.wrapper { max-width: 640px; margin: 0 auto; padding: 2rem 1rem; }
+.backLink { display: inline-block; margin-bottom: 1rem; opacity: 0.75; text-decoration: none; }
+
+.detailCard {
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.header { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.8rem; opacity: 0.85; }
+.tierBadge { font-weight: 700; padding: 2px 10px; border-radius: 6px; }
+
+.portrait {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.name { font-family: var(--font-hotd, serif); font-size: 1.8rem; margin: 0; }
+.subtitle { opacity: 0.85; margin-bottom: 1rem; }
+
+.statBlock { display: flex; gap: 1rem; margin-bottom: 1rem; }
+.statBox {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 0.6rem;
+  text-align: center;
+}
+.statLabel { display: block; font-size: 0.7rem; opacity: 0.7; text-transform: uppercase; }
+.statValue { font-size: 1.4rem; font-weight: 700; }
+
+.keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+.keyword {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+}
+
+.quote {
+  font-style: italic;
+  border-left: 3px solid var(--gold, #d4af37);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+}
+
+.section { margin-top: 1.5rem; }
+.section h2 { font-size: 1rem; margin-bottom: 0.5rem; opacity: 0.9; }
+
+.ability { margin-bottom: 0.75rem; }
+.ability p { margin: 2px 0 0; font-size: 0.9rem; opacity: 0.85; }
+
+.relRow { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.characterLink {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  background: var(--gold, #d4af37);
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* tier renkleri detay kartı için */
+.s-plus { border-color: #d4af37; background: linear-gradient(170deg, #8b1e2b, #3a0a10); }
+.s { border-color: #c0c0c0; background: linear-gradient(170deg, #4b2e6f, #1f1330); }
+.a { border-color: #a97142; background: linear-gradient(170deg, #2f4a3e, #14211c); }
+.b { border-color: #8c8c8c; background: #3d3d3d; }
+.c { border-color: #7a6a58; background: #5c4a3a; }

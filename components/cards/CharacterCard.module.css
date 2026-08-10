@@ -1,0 +1,126 @@
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--surface);
+  border: 2px solid transparent;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+
+/* --- HOVER EFEKTİ (tüm tier'ler için ortak) --- */
+.card:hover {
+  transform: translateY(-8px) scale(1.04);
+  z-index: 5;
+}
+
+.typeBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.tierBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.portrait {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-family: var(--font-hotd, serif);
+  font-size: 1.05rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.78rem;
+  opacity: 0.85;
+  margin: 2px 0 6px;
+}
+
+.statRow {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.stat {
+  font-weight: 600;
+}
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.keyword {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0.8;
+}
+
+/* ===== TIER STİLLERİ ===== */
+
+.s-plus {
+  border-color: #d4af37;
+  background: linear-gradient(160deg, #8b1e2b, #3a0a10);
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.3);
+}
+.s-plus .tierBadge { background: #d4af37; color: #2a1a00; }
+.s-plus:hover { box-shadow: 0 0 32px rgba(212, 175, 55, 0.6); border-color: #ffd75e; }
+
+.s {
+  border-color: #c0c0c0;
+  background: linear-gradient(160deg, #4b2e6f, #1f1330);
+  box-shadow: 0 0 10px rgba(192, 192, 192, 0.2);
+}
+.s .tierBadge { background: #c0c0c0; color: #1f1330; }
+.s:hover { box-shadow: 0 0 22px rgba(192, 192, 192, 0.45); border-color: #e6e6e6; }
+
+.a {
+  border-color: #a97142;
+  background: linear-gradient(160deg, #2f4a3e, #14211c);
+}
+.a .tierBadge { background: #a97142; color: #14211c; }
+.a:hover { box-shadow: 0 0 16px rgba(169, 113, 66, 0.4); border-color: #c98d55; }
+
+.b {
+  border-color: #8c8c8c;
+  background: #3d3d3d;
+}
+.b .tierBadge { background: #8c8c8c; color: #1a1a1a; }
+.b:hover { box-shadow: 0 0 10px rgba(140, 140, 140, 0.3); }
+
+.c {
+  border-color: #7a6a58;
+  background: #5c4a3a;
+  box-shadow: none;
+}
+.c .tierBadge { background: #7a6a58; color: #2a2016; }
+.c:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 8px rgba(122, 106, 88, 0.3); }
