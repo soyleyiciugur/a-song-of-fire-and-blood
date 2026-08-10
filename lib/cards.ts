@@ -45,7 +45,7 @@ export function getAllCards(): Card[] {
 export function getCardsByTier(tierId: string): Card[] {
   return getAllCards()
     .filter((c) => c.tierId === tierId)
-    .sort((a, b) => b.power - a.power);
+    .sort((a, b) => (b.power + b.influence) - (a.power + a.influence));
 }
 
 export function getCardById(id: string): Card | undefined {
