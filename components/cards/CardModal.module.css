@@ -39,11 +39,11 @@
 
 .portrait {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 3 / 4;          /* tall portrait in modal too */
   background: rgba(0,0,0,0.3);
   border-radius: 10px;
   margin-bottom: 1rem;
-  position: relative;
+  position: relative;            /* ← required for next/image fill */
   overflow: hidden;
 }
 

@@ -39,7 +39,13 @@ export function CardModal({
   const card = getCardById(cardId);
 
   const { src: portraitSrc, onError: portraitOnError } = usePortrait(
-    card?.linkedCharacterId ?? card?.id ?? ""
+    card.linkedCharacterId || card.cardType === "character") && (
+  <Link
+    href={`/characters/${card.linkedCharacterId ?? card.id}`}
+    className={styles.characterLink}
+  >
+    View Character Profile →
+  </Link>
   );
 
   useEffect(() => {

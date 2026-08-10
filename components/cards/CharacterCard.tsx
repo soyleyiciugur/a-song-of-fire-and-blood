@@ -31,39 +31,42 @@ export function CharacterCard({
       className={`${styles.card} ${styles[card.tierId]}`}
       onClick={() => onSelect(card.id)}
     >
+      {/* Badges sit above portrait via z-index */}
       <div className={styles.typeBadge}>{CARD_TYPE_ICON[card.cardType]}</div>
       <div className={styles.tierBadge}>
         {card.tierId.toUpperCase().replace("-PLUS", "+")}
       </div>
 
+      {/* Portrait — z-index 0, badges are z-index 2 */}
       <div className={styles.portrait}>
         <Image
           src={src}
           alt={card.name}
           fill
-          sizes="180px"
-          style={{ objectFit: "cover", borderRadius: 8 }}
+          sizes="(max-width: 768px) 50vw, 220px"
+          style={{ objectFit: "cover", objectPosition: "top center" }}
           onError={onError}
         />
+        <div className={styles.portraitFade} />
       </div>
 
-      <h3 className={styles.name}>{card.name}</h3>
-      <p className={styles.subtitle}>{card.subtitle}</p>
+      <div className={styles.cardBody}>
+        <h3 className={styles.name}>{card.name}</h3>
+        <p className={styles.subtitle}>{card.subtitle}</p>
 
-      <div className={styles.statRow}>
-        <span className={styles.stat}>⚔ {card.power}</span>
-        <span className={styles.stat}>♛ {card.influence}</span>
-      </div>
-
-      {card.keywords.length > 0 && (
-        <div className={styles.keywords}>
-          {card.keywords.slice(0, 2).map((k) => (
-            <span key={k} className={styles.keyword} title={k}>
-              {k}
-            </span>
-          ))}
+        <div className={styles.statRow}>
+          <span className={styles.stat}>⚔ {card.power}</span>
+          <span className={styles.stat}>♛ {card.influence}</span>
         </div>
-      )}
+
+        {card.keywords.length > 0 && (
+          <div className={styles.keywords}>
+            {card.keywords.slice(0, 3).map((k) => (
+              <span key={k} className={styles.keyword}>{k}</span>
+            ))}
+          </div>
+        )}
+      </div>
     </button>
   );
 }

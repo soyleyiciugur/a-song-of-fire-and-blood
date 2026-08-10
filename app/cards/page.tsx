@@ -3,36 +3,31 @@
 import { useState } from "react";
 import { getTiers, getCardsByTier } from "@/lib/cards";
 import { CharacterCard } from "@/components/cards/CharacterCard";
-import Link from "next/link";
+import { CardModal } from "@/components/cards/CardModal";
 import styles from "./page.module.css";
 
 export default function CardsPage() {
   const tiers = getTiers();
   const [activeTier, setActiveTier] = useState(tiers[0].id);
-
-  const handleSelect = (id: string) => {
-    // Character selection logic can be added here later.
-    console.log("Selected character:", id);
-  };
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.headerRow}>
-        <h1>Character Tier List</h1>
+      <div className={styles.pageBackground} aria-hidden />
 
-        <Link href="/duel" className={styles.duelButton}>
-          ⚔️ Play Duel
-        </Link>
+      <div className={styles.headerRow}>
+        <div className={styles.headerText}>
+          <span className={styles.headerEyebrow}>The Realm's Reckoning</span>
+          <h1 className={styles.headerTitle}>Character Tier List</h1>
+        </div>
       </div>
 
       <div className={styles.tabs}>
         {tiers.map((t) => (
           <button
             key={t.id}
-            className={`${styles.tab} ${
-              activeTier === t.id ? styles.activeTab : ""
-            }`}
-            style={{ borderColor: t.accentColor }}
+            className={`${styles.tab} ${activeTier === t.id ? styles.activeTab : ""}`}
+            style={activeTier === t.id ? { borderColor: t.accentColor, color: t.accentColor } : { borderColor: "rgba(255,255,255,0.2)" }}
             onClick={() => setActiveTier(t.id)}
           >
             {t.label}
@@ -42,13 +37,17 @@ export default function CardsPage() {
 
       <div className={styles.grid}>
         {getCardsByTier(activeTier).map((c) => (
-          <CharacterCard
-            key={c.id}
-            card={c}
-            onSelect={handleSelect}
-          />
+          <CharacterCard key={c.id} card={c} onSelect={setSelectedCardId} />
         ))}
       </div>
+
+      {selectedCardId && (
+        <CardModal
+          cardId={selectedCardId}
+          onClose={() => setSelectedCardId(null)}
+          onSelectCard={setSelectedCardId}
+        />
+      )}
     </div>
   );
 }
