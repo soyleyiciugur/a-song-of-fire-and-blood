@@ -18,13 +18,6 @@ const cinzel = Cinzel({
   weight: ["400", "600", "700", "900"],
 });
 
-const crimsonText = Crimson_Text({
-  subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
-});
-
 const siteUrl = "https://a-song-of-fire-and-blood.vercel.app";
 const siteName = "A Song of Fire and Blood";
 const siteDescription = "A living chronicle of House Targaryen.";
@@ -77,7 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geist.variable} ${cinzel.variable} ${crimsonText.variable}`}
+        className={`${geist.variable} ${cinzel.variable}`}
       >
         <Navbar />
         {children}
