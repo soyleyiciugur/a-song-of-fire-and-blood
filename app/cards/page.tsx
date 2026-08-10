@@ -10,11 +10,17 @@ export default function CardsPage() {
   const tiers = getTiers();
   const [activeTier, setActiveTier] = useState(tiers[0].id);
 
+  const handleSelect = (id: string) => {
+    // Character selection logic can be added here later.
+    console.log("Selected character:", id);
+  };
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.headerRow}>
+    <div className={styles.page}>
+      <div className={styles.header}>
         <h1>Character Tier List</h1>
-        <Link href="/cards/duel" className={styles.duelLink}>
+
+        <Link href="/duel" className={styles.duelButton}>
           ⚔️ Play Duel
         </Link>
       </div>
@@ -23,7 +29,9 @@ export default function CardsPage() {
         {tiers.map((t) => (
           <button
             key={t.id}
-            className={`${styles.tab} ${activeTier === t.id ? styles.activeTab : ""}`}
+            className={`${styles.tab} ${
+              activeTier === t.id ? styles.activeTab : ""
+            }`}
             style={{ borderColor: t.accentColor }}
             onClick={() => setActiveTier(t.id)}
           >
@@ -34,7 +42,11 @@ export default function CardsPage() {
 
       <div className={styles.grid}>
         {getCardsByTier(activeTier).map((c) => (
-          <CharacterCard key={c.id} card={c} />
+          <CharacterCard
+            key={c.id}
+            card={c}
+            onSelect={handleSelect}
+          />
         ))}
       </div>
     </div>
