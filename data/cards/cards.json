@@ -119,26 +119,5 @@
     "allies": ["gaelor-targaryen"],
     "flavorQuote": "Steel changed hands. So too did favor.",
     "linkedCharacterId": "gaelor-targaryen"
-  },
-  {
-    "id": "the-poison-beneath-the-crown",
-    "cardType": "event",
-    "tierId": "s",
-    "name": "The Poison Beneath the Crown",
-    "subtitle": "Chapter I — The Poisoning of the King",
-    "houseId": "targaryen",
-    "power": 0,
-    "influence": 9,
-    "keywords": ["Assassination Attempt", "Turning Point"],
-    "abilities": [
-      {
-        "name": "Realm-Shaking",
-        "description": "Fractures trust across House Targaryen; every noble becomes a suspect."
-      }
-    ],
-    "nemesis": [],
-    "allies": [],
-    "flavorQuote": "Before the dragons of House Targaryen would draw their first breath, death itself would reach for the king.",
-    "linkedCharacterId": "baelenys-targaryen"
   }
 ]

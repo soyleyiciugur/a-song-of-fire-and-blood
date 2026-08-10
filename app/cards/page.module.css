@@ -7,19 +7,33 @@
 }
 
 /* Atmospheric background — layered radial glows on dark */
+
 .pageBackground {
   position: fixed;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(139, 30, 43, 0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 35% at 80% 80%, rgba(75, 46, 111, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20, 10, 5, 0.4) 0%, transparent 100%),
+    radial-gradient(
+      ellipse 60% 40% at 20% 10%,
+      rgba(139, 30, 43, 0.18) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 80% 80%,
+      rgba(75, 46, 111, 0.15) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(20, 10, 5, 0.4) 0%,
+      transparent 100%
+    ),
     #0a0a0d;
   pointer-events: none;
 }
 
 /* Header */
+
 .headerRow {
   margin-bottom: 2.5rem;
   border-bottom: 1px solid rgba(212, 175, 55, 0.25);
@@ -28,28 +42,30 @@
 
 .headerEyebrow {
   display: block;
+  font-family: var(--font-hotd), serif;
   font-size: 0.75rem;
-  letter-spacing: 0.25em;
+  font-weight: 600;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #d4af37;
   opacity: 0.8;
   margin-bottom: 0.4rem;
-  font-family: var(--font-hotd, serif);
 }
 
 .headerTitle {
-  font-family: var(--font-hotd, serif);
+  font-family: var(--font-hotd), serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   margin: 0;
   color: #f5e6c8;
   text-shadow:
     0 0 40px rgba(212, 175, 55, 0.3),
-    0 2px 4px rgba(0,0,0,0.8);
-  letter-spacing: 0.02em;
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.025em;
 }
 
 /* Tier tabs */
+
 .tabs {
   display: flex;
   gap: 0.5rem;
@@ -62,18 +78,19 @@
   border: 1.5px solid;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.03);
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  font-family: var(--font-hotd, serif);
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
+  font-family: var(--font-hotd), serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   transition: all 0.2s ease;
   backdrop-filter: blur(4px);
 }
 
 .tab:hover {
-  background: rgba(255,255,255,0.07);
-  color: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .activeTab {
@@ -82,6 +99,7 @@
 }
 
 /* Card grid — wider cards, good gap */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
