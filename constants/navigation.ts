@@ -31,7 +31,6 @@ export const NAV_ITEMS: NavigationEntry[] = [
   { label: "Dragons", href: "/dragons" },
   { label: "Houses", href: "/houses" },
   { label: "Map", href: "/map" },
-  { label: "The Raven's Eye", href: "/ravens-eye" },
   { label: "Timeline", href: "/timeline" },
   { 
     label: "Records", 
@@ -41,6 +40,8 @@ export const NAV_ITEMS: NavigationEntry[] = [
       { label: "The Book of Brothers", href: "/book-of-brothers" },
     ],
   },
+  { label: "The Raven's Eye", href: "/ravens-eye" },
+  { label: "The Great Game", href: "/cards" },
 ];
 
 // Flattened version — every group's children pulled up into a single flat
