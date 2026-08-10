@@ -16,15 +16,19 @@ const EXTS = ["webp", "png", "jpg", "jpeg"];
 
 function usePortrait(id: string) {
   const [extIndex, setExtIndex] = useState(0);
+  const [failed, setFailed] = useState(false);
 
   const src = `/images/characters/${id}.${EXTS[extIndex]}`;
 
-  const onError =
-    extIndex < EXTS.length - 1
-      ? () => setExtIndex((i) => i + 1)
-      : undefined;
+  function onError() {
+    if (extIndex < EXTS.length - 1) {
+      setExtIndex((i) => i + 1);
+    } else {
+      setFailed(true);
+    }
+  }
 
-  return { src, onError };
+  return { src, onError: failed ? undefined : onError, failed };
 }
 
 export function CardModal({
@@ -42,32 +46,23 @@ export function CardModal({
     card?.linkedCharacterId ??
     (card?.cardType === "character" ? card.id : "");
 
-  const {
-    src: portraitSrc,
-    onError: portraitOnError,
-  } = usePortrait(portraitId);
+  const { src: portraitSrc, onError: portraitOnError, failed } = usePortrait(portraitId);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        onClose();
-      }
+      if (e.key === "Escape") onClose();
     }
-
     window.addEventListener("keydown", handleKey);
-
-    return () => {
-      window.removeEventListener("keydown", handleKey);
-    };
+    return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  if (!card) {
-    return null;
-  }
+  if (!card) return null;
 
   const tier = getTiers().find((t) => t.id === card.tierId);
   const nemesisCards = getCardsByIds(card.nemesis);
   const allyCards = getCardsByIds(card.allies);
+
+  const showPortrait = !!portraitId && !failed;
 
   return (
     <div
@@ -85,28 +80,28 @@ export function CardModal({
 
       <div className={styles.header}>
         <span className={styles.typeBadge}>
-          {CARD_TYPE_ICON[card.cardType]}{" "}
-          {card.cardType.toUpperCase()}
+          {CARD_TYPE_ICON[card.cardType]} {card.cardType.toUpperCase()}
         </span>
-
-        <span className={styles.tierBadge}>
-          {tier?.label ?? card.tierId}
-        </span>
+        <span className={styles.tierBadge}>{tier?.label ?? card.tierId}</span>
       </div>
 
-      <div className={styles.portrait}>
-        <Image
-          src={portraitSrc}
-          alt={card.name}
-          fill
-          sizes="480px"
-          style={{ objectFit: "cover" }}
-          onError={portraitOnError}
-        />
-      </div>
+      {showPortrait ? (
+        <div className={styles.portrait}>
+          <Image
+            src={portraitSrc}
+            alt={card.name}
+            fill
+            sizes="480px"
+            style={{ objectFit: "cover", objectPosition: "top center" }}
+            onError={portraitOnError}
+          />
+        </div>
+      ) : portraitId ? (
+        // had an id but all extensions failed
+        <div className={styles.portraitFallback}>?</div>
+      ) : null}
 
       <h2 className={styles.name}>{card.name}</h2>
-
       <p className={styles.subtitle}>{card.subtitle}</p>
 
       <div className={styles.statBlock}>
@@ -114,7 +109,6 @@ export function CardModal({
           <span className={styles.statLabel}>Power</span>
           <span className={styles.statValue}>{card.power}</span>
         </div>
-
         <div className={styles.statBox}>
           <span className={styles.statLabel}>Influence</span>
           <span className={styles.statValue}>{card.influence}</span>
@@ -123,9 +117,7 @@ export function CardModal({
 
       <div className={styles.keywords}>
         {card.keywords.map((k) => (
-          <span key={k} className={styles.keyword}>
-            {k}
-          </span>
+          <span key={k} className={styles.keyword}>{k}</span>
         ))}
       </div>
 
@@ -138,7 +130,6 @@ export function CardModal({
       {card.abilities.length > 0 && (
         <div className={styles.section}>
           <h3>Abilities</h3>
-
           {card.abilities.map((ab) => (
             <div key={ab.name} className={styles.ability}>
               <strong>{ab.name}</strong>
@@ -151,14 +142,9 @@ export function CardModal({
       {nemesisCards.length > 0 && (
         <div className={styles.section}>
           <h3>Nemesis</h3>
-
           <div className={styles.relRow}>
             {nemesisCards.map((c) => (
-              <MiniCardButton
-                key={c.id}
-                card={c}
-                onSelect={onSelectCard}
-              />
+              <MiniCardButton key={c.id} card={c} onSelect={onSelectCard} />
             ))}
           </div>
         </div>
@@ -167,24 +153,16 @@ export function CardModal({
       {allyCards.length > 0 && (
         <div className={styles.section}>
           <h3>Allies</h3>
-
           <div className={styles.relRow}>
             {allyCards.map((c) => (
-              <MiniCardButton
-                key={c.id}
-                card={c}
-                onSelect={onSelectCard}
-              />
+              <MiniCardButton key={c.id} card={c} onSelect={onSelectCard} />
             ))}
           </div>
         </div>
       )}
 
       {card.linkedCharacterId && (
-        <Link
-          href={`/characters/${card.linkedCharacterId}`}
-          className={styles.characterLink}
-        >
+        <Link href={`/characters/${card.linkedCharacterId}`} className={styles.characterLink}>
           View Full Character Profile →
         </Link>
       )}

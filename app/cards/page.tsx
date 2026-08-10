@@ -11,6 +11,23 @@ export default function CardsPage() {
   const [activeTier, setActiveTier] = useState(tiers[0].id);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
+  const tierCards = getCardsByTier(activeTier);
+  const selectedIndex = tierCards.findIndex((c) => c.id === selectedCardId);
+
+  function handleTierChange(tierId: string) {
+    setActiveTier(tierId);
+    setSelectedCardId(null);
+  }
+
+  function handlePrev() {
+    if (selectedIndex > 0) setSelectedCardId(tierCards[selectedIndex - 1].id);
+  }
+
+  function handleNext() {
+    if (selectedIndex < tierCards.length - 1)
+      setSelectedCardId(tierCards[selectedIndex + 1].id);
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.pageBackground} aria-hidden />
@@ -27,8 +44,12 @@ export default function CardsPage() {
           <button
             key={t.id}
             className={`${styles.tab} ${activeTier === t.id ? styles.activeTab : ""}`}
-            style={activeTier === t.id ? { borderColor: t.accentColor, color: t.accentColor } : { borderColor: "rgba(255,255,255,0.2)" }}
-            onClick={() => setActiveTier(t.id)}
+            style={
+              activeTier === t.id
+                ? { borderColor: t.accentColor, color: t.accentColor }
+                : { borderColor: "rgba(255,255,255,0.2)" }
+            }
+            onClick={() => handleTierChange(t.id)}
           >
             {t.label}
           </button>
@@ -36,17 +57,43 @@ export default function CardsPage() {
       </div>
 
       <div className={styles.grid}>
-        {getCardsByTier(activeTier).map((c) => (
+        {tierCards.map((c) => (
           <CharacterCard key={c.id} card={c} onSelect={setSelectedCardId} />
         ))}
       </div>
 
       {selectedCardId && (
-        <CardModal
-          cardId={selectedCardId}
-          onClose={() => setSelectedCardId(null)}
-          onSelectCard={setSelectedCardId}
-        />
+        <div
+          className={styles.overlay}
+          onClick={() => setSelectedCardId(null)}
+        >
+          <button
+            className={styles.navArrow}
+            onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+            aria-label="Previous card"
+            style={{ visibility: selectedIndex > 0 ? "visible" : "hidden" }}
+          >
+            ‹
+          </button>
+
+          <CardModal
+            cardId={selectedCardId}
+            onClose={() => setSelectedCardId(null)}
+            onSelectCard={setSelectedCardId}
+          />
+
+          <button
+            className={styles.navArrow}
+            onClick={(e) => { e.stopPropagation(); handleNext(); }}
+            aria-label="Next card"
+            style={{
+              visibility:
+                selectedIndex < tierCards.length - 1 ? "visible" : "hidden",
+            }}
+          >
+            ›
+          </button>
+        </div>
       )}
     </div>
   );
