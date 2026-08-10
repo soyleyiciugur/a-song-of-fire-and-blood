@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getTiers, getCardsByTier } from "@/lib/cards";
 import { CharacterCard } from "@/components/cards/CharacterCard";
 import { CardModal } from "@/components/cards/CardModal";
@@ -14,18 +14,28 @@ export default function CardsPage() {
   const tierCards = getCardsByTier(activeTier);
   const selectedIndex = tierCards.findIndex((c) => c.id === selectedCardId);
 
+  const handlePrev = useCallback(() => {
+    if (selectedIndex > 0) setSelectedCardId(tierCards[selectedIndex - 1].id);
+  }, [selectedIndex, tierCards]);
+
+  const handleNext = useCallback(() => {
+    if (selectedIndex < tierCards.length - 1)
+      setSelectedCardId(tierCards[selectedIndex + 1].id);
+  }, [selectedIndex, tierCards]);
+
+  useEffect(() => {
+    if (!selectedCardId) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [selectedCardId, handlePrev, handleNext]);
+
   function handleTierChange(tierId: string) {
     setActiveTier(tierId);
     setSelectedCardId(null);
-  }
-
-  function handlePrev() {
-    if (selectedIndex > 0) setSelectedCardId(tierCards[selectedIndex - 1].id);
-  }
-
-  function handleNext() {
-    if (selectedIndex < tierCards.length - 1)
-      setSelectedCardId(tierCards[selectedIndex + 1].id);
   }
 
   return (
@@ -35,7 +45,7 @@ export default function CardsPage() {
       <div className={styles.headerRow}>
         <div className={styles.headerText}>
           <span className={styles.headerEyebrow}>The Realm's Reckoning</span>
-          <h1 className={styles.headerTitle}>Character Tier List</h1>
+          <h1 className={styles.headerTitle}>The Great Game</h1>
         </div>
       </div>
 
@@ -63,10 +73,7 @@ export default function CardsPage() {
       </div>
 
       {selectedCardId && (
-        <div
-          className={styles.overlay}
-          onClick={() => setSelectedCardId(null)}
-        >
+        <div className={styles.overlay} onClick={() => setSelectedCardId(null)}>
           <button
             className={styles.navArrow}
             onClick={(e) => { e.stopPropagation(); handlePrev(); }}
@@ -87,8 +94,7 @@ export default function CardsPage() {
             onClick={(e) => { e.stopPropagation(); handleNext(); }}
             aria-label="Next card"
             style={{
-              visibility:
-                selectedIndex < tierCards.length - 1 ? "visible" : "hidden",
+              visibility: selectedIndex < tierCards.length - 1 ? "visible" : "hidden",
             }}
           >
             ›

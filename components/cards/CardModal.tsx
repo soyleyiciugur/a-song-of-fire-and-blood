@@ -14,21 +14,24 @@ import { MiniCardButton } from "./MiniCardButton";
 
 const EXTS = ["webp", "png", "jpg", "jpeg"];
 
-function usePortrait(id: string) {
+function usePortrait(src: string) {
   const [extIndex, setExtIndex] = useState(0);
   const [failed, setFailed] = useState(false);
 
-  const src = `/images/characters/${id}.${EXTS[extIndex]}`;
+  // Reset when src (base path) changes
+  useEffect(() => {
+    setExtIndex(0);
+    setFailed(false);
+  }, [src]);
+
+  const fullSrc = `${src}.${EXTS[extIndex]}`;
 
   function onError() {
-    if (extIndex < EXTS.length - 1) {
-      setExtIndex((i) => i + 1);
-    } else {
-      setFailed(true);
-    }
+    if (extIndex < EXTS.length - 1) setExtIndex((i) => i + 1);
+    else setFailed(true);
   }
 
-  return { src, onError: failed ? undefined : onError, failed };
+  return { fullSrc, onError: failed ? undefined : onError, failed };
 }
 
 export function CardModal({
@@ -42,11 +45,14 @@ export function CardModal({
 }) {
   const card = getCardById(cardId);
 
-  const portraitId =
-    card?.linkedCharacterId ??
-    (card?.cardType === "character" ? card.id : "");
+  // Portrait source: character cards use character portraits, everything else uses /images/cards/
+  const portraitBase = card
+    ? card.cardType === "character"
+      ? `/images/characters/${card.linkedCharacterId ?? card.id}`
+      : `/images/cards/${card.id}`
+    : "";
 
-  const { src: portraitSrc, onError: portraitOnError, failed } = usePortrait(portraitId);
+  const { fullSrc, onError, failed } = usePortrait(portraitBase);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
@@ -62,69 +68,68 @@ export function CardModal({
   const nemesisCards = getCardsByIds(card.nemesis);
   const allyCards = getCardsByIds(card.allies);
 
-  const showPortrait = !!portraitId && !failed;
+  const showPortrait = !failed && portraitBase !== "";
 
   return (
     <div
       className={`${styles.modal} ${styles[card.tierId]}`}
       onClick={(e) => e.stopPropagation()}
     >
-      <button
-        type="button"
-        className={styles.close}
-        onClick={onClose}
-        aria-label="Close"
-      >
+      <button type="button" className={styles.close} onClick={onClose} aria-label="Close">
         ✕
       </button>
 
-      <div className={styles.header}>
-        <span className={styles.typeBadge}>
-          {CARD_TYPE_ICON[card.cardType]} {card.cardType.toUpperCase()}
-        </span>
-        <span className={styles.tierBadge}>{tier?.label ?? card.tierId}</span>
-      </div>
-
-      {showPortrait ? (
-        <div className={styles.portrait}>
-          <Image
-            src={portraitSrc}
-            alt={card.name}
-            fill
-            sizes="480px"
-            style={{ objectFit: "cover", objectPosition: "top center" }}
-            onError={portraitOnError}
-          />
+      {/* Two-column layout: portrait left, core info right */}
+      <div className={styles.topRow}>
+        <div className={styles.portraitCol}>
+          {showPortrait ? (
+            <div className={styles.portrait}>
+              <Image
+                src={fullSrc}
+                alt={card.name}
+                fill
+                sizes="160px"
+                style={{ objectFit: "cover", objectPosition: "top center" }}
+                onError={onError}
+              />
+            </div>
+          ) : (
+            <div className={`${styles.portrait} ${styles.portraitFallback}`}>?</div>
+          )}
         </div>
-      ) : portraitId ? (
-        // had an id but all extensions failed
-        <div className={styles.portraitFallback}>?</div>
-      ) : null}
 
-      <h2 className={styles.name}>{card.name}</h2>
-      <p className={styles.subtitle}>{card.subtitle}</p>
+        <div className={styles.infoCol}>
+          <div className={styles.header}>
+            <span className={styles.typeBadge}>
+              {CARD_TYPE_ICON[card.cardType]} {card.cardType.toUpperCase()}
+            </span>
+            <span className={styles.tierBadge}>{tier?.label ?? card.tierId}</span>
+          </div>
 
-      <div className={styles.statBlock}>
-        <div className={styles.statBox}>
-          <span className={styles.statLabel}>Power</span>
-          <span className={styles.statValue}>{card.power}</span>
+          <h2 className={styles.name}>{card.name}</h2>
+          <p className={styles.subtitle}>{card.subtitle}</p>
+
+          <div className={styles.statBlock}>
+            <div className={styles.statBox}>
+              <span className={styles.statLabel}>Power</span>
+              <span className={styles.statValue}>{card.power}</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statLabel}>Influence</span>
+              <span className={styles.statValue}>{card.influence}</span>
+            </div>
+          </div>
+
+          <div className={styles.keywords}>
+            {card.keywords.map((k) => (
+              <span key={k} className={styles.keyword}>{k}</span>
+            ))}
+          </div>
         </div>
-        <div className={styles.statBox}>
-          <span className={styles.statLabel}>Influence</span>
-          <span className={styles.statValue}>{card.influence}</span>
-        </div>
-      </div>
-
-      <div className={styles.keywords}>
-        {card.keywords.map((k) => (
-          <span key={k} className={styles.keyword}>{k}</span>
-        ))}
       </div>
 
       {card.flavorQuote && (
-        <blockquote className={styles.quote}>
-          &ldquo;{card.flavorQuote}&rdquo;
-        </blockquote>
+        <blockquote className={styles.quote}>&ldquo;{card.flavorQuote}&rdquo;</blockquote>
       )}
 
       {card.abilities.length > 0 && (
