@@ -5,6 +5,18 @@ import { useEffect } from "react";
 import styles from "./CardModal.module.css";
 import { CARD_TYPE_ICON, getCardById, getCardsByIds, getTiers, type Card } from "@/lib/cards";
 import { MiniCardButton } from "./MiniCardButton";
+import Image from "next/image";
+import { useState } from "react";
+
+const EXTS = ["webp", "png", "jpg", "jpeg"];
+function usePortrait(id: string) {
+  const [extIndex, setExtIndex] = useState(0);
+  const src = `/images/characters/${id}.${EXTS[extIndex]}`;
+  const onError = extIndex < EXTS.length - 1
+    ? () => setExtIndex((i) => i + 1)
+    : undefined;
+  return { src, onError };
+}
 
 export function CardModal({
   cardId,
@@ -48,7 +60,16 @@ export function CardModal({
           <span className={styles.tierBadge}>{tier?.label ?? card.tierId}</span>
         </div>
 
-        <div className={styles.portrait} aria-hidden />
+        <div className={styles.portrait}>
+          <Image
+            src={portraitSrc}
+            alt={card.name}
+            fill
+            sizes="480px"
+            style={{ objectFit: "cover" }}
+            onError={portraitOnError}
+          />
+        </div>
 
         <h2 className={styles.name}>{card.name}</h2>
         <p className={styles.subtitle}>{card.subtitle}</p>
@@ -117,3 +138,7 @@ export function CardModal({
     </div>
   );
 }
+
+const { src: portraitSrc, onError: portraitOnError } = usePortrait(
+  card?.linkedCharacterId ?? card?.id ?? ""
+);

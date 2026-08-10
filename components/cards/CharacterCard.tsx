@@ -1,7 +1,20 @@
 "use client";
 
+import Image from "next/image";
+import { useState } from "react";
 import styles from "./CharacterCard.module.css";
 import { CARD_TYPE_ICON, type Card } from "@/lib/cards";
+
+const EXTS = ["webp", "png", "jpg", "jpeg"];
+
+function usePortrait(id: string) {
+  const [extIndex, setExtIndex] = useState(0);
+  const src = `/images/characters/${id}.${EXTS[extIndex]}`;
+  const onError = extIndex < EXTS.length - 1
+    ? () => setExtIndex((i) => i + 1)
+    : undefined;
+  return { src, onError };
+}
 
 export function CharacterCard({
   card,
@@ -10,6 +23,8 @@ export function CharacterCard({
   card: Card;
   onSelect: (id: string) => void;
 }) {
+  const { src, onError } = usePortrait(card.linkedCharacterId ?? card.id);
+
   return (
     <button
       type="button"
@@ -21,7 +36,16 @@ export function CharacterCard({
         {card.tierId.toUpperCase().replace("-PLUS", "+")}
       </div>
 
-      <div className={styles.portrait} aria-hidden />
+      <div className={styles.portrait}>
+        <Image
+          src={src}
+          alt={card.name}
+          fill
+          sizes="180px"
+          style={{ objectFit: "cover", borderRadius: 8 }}
+          onError={onError}
+        />
+      </div>
 
       <h3 className={styles.name}>{card.name}</h3>
       <p className={styles.subtitle}>{card.subtitle}</p>

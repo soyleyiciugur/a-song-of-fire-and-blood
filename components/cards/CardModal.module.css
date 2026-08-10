@@ -43,6 +43,8 @@
   background: rgba(0,0,0,0.3);
   border-radius: 10px;
   margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .name { font-family: var(--font-hotd, serif); font-size: 1.6rem; margin: 0; }
