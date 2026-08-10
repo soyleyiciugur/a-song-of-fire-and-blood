@@ -21,7 +21,7 @@
     ],
     "nemesis": ["gaelor-targaryen", "derrin-hightower"],
     "allies": ["alester-dayne", "saera-targaryen", "maela-targaryen"],
-    "flavorQuote": "The hardest lies were never told to enemies. Only to those one loved.",
+    "flavorQuote": "If this man actually manages to kill Gaelor, he will have done the Crown a favor.",
     "linkedCharacterId": "jacaelon-targaryen"
   },
   {
@@ -100,6 +100,873 @@
     "linkedCharacterId": "visenor-targaryen"
   },
   {
+    "id": "jaery-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Jaery Targaryen",
+    "subtitle": "Queen of the Seven Kingdoms",
+    "houseId": "targaryen",
+    "power": 3,
+    "influence": 9,
+    "keywords": ["Queen", "Peacemaker", "Mother", "Last Barrier"],
+    "abilities": [
+      {
+        "name": "The People Have Suffered Enough",
+        "description": "Once per round, cancels a punishment or decree before it reaches the realm."
+      },
+      {
+        "name": "A Mother's Plea",
+        "description": "Compels two warring allies to stand down — at least until the next morning."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen"],
+    "allies": ["jacaelon-targaryen", "baelor-targaryen", "vhaemys-targaryen"],
+    "flavorQuote": "I do not want to be with my husband anymore. You are not the man I knew.",
+    "linkedCharacterId": "jaery-targaryen"
+  },
+  {
+    "id": "baelor-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Baelor Targaryen",
+    "subtitle": "Grand Maester",
+    "houseId": "targaryen",
+    "power": 2,
+    "influence": 9,
+    "keywords": ["Grand Maester", "Scholar", "Dissenter", "Strategist"],
+    "abilities": [
+      {
+        "name": "The Argumentative One",
+        "description": "Whenever a rash decree is issued, may force a recount of votes at the council table."
+      },
+      {
+        "name": "Economic Pressure",
+        "description": "Forces a rival city or house to expel a named target without open war."
+      }
+    ],
+    "nemesis": ["cordin-poole"],
+    "allies": ["jacaelon-targaryen", "baelenys-targaryen", "saera-targaryen"],
+    "flavorQuote": "Gaelor ruined my life. I had to abandon Oldtown. My entire reputation there was destroyed because of him.",
+    "linkedCharacterId": "baelor-targaryen"
+  },
+  {
+    "id": "saera-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Saera Targaryen",
+    "subtitle": "Cloud Eyes",
+    "houseId": "targaryen",
+    "power": 6,
+    "influence": 7,
+    "keywords": ["Dragonrider", "Principled", "Diplomat", "Refusing to Be Used"],
+    "abilities": [
+      {
+        "name": "Cloud Eyes",
+        "description": "Sees through deception; cannot be misled by false reports or forged evidence."
+      },
+      {
+        "name": "Cloudgazer's Shadow",
+        "description": "When she commits her dragon, rivals cannot retreat or hide."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["jacaelon-targaryen", "alester-dayne", "visenor-targaryen"],
+    "flavorQuote": "My king, will you punish years of loyal service for the deeds of one stranger?",
+    "linkedCharacterId": "saera-targaryen"
+  },
+  {
+    "id": "alester-dayne",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Ser Alester Dayne",
+    "subtitle": "Kingsguard",
+    "houseId": "dayne",
+    "power": 9,
+    "influence": 5,
+    "keywords": ["Kingsguard", "Knight", "Nearly Unkillable", "Sworn Shield"],
+    "abilities": [
+      {
+        "name": "Dawn's Edge",
+        "description": "In single combat, ignores the first wound dealt against him each round."
+      },
+      {
+        "name": "Rise, Ser Jacaelon",
+        "description": "May confer a knighthood. The knighted ally gains +2 power until end of game."
+      }
+    ],
+    "nemesis": ["curtass-whent"],
+    "allies": ["jacaelon-targaryen", "saera-targaryen", "lorenah-dayne"],
+    "flavorQuote": "The only reason I am alive is King Baelenys.",
+    "linkedCharacterId": "alester-dayne"
+  },
+  {
+    "id": "rhaella-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Rhaella Targaryen",
+    "subtitle": "Princess in Hiding",
+    "houseId": "targaryen",
+    "power": 2,
+    "influence": 7,
+    "keywords": ["Fugitive", "Pregnant", "Exiled Blood", "Loyal"],
+    "abilities": [
+      {
+        "name": "Dangerous Name",
+        "description": "Merely being found with her costs an ally significant standing at court."
+      },
+      {
+        "name": "I Just Need to Sleep",
+        "description": "Removes one pursuit token from her location each round she remains hidden."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen"],
+    "allies": ["visenor-targaryen", "alester-dayne", "lorenah-dayne"],
+    "flavorQuote": "I just need to sleep.",
+    "linkedCharacterId": "rhaella-targaryen"
+  },
+  {
+    "id": "maela-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Maela Targaryen",
+    "subtitle": "The Twin",
+    "houseId": "targaryen",
+    "power": 5,
+    "influence": 8,
+    "keywords": ["Dragonrider", "Manipulative", "Guarded", "Unbothered"],
+    "abilities": [
+      {
+        "name": "Jadefyre's Rider",
+        "description": "Controls an inherited dragon; gains power proportional to how long she has held it."
+      },
+      {
+        "name": "Buried Secret",
+        "description": "A hidden threat. If revealed, deals influence damage to the ally who exposed her."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["jacaelon-targaryen", "saera-targaryen"],
+    "flavorQuote": "You gave him a lesson he will not soon forget. Whether the realm realizes it or not, you won.",
+    "linkedCharacterId": "maela-targaryen"
+  },
+  {
+    "id": "vahaemon-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Vahaemon Targaryen",
+    "subtitle": "The Exiled Viper",
+    "houseId": "targaryen",
+    "power": 7,
+    "influence": 6,
+    "keywords": ["Exile", "Dragonrider", "Claimant", "Traitor"],
+    "abilities": [
+      {
+        "name": "Dark Sister's Legacy",
+        "description": "Commands agents inside enemy territory; their actions cannot be traced back to him."
+      },
+      {
+        "name": "Unknown Dragon",
+        "description": "Deploys a dragon of unverified strength — power value hidden until combat begins."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen"],
+    "allies": ["visenya-targaryen", "rhaella-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "vahaemon-targaryen"
+  },
+  {
+    "id": "derrin-hightower",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Derrin Hightower",
+    "subtitle": "Former Hand of the King",
+    "houseId": "hightower",
+    "power": 3,
+    "influence": 9,
+    "keywords": ["Traitor", "Hand of the King", "Idealist", "Conspirator"],
+    "abilities": [
+      {
+        "name": "Love Alone Cannot Preserve a Dynasty",
+        "description": "May redirect punishment for a failed conspiracy onto a house ally, sparing himself."
+      },
+      {
+        "name": "The Confession",
+        "description": "When captured, reveals all allied conspirators — but grants one final act before death."
+      }
+    ],
+    "nemesis": ["jacaelon-targaryen", "baelenys-targaryen"],
+    "allies": ["renrose-tyrell"],
+    "flavorQuote": "Love alone cannot preserve a dynasty.",
+    "linkedCharacterId": "derrin-hightower"
+  },
+  {
+    "id": "visenya-targaryen",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Visenya Targaryen",
+    "subtitle": "The Blindfolded Blade",
+    "houseId": "targaryen",
+    "power": 8,
+    "influence": 5,
+    "keywords": ["Fugitive", "Swordswoman", "Infiltrator", "Playing Her Own Game"],
+    "abilities": [
+      {
+        "name": "Not Blind",
+        "description": "Ignores concealment — sees through disguises and hidden positions."
+      },
+      {
+        "name": "Dark Sister at Your Throat",
+        "description": "May neutralize a target without killing them, leaving a message instead."
+      }
+    ],
+    "nemesis": ["jacaelon-targaryen", "gaelor-targaryen"],
+    "allies": ["vahaemon-targaryen"],
+    "flavorQuote": "We finally meet, cousin.",
+    "linkedCharacterId": "visenya-targaryen"
+  },
+  {
+    "id": "lorenah-dayne",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Lorenah Dayne",
+    "subtitle": "Lady of Torrentine",
+    "houseId": "dayne",
+    "power": 3,
+    "influence": 8,
+    "keywords": ["Dornish", "Perceptive", "Sanctuary", "Unimpressed"],
+    "abilities": [
+      {
+        "name": "Starfall's Shadow",
+        "description": "An ally hidden under her protection cannot be found by pursuit unless she is defeated first."
+      },
+      {
+        "name": "We Breathe the Same Air",
+        "description": "Reduces hostility between two opposing factions by one tier."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["jacaelon-targaryen", "alester-dayne", "visenor-targaryen"],
+    "flavorQuote": "We breathe the same air. We stand beneath the same stars. Why must we always find reasons to hate one another?",
+    "linkedCharacterId": "lorenah-dayne"
+  },
+  {
+    "id": "renrose-tyrell",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Renrose Tyrell",
+    "subtitle": "Lord of Highgarden",
+    "houseId": "tyrell",
+    "power": 4,
+    "influence": 9,
+    "keywords": ["Lord", "Schemer", "Kingmaker", "Patient"],
+    "abilities": [
+      {
+        "name": "The Mander's Pact",
+        "description": "Binds an ally's claim to his own; both gain power equal to the other's influence score."
+      },
+      {
+        "name": "Eyes in Every Room",
+        "description": "Whenever an ally enters a new location, Renrose receives a copy of their intelligence."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen"],
+    "allies": ["visenor-targaryen", "martyn-mullendore", "leo-tyrell"],
+    "flavorQuote": "My father loved these gardens dearly. Before your father had him executed, of course.",
+    "linkedCharacterId": "renrose-tyrell"
+  },
+  {
+    "id": "naella-velaryon",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Naella Velaryon",
+    "subtitle": "Princess of Driftmark",
+    "houseId": "velaryon",
+    "power": 2,
+    "influence": 7,
+    "keywords": ["Wife", "Perceptive", "Steady", "Pregnant"],
+    "abilities": [
+      {
+        "name": "For Tonight, Only My Husband",
+        "description": "Removes one stress or rage token from Gaelor; he cannot act recklessly this round."
+      },
+      {
+        "name": "Your Seed Is Strong",
+        "description": "When her child is confirmed, Gaelor gains +1 power permanently."
+      }
+    ],
+    "nemesis": ["jacaelon-targaryen"],
+    "allies": ["gaelor-targaryen", "baelenys-targaryen"],
+    "flavorQuote": "If you weren't nervous, I'd think you didn't understand what today means.",
+    "linkedCharacterId": "naella-velaryon"
+  },
+  {
+    "id": "berholt-caswell",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Berholt Caswell",
+    "subtitle": "High Septon",
+    "houseId": "-",
+    "power": 1,
+    "influence": 8,
+    "keywords": ["High Septon", "Pious", "Principled", "Aware of the Gap"],
+    "abilities": [
+      {
+        "name": "The Gods Will Judge",
+        "description": "May override a death sentence with a sentence of the Wall — once per game."
+      },
+      {
+        "name": "Quiet Conscience",
+        "description": "Costs no influence to align with, but grants no influence in return."
+      }
+    ],
+    "nemesis": ["baelor-targaryen"],
+    "allies": ["jacaelon-targaryen"],
+    "flavorQuote": "You know an innocent girl was butchered. Do you want to cross the gods?",
+    "linkedCharacterId": "berholt-caswell"
+  },
+  {
+    "id": "vhaemys-targaryen",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Vhaemys Targaryen",
+    "subtitle": "The King's Little Shadow",
+    "houseId": "targaryen",
+    "power": 1,
+    "influence": 4,
+    "keywords": ["Child", "Perceptive", "In Need of Better Influences", "Beloved"],
+    "abilities": [
+      {
+        "name": "Let's All Go for a Walk",
+        "description": "Once per game, her presence defuses an escalating confrontation before blood is drawn."
+      },
+      {
+        "name": "Trust Is More Important Than Love",
+        "description": "The ally she declares loyalty to gains +1 influence for the rest of the game."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["jacaelon-targaryen", "alester-dayne", "baelenys-targaryen"],
+    "flavorQuote": "Anyway, trust is more important than love.",
+    "linkedCharacterId": "vhaemys-targaryen"
+  },
+  {
+    "id": "saathos-maris",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ser Saathos Maris",
+    "subtitle": "Gaelor's Sworn Sword",
+    "houseId": "-",
+    "power": 7,
+    "influence": 4,
+    "keywords": ["Kingsguard", "Loyal", "Sardonic", "Investigative"],
+    "abilities": [
+      {
+        "name": "Hold the Door",
+        "description": "Denies entry to a location; even a royal command requires overcoming him first."
+      },
+      {
+        "name": "The Blonde Knight",
+        "description": "May spend an action to investigate a death; gains one hidden clue token."
+      }
+    ],
+    "nemesis": ["alester-dayne"],
+    "allies": ["gaelor-targaryen"],
+    "flavorQuote": "Need me to hold it for you, my Prince?",
+    "linkedCharacterId": "saathos-maris"
+  },
+  {
+    "id": "steffon-baratheon",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Steffon Baratheon",
+    "subtitle": "The Young Stag",
+    "houseId": "baratheon",
+    "power": 8,
+    "influence": 5,
+    "keywords": ["Lord", "Knight", "Tourney Champion", "Politically Naive"],
+    "abilities": [
+      {
+        "name": "A Baratheon Kneels When He Feels Safe",
+        "description": "Cannot be compelled to show deference; ignores intimidation effects."
+      },
+      {
+        "name": "The Hollow Crown",
+        "description": "Won the tourney by default; gains the champion title but not the glory."
+      }
+    ],
+    "nemesis": ["jacaelon-targaryen"],
+    "allies": ["alester-dayne", "naella-velaryon"],
+    "flavorQuote": "A Baratheon kneels when he feels safe.",
+    "linkedCharacterId": "steffon-baratheon"
+  },
+  {
+    "id": "brant-costayne",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ser Brant Costayne",
+    "subtitle": "The Reckoning",
+    "houseId": "-",
+    "power": 7,
+    "influence": 3,
+    "keywords": ["Knight", "Grief-Driven", "Came to Die", "Survivor"],
+    "abilities": [
+      {
+        "name": "Knights of Oldtown",
+        "description": "When he falls, all Reach-aligned characters gain +1 power for the remainder of the game."
+      },
+      {
+        "name": "Trial by Combat",
+        "description": "May demand single combat in lieu of any verdict; forces the plaintiff to fight personally."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["timos-hightower"],
+    "flavorQuote": "I stopped trusting the justice of the Seven Kingdoms a long time ago.",
+    "linkedCharacterId": "brant-costayne"
+  },
+  {
+    "id": "melessa-hightower",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Melessa Hightower",
+    "subtitle": "The Last Hightower",
+    "houseId": "hightower",
+    "power": 2,
+    "influence": 6,
+    "keywords": ["Survivor", "Lady", "Thirteen and Already Ruined", "Last of Her Blood"],
+    "abilities": [
+      {
+        "name": "The Last Name Standing",
+        "description": "While she lives, House Hightower cannot be fully eliminated from the game."
+      },
+      {
+        "name": "Uneasy Sanctuary",
+        "description": "May shelter a fugitive, but doing so costs her 2 influence each round they remain."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["martyn-mullendore", "almar-larchmont", "visenor-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "melessa-hightower"
+  },
+  {
+    "id": "weylar-rocke",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Weylar Rocke",
+    "subtitle": "Master of Whisperers",
+    "houseId": "-",
+    "power": 1,
+    "influence": 7,
+    "keywords": ["Spymaster", "Fear-Driven Loyalty", "Opportunistic", "Resourceful"],
+    "abilities": [
+      {
+        "name": "Little Birds",
+        "description": "Once per round, reveals one hidden piece of information about any character on the board."
+      },
+      {
+        "name": "Pardon Bought in Terror",
+        "description": "Cannot betray Jacaelon while Jacaelon lives; loyalty is absolute and involuntary."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["jacaelon-targaryen"],
+    "flavorQuote": "My little birds have brought me a song, my Prince.",
+    "linkedCharacterId": "weylar-rocke"
+  },
+  {
+    "id": "godfrey-blackwood",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Godfrey Blackwood",
+    "subtitle": "Lord of Raventree Hall",
+    "houseId": "blackwood",
+    "power": 6,
+    "influence": 5,
+    "keywords": ["Lord", "Knight", "Gracious", "Unconventional"],
+    "abilities": [
+      {
+        "name": "Gracious in Defeat",
+        "description": "When eliminated from combat, deals 1 influence damage to his opponent regardless."
+      },
+      {
+        "name": "Tackled into the Mud",
+        "description": "Once per game, prevents an assassination attempt mid-action."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["jacaelon-targaryen", "gaelor-targaryen"],
+    "flavorQuote": "What a jolly day for the peasants.",
+    "linkedCharacterId": "godfrey-blackwood"
+  },
+  {
+    "id": "rickard-stark",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Rickard Stark",
+    "subtitle": "Lord of Winterfell",
+    "houseId": "stark",
+    "power": 5,
+    "influence": 6,
+    "keywords": ["Lord", "Northern", "Honorable", "Quietly Ambitious"],
+    "abilities": [
+      {
+        "name": "The North Remembers",
+        "description": "Cannot be intimidated by Targaryen influence; Northern loyalty runs deeper than dragons."
+      },
+      {
+        "name": "When People Look Up",
+        "description": "Grants +1 influence to a Targaryen ally if he openly supports them."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["saera-targaryen"],
+    "flavorQuote": "When people look up, they want to see someone like you.",
+    "linkedCharacterId": "rickard-stark"
+  },
+  {
+    "id": "timos-hightower",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Timos Hightower",
+    "subtitle": "Lord of Oldtown",
+    "houseId": "hightower",
+    "power": 2,
+    "influence": 4,
+    "keywords": ["Lord", "Young", "Innocent", "Condemned"],
+    "abilities": [
+      {
+        "name": "He Asked for Parley",
+        "description": "If killed without a fair trial, all Reach-aligned characters gain +2 power permanently."
+      },
+      {
+        "name": "Desperate Steel",
+        "description": "In his final action, may strike back against any foe regardless of power difference."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["brant-costayne", "melessa-hightower"],
+    "flavorQuote": "",
+    "linkedCharacterId": "timos-hightower"
+  },
+  {
+    "id": "cordin-poole",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Cordin Poole",
+    "subtitle": "Maester",
+    "houseId": "-",
+    "power": 1,
+    "influence": 5,
+    "keywords": ["Maester", "Sycophantic", "Long-Serving", "Uncomfortable Truths"],
+    "abilities": [
+      {
+        "name": "And Who Else's Would It Be?",
+        "description": "Flatters the most powerful character in play; gains 1 influence from them each round."
+      },
+      {
+        "name": "Sons Must Pay",
+        "description": "Once per game, silences one ongoing argument or challenge at the council table — the affected player loses their next action."
+      }
+    ],
+    "nemesis": ["jacaelon-targaryen", "baelor-targaryen"],
+    "allies": ["gaelor-targaryen", "baelenys-targaryen"],
+    "flavorQuote": "Sons must pay the price for their fathers' ambitions.",
+    "linkedCharacterId": "cordin-poole"
+  },
+  {
+    "id": "orwell-morrigen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Orwell Morrigen",
+    "subtitle": "Lord Commander of the Kingsguard",
+    "houseId": "morrigen",
+    "power": 7,
+    "influence": 4,
+    "keywords": ["Lord Commander", "Kingsguard", "Disciplined", "Watching"],
+    "abilities": [
+      {
+        "name": "Experience Triumphs",
+        "description": "In combat against a younger character, gains +2 power."
+      },
+      {
+        "name": "Running Out of Patience",
+        "description": "Once per game, demands an accounting from any ally who has acted without orders."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["baelenys-targaryen", "alester-dayne"],
+    "flavorQuote": "Experience triumphs over youth and speed. The men you truly must fear are the experienced ones.",
+    "linkedCharacterId": "orwell-morrigen"
+  },
+  {
+    "id": "curtass-whent",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Curtass Whent",
+    "subtitle": "Former Kingsguard",
+    "houseId": "whent",
+    "power": 8,
+    "influence": 2,
+    "keywords": ["Mercenary", "Brutal", "Once-Legendary", "Sadistic"],
+    "abilities": [
+      {
+        "name": "Fixers Don't Make Songs",
+        "description": "Cannot be assigned honorable death; dies off-screen when defeated."
+      },
+      {
+        "name": "They Pass Over Real Men",
+        "description": "Deals +2 power against Kingsguard characters specifically."
+      }
+    ],
+    "nemesis": ["alester-dayne"],
+    "allies": ["baelenys-targaryen"],
+    "flavorQuote": "You know what the problem with the Kingsguard is? They pass over fixers — real men like me.",
+    "linkedCharacterId": "curtass-whent"
+  },
+  {
+    "id": "brannyn-vance",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Brannyn Vance",
+    "subtitle": "Sworn Shield, Broken",
+    "houseId": "vance",
+    "power": 5,
+    "influence": 2,
+    "keywords": ["Kingsguard", "Broken Vows", "Guilt-Ridden", "The Secret That Walks"],
+    "abilities": [
+      {
+        "name": "I Cannot Draw Steel Against Royal Blood",
+        "description": "Cannot attack any Targaryen character. Takes full damage from them without retaliation."
+      },
+      {
+        "name": "A Moment of Weakness",
+        "description": "When eliminated, deals 2 influence damage to every character currently holding a secret token. If any of those characters are Targaryen, they take 3 instead."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["maela-targaryen"],
+    "flavorQuote": "Of course I felt it. How could I not?",
+    "linkedCharacterId": "brannyn-vance"
+  },
+  {
+    "id": "malaenar-targaryen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Malaenar Targaryen",
+    "subtitle": "Lord of Dragonstone",
+    "houseId": "targaryen",
+    "power": 2,
+    "influence": 5,
+    "keywords": ["Lord", "Loyal", "Steady", "Overshadowed"],
+    "abilities": [
+      {
+        "name": "Renounced and Reliable",
+        "description": "Cannot be drawn into succession conflict; immune to kingmaking pressure."
+      },
+      {
+        "name": "Dragonstone's Quiet",
+        "description": "Holds a strategic location without requiring upkeep."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["baelenys-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "malaenar-targaryen"
+  },
+  {
+    "id": "naela-targaryen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Naela Targaryen",
+    "subtitle": "Wife of the Exiled",
+    "houseId": "targaryen",
+    "power": 1,
+    "influence": 3,
+    "keywords": ["Exile", "Unknown", "Mother"],
+    "abilities": [
+      {
+        "name": "Whereabouts Unknown",
+        "description": "Cannot be targeted by any player while her location remains hidden."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["vahaemon-targaryen", "rhaella-targaryen", "visenya-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "naela-targaryen"
+  },
+  {
+    "id": "brandon-stark",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Brandon Stark",
+    "subtitle": "Late Lord of Winterfell",
+    "houseId": "stark",
+    "power": 1,
+    "influence": 3,
+    "keywords": ["Dead", "Northern", "Honorable", "The Reason She Went North"],
+    "abilities": [
+      {
+        "name": "Death in His Own Bed",
+        "description": "When played, immediately triggers one diplomatic event between Stark and Targaryen."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["rickard-stark"],
+    "flavorQuote": "",
+    "linkedCharacterId": "brandon-stark"
+  },
+  {
+    "id": "tion-lannister",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Tion Lannister",
+    "subtitle": "Master of Coin",
+    "houseId": "lannister",
+    "power": 1,
+    "influence": 6,
+    "keywords": ["Master of Coin", "Practical", "Rarely Heeded", "Correct"],
+    "abilities": [
+      {
+        "name": "Deal With the Money",
+        "description": "Reduces the cost of any decree or campaign by 1 resource — if anyone listens."
+      },
+      {
+        "name": "A War With No Clear End",
+        "description": "May delay a military campaign by one round by presenting financial projections."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen"],
+    "allies": ["jacaelon-targaryen", "baelor-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "tion-lannister"
+  },
+  {
+    "id": "martyn-mullendore",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Martyn Mullendore",
+    "subtitle": "Knight of the Reach",
+    "houseId": "mullendore",
+    "power": 5,
+    "influence": 3,
+    "keywords": ["Knight", "Loyal", "Discreet", "Perceptive"],
+    "abilities": [
+      {
+        "name": "I Have a Good Memory for Faces",
+        "description": "Cannot be fooled by disguise; automatically identifies hidden characters."
+      },
+      {
+        "name": "Loyalty to the Prince",
+        "description": "His allegiance runs to Visenor personally, not to the house that employs him."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["visenor-targaryen", "melessa-hightower"],
+    "flavorQuote": "You are in the absolute last place in the realm you should be, my Prince.",
+    "linkedCharacterId": "martyn-mullendore"
+  },
+  {
+    "id": "leo-tyrell",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Leo Tyrell",
+    "subtitle": "Son of Highgarden",
+    "houseId": "tyrell",
+    "power": 2,
+    "influence": 4,
+    "keywords": ["Young", "Haughty", "His Father's Eyes", "Learning"],
+    "abilities": [
+      {
+        "name": "My Father Can Send—",
+        "description": "Attempts to summon Tyrell reinforcements; can be quietly shut down by any senior ally."
+      },
+      {
+        "name": "Proud of His Name",
+        "description": "Gains +1 influence whenever a Tyrell character is mentioned in play."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["renrose-tyrell", "martyn-mullendore"],
+    "flavorQuote": "",
+    "linkedCharacterId": "leo-tyrell"
+  },
+  {
+    "id": "almar-larchmont",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Almar Larchmont",
+    "subtitle": "Maester of the Hightower",
+    "houseId": "-",
+    "power": 1,
+    "influence": 4,
+    "keywords": ["Maester", "Discreet", "Fiercely Loyal", "Sharp"],
+    "abilities": [
+      {
+        "name": "He Is Maester Arthur",
+        "description": "Maintains a cover identity for one ally; costs 1 influence per round to sustain."
+      },
+      {
+        "name": "Do Not Forget It, My Lady",
+        "description": "Once per game, corrects a dangerous slip before it reaches hostile ears."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["melessa-hightower", "visenor-targaryen"],
+    "flavorQuote": "From this day forth, we shall not refer to our guest as a prince. He is Maester Arthur. Do not forget it, my lady.",
+    "linkedCharacterId": "almar-larchmont"
+  },
+  {
+    "id": "edmyn-uller",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Edmyn Uller",
+    "subtitle": "Dornish Maester",
+    "houseId": "-",
+    "power": 1,
+    "influence": 3,
+    "keywords": ["Maester", "Blunt", "Foul-Mouthed", "Refreshingly Honest"],
+    "abilities": [
+      {
+        "name": "They Are Utterly Fucked",
+        "description": "Delivers the most accurate intelligence report in play, without diplomatic softening."
+      },
+      {
+        "name": "Confirmed the Pregnancy",
+        "description": "When played alongside Rhaella, triggers a permanent narrative event."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["visenor-targaryen", "rhaella-targaryen", "lorenah-dayne"],
+    "flavorQuote": "",
+    "linkedCharacterId": "edmyn-uller"
+  },
+  {
+    "id": "alysanne-hightower",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Alysanne Hightower",
+    "subtitle": "A Quiet Tragedy",
+    "houseId": "hightower",
+    "power": 1,
+    "influence": 2,
+    "keywords": ["Dead", "Innocent", "Silent Witness", "The One They Did Not Mean to Kill"],
+    "abilities": [
+      {
+        "name": "Unintended",
+        "description": "Her death was not ordered. When eliminated, the character who caused it loses 3 influence permanently."
+      },
+      {
+        "name": "Watching from the Window",
+        "description": "When in play, all incoming threats are visible one round before they arrive."
+      }
+    ],
+    "nemesis": ["gaelor-targaryen"],
+    "allies": ["timos-hightower", "melessa-hightower"],
+    "flavorQuote": "",
+    "linkedCharacterId": "alysanne-hightower"
+  },
+  {
     "id": "blackfyre",
     "cardType": "artifact",
     "tierId": "s",
@@ -119,5 +986,47 @@
     "allies": ["gaelor-targaryen"],
     "flavorQuote": "Steel changed hands. So too did favor.",
     "linkedCharacterId": "gaelor-targaryen"
+  },
+  {
+    "id": "dark-sister",
+    "cardType": "artifact",
+    "tierId": "a",
+    "name": "Dark Sister",
+    "subtitle": "Ancestral Valyrian Steel Sword",
+    "houseId": "targaryen",
+    "power": 7,
+    "influence": 3,
+    "keywords": ["Valyrian Steel", "Stolen Legacy", "Message Left in Blood"],
+    "abilities": [
+      {
+        "name": "At Your Throat",
+        "description": "When wielded, may neutralize a target without killing — leaving them alive and shaken."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["visenya-targaryen", "vahaemon-targaryen"],
+    "flavorQuote": "The rumors were true. You are still rock hard.",
+    "linkedCharacterId": "visenya-targaryen"
+  },
+  {
+    "id": "dawn",
+    "cardType": "artifact",
+    "tierId": "s",
+    "name": "Dawn",
+    "subtitle": "Sword of the Morning",
+    "houseId": "dayne",
+    "power": 9,
+    "influence": 2,
+    "keywords": ["Ancestral Blade", "Valyrian-Like", "House Dayne", "Legendary"],
+    "abilities": [
+      {
+        "name": "Sword of the Morning",
+        "description": "Shatters lesser steel on contact; any non-Valyrian blade that strikes it is destroyed."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["alester-dayne"],
+    "flavorQuote": "",
+    "linkedCharacterId": "alester-dayne"
   }
 ]
