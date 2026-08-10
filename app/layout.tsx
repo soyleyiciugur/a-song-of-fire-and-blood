@@ -20,14 +20,9 @@ const cinzel = Cinzel({
 
 const crimsonText = Crimson_Text({
   subsets: ["latin"],
-  variable: "--font-crimson-text",
+  variable: "--font-body",
   weight: ["400", "600"],
   style: ["normal", "italic"],
-});
-
-const geistBody = Geist({
-  subsets: ["latin"],
-  variable: "--font-body",
 });
 
 const siteUrl = "https://a-song-of-fire-and-blood.vercel.app";
