@@ -715,8 +715,9 @@
       "Avoid ever repeating his other brother's fate"
     ],
     "relationships": {
-      "baelenys-targaryen": "His younger brother and King; renounced his own claim to the throne due to his infirmity and has never once challenged his rule.",
-      "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name."
+      "baelenys-targaryen": "His younger brother and King; their nameday reunion on Dragonstone devolved into a screaming match over old wounds — Vahaemon's treason, their father's violence against their mother, and Malaenar's choice to stand aside during the succession crisis. By the end of the evening they were drinking together on the balcony, which for this family constitutes reconciliation.",
+      "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name.",
+      "tansy-riverside": "His companion of two years, who organized the nameday feast that summoned the royal family without telling him first; he was heavily drunk throughout and seemed more amused than alarmed by the chaos that followed."
     },
     "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar renounced his own claim to the Iron Throne due to an infirmity and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor,' Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust.",
     "quotes": []
@@ -1288,7 +1289,7 @@
     "status": "Unknown",
     "secret": {
       "status": "Alive",
-      "note": "Believed to be in Pentos following expulsion from Braavos through Targaryen diplomatic pressure. Possesses a dragon of unknown origin."
+      "note": "Denied entry to Pentos by Targaryen diplomatic pressure. Has sailed for Tyrosh, where an informant within his camp reports he intends to offer the city the protection of his dragon in exchange for sanctuary and support."
     },
     "age": 55,
     "nameday": {
@@ -1697,10 +1698,11 @@
     "goals": [
       "Build goodwill with the new Hand of the King",
       "Perform creditably in the tourney lists",
-      "Enjoy himself without apology"
+      "Enjoy himself without apology",
+      "Secure Crown justice for his cousin's death at Bracken hands"
     ],
     "relationships": {
-      "jacaelon-targaryen": "Complimented his tenure as Hand before the tourney and faced him in the quarter-finals in a hard six-pass tilt; was unhorsed cleanly and congratulated Jace from the dirt. Alester reported seeing him descend from an inn's upper rooms flanked by a serving wench and a stableboy, and noted that he makes no secret of his tastes.",
+      "jacaelon-targaryen": "Complimented his tenure as Hand before the tourney and faced him in the quarter-finals in a hard six-pass tilt; was unhorsed cleanly and congratulated Jace from the dirt. Alester reported seeing him descend from an inn's upper rooms flanked by a serving wench and a stableboy, and noted that he makes no secret of his tastes. Brought the Bracken border killing before the Hand's throne; was offered two paths — a Crown envoy or a trial by combat — and accepted both as grounds to wait. Also threatened to ride North to Stark if the Crown failed him, a gambit Jace noted without flinching.",
       "gaelor-targaryen": "Tackled Ser Brant Costayne into the mud when Costayne drove a sword through Gaelor's horse's chest and attempted to murder the prince — an intervention that likely saved Gaelor's life and has not yet been formally acknowledged."
     },
     "summary": "A well-traveled lord from the Riverlands who arrived at the tourney with kind words for the Hand and a six-pass joust that lasted long enough to impress the stands before Jace's final lance throw sent him into the dirt. He congratulated Jace graciously, which cost him nothing; he then saved Gaelor Targaryen's life by tackling Brant Costayne mid-assassination, which cost him rather more. He makes no secret of his broader appetites, a fact Ser Alester noted with mild amusement from a roadside inn and relayed to Jace with more detail than was strictly necessary.",
@@ -1920,6 +1922,167 @@
       "leo-tyrell": "Present at the first breakfast meeting; his relationship with the Tyrell boy is not yet defined, though his instinct to keep Renrose's reach limited aligns with Visenor's own."
     },
     "summary": "Maester Almar serves as castle healer at the Hightower and is one of the four people inside the castle walls who know that the man calling himself Maester Arthur Sand is in fact Prince Visenor Targaryen. His composure under pressure was evident from the first morning: when Melessa began to address the prince by his true title at the breakfast table, Almar cut her off mid-word with a voice sharp enough to silence the room. His loyalties run first to Melessa and second to the success of the arrangement that keeps her safe — which, for now, means keeping Visenor's cover intact.",
+    "quotes": []
+  },
+  {
+    "id": "baran-strong",
+    "name": "Baran Strong",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Strong",
+    "title": "Sworn Sword of Dragonstone",
+    "status": "Alive",
+    "age": "-",
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": "-"
+    },
+    "height": "208 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Physically Imposing",
+      "Blunt",
+      "Resentful of His Exile",
+      "Loyal to Those Who Treat Him Fairly",
+      "Contemptuous of Curtass Whent"
+    ],
+    "goals": [
+      "Return to the Red Keep and to meaningful service",
+      "Prove his worth to Prince Gaelor"
+    ],
+    "relationships": {
+      "gaelor-targaryen": "Offered a place in Gaelor's service at Dragonstone; Gaelor extended the invitation after hearing his grievance and assessing his size and bearing.",
+      "jacaelon-targaryen": "Acknowledged him as Lord Hand and was told plainly there is a place for him in the Red Keep — but that Gaelor does not get to make that decision unilaterally.",
+      "curtass-whent": "Brawled with him inside the Red Keep; both were stripped of their white cloaks, though Baran was deemed the party in the right and exiled to Dragonstone rather than disgraced. He despised Whent and makes no pretense otherwise.",
+      "malaenar-targaryen": "Has served as his sworn sword on Dragonstone since the exile; Malaenar regards him as one of the finest knights in the Seven Kingdoms and is openly reluctant to give him back.",
+      "alester-dayne": "Met him at Dragonstone; needled him about the Kingsguard preferring pretty faces, and received a mild, unimpressed reply. Alester noted the size and filed it away."
+    },
+    "summary": "A near-seven-foot wall of muscle and grievance, Baran Strong was once a Kingsguard whose career ended in a brawl with Curtass Whent inside the Red Keep itself. Stripped of his white cloak but judged the wronged party, he was exiled to Dragonstone rather than disgraced outright — a distinction he appreciates and resents in equal measure. Prince Malaenar calls him one of the finest knights in the Seven Kingdoms. Prince Gaelor, after a single evening's conversation at the stables, decided to find out if that was true.",
+    "quotes": []
+  },
+  {
+    "id": "tansy-riverside",
+    "name": "Tansy",
+    "nickname": "-",
+    "aliases": [],
+    "house": "-",
+    "title": "-",
+    "status": "Alive",
+    "age": 17,
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": "-"
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Lowborn",
+      "Ambitious",
+      "Calculating",
+      "Undeterred by Disapproval",
+      "Tactically Charming"
+    ],
+    "goals": [
+      "Secure her position beside Malaenar",
+      "Be acknowledged by the royal family, however reluctantly"
+    ],
+    "relationships": {
+      "malaenar-targaryen": "His companion of two years; organized the nameday feast that summoned the royal family to Dragonstone without his prior knowledge, a move the family received with barely concealed contempt.",
+      "baelenys-targaryen": "Called her 'your wench' before his brother and the entire hall; she held his gaze and did not flinch.",
+      "gaelor-targaryen": "Caught his eye more than once during the evening; he extracted himself before anything could happen, aware of exactly what was at stake."
+    },
+    "summary": "A seventeen-year-old of no house and considerable ambition, Tansy has spent two years at Dragonstone as Malaenar Targaryen's companion. She organized his nameday feast and invited the royal family without asking him first — a gambit that put her at a high table with a king who called her a wench and a crown prince who looked at her the way men do when they are deciding not to. She showed no sign of finding either development discouraging.",
+    "quotes": []
+  },
+  {
+    "id": "perric-bracken",
+    "name": "Perric Bracken",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Bracken",
+    "title": "Lord of Stone Hedge",
+    "status": "Alive",
+    "age": "-",
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": "-"
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Aggressive",
+      "Opportunistic",
+      "Contemptuous of the Blackwoods"
+    ],
+    "goals": [
+      "Press House Bracken's advantage over the Blackwoods wherever possible",
+      "Avoid Crown intervention"
+    ],
+    "relationships": {
+      "godfrey-blackwood": "Ancient rivals; his men killed Godfrey's cousin near the border under circumstances he characterized as an accident and Godfrey characterized as murder. The Hand has offered him a trial by combat if he refuses to negotiate.",
+      "jacaelon-targaryen": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge."
+    },
+    "summary": "Lord Perric Bracken of Stone Hedge, whose men killed a Blackwood cousin near the border in circumstances that remain disputed. He called it an unfortunate accident during an altercation; Lord Godfrey Blackwood called it a deliberate provocation and brought the matter to the Hand of the King. The Hand offered two paths: a Crown envoy or a trial by combat. Bracken has not yet answered.",
+    "quotes": []
+  },
+  {
+    "id": "clover-tully",
+    "name": "Clover Tully",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Tully",
+    "title": "Lord of Riverrun, Lord Paramount of the Trident",
+    "status": "Alive",
+    "age": "-",
+    "nameday": {
+      "day": "-",
+      "moon": "-",
+      "year": "-"
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Passive",
+      "Diplomatic",
+      "Conflict-Averse",
+      "Recently Tied to the Brackens by Marriage"
+    ],
+    "goals": [
+      "Keep the Riverlands at peace",
+      "Avoid taking sides between Blackwood and Bracken"
+    ],
+    "relationships": {
+      "godfrey-blackwood": "His bannerman; refused to grant him vengeance or marshal forces against the Brackens, calling the border killing a drunken mistake. Godfrey bypassed him entirely and went to the Crown.",
+      "perric-bracken": "His other bannerman; recently tied to him by the marriage of a grandson to a Bracken girl, which Godfrey and the Hand both noted as the reason for his passivity."
+    },
+    "summary": "Lord Clover Tully of Riverrun, Lord Paramount of the Trident. Notoriously passive and recently bound to House Bracken by his grandson's marriage, he refused to give Godfrey Blackwood the justice he demanded for his cousin's death — calling it a drunken mistake and urging peace. Godfrey took the matter to the Hand of the King instead, a step Lord Tully was informed of in advance and did not prevent.",
     "quotes": []
   }
 ]
