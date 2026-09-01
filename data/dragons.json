@@ -17,7 +17,7 @@
     "name": "Jhagar",
     "status": "Alive",
     "riderId": "jacaelon-targaryen",
-    "image": "/images/dragons/jhagar.webp",
+    "image": "/images/dragons/jhagar.png",
     "traits": [
       "Ill-Tempered",
       "Difficult to Handle",
@@ -74,7 +74,7 @@
     "name": "Boneskin",
     "status": "Alive",
     "riderId": "visenor-targaryen",
-    "image": "/images/dragons/boneskin.webp",
+    "image": "/images/dragons/boneskin.png",
     "traits": [
       "Pale, Bone-Yellow Scales",
       "Wings Thin Enough to Show the Bone Beneath",
