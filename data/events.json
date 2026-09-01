@@ -53,5 +53,16 @@
     "moon": 7,
     "year": 99,
     "description": "Ser Brant Costayne stands trial in the Great Hall of the Red Keep before the Hand of the King, the Grand Maester, and the High Septon. The panel sentences him to the Wall — a verdict he immediately voids by demanding trial by combat."
+  },
+  {
+    "id": "nameday-malaenar",
+    "title": "Prince Malaenar's Nameday",
+    "type": "nameday",
+    "location": "Dragonstone",
+    "chapterSlug": "the-reunion",
+    "day": 4,
+    "moon": 8,
+    "year": 99,
+    "description": "The royal family gathers on Dragonstone for Prince Malaenar Targaryen's nameday, where a candlelit feast arranged in secret by Tansy descends into a bitter confrontation between Malaenar and King Baelenys over old wounds, family loyalties, and the succession."
   }
 ]

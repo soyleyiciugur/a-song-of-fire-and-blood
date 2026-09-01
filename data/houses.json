@@ -10,14 +10,14 @@
     "description": "The ruling house of the Seven Kingdoms, bound as much by dragonfire as by blood. King Baelenys' reign has grown harsher since the poisoning, and the loyalty of his own siblings and children has never been so openly tested."
   },
   {
-  "id": "tyrell",
-  "name": "House Tyrell",
-  "words": "Growing Strong",
-  "seat": "Highgarden",
-  "sigilSrc": "/images/houses/tyrell.webp",
-  "color": "#228B22",
-  "secondaryColor": "#F4C430",
-  "description": "Lords of the Reach, whose previous lord — Renrose's father — was executed for his role in the plot to poison King Baelenys alongside Derrin Hightower. The sanctions levied against the house in the aftermath have since been lightened, in part because the Oldtown Massacre shifted the realm's attention and gave Renrose room to quietly rehabilitate his position. He has used that room shrewdly: in secret, he has pledged the full strength of the Reach behind Visenor's claim to the throne in exchange for being named Hand of the King upon his coronation. His first move after sealing the Mander's Pact was to send his fourteen-year-old son Leo to Oldtown, ostensibly to be educated alongside Lady Melessa Hightower. In practice, the boy is Renrose's eyes inside the Hightower — a foothold Visenor has already begun quietly working to limit."
+    "id": "tyrell",
+    "name": "House Tyrell",
+    "words": "Growing Strong",
+    "seat": "Highgarden",
+    "sigilSrc": "/images/houses/tyrell.webp",
+    "color": "#228B22",
+    "secondaryColor": "#F4C430",
+    "description": "Lords of the Reach, whose previous lord — Renrose's father — was executed for his role in the plot to poison King Baelenys alongside Derrin Hightower. The sanctions levied against the house in the aftermath have since been lightened, in part because the Oldtown Massacre shifted the realm's attention and gave Renrose room to quietly rehabilitate his position. He has used that room shrewdly: in secret, he has pledged the full strength of the Reach behind Visenor's claim to the throne in exchange for being named Hand of the King upon his coronation. His first move after sealing the Mander's Pact was to send his fourteen-year-old son Leo to Oldtown, ostensibly to be educated alongside Lady Melessa Hightower. In practice, the boy is Renrose's eyes inside the Hightower — a foothold Visenor has already begun quietly working to limit."
   },
   {
     "id": "hightower",
@@ -128,5 +128,65 @@
     "color": "#FFD93D",
     "secondaryColor": "#000000",
     "description": "A crownlands house best known here through Curtass Whent, whose long shadow stretched from the Kingsguard to the woods south of King's Landing. Word of his death there, killed in the King's service while hunting Prince Visenor, has since reached the Red Keep — received by the Crown with far more indifference than House Whent might have hoped for."
+  },
+  {
+    "id": "strong",
+    "name": "House Strong",
+    "words": "-",
+    "seat": "-",
+    "sigilSrc": "/images/houses/strong.webp",
+    "color": "#3B3B3B",
+    "secondaryColor": "#D4AF37",
+    "description": "A minor Riverlands house whose name survives at court through Baran Strong. Once a knight of the Kingsguard, Baran has since been cast from the white cloak and into exile, leaving his house's place in the affairs of the realm tied largely to his uncertain fate."
+  },
+  {
+    "id": "bracken",
+    "name": "House Bracken",
+    "words": "-",
+    "seat": "Stone Hedge",
+    "sigilSrc": "/images/houses/bracken.webp",
+    "color": "#B08A47",
+    "secondaryColor": "#8B0000",
+    "description": "An ancient Riverlands house and bitter rival of House Blackwood. In 99 AC, men sworn to Lord Perric Bracken killed a Blackwood cousin near the disputed border, reopening a feud old enough that few remember its beginning. The bloodshed has since grown into a matter for the Hand of the King, with neither house inclined to yield."
+  },
+  {
+    "id": "tully",
+    "name": "House Tully",
+    "words": "Family, Duty, Honor",
+    "seat": "Riverrun",
+    "sigilSrc": "/images/houses/tully.webp",
+    "color": "#315D9B",
+    "secondaryColor": "#A71930",
+    "description": "Lords Paramount of the Trident, charged with keeping peace among the proud and quarrelsome houses of the Riverlands. Under Lord Clover Tully, whose passive rule has done little to restrain his bannermen, that peace has grown increasingly brittle. His grandson's recent marriage into House Bracken has further complicated the ancient Bracken-Blackwood feud and raised questions over Riverrun's impartiality."
+  },
+  {
+    "id": "arryn",
+    "name": "House Arryn",
+    "words": "As High as Honor",
+    "seat": "The Eyrie",
+    "sigilSrc": "/images/houses/arryn.webp",
+    "color": "#4A90C2",
+    "secondaryColor": "#FFFFFF",
+    "description": "Lords of the Vale and one of the great houses of the realm. The Arryns have so far remained largely removed from the crises consuming the Crown, though their position, armies, and ancient prestige ensure that their allegiance cannot be ignored as divisions within House Targaryen deepen."
+  },
+  {
+    "id": "greyjoy",
+    "name": "House Greyjoy",
+    "words": "We Do Not Sow",
+    "seat": "Pyke",
+    "sigilSrc": "/images/houses/greyjoy.webp",
+    "color": "#1C1C1C",
+    "secondaryColor": "#D4AF37",
+    "description": "The ruling house of the Iron Islands, a land whose relationship with the Iron Throne has long been written in salt, steel, and blood. Memories of King Baelenys' wars in the islands remain vivid, not least the tale of his confrontation with Harrik, the towering warrior remembered as the Drowned Servant."
+  },
+  {
+    "id": "martell",
+    "name": "House Martell",
+    "words": "Unbowed, Unbent, Unbroken",
+    "seat": "Sunspear",
+    "sigilSrc": "/images/houses/martell.webp",
+    "color": "#D97925",
+    "secondaryColor": "#C0392B",
+    "description": "The ruling house of Dorne, proud guardians of a realm that has always kept its own counsel. Though the troubles surrounding Prince Visenor have repeatedly carried Targaryen blood across Dornish lands, House Martell itself has yet to hear about them and to openly take a side in the gathering struggle for the Iron Throne."
   }
 ]

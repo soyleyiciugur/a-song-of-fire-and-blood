@@ -213,5 +213,15 @@
     "name": "The Dornish Marches",
     "xPct": 15.09,
     "yPct": 58.87
+  },
+  {
+    "name": "Stone Hedge",
+    "xPct": 16.15,
+    "yPct": 44.11
+  },
+  {
+    "name": "Raventree Hall",
+    "xPct": 15.2,
+    "yPct": 42.54
   }
 ]

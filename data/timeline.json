@@ -540,5 +540,53 @@
         ]
       }
     ]
+  },
+  {
+    "chapterSlug": "the-reunion",
+    "chapterTitle": "Chapter XIV: The Reunion",
+    "date": "2nd–8th of the 8th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Lord Blackwood Before the Hand",
+        "description": "Lord Godfrey Blackwood brings the Bracken border killing before Hand Jacaelon Targaryen, demanding justice or leave to declare war. Jace offers two paths: a Crown envoy, or a trial by combat if Bracken refuses the challenge.",
+        "date": "2nd of the 8th Moon",
+        "characters": [
+          "godfrey-blackwood",
+          "jacaelon-targaryen",
+          "baelor-targaryen"
+        ]
+      },
+      {
+        "title": "The Nameday Feast on Dragonstone",
+        "description": "The royal family visits Dragonstone for Prince Malaenar's nameday, a feast organized without his knowledge by his companion Tansy. The dinner devolves into a screaming confrontation between King Baelenys and Malaenar over old wounds — Vahaemon, their father's violence, and who failed whom. By the end of the evening the brothers drink wine together on the balcony. Gaelor intercepts Baelor's letter about Vahaemon sailing for Tyrosh. Jace and Lorenah spend their first night together.",
+        "date": "4th of the 8th Moon",
+        "characters": [
+          "baelenys-targaryen",
+          "jaery-targaryen",
+          "gaelor-targaryen",
+          "naella-velaryon",
+          "saera-targaryen",
+          "maela-targaryen",
+          "jacaelon-targaryen",
+          "vhaemys-targaryen",
+          "malaenar-targaryen",
+          "tansy-riverside",
+          "baran-strong",
+          "alester-dayne",
+          "saathos-maris",
+          "lorenah-dayne"
+        ]
+      },
+      {
+        "title": "Vahaemon Sails for Tyrosh",
+        "description": "Intelligence reaches the Red Keep via Baelor's raven: Vahaemon Targaryen has been denied entry to Pentos and has sailed for Tyrosh, where he intends to offer the city the protection of his dragon in exchange for sanctuary and support.",
+        "date": "4th of the 8th Moon",
+        "characters": [
+          "vahaemon-targaryen",
+          "baelor-targaryen",
+          "gaelor-targaryen"
+        ]
+      }
+    ]
   }
 ]

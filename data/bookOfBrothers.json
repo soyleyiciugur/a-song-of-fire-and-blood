@@ -204,75 +204,54 @@
     "published": true
   },
   {
-    "id": "ser-orwell-morrigen",
-    "characterId": "ser-orwell-morrigen",
+    "id": "orwell-morrigen",
+    "characterId": "orwell-morrigen",
     "appointedDate": "many years past",
     "endDate": "",
     "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
     "deeds": [
       {
-        "description": "Rose to Lord Commander of the Kingsguard, and held it through decades of relative peace."
+        "description": "Rose to Lord Commander of the Kingsguard, and held the office through decades of relative peace."
       },
       {
-        "description": "Trained Prince Jacaelon Targaryen rigorously during Ser Alester Dayne's unexplained absence from court, and judged him ready for knighthood, though the Prince ultimately chose Ser Alester to perform the ceremony."
-      },
-      {
-        "description": "Held the White Sword Tower together through a poisoning attempt on the King, a vanished Crown Prince, and a sworn brother's unsanctioned flight from the capital — all within a single turbulent season."
+        "description": "Held command of the Kingsguard through the poisoning of King Baelenys and the disappearance of Crown Prince Visenor."
       }
     ],
     "notes": "",
     "published": true
   },
   {
-    "id": "ser-alester-dayne",
-    "characterId": "ser-alester-dayne",
+    "id": "alester-dayne",
+    "characterId": "alester-dayne",
     "appointedDate": "recently",
     "endDate": "",
     "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
     "deeds": [
       {
-        "description": "Served as Prince Jacaelon Targaryen's closest protector and confidant."
+        "description": "Abandoned his post without leave to escort Crown Prince Visenor and Princess Rhaella from King's Landing toward Dorne."
       },
       {
-        "description": "Uncovered Princess Rhaella's secret correspondence with her exiled kin during the poisoning crisis."
-      },
-      {
-        "description": "Defied the Hand of the King himself to guard a secret entrusted to him."
-      },
-      {
-        "description": "Escorted Crown Prince Visenor and Princess Rhaella out of King's Landing under cover of darkness, smuggling them toward Dorne."
-      },
-      {
-        "description": "Ambushed in the woods south of the capital by the disgraced former knight Curtass Whent and five hired sellswords; fought through brutal, sustained violence—losing an eye's worth of vision and half his ribs—before killing Whent in a final, desperate act to win free."
-      },
-      {
-        "description": "Knighted Prince Jacaelon Targaryen in a private ceremony, witnessed by no other, after returning to court."
-      },
-      {
-        "description": "Sought out by Princess Saera upon his battered return to the capital, quietly resuming their old habit of walking the corridors together late at night."
+        "description": "Fought Ser Curtass Whent and five hired swords during an ambush on the road to Dorne, and slew Whent despite suffering grievous wounds."
       }
     ],
-    "notes": "",
+    "notes": "His unauthorized departure from the capital remains a matter for the Lord Commander.",
     "published": true
   },
   {
-    "id": "ser-brannyn-vance",
-    "characterId": "ser-brannyn-vance",
+    "id": "brannyn-vance",
+    "characterId": "brannyn-vance",
     "appointedDate": "",
-    "endDate": "",
+    "endDate": "executed after breaking his vows",
     "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
     "deeds": [
       {
-        "description": "Sworn shield to Princess Maela Targaryen."
+        "description": "Broke his vows of chastity with Princess Maela Targaryen."
       },
       {
-        "description": "Broke his sacred vows for her in a single night neither has spoken of since."
-      },
-      {
-        "description": "Continues in her service, wracked with guilt, the secret kept by the Princess's word alone and a cup of moon tea."
+        "description": "Put to death by Prince Gaelor Targaryen with Blackfyre after his breach of vows was discovered."
       }
     ],
-    "notes": "",
+    "notes": "His name remains in the White Book as a record of service and disgrace.",
     "published": true
   },
   {
@@ -282,13 +261,54 @@
     "endDate": "slain in disgrace",
     "oath": "I shall keep the king I serve from harm...",
     "deeds": [
-      { "description": "Served as a sworn brother of the Kingsguard with a fearsome reputation as a swordsman." },
-      { "description": "Left the order under clouded circumstances, his honor abandoned." },
-      { "description": "Summoned back by King Baelenys as a hired hunter to track down Crown Prince Visenor." },
-      { "description": "Ambushed Ser Alester Dayne and the fugitive Prince in the Dornish woods with five sellswords." },
-      { "description": "Slain by Ser Alester Dayne during the ambush, his body left near a rural sept." }
+      {
+        "description": "Served as a sworn brother of the Kingsguard and was accounted a formidable swordsman."
+      },
+      {
+        "description": "Was stripped of his white cloak after a violent quarrel with Ser Baran Strong within the Red Keep."
+      },
+      {
+        "description": "Later entered King Baelenys's service as a hunter charged with finding Crown Prince Visenor."
+      },
+      {
+        "description": "Ambushed Ser Alester Dayne and Crown Prince Visenor with five hired swords on the road to Dorne."
+      },
+      {
+        "description": "Slain by Ser Alester Dayne during the ambush."
+      }
     ],
     "notes": "Struck from the White Book's place of honor; recorded here only as a warning.",
+    "published": true
+  },
+  {
+    "id": "baran-strong",
+    "characterId": "baran-strong",
+    "appointedDate": "years past",
+    "endDate": "stripped of his white cloak and exiled to Dragonstone",
+    "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
+    "deeds": [
+      {
+        "description": "Was stripped of his white cloak after fighting Ser Curtass Whent within the Red Keep."
+      },
+      {
+        "description": "Judged the less culpable of the two and exiled to Dragonstone rather than condemned in disgrace."
+      }
+    ],
+    "notes": "After his dismissal, entered the service of Prince Malaenar Targaryen on Dragonstone.",
+    "published": true
+  },
+  {
+    "id": "saathos-maris",
+    "characterId": "saathos-maris",
+    "appointedDate": "recently",
+    "endDate": "",
+    "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
+    "deeds": [
+      {
+        "description": "Rode with Prince Gaelor Targaryen during the Crown's march upon Oldtown."
+      }
+    ],
+    "notes": "",
     "published": true
   }
 ]
