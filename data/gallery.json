@@ -1,5 +1,136 @@
 [
   {
+    "id": "gallery-mtj61vlo",
+    "src": "/images/gallery/visenor-gaelor-jace.jpeg",
+    "caption": "The Big 3.",
+    "characterIds": [
+      "jacaelon-targaryen",
+      "visenor-targaryen",
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-01",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtj5wuc5",
+    "src": "/images/gallery/jacemounted.png",
+    "caption": "The Winged Hand.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-brothers-tilt",
+    "worldDate": {
+      "day": 18,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-01",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtj5vqun",
+    "src": "/images/gallery/jace-tourney-fallen.png",
+    "caption": "The Hand that fell.",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-brothers-tilt",
+    "worldDate": {
+      "day": 18,
+      "moon": 7,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-01",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtj5um5s",
+    "src": "/images/gallery/jace-hasocash.png",
+    "caption": "1000 liralık hasocash doldur, 4 paket de biscolata starz",
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-brothers-tilt",
+    "worldDate": null,
+    "uploadedAt": "2026-09-01",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mtj5p1dq",
+    "src": "/images/gallery/durduk-yere-olen-brandon.png",
+    "caption": "kurt yediği ayaz hakkında detay veremeyecek maalesef",
+    "characterIds": [
+      "brandon-stark"
+    ],
+    "houseIds": [
+      "stark"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": {
+      "day": 30,
+      "moon": 2,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-01",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-mtj5ooc5",
+    "src": "/images/gallery/cloudgazer-portrait.png",
+    "caption": "Cloudgazer.",
+    "characterIds": [],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "cloudgazer"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-01",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtj5nnr3",
+    "src": "/images/gallery/cloudgazer-over-kings-landing.png",
+    "caption": "Cloudgazer over the King's Landing.",
+    "characterIds": [
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "cloudgazer"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-01",
+    "category": "raven"
+  },
+  {
     "id": "gallery-msp5o3gw",
     "src": "/videos/reels/dursec.mp4",
     "caption": "✌️dur. seç.✌️dur. seç.✌️",
@@ -1206,7 +1337,7 @@
   },
   {
     "id": "gallery-mri9xkcb",
-    "src": "/images/gallery/jace-the-hand.png",
+    "src": "/images/gallery/jace-the-hand.jpeg",
     "caption": "Jace the Hand.",
     "characterIds": [
       "jacaelon-targaryen"
