@@ -1282,7 +1282,7 @@
     "height": "178 cm",
     "father": "tygett-lannister",
     "mother": "ella-lannister",
-    "spouse": "myrielle-lannister",
+    "spouse": "myrielle-marbrand",
     "siblings": [],
     "children": [],
     "mentor": "-",
@@ -2386,12 +2386,12 @@
     "quotes": []
   },
   {
-    "id": "myrielle-lannister",
-    "name": "Myrielle Lannister",
+    "id": "myrielle-marbrand",
+    "name": "Myrielle Marbrand",
     "nickname": "-",
     "aliases": [],
-    "house": "House Lannister",
-    "title": "Lady of House Lannister",
+    "house": "House Marbrand",
+    "title": "Lady Myrielle Marbrand",
     "status": "Alive",
     "age": 47,
     "nameday": {

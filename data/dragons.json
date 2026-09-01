@@ -34,11 +34,12 @@
     "image": "/images/dragons/cloudgazer.webp",
     "traits": [
       "Storm-Grey Scales",
+      "Amethyst-Crystal Horns",
       "Unusually Gentle",
       "Swift",
       "Prefers High Altitude"
     ],
-    "description": "Princess Saera's dragon, storm-grey and unusually gentle. She retreats to his back whenever the Red Keep grows too loud."
+    "description": "Princess Saera's dragon, a vast storm-grey beast crowned with translucent amethyst-like horns and unusually gentle by nature. She retreats to his back whenever the Red Keep grows too loud."
   },
   {
     "id": "bayle",

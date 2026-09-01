@@ -249,7 +249,7 @@ export default function FamilyTree() {
             >
               <Union
                 a={{ id: "tion-lannister" }}
-                b={{ id: "myrielle-lannister" }}
+                b={{ id: "myrielle-marbrand" }}
               />
             </FamilyUnit>
           </div>
