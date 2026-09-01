@@ -1,3 +1,4 @@
+```tsx
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\family-tree\page.tsx
 
 import FamilyUnit from "@/components/familytree/FamilyUnit";
@@ -21,24 +22,46 @@ export default function FamilyTree() {
         <section id="house-targaryen" className={styles.house}>
           <h2 className={styles.houseTitle}>House Targaryen</h2>
 
+          <p className={styles.generationLabel}>The Elder Generation</p>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="baelor-targaryen" />
+
+            <Union
+              a={{ id: "aenys-targaryen-ii" }}
+              b={{ id: "vhaemys-targaryen-elder" }}
+            />
+          </div>
+
           <p className={styles.generationLabel}>
-            The Old King&apos;s Children
+            The Children of Aenys II
           </p>
 
           <div className={styles.generationRow}>
             <FamilyUnit
-              parentA={{ name: "Aenys Targaryen II" }}
-              parentB={{ name: "Vhaemys Targaryen" }}
+              parentA={{ id: "aenys-targaryen-ii" }}
+              parentB={{ id: "vhaemys-targaryen-elder" }}
               childrenLabel="Children"
             >
-              <PersonNode id="malaenar-targaryen" />
-              <PersonNode id="baelenys-targaryen" />
-              <PersonNode id="vahaemon-targaryen" />
+              <Union
+                a={{ id: "malaenar-targaryen" }}
+                b={{ id: "alysa-targaryen" }}
+              />
+
+              <Union
+                a={{ id: "baelenys-targaryen" }}
+                b={{ id: "jaery-targaryen" }}
+              />
+
+              <Union
+                a={{ id: "vahaemon-targaryen" }}
+                b={{ id: "naela-targaryen" }}
+              />
             </FamilyUnit>
           </div>
 
           <p className={styles.generationLabel}>
-            The King&apos;s Generation
+            The King&apos;s Children
           </p>
 
           <div className={styles.generationRow}>
@@ -63,39 +86,39 @@ export default function FamilyTree() {
               <PersonNode id="jacaelon-targaryen" />
               <PersonNode id="vhaemys-targaryen" />
             </FamilyUnit>
+          </div>
 
-            <FamilyUnit
-              parentA={{ id: "malaenar-targaryen" }}
-              parentB={{ name: "Alysa Targaryen" }}
-            />
+          <p className={styles.generationLabel}>
+            Vahaemon&apos;s Children
+          </p>
 
+          <div className={styles.generationRow}>
             <FamilyUnit
               parentA={{ id: "vahaemon-targaryen" }}
               parentB={{ id: "naela-targaryen" }}
               childrenLabel="Children"
             >
               <PersonNode id="visenya-targaryen" />
-              <PersonNode id="rhaella-targaryen" />
+
+              <Union
+                a={{ id: "rhaella-targaryen" }}
+                b={{ id: "visenor-targaryen" }}
+              />
             </FamilyUnit>
           </div>
 
-          <p className={styles.generationLabel}>Other Royal Branches</p>
+          <p className={styles.generationLabel}>
+            Queen Jaery&apos;s Branch
+          </p>
 
           <div className={styles.generationRow}>
-            <PersonNode id="baelor-targaryen" />
+            <PersonNode id="vaenarr-targaryen" />
+
+            <Union
+              a={{ id: "jaery-targaryen" }}
+              b={{ id: "baelenys-targaryen" }}
+            />
           </div>
-
-          <p className={styles.houseNote}>
-            Grand Maester Baelor belongs to an older branch of the royal
-            family and is King Baelenys&apos; great-uncle. The exact line
-            connecting his branch to the King&apos;s is not yet recorded.
-          </p>
-
-          <p className={styles.houseNote}>
-            Rhaella appears twice above: she is both Vahaemon&apos;s daughter
-            and Visenor&apos;s wife, tying the exiled branch directly back
-            into the royal line.
-          </p>
         </section>
 
         {/* HOUSE VELARYON */}
@@ -108,12 +131,6 @@ export default function FamilyTree() {
               b={{ id: "gaelor-targaryen" }}
             />
           </div>
-
-          <p className={styles.houseNote}>
-            Princess Naella&apos;s immediate Velaryon family has not yet been
-            named in the records. Her marriage to Prince Gaelor binds House
-            Velaryon directly to the royal family.
-          </p>
         </section>
 
         {/* HOUSE HIGHTOWER */}
@@ -130,12 +147,6 @@ export default function FamilyTree() {
               <PersonNode id="melessa-hightower" />
             </FamilyUnit>
           </div>
-
-          <p className={styles.houseNote}>
-            Derrin&apos;s wife and the mother of his children has not yet been
-            named. Melessa is the only surviving child of this branch after
-            the deaths of Timos and Alysanne at Oldtown.
-          </p>
         </section>
 
         {/* HOUSE TYRELL */}
@@ -181,23 +192,32 @@ export default function FamilyTree() {
             </FamilyUnit>
           </div>
 
-          <p className={styles.generationLabel}>A Distant Branch</p>
+          <p className={styles.generationLabel}>Maron&apos;s Branch</p>
 
           <div className={styles.generationRow}>
             <FamilyUnit
-              parentA={{ name: "Unknown Dayne" }}
-              parentB={{ name: "A Karstark of the North" }}
+              parentA={{ id: "maron-dayne" }}
+              parentB={{ id: "lyarra-karstark" }}
               childrenLabel="Children"
             >
               <PersonNode id="alester-dayne" />
             </FamilyUnit>
           </div>
+        </section>
 
-          <p className={styles.houseNote}>
-            Ser Alester Dayne is a distant cousin of Lorenah&apos;s from
-            another branch of House Dayne, not a direct descendant of Darren
-            Dayne.
-          </p>
+        {/* HOUSE KARSTARK */}
+        <section id="house-karstark" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Karstark</h2>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit
+              parentA={{ id: "lyarra-karstark" }}
+              parentB={{ id: "maron-dayne" }}
+              childrenLabel="Children"
+            >
+              <PersonNode id="alester-dayne" />
+            </FamilyUnit>
+          </div>
         </section>
 
         {/* HOUSE BARATHEON */}
@@ -209,19 +229,28 @@ export default function FamilyTree() {
           </div>
         </section>
 
+        {/* HOUSE ARRYN */}
+        <section id="house-arryn" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Arryn</h2>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="ronnel-arryn" />
+          </div>
+        </section>
+
         {/* HOUSE LANNISTER */}
         <section id="house-lannister" className={styles.house}>
           <h2 className={styles.houseTitle}>House Lannister</h2>
 
           <div className={styles.generationRow}>
             <FamilyUnit
-              parentA={{ name: "Tygett Lannister" }}
-              parentB={{ name: "Ella Lannister" }}
+              parentA={{ id: "tygett-lannister" }}
+              parentB={{ id: "ella-lannister" }}
               childrenLabel="Children"
             >
               <Union
                 a={{ id: "tion-lannister" }}
-                b={{ name: "Myrielle Lannister" }}
+                b={{ id: "myrielle-lannister" }}
               />
             </FamilyUnit>
           </div>
@@ -242,6 +271,11 @@ export default function FamilyTree() {
 
           <div className={styles.generationRow}>
             <PersonNode id="perric-bracken" />
+
+            <Union
+              a={{ id: "bethany-bracken" }}
+              b={{ id: "oscar-tully" }}
+            />
           </div>
         </section>
 
@@ -252,24 +286,19 @@ export default function FamilyTree() {
           <div className={styles.generationRow}>
             <FamilyUnit
               parentA={{ id: "clover-tully" }}
-              childrenLabel="Child"
+              childrenLabel="Children"
             >
               <FamilyUnit
-                parentA={{ name: "Unknown Tully" }}
+                parentA={{ id: "elwood-tully" }}
                 childrenLabel="Children"
               >
                 <Union
-                  a={{ name: "Clover Tully's Grandson" }}
-                  b={{ name: "A Bracken Girl" }}
+                  a={{ id: "oscar-tully" }}
+                  b={{ id: "bethany-bracken" }}
                 />
               </FamilyUnit>
             </FamilyUnit>
           </div>
-
-          <p className={styles.houseNote}>
-            Lord Clover&apos;s grandson recently married into House Bracken.
-            The intervening generation has not yet been identified.
-          </p>
         </section>
 
         {/* HOUSE STRONG */}
@@ -278,6 +307,15 @@ export default function FamilyTree() {
 
           <div className={styles.generationRow}>
             <PersonNode id="baran-strong" />
+          </div>
+        </section>
+
+        {/* HOUSE GREYJOY */}
+        <section id="house-greyjoy" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Greyjoy</h2>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="harrik-greyjoy" />
           </div>
         </section>
 
@@ -329,3 +367,4 @@ export default function FamilyTree() {
     </main>
   );
 }
+```

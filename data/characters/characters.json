@@ -1420,13 +1420,15 @@
     "id": "visenor-targaryen",
     "name": "Visenor Targaryen",
     "nickname": "-",
-    "aliases": [],
+    "aliases": [
+      "Maester Arthur Sand"
+    ],
     "house": "House Targaryen",
     "title": "Crown Prince",
     "status": "Missing",
     "secret": {
       "status": "Alive",
-      "note": "Hiding at the scholars' retreat near Starfall, Dorne, with Rhaella. Rhaella is pregnant. Visenor has made contact with a reclusive dragon named Boneskin in the Red Mountains and successfully bonded with it; the dragon has since relocated to a coastal cave near Starfall. Visenor is aware of Grand Maester Baelor's incomplete research on the Targaryen Dreamers, having found unmailed letters at the retreat."
+      "note": "Currently concealed within the Hightower in Oldtown under the identity of Maester Arthur Sand, serving publicly as tutor to Melessa Hightower and Leo Tyrell. Only a small circle knows his true identity. Rhaella remains hidden at the scholars' retreat near Starfall and is pregnant with their first child. Visenor has bonded with the dragon Boneskin, whose existence remains unknown to the Crown."
     },
     "age": 24,
     "nameday": {
@@ -1456,30 +1458,38 @@
       "Idealistic",
       "Devoted Husband",
       "Reluctant Fugitive",
-      "At Peace for the First Time in His Life",
-      "Newly a Dragonrider"
+      "Newly a Dragonrider",
+      "Living Under an Assumed Identity"
     ],
     "goals": [
       "Protect Rhaella and their unborn child",
+      "Maintain the identity of Maester Arthur Sand in Oldtown",
       "Avoid civil war",
-      "Reach safety without becoming a rallying banner for his enemies",
+      "Build support without becoming dependent on House Tyrell",
+      "Understand the shifting balance of power within the Reach",
       "Return home a king worth trusting",
       "Deepen his bond with Boneskin",
       "Pursue his discovery of Baelor's research on the Targaryen Dreamers"
     ],
     "relationships": {
       "baelenys-targaryen": "Once the King's most trusted child. That trust has now been shattered, along with two of his teeth.",
-      "rhaella-targaryen": "His greatest love and the reason he gave up everything to flee the capital; she is now carrying their first child.",
+      "rhaella-targaryen": "His greatest love and the reason he gave up everything to flee the capital. She remains hidden near Starfall and is carrying their first child.",
       "jacaelon-targaryen": "His opinion of Jace changed completely after learning of his secret help and the price Ser Alester nearly paid for it.",
       "gaelor-targaryen": "Often disagrees with his methods, though it was Gaelor who first argued Visenor should never split his clutch of dragons among the family.",
       "saera-targaryen": "One of the siblings he trusts most.",
       "alester-dayne": "The knight who saved his and Rhaella's lives twice over in the woods south of King's Landing, at tremendous personal cost. Visenor embraced him as a friend before he left Starfall.",
-      "lorenah-dayne": "Granted him and Rhaella sanctuary despite the very real danger it poses to her own house; he has promised to repay her hospitality when he is in a position to do so.",
+      "lorenah-dayne": "Granted him and Rhaella sanctuary despite the danger it posed to her own house. Visenor has promised to repay her hospitality when he is able.",
       "maela-targaryen": "His sister now carries Jadefyre, the one hatchling of his own clutch to survive.",
-      "edmyn-uller": "The blunt Dornish maester at the scholars' retreat who briefed him on events in the realm with startling frankness; Visenor found his unfiltered honesty unexpectedly refreshing.",
-      "boneskin": "A lean, pale-scaled dragon of extraordinary intelligence that had been roosting in the Red Mountains near Starfall. After days of patience, shared meals, and Valyrian songs in the mountain air, Visenor earned its trust. Boneskin has since relocated its egg to a coastal cave near Starfall and permitted Visenor to ride."
+      "edmyn-uller": "The blunt Dornish maester who tended to him and Rhaella at the scholars' retreat and briefed him on events in the realm with startling frankness. Visenor found his honesty unexpectedly refreshing.",
+      "melessa-hightower": "The young Lady of Oldtown whose household now shelters him beneath the identity of Maester Arthur Sand. Visenor agreed to serve as her tutor in repayment of the debt his family owes House Hightower. Melessa is one of the few people in Oldtown trusted with his true identity.",
+      "renrose-tyrell": "Lord of Highgarden and Visenor's most powerful political ally in the Reach. At the Mander's Pact, Renrose pledged the strength of House Tyrell to Visenor's claim in exchange for the Handship under his future reign and a marriage alliance between their children. Visenor accepted but remains wary of becoming dependent upon Tyrell power.",
+      "martyn-mullendore": "The Reach knight who recognised Visenor beneath his disguise during the Oldtown street ambush and chose to protect rather than expose him. Martyn brought him to Melessa Hightower, accompanied him to Highgarden, and remains among the small circle who know Arthur Sand is actually the Crown Prince.",
+      "leo-tyrell": "Renrose Tyrell's young heir and one of Visenor's pupils in Oldtown. Leo knows Arthur Sand's true identity and initially approached him partly as his father's representative. Their relationship has since become more genuinely that of pupil and tutor, strengthened by lessons and private sword practice.",
+      "almar-larchmont": "Maester of the Hightower and one of the small circle protecting Visenor's identity in Oldtown. Almar rigorously maintains the fiction of Maester Arthur Sand and has become a valuable source of counsel on the increasingly unstable politics of the Reach.",
+      "clarisse-flowers": "A Hightower bastard and formidable swordswoman whom Melessa personally assigned as Visenor's protector. Visenor initially questioned the unexpected choice, only for Clarisse to decisively defeat him in their first private spar. He accepted the lesson readily and told her there was much he could learn from her.",
+      "boneskin": "A lean, pale-scaled dragon of extraordinary intelligence that had been roosting in the Red Mountains near Starfall. After days of patience, shared meals, and Valyrian songs, Visenor earned its trust and eventually rode it."
     },
-    "summary": "Raised from childhood to inherit the Iron Throne, Visenor devoted his life to scholarship rather than warfare. The poisoning crisis destroyed his faith that diplomacy could solve almost anything. Forced to choose between his father's trust and his wife's life, he lost both: Baelenys stripped him of Blackfyre before the court and struck him bloody, then demanded he murder Rhaella to regain his place as heir. Visenor chose exile instead. After surviving outlaws and a hired hunter, he found refuge at Starfall through Lady Lorenah Dayne and now rests at a scholars' retreat in the Dornish hills with Rhaella, who is pregnant with their first child. In the weeks since arriving, he has done something no one in King's Landing knows: traveled alone into the Red Mountains, spent days earning the trust of an ancient, reclusive dragon named Boneskin, and flown back at night beneath the clouds with the creature's egg clutched in its own front claws. He is, for the first time in his life, at peace. He has also begun reading Grand Maester Baelor's incomplete and unmailed research on the Targaryen Dreamers. Whatever he found has not left his mind.",
+    "summary": "The missing Crown Prince has exchanged one refuge for another. After fleeing King's Landing with Rhaella, surviving pursuit, finding sanctuary in Dorne, and secretly bonding with the dragon Boneskin, Visenor eventually entered the Reach and struck the Mander's Pact with Lord Renrose Tyrell. House Tyrell pledged its strength to his future claim in exchange for Renrose becoming Hand and a marriage alliance between their children. Visenor then returned to Oldtown in disguise. As of the Ninth Day of the Eighth Moon, 99 AC, he lives within the Hightower as Maester Arthur Sand, publicly serving as tutor to Melessa Hightower and Leo Tyrell. His true identity is known only to a small circle that includes Melessa, Leo, Maester Almar, Ser Martyn Mullendore and Clarisse Flowers. Beneath the disguise he has begun studying the Reach itself: the ambitions of House Tyrell, the growing challenge posed by House Gardener, and the Hightowers' precarious attempt to survive between them. Rhaella remains concealed in Dorne with their unborn child, while Boneskin remains Visenor's greatest hidden advantage.",
     "quotes": []
   },
   {
@@ -1591,18 +1601,30 @@
     "dragon": "-",
     "traits": [
       "Survivor of the Oldtown Massacre",
-      "Unnamed in Every Account of That Day",
-      "Thirteen Years Old and Already Ruined"
+      "Young",
+      "Politically Vulnerable",
+      "Trusting of Her Inner Circle",
+      "Protective of Those She Values",
+      "Growing Into Her Position"
     ],
     "goals": [
-      "-"
+      "Preserve House Hightower after the destruction of her family",
+      "Keep Visenor's identity hidden while he remains in Oldtown",
+      "Navigate the growing rivalry between the Tyrells and their challengers in the Reach",
+      "Keep Oldtown from becoming the battlefield of another great house"
     ],
     "relationships": {
-      "timos-hightower": "Her brother; she watched from the same high window as Gaelor's vanguard arrived, and was pinned to the Great Hall floor beside her sister when his execution turned to slaughter.",
-      "alysanne-hightower": "Her sister, killed in the same chaos that she herself survived.",
-      "derrin-hightower": "Her father, whose treason condemned the entire family long before she ever understood what was happening."
+      "timos-hightower": "Her brother, killed during the royal assault on Oldtown.",
+      "alysanne-hightower": "Her sister, killed in the same chaos that Melessa herself survived.",
+      "derrin-hightower": "Her father, whose treason helped set in motion the catastrophe that destroyed much of their family.",
+      "visenor-targaryen": "Shelters the missing Crown Prince inside the Hightower under the identity of Maester Arthur Sand. Visenor has entered her household publicly as a tutor, while Melessa is among the handful who know who he truly is. Their arrangement carries both personal and political weight, with Visenor regarding his service partly as repayment for what House Targaryen inflicted upon hers.",
+      "almar-larchmont": "The Hightower's maester and one of Melessa's most trusted protectors and advisers. Almar guards both her safety and her discretion, including correcting her whenever she comes dangerously close to exposing Visenor's identity.",
+      "leo-tyrell": "The young heir to Highgarden, sent by Renrose Tyrell to Oldtown ostensibly to receive an education alongside her. His presence also places a Tyrell representative directly within her household.",
+      "martyn-mullendore": "The knight who brought the disguised Visenor to her after recognising him during the Oldtown street ambush. His decision placed him inside the small circle protecting the prince's secret.",
+      "renrose-tyrell": "The Lord of Highgarden whose influence now reaches directly into her household through his son Leo. The weakened Hightowers remain politically closer to the Tyrells than to their rivals, although the imbalance in power makes that friendship difficult to separate from dependence.",
+      "clarisse-flowers": "A Hightower bastard whom Melessa values deeply and trusts enough to place personally at Visenor's side. She considers Clarisse the finest protection Oldtown can offer the hidden prince when he must leave the safety of the Hightower."
     },
-    "summary": "The second of the two Hightower sisters glimpsed watching from a high window as Prince Gaelor's vanguard arrived at Oldtown's gates. Never named in any account of that day, she was tackled to the floor of the Great Hall alongside Alysanne when the massacre began — and, unlike her sister, lived through it. What became of her afterward is not recorded.",
+    "summary": "Melessa Hightower survived the destruction that consumed much of her family and now occupies a position far larger than her years. With Derrin, Timos and Alysanne gone, the young Lady of Oldtown stands at the centre of a weakened House Hightower while the political order of the Reach shifts around her. Her household has also become the hiding place of the missing Crown Prince. Visenor Targaryen now lives beneath her roof as Maester Arthur Sand, publicly tutoring Melessa and Leo Tyrell while only a small inner circle knows his true identity. Melessa has placed considerable trust in Visenor, Maester Almar, Ser Martyn Mullendore and Clarisse Flowers, whom she personally assigned to protect the prince. At the same time, Renrose Tyrell's decision to place his heir inside the Hightower has drawn Highgarden closer to Oldtown than ever, leaving Melessa caught between protection, influence and dependence as rival powers begin testing House Tyrell's grip upon the Reach.",
     "quotes": []
   },
   {
@@ -1895,22 +1917,27 @@
     "dragon": "-",
     "traits": [
       "Haughty",
-      "Eager to prove his worth",
-      "Politically aware beyond his years — though not beyond his father's instruction",
-      "Proud of his Highgarden name"
+      "Eager to Prove His Worth",
+      "Politically Aware Beyond His Years",
+      "Proud of His Highgarden Name",
+      "Agile",
+      "Promising Swordsman",
+      "Competitive"
     ],
     "goals": [
       "Prove himself useful to his father's alliance with Visenor",
       "Receive the education his father sent him to Oldtown for",
-      "Earn the respect of the older men around him"
+      "Develop his skill with a sword",
+      "Earn the respect of Visenor and the older men around him"
     ],
     "relationships": {
-      "renrose-tyrell": "Dispatched by his father to Oldtown ostensibly for his education alongside Melessa Hightower; in practice he is also his father's presence in the room, a role he is old enough to half-understand and young enough to play clumsily.",
-      "visenor-targaryen": "Knows him as Maester Arthur Sand, one of only four inside the Hightower aware of his true identity; volunteered to send for his father's swordsmen before Visenor quietly shut the idea down — his first lesson that the prince will not be managed.",
-      "melessa-hightower": "Sent to be educated alongside her; the dynamic between a grieving fourteen-year-old lady and a haughty fourteen-year-old lord has not yet been established.",
-      "martyn-mullendore": "Rode from Highgarden to Oldtown in his company; Martyn tolerates him."
+      "renrose-tyrell": "His father, who dispatched him to Oldtown ostensibly for his education. Leo understands that his presence also makes him his father's representative within the Hightower, even if he does not yet grasp every implication of that role.",
+      "visenor-targaryen": "Knows his tutor Maester Arthur Sand is truly Prince Visenor Targaryen and is among the small circle trusted with the secret. Initially approached him partly as his father's representative, even offering Tyrell swords for his protection, but their relationship has begun shifting toward that of pupil and tutor. During a private practice bout Leo surprised Visenor with his speed and landed a clean blow to the prince's head.",
+      "melessa-hightower": "Sent to Oldtown to receive an education alongside the young Lady of Oldtown. Their proximity also strengthens the political connection between Highgarden and the weakened House Hightower.",
+      "martyn-mullendore": "Rode from Highgarden to Oldtown in his company. Martyn treats him with the patience of an experienced knight accustomed to the pride of a young lord.",
+      "almar-larchmont": "The Hightower maester who oversees much of the household surrounding Leo and Melessa. Almar is particularly strict about ensuring Leo remembers that Visenor must always be treated as Maester Arthur Sand whenever the disguise matters."
     },
-    "summary": "Leo Tyrell is fourteen years old and carries himself with the full weight of Highgarden behind him — which is to say, with a haughtiness that sits uneasily on his young shoulders. His father Renrose dispatched him to Oldtown under the banner of education alongside Melessa Hightower, but Leo is perceptive enough to sense the political dimension of the arrangement even if he cannot fully articulate it. His first instinct on arriving at the Hightower was to offer his father's swordsmen to Visenor — an offer that was politely and firmly declined, his first indication that the prince he is nominally serving has no intention of being dependent on House Tyrell.",
+    "summary": "Leo Tyrell is the fourteen-year-old heir to Highgarden, proud of his name and already conscious that his father expects more from him than lessons and good manners. Renrose sent him to Oldtown ostensibly to be educated alongside Melessa Hightower, but Leo also serves as a quiet Tyrell presence inside the Hightower and among the small group protecting Visenor Targaryen's secret identity. The prince now tutors him publicly as Maester Arthur Sand. Their relationship has already begun moving beyond politics: during private sword practice Leo displayed surprising agility and promise, even catching Visenor cleanly across the head with a wooden blade. He remains haughty and eager to impress, but beneath the pride is a boy beginning to understand the responsibilities that will one day accompany Highgarden.",
     "quotes": []
   },
   {
@@ -1936,22 +1963,27 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Sharp and protective",
-      "Decisive under pressure",
+      "Sharp and Protective",
+      "Decisive Under Pressure",
       "Discreet",
-      "Fiercely loyal to Melessa Hightower"
+      "Fiercely Loyal to Melessa Hightower",
+      "Politically Observant",
+      "Cautious"
     ],
     "goals": [
-      "Protect Melessa Hightower and see her established as the foremost lady of the Reach",
+      "Protect Melessa Hightower and preserve her position in Oldtown",
       "Maintain Visenor's cover identity within the Hightower without fracture",
-      "Keep the knowledge of the prince's presence contained to the four who already hold it"
+      "Prevent the Hightowers from being dragged into another disastrous conflict",
+      "Understand the growing struggle between the Tyrells and Gardeners",
+      "Keep knowledge of the hidden prince contained"
     ],
     "relationships": {
-      "visenor-targaryen": "One of only four people inside the Hightower who know Maester Arthur Sand is Prince Visenor; sharp enough to cut off Melessa mid-sentence on the first morning before she exposed the prince's identity to the room.",
-      "melessa-hightower": "His primary charge and loyalty; the speed with which he corrected her slip at breakfast suggests a long-established habit of protecting her from her own candour.",
-      "leo-tyrell": "Present at the first breakfast meeting; his relationship with the Tyrell boy is not yet defined, though his instinct to keep Renrose's reach limited aligns with Visenor's own."
+      "visenor-targaryen": "One of the few people inside the Hightower who know Maester Arthur Sand is Prince Visenor Targaryen. Almar rigorously maintains the disguise, correcting even minor slips among those who know the truth. Visenor has also begun treating him as a source of political counsel, questioning him about the growing strength of House Gardener, the weakening Tyrell hold over the Reach and the Hightowers' dangerous position between rival factions.",
+      "melessa-hightower": "His primary charge and deepest loyalty. Almar acts as healer, adviser and quiet guardian to the young Lady of Oldtown, protecting her from political dangers as readily as physical ones.",
+      "leo-tyrell": "One of the two young nobles placed under Arthur Sand's instruction at the Hightower. Almar keeps Leo mindful of the prince's disguise and has little patience for the boy forgetting that, when others may hear, Visenor is Maester Sand.",
+      "renrose-tyrell": "Regards the Lord of Highgarden as an important but potentially overbearing ally. Renrose's decision to place Leo within the Hightower gives House Tyrell influence close to Melessa, something Almar watches carefully."
     },
-    "summary": "Maester Almar serves as castle healer at the Hightower and is one of the four people inside the castle walls who know that the man calling himself Maester Arthur Sand is in fact Prince Visenor Targaryen. His composure under pressure was evident from the first morning: when Melessa began to address the prince by his true title at the breakfast table, Almar cut her off mid-word with a voice sharp enough to silence the room. His loyalties run first to Melessa and second to the success of the arrangement that keeps her safe — which, for now, means keeping Visenor's cover intact.",
+    "summary": "Maester Almar serves the Hightower as healer, adviser and one of the principal guardians of young Melessa Hightower. He is also one of the small circle entrusted with Oldtown's most dangerous secret: Maester Arthur Sand, the supposed tutor now residing within the Hightower, is actually the missing Crown Prince Visenor Targaryen. Almar treats the disguise with absolute seriousness, correcting even harmless slips before they become habits. His usefulness to Visenor has grown beyond secrecy. The prince now seeks his judgment on the increasingly unstable politics of the Reach, where House Gardener is applying economic and popular pressure against the Tyrells while the Hightowers attempt to remain cautious without abandoning their traditional closeness to Highgarden. Almar's priority remains Melessa. Every alliance, secret and political calculation is ultimately judged according to whether it leaves the young Lady of Oldtown safer than before.",
     "quotes": []
   },
   {
@@ -2685,10 +2717,10 @@
     ],
     "relationships": {
       "melessa-hightower": "A woman Clarisse holds in great loyalty and esteem. Melessa considers her one of the most valuable people in her service and personally assigned her to protect the man publicly known as Maester Arthur Sand.",
-      "visenor-targaryen": "Assigned by Melessa Hightower as Visenor's personal protection during his concealed stay in Oldtown as Maester Arthur Sand. Their first private spar ended with Clarisse overpowering him and placing her wooden blade at his throat. Visenor was impressed by her skill and openly admitted that he had much to learn from her.",
+      "visenor-targaryen": "Assigned by Melessa Hightower as Visenor's personal protection during his concealed stay in Oldtown. Their first private spar ended with Clarisse overpowering him, pinning his wooden sword beneath her boot and placing her own blade at his throat. Visenor was impressed rather than offended and openly admitted that he had much to learn from her.",
       "godfrey-blackwood": "Once faced him while disguised as a man in a tournament. Clarisse claims she left the renowned warrior with wounds that took a long time to heal."
     },
-    "summary": "Clarisse Flowers is a twenty-year-old bastard of Hightower blood, a short-haired, physically imposing swordswoman who was raised more like a son than a daughter and never prepared for the conventional life of a lady. Though neither a knight nor, by her own insistence, a lady, she has developed into an exceptional fighter and claims to have crossed swords with some of the realm's greatest knights while competing in disguise as a man. Among them was Lord Godfrey Blackwood, whom she says she left badly wounded. Lady Melessa Hightower values Clarisse highly and, on the Ninth Day of the Eighth Moon, 99 AC, assigned her to protect Visenor Targaryen throughout his concealed stay in Oldtown as Maester Arthur Sand. Visenor initially admitted surprise at being given a woman as his protector, prompting Clarisse to explain that she had never been raised as a conventional woman and could outfight many of the knights he had known at the Red Keep. When Visenor asked to test that claim, Clarisse proved it. After a hard spar that bloodied the prince's nose, she used her superior strength and speed to pressure him against a tree, evaded his counterattack, pinned his wooden sword beneath her boot, and placed her own blade against his throat. Visenor accepted the defeat with good humor and told her there was clearly much he could learn from her.",
+    "summary": "Clarisse Flowers is a twenty-year-old bastard of Hightower blood, a short-haired, physically imposing swordswoman who was raised more like a son than a daughter and never prepared for the conventional life of a lady. Though neither a knight nor, by her own insistence, a lady, she has developed into an exceptional fighter and claims to have crossed swords with some of the realm's greatest knights while competing in disguise as a man. Among them was Lord Godfrey Blackwood, whom she says she left badly wounded. Lady Melessa Hightower values Clarisse highly and, on the Ninth Day of the Eighth Moon, 99 AC, assigned her to protect Visenor Targaryen throughout his concealed stay in Oldtown as Maester Arthur Sand. Visenor initially admitted surprise at being given a woman as his protector, prompting Clarisse to explain that she had never been raised as a conventional woman and could outfight many of the knights he had known at the Red Keep. When Visenor asked to test that claim, Clarisse proved it. After a hard spar that bloodied the prince's nose, she trapped him against a tree, evaded his counterattack, pinned his wooden sword beneath her boot and placed her own blade against his throat. Visenor accepted the defeat with good humor and told her there was clearly much he could learn from her.",
     "quotes": []
   }
 ]
