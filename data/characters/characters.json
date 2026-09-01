@@ -57,8 +57,8 @@
       "year": 40
     },
     "height": "185 cm",
-    "father": "Aenys Targaryen II",
-    "mother": "Vhaemys Targaryen",
+    "father": "aenys-targaryen-ii",
+    "mother": "vhaemys-targaryen-elder",
     "spouse": "jaery-targaryen",
     "siblings": [
       "malaenar-targaryen",
@@ -147,13 +147,13 @@
       "Advise the Crown before its impulsiveness costs it everything",
       "Prevent a wider war with the Reach",
       "Guide Jacaelon, in whom he sees a reflection of himself",
-      "Funnel Vahaemon south toward Tyrosh — confirmed: Pentos denied him entry, and he is now sailing for Tyrosh",
+      "Funnel Vahaemon south toward Tyrosh and end the succession threat without open war",
       "Convince Saera to commit her dragon to the campaign against Vahaemon"
     ],
     "relationships": {
       "baelenys-targaryen": "His great-nephew and King, who summoned him back from the Citadel after years of self-imposed exile and named him Grand Maester in Cordin's place; the two clash constantly over the Oldtown Massacre and the handling of Vahaemon.",
       "jacaelon-targaryen": "The King himself compares the two as kindred spirits — scholars and dissenters born into a family of warriors. Baelor embraced him warmly upon arrival and found, to his relief, the sharpest mind at the council table.",
-      "gaelor-targaryen": "Sent him the intelligence letter about Pentos and Tyrosh via raven — which Gaelor intercepted before Jace could read it, and which Gaelor immediately began planning to weaponize for a Stepstones campaign.",
+      "gaelor-targaryen": "Greeted warmly on the road from Oldtown, though visibly and vocally horrified upon learning of the massacre; called the decision to send two thousand men to execute a fifteen-year-old boy flawed from its very inception.",
       "cordin-poole": "Displaced him as Grand Maester, though the two continue to work together on the council's finances.",
       "saera-targaryen": "Working with Jace to convince her to commit Cloudgazer to the Tyrosh campaign, framing it as a war of liberation rather than a war of succession.",
       "vahaemon-targaryen": "Spent years accumulating research on the Targaryen Dreamers while at Oldtown, some of which Visenor later discovered in an unmailed letter at the scholars' retreat near Starfall; that research now belongs to the fugitive prince."
@@ -167,7 +167,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Stark",
-    "title": "Late Lord of Winterfell, Warden of the North",
+    "title": "Late Lord of Winterfell and Warden of the North",
     "status": "Dead",
     "age": 41,
     "nameday": {
@@ -420,9 +420,7 @@
       "Crush the Tyrell-Hightower conspiracy",
       "Lead the campaign to take the Stepstones",
       "Uncover who the 'blonde knight' was that killed Curtass Whent",
-      "Keep Maela's secret buried permanently",
-      "Bring Baran Strong into his service at the Red Keep",
-      "Convince the King to strike at Vahaemon before he consolidates in Tyrosh"
+      "Keep Maela's secret buried permanently"
     ],
     "relationships": {
       "baelenys-targaryen": "His loyalty has brought him closer to the King, who has named him heir should Visenor not return; he accepts full responsibility for the Oldtown Massacre on Gaelor's behalf, though neither man fully forgives the other for it.",
@@ -438,10 +436,7 @@
       "brannyn-vance": "Found him in Maela's bed, dragged him to the black cells, and killed him with Blackfyre in a humiliating, methodical execution that no one else witnessed.",
       "cordin-poole": "Accepts his fawning with the casual pleasure of a man who has recently run out of people willing to flatter him.",
       "brant-costayne": "The Oldtown knight who survived the massacre and took his revenge in the tourney lists — driving a sword through Gaelor's warhorse's chest before being subdued by Ser Blackwood and taken to the black cells.",
-      "godfrey-blackwood": "Tackled Costayne in the tourney lists when the knight's assassination attempt threatened to end Gaelor's life; Gaelor owes him a debt he has not yet named.",
-      "baran-strong": "Recruited him informally at the Dragonstone stables after hearing his grievance about the exile; told him he would speak to Malaenar and bring him to the Red Keep. Jace later made clear the decision was not Gaelor's alone to make.",
-      "tansy-riverside": "Noticed her at the feast and again in the kitchens; extracted himself deliberately before anything happened. The self-restraint cost him visible effort.",
-      "vahaemon-targaryen": "Intercepted Baelor's letter about Pentos and Tyrosh; saw not a diplomatic triumph but a military opportunity — the Stepstones campaign and Vahaemon's elimination at once."
+      "godfrey-blackwood": "Tackled Costayne in the tourney lists when the knight's assassination attempt threatened to end Gaelor's life; Gaelor owes him a debt he has not yet named."
     },
     "summary": "A natural warrior rather than a statesman, Gaelor's courage often outruns his judgment. His brutal investigation into the poisoning uncovered the dying accusation against the Hand, yet he concealed that revelation even from his siblings. After King Baelenys stripped Blackfyre from Visenor and bestowed it upon him, Gaelor married Naella Velaryon at Driftmark and was named heir should his brother not return. Sent to Oldtown to demand Hightower blood for Derrin's treason, he beheaded young Lord Timos Hightower when the boy panicked, triggering a massacre that slaughtered every Hightower knight present and killed two of Derrin's daughters in the chaos. Back in King's Landing, he privately executed Ser Brannyn Vance for breaking his vows with Princess Maela. He and Jace very nearly destroyed each other in the tourney lists before collapsing within yards of one another — and began speaking again only in the infirmary, from opposite beds, too broken to sustain hatred.",
     "quotes": []
@@ -498,25 +493,22 @@
       "Bring Visenor and Rhaella home safely, in secret",
       "Uncover the full extent of the Tyrell-Hightower conspiracy",
       "Establish back-channel communication with Starfall without implicating Lorenah",
-      "Identify what his cousin Visenya is doing in King's Landing and whose orders she follows",
-      "Travel to Dorne to secure Lord Darren Dayne's blessing for Lorenah",
-      "Investigate Vhaemys's recurring dreams of a white dragon as a possible sign of Dreamer's blood",
-      "Broker Saera's acting Hand role during his absence"
+      "Identify what his cousin Visenya is doing in King's Landing and whose orders she follows"
     ],
     "relationships": {
       "baelenys-targaryen": "A complicated love-hate relationship driven by a desperate need for approval — one his father finally granted him by naming him Hand, and then complicated again by the King's drunken, drawn-sword breakdown in the corridor.",
       "maela-targaryen": "His twin and emotional anchor; the person he is most protective of and least honest with.",
-      "saera-targaryen": "Offered her the acting Hand position during his coming absence in Dorne; she accepted on the condition that she visits Winterfell first.",
+      "saera-targaryen": "One of the few siblings he genuinely trusts; she sees through his composure more readily than almost anyone.",
       "visenor-targaryen": "Once looked down on him and considered him weak; risking everything to save him and Rhaella changed that completely.",
       "gaelor-targaryen": "Their rivalry came to a bloody climax in the tourney lists; they have spoken to each other from infirmary beds since, and the King has commanded them to make peace.",
-      "alester-dayne": "Ordered him to fly to Winterfell with Saera on dragonback and to stop finding reasons not to speak plainly to her.",
+      "alester-dayne": "His closest friend, mentor, and the man he sent into mortal danger to save Visenor. Alester knighted him in a private ceremony — the only honor Jace has ever asked for that was not given by the crown.",
       "derrin-hightower": "Exposed his treason, extracted his confession in private, and executed him himself. Only the King knows the truth.",
-      "vhaemys-targaryen": "Has taken over her education entirely; she has been having recurring nightmares of a massive white dragon, which Jace has connected to Baelor's old texts on the Targaryen Dreamers and intends to investigate.",
+      "vhaemys-targaryen": "The little princess who feels safest in his hands; he has tasked Weylar Rocke with quietly finding her a tutor before her admiration of the King's cruelty becomes something else entirely.",
       "weylar-rocke": "His personal spymaster, pardoned from the black cells to ensure loyalty born of terror; first brought him news of Gaelor's brothel visit, and more recently delivered early warning of the Oldtown Massacre's worst details.",
       "baelor-targaryen": "Embraced him warmly on arrival and considers him the one voice at council that matches his own measured counsel.",
       "orwell-morrigen": "Trained under him rigorously during Alester's absence; Morrigen assessed him ready for knighthood, though it was Alester who ultimately performed the ceremony.",
       "steffon-baratheon": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown; unhorsed him in the tourney lists and the insult still burns on both sides.",
-      "lorenah-dayne": "Brought her to Dragonstone for the family's nameday visit; they spent their first night together there. She carries news of Visenor's disappearance from the scholars' retreat and Rhaella's pregnancy. He is planning to travel to Dorne soon to seek her father's blessing.",
+      "lorenah-dayne": "Spent an evening in disguise together through the streets of Flea Bottom; she kissed him at her door when they returned. The conversation that preceded it was the most honest one he has had in months.",
       "visenya-targaryen": "His cousin, Vahaemon's daughter — who climbed into his bed in a Flea Bottom brothel believing him to be Gaelor, held Dark Sister to his throat throughout, and vanished before he or Alester could catch her. The encounter left a cut on his neck and a great deal of unanswered questions.",
       "godfrey-blackwood": "Met him in the tourney lists and unhorsed him in a hard-fought six-pass tilt; Blackwood congratulated him graciously in the dirt.",
       "edmyn-uller": "The Dornish maester at the scholars' retreat whose frankness about events in the realm — delivered by raven — proved unexpectedly useful."
@@ -543,7 +535,7 @@
     "mother": "-",
     "spouse": "baelenys-targaryen",
     "siblings": [
-      "Vaenarr Targaryen"
+      "vaenarr-targaryen"
     ],
     "children": [
       "saera-targaryen",
@@ -619,11 +611,10 @@
       "Protect House Dayne's neutrality without appearing to take sides",
       "Shelter Visenor and Rhaella without dragging Starfall into open war",
       "Build something genuine with Jacaelon, or at least understand what he is",
-      "Return to Dorne before King's Landing politics consume her entirely",
-      "Delay her return to Dorne long enough to see what Jace's surprise is"
+      "Return to Dorne before King's Landing politics consume her entirely"
     ],
     "relationships": {
-      "jacaelon-targaryen": "Accompanied him to Dragonstone for the royal family's nameday visit; their first night together was spent there. Delivered news of Visenor's disappearance and Rhaella's pregnancy. Her father's letter arrived during the visit, asking for her return — but Jace has asked her to stay for the surprise first. She has agreed.",
+      "jacaelon-targaryen": "Trusted enough to become his fugitive family's last resort in Dorne; now a guest at King's Landing, where a night spent together in disguise through Flea Bottom ended with a kiss at her door and a conversation neither of them has entirely recovered from. She has agreed to stay for the tourney and carry his favor.",
       "alester-dayne": "A distant cousin from another branch of House Dayne; her household's network almost certainly saved his life, and she managed his unauthorized role in the whole affair with characteristic competence.",
       "visenor-targaryen": "Granted him and Rhaella sanctuary at Starfall fully aware of what it could cost House Dayne if discovered; told him plainly that at some point he will have to leave.",
       "rhaella-targaryen": "Provided her sanctuary at Starfall and dispatched a maid and a maester to the scholars' retreat, asking nothing in return."
@@ -701,9 +692,9 @@
       "year": 38
     },
     "height": "177 cm",
-    "father": "Aenys Targaryen II",
-    "mother": "Vhaemys Targaryen",
-    "spouse": "Alysa Targaryen",
+    "father": "aenys-targaryen-ii",
+    "mother": "vhaemys-targaryen-elder",
+    "spouse": "alysa-targaryen",
     "siblings": [
       "baelenys-targaryen",
       "vahaemon-targaryen"
@@ -716,9 +707,7 @@
       "Steady",
       "Traditionalist",
       "Overshadowed",
-      "Infirm",
-      "Heavy Drinker",
-      "Quietly Nostalgic"
+      "Infirm"
     ],
     "goals": [
       "Hold Dragonstone quietly in the King's name",
@@ -730,7 +719,7 @@
       "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name.",
       "tansy-riverside": "His companion of two years, who organized the nameday feast that summoned the royal family without telling him first; he was heavily drunk throughout and seemed more amused than alarmed by the chaos that followed."
     },
-    "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar renounced his own claim to the Iron Throne due to an infirmity and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor,' Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust. At his nameday feast on Dragonstone — organized without his knowledge by his companion Tansy — Malaenar and Baelenys erupted into their oldest fight: who failed whom during their father's abuse of their mother, and who stood aside while two brothers bled each other dry. They ended the night on a balcony with wine, which, by Targaryen standards, is something close to peace.",
+    "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar renounced his own claim to the Iron Throne due to an infirmity and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor,' Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust.",
     "quotes": []
   },
   {
@@ -769,7 +758,7 @@
       "Persuade him to let his rivalry with Jace go before it kills one of them"
     ],
     "relationships": {
-      "gaelor-targaryen": "Accompanied him to Dragonstone for Malaenar's nameday; watched the family implode at dinner and followed him to the courtyard when he walked out. Noted that whatever Tansy was, Malaenar's behavior 'was no better.'",
+      "gaelor-targaryen": "Her husband since their wedding at Driftmark; she sees past his bravado to the weight he carries as heir. She is now carrying his child — news she brought to him directly, and then to the King herself.",
       "baelenys-targaryen": "Told the King herself that she was with child; he received the news with an awkward but sincere paternal warmth — a pat on the cheek and two words of approval.",
       "jacaelon-targaryen": "Sat at Gaelor's bedside in the infirmary after the tourney tilt, insisting that Costayne had cheated and that Gaelor was fighting crippled; holds Jace entirely responsible for the damage."
     },
@@ -837,7 +826,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Stark",
-    "title": "Lord of Winterfell, Warden of the North",
+    "title": "Lord of Winterfell and Warden of the North",
     "status": "Alive",
     "age": 23,
     "nameday": {
@@ -915,20 +904,17 @@
       "Build alliances beyond the capital",
       "Protect Visenor and Rhaella however she can from afar",
       "Resist being weaponized as a dragonrider in a succession war she did not start",
-      "Preserve whatever she found in Winterfell",
-      "Visit Winterfell again, this time properly hosted by Rickard Stark",
-      "Serve as acting Hand while Jace travels to Dorne"
+      "Preserve whatever she found in Winterfell"
     ],
     "relationships": {
       "baelenys-targaryen": "Frequently opposes the King's decisions and is the only child willing to do so in open court; called him out publicly over the Oldtown Massacre and earned a threat of the black cells for it.",
       "jacaelon-targaryen": "Works closely with him and is one of the few people able to see through his composure; spotted his happiness after the Flea Bottom evening with Lorenah and named it before he admitted it to himself.",
       "visenor-targaryen": "Supported him during the Rhaella affair and helped shield the truth from their father as long as she could.",
-      "rickard-stark": "Received a letter from him at Dragonstone inviting her back to Winterfell for a proper visit; blushed reading it, which her siblings noticed before she could stop them. Has agreed to go, with Alester as her sworn shield.",
+      "rickard-stark": "Sent north to offer the Crown's condolences, she found an unexpected warmth in his company; lingered a full week beyond her expected return.",
       "alester-dayne": "Waited for him to come to her rather than going to him after his battered return to court; allowed herself a late-night walk with him and quietly resumed an old habit neither has named.",
       "gaelor-targaryen": "Called him a deranged psychopath before the King after the Oldtown Massacre; the relationship has not recovered.",
       "maela-targaryen": "Suspects something is wrong beneath her sister's hollow composure; has not yet learned what.",
-      "baelor-targaryen": "Working alongside him to find a way to frame the Tyrosh campaign that Saera might actually agree to; she remains resistant to being used as a weapon in a war of succession.",
-      "lorenah-dayne": "Questioned by her about the Alester situation on the Dragonstone balcony; was honest in a way she rarely is with anyone outside Jace."
+      "baelor-targaryen": "Working alongside him to find a way to frame the Tyrosh campaign that Saera might actually agree to; she remains resistant to being used as a weapon in a war of succession."
     },
     "summary": "Known throughout the realm as 'Cloud Eyes,' Saera's mysterious gaze has only grown cloudier over time. Quiet yet perceptive, she commands unusual affection from dragons and smallfolk alike. Sent to Winterfell to honor Lord Brandon Stark's death, she lingered a full week longer than expected, drawn to the new Lord Rickard Stark and to a North quieter and more honest than anything she has known in King's Landing. Back at court, she confronted the King openly over the Oldtown Massacre, survived the threat, and now finds herself at the center of a plan to use her dragon against Vahaemon in Tyrosh — a plan she has not yet agreed to.",
     "quotes": []
@@ -948,8 +934,8 @@
       "year": 81
     },
     "height": "196 cm",
-    "father": "-",
-    "mother": "A Karstark of the North",
+    "father": "maron-dayne",
+    "mother": "lyarra-karstark",
     "spouse": "-",
     "siblings": [],
     "children": [],
@@ -979,12 +965,10 @@
       "visenor-targaryen": "Escorted him and Rhaella out of King's Landing under cover of darkness and nearly died protecting them twice over; considers the debt repaid by Visenor's own courage through the journey.",
       "lorenah-dayne": "A distant cousin whose protection at Starfall likely saved both his life and the fugitive prince's; she knew his role long before he admitted it.",
       "curtass-whent": "Ambushed by him and five sellswords in the Dornish woods; Whent beat him nearly to death before a desperate act involving the warhorse's testicles ended the fight. The ugliest duel of his life.",
-      "saera-targaryen": "Failed to speak to her at Dragonstone when he found the Queen already in her chambers; Jace called him an utter moron. Has been ordered to fly to Winterfell with her on dragonback and to stop being a coward.",
+      "saera-targaryen": "Sought her out the night of his return; she had been waiting. They resumed their old habit of walking the corridors together, and she allowed it without making him ask twice.",
       "orwell-morrigen": "His Lord Commander, whose patience with his unauthorized absence has worn thin; the matter of what to do about it has not yet been formally resolved.",
       "steffon-baratheon": "Faced him in the tourney semi-finals in what witnesses called one of the finest jousts the realm had seen in years; lost in the final pass to a two-handed lance thrust to the gut, and shook the man's hand from the dirt.",
-      "saathos-maris": "Traded barbed pleasantries with him in the infirmary; the two understand each other's roles perfectly and trust each other roughly as far as their princes allow.",
-      "baran-strong": "Met him at the Dragonstone stables; their exchange was mild and calibrated. Baran needled him about Kingsguard aesthetics. Alester absorbed it without expression.",
-      "gaelor-targaryen": "Shared drinks at the stables with him and Saathos; revealed that Jace broke Saathos's arm, to Baran Strong's visible admiration."
+      "saathos-maris": "Traded barbed pleasantries with him in the infirmary; the two understand each other's roles perfectly and trust each other roughly as far as their princes allow."
     },
     "summary": "Ser Alester Dayne is Prince Jacaelon's closest friend and sworn protector. Silent, observant, and capable in combat beyond almost any man in the realm, he acted as the physical execution arm of Jace's plans throughout the poisoning crisis: uncovering Rhaella's secret correspondence, defying the Hand during the dungeon confrontation, and ultimately smuggling Visenor and Rhaella out of King's Landing toward Dorne. The journey nearly killed him. Ambushed in the woods by Curtass Whent and five hired sellswords, Alester fought through brutal, sustained violence before killing Whent in a final, desperate act. He returned to King's Landing battered but breathing, knighted Jace in private the night before the tourney, watched him unhorse Godfrey Blackwood in the lists, and then fell in the semi-finals to Steffon Baratheon in a joust the crowd will not soon forget. His unauthorized absence from court remains unresolved with Lord Commander Morrigen.",
     "quotes": []
@@ -1153,8 +1137,7 @@
       "gaelor-targaryen": "Sworn knight, loyal protector, and one of the few people willing to needle him with dark humor even in the worst moments; visited him in the infirmary after the tourney tilt and woke him up by slapping his shoulder.",
       "baelenys-targaryen": "Rode at Gaelor's side through Oldtown and carried out the King's orders.",
       "baelor-targaryen": "Chosen by Baelor to ride south and investigate the deaths of Ser Curtass Whent and his men near the rural sept; his findings confirmed the broad outlines of an ambush but not the identity of the surviving knight.",
-      "alester-dayne": "Revealed in front of Baran that Jace broke his arm; received 'bad luck' as his only public explanation and stuck with it.",
-      "baran-strong": "Floated the idea of bringing him to the Red Keep in Gaelor's service at the Dragonstone stables; was immediately shut down by Gaelor for overstepping. Took the rebuke without argument."
+      "alester-dayne": "Suspects, based on his investigation of the sept and the description of the surviving blonde knight, that Dayne is connected to Curtass Whent's death; has not yet formally accused anyone. Their infirmary exchange was pleasant and meant nothing at all."
     },
     "summary": "Ser Saathos Maris is the sworn knight of Prince Gaelor Targaryen. Disciplined, dependable, and unwavering in duty, he represents the military backbone of Gaelor's authority. During the poisoning crisis, he assisted in tracking the assassin and later defied political pressure by refusing the Hand entry into the dungeon. He rode at Gaelor's side through the bloody march on Oldtown and the massacre that followed. Sent south by Baelor Targaryen to investigate Curtass Whent's death, he returned with incomplete answers and a growing private suspicion about who the blonde knight at the sept really was — a suspicion he has not yet taken anywhere.",
     "quotes": []
@@ -1267,9 +1250,9 @@
       "year": 49
     },
     "height": "178 cm",
-    "father": "Tygett Lannister",
-    "mother": "Ella Lannister",
-    "spouse": "Myrielle Lannister",
+    "father": "tygett-lannister",
+    "mother": "ella-lannister",
+    "spouse": "myrielle-lannister",
     "siblings": [],
     "children": [],
     "mentor": "-",
@@ -1315,8 +1298,8 @@
       "year": 44
     },
     "height": "180 cm",
-    "father": "Aenys Targaryen II",
-    "mother": "Vhaemys Targaryen",
+    "father": "aenys-targaryen-ii",
+    "mother": "vhaemys-targaryen-elder",
     "spouse": "naela-targaryen",
     "siblings": [
       "baelenys-targaryen",
@@ -1386,9 +1369,7 @@
       "Affectionate",
       "Perceptive Beyond Her Years",
       "Parroting the King's Cruelty Without Understanding It",
-      "In Need of Better Influences",
-      "Recurring Dreams of a White Dragon",
-      "Possible Dreamer"
+      "In Need of Better Influences"
     ],
     "goals": [
       "-"
@@ -1399,8 +1380,8 @@
       "jacaelon-targaryen": "Feels safest around him, clings to him whenever the family fractures in front of her, and occasionally uses his authority to be difficult with people she dislikes. He has quietly tasked Weylar Rocke with finding her a tutor capable of teaching her empathy.",
       "gaelor-targaryen": "He promises her she will always be his most loved, no matter how many nieces and nephews follow; she repaid him by defending him before Jace and Saera in the corridor after the Oldtown news broke.",
       "jaery-targaryen": "Her mother, beside whom she sheltered during the worst of the family's fracturing.",
-      "saera-targaryen": "Pinched her ear on the Dragonstone balcony after her rudeness to Lorenah; Vhaemys threatened to tell Father and then forgave her by morning.",
-      "lorenah-dayne": "Was openly rude to her on Dragonstone, calling her a desert rat near a dragon; Lorenah laughed it off, Saera pinched her ear hard, and Jace promised a surprise if she behaved."
+      "saera-targaryen": "Her older sister, toward whom she gravitates when the castle turns frightening and Jace or Alester are unavailable.",
+      "lorenah-dayne": "Took an immediate dislike to her on first meeting in the Godswood and was openly rude; Jace took her to see Jhagar to get her out of the way."
     },
     "summary": "The youngest child of King Baelenys Targaryen. Sheltered from court politics but absorbing its worst lessons anyway, Vhaemys still believes her father can never be defeated and greeted the news of the Oldtown Massacre with cheerful approval that horrified everyone except the King. During the family's worst public fracturing she stomped a harmless beetle in the corridor and did not understand why Jace made it a lesson. He is looking for a tutor. It may already be too late for some of what she has learned.",
     "quotes": []
@@ -1721,7 +1702,7 @@
       "Secure Crown justice for his cousin's death at Bracken hands"
     ],
     "relationships": {
-      "jacaelon-targaryen": "Brought the Bracken border killing before the Hand's throne; was offered two paths — a Crown envoy or a trial by combat — and accepted both as grounds to wait. Also threatened to ride North to Stark if the Crown failed him, a gambit Jace noted without flinching.",
+      "jacaelon-targaryen": "Complimented his tenure as Hand before the tourney and faced him in the quarter-finals in a hard six-pass tilt; was unhorsed cleanly and congratulated Jace from the dirt. Alester reported seeing him descend from an inn's upper rooms flanked by a serving wench and a stableboy, and noted that he makes no secret of his tastes. Brought the Bracken border killing before the Hand's throne; was offered two paths — a Crown envoy or a trial by combat — and accepted both as grounds to wait. Also threatened to ride North to Stark if the Crown failed him, a gambit Jace noted without flinching.",
       "gaelor-targaryen": "Tackled Ser Brant Costayne into the mud when Costayne drove a sword through Gaelor's horse's chest and attempted to murder the prince — an intervention that likely saved Gaelor's life and has not yet been formally acknowledged."
     },
     "summary": "A well-traveled lord from the Riverlands who arrived at the tourney with kind words for the Hand and a six-pass joust that lasted long enough to impress the stands before Jace's final lance throw sent him into the dirt. He congratulated Jace graciously, which cost him nothing; he then saved Gaelor Targaryen's life by tackling Brant Costayne mid-assassination, which cost him rather more. He makes no secret of his broader appetites, a fact Ser Alester noted with mild amusement from a roadside inn and relayed to Jace with more detail than was strictly necessary.",
@@ -1737,8 +1718,8 @@
     "status": "Alive",
     "age": 48,
     "nameday": {
-      "day": "-",
-      "moon": "-",
+      "day": 26,
+      "moon": 5,
       "year": 51
     },
     "height": "-",
@@ -1782,8 +1763,8 @@
     "status": "Alive",
     "age": 32,
     "nameday": {
-      "day": "-",
-      "moon": "-",
+      "day": 12,
+      "moon": 3,
       "year": 67
     },
     "height": "-",
@@ -1826,8 +1807,8 @@
     "status": "Alive",
     "age": 74,
     "nameday": {
-      "day": "-",
-      "moon": "-",
+      "day": 18,
+      "moon": 1,
       "year": 25
     },
     "height": "168 cm",
@@ -1870,8 +1851,8 @@
     "status": "Alive",
     "age": 14,
     "nameday": {
-      "day": "-",
-      "moon": "-",
+      "day": 9,
+      "moon": 5,
       "year": 85
     },
     "height": "-",
@@ -1910,11 +1891,11 @@
     "house": "-",
     "title": "Maester",
     "status": "Alive",
-    "age": "-",
+    "age": 57,
     "nameday": {
-      "day": "-",
-      "moon": "-",
-      "year": "-"
+      "day": 13,
+      "moon": 8,
+      "year": 41
     },
     "height": "-",
     "father": "-",
@@ -1951,11 +1932,11 @@
     "house": "House Strong",
     "title": "Sworn Sword of Dragonstone",
     "status": "Alive",
-    "age": "-",
+    "age": 39,
     "nameday": {
-      "day": "-",
-      "moon": "-",
-      "year": "-"
+      "day": 6,
+      "moon": 10,
+      "year": 59
     },
     "height": "208 cm",
     "father": "-",
@@ -1996,9 +1977,9 @@
     "status": "Alive",
     "age": 17,
     "nameday": {
-      "day": "-",
-      "moon": "-",
-      "year": "-"
+      "day": 7,
+      "moon": 7,
+      "year": 82
     },
     "height": "-",
     "father": "-",
@@ -2035,11 +2016,11 @@
     "house": "House Bracken",
     "title": "Lord of Stone Hedge",
     "status": "Alive",
-    "age": "-",
+    "age": 39,
     "nameday": {
-      "day": "-",
-      "moon": "-",
-      "year": "-"
+      "day": 24,
+      "moon": 1,
+      "year": 60
     },
     "height": "-",
     "father": "-",
@@ -2060,9 +2041,10 @@
     ],
     "relationships": {
       "godfrey-blackwood": "Ancient rivals; his men killed Godfrey's cousin near the border under circumstances he characterized as an accident and Godfrey characterized as murder. The Hand has offered him a trial by combat if he refuses to negotiate.",
-      "jacaelon-targaryen": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge."
+      "jacaelon-targaryen": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge.",
+      "bethany-bracken": "His niece, whose marriage to Oscar Tully recently tied House Bracken to the ruling Tully line."
     },
-    "summary": "Lord Perric Bracken of Stone Hedge, whose men killed a Blackwood cousin near the border in circumstances that remain disputed. He called it an unfortunate accident during an altercation; Lord Godfrey Blackwood called it a deliberate provocation and brought the matter to the Hand of the King. The Hand offered two paths: a Crown envoy or a trial by combat. Bracken has not yet answered.",
+    "summary": "Lord Perric Bracken of Stone Hedge, whose men killed a Blackwood cousin near the border in circumstances that remain disputed. He called it an unfortunate accident during an altercation; Lord Godfrey Blackwood called it a deliberate provocation and brought the matter to the Hand of the King. Perric's niece Bethany is newly married to Oscar Tully, grandson of Lord Clover Tully, further complicating the Riverlands dispute.",
     "quotes": []
   },
   {
@@ -2073,18 +2055,20 @@
     "house": "House Tully",
     "title": "Lord of Riverrun, Lord Paramount of the Trident",
     "status": "Alive",
-    "age": "-",
+    "age": 71,
     "nameday": {
-      "day": "-",
-      "moon": "-",
-      "year": "-"
+      "day": 25,
+      "moon": 8,
+      "year": 27
     },
     "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
     "siblings": [],
-    "children": [],
+    "children": [
+      "elwood-tully"
+    ],
     "mentor": "-",
     "dragon": "-",
     "traits": [
@@ -2099,9 +2083,509 @@
     ],
     "relationships": {
       "godfrey-blackwood": "His bannerman; refused to grant him vengeance or marshal forces against the Brackens, calling the border killing a drunken mistake. Godfrey bypassed him entirely and went to the Crown.",
-      "perric-bracken": "His other bannerman; recently tied to him by the marriage of a grandson to a Bracken girl, which Godfrey and the Hand both noted as the reason for his passivity."
+      "perric-bracken": "His bannerman and Lord of Stone Hedge; their houses are now tied by the marriage of Clover's grandson Oscar Tully to Perric's niece Bethany Bracken, a connection Godfrey Blackwood sees as compromising Clover's neutrality."
     },
-    "summary": "Lord Clover Tully of Riverrun, Lord Paramount of the Trident. Notoriously passive and recently bound to House Bracken by his grandson's marriage, he refused to give Godfrey Blackwood the justice he demanded for his cousin's death — calling it a drunken mistake and urging peace. Godfrey took the matter to the Hand of the King instead, a step Lord Tully was informed of in advance and did not prevent.",
+    "summary": "Lord Clover Tully of Riverrun, Lord Paramount of the Trident. Notoriously passive and recently bound to House Bracken by the marriage of his grandson Oscar Tully to Lord Perric Bracken's niece Bethany, he refused to give Godfrey Blackwood the justice he demanded for his cousin's death — calling it a drunken mistake and urging peace. Godfrey took the matter to the Hand of the King instead.",
+    "quotes": []
+  },
+  {
+    "id": "aenys-targaryen-ii",
+    "name": "Aenys Targaryen II",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Late King of the Seven Kingdoms",
+    "status": "Dead",
+    "age": 73,
+    "nameday": {
+      "day": 15,
+      "moon": 2,
+      "year": 15
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "vhaemys-targaryen-elder",
+    "siblings": [],
+    "children": [
+      "malaenar-targaryen",
+      "baelenys-targaryen",
+      "vahaemon-targaryen"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Authoritarian",
+      "Dynastic",
+      "Severe"
+    ],
+    "goals": [],
+    "relationships": {
+      "vhaemys-targaryen-elder": "His queen and wife.",
+      "malaenar-targaryen": "His eldest son.",
+      "baelenys-targaryen": "His son and eventual successor.",
+      "vahaemon-targaryen": "His youngest son."
+    },
+    "summary": "The late King Aenys Targaryen II, father of Malaenar, Baelenys, and Vahaemon. His reign and treatment of his family left wounds that still shape the royal house.",
+    "quotes": []
+  },
+  {
+    "id": "vhaemys-targaryen-elder",
+    "name": "Vhaemys Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Late Queen of the Seven Kingdoms",
+    "status": "Dead",
+    "age": 70,
+    "nameday": {
+      "day": 9,
+      "moon": 6,
+      "year": 18
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "aenys-targaryen-ii",
+    "siblings": [],
+    "children": [
+      "malaenar-targaryen",
+      "baelenys-targaryen",
+      "vahaemon-targaryen"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Royal",
+      "Long-Suffering"
+    ],
+    "goals": [],
+    "relationships": {
+      "aenys-targaryen-ii": "Her husband and king.",
+      "malaenar-targaryen": "Her eldest son.",
+      "baelenys-targaryen": "Her son.",
+      "vahaemon-targaryen": "Her youngest son."
+    },
+    "summary": "The late Queen Vhaemys Targaryen, wife of Aenys II and mother of Malaenar, Baelenys, and Vahaemon. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
+    "quotes": []
+  },
+  {
+    "id": "alysa-targaryen",
+    "name": "Alysa Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Late Lady of Dragonstone",
+    "status": "Dead",
+    "age": 51,
+    "nameday": {
+      "day": 23,
+      "moon": 9,
+      "year": 44
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "malaenar-targaryen",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Highborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "malaenar-targaryen": "Her husband, Lord of Dragonstone."
+    },
+    "summary": "Malaenar Targaryen's first wife, a Targaryen by blood. She died before Tansy Riverside came to share Malaenar's life on Dragonstone.",
+    "quotes": []
+  },
+  {
+    "id": "vaenarr-targaryen",
+    "name": "Vaenarr Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Prince of House Targaryen",
+    "status": "Alive",
+    "age": 51,
+    "nameday": {
+      "day": 15,
+      "moon": 4,
+      "year": 48
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [
+      "jaery-targaryen"
+    ],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Royal"
+    ],
+    "goals": [],
+    "relationships": {
+      "jaery-targaryen": "His sister, Queen of the Seven Kingdoms."
+    },
+    "summary": "A Targaryen prince and sibling of Queen Jaery.",
+    "quotes": []
+  },
+  {
+    "id": "tygett-lannister",
+    "name": "Tygett Lannister",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Lannister",
+    "title": "Lord of Casterly Rock, Shield of Lannisport and Warden of the West",
+    "status": "Alive",
+    "age": 74,
+    "nameday": {
+      "day": 10,
+      "moon": 12,
+      "year": 24
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "ella-lannister",
+    "siblings": [],
+    "children": [
+      "tion-lannister"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Powerful",
+      "Established",
+      "Dynastic"
+    ],
+    "goals": [],
+    "relationships": {
+      "tion-lannister": "His son, who serves the Crown as Master of Coin.",
+      "ella-lannister": "His wife."
+    },
+    "summary": "Lord Tygett Lannister, Lord of Casterly Rock and Warden of the West. He is the father of Tion Lannister, the Crown's Master of Coin.",
+    "quotes": []
+  },
+  {
+    "id": "ella-lannister",
+    "name": "Ella Lannister",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Lannister",
+    "title": "Lady of Casterly Rock",
+    "status": "Alive",
+    "age": 71,
+    "nameday": {
+      "day": 8,
+      "moon": 12,
+      "year": 27
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "tygett-lannister",
+    "siblings": [],
+    "children": [
+      "tion-lannister"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Highborn",
+      "Dynastic"
+    ],
+    "goals": [],
+    "relationships": {
+      "tygett-lannister": "Her husband, Lord of Casterly Rock.",
+      "tion-lannister": "Her son, the Master of Coin."
+    },
+    "summary": "Lady Ella Lannister, wife of Tygett Lannister and mother of Tion Lannister.",
+    "quotes": []
+  },
+  {
+    "id": "myrielle-lannister",
+    "name": "Myrielle Lannister",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Lannister",
+    "title": "Lady of House Lannister",
+    "status": "Alive",
+    "age": 47,
+    "nameday": {
+      "day": 16,
+      "moon": 11,
+      "year": 51
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "tion-lannister",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Highborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "tion-lannister": "Her husband, the Crown's Master of Coin."
+    },
+    "summary": "The wife of Tion Lannister, Master of Coin.",
+    "quotes": []
+  },
+  {
+    "id": "harrik-greyjoy",
+    "name": "Harrik Greyjoy",
+    "nickname": "Drowned Servant",
+    "aliases": [],
+    "house": "House Greyjoy",
+    "title": "Ironborn Warrior",
+    "status": "Dead",
+    "age": 44,
+    "nameday": {
+      "day": 21,
+      "moon": 3,
+      "year": 33
+    },
+    "height": "220 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Massive",
+      "Fearsome",
+      "One White Eye",
+      "Ironborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "baelenys-targaryen": "A famed opponent from Baelenys's Iron Islands campaigns; their clash survived in royal family stories as 'the Dragon Breath vs. Harrik the Drowned Servant.'"
+    },
+    "summary": "Harrik 'Drowned Servant' Greyjoy, a gigantic Ironborn warrior remembered as one of Baelenys Targaryen's most famous opponents in the Iron Islands. Harrik died in 77 AC at the age of forty-four, when Baelenys was thirty-six.",
+    "quotes": []
+  },
+  {
+    "id": "maron-dayne",
+    "name": "Maron Dayne",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Dayne",
+    "title": "Ser of House Dayne",
+    "status": "Dead",
+    "age": 38,
+    "nameday": {
+      "day": 11,
+      "moon": 5,
+      "year": 55
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "lyarra-karstark",
+    "siblings": [],
+    "children": [
+      "alester-dayne"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Dornish",
+      "Highborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "lyarra-karstark": "His Karstark wife; their marriage began as a purely political match.",
+      "alester-dayne": "His son."
+    },
+    "summary": "Ser Maron Dayne, father of Ser Alester Dayne. His marriage to Lyarra Karstark began as a political arrangement. He was later killed by Dornishmen; the exact circumstances remain unresolved.",
+    "quotes": []
+  },
+  {
+    "id": "lyarra-karstark",
+    "name": "Lyarra Karstark",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Karstark",
+    "title": "Lady of House Karstark",
+    "status": "Alive",
+    "age": 42,
+    "nameday": {
+      "day": 13,
+      "moon": 1,
+      "year": 57
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "maron-dayne",
+    "siblings": [],
+    "children": [
+      "alester-dayne"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Northern",
+      "Highborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "maron-dayne": "Her late husband; their marriage began as a political match.",
+      "alester-dayne": "Her son."
+    },
+    "summary": "A Karstark woman of the North and mother of Ser Alester Dayne. Her marriage to Maron Dayne was arranged for political reasons, though Alester's account implies it became more than that.",
+    "quotes": []
+  },
+  {
+    "id": "elwood-tully",
+    "name": "Elwood Tully",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Tully",
+    "title": "Heir of House Tully",
+    "status": "Alive",
+    "age": 47,
+    "nameday": {
+      "day": 18,
+      "moon": 6,
+      "year": 52
+    },
+    "height": "-",
+    "father": "clover-tully",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [
+      "oscar-tully"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Riverlord",
+      "Dynastic"
+    ],
+    "goals": [],
+    "relationships": {
+      "clover-tully": "His father, Lord Paramount of the Trident.",
+      "oscar-tully": "His son."
+    },
+    "summary": "Son of Lord Clover Tully and father of Oscar Tully, forming the intervening generation between Riverrun's lord and the grandson whose marriage tied House Tully to House Bracken.",
+    "quotes": []
+  },
+  {
+    "id": "oscar-tully",
+    "name": "Oscar Tully",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Tully",
+    "title": "Ser of House Tully",
+    "status": "Alive",
+    "age": 24,
+    "nameday": {
+      "day": 12,
+      "moon": 10,
+      "year": 74
+    },
+    "height": "-",
+    "father": "elwood-tully",
+    "mother": "-",
+    "spouse": "bethany-bracken",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Riverlander",
+      "Highborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "elwood-tully": "His father.",
+      "clover-tully": "His grandfather, Lord of Riverrun.",
+      "bethany-bracken": "His wife, whose marriage to him recently tied Houses Tully and Bracken."
+    },
+    "summary": "Grandson of Lord Clover Tully and son of Elwood Tully. His recent marriage to Bethany Bracken has become politically important amid the Blackwood-Bracken dispute.",
+    "quotes": []
+  },
+  {
+    "id": "bethany-bracken",
+    "name": "Bethany Bracken",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Bracken",
+    "title": "Lady Bethany Bracken",
+    "status": "Alive",
+    "age": 21,
+    "nameday": {
+      "day": 13,
+      "moon": 3,
+      "year": 78
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "oscar-tully",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Riverlander",
+      "Highborn"
+    ],
+    "goals": [],
+    "relationships": {
+      "oscar-tully": "Her husband.",
+      "perric-bracken": "Her uncle, Lord of Stone Hedge.",
+      "clover-tully": "Her husband's grandfather and Lord Paramount of the Trident."
+    },
+    "summary": "A niece of Lord Perric Bracken and wife of Oscar Tully. Her marriage into House Tully has drawn the two houses closer at a particularly sensitive moment in the Riverlands.",
+    "quotes": []
+  },
+  {
+    "id": "ronnel-arryn",
+    "name": "Ronnel Arryn",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Arryn",
+    "title": "Lord of the Eyrie, Defender of the Vale and Warden of the East",
+    "status": "Alive",
+    "age": 49,
+    "nameday": {
+      "day": 4,
+      "moon": 3,
+      "year": 50
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Proud",
+      "Aristocratic",
+      "Powerful"
+    ],
+    "goals": [
+      "Defend the Vale",
+      "Preserve House Arryn's influence"
+    ],
+    "relationships": {},
+    "summary": "Lord Ronnel Arryn, Lord of the Eyrie, Defender of the Vale and Warden of the East. He stands as one of the four great regional wardens of the realm.",
     "quotes": []
   }
 ]

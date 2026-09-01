@@ -1,4 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\familytree\PersonNode.tsx
+
 import Link from "next/link";
 
 import { getCharacter } from "@/lib/characters";
@@ -31,10 +32,16 @@ export default function PersonNode({ id, name, dimmed }: Props) {
   }
 
   return (
-    <span className={`${styles.person} ${styles.unlinked}`}>
+    <span
+      className={`${styles.person} ${styles.unlinked} ${
+        dimmed ? styles.dimmed : ""
+      }`}
+    >
       <span className={styles.unlinkedAvatar}>?</span>
 
-      <span className={styles.personName}>{name ?? "Unknown"}</span>
+      <span className={styles.personName}>
+        {name ?? "Unknown"}
+      </span>
     </span>
   );
 }
