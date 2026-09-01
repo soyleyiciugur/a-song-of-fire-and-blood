@@ -38,7 +38,12 @@
       "melessa-hightower": "Her younger sister, who was pinned to the Great Hall floor beside her when the massacre began — and, unlike Alysanne, survived it."
     },
     "summary": "Alysanne Hightower appeared only briefly, a silhouette in a high window watching Prince Gaelor's vanguard arrive at her family's gates. She and her sister were pinned to the floor as the Great Hall dissolved into violence, and in the blind panic that followed, a soldier's blade found her. Her death, unintended and unremarked upon by the men who caused it, is one of Oldtown's quietest tragedies.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 26,
+      "moon": 3,
+      "year": 99
+    }
   },
   {
     "id": "baelenys-targaryen",
@@ -198,7 +203,12 @@
       "baelenys-targaryen": "Their houses shared an old, uneasy loyalty; his own father bled for the Iron Throne beside Baelenys' uncle."
     },
     "summary": "Lord Brandon Stark died quietly in his own bed while the royal court feasted at Driftmark, a small, undramatic death that nonetheless drew King's Landing's attention back to the North for the first time in years. His passing brought Princess Saera to Winterfell to pay the Crown's respects, and with her, the first real contact between Stark and Targaryen in a generation.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 30,
+      "moon": 2,
+      "year": 99
+    }
   },
   {
     "id": "cordin-poole",
@@ -283,7 +293,12 @@
       "saathos-maris": "Sent by Baelor Targaryen to investigate his death near the rural sept south of King's Landing; Saathos's inquiries confirmed the broad strokes of the ambush but could not identify the knight who survived it."
     },
     "summary": "Once a Kingsguard whose exploits were sung about before most knights would dare dream of it, Curtass Whent left the order under circumstances the realm no longer discusses openly. King Baelenys called him back for one purpose: find Visenor. He very nearly succeeded, cornering Ser Alester Dayne with five sellswords in the woods south of King's Landing. The fight cost him his life at the hooves of his own target's horse — killed not by a sword, but by a desperate, dying act of improvisation from the man he had just beaten half to death. His body was found alongside those of his five sellswords near a rural sept, and word of his death reached the King, who received it with cold indifference.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 15,
+      "moon": 3,
+      "year": 99
+    }
   },
   {
     "id": "darren-dayne",
@@ -373,7 +388,12 @@
       "the-lord-of-highgarden": "His co-conspirator; it was the Lord of Highgarden who first approached him with the plan to poison the King, sharing his belief that the realm could not survive another of Baelenys's wars."
     },
     "summary": "For decades Derrin Hightower served as Baelenys' Hand and closest political adviser. After the poisoning attempt, he became the center of suspicion when the dying assassin allegedly whispered only two words: 'the Hand.' Confronted alone by Jacaelon at Driftmark, Derrin confessed everything: he had conspired with the Lord of Highgarden to poison the King, believing the realm could no longer survive Baelenys' wars and taxes, and that he acted for House Targaryen's future rather than against it. Jace executed him on the spot and disposed of his body at sea. To the realm, Derrin Hightower remains simply missing — his true fate known only to the King, his new Hand, and the sea.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 30,
+      "moon": 2,
+      "year": 99
+    }
   },
   {
     "id": "gaelor-targaryen",
@@ -1010,7 +1030,12 @@
       "gaelor-targaryen": "Discovered, dragged to the black cells, and executed with Blackfyre in a humiliating fight Vance refused to fully participate in. He asked only to die with some remnant of honor. He was not given it."
     },
     "summary": "Ser Brannyn Vance served as Princess Maela's sworn shield long enough to become someone she trusted with more than her safety. He broke his Kingsguard vows in a single night in Storm's End and spent the journey home wracked with guilt, terrified of what came next. What came next was Prince Gaelor — through the door, across the room, and eventually down to the black cells. Vance died on Blackfyre's edge, castrated and then killed, having refused on principle to raise steel against royal blood. He is officially listed as a traitor. Only three people know the truth of what happened.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 3,
+      "moon": 7,
+      "year": 99
+    }
   },
   {
     "id": "brant-costayne",
@@ -1199,7 +1224,7 @@
     "age": 15,
     "nameday": {
       "day": 4,
-      "moon": 6,
+      "moon": 2,
       "year": 84
     },
     "height": "169 cm",
@@ -1233,7 +1258,12 @@
       "brant-costayne": "The knight who stood in oath to defend him, called for his revenge the moment he was killed, and died in the chaos that followed."
     },
     "summary": "Thrust into Oldtown's lordship the moment his father vanished under suspicion, fifteen-year-old Timos Hightower tried desperately to comply with the Crown's demands. He asked Gaelor to enter with only a few men and speak. It was not enough. When the prince announced his execution, panic drove the boy to draw steel. He never had a chance to use it. His decapitated head rolled to a stop at Gaelor's boots. His death, and the massacre it triggered, will be remembered in the Reach for a hundred years.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 26,
+      "moon": 3,
+      "year": 99
+    }
   },
   {
     "id": "tion-lannister",
@@ -1969,7 +1999,7 @@
   },
   {
     "id": "tansy-riverside",
-    "name": "Tansy",
+    "name": "Tansy Riverside",
     "nickname": "-",
     "aliases": [],
     "house": "-",
@@ -2127,7 +2157,12 @@
       "vahaemon-targaryen": "His youngest son."
     },
     "summary": "The late King Aenys Targaryen II, father of Malaenar, Baelenys, and Vahaemon. His reign and treatment of his family left wounds that still shape the royal house.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 20,
+      "moon": 6,
+      "year": 88
+    }
   },
   {
     "id": "vhaemys-targaryen-elder",
@@ -2167,7 +2202,12 @@
       "vahaemon-targaryen": "Her youngest son."
     },
     "summary": "The late Queen Vhaemys Targaryen, wife of Aenys II and mother of Malaenar, Baelenys, and Vahaemon. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 4,
+      "moon": 10,
+      "year": 88
+    }
   },
   {
     "id": "alysa-targaryen",
@@ -2199,7 +2239,12 @@
       "malaenar-targaryen": "Her husband, Lord of Dragonstone."
     },
     "summary": "Malaenar Targaryen's first wife, a Targaryen by blood. She died before Tansy Riverside came to share Malaenar's life on Dragonstone.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 12,
+      "moon": 11,
+      "year": 95
+    }
   },
   {
     "id": "vaenarr-targaryen",
@@ -2373,7 +2418,12 @@
       "baelenys-targaryen": "A famed opponent from Baelenys's Iron Islands campaigns; their clash survived in royal family stories as 'the Dragon Breath vs. Harrik the Drowned Servant.'"
     },
     "summary": "Harrik 'Drowned Servant' Greyjoy, a gigantic Ironborn warrior remembered as one of Baelenys Targaryen's most famous opponents in the Iron Islands. Harrik died in 77 AC at the age of forty-four, when Baelenys was thirty-six.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 17,
+      "moon": 6,
+      "year": 77
+    }
   },
   {
     "id": "maron-dayne",
@@ -2409,7 +2459,12 @@
       "alester-dayne": "His son."
     },
     "summary": "Ser Maron Dayne, father of Ser Alester Dayne. His marriage to Lyarra Karstark began as a political arrangement. He was later killed by Dornishmen; the exact circumstances remain unresolved.",
-    "quotes": []
+    "quotes": [],
+    "death": {
+      "day": 18,
+      "moon": 8,
+      "year": 93
+    }
   },
   {
     "id": "lyarra-karstark",

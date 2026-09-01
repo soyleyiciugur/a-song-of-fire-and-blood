@@ -6,7 +6,11 @@ import { useState } from "react";
 import charactersData from "@/data/characters/characters.json";
 import type { Character } from "../../types/character";
 import { slugifyHouse } from "../../lib/houses";
-import { computeAge, formatNameday } from "../../lib/age";
+import {
+  computeAge,
+  formatNameday,
+  formatDeathDate,
+} from "../../lib/age";
 import worldDate from "../../data/worldDate.json";
 import StatusReveal from "./StatusReveal";
 
@@ -52,12 +56,16 @@ export default function CharacterInfoBox({ character }: Props) {
   );
 
   const age = character.nameday
-    ? computeAge(character.nameday, worldDate)
+    ? computeAge(character.nameday, worldDate, character.death)
     : character.age;
 
   const namedayLabel = character.nameday
     ? formatNameday(character.nameday, worldDate.era)
     : "-";
+
+  const deathLabel = character.death
+    ? formatDeathDate(character.death, worldDate.era)
+    : null;
 
   return (
     <aside
@@ -118,6 +126,7 @@ export default function CharacterInfoBox({ character }: Props) {
             )
           }
         />
+
         <InfoRow
           label="Status"
           value={
@@ -127,9 +136,17 @@ export default function CharacterInfoBox({ character }: Props) {
             />
           }
         />
+
         <InfoRow label="Title" value={character.title} />
-        <InfoRow label="Age" value={String(age)} />
+
+        <InfoRow label="Age" value={age !== undefined ? String(age) : "-"} />
+
         <InfoRow label="Nameday" value={namedayLabel} />
+
+        {deathLabel && (
+          <InfoRow label="Died" value={deathLabel} />
+        )}
+
         <InfoRow label="Height" value={character.height ?? "-"} />
         <InfoRow label="Dragon" value={character.dragon ?? "-"} />
         <InfoRow label="Father" value={getCharacterName(character.father)} />

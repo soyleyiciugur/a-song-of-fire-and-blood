@@ -1,37 +1,66 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\types\character.ts
+
 export type CharacterStatus = "Alive" | "Dead" | "Unknown" | "Missing";
 
 export type CharacterId =
+  | "aenys-targaryen-ii"
+  | "almar-larchmont"
+  | "alysa-targaryen"
   | "alysanne-hightower"
   | "baelenys-targaryen"
   | "baelor-targaryen"
+  | "baran-strong"
+  | "berholt-caswell"
+  | "bethany-bracken"
   | "brandon-stark"
-  | "ser-brannyn-vance"
+  | "clover-tully"
   | "cordin-poole"
   | "curtass-whent"
   | "darren-dayne"
   | "derrin-hightower"
+  | "edmyn-uller"
+  | "ella-lannister"
+  | "elwood-tully"
   | "gaelor-targaryen"
+  | "godfrey-blackwood"
+  | "harrik-greyjoy"
   | "jacaelon-targaryen"
   | "jaery-targaryen"
+  | "leo-tyrell"
   | "lorenah-dayne"
+  | "lyarra-karstark"
   | "maela-targaryen"
   | "malaenar-targaryen"
+  | "maron-dayne"
+  | "martyn-mullendore"
+  | "melessa-hightower"
+  | "myrielle-lannister"
+  | "naela-targaryen"
   | "naella-velaryon"
-  | "ser-orwell-morrigen"
+  | "oscar-tully"
+  | "perric-bracken"
+  | "renrose-tyrell"
   | "rhaella-targaryen"
   | "rickard-stark"
+  | "ronnel-arryn"
   | "saera-targaryen"
   | "ser-alester-dayne"
+  | "ser-brannyn-vance"
   | "ser-brant-costayne"
+  | "ser-orwell-morrigen"
   | "ser-saathos-maris"
   | "steffon-baratheon"
+  | "tansy-riverside"
   | "timos-hightower"
   | "tion-lannister"
+  | "tygett-lannister"
+  | "vaenarr-targaryen"
   | "vahaemon-targaryen"
   | "vhaemys-targaryen"
-  | "visenor-targaryen";
-
+  | "vhaemys-targaryen-elder"
+  | "visenor-targaryen"
+  | "visenya-targaryen"
+  | "weylar-rocke";
 
 export interface CharacterQuote {
   text: string;
@@ -41,12 +70,13 @@ export interface CharacterQuote {
   chapterTitle?: string;
 }
 
-// Full birth date (day + moon + year) — needed because computeAge() in
-// lib/age.ts derives the character's current in-world age from
-// (worldDate.year - nameday.year), adjusted for whether this year's
-// nameday has passed yet. Matches lib/age.ts's `Nameday` interface and
-// CharacterSchema's `nameday` in schemas/character.ts.
 export interface CharacterNameday {
+  day: number;
+  moon: number;
+  year: number;
+}
+
+export interface CharacterDeath {
   day: number;
   moon: number;
   year: number;
@@ -65,9 +95,17 @@ export interface Character {
   status: CharacterStatus;
   secret?: { status: CharacterStatus; note: string };
 
-  /** @deprecated legacy static age — superseded by `nameday` + computeAge(). Kept optional so old records don't break. */
+  /** @deprecated legacy static age */
   age?: number;
+
   nameday?: CharacterNameday;
+
+  /**
+   * Exact date of death.
+   * Living characters should omit this field.
+   */
+  death?: CharacterDeath;
+
   height?: string;
 
   father: string;
@@ -91,7 +129,6 @@ export interface Character {
   quote?: CharacterQuote;
   quotes?: CharacterQuote[];
 
-  // 🔥 UI layer (optional asset)
   portrait?: string;
   miniPortrait?: string;
 }
