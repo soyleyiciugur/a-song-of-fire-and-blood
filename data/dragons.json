@@ -4,12 +4,11 @@
     "name": "Maelwing",
     "status": "Alive",
     "riderId": "baelenys-targaryen",
-    "image": "/images/dragons/maelwing.webp",
+    "image": "/images/dragons/maelwing.png",
     "traits": [
       "Ancient",
       "Battle-Scarred",
-      "Fiercely Loyal to Baelenys",
-      "Rarely Flown Beyond the Capital"
+      "Fiercely Loyal to Baelenys"
     ],
     "description": "King Baelenys' dragon, ridden since long before his own coronation and as feared throughout the realm as the king himself."
   },
@@ -31,7 +30,7 @@
     "name": "Cloudgazer",
     "status": "Alive",
     "riderId": "saera-targaryen",
-    "image": "/images/dragons/cloudgazer.webp",
+    "image": "/images/dragons/cloudgazer.png",
     "traits": [
       "Storm-Grey Scales",
       "Amethyst-Crystal Horns",
@@ -61,7 +60,7 @@
     "status": "Alive",
     "riderId": "maela-targaryen",
     "previousRiderId": "visenor-targaryen",
-    "image": "/images/dragons/jadefyre.webp",
+    "image": "/images/dragons/jadefyre.png",
     "traits": [
       "Jade-Green Scales",
       "Small for Its Age",
