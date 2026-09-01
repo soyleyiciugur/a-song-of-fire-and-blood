@@ -227,7 +227,7 @@
   {
     "id": "maela-targaryen",
     "cardType": "character",
-    "tierId": "s",
+    "tierId": "b",
     "name": "Maela Targaryen",
     "subtitle": "The Twin",
     "houseId": "targaryen",
@@ -594,7 +594,7 @@
         "description": "Once per game, prevents an assassination attempt mid-action."
       }
     ],
-    "nemesis": [],
+    "nemesis": ["perric-bracken"],
     "allies": ["jacaelon-targaryen", "gaelor-targaryen"],
     "flavorQuote": "What a jolly day for the peasants.",
     "linkedCharacterId": "godfrey-blackwood"
@@ -648,6 +648,56 @@
     "allies": ["brant-costayne", "melessa-hightower"],
     "flavorQuote": "",
     "linkedCharacterId": "timos-hightower"
+  },
+  {
+    "id": "baran-strong",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Baran Strong",
+    "subtitle": "The Exiled Wall",
+    "houseId": "strong",
+    "power": 9,
+    "influence": 3,
+    "keywords": ["Knight", "Exiled", "Formidable", "Resentful"],
+    "abilities": [
+      {
+        "name": "Curtass Was Nothing Special",
+        "description": "Deals +2 power against any character who previously defeated or disgraced a Kingsguard."
+      },
+      {
+        "name": "Seven Feet of Grievance",
+        "description": "Once per game, forces any character who underestimates him to re-engage in combat at a disadvantage."
+      }
+    ],
+    "nemesis": ["curtass-whent"],
+    "allies": ["gaelor-targaryen", "malaenar-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "baran-strong"
+  },
+  {
+    "id": "clarisse-flowers",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Clarisse Flowers",
+    "subtitle": "Sworn Sword of Oldtown",
+    "houseId": "hightower",
+    "power": 8,
+    "influence": 3,
+    "keywords": ["Swordswoman", "Bastard", "Formidable", "Raised as a Boy"],
+    "abilities": [
+      {
+        "name": "I Was Never Raised to Be a Lady",
+        "description": "Opponents who underestimate her based on gender or birth lose 1 power before combat begins."
+      },
+      {
+        "name": "Blade at Your Throat",
+        "description": "Once per game, pins a target and ends their action for the round without killing them."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["melessa-hightower", "visenor-targaryen"],
+    "flavorQuote": "",
+    "linkedCharacterId": "clarisse-flowers"
   },
   {
     "id": "cordin-poole",
@@ -719,7 +769,7 @@
         "description": "Deals +2 power against Kingsguard characters specifically."
       }
     ],
-    "nemesis": ["alester-dayne"],
+    "nemesis": ["alester-dayne", "baran-strong"],
     "allies": ["baelenys-targaryen"],
     "flavorQuote": "You know what the problem with the Kingsguard is? They pass over fixers — real men like me.",
     "linkedCharacterId": "curtass-whent"
@@ -740,7 +790,7 @@
         "description": "Cannot attack any Targaryen character. Takes full damage from them without retaliation."
       },
       {
-        "name": "A Moment of Weakness",
+        "name": "When He Falls, Everything Falls",
         "description": "When eliminated, deals 2 influence damage to every character currently holding a secret token. If any of those characters are Targaryen, they take 3 instead."
       }
     ],
@@ -770,9 +820,34 @@
       }
     ],
     "nemesis": [],
-    "allies": ["baelenys-targaryen"],
-    "flavorQuote": "",
+    "allies": ["baelenys-targaryen", "baran-strong"],
+    "flavorQuote": "Even though I never showed it, I always envied you. Especially for how you stood up to our father.",
     "linkedCharacterId": "malaenar-targaryen"
+  },
+  {
+    "id": "tansy-riverside",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Tansy Riverside",
+    "subtitle": "Paramour of Dragonstone",
+    "houseId": "-",
+    "power": 1,
+    "influence": 5,
+    "keywords": ["Lowborn", "Ambitious", "Calculating", "Undeterred"],
+    "abilities": [
+      {
+        "name": "She Organized the Whole Thing",
+        "description": "Once per game, triggers a social event without her ally's knowledge — all consequences fall on her instead of him."
+      },
+      {
+        "name": "She Held His Gaze",
+        "description": "Cannot be dismissed or removed from play by intimidation alone; requires an active political action."
+      }
+    ],
+    "nemesis": ["baelenys-targaryen", "jaery-targaryen"],
+    "allies": ["malaenar-targaryen"],
+    "flavorQuote": "I am so deeply honored that you graced us with your presence today.",
+    "linkedCharacterId": "tansy-riverside"
   },
   {
     "id": "naela-targaryen",
@@ -954,7 +1029,7 @@
     "abilities": [
       {
         "name": "Unintended",
-        "description": "Her death was not ordered. When eliminated, the character who caused it loses 3 influence permanently."
+        "description": "When eliminated, the character who caused it loses 3 influence permanently."
       },
       {
         "name": "Watching from the Window",
@@ -965,6 +1040,56 @@
     "allies": ["timos-hightower", "melessa-hightower"],
     "flavorQuote": "",
     "linkedCharacterId": "alysanne-hightower"
+  },
+  {
+    "id": "perric-bracken",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Perric Bracken",
+    "subtitle": "Lord of Stone Hedge",
+    "houseId": "bracken",
+    "power": 4,
+    "influence": 4,
+    "keywords": ["Lord", "Aggressive", "Opportunistic", "Ancient Feud"],
+    "abilities": [
+      {
+        "name": "An Unfortunate Accident",
+        "description": "When accused of an act, may claim plausible deniability — reduces evidence weight by 1 unless a witness token is present."
+      },
+      {
+        "name": "Tully Blood Now",
+        "description": "While allied with a Tully character, ignores one Crown challenge per round."
+      }
+    ],
+    "nemesis": ["godfrey-blackwood"],
+    "allies": ["clover-tully"],
+    "flavorQuote": "",
+    "linkedCharacterId": "perric-bracken"
+  },
+  {
+    "id": "clover-tully",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Clover Tully",
+    "subtitle": "Lord Paramount of the Trident",
+    "houseId": "tully",
+    "power": 2,
+    "influence": 6,
+    "keywords": ["Lord Paramount", "Passive", "Conflict-Averse", "Compromised"],
+    "abilities": [
+      {
+        "name": "A Drunken Mistake",
+        "description": "Once per game, dismisses a border dispute without consequence — but loses 1 influence from both sides permanently."
+      },
+      {
+        "name": "Tied to the Brackens",
+        "description": "Cannot oppose Bracken-allied characters while his house is bound by the current marriage pact."
+      }
+    ],
+    "nemesis": [],
+    "allies": ["perric-bracken", "oscar-tully"],
+    "flavorQuote": "",
+    "linkedCharacterId": "clover-tully"
   },
   {
     "id": "blackfyre",
