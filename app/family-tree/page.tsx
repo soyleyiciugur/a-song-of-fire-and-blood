@@ -21,7 +21,9 @@ export default function FamilyTree() {
         <section id="house-targaryen" className={styles.house}>
           <h2 className={styles.houseTitle}>House Targaryen</h2>
 
-          <p className={styles.generationLabel}>The Old King&apos;s Children</p>
+          <p className={styles.generationLabel}>
+            The Old King&apos;s Children
+          </p>
 
           <div className={styles.generationRow}>
             <FamilyUnit
@@ -35,7 +37,9 @@ export default function FamilyTree() {
             </FamilyUnit>
           </div>
 
-          <p className={styles.generationLabel}>The King&apos;s Generation</p>
+          <p className={styles.generationLabel}>
+            The King&apos;s Generation
+          </p>
 
           <div className={styles.generationRow}>
             <FamilyUnit
@@ -126,6 +130,12 @@ export default function FamilyTree() {
               <PersonNode id="melessa-hightower" />
             </FamilyUnit>
           </div>
+
+          <p className={styles.houseNote}>
+            Derrin&apos;s wife and the mother of his children has not yet been
+            named. Melessa is the only surviving child of this branch after
+            the deaths of Timos and Alysanne at Oldtown.
+          </p>
         </section>
 
         {/* HOUSE TYRELL */}
@@ -242,7 +252,7 @@ export default function FamilyTree() {
           <div className={styles.generationRow}>
             <FamilyUnit
               parentA={{ id: "clover-tully" }}
-              childrenLabel="Children"
+              childrenLabel="Child"
             >
               <FamilyUnit
                 parentA={{ name: "Unknown Tully" }}

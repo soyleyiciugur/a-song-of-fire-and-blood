@@ -216,7 +216,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "-",
-    "title": "Maester",
+    "title": "Maester of the Red Keep",
     "status": "Alive",
     "age": 68,
     "nameday": {
@@ -471,7 +471,7 @@
       "Derrick"
     ],
     "house": "House Targaryen",
-    "title": "Prince Jacaelon of House Targaryen, Hand of the King, Ser",
+    "title": "Prince Jacaelon of House Targaryen, Hand of the King",
     "status": "Alive",
     "age": 17,
     "nameday": {
@@ -1315,7 +1315,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "Traitor",
+    "title": "Exiled Prince of House Targaryen",
     "status": "Unknown",
     "secret": {
       "status": "Alive",
@@ -1529,7 +1529,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "-",
-    "title": "Maester",
+    "title": "Maester of the Scholars' Retreat",
     "status": "Alive",
     "age": 60,
     "nameday": {
@@ -1611,7 +1611,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "-",
+    "title": "Princess Visenya of House Targaryen",
     "status": "Unknown",
     "secret": {
       "status": "Alive",
@@ -1661,7 +1661,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "-",
+    "title": "Princess Naela of House Targaryen",
     "status": "Unknown",
     "secret": {
       "status": "Alive",
@@ -1877,7 +1877,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Tyrell",
-    "title": "-",
+    "title": "Heir to Highgarden",
     "status": "Alive",
     "age": 14,
     "nameday": {
@@ -1919,7 +1919,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "-",
-    "title": "Maester",
+    "title": "Maester of the Hightower",
     "status": "Alive",
     "age": 57,
     "nameday": {
@@ -2003,7 +2003,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "-",
-    "title": "-",
+    "title": "Paramour of the Lord of Dragonstone",
     "status": "Alive",
     "age": 17,
     "nameday": {
@@ -2431,7 +2431,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Dayne",
-    "title": "Ser of House Dayne",
+    "title": "Knight of House Dayne",
     "status": "Dead",
     "age": 38,
     "nameday": {
@@ -2544,7 +2544,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Tully",
-    "title": "Ser of House Tully",
+    "title": "Knight of House Tully",
     "status": "Alive",
     "age": 24,
     "nameday": {
