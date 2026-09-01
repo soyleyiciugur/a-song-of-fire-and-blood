@@ -231,8 +231,8 @@
     "name": "Maela Targaryen",
     "subtitle": "The Twin",
     "houseId": "targaryen",
-    "power": 5,
-    "influence": 8,
+    "power": 4,
+    "influence": 6,
     "keywords": ["Dragonrider", "Manipulative", "Guarded", "Unbothered"],
     "abilities": [
       {
@@ -656,7 +656,7 @@
     "name": "Baran Strong",
     "subtitle": "The Exiled Wall",
     "houseId": "strong",
-    "power": 9,
+    "power": 7,
     "influence": 3,
     "keywords": ["Knight", "Exiled", "Formidable", "Resentful"],
     "abilities": [
