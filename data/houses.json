@@ -56,7 +56,7 @@
     "seat": "Driftmark",
     "sigilSrc": "/images/houses/velaryon.webp",
     "color": "#20B2AA",
-    "secondaryColor": "#B0E0E6",
+    "secondaryColor": "#C0C0C0",
     "description": "Masters of Driftmark and the Crown's oldest maritime allies, tied now to the royal family directly through Naella Velaryon's marriage to Prince Gaelor. Naella carries his heir."
   },
   {
@@ -86,7 +86,7 @@
     "seat": "The Reach",
     "sigilSrc": "/images/houses/morrigen.webp",
     "color": "#4E7F4C",
-    "secondaryColor": "#8FBC8F",
+    "secondaryColor": "#111111",
     "description": "A Reach house represented at court by Ser Orwell Morrigen, Lord Commander of the Kingsguard, who watches the realm's unraveling with growing unease."
   },
   {
@@ -115,8 +115,8 @@
     "words": "Ever Upward",
     "seat": "Uplands",
     "sigilSrc": "/images/houses/mullendore.webp",
-    "color": "#4B0082",
-    "secondaryColor": "#E6E6FA",
+    "color": "#F2EFE6",
+    "secondaryColor": "#D97828",
     "description": "A minor Reach house whose sigil bears butterflies and whose seat lies in the Uplands. House Mullendore has served the Hightowers loyally for generations, and it is through that loyalty that Ser Martyn Mullendore came to recognize a disguised Visenor Targaryen bleeding in an Oldtown alley — and chose to deliver him to Lady Melessa rather than the Watch."
   },
   {
@@ -132,21 +132,21 @@
   {
     "id": "strong",
     "name": "House Strong",
-    "words": "-",
+    "words": "Firm and True",
     "seat": "-",
     "sigilSrc": "/images/houses/strong.webp",
-    "color": "#3B3B3B",
-    "secondaryColor": "#D4AF37",
+    "color": "#F2F2F0",
+    "secondaryColor": "#315A8C",
     "description": "A minor Riverlands house whose name survives at court through Baran Strong. Once a knight of the Kingsguard, Baran has since been cast from the white cloak and into exile, leaving his house's place in the affairs of the realm tied largely to his uncertain fate."
   },
   {
     "id": "bracken",
     "name": "House Bracken",
-    "words": "-",
+    "words": "No Bridle Can Tame",
     "seat": "Stone Hedge",
     "sigilSrc": "/images/houses/bracken.webp",
-    "color": "#B08A47",
-    "secondaryColor": "#8B0000",
+    "color": "#75502B",
+    "secondaryColor": "#C79A32",
     "description": "An ancient Riverlands house and bitter rival of House Blackwood. In 99 AC, men sworn to Lord Perric Bracken killed a Blackwood cousin near the disputed border, reopening a feud old enough that few remember its beginning. The bloodshed has since grown into a matter for the Hand of the King, with neither house inclined to yield."
   },
   {
