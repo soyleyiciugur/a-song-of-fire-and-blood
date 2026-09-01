@@ -45,7 +45,7 @@
     "name": "Bayle",
     "status": "Alive",
     "riderId": "gaelor-targaryen",
-    "image": "/images/dragons/bayle.webp",
+    "image": "/images/dragons/bayle.png",
     "traits": [
       "Savage Toward Others",
       "Remarkably Obedient to Gaelor",
@@ -89,7 +89,7 @@
     "id": "boneskins-egg",
     "name": "Boneskin's Egg",
     "status": "Alive",
-    "image": "/images/dragons/boneskin-egg.webp",
+    "image": "/images/dragons/boneskin-egg.png",
     "traits": [
       "Recovered from a Cave in the Red Mountains",
       "Carried by Boneskin Himself",
