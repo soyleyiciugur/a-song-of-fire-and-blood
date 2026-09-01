@@ -1,4 +1,3 @@
-```tsx
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\family-tree\page.tsx
 
 import FamilyUnit from "@/components/familytree/FamilyUnit";
@@ -367,4 +366,3 @@ export default function FamilyTree() {
     </main>
   );
 }
-```
