@@ -2642,5 +2642,53 @@
     "relationships": {},
     "summary": "Lord Ronnel Arryn, Lord of the Eyrie, Defender of the Vale and Warden of the East. He stands as one of the four great regional wardens of the realm.",
     "quotes": []
+  },
+  {
+    "id": "clarisse-flowers",
+    "name": "Clarisse Flowers",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Hightower",
+    "title": "Sworn Sword of Oldtown",
+    "status": "Alive",
+    "age": 20,
+    "nameday": {
+      "day": 14,
+      "moon": 4,
+      "year": 79
+    },
+    "height": "180 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Formidable Swordswoman",
+      "Athletic",
+      "Strong",
+      "Quick",
+      "Blunt",
+      "Proud",
+      "Raised as a Boy",
+      "Illegitimate",
+      "Uncomfortable with Ladylike Expectations",
+      "Battle-Tested"
+    ],
+    "goals": [
+      "Protect Visenor Targaryen while he remains in Oldtown",
+      "Serve Melessa Hightower faithfully",
+      "Prove her worth through skill rather than birth or sex",
+      "Earn the recognition denied to her as both a bastard and a woman"
+    ],
+    "relationships": {
+      "melessa-hightower": "A woman Clarisse holds in great loyalty and esteem. Melessa considers her one of the most valuable people in her service and personally assigned her to protect the man publicly known as Maester Arthur Sand.",
+      "visenor-targaryen": "Assigned by Melessa Hightower as Visenor's personal protection during his concealed stay in Oldtown as Maester Arthur Sand. Their first private spar ended with Clarisse overpowering him and placing her wooden blade at his throat. Visenor was impressed by her skill and openly admitted that he had much to learn from her.",
+      "godfrey-blackwood": "Once faced him while disguised as a man in a tournament. Clarisse claims she left the renowned warrior with wounds that took a long time to heal."
+    },
+    "summary": "Clarisse Flowers is a twenty-year-old bastard of Hightower blood, a short-haired, physically imposing swordswoman who was raised more like a son than a daughter and never prepared for the conventional life of a lady. Though neither a knight nor, by her own insistence, a lady, she has developed into an exceptional fighter and claims to have crossed swords with some of the realm's greatest knights while competing in disguise as a man. Among them was Lord Godfrey Blackwood, whom she says she left badly wounded. Lady Melessa Hightower values Clarisse highly and, on the Ninth Day of the Eighth Moon, 99 AC, assigned her to protect Visenor Targaryen throughout his concealed stay in Oldtown as Maester Arthur Sand. Visenor initially admitted surprise at being given a woman as his protector, prompting Clarisse to explain that she had never been raised as a conventional woman and could outfight many of the knights he had known at the Red Keep. When Visenor asked to test that claim, Clarisse proved it. After a hard spar that bloodied the prince's nose, she used her superior strength and speed to pressure him against a tree, evaded his counterattack, pinned his wooden sword beneath her boot, and placed her own blade against his throat. Visenor accepted the defeat with good humor and told her there was clearly much he could learn from her.",
+    "quotes": []
   }
 ]

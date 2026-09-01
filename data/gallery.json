@@ -1051,7 +1051,7 @@
   },
   {
     "id": "gallery-mria3lqb",
-    "src": "/images/gallery/targaryen-family-portrait1.jpeg",
+    "src": "/images/gallery/targaryen-family-portrait1.png",
     "caption": "House of the Dragon.",
     "characterIds": [
       "baelenys-targaryen",
@@ -1149,7 +1149,7 @@
   },
   {
     "id": "gallery-mri9zyf1",
-    "src": "/images/gallery/jace-yengeden-makas.jpeg",
+    "src": "/images/gallery/jace-yengeden-makas.png",
     "caption": "Yengeden makas alınca Jace",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1189,7 +1189,7 @@
   },
   {
     "id": "gallery-mri9y5u6",
-    "src": "/images/gallery/jace-visenor-getting-along.jpeg",
+    "src": "/images/gallery/jace-visenor-getting-along.png",
     "caption": "the Manipulator & the Scholar.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1206,7 +1206,7 @@
   },
   {
     "id": "gallery-mri9xkcb",
-    "src": "/images/gallery/jace-the-hand.jpeg",
+    "src": "/images/gallery/jace-the-hand.png",
     "caption": "Jace the Hand.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1222,7 +1222,7 @@
   },
   {
     "id": "gallery-mri9x0ro",
-    "src": "/images/gallery/jace-sicko-on-the-throne.jpeg",
+    "src": "/images/gallery/jace-sicko-on-the-throne.png",
     "caption": "...yarın King?",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1238,7 +1238,7 @@
   },
   {
     "id": "gallery-mri9v7lk",
-    "src": "/images/gallery/jace-sicko.jpeg",
+    "src": "/images/gallery/jace-sicko.png",
     "caption": "Bugün Hand...",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1254,7 +1254,7 @@
   },
   {
     "id": "gallery-mri9qqj6",
-    "src": "/images/gallery/jace-saera-intimate.jpeg",
+    "src": "/images/gallery/jace-saera-intimate.png",
     "caption": "Rebels.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1271,7 +1271,7 @@
   },
   {
     "id": "gallery-mri9q1l1",
-    "src": "/images/gallery/jace-overthinking-alester-gift.jpeg",
+    "src": "/images/gallery/jace-overthinking-alester-gift.png",
     "caption": "Jace missing Ser Alester.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1287,7 +1287,7 @@
   },
   {
     "id": "gallery-mri9p5oh",
-    "src": "/images/gallery/jace-overthinking-alester.jpeg",
+    "src": "/images/gallery/jace-overthinking-alester.png",
     "caption": "Jace, worried about Ser Alester.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1303,7 +1303,7 @@
   },
   {
     "id": "gallery-mri9nayi",
-    "src": "/images/gallery/jace-nightmares-alester.jpeg",
+    "src": "/images/gallery/jace-nightmares-alester.png",
     "caption": "Alester gidince Jace'in kâbuslar",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1338,7 +1338,7 @@
   },
   {
     "id": "gallery-mri9lt6q",
-    "src": "/images/gallery/jace-lorenah-flirty.jpeg",
+    "src": "/images/gallery/jace-lorenah-flirty.png",
     "caption": "Jace & Lorenah.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1416,7 +1416,7 @@
   },
   {
     "id": "gallery-mri9hjbo",
-    "src": "/images/gallery/jace-alester-dorne-wine.jpeg",
+    "src": "/images/gallery/jace-alester-dorne-wine.png",
     "caption": "Jace & Alester enjoying Dornish wine.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1434,7 +1434,7 @@
   },
   {
     "id": "gallery-mri9cqw8",
-    "src": "/images/gallery/jace-alester-dorne-sunset.jpeg",
+    "src": "/images/gallery/jace-alester-dorne-sunset.png",
     "caption": "Jace & Alester enjoying the Dornish meadows.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1452,7 +1452,7 @@
   },
   {
     "id": "gallery-mri9bsbh",
-    "src": "/images/gallery/jace-alester-cool.jpeg",
+    "src": "/images/gallery/jace-alester-cool.png",
     "caption": "Prince Jacaelon Targaryen and Ser Alester Dayne ",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1734,7 +1734,7 @@
   },
   {
     "id": "gallery-001",
-    "src": "/images/gallery/the-dragon-children.jpeg",
+    "src": "/images/gallery/the-dragon-children.png",
     "caption": "The Dragon Children",
     "characterIds": [
       "gaelor-targaryen",

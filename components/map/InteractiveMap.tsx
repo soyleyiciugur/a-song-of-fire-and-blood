@@ -1726,7 +1726,7 @@ export default function InteractiveMap() {
                           }ms`,
                         } as React.CSSProperties
                       }
-                      title={`${selectedCharacter?.name ?? ""} — Chapter ${point.roman}, ${point.locationName}`}
+                      aria-label={`${selectedCharacter?.name ?? ""} — Chapter ${point.roman}, ${point.locationName}`}
                       onMouseDown={(
                         event
                       ) =>
@@ -1943,17 +1943,14 @@ export default function InteractiveMap() {
                                     ? styles.avatarFaded
                                     : ""
                                 }`}
-                                title={
-                                  entry.status ===
-                                  "dead"
+                                aria-label={
+                                  entry.status === "dead"
                                     ? `${character?.name ?? id} (last seen here — presumed dead)`
-                                    : entry.status ===
-                                        "unknown"
+                                    : entry.status === "unknown"
                                       ? `${character?.name ?? id} (last seen here — whereabouts unknown)`
                                       : entry.faded
                                         ? `${character?.name ?? id} (passing by)`
-                                        : character?.name ??
-                                          id
+                                        : character?.name ?? id
                                 }
                                 onMouseDown={(
                                   event
@@ -2839,17 +2836,14 @@ export default function InteractiveMap() {
                                   ? styles.avatarFaded
                                   : ""
                               }`}
-                              title={
-                                entry.status ===
-                                "dead"
+                              aria-label={
+                                entry.status === "dead"
                                   ? `${character?.name ?? entry.id} (presumed dead)`
-                                  : entry.status ===
-                                      "unknown"
+                                  : entry.status === "unknown"
                                     ? `${character?.name ?? entry.id} (whereabouts unknown)`
                                     : entry.faded
                                       ? `${character?.name ?? entry.id} (passing by)`
-                                      : character?.name ??
-                                        entry.id
+                                      : character?.name ?? entry.id
                               }
                               onClick={() =>
                                 setSelectedCharacterId(
