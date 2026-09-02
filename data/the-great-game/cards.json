@@ -1,0 +1,494 @@
+[
+  {
+    "id": "northern-warrior",
+    "cardType": "character",
+    "name": "Northern Warrior",
+    "houseId": "stark",
+    "cost": 3,
+    "power": 3,
+    "influence": 0,
+    "health": 3,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "military"],
+    "generic": true
+  },
+  {
+    "id": "baratheon-man-at-arms",
+    "cardType": "character",
+    "name": "Baratheon Man-at-Arms",
+    "houseId": "baratheon",
+    "cost": 2,
+    "power": 3,
+    "influence": 0,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "tempo"],
+    "generic": true
+  },
+  {
+    "id": "dornish-sandshield",
+    "cardType": "character",
+    "name": "Dornish Sandshield",
+    "houseId": "martell",
+    "cost": 2,
+    "power": 2,
+    "influence": 0,
+    "health": 3,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "defensive"],
+    "generic": true
+  },
+  {
+    "id": "tully-river-guard",
+    "cardType": "character",
+    "name": "Tully River Guard",
+    "houseId": "tully",
+    "cost": 3,
+    "power": 2,
+    "influence": 0,
+    "health": 2,
+    "traits": ["guard"],
+    "abilities": [],
+    "roles": ["french-vanilla", "defensive"],
+    "generic": true
+  },
+  {
+    "id": "reach-courtier",
+    "cardType": "character",
+    "name": "Reach Courtier",
+    "houseId": "tyrell",
+    "cost": 3,
+    "power": 0,
+    "influence": 2,
+    "health": 2,
+    "traits": ["intrigue"],
+    "abilities": [],
+    "roles": ["french-vanilla", "political", "defensive"],
+    "generic": true
+  },
+  {
+    "id": "lannister-household-knight",
+    "cardType": "character",
+    "name": "Lannister Household Knight",
+    "houseId": "lannister",
+    "cost": 3,
+    "power": 2,
+    "influence": 2,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": ["hybrid-vanilla"],
+    "generic": true
+  },
+  {
+    "id": "vale-spearman",
+    "cardType": "character",
+    "name": "Vale Spearman",
+    "houseId": "arryn",
+    "cost": 4,
+    "power": 3,
+    "influence": 0,
+    "health": 4,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "defensive"],
+    "generic": true
+  },
+  {
+    "id": "ironborn-reaver",
+    "cardType": "character",
+    "name": "Ironborn Reaver",
+    "houseId": "greyjoy",
+    "cost": 2,
+    "power": 4,
+    "influence": 0,
+    "health": 1,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "aggro"],
+    "generic": true
+  },
+  {
+    "id": "dragonstone-swordsman",
+    "cardType": "character",
+    "name": "Dragonstone Swordsman",
+    "houseId": "targaryen",
+    "cost": 4,
+    "power": 3,
+    "influence": 2,
+    "health": 3,
+    "traits": [],
+    "abilities": [],
+    "roles": ["hybrid-vanilla"],
+    "generic": true
+  },
+
+  {
+    "id": "jacaelon-targaryen",
+    "cardType": "character",
+    "name": "Jacaelon Targaryen",
+    "subtitle": "Hand of the King",
+    "houseId": "targaryen",
+    "cost": 6,
+    "power": 6,
+    "influence": 8,
+    "health": 6,
+    "traits": ["unique", "schemer", "dragonrider"],
+    "abilities": [
+      {
+        "id": "silent-verdict",
+        "name": "Silent Verdict",
+        "trigger": "victory",
+        "text": "After Jacaelon wins a Political Conflict, the opposing player loses 2 additional Standing."
+      }
+    ],
+    "roles": ["core", "political", "control"],
+    "linkedCharacterId": "jacaelon-targaryen"
+  },
+  {
+    "id": "gaelor-targaryen",
+    "cardType": "character",
+    "name": "Gaelor Targaryen",
+    "subtitle": "The Housebreaker",
+    "houseId": "targaryen",
+    "cost": 6,
+    "power": 8,
+    "influence": 6,
+    "health": 7,
+    "traits": ["unique", "swift", "dragonrider"],
+    "abilities": [
+      {
+        "id": "housebreaker",
+        "name": "Housebreaker",
+        "trigger": "victory",
+        "text": "When Gaelor destroys an enemy Character in a Military Conflict, deal 2 damage to the enemy player's Standing."
+      }
+    ],
+    "roles": ["core", "military", "tempo"],
+    "linkedCharacterId": "gaelor-targaryen"
+  },
+  {
+    "id": "alester-dayne",
+    "cardType": "character",
+    "name": "Ser Alester Dayne",
+    "subtitle": "Kingsguard",
+    "houseId": "dayne",
+    "cost": 7,
+    "power": 9,
+    "influence": 3,
+    "health": 8,
+    "traits": ["unique", "challenge"],
+    "abilities": [
+      {
+        "id": "dawns-edge",
+        "name": "Dawn's Edge",
+        "trigger": "passive",
+        "text": "The first 2 Military damage Alester would take each turn is prevented."
+      }
+    ],
+    "roles": ["military", "control"],
+    "linkedCharacterId": "alester-dayne"
+  },
+  {
+    "id": "renrose-tyrell",
+    "cardType": "character",
+    "name": "Renrose Tyrell",
+    "subtitle": "Lord of Highgarden",
+    "houseId": "tyrell",
+    "cost": 5,
+    "power": 3,
+    "influence": 9,
+    "health": 5,
+    "traits": ["unique", "confront"],
+    "abilities": [
+      {
+        "id": "manders-pact",
+        "name": "The Mander's Pact",
+        "trigger": "arrival",
+        "text": "Choose another Character. It gains +2 Influence permanently. At the start of your next turn, if that Character is still in play, draw 1 card."
+      }
+    ],
+    "roles": ["political", "support", "value"],
+    "linkedCharacterId": "renrose-tyrell"
+  },
+  {
+    "id": "cordin-poole",
+    "cardType": "character",
+    "name": "Cordin Poole",
+    "subtitle": "Maester",
+    "cost": 3,
+    "power": 1,
+    "influence": 4,
+    "health": 3,
+    "traits": ["unique"],
+    "abilities": [
+      {
+        "id": "as-i-was-saying",
+        "name": "As I Was Saying",
+        "trigger": "start-of-turn",
+        "text": "Draw 1 card. If this ability triggered last turn and you successfully drew a card, the card you drew this turn costs 1 less Command to play."
+      }
+    ],
+    "roles": ["support", "value"],
+    "linkedCharacterId": "cordin-poole"
+  },
+  {
+    "id": "saera-targaryen",
+    "cardType": "character",
+    "name": "Saera Targaryen",
+    "subtitle": "Cloud Eyes",
+    "houseId": "targaryen",
+    "cost": 5,
+    "power": 5,
+    "influence": 7,
+    "health": 5,
+    "traits": ["unique", "dragonrider"],
+    "abilities": [
+      {
+        "id": "veiled-sight",
+        "name": "Veiled Sight",
+        "trigger": "arrival",
+        "text": "Look at your opponent's hand. Choose one card. Until the start of your next turn, that card costs 2 more Command to play."
+      }
+    ],
+    "roles": ["support", "utility"],
+    "linkedCharacterId": "saera-targaryen"
+  },
+  {
+    "id": "baelenys-targaryen",
+    "cardType": "character",
+    "name": "Baelenys Targaryen",
+    "subtitle": "King of the Seven Kingdoms",
+    "houseId": "targaryen",
+    "cost": 8,
+    "power": 8,
+    "influence": 9,
+    "health": 8,
+    "traits": ["unique", "dragonrider"],
+    "abilities": [
+      {
+        "id": "iron-wrath",
+        "name": "Iron Wrath",
+        "trigger": "arrival",
+        "text": "Deal 3 damage to an enemy Character. If that Character is destroyed this way, gain 3 Standing."
+      }
+    ],
+    "roles": ["core", "finisher", "control"],
+    "linkedCharacterId": "baelenys-targaryen"
+  },
+  {
+    "id": "weylar-rocke",
+    "cardType": "character",
+    "name": "Weylar Rocke",
+    "subtitle": "Master of Whisperers",
+    "cost": 4,
+    "power": 2,
+    "influence": 5,
+    "health": 4,
+    "traits": ["unique", "intrigue"],
+    "abilities": [
+      {
+        "id": "price-of-loyalty",
+        "name": "The Price of Loyalty",
+        "trigger": "end-of-turn",
+        "text": "At the end of your 3rd turn after Weylar enters play, draw 2 cards and gain 2 Command next turn."
+      }
+    ],
+    "roles": ["control", "value"],
+    "linkedCharacterId": "weylar-rocke"
+  },
+
+  {
+    "id": "jhagar",
+    "cardType": "dragon",
+    "name": "Jhagar",
+    "houseId": "targaryen",
+    "cost": 8,
+    "power": 8,
+    "health": 9,
+    "traits": ["unique", "dragon"],
+    "abilities": [
+      {
+        "id": "bond-jacaelon",
+        "name": "Bond — Jacaelon",
+        "trigger": "bond",
+        "text": "If you control Jacaelon Targaryen, Jhagar costs 2 less to play."
+      }
+    ],
+    "roles": ["military", "finisher"]
+  },
+  {
+    "id": "cloudgazer",
+    "cardType": "dragon",
+    "name": "Cloudgazer",
+    "houseId": "targaryen",
+    "cost": 7,
+    "power": 6,
+    "health": 8,
+    "traits": ["unique", "dragon"],
+    "abilities": [
+      {
+        "id": "bond-saera",
+        "name": "Bond — Saera",
+        "trigger": "bond",
+        "text": "If you control Saera Targaryen, Cloudgazer costs 2 less to play."
+      }
+    ],
+    "roles": ["military", "durable"]
+  },
+  {
+    "id": "maelwing",
+    "cardType": "dragon",
+    "name": "Maelwing",
+    "houseId": "targaryen",
+    "cost": 10,
+    "power": 10,
+    "health": 11,
+    "traits": ["unique", "dragon"],
+    "abilities": [
+      {
+        "id": "bond-baelenys",
+        "name": "Bond — Baelenys",
+        "trigger": "bond",
+        "text": "If you control Baelenys Targaryen, Maelwing costs 2 less to play."
+      }
+    ],
+    "roles": ["core", "military", "finisher"]
+  },
+
+  {
+    "id": "trial-by-combat",
+    "cardType": "event",
+    "name": "Trial by Combat",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "trial-by-combat",
+        "name": "Trial by Combat",
+        "trigger": "event",
+        "text": "Choose one Character you control and one enemy Character. They immediately deal Power damage to each other simultaneously."
+      }
+    ],
+    "roles": ["military", "removal"]
+  },
+  {
+    "id": "oldtown-massacre",
+    "cardType": "event",
+    "name": "Oldtown Massacre",
+    "cost": 6,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "oldtown-massacre",
+        "name": "Oldtown Massacre",
+        "trigger": "event",
+        "text": "Deal 2 damage to every Character and Dragon on the board. Deal 2 damage to both players' Standing."
+      }
+    ],
+    "roles": ["control", "board-clear"]
+  },
+  {
+    "id": "brothers-tilt",
+    "cardType": "event",
+    "name": "The Brothers' Tilt",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "brothers-tilt",
+        "name": "The Brothers' Tilt",
+        "trigger": "event",
+        "text": "Choose one Character you control. It gains +1 Power for each ready enemy Character whose Power it exceeds, up to +3. Then exhaust it."
+      }
+    ],
+    "roles": ["military", "tempo"]
+  },
+
+  {
+    "id": "blackfyre",
+    "cardType": "artifact",
+    "name": "Blackfyre",
+    "cost": 4,
+    "houseId": "targaryen",
+    "traits": ["unique"],
+    "abilities": [
+      {
+        "id": "blackfyre",
+        "name": "Mark of the Heir",
+        "trigger": "passive",
+        "text": "Equipped Character gets +2 Power and +1 Influence."
+      }
+    ],
+    "roles": ["core", "support"]
+  },
+  {
+    "id": "dark-sister",
+    "cardType": "artifact",
+    "name": "Dark Sister",
+    "cost": 3,
+    "houseId": "targaryen",
+    "traits": ["unique"],
+    "abilities": [
+      {
+        "id": "at-your-throat",
+        "name": "At Your Throat",
+        "trigger": "passive",
+        "text": "Equipped Character gets +2 Power and gains Challenge."
+      }
+    ],
+    "roles": ["military", "control"]
+  },
+
+  {
+    "id": "dragonstone",
+    "cardType": "location",
+    "name": "Dragonstone",
+    "cost": 5,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "dragonstone",
+        "name": "Dragonstone",
+        "trigger": "passive",
+        "text": "All Dragons cost 1 less."
+      }
+    ],
+    "roles": ["support"]
+  },
+  {
+    "id": "kings-landing",
+    "cardType": "location",
+    "name": "King's Landing",
+    "cost": 5,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "kings-landing",
+        "name": "King's Landing",
+        "trigger": "passive",
+        "text": "All Characters have +1 Influence."
+      }
+    ],
+    "roles": ["political"]
+  },
+  {
+    "id": "oldtown",
+    "cardType": "location",
+    "name": "Oldtown",
+    "cost": 5,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "oldtown",
+        "name": "Oldtown",
+        "trigger": "passive",
+        "text": "The first Event each player plays on their turn costs 1 less."
+      }
+    ],
+    "roles": ["value", "support"]
+  }
+]
