@@ -335,7 +335,7 @@ export default function GreatGamePlayPage() {
     );
 
   const [
-    currentGame,
+    game,
     setGame,
   ] =
     useState<GameState | null>(
@@ -2625,7 +2625,7 @@ export default function GreatGamePlayPage() {
                   handCard
                 }
                 state={
-                  game
+                  currentGame
                 }
                 playerId={
                   activePlayerId
@@ -2851,7 +2851,7 @@ function MainMenu({
 }
 
 function MulliganScreen({
-  currentGame,
+  game,
   selectedIds,
   onToggle,
   onConfirm,
@@ -2874,10 +2874,10 @@ function MulliganScreen({
   onConfirmExit: () => void;
 }) {
   const playerId =
-    currentGame.activePlayerId;
+    game.activePlayerId;
 
   const player =
-    currentGame.players[
+    game.players[
       playerId
     ];
 
