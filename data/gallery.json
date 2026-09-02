@@ -1,4 +1,29 @@
 [
+    {
+    "id": "gallery-mtj55kzy",
+    "src": "/images/gallery/alester-kuzey.png",
+    "caption": "Alester, \"Kuzey\"deyken...",
+    "characterIds": [
+      "alester-dayne",
+      "saera-targaryen",
+      "rickard-stark"
+    ],
+    "houseIds": [
+      "dayne",
+      "stark",
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-glass-flower",
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-03",
+    "category": "fleabottom"
+  },
   {
     "id": "gallery-mtj61vlo",
     "src": "/images/gallery/visenor-gaelor-jace.jpeg",
