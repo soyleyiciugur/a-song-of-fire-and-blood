@@ -3613,13 +3613,40 @@ function BoardUnit({
                   Price of Loyalty
                 </span>
 
-                <strong>
-                  {unit.flags[
-                    "weylar-triggered"
-                  ]
-                    ? "✓"
-                    : `${weylarProgress}/3`}
-                </strong>
+                <div
+                  className={
+                    styles.skillProgressMeter
+                  }
+                  aria-label={
+                    unit.flags[
+                      "weylar-triggered"
+                    ]
+                      ? "Price of Loyalty triggered"
+                      : `Price of Loyalty ${weylarProgress} of 3 turns`
+                  }
+                >
+                  {[0, 1, 2].map(
+                    (step) => (
+                      <i
+                        key={step}
+                        className={
+                          step <
+                          weylarProgress
+                            ? styles.skillProgressPipFilled
+                            : undefined
+                        }
+                      />
+                    )
+                  )}
+
+                  <strong>
+                    {unit.flags[
+                      "weylar-triggered"
+                    ]
+                      ? "✓"
+                      : `${weylarProgress}/3`}
+                  </strong>
+                </div>
               </div>
             )}
 
@@ -3802,6 +3829,8 @@ function CardChrome({
           className={
             styles.cost
           }
+          title="Command cost"
+          aria-label={`${cost} Command`}
         >
           {cost}
         </span>
@@ -3811,6 +3840,7 @@ function CardChrome({
         className={
           styles.tierBadge
         }
+        title={`${tierLabel(card)} Tier`}
       >
         {tierLabel(
           card
@@ -3887,19 +3917,40 @@ function CardInfoPanel({
           {card.name}
         </strong>
 
-        {card.subtitle && (
-          <small>
-            {card.subtitle}
-          </small>
-        )}
-      </div>
-
-      {isUnitCard(card) && (
-        <div
+        <small
           className={
-            styles.cardStats
+            card.subtitle
+              ? undefined
+              : styles.emptySubtitle
+          }
+          aria-hidden={
+            card.subtitle
+              ? undefined
+              : true
           }
         >
+          {card.subtitle ??
+            "\u00a0"}
+        </small>
+      </div>
+
+      <div
+        className={[
+          styles.cardStats,
+          !isUnitCard(card)
+            ? styles.emptyCardStats
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        aria-hidden={
+          !isUnitCard(card)
+            ? true
+            : undefined
+        }
+      >
+        {isUnitCard(card) && (
+          <>
           <span>
             ⚔{" "}
             {runtimeStats
@@ -3923,16 +3974,27 @@ function CardInfoPanel({
               ? `${runtimeStats.health}/${runtimeStats.maxHealth}`
               : card.health}
           </span>
-        </div>
-      )}
+          </>
+        )}
+      </div>
 
-      {traits.length >
-        0 && (
-        <div
-          className={
-            styles.traits
-          }
-        >
+      <div
+        className={[
+          styles.traits,
+          traits.length === 0
+            ? styles.emptyTraits
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        aria-hidden={
+          traits.length === 0
+            ? true
+            : undefined
+        }
+      >
+        {traits.length > 0 && (
+          <>
           {traits.map(
             (trait) => (
               <span
@@ -3944,10 +4006,11 @@ function CardInfoPanel({
               </span>
             )
           )}
-        </div>
-      )}
+          </>
+        )}
+      </div>
 
-      {card.abilities[0] && (
+      {card.abilities[0] ? (
         <AbilityDisplay
           trigger={
             card.abilities[0]
@@ -3965,9 +4028,20 @@ function CardInfoPanel({
             showDescription
           }
         />
+      ) : (
+        <div
+          className={`${styles.abilityDisplay} ${styles.emptyAbility}`}
+          aria-hidden
+        />
       )}
 
-      {footer}
+      <div
+        className={
+          styles.cardFooter
+        }
+      >
+        {footer}
+      </div>
 
       {actions && (
         <div

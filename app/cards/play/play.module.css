@@ -10,6 +10,16 @@
   font-family:
     var(--font-body),
     serif;
+
+  --realm-cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 2.5 22 12l-7.2 2.1 4.2 8.1-3.6 1.8-4.1-8-5.6 5.3z' fill='%23c5a85a' stroke='%23110b08' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='m8.2 7.2 8.2 4.3-4.4 1.3z' fill='%23f5e6c8' opacity='.55'/%3E%3C/svg%3E") 3 3,
+    auto;
+
+  --realm-action-cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 2.5 22 12l-7.2 2.1 4.2 8.1-3.6 1.8-4.1-8-5.6 5.3z' fill='%23e1c56f' stroke='%23110b08' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='m8.2 7.2 8.2 4.3-4.4 1.3z' fill='%23fff2bc' opacity='.8'/%3E%3Ccircle cx='21.5' cy='5.5' r='2.2' fill='%23d4af37' stroke='%23110b08'/%3E%3C/svg%3E") 3 3,
+    pointer;
+
+  cursor: var(--realm-cursor);
 }
 
 .pageBackground {
@@ -222,7 +232,7 @@
 
   color: #e5c971;
 
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   font-family:
     var(--font-hotd),
@@ -468,7 +478,7 @@
   color:
     rgba(245, 230, 200, 0.7);
 
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 }
 
 .prompt button:disabled {
@@ -556,7 +566,7 @@
 }
 
 .standingBoxTarget {
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   border-color: #d35e4b;
 
@@ -684,14 +694,14 @@
 }
 
 .board {
-  min-height: 245px;
+  min-height: 270px;
 
   display: grid;
 
   grid-template-columns:
     repeat(
       6,
-      minmax(165px, 1fr)
+      minmax(185px, 1fr)
     );
 
   gap: 0.75rem;
@@ -712,7 +722,7 @@
 }
 
 .playableBoard {
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   border-color:
     rgba(212, 175, 55, 0.55);
@@ -825,84 +835,22 @@
   font-size: 2rem;
 }
 
-.cost {
+.cost,
+.tierBadge {
   position: absolute;
 
   top: 0.45rem;
-  left: 0.45rem;
 
   z-index: 5;
 
-  width: 1.8rem;
-  height: 1.8rem;
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 50%;
-
-  border:
-    1px solid rgba(183, 219, 250, 0.6);
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #7396b3,
-      #304657 72%
-    );
-
-  color: #fff;
-
-  font-family:
-    var(--font-hotd),
-    serif;
-
-  font-weight: 700;
-
-  box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.7);
-}
-
-.tierBadge {
-  position: absolute;
-
-  top: 0.5rem;
-  left: 50%;
-
-  z-index: 5;
-
-  transform:
-    translateX(-50%);
-
-  min-width: 1.8rem;
-
-  padding: 0.22rem 0.5rem;
-
-  box-sizing: border-box;
-
-  text-align: center;
-
-  border:
-    1px solid
-    color-mix(
-      in srgb,
-      var(--tier-accent, #d4af37) 55%,
-      transparent
-    );
-
-  background:
-    color-mix(
-      in srgb,
-      var(--tier-color, #8b1e2b) 78%,
-      rgba(5, 4, 7, 0.92)
-    );
-
   backdrop-filter:
     blur(6px);
-
-  color:
-    var(--tier-accent, #d4af37);
 
   font-family:
     var(--font-hotd),
@@ -910,8 +858,103 @@
 
   font-size: 0.62rem;
   font-weight: 700;
+  line-height: 1;
 
+  text-align: center;
   text-transform: uppercase;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+.cost {
+  left: 0.45rem;
+
+  width: 2rem;
+  height: 2rem;
+
+  padding: 0;
+
+  border:
+    1px solid rgba(190, 222, 238, 0.7);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 34% 27%,
+      rgba(190, 224, 238, 0.9),
+      rgba(69, 101, 122, 0.96) 35%,
+      rgba(22, 37, 49, 0.98) 76%
+    );
+
+  color: #edf7ff;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.9);
+
+  box-shadow:
+    inset 0 0 0 2px rgba(7, 14, 20, 0.5),
+    inset 0 0 0 3px rgba(214, 235, 245, 0.17),
+    0 3px 10px rgba(0, 0, 0, 0.72),
+    0 0 12px rgba(93, 147, 177, 0.16);
+}
+
+.tierBadge {
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  min-width: 2.15rem;
+  height: 1.55rem;
+
+  padding: 0 0.55rem;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 62%,
+      transparent
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 86%,
+        #171118
+      ),
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 58%,
+        #070507
+      )
+    );
+
+  clip-path:
+    polygon(
+      0.25rem 0,
+      calc(100% - 0.25rem) 0,
+      100% 50%,
+      calc(100% - 0.25rem) 100%,
+      0.25rem 100%,
+      0 50%
+    );
+
+  color:
+    var(--tier-accent, #d4af37);
+
+  box-shadow:
+    inset 0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 16%,
+        transparent
+      ),
+    0 3px 10px rgba(0, 0, 0, 0.72);
 }
 
 .uniqueMark {
@@ -940,11 +983,22 @@
 
   z-index: 4;
 
-  height: 46%;
+  height: 50%;
 
   box-sizing: border-box;
 
-  padding: 0.5rem 0.6rem;
+  display: grid;
+
+  grid-template-rows:
+    2.35rem
+    1.05rem
+    1.05rem
+    minmax(1.5rem, 1fr)
+    0.9rem;
+
+  gap: 0.08rem;
+
+  padding: 0.52rem 0.6rem 0.48rem;
 
   overflow: hidden;
 
@@ -974,6 +1028,15 @@
 
 .cardIdentity {
   min-width: 0;
+
+  display: grid;
+
+  grid-template-rows:
+    0.56rem
+    0.95rem
+    0.65rem;
+
+  align-content: start;
 }
 
 .cardIdentity > strong {
@@ -989,7 +1052,7 @@
 
   font-size: 0.72rem;
 
-  line-height: 1.15;
+  line-height: 0.95rem;
 
   text-overflow: ellipsis;
 
@@ -999,7 +1062,7 @@
 .cardIdentity > small {
   display: block;
 
-  margin-top: 0.08rem;
+  margin: 0;
 
   overflow: hidden;
 
@@ -1008,15 +1071,21 @@
 
   font-size: 0.5rem;
 
+  line-height: 0.65rem;
+
   text-overflow: ellipsis;
 
   white-space: nowrap;
 }
 
+.emptySubtitle {
+  visibility: hidden;
+}
+
 .cardType {
   display: block;
 
-  margin-bottom: 0.1rem;
+  margin: 0;
 
   color:
     var(--tier-accent, #d4af37);
@@ -1027,6 +1096,8 @@
 
   font-size: 0.48rem;
 
+  line-height: 0.56rem;
+
   letter-spacing: 0.12em;
 
   text-transform: uppercase;
@@ -1035,9 +1106,14 @@
 .cardStats {
   display: flex;
 
+  align-items: center;
+
   gap: 0.55rem;
 
-  margin: 0.28rem 0;
+  min-width: 0;
+  height: 1.05rem;
+
+  margin: 0;
 
   color:
     rgba(245, 230, 200, 0.88);
@@ -1049,14 +1125,27 @@
   font-size: 0.54rem;
 }
 
+.emptyCardStats {
+  visibility: hidden;
+}
+
 .traits {
   display: flex;
 
+  align-items: center;
+
   gap: 0.18rem;
 
-  margin: 0.2rem 0;
+  min-width: 0;
+  height: 1.05rem;
+
+  margin: 0;
 
   overflow: hidden;
+}
+
+.emptyTraits {
+  visibility: hidden;
 }
 
 .traits span {
@@ -1098,12 +1187,21 @@
 }
 
 .abilityDisplay {
-  margin-top: 0.24rem;
+  min-width: 0;
+  min-height: 0;
 
-  padding-top: 0.24rem;
+  margin: 0;
+
+  padding-top: 0.25rem;
+
+  overflow: hidden;
 
   border-top:
     1px solid rgba(255, 255, 255, 0.07);
+}
+
+.emptyAbility {
+  visibility: hidden;
 }
 
 .abilityHeading {
@@ -1175,10 +1273,17 @@
   -webkit-line-clamp: 2;
 }
 
+.cardFooter {
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
 /* Board cards */
 
 .unitCard {
-  min-width: 165px;
+  min-width: 185px;
 
   width: 100%;
 
@@ -1192,7 +1297,7 @@
 }
 
 .targetableUnit {
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   transform:
     translateY(-4px);
@@ -1234,39 +1339,80 @@
   content: "";
 
   position: absolute;
-  inset: -45%;
+  inset: 0;
 
-  z-index: 3;
+  z-index: 6;
 
   pointer-events: none;
 
   background:
-    conic-gradient(
-      from 0deg,
-      transparent,
+    radial-gradient(
+      circle at 13% 18%,
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 28%,
+        var(--tier-accent, #d4af37) 75%,
         transparent
-      ),
-      transparent 18%,
-      transparent 58%,
+      ) 0 1px,
+      transparent 1.7px
+    ),
+    radial-gradient(
+      circle at 88% 33%,
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 22%,
+        var(--tier-accent, #d4af37) 58%,
         transparent
-      ),
-      transparent 76%
+      ) 0 0.8px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle at 79% 84%,
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 68%,
+        transparent
+      ) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 23% 73%,
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 48%,
+        transparent
+      ) 0 0.7px,
+      transparent 1.5px
     );
 
   animation:
-    cardSparkle 4s linear infinite;
+    cardGleam 2.8s ease-in-out infinite;
+
+  box-shadow:
+    inset 0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 48%,
+        transparent
+      ),
+    inset 0 0 18px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 7%,
+        transparent
+      );
 }
 
-@keyframes cardSparkle {
-  to {
-    transform:
-      rotate(360deg);
+@keyframes cardGleam {
+  0%,
+  100% {
+    opacity: 0.32;
+
+    filter: brightness(0.85);
+  }
+
+  48% {
+    opacity: 0.82;
+
+    filter: brightness(1.25);
   }
 }
 
@@ -1333,7 +1479,7 @@
 
 .skillProgress,
 .artifact {
-  margin-top: 0.18rem;
+  margin: 0;
 
   font-size: 0.4rem;
 }
@@ -1341,10 +1487,72 @@
 .skillProgress {
   display: flex;
 
+  align-items: center;
+
   justify-content:
     space-between;
 
+  height: 100%;
+
+  padding: 0 0.28rem;
+
+  border-left:
+    2px solid rgba(179, 126, 211, 0.55);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(104, 62, 128, 0.18),
+      transparent 72%
+    );
+
   color: #d6b5e9;
+}
+
+.skillProgress strong {
+  min-width: 1.45rem;
+
+  color: #eadcf3;
+
+  font-family:
+    var(--font-hotd),
+    serif;
+
+  text-align: right;
+}
+
+.skillProgressMeter {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.16rem;
+}
+
+.skillProgressMeter i {
+  width: 0.28rem;
+  height: 0.28rem;
+
+  display: block;
+
+  box-sizing: border-box;
+
+  transform: rotate(45deg);
+
+  border:
+    1px solid rgba(214, 181, 233, 0.42);
+
+  background:
+    rgba(24, 13, 31, 0.72);
+}
+
+.skillProgressMeter .skillProgressPipFilled {
+  border-color: #d6b5e9;
+
+  background: #b47ed0;
+
+  box-shadow:
+    0 0 7px rgba(190, 128, 221, 0.48);
 }
 
 .artifact {
@@ -1352,14 +1560,6 @@
 }
 
 .unitActions {
-  position: absolute;
-
-  left: 0.6rem;
-  right: 0.6rem;
-  bottom: 0.5rem;
-
-  z-index: 2;
-
   display: flex;
 
   gap: 0.22rem;
@@ -1368,7 +1568,24 @@
 }
 
 .cardInfoPanelWithActions {
-  padding-bottom: 2.55rem;
+  height: 66%;
+
+  grid-template-rows:
+    2.35rem
+    1.05rem
+    1.05rem
+    minmax(1.35rem, 1fr)
+    0.9rem
+    1.75rem;
+}
+
+.cardInfoPanelWithActions .abilityDisplay {
+  overflow: hidden;
+}
+
+.cardInfoPanelWithActions .abilityDisplay p {
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
 }
 
 .unitActions button {
@@ -1387,12 +1604,16 @@
     );
 
   background:
-    rgba(0, 0, 0, 0.35);
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.1),
+      rgba(26, 18, 13, 0.64)
+    );
 
   color:
     rgba(245, 230, 200, 0.75);
 
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   font-family:
     var(--font-hotd),
@@ -1404,6 +1625,32 @@
   letter-spacing: 0.035em;
 
   text-transform: uppercase;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.unitActions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  border-color:
+    var(--tier-accent, #d4af37);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.21),
+      rgba(45, 30, 14, 0.74)
+    );
+
+  color: #fff0bf;
+
+  box-shadow:
+    0 0 16px rgba(212, 175, 55, 0.16);
 }
 
 .unitActions button:disabled {
@@ -1439,7 +1686,7 @@
 
   color: inherit;
 
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   text-align: left;
 
@@ -1490,6 +1737,8 @@
 
   transform:
     translateY(-5px);
+
+  cursor: grabbing;
 }
 
 .targetableHandCard {
@@ -1657,10 +1906,56 @@
     0 35px 90px rgba(0, 0, 0, 0.82);
 }
 
-.selectedCardInner .cardInfoPanel {
-  height: 55%;
+.selectedCardInner::after {
+  content: "";
 
-  padding: 0.95rem 1rem 4.2rem;
+  position: absolute;
+  inset: 0;
+
+  z-index: 6;
+
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 54%,
+        transparent
+      ),
+    inset 0 0 30px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 8%,
+        transparent
+      );
+
+  animation:
+    selectedCardBreath 2.5s ease-in-out infinite;
+}
+
+@keyframes selectedCardBreath {
+  0%,
+  100% {
+    opacity: 0.48;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.selectedCardInner .cardInfoPanel {
+  height: 58%;
+
+  grid-template-rows:
+    3.05rem
+    1.45rem
+    1.35rem
+    minmax(3.5rem, 1fr)
+    1.05rem;
+
+  padding: 0.82rem 1rem 4.25rem;
 }
 
 .selectedCardInner .cardIdentity > strong {
@@ -1727,24 +2022,70 @@
   padding: 0.62rem;
 
   border:
-    1px solid rgba(255, 255, 255, 0.16);
+    1px solid rgba(212, 175, 55, 0.38);
 
   background:
-    rgba(4, 3, 5, 0.78);
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.11),
+      rgba(18, 12, 12, 0.92)
+    );
 
   backdrop-filter:
     blur(8px);
 
-  color:
-    rgba(245, 230, 200, 0.72);
+  color: #dbc98f;
 
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   font-family:
     var(--font-hotd),
     serif;
 
   font-size: 0.72rem;
+
+  letter-spacing: 0.055em;
+
+  text-transform: uppercase;
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    0 6px 16px rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.selectedActions button:hover {
+  transform: translateY(-1px);
+
+  border-color: #d4af37;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.24),
+      rgba(47, 31, 14, 0.94)
+    );
+
+  color: #fff0b8;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 223, 112, 0.08),
+    0 0 22px rgba(212, 175, 55, 0.22),
+    0 7px 18px rgba(0, 0, 0, 0.36);
+}
+
+.selectedActions button:active {
+  transform: translateY(1px);
+
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.5),
+    0 0 14px rgba(212, 175, 55, 0.16);
 }
 
 .selectedActions .selectedConfirm {
@@ -1752,7 +2093,26 @@
     var(--tier-accent, #d4af37);
 
   color:
-    var(--tier-accent, #d4af37);
+    #fff0ad;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 66%,
+        rgba(212, 175, 55, 0.2)
+      ),
+      rgba(38, 20, 15, 0.94)
+    );
+
+  box-shadow:
+    0 0 18px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 18%,
+        transparent
+      );
 }
 
 /* Mulligan */
@@ -1800,12 +2160,12 @@
   grid-template-columns:
     repeat(
       5,
-      minmax(150px, 1fr)
+      minmax(205px, 1fr)
     );
 
-  gap: 1rem;
+  gap: 1.1rem;
 
-  max-width: 1100px;
+  max-width: 1280px;
 
   margin: 2rem auto;
 }
@@ -1817,13 +2177,47 @@
 
   color: inherit;
 
-  cursor: pointer;
+  cursor: var(--realm-action-cursor);
 
   text-align: left;
 
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.mulliganCard .cardInfoPanel {
+  height: 52%;
+}
+
+.mulliganCard .cardIdentity > strong {
+  font-size: 0.78rem;
+}
+
+.mulliganCard .cardIdentity > small {
+  font-size: 0.54rem;
+}
+
+.mulliganCard .cardStats {
+  font-size: 0.59rem;
+}
+
+.mulliganCard .traits span {
+  font-size: 0.41rem;
+}
+
+.mulliganCard .abilityHeading span,
+.mulliganCard .abilityHeading strong {
+  font-size: 0.46rem;
+}
+
+.mulliganCard .abilityDisplay p {
+  font-size: 0.5rem;
+
+  line-height: 1.34;
+
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
 }
 
 .mulliganCard:hover {
@@ -2042,13 +2436,13 @@
     grid-template-columns:
       repeat(
         3,
-        minmax(160px, 1fr)
+        minmax(205px, 1fr)
       );
   }
 
   .board {
     grid-template-columns:
-      repeat(6, 155px);
+      repeat(6, 175px);
   }
 }
 
@@ -2107,14 +2501,14 @@
 
   .board {
     grid-template-columns:
-      repeat(6, 165px);
+      repeat(6, 175px);
   }
 
   .mulliganGrid {
     grid-template-columns:
       repeat(
         2,
-        minmax(145px, 1fr)
+        minmax(165px, 1fr)
       );
   }
 
