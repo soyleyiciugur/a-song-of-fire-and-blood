@@ -33,10 +33,6 @@ import {
   isUnitCard,
 } from "@/lib/the-great-game/cards";
 
-import {
-  getTiers,
-} from "@/lib/cards";
-
 import type {
   AbilityTrigger,
   GameAction,
@@ -44,6 +40,7 @@ import type {
   GameState,
   HandCardState,
   PlayerId,
+  TierId,
   UnitState,
 } from "@/lib/the-great-game/types";
 
@@ -102,15 +99,61 @@ type PendingConflict =
       unopposed: boolean;
     };
 
-const TIER_MAP =
-  new Map(
-    getTiers().map(
-      (tier) => [
-        tier.id,
-        tier,
-      ]
-    )
-  );
+const TIER_MAP = new Map<
+  TierId,
+  {
+    label: string;
+    order: number;
+    color: string;
+    accentColor: string;
+  }
+>([
+  [
+    "s-plus",
+    {
+      label: "S+",
+      order: 0,
+      color: "#8b1e2b",
+      accentColor: "#d4af37",
+    },
+  ],
+  [
+    "s",
+    {
+      label: "S",
+      order: 1,
+      color: "#4b2e6f",
+      accentColor: "#c0c0c0",
+    },
+  ],
+  [
+    "a",
+    {
+      label: "A",
+      order: 2,
+      color: "#2f4a3e",
+      accentColor: "#a97142",
+    },
+  ],
+  [
+    "b",
+    {
+      label: "B",
+      order: 3,
+      color: "#3d3d3d",
+      accentColor: "#8c8c8c",
+    },
+  ],
+  [
+    "c",
+    {
+      label: "C",
+      order: 4,
+      color: "#5c4a3a",
+      accentColor: "#7a6a58",
+    },
+  ],
+]);
 
 function tierStyle(
   card: GameCard
@@ -170,6 +213,24 @@ function abilityTypeLabel(
     case "bond":
       return "Bond";
   }
+}
+
+function abilityNameLabel(
+  trigger: AbilityTrigger,
+  name: string
+): string {
+  if (trigger !== "bond") {
+    return name;
+  }
+
+  return (
+    name
+      .replace(
+        /^bond\s*(?:—|–|-|:)\s*/i,
+        ""
+      )
+      .trim() || name
+  );
 }
 
 function playerName(
@@ -3675,6 +3736,7 @@ function HandCard({
 
       <CardInfoPanel
         card={card}
+        showDescription={false}
       />
     </button>
   );
@@ -3719,6 +3781,7 @@ function HandCardVisual({
 
       <CardInfoPanel
         card={card}
+        showDescription={false}
       />
     </button>
   );
@@ -3776,6 +3839,7 @@ function CardInfoPanel({
   runtimeStats,
   actions,
   footer,
+  showDescription = true,
 }: {
   card: GameCard;
   runtimeStats?: {
@@ -3786,6 +3850,7 @@ function CardInfoPanel({
   };
   actions?: ReactNode;
   footer?: ReactNode;
+  showDescription?: boolean;
 }) {
   const traits =
     visibleTraits(
@@ -3794,9 +3859,14 @@ function CardInfoPanel({
 
   return (
     <div
-      className={
-        styles.cardInfoPanel
-      }
+      className={[
+        styles.cardInfoPanel,
+        actions
+          ? styles.cardInfoPanelWithActions
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       <div
         className={
@@ -3891,6 +3961,9 @@ function CardInfoPanel({
             card.abilities[0]
               .text
           }
+          showDescription={
+            showDescription
+          }
         />
       )}
 
@@ -3913,10 +3986,12 @@ function AbilityDisplay({
   trigger,
   name,
   text,
+  showDescription,
 }: {
   trigger: AbilityTrigger;
   name: string;
   text: string;
+  showDescription: boolean;
 }) {
   return (
     <div
@@ -3938,13 +4013,18 @@ function AbilityDisplay({
         <b>—</b>
 
         <strong>
-          {name}
+          {abilityNameLabel(
+            trigger,
+            name
+          )}
         </strong>
       </div>
 
-      <p>
-        {text}
-      </p>
+      {showDescription && (
+        <p>
+          {text}
+        </p>
+      )}
     </div>
   );
 }
