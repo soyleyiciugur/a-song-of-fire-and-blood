@@ -335,7 +335,7 @@ export default function GreatGamePlayPage() {
     );
 
   const [
-    game,
+    currentGame,
     setGame,
   ] =
     useState<GameState | null>(
@@ -442,8 +442,10 @@ export default function GreatGamePlayPage() {
     return null;
   }
 
+  const currentGame: GameState = game;
+
   const activePlayerId =
-    game.activePlayerId;
+    currentGame.activePlayerId;
 
   const enemyPlayerId =
     opponentOf(
@@ -451,12 +453,12 @@ export default function GreatGamePlayPage() {
     );
 
   const activePlayer =
-    game.players[
+    currentGame.players[
       activePlayerId
     ];
 
   const enemyPlayer =
-    game.players[
+    currentGame.players[
       enemyPlayerId
     ];
 
@@ -501,7 +503,7 @@ export default function GreatGamePlayPage() {
 
   const gameInteractionLocked =
     Boolean(
-      game.pendingEffect
+      currentGame.pendingEffect
     );
 
   function dispatch(
@@ -509,7 +511,7 @@ export default function GreatGamePlayPage() {
   ): boolean {
     const result =
       applyAction(
-        game!,
+        currentGame,
         action
       );
 
@@ -545,7 +547,7 @@ export default function GreatGamePlayPage() {
 
   function cancelSelection() {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       setError(
         "This Arrival ability must be resolved."
@@ -615,7 +617,7 @@ export default function GreatGamePlayPage() {
   function confirmMulligan() {
     const result =
       applyAction(
-        game!,
+        currentGame,
         {
           type: "mulligan",
 
@@ -648,7 +650,7 @@ export default function GreatGamePlayPage() {
 
   function endTurn() {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       setError(
         "Resolve the pending Arrival ability first."
@@ -659,7 +661,7 @@ export default function GreatGamePlayPage() {
 
     const result =
       applyAction(
-        game,
+        currentGame,
         {
           type:
             "end-turn",
@@ -700,7 +702,7 @@ export default function GreatGamePlayPage() {
     handCard: HandCardState
   ) {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       return;
     }
@@ -877,10 +879,10 @@ export default function GreatGamePlayPage() {
     unit: UnitState
   ) {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       const effect =
-        game.pendingEffect;
+        currentGame.pendingEffect;
 
       if (
         effect.abilityId ===
@@ -914,7 +916,7 @@ export default function GreatGamePlayPage() {
       ) {
         if (
           unit.ownerId ===
-            game.activePlayerId ||
+            currentGame.activePlayerId ||
           getGameCard(
             unit.cardId
           ).cardType !==
@@ -944,7 +946,7 @@ export default function GreatGamePlayPage() {
         case "artifact": {
           if (
             unit.ownerId !==
-              game.activePlayerId ||
+              currentGame.activePlayerId ||
             getGameCard(
               unit.cardId
             ).cardType !==
@@ -995,7 +997,7 @@ export default function GreatGamePlayPage() {
         case "brothers-tilt": {
           if (
             unit.ownerId !==
-              game.activePlayerId ||
+              currentGame.activePlayerId ||
             getGameCard(
               unit.cardId
             ).cardType !==
@@ -1025,7 +1027,7 @@ export default function GreatGamePlayPage() {
           ) {
             if (
               unit.ownerId !==
-                game.activePlayerId ||
+                currentGame.activePlayerId ||
               getGameCard(
                 unit.cardId
               ).cardType !==
@@ -1048,7 +1050,7 @@ export default function GreatGamePlayPage() {
 
           if (
             unit.ownerId ===
-              game.activePlayerId ||
+              currentGame.activePlayerId ||
             getGameCard(
               unit.cardId
             ).cardType !==
@@ -1087,7 +1089,7 @@ export default function GreatGamePlayPage() {
     ) {
       const options =
         getMilitaryTargetOptions(
-          game,
+          currentGame,
           pendingConflict
             .attackerInstanceId
         );
@@ -1145,7 +1147,7 @@ export default function GreatGamePlayPage() {
     handCard: HandCardState
   ) {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
         ?.abilityId !==
       "veiled-sight"
     ) {
@@ -1165,7 +1167,7 @@ export default function GreatGamePlayPage() {
     unit: UnitState
   ) {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       return;
     }
@@ -1178,7 +1180,7 @@ export default function GreatGamePlayPage() {
 
     const options =
       getMilitaryTargetOptions(
-        game,
+        currentGame,
         unit.instanceId
       );
 
@@ -1221,7 +1223,7 @@ export default function GreatGamePlayPage() {
 
       targetPlayerId:
         opponentOf(
-          game.activePlayerId
+          currentGame.activePlayerId
         ),
     });
   }
@@ -1230,7 +1232,7 @@ export default function GreatGamePlayPage() {
     unit: UnitState
   ) {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       return;
     }
@@ -1243,7 +1245,7 @@ export default function GreatGamePlayPage() {
 
     const defense =
       getPoliticalDefenseOptions(
-        game,
+        currentGame,
         unit.instanceId
       );
 
@@ -1289,7 +1291,7 @@ export default function GreatGamePlayPage() {
   ) {
     if (
       unit.ownerId !==
-        game.activePlayerId ||
+        currentGame.activePlayerId ||
       unit.exhausted ||
       unit.grounded
     ) {
@@ -1303,7 +1305,7 @@ export default function GreatGamePlayPage() {
     }
 
     return unitHasTrait(
-      game,
+      currentGame,
       unit,
       "swift"
     );
@@ -1326,7 +1328,7 @@ export default function GreatGamePlayPage() {
 
     if (
       unit.ownerId !==
-        game.activePlayerId ||
+        currentGame.activePlayerId ||
       unit.exhausted
     ) {
       return false;
@@ -1339,7 +1341,7 @@ export default function GreatGamePlayPage() {
     }
 
     return unitHasTrait(
-      game,
+      currentGame,
       unit,
       "schemer"
     );
@@ -1362,7 +1364,7 @@ export default function GreatGamePlayPage() {
 
     const cost =
       getEffectiveCost(
-        game,
+        currentGame,
         activePlayerId,
         handCard
       );
@@ -1478,7 +1480,7 @@ export default function GreatGamePlayPage() {
 
   function playerHasLegalAction(): boolean {
     if (
-      game.pendingEffect ||
+      currentGame.pendingEffect ||
       pendingPlay ||
       pendingConflict ||
       draggingHandInstanceId
@@ -1505,7 +1507,7 @@ export default function GreatGamePlayPage() {
       ) {
         const targets =
           getMilitaryTargetOptions(
-            game,
+            currentGame,
             unit.instanceId
           );
 
@@ -1525,7 +1527,7 @@ export default function GreatGamePlayPage() {
       ) {
         const defense =
           getPoliticalDefenseOptions(
-            game,
+            currentGame,
             unit.instanceId
           );
 
@@ -1543,7 +1545,7 @@ export default function GreatGamePlayPage() {
   }
 
   const highlightEndTurn =
-    game.phase ===
+    currentGame.phase ===
       "playing" &&
     !playerHasLegalAction();
 
@@ -1551,10 +1553,10 @@ export default function GreatGamePlayPage() {
     unit: UnitState
   ) {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       const effect =
-        game.pendingEffect;
+        currentGame.pendingEffect;
 
       if (
         effect.abilityId ===
@@ -1576,7 +1578,7 @@ export default function GreatGamePlayPage() {
       ) {
         return (
           unit.ownerId !==
-            game.activePlayerId &&
+            currentGame.activePlayerId &&
           getGameCard(
             unit.cardId
           ).cardType ===
@@ -1594,7 +1596,7 @@ export default function GreatGamePlayPage() {
         case "artifact":
           return (
             unit.ownerId ===
-              game.activePlayerId &&
+              currentGame.activePlayerId &&
             getGameCard(
               unit.cardId
             ).cardType ===
@@ -1613,7 +1615,7 @@ export default function GreatGamePlayPage() {
         case "brothers-tilt":
           return (
             unit.ownerId ===
-              game.activePlayerId &&
+              currentGame.activePlayerId &&
             getGameCard(
               unit.cardId
             ).cardType ===
@@ -1627,7 +1629,7 @@ export default function GreatGamePlayPage() {
           ) {
             return (
               unit.ownerId ===
-                game.activePlayerId &&
+                currentGame.activePlayerId &&
               getGameCard(
                 unit.cardId
               ).cardType ===
@@ -1637,7 +1639,7 @@ export default function GreatGamePlayPage() {
 
           return (
             unit.ownerId !==
-              game.activePlayerId &&
+              currentGame.activePlayerId &&
             getGameCard(
               unit.cardId
             ).cardType ===
@@ -1655,7 +1657,7 @@ export default function GreatGamePlayPage() {
       "military"
     ) {
       return getMilitaryTargetOptions(
-        game,
+        currentGame,
         pendingConflict
           .attackerInstanceId
       ).unitInstanceIds.includes(
@@ -1677,10 +1679,10 @@ export default function GreatGamePlayPage() {
 
   function getPrompt() {
     if (
-      game.pendingEffect
+      currentGame.pendingEffect
     ) {
       switch (
-        game.pendingEffect
+        currentGame.pendingEffect
           .abilityId
       ) {
         case "manders-pact":
@@ -1752,7 +1754,7 @@ export default function GreatGamePlayPage() {
     handCard: HandCardState
   ) {
     if (
-      game.pendingEffect ||
+      currentGame.pendingEffect ||
       pendingConflict
     ) {
       event.preventDefault();
@@ -1941,7 +1943,7 @@ export default function GreatGamePlayPage() {
     ) {
       if (
         unit.ownerId !==
-          game.activePlayerId ||
+          currentGame.activePlayerId ||
         getGameCard(
           unit.cardId
         ).cardType !==
@@ -1980,7 +1982,7 @@ export default function GreatGamePlayPage() {
   }
 
   if (
-    game.winner
+    currentGame.winner
   ) {
     return (
       <main
@@ -2010,14 +2012,14 @@ export default function GreatGamePlayPage() {
           </span>
 
           <h1>
-            {game.winner ===
+            {currentGame.winner ===
             "draw"
               ? "The Realm Lies Broken"
-              : `${playerName(game.winner)} Prevails`}
+              : `${playerName(currentGame.winner)} Prevails`}
           </h1>
 
           <p>
-            {game.winner ===
+            {currentGame.winner ===
             "draw"
               ? "Neither claimant remains standing."
               : "The opposing claimant has lost all Standing."}
@@ -2057,7 +2059,7 @@ export default function GreatGamePlayPage() {
 
   if (handoff) {
     const mulliganHandoff =
-      game.phase ===
+      currentGame.phase ===
       "mulligan-player2";
 
     return (
@@ -2083,7 +2085,7 @@ export default function GreatGamePlayPage() {
           >
             {mulliganHandoff
               ? "Opening Hand"
-              : `Turn ${game.players[game.activePlayerId].turnsTaken}`}
+              : `Turn ${currentGame.players[currentGame.activePlayerId].turnsTaken}`}
           </span>
 
           <h1>
@@ -2094,7 +2096,7 @@ export default function GreatGamePlayPage() {
             Give the device to{" "}
             <strong>
               {playerName(
-                game.activePlayerId
+                currentGame.activePlayerId
               )}
             </strong>
             .
@@ -2111,8 +2113,8 @@ export default function GreatGamePlayPage() {
             }
           >
             {mulliganHandoff
-              ? `Review ${playerName(game.activePlayerId)} Opening Hand`
-              : `Begin ${playerName(game.activePlayerId)}'s Turn`}
+              ? `Review ${playerName(currentGame.activePlayerId)} Opening Hand`
+              : `Begin ${playerName(currentGame.activePlayerId)}'s Turn`}
           </button>
         </div>
       </main>
@@ -2120,14 +2122,14 @@ export default function GreatGamePlayPage() {
   }
 
   if (
-    game.phase ===
+    currentGame.phase ===
       "mulligan-player1" ||
-    game.phase ===
+    currentGame.phase ===
       "mulligan-player2"
   ) {
     return (
       <MulliganScreen
-        game={game}
+        game={currentGame}
         selectedIds={
           mulliganSelected
         }
@@ -2162,9 +2164,9 @@ export default function GreatGamePlayPage() {
     getPrompt();
 
   const activeLocation =
-    game.activeLocation
+    currentGame.activeLocation
       ? getGameCard(
-          game.activeLocation.cardId
+          currentGame.activeLocation.cardId
         )
       : null;
 
@@ -2172,7 +2174,7 @@ export default function GreatGamePlayPage() {
     pendingConflict?.kind ===
       "military" &&
     getMilitaryTargetOptions(
-      game,
+      currentGame,
       pendingConflict
         .attackerInstanceId
     ).canAttackStanding;
@@ -2200,7 +2202,7 @@ export default function GreatGamePlayPage() {
         selectedCard &&
         !draggingHandInstanceId &&
         !pendingPlay?.hidePreview &&
-        !game.pendingEffect
+        !currentGame.pendingEffect
     );
 
   return (
@@ -2247,7 +2249,7 @@ export default function GreatGamePlayPage() {
         >
           <span>
             {playerName(
-              game.activePlayerId
+              currentGame.activePlayerId
             )}
           </span>
 
@@ -2325,14 +2327,14 @@ export default function GreatGamePlayPage() {
           <button
             disabled={
               Boolean(
-                game.pendingEffect
+                currentGame.pendingEffect
               )
             }
             onClick={
               cancelSelection
             }
           >
-            {game.pendingEffect
+            {currentGame.pendingEffect
               ? "Must Resolve"
               : "Cancel"}
           </button>
@@ -2343,7 +2345,7 @@ export default function GreatGamePlayPage() {
         playerId={
           enemyPlayerId
         }
-        state={game}
+        state={currentGame}
         opponent
         standingTarget={
           Boolean(
@@ -2367,7 +2369,7 @@ export default function GreatGamePlayPage() {
         }
       />
 
-      {game.pendingEffect
+      {currentGame.pendingEffect
         ?.abilityId ===
         "veiled-sight" && (
         <section
@@ -2408,7 +2410,7 @@ export default function GreatGamePlayPage() {
                     }
                     cost={
                       getEffectiveCost(
-                        game,
+                        currentGame,
                         enemyPlayerId,
                         handCard
                       )
@@ -2432,7 +2434,7 @@ export default function GreatGamePlayPage() {
         units={
           enemyPlayer.board
         }
-        state={game}
+        state={currentGame}
         targetable={
           isUnitTargetable
         }
@@ -2462,7 +2464,7 @@ export default function GreatGamePlayPage() {
         units={
           activePlayer.board
         }
-        state={game}
+        state={currentGame}
         targetable={
           isUnitTargetable
         }
@@ -2556,7 +2558,7 @@ export default function GreatGamePlayPage() {
         playerId={
           activePlayerId
         }
-        state={game}
+        state={currentGame}
       />
 
       <section
@@ -2592,7 +2594,7 @@ export default function GreatGamePlayPage() {
             }`}
             disabled={
               Boolean(
-                game.pendingEffect
+                currentGame.pendingEffect
               )
             }
             title={
@@ -2638,7 +2640,7 @@ export default function GreatGamePlayPage() {
                 }
                 interactionLocked={
                   Boolean(
-                    game.pendingEffect ||
+                    currentGame.pendingEffect ||
                       pendingConflict
                   )
                 }
@@ -2682,7 +2684,7 @@ export default function GreatGamePlayPage() {
             styles.log
           }
         >
-          {[...game.log]
+          {[...currentGame.log]
             .reverse()
             .slice(0, 40)
             .map(
@@ -2733,7 +2735,7 @@ export default function GreatGamePlayPage() {
               handCard={
                 selectedHandCard
               }
-              state={game}
+              state={currentGame}
               playerId={
                 activePlayerId
               }
@@ -2849,7 +2851,7 @@ function MainMenu({
 }
 
 function MulliganScreen({
-  game,
+  currentGame,
   selectedIds,
   onToggle,
   onConfirm,
@@ -2872,10 +2874,10 @@ function MulliganScreen({
   onConfirmExit: () => void;
 }) {
   const playerId =
-    game.activePlayerId;
+    currentGame.activePlayerId;
 
   const player =
-    game.players[
+    currentGame.players[
       playerId
     ];
 
