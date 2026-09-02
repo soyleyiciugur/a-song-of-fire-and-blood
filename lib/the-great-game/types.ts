@@ -1,10 +1,12 @@
 // lib/the-great-game/types.ts
 
 // ─────────────────────────────────────────────
-// Core IDs / enums
+// Core
 // ─────────────────────────────────────────────
 
-export type PlayerId = "player1" | "player2";
+export type PlayerId =
+  | "player1"
+  | "player2";
 
 export type CardType =
   | "character"
@@ -41,7 +43,8 @@ export type InternalRole =
   | "french-vanilla"
   | "hybrid-vanilla"
   | "removal"
-  | "board-clear";
+  | "board-clear"
+  | "resource";
 
 export type AbilityTrigger =
   | "arrival"
@@ -68,11 +71,16 @@ export type AbilityId =
   | "trial-by-combat"
   | "oldtown-massacre"
   | "brothers-tilt"
+  | "word-in-the-right-ear"
   | "blackfyre"
   | "at-your-throat"
   | "dragonstone"
   | "kings-landing"
-  | "oldtown";
+  | "oldtown"
+  | "royal-favor";
+
+export type SpecialCardKind =
+  | "royal-favor";
 
 // ─────────────────────────────────────────────
 // Card definitions
@@ -98,30 +106,32 @@ interface BaseCard {
   cost: number;
 
   traits: Trait[];
-
   abilities: CardAbility[];
 
-  /**
-   * Internal balance/design metadata.
-   * Not displayed on the card UI.
-   */
   roles: InternalRole[];
 
   flavorQuote?: string;
 
-  /**
-   * Optional link back to the lore/character database.
-   */
   linkedCharacterId?: string;
 
-  /**
-   * Generic units obey the unique generic
-   * stat-skeleton design rule.
-   */
   generic?: boolean;
+
+  /**
+   * Defaults to true.
+   *
+   * Royal Favor is not deckable.
+   */
+  deckable?: boolean;
+
+  /**
+   * Marks special cards created by game rules
+   * rather than normal deck construction.
+   */
+  special?: SpecialCardKind;
 }
 
-export interface CharacterCard extends BaseCard {
+export interface CharacterCard
+  extends BaseCard {
   cardType: "character";
 
   power: number;
@@ -129,26 +139,26 @@ export interface CharacterCard extends BaseCard {
   health: number;
 }
 
-export interface DragonCard extends BaseCard {
+export interface DragonCard
+  extends BaseCard {
   cardType: "dragon";
 
   power: number;
   health: number;
-
-  /**
-   * Dragons deliberately have no Influence.
-   */
 }
 
-export interface EventCard extends BaseCard {
+export interface EventCard
+  extends BaseCard {
   cardType: "event";
 }
 
-export interface ArtifactCard extends BaseCard {
+export interface ArtifactCard
+  extends BaseCard {
   cardType: "artifact";
 }
 
-export interface LocationCard extends BaseCard {
+export interface LocationCard
+  extends BaseCard {
   cardType: "location";
 }
 
@@ -182,7 +192,7 @@ export interface RuntimeModifier {
 }
 
 // ─────────────────────────────────────────────
-// Hand runtime state
+// Hand
 // ─────────────────────────────────────────────
 
 export type HandModifierExpiration =
@@ -196,24 +206,10 @@ export interface HandCostModifier {
 
   expiresAt: HandModifierExpiration;
 
-  /**
-   * Whose turn controls expiration.
-   *
-   * Example:
-   * Veiled Sight targets an enemy hand card,
-   * but expires at the start of Saera's
-   * controller's next turn.
-   */
   expiresForPlayerId: PlayerId;
 }
 
 export interface HandCardState {
-  /**
-   * Unique runtime instance.
-   *
-   * Important because two copies of the same
-   * card can exist in a hand at once.
-   */
   instanceId: string;
 
   cardId: string;
@@ -222,7 +218,7 @@ export interface HandCardState {
 }
 
 // ─────────────────────────────────────────────
-// Unit runtime state
+// Unit state
 // ─────────────────────────────────────────────
 
 export interface UnitState {
@@ -235,68 +231,39 @@ export interface UnitState {
   currentHealth: number;
 
   /**
-   * Exhausted units cannot initiate normal
-   * conflicts.
+   * Exhaustion only lasts for the current
+   * player-turn.
    *
-   * Political defenders must also be Ready.
+   * Every unit becomes Ready whenever
+   * End Turn is pressed.
    */
   exhausted: boolean;
 
   /**
-   * A newly played Character or Dragon cannot
-   * initiate a normal conflict that turn.
+   * Prevents a newly deployed unit from
+   * initiating a normal conflict that turn.
    *
-   * Swift ignores this for Military.
-   * Schemer ignores this for Political.
+   * Swift overrides this for Military.
+   * Schemer overrides this for Political.
    *
-   * This restriction expires at the end of
-   * its controller's turn.
+   * Removed at the end of the deploying
+   * player's turn.
    */
   deployedThisTurn: boolean;
 
-  /**
-   * Dragon-only state.
-   *
-   * Grounded Dragons remain on board but:
-   * - cannot attack
-   * - cannot defend
-   * - cannot use abilities
-   */
   grounded: boolean;
 
-  /**
-   * Card ID of the equipped Artifact.
-   *
-   * MVP:
-   * max 1 Artifact per Character.
-   */
   attachedArtifactId: string | null;
 
   modifiers: RuntimeModifier[];
 
-  /**
-   * Generic number storage used by
-   * card-specific engine mechanics.
-   *
-   * Examples:
-   * - Weylar turns-in-play
-   * - Dawn's Edge prevention tracking
-   */
   counters: Record<string, number>;
 
-  /**
-   * Generic boolean storage used by
-   * card-specific engine mechanics.
-   *
-   * Examples:
-   * - Weylar already triggered
-   * - Cordin previous successful draw
-   */
   flags: Record<string, boolean>;
 }
 
 // ─────────────────────────────────────────────
-// Player runtime state
+// Player
 // ─────────────────────────────────────────────
 
 export interface PlayerState {
@@ -305,67 +272,46 @@ export interface PlayerState {
   standing: number;
 
   /**
-   * Normal Command cap for the current turn.
-   *
-   * Progresses 1 → 10.
+   * Number of this player's own turns
+   * that have begun.
    */
-  maxCommand: number;
+  turnsTaken: number;
 
-  /**
-   * Command currently available to spend.
-   */
+  maxCommand: number;
   command: number;
 
   /**
-   * Temporary Command granted for the next turn.
-   *
-   * Example:
-   * Weylar Rocke.
+   * Temporary bonus applied when
+   * the player's next turn begins.
    */
   nextCommandBonus: number;
 
-  /**
-   * Deck contains card IDs only.
-   *
-   * Runtime instance IDs are generated
-   * when cards enter the hand.
-   */
   deck: string[];
 
   hand: HandCardState[];
 
-  /**
-   * Discard stores card IDs.
-   */
   discard: string[];
 
   board: UnitState[];
 
-  /**
-   * Cards burned because the hand
-   * was already at the 8-card limit.
-   */
   burnedCards: string[];
 
   /**
-   * Needed for Oldtown:
-   * "The first Event each player plays
-   * on their turn costs 1 less."
+   * Special cards such as Royal Favor
+   * leave the game after use.
    */
+  removedFromGame: string[];
+
   eventsPlayedThisTurn: number;
 }
 
 // ─────────────────────────────────────────────
-// Location state
+// Location
 // ─────────────────────────────────────────────
 
 export interface ActiveLocationState {
   cardId: string;
 
-  /**
-   * Needed so the Location can return to
-   * the correct discard pile when replaced.
-   */
   playedBy: PlayerId;
 }
 
@@ -381,21 +327,30 @@ export interface DelayedEffect {
 
   type: DelayedEffectType;
 
-  /**
-   * Effect resolves at the start of
-   * this player's turn.
-   */
   triggerPlayerId: PlayerId;
 
-  /**
-   * Mander's Pact only draws if the
-   * chosen Character is still in play.
-   */
   targetUnitInstanceId: string;
 }
 
 // ─────────────────────────────────────────────
-// Game state
+// Mulligan
+// ─────────────────────────────────────────────
+
+export type GamePhase =
+  | "mulligan-player1"
+  | "mulligan-player2"
+  | "playing"
+  | "finished";
+
+export interface MulliganState {
+  completed: Record<
+    PlayerId,
+    boolean
+  >;
+}
+
+// ─────────────────────────────────────────────
+// Game
 // ─────────────────────────────────────────────
 
 export type GameWinner =
@@ -404,35 +359,36 @@ export type GameWinner =
   | null;
 
 export interface GameState {
+  /**
+   * Global chronological turn sequence.
+   *
+   * Player-facing turn counts live on
+   * PlayerState.turnsTaken.
+   */
   turnNumber: number;
 
   activePlayerId: PlayerId;
 
-  players: Record<PlayerId, PlayerState>;
+  phase: GamePhase;
 
-  activeLocation: ActiveLocationState | null;
+  mulligan: MulliganState;
 
-  delayedEffects: DelayedEffect[];
+  players: Record<
+    PlayerId,
+    PlayerState
+  >;
+
+  activeLocation:
+    | ActiveLocationState
+    | null;
+
+  delayedEffects:
+    DelayedEffect[];
 
   winner: GameWinner;
 
-  /**
-   * Useful for:
-   * - local debug UI
-   * - gameplay history
-   * - later online action history
-   */
   log: GameLogEntry[];
 
-  /**
-   * Global runtime instance counter.
-   *
-   * Used for:
-   * - hand instances
-   * - unit instances
-   * - modifiers
-   * - delayed effects
-   */
   nextInstanceNumber: number;
 }
 
@@ -447,7 +403,7 @@ export interface GameLogEntry {
 }
 
 // ─────────────────────────────────────────────
-// Combat / conflict
+// Conflict
 // ─────────────────────────────────────────────
 
 export type ConflictType =
@@ -458,20 +414,17 @@ export type ConflictType =
 // Actions
 // ─────────────────────────────────────────────
 
+export interface MulliganAction {
+  type: "mulligan";
+
+  replaceHandInstanceIds: string[];
+}
+
 export interface MilitaryAttackAction {
   type: "military-attack";
 
   attackerInstanceId: string;
 
-  /**
-   * Military attacks target either:
-   *
-   * - an enemy unit
-   * OR
-   * - enemy Standing
-   *
-   * Never both.
-   */
   targetUnitInstanceId?: string;
 
   targetPlayerId?: PlayerId;
@@ -482,58 +435,18 @@ export interface PoliticalAttackAction {
 
   attackerInstanceId: string;
 
-  /**
-   * Political defender.
-   *
-   * Required when the defender must be
-   * explicitly selected.
-   *
-   * Examples:
-   * - multiple Intrigue defenders
-   * - Confront
-   * - normal defender choice
-   */
   defenderInstanceId?: string;
 }
 
 export interface PlayCardAction {
   type: "play-card";
 
-  /**
-   * Exact physical card instance in hand.
-   *
-   * Using handInstanceId rather than cardId
-   * matters because:
-   * - duplicate cards can exist
-   * - individual cards can have cost modifiers
-   * - Veiled Sight targets a specific copy
-   */
   handInstanceId: string;
 
-  /**
-   * Primary board target.
-   *
-   * Used by:
-   * - The Mander's Pact
-   * - Iron Wrath
-   * - Artifacts
-   * - The Brothers' Tilt
-   * - Trial by Combat
-   */
   targetInstanceId?: string;
 
-  /**
-   * Secondary board target.
-   *
-   * Used by Trial by Combat.
-   */
   secondaryTargetInstanceId?: string;
 
-  /**
-   * Exact card instance in the opponent's hand.
-   *
-   * Used by Veiled Sight.
-   */
   targetHandInstanceId?: string;
 }
 
@@ -542,13 +455,14 @@ export interface EndTurnAction {
 }
 
 export type GameAction =
+  | MulliganAction
   | PlayCardAction
   | MilitaryAttackAction
   | PoliticalAttackAction
   | EndTurnAction;
 
 // ─────────────────────────────────────────────
-// Action results
+// Result
 // ─────────────────────────────────────────────
 
 export interface ActionResult {

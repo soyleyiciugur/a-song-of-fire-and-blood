@@ -1,10 +1,19 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import type { ReactNode } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import type {
+  DragEvent,
+  ReactNode,
+} from "react";
 
 import {
   applyAction,
+  BOARD_LIMIT,
   createGame,
   getEffectiveCost,
   getEffectiveInfluence,
@@ -23,6 +32,7 @@ import {
 
 import type {
   GameAction,
+  GameCard,
   GameState,
   HandCardState,
   PlayerId,
@@ -32,10 +42,18 @@ import type {
 import styles from "./play.module.css";
 
 // ─────────────────────────────────────────────
-// Local UI state
+// UI state
 // ─────────────────────────────────────────────
 
 type PendingPlay =
+  | {
+      kind: "deploy";
+      handInstanceId: string;
+    }
+  | {
+      kind: "confirm";
+      handInstanceId: string;
+    }
   | {
       kind: "artifact";
       handInstanceId: string;
@@ -47,9 +65,14 @@ type PendingPlay =
   | {
       kind: "veiled-sight";
       handInstanceId: string;
+      committed: boolean;
     }
   | {
       kind: "iron-wrath";
+      handInstanceId: string;
+    }
+  | {
+      kind: "word-in-right-ear";
       handInstanceId: string;
     }
   | {
@@ -71,13 +94,143 @@ type PendingConflict =
       kind: "political";
       attackerInstanceId: string;
       legalDefenders: string[];
-      selectionBy: "attacker" | "defender";
+      selectionBy:
+        | "attacker"
+        | "defender"
+        | "none";
+      unopposed: boolean;
     };
 
-function playerName(playerId: PlayerId) {
-  return playerId === "player1"
+function playerName(
+  playerId: PlayerId
+) {
+  return playerId ===
+    "player1"
     ? "Player 1"
     : "Player 2";
+}
+
+// ─────────────────────────────────────────────
+// Artwork resolution
+// ─────────────────────────────────────────────
+
+const ART_EXTENSIONS = [
+  "webp",
+  "png",
+  "jpg",
+  "jpeg",
+];
+
+function getArtworkCandidates(
+  card: GameCard
+): string[] {
+  const paths: string[] = [];
+
+  if (
+    card.cardType ===
+    "character"
+  ) {
+    const id =
+      card.linkedCharacterId ??
+      card.id;
+
+    for (
+      const extension of
+      ART_EXTENSIONS
+    ) {
+      paths.push(
+        `/images/characters/${id}.${extension}`
+      );
+    }
+  }
+
+  if (
+    card.cardType ===
+    "dragon"
+  ) {
+    for (
+      const extension of
+      ART_EXTENSIONS
+    ) {
+      paths.push(
+        `/images/dragons/${card.id}.${extension}`
+      );
+    }
+  }
+
+  for (
+    const extension of
+    ART_EXTENSIONS
+  ) {
+    paths.push(
+      `/images/cards/${card.id}.${extension}`
+    );
+  }
+
+  return paths;
+}
+
+function CardArtwork({
+  card,
+  className,
+}: {
+  card: GameCard;
+  className?: string;
+}) {
+  const candidates =
+    useMemo(
+      () =>
+        getArtworkCandidates(
+          card
+        ),
+      [card]
+    );
+
+  const [
+    candidateIndex,
+    setCandidateIndex,
+  ] = useState(0);
+
+  useEffect(() => {
+    setCandidateIndex(0);
+  }, [card.id]);
+
+  if (
+    candidateIndex >=
+    candidates.length
+  ) {
+    return (
+      <div
+        className={`${styles.artworkFallback} ${
+          className ?? ""
+        }`}
+      >
+        <span>✦</span>
+      </div>
+    );
+  }
+
+  return (
+    // Deliberately using img because the source
+    // extension is resolved dynamically via onError.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={
+        candidates[
+          candidateIndex
+        ]
+      }
+      alt={card.name}
+      className={className}
+      draggable={false}
+      onError={() =>
+        setCandidateIndex(
+          (current) =>
+            current + 1
+        )
+      }
+    />
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -85,104 +238,309 @@ function playerName(playerId: PlayerId) {
 // ─────────────────────────────────────────────
 
 export default function GreatGamePlayPage() {
-  const [game, setGame] = useState<GameState | null>(null);
+  const [
+    game,
+    setGame,
+  ] =
+    useState<GameState | null>(
+      null
+    );
 
-  const [error, setError] = useState<string | null>(null);
+  const [
+    error,
+    setError,
+  ] =
+    useState<string | null>(
+      null
+    );
 
-  const [pendingPlay, setPendingPlay] =
-    useState<PendingPlay | null>(null);
+  const [
+    pendingPlay,
+    setPendingPlay,
+  ] =
+    useState<PendingPlay | null>(
+      null
+    );
 
-  const [pendingConflict, setPendingConflict] =
-    useState<PendingConflict | null>(null);
+  const [
+    pendingConflict,
+    setPendingConflict,
+  ] =
+    useState<PendingConflict | null>(
+      null
+    );
 
-  const [handoff, setHandoff] = useState(false);
+  const [
+    handoff,
+    setHandoff,
+  ] =
+    useState(false);
 
-  // Deck shuffling uses Math.random(), so game creation
-  // happens client-side after mount.
+  const [
+    mulliganSelected,
+    setMulliganSelected,
+  ] =
+    useState<string[]>([]);
+
+  const [
+    draggingHandInstanceId,
+    setDraggingHandInstanceId,
+  ] =
+    useState<string | null>(
+      null
+    );
+
   useEffect(() => {
-    setGame(createGame());
+    setGame(
+      createGame()
+    );
   }, []);
 
-  const activePlayerId = game?.activePlayerId ?? null;
+  useEffect(() => {
+    setMulliganSelected(
+      []
+    );
+  }, [game?.phase]);
 
-  const enemyPlayerId = activePlayerId
-    ? opponentOf(activePlayerId)
-    : null;
+  const activePlayerId =
+    game?.activePlayerId ??
+    null;
+
+  const enemyPlayerId =
+    activePlayerId
+      ? opponentOf(
+          activePlayerId
+        )
+      : null;
 
   const activePlayer =
-    game && activePlayerId
-      ? game.players[activePlayerId]
+    game &&
+    activePlayerId
+      ? game.players[
+          activePlayerId
+        ]
       : null;
 
   const enemyPlayer =
-    game && enemyPlayerId
-      ? game.players[enemyPlayerId]
+    game &&
+    enemyPlayerId
+      ? game.players[
+          enemyPlayerId
+        ]
       : null;
 
-  // ───────────────────────────────────────────
-  // Board lists
-  // ───────────────────────────────────────────
+  const alliedCharacters =
+    useMemo(() => {
+      if (
+        !game ||
+        !activePlayer
+      ) {
+        return [];
+      }
 
-  const alliedCharacters = useMemo(() => {
-    if (!game || !activePlayer) {
-      return [];
-    }
-
-    return activePlayer.board.filter((unit) => {
-      return (
-        getGameCard(unit.cardId).cardType ===
-        "character"
+      return activePlayer.board.filter(
+        (unit) =>
+          getGameCard(
+            unit.cardId
+          ).cardType ===
+          "character"
       );
-    });
-  }, [game, activePlayer]);
+    }, [
+      game,
+      activePlayer,
+    ]);
 
-  const enemyCharacters = useMemo(() => {
-    if (!game || !enemyPlayer) {
-      return [];
-    }
+  const enemyCharacters =
+    useMemo(() => {
+      if (
+        !game ||
+        !enemyPlayer
+      ) {
+        return [];
+      }
 
-    return enemyPlayer.board.filter((unit) => {
-      return (
-        getGameCard(unit.cardId).cardType ===
-        "character"
+      return enemyPlayer.board.filter(
+        (unit) =>
+          getGameCard(
+            unit.cardId
+          ).cardType ===
+          "character"
       );
-    });
-  }, [game, enemyPlayer]);
+    }, [
+      game,
+      enemyPlayer,
+    ]);
 
-  const allCharacters = useMemo(
-    () => [
-      ...alliedCharacters,
-      ...enemyCharacters,
-    ],
-    [alliedCharacters, enemyCharacters]
-  );
+  const allCharacters =
+    useMemo(
+      () => [
+        ...alliedCharacters,
+        ...enemyCharacters,
+      ],
+      [
+        alliedCharacters,
+        enemyCharacters,
+      ]
+    );
+
+  const selectedHandCard =
+    pendingPlay &&
+    activePlayer
+      ? activePlayer.hand.find(
+          (handCard) =>
+            handCard.instanceId ===
+            pendingPlay.handInstanceId
+        ) ?? null
+      : null;
+
+  const selectedCard =
+    selectedHandCard
+      ? getGameCard(
+          selectedHandCard.cardId
+        )
+      : null;
+
+  const irreversibleVeiledSight =
+    pendingPlay?.kind ===
+      "veiled-sight" &&
+    pendingPlay.committed;
 
   // ───────────────────────────────────────────
-  // Action dispatcher
+  // Generic dispatcher
   // ───────────────────────────────────────────
 
-  function dispatch(action: GameAction): boolean {
+  function dispatch(
+    action: GameAction
+  ): boolean {
     if (!game) {
       return false;
     }
 
-    const result = applyAction(game, action);
+    const result =
+      applyAction(
+        game,
+        action
+      );
 
     if (!result.ok) {
       setError(
-        result.error ?? "Action failed."
+        result.error ??
+          "Action failed."
       );
 
       return false;
     }
 
-    setGame(result.state);
+    setGame(
+      result.state
+    );
+
     setError(null);
 
-    setPendingPlay(null);
-    setPendingConflict(null);
+    setPendingPlay(
+      null
+    );
+
+    setPendingConflict(
+      null
+    );
+
+    setDraggingHandInstanceId(
+      null
+    );
 
     return true;
+  }
+
+  function cancelSelection() {
+    if (
+      irreversibleVeiledSight
+    ) {
+      setError(
+        "Veiled Sight has been committed. Choose a card from the opponent's hand."
+      );
+
+      return;
+    }
+
+    setPendingPlay(
+      null
+    );
+
+    setPendingConflict(
+      null
+    );
+
+    setError(null);
+
+    setDraggingHandInstanceId(
+      null
+    );
+  }
+
+  // ───────────────────────────────────────────
+  // Mulligan
+  // ───────────────────────────────────────────
+
+  function toggleMulliganCard(
+    instanceId: string
+  ) {
+    setMulliganSelected(
+      (current) =>
+        current.includes(
+          instanceId
+        )
+          ? current.filter(
+              (id) =>
+                id !==
+                instanceId
+            )
+          : [
+              ...current,
+              instanceId,
+            ]
+    );
+  }
+
+  function confirmMulligan() {
+    if (!game) {
+      return;
+    }
+
+    const result =
+      applyAction(
+        game,
+        {
+          type: "mulligan",
+
+          replaceHandInstanceIds:
+            mulliganSelected,
+        }
+      );
+
+    if (!result.ok) {
+      setError(
+        result.error ??
+          "Mulligan failed."
+      );
+
+      return;
+    }
+
+    setGame(
+      result.state
+    );
+
+    setMulliganSelected(
+      []
+    );
+
+    setError(null);
+
+    // Privacy handoff:
+    // P1 → P2 mulligan
+    // P2 → P1 first turn
+    setHandoff(true);
   }
 
   // ───────────────────────────────────────────
@@ -190,16 +548,31 @@ export default function GreatGamePlayPage() {
   // ───────────────────────────────────────────
 
   function restartGame() {
-    setGame(createGame());
+    setGame(
+      createGame()
+    );
 
     setError(null);
+
     setPendingPlay(null);
-    setPendingConflict(null);
+
+    setPendingConflict(
+      null
+    );
+
+    setMulliganSelected(
+      []
+    );
+
+    setDraggingHandInstanceId(
+      null
+    );
+
     setHandoff(false);
   }
 
   // ───────────────────────────────────────────
-  // End Turn
+  // End turn
   // ───────────────────────────────────────────
 
   function endTurn() {
@@ -207,31 +580,56 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    const result = applyAction(game, {
-      type: "end-turn",
-    });
-
-    if (!result.ok) {
+    if (
+      irreversibleVeiledSight
+    ) {
       setError(
-        result.error ?? "Could not end turn."
+        "Resolve Veiled Sight before ending the turn."
       );
 
       return;
     }
 
-    setGame(result.state);
+    const result =
+      applyAction(
+        game,
+        {
+          type: "end-turn",
+        }
+      );
+
+    if (!result.ok) {
+      setError(
+        result.error ??
+          "Could not end turn."
+      );
+
+      return;
+    }
+
+    setGame(
+      result.state
+    );
 
     setError(null);
-    setPendingPlay(null);
-    setPendingConflict(null);
 
-    // Hot-seat privacy screen before the next player sees
-    // their hand.
+    setPendingPlay(
+      null
+    );
+
+    setPendingConflict(
+      null
+    );
+
+    setDraggingHandInstanceId(
+      null
+    );
+
     setHandoff(true);
   }
 
   // ───────────────────────────────────────────
-  // Card play
+  // Select hand card
   // ───────────────────────────────────────────
 
   function beginPlayCard(
@@ -245,22 +643,41 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    setError(null);
-    setPendingConflict(null);
+    if (
+      irreversibleVeiledSight
+    ) {
+      setError(
+        "Resolve Veiled Sight first."
+      );
 
-    const card = getGameCard(
-      handCard.cardId
+      return;
+    }
+
+    setError(null);
+
+    setPendingConflict(
+      null
     );
 
+    const card =
+      getGameCard(
+        handCard.cardId
+      );
+
     // Artifact
-    if (card.cardType === "artifact") {
-      const validTargets =
+    if (
+      card.cardType ===
+      "artifact"
+    ) {
+      const targets =
         alliedCharacters.filter(
           (unit) =>
             !unit.attachedArtifactId
         );
 
-      if (validTargets.length === 0) {
+      if (
+        targets.length === 0
+      ) {
         setError(
           "You have no Character who can equip this Artifact."
         );
@@ -270,6 +687,7 @@ export default function GreatGamePlayPage() {
 
       setPendingPlay({
         kind: "artifact",
+
         handInstanceId:
           handCard.instanceId,
       });
@@ -277,13 +695,17 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    // Renrose — The Mander's Pact
+    // Renrose
     if (
-      card.id === "renrose-tyrell" &&
-      allCharacters.length > 0
+      card.id ===
+        "renrose-tyrell" &&
+      allCharacters.length >
+        0
     ) {
       setPendingPlay({
-        kind: "manders-pact",
+        kind:
+          "manders-pact",
+
         handInstanceId:
           handCard.instanceId,
       });
@@ -291,28 +713,64 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    // Saera — Veiled Sight
+    // Saera
     if (
-      card.id === "saera-targaryen" &&
-      enemyPlayer.hand.length > 0
+      card.id ===
+        "saera-targaryen" &&
+      enemyPlayer.hand.length >
+        0
     ) {
       setPendingPlay({
-        kind: "veiled-sight",
+        kind:
+          "veiled-sight",
+
         handInstanceId:
           handCard.instanceId,
+
+        committed: false,
       });
 
       return;
     }
 
-    // Baelenys — Iron Wrath
+    // Baelenys
     if (
       card.id ===
         "baelenys-targaryen" &&
-      enemyCharacters.length > 0
+      enemyCharacters.length >
+        0
     ) {
       setPendingPlay({
-        kind: "iron-wrath",
+        kind:
+          "iron-wrath",
+
+        handInstanceId:
+          handCard.instanceId,
+      });
+
+      return;
+    }
+
+    // A Word in the Right Ear
+    if (
+      card.id ===
+      "word-in-the-right-ear"
+    ) {
+      if (
+        allCharacters.length ===
+        0
+      ) {
+        setError(
+          "A Word in the Right Ear requires a Character in play."
+        );
+
+        return;
+      }
+
+      setPendingPlay({
+        kind:
+          "word-in-right-ear",
+
         handInstanceId:
           handCard.instanceId,
       });
@@ -322,11 +780,14 @@ export default function GreatGamePlayPage() {
 
     // Trial by Combat
     if (
-      card.id === "trial-by-combat"
+      card.id ===
+      "trial-by-combat"
     ) {
       if (
-        alliedCharacters.length === 0 ||
-        enemyCharacters.length === 0
+        alliedCharacters.length ===
+          0 ||
+        enemyCharacters.length ===
+          0
       ) {
         setError(
           "Trial by Combat requires an allied Character and an enemy Character."
@@ -336,7 +797,9 @@ export default function GreatGamePlayPage() {
       }
 
       setPendingPlay({
-        kind: "trial-by-combat",
+        kind:
+          "trial-by-combat",
+
         handInstanceId:
           handCard.instanceId,
       });
@@ -344,12 +807,14 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    // The Brothers' Tilt
+    // Brothers' Tilt
     if (
-      card.id === "brothers-tilt"
+      card.id ===
+      "brothers-tilt"
     ) {
       if (
-        alliedCharacters.length === 0
+        alliedCharacters.length ===
+        0
       ) {
         setError(
           "The Brothers' Tilt requires a Character you control."
@@ -359,7 +824,9 @@ export default function GreatGamePlayPage() {
       }
 
       setPendingPlay({
-        kind: "brothers-tilt",
+        kind:
+          "brothers-tilt",
+
         handInstanceId:
           handCard.instanceId,
       });
@@ -367,16 +834,138 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    // No target required
-    dispatch({
-      type: "play-card",
+    // Normal Character / Dragon
+    if (
+      isUnitCard(card)
+    ) {
+      setPendingPlay({
+        kind: "deploy",
+
+        handInstanceId:
+          handCard.instanceId,
+      });
+
+      return;
+    }
+
+    // Location / untargeted Event / Royal Favor
+    setPendingPlay({
+      kind: "confirm",
+
       handInstanceId:
         handCard.instanceId,
     });
   }
 
   // ───────────────────────────────────────────
-  // Board target
+  // Saera hidden-information commit
+  // ───────────────────────────────────────────
+
+  function commitVeiledSight() {
+    if (
+      !game ||
+      !activePlayer ||
+      pendingPlay?.kind !==
+        "veiled-sight" ||
+      pendingPlay.committed
+    ) {
+      return;
+    }
+
+    const handCard =
+      activePlayer.hand.find(
+        (card) =>
+          card.instanceId ===
+          pendingPlay.handInstanceId
+      );
+
+    if (!handCard) {
+      return;
+    }
+
+    const cost =
+      getEffectiveCost(
+        game,
+        game.activePlayerId,
+        handCard
+      );
+
+    if (
+      activePlayer.command <
+      cost
+    ) {
+      setError(
+        `Not enough Command. Saera Targaryen costs ${cost}.`
+      );
+
+      return;
+    }
+
+    if (
+      activePlayer.board.length >=
+      BOARD_LIMIT
+    ) {
+      setError(
+        "Your board is full."
+      );
+
+      return;
+    }
+
+    /**
+     * From this point onward the player has
+     * committed to playing Saera.
+     *
+     * We reveal the opponent hand only now,
+     * so selecting Saera and cancelling cannot
+     * be abused to inspect hidden information.
+     */
+    setPendingPlay({
+      ...pendingPlay,
+
+      committed: true,
+    });
+
+    setError(null);
+  }
+
+  // ───────────────────────────────────────────
+  // Confirm simple board play
+  // ───────────────────────────────────────────
+
+  function confirmSelectedOnBoard() {
+    if (!pendingPlay) {
+      return;
+    }
+
+    if (
+      pendingPlay.kind ===
+      "veiled-sight"
+    ) {
+      commitVeiledSight();
+
+      return;
+    }
+
+    if (
+      pendingPlay.kind !==
+        "deploy" &&
+      pendingPlay.kind !==
+        "confirm"
+    ) {
+      return;
+    }
+
+    dispatch({
+      type: "play-card",
+
+      handInstanceId:
+        pendingPlay.handInstanceId,
+    });
+  }
+
+  // ───────────────────────────────────────────
+  // Unit target
   // ───────────────────────────────────────────
 
   function handleUnitTarget(
@@ -386,26 +975,18 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    // ── Pending card play ──
-
     if (pendingPlay) {
-      switch (pendingPlay.kind) {
+      switch (
+        pendingPlay.kind
+      ) {
         case "artifact": {
           if (
             unit.ownerId !==
-            game.activePlayerId
-          ) {
-            return;
-          }
-
-          if (
-            getGameCard(unit.cardId)
-              .cardType !== "character"
-          ) {
-            return;
-          }
-
-          if (
+              game.activePlayerId ||
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+              "character" ||
             unit.attachedArtifactId
           ) {
             return;
@@ -426,8 +1007,10 @@ export default function GreatGamePlayPage() {
 
         case "manders-pact": {
           if (
-            getGameCard(unit.cardId)
-              .cardType !== "character"
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+            "character"
           ) {
             return;
           }
@@ -448,14 +1031,34 @@ export default function GreatGamePlayPage() {
         case "iron-wrath": {
           if (
             unit.ownerId ===
-            game.activePlayerId
+              game.activePlayerId ||
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+              "character"
           ) {
             return;
           }
 
+          dispatch({
+            type: "play-card",
+
+            handInstanceId:
+              pendingPlay.handInstanceId,
+
+            targetInstanceId:
+              unit.instanceId,
+          });
+
+          return;
+        }
+
+        case "word-in-right-ear": {
           if (
-            getGameCard(unit.cardId)
-              .cardType !== "character"
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+            "character"
           ) {
             return;
           }
@@ -476,14 +1079,11 @@ export default function GreatGamePlayPage() {
         case "brothers-tilt": {
           if (
             unit.ownerId !==
-            game.activePlayerId
-          ) {
-            return;
-          }
-
-          if (
-            getGameCard(unit.cardId)
-              .cardType !== "character"
+              game.activePlayerId ||
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+              "character"
           ) {
             return;
           }
@@ -502,21 +1102,17 @@ export default function GreatGamePlayPage() {
         }
 
         case "trial-by-combat": {
-          // First target = allied Character
           if (
             !pendingPlay
               .firstTargetInstanceId
           ) {
             if (
               unit.ownerId !==
-              game.activePlayerId
-            ) {
-              return;
-            }
-
-            if (
-              getGameCard(unit.cardId)
-                .cardType !== "character"
+                game.activePlayerId ||
+              getGameCard(
+                unit.cardId
+              ).cardType !==
+                "character"
             ) {
               return;
             }
@@ -531,17 +1127,13 @@ export default function GreatGamePlayPage() {
             return;
           }
 
-          // Second target = enemy Character
           if (
             unit.ownerId ===
-            game.activePlayerId
-          ) {
-            return;
-          }
-
-          if (
-            getGameCard(unit.cardId)
-              .cardType !== "character"
+              game.activePlayerId ||
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+              "character"
           ) {
             return;
           }
@@ -563,13 +1155,14 @@ export default function GreatGamePlayPage() {
           return;
         }
 
+        case "deploy":
+        case "confirm":
         case "veiled-sight":
-          return;
+          break;
       }
     }
 
-    // ── Pending Military target ──
-
+    // Military target
     if (
       pendingConflict?.kind ===
       "military"
@@ -590,7 +1183,8 @@ export default function GreatGamePlayPage() {
       }
 
       dispatch({
-        type: "military-attack",
+        type:
+          "military-attack",
 
         attackerInstanceId:
           pendingConflict
@@ -603,8 +1197,7 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    // ── Pending Political defender ──
-
+    // Political target
     if (
       pendingConflict?.kind ===
       "political"
@@ -618,7 +1211,8 @@ export default function GreatGamePlayPage() {
       }
 
       dispatch({
-        type: "political-attack",
+        type:
+          "political-attack",
 
         attackerInstanceId:
           pendingConflict
@@ -631,7 +1225,7 @@ export default function GreatGamePlayPage() {
   }
 
   // ───────────────────────────────────────────
-  // Veiled Sight
+  // Veiled Sight hand target
   // ───────────────────────────────────────────
 
   function targetEnemyHandCard(
@@ -639,7 +1233,8 @@ export default function GreatGamePlayPage() {
   ) {
     if (
       pendingPlay?.kind !==
-      "veiled-sight"
+        "veiled-sight" ||
+      !pendingPlay.committed
     ) {
       return;
     }
@@ -656,7 +1251,7 @@ export default function GreatGamePlayPage() {
   }
 
   // ───────────────────────────────────────────
-  // Military
+  // Military selection
   // ───────────────────────────────────────────
 
   function beginMilitary(
@@ -666,8 +1261,17 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    if (
+      irreversibleVeiledSight
+    ) {
+      return;
+    }
+
     setError(null);
-    setPendingPlay(null);
+
+    setPendingPlay(
+      null
+    );
 
     const options =
       getMilitaryTargetOptions(
@@ -676,7 +1280,8 @@ export default function GreatGamePlayPage() {
       );
 
     if (
-      options.unitInstanceIds.length === 0 &&
+      options.unitInstanceIds
+        .length === 0 &&
       !options.canAttackStanding
     ) {
       setError(
@@ -694,7 +1299,7 @@ export default function GreatGamePlayPage() {
     });
   }
 
-  function attackStanding() {
+  function attackStandingMilitary() {
     if (
       !game ||
       pendingConflict?.kind !==
@@ -703,23 +1308,23 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    const enemyId = opponentOf(
-      game.activePlayerId
-    );
-
     dispatch({
-      type: "military-attack",
+      type:
+        "military-attack",
 
       attackerInstanceId:
         pendingConflict
           .attackerInstanceId,
 
-      targetPlayerId: enemyId,
+      targetPlayerId:
+        opponentOf(
+          game.activePlayerId
+        ),
     });
   }
 
   // ───────────────────────────────────────────
-  // Political
+  // Political selection
   // ───────────────────────────────────────────
 
   function beginPolitical(
@@ -729,8 +1334,17 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    if (
+      irreversibleVeiledSight
+    ) {
+      return;
+    }
+
     setError(null);
-    setPendingPlay(null);
+
+    setPendingPlay(
+      null
+    );
 
     const defense =
       getPoliticalDefenseOptions(
@@ -738,24 +1352,14 @@ export default function GreatGamePlayPage() {
         unit.instanceId
       );
 
-    // No ready defender — immediately resolve.
-    if (defense.unopposed) {
-      dispatch({
-        type: "political-attack",
-
-        attackerInstanceId:
-          unit.instanceId,
-      });
-
-      return;
-    }
-
-    if (
-      defense.selectionBy === "none"
-    ) {
-      return;
-    }
-
+    /**
+     * IMPORTANT:
+     * Even when unopposed, Political does
+     * NOT auto-resolve anymore.
+     *
+     * Enemy Standing becomes a target and
+     * requires a second click.
+     */
     setPendingConflict({
       kind: "political",
 
@@ -767,6 +1371,29 @@ export default function GreatGamePlayPage() {
 
       selectionBy:
         defense.selectionBy,
+
+      unopposed:
+        defense.unopposed,
+    });
+  }
+
+  function attackStandingPolitical() {
+    if (
+      !game ||
+      pendingConflict?.kind !==
+        "political" ||
+      !pendingConflict.unopposed
+    ) {
+      return;
+    }
+
+    dispatch({
+      type:
+        "political-attack",
+
+      attackerInstanceId:
+        pendingConflict
+          .attackerInstanceId,
     });
   }
 
@@ -783,19 +1410,16 @@ export default function GreatGamePlayPage() {
 
     if (
       unit.ownerId !==
-      game.activePlayerId
-    ) {
-      return false;
-    }
-
-    if (
+        game.activePlayerId ||
       unit.exhausted ||
       unit.grounded
     ) {
       return false;
     }
 
-    if (!unit.deployedThisTurn) {
+    if (
+      !unit.deployedThisTurn
+    ) {
       return true;
     }
 
@@ -813,12 +1437,14 @@ export default function GreatGamePlayPage() {
       return false;
     }
 
-    const card = getGameCard(
-      unit.cardId
-    );
+    const card =
+      getGameCard(
+        unit.cardId
+      );
 
     if (
-      card.cardType !== "character"
+      card.cardType !==
+      "character"
     ) {
       return false;
     }
@@ -831,7 +1457,9 @@ export default function GreatGamePlayPage() {
       return false;
     }
 
-    if (!unit.deployedThisTurn) {
+    if (
+      !unit.deployedThisTurn
+    ) {
       return true;
     }
 
@@ -843,7 +1471,7 @@ export default function GreatGamePlayPage() {
   }
 
   // ───────────────────────────────────────────
-  // Target highlighting
+  // Target highlights
   // ───────────────────────────────────────────
 
   function isUnitTargetable(
@@ -854,30 +1482,25 @@ export default function GreatGamePlayPage() {
     }
 
     if (pendingPlay) {
-      switch (pendingPlay.kind) {
+      switch (
+        pendingPlay.kind
+      ) {
         case "artifact":
           return (
             unit.ownerId ===
               game.activePlayerId &&
-            getGameCard(unit.cardId)
-              .cardType ===
+            getGameCard(
+              unit.cardId
+            ).cardType ===
               "character" &&
             !unit.attachedArtifactId
           );
 
-        case "brothers-tilt":
-          return (
-            unit.ownerId ===
-              game.activePlayerId &&
-            getGameCard(unit.cardId)
-              .cardType ===
-              "character"
-          );
-
         case "manders-pact":
           return (
-            getGameCard(unit.cardId)
-              .cardType ===
+            getGameCard(
+              unit.cardId
+            ).cardType ===
             "character"
           );
 
@@ -885,8 +1508,27 @@ export default function GreatGamePlayPage() {
           return (
             unit.ownerId !==
               game.activePlayerId &&
-            getGameCard(unit.cardId)
-              .cardType ===
+            getGameCard(
+              unit.cardId
+            ).cardType ===
+              "character"
+          );
+
+        case "word-in-right-ear":
+          return (
+            getGameCard(
+              unit.cardId
+            ).cardType ===
+            "character"
+          );
+
+        case "brothers-tilt":
+          return (
+            unit.ownerId ===
+              game.activePlayerId &&
+            getGameCard(
+              unit.cardId
+            ).cardType ===
               "character"
           );
 
@@ -898,8 +1540,9 @@ export default function GreatGamePlayPage() {
             return (
               unit.ownerId ===
                 game.activePlayerId &&
-              getGameCard(unit.cardId)
-                .cardType ===
+              getGameCard(
+                unit.cardId
+              ).cardType ===
                 "character"
             );
           }
@@ -907,11 +1550,14 @@ export default function GreatGamePlayPage() {
           return (
             unit.ownerId !==
               game.activePlayerId &&
-            getGameCard(unit.cardId)
-              .cardType ===
+            getGameCard(
+              unit.cardId
+            ).cardType ===
               "character"
           );
 
+        case "deploy":
+        case "confirm":
         case "veiled-sight":
           return false;
       }
@@ -921,14 +1567,11 @@ export default function GreatGamePlayPage() {
       pendingConflict?.kind ===
       "military"
     ) {
-      const options =
-        getMilitaryTargetOptions(
-          game,
-          pendingConflict
-            .attackerInstanceId
-        );
-
-      return options.unitInstanceIds.includes(
+      return getMilitaryTargetOptions(
+        game,
+        pendingConflict
+          .attackerInstanceId
+      ).unitInstanceIds.includes(
         unit.instanceId
       );
     }
@@ -945,24 +1588,33 @@ export default function GreatGamePlayPage() {
     return false;
   }
 
-  // ───────────────────────────────────────────
-  // Prompt
-  // ───────────────────────────────────────────
-
   function getPrompt() {
     if (pendingPlay) {
-      switch (pendingPlay.kind) {
+      switch (
+        pendingPlay.kind
+      ) {
+        case "deploy":
+          return "Card selected — click your board to deploy it.";
+
+        case "confirm":
+          return "Card selected — click your board or Play Card to confirm.";
+
         case "artifact":
-          return "Choose a Character you control to equip.";
+          return "Choose one of your Characters to equip.";
 
         case "manders-pact":
           return "Choose another Character for The Mander's Pact.";
 
         case "veiled-sight":
-          return "Veiled Sight — choose a card from your opponent's hand.";
+          return pendingPlay.committed
+            ? "Veiled Sight — choose a card from the opponent's revealed hand."
+            : "Deploy Saera to commit Veiled Sight and reveal the opponent's hand.";
 
         case "iron-wrath":
           return "Choose an enemy Character to suffer Iron Wrath.";
+
+        case "word-in-right-ear":
+          return "Choose any Character to gain +1 Influence this turn.";
 
         case "brothers-tilt":
           return "Choose a Character you control for The Brothers' Tilt.";
@@ -979,26 +1631,99 @@ export default function GreatGamePlayPage() {
       pendingConflict?.kind ===
       "military"
     ) {
-      return "Military Conflict — choose an enemy unit or attack Standing.";
+      return "Military Conflict — choose an enemy unit or enemy Standing.";
     }
 
     if (
       pendingConflict?.kind ===
       "political"
     ) {
+      if (
+        pendingConflict.unopposed
+      ) {
+        return "Political Conflict — enemy Standing is unopposed. Click Standing to confirm the attack.";
+      }
+
       return pendingConflict.selectionBy ===
         "attacker"
-        ? `${playerName(
-            game!.activePlayerId
-          )} chooses the Political defender.`
-        : `${playerName(
-            opponentOf(
-              game!.activePlayerId
-            )
-          )} chooses the Political defender.`;
+        ? "Choose the Political defender."
+        : "The defending player chooses the Political defender.";
     }
 
     return null;
+  }
+
+  // ───────────────────────────────────────────
+  // Drag
+  // ───────────────────────────────────────────
+
+  function handleHandDragStart(
+    event: DragEvent,
+    handCard: HandCardState
+  ) {
+    if (
+      pendingConflict ||
+      irreversibleVeiledSight
+    ) {
+      event.preventDefault();
+
+      return;
+    }
+
+    beginPlayCard(
+      handCard
+    );
+
+    setDraggingHandInstanceId(
+      handCard.instanceId
+    );
+
+    event.dataTransfer.effectAllowed =
+      "move";
+
+    event.dataTransfer.setData(
+      "text/plain",
+      handCard.instanceId
+    );
+  }
+
+  function handleHandDragEnd() {
+    setDraggingHandInstanceId(
+      null
+    );
+  }
+
+  function handleBoardDragOver(
+    event: DragEvent
+  ) {
+    if (
+      pendingPlay?.kind ===
+        "deploy" ||
+      pendingPlay?.kind ===
+        "confirm" ||
+      (
+        pendingPlay?.kind ===
+          "veiled-sight" &&
+        !pendingPlay.committed
+      )
+    ) {
+      event.preventDefault();
+
+      event.dataTransfer.dropEffect =
+        "move";
+    }
+  }
+
+  function handleBoardDrop(
+    event: DragEvent
+  ) {
+    event.preventDefault();
+
+    confirmSelectedOnBoard();
+
+    setDraggingHandInstanceId(
+      null
+    );
   }
 
   // ───────────────────────────────────────────
@@ -1007,27 +1732,22 @@ export default function GreatGamePlayPage() {
 
   if (!game) {
     return (
-      <main className={styles.loading}>
+      <main
+        className={
+          styles.loading
+        }
+      >
         <div
-          className={styles.pageBackground}
+          className={
+            styles.pageBackground
+          }
           aria-hidden
         />
 
-        <span>
-          Preparing The Great Game...
-        </span>
+        Preparing The Great Game...
       </main>
     );
   }
-
-  const prompt = getPrompt();
-
-  const activeLocation =
-    game.activeLocation
-      ? getGameCard(
-          game.activeLocation.cardId
-        )
-      : null;
 
   // ───────────────────────────────────────────
   // Winner
@@ -1035,27 +1755,42 @@ export default function GreatGamePlayPage() {
 
   if (game.winner) {
     return (
-      <main className={styles.game}>
+      <main
+        className={
+          styles.game
+        }
+      >
         <div
-          className={styles.pageBackground}
+          className={
+            styles.pageBackground
+          }
           aria-hidden
         />
 
-        <div className={styles.winner}>
-          <span className={styles.eyebrow}>
-            The Realm&apos;s Reckoning
+        <div
+          className={
+            styles.winner
+          }
+        >
+          <span
+            className={
+              styles.eyebrow
+            }
+          >
+            The Realm&apos;s
+            Reckoning
           </span>
 
           <h1>
-            {game.winner === "draw"
+            {game.winner ===
+            "draw"
               ? "The Realm Lies Broken"
-              : `${playerName(
-                  game.winner
-                )} Prevails`}
+              : `${playerName(game.winner)} Prevails`}
           </h1>
 
           <p>
-            {game.winner === "draw"
+            {game.winner ===
+            "draw"
               ? "Neither claimant remains standing."
               : "The opposing claimant has lost all Standing."}
           </p>
@@ -1064,7 +1799,9 @@ export default function GreatGamePlayPage() {
             className={
               styles.primaryButton
             }
-            onClick={restartGame}
+            onClick={
+              restartGame
+            }
           >
             Begin Another Game
           </button>
@@ -1074,29 +1811,43 @@ export default function GreatGamePlayPage() {
   }
 
   // ───────────────────────────────────────────
-  // Hot-seat handoff
+  // Privacy handoff
   // ───────────────────────────────────────────
 
   if (handoff) {
+    const mulliganHandoff =
+      game.phase ===
+      "mulligan-player2";
+
     return (
       <main
         className={`${styles.game} ${styles.handoffScreen}`}
       >
         <div
-          className={styles.pageBackground}
+          className={
+            styles.pageBackground
+          }
           aria-hidden
         />
 
         <div
-          className={styles.handoffCard}
+          className={
+            styles.handoffCard
+          }
         >
           <span
-            className={styles.eyebrow}
+            className={
+              styles.eyebrow
+            }
           >
-            Turn {game.turnNumber}
+            {mulliganHandoff
+              ? "Opening Hand"
+              : `Turn ${game.players[game.activePlayerId].turnsTaken}`}
           </span>
 
-          <h1>Pass the Realm</h1>
+          <h1>
+            Pass the Realm
+          </h1>
 
           <p>
             Give the device to{" "}
@@ -1113,60 +1864,157 @@ export default function GreatGamePlayPage() {
               styles.primaryButton
             }
             onClick={() =>
-              setHandoff(false)
+              setHandoff(
+                false
+              )
             }
           >
-            Begin{" "}
-            {playerName(
-              game.activePlayerId
-            )}
-            &apos;s Turn
+            {mulliganHandoff
+              ? `Review ${playerName(game.activePlayerId)} Opening Hand`
+              : `Begin ${playerName(game.activePlayerId)}'s Turn`}
           </button>
         </div>
       </main>
     );
   }
 
+  // ───────────────────────────────────────────
+  // Mulligan
+  // ───────────────────────────────────────────
+
+  if (
+    game.phase ===
+      "mulligan-player1" ||
+    game.phase ===
+      "mulligan-player2"
+  ) {
+    return (
+      <MulliganScreen
+        game={game}
+        selectedIds={
+          mulliganSelected
+        }
+        onToggle={
+          toggleMulliganCard
+        }
+        onConfirm={
+          confirmMulligan
+        }
+        onRestart={
+          restartGame
+        }
+        error={error}
+      />
+    );
+  }
+
+  const prompt =
+    getPrompt();
+
+  const activeLocation =
+    game.activeLocation
+      ? getGameCard(
+          game.activeLocation.cardId
+        )
+      : null;
+
+  const militaryStandingTarget =
+    pendingConflict?.kind ===
+      "military" &&
+    getMilitaryTargetOptions(
+      game,
+      pendingConflict
+        .attackerInstanceId
+    ).canAttackStanding;
+
+  const politicalStandingTarget =
+    pendingConflict?.kind ===
+      "political" &&
+    pendingConflict.unopposed;
+
+  const selectedAttacker =
+    pendingConflict
+      ? pendingConflict
+          .attackerInstanceId
+      : null;
+
+  const canReceiveBoardPlay =
+    pendingPlay?.kind ===
+      "deploy" ||
+    pendingPlay?.kind ===
+      "confirm" ||
+    (
+      pendingPlay?.kind ===
+        "veiled-sight" &&
+      !pendingPlay.committed
+    );
+
   return (
-    <main className={styles.game}>
+    <main
+      className={
+        styles.game
+      }
+    >
       <div
-        className={styles.pageBackground}
+        className={
+          styles.pageBackground
+        }
         aria-hidden
       />
 
       {/* HEADER */}
 
-      <header className={styles.topbar}>
+      <header
+        className={
+          styles.topbar
+        }
+      >
         <div>
           <span
-            className={styles.eyebrow}
+            className={
+              styles.eyebrow
+            }
           >
-            The Realm&apos;s Reckoning
+            The Realm&apos;s
+            Reckoning
           </span>
 
           <h1
-            className={styles.title}
+            className={
+              styles.title
+            }
           >
             The Great Game
           </h1>
         </div>
 
-        <div className={styles.turnInfo}>
+        <div
+          className={
+            styles.turnInfo
+          }
+        >
           <span>
-            Turn {game.turnNumber}
-          </span>
-
-          <strong>
             {playerName(
               game.activePlayerId
             )}
+          </span>
+
+          <strong>
+            Turn{" "}
+            {
+              game.players[
+                game.activePlayerId
+              ].turnsTaken
+            }
           </strong>
 
           <button
             className={
               styles.smallButton
             }
-            onClick={restartGame}
+            onClick={
+              restartGame
+            }
           >
             New Game
           </button>
@@ -1176,7 +2024,9 @@ export default function GreatGamePlayPage() {
       {/* LOCATION */}
 
       <section
-        className={styles.locationBar}
+        className={
+          styles.locationBar
+        }
       >
         <div>
           <span
@@ -1194,154 +2044,189 @@ export default function GreatGamePlayPage() {
           </strong>
         </div>
 
-        {activeLocation
-          ?.abilities[0] && (
-          <small>
-            {
-              activeLocation
-                .abilities[0].text
-            }
-          </small>
-        )}
+        <small>
+          {activeLocation
+            ?.abilities[0]
+            ?.text ??
+            "No Location is currently in play."}
+        </small>
       </section>
 
-      {/* ERROR */}
-
       {error && (
-        <div className={styles.error}>
+        <div
+          className={
+            styles.error
+          }
+        >
           {error}
         </div>
       )}
 
-      {/* PROMPT */}
-
       {prompt && (
-        <div className={styles.prompt}>
-          <span>{prompt}</span>
+        <div
+          className={
+            styles.prompt
+          }
+        >
+          <span>
+            {prompt}
+          </span>
 
           <button
-            onClick={() => {
-              setPendingPlay(null);
-              setPendingConflict(null);
-              setError(null);
-            }}
+            disabled={
+              irreversibleVeiledSight
+            }
+            onClick={
+              cancelSelection
+            }
           >
-            Cancel
+            {irreversibleVeiledSight
+              ? "Committed"
+              : "Cancel"}
           </button>
         </div>
       )}
 
-      {/* OPPONENT HEADER */}
+      {/* OPPONENT HUD */}
 
       <PlayerHeader
-        playerId={enemyPlayerId!}
+        playerId={
+          enemyPlayerId!
+        }
         state={game}
         opponent
+        standingTarget={
+          militaryStandingTarget ||
+          politicalStandingTarget
+        }
+        standingTargetType={
+          militaryStandingTarget
+            ? "military"
+            : politicalStandingTarget
+              ? "political"
+              : null
+        }
+        onStandingClick={
+          militaryStandingTarget
+            ? attackStandingMilitary
+            : politicalStandingTarget
+              ? attackStandingPolitical
+              : undefined
+        }
       />
 
       {/* VEILED SIGHT */}
 
       {pendingPlay?.kind ===
-        "veiled-sight" && (
-        <section
-          className={
-            styles.revealedHand
-          }
-        >
-          <div
+        "veiled-sight" &&
+        pendingPlay.committed && (
+          <section
             className={
-              styles.sectionTitle
+              styles.revealedHand
             }
           >
-            Opponent&apos;s Hand
-          </div>
-
-          <div className={styles.hand}>
-            {enemyPlayer!.hand.map(
-              (handCard) => {
-                const card =
-                  getGameCard(
-                    handCard.cardId
-                  );
-
-                return (
-                  <button
-                    key={
-                      handCard.instanceId
-                    }
-                    className={`${styles.handCard} ${styles.targetableHandCard}`}
-                    onClick={() =>
-                      targetEnemyHandCard(
-                        handCard
-                      )
-                    }
-                  >
-                    <span
-                      className={
-                        styles.cost
-                      }
-                    >
-                      {getEffectiveCost(
-                        game,
-                        enemyPlayerId!,
-                        handCard
-                      )}
-                    </span>
-
-                    <span
-                      className={
-                        styles.cardType
-                      }
-                    >
-                      {card.cardType}
-                    </span>
-
-                    <strong>
-                      {card.name}
-                    </strong>
-
-                    {card.subtitle && (
-                      <small
-                        className={
-                          styles.cardSubtitle
-                        }
-                      >
-                        {card.subtitle}
-                      </small>
-                    )}
-
-                    {card.abilities[0] && (
-                      <p
-                        className={
-                          styles.handAbility
-                        }
-                      >
-                        <b>
-                          {
-                            card.abilities[0]
-                              .name
-                          }
-                          .
-                        </b>{" "}
-                        {
-                          card.abilities[0]
-                            .text
-                        }
-                      </p>
-                    )}
-                  </button>
-                );
+            <div
+              className={
+                styles.sectionTitle
               }
-            )}
-          </div>
-        </section>
-      )}
+            >
+              Opponent&apos;s
+              Revealed Hand
+            </div>
+
+            <div
+              className={
+                styles.hand
+              }
+            >
+              {enemyPlayer!.hand.map(
+                (
+                  handCard
+                ) => {
+                  const card =
+                    getGameCard(
+                      handCard.cardId
+                    );
+
+                  return (
+                    <button
+                      key={
+                        handCard.instanceId
+                      }
+                      className={`${styles.handCard} ${styles.targetableHandCard}`}
+                      onClick={() =>
+                        targetEnemyHandCard(
+                          handCard
+                        )
+                      }
+                      onDragOver={(
+                        event
+                      ) => {
+                        event.preventDefault();
+                      }}
+                      onDrop={(
+                        event
+                      ) => {
+                        event.preventDefault();
+
+                        targetEnemyHandCard(
+                          handCard
+                        );
+                      }}
+                    >
+                      <span
+                        className={
+                          styles.cost
+                        }
+                      >
+                        {getEffectiveCost(
+                          game,
+                          enemyPlayerId!,
+                          handCard
+                        )}
+                      </span>
+
+                      <CardArtwork
+                        card={
+                          card
+                        }
+                        className={
+                          styles.handArtwork
+                        }
+                      />
+
+                      <span
+                        className={
+                          styles.cardType
+                        }
+                      >
+                        {
+                          card.cardType
+                        }
+                      </span>
+
+                      <strong
+                        className={
+                          styles.handCardName
+                        }
+                      >
+                        {card.name}
+                      </strong>
+                    </button>
+                  );
+                }
+              )}
+            </div>
+          </section>
+        )}
 
       {/* OPPONENT BOARD */}
 
       <Board
         title="Opponent's Board"
-        units={enemyPlayer!.board}
+        units={
+          enemyPlayer!.board
+        }
         state={game}
         targetable={
           isUnitTargetable
@@ -1349,44 +2234,28 @@ export default function GreatGamePlayPage() {
         onUnitClick={
           handleUnitTarget
         }
+        selectedInstanceId={
+          selectedAttacker
+        }
       />
 
-      {/* DIRECT MILITARY ATTACK */}
-
-      {pendingConflict?.kind ===
-        "military" &&
-        getMilitaryTargetOptions(
-          game,
-          pendingConflict
-            .attackerInstanceId
-        ).canAttackStanding && (
-          <div
-            className={
-              styles.standingTarget
-            }
-          >
-            <button
-              onClick={attackStanding}
-            >
-              <span>⚔</span>
-              Attack{" "}
-              {playerName(
-                enemyPlayerId!
-              )}{" "}
-              Standing
-            </button>
-          </div>
-        )}
-
-      <div className={styles.battleLine}>
-        <span>✦ The Realm ✦</span>
+      <div
+        className={
+          styles.battleLine
+        }
+      >
+        <span>
+          ✦ The Realm ✦
+        </span>
       </div>
 
       {/* ACTIVE BOARD */}
 
       <Board
         title="Your Board"
-        units={activePlayer!.board}
+        units={
+          activePlayer!.board
+        }
         state={game}
         targetable={
           isUnitTargetable
@@ -1394,7 +2263,32 @@ export default function GreatGamePlayPage() {
         onUnitClick={
           handleUnitTarget
         }
-        renderActions={(unit) => (
+        selectedInstanceId={
+          selectedAttacker
+        }
+        canReceivePlay={
+          Boolean(
+            canReceiveBoardPlay
+          )
+        }
+        onBoardClick={
+          canReceiveBoardPlay
+            ? confirmSelectedOnBoard
+            : undefined
+        }
+        onBoardDragOver={
+          canReceiveBoardPlay
+            ? handleBoardDragOver
+            : undefined
+        }
+        onBoardDrop={
+          canReceiveBoardPlay
+            ? handleBoardDrop
+            : undefined
+        }
+        renderActions={(
+          unit
+        ) => (
           <>
             <button
               disabled={
@@ -1406,10 +2300,14 @@ export default function GreatGamePlayPage() {
                     pendingConflict
                 )
               }
-              onClick={(event) => {
+              onClick={(
+                event
+              ) => {
                 event.stopPropagation();
 
-                beginMilitary(unit);
+                beginMilitary(
+                  unit
+                );
               }}
             >
               Military
@@ -1429,10 +2327,14 @@ export default function GreatGamePlayPage() {
                       pendingConflict
                   )
                 }
-                onClick={(event) => {
+                onClick={(
+                  event
+                ) => {
                   event.stopPropagation();
 
-                  beginPolitical(unit);
+                  beginPolitical(
+                    unit
+                  );
                 }}
               >
                 Political
@@ -1442,17 +2344,21 @@ export default function GreatGamePlayPage() {
         )}
       />
 
-      {/* ACTIVE PLAYER HEADER */}
+      {/* PLAYER HUD */}
 
       <PlayerHeader
-        playerId={activePlayerId!}
+        playerId={
+          activePlayerId!
+        }
         state={game}
       />
 
       {/* HAND */}
 
       <section
-        className={styles.handSection}
+        className={
+          styles.handSection
+        }
       >
         <div
           className={
@@ -1469,8 +2375,8 @@ export default function GreatGamePlayPage() {
             </div>
 
             <small>
-              {activePlayer!.hand.length}
-              /8 cards
+              Drag a card or
+              click to select it
             </small>
           </div>
 
@@ -1478,32 +2384,63 @@ export default function GreatGamePlayPage() {
             className={
               styles.endTurnButton
             }
-            onClick={endTurn}
+            onClick={
+              endTurn
+            }
           >
             End Turn
           </button>
         </div>
 
-        <div className={styles.hand}>
+        <div
+          className={
+            styles.hand
+          }
+        >
           {activePlayer!.hand.map(
             (handCard) => (
               <HandCard
                 key={
                   handCard.instanceId
                 }
-                handCard={handCard}
-                state={game}
+                handCard={
+                  handCard
+                }
+                state={
+                  game
+                }
                 playerId={
                   activePlayerId!
                 }
-                disabled={Boolean(
-                  pendingPlay ||
+                selected={
+                  pendingPlay?.handInstanceId ===
+                  handCard.instanceId
+                }
+                dragging={
+                  draggingHandInstanceId ===
+                  handCard.instanceId
+                }
+                interactionLocked={
+                  Boolean(
                     pendingConflict
-                )}
+                  ) ||
+                  irreversibleVeiledSight
+                }
                 onPlay={() =>
                   beginPlayCard(
                     handCard
                   )
+                }
+                onDragStart={(
+                  event
+                ) =>
+                  handleHandDragStart(
+                    event,
+                    handCard
+                  )
+                }
+                onDragEnd={
+                  handleHandDragEnd
                 }
               />
             )
@@ -1511,10 +2448,12 @@ export default function GreatGamePlayPage() {
         </div>
       </section>
 
-      {/* GAME LOG */}
+      {/* CHRONICLE */}
 
       <section
-        className={styles.logSection}
+        className={
+          styles.logSection
+        }
       >
         <div
           className={
@@ -1524,45 +2463,379 @@ export default function GreatGamePlayPage() {
           Chronicle
         </div>
 
-        <div className={styles.log}>
+        <div
+          className={
+            styles.log
+          }
+        >
           {[...game.log]
             .reverse()
-            .slice(0, 20)
-            .map((entry) => (
-              <div
-                key={entry.id}
-                className={
-                  styles.logEntry
-                }
-              >
-                <span>
-                  T{entry.turn}
-                </span>
+            .slice(0, 30)
+            .map(
+              (entry) => (
+                <div
+                  key={
+                    entry.id
+                  }
+                  className={
+                    styles.logEntry
+                  }
+                >
+                  <span>
+                    T
+                    {
+                      entry.turn
+                    }
+                  </span>
 
-                <p>{entry.message}</p>
-              </div>
-            ))}
+                  <p>
+                    {
+                      entry.message
+                    }
+                  </p>
+                </div>
+              )
+            )}
         </div>
       </section>
+
+      {/* SELECTED HAND CARD */}
+
+      {selectedHandCard &&
+        selectedCard && (
+          <>
+            <div
+              className={
+                styles.selectionShade
+              }
+              aria-hidden
+            />
+
+            <SelectedCardPreview
+              card={
+                selectedCard
+              }
+              handCard={
+                selectedHandCard
+              }
+              state={game}
+              playerId={
+                activePlayerId!
+              }
+              pendingPlay={
+                pendingPlay!
+              }
+              canCancel={
+                !irreversibleVeiledSight
+              }
+              onCancel={
+                cancelSelection
+              }
+              onConfirm={
+                confirmSelectedOnBoard
+              }
+            />
+          </>
+        )}
     </main>
   );
 }
 
 // ─────────────────────────────────────────────
-// Player Header
+// Mulligan screen
+// ─────────────────────────────────────────────
+
+function MulliganScreen({
+  game,
+  selectedIds,
+  onToggle,
+  onConfirm,
+  onRestart,
+  error,
+}: {
+  game: GameState;
+
+  selectedIds: string[];
+
+  onToggle: (
+    instanceId: string
+  ) => void;
+
+  onConfirm: () => void;
+
+  onRestart: () => void;
+
+  error: string | null;
+}) {
+  const playerId =
+    game.activePlayerId;
+
+  const player =
+    game.players[
+      playerId
+    ];
+
+  return (
+    <main
+      className={
+        styles.game
+      }
+    >
+      <div
+        className={
+          styles.pageBackground
+        }
+        aria-hidden
+      />
+
+      <header
+        className={
+          styles.topbar
+        }
+      >
+        <div>
+          <span
+            className={
+              styles.eyebrow
+            }
+          >
+            Before the Game
+          </span>
+
+          <h1
+            className={
+              styles.title
+            }
+          >
+            Opening Hand
+          </h1>
+        </div>
+
+        <button
+          className={
+            styles.smallButton
+          }
+          onClick={
+            onRestart
+          }
+        >
+          New Game
+        </button>
+      </header>
+
+      <section
+        className={
+          styles.mulliganIntro
+        }
+      >
+        <span>
+          {playerName(
+            playerId
+          )}
+        </span>
+
+        <h2>
+          Choose cards to
+          replace
+        </h2>
+
+        <p>
+          Selected cards are set
+          aside, replacements are
+          drawn, then the replaced
+          cards are shuffled back
+          into your deck.
+        </p>
+      </section>
+
+      {error && (
+        <div
+          className={
+            styles.error
+          }
+        >
+          {error}
+        </div>
+      )}
+
+      <div
+        className={
+          styles.mulliganGrid
+        }
+      >
+        {player.hand.map(
+          (handCard) => {
+            const card =
+              getGameCard(
+                handCard.cardId
+              );
+
+            const selected =
+              selectedIds.includes(
+                handCard.instanceId
+              );
+
+            return (
+              <button
+                key={
+                  handCard.instanceId
+                }
+                className={`${styles.mulliganCard} ${
+                  selected
+                    ? styles.mulliganSelected
+                    : ""
+                }`}
+                onClick={() =>
+                  onToggle(
+                    handCard.instanceId
+                  )
+                }
+              >
+                <span
+                  className={
+                    styles.cost
+                  }
+                >
+                  {
+                    card.cost
+                  }
+                </span>
+
+                <CardArtwork
+                  card={card}
+                  className={
+                    styles.mulliganArtwork
+                  }
+                />
+
+                <span
+                  className={
+                    styles.cardType
+                  }
+                >
+                  {
+                    card.cardType
+                  }
+                </span>
+
+                <strong>
+                  {
+                    card.name
+                  }
+                </strong>
+
+                {isUnitCard(
+                  card
+                ) && (
+                  <div
+                    className={
+                      styles.miniStats
+                    }
+                  >
+                    <span>
+                      ⚔{" "}
+                      {
+                        card.power
+                      }
+                    </span>
+
+                    {card.cardType ===
+                      "character" && (
+                      <span>
+                        ♛{" "}
+                        {
+                          card.influence
+                        }
+                      </span>
+                    )}
+
+                    <span>
+                      ♥{" "}
+                      {
+                        card.health
+                      }
+                    </span>
+                  </div>
+                )}
+
+                <div
+                  className={
+                    styles.mulliganMark
+                  }
+                >
+                  {selected
+                    ? "Replace"
+                    : "Keep"}
+                </div>
+              </button>
+            );
+          }
+        )}
+      </div>
+
+      <div
+        className={
+          styles.mulliganFooter
+        }
+      >
+        <div>
+          <strong>
+            {
+              selectedIds.length
+            }
+          </strong>{" "}
+          selected for replacement
+        </div>
+
+        <button
+          className={
+            styles.primaryButton
+          }
+          onClick={
+            onConfirm
+          }
+        >
+          {selectedIds.length >
+          0
+            ? `Replace ${selectedIds.length}`
+            : "Keep All"}
+        </button>
+      </div>
+    </main>
+  );
+}
+
+// ─────────────────────────────────────────────
+// Player HUD
 // ─────────────────────────────────────────────
 
 function PlayerHeader({
   playerId,
   state,
   opponent = false,
+  standingTarget = false,
+  standingTargetType = null,
+  onStandingClick,
 }: {
   playerId: PlayerId;
+
   state: GameState;
+
   opponent?: boolean;
+
+  standingTarget?: boolean;
+
+  standingTargetType?:
+    | "military"
+    | "political"
+    | null;
+
+  onStandingClick?: () => void;
 }) {
   const player =
-    state.players[playerId];
+    state.players[
+      playerId
+    ];
 
   return (
     <section
@@ -1572,19 +2845,46 @@ function PlayerHeader({
           : ""
       }`}
     >
-      <div
-        className={
-          styles.playerIdentity
+      <button
+        className={`${styles.standingBox} ${
+          standingTarget
+            ? styles.standingBoxTarget
+            : ""
+        }`}
+        disabled={
+          !standingTarget
+        }
+        onClick={
+          standingTarget
+            ? onStandingClick
+            : undefined
         }
       >
         <span>
-          {playerName(playerId)}
+          {playerName(
+            playerId
+          )}
         </span>
 
         <strong>
-          {player.standing} Standing
+          {
+            player.standing
+          }
         </strong>
-      </div>
+
+        <small>
+          Standing
+        </small>
+
+        {standingTarget && (
+          <em>
+            {standingTargetType ===
+            "military"
+              ? "⚔ Attack"
+              : "♛ Claim"}
+          </em>
+        )}
+      </button>
 
       <div
         className={
@@ -1592,50 +2892,80 @@ function PlayerHeader({
         }
       >
         {!opponent && (
-          <span>
-            Command{" "}
-            <strong>
-              {player.command}/
-              {player.maxCommand}
-            </strong>
-          </span>
+          <HudStat
+            label="Command"
+            value={`${player.command}/${player.maxCommand}`}
+            accent
+          />
         )}
 
-        <span>
-          Deck{" "}
-          <strong>
-            {player.deck.length}
-          </strong>
-        </span>
+        <HudStat
+          label="Deck"
+          value={
+            player.deck.length
+          }
+        />
 
-        <span>
-          Hand{" "}
-          <strong>
-            {player.hand.length}
-          </strong>
-        </span>
+        <HudStat
+          label="Hand"
+          value={`${player.hand.length}/8`}
+        />
 
-        <span>
-          Discard{" "}
-          <strong>
-            {player.discard.length}
-          </strong>
-        </span>
+        <HudStat
+          label="Discard"
+          value={
+            player.discard.length
+          }
+        />
 
-        {player.burnedCards.length >
+        <HudStat
+          label="Burned"
+          value={
+            player.burnedCards
+              .length
+          }
+        />
+
+        {player.nextCommandBonus >
           0 && (
-          <span>
-            Burned{" "}
-            <strong>
-              {
-                player.burnedCards
-                  .length
-              }
-            </strong>
-          </span>
+          <HudStat
+            label="Next Turn"
+            value={`+${player.nextCommandBonus} Command`}
+            accent
+          />
         )}
       </div>
     </section>
+  );
+}
+
+function HudStat({
+  label,
+  value,
+  accent = false,
+}: {
+  label: string;
+  value:
+    | string
+    | number;
+  accent?: boolean;
+}) {
+  return (
+    <div
+      className={`${styles.hudStat} ${
+        accent
+          ? styles.hudStatAccent
+          : ""
+      }`}
+    >
+      <span>
+        {label}
+      </span>
+
+      <strong>
+        {value}
+      </strong>
+    </div>
   );
 }
 
@@ -1649,10 +2979,17 @@ function Board({
   state,
   targetable,
   onUnitClick,
+  selectedInstanceId,
   renderActions,
+  canReceivePlay = false,
+  onBoardClick,
+  onBoardDragOver,
+  onBoardDrop,
 }: {
   title: string;
+
   units: UnitState[];
+
   state: GameState;
 
   targetable: (
@@ -1663,13 +3000,31 @@ function Board({
     unit: UnitState
   ) => void;
 
+  selectedInstanceId?:
+    | string
+    | null;
+
   renderActions?: (
     unit: UnitState
   ) => ReactNode;
+
+  canReceivePlay?: boolean;
+
+  onBoardClick?: () => void;
+
+  onBoardDragOver?: (
+    event: DragEvent
+  ) => void;
+
+  onBoardDrop?: (
+    event: DragEvent
+  ) => void;
 }) {
   return (
     <section
-      className={styles.boardSection}
+      className={
+        styles.boardSection
+      }
     >
       <div
         className={
@@ -1686,64 +3041,106 @@ function Board({
           </div>
 
           <small>
-            {units.length}/6 unit
-            slots
+            {units.length}/6
+            unit slots
           </small>
         </div>
       </div>
 
-      <div className={styles.board}>
-        {units.length === 0 && (
+      <div
+        className={`${styles.board} ${
+          canReceivePlay
+            ? styles.playableBoard
+            : ""
+        }`}
+        onClick={
+          canReceivePlay
+            ? onBoardClick
+            : undefined
+        }
+        onDragOver={
+          onBoardDragOver
+        }
+        onDrop={
+          onBoardDrop
+        }
+      >
+        {units.length ===
+          0 && (
           <div
             className={
               styles.emptyBoard
             }
           >
-            No units in play.
+            {canReceivePlay
+              ? "Click or drop here to deploy."
+              : "No units in play."}
           </div>
         )}
 
-        {units.map((unit) => (
-          <BoardUnit
-            key={unit.instanceId}
-            unit={unit}
-            state={state}
-            targetable={targetable(
-              unit
-            )}
-            onClick={() =>
-              onUnitClick(unit)
-            }
-            actions={renderActions?.(
-              unit
-            )}
-          />
-        ))}
+        {units.map(
+          (unit) => (
+            <BoardUnit
+              key={
+                unit.instanceId
+              }
+              unit={unit}
+              state={state}
+              targetable={
+                targetable(
+                  unit
+                )
+              }
+              selected={
+                selectedInstanceId ===
+                unit.instanceId
+              }
+              onClick={() =>
+                onUnitClick(
+                  unit
+                )
+              }
+              actions={
+                renderActions?.(
+                  unit
+                )
+              }
+            />
+          )
+        )}
       </div>
     </section>
   );
 }
 
 // ─────────────────────────────────────────────
-// Board Unit
+// Board card
 // ─────────────────────────────────────────────
 
 function BoardUnit({
   unit,
   state,
   targetable,
+  selected,
   onClick,
   actions,
 }: {
   unit: UnitState;
+
   state: GameState;
+
   targetable: boolean;
+
+  selected: boolean;
+
   onClick: () => void;
+
   actions?: ReactNode;
 }) {
-  const card = getGameCard(
-    unit.cardId
-  );
+  const card =
+    getGameCard(
+      unit.cardId
+    );
 
   if (!isUnitCard(card)) {
     return null;
@@ -1762,32 +3159,91 @@ function BoardUnit({
     );
 
   const maxHealth =
-    getMaximumHealth(unit);
+    getMaximumHealth(
+      unit
+    );
+
+  const weylarProgress =
+    card.id ===
+    "weylar-rocke"
+      ? Math.min(
+          3,
+          unit.counters[
+            "turns-in-play"
+          ] ?? 0
+        )
+      : null;
 
   return (
     <div
       className={[
         styles.unitCard,
+
         targetable
           ? styles.targetableUnit
           : "",
+
+        selected
+          ? styles.selectedUnit
+          : "",
+
         unit.exhausted
           ? styles.exhaustedUnit
           : "",
+
         unit.grounded
           ? styles.groundedUnit
           : "",
       ]
         .filter(Boolean)
         .join(" ")}
-      onClick={
-        targetable
-          ? onClick
-          : undefined
-      }
+      onClick={(
+        event
+      ) => {
+        event.stopPropagation();
+
+        if (
+          targetable
+        ) {
+          onClick();
+        }
+      }}
+      onDragOver={(
+        event
+      ) => {
+        if (
+          targetable
+        ) {
+          event.preventDefault();
+
+          event.stopPropagation();
+        }
+      }}
+      onDrop={(
+        event
+      ) => {
+        if (
+          targetable
+        ) {
+          event.preventDefault();
+
+          event.stopPropagation();
+
+          onClick();
+        }
+      }}
     >
+      <CardArtwork
+        card={card}
+        className={
+          styles.boardArtwork
+        }
+      />
+
       <div
-        className={styles.unitTop}
+        className={
+          styles.unitTop
+        }
       >
         <span
           className={
@@ -1808,7 +3264,9 @@ function BoardUnit({
         )}
       </div>
 
-      <h3>{card.name}</h3>
+      <h3>
+        {card.name}
+      </h3>
 
       {card.subtitle && (
         <div
@@ -1820,32 +3278,47 @@ function BoardUnit({
         </div>
       )}
 
-      <div className={styles.stats}>
-        <span title="Power">
-          <b>⚔</b> {power}
+      <div
+        className={
+          styles.stats
+        }
+      >
+        <span>
+          <b>⚔</b>{" "}
+          {power}
         </span>
 
         {card.cardType ===
           "character" && (
-          <span title="Influence">
-            <b>♛</b> {influence}
+          <span>
+            <b>♛</b>{" "}
+            {influence}
           </span>
         )}
 
-        <span title="Health">
+        <span>
           <b>♥</b>{" "}
-          {unit.currentHealth}/
-          {maxHealth}
+          {
+            unit.currentHealth
+          }
+          /{maxHealth}
         </span>
       </div>
 
-      {card.traits.length > 0 && (
+      {card.traits.length >
+        0 && (
         <div
-          className={styles.traits}
+          className={
+            styles.traits
+          }
         >
           {card.traits.map(
             (trait) => (
-              <span key={trait}>
+              <span
+                key={
+                  trait
+                }
+              >
                 {trait}
               </span>
             )
@@ -1856,18 +3329,48 @@ function BoardUnit({
       {card.abilities.map(
         (ability) => (
           <div
-            key={ability.id}
+            key={
+              ability.id
+            }
             className={
               styles.ability
             }
           >
             <strong>
-              {ability.name}
+              {
+                ability.name
+              }
             </strong>
 
-            <p>{ability.text}</p>
+            <p>
+              {
+                ability.text
+              }
+            </p>
           </div>
         )
+      )}
+
+      {weylarProgress !==
+        null && (
+        <div
+          className={
+            styles.skillProgress
+          }
+        >
+          <span>
+            The Price of
+            Loyalty
+          </span>
+
+          <strong>
+            {unit.flags[
+              "weylar-triggered"
+            ]
+              ? "Triggered"
+              : `${weylarProgress}/3`}
+          </strong>
+        </div>
       )}
 
       {unit.attachedArtifactId && (
@@ -1893,11 +3396,15 @@ function BoardUnit({
         }
       >
         {unit.exhausted && (
-          <span>Exhausted</span>
+          <span>
+            Exhausted
+          </span>
         )}
 
         {unit.grounded && (
-          <span>Grounded</span>
+          <span>
+            Grounded
+          </span>
         )}
       </div>
 
@@ -1915,37 +3422,56 @@ function BoardUnit({
 }
 
 // ─────────────────────────────────────────────
-// Hand Card
+// Hand card
 // ─────────────────────────────────────────────
 
 function HandCard({
   handCard,
   state,
   playerId,
-  disabled,
+  selected,
+  dragging,
+  interactionLocked,
   onPlay,
+  onDragStart,
+  onDragEnd,
 }: {
   handCard: HandCardState;
+
   state: GameState;
+
   playerId: PlayerId;
-  disabled: boolean;
+
+  selected: boolean;
+
+  dragging: boolean;
+
+  interactionLocked: boolean;
+
   onPlay: () => void;
+
+  onDragStart: (
+    event: DragEvent
+  ) => void;
+
+  onDragEnd: () => void;
 }) {
-  const card = getGameCard(
-    handCard.cardId
-  );
+  const card =
+    getGameCard(
+      handCard.cardId
+    );
 
-  const cost = getEffectiveCost(
-    state,
-    playerId,
-    handCard
-  );
-
-  const player =
-    state.players[playerId];
+  const cost =
+    getEffectiveCost(
+      state,
+      playerId,
+      handCard
+    );
 
   const affordable =
-    player.command >= cost;
+    state.players[
+      playerId
+    ].command >= cost;
 
   return (
     <button
@@ -1955,19 +3481,47 @@ function HandCard({
         !affordable
           ? styles.unaffordableCard
           : "",
+
+        selected
+          ? styles.selectedHandCard
+          : "",
+
+        dragging
+          ? styles.draggingHandCard
+          : "",
       ]
         .filter(Boolean)
         .join(" ")}
       disabled={
-        disabled || !affordable
+        interactionLocked
       }
-      onClick={onPlay}
+      onClick={
+        onPlay
+      }
+      draggable={
+        !interactionLocked
+      }
+      onDragStart={
+        onDragStart
+      }
+      onDragEnd={
+        onDragEnd
+      }
     >
       <span
-        className={styles.cost}
+        className={
+          styles.cost
+        }
       >
         {cost}
       </span>
+
+      <CardArtwork
+        card={card}
+        className={
+          styles.handArtwork
+        }
+      />
 
       <span
         className={
@@ -2002,14 +3556,17 @@ function HandCard({
           }
         >
           <span>
-            <b>⚔</b> {card.power}
+            <b>⚔</b>{" "}
+            {card.power}
           </span>
 
           {card.cardType ===
             "character" && (
             <span>
               <b>♛</b>{" "}
-              {card.influence}
+              {
+                card.influence
+              }
             </span>
           )}
 
@@ -2020,13 +3577,20 @@ function HandCard({
         </div>
       )}
 
-      {card.traits.length > 0 && (
+      {card.traits.length >
+        0 && (
         <div
-          className={styles.traits}
+          className={
+            styles.traits
+          }
         >
           {card.traits.map(
             (trait) => (
-              <span key={trait}>
+              <span
+                key={
+                  trait
+                }
+              >
                 {trait}
               </span>
             )
@@ -2037,18 +3601,233 @@ function HandCard({
       {card.abilities.map(
         (ability) => (
           <p
-            key={ability.id}
+            key={
+              ability.id
+            }
             className={
               styles.handAbility
             }
           >
             <b>
-              {ability.name}.
+              {
+                ability.name
+              }
+              .
             </b>{" "}
             {ability.text}
           </p>
         )
       )}
     </button>
+  );
+}
+
+// ─────────────────────────────────────────────
+// Selected large card
+// ─────────────────────────────────────────────
+
+function SelectedCardPreview({
+  card,
+  handCard,
+  state,
+  playerId,
+  pendingPlay,
+  canCancel,
+  onCancel,
+  onConfirm,
+}: {
+  card: GameCard;
+
+  handCard: HandCardState;
+
+  state: GameState;
+
+  playerId: PlayerId;
+
+  pendingPlay: PendingPlay;
+
+  canCancel: boolean;
+
+  onCancel: () => void;
+
+  onConfirm: () => void;
+}) {
+  const cost =
+    getEffectiveCost(
+      state,
+      playerId,
+      handCard
+    );
+
+  const confirmable =
+    pendingPlay.kind ===
+      "deploy" ||
+    pendingPlay.kind ===
+      "confirm" ||
+    (
+      pendingPlay.kind ===
+        "veiled-sight" &&
+      !pendingPlay.committed
+    );
+
+  const label =
+    pendingPlay.kind ===
+      "deploy"
+      ? "Deploy"
+      : pendingPlay.kind ===
+          "veiled-sight"
+        ? "Deploy Saera"
+        : "Play Card";
+
+  return (
+    <div
+      className={
+        styles.selectedCardPreview
+      }
+    >
+      <div
+        className={
+          styles.selectedCardInner
+        }
+      >
+        <span
+          className={
+            styles.selectedCost
+          }
+        >
+          {cost}
+        </span>
+
+        <CardArtwork
+          card={card}
+          className={
+            styles.selectedArtwork
+          }
+        />
+
+        <span
+          className={
+            styles.cardType
+          }
+        >
+          {card.cardType}
+        </span>
+
+        <h2>
+          {card.name}
+        </h2>
+
+        {card.subtitle && (
+          <div
+            className={
+              styles.cardSubtitle
+            }
+          >
+            {card.subtitle}
+          </div>
+        )}
+
+        {isUnitCard(card) && (
+          <div
+            className={
+              styles.selectedStats
+            }
+          >
+            <span>
+              ⚔ {card.power}
+            </span>
+
+            {card.cardType ===
+              "character" && (
+              <span>
+                ♛{" "}
+                {
+                  card.influence
+                }
+              </span>
+            )}
+
+            <span>
+              ♥ {card.health}
+            </span>
+          </div>
+        )}
+
+        {card.traits.length >
+          0 && (
+          <div
+            className={
+              styles.traits
+            }
+          >
+            {card.traits.map(
+              (trait) => (
+                <span
+                  key={
+                    trait
+                  }
+                >
+                  {trait}
+                </span>
+              )
+            )}
+          </div>
+        )}
+
+        {card.abilities.map(
+          (ability) => (
+            <div
+              key={
+                ability.id
+              }
+              className={
+                styles.selectedAbility
+              }
+            >
+              <strong>
+                {
+                  ability.name
+                }
+              </strong>
+
+              <p>
+                {
+                  ability.text
+                }
+              </p>
+            </div>
+          )
+        )}
+
+        <div
+          className={
+            styles.selectedActions
+          }
+        >
+          {canCancel && (
+            <button
+              onClick={
+                onCancel
+              }
+            >
+              Cancel
+            </button>
+          )}
+
+          {confirmable && (
+            <button
+              className={
+                styles.selectedConfirm
+              }
+              onClick={
+                onConfirm
+              }
+            >
+              {label}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

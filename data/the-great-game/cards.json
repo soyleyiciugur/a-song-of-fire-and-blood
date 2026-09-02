@@ -1,5 +1,31 @@
 [
   {
+    "id": "castle-swordsman",
+    "cardType": "character",
+    "name": "Castle Swordsman",
+    "cost": 1,
+    "power": 1,
+    "influence": 0,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "military"],
+    "generic": true
+  },
+  {
+    "id": "court-page",
+    "cardType": "character",
+    "name": "Court Page",
+    "cost": 1,
+    "power": 0,
+    "influence": 1,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": ["vanilla", "political"],
+    "generic": true
+  },
+  {
     "id": "northern-warrior",
     "cardType": "character",
     "name": "Northern Warrior",
@@ -125,7 +151,6 @@
     "roles": ["hybrid-vanilla"],
     "generic": true
   },
-
   {
     "id": "jacaelon-targaryen",
     "cardType": "character",
@@ -300,7 +325,6 @@
     "roles": ["control", "value"],
     "linkedCharacterId": "weylar-rocke"
   },
-
   {
     "id": "jhagar",
     "cardType": "dragon",
@@ -358,7 +382,22 @@
     ],
     "roles": ["core", "military", "finisher"]
   },
-
+  {
+    "id": "word-in-the-right-ear",
+    "cardType": "event",
+    "name": "A Word in the Right Ear",
+    "cost": 1,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "word-in-the-right-ear",
+        "name": "A Word in the Right Ear",
+        "trigger": "event",
+        "text": "Choose a Character. It gains +1 Influence until the end of this turn."
+      }
+    ],
+    "roles": ["political", "utility"]
+  },
   {
     "id": "trial-by-combat",
     "cardType": "event",
@@ -407,7 +446,6 @@
     ],
     "roles": ["military", "tempo"]
   },
-
   {
     "id": "blackfyre",
     "cardType": "artifact",
@@ -442,7 +480,6 @@
     ],
     "roles": ["military", "control"]
   },
-
   {
     "id": "dragonstone",
     "cardType": "location",
@@ -490,5 +527,24 @@
       }
     ],
     "roles": ["value", "support"]
+  },
+  {
+    "id": "royal-favor",
+    "cardType": "event",
+    "name": "Royal Favor",
+    "subtitle": "Second Player Boon",
+    "cost": 0,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "royal-favor",
+        "name": "Royal Favor",
+        "trigger": "event",
+        "text": "Gain 1 Command this turn."
+      }
+    ],
+    "roles": ["utility", "resource"],
+    "deckable": false,
+    "special": "royal-favor"
   }
 ]

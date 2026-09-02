@@ -1,203 +1,111 @@
-// lib/the-great-game/deck.ts
+// lib/the-great-game/cards.ts
 
-import {
-  findGameCard,
-  getAllGameCards,
-  isUnique,
-  isUnitCard,
-} from "./cards";
+import cardsData from "@/data/the-great-game/cards.json";
 
-export interface DeckValidationResult {
-  valid: boolean;
-  errors: string[];
+import type {
+  CharacterCard,
+  DragonCard,
+  GameCard,
+  Trait,
+} from "./types";
+
+const CARDS =
+  cardsData as unknown as GameCard[];
+
+export function getAllGameCards(): GameCard[] {
+  return CARDS;
 }
 
-export function validateDeck(
-  cardIds: string[]
-): DeckValidationResult {
-  const errors: string[] = [];
-
-  if (cardIds.length !== 30) {
-    errors.push(
-      `Deck must contain exactly 30 cards. Current: ${cardIds.length}.`
-    );
-  }
-
-  const counts = new Map<string, number>();
-
-  for (const cardId of cardIds) {
-    const card = findGameCard(cardId);
-
-    if (!card) {
-      errors.push(`Unknown card: ${cardId}`);
-      continue;
-    }
-
-    counts.set(cardId, (counts.get(cardId) ?? 0) + 1);
-  }
-
-  for (const [cardId, count] of counts.entries()) {
-    const card = findGameCard(cardId);
-
-    if (!card) continue;
-
-    const maxCopies = isUnique(card) ? 1 : 2;
-
-    if (count > maxCopies) {
-      errors.push(
-        `${card.name} allows maximum ${maxCopies} ${
-          maxCopies === 1 ? "copy" : "copies"
-        }.`
-      );
-    }
-  }
-
-  const validCards = cardIds
-    .map(findGameCard)
-    .filter((card): card is NonNullable<typeof card> =>
-      Boolean(card)
-    );
-
-  const unitCount = validCards.filter(isUnitCard).length;
-
-  if (unitCount < 15) {
-    errors.push(
-      `Deck must contain at least 15 Characters/Dragons. Current: ${unitCount}.`
-    );
-  }
-
-  const locations = validCards.filter(
-    (card) => card.cardType === "location"
-  );
-
-  const distinctLocations = new Set(
-    locations.map((card) => card.id)
-  );
-
-  if (distinctLocations.size > 2) {
-    errors.push(
-      `Deck may contain at most 2 different Locations.`
-    );
-  }
-
-  for (const locationId of distinctLocations) {
-    const count = counts.get(locationId) ?? 0;
-
-    if (count > 1) {
-      const location = findGameCard(locationId);
-
-      errors.push(
-        `${location?.name ?? locationId} may only appear once in a deck.`
-      );
-    }
-  }
-
-  return {
-    valid: errors.length === 0,
-    errors,
-  };
-}
-
-/**
- * Temporary test deck.
- *
- * This is deliberately not a final balanced deck.
- * It only exists so the local engine can boot
- * without requiring a deck builder first.
- */
-export function createTestDeck(): string[] {
-  const deck = [
-    // Named
-    "jacaelon-targaryen",
-    "gaelor-targaryen",
-    "alester-dayne",
-    "renrose-tyrell",
-    "cordin-poole",
-    "saera-targaryen",
-    "baelenys-targaryen",
-    "weylar-rocke",
-
-    // Dragons
-    "jhagar",
-    "cloudgazer",
-    "maelwing",
-
-    // Generics x2
-    "northern-warrior",
-    "northern-warrior",
-
-    "baratheon-man-at-arms",
-    "baratheon-man-at-arms",
-
-    "dornish-sandshield",
-    "dornish-sandshield",
-
-    "tully-river-guard",
-    "tully-river-guard",
-
-    "reach-courtier",
-    "reach-courtier",
-
-    "lannister-household-knight",
-    "lannister-household-knight",
-
-    // Events
-    "trial-by-combat",
-    "oldtown-massacre",
-    "brothers-tilt",
-
-    // Artifacts
-    "blackfyre",
-    "dark-sister",
-
-    // Locations
-    "dragonstone",
-    "kings-landing",
-  ];
-
-  if (deck.length !== 30) {
-    throw new Error(
-      `Test deck construction error: expected 30 cards, got ${deck.length}.`
-    );
-  }
-
-  return deck;
-}
-
-/**
- * Dev helper: validates the card database itself.
- */
-export function validateGenericStatSkeletons(): string[] {
-  const errors: string[] = [];
-
-  const generics = getAllGameCards().filter(
+export function getAllDeckableGameCards(): GameCard[] {
+  return CARDS.filter(
     (card) =>
-      card.cardType === "character" &&
-      card.generic
+      card.deckable !== false
+  );
+}
+
+export function getGameCard(
+  cardId: string
+): GameCard {
+  const card = CARDS.find(
+    (candidate) =>
+      candidate.id === cardId
   );
 
-  const seen = new Map<string, string>();
-
-  for (const card of generics) {
-    if (card.cardType !== "character") continue;
-
-    const key = [
-      card.cost,
-      card.power,
-      card.influence,
-      card.health,
-    ].join(":");
-
-    const existing = seen.get(key);
-
-    if (existing) {
-      errors.push(
-        `Generic stat skeleton collision: ${existing} and ${card.name} both use ${key}.`
-      );
-    } else {
-      seen.set(key, card.name);
-    }
+  if (!card) {
+    throw new Error(
+      `The Great Game card not found: ${cardId}`
+    );
   }
 
-  return errors;
+  return card;
+}
+
+export function findGameCard(
+  cardId: string
+): GameCard | undefined {
+  return CARDS.find(
+    (card) =>
+      card.id === cardId
+  );
+}
+
+export function getCharacterCard(
+  cardId: string
+): CharacterCard | undefined {
+  const card =
+    findGameCard(cardId);
+
+  return card?.cardType ===
+    "character"
+    ? card
+    : undefined;
+}
+
+export function getDragonCard(
+  cardId: string
+): DragonCard | undefined {
+  const card =
+    findGameCard(cardId);
+
+  return card?.cardType ===
+    "dragon"
+    ? card
+    : undefined;
+}
+
+export function isUnitCard(
+  card: GameCard
+): card is
+  | CharacterCard
+  | DragonCard {
+  return (
+    card.cardType ===
+      "character" ||
+    card.cardType ===
+      "dragon"
+  );
+}
+
+export function hasTrait(
+  card: GameCard,
+  trait: Trait
+): boolean {
+  return card.traits.includes(
+    trait
+  );
+}
+
+export function isUnique(
+  card: GameCard
+): boolean {
+  return hasTrait(
+    card,
+    "unique"
+  );
+}
+
+export function isDeckable(
+  card: GameCard
+): boolean {
+  return card.deckable !== false;
 }

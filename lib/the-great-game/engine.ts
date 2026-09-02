@@ -39,15 +39,25 @@ export const DRAGON_BOARD_LIMIT = 2;
 export const MAX_COMMAND = 10;
 
 // ─────────────────────────────────────────────
-// Basic helpers
+// Helpers
 // ─────────────────────────────────────────────
 
 export function opponentOf(
   playerId: PlayerId
 ): PlayerId {
-  return playerId === "player1"
+  return playerId ===
+    "player1"
     ? "player2"
     : "player1";
+}
+
+function playerName(
+  playerId: PlayerId
+): string {
+  return playerId ===
+    "player1"
+    ? "Player 1"
+    : "Player 2";
 }
 
 function assertRule(
@@ -55,14 +65,18 @@ function assertRule(
   message: string
 ): asserts condition {
   if (!condition) {
-    throw new Error(message);
+    throw new Error(
+      message
+    );
   }
 }
 
 function cloneState(
   state: GameState
 ): GameState {
-  return structuredClone(state);
+  return structuredClone(
+    state
+  );
 }
 
 function nextRuntimeId(
@@ -72,7 +86,8 @@ function nextRuntimeId(
   const id =
     `${prefix}-${state.nextInstanceNumber}`;
 
-  state.nextInstanceNumber += 1;
+  state.nextInstanceNumber +=
+    1;
 
   return id;
 }
@@ -83,9 +98,15 @@ function addLog(
   playerId?: PlayerId
 ) {
   state.log.push({
-    id: state.log.length + 1,
-    turn: state.turnNumber,
+    id:
+      state.log.length +
+      1,
+
+    turn:
+      state.turnNumber,
+
     playerId,
+
     message,
   });
 }
@@ -96,13 +117,15 @@ function shuffle<T>(
   const copy = [...items];
 
   for (
-    let i = copy.length - 1;
+    let i =
+      copy.length - 1;
     i > 0;
     i--
   ) {
     const j =
       Math.floor(
-        Math.random() * (i + 1)
+        Math.random() *
+          (i + 1)
       );
 
     [
@@ -139,35 +162,6 @@ export function findUnit(
   );
 }
 
-export function getUnitOwner(
-  state: GameState,
-  instanceId: string
-): PlayerId | undefined {
-  const p1 =
-    state.players.player1.board.some(
-      (unit) =>
-        unit.instanceId ===
-        instanceId
-    );
-
-  if (p1) {
-    return "player1";
-  }
-
-  const p2 =
-    state.players.player2.board.some(
-      (unit) =>
-        unit.instanceId ===
-        instanceId
-    );
-
-  if (p2) {
-    return "player2";
-  }
-
-  return undefined;
-}
-
 function getHandCard(
   player: PlayerState,
   handInstanceId: string
@@ -188,12 +182,13 @@ function playerControlsCard(
     playerId
   ].board.some(
     (unit) =>
-      unit.cardId === cardId
+      unit.cardId ===
+      cardId
   );
 }
 
 // ─────────────────────────────────────────────
-// Effective Traits / stats
+// Traits / Stats
 // ─────────────────────────────────────────────
 
 export function unitHasTrait(
@@ -202,15 +197,22 @@ export function unitHasTrait(
   trait: Trait
 ): boolean {
   const card =
-    getGameCard(unit.cardId);
+    getGameCard(
+      unit.cardId
+    );
 
-  if (hasTrait(card, trait)) {
+  if (
+    hasTrait(
+      card,
+      trait
+    )
+  ) {
     return true;
   }
 
-  // Dark Sister grants Challenge.
   if (
-    trait === "challenge" &&
+    trait ===
+      "challenge" &&
     unit.attachedArtifactId ===
       "dark-sister"
   ) {
@@ -225,13 +227,16 @@ export function getEffectivePower(
   unit: UnitState
 ): number {
   const card =
-    getGameCard(unit.cardId);
+    getGameCard(
+      unit.cardId
+    );
 
   if (!isUnitCard(card)) {
     return 0;
   }
 
-  let power = card.power;
+  let power =
+    card.power;
 
   for (
     const modifier of
@@ -255,7 +260,10 @@ export function getEffectivePower(
     power += 2;
   }
 
-  return Math.max(0, power);
+  return Math.max(
+    0,
+    power
+  );
 }
 
 export function getEffectiveInfluence(
@@ -263,7 +271,9 @@ export function getEffectiveInfluence(
   unit: UnitState
 ): number {
   const card =
-    getGameCard(unit.cardId);
+    getGameCard(
+      unit.cardId
+    );
 
   if (
     card.cardType !==
@@ -280,7 +290,8 @@ export function getEffectiveInfluence(
     unit.modifiers
   ) {
     influence +=
-      modifier.influence ?? 0;
+      modifier.influence ??
+      0;
   }
 
   if (
@@ -308,7 +319,9 @@ export function getMaximumHealth(
   unit: UnitState
 ): number {
   const card =
-    getGameCard(unit.cardId);
+    getGameCard(
+      unit.cardId
+    );
 
   if (!isUnitCard(card)) {
     return 0;
@@ -344,28 +357,32 @@ export function getEffectiveCost(
       handCard.cardId
     );
 
-  let cost = card.cost;
+  let cost =
+    card.cost;
 
-  // Individual hand-card modifiers.
   for (
     const modifier of
     handCard.costModifiers
   ) {
-    cost += modifier.amount;
+    cost +=
+      modifier.amount;
   }
 
-  // Dragonstone.
+  // Dragonstone
   if (
-    card.cardType === "dragon" &&
+    card.cardType ===
+      "dragon" &&
     state.activeLocation
-      ?.cardId === "dragonstone"
+      ?.cardId ===
+      "dragonstone"
   ) {
     cost -= 1;
   }
 
-  // Bond — Jacaelon.
+  // Bonds
   if (
-    card.id === "jhagar" &&
+    card.id ===
+      "jhagar" &&
     playerControlsCard(
       state,
       playerId,
@@ -375,7 +392,6 @@ export function getEffectiveCost(
     cost -= 2;
   }
 
-  // Bond — Saera.
   if (
     card.id ===
       "cloudgazer" &&
@@ -388,9 +404,9 @@ export function getEffectiveCost(
     cost -= 2;
   }
 
-  // Bond — Baelenys.
   if (
-    card.id === "maelwing" &&
+    card.id ===
+      "maelwing" &&
     playerControlsCard(
       state,
       playerId,
@@ -400,28 +416,62 @@ export function getEffectiveCost(
     cost -= 2;
   }
 
-  // Oldtown.
+  // Royal Favor is a special resource token,
+  // not a normal Event for Oldtown purposes.
   if (
-    card.cardType === "event" &&
+    card.cardType ===
+      "event" &&
+    !card.special &&
     state.activeLocation
-      ?.cardId === "oldtown" &&
-    player.eventsPlayedThisTurn === 0
+      ?.cardId ===
+      "oldtown" &&
+    player.eventsPlayedThisTurn ===
+      0
   ) {
     cost -= 1;
   }
 
-  return Math.max(0, cost);
+  return Math.max(
+    0,
+    cost
+  );
 }
 
 // ─────────────────────────────────────────────
-// Draw / Burn
+// Hand creation / Draw / Burn
 // ─────────────────────────────────────────────
+
+function addCardToHandMutable(
+  state: GameState,
+  playerId: PlayerId,
+  cardId: string
+): HandCardState {
+  const card: HandCardState = {
+    instanceId:
+      nextRuntimeId(
+        state,
+        "hand"
+      ),
+
+    cardId,
+
+    costModifiers: [],
+  };
+
+  state.players[
+    playerId
+  ].hand.push(card);
+
+  return card;
+}
 
 interface DrawResult {
   success: boolean;
+
   burned: boolean;
 
   handInstanceId?: string;
+
   cardId?: string;
 }
 
@@ -438,7 +488,9 @@ function drawCardMutable(
   }
 ): DrawResult {
   const player =
-    state.players[playerId];
+    state.players[
+      playerId
+    ];
 
   const cardId =
     player.deck.shift();
@@ -447,7 +499,7 @@ function drawCardMutable(
     if (!options?.silent) {
       addLog(
         state,
-        "Could not draw: deck is empty.",
+        `${playerName(playerId)} cannot draw: the deck is empty.`,
         playerId
       );
     }
@@ -458,12 +510,13 @@ function drawCardMutable(
     };
   }
 
-  // Burn.
   if (
     player.hand.length >=
     HAND_LIMIT
   ) {
-    player.discard.push(cardId);
+    player.discard.push(
+      cardId
+    );
 
     player.burnedCards.push(
       cardId
@@ -472,7 +525,7 @@ function drawCardMutable(
     if (!options?.silent) {
       addLog(
         state,
-        `${getGameCard(cardId).name} was burned.`,
+        `${getGameCard(cardId).name} is burned. (${player.deck.length} cards remain in deck)`,
         playerId
       );
     }
@@ -484,47 +537,227 @@ function drawCardMutable(
     };
   }
 
-  const handCard: HandCardState =
-    {
-      instanceId:
+  const handCard =
+    addCardToHandMutable(
+      state,
+      playerId,
+      cardId
+    );
+
+  if (
+    options?.costModifier
+  ) {
+    handCard.costModifiers.push({
+      id:
         nextRuntimeId(
           state,
-          "hand"
+          "cost-mod"
         ),
-
-      cardId,
-
-      costModifiers: [],
-    };
-
-  if (options?.costModifier) {
-    handCard.costModifiers.push({
-      id: nextRuntimeId(
-        state,
-        "cost-mod"
-      ),
 
       ...options.costModifier,
     });
   }
 
-  player.hand.push(handCard);
-
   if (!options?.silent) {
     addLog(
       state,
-      `Drew ${getGameCard(cardId).name}.`,
+      `Drew ${getGameCard(cardId).name}. (${player.deck.length} cards remain in deck)`,
       playerId
     );
   }
 
   return {
     success: true,
+
     burned: false,
+
     handInstanceId:
       handCard.instanceId,
+
     cardId,
   };
+}
+
+// ─────────────────────────────────────────────
+// Mulligan
+// ─────────────────────────────────────────────
+
+function resolveMulliganMutable(
+  state: GameState,
+  action: Extract<
+    GameAction,
+    { type: "mulligan" }
+  >
+) {
+  const playerId =
+    state.activePlayerId;
+
+  const expectedPlayer =
+    state.phase ===
+      "mulligan-player1"
+      ? "player1"
+      : state.phase ===
+          "mulligan-player2"
+        ? "player2"
+        : null;
+
+  assertRule(
+    expectedPlayer !== null,
+    "The opening mulligan has already ended."
+  );
+
+  assertRule(
+    playerId ===
+      expectedPlayer,
+    "It is not this player's mulligan."
+  );
+
+  const player =
+    state.players[
+      playerId
+    ];
+
+  const uniqueIds =
+    Array.from(
+      new Set(
+        action.replaceHandInstanceIds
+      )
+    );
+
+  assertRule(
+    uniqueIds.length <=
+      STARTING_HAND_SIZE,
+    "Too many mulligan cards selected."
+  );
+
+  const replacedCards:
+    HandCardState[] = [];
+
+  for (
+    const instanceId of
+    uniqueIds
+  ) {
+    const card =
+      player.hand.find(
+        (candidate) =>
+          candidate.instanceId ===
+          instanceId
+      );
+
+    assertRule(
+      Boolean(card),
+      "A selected mulligan card is no longer in the opening hand."
+    );
+
+    replacedCards.push(
+      card!
+    );
+  }
+
+  // Temporarily remove selected cards.
+  player.hand =
+    player.hand.filter(
+      (card) =>
+        !uniqueIds.includes(
+          card.instanceId
+        )
+    );
+
+  // Draw replacements while the rejected
+  // cards remain outside the deck.
+  for (
+    let index = 0;
+    index <
+    replacedCards.length;
+    index++
+  ) {
+    const replacementId =
+      player.deck.shift();
+
+    assertRule(
+      Boolean(replacementId),
+      "Not enough cards remain to complete the mulligan."
+    );
+
+    addCardToHandMutable(
+      state,
+      playerId,
+      replacementId!
+    );
+  }
+
+  // Return rejected cards and reshuffle.
+  player.deck.push(
+    ...replacedCards.map(
+      (card) =>
+        card.cardId
+    )
+  );
+
+  player.deck =
+    shuffle(
+      player.deck
+    );
+
+  state.mulligan.completed[
+    playerId
+  ] = true;
+
+  addLog(
+    state,
+    `${playerName(playerId)} replaced ${replacedCards.length} opening ${
+      replacedCards.length ===
+      1
+        ? "card"
+        : "cards"
+    }.`,
+    playerId
+  );
+
+  if (
+    playerId ===
+    "player1"
+  ) {
+    state.phase =
+      "mulligan-player2";
+
+    state.activePlayerId =
+      "player2";
+
+    return;
+  }
+
+  // Player 2 receives Royal Favor only
+  // AFTER both mulligans are complete.
+  addCardToHandMutable(
+    state,
+    "player2",
+    "royal-favor"
+  );
+
+  addLog(
+    state,
+    "Player 2 receives Royal Favor.",
+    "player2"
+  );
+
+  state.phase =
+    "playing";
+
+  state.activePlayerId =
+    "player1";
+
+  state.turnNumber = 1;
+
+  addLog(
+    state,
+    "The Great Game begins."
+  );
+
+  startTurnMutable(
+    state,
+    "player1"
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -534,29 +767,44 @@ function drawCardMutable(
 function evaluateWinnerMutable(
   state: GameState
 ) {
-  const player1Dead =
+  const p1Dead =
     state.players.player1
       .standing <= 0;
 
-  const player2Dead =
+  const p2Dead =
     state.players.player2
       .standing <= 0;
 
   if (
-    player1Dead &&
-    player2Dead
+    p1Dead &&
+    p2Dead
   ) {
-    state.winner = "draw";
+    state.winner =
+      "draw";
+
+    state.phase =
+      "finished";
+
     return;
   }
 
-  if (player1Dead) {
-    state.winner = "player2";
+  if (p1Dead) {
+    state.winner =
+      "player2";
+
+    state.phase =
+      "finished";
+
     return;
   }
 
-  if (player2Dead) {
-    state.winner = "player1";
+  if (p2Dead) {
+    state.winner =
+      "player1";
+
+    state.phase =
+      "finished";
+
     return;
   }
 
@@ -567,29 +815,49 @@ function damageStandingMutable(
   state: GameState,
   playerId: PlayerId,
   amount: number,
-  evaluate = true
+  options?: {
+    source?: string;
+
+    evaluate?: boolean;
+  }
 ) {
   if (amount <= 0) {
     return;
   }
 
   const player =
-    state.players[playerId];
+    state.players[
+      playerId
+    ];
+
+  const before =
+    player.standing;
 
   player.standing =
     Math.max(
       0,
-      player.standing -
-        amount
+      before - amount
     );
+
+  const actualDamage =
+    before -
+    player.standing;
+
+  const prefix =
+    options?.source
+      ? `${options.source}: `
+      : "";
 
   addLog(
     state,
-    `${playerId} loses ${amount} Standing.`,
+    `${prefix}${playerName(playerId)} loses ${actualDamage} Standing. (${before} → ${player.standing} Standing)`,
     playerId
   );
 
-  if (evaluate) {
+  if (
+    options?.evaluate !==
+    false
+  ) {
     evaluateWinnerMutable(
       state
     );
@@ -599,31 +867,45 @@ function damageStandingMutable(
 function gainStandingMutable(
   state: GameState,
   playerId: PlayerId,
-  amount: number
+  amount: number,
+  source?: string
 ) {
   if (amount <= 0) {
     return;
   }
 
   const player =
-    state.players[playerId];
+    state.players[
+      playerId
+    ];
+
+  const before =
+    player.standing;
 
   player.standing =
     Math.min(
       STARTING_STANDING,
-      player.standing +
-        amount
+      before + amount
     );
+
+  const actualGain =
+    player.standing -
+    before;
+
+  const prefix =
+    source
+      ? `${source}: `
+      : "";
 
   addLog(
     state,
-    `${playerId} gains ${amount} Standing.`,
+    `${prefix}${playerName(playerId)} gains ${actualGain} Standing. (${before} → ${player.standing} Standing)`,
     playerId
   );
 }
 
 // ─────────────────────────────────────────────
-// Destroy / Damage / Grounded
+// Damage / Destruction / Grounded
 // ─────────────────────────────────────────────
 
 type DamageKind =
@@ -660,12 +942,14 @@ function destroyCharacterMutable(
   }
 
   const card =
-    getGameCard(unit.cardId);
+    getGameCard(
+      unit.cardId
+    );
 
   assertRule(
     card.cardType ===
       "character",
-    "Only Characters can be destroyed through this path."
+    "Only Characters may be destroyed through this path."
   );
 
   owner.board.splice(
@@ -687,19 +971,17 @@ function destroyCharacterMutable(
 
   addLog(
     state,
-    `${card.name} was destroyed.`,
+    `${card.name} is destroyed.`,
     unit.ownerId
   );
-
-  // FALL abilities will resolve here
-  // once FALL cards enter the pool.
 }
 
 function damageUnitMutable(
   state: GameState,
   instanceId: string,
   amount: number,
-  kind: DamageKind
+  kind: DamageKind,
+  source?: string
 ): DamageResult {
   const unit =
     findUnit(
@@ -719,27 +1001,31 @@ function damageUnitMutable(
   }
 
   const card =
-    getGameCard(unit.cardId);
+    getGameCard(
+      unit.cardId
+    );
 
   assertRule(
     isUnitCard(card),
     "Damage target must be a Character or Dragon."
   );
 
-  let finalDamage = amount;
+  let finalDamage =
+    amount;
 
-  // Dawn's Edge.
+  // Dawn's Edge
   if (
     card.id ===
       "alester-dayne" &&
-    kind === "military"
+    kind ===
+      "military"
   ) {
     const alreadyPrevented =
       unit.counters[
         "dawns-edge-prevented"
       ] ?? 0;
 
-    const remainingPrevention =
+    const remaining =
       Math.max(
         0,
         2 -
@@ -748,11 +1034,12 @@ function damageUnitMutable(
 
     const prevented =
       Math.min(
-        remainingPrevention,
+        remaining,
         finalDamage
       );
 
-    finalDamage -= prevented;
+    finalDamage -=
+      prevented;
 
     unit.counters[
       "dawns-edge-prevented"
@@ -760,15 +1047,19 @@ function damageUnitMutable(
       alreadyPrevented +
       prevented;
 
-    if (prevented > 0) {
+    if (
+      prevented > 0
+    ) {
       addLog(
         state,
-        `Dawn's Edge prevented ${prevented} Military damage.`
+        `Dawn's Edge prevents ${prevented} Military damage to Ser Alester Dayne.`
       );
     }
   }
 
-  if (finalDamage <= 0) {
+  if (
+    finalDamage <= 0
+  ) {
     return {
       damageDealt: 0,
       destroyed: false,
@@ -776,19 +1067,31 @@ function damageUnitMutable(
     };
   }
 
+  const before =
+    unit.currentHealth;
+
   unit.currentHealth =
     Math.max(
       0,
-      unit.currentHealth -
+      before -
         finalDamage
     );
 
+  const prefix =
+    source
+      ? `${source}: `
+      : "";
+
+  const damageLabel =
+    kind === "military"
+      ? "Military damage"
+      : "damage";
+
   addLog(
     state,
-    `${card.name} takes ${finalDamage} damage.`
+    `${prefix}${card.name} takes ${finalDamage} ${damageLabel}. (${before} → ${unit.currentHealth} Health)`
   );
 
-  // Dragon → Grounded.
   if (
     card.cardType ===
       "dragon" &&
@@ -798,9 +1101,12 @@ function damageUnitMutable(
       !unit.grounded;
 
     unit.currentHealth = 0;
+
     unit.grounded = true;
 
-    if (newlyGrounded) {
+    if (
+      newlyGrounded
+    ) {
       addLog(
         state,
         `${card.name} becomes Grounded.`
@@ -817,7 +1123,6 @@ function damageUnitMutable(
     };
   }
 
-  // Character → destroyed.
   if (
     card.cardType ===
       "character" &&
@@ -849,22 +1154,20 @@ function damageUnitMutable(
 }
 
 // ─────────────────────────────────────────────
-// Character target helpers
+// Target helpers
 // ─────────────────────────────────────────────
 
 function enemyCharacters(
   state: GameState,
   playerId: PlayerId
 ): UnitState[] {
-  const enemyId =
-    opponentOf(playerId);
-
   return state.players[
-    enemyId
+    opponentOf(playerId)
   ].board.filter(
     (unit) =>
-      getGameCard(unit.cardId)
-        .cardType ===
+      getGameCard(
+        unit.cardId
+      ).cardType ===
       "character"
   );
 }
@@ -873,21 +1176,19 @@ function allCharacters(
   state: GameState
 ): UnitState[] {
   return [
-    ...state.players.player1
-      .board,
-
-    ...state.players.player2
-      .board,
+    ...state.players.player1.board,
+    ...state.players.player2.board,
   ].filter(
     (unit) =>
-      getGameCard(unit.cardId)
-        .cardType ===
+      getGameCard(
+        unit.cardId
+      ).cardType ===
       "character"
   );
 }
 
 // ─────────────────────────────────────────────
-// Military target options
+// Military targets
 // ─────────────────────────────────────────────
 
 export interface MilitaryTargetOptions {
@@ -926,9 +1227,9 @@ export function getMilitaryTargetOptions(
   const guards =
     enemyBoard.filter(
       (unit) => {
-        // Grounded Dragons cannot
-        // function as defenders.
-        if (unit.grounded) {
+        if (
+          unit.grounded
+        ) {
           return false;
         }
 
@@ -940,18 +1241,16 @@ export function getMilitaryTargetOptions(
       }
     );
 
-  const hasChallenge =
+  const challenge =
     unitHasTrait(
       state,
       attacker,
       "challenge"
     );
 
-  // Guard blocks everything except
-  // Challenge targeting another unit.
   if (
     guards.length > 0 &&
-    !hasChallenge
+    !challenge
   ) {
     return {
       unitInstanceIds:
@@ -972,16 +1271,13 @@ export function getMilitaryTargetOptions(
           unit.instanceId
       ),
 
-    // Challenge may bypass Guard
-    // to target another unit,
-    // but not Standing.
     canAttackStanding:
       guards.length === 0,
   };
 }
 
 // ─────────────────────────────────────────────
-// Political defense options
+// Political defense
 // ─────────────────────────────────────────────
 
 export interface PoliticalDefenseOptions {
@@ -1014,14 +1310,14 @@ export function getPoliticalDefenseOptions(
     };
   }
 
-  const defenderPlayerId =
+  const enemyId =
     opponentOf(
       attacker.ownerId
     );
 
   const readyCharacters =
     state.players[
-      defenderPlayerId
+      enemyId
     ].board.filter(
       (unit) => {
         const card =
@@ -1037,21 +1333,21 @@ export function getPoliticalDefenseOptions(
       }
     );
 
-  // No ready political defense.
   if (
     readyCharacters.length ===
     0
   ) {
     return {
       unopposed: true,
-      defenderInstanceIds: [],
-      selectionBy: "none",
+
+      defenderInstanceIds:
+        [],
+
+      selectionBy:
+        "none",
     };
   }
 
-  // Confront ignores Intrigue and
-  // lets attacker pick any ready
-  // Character.
   if (
     unitHasTrait(
       state,
@@ -1073,7 +1369,7 @@ export function getPoliticalDefenseOptions(
     };
   }
 
-  const intrigueCharacters =
+  const intrigue =
     readyCharacters.filter(
       (unit) =>
         unitHasTrait(
@@ -1083,17 +1379,14 @@ export function getPoliticalDefenseOptions(
         )
     );
 
-  // Intrigue exists:
-  // attacker chooses among them.
   if (
-    intrigueCharacters.length >
-    0
+    intrigue.length > 0
   ) {
     return {
       unopposed: false,
 
       defenderInstanceIds:
-        intrigueCharacters.map(
+        intrigue.map(
           (unit) =>
             unit.instanceId
         ),
@@ -1103,8 +1396,6 @@ export function getPoliticalDefenseOptions(
     };
   }
 
-  // Normal Political defense:
-  // defending player chooses.
   return {
     unopposed: false,
 
@@ -1133,10 +1424,11 @@ function validatePlayTargets(
   >
 ) {
   const enemyId =
-    opponentOf(playerId);
+    opponentOf(
+      playerId
+    );
 
-  // ── Artifact ──
-
+  // Artifact
   if (
     card.cardType ===
     "artifact"
@@ -1162,7 +1454,7 @@ function validatePlayTargets(
     assertRule(
       target!.ownerId ===
         playerId,
-      "Artifacts can only be equipped to Characters you control."
+      "Artifacts may only be equipped to Characters you control."
     );
 
     assertRule(
@@ -1170,7 +1462,7 @@ function validatePlayTargets(
         target!.cardId
       ).cardType ===
         "character",
-      "Artifacts can only be equipped to Characters."
+      "Artifacts may only be equipped to Characters."
     );
 
     assertRule(
@@ -1180,19 +1472,15 @@ function validatePlayTargets(
     );
   }
 
-  // ── Mander's Pact ──
-
+  // Mander's Pact
   if (
     card.id ===
     "renrose-tyrell"
   ) {
-    const possibleTargets =
-      allCharacters(state);
-
-    // "another Character":
-    // neutral targeting is intentional.
     if (
-      possibleTargets.length > 0
+      allCharacters(
+        state
+      ).length > 0
     ) {
       assertRule(
         Boolean(
@@ -1208,22 +1496,17 @@ function validatePlayTargets(
         );
 
       assertRule(
-        Boolean(target),
-        "The Mander's Pact target does not exist."
-      );
-
-      assertRule(
-        getGameCard(
-          target!.cardId
-        ).cardType ===
-          "character",
+        Boolean(target) &&
+          getGameCard(
+            target!.cardId
+          ).cardType ===
+            "character",
         "The Mander's Pact target must be a Character."
       );
     }
   }
 
-  // ── Veiled Sight ──
-
+  // Veiled Sight
   if (
     card.id ===
     "saera-targaryen"
@@ -1240,7 +1523,7 @@ function validatePlayTargets(
         Boolean(
           action.targetHandInstanceId
         ),
-        "Veiled Sight requires a card from your opponent's hand."
+        "Veiled Sight requires a card from the opponent's hand."
       );
 
       assertRule(
@@ -1254,26 +1537,22 @@ function validatePlayTargets(
     }
   }
 
-  // ── Iron Wrath ──
-
+  // Iron Wrath
   if (
     card.id ===
     "baelenys-targaryen"
   ) {
-    const targets =
+    if (
       enemyCharacters(
         state,
         playerId
-      );
-
-    if (
-      targets.length > 0
+      ).length > 0
     ) {
       assertRule(
         Boolean(
           action.targetInstanceId
         ),
-        "Iron Wrath requires an enemy Character target."
+        "Iron Wrath requires an enemy Character."
       );
 
       const target =
@@ -1283,28 +1562,47 @@ function validatePlayTargets(
         );
 
       assertRule(
-        Boolean(target),
-        "Iron Wrath target does not exist."
-      );
-
-      assertRule(
-        target!.ownerId ===
-          enemyId,
-        "Iron Wrath must target an enemy Character."
-      );
-
-      assertRule(
-        getGameCard(
-          target!.cardId
-        ).cardType ===
-          "character",
+        Boolean(target) &&
+          target!.ownerId ===
+            enemyId &&
+          getGameCard(
+            target!.cardId
+          ).cardType ===
+            "character",
         "Iron Wrath must target an enemy Character."
       );
     }
   }
 
-  // ── Trial by Combat ──
+  // A Word in the Right Ear
+  if (
+    card.id ===
+    "word-in-the-right-ear"
+  ) {
+    assertRule(
+      Boolean(
+        action.targetInstanceId
+      ),
+      "A Word in the Right Ear requires a Character target."
+    );
 
+    const target =
+      findUnit(
+        state,
+        action.targetInstanceId!
+      );
+
+    assertRule(
+      Boolean(target) &&
+        getGameCard(
+          target!.cardId
+        ).cardType ===
+          "character",
+      "A Word in the Right Ear must target a Character."
+    );
+  }
+
+  // Trial by Combat
   if (
     card.id ===
     "trial-by-combat"
@@ -1332,18 +1630,9 @@ function validatePlayTargets(
       );
 
     assertRule(
-      Boolean(allied),
-      "Trial by Combat allied target does not exist."
-    );
-
-    assertRule(
-      Boolean(enemy),
-      "Trial by Combat enemy target does not exist."
-    );
-
-    assertRule(
-      allied!.ownerId ===
-        playerId &&
+      Boolean(allied) &&
+        allied!.ownerId ===
+          playerId &&
         getGameCard(
           allied!.cardId
         ).cardType ===
@@ -1352,8 +1641,9 @@ function validatePlayTargets(
     );
 
     assertRule(
-      enemy!.ownerId ===
-        enemyId &&
+      Boolean(enemy) &&
+        enemy!.ownerId ===
+          enemyId &&
         getGameCard(
           enemy!.cardId
         ).cardType ===
@@ -1362,8 +1652,7 @@ function validatePlayTargets(
     );
   }
 
-  // ── Brothers' Tilt ──
-
+  // Brothers' Tilt
   if (
     card.id ===
     "brothers-tilt"
@@ -1372,7 +1661,7 @@ function validatePlayTargets(
       Boolean(
         action.targetInstanceId
       ),
-      "The Brothers' Tilt requires a Character target."
+      "The Brothers' Tilt requires a Character you control."
     );
 
     const target =
@@ -1382,13 +1671,9 @@ function validatePlayTargets(
       );
 
     assertRule(
-      Boolean(target),
-      "The Brothers' Tilt target does not exist."
-    );
-
-    assertRule(
-      target!.ownerId ===
-        playerId &&
+      Boolean(target) &&
+        target!.ownerId ===
+          playerId &&
         getGameCard(
           target!.cardId
         ).cardType ===
@@ -1399,7 +1684,7 @@ function validatePlayTargets(
 }
 
 // ─────────────────────────────────────────────
-// Arrival abilities
+// Arrival
 // ─────────────────────────────────────────────
 
 function resolveArrivalMutable(
@@ -1416,8 +1701,7 @@ function resolveArrivalMutable(
       unit.cardId
     );
 
-  // ── The Mander's Pact ──
-
+  // Mander's Pact
   if (
     card.id ===
       "renrose-tyrell" &&
@@ -1430,22 +1714,36 @@ function resolveArrivalMutable(
       );
 
     if (target) {
-      target.modifiers.push({
-        id: nextRuntimeId(
+      const before =
+        getEffectiveInfluence(
           state,
-          "modifier"
-        ),
+          target
+        );
+
+      target.modifiers.push({
+        id:
+          nextRuntimeId(
+            state,
+            "modifier"
+          ),
 
         influence: 2,
 
         permanent: true,
       });
 
-      state.delayedEffects.push({
-        id: nextRuntimeId(
+      const after =
+        getEffectiveInfluence(
           state,
-          "delayed"
-        ),
+          target
+        );
+
+      state.delayedEffects.push({
+        id:
+          nextRuntimeId(
+            state,
+            "delayed"
+          ),
 
         type:
           "manders-pact-draw",
@@ -1459,21 +1757,22 @@ function resolveArrivalMutable(
 
       addLog(
         state,
-        `${getGameCard(target.cardId).name} gains +2 Influence permanently from The Mander's Pact.`,
+        `The Mander's Pact: ${getGameCard(target.cardId).name} gains +2 Influence. (${before} → ${after} Influence)`,
         playerId
       );
     }
   }
 
-  // ── Veiled Sight ──
-
+  // Veiled Sight
   if (
     card.id ===
       "saera-targaryen" &&
     action.targetHandInstanceId
   ) {
     const enemyId =
-      opponentOf(playerId);
+      opponentOf(
+        playerId
+      );
 
     const target =
       getHandCard(
@@ -1485,32 +1784,30 @@ function resolveArrivalMutable(
 
     if (target) {
       target.costModifiers.push({
-        id: nextRuntimeId(
-          state,
-          "cost-mod"
-        ),
+        id:
+          nextRuntimeId(
+            state,
+            "cost-mod"
+          ),
 
         amount: 2,
 
         expiresAt:
           "start-of-player-turn",
 
-        // Saera controller's
-        // next turn.
         expiresForPlayerId:
           playerId,
       });
 
       addLog(
         state,
-        `Veiled Sight increases ${getGameCard(target.cardId).name}'s cost by 2 Command.`,
+        `Veiled Sight: ${getGameCard(target.cardId).name} costs 2 more Command until the start of ${playerName(playerId)}'s next turn.`,
         playerId
       );
     }
   }
 
-  // ── Iron Wrath ──
-
+  // Iron Wrath
   if (
     card.id ===
       "baelenys-targaryen" &&
@@ -1521,7 +1818,8 @@ function resolveArrivalMutable(
         state,
         action.targetInstanceId,
         3,
-        "ability"
+        "ability",
+        "Iron Wrath"
       );
 
     if (
@@ -1530,7 +1828,8 @@ function resolveArrivalMutable(
       gainStandingMutable(
         state,
         playerId,
-        3
+        3,
+        "Iron Wrath"
       );
     }
   }
@@ -1549,8 +1848,54 @@ function resolveEventMutable(
     { type: "play-card" }
   >
 ) {
-  // ── Trial by Combat ──
+  // A Word in the Right Ear
+  if (
+    card.id ===
+    "word-in-the-right-ear"
+  ) {
+    const target =
+      findUnit(
+        state,
+        action.targetInstanceId!
+      )!;
 
+    const before =
+      getEffectiveInfluence(
+        state,
+        target
+      );
+
+    target.modifiers.push({
+      id:
+        nextRuntimeId(
+          state,
+          "modifier"
+        ),
+
+      influence: 1,
+
+      permanent: false,
+
+      expiresAt:
+        "end-of-current-turn",
+    });
+
+    const after =
+      getEffectiveInfluence(
+        state,
+        target
+      );
+
+    addLog(
+      state,
+      `A Word in the Right Ear: ${getGameCard(target.cardId).name} gains +1 Influence this turn. (${before} → ${after} Influence)`,
+      playerId
+    );
+
+    return;
+  }
+
+  // Trial by Combat
   if (
     card.id ===
     "trial-by-combat"
@@ -1567,8 +1912,6 @@ function resolveEventMutable(
         action.secondaryTargetInstanceId!
       )!;
 
-    // Snapshot values before
-    // simultaneous damage.
     const alliedPower =
       getEffectivePower(
         state,
@@ -1585,39 +1928,34 @@ function resolveEventMutable(
       state,
       allied.instanceId,
       enemyPower,
-      "military"
+      "military",
+      "Trial by Combat"
     );
 
     damageUnitMutable(
       state,
       enemy.instanceId,
       alliedPower,
-      "military"
+      "military",
+      "Trial by Combat"
     );
 
     return;
   }
 
-  // ── Oldtown Massacre ──
-
+  // Oldtown Massacre
   if (
     card.id ===
     "oldtown-massacre"
   ) {
     const unitIds = [
-      ...state.players.player1
-        .board,
-
-      ...state.players.player2
-        .board,
+      ...state.players.player1.board,
+      ...state.players.player2.board,
     ].map(
       (unit) =>
         unit.instanceId
     );
 
-    // Snapshot IDs first because
-    // Characters may leave board
-    // during resolution.
     for (
       const instanceId of
       unitIds
@@ -1632,25 +1970,34 @@ function resolveEventMutable(
           state,
           instanceId,
           2,
-          "event"
+          "event",
+          "Oldtown Massacre"
         );
       }
     }
 
-    // Both Standing hits are
-    // treated simultaneously.
     damageStandingMutable(
       state,
       "player1",
       2,
-      false
+      {
+        source:
+          "Oldtown Massacre",
+
+        evaluate: false,
+      }
     );
 
     damageStandingMutable(
       state,
       "player2",
       2,
-      false
+      {
+        source:
+          "Oldtown Massacre",
+
+        evaluate: false,
+      }
     );
 
     evaluateWinnerMutable(
@@ -1660,8 +2007,7 @@ function resolveEventMutable(
     return;
   }
 
-  // ── The Brothers' Tilt ──
-
+  // Brothers' Tilt
   if (
     card.id ===
     "brothers-tilt"
@@ -1672,16 +2018,18 @@ function resolveEventMutable(
         action.targetInstanceId!
       )!;
 
-    const targetPower =
+    const beforePower =
       getEffectivePower(
         state,
         target
       );
 
     const enemyId =
-      opponentOf(playerId);
+      opponentOf(
+        playerId
+      );
 
-    const weakerReadyEnemies =
+    const weakerReady =
       state.players[
         enemyId
       ].board.filter(
@@ -1705,7 +2053,7 @@ function resolveEventMutable(
           }
 
           return (
-            targetPower >
+            beforePower >
             getEffectivePower(
               state,
               enemy
@@ -1717,16 +2065,18 @@ function resolveEventMutable(
     const bonus =
       Math.min(
         3,
-        weakerReadyEnemies
-          .length
+        weakerReady.length
       );
 
-    if (bonus > 0) {
+    if (
+      bonus > 0
+    ) {
       target.modifiers.push({
-        id: nextRuntimeId(
-          state,
-          "modifier"
-        ),
+        id:
+          nextRuntimeId(
+            state,
+            "modifier"
+          ),
 
         power: bonus,
 
@@ -1734,15 +2084,20 @@ function resolveEventMutable(
       });
     }
 
-    target.exhausted = true;
+    target.exhausted =
+      true;
+
+    const afterPower =
+      getEffectivePower(
+        state,
+        target
+      );
 
     addLog(
       state,
-      `${getGameCard(target.cardId).name} gains +${bonus} Power from The Brothers' Tilt and becomes Exhausted.`,
+      `The Brothers' Tilt: ${getGameCard(target.cardId).name} gains +${bonus} Power and becomes Exhausted. (${beforePower} → ${afterPower} Power)`,
       playerId
     );
-
-    return;
   }
 }
 
@@ -1767,8 +2122,8 @@ function playCardMutable(
 
   const handIndex =
     player.hand.findIndex(
-      (handCard) =>
-        handCard.instanceId ===
+      (card) =>
+        card.instanceId ===
         action.handInstanceId
     );
 
@@ -1787,8 +2142,7 @@ function playCardMutable(
       handCard.cardId
     );
 
-  // ── Board capacity ──
-
+  // Board capacity
   if (isUnitCard(card)) {
     assertRule(
       player.board.length <
@@ -1817,8 +2171,7 @@ function playCardMutable(
     }
   }
 
-  // ── Unique in play ──
-
+  // Unique already in play
   if (
     hasTrait(
       card,
@@ -1846,8 +2199,6 @@ function playCardMutable(
     );
   }
 
-  // Validate all targets before
-  // spending Command.
   validatePlayTargets(
     state,
     playerId,
@@ -1863,14 +2214,14 @@ function playCardMutable(
     );
 
   assertRule(
-    player.command >= cost,
+    player.command >=
+      cost,
     `Not enough Command. ${card.name} costs ${cost}.`
   );
 
-  // Pay.
-  player.command -= cost;
+  player.command -=
+    cost;
 
-  // Remove exact hand instance.
   player.hand.splice(
     handIndex,
     1
@@ -1882,10 +2233,30 @@ function playCardMutable(
     playerId
   );
 
-  // ───────────────────────────────────────────
-  // Character / Dragon
-  // ───────────────────────────────────────────
+  // Royal Favor
+  if (
+    card.special ===
+    "royal-favor"
+  ) {
+    const before =
+      player.command;
 
+    player.command += 1;
+
+    player.removedFromGame.push(
+      card.id
+    );
+
+    addLog(
+      state,
+      `Royal Favor grants +1 Command this turn. (${before} → ${player.command} Command)`,
+      playerId
+    );
+
+    return;
+  }
+
+  // Unit
   if (isUnitCard(card)) {
     const unit: UnitState = {
       instanceId:
@@ -1903,9 +2274,6 @@ function playCardMutable(
       currentHealth:
         card.health,
 
-      // New units are technically
-      // Ready, but deployment stops
-      // normal attacks this turn.
       exhausted: false,
 
       deployedThisTurn:
@@ -1923,7 +2291,9 @@ function playCardMutable(
       flags: {},
     };
 
-    player.board.push(unit);
+    player.board.push(
+      unit
+    );
 
     if (
       card.cardType ===
@@ -1944,10 +2314,7 @@ function playCardMutable(
     return;
   }
 
-  // ───────────────────────────────────────────
   // Event
-  // ───────────────────────────────────────────
-
   if (
     card.cardType ===
     "event"
@@ -1973,10 +2340,7 @@ function playCardMutable(
     return;
   }
 
-  // ───────────────────────────────────────────
   // Artifact
-  // ───────────────────────────────────────────
-
   if (
     card.cardType ===
     "artifact"
@@ -1998,17 +2362,14 @@ function playCardMutable(
 
     addLog(
       state,
-      `${card.name} equipped to ${getGameCard(target!.cardId).name}.`,
+      `${card.name} is equipped to ${getGameCard(target!.cardId).name}.`,
       playerId
     );
 
     return;
   }
 
-  // ───────────────────────────────────────────
   // Location
-  // ───────────────────────────────────────────
-
   if (
     card.cardType ===
     "location"
@@ -2016,24 +2377,27 @@ function playCardMutable(
     if (
       state.activeLocation
     ) {
-      const oldLocation =
+      const old =
         state.activeLocation;
 
       state.players[
-        oldLocation.playedBy
+        old.playedBy
       ].discard.push(
-        oldLocation.cardId
+        old.cardId
       );
 
       addLog(
         state,
-        `${getGameCard(oldLocation.cardId).name} is replaced.`
+        `${getGameCard(old.cardId).name} is replaced.`
       );
     }
 
     state.activeLocation = {
-      cardId: card.id,
-      playedBy: playerId,
+      cardId:
+        card.id,
+
+      playedBy:
+        playerId,
     };
 
     addLog(
@@ -2041,13 +2405,11 @@ function playCardMutable(
       `${card.name} becomes the active Location.`,
       playerId
     );
-
-    return;
   }
 }
 
 // ─────────────────────────────────────────────
-// Military Conflict
+// Military
 // ─────────────────────────────────────────────
 
 function militaryAttackMutable(
@@ -2061,7 +2423,9 @@ function militaryAttackMutable(
     state.activePlayerId;
 
   const enemyId =
-    opponentOf(playerId);
+    opponentOf(
+      playerId
+    );
 
   const attacker =
     findUnit(
@@ -2090,7 +2454,6 @@ function militaryAttackMutable(
     "A Grounded Dragon cannot attack."
   );
 
-  // Deployment restriction.
   if (
     attacker!
       .deployedThisTurn
@@ -2108,8 +2471,7 @@ function militaryAttackMutable(
   const options =
     getMilitaryTargetOptions(
       state,
-      attacker!
-        .instanceId
+      attacker!.instanceId
     );
 
   const targetingPlayer =
@@ -2128,15 +2490,19 @@ function militaryAttackMutable(
     "Military Attack must target exactly one enemy unit or Standing."
   );
 
-  // ── Direct Standing attack ──
+  const attackerCard =
+    getGameCard(
+      attacker!.cardId
+    );
 
+  // Direct Standing
   if (
     action.targetPlayerId
   ) {
     assertRule(
       action.targetPlayerId ===
         enemyId,
-      "You can only attack the opposing player's Standing."
+      "You may only attack enemy Standing."
     );
 
     assertRule(
@@ -2156,13 +2522,15 @@ function militaryAttackMutable(
     damageStandingMutable(
       state,
       enemyId,
-      damage
+      damage,
+      {
+        source:
+          `${attackerCard.name} — Military Attack`,
+      }
     );
 
     return;
   }
-
-  // ── Unit target ──
 
   const target =
     findUnit(
@@ -2178,16 +2546,14 @@ function militaryAttackMutable(
   assertRule(
     target!.ownerId ===
       enemyId,
-    "You can only attack enemy units."
+    "You may only attack enemy units."
   );
 
   assertRule(
-    options
-      .unitInstanceIds
-      .includes(
-        target!.instanceId
-      ),
-    "That unit cannot currently be targeted by this Military Attack."
+    options.unitInstanceIds.includes(
+      target!.instanceId
+    ),
+    "That target cannot currently be attacked."
   );
 
   const attackerPower =
@@ -2213,18 +2579,15 @@ function militaryAttackMutable(
   attacker!.exhausted =
     true;
 
-  // Snapshot Power values first,
-  // then resolve simultaneous combat.
-
-  const targetDamageResult =
+  const targetResult =
     damageUnitMutable(
       state,
       target!.instanceId,
       attackerPower,
-      "military"
+      "military",
+      `${attackerCard.name} — Military Conflict`
     );
 
-  // Grounded Dragons cannot defend.
   if (
     !targetWasGrounded
   ) {
@@ -2232,23 +2595,26 @@ function militaryAttackMutable(
       state,
       attacker!.instanceId,
       targetPower,
-      "military"
+      "military",
+      `${targetCard.name} — Military Defense`
     );
   }
 
-  // Housebreaker.
   if (
     attacker!.cardId ===
       "gaelor-targaryen" &&
     targetCard.cardType ===
       "character" &&
-    targetDamageResult
-      .destroyed
+    targetResult.destroyed
   ) {
     damageStandingMutable(
       state,
       enemyId,
-      2
+      2,
+      {
+        source:
+          "Housebreaker",
+      }
     );
   }
 
@@ -2258,7 +2624,7 @@ function militaryAttackMutable(
 }
 
 // ─────────────────────────────────────────────
-// Political Conflict
+// Political
 // ─────────────────────────────────────────────
 
 function resolveSilentVerdictMutable(
@@ -2280,13 +2646,11 @@ function resolveSilentVerdictMutable(
   damageStandingMutable(
     state,
     enemyId,
-    2
-  );
-
-  addLog(
-    state,
-    "Silent Verdict deals 2 additional Standing damage.",
-    attacker.ownerId
+    2,
+    {
+      source:
+        "Silent Verdict",
+    }
   );
 }
 
@@ -2301,7 +2665,9 @@ function politicalAttackMutable(
     state.activePlayerId;
 
   const enemyId =
-    opponentOf(playerId);
+    opponentOf(
+      playerId
+    );
 
   const attacker =
     findUnit(
@@ -2328,7 +2694,7 @@ function politicalAttackMutable(
   assertRule(
     attackerCard.cardType ===
       "character",
-    "Only Characters can initiate Political Conflicts."
+    "Only Characters may initiate Political Conflicts."
   );
 
   assertRule(
@@ -2336,7 +2702,6 @@ function politicalAttackMutable(
     "That Character is Exhausted."
   );
 
-  // Deployment restriction.
   if (
     attacker!
       .deployedThisTurn
@@ -2354,8 +2719,7 @@ function politicalAttackMutable(
   const defense =
     getPoliticalDefenseOptions(
       state,
-      attacker!
-        .instanceId
+      attacker!.instanceId
     );
 
   const attackerInfluence =
@@ -2367,8 +2731,6 @@ function politicalAttackMutable(
   attacker!.exhausted =
     true;
 
-  // ── Unopposed ──
-
   if (
     defense.unopposed
   ) {
@@ -2378,10 +2740,13 @@ function politicalAttackMutable(
       damageStandingMutable(
         state,
         enemyId,
-        attackerInfluence
+        attackerInfluence,
+        {
+          source:
+            `${attackerCard.name} — Unopposed Political Conflict`,
+        }
       );
 
-      // Political Victory.
       resolveSilentVerdictMutable(
         state,
         attacker!
@@ -2398,35 +2763,26 @@ function politicalAttackMutable(
   let defenderInstanceId =
     action.defenderInstanceId;
 
-  // Auto-select if there is
-  // only one legal defender.
   if (
     !defenderInstanceId &&
-    defense
-      .defenderInstanceIds
+    defense.defenderInstanceIds
       .length === 1
   ) {
     defenderInstanceId =
-      defense
-        .defenderInstanceIds[0];
+      defense.defenderInstanceIds[0];
   }
 
   assertRule(
     Boolean(
       defenderInstanceId
     ),
-    defense.selectionBy ===
-      "defender"
-      ? "The defending player must choose a Political defender."
-      : "The attacking player must choose a Political defender."
+    "A Political defender must be chosen."
   );
 
   assertRule(
-    defense
-      .defenderInstanceIds
-      .includes(
-        defenderInstanceId!
-      ),
+    defense.defenderInstanceIds.includes(
+      defenderInstanceId!
+    ),
     "That Character is not a legal Political defender."
   );
 
@@ -2459,25 +2815,36 @@ function politicalAttackMutable(
     attackerInfluence -
     defenderInfluence;
 
-  if (difference > 0) {
+  addLog(
+    state,
+    `${attackerCard.name} challenges ${getGameCard(defender!.cardId).name} politically. (${attackerInfluence} vs ${defenderInfluence} Influence)`,
+    playerId
+  );
+
+  if (
+    difference > 0
+  ) {
     damageStandingMutable(
       state,
       enemyId,
-      difference
+      difference,
+      {
+        source:
+          `${attackerCard.name} — Political Victory`,
+      }
     );
 
-    // Attacker won Political Conflict.
     resolveSilentVerdictMutable(
       state,
       attacker!
     );
+  } else {
+    addLog(
+      state,
+      `${getGameCard(defender!.cardId).name} prevents all Political Standing damage.`,
+      defender!.ownerId
+    );
   }
-
-  addLog(
-    state,
-    `${attackerCard.name} (${attackerInfluence} Influence) faced ${getGameCard(defender!.cardId).name} (${defenderInfluence} Influence).`,
-    playerId
-  );
 
   evaluateWinnerMutable(
     state
@@ -2485,7 +2852,7 @@ function politicalAttackMutable(
 }
 
 // ─────────────────────────────────────────────
-// Hand modifier expiration
+// Modifier expiration
 // ─────────────────────────────────────────────
 
 function expireHandModifiersAtStart(
@@ -2505,18 +2872,15 @@ function expireHandModifiersAtStart(
       ].hand
     ) {
       handCard.costModifiers =
-        handCard
-          .costModifiers
-          .filter(
-            (modifier) =>
-              !(
-                modifier.expiresAt ===
-                  "start-of-player-turn" &&
-                modifier
-                  .expiresForPlayerId ===
-                  playerId
-              )
-          );
+        handCard.costModifiers.filter(
+          (modifier) =>
+            !(
+              modifier.expiresAt ===
+                "start-of-player-turn" &&
+              modifier.expiresForPlayerId ===
+                playerId
+            )
+        );
     }
   }
 }
@@ -2538,24 +2902,100 @@ function expireHandModifiersAtEnd(
       ].hand
     ) {
       handCard.costModifiers =
-        handCard
-          .costModifiers
-          .filter(
-            (modifier) =>
-              !(
-                modifier.expiresAt ===
-                  "end-of-player-turn" &&
-                modifier
-                  .expiresForPlayerId ===
-                  playerId
-              )
-          );
+        handCard.costModifiers.filter(
+          (modifier) =>
+            !(
+              modifier.expiresAt ===
+                "end-of-player-turn" &&
+              modifier.expiresForPlayerId ===
+                playerId
+            )
+        );
+    }
+  }
+}
+
+function expireUnitModifiersAtStart(
+  state: GameState,
+  playerId: PlayerId
+) {
+  for (
+    const ownerId of [
+      "player1",
+      "player2",
+    ] as PlayerId[]
+  ) {
+    for (
+      const unit of
+      state.players[
+        ownerId
+      ].board
+    ) {
+      unit.modifiers =
+        unit.modifiers.filter(
+          (modifier) =>
+            !(
+              !modifier.permanent &&
+              modifier.expiresAt ===
+                "start-of-controller-next-turn" &&
+              unit.ownerId ===
+                playerId
+            )
+        );
+    }
+  }
+}
+
+function expireUnitModifiersAtEnd(
+  state: GameState,
+  endingPlayerId: PlayerId
+) {
+  for (
+    const ownerId of [
+      "player1",
+      "player2",
+    ] as PlayerId[]
+  ) {
+    for (
+      const unit of
+      state.players[
+        ownerId
+      ].board
+    ) {
+      unit.modifiers =
+        unit.modifiers.filter(
+          (modifier) => {
+            if (
+              modifier.permanent
+            ) {
+              return true;
+            }
+
+            if (
+              modifier.expiresAt ===
+              "end-of-current-turn"
+            ) {
+              return false;
+            }
+
+            if (
+              modifier.expiresAt ===
+                "end-of-controller-turn" &&
+              unit.ownerId ===
+                endingPlayerId
+            ) {
+              return false;
+            }
+
+            return true;
+          }
+        );
     }
   }
 }
 
 // ─────────────────────────────────────────────
-// Mander's Pact delayed draw
+// Mander delayed draw
 // ─────────────────────────────────────────────
 
 function processManderDelayedEffects(
@@ -2573,29 +3013,36 @@ function processManderDelayedEffects(
       effect.triggerPlayerId !==
       playerId
     ) {
-      remaining.push(effect);
+      remaining.push(
+        effect
+      );
+
       continue;
     }
 
-    if (
-      effect.type ===
-      "manders-pact-draw"
-    ) {
-      const target =
-        findUnit(
-          state,
-          effect
-            .targetUnitInstanceId
-        );
+    const target =
+      findUnit(
+        state,
+        effect.targetUnitInstanceId
+      );
 
-      // Only draw if exact target
-      // is still in play.
-      if (target) {
-        drawCardMutable(
-          state,
-          playerId
-        );
-      }
+    if (target) {
+      addLog(
+        state,
+        `The Mander's Pact endures through ${getGameCard(target.cardId).name}. ${playerName(playerId)} draws 1 card.`,
+        playerId
+      );
+
+      drawCardMutable(
+        state,
+        playerId
+      );
+    } else {
+      addLog(
+        state,
+        "The Mander's Pact target is no longer in play. No card is drawn.",
+        playerId
+      );
     }
   }
 
@@ -2624,10 +3071,16 @@ function processCordinStartOfTurn(
     const cordin of
     cordins
   ) {
-    const previousSuccessfulDraw =
+    const previousSuccessful =
       cordin.flags[
         "cordin-previous-draw-successful"
       ] ?? false;
+
+    addLog(
+      state,
+      "Cordin Poole — As I Was Saying triggers.",
+      playerId
+    );
 
     const result =
       drawCardMutable(
@@ -2636,11 +3089,11 @@ function processCordinStartOfTurn(
       );
 
     if (
-      previousSuccessfulDraw &&
+      previousSuccessful &&
       result.success &&
       result.handInstanceId
     ) {
-      const drawnCard =
+      const drawn =
         getHandCard(
           state.players[
             playerId
@@ -2648,35 +3101,33 @@ function processCordinStartOfTurn(
           result.handInstanceId
         );
 
-      drawnCard
-        ?.costModifiers
-        .push({
-          id: nextRuntimeId(
+      drawn?.costModifiers.push({
+        id:
+          nextRuntimeId(
             state,
             "cost-mod"
           ),
 
-          amount: -1,
+        amount: -1,
 
-          expiresAt:
-            "end-of-player-turn",
+        expiresAt:
+          "end-of-player-turn",
 
-          expiresForPlayerId:
-            playerId,
-        });
+        expiresForPlayerId:
+          playerId,
+      });
 
       if (
         result.cardId
       ) {
         addLog(
           state,
-          `${getGameCard(result.cardId).name} costs 1 less this turn due to As I Was Saying.`,
+          `As I Was Saying reduces ${getGameCard(result.cardId).name}'s cost by 1 this turn.`,
           playerId
         );
       }
     }
 
-    // Burn / failed draw = false.
     cordin.flags[
       "cordin-previous-draw-successful"
     ] =
@@ -2685,7 +3136,7 @@ function processCordinStartOfTurn(
 }
 
 // ─────────────────────────────────────────────
-// Grounded Dragon recovery
+// Grounded recovery
 // ─────────────────────────────────────────────
 
 function recoverGroundedDragons(
@@ -2716,10 +3167,13 @@ function recoverGroundedDragons(
         unit
       );
 
+    const before =
+      unit.currentHealth;
+
     unit.currentHealth =
       Math.min(
         maximum,
-        unit.currentHealth + 1
+        before + 1
       );
 
     const threshold =
@@ -2729,7 +3183,7 @@ function recoverGroundedDragons(
 
     addLog(
       state,
-      `${card.name} recovers to ${unit.currentHealth}/${maximum} Health.`,
+      `${card.name} recovers 1 Health while Grounded. (${before} → ${unit.currentHealth} Health; recovery threshold ${threshold})`,
       playerId
     );
 
@@ -2737,7 +3191,8 @@ function recoverGroundedDragons(
       unit.currentHealth >=
       threshold
     ) {
-      unit.grounded = false;
+      unit.grounded =
+        false;
 
       addLog(
         state,
@@ -2812,9 +3267,18 @@ function processWeylarEndOfTurn(
 
     weylar.counters[
       "turns-in-play"
-    ] = turns;
+    ] =
+      turns;
 
-    if (turns === 3) {
+    addLog(
+      state,
+      `Weylar Rocke — The Price of Loyalty advances. (${Math.min(turns, 3)}/3)`,
+      playerId
+    );
+
+    if (
+      turns === 3
+    ) {
       drawCardMutable(
         state,
         playerId
@@ -2836,7 +3300,7 @@ function processWeylarEndOfTurn(
 
       addLog(
         state,
-        "The Price of Loyalty triggers: draw 2 cards and gain 2 Command next turn.",
+        `The Price of Loyalty triggers. ${playerName(playerId)} draws 2 cards and will gain +2 Command next turn.`,
         playerId
       );
     }
@@ -2859,86 +3323,110 @@ function startTurnMutable(
   state.activePlayerId =
     playerId;
 
+  player.turnsTaken += 1;
+
   player.eventsPlayedThisTurn =
     0;
 
-  // ── READY ──
-
-  for (
-    const unit of
-    player.board
-  ) {
-    unit.exhausted = false;
-  }
-
-  // Dawn's Edge is "each turn",
-  // so reset globally.
   resetPerTurnCounters(
     state
   );
 
-  // Effects expiring at this
-  // player's Start of Turn.
   expireHandModifiersAtStart(
     state,
     playerId
   );
 
-  // Grounded recovery.
+  expireUnitModifiersAtStart(
+    state,
+    playerId
+  );
+
+  addLog(
+    state,
+    `${playerName(playerId)} begins Turn ${player.turnsTaken}.`,
+    playerId
+  );
+
   recoverGroundedDragons(
     state,
     playerId
   );
 
-  // Delayed start-of-turn
-  // effects.
   processManderDelayedEffects(
     state,
     playerId
   );
 
-  // Character Start of Turn
-  // abilities.
   processCordinStartOfTurn(
     state,
     playerId
   );
 
-  // ── NORMAL DRAW ──
-
+  // Normal draw
   drawCardMutable(
     state,
     playerId
   );
 
-  // ── COMMAND ──
-
+  // Command
   player.maxCommand =
     Math.min(
       MAX_COMMAND,
       player.maxCommand + 1
     );
 
+  const bonus =
+    player.nextCommandBonus;
+
   player.command =
-    Math.min(
-      MAX_COMMAND,
-      player.maxCommand +
-        player.nextCommandBonus
-    );
+    player.maxCommand +
+    bonus;
 
   player.nextCommandBonus =
     0;
 
-  addLog(
-    state,
-    `Turn begins with ${player.command} Command.`,
-    playerId
-  );
+  if (
+    bonus > 0
+  ) {
+    addLog(
+      state,
+      `Command refills to ${player.command}. (${player.maxCommand} base + ${bonus} bonus)`,
+      playerId
+    );
+  } else {
+    addLog(
+      state,
+      `Command refills to ${player.command}.`,
+      playerId
+    );
+  }
 }
 
 // ─────────────────────────────────────────────
 // End Turn
 // ─────────────────────────────────────────────
+
+function readyAllUnitsMutable(
+  state: GameState
+) {
+  for (
+    const ownerId of [
+      "player1",
+      "player2",
+    ] as PlayerId[]
+  ) {
+    for (
+      const unit of
+      state.players[
+        ownerId
+      ].board
+    ) {
+      unit.exhausted =
+        false;
+    }
+  }
+}
 
 function endTurnMutable(
   state: GameState
@@ -2956,12 +3444,14 @@ function endTurnMutable(
     playerId
   );
 
-  // Deployment sickness expires
-  // at the END of controller's
-  // current turn.
-  //
-  // Units that actually attacked
-  // remain Exhausted.
+  expireUnitModifiersAtEnd(
+    state,
+    playerId
+  );
+
+  // Deployment restriction only expires
+  // for units deployed by the player whose
+  // turn is ending.
   for (
     const unit of
     state.players[
@@ -2972,14 +3462,28 @@ function endTurnMutable(
       false;
   }
 
-  const nextPlayerId =
-    opponentOf(playerId);
+  /**
+   * Exhaustion is turn-local.
+   *
+   * Every End Turn makes every unit Ready,
+   * including Political defenders belonging
+   * to the incoming player.
+   */
+  readyAllUnitsMutable(
+    state
+  );
 
-  state.turnNumber += 1;
+  const nextPlayer =
+    opponentOf(
+      playerId
+    );
+
+  state.turnNumber +=
+    1;
 
   startTurnMutable(
     state,
-    nextPlayerId
+    nextPlayer
   );
 }
 
@@ -2997,13 +3501,16 @@ function createPlayer(
     standing:
       STARTING_STANDING,
 
+    turnsTaken: 0,
+
     maxCommand: 0,
 
     command: 0,
 
     nextCommandBonus: 0,
 
-    deck: shuffle(deck),
+    deck:
+      shuffle(deck),
 
     hand: [],
 
@@ -3013,51 +3520,61 @@ function createPlayer(
 
     burnedCards: [],
 
+    removedFromGame: [],
+
     eventsPlayedThisTurn:
       0,
   };
 }
 
 export function createGame(
-  player1Deck:
-    string[] =
+  player1Deck: string[] =
     createTestDeck(),
 
-  player2Deck:
-    string[] =
+  player2Deck: string[] =
     createTestDeck()
 ): GameState {
-  const player1Validation =
+  const p1Validation =
     validateDeck(
       player1Deck
     );
 
-  const player2Validation =
+  const p2Validation =
     validateDeck(
       player2Deck
     );
 
   if (
-    !player1Validation.valid
+    !p1Validation.valid
   ) {
     throw new Error(
-      `Player 1 deck invalid:\n${player1Validation.errors.join("\n")}`
+      `Player 1 deck invalid:\n${p1Validation.errors.join("\n")}`
     );
   }
 
   if (
-    !player2Validation.valid
+    !p2Validation.valid
   ) {
     throw new Error(
-      `Player 2 deck invalid:\n${player2Validation.errors.join("\n")}`
+      `Player 2 deck invalid:\n${p2Validation.errors.join("\n")}`
     );
   }
 
   const state: GameState = {
-    turnNumber: 1,
+    turnNumber: 0,
 
     activePlayerId:
       "player1",
+
+    phase:
+      "mulligan-player1",
+
+    mulligan: {
+      completed: {
+        player1: false,
+        player2: false,
+      },
+    },
 
     players: {
       player1:
@@ -3084,8 +3601,8 @@ export function createGame(
     nextInstanceNumber: 1,
   };
 
-  // Starting hand:
-  // exactly 5 cards each.
+  // Both players receive exactly
+  // five opening cards before mulligan.
   for (
     let index = 0;
     index <
@@ -3095,84 +3612,101 @@ export function createGame(
     drawCardMutable(
       state,
       "player1",
-      { silent: true }
+      {
+        silent: true,
+      }
     );
 
     drawCardMutable(
       state,
       "player2",
-      { silent: true }
+      {
+        silent: true,
+      }
     );
   }
-
-  addLog(
-    state,
-    "The Great Game begins."
-  );
-
-  // Player 1 then receives the
-  // normal Turn 1 draw and
-  // 1 Command.
-  startTurnMutable(
-    state,
-    "player1"
-  );
 
   return state;
 }
 
 // ─────────────────────────────────────────────
-// Public action dispatcher
+// Public dispatcher
 // ─────────────────────────────────────────────
 
 export function applyAction(
   state: GameState,
   action: GameAction
 ): ActionResult {
-  if (state.winner) {
+  if (
+    state.phase ===
+      "finished" ||
+    state.winner
+  ) {
     return {
       ok: false,
+
       state,
+
       error:
         "The game has already ended.",
     };
   }
 
   const draft =
-    cloneState(state);
+    cloneState(
+      state
+    );
 
   try {
+    // Mulligan phase
+    if (
+      action.type ===
+      "mulligan"
+    ) {
+      resolveMulliganMutable(
+        draft,
+        action
+      );
+
+      return {
+        ok: true,
+        state: draft,
+      };
+    }
+
+    assertRule(
+      draft.phase ===
+        "playing",
+      "The opening mulligan must be completed before gameplay begins."
+    );
+
     switch (action.type) {
-      case "play-card": {
+      case "play-card":
         playCardMutable(
           draft,
           action
         );
         break;
-      }
 
-      case "military-attack": {
+      case "military-attack":
         militaryAttackMutable(
           draft,
           action
         );
         break;
-      }
 
-      case "political-attack": {
+      case "political-attack":
         politicalAttackMutable(
           draft,
           action
         );
         break;
-      }
 
-      case "end-turn": {
+      case "end-turn":
         endTurnMutable(
           draft
         );
         break;
-      }
 
       default: {
         const exhaustive:
@@ -3186,18 +3720,18 @@ export function applyAction(
 
     return {
       ok: true,
+
       state: draft,
     };
   } catch (error) {
     return {
       ok: false,
 
-      // Failed actions never mutate
-      // the original state.
       state,
 
       error:
-        error instanceof Error
+        error instanceof
+        Error
           ? error.message
           : "Unknown game engine error.",
     };
