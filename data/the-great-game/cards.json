@@ -2,6 +2,7 @@
   {
     "id": "castle-swordsman",
     "cardType": "character",
+    "tierId": "c",
     "name": "Castle Swordsman",
     "cost": 1,
     "power": 1,
@@ -15,6 +16,7 @@
   {
     "id": "court-page",
     "cardType": "character",
+    "tierId": "c",
     "name": "Court Page",
     "cost": 1,
     "power": 0,
@@ -28,6 +30,7 @@
   {
     "id": "northern-warrior",
     "cardType": "character",
+    "tierId": "c",
     "name": "Northern Warrior",
     "houseId": "stark",
     "cost": 3,
@@ -42,6 +45,7 @@
   {
     "id": "baratheon-man-at-arms",
     "cardType": "character",
+    "tierId": "c",
     "name": "Baratheon Man-at-Arms",
     "houseId": "baratheon",
     "cost": 2,
@@ -56,6 +60,7 @@
   {
     "id": "dornish-sandshield",
     "cardType": "character",
+    "tierId": "c",
     "name": "Dornish Sandshield",
     "houseId": "martell",
     "cost": 2,
@@ -70,6 +75,7 @@
   {
     "id": "tully-river-guard",
     "cardType": "character",
+    "tierId": "b",
     "name": "Tully River Guard",
     "houseId": "tully",
     "cost": 3,
@@ -84,6 +90,7 @@
   {
     "id": "reach-courtier",
     "cardType": "character",
+    "tierId": "b",
     "name": "Reach Courtier",
     "houseId": "tyrell",
     "cost": 3,
@@ -98,6 +105,7 @@
   {
     "id": "lannister-household-knight",
     "cardType": "character",
+    "tierId": "c",
     "name": "Lannister Household Knight",
     "houseId": "lannister",
     "cost": 3,
@@ -112,6 +120,7 @@
   {
     "id": "vale-spearman",
     "cardType": "character",
+    "tierId": "c",
     "name": "Vale Spearman",
     "houseId": "arryn",
     "cost": 4,
@@ -126,6 +135,7 @@
   {
     "id": "ironborn-reaver",
     "cardType": "character",
+    "tierId": "c",
     "name": "Ironborn Reaver",
     "houseId": "greyjoy",
     "cost": 2,
@@ -140,6 +150,7 @@
   {
     "id": "dragonstone-swordsman",
     "cardType": "character",
+    "tierId": "b",
     "name": "Dragonstone Swordsman",
     "houseId": "targaryen",
     "cost": 4,
@@ -154,6 +165,7 @@
   {
     "id": "jacaelon-targaryen",
     "cardType": "character",
+    "tierId": "s-plus",
     "name": "Jacaelon Targaryen",
     "subtitle": "Hand of the King",
     "houseId": "targaryen",
@@ -176,6 +188,7 @@
   {
     "id": "gaelor-targaryen",
     "cardType": "character",
+    "tierId": "s-plus",
     "name": "Gaelor Targaryen",
     "subtitle": "The Housebreaker",
     "houseId": "targaryen",
@@ -198,6 +211,7 @@
   {
     "id": "alester-dayne",
     "cardType": "character",
+    "tierId": "s",
     "name": "Ser Alester Dayne",
     "subtitle": "Kingsguard",
     "houseId": "dayne",
@@ -205,7 +219,7 @@
     "power": 9,
     "influence": 3,
     "health": 8,
-    "traits": ["unique", "challenge"],
+    "traits": ["unique", "guard", "challenge"],
     "abilities": [
       {
         "id": "dawns-edge",
@@ -214,12 +228,13 @@
         "text": "The first 2 Military damage Alester would take each turn is prevented."
       }
     ],
-    "roles": ["military", "control"],
+    "roles": ["military", "control", "defensive"],
     "linkedCharacterId": "alester-dayne"
   },
   {
     "id": "renrose-tyrell",
     "cardType": "character",
+    "tierId": "a",
     "name": "Renrose Tyrell",
     "subtitle": "Lord of Highgarden",
     "houseId": "tyrell",
@@ -233,7 +248,7 @@
         "id": "manders-pact",
         "name": "The Mander's Pact",
         "trigger": "arrival",
-        "text": "Choose another Character. It gains +2 Influence permanently. At the start of your next turn, if that Character is still in play, draw 1 card."
+        "text": "Choose another Character. It gains +2 Influence permanently. At the start of your next turn, if that exact Character is still in play, draw 1 card."
       }
     ],
     "roles": ["political", "support", "value"],
@@ -242,6 +257,7 @@
   {
     "id": "cordin-poole",
     "cardType": "character",
+    "tierId": "c",
     "name": "Cordin Poole",
     "subtitle": "Maester",
     "cost": 3,
@@ -254,7 +270,7 @@
         "id": "as-i-was-saying",
         "name": "As I Was Saying",
         "trigger": "start-of-turn",
-        "text": "Draw 1 card. If this ability triggered last turn and you successfully drew a card, the card you drew this turn costs 1 less Command to play."
+        "text": "Draw 1 card. If this ability successfully drew a card on your previous turn, the card drawn by this ability this turn costs 1 less Command until the end of your turn."
       }
     ],
     "roles": ["support", "value"],
@@ -263,6 +279,7 @@
   {
     "id": "saera-targaryen",
     "cardType": "character",
+    "tierId": "s",
     "name": "Saera Targaryen",
     "subtitle": "Cloud Eyes",
     "houseId": "targaryen",
@@ -276,7 +293,7 @@
         "id": "veiled-sight",
         "name": "Veiled Sight",
         "trigger": "arrival",
-        "text": "Look at your opponent's hand. Choose one card. Until the start of your next turn, that card costs 2 more Command to play."
+        "text": "After Saera enters play, reveal your opponent's hand. Choose one card. Until the start of your next turn, that exact card costs 2 more Command to play."
       }
     ],
     "roles": ["support", "utility"],
@@ -285,6 +302,7 @@
   {
     "id": "baelenys-targaryen",
     "cardType": "character",
+    "tierId": "s-plus",
     "name": "Baelenys Targaryen",
     "subtitle": "King of the Seven Kingdoms",
     "houseId": "targaryen",
@@ -298,7 +316,7 @@
         "id": "iron-wrath",
         "name": "Iron Wrath",
         "trigger": "arrival",
-        "text": "Deal 3 damage to an enemy Character. If that Character is destroyed this way, gain 3 Standing."
+        "text": "After Baelenys enters play, deal 3 damage to an enemy Character. If that Character is destroyed this way, gain 3 Standing."
       }
     ],
     "roles": ["core", "finisher", "control"],
@@ -307,6 +325,7 @@
   {
     "id": "weylar-rocke",
     "cardType": "character",
+    "tierId": "b",
     "name": "Weylar Rocke",
     "subtitle": "Master of Whisperers",
     "cost": 4,
@@ -319,7 +338,7 @@
         "id": "price-of-loyalty",
         "name": "The Price of Loyalty",
         "trigger": "end-of-turn",
-        "text": "At the end of your 3rd turn after Weylar enters play, draw 2 cards and gain 2 Command next turn."
+        "text": "At the end of your 3rd turn with Weylar in play, draw 2 cards and gain 2 additional Command on your next turn."
       }
     ],
     "roles": ["control", "value"],
@@ -328,6 +347,7 @@
   {
     "id": "jhagar",
     "cardType": "dragon",
+    "tierId": "s",
     "name": "Jhagar",
     "houseId": "targaryen",
     "cost": 8,
@@ -347,6 +367,7 @@
   {
     "id": "cloudgazer",
     "cardType": "dragon",
+    "tierId": "s",
     "name": "Cloudgazer",
     "houseId": "targaryen",
     "cost": 7,
@@ -366,6 +387,7 @@
   {
     "id": "maelwing",
     "cardType": "dragon",
+    "tierId": "s-plus",
     "name": "Maelwing",
     "houseId": "targaryen",
     "cost": 10,
@@ -385,6 +407,7 @@
   {
     "id": "word-in-the-right-ear",
     "cardType": "event",
+    "tierId": "c",
     "name": "A Word in the Right Ear",
     "cost": 1,
     "traits": [],
@@ -401,6 +424,7 @@
   {
     "id": "trial-by-combat",
     "cardType": "event",
+    "tierId": "b",
     "name": "Trial by Combat",
     "cost": 3,
     "traits": [],
@@ -417,6 +441,7 @@
   {
     "id": "oldtown-massacre",
     "cardType": "event",
+    "tierId": "a",
     "name": "Oldtown Massacre",
     "cost": 6,
     "traits": [],
@@ -433,6 +458,7 @@
   {
     "id": "brothers-tilt",
     "cardType": "event",
+    "tierId": "b",
     "name": "The Brothers' Tilt",
     "cost": 3,
     "traits": [],
@@ -449,7 +475,9 @@
   {
     "id": "blackfyre",
     "cardType": "artifact",
+    "tierId": "s",
     "name": "Blackfyre",
+    "subtitle": "Ancestral Valyrian Steel Sword",
     "cost": 4,
     "houseId": "targaryen",
     "traits": ["unique"],
@@ -466,7 +494,9 @@
   {
     "id": "dark-sister",
     "cardType": "artifact",
+    "tierId": "a",
     "name": "Dark Sister",
+    "subtitle": "Ancestral Valyrian Steel Sword",
     "cost": 3,
     "houseId": "targaryen",
     "traits": ["unique"],
@@ -483,6 +513,7 @@
   {
     "id": "dragonstone",
     "cardType": "location",
+    "tierId": "a",
     "name": "Dragonstone",
     "cost": 5,
     "traits": [],
@@ -499,6 +530,7 @@
   {
     "id": "kings-landing",
     "cardType": "location",
+    "tierId": "a",
     "name": "King's Landing",
     "cost": 5,
     "traits": [],
@@ -515,6 +547,7 @@
   {
     "id": "oldtown",
     "cardType": "location",
+    "tierId": "a",
     "name": "Oldtown",
     "cost": 5,
     "traits": [],
@@ -523,7 +556,7 @@
         "id": "oldtown",
         "name": "Oldtown",
         "trigger": "passive",
-        "text": "The first Event each player plays on their turn costs 1 less."
+        "text": "The first normal Event each player plays on their turn costs 1 less."
       }
     ],
     "roles": ["value", "support"]
@@ -531,6 +564,7 @@
   {
     "id": "royal-favor",
     "cardType": "event",
+    "tierId": "c",
     "name": "Royal Favor",
     "subtitle": "Second Player Boon",
     "cost": 0,

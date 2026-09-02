@@ -15,6 +15,13 @@ export type CardType =
   | "artifact"
   | "location";
 
+export type TierId =
+  | "s-plus"
+  | "s"
+  | "a"
+  | "b"
+  | "c";
+
 export type Trait =
   | "unique"
   | "dragon"
@@ -98,6 +105,8 @@ interface BaseCard {
 
   cardType: CardType;
 
+  tierId: TierId;
+
   name: string;
   subtitle?: string;
 
@@ -116,17 +125,8 @@ interface BaseCard {
 
   generic?: boolean;
 
-  /**
-   * Defaults to true.
-   *
-   * Royal Favor is not deckable.
-   */
   deckable?: boolean;
 
-  /**
-   * Marks special cards created by game rules
-   * rather than normal deck construction.
-   */
   special?: SpecialCardKind;
 }
 
@@ -230,25 +230,8 @@ export interface UnitState {
 
   currentHealth: number;
 
-  /**
-   * Exhaustion only lasts for the current
-   * player-turn.
-   *
-   * Every unit becomes Ready whenever
-   * End Turn is pressed.
-   */
   exhausted: boolean;
 
-  /**
-   * Prevents a newly deployed unit from
-   * initiating a normal conflict that turn.
-   *
-   * Swift overrides this for Military.
-   * Schemer overrides this for Political.
-   *
-   * Removed at the end of the deploying
-   * player's turn.
-   */
   deployedThisTurn: boolean;
 
   grounded: boolean;
@@ -257,9 +240,15 @@ export interface UnitState {
 
   modifiers: RuntimeModifier[];
 
-  counters: Record<string, number>;
+  counters: Record<
+    string,
+    number
+  >;
 
-  flags: Record<string, boolean>;
+  flags: Record<
+    string,
+    boolean
+  >;
 }
 
 // ─────────────────────────────────────────────
@@ -271,19 +260,11 @@ export interface PlayerState {
 
   standing: number;
 
-  /**
-   * Number of this player's own turns
-   * that have begun.
-   */
   turnsTaken: number;
 
   maxCommand: number;
   command: number;
 
-  /**
-   * Temporary bonus applied when
-   * the player's next turn begins.
-   */
   nextCommandBonus: number;
 
   deck: string[];
@@ -296,10 +277,6 @@ export interface PlayerState {
 
   burnedCards: string[];
 
-  /**
-   * Special cards such as Royal Favor
-   * leave the game after use.
-   */
   removedFromGame: string[];
 
   eventsPlayedThisTurn: number;
@@ -333,6 +310,23 @@ export interface DelayedEffect {
 }
 
 // ─────────────────────────────────────────────
+// Mandatory ability resolution
+// ─────────────────────────────────────────────
+
+export interface PendingEffectState {
+  id: string;
+
+  controllerId: PlayerId;
+
+  sourceUnitInstanceId: string;
+
+  abilityId:
+    | "manders-pact"
+    | "veiled-sight"
+    | "iron-wrath";
+}
+
+// ─────────────────────────────────────────────
 // Mulligan
 // ─────────────────────────────────────────────
 
@@ -359,12 +353,6 @@ export type GameWinner =
   | null;
 
 export interface GameState {
-  /**
-   * Global chronological turn sequence.
-   *
-   * Player-facing turn counts live on
-   * PlayerState.turnsTaken.
-   */
   turnNumber: number;
 
   activePlayerId: PlayerId;
@@ -384,6 +372,10 @@ export interface GameState {
 
   delayedEffects:
     DelayedEffect[];
+
+  pendingEffect:
+    | PendingEffectState
+    | null;
 
   winner: GameWinner;
 
@@ -418,6 +410,14 @@ export interface MulliganAction {
   type: "mulligan";
 
   replaceHandInstanceIds: string[];
+}
+
+export interface ResolvePendingEffectAction {
+  type: "resolve-pending-effect";
+
+  targetInstanceId?: string;
+
+  targetHandInstanceId?: string;
 }
 
 export interface MilitaryAttackAction {
@@ -456,6 +456,7 @@ export interface EndTurnAction {
 
 export type GameAction =
   | MulliganAction
+  | ResolvePendingEffectAction
   | PlayCardAction
   | MilitaryAttackAction
   | PoliticalAttackAction
