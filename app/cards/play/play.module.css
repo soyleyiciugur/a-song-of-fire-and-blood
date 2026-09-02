@@ -23,8 +23,9 @@
 }
 
 /* Clickable elements always use action cursor */
-button:not(:disabled),
-[role="button"]:not(:disabled) {
+
+:global(button:not(:disabled)),
+:global([role="button"]:not(:disabled)) {
   cursor: var(--realm-action-cursor);
 }
 
