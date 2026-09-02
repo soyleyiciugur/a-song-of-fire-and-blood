@@ -825,84 +825,39 @@
   font-size: 2rem;
 }
 
-.cost {
+.cost,
+.tierBadge {
   position: absolute;
 
   top: 0.45rem;
-  left: 0.45rem;
 
   z-index: 5;
 
-  width: 1.8rem;
-  height: 1.8rem;
+  min-width: 1.95rem;
+  height: 1.95rem;
+
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 50%;
+  padding: 0 0.45rem;
 
-  border:
-    1px solid rgba(183, 219, 250, 0.6);
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #7396b3,
-      #304657 72%
-    );
-
-  color: #fff;
-
-  font-family:
-    var(--font-hotd),
-    serif;
-
-  font-weight: 700;
-
-  box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.7);
-}
-
-.tierBadge {
-  position: absolute;
-
-  top: 0.5rem;
-  left: 50%;
-
-  z-index: 5;
-
-  transform:
-    translateX(-50%);
-
-  min-width: 1.8rem;
-
-  padding: 0.22rem 0.5rem;
-
-  box-sizing: border-box;
-
-  text-align: center;
-
-  border:
-    1px solid
-    color-mix(
-      in srgb,
-      var(--tier-accent, #d4af37) 55%,
-      transparent
-    );
-
-  background:
-    color-mix(
-      in srgb,
-      var(--tier-color, #8b1e2b) 78%,
-      rgba(5, 4, 7, 0.92)
+  clip-path:
+    polygon(
+      0.28rem 0,
+      calc(100% - 0.28rem) 0,
+      100% 0.28rem,
+      100% calc(100% - 0.28rem),
+      calc(100% - 0.28rem) 100%,
+      0.28rem 100%,
+      0 calc(100% - 0.28rem),
+      0 0.28rem
     );
 
   backdrop-filter:
     blur(6px);
-
-  color:
-    var(--tier-accent, #d4af37);
 
   font-family:
     var(--font-hotd),
@@ -910,8 +865,66 @@
 
   font-size: 0.62rem;
   font-weight: 700;
+  line-height: 1;
 
+  text-align: center;
   text-transform: uppercase;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+.cost {
+  left: 0.45rem;
+
+  width: 1.95rem;
+
+  padding: 0;
+
+  border:
+    1px solid rgba(183, 219, 250, 0.62);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(87, 119, 145, 0.96),
+      rgba(31, 47, 60, 0.96)
+    );
+
+  color: #edf7ff;
+}
+
+.tierBadge {
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 62%,
+      transparent
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 86%,
+        #171118
+      ),
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 58%,
+        #070507
+      )
+    );
+
+  color:
+    var(--tier-accent, #d4af37);
 }
 
 .uniqueMark {
@@ -1368,7 +1381,18 @@
 }
 
 .cardInfoPanelWithActions {
+  height: 64%;
+
   padding-bottom: 2.55rem;
+}
+
+.cardInfoPanelWithActions .abilityDisplay {
+  overflow: hidden;
+}
+
+.cardInfoPanelWithActions .abilityDisplay p {
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
 }
 
 .unitActions button {
