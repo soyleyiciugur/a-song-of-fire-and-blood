@@ -442,7 +442,7 @@ export default function GreatGamePlayPage() {
     return null;
   }
 
-  const currentGame: GameState = currentGame;
+  const currentGame: GameState = game;
 
   const activePlayerId =
     currentGame.activePlayerId;
