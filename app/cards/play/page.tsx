@@ -99,6 +99,12 @@ type PendingConflict =
       unopposed: boolean;
     };
 
+type DragCursorState = {
+  x: number;
+  y: number;
+  canDrop: boolean;
+};
+
 const TIER_MAP = new Map<
   TierId,
   {
@@ -448,6 +454,14 @@ export default function GreatGamePlayPage() {
     );
 
   const [
+    dragCursor,
+    setDragCursor,
+  ] =
+    useState<DragCursorState | null>(
+      null
+    );
+
+  const [
     exitConfirm,
     setExitConfirm,
   ] =
@@ -468,6 +482,7 @@ export default function GreatGamePlayPage() {
     setHandoff(false);
     setMulliganSelected([]);
     setDraggingHandInstanceId(null);
+    setDragCursor(null);
     setExitConfirm(false);
   }
 
@@ -484,6 +499,7 @@ export default function GreatGamePlayPage() {
     setHandoff(false);
     setMulliganSelected([]);
     setDraggingHandInstanceId(null);
+    setDragCursor(null);
     setExitConfirm(false);
   }
 
@@ -603,6 +619,8 @@ export default function GreatGamePlayPage() {
       null
     );
 
+    setDragCursor(null);
+
     return true;
   }
 
@@ -628,6 +646,8 @@ export default function GreatGamePlayPage() {
     setDraggingHandInstanceId(
       null
     );
+
+    setDragCursor(null);
 
     setError(null);
   }
@@ -755,6 +775,8 @@ export default function GreatGamePlayPage() {
     setDraggingHandInstanceId(
       null
     );
+
+    setDragCursor(null);
 
     setHandoff(true);
   }
@@ -934,6 +956,29 @@ export default function GreatGamePlayPage() {
       handInstanceId:
         pendingPlay.handInstanceId,
     });
+  }
+
+  function confirmSelectedPreview() {
+    if (!pendingPlay) {
+      return;
+    }
+
+    switch (pendingPlay.kind) {
+      case "deploy":
+      case "confirm":
+        confirmSelectedOnBoard();
+        return;
+
+      case "artifact":
+      case "word-in-right-ear":
+      case "brothers-tilt":
+      case "trial-by-combat":
+        setPendingPlay({
+          ...pendingPlay,
+          hidePreview: true,
+        });
+        return;
+    }
   }
 
   function handleUnitTarget(
@@ -1650,6 +1695,18 @@ export default function GreatGamePlayPage() {
       return false;
     }
 
+    if (draggingHandInstanceId) {
+      const draggedHandCard =
+        getDraggedHandCard();
+
+      return draggedHandCard
+        ? canDropHandCardOnUnit(
+            draggedHandCard,
+            unit
+          )
+        : false;
+    }
+
     if (pendingPlay) {
       switch (
         pendingPlay.kind
@@ -1810,6 +1867,116 @@ export default function GreatGamePlayPage() {
     return null;
   }
 
+  function canDropHandCardOnBoard(
+    handCard: HandCardState
+  ): boolean {
+    if (!canPlayHandCard(handCard)) {
+      return false;
+    }
+
+    const card =
+      getGameCard(
+        handCard.cardId
+      );
+
+    return (
+      isUnitCard(card) ||
+      card.cardType ===
+        "location" ||
+      card.id ===
+        "oldtown-massacre" ||
+      card.id ===
+        "royal-favor"
+    );
+  }
+
+  function canDropHandCardOnUnit(
+    handCard: HandCardState,
+    unit: UnitState
+  ): boolean {
+    if (!canPlayHandCard(handCard)) {
+      return false;
+    }
+
+    const card =
+      getGameCard(
+        handCard.cardId
+      );
+
+    const targetCard =
+      getGameCard(
+        unit.cardId
+      );
+
+    if (
+      canDropHandCardOnBoard(
+        handCard
+      )
+    ) {
+      return (
+        unit.ownerId ===
+        currentGame.activePlayerId
+      );
+    }
+
+    if (
+      card.cardType ===
+      "artifact"
+    ) {
+      return (
+        unit.ownerId ===
+          currentGame.activePlayerId &&
+        targetCard.cardType ===
+          "character" &&
+        !unit.attachedArtifactId
+      );
+    }
+
+    if (
+      card.id ===
+      "word-in-the-right-ear"
+    ) {
+      return (
+        targetCard.cardType ===
+        "character"
+      );
+    }
+
+    if (
+      card.id ===
+        "brothers-tilt" ||
+      card.id ===
+        "trial-by-combat"
+    ) {
+      return (
+        unit.ownerId ===
+          currentGame.activePlayerId &&
+        targetCard.cardType ===
+          "character"
+      );
+    }
+
+    return false;
+  }
+
+  function updateDragCursor(
+    event: DragEvent,
+    canDrop: boolean
+  ) {
+    if (
+      event.clientX === 0 &&
+      event.clientY === 0
+    ) {
+      return;
+    }
+
+    setDragCursor({
+      x: event.clientX,
+      y: event.clientY,
+      canDrop,
+    });
+  }
+
   function handleHandDragStart(
     event: DragEvent,
     handCard: HandCardState
@@ -1823,11 +1990,27 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    if (!canPlayHandCard(handCard)) {
+      event.preventDefault();
+
+      setError(
+        "That card cannot be played right now."
+      );
+
+      return;
+    }
+
     setPendingPlay(null);
 
     setDraggingHandInstanceId(
       handCard.instanceId
     );
+
+    setDragCursor({
+      x: event.clientX,
+      y: event.clientY,
+      canDrop: false,
+    });
 
     event.dataTransfer.effectAllowed =
       "move";
@@ -1836,12 +2019,80 @@ export default function GreatGamePlayPage() {
       "text/plain",
       handCard.instanceId
     );
+
+    const transparentGhost =
+      document.createElement(
+        "span"
+      );
+
+    transparentGhost.style.position =
+      "fixed";
+    transparentGhost.style.left =
+      "-100px";
+    transparentGhost.style.top =
+      "-100px";
+    transparentGhost.style.width =
+      "1px";
+    transparentGhost.style.height =
+      "1px";
+    transparentGhost.style.opacity =
+      "0";
+
+    document.body.appendChild(
+      transparentGhost
+    );
+
+    event.dataTransfer.setDragImage(
+      transparentGhost,
+      0,
+      0
+    );
+
+    requestAnimationFrame(() =>
+      transparentGhost.remove()
+    );
+  }
+
+  function handleHandDrag(
+    event: DragEvent
+  ) {
+    if (
+      event.clientX === 0 &&
+      event.clientY === 0
+    ) {
+      return;
+    }
+
+    setDragCursor(
+      (current) => ({
+        x: event.clientX,
+        y: event.clientY,
+        canDrop:
+          current?.canDrop ??
+          false,
+      })
+    );
+  }
+
+  function handleGameDragOver(
+    event: DragEvent
+  ) {
+    if (!draggingHandInstanceId) {
+      return;
+    }
+
+    updateDragCursor(
+      event,
+      false
+    );
   }
 
   function handleHandDragEnd() {
     setDraggingHandInstanceId(
       null
     );
+
+    setDragCursor(null);
   }
 
   function getDraggedHandCard():
@@ -1865,16 +2116,61 @@ export default function GreatGamePlayPage() {
   function handleBoardDragOver(
     event: DragEvent
   ) {
-    if (
-      !draggingHandInstanceId
-    ) {
+    const handCard =
+      getDraggedHandCard();
+
+    if (!handCard) {
       return;
     }
 
     event.preventDefault();
+    event.stopPropagation();
+
+    const canDrop =
+      canDropHandCardOnBoard(
+        handCard
+      );
 
     event.dataTransfer.dropEffect =
-      "move";
+      canDrop
+        ? "move"
+        : "none";
+
+    updateDragCursor(
+      event,
+      canDrop
+    );
+  }
+
+  function handleUnitDragOver(
+    event: DragEvent,
+    unit: UnitState
+  ) {
+    const handCard =
+      getDraggedHandCard();
+
+    if (!handCard) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const canDrop =
+      canDropHandCardOnUnit(
+        handCard,
+        unit
+      );
+
+    event.dataTransfer.dropEffect =
+      canDrop
+        ? "move"
+        : "none";
+
+    updateDragCursor(
+      event,
+      canDrop
+    );
   }
 
   function handleBoardDrop(
@@ -1898,14 +2194,12 @@ export default function GreatGamePlayPage() {
       null
     );
 
+    setDragCursor(null);
+
     if (
-      isUnitCard(card) ||
-      card.cardType ===
-        "location" ||
-      card.id ===
-        "oldtown-massacre" ||
-      card.id ===
-        "royal-favor"
+      canDropHandCardOnBoard(
+        handCard
+      )
     ) {
       dispatch({
         type:
@@ -1946,8 +2240,25 @@ export default function GreatGamePlayPage() {
       null
     );
 
+    setDragCursor(null);
+
     if (
-      isUnitCard(card)
+      !canDropHandCardOnUnit(
+        handCard,
+        unit
+      )
+    ) {
+      setError(
+        `${card.name} cannot be played on that unit.`
+      );
+
+      return;
+    }
+
+    if (
+      canDropHandCardOnBoard(
+        handCard
+      )
     ) {
       dispatch({
         type:
@@ -2033,13 +2344,9 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    dispatch({
-      type:
-        "play-card",
-
-      handInstanceId:
-        handCard.instanceId,
-    });
+    setError(
+      `${card.name} requires a different target.`
+    );
   }
 
   if (
@@ -2257,6 +2564,16 @@ export default function GreatGamePlayPage() {
     pendingPlay?.kind ===
       "confirm";
 
+  const draggedHandCard =
+    getDraggedHandCard();
+
+  const canReceiveDraggedCard =
+    draggedHandCard
+      ? canDropHandCardOnBoard(
+          draggedHandCard
+        )
+      : false;
+
   const showSelectedPreview =
     Boolean(
       selectedHandCard &&
@@ -2268,8 +2585,13 @@ export default function GreatGamePlayPage() {
 
   return (
     <main
-      className={
-        styles.game
+      className={`${styles.game} ${
+        draggingHandInstanceId
+          ? styles.draggingGame
+          : ""
+      }`}
+      onDragOver={
+        handleGameDragOver
       }
     >
       <div
@@ -2278,6 +2600,46 @@ export default function GreatGamePlayPage() {
         }
         aria-hidden
       />
+
+      {dragCursor && (
+        <div
+          className={`${styles.dragCursorOverlay} ${
+            dragCursor.canDrop
+              ? styles.dragCursorCanDrop
+              : ""
+          }`}
+          style={{
+            left: dragCursor.x,
+            top: dragCursor.y,
+          }}
+          aria-hidden
+        >
+          <svg
+            viewBox="0 0 32 32"
+            aria-hidden
+          >
+            <path
+              d="M5 3 26 14l-8 2.2 4.5 9-4.2 2.1-4.4-8.9L7 25Z"
+              fill="currentColor"
+              stroke="#100909"
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            />
+
+            <path
+              d="m10 9 9 4.7-4.8 1.4Z"
+              fill="#fff0ba"
+              opacity="0.52"
+            />
+          </svg>
+
+          <small>
+            {dragCursor.canDrop
+              ? "Release"
+              : "Choose target"}
+          </small>
+        </div>
+      )}
 
       <header
         className={
@@ -2505,6 +2867,9 @@ export default function GreatGamePlayPage() {
         selectedInstanceId={
           selectedAttacker
         }
+        onDragOverUnit={
+          handleUnitDragOver
+        }
         onDropOnUnit={
           handleDropOnUnit
         }
@@ -2538,7 +2903,7 @@ export default function GreatGamePlayPage() {
         canReceivePlay={
           Boolean(
             canReceiveBoardPlay ||
-              draggingHandInstanceId
+              canReceiveDraggedCard
           )
         }
         onBoardClick={
@@ -2551,6 +2916,9 @@ export default function GreatGamePlayPage() {
         }
         onBoardDrop={
           handleBoardDrop
+        }
+        onDragOverUnit={
+          handleUnitDragOver
         }
         onDropOnUnit={
           handleDropOnUnit
@@ -2721,6 +3089,9 @@ export default function GreatGamePlayPage() {
                 onDragEnd={
                   handleHandDragEnd
                 }
+                onDrag={
+                  handleHandDrag
+                }
               />
             )
           )}
@@ -2807,7 +3178,7 @@ export default function GreatGamePlayPage() {
                 cancelSelection
               }
               onConfirm={
-                confirmSelectedOnBoard
+                confirmSelectedPreview
               }
             />
           </>
@@ -3319,6 +3690,7 @@ function Board({
   onBoardClick,
   onBoardDragOver,
   onBoardDrop,
+  onDragOverUnit,
   onDropOnUnit,
 }: {
   title: string;
@@ -3343,6 +3715,10 @@ function Board({
   ) => void;
   onBoardDrop?: (
     event: DragEvent
+  ) => void;
+  onDragOverUnit?: (
+    event: DragEvent,
+    unit: UnitState
   ) => void;
   onDropOnUnit?: (
     event: DragEvent,
@@ -3437,6 +3813,14 @@ function Board({
                   unit
                 )
               }
+              onDragOver={(
+                event
+              ) =>
+                onDragOverUnit?.(
+                  event,
+                  unit
+                )
+              }
               actions={
                 renderActions?.(
                   unit
@@ -3456,6 +3840,7 @@ function BoardUnit({
   targetable,
   selected,
   onClick,
+  onDragOver,
   onDrop,
   actions,
 }: {
@@ -3464,6 +3849,9 @@ function BoardUnit({
   targetable: boolean;
   selected: boolean;
   onClick: () => void;
+  onDragOver: (
+    event: DragEvent
+  ) => void;
   onDrop: (
     event: DragEvent
   ) => void;
@@ -3546,8 +3934,9 @@ function BoardUnit({
       onDragOver={(
         event
       ) => {
-        event.preventDefault();
-        event.stopPropagation();
+        onDragOver(
+          event
+        );
       }}
       onDrop={
         onDrop
@@ -3680,6 +4069,7 @@ function HandCard({
   interactionLocked,
   onPlay,
   onDragStart,
+  onDrag,
   onDragEnd,
 }: {
   handCard: HandCardState;
@@ -3690,6 +4080,9 @@ function HandCard({
   interactionLocked: boolean;
   onPlay: () => void;
   onDragStart: (
+    event: DragEvent
+  ) => void;
+  onDrag: (
     event: DragEvent
   ) => void;
   onDragEnd: () => void;
@@ -3744,6 +4137,9 @@ function HandCard({
       }
       onDragStart={
         onDragStart
+      }
+      onDrag={
+        onDrag
       }
       onDragEnd={
         onDragEnd
@@ -4127,11 +4523,25 @@ function SelectedCardPreview({
       handCard
     );
 
-  const confirmable =
-    pendingPlay.kind ===
-      "deploy" ||
-    pendingPlay.kind ===
-      "confirm";
+  const actionLabel = (() => {
+    switch (pendingPlay.kind) {
+      case "deploy":
+        return "Deploy";
+
+      case "confirm":
+        return "Play Card";
+
+      case "artifact":
+        return "Equip";
+
+      case "word-in-right-ear":
+      case "brothers-tilt":
+        return "Choose Target";
+
+      case "trial-by-combat":
+        return "Begin Trial";
+    }
+  })();
 
   return (
     <div
@@ -4176,21 +4586,16 @@ function SelectedCardPreview({
             Cancel
           </button>
 
-          {confirmable && (
-            <button
-              className={
-                styles.selectedConfirm
-              }
-              onClick={
-                onConfirm
-              }
-            >
-              {pendingPlay.kind ===
-              "deploy"
-                ? "Deploy"
-                : "Play Card"}
-            </button>
-          )}
+          <button
+            className={
+              styles.selectedConfirm
+            }
+            onClick={
+              onConfirm
+            }
+          >
+            {actionLabel}
+          </button>
         </div>
       </div>
     </div>

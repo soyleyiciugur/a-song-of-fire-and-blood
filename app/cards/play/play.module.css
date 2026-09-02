@@ -53,6 +53,88 @@
     #06040a;
 }
 
+.draggingGame,
+.draggingGame * {
+  cursor: none !important;
+}
+
+.dragCursorOverlay {
+  position: fixed;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.38rem;
+
+  transform:
+    translate(10px, 10px);
+
+  padding: 0.38rem 0.55rem;
+
+  pointer-events: none;
+
+  border:
+    1px solid rgba(157, 101, 83, 0.58);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(34, 22, 22, 0.96),
+      rgba(12, 8, 10, 0.96)
+    );
+
+  color:
+    rgba(225, 190, 174, 0.82);
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.55);
+}
+
+.dragCursorOverlay svg {
+  width: 1.15rem;
+  height: 1.15rem;
+
+  flex: 0 0 auto;
+
+  color: #9d6553;
+}
+
+.dragCursorOverlay small {
+  font-family:
+    var(--font-hotd),
+    serif;
+
+  font-size: 0.54rem;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+.dragCursorCanDrop {
+  border-color:
+    rgba(212, 175, 55, 0.74);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(73, 55, 20, 0.97),
+      rgba(24, 16, 10, 0.97)
+    );
+
+  color: #f3dda0;
+
+  box-shadow:
+    0 0 18px rgba(212, 175, 55, 0.2),
+    0 7px 18px rgba(0, 0, 0, 0.55);
+}
+
+.dragCursorCanDrop svg {
+  color: #d4af37;
+}
+
 /* Main menu */
 
 .mainMenu {
@@ -694,14 +776,14 @@
 }
 
 .board {
-  min-height: 270px;
+  min-height: 300px;
 
   display: grid;
 
   grid-template-columns:
     repeat(
       6,
-      minmax(185px, 1fr)
+      minmax(205px, 1fr)
     );
 
   gap: 0.75rem;
@@ -870,34 +952,41 @@
 .cost {
   left: 0.45rem;
 
-  width: 2rem;
-  height: 2rem;
+  width: 2.05rem;
+  height: 2.2rem;
 
   padding: 0;
 
-  border:
-    1px solid rgba(190, 222, 238, 0.7);
-
-  border-radius: 50%;
+  border: 0;
 
   background:
-    radial-gradient(
-      circle at 34% 27%,
-      rgba(190, 224, 238, 0.9),
-      rgba(69, 101, 122, 0.96) 35%,
-      rgba(22, 37, 49, 0.98) 76%
+    linear-gradient(
+      145deg,
+      #aa8744,
+      #5f431e 52%,
+      #26170d
     );
 
-  color: #edf7ff;
+  clip-path:
+    polygon(
+      50% 0,
+      90% 15%,
+      84% 70%,
+      50% 100%,
+      16% 70%,
+      10% 15%
+    );
+
+  color: #fff0ba;
 
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.9);
 
   box-shadow:
-    inset 0 0 0 2px rgba(7, 14, 20, 0.5),
-    inset 0 0 0 3px rgba(214, 235, 245, 0.17),
+    inset 0 0 0 2px rgba(241, 207, 126, 0.2),
+    inset 0 -8px 12px rgba(20, 10, 4, 0.35),
     0 3px 10px rgba(0, 0, 0, 0.72),
-    0 0 12px rgba(93, 147, 177, 0.16);
+    0 0 10px rgba(169, 121, 51, 0.13);
 }
 
 .tierBadge {
@@ -906,18 +995,12 @@
   transform:
     translateX(-50%);
 
-  min-width: 2.15rem;
-  height: 1.55rem;
+  min-width: 2rem;
+  height: 1.38rem;
 
-  padding: 0 0.55rem;
+  padding: 0 0.5rem;
 
-  border:
-    1px solid
-    color-mix(
-      in srgb,
-      var(--tier-accent, #d4af37) 62%,
-      transparent
-    );
+  border: 0;
 
   background:
     linear-gradient(
@@ -934,26 +1017,19 @@
       )
     );
 
-  clip-path:
-    polygon(
-      0.25rem 0,
-      calc(100% - 0.25rem) 0,
-      100% 50%,
-      calc(100% - 0.25rem) 100%,
-      0.25rem 100%,
-      0 50%
-    );
+  border-radius: 1px;
 
   color:
     var(--tier-accent, #d4af37);
 
   box-shadow:
-    inset 0 0 0 1px
+    inset 0 -2px 0
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 16%,
+        var(--tier-accent, #d4af37) 62%,
         transparent
       ),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 3px 10px rgba(0, 0, 0, 0.72);
 }
 
@@ -983,7 +1059,7 @@
 
   z-index: 4;
 
-  height: 50%;
+  height: 55%;
 
   box-sizing: border-box;
 
@@ -993,7 +1069,7 @@
     2.35rem
     1.05rem
     1.05rem
-    minmax(1.5rem, 1fr)
+    minmax(2.15rem, 1fr)
     0.9rem;
 
   gap: 0.08rem;
@@ -1122,7 +1198,7 @@
     var(--font-hotd),
     serif;
 
-  font-size: 0.54rem;
+  font-size: 0.59rem;
 }
 
 .emptyCardStats {
@@ -1175,7 +1251,7 @@
     var(--font-hotd),
     serif;
 
-  font-size: 0.38rem;
+  font-size: 0.43rem;
 
   letter-spacing: 0.03em;
 
@@ -1224,7 +1300,7 @@
     var(--font-hotd),
     serif;
 
-  font-size: 0.39rem;
+  font-size: 0.5rem;
   font-weight: 700;
 
   text-transform: uppercase;
@@ -1247,30 +1323,24 @@
     var(--font-hotd),
     serif;
 
-  font-size: 0.43rem;
+  font-size: 0.53rem;
 
   text-overflow: ellipsis;
 }
 
 .abilityDisplay p {
-  display: -webkit-box;
+  display: block;
 
   margin: 0.16rem 0 0;
 
   overflow: hidden;
 
   color:
-    rgba(245, 230, 200, 0.58);
+    rgba(245, 230, 200, 0.74);
 
-  font-size: 0.46rem;
+  font-size: 0.61rem;
 
-  line-height: 1.3;
-
-  -webkit-box-orient:
-    vertical;
-
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
+  line-height: 1.4;
 }
 
 .cardFooter {
@@ -1283,7 +1353,7 @@
 /* Board cards */
 
 .unitCard {
-  min-width: 185px;
+  min-width: 205px;
 
   width: 100%;
 
@@ -1305,12 +1375,13 @@
   box-shadow:
     0 0 0 1px
       var(--tier-accent, #d4af37),
-    0 0 30px
+    0 0 18px
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 35%,
+        var(--tier-accent, #d4af37) 28%,
         transparent
-      );
+      ),
+    0 14px 30px rgba(0, 0, 0, 0.42);
 }
 
 .selectedUnit {
@@ -1324,10 +1395,10 @@
         var(--tier-accent, #d4af37) 50%,
         transparent
       ),
-    0 0 35px
+    0 0 22px
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 30%,
+        var(--tier-accent, #d4af37) 32%,
         transparent
       );
 }
@@ -1384,7 +1455,7 @@
     );
 
   animation:
-    cardGleam 2.8s ease-in-out infinite;
+    cardGleam 3.8s ease-in-out infinite;
 
   box-shadow:
     inset 0 0 0 1px
@@ -1393,10 +1464,10 @@
         var(--tier-accent, #d4af37) 48%,
         transparent
       ),
-    inset 0 0 18px
+    inset 0 0 26px
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 7%,
+        var(--tier-accent, #d4af37) 11%,
         transparent
       );
 }
@@ -1568,24 +1639,19 @@
 }
 
 .cardInfoPanelWithActions {
-  height: 66%;
+  height: 70%;
 
   grid-template-rows:
     2.35rem
     1.05rem
     1.05rem
-    minmax(1.35rem, 1fr)
+    minmax(2.55rem, 1fr)
     0.9rem
     1.75rem;
 }
 
 .cardInfoPanelWithActions .abilityDisplay {
   overflow: hidden;
-}
-
-.cardInfoPanelWithActions .abilityDisplay p {
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
 }
 
 .unitActions button {
@@ -1724,10 +1790,10 @@
   box-shadow:
     0 0 0 1px
       var(--tier-accent, #d4af37),
-    0 0 34px
+    0 0 22px
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 30%,
+        var(--tier-accent, #d4af37) 28%,
         transparent
       );
 }
@@ -1745,10 +1811,10 @@
   box-shadow:
     0 0 0 1px
       var(--tier-accent, #d4af37),
-    0 0 30px
+    0 0 20px
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 35%,
+        var(--tier-accent, #d4af37) 28%,
         transparent
       );
 }
@@ -1992,12 +2058,9 @@
 }
 
 .selectedCardInner .abilityDisplay p {
-  font-size: 0.68rem;
+  font-size: 0.8rem;
 
-  line-height: 1.42;
-
-  line-clamp: 6;
-  -webkit-line-clamp: 6;
+  line-height: 1.48;
 }
 
 .selectedActions {
@@ -2159,18 +2222,20 @@
 
   grid-template-columns:
     repeat(
-      5,
-      minmax(205px, 1fr)
+      6,
+      minmax(0, 1fr)
     );
 
   gap: 1.1rem;
 
-  max-width: 1280px;
+  max-width: 930px;
 
   margin: 2rem auto;
 }
 
 .mulliganCard {
+  grid-column: span 2;
+
   width: 100%;
 
   padding: 0;
@@ -2186,8 +2251,13 @@
     box-shadow 0.2s ease;
 }
 
+.mulliganCard:nth-child(4):nth-last-child(2) {
+  grid-column:
+    2 / span 2;
+}
+
 .mulliganCard .cardInfoPanel {
-  height: 52%;
+  height: 58%;
 }
 
 .mulliganCard .cardIdentity > strong {
@@ -2212,12 +2282,9 @@
 }
 
 .mulliganCard .abilityDisplay p {
-  font-size: 0.5rem;
+  font-size: 0.66rem;
 
-  line-height: 1.34;
-
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
+  line-height: 1.4;
 }
 
 .mulliganCard:hover {
@@ -2435,14 +2502,14 @@
   .mulliganGrid {
     grid-template-columns:
       repeat(
-        3,
-        minmax(205px, 1fr)
+        6,
+        minmax(0, 1fr)
       );
   }
 
   .board {
     grid-template-columns:
-      repeat(6, 175px);
+      repeat(6, 195px);
   }
 }
 
@@ -2501,7 +2568,7 @@
 
   .board {
     grid-template-columns:
-      repeat(6, 175px);
+      repeat(6, 185px);
   }
 
   .mulliganGrid {
@@ -2510,6 +2577,11 @@
         2,
         minmax(165px, 1fr)
       );
+  }
+
+  .mulliganCard,
+  .mulliganCard:nth-child(4):nth-last-child(2) {
+    grid-column: auto;
   }
 
   .mulliganFooter {
