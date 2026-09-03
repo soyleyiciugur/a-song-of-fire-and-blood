@@ -903,8 +903,8 @@ export default function GreatGamePlayPage() {
   useEffect(() => {
     setHoveredCommandCost(null);
   }, [
-    currentGame.activePlayerId,
-    currentGame.turnNumber,
+    game?.activePlayerId,
+    game?.turnNumber,
   ]);
 
   useEffect(() => {
