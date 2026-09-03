@@ -5258,14 +5258,6 @@ function BoardUnit({
 
       <CardSparkles />
 
-      {unit.attachedArtifactId && (
-        <EquippedArtifactBadge
-          artifactId={
-            unit.attachedArtifactId
-          }
-        />
-      )}
-
       <div
         className={
           styles.statusOverlay
@@ -5292,6 +5284,9 @@ function BoardUnit({
 
       <CardInfoPanel
         card={card}
+        artifactId={
+          unit.attachedArtifactId
+        }
         runtimeStats={{
           power,
           influence,
@@ -5798,6 +5793,8 @@ function EquippedArtifactBadge({
 
 function CardInfoPanel({
   card,
+  artifactId,
+  artifactBadgeDetailed = false,
   runtimeStats,
   baseStats,
   actions,
@@ -5806,6 +5803,8 @@ function CardInfoPanel({
   showTraitTooltips = false,
 }: {
   card: GameCard;
+  artifactId?: string | null;
+  artifactBadgeDetailed?: boolean;
   runtimeStats?: {
     power: number;
     influence: number;
@@ -5851,6 +5850,15 @@ function CardInfoPanel({
         .filter(Boolean)
         .join(" ")}
     >
+      {artifactId && (
+        <EquippedArtifactBadge
+          artifactId={artifactId}
+          detailed={
+            artifactBadgeDetailed
+          }
+        />
+      )}
+
       <div
         className={
           styles.cardIdentity
@@ -6372,17 +6380,12 @@ function UnitDetailOverlay({
         <CardChrome card={card} />
         <CardSparkles />
 
-        {unit.attachedArtifactId && (
-          <EquippedArtifactBadge
-            artifactId={
-              unit.attachedArtifactId
-            }
-            detailed
-          />
-        )}
-
         <CardInfoPanel
           card={card}
+          artifactId={
+            unit.attachedArtifactId
+          }
+          artifactBadgeDetailed
           showTraitTooltips
           runtimeStats={{
             power: getEffectivePower(
