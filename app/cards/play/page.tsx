@@ -3,12 +3,13 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 
 import type {
   CSSProperties,
-  DragEvent,
+  PointerEvent as ReactPointerEvent,
   ReactNode,
 } from "react";
 
@@ -105,6 +106,23 @@ type DragCursorState = {
   canDrop: boolean;
   requiresTarget: boolean;
 };
+
+type PointerDragSession = {
+  handInstanceId: string;
+  pointerId: number;
+  startX: number;
+  startY: number;
+  dragging: boolean;
+};
+
+type PointerDropTarget =
+  | {
+      kind: "board";
+    }
+  | {
+      kind: "unit";
+      unit: UnitState;
+    };
 
 type UnitModifier =
   UnitState["modifiers"][number];
@@ -267,6 +285,52 @@ function humanizeModifierId(
     .join(" ");
 }
 
+function modifierTitle(
+  modifier: UnitModifier
+): string {
+  const onlyInfluence =
+    Boolean(modifier.influence) &&
+    !modifier.power &&
+    !modifier.health &&
+    !modifier.cost;
+
+  if (
+    modifier.permanent &&
+    onlyInfluence &&
+    modifier.influence === 2
+  ) {
+    return "The Mander's Pact";
+  }
+
+  if (
+    !modifier.permanent &&
+    onlyInfluence &&
+    modifier.influence === 1 &&
+    modifier.expiresAt ===
+      "end-of-current-turn"
+  ) {
+    return "A Word in the Right Ear";
+  }
+
+  if (
+    modifier.permanent &&
+    Boolean(modifier.power) &&
+    !modifier.influence &&
+    !modifier.health &&
+    !modifier.cost
+  ) {
+    return "The Brothers' Tilt";
+  }
+
+  if (/^modifier-\d+$/i.test(modifier.id)) {
+    return "Active Effect";
+  }
+
+  return humanizeModifierId(
+    modifier.id
+  );
+}
+
 function modifierDescription(
   modifier: UnitModifier
 ): string {
@@ -312,6 +376,93 @@ function CardSparkles() {
       <i />
       <i />
     </span>
+  );
+}
+
+function HorizontalHand({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const handRef =
+    useRef<HTMLDivElement | null>(
+      null
+    );
+
+  useEffect(() => {
+    const hand = handRef.current;
+
+    if (!hand) {
+      return;
+    }
+
+    const handleWheel = (
+      event: WheelEvent
+    ) => {
+      const maxScroll =
+        hand.scrollWidth -
+        hand.clientWidth;
+
+      if (maxScroll <= 0) {
+        return;
+      }
+
+      const rawDelta =
+        Math.abs(event.deltaY) >=
+        Math.abs(event.deltaX)
+          ? event.deltaY
+          : event.deltaX;
+
+      const deltaScale =
+        event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? hand.clientWidth
+            : 1;
+
+      const delta =
+        rawDelta * deltaScale;
+
+      const nextScroll = Math.max(
+        0,
+        Math.min(
+          maxScroll,
+          hand.scrollLeft + delta
+        )
+      );
+
+      if (
+        nextScroll ===
+        hand.scrollLeft
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      hand.scrollLeft = nextScroll;
+    };
+
+    hand.addEventListener(
+      "wheel",
+      handleWheel,
+      { passive: false }
+    );
+
+    return () => {
+      hand.removeEventListener(
+        "wheel",
+        handleWheel
+      );
+    };
+  }, []);
+
+  return (
+    <div
+      ref={handRef}
+      className={styles.hand}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -527,6 +678,14 @@ export default function GreatGamePlayPage() {
     useState<DragCursorState | null>(
       null
     );
+
+  const pointerDragRef =
+    useRef<PointerDragSession | null>(
+      null
+    );
+
+  const suppressHandClickRef =
+    useRef(false);
 
   const [
     exitConfirm,
@@ -2046,151 +2205,6 @@ export default function GreatGamePlayPage() {
     return false;
   }
 
-  function updateDragCursor(
-    event: DragEvent,
-    canDrop: boolean
-  ) {
-    if (
-      event.clientX === 0 &&
-      event.clientY === 0
-    ) {
-      return;
-    }
-
-    setDragCursor(
-      (current) => ({
-        x: event.clientX,
-        y: event.clientY,
-        canDrop,
-        requiresTarget:
-          current?.requiresTarget ?? true,
-      })
-    );
-  }
-
-  function handleHandDragStart(
-    event: DragEvent,
-    handCard: HandCardState
-  ) {
-    if (
-      currentGame.pendingEffect ||
-      pendingConflict
-    ) {
-      event.preventDefault();
-
-      return;
-    }
-
-    if (!canPlayHandCard(handCard)) {
-      event.preventDefault();
-
-      setError(
-        "That card cannot be played right now."
-      );
-
-      return;
-    }
-
-    setPendingPlay(null);
-    setInspectedUnitId(null);
-
-    setDraggingHandInstanceId(
-      handCard.instanceId
-    );
-
-    setDragCursor({
-      x: event.clientX,
-      y: event.clientY,
-      canDrop: false,
-      requiresTarget:
-        !canDropHandCardOnBoard(handCard),
-    });
-
-    event.dataTransfer.effectAllowed =
-      "move";
-
-    event.dataTransfer.setData(
-      "text/plain",
-      handCard.instanceId
-    );
-
-    const transparentGhost =
-      document.createElement(
-        "span"
-      );
-
-    transparentGhost.style.position =
-      "fixed";
-    transparentGhost.style.left =
-      "-100px";
-    transparentGhost.style.top =
-      "-100px";
-    transparentGhost.style.width =
-      "1px";
-    transparentGhost.style.height =
-      "1px";
-    transparentGhost.style.opacity =
-      "0";
-
-    document.body.appendChild(
-      transparentGhost
-    );
-
-    event.dataTransfer.setDragImage(
-      transparentGhost,
-      0,
-      0
-    );
-
-    requestAnimationFrame(() =>
-      transparentGhost.remove()
-    );
-  }
-
-  function handleHandDrag(
-    event: DragEvent
-  ) {
-    if (
-      event.clientX === 0 &&
-      event.clientY === 0
-    ) {
-      return;
-    }
-
-    setDragCursor(
-      (current) => ({
-        x: event.clientX,
-        y: event.clientY,
-        canDrop:
-          current?.canDrop ??
-          false,
-        requiresTarget:
-          current?.requiresTarget ?? true,
-      })
-    );
-  }
-
-  function handleGameDragOver(
-    event: DragEvent
-  ) {
-    if (!draggingHandInstanceId) {
-      return;
-    }
-
-    updateDragCursor(
-      event,
-      false
-    );
-  }
-
-  function handleHandDragEnd() {
-    setDraggingHandInstanceId(
-      null
-    );
-
-    setDragCursor(null);
-  }
-
   function getDraggedHandCard():
     | HandCardState
     | null {
@@ -2209,147 +2223,205 @@ export default function GreatGamePlayPage() {
     );
   }
 
-  function handleBoardDragOver(
-    event: DragEvent
-  ) {
-    const handCard =
-      getDraggedHandCard();
-
-    if (!handCard) {
-      return;
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const canDrop =
-      canDropHandCardOnBoard(
-        handCard
+  function getPointerDropTarget(
+    x: number,
+    y: number
+  ): PointerDropTarget | null {
+    const element =
+      document.elementFromPoint(
+        x,
+        y
       );
 
-    event.dataTransfer.dropEffect =
-      canDrop
-        ? "move"
-        : "none";
-
-    updateDragCursor(
-      event,
-      canDrop
-    );
-  }
-
-  function handleUnitDragOver(
-    event: DragEvent,
-    unit: UnitState
-  ) {
-    const handCard =
-      getDraggedHandCard();
-
-    if (!handCard) {
-      return;
+    if (!element) {
+      return null;
     }
 
-    event.preventDefault();
-    event.stopPropagation();
-
-    const canDrop =
-      canDropHandCardOnUnit(
-        handCard,
-        unit
+    const unitElement =
+      element.closest<HTMLElement>(
+        "[data-unit-instance-id]"
       );
 
-    event.dataTransfer.dropEffect =
-      canDrop
-        ? "move"
-        : "none";
+    const unitInstanceId =
+      unitElement?.dataset
+        .unitInstanceId;
 
-    updateDragCursor(
-      event,
-      canDrop
-    );
-  }
+    if (unitInstanceId) {
+      const unit = [
+        ...activePlayer.board,
+        ...enemyPlayer.board,
+      ].find(
+        (candidate) =>
+          candidate.instanceId ===
+          unitInstanceId
+      );
 
-  function handleBoardDrop(
-    event: DragEvent
-  ) {
-    event.preventDefault();
-
-    const handCard =
-      getDraggedHandCard();
-
-    if (!handCard) {
-      return;
+      if (unit) {
+        return {
+          kind: "unit",
+          unit,
+        };
+      }
     }
-
-    const card =
-      getGameCard(
-        handCard.cardId
-      );
-
-    setDraggingHandInstanceId(
-      null
-    );
-
-    setDragCursor(null);
 
     if (
-      canDropHandCardOnBoard(
-        handCard
+      element.closest(
+        '[data-card-drop-board="true"]'
       )
     ) {
-      dispatch({
-        type:
-          "play-card",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
-
-      return;
+      return {
+        kind: "board",
+      };
     }
 
-    setError(
-      `${card.name} must be dropped onto a valid target.`
+    return null;
+  }
+
+  function canDropOnPointerTarget(
+    handCard: HandCardState,
+    target: PointerDropTarget | null
+  ): boolean {
+    if (!target) {
+      return false;
+    }
+
+    return target.kind === "unit"
+      ? canDropHandCardOnUnit(
+          handCard,
+          target.unit
+        )
+      : canDropHandCardOnBoard(
+          handCard
+        );
+  }
+
+  function beginPointerDrag(
+    handCard: HandCardState
+  ) {
+    setPendingPlay(null);
+    setPendingConflict(null);
+    setInspectedUnitId(null);
+    setError(null);
+    setDraggingHandInstanceId(
+      handCard.instanceId
     );
   }
 
-  function handleDropOnUnit(
-    event: DragEvent,
-    unit: UnitState
+  function updatePointerDrag(
+    handCard: HandCardState,
+    x: number,
+    y: number
   ) {
-    event.preventDefault();
-    event.stopPropagation();
+    const target =
+      getPointerDropTarget(x, y);
 
-    const handCard =
-      getDraggedHandCard();
+    setDragCursor({
+      x,
+      y,
+      canDrop:
+        canDropOnPointerTarget(
+          handCard,
+          target
+        ),
+      requiresTarget:
+        !canDropHandCardOnBoard(
+          handCard
+        ),
+    });
+  }
 
-    if (!handCard) {
+  function handleHandPointerDown(
+    event: ReactPointerEvent<HTMLButtonElement>,
+    handCard: HandCardState
+  ) {
+    if (
+      event.button !== 0 ||
+      currentGame.pendingEffect ||
+      pendingConflict ||
+      !canPlayHandCard(handCard)
+    ) {
       return;
     }
 
-    const card =
-      getGameCard(
-        handCard.cardId
-      );
+    suppressHandClickRef.current =
+      false;
 
-    setDraggingHandInstanceId(
-      null
+    pointerDragRef.current = {
+      handInstanceId:
+        handCard.instanceId,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      dragging: false,
+    };
+
+    event.currentTarget.setPointerCapture(
+      event.pointerId
     );
+  }
 
-    setDragCursor(null);
+  function handleHandPointerMove(
+    event: ReactPointerEvent<HTMLButtonElement>,
+    handCard: HandCardState
+  ) {
+    const session =
+      pointerDragRef.current;
 
     if (
-      !canDropHandCardOnUnit(
-        handCard,
-        unit
-      )
+      !session ||
+      session.pointerId !==
+        event.pointerId ||
+      session.handInstanceId !==
+        handCard.instanceId
     ) {
-      setError(
-        `${card.name} cannot be played on that unit.`
-      );
-
       return;
     }
+
+    if (!session.dragging) {
+      const distance =
+        Math.hypot(
+          event.clientX -
+            session.startX,
+          event.clientY -
+            session.startY
+        );
+
+      if (distance < 7) {
+        return;
+      }
+
+      session.dragging = true;
+      suppressHandClickRef.current =
+        true;
+      beginPointerDrag(handCard);
+    }
+
+    event.preventDefault();
+
+    updatePointerDrag(
+      handCard,
+      event.clientX,
+      event.clientY
+    );
+  }
+
+  function playPointerCardOnBoard(
+    handCard: HandCardState
+  ) {
+    dispatch({
+      type: "play-card",
+      handInstanceId:
+        handCard.instanceId,
+    });
+  }
+
+  function playPointerCardOnUnit(
+    handCard: HandCardState,
+    unit: UnitState
+  ) {
+    const card = getGameCard(
+      handCard.cardId
+    );
 
     if (
       canDropHandCardOnBoard(
@@ -2443,6 +2515,100 @@ export default function GreatGamePlayPage() {
     setError(
       `${card.name} requires a different target.`
     );
+  }
+
+  function clearPointerDrag() {
+    pointerDragRef.current = null;
+    setDraggingHandInstanceId(null);
+    setDragCursor(null);
+  }
+
+  function handleHandPointerUp(
+    event: ReactPointerEvent<HTMLButtonElement>,
+    handCard: HandCardState
+  ) {
+    const session =
+      pointerDragRef.current;
+
+    if (
+      !session ||
+      session.pointerId !==
+        event.pointerId ||
+      session.handInstanceId !==
+        handCard.instanceId
+    ) {
+      return;
+    }
+
+    if (!session.dragging) {
+      pointerDragRef.current =
+        null;
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const target =
+      getPointerDropTarget(
+        event.clientX,
+        event.clientY
+      );
+
+    const canDrop =
+      canDropOnPointerTarget(
+        handCard,
+        target
+      );
+
+    clearPointerDrag();
+
+    if (
+      canDrop &&
+      target?.kind === "unit"
+    ) {
+      playPointerCardOnUnit(
+        handCard,
+        target.unit
+      );
+    } else if (
+      canDrop &&
+      target?.kind === "board"
+    ) {
+      playPointerCardOnBoard(
+        handCard
+      );
+    } else {
+      setError(
+        `${getGameCard(handCard.cardId).name} was not released over a valid target.`
+      );
+    }
+
+    requestAnimationFrame(() => {
+      suppressHandClickRef.current =
+        false;
+    });
+  }
+
+  function handleHandPointerCancel(
+    event: ReactPointerEvent<HTMLButtonElement>
+  ) {
+    if (
+      pointerDragRef.current
+        ?.pointerId !==
+      event.pointerId
+    ) {
+      return;
+    }
+
+    suppressHandClickRef.current =
+      true;
+    clearPointerDrag();
+
+    requestAnimationFrame(() => {
+      suppressHandClickRef.current =
+        false;
+    });
   }
 
   if (
@@ -2686,9 +2852,6 @@ export default function GreatGamePlayPage() {
           ? styles.draggingGame
           : ""
       }`}
-      onDragOver={
-        handleGameDragOver
-      }
     >
       <div
         className={
@@ -2711,21 +2874,46 @@ export default function GreatGamePlayPage() {
           aria-hidden
         >
           <svg
-            viewBox="0 0 32 32"
+            viewBox="0 0 40 40"
             aria-hidden
           >
             <path
-              d="M5 3 26 14l-8 2.2 4.5 9-4.2 2.1-4.4-8.9L7 25Z"
+              d="M3.5 3.5 9 5.2 25.4 21.6l-3.8 3.8L5.2 9Z"
               fill="currentColor"
-              stroke="#100909"
-              strokeWidth="1.5"
+              stroke="#130b08"
+              strokeWidth="1.4"
               strokeLinejoin="round"
             />
 
             <path
-              d="m10 9 9 4.7-4.8 1.4Z"
-              fill="#fff0ba"
-              opacity="0.52"
+              d="m7.2 6.8 15 15-1.25 1.25Z"
+              fill="#fff1bb"
+              opacity="0.5"
+            />
+
+            <path
+              d="m16.8 27.7 11-11 2.5 2.5-11 11Z"
+              fill="#9b7130"
+              stroke="#130b08"
+              strokeWidth="1.4"
+              strokeLinejoin="round"
+            />
+
+            <path
+              d="m24 26.2 7.8 7.8"
+              fill="none"
+              stroke="#7b4f28"
+              strokeWidth="4.2"
+              strokeLinecap="round"
+            />
+
+            <circle
+              cx="33.6"
+              cy="35.8"
+              r="2.6"
+              fill="currentColor"
+              stroke="#130b08"
+              strokeWidth="1.3"
             />
           </svg>
 
@@ -2909,11 +3097,7 @@ export default function GreatGamePlayPage() {
             Opponent&apos;s Hand
           </div>
 
-          <div
-            className={
-              styles.hand
-            }
-          >
+          <HorizontalHand>
             {enemyPlayer.hand.map(
               (
                 handCard
@@ -2948,7 +3132,7 @@ export default function GreatGamePlayPage() {
                 );
               }
             )}
-          </div>
+          </HorizontalHand>
         </section>
       )}
 
@@ -2976,12 +3160,6 @@ export default function GreatGamePlayPage() {
         }}
         selectedInstanceId={
           selectedAttacker
-        }
-        onDragOverUnit={
-          handleUnitDragOver
-        }
-        onDropOnUnit={
-          handleDropOnUnit
         }
       />
 
@@ -3031,18 +3209,7 @@ export default function GreatGamePlayPage() {
             ? confirmSelectedOnBoard
             : undefined
         }
-        onBoardDragOver={
-          handleBoardDragOver
-        }
-        onBoardDrop={
-          handleBoardDrop
-        }
-        onDragOverUnit={
-          handleUnitDragOver
-        }
-        onDropOnUnit={
-          handleDropOnUnit
-        }
+        pointerDropBoard
         renderActions={(
           unit
         ) => (
@@ -3159,11 +3326,7 @@ export default function GreatGamePlayPage() {
           </button>
         </div>
 
-        <div
-          className={
-            styles.hand
-          }
-        >
+        <HorizontalHand>
           {activePlayer.hand.map(
             (handCard) => (
               <HandCard
@@ -3193,29 +3356,42 @@ export default function GreatGamePlayPage() {
                       pendingConflict
                   )
                 }
-                onPlay={() =>
+                onPlay={() => {
+                  if (
+                    suppressHandClickRef.current
+                  ) {
+                    return;
+                  }
+
                   beginPlayCard(
                     handCard
-                  )
-                }
-                onDragStart={(
-                  event
-                ) =>
-                  handleHandDragStart(
+                  );
+                }}
+                onPointerDown={(event) =>
+                  handleHandPointerDown(
                     event,
                     handCard
                   )
                 }
-                onDragEnd={
-                  handleHandDragEnd
+                onPointerMove={(event) =>
+                  handleHandPointerMove(
+                    event,
+                    handCard
+                  )
                 }
-                onDrag={
-                  handleHandDrag
+                onPointerUp={(event) =>
+                  handleHandPointerUp(
+                    event,
+                    handCard
+                  )
+                }
+                onPointerCancel={
+                  handleHandPointerCancel
                 }
               />
             )
           )}
-        </div>
+        </HorizontalHand>
       </section>
 
       <section
@@ -3826,10 +4002,7 @@ function Board({
   renderActions,
   canReceivePlay = false,
   onBoardClick,
-  onBoardDragOver,
-  onBoardDrop,
-  onDragOverUnit,
-  onDropOnUnit,
+  pointerDropBoard = false,
 }: {
   title: string;
   units: UnitState[];
@@ -3851,20 +4024,7 @@ function Board({
   ) => ReactNode;
   canReceivePlay?: boolean;
   onBoardClick?: () => void;
-  onBoardDragOver?: (
-    event: DragEvent
-  ) => void;
-  onBoardDrop?: (
-    event: DragEvent
-  ) => void;
-  onDragOverUnit?: (
-    event: DragEvent,
-    unit: UnitState
-  ) => void;
-  onDropOnUnit?: (
-    event: DragEvent,
-    unit: UnitState
-  ) => void;
+  pointerDropBoard?: boolean;
 }) {
   return (
     <section
@@ -3904,11 +4064,10 @@ function Board({
             ? onBoardClick
             : undefined
         }
-        onDragOver={
-          onBoardDragOver
-        }
-        onDrop={
-          onBoardDrop
+        data-card-drop-board={
+          pointerDropBoard
+            ? "true"
+            : undefined
         }
       >
         {units.length ===
@@ -3949,22 +4108,6 @@ function Board({
               onInspect={() =>
                 onInspectUnit?.(unit)
               }
-              onDrop={(
-                event
-              ) =>
-                onDropOnUnit?.(
-                  event,
-                  unit
-                )
-              }
-              onDragOver={(
-                event
-              ) =>
-                onDragOverUnit?.(
-                  event,
-                  unit
-                )
-              }
               actions={
                 renderActions?.(
                   unit
@@ -3985,8 +4128,6 @@ function BoardUnit({
   selected,
   onClick,
   onInspect,
-  onDragOver,
-  onDrop,
   actions,
 }: {
   unit: UnitState;
@@ -3995,12 +4136,6 @@ function BoardUnit({
   selected: boolean;
   onClick: () => void;
   onInspect: () => void;
-  onDragOver: (
-    event: DragEvent
-  ) => void;
-  onDrop: (
-    event: DragEvent
-  ) => void;
   actions?: ReactNode;
 }) {
   const card =
@@ -4071,6 +4206,9 @@ function BoardUnit({
       style={
         tierStyle(card)
       }
+      data-unit-instance-id={
+        unit.instanceId
+      }
       onClick={(
         event
       ) => {
@@ -4084,16 +4222,6 @@ function BoardUnit({
           onInspect();
         }
       }}
-      onDragOver={(
-        event
-      ) => {
-        onDragOver(
-          event
-        );
-      }}
-      onDrop={
-        onDrop
-      }
     >
       <CardArtwork
         card={card}
@@ -4236,9 +4364,10 @@ function HandCard({
   dragging,
   interactionLocked,
   onPlay,
-  onDragStart,
-  onDrag,
-  onDragEnd,
+  onPointerDown,
+  onPointerMove,
+  onPointerUp,
+  onPointerCancel,
 }: {
   handCard: HandCardState;
   state: GameState;
@@ -4247,13 +4376,18 @@ function HandCard({
   dragging: boolean;
   interactionLocked: boolean;
   onPlay: () => void;
-  onDragStart: (
-    event: DragEvent
+  onPointerDown: (
+    event: ReactPointerEvent<HTMLButtonElement>
   ) => void;
-  onDrag: (
-    event: DragEvent
+  onPointerMove: (
+    event: ReactPointerEvent<HTMLButtonElement>
   ) => void;
-  onDragEnd: () => void;
+  onPointerUp: (
+    event: ReactPointerEvent<HTMLButtonElement>
+  ) => void;
+  onPointerCancel: (
+    event: ReactPointerEvent<HTMLButtonElement>
+  ) => void;
 }) {
   const card =
     getGameCard(
@@ -4300,17 +4434,21 @@ function HandCard({
       onClick={
         onPlay
       }
-      draggable={
-        !interactionLocked
+      draggable={false}
+      onPointerDown={
+        onPointerDown
       }
-      onDragStart={
-        onDragStart
+      onPointerMove={
+        onPointerMove
       }
-      onDrag={
-        onDrag
+      onPointerUp={
+        onPointerUp
       }
-      onDragEnd={
-        onDragEnd
+      onPointerCancel={
+        onPointerCancel
+      }
+      onDragStart={(event) =>
+        event.preventDefault()
       }
     >
       <CardArtwork
@@ -4882,8 +5020,8 @@ function UnitEffectsTooltip({
             }
           >
             <strong>
-              {humanizeModifierId(
-                modifier.id
+              {modifierTitle(
+                modifier
               )}
             </strong>
             <small>
@@ -5046,8 +5184,8 @@ function UnitDetailOverlay({
                     : "Debuff"}
                 </span>
                 <strong>
-                  {humanizeModifierId(
-                    modifier.id
+                  {modifierTitle(
+                    modifier
                   )}
                 </strong>
                 <p>

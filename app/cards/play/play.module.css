@@ -1912,6 +1912,12 @@
 
   overflow-x: auto;
 
+  overscroll-behavior-x: contain;
+
+  scroll-behavior: auto;
+
+  scrollbar-gutter: stable;
+
   padding:
     0.55rem 0.2rem
     1.25rem;
@@ -1929,6 +1935,12 @@
   cursor: var(--realm-action-cursor);
 
   text-align: left;
+
+  touch-action: none;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
 
   transition:
     transform 0.18s ease,
