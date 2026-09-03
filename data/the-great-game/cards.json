@@ -270,7 +270,7 @@
         "id": "as-i-was-saying",
         "name": "As I Was Saying",
         "trigger": "start-of-turn",
-        "text": "Draw 1 card. If this ability successfully drew a card on your previous turn, the card drawn by this ability this turn costs 1 less Command until the end of your turn."
+        "text": "Draw 1 card. If this ability successfully drew a card on your previous turn, the card drawn by this ability costs 1 less Command until the end of the turn."
       }
     ],
     "roles": ["support", "value"],

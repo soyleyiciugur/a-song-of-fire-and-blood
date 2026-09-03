@@ -492,7 +492,7 @@
       "moon": 11,
       "year": 81
     },
-    "height": "177 cm",
+    "height": "175 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
     "spouse": "-",
@@ -1864,7 +1864,7 @@
   },
   {
     "id": "martyn-mullendore",
-    "name": "Martyn Mullendore",
+    "name": "Ser Martyn Mullendore",
     "nickname": "-",
     "aliases": [],
     "house": "House Mullendore",
@@ -2045,7 +2045,7 @@
   },
   {
     "id": "baran-strong",
-    "name": "Baran Strong",
+    "name": "Ser Baran Strong",
     "nickname": "-",
     "aliases": [],
     "house": "House Strong",
@@ -2800,7 +2800,7 @@
       "moon": 12,
       "year": 83
     },
-    "height": "170 cm",
+    "height": "174 cm",
     "father": "brandon-stark",
     "mother": "-",
     "spouse": "-",

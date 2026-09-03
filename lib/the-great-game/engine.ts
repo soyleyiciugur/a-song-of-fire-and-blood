@@ -3851,17 +3851,27 @@ function startTurnMutable(
     playerId
   );
 
+  /*
+   * Start-of-turn draw order:
+   * 1) Natural turn draw always happens first.
+   * 2) Card / delayed start-of-turn draw effects resolve afterwards.
+   *
+   * This matters for effects such as Cordin Poole's "As I Was Saying":
+   * only the card drawn by Cordin's own ability can receive its
+   * conditional -1 Command modifier. The normal turn draw must never
+   * accidentally receive that discount.
+   */
+  drawCardMutable(
+    state,
+    playerId
+  );
+
   processManderDelayedEffects(
     state,
     playerId
   );
 
   processCordinStartOfTurn(
-    state,
-    playerId
-  );
-
-  drawCardMutable(
     state,
     playerId
   );
