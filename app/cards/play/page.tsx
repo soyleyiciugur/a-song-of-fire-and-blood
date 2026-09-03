@@ -871,9 +871,21 @@ export default function GreatGamePlayPage() {
   const incomingTurnDrawsRef =
     useRef<PendingDrawAnimation[]>([]);
 
+  const handoffDrawDelayTimerRef =
+    useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const drawGapTimerRef =
+    useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [
+    drawGapActive,
+    setDrawGapActive,
+  ] = useState(false);
+
   useEffect(() => {
     if (
       handoff ||
+      drawGapActive ||
       drawFlight ||
       drawQueue.length === 0
     ) {
@@ -990,6 +1002,7 @@ export default function GreatGamePlayPage() {
   }, [
     drawFlight,
     drawQueue,
+    drawGapActive,
     handoff,
   ]);
 
@@ -1098,6 +1111,19 @@ export default function GreatGamePlayPage() {
       (current) =>
         current.slice(1)
     );
+
+    if (drawQueue.length > 1) {
+      setDrawGapActive(true);
+
+      if (drawGapTimerRef.current) {
+        clearTimeout(drawGapTimerRef.current);
+      }
+
+      drawGapTimerRef.current = setTimeout(() => {
+        setDrawGapActive(false);
+        drawGapTimerRef.current = null;
+      }, 250);
+    }
   }
 
   function beginHandoffTurn() {
@@ -1107,11 +1133,30 @@ export default function GreatGamePlayPage() {
     incomingTurnDrawsRef.current =
       [];
 
-    if (draws.length > 0) {
-      startDrawSequence(draws);
-    }
-
     setHandoff(false);
+
+    if (draws.length > 0) {
+      setHiddenDrawnIds(
+        (current) => [
+          ...new Set([
+            ...current,
+            ...draws.map(
+              (draw) =>
+                draw.handInstanceId
+            ),
+          ]),
+        ]
+      );
+
+      if (handoffDrawDelayTimerRef.current) {
+        clearTimeout(handoffDrawDelayTimerRef.current);
+      }
+
+      handoffDrawDelayTimerRef.current = setTimeout(() => {
+        startDrawSequence(draws);
+        handoffDrawDelayTimerRef.current = null;
+      }, 1250);
+    }
   }
 
   function startNewGame() {
@@ -1139,6 +1184,17 @@ export default function GreatGamePlayPage() {
       null;
     incomingTurnDrawsRef.current =
       [];
+    setDrawGapActive(false);
+
+    if (handoffDrawDelayTimerRef.current) {
+      clearTimeout(handoffDrawDelayTimerRef.current);
+      handoffDrawDelayTimerRef.current = null;
+    }
+
+    if (drawGapTimerRef.current) {
+      clearTimeout(drawGapTimerRef.current);
+      drawGapTimerRef.current = null;
+    }
   }
 
   function exitToMenu() {
@@ -1164,7 +1220,97 @@ export default function GreatGamePlayPage() {
       null;
     incomingTurnDrawsRef.current =
       [];
+    setDrawGapActive(false);
+
+    if (handoffDrawDelayTimerRef.current) {
+      clearTimeout(handoffDrawDelayTimerRef.current);
+      handoffDrawDelayTimerRef.current = null;
+    }
+
+    if (drawGapTimerRef.current) {
+      clearTimeout(drawGapTimerRef.current);
+      drawGapTimerRef.current = null;
+    }
   }
+
+  useEffect(() => {
+    const hasCancelableBoardSelection =
+      Boolean(
+        pendingConflict ||
+          inspectedUnitId ||
+          pendingPlay?.hidePreview
+      );
+
+    const clearCancelableSelection = () => {
+      setInspectedUnitId(null);
+
+      if (game?.pendingEffect) {
+        return;
+      }
+
+      setPendingPlay(null);
+      setPendingConflict(null);
+      setDraggingHandInstanceId(null);
+      setDragCursor(null);
+      setError(null);
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      if (exitConfirm) {
+        setExitConfirm(false);
+        return;
+      }
+
+      if (
+        pendingPlay ||
+        pendingConflict ||
+        inspectedUnitId
+      ) {
+        event.preventDefault();
+        clearCancelableSelection();
+      }
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!hasCancelableBoardSelection) {
+        return;
+      }
+
+      const target = event.target;
+
+      if (!(target instanceof Element)) {
+        return;
+      }
+
+      if (
+        target.closest(
+          '[data-game-card="true"], [data-selection-ui="true"]'
+        )
+      ) {
+        return;
+      }
+
+      clearCancelableSelection();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [
+    exitConfirm,
+    game?.pendingEffect,
+    inspectedUnitId,
+    pendingConflict,
+    pendingPlay,
+  ]);
 
   if (
     mode === "menu"
@@ -3905,7 +4051,10 @@ export default function GreatGamePlayPage() {
                 drawHidden={
                   hiddenDrawnIds.includes(
                     handCard.instanceId
-                  )
+                  ) ||
+                  (showSelectedPreview &&
+                    pendingPlay?.handInstanceId ===
+                      handCard.instanceId)
                 }
                 interactionLocked={
                   Boolean(
@@ -4921,7 +5070,10 @@ function BoardUnit({
     Boolean(unit.attachedArtifactId);
 
   return (
-    <div className={styles.unitCardWrapper}>
+    <div
+      className={styles.unitCardWrapper}
+      data-game-card="true"
+    >
     <div
       className={[
         styles.unitCard,
@@ -5155,6 +5307,7 @@ function HandCard({
 
   return (
     <button
+      data-game-card="true"
       className={[
         styles.handCard,
 
@@ -5737,6 +5890,7 @@ function SelectedCardPreview({
       }
     >
       <div
+        data-game-card="true"
         className={
           styles.selectedCardInner
         }
@@ -5891,6 +6045,7 @@ function UnitDetailOverlay({
 
   return (
     <div
+      data-selection-ui="true"
       className={
         styles.unitDetailOverlay
       }
