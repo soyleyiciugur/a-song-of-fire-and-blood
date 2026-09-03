@@ -205,7 +205,7 @@ export function createTestDeck(): string[] {
 
     "reach-courtier",
 
-    "lannister-household-knight",
+    "lannister-red-cloak",
 
     "vale-spearman",
 

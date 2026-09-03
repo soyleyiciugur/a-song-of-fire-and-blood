@@ -7,6 +7,10 @@ import {
   useState,
 } from "react";
 
+import {
+  createPortal,
+} from "react-dom";
+
 import type {
   CSSProperties,
   PointerEvent as ReactPointerEvent,
@@ -5254,6 +5258,14 @@ function BoardUnit({
 
       <CardSparkles />
 
+      {unit.attachedArtifactId && (
+        <EquippedArtifactBadge
+          artifactId={
+            unit.attachedArtifactId
+          }
+        />
+      )}
+
       <div
         className={
           styles.statusOverlay
@@ -5348,20 +5360,6 @@ function BoardUnit({
               </div>
             )}
 
-            {unit.attachedArtifactId && (
-              <div
-                className={
-                  styles.artifact
-                }
-              >
-                ◆{" "}
-                {
-                  getGameCard(
-                    unit.attachedArtifactId
-                  ).name
-                }
-              </div>
-            )}
           </>
         }
       />
@@ -5630,6 +5628,176 @@ function CardChrome({
   );
 }
 
+function TraitRuleTooltip({
+  label,
+  rule,
+}: {
+  label: string;
+  rule: string;
+}) {
+  const triggerRef =
+    useRef<HTMLSpanElement | null>(
+      null
+    );
+
+  const [
+    open,
+    setOpen,
+  ] = useState(false);
+
+  const [
+    position,
+    setPosition,
+  ] = useState<{
+    left: number;
+    top: number;
+  } | null>(null);
+
+  const updatePosition = () => {
+    const element =
+      triggerRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const rect =
+      element.getBoundingClientRect();
+
+    setPosition({
+      left:
+        rect.left +
+        rect.width / 2,
+      top:
+        rect.top - 8,
+    });
+  };
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    updatePosition();
+
+    const handleViewportChange =
+      () => updatePosition();
+
+    window.addEventListener(
+      "scroll",
+      handleViewportChange,
+      true
+    );
+
+    window.addEventListener(
+      "resize",
+      handleViewportChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleViewportChange,
+        true
+      );
+
+      window.removeEventListener(
+        "resize",
+        handleViewportChange
+      );
+    };
+  }, [open]);
+
+  return (
+    <>
+      <span
+        ref={triggerRef}
+        className={
+          styles.traitTooltipTrigger
+        }
+        tabIndex={0}
+        onMouseEnter={() => {
+          updatePosition();
+          setOpen(true);
+        }}
+        onMouseLeave={() =>
+          setOpen(false)
+        }
+        onFocus={() => {
+          updatePosition();
+          setOpen(true);
+        }}
+        onBlur={() =>
+          setOpen(false)
+        }
+      >
+        {label}
+      </span>
+
+      {open &&
+        position &&
+        typeof document !==
+          "undefined" &&
+        createPortal(
+          <span
+            className={
+              styles.traitTooltipPortal
+            }
+            role="tooltip"
+            style={{
+              left:
+                position.left,
+              top:
+                position.top,
+            }}
+          >
+            {rule}
+          </span>,
+          document.body
+        )}
+    </>
+  );
+}
+
+function EquippedArtifactBadge({
+  artifactId,
+  detailed = false,
+}: {
+  artifactId: string;
+  detailed?: boolean;
+}) {
+  const artifact =
+    getGameCard(
+      artifactId
+    );
+
+  return (
+    <div
+      className={[
+        styles.equippedArtifactBadge,
+        detailed
+          ? styles.equippedArtifactBadgeDetailed
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      title={
+        artifact.name
+      }
+      aria-label={`Equipped Artifact: ${artifact.name}`}
+    >
+      <span
+        aria-hidden
+        className={
+          styles.equippedArtifactGlyph
+        }
+      >
+        ◆
+      </span>
+    </div>
+  );
+}
+
 function CardInfoPanel({
   card,
   runtimeStats,
@@ -5860,32 +6028,22 @@ function CardInfoPanel({
               showTraitTooltips &&
               Boolean(rule);
 
-            return (
-              <span
-                key={trait}
-                className={
-                  interactive
-                    ? styles.traitTooltipTrigger
-                    : undefined
-                }
-                tabIndex={
-                  interactive
-                    ? 0
-                    : undefined
-                }
-              >
-                {trait}
+            if (
+              interactive &&
+              rule
+            ) {
+              return (
+                <TraitRuleTooltip
+                  key={trait}
+                  label={trait}
+                  rule={rule}
+                />
+              );
+            }
 
-                {interactive && (
-                  <span
-                    className={
-                      styles.traitTooltipBubble
-                    }
-                    role="tooltip"
-                  >
-                    {rule}
-                  </span>
-                )}
+            return (
+              <span key={trait}>
+                {trait}
               </span>
             );
           })}
@@ -6215,6 +6373,15 @@ function UnitDetailOverlay({
 
         <CardChrome card={card} />
         <CardSparkles />
+
+        {unit.attachedArtifactId && (
+          <EquippedArtifactBadge
+            artifactId={
+              unit.attachedArtifactId
+            }
+            detailed
+          />
+        )}
 
         <CardInfoPanel
           card={card}

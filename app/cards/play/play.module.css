@@ -2008,26 +2008,20 @@
   outline: none;
 }
 
-.traits .traitTooltipBubble {
-  position: absolute;
+.traitTooltipPortal {
+  position: fixed;
 
-  left: 50%;
-  bottom: calc(100% + 0.48rem);
-
-  z-index: 40;
+  z-index: 10000;
 
   width: 218px;
   height: auto;
-  min-width: 0;
 
   box-sizing: border-box;
 
   padding: 0.52rem 0.62rem;
 
-  overflow: visible;
-
   transform:
-    translate(-50%, 4px);
+    translate(-50%, -100%);
 
   pointer-events: none;
 
@@ -2035,27 +2029,25 @@
     1px solid
     color-mix(
       in srgb,
-      var(--tier-accent, #d4af37) 52%,
+      #d4af37 52%,
       transparent
     );
 
   background:
     linear-gradient(
       180deg,
-      rgba(31, 24, 22, 0.99),
-      rgba(9, 7, 9, 0.99)
+      rgba(31, 24, 22, 0.995),
+      rgba(9, 7, 9, 0.995)
     );
 
-  color: rgba(245, 230, 200, 0.9);
+  color:
+    rgba(245, 230, 200, 0.92);
 
   box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.72),
+    0 12px 30px
+      rgba(0, 0, 0, 0.78),
     0 0 18px
-      color-mix(
-        in srgb,
-        var(--tier-accent, #d4af37) 12%,
-        transparent
-      );
+      rgba(212, 175, 55, 0.12);
 
   font-family:
     var(--font-body),
@@ -2070,19 +2062,25 @@
   text-transform: none;
   white-space: normal;
 
-  opacity: 0;
-
-  transition:
-    opacity 0.16s ease,
-    transform 0.16s ease;
+  animation:
+    traitPortalIn
+    0.14s ease-out;
 }
 
-.traitTooltipTrigger:hover > .traitTooltipBubble,
-.traitTooltipTrigger:focus-visible > .traitTooltipBubble {
-  transform:
-    translate(-50%, 0);
+@keyframes traitPortalIn {
+  from {
+    opacity: 0;
 
-  opacity: 1;
+    transform:
+      translate(-50%, calc(-100% + 4px));
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -100%);
+  }
 }
 
 .abilityDisplay {
@@ -2277,6 +2275,128 @@
   opacity: 1;
 }
 
+.equippedArtifactBadge {
+  position: absolute;
+
+  right: 0.52rem;
+  bottom: 39.6%;
+
+  z-index: 12;
+
+  width: 1.58rem;
+  height: 1.58rem;
+
+  display: grid;
+  place-items: center;
+
+  box-sizing: border-box;
+
+  pointer-events: none;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 58%,
+      transparent
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 28%,
+        rgba(24, 18, 18, 0.96)
+      ),
+      rgba(8, 7, 9, 0.98)
+    );
+
+  box-shadow:
+    inset 0 0 0 1px
+      rgba(255, 255, 255, 0.035),
+    0 3px 10px
+      rgba(0, 0, 0, 0.58),
+    0 0 9px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 16%,
+        transparent
+      );
+}
+
+.equippedArtifactBadge::before,
+.equippedArtifactBadge::after {
+  content: "";
+
+  position: absolute;
+
+  width: 0.24rem;
+  height: 0.24rem;
+
+  transform: rotate(45deg);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 62%,
+      transparent
+    );
+
+  background:
+    rgba(11, 8, 10, 0.98);
+}
+
+.equippedArtifactBadge::before {
+  left: -0.14rem;
+  top: -0.14rem;
+}
+
+.equippedArtifactBadge::after {
+  right: -0.14rem;
+  bottom: -0.14rem;
+}
+
+.equippedArtifactGlyph {
+  color:
+    var(--tier-accent, #d4af37);
+
+  font-size: 0.72rem;
+  line-height: 1;
+
+  text-shadow:
+    0 0 7px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 52%,
+        transparent
+      );
+}
+
+.equippedArtifactBadgeDetailed {
+  right: 0.96rem;
+  bottom: 39.6%;
+
+  width: 2.42rem;
+  height: 2.42rem;
+
+  border-width: 1px;
+}
+
+.equippedArtifactBadgeDetailed
+  .equippedArtifactGlyph {
+  font-size: 1.05rem;
+}
+
+/*
+ * The equipped-artifact badge sits over the card, but the
+ * existing Active Effects hover panel must always win.
+ */
+.unitEffectsTooltip {
+  z-index: 30;
+}
+
 .unitEffectsTooltip {
   position: absolute;
 
@@ -2437,8 +2557,7 @@
   text-transform: uppercase;
 }
 
-.skillProgress,
-.artifact {
+.skillProgress {
   margin: 0;
 
   font-size: 0.4rem;
@@ -2515,9 +2634,6 @@
     0 0 7px rgba(190, 128, 221, 0.48);
 }
 
-.artifact {
-  color: #dcc16f;
-}
 
 .unitActions {
   display: flex;
@@ -3144,12 +3260,6 @@
   line-height: 1.5;
 }
 
-.selectedCardInner .traits .traitTooltipBubble,
-.unitDetailCard .traits .traitTooltipBubble {
-  z-index: 1000;
-
-  font-size: 0.7rem;
-}
 
 .unitDetailEffects {
   position: relative;

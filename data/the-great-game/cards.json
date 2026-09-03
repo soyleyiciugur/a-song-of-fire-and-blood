@@ -103,10 +103,10 @@
     "generic": true
   },
   {
-    "id": "lannister-household-knight",
+    "id": "lannister-red-cloak",
     "cardType": "character",
     "tierId": "c",
-    "name": "Lannister Household Knight",
+    "name": "Lannister Red Cloak",
     "houseId": "lannister",
     "cost": 3,
     "power": 2,
