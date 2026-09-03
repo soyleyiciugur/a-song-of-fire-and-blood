@@ -821,6 +821,14 @@ export default function GreatGamePlayPage() {
     );
 
   const [
+    hoveredCommandCost,
+    setHoveredCommandCost,
+  ] =
+    useState<number | null>(
+      null
+    );
+
+  const [
     dragCursor,
     setDragCursor,
   ] =
@@ -3988,6 +3996,9 @@ export default function GreatGamePlayPage() {
         highlightEndTurn={
           highlightEndTurn
         }
+        previewCommandCost={
+          hoveredCommandCost
+        }
       />
 
       <section
@@ -4060,6 +4071,26 @@ export default function GreatGamePlayPage() {
                   Boolean(
                     gameInteractionLocked ||
                       pendingConflict
+                  )
+                }
+                onMouseEnter={() => {
+                  const hoveredCost =
+                    getEffectiveCost(
+                      currentGame,
+                      activePlayerId,
+                      handCard
+                    );
+
+                  setHoveredCommandCost(
+                    hoveredCost <=
+                      activePlayer.command
+                      ? hoveredCost
+                      : null
+                  );
+                }}
+                onMouseLeave={() =>
+                  setHoveredCommandCost(
+                    null
                   )
                 }
                 onPlay={() => {
@@ -4487,6 +4518,17 @@ function MulliganScreen({
                     ? "Replace"
                     : "Keep"}
                 </div>
+
+                {selected && (
+                  <span
+                    className={
+                      styles.mulliganReplaceX
+                    }
+                    aria-hidden
+                  >
+                    ×
+                  </span>
+                )}
               </button>
             );
           }
@@ -4553,6 +4595,7 @@ function PlayerHeader({
   onEndTurn,
   endTurnDisabled = false,
   highlightEndTurn = false,
+  previewCommandCost = null,
 }: {
   playerId: PlayerId;
   state: GameState;
@@ -4566,6 +4609,7 @@ function PlayerHeader({
   onEndTurn?: () => void;
   endTurnDisabled?: boolean;
   highlightEndTurn?: boolean;
+  previewCommandCost?: number | null;
 }) {
   const player =
     state.players[
@@ -4665,6 +4709,9 @@ function PlayerHeader({
           }
           nextCommandBonus={
             player.nextCommandBonus
+          }
+          previewCost={
+            previewCommandCost
           }
           compact
         />
@@ -4792,11 +4839,13 @@ function CommandMeter({
   command,
   maxCommand,
   nextCommandBonus,
+  previewCost = null,
   compact = false,
 }: {
   command: number;
   maxCommand: number;
   nextCommandBonus: number;
+  previewCost?: number | null;
   compact?: boolean;
 }) {
   const slotCount =
@@ -4850,6 +4899,18 @@ function CommandMeter({
           const bonus =
             index >= maxCommand;
 
+          const previewSpend =
+            Boolean(
+              previewCost &&
+                previewCost > 0 &&
+                previewCost <= command &&
+                available &&
+                index >=
+                  command -
+                    previewCost &&
+                index < command
+            );
+
           return (
             <span
               key={index}
@@ -4860,6 +4921,9 @@ function CommandMeter({
                   : styles.commandPipSpent,
                 bonus
                   ? styles.commandPipBonus
+                  : "",
+                previewSpend
+                  ? styles.commandPipPreviewSpend
                   : "",
               ]
                 .filter(Boolean)
@@ -5260,6 +5324,8 @@ function HandCard({
   drawHidden,
   interactionLocked,
   onPlay,
+  onMouseEnter,
+  onMouseLeave,
   onPointerDown,
   onPointerMove,
   onPointerUp,
@@ -5275,6 +5341,8 @@ function HandCard({
   drawHidden: boolean;
   interactionLocked: boolean;
   onPlay: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   onPointerDown: (
     event: ReactPointerEvent<HTMLButtonElement>
   ) => void;
@@ -5344,6 +5412,12 @@ function HandCard({
       }
       onClick={
         onPlay
+      }
+      onMouseEnter={
+        onMouseEnter
+      }
+      onMouseLeave={
+        onMouseLeave
       }
       draggable={false}
       onPointerDown={
@@ -5443,10 +5517,22 @@ function CardChrome({
       {typeof cost ===
         "number" && (
         <span
-          className={
-            styles.cost
+          className={[
+            styles.cost,
+            cost > card.cost
+              ? styles.costIncreased
+              : "",
+            cost < card.cost
+              ? styles.costReduced
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          title={
+            cost === card.cost
+              ? "Command cost"
+              : `Command cost: ${cost} (base ${card.cost})`
           }
-          title="Command cost"
           aria-label={`${cost} Command`}
         >
           <CommandSigil

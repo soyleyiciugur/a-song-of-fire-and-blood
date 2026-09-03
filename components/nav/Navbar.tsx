@@ -53,12 +53,18 @@ export default function Navbar() {
               setOpenGroup(null);
             }}
           >
-            <span>
-              {playNavExpanded ? "Collapse" : "Navigation"}
+            <span
+              className={[
+                styles.playNavToggleIcon,
+                playNavExpanded ? styles.playNavToggleIconUp : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-hidden="true"
+            >
+              <i />
+              <i />
             </span>
-            <i aria-hidden>
-              {playNavExpanded ? "▴" : "▾"}
-            </i>
           </button>
         )}
 

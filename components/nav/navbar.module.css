@@ -32,47 +32,98 @@
 }
 
 .playNavToggle {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  z-index: 6;
+
   display: none;
   align-items: center;
   justify-content: center;
-  gap: 7px;
 
-  min-height: 30px;
-  padding: 5px 10px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
 
-  font-family: inherit;
-  font-size: 11px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-
-  color: rgba(230, 205, 135, 0.76);
-  background: rgba(212, 175, 55, 0.045);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 2px;
+  color: rgba(230, 205, 135, 0.78);
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(212, 175, 55, 0.14),
+      rgba(14, 11, 13, 0.97) 66%
+    );
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 999px;
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 225, 140, 0.035);
   cursor: pointer;
+
+  transform: translateX(-50%);
 
   transition:
     color 0.18s ease,
     border-color 0.18s ease,
-    background-color 0.18s ease;
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
 }
 
 .playNavToggle:hover,
 .playNavToggle:focus-visible {
   color: var(--gold);
-  border-color: rgba(212, 175, 55, 0.5);
-  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.68);
+  box-shadow:
+    0 3px 14px rgba(0, 0, 0, 0.58),
+    0 0 14px rgba(212, 175, 55, 0.14),
+    inset 0 0 0 1px rgba(255, 225, 140, 0.07);
   outline: none;
+  transform: translateX(-50%) translateY(-1px);
 }
 
-.playNavToggle i {
-  font-size: 9px;
-  font-style: normal;
-  line-height: 1;
+.playNavToggleIcon {
+  position: relative;
+  width: 10px;
+  height: 9px;
+  display: block;
+}
+
+.playNavToggleIcon i {
+  position: absolute;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.playNavToggleIcon i:first-child {
+  top: -1px;
+}
+
+.playNavToggleIcon i:last-child {
+  top: 3px;
+}
+
+.playNavToggleIconUp i {
+  transform: translateX(-50%) rotate(225deg);
+}
+
+.playNavToggleIconUp i:first-child {
+  top: 1px;
+}
+
+.playNavToggleIconUp i:last-child {
+  top: 5px;
 }
 
 .playBanner .playNavToggle {
   display: inline-flex;
+}
+
+.playBanner .inner {
+  position: relative;
 }
 
 .playBannerCollapsed .inner {
@@ -84,10 +135,6 @@
 .playBannerCollapsed .homeLink {
   font-size: 12px;
   opacity: 0.72;
-}
-
-.playBannerCollapsed .playNavToggle {
-  margin-left: auto;
 }
 
 .playBannerCollapsed .navLinks,
