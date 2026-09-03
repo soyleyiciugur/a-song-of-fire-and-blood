@@ -3549,86 +3549,73 @@ function processManderDelayedEffects(
 // Cordin
 // ─────────────────────────────────────────────
 
-function processCordinStartOfTurn(
+function resolveCordinStartOfTurn(
   state: GameState,
-  playerId: PlayerId
+  playerId: PlayerId,
+  cordin: UnitState
 ) {
-  const cordins =
-    state.players[
-      playerId
-    ].board.filter(
-      (unit) =>
-        unit.cardId ===
-        "cordin-poole"
-    );
-
-  for (
-    const cordin of
-    cordins
-  ) {
-    const previousSuccessful =
-      cordin.flags[
-        "cordin-previous-draw-successful"
-      ] ?? false;
-
-    logAbilityActivation(
-      state,
-      cordin.cardId,
-      "as-i-was-saying",
-      playerId
-    );
-
-    const result =
-      drawCardMutable(
-        state,
-        playerId
-      );
-
-    if (
-      previousSuccessful &&
-      result.success &&
-      result.handInstanceId
-    ) {
-      const drawn =
-        getHandCard(
-          state.players[
-            playerId
-          ],
-          result.handInstanceId
-        );
-
-      drawn?.costModifiers.push({
-        id:
-          nextRuntimeId(
-            state,
-            "cost-mod"
-          ),
-
-        amount: -1,
-
-        expiresAt:
-          "end-of-player-turn",
-
-        expiresForPlayerId:
-          playerId,
-      });
-
-      if (
-        result.cardId
-      ) {
-        addLog(
-          state,
-          `As I Was Saying reduces ${getGameCard(result.cardId).name}'s cost by 1 Command this turn.`,
-          playerId
-        );
-      }
-    }
-
+  const previousSuccessful =
     cordin.flags[
       "cordin-previous-draw-successful"
-    ] =
-      result.success;
+    ] ?? false;
+
+  logAbilityActivation(
+    state,
+    cordin.cardId,
+    "as-i-was-saying",
+    playerId
+  );
+
+  const result =
+    drawCardMutable(
+      state,
+      playerId
+    );
+
+  if (
+    previousSuccessful &&
+    result.success &&
+    result.handInstanceId
+  ) {
+    const drawn =
+      getHandCard(
+        state.players[
+          playerId
+        ],
+        result.handInstanceId
+      );
+
+    drawn?.costModifiers.push({
+      id:
+        nextRuntimeId(
+          state,
+          "cost-mod"
+        ),
+
+      amount: -1,
+
+      expiresAt:
+        "end-of-player-turn",
+
+      expiresForPlayerId:
+        playerId,
+    });
+
+    if (
+      result.cardId
+    ) {
+      addLog(
+        state,
+        `As I Was Saying reduces ${getGameCard(result.cardId).name}'s cost by 1 Command this turn.`,
+        playerId
+      );
+    }
   }
+
+  cordin.flags[
+    "cordin-previous-draw-successful"
+  ] =
+    result.success;
 }
 
 // ─────────────────────────────────────────────
@@ -3729,77 +3716,185 @@ function resetPerTurnCounters(
 // Weylar
 // ─────────────────────────────────────────────
 
-function processWeylarEndOfTurn(
+function resolveWeylarEndOfTurn(
   state: GameState,
-  playerId: PlayerId
+  playerId: PlayerId,
+  weylar: UnitState
 ) {
-  const weylars =
+  if (
+    weylar.flags[
+      "weylar-triggered"
+    ]
+  ) {
+    return;
+  }
+
+  const turns =
+    (
+      weylar.counters[
+        "turns-in-play"
+      ] ?? 0
+    ) + 1;
+
+  weylar.counters[
+    "turns-in-play"
+  ] =
+    turns;
+
+  logAbilityActivation(
+    state,
+    weylar.cardId,
+    "price-of-loyalty",
+    playerId,
+    `Progress: ${Math.min(turns, 3)}/3.`
+  );
+
+  if (
+    turns === 3
+  ) {
+    drawCardMutable(
+      state,
+      playerId
+    );
+
+    drawCardMutable(
+      state,
+      playerId
+    );
+
     state.players[
       playerId
-    ].board.filter(
+    ].nextCommandBonus +=
+      2;
+
+    weylar.flags[
+      "weylar-triggered"
+    ] = true;
+
+    addLog(
+      state,
+      `The Price of Loyalty resolves. ${playerName(playerId)} draws 2 cards and gains +2 Command next turn.`,
+      playerId
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
+// Ordered board trigger queue
+// ─────────────────────────────────────────────
+
+function resolveBoardTriggeredAbilityMutable(
+  state: GameState,
+  playerId: PlayerId,
+  unit: UnitState,
+  abilityId: AbilityId
+) {
+  switch (
+    abilityId
+  ) {
+    case "as-i-was-saying":
+      resolveCordinStartOfTurn(
+        state,
+        playerId,
+        unit
+      );
+      return;
+
+    case "price-of-loyalty":
+      resolveWeylarEndOfTurn(
+        state,
+        playerId,
+        unit
+      );
+      return;
+
+    default:
+      return;
+  }
+}
+
+function processBoardTriggerMutable(
+  state: GameState,
+  playerId: PlayerId,
+  trigger: Extract<
+    AbilityTrigger,
+    | "start-of-turn"
+    | "end-of-turn"
+  >
+) {
+  /*
+   * Board order is deployment order:
+   * units are appended with board.push() and are never
+   * re-sorted. Therefore index 0 is the oldest surviving
+   * permanent and the last index is the newest.
+   *
+   * Snapshot the instance IDs first so effects that remove
+   * or add units while this queue is resolving cannot change
+   * the order of the current trigger window.
+   */
+  const orderedUnitIds =
+    state.players[
+      playerId
+    ].board.map(
       (unit) =>
-        unit.cardId ===
-        "weylar-rocke"
+        unit.instanceId
     );
 
   for (
-    const weylar of
-    weylars
+    const instanceId of
+    orderedUnitIds
   ) {
-    if (
-      weylar.flags[
-        "weylar-triggered"
-      ]
-    ) {
+    const unit =
+      state.players[
+        playerId
+      ].board.find(
+        (candidate) =>
+          candidate.instanceId ===
+          instanceId
+      );
+
+    if (!unit) {
       continue;
     }
 
-    const turns =
-      (
-        weylar.counters[
-          "turns-in-play"
-        ] ?? 0
-      ) + 1;
+    const card =
+      getGameCard(
+        unit.cardId
+      );
 
-    weylar.counters[
-      "turns-in-play"
-    ] =
-      turns;
+    const triggeredAbilities =
+      card.abilities.filter(
+        (ability) =>
+          ability.trigger ===
+          trigger
+      );
 
-    logAbilityActivation(
-      state,
-      weylar.cardId,
-      "price-of-loyalty",
-      playerId,
-      `Progress: ${Math.min(turns, 3)}/3.`
-    );
-
-    if (
-      turns === 3
+    for (
+      const ability of
+      triggeredAbilities
     ) {
-      drawCardMutable(
+      /*
+       * Re-check the source before every ability in case an
+       * earlier trigger removed it from play.
+       */
+      const stillInPlay =
+        state.players[
+          playerId
+        ].board.some(
+          (candidate) =>
+            candidate.instanceId ===
+            instanceId
+        );
+
+      if (!stillInPlay) {
+        break;
+      }
+
+      resolveBoardTriggeredAbilityMutable(
         state,
-        playerId
-      );
-
-      drawCardMutable(
-        state,
-        playerId
-      );
-
-      state.players[
-        playerId
-      ].nextCommandBonus +=
-        2;
-
-      weylar.flags[
-        "weylar-triggered"
-      ] = true;
-
-      addLog(
-        state,
-        `The Price of Loyalty resolves. ${playerName(playerId)} draws 2 cards and gains +2 Command next turn.`,
-        playerId
+        playerId,
+        unit,
+        ability.id
       );
     }
   }
@@ -3854,7 +3949,9 @@ function startTurnMutable(
   /*
    * Start-of-turn draw order:
    * 1) Natural turn draw always happens first.
-   * 2) Card / delayed start-of-turn draw effects resolve afterwards.
+   * 2) Board Start-of-Turn abilities resolve from left to right
+   *    (oldest deployed surviving unit → newest).
+   * 3) Non-board delayed Start-of-Turn effects resolve afterwards.
    *
    * This matters for effects such as Cordin Poole's "As I Was Saying":
    * only the card drawn by Cordin's own ability can receive its
@@ -3866,12 +3963,17 @@ function startTurnMutable(
     playerId
   );
 
-  processManderDelayedEffects(
+  processBoardTriggerMutable(
     state,
-    playerId
+    playerId,
+    "start-of-turn"
   );
 
-  processCordinStartOfTurn(
+  /*
+   * Delayed effects are not board permanents, so they resolve
+   * after the ordered board trigger queue.
+   */
+  processManderDelayedEffects(
     state,
     playerId
   );
@@ -3948,9 +4050,10 @@ function endTurnMutable(
     "Resolve the pending ability before ending the turn."
   );
 
-  processWeylarEndOfTurn(
+  processBoardTriggerMutable(
     state,
-    playerId
+    playerId,
+    "end-of-turn"
   );
 
   expireHandModifiersAtEnd(
