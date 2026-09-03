@@ -890,6 +890,23 @@ export default function GreatGamePlayPage() {
     setDrawGapActive,
   ] = useState(false);
 
+  const [
+    turnDrawPending,
+    setTurnDrawPending,
+  ] = useState(false);
+
+  /*
+   * Command-spend preview is strictly turn-local.
+   * A hover from the outgoing player must never leak into
+   * the next player's Command meter.
+   */
+  useEffect(() => {
+    setHoveredCommandCost(null);
+  }, [
+    currentGame.activePlayerId,
+    currentGame.turnNumber,
+  ]);
+
   useEffect(() => {
     if (
       handoff ||
@@ -1141,9 +1158,22 @@ export default function GreatGamePlayPage() {
     incomingTurnDrawsRef.current =
       [];
 
+    setHoveredCommandCost(
+      null
+    );
+
     setHandoff(false);
 
     if (draws.length > 0) {
+      /*
+       * Lock turn actions from the instant the player presses
+       * "Begin Player's Turn" — including the 1.25s cinematic
+       * delay before the first card starts moving.
+       */
+      setTurnDrawPending(
+        true
+      );
+
       setHiddenDrawnIds(
         (current) => [
           ...new Set([
@@ -1161,9 +1191,19 @@ export default function GreatGamePlayPage() {
       }
 
       handoffDrawDelayTimerRef.current = setTimeout(() => {
-        startDrawSequence(draws);
+        startDrawSequence(
+          draws,
+          () =>
+            setTurnDrawPending(
+              false
+            )
+        );
         handoffDrawDelayTimerRef.current = null;
       }, 1250);
+    } else {
+      setTurnDrawPending(
+        false
+      );
     }
   }
 
@@ -1193,6 +1233,8 @@ export default function GreatGamePlayPage() {
     incomingTurnDrawsRef.current =
       [];
     setDrawGapActive(false);
+    setTurnDrawPending(false);
+    setHoveredCommandCost(null);
 
     if (handoffDrawDelayTimerRef.current) {
       clearTimeout(handoffDrawDelayTimerRef.current);
@@ -1458,6 +1500,10 @@ export default function GreatGamePlayPage() {
     );
 
     setDraggingHandInstanceId(
+      null
+    );
+
+    setHoveredCommandCost(
       null
     );
 
@@ -3990,8 +4036,12 @@ export default function GreatGamePlayPage() {
         endTurnDisabled={
           Boolean(
             currentGame.pendingEffect ||
-              drawAnimationActive
+              turnDrawPending
           )
+        }
+        preserveEndTurnAppearance={
+          turnDrawPending &&
+          !currentGame.pendingEffect
         }
         highlightEndTurn={
           highlightEndTurn
@@ -4594,6 +4644,7 @@ function PlayerHeader({
   onStandingClick,
   onEndTurn,
   endTurnDisabled = false,
+  preserveEndTurnAppearance = false,
   highlightEndTurn = false,
   previewCommandCost = null,
 }: {
@@ -4608,6 +4659,7 @@ function PlayerHeader({
   onStandingClick?: () => void;
   onEndTurn?: () => void;
   endTurnDisabled?: boolean;
+  preserveEndTurnAppearance?: boolean;
   highlightEndTurn?: boolean;
   previewCommandCost?: number | null;
 }) {
@@ -4720,11 +4772,18 @@ function PlayerHeader({
       {onEndTurn ? (
         <button
           type="button"
-          className={`${styles.endTurnButton} ${styles.headerEndTurnButton} ${
+          className={[
+            styles.endTurnButton,
+            styles.headerEndTurnButton,
             highlightEndTurn
               ? styles.endTurnReady
-              : ""
-          }`}
+              : "",
+            preserveEndTurnAppearance
+              ? styles.endTurnDisabledStable
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
           disabled={
             endTurnDisabled
           }
@@ -4733,7 +4792,9 @@ function PlayerHeader({
           }
           title={
             endTurnDisabled
-              ? "Resolve the current effect first"
+              ? preserveEndTurnAppearance
+                ? "Wait for the turn draw to finish"
+                : "Resolve the current effect first"
               : "End your turn"
           }
         >

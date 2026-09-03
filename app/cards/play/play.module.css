@@ -391,6 +391,15 @@
 }
 
 /*
+ * During the automatic start-of-turn draw, End Turn is
+ * functionally disabled but should not visually flash between
+ * normal -> grey -> normal. Keep its normal appearance stable.
+ */
+.endTurnButton.endTurnDisabledStable:disabled {
+  opacity: 1;
+}
+
+/*
  * Hearthstone-style visual hint:
  * only appears when the page cannot find
  * another legal player action.
