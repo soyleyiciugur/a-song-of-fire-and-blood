@@ -5786,14 +5786,12 @@ function EquippedArtifactBadge({
       }
       aria-label={`Equipped Artifact: ${artifact.name}`}
     >
-      <span
-        aria-hidden
+      <CardArtwork
+        card={artifact}
         className={
-          styles.equippedArtifactGlyph
+          styles.equippedArtifactArtwork
         }
-      >
-        ◆
-      </span>
+      />
     </div>
   );
 }
