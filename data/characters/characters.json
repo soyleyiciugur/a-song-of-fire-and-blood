@@ -357,7 +357,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Hightower",
-    "title": "Late Hand of the King",
+    "title": "Former Hand of the King",
     "status": "Dead",
     "age": 68,
     "nameday": {
@@ -1270,7 +1270,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Hightower",
-    "title": "Late Lord of Oldtown",
+    "title": "Former Lord of Oldtown",
     "status": "Dead",
     "age": 15,
     "nameday": {
@@ -2260,7 +2260,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "Late Queen of the Seven Kingdoms",
+    "title": "Former Queen of the Seven Kingdoms",
     "status": "Dead",
     "age": 70,
     "nameday": {
@@ -2305,7 +2305,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "Late Lady of Dragonstone",
+    "title": "Former Lady of Dragonstone",
     "status": "Dead",
     "age": 51,
     "nameday": {
@@ -2879,7 +2879,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Stark",
-    "title": "Late Lord of Winterfell and Warden of the North",
+    "title": "Former Lord of Winterfell and Warden of the North",
     "status": "Dead",
     "age": 59,
     "nameday": {
