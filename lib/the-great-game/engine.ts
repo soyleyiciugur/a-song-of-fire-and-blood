@@ -945,10 +945,7 @@ function gainStandingMutable(
     player.standing;
 
   player.standing =
-    Math.min(
-      STARTING_STANDING,
-      before + amount
-    );
+    before + amount;
 
   const actualGain =
     player.standing -

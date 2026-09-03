@@ -127,6 +127,41 @@ type PointerDropTarget =
 type UnitModifier =
   UnitState["modifiers"][number];
 
+type PendingDrawAnimation = {
+  playerId: PlayerId;
+  handInstanceId: string;
+  cardId: string;
+  cost: number;
+};
+
+type ActiveDrawAnimation =
+  PendingDrawAnimation & {
+    animationId: number;
+    startX: number;
+    startY: number;
+    middleX: number;
+    middleY: number;
+    endX: number;
+    endY: number;
+  };
+
+type FanCardProperties =
+  CSSProperties & {
+    "--fan-angle": string;
+    "--fan-y": string;
+    "--fan-z": number;
+  };
+
+type DrawFlightProperties =
+  CSSProperties & {
+    "--draw-start-x": string;
+    "--draw-start-y": string;
+    "--draw-middle-x": string;
+    "--draw-middle-y": string;
+    "--draw-end-x": string;
+    "--draw-end-y": string;
+  };
+
 const TIER_MAP = new Map<
   TierId,
   {
@@ -200,6 +235,55 @@ function tierStyle(
       tier?.color ??
       "#d4af37",
   } as CSSProperties;
+}
+
+function fanCardStyle(
+  card: GameCard,
+  index: number,
+  count: number
+): FanCardProperties {
+  const middle =
+    (count - 1) / 2;
+
+  const normalized =
+    middle === 0
+      ? 0
+      : (index - middle) /
+        middle;
+
+  const maximumAngle =
+    Math.min(
+      6.5,
+      3.8 + count * 0.35
+    );
+
+  const verticalOffset =
+    Math.pow(
+      Math.abs(normalized),
+      1.65
+    ) * 13;
+
+  return {
+    ...tierStyle(card),
+    "--fan-angle": `${normalized * maximumAngle}deg`,
+    "--fan-y": `${verticalOffset}px`,
+    "--fan-z": index + 1,
+  } as FanCardProperties;
+}
+
+function drawFlightStyle(
+  flight: ActiveDrawAnimation,
+  card: GameCard
+): DrawFlightProperties {
+  return {
+    ...tierStyle(card),
+    "--draw-start-x": `${flight.startX}px`,
+    "--draw-start-y": `${flight.startY}px`,
+    "--draw-middle-x": `${flight.middleX}px`,
+    "--draw-middle-y": `${flight.middleY}px`,
+    "--draw-end-x": `${flight.endX}px`,
+    "--draw-end-y": `${flight.endY}px`,
+  } as DrawFlightProperties;
 }
 
 function tierLabel(
@@ -381,8 +465,12 @@ function CardSparkles() {
 
 function HorizontalHand({
   children,
+  fanned = false,
+  active = false,
 }: {
   children: ReactNode;
+  fanned?: boolean;
+  active?: boolean;
 }) {
   const handRef =
     useRef<HTMLDivElement | null>(
@@ -459,9 +547,26 @@ function HorizontalHand({
   return (
     <div
       ref={handRef}
-      className={styles.hand}
+      className={`${styles.hand} ${
+        fanned
+          ? styles.fannedHand
+          : ""
+      }`}
+      data-active-hand={
+        active
+          ? "true"
+          : undefined
+      }
     >
-      {children}
+      <div
+        className={
+          fanned
+            ? styles.handFanTrack
+            : styles.handLinearTrack
+        }
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -698,6 +803,273 @@ export default function GreatGamePlayPage() {
     setInspectedUnitId,
   ] = useState<string | null>(null);
 
+  const [
+    drawQueue,
+    setDrawQueue,
+  ] = useState<PendingDrawAnimation[]>([]);
+
+  const [
+    drawFlight,
+    setDrawFlight,
+  ] = useState<ActiveDrawAnimation | null>(null);
+
+  const [
+    hiddenDrawnIds,
+    setHiddenDrawnIds,
+  ] = useState<string[]>([]);
+
+  const drawAnimationIdRef =
+    useRef(0);
+
+  const drawSequenceCompleteRef =
+    useRef<(() => void) | null>(null);
+
+  const incomingTurnDrawsRef =
+    useRef<PendingDrawAnimation[]>([]);
+
+  useEffect(() => {
+    if (
+      handoff ||
+      drawFlight ||
+      drawQueue.length === 0
+    ) {
+      return;
+    }
+
+    const animationFrame =
+      requestAnimationFrame(() => {
+        const draw =
+          drawQueue[0];
+
+        const source =
+          document.querySelector<HTMLElement>(
+            `[data-deck-anchor="${draw.playerId}"]`
+          );
+
+        const target =
+          document.querySelector<HTMLElement>(
+            `[data-hand-instance-id="${draw.handInstanceId}"]`
+          );
+
+        const hand =
+          document.querySelector<HTMLElement>(
+            '[data-active-hand="true"]'
+          );
+
+        const sourceRect =
+          source?.getBoundingClientRect();
+
+        const targetRect =
+          target?.getBoundingClientRect();
+
+        const handRect =
+          hand?.getBoundingClientRect();
+
+        const flightWidth =
+          Math.min(
+            178,
+            Math.max(
+              136,
+              window.innerWidth * 0.12
+            )
+          );
+
+        const startX =
+          (sourceRect
+            ? sourceRect.left +
+              sourceRect.width / 2
+            : window.innerWidth - 62) -
+          flightWidth / 2;
+
+        const startY =
+          (sourceRect
+            ? sourceRect.top +
+              sourceRect.height / 2
+            : window.innerHeight * 0.24) -
+          (flightWidth * 1.4) / 2;
+
+        const fallbackEndX =
+          handRect
+            ? handRect.left +
+              handRect.width / 2 -
+              flightWidth / 2
+            : window.innerWidth / 2 -
+              flightWidth / 2;
+
+        const fallbackEndY =
+          handRect
+            ? handRect.top + 24
+            : window.innerHeight -
+              flightWidth * 1.55;
+
+        const endX =
+          targetRect
+            ? targetRect.left +
+              targetRect.width / 2 -
+              flightWidth / 2
+            : fallbackEndX;
+
+        const endY =
+          targetRect
+            ? targetRect.top
+            : fallbackEndY;
+
+        drawAnimationIdRef.current +=
+          1;
+
+        setDrawFlight({
+          ...draw,
+          animationId:
+            drawAnimationIdRef.current,
+          startX,
+          startY,
+          middleX:
+            startX +
+            (endX - startX) * 0.55,
+          middleY:
+            Math.max(
+              24,
+              Math.min(
+                startY,
+                endY
+              ) - 112
+            ),
+          endX,
+          endY,
+        });
+      });
+
+    return () =>
+      cancelAnimationFrame(
+        animationFrame
+      );
+  }, [
+    drawFlight,
+    drawQueue,
+    handoff,
+  ]);
+
+  useEffect(() => {
+    if (
+      drawFlight ||
+      drawQueue.length > 0 ||
+      !drawSequenceCompleteRef.current
+    ) {
+      return;
+    }
+
+    const onComplete =
+      drawSequenceCompleteRef.current;
+
+    drawSequenceCompleteRef.current =
+      null;
+
+    onComplete();
+  }, [drawFlight, drawQueue]);
+
+  function collectNewDraws(
+    before: GameState,
+    after: GameState,
+    playerId: PlayerId
+  ): PendingDrawAnimation[] {
+    const previousIds =
+      new Set(
+        before.players[
+          playerId
+        ].hand.map(
+          (card) =>
+            card.instanceId
+        )
+      );
+
+    return after.players[
+      playerId
+    ].hand
+      .filter(
+        (card) =>
+          !previousIds.has(
+            card.instanceId
+          )
+      )
+      .map((card) => ({
+        playerId,
+        handInstanceId:
+          card.instanceId,
+        cardId: card.cardId,
+        cost:
+          getEffectiveCost(
+            after,
+            playerId,
+            card
+          ),
+      }));
+  }
+
+  function startDrawSequence(
+    draws: PendingDrawAnimation[],
+    onComplete?: () => void
+  ) {
+    if (draws.length === 0) {
+      onComplete?.();
+      return;
+    }
+
+    drawSequenceCompleteRef.current =
+      onComplete ?? null;
+
+    setHiddenDrawnIds(
+      (current) => [
+        ...new Set([
+          ...current,
+          ...draws.map(
+            (draw) =>
+              draw.handInstanceId
+          ),
+        ]),
+      ]
+    );
+
+    setDrawQueue(draws);
+  }
+
+  function finishDrawFlight() {
+    if (!drawFlight) {
+      return;
+    }
+
+    const finishedId =
+      drawFlight.handInstanceId;
+
+    setHiddenDrawnIds(
+      (current) =>
+        current.filter(
+          (id) =>
+            id !== finishedId
+        )
+    );
+
+    setDrawFlight(null);
+
+    setDrawQueue(
+      (current) =>
+        current.slice(1)
+    );
+  }
+
+  function beginHandoffTurn() {
+    const draws =
+      incomingTurnDrawsRef.current;
+
+    incomingTurnDrawsRef.current =
+      [];
+
+    if (draws.length > 0) {
+      startDrawSequence(draws);
+    }
+
+    setHandoff(false);
+  }
+
   function startNewGame() {
     setGame(
       createGame()
@@ -716,6 +1088,13 @@ export default function GreatGamePlayPage() {
     setDragCursor(null);
     setExitConfirm(false);
     setInspectedUnitId(null);
+    setDrawQueue([]);
+    setDrawFlight(null);
+    setHiddenDrawnIds([]);
+    drawSequenceCompleteRef.current =
+      null;
+    incomingTurnDrawsRef.current =
+      [];
   }
 
   function exitToMenu() {
@@ -734,6 +1113,13 @@ export default function GreatGamePlayPage() {
     setDragCursor(null);
     setExitConfirm(false);
     setInspectedUnitId(null);
+    setDrawQueue([]);
+    setDrawFlight(null);
+    setHiddenDrawnIds([]);
+    drawSequenceCompleteRef.current =
+      null;
+    incomingTurnDrawsRef.current =
+      [];
   }
 
   if (
@@ -822,9 +1208,16 @@ export default function GreatGamePlayPage() {
         ) ?? null
       : null;
 
+  const drawAnimationActive =
+    Boolean(
+      drawFlight ||
+        drawQueue.length > 0
+    );
+
   const gameInteractionLocked =
     Boolean(
-      currentGame.pendingEffect
+      currentGame.pendingEffect ||
+        drawAnimationActive
     );
 
   function dispatch(
@@ -844,6 +1237,13 @@ export default function GreatGamePlayPage() {
 
       return false;
     }
+
+    const draws =
+      collectNewDraws(
+        currentGame,
+        result.state,
+        currentGame.activePlayerId
+      );
 
     setGame(
       result.state
@@ -866,6 +1266,12 @@ export default function GreatGamePlayPage() {
     setDragCursor(null);
 
     setInspectedUnitId(null);
+
+    if (draws.length > 0) {
+      startDrawSequence(
+        draws
+      );
+    }
 
     return true;
   }
@@ -962,6 +1368,18 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    if (
+      result.state.phase ===
+      "playing"
+    ) {
+      incomingTurnDrawsRef.current =
+        collectNewDraws(
+          currentGame,
+          result.state,
+          result.state.activePlayerId
+        );
+    }
+
     setGame(
       result.state
     );
@@ -977,10 +1395,13 @@ export default function GreatGamePlayPage() {
 
   function endTurn() {
     if (
-      currentGame.pendingEffect
+      currentGame.pendingEffect ||
+      drawAnimationActive
     ) {
       setError(
-        "Resolve the pending Arrival ability first."
+        currentGame.pendingEffect
+          ? "Resolve the pending Arrival ability first."
+          : "Let the drawn card settle first."
       );
 
       return;
@@ -1004,9 +1425,30 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    setGame(
-      result.state
-    );
+    const outgoingDraws =
+      collectNewDraws(
+        currentGame,
+        result.state,
+        currentGame.activePlayerId
+      );
+
+    const incomingDraws =
+      collectNewDraws(
+        currentGame,
+        result.state,
+        result.state.activePlayerId
+      );
+
+    incomingTurnDrawsRef.current =
+      incomingDraws;
+
+    const commitTurn = () => {
+      setGame(
+        result.state
+      );
+
+      setHandoff(true);
+    };
 
     setError(null);
 
@@ -1024,7 +1466,16 @@ export default function GreatGamePlayPage() {
 
     setDragCursor(null);
 
-    setHandoff(true);
+    setInspectedUnitId(null);
+
+    if (outgoingDraws.length > 0) {
+      startDrawSequence(
+        outgoingDraws,
+        commitTurn
+      );
+    } else {
+      commitTurn();
+    }
   }
 
   function beginPlayCard(
@@ -2736,10 +3187,8 @@ export default function GreatGamePlayPage() {
             className={
               styles.primaryButton
             }
-            onClick={() =>
-              setHandoff(
-                false
-              )
+            onClick={
+              beginHandoffTurn
             }
           >
             {mulliganHandoff
@@ -2859,6 +3308,66 @@ export default function GreatGamePlayPage() {
         }
         aria-hidden
       />
+
+      {drawFlight && (() => {
+        const drawnCard =
+          getGameCard(
+            drawFlight.cardId
+          );
+
+        return (
+          <div
+            key={
+              drawFlight.animationId
+            }
+            className={
+              styles.drawCardFlight
+            }
+            style={
+              drawFlightStyle(
+                drawFlight,
+                drawnCard
+              )
+            }
+            onAnimationEnd={(event) => {
+              if (
+                event.currentTarget ===
+                event.target
+              ) {
+                finishDrawFlight();
+              }
+            }}
+            aria-live="polite"
+            aria-label={`${drawnCard.name} drawn`}
+          >
+            <span
+              className={
+                styles.drawCardTrail
+              }
+              aria-hidden
+            />
+
+            <CardArtwork
+              card={drawnCard}
+              className={
+                styles.fullCardArtwork
+              }
+            />
+
+            <CardChrome
+              card={drawnCard}
+              cost={
+                drawFlight.cost
+              }
+            />
+
+            <CardInfoPanel
+              card={drawnCard}
+              showDescription={false}
+            />
+          </div>
+        );
+      })()}
 
       {dragCursor && (
         <div
@@ -3302,33 +3811,55 @@ export default function GreatGamePlayPage() {
             </small>
           </div>
 
-          <button
-            className={`${styles.endTurnButton} ${
-              highlightEndTurn
-                ? styles.endTurnReady
-                : ""
-            }`}
-            disabled={
-              Boolean(
-                currentGame.pendingEffect
-              )
-            }
-            title={
-              highlightEndTurn
-                ? "No legal actions remain."
-                : undefined
-            }
-            onClick={
-              endTurn
+          <div
+            className={
+              styles.handControls
             }
           >
-            End Turn
-          </button>
+            <CommandMeter
+              command={
+                activePlayer.command
+              }
+              maxCommand={
+                activePlayer.maxCommand
+              }
+              nextCommandBonus={
+                activePlayer.nextCommandBonus
+              }
+            />
+
+            <button
+              className={`${styles.endTurnButton} ${
+                highlightEndTurn
+                  ? styles.endTurnReady
+                  : ""
+              }`}
+              disabled={
+                Boolean(
+                  currentGame.pendingEffect ||
+                    drawAnimationActive
+                )
+              }
+              title={
+                highlightEndTurn
+                  ? "No legal actions remain."
+                  : undefined
+              }
+              onClick={
+                endTurn
+              }
+            >
+              End Turn
+            </button>
+          </div>
         </div>
 
-        <HorizontalHand>
+        <HorizontalHand
+          fanned
+          active
+        >
           {activePlayer.hand.map(
-            (handCard) => (
+            (handCard, index) => (
               <HandCard
                 key={
                   handCard.instanceId
@@ -3350,9 +3881,18 @@ export default function GreatGamePlayPage() {
                   draggingHandInstanceId ===
                   handCard.instanceId
                 }
+                fanIndex={index}
+                fanCount={
+                  activePlayer.hand.length
+                }
+                drawHidden={
+                  hiddenDrawnIds.includes(
+                    handCard.instanceId
+                  )
+                }
                 interactionLocked={
                   Boolean(
-                    currentGame.pendingEffect ||
+                    gameInteractionLocked ||
                       pendingConflict
                   )
                 }
@@ -3909,22 +4449,33 @@ function PlayerHeader({
         )}
       </button>
 
+      {opponent && (
+        <CommandMeter
+          command={
+            player.command
+          }
+          maxCommand={
+            player.maxCommand
+          }
+          nextCommandBonus={
+            player.nextCommandBonus
+          }
+          compact
+        />
+      )}
+
       <div
         className={
           styles.playerStats
         }
       >
-        {/* Always visible for BOTH players */}
-        <HudStat
-          label="Command"
-          value={`${player.command}/${player.maxCommand}`}
-          accent
-        />
-
         <HudStat
           label="Deck"
           value={
             player.deck.length
+          }
+          deckAnchorPlayerId={
+            playerId
           }
         />
 
@@ -3948,14 +4499,6 @@ function PlayerHeader({
           }
         />
 
-        {player.nextCommandBonus >
-          0 && (
-          <HudStat
-            label="Next Turn"
-            value={`+${player.nextCommandBonus} Command`}
-            accent
-          />
-        )}
       </div>
     </section>
   );
@@ -3965,12 +4508,14 @@ function HudStat({
   label,
   value,
   accent = false,
+  deckAnchorPlayerId,
 }: {
   label: string;
   value:
     | string
     | number;
   accent?: boolean;
+  deckAnchorPlayerId?: PlayerId;
 }) {
   return (
     <div
@@ -3979,6 +4524,9 @@ function HudStat({
           ? styles.hudStatAccent
           : ""
       }`}
+      data-deck-anchor={
+        deckAnchorPlayerId
+      }
     >
       <span>
         {label}
@@ -3987,6 +4535,145 @@ function HudStat({
       <strong>
         {value}
       </strong>
+    </div>
+  );
+}
+
+function CommandSigil({
+  value,
+}: {
+  value?: number;
+}) {
+  return (
+    <svg
+      viewBox="0 0 44 44"
+      aria-hidden
+    >
+      <path
+        d="M13 2h18l11 11v18L31 42H13L2 31V13Z"
+        className={
+          styles.commandBadgePlate
+        }
+      />
+
+      <path
+        d="M15 6h14l9 9v14l-9 9H15l-9-9V15Z"
+        className={
+          styles.commandBadgeInset
+        }
+      />
+
+      <path
+        d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z"
+        className={
+          styles.commandBadgeRune
+        }
+      />
+
+      {typeof value ===
+        "number" && (
+        <text
+          x="22"
+          y="22.6"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          className={
+            styles.commandCostText
+          }
+        >
+          {value}
+        </text>
+      )}
+    </svg>
+  );
+}
+
+function CommandMeter({
+  command,
+  maxCommand,
+  nextCommandBonus,
+  compact = false,
+}: {
+  command: number;
+  maxCommand: number;
+  nextCommandBonus: number;
+  compact?: boolean;
+}) {
+  const slotCount =
+    Math.max(
+      command,
+      maxCommand
+    );
+
+  return (
+    <div
+      className={`${styles.commandMeter} ${
+        compact
+          ? styles.commandMeterCompact
+          : ""
+      }`}
+      title={`${command} of ${maxCommand} Command available`}
+    >
+      <div
+        className={
+          styles.commandMeterHeading
+        }
+      >
+        <span>Command</span>
+
+        <strong>
+          {command}/{maxCommand}
+        </strong>
+
+        {nextCommandBonus > 0 && (
+          <em>
+            +{nextCommandBonus} next
+          </em>
+        )}
+      </div>
+
+      <div
+        className={
+          styles.commandPips
+        }
+        aria-label={`${command} Command available`}
+      >
+        {Array.from({
+          length: slotCount,
+        }).map((_, index) => {
+          const available =
+            index < command;
+
+          const bonus =
+            index >= maxCommand;
+
+          return (
+            <span
+              key={index}
+              className={[
+                styles.commandPip,
+                available
+                  ? styles.commandPipLit
+                  : styles.commandPipSpent,
+                bonus
+                  ? styles.commandPipBonus
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              title={
+                available
+                  ? bonus
+                    ? "Bonus Command available"
+                    : "Command available"
+                  : "Command spent"
+              }
+            >
+              <CommandSigil />
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -4362,6 +5049,9 @@ function HandCard({
   playerId,
   selected,
   dragging,
+  fanIndex,
+  fanCount,
+  drawHidden,
   interactionLocked,
   onPlay,
   onPointerDown,
@@ -4374,6 +5064,9 @@ function HandCard({
   playerId: PlayerId;
   selected: boolean;
   dragging: boolean;
+  fanIndex: number;
+  fanCount: number;
+  drawHidden: boolean;
   interactionLocked: boolean;
   onPlay: () => void;
   onPointerDown: (
@@ -4422,11 +5115,22 @@ function HandCard({
         dragging
           ? styles.draggingHandCard
           : "",
+
+        drawHidden
+          ? styles.drawHiddenHandCard
+          : "",
       ]
         .filter(Boolean)
         .join(" ")}
       style={
-        tierStyle(card)
+        fanCardStyle(
+          card,
+          fanIndex,
+          fanCount
+        )
+      }
+      data-hand-instance-id={
+        handCard.instanceId
       }
       disabled={
         interactionLocked
@@ -4538,18 +5242,9 @@ function CardChrome({
           title="Command cost"
           aria-label={`${cost} Command`}
         >
-          <svg viewBox="0 0 44 44" aria-hidden>
-            <path
-              d="M13 2h18l11 11v18L31 42H13L2 31V13Z"
-              className={styles.commandBadgePlate}
-            />
-            <path
-              d="M15 6h14l9 9v14l-9 9H15l-9-9V15Z"
-              className={styles.commandBadgeInset}
-            />
-          </svg>
-
-          <strong>{cost}</strong>
+          <CommandSigil
+            value={cost}
+          />
         </span>
       )}
 
@@ -4688,34 +5383,66 @@ function CardInfoPanel({
         {isUnitCard(card) && (
           <>
           <span
-            className={statTone(
-              runtimeStats?.power ?? card.power,
-              baseStats?.power
-            )}
+            className={[
+              styles.cardStat,
+              statTone(
+                runtimeStats?.power ?? card.power,
+                baseStats?.power
+              ),
+            ]
+              .filter(Boolean)
+              .join(" ")}
           >
-            ⚔{" "}
-            {runtimeStats
-              ?.power ??
-              card.power}
+            <i
+              className={
+                styles.cardStatIcon
+              }
+              aria-hidden
+            >
+              ⚔
+            </i>
+
+            <b>
+              {runtimeStats
+                ?.power ??
+                card.power}
+            </b>
           </span>
 
           {card.cardType ===
             "character" && (
             <span
-              className={statTone(
-                runtimeStats?.influence ?? card.influence,
-                baseStats?.influence
-              )}
+              className={[
+                styles.cardStat,
+                statTone(
+                  runtimeStats?.influence ?? card.influence,
+                  baseStats?.influence
+                ),
+              ]
+                .filter(Boolean)
+                .join(" ")}
             >
-              ♛{" "}
-              {runtimeStats
-                ?.influence ??
-                card.influence}
+              <i
+                className={
+                  styles.cardStatIcon
+                }
+                aria-hidden
+              >
+                ♛
+              </i>
+
+              <b>
+                {runtimeStats
+                  ?.influence ??
+                  card.influence}
+              </b>
             </span>
           )}
 
           <span
             className={[
+              styles.cardStat,
+              styles.healthStat,
               statTone(
                 runtimeStats?.maxHealth ?? card.health,
                 baseStats?.health
@@ -4728,10 +5455,20 @@ function CardInfoPanel({
               .filter(Boolean)
               .join(" ")}
           >
-            ♥{" "}
-            {runtimeStats
-              ? `${runtimeStats.health}/${runtimeStats.maxHealth}`
-              : card.health}
+            <i
+              className={
+                styles.cardStatIcon
+              }
+              aria-hidden
+            >
+              ♥
+            </i>
+
+            <b>
+              {runtimeStats
+                ? `${runtimeStats.health}/${runtimeStats.maxHealth}`
+                : card.health}
+            </b>
           </span>
           </>
         )}

@@ -699,7 +699,7 @@
 
   grid-template-columns:
     repeat(
-      5,
+      4,
       minmax(80px, 1fr)
     );
 
@@ -750,6 +750,196 @@
   color: #d4af37;
 }
 
+.commandMeter {
+  min-width: min(360px, 44vw);
+
+  padding: 0.55rem 0.7rem 0.6rem;
+
+  border:
+    1px solid rgba(214, 174, 80, 0.3);
+
+  background:
+    radial-gradient(
+      circle at 50% 0,
+      rgba(230, 190, 87, 0.1),
+      transparent 58%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(47, 31, 17, 0.92),
+      rgba(16, 12, 11, 0.96)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 231, 157, 0.08),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.23),
+    0 7px 22px rgba(0, 0, 0, 0.28);
+}
+
+.commandMeterHeading {
+  display: flex;
+  align-items: baseline;
+
+  gap: 0.42rem;
+
+  margin-bottom: 0.34rem;
+
+  font-family:
+    var(--font-hotd),
+    serif;
+
+  line-height: 1;
+}
+
+.commandMeterHeading span {
+  color:
+    rgba(245, 230, 200, 0.5);
+
+  font-size: 0.55rem;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.commandMeterHeading strong {
+  color: #f5d66f;
+
+  font-size: 0.75rem;
+
+  text-shadow:
+    0 0 9px rgba(238, 191, 60, 0.35);
+}
+
+.commandMeterHeading em {
+  margin-left: auto;
+
+  color: #d7b960;
+
+  font-size: 0.48rem;
+  font-style: normal;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.commandPips {
+  display: flex;
+  align-items: center;
+
+  gap: 0.16rem;
+
+  min-height: 1.42rem;
+}
+
+.commandPip {
+  position: relative;
+
+  display: block;
+
+  width: 1.48rem;
+  height: 1.48rem;
+
+  flex: 0 0 1.48rem;
+
+  transition:
+    filter 0.22s ease,
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.commandPip svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+}
+
+.commandPipLit {
+  filter:
+    drop-shadow(0 0 3px rgba(255, 221, 111, 0.75))
+    drop-shadow(0 0 8px rgba(210, 151, 35, 0.44));
+
+  animation:
+    commandPipGlow 2.8s ease-in-out infinite;
+}
+
+.commandPipLit .commandBadgePlate {
+  fill: #6d4514;
+  stroke: #f0ca64;
+}
+
+.commandPipLit .commandBadgeInset {
+  fill: #d69a2a;
+  stroke: #ffe89b;
+}
+
+.commandPipLit .commandBadgeRune {
+  fill: #fff0a7;
+  opacity: 0.95;
+}
+
+.commandPipSpent {
+  opacity: 0.36;
+
+  filter:
+    grayscale(0.72)
+    brightness(0.58);
+}
+
+.commandPipSpent .commandBadgePlate {
+  fill: #29231d;
+  stroke: #716653;
+}
+
+.commandPipSpent .commandBadgeInset {
+  fill: #464038;
+  stroke: #726957;
+}
+
+.commandPipSpent .commandBadgeRune {
+  fill: #857966;
+  opacity: 0.44;
+}
+
+.commandPipBonus {
+  transform: scale(0.9);
+}
+
+@keyframes commandPipGlow {
+  0%,
+  100% {
+    opacity: 0.88;
+  }
+
+  50% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 4px rgba(255, 229, 135, 0.88))
+      drop-shadow(0 0 11px rgba(210, 151, 35, 0.58));
+  }
+}
+
+.commandMeterCompact {
+  min-width: 170px;
+
+  padding: 0.42rem 0.52rem 0.46rem;
+}
+
+.commandMeterCompact .commandPip {
+  width: 1.08rem;
+  height: 1.08rem;
+
+  flex-basis: 1.08rem;
+}
+
+.commandMeterCompact .commandPips {
+  min-height: 1.08rem;
+}
+
 /* Sections */
 
 .sectionHeading {
@@ -778,6 +968,17 @@
 .sectionHeading small {
   color:
     rgba(245, 230, 200, 0.3);
+}
+
+.handControls {
+  display: flex;
+  align-items: stretch;
+
+  gap: 0.65rem;
+}
+
+.handControls .endTurnButton {
+  min-width: 112px;
 }
 
 /* Board */
@@ -928,6 +1129,160 @@
   font-size: 2rem;
 }
 
+.drawCardFlight {
+  position: fixed;
+
+  left:
+    var(--draw-start-x);
+  top:
+    var(--draw-start-y);
+
+  z-index: 300;
+
+  width:
+    clamp(
+      136px,
+      12vw,
+      178px
+    );
+
+  overflow: hidden;
+
+  aspect-ratio: 5 / 7;
+
+  border:
+    2px solid
+    var(--tier-color, #8b1e2b);
+
+  background: #0e0b0e;
+
+  box-shadow:
+    0 20px 54px rgba(0, 0, 0, 0.72),
+    0 0 24px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 34%,
+        transparent
+      );
+
+  pointer-events: none;
+
+  isolation: isolate;
+
+  animation:
+    drawCardFlight 760ms
+    cubic-bezier(0.2, 0.78, 0.24, 1)
+    both;
+}
+
+.drawCardFlight::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 8;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 58%,
+      transparent
+    );
+
+  box-shadow:
+    inset 0 0 22px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 24%,
+        transparent
+      );
+}
+
+.drawCardTrail {
+  position: absolute;
+  inset: -35% -70%;
+
+  z-index: 7;
+
+  background:
+    linear-gradient(
+      112deg,
+      transparent 39%,
+      rgba(255, 234, 169, 0.34) 49%,
+      transparent 59%
+    );
+
+  transform:
+    translateX(-42%);
+
+  animation:
+    drawCardGleam 760ms ease-out both;
+}
+
+@keyframes drawCardFlight {
+  0% {
+    left:
+      var(--draw-start-x);
+    top:
+      var(--draw-start-y);
+
+    opacity: 0;
+
+    transform:
+      rotate(10deg)
+      scale(0.52);
+  }
+
+  14% {
+    opacity: 1;
+  }
+
+  55% {
+    left:
+      var(--draw-middle-x);
+    top:
+      var(--draw-middle-y);
+
+    transform:
+      rotate(-2.5deg)
+      scale(1.08);
+  }
+
+  100% {
+    left:
+      var(--draw-end-x);
+    top:
+      var(--draw-end-y);
+
+    opacity: 1;
+
+    transform:
+      rotate(0deg)
+      scale(0.98);
+  }
+}
+
+@keyframes drawCardGleam {
+  0%,
+  36% {
+    opacity: 0;
+    transform:
+      translateX(-42%);
+  }
+
+  55% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateX(42%);
+  }
+}
+
 .cost,
 .tierBadge {
   position: absolute;
@@ -983,8 +1338,7 @@
 }
 
 .cost svg {
-  position: absolute;
-  inset: 0;
+  display: block;
 
   width: 100%;
   height: 100%;
@@ -994,23 +1348,38 @@
     drop-shadow(0 0 4px rgba(183, 130, 54, 0.16));
 }
 
-.cost strong {
-  position: relative;
-  z-index: 1;
-
-  font-size: 0.72rem;
-}
-
 .commandBadgePlate {
-  fill: #3a2413;
-  stroke: #d0aa5a;
+  fill: #4b2e0f;
+  stroke: #e0b94f;
   stroke-width: 2;
 }
 
 .commandBadgeInset {
-  fill: #745022;
-  stroke: rgba(255, 226, 151, 0.28);
+  fill: #a66e18;
+  stroke: rgba(255, 235, 170, 0.54);
   stroke-width: 1;
+}
+
+.commandBadgeRune {
+  fill: rgba(255, 222, 119, 0.24);
+}
+
+.commandCostText {
+  fill: #fff1b0;
+
+  font-family:
+    var(--font-hotd),
+    serif;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  paint-order: stroke;
+  stroke: rgba(35, 18, 4, 0.86);
+  stroke-width: 1.3px;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .tierBadge {
@@ -1019,35 +1388,38 @@
   transform:
     translateX(-50%);
 
-  min-width: 2.15rem;
-  height: 1.34rem;
+  min-width: 2rem;
+  height: 1.22rem;
 
-  padding: 0 0.5rem;
+  padding: 0 0.46rem;
 
-  border:
-    1px solid rgba(8, 5, 8, 0.78);
+  border: 0;
+  border-top:
+    2px solid
+    var(--tier-color, #8b1e2b);
 
   background:
     linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 74%, #211a20),
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 58%, #080608)
+      180deg,
+      color-mix(in srgb, var(--tier-color, #8b1e2b) 54%, rgba(25, 18, 20, 0.94)),
+      rgba(8, 6, 8, 0.9)
     );
 
-  border-radius: 2px;
+  border-radius: 0 0 2px 2px;
 
   color:
     var(--tier-accent, #d4af37);
 
   box-shadow:
-    inset 0 -2px 0
+    inset 0 -1px 0
       color-mix(
         in srgb,
-        var(--tier-accent, #d4af37) 62%,
+        var(--tier-accent, #d4af37) 72%,
         transparent
       ),
-    inset 0 1px 0 rgba(255, 255, 255, 0.09),
-    0 3px 10px rgba(0, 0, 0, 0.72);
+    0 4px 12px rgba(0, 0, 0, 0.74);
+
+  letter-spacing: 0.08em;
 }
 
 .cardSparkles {
@@ -1269,7 +1641,7 @@
 .cardStats {
   display: flex;
 
-  align-items: center;
+  align-items: stretch;
 
   gap: 0.55rem;
 
@@ -1292,6 +1664,53 @@
   transition:
     color 0.18s ease,
     text-shadow 0.18s ease;
+}
+
+.cardStat {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.18rem;
+
+  height: 1.05rem;
+
+  line-height: 1;
+}
+
+.cardStatIcon {
+  display: inline-grid;
+  place-items: center;
+
+  width: 0.66rem;
+  height: 0.66rem;
+
+  margin: 0;
+
+  color: currentColor;
+
+  font-family:
+    var(--font-hotd),
+    serif;
+
+  font-size: 0.58rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+.cardStat b {
+  display: inline-block;
+
+  margin: 0;
+
+  color: currentColor;
+
+  font: inherit;
+  font-weight: inherit;
+  line-height: 1;
+}
+
+.healthStat .cardStatIcon {
+  transform: translateY(0.5px);
 }
 
 .cardStats .statBuffed {
@@ -1969,11 +2388,10 @@
 }
 
 .hand {
-  display: flex;
-
-  gap: 0.75rem;
+  display: block;
 
   overflow-x: auto;
+  overflow-y: hidden;
 
   overscroll-behavior-x: contain;
 
@@ -1984,6 +2402,41 @@
   padding:
     0.55rem 0.2rem
     1.25rem;
+}
+
+.handLinearTrack {
+  display: flex;
+
+  gap: 0.75rem;
+
+  width: max-content;
+  min-width: 100%;
+}
+
+.fannedHand {
+  min-height: 325px;
+
+  padding-top: 1.15rem;
+}
+
+.handFanTrack {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  width: max-content;
+  min-width: 100%;
+  min-height: 304px;
+
+  padding:
+    0.25rem 3.4rem
+    1.15rem;
+}
+
+.handFanTrack > .handCard + .handCard {
+  margin-left: -44px;
 }
 
 .handCard {
@@ -2048,7 +2501,7 @@
 }
 
 .draggingHandCard {
-  opacity: 0.2;
+  opacity: 0;
 
   transform:
     translateY(-5px);
@@ -2066,6 +2519,58 @@
         var(--tier-accent, #d4af37) 28%,
         transparent
       );
+}
+
+.fannedHand .handCard {
+  z-index:
+    var(--fan-z, 1);
+
+  transform:
+    translateY(
+      var(--fan-y, 0)
+    )
+    rotate(
+      var(--fan-angle, 0deg)
+    );
+
+  transform-origin:
+    center 118%;
+
+  will-change:
+    transform;
+}
+
+.fannedHand .handCard:hover:not(:disabled) {
+  z-index: 50;
+
+  transform:
+    translateY(-18px)
+    rotate(0deg)
+    scale(1.045);
+}
+
+.fannedHand .selectedHandCard {
+  z-index: 55;
+
+  transform:
+    translateY(-20px)
+    rotate(0deg)
+    scale(1.045);
+}
+
+.fannedHand .draggingHandCard,
+.fannedHand .drawHiddenHandCard {
+  opacity: 0;
+
+  transform:
+    translateY(
+      var(--fan-y, 0)
+    )
+    rotate(
+      var(--fan-angle, 0deg)
+    );
+
+  pointer-events: none;
 }
 
 /* Divider */
@@ -3044,6 +3549,14 @@
     flex-direction: column;
   }
 
+  .commandMeter,
+  .commandMeterCompact {
+    width: 100%;
+    min-width: 0;
+
+    box-sizing: border-box;
+  }
+
   .standingBox {
     width: 100%;
 
@@ -3115,7 +3628,39 @@
     width: 175px;
   }
 
+  .sectionHeading {
+    align-items: stretch;
+    flex-direction: column;
+
+    gap: 0.7rem;
+  }
+
+  .handControls {
+    width: 100%;
+  }
+
+  .handControls .commandMeter {
+    flex: 1;
+  }
+
+  .handFanTrack > .handCard + .handCard {
+    margin-left: -36px;
+  }
+
   .menuActions {
     flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commandPipLit,
+  .drawCardFlight,
+  .drawCardTrail {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+
+  .fannedHand .handCard {
+    transition: none;
   }
 }
