@@ -1,5 +1,28 @@
 [
   {
+    "id": "gallery-mtlmy3ac",
+    "src": "/videos/reels/alestercore.mp4",
+    "caption": "alestercore",
+    "characterIds": [
+      "alester-dayne",
+      "saera-targaryen"
+    ],
+    "houseIds": [
+      "dayne",
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": "the-glass-flower",
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-03",
+    "category": "raven"
+  },
+  {
     "id": "gallery-mtlmy3hc",
     "src": "/images/gallery/hasocash.png",
     "caption": "yargılama günü geldiğinde gaelor vs. jace",
