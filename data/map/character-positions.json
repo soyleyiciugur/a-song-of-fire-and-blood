@@ -42,6 +42,8 @@
     "perric-bracken": "Stone Hedge",
     "clover-tully": "Riverrun",
     "clarisse-flowers": "Oldtown",
+    "benjen-stark": "Winterfell",
+    "mother-marya": "Winterfell",
     "naela-targaryen": "-",
     "vahaemon-targaryen": "-",
     "visenya-targaryen": "-"
@@ -818,6 +820,67 @@
     "naela-targaryen": "-",
     "vahaemon-targaryen": "-",
     "visenya-targaryen": "-",
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "brannyn-vance": "Dead",
+    "curtass-whent": "Dead",
+    "derrin-hightower": "Dead",
+    "timos-hightower": "Dead"
+  },
+  "the-glass-flower": {
+    "baelenys-targaryen": "King's Landing",
+    "baelor-targaryen": "King's Landing",
+    "cordin-poole": "King's Landing",
+    "darren-dayne": "Starfall",
+    "gaelor-targaryen": "King's Landing",
+    "jacaelon-targaryen": "King's Landing",
+    "jaery-targaryen": "King's Landing",
+    "lorenah-dayne": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "malaenar-targaryen": "Dragonstone",
+    "naella-velaryon": "King's Landing",
+    "rhaella-targaryen": "Starfall",
+    "rickard-stark": "Winterfell",
+
+    "saera-targaryen": [
+      "King's Landing",
+      "Winterfell"
+    ],
+
+    "alester-dayne": [
+      "King's Landing",
+      "Winterfell"
+    ],
+
+    "brant-costayne": "King's Landing",
+    "orwell-morrigen": "King's Landing",
+    "saathos-maris": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vhaemys-targaryen": "King's Landing",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "Starfall",
+    "melessa-hightower": "Oldtown",
+    "godfrey-blackwood": "Raventree Hall",
+    "visenor-targaryen": "Oldtown",
+    "renrose-tyrell": "Highgarden",
+    "martyn-mullendore": "Oldtown",
+    "berholt-caswell": "King's Landing",
+    "leo-tyrell": "Oldtown",
+    "almar-larchmont": "Oldtown",
+    "baran-strong": "Dragonstone",
+    "tansy-riverside": "Dragonstone",
+    "perric-bracken": "Stone Hedge",
+    "clover-tully": "Riverrun",
+
+    "clarisse-flowers": "Oldtown",
+    "benjen-stark": "Winterfell",
+    "mother-marya": "Winterfell",
+
+    "naela-targaryen": "-",
+    "vahaemon-targaryen": "-",
+    "visenya-targaryen": "-",
+
     "alysanne-hightower": "Dead",
     "brandon-stark": "Dead",
     "brannyn-vance": "Dead",

@@ -64,5 +64,16 @@
     "moon": 8,
     "year": 99,
     "description": "The royal family gathers on Dragonstone for Prince Malaenar Targaryen's nameday, where a candlelit feast arranged in secret by Tansy descends into a bitter confrontation between Malaenar and King Baelenys over old wounds, family loyalties, and the succession."
+  },
+  {
+    "id": "feast-winterfell",
+    "title": "Feast at Winterfell",
+    "type": "feast",
+    "location": "Winterfell",
+    "chapterSlug": "chapter-xv",
+    "day": 13,
+    "moon": 8,
+    "year": 99,
+    "description": "A feast is held at Winterfell as the northern court gathers beneath the Stark banners."
   }
 ]

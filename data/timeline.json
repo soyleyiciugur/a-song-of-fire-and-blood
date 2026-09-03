@@ -588,5 +588,59 @@
         ]
       }
     ]
+  },
+  {
+    "chapterSlug": "chapter-xv",
+    "chapterTitle": "Chapter XV",
+    "date": "9th–14th of the 8th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Jace and Lorenah are betrothed",
+        "description": "Jacaelon Targaryen proposes marriage to Lady Lorenah Dayne. Lorenah accepts, binding the young Hand and the Lady of Starfall to one another.",
+        "date": "9th of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "lorenah-dayne"
+        ]
+      },
+      {
+        "title": "Gaelor and Cordin's covert alliance",
+        "description": "Gaelor Targaryen and Cordin Poole form a secret alliance. Cordin begins covert surveillance on Gaelor's behalf.",
+        "date": "9th of the 8th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "cordin-poole"
+        ]
+      },
+      {
+        "title": "Visenor begins the Gardener framing",
+        "description": "Visenor begins putting his plan to frame House Gardener into motion and sends a coded raven to Rhaella.",
+        "date": "10th of the 8th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "rhaella-targaryen"
+        ]
+      },
+      {
+        "title": "Saera and Alester arrive at Winterfell",
+        "description": "Princess Saera Targaryen and Ser Alester Dayne arrive at Winterfell, where a feast is held to receive them.",
+        "date": "13th of the 8th Moon",
+        "characters": [
+          "saera-targaryen",
+          "alester-dayne",
+          "rickard-stark"
+        ]
+      },
+      {
+        "title": "Saera sees again",
+        "description": "Through Mother Marya, Saera briefly regains her sight. Rickard Stark later presents her with a white direwolf.",
+        "date": "14th of the 8th Moon",
+        "characters": [
+          "saera-targaryen",
+          "mother-marya",
+          "rickard-stark"
+        ]
+      }
+    ]
   }
 ]

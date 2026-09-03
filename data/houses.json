@@ -17,7 +17,7 @@
     "sigilSrc": "/images/houses/tyrell.webp",
     "color": "#228B22",
     "secondaryColor": "#F4C430",
-    "description": "Lords of the Reach, whose previous lord — Renrose's father — was executed for his role in the plot to poison King Baelenys alongside Derrin Hightower. The sanctions levied against the house in the aftermath have since been lightened, in part because the Oldtown Massacre shifted the realm's attention and gave Renrose room to quietly rehabilitate his position. He has used that room shrewdly: in secret, he has pledged the full strength of the Reach behind Visenor's claim to the throne in exchange for being named Hand of the King upon his coronation. His first move after sealing the Mander's Pact was to send his fourteen-year-old son Leo to Oldtown, ostensibly to be educated alongside Lady Melessa Hightower. In practice, the boy is Renrose's eyes inside the Hightower — a foothold Visenor has already begun quietly working to limit."
+    "description": "Lords of the Reach, whose previous lord — Renrose's father — was executed for his role in the plot to poison King Baelenys alongside Derrin Hightower. The sanctions levied against the house in the aftermath have since been lightened, in part because the Oldtown Massacre shifted the realm's attention and gave Renrose room to quietly rehabilitate his position. He has used that room shrewdly: in secret, he has pledged the full strength of the Reach behind Visenor's claim to the throne in exchange for being named Hand of the King upon his coronation. His fourteen-year-old son Leo now resides in Oldtown, where Prince Visenor — concealed as Maester Arthur Sand — has taken an increasingly direct role in his education and martial training. Yet Tyrell authority in the Reach is facing its first serious internal challenge. House Gardener has begun openly pressing its ancient claim to rule the region, while using superior wealth and grain relief to build influence among the smallfolk. More dangerously still, Lord Gardener is believed to be seeking an audience with King Baelenys, whose hostility toward the Tyrells could transform a dynastic grievance into an existential threat to Highgarden."
   },
   {
     "id": "hightower",
@@ -25,9 +25,9 @@
     "words": "We Light the Way",
     "seat": "Oldtown",
     "sigilSrc": "/images/houses/hightower.webp",
-    "color": "#009E60",
+    "color": "#6F7478",
     "secondaryColor": "#FFFFFF",
-    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand. His secret treason, and the massacre that followed at Oldtown — which claimed young Lord Timos and his sister Alysanne, along with two hundred of the house's knights — has left the house in ruins. The seat now falls to thirteen-year-old Lady Melessa Hightower, who received a wounded and disguised Prince Visenor in her hall and chose to send him on to Highgarden rather than hand him to the Watch. He has since returned — now embedded in the Hightower itself under the alias Maester Arthur Sand, serving as tutor to Melessa and to Leo Tyrell. Only four people within the castle walls know the truth: Melessa, Leo, Ser Martyn Mullendore, and Maester Almar Larchmont."
+    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand, House Hightower now barely stands. Derrin's treason and the royal assault on Oldtown cost the house its lord, its heirs, and two hundred knights, leaving thirteen-year-old Lady Melessa Hightower to inherit what remained. Her household secretly shelters Prince Visenor beneath the identity of Maester Arthur Sand, but Oldtown's posture has grown markedly cautious. The Hightowers remain naturally closer to the Tyrells than to their rivals, yet no longer possess the strength to commit themselves recklessly to another great struggle. As the contest between Tyrell and Gardener threatens to divide the Reach, Melessa and Maester Almar increasingly seek neutrality, survival, and above all the prevention of another war fought on Oldtown's doorstep."
   },
   {
     "id": "stark",
@@ -35,9 +35,9 @@
     "words": "Winter is Coming",
     "seat": "Winterfell",
     "sigilSrc": "/images/houses/stark.webp",
-    "color": "#4D495B",
-    "secondaryColor": "#C0C0C0",
-    "description": "Wardens of the North, bound to the Iron Throne by an old, uneasy loyalty sealed in blood generations ago. Lord Brandon Stark's death brought his son Rickard to Winterfell's seat, and House Targaryen back to its gates."
+    "color": "#666A70",
+    "secondaryColor": "#F1F3F4",
+    "description": "Wardens of the North, bound to the Iron Throne by an old, uneasy loyalty sealed in blood generations ago. Lord Brandon Stark's death brought his son Rickard to Winterfell's seat, and House Targaryen back to its gates. That connection has since grown more personal: Rickard has begun openly courting Princess Saera Targaryen at Winterfell. In a gesture steeped in the old symbols of his house, he presented her with a white direwolf pup — a rare creature whose arrival has drawn the princess still further into the strange, ancient world of the North."
   },
   {
     "id": "dayne",
@@ -77,7 +77,7 @@
     "sigilSrc": "/images/houses/vance.webp",
     "color": "#006400",
     "secondaryColor": "#FFFFFF",
-    "description": "A lesser house known mainly through Ser Brannyn Vance's service in the Kingsguard, sworn to protect Princess Maela at any cost to himself."
+    "description": "House Vance of Atranta, a lesser house known mainly through Ser Brannyn Vance's service in the Kingsguard."
   },
   {
     "id": "morrigen",
@@ -85,7 +85,7 @@
     "words": "Ever Vigilant",
     "seat": "The Reach",
     "sigilSrc": "/images/houses/morrigen.webp",
-    "color": "#4E7F4C",
+    "color": "#4E6B50",
     "secondaryColor": "#111111",
     "description": "A Reach house represented at court by Ser Orwell Morrigen, Lord Commander of the Kingsguard, who watches the realm's unraveling with growing unease."
   },
@@ -115,8 +115,8 @@
     "words": "Ever Upward",
     "seat": "Uplands",
     "sigilSrc": "/images/houses/mullendore.webp",
-    "color": "#F2EFE6",
-    "secondaryColor": "#D97828",
+    "color": "#D97828",
+    "secondaryColor": "#F2EFE6",
     "description": "A minor Reach house whose sigil bears butterflies and whose seat lies in the Uplands. House Mullendore has served the Hightowers loyally for generations, and it is through that loyalty that Ser Martyn Mullendore came to recognize a disguised Visenor Targaryen bleeding in an Oldtown alley — and chose to deliver him to Lady Melessa rather than the Watch."
   },
   {
@@ -135,8 +135,8 @@
     "words": "Firm and True",
     "seat": "-",
     "sigilSrc": "/images/houses/strong.webp",
-    "color": "#F2F2F0",
-    "secondaryColor": "#315A8C",
+    "color": "#315A8C",
+    "secondaryColor": "#B53838",
     "description": "A minor Riverlands house whose name survives at court through Baran Strong. Once a knight of the Kingsguard, Baran has since been cast from the white cloak and into exile, leaving his house's place in the affairs of the realm tied largely to his uncertain fate."
   },
   {
@@ -188,5 +188,25 @@
     "color": "#D97925",
     "secondaryColor": "#C0392B",
     "description": "The ruling house of Dorne, proud guardians of a realm that has always kept its own counsel. Though the troubles surrounding Prince Visenor have repeatedly carried Targaryen blood across Dornish lands, House Martell itself has yet to hear about them and to openly take a side in the gathering struggle for the Iron Throne."
+  },
+  {
+    "id": "gardener",
+    "name": "House Gardener",
+    "words": "The Green Hand Endures",
+    "seat": "-",
+    "sigilSrc": "/images/houses/gardener.webp",
+    "color": "#2E7D32",
+    "secondaryColor": "#F2F2ED",
+    "description": "Descendants of the ancient Kings of the Reach, House Gardener has emerged from the margins of regional politics to openly challenge Tyrell legitimacy. They claim the Reach by a bloodline stretching back thousands of years to the kings who ruled before Highgarden passed to House Tyrell, and their challenge is no longer merely symbolic. Gardener wealth now exceeds that of the Tyrells, while their grain is being distributed through the starving corners of the Reach in an increasingly visible campaign for influence among the smallfolk. Lord Gardener is believed to be seeking an audience with King Baelenys, hoping that the Crown's hostility toward House Tyrell might restore political weight to his family's ancient claim. The prospect has alarmed both Highgarden and Oldtown enough that Prince Visenor has begun considering how the meeting might be prevented — or turned against the Gardeners themselves."
+  },
+  {
+    "id": "karstark",
+    "name": "House Karstark",
+    "words": "The Sun of Winter",
+    "seat": "Karhold",
+    "sigilSrc": "/images/houses/karstark.webp",
+    "color": "#111111",
+    "secondaryColor": "#F2F2F2",
+    "description": "An ancient northern house descended from House Stark, founded when Karlon Stark was granted lands for putting down a rebel lord more than a thousand years ago. From Karl's Hold came Karhold, and from its Stark lords came the Karstarks. Though bound to Winterfell by blood as well as fealty, they have grown over the centuries into one of the North's principal houses in their own right."
   }
 ]
