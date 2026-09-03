@@ -1,4 +1,3 @@
-// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\nav\Navbar.tsx
 "use client";
 
 import { useState } from "react";
@@ -14,14 +13,54 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
+  const [expandedPlayPath, setExpandedPlayPath] = useState<string | null>(null);
   const pathname = usePathname();
+  const isPlayPage = pathname.startsWith("/cards/play");
+  const playNavExpanded = isPlayPage && expandedPlayPath === pathname;
 
   return (
-    <header className={styles.banner}>
+    <header
+      className={[
+        styles.banner,
+        isPlayPage ? styles.playBanner : "",
+        isPlayPage && !playNavExpanded
+          ? styles.playBannerCollapsed
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className={styles.inner}>
         <Link href="/" className={styles.homeLink}>
           A Song of Fire and Blood
         </Link>
+
+        {isPlayPage && (
+          <button
+            type="button"
+            className={styles.playNavToggle}
+            aria-expanded={playNavExpanded}
+            aria-label={
+              playNavExpanded
+                ? "Collapse site navigation"
+                : "Expand site navigation"
+            }
+            onClick={() => {
+              setExpandedPlayPath((current) =>
+                current === pathname ? null : pathname
+              );
+              setMenuOpen(false);
+              setOpenGroup(null);
+            }}
+          >
+            <span>
+              {playNavExpanded ? "Collapse" : "Navigation"}
+            </span>
+            <i aria-hidden>
+              {playNavExpanded ? "▴" : "▾"}
+            </i>
+          </button>
+        )}
 
         <nav className={styles.navLinks}>
           {NAV_ITEMS.map((item) =>

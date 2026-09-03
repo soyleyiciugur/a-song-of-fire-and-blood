@@ -1476,7 +1476,7 @@ function resolvePendingEffectMutable(
         id:
           nextRuntimeId(
             state,
-            "modifier"
+            "manders-pact"
           ),
 
         influence: 2,
@@ -2085,7 +2085,7 @@ function resolveEventMutable(
       id:
         nextRuntimeId(
           state,
-          "modifier"
+          "word-in-right-ear"
         ),
 
       influence: 1,
@@ -2304,7 +2304,7 @@ function resolveEventMutable(
         id:
           nextRuntimeId(
             state,
-            "modifier"
+            "brothers-tilt"
           ),
 
         power: bonus,
@@ -2556,7 +2556,11 @@ function playCardMutable(
     const before =
       player.command;
 
-    player.command += 1;
+    player.command =
+      Math.min(
+        MAX_COMMAND,
+        player.command + 1
+      );
 
     player.removedFromGame.push(
       card.id
@@ -3152,6 +3156,11 @@ function politicalAttackMutable(
       attacker!
     );
 
+  assertRule(
+    attackerInfluence > 0,
+    "A Character with 0 Influence cannot initiate a Political Conflict."
+  );
+
   attacker!.exhausted =
     true;
 
@@ -3280,14 +3289,19 @@ function politicalAttackMutable(
     );
   }
 
-  defender!.exhausted =
-    true;
-
   const defenderInfluence =
     getEffectiveInfluence(
       state,
       defender!
     );
+
+  if (
+    attackerInfluence >=
+    defenderInfluence
+  ) {
+    defender!.exhausted =
+      true;
+  }
 
   const difference =
     attackerInfluence -
@@ -3319,7 +3333,10 @@ function politicalAttackMutable(
   } else {
     addLog(
       state,
-      `${getGameCard(defender!.cardId).name} prevents all Political Standing damage.`,
+      attackerInfluence <
+        defenderInfluence
+        ? `${getGameCard(defender!.cardId).name} dismisses the weaker Political challenge and remains Ready.`
+        : `${getGameCard(defender!.cardId).name} prevents all Political Standing damage.`,
       defender!.ownerId
     );
   }
@@ -3859,8 +3876,11 @@ function startTurnMutable(
     player.nextCommandBonus;
 
   player.command =
-    player.maxCommand +
-    bonus;
+    Math.min(
+      MAX_COMMAND,
+      player.maxCommand +
+        bonus
+    );
 
   player.nextCommandBonus =
     0;

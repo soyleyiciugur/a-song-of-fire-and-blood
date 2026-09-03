@@ -1,8 +1,7 @@
-/* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\nav\navbar.module.css */
 .banner {
   position: sticky;
   top: 0;
-  z-index: 250; /* was 50 — must outrank admin panel nav's zIndex: 200 */
+  z-index: 250;
 
   background: rgba(11, 11, 15, 0.92);
   backdrop-filter: blur(6px);
@@ -30,6 +29,72 @@
   color: var(--gold);
   text-decoration: none;
   white-space: nowrap;
+}
+
+.playNavToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-height: 30px;
+  padding: 5px 10px;
+
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+
+  color: rgba(230, 205, 135, 0.76);
+  background: rgba(212, 175, 55, 0.045);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 2px;
+  cursor: pointer;
+
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.playNavToggle:hover,
+.playNavToggle:focus-visible {
+  color: var(--gold);
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.1);
+  outline: none;
+}
+
+.playNavToggle i {
+  font-size: 9px;
+  font-style: normal;
+  line-height: 1;
+}
+
+.playBanner .playNavToggle {
+  display: inline-flex;
+}
+
+.playBannerCollapsed .inner {
+  min-height: 34px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.playBannerCollapsed .homeLink {
+  font-size: 12px;
+  opacity: 0.72;
+}
+
+.playBannerCollapsed .playNavToggle {
+  margin-left: auto;
+}
+
+.playBannerCollapsed .navLinks,
+.playBannerCollapsed .menuButton,
+.playBannerCollapsed .searchWrap,
+.playBannerCollapsed .mobileNav {
+  display: none;
 }
 
 .navLinks {
@@ -251,15 +316,6 @@
   color: #e6c34a;
 }
 
-/* --- Records dropdown (desktop hover/click menu) --- */
-
-/* Group = [text link][caret button], treated as one nav item. The gap here
-   (text ↔ arrow) is intentionally smaller than .navLinks' 18px item gap —
-   it's an internal detail of one item, not the space between two items.
-   The caret button's own padding is symmetric (4px) so the visual gap on
-   its left (to the text) and its right (to the *next* nav item, via
-   .navLinks' gap) both come out even instead of the arrow sitting closer
-   to one side than the other. */
 .navGroup {
   position: relative;
   display: flex;
@@ -321,8 +377,6 @@
   animation: dropdownIn 0.15s ease;
 }
 
-/* Invisible bridge so the menu doesn't close while moving the mouse from
-   the button down into the menu */
 .navGroupMenu::before {
   content: "";
   position: absolute;
@@ -347,7 +401,6 @@
   color: var(--gold);
 }
 
-/* Mobile accordion */
 .mobileNavGroup {
   display: flex;
   flex-direction: column;
@@ -391,4 +444,4 @@
   .searchWrap {
     width: 180px;
   }
-} 
+}

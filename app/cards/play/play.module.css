@@ -1,6 +1,6 @@
 .game {
   min-height: 100vh;
-  max-width: 1400px;
+  max-width: 1680px;
   margin: 0 auto;
   padding: 3rem 2rem 4rem;
   position: relative;
@@ -698,10 +698,8 @@
   display: grid;
 
   grid-template-columns:
-    repeat(
-      4,
-      minmax(80px, 1fr)
-    );
+    repeat(4, minmax(72px, 0.72fr))
+    minmax(275px, 2.15fr);
 
   gap: 0.5rem;
 }
@@ -924,7 +922,10 @@
 }
 
 .commandMeterCompact {
-  min-width: 170px;
+  min-width: 0;
+  width: 100%;
+
+  box-sizing: border-box;
 
   padding: 0.42rem 0.52rem 0.46rem;
 }
@@ -938,6 +939,18 @@
 
 .commandMeterCompact .commandPips {
   min-height: 1.08rem;
+}
+
+.headerEndTurnButton,
+.headerEndTurnSpacer {
+  flex: 0 0 116px;
+  min-width: 116px;
+}
+
+.headerEndTurnButton {
+  align-self: stretch;
+
+  padding: 0.5rem 0.7rem;
 }
 
 /* Sections */
@@ -993,16 +1006,13 @@
   display: grid;
 
   grid-template-columns:
-    repeat(
-      6,
-      minmax(220px, 1fr)
-    );
+    repeat(6, minmax(0, 1fr));
 
   gap: 0.75rem;
 
   padding: 0.8rem;
 
-  overflow-x: auto;
+  overflow: visible;
 
   border:
     1px solid rgba(255, 255, 255, 0.08);
@@ -1710,7 +1720,7 @@
 }
 
 .healthStat .cardStatIcon {
-  transform: translateY(0.5px);
+  transform: translateY(-0.5px);
 }
 
 .cardStats .statBuffed {
@@ -1852,6 +1862,100 @@
   white-space: nowrap;
 }
 
+.interactiveTraits {
+  position: relative;
+
+  z-index: 20;
+
+  overflow: visible;
+}
+
+.traits .traitTooltipTrigger {
+  position: relative;
+
+  overflow: visible;
+
+  cursor: help;
+  outline: none;
+}
+
+.traits .traitTooltipBubble {
+  position: absolute;
+
+  left: 50%;
+  bottom: calc(100% + 0.48rem);
+
+  z-index: 40;
+
+  width: 218px;
+  height: auto;
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding: 0.52rem 0.62rem;
+
+  overflow: visible;
+
+  transform:
+    translate(-50%, 4px);
+
+  pointer-events: none;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 52%,
+      transparent
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 24, 22, 0.99),
+      rgba(9, 7, 9, 0.99)
+    );
+
+  color: rgba(245, 230, 200, 0.9);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.72),
+    0 0 18px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 12%,
+        transparent
+      );
+
+  font-family:
+    var(--font-body),
+    serif;
+
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: 0;
+
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+
+.traitTooltipTrigger:hover > .traitTooltipBubble,
+.traitTooltipTrigger:focus-visible > .traitTooltipBubble {
+  transform:
+    translate(-50%, 0);
+
+  opacity: 1;
+}
+
 .abilityDisplay {
   min-width: 0;
   min-height: 0;
@@ -1945,14 +2049,14 @@
 .unitCardWrapper {
   position: relative;
 
-  min-width: 220px;
+  min-width: 0;
   width: 100%;
 
   align-self: start;
 }
 
 .unitCard {
-  min-width: 220px;
+  min-width: 0;
 
   width: 100%;
 
@@ -2390,18 +2494,11 @@
 .hand {
   display: block;
 
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  overscroll-behavior-x: contain;
-
-  scroll-behavior: auto;
-
-  scrollbar-gutter: stable;
+  overflow: visible;
 
   padding:
-    0.55rem 0.2rem
-    1.25rem;
+    1.65rem 0
+    1.5rem;
 }
 
 .handLinearTrack {
@@ -2414,9 +2511,9 @@
 }
 
 .fannedHand {
-  min-height: 325px;
+  min-height: 345px;
 
-  padding-top: 1.15rem;
+  padding-top: 2rem;
 }
 
 .handFanTrack {
@@ -2426,17 +2523,19 @@
 
   box-sizing: border-box;
 
-  width: max-content;
-  min-width: 100%;
-  min-height: 304px;
+  width: 100%;
+  min-width: 0;
+  min-height: 315px;
 
   padding:
-    0.25rem 3.4rem
+    0.25rem 0
     1.15rem;
+
+  overflow: visible;
 }
 
 .handFanTrack > .handCard + .handCard {
-  margin-left: -44px;
+  margin-left: -50px;
 }
 
 .handCard {
@@ -2479,10 +2578,11 @@
 }
 
 .unaffordableCard {
-  opacity: 0.45;
+  opacity: 1;
 
   filter:
-    saturate(0.5);
+    saturate(0.46)
+    brightness(0.48);
 }
 
 .selectedHandCard {
@@ -2541,7 +2641,7 @@
 }
 
 .fannedHand .handCard:hover:not(:disabled) {
-  z-index: 50;
+  z-index: 1000;
 
   transform:
     translateY(-18px)
@@ -2550,7 +2650,7 @@
 }
 
 .fannedHand .selectedHandCard {
-  z-index: 55;
+  z-index: 1001;
 
   transform:
     translateY(-20px)
@@ -2909,6 +3009,11 @@
 .unitDetailCard .abilityDisplay p {
   font-size: 0.82rem;
   line-height: 1.5;
+}
+
+.selectedCardInner .traits .traitTooltipBubble,
+.unitDetailCard .traits .traitTooltipBubble {
+  font-size: 0.7rem;
 }
 
 .unitDetailEffects {
@@ -3477,15 +3582,11 @@
 
 /* Scrollbars */
 
-.hand::-webkit-scrollbar,
-.board::-webkit-scrollbar,
 .log::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
-.hand::-webkit-scrollbar-thumb,
-.board::-webkit-scrollbar-thumb,
 .log::-webkit-scrollbar-thumb {
   background:
     rgba(212, 175, 55, 0.22);
@@ -3493,13 +3594,39 @@
 
 /* Responsive */
 
+@media (max-width: 1400px) {
+  .handFanTrack > .handCard + .handCard {
+    margin-left: -66px;
+  }
+}
+
 @media (max-width: 1100px) {
+  .playerHeader {
+    flex-wrap: wrap;
+  }
+
   .playerStats {
+    order: 2;
+
+    flex-basis: calc(100% - 131px);
+
     grid-template-columns:
-      repeat(
-        3,
-        minmax(80px, 1fr)
-      );
+      repeat(4, minmax(70px, 1fr));
+  }
+
+  .playerStats .commandMeterCompact {
+    grid-column: 1 / -1;
+  }
+
+  .standingBox {
+    order: 1;
+  }
+
+  .headerEndTurnButton,
+  .headerEndTurnSpacer {
+    order: 1;
+
+    margin-left: auto;
   }
 
   .mulliganGrid {
@@ -3512,7 +3639,17 @@
 
   .board {
     grid-template-columns:
-      repeat(6, 210px);
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .handCard {
+    flex-basis: 190px;
+
+    width: 190px;
+  }
+
+  .handFanTrack > .handCard + .handCard {
+    margin-left: -76px;
   }
 }
 
@@ -3547,6 +3684,7 @@
 
   .playerHeader {
     flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   .commandMeter,
@@ -3568,7 +3706,10 @@
   }
 
   .playerStats {
+    order: initial;
+
     width: 100%;
+    flex-basis: auto;
 
     grid-template-columns:
       repeat(
@@ -3577,9 +3718,29 @@
       );
   }
 
+  .playerStats .commandMeterCompact {
+    grid-column: 1 / -1;
+  }
+
+  .headerEndTurnButton,
+  .headerEndTurnSpacer {
+    order: initial;
+
+    width: 100%;
+    min-width: 0;
+
+    flex-basis: auto;
+
+    margin-left: 0;
+  }
+
+  .headerEndTurnSpacer {
+    display: none;
+  }
+
   .board {
     grid-template-columns:
-      repeat(6, 200px);
+      repeat(2, minmax(0, 1fr));
   }
 
   .mulliganGrid {
@@ -3644,7 +3805,7 @@
   }
 
   .handFanTrack > .handCard + .handCard {
-    margin-left: -36px;
+    margin-left: -102px;
   }
 
   .menuActions {

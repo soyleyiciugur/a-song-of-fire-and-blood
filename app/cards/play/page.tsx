@@ -42,6 +42,7 @@ import type {
   HandCardState,
   PlayerId,
   TierId,
+  Trait,
   UnitState,
 } from "@/lib/the-great-game/types";
 
@@ -218,6 +219,25 @@ const TIER_MAP = new Map<
   ],
 ]);
 
+const TRAIT_RULES: Partial<
+  Record<Trait, string>
+> = {
+  dragonrider:
+    "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is under your control.",
+  guard:
+    "Enemy units must face Ready Guard units before attacking other Military targets or Standing.",
+  intrigue:
+    "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
+  swift:
+    "This unit may initiate a Military Conflict on the turn it is deployed.",
+  schemer:
+    "This Character may initiate a Political Conflict on the turn it is deployed.",
+  challenge:
+    "This unit may ignore Guard when choosing a Military target.",
+  confront:
+    "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
+};
+
 function tierStyle(
   card: GameCard
 ): CSSProperties {
@@ -372,6 +392,30 @@ function humanizeModifierId(
 function modifierTitle(
   modifier: UnitModifier
 ): string {
+  if (
+    modifier.id.startsWith(
+      "manders-pact-"
+    )
+  ) {
+    return "The Mander's Pact";
+  }
+
+  if (
+    modifier.id.startsWith(
+      "word-in-right-ear-"
+    )
+  ) {
+    return "A Word in the Right Ear";
+  }
+
+  if (
+    modifier.id.startsWith(
+      "brothers-tilt-"
+    )
+  ) {
+    return "The Brothers' Tilt";
+  }
+
   const onlyInfluence =
     Boolean(modifier.influence) &&
     !modifier.power &&
@@ -2132,7 +2176,11 @@ export default function GreatGamePlayPage() {
     if (
       unit.ownerId !==
         currentGame.activePlayerId ||
-      unit.exhausted
+      unit.exhausted ||
+      getEffectiveInfluence(
+        currentGame,
+        unit
+      ) <= 0
     ) {
       return false;
     }
@@ -3784,6 +3832,16 @@ export default function GreatGamePlayPage() {
           activePlayerId
         }
         state={currentGame}
+        onEndTurn={endTurn}
+        endTurnDisabled={
+          Boolean(
+            currentGame.pendingEffect ||
+              drawAnimationActive
+          )
+        }
+        highlightEndTurn={
+          highlightEndTurn
+        }
       />
 
       <section
@@ -3811,47 +3869,6 @@ export default function GreatGamePlayPage() {
             </small>
           </div>
 
-          <div
-            className={
-              styles.handControls
-            }
-          >
-            <CommandMeter
-              command={
-                activePlayer.command
-              }
-              maxCommand={
-                activePlayer.maxCommand
-              }
-              nextCommandBonus={
-                activePlayer.nextCommandBonus
-              }
-            />
-
-            <button
-              className={`${styles.endTurnButton} ${
-                highlightEndTurn
-                  ? styles.endTurnReady
-                  : ""
-              }`}
-              disabled={
-                Boolean(
-                  currentGame.pendingEffect ||
-                    drawAnimationActive
-                )
-              }
-              title={
-                highlightEndTurn
-                  ? "No legal actions remain."
-                  : undefined
-              }
-              onClick={
-                endTurn
-              }
-            >
-              End Turn
-            </button>
-          </div>
         </div>
 
         <HorizontalHand
@@ -4384,6 +4401,9 @@ function PlayerHeader({
   standingTarget = false,
   standingTargetType = null,
   onStandingClick,
+  onEndTurn,
+  endTurnDisabled = false,
+  highlightEndTurn = false,
 }: {
   playerId: PlayerId;
   state: GameState;
@@ -4394,6 +4414,9 @@ function PlayerHeader({
     | "political"
     | null;
   onStandingClick?: () => void;
+  onEndTurn?: () => void;
+  endTurnDisabled?: boolean;
+  highlightEndTurn?: boolean;
 }) {
   const player =
     state.players[
@@ -4449,21 +4472,6 @@ function PlayerHeader({
         )}
       </button>
 
-      {opponent && (
-        <CommandMeter
-          command={
-            player.command
-          }
-          maxCommand={
-            player.maxCommand
-          }
-          nextCommandBonus={
-            player.nextCommandBonus
-          }
-          compact
-        />
-      )}
-
       <div
         className={
           styles.playerStats
@@ -4499,7 +4507,50 @@ function PlayerHeader({
           }
         />
 
+        <CommandMeter
+          command={
+            player.command
+          }
+          maxCommand={
+            player.maxCommand
+          }
+          nextCommandBonus={
+            player.nextCommandBonus
+          }
+          compact
+        />
       </div>
+
+      {onEndTurn ? (
+        <button
+          type="button"
+          className={`${styles.endTurnButton} ${styles.headerEndTurnButton} ${
+            highlightEndTurn
+              ? styles.endTurnReady
+              : ""
+          }`}
+          disabled={
+            endTurnDisabled
+          }
+          onClick={
+            onEndTurn
+          }
+          title={
+            endTurnDisabled
+              ? "Resolve the current effect first"
+              : "End your turn"
+          }
+        >
+          End Turn
+        </button>
+      ) : (
+        <div
+          className={
+            styles.headerEndTurnSpacer
+          }
+          aria-hidden
+        />
+      )}
     </section>
   );
 }
@@ -4574,9 +4625,9 @@ function CommandSigil({
         "number" && (
         <text
           x="22"
-          y="22.6"
+          y="23"
           textAnchor="middle"
-          dominantBaseline="middle"
+          dominantBaseline="central"
           className={
             styles.commandCostText
           }
@@ -4600,9 +4651,12 @@ function CommandMeter({
   compact?: boolean;
 }) {
   const slotCount =
-    Math.max(
-      command,
-      maxCommand
+    Math.min(
+      10,
+      Math.max(
+        command,
+        maxCommand
+      )
     );
 
   return (
@@ -5283,6 +5337,7 @@ function CardInfoPanel({
   actions,
   footer,
   showDescription = true,
+  showTraitTooltips = false,
 }: {
   card: GameCard;
   runtimeStats?: {
@@ -5299,6 +5354,7 @@ function CardInfoPanel({
   actions?: ReactNode;
   footer?: ReactNode;
   showDescription?: boolean;
+  showTraitTooltips?: boolean;
 }) {
   const traits =
     visibleTraits(
@@ -5480,6 +5536,9 @@ function CardInfoPanel({
           traits.length === 0
             ? styles.emptyTraits
             : "",
+          showTraitTooltips
+            ? styles.interactiveTraits
+            : "",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -5491,17 +5550,45 @@ function CardInfoPanel({
       >
         {traits.length > 0 && (
           <>
-          {traits.map(
-            (trait) => (
+          {traits.map((trait) => {
+            const rule =
+              TRAIT_RULES[
+                trait
+              ];
+
+            const interactive =
+              showTraitTooltips &&
+              Boolean(rule);
+
+            return (
               <span
-                key={
-                  trait
+                key={trait}
+                className={
+                  interactive
+                    ? styles.traitTooltipTrigger
+                    : undefined
+                }
+                tabIndex={
+                  interactive
+                    ? 0
+                    : undefined
                 }
               >
                 {trait}
+
+                {interactive && (
+                  <span
+                    className={
+                      styles.traitTooltipBubble
+                    }
+                    role="tooltip"
+                  >
+                    {rule}
+                  </span>
+                )}
               </span>
-            )
-          )}
+            );
+          })}
           </>
         )}
       </div>
@@ -5673,6 +5760,7 @@ function SelectedCardPreview({
 
         <CardInfoPanel
           card={card}
+          showTraitTooltips
         />
 
         <div
@@ -5828,6 +5916,7 @@ function UnitDetailOverlay({
 
         <CardInfoPanel
           card={card}
+          showTraitTooltips
           runtimeStats={{
             power: getEffectivePower(
               state,
