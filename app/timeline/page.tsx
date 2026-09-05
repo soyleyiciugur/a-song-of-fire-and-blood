@@ -8,6 +8,8 @@ import MiniPortrait from "@/components/MiniPortrait";
 import styles from "./timeline.module.css";
 
 export default function Timeline() {
+  const sortedTimeline = [...timeline].reverse();
+
   return (
     <main className={styles.page}>
       <div className={styles.container}>
@@ -18,11 +20,15 @@ export default function Timeline() {
         </p>
 
         <div className={styles.chapters}>
-          {timeline.map((chapter) => (
+          {sortedTimeline.map((chapter) => (
             <section key={chapter.chapterSlug} className={styles.chapterBlock}>
-              <Link href={`/chapters/${chapter.chapterSlug}`} className={styles.chapterTitle}>
+              <Link
+                href={`/chapters/${chapter.chapterSlug}`}
+                className={styles.chapterTitle}
+              >
                 {chapter.chapterTitle}
               </Link>
+
               {chapter.date && (
                 <p className={styles.chapterDate}>{chapter.date}</p>
               )}
@@ -34,6 +40,7 @@ export default function Timeline() {
 
                     <div className={styles.eventBody}>
                       <h3 className={styles.eventTitle}>{event.title}</h3>
+
                       {event.date && (
                         <p className={styles.eventDate}>{event.date}</p>
                       )}
