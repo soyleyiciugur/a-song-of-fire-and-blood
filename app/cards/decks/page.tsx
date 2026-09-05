@@ -151,7 +151,7 @@ export default function DecksPage() {
       <header className={styles.hero}>
         <div>
           <span className={styles.eyebrow}>The Great Game</span>
-          <h1>Decks &amp; Collection</h1>
+          <h1>Deck Workshop</h1>
           <p>Study every card in the realm, assemble thirty-card decks, and keep each list ready for the wars to come.</p>
         </div>
         <nav className={styles.gameNav}>

@@ -167,6 +167,24 @@ export default function CardsPage() {
           }
         >
           <Link
+            href="/cards/decks"
+            className={
+              styles.decksButton
+            }
+          >
+            <span
+              className={
+                styles.decksIcon
+              }
+              aria-hidden
+            >
+              ◫
+            </span>
+
+            Decks
+          </Link>
+
+          <Link
             href="/cards/play"
             className={
               styles.playButton
