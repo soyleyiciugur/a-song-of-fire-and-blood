@@ -34,7 +34,7 @@ export default function Timeline() {
               )}
 
               <ol className={styles.eventList}>
-                {chapter.events.map((event) => (
+                {[...chapter.events].reverse().map((event) => (
                   <li key={event.title} className={styles.event}>
                     <div className={styles.eventMarker} />
 
