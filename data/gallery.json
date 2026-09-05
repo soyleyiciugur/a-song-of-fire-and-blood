@@ -23,17 +23,11 @@
     "caption": "Bayle.",
     "characterIds": [],
     "houseIds": [
-      "targaryen",
-      "greyjoy"
+      "targaryen"
     ],
-    "dragonIds": [],
+    "dragonIds": ["bayle"],
     "chapterId": null,
-    "worldDate": {
-      "day": 17,
-      "moon": 6,
-      "year": 77,
-      "era": "AC"
-    },
+    "worldDate": null,
     "uploadedAt": "2026-09-05",
     "category": "raven"
   },
@@ -106,7 +100,7 @@
     "worldDate": {
       "day": 17,
       "moon": 6,
-      "year": 69,
+      "year": 77,
       "era": "AC"
     },
     "uploadedAt": "2026-09-05",
