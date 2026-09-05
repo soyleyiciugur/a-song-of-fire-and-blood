@@ -2591,12 +2591,13 @@
     2.35rem
     1.05rem
     1.05rem
-    minmax(4.2rem, 1fr)
+    minmax(1.55rem, 1fr)
     0.9rem
     1.75rem;
 }
 
 .cardInfoPanelWithActions .abilityDisplay {
+  min-height: 0;
   overflow: hidden;
 }
 
