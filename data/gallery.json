@@ -1,105 +1,158 @@
 [
   {
-    "id": "gallery-reisy5ov",
-    "src": "/videos/reels/reis-suphelendi.mp4",
-    "caption": "reis şüphelendi biri HRRM'ı durdursun",
+    "id": "gallery-mtow0gb8",
+    "src": "/images/gallery/baelenys-young-anime.png",
+    "caption": "Young Baelenys meets Hatchling Maelwing.",
     "characterIds": [
       "baelenys-targaryen"
     ],
     "houseIds": [
       "targaryen"
     ],
-    "dragonIds": [],
+    "dragonIds": [
+      "maelwing"
+    ],
     "chapterId": null,
     "worldDate": null,
     "uploadedAt": "2026-09-05",
     "category": "raven"
   },
   {
-    "id": "gallery-auray5ov",
-    "src": "/videos/reels/baelenys-him.mov",
-    "caption": "aura.",
+    "id": "gallery-mtow0c5n",
+    "src": "/images/gallery/baelenys-wings.png",
+    "caption": "They say men see wings upon him when they are about to meet their end.",
     "characterIds": [
       "baelenys-targaryen"
     ],
     "houseIds": [
       "targaryen"
     ],
-    "dragonIds": ["maelwing"],
+    "dragonIds": [
+      "maelwing"
+    ],
     "chapterId": null,
     "worldDate": null,
     "uploadedAt": "2026-09-05",
     "category": "raven"
   },
   {
-    "id": "gallery-mtlmy5ov",
-    "src": "/images/gallery/rpyi-ovelim.png",
-    "caption": "overys targaryen",
-    "characterIds": [],
-    "houseIds": [],
-    "dragonIds": [],
-    "chapterId": null,
-    "worldDate": null,
-    "uploadedAt": "2026-09-04",
-    "category": "fleabottom"
-  },
-  {
-    "id": "gallery-mtlmy3j4",
-    "src": "/images/gallery/jace-gunde-4saat.png",
-    "caption": "sonra alarmı kapatıp uyuyom",
+    "id": "gallery-mtow081l",
+    "src": "/images/gallery/baelenys-vs-harrik.png",
+    "caption": "The Dragonbreath vs. Harrik the Drowned Servant",
     "characterIds": [
-      "jacaelon-targaryen"
+      "baelenys-targaryen",
+      "harrik-greyjoy"
     ],
     "houseIds": [
-      "targaryen"
+      "targaryen",
+      "greyjoy"
     ],
     "dragonIds": [],
     "chapterId": null,
-    "worldDate": null,
-    "uploadedAt": "2026-09-04",
-    "category": "fleabottom"
-  },
-  {
-    "id": "gallery-mtlmy3ac",
-    "src": "/videos/reels/alestercore.mp4",
-    "caption": "Ser Alester Dayne (81 AC-), House Dayne mensubu, Kral Muhafızları’nın genç şövalyelerinden, yetenekli bir savaşçı ve Jacaelon Targaryen’ın yakın yoldaşıdır.\nStarfall’da doğan Alester, genç yaşına rağmen kılıç kullanmadaki yeteneği, uzun boyu ve soğukkanlılığıyla tanınmış; on sekiz yaşında Kral Muhafızları’nda görev alacak kadar yükselmiştir. Ser Orwell Morrigen’in öğrencisi olan şövalye, özellikle Prens Jacaelon’ın korunması ve eğitimi konusunda önemli bir rol üstlenmiştir.\n\n**Ser Alester Dayne Hakkında Temel Bilgiler:**\n**Hayatı:** Üçüncü ayın yirmi altıncı günü, 81 AC’de House Dayne’in bir ferdi olarak dünyaya geldi. Babası Maron Dayne, annesi ise House Karstark’tan Lyarra Karstark’tır. Starfall’da yetişen Alester, Ser Orwell Morrigen’in yanında şövalyelik eğitimi aldı ve henüz genç yaşta Kral Muhafızları’nın yeminli kardeşlerinden biri oldu.\n\n**Kişiliği:** Sessiz, disiplinli ve görev bilinci yüksek bir şövalyedir. Saray entrikalarına doğrudan karışmaktan kaçınmasına rağmen çevresinde yaşananları dikkatle gözlemler. Sadakatini sözlerden çok davranışlarıyla gösterir ve özellikle korumakla görevlendirildiği kişilere karşı son derece kararlıdır.\n\n**Savaşçılığı:** 196 santimetrelik boyuyla oldukça heybetli bir görünüme sahiptir. Kılıç dövüşü, yakın muharebe ve atlı savaş konusunda eğitimlidir. Ser Orwell Morrigen’den aldığı eğitim sayesinde yalnızca fiziksel güce değil, sabır, zamanlama ve savunmaya dayalı bir dövüş anlayışına sahiptir.\n\n**Önemli Olayları:** Prens Visenor Targaryen’ın King's Landing’den kaçışı sırasında Dornish kafilesiyle bağlantılı görevlerde bulundu. Dorne yolculuğu sırasında Ser Curtass Whent ile karşı karşıya geldi; çatışmada yaralanmasına rağmen Whent’i öldürmeyi başardı. Daha sonra Starfall’dan ayrılarak yeniden King's Landing’e döndü ve Prens Jacaelon’ın yanında görevine devam etti.\n\n**Jacaelon Targaryen ile İlişkisi:** Alester, Jacaelon’ın yalnızca muhafızlarından biri değil, aynı zamanda dövüş eğitmeni ve en güvendiği yakınlarından biridir. Prensin turnuvalara ve gerçek çatışmalara hazırlanmasında önemli rol oynar. Jacaelon’ın saraydaki siyasi mücadelesine doğrudan müdahil olmamaya çalışsa da gerektiğinde onun güvenliği için emirlerin ve saray teamüllerinin sınırlarını zorlayabilir.\n\n**Ailesi:** House Dayne’in ana koluna mensuptur. Babası Maron Dayne, annesi Lyarra Karstark’tır. Annesi aracılığıyla Kuzey’in House Karstark hanedanıyla da kan bağı bulunmaktadır.\n\n**Özellikleri:** Genç yaşına rağmen Kral Muhafızları’na kabul edilmiş olması, döneminin en gelecek vadeden şövalyelerinden biri olarak görülmesine neden olmuştur. Uzun boyu, sakin mizacı ve disiplinli dövüş tarzıyla dikkat çeker. House Dayne’in savaşçı geleneğini taşımasına rağmen şöhret veya gösterişten çok görevine önem verir.\n\nSer Alester Dayne, henüz on sekiz yaşında olmasına rağmen hem savaş alanında hem de saray içinde güvenilirliğini kanıtlamış; özellikle Jacaelon Targaryen’ın yükselişiyle birlikte kraliyet çevresindeki en önemli genç şövalyelerden biri hâline gelmiştir.",
-    "characterIds": [
-      "alester-dayne",
-      "saera-targaryen"
-    ],
-    "houseIds": [
-      "dayne",
-      "targaryen"
-    ],
-    "dragonIds": [],
-    "chapterId": "the-glass-flower",
     "worldDate": {
-      "day": 14,
-      "moon": 8,
-      "year": 99,
+      "day": 17,
+      "moon": 6,
+      "year": 69,
       "era": "AC"
     },
-    "uploadedAt": "2026-09-03",
+    "uploadedAt": "2026-09-05",
     "category": "raven"
   },
   {
-    "id": "gallery-mtlmy3hc",
-    "src": "/images/gallery/hasocash.png",
-    "caption": "yargılama günü geldiğinde gaelor vs. jace",
-    "characterIds": [],
-    "houseIds": [],
-    "dragonIds": [],
+    "id": "gallery-mtow03d3",
+    "src": "/images/gallery/baelenys-maelwing-red-moon.png",
+    "caption": "Always watching over him.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
     "chapterId": null,
     "worldDate": null,
-    "uploadedAt": "2026-09-03",
-    "category": "fleabottom"
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
   },
   {
-    "id": "gallery-mtlmy3pe",
-    "src": "/images/gallery/jace-dwarf.png",
-    "caption": "Height: 175 cm",
+    "id": "gallery-mtow015w",
+    "src": "/images/gallery/baelenys-maelwing-two-face.png",
+    "caption": "Two sides of the same coin.",
     "characterIds": [
-      "jacaelon-targaryen",
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzxh6",
+    "src": "/images/gallery/baelenys-maelwing-pastel.png",
+    "caption": "The day they met.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzwbm",
+    "src": "/images/gallery/baelenys-maelwing-iron-throne.png",
+    "caption": "Many a sword has found its way to the old chair by their claws.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzqqe",
+    "src": "/images/gallery/baelenys-maelwing-foggy.png",
+    "caption": "The yellow glow inside the fog.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovznf3",
+    "src": "/images/gallery/baelenys-fields.png",
+    "caption": "This view + cracking walnuts.",
+    "characterIds": [
       "baelenys-targaryen"
     ],
     "houseIds": [
@@ -108,24 +161,44 @@
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
-    "uploadedAt": "2026-09-03",
-    "category": "fleabottom"
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
   },
   {
-    "id": "gallery-mtlmxsis",
-    "src": "/images/gallery/hrrm-evreninde-boy-ortalamasi.webp",
-    "caption": "herhangi bir adam vs. jace",
+    "id": "gallery-mtovzji8",
+    "src": "/images/gallery/baelenys-dany.png",
+    "caption": "Devoted to Aegon's dream.",
     "characterIds": [
-      "jacaelon-targaryen"
+      "baelenys-targaryen"
     ],
     "houseIds": [
       "targaryen"
     ],
-    "dragonIds": [],
+    "dragonIds": [
+      "maelwing"
+    ],
     "chapterId": null,
     "worldDate": null,
-    "uploadedAt": "2026-09-03",
-    "category": "fleabottom"
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovz5fw",
+    "src": "/images/gallery/baelenys-black-white-anime.png",
+    "caption": "The Dragonbreath.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
   },
   {
     "id": "gallery-mtj55kzy",
