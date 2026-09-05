@@ -4886,7 +4886,7 @@ function CommandSigil({
         "number" && (
         <text
           x="22"
-          y="23"
+          y="21.6"
           textAnchor="middle"
           dominantBaseline="central"
           className={

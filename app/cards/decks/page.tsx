@@ -25,6 +25,37 @@ const LABEL: Record<CardType | "all", string> = {
 };
 const TIER_RANK: Record<string, number> = { "s-plus": 0, s: 1, a: 2, b: 3, c: 4 };
 
+const TIER_MAP: Record<string, { label: string; color: string; accent: string }> = {
+  "s-plus": { label: "S+", color: "#8b1e2b", accent: "#d4af37" },
+  s: { label: "S", color: "#4b2e6f", accent: "#c0c0c0" },
+  a: { label: "A", color: "#2f4a3e", accent: "#a97142" },
+  b: { label: "B", color: "#3d3d3d", accent: "#8c8c8c" },
+  c: { label: "C", color: "#5c4a3a", accent: "#7a6a58" },
+};
+
+function tierStyle(card: Card) {
+  const tier = TIER_MAP[card.tierId];
+  return {
+    "--tier-color": tier?.color ?? "#d4af37",
+    "--tier-accent": tier?.accent ?? "#d4af37",
+  } as React.CSSProperties;
+}
+
+function tierLabel(card: Card) {
+  return TIER_MAP[card.tierId]?.label ?? card.tierId.toUpperCase();
+}
+
+function CommandSigil({ value }: { value: number }) {
+  return (
+    <svg viewBox="0 0 44 44" aria-hidden>
+      <path d="M13 2h18l11 11v18L31 42H13L2 31V13Z" className={styles.commandBadgePlate} />
+      <path d="M15 6h14l9 9v14l-9 9H15l-9-9V15Z" className={styles.commandBadgeInset} />
+      <path d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z" className={styles.commandBadgeRune} />
+      <text x="22" y="21.6" textAnchor="middle" dominantBaseline="central" className={styles.commandCostText}>{value}</text>
+    </svg>
+  );
+}
+
 function titleCase(value: string) {
   return value.split("-").filter(Boolean).map(x => x[0].toUpperCase() + x.slice(1)).join(" ");
 }
@@ -189,13 +220,15 @@ export default function DecksPage() {
           <div className={styles.cardGrid}>
             {filtered.map(card => {
               const copies = selected?.cards[card.id] ?? 0;
-              return <article className={styles.card} data-tier={card.tierId} key={card.id}>
+              return <article className={styles.card} data-tier={card.tierId} key={card.id} style={tierStyle(card)}>
                 <button className={styles.cardMain} onClick={() => setInspect(card.id)}>
                   <CardArt card={card} className={styles.cardArt} />
                   <div className={styles.cardShade} />
-                  <span className={styles.cost}>{card.cost}</span>
-                  <span className={styles.typeBadge}>{LABEL[card.cardType]} · {card.tierId.toUpperCase()}</span>
+                  <span className={styles.cost} title="Command cost" aria-label={`${card.cost} Command`}><CommandSigil value={card.cost} /></span>
+                  <span className={styles.tierBadge} title={`${tierLabel(card)} Tier`}>{tierLabel(card)}</span>
+                  {card.traits.includes("unique") && <span className={styles.uniqueMark} title="Unique" aria-label="Unique">◆</span>}
                   <div className={styles.cardText}>
+                    <span className={styles.cardType}>{LABEL[card.cardType]}</span>
                     <h3>{card.name}</h3>{card.subtitle && <small>{card.subtitle}</small>}
                     {(card.cardType === "character" || card.cardType === "dragon") && <div className={styles.stats}>
                       <span><b>{card.power ?? 0}</b> PWR</span>
@@ -203,7 +236,7 @@ export default function DecksPage() {
                       <span><b>{card.health ?? 0}</b> HP</span>
                     </div>}
                     <div className={styles.traits}>{card.traits.filter(t => !["unique","dragon"].includes(t)).slice(0,3).map(t => <span key={t}>{titleCase(t)}</span>)}</div>
-                    {card.abilities[0] && <p><strong>{card.abilities[0].name}</strong>{card.abilities[0].text}</p>}
+                    {card.abilities[0] && <p><strong><span>{titleCase(card.abilities[0].trigger)}</span>{card.abilities[0].name}</strong>{card.abilities[0].text}</p>}
                   </div>
                 </button>
                 <div className={styles.cardActions}>
@@ -239,7 +272,7 @@ export default function DecksPage() {
       {inspected && <div className={styles.modalBackdrop} onMouseDown={() => setInspect(null)}>
         <article className={styles.modal} onMouseDown={e => e.stopPropagation()}>
           <button className={styles.close} onClick={() => setInspect(null)}>×</button>
-          <div className={styles.modalArtWrap}><CardArt card={inspected} className={styles.modalArt} /><div className={styles.modalShade}/><span className={styles.modalCost}>{inspected.cost}</span></div>
+          <div className={styles.modalArtWrap} style={tierStyle(inspected)}><CardArt card={inspected} className={styles.modalArt} /><div className={styles.modalShade}/><span className={`${styles.cost} ${styles.modalCost}`}><CommandSigil value={inspected.cost} /></span><span className={`${styles.tierBadge} ${styles.modalTierBadge}`}>{tierLabel(inspected)}</span></div>
           <div className={styles.modalContent}>
             <span className={styles.kicker}>{LABEL[inspected.cardType]} · {inspected.tierId.toUpperCase()}</span>
             <h2>{inspected.name}</h2>{inspected.subtitle && <p className={styles.subtitle}>{inspected.subtitle}</p>}
