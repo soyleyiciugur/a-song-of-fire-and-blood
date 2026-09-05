@@ -38,6 +38,81 @@
     "category": "raven"
   },
   {
+    "id": "gallery-mtoxzqrz",
+    "src": "/images/gallery/jadefyre.png",
+    "caption": "Jadefyre.",
+    "characterIds": [],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "jadefyre"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtow0gb8",
+    "src": "/images/gallery/baelenys-young-anime.png",
+    "caption": "Young Baelenys meets Hatchling Maelwing.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtow0c5n",
+    "src": "/images/gallery/baelenys-wings.png",
+    "caption": "They say men see wings upon him when they are about to meet their end.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtow081l",
+    "src": "/images/gallery/baelenys-vs-harrik.png",
+    "caption": "The Dragonbreath vs. Harrik the Drowned Servant",
+    "characterIds": [
+      "baelenys-targaryen",
+      "harrik-greyjoy"
+    ],
+    "houseIds": [
+      "targaryen",
+      "greyjoy"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": {
+      "day": 17,
+      "moon": 6,
+      "year": 69,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
     "id": "gallery-mtow03d3",
     "src": "/images/gallery/baelenys-maelwing-red-moon.png",
     "caption": "Always watching over him.",
@@ -48,7 +123,7 @@
       "targaryen"
     ],
     "dragonIds": [
-      "bayle"
+      "maelwing"
     ],
     "chapterId": null,
     "worldDate": null,
@@ -56,15 +131,123 @@
     "category": "raven"
   },
   {
-    "id": "gallery-mtoxzqrz",
-    "src": "/images/gallery/jadefyre.png",
-    "caption": "Jadefyre.",
-    "characterIds": [],
+    "id": "gallery-mtow015w",
+    "src": "/images/gallery/baelenys-maelwing-two-face.png",
+    "caption": "Two sides of the same coin.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
     "houseIds": [
       "targaryen"
     ],
     "dragonIds": [
-      "jadefyre"
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzxh6",
+    "src": "/images/gallery/baelenys-maelwing-pastel.png",
+    "caption": "The day they met.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzwbm",
+    "src": "/images/gallery/baelenys-maelwing-iron-throne.png",
+    "caption": "Many a sword has found its way to the old chair by their claws.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzqqe",
+    "src": "/images/gallery/baelenys-maelwing-foggy.png",
+    "caption": "The yellow glow inside the fog.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovznf3",
+    "src": "/images/gallery/baelenys-fields.png",
+    "caption": "This view + cracking walnuts.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovzji8",
+    "src": "/images/gallery/baelenys-dany.png",
+    "caption": "Devoted to Aegon's dream.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtovz5fw",
+    "src": "/images/gallery/baelenys-black-white-anime.png",
+    "caption": "The Dragonbreath.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
     ],
     "chapterId": null,
     "worldDate": null,
@@ -97,9 +280,7 @@
     "houseIds": [
       "targaryen"
     ],
-    "dragonIds": [
-      "maelwing"
-    ],
+    "dragonIds": ["maelwing"],
     "chapterId": null,
     "worldDate": null,
     "uploadedAt": "2026-09-05",
