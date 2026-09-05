@@ -2585,7 +2585,7 @@
 }
 
 .cardInfoPanelWithActions {
-  height: 74%;
+  height: 60%;
 
   grid-template-rows:
     2.35rem
