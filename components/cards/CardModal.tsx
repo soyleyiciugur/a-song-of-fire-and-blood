@@ -18,7 +18,6 @@ function usePortrait(src: string) {
   const [extIndex, setExtIndex] = useState(0);
   const [failed, setFailed] = useState(false);
 
-  // Reset when src (base path) changes
   useEffect(() => {
     setExtIndex(0);
     setFailed(false);
@@ -45,11 +44,12 @@ export function CardModal({
 }) {
   const card = getCardById(cardId);
 
-  // Portrait source: character cards use character portraits, everything else uses /images/cards/
   const portraitBase = card
     ? card.cardType === "character"
       ? `/images/characters/${card.linkedCharacterId ?? card.id}`
-      : `/images/cards/${card.id}`
+      : card.cardType === "dragon"
+        ? `/images/dragons/${card.id}`
+        : `/images/cards/${card.id}`
     : "";
 
   const { fullSrc, onError, failed } = usePortrait(portraitBase);
@@ -67,7 +67,6 @@ export function CardModal({
   const tier = getTiers().find((t) => t.id === card.tierId);
   const nemesisCards = getCardsByIds(card.nemesis);
   const allyCards = getCardsByIds(card.allies);
-
   const showPortrait = !failed && portraitBase !== "";
 
   return (
@@ -79,7 +78,6 @@ export function CardModal({
         ✕
       </button>
 
-      {/* Two-column layout: portrait left, core info right */}
       <div className={styles.topRow}>
         <div className={styles.portraitCol}>
           {showPortrait ? (
@@ -166,7 +164,7 @@ export function CardModal({
         </div>
       )}
 
-      {card.linkedCharacterId && (
+      {card.cardType === "character" && card.linkedCharacterId && (
         <Link href={`/characters/${card.linkedCharacterId}`} className={styles.characterLink}>
           View Full Character Profile →
         </Link>

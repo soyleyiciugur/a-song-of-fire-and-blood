@@ -1167,6 +1167,12 @@
   background: #0e0b0e;
 
   box-shadow:
+    0 0 22px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 22%,
+        transparent
+      ),
     0 8px 24px rgba(0, 0, 0, 0.38);
 
   isolation: isolate;
@@ -2169,6 +2175,20 @@
   min-height: 0;
 
   overflow: hidden;
+}
+
+/* Ambient tier glow — mirrors the lore card gallery. */
+.unitCard:hover,
+.handCard:hover:not(:disabled),
+.mulliganCard:hover {
+  box-shadow:
+    0 0 34px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 38%,
+        transparent
+      ),
+    0 14px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* Board cards */

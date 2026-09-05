@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import rawCards from "@/data/the-great-game/cards.json";
 import styles from "./decks.module.css";
@@ -53,6 +53,80 @@ function CommandSigil({ value }: { value: number }) {
       <path d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z" className={styles.commandBadgeRune} />
       <text x="22" y="21.6" textAnchor="middle" dominantBaseline="central" className={styles.commandCostText}>{value}</text>
     </svg>
+  );
+}
+
+
+
+type FilterOption = { value: string; label: string };
+
+function FilterMenu({
+  value,
+  options,
+  onChange,
+  ariaLabel,
+}: {
+  value: string;
+  options: FilterOption[];
+  onChange: (value: string) => void;
+  ariaLabel: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const selected = options.find(option => option.value === value) ?? options[0];
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div ref={rootRef} className={`${styles.filterMenu} ${open ? styles.filterMenuOpen : ""}`}>
+      <button
+        type="button"
+        className={styles.filterTrigger}
+        aria-label={ariaLabel}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen(current => !current)}
+      >
+        <span>{selected?.label ?? value}</span>
+        <i aria-hidden>⌄</i>
+      </button>
+      {open && (
+        <div className={styles.filterOptions} role="listbox" aria-label={ariaLabel}>
+          {options.map(option => (
+            <button
+              type="button"
+              role="option"
+              aria-selected={option.value === value}
+              className={option.value === value ? styles.filterOptionActive : undefined}
+              key={option.value}
+              onClick={() => {
+                onChange(option.value);
+                setOpen(false);
+              }}
+            >
+              <span>{option.label}</span>
+              {option.value === value && <b aria-hidden>◆</b>}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -114,7 +188,7 @@ export default function DecksPage() {
 
   const selected = decks.find(d => d.id === selectedId) ?? null;
   const total = countDeck(selected);
-  const houses = useMemo(() => Array.from(new Set(ALL.map(c => c.houseId).filter(Boolean) as string[])).sort(), []);
+  const houses = useMemo(() => Array.from(new Set(ALL.map(c => c.houseId).filter((house): house is string => Boolean(house) && house !== "-"))).sort(), []);
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return ALL
@@ -211,10 +285,45 @@ export default function DecksPage() {
             <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search cards, abilities, houses..." />
           </div>
           <div className={styles.filters}>
-            <select value={type} onChange={e => setType(e.target.value as CardType | "all")}>{Object.entries(LABEL).map(([v,l]) => <option key={v} value={v}>{l}</option>)}</select>
-            <select value={tier} onChange={e => setTier(e.target.value)}><option value="all">All Tiers</option><option value="s-plus">S+ Tier</option><option value="s">S Tier</option><option value="a">A Tier</option><option value="b">B Tier</option><option value="c">C Tier</option></select>
-            <select value={house} onChange={e => setHouse(e.target.value)}><option value="all">All Houses</option>{houses.map(h => <option key={h} value={h}>{titleCase(h)}</option>)}</select>
-            <select value={sort} onChange={e => setSort(e.target.value)}><option value="cost">Sort: Command</option><option value="name">Sort: Name</option><option value="tier">Sort: Tier</option><option value="type">Sort: Type</option></select>
+            <FilterMenu
+              value={type}
+              ariaLabel="Filter by card type"
+              onChange={value => setType(value as CardType | "all")}
+              options={Object.entries(LABEL).map(([value, label]) => ({ value, label }))}
+            />
+            <FilterMenu
+              value={tier}
+              ariaLabel="Filter by tier"
+              onChange={setTier}
+              options={[
+                { value: "all", label: "All Tiers" },
+                { value: "s-plus", label: "S+ Tier" },
+                { value: "s", label: "S Tier" },
+                { value: "a", label: "A Tier" },
+                { value: "b", label: "B Tier" },
+                { value: "c", label: "C Tier" },
+              ]}
+            />
+            <FilterMenu
+              value={house}
+              ariaLabel="Filter by house"
+              onChange={setHouse}
+              options={[
+                { value: "all", label: "All Houses" },
+                ...houses.map(value => ({ value, label: titleCase(value) })),
+              ]}
+            />
+            <FilterMenu
+              value={sort}
+              ariaLabel="Sort cards"
+              onChange={setSort}
+              options={[
+                { value: "cost", label: "Sort: Command" },
+                { value: "name", label: "Sort: Name" },
+                { value: "tier", label: "Sort: Tier" },
+                { value: "type", label: "Sort: Type" },
+              ]}
+            />
           </div>
 
           <div className={styles.cardGrid}>

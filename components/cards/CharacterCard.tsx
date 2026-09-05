@@ -10,9 +10,13 @@ const EXTS = ["webp", "png", "jpg", "jpeg"];
 function usePortrait(card: Card) {
   const [extIndex, setExtIndex] = useState(0);
 
-  // Character cards use character portraits.
-  // All other card types use dedicated card artwork.
-  const folder = card.cardType === "character" ? "characters" : "cards";
+  // Characters, Dragons and the remaining card types each use their own art folders.
+  const folder =
+    card.cardType === "character"
+      ? "characters"
+      : card.cardType === "dragon"
+        ? "dragons"
+        : "cards";
 
   const imageId =
     card.cardType === "character"
@@ -44,7 +48,6 @@ export function CharacterCard({
       className={`${styles.card} ${styles[card.tierId]}`}
       onClick={() => onSelect(card.id)}
     >
-      {/* Badges sit above portrait via z-index */}
       <span className={styles.typeBadge}>
         {CARD_TYPE_ICON[card.cardType]}
       </span>
