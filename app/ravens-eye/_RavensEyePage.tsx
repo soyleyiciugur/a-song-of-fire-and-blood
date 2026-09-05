@@ -262,37 +262,96 @@ function ExpandableCaption({
   text,
   className,
   limit = 180,
+  scrollWhenExpanded = false,
 }: {
   text: string;
   className?: string;
   limit?: number;
+  scrollWhenExpanded?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const needsMore = text.length > limit;
+
+  useEffect(() => {
+    if (!expanded && scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
+  }, [expanded]);
 
   const visible =
     needsMore && !expanded
       ? `${text.slice(0, limit).trimEnd()}…`
       : text;
 
-  return (
-    <p className={className}>
-      {visible}
-      {needsMore && (
-        <>
-          {" "}
+  if (!needsMore) {
+    return <p className={className}>{text}</p>;
+  }
+
+  if (!expanded) {
+    return (
+      <p className={className}>
+        {visible}{" "}
+        <button
+          type="button"
+          className={styles.captionMoreBtn}
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded(true);
+          }}
+        >
+          more
+        </button>
+      </p>
+    );
+  }
+
+  if (scrollWhenExpanded) {
+    return (
+      <div
+        className={styles.expandedCaptionShell}
+        onClick={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
+        onPointerMove={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
+        <div
+          ref={scrollRef}
+          className={`${className ?? ""} ${styles.expandedCaptionScroll}`}
+        >
+          {text}
+        </div>
+
+        <div className={styles.captionCollapseRow}>
           <button
             type="button"
             className={styles.captionMoreBtn}
             onClick={(e) => {
               e.stopPropagation();
-              setExpanded((v) => !v);
+              setExpanded(false);
             }}
           >
-            {expanded ? "less" : "more"}
+            less
           </button>
-        </>
-      )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <p className={className}>
+      {text}{" "}
+      <button
+        type="button"
+        className={styles.captionMoreBtn}
+        onClick={(e) => {
+          e.stopPropagation();
+          setExpanded(false);
+        }}
+      >
+        less
+      </button>
     </p>
   );
 }
@@ -654,6 +713,7 @@ function ReelSlide({
               text={entry.caption}
               className={styles.reelCaption}
               limit={165}
+              scrollWhenExpanded
             />
           )}
           <GroupedTags entry={entry} small />

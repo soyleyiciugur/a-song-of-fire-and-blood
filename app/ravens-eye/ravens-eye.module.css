@@ -200,6 +200,49 @@
   text-decoration: underline;
 }
 
+.expandedCaptionShell {
+  position: relative;
+  width: min(720px, calc(100vw - 32px));
+  max-height: 42dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  pointer-events: auto;
+}
+
+.expandedCaptionScroll {
+  max-height: 36dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 10px 8px;
+  margin: 0;
+}
+
+.expandedCaptionScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.captionCollapseRow {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 10px 9px;
+  margin-top: -16px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.48) 55%,
+    transparent 100%
+  );
+}
+
 /* ── Tags ──────────────────────────────────────────────────────────────── */
 
 .tagBtn {
@@ -649,6 +692,15 @@
     padding-left: 12px;
     padding-right: 12px;
     padding-bottom: calc(30px + env(safe-area-inset-bottom));
+  }
+
+  .expandedCaptionShell {
+    width: calc(100vw - 24px);
+    max-height: 44dvh;
+  }
+
+  .expandedCaptionScroll {
+    max-height: 38dvh;
   }
 
   .reelProgressHitbox {
