@@ -23,6 +23,28 @@
     "caption": "Bayle.",
     "characterIds": [],
     "houseIds": [
+      "targaryen",
+      "greyjoy"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": {
+      "day": 17,
+      "moon": 6,
+      "year": 77,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-05",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtow03d3",
+    "src": "/images/gallery/baelenys-maelwing-red-moon.png",
+    "caption": "Always watching over him.",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
       "targaryen"
     ],
     "dragonIds": [
