@@ -4960,3 +4960,107 @@
     0 0 7px rgba(255, 255, 255, 0.56),
     0 0 20px rgba(190, 195, 200, 0.34) !important;
 }
+
+
+/* ────────────────────────────────────────────
+   v13 death + Veiled Sight layout refinements
+   ──────────────────────────────────────────── */
+
+/* Death should read as a neutral black execution/death mark, not damage color. */
+.combatDeathPreview,
+.standingBox .conflictValueLethal,
+.conflictValueLethal {
+  color: #050505 !important;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0 6px rgba(235, 235, 225, 0.50),
+    0 0 15px rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Veiled Sight: no framed modal panel, no internal scrollbar.
+   The screen fade remains, while the cards themselves float centered. */
+.revealedHandModal {
+  width:
+    min(
+      96vw,
+      1460px
+    );
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.revealedHandTitle {
+  margin-bottom: 0.8rem;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+/* Exactly eight cards fit across the reveal row on a desktop viewport.
+   These are only the revealed-opponent-hand cards; normal hand sizing is unchanged. */
+.revealedHandModal .hand {
+  width: 100%;
+  overflow: visible;
+}
+
+.revealedHandModal .handLinearTrack,
+.revealedHandModal .handFanTrack {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      8,
+      minmax(0, 1fr)
+    );
+  gap:
+    clamp(
+      0.35rem,
+      0.7vw,
+      0.7rem
+    );
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  justify-content: center;
+  align-items: end;
+  transform: none;
+}
+
+/* Override normal hand-card fan offsets/rotation only inside Veiled Sight.
+   Keep the card visual/chrome/target highlighting logic itself unchanged. */
+.revealedHandModal .handCard {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.revealedHandModal .handCard:hover {
+  transform:
+    translateY(-8px)
+    scale(1.035) !important;
+  z-index: 8;
+}
+
+/* On narrower screens, preserve "up to eight across" without creating an
+   internal scroller: the row simply tightens. */
+@media (max-width: 1050px) {
+  .revealedHandBackdrop {
+    padding-inline: 0.7rem;
+  }
+
+  .revealedHandModal {
+    width:
+      calc(
+        100vw - 1.4rem
+      );
+  }
+
+  .revealedHandModal .handLinearTrack,
+  .revealedHandModal .handFanTrack {
+    gap: 0.28rem;
+  }
+}

@@ -4946,6 +4946,7 @@ export default function GreatGamePlayPage() {
             className={
               styles.revealedHandModal
             }
+            data-revealed-hand="true"
           >
             <div
               className={
