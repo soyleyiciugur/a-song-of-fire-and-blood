@@ -165,14 +165,149 @@ export default function CardsPage() {
           className="greatGameNav"
           aria-label="The Great Game"
         >
-          <Link href="/cards" className="greatGameNavActive">
+          <Link
+            href="/cards"
+            className="greatGameNavActive"
+          >
             Cards
           </Link>
+
           <Link href="/cards/decks">
             Decks
           </Link>
+
           <Link href="/cards/play">
             Play
           </Link>
         </nav>
+      </div>
+
+      {/* TIER TABS */}
+
+      <div
+        className={styles.tabs}
+      >
+        {tiers.map((tier) => (
+          <button
+            key={tier.id}
+            className={`${styles.tab} ${
+              activeTier ===
+              tier.id
+                ? styles.activeTab
+                : ""
+            }`}
+            style={
+              activeTier ===
+              tier.id
+                ? {
+                    borderColor:
+                      tier.accentColor,
+
+                    color:
+                      tier.accentColor,
+                  }
+                : {
+                    borderColor:
+                      "rgba(255,255,255,0.2)",
+                  }
+            }
+            onClick={() =>
+              handleTierChange(
+                tier.id
+              )
+            }
+          >
+            {tier.label}
+          </button>
+        ))}
+      </div>
+
+      {/* CARD GRID */}
+
+      <div
+        className={styles.grid}
+      >
+        {tierCards.map(
+          (card) => (
+            <CharacterCard
+              key={card.id}
+              card={card}
+              onSelect={
+                setSelectedCardId
+              }
+            />
+          )
+        )}
+      </div>
+
+      {/* MODAL */}
+
+      {selectedCardId && (
+        <div
+          className={
+            styles.overlay
+          }
+          onClick={() =>
+            setSelectedCardId(
+              null
+            )
+          }
+        >
+          <button
+            className={
+              styles.navArrow
+            }
+            onClick={(event) => {
+              event.stopPropagation();
+              handlePrev();
+            }}
+            aria-label="Previous card"
+            style={{
+              visibility:
+                selectedIndex > 0
+                  ? "visible"
+                  : "hidden",
+            }}
+          >
+            ‹
+          </button>
+
+          <CardModal
+            cardId={
+              selectedCardId
+            }
+            onClose={() =>
+              setSelectedCardId(
+                null
+              )
+            }
+            onSelectCard={
+              setSelectedCardId
+            }
+          />
+
+          <button
+            className={
+              styles.navArrow
+            }
+            onClick={(event) => {
+              event.stopPropagation();
+              handleNext();
+            }}
+            aria-label="Next card"
+            style={{
+              visibility:
+                selectedIndex <
+                tierCards.length -
+                  1
+                  ? "visible"
+                  : "hidden",
+            }}
+          >
+            ›
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
