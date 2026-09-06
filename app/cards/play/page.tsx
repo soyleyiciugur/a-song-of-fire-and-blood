@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Fragment,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -3201,10 +3200,10 @@ export default function GreatGamePlayPage() {
     x: number,
     y: number
   ): PointerDropTarget | null {
-    const element =
-      document.elementFromPoint(x, y);
+    const elements =
+      document.elementsFromPoint(x, y);
 
-    if (!element) {
+    if (elements.length === 0) {
       return null;
     }
 
@@ -3212,6 +3211,52 @@ export default function GreatGamePlayPage() {
     const draggedCard = dragged
       ? getGameCard(dragged.cardId)
       : null;
+
+    const boardElement = elements
+      .map((element) =>
+        element.closest<HTMLElement>(
+          '[data-card-drop-board="true"]'
+        )
+      )
+      .find(Boolean) ?? null;
+
+    /*
+     * Unit placement is resolved from the board's fixed six-column geometry,
+     * not from animated card rectangles. That keeps the insertion index stable
+     * even when the pointer is scrubbed rapidly left/right while cards slide.
+     */
+    if (
+      boardElement &&
+      draggedCard &&
+      isUnitCard(draggedCard)
+    ) {
+      const rect = boardElement.getBoundingClientRect();
+      const style = window.getComputedStyle(boardElement);
+      const paddingLeft = parseFloat(style.paddingLeft) || 0;
+      const paddingRight = parseFloat(style.paddingRight) || 0;
+      const gap = parseFloat(style.columnGap) || 0;
+      const columns = 6;
+      const contentWidth =
+        rect.width - paddingLeft - paddingRight;
+      const columnWidth =
+        (contentWidth - gap * (columns - 1)) / columns;
+      const stride = columnWidth + gap;
+      const localX =
+        x - rect.left - paddingLeft;
+      const rawIndex = Math.floor(
+        (localX + columnWidth / 2) / stride
+      );
+
+      return {
+        kind: "board",
+        boardIndex: Math.max(
+          0,
+          Math.min(activePlayer.board.length, rawIndex)
+        ),
+      };
+    }
+
+    const element = elements[0];
 
     const unitElement =
       element.closest<HTMLElement>(
@@ -3231,26 +3276,6 @@ export default function GreatGamePlayPage() {
       );
 
       if (unit) {
-        // Unit cards dragged over our own board are placement gestures,
-        // not target gestures. Drop on the left/right half of a card to
-        // insert before/after it, Hearthstone-style.
-        if (
-          draggedCard &&
-          isUnitCard(draggedCard) &&
-          unit.ownerId === currentGame.activePlayerId &&
-          unitElement
-        ) {
-          const unitIndex = activePlayer.board.findIndex(
-            (candidate) => candidate.instanceId === unit.instanceId
-          );
-          const rect = unitElement.getBoundingClientRect();
-          const after = x > rect.left + rect.width / 2;
-          return {
-            kind: "board",
-            boardIndex: Math.max(0, unitIndex + (after ? 1 : 0)),
-          };
-        }
-
         return {
           kind: "unit",
           unit,
@@ -3258,34 +3283,10 @@ export default function GreatGamePlayPage() {
       }
     }
 
-    const boardElement =
-      element.closest<HTMLElement>(
-        '[data-card-drop-board="true"]'
-      );
-
     if (boardElement) {
-      let boardIndex = activePlayer.board.length;
-
-      if (draggedCard && isUnitCard(draggedCard)) {
-        const unitEls = Array.from(
-          boardElement.querySelectorAll<HTMLElement>(
-            '[data-unit-instance-id]'
-          )
-        );
-
-        boardIndex = unitEls.findIndex((node) => {
-          const rect = node.getBoundingClientRect();
-          return x < rect.left + rect.width / 2;
-        });
-
-        if (boardIndex < 0) {
-          boardIndex = unitEls.length;
-        }
-      }
-
       return {
         kind: "board",
-        boardIndex,
+        boardIndex: activePlayer.board.length,
       };
     }
 
@@ -4699,6 +4700,17 @@ export default function GreatGamePlayPage() {
   const draggedHandCard =
     getDraggedHandCard();
 
+  const draggedCardDefinition =
+    draggedHandCard
+      ? getGameCard(draggedHandCard.cardId)
+      : null;
+
+  const draggedCardIsPlaceableUnit =
+    Boolean(
+      draggedCardDefinition &&
+        isUnitCard(draggedCardDefinition)
+    );
+
   const canReceiveDraggedCard =
     draggedHandCard
       ? canDropHandCardOnBoard(
@@ -5166,6 +5178,7 @@ export default function GreatGamePlayPage() {
         pointerDropBoard
         dropIndex={
           draggingHandInstanceId &&
+          draggedCardIsPlaceableUnit &&
           dragCursor?.canDrop
             ? dragCursor.boardIndex ?? null
             : null
@@ -6476,43 +6489,6 @@ function Board({
   const boardRef =
     useRef<HTMLDivElement | null>(null);
 
-  const previousRectsRef =
-    useRef<Map<string, DOMRect>>(new Map());
-
-  useLayoutEffect(() => {
-    const board = boardRef.current;
-    if (!board) return;
-
-    const nextRects = new Map<string, DOMRect>();
-    const nodes = Array.from(
-      board.querySelectorAll<HTMLElement>(
-        '[data-unit-instance-id]'
-      )
-    );
-
-    for (const node of nodes) {
-      const id = node.dataset.unitInstanceId;
-      if (!id) continue;
-      const next = node.getBoundingClientRect();
-      nextRects.set(id, next);
-      const previous = previousRectsRef.current.get(id);
-      if (!previous) continue;
-
-      const dx = previous.left - next.left;
-      const dy = previous.top - next.top;
-      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) continue;
-
-      node.animate(
-        [
-          { transform: `translate(${dx}px, ${dy}px)` },
-          { transform: 'translate(0, 0)' },
-        ],
-        { duration: 260, easing: 'cubic-bezier(.2,.78,.2,1)' }
-      );
-    }
-
-    previousRectsRef.current = nextRects;
-  }, [units.map((unit) => unit.instanceId).join('|'), dropIndex]);
 
   return (
     <section
@@ -6577,15 +6553,27 @@ function Board({
           </div>
         )}
 
+        {dropIndex !== null && (
+          <div
+            className={styles.boardDropSlot}
+            style={{
+              "--drop-index": dropIndex,
+            } as CSSProperties}
+            aria-hidden
+          />
+        )}
+
         {units.map(
           (unit, index) => (
-            <Fragment key={unit.instanceId}>
-              {dropIndex === index && (
-                <div
-                  className={styles.boardDropSlot}
-                  aria-hidden
-                />
-              )}
+            <div
+              key={unit.instanceId}
+              className={styles.boardPlacementCell}
+              data-shift-for-drop={
+                dropIndex !== null && index >= dropIndex
+                  ? "true"
+                  : undefined
+              }
+            >
             <BoardUnit
               key={
                 unit.instanceId
@@ -6657,14 +6645,8 @@ function Board({
                 )
               }
             />
-            </Fragment>
+            </div>
           )
-        )}
-        {dropIndex === units.length && (
-          <div
-            className={styles.boardDropSlot}
-            aria-hidden
-          />
         )}
       </div>
     </section>

@@ -610,3 +610,52 @@
   outline: none;
 }
 .modalArtWrap .uniqueMark { top: 1rem; right: 1rem; z-index: 9; }
+
+/* =========================================================
+   v11 collection density + tooltip cursor + clipping polish
+   ========================================================= */
+.page {
+  --realm-help-cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath d='M3 2.5 22 12l-7.2 2.1 4.2 8.1-3.6 1.8-4.1-8-5.6 5.3z' fill='%23e1c56f' stroke='%23110b08' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='m8.2 7.2 8.2 4.3-4.4 1.3z' fill='%23fff2bc' opacity='.8'/%3E%3Ccircle cx='23' cy='6' r='4.2' fill='%23110b08' stroke='%23d4af37' stroke-width='1'/%3E%3Ctext x='23' y='8.45' text-anchor='middle' font-size='7.5' font-family='Georgia,serif' font-weight='700' fill='%23f5e6c8'%3E?%3C/text%3E%3C/svg%3E") 3 3,
+    help;
+}
+
+.modalTraits > span,
+.uniqueMark,
+[data-rule-tooltip-trigger="true"] {
+  cursor: var(--realm-help-cursor) !important;
+}
+
+/* Five cards across on a normal desktop collection view. */
+.cardGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: .85rem;
+}
+
+/* Ability headers should wrap rather than ending in a hard ellipsis. */
+.cardText p strong {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.25;
+}
+
+.cardText p {
+  overflow: hidden;
+}
+
+@media (max-width: 1450px) {
+  .cardGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1180px) {
+  .cardGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 920px) {
+  .cardGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
