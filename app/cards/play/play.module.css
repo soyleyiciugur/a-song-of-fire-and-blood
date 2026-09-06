@@ -5161,3 +5161,266 @@
   top: 20%;
   transform: translate(-50%, -50%);
 }
+
+
+/* ────────────────────────────────────────────
+   v17 tier treatment — Border Accent
+   ──────────────────────────────────────────── */
+
+/*
+ * Tier is no longer a hanging rectangular UI plate.
+ * The card frame carries the tier identity, with a tiny jewel/notch centered
+ * on the upper border. Command remains left; Unique remains right.
+ */
+.unitCard,
+.handCard,
+.mulliganCard,
+.selectedCardInner {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 40%,
+      rgba(115, 93, 65, 0.72)
+    );
+}
+
+/* Tier-colored top-border accent. */
+.unitCard::after,
+.handCard::after,
+.mulliganCard::after,
+.selectedCardInner::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: -1px;
+  z-index: 4;
+  height: 2px;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--tier-color, #8b1e2b) 18%,
+      var(--tier-accent, #d4af37) 50%,
+      var(--tier-color, #8b1e2b) 82%,
+      transparent
+    );
+  box-shadow:
+    0 0 7px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 26%,
+        transparent
+      );
+}
+
+/*
+ * Several older selected-card rules also use ::after.
+ * Preserve their existing selected glow through ::before and let the tier
+ * accent own the top-edge ::after in v17.
+ */
+.selectedCardInner::after {
+  inset: auto 15% auto 15%;
+  top: -1px;
+  height: 2px;
+  animation: none;
+}
+
+/* Tiny heraldic jewel/notch on the frame, rather than a floating badge. */
+.tierBadge {
+  left: 50%;
+  top: -0.12rem;
+  z-index: 9;
+
+  min-width: 1.36rem;
+  width: auto;
+  height: 1.02rem;
+
+  padding:
+    0
+    0.32rem;
+
+  transform:
+    translateX(-50%);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 62%,
+      rgba(25, 19, 16, 0.92)
+    );
+
+  border-radius:
+    0
+    0
+    0.34rem
+    0.34rem;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 72%,
+        rgba(17, 12, 14, 0.98)
+      ),
+      rgba(8, 6, 8, 0.96)
+    );
+
+  backdrop-filter:
+    blur(5px);
+
+  color:
+    var(--tier-accent, #d4af37);
+
+  font-size: 0.48rem;
+  letter-spacing: 0.055em;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.72),
+    0 0 7px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 18%,
+        transparent
+      );
+}
+
+/* Detailed cards scale the jewel slightly, but it stays a frame detail. */
+.selectedCardInner .tierBadge,
+.unitDetailCard .tierBadge {
+  top: -0.14rem;
+
+  min-width: 1.72rem;
+  height: 1.22rem;
+
+  padding:
+    0
+    0.42rem;
+
+  font-size: 0.61rem;
+}
+
+/* Unique is a standalone right-corner diamond. No duplicate "Unique" trait tag. */
+.uniqueMark {
+  top: 0.48rem;
+  right: 0.52rem;
+  z-index: 12;
+
+  display: grid;
+  place-items: center;
+
+  width: 1.02rem;
+  height: 1.02rem;
+
+  color:
+    var(--tier-accent, #d4af37);
+
+  font-size: 0.74rem;
+  line-height: 1;
+
+  cursor: var(--realm-action-cursor);
+
+  text-shadow:
+    0 0 5px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 62%,
+        transparent
+      );
+
+  transition:
+    transform 0.16s ease,
+    filter 0.16s ease,
+    text-shadow 0.16s ease;
+}
+
+.uniqueMark:hover,
+.uniqueMark:focus-visible {
+  transform: scale(1.12);
+
+  text-shadow:
+    0 0 6px
+      var(--tier-accent, #d4af37),
+    0 0 12px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 42%,
+        transparent
+      );
+}
+
+.uniqueMark:focus-visible {
+  outline: none;
+}
+
+/* Delayed Unique tooltips rendered through document.body. */
+.uniqueTooltipPortal {
+  position: fixed;
+  z-index: 320;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: none;
+
+  border:
+    1px solid
+    rgba(212, 175, 55, 0.24);
+
+  background:
+    rgba(10, 8, 9, 0.97);
+
+  color:
+    rgba(246, 232, 205, 0.90);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.66);
+
+  font-family:
+    var(--font-body),
+    Georgia,
+    serif;
+
+  line-height: 1.45;
+}
+
+.uniqueTooltipCompact {
+  padding:
+    0.28rem
+    0.46rem;
+
+  font-family:
+    var(--font-hotd),
+    Georgia,
+    serif;
+
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.uniqueTooltipDetailed {
+  width:
+    min(
+      270px,
+      calc(100vw - 24px)
+    );
+
+  padding:
+    0.48rem
+    0.58rem;
+
+  font-size: 0.69rem;
+}
+
+/*
+ * Unique was already filtered out by visibleTraits(), so this is defensive:
+ * a raw UNIQUE trait chip should never appear if another renderer is added.
+ */
+.traits > span[data-trait="unique"] {
+  display: none;
+}

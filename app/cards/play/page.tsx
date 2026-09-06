@@ -316,6 +316,9 @@ const TRAIT_RULES: Partial<
     "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
 };
 
+const UNIQUE_RULE =
+  "Unique — You cannot play another copy of this card while one is already in play under your control.";
+
 function tierStyle(
   card: GameCard
 ): CSSProperties {
@@ -7462,12 +7465,190 @@ function HandCardVisual({
   );
 }
 
+function UniqueDiamond({
+  detailed = false,
+}: {
+  detailed?: boolean;
+}) {
+  const triggerRef =
+    useRef<HTMLSpanElement | null>(
+      null
+    );
+
+  const [
+    open,
+    setOpen,
+  ] = useState(false);
+
+  const [
+    position,
+    setPosition,
+  ] = useState<{
+    left: number;
+    top: number;
+  } | null>(null);
+
+  const timerRef =
+    useRef<
+      ReturnType<typeof setTimeout> |
+      null
+    >(null);
+
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(
+        timerRef.current
+      );
+
+      timerRef.current =
+        null;
+    }
+  };
+
+  const updatePosition = () => {
+    const element =
+      triggerRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const rect =
+      element.getBoundingClientRect();
+
+    setPosition({
+      left:
+        rect.left +
+        rect.width / 2,
+      top:
+        rect.bottom + 8,
+    });
+  };
+
+  const openAfterDelay = () => {
+    clearTimer();
+    updatePosition();
+
+    timerRef.current =
+      setTimeout(
+        () => {
+          updatePosition();
+          setOpen(true);
+        },
+        detailed
+          ? 320
+          : 560
+      );
+  };
+
+  const closeTooltip = () => {
+    clearTimer();
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const handleViewportChange =
+      () => updatePosition();
+
+    window.addEventListener(
+      "scroll",
+      handleViewportChange,
+      true
+    );
+
+    window.addEventListener(
+      "resize",
+      handleViewportChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleViewportChange,
+        true
+      );
+
+      window.removeEventListener(
+        "resize",
+        handleViewportChange
+      );
+    };
+  }, [open]);
+
+  useEffect(
+    () => () => clearTimer(),
+    []
+  );
+
+  return (
+    <>
+      <span
+        ref={triggerRef}
+        className={
+          styles.uniqueMark
+        }
+        aria-label="Unique"
+        tabIndex={0}
+        onMouseEnter={
+          openAfterDelay
+        }
+        onMouseLeave={
+          closeTooltip
+        }
+        onFocus={
+          openAfterDelay
+        }
+        onBlur={
+          closeTooltip
+        }
+      >
+        ◆
+      </span>
+
+      {open &&
+        position &&
+        typeof document !==
+          "undefined" &&
+        createPortal(
+          <span
+            className={[
+              styles.uniqueTooltipPortal,
+              detailed
+                ? styles.uniqueTooltipDetailed
+                : styles.uniqueTooltipCompact,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            role="tooltip"
+            style={{
+              left:
+                position.left,
+              top:
+                position.top,
+            }}
+          >
+            {detailed
+              ? UNIQUE_RULE
+              : "Unique"}
+          </span>,
+          document.body
+        )}
+    </>
+  );
+}
+
 function CardChrome({
   card,
   cost,
+  detailed = false,
 }: {
   card: GameCard;
   cost?: number;
+  detailed?: boolean;
 }) {
   return (
     <>
@@ -7503,6 +7684,7 @@ function CardChrome({
           styles.tierBadge
         }
         title={`${tierLabel(card)} Tier`}
+        aria-label={`${tierLabel(card)} Tier`}
       >
         {tierLabel(
           card
@@ -7512,15 +7694,11 @@ function CardChrome({
       {card.traits.includes(
         "unique"
       ) && (
-        <span
-          className={
-            styles.uniqueMark
+        <UniqueDiamond
+          detailed={
+            detailed
           }
-          title="Unique"
-          aria-label="Unique"
-        >
-          ◆
-        </span>
+        />
       )}
     </>
   );
@@ -8122,6 +8300,7 @@ function SelectedCardPreview({
       <CardChrome
         card={card}
         cost={cost}
+        detailed
       />
 
       <CardSparkles />
@@ -8280,7 +8459,10 @@ function UnitDetailOverlay({
           }
         />
 
-        <CardChrome card={card} />
+        <CardChrome
+          card={card}
+          detailed
+        />
         <CardSparkles />
 
         <CardInfoPanel
