@@ -5715,3 +5715,67 @@
   top: 20% !important;
   transform: translate(-50%, -50%) rotate(-8deg) !important;
 }
+
+/* ────────────────────────────────────────────
+   v23 drag preview frame parity
+   ──────────────────────────────────────────── */
+/* The hand-drag preview uses its own wrapper, so it must explicitly inherit
+   the exact same tier frame treatment as live cards. */
+.dragGhostCard {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--tier-accent, #d4af37) 40%,
+      rgba(115, 93, 65, 0.72)
+    );
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.48),
+    0 -5px 20px color-mix(in srgb, var(--tier-color, #8b1e2b) 58%, transparent),
+    0 0 34px color-mix(in srgb, var(--tier-color, #8b1e2b) 24%, transparent);
+}
+
+.dragGhostCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--tier-accent, #d4af37) 35%,
+        transparent
+      ),
+    inset 0 0 24px
+      color-mix(
+        in srgb,
+        var(--tier-color, #8b1e2b) 22%,
+        rgba(0, 0, 0, 0.28)
+      );
+}
+
+.dragGhostCard::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: -1px;
+  z-index: 14;
+  height: 2px;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--tier-color, #8b1e2b) 16%,
+      var(--tier-accent, #d4af37) 50%,
+      var(--tier-color, #8b1e2b) 84%,
+      transparent
+    );
+  box-shadow:
+    0 0 7px var(--tier-color, #8b1e2b),
+    0 0 17px color-mix(in srgb, var(--tier-color, #8b1e2b) 82%, transparent),
+    0 4px 25px color-mix(in srgb, var(--tier-color, #8b1e2b) 54%, transparent);
+}
