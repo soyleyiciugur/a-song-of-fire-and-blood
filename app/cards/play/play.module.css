@@ -1113,6 +1113,32 @@
 
 .boardSection {
   margin-bottom: 1rem;
+
+  /* Realm label lives beside the board rather than above it. */
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  column-gap: 0.8rem;
+  align-items: center;
+}
+
+.boardSection > .sectionHeading {
+  margin-bottom: 0;
+  align-self: center;
+}
+
+.boardSection > .sectionHeading > div {
+  min-width: 0;
+}
+
+.boardSection > .sectionHeading .sectionTitle {
+  line-height: 1.35;
+}
+
+.boardSection > .sectionHeading small {
+  display: block;
+  margin-top: 0.28rem;
+  white-space: nowrap;
+  font-size: 0.62rem;
 }
 
 .board {
@@ -2911,12 +2937,12 @@
 
 .battleLine {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
 
   gap: 1rem;
 
-  /* Sit exactly between the two Realm boards, aligned to their left edge. */
+  /* Keep THE REALMS centered between the two boards. */
   margin: 0.55rem 0;
 
   color:
@@ -2933,10 +2959,7 @@
   text-transform: uppercase;
 }
 
-.battleLine::before {
-  display: none;
-}
-
+.battleLine::before,
 .battleLine::after {
   content: "";
   width: 100%;
