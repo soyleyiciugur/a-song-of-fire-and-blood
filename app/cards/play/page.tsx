@@ -1486,6 +1486,11 @@ export default function GreatGamePlayPage() {
     ...enemyCharacters,
   ];
 
+  const allUnits = [
+    ...activePlayer.board,
+    ...enemyPlayer.board,
+  ];
+
   const selectedHandCard =
     pendingPlay
       ? activePlayer.hand.find(
