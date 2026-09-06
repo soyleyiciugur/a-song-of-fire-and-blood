@@ -636,3 +636,20 @@
     font-size: 1.7rem;
   }
 }
+
+/* v9: title and shared TCG navigation get separate rows so the centered menu
+   can never overlap "The Great Game". */
+.headerRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+}
+
+.headerText {
+  width: 100%;
+}
+
+.headerRow :global(.greatGameNavPageCenter) {
+  justify-self: center;
+  margin-top: 1.35rem;
+}

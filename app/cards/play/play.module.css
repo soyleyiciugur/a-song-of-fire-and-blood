@@ -4114,7 +4114,7 @@
 .attackDragLayer {
   position: fixed;
   inset: 0;
-  z-index: 180;
+  z-index: 55;
   pointer-events: none;
 }
 
@@ -4130,7 +4130,7 @@
       currentColor 34%,
       currentColor
     );
-  color: #c65f50;
+  color: inherit;
   filter:
     drop-shadow(0 0 6px currentColor)
     drop-shadow(0 3px 3px rgba(0, 0, 0, 0.72));
@@ -4557,4 +4557,160 @@
   box-shadow:
     inset 0 0 0 1px rgba(214, 184, 108, 0.32),
     0 0 18px rgba(214, 184, 108, 0.12);
+}
+
+
+/* ────────────────────────────────────────────
+   v9 conflict preview / drag corrections
+   ──────────────────────────────────────────── */
+
+/* Compact board/hand cards are game pieces, not text-selection surfaces.
+   Detailed/inspected overlays are intentionally NOT included here. */
+.unitCard,
+.unitCard *,
+.handCard,
+.handCard *,
+.mulliganCard,
+.mulliganCard * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
+/* The drag-mode label sits on the first third of the arrow instead of
+   colliding with target damage/lethal previews. */
+.attackDragBadge {
+  transform: translate(-50%, -50%);
+  z-index: 56;
+}
+
+/* All combat outcome glyphs use the same large, borderless "lethal preview"
+   visual language. No pill/background boxes. */
+.combatValuePreview,
+.combatDeathPreview,
+.combatGroundPreview {
+  left: 50%;
+  top: 50%;
+  z-index: 120;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 2.45rem;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow:
+    0 2px 0 rgba(20, 3, 4, 0.98),
+    0 0 7px currentColor,
+    0 0 20px color-mix(in srgb, currentColor 58%, transparent);
+  filter: none;
+}
+
+.combatValueNoDamage {
+  font-size: 2.75rem;
+}
+
+.combatDeathPreview {
+  color: #e46e62;
+  font-size: 3.05rem;
+}
+
+.combatGroundPreview {
+  color: #d6b86a;
+  font-size: 2.15rem;
+  font-style: italic;
+  letter-spacing: -0.08em;
+}
+
+/* If the hovered defender is Exhausted/Grounded, keep the outcome glyph at
+   full strength. The card itself is still visually subdued with an overlay
+   underneath the indicator rather than parent opacity/filter. */
+.unitWithCombatPreview.exhaustedUnit,
+.unitWithCombatPreview.groundedUnit {
+  opacity: 1;
+  filter: none;
+}
+
+.unitWithCombatPreview.exhaustedUnit::after,
+.unitWithCombatPreview.groundedUnit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  background: rgba(6, 6, 7, 0.48);
+  backdrop-filter: grayscale(0.72) saturate(0.45);
+}
+
+.unitWithCombatPreview .combatValuePreview,
+.unitWithCombatPreview .combatDeathPreview,
+.unitWithCombatPreview .combatGroundPreview {
+  z-index: 130;
+}
+
+/* Standing uses the same glyph language, slightly reduced for the smaller HUD
+   target. Lethal Standing displays only the skull. */
+.conflictValuePreview {
+  z-index: 130;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow:
+    0 2px 0 rgba(20, 3, 4, 0.98),
+    0 0 7px currentColor,
+    0 0 18px color-mix(in srgb, currentColor 58%, transparent);
+}
+
+.conflictValueNoDamage {
+  font-size: 2.2rem;
+}
+
+.conflictValueLethal {
+  color: #e46e62 !important;
+  font-size: 2.65rem;
+}
+
+/* Explicitly keep red and gold modes distinct all the way through the arrow. */
+.attackDragMilitary,
+.attackDragMilitary .attackDragArrow,
+.attackDragMilitary .attackDragBadge {
+  color: #d86b5a;
+}
+
+.attackDragPolitical,
+.attackDragPolitical .attackDragArrow,
+.attackDragPolitical .attackDragBadge {
+  color: #dfbd54;
+}
+
+/* A temporarily unavailable Political button on a Character does not turn the
+   entire card into a Military surface. Only true single-action cards (currently
+   Dragons) receive the whole-card Military tint. */
+.unitCard:not(.attackOnlyMilitary) .attackHalfMilitaryHover::before {
+  right: 50%;
+}
+
+.unitCard:not(.attackOnlyPolitical) .attackHalfPoliticalHover::before {
+  left: 50%;
+}
+
+/* Selection/highlight overlays stay beneath combat result glyphs. */
+.illegalAttackDragTarget::after {
+  z-index: 68;
 }

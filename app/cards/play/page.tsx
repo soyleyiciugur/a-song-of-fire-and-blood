@@ -1985,11 +1985,11 @@ export default function GreatGamePlayPage() {
       "brothers-tilt"
     ) {
       if (
-        alliedCharacters.length ===
+        allCharacters.length ===
         0
       ) {
         setError(
-          "The Brothers' Tilt requires a Character you control."
+          "The Brothers' Tilt requires a Character in play."
         );
 
         return;
@@ -2205,20 +2205,18 @@ export default function GreatGamePlayPage() {
 
         case "trial-by-combat": {
           if (
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+              "character"
+          ) {
+            return;
+          }
+
+          if (
             !pendingPlay
               .firstTargetInstanceId
           ) {
-            if (
-              unit.ownerId !==
-                currentGame.activePlayerId ||
-              getGameCard(
-                unit.cardId
-              ).cardType !==
-                "character"
-            ) {
-              return;
-            }
-
             setPendingPlay({
               ...pendingPlay,
 
@@ -2231,16 +2229,32 @@ export default function GreatGamePlayPage() {
             return;
           }
 
+          const firstTarget =
+            allUnits.find(
+              (candidate) =>
+                candidate.instanceId ===
+                pendingPlay.firstTargetInstanceId
+            );
+
           if (
+            !firstTarget ||
             unit.ownerId ===
-              currentGame.activePlayerId ||
-            getGameCard(
-              unit.cardId
-            ).cardType !==
-              "character"
+              firstTarget.ownerId
           ) {
             return;
           }
+
+          const allied =
+            firstTarget.ownerId ===
+              currentGame.activePlayerId
+              ? firstTarget
+              : unit;
+
+          const enemy =
+            firstTarget.ownerId ===
+              currentGame.activePlayerId
+              ? unit
+              : firstTarget;
 
           dispatch({
             type:
@@ -2250,13 +2264,13 @@ export default function GreatGamePlayPage() {
               pendingPlay.handInstanceId,
 
             targetInstanceId:
-              pendingPlay
-                .firstTargetInstanceId,
+              allied.instanceId,
 
             secondaryTargetInstanceId:
-              unit.instanceId,
+              enemy.instanceId,
           });
 
+          setCombatPreview(null);
           return;
         }
 
@@ -2476,7 +2490,11 @@ export default function GreatGamePlayPage() {
       unit.ownerId !==
         currentGame.activePlayerId ||
       unit.exhausted ||
-      unit.grounded
+      unit.grounded ||
+      getEffectivePower(
+        currentGame,
+        unit
+      ) <= 0
     ) {
       return false;
     }
@@ -2657,7 +2675,7 @@ export default function GreatGamePlayPage() {
       "brothers-tilt"
     ) {
       return (
-        alliedCharacters.length >
+        allCharacters.length >
         0
       );
     }
@@ -2780,12 +2798,22 @@ export default function GreatGamePlayPage() {
       const draggedHandCard =
         getDraggedHandCard();
 
-      return draggedHandCard
-        ? canDropHandCardOnUnit(
-            draggedHandCard,
-            unit
-          )
-        : false;
+      if (!draggedHandCard) {
+        return false;
+      }
+
+      if (
+        canDropHandCardOnBoard(
+          draggedHandCard
+        )
+      ) {
+        return false;
+      }
+
+      return canDropHandCardOnUnit(
+        draggedHandCard,
+        unit
+      );
     }
 
     if (pendingPlay) {
@@ -2817,29 +2845,36 @@ export default function GreatGamePlayPage() {
               "character"
           );
 
-        case "trial-by-combat":
+        case "trial-by-combat": {
+          if (
+            getGameCard(
+              unit.cardId
+            ).cardType !==
+              "character"
+          ) {
+            return false;
+          }
+
           if (
             !pendingPlay
               .firstTargetInstanceId
           ) {
-            return (
-              unit.ownerId ===
-                currentGame.activePlayerId &&
-              getGameCard(
-                unit.cardId
-              ).cardType ===
-                "character"
-            );
+            return true;
           }
 
-          return (
+          const firstTarget =
+            allUnits.find(
+              (candidate) =>
+                candidate.instanceId ===
+                pendingPlay.firstTargetInstanceId
+            );
+
+          return Boolean(
+            firstTarget &&
             unit.ownerId !==
-              currentGame.activePlayerId &&
-            getGameCard(
-              unit.cardId
-            ).cardType ===
-              "character"
+              firstTarget.ownerId
           );
+        }
 
         case "deploy":
         case "confirm":
@@ -2910,11 +2945,25 @@ export default function GreatGamePlayPage() {
         case "brothers-tilt":
           return "Choose a Character you control for The Brothers' Tilt.";
 
-        case "trial-by-combat":
-          return pendingPlay
-            .firstTargetInstanceId
-            ? "Trial by Combat — choose the enemy Character."
-            : "Trial by Combat — choose your Character first.";
+        case "trial-by-combat": {
+          if (
+            !pendingPlay.firstTargetInstanceId
+          ) {
+            return "Trial by Combat — choose either duelist first.";
+          }
+
+          const firstTarget =
+            allUnits.find(
+              (unit) =>
+                unit.instanceId ===
+                pendingPlay.firstTargetInstanceId
+            );
+
+          return firstTarget?.ownerId ===
+            currentGame.activePlayerId
+            ? "Trial by Combat — choose an enemy Character."
+            : "Trial by Combat — choose one of your Characters.";
+        }
       }
     }
 
@@ -3032,8 +3081,6 @@ export default function GreatGamePlayPage() {
         "trial-by-combat"
     ) {
       return (
-        unit.ownerId ===
-          currentGame.activePlayerId &&
         targetCard.cardType ===
           "character"
       );
@@ -3262,9 +3309,7 @@ export default function GreatGamePlayPage() {
       defenderInstanceId:
         defender?.instanceId,
       targetPlayerId:
-        defender
-          ? undefined
-          : opponentOf(attacker.ownerId),
+        opponentOf(attacker.ownerId),
       attackerDamageTaken: 0,
       defenderDamageTaken: 0,
       standingDamage:
@@ -3279,16 +3324,61 @@ export default function GreatGamePlayPage() {
   }
 
   function handleSelectedTargetHover(
-    defender: UnitState | null
+    hoveredUnit: UnitState | null
   ) {
+    if (!hoveredUnit) {
+      setCombatPreview(null);
+      return;
+    }
+
     if (
-      pendingConflict?.kind !==
-        "military" ||
-      !defender
+      pendingPlay?.kind ===
+        "trial-by-combat" &&
+      pendingPlay.firstTargetInstanceId
     ) {
+      const firstTarget =
+        allUnits.find(
+          (unit) =>
+            unit.instanceId ===
+            pendingPlay.firstTargetInstanceId
+        );
+
+      if (
+        !firstTarget ||
+        hoveredUnit.ownerId ===
+          firstTarget.ownerId ||
+        getGameCard(
+          hoveredUnit.cardId
+        ).cardType !==
+          "character"
+      ) {
+        setCombatPreview(null);
+        return;
+      }
+
+      const allied =
+        firstTarget.ownerId ===
+          currentGame.activePlayerId
+          ? firstTarget
+          : hoveredUnit;
+
+      const enemy =
+        firstTarget.ownerId ===
+          currentGame.activePlayerId
+          ? hoveredUnit
+          : firstTarget;
+
       setCombatPreview(
-        null
+        buildMilitaryCombatPreview(
+          allied,
+          enemy
+        )
       );
+      return;
+    }
+
+    if (!pendingConflict) {
+      setCombatPreview(null);
       return;
     }
 
@@ -3296,30 +3386,101 @@ export default function GreatGamePlayPage() {
       allUnits.find(
         (unit) =>
           unit.instanceId ===
-          pendingConflict
-            .attackerInstanceId
+          pendingConflict.attackerInstanceId
       );
 
+    if (!attacker) {
+      setCombatPreview(null);
+      return;
+    }
+
     if (
-      !attacker ||
-      !getMilitaryTargetOptions(
-        currentGame,
-        attacker.instanceId
-      ).unitInstanceIds.includes(
-        defender.instanceId
-      )
+      pendingConflict.kind ===
+        "military"
     ) {
+      const legal =
+        getMilitaryTargetOptions(
+          currentGame,
+          attacker.instanceId
+        ).unitInstanceIds.includes(
+          hoveredUnit.instanceId
+        );
+
       setCombatPreview(
-        null
+        legal
+          ? buildMilitaryCombatPreview(
+              attacker,
+              hoveredUnit
+            )
+          : null
+      );
+      return;
+    }
+
+    const legal =
+      pendingConflict.legalDefenders.includes(
+        hoveredUnit.instanceId
+      );
+
+    setCombatPreview(
+      legal
+        ? buildPoliticalPreview(
+            attacker,
+            hoveredUnit
+          )
+        : null
+    );
+  }
+
+  function handleSelectedStandingHover(
+    hovered: boolean
+  ) {
+    if (
+      !hovered ||
+      !pendingConflict
+    ) {
+      setCombatPreview(null);
+      return;
+    }
+
+    const attacker =
+      allUnits.find(
+        (unit) =>
+          unit.instanceId ===
+          pendingConflict.attackerInstanceId
+      );
+
+    if (!attacker) {
+      setCombatPreview(null);
+      return;
+    }
+
+    if (
+      pendingConflict.kind ===
+        "military"
+    ) {
+      const options =
+        getMilitaryTargetOptions(
+          currentGame,
+          attacker.instanceId
+        );
+
+      setCombatPreview(
+        options.canAttackStanding
+          ? buildMilitaryStandingPreview(
+              attacker
+            )
+          : null
       );
       return;
     }
 
     setCombatPreview(
-      buildMilitaryCombatPreview(
-        attacker,
-        defender
-      )
+      pendingConflict.unopposed
+        ? buildPoliticalPreview(
+            attacker
+          )
+        : null
     );
   }
 
@@ -3894,15 +4055,13 @@ export default function GreatGamePlayPage() {
       "trial-by-combat"
     ) {
       if (
-        unit.ownerId !==
-          currentGame.activePlayerId ||
         getGameCard(
           unit.cardId
         ).cardType !==
           "character"
       ) {
         setError(
-          "Begin Trial by Combat by dropping it onto one of your Characters."
+          "Begin Trial by Combat by dropping it onto a Character."
         );
 
         return;
@@ -4548,6 +4707,9 @@ export default function GreatGamePlayPage() {
               ? attackStandingPolitical
               : undefined
         }
+        onStandingHover={
+          handleSelectedStandingHover
+        }
         attackStandingDropTarget={
           Boolean(
             attackDrag &&
@@ -4709,12 +4871,14 @@ export default function GreatGamePlayPage() {
         canMilitaryAttack={(unit) =>
           !pendingPlay &&
           !pendingConflict &&
+          !draggingHandInstanceId &&
           !gameInteractionLocked &&
           canMilitaryAttack(unit)
         }
         canPoliticalAttack={(unit) =>
           !pendingPlay &&
           !pendingConflict &&
+          !draggingHandInstanceId &&
           !gameInteractionLocked &&
           canPoliticalAttack(unit)
         }
@@ -4738,6 +4902,9 @@ export default function GreatGamePlayPage() {
         }
         attackDrag={
           attackDrag
+        }
+        onUnitHover={
+          handleSelectedTargetHover
         }
         renderActions={(
           unit
@@ -5425,6 +5592,7 @@ function PlayerHeader({
   standingTarget = false,
   standingTargetType = null,
   onStandingClick,
+  onStandingHover,
   onEndTurn,
   endTurnDisabled = false,
   preserveEndTurnAppearance = false,
@@ -5442,6 +5610,9 @@ function PlayerHeader({
     | "political"
     | null;
   onStandingClick?: () => void;
+  onStandingHover?: (
+    hovered: boolean
+  ) => void;
   onEndTurn?: () => void;
   endTurnDisabled?: boolean;
   preserveEndTurnAppearance?: boolean;
@@ -5478,14 +5649,26 @@ function PlayerHeader({
             ? "true"
             : undefined
         }
+        type="button"
         disabled={
-          !standingTarget
+          !standingTarget &&
+          !attackStandingDropTarget
         }
-        onClick={
-          standingTarget
-            ? onStandingClick
-            : undefined
+        onPointerEnter={() =>
+          onStandingHover?.(true)
         }
+        onPointerLeave={() =>
+          onStandingHover?.(false)
+        }
+        onClick={(event) => {
+          event.stopPropagation();
+
+          if (
+            standingTarget
+          ) {
+            onStandingClick?.();
+          }
+        }}
       >
         <span>
           {playerName(
@@ -5525,14 +5708,27 @@ function PlayerHeader({
                 conflictPreview.noPoliticalDamage
                   ? styles.conflictValueNoDamage
                   : "",
+                !conflictPreview.noPoliticalDamage &&
+                conflictPreview.standingDamage > 0 &&
+                player.standing -
+                  conflictPreview.standingDamage <=
+                  0
+                  ? styles.conflictValueLethal
+                  : "",
               ]
                 .filter(Boolean)
                 .join(" ")}
               aria-hidden
             >
-              {conflictPreview.noPoliticalDamage
-                ? "?"
-                : `${conflictPreview.kind === "military" ? "⚔" : "♛"}${conflictPreview.standingDamage}`}
+              {!conflictPreview.noPoliticalDamage &&
+              conflictPreview.standingDamage > 0 &&
+              player.standing -
+                conflictPreview.standingDamage <=
+                0
+                ? "☠"
+                : conflictPreview.noPoliticalDamage
+                  ? "?"
+                  : `${conflictPreview.kind === "military" ? "⚔" : "♛"}${conflictPreview.standingDamage}`}
             </span>
           )}
       </button>
@@ -6100,8 +6296,14 @@ function AttackDragOverlay({
           styles.attackDragBadge
         }
         style={{
-          left: drag.x,
-          top: drag.y,
+          left:
+            drag.originX +
+            (drag.x - drag.originX) *
+              0.34,
+          top:
+            drag.originY +
+            (drag.y - drag.originY) *
+              0.34,
         }}
       >
         <strong>
@@ -6267,36 +6469,39 @@ function BoardUnit({
       return null;
     }
 
+    /*
+     * Dragons currently have only the Military action, so the whole card
+     * is their Military drag surface. Characters structurally have both
+     * buttons: a temporarily-disabled Political/Military action must NOT
+     * make the other action consume the whole card.
+     */
     if (
-      canMilitaryAttack &&
-      !canPoliticalAttack
+      card.cardType ===
+        "dragon"
     ) {
-      return "military";
-    }
-
-    if (
-      canPoliticalAttack &&
-      !canMilitaryAttack
-    ) {
-      return "political";
-    }
-
-    if (
-      !canMilitaryAttack &&
-      !canPoliticalAttack
-    ) {
-      return null;
+      return canMilitaryAttack
+        ? "military"
+        : null;
     }
 
     const rect =
       event.currentTarget
         .getBoundingClientRect();
 
-    return event.clientX <
+    const leftHalf =
+      event.clientX <
       rect.left +
-        rect.width / 2
-      ? "military"
-      : "political";
+        rect.width / 2;
+
+    if (leftHalf) {
+      return canMilitaryAttack
+        ? "military"
+        : null;
+    }
+
+    return canPoliticalAttack
+      ? "political"
+      : null;
   };
 
   return (
@@ -6342,14 +6547,10 @@ function BoardUnit({
           ? styles.attackHalfPoliticalHover
           : "",
 
-        canMilitaryAttack &&
-        !canPoliticalAttack
+        card.cardType ===
+          "dragon" &&
+        canMilitaryAttack
           ? styles.attackOnlyMilitary
-          : "",
-
-        canPoliticalAttack &&
-        !canMilitaryAttack
-          ? styles.attackOnlyPolitical
           : "",
 
         selected
@@ -6366,6 +6567,16 @@ function BoardUnit({
 
         illegalDuringAttackDrag
           ? styles.illegalAttackDragTarget
+          : "",
+
+        combatPreview &&
+        (
+          combatPreview.attackerInstanceId ===
+            unit.instanceId ||
+          combatPreview.defenderInstanceId ===
+            unit.instanceId
+        )
+          ? styles.unitWithCombatPreview
           : "",
       ]
         .filter(Boolean)
@@ -6489,7 +6700,9 @@ function BoardUnit({
         combatPreview.attackerInstanceId ===
           unit.instanceId &&
         combatPreview.kind === "military" &&
-        combatPreview.attackerDamageTaken > 0 && (
+        combatPreview.attackerDamageTaken > 0 &&
+        !combatPreview.attackerDies &&
+        !combatPreview.attackerGrounded && (
           <div
             className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
             aria-hidden
@@ -6501,7 +6714,9 @@ function BoardUnit({
       {combatPreview &&
         combatPreview.defenderInstanceId ===
           unit.instanceId &&
-        combatPreview.kind === "military" && (
+        combatPreview.kind === "military" &&
+        !combatPreview.defenderDies &&
+        !combatPreview.defenderGrounded && (
           <div
             className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
             aria-hidden
@@ -6547,7 +6762,7 @@ function BoardUnit({
           >
             {combatPreview.attackerDies
               ? "☠"
-              : "zzz…"}
+              : "Zzz"}
           </div>
         )}
 
@@ -6566,7 +6781,7 @@ function BoardUnit({
           >
             {combatPreview.defenderDies
               ? "☠"
-              : "zzz…"}
+              : "Zzz"}
           </div>
         )}
 

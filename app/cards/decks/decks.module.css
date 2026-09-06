@@ -435,3 +435,17 @@
 .filterOptions::-webkit-scrollbar-thumb:hover {
   background: rgba(214, 184, 108, 0.56);
 }
+
+
+/* v9: keep the shared navigation horizontally centered without colliding
+   with the Decks hero copy. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+}
+
+.hero :global(.greatGameNavPageCenter) {
+  justify-self: center;
+  margin-top: 1.15rem;
+}

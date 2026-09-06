@@ -81,10 +81,12 @@
 }
 
 .greatGameNavPageCenter {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  justify-self: center;
+  margin-inline: auto;
   z-index: 4;
 }
 
