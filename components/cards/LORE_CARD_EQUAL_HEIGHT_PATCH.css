@@ -1,0 +1,19 @@
+/* Add/merge these declarations into CharacterCard.module.css.
+   They keep every lore gallery card the same height even when keyword tags wrap. */
+.card {
+  aspect-ratio: 8 / 15;
+  height: auto;
+  min-height: 0;
+}
+
+.cardBody {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.keywords {
+  min-height: 2.65rem;
+  max-height: 2.65rem;
+  align-content: flex-start;
+  overflow: hidden;
+}

@@ -259,7 +259,7 @@ export default function DecksPage() {
           <h1>Deck Workshop</h1>
           <p>Study every card in the realm, assemble thirty-card decks, and keep each list ready for the wars to come.</p>
         </div>
-        <nav className="greatGameNav" aria-label="The Great Game">
+        <nav className="greatGameNav greatGameNavPageCenter" aria-label="The Great Game">
           <Link href="/cards">Cards</Link>
           <Link href="/cards/decks" className="greatGameNavActive">Decks</Link>
           <Link href="/cards/play">Play</Link>

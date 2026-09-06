@@ -75,6 +75,8 @@
    ──────────────────────────────────────────── */
 
 .headerRow {
+  position: relative;
+
   display: flex;
 
   align-items: flex-end;
@@ -448,18 +450,6 @@
 /* ────────────────────────────────────────────
    Card grid
    ──────────────────────────────────────────── */
-
-
-.cardMain {
-  aspect-ratio: 5 / 7;
-  height: auto;
-}
-
-.cardTags {
-  min-height: 1.55rem;
-  max-height: 1.55rem;
-  overflow: hidden;
-}
 
 .grid {
   display: grid;

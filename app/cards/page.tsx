@@ -162,7 +162,7 @@ export default function CardsPage() {
         </div>
 
         <nav
-          className="greatGameNav"
+          className="greatGameNav greatGameNavPageCenter"
           aria-label="The Great Game"
         >
           <Link

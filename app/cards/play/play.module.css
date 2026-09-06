@@ -4321,3 +4321,240 @@
 .attackHalfPoliticalHover::before {
   pointer-events: none !important;
 }
+
+
+/* ────────────────────────────────────────────
+   v8 interaction polish
+   ──────────────────────────────────────────── */
+
+/* The hand is a persistent viewport shelf; detail overlays center in the
+   remaining space above it instead of behind it. */
+.game {
+  --fixed-hand-reserved: 235px;
+}
+
+.handSection {
+  bottom: -7.1rem;
+}
+
+.handSection .sectionHeading {
+  display: none !important;
+}
+
+.selectedCardPreview,
+.unitDetailOverlay {
+  top: calc((100vh - var(--fixed-hand-reserved)) / 2);
+}
+
+.unitDetailOverlay {
+  max-height: calc(100vh - var(--fixed-hand-reserved) - 24px);
+}
+
+/* Drag intent is visual, but weaker than the explicit Military / Political
+   buttons. One legal conflict type means the whole card carries that tint. */
+.attackHalfMilitaryHover::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(177, 58, 46, 0.18) 0%,
+      rgba(177, 58, 46, 0.08) 48%,
+      transparent 64%
+    );
+}
+
+.attackHalfPoliticalHover::before {
+  background:
+    linear-gradient(
+      270deg,
+      rgba(173, 137, 50, 0.18) 0%,
+      rgba(173, 137, 50, 0.08) 48%,
+      transparent 64%
+    );
+}
+
+/* If there is only one attack type available, JS applies that same mode no
+   matter which part of the card is under the cursor; use a full-card wash. */
+.unitCard.attackHalfMilitaryHover:has(.unitActions button:nth-child(1):not(:disabled)) {
+  --attack-hover-ready: 1;
+}
+
+/* Legal-target selection for buffs/artifacts remains the ordinary gold/red
+   target treatment; attack-half overlays are suppressed during targeting. */
+.targetableUnit.attackHalfMilitaryHover::before,
+.targetableUnit.attackHalfPoliticalHover::before {
+  display: none;
+}
+
+/* Enemy units that cannot legally receive the dragged conflict are visibly
+   unavailable without changing game state. */
+.illegalAttackDragTarget {
+  opacity: 0.28;
+  filter: grayscale(0.72) saturate(0.42) brightness(0.72);
+  transform: scale(0.985);
+}
+
+.illegalAttackDragTarget::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+  pointer-events: none;
+  background: rgba(4, 4, 5, 0.16);
+}
+
+/* The source card's Active Effects tooltip must disappear as soon as the
+   pointer leaves the card while its pointer capture continues the drag. */
+.attackDraggingAway .unitEffectsTooltip,
+.attackDraggingAway:hover .unitEffectsTooltip {
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Combat previews live above artwork, stats, ability text, artifact badges,
+   and Active Effects UI. They are never selectable or interactive. */
+.combatValuePreview,
+.combatDeathPreview,
+.combatGroundPreview {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  z-index: 80;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.combatValuePreview {
+  transform: translate(-50%, -50%);
+  padding: 0.28rem 0.44rem;
+  border: 1px solid currentColor;
+  background: rgba(9, 6, 8, 0.90);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.62),
+    0 0 13px color-mix(in srgb, currentColor 34%, transparent);
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.combatValueMilitary {
+  color: #df6d5d;
+}
+
+.combatValuePolitical {
+  color: #dfbd54;
+}
+
+.combatValueNoDamage {
+  min-width: 1.8rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.combatDeathPreview {
+  top: 31%;
+  z-index: 82;
+  color: #e46e62;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.combatGroundPreview {
+  top: 31%;
+  z-index: 82;
+  width: auto;
+  height: auto;
+  padding: 0.28rem 0.46rem;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  border: 1px solid rgba(214, 184, 106, 0.5);
+  border-radius: 999px;
+  color: #d6b86a;
+  background: rgba(8, 6, 8, 0.9);
+  font-family: Georgia, serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(214, 184, 106, 0.45);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Standing receives the same pre-resolution language as board cards. */
+.standingBox {
+  position: relative;
+}
+
+.conflictValuePreview {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 12;
+  transform: translate(-50%, -50%);
+  min-width: 2.2rem;
+  padding: 0.3rem 0.42rem;
+  border: 1px solid currentColor;
+  background: rgba(8, 6, 8, 0.92);
+  box-shadow: 0 0 13px color-mix(in srgb, currentColor 32%, transparent);
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.conflictValueMilitary {
+  color: #df6d5d;
+}
+
+.conflictValuePolitical {
+  color: #dfbd54;
+}
+
+.conflictValueNoDamage {
+  font-size: 1.15rem;
+}
+
+/* Drag arrow always starts at the attacker's current top-center. It is fixed
+   to viewport coordinates, while JS refreshes that origin on every move. */
+.attackDragArrow {
+  transform-origin: 0 50%;
+}
+
+/* Avoid browser text-selection flashes during combat drag. */
+.attackDragLayer,
+.unitCard,
+.unitCard * {
+  -webkit-user-drag: none;
+}
+
+@media (max-height: 760px) {
+  .game {
+    --fixed-hand-reserved: 205px;
+  }
+}
+
+/* Single-mode units use the entire card as their attack drag affordance. */
+.attackOnlyMilitary.attackHalfMilitaryHover::before {
+  background: rgba(177, 58, 46, 0.11);
+  box-shadow:
+    inset 0 0 0 1px rgba(224, 112, 91, 0.22),
+    inset 0 0 30px rgba(177, 58, 46, 0.07);
+}
+
+.attackOnlyPolitical.attackHalfPoliticalHover::before {
+  background: rgba(173, 137, 50, 0.11);
+  box-shadow:
+    inset 0 0 0 1px rgba(225, 196, 100, 0.22),
+    inset 0 0 30px rgba(173, 137, 50, 0.07);
+}
+
+.standingBoxDragTarget {
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 184, 108, 0.32),
+    0 0 18px rgba(214, 184, 108, 0.12);
+}

@@ -146,15 +146,22 @@ type AttackDragState = {
   x: number;
   y: number;
   canDrop: boolean;
+  sourceHovered: boolean;
 };
 
 type CombatPreviewState = {
+  kind: AttackKind;
   attackerInstanceId: string;
-  defenderInstanceId: string;
+  defenderInstanceId?: string;
+  targetPlayerId?: PlayerId;
+  attackerDamageTaken: number;
+  defenderDamageTaken: number;
+  standingDamage: number;
   attackerDies: boolean;
   defenderDies: boolean;
   attackerGrounded: boolean;
   defenderGrounded: boolean;
+  noPoliticalDamage: boolean;
 };
 
 type PointerDropTarget =
@@ -908,6 +915,69 @@ export default function GreatGamePlayPage() {
     useState<CombatPreviewState | null>(
       null
     );
+
+  useEffect(() => {
+    const attackerInstanceId =
+      attackDrag?.attackerInstanceId;
+
+    if (!attackerInstanceId) {
+      return;
+    }
+
+    const syncAttackOrigin = () => {
+      const element =
+        document.querySelector<HTMLElement>(
+          `[data-unit-instance-id="${attackerInstanceId}"]`
+        );
+
+      if (!element) {
+        return;
+      }
+
+      const rect =
+        element.getBoundingClientRect();
+
+      setAttackDrag(
+        (current) =>
+          current &&
+          current.attackerInstanceId ===
+            attackerInstanceId
+            ? {
+                ...current,
+                originX:
+                  rect.left +
+                  rect.width / 2,
+                originY:
+                  rect.top,
+              }
+            : current
+      );
+    };
+
+    window.addEventListener(
+      "scroll",
+      syncAttackOrigin,
+      true
+    );
+    window.addEventListener(
+      "resize",
+      syncAttackOrigin
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        syncAttackOrigin,
+        true
+      );
+      window.removeEventListener(
+        "resize",
+        syncAttackOrigin
+      );
+    };
+  }, [
+    attackDrag?.attackerInstanceId,
+  ]);
 
   const [
     exitConfirm,
@@ -3107,7 +3177,7 @@ export default function GreatGamePlayPage() {
     );
   }
 
-  function buildCombatPreview(
+  function buildMilitaryCombatPreview(
     attacker: UnitState,
     defender: UnitState
   ): CombatPreviewState | null {
@@ -3120,10 +3190,16 @@ export default function GreatGamePlayPage() {
 
     return preview
       ? {
+          kind: "military",
           attackerInstanceId:
             attacker.instanceId,
           defenderInstanceId:
             defender.instanceId,
+          attackerDamageTaken:
+            preview.attackerDamageTaken,
+          defenderDamageTaken:
+            preview.defenderDamageTaken,
+          standingDamage: 0,
           attackerDies:
             preview.attackerDies,
           defenderDies:
@@ -3132,8 +3208,74 @@ export default function GreatGamePlayPage() {
             preview.attackerGrounded,
           defenderGrounded:
             preview.defenderGrounded,
+          noPoliticalDamage: false,
         }
       : null;
+  }
+
+  function buildMilitaryStandingPreview(
+    attacker: UnitState
+  ): CombatPreviewState {
+    return {
+      kind: "military",
+      attackerInstanceId:
+        attacker.instanceId,
+      targetPlayerId:
+        opponentOf(attacker.ownerId),
+      attackerDamageTaken: 0,
+      defenderDamageTaken: 0,
+      standingDamage:
+        getEffectivePower(
+          currentGame,
+          attacker
+        ),
+      attackerDies: false,
+      defenderDies: false,
+      attackerGrounded: false,
+      defenderGrounded: false,
+      noPoliticalDamage: false,
+    };
+  }
+
+  function buildPoliticalPreview(
+    attacker: UnitState,
+    defender?: UnitState | null
+  ): CombatPreviewState {
+    const attackerInfluence =
+      getEffectiveInfluence(
+        currentGame,
+        attacker
+      );
+
+    const difference = defender
+      ? attackerInfluence -
+        getEffectiveInfluence(
+          currentGame,
+          defender
+        )
+      : attackerInfluence;
+
+    return {
+      kind: "political",
+      attackerInstanceId:
+        attacker.instanceId,
+      defenderInstanceId:
+        defender?.instanceId,
+      targetPlayerId:
+        defender
+          ? undefined
+          : opponentOf(attacker.ownerId),
+      attackerDamageTaken: 0,
+      defenderDamageTaken: 0,
+      standingDamage:
+        Math.max(0, difference),
+      attackerDies: false,
+      defenderDies: false,
+      attackerGrounded: false,
+      defenderGrounded: false,
+      noPoliticalDamage:
+        difference <= 0,
+    };
   }
 
   function handleSelectedTargetHover(
@@ -3174,7 +3316,7 @@ export default function GreatGamePlayPage() {
     }
 
     setCombatPreview(
-      buildCombatPreview(
+      buildMilitaryCombatPreview(
         attacker,
         defender
       )
@@ -3228,8 +3370,7 @@ export default function GreatGamePlayPage() {
         rect.left +
         rect.width / 2,
       originY:
-        rect.top +
-        rect.height / 2,
+        rect.top,
       dragging: false,
     };
 
@@ -3295,6 +3436,29 @@ export default function GreatGamePlayPage() {
         event.clientY
       );
 
+    const standingHovered =
+      isStandingAtPoint(
+        event.clientX,
+        event.clientY
+      );
+
+    const attackerElement =
+      document.querySelector<HTMLElement>(
+        `[data-unit-instance-id="${unit.instanceId}"]`
+      );
+
+    const attackerRect =
+      attackerElement?.getBoundingClientRect();
+
+    const originX = attackerRect
+      ? attackerRect.left +
+        attackerRect.width / 2
+      : session.originX;
+
+    const originY = attackerRect
+      ? attackerRect.top
+      : session.originY;
+
     let canDrop =
       false;
 
@@ -3308,27 +3472,34 @@ export default function GreatGamePlayPage() {
           unit.instanceId
         );
 
-      canDrop =
-        target
-          ? options.unitInstanceIds.includes(
-              target.instanceId
-            )
-          : options.canAttackStanding &&
-            isStandingAtPoint(
-              event.clientX,
-              event.clientY
-            );
-
-      setCombatPreview(
+      const legalUnit =
         target &&
         options.unitInstanceIds.includes(
           target.instanceId
-        )
-          ? buildCombatPreview(
+        );
+
+      const legalStanding =
+        !target &&
+        standingHovered &&
+        options.canAttackStanding;
+
+      canDrop =
+        Boolean(
+          legalUnit ||
+          legalStanding
+        );
+
+      setCombatPreview(
+        legalUnit && target
+          ? buildMilitaryCombatPreview(
               unit,
               target
             )
-          : null
+          : legalStanding
+            ? buildMilitaryStandingPreview(
+                unit
+              )
+            : null
       );
     } else {
       const defense =
@@ -3337,19 +3508,34 @@ export default function GreatGamePlayPage() {
           unit.instanceId
         );
 
+      const legalUnit =
+        target &&
+        defense.defenderInstanceIds.includes(
+          target.instanceId
+        );
+
+      const legalStanding =
+        !target &&
+        standingHovered &&
+        defense.unopposed;
+
       canDrop =
-        target
-          ? defense.defenderInstanceIds.includes(
-              target.instanceId
-            )
-          : defense.unopposed &&
-            isStandingAtPoint(
-              event.clientX,
-              event.clientY
-            );
+        Boolean(
+          legalUnit ||
+          legalStanding
+        );
 
       setCombatPreview(
-        null
+        legalUnit && target
+          ? buildPoliticalPreview(
+              unit,
+              target
+            )
+          : legalStanding
+            ? buildPoliticalPreview(
+                unit
+              )
+            : null
       );
     }
 
@@ -3358,15 +3544,21 @@ export default function GreatGamePlayPage() {
         unit.instanceId,
       kind:
         session.kind,
-      originX:
-        session.originX,
-      originY:
-        session.originY,
+      originX,
+      originY,
       x:
         event.clientX,
       y:
         event.clientY,
       canDrop,
+      sourceHovered:
+        Boolean(
+          attackerRect &&
+          event.clientX >= attackerRect.left &&
+          event.clientX <= attackerRect.right &&
+          event.clientY >= attackerRect.top &&
+          event.clientY <= attackerRect.bottom
+        ),
     });
   }
 
@@ -4356,6 +4548,23 @@ export default function GreatGamePlayPage() {
               ? attackStandingPolitical
               : undefined
         }
+        attackStandingDropTarget={
+          Boolean(
+            attackDrag &&
+            (attackDrag.kind === "military"
+              ? getMilitaryTargetOptions(
+                  currentGame,
+                  attackDrag.attackerInstanceId
+                ).canAttackStanding
+              : getPoliticalDefenseOptions(
+                  currentGame,
+                  attackDrag.attackerInstanceId
+                ).unopposed)
+          )
+        }
+        conflictPreview={
+          combatPreview
+        }
       />
 
       {currentGame.pendingEffect
@@ -4439,7 +4648,6 @@ export default function GreatGamePlayPage() {
         selectedInstanceId={
           selectedAttacker
         }
-        attackStandingTarget
         combatPreview={
           combatPreview
         }
@@ -4498,11 +4706,17 @@ export default function GreatGamePlayPage() {
             : undefined
         }
         pointerDropBoard
-        canMilitaryAttack={
-          canMilitaryAttack
+        canMilitaryAttack={(unit) =>
+          !pendingPlay &&
+          !pendingConflict &&
+          !gameInteractionLocked &&
+          canMilitaryAttack(unit)
         }
-        canPoliticalAttack={
-          canPoliticalAttack
+        canPoliticalAttack={(unit) =>
+          !pendingPlay &&
+          !pendingConflict &&
+          !gameInteractionLocked &&
+          canPoliticalAttack(unit)
         }
         onAttackPointerDown={
           handleAttackPointerDown
@@ -4540,6 +4754,11 @@ export default function GreatGamePlayPage() {
                     gameInteractionLocked
                 )
               }
+              onPointerDown={(
+                event
+              ) =>
+                event.stopPropagation()
+              }
               onClick={(
                 event
               ) => {
@@ -4567,6 +4786,11 @@ export default function GreatGamePlayPage() {
                       pendingConflict ||
                       gameInteractionLocked
                   )
+                }
+                onPointerDown={(
+                  event
+                ) =>
+                  event.stopPropagation()
                 }
                 onClick={(
                   event
@@ -4622,28 +4846,6 @@ export default function GreatGamePlayPage() {
           styles.handSection
         }
       >
-        <div
-          className={
-            styles.sectionHeading
-          }
-        >
-          <div>
-            <div
-              className={
-                styles.sectionTitle
-              }
-            >
-              Your Hand
-            </div>
-
-            <small>
-              Click to inspect ·
-              drag to play
-            </small>
-          </div>
-
-        </div>
-
         <HorizontalHand
           fanned
           active
@@ -5228,6 +5430,8 @@ function PlayerHeader({
   preserveEndTurnAppearance = false,
   highlightEndTurn = false,
   previewCommandCost = null,
+  conflictPreview = null,
+  attackStandingDropTarget = false,
 }: {
   playerId: PlayerId;
   state: GameState;
@@ -5243,6 +5447,8 @@ function PlayerHeader({
   preserveEndTurnAppearance?: boolean;
   highlightEndTurn?: boolean;
   previewCommandCost?: number | null;
+  conflictPreview?: CombatPreviewState | null;
+  attackStandingDropTarget?: boolean;
 }) {
   const player =
     state.players[
@@ -5262,7 +5468,16 @@ function PlayerHeader({
           standingTarget
             ? styles.standingBoxTarget
             : ""
+        } ${
+          attackStandingDropTarget
+            ? styles.standingBoxDragTarget
+            : ""
         }`}
+        data-attack-standing-target={
+          attackStandingDropTarget
+            ? "true"
+            : undefined
+        }
         disabled={
           !standingTarget
         }
@@ -5296,6 +5511,30 @@ function PlayerHeader({
               : "♛ Claim"}
           </em>
         )}
+
+        {conflictPreview &&
+          conflictPreview.targetPlayerId ===
+            playerId && (
+            <span
+              className={[
+                styles.conflictValuePreview,
+                conflictPreview.kind ===
+                  "military"
+                  ? styles.conflictValueMilitary
+                  : styles.conflictValuePolitical,
+                conflictPreview.noPoliticalDamage
+                  ? styles.conflictValueNoDamage
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-hidden
+            >
+              {conflictPreview.noPoliticalDamage
+                ? "?"
+                : `${conflictPreview.kind === "military" ? "⚔" : "♛"}${conflictPreview.standingDamage}`}
+            </span>
+          )}
       </button>
 
       <div
@@ -5777,6 +6016,9 @@ function Board({
               combatPreview={
                 combatPreview
               }
+              attackDrag={
+                attackDrag
+              }
               attackDragging={
                 attackDrag
                   ?.attackerInstanceId ===
@@ -5895,6 +6137,7 @@ function BoardUnit({
   onAttackPointerCancel,
   suppressBoardClickRef,
   combatPreview,
+  attackDrag = null,
   attackDragging = false,
   onHover,
   actions,
@@ -5925,6 +6168,7 @@ function BoardUnit({
     current: boolean;
   };
   combatPreview?: CombatPreviewState | null;
+  attackDrag?: AttackDragState | null;
   attackDragging?: boolean;
   onHover?: (
     unit: UnitState | null
@@ -5980,9 +6224,92 @@ function BoardUnit({
     unit.modifiers.length > 0 ||
     Boolean(unit.attachedArtifactId);
 
+  const dragAttacker =
+    attackDrag
+      ? [
+          ...state.players.player1.board,
+          ...state.players.player2.board,
+        ].find(
+          (candidate) =>
+            candidate.instanceId ===
+            attackDrag.attackerInstanceId
+        ) ?? null
+      : null;
+
+  const illegalDuringAttackDrag =
+    Boolean(
+      attackDrag &&
+      dragAttacker &&
+      unit.ownerId !==
+        dragAttacker.ownerId &&
+      (attackDrag.kind === "military"
+        ? !getMilitaryTargetOptions(
+            state,
+            dragAttacker.instanceId
+          ).unitInstanceIds.includes(
+            unit.instanceId
+          )
+        : !getPoliticalDefenseOptions(
+            state,
+            dragAttacker.instanceId
+          ).defenderInstanceIds.includes(
+            unit.instanceId
+          ))
+    );
+
+  const attackModeForPointer = (
+    event: ReactPointerEvent<HTMLDivElement>
+  ): AttackKind | null => {
+    if (
+      targetable ||
+      !onAttackPointerDown
+    ) {
+      return null;
+    }
+
+    if (
+      canMilitaryAttack &&
+      !canPoliticalAttack
+    ) {
+      return "military";
+    }
+
+    if (
+      canPoliticalAttack &&
+      !canMilitaryAttack
+    ) {
+      return "political";
+    }
+
+    if (
+      !canMilitaryAttack &&
+      !canPoliticalAttack
+    ) {
+      return null;
+    }
+
+    const rect =
+      event.currentTarget
+        .getBoundingClientRect();
+
+    return event.clientX <
+      rect.left +
+        rect.width / 2
+      ? "military"
+      : "political";
+  };
+
   return (
     <div
-      className={styles.unitCardWrapper}
+      className={[
+        styles.unitCardWrapper,
+        attackDragging &&
+        !attackDrag?.sourceHovered
+          ? styles.attackDraggingAway
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       data-game-card="true"
     >
     <div
@@ -6015,6 +6342,16 @@ function BoardUnit({
           ? styles.attackHalfPoliticalHover
           : "",
 
+        canMilitaryAttack &&
+        !canPoliticalAttack
+          ? styles.attackOnlyMilitary
+          : "",
+
+        canPoliticalAttack &&
+        !canMilitaryAttack
+          ? styles.attackOnlyPolitical
+          : "",
+
         selected
           ? styles.selectedUnit
           : "",
@@ -6025,6 +6362,10 @@ function BoardUnit({
 
         unit.grounded
           ? styles.groundedUnit
+          : "",
+
+        illegalDuringAttackDrag
+          ? styles.illegalAttackDragTarget
           : "",
       ]
         .filter(Boolean)
@@ -6049,40 +6390,18 @@ function BoardUnit({
           return;
         }
 
-        if (
-          !onAttackPointerDown
-        ) {
-          return;
-        }
-
-        const rect =
-          event.currentTarget
-            .getBoundingClientRect();
-
-        const leftHalf =
-          event.clientX <
-          rect.left +
-            rect.width / 2;
-
-        if (
-          leftHalf &&
-          canMilitaryAttack
-        ) {
-          setAttackHoverKind(
-            "military"
-          );
-        } else if (
-          !leftHalf &&
-          canPoliticalAttack
-        ) {
-          setAttackHoverKind(
-            "political"
-          );
-        } else {
+        if (targetable) {
           setAttackHoverKind(
             null
           );
+          return;
         }
+
+        setAttackHoverKind(
+          attackModeForPointer(
+            event
+          )
+        );
       }}
       onPointerEnter={() =>
         onHover?.(
@@ -6105,35 +6424,25 @@ function BoardUnit({
       onPointerDown={(
         event
       ) => {
+        const targetElement =
+          event.target as HTMLElement;
+
         if (
-          targetable ||
-          !onAttackPointerDown
+          targetElement.closest(
+            "button, [role='button'], [data-no-attack-drag='true']"
+          )
         ) {
           return;
         }
 
-        const rect =
-          event.currentTarget
-            .getBoundingClientRect();
-
-        const leftHalf =
-          event.clientX <
-          rect.left +
-            rect.width / 2;
-
-        const kind:
-          AttackKind =
-          leftHalf
-            ? "military"
-            : "political";
+        const kind =
+          attackModeForPointer(
+            event
+          );
 
         if (
-          (kind ===
-            "military" &&
-            !canMilitaryAttack) ||
-          (kind ===
-            "political" &&
-            !canPoliticalAttack)
+          !kind ||
+          !onAttackPointerDown
         ) {
           return;
         }
@@ -6179,6 +6488,53 @@ function BoardUnit({
       {combatPreview &&
         combatPreview.attackerInstanceId ===
           unit.instanceId &&
+        combatPreview.kind === "military" &&
+        combatPreview.attackerDamageTaken > 0 && (
+          <div
+            className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
+            aria-hidden
+          >
+            ⚔{combatPreview.attackerDamageTaken}
+          </div>
+        )}
+
+      {combatPreview &&
+        combatPreview.defenderInstanceId ===
+          unit.instanceId &&
+        combatPreview.kind === "military" && (
+          <div
+            className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
+            aria-hidden
+          >
+            ⚔{combatPreview.defenderDamageTaken}
+          </div>
+        )}
+
+      {combatPreview &&
+        combatPreview.defenderInstanceId ===
+          unit.instanceId &&
+        combatPreview.kind === "political" && (
+          <div
+            className={[
+              styles.combatValuePreview,
+              styles.combatValuePolitical,
+              combatPreview.noPoliticalDamage
+                ? styles.combatValueNoDamage
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-hidden
+          >
+            {combatPreview.noPoliticalDamage
+              ? "?"
+              : `♛${combatPreview.standingDamage}`}
+          </div>
+        )}
+
+      {combatPreview &&
+        combatPreview.attackerInstanceId ===
+          unit.instanceId &&
         (combatPreview.attackerDies ||
           combatPreview.attackerGrounded) && (
           <div
@@ -6191,7 +6547,7 @@ function BoardUnit({
           >
             {combatPreview.attackerDies
               ? "☠"
-              : "⌄"}
+              : "zzz…"}
           </div>
         )}
 
@@ -6210,7 +6566,7 @@ function BoardUnit({
           >
             {combatPreview.defenderDies
               ? "☠"
-              : "⌄"}
+              : "zzz…"}
           </div>
         )}
 
