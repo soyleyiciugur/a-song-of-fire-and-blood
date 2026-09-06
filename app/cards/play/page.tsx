@@ -3,7 +3,9 @@
 import Link from "next/link";
 
 import {
+  Fragment,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -113,6 +115,7 @@ type DragCursorState = {
   y: number;
   canDrop: boolean;
   requiresTarget: boolean;
+  boardIndex?: number;
 };
 
 type PointerDragSession = {
@@ -197,6 +200,7 @@ type ActionPreviewState = {
 type PointerDropTarget =
   | {
       kind: "board";
+      boardIndex?: number;
     }
   | {
       kind: "unit";
@@ -297,27 +301,86 @@ const TIER_MAP = new Map<
   ],
 ]);
 
-const TRAIT_RULES: Partial<
-  Record<Trait, string>
+type InnkeeperVoice =
+  | "neutral"
+  | "courtly"
+  | "stoic";
+
+// Change this one constant later when the Alekeeper picker is wired into the UI.
+// For now the flattering old courtier is the default voice.
+const DEFAULT_INNKEEPER_VOICE: InnkeeperVoice =
+  "courtly";
+
+const TRAIT_RULES_BY_VOICE: Record<
+  InnkeeperVoice,
+  Partial<Record<Trait, string>>
 > = {
-  dragonrider:
-    "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is under your control.",
-  guard:
-    "Enemy units must face Ready Guard units before attacking other Military targets or Standing.",
-  intrigue:
-    "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
-  swift:
-    "This unit may initiate a Military Conflict on the turn it is deployed.",
-  schemer:
-    "This Character may initiate a Political Conflict on the turn it is deployed.",
-  challenge:
-    "This unit may ignore Guard when choosing a Military target.",
-  confront:
-    "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
+  neutral: {
+    dragonrider:
+      "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is ruled by the same Ruler.",
+    guard:
+      "Enemy Units must face Ready Guard Units before attacking other legal Military targets or Standing.",
+    intrigue:
+      "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
+    swift:
+      "This Unit may initiate a Military Conflict on the turn it is deployed.",
+    schemer:
+      "This Character may initiate a Political Conflict on the turn it is deployed.",
+    challenge:
+      "This Unit may ignore Guard when choosing a Military target.",
+    confront:
+      "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
+  },
+  courtly: {
+    dragonrider:
+      "A rare bond, my liege. Keep rider and Dragon beneath the same Ruler, and the Dragon's Bond discount is honored.",
+    guard:
+      "Your faithful shield, my liege. A Ready Guard must be faced before lesser Military targets—or your Standing—may be attacked.",
+    intrigue:
+      "A watchful courtier, my liege. While Ready, Intrigue compels ordinary Political attackers to answer this Character first.",
+    swift:
+      "No need to keep them waiting, my liege. Swift Units may begin a Military Conflict the very turn they are deployed.",
+    schemer:
+      "Already whispering before the chair is warm, my liege. A Schemer may begin a Political Conflict on the turn it is deployed.",
+    challenge:
+      "A bold soul, my liege. Challenge permits this Unit to ignore Guard when choosing a Military target.",
+    confront:
+      "Direct and most useful, my liege. Confront lets this Character ignore Intrigue priority and choose any Ready enemy Character to defend.",
+  },
+  stoic: {
+    dragonrider:
+      "Rider and Dragon share a bond. Same Ruler, Bond discount applies. Simple.",
+    guard:
+      "Ready Guard stands in the way. Deal with it before other Military targets or Standing.",
+    intrigue:
+      "Ready Intrigue controls the Political defense. Ordinary schemes answer to it first.",
+    swift:
+      "Swift fights immediately. Deployment sickness does not stop its Military Conflict.",
+    schemer:
+      "Schemer plots immediately. It may start a Political Conflict on deployment turn.",
+    challenge:
+      "Challenge ignores Guard when choosing a Military target.",
+    confront:
+      "Confront ignores Intrigue priority. Pick any Ready enemy Character to defend.",
+  },
 };
 
-const UNIQUE_RULE =
-  "Unique — You cannot play another copy of this card while one is already in play under your control.";
+const UNIQUE_RULES: Record<InnkeeperVoice, string> = {
+  neutral:
+    "Unique — A Ruler cannot play another copy of this card while one is already in play under that Ruler.",
+  courtly:
+    "Unique, my liege. One such presence is distinction enough; a Ruler cannot play another copy while one already stands beneath their rule.",
+  stoic:
+    "Unique. One copy per Ruler in play. Another cannot be played until it leaves.",
+};
+
+function traitRule(trait: Trait): string | undefined {
+  return TRAIT_RULES_BY_VOICE[DEFAULT_INNKEEPER_VOICE][trait];
+}
+
+function uniqueRule(): string {
+  return UNIQUE_RULES[DEFAULT_INNKEEPER_VOICE];
+}
 
 function tierStyle(
   card: GameCard
@@ -565,10 +628,10 @@ function modifierDescription(
     ? "Permanent"
     : modifier.expiresAt ===
         "start-of-controller-next-turn"
-      ? "Until the start of its controller's next turn"
+      ? "Until the start of its Ruler's next turn"
       : modifier.expiresAt ===
           "end-of-controller-turn"
-        ? "Until the end of its controller's turn"
+        ? "Until the end of its Ruler's turn"
         : "Until the end of the current turn";
 
   return `${changes.join(", ") || "Ongoing effect"} · ${duration}`;
@@ -2119,11 +2182,7 @@ export default function GreatGamePlayPage() {
       ) {
         if (
           unit.instanceId ===
-            effect.sourceUnitInstanceId ||
-          getGameCard(
-            unit.cardId
-          ).cardType !==
-            "character"
+            effect.sourceUnitInstanceId
         ) {
           return;
         }
@@ -2145,11 +2204,7 @@ export default function GreatGamePlayPage() {
       ) {
         if (
           unit.instanceId ===
-            effect.sourceUnitInstanceId ||
-          getGameCard(
-            unit.cardId
-          ).cardType !==
-            "character"
+            effect.sourceUnitInstanceId
         ) {
           return;
         }
@@ -2825,11 +2880,7 @@ export default function GreatGamePlayPage() {
       ) {
         return (
           unit.instanceId !==
-            effect.sourceUnitInstanceId &&
-          getGameCard(
-            unit.cardId
-          ).cardType ===
-            "character"
+            effect.sourceUnitInstanceId
         );
       }
 
@@ -2964,7 +3015,7 @@ export default function GreatGamePlayPage() {
           return "ARRIVAL — Veiled Sight: choose a card from the revealed enemy hand.";
 
         case "iron-wrath":
-          return "ARRIVAL — Iron Wrath: choose another Character.";
+          return "ARRIVAL — Iron Wrath: choose another Unit.";
       }
     }
 
@@ -3151,14 +3202,16 @@ export default function GreatGamePlayPage() {
     y: number
   ): PointerDropTarget | null {
     const element =
-      document.elementFromPoint(
-        x,
-        y
-      );
+      document.elementFromPoint(x, y);
 
     if (!element) {
       return null;
     }
+
+    const dragged = getDraggedHandCard();
+    const draggedCard = dragged
+      ? getGameCard(dragged.cardId)
+      : null;
 
     const unitElement =
       element.closest<HTMLElement>(
@@ -3166,8 +3219,7 @@ export default function GreatGamePlayPage() {
       );
 
     const unitInstanceId =
-      unitElement?.dataset
-        .unitInstanceId;
+      unitElement?.dataset.unitInstanceId;
 
     if (unitInstanceId) {
       const unit = [
@@ -3175,11 +3227,30 @@ export default function GreatGamePlayPage() {
         ...enemyPlayer.board,
       ].find(
         (candidate) =>
-          candidate.instanceId ===
-          unitInstanceId
+          candidate.instanceId === unitInstanceId
       );
 
       if (unit) {
+        // Unit cards dragged over our own board are placement gestures,
+        // not target gestures. Drop on the left/right half of a card to
+        // insert before/after it, Hearthstone-style.
+        if (
+          draggedCard &&
+          isUnitCard(draggedCard) &&
+          unit.ownerId === currentGame.activePlayerId &&
+          unitElement
+        ) {
+          const unitIndex = activePlayer.board.findIndex(
+            (candidate) => candidate.instanceId === unit.instanceId
+          );
+          const rect = unitElement.getBoundingClientRect();
+          const after = x > rect.left + rect.width / 2;
+          return {
+            kind: "board",
+            boardIndex: Math.max(0, unitIndex + (after ? 1 : 0)),
+          };
+        }
+
         return {
           kind: "unit",
           unit,
@@ -3187,13 +3258,34 @@ export default function GreatGamePlayPage() {
       }
     }
 
-    if (
-      element.closest(
+    const boardElement =
+      element.closest<HTMLElement>(
         '[data-card-drop-board="true"]'
-      )
-    ) {
+      );
+
+    if (boardElement) {
+      let boardIndex = activePlayer.board.length;
+
+      if (draggedCard && isUnitCard(draggedCard)) {
+        const unitEls = Array.from(
+          boardElement.querySelectorAll<HTMLElement>(
+            '[data-unit-instance-id]'
+          )
+        );
+
+        boardIndex = unitEls.findIndex((node) => {
+          const rect = node.getBoundingClientRect();
+          return x < rect.left + rect.width / 2;
+        });
+
+        if (boardIndex < 0) {
+          boardIndex = unitEls.length;
+        }
+      }
+
       return {
         kind: "board",
+        boardIndex,
       };
     }
 
@@ -4103,6 +4195,10 @@ export default function GreatGamePlayPage() {
         !canDropHandCardOnBoard(
           handCard
         ),
+      boardIndex:
+        target?.kind === "board"
+          ? target.boardIndex
+          : undefined,
     });
   }
 
@@ -4182,18 +4278,21 @@ export default function GreatGamePlayPage() {
   }
 
   function playPointerCardOnBoard(
-    handCard: HandCardState
+    handCard: HandCardState,
+    boardIndex?: number
   ) {
     dispatch({
       type: "play-card",
       handInstanceId:
         handCard.instanceId,
-    });
+      boardIndex,
+    } as GameAction);
   }
 
   function playPointerCardOnUnit(
     handCard: HandCardState,
-    unit: UnitState
+    unit: UnitState,
+    boardIndex?: number
   ) {
     const card = getGameCard(
       handCard.cardId
@@ -4204,13 +4303,10 @@ export default function GreatGamePlayPage() {
         handCard
       )
     ) {
-      dispatch({
-        type:
-          "play-card",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
+      playPointerCardOnBoard(
+        handCard,
+        boardIndex
+      );
 
       return;
     }
@@ -4351,7 +4447,8 @@ export default function GreatGamePlayPage() {
       target?.kind === "board"
     ) {
       playPointerCardOnBoard(
-        handCard
+        handCard,
+        target.boardIndex
       );
     } else {
       setError(
@@ -4693,74 +4790,55 @@ export default function GreatGamePlayPage() {
         );
       })()}
 
-      {dragCursor && (
-        <div
-          className={`${styles.dragCursorOverlay} ${
-            dragCursor.canDrop
-              ? styles.dragCursorCanDrop
-              : ""
-          }`}
-          style={{
-            left: dragCursor.x,
-            top: dragCursor.y,
-          }}
-          aria-hidden
-        >
-          <svg
-            viewBox="0 0 40 40"
-            aria-hidden
-          >
-            <path
-              d="M3.5 3.5 9 5.2 25.4 21.6l-3.8 3.8L5.2 9Z"
-              fill="currentColor"
-              stroke="#130b08"
-              strokeWidth="1.4"
-              strokeLinejoin="round"
-            />
+      {dragCursor &&
+        draggingHandInstanceId &&
+        (() => {
+          const handCard = activePlayer.hand.find(
+            (candidate) =>
+              candidate.instanceId === draggingHandInstanceId
+          );
+          if (!handCard) return null;
+          const card = getGameCard(handCard.cardId);
+          const cost = getEffectiveCost(
+            currentGame,
+            activePlayerId,
+            handCard
+          );
 
-            <path
-              d="m7.2 6.8 15 15-1.25 1.25Z"
-              fill="#fff1bb"
-              opacity="0.5"
-            />
-
-            <path
-              d="m16.8 27.7 11-11 2.5 2.5-11 11Z"
-              fill="#9b7130"
-              stroke="#130b08"
-              strokeWidth="1.4"
-              strokeLinejoin="round"
-            />
-
-            <path
-              d="m24 26.2 7.8 7.8"
-              fill="none"
-              stroke="#7b4f28"
-              strokeWidth="4.2"
-              strokeLinecap="round"
-            />
-
-            <circle
-              cx="33.6"
-              cy="35.8"
-              r="2.6"
-              fill="currentColor"
-              stroke="#130b08"
-              strokeWidth="1.3"
-            />
-          </svg>
-
-          <small>
-            {dragCursor.canDrop
-              ? dragCursor.requiresTarget
-                ? "Release on target"
-                : "Release to play"
-              : dragCursor.requiresTarget
-                ? "Choose target"
-                : "Move to your board"}
-          </small>
-        </div>
-      )}
+          return createPortal(
+            <div
+              className={[
+                styles.dragCardOverlay,
+                dragCursor.canDrop
+                  ? styles.dragCardCanDrop
+                  : styles.dragCardCannotDrop,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={{
+                left: dragCursor.x,
+                top: dragCursor.y,
+              }}
+              aria-hidden
+            >
+              <div
+                className={styles.dragGhostCard}
+                style={tierStyle(card)}
+              >
+                <CardArtwork
+                  card={card}
+                  className={styles.fullCardArtwork}
+                />
+                <CardChrome card={card} cost={cost} />
+                <CardInfoPanel
+                  card={card}
+                  showDescription={false}
+                />
+              </div>
+            </div>,
+            document.body
+          );
+        })()}
 
       <header
         className={
@@ -5086,6 +5164,12 @@ export default function GreatGamePlayPage() {
             : undefined
         }
         pointerDropBoard
+        dropIndex={
+          draggingHandInstanceId &&
+          dragCursor?.canDrop
+            ? dragCursor.boardIndex ?? null
+            : null
+        }
         canMilitaryAttack={(unit) =>
           !pendingPlay &&
           !pendingConflict &&
@@ -5745,7 +5829,6 @@ function MulliganScreen({
                   }
                 />
 
-                <CardSparkles />
 
                 <CardInfoPanel
                   card={
@@ -6323,6 +6406,7 @@ function Board({
   canReceivePlay = false,
   onBoardClick,
   pointerDropBoard = false,
+  dropIndex = null,
   attackStandingTarget = false,
   canMilitaryAttack,
   canPoliticalAttack,
@@ -6357,6 +6441,7 @@ function Board({
   canReceivePlay?: boolean;
   onBoardClick?: () => void;
   pointerDropBoard?: boolean;
+  dropIndex?: number | null;
   attackStandingTarget?: boolean;
   canMilitaryAttack?: (
     unit: UnitState
@@ -6388,6 +6473,47 @@ function Board({
     unit: UnitState | null
   ) => void;
 }) {
+  const boardRef =
+    useRef<HTMLDivElement | null>(null);
+
+  const previousRectsRef =
+    useRef<Map<string, DOMRect>>(new Map());
+
+  useLayoutEffect(() => {
+    const board = boardRef.current;
+    if (!board) return;
+
+    const nextRects = new Map<string, DOMRect>();
+    const nodes = Array.from(
+      board.querySelectorAll<HTMLElement>(
+        '[data-unit-instance-id]'
+      )
+    );
+
+    for (const node of nodes) {
+      const id = node.dataset.unitInstanceId;
+      if (!id) continue;
+      const next = node.getBoundingClientRect();
+      nextRects.set(id, next);
+      const previous = previousRectsRef.current.get(id);
+      if (!previous) continue;
+
+      const dx = previous.left - next.left;
+      const dy = previous.top - next.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) continue;
+
+      node.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px)` },
+          { transform: 'translate(0, 0)' },
+        ],
+        { duration: 260, easing: 'cubic-bezier(.2,.78,.2,1)' }
+      );
+    }
+
+    previousRectsRef.current = nextRects;
+  }, [units.map((unit) => unit.instanceId).join('|'), dropIndex]);
+
   return (
     <section
       className={
@@ -6416,6 +6542,7 @@ function Board({
       </div>
 
       <div
+        ref={boardRef}
         className={`${styles.board} ${
           canReceivePlay
             ? styles.playableBoard
@@ -6451,7 +6578,14 @@ function Board({
         )}
 
         {units.map(
-          (unit) => (
+          (unit, index) => (
+            <Fragment key={unit.instanceId}>
+              {dropIndex === index && (
+                <div
+                  className={styles.boardDropSlot}
+                  aria-hidden
+                />
+              )}
             <BoardUnit
               key={
                 unit.instanceId
@@ -6523,7 +6657,14 @@ function Board({
                 )
               }
             />
+            </Fragment>
           )
+        )}
+        {dropIndex === units.length && (
+          <div
+            className={styles.boardDropSlot}
+            aria-hidden
+          />
         )}
       </div>
     </section>
@@ -7162,7 +7303,6 @@ function BoardUnit({
         card={card}
       />
 
-      <CardSparkles />
 
       <div
         className={
@@ -7408,7 +7548,6 @@ function HandCard({
         cost={cost}
       />
 
-      <CardSparkles />
 
       <CardInfoPanel
         card={card}
@@ -7455,7 +7594,6 @@ function HandCardVisual({
         cost={cost}
       />
 
-      <CardSparkles />
 
       <CardInfoPanel
         card={card}
@@ -7632,7 +7770,7 @@ function UniqueDiamond({
             }}
           >
             {detailed
-              ? UNIQUE_RULE
+              ? uniqueRule()
               : "Unique"}
           </span>,
           document.body
@@ -8107,9 +8245,7 @@ function CardInfoPanel({
           <>
           {traits.map((trait) => {
             const rule =
-              TRAIT_RULES[
-                trait
-              ];
+              traitRule(trait);
 
             const interactive =
               showTraitTooltips &&
@@ -8303,7 +8439,6 @@ function SelectedCardPreview({
         detailed
       />
 
-      <CardSparkles />
 
         <CardInfoPanel
           card={card}
@@ -8463,7 +8598,6 @@ function UnitDetailOverlay({
           card={card}
           detailed
         />
-        <CardSparkles />
 
         <CardInfoPanel
           card={card}

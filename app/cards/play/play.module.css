@@ -5529,3 +5529,102 @@
   padding-top: 0.18rem;
   padding-bottom: 0;
 }
+
+
+/* ────────────────────────────────────────────
+   v19 hand-to-board placement + drag polish
+   ──────────────────────────────────────────── */
+
+/* The dragged card itself follows the pointer, Hearthstone-style. */
+.dragCardOverlay {
+  position: fixed;
+  z-index: 1200;
+  width: 7.1rem;
+  aspect-ratio: 5 / 7;
+  transform: translate(-50%, -52%) scale(0.78) rotate(-1.8deg);
+  transform-origin: center;
+  pointer-events: none;
+  will-change: left, top, transform, filter;
+  transition:
+    transform 90ms ease,
+    filter 90ms ease;
+}
+
+.dragGhostCard {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--tier-color, #8b1e2b);
+  background: #0e0b0e;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.68),
+    0 -4px 20px color-mix(in srgb, var(--tier-color, #8b1e2b) 52%, transparent),
+    0 0 28px color-mix(in srgb, var(--tier-color, #8b1e2b) 22%, transparent);
+  isolation: isolate;
+}
+
+.dragCardCanDrop {
+  transform: translate(-50%, -56%) scale(0.82) rotate(1deg);
+  filter: brightness(1.08) saturate(1.08);
+}
+
+.dragCardCannotDrop {
+  transform: translate(-50%, -50%) scale(0.72) rotate(-2.5deg);
+  filter: brightness(0.72) saturate(0.65);
+}
+
+/* A real board gap opens where the card will land. Existing cards slide aside. */
+.boardDropSlot {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 5 / 7;
+  border: 1px dashed rgba(212, 175, 55, 0.46);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.065),
+      rgba(212, 175, 55, 0.015)
+    );
+  box-shadow:
+    inset 0 0 24px rgba(212, 175, 55, 0.055),
+    0 0 18px rgba(212, 175, 55, 0.06);
+  animation: boardDropSlotIn 120ms ease-out both;
+}
+
+@keyframes boardDropSlotIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* FLIP animation is applied by Board; this keeps hover/transient transforms smooth too. */
+.unitCard {
+  transition:
+    box-shadow 160ms ease,
+    filter 160ms ease,
+    opacity 160ms ease;
+}
+
+/* Unique diamond must never move on hover; only its light changes. */
+.uniqueMark,
+.uniqueMark:hover,
+.uniqueMark:focus-visible {
+  transform: none !important;
+}
+
+.uniqueMark:hover,
+.uniqueMark:focus-visible {
+  filter: brightness(1.18);
+}
+
+/* Match the board death/replace indicator: center the X over the artwork, not the full card. */
+.mulliganReplaceX {
+  top: 31% !important;
+  transform: translate(-50%, -50%) rotate(-8deg);
+}

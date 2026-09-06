@@ -1590,7 +1590,7 @@ function resolvePendingEffectMutable(
         Boolean(
           action.targetInstanceId
         ),
-        "Iron Wrath requires another Character."
+        "Iron Wrath requires another Unit."
       );
 
       const target =
@@ -1607,15 +1607,7 @@ function resolvePendingEffectMutable(
       assertRule(
         target!.instanceId !==
           source!.instanceId,
-        "Iron Wrath must target another Character."
-      );
-
-      assertRule(
-        getGameCard(
-          target!.cardId
-        ).cardType ===
-          "character",
-        "Iron Wrath must target a Character."
+        "Iron Wrath must target another Unit."
       );
 
       const result =
@@ -2315,10 +2307,16 @@ function resolveEventMutable(
     const unitIds = [
       ...state.players.player1.board,
       ...state.players.player2.board,
-    ].map(
-      (unit) =>
-        unit.instanceId
-    );
+    ]
+      .filter(
+        (unit) =>
+          getGameCard(unit.cardId).cardType ===
+          "character"
+      )
+      .map(
+        (unit) =>
+          unit.instanceId
+      );
 
     for (
       const instanceId of
@@ -2747,7 +2745,24 @@ function playCardMutable(
       flags: {},
     };
 
-    player.board.push(
+    const requestedBoardIndex =
+      (action as typeof action & { boardIndex?: number })
+        .boardIndex;
+
+    const boardIndex =
+      typeof requestedBoardIndex === "number"
+        ? Math.max(
+            0,
+            Math.min(
+              player.board.length,
+              Math.trunc(requestedBoardIndex)
+            )
+          )
+        : player.board.length;
+
+    player.board.splice(
+      boardIndex,
+      0,
       unit
     );
 
