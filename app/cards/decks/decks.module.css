@@ -622,7 +622,7 @@
 
 .modalTraits > span,
 .uniqueMark,
-[data-rule-tooltip-trigger="true"] {
+.page :global([data-rule-tooltip-trigger="true"]) {
   cursor: var(--realm-help-cursor) !important;
 }
 

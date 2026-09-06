@@ -2461,13 +2461,22 @@
 }
 
 .exhaustedUnit {
-  opacity: 0.42;
+  /* Do not dim/filter the whole moving card node. Parent opacity/filter can
+     create a separate compositing layer and briefly disappear while the
+     placement wrapper is rapidly transformed. Keep the card itself stable
+     and render exhaustion as a non-interactive visual veil instead. */
+  opacity: 1;
+  filter: none;
+}
 
-  filter:
-    grayscale(0.92)
-    saturate(0.18)
-    brightness(0.72)
-    contrast(0.88);
+.exhaustedUnit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 58;
+  pointer-events: none;
+  background: rgba(5, 5, 7, 0.47);
+  backdrop-filter: grayscale(0.9) saturate(0.2) brightness(0.76);
 }
 
 .groundedUnit {
@@ -4641,6 +4650,10 @@
   filter: none;
 }
 
+.unitWithCombatPreview.exhaustedUnit::before {
+  display: none;
+}
+
 .unitWithCombatPreview.exhaustedUnit::after,
 .unitWithCombatPreview.groundedUnit::after {
   content: "";
@@ -5675,7 +5688,7 @@
 
 .traits .traitTooltipTrigger,
 .uniqueMark,
-[data-rule-tooltip-trigger="true"] {
+.game :global([data-rule-tooltip-trigger="true"]) {
   cursor: var(--realm-help-cursor) !important;
 }
 
