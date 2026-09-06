@@ -1113,17 +1113,21 @@
 
 .boardSection {
   margin-bottom: 1rem;
-
-  /* Realm label lives beside the board rather than above it. */
-  display: grid;
-  grid-template-columns: 86px minmax(0, 1fr);
-  column-gap: 0.8rem;
-  align-items: center;
+  position: relative;
 }
 
+/* Keep the board at its original full width. Realm labels are taken out of
+   normal flow and sit in the gutter to the left, vertically centered against
+   their own board. */
 .boardSection > .sectionHeading {
-  margin-bottom: 0;
-  align-self: center;
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  right: calc(100% + 0.8rem);
+  width: 5.6rem;
+  margin: 0;
+  transform: translateY(-50%);
+  display: block;
 }
 
 .boardSection > .sectionHeading > div {
@@ -5822,4 +5826,20 @@
     0 0 7px var(--tier-color, #8b1e2b),
     0 0 17px color-mix(in srgb, var(--tier-color, #8b1e2b) 82%, transparent),
     0 4px 25px color-mix(in srgb, var(--tier-color, #8b1e2b) 54%, transparent);
+}
+
+
+/* Board realm labels stay beside the full-width board even where generic
+   section headings stack on smaller screens. */
+.boardSection > .sectionHeading {
+  align-items: initial;
+  flex-direction: initial;
+  gap: 0;
+}
+
+@media (max-width: 980px) {
+  .boardSection > .sectionHeading {
+    right: calc(100% + 0.55rem);
+    width: 5rem;
+  }
 }
