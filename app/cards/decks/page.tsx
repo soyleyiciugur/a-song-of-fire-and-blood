@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import rawCards from "@/data/the-great-game/cards.json";
 import styles from "./decks.module.css";
@@ -24,6 +25,55 @@ const LABEL: Record<CardType | "all", string> = {
   event: "Events", artifact: "Artifacts", location: "Locations",
 };
 const TIER_RANK: Record<string, number> = { "s-plus": 0, s: 1, a: 2, b: 3, c: 4 };
+
+const TRAIT_RULES: Record<string, string> = {
+  dragonrider: "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is under your control.",
+  guard: "Enemy units must face Ready Guard units before attacking other Military targets or Standing.",
+  intrigue: "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
+  swift: "This unit may initiate a Military Conflict on the turn it is deployed.",
+  schemer: "This Character may initiate a Political Conflict on the turn it is deployed.",
+  challenge: "This unit may ignore Guard when choosing a Military target.",
+  confront: "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
+};
+
+const UNIQUE_RULE = "Unique — You cannot play another copy of this card while one is already in play under your control.";
+
+function HoverTooltip({ label, text, detailed = true, className = "" }: { label: string; text: string; detailed?: boolean; className?: string }) {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState<{left:number;top:number}|null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const place = () => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setPos({ left: r.left + r.width / 2, top: r.top - 8 });
+  };
+  const show = () => {
+    place();
+    timer.current = setTimeout(() => setOpen(true), detailed ? 0 : 420);
+  };
+  const hide = () => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = null;
+    setOpen(false);
+  };
+
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
+
+  return <>
+    <span ref={ref} className={className} tabIndex={0} onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>{label}</span>
+    {open && pos && typeof document !== "undefined" && createPortal(
+      <span className={styles.ruleTooltipPortal} role="tooltip" style={{left:pos.left,top:pos.top}}>{text}</span>,
+      document.body
+    )}
+  </>;
+}
+
+function UniqueDiamond({ detailed = false }: { detailed?: boolean }) {
+  return <HoverTooltip label="◆" text={detailed ? UNIQUE_RULE : "Unique"} detailed={detailed} className={styles.uniqueMark} />;
+}
 
 const TIER_MAP: Record<string, { label: string; color: string; accent: string }> = {
   "s-plus": { label: "S+", color: "#8b1e2b", accent: "#d4af37" },
@@ -168,6 +218,7 @@ export default function DecksPage() {
   const [tier, setTier] = useState("all");
   const [house, setHouse] = useState("all");
   const [sort, setSort] = useState("cost");
+  const [availability, setAvailability] = useState<"deckable" | "non-deckable">("deckable");
   const [inspect, setInspect] = useState<string | null>(null);
   const [renaming, setRenaming] = useState(false);
 
@@ -192,7 +243,7 @@ export default function DecksPage() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return ALL
-      .filter(c => c.deckable !== false)
+      .filter(c => availability === "non-deckable" ? c.deckable === false : c.deckable !== false)
       .filter(c => type === "all" || c.cardType === type)
       .filter(c => tier === "all" || c.tierId === tier)
       .filter(c => house === "all" || c.houseId === house)
@@ -203,7 +254,7 @@ export default function DecksPage() {
         if (sort === "type") return a.cardType.localeCompare(b.cardType) || a.name.localeCompare(b.name);
         return a.cost - b.cost || a.name.localeCompare(b.name);
       });
-  }, [query, type, tier, house, sort]);
+  }, [query, type, tier, house, sort, availability]);
 
   const inspected = ALL.find(c => c.id === inspect) ?? null;
   const curve = useMemo(() => {
@@ -281,8 +332,16 @@ export default function DecksPage() {
 
         <section className={styles.collection}>
           <div className={styles.collectionHeader}>
-            <div><span className={styles.kicker}>The Collection</span><h2>All Cards</h2><small>{filtered.length} shown · {ALL.filter(c => c.deckable !== false).length} deckable</small></div>
+            <div>
+              <span className={styles.kicker}>The Collection</span>
+              <h2>{availability === "non-deckable" ? "Non-Deckable Cards" : "Deckable Cards"}</h2>
+              <small>{filtered.length} shown · {availability === "non-deckable" ? ALL.filter(c => c.deckable === false).length : ALL.filter(c => c.deckable !== false).length} total</small>
+            </div>
             <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search cards, abilities, houses..." />
+          </div>
+          <div className={styles.collectionTabs} role="tablist" aria-label="Collection availability">
+            <button type="button" role="tab" aria-selected={availability === "deckable"} className={availability === "deckable" ? styles.collectionTabActive : undefined} onClick={() => setAvailability("deckable")}>Deckable</button>
+            <button type="button" role="tab" aria-selected={availability === "non-deckable"} className={availability === "non-deckable" ? styles.collectionTabActive : undefined} onClick={() => setAvailability("non-deckable")}>Non-Deckable</button>
           </div>
           <div className={styles.filters}>
             <FilterMenu
@@ -335,7 +394,7 @@ export default function DecksPage() {
                   <div className={styles.cardShade} />
                   <span className={styles.cost} title="Command cost" aria-label={`${card.cost} Command`}><CommandSigil value={card.cost} /></span>
                   <span className={styles.tierBadge} title={`${tierLabel(card)} Tier`}>{tierLabel(card)}</span>
-                  {card.traits.includes("unique") && <span className={styles.uniqueMark} title="Unique" aria-label="Unique">◆</span>}
+                  {card.traits.includes("unique") && <UniqueDiamond />}
                   <div className={styles.cardText}>
                     <span className={styles.cardType}>{LABEL[card.cardType]}</span>
                     <h3>{card.name}</h3>{card.subtitle && <small>{card.subtitle}</small>}
@@ -348,10 +407,14 @@ export default function DecksPage() {
                     {card.abilities[0] && <p><strong><span>{titleCase(card.abilities[0].trigger)}</span>{card.abilities[0].name}</strong>{card.abilities[0].text}</p>}
                   </div>
                 </button>
-                <div className={styles.cardActions}>
-                  <button disabled={!copies} onClick={() => removeCard(card.id)}>−</button><span>{copies}/{MAX_COPIES}</span>
-                  <button disabled={!selected || total >= MAX_DECK || copies >= MAX_COPIES} onClick={() => addCard(card)}>+</button>
-                </div>
+                {card.deckable === false ? (
+                  <div className={`${styles.cardActions} ${styles.nonDeckableActions}`}><span>NON-DECKABLE</span></div>
+                ) : (
+                  <div className={styles.cardActions}>
+                    <button disabled={!copies} onClick={() => removeCard(card.id)}>−</button><span>{copies}/{MAX_COPIES}</span>
+                    <button disabled={!selected || total >= MAX_DECK || copies >= MAX_COPIES} onClick={() => addCard(card)}>+</button>
+                  </div>
+                )}
               </article>;
             })}
           </div>
@@ -381,17 +444,17 @@ export default function DecksPage() {
       {inspected && <div className={styles.modalBackdrop} onMouseDown={() => setInspect(null)}>
         <article className={styles.modal} onMouseDown={e => e.stopPropagation()}>
           <button className={styles.close} onClick={() => setInspect(null)}>×</button>
-          <div className={styles.modalArtWrap} style={tierStyle(inspected)}><CardArt card={inspected} className={styles.modalArt} /><div className={styles.modalShade}/><span className={`${styles.cost} ${styles.modalCost}`}><CommandSigil value={inspected.cost} /></span><span className={`${styles.tierBadge} ${styles.modalTierBadge}`}>{tierLabel(inspected)}</span></div>
+          <div className={styles.modalArtWrap} style={tierStyle(inspected)}><CardArt card={inspected} className={styles.modalArt} /><div className={styles.modalShade}/><span className={`${styles.cost} ${styles.modalCost}`}><CommandSigil value={inspected.cost} /></span><span className={`${styles.tierBadge} ${styles.modalTierBadge}`}>{tierLabel(inspected)}</span>{inspected.traits.includes("unique") && <UniqueDiamond detailed />}</div>
           <div className={styles.modalContent}>
             <span className={styles.kicker}>{LABEL[inspected.cardType]} · {inspected.tierId.toUpperCase()}</span>
             <h2>{inspected.name}</h2>{inspected.subtitle && <p className={styles.subtitle}>{inspected.subtitle}</p>}
             {(inspected.cardType === "character" || inspected.cardType === "dragon") && <div className={styles.modalStats}>
               <span><b>{inspected.power ?? 0}</b><small>Power</small></span>{inspected.cardType==="character"&&<span><b>{inspected.influence ?? 0}</b><small>Influence</small></span>}<span><b>{inspected.health ?? 0}</b><small>Health</small></span>
             </div>}
-            <div className={styles.modalTraits}>{inspected.traits.map(t=><span key={t}>{titleCase(t)}</span>)}{inspected.houseId&&<span>{titleCase(inspected.houseId)}</span>}</div>
+            <div className={styles.modalTraits}>{inspected.traits.filter(t => !["unique","dragon"].includes(t)).map(t => TRAIT_RULES[t] ? <HoverTooltip key={t} label={titleCase(t)} text={TRAIT_RULES[t]} /> : <span key={t}>{titleCase(t)}</span>)}{inspected.houseId&&<span>{titleCase(inspected.houseId)}</span>}</div>
             <div className={styles.abilities}>{inspected.abilities.length ? inspected.abilities.map(a=><section key={a.id}><span>{titleCase(a.trigger)}</span><h3>{a.name}</h3><p>{a.text}</p></section>) : <p>No special ability.</p>}</div>
             {inspected.balanceStatus === "provisional" && <div className={styles.provisional}>Balance values are provisional.</div>}
-            <button className={styles.modalAdd} disabled={!selected || total>=MAX_DECK || (selected.cards[inspected.id]??0)>=MAX_COPIES} onClick={()=>addCard(inspected)}>Add to {selected?.name ?? "Deck"}</button>
+            <button className={styles.modalAdd} disabled={inspected.deckable === false || !selected || total>=MAX_DECK || (selected.cards[inspected.id]??0)>=MAX_COPIES} onClick={()=>addCard(inspected)}>{inspected.deckable === false ? "Non-deckable" : `Add to ${selected?.name ?? "Deck"}`}</button>
           </div>
         </article>
       </div>}

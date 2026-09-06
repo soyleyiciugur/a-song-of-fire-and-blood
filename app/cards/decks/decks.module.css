@@ -450,14 +450,67 @@
   margin-top: 1.15rem;
 }
 
-/* v18: match the play-board tier frame treatment and stronger top glow. */
+
+/* =========================================================
+   v10: collection availability + stronger tier treatment
+   ========================================================= */
+.collectionTabs {
+  display: flex;
+  gap: 0;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(214, 184, 108, 0.1);
+  background: rgba(6, 5, 6, 0.38);
+}
+
+.collectionTabs button {
+  position: relative;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0.72rem 1rem 0.64rem;
+  color: rgba(242, 223, 189, 0.5);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.collectionTabs button:hover {
+  color: rgba(242, 223, 189, 0.82);
+}
+
+.collectionTabs .collectionTabActive {
+  border-bottom-color: var(--gold);
+  color: #fff0cf;
+  background: linear-gradient(180deg, transparent, rgba(214, 184, 108, 0.055));
+}
+
+/* The frame keeps the metallic accent, but the ambient light is the tier's
+   actual color. S+ therefore reads unmistakably red instead of merely gold. */
 .cardMain {
-  border-color:
-    color-mix(
-      in srgb,
-      var(--tier-accent, #d4af37) 40%,
-      rgba(115, 93, 65, 0.72)
-    );
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.38),
+    0 -4px 18px color-mix(in srgb, var(--tier-color, #8b1e2b) 42%, transparent),
+    0 0 28px color-mix(in srgb, var(--tier-color, #8b1e2b) 22%, transparent);
+}
+
+.cardMain::before {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 0;
+  z-index: 3;
+  height: 4.5rem;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% -10%,
+      color-mix(in srgb, var(--tier-color, #8b1e2b) 78%, transparent) 0%,
+      color-mix(in srgb, var(--tier-color, #8b1e2b) 38%, transparent) 29%,
+      transparent 72%);
+  opacity: 0.88;
+  mix-blend-mode: screen;
 }
 
 .cardMain::after {
@@ -465,53 +518,95 @@
   position: absolute;
   left: 10%;
   right: 10%;
-  top: -1px;
-  z-index: 4;
+  top: 0;
+  z-index: 6;
   height: 2px;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent) 12%,
-      var(--tier-color, #8b1e2b) 28%,
-      var(--tier-accent, #d4af37) 50%,
-      var(--tier-color, #8b1e2b) 72%,
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent) 88%,
-      transparent 100%
-    );
+  background: linear-gradient(90deg,
+    transparent,
+    var(--tier-color, #8b1e2b) 18%,
+    var(--tier-accent, #d4af37) 50%,
+    var(--tier-color, #8b1e2b) 82%,
+    transparent);
   box-shadow:
-    0 0 5px color-mix(in srgb, var(--tier-accent, #d4af37) 72%, transparent),
-    0 0 13px color-mix(in srgb, var(--tier-accent, #d4af37) 46%, transparent),
-    0 3px 18px color-mix(in srgb, var(--tier-color, #8b1e2b) 34%, transparent);
-}
-
-.cardMain .tierBadge {
-  top: -0.12rem;
-  z-index: 9;
-  min-width: 1.36rem;
-  width: auto;
-  height: 1.02rem;
-  padding: 0 0.32rem;
-  border: 1px solid color-mix(in srgb, var(--tier-accent, #d4af37) 62%, rgba(25, 19, 16, 0.92));
-  border-radius: 0 0 0.34rem 0.34rem;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 72%, rgba(17, 12, 14, 0.98)),
-      rgba(8, 6, 8, 0.96)
-    );
-  font-size: 0.48rem;
-  letter-spacing: 0.055em;
-  box-shadow:
-    0 2px 5px rgba(0, 0, 0, 0.72),
-    0 0 7px color-mix(in srgb, var(--tier-accent, #d4af37) 24%, transparent);
+    0 0 8px var(--tier-color, #8b1e2b),
+    0 0 18px color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent),
+    0 3px 24px color-mix(in srgb, var(--tier-color, #8b1e2b) 52%, transparent);
 }
 
 .card:hover .cardMain {
-  border-color:
-    color-mix(in srgb, var(--tier-accent, #d4af37) 52%, rgba(115, 93, 65, 0.78));
   box-shadow:
     0 14px 30px rgba(0, 0, 0, 0.5),
-    0 0 30px color-mix(in srgb, var(--tier-accent, #d4af37) 30%, transparent);
+    0 -5px 22px color-mix(in srgb, var(--tier-color, #8b1e2b) 58%, transparent),
+    0 0 34px color-mix(in srgb, var(--tier-color, #8b1e2b) 32%, transparent);
 }
+
+/* Optical centering: Cinzel/HOTD glyphs sit slightly high at line-height:1. */
+.tierBadge {
+  top: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.1rem;
+  min-width: 1.55rem;
+  padding: 0.08rem 0.36rem 0;
+  line-height: 1;
+  letter-spacing: 0.055em;
+}
+
+/* Detailed deck view uses the exact same frame notch instead of the old
+   floating tier rectangle. */
+.modalArtWrap {
+  border-top: 2px solid var(--tier-color, #8b1e2b);
+  box-shadow:
+    inset 0 16px 28px color-mix(in srgb, var(--tier-color, #8b1e2b) 18%, transparent),
+    0 -6px 24px color-mix(in srgb, var(--tier-color, #8b1e2b) 34%, transparent);
+}
+
+.modalTierBadge {
+  top: -2px;
+  left: 50%;
+  z-index: 8;
+  min-width: 1.72rem;
+  height: 1.16rem;
+  padding: 0.09rem 0.42rem 0;
+  transform: translateX(-50%);
+  border: 1px solid color-mix(in srgb, var(--tier-accent, #d4af37) 58%, rgba(25, 19, 16, 0.92));
+  border-top: 0;
+  border-radius: 0 0 0.28rem 0.28rem;
+  font-size: 0.55rem;
+}
+
+.nonDeckableActions {
+  grid-template-columns: 1fr;
+}
+
+.nonDeckableActions > span {
+  border-inline: 0;
+  color: rgba(242, 223, 189, 0.46);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+}
+
+
+/* Tooltip parity with Play: detailed trait chips explain their mechanic. */
+.modalTraits > span { cursor: help; }
+.ruleTooltipPortal {
+  position: fixed; z-index: 520; max-width: min(320px, calc(100vw - 24px));
+  transform: translate(-50%, -100%); pointer-events: none;
+  padding: .5rem .62rem; border: 1px solid rgba(214,184,108,.3);
+  color: #f2dfbd; background: rgba(9,7,8,.97);
+  box-shadow: 0 10px 28px rgba(0,0,0,.62);
+  font-size: .68rem; line-height: 1.4; white-space: normal;
+}
+
+/* Unique diamond never shifts on hover; only its light intensifies. */
+.uniqueMark { transform: none !important; transition: filter .16s ease, text-shadow .16s ease; cursor: help; }
+.uniqueMark:hover, .uniqueMark:focus-visible {
+  transform: none !important;
+  filter: brightness(1.35);
+  text-shadow: 0 0 6px var(--tier-accent,#d4af37), 0 0 14px color-mix(in srgb,var(--tier-accent,#d4af37) 58%,transparent);
+  outline: none;
+}
+.modalArtWrap .uniqueMark { top: 1rem; right: 1rem; z-index: 9; }

@@ -5425,27 +5425,107 @@
   display: none;
 }
 
-/* v18: stronger tier light along the upper frame. */
+
+/* ────────────────────────────────────────────
+   v18 tier treatment — visible tier-color aura
+   ──────────────────────────────────────────── */
+/* Use the tier's primary color for the light itself. The metallic accent is
+   trim only; e.g. S+ now throws a clearly red aura around the upper frame. */
+.unitCard,
+.handCard,
+.mulliganCard,
+.selectedCardInner,
+.unitDetailCard {
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.48),
+    0 -5px 20px color-mix(in srgb, var(--tier-color, #8b1e2b) 58%, transparent),
+    0 0 34px color-mix(in srgb, var(--tier-color, #8b1e2b) 24%, transparent);
+}
+
 .unitCard::after,
 .handCard::after,
 .mulliganCard::after,
-.selectedCardInner::after {
+.selectedCardInner::after,
+.unitDetailCard::after {
   left: 10%;
   right: 10%;
+  top: -1px;
   height: 2px;
+  z-index: 14;
   background:
     linear-gradient(
       90deg,
-      transparent 0%,
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent) 12%,
-      var(--tier-color, #8b1e2b) 28%,
+      transparent,
+      var(--tier-color, #8b1e2b) 16%,
       var(--tier-accent, #d4af37) 50%,
-      var(--tier-color, #8b1e2b) 72%,
-      color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent) 88%,
-      transparent 100%
+      var(--tier-color, #8b1e2b) 84%,
+      transparent
     );
   box-shadow:
-    0 0 5px color-mix(in srgb, var(--tier-accent, #d4af37) 72%, transparent),
-    0 0 13px color-mix(in srgb, var(--tier-accent, #d4af37) 46%, transparent),
-    0 3px 18px color-mix(in srgb, var(--tier-color, #8b1e2b) 34%, transparent);
+    0 0 7px var(--tier-color, #8b1e2b),
+    0 0 17px color-mix(in srgb, var(--tier-color, #8b1e2b) 82%, transparent),
+    0 4px 25px color-mix(in srgb, var(--tier-color, #8b1e2b) 54%, transparent);
+}
+
+/* Keep the tier marker a small part of the frame everywhere, including the
+   detailed card. This overrides older enlarged-detail tier boxes. */
+.tierBadge,
+.selectedCardInner .tierBadge,
+.unitDetailCard .tierBadge {
+  top: -1px;
+  left: 50%;
+  z-index: 18;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  width: auto;
+  height: 1.08rem;
+  padding: 0.08rem 0.36rem 0;
+  transform: translateX(-50%);
+  border: 1px solid color-mix(in srgb, var(--tier-accent, #d4af37) 62%, rgba(25, 19, 16, 0.92));
+  border-top: 0;
+  border-radius: 0 0 0.3rem 0.3rem;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--tier-color, #8b1e2b) 78%, rgba(17, 12, 14, 0.98)),
+      rgba(8, 6, 8, 0.97)
+    );
+  color: var(--tier-accent, #d4af37);
+  font-size: 0.5rem;
+  line-height: 1;
+  letter-spacing: 0.055em;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.72),
+    0 0 9px color-mix(in srgb, var(--tier-color, #8b1e2b) 56%, transparent);
+}
+
+.selectedCardInner .tierBadge,
+.unitDetailCard .tierBadge {
+  min-width: 1.72rem;
+  height: 1.16rem;
+  padding: 0.09rem 0.42rem 0;
+  font-size: 0.56rem;
+}
+
+
+/* Final polish: remove the four decorative corner sparkle dots entirely. */
+.cardSparkles { display: none !important; }
+
+/* Unique diamond is position-stable. Hover/focus adds glow only. */
+.uniqueMark:hover, .uniqueMark:focus-visible {
+  transform: none !important;
+  filter: brightness(1.35);
+}
+
+/* v19 — optical centering for the tier text in Play.
+   Cinzel sits visually high even inside a flex-centered box, so use a small
+   internal top offset rather than moving the badge itself. */
+.tierBadge,
+.selectedCardInner .tierBadge,
+.unitDetailCard .tierBadge {
+  padding-top: 0.18rem;
+  padding-bottom: 0;
 }
