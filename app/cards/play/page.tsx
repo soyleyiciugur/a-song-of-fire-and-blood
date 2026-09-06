@@ -5215,6 +5215,9 @@ export default function GreatGamePlayPage() {
         previewCommandCost={
           hoveredCommandCost
         }
+        actionPreview={
+          actionPreview
+        }
       />
 
       {attackDrag && (
@@ -5881,6 +5884,16 @@ function PlayerHeader({
         } ${
           attackStandingDropTarget
             ? styles.standingBoxDragTarget
+            : ""
+        } ${
+          (
+            conflictPreview?.targetPlayerId ===
+              playerId ||
+            actionPreview?.standing[
+              playerId
+            ]
+          )
+            ? styles.standingBoxHasPreview
             : ""
         }`}
         data-attack-standing-target={

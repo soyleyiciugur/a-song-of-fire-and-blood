@@ -4921,3 +4921,42 @@
   color:
     rgba(224, 202, 199, 0.68);
 }
+
+
+/* ────────────────────────────────────────────
+   v12 Standing preview readability + neutral death
+   ──────────────────────────────────────────── */
+
+/* When Standing has a projected result, de-emphasize the underlying HUD number
+   just enough that the foreground indicator reads as one clear layer.
+   Do NOT blur the indicator itself. */
+.standingBoxHasPreview > span:not(.conflictValuePreview),
+.standingBoxHasPreview > strong,
+.standingBoxHasPreview > small,
+.standingBoxHasPreview > em {
+  filter: blur(1.15px);
+  opacity: 0.32;
+  transition:
+    filter 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.standingBoxHasPreview {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 16, 16, 0.92),
+      rgba(11, 9, 10, 0.90)
+    );
+}
+
+/* Death is a neutral state, not a Military-colored state. */
+.combatDeathPreview,
+.standingBox .conflictValueLethal,
+.conflictValueLethal {
+  color: rgba(235, 235, 230, 0.96) !important;
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.98),
+    0 0 7px rgba(255, 255, 255, 0.56),
+    0 0 20px rgba(190, 195, 200, 0.34) !important;
+}
