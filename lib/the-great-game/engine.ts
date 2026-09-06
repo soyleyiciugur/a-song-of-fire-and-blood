@@ -4074,6 +4074,12 @@ function endTurnMutable(
     "Resolve the pending ability before ending the turn."
   );
 
+  addLog(
+    state,
+    `${playerName(playerId)} ends Turn ${state.players[playerId].turnsTaken}.`,
+    playerId
+  );
+
   processWeylarEndOfTurn(
     state,
     playerId

@@ -4860,3 +4860,64 @@
 .standingBox .conflictValuePreview {
   z-index: 140 !important;
 }
+
+
+/* ────────────────────────────────────────────
+   v11 Chronicle turn-boundary markers
+   ──────────────────────────────────────────── */
+
+.logTurnStart,
+.logTurnEnd {
+  position: relative;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Start of Turn: muted antique-gold/olive wash. */
+.logTurnStart {
+  border-left:
+    2px solid
+    rgba(188, 163, 86, 0.34);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(155, 135, 62, 0.055),
+      rgba(155, 135, 62, 0.012) 58%,
+      transparent
+    );
+}
+
+.logTurnStart > span {
+  color:
+    rgba(205, 181, 103, 0.62);
+}
+
+.logTurnStart p {
+  color:
+    rgba(238, 222, 185, 0.72);
+}
+
+/* End of Turn: muted wine/crimson wash, intentionally equally subtle. */
+.logTurnEnd {
+  border-left:
+    2px solid
+    rgba(132, 67, 72, 0.34);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(105, 42, 49, 0.06),
+      rgba(105, 42, 49, 0.014) 58%,
+      transparent
+    );
+}
+
+.logTurnEnd > span {
+  color:
+    rgba(173, 111, 115, 0.58);
+}
+
+.logTurnEnd p {
+  color:
+    rgba(224, 202, 199, 0.68);
+}

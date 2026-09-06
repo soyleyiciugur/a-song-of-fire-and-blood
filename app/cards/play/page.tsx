@@ -5355,14 +5355,33 @@ export default function GreatGamePlayPage() {
             .reverse()
             .slice(0, 40)
             .map(
-              (entry) => (
+              (entry) => {
+                const isTurnStart =
+                  / begins Turn \d+\.$/.test(
+                    entry.message
+                  );
+
+                const isTurnEnd =
+                  / ends Turn \d+\.$/.test(
+                    entry.message
+                  );
+
+                return (
                 <div
                   key={
                     entry.id
                   }
-                  className={
-                    styles.logEntry
-                  }
+                  className={[
+                    styles.logEntry,
+                    isTurnStart
+                      ? styles.logTurnStart
+                      : "",
+                    isTurnEnd
+                      ? styles.logTurnEnd
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                 >
                   <span>
                     T
@@ -5377,7 +5396,8 @@ export default function GreatGamePlayPage() {
                     }
                   </p>
                 </div>
-              )
+                );
+              }
             )}
         </div>
       </section>
@@ -6596,6 +6616,7 @@ function BoardUnit({
   onAttackPointerCancel,
   suppressBoardClickRef,
   combatPreview,
+  actionPreview,
   attackDrag = null,
   attackDragging = false,
   onHover,
@@ -6627,6 +6648,7 @@ function BoardUnit({
     current: boolean;
   };
   combatPreview?: CombatPreviewState | null;
+  actionPreview?: ActionPreviewState | null;
   attackDrag?: AttackDragState | null;
   attackDragging?: boolean;
   onHover?: (
