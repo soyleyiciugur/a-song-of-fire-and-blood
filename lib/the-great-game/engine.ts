@@ -3880,7 +3880,7 @@ function resetPerTurnCounters(
 // Weylar
 // ─────────────────────────────────────────────
 
-function processWeylarEndOfTurn(
+function processWeylarEndOfTurnProgress(
   state: GameState,
   playerId: PlayerId
 ) {
@@ -3924,35 +3924,69 @@ function processWeylarEndOfTurn(
       playerId,
       `Progress: ${Math.min(turns, 3)}/3.`
     );
+  }
+}
 
+function processWeylarStartOfTurn(
+  state: GameState,
+  playerId: PlayerId
+) {
+  const weylars =
+    state.players[
+      playerId
+    ].board.filter(
+      (unit) =>
+        unit.cardId ===
+        "weylar-rocke"
+    );
+
+  for (
+    const weylar of
+    weylars
+  ) {
     if (
-      turns === 3
-    ) {
-      drawCardMutable(
-        state,
-        playerId
-      );
-
-      drawCardMutable(
-        state,
-        playerId
-      );
-
-      state.players[
-        playerId
-      ].nextCommandBonus +=
-        2;
-
       weylar.flags[
         "weylar-triggered"
-      ] = true;
-
-      addLog(
-        state,
-        `The Price of Loyalty resolves. ${playerName(playerId)} draws 2 cards and gains +2 Command next turn.`,
-        playerId
-      );
+      ]
+    ) {
+      continue;
     }
+
+    const turns =
+      weylar.counters[
+        "turns-in-play"
+      ] ?? 0;
+
+    if (turns < 3) {
+      continue;
+    }
+
+    drawCardMutable(
+      state,
+      playerId
+    );
+
+    drawCardMutable(
+      state,
+      playerId
+    );
+
+    // startTurnMutable consumes nextCommandBonus later in this same
+    // start-of-turn sequence, so this becomes +2 Command this turn.
+    state.players[
+      playerId
+    ].nextCommandBonus +=
+      2;
+
+    weylar.flags[
+      "weylar-triggered"
+    ] = true;
+
+    addLog(
+      state,
+      `The Price of Loyalty resolves. ${playerName(playerId)} draws 2 cards and gains +2 Command this turn.`,
+      playerId
+    );
   }
 }
 
@@ -4003,6 +4037,11 @@ function startTurnMutable(
   );
 
   processManderDelayedEffects(
+    state,
+    playerId
+  );
+
+  processWeylarStartOfTurn(
     state,
     playerId
   );
@@ -4095,7 +4134,7 @@ function endTurnMutable(
     playerId
   );
 
-  processWeylarEndOfTurn(
+  processWeylarEndOfTurnProgress(
     state,
     playerId
   );

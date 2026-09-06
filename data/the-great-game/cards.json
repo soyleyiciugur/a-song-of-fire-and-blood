@@ -368,7 +368,7 @@
         "id": "veiled-sight",
         "name": "Veiled Sight",
         "trigger": "arrival",
-        "text": "After Saera enters play, reveal your opponent's hand. Choose one card. Until the start of your next turn, that exact card costs 2 more Command to play."
+        "text": "After Saera enters play, reveal the opposing Ruler's hand. Choose one card. Until the start of Saera's Ruler's next turn, that exact card costs 2 more Command to play."
       }
     ],
     "roles": [
@@ -397,7 +397,7 @@
         "id": "iron-wrath",
         "name": "Iron Wrath",
         "trigger": "arrival",
-        "text": "After Baelenys enters play, deal 3 damage to another Unit. If that Unit is destroyed this way, gain 3 Standing."
+        "text": "After Baelenys enters play, deal 3 damage to another Unit. If that Unit is destroyed this way, Baelenys's Ruler gains 3 Standing."
       }
     ],
     "roles": [
@@ -425,8 +425,8 @@
       {
         "id": "price-of-loyalty",
         "name": "The Price of Loyalty",
-        "trigger": "end-of-turn",
-        "text": "At the end of your 3rd turn with Weylar in play, draw 2 cards and gain 2 additional Command on your next turn."
+        "trigger": "start-of-turn",
+        "text": "If Weylar has survived 3 of the same Ruler’s turns in play, draw 2 cards and gain 2 additional Command this turn."
       }
     ],
     "roles": [
@@ -454,7 +454,7 @@
         "id": "hidden-claim",
         "name": "Hidden Claim",
         "trigger": "arrival",
-        "text": "Draw 1 card. If you control no other Targaryen Character, the card drawn this way costs 1 less Command until the end of this turn."
+        "text": "Visenor's Ruler draws 1 card. If Visenor's Ruler controls no other Targaryen Character, the card drawn this way costs 1 less Command until the end of that turn."
       }
     ],
     "roles": [
@@ -513,7 +513,7 @@
         "id": "argumentative-one",
         "name": "The Argumentative One",
         "trigger": "arrival",
-        "text": "The next Event your opponent plays costs 2 more Command."
+        "text": "The next Event the opposing Ruler plays costs 2 more Command."
       }
     ],
     "roles": [
@@ -629,7 +629,7 @@
         "id": "the-confession",
         "name": "The Confession",
         "trigger": "fall",
-        "text": "Draw 2 cards. Your opponent draws 1 card."
+        "text": "Derrin's Ruler draws 2 cards. The opposing Ruler draws 1 card."
       }
     ],
     "roles": [
@@ -725,7 +725,7 @@
         "id": "our-fleet-is-yours",
         "name": "Our Fleet Is Yours",
         "trigger": "arrival",
-        "text": "Summon two 1/0/1 Velaryon Sailors. If Driftmark is the active Location, they have +1 Power while it remains active."
+        "text": "Summon two 1/0/1 Velaryon Sailors ruled by Naella's Ruler. While Driftmark is the active Location, Velaryon Sailors have +1 Power."
       }
     ],
     "roles": [
@@ -782,7 +782,7 @@
         "id": "dreams-of-things-to-come",
         "name": "Dreams of Things to Come",
         "trigger": "arrival",
-        "text": "Look at the top 3 cards of the opposing Ruler's deck. You may put one of them on the bottom of that deck. Return the others in the same order."
+        "text": "Look at the top 3 cards of the opposing Ruler's deck. Vhaemys's Ruler may put one of them on the bottom of that deck. Return the others in the same order."
       }
     ],
     "roles": [
@@ -898,7 +898,7 @@
         "id": "the-last-name-standing",
         "name": "The Last Name Standing",
         "trigger": "passive",
-        "text": "Your other Hightower Characters have +1 Influence."
+        "text": "Other Hightower Characters ruled by Melessa's Ruler have +1 Influence."
       }
     ],
     "roles": [
@@ -1159,7 +1159,7 @@
         "id": "dragonstones-quiet",
         "name": "Dragonstone's Quiet",
         "trigger": "passive",
-        "text": "While Dragonstone is the active Location, Units ruled by Malaenar's Ruler have +1 Health."
+        "text": "While Dragonstone is the active Location, Units ruled by Malaenar's current Ruler have +1 Health."
       }
     ],
     "roles": [
@@ -1188,7 +1188,7 @@
         "id": "she-organized-the-whole-thing",
         "name": "She Organized the Whole Thing",
         "trigger": "arrival",
-        "text": "Your next Event this turn costs 1 less Command."
+        "text": "The next Event Tansy's Ruler plays this turn costs 1 less Command."
       }
     ],
     "roles": [
@@ -1243,7 +1243,7 @@
         "id": "death-in-his-own-bed",
         "name": "Death in His Own Bed",
         "trigger": "arrival",
-        "text": "Choose a Stark or Targaryen Character you control. It gains +1 Influence permanently."
+        "text": "Choose a Stark or Targaryen Character ruled by Brandon's Ruler. It gains +1 Influence permanently."
       }
     ],
     "roles": [
@@ -1358,7 +1358,7 @@
         "id": "do-not-forget-it-my-lady",
         "name": "Do Not Forget It, My Lady",
         "trigger": "passive",
-        "text": "The first time another Character you control would receive a negative stat modifier each turn, prevent that modifier."
+        "text": "The first time another Character ruled by Almar's Ruler would receive a negative stat modifier each turn, prevent that modifier."
       }
     ],
     "roles": [
@@ -1386,7 +1386,7 @@
         "id": "they-are-utterly-fucked",
         "name": "They Are Utterly Fucked",
         "trigger": "arrival",
-        "text": "Look at the top 3 cards of your deck. Put one into your hand and put the rest on the bottom of your deck in any order."
+        "text": "Look at the top 3 cards of Edmyn's Ruler's deck. Put one into that Ruler's hand and put the rest on the bottom of that deck in any order."
       }
     ],
     "roles": [
@@ -1472,7 +1472,7 @@
         "id": "a-drunken-mistake",
         "name": "A Drunken Mistake",
         "trigger": "arrival",
-        "text": "Restore 2 Standing to both players. Then draw 1 card."
+        "text": "Restore 2 Standing to both Rulers. Then Clover's Ruler draws 1 card."
       }
     ],
     "roles": [
@@ -1523,7 +1523,7 @@
         "id": "bond-jacaelon",
         "name": "Bond — Jacaelon",
         "trigger": "bond",
-        "text": "If you control Jacaelon Targaryen, Jhagar costs 2 less to play."
+        "text": "If Jhagar's Ruler controls Jacaelon Targaryen, Jhagar costs 2 less to play."
       }
     ],
     "roles": [
@@ -1549,7 +1549,7 @@
         "id": "bond-saera",
         "name": "Bond — Saera",
         "trigger": "bond",
-        "text": "If you control Saera Targaryen, Cloudgazer costs 2 less to play."
+        "text": "If Cloudgazer's Ruler controls Saera Targaryen, Cloudgazer costs 2 less to play."
       }
     ],
     "roles": [
@@ -1575,7 +1575,7 @@
         "id": "bond-baelenys",
         "name": "Bond — Baelenys",
         "trigger": "bond",
-        "text": "If you control Baelenys Targaryen, Maelwing costs 2 less to play."
+        "text": "If Maelwing's Ruler controls Baelenys Targaryen, Maelwing costs 2 less to play."
       }
     ],
     "roles": [
@@ -1762,7 +1762,7 @@
         "id": "oldtown",
         "name": "Oldtown",
         "trigger": "passive",
-        "text": "The first normal Event each player plays on their turn costs 1 less."
+        "text": "The first normal Event each Ruler plays on their turn costs 1 less."
       }
     ],
     "roles": [

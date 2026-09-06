@@ -5091,7 +5091,7 @@ export default function GreatGamePlayPage() {
       )}
 
       <Board
-        title="Opponent's Board"
+        title="Opposing Realm"
         units={
           enemyPlayer.board
         }
@@ -5135,12 +5135,12 @@ export default function GreatGamePlayPage() {
         }
       >
         <span>
-          ✦ The Realm ✦
+          ✦ The Realms ✦
         </span>
       </div>
 
       <Board
-        title="Your Board"
+        title="Your Realm"
         units={
           activePlayer.board
         }

@@ -391,12 +391,24 @@
 }
 
 /*
- * During the automatic start-of-turn draw, End Turn is
- * functionally disabled but should not visually flash between
- * normal -> grey -> normal. Keep its normal appearance stable.
+ * During automatic draw animations, End Turn stays functionally
+ * disabled and visibly muted. Once the draw sequence settles it
+ * returns to its normal or highlighted ready state.
  */
 .endTurnButton.endTurnDisabledStable:disabled {
-  opacity: 1;
+  opacity: 0.3;
+  filter: grayscale(0.75) brightness(0.72);
+  box-shadow: none;
+  animation: none;
+  transform: none;
+}
+
+.endTurnButton.endTurnDisabledStable.endTurnReady:disabled {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.025);
+  color: rgba(245, 230, 200, 0.55);
+  box-shadow: none;
+  animation: none;
 }
 
 /*
@@ -1106,7 +1118,11 @@
 .board {
   position: relative;
 
-  min-height: 320px;
+  /* Keep an empty board the same visual height as a populated six-slot row.
+     Previously the board collapsed to 320px until a card established the
+     row's 5:7 aspect-ratio height, which made the drag preview/frame look
+     misaligned while deploying the first unit. */
+  min-height: 390px;
 
   display: grid;
 
@@ -2894,12 +2910,14 @@
 /* Divider */
 
 .battleLine {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
 
   gap: 1rem;
 
-  margin: 1rem 0;
+  /* Sit exactly between the two Realm boards, aligned to their left edge. */
+  margin: 0.55rem 0;
 
   color:
     rgba(212, 175, 55, 0.28);
@@ -2915,16 +2933,15 @@
   text-transform: uppercase;
 }
 
-.battleLine::before,
+.battleLine::before {
+  display: none;
+}
+
 .battleLine::after {
   content: "";
-
-  flex: 1;
-
+  width: 100%;
   height: 1px;
-
-  background:
-    rgba(212, 175, 55, 0.13);
+  background: rgba(212, 175, 55, 0.13);
 }
 
 /* Revealed hand */
@@ -3901,6 +3918,8 @@
   .board {
     grid-template-columns:
       repeat(3, minmax(0, 1fr));
+
+    min-height: 430px;
   }
 
   .handCard {
@@ -4002,6 +4021,8 @@
   .board {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
+
+    min-height: 430px;
   }
 
   .mulliganGrid {
