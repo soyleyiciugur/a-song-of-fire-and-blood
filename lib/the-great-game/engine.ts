@@ -1825,7 +1825,10 @@ export function getMilitaryTargetOptions(
   const enemyBoard =
     state.players[
       enemyId
-    ].board;
+    ].board.filter(
+      (unit) =>
+        !unit.grounded
+    );
 
   const guards =
     enemyBoard.filter(
@@ -2009,7 +2012,7 @@ export function getPoliticalDefenseOptions(
       ),
 
     selectionBy:
-      "defender",
+      "attacker",
   };
 }
 

@@ -4714,3 +4714,149 @@
 .illegalAttackDragTarget::after {
   z-index: 68;
 }
+
+
+/* ────────────────────────────────────────────
+   v10 targeting / preview refinements
+   ──────────────────────────────────────────── */
+
+/* Standing is selection UI so the document-level outside-click cancellation
+   must never fire before its own click handler. */
+.standingBox[data-selection-ui="true"] {
+  pointer-events: auto;
+}
+
+/* `.standingBox span` is more specific than `.conflictValuePreview` in the
+   older CSS. Override it explicitly so Standing preview glyphs match board
+   preview size/color instead of inheriting tiny HUD-label styling. */
+.standingBox .conflictValuePreview {
+  left: 50%;
+  top: 50%;
+  z-index: 135;
+  width: auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: none;
+  opacity: 1;
+  text-shadow:
+    0 2px 0 rgba(20, 3, 4, 0.98),
+    0 0 7px currentColor,
+    0 0 18px color-mix(in srgb, currentColor 58%, transparent);
+  pointer-events: none;
+}
+
+.standingBox .conflictValueMilitary {
+  color: #df6d5d;
+}
+
+.standingBox .conflictValuePolitical {
+  color: #dfbd54;
+}
+
+.standingBox .conflictValueHeal,
+.combatValueHeal {
+  color: #72c98b;
+}
+
+.standingBox .conflictValueLethal {
+  color: #e46e62;
+  font-size: 2.55rem;
+}
+
+.combatValueHeal {
+  color: #72c98b;
+}
+
+/* Grounded preview uses a single-font moon/sleep glyph so it takes the same
+   glow treatment as skull / damage / ? instead of a platform emoji sprite. */
+.combatGroundPreview {
+  color: #d6b86a;
+  font-size: 2.65rem;
+  font-style: normal;
+  letter-spacing: -0.14em;
+}
+
+/* Saera / opponent-hand inspection is a modal targeting layer, not another
+   board section. The existing HandCardVisual target logic is retained. */
+.revealedHandBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background:
+    rgba(3, 3, 5, 0.66);
+  backdrop-filter:
+    blur(3px)
+    brightness(0.58);
+}
+
+.revealedHandModal {
+  width:
+    min(
+      1120px,
+      calc(100vw - 4rem)
+    );
+  max-height:
+    calc(100vh - 5rem);
+  overflow: auto;
+  padding:
+    1.25rem
+    1.35rem
+    1.6rem;
+  border:
+    1px solid rgba(212, 175, 55, 0.35);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(23, 15, 16, 0.97),
+      rgba(7, 6, 8, 0.98)
+    );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.7),
+    inset 0 0 55px rgba(212, 175, 55, 0.035);
+}
+
+.revealedHandTitle {
+  margin-bottom: 1rem;
+  color:
+    rgba(231, 201, 116, 0.85);
+  font-family:
+    var(--font-hotd),
+    Georgia,
+    serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Center the revealed cards as a row. */
+.revealedHandModal .hand {
+  margin-inline: auto;
+}
+
+.revealedHandModal .handLinearTrack,
+.revealedHandModal .handFanTrack {
+  justify-content: center;
+}
+
+/* Action and conflict result glyphs must beat arrows, card effects and faded
+   illegal-target overlays in stacking order. */
+.combatValuePreview,
+.combatDeathPreview,
+.combatGroundPreview,
+.standingBox .conflictValuePreview {
+  z-index: 140 !important;
+}

@@ -164,6 +164,36 @@ type CombatPreviewState = {
   noPoliticalDamage: boolean;
 };
 
+type ActionUnitPreview = {
+  damage?: number;
+  heal?: number;
+  dies?: boolean;
+  grounded?: boolean;
+};
+
+type ActionStandingPreview = {
+  damage?: number;
+  heal?: number;
+  dies?: boolean;
+};
+
+type ActionPreviewState = {
+  tone:
+    | "military"
+    | "political"
+    | "heal";
+  units: Record<
+    string,
+    ActionUnitPreview
+  >;
+  standing: Partial<
+    Record<
+      PlayerId,
+      ActionStandingPreview
+    >
+  >;
+};
+
 type PointerDropTarget =
   | {
       kind: "board";
@@ -913,6 +943,14 @@ export default function GreatGamePlayPage() {
     setCombatPreview,
   ] =
     useState<CombatPreviewState | null>(
+      null
+    );
+
+  const [
+    actionPreview,
+    setActionPreview,
+  ] =
+    useState<ActionPreviewState | null>(
       null
     );
 
@@ -1684,6 +1722,7 @@ export default function GreatGamePlayPage() {
     );
 
     setDragCursor(null);
+    setActionPreview(null);
 
     setError(null);
   }
@@ -2984,10 +3023,7 @@ export default function GreatGamePlayPage() {
         return "Political Conflict — enemy Standing is unopposed. Click Standing to confirm.";
       }
 
-      return pendingConflict.selectionBy ===
-        "attacker"
-        ? "Choose the Political defender."
-        : "The defending player chooses the Political defender.";
+      return "Choose the Political defender.";
     }
 
     return null;
@@ -3323,13 +3359,165 @@ export default function GreatGamePlayPage() {
     };
   }
 
+  function buildOldtownMassacrePreview():
+    ActionPreviewState {
+    const unitResults:
+      Record<
+        string,
+        ActionUnitPreview
+      > = {};
+
+    for (
+      const unit of
+      allUnits
+    ) {
+      const card =
+        getGameCard(
+          unit.cardId
+        );
+
+      const lethal =
+        unit.currentHealth -
+          2 <=
+        0;
+
+      unitResults[
+        unit.instanceId
+      ] = {
+        damage: 2,
+        dies:
+          card.cardType ===
+            "character" &&
+          lethal,
+        grounded:
+          card.cardType ===
+            "dragon" &&
+          lethal,
+      };
+    }
+
+    return {
+      tone: "military",
+      units:
+        unitResults,
+      standing: {
+        player1: {
+          damage: 2,
+          dies:
+            currentGame.players
+              .player1
+              .standing -
+              2 <=
+            0,
+        },
+        player2: {
+          damage: 2,
+          dies:
+            currentGame.players
+              .player2
+              .standing -
+              2 <=
+            0,
+        },
+      },
+    };
+  }
+
+  function buildIronWrathPreview(
+    target: UnitState
+  ): ActionPreviewState {
+    const targetCard =
+      getGameCard(
+        target.cardId
+      );
+
+    const lethal =
+      target.currentHealth -
+        3 <=
+      0;
+
+    const controllerId =
+      currentGame.pendingEffect
+        ?.controllerId;
+
+    const standing:
+      ActionPreviewState[
+        "standing"
+      ] = {};
+
+    if (
+      controllerId &&
+      targetCard.cardType ===
+        "character" &&
+      lethal
+    ) {
+      standing[
+        controllerId
+      ] = {
+        heal: 3,
+      };
+    }
+
+    return {
+      tone: "military",
+      units: {
+        [
+          target.instanceId
+        ]: {
+          damage: 3,
+          dies:
+            targetCard.cardType ===
+              "character" &&
+            lethal,
+          grounded:
+            targetCard.cardType ===
+              "dragon" &&
+            lethal,
+        },
+      },
+      standing,
+    };
+  }
+
   function handleSelectedTargetHover(
     hoveredUnit: UnitState | null
   ) {
     if (!hoveredUnit) {
       setCombatPreview(null);
+      setActionPreview(null);
       return;
     }
+
+    if (
+      currentGame.pendingEffect
+        ?.abilityId ===
+        "iron-wrath"
+    ) {
+      const effect =
+        currentGame.pendingEffect;
+
+      if (
+        hoveredUnit.instanceId ===
+          effect.sourceUnitInstanceId ||
+        getGameCard(
+          hoveredUnit.cardId
+        ).cardType !==
+          "character"
+      ) {
+        setActionPreview(null);
+        return;
+      }
+
+      setCombatPreview(null);
+      setActionPreview(
+        buildIronWrathPreview(
+          hoveredUnit
+        )
+      );
+      return;
+    }
+
+    setActionPreview(null);
 
     if (
       pendingPlay?.kind ===
@@ -3878,6 +4066,18 @@ export default function GreatGamePlayPage() {
     setDraggingHandInstanceId(
       handCard.instanceId
     );
+
+    const draggedCard =
+      getGameCard(
+        handCard.cardId
+      );
+
+    setActionPreview(
+      draggedCard.id ===
+        "oldtown-massacre"
+        ? buildOldtownMassacrePreview()
+        : null
+    );
   }
 
   function updatePointerDrag(
@@ -4092,6 +4292,7 @@ export default function GreatGamePlayPage() {
     pointerDragRef.current = null;
     setDraggingHandInstanceId(null);
     setDragCursor(null);
+    setActionPreview(null);
   }
 
   function handleHandPointerUp(
@@ -4727,26 +4928,35 @@ export default function GreatGamePlayPage() {
         conflictPreview={
           combatPreview
         }
+        actionPreview={
+          actionPreview
+        }
       />
 
       {currentGame.pendingEffect
         ?.abilityId ===
         "veiled-sight" && (
-        <section
+        <div
           className={
-            styles.revealedHand
+            styles.revealedHandBackdrop
           }
+          data-selection-ui="true"
         >
-          <div
+          <section
             className={
-              styles.sectionTitle
+              styles.revealedHandModal
             }
           >
-            Veiled Sight —
-            Opponent&apos;s Hand
-          </div>
+            <div
+              className={
+                styles.revealedHandTitle
+              }
+            >
+              Veiled Sight —
+              Opponent&apos;s Hand
+            </div>
 
-          <HorizontalHand>
+            <HorizontalHand>
             {enemyPlayer.hand.map(
               (
                 handCard
@@ -4783,6 +4993,7 @@ export default function GreatGamePlayPage() {
             )}
           </HorizontalHand>
         </section>
+        </div>
       )}
 
       <Board
@@ -4812,6 +5023,9 @@ export default function GreatGamePlayPage() {
         }
         combatPreview={
           combatPreview
+        }
+        actionPreview={
+          actionPreview
         }
         attackDrag={
           attackDrag
@@ -4899,6 +5113,9 @@ export default function GreatGamePlayPage() {
         }
         combatPreview={
           combatPreview
+        }
+        actionPreview={
+          actionPreview
         }
         attackDrag={
           attackDrag
@@ -5599,6 +5816,7 @@ function PlayerHeader({
   highlightEndTurn = false,
   previewCommandCost = null,
   conflictPreview = null,
+  actionPreview = null,
   attackStandingDropTarget = false,
 }: {
   playerId: PlayerId;
@@ -5619,6 +5837,7 @@ function PlayerHeader({
   highlightEndTurn?: boolean;
   previewCommandCost?: number | null;
   conflictPreview?: CombatPreviewState | null;
+  actionPreview?: ActionPreviewState | null;
   attackStandingDropTarget?: boolean;
 }) {
   const player =
@@ -5649,6 +5868,7 @@ function PlayerHeader({
             ? "true"
             : undefined
         }
+        data-selection-ui="true"
         type="button"
         disabled={
           !standingTarget &&
@@ -5731,6 +5951,38 @@ function PlayerHeader({
                   : `${conflictPreview.kind === "military" ? "⚔" : "♛"}${conflictPreview.standingDamage}`}
             </span>
           )}
+
+        {actionPreview?.standing[
+          playerId
+        ] && (() => {
+          const preview =
+            actionPreview.standing[
+              playerId
+            ]!;
+
+          return (
+            <span
+              className={[
+                styles.conflictValuePreview,
+                preview.heal
+                  ? styles.conflictValueHeal
+                  : styles.conflictValueMilitary,
+                preview.dies
+                  ? styles.conflictValueLethal
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-hidden
+            >
+              {preview.dies
+                ? "☠"
+                : preview.heal
+                  ? `♥${preview.heal}`
+                  : `⚔${preview.damage ?? 0}`}
+            </span>
+          );
+        })()}
       </button>
 
       <div
@@ -6043,6 +6295,7 @@ function Board({
   onAttackPointerCancel,
   suppressBoardClickRef,
   combatPreview,
+  actionPreview,
   attackDrag,
   onUnitHover,
 }: {
@@ -6092,6 +6345,7 @@ function Board({
     current: boolean;
   };
   combatPreview?: CombatPreviewState | null;
+  actionPreview?: ActionPreviewState | null;
   attackDrag?: AttackDragState | null;
   onUnitHover?: (
     unit: UnitState | null
@@ -6211,6 +6465,9 @@ function Board({
               }
               combatPreview={
                 combatPreview
+              }
+              actionPreview={
+                actionPreview
               }
               attackDrag={
                 attackDrag
@@ -6569,13 +6826,18 @@ function BoardUnit({
           ? styles.illegalAttackDragTarget
           : "",
 
-        combatPreview &&
         (
-          combatPreview.attackerInstanceId ===
-            unit.instanceId ||
-          combatPreview.defenderInstanceId ===
-            unit.instanceId
-        )
+          combatPreview &&
+          (
+            combatPreview.attackerInstanceId ===
+              unit.instanceId ||
+            combatPreview.defenderInstanceId ===
+              unit.instanceId
+          )
+        ) ||
+        actionPreview?.units[
+          unit.instanceId
+        ]
           ? styles.unitWithCombatPreview
           : "",
       ]
@@ -6696,6 +6958,71 @@ function BoardUnit({
         }
       }}
     >
+      {actionPreview?.units[
+        unit.instanceId
+      ] && (() => {
+        const preview =
+          actionPreview.units[
+            unit.instanceId
+          ];
+
+        if (preview.dies) {
+          return (
+            <div
+              className={
+                styles.combatDeathPreview
+              }
+              aria-hidden
+            >
+              ☠
+            </div>
+          );
+        }
+
+        if (preview.grounded) {
+          return (
+            <div
+              className={
+                styles.combatGroundPreview
+              }
+              aria-hidden
+            >
+              ☾ᶻ
+            </div>
+          );
+        }
+
+        if (
+          (preview.heal ?? 0) >
+          0
+        ) {
+          return (
+            <div
+              className={`${styles.combatValuePreview} ${styles.combatValueHeal}`}
+              aria-hidden
+            >
+              ♥{preview.heal}
+            </div>
+          );
+        }
+
+        if (
+          (preview.damage ?? 0) >
+          0
+        ) {
+          return (
+            <div
+              className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
+              aria-hidden
+            >
+              ⚔{preview.damage}
+            </div>
+          );
+        }
+
+        return null;
+      })()}
+
       {combatPreview &&
         combatPreview.attackerInstanceId ===
           unit.instanceId &&
@@ -6762,7 +7089,7 @@ function BoardUnit({
           >
             {combatPreview.attackerDies
               ? "☠"
-              : "Zzz"}
+              : "☾ᶻ"}
           </div>
         )}
 
@@ -6781,7 +7108,7 @@ function BoardUnit({
           >
             {combatPreview.defenderDies
               ? "☠"
-              : "Zzz"}
+              : "☾ᶻ"}
           </div>
         )}
 
