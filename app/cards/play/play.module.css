@@ -5424,3 +5424,28 @@
 .traits > span[data-trait="unique"] {
   display: none;
 }
+
+/* v18: stronger tier light along the upper frame. */
+.unitCard::after,
+.handCard::after,
+.mulliganCard::after,
+.selectedCardInner::after {
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent) 12%,
+      var(--tier-color, #8b1e2b) 28%,
+      var(--tier-accent, #d4af37) 50%,
+      var(--tier-color, #8b1e2b) 72%,
+      color-mix(in srgb, var(--tier-color, #8b1e2b) 76%, transparent) 88%,
+      transparent 100%
+    );
+  box-shadow:
+    0 0 5px color-mix(in srgb, var(--tier-accent, #d4af37) 72%, transparent),
+    0 0 13px color-mix(in srgb, var(--tier-accent, #d4af37) 46%, transparent),
+    0 3px 18px color-mix(in srgb, var(--tier-color, #8b1e2b) 34%, transparent);
+}

@@ -219,7 +219,7 @@
         "id": "silent-verdict",
         "name": "Silent Verdict",
         "trigger": "victory",
-        "text": "After Jacaelon wins a Political Conflict, the opposing player loses 2 additional Standing."
+        "text": "After Jacaelon wins a Political Conflict against a Character, the opposing Ruler loses 2 additional Standing."
       }
     ],
     "roles": [
@@ -250,7 +250,7 @@
         "id": "housebreaker",
         "name": "Housebreaker",
         "trigger": "victory",
-        "text": "When Gaelor destroys an enemy Character in a Military Conflict, deal 2 damage to the enemy player's Standing."
+        "text": "When Military damage dealt by Gaelor destroys an enemy Character during a Military Conflict, deal 2 damage to the opposing Ruler's Standing."
       }
     ],
     "roles": [
@@ -281,7 +281,7 @@
         "id": "dawns-edge",
         "name": "Dawn's Edge",
         "trigger": "passive",
-        "text": "The first 2 Military damage Alester would take each turn is prevented."
+        "text": "Prevent the first 2 points of Military damage that would be dealt to Alester each turn."
       }
     ],
     "roles": [
@@ -311,7 +311,7 @@
         "id": "manders-pact",
         "name": "The Mander's Pact",
         "trigger": "arrival",
-        "text": "Choose another Character. It gains +2 Influence permanently. At the start of your next turn, if that exact Character is still in play, draw 1 card."
+        "text": "Choose another Character. It gains +2 Influence permanently. At the start of Renrose's Ruler's next turn, if that exact Character is still in play, draw 1 card."
       }
     ],
     "roles": [
@@ -327,7 +327,7 @@
     "tierId": "c",
     "name": "Cordin Poole",
     "subtitle": "Maester",
-    "cost": 3,
+    "cost": 4,
     "power": 1,
     "influence": 4,
     "health": 3,
@@ -339,7 +339,7 @@
         "id": "as-i-was-saying",
         "name": "As I Was Saying",
         "trigger": "start-of-turn",
-        "text": "Draw 1 card. If this ability successfully drew a card on your previous turn, the card drawn by this ability this turn costs 1 less Command until the end of the turn."
+        "text": "Draw 1 card. If this ability successfully drew a card on Cordin's Ruler's previous turn, the card drawn by this ability this turn costs 1 less Command until the end of the turn."
       }
     ],
     "roles": [
@@ -397,7 +397,7 @@
         "id": "iron-wrath",
         "name": "Iron Wrath",
         "trigger": "arrival",
-        "text": "After Baelenys enters play, deal 3 damage to another Character. If that Character is destroyed this way, gain 3 Standing."
+        "text": "After Baelenys enters play, deal 3 damage to another Unit. If that Unit is destroyed this way, gain 3 Standing."
       }
     ],
     "roles": [
@@ -485,18 +485,11 @@
         "name": "The People Have Suffered Enough",
         "trigger": "arrival",
         "text": "Restore 3 Standing."
-      },
-      {
-        "id": "a-mothers-plea",
-        "name": "A Mother's Plea",
-        "trigger": "passive",
-        "text": "The first enemy Character that attacks one of your Characters each turn deals 2 less damage."
       }
     ],
     "roles": [
       "political",
-      "support",
-      "defensive"
+      "support"
     ],
     "subtitle": "Queen of the Seven Kingdoms",
     "houseId": "targaryen",
@@ -577,7 +570,7 @@
         "id": "buried-secret",
         "name": "Buried Secret",
         "trigger": "victory",
-        "text": "After Maela wins a Political Conflict, the opponent's next card costs 1 more Command."
+        "text": "After Maela wins a Political Conflict against a Character, the opposing Ruler's next card costs 1 more Command."
       }
     ],
     "roles": [
@@ -607,7 +600,7 @@
         "id": "dark-sisters-legacy",
         "name": "Dark Sister's Legacy",
         "trigger": "arrival",
-        "text": "Choose an enemy Character. It cannot initiate a Political Conflict during its controller's next turn."
+        "text": "Choose an enemy Character. It cannot initiate a Political Conflict during that Character's Ruler's next turn."
       }
     ],
     "roles": [
@@ -665,13 +658,13 @@
         "id": "you-never-saw-me",
         "name": "You Never Saw Me",
         "trigger": "victory",
-        "text": "After Visenya wins a Military Conflict, she cannot be targeted by enemy Characters, Events, or abilities until the start of your next turn."
+        "text": "After Visenya wins a Military Conflict against a Character, if this is her first deployment this game, she cannot be targeted by enemy Characters, Events, or abilities until the start of her Ruler's next turn."
       },
       {
         "id": "playing-her-own-game",
         "name": "Playing Her Own Game",
         "trigger": "end-of-turn",
-        "text": "At the end of your 3rd turn with Visenya in play, if she is still in play, return her to your hand."
+        "text": "At the end of her Ruler's 3rd turn with Visenya in play, if she is still in play, return her to her Ruler's hand. This ability can trigger only once per game."
       }
     ],
     "roles": [
@@ -702,7 +695,7 @@
         "id": "starfalls-shadow",
         "name": "Starfall's Shadow",
         "trigger": "passive",
-        "text": "While Lorenah is Ready, other Characters you control cannot be targeted by enemy Events."
+        "text": "While Lorenah is in play, other Characters ruled by her Ruler cannot be targeted by enemy Events."
       }
     ],
     "roles": [
@@ -729,15 +722,16 @@
     ],
     "abilities": [
       {
-        "id": "for-tonight-only-my-husband",
-        "name": "For Tonight, Only My Husband",
-        "trigger": "start-of-turn",
-        "text": "If you control Gaelor Targaryen, restore 2 Health to him. If he is Exhausted, Ready him."
+        "id": "our-fleet-is-yours",
+        "name": "Our Fleet Is Yours",
+        "trigger": "arrival",
+        "text": "Summon two 1/0/1 Velaryon Sailors. If Driftmark is the active Location, they have +1 Power while it remains active."
       }
     ],
     "roles": [
       "support",
-      "value"
+      "tempo",
+      "swarm"
     ],
     "subtitle": "Princess of Driftmark",
     "houseId": "velaryon",
@@ -785,14 +779,15 @@
     ],
     "abilities": [
       {
-        "id": "lets-all-go-for-a-walk",
-        "name": "Let's All Go for a Walk",
+        "id": "dreams-of-things-to-come",
+        "name": "Dreams of Things to Come",
         "trigger": "arrival",
-        "text": "Choose an enemy Character. It cannot initiate a Conflict until the start of your next turn."
+        "text": "Look at the top 3 cards of the opposing Ruler's deck. You may put one of them on the bottom of that deck. Return the others in the same order."
       }
     ],
     "roles": [
       "support",
+      "information",
       "tempo"
     ],
     "subtitle": "The King's Little Shadow",
@@ -814,10 +809,10 @@
     ],
     "abilities": [
       {
-        "id": "hold-the-door",
-        "name": "Hold the Door",
+        "id": "innkeeper-another",
+        "name": "Innkeeper! Another!",
         "trigger": "passive",
-        "text": "While Saathos is Ready, enemy Characters cannot attack your Standing directly."
+        "text": "Adjacent Characters have +1 Health while Saathos is in play."
       }
     ],
     "roles": [
@@ -874,7 +869,7 @@
         "id": "knights-of-oldtown",
         "name": "Knights of Oldtown",
         "trigger": "fall",
-        "text": "Your other Characters gain +1 Power until the end of your next turn."
+        "text": "Other Characters ruled by Brant's Ruler gain +1 Power until the end of Brant's Ruler's next turn."
       }
     ],
     "roles": [
@@ -961,8 +956,8 @@
       {
         "id": "when-people-look-up",
         "name": "When People Look Up",
-        "trigger": "arrival",
-        "text": "Choose another Character. It gains +1 Influence while Rickard remains in play."
+        "trigger": "passive",
+        "text": "Adjacent Characters have +1 Influence while Rickard is in play."
       }
     ],
     "roles": [
@@ -990,7 +985,7 @@
         "id": "he-asked-for-parley",
         "name": "He Asked for Parley",
         "trigger": "fall",
-        "text": "Your Characters gain +1 Power until the end of your next turn. If Timos was destroyed in a Military Conflict, they gain +2 Power instead."
+        "text": "Characters ruled by Timos's Ruler gain +1 Power until the end of Timos's Ruler's next turn. If Timos was destroyed in a Military Conflict, they gain +2 Power instead."
       }
     ],
     "roles": [
@@ -1019,7 +1014,7 @@
         "id": "seven-feet-of-grievance",
         "name": "Seven Feet of Grievance",
         "trigger": "passive",
-        "text": "The first time Baran survives Military damage each turn, he gains +2 Power until the end of the turn."
+        "text": "The first time Baran takes Military damage each turn, if he survives that damage, he gains +2 Power until the end of the turn."
       }
     ],
     "roles": [
@@ -1036,7 +1031,7 @@
     "tierId": "b",
     "name": "Clarisse Flowers",
     "cost": 5,
-    "power": 8,
+    "power": 3,
     "influence": 2,
     "health": 5,
     "traits": [
@@ -1045,23 +1040,24 @@
     ],
     "abilities": [
       {
-        "id": "blade-at-your-throat",
-        "name": "Blade at Your Throat",
-        "trigger": "victory",
-        "text": "After Clarisse wins a Military Conflict against a surviving Character, that Character does not Ready during its controller's next Ready step."
+        "id": "im-no-knight-nor-lady",
+        "name": "I'm No Knight nor Lady",
+        "trigger": "passive",
+        "text": "The first time Clarisse survives damage from a Military Conflict each turn, she gains +1 Power permanently."
       }
     ],
     "roles": [
       "military",
-      "control"
+      "scaling",
+      "durable"
     ],
-    "subtitle": "The Hidden Knight",
+    "subtitle": "No Knight nor Lady",
     "linkedCharacterId": "clarisse-flowers"
   },
   {
     "id": "orwell-morrigen",
     "cardType": "character",
-    "tierId": "c",
+    "tierId": "a",
     "name": "Ser Orwell Morrigen",
     "cost": 5,
     "power": 7,
@@ -1163,7 +1159,7 @@
         "id": "dragonstones-quiet",
         "name": "Dragonstone's Quiet",
         "trigger": "passive",
-        "text": "While Dragonstone is the active Location, your Characters have +1 Health."
+        "text": "While Dragonstone is the active Location, Units ruled by Malaenar's Ruler have +1 Health."
       }
     ],
     "roles": [
@@ -1261,7 +1257,7 @@
   {
     "id": "tion-lannister",
     "cardType": "character",
-    "tierId": "c",
+    "tierId": "b",
     "name": "Tion Lannister",
     "cost": 4,
     "power": 1,
@@ -1302,10 +1298,10 @@
     ],
     "abilities": [
       {
-        "id": "loyalty-to-the-prince",
-        "name": "Loyalty to the Prince",
-        "trigger": "passive",
-        "text": "While you control Visenor Targaryen, Martyn has +2 Power and +1 Influence."
+        "id": "safe-passage",
+        "name": "Safe Passage",
+        "trigger": "arrival",
+        "text": "Choose another Character ruled by Martyn's Ruler. Enemy Characters cannot initiate Conflicts against it until the start of Martyn's Ruler's next turn."
       }
     ],
     "roles": [
@@ -1333,7 +1329,7 @@
         "id": "proud-of-his-name",
         "name": "Proud of His Name",
         "trigger": "passive",
-        "text": "Whenever you deploy another Tyrell Character, Leo gains +1 Influence permanently."
+        "text": "Whenever you deploy Visenor Targaryen, another Tyrell Character, or a Hightower Character, Leo gains +1 Influence permanently."
       }
     ],
     "roles": [
@@ -1488,6 +1484,28 @@
     "linkedCharacterId": "clover-tully"
   },
   {
+    "id": "velaryon-sailor",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Velaryon Sailor",
+    "cost": 0,
+    "power": 1,
+    "influence": 0,
+    "health": 1,
+    "traits": [
+      "token"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "token",
+      "swarm"
+    ],
+    "houseId": "velaryon",
+    "deckable": false,
+    "special": "token"
+  },
+  {
     "id": "jhagar",
     "cardType": "dragon",
     "tierId": "s",
@@ -1598,7 +1616,7 @@
         "id": "trial-by-combat",
         "name": "Trial by Combat",
         "trigger": "event",
-        "text": "Choose one Character you control and one enemy Character. They immediately deal Power damage to each other simultaneously."
+        "text": "Choose one Character ruled by you and one enemy Character. They immediately deal Military damage equal to their Power to each other simultaneously."
       }
     ],
     "roles": [
@@ -1618,7 +1636,7 @@
         "id": "oldtown-massacre",
         "name": "Oldtown Massacre",
         "trigger": "event",
-        "text": "Deal 2 damage to every Character and Dragon on the board. Deal 2 damage to both players' Standing."
+        "text": "Deal 2 damage to every Character on the board. Deal 2 damage to both Rulers' Standing."
       }
     ],
     "roles": [
@@ -1638,7 +1656,7 @@
         "id": "brothers-tilt",
         "name": "The Brothers' Tilt",
         "trigger": "event",
-        "text": "Choose a Character. It gains +1 Power for each ready enemy Character whose Power it exceeds, up to +3. Then exhaust it."
+        "text": "Choose a Character. It gains +1 Power for each other Character in play with lower Power than it, up to +3. Then Exhaust it."
       }
     ],
     "roles": [
