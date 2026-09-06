@@ -5064,3 +5064,80 @@
     gap: 0.28rem;
   }
 }
+
+
+/* ────────────────────────────────────────────
+   v14 death skull refinement
+   ──────────────────────────────────────────── */
+
+/* Death mark: white skull with only a very soft black halo.
+   Keeps death visually neutral and distinct from Military/Political colors. */
+.combatDeathPreview,
+.standingBox .conflictValueLethal,
+.conflictValueLethal {
+  color: rgba(248, 248, 245, 0.98) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.72),
+    0 0 5px rgba(0, 0, 0, 0.26) !important;
+}
+
+
+/* ────────────────────────────────────────────
+   v15 Veiled Sight centering
+   ──────────────────────────────────────────── */
+
+/* Keep 1–8 revealed cards centered as a group.
+   Unlike an 8-column grid, flex does not reserve empty columns for missing cards. */
+.revealedHandModal .handLinearTrack,
+.revealedHandModal .handFanTrack {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: end;
+  gap:
+    clamp(
+      0.35rem,
+      0.7vw,
+      0.7rem
+    );
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  transform: none;
+}
+
+/* Size each card as one eighth of the available row at most.
+   Fewer than eight cards keep the same card size and the whole set stays centered. */
+.revealedHandModal .handCard {
+  flex:
+    0 1
+    calc(
+      (100% - 4.9rem) / 8
+    );
+  width:
+    calc(
+      (100% - 4.9rem) / 8
+    );
+  min-width: 0;
+  max-width: 175px;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 1050px) {
+  .revealedHandModal .handLinearTrack,
+  .revealedHandModal .handFanTrack {
+    gap: 0.28rem;
+  }
+
+  .revealedHandModal .handCard {
+    flex-basis:
+      calc(
+        (100% - 1.96rem) / 8
+      );
+    width:
+      calc(
+        (100% - 1.96rem) / 8
+      );
+  }
+}
