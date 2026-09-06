@@ -4954,10 +4954,11 @@
 .combatDeathPreview,
 .standingBox .conflictValueLethal,
 .conflictValueLethal {
-  color: rgba(248, 248, 245, 0.98) !important;
+  color: rgba(235, 235, 230, 0.96) !important;
   text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.88),
-    0 0 6px rgba(0, 0, 0, 0.42) !important;
+    0 2px 0 rgba(0, 0, 0, 0.98),
+    0 0 7px rgba(255, 255, 255, 0.56),
+    0 0 20px rgba(190, 195, 200, 0.34) !important;
 }
 
 
@@ -5139,4 +5140,24 @@
         (100% - 1.96rem) / 8
       );
   }
+}
+
+
+/* ────────────────────────────────────────────
+   v16 board indicator artwork positioning
+   ──────────────────────────────────────────── */
+
+/*
+ * Board-card result indicators belong to the ARTWORK area, not to the full
+ * card. The info panel occupies the bottom 60%, so the visible artwork is the
+ * top 40% of the card. Its vertical midpoint is therefore 20% of card height.
+ *
+ * Standing indicators are intentionally unaffected.
+ */
+.unitCard .combatValuePreview,
+.unitCard .combatDeathPreview,
+.unitCard .combatGroundPreview {
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
 }
