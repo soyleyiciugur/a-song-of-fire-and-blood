@@ -397,7 +397,7 @@
         "id": "iron-wrath",
         "name": "Iron Wrath",
         "trigger": "arrival",
-        "text": "After Baelenys enters play, deal 3 damage to an enemy Character. If that Character is destroyed this way, gain 3 Standing."
+        "text": "After Baelenys enters play, deal 3 damage to another Character. If that Character is destroyed this way, gain 3 Standing."
       }
     ],
     "roles": [
@@ -1638,7 +1638,7 @@
         "id": "brothers-tilt",
         "name": "The Brothers' Tilt",
         "trigger": "event",
-        "text": "Choose one Character you control. It gains +1 Power for each ready enemy Character whose Power it exceeds, up to +3. Then exhaust it."
+        "text": "Choose a Character. It gains +1 Power for each ready enemy Character whose Power it exceeds, up to +3. Then exhaust it."
       }
     ],
     "roles": [

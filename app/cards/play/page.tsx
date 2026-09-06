@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   useEffect,
   useMemo,
@@ -26,6 +28,7 @@ import {
   getEffectiveInfluence,
   getEffectivePower,
   getMaximumHealth,
+  getMilitaryCombatPreview,
   getMilitaryTargetOptions,
   getPoliticalDefenseOptions,
   MAX_MULLIGAN_REPLACEMENTS,
@@ -118,6 +121,40 @@ type PointerDragSession = {
   startX: number;
   startY: number;
   dragging: boolean;
+};
+
+type AttackKind =
+  | "military"
+  | "political";
+
+type AttackPointerSession = {
+  attackerInstanceId: string;
+  pointerId: number;
+  kind: AttackKind;
+  startX: number;
+  startY: number;
+  originX: number;
+  originY: number;
+  dragging: boolean;
+};
+
+type AttackDragState = {
+  attackerInstanceId: string;
+  kind: AttackKind;
+  originX: number;
+  originY: number;
+  x: number;
+  y: number;
+  canDrop: boolean;
+};
+
+type CombatPreviewState = {
+  attackerInstanceId: string;
+  defenderInstanceId: string;
+  attackerDies: boolean;
+  defenderDies: boolean;
+  attackerGrounded: boolean;
+  defenderGrounded: boolean;
 };
 
 type PointerDropTarget =
@@ -845,8 +882,32 @@ export default function GreatGamePlayPage() {
       null
     );
 
+  const attackPointerRef =
+    useRef<AttackPointerSession | null>(
+      null
+    );
+
   const suppressHandClickRef =
     useRef(false);
+
+  const suppressBoardClickRef =
+    useRef(false);
+
+  const [
+    attackDrag,
+    setAttackDrag,
+  ] =
+    useState<AttackDragState | null>(
+      null
+    );
+
+  const [
+    combatPreview,
+    setCombatPreview,
+  ] =
+    useState<CombatPreviewState | null>(
+      null
+    );
 
   const [
     exitConfirm,
@@ -1764,7 +1825,7 @@ export default function GreatGamePlayPage() {
       "artifact"
     ) {
       const targets =
-        alliedCharacters.filter(
+        allCharacters.filter(
           (unit) =>
             !unit.attachedArtifactId
         );
@@ -1773,7 +1834,7 @@ export default function GreatGamePlayPage() {
         targets.length === 0
       ) {
         setError(
-          "You have no Character who can equip this Artifact."
+          "There is no Character who can equip this Artifact."
         );
 
         return;
@@ -1966,8 +2027,8 @@ export default function GreatGamePlayPage() {
         "iron-wrath"
       ) {
         if (
-          unit.ownerId ===
-            currentGame.activePlayerId ||
+          unit.instanceId ===
+            effect.sourceUnitInstanceId ||
           getGameCard(
             unit.cardId
           ).cardType !==
@@ -1996,8 +2057,6 @@ export default function GreatGamePlayPage() {
       ) {
         case "artifact": {
           if (
-            unit.ownerId !==
-              currentGame.activePlayerId ||
             getGameCard(
               unit.cardId
             ).cardType !==
@@ -2047,8 +2106,6 @@ export default function GreatGamePlayPage() {
 
         case "brothers-tilt": {
           if (
-            unit.ownerId !==
-              currentGame.activePlayerId ||
             getGameCard(
               unit.cardId
             ).cardType !==
@@ -2492,7 +2549,7 @@ export default function GreatGamePlayPage() {
       card.cardType ===
       "artifact"
     ) {
-      return alliedCharacters.some(
+      return allCharacters.some(
         (unit) =>
           !unit.attachedArtifactId
       );
@@ -2632,8 +2689,8 @@ export default function GreatGamePlayPage() {
         "iron-wrath"
       ) {
         return (
-          unit.ownerId !==
-            currentGame.activePlayerId &&
+          unit.instanceId !==
+            effect.sourceUnitInstanceId &&
           getGameCard(
             unit.cardId
           ).cardType ===
@@ -2662,8 +2719,6 @@ export default function GreatGamePlayPage() {
       ) {
         case "artifact":
           return (
-            unit.ownerId ===
-              currentGame.activePlayerId &&
             getGameCard(
               unit.cardId
             ).cardType ===
@@ -2681,8 +2736,6 @@ export default function GreatGamePlayPage() {
 
         case "brothers-tilt":
           return (
-            unit.ownerId ===
-              currentGame.activePlayerId &&
             getGameCard(
               unit.cardId
             ).cardType ===
@@ -2759,7 +2812,7 @@ export default function GreatGamePlayPage() {
           return "ARRIVAL — Veiled Sight: choose a card from the revealed enemy hand.";
 
         case "iron-wrath":
-          return "ARRIVAL — Iron Wrath: choose an enemy Character.";
+          return "ARRIVAL — Iron Wrath: choose another Character.";
       }
     }
 
@@ -2774,7 +2827,7 @@ export default function GreatGamePlayPage() {
           return "Card selected — click your board or Play Card to confirm.";
 
         case "artifact":
-          return "Choose one of your Characters to equip.";
+          return "Choose any Character to equip.";
 
         case "word-in-right-ear":
           return "Choose any Character to gain +1 Influence this turn.";
@@ -2873,8 +2926,6 @@ export default function GreatGamePlayPage() {
       "artifact"
     ) {
       return (
-        unit.ownerId ===
-          currentGame.activePlayerId &&
         targetCard.cardType ===
           "character" &&
         !unit.attachedArtifactId
@@ -2893,7 +2944,15 @@ export default function GreatGamePlayPage() {
 
     if (
       card.id ===
-        "brothers-tilt" ||
+        "brothers-tilt"
+    ) {
+      return (
+        targetCard.cardType ===
+        "character"
+      );
+    }
+
+    if (
       card.id ===
         "trial-by-combat"
     ) {
@@ -2996,6 +3055,459 @@ export default function GreatGamePlayPage() {
       : canDropHandCardOnBoard(
           handCard
         );
+  }
+
+  function getUnitAtPoint(
+    x: number,
+    y: number
+  ): UnitState | null {
+    const element =
+      document.elementFromPoint(
+        x,
+        y
+      ) as HTMLElement | null;
+
+    const unitElement =
+      element?.closest<HTMLElement>(
+        "[data-unit-instance-id]"
+      );
+
+    const instanceId =
+      unitElement?.dataset
+        .unitInstanceId;
+
+    return instanceId
+      ? allUnits.find(
+          (unit) =>
+            unit.instanceId ===
+            instanceId
+        ) ?? null
+      : null;
+  }
+
+  function isStandingAtPoint(
+    x: number,
+    y: number
+  ) {
+    const element =
+      document.elementFromPoint(
+        x,
+        y
+      ) as HTMLElement | null;
+
+    return Boolean(
+      element?.closest(
+        '[data-attack-standing-target="true"]'
+      )
+    );
+  }
+
+  function buildCombatPreview(
+    attacker: UnitState,
+    defender: UnitState
+  ): CombatPreviewState | null {
+    const preview =
+      getMilitaryCombatPreview(
+        currentGame,
+        attacker.instanceId,
+        defender.instanceId
+      );
+
+    return preview
+      ? {
+          attackerInstanceId:
+            attacker.instanceId,
+          defenderInstanceId:
+            defender.instanceId,
+          attackerDies:
+            preview.attackerDies,
+          defenderDies:
+            preview.defenderDies,
+          attackerGrounded:
+            preview.attackerGrounded,
+          defenderGrounded:
+            preview.defenderGrounded,
+        }
+      : null;
+  }
+
+  function handleSelectedTargetHover(
+    defender: UnitState | null
+  ) {
+    if (
+      pendingConflict?.kind !==
+        "military" ||
+      !defender
+    ) {
+      setCombatPreview(
+        null
+      );
+      return;
+    }
+
+    const attacker =
+      allUnits.find(
+        (unit) =>
+          unit.instanceId ===
+          pendingConflict
+            .attackerInstanceId
+      );
+
+    if (
+      !attacker ||
+      !getMilitaryTargetOptions(
+        currentGame,
+        attacker.instanceId
+      ).unitInstanceIds.includes(
+        defender.instanceId
+      )
+    ) {
+      setCombatPreview(
+        null
+      );
+      return;
+    }
+
+    setCombatPreview(
+      buildCombatPreview(
+        attacker,
+        defender
+      )
+    );
+  }
+
+  function handleAttackPointerDown(
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState,
+    kind: AttackKind
+  ) {
+    if (
+      event.button !== 0 ||
+      currentGame.pendingEffect ||
+      pendingPlay ||
+      pendingConflict ||
+      gameInteractionLocked
+    ) {
+      return;
+    }
+
+    const legal =
+      kind ===
+        "military"
+        ? canMilitaryAttack(
+            unit
+          )
+        : canPoliticalAttack(
+            unit
+          );
+
+    if (!legal) {
+      return;
+    }
+
+    const rect =
+      event.currentTarget
+        .getBoundingClientRect();
+
+    attackPointerRef.current = {
+      attackerInstanceId:
+        unit.instanceId,
+      pointerId:
+        event.pointerId,
+      kind,
+      startX:
+        event.clientX,
+      startY:
+        event.clientY,
+      originX:
+        rect.left +
+        rect.width / 2,
+      originY:
+        rect.top +
+        rect.height / 2,
+      dragging: false,
+    };
+
+    suppressBoardClickRef.current =
+      false;
+
+    event.currentTarget
+      .setPointerCapture(
+        event.pointerId
+      );
+  }
+
+  function handleAttackPointerMove(
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState
+  ) {
+    const session =
+      attackPointerRef.current;
+
+    if (
+      !session ||
+      session.pointerId !==
+        event.pointerId ||
+      session.attackerInstanceId !==
+        unit.instanceId
+    ) {
+      return;
+    }
+
+    if (!session.dragging) {
+      const distance =
+        Math.hypot(
+          event.clientX -
+            session.startX,
+          event.clientY -
+            session.startY
+        );
+
+      if (distance < 7) {
+        return;
+      }
+
+      session.dragging =
+        true;
+
+      suppressBoardClickRef.current =
+        true;
+
+      setInspectedUnitId(
+        null
+      );
+
+      setError(
+        null
+      );
+    }
+
+    event.preventDefault();
+
+    const target =
+      getUnitAtPoint(
+        event.clientX,
+        event.clientY
+      );
+
+    let canDrop =
+      false;
+
+    if (
+      session.kind ===
+      "military"
+    ) {
+      const options =
+        getMilitaryTargetOptions(
+          currentGame,
+          unit.instanceId
+        );
+
+      canDrop =
+        target
+          ? options.unitInstanceIds.includes(
+              target.instanceId
+            )
+          : options.canAttackStanding &&
+            isStandingAtPoint(
+              event.clientX,
+              event.clientY
+            );
+
+      setCombatPreview(
+        target &&
+        options.unitInstanceIds.includes(
+          target.instanceId
+        )
+          ? buildCombatPreview(
+              unit,
+              target
+            )
+          : null
+      );
+    } else {
+      const defense =
+        getPoliticalDefenseOptions(
+          currentGame,
+          unit.instanceId
+        );
+
+      canDrop =
+        target
+          ? defense.defenderInstanceIds.includes(
+              target.instanceId
+            )
+          : defense.unopposed &&
+            isStandingAtPoint(
+              event.clientX,
+              event.clientY
+            );
+
+      setCombatPreview(
+        null
+      );
+    }
+
+    setAttackDrag({
+      attackerInstanceId:
+        unit.instanceId,
+      kind:
+        session.kind,
+      originX:
+        session.originX,
+      originY:
+        session.originY,
+      x:
+        event.clientX,
+      y:
+        event.clientY,
+      canDrop,
+    });
+  }
+
+  function clearAttackPointerDrag() {
+    attackPointerRef.current =
+      null;
+
+    setAttackDrag(
+      null
+    );
+
+    setCombatPreview(
+      null
+    );
+  }
+
+  function handleAttackPointerUp(
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState
+  ) {
+    const session =
+      attackPointerRef.current;
+
+    if (
+      !session ||
+      session.pointerId !==
+        event.pointerId ||
+      session.attackerInstanceId !==
+        unit.instanceId
+    ) {
+      return;
+    }
+
+    if (!session.dragging) {
+      attackPointerRef.current =
+        null;
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const target =
+      getUnitAtPoint(
+        event.clientX,
+        event.clientY
+      );
+
+    const standing =
+      isStandingAtPoint(
+        event.clientX,
+        event.clientY
+      );
+
+    clearAttackPointerDrag();
+
+    if (
+      session.kind ===
+      "military"
+    ) {
+      const options =
+        getMilitaryTargetOptions(
+          currentGame,
+          unit.instanceId
+        );
+
+      if (
+        target &&
+        options.unitInstanceIds.includes(
+          target.instanceId
+        )
+      ) {
+        dispatch({
+          type:
+            "military-attack",
+          attackerInstanceId:
+            unit.instanceId,
+          targetUnitInstanceId:
+            target.instanceId,
+        });
+      } else if (
+        standing &&
+        options.canAttackStanding
+      ) {
+        dispatch({
+          type:
+            "military-attack",
+          attackerInstanceId:
+            unit.instanceId,
+          targetPlayerId:
+            opponentOf(
+              currentGame.activePlayerId
+            ),
+        });
+      }
+    } else {
+      const defense =
+        getPoliticalDefenseOptions(
+          currentGame,
+          unit.instanceId
+        );
+
+      if (
+        target &&
+        defense.defenderInstanceIds.includes(
+          target.instanceId
+        )
+      ) {
+        dispatch({
+          type:
+            "political-attack",
+          attackerInstanceId:
+            unit.instanceId,
+          defenderInstanceId:
+            target.instanceId,
+        });
+      } else if (
+        standing &&
+        defense.unopposed
+      ) {
+        dispatch({
+          type:
+            "political-attack",
+          attackerInstanceId:
+            unit.instanceId,
+        });
+      }
+    }
+
+    requestAnimationFrame(
+      () => {
+        suppressBoardClickRef.current =
+          false;
+      }
+    );
+  }
+
+  function handleAttackPointerCancel() {
+    clearAttackPointerDrag();
+
+    requestAnimationFrame(
+      () => {
+        suppressBoardClickRef.current =
+          false;
+      }
+    );
   }
 
   function beginPointerDrag(
@@ -3922,6 +4434,16 @@ export default function GreatGamePlayPage() {
         selectedInstanceId={
           selectedAttacker
         }
+        attackStandingTarget
+        combatPreview={
+          combatPreview
+        }
+        attackDrag={
+          attackDrag
+        }
+        onUnitHover={
+          handleSelectedTargetHover
+        }
       />
 
       <div
@@ -3971,6 +4493,33 @@ export default function GreatGamePlayPage() {
             : undefined
         }
         pointerDropBoard
+        canMilitaryAttack={
+          canMilitaryAttack
+        }
+        canPoliticalAttack={
+          canPoliticalAttack
+        }
+        onAttackPointerDown={
+          handleAttackPointerDown
+        }
+        onAttackPointerMove={
+          handleAttackPointerMove
+        }
+        onAttackPointerUp={
+          handleAttackPointerUp
+        }
+        onAttackPointerCancel={
+          handleAttackPointerCancel
+        }
+        suppressBoardClickRef={
+          suppressBoardClickRef
+        }
+        combatPreview={
+          combatPreview
+        }
+        attackDrag={
+          attackDrag
+        }
         renderActions={(
           unit
         ) => (
@@ -4054,6 +4603,14 @@ export default function GreatGamePlayPage() {
           hoveredCommandCost
         }
       />
+
+      {attackDrag && (
+        <AttackDragOverlay
+          drag={
+            attackDrag
+          }
+        />
+      )}
 
       <section
         className={
@@ -4320,6 +4877,21 @@ function MainMenu({
         }
         aria-hidden
       />
+
+      <nav
+        className="greatGameNav greatGameNavMenu"
+        aria-label="The Great Game"
+      >
+        <Link href="/cards">
+          Cards
+        </Link>
+        <Link href="/cards/decks">
+          Decks
+        </Link>
+        <Link href="/cards/play" className="greatGameNavActive">
+          Play
+        </Link>
+      </nav>
 
       <div
         className={
@@ -5022,6 +5594,17 @@ function Board({
   canReceivePlay = false,
   onBoardClick,
   pointerDropBoard = false,
+  attackStandingTarget = false,
+  canMilitaryAttack,
+  canPoliticalAttack,
+  onAttackPointerDown,
+  onAttackPointerMove,
+  onAttackPointerUp,
+  onAttackPointerCancel,
+  suppressBoardClickRef,
+  combatPreview,
+  attackDrag,
+  onUnitHover,
 }: {
   title: string;
   units: UnitState[];
@@ -5044,6 +5627,35 @@ function Board({
   canReceivePlay?: boolean;
   onBoardClick?: () => void;
   pointerDropBoard?: boolean;
+  attackStandingTarget?: boolean;
+  canMilitaryAttack?: (
+    unit: UnitState
+  ) => boolean;
+  canPoliticalAttack?: (
+    unit: UnitState
+  ) => boolean;
+  onAttackPointerDown?: (
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState,
+    kind: AttackKind
+  ) => void;
+  onAttackPointerMove?: (
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState
+  ) => void;
+  onAttackPointerUp?: (
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState
+  ) => void;
+  onAttackPointerCancel?: () => void;
+  suppressBoardClickRef?: {
+    current: boolean;
+  };
+  combatPreview?: CombatPreviewState | null;
+  attackDrag?: AttackDragState | null;
+  onUnitHover?: (
+    unit: UnitState | null
+  ) => void;
 }) {
   return (
     <section
@@ -5088,6 +5700,11 @@ function Board({
             ? "true"
             : undefined
         }
+        data-attack-standing-target={
+          attackStandingTarget
+            ? "true"
+            : undefined
+        }
       >
         {units.length ===
           0 && (
@@ -5127,6 +5744,42 @@ function Board({
               onInspect={() =>
                 onInspectUnit?.(unit)
               }
+              canMilitaryAttack={
+                canMilitaryAttack?.(
+                  unit
+                ) ?? false
+              }
+              canPoliticalAttack={
+                canPoliticalAttack?.(
+                  unit
+                ) ?? false
+              }
+              onAttackPointerDown={
+                onAttackPointerDown
+              }
+              onAttackPointerMove={
+                onAttackPointerMove
+              }
+              onAttackPointerUp={
+                onAttackPointerUp
+              }
+              onAttackPointerCancel={
+                onAttackPointerCancel
+              }
+              suppressBoardClickRef={
+                suppressBoardClickRef
+              }
+              combatPreview={
+                combatPreview
+              }
+              attackDragging={
+                attackDrag
+                  ?.attackerInstanceId ===
+                unit.instanceId
+              }
+              onHover={
+                onUnitHover
+              }
               actions={
                 renderActions?.(
                   unit
@@ -5140,6 +5793,88 @@ function Board({
   );
 }
 
+function AttackDragOverlay({
+  drag,
+}: {
+  drag: AttackDragState;
+}) {
+  const dx =
+    drag.x -
+    drag.originX;
+
+  const dy =
+    drag.y -
+    drag.originY;
+
+  const length =
+    Math.hypot(dx, dy);
+
+  const angle =
+    Math.atan2(dy, dx) *
+    180 /
+    Math.PI;
+
+  return createPortal(
+    <div
+      className={[
+        styles.attackDragLayer,
+        drag.kind === "military"
+          ? styles.attackDragMilitary
+          : styles.attackDragPolitical,
+        drag.canDrop
+          ? styles.attackDragValid
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      aria-hidden
+    >
+      <div
+        className={
+          styles.attackDragArrow
+        }
+        style={{
+          left: drag.originX,
+          top: drag.originY,
+          width: length,
+          transform:
+            `rotate(${angle}deg)`,
+        }}
+      >
+        <span
+          className={
+            styles.attackDragArrowHead
+          }
+        />
+      </div>
+
+      <div
+        className={
+          styles.attackDragBadge
+        }
+        style={{
+          left: drag.x,
+          top: drag.y,
+        }}
+      >
+        <strong>
+          {drag.kind ===
+            "military"
+            ? "⚔"
+            : "♛"}
+        </strong>
+        <span>
+          {drag.kind ===
+            "military"
+            ? "Military"
+            : "Political"}
+        </span>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 function BoardUnit({
   unit,
   state,
@@ -5147,6 +5882,16 @@ function BoardUnit({
   selected,
   onClick,
   onInspect,
+  canMilitaryAttack = false,
+  canPoliticalAttack = false,
+  onAttackPointerDown,
+  onAttackPointerMove,
+  onAttackPointerUp,
+  onAttackPointerCancel,
+  suppressBoardClickRef,
+  combatPreview,
+  attackDragging = false,
+  onHover,
   actions,
 }: {
   unit: UnitState;
@@ -5155,11 +5900,43 @@ function BoardUnit({
   selected: boolean;
   onClick: () => void;
   onInspect: () => void;
+  canMilitaryAttack?: boolean;
+  canPoliticalAttack?: boolean;
+  onAttackPointerDown?: (
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState,
+    kind: AttackKind
+  ) => void;
+  onAttackPointerMove?: (
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState
+  ) => void;
+  onAttackPointerUp?: (
+    event: ReactPointerEvent<HTMLDivElement>,
+    unit: UnitState
+  ) => void;
+  onAttackPointerCancel?: () => void;
+  suppressBoardClickRef?: {
+    current: boolean;
+  };
+  combatPreview?: CombatPreviewState | null;
+  attackDragging?: boolean;
+  onHover?: (
+    unit: UnitState | null
+  ) => void;
   actions?: ReactNode;
 }) {
   const card =
     getGameCard(
       unit.cardId
+    );
+
+  const [
+    attackHoverKind,
+    setAttackHoverKind,
+  ] =
+    useState<AttackKind | null>(
+      null
     );
 
   if (!isUnitCard(card)) {
@@ -5211,6 +5988,28 @@ function BoardUnit({
           ? styles.targetableUnit
           : "",
 
+        targetable &&
+        unit.ownerId ===
+          state.activePlayerId
+          ? styles.friendlyTargetableUnit
+          : "",
+
+        targetable &&
+        unit.ownerId !==
+          state.activePlayerId
+          ? styles.enemyTargetableUnit
+          : "",
+
+        attackHoverKind ===
+          "military"
+          ? styles.attackHalfMilitaryHover
+          : "",
+
+        attackHoverKind ===
+          "political"
+          ? styles.attackHalfPoliticalHover
+          : "",
+
         selected
           ? styles.selectedUnit
           : "",
@@ -5231,10 +6030,137 @@ function BoardUnit({
       data-unit-instance-id={
         unit.instanceId
       }
+      onPointerMove={(
+        event
+      ) => {
+        onAttackPointerMove?.(
+          event,
+          unit
+        );
+
+        if (
+          attackDragging
+        ) {
+          return;
+        }
+
+        if (
+          !onAttackPointerDown
+        ) {
+          return;
+        }
+
+        const rect =
+          event.currentTarget
+            .getBoundingClientRect();
+
+        const leftHalf =
+          event.clientX <
+          rect.left +
+            rect.width / 2;
+
+        if (
+          leftHalf &&
+          canMilitaryAttack
+        ) {
+          setAttackHoverKind(
+            "military"
+          );
+        } else if (
+          !leftHalf &&
+          canPoliticalAttack
+        ) {
+          setAttackHoverKind(
+            "political"
+          );
+        } else {
+          setAttackHoverKind(
+            null
+          );
+        }
+      }}
+      onPointerEnter={() =>
+        onHover?.(
+          unit
+        )
+      }
+      onPointerLeave={() => {
+        if (
+          !attackDragging
+        ) {
+          setAttackHoverKind(
+            null
+          );
+        }
+
+        onHover?.(
+          null
+        );
+      }}
+      onPointerDown={(
+        event
+      ) => {
+        if (
+          targetable ||
+          !onAttackPointerDown
+        ) {
+          return;
+        }
+
+        const rect =
+          event.currentTarget
+            .getBoundingClientRect();
+
+        const leftHalf =
+          event.clientX <
+          rect.left +
+            rect.width / 2;
+
+        const kind:
+          AttackKind =
+          leftHalf
+            ? "military"
+            : "political";
+
+        if (
+          (kind ===
+            "military" &&
+            !canMilitaryAttack) ||
+          (kind ===
+            "political" &&
+            !canPoliticalAttack)
+        ) {
+          return;
+        }
+
+        onAttackPointerDown(
+          event,
+          unit,
+          kind
+        );
+      }}
+      onPointerUp={(
+        event
+      ) =>
+        onAttackPointerUp?.(
+          event,
+          unit
+        )
+      }
+      onPointerCancel={() =>
+        onAttackPointerCancel?.()
+      }
       onClick={(
         event
       ) => {
         event.stopPropagation();
+
+        if (
+          suppressBoardClickRef
+            ?.current
+        ) {
+          return;
+        }
 
         if (
           targetable
@@ -5245,6 +6171,44 @@ function BoardUnit({
         }
       }}
     >
+      {combatPreview &&
+        combatPreview.attackerInstanceId ===
+          unit.instanceId &&
+        (combatPreview.attackerDies ||
+          combatPreview.attackerGrounded) && (
+          <div
+            className={
+              combatPreview.attackerDies
+                ? styles.combatDeathPreview
+                : styles.combatGroundPreview
+            }
+            aria-hidden
+          >
+            {combatPreview.attackerDies
+              ? "☠"
+              : "⌄"}
+          </div>
+        )}
+
+      {combatPreview &&
+        combatPreview.defenderInstanceId ===
+          unit.instanceId &&
+        (combatPreview.defenderDies ||
+          combatPreview.defenderGrounded) && (
+          <div
+            className={
+              combatPreview.defenderDies
+                ? styles.combatDeathPreview
+                : styles.combatGroundPreview
+            }
+            aria-hidden
+          >
+            {combatPreview.defenderDies
+              ? "☠"
+              : "⌄"}
+          </div>
+        )}
+
       <CardArtwork
         card={card}
         className={

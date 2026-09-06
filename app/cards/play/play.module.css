@@ -2207,7 +2207,7 @@
 
   width: 100%;
 
-  cursor: default;
+  cursor: var(--realm-cursor);
 
   transition:
     transform 0.18s ease,
@@ -2218,19 +2218,20 @@
 
 .targetableUnit {
   cursor: var(--realm-action-cursor);
+  transform: translateY(-4px);
+}
 
-  transform:
-    translateY(-4px);
-
+.friendlyTargetableUnit {
   box-shadow:
-    0 0 0 1px
-      var(--tier-accent, #d4af37),
-    0 0 18px
-      color-mix(
-        in srgb,
-        var(--tier-accent, #d4af37) 28%,
-        transparent
-      ),
+    0 0 0 2px rgba(215, 184, 104, 0.78),
+    0 0 20px rgba(212, 175, 55, 0.25),
+    0 14px 30px rgba(0, 0, 0, 0.42);
+}
+
+.enemyTargetableUnit {
+  box-shadow:
+    0 0 0 2px rgba(194, 75, 65, 0.86),
+    0 0 22px rgba(173, 52, 47, 0.33),
     0 14px 30px rgba(0, 0, 0, 0.42);
 }
 
@@ -4073,4 +4074,250 @@
   .fannedHand .handCard {
     transition: none;
   }
+}
+
+
+.attackHalfMilitaryHover::before,
+.attackHalfPoliticalHover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+.attackHalfMilitaryHover::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(177, 58, 46, 0.16) 0%,
+      rgba(177, 58, 46, 0.07) 42%,
+      transparent 58%
+    );
+  box-shadow:
+    inset 2px 0 rgba(224, 112, 91, 0.34);
+}
+
+.attackHalfPoliticalHover::before {
+  background:
+    linear-gradient(
+      270deg,
+      rgba(173, 137, 50, 0.16) 0%,
+      rgba(173, 137, 50, 0.07) 42%,
+      transparent 58%
+    );
+  box-shadow:
+    inset -2px 0 rgba(225, 196, 100, 0.34);
+}
+
+.attackDragLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  pointer-events: none;
+}
+
+.attackDragArrow {
+  position: fixed;
+  height: 4px;
+  transform-origin: 0 50%;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(245, 230, 200, 0.22),
+      currentColor 34%,
+      currentColor
+    );
+  color: #c65f50;
+  filter:
+    drop-shadow(0 0 6px currentColor)
+    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.72));
+}
+
+.attackDragArrow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform:
+    translate(-40%, -50%)
+    rotate(45deg);
+  border: 2px solid currentColor;
+  background: #14090a;
+}
+
+.attackDragArrowHead {
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  width: 17px;
+  height: 17px;
+  transform:
+    translate(38%, -50%)
+    rotate(45deg);
+  border-top: 4px solid currentColor;
+  border-right: 4px solid currentColor;
+}
+
+.attackDragMilitary {
+  color: #d86b5a;
+}
+
+.attackDragPolitical {
+  color: #dfbd54;
+}
+
+.attackDragValid .attackDragArrow {
+  filter:
+    drop-shadow(0 0 9px currentColor)
+    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.72));
+}
+
+.attackDragBadge {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transform: translate(12px, 12px);
+  padding: 0.35rem 0.52rem;
+  border: 1px solid currentColor;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 20, 20, 0.96),
+      rgba(11, 8, 10, 0.97)
+    );
+  color: inherit;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.55);
+  font-family:
+    var(--font-hotd),
+    serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.48rem;
+}
+
+.attackDragBadge strong {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.combatDeathPreview,
+.combatGroundPreview {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.45rem;
+  height: 4.45rem;
+  transform:
+    translate(-50%, -50%)
+    rotate(-7deg);
+  pointer-events: none;
+  border-radius: 50%;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 3.9rem;
+  line-height: 1;
+  text-shadow:
+    0 2px 0 rgba(20, 3, 4, 0.98),
+    0 0 6px currentColor,
+    0 0 18px color-mix(in srgb, currentColor 56%, transparent);
+}
+
+.combatDeathPreview {
+  color: #e46e62;
+}
+
+.combatGroundPreview {
+  color: #d6b86a;
+  font-size: 4.5rem;
+  transform:
+    translate(-50%, -50%);
+}
+
+/* Fixed Hearthstone-style hand, retaining the current fan/card geometry. */
+.handSection {
+  position: fixed;
+  left: 50%;
+  bottom: -7.1rem;
+  z-index: 95;
+  width:
+    min(
+      1180px,
+      calc(100vw - 2rem)
+    );
+  margin: 0;
+  transform:
+    translateX(-50%);
+  pointer-events: none;
+}
+
+.handSection .sectionHeading {
+  width: max-content;
+  margin:
+    0 auto
+    -0.15rem;
+  padding:
+    0.34rem
+    0.7rem;
+  border:
+    1px solid rgba(212, 175, 55, 0.14);
+  background:
+    rgba(10, 7, 9, 0.72);
+  backdrop-filter:
+    blur(7px);
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.handSection .hand,
+.handSection .handCard {
+  pointer-events: auto;
+}
+
+.handSection:hover {
+  z-index: 105;
+}
+
+
+/* Fixed-hand scroll clearance */
+.logSection {
+  margin-bottom: 10rem;
+}
+
+
+/* Cursor/glow interaction fix
+   The visual glow layers must never capture pointer hit-testing,
+   and board cards should keep The Great Game cursor on hover. */
+.unitCard,
+.unitCardWrapper {
+  cursor: var(--realm-cursor);
+}
+
+.unitCard button:not(:disabled),
+.unitCard [role="button"]:not([aria-disabled="true"]),
+.targetableUnit,
+.attackHalfMilitaryHover,
+.attackHalfPoliticalHover {
+  cursor: var(--realm-action-cursor);
+}
+
+.unitCard::before,
+.unitCard::after,
+.unitCardWrapper::before,
+.unitCardWrapper::after,
+.attackHalfMilitaryHover::before,
+.attackHalfPoliticalHover::before {
+  pointer-events: none !important;
 }

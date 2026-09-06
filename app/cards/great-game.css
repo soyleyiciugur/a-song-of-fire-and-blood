@@ -27,3 +27,70 @@
 .great-game-shell textarea {
   cursor: var(--realm-cursor);
 }
+
+
+/* Shared The Great Game section navigation */
+.greatGameNav {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(214, 184, 108, 0.22);
+  background: rgba(8, 6, 7, 0.78);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.24),
+    inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.greatGameNav a {
+  position: relative;
+  min-width: 78px;
+  padding: 0.78rem 1.05rem;
+  color: rgba(242, 223, 189, 0.58);
+  background: transparent;
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color 0.16s ease,
+    background 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.greatGameNav a + a {
+  border-left: 1px solid rgba(214, 184, 108, 0.10);
+}
+
+.greatGameNav a:hover {
+  color: #f7e7c4;
+  background: rgba(214, 184, 108, 0.055);
+}
+
+.greatGameNav a.greatGameNavActive {
+  color: #fff0d0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(142, 47, 45, 0.30),
+      rgba(91, 24, 27, 0.22)
+    );
+  box-shadow:
+    inset 0 -2px rgba(214, 184, 108, 0.32);
+}
+
+.greatGameNav a.greatGameNavActive::after {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 0;
+  height: 1px;
+  background: rgba(225, 197, 111, 0.82);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.40);
+}
+
+.greatGameNavMenu {
+  margin-bottom: 2.15rem;
+}

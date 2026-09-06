@@ -1352,11 +1352,17 @@ function queueArrivalEffectMutable(
     card.id ===
     "baelenys-targaryen"
   ) {
+    const ironWrathTargets =
+      allCharacters(
+        state
+      ).filter(
+        (target) =>
+          target.instanceId !==
+          unit.instanceId
+      );
+
     if (
-      enemyCharacters(
-        state,
-        unit.ownerId
-      ).length > 0
+      ironWrathTargets.length > 0
     ) {
       state.pendingEffect = {
         id:
@@ -1580,17 +1586,11 @@ function resolvePendingEffectMutable(
     }
 
     case "iron-wrath": {
-      const enemyId =
-        opponentOf(
-          pending!
-            .controllerId
-        );
-
       assertRule(
         Boolean(
           action.targetInstanceId
         ),
-        "Iron Wrath requires an enemy Character."
+        "Iron Wrath requires another Character."
       );
 
       const target =
@@ -1605,9 +1605,9 @@ function resolvePendingEffectMutable(
       );
 
       assertRule(
-        target!.ownerId ===
-          enemyId,
-        "Iron Wrath must target an enemy Character."
+        target!.instanceId !==
+          source!.instanceId,
+        "Iron Wrath must target another Character."
       );
 
       assertRule(
@@ -1615,7 +1615,7 @@ function resolvePendingEffectMutable(
           target!.cardId
         ).cardType ===
           "character",
-        "Iron Wrath must target an enemy Character."
+        "Iron Wrath must target a Character."
       );
 
       const result =
@@ -1649,6 +1649,145 @@ function resolvePendingEffectMutable(
       return;
     }
   }
+}
+
+
+export interface MilitaryCombatPreview {
+  attackerDies: boolean;
+  defenderDies: boolean;
+  attackerGrounded: boolean;
+  defenderGrounded: boolean;
+  attackerDamageTaken: number;
+  defenderDamageTaken: number;
+}
+
+function previewMilitaryDamage(
+  unit: UnitState,
+  card: GameCard,
+  amount: number
+): number {
+  let finalDamage =
+    Math.max(0, amount);
+
+  if (
+    card.id ===
+      "alester-dayne"
+  ) {
+    const alreadyPrevented =
+      unit.counters[
+        "dawns-edge-prevented"
+      ] ?? 0;
+
+    finalDamage =
+      Math.max(
+        0,
+        finalDamage -
+          Math.max(
+            0,
+            2 -
+              alreadyPrevented
+          )
+      );
+  }
+
+  return finalDamage;
+}
+
+export function getMilitaryCombatPreview(
+  state: GameState,
+  attackerInstanceId: string,
+  defenderInstanceId: string
+): MilitaryCombatPreview | null {
+  const attacker =
+    findUnit(
+      state,
+      attackerInstanceId
+    );
+
+  const defender =
+    findUnit(
+      state,
+      defenderInstanceId
+    );
+
+  if (
+    !attacker ||
+    !defender
+  ) {
+    return null;
+  }
+
+  const attackerCard =
+    getGameCard(
+      attacker.cardId
+    );
+
+  const defenderCard =
+    getGameCard(
+      defender.cardId
+    );
+
+  if (
+    !isUnitCard(attackerCard) ||
+    !isUnitCard(defenderCard)
+  ) {
+    return null;
+  }
+
+  const defenderDamage =
+    previewMilitaryDamage(
+      defender,
+      defenderCard,
+      getEffectivePower(
+        state,
+        attacker
+      )
+    );
+
+  const attackerDamage =
+    defender.grounded
+      ? 0
+      : previewMilitaryDamage(
+          attacker,
+          attackerCard,
+          getEffectivePower(
+            state,
+            defender
+          )
+        );
+
+  const attackerLethal =
+    attacker.currentHealth -
+      attackerDamage <=
+    0;
+
+  const defenderLethal =
+    defender.currentHealth -
+      defenderDamage <=
+    0;
+
+  return {
+    attackerDies:
+      attackerCard.cardType ===
+        "character" &&
+      attackerLethal,
+    defenderDies:
+      defenderCard.cardType ===
+        "character" &&
+      defenderLethal,
+    attackerGrounded:
+      attackerCard.cardType ===
+        "dragon" &&
+      attackerLethal,
+    defenderGrounded:
+      defenderCard.cardType ===
+        "dragon" &&
+      defenderLethal,
+    attackerDamageTaken:
+      attackerDamage,
+    defenderDamageTaken:
+      defenderDamage,
+  };
 }
 
 // ─────────────────────────────────────────────
@@ -1916,11 +2055,7 @@ function validatePlayTargets(
       "Artifact target does not exist."
     );
 
-    assertRule(
-      target!.ownerId ===
-        playerId,
-      "Artifacts may only be equipped to Characters you control."
-    );
+    /* Tactical targeting: Artifacts may be equipped to Characters on either side. */
 
     assertRule(
       getGameCard(
@@ -2032,13 +2167,11 @@ function validatePlayTargets(
 
     assertRule(
       Boolean(target) &&
-        target!.ownerId ===
-          playerId &&
         getGameCard(
           target!.cardId
         ).cardType ===
           "character",
-      "The Brothers' Tilt must target a Character you control."
+      "The Brothers' Tilt must target a Character."
     );
   }
 }
@@ -2260,7 +2393,7 @@ function resolveEventMutable(
 
     const enemyId =
       opponentOf(
-        playerId
+        target.ownerId
       );
 
     const weakerReady =
@@ -3549,73 +3682,86 @@ function processManderDelayedEffects(
 // Cordin
 // ─────────────────────────────────────────────
 
-function resolveCordinStartOfTurn(
+function processCordinStartOfTurn(
   state: GameState,
-  playerId: PlayerId,
-  cordin: UnitState
+  playerId: PlayerId
 ) {
-  const previousSuccessful =
-    cordin.flags[
-      "cordin-previous-draw-successful"
-    ] ?? false;
+  const cordins =
+    state.players[
+      playerId
+    ].board.filter(
+      (unit) =>
+        unit.cardId ===
+        "cordin-poole"
+    );
 
-  logAbilityActivation(
-    state,
-    cordin.cardId,
-    "as-i-was-saying",
-    playerId
-  );
+  for (
+    const cordin of
+    cordins
+  ) {
+    const previousSuccessful =
+      cordin.flags[
+        "cordin-previous-draw-successful"
+      ] ?? false;
 
-  const result =
-    drawCardMutable(
+    logAbilityActivation(
       state,
+      cordin.cardId,
+      "as-i-was-saying",
       playerId
     );
 
-  if (
-    previousSuccessful &&
-    result.success &&
-    result.handInstanceId
-  ) {
-    const drawn =
-      getHandCard(
-        state.players[
-          playerId
-        ],
-        result.handInstanceId
-      );
-
-    drawn?.costModifiers.push({
-      id:
-        nextRuntimeId(
-          state,
-          "cost-mod"
-        ),
-
-      amount: -1,
-
-      expiresAt:
-        "end-of-player-turn",
-
-      expiresForPlayerId:
-        playerId,
-    });
-
-    if (
-      result.cardId
-    ) {
-      addLog(
+    const result =
+      drawCardMutable(
         state,
-        `As I Was Saying reduces ${getGameCard(result.cardId).name}'s cost by 1 Command this turn.`,
         playerId
       );
-    }
-  }
 
-  cordin.flags[
-    "cordin-previous-draw-successful"
-  ] =
-    result.success;
+    if (
+      previousSuccessful &&
+      result.success &&
+      result.handInstanceId
+    ) {
+      const drawn =
+        getHandCard(
+          state.players[
+            playerId
+          ],
+          result.handInstanceId
+        );
+
+      drawn?.costModifiers.push({
+        id:
+          nextRuntimeId(
+            state,
+            "cost-mod"
+          ),
+
+        amount: -1,
+
+        expiresAt:
+          "end-of-player-turn",
+
+        expiresForPlayerId:
+          playerId,
+      });
+
+      if (
+        result.cardId
+      ) {
+        addLog(
+          state,
+          `As I Was Saying reduces ${getGameCard(result.cardId).name}'s cost by 1 Command this turn.`,
+          playerId
+        );
+      }
+    }
+
+    cordin.flags[
+      "cordin-previous-draw-successful"
+    ] =
+      result.success;
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -3716,185 +3862,77 @@ function resetPerTurnCounters(
 // Weylar
 // ─────────────────────────────────────────────
 
-function resolveWeylarEndOfTurn(
+function processWeylarEndOfTurn(
   state: GameState,
-  playerId: PlayerId,
-  weylar: UnitState
+  playerId: PlayerId
 ) {
-  if (
-    weylar.flags[
-      "weylar-triggered"
-    ]
-  ) {
-    return;
-  }
-
-  const turns =
-    (
-      weylar.counters[
-        "turns-in-play"
-      ] ?? 0
-    ) + 1;
-
-  weylar.counters[
-    "turns-in-play"
-  ] =
-    turns;
-
-  logAbilityActivation(
-    state,
-    weylar.cardId,
-    "price-of-loyalty",
-    playerId,
-    `Progress: ${Math.min(turns, 3)}/3.`
-  );
-
-  if (
-    turns === 3
-  ) {
-    drawCardMutable(
-      state,
-      playerId
-    );
-
-    drawCardMutable(
-      state,
-      playerId
-    );
-
+  const weylars =
     state.players[
       playerId
-    ].nextCommandBonus +=
-      2;
-
-    weylar.flags[
-      "weylar-triggered"
-    ] = true;
-
-    addLog(
-      state,
-      `The Price of Loyalty resolves. ${playerName(playerId)} draws 2 cards and gains +2 Command next turn.`,
-      playerId
-    );
-  }
-}
-
-// ─────────────────────────────────────────────
-// Ordered board trigger queue
-// ─────────────────────────────────────────────
-
-function resolveBoardTriggeredAbilityMutable(
-  state: GameState,
-  playerId: PlayerId,
-  unit: UnitState,
-  abilityId: AbilityId
-) {
-  switch (
-    abilityId
-  ) {
-    case "as-i-was-saying":
-      resolveCordinStartOfTurn(
-        state,
-        playerId,
-        unit
-      );
-      return;
-
-    case "price-of-loyalty":
-      resolveWeylarEndOfTurn(
-        state,
-        playerId,
-        unit
-      );
-      return;
-
-    default:
-      return;
-  }
-}
-
-function processBoardTriggerMutable(
-  state: GameState,
-  playerId: PlayerId,
-  trigger: Extract<
-    AbilityTrigger,
-    | "start-of-turn"
-    | "end-of-turn"
-  >
-) {
-  /*
-   * Board order is deployment order:
-   * units are appended with board.push() and are never
-   * re-sorted. Therefore index 0 is the oldest surviving
-   * permanent and the last index is the newest.
-   *
-   * Snapshot the instance IDs first so effects that remove
-   * or add units while this queue is resolving cannot change
-   * the order of the current trigger window.
-   */
-  const orderedUnitIds =
-    state.players[
-      playerId
-    ].board.map(
+    ].board.filter(
       (unit) =>
-        unit.instanceId
+        unit.cardId ===
+        "weylar-rocke"
     );
 
   for (
-    const instanceId of
-    orderedUnitIds
+    const weylar of
+    weylars
   ) {
-    const unit =
-      state.players[
-        playerId
-      ].board.find(
-        (candidate) =>
-          candidate.instanceId ===
-          instanceId
-      );
-
-    if (!unit) {
+    if (
+      weylar.flags[
+        "weylar-triggered"
+      ]
+    ) {
       continue;
     }
 
-    const card =
-      getGameCard(
-        unit.cardId
-      );
+    const turns =
+      (
+        weylar.counters[
+          "turns-in-play"
+        ] ?? 0
+      ) + 1;
 
-    const triggeredAbilities =
-      card.abilities.filter(
-        (ability) =>
-          ability.trigger ===
-          trigger
-      );
+    weylar.counters[
+      "turns-in-play"
+    ] =
+      turns;
 
-    for (
-      const ability of
-      triggeredAbilities
+    logAbilityActivation(
+      state,
+      weylar.cardId,
+      "price-of-loyalty",
+      playerId,
+      `Progress: ${Math.min(turns, 3)}/3.`
+    );
+
+    if (
+      turns === 3
     ) {
-      /*
-       * Re-check the source before every ability in case an
-       * earlier trigger removed it from play.
-       */
-      const stillInPlay =
-        state.players[
-          playerId
-        ].board.some(
-          (candidate) =>
-            candidate.instanceId ===
-            instanceId
-        );
-
-      if (!stillInPlay) {
-        break;
-      }
-
-      resolveBoardTriggeredAbilityMutable(
+      drawCardMutable(
         state,
-        playerId,
-        unit,
-        ability.id
+        playerId
+      );
+
+      drawCardMutable(
+        state,
+        playerId
+      );
+
+      state.players[
+        playerId
+      ].nextCommandBonus +=
+        2;
+
+      weylar.flags[
+        "weylar-triggered"
+      ] = true;
+
+      addLog(
+        state,
+        `The Price of Loyalty resolves. ${playerName(playerId)} draws 2 cards and gains +2 Command next turn.`,
+        playerId
       );
     }
   }
@@ -3946,34 +3984,17 @@ function startTurnMutable(
     playerId
   );
 
-  /*
-   * Start-of-turn draw order:
-   * 1) Natural turn draw always happens first.
-   * 2) Board Start-of-Turn abilities resolve from left to right
-   *    (oldest deployed surviving unit → newest).
-   * 3) Non-board delayed Start-of-Turn effects resolve afterwards.
-   *
-   * This matters for effects such as Cordin Poole's "As I Was Saying":
-   * only the card drawn by Cordin's own ability can receive its
-   * conditional -1 Command modifier. The normal turn draw must never
-   * accidentally receive that discount.
-   */
-  drawCardMutable(
+  processManderDelayedEffects(
     state,
     playerId
   );
 
-  processBoardTriggerMutable(
+  processCordinStartOfTurn(
     state,
-    playerId,
-    "start-of-turn"
+    playerId
   );
 
-  /*
-   * Delayed effects are not board permanents, so they resolve
-   * after the ordered board trigger queue.
-   */
-  processManderDelayedEffects(
+  drawCardMutable(
     state,
     playerId
   );
@@ -4050,10 +4071,9 @@ function endTurnMutable(
     "Resolve the pending ability before ending the turn."
   );
 
-  processBoardTriggerMutable(
+  processWeylarEndOfTurn(
     state,
-    playerId,
-    "end-of-turn"
+    playerId
   );
 
   expireHandModifiersAtEnd(
