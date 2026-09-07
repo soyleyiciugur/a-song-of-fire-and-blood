@@ -7,8 +7,8 @@ type Quote = {
   note?: string | null; // Yeni alan eklendi
   speakerId?: string;
   speakerName: string;
-  chapterSlug?: string;
-  chapterTitle?: string;
+  chapterSlug?: string | null;
+  chapterTitle?: string | null;
 };
 
 type Props = {
