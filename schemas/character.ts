@@ -23,7 +23,7 @@ export const CharacterSchema = z.object({
     status: CharacterStatusSchema,
     note: z.string().optional(),
   }).strict().optional(),
-  age: z.number().int().nonnegative().default(0),
+  age: z.number().int().nonnegative().optional(),
   // Full birth date — computeAge() in lib/age.ts needs `year` to derive the
   // character's current in-world age (worldDate.year - nameday.year, with
   // an adjustment for whether this year's nameday has passed). Previously

@@ -55,9 +55,11 @@ export default function CharacterInfoBox({ character }: Props) {
     character.portrait
   );
 
-  const age = character.nameday
-    ? computeAge(character.nameday, worldDate, character.death)
-    : character.age;
+  const age =
+    character.age ??
+    (character.nameday
+      ? computeAge(character.nameday, worldDate, character.death)
+      : undefined);
 
   const namedayLabel = character.nameday
     ? formatNameday(character.nameday, worldDate.era)

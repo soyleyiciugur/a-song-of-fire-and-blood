@@ -11,7 +11,7 @@
     "house": "Demirsoy",
     "title": "Game Master",
     "status": "Alive",
-    "age": 26,
+    "age": 27,
     "nameday": {
       "day": 30,
       "moon": 11,
@@ -55,7 +55,6 @@
     "house": "House Hightower",
     "title": "Lady Alysanne Hightower of Oldtown",
     "status": "Dead",
-    "age": 17,
     "nameday": {
       "day": 24,
       "moon": 1,
@@ -104,7 +103,6 @@
     "house": "House Targaryen",
     "title": "King of the Seven Kingdoms",
     "status": "Alive",
-    "age": 58,
     "nameday": {
       "day": 8,
       "moon": 11,
@@ -177,7 +175,6 @@
     "house": "House Targaryen",
     "title": "Grand Maester",
     "status": "Alive",
-    "age": 67,
     "nameday": {
       "day": 5,
       "moon": 4,
@@ -225,7 +222,6 @@
     "house": "House Stark",
     "title": "Lord of Winterfell and Warden of the North",
     "status": "Dead",
-    "age": 41,
     "nameday": {
       "day": 4,
       "moon": 12,
@@ -272,7 +268,6 @@
     "house": "-",
     "title": "Maester of the Red Keep",
     "status": "Alive",
-    "age": 68,
     "nameday": {
       "day": 24,
       "moon": 11,
@@ -322,7 +317,6 @@
     "house": "House Whent",
     "title": "Former Sworn Brother of the Kingsguard",
     "status": "Dead",
-    "age": 30,
     "nameday": {
       "day": 3,
       "moon": 9,
@@ -367,7 +361,6 @@
     "house": "House Dayne",
     "title": "Lord of Torrentine",
     "status": "Alive",
-    "age": 38,
     "nameday": {
       "day": 14,
       "moon": 10,
@@ -408,7 +401,6 @@
     "house": "House Hightower",
     "title": "Former Hand of the King",
     "status": "Dead",
-    "age": 68,
     "nameday": {
       "day": 1,
       "moon": 1,
@@ -464,7 +456,6 @@
     "house": "House Targaryen",
     "title": "Prince Gaelor of House Targaryen",
     "status": "Alive",
-    "age": 18,
     "nameday": {
       "day": 7,
       "moon": 2,
@@ -535,7 +526,6 @@
     "house": "House Targaryen",
     "title": "Prince Jacaelon of House Targaryen, Hand of the King",
     "status": "Alive",
-    "age": 17,
     "nameday": {
       "day": 4,
       "moon": 11,
@@ -608,7 +598,6 @@
     "house": "House Targaryen",
     "title": "Queen of the Seven Kingdoms",
     "status": "Alive",
-    "age": 48,
     "nameday": {
       "day": 17,
       "moon": 4,
@@ -670,7 +659,6 @@
     "house": "House Dayne",
     "title": "Lady Lorenah Dayne of Torrentine",
     "status": "Alive",
-    "age": 16,
     "nameday": {
       "day": 1,
       "moon": 10,
@@ -720,7 +708,6 @@
     "house": "House Targaryen",
     "title": "Princess Maela of House Targaryen",
     "status": "Alive",
-    "age": 17,
     "nameday": {
       "day": 4,
       "moon": 11,
@@ -775,7 +762,6 @@
     "house": "House Targaryen",
     "title": "Lord of Dragonstone",
     "status": "Alive",
-    "age": 60,
     "nameday": {
       "day": 4,
       "moon": 8,
@@ -821,7 +807,6 @@
     "house": "House Velaryon",
     "title": "Princess Naella",
     "status": "Alive",
-    "age": 15,
     "nameday": {
       "day": 21,
       "moon": 12,
@@ -874,7 +859,6 @@
       "status": "Alive",
       "note": "Hiding at the scholars' retreat near Starfall under Lorenah Dayne's protection. Pregnant with Visenor's child. Visenor is no longer with her and is secretly operating in Oldtown as Maester Arthur Sand. On the Tenth Day of the Eighth Moon, Visenor dispatched a coded raven toward her using a Dornish cipher, hoping Maester Edmyn Uller would be able to decipher it."
     },
-    "age": 16,
     "nameday": {
       "day": 18,
       "moon": 12,
@@ -926,7 +910,6 @@
     "house": "House Stark",
     "title": "Lord of Winterfell and Warden of the North",
     "status": "Alive",
-    "age": 23,
     "nameday": {
       "day": 8,
       "moon": 7,
@@ -976,7 +959,6 @@
     "house": "House Targaryen",
     "title": "Princess Saera of House Targaryen",
     "status": "Alive",
-    "age": 20,
     "nameday": {
       "day": 19,
       "moon": 8,
@@ -1037,7 +1019,6 @@
     "house": "House Dayne",
     "title": "Sworn Brother of the Kingsguard",
     "status": "Alive",
-    "age": 18,
     "nameday": {
       "day": 26,
       "moon": 3,
@@ -1101,7 +1082,6 @@
     "house": "House Vance",
     "title": "Former Sworn Brother of the Kingsguard",
     "status": "Dead",
-    "age": 25,
     "nameday": {
       "day": 25,
       "moon": 1,
@@ -1149,7 +1129,6 @@
       "status": "Alive",
       "note": "Imprisoned in the black cells of the Red Keep following his assassination attempt on Prince Gaelor in the tourney lists. Gaelor has claimed him personally."
     },
-    "age": 35,
     "nameday": {
       "day": 23,
       "moon": 3,
@@ -1189,7 +1168,6 @@
     "house": "House Morrigen",
     "title": "Lord Commander of the Kingsguard",
     "status": "Alive",
-    "age": 54,
     "nameday": {
       "day": 11,
       "moon": 7,
@@ -1231,7 +1209,6 @@
     "house": "-",
     "title": "Sworn Brother of the Kingsguard",
     "status": "Alive",
-    "age": 25,
     "nameday": {
       "day": 5,
       "moon": 5,
@@ -1275,7 +1252,6 @@
     "house": "House Baratheon",
     "title": "Lord of Storm's End",
     "status": "Alive",
-    "age": 17,
     "nameday": {
       "day": 25,
       "moon": 4,
@@ -1321,7 +1297,6 @@
     "house": "House Hightower",
     "title": "Former Lord of Oldtown",
     "status": "Dead",
-    "age": 15,
     "nameday": {
       "day": 4,
       "moon": 2,
@@ -1373,7 +1348,6 @@
     "house": "House Lannister",
     "title": "Master of Coin",
     "status": "Alive",
-    "age": 50,
     "nameday": {
       "day": 13,
       "moon": 2,
@@ -1424,7 +1398,6 @@
       "status": "Alive",
       "note": "Denied entry to Pentos by Targaryen diplomatic pressure. Has sailed for Tyrosh, where an informant within his camp reports he intends to offer the city the protection of his dragon in exchange for sanctuary and support."
     },
-    "age": 55,
     "nameday": {
       "day": 12,
       "moon": 2,
@@ -1476,7 +1449,6 @@
     "house": "House Targaryen",
     "title": "Princess Vhaemys of House Targaryen",
     "status": "Alive",
-    "age": 7,
     "nameday": {
       "day": 20,
       "moon": 4,
@@ -1533,7 +1505,6 @@
       "status": "Alive",
       "note": "Currently concealed within the Hightower in Oldtown under the identity of Maester Arthur Sand, serving publicly as tutor to Melessa Hightower and Leo Tyrell. Only a small circle knows his true identity. Rhaella remains hidden at the scholars' retreat near Starfall and is pregnant with their first child. Visenor has bonded with the dragon Boneskin, whose existence remains unknown to the Crown."
     },
-    "age": 24,
     "nameday": {
       "day": 19,
       "moon": 7,
@@ -1605,7 +1576,6 @@
     "house": "-",
     "title": "Master of Whisperers to the Hand of the King",
     "status": "Alive",
-    "age": 35,
     "nameday": {
       "day": 24,
       "moon": 1,
@@ -1646,7 +1616,6 @@
     "house": "-",
     "title": "Maester of the Scholars' Retreat",
     "status": "Alive",
-    "age": 60,
     "nameday": {
       "day": 18,
       "moon": 8,
@@ -1688,7 +1657,6 @@
     "house": "House Hightower",
     "title": "Lady of Oldtown",
     "status": "Alive",
-    "age": 13,
     "nameday": {
       "day": 30,
       "moon": 2,
@@ -1745,7 +1713,6 @@
       "status": "Alive",
       "note": "Was in King's Landing as of the seventeenth day of the seventh moon, 99 AC. Entered a Flea Bottom brothel, held Dark Sister to Prince Jacaelon's throat during a sexual encounter she initiated while believing him to be Gaelor. Fled before Alester Dayne could catch her. Current location unknown."
     },
-    "age": 20,
     "nameday": {
       "day": 18,
       "moon": 7,
@@ -1795,7 +1762,6 @@
       "status": "Alive",
       "note": "No information about Naela's current whereabouts or condition is known to the realm."
     },
-    "age": 50,
     "nameday": {
       "day": 12,
       "moon": 3,
@@ -1832,7 +1798,6 @@
     "house": "House Blackwood",
     "title": "Lord Godfrey Blackwood of Raventree Hall",
     "status": "Alive",
-    "age": 25,
     "nameday": {
       "day": 14,
       "moon": 5,
@@ -1874,7 +1839,6 @@
     "house": "House Tyrell",
     "title": "Lord of Highgarden and Warden of the South",
     "status": "Alive",
-    "age": 39,
     "nameday": {
       "day": 26,
       "moon": 5,
@@ -1919,7 +1883,6 @@
     "house": "House Mullendore",
     "title": "Knight of the Reach",
     "status": "Alive",
-    "age": 32,
     "nameday": {
       "day": 12,
       "moon": 3,
@@ -1963,7 +1926,6 @@
     "house": "House Caswell",
     "title": "High Septon",
     "status": "Alive",
-    "age": 74,
     "nameday": {
       "day": 18,
       "moon": 1,
@@ -2007,7 +1969,6 @@
     "house": "House Tyrell",
     "title": "Heir to Highgarden",
     "status": "Alive",
-    "age": 14,
     "nameday": {
       "day": 9,
       "moon": 5,
@@ -2054,7 +2015,6 @@
     "house": "-",
     "title": "Maester of the Hightower",
     "status": "Alive",
-    "age": 57,
     "nameday": {
       "day": 13,
       "moon": 8,
@@ -2100,7 +2060,6 @@
     "house": "House Strong",
     "title": "Sworn Sword of Dragonstone",
     "status": "Alive",
-    "age": 39,
     "nameday": {
       "day": 6,
       "moon": 10,
@@ -2143,7 +2102,6 @@
     "house": "-",
     "title": "Paramour of the Lord of Dragonstone",
     "status": "Alive",
-    "age": 17,
     "nameday": {
       "day": 7,
       "moon": 7,
@@ -2184,7 +2142,6 @@
     "house": "House Bracken",
     "title": "Lord of Stone Hedge",
     "status": "Alive",
-    "age": 39,
     "nameday": {
       "day": 24,
       "moon": 1,
@@ -2223,7 +2180,6 @@
     "house": "House Tully",
     "title": "Lord of Riverrun, Lord Paramount of the Trident",
     "status": "Alive",
-    "age": 71,
     "nameday": {
       "day": 25,
       "moon": 8,
@@ -2264,7 +2220,6 @@
     "house": "House Targaryen",
     "title": "Former King of the Seven Kingdoms",
     "status": "Dead",
-    "age": 73,
     "nameday": {
       "day": 15,
       "moon": 2,
@@ -2311,7 +2266,6 @@
     "house": "House Targaryen",
     "title": "Former Queen of the Seven Kingdoms",
     "status": "Dead",
-    "age": 70,
     "nameday": {
       "day": 9,
       "moon": 6,
@@ -2356,7 +2310,6 @@
     "house": "House Targaryen",
     "title": "Former Lady of Dragonstone",
     "status": "Dead",
-    "age": 51,
     "nameday": {
       "day": 23,
       "moon": 9,
@@ -2393,7 +2346,6 @@
     "house": "House Targaryen",
     "title": "Prince Vaenarr of House Targaryen",
     "status": "Alive",
-    "age": 51,
     "nameday": {
       "day": 15,
       "moon": 4,
@@ -2427,7 +2379,6 @@
     "house": "House Lannister",
     "title": "Lord of Casterly Rock, Shield of Lannisport and Warden of the West",
     "status": "Alive",
-    "age": 74,
     "nameday": {
       "day": 10,
       "moon": 12,
@@ -2464,7 +2415,6 @@
     "house": "House Lannister",
     "title": "Lady of Casterly Rock",
     "status": "Alive",
-    "age": 71,
     "nameday": {
       "day": 8,
       "moon": 12,
@@ -2500,7 +2450,6 @@
     "house": "House Marbrand",
     "title": "Lady Myrielle Marbrand of Ashemark",
     "status": "Alive",
-    "age": 47,
     "nameday": {
       "day": 16,
       "moon": 11,
@@ -2532,7 +2481,6 @@
     "house": "House Greyjoy",
     "title": "The Salt King",
     "status": "Dead",
-    "age": 44,
     "nameday": {
       "day": 21,
       "moon": 3,
@@ -2572,7 +2520,6 @@
     "house": "House Dayne",
     "title": "Ser Maron Dayne of Starfall",
     "status": "Dead",
-    "age": 32,
     "nameday": {
       "day": 2,
       "moon": 1,
@@ -2613,7 +2560,6 @@
     "house": "House Karstark",
     "title": "Lady Lyarra Karstark of Karhold",
     "status": "Dead",
-    "age": 33,
     "nameday": {
       "day": 13,
       "moon": 1,
@@ -2654,7 +2600,6 @@
     "house": "House Tully",
     "title": "Heir to Riverrun",
     "status": "Alive",
-    "age": 47,
     "nameday": {
       "day": 18,
       "moon": 6,
@@ -2690,7 +2635,6 @@
     "house": "House Tully",
     "title": "Knight of House Tully",
     "status": "Alive",
-    "age": 24,
     "nameday": {
       "day": 12,
       "moon": 10,
@@ -2725,7 +2669,6 @@
     "house": "House Bracken",
     "title": "Lady Bethany Bracken of Stone Hedge",
     "status": "Alive",
-    "age": 21,
     "nameday": {
       "day": 13,
       "moon": 3,
@@ -2760,7 +2703,6 @@
     "house": "House Arryn",
     "title": "Lord of the Eyrie, Defender of the Vale and Warden of the East",
     "status": "Alive",
-    "age": 49,
     "nameday": {
       "day": 4,
       "moon": 3,
@@ -2795,7 +2737,6 @@
     "house": "House Hightower",
     "title": "Sworn Sword of Oldtown",
     "status": "Alive",
-    "age": 20,
     "nameday": {
       "day": 14,
       "moon": 4,
@@ -2843,7 +2784,6 @@
     "house": "House Stark",
     "title": "Lord Benjen Stark of Winterfell",
     "status": "Alive",
-    "age": 15,
     "nameday": {
       "day": 3,
       "moon": 12,
@@ -2930,7 +2870,6 @@
     "house": "House Stark",
     "title": "Former Lord of Winterfell and Warden of the North",
     "status": "Dead",
-    "age": 59,
     "nameday": {
       "day": 17,
       "moon": 4,
