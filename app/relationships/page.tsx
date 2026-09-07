@@ -26,7 +26,7 @@ interface Edge {
 }
 
 function formatCharacterName(name: string) {
-  return name.replace(/^(Ser|Lady|Lord|King|Queen|Prince|Princess)\s+/i, "").trim();
+  return name.replace(/^(Ser|Lady|Lord|King|Queen|Prince|Princess|Mother)\s+/i, "").trim();
 }
 
 // Deterministic pseudo-random color for characters with no house (or an

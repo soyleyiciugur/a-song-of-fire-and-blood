@@ -208,5 +208,35 @@
     "color": "#111111",
     "secondaryColor": "#F2F2F2",
     "description": "An ancient northern house descended from House Stark, founded when Karlon Stark was granted lands for putting down a rebel lord more than a thousand years ago. From Karl's Hold came Karhold, and from its Stark lords came the Karstarks. Though bound to Winterfell by blood as well as fealty, they have grown over the centuries into one of the North's principal houses in their own right."
+  },
+  {
+    "id": "mooton",
+    "name": "House Mooton",
+    "words": "Wisdom and Strength",
+    "seat": "Maidenpool",
+    "sigilSrc": "/images/houses/mooton.webp",
+    "color": "#8B0000",
+    "secondaryColor": "#F2F2F2",
+    "description": "An old and wealthy Riverlands house seated at Maidenpool, whose lands command an important port on the Bay of Crabs. Though sworn beneath Riverrun, the Mootons possess wealth and influence disproportionate to their place in the feudal order, making Maidenpool a valuable prize whenever the politics of the Trident begin to fracture."
+  },
+  {
+    "id": "harlaw",
+    "name": "House Harlaw",
+    "words": "We Reap What You Sow",
+    "seat": "Ten Towers",
+    "sigilSrc": "/images/houses/harlaw.webp",
+    "color": "#111111",
+    "secondaryColor": "#C0C0C0",
+    "description": "Among the oldest, wealthiest, and most powerful houses of the Iron Islands, the Harlaws rule their island from Ten Towers beneath the overlordship of House Greyjoy. Their strength, lands, and numerous cadet branches make them a power in their own right, and one whose support can carry considerable weight whenever the captains and lords of the isles are divided."
+  },
+  {
+    "id": "celtigar",
+    "name": "House Celtigar",
+    "words": "Our Claws Are Sharp",
+    "seat": "Claw Isle",
+    "sigilSrc": "/images/houses/celtigar.webp",
+    "color": "#C62828",
+    "secondaryColor": "#F2F2F2",
+    "description": "An ancient Valyrian house of Claw Isle, House Celtigar shares with the Targaryens and Velaryons a lineage reaching back to the Freehold. Wealthy by the standards of the Crownlands and traditionally bound to Dragonstone and the Iron Throne, the Celtigars remain one of the realm's surviving houses of Valyrian blood."
   }
 ]

@@ -1,5 +1,116 @@
 [
   {
+    "id": "gallery-alester-jace-fleabottom",
+    "src": "/images/gallery/alester-jace-fleabottom.png",
+    "caption": null,
+    "characterIds": [
+      "jacaelon-targaryen",
+      "alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-alester-jace-training",
+    "src": "/images/gallery/alester-jace-training.png",
+    "caption": null,
+    "characterIds": [
+      "jacaelon-targaryen",
+      "alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-grance-myles",
+    "src": "/images/gallery/grance-myles.png",
+    "caption": null,
+    "characterIds": [
+      "grance-morrigen",
+      "myles-mooton"
+    ],
+    "houseIds": [
+      "morrigen",
+      "mooton"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-lorenah-jace-alester-proposal",
+    "src": "/images/gallery/lorenah-jace-alester-proposal.jpg",
+    "caption": null,
+    "characterIds": [
+      "lorenah-dayne",
+      "jacaelon-targaryen",
+      "alester-dayne"
+    ],
+    "houseIds": [
+      "dayne",
+      "targaryen"
+    ],
+    "dragonIds": ["jhagar"],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-vhaemys-jace-alester-breakfast",
+    "src": "/images/gallery/vhaemys-jace-alester-breakfast.png",
+    "caption": null,
+    "characterIds": [
+      "vhaemys-targaryen",
+      "jacaelon-targaryen",
+      "alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-vhaemys-jace-alester-toy",
+    "src": "/images/gallery/vhaemys-jace-alester-toy.png",
+    "caption": null,
+    "characterIds": [
+      "vhaemys-targaryen",
+      "jacaelon-targaryen",
+      "alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen",
+      "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
     "id": "gallery-nedenotr",
     "src": "/videos/reels/nedenotaraf.mp4",
     "caption": "satıcı olduğu için",
