@@ -24,6 +24,7 @@ export type CharacterId =
   | "gaelor-targaryen"
   | "godfrey-blackwood"
   | "harrik-greyjoy"
+  | "hrrm"
   | "jacaelon-targaryen"
   | "jaery-targaryen"
   | "leo-tyrell"
@@ -88,6 +89,14 @@ export interface Character {
   name: string;
   nickname?: string;
   aliases: string[];
+
+  /**
+   * Hidden characters remain accessible by direct route,
+   * but should be excluded from character listings,
+   * search results, relationship graphs, family trees,
+   * house/member lists, and other discovery surfaces.
+   */
+  hidden?: boolean;
 
   house: string;
   title: string;

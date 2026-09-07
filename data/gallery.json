@@ -525,7 +525,8 @@
     "src": "/videos/reels/reis-suphelendi.mp4",
     "caption": "reis şüphelendi biri HRRM'ı durdursun",
     "characterIds": [
-      "baelenys-targaryen"
+      "baelenys-targaryen",
+      "hrrm"
     ],
     "houseIds": [
       "targaryen"
@@ -639,7 +640,8 @@
     "src": "/images/gallery/hrrm-evreninde-boy-ortalamasi.webp",
     "caption": "herhangi bir adam vs. jace",
     "characterIds": [
-      "jacaelon-targaryen"
+      "jacaelon-targaryen",
+      "hrrm"
     ],
     "houseIds": [
       "targaryen"

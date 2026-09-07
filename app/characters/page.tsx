@@ -1,4 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\characters\page.tsx
+
 import Link from "next/link";
 
 import { getCharacters } from "@/lib/characters";
@@ -8,14 +9,16 @@ import MiniPortrait from "@/components/MiniPortrait";
 import styles from "./characters.module.css";
 
 export default function Characters() {
-  const characters = getCharacters().sort((a, b) => {
-    const rankA = getTitleRank(a.title);
-    const rankB = getTitleRank(b.title);
+  const characters = getCharacters()
+    .filter((character) => !character.hidden)
+    .sort((a, b) => {
+      const rankA = getTitleRank(a.title);
+      const rankB = getTitleRank(b.title);
 
-    if (rankA !== rankB) return rankA - rankB;
+      if (rankA !== rankB) return rankA - rankB;
 
-    return a.name.localeCompare(b.name);
-  });
+      return a.name.localeCompare(b.name);
+    });
 
   return (
     <main className="page-shell">

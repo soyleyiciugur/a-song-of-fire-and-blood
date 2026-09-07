@@ -1,5 +1,47 @@
 [
   {
+    "id": "hrrm",
+    "name": "Hasan Mert Demirsoy",
+    "nickname": "HRRM",
+    "aliases": [
+      "HMD",
+      "H.R.R. Martin"
+    ],
+    "hidden": true,
+    "house": "Demirsoy",
+    "title": "Game Master",
+    "status": "Alive",
+    "height": "181 cm",
+    "father": "Hüsnü Demirsoy",
+    "mother": "Leyla Demirsoy",
+    "spouse": "Lily-Rose Depp",
+    "siblings": ["Mehmet Yağız Demirsoy"],
+    "children": ["All The NPCs"],
+    "mentor": "Uğur Söyleyici",
+    "dragon": "Quaresma",
+    "traits": [
+      "Game Master",
+      "Storyteller",
+      "Worldbuilder",
+      "Unforgiving",
+      "Omniscient",
+      "Behind Nearly Every Face"
+    ],
+    "goals": [
+      "Tell the story of A Song of Fire and Blood",
+      "Keep the world moving regardless of the players",
+      "Make choices and consequences matter",
+      "Punish inadequate preparation when deserved"
+    ],
+    "relationships": {
+      "jacaelon-targaryen": "One of the few major characters not controlled by HRRM.",
+      "gaelor-targaryen": "One of the few major characters not controlled by HRRM.",
+      "visenor-targaryen": "One of the few major characters not controlled by HRRM."
+    },
+    "summary": "Hasan Mert Demirsoy, better known as HMD, HRRM or H.R.R. Martin, is the Game Master and narrator behind A Song of Fire and Blood. He builds the world, directs its events and gives life to nearly every character beyond Jace, Gaelor and Visenor. Across years of roleplay he has run stories in countless settings and genres, developing a reputation as an exacting storyteller who remembers player choices, missed opportunities and inadequate preparation — and is rarely inclined to let any of them pass without consequence.",
+    "quotes": []
+  },
+  {
     "id": "alysanne-hightower",
     "name": "Alysanne Hightower",
     "nickname": "-",
