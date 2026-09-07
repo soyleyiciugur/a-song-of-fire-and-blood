@@ -17,7 +17,7 @@ const statusMap: Record<
 
 export type StatusSecret = {
   status: CharacterStatus;
-  note: string;
+  note?: string;
 };
 
 type Props = {
@@ -119,7 +119,7 @@ export default function StatusReveal({ status, secret }: Props) {
             isRealSecret ? styles.noteSecret : styles.noteConfirmed
           }`}
         >
-          {effectiveSecret.note}
+          {effectiveSecret.note ?? "No further details are recorded."}
         </p>
       )}
     </div>

@@ -5,10 +5,17 @@ import Union from "@/components/familytree/Union";
 import PersonNode from "@/components/familytree/PersonNode";
 
 import styles from "./family-tree.module.css";
+import FamilyTreeFocus from "./FamilyTreeFocus";
 
-export default function FamilyTree() {
+type Props = {
+  searchParams: Promise<{ focus?: string }>;
+};
+
+export default async function FamilyTree({ searchParams }: Props) {
+  const { focus } = await searchParams;
   return (
     <main className={styles.page}>
+      <FamilyTreeFocus focusId={focus} />
       <div className={styles.container}>
         <h1 className={styles.heading}>Family Tree</h1>
 

@@ -358,9 +358,19 @@ function ExpandableCaption({
 
 // ── URL helpers ─────────────────────────────────────────────────────────────
 
-function mediaUrl(tab: RavensEyeTab, id?: string) {
+function mediaUrl(
+  tab: RavensEyeTab,
+  id?: string,
+  characterId?: string
+) {
   const base = TAB_META[tab].href;
-  return id ? `${base}?item=${encodeURIComponent(id)}` : base;
+  const params = new URLSearchParams();
+
+  if (characterId) params.set("character", characterId);
+  if (id) params.set("item", id);
+
+  const query = params.toString();
+  return query ? `${base}?${query}` : base;
 }
 
 function setBrowserUrl(url: string, mode: "push" | "replace" = "push") {
@@ -789,17 +799,30 @@ function ReelsViewer({
 
 // ── Tab bar ────────────────────────────────────────────────────────────────
 
-function TabBar({ active }: { active: RavensEyeTab }) {
+function TabBar({
+  active,
+  characterFilter,
+}: {
+  active: RavensEyeTab;
+  characterFilter?: string;
+}) {
   return (
     <nav className={styles.tabBar} aria-label="Raven's Eye sections">
       {(Object.keys(TAB_META) as RavensEyeTab[]).map((id) => {
         const meta = TAB_META[id];
-        const count = meta.entries.length;
+        const count = characterFilter
+          ? meta.entries.filter((entry) =>
+              entry.characterIds.includes(characterFilter)
+            ).length
+          : meta.entries.length;
+        const href = characterFilter
+          ? `${meta.href}?character=${encodeURIComponent(characterFilter)}`
+          : meta.href;
 
         return (
           <a
             key={id}
-            href={meta.href}
+            href={href}
             className={`${styles.tabBtn} ${
               active === id ? styles.tabBtnActive : ""
             }`}
@@ -816,11 +839,18 @@ function TabBar({ active }: { active: RavensEyeTab }) {
 
 // ── Shared filters ──────────────────────────────────────────────────────────
 
-function useGalleryFilters(entries: GalleryEntry[]) {
-  const [filterChar, setFilterChar] = useState("");
+function useGalleryFilters(
+  entries: GalleryEntry[],
+  initialCharacter = ""
+) {
+  const [filterChar, setFilterChar] = useState(initialCharacter);
   const [filterHouse, setFilterHouse] = useState("");
   const [filterDragon, setFilterDragon] = useState("");
   const [sort, setSort] = useState<SortKey>("uploadedAt");
+
+  useEffect(() => {
+    setFilterChar(initialCharacter);
+  }, [initialCharacter]);
 
   const { characters, houses, dragons } = useMemo(
     () => filterOptionsFor(entries),
@@ -960,13 +990,15 @@ function GallerySection({
   emptyLabel,
   intro,
   onOpen,
+  initialCharacter,
 }: {
   entries: GalleryEntry[];
   emptyLabel: string;
   intro: string;
   onOpen: (list: GalleryEntry[], idx: number) => void;
+  initialCharacter?: string;
 }) {
-  const filters = useGalleryFilters(entries);
+  const filters = useGalleryFilters(entries, initialCharacter);
   const { filtered, anyFilter } = filters;
 
   return (
@@ -1043,13 +1075,15 @@ function ReelsGridSection({
   emptyLabel,
   intro,
   onOpen,
+  initialCharacter,
 }: {
   entries: GalleryEntry[];
   emptyLabel: string;
   intro: string;
   onOpen: (list: GalleryEntry[], idx: number) => void;
+  initialCharacter?: string;
 }) {
-  const filters = useGalleryFilters(entries);
+  const filters = useGalleryFilters(entries, initialCharacter);
   const { filtered, anyFilter } = filters;
 
   return (
@@ -1115,6 +1149,7 @@ function RavensEyePageInner({
   const searchParams = useSearchParams();
 
   const tab: RavensEyeTab = forcedTab ?? "raven";
+  const characterFilter = searchParams.get("character") ?? "";
 
   const [lightboxList, setLightboxList] = useState<GalleryEntry[] | null>(null);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -1123,6 +1158,15 @@ function RavensEyePageInner({
   const [reelsStartIdx, setReelsStartIdx] = useState<number | null>(null);
 
   const activeMeta = TAB_META[tab];
+  const activeEntriesForCharacter = useMemo(
+    () =>
+      characterFilter
+        ? activeMeta.entries.filter((entry) =>
+            entry.characterIds.includes(characterFilter)
+          )
+        : activeMeta.entries,
+    [activeMeta.entries, characterFilter]
+  );
 
   // Direct-link support:
   // /ravens-eye?item=...
@@ -1139,7 +1183,7 @@ function RavensEyePageInner({
       return;
     }
 
-    const idx = activeMeta.entries.findIndex((e) => e.id === itemId);
+    const idx = activeEntriesForCharacter.findIndex((e) => e.id === itemId);
 
     if (idx === -1) {
       // The item exists, but the supplied section URL is wrong.
@@ -1153,39 +1197,56 @@ function RavensEyePageInner({
             ? "flea"
             : "raven";
 
-        router.replace(mediaUrl(correctTab, globalEntry.id));
+        const keepCharacterFilter =
+          !characterFilter || globalEntry.characterIds.includes(characterFilter);
+
+        router.replace(
+          mediaUrl(
+            correctTab,
+            globalEntry.id,
+            keepCharacterFilter ? characterFilter || undefined : undefined
+          )
+        );
       }
 
       return;
     }
 
     if (tab === "reels") {
-      setReelsList(activeMeta.entries);
+      setReelsList(activeEntriesForCharacter);
       setReelsStartIdx(idx);
       setLightboxList(null);
       setLightboxIdx(null);
     } else {
-      setLightboxList(activeMeta.entries);
+      setLightboxList(activeEntriesForCharacter);
       setLightboxIdx(idx);
       setReelsList(null);
       setReelsStartIdx(null);
     }
-  }, [activeMeta.entries, router, searchParams, tab]);
+  }, [
+    activeEntriesForCharacter,
+    characterFilter,
+    router,
+    searchParams,
+    tab,
+  ]);
 
   const openLightbox = useCallback(
     (list: GalleryEntry[], idx: number) => {
       setLightboxList(list);
       setLightboxIdx(idx);
-      setBrowserUrl(mediaUrl(tab, list[idx].id));
+      setBrowserUrl(
+        mediaUrl(tab, list[idx].id, characterFilter || undefined)
+      );
     },
-    [tab]
+    [characterFilter, tab]
   );
 
   const closeLightbox = useCallback(() => {
     setLightboxList(null);
     setLightboxIdx(null);
-    setBrowserUrl(mediaUrl(tab));
-  }, [tab]);
+    setBrowserUrl(mediaUrl(tab, undefined, characterFilter || undefined));
+  }, [characterFilter, tab]);
 
   const moveLightbox = useCallback(
     (direction: -1 | 1) => {
@@ -1195,31 +1256,48 @@ function RavensEyePageInner({
 
         if (next < 0 || next >= lightboxList.length) return current;
 
-        setBrowserUrl(mediaUrl(tab, lightboxList[next].id), "replace");
+        setBrowserUrl(
+          mediaUrl(
+            tab,
+            lightboxList[next].id,
+            characterFilter || undefined
+          ),
+          "replace"
+        );
         return next;
       });
     },
-    [lightboxList, tab]
+    [characterFilter, lightboxList, tab]
   );
 
   const openReels = useCallback(
     (list: GalleryEntry[], idx: number) => {
       setReelsList(list);
       setReelsStartIdx(idx);
-      setBrowserUrl(mediaUrl("reels", list[idx].id));
+      setBrowserUrl(
+        mediaUrl("reels", list[idx].id, characterFilter || undefined)
+      );
     },
-    []
+    [characterFilter]
   );
 
   const closeReels = useCallback(() => {
     setReelsList(null);
     setReelsStartIdx(null);
-    setBrowserUrl(mediaUrl("reels"));
-  }, []);
+    setBrowserUrl(
+      mediaUrl("reels", undefined, characterFilter || undefined)
+    );
+  }, [characterFilter]);
 
-  const handleActiveReel = useCallback((entry: GalleryEntry) => {
-    setBrowserUrl(mediaUrl("reels", entry.id), "replace");
-  }, []);
+  const handleActiveReel = useCallback(
+    (entry: GalleryEntry) => {
+      setBrowserUrl(
+        mediaUrl("reels", entry.id, characterFilter || undefined),
+        "replace"
+      );
+    },
+    [characterFilter]
+  );
 
   // Native browser back/forward should open/close the current media correctly.
   useEffect(() => {
@@ -1234,7 +1312,11 @@ function RavensEyePageInner({
         return;
       }
 
-      const list = TAB_META[tab].entries;
+      const list = characterFilter
+        ? TAB_META[tab].entries.filter((entry) =>
+            entry.characterIds.includes(characterFilter)
+          )
+        : TAB_META[tab].entries;
       const idx = list.findIndex((entry) => entry.id === itemId);
       if (idx === -1) return;
 
@@ -1249,7 +1331,7 @@ function RavensEyePageInner({
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, [tab]);
+  }, [characterFilter, tab]);
 
   return (
     <div className={styles.page}>
@@ -1261,7 +1343,7 @@ function RavensEyePageInner({
         </p>
       </div>
 
-      <TabBar active={tab} />
+      <TabBar active={tab} characterFilter={characterFilter || undefined} />
 
       {tab === "reels" ? (
         <ReelsGridSection
@@ -1269,6 +1351,7 @@ function RavensEyePageInner({
           emptyLabel={activeMeta.emptyLabel}
           intro={activeMeta.intro(activeMeta.entries.length)}
           onOpen={openReels}
+          initialCharacter={characterFilter}
         />
       ) : (
         <GallerySection
@@ -1277,6 +1360,7 @@ function RavensEyePageInner({
           emptyLabel={activeMeta.emptyLabel}
           intro={activeMeta.intro(activeMeta.entries.length)}
           onOpen={openLightbox}
+          initialCharacter={characterFilter}
         />
       )}
 

@@ -1,0 +1,23 @@
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 34px;
+  align-items: start;
+}
+
+.mainColumn {
+  min-width: 0;
+}
+
+.quotesHeading {
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+}

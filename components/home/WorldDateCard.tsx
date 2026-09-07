@@ -1,9 +1,8 @@
-// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\home\WorldDateCard.tsx
 import Link from "next/link";
 import worldDate from "../../data/worldDate.json";
 import characters from "../../data/characters/characters.json";
 import { getUpcomingEvents, type UpcomingEvent } from "../../lib/events";
-import { formatNameday } from "../../lib/age";
+import { formatDaysUntil, formatNameday } from "../../lib/age";
 
 const TYPE_LABEL: Record<UpcomingEvent["type"], string> = {
   nameday: "Nameday",
@@ -23,14 +22,8 @@ const TYPE_COLOR: Record<UpcomingEvent["type"], string> = {
   other: "#8a8a92",
 };
 
-function formatDaysUntil(daysUntil: number) {
-  if (daysUntil === 0) return "Today";
-  if (daysUntil === 1) return "Tomorrow";
-  return `in ${daysUntil} days`;
-}
-
 export default function WorldDateCard() {
-  // Fetch a larger pool of events, filter them, then take exactly the first 5
+  // Fetch a larger pool of events, filter them, then take exactly the first 5.
   const upcoming = getUpcomingEvents(worldDate, 50)
     .filter((event: any) => {
       const charId =
@@ -40,26 +33,23 @@ export default function WorldDateCard() {
           : null);
 
       if (charId) {
-        // Explicitly type as any to prevent TS union type errors
         const character: any = characters.find((c: any) => c.id === charId);
 
-        // Check for nested secret.status
-        if (
-          character &&
-          (character.status === "Dead" || character.secret?.status === "Dead")
-        ) {
+        // Public-facing card: do not let a secret death leak through the
+        // disappearance of an otherwise expected nameday.
+        if (character?.status === "Dead") {
           return false;
         }
       }
 
       const char: any = event.character;
-      if (char && (char.status === "Dead" || char.secret?.status === "Dead")) {
+      if (char?.status === "Dead") {
         return false;
       }
 
       return true;
     })
-    .slice(0, 5); // Ensure we only display 5 events after filtering
+    .slice(0, 5);
 
   return (
     <aside
