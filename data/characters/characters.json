@@ -1200,7 +1200,9 @@
     "father": "-",
     "mother": "-",
     "spouse": "-",
-    "siblings": [],
+    "siblings": [
+      "grance-morrigen"
+    ],
     "children": [],
     "mentor": "-",
     "dragon": "-",
@@ -1219,7 +1221,8 @@
     "relationships": {
       "baelenys-targaryen": "Serves him with rigid, unquestioning discipline.",
       "alester-dayne": "Trained him personally; considers him the finest blade he has ever produced. His unauthorized absence protecting Prince Visenor has not gone unnoticed and will not go unpunished forever.",
-      "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence; openly assessed him ready for knighthood, told him he could not quite beat Alester yet but was close, and watched Jace choose Alester's hand over his for the ceremony itself. The slight was real. He showed no sign of minding."
+      "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence; openly assessed him ready for knighthood, told him he could not quite beat Alester yet but was close, and watched Jace choose Alester's hand over his for the ceremony itself. The slight was real. He showed no sign of minding.",
+      "grance-morrigen": "His brother, Ser Grance Morrigen."
     },
     "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told. He trained both Alester Dayne and Prince Jacaelon; the latter chose his sworn shield's sword over his Lord Commander's for the knighting ceremony, which Morrigen absorbed in silence and has not mentioned since.",
     "quotes": []
@@ -3128,7 +3131,7 @@
     "aliases": [],
     "house": "House Mooton",
     "title": "Knight of House Mooton",
-    "status": "Alive",
+    "status": "Unknown",
     "nameday": {
       "day": 7,
       "moon": 1,
@@ -3175,7 +3178,9 @@
     "father": "-",
     "mother": "-",
     "spouse": "-",
-    "siblings": [],
+    "siblings": [
+      "orwell-morrigen"
+    ],
     "children": [],
     "mentor": "-",
     "dragon": "-",
@@ -3191,7 +3196,8 @@
       "baelenys-targaryen": "Rode close behind the young prince during the Cloudpass crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into.",
       "vahaemon-targaryen": "Alongside Ser Myles Mooton, took hold of the terrified young prince and pulled him away as Baelenys faced Maelwing.",
       "derrin-hightower": "Rode with the young Derrin Hightower during the Cloudpass incident; Derrin urged him to keep pace as the party hurried after Baelenys.",
-      "myles-mooton": "Fellow knight in the Cloudpass party, with whom he approached Vahaemon and pulled the boy away from the dragon."
+      "myles-mooton": "Fellow knight in the Cloudpass party, with whom he approached Vahaemon and pulled the boy away from the dragon.",
+      "orwell-morrigen": "His brother, Ser Orwell Morrigen, who later became Lord Commander of the Kingsguard."
     },
     "summary": "Ser Grance Morrigen was thirty-four years old on the Twelfth Day of the Second Moon, 56 AC, when he rode in Prince Baelenys's party to Cloudpass. He was openly uneasy about the situation and muttered about what they had gotten themselves into as the party climbed into the clouds. After finding Vahaemon surrounded by the burned remains of his men and seeing Maelwing emerge, Grance nevertheless advanced with Ser Myles Mooton and helped drag the frightened young prince to safety while Baelenys stood his ground before the dragon.",
     "quotes": []
