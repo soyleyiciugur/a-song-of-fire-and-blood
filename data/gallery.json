@@ -54,9 +54,7 @@
   "characterIds": [
     "hrrm"
   ],
-    "houseIds": [
-      "targaryen"
-    ],
+    "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -74,6 +72,38 @@
     "houseIds": [
       "targaryen",
       "dayne"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtr7lk7l",
+    "src": "/videos/reels/nevarkitarzimda.mp4",
+    "caption": "ne var ki tarzımda",
+    "characterIds": [
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-07",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-mtr7lj6k",
+    "src": "/videos/reels/visenor-ozledim.mp4",
+    "caption": "eminim eve dönmenin yollarını arıyordur 😀👍",
+    "characterIds": [
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
     ],
     "dragonIds": [],
     "chapterId": null,
