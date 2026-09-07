@@ -11,6 +11,12 @@
     "house": "Demirsoy",
     "title": "Game Master",
     "status": "Alive",
+    "age": 26,
+    "nameday": {
+      "day": 30,
+      "moon": 11,
+      "year": 1998
+    },
     "height": "181 cm",
     "father": "Hüsnü Demirsoy",
     "mother": "Leyla Demirsoy",
