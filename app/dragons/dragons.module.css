@@ -182,3 +182,9 @@
   font-size: 13px;
   font-weight: 600;
 }
+
+.card > a { flex:none; }
+.cardHeader { flex-wrap:wrap; }
+.dragonName a,.riderChip { text-decoration:none; }
+.dragonName a:hover { color:var(--gold); }
+.grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr)); }

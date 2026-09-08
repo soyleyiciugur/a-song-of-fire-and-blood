@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function DragonsRedirect() {
-  redirect("/bestiary");
+  redirect("/bestiary/dragons");
 }

@@ -36,7 +36,7 @@
 
 .ageStateBar {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1px;
   padding: 7px;
   background: #101013;
@@ -799,6 +799,11 @@
   .portrait {
     aspect-ratio: 4 / 5;
   }
+}
+
+.ageStateButton:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
 }
 
 @media (max-width: 640px) {

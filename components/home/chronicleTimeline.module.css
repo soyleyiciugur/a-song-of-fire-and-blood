@@ -26,7 +26,7 @@
 .portraits { display: flex; gap: 4px; margin-top: 10px; }
 .portraits > span { border: 1px solid var(--border); }
 .edgeLabel { position: absolute; top: 26px; z-index: 4; transform: translateX(-50%); color: var(--muted); font: 10px var(--font-geist); white-space: nowrap; }
-.edgeLabelStart { transform: none; }
+.edgeLabelStart { transform: translateX(-50%); }
 .edgeLabelPresent { width: 120px; white-space: normal; text-align: center; line-height: 1.25; transform: translateX(-50%); }
 .future { transform: translateX(-100%); }
 @media (max-width: 600px) { .section { padding-inline: 14px; } .header { align-items: start; flex-direction: column; margin-bottom: 16px; } .edgeLabelPresent { transform: translateX(-50%); } }
@@ -37,3 +37,6 @@
 .floatingTooltip ul { margin:9px 0 0; padding-left:16px; }
 .floatingTooltip li a { color:var(--text); text-decoration:none; }
 .floatingTooltip li a:hover { color:var(--gold); }
+
+.viewport { padding-inline:64px; }
+.track { min-width:500px; }

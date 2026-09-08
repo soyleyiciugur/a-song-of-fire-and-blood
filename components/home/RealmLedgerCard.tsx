@@ -6,7 +6,7 @@ import events from "@/data/events.json";
 
 const figures = [
   ["Characters", getCharacters().filter((character) => !character.hidden).length, "/characters"],
-  ["Dragons", dragons.length, "/bestiary"],
+  ["Dragons", dragons.length, "/bestiary/dragons"],
   ["Chapters", getAllChapters().length, "/chapters"],
   ["Annals", events.length, "/chronicle"],
 ] as const;

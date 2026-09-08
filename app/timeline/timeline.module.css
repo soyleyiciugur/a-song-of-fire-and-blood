@@ -30,3 +30,7 @@
 .chapterDate { margin: 2px 0 12px; color: var(--muted); font-size: .75rem; font-style: italic; }
 .eventDate { margin: 2px 0 6px; color: var(--gold); font-size: .72rem; font-style: italic; opacity: .8; }
 @media (max-width: 600px) { .page { padding: 40px 16px 64px; } .heading { font-size: 36px; } .event { gap: 12px; padding-left: 24px; } .eventTitle { font-size: 17px; } }
+
+.filters { align-items:center; gap:6px; margin-top:0; }
+.filters > input,.filters > button,.characterSelect > div > button { height:38px; box-sizing:border-box; }
+.characterSelect > div > button { font:12px var(--font-geist); padding:8px 12px; }

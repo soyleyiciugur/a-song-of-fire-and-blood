@@ -139,3 +139,5 @@
   background: rgba(201, 162, 39, 0.08);
   border-color: var(--gold);
 }
+
+.shelf { grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); }

@@ -812,12 +812,14 @@
 .scene { height:calc(100dvh - var(--site-nav-height,58px)); min-height:0; padding:96px 16px 30px; overflow:clip; }
 .book { height:min(var(--pg-h),calc(100dvh - var(--site-nav-height,58px) - 140px)); max-height:none; flex-shrink:0; }
 .langToggle,.backLink { position:fixed; top:calc(var(--site-nav-height,58px) + 20px); }
+.scene .langToggle,.scene .backLink { position:absolute; top:20px; }
 .chapterListPanel { display:flex; flex-direction:column; overflow:hidden; }
 .chapterListHeader { flex:none; }
 .chapterList { flex:1; min-height:0; overflow:auto; padding-bottom:24px; }
 @media(max-width:700px) {
 .langToggle { right:12px; flex-wrap:wrap; justify-content:flex-end; max-width:calc(100% - 24px); }
 .backLink { top:calc(var(--site-nav-height,58px) + 64px); left:12px; }
+.scene .backLink { top:64px; }
 .scene { padding-top:130px; }
 .book { height:min(var(--pg-h),calc(100dvh - var(--site-nav-height,58px) - 165px)); }
 }

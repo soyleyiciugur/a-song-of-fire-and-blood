@@ -56,7 +56,7 @@ export default async function DragonPage({ params }: Props) {
         <p className={styles.description}>{dragon.description}</p>
 
         <nav className={styles.tabs} aria-label="Bestiary sections">
-          <Link className={styles.activeTab} href="/bestiary">Dragons</Link>
+          <Link className={styles.activeTab} href="/bestiary/dragons">Dragons</Link>
           <Link href="/bestiary/direwolves">Direwolves</Link>
           <Link href="/bestiary/dogs">Dogs</Link>
           <Link href="/bestiary/cats">Cats</Link>
@@ -108,7 +108,7 @@ export default async function DragonPage({ params }: Props) {
           </>
         )}
 
-        <Link href="/bestiary" className={styles.backLink}>
+        <Link href="/bestiary/dragons" className={styles.backLink}>
           ← Back to Dragons
         </Link>
       </div>

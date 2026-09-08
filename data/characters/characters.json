@@ -2836,6 +2836,7 @@
   {
     "id": "mother-marya",
     "name": "Mother Marya",
+    "portraitAgeState": "elder",
     "nickname": "Old Nan",
     "aliases": [
       "Old Nan"

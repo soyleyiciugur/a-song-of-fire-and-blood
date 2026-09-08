@@ -29,7 +29,7 @@ export const NAV_ITEMS: NavigationEntry[] = [
     ],
   },
   { label: "Bestiary", href: "/bestiary", items: [
-    { label: "Dragons", href: "/bestiary" },
+    { label: "Dragons", href: "/bestiary/dragons" },
     { label: "Direwolves", href: "/bestiary/direwolves" },
     { label: "Dogs", href: "/bestiary/dogs" },
     { label: "Cats", href: "/bestiary/cats" },
@@ -53,8 +53,9 @@ export const NAV_ITEMS: NavigationEntry[] = [
     href: "/records", 
     items: [
       { label: "The Realm's Ledger", href: "/stats" },
-      { label: "Scrolls", href: "/scrolls" },
+      { label: "Scrolls from the Realm", href: "/scrolls" },
       { label: "The Book of Brothers", href: "/book-of-brothers" },
+      { label: "Echoes of the Realm", href: "/quotes" },
     ],
   },
   { label: "The Raven's Eye", href: "/ravens-eye" },

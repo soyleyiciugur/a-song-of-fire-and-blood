@@ -67,7 +67,7 @@ export default function Timeline() {
 
         <div className={styles.chapters}>
           {filteredTimeline.map((chapter) => (
-            <section key={chapter.chapterSlug} className={styles.chapterBlock}>
+            <section key={chapter.chapterSlug} id={chapter.chapterSlug} className={styles.chapterBlock}>
               <Link
                 href={`/chapters/${chapter.chapterSlug}`}
                 className={styles.chapterTitle}

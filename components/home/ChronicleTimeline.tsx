@@ -13,7 +13,8 @@ function eventAnchor(chapterSlug: string, title: string) {
 }
 
 export default function ChronicleTimeline() {
-  const currentPosition = Math.max(8, Math.min(92, ((worldDate.year - 1) / 120) * 100));
+  const edgeGap = 8;
+  const currentPosition = 100 - edgeGap;
 
   return (
     <section className={styles.section} aria-labelledby="chronicle-timeline-title">
@@ -32,11 +33,11 @@ export default function ChronicleTimeline() {
           <span className={`${styles.edgeLabel} ${styles.edgeLabelPresent}`} style={{ left: `${currentPosition}%` }}><span>Present</span><span>{worldDate.day}/{worldDate.moon}/{worldDate.year} {worldDate.era}</span></span>
           <span className={`${styles.edgeLabel} ${styles.future}`} style={{ left: "100%" }}>Unknown</span>
           {timeline.map((chapter, index) => {
-            const position = 6 + (index / Math.max(1, timeline.length - 1)) * (currentPosition - 12);
+            const position = edgeGap + (index / Math.max(1, timeline.length - 1)) * (currentPosition - edgeGap - 4);
             const characters = Array.from(new Set(chapter.events.flatMap((event) => event.characters ?? [])));
             return (
-              <ChronicleMarker key={chapter.chapterSlug} position={position} href={`/chapters/${chapter.chapterSlug}`} label={chapter.chapterTitle}>
-                  <Link href={`/chapters/${chapter.chapterSlug}`} className={styles.chapter}>{chapter.chapterTitle}</Link>
+              <ChronicleMarker key={chapter.chapterSlug} position={position} href={`/timeline#${chapter.chapterSlug}`} label={chapter.chapterTitle}>
+                  <Link href={`/timeline#${chapter.chapterSlug}`} className={styles.chapter}>{chapter.chapterTitle}</Link>
                   {chapter.date && <span className={styles.date}>{chapter.date}</span>}
                   <ul>
                     {chapter.events.slice(0, 4).map((event) => (

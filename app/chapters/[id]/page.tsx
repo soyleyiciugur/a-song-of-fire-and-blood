@@ -51,6 +51,7 @@ import {
 } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import ChapterCover from "@/components/ChapterCover";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapter-reader.module.css";
 import fc from "./full-chapter.module.css";
@@ -523,7 +524,8 @@ export default function ChapterReader() {
           <header className={fc.fcHeader}>
             {chapter.image && (
               <div className={fc.fcImageWrap}>
-                <Image
+                <ChapterCover
+                  key={chapter.image}
                   src={chapter.image}
                   alt={displayTitle}
                   width={480}
@@ -615,7 +617,8 @@ export default function ChapterReader() {
                 <div className={styles.chapterHeader}>
                   {chapter.image && (
                     <div className={styles.chapterImageWrap}>
-                      <Image
+                      <ChapterCover
+                        key={chapter.image}
                         src={chapter.image}
                         alt={displayTitle}
                         width={340}
