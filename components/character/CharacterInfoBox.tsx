@@ -378,8 +378,7 @@ export default function CharacterInfoBox({
               src={activePortrait}
               alt={`${character.name} — ${AGE_STATE_LABELS[activeAgeState]}`}
               fill
-              sizes="(max-width: 900px) 100vw, 340px"
-              quality={95}
+              unoptimized
               className={styles.portraitImage}
               onError={() => setImageFailed(true)}
               priority
