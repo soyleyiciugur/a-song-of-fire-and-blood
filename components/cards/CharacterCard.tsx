@@ -1,36 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import styles from "./CharacterCard.module.css";
 import { CARD_TYPE_ICON, type Card } from "@/lib/cards";
 
-const EXTS = ["webp", "png", "jpg", "jpeg"];
-
-function usePortrait(card: Card) {
-  const [extIndex, setExtIndex] = useState(0);
-
-  // Characters, Dragons and the remaining card types each use their own art folders.
-  const folder =
-    card.cardType === "character"
-      ? "characters"
-      : card.cardType === "dragon"
-        ? "dragons"
-        : "cards";
-
-  const imageId =
-    card.cardType === "character"
-      ? (card.linkedCharacterId ?? card.id)
-      : card.id;
-
-  const src = `/images/${folder}/${imageId}.${EXTS[extIndex]}`;
-
-  const onError =
-    extIndex < EXTS.length - 1
-      ? () => setExtIndex((i) => i + 1)
-      : undefined;
-
-  return { src, onError };
+function getCardImageSrc(card: Card) {
+  return `/images/cards/${card.id}.webp`;
 }
 
 export function CharacterCard({
@@ -40,7 +15,7 @@ export function CharacterCard({
   card: Card;
   onSelect: (id: string) => void;
 }) {
-  const { src, onError } = usePortrait(card);
+  const src = getCardImageSrc(card);
 
   return (
     <button
@@ -66,7 +41,6 @@ export function CharacterCard({
             objectFit: "cover",
             objectPosition: "top center",
           }}
-          onError={onError}
         />
 
         <div className={styles.portraitFade} />
