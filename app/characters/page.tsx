@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getCharacters } from "@/lib/characters";
-import MiniPortrait from "@/components/MiniPortrait";
 
 import styles from "./characters.module.css";
 
@@ -56,7 +55,34 @@ function houseLabel(house: string) {
 
 function formatNickname(nickname?: string | null) {
   if (!nickname || nickname === "-") return null;
-  return `“${nickname.replace(/^[“”"']+|[“”"']+$/g, "")}”`;
+
+  const clean = nickname
+    .trim()
+    .replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, "");
+
+  return clean ? `“${clean}”` : null;
+}
+
+function RawMiniPortrait({
+  id,
+  alt,
+  size,
+}: {
+  id: string;
+  alt: string;
+  size: number;
+}) {
+  return (
+    <img
+      src={`/images/miniportraits/${id}.png`}
+      alt={alt}
+      width={size}
+      height={size}
+      className={styles.rawMiniPortrait}
+      draggable={false}
+      decoding="async"
+    />
+  );
 }
 
 function StyledSelect({
@@ -289,7 +315,7 @@ export default function Characters() {
                   <span className={styles.crownGlyph} aria-hidden="true">
                     ♛
                   </span>
-                  <MiniPortrait
+                  <RawMiniPortrait
                     id={character.id}
                     alt={character.name}
                     size={62}
@@ -312,9 +338,9 @@ export default function Characters() {
                   className={styles.successionCard}
                 >
                   <span className={styles.successionNumber}>
-                    {SUCCESSION_NUMERALS[index]}
+                    <span>{SUCCESSION_NUMERALS[index]}</span>
                   </span>
-                  <MiniPortrait
+                  <RawMiniPortrait
                     id={character.id}
                     alt={character.name}
                     size={46}
@@ -401,7 +427,7 @@ export default function Characters() {
                       href={`/characters/${character.id}`}
                       className={styles.characterRow}
                     >
-                      <MiniPortrait
+                      <RawMiniPortrait
                         id={character.id}
                         alt={character.name}
                         size={44}

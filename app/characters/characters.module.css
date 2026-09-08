@@ -160,6 +160,21 @@
   min-width: 0;
 }
 
+.rawMiniPortrait {
+  display: block;
+  flex: 0 0 auto;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  border-radius: 24%;
+  background: var(--surface);
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+}
+
 .crownIdentity {
   display: flex;
   flex-direction: column;
@@ -213,9 +228,8 @@
   position: absolute;
   top: 7px;
   right: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   width: 20px;
   height: 20px;
   padding: 0;
@@ -223,10 +237,17 @@
   border-radius: 50%;
   color: var(--gold);
   background: var(--surface);
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 0.58rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   text-align: center;
+}
+
+.successionNumber > span {
+  display: block;
+  line-height: 1;
+  transform: translateY(0.5px);
 }
 
 .successionIdentity {
