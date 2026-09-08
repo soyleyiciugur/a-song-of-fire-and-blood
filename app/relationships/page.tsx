@@ -332,13 +332,26 @@ export default function RelationshipsPage() {
         return [];
       }
 
-      return getEffectiveRelationships(selectedCharacter.id)
-        .filter((entry) => entry.character && visibleIds.has(entry.id))
-        .map((entry) => ({
-          id: entry.id as CharacterId,
-          name: entry.character?.name ?? entry.name,
-          description: entry.description,
-        }));
+      return getEffectiveRelationships(selectedCharacter.id).flatMap(
+        (entry) => {
+          const relatedCharacter = entry.character;
+
+          if (
+            !relatedCharacter ||
+            !visibleIds.has(relatedCharacter.id)
+          ) {
+            return [];
+          }
+
+          return [
+            {
+              id: relatedCharacter.id,
+              name: relatedCharacter.name,
+              description: entry.description,
+            },
+          ];
+        }
+      );
     }, [selectedCharacter, visibleIds]);
 
   return (
