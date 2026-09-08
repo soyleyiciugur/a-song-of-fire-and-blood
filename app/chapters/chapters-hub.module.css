@@ -239,58 +239,46 @@
   transform-style: preserve-3d;
   transform-origin: center center;
   transform: rotateX(4deg) rotateY(-28deg);
-  transition: transform 0.4s ease, width 0.5s ease;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 /* open/opening/closing all need the wider (2-page) footprint so the
    spread is centered as a whole, not just the cover */
 .bookOpening,
-.bookOpen,
-.bookClosing {
-  width: calc(var(--book-w) * 2 + var(--spine-w) * 2);
+.bookOpen {
+  width: calc(var(--book-w) * 2 + var(--spine-w));
 }
 
 /* Idle hover tilt — rotates FURTHER (not less) so the flat leather
    spine face actually turns toward the camera and reads clearly,
    instead of hiding it. */
 .bookWrap:not(.bookOpen):not(.bookOpening):not(.bookClosing):hover {
-  transform: rotateX(2deg) rotateY(-38deg);
+  transform: rotateX(4deg) rotateY(-28deg);
 }
 
 .bookOpening {
-  animation: bookSwingOpen 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  transition: width 0.9s ease;
+  transform: rotateX(0deg) rotateY(0deg);
+  pointer-events: none;
   cursor: default;
 }
-@keyframes bookSwingOpen {
-  0%   { transform: rotateX(4deg)  rotateY(-28deg) scale(1); }
-  30%  { transform: rotateX(6deg)  rotateY(-45deg) scale(1.04); }
-  100% { transform: rotateX(2deg)  rotateY(-8deg)  scale(1.06); }
-}
+
 
 .bookOpen {
   /* -8deg, not 0deg: at a dead-flat 0deg the folded spine (rotateY(-90deg)
      relative to this) is viewed exactly edge-on and disappears. Keeping a
      small residual angle here, in the same direction as the resting/hover
      tilt, keeps the spine visibly turned toward the camera. */
-  transform: rotateX(2deg) rotateY(-8deg) scale(1.06);
-  transition: width 0.3s ease;
+  transform: rotateX(0deg) rotateY(0deg);
   cursor: default;
   pointer-events: auto;
 }
 
 .bookClosing {
-  animation: bookSwingClose 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  transition: width 0.7s ease;
   cursor: default;
   pointer-events: none;
 }
-@keyframes bookSwingClose {
-  0%   { transform: rotateX(2deg)  rotateY(-8deg)  scale(1.06); }
-  40%  { transform: rotateX(6deg)  rotateY(-45deg) scale(1.04); }
-  100% { transform: rotateX(12deg) rotateY(-70deg) scale(0.9); }
-}
+
 
 /* ════════════════════════════════════════════════════════════
    SPINE — folded flat via a single rotateY(-90deg). This works
@@ -356,6 +344,7 @@
   z-index: 4;
 }
 
+.bookOpening .spineRight,
 .bookOpen .spineRight {
   opacity: 1;
 }
@@ -409,13 +398,9 @@
 }
 
 .bookClosing .coverCard {
-  animation: coverClose 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   pointer-events: none;
 }
-@keyframes coverClose {
-  from { transform: rotateY(-180deg); }
-  to   { transform: rotateY(0deg); }
-}
+
 
 /* ── FRONT FACE ── */
 .cover {
@@ -429,11 +414,12 @@
     0 8px 32px rgba(0,0,0,0.6);
 }
 
-.coverCard:not(.coverCardFlipped) .cover { visibility: visible; }
-.coverCardFlipped .cover { visibility: hidden; }
-
-.coverCard:not(.coverCardFlipped) .coverBack { visibility: hidden; }
-.coverCardFlipped .coverBack { visibility: visible; }
+/* Keep both faces mounted; their orientation controls visibility mid-turn. */
+.cover {
+  transform: translateZ(1px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
 
 .cover::before {
   content: "";
@@ -545,7 +531,7 @@
 .coverBack {
   position: absolute;
   inset: 0;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: linear-gradient(160deg, #f2e9d0 0%, #e8dbbf 60%, #ddd0ab 100%);
@@ -562,6 +548,7 @@
   align-items: center;
   justify-content: center;
   padding: 60px 48px;
+  justify-content: flex-start;
   gap: 14px;
 }
 
@@ -592,6 +579,7 @@
    ══════════════════════════════════════════════════════════ */
 .tocSpread {
   position: absolute;
+  transform: translateZ(3px);
   left: calc(var(--spine-w) + var(--book-w));
   top: 0;
   width: var(--book-w);
@@ -602,10 +590,12 @@
   z-index: 5;
 }
 
+.bookOpening .tocSpread,
 .bookOpen .tocSpread {
   opacity: 1;
-  pointer-events: auto;
 }
+
+.bookOpen .tocSpread { pointer-events: auto; }
 
 .tocPage {
   position: relative;
@@ -614,7 +604,7 @@
   overflow: hidden;
   background: linear-gradient(160deg, #f5ecd4 0%, #ece0c0 60%, #e2d4a8 100%);
   border-radius: 0 3px 3px 0;
-  box-shadow: inset 2px 0 6px rgba(0,0,0,0.1);
+  box-shadow: inset 12px 0 22px -14px rgba(48,26,8,0.65), 3px 2px 0 #d4c59a, 5px 4px 0 #8e7549, 7px 6px 0 #2e1a08;
 }
 
 /* left-edge gutter shadow where this page meets the inside cover */
@@ -674,7 +664,9 @@
   padding: 0 4px 4px 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -708,7 +700,9 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 12px;
+  min-height: 48px;
+  padding: 12px 14px;
+  touch-action: manipulation;
   margin: 0;
   border: none;
   border-radius: 3px;
@@ -760,7 +754,7 @@
 .tocEntry:hover .tocEntryTitle,
 .tocEntry:focus-visible .tocEntryTitle,
 .tocEntryHovered .tocEntryTitle {
-  color: var(--gold-bright);
+  color: var(--ink);
 }
 .tocEntryActive {
   background: rgba(180, 140, 40, 0.22);
@@ -783,9 +777,12 @@
    (top offset) is computed in JS and passed in as an inline style. ── */
 .tocBubble {
   position: absolute;
-  left: calc(100% + 16px);
-  width: 240px;
-  transform: translateY(-50%);
+  left: calc(-100% + 32px);
+  top: 55%;
+  width: calc(100% - 64px);
+  max-height: 40%;
+  overflow: hidden;
+  box-sizing: border-box;
   background: rgba(20, 11, 4, 0.96);
   border: 1px solid var(--gold-dark);
   border-radius: 6px;
@@ -793,11 +790,11 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,168,64,0.08);
   pointer-events: none;
   z-index: 50;
-  animation: bubbleIn 0.16s ease both;
 }
 
 /* small pointer triangle aimed back at the page */
 .tocBubble::before {
+  display: none;
   content: "";
   position: absolute;
   left: -7px;
@@ -810,10 +807,7 @@
   border-right: 7px solid var(--gold-dark);
 }
 
-@keyframes bubbleIn {
-  from { opacity: 0; transform: translateY(-50%) translateX(-4px); }
-  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
-}
+
 
 .tocBubbleTitle {
   font-family: var(--hd-font);
@@ -890,18 +884,23 @@
    so it's disabled below 900px and the synopsis just isn't shown
    inline (title-only list); everything still opens/navigates fine.
    ══════════════════════════════════════════════════════════ */
-@media (max-width: 900px) {
-  .tocBubble { display: none; }
+@media (max-width: 1000px) {
+  .scene { --book-w: calc((100vw - 80px) / 2); --spine-w: 24px; }
+  .insideLeft { padding: 48px 24px; }
 }
 
 @media (max-width: 600px) {
-  :root {
-    --book-w: 300px;
+  .scene {
+    --book-w: min(300px, calc(100vw - 64px));
     --book-h: 420px;
     --spine-w: 38px;
   }
 
   .coverTitle { font-size: 2.1rem; }
+  .bookOpening, .bookOpen { width: calc(var(--book-w) + var(--spine-w)); }
+  .tocSpread { left: var(--spine-w); }
+  .bookOpen .coverCard { visibility: hidden; }
+  .spineRight, .tocBubble { display: none; }
   .tocHeader  { font-size: 0.72rem; }
   .tocEntryTitle { font-size: 0.84rem; }
   .tocPageInner  { padding: 22px 18px 18px; }
@@ -923,8 +922,11 @@
 
   .bookOpening,
   .bookClosing { animation: none; }
-  .bookOpen    { transform: rotateX(2deg) rotateY(-8deg) scale(1.06); }
+  .bookOpen, .bookOpening { transform: none; }
 
-  .coverCard  { transition: transform 0.3s ease; }
+  .bookWrap, .coverCard, .tocSpread, .spineRight { transition: none; }
   .tocBubble  { animation: none; }
 }
+
+.tocEntry:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: -2px; }
+.bookWrap:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 12px; }

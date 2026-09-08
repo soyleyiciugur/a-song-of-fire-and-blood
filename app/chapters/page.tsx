@@ -1,20 +1,3 @@
-// ─── C:\Users\Locpick-13\a-song-of-fire-and-blood\app\chapters\page.tsx ───
-//
-// Requires: app/chapters/chapters-hub.module.css
-//
-// Language support: reads/writes localStorage key "asofiab-lang" ("en"|"tr").
-// Chapter data: pulls from data/chapters.json via getAllChapters().
-// TR fields used: chapter.titleTr, chapter.synopsisTr (optional; falls back to EN).
-//
-// This revision replaces the split left/right ToC pages with the open
-// book showing exactly two real pages:
-//   left  = inside cover (title + short description — unchanged)
-//   right = one full, scrollable table of contents
-// Hovering a chapter title in the ToC opens a floating "bubble" to the
-// right of the page showing that chapter's synopsis. The bubble's
-// vertical position is computed from the hovered row's actual position
-// (via getBoundingClientRect) relative to the page, so it always lines
-// up with the row you're hovering even while the list is scrolled.
 "use client";
 
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
@@ -41,7 +24,6 @@ type BubbleState = {
   slug: string;
   title: string;
   synopsis: string;
-  top: number; // px, relative to the ToC page container
 };
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -72,20 +54,21 @@ function ChaptersHubContent() {
   // bookmark
   const [bookmark, setBookmark] = useState<{ slug: string; page: number } | null>(null);
 
-  const bookRef = useRef<HTMLDivElement>(null);
-  const tocPageRef = useRef<HTMLDivElement>(null);
-
   // ── init: read persisted lang & bookmark
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("asofiab-lang") as Lang | null;
-      if (saved === "en" || saved === "tr") setLang(saved);
-      const bm = localStorage.getItem("asofiab-bookmark");
-      if (bm) setBookmark(JSON.parse(bm));
-    } catch {}
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        const saved = localStorage.getItem("asofiab-lang") as Lang | null;
+        if (saved === "en" || saved === "tr") setLang(saved);
+        const bm = localStorage.getItem("asofiab-bookmark");
+        if (bm) setBookmark(JSON.parse(bm));
+      } catch {}
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const selectLang = useCallback((next: Lang) => {
+    setBubble(null);
     setLang(next);
     try { localStorage.setItem("asofiab-lang", next); } catch {}
   }, []);
@@ -93,25 +76,39 @@ function ChaptersHubContent() {
   const openBook = useCallback(() => {
     if (phase !== "cover") return;
     setPhase("opening");
-    setTimeout(() => setPhase("toc"), 900);
   }, [phase]);
 
   const closeBook = useCallback(() => {
     if (phase !== "toc") return;
     setBubble(null);
     setPhase("closing");
-    setTimeout(() => setPhase("cover"), 700);
   }, [phase]);
 
   const goToChapter = useCallback((slug: string) => {
+    if (phase !== "toc" || pendingSlug) return;
     setBubble(null);
     setPendingSlug(slug);
     setPhase("closing");
-    setTimeout(() => {
-      try { localStorage.setItem("asofiab-lang", lang); } catch {}
-      router.push(`/chapters/${slug}?lang=${lang}`);
-    }, 700);
-  }, [router, lang]);
+  }, [phase, pendingSlug]);
+
+  const finishTransition = useCallback(() => {
+    if (phase === "opening") setPhase("toc");
+    if (phase === "closing") {
+      if (pendingSlug) {
+        router.push(`/chapters/${pendingSlug}?lang=${lang}`);
+      } else {
+        setPhase("cover");
+      }
+    }
+  }, [phase, pendingSlug, router, lang]);
+
+  useEffect(() => {
+    if (phase !== "opening" && phase !== "closing") return;
+    // Covers reduced motion and browsers that cancel transition events.
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const timer = window.setTimeout(finishTransition, reduced ? 0 : 1000);
+    return () => window.clearTimeout(timer);
+  }, [phase, finishTransition]);
 
   const continueReading = useCallback(() => {
     if (!bookmark) return;
@@ -130,18 +127,7 @@ function ChaptersHubContent() {
     return () => window.removeEventListener("keydown", handler);
   }, [phase, closeBook]);
 
-  // ── hover bubble: compute the hovered row's vertical position
-  // relative to the page container, so the bubble lines up with it
-  // regardless of scroll position.
-  //
-  // The hide side is debounced: hovering near a row's inner edges (the
-  // gap between the row's own padding and its child <span>) can fire a
-  // spurious mouseleave/mouseenter pair even while the pointer never
-  // actually left the clickable box, which made the bubble flicker off
-  // and back on. Scheduling the hide a beat later — and cancelling that
-  // timeout if a new (or the same) row's mouseenter arrives first —
-  // means the bubble only ever disappears once the pointer has
-  // genuinely stayed outside every row for that beat.
+  // Delay hiding while the pointer crosses neighboring rows.
   const hideTimeoutRef = useRef<number | null>(null);
 
   const clearHideTimeout = useCallback(() => {
@@ -151,24 +137,9 @@ function ChaptersHubContent() {
     }
   }, []);
 
-  const showBubble = useCallback((ch: Chapter, rowEl: HTMLElement) => {
+  const showBubble = useCallback((ch: Chapter) => {
     clearHideTimeout();
-    const pageEl = tocPageRef.current;
-    if (!pageEl) return;
-    const rowRect = rowEl.getBoundingClientRect();
-    const pageRect = pageEl.getBoundingClientRect();
-    const top = rowRect.top - pageRect.top + rowRect.height / 2;
-    setBubble((prev) => {
-      // skip the update (and the resulting re-render) if nothing
-      // actually changed — avoids restarting anything for no reason
-      if (prev && prev.slug === ch.slug && prev.top === top) return prev;
-      return {
-        slug: ch.slug,
-        title: chapterTitle(ch, lang),
-        synopsis: chapterSynopsis(ch, lang),
-        top,
-      };
-    });
+    setBubble({ slug: ch.slug, title: chapterTitle(ch, lang), synopsis: chapterSynopsis(ch, lang) });
   }, [lang, clearHideTimeout]);
 
   const hideBubble = useCallback(() => {
@@ -176,7 +147,7 @@ function ChaptersHubContent() {
     hideTimeoutRef.current = window.setTimeout(() => {
       setBubble(null);
       hideTimeoutRef.current = null;
-    }, 60);
+    }, 140);
   }, [clearHideTimeout]);
 
   useEffect(() => clearHideTimeout, [clearHideTimeout]);
@@ -189,7 +160,7 @@ function ChaptersHubContent() {
   }, [clearHideTimeout]);
 
   const bookmarkChapter = bookmark ? chapters.find(c => c.slug === bookmark.slug) : null;
-  const coverOpen = phase !== "cover";
+  const coverOpen = phase === "opening" || phase === "toc";
 
   return (
     <div
@@ -236,7 +207,6 @@ function ChaptersHubContent() {
 
       {/* ════════════════ THE BOOK ════════════════ */}
       <div
-        ref={bookRef}
         className={[
           styles.bookWrap,
           phase === "opening" ? styles.bookOpening : "",
@@ -253,7 +223,12 @@ function ChaptersHubContent() {
         role={phase === "cover" ? "button" : undefined}
         aria-label={phase === "cover" ? (lang === "en" ? "Open the book" : "Kitabı aç") : undefined}
         tabIndex={phase === "cover" ? 0 : undefined}
-        onKeyDown={phase === "cover" ? (e) => e.key === "Enter" && openBook() : undefined}
+        onKeyDown={phase === "cover" ? (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openBook();
+          }
+        } : undefined}
       >
         {/* ── spine ── */}
         <div className={styles.spine}>
@@ -270,6 +245,9 @@ function ChaptersHubContent() {
         {/* ── COVER CARD: front cover + inside-left page ── */}
         <div
           className={[styles.coverCard, coverOpen ? styles.coverCardFlipped : ""].filter(Boolean).join(" ")}
+          onTransitionEnd={(e) => {
+            if (e.target === e.currentTarget && e.propertyName === "transform") finishTransition();
+          }}
         >
           {/* ── FRONT FACE ── */}
           <div className={styles.cover}>
@@ -310,8 +288,8 @@ function ChaptersHubContent() {
 
         {/* ── TABLE OF CONTENTS: ONE full page to the right of the cover,
               single scrollable list, hover synopsis bubble ── */}
-        <div className={styles.tocSpread}>
-          <div className={styles.tocPage} ref={tocPageRef}>
+        <div className={styles.tocSpread} inert={phase !== "toc"}>
+          <div className={styles.tocPage}>
             <div className={styles.pageTexture} />
             <div className={styles.tocPageInner}>
               <div className={styles.tocHeader}>
@@ -326,14 +304,15 @@ function ChaptersHubContent() {
                   <li key={ch.slug} className={styles.tocEntryItem}>
                     <button
                       type="button"
+                      disabled={phase !== "toc"}
                       className={[
                         styles.tocEntry,
                         bubble?.slug === ch.slug ? styles.tocEntryHovered : "",
                         pendingSlug === ch.slug ? styles.tocEntryActive : "",
                       ].filter(Boolean).join(" ")}
-                      onMouseEnter={(e) => showBubble(ch, e.currentTarget)}
+                      onMouseEnter={() => showBubble(ch)}
                       onMouseLeave={hideBubble}
-                      onFocus={(e) => showBubble(ch, e.currentTarget)}
+                      onFocus={() => showBubble(ch)}
                       onBlur={hideBubble}
                       onClick={() => goToChapter(ch.slug)}
                     >
@@ -345,18 +324,10 @@ function ChaptersHubContent() {
             </div>
           </div>
 
-          {/* floating synopsis bubble — a sibling of .tocPage, NOT a child
-              of it. .tocPage has overflow:hidden (for its rounded corner /
-              texture), which was silently clipping the bubble entirely
-              since it renders outside the page's own right edge. .tocSpread
-              has no overflow set, so positioning it here lets it actually
-              show up. Its "top" offset is still computed relative to
-              tocPageRef, so it lines up with the hovered row exactly as
-              before. */}
+          {/* The synopsis stays on the facing page without moving the list. */}
           {bubble && (
             <div
               className={styles.tocBubble}
-              style={{ top: bubble.top }}
               aria-hidden
             >
               <div className={styles.tocBubbleTitle}>{bubble.title}</div>

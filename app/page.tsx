@@ -20,6 +20,8 @@ export default function Home() {
           alt="A Song of Fire and Blood"
           fill
           preload
+          unoptimized
+          sizes="100vw"
           className="hero-image"
         />
         <div className="hero-fade" />
