@@ -12,11 +12,11 @@ import {
   colorForHouse,
   secondaryColorForHouse,
 } from "@/lib/graph-layout";
-import type { Character } from "@/types/character";
+import type { Character, CharacterId } from "@/types/character";
 import styles from "./characterContent.module.css";
 
 type Props = {
-  characterId: string;
+  characterId: CharacterId;
   /** Kept optional for backwards compatibility with older character page calls. */
   relationships?: Record<string, string>;
 };
@@ -32,7 +32,7 @@ const CENTER_Y = HEIGHT / 2;
 const LABEL_EDGE_GUARD = 86;
 
 const characters = getCharacters();
-const byId = new Map<string, Character>(
+const byId = new Map<CharacterId, Character>(
   characters.map((character) => [character.id, character])
 );
 
