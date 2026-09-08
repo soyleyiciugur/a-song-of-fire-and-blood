@@ -3,11 +3,11 @@ import { dragons } from "@/data/dragons";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
 import SigilImage from "@/components/SigilImage";
-import BestiaryTabs from "@/components/BestiaryTabs";
+import BestiaryTabs, { BackToBestiary } from "@/components/BestiaryTabs";
 import styles from "../../dragons/dragons.module.css";
 
 export default function DragonsPage() {
-  return <main className={styles.page}><div className={styles.container}><h1 className="realm-page-title">Dragons</h1><p className={styles.subheading}>The living fire of House Targaryen, and the flames that went out too soon.</p><BestiaryTabs active="dragons" />{(["Alive", "Dead"] as const).map((status) => <section className={styles.group} key={status}><h2 className={styles.groupHeading}>{status === "Alive" ? "Living" : "Lost"}</h2><div className={styles.grid}>{dragons.filter((dragon) => dragon.status === status).map((dragon) => <DragonCard key={dragon.id} dragon={dragon}/>)}</div></section>)}</div></main>;
+  return <main className={styles.page}><div className={styles.container}><h1 className="realm-page-title">Dragons</h1><p className={styles.subheading}>The living fire of House Targaryen, and the flames that went out too soon.</p><BestiaryTabs active="dragons" />{(["Alive", "Dead"] as const).map((status) => <section className={styles.group} key={status}><h2 className={styles.groupHeading}>{status === "Alive" ? "Living" : "Lost"}</h2><div className={styles.grid}>{dragons.filter((dragon) => dragon.status === status).map((dragon) => <DragonCard key={dragon.id} dragon={dragon}/>)}</div></section>)}<BackToBestiary /></div></main>;
 }
 
 function DragonCard({ dragon }: { dragon: (typeof dragons)[number] }) {

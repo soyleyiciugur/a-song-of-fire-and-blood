@@ -1,4 +1,5 @@
 import Link from "next/link";
+import archiveStyles from "@/app/records/records.module.css";
 
 export const beastTypes = [
   { id: "dragons", name: "Dragons", description: "Living fire, ancient bonds, and the wings that shadow the realm." },
@@ -8,5 +9,9 @@ export const beastTypes = [
 ] as const;
 
 export default function BestiaryTabs({ active }: { active: string }) {
-  return <nav className="realm-section-tabs" aria-label="Bestiary sections"><Link href="/bestiary">The Bestiary</Link>{beastTypes.map((beast) => <Link key={beast.id} href={`/bestiary/${beast.id}`} aria-current={active === beast.id ? "page" : undefined}>{beast.name}</Link>)}</nav>;
+  return <nav className="realm-section-tabs" aria-label="Bestiary sections">{beastTypes.map((beast) => <Link key={beast.id} href={`/bestiary/${beast.id}`} aria-current={active === beast.id ? "page" : undefined}>{beast.name}</Link>)}</nav>;
+}
+
+export function BackToBestiary() {
+  return <Link href="/bestiary" className={archiveStyles.backLink}>← The Bestiary</Link>;
 }

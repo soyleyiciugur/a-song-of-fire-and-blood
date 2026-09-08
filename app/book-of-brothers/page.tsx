@@ -1,5 +1,6 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\book-of-brothers\page.tsx
 import Link from "next/link";
+import archiveStyles from "@/app/records/records.module.css";
 import { getAllKingsguardEntries } from "@/lib/bookOfBrothers";
 import { getCharacter } from "@/lib/characters";
 import SigilImage from "@/components/SigilImage"; // Projendeki tam path'e göre ayarla
@@ -77,6 +78,9 @@ export default function BookOfBrothersPage() {
           No entries have been recorded in the White Book yet.
         </p>
       )}
+      <Link href="/records" className={archiveStyles.backLink}>
+        ← Records of the Realm
+      </Link>
     </div>
   );
 }

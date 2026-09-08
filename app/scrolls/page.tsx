@@ -1,5 +1,6 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\scrolls\page.tsx
 import Link from "next/link";
+import archiveStyles from "@/app/records/records.module.css";
 import { getAllScrolls, getScrollCategories } from "@/lib/scrolls";
 import styles from "./scrolls.module.css";
 
@@ -61,6 +62,9 @@ export default function ScrollsPage() {
           No scrolls have been added to the archive yet.
         </p>
       )}
+      <Link href="/records" className={archiveStyles.backLink}>
+        ← Records of the Realm
+      </Link>
     </div>
   );
 }
