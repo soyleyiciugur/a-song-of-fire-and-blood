@@ -195,7 +195,7 @@
   align-items: center;
   gap: 7px;
   min-width: 0;
-  padding: 10px 7px 9px;
+  padding: 10px 7px 10px;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   text-align: center;
@@ -213,23 +213,27 @@
   position: absolute;
   top: 7px;
   right: 8px;
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border: 1px solid rgba(201, 162, 39, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid rgba(201, 162, 39, 0.32);
   border-radius: 50%;
   color: var(--gold);
   background: var(--surface);
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 800;
+  line-height: 1;
+  text-align: center;
 }
 
 .successionIdentity {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   width: 100%;
 }
 
@@ -244,21 +248,74 @@
 }
 
 .successionIdentity small {
+  display: block;
   max-width: 100%;
-  overflow: hidden;
   color: var(--gold);
   font-size: 0.66rem;
   font-style: italic;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.35;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .directorySection {
   margin-top: 18px;
   padding: 20px;
+  overflow: visible;
+}
+
+.directoryHeader {
+  align-items: center;
+}
+
+.directoryHeaderTools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+}
+
+.statusTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.statusTab {
+  min-height: 27px;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.67rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.statusTab:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.statusTabActive {
+  border-color: rgba(201, 162, 39, 0.28);
+  background: rgba(201, 162, 39, 0.09);
+  color: var(--gold);
 }
 
 .controls {
+  position: relative;
+  z-index: 6;
   display: grid;
   grid-template-columns: minmax(220px, 1fr) minmax(150px, 190px) minmax(140px, 170px);
   gap: 10px;
@@ -286,11 +343,11 @@
   text-transform: uppercase;
 }
 
-.searchInput,
-.select {
+.searchInput {
   width: 100%;
   min-width: 0;
   height: 34px;
+  padding: 0 10px;
   border: 1px solid var(--border);
   border-radius: 7px;
   outline: none;
@@ -298,21 +355,13 @@
   color: var(--text);
   font: inherit;
   font-size: 0.78rem;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-.searchInput {
-  padding: 0 10px;
-}
-
-.select {
-  padding: 0 28px 0 9px;
-}
-
-.searchInput:focus,
-.select:focus {
+.searchInput:focus {
   border-color: rgba(201, 162, 39, 0.55);
   box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.08);
+  background: var(--surface-hover);
 }
 
 .searchInput::placeholder {
@@ -320,7 +369,125 @@
   opacity: 0.7;
 }
 
+.searchInput::-webkit-search-cancel-button {
+  filter: sepia(1) saturate(0.6);
+  opacity: 0.55;
+}
+
+.styledSelect {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.selectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 34px;
+  padding: 0 9px 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  outline: none;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.selectTrigger:hover,
+.selectTriggerOpen {
+  border-color: rgba(201, 162, 39, 0.42);
+  background: var(--surface-hover);
+}
+
+.selectTrigger:focus-visible {
+  border-color: rgba(201, 162, 39, 0.55);
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.08);
+}
+
+.selectChevron {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 0.48rem;
+  line-height: 1;
+  transform: rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.selectTriggerOpen .selectChevron {
+  transform: rotate(225deg);
+}
+
+.selectMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  width: 100%;
+  min-width: 170px;
+  max-height: 270px;
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid rgba(201, 162, 39, 0.24);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 96%, black 4%);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.015) inset;
+}
+
+.selectMenu::-webkit-scrollbar {
+  width: 7px;
+}
+
+.selectMenu::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(201, 162, 39, 0.24);
+  background-clip: padding-box;
+}
+
+.selectOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 31px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.76rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.14s ease, background 0.14s ease;
+}
+
+.selectOption:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.selectOptionActive {
+  color: var(--gold);
+  background: rgba(201, 162, 39, 0.075);
+}
+
+.selectOptionMark {
+  color: var(--gold);
+  font-size: 0.62rem;
+}
+
 .characterGrid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
@@ -389,6 +556,7 @@
   color: var(--gold);
   font-size: 0.68rem;
   font-style: italic;
+  line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -461,6 +629,16 @@
     justify-content: flex-start;
   }
 
+  .directoryHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .directoryHeaderTools {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .successionLine {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -504,6 +682,20 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .directoryHeaderTools {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .statusTabs {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .statusTab {
+    flex: 0 0 auto;
+  }
+
   .controls {
     grid-template-columns: 1fr;
   }
@@ -512,12 +704,16 @@
     grid-column: auto;
   }
 
+  .selectWrap {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+  }
+
   .characterGrid {
     grid-template-columns: 1fr;
   }
 
-  .sectionHeadingRow,
-  .directoryHeader {
+  .sectionHeadingRow {
     align-items: flex-start;
   }
 

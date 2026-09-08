@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getCharacters } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
@@ -19,10 +19,28 @@ const SUCCESSION_IDS = [
   "vhaemys-targaryen",
 ] as const;
 
+const SUCCESSION_NUMERALS = ["I", "II", "III", "IV", "V", "VI"] as const;
+
 const ROYAL_IDS = new Set<string>([
   ...ROYAL_PARENT_IDS,
   ...SUCCESSION_IDS,
 ]);
+
+type StatusFilter = "all" | "Alive" | "Dead" | "Missing" | "Unknown";
+type SortMode = "name" | "house";
+
+type SelectOption = {
+  value: string;
+  label: string;
+};
+
+const STATUS_TABS: { value: StatusFilter; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "Alive", label: "Alive" },
+  { value: "Dead", label: "Dead" },
+  { value: "Missing", label: "Missing" },
+  { value: "Unknown", label: "Unknown" },
+];
 
 function displayName(name: string) {
   return name.replace(/^(Ser|Mother)\s+/i, "").trim();
@@ -34,6 +52,102 @@ function sortableName(name: string) {
 
 function houseLabel(house: string) {
   return house === "-" ? "Unaffiliated" : house.replace(/^House\s+/i, "");
+}
+
+function formatNickname(nickname?: string | null) {
+  if (!nickname || nickname === "-") return null;
+  return `“${nickname.replace(/^[“”"']+|[“”"']+$/g, "")}”`;
+}
+
+function StyledSelect({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: SelectOption[];
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const selected = options.find((option) => option.value === value) ?? options[0];
+
+  useEffect(() => {
+    if (!open) return;
+
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      const root = rootRef.current;
+      if (root && !root.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open]);
+
+  return (
+    <div className={styles.selectWrap} ref={rootRef}>
+      <span className={styles.controlLabel}>{label}</span>
+
+      <div className={styles.styledSelect}>
+        <button
+          type="button"
+          className={`${styles.selectTrigger} ${open ? styles.selectTriggerOpen : ""}`}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
+        >
+          <span>{selected?.label ?? "—"}</span>
+          <span className={styles.selectChevron} aria-hidden="true">
+            ◆
+          </span>
+        </button>
+
+        {open && (
+          <div className={styles.selectMenu} role="listbox" aria-label={label}>
+            {options.map((option) => {
+              const active = option.value === value;
+
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  className={`${styles.selectOption} ${
+                    active ? styles.selectOptionActive : ""
+                  }`}
+                  onClick={() => {
+                    onChange(option.value);
+                    setOpen(false);
+                  }}
+                >
+                  <span>{option.label}</span>
+                  {active && (
+                    <span className={styles.selectOptionMark} aria-hidden="true">
+                      ✦
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function Characters() {
@@ -72,13 +186,18 @@ export default function Characters() {
 
   const [query, setQuery] = useState("");
   const [houseFilter, setHouseFilter] = useState("all");
-  const [sortBy, setSortBy] = useState<"name" | "house">("name");
+  const [sortBy, setSortBy] = useState<SortMode>("name");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
   const visibleCharacters = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("en");
 
     return otherCharacters
       .filter((character) => {
+        if (statusFilter !== "all" && character.status !== statusFilter) {
+          return false;
+        }
+
         if (houseFilter !== "all" && character.house !== houseFilter) {
           return false;
         }
@@ -111,7 +230,20 @@ export default function Characters() {
           sensitivity: "base",
         });
       });
-  }, [otherCharacters, houseFilter, query, sortBy]);
+  }, [otherCharacters, houseFilter, query, sortBy, statusFilter]);
+
+  const houseOptions = useMemo<SelectOption[]>(
+    () => [
+      { value: "all", label: "All houses" },
+      ...houses.map((house) => ({ value: house, label: houseLabel(house) })),
+    ],
+    [houses]
+  );
+
+  const sortOptions: SelectOption[] = [
+    { value: "name", label: "Name A–Z" },
+    { value: "house", label: "House A–Z" },
+  ];
 
   return (
     <main className="page-shell">
@@ -179,7 +311,9 @@ export default function Characters() {
                   href={`/characters/${character.id}`}
                   className={styles.successionCard}
                 >
-                  <span className={styles.successionNumber}>{index + 1}</span>
+                  <span className={styles.successionNumber}>
+                    {SUCCESSION_NUMERALS[index]}
+                  </span>
                   <MiniPortrait
                     id={character.id}
                     alt={character.name}
@@ -187,8 +321,8 @@ export default function Characters() {
                   />
                   <span className={styles.successionIdentity}>
                     <strong>{displayName(character.name)}</strong>
-                    {character.nickname !== "-" && (
-                      <small>{character.nickname}</small>
+                    {formatNickname(character.nickname) && (
+                      <small>{formatNickname(character.nickname)}</small>
                     )}
                   </span>
                 </Link>
@@ -203,9 +337,28 @@ export default function Characters() {
               <span className={styles.eyebrow}>The Realm</span>
               <h2 className={styles.sectionTitle}>Other Characters</h2>
             </div>
-            <span className={styles.resultCount}>
-              {visibleCharacters.length} of {otherCharacters.length}
-            </span>
+
+            <div className={styles.directoryHeaderTools}>
+              <div className={styles.statusTabs} role="group" aria-label="Status filter">
+                {STATUS_TABS.map((tab) => (
+                  <button
+                    key={tab.value}
+                    type="button"
+                    className={`${styles.statusTab} ${
+                      statusFilter === tab.value ? styles.statusTabActive : ""
+                    }`}
+                    onClick={() => setStatusFilter(tab.value)}
+                    aria-pressed={statusFilter === tab.value}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              <span className={styles.resultCount}>
+                {visibleCharacters.length} of {otherCharacters.length}
+              </span>
+            </div>
           </div>
 
           <div className={styles.controls}>
@@ -220,35 +373,19 @@ export default function Characters() {
               />
             </label>
 
-            <label className={styles.selectWrap}>
-              <span className={styles.controlLabel}>House</span>
-              <select
-                value={houseFilter}
-                onChange={(event) => setHouseFilter(event.target.value)}
-                className={styles.select}
-              >
-                <option value="all">All houses</option>
-                {houses.map((house) => (
-                  <option key={house} value={house}>
-                    {houseLabel(house)}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <StyledSelect
+              label="House"
+              value={houseFilter}
+              options={houseOptions}
+              onChange={setHouseFilter}
+            />
 
-            <label className={styles.selectWrap}>
-              <span className={styles.controlLabel}>Sort</span>
-              <select
-                value={sortBy}
-                onChange={(event) =>
-                  setSortBy(event.target.value as "name" | "house")
-                }
-                className={styles.select}
-              >
-                <option value="name">Name A–Z</option>
-                <option value="house">House A–Z</option>
-              </select>
-            </label>
+            <StyledSelect
+              label="Sort"
+              value={sortBy}
+              options={sortOptions}
+              onChange={(value) => setSortBy(value as SortMode)}
+            />
           </div>
 
           {visibleCharacters.length > 0 ? (
@@ -256,6 +393,7 @@ export default function Characters() {
               {visibleCharacters.map((character) => {
                 const name = displayName(character.name);
                 const title = character.title !== "-" ? character.title : null;
+                const nickname = formatNickname(character.nickname);
 
                 return (
                   <li key={character.id} className={styles.characterItem}>
@@ -272,10 +410,8 @@ export default function Characters() {
                       <span className={styles.characterText}>
                         <span className={styles.nameLine}>
                           <strong>{name}</strong>
-                          {character.nickname !== "-" && (
-                            <span className={styles.nickname}>
-                              “{character.nickname}”
-                            </span>
+                          {nickname && (
+                            <span className={styles.nickname}>{nickname}</span>
                           )}
                         </span>
 
@@ -309,6 +445,7 @@ export default function Characters() {
                   setQuery("");
                   setHouseFilter("all");
                   setSortBy("name");
+                  setStatusFilter("all");
                 }}
               >
                 Clear filters
