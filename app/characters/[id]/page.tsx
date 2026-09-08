@@ -36,11 +36,7 @@ export default async function CharacterPage({ params }: Props) {
     character.portraitAgeState
   );
 
-  const portraitVariants = getCharacterPortraitVariants(
-    character.id,
-    currentAgeState,
-    character.portrait
-  );
+  const portraitVariants = getCharacterPortraitVariants(character.id);
 
   return (
     <main className="page">

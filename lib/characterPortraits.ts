@@ -23,33 +23,26 @@ function findPublicImage(relativeWithoutExtension: string): string | null {
 }
 
 /**
- * The root character portrait is always the canonical worldDate/current image.
- * The age-state matching the current character age therefore points at root;
- * every other state is looked up in its own subfolder.
+ * Every portrait state lives in its own age-state folder.
+ * There is no special root/current portrait anymore.
+ *
+ * Example:
+ *   /images/characters/young/jacaelon-targaryen-young.webp
+ *   /images/characters/adult/jacaelon-targaryen-adult.webp
  */
 export function getCharacterPortraitVariants(
-  characterId: string,
-  currentAgeState: CharacterAgeState,
-  customCurrentPortrait?: string | null
+  characterId: string
 ): CharacterPortraitVariants {
   const variants: CharacterPortraitVariants = {};
 
-  const currentPortrait =
-    customCurrentPortrait ??
-    findPublicImage(`images/characters/${characterId}`);
-
-  if (currentPortrait) {
-    variants[currentAgeState] = currentPortrait;
-  }
-
   for (const state of CHARACTER_AGE_STATES) {
-    if (state === currentAgeState) continue;
-
     const portrait = findPublicImage(
       `images/characters/${state}/${characterId}-${state}`
     );
 
-    if (portrait) variants[state] = portrait;
+    if (portrait) {
+      variants[state] = portrait;
+    }
   }
 
   return variants;
