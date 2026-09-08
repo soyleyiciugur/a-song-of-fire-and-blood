@@ -1,4 +1,12 @@
-import cards from "@/data/the-great-game/cards.json";
+import Image from "next/image";
 import styles from "./artifacts.module.css";
 
-export default function ArtifactsPage() { const artifacts = cards.filter((card) => card.cardType === "artifact"); return <main className={styles.page}><div className={styles.container}><p className={styles.eyebrow}>Relics of the Realm</p><h1>Artifacts</h1><p className={styles.lead}>Weapons, heirlooms, and objects whose names outlived their keepers.</p><div className={styles.grid}>{artifacts.map((artifact) => <article className={styles.card} key={artifact.id}><span className={styles.tier}>{artifact.tierId}</span><h2>{artifact.name}</h2><p>{artifact.subtitle}</p>{artifact.abilities?.[0] && <small>{artifact.abilities[0].text}</small>}</article>)}</div></div></main>; }
+const artifacts = [
+  ["blackfyre", "Blackfyre", "The black blade of Targaryen kings, carried as much for the claim it represented as for the edge it kept."],
+  ["dark-sister", "Dark Sister", "A slender Valyrian steel sword, remembered in the hands of warriors who made speed and precision their answer to strength."],
+  ["ice", "Ice", "The great Valyrian blade of House Stark, a symbol of northern judgment and the weight of an ancient house."],
+  ["bow", "Watcher’s Howl", "A hunting bow whose name is spoken in the same breath as the watchful forests and the men who know their paths."],
+  ["dawn", "Dawn", "The pale sword of House Dayne, granted to the knight deemed worthy to bear the title Sword of the Morning."],
+] as const;
+
+export default function ArtifactsPage() { return <main className={styles.page}><div className={styles.container}><p className={styles.eyebrow}>Relics of the Realm</p><h1>The Collection</h1><p className={styles.lead}>Artifacts remembered for the stories they carry, not the games they might be played in.</p><h2 className={styles.sectionTitle}>Artifacts</h2><div className={styles.grid}>{artifacts.map(([id, name, description]) => <article className={styles.card} key={id}><div className={styles.image}><Image src={`/images/cards/${id}.png`} alt={name} fill sizes="(max-width: 700px) 50vw, 220px" /></div><div className={styles.body}><h3>{name}</h3><p>{description}</p></div></article>)}</div></div></main>; }

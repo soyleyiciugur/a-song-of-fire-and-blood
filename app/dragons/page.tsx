@@ -1,5 +1,6 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\dragons\page.tsx
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { dragons } from "@/data/dragons";
 import { getCharacter } from "@/lib/characters";
@@ -9,6 +10,7 @@ import SigilImage from "@/components/SigilImage";
 import styles from "./dragons.module.css";
 
 export default function Dragons() {
+  redirect("/bestiary");
   const alive = dragons.filter((d) => d.status === "Alive");
   const dead = dragons.filter((d) => d.status === "Dead");
 

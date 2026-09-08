@@ -12,6 +12,8 @@ import timelineData from "@/data/timeline.json";
 import mapLocationsData from "@/data/map/locations.json";
 import characterPositionsData from "@/data/map/character-positions.json";
 import galleryData from "@/data/gallery.json";
+import eventsData from "@/data/events.json";
+import bloodshedData from "@/data/bloodshed.json";
 import { ConfirmModal } from "./_components/Modal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,6 +31,8 @@ const ADMIN_NAV_ITEMS = [
   { label: "Houses", href: "/admin/houses" },
   { label: "Map", href: "/admin/map" },
   { label: "The Raven's Eye", href: "/admin/ravens-eye" },
+  { label: "Events", href: "/admin/events" },
+  { label: "The Bloodshed", href: "/admin/bloodshed" },
   { label: "Timeline", href: "/admin/timeline" },
   { label: "Records", href: "/admin/records" }, // replaces Scrolls + Book of Brothers
   { label: "Tools", href: "/admin/tools" },
@@ -52,6 +56,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     characterPositions: false,
     chapters: false,
     gallery: false,
+    events: false,
+    bloodshed: false,
   });
 
   const [isSaving, setIsSaving] = useState(false);
@@ -112,7 +118,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     characters: boolean; quotes: boolean; houses: boolean; worldDate: boolean;
     scrolls: boolean; bookOfBrothers: boolean; dragons: boolean;
     timeline: boolean; mapLocations: boolean; characterPositions: boolean;
-    chapters: boolean; gallery: boolean;
+    chapters: boolean; gallery: boolean; events: boolean; bloodshed: boolean;
   };
 
   function DraftTooltip({ currentStatus }: { currentStatus: DraftStatus }) {
@@ -227,6 +233,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           e.caption ? `"${(e.caption as string).slice(0, 32)}…"` : e.id
         );
         if (changed.length > 0) result.push({ section: "The Raven's Eye", items: changed });
+      }
+
+      if (currentStatus.events && Array.isArray(pending.events)) {
+        const changed = diffById(eventsData as any[], pending.events as any[], (e) => e.title || e.id);
+        if (changed.length > 0) result.push({ section: "Events", items: changed });
+      }
+
+      if (currentStatus.bloodshed && Array.isArray(pending.bloodshed)) {
+        const changed = diffById(bloodshedData as any[], pending.bloodshed as any[], (e) => e.title || e.id);
+        if (changed.length > 0) result.push({ section: "The Bloodshed", items: changed });
       }
 
       return result;

@@ -11,6 +11,8 @@ import mapLocationsData from "../data/map/locations.json";
 import characterPositionsData from "../data/map/character-positions.json";
 import chaptersData from "../data/chapters.json";
 import galleryData from "../data/gallery.json";
+import eventsData from "../data/events.json";
+import bloodshedData from "../data/bloodshed.json";
 
 const DRAFT_KEYS = {
   characters: "draft-characters",
@@ -25,6 +27,8 @@ const DRAFT_KEYS = {
   characterPositions: "draft-characterPositions",
   chapters: "draft-chapters",
   gallery: "draft-gallery",
+  events: "draft-events",
+  bloodshed: "draft-bloodshed",
 } as const;
 
 const ORIGINAL_DATA: Record<keyof typeof DRAFT_KEYS, unknown> = {
@@ -40,6 +44,8 @@ const ORIGINAL_DATA: Record<keyof typeof DRAFT_KEYS, unknown> = {
   characterPositions: characterPositionsData,
   chapters: chaptersData,
   gallery: galleryData,
+  events: eventsData,
+  bloodshed: bloodshedData,
 };
 
 export function getDraft<T = any>(key: keyof typeof DRAFT_KEYS): T | null {
@@ -85,6 +91,8 @@ export function collectAllPendingDrafts() {
     characterPositions: getDraft("characterPositions"),
     chapters: getDraft("chapters"),
     gallery: getDraft("gallery"),
+    events: getDraft("events"),
+    bloodshed: getDraft("bloodshed"),
   };
 }
 
@@ -107,6 +115,8 @@ export function getPendingDraftStatus() {
     characterPositions: isDraftDifferentFromOriginal(getDraft("characterPositions"), ORIGINAL_DATA.characterPositions),
     chapters: isDraftDifferentFromOriginal(getDraft("chapters"), ORIGINAL_DATA.chapters),
     gallery: isDraftDifferentFromOriginal(getDraft("gallery"), ORIGINAL_DATA.gallery),
+    events: isDraftDifferentFromOriginal(getDraft("events"), ORIGINAL_DATA.events),
+    bloodshed: isDraftDifferentFromOriginal(getDraft("bloodshed"), ORIGINAL_DATA.bloodshed),
   };
 }
 

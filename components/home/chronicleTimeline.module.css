@@ -1,9 +1,9 @@
-.section { margin-top: 42px; padding: 24px 22px 30px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.section { position:relative; z-index:5; margin-top: 42px; padding: 24px 22px 30px; overflow: visible; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
 .header { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 48px; }
 .eyebrow { display: block; margin-bottom: 6px; color: var(--muted); font: 600 10px var(--font-geist); letter-spacing: .16em; text-transform: uppercase; }
 .header h2 { margin: 0; color: var(--gold); font: 600 22px var(--font-hotd); }
 .today { color: var(--muted); font: 12px var(--font-geist); white-space: nowrap; }
-.viewport { overflow-x: auto; padding: 0 4px 12px; scrollbar-width: thin; }
+.viewport { overflow-x: auto; padding: 150px 4px 12px; scrollbar-width: thin; }
 .track { position: relative; min-width: 620px; height: 28px; margin: 0 8px; background: linear-gradient(var(--border), var(--border)) center / 100% 2px no-repeat; }
 .progress { position: absolute; top: 13px; left: 0; height: 2px; background: var(--gold); }
 .marker { position: absolute; top: 8px; transform: translateX(-50%); }
@@ -16,6 +16,6 @@
 .tooltip ul { margin: 9px 0 0; padding-left: 16px; color: var(--text); font: 12px/1.45 var(--font-body); }
 .portraits { display: flex; gap: 4px; margin-top: 10px; }
 .portraits img { width: 25px; height: 25px; border: 1px solid var(--border); border-radius: 50%; object-fit: cover; }
-.edgeLabel { position: absolute; top: 26px; transform: translateX(-50%); color: var(--muted); font: 10px var(--font-geist); white-space: nowrap; }
+.edgeLabel { position: absolute; top: 26px; transform: translateX(-50%); color: var(--muted); font: 10px var(--font-geist); white-space: nowrap; z-index:4; }
 .edgeLabel:first-of-type { transform: none; }.future { transform: translateX(-100%); }
 @media (max-width: 600px) { .section { padding-inline: 14px; } .header { align-items: start; flex-direction: column; margin-bottom: 42px; } .today { align-self: end; } }

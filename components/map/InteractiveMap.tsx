@@ -3,7 +3,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useMapViewport } from "@/lib/useMapViewport";
 import {
@@ -243,6 +243,8 @@ function Avatar({
 
 export default function InteractiveMap() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const requestedLocation = searchParams.get("location");
 
   const [visibleCard, setVisibleCard] =
     useState<Character | null>(null);
@@ -361,9 +363,7 @@ export default function InteractiveMap() {
         height,
       });
 
-      const kl = getMapLocation(
-        DEFAULT_MAP_LOCATION
-      );
+      const kl = getMapLocation(requestedLocation || DEFAULT_MAP_LOCATION);
 
       if (kl) {
         centerOn(
@@ -375,7 +375,7 @@ export default function InteractiveMap() {
         );
       }
     },
-    [centerOn]
+    [centerOn, requestedLocation]
   );
 
   const currentChapter =

@@ -12,6 +12,8 @@ import { MapLocationListSchema } from "../../../../schemas/mapLocation";
 import { CharacterPositionsSchema } from "../../../../schemas/characterPositions";
 import { ChapterListSchema } from "../../../../schemas/chapter";
 import { GalleryListSchema } from "../../../../schemas/gallery";
+import { MapEventListSchema } from "../../../../schemas/map";
+import { BloodshedListSchema } from "../../../../schemas/bloodshed";
 import { updateMultipleFilesOnGithub } from "@/lib/github";
 
 export async function POST(request: Request) {
@@ -30,6 +32,8 @@ export async function POST(request: Request) {
       characterPositions,
       chapters,
       gallery,
+      events,
+      bloodshed,
     } = body;
 
     const files: { path: string; content: unknown }[] = [];
@@ -91,6 +95,16 @@ export async function POST(request: Request) {
     if (gallery) {
       const validatedGallery = GalleryListSchema.parse(gallery);
       files.push({ path: "data/gallery.json", content: validatedGallery });
+    }
+
+    if (events) {
+      const validatedEvents = MapEventListSchema.parse(events);
+      files.push({ path: "data/events.json", content: validatedEvents });
+    }
+
+    if (bloodshed) {
+      const validatedBloodshed = BloodshedListSchema.parse(bloodshed);
+      files.push({ path: "data/bloodshed.json", content: validatedBloodshed });
     }
 
     if (files.length === 0) {

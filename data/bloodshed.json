@@ -1,0 +1,32 @@
+[
+  {
+    "id": "massacre-at-oldtown",
+    "title": "The Massacre at Oldtown",
+    "kind": "battle",
+    "day": 5,
+    "moon": 5,
+    "year": 99,
+    "location": "Oldtown",
+    "chapterSlug": "fathers-and-their-sins",
+    "participants": ["gaelor-targaryen", "melessa-hightower", "baelenys-targaryen"],
+    "houses": ["targaryen", "hightower"],
+    "summary": "Prince Gaelor's vanguard clashes with Oldtown's knights in the castle courtyard.",
+    "cause": "The Crown's punishment for Hightower treason and the unresolved poison plot.",
+    "consequence": "Oldtown loses two hundred knights, House Hightower is broken, and the Reach remembers the Crown's violence."
+  },
+  {
+    "id": "grand-tourney-kings-landing",
+    "title": "The Grand Tourney at King's Landing",
+    "kind": "tourney",
+    "day": 18,
+    "moon": 7,
+    "year": 99,
+    "location": "King's Landing",
+    "chapterSlug": "the-brothers-tilt",
+    "participants": ["gaelor-targaryen", "jacaelon-targaryen", "brant-costayne", "godfrey-blackwood"],
+    "houses": ["targaryen", "costayne", "blackwood"],
+    "summary": "A grand tourney becomes a bloody contest of pride, assassination, and dynastic rivalry.",
+    "cause": "The Crown seeks spectacle and reconciliation while old enemies use the lists as cover.",
+    "consequence": "Neither prince can stand after the final tilt, and the attempted assassination turns public celebration into scandal."
+  }
+]

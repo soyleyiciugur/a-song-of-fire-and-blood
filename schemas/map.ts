@@ -17,6 +17,9 @@ export const MapEventSchema = z.object({
   chapterSlug: z.string().min(1),
   chapterSlugs: z.array(z.string().min(1)).optional(),
   description: z.string().min(1),
+  day: z.number().int().min(1).max(30).optional(),
+  moon: z.number().int().min(1).max(12).optional(),
+  year: z.number().int().min(1).optional(),
 }).strict();
 
 export const MapLocationListSchema = z.array(MapLocationSchema);

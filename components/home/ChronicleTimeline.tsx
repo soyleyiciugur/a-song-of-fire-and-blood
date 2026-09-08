@@ -17,14 +17,14 @@ export default function ChronicleTimeline() {
           <span className={styles.eyebrow}>The Known Chronicle</span>
           <h2 id="chronicle-timeline-title">Aegon&apos;s Conquest → The Unknown</h2>
         </div>
-        <span className={styles.today}>Today · {worldDate.year} {worldDate.era}</span>
+        <span className={styles.today}>Present · {worldDate.day} / {worldDate.moon} / {worldDate.year} {worldDate.era}</span>
       </div>
       <div className={styles.viewport}>
         <div className={styles.track}>
           <span className={styles.progress} style={{ width: `${currentPosition}%` }} />
-          <span className={styles.edgeLabel} style={{ left: "0%" }}>Aegon&apos;s Conquest</span>
+          <span className={styles.edgeLabel} style={{ left: "1%" }}>Aegon&apos;s Conquest</span>
           <span className={styles.edgeLabel} style={{ left: `${currentPosition}%` }}>Present</span>
-          <span className={`${styles.edgeLabel} ${styles.future}`} style={{ left: "100%" }}>Unknown</span>
+          <span className={`${styles.edgeLabel} ${styles.future}`} style={{ left: "99%" }}>Unknown</span>
           {chapters.map((chapter, index) => {
             const position = 6 + (index / Math.max(1, chapters.length - 1)) * (currentPosition - 12);
             const characters = Array.from(new Set(chapter.events.flatMap((event) => event.characters ?? [])));
