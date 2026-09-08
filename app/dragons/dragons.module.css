@@ -57,6 +57,8 @@
 }
 
 .card {
+  position: relative;
+  isolation: isolate;
   display: flex;
   gap: 16px;
 
@@ -150,6 +152,8 @@
 }
 
 .riderChip {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -183,7 +187,20 @@
   font-weight: 600;
 }
 
-.card > a { flex:none; }
+.card > :first-child { flex:none; }
+.cardLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius-md);
+}
+.cardLink:focus-visible { outline: none; }
+.cardLink:focus-visible::after,
+.riderChip:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
 .cardHeader { flex-wrap:wrap; }
 .dragonName a,.riderChip { text-decoration:none; }
 .dragonName a:hover { color:var(--gold); }

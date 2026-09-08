@@ -28,6 +28,37 @@
   margin-bottom: 3rem;
 }
 
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  max-width: 100%;
+  margin-top: 2rem;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--gold);
+  font-family: var(--font-geist), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.backLink:hover {
+  border-color: var(--gold);
+  background: var(--surface-hover);
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 .eyebrow {
   font-family: "House of the Dragon", serif;
   font-size: 0.85rem;
