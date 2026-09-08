@@ -1,5 +1,5 @@
 import charactersData from "@/data/characters/characters.json";
-import type { Character } from "@/types/character";
+import type { Character, CharacterId } from "@/types/character";
 
 export type EffectiveRelationship = {
   id: string;
@@ -10,7 +10,9 @@ export type EffectiveRelationship = {
 
 const allCharacters = charactersData as Character[];
 const publicCharacters = allCharacters.filter((character) => !character.hidden);
-const byId = new Map(publicCharacters.map((character) => [character.id, character]));
+const byId = new Map<CharacterId, Character>(
+  publicCharacters.map((character) => [character.id, character])
+);
 
 function displayNameFromId(id: string) {
   return id
@@ -40,20 +42,18 @@ export function sortableCharacterName(name: string) {
  * - sort the resulting list A-Z by character name.
  */
 export function getEffectiveRelationships(
-  characterId: string
+  characterId: CharacterId
 ): EffectiveRelationship[] {
   const character = byId.get(characterId);
   if (!character) return [];
 
   return Object.entries(character.relationships ?? {})
     .flatMap(([id, description]) => {
-      if (id === "hrrm") return [];
-
-      const resolved = byId.get(id);
+      const resolved = byId.get(id as CharacterId);
 
       // If this id exists in characters.json but is hidden, omit it entirely.
       const rawCharacter = allCharacters.find((entry) => entry.id === id);
-      if (rawCharacter && !resolved) return [];
+      if (rawCharacter?.hidden) return [];
 
       return [
         {
