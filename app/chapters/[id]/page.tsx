@@ -254,6 +254,7 @@ export default function ChapterReader() {
   // chapter should default back to the book view; the scroll view is a
   // one-off reading convenience for the current visit.
   const [viewMode, setViewMode] = useState<ViewMode>("book");
+  const [chapterListOpen, setChapterListOpen] = useState(false);
 
   const toggleViewMode = useCallback(() => {
     setViewMode((m) => (m === "book" ? "scroll" : "book"));
@@ -352,6 +353,7 @@ export default function ChapterReader() {
   const isLastSpread = spreadIndex === totalSpreads - 1;
 
   const goChapter = useCallback((slug: string) => {
+    setChapterListOpen(false);
     router.push(`/chapters/${slug}?lang=${lang}`);
   }, [router, lang]);
 
@@ -364,12 +366,16 @@ export default function ChapterReader() {
         if (e.key === "ArrowLeft" || e.key === "ArrowUp") goPrevSpread();
       }
       if (e.key === "Escape") {
-        router.push(`/chapters?openToc=1&lang=${lang}`);
+        if (chapterListOpen) {
+          setChapterListOpen(false);
+        } else {
+          router.push(`/chapters?openToc=1&lang=${lang}`);
+        }
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [goNextSpread, goPrevSpread, router, lang, viewMode]);
+  }, [goNextSpread, goPrevSpread, router, lang, viewMode, chapterListOpen]);
 
   // page-number input handlers (bug #12) — input is a PAGE number,
   // convert to spread by integer division
@@ -427,6 +433,8 @@ export default function ChapterReader() {
           className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
           onClick={() => selectLang("en")}
           aria-pressed={lang === "en"}
+          title="The Common Tongue"
+          aria-label="The Common Tongue"
         >
           EN
         </button>
@@ -434,14 +442,70 @@ export default function ChapterReader() {
           className={[styles.langBtn, lang === "tr" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
           onClick={() => selectLang("tr")}
           aria-pressed={lang === "tr"}
+          title="Türkçe"
+          aria-label="Türkçe"
         >
           TR
         </button>
       </div>
 
-      <a href={`/chapters?openToc=1&lang=${lang}`} className={styles.backLink}>
-        ← {lang === "en" ? "All chapters" : "Tüm bölümler"}
-      </a>
+      <button
+        type="button"
+        className={styles.backLink}
+        onClick={() => setChapterListOpen(true)}
+        aria-expanded={chapterListOpen}
+        aria-controls="chapter-list-panel"
+      >
+        ☰ {lang === "en" ? "Chapter list" : "Bölüm listesi"}
+      </button>
+
+      {chapterListOpen && (
+        <div
+          className={styles.chapterListOverlay}
+          role="presentation"
+          onClick={() => setChapterListOpen(false)}
+        >
+          <aside
+            id="chapter-list-panel"
+            className={styles.chapterListPanel}
+            role="dialog"
+            aria-modal="true"
+            aria-label={lang === "en" ? "Chapter list" : "Bölüm listesi"}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className={styles.chapterListHeader}>
+              <div>
+                <span className={styles.chapterListKicker}>
+                  {lang === "en" ? "The Chronicle" : "Kronik"}
+                </span>
+                <h2>{lang === "en" ? "Chapter list" : "Bölüm listesi"}</h2>
+              </div>
+              <button
+                type="button"
+                className={styles.chapterListClose}
+                onClick={() => setChapterListOpen(false)}
+                aria-label={lang === "en" ? "Close chapter list" : "Bölüm listesini kapat"}
+              >
+                ×
+              </button>
+            </div>
+            <ol className={styles.chapterList}>
+              {allChapters.map((item, index) => (
+                <li key={item.slug}>
+                  <button
+                    type="button"
+                    className={`${styles.chapterListItem} ${item.slug === chapter.slug ? styles.chapterListItemActive : ""}`}
+                    onClick={() => goChapter(item.slug)}
+                  >
+                    <span className={styles.chapterListNumber}>{String(index + 1).padStart(2, "0")}</span>
+                    <span>{chapterTitle(item, lang)}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </aside>
+        </div>
+      )}
     </>
   );
 
@@ -520,15 +584,7 @@ export default function ChapterReader() {
       <div
         ref={rulerRef}
         aria-hidden
-        style={{
-          position: "fixed",
-          visibility: "hidden",
-          pointerEvents: "none",
-          top: 0,
-          left: 0,
-          width: "calc((min(920px, 100vw) - 52px) / 2 - 64px)",
-          overflow: "hidden",
-        }}
+        className={styles.paginationRuler}
       />
 
       {topControls}

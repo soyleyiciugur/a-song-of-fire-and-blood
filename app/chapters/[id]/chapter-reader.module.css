@@ -53,7 +53,8 @@
    ══════════════════════════════════════════════════════════ */
 .scene {
   width: 100%;                 /* add, in case a parent layout constrains it */
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   background: #090603;
   display: flex;
   flex-direction: column;
@@ -62,6 +63,7 @@
   padding: 40px 16px 60px;
   position: relative;
   perspective: 1800px;
+  overflow: hidden;
 }
 
 .scene::before {
@@ -137,6 +139,138 @@
   transition: color 0.2s, border-color 0.2s;
 }
 .backLink:hover { color: var(--g-bright); border-color: var(--g-bright); }
+
+.backLink:focus-visible,
+.langBtn:focus-visible,
+.chapterListClose:focus-visible,
+.chapterListItem:focus-visible {
+  outline: 2px solid var(--g-bright);
+  outline-offset: 3px;
+}
+
+.paginationRuler {
+  position: fixed;
+  visibility: hidden;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: calc((min(920px, 100vw) - 52px) / 2 - 64px);
+  overflow: hidden;
+}
+
+.chapterListOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(4, 2, 1, 0.66);
+  backdrop-filter: blur(7px);
+}
+
+.chapterListPanel {
+  width: min(360px, calc(100vw - 32px));
+  height: 100%;
+  padding: 28px 20px 24px;
+  color: var(--p-light);
+  background:
+    linear-gradient(145deg, rgba(49, 27, 10, 0.98), rgba(14, 8, 3, 0.99)),
+    #0e0803;
+  border-right: 1px solid rgba(212, 168, 64, 0.5);
+  box-shadow: 24px 0 70px rgba(0, 0, 0, 0.55);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: chapterListReveal 180ms ease-out;
+}
+
+@keyframes chapterListReveal {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.chapterListHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(212, 168, 64, 0.22);
+}
+
+.chapterListKicker {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--g-mid);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.chapterListHeader h2 {
+  margin: 0;
+  color: var(--g-bright);
+  font-family: var(--hd-font);
+  font-size: 1.45rem;
+  font-weight: 400;
+}
+
+.chapterListClose {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: var(--g-bright);
+  background: rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(212, 168, 64, 0.35);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.chapterListClose:hover {
+  background: rgba(212, 168, 64, 0.14);
+  border-color: var(--g-bright);
+}
+
+.chapterList {
+  display: grid;
+  gap: 5px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chapterListItem {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 8px 10px;
+  color: rgba(245, 237, 212, 0.72);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.chapterListItem:hover,
+.chapterListItemActive {
+  color: var(--p-light);
+  background: rgba(212, 168, 64, 0.11);
+  border-color: rgba(212, 168, 64, 0.35);
+}
+
+.chapterListNumber {
+  color: var(--g-mid);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
 
 /* ════════════════════════════════════════════════════════════
    BOOK SHELL

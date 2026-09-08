@@ -32,12 +32,16 @@
    ══════════════════════════════════════════════════════════ */
 .fcScene {
   width: 100%;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   background: #090603;
   position: relative;
   padding: 100px 16px 80px;
   display: flex;
   justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 .fcScene::before {
@@ -296,6 +300,13 @@
   border-color: #f0c050;
 }
 
+.fcToggleBtn:focus-visible,
+.fcFooterLink:focus-visible,
+.fcBackToBook:focus-visible {
+  outline: 2px solid var(--fc-gold-bright);
+  outline-offset: 3px;
+}
+
 /* ════════════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════════ */
@@ -304,6 +315,22 @@
   .fcParchment { padding: 3rem 1.5rem 2.25rem; }
   .fcDropCap { font-size: 2.7rem; }
   .fcBody { font-size: 1rem; }
+
+  .fcFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fcBackToBook {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .fcFooterLink:last-child {
+    justify-self: end;
+    text-align: right;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
