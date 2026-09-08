@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,17 +13,22 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
-  const [expandedPlayPath, setExpandedPlayPath] = useState<string | null>(null);
   const pathname = usePathname();
   const isPlayPage = pathname === "/cards" || pathname.startsWith("/cards/");
-  const playNavExpanded = isPlayPage && expandedPlayPath === pathname;
+  const [navExpanded, setNavExpanded] = useState(() => !isPlayPage);
+
+  useEffect(() => {
+    setNavExpanded(!isPlayPage);
+    setMenuOpen(false);
+    setOpenGroup(null);
+  }, [isPlayPage, pathname]);
 
   return (
     <header
       className={[
         styles.banner,
-        isPlayPage ? styles.playBanner : "",
-        isPlayPage && !playNavExpanded
+        styles.playBanner,
+        !navExpanded
           ? styles.playBannerCollapsed
           : "",
       ]
@@ -35,38 +40,34 @@ export default function Navbar() {
           A Song of Fire and Blood
         </Link>
 
-        {isPlayPage && (
-          <button
-            type="button"
-            className={styles.playNavToggle}
-            aria-expanded={playNavExpanded}
-            aria-label={
-              playNavExpanded
-                ? "Collapse site navigation"
-                : "Expand site navigation"
-            }
-            onClick={() => {
-              setExpandedPlayPath((current) =>
-                current === pathname ? null : pathname
-              );
-              setMenuOpen(false);
-              setOpenGroup(null);
-            }}
+        <button
+          type="button"
+          className={styles.playNavToggle}
+          aria-expanded={navExpanded}
+          aria-label={
+            navExpanded
+              ? "Collapse site navigation"
+              : "Expand site navigation"
+          }
+          onClick={() => {
+            setNavExpanded((expanded) => !expanded);
+            setMenuOpen(false);
+            setOpenGroup(null);
+          }}
+        >
+          <span
+            className={[
+              styles.playNavToggleIcon,
+              navExpanded ? styles.playNavToggleIconUp : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-hidden="true"
           >
-            <span
-              className={[
-                styles.playNavToggleIcon,
-                playNavExpanded ? styles.playNavToggleIconUp : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              aria-hidden="true"
-            >
-              <i />
-              <i />
-            </span>
-          </button>
-        )}
+            <i />
+            <i />
+          </span>
+        </button>
 
         <nav className={styles.navLinks}>
           {NAV_ITEMS.map((item) =>

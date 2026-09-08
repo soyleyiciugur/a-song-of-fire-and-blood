@@ -3,6 +3,9 @@
 .eyebrow { margin: 0 0 8px; color: var(--muted); font: 600 11px/1.2 var(--font-geist); letter-spacing: .16em; text-transform: uppercase; }
 .heading { margin: 0; color: var(--gold); font: 700 46px/1.1 var(--font-hotd); }
 .subheading { max-width: 620px; margin: 12px 0 28px; color: var(--muted); font-size: 17px; line-height: 1.55; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.tabs a { padding: 8px 13px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font: 12px var(--font-geist); text-decoration: none; }
+.tabs a:hover, .tabs .activeTab { color: var(--gold); border-color: var(--gold); background: rgba(201, 162, 39, .08); }
 .intro { display: flex; align-items: center; gap: 14px; margin: 0 0 48px; padding: 16px 20px; border: 1px solid var(--border); border-left: 3px solid var(--gold); background: var(--surface); color: var(--muted); }
 .intro p { margin: 0; font-style: italic; }
 .introMark { color: var(--gold); font-size: 22px; }

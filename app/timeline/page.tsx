@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { timeline, getTimelineEventKind } from "@/data/timeline";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
+import SearchableSelect from "@/components/SearchableSelect";
 
 import styles from "./timeline.module.css";
 
@@ -15,7 +16,10 @@ export default function Timeline() {
   const [kind, setKind] = useState("all");
   const [characterFilter, setCharacterFilter] = useState("all");
   const kinds = ["all", "conflict", "death", "politics", "family", "travel", "revelation"];
-  const characterOptions = Array.from(new Set(sortedTimeline.flatMap((chapter) => chapter.events.flatMap((event) => event.characters ?? [])))).sort();
+  const humanizeLabel = (value: string) => value.split(/[-_\s]+/).filter(Boolean).map((part) => part.charAt(0).toLocaleUpperCase("en-US") + part.slice(1)).join(" ");
+  const characterOptions = Array.from(new Set(sortedTimeline.flatMap((chapter) => chapter.events.flatMap((event) => event.characters ?? []))))
+    .sort()
+    .map((id) => ({ value: id, label: getCharacter(id)?.name ?? humanizeLabel(id) }));
   const matchesKind = (event: (typeof sortedTimeline)[number]["events"][number], value: string) => {
     if (value === "all") return true;
     return getTimelineEventKind(event) === value;
@@ -40,10 +44,25 @@ export default function Timeline() {
           The major turns of the realm, chapter by chapter.
         </p>
 
+        <nav className={styles.tabs} aria-label="Chronicle sections">
+          <Link className={styles.activeTab} href="/timeline">Timeline</Link>
+          <Link href="/chronicle">Annals</Link>
+          <Link href="/wars">The Bloodshed</Link>
+        </nav>
+
         <div className={styles.filters}>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the timeline…" aria-label="Search timeline" />
-          <select value={characterFilter} onChange={(event) => setCharacterFilter(event.target.value)} aria-label="Filter by character"><option value="all">All characters</option>{characterOptions.map((id) => <option key={id} value={id}>{id.replaceAll("-", " ")}</option>)}</select>
-          {kinds.map((value) => <button key={value} className={kind === value ? styles.filterActive : ""} onClick={() => setKind(value)}>{value}</button>)}
+          <div className={styles.characterSelect}>
+            <SearchableSelect
+              options={[{ value: "all", label: "All characters" }, ...characterOptions]}
+              value={characterFilter}
+              onChange={setCharacterFilter}
+              placeholder="All characters"
+              searchPlaceholder="Search characters…"
+              aria-label="Filter by character"
+            />
+          </div>
+          {kinds.map((value) => <button type="button" key={value} className={kind === value ? styles.filterActive : ""} onClick={() => setKind(value)}>{humanizeLabel(value)}</button>)}
         </div>
 
         <div className={styles.chapters}>
@@ -68,7 +87,7 @@ export default function Timeline() {
                     <div className={styles.eventBody}>
                       <h3 className={styles.eventTitle}>{event.title}</h3>
 
-                      <span className={styles.eventKind}>{getTimelineEventKind(event)}</span>
+                      <span className={styles.eventKind}>{humanizeLabel(getTimelineEventKind(event))}</span>
 
                       {event.date && (
                         <p className={styles.eventDate}>{event.date}</p>

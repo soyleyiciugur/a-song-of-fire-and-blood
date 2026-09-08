@@ -99,13 +99,22 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
   gap: 32px;
-  align-items: start;
+  align-items: stretch;
   text-align: left;
 }
 
 @media (max-width: 860px) {
   .home-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-left-col,
+  .home-right-col {
+    height: auto;
+  }
+
+  .realm-ledger-card {
+    margin-top: 0;
   }
 }
 
@@ -126,12 +135,18 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  height: 100%;
 }
 
 .home-right-col {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  height: 100%;
+}
+
+.realm-ledger-card {
+  margin-top: auto;
 }
 
 .realm-ledger-card {

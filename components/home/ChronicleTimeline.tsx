@@ -16,26 +16,27 @@ export default function ChronicleTimeline() {
 
   return (
     <section className={styles.section} aria-labelledby="chronicle-timeline-title">
-      <div className={styles.header}>
-        <div>
-          <span className={styles.eyebrow}>The Known Chronicle</span>
-          <h2 id="chronicle-timeline-title">Aegon&apos;s Conquest &rarr; The Unknown</h2>
+        <div className={styles.header}>
+          <div>
+            <span className={styles.eyebrow}>The Known Chronicle</span>
+            <h2 id="chronicle-timeline-title">Aegon&apos;s Conquest &rarr; The Unknown</h2>
+          </div>
         </div>
-        <span className={styles.today}>Present &middot; {worldDate.day} / {worldDate.moon} / {worldDate.year} {worldDate.era}</span>
-      </div>
       <div className={styles.viewport}>
         <div className={styles.track}>
           <span className={styles.progress} style={{ width: `${currentPosition}%` }} />
-          <span className={`${styles.edgeLabel} ${styles.edgeLabelStart}`} style={{ left: "1%" }}>Aegon&apos;s Conquest</span>
-          <span className={`${styles.edgeLabel} ${styles.edgeLabelPresent}`} style={{ left: `${currentPosition}%` }}>Present &middot; {worldDate.day} / {worldDate.moon} / {worldDate.year} {worldDate.era}</span>
-          <span className={`${styles.edgeLabel} ${styles.future}`} style={{ left: "99%" }}>Unknown</span>
+          <span className={styles.epochMarker} style={{ left: "0%" }} aria-label="Aegon&apos;s Conquest">✦</span>
+          <span className={`${styles.epochMarker} ${styles.epochMarkerPresent}`} style={{ left: `${currentPosition}%` }} aria-label="Present">✦</span>
+          <span className={`${styles.edgeLabel} ${styles.edgeLabelStart}`} style={{ left: "0%" }}>Aegon&apos;s Conquest</span>
+          <span className={`${styles.edgeLabel} ${styles.edgeLabelPresent}`} style={{ left: `${currentPosition}%` }}><span>Present</span><span>{worldDate.day}/{worldDate.moon}/{worldDate.year} {worldDate.era}</span></span>
+          <span className={`${styles.edgeLabel} ${styles.future}`} style={{ left: "100%" }}>Unknown</span>
           {timeline.map((chapter, index) => {
             const position = 6 + (index / Math.max(1, timeline.length - 1)) * (currentPosition - 12);
             const characters = Array.from(new Set(chapter.events.flatMap((event) => event.characters ?? [])));
             return (
               <div key={chapter.chapterSlug} className={styles.marker} style={{ left: `${position}%` }}>
                 <span className={styles.dot} />
-                <div className={`${styles.tooltip} ${index === 0 ? styles.tooltipLeft : ""} ${index === timeline.length - 1 ? styles.tooltipRight : ""}`}>
+                <div className={styles.tooltip}>
                   <Link href={`/chapters/${chapter.chapterSlug}`} className={styles.chapter}>{chapter.chapterTitle}</Link>
                   {chapter.date && <span className={styles.date}>{chapter.date}</span>}
                   <ul>
