@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import MiniPortrait from "@/components/MiniPortrait";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getCharacters } from "@/lib/characters";
@@ -61,28 +62,6 @@ function formatNickname(nickname?: string | null) {
     .replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, "");
 
   return clean ? `“${clean}”` : null;
-}
-
-function RawMiniPortrait({
-  id,
-  alt,
-  size,
-}: {
-  id: string;
-  alt: string;
-  size: number;
-}) {
-  return (
-    <img
-      src={`/images/miniportraits/${id}.png`}
-      alt={alt}
-      width={size}
-      height={size}
-      className={styles.rawMiniPortrait}
-      draggable={false}
-      decoding="async"
-    />
-  );
 }
 
 function StyledSelect({
@@ -315,7 +294,7 @@ export default function Characters() {
                   <span className={styles.crownGlyph} aria-hidden="true">
                     ♛
                   </span>
-                  <RawMiniPortrait
+                  <MiniPortrait
                     id={character.id}
                     alt={character.name}
                     size={62}
@@ -340,7 +319,7 @@ export default function Characters() {
                   <span className={styles.successionNumber}>
                     <span>{SUCCESSION_NUMERALS[index]}</span>
                   </span>
-                  <RawMiniPortrait
+                  <MiniPortrait
                     id={character.id}
                     alt={character.name}
                     size={46}
@@ -427,7 +406,7 @@ export default function Characters() {
                       href={`/characters/${character.id}`}
                       className={styles.characterRow}
                     >
-                      <RawMiniPortrait
+                      <MiniPortrait
                         id={character.id}
                         alt={character.name}
                         size={44}
