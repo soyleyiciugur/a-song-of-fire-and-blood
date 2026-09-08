@@ -3,8 +3,11 @@ import characters from "@/data/characters/characters.json";
 import { chapterList } from "@/data/chapters/";
 import { dragons } from "@/data/dragons";
 import { houses } from "@/data/houses";
+import events from "@/data/events.json";
+import locations from "@/data/map/locations.json";
+import cards from "@/data/the-great-game/cards.json";
 
-export type SearchResultType = "character" | "chapter" | "house" | "dragon";
+export type SearchResultType = "character" | "chapter" | "house" | "dragon" | "event" | "location" | "artifact";
 
 export type SearchResultThumbnail =
   | { kind: "character"; src: string; alt: string }
@@ -69,7 +72,7 @@ export function buildSearchIndex(): SearchResult[] {
       id: chapter.slug,
       title: chapter.title,
       subtitle: chapter.synopsis,
-      href: `/${chapter.slug}`,
+      href: `/chapters/${chapter.slug}`,
       keywords: normalize(`${chapter.title} ${chapter.synopsis}`),
       thumbnail: {
         kind: "chapter",
@@ -115,6 +118,9 @@ export function buildSearchIndex(): SearchResult[] {
       },
     });
   }
+  for (const event of events) results.push({ type: "event", id: event.id, title: event.title, subtitle: event.description, href: "/chronicle", keywords: normalize(`${event.title} ${event.description} ${event.location}`) });
+  for (const location of locations) results.push({ type: "location", id: location.name, title: location.name, subtitle: "Known World location", href: `/map?location=${encodeURIComponent(location.name)}`, keywords: normalize(location.name) });
+  for (const card of cards.filter((item) => item.cardType === "artifact")) results.push({ type: "artifact", id: card.id, title: card.name, subtitle: card.subtitle, href: "/artifacts", keywords: normalize(`${card.name} ${card.subtitle}`) });
 
   cachedIndex = results;
   return results;

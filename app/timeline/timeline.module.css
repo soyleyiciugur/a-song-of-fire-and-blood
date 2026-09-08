@@ -29,6 +29,12 @@
   line-height: 1.5;
 }
 
+.filters { display:flex; flex-wrap:wrap; gap:8px; margin:-16px 0 38px; }
+.filters input { flex:1 1 220px; min-width:0; padding:10px 13px; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:8px; font:13px var(--font-geist); }
+.filters select { flex:0 1 180px; min-width:150px; padding:10px 13px; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:8px; font:13px var(--font-geist); }
+.filters button { padding:9px 12px; color:var(--muted); background:var(--surface); border:1px solid var(--border); border-radius:999px; cursor:pointer; font:11px var(--font-geist); text-transform:capitalize; }
+.filters button:hover,.filters .filterActive { color:var(--gold); border-color:var(--gold); }
+
 .chapters {
   display: flex;
   flex-direction: column;

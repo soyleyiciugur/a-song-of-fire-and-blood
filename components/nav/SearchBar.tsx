@@ -14,9 +14,12 @@ const TYPE_LABELS: Record<SearchResult["type"], string> = {
   chapter: "Chapters",
   house: "Houses",
   dragon: "Dragons",
+  event: "Events",
+  location: "Locations",
+  artifact: "Artifacts",
 };
 
-const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon"];
+const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon", "event", "location", "artifact"];
 
 function groupResults(results: SearchResult[]) {
   const groups = new Map<SearchResult["type"], SearchResult[]>();

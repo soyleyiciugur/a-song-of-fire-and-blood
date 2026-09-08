@@ -143,8 +143,8 @@ const SECRET_STATUS_OPTIONS = [
 ];
 
 const CHARACTER_FIELD_ORDER = [
-  "id", "name", "nickname", "aliases", "house", "title", "status", "secret",
-  "nameday", "age", "height", "father", "mother", "spouse", "siblings", "children",
+  "id", "name", "nickname", "aliases", "hidden", "house", "title", "status", "secret",
+  "nameday", "death", "age", "height", "portraitAgeState", "portrait", "miniPortrait", "father", "mother", "spouse", "siblings", "children",
   "mentor", "dragon", "traits", "goals", "relationships", "summary", "quotes",
 ];
 
@@ -387,6 +387,14 @@ function CharactersTab({
                 <SearchableSelect label="Status" searchable={false} value={activeChar.status} options={STATUS_OPTIONS} onChange={(v: string) => handleChange("status", v)} />
               </div>
 
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "18px", padding: "12px 14px", background: "rgba(201,162,39,0.05)", border: "1px solid rgba(201,162,39,0.18)", borderRadius: "6px" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
+                  <input type="checkbox" checked={Boolean(activeChar.hidden)} onChange={(e) => handleChange("hidden", e.target.checked)} />
+                  <span>Hidden from public roster</span>
+                </label>
+                <SearchableSelect label="Portrait age state" searchable={false} value={activeChar.portraitAgeState || "-"} options={[{ id: "-", name: "Auto" }, ...["baby", "kid", "teen", "young", "adult", "old"].map((id) => ({ id, name: id }))]} onChange={(v: string) => handleChange("portraitAgeState", v === "-" ? undefined : v)} />
+              </div>
+
               <div style={{ display: "flex", gap: "20px" }}>
                 <SearchableSelect label="House" value={activeChar.house} options={houseOptions} onChange={(v: string) => handleChange("house", v)} />
                 <label style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -430,6 +438,21 @@ function CharactersTab({
                     <>No nameday set — falling back to legacy age field ({activeChar.age ?? "-"}).</>
                   )}
                 </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Death date</span>
+                <div style={{ display: "flex", alignItems: "end", gap: "15px" }}>
+                  <NumberStepper label="Day" value={activeChar.death?.day ?? 1} min={1} max={30} onChange={(v: number) => handleChange("death", { ...(activeChar.death || { moon: 1, year: worldDate.year }), day: v })} />
+                  <NumberStepper label="Moon" value={activeChar.death?.moon ?? 1} min={1} max={12} onChange={(v: number) => handleChange("death", { ...(activeChar.death || { day: 1, year: worldDate.year }), moon: v })} />
+                  <NumberStepper label="Year" value={activeChar.death?.year ?? worldDate.year} min={1} max={worldDate.year} onChange={(v: number) => handleChange("death", { ...(activeChar.death || { day: 1, moon: 1 }), year: v })} />
+                  <button type="button" onClick={() => handleChange("death", undefined)} style={{ padding: "10px 12px", color: "#ff8080", background: "transparent", border: "1px solid rgba(255,128,128,.4)", borderRadius: "4px", cursor: "pointer" }}>Clear</button>
+                </div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
+                <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}><span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Portrait path</span><input value={activeChar.portrait || ""} onChange={(e) => handleChange("portrait", e.target.value)} placeholder="/images/portraits/..." style={{ padding: "12px", background: "rgba(0,0,0,.2)", border: "1px solid rgba(255,255,255,.2)", color: "inherit", borderRadius: "4px" }} /></label>
+                <label style={{ display: "flex", flexDirection: "column", gap: "8px" }}><span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Mini portrait path</span><input value={activeChar.miniPortrait || ""} onChange={(e) => handleChange("miniPortrait", e.target.value)} placeholder="/images/miniportraits/..." style={{ padding: "12px", background: "rgba(0,0,0,.2)", border: "1px solid rgba(255,255,255,.2)", color: "inherit", borderRadius: "4px" }} /></label>
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>

@@ -10,6 +10,7 @@ import CharacterHeader from "@/components/character/CharacterHeader";
 import CharacterBiography from "@/components/character/CharacterBiography";
 import CharacterTraits from "@/components/character/CharacterTraits";
 import CharacterRelationships from "@/components/character/CharacterRelationships";
+import CharacterTimeline from "@/components/character/CharacterTimeline";
 import type { Character } from "@/types/character";
 import contentStyles from "@/components/character/characterContent.module.css";
 import styles from "./characterDetail.module.css";
@@ -74,6 +75,7 @@ export default async function CharacterPage({ params }: Props) {
                 </div>
               </section>
             )}
+            <CharacterTimeline character={character} />
           </div>
 
           <CharacterInfoBox

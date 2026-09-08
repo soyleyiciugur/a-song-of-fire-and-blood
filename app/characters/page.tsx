@@ -76,10 +76,13 @@ function RawMiniPortrait({
 }) {
   const [extIndex, setExtIndex] = useState(0);
 
-  const src = `/images/miniportraits/${id}.${MINI_PORTRAIT_EXTS[extIndex]}`;
+  const src =
+    extIndex >= MINI_PORTRAIT_EXTS.length
+      ? "/images/miniportraits/default.png"
+      : `/images/miniportraits/${id}.${MINI_PORTRAIT_EXTS[extIndex]}`;
 
   const onError =
-    extIndex < MINI_PORTRAIT_EXTS.length - 1
+    extIndex <= MINI_PORTRAIT_EXTS.length - 1
       ? () => setExtIndex((current) => current + 1)
       : undefined;
 

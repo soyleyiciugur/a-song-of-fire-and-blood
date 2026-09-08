@@ -231,6 +231,7 @@ export default function CharacterInfoBox({
   const [imageFailed, setImageFailed] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryTab, setGalleryTab] = useState<GalleryTab>("raven");
+  const [mobileExpanded, setMobileExpanded] = useState(false);
 
   useEffect(() => {
     setActiveAgeState(currentAgeState);
@@ -343,7 +344,16 @@ export default function CharacterInfoBox({
 
   return (
     <>
-      <aside className={styles.box}>
+      <aside className={`${styles.box} ${mobileExpanded ? styles.boxExpanded : styles.boxCollapsed}`}>
+        <button
+          type="button"
+          className={styles.mobileToggle}
+          aria-expanded={mobileExpanded}
+          onClick={() => setMobileExpanded((expanded) => !expanded)}
+        >
+          <span>Character record</span>
+          <span aria-hidden="true">{mobileExpanded ? "−" : "+"}</span>
+        </button>
         <div className={styles.ageStateBar} aria-label="Portrait age">
           {CHARACTER_AGE_STATES.map((state) => {
             const available = Boolean(portraitVariants[state]);

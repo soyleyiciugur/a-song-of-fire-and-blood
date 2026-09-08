@@ -7,6 +7,8 @@ import { getRandomQuote } from "@/lib/characters";
 import CharacterQuote from "@/components/character/CharacterQuote";
 import WorldDateCard from "@/components/home/WorldDateCard";
 import RavenEyeCard from "@/components/home/RavenEyeCard";
+import ChronicleTimeline from "@/components/home/ChronicleTimeline";
+import LatestUpdates from "@/components/home/LatestUpdates";
 
 export const dynamic = "force-dynamic";
 
@@ -60,6 +62,8 @@ export default function Home() {
           </div>
           <WorldDateCard />
         </div>
+        <LatestUpdates />
+        <ChronicleTimeline />
       </div>
     </main>
   );

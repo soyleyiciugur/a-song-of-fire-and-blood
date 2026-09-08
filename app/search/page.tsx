@@ -16,9 +16,12 @@ const TYPE_LABELS: Record<SearchResult["type"], string> = {
   chapter: "Chapters",
   house: "Houses",
   dragon: "Dragons",
+  event: "Events",
+  location: "Locations",
+  artifact: "Artifacts",
 };
 
-const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon"];
+const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon", "event", "location", "artifact"];
 
 // A small wax-seal medallion with the chapter number pressed into it — the
 // same raven-letter/seal motif used for correspondence across Westeros.

@@ -175,6 +175,10 @@
   image-rendering: auto;
 }
 
+.rawMiniPortrait[src$=".webp"] {
+  background: var(--surface-hover) url("/images/miniportraits/default.png") center / cover no-repeat;
+}
+
 .crownIdentity {
   display: flex;
   flex-direction: column;
