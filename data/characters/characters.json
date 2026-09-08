@@ -73,8 +73,7 @@
     "dragon": "-",
     "traits": [
       "Watchful",
-      "Protective of Her Siblings",
-      "Silent Witness"
+      "Protective of Her Siblings"
     ],
     "goals": [
       "-"
@@ -133,9 +132,7 @@
       "Intimidating",
       "Proud",
       "Calculating",
-      "Paranoid",
-      "Increasingly Erratic",
-      "Grief-Stricken"
+      "Paranoid"
     ],
     "goals": [
       "Preserve the Iron Throne",
@@ -203,7 +200,6 @@
       "Scholarly",
       "Argumentative",
       "Politically Astute",
-      "Self-Exiled",
       "Principled",
       "Appalled by Unnecessary Violence"
     ],
@@ -257,8 +253,7 @@
     "dragon": "-",
     "traits": [
       "Honorable",
-      "Loyal to the Crown",
-      "Northern"
+      "Loyal to the Crown"
     ],
     "goals": [
       "-"
@@ -305,8 +300,7 @@
       "Long-Serving",
       "Politically Timid in Public",
       "Opportunistic",
-      "Secretive",
-      "Building a Private Network"
+      "Secretive"
     ],
     "goals": [
       "Preserve his position at court after his demotion",
@@ -401,8 +395,7 @@
     "traits": [
       "Reserved",
       "Protective",
-      "Pragmatic",
-      "Dornish Lord"
+      "Pragmatic"
     ],
     "goals": [
       "Safeguard House Dayne's holdings along the Torrentine",
@@ -443,7 +436,7 @@
     "traits": [
       "Experienced",
       "Patient",
-      "Political",
+      "Politically Astute",
       "Secretive",
       "Treasonous",
       "Idealistic",
@@ -501,13 +494,12 @@
     "mentor": "-",
     "dragon": "Bayle",
     "traits": [
-      "Knight",
       "Impulsive",
       "Fearless",
       "Poor Politician",
-      "Warrior",
-      "Increasingly Ruthless",
-      "Possessive of Blackfyre",
+      "Formidable Warrior",
+      "Ruthless",
+      "Bearer of Blackfyre",
       "Capable of Surprising Tenderness"
     ],
     "goals": [
@@ -587,11 +579,7 @@
       "Charismatic",
       "Highly Perceptive",
       "Paranoid",
-      "Strategic",
-      "Ruthless",
-      "Chaotic Neutral",
-      "Knight",
-      "Betrothed"
+      "Strategic"
     ],
     "goals": [
       "Earn Baelenys' respect",
@@ -669,10 +657,7 @@
     "traits": [
       "Calm",
       "Diplomatic",
-      "Protective",
-      "Quietly Ruthless",
-      "Increasingly Desperate",
-      "Frightened for Her Family"
+      "Protective"
     ],
     "goals": [
       "Keep the royal family together",
@@ -727,8 +712,7 @@
       "Quietly Powerful",
       "Perceptive",
       "Disarmingly Honest",
-      "Unimpressed by Targaryen Grandeur",
-      "Betrothed"
+      "Unimpressed by Targaryen Grandeur"
     ],
     "goals": [
       "Protect House Dayne's neutrality without appearing to take sides",
@@ -786,9 +770,7 @@
       "Charismatic",
       "Agile",
       "Guarded",
-      "Unbothered by Convention",
-      "Hollow",
-      "Increasingly Withdrawn"
+      "Unbothered by Convention"
     ],
     "goals": [
       "Keep control over her own future, marriage included",
@@ -838,8 +820,7 @@
       "Loyal",
       "Steady",
       "Traditionalist",
-      "Overshadowed",
-      "Infirm"
+      "Overshadowed"
     ],
     "goals": [
       "Hold Dragonstone quietly in the King's name",
@@ -886,9 +867,7 @@
       "Genuine",
       "Steady",
       "Fiercely Protective of Gaelor",
-      "Politically Watchful",
-      "Suspicious of Jace",
-      "Pregnant"
+      "Politically Watchful"
     ],
     "goals": [
       "Support Gaelor through the weight of his position as heir",
@@ -940,10 +919,7 @@
       "Gentle",
       "Loyal",
       "Determined",
-      "Frightened but Resilient",
-      "Torn Between Duty and Love",
-      "Pregnant",
-      "Finding Her Footing in Exile"
+      "Resilient"
     ],
     "goals": [
       "Survive",
@@ -993,7 +969,6 @@
       "Solemn",
       "Honorable",
       "Plainspoken",
-      "Grieving",
       "Quietly Ambitious for His House"
     ],
     "goals": [
@@ -1043,13 +1018,12 @@
     "mentor": "-",
     "dragon": "Cloudgazer",
     "traits": [
-      "Dragonrider",
       "Reserved",
       "Mysterious",
       "Observant",
       "Quietly Compassionate",
       "Principled",
-      "Refusing to be Used"
+      "Independent"
     ],
     "goals": [
       "Maintain the family's fragile unity",
@@ -1107,11 +1081,7 @@
       "Exceptional Swordsman",
       "Nearly Unkillable",
       "Battle-Hardened",
-      "Quietly Devoted",
-      "Recovering",
-      "Orphaned Young",
-      "Jealous",
-      "Emotionally Torn"
+      "Quietly Devoted"
     ],
     "goals": [
       "Protect Jace",
@@ -1170,10 +1140,7 @@
     "dragon": "-",
     "traits": [
       "Dutiful",
-      "Conflicted",
-      "Guilt-Ridden",
-      "Skilled Swordsman",
-      "Broken by His Own Choices"
+      "Skilled Swordsman"
     ],
     "goals": [
       "-"
@@ -1216,11 +1183,11 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Pragmatic",
-      "Ruthless",
-      "Battle-Scarred",
-      "Grief-Driven",
-      "Came to Die"
+      "Honorable",
+      "Loyal",
+      "Oath-Bound",
+      "Formidable Fighter",
+      "Battle-Hardened"
     ],
     "goals": [
       "Avenge Lord Timos and the knights of Oldtown",
@@ -1263,8 +1230,7 @@
       "Disciplined",
       "Old-Fashioned",
       "Watchful",
-      "Weary",
-      "Proud of Craft"
+      "Proud of His Craft"
     ],
     "goals": [
       "Hold the Kingsguard together through scandal and desertion",
@@ -1306,8 +1272,7 @@
       "Disciplined",
       "Reliable",
       "Sardonic",
-      "Battle-Ready",
-      "Investigative"
+      "Seasoned Fighter"
     ],
     "goals": [
       "Serve Prince Gaelor faithfully",
@@ -1397,13 +1362,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Young",
-      "Frightened",
-      "Desperate",
-      "Innocent of His Father's Crimes",
-      "Tried to Choose Parley Over Pride"
-    ],
+    "traits": [],
     "goals": [
       "Survive the Crown's judgment",
       "Protect his sisters",
@@ -1502,12 +1461,9 @@
     "mentor": "-",
     "dragon": "Unknown",
     "traits": [
-      "Exiled",
       "Bitter",
       "Cunning",
-      "Estranged",
-      "In Possession of Artifacts of House Targaryen",
-      "A Dragon's Rider"
+      "Ambitious"
     ],
     "goals": [
       "Regain some measure of standing for his name",
@@ -1563,9 +1519,7 @@
       "Innocent",
       "Curious",
       "Affectionate",
-      "Perceptive Beyond Her Years",
-      "Parroting the King's Cruelty Without Understanding It",
-      "In Need of Better Influences"
+      "Perceptive Beyond Her Years"
     ],
     "goals": [
       "-"
@@ -1624,10 +1578,7 @@
       "Diplomatic",
       "Bookish",
       "Idealistic",
-      "Devoted Husband",
-      "Reluctant Fugitive",
-      "Newly a Dragonrider",
-      "Living Under an Assumed Identity"
+      "Devoted"
     ],
     "goals": [
       "Protect Rhaella and their unborn child",
@@ -1691,7 +1642,7 @@
       "Fear-Driven Loyalty",
       "Resourceful",
       "Opportunistic",
-      "Unshakably Servile in Jace's Presence"
+      "Servile"
     ],
     "goals": [
       "Remain indispensable to Jace",
@@ -1731,7 +1682,6 @@
       "Blunt",
       "Foul-Mouthed",
       "Competent",
-      "Dornish",
       "Refreshingly Unimpressed by Royal Blood"
     ],
     "goals": [
@@ -1773,12 +1723,8 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Survivor of the Oldtown Massacre",
-      "Young",
-      "Politically Vulnerable",
       "Trusting of Her Inner Circle",
-      "Protective of Those She Values",
-      "Growing Into Her Position"
+      "Protective of Those She Values"
     ],
     "goals": [
       "Preserve House Hightower after the destruction of her family",
@@ -1828,12 +1774,9 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Scarred",
-      "Amethyst-Eyed",
-      "A Swordswoman",
+      "Formidable Swordswoman",
       "Unafraid of Targaryen Princes",
-      "Playing Her Own Game",
-      "Appears Sighted Despite the Blindfold"
+      "Playing Her Own Game"
     ],
     "goals": [
       "Determine who she will need to kill when the family's war in Essos begins",
@@ -1961,7 +1904,7 @@
     "dragon": "-",
     "traits": [
       "Ambitious",
-      "Politically shrewd",
+      "Politically Shrewd",
       "Calculating",
       "Patient"
     ],
@@ -2005,7 +1948,7 @@
     "dragon": "-",
     "traits": [
       "Loyal",
-      "Composed under pressure",
+      "Composed Under Pressure",
       "Perceptive",
       "Discreet",
       "Steady"
@@ -2047,12 +1990,12 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Genuinely pious",
-      "Well-meaning",
-      "Politically cautious — not cowardly, but deliberate",
+      "Genuinely Pious",
+      "Well-Meaning",
+      "Politically Cautious",
       "Diplomatic",
-      "Quietly principled",
-      "Capable of shame when his principles and his caution have not aligned"
+      "Quietly Principled",
+      "Self-Reflective"
     ],
     "goals": [
       "Deliver verdicts and guidance that he can honestly believe the gods would sanction",
@@ -2136,10 +2079,11 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Sharp and Protective",
+      "Sharp",
+      "Protective",
       "Decisive Under Pressure",
       "Discreet",
-      "Fiercely Loyal to Melessa Hightower",
+      "Fiercely Loyal",
       "Politically Observant",
       "Cautious"
     ],
@@ -2183,9 +2127,7 @@
     "traits": [
       "Physically Imposing",
       "Blunt",
-      "Resentful of His Exile",
-      "Loyal to Those Who Treat Him Fairly",
-      "Contemptuous of Curtass Whent"
+      "Loyal to Those Who Treat Him Fairly"
     ],
     "goals": [
       "Return to the Red Keep and to meaningful service",
@@ -2224,7 +2166,6 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Lowborn",
       "Ambitious",
       "Calculating",
       "Undeterred by Disapproval",
@@ -2265,8 +2206,7 @@
     "dragon": "-",
     "traits": [
       "Aggressive",
-      "Opportunistic",
-      "Contemptuous of the Blackwoods"
+      "Opportunistic"
     ],
     "goals": [
       "Press House Bracken's advantage over the Blackwoods wherever possible",
@@ -2307,8 +2247,7 @@
     "traits": [
       "Passive",
       "Diplomatic",
-      "Conflict-Averse",
-      "Recently Tied to the Brackens by Marriage"
+      "Conflict-Averse"
     ],
     "goals": [
       "Keep the Riverlands at peace",
@@ -2351,7 +2290,6 @@
     "dragon": "-",
     "traits": [
       "Authoritarian",
-      "Dynastic",
       "Severe"
     ],
     "goals": [],
@@ -2396,7 +2334,6 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Royal",
       "Long-Suffering"
     ],
     "goals": [],
@@ -2435,9 +2372,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "malaenar-targaryen": "Her husband, Lord of Dragonstone."
@@ -2473,9 +2408,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Royal"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "jaery-targaryen": "His sister, Queen of the Seven Kingdoms."
@@ -2506,11 +2439,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Powerful",
-      "Established",
-      "Dynastic"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "ella-lannister": "His wife.",
@@ -2542,10 +2471,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Highborn",
-      "Dynastic"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "tion-lannister": "Her son, the Master of Coin.",
@@ -2575,9 +2501,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "tion-lannister": "Her husband, the Crown's Master of Coin."
@@ -2607,10 +2531,7 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Massive",
-      "Fearsome",
-      "One White Eye",
-      "Ironborn"
+      "Fearsome"
     ],
     "goals": [],
     "relationships": {
@@ -2647,10 +2568,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Dornish",
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "alester-dayne": "His only son. Maron's death while Alester was still a boy left a wound that continued to shape his son's loyalties and sense of duty.",
@@ -2687,10 +2605,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Northern",
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "alester-dayne": "Her only son. She survived Maron by nearly two years, leaving Alester orphaned before he had reached manhood.",
@@ -2727,10 +2642,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Riverlord",
-      "Dynastic"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "clover-tully": "His father, Lord Paramount of the Trident.",
@@ -2760,10 +2672,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Riverlander",
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "bethany-bracken": "His wife, whose marriage to him recently tied Houses Tully and Bracken.",
@@ -2794,10 +2703,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Riverlander",
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "clover-tully": "Her husband's grandfather and Lord Paramount of the Trident.",
@@ -2830,8 +2736,7 @@
     "dragon": "-",
     "traits": [
       "Proud",
-      "Aristocratic",
-      "Powerful"
+      "Aristocratic"
     ],
     "goals": [
       "Defend the Vale",
@@ -2869,9 +2774,7 @@
       "Quick",
       "Blunt",
       "Proud",
-      "Raised as a Boy",
-      "Illegitimate",
-      "Uncomfortable with Ladylike Expectations",
+      "Defiant of Ladylike Expectations",
       "Battle-Tested"
     ],
     "goals": [
@@ -2912,13 +2815,9 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Fine-Boned",
-      "Long-Legged",
       "Skilled Archer",
       "Rugged Hunter",
-      "Formal",
-      "Cold, Piercing Gaze",
-      "Northern"
+      "Formal"
     ],
     "goals": [
       "Serve House Stark and his elder brother faithfully",
@@ -2954,11 +2853,8 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Elderly",
-      "Blind",
       "Mysterious",
-      "Herbal Knowledge",
-      "Knowledgeable of Rare Northern Flora",
+      "Expert Herbalist",
       "Cryptic",
       "Possesses Unexplained Abilities"
     ],
@@ -2998,11 +2894,8 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Northern",
       "Honorable",
-      "Loyal",
-      "Ally of King Aenys",
-      "Remembered by King Baelenys"
+      "Loyal"
     ],
     "goals": [],
     "relationships": {
@@ -3043,10 +2936,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Dornish",
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "meria-martell": "His younger sister, three years his junior."
@@ -3077,10 +2967,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Dornish",
-      "Highborn"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "nymor-martell": "Her elder brother, three years her senior."
@@ -3111,10 +2998,7 @@
     ],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Highborn",
-      "Velaryon"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "naella-velaryon": "Her daughter, now married to Prince Gaelor Targaryen and carrying his child."
@@ -3143,11 +3027,7 @@
     "children": [],
     "mentor": "-",
     "dragon": "-",
-    "traits": [
-      "Highborn",
-      "Young",
-      "Companion of Princess Vhaemys"
-    ],
+    "traits": [],
     "goals": [],
     "relationships": {
       "vhaemys-targaryen": "Her closest friend at the Red Keep. Annara, a Celtigar girl of the same general age, remains at court and is one of Vhaemys's most constant companions."
@@ -3177,12 +3057,9 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Dornish",
       "Observant",
       "Discreet",
-      "Resourceful",
-      "Well-Placed Among Servants",
-      "Spy"
+      "Resourceful"
     ],
     "goals": [
       "Serve Lorenah Dayne faithfully",
@@ -3221,8 +3098,6 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Knight",
-      "Riverlander",
       "Veteran",
       "Steady Under Pressure"
     ],
@@ -3260,7 +3135,6 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Knight",
       "Cautious",
       "Battle-Tested",
       "Protective",
@@ -3299,9 +3173,7 @@
     "mentor": "-",
     "dragon": "-",
     "traits": [
-      "Ironborn",
-      "Veteran",
-      "Long-Ruling Lord"
+      "Veteran"
     ],
     "goals": [],
     "relationships": {},
