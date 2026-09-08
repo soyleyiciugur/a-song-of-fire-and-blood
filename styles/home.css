@@ -131,6 +131,9 @@
   letter-spacing: 1px;
 }
 
+.realm-ledger-title-link { display: inline-flex; align-items: center; gap: 8px; width: max-content; color: inherit; text-decoration: none; }
+.realm-ledger-title-link:hover { color: var(--gold); }
+
 .home-left-col {
   display: flex;
   flex-direction: column;

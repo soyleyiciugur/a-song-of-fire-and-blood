@@ -30,7 +30,6 @@ export const NAV_ITEMS: NavigationEntry[] = [
   },
   { label: "Bestiary", href: "/bestiary", items: [
     { label: "Dragons", href: "/bestiary" },
-    { label: "The Measure of Fire", href: "/dragons/scale" },
     { label: "Direwolves", href: "/bestiary/direwolves" },
     { label: "Dogs", href: "/bestiary/dogs" },
     { label: "Cats", href: "/bestiary/cats" },
@@ -46,14 +45,14 @@ export const NAV_ITEMS: NavigationEntry[] = [
     { label: "The Bloodshed", href: "/wars" },
   ] },
   { label: "Succession", href: "/succession" },
-  { label: "The Collection", href: "/artifacts", items: [
-    { label: "Artifacts", href: "/artifacts" },
+  { label: "The Collection", href: "/collection", items: [
+    { label: "Artifacts", href: "/collection" },
   ] },
   { 
     label: "Records", 
     href: "/records", 
     items: [
-      { label: "Stats", href: "/stats" },
+      { label: "The Realm's Ledger", href: "/stats" },
       { label: "Scrolls", href: "/scrolls" },
       { label: "The Book of Brothers", href: "/book-of-brothers" },
     ],

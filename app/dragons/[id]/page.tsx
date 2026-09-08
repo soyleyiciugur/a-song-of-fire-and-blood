@@ -57,7 +57,6 @@ export default async function DragonPage({ params }: Props) {
 
         <nav className={styles.tabs} aria-label="Bestiary sections">
           <Link className={styles.activeTab} href="/bestiary">Dragons</Link>
-          <Link href="/dragons/scale">The Measure of Fire</Link>
           <Link href="/bestiary/direwolves">Direwolves</Link>
           <Link href="/bestiary/dogs">Dogs</Link>
           <Link href="/bestiary/cats">Cats</Link>

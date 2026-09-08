@@ -53,14 +53,15 @@
    ══════════════════════════════════════════════════════════ */
 .scene {
   width: 100%;                 /* add, in case a parent layout constrains it */
-  height: 100dvh;
-  min-height: 100dvh;
+  height: calc(100dvh - 58px);
+  min-height: calc(100dvh - 58px);
   background: #090603;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 16px 60px;
+  padding: 82px 16px 40px;
+  box-sizing: border-box;
   position: relative;
   perspective: 1800px;
   overflow: hidden;
@@ -802,4 +803,8 @@
   .turningPrev { animation: none; }
 
   .pageCorner { transition: none; }
+}
+
+@media (max-width: 960px) {
+  .scene { height: calc(100dvh - 104px); min-height: calc(100dvh - 104px); }
 }

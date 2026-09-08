@@ -57,7 +57,9 @@
    ══════════════════════════════════════════════════════════ */
 .scene {
   position: relative;
-  min-height: 100vh;
+  height: calc(100dvh - 58px);
+  min-height: calc(100dvh - 58px);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,6 +68,7 @@
   perspective: 2200px;
   perspective-origin: 50% 50%;
   user-select: none;
+  overflow: hidden;
 }
 
 .scene::before {
@@ -216,6 +219,7 @@
   pointer-events: none;
   z-index: 10;
 }
+.scene:has(.continueBanner) .hint { display: none; }
 @keyframes pulse {
   0%, 100% { opacity: 0.4; }
   50%       { opacity: 0.9; }
@@ -662,8 +666,9 @@
   list-style: none;
   margin: 0;
   padding: 0 4px 4px 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
   gap: 0;
   scrollbar-gutter: stable;
   overscroll-behavior: contain;
@@ -894,6 +899,8 @@
     --book-w: min(300px, calc(100vw - 64px));
     --book-h: 420px;
     --spine-w: 38px;
+    height: calc(100dvh - 104px);
+    min-height: calc(100dvh - 104px);
   }
 
   .coverTitle { font-size: 2.1rem; }
@@ -905,6 +912,7 @@
   .tocEntryTitle { font-size: 0.84rem; }
   .tocPageInner  { padding: 22px 18px 18px; }
   .tocEntry      { padding: 8px 10px; }
+  .tocList { grid-template-columns: 1fr; }
 
   .continueBanner {
     flex-direction: column;

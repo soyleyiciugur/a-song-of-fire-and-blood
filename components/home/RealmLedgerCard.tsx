@@ -14,7 +14,7 @@ const figures = [
 export default function RealmLedgerCard() {
   return (
     <aside className="card card-padding realm-ledger-card">
-      <div className="home-quote-label">The Realm&apos;s Ledger</div>
+      <Link href="/records" className="home-quote-label realm-ledger-title-link">The Realm&apos;s Ledger <span aria-hidden="true">→</span></Link>
       <p className="realm-ledger-intro">A living count of what the archive has recorded.</p>
       <div className="realm-ledger-grid">
         {figures.map(([label, value, href]) => (
