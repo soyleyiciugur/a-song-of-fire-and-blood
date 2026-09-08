@@ -49,9 +49,9 @@ const Avatar = ({ id, name, size = 32, border = "1px solid rgba(255,255,255,0.1)
     const titles = ["Ser", "Lord", "Lady", "Prince", "Princess", "Queen", "King", "Maester"];
     const nameParts = fullName.split(" ").filter(part => !titles.includes(part));
     if (nameParts.length === 0) return "?";
-    if (nameParts.length === 1) return nameParts[0].charAt(0).toUpperCase();
+    if (nameParts.length === 1) return nameParts[0].charAt(0).toLocaleUpperCase("tr-TR");
     const lastName = nameParts[nameParts.length - 1];
-    return (nameParts[0].charAt(0) + lastName.charAt(0)).toUpperCase();
+    return (nameParts[0].charAt(0) + lastName.charAt(0)).toLocaleUpperCase("tr-TR");
   };
 
   if (!id || imgError) {
@@ -392,7 +392,7 @@ function CharactersTab({
                   <input type="checkbox" checked={Boolean(activeChar.hidden)} onChange={(e) => handleChange("hidden", e.target.checked)} />
                   <span>Hidden from public roster</span>
                 </label>
-                <SearchableSelect label="Portrait age state" searchable={false} value={activeChar.portraitAgeState || "-"} options={[{ id: "-", name: "Auto" }, ...["baby", "kid", "teen", "young", "adult", "old"].map((id) => ({ id, name: id }))]} onChange={(v: string) => handleChange("portraitAgeState", v === "-" ? undefined : v)} />
+                <SearchableSelect label="Portrait age state" searchable={false} value={activeChar.portraitAgeState || "-"} options={[{ id: "-", name: "Auto" }, ...["child", "young", "youth", "adult", "elder"].map((id) => ({ id, name: id }))]} onChange={(v: string) => handleChange("portraitAgeState", v === "-" ? undefined : v)} />
               </div>
 
               <div style={{ display: "flex", gap: "20px" }}>

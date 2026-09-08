@@ -70,7 +70,7 @@ export default function ScrollDisplay({
                 <li key={houseId} className={styles.referenceHouse}>
                   <Link href={`/houses/${houseId}`}>
                     {/* Capitalizes the first letter, e.g., "targaryen" -> "House Targaryen" */}
-                    House {houseId.charAt(0).toUpperCase() + houseId.slice(1)}
+                    House {houseId.charAt(0).toLocaleUpperCase("tr-TR") + houseId.slice(1)}
                   </Link>
                 </li>
               ))}

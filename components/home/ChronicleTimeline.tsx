@@ -27,7 +27,7 @@ export default function ChronicleTimeline() {
         <div className={styles.track}>
           <span className={styles.progress} style={{ width: `${currentPosition}%` }} />
           <span className={`${styles.edgeLabel} ${styles.edgeLabelStart}`} style={{ left: "1%" }}>Aegon&apos;s Conquest</span>
-          <span className={styles.edgeLabel} style={{ left: `${currentPosition}%` }}>Present &middot; {worldDate.day} / {worldDate.moon} / {worldDate.year} {worldDate.era}</span>
+          <span className={`${styles.edgeLabel} ${styles.edgeLabelPresent}`} style={{ left: `${currentPosition}%` }}>Present &middot; {worldDate.day} / {worldDate.moon} / {worldDate.year} {worldDate.era}</span>
           <span className={`${styles.edgeLabel} ${styles.future}`} style={{ left: "99%" }}>Unknown</span>
           {timeline.map((chapter, index) => {
             const position = 6 + (index / Math.max(1, timeline.length - 1)) * (currentPosition - 12);

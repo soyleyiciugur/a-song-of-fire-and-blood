@@ -19,7 +19,7 @@ function pick<T>(arr: T[]): T {
 }
 
 function capitalize(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
+  return s.charAt(0).toLocaleUpperCase("tr-TR") + s.slice(1);
 }
 
 function buildFull(given: string, surname?: string, byname?: string): string {

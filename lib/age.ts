@@ -18,20 +18,18 @@ export interface WorldDate {
 }
 
 export type CharacterAgeState =
-  | "baby"
-  | "kid"
-  | "teen"
+  | "child"
   | "young"
+  | "youth"
   | "adult"
-  | "old";
+  | "elder";
 
 export const CHARACTER_AGE_STATES: CharacterAgeState[] = [
-  "baby",
-  "kid",
-  "teen",
+  "child",
   "young",
+  "youth",
   "adult",
-  "old",
+  "elder",
 ];
 
 export const DAYS_PER_MOON = 30;
@@ -75,12 +73,11 @@ export function computeAge(
  * calls for a different visual bucket.
  */
 export function ageToPortraitState(age: number): CharacterAgeState {
-  if (age <= 2) return "baby";
-  if (age <= 11) return "kid";
-  if (age <= 16) return "teen";
-  if (age <= 25) return "young";
+  if (age <= 14) return "child";
+  if (age <= 24) return "young";
+  if (age <= 39) return "youth";
   if (age <= 59) return "adult";
-  return "old";
+  return "elder";
 }
 
 export function resolvePortraitAgeState(

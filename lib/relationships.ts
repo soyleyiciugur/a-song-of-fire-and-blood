@@ -18,7 +18,7 @@ function displayNameFromId(id: string) {
   return id
     .split("-")
     .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .map((part) => part.charAt(0).toLocaleUpperCase("tr-TR") + part.slice(1))
     .join(" ");
 }
 

@@ -1,12 +1,11 @@
 export type CharacterStatus = "Alive" | "Dead" | "Unknown" | "Missing";
 
 export type CharacterAgeState =
-  | "baby"
-  | "kid"
-  | "teen"
+  | "child"
   | "young"
+  | "youth"
   | "adult"
-  | "old";
+  | "elder";
 
 export type CharacterId =
   | "aenys-targaryen-ii"

@@ -181,7 +181,7 @@ function FilterMenu({
 }
 
 function titleCase(value: string) {
-  return value.split("-").filter(Boolean).map(x => x[0].toUpperCase() + x.slice(1)).join(" ");
+  return value.split("-").filter(Boolean).map(x => x[0].toLocaleUpperCase("tr-TR") + x.slice(1)).join(" ");
 }
 function makeDeck(name = "New Deck"): Deck {
   return { id: `deck-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, name, cards: {}, updatedAt: Date.now() };

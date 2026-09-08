@@ -56,7 +56,7 @@ export default function BookOfBrothersPage() {
                 alt={entry.computedName}
                 size={44} // Liste kartı için ideal boyut
                 shape="circle"
-                fallbackText={entry.computedName.slice(0, 2).toUpperCase()}
+                fallbackText={entry.computedName.slice(0, 2).toLocaleUpperCase("tr-TR")}
               />
               
               <div>

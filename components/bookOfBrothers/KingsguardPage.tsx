@@ -36,7 +36,7 @@ export default function KingsguardPage({ entry, character, precedingCharacter }:
           alt={name}
           size={84}
           shape="circle"
-          fallbackText={name.slice(0, 2).toUpperCase()}
+          fallbackText={name.slice(0, 2).toLocaleUpperCase("tr-TR")}
         />
 
         <div>

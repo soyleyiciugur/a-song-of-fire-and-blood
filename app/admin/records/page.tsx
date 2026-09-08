@@ -442,7 +442,7 @@ function BookOfBrothersTab() {
     if (!slug) return "Unknown Knight";
     return slug
       .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toLocaleUpperCase("tr-TR") + word.slice(1))
       .join(" ");
   };
 

@@ -9,6 +9,16 @@ export type CharacterPortraitVariants = Partial<
   Record<CharacterAgeState, string>
 >;
 
+// Keep the existing artwork usable while new portraits are added with the
+// canonical child/young/youth/adult/elder naming scheme.
+const LEGACY_STATES: Record<CharacterAgeState, string[]> = {
+  child: ["baby", "kid", "teen"],
+  young: ["young"],
+  youth: ["young"],
+  adult: ["adult"],
+  elder: ["old"],
+};
+
 function findPublicImage(relativeWithoutExtension: string): string | null {
   for (const extension of PORTRAIT_EXTENSIONS) {
     const relativePath = `${relativeWithoutExtension}.${extension}`;
@@ -36,9 +46,11 @@ export function getCharacterPortraitVariants(
   const variants: CharacterPortraitVariants = {};
 
   for (const state of CHARACTER_AGE_STATES) {
-    const portrait = findPublicImage(
-      `images/characters/${state}/${characterId}-${state}`
-    );
+    const portrait = [state, ...LEGACY_STATES[state]]
+      .map((folder) =>
+        findPublicImage(`images/characters/${folder}/${characterId}-${folder}`)
+      )
+      .find((value): value is string => Boolean(value));
 
     if (portrait) {
       variants[state] = portrait;

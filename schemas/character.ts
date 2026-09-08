@@ -8,12 +8,11 @@ export const CharacterStatusSchema = z.enum([
 ]);
 
 export const CharacterAgeStateSchema = z.enum([
-  "baby",
-  "kid",
-  "teen",
+  "child",
   "young",
+  "youth",
   "adult",
-  "old",
+  "elder",
 ]);
 
 export const CharacterQuoteSchema = z

@@ -526,7 +526,7 @@ function humanizeModifierId(
     .filter(Boolean)
     .map(
       (part) =>
-        part.charAt(0).toUpperCase() +
+        part.charAt(0).toLocaleUpperCase("tr-TR") +
         part.slice(1)
     )
     .join(" ");

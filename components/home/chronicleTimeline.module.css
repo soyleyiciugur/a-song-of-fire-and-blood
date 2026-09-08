@@ -17,12 +17,13 @@
 .chapter { display: block; color: var(--gold); font: 600 13px var(--font-hotd); text-decoration: none; }
 .chapter:hover { text-decoration: underline; }
 .date { display: block; margin-top: 3px; color: var(--muted); font: 10px var(--font-geist); }
-.tooltip ul { margin: 9px 0 0; padding-left: 16px; color: var(--text); font: 12px/1.45 var(--font-body); }
+.tooltip ul { margin: 9px 0 0; padding-left: 16px; color: var(--text); font: 12px/1.45 var(--font-geist); }
 .tooltip li a { color: var(--text); text-decoration: none; }
 .tooltip li a:hover { color: var(--gold); text-decoration: underline; }
 .portraits { display: flex; gap: 4px; margin-top: 10px; }
 .portraits > span { border: 1px solid var(--border); }
 .edgeLabel { position: absolute; top: 26px; z-index: 4; transform: translateX(-50%); color: var(--muted); font: 10px var(--font-geist); white-space: nowrap; }
 .edgeLabelStart { transform: none; }
+.edgeLabelPresent { max-width: 150px; white-space: normal; text-align: center; line-height: 1.25; transform: translateX(-70%); }
 .future { transform: translateX(-100%); }
-@media (max-width: 600px) { .section { padding-inline: 14px; } .header { align-items: start; flex-direction: column; margin-bottom: 42px; } .today { align-self: end; } }
+@media (max-width: 600px) { .section { padding-inline: 14px; } .header { align-items: start; flex-direction: column; margin-bottom: 42px; } .today { align-self: end; } .edgeLabelPresent { transform: translateX(-100%); } }

@@ -21,6 +21,7 @@ export default function SigilImage({
   const [failed, setFailed] = useState(false);
 
   const radius = shape === "circle" ? "50%" : "var(--radius-md)";
+  const initials = fallbackText ?? alt.trim().split(/\s+/).slice(0, 2).map((word) => word[0] ?? "").join("").toLocaleUpperCase("tr-TR");
 
   if (failed) {
     return (
@@ -40,7 +41,7 @@ export default function SigilImage({
           flexShrink: 0,
         }}
       >
-        {fallbackText ?? alt.slice(0, 2).toUpperCase()}
+        {initials}
       </div>
     );
   }
