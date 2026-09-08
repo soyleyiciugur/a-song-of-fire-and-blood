@@ -1336,7 +1336,7 @@ function RavensEyePageInner({
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>The Raven&apos;s Eye</h1>
+        <h1 className={`${styles.title} realm-page-title`}>The Raven&apos;s Eye</h1>
         <p className={styles.subtitle}>
           Visions carried on black wings — and whatever else lands in the
           basket.

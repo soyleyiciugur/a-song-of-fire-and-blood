@@ -32,16 +32,13 @@
    ══════════════════════════════════════════════════════════ */
 .fcScene {
   width: 100%;
-  height: calc(100dvh - 58px);
-  min-height: calc(100dvh - 58px);
+  min-height: 100vh;
   background: #090603;
   position: relative;
   padding: 100px 16px 80px;
   display: flex;
   justify-content: center;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
+
 }
 
 .fcScene::before {
@@ -315,7 +312,7 @@
    RESPONSIVE
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 560px) {
-  .fcScene { height: calc(100dvh - 104px); min-height: calc(100dvh - 104px); padding: 88px 10px 60px; }
+  .fcScene { padding: 88px 10px 60px; }
   .fcParchment { padding: 3rem 1.5rem 2.25rem; }
   .fcDropCap { font-size: 2.7rem; }
   .fcBody { font-size: 1rem; }
@@ -340,3 +337,7 @@
 @media (prefers-reduced-motion: reduce) {
   .fcParchment { animation: none; }
 }
+
+.fcFooterLink,.fcBackToBook { font-family:var(--font-geist); font-size:12px; line-height:1.5; padding:10px 14px; border:1px solid var(--fc-gold); border-radius:4px; color:var(--fc-parchment-light); background:#241c12; }
+.fcFooterLink { flex:1; }
+.fcFooterLink:hover,.fcBackToBook:hover { color:#f0c050; background:#33281a; border-color:var(--fc-gold-bright); }

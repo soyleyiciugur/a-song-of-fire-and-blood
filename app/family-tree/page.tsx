@@ -17,7 +17,7 @@ export default async function FamilyTree({ searchParams }: Props) {
     <main className={styles.page}>
       <FamilyTreeFocus focusId={focus} />
       <div className={styles.container}>
-        <h1 className={styles.heading}>Family Tree</h1>
+        <h1 className={`${styles.heading} realm-page-title`}>Family Tree</h1>
 
         <p className={styles.subheading}>
           The bloodlines behind the crown. Dashed nodes mark relatives who

@@ -4,6 +4,7 @@ import worldDate from "@/data/worldDate.json";
 import { timeline } from "@/data/timeline";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
+import ChronicleMarker from "./ChronicleMarker";
 
 import styles from "./chronicleTimeline.module.css";
 
@@ -34,9 +35,7 @@ export default function ChronicleTimeline() {
             const position = 6 + (index / Math.max(1, timeline.length - 1)) * (currentPosition - 12);
             const characters = Array.from(new Set(chapter.events.flatMap((event) => event.characters ?? [])));
             return (
-              <div key={chapter.chapterSlug} className={styles.marker} style={{ left: `${position}%` }}>
-                <span className={styles.dot} />
-                <div className={styles.tooltip}>
+              <ChronicleMarker key={chapter.chapterSlug} position={position} href={`/chapters/${chapter.chapterSlug}`} label={chapter.chapterTitle}>
                   <Link href={`/chapters/${chapter.chapterSlug}`} className={styles.chapter}>{chapter.chapterTitle}</Link>
                   {chapter.date && <span className={styles.date}>{chapter.date}</span>}
                   <ul>
@@ -54,8 +53,7 @@ export default function ChronicleTimeline() {
                       })}
                     </div>
                   )}
-                </div>
-              </div>
+              </ChronicleMarker>
             );
           })}
         </div>

@@ -73,6 +73,9 @@
 }
 
 .search {
+  flex: none;
+  height: 38px;
+  min-height: 38px;
   font-family: inherit;
   font-size: 13px;
   color: var(--text);

@@ -10,11 +10,11 @@ export default function ChroniclePage() {
     <main className={styles.page}>
       <div className={styles.container}>
         <p className={styles.eyebrow}>The Historical Record</p>
-        <h1>The Chronicle</h1>
+        <h1 className="realm-page-title">The Chronicle</h1>
         <p className={styles.lead}>The turning points, secrets, and reckonings of the realm.</p>
-        <nav className={styles.tabs} aria-label="Chronicle sections">
+        <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Chronicle sections">
           <Link href="/timeline">Timeline</Link>
-          <Link className={styles.activeTab} href="/chronicle">Annals</Link>
+          <Link aria-current="page" className={styles.activeTab} href="/chronicle">Annals</Link>
           <Link href="/wars">The Bloodshed</Link>
         </nav>
         <h2 className={styles.sectionTitle}>Annals</h2>

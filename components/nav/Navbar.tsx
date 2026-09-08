@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,6 +10,16 @@ import SearchBar from "./SearchBar";
 import styles from "./navbar.module.css";
 
 export default function Navbar() {
+  const headerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const measure = () => document.documentElement.style.setProperty("--site-nav-height", `${header.getBoundingClientRect().height}px`);
+    const observer = new ResizeObserver(measure);
+    observer.observe(header);
+    measure();
+    return () => observer.disconnect();
+  }, []);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
@@ -25,6 +35,7 @@ export default function Navbar() {
 
   return (
     <header
+      ref={headerRef}
       className={[
         styles.banner,
         styles.playBanner,

@@ -6,10 +6,10 @@
 .tabs a { padding: 8px 13px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font: 12px var(--font-geist); text-decoration: none; }
 .tabs a:hover, .tabs .activeTab { color: var(--gold); border-color: var(--gold); background: rgba(201, 162, 39, .08); }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -16px 0 38px; }
-.filters input { flex: 1 1 220px; min-width: 0; padding: 10px 13px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font: 13px var(--font-geist); }
-.characterSelect { flex: 1 1 240px; min-width: 220px; }
+.filters > input { flex: 1 1 160px; min-width: 130px; padding: 10px 13px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font: 13px var(--font-geist); }
+.characterSelect { flex: 0 1 190px; min-width: 160px; }
 .characterSelect > div { width: 100%; min-width: 0; }
-.filters button { padding: 9px 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; font: 11px var(--font-geist); text-transform: none; }
+.filters > button { padding: 7px 8px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; font: 10px var(--font-geist); text-transform: none; }
 .filters button:hover, .filters .filterActive { color: var(--gold); border-color: var(--gold); }
 .chapters { display: flex; flex-direction: column; gap: 48px; }
 .chapterBlock { position: relative; scroll-margin-top: 90px; }

@@ -38,14 +38,14 @@ export default function Timeline() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.heading}>Timeline</h1>
+        <h1 className={`${styles.heading} realm-page-title`}>Timeline</h1>
 
         <p className={styles.subheading}>
           The major turns of the realm, chapter by chapter.
         </p>
 
-        <nav className={styles.tabs} aria-label="Chronicle sections">
-          <Link className={styles.activeTab} href="/timeline">Timeline</Link>
+        <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Chronicle sections">
+          <Link aria-current="page" className={styles.activeTab} href="/timeline">Timeline</Link>
           <Link href="/chronicle">Annals</Link>
           <Link href="/wars">The Bloodshed</Link>
         </nav>

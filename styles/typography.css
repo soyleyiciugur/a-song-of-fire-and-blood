@@ -1,4 +1,8 @@
 /* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\styles\typography.css */
+.realm-page-title.realm-page-title { margin:0; color:var(--gold); font-family:var(--font-hotd); font-size:clamp(32px,4vw,46px); font-weight:700; line-height:1.2; letter-spacing:normal; text-transform:none; }
+.realm-section-tabs.realm-section-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 28px; padding:0 0 12px; border-bottom:1px solid var(--border); }
+.realm-section-tabs.realm-section-tabs a { display:inline-flex; align-items:center; padding:8px 13px; border:1px solid var(--border); border-radius:999px; color:var(--muted); font:12px/1.4 var(--font-geist); text-decoration:none; }
+.realm-section-tabs.realm-section-tabs a:hover,.realm-section-tabs.realm-section-tabs a[aria-current="page"] { color:var(--gold); border-color:var(--gold); background:rgba(201,162,39,.08); }
 .page-title {
   color: var(--gold);
   font-size: 48px;

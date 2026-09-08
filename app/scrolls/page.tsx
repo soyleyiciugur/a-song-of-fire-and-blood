@@ -16,7 +16,7 @@ export default function ScrollsPage() {
     <div className={styles.page}>
       <header className={styles.pageHeader}>
         <p className={styles.eyebrow}>The Citadel&apos;s Archive</p>
-        <h1 className={styles.pageTitle}>Scrolls from the Realm</h1>
+        <h1 className={`${styles.pageTitle} realm-page-title`}>Scrolls from the Realm</h1>
         <p className={styles.pageIntro}>
           Studies, histories, and accounts set down by maesters, septons, and
           scholars across the realm — preserved here for any who would learn

@@ -3,7 +3,7 @@
 .eyebrow { display: block; margin-bottom: 6px; color: var(--muted); font: 600 10px var(--font-geist); letter-spacing: .16em; text-transform: uppercase; }
 .header h2 { margin: 0; color: var(--gold); font: 600 22px var(--font-hotd); }
 .today { color: var(--muted); font: 12px var(--font-geist); white-space: nowrap; }
-.viewport { overflow-x: auto; overflow-y: visible; padding: 112px 12px 28px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.viewport { overflow-x: auto; overflow-y: visible; padding: 16px 12px 48px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .track { position: relative; min-width: 620px; height: 28px; margin: 0 8px; background: linear-gradient(var(--border), var(--border)) center / 100% 2px no-repeat; }
 .progress { position: absolute; top: 13px; left: 0; height: 2px; background: var(--gold); }
 .epochMarker { position: absolute; top: 2px; z-index: 4; display: grid; place-items: center; width: 22px; height: 22px; transform: translateX(-50%) rotate(45deg); color: var(--gold); background: var(--surface); border: 1px solid var(--gold); font: 14px/1 var(--font-geist); }
@@ -30,3 +30,10 @@
 .edgeLabelPresent { width: 120px; white-space: normal; text-align: center; line-height: 1.25; transform: translateX(-50%); }
 .future { transform: translateX(-100%); }
 @media (max-width: 600px) { .section { padding-inline: 14px; } .header { align-items: start; flex-direction: column; margin-bottom: 16px; } .edgeLabelPresent { transform: translateX(-50%); } }
+
+.edgeLabelPresent > span { display:block; }
+.epochMarker { border-radius:50%; transform:translateX(-50%); }
+.floatingTooltip { position:fixed; z-index:10000; width:250px; max-width:calc(100vw - 24px); max-height:70dvh; overflow:auto; transform:translate(-50%,-100%); padding:13px; background:#17171b; color:var(--text); border:1px solid var(--gold); border-radius:8px; box-shadow:var(--shadow-card); font:12px/1.45 var(--font-geist); }
+.floatingTooltip ul { margin:9px 0 0; padding-left:16px; }
+.floatingTooltip li a { color:var(--text); text-decoration:none; }
+.floatingTooltip li a:hover { color:var(--gold); }

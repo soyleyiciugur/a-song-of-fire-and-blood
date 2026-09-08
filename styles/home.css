@@ -196,3 +196,10 @@
   color: var(--muted);
   font-size: 11px;
 }
+
+.home-left-col > a:last-child { margin-top:auto; }
+.home-content .button-row { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; max-width:1100px; }
+.home-content .button { display:flex; align-items:center; justify-content:center; min-height:60px; padding:12px; border-radius:4px; background:linear-gradient(145deg,rgba(201,162,39,.07),var(--surface)); border-top-color:rgba(201,162,39,.4); letter-spacing:.025em; }
+@media(max-width:1000px) { .home-content .button-row { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:600px) { .home-content .button-row { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:860px) { .home-left-col,.home-right-col { height:auto; } }

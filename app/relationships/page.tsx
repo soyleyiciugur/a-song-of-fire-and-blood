@@ -357,7 +357,7 @@ export default function RelationshipsPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.heading}>
+        <h1 className={`${styles.heading} realm-page-title`}>
           Web of Loyalties
         </h1>
 

@@ -38,7 +38,7 @@ export default function BookOfBrothersPage() {
     <div className={styles.page}>
       <header className={styles.pageHeader}>
         <p className={styles.eyebrow}>The White Book</p>
-        <h1 className={styles.pageTitle}>The Book of Brothers</h1>
+        <h1 className={`${styles.pageTitle} realm-page-title`}>The Book of Brothers</h1>
         <p className={styles.pageIntro}>
           The record of every knight who has worn the white cloak — their
           vows, their years of service, and the deeds set down in their name.

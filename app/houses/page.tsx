@@ -13,7 +13,7 @@ export default function Houses() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.heading}>Houses</h1>
+        <h1 className={`${styles.heading} realm-page-title`}>Houses</h1>
 
         <p className={styles.subheading}>
           The great and lesser houses whose banners, words, and blood shape
