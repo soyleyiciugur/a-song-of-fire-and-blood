@@ -52,12 +52,12 @@ type GalleryTab = "raven" | "memes" | "reels";
 const VIDEO_EXTENSIONS = [".mp4", ".webm", ".mov"];
 
 const AGE_STATE_LABELS: Record<CharacterAgeState, string> = {
-  baby: "Baby",
-  kid: "Kid",
-  teen: "Teen",
+  baby: "Babe",
+  kid: "Child",
+  teen: "Youth",
   young: "Young",
   adult: "Adult",
-  old: "Old",
+  old: "Elder",
 };
 
 function isVideo(src: string) {
