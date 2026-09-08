@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import MiniPortrait from "@/components/MiniPortrait";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getCharacters } from "@/lib/characters";
@@ -54,6 +53,8 @@ function houseLabel(house: string) {
   return house === "-" ? "Unaffiliated" : house.replace(/^House\s+/i, "");
 }
 
+const MINI_PORTRAIT_EXTS = ["webp", "png", "jpg", "jpeg"] as const;
+
 function formatNickname(nickname?: string | null) {
   if (!nickname || nickname === "-") return null;
 
@@ -62,6 +63,38 @@ function formatNickname(nickname?: string | null) {
     .replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, "");
 
   return clean ? `“${clean}”` : null;
+}
+
+function RawMiniPortrait({
+  id,
+  alt,
+  size,
+}: {
+  id: string;
+  alt: string;
+  size: number;
+}) {
+  const [extIndex, setExtIndex] = useState(0);
+
+  const src = `/images/miniportraits/${id}.${MINI_PORTRAIT_EXTS[extIndex]}`;
+
+  const onError =
+    extIndex < MINI_PORTRAIT_EXTS.length - 1
+      ? () => setExtIndex((current) => current + 1)
+      : undefined;
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      width={size}
+      height={size}
+      className={styles.rawMiniPortrait}
+      draggable={false}
+      decoding="async"
+      onError={onError}
+    />
+  );
 }
 
 function StyledSelect({
@@ -294,7 +327,7 @@ export default function Characters() {
                   <span className={styles.crownGlyph} aria-hidden="true">
                     ♛
                   </span>
-                  <MiniPortrait
+                  <RawMiniPortrait
                     id={character.id}
                     alt={character.name}
                     size={62}
@@ -319,7 +352,7 @@ export default function Characters() {
                   <span className={styles.successionNumber}>
                     <span>{SUCCESSION_NUMERALS[index]}</span>
                   </span>
-                  <MiniPortrait
+                  <RawMiniPortrait
                     id={character.id}
                     alt={character.name}
                     size={46}
@@ -406,7 +439,7 @@ export default function Characters() {
                       href={`/characters/${character.id}`}
                       className={styles.characterRow}
                     >
-                      <MiniPortrait
+                      <RawMiniPortrait
                         id={character.id}
                         alt={character.name}
                         size={44}
