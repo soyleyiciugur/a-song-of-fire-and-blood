@@ -1,32 +1,20 @@
-// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\character\CharacterBiography.tsx
+import styles from "./characterContent.module.css";
+
 type Props = {
   summary: string;
 };
 
 export default function CharacterBiography({ summary }: Props) {
   return (
-    <section style={{ marginBottom: 40 }}>
-      <h2
-        style={{
-          color: "var(--gold)",
-          marginBottom: 18,
-          borderBottom: "1px solid var(--border)",
-          paddingBottom: 10,
-        }}
-      >
-        Biography
-      </h2>
+    <section className={styles.sectionPanel}>
+      <div className={styles.sectionHeader}>
+        <div className={styles.sectionTitleGroup}>
+          <span className={styles.sectionEyebrow}>Life &amp; standing</span>
+          <h2 className={styles.sectionTitle}>Biography</h2>
+        </div>
+      </div>
 
-      <p
-        style={{
-          lineHeight: 1.9,
-          color: "var(--text)",
-          fontSize: 17,
-          margin: 0,
-        }}
-      >
-        {summary}
-      </p>
+      <p className={styles.biographyText}>{summary}</p>
     </section>
   );
 }

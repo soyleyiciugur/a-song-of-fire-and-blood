@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import charactersData from "@/data/characters/characters.json";
 import galleryData from "@/data/gallery.json";
 import housesData from "@/data/houses.json";
@@ -137,6 +137,33 @@ function resolveDragon(value?: string | null) {
   );
 }
 
+function sortCharacterRefsOldestFirst(values?: string[]) {
+  return [...(values ?? [])].sort((a, b) => {
+    const aCharacter = resolveCharacter(a);
+    const bCharacter = resolveCharacter(b);
+
+    const aNameday = aCharacter?.nameday;
+    const bNameday = bCharacter?.nameday;
+
+    if (aNameday && bNameday) {
+      if (aNameday.year !== bNameday.year) {
+        return aNameday.year - bNameday.year;
+      }
+
+      if (aNameday.moon !== bNameday.moon) {
+        return aNameday.moon - bNameday.moon;
+      }
+
+      return aNameday.day - bNameday.day;
+    }
+
+    if (aNameday) return -1;
+    if (bNameday) return 1;
+
+    return 0;
+  });
+}
+
 function CharacterValue({ value }: { value?: string | null }) {
   if (!isValidValue(value)) return <>-</>;
 
@@ -258,6 +285,16 @@ export default function CharacterInfoBox({
         .filter((entry) => entry.characterIds.includes(character.id))
         .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt)),
     [character.id]
+  );
+
+  const sortedSiblings = useMemo(
+    () => sortCharacterRefsOldestFirst(character.siblings),
+    [character.siblings]
+  );
+
+  const sortedChildren = useMemo(
+    () => sortCharacterRefsOldestFirst(character.children),
+    [character.children]
   );
 
   const previewEntries = taggedGallery.slice(0, 3);
@@ -407,7 +444,7 @@ export default function CharacterInfoBox({
                 <InfoRow
                   label="Siblings"
                   compact
-                  value={<CharacterListValue values={character.siblings} />}
+                  value={<CharacterListValue values={sortedSiblings} />}
                 />
               )}
 
@@ -415,7 +452,7 @@ export default function CharacterInfoBox({
                 <InfoRow
                   label="Children"
                   compact
-                  value={<CharacterListValue values={character.children} />}
+                  value={<CharacterListValue values={sortedChildren} />}
                 />
               )}
             </section>
@@ -465,7 +502,18 @@ export default function CharacterInfoBox({
                           className={styles.galleryPreviewMedia}
                         />
                       )}
-                      {video && <span className={styles.playBadge}>▶</span>}
+                      {video && (
+                        <span className={styles.playBadge}>
+                          <svg
+                            width="11"
+                            height="11"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </span>
+                      )}
                     </button>
                   );
                 })}
@@ -501,6 +549,208 @@ function InfoRow({ label, value, compact = false }: RowProps) {
     <div className={`${styles.infoRow} ${compact ? styles.infoRowCompact : ""}`}>
       <div className={styles.infoLabel}>{label}</div>
       <div className={styles.infoValue}>{value ?? "-"}</div>
+    </div>
+  );
+}
+
+function CharacterReelSlide({
+  entry,
+  characterId,
+}: {
+  entry: GalleryEntry;
+  characterId: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const slideRef = useRef<HTMLDivElement>(null);
+  const iconTimeout = useRef<number | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const slide = slideRef.current;
+    if (!video || !slide) return;
+
+    const observer = new IntersectionObserver(
+      ([intersection]) => {
+        if (intersection.isIntersecting && intersection.intersectionRatio > 0.6) {
+          video
+            .play()
+            .then(() => setIsPlaying(true))
+            .catch(() => setIsPlaying(false));
+        } else {
+          video.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: [0, 0.6, 1] }
+    );
+
+    observer.observe(slide);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (iconTimeout.current) window.clearTimeout(iconTimeout.current);
+    };
+  }, []);
+
+  function flashIcon() {
+    setShowIcon(true);
+    if (iconTimeout.current) window.clearTimeout(iconTimeout.current);
+    iconTimeout.current = window.setTimeout(() => setShowIcon(false), 500);
+  }
+
+  function togglePlayback() {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+
+    flashIcon();
+  }
+
+  function updateProgress() {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(video.duration) || video.duration <= 0) {
+      setProgress(0);
+      return;
+    }
+
+    setProgress(video.currentTime / video.duration);
+  }
+
+  function seek(event: React.MouseEvent<HTMLDivElement>) {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    video.currentTime = ratio * video.duration;
+    setProgress(ratio);
+  }
+
+  return (
+    <div ref={slideRef} className={styles.characterReelSlide}>
+      <video
+        ref={videoRef}
+        src={entry.src}
+        className={styles.characterReelVideo}
+        loop
+        playsInline
+        preload="metadata"
+        onTimeUpdate={updateProgress}
+        onLoadedMetadata={updateProgress}
+        onDurationChange={updateProgress}
+      />
+
+      <button
+        type="button"
+        className={styles.characterReelTapCatcher}
+        onClick={togglePlayback}
+        aria-label={isPlaying ? "Pause reel" : "Play reel"}
+      />
+
+      <div
+        className={`${styles.characterReelCenterIcon} ${
+          showIcon ? styles.characterReelCenterIconVisible : ""
+        }`}
+      >
+        {isPlaying ? (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="5" width="4" height="14" />
+            <rect x="14" y="5" width="4" height="14" />
+          </svg>
+        ) : (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        )}
+      </div>
+
+      <div className={styles.characterReelMeta}>
+        {entry.caption && <p>{entry.caption}</p>}
+        <Link href={galleryHref("reels", characterId, entry.id)}>
+          Open in Gutter Reels ↗
+        </Link>
+      </div>
+
+      <div
+        className={styles.characterReelProgressHitbox}
+        onClick={seek}
+        role="slider"
+        aria-label="Reel progress"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(progress * 100)}
+      >
+        <div className={styles.characterReelProgressTrack}>
+          <div
+            className={styles.characterReelProgressFill}
+            style={{ transform: `scaleX(${progress})` }}
+          />
+          <div
+            className={styles.characterReelProgressThumb}
+            style={{ left: `${progress * 100}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CharacterReelsViewer({
+  entries,
+  startIndex,
+  characterId,
+  onClose,
+}: {
+  entries: GalleryEntry[];
+  startIndex: number;
+  characterId: string;
+  onClose: () => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const container = containerRef.current;
+      if (!container) return;
+      const slide = container.children[startIndex] as HTMLElement | undefined;
+      slide?.scrollIntoView({ block: "start" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [startIndex]);
+
+  return (
+    <div className={styles.characterReelsViewer} ref={containerRef}>
+      {entries.map((entry) => (
+        <CharacterReelSlide
+          key={entry.id}
+          entry={entry}
+          characterId={characterId}
+        />
+      ))}
+
+      <button
+        type="button"
+        className={styles.characterReelsClose}
+        onClick={onClose}
+        aria-label="Close reels viewer"
+      >
+        ✕
+      </button>
     </div>
   );
 }
@@ -609,7 +859,11 @@ function CharacterGalleryModal({
           {activeEntries.length === 0 ? (
             <div className={styles.modalEmpty}>Nothing tagged here yet.</div>
           ) : (
-            <div className={styles.modalGrid}>
+            <div
+              className={`${styles.modalGrid} ${
+                activeTab === "reels" ? styles.modalReelsGrid : ""
+              }`}
+            >
               {activeEntries.map((entry, index) => {
                 const video = isVideo(entry.src);
 
@@ -617,7 +871,9 @@ function CharacterGalleryModal({
                   <button
                     key={entry.id}
                     type="button"
-                    className={styles.modalMediaCard}
+                    className={`${styles.modalMediaCard} ${
+                      video ? styles.modalReelCard : ""
+                    }`}
                     onClick={() => setViewerIndex(index)}
                   >
                     {video ? (
@@ -636,7 +892,18 @@ function CharacterGalleryModal({
                         className={styles.modalMedia}
                       />
                     )}
-                    {video && <span className={styles.modalPlay}>▶</span>}
+                    {video && (
+                      <span className={styles.modalPlay}>
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
+                    )}
                   </button>
                 );
               })}
@@ -653,7 +920,14 @@ function CharacterGalleryModal({
           </Link>
         </div>
 
-        {selected && (
+        {selected && isVideo(selected.src) ? (
+          <CharacterReelsViewer
+            entries={activeEntries}
+            startIndex={viewerIndex ?? 0}
+            characterId={character.id}
+            onClose={() => setViewerIndex(null)}
+          />
+        ) : selected ? (
           <div
             className={styles.viewerBackdrop}
             onMouseDown={() => setViewerIndex(null)}
@@ -671,21 +945,11 @@ function CharacterGalleryModal({
                 ×
               </button>
 
-              {isVideo(selected.src) ? (
-                <video
-                  src={selected.src}
-                  controls
-                  autoPlay
-                  playsInline
-                  className={styles.viewerMedia}
-                />
-              ) : (
-                <img
-                  src={selected.src}
-                  alt={selected.caption || "Gallery image"}
-                  className={styles.viewerMedia}
-                />
-              )}
+              <img
+                src={selected.src}
+                alt={selected.caption || "Gallery image"}
+                className={styles.viewerMedia}
+              />
 
               {selected.caption && (
                 <p className={styles.viewerCaption}>{selected.caption}</p>
@@ -733,7 +997,7 @@ function CharacterGalleryModal({
               </Link>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>,
     document.body

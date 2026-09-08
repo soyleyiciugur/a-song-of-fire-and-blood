@@ -1,24 +1,317 @@
-// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\character\CharacterRelationships.tsx
-import RelationshipCard from "./RelationshipCard";
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import MiniPortrait from "@/components/MiniPortrait";
+import charactersData from "@/data/characters/characters.json";
+import {
+  colorForHouse,
+  secondaryColorForHouse,
+} from "@/lib/graph-layout";
+import type { Character } from "@/types/character";
+import styles from "./characterContent.module.css";
 
 type Props = {
+  characterId: string;
   relationships: Record<string, string>;
 };
 
-export default function CharacterRelationships({ relationships }: Props) {
+type RelatedEntry = {
+  id: string;
+  description: string;
+  character: Character;
+};
+
+const WIDTH = 720;
+const HEIGHT = 390;
+const CENTER_X = WIDTH / 2;
+const CENTER_Y = HEIGHT / 2;
+
+const characters = charactersData as Character[];
+const byId = new Map<string, Character>(
+  characters.map((character) => [character.id, character])
+);
+
+function fallbackColorForId(id: string) {
+  let hash = 0;
+
+  for (let i = 0; i < id.length; i++) {
+    hash = id.charCodeAt(i) + ((hash << 5) - hash);
+    hash |= 0;
+  }
+
+  return `hsl(${Math.abs(hash) % 360}, 55%, 55%)`;
+}
+
+function colorForCharacter(id: string, house: string) {
+  if (house && house !== "-") {
+    const houseColor = colorForHouse(house);
+    if (houseColor) return houseColor;
+  }
+
+  return fallbackColorForId(id);
+}
+
+function formatCharacterName(name: string) {
+  return name
+    .replace(
+      /^(Ser|Lady|Lord|King|Queen|Prince|Princess|Mother)\s+/i,
+      ""
+    )
+    .trim();
+}
+
+function shortLabel(name: string) {
+  const clean = formatCharacterName(name);
+  return clean.split(" ")[0] || clean;
+}
+
+function buildRadialLayout(ids: string[]) {
+  const result = new Map<string, { x: number; y: number }>();
+  const count = ids.length;
+
+  if (count === 0) return result;
+
+  const firstRingCount = Math.min(count, 9);
+  const secondRingCount = Math.max(0, count - firstRingCount);
+
+  ids.slice(0, firstRingCount).forEach((id, index) => {
+    const angle = -Math.PI / 2 + (index / firstRingCount) * Math.PI * 2;
+    const radiusX = 235;
+    const radiusY = 135;
+
+    result.set(id, {
+      x: CENTER_X + Math.cos(angle) * radiusX,
+      y: CENTER_Y + Math.sin(angle) * radiusY,
+    });
+  });
+
+  ids.slice(firstRingCount).forEach((id, index) => {
+    const angle =
+      -Math.PI / 2 +
+      (index / Math.max(secondRingCount, 1)) * Math.PI * 2 +
+      Math.PI / Math.max(secondRingCount, 1);
+
+    result.set(id, {
+      x: CENTER_X + Math.cos(angle) * 295,
+      y: CENTER_Y + Math.sin(angle) * 165,
+    });
+  });
+
+  return result;
+}
+
+export default function CharacterRelationships({
+  characterId,
+  relationships,
+}: Props) {
+  const currentCharacter = byId.get(characterId);
   const entries = Object.entries(relationships ?? {});
 
-  if (entries.length === 0) return null;
+  const known = useMemo<RelatedEntry[]>(
+    () =>
+      entries.flatMap(([id, description]) => {
+        const character = byId.get(id);
+        return character ? [{ id, description, character }] : [];
+      }),
+    [relationships]
+  );
+
+  const unresolved = useMemo(
+    () =>
+      entries.filter(([id]) => !byId.has(id)).map(([id, description]) => ({
+        id,
+        description,
+      })),
+    [relationships]
+  );
+
+  const layout = useMemo(
+    () => buildRadialLayout(known.map((entry) => entry.id)),
+    [known]
+  );
+
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  if (entries.length === 0 || !currentCharacter) return null;
+
+  const selected = selectedId
+    ? known.find((entry) => entry.id === selectedId) ?? null
+    : null;
+  const activeId = hoveredId ?? selectedId;
 
   return (
-    <section style={{ marginBottom: 40 }}>
-      <h2 style={{ color: "var(--gold)", marginBottom: 20, borderBottom: "1px solid var(--border)", paddingBottom: 10 }}>
-        Relationships
-      </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-        {entries.map(([id, description]) => (
-          <RelationshipCard key={id} id={id} description={description} />
-        ))}
+    <section className={styles.sectionPanel}>
+      <div className={styles.sectionHeader}>
+        <div className={styles.sectionTitleGroup}>
+          <span className={styles.sectionEyebrow}>Web of loyalties</span>
+          <h2 className={styles.sectionTitle}>Relationships</h2>
+        </div>
+        <p className={styles.sectionHint}>
+          Hover to trace a bond. Click a node to pin its record.
+        </p>
+      </div>
+
+      <div className={styles.relationshipLayout}>
+        <div className={styles.relationshipGraphShell}>
+          <svg
+            viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+            className={styles.relationshipSvg}
+            role="img"
+            aria-label={`${currentCharacter.name} relationship network`}
+            onClick={() => setSelectedId(null)}
+          >
+            {known.map((entry) => {
+              const point = layout.get(entry.id);
+              if (!point) return null;
+
+              const active = activeId === entry.id;
+
+              return (
+                <line
+                  key={`edge-${entry.id}`}
+                  x1={CENTER_X}
+                  y1={CENTER_Y}
+                  x2={point.x}
+                  y2={point.y}
+                  stroke={active ? "var(--gold)" : "var(--border)"}
+                  strokeWidth={active ? 1.7 : 1}
+                  opacity={active ? 0.95 : activeId ? 0.18 : 0.55}
+                />
+              );
+            })}
+
+            <g transform={`translate(${CENTER_X}, ${CENTER_Y})`}>
+              <circle
+                r={13}
+                fill={colorForCharacter(
+                  currentCharacter.id,
+                  currentCharacter.house
+                )}
+                stroke="var(--gold)"
+                strokeWidth={2.4}
+              />
+              <text
+                x={17}
+                y={4}
+                className={`${styles.relationshipNodeLabel} ${styles.relationshipNodeLabelActive}`}
+              >
+                {shortLabel(currentCharacter.name)}
+              </text>
+            </g>
+
+            {known.map((entry) => {
+              const point = layout.get(entry.id);
+              if (!point) return null;
+
+              const isSelected = selectedId === entry.id;
+              const isHovered = hoveredId === entry.id;
+              const highlighted = isSelected || isHovered;
+              const dimmed = Boolean(activeId && activeId !== entry.id);
+
+              return (
+                <g
+                  key={entry.id}
+                  transform={`translate(${point.x}, ${point.y})`}
+                  className={styles.relationshipNode}
+                  opacity={dimmed ? 0.35 : 1}
+                  onMouseEnter={() => setHoveredId(entry.id)}
+                  onMouseLeave={() =>
+                    setHoveredId((current) =>
+                      current === entry.id ? null : current
+                    )
+                  }
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setSelectedId(entry.id);
+                  }}
+                >
+                  <circle
+                    r={highlighted ? 10 : 7}
+                    fill={colorForCharacter(
+                      entry.character.id,
+                      entry.character.house
+                    )}
+                    stroke={
+                      highlighted
+                        ? "var(--gold)"
+                        : secondaryColorForHouse(entry.character.house) ??
+                          "var(--background)"
+                    }
+                    strokeWidth={highlighted ? 2 : 1.5}
+                  />
+                  <text
+                    x={11}
+                    y={4}
+                    className={`${styles.relationshipNodeLabel} ${
+                      highlighted ? styles.relationshipNodeLabelActive : ""
+                    }`}
+                  >
+                    {shortLabel(entry.character.name)}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        <aside className={styles.relationshipSidebar}>
+          {selected ? (
+            <>
+              <div className={styles.relationshipSidebarHeader}>
+                <MiniPortrait
+                  id={selected.character.id}
+                  alt={selected.character.name}
+                  size={34}
+                />
+                <div>
+                  <Link
+                    href={`/characters/${selected.character.id}`}
+                    className={styles.relationshipSidebarName}
+                  >
+                    {selected.character.name}
+                  </Link>
+                  <div className={styles.relationshipSidebarHouse}>
+                    {selected.character.house !== "-"
+                      ? selected.character.house
+                      : selected.character.title}
+                  </div>
+                </div>
+              </div>
+
+              <p className={styles.relationshipDescription}>
+                {selected.description}
+              </p>
+            </>
+          ) : (
+            <p className={styles.relationshipSidebarEmpty}>
+              Select one of the connected characters to read the recorded bond.
+            </p>
+          )}
+        </aside>
+      </div>
+
+      {unresolved.length > 0 && (
+        <div className={styles.unresolvedBlock}>
+          <h3 className={styles.unresolvedTitle}>Other recorded ties</h3>
+          <ul className={styles.unresolvedList}>
+            {unresolved.map((entry) => (
+              <li key={entry.id} className={styles.unresolvedItem}>
+                <strong>{entry.id.replace(/-/g, " ")}</strong> — {entry.description}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className={styles.relationshipFooter}>
+        <span className={styles.relationshipCount}>
+          {entries.length} recorded {entries.length === 1 ? "bond" : "bonds"}
+        </span>
+        <Link href="/relationships" className={styles.relationshipFullLink}>
+          Open full web →
+        </Link>
       </div>
     </section>
   );

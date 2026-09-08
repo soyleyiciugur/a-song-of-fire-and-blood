@@ -1,7 +1,7 @@
 [
   {
     "id": "gallery-alester-jace-fleabottom",
-    "src": "/images/gallery/alester-jace-fleabottom.png",
+    "src": "/images/gallery/alester-jace-fleabottom.webp",
     "caption": null,
     "characterIds": [
       "jacaelon-targaryen",
@@ -19,7 +19,7 @@
   },
   {
     "id": "gallery-alester-jace-training",
-    "src": "/images/gallery/alester-jace-training.png",
+    "src": "/images/gallery/alester-jace-training.webp",
     "caption": null,
     "characterIds": [
       "jacaelon-targaryen",
@@ -37,7 +37,7 @@
   },
   {
     "id": "gallery-grance-myles",
-    "src": "/images/gallery/grance-myles.png",
+    "src": "/images/gallery/grance-myles.webp",
     "caption": null,
     "characterIds": [
       "grance-morrigen",
@@ -55,7 +55,7 @@
   },
   {
     "id": "gallery-lorenah-jace-alester-proposal",
-    "src": "/images/gallery/lorenah-jace-alester-proposal.jpg",
+    "src": "/images/gallery/lorenah-jace-alester-proposal.webp",
     "caption": null,
     "characterIds": [
       "lorenah-dayne",
@@ -74,7 +74,7 @@
   },
   {
     "id": "gallery-vhaemys-jace-alester-breakfast",
-    "src": "/images/gallery/vhaemys-jace-alester-breakfast.png",
+    "src": "/images/gallery/vhaemys-jace-alester-breakfast.webp",
     "caption": null,
     "characterIds": [
       "vhaemys-targaryen",
@@ -93,7 +93,7 @@
   },
   {
     "id": "gallery-vhaemys-jace-alester-toy",
-    "src": "/images/gallery/vhaemys-jace-alester-toy.png",
+    "src": "/images/gallery/vhaemys-jace-alester-toy.webp",
     "caption": null,
     "characterIds": [
       "vhaemys-targaryen",
@@ -382,7 +382,7 @@
   },
   {
     "id": "gallery-mtoy01sa",
-    "src": "/images/gallery/maelwing.png",
+    "src": "/images/gallery/maelwing.webp",
     "caption": "Maelwing.",
     "characterIds": [
       "baelenys-targaryen"
@@ -400,7 +400,7 @@
   },
   {
     "id": "gallery-mtoxzyds",
-    "src": "/images/gallery/bayle.png",
+    "src": "/images/gallery/bayle.webp",
     "caption": "Bayle.",
     "characterIds": [],
     "houseIds": [
@@ -416,7 +416,7 @@
   },
   {
     "id": "gallery-mtoxzqrz",
-    "src": "/images/gallery/jadefyre.png",
+    "src": "/images/gallery/jadefyre.webp",
     "caption": "Jadefyre.",
     "characterIds": [],
     "houseIds": [
@@ -432,7 +432,7 @@
   },
   {
     "id": "gallery-mtow0gb8",
-    "src": "/images/gallery/baelenys-young-anime.png",
+    "src": "/images/gallery/baelenys-young-anime.webp",
     "caption": "Young Baelenys meets Hatchling Maelwing.",
     "characterIds": [
       "baelenys-targaryen"
@@ -450,7 +450,7 @@
   },
   {
     "id": "gallery-mtow0c5n",
-    "src": "/images/gallery/baelenys-wings.png",
+    "src": "/images/gallery/baelenys-wings.webp",
     "caption": "They say men see wings upon him when they are about to meet their end.",
     "characterIds": [
       "baelenys-targaryen"
@@ -468,7 +468,7 @@
   },
   {
     "id": "gallery-mtow081l",
-    "src": "/images/gallery/baelenys-vs-harrik.png",
+    "src": "/images/gallery/baelenys-vs-harrik.webp",
     "caption": "The Dragonbreath vs. Harrik the Drowned Servant",
     "characterIds": [
       "baelenys-targaryen",
@@ -491,7 +491,7 @@
   },
   {
     "id": "gallery-mtow03d3",
-    "src": "/images/gallery/baelenys-maelwing-red-moon.png",
+    "src": "/images/gallery/baelenys-maelwing-red-moon.webp",
     "caption": "Always watching over him.",
     "characterIds": [
       "baelenys-targaryen"
@@ -509,7 +509,7 @@
   },
   {
     "id": "gallery-mtow015w",
-    "src": "/images/gallery/baelenys-maelwing-two-face.png",
+    "src": "/images/gallery/baelenys-maelwing-two-face.jpeg",
     "caption": "Two sides of the same coin.",
     "characterIds": [
       "baelenys-targaryen"
@@ -527,7 +527,7 @@
   },
   {
     "id": "gallery-mtovzxh6",
-    "src": "/images/gallery/baelenys-maelwing-pastel.png",
+    "src": "/images/gallery/baelenys-maelwing-pastel.webp",
     "caption": "The day they met.",
     "characterIds": [
       "baelenys-targaryen"
@@ -545,7 +545,7 @@
   },
   {
     "id": "gallery-mtovzwbm",
-    "src": "/images/gallery/baelenys-maelwing-iron-throne.png",
+    "src": "/images/gallery/baelenys-maelwing-iron-throne.webp",
     "caption": "Many a sword has found its way to the old chair by their claws.",
     "characterIds": [
       "baelenys-targaryen"
@@ -563,7 +563,7 @@
   },
   {
     "id": "gallery-mtovzqqe",
-    "src": "/images/gallery/baelenys-maelwing-foggy.png",
+    "src": "/images/gallery/baelenys-maelwing-foggy.webp",
     "caption": "The yellow glow inside the fog.",
     "characterIds": [
       "baelenys-targaryen"
@@ -581,7 +581,7 @@
   },
   {
     "id": "gallery-mtovznf3",
-    "src": "/images/gallery/baelenys-fields.png",
+    "src": "/images/gallery/baelenys-fields.webp",
     "caption": "This view + cracking walnuts.",
     "characterIds": [
       "baelenys-targaryen"
@@ -597,7 +597,7 @@
   },
   {
     "id": "gallery-mtovzji8",
-    "src": "/images/gallery/baelenys-dany.png",
+    "src": "/images/gallery/baelenys-dany.webp",
     "caption": "Devoted to Aegon's dream.",
     "characterIds": [
       "baelenys-targaryen"
@@ -615,7 +615,7 @@
   },
   {
     "id": "gallery-mtovz5fw",
-    "src": "/images/gallery/baelenys-black-white-anime.png",
+    "src": "/images/gallery/baelenys-black-white-anime.webp",
     "caption": "The Dragonbreath.",
     "characterIds": [
       "baelenys-targaryen"
@@ -668,7 +668,7 @@
   },
   {
     "id": "gallery-mtlmy5ov",
-    "src": "/images/gallery/rpyi-ovelim.png",
+    "src": "/images/gallery/rpyi-ovelim.webp",
     "caption": "overys targaryen",
     "characterIds": [],
     "houseIds": [],
@@ -680,7 +680,7 @@
   },
   {
     "id": "gallery-mtlmy3j4",
-    "src": "/images/gallery/jace-gunde-4saat.png",
+    "src": "/images/gallery/jace-gunde-4saat.webp",
     "caption": "sonra alarmı kapatıp uyuyom",
     "characterIds": [
       "jacaelon-targaryen"
@@ -719,7 +719,7 @@
   },
   {
     "id": "gallery-mtlmy3hc",
-    "src": "/images/gallery/hasocash.png",
+    "src": "/images/gallery/hasocash.webp",
     "caption": "yargılama günü geldiğinde gaelor vs. jace",
     "characterIds": [],
     "houseIds": [],
@@ -731,7 +731,7 @@
   },
   {
     "id": "gallery-mtlmy3pe",
-    "src": "/images/gallery/jace-dwarf.png",
+    "src": "/images/gallery/jace-dwarf.webp",
     "caption": "Height: 175 cm",
     "characterIds": [
       "jacaelon-targaryen",
@@ -765,7 +765,7 @@
   },
   {
     "id": "gallery-mtj55kzy",
-    "src": "/images/gallery/alester-kuzey.png",
+    "src": "/images/gallery/alester-kuzey.webp",
     "caption": "Alester, \"Kuzey\"deyken...",
     "characterIds": [
       "alester-dayne",
@@ -808,7 +808,7 @@
   },
   {
     "id": "gallery-mtj5wuc5",
-    "src": "/images/gallery/jacemounted.png",
+    "src": "/images/gallery/jacemounted.webp",
     "caption": "The Winged Hand.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -829,7 +829,7 @@
   },
   {
     "id": "gallery-mtj5vqun",
-    "src": "/images/gallery/jace-tourney-fallen.png",
+    "src": "/images/gallery/jace-tourney-fallen.webp",
     "caption": "The Hand that fell.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -850,7 +850,7 @@
   },
   {
     "id": "gallery-mtj5um5s",
-    "src": "/images/gallery/jace-hasocash.png",
+    "src": "/images/gallery/jace-hasocash.webp",
     "caption": "1000 liralık hasocash doldur, 4 paket de biscolata starz",
     "characterIds": [
       "jacaelon-targaryen"
@@ -866,7 +866,7 @@
   },
   {
     "id": "gallery-mtj5p1dq",
-    "src": "/images/gallery/durduk-yere-olen-brandon.png",
+    "src": "/images/gallery/durduk-yere-olen-brandon.webp",
     "caption": "kurt yediği ayaz hakkında detay veremeyecek maalesef",
     "characterIds": [
       "brandon-stark"
@@ -887,7 +887,7 @@
   },
   {
     "id": "gallery-mtj5ooc5",
-    "src": "/images/gallery/cloudgazer-portrait.png",
+    "src": "/images/gallery/cloudgazer-portrait.jpeg",
     "caption": "Cloudgazer.",
     "characterIds": [],
     "houseIds": [
@@ -903,7 +903,7 @@
   },
   {
     "id": "gallery-mtj5nnr3",
-    "src": "/images/gallery/cloudgazer-over-kings-landing.png",
+    "src": "/images/gallery/cloudgazer-over-kings-landing.webp",
     "caption": "Cloudgazer over the King's Landing.",
     "characterIds": [
       "saera-targaryen"
@@ -986,7 +986,7 @@
   },
   {
     "id": "gallery-msly4w4x",
-    "src": "/images/gallery/jace-visenya-sex.jpeg",
+    "src": "/images/gallery/jace-visenya-sex.webp",
     "caption": "*hafifçe boşalır*",
     "characterIds": [
       "jacaelon-targaryen",
@@ -1062,7 +1062,7 @@
   },
   {
     "id": "gallery-msly0ac8",
-    "src": "/images/gallery/aurabaelenys.jpeg",
+    "src": "/images/gallery/aurabaelenys.webp",
     "caption": "King Baelenys.",
     "characterIds": [
       "baelenys-targaryen"
@@ -1078,7 +1078,7 @@
   },
   {
     "id": "gallery-mslxze5a",
-    "src": "/images/gallery/alester-saathos-aurafarm.png",
+    "src": "/images/gallery/alester-saathos-aurafarm.webp",
     "caption": "Ser Alester Dayne & Ser Saathos Maris.",
     "characterIds": [
       "alester-dayne",
@@ -1117,7 +1117,7 @@
   },
   {
     "id": "gallery-mslvzlmt",
-    "src": "/images/gallery/targaryen-plaj.png",
+    "src": "/images/gallery/targaryen-plaj.webp",
     "caption": "+çocuklar gelin su çok güzel\n-yok moruk biz voleybol oynucaz",
     "characterIds": [
       "gaelor-targaryen",
@@ -1139,7 +1139,7 @@
   },
   {
     "id": "gallery-mslvvyhv",
-    "src": "/images/gallery/targaryen-piknik.png",
+    "src": "/images/gallery/targaryen-piknik.webp",
     "caption": "amca sen bişe yiyemedin ama yaa ver biraz ben bakim mangala",
     "characterIds": [
       "baelenys-targaryen",
@@ -1163,7 +1163,7 @@
   },
   {
     "id": "gallery-mslvv0jd",
-    "src": "/images/gallery/targaryen-korfez.png",
+    "src": "/images/gallery/targaryen-korfez.webp",
     "caption": "başka bir evrende...",
     "characterIds": [
       "baelenys-targaryen",
@@ -1185,7 +1185,7 @@
   },
   {
     "id": "gallery-mslvt2d0",
-    "src": "/images/gallery/targaryen-kiz-isteme.png",
+    "src": "/images/gallery/targaryen-kiz-isteme.webp",
     "caption": "father'ın emri, mother'ın kavliyle kızınız naella'yı oğlumuz gaelor'a istiyoruz",
     "characterIds": [
       "baelenys-targaryen",
@@ -1207,7 +1207,7 @@
   },
   {
     "id": "gallery-mslvs4e3",
-    "src": "/images/gallery/targaryen-bulvar-avm.png",
+    "src": "/images/gallery/targaryen-bulvar-avm.webp",
     "caption": "SAMSUN HATIRASI",
     "characterIds": [
       "baelenys-targaryen",
@@ -1229,7 +1229,7 @@
   },
   {
     "id": "gallery-mslvqeek",
-    "src": "/images/gallery/targaryen-bandirma.png",
+    "src": "/images/gallery/targaryen-bandirma.webp",
     "caption": "atatürk'ün dragonstone'dan king's landing'e geldiği vapur, bandırma the black dread",
     "characterIds": [
       "baelenys-targaryen",
@@ -1251,7 +1251,7 @@
   },
   {
     "id": "gallery-mslvp15b",
-    "src": "/images/gallery/targaryen-ataturk-aniti.png",
+    "src": "/images/gallery/targaryen-ataturk-aniti.webp",
     "caption": "Targaryen Hanesi, 99 AC (After Atatürk's Conquest)",
     "characterIds": [
       "baelenys-targaryen",
@@ -1273,7 +1273,7 @@
   },
   {
     "id": "gallery-mslvnfjl",
-    "src": "/images/gallery/targaryen-amazon-koyu.png",
+    "src": "/images/gallery/targaryen-amazon-koyu.webp",
     "caption": "ejderhalar daha iyi",
     "characterIds": [
       "baelenys-targaryen",
@@ -1295,7 +1295,7 @@
   },
   {
     "id": "gallery-mslvmmr9",
-    "src": "/images/gallery/naella-nightgown.png",
+    "src": "/images/gallery/naella-nightgown.webp",
     "caption": "Princess Naella Velaryon.",
     "characterIds": [
       "naella-velaryon"
@@ -1311,7 +1311,7 @@
   },
   {
     "id": "gallery-mslvk81f",
-    "src": "/images/gallery/lorenah-nightgown.png",
+    "src": "/images/gallery/lorenah-nightgown.webp",
     "caption": "Lady Lorenah Dayne.",
     "characterIds": [
       "lorenah-dayne"
@@ -1327,7 +1327,7 @@
   },
   {
     "id": "gallery-mslvf3sd",
-    "src": "/images/gallery/jace-baelor-trial.png",
+    "src": "/images/gallery/jace-baelor-trial.webp",
     "caption": "trial of six seven ",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1348,7 +1348,7 @@
   },
   {
     "id": "gallery-mslvb2l8",
-    "src": "/images/gallery/jace-atakum.png",
+    "src": "/images/gallery/jace-atakum.webp",
     "caption": "kraliyet adına atakum körfez sahiline ziyaretlerimizi gerçekleştirdik. atakum belediyesini kutlarım. mutlaka tekrar geleceğim. - westeros başbakanı ceyhun tarıkoğlu",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1364,7 +1364,7 @@
   },
   {
     "id": "gallery-mslvaimb",
-    "src": "/images/gallery/jace-adana.png",
+    "src": "/images/gallery/jace-adana.webp",
     "caption": "adana mı yesek",
     "characterIds": [
       "jacaelon-targaryen"
@@ -1402,7 +1402,7 @@
   },
   {
     "id": "gallery-mslv4ypi",
-    "src": "/images/gallery/gaelor-jace-bisiklet.png",
+    "src": "/images/gallery/gaelor-jace-bisiklet.webp",
     "caption": "agalarla incesu",
     "characterIds": [
       "gaelor-targaryen",
@@ -1419,7 +1419,7 @@
   },
   {
     "id": "gallery-mslv2fqv",
-    "src": "/images/gallery/gaelor-jace-baelenys-infirmary.jpeg",
+    "src": "/images/gallery/gaelor-jace-baelenys-infirmary.webp",
     "caption": "güreşip bi taraflarımızı kırdıktan sonra aynı odada yatarken kardeşcanla",
     "characterIds": [
       "gaelor-targaryen",
@@ -1442,7 +1442,7 @@
   },
   {
     "id": "gallery-mskqis7u",
-    "src": "/images/gallery/jace-gaelor-atakent.png",
+    "src": "/images/gallery/jace-gaelor-atakent.webp",
     "caption": "what jace saw in the front camera during the tilt",
     "characterIds": [
       "gaelor-targaryen",
@@ -1887,7 +1887,7 @@
   },
   {
     "id": "gallery-mriabu5c",
-    "src": "/images/gallery/visenor-trying-to-gargle-daddy.jpeg",
+    "src": "/images/gallery/visenor-trying-to-gargle-daddy.webp",
     "caption": "THINK MARK THINK",
     "characterIds": [
       "visenor-targaryen",
@@ -1926,7 +1926,7 @@
   },
   {
     "id": "gallery-mria6m2b",
-    "src": "/images/gallery/visenor-mjgoat.jpg",
+    "src": "/images/gallery/visenor-mjgoat.webp",
     "caption": "visenor mağaradayken duvara yansıyan gölge",
     "characterIds": [
       "visenor-targaryen"
@@ -1971,7 +1971,7 @@
   },
   {
     "id": "gallery-mria3lqb",
-    "src": "/images/gallery/targaryen-family-portrait1.png",
+    "src": "/images/gallery/targaryen-family-portrait1.webp",
     "caption": "House of the Dragon.",
     "characterIds": [
       "baelenys-targaryen",
@@ -2046,7 +2046,7 @@
   },
   {
     "id": "gallery-mria1c10",
-    "src": "/images/gallery/jhagar-overlooking-kings-landing.png",
+    "src": "/images/gallery/jhagar-overlooking-kings-landing.webp",
     "caption": "Baby Jhagar overlooking King's Landing.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2069,7 +2069,7 @@
   },
   {
     "id": "gallery-mri9zyf1",
-    "src": "/images/gallery/jace-yengeden-makas.png",
+    "src": "/images/gallery/jace-yengeden-makas.webp",
     "caption": "Yengeden makas alınca Jace",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2091,7 +2091,7 @@
   },
   {
     "id": "gallery-mri9yw60",
-    "src": "/images/gallery/jace-when-he-realized-curtahh.jpeg",
+    "src": "/images/gallery/jace-when-he-realized-curtahh.webp",
     "caption": "smh",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2109,7 +2109,7 @@
   },
   {
     "id": "gallery-mri9y5u6",
-    "src": "/images/gallery/jace-visenor-getting-along.png",
+    "src": "/images/gallery/jace-visenor-getting-along.webp",
     "caption": "the Manipulator & the Scholar.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2142,7 +2142,7 @@
   },
   {
     "id": "gallery-mri9x0ro",
-    "src": "/images/gallery/jace-sicko-on-the-throne.png",
+    "src": "/images/gallery/jace-sicko-on-the-throne.webp",
     "caption": "...yarın King?",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2158,7 +2158,7 @@
   },
   {
     "id": "gallery-mri9v7lk",
-    "src": "/images/gallery/jace-sicko.png",
+    "src": "/images/gallery/jace-sicko.webp",
     "caption": "Bugün Hand...",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2174,7 +2174,7 @@
   },
   {
     "id": "gallery-mri9qqj6",
-    "src": "/images/gallery/jace-saera-intimate.png",
+    "src": "/images/gallery/jace-saera-intimate.webp",
     "caption": "Rebels.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2191,7 +2191,7 @@
   },
   {
     "id": "gallery-mri9q1l1",
-    "src": "/images/gallery/jace-overthinking-alester-gift.png",
+    "src": "/images/gallery/jace-overthinking-alester-gift.webp",
     "caption": "Jace missing Ser Alester.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2207,7 +2207,7 @@
   },
   {
     "id": "gallery-mri9p5oh",
-    "src": "/images/gallery/jace-overthinking-alester.png",
+    "src": "/images/gallery/jace-overthinking-alester.webp",
     "caption": "Jace, worried about Ser Alester.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2223,7 +2223,7 @@
   },
   {
     "id": "gallery-mri9nayi",
-    "src": "/images/gallery/jace-nightmares-alester.png",
+    "src": "/images/gallery/jace-nightmares-alester.webp",
     "caption": "Alester gidince Jace'in kâbuslar",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2258,7 +2258,7 @@
   },
   {
     "id": "gallery-mri9lt6q",
-    "src": "/images/gallery/jace-lorenah-flirty.png",
+    "src": "/images/gallery/jace-lorenah-flirty.webp",
     "caption": "Jace & Lorenah.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2299,7 +2299,7 @@
   },
   {
     "id": "gallery-mri9ivtq",
-    "src": "/images/gallery/jace-became-hand.jpeg",
+    "src": "/images/gallery/jace-became-hand.webp",
     "caption": "Jace becoming the Hand.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2320,7 +2320,7 @@
   },
   {
     "id": "gallery-mri9ihjh",
-    "src": "/images/gallery/jace-arm-on-face.jpeg",
+    "src": "/images/gallery/jace-arm-on-face.webp",
     "caption": "Jace.",
     "characterIds": [
       "jacaelon-targaryen"
@@ -2336,7 +2336,7 @@
   },
   {
     "id": "gallery-mri9hjbo",
-    "src": "/images/gallery/jace-alester-dorne-wine.png",
+    "src": "/images/gallery/jace-alester-dorne-wine.webp",
     "caption": "Jace & Alester enjoying Dornish wine.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2354,7 +2354,7 @@
   },
   {
     "id": "gallery-mri9cqw8",
-    "src": "/images/gallery/jace-alester-dorne-sunset.png",
+    "src": "/images/gallery/jace-alester-dorne-sunset.webp",
     "caption": "Jace & Alester enjoying the Dornish meadows.",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2372,7 +2372,7 @@
   },
   {
     "id": "gallery-mri9bsbh",
-    "src": "/images/gallery/jace-alester-cool.png",
+    "src": "/images/gallery/jace-alester-cool.webp",
     "caption": "Prince Jacaelon Targaryen and Ser Alester Dayne ",
     "characterIds": [
       "jacaelon-targaryen",
@@ -2402,7 +2402,7 @@
   },
   {
     "id": "gallery-mri95xhy",
-    "src": "/images/gallery/gaelor-when-hes-not-torturing.jpeg",
+    "src": "/images/gallery/gaelor-when-hes-not-torturing.webp",
     "caption": "Gaylord fr",
     "characterIds": [
       "gaelor-targaryen"
@@ -2534,7 +2534,7 @@
   },
   {
     "id": "gallery-mri8rwyg",
-    "src": "/images/gallery/boneskin-cave.png",
+    "src": "/images/gallery/boneskin-cave.webp",
     "caption": "Boneskin.",
     "characterIds": [
       "visenor-targaryen"
@@ -2573,7 +2573,7 @@
   },
   {
     "id": "gallery-mri8nlag",
-    "src": "/images/gallery/alester-i-fear-no-man.jpeg",
+    "src": "/images/gallery/alester-i-fear-no-man.webp",
     "caption": "Jace's enemies",
     "characterIds": [
       "alester-dayne"
@@ -2654,7 +2654,7 @@
   },
   {
     "id": "gallery-001",
-    "src": "/images/gallery/the-dragon-children.png",
+    "src": "/images/gallery/the-dragon-children.webp",
     "caption": "The Dragon Children",
     "characterIds": [
       "gaelor-targaryen",

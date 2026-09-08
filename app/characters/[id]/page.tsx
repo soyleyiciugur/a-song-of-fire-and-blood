@@ -11,6 +11,7 @@ import CharacterBiography from "@/components/character/CharacterBiography";
 import CharacterTraits from "@/components/character/CharacterTraits";
 import CharacterRelationships from "@/components/character/CharacterRelationships";
 import type { Character } from "@/types/character";
+import contentStyles from "@/components/character/characterContent.module.css";
 import styles from "./characterDetail.module.css";
 
 type Props = {
@@ -52,15 +53,29 @@ export default async function CharacterPage({ params }: Props) {
             <CharacterTraits traits={character.traits} />
 
             <CharacterRelationships
+              characterId={character.id}
               relationships={character.relationships as Record<string, string>}
             />
 
             {quotes.length > 0 && (
-              <section>
-                <h2 className={styles.quotesHeading}>Notable Quotes</h2>
-                {quotes.map((q, i) => (
-                  <CharacterQuote key={i} quote={q} />
-                ))}
+              <section className={contentStyles.sectionPanel}>
+                <div className={contentStyles.sectionHeader}>
+                  <div className={contentStyles.sectionTitleGroup}>
+                    <span className={contentStyles.sectionEyebrow}>
+                      Words remembered
+                    </span>
+                    <h2 className={contentStyles.sectionTitle}>Notable Quotes</h2>
+                  </div>
+                  <p className={contentStyles.sectionHint}>
+                    {quotes.length} {quotes.length === 1 ? "quote" : "quotes"}
+                  </p>
+                </div>
+
+                <div className={contentStyles.quoteList}>
+                  {quotes.map((quote, index) => (
+                    <CharacterQuote key={index} quote={quote} />
+                  ))}
+                </div>
               </section>
             )}
           </div>
