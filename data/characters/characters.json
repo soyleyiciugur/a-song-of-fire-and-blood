@@ -172,7 +172,7 @@
       "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
       "visenor-targaryen": "Formerly his most trusted heir. That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
     },
-    "summary": "King Baelenys has ruled the realm through fear, strength, and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence with his own exiled brother Vahaemon shattered his already fragile trust in his children, especially Visenor, whom he struck down before the entire court and gave an impossible choice: kill his wife, or lose everything. Having named Jacaelon his new Hand after Derrin Hightower's treason and secret execution, Baelenys now moves toward war with House Tyrell, Hightower, and ultimately his own exiled brother with the same merciless certainty that has defined his reign. His drunken violence against Queen Jaery and the drawn sword leveled at his own sons in a midnight corridor suggest a man whose grip on himself is loosening even as his grip on the realm tightens.",
+    "summary": "King Baelenys has ruled the realm through fear, strength, and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence with his own exiled brother Vahaemon shattered his already fragile trust in his children, especially Visenor, whom he struck down before the entire court and gave an impossible choice: kill his wife, or lose everything. Having named Jacaelon his new Hand after Derrin Hightower's treason and secret execution, Baelenys now moves toward war with House Tyrell, Hightower, and ultimately his own exiled brother with the same merciless certainty that has defined his reign. His drunken violence against Queen Jaery and the drawn sword leveled at his own sons in a midnight corridor suggest a man whose grip on himself is loosening even as his grip on the realm tightens. A history lesson recounts how he rescued Vahaemon and claimed Maelwing at Cloudpass on the Twelfth Day of the Second Moon, 56 AC. On the Fourteenth Day of the Eighth Moon, 99 AC, he promises Gaelor command of the City Watch in a couple of days, on condition that the prince keep peace with Jacaelon.",
     "quotes": []
   },
   {
@@ -224,7 +224,7 @@
       "visenor-targaryen": "He has influenced Visenor from a distance through scholarship rather than counsel. In exile, the prince uncovered Baelor's research and private letters on dragons, dreamers, and Vahaemon, turning his great-uncle's abandoned studies into part of his own search for answers.",
       "visenya-targaryen": "He remembers Visenya as the strange, grim child she once was and is now one of the few people at court trying to reason through what the woman she became may actually want. Her return turned an old family memory into a present strategic threat."
     },
-    "summary": "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid the Tyrell-Hightower treason crisis, Baelor arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy.",
+    "summary": "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid the Tyrell-Hightower treason crisis, Baelor arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
     "quotes": []
   },
   {
@@ -508,7 +508,7 @@
       "Counter Jace before he can undermine Gaelor's future reign",
       "Use Cordin's men to watch Jace and his inner circle",
       "Investigate whether Alester Dayne killed Curtass Whent",
-      "Seek command of the City Watch and expand his independent power base"
+      "Assume command of the City Watch in a couple of days, double security checks, and build a private network of informers"
     ],
     "relationships": {
       "alester-dayne": "Now suspects Alester may be the large blond knight connected to Curtass Whent's death. Gaelor fed Cordin a false claim that a Red Keep headcount left only Alester unaccounted for and ordered the matter investigated.",
@@ -531,15 +531,16 @@
       "malaenar-targaryen": "He knows Malaenar as the steady uncle who has remained on Dragonstone while the rest of the dynasty tears itself apart. Their contact at the nameday reunion pulled Gaelor directly into the older generation's wounds over succession, exile, and Baelenys's past.",
       "naella-velaryon": "His wife and closest private confidante. Naella has become increasingly protective of his political future, warning that Jace and Lorenah together may become a coordinated threat and urging Gaelor to place them under surveillance.",
       "renrose-tyrell": "He regards Renrose as the head of a house that will never forgive Oldtown and may strike at the Crown again if given room. Gaelor does not know the full extent of Renrose's private support for Visenor, but already considers Highgarden a succession threat.",
-      "saathos-maris": "Trusted knight, mentor, and drinking companion who indulges his temper more than he probably should; dispatched south to investigate Curtass Whent's death.",
+      "saathos-maris": "His companion during the Watch inspections and a drunken night in Flea Bottom. At Gaelor's order Saathos gathers gold cloaks to surround the mummers' tent; during the ensuing crush he uses his shield and sword flat rather than its edge.",
       "saera-targaryen": "Rarely in open conflict, but her disgust after the Oldtown Massacre was plain; she called him a deranged psychopath before the King.",
       "tansy-riverside": "He noticed Tansy more than once during the Dragonstone feast and understood the invitation in her attention. Gaelor deliberately stepped away before flirtation could become another scandal.",
       "timos-hightower": "Executed him personally at Oldtown to enforce the King's justice — a killing that spiraled into a massacre he did not fully intend and cannot entirely escape.",
       "tion-lannister": "He has little patience for Tion's caution and treasury-minded objections. Their council exchanges regularly reduce to Tion calling Gaelor reckless and Gaelor dismissing him as timid.",
       "vhaemys-targaryen": "The little princess he has promised will always be his most loved, however many nieces and nephews may follow; she, in turn, defends him against everyone in the family who calls him a monster.",
-      "visenor-targaryen": "Frustrated by what he sees as weakness, though it was Gaelor who beat the poisoner's confession out of the dying assassin himself."
+      "visenor-targaryen": "Frustrated by what he sees as weakness, though it was Gaelor who beat the poisoner's confession out of the dying assassin himself.",
+      "oswald": "Resents the impending loss of command, but is offered a place at Gaelor's right hand with unchanged pay."
     },
-    "summary": "Gaelor's rivalry with Jace has moved beyond bruised pride. After the tourney and Brant Costayne's trial, he has begun treating his brother as a future political threat to his reign. At Naella's urging, Gaelor approached Maester Cordin in secret and authorized surveillance of Jace and his inner circle. Cordin also agreed to investigate Gaelor's suspicion that Ser Alester Dayne may have been involved in Curtass Whent's death, a theory Gaelor strengthened with a deliberate lie about a Red Keep headcount. Cordin further urged him to ask King Baelenys for command of the City Watch, giving Gaelor an independent network of armed men and information throughout King's Landing. The prince intends to do exactly that.",
+    "summary": "Gaelor's rivalry with Jace has moved beyond bruised pride. After the tourney and Brant Costayne's trial, he has begun treating his brother as a future political threat to his reign. At Naella's urging, Gaelor approached Maester Cordin in secret and authorized surveillance of Jace and his inner circle. Cordin also agreed to investigate Gaelor's suspicion that Ser Alester Dayne may have been involved in Curtass Whent's death, a theory Gaelor strengthened with a deliberate lie about a Red Keep headcount. Cordin further urged him to ask King Baelenys for command of the City Watch, giving Gaelor an independent network of armed men and information throughout King's Landing.  On the Fourteenth Day of the Eighth Moon, Baelenys agrees to give him command of the City Watch in a couple of days, conditional on keeping peace with Jace. Gaelor begins inspecting the Watch and proposes doubled checks and personal informers. That night in Flea Bottom, he kills two actors with Blackfyre during a satire of the royal family. His cordon traps the fleeing audience; panic, trampling and Watch swords leave eighteen additional smallfolk dead and roughly a dozen badly wounded. He eventually orders the guards to let the crowd go.",
     "quotes": []
   },
   {
@@ -620,7 +621,7 @@
       "visenya-targaryen": "His cousin, Vahaemon's daughter — who climbed into his bed in a Flea Bottom brothel believing him to be Gaelor, held Dark Sister to his throat throughout, and vanished before he or Alester could catch her. The encounter left a cut on his neck and a great deal of unanswered questions.",
       "weylar-rocke": "His personal spymaster, pardoned from the black cells to ensure loyalty born of terror; first brought him news of Gaelor's brothel visit, and more recently delivered early warning of the Oldtown Massacre's worst details."
     },
-    "summary": "Prince Jacaelon remains Hand of the King, knight, conspirator, and one of the sharpest political minds in the royal family, but his private life has crossed a threshold just as dangerous as his public one. On the Ninth Day of the Eighth Moon, in a secluded valley reachable only by dragonback, Jace asked Lorenah Dayne to marry him. Jhagar carried the gift: a necklace crafted from Cloudgazer's shed horn-scales. Lorenah accepted, making the pair formally betrothed in all but whatever negotiations remain with their houses. Saera helped arrange the moment, Vhaemys watched with jealous fascination, and Alester stood close by. Jace now intends to travel toward Dorne while Gaelor, unknown to him, has begun building a private surveillance network around Maester Cordin specifically to watch Jace and everyone close to him.",
+    "summary": "Prince Jacaelon remains Hand of the King, knight, conspirator, and one of the sharpest political minds in the royal family, but his private life has crossed a threshold just as dangerous as his public one. On the Ninth Day of the Eighth Moon, in a secluded valley reachable only by dragonback, Jace asked Lorenah Dayne to marry him. Jhagar carried the gift: a necklace crafted from Cloudgazer's shed horn-scales. Lorenah accepted, making the pair formally betrothed in all but whatever negotiations remain with their houses. Saera helped arrange the moment, Vhaemys watched with jealous fascination, and Alester stood close by. Jace now intends to travel toward Dorne while Gaelor, unknown to him, has begun building a private surveillance network around Maester Cordin specifically to watch Jace and everyone close to him. He asks Daria to oversee Vhaemys's lessons, then discusses Melessa Hightower's conciliatory letter with Baelor. He promises to support Baelor's eventual return to the Citadel once the realm is settled. His questions about Dreamers and camouflaged dragons lead to accounts of Ghost, an ancient pale she-dragon presumed dead by Baelor. Jace requests a discreet investigation concerning Visenya Targaryen.",
     "quotes": []
   },
   {
@@ -734,7 +735,7 @@
       "vhaemys-targaryen": "Their first meeting began with Vhaemys's hostility and jealousy. During Jace's proposal outing Lorenah kissed the little princess's cheek and personally fastened a pair of Cloudgazer-horn earrings on her, beginning a small but genuine thaw.",
       "visenor-targaryen": "Granted him and Rhaella sanctuary at Starfall fully aware of what it could cost House Dayne if discovered; told him plainly that at some point he will have to leave."
     },
-    "summary": "Lorenah Dayne entered King's Landing as a politically careful Dornish guest and has now become Prince Jacaelon's intended wife. After their growing intimacy in Flea Bottom and on Dragonstone, Jace brought her to the secluded Cloudpass valley on the Ninth Day of the Eighth Moon and proposed with a necklace made from Cloudgazer's shed horn-scales. Lorenah accepted, telling him plainly that the honor she wanted was not a title in the Red Keep but a life beside him. The betrothal places her directly inside the royal family's factional struggle: Naella Velaryon already regards her as a potential second enemy beside Jace, while Vhaemys's childish hostility has begun to soften after Lorenah treated her with affection during the proposal outing.",
+    "summary": "Lorenah Dayne entered King's Landing as a politically careful Dornish guest and has now become Prince Jacaelon's intended wife. After their growing intimacy in Flea Bottom and on Dragonstone, Jace brought her to the secluded Cloudpass valley on the Ninth Day of the Eighth Moon and proposed with a necklace made from Cloudgazer's shed horn-scales. Lorenah accepted, telling him plainly that the honor she wanted was not a title in the Red Keep but a life beside him. The betrothal places her directly inside the royal family's factional struggle: Naella Velaryon already regards her as a potential second enemy beside Jace, while Vhaemys's childish hostility has begun to soften after Lorenah treated her with affection during the proposal outing. Daria reports Weylar's conspicuous drunkenness, Gaelor's alliance with Cordin and Naella's encouragement of his ambitions. Lorenah declines Daria's suggestion of acting against Naella, intends to speak with Jace, and tells Daria to stop Weylar from drawing attention.",
     "quotes": []
   },
   {
@@ -1240,9 +1241,11 @@
       "alester-dayne": "Trained him personally; considers him the finest blade he has ever produced. His unauthorized absence protecting Prince Visenor has not gone unnoticed and will not go unpunished forever.",
       "baelenys-targaryen": "Serves him with rigid, unquestioning discipline.",
       "grance-morrigen": "His brother, Ser Grance Morrigen.",
-      "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence; openly assessed him ready for knighthood, told him he could not quite beat Alester yet but was close, and watched Jace choose Alester's hand over his for the ceremony itself. The slight was real. He showed no sign of minding."
+      "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence; openly assessed him ready for knighthood, told him he could not quite beat Alester yet but was close, and watched Jace choose Alester's hand over his for the ceremony itself. The slight was real. He showed no sign of minding.",
+      "reyenald-reyne": "Trains the talented young swordsman and warns him against arrogance.",
+      "lucas-corbray": "Welcomes his fellow Kingsguard back from the Vale and entrusts Vhaemys to him."
     },
-    "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told. He trained both Alester Dayne and Prince Jacaelon; the latter chose his sworn shield's sword over his Lord Commander's for the knighting ceremony, which Morrigen absorbed in silence and has not mentioned since.",
+    "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told. He trained both Alester Dayne and Prince Jacaelon; the latter chose his sworn shield's sword over his Lord Commander's for the knighting ceremony, which Morrigen absorbed in silence and has not mentioned since. He privately trains thirteen-year-old Reyenald Reyne, warning him against arrogance, before Vhaemys interrupts. He welcomes Lucas Corbray back from the Vale and leaves the princess in his care.",
     "quotes": []
   },
   {
@@ -1288,7 +1291,7 @@
       "gaelor-targaryen": "Sworn knight, loyal protector, and one of the few people willing to needle him with dark humor even in the worst moments; visited him in the infirmary after the tourney tilt and woke him up by slapping his shoulder.",
       "jacaelon-targaryen": "He knows Jace chiefly as Gaelor's rival and the other prince around whom court tensions gather. Their clearest direct clash came in the tourney, where Saathos shattered Jace's shield before Jace broke his arm and unhorsed him; the prince's immediate concern afterward tempered the humiliation."
     },
-    "summary": "Ser Saathos Maris is the sworn knight of Prince Gaelor Targaryen. Disciplined, dependable, and unwavering in duty, he represents the military backbone of Gaelor's authority. During the poisoning crisis, he assisted in tracking the assassin and later defied political pressure by refusing the Hand entry into the dungeon. He rode at Gaelor's side through the bloody march on Oldtown and the massacre that followed. Sent south by Baelor Targaryen to investigate Curtass Whent's death, he returned with incomplete answers and a growing private suspicion about who the blonde knight at the sept really was — a suspicion he has not yet taken anywhere.",
+    "summary": "Ser Saathos Maris is the sworn knight of Prince Gaelor Targaryen. Disciplined, dependable, and unwavering in duty, he represents the military backbone of Gaelor's authority. During the poisoning crisis, he assisted in tracking the assassin and later defied political pressure by refusing the Hand entry into the dungeon. He rode at Gaelor's side through the bloody march on Oldtown and the massacre that followed. Sent south by Baelor Targaryen to investigate Curtass Whent's death, he returned with incomplete answers and a growing private suspicion about who the blonde knight at the sept really was — a suspicion he has not yet taken anywhere. On the Fourteenth Day of the Eighth Moon he accompanies Gaelor through the Watch barracks and Flea Bottom. He brings six gold cloaks into a mummers' tent at the prince's command. When Gaelor kills two actors and the audience stampedes, Saathos uses his shield and sword flat, refusing to use the edge. Eighteen smallfolk die in the ensuing crush and violence.",
     "quotes": []
   },
   {
@@ -1533,9 +1536,10 @@
       "lorenah-dayne": "Still jealous of the attention Jace gives Lorenah, but their hostility has begun to thaw. During Jace's proposal outing Vhaemys allowed Lorenah to kiss her cheek and happily accepted earrings that Lorenah fastened for her, though she remained jealous of Lorenah's necklace.",
       "maela-targaryen": "Her older sister and Jace's twin. Vhaemys looks to Maela as another familiar presence within the royal family even if their bond has not yet been tested by the same crises as her attachments to Jace, Saera, Gaelor, and Alester.",
       "saera-targaryen": "Her older sister, toward whom she gravitates when the castle turns frightening and Jace or Alester are unavailable.",
-      "visenor-targaryen": "Her eldest brother among the King's children. His disappearance is one of the great absences in the family, though Vhaemys is too young to understand the politics that forced him away."
+      "visenor-targaryen": "Her eldest brother among the King's children. His disappearance is one of the great absences in the family, though Vhaemys is too young to understand the politics that forced him away.",
+      "lucas-corbray": "Her beloved Mustang carries her on his shoulders and indulges her, while secretly sparing servants from her punishments."
     },
-    "summary": "The youngest child of King Baelenys remains affectionate, jealous, and dangerously impressionable. Her attachment to Jace has made Lorenah an obvious rival for his attention, but the hostility is no longer absolute. During the Cloudpass proposal Vhaemys watched Jace ask Lorenah to marry him, grudgingly allowed Lorenah to kiss her cheek, and delighted in a pair of earrings made from Cloudgazer's shed horn-scales, which Lorenah personally fastened for her. The little princess still wanted the necklace too.",
+    "summary": "The youngest child of King Baelenys remains affectionate, jealous, and dangerously impressionable. Her attachment to Jace has made Lorenah an obvious rival for his attention, but the hostility is no longer absolute. During the Cloudpass proposal Vhaemys watched Jace ask Lorenah to marry him, grudgingly allowed Lorenah to kiss her cheek, and delighted in a pair of earrings made from Cloudgazer's shed horn-scales, which Lorenah personally fastened for her. The little princess still wanted the necklace too. She reunites with Lucas Corbray, her adored Mustang, after his absence in the Vale. Lucas quietly spares the kitchen maids whom she orders imprisoned, while Jace presses her to thank them, clean up and attend her lessons.",
     "quotes": []
   },
   {
@@ -3073,7 +3077,7 @@
       "naella-velaryon": "Learned through another maid that Naella had been urging Gaelor to move more aggressively against Jace. Daria jokingly offered to 'handle' the princess, an offer Lorenah declined.",
       "weylar-rocke": "Has observed Jace's spymaster drinking heavily, running up bills in Flea Bottom in the prince's name, and getting himself beaten. Lorenah instructed Daria to speak with him and make him stop drawing attention."
     },
-    "summary": "Daria Sand is a twenty-three-year-old Dornish maid who came to King's Landing in Lorenah Dayne's household and serves as far more than a domestic attendant. She acts as Lorenah's eyes and ears among the servants and in the lower reaches of the city. Early in the sixteenth chapter, Daria reported Weylar Rocke's increasingly conspicuous drunken behavior in Flea Bottom, the emerging alliance between Prince Gaelor and Maester Cordin, and Naella Velaryon's efforts to push Gaelor into action against Jace. Lorenah treated the intelligence seriously but without panic and ordered Daria to deal with Weylar's public foolishness.",
+    "summary": "Daria Sand is a twenty-three-year-old Dornish maid who came to King's Landing in Lorenah Dayne's household and serves as far more than a domestic attendant. She acts as Lorenah's eyes and ears among the servants and in the lower reaches of the city. Early in the sixteenth chapter, Daria reported Weylar Rocke's increasingly conspicuous drunken behavior in Flea Bottom, the emerging alliance between Prince Gaelor and Maester Cordin, and Naella Velaryon's efforts to push Gaelor into action against Jace. Lorenah treated the intelligence seriously but without panic and ordered Daria to deal with Weylar's public foolishness. Jacaelon later asks her to watch Vhaemys and ensure that she attends her lessons.",
     "quotes": []
   },
   {
@@ -3178,6 +3182,88 @@
     "goals": [],
     "relationships": {},
     "summary": "Drack Harlaw is the seventy-five-year-old Lord of Harlaw, an Ironborn noble of House Harlaw. Surviving portraits also preserve his appearance at forty-one, decades before the present day.",
+    "quotes": []
+  },
+  {
+    "id": "lucas-corbray",
+    "name": "Ser Lucas Corbray",
+    "nickname": "Mustang",
+    "aliases": [],
+    "house": "House Corbray",
+    "title": "Knight of the Kingsguard",
+    "status": "Alive",
+    "age": 40,
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Powerful",
+      "Protective",
+      "Indulgent"
+    ],
+    "goals": [],
+    "relationships": {
+      "vhaemys-targaryen": "His beloved charge, whom he indulges and protects; she helped give him the nickname Mustang.",
+      "orwell-morrigen": "His Lord Commander, who welcomes him back from the Vale.",
+      "jacaelon-targaryen": "Cooperates with Jace to spare the kitchen maids and gently manage Vhaemys."
+    },
+    "summary": "Known as the Mustang, Lucas Corbray stands second only to the Lord Commander among the Kingsguard. Bald, scarred and immensely strong, he returns to the Red Keep after nearly a moon and a half in the Vale. He adores Vhaemys, who reminds him of his dead younger sister, and quietly sends servants away for the day when the princess demands their punishment.",
+    "quotes": []
+  },
+  {
+    "id": "reyenald-reyne",
+    "name": "Reyenald Reyne",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Reyne",
+    "title": "Young swordsman training at the Red Keep",
+    "status": "Alive",
+    "age": 13,
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "orwell-morrigen",
+    "dragon": "-",
+    "traits": [
+      "Talented",
+      "Arrogant"
+    ],
+    "goals": [],
+    "relationships": {
+      "orwell-morrigen": "His sword instructor, who warns him against overconfidence.",
+      "vhaemys-targaryen": "Meets the princess after she interrupts his practice."
+    },
+    "summary": "A thirteen-year-old boy with striking crimson hair, Reyenald trains with wooden swords under Lord Commander Orwell Morrigen. Orwell praises his skill but warns that his arrogance could kill him. Their practice ends when Princess Vhaemys interrupts.",
+    "quotes": []
+  },
+  {
+    "id": "oswald",
+    "name": "Ser Oswald",
+    "nickname": "-",
+    "aliases": [],
+    "house": "-",
+    "title": "Commander of the City Watch",
+    "status": "Alive",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {
+      "gaelor-targaryen": "Resents the impending loss of command, but is offered a place at Gaelor's right hand with unchanged pay.",
+      "baelor-targaryen": "The Grand Maester anticipates his resentment at losing command."
+    },
+    "summary": "A seasoned commander in his late forties, Oswald learns that King Baelenys has promised his post to Prince Gaelor in a couple of days. Until then the title remains his. Gaelor offers to retain his pay and most duties. Resentful of the impending demotion, Oswald nevertheless begins discussing security reforms after learning of Visenya's undetected entry into the capital.",
     "quotes": []
   }
 ]

@@ -642,5 +642,80 @@
         ]
       }
     ]
+  },
+  {
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "date": "14th of the 8th Moon, 99 AC (with a flashback to 12th of the 2nd Moon, 56 AC)",
+    "events": [
+      {
+        "title": "Baelenys claims Maelwing",
+        "description": "A historical account recounts Vahaemon's disastrous attempt to approach Maelwing. Baelenys rescues his brother and claims the dragon while Grance Morrigen and Myles Mooton pull Vahaemon to safety.",
+        "date": "12th of the 2nd Moon, 56 AC",
+        "characters": [
+          "baelenys-targaryen",
+          "vahaemon-targaryen",
+          "derrin-hightower",
+          "grance-morrigen",
+          "myles-mooton"
+        ]
+      },
+      {
+        "title": "Daria reports to Lorenah",
+        "description": "Daria exposes Gaelor and Cordin's alliance and reports Weylar's drunken behavior. Lorenah orders her to curb Weylar's indiscretion.",
+        "date": "14th of the 8th Moon",
+        "characters": [
+          "daria-sand",
+          "lorenah-dayne",
+          "weylar-rocke",
+          "gaelor-targaryen",
+          "cordin-poole"
+        ]
+      },
+      {
+        "title": "Gaelor is promised the City Watch",
+        "description": "Baelenys promises Gaelor command in a couple of days, provided he keeps peace with Jace. Oswald retains the title for now. Gaelor proposes doubled security checks and his own informers.",
+        "date": "14th of the 8th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "baelenys-targaryen",
+          "baelor-targaryen",
+          "oswald",
+          "saathos-maris"
+        ]
+      },
+      {
+        "title": "The Mustang returns",
+        "description": "Lucas Corbray returns from the Vale. Orwell trains Reyenald Reyne, and Lucas quietly protects the kitchen servants from Vhaemys's demands for punishment.",
+        "date": "14th of the 8th Moon",
+        "characters": [
+          "lucas-corbray",
+          "orwell-morrigen",
+          "reyenald-reyne",
+          "vhaemys-targaryen",
+          "jacaelon-targaryen"
+        ]
+      },
+      {
+        "title": "A letter from Oldtown and the mystery of Ghost",
+        "description": "Baelor receives a conciliatory invitation from Melessa Hightower. Jace questions him about Dreamers and Ghost, an ancient camouflaged she-dragon Baelor believes dead, then asks for a quiet investigation concerning Visenya.",
+        "date": "14th of the 8th Moon",
+        "characters": [
+          "baelor-targaryen",
+          "jacaelon-targaryen",
+          "melessa-hightower",
+          "visenya-targaryen"
+        ]
+      },
+      {
+        "title": "The Mummers' Blood",
+        "description": "Gaelor kills two actors with Blackfyre. His gold-cloak cordon traps the fleeing audience, and eighteen additional smallfolk die: three children, four women and eleven men. Roughly a dozen more are badly wounded. Saathos uses his shield and sword flat; Gaelor finally orders the crowd released.",
+        "date": "14th of the 8th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "saathos-maris"
+        ]
+      }
+    ]
   }
 ]

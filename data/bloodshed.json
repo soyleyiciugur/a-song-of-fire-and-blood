@@ -8,8 +8,15 @@
     "year": 99,
     "location": "Oldtown",
     "chapterSlug": "fathers-and-their-sins",
-    "participants": ["gaelor-targaryen", "melessa-hightower", "baelenys-targaryen"],
-    "houses": ["targaryen", "hightower"],
+    "participants": [
+      "gaelor-targaryen",
+      "melessa-hightower",
+      "baelenys-targaryen"
+    ],
+    "houses": [
+      "targaryen",
+      "hightower"
+    ],
     "summary": "Prince Gaelor's vanguard clashes with Oldtown's knights in the castle courtyard.",
     "cause": "The Crown's punishment for Hightower treason and the unresolved poison plot.",
     "consequence": "Oldtown loses two hundred knights, House Hightower is broken, and the Reach remembers the Crown's violence."
@@ -23,10 +30,39 @@
     "year": 99,
     "location": "King's Landing",
     "chapterSlug": "the-brothers-tilt",
-    "participants": ["gaelor-targaryen", "jacaelon-targaryen", "brant-costayne", "godfrey-blackwood"],
-    "houses": ["targaryen", "costayne", "blackwood"],
+    "participants": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen",
+      "brant-costayne",
+      "godfrey-blackwood"
+    ],
+    "houses": [
+      "targaryen",
+      "costayne",
+      "blackwood"
+    ],
     "summary": "A grand tourney becomes a bloody contest of pride, assassination, and dynastic rivalry.",
     "cause": "The Crown seeks spectacle and reconciliation while old enemies use the lists as cover.",
     "consequence": "Neither prince can stand after the final tilt, and the attempted assassination turns public celebration into scandal."
+  },
+  {
+    "id": "mummers-blood",
+    "title": "The Mummers' Blood",
+    "kind": "battle",
+    "day": 14,
+    "moon": 8,
+    "year": 99,
+    "location": "King's Landing",
+    "chapterSlug": "the-mummers-blood",
+    "participants": [
+      "gaelor-targaryen",
+      "saathos-maris"
+    ],
+    "houses": [
+      "targaryen"
+    ],
+    "summary": "Gaelor kills two mummers with Blackfyre during a satire of the royal family. The trapped audience stampedes into the City Watch cordon.",
+    "cause": "A satirical play enrages Gaelor, who orders gold cloaks to surround the tent before attacking the actors.",
+    "consequence": "Twenty die: two actors and eighteen smallfolk (three children, four women and eleven men). Roughly a dozen more are badly wounded, and panic spreads through Flea Bottom."
   }
 ]

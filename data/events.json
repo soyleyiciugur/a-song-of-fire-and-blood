@@ -75,5 +75,16 @@
     "moon": 8,
     "year": 99,
     "description": "A feast is held at Winterfell as the northern court gathers beneath the Stark banners."
+  },
+  {
+    "id": "mummers-blood",
+    "title": "The Mummers' Blood",
+    "type": "battle",
+    "location": "King's Landing",
+    "chapterSlug": "the-mummers-blood",
+    "day": 14,
+    "moon": 8,
+    "year": 99,
+    "description": "Gaelor kills two mummers with Blackfyre during a satire of the royal family. The trapped audience stampedes into the City Watch cordon. Twenty die: two actors and eighteen smallfolk (three children, four women and eleven men). Roughly a dozen more are badly wounded, and panic spreads through Flea Bottom."
   }
 ]

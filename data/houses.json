@@ -238,5 +238,23 @@
     "color": "#C62828",
     "secondaryColor": "#F2F2F2",
     "description": "An ancient Valyrian house of Claw Isle, House Celtigar shares with the Targaryens and Velaryons a lineage reaching back to the Freehold. Wealthy by the standards of the Crownlands and traditionally bound to Dragonstone and the Iron Throne, the Celtigars remain one of the realm's surviving houses of Valyrian blood."
+  },
+  {
+    "id": "corbray",
+    "name": "House Corbray",
+    "words": "-",
+    "seat": "-",
+    "sigilSrc": "",
+    "color": "#777777",
+    "description": "The family of Ser Lucas Corbray, the Kingsguard known as the Mustang, who returns from the Vale in the sixteenth chapter."
+  },
+  {
+    "id": "reyne",
+    "name": "House Reyne",
+    "words": "-",
+    "seat": "-",
+    "sigilSrc": "",
+    "color": "#777777",
+    "description": "The family of Reyenald Reyne, a thirteen-year-old swordsman training under Orwell Morrigen at the Red Keep."
   }
 ]

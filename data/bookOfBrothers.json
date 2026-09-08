@@ -215,6 +215,10 @@
       },
       {
         "description": "Held command of the Kingsguard through the poisoning of King Baelenys and the disappearance of Crown Prince Visenor."
+      },
+      {
+        "date": "14th of the 8th Moon, 99 AC",
+        "description": "Trained Reyenald Reyne at the Red Keep, praising his skill while warning him against arrogance."
       }
     ],
     "notes": "",
@@ -306,9 +310,25 @@
     "deeds": [
       {
         "description": "Rode with Prince Gaelor Targaryen during the Crown's march upon Oldtown."
+      },
+      {
+        "date": "14th of the 8th Moon, 99 AC",
+        "description": "Gathered gold cloaks around a mummers' tent on Gaelor's orders. During the ensuing massacre, used his shield and the flat of his sword rather than its edge."
       }
     ],
     "notes": "",
+    "published": true
+  },
+  {
+    "id": "lucas-corbray",
+    "characterId": "lucas-corbray",
+    "deeds": [
+      {
+        "date": "14th of the 8th Moon, 99 AC",
+        "description": "Returned to the Red Keep after nearly a moon and a half in the Vale and resumed caring for Princess Vhaemys. Quietly spared the kitchen maids from her demands for punishment."
+      }
+    ],
+    "notes": "Known as the Mustang; stands second only to the Lord Commander among the Kingsguard.",
     "published": true
   }
 ]
