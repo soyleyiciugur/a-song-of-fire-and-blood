@@ -35,6 +35,11 @@ export default function WorldDateCard() {
       if (charId) {
         const character: any = characters.find((c: any) => c.id === charId);
 
+        // Hidden/easter-egg characters must never leak into public upcoming lists.
+        if (character?.hidden) {
+          return false;
+        }
+
         // Public-facing card: do not let a secret death leak through the
         // disappearance of an otherwise expected nameday.
         if (character?.status === "Dead") {
@@ -43,7 +48,7 @@ export default function WorldDateCard() {
       }
 
       const char: any = event.character;
-      if (char?.status === "Dead") {
+      if (char?.hidden || char?.status === "Dead") {
         return false;
       }
 

@@ -13,8 +13,10 @@ import {
   CHARACTER_AGE_STATES,
   computeAge,
   daysUntilNextNameday,
+  daysUntilNextGregorianNameday,
   formatDaysUntil,
   formatDeathDate,
+  formatGregorianNameday,
   formatNameday,
 } from "@/lib/age";
 import worldDate from "@/data/worldDate.json";
@@ -257,12 +259,47 @@ export default function CharacterInfoBox({
       ? computeAge(character.nameday, worldDate, character.death)
       : undefined);
 
+  const isRealWorldNameday = character.id === "hrrm";
+
+  const [realWorldNamedayCountdown, setRealWorldNamedayCountdown] =
+    useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isRealWorldNameday || !character.nameday) {
+      setRealWorldNamedayCountdown(null);
+      return;
+    }
+
+    const refresh = () => {
+      setRealWorldNamedayCountdown(
+        formatDaysUntil(
+          daysUntilNextGregorianNameday(character.nameday!, new Date())
+        )
+      );
+    };
+
+    refresh();
+
+    // Keeps an open HRRM profile correct across midnight without requiring reload.
+    const interval = window.setInterval(refresh, 60 * 60 * 1000);
+    return () => window.clearInterval(interval);
+  }, [
+    isRealWorldNameday,
+    character.nameday?.day,
+    character.nameday?.moon,
+    character.nameday?.year,
+  ]);
+
   const namedayLabel = character.nameday
-    ? formatNameday(character.nameday, worldDate.era)
+    ? isRealWorldNameday
+      ? formatGregorianNameday(character.nameday)
+      : formatNameday(character.nameday, worldDate.era)
     : "-";
 
   const namedayCountdown = character.nameday
-    ? formatDaysUntil(daysUntilNextNameday(character.nameday, worldDate))
+    ? isRealWorldNameday
+      ? realWorldNamedayCountdown
+      : formatDaysUntil(daysUntilNextNameday(character.nameday, worldDate))
     : null;
 
   const deathLabel = character.death

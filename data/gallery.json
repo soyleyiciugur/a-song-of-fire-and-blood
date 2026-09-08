@@ -721,7 +721,11 @@
     "id": "gallery-mtlmy3hc",
     "src": "/images/gallery/hasocash.webp",
     "caption": "yargılama günü geldiğinde gaelor vs. jace",
-    "characterIds": [],
+    "characterIds": [
+      "hrrm",
+      "jacaelon-targaryen",
+      "gaelor-targaryen"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
@@ -735,7 +739,8 @@
     "caption": "Height: 175 cm",
     "characterIds": [
       "jacaelon-targaryen",
-      "baelenys-targaryen"
+      "baelenys-targaryen",
+      "hrrm"
     ],
     "houseIds": [
       "targaryen"
@@ -853,7 +858,8 @@
     "src": "/images/gallery/jace-hasocash.webp",
     "caption": "1000 liralık hasocash doldur, 4 paket de biscolata starz",
     "characterIds": [
-      "jacaelon-targaryen"
+      "jacaelon-targaryen",
+      "hrrm"
     ],
     "houseIds": [
       "targaryen"
@@ -923,7 +929,7 @@
     "id": "gallery-msp5o3gw",
     "src": "/videos/reels/dursec.mp4",
     "caption": "✌️dur. seç.✌️dur. seç.✌️",
-    "characterIds": [],
+    "characterIds": ["hrrm"],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
@@ -936,7 +942,8 @@
     "src": "/images/gallery/visenorgoat.jpeg",
     "caption": "visenor with his nemesis",
     "characterIds": [
-      "visenor-targaryen"
+      "visenor-targaryen",
+      "hrrm"      
     ],
     "houseIds": [
       "targaryen"
@@ -1618,7 +1625,7 @@
     "id": "gallery-mrj7ma4s",
     "src": "/videos/reels/hmd-psikolojik-siddet.mp4",
     "caption": "H.R.R.M",
-    "characterIds": [],
+    "characterIds": ["hrrm"],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": "the-weight-of-loyalty",
@@ -2392,7 +2399,7 @@
     "id": "gallery-mri9apme",
     "src": "/images/gallery/hmd-grrm.jpeg",
     "caption": "he's busy writing more lore",
-    "characterIds": [],
+    "characterIds": ["hrrm"],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,

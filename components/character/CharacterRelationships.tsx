@@ -3,7 +3,11 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import MiniPortrait from "@/components/MiniPortrait";
-import charactersData from "@/data/characters/characters.json";
+import { getCharacters } from "@/lib/characters";
+import {
+  getEffectiveRelationships,
+  type EffectiveRelationship,
+} from "@/lib/relationships";
 import {
   colorForHouse,
   secondaryColorForHouse,
@@ -13,12 +17,11 @@ import styles from "./characterContent.module.css";
 
 type Props = {
   characterId: string;
-  relationships: Record<string, string>;
+  /** Kept optional for backwards compatibility with older character page calls. */
+  relationships?: Record<string, string>;
 };
 
-type RelatedEntry = {
-  id: string;
-  description: string;
+type RelatedEntry = EffectiveRelationship & {
   character: Character;
 };
 
@@ -26,8 +29,9 @@ const WIDTH = 720;
 const HEIGHT = 390;
 const CENTER_X = WIDTH / 2;
 const CENTER_Y = HEIGHT / 2;
+const LABEL_EDGE_GUARD = 86;
 
-const characters = charactersData as Character[];
+const characters = getCharacters();
 const byId = new Map<string, Character>(
   characters.map((character) => [character.id, character])
 );
@@ -101,29 +105,32 @@ function buildRadialLayout(ids: string[]) {
   return result;
 }
 
-export default function CharacterRelationships({
-  characterId,
-  relationships,
-}: Props) {
+function labelPlacement(x: number) {
+  if (x > WIDTH - LABEL_EDGE_GUARD) {
+    return { x: -11, textAnchor: "end" as const };
+  }
+
+  return { x: 11, textAnchor: "start" as const };
+}
+
+export default function CharacterRelationships({ characterId }: Props) {
   const currentCharacter = byId.get(characterId);
-  const entries = Object.entries(relationships ?? {});
+  const entries = useMemo(
+    () => getEffectiveRelationships(characterId),
+    [characterId]
+  );
 
   const known = useMemo<RelatedEntry[]>(
     () =>
-      entries.flatMap(([id, description]) => {
-        const character = byId.get(id);
-        return character ? [{ id, description, character }] : [];
-      }),
-    [relationships]
+      entries.flatMap((entry) =>
+        entry.character ? [{ ...entry, character: entry.character }] : []
+      ),
+    [entries]
   );
 
   const unresolved = useMemo(
-    () =>
-      entries.filter(([id]) => !byId.has(id)).map(([id, description]) => ({
-        id,
-        description,
-      })),
-    [relationships]
+    () => entries.filter((entry) => !entry.character),
+    [entries]
   );
 
   const layout = useMemo(
@@ -209,6 +216,7 @@ export default function CharacterRelationships({
               const isHovered = hoveredId === entry.id;
               const highlighted = isSelected || isHovered;
               const dimmed = Boolean(activeId && activeId !== entry.id);
+              const label = labelPlacement(point.x);
 
               return (
                 <g
@@ -242,8 +250,9 @@ export default function CharacterRelationships({
                     strokeWidth={highlighted ? 2 : 1.5}
                   />
                   <text
-                    x={11}
+                    x={label.x}
                     y={4}
+                    textAnchor={label.textAnchor}
                     className={`${styles.relationshipNodeLabel} ${
                       highlighted ? styles.relationshipNodeLabelActive : ""
                     }`}
@@ -298,7 +307,7 @@ export default function CharacterRelationships({
           <ul className={styles.unresolvedList}>
             {unresolved.map((entry) => (
               <li key={entry.id} className={styles.unresolvedItem}>
-                <strong>{entry.id.replace(/-/g, " ")}</strong> — {entry.description}
+                <strong>{entry.name}</strong> — {entry.description}
               </li>
             ))}
           </ul>

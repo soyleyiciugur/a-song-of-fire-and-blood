@@ -143,3 +143,44 @@ function ordinal(n: number): string {
 
   return `${n}${s[(v - 20) % 10] || s[v] || s[0]}`;
 }
+
+/**
+ * Days until a recurring real-world Gregorian birthday/nameday.
+ * Uses the browser/server's local calendar date, but performs the subtraction in
+ * UTC so daylight-saving changes cannot create off-by-one results.
+ */
+export function daysUntilNextGregorianNameday(
+  nameday: Pick<Nameday, "day" | "moon">,
+  now = new Date()
+): number {
+  const currentYear = now.getFullYear();
+  const current = Date.UTC(currentYear, now.getMonth(), now.getDate());
+
+  let target = Date.UTC(currentYear, nameday.moon - 1, nameday.day);
+  if (target < current) {
+    target = Date.UTC(currentYear + 1, nameday.moon - 1, nameday.day);
+  }
+
+  return Math.round((target - current) / 86_400_000);
+}
+
+/** Human-readable real-world date for the HRRM easter-egg record. */
+export function formatGregorianNameday(nameday: Nameday): string {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const month = months[nameday.moon - 1] ?? `Month ${nameday.moon}`;
+  return `${nameday.day} ${month} ${nameday.year}`;
+}

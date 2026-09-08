@@ -132,10 +132,15 @@ export default async function FamilyTree({ searchParams }: Props) {
           <h2 className={styles.houseTitle}>House Velaryon</h2>
 
           <div className={styles.generationRow}>
-            <Union
-              a={{ id: "naella-velaryon" }}
-              b={{ id: "gaelor-targaryen" }}
-            />
+            <FamilyUnit
+              parentA={{ id: "alyssa-velaryon" }}
+              childrenLabel="Children"
+            >
+              <Union
+                a={{ id: "naella-velaryon" }}
+                b={{ id: "gaelor-targaryen" }}
+              />
+            </FamilyUnit>
           </div>
         </section>
 
@@ -152,6 +157,8 @@ export default async function FamilyTree({ searchParams }: Props) {
               <PersonNode id="timos-hightower" />
               <PersonNode id="melessa-hightower" />
             </FamilyUnit>
+
+            <PersonNode id="clarisse-flowers" />
           </div>
         </section>
 
@@ -179,6 +186,7 @@ export default async function FamilyTree({ searchParams }: Props) {
               childrenLabel="Children"
             >
               <PersonNode id="rickard-stark" />
+              <PersonNode id="benjen-stark" />
             </FamilyUnit>
           </div>
         </section>
@@ -347,8 +355,11 @@ export default async function FamilyTree({ searchParams }: Props) {
         <section id="house-morrigen" className={styles.house}>
           <h2 className={styles.houseTitle}>House Morrigen</h2>
 
+          <p className={styles.generationLabel}>Known Siblings</p>
+
           <div className={styles.generationRow}>
             <PersonNode id="orwell-morrigen" />
+            <PersonNode id="grance-morrigen" />
           </div>
         </section>
 
@@ -367,6 +378,56 @@ export default async function FamilyTree({ searchParams }: Props) {
 
           <div className={styles.generationRow}>
             <PersonNode id="berholt-caswell" />
+          </div>
+        </section>
+
+        {/* HOUSE MARTELL */}
+        <section id="house-martell" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Martell</h2>
+          <p className={styles.generationLabel}>Known Siblings</p>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="nymor-martell" />
+            <PersonNode id="meria-martell" />
+          </div>
+        </section>
+
+        {/* HOUSE CELTIGAR */}
+        <section id="house-celtigar" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Celtigar</h2>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="annara-celtigar" />
+          </div>
+        </section>
+
+        {/* HOUSE MARBRAND */}
+        <section id="house-marbrand" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Marbrand</h2>
+
+          <div className={styles.generationRow}>
+            <Union
+              a={{ id: "myrielle-marbrand" }}
+              b={{ id: "tion-lannister" }}
+            />
+          </div>
+        </section>
+
+        {/* HOUSE MOOTON */}
+        <section id="house-mooton" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Mooton</h2>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="myles-mooton" />
+          </div>
+        </section>
+
+        {/* HOUSE HARLAW */}
+        <section id="house-harlaw" className={styles.house}>
+          <h2 className={styles.houseTitle}>House Harlaw</h2>
+
+          <div className={styles.generationRow}>
+            <PersonNode id="drack-harlaw" />
           </div>
         </section>
       </div>

@@ -7,7 +7,13 @@ import { daysUntilNextNameday, type WorldDate } from "@/lib/age";
 const DAYS_PER_MOON = 30;
 const YEAR_LENGTH = 12 * DAYS_PER_MOON;
 
-export type UpcomingEventType = "nameday" | "feast" | "wedding" | "battle" | "trial" | "other";
+export type UpcomingEventType =
+  | "nameday"
+  | "feast"
+  | "wedding"
+  | "battle"
+  | "trial"
+  | "other";
 
 export interface UpcomingEvent {
   title: string;
@@ -28,7 +34,26 @@ function daysUntil(day: number, moon: number, worldDate: WorldDate) {
   const current = dayOfYear(worldDate.moon, worldDate.day);
   const target = dayOfYear(moon, day);
   const diff = target - current;
+
   return diff >= 0 ? diff : diff + YEAR_LENGTH;
+}
+
+/**
+ * A character can appear in public upcoming namedays only if:
+ *  - they have a nameday,
+ *  - they are not hidden,
+ *  - their PUBLIC status is not Dead.
+ *
+ * Deliberately do not inspect secret.status here.
+ * Doing so could leak a secret death by making a normally expected
+ * nameday disappear from public-facing UI.
+ */
+function isPublicNamedayCharacter(character: any): boolean {
+  return Boolean(
+    character?.nameday &&
+      character.hidden !== true &&
+      character.status !== "Dead"
+  );
 }
 
 /**
@@ -48,6 +73,7 @@ function isStillUpcoming(
   if (year === undefined) return true;
   if (year > worldDate.year) return true;
   if (year < worldDate.year) return false;
+
   return dayOfYear(moon, day) >= dayOfYear(worldDate.moon, worldDate.day);
 }
 
@@ -55,29 +81,37 @@ function isStillUpcoming(
  * Builds a combined, sorted list of upcoming character namedays and
  * calendar events (feasts, weddings, battles, etc.), relative to the
  * given WorldDate. Used by the homepage's "Realm Today" card.
+ *
+ * Hidden characters (including HRRM) are excluded here at the source,
+ * so every consumer of getUpcomingEvents() receives the same safe list.
  */
-export function getUpcomingEvents(worldDate: WorldDate, limit = 5): UpcomingEvent[] {
+export function getUpcomingEvents(
+  worldDate: WorldDate,
+  limit = 5
+): UpcomingEvent[] {
   const namedayEvents: UpcomingEvent[] = (charactersData as any[])
-    .filter((c) => c.nameday)
-    .map((c) => ({
-      title: c.name,
+    .filter(isPublicNamedayCharacter)
+    .map((character) => ({
+      title: character.name,
       type: "nameday" as const,
-      day: c.nameday.day,
-      moon: c.nameday.moon,
-      daysUntil: daysUntilNextNameday(c.nameday, worldDate),
-      href: `/characters/${c.id}`,
+      day: character.nameday.day,
+      moon: character.nameday.moon,
+      daysUntil: daysUntilNextNameday(character.nameday, worldDate),
+      href: `/characters/${character.id}`,
     }));
 
   const calendarEvents: UpcomingEvent[] = (eventsData as any[])
-    .filter((e) => isStillUpcoming(e.day, e.moon, e.year, worldDate))
-    .map((e) => ({
-      title: e.title,
-      type: e.type as UpcomingEventType,
-      day: e.day,
-      moon: e.moon,
-      year: e.year,
-      description: e.description,
-      daysUntil: daysUntil(e.day, e.moon, worldDate),
+    .filter((event) =>
+      isStillUpcoming(event.day, event.moon, event.year, worldDate)
+    )
+    .map((event) => ({
+      title: event.title,
+      type: event.type as UpcomingEventType,
+      day: event.day,
+      moon: event.moon,
+      year: event.year,
+      description: event.description,
+      daysUntil: daysUntil(event.day, event.moon, worldDate),
     }));
 
   return [...namedayEvents, ...calendarEvents]
@@ -91,9 +125,11 @@ export function getUpcomingEvents(worldDate: WorldDate, limit = 5): UpcomingEven
  * `chapterSlug` are map-relevant; homepage-only entries are ignored here.
  */
 export function getMapEvents(): MapEvent[] {
-  return (eventsData as any[]).filter((e) => e.location && e.chapterSlug);
+  return (eventsData as any[]).filter(
+    (event) => event.location && event.chapterSlug
+  );
 }
 
 export function getEventsForChapter(chapterSlug: string): MapEvent[] {
-  return getMapEvents().filter((e) => e.chapterSlug === chapterSlug);
+  return getMapEvents().filter((event) => event.chapterSlug === chapterSlug);
 }

@@ -6,6 +6,7 @@ import type { CharacterId } from "@/types/character";
 import MiniPortrait from "@/components/MiniPortrait";
 
 import { getCharacters } from "@/lib/characters";
+import { getEffectiveRelationships } from "@/lib/relationships";
 import {
   computeGraphLayout,
   colorForHouse,
@@ -20,6 +21,7 @@ const HEIGHT = 640;
 
 const MIN_NODE_DISTANCE = 42;
 const GRAPH_PADDING = 24;
+const LABEL_EDGE_GUARD = 72;
 
 interface Edge {
   source: CharacterId;
@@ -59,6 +61,14 @@ function colorForCharacter(id: string, house: string) {
   }
 
   return fallbackColorForId(id);
+}
+
+function nodeLabelPlacement(x: number) {
+  if (x > WIDTH - LABEL_EDGE_GUARD) {
+    return { x: -11, textAnchor: "end" as const };
+  }
+
+  return { x: 11, textAnchor: "start" as const };
 }
 
 function addNodeSafeSpacing<T extends string>(
@@ -204,19 +214,14 @@ export default function RelationshipsPage() {
     const seen = new Set<string>();
 
     for (const character of characters) {
-      for (const [targetId, label] of Object.entries(
-        character.relationships ?? {}
-      ) as [CharacterId, string][]) {
+      for (const relationship of getEffectiveRelationships(character.id)) {
+        const targetId = relationship.id as CharacterId;
+
         if (!byId.has(targetId)) {
           continue;
         }
 
-        const key = [
-          character.id,
-          targetId,
-        ]
-          .sort()
-          .join("::");
+        const key = [character.id, targetId].sort().join("::");
 
         if (seen.has(key)) {
           continue;
@@ -227,7 +232,7 @@ export default function RelationshipsPage() {
         list.push({
           source: character.id,
           target: targetId,
-          label,
+          label: relationship.description,
         });
       }
     }
@@ -327,27 +332,14 @@ export default function RelationshipsPage() {
         return [];
       }
 
-      return (
-        Object.entries(
-          selectedCharacter.relationships ?? {}
-        ) as [CharacterId, string][]
-      )
-        .map(
-          ([id, description]) => ({
-            id,
-            name:
-              byId.get(id)?.name ?? id,
-            description,
-          })
-        )
-        .filter((entry) =>
-          visibleIds.has(entry.id)
-        );
-    }, [
-      selectedCharacter,
-      byId,
-      visibleIds,
-    ]);
+      return getEffectiveRelationships(selectedCharacter.id)
+        .filter((entry) => entry.character && visibleIds.has(entry.id))
+        .map((entry) => ({
+          id: entry.id as CharacterId,
+          name: entry.character?.name ?? entry.name,
+          description: entry.description,
+        }));
+    }, [selectedCharacter, visibleIds]);
 
   return (
     <main className={styles.page}>
@@ -499,6 +491,9 @@ export default function RelationshipsPage() {
                   isSelected ||
                   isHovered;
 
+                const labelPlacement =
+                  nodeLabelPlacement(point.x);
+
                 return (
                   <g
                     key={id}
@@ -565,8 +560,9 @@ export default function RelationshipsPage() {
                     />
 
                     <text
-                      x={11}
+                      x={labelPlacement.x}
                       y={4}
+                      textAnchor={labelPlacement.textAnchor}
                       className={`${styles.nodeLabel} ${
                         isHovered
                           ? styles.nodeLabelHovered
