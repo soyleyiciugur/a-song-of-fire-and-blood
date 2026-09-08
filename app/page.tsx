@@ -16,7 +16,7 @@ export default function Home() {
     <main className="home-page">
       <div className="hero">
         <Image
-          src="/images/home/a-song-of-fire-and-blood.png"
+          src="/images/home/a-song-of-fire-and-blood.webp"
           alt="A Song of Fire and Blood"
           fill
           preload

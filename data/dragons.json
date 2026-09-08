@@ -4,7 +4,7 @@
     "name": "Maelwing",
     "status": "Alive",
     "riderId": "baelenys-targaryen",
-    "image": "/images/dragons/maelwing.png",
+    "image": "/images/dragons/maelwing.webp",
     "traits": [
       "Ancient",
       "Battle-Scarred",
@@ -17,7 +17,7 @@
     "name": "Jhagar",
     "status": "Alive",
     "riderId": "jacaelon-targaryen",
-    "image": "/images/dragons/jhagar.png",
+    "image": "/images/dragons/jhagar.webp",
     "traits": [
       "Ill-Tempered",
       "Difficult to Handle",
@@ -30,7 +30,7 @@
     "name": "Cloudgazer",
     "status": "Alive",
     "riderId": "saera-targaryen",
-    "image": "/images/dragons/cloudgazer.png",
+    "image": "/images/dragons/cloudgazer.webp",
     "traits": [
       "Storm-Grey Scales",
       "Amethyst-Crystal Horns",
@@ -45,7 +45,7 @@
     "name": "Bayle",
     "status": "Alive",
     "riderId": "gaelor-targaryen",
-    "image": "/images/dragons/bayle.png",
+    "image": "/images/dragons/bayle.webp",
     "traits": [
       "Savage Toward Others",
       "Remarkably Obedient to Gaelor",
@@ -60,7 +60,7 @@
     "status": "Alive",
     "riderId": "maela-targaryen",
     "previousRiderId": "visenor-targaryen",
-    "image": "/images/dragons/jadefyre.png",
+    "image": "/images/dragons/jadefyre.webp",
     "traits": [
       "Jade-Green Scales",
       "Small for Its Age",
@@ -74,7 +74,7 @@
     "name": "Boneskin",
     "status": "Alive",
     "riderId": "visenor-targaryen",
-    "image": "/images/dragons/boneskin.png",
+    "image": "/images/dragons/boneskin.webp",
     "traits": [
       "Pale, Bone-Yellow Scales",
       "Wings Thin Enough to Show the Bone Beneath",
@@ -89,7 +89,7 @@
     "id": "boneskins-egg",
     "name": "Boneskin's Egg",
     "status": "Alive",
-    "image": "/images/dragons/boneskin-egg.png",
+    "image": "/images/dragons/boneskin-egg.webp",
     "traits": [
       "Recovered from a Cave in the Red Mountains",
       "Carried by Boneskin Himself",
