@@ -127,3 +127,54 @@
   flex-direction: column;
   gap: 32px;
 }
+
+.home-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.realm-ledger-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.realm-ledger-intro {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.realm-ledger-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.realm-ledger-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px;
+  color: inherit;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.realm-ledger-stat:hover {
+  border-color: var(--gold);
+}
+
+.realm-ledger-stat strong {
+  color: var(--gold);
+  font-size: 1.25rem;
+}
+
+.realm-ledger-stat span {
+  color: var(--muted);
+  font-size: 11px;
+}

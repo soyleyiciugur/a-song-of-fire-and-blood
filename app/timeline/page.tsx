@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { timeline } from "@/data/timeline";
+import { timeline, getTimelineEventKind } from "@/data/timeline";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
 
@@ -16,25 +16,16 @@ export default function Timeline() {
   const [characterFilter, setCharacterFilter] = useState("all");
   const kinds = ["all", "conflict", "death", "politics", "family", "travel", "revelation"];
   const characterOptions = Array.from(new Set(sortedTimeline.flatMap((chapter) => chapter.events.flatMap((event) => event.characters ?? [])))).sort();
-  const matchesKind = (title: string, description: string, value: string) => {
+  const matchesKind = (event: (typeof sortedTimeline)[number]["events"][number], value: string) => {
     if (value === "all") return true;
-    const text = `${title} ${description}`.toLowerCase();
-    const patterns: Record<string, RegExp> = {
-      conflict: /battle|duel|fight|war|kill|murder|assault|tourney|combat|attack|clash|sword/,
-      death: /dead|death|die|dies|killed|murder|execut|slaughter|massacre|poison/,
-      politics: /king|crown|throne|heir|council|hand|lord|claim|alliance|war|faith/,
-      family: /father|mother|brother|sister|son|daughter|wife|husband|child|family|marry/,
-      travel: /travel|arrive|depart|fly|flee|escape|journey|ride|return|reach/,
-      revelation: /reveal|secret|discover|learn|confess|letter|identity|truth|unknown/,
-    };
-    return patterns[value]?.test(text) ?? true;
+    return getTimelineEventKind(event) === value;
   };
   const filteredTimeline = useMemo(() => sortedTimeline.map((chapter) => ({
     ...chapter,
     events: chapter.events.filter((event) => {
       const text = `${event.title} ${event.description} ${event.characters?.join(" ")}`.toLowerCase();
       const queryMatch = !query || text.includes(query.toLowerCase());
-      const kindMatch = matchesKind(event.title, event.description, kind);
+      const kindMatch = matchesKind(event, kind);
       const characterMatch = characterFilter === "all" || event.characters?.includes(characterFilter as never);
       return queryMatch && kindMatch && characterMatch;
     }),
@@ -71,11 +62,13 @@ export default function Timeline() {
 
               <ol className={styles.eventList}>
                 {[...chapter.events].reverse().map((event) => (
-                  <li key={event.title} className={styles.event}>
+                  <li key={event.title} id={`${chapter.chapterSlug}-${event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className={styles.event}>
                     <div className={styles.eventMarker} />
 
                     <div className={styles.eventBody}>
                       <h3 className={styles.eventTitle}>{event.title}</h3>
+
+                      <span className={styles.eventKind}>{getTimelineEventKind(event)}</span>
 
                       {event.date && (
                         <p className={styles.eventDate}>{event.date}</p>

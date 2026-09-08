@@ -145,3 +145,7 @@
 .backLink:hover {
   color: #e6c34a;
 }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.tabs a { padding: 8px 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; text-decoration: none; }
+.tabs a:hover, .tabs .activeTab { color: var(--gold); border-color: var(--gold); }

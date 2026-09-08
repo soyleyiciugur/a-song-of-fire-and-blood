@@ -1,0 +1,16 @@
+.card { width: 100%; background: #141418; border: 1px solid #2b2b31; border-radius: 12px; overflow: hidden; }
+.content { padding: 20px; }
+.content h2 { margin: 0 0 4px; color: #c9a227; font-size: 24px; text-align: center; }
+.date { margin-bottom: 20px; color: #ececec; font-size: 16px; text-align: center; }
+.sectionLabel { margin-bottom: 12px; padding-top: 16px; color: #888; border-top: 1px solid #26262c; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+.empty { color: #888; font-size: 14px; font-style: italic; }
+.list { display: flex; flex-direction: column; }
+.eventLink { color: inherit; text-decoration: none; }
+.row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #26262c; }
+.firstRow { border-top: 0; }
+.eventText { min-width: 0; }
+.eventTitle { overflow: hidden; color: #ececec; font-size: 15px; text-overflow: ellipsis; white-space: nowrap; }
+.type { margin-top: 2px; font-size: 12px; letter-spacing: .5px; text-align: left; text-transform: uppercase; }
+.nameday,.feast,.wedding { color: #c9a227; }.battle { color: #b22222; }.trial { color: #8b6914; }.other { color: #8a8a92; }
+.countdown { flex-shrink: 0; color: #888; font-size: 13px; white-space: nowrap; }
+.eventLink:hover .eventTitle { color: #c9a227; }

@@ -245,6 +245,7 @@ export default function InteractiveMap() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const requestedLocation = searchParams.get("location");
+  const requestedChapter = searchParams.get("chapter");
 
   const [visibleCard, setVisibleCard] =
     useState<Character | null>(null);
@@ -287,10 +288,12 @@ export default function InteractiveMap() {
     useState(0);
 
   useEffect(() => {
-    if (chapters.length > 0) {
-      setChapterIndex(chapters.length - 1);
-    }
-  }, [chapters]);
+    if (chapters.length === 0) return;
+    const requestedIndex = requestedChapter
+      ? chapters.findIndex((chapter) => chapter.slug === requestedChapter)
+      : -1;
+    setChapterIndex(requestedIndex >= 0 ? requestedIndex : chapters.length - 1);
+  }, [chapters, requestedChapter]);
 
   const [
     selectedCharacterId,
@@ -377,6 +380,14 @@ export default function InteractiveMap() {
     },
     [centerOn, requestedLocation]
   );
+
+  useEffect(() => {
+    if (!naturalSize || !requestedLocation) return;
+    const location = getMapLocation(requestedLocation);
+    if (location) {
+      centerOn(location.xPct, location.yPct, naturalSize.width, naturalSize.height, DEFAULT_MAP_FOCUS_SCALE);
+    }
+  }, [centerOn, naturalSize, requestedLocation]);
 
   const currentChapter =
     chapters[chapterIndex];

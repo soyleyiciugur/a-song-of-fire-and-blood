@@ -42,6 +42,13 @@ export default function RecordsPage() {
         </p>
       </header>
 
+      <nav className={styles.tabs} aria-label="Records sections">
+        <Link href="/records" className={styles.activeTab}>Records</Link>
+        <Link href="/stats">The Realm in Numbers</Link>
+        <Link href="/scrolls">Scrolls</Link>
+        <Link href="/book-of-brothers">The Book of Brothers</Link>
+      </nav>
+
       <div className={styles.shelf}>
         {sections.map((section) => (
           <Link key={section.href} href={section.href} className={styles.recordCard}>

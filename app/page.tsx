@@ -2,13 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { FLAT_NAV_ITEMS } from "@/constants/navigation"; // NAV_ITEMS yerine
+import { NAV_ITEMS, isNavigationGroup } from "@/constants/navigation";
 import { getRandomQuote } from "@/lib/characters";
 import CharacterQuote from "@/components/character/CharacterQuote";
 import WorldDateCard from "@/components/home/WorldDateCard";
 import RavenEyeCard from "@/components/home/RavenEyeCard";
 import ChronicleTimeline from "@/components/home/ChronicleTimeline";
 import LatestUpdates from "@/components/home/LatestUpdates";
+import RealmLedgerCard from "@/components/home/RealmLedgerCard";
 
 export const dynamic = "force-dynamic";
 
@@ -39,13 +40,11 @@ export default function Home() {
 
       <div className="container home-content">
         <div className="button-row">
-          {FLAT_NAV_ITEMS
-            .filter((item) => item.href !== "/scrolls" && item.href !== "/book-of-brothers" && item.href !== "/family-tree" && item.href !== "/relationships")
-            .map((item) => (
-              <Link key={item.href} href={item.href} className="button">
-                {item.label}
-              </Link>
-            ))}
+          {NAV_ITEMS.map((item) => {
+            const href = isNavigationGroup(item) ? item.href : item.href;
+            if (!href) return null;
+            return <Link key={href} href={href} className="button">{item.label}</Link>;
+          })}
         </div>
 
         <div className="home-divider" aria-hidden="true">
@@ -60,7 +59,10 @@ export default function Home() {
             </div>
             <RavenEyeCard />
           </div>
-          <WorldDateCard />
+          <div className="home-right-col">
+            <WorldDateCard />
+            <RealmLedgerCard />
+          </div>
         </div>
         <LatestUpdates />
         <ChronicleTimeline />

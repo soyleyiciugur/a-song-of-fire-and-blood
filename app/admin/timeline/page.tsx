@@ -180,6 +180,30 @@ export default function AdminTimelinePage() {
                   />
                 </label>
 
+                <div style={{ display: "grid", gridTemplateColumns: "minmax(150px, 0.7fr) minmax(180px, 1.3fr)", gap: "12px", marginBottom: "12px" }}>
+                  <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>Timeline kind</span>
+                    <select value={event.kind || "other"} onChange={(e) => handleEventChange(eventIdx, "kind", e.target.value)}>
+                      {["conflict", "death", "politics", "family", "travel", "revelation", "other"].map((kind) => <option key={kind} value={kind}>{kind}</option>)}
+                    </select>
+                  </label>
+                  <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>Location</span>
+                    <input value={event.location || ""} onChange={(e) => handleEventChange(eventIdx, "location", e.target.value)} placeholder="e.g. King's Landing" />
+                  </label>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "12px" }}>
+                  <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>Cause</span>
+                    <textarea value={event.cause || ""} onChange={(e) => handleEventChange(eventIdx, "cause", e.target.value)} placeholder="What set it in motion?" />
+                  </label>
+                  <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>Consequence</span>
+                    <textarea value={event.consequence || ""} onChange={(e) => handleEventChange(eventIdx, "consequence", e.target.value)} placeholder="What followed?" />
+                  </label>
+                </div>
+
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                   <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>Characters</span>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "8px" }}>

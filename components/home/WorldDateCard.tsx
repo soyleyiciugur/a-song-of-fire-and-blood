@@ -1,176 +1,49 @@
 import Link from "next/link";
-import worldDate from "../../data/worldDate.json";
-import characters from "../../data/characters/characters.json";
-import { getUpcomingEvents, type UpcomingEvent } from "../../lib/events";
-import { formatDaysUntil, formatNameday } from "../../lib/age";
+import worldDate from "@/data/worldDate.json";
+import characters from "@/data/characters/characters.json";
+import { getUpcomingEvents, type UpcomingEvent } from "@/lib/events";
+import { formatDaysUntil, formatNameday } from "@/lib/age";
+import styles from "./worldDateCard.module.css";
 
 const TYPE_LABEL: Record<UpcomingEvent["type"], string> = {
-  nameday: "Nameday",
-  feast: "Feast",
-  battle: "Battle",
-  wedding: "Wedding",
-  trial: "Trial",
-  other: "Event",
+  nameday: "Nameday", feast: "Feast", battle: "Battle", wedding: "Wedding", trial: "Trial", other: "Event",
 };
 
-const TYPE_COLOR: Record<UpcomingEvent["type"], string> = {
-  nameday: "#c9a227",
-  feast: "#c9a227",
-  wedding: "#c9a227",
-  battle: "#B22222",
-  trial: "#8B6914",
-  other: "#8a8a92",
+const TYPE_CLASS: Record<UpcomingEvent["type"], string> = {
+  nameday: styles.nameday, feast: styles.feast, battle: styles.battle,
+  wedding: styles.wedding, trial: styles.trial, other: styles.other,
 };
 
 export default function WorldDateCard() {
-  // Fetch a larger pool of events, filter them, then take exactly the first 5.
   const upcoming = getUpcomingEvents(worldDate, 50)
     .filter((event: any) => {
-      const charId =
-        event.characterId ||
-        (event.href?.startsWith("/characters/")
-          ? event.href.split("/characters/")[1]
-          : null);
-
-      if (charId) {
-        const character: any = characters.find((c: any) => c.id === charId);
-
-        // Hidden/easter-egg characters must never leak into public upcoming lists.
-        if (character?.hidden) {
-          return false;
-        }
-
-        // Public-facing card: do not let a secret death leak through the
-        // disappearance of an otherwise expected nameday.
-        if (character?.status === "Dead") {
-          return false;
-        }
-      }
-
-      const char: any = event.character;
-      if (char?.hidden || char?.status === "Dead") {
-        return false;
-      }
-
-      return true;
+      const charId = event.characterId || (event.href?.startsWith("/characters/") ? event.href.split("/characters/")[1] : null);
+      const character: any = charId ? characters.find((item: any) => item.id === charId) : event.character;
+      return !character?.hidden && character?.status !== "Dead";
     })
     .slice(0, 5);
 
   return (
-    <aside
-      style={{
-        width: "100%",
-        maxWidth: 1000,
-        background: "#141418",
-        border: "1px solid #2b2b31",
-        borderRadius: 12,
-        overflow: "hidden",
-      }}
-    >
-      <div style={{ padding: 20 }}>
-        <h2
-          style={{
-            color: "#c9a227",
-            marginTop: 0,
-            marginBottom: 4,
-            fontSize: 24,
-            textAlign: "center",
-          }}
-        >
-          The Realm Today
-        </h2>
-        <div
-          style={{
-            textAlign: "center",
-            color: "#ececec",
-            fontSize: 16,
-            marginBottom: 20,
-          }}
-        >
-          {formatNameday(worldDate, worldDate.era)}
-        </div>
-
-        <div
-          style={{
-            color: "#888",
-            fontSize: 13,
-            marginBottom: 12,
-            textTransform: "uppercase",
-            letterSpacing: 1,
-            borderTop: "1px solid #26262c",
-            paddingTop: 16,
-          }}
-        >
-          Upcoming
-        </div>
-
+    <aside className={styles.card}>
+      <div className={styles.content}>
+        <h2>The Realm Today</h2>
+        <div className={styles.date}>{formatNameday(worldDate, worldDate.era)}</div>
+        <div className={styles.sectionLabel}>Upcoming</div>
         {upcoming.length === 0 ? (
-          <div style={{ color: "#888", fontSize: 14, fontStyle: "italic" }}>
-            Nothing on the horizon.
-          </div>
+          <div className={styles.empty}>Nothing on the horizon.</div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {upcoming.map((event, i) => {
+          <div className={styles.list}>
+            {upcoming.map((event, index) => {
               const row = (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    gap: 12,
-                    padding: "10px 0",
-                    borderTop: i === 0 ? "none" : "1px solid #26262c",
-                  }}
-                >
-                  <div style={{ minWidth: 0 }}>
-                    <div
-                      style={{
-                        color: "#ececec",
-                        fontSize: 15,
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {event.title}
-                    </div>
-                    <div
-                      style={{
-                        color: TYPE_COLOR[event.type],
-                        fontSize: 12,
-                        textTransform: "uppercase",
-                        letterSpacing: 0.5,
-                        marginTop: 2,
-                        textAlign: "left",
-                      }}
-                    >
-                      {TYPE_LABEL[event.type]}
-                    </div>
+                <div className={`${styles.row} ${index === 0 ? styles.firstRow : ""}`}>
+                  <div className={styles.eventText}>
+                    <div className={styles.eventTitle}>{event.title}</div>
+                    <div className={`${styles.type} ${TYPE_CLASS[event.type]}`}>{TYPE_LABEL[event.type]}</div>
                   </div>
-                  <div
-                    style={{
-                      color: "#888",
-                      fontSize: 13,
-                      whiteSpace: "nowrap",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {formatDaysUntil(event.daysUntil)}
-                  </div>
+                  <div className={styles.countdown}>{formatDaysUntil(event.daysUntil)}</div>
                 </div>
               );
-
-              return event.href ? (
-                <Link
-                  key={`${event.type}-${event.title}-${i}`}
-                  href={event.href}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  {row}
-                </Link>
-              ) : (
-                <div key={`${event.type}-${event.title}-${i}`}>{row}</div>
-              );
+              return event.href ? <Link key={`${event.type}-${event.title}-${index}`} href={event.href} className={styles.eventLink}>{row}</Link> : <div key={`${event.type}-${event.title}-${index}`}>{row}</div>;
             })}
           </div>
         )}

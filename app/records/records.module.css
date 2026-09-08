@@ -114,3 +114,28 @@
   margin: 0;
   line-height: 1.55;
 }
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 2.25rem;
+}
+
+.tabs a {
+  padding: 9px 14px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.tabs a:hover,
+.tabs .activeTab {
+  color: var(--gold);
+  background: rgba(201, 162, 39, 0.08);
+  border-color: var(--gold);
+}

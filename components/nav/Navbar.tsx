@@ -15,7 +15,7 @@ export default function Navbar() {
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
   const [expandedPlayPath, setExpandedPlayPath] = useState<string | null>(null);
   const pathname = usePathname();
-  const isPlayPage = pathname.startsWith("/cards/play");
+  const isPlayPage = pathname === "/cards" || pathname.startsWith("/cards/");
   const playNavExpanded = isPlayPage && expandedPlayPath === pathname;
 
   return (
@@ -151,7 +151,7 @@ export default function Navbar() {
         {NAV_ITEMS.map((item) =>
           isNavigationGroup(item) ? (
             <div key={item.label} className={styles.mobileNavGroup}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div className={styles.mobileNavGroupHeaderRow}>
                 <Link
                   href={item.href || "#"}
                   className={styles.mobileNavLink}
@@ -162,14 +162,6 @@ export default function Navbar() {
                 <button
                   type="button"
                   className={styles.mobileNavGroupHeader}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    padding: "8px",
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
                   aria-expanded={openMobileGroup === item.label}
                   onClick={() =>
                     setOpenMobileGroup((current) =>
@@ -178,7 +170,7 @@ export default function Navbar() {
                   }
                   aria-label={`Toggle ${item.label} menu`}
                 >
-                  <span className={styles.navGroupCaret} aria-hidden="true" style={{ fontSize: "0.8rem", color: "var(--gold)" }}>
+                  <span className={styles.navGroupCaret} aria-hidden="true">
                     {openMobileGroup === item.label ? "▴" : "▾"}
                   </span>
                 </button>

@@ -1,10 +1,64 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import bloodshedData from "@/data/bloodshed.json";
+import chaptersData from "@/data/chapters.json";
+import locationsData from "@/data/map/locations.json";
 import { getDraft, setDraft } from "@/lib/adminDrafts";
+import { ConfirmModal, PromptModal } from "../_components/Modal";
+import styles from "./bloodshed.module.css";
 
-type Entry = (typeof bloodshedData)[number];
-const inputStyle = { width: "100%", padding: "11px", color: "var(--text)", background: "rgba(0,0,0,.2)", border: "1px solid var(--border)", borderRadius: 5, font: "inherit" };
+type Entry = {
+  id: string; title: string; kind: "battle" | "duel" | "tourney";
+  day: number; moon: number; year: number; location: string; chapterSlug: string;
+  participants: string[]; houses: string[]; summary: string; cause: string; consequence: string;
+};
 
-export default function AdminBloodshedPage() { const [entries, setEntries] = useState<Entry[]>(bloodshedData as Entry[]); const [selected, setSelected] = useState(0); const active = entries[selected]; useEffect(() => { const draft = getDraft<Entry[]>("bloodshed"); if (draft) setEntries(draft); }, []); useEffect(() => { setDraft("bloodshed", entries); }, [entries]); const update = (field: keyof Entry, value: string | string[] | number) => setEntries((current) => current.map((item, index) => index === selected ? { ...item, [field]: value } : item)); return <main style={{ minHeight: "100vh", padding: "32px 24px 80px" }}><div style={{ maxWidth: 1100, margin: "auto" }}><p style={{ color: "var(--muted)", fontSize: 11, letterSpacing: 2, textTransform: "uppercase" }}>Chronicle data</p><h1 style={{ color: "var(--gold)" }}>The Bloodshed</h1><p style={{ color: "var(--muted)" }}>Only completed battles, duels, and tourneys belong here. Future requests stay in the Annals until they happen.</p><div style={{ display: "grid", gridTemplateColumns: "280px minmax(0,1fr)", gap: 24 }}><aside style={{ display: "grid", gap: 8, alignContent: "start" }}>{entries.map((item, index) => <button key={item.id} onClick={() => setSelected(index)} style={{ padding: 12, textAlign: "left", color: selected === index ? "#000" : "var(--text)", background: selected === index ? "var(--gold)" : "var(--surface)", border: "1px solid var(--border)", borderRadius: 5, cursor: "pointer" }}>{item.title}<small style={{ display: "block", opacity: .7 }}>{item.kind}</small></button>)}</aside>{active && <section style={{ display: "grid", gap: 16, maxWidth: 760 }}><label>Title<input style={inputStyle} value={active.title} onChange={(e) => update("title", e.target.value)} /></label><div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}><label>Kind<select style={inputStyle} value={active.kind} onChange={(e) => update("kind", e.target.value)}><option value="battle">Battle</option><option value="duel">Duel</option><option value="tourney">Tourney</option></select></label><label>Day<input style={inputStyle} type="number" value={active.day} onChange={(e) => update("day", Number(e.target.value))} /></label><label>Moon<input style={inputStyle} type="number" value={active.moon} onChange={(e) => update("moon", Number(e.target.value))} /></label></div><label>Summary<textarea style={{ ...inputStyle, minHeight: 90 }} value={active.summary} onChange={(e) => update("summary", e.target.value)} /></label><label>Cause<textarea style={{ ...inputStyle, minHeight: 90 }} value={active.cause} onChange={(e) => update("cause", e.target.value)} /></label><label>Consequence<textarea style={{ ...inputStyle, minHeight: 90 }} value={active.consequence} onChange={(e) => update("consequence", e.target.value)} /></label><p style={{ color: "var(--muted)", fontSize: 12 }}>Location, chapter, participants, and houses remain in the JSON-compatible record and can be edited through content sync until their dedicated controls are added.</p></section>}</div></div></main>; }
+const kinds: Entry["kind"][] = ["battle", "duel", "tourney"];
+const toId = (value: string) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+export default function AdminBloodshedPage() {
+  const [entries, setEntries] = useState<Entry[]>(bloodshedData as Entry[]);
+  const [selectedId, setSelectedId] = useState((bloodshedData[0] as Entry)?.id ?? "");
+  const [search, setSearch] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const active = entries.find((entry) => entry.id === selectedId);
+  const filtered = useMemo(() => entries.filter((entry) => `${entry.title} ${entry.location} ${entry.kind}`.toLowerCase().includes(search.toLowerCase())), [entries, search]);
+
+  useEffect(() => { const draft = getDraft<Entry[]>("bloodshed"); if (draft?.length) { setEntries(draft); setSelectedId(draft[0].id); } }, []);
+  useEffect(() => { setDraft("bloodshed", entries); }, [entries]);
+
+  const update = <K extends keyof Entry>(field: K, value: Entry[K]) => {
+    if (!active) return;
+    setEntries((current) => current.map((entry) => entry.id === active.id ? { ...entry, [field]: value } : entry));
+  };
+  const add = (title: string) => {
+    const clean = title.trim();
+    if (!clean) return setShowAdd(false);
+    const id = toId(clean);
+    if (!id || entries.some((entry) => entry.id === id)) return setShowAdd(false);
+    const next: Entry = { id, title: clean, kind: "battle", day: 1, moon: 1, year: 99, location: locationsData[0]?.name ?? "", chapterSlug: chaptersData.at(-1)?.slug ?? "", participants: [], houses: [], summary: "", cause: "", consequence: "" };
+    setEntries((current) => [...current, next]); setSelectedId(id); setShowAdd(false);
+  };
+  const remove = () => {
+    if (!active) return;
+    const next = entries.filter((entry) => entry.id !== active.id);
+    setEntries(next); setSelectedId(next[0]?.id ?? ""); setShowDelete(false);
+  };
+  const updateList = (field: "participants" | "houses", value: string) => update(field, value.split(",").map((item) => item.trim()).filter(Boolean));
+
+  return (
+    <main className={styles.page}>
+      <div className={styles.container}>
+        <div className={styles.heading}><div><p className={styles.eyebrow}>Chronicle data</p><h1>The Bloodshed</h1><p className={styles.lead}>Completed battles, duels, and tourneys. Future requests stay in the Annals until they happen.</p></div><button className={styles.primaryButton} onClick={() => setShowAdd(true)}>+ Add entry</button></div>
+        <div className={styles.editor}>
+          <aside className={styles.sidebar}><input className={styles.input} placeholder="Search the bloodshed..." value={search} onChange={(event) => setSearch(event.target.value)} /><div className={styles.entryList}>{filtered.map((entry) => <button className={`${styles.entryButton} ${entry.id === selectedId ? styles.entryButtonActive : ""}`} key={entry.id} onClick={() => setSelectedId(entry.id)}><strong>{entry.title}</strong><small>{entry.kind} · {entry.year} AC</small></button>)}</div></aside>
+          {active && <section className={styles.form}><div className={styles.formTop}><span>ID: {active.id}</span><button className={styles.dangerButton} onClick={() => setShowDelete(true)}>Delete</button></div><label>Title<input className={styles.input} value={active.title} onChange={(event) => update("title", event.target.value)} /></label><div className={styles.fields3}><label>Kind<select className={styles.input} value={active.kind} onChange={(event) => update("kind", event.target.value as Entry["kind"])}>{kinds.map((kind) => <option key={kind} value={kind}>{kind}</option>)}</select></label><label>Location<select className={styles.input} value={active.location} onChange={(event) => update("location", event.target.value)}>{locationsData.map((location) => <option key={location.name} value={location.name}>{location.name}</option>)}</select></label><label>Chapter<select className={styles.input} value={active.chapterSlug} onChange={(event) => update("chapterSlug", event.target.value)}>{chaptersData.map((chapter) => <option key={chapter.slug} value={chapter.slug}>{chapter.title}</option>)}</select></label></div><div className={styles.fields3}><label>Day<input className={styles.input} type="number" min={1} max={30} value={active.day} onChange={(event) => update("day", Number(event.target.value))} /></label><label>Moon<input className={styles.input} type="number" min={1} max={12} value={active.moon} onChange={(event) => update("moon", Number(event.target.value))} /></label><label>Year<input className={styles.input} type="number" min={1} value={active.year} onChange={(event) => update("year", Number(event.target.value))} /></label></div><label>Summary<textarea className={styles.textarea} value={active.summary} onChange={(event) => update("summary", event.target.value)} /></label><div className={styles.fields2}><label>Cause<textarea className={styles.textarea} value={active.cause} onChange={(event) => update("cause", event.target.value)} /></label><label>Consequence<textarea className={styles.textarea} value={active.consequence} onChange={(event) => update("consequence", event.target.value)} /></label></div><label>Participant IDs, comma separated<input className={styles.input} value={active.participants.join(", ")} onChange={(event) => updateList("participants", event.target.value)} /></label><label>House IDs, comma separated<input className={styles.input} value={active.houses.join(", ")} onChange={(event) => updateList("houses", event.target.value)} /></label><p className={styles.note}>Changes are saved as a local draft and validated against the Bloodshed JSON schema when published.</p></section>}
+        </div>
+      </div>
+      {showAdd && <PromptModal title="Add Bloodshed entry" placeholder="Entry title" onConfirm={add} onCancel={() => setShowAdd(false)} />}
+      {showDelete && active && <ConfirmModal title="Delete entry" message={`Delete ${active.title}?`} confirmLabel="Delete" onConfirm={remove} onCancel={() => setShowDelete(false)} />}
+    </main>
+  );
+}
