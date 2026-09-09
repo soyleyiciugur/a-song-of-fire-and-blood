@@ -4,6 +4,9 @@ import assert from "node:assert/strict";
 const read = (name) => JSON.parse(fs.readFileSync(new URL(`../data/${name}`, import.meta.url), "utf8"));
 const gallery = read("gallery.json");
 const { version, users, comments } = read("flea-bottom.json");
+const fandoms = read("flea-bottom-fandoms.json");
+const fandomIds = new Set(fandoms.map((fandom) => fandom.id));
+assert.equal(fandomIds.size, fandoms.length, "Duplicate fandom IDs");
 const eligible = gallery.filter((entry) => entry.category === "fleabottom" || /\.(mp4|webm|mov)$/i.test(entry.src.split(/[?#]/)[0]));
 
 if (process.argv.includes("--pending")) {
@@ -24,6 +27,20 @@ for (const user of users) {
   assert(/^[a-zA-Z0-9_.]{3,30}$/.test(user.username), `Invalid handle: ${user.id}`);
   assert(/^#[0-9a-f]{6}$/i.test(user.color), `Invalid avatar color: ${user.id}`);
   assert(user.avatar && user.bio && user.voice && user.continuity?.length, `Incomplete profile: ${user.id}`);
+  for (const field of ["displayName", "pronouns", "location"]) {
+    if (user[field] !== undefined) assert(typeof user[field] === "string" && user[field].trim().length > 0 && user[field].length <= 80, `Invalid ${field}: ${user.id}`);
+  }
+  if (user.current !== undefined) {
+    assert(["Reading", "Watching", "Playing", "On repeat", "Making"].includes(user.current.label), `Invalid profile detail label: ${user.id}`);
+    assert(typeof user.current.value === "string" && user.current.value.trim().length > 0 && user.current.value.length <= 120, `Invalid profile detail: ${user.id}`);
+  }
+  if (user.fandoms !== undefined) {
+    assert(Array.isArray(user.fandoms) && new Set(user.fandoms).size === user.fandoms.length, `Invalid fandom list: ${user.id}`);
+    assert(user.fandoms.every((id) => fandomIds.has(id)), `Unknown fandom: ${user.id}`);
+  }
+}
+for (const fandom of fandoms) {
+  assert(users.some((user) => user.fandoms?.includes(fandom.id)), `No profile for fandom: ${fandom.label}`);
 }
 for (const comment of comments) {
   assert(entryIds.has(comment.entryId), `Comment on missing or non-gutter entry: ${comment.id}`);
@@ -44,3 +61,4 @@ for (const entry of eligible) {
   assert.equal(new Set(thread.map((comment) => comment.body.trim().toLowerCase())).size, thread.length, `Duplicate body in ${entry.id}`);
 }
 console.log(`Gutter data valid: ${eligible.length} posts, ${users.length} profiles, ${comments.length} comments.`);
+console.log(`All ${fandoms.length} fandom areas represented. Quiet profiles do not need a forced comment.`);

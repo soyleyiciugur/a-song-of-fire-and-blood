@@ -13,6 +13,14 @@
 .profileHint { margin-left: auto; font: 10px system-ui; color: var(--muted, #b4a99b); }
 .bio { margin: 8px 0 10px 39px; padding: 12px; border: 1px solid var(--border, #443b31); background: #ffffff05; border-radius: 8px; font: 12px/1.6 system-ui; }
 .bio p { margin: 6px 0 0; }
+.profileIdentity { display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px 10px; margin-bottom: 5px; }
+.profileIdentity strong { color: var(--text, #eee6da); font-size: 14px; overflow-wrap: anywhere; }
+.profileIdentity span, .activity { color: var(--muted, #b4a99b); font-size: 11px; }
+.profileFacts { display: grid; gap: 5px; margin: 10px 0; }
+.profileFacts > div { display: grid; grid-template-columns: 65px minmax(0, 1fr); gap: 8px; }
+.profileFacts dt { color: var(--muted, #b4a99b); font-size: 11px; }
+.profileFacts dd { margin: 0; overflow-wrap: anywhere; }
+.bio .activity { border-top: 1px solid var(--border, #443b31); margin-top: 10px; padding-top: 8px; }
 .badge { color: #d6b56f; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
 .body { margin: 3px 0 0 39px; font: 13px/1.65 system-ui; white-space: pre-wrap; overflow-wrap: anywhere; }
 .replies { margin-left: 15px; padding-left: 15px; border-left: 1px solid var(--border, #443b31); }

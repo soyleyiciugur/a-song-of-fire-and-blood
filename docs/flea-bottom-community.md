@@ -31,11 +31,46 @@ The expanded cast is deliberately sparse: new accounts initially appear in only 
 - Selective character fans: `lemoncake.mp3` centers Lorenah, `velvet_tax` wants Maela's perspective, `shield_main` follows Saathos independently of Gaelor, and `pearl_clutch.exe` cares about Naella and wives being treated as people.
 - Less performative voices: `AuntieMyrtle7` is a religious aunt with pointed manners, `MumsBookClub` is an emotionally invested reader, `tab_38` procrastinates with recap reels, and `moth_in_4k` is a shy, sincere lurker. Let them sound earnest or uncertain; not everyone needs a punchline.
 
+## Broader cast and ordinary behaviour
+
+The latest expansion includes all 32 suggested audience types plus eight additional voices. They are writing tendencies, not compulsory topics. The public bio should usually sound like something a person might actually leave on an account; the authoring-only `voice`, `interests`, and `continuity` fields hold the fuller personality. Thirty earlier bios were relaxed accordingly. Keep explicit single-character stan profiles as a minority.
+
+- Conflict and politics: `gaelorflop`, `velvetvillain69`, `graveyardwifi`, `formerly_toxic31`, `nuance_pending`, `justshowthedragon`, `LadyRespectfully`, `seven_not_the_crown`, `realm_can_change`, `splittercell99`, `invisible_handjob`, `principles_on_pause`.
+- Fandom habits: `receipts_since_2014`, `before_the_edits`, `wait_whos_his_dad67`, `fixitfic_department`, `two_frames_is_canon`, `unfollowed_the_wedding`, `lavender_footnotes`, `her_wrong_answers`, `feats_over_feelings`.
+- Social feeds and generations: `realmspor55`, `ivory.and.ashes`, `heal_with_wildfire`, `GulayHanim61`, `KemalUsta1962`, `NanaReadsFantasy`, `second_marriage_patch`, `this_happened_to_me`, `OldtownVisitorCentre`, `dragonfacts_247`, `seen_at_03_17`.
+- Additional everyday voices: `mulligan_mert31` (The Great Game and other interests), `one_more_scroll69`, `de_ayri`, `polls_and_vibes`, `eyvallah_bestie`, `spare_charger_67`, `tiny_good_news`, `hotglue_casualty`.
+
+Use the contrasts: the nihilist enjoys a pastry; the centrist sometimes sees no need for both sides; the hostile anti-fan is moved by a sad scene; the older reader understands people perfectly well; the craft hobbyist can just react without mentioning glue. A new fan should gradually learn. Several users can agree, have no joke ready, or leave an ordinary short reaction. Do not give everyone identical ironic fluency or an encyclopedic recall of canon. Fictional personal anecdotes are fine; do not invent actual observations, receipts, source quotations, or The Great Game mechanics.
+
+Each newly introduced account starts with only one or two comments. They are not a new mandatory posting block. The initial broad-cast pass adds 50 comments while preserving earlier comments and the 5–10 distinct-author limit per post. Future posts should rotate the wider pool instead of increasing thread volume to fit everyone.
+
 ## Language refresh
+
+### Invincible and broader brainrot
+
+`skibidi_septon` already covers occasional aura/Gen Alpha-style jokes. Five additional sparse voices widen this without making everyone speak the same way:
+
+- `viltrumite_wifi`: Invincible crossover/powerscaling reflexes, with ordinary reactions outside those interests.
+- `think_mert_think`: occasional short quote riffs, including the existing THINK MARK THINK meme; also simply chats about the scene.
+- `atom_eve.png`: an Invincible edit fan with emotional and everyday interests, not a constant franchise-reference account.
+- `cooked_by_default`: self-deprecating task-failure and gaming brainrot, distinct from aura arithmetic.
+- `fridge_lore69`: brief absurd associations mixed with normal conversation; the username is not a required joke topic.
+
+Each starts with two comments: nine across suitable reels and one reply on the directly relevant THINK MARK THINK image. Keep them rare in future selection, preserve ordinary bios, and allow comments without any catchphrase. Invincible crossovers are jokes/headcanon, never claims about this story's canon. Do not fabricate feats, episode details, or current-season spoilers. Prefer short familiar references over copied dialogue or forced trend lists.
 
 Slang is an editorial choice, not a live internet feed. When specifically refreshing contemporary meme language, check current examples first, then update only suitable voices and future comments. Never paste scraped conversations or make every account use the same trending phrase. Existing comments preserve their era and continuity.
 
 ## UI and future accounts
+
+### Fandom coverage and profile details
+
+`data/flea-bottom-fandoms.json` covers the 56 requested areas, plus Disco Elysium, Baldur's Gate, Stardew Valley, wrestling, and the previously added Invincible. The 52 new profiles cover new territory; eight existing profiles cover ASOIAF, gaming, music, pop fandom, fantasy literature, fanfic, cosplay, and editing. Existing Invincible profiles carry their tag too. Validation checks every area has a profile, not that every profile has posted.
+
+Fandom interests stay in the authoring data. Do not insert a franchise comparison when a plain reaction would be more natural. Let a fan remain quiet if neither the verified content nor the conversation gives a reason to speak. The introduction adds just 16 comments to suitable existing memes/reels; the rest of the new accounts wait for relevant future posts. Do not automatically bring in an entire matching fandom group. English-first Gen Z speech is the default with explicit exceptions such as the older Trekkie, comfort-sitcom reader or MMO player.
+
+Handle patterns deliberately mix names, initials, old nicknames, small number suffixes, separators, file extensions, short phrases, an occasional explicit fandom handle, and apparent availability workarounds. These are fictional creations, not copied real accounts or claims about statistically common handles. Official references for handle/display-name separation and allowed patterns: [X profile names](https://help.x.com/en/managing-your-account/change-x-handle), [X username guidance](https://help.x.com/en/managing-your-account/x-username-rules), [TikTok profile names](https://support.tiktok.com/en/getting-started/setting-up-your-profile/changing-your-username).
+
+The expandable profile now supports optional `displayName`, `pronouns`, `location`, and a single `current` detail with a label and value. These are authored profile snapshots, not a live activity feed. Not everybody fills every field. Display names do not replace stable handles or author IDs. The profile also shows comment and distinct-post counts calculated from the stored comments. Avoid fabricated followers, verification, online states and join dates. Public profile details do not expose the author's full personality instructions or a wall of fandom badges.
 
 Image cards show comment counts. Open a meme for its thread; reels have an expandable Gutter talk panel. Clicking a username opens the persistent profile bio. The page and profiles identify this cast as fictional regulars. No fabricated likes, online indicators, timestamps, or nonfunctional submit forms are present.
 

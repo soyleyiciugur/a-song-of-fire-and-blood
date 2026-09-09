@@ -1,0 +1,246 @@
+[
+  {
+    "id": "star-wars",
+    "label": "Star Wars"
+  },
+  {
+    "id": "tolkien",
+    "label": "LOTR / Tolkien"
+  },
+  {
+    "id": "harry-potter",
+    "label": "Harry Potter"
+  },
+  {
+    "id": "asoiaf",
+    "label": "ASOIAF / Game of Thrones"
+  },
+  {
+    "id": "marvel",
+    "label": "Marvel"
+  },
+  {
+    "id": "dc",
+    "label": "DC"
+  },
+  {
+    "id": "batman",
+    "label": "Batman"
+  },
+  {
+    "id": "dune",
+    "label": "Dune"
+  },
+  {
+    "id": "star-trek",
+    "label": "Star Trek"
+  },
+  {
+    "id": "doctor-who",
+    "label": "Doctor Who"
+  },
+  {
+    "id": "disney",
+    "label": "Disney"
+  },
+  {
+    "id": "twilight",
+    "label": "Twilight"
+  },
+  {
+    "id": "hunger-games",
+    "label": "The Hunger Games"
+  },
+  {
+    "id": "percy-jackson",
+    "label": "Percy Jackson"
+  },
+  {
+    "id": "breaking-bad",
+    "label": "Breaking Bad / Better Call Saul"
+  },
+  {
+    "id": "stranger-things",
+    "label": "Stranger Things"
+  },
+  {
+    "id": "friends",
+    "label": "Friends"
+  },
+  {
+    "id": "the-office",
+    "label": "The Office"
+  },
+  {
+    "id": "nolan",
+    "label": "Christopher Nolan"
+  },
+  {
+    "id": "cinema",
+    "label": "Cinema"
+  },
+  {
+    "id": "horror",
+    "label": "Horror films"
+  },
+  {
+    "id": "anime",
+    "label": "Anime"
+  },
+  {
+    "id": "one-piece",
+    "label": "One Piece"
+  },
+  {
+    "id": "naruto",
+    "label": "Naruto"
+  },
+  {
+    "id": "dragon-ball",
+    "label": "Dragon Ball"
+  },
+  {
+    "id": "pokemon",
+    "label": "Pokémon"
+  },
+  {
+    "id": "ghibli",
+    "label": "Studio Ghibli"
+  },
+  {
+    "id": "atla",
+    "label": "Avatar: The Last Airbender"
+  },
+  {
+    "id": "arcane",
+    "label": "Arcane"
+  },
+  {
+    "id": "gaming",
+    "label": "Gaming"
+  },
+  {
+    "id": "league",
+    "label": "League of Legends"
+  },
+  {
+    "id": "minecraft",
+    "label": "Minecraft"
+  },
+  {
+    "id": "souls",
+    "label": "Souls / Elden Ring"
+  },
+  {
+    "id": "gta",
+    "label": "Grand Theft Auto"
+  },
+  {
+    "id": "sims",
+    "label": "The Sims"
+  },
+  {
+    "id": "zelda",
+    "label": "The Legend of Zelda"
+  },
+  {
+    "id": "dnd",
+    "label": "Dungeons & Dragons"
+  },
+  {
+    "id": "warhammer",
+    "label": "Warhammer"
+  },
+  {
+    "id": "warcraft",
+    "label": "World of Warcraft / Warcraft"
+  },
+  {
+    "id": "fallout",
+    "label": "Fallout"
+  },
+  {
+    "id": "elder-scrolls",
+    "label": "The Elder Scrolls / Skyrim"
+  },
+  {
+    "id": "musicals",
+    "label": "Musicals"
+  },
+  {
+    "id": "hamilton",
+    "label": "Hamilton"
+  },
+  {
+    "id": "epic",
+    "label": "EPIC: The Musical"
+  },
+  {
+    "id": "wicked",
+    "label": "Wicked"
+  },
+  {
+    "id": "hadestown",
+    "label": "Hadestown"
+  },
+  {
+    "id": "music",
+    "label": "Music"
+  },
+  {
+    "id": "pop-stan",
+    "label": "Pop fandom"
+  },
+  {
+    "id": "fantasy-books",
+    "label": "Fantasy literature"
+  },
+  {
+    "id": "stephen-king",
+    "label": "Stephen King"
+  },
+  {
+    "id": "mythology",
+    "label": "Mythology"
+  },
+  {
+    "id": "history",
+    "label": "History"
+  },
+  {
+    "id": "true-crime",
+    "label": "True crime"
+  },
+  {
+    "id": "fanfic",
+    "label": "Fanfic / AO3"
+  },
+  {
+    "id": "cosplay",
+    "label": "Cosplay"
+  },
+  {
+    "id": "editing",
+    "label": "Video editing"
+  },
+  {
+    "id": "disco-elysium",
+    "label": "Disco Elysium"
+  },
+  {
+    "id": "baldurs-gate",
+    "label": "Baldur's Gate"
+  },
+  {
+    "id": "stardew",
+    "label": "Stardew Valley"
+  },
+  {
+    "id": "wrestling",
+    "label": "Professional wrestling"
+  },
+  {
+    "id": "invincible",
+    "label": "Invincible"
+  }
+]
