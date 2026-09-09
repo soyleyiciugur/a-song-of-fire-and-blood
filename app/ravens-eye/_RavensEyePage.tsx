@@ -17,6 +17,8 @@ import dragonsData from "@/data/dragons.json";
 import chaptersData from "@/data/chapters.json";
 import { Select } from "../_components/Select";
 import styles from "./ravens-eye.module.css";
+import GutterComments from "@/components/gallery/GutterComments";
+import { getGutterComments, isGutterEntry } from "@/lib/fleaBottom";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -418,7 +420,7 @@ function Lightbox({
 
   return (
     <div onClick={onClose} className={styles.lightboxBackdrop}>
-      {hasPrev && (
+      {hasPrev && !isGutterEntry(entry) && (
         <button
           type="button"
           onClick={(e) => {
@@ -434,8 +436,15 @@ function Lightbox({
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className={styles.lightboxCard}
+        className={`${styles.lightboxCard} ${isGutterEntry(entry) ? styles.gutterLightbox : ""}`}
       >
+        {isGutterEntry(entry) && (
+          <div className={styles.gutterToolbar}>
+            <button type="button" onClick={onPrev} disabled={!hasPrev} aria-label="Previous">← Previous</button>
+            <button type="button" onClick={onNext} disabled={!hasNext} aria-label="Next">Next →</button>
+            <button type="button" onClick={onClose} aria-label="Close">Close ×</button>
+          </div>
+        )}
         <div className={styles.lightboxImgWrap}>
           <img
             src={entry.src}
@@ -462,10 +471,11 @@ function Lightbox({
               {formatDate(entry.worldDate)}
             </div>
           )}
+          {isGutterEntry(entry) && <GutterComments key={entry.id} entryId={entry.id} />}
         </div>
       </div>
 
-      {hasNext && (
+      {hasNext && !isGutterEntry(entry) && (
         <button
           type="button"
           onClick={(e) => {
@@ -479,14 +489,14 @@ function Lightbox({
         </button>
       )}
 
-      <button
+      {!isGutterEntry(entry) && <button
         type="button"
         onClick={onClose}
         className={styles.closeBtn}
         aria-label="Close"
       >
         ✕
-      </button>
+      </button>}
     </div>
   );
 }
@@ -716,7 +726,7 @@ function ReelSlide({
         )}
       </div>
 
-      {(entry.caption || flatTagsFor(entry).length > 0) && (
+      {(entry.caption || flatTagsFor(entry).length > 0 || isGutterEntry(entry)) && (
         <div className={styles.reelSlideMeta}>
           {entry.caption && (
             <ExpandableCaption
@@ -727,6 +737,7 @@ function ReelSlide({
             />
           )}
           <GroupedTags entry={entry} small />
+          <GutterComments entryId={entry.id} collapsible />
         </div>
       )}
 
@@ -1029,6 +1040,15 @@ function GallerySection({
                 key={entry.id}
                 onClick={() => onOpen(filtered, idx)}
                 className={styles.card}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open ${entry.caption || "gallery image"}`}
+                onKeyDown={(event) => {
+                  if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) {
+                    event.preventDefault();
+                    onOpen(filtered, idx);
+                  }
+                }}
               >
                 <img
                   src={entry.src}
@@ -1036,6 +1056,9 @@ function GallerySection({
                   loading="lazy"
                   className={styles.cardImg}
                 />
+                {isGutterEntry(entry) && (
+                  <span className={styles.commentCount}>{getGutterComments(entry.id).length} comments</span>
+                )}
 
                 {(entry.caption || tags.length > 0) && (
                   <div className={styles.cardOverlay}>
@@ -1111,6 +1134,15 @@ function ReelsGridSection({
               key={entry.id}
               onClick={() => onOpen(filtered, idx)}
               className={styles.reelCard}
+              role="button"
+              tabIndex={0}
+              aria-label={`Open reel: ${entry.caption.split("\n")[0] || "Gutter reel"}`}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onOpen(filtered, idx);
+                }
+              }}
             >
               <video
                 src={withPosterFrame(entry.src)}
@@ -1119,6 +1151,7 @@ function ReelsGridSection({
                 playsInline
                 preload="metadata"
               />
+              <span className={styles.commentCount}>{getGutterComments(entry.id).length} comments</span>
 
               <div className={styles.reelPlayIcon}>
                 <svg
@@ -1366,6 +1399,7 @@ function RavensEyePageInner({
 
       {lightboxList && lightboxIdx !== null && (
         <Lightbox
+          key={lightboxList[lightboxIdx].id}
           entry={lightboxList[lightboxIdx]}
           onClose={closeLightbox}
           onPrev={() => moveLightbox(-1)}

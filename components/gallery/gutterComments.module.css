@@ -1,0 +1,23 @@
+.section { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border, #443b31); color: var(--text, #eee6da); text-align: left; }
+.heading { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 1.1rem; }
+.heading span { color: var(--muted, #b4a99b); font: 12px system-ui; border: 1px solid var(--border, #443b31); padding: 3px 8px; border-radius: 20px; }
+.intro, .footer { font: 12px/1.6 system-ui; color: var(--muted, #b4a99b); margin: 10px 0 18px; }
+.footer { border-top: 1px solid var(--border, #443b31); padding-top: 14px; margin-bottom: 0; }
+.thread, .replies { list-style: none; padding: 0; margin: 0; }
+.comment { margin-top: 17px; min-width: 0; }
+.profile summary { display: flex; align-items: center; gap: 9px; cursor: pointer; min-height: 44px; list-style: none; border-radius: 5px; }
+.profile summary::-webkit-details-marker { display: none; }
+.profile summary:focus-visible, .toggle:focus-visible { outline: 2px solid #d6b56f; outline-offset: 3px; }
+.avatar { width: 30px; height: 30px; display: grid; place-items: center; flex-shrink: 0; border-radius: 9px; color: #fff; font: 700 12px system-ui; }
+.username { font: 600 12px/1.4 system-ui; overflow-wrap: anywhere; }
+.profileHint { margin-left: auto; font: 10px system-ui; color: var(--muted, #b4a99b); }
+.bio { margin: 8px 0 10px 39px; padding: 12px; border: 1px solid var(--border, #443b31); background: #ffffff05; border-radius: 8px; font: 12px/1.6 system-ui; }
+.bio p { margin: 6px 0 0; }
+.badge { color: #d6b56f; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+.body { margin: 3px 0 0 39px; font: 13px/1.65 system-ui; white-space: pre-wrap; overflow-wrap: anywhere; }
+.replies { margin-left: 15px; padding-left: 15px; border-left: 1px solid var(--border, #443b31); }
+.collapsible { max-width: 720px; margin-top: 12px; padding-top: 0; border: 1px solid #ffffff30; border-radius: 10px; background: #13110fee; color: #eee6da; }
+.toggle { display: flex; justify-content: space-between; gap: 15px; width: 100%; min-height: 46px; padding: 10px 13px; border: 0; background: none; color: inherit; font: 12px system-ui; cursor: pointer; text-align: left; }
+.toggle > :last-child { color: #d6b56f; }
+.reelPanel { max-height: 45dvh; overflow-y: auto; overscroll-behavior: contain; padding: 0 14px 14px; touch-action: pan-y; }
+@media (max-width: 600px) { .body { margin-left: 0; } .bio { margin-left: 0; } .replies { margin-left: 8px; padding-left: 12px; } }

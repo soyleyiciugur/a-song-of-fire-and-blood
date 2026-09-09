@@ -351,6 +351,18 @@
   letter-spacing: 0.5px;
 }
 
+.gutterLightbox { overflow-y: auto; overscroll-behavior: contain; }
+.gutterLightbox .lightboxImgWrap { flex: 0 0 auto; overflow: visible; }
+.gutterLightbox .lightboxImg { height: auto; max-height: 60dvh; }
+.gutterLightbox .lightboxMeta { overflow: visible; }
+.gutterToolbar { position: sticky; top: 0; z-index: 4; display: flex; gap: 8px; flex: 0 0 auto; padding: 8px 12px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.gutterToolbar button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; color: var(--text); background: transparent; cursor: pointer; font: 12px system-ui; }
+.gutterToolbar button:last-child { margin-left: auto; }
+.gutterToolbar button:disabled { opacity: .35; cursor: default; }
+.gutterToolbar button:focus-visible { outline: 2px solid #d6b56f; outline-offset: 2px; }
+.commentCount { position: absolute; z-index: 2; top: 8px; right: 8px; padding: 5px 9px; border: 1px solid #ffffff30; border-radius: 20px; background: #17130ee8; color: #eee6da; font: 11px/1.4 system-ui; pointer-events: none; }
+.card:focus-visible, .reelCard:focus-visible { outline: 2px solid #d6b56f; outline-offset: 3px; }
+
 .navBtn {
   position: fixed;
   top: 50%;

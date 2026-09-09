@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "validate:data": "node scripts/validate-data.mjs"
+    "validate:data": "node scripts/validate-gutter.mjs && node scripts/validate-data.mjs",
+    "validate:comments": "node scripts/validate-gutter.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
