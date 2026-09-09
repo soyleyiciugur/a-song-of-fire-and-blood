@@ -144,6 +144,342 @@
       "continuity": [
         "Defends Jace against Gaelor stans, shares Alester appreciation with swordwife. Not blind to his ego."
       ]
+    },
+    {
+      "id": "regular-render",
+      "username": "keyframe_goblin",
+      "kind": "fictional",
+      "avatar": "KF",
+      "color": "#765467",
+      "bio": "exporting final_FINAL_v9. do not ask for the project file.",
+      "voice": "Gen Z amateur video editor; notices editing choices, thinks in timelines and exports. Brief, practical; occasionally defensive about the craft.",
+      "continuity": [
+        "Likes Alester edits without being an Alester stan. Talks shop with auxcord_wight."
+      ],
+      "interests": "Edits, compilations, dramatic entrances; skips policy fights.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-horse",
+      "username": "ponygirl_2004",
+      "kind": "fictional",
+      "avatar": "PG",
+      "color": "#785d45",
+      "bio": "the horse did nothing wrong. pinned for a reason.",
+      "voice": "Earnest horse girl; practical riding welfare concerns with occasional lowercase indignation.",
+      "continuity": [
+        "Judges riders by how they treat mounts, not their houses. Wants horses included in journey recaps."
+      ],
+      "interests": "Travel, mounted knights, retreats.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-ecology",
+      "username": "newtposting",
+      "kind": "fictional",
+      "avatar": "np",
+      "color": "#487451",
+      "bio": "dragons are animals before they are your faction logo.",
+      "voice": "Quiet ecology nerd; genuine questions about feeding and habitat; gently annoyed by power rankings.",
+      "continuity": [
+        "Allied with nobody. Questions dragon upkeep rather than inventing biological facts."
+      ],
+      "interests": "Dragons, Dorne journeys, royal resources.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-ledger",
+      "username": "sumif_broke",
+      "kind": "fictional",
+      "avatar": "Σ",
+      "color": "#586846",
+      "bio": "the royal budget has circular references.",
+      "voice": "Exhausted millennial spreadsheet worker; dry, specific finance jokes, sparse exclamation marks.",
+      "continuity": [
+        "Finds common ground with breadpilled on pay but wants working accounts more than revolution."
+      ],
+      "interests": "Government, staffing, damage bills, GM workload.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-odds",
+      "username": "parlay_peasant",
+      "kind": "fictional",
+      "avatar": "PP",
+      "color": "#7c5540",
+      "bio": "one more sensible bet and i'm retiring.",
+      "voice": "Sports betting forum addict; bargaining, hedging and terrible judgement. Hypothetical imaginary wagers only.",
+      "continuity": [
+        "Repeatedly misreads Visenor; envies people who supported Derrin early. Never gives real gambling advice."
+      ],
+      "interests": "Rivalries, comebacks, choice memes.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-sept",
+      "username": "AuntieMyrtle7",
+      "kind": "fictional",
+      "avatar": "AM",
+      "color": "#785b73",
+      "bio": "Tea at six. Prayer at seven. Please stop forwarding that clip.",
+      "voice": "Boomer religious aunt; warm complete sentences, pointed manners; not another confused technology uncle.",
+      "continuity": [
+        "Likes StannisOnFacebook's concern for safety. Thinks princes need apologies more than grand titles."
+      ],
+      "interests": "Weddings, family behaviour, cruelty, reunions.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-local",
+      "username": "rentdue99",
+      "kind": "fictional",
+      "avatar": "rd",
+      "color": "#78634b",
+      "bio": "actually live here btw",
+      "voice": "Terse young city resident; specific inconveniences, little interest in faction discourse.",
+      "continuity": [
+        "Finds breadpilled's speeches tiring even when agreeing. Wants streets safe and shops open."
+      ],
+      "interests": "City violence, public services, royal disorder.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-it",
+      "username": "root_access_denied",
+      "kind": "fictional",
+      "avatar": "su",
+      "color": "#416877",
+      "bio": "have you tried revoking the prince's permissions",
+      "voice": "Millennial sysadmin; concrete permissions, logs and incident-response analogies rather than gamer slang.",
+      "continuity": [
+        "Thinks HRRM is simultaneously admin and incident generator. Refuses to support anyone's unpaid help desk."
+      ],
+      "interests": "GM power, suspicious kings, authority and mistakes.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-gym",
+      "username": "bulkseason_boros",
+      "kind": "fictional",
+      "avatar": "BB",
+      "color": "#735442",
+      "bio": "sleep. eat. stop challenging your relatives.",
+      "voice": "Gym bro with unexpectedly sensible advice; casual bro-speak, no aggressive macho posturing.",
+      "continuity": [
+        "Does not count intimidation as strength. Likes discipline more than Alester's edit aura."
+      ],
+      "interests": "Training, combat posture, stressful family arguments.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-club",
+      "username": "MumsBookClub",
+      "kind": "fictional",
+      "avatar": "MB",
+      "color": "#675574",
+      "bio": "We meet on Thursdays. We never get through the agenda.",
+      "voice": "Middle-aged reader; sincere emotional reactions, book-club observations, light embarrassment about fandom.",
+      "continuity": [
+        "Enjoys Saera and Alester but worries about everybody. Tries to bring quieter characters into discussions."
+      ],
+      "interests": "Character recaps, reunions, sad edits, family fallout.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-grad",
+      "username": "footnote_404",
+      "kind": "fictional",
+      "avatar": "fn",
+      "color": "#555f75",
+      "bio": "thesis on court ritual. thesis currently losing.",
+      "voice": "Overworked graduate student; semi-academic observations followed by self-deprecating admissions.",
+      "continuity": [
+        "citation_maester checks facts; this account interprets themes and admits subjectivity. No fake quotations."
+      ],
+      "interests": "Court rituals, storytelling, political language.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-lorenah",
+      "username": "lemoncake.mp3",
+      "kind": "fictional",
+      "avatar": "lc",
+      "color": "#777040",
+      "bio": "Lorenah enjoyer. your prince is a supporting character.",
+      "voice": "Gen Z Lorenah fan; direct, selective, mildly unimpressed by prince-centric framing.",
+      "continuity": [
+        "Pushes back on jacejpeg's habit of making every scene about Jace. Likes women with their own plans."
+      ],
+      "interests": "Jace relationships, Dorne, royal celebrity.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-maela",
+      "username": "velvet_tax",
+      "kind": "fictional",
+      "avatar": "vt",
+      "color": "#744f73",
+      "bio": "Maela mentions: notifications ON. princes: muted.",
+      "voice": "Fashion-conscious Maela fan; clipped discerning opinions, not generic thirst.",
+      "continuity": [
+        "Not interested in joining either brother's faction. Notices whose perspective is absent."
+      ],
+      "interests": "Royal style, family ensembles, sibling quarrels.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-shield",
+      "username": "shield_main",
+      "kind": "fictional",
+      "avatar": "SM",
+      "color": "#466576",
+      "bio": "Saathos POV when",
+      "voice": "Understated support-class gamer and Saathos fan; tactical logistics, no excuses for Gaelor.",
+      "continuity": [
+        "Wants Saathos judged separately from his prince; does not invent acts of heroism."
+      ],
+      "interests": "Gaelor scenes, bodyguards, dangerous orders.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-supply",
+      "username": "wagonmaxxer",
+      "kind": "fictional",
+      "avatar": "wm",
+      "color": "#70624b",
+      "bio": "cool army. how are you feeding it",
+      "voice": "Strategy game logistics obsessive; practical follow-up questions rather than battle fantasies.",
+      "continuity": [
+        "Shares feeding concerns with newtposting. Skeptical of dramatic travel plans."
+      ],
+      "interests": "Journeys, war, timeskips, food.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-pirate",
+      "username": "dockside_dave",
+      "kind": "fictional",
+      "avatar": "DD",
+      "color": "#46677b",
+      "bio": "no king has ever helped me unload a boat",
+      "voice": "Older dockworker persona; blunt maritime comparisons, no cartoon pirate accent.",
+      "continuity": [
+        "Distrusts both court factions. Has more patience for workers and snacks than speeches."
+      ],
+      "interests": "Royal travel, respect, trade, practical work.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-north",
+      "username": "wintermute_89",
+      "kind": "fictional",
+      "avatar": "W",
+      "color": "#526474",
+      "bio": "southern problems. southern budget.",
+      "voice": "Dry millennial northern isolationist; short dismissals, occasional regional pride.",
+      "continuity": [
+        "Thinks most capital disputes are voluntary nonsense. Dislikes direwolf branding on random products."
+      ],
+      "interests": "Court infighting, northern references, realm-wide popularity claims.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-career",
+      "username": "hustlemaester",
+      "kind": "fictional",
+      "avatar": "HM",
+      "color": "#546386",
+      "bio": "turning setbacks into succession. open to work.",
+      "voice": "Earnest parody of a LinkedIn hustler; turns obvious disasters into career lessons, occasionally breaks character.",
+      "continuity": [
+        "Believes networking can solve anything until meeting HRRM's power over NPCs."
+      ],
+      "interests": "Appointments, resumes, public image and promotions.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-music",
+      "username": "auxcord_wight",
+      "kind": "fictional",
+      "avatar": "AW",
+      "color": "#63507f",
+      "bio": "here for the soundtrack. unfortunately learned the plot.",
+      "voice": "Music fan; asks about playlists and mood, avoids claiming unverified track titles or sound details.",
+      "continuity": [
+        "Befriends keyframe_goblin over edit-making. Has become invested in Alester against their will."
+      ],
+      "interests": "Edits, entrances, sad clips, HRRM theatrics.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-student",
+      "username": "tab_38",
+      "kind": "fictional",
+      "avatar": "38",
+      "color": "#59698a",
+      "bio": "this is revision if you don't check the syllabus",
+      "voice": "Distracted student; short honest confusion, procrastination and selective attention. No stated age.",
+      "continuity": [
+        "Uses recap reels to procrastinate; knows citation_maester disapproves. Not secretly a lore expert."
+      ],
+      "interests": "Recaps, huge captions, choices, GM notes.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-food",
+      "username": "OnionKnightEats",
+      "kind": "fictional",
+      "avatar": "OE",
+      "color": "#826141",
+      "bio": "Food only. Please do not send succession charts.",
+      "voice": "Gen X hobby cook; friendly literal food talk, can decline a metaphorical cooking meme.",
+      "continuity": [
+        "Shares food enthusiasm with StannisOnFacebook; refuses to treat HRRM's cooking as a recipe."
+      ],
+      "interests": "Food captions, cooking jokes, travel and hospitality.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-lurk",
+      "username": "moth_in_4k",
+      "kind": "fictional",
+      "avatar": "m",
+      "color": "#655571",
+      "bio": "usually just reading",
+      "voice": "Shy lurker; small sincere comments, hesitant punctuation, no constant punchlines.",
+      "continuity": [
+        "Rarely joins disputes; moved by reunions and dislikes hostile family scenes."
+      ],
+      "interests": "Quiet character moments and emotionally intense edits.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-legal",
+      "username": "objection_lol",
+      "kind": "fictional",
+      "avatar": "OL",
+      "color": "#5d6374",
+      "bio": "courtroom drama enthusiast. not your counsel.",
+      "voice": "Mock legal procedural pedant; concise objections and incredulous questions; no real legal advice.",
+      "continuity": [
+        "Unimpressed by both princes' self-justification. Needles gaelord_apologist rather than becoming their lawyer."
+      ],
+      "interests": "Confessions, punishment, succession claims, trials.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+    },
+    {
+      "id": "regular-naella",
+      "username": "pearl_clutch.exe",
+      "kind": "fictional",
+      "avatar": "pc",
+      "color": "#687c78",
+      "bio": "Naella has a point sometimes. notifications off.",
+      "voice": "Gen Z Naella fan; socially perceptive, dry and selective; neither wholly defensive nor anti-Lorenah.",
+      "continuity": [
+        "Tired of wives being treated as props. Can disagree with lemoncake.mp3 without inventing canon feuds."
+      ],
+      "interests": "Marriage, family reputation, Gaelor's decisions.",
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     }
   ],
   "comments": [
@@ -4059,6 +4395,664 @@
       "authorId": "regular-b",
       "parentId": null,
       "body": "Back to the beach photographs for me."
+    },
+    {
+      "id": "gallery-derrin-will-return-guest-1",
+      "entryId": "gallery-derrin-will-return",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "I sold my imaginary Derrin shares right before this. naturally."
+    },
+    {
+      "id": "gallery-derrin-will-return-guest-2",
+      "entryId": "gallery-derrin-will-return",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "i don't even follow hightower theories but i'm happy for the lighthouse guy"
+    },
+    {
+      "id": "gallery-gaelor-another-massacre-guest-1",
+      "entryId": "gallery-gaelor-another-massacre",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "some of us would like to get home without becoming chapter context"
+    },
+    {
+      "id": "gallery-gaelor-another-massacre-guest-2",
+      "entryId": "gallery-gaelor-another-massacre",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "every new gaelor clip makes me want a separate saathos tag even more"
+    },
+    {
+      "id": "gallery-gaelor-another-massacre-guest-3",
+      "entryId": "gallery-gaelor-another-massacre",
+      "authorId": "regular-legal",
+      "parentId": "gallery-gaelor-another-massacre-comment-1",
+      "body": "your client has outpaced the draft again"
+    },
+    {
+      "id": "gallery-gaelor-do-it-twice-guest-1",
+      "entryId": "gallery-gaelor-do-it-twice",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "There are families behind that list of names. I cannot find much to smile about here."
+    },
+    {
+      "id": "gallery-hrrm-cook-guest-1",
+      "entryId": "gallery-hrrm-cook",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "came here expecting food. leaving concerned."
+    },
+    {
+      "id": "gallery-hrrm-cook-guest-2",
+      "entryId": "gallery-hrrm-cook",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "adding this to the pre-session playlist feels like inviting something in"
+    },
+    {
+      "id": "gallery-nedenotr-guest-1",
+      "entryId": "gallery-nedenotr",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "i keep backing visenor and he keeps trading against my position"
+    },
+    {
+      "id": "gallery-nedenotr-guest-2",
+      "entryId": "gallery-nedenotr",
+      "authorId": "regular-pirate",
+      "parentId": null,
+      "body": "a man who changes sides that easily should never be trusted to load a boat"
+    },
+    {
+      "id": "gallery-nedenotr-guest-3",
+      "entryId": "gallery-nedenotr",
+      "authorId": "regular-career",
+      "parentId": null,
+      "body": "Pivoting is an essential skill. Probably not what happened here but I need this post today."
+    },
+    {
+      "id": "gallery-timeskip-guest-1",
+      "entryId": "gallery-timeskip",
+      "authorId": "regular-supply",
+      "parentId": null,
+      "body": "before we skip three months can someone tell me who paid for the supplies"
+    },
+    {
+      "id": "gallery-timeskip-guest-2",
+      "entryId": "gallery-timeskip",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "please. i just finished catching up to the previous date"
+    },
+    {
+      "id": "gallery-mahser3l-guest-1",
+      "entryId": "gallery-mahser3l",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "Imagine all three asking you to take their side at breakfast."
+    },
+    {
+      "id": "gallery-mahser3l-guest-2",
+      "entryId": "gallery-mahser3l",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "bro needs eight hours and three separate guest rooms"
+    },
+    {
+      "id": "gallery-mahser3l-guest-3",
+      "entryId": "gallery-mahser3l",
+      "authorId": "regular-north",
+      "parentId": null,
+      "body": "we could simply leave all three in the south"
+    },
+    {
+      "id": "gallery-hrrmlh5j-guest-1",
+      "entryId": "gallery-hrrmlh5j",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "i opened this instead of my reading and the caption assigned me more reading"
+    },
+    {
+      "id": "gallery-kardes55-guest-1",
+      "entryId": "gallery-kardes55",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "this is the bit i keep coming back for tbh"
+    },
+    {
+      "id": "gallery-kardes55-guest-2",
+      "entryId": "gallery-kardes55",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "That bond feels much warmer than most of the actual family scenes."
+    },
+    {
+      "id": "gallery-mtr7lk7l-guest-1",
+      "entryId": "gallery-mtr7lk7l",
+      "authorId": "regular-maela",
+      "parentId": null,
+      "body": "the outfit can stay. the attitude needs tailoring."
+    },
+    {
+      "id": "gallery-mtr7lk7l-guest-2",
+      "entryId": "gallery-mtr7lk7l",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "i love when an entire edit can be pitched as one extremely defensive sentence"
+    },
+    {
+      "id": "gallery-mtr7lk7l-guest-3",
+      "entryId": "gallery-mtr7lk7l",
+      "authorId": "regular-career",
+      "parentId": null,
+      "body": "Personal branding means standing by your choices. Even when the comments are like this."
+    },
+    {
+      "id": "gallery-mtr7lj6k-guest-1",
+      "entryId": "gallery-mtr7lj6k",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "if he does head back i hope the horse gets more rest than his excuses do"
+    },
+    {
+      "id": "gallery-mtr7lj6k-guest-2",
+      "entryId": "gallery-mtr7lj6k",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "Dorne is allowed to be more than a holding area for homesick princes"
+    },
+    {
+      "id": "gallery-mtr7lh5j-guest-1",
+      "entryId": "gallery-mtr7lh5j",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "intimidating people does not count as a strength programme"
+    },
+    {
+      "id": "gallery-mtr7ldzx-guest-1",
+      "entryId": "gallery-mtr7ldzx",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "if the administrator disappears from the logs i am going home"
+    },
+    {
+      "id": "gallery-mtr7ldzx-guest-2",
+      "entryId": "gallery-mtr7ldzx",
+      "authorId": "regular-north",
+      "parentId": null,
+      "body": "every southern travel guide reads like a warning label"
+    },
+    {
+      "id": "gallery-mtr7lcmu-guest-1",
+      "entryId": "gallery-mtr7lcmu",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "i would like a staffing chart before another biography"
+    },
+    {
+      "id": "gallery-mtr7lcmu-guest-2",
+      "entryId": "gallery-mtr7lcmu",
+      "authorId": "regular-career",
+      "parentId": null,
+      "body": "Seventeen. Multiple leadership roles. I need to update my profile."
+    },
+    {
+      "id": "gallery-mtr7lcmu-guest-3",
+      "entryId": "gallery-mtr7lcmu",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "all these responsibilities and a dragon. who plans the feeding schedule"
+    },
+    {
+      "id": "gallery-mtr7l6j7-guest-1",
+      "entryId": "gallery-mtr7l6j7",
+      "authorId": "regular-maela",
+      "parentId": null,
+      "body": "same household that manufactures the drama now requesting moderation"
+    },
+    {
+      "id": "gallery-mtr7l5ci-guest-1",
+      "entryId": "gallery-mtr7l5ci",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "Our Thursday group has abandoned every other discussion for these two."
+    },
+    {
+      "id": "gallery-mtr7l5ci-guest-2",
+      "entryId": "gallery-mtr7l5ci",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "i was trying to be normal about them. unfortunate development"
+    },
+    {
+      "id": "gallery-mtr7l0fq-guest-1",
+      "entryId": "gallery-mtr7l0fq",
+      "authorId": "regular-naella",
+      "parentId": null,
+      "body": "a wife isn't a checkpoint you unlock before returning to your previous activities"
+    },
+    {
+      "id": "gallery-mtr7l0fq-guest-2",
+      "entryId": "gallery-mtr7l0fq",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "Perhaps celebrate the marriage with the person you married."
+    },
+    {
+      "id": "gallery-mtr7l0fq-guest-3",
+      "entryId": "gallery-mtr7l0fq",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "even the caption reads like evidence submitted by the other side"
+    },
+    {
+      "id": "gallery-mtr7kx4h-guest-1",
+      "entryId": "gallery-mtr7kx4h",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "lonely knight edit but i'm thinking about where the horse gets watered"
+    },
+    {
+      "id": "gallery-mtr7kx4h-guest-2",
+      "entryId": "gallery-mtr7kx4h",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "i don't need another sad alester playlist. saved anyway"
+    },
+    {
+      "id": "gallery-mtr7kqxg-guest-1",
+      "entryId": "gallery-mtr7kqxg",
+      "authorId": "regular-north",
+      "parentId": null,
+      "body": "did anyone actually ask the Wall"
+    },
+    {
+      "id": "gallery-mtr7kqxg-guest-2",
+      "entryId": "gallery-mtr7kqxg",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "objection to calling unborn children as witnesses"
+    },
+    {
+      "id": "gallery-mtr7kqxg-guest-3",
+      "entryId": "gallery-mtr7kqxg",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "Claiming unanimous love is such a revealing way to campaign. Anyway my thesis is still blank."
+    },
+    {
+      "id": "gallery-acikl67y-guest-1",
+      "entryId": "gallery-acikl67y",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "muting jace gang until someone remembers other characters have things going on"
+    },
+    {
+      "id": "gallery-reisy5ov-guest-1",
+      "entryId": "gallery-reisy5ov",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "suspicion detected. nobody delete the logs, that makes it worse"
+    },
+    {
+      "id": "gallery-reisy5ov-guest-2",
+      "entryId": "gallery-reisy5ov",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "i would also become suspicious if someone asked me what happened in the chapter"
+    },
+    {
+      "id": "gallery-auray5ov-guest-1",
+      "entryId": "gallery-auray5ov",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "the editor deserves a seat at this small council"
+    },
+    {
+      "id": "gallery-auray5ov-guest-2",
+      "entryId": "gallery-auray5ov",
+      "authorId": "regular-maela",
+      "parentId": null,
+      "body": "presence is doing a lot of work here. taste remains a separate question."
+    },
+    {
+      "id": "gallery-auray5ov-guest-3",
+      "entryId": "gallery-auray5ov",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "i can respect the presence without volunteering to argue with him"
+    },
+    {
+      "id": "gallery-mtlmy3ac-guest-1",
+      "entryId": "gallery-mtlmy3ac",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "was here for edits. now apparently i know this man's employment history"
+    },
+    {
+      "id": "gallery-mtlmy3ac-guest-2",
+      "entryId": "gallery-mtlmy3ac",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "bodyguard fans of other bodyguards 🤝 wanting a reasonable shift length"
+    },
+    {
+      "id": "gallery-msp5o3gw-guest-1",
+      "entryId": "gallery-msp5o3gw",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "whichever one i pick, consider backing the other one"
+    },
+    {
+      "id": "gallery-msly0z13-guest-1",
+      "entryId": "gallery-msly0z13",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "you can mute the replies. we still have to live down the street"
+    },
+    {
+      "id": "gallery-msly0z13-guest-2",
+      "entryId": "gallery-msly0z13",
+      "authorId": "regular-naella",
+      "parentId": null,
+      "body": "this is what happens when you mistake everyone else's patience for approval"
+    },
+    {
+      "id": "gallery-mslxy0sp-guest-1",
+      "entryId": "gallery-mslxy0sp",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "he has the right to stop making the presentation worse at any point"
+    },
+    {
+      "id": "gallery-mslxy0sp-guest-2",
+      "entryId": "gallery-mslxy0sp",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "please do not itemise the crimes like reimbursable expenses"
+    },
+    {
+      "id": "gallery-mslxy0sp-guest-3",
+      "entryId": "gallery-mslxy0sp",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "Interesting choice to confuse explaining your reasoning with obtaining agreement."
+    },
+    {
+      "id": "gallery-mrj7mx6e-guest-1",
+      "entryId": "gallery-mrj7mx6e",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "being a jace fan looks exhausting. glad i chose differently"
+    },
+    {
+      "id": "gallery-mrj7mx6f-guest-1",
+      "entryId": "gallery-mrj7mx6f",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "oh. genuinely missed them together"
+    },
+    {
+      "id": "gallery-mrj7mx6f-guest-2",
+      "entryId": "gallery-mrj7mx6f",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "reunion edits are dangerous because suddenly i'm opening the project file at 2am"
+    },
+    {
+      "id": "gallery-mrj7mte4-guest-1",
+      "entryId": "gallery-mrj7mte4",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "i'd make this an alarm but i think i'd wake up ready to defend a prince"
+    },
+    {
+      "id": "gallery-mrj7mte4-guest-2",
+      "entryId": "gallery-mrj7mte4",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "that's an entrance you need a proper warmup for"
+    },
+    {
+      "id": "gallery-mrj7mte4-guest-3",
+      "entryId": "gallery-mrj7mte4",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "everyone greets the knight. nobody greets his transport"
+    },
+    {
+      "id": "gallery-mrj7mp57-guest-1",
+      "entryId": "gallery-mrj7mp57",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "i am hedging with neither of them"
+    },
+    {
+      "id": "gallery-mrj7mp57-guest-2",
+      "entryId": "gallery-mrj7mp57",
+      "authorId": "regular-north",
+      "parentId": null,
+      "body": "this could have stayed a family matter but apparently we all need updates"
+    },
+    {
+      "id": "gallery-mrj7mm4g-guest-1",
+      "entryId": "gallery-mrj7mm4g",
+      "authorId": "regular-supply",
+      "parentId": null,
+      "body": "retreat is a plan only if you know where the supplies are going"
+    },
+    {
+      "id": "gallery-mrj7mm4g-guest-2",
+      "entryId": "gallery-mrj7mm4g",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "the horse would also like to know why this suddenly became urgent"
+    },
+    {
+      "id": "gallery-mrj7mm4g-guest-3",
+      "entryId": "gallery-mrj7mm4g",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "retreating yourself and leaving someone else to tank are different abilities"
+    },
+    {
+      "id": "gallery-mrj7miaa-guest-1",
+      "entryId": "gallery-mrj7miaa",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "i keep seeing the joke but all i can think is that he could show up on my street"
+    },
+    {
+      "id": "gallery-mrj7mfdh-guest-1",
+      "entryId": "gallery-mrj7mfdh",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "I was having a perfectly manageable evening before this."
+    },
+    {
+      "id": "gallery-mrj7mfdh-guest-2",
+      "entryId": "gallery-mrj7mfdh",
+      "authorId": "regular-music",
+      "parentId": "gallery-mrj7mfdh-comment-4",
+      "body": "the trouble is i keep saving the sad ones and then complaining about my playlist"
+    },
+    {
+      "id": "gallery-mrj7ma4s-guest-1",
+      "entryId": "gallery-mrj7ma4s",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "HRRM has production access and no change approval process"
+    },
+    {
+      "id": "gallery-mrj7ma4s-guest-2",
+      "entryId": "gallery-mrj7ma4s",
+      "authorId": "regular-career",
+      "parentId": null,
+      "body": "Attempted to network with the narrator. Discovered he already knows everyone."
+    },
+    {
+      "id": "gallery-mrj7ma4s-guest-3",
+      "entryId": "gallery-mrj7ma4s",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "Authorial authority is a fun topic until it starts asking what your character does next."
+    },
+    {
+      "id": "gallery-mrj7m7zs-guest-1",
+      "entryId": "gallery-mrj7m7zs",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "A letter is worth sleeping on before you send it. Especially that letter."
+    },
+    {
+      "id": "gallery-mrj7m7zs-guest-2",
+      "entryId": "gallery-mrj7m7zs",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "i would have left that in drafts and still panicked"
+    },
+    {
+      "id": "gallery-mrj7m2m0-guest-1",
+      "entryId": "gallery-mrj7m2m0",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "i came for dragons and now i'm revising a household dispute"
+    },
+    {
+      "id": "gallery-mrj7lxqx-guest-1",
+      "entryId": "gallery-mrj7lxqx",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "another visenor position closed at a loss"
+    },
+    {
+      "id": "gallery-mrj7lxqx-guest-2",
+      "entryId": "gallery-mrj7lxqx",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "there is no shame in knowing when to stop the set. or the argument."
+    },
+    {
+      "id": "gallery-mrj7ltqc-guest-1",
+      "entryId": "gallery-mrj7ltqc",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "okay chapter one. a manageable place to start. surely."
+    },
+    {
+      "id": "gallery-mrj7ltqc-guest-2",
+      "entryId": "gallery-mrj7ltqc",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "Watching a dynasty introduce itself by failing to communicate is unfortunately very readable."
+    },
+    {
+      "id": "gallery-mrj7ltqc-guest-3",
+      "entryId": "gallery-mrj7ltqc",
+      "authorId": "regular-maela",
+      "parentId": null,
+      "body": "adding the women to the recap tags is a start. now let them have the conversation"
+    },
+    {
+      "id": "gallery-mrj7lq16-guest-1",
+      "entryId": "gallery-mrj7lq16",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "Dorne isn't just the consolation prize in a conversation between brothers"
+    },
+    {
+      "id": "gallery-mrj7lq16-guest-2",
+      "entryId": "gallery-mrj7lq16",
+      "authorId": "regular-supply",
+      "parentId": null,
+      "body": "is transport included in this very threatening holiday offer"
+    },
+    {
+      "id": "gallery-mrj7ljmc-guest-1",
+      "entryId": "gallery-mrj7ljmc",
+      "authorId": "regular-naella",
+      "parentId": null,
+      "body": "amazing how the brothers can make even parental approval into a spectator sport"
+    },
+    {
+      "id": "gallery-mrj7ljmc-guest-2",
+      "entryId": "gallery-mrj7ljmc",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "these are the family scenes where i stop laughing a little"
+    },
+    {
+      "id": "gallery-mrj7ljmc-guest-3",
+      "entryId": "gallery-mrj7ljmc",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "Respect does not require competing to be the favourite."
+    },
+    {
+      "id": "gallery-mrj7lesk-guest-1",
+      "entryId": "gallery-mrj7lesk",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "if a dragon is involved this holiday has a feeding budget larger than mine"
+    },
+    {
+      "id": "gallery-mrj7l9hy-guest-1",
+      "entryId": "gallery-mrj7l9hy",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "is this savoury or sweet? finally a succession question i care about"
+    },
+    {
+      "id": "gallery-mrj7l9hy-guest-2",
+      "entryId": "gallery-mrj7l9hy",
+      "authorId": "regular-north",
+      "parentId": null,
+      "body": "why has the direwolf become a bakery mascot"
+    },
+    {
+      "id": "gallery-mrj7l6vl-guest-1",
+      "entryId": "gallery-mrj7l6vl",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "being the support main does not mean approving the whole team's decisions"
+    },
+    {
+      "id": "gallery-mrj7l6vl-guest-2",
+      "entryId": "gallery-mrj7l6vl",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "destroying the logs before debugging. outstanding workflow."
+    },
+    {
+      "id": "gallery-mrj7l6vl-guest-3",
+      "entryId": "gallery-mrj7l6vl",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "and then somebody has to reconcile the damage account"
+    },
+    {
+      "id": "gallery-mrj7l0a7-guest-1",
+      "entryId": "gallery-mrj7l0a7",
+      "authorId": "regular-pirate",
+      "parentId": null,
+      "body": "never seen a whole crew change tone that fast unless the owner came aboard"
+    },
+    {
+      "id": "gallery-mrj7l0a7-guest-2",
+      "entryId": "gallery-mrj7l0a7",
+      "authorId": "regular-naella",
+      "parentId": null,
+      "body": "everyone suddenly remembered how to behave. interesting."
+    },
+    {
+      "id": "gallery-mrj7kjje-guest-1",
+      "entryId": "gallery-mrj7kjje",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "i was trying to find the pastry clip again and took a very wrong turn"
     }
   ]
 }
