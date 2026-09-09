@@ -10,11 +10,12 @@ export default function CharacterHeader({ character }: Props) {
     <header style={{ marginBottom: 40 }}>
       <h1
         style={{
-          fontSize: 48,
+          fontSize: "clamp(34px, 10vw, 48px)",
           color: "var(--gold)",
           marginTop: 0,
           marginBottom: 8,
           lineHeight: 1.15,
+          overflowWrap: "anywhere",
         }}
       >
         {character.name}
@@ -39,6 +40,7 @@ export default function CharacterHeader({ character }: Props) {
           color: "var(--muted)",
           fontSize: 18,
           marginBottom: 0,
+          overflowWrap: "anywhere",
         }}
       >
         {character.title}

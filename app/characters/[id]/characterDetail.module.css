@@ -1,16 +1,43 @@
+.page {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 .detailGrid {
   display: grid;
+  width: 100%;
+  min-width: 0;
   grid-template-columns: minmax(0, 1fr) 320px;
   gap: 30px;
   align-items: start;
 }
 
 .mainColumn {
+  width: 100%;
+  min-width: 0;
+}
+
+.detailGrid > * {
   min-width: 0;
 }
 
 @media (max-width: 900px) {
   .detailGrid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .detailGrid > :last-child {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 36px 14px 56px;
+  }
+
+  .detailGrid {
+    gap: 16px;
   }
 }

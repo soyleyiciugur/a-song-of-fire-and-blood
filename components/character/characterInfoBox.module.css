@@ -808,42 +808,27 @@
 
 @media (max-width: 640px) {
   .box {
-    position: fixed;
-    z-index: 20;
-    left: 0;
-    top: 84px;
-    width: min(330px, calc(100vw - 28px));
-    max-width: none;
-    max-height: calc(100dvh - 100px);
-    border-radius: 0 14px 14px 0;
-    transform: translateX(calc(-100% + 48px));
-    transition: transform 0.22s ease;
+    position: relative;
+    z-index: auto;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+    border-radius: 12px;
+    transform: none;
+    transition: none;
   }
 
-  .boxExpanded { transform: translateX(0); }
-  .boxCollapsed { overflow: hidden; }
+  .boxExpanded,
+  .boxCollapsed {
+    transform: none;
+  }
+
   .mobileToggle {
-    display: flex;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: -48px;
-    width: 48px;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    flex-direction: column;
-    color: var(--gold);
-    background: #141418;
-    border: 1px solid #2b2b31;
-    border-left: 0;
-    border-radius: 0 10px 10px 0;
-    cursor: pointer;
-    font: 10px var(--font-geist);
+    display: none;
   }
-
-  .mobileToggle span:last-child { font-size: 20px; line-height: 1; }
 
   .modalBackdrop {
     padding: 10px;

@@ -40,7 +40,7 @@ export default async function CharacterPage({ params }: Props) {
   const portraitVariants = getCharacterPortraitVariants(character.id);
 
   return (
-    <main className="page">
+    <main className={`page ${styles.page}`}>
       <div className="container">
         <CharacterHeader character={character} />
 
