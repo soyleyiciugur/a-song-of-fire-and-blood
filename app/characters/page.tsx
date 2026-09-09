@@ -62,7 +62,7 @@ function formatNickname(nickname?: string | null) {
     .trim()
     .replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, "");
 
-  return clean ? `“${clean}”` : null;
+  return clean ? `"${clean}"` : null;
 }
 
 function RawMiniPortrait({
