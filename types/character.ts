@@ -53,6 +53,8 @@ export type CharacterId =
   | "melessa-hightower"
   | "meria-martell"
   | "mother-marya"
+  | "merryn-whitespring"
+  | "mydan-gerren"
   | "myles-mooton"
   | "myrielle-marbrand"
   | "naela-targaryen"
@@ -78,7 +80,8 @@ export type CharacterId =
   | "vhaemys-targaryen-elder"
   | "visenor-targaryen"
   | "visenya-targaryen"
-  | "weylar-rocke";
+  | "weylar-rocke"
+  | "zekar-alasyr";
 
 export interface CharacterQuote {
   text: string;
@@ -132,7 +135,7 @@ export interface Character {
   spouse?: string;
   siblings: string[];
   children?: string[];
-  mentor?: string;
+  mentor?: string | string[];
   dragon?: string;
 
   traits: string[];

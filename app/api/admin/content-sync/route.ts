@@ -58,7 +58,7 @@ The data files use these schemas. Follow them EXACTLY — field names, casing, a
 the output is merged directly into these files.
 
 - characters: { id, name, nickname, aliases[], house, title, status, age, nameday: { day, moon, year }, height,
-  father, mother, spouse, siblings[], children[], mentor, dragon, traits[], goals[], relationships: { otherCharacterId: "one sentence" },
+  father, mother, spouse, siblings[], children[], mentor (string or string[]), dragon, traits[], goals[], relationships: { otherCharacterId: "one sentence" },
   summary, quotes[] }
   -- traits[] MUST be short (1-3 word) adjectives or noun-phrases, e.g. "Loyal", "Quietly Ruthless", "Battle-Scarred".
      NEVER a full sentence. If unsure, omit rather than pad.

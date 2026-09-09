@@ -184,7 +184,7 @@ const createBlankCharacter = (id: string, name: string) => ({
   spouse: "-",
   siblings: [],
   children: [],
-  mentor: "-",
+  mentor: [],
   dragon: "-",
   traits: [],
   goals: [],
@@ -460,6 +460,55 @@ function CharactersTab({
                 <SearchableSelect label="Mother" value={activeChar.mother} options={charOptions} onChange={(v: string) => handleChange("mother", v)} />
                 <SearchableSelect label="Spouse" value={activeChar.spouse} options={charOptions} onChange={(v: string) => handleChange("spouse", v)} />
                 <SearchableSelect label="Dragon" value={activeChar.dragon} options={dragonOptions} onChange={(v: string) => handleChange("dragon", v)} />
+              </div>
+              <div>
+                <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Mentors</span>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "10px", marginBottom: "10px" }}>
+                  {(Array.isArray(activeChar.mentor)
+                    ? activeChar.mentor
+                    : activeChar.mentor && activeChar.mentor !== "-"
+                      ? [activeChar.mentor]
+                      : []
+                  ).map((mentorId: string) => {
+                    const mentor = chars.find((character) => character.id === mentorId);
+                    return (
+                      <div key={mentorId} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 6px 6px 10px", background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "20px", fontSize: "0.9rem" }}>
+                        <Avatar id={mentorId} name={mentor?.name || mentorId} size={20} />
+                        <span>{mentor?.name || mentorId}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const mentors = Array.isArray(activeChar.mentor) ? activeChar.mentor : [activeChar.mentor];
+                            handleChange("mentor", mentors.filter((id: string) => id !== mentorId));
+                          }}
+                          style={{ background: "rgba(178,34,34,0.2)", color: "#ff8080", border: "none", width: "18px", height: "18px", borderRadius: "50%", cursor: "pointer", lineHeight: 1, fontSize: "0.8rem" }}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+                <SearchableSelect
+                  label=""
+                  placeholder="+ Add Mentor..."
+                  options={charOptions.filter((option) => {
+                    const mentors = Array.isArray(activeChar.mentor)
+                      ? activeChar.mentor
+                      : activeChar.mentor && activeChar.mentor !== "-"
+                        ? [activeChar.mentor]
+                        : [];
+                    return option.id !== "-" && option.id !== activeChar.id && !mentors.includes(option.id);
+                  })}
+                  onChange={(mentorId: string) => {
+                    const mentors = Array.isArray(activeChar.mentor)
+                      ? activeChar.mentor
+                      : activeChar.mentor && activeChar.mentor !== "-"
+                        ? [activeChar.mentor]
+                        : [];
+                    handleChange("mentor", [...mentors, mentorId]);
+                  }}
+                />
               </div>
               <div>
                 <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Traits</span>

@@ -94,6 +94,11 @@ function isValidValue(value?: string | null): value is string {
   return Boolean(value && value !== "-");
 }
 
+function validCharacterRefs(value?: string | string[] | null) {
+  const values = Array.isArray(value) ? value : [value];
+  return values.filter(isValidValue);
+}
+
 const characterList = charactersData as Character[];
 const houseList = housesData as { id: string; name: string }[];
 const dragonList = dragonsData as { id: string; name: string }[];
@@ -438,10 +443,19 @@ export default function CharacterInfoBox({
             <InfoRow label="Height" value={character.height ?? "-"} />
             <InfoRow label="Dragon" value={<DragonValue value={character.dragon} />} />
 
-            {isValidValue(character.mentor) && (
+            {validCharacterRefs(character.mentor).length > 0 && (
               <InfoRow
-                label="Mentor"
-                value={<CharacterValue value={character.mentor} />}
+                label={validCharacterRefs(character.mentor).length > 1 ? "Mentors" : "Mentor"}
+                value={
+                  <>
+                    {validCharacterRefs(character.mentor).map((mentor, index) => (
+                      <span key={mentor}>
+                        {index > 0 && ", "}
+                        <CharacterValue value={mentor} />
+                      </span>
+                    ))}
+                  </>
+                }
               />
             )}
           </section>

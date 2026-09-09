@@ -65,7 +65,7 @@ export const CharacterSchema = z
     spouse: z.string().optional().default("-"),
     siblings: z.array(z.string()).default([]),
     children: z.array(z.string()).optional().default([]),
-    mentor: z.string().optional().default("-"),
+    mentor: z.union([z.string(), z.array(z.string())]).optional().default("-"),
     dragon: z.string().optional().default("-"),
     traits: z.array(z.string()).default([]),
     goals: z.array(z.string()).default([]),
