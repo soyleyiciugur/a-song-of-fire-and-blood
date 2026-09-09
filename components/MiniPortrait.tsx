@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\MiniPortrait.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const FALLBACK = "/images/miniportraits/default.png";
@@ -15,8 +15,13 @@ type Props = {
 export default function MiniPortrait({ id, alt, size = 36 }: Props) {
   const [src, setSrc] = useState(`/images/miniportraits/${id}.webp`);
 
+  useEffect(() => {
+    setSrc(`/images/miniportraits/${id}.webp`);
+  }, [id]);
+
   return (
     <Image
+      key={id}
       src={src}
       alt={alt}
       width={size}

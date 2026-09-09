@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import MiniPortrait from "@/components/MiniPortrait";
 import { getCharacters } from "@/lib/characters";
@@ -30,6 +30,8 @@ const HEIGHT = 390;
 const CENTER_X = WIDTH / 2;
 const CENTER_Y = HEIGHT / 2;
 const LABEL_EDGE_GUARD = 86;
+const LABEL_VERTICAL_GUARD = 24;
+const MIN_LABEL_GAP = 22;
 
 const characters = getCharacters();
 const byId = new Map<CharacterId, Character>(
@@ -102,6 +104,44 @@ function buildRadialLayout(ids: string[]) {
     });
   });
 
+  // Labels on the sides of a radial graph can converge even when their nodes
+  // sit on separate rings. Keep each side in its original order while giving
+  // every label a guaranteed vertical lane inside the viewBox.
+  const spreadSide = (sideIds: string[]) => {
+    const sorted = sideIds.sort(
+      (a, b) => (result.get(a)?.y ?? 0) - (result.get(b)?.y ?? 0)
+    );
+
+    sorted.forEach((id, index) => {
+      const point = result.get(id);
+      if (!point || index === 0) return;
+
+      const previous = result.get(sorted[index - 1]);
+      if (previous) point.y = Math.max(point.y, previous.y + MIN_LABEL_GAP);
+    });
+
+    for (let index = sorted.length - 1; index >= 0; index--) {
+      const point = result.get(sorted[index]);
+      if (!point) continue;
+
+      const maxY =
+        HEIGHT - LABEL_VERTICAL_GUARD - (sorted.length - 1 - index) * MIN_LABEL_GAP;
+      point.y = Math.min(point.y, maxY);
+    }
+
+    sorted.forEach((id, index) => {
+      const point = result.get(id);
+      if (!point) return;
+      point.y = Math.max(
+        point.y,
+        LABEL_VERTICAL_GUARD + index * MIN_LABEL_GAP
+      );
+    });
+  };
+
+  spreadSide(ids.filter((id) => (result.get(id)?.x ?? CENTER_X) < CENTER_X));
+  spreadSide(ids.filter((id) => (result.get(id)?.x ?? CENTER_X) >= CENTER_X));
+
   return result;
 }
 
@@ -140,6 +180,11 @@ export default function CharacterRelationships({ characterId }: Props) {
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedId(null);
+    setHoveredId(null);
+  }, [characterId]);
 
   if (entries.length === 0 || !currentCharacter) return null;
 
@@ -270,6 +315,7 @@ export default function CharacterRelationships({ characterId }: Props) {
             <>
               <div className={styles.relationshipSidebarHeader}>
                 <MiniPortrait
+                  key={selected.character.id}
                   id={selected.character.id}
                   alt={selected.character.name}
                   size={34}
