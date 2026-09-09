@@ -374,7 +374,7 @@
         "Not interested in joining either brother's faction. Notices whose perspective is absent."
       ],
       "interests": "Royal style, family ensembles, sibling quarrels.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
+      "postingStyle": "Occasional ordinary fashion or social observations. Maela references are rare and only directly relevant; do not steer unrelated threads back to her."
     },
     {
       "id": "regular-shield",
@@ -2466,6 +2466,234 @@
         "value": "old wrestling highlights"
       },
       "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
+    },
+    {
+      "id": "cast-jacaelon-targaryen",
+      "username": "jace_targaryen",
+      "kind": "fictional",
+      "avatar": "JT",
+      "color": "#695d91",
+      "bio": "175. yes, still.",
+      "displayName": "Jace",
+      "voice": "17 at the current world date. Gen Z, quick and strategic, lightly sarcastic, occasionally defensive; no forced slang stacks.",
+      "continuity": [
+        "Protective of people close to him, obsessed with being taken seriously. Uses witty deflection rather than explaining secrets.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "jacaelon-targaryen"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-gaelor-targaryen",
+      "username": "gaelor_targaryen",
+      "kind": "fictional",
+      "avatar": "GT",
+      "color": "#8a454b",
+      "bio": "not running this past anyone first",
+      "displayName": "Gaelor",
+      "voice": "18 at the current world date. Gen Z, blunt, impulsive and proud; shorter, more confrontational replies than Jace.",
+      "continuity": [
+        "Reacts badly to ridicule and competes with Jace. Does not deny canon cruelty or turn victims into punchlines.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "gaelor-targaryen"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-visenor-targaryen",
+      "username": "visenor_targaryen",
+      "kind": "fictional",
+      "avatar": "VT",
+      "color": "#527975",
+      "bio": "will answer when i have a proper answer",
+      "displayName": "Visenor",
+      "voice": "24 at the current world date. Young adult, articulate evasions and overexplaining mixed with restrained internet speech.",
+      "continuity": [
+        "Bookish and defensive about family decisions. Social-AU jokes never reveal his hidden alias, location, dragon or secret plans as an actual public confession.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "visenor-targaryen"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-alester-dayne",
+      "username": "alester_dayne",
+      "kind": "fictional",
+      "avatar": "AD",
+      "color": "#6e638b",
+      "bio": "i have been asked to be here",
+      "displayName": "Alester",
+      "voice": "18 at the current world date. Gen Z but laconic, observant, dry; a young quiet person, not an old knight lecturing everyone.",
+      "continuity": [
+        "Loyal to Jace and Saera. Affection is understated. No invented romantic resolution or public disclosure of hidden feelings.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "alester-dayne"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-saera-targaryen",
+      "username": "saera_targaryen",
+      "kind": "fictional",
+      "avatar": "ST",
+      "color": "#6b8297",
+      "bio": "some things can remain private",
+      "displayName": "Saera",
+      "voice": "19 at the current world date. Reserved young adult, quietly funny, warm with boundaries; light modern phrasing, no performative catchphrases.",
+      "continuity": [
+        "Independent and compassionate. Do not assume normal sight or invent a relationship outcome.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "saera-targaryen"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-baelenys-targaryen",
+      "username": "BaelenysTargaryen",
+      "kind": "fictional",
+      "avatar": "BT",
+      "color": "#846d43",
+      "bio": "If it concerns the Crown, be clear.",
+      "displayName": "Baelenys",
+      "voice": "58 at the current world date. Older authoritative father, complete sentences, exacting and imposing; no Gen Z slang unless deliberately quoting a child.",
+      "continuity": [
+        "Proud, calculating, impatient with his children's public arguments. Not a generic kindly granddad.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "baelenys-targaryen"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-lorenah-dayne",
+      "username": "lorenah_dayne",
+      "kind": "fictional",
+      "avatar": "LD",
+      "color": "#817249",
+      "bio": "a quiet afternoon would be nice",
+      "displayName": "Lorenah",
+      "voice": "16 at the current world date. Composed, perceptive teenager with direct modern phrasing, small dry jokes and little patience for grandeur.",
+      "continuity": [
+        "Can puncture Jace's self-importance without hostility. Keep replies age-appropriate and do not disclose intrigue.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "lorenah-dayne"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-naella-velaryon",
+      "username": "naella_velaryon",
+      "kind": "fictional",
+      "avatar": "NV",
+      "color": "#507f84",
+      "bio": "not every thought needs a reply",
+      "displayName": "Naella",
+      "voice": "15 at the current world date. Warm but watchful teen, short direct replies; protective without sounding like a middle-aged parent.",
+      "continuity": [
+        "Protective of Gaelor but can tell him to stop posting. No sexualized dialogue or public disclosure of political schemes.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "naella-velaryon"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "cast-maela-targaryen",
+      "username": "maela_targaryen",
+      "kind": "fictional",
+      "avatar": "MT",
+      "color": "#87608b",
+      "bio": "older twin. it matters.",
+      "displayName": "Maela",
+      "voice": "17 at the current world date. Gen Z, agile teasing, guarded, unbothered; has a life outside mocking Jace.",
+      "continuity": [
+        "Two minutes older than Jace; sibling teasing stays nonsexual. Does not reveal Vance's fate or her secrets.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "maela-targaryen"
+      },
+      "postingStyle": "Very rare: low editorial priority. Only appear when Maela herself is directly relevant; do not use her as the default sibling reply or insert her into general royal conversations."
+    },
+    {
+      "id": "cast-saathos-maris",
+      "username": "saathos_maris",
+      "kind": "fictional",
+      "avatar": "SM",
+      "color": "#597081",
+      "bio": "read the instructions before leaving",
+      "displayName": "Saathos",
+      "voice": "25 at the current world date. Young adult, disciplined and sardonic, plain concise sentences, dry workplace humour.",
+      "continuity": [
+        "Loyal but exhausted by dangerous orders. Does not claim invented heroics or endorse civilian deaths.",
+        "Fictional social-media AU cameo, not a new canon event. Use current nameday/chronicle age for tone; no inherited generational stereotype overrides personality."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "saathos-maris"
+      },
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
+    },
+    {
+      "id": "institution-citadel",
+      "username": "citadel_raven_desk",
+      "kind": "fictional",
+      "avatar": "CR",
+      "color": "#678073",
+      "displayName": "Citadel · Raven desk",
+      "bio": "please include a subject line. the bird cannot guess.",
+      "voice": "A fictional Gen Z public-facing Citadel admin: concise helpful institutional voice slipping into dry internet humour. Never claims to be a named maester or to publish canon policy.",
+      "continuity": [
+        "Answers harmless questions about notes, correspondence and reading. Does not leak letters, private identities or secret lore.",
+        "The Citadel is canonical; this social desk is a parody invention."
+      ],
+      "account": {
+        "type": "institution",
+        "institutionId": "citadel"
+      },
+      "postingStyle": "Rare, only relevant admin replies. Institution verification does not pin a conversation."
+    },
+    {
+      "id": "institution-city-watch",
+      "username": "citywatch_help",
+      "kind": "fictional",
+      "avatar": "CW",
+      "color": "#8c7744",
+      "displayName": "City Watch · Help desk",
+      "bio": "this inbox is not an emergency service",
+      "voice": "Fictional Gen Z institutional admin, strained professionalism and understated exasperation. Avoids describing cruelty as a cute PR mishap.",
+      "continuity": [
+        "Can address harmless AU traffic or public conduct jokes; does not issue invented real or canon regulations.",
+        "City Watch is canonical; this help desk and its unnamed admin are parody inventions."
+      ],
+      "account": {
+        "type": "institution",
+        "institutionId": "city-watch"
+      },
+      "postingStyle": "One comment once in a while, no mandatory appearance on violence posts. Not automatically pinned."
     }
   ],
   "comments": [
@@ -7571,6 +7799,657 @@
       "authorId": "regular-fandom-hunger-games",
       "parentId": null,
       "body": "and everyone outside the palace is expected to live with that being his idea of a good day"
+    },
+    {
+      "id": "gallery-mri1fb1a-sprinkle-star-wars",
+      "entryId": "gallery-mri1fb1a",
+      "authorId": "regular-fandom-star-wars",
+      "parentId": null,
+      "body": "family gatherings really do become easier when nobody there can command an army"
+    },
+    {
+      "id": "gallery-mslvqeek-sprinkle-tolkien",
+      "entryId": "gallery-mslvqeek",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "calling the ferry the black dread has completely won me over"
+    },
+    {
+      "id": "gallery-mri9apme-sprinkle-harry-potter",
+      "entryId": "gallery-mri9apme",
+      "authorId": "regular-fandom-harry-potter",
+      "parentId": null,
+      "body": "i love extra lore right up until someone expects me to remember it out loud"
+    },
+    {
+      "id": "gallery-mri8nlag-sprinkle-marvel",
+      "entryId": "gallery-mri8nlag",
+      "authorId": "regular-fandom-marvel",
+      "parentId": null,
+      "body": "being the guy who handles all the enemies is a terrible job description actually"
+    },
+    {
+      "id": "gallery-mri9nayi-sprinkle-dc",
+      "entryId": "gallery-mri9nayi",
+      "authorId": "regular-fandom-dc",
+      "parentId": null,
+      "body": "that's a lot of trust to notice only when the person isn't there"
+    },
+    {
+      "id": "gallery-mskqis7u-sprinkle-batman",
+      "entryId": "gallery-mskqis7u",
+      "authorId": "regular-fandom-batman",
+      "parentId": null,
+      "body": "i'd close the front camera and pretend i never saw that"
+    },
+    {
+      "id": "gallery-mtlmy3hc-sprinkle-dune",
+      "entryId": "gallery-mtlmy3hc",
+      "authorId": "regular-fandom-dune",
+      "parentId": null,
+      "body": "having the author tagged in your judgement-day meme feels like a serious procedural problem"
+    },
+    {
+      "id": "gallery-mslv4ypi-sprinkle-star-trek",
+      "entryId": "gallery-mslv4ypi",
+      "authorId": "regular-fandom-star-trek",
+      "parentId": null,
+      "body": "A shared afternoon without a succession debate seems worth trying more often."
+    },
+    {
+      "id": "gallery-mri9ivtq-sprinkle-doctor-who",
+      "entryId": "gallery-mri9ivtq",
+      "authorId": "regular-fandom-doctor-who",
+      "parentId": null,
+      "body": "getting the title and realising you still have to be yourself in the morning. rough"
+    },
+    {
+      "id": "gallery-mslvs4e3-sprinkle-disney",
+      "entryId": "gallery-mslvs4e3",
+      "authorId": "regular-fandom-disney",
+      "parentId": null,
+      "body": "getting this many people through one outing without losing someone is already an achievement"
+    },
+    {
+      "id": "gallery-mtj55kzy-sprinkle-twilight",
+      "entryId": "gallery-mtj55kzy",
+      "authorId": "regular-fandom-twilight",
+      "parentId": null,
+      "body": "the quotation marks around north are doing more work than the itinerary"
+    },
+    {
+      "id": "gallery-heir-of-childslayers-sprinkle-hunger-games",
+      "entryId": "gallery-heir-of-childslayers",
+      "authorId": "regular-fandom-hunger-games",
+      "parentId": null,
+      "body": "the caption gets worse when you realise it's correcting an excuse"
+    },
+    {
+      "id": "gallery-mtlmy5ov-sprinkle-percy-jackson",
+      "entryId": "gallery-mtlmy5ov",
+      "authorId": "regular-fandom-percy-jackson",
+      "parentId": null,
+      "body": "wait is that a real name or has the family tree finally defeated me"
+    },
+    {
+      "id": "gallery-mtlmy3hc-sprinkle-breaking-bad",
+      "entryId": "gallery-mtlmy3hc",
+      "authorId": "regular-fandom-breaking-bad",
+      "parentId": null,
+      "body": "hearing your own explanation repeated back at a trial must be a deeply unpleasant experience"
+    },
+    {
+      "id": "gallery-mslv2fqv-sprinkle-stranger-things",
+      "entryId": "gallery-mslv2fqv",
+      "authorId": "regular-fandom-stranger-things",
+      "parentId": null,
+      "body": "same room after the fight is brutal. no opportunity to pretend you won"
+    },
+    {
+      "id": "gallery-mslvaimb-sprinkle-friends",
+      "entryId": "gallery-mslvaimb",
+      "authorId": "regular-fandom-friends",
+      "parentId": null,
+      "body": "A lunch decision. Finally something I feel qualified to join."
+    },
+    {
+      "id": "gallery-mri9v7lk-sprinkle-the-office",
+      "entryId": "gallery-mri9v7lk",
+      "authorId": "regular-fandom-the-office",
+      "parentId": null,
+      "body": "congrats on the promotion. the unread messages are now your personality"
+    },
+    {
+      "id": "gallery-mslvv0jd-sprinkle-nolan",
+      "entryId": "gallery-mslvv0jd",
+      "authorId": "regular-fandom-nolan",
+      "parentId": null,
+      "body": "this is the timeline i'd like a little more screen time in"
+    },
+    {
+      "id": "gallery-mri8m3qz-sprinkle-cinema",
+      "entryId": "gallery-mri8m3qz",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "it's funnier when the caption is this openly on his side"
+    },
+    {
+      "id": "gallery-mria6m2b-sprinkle-horror",
+      "entryId": "gallery-mria6m2b",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "being alone in a cave is already enough. the shadow did not need a personality"
+    },
+    {
+      "id": "gallery-mslvzlmt-sprinkle-anime",
+      "entryId": "gallery-mslvzlmt",
+      "authorId": "regular-fandom-anime",
+      "parentId": null,
+      "body": "filler episode defenders we are so back"
+    },
+    {
+      "id": "gallery-mri1czah-sprinkle-one-piece",
+      "entryId": "gallery-mri1czah",
+      "authorId": "regular-fandom-one-piece",
+      "parentId": null,
+      "body": "a room full of people raising a glass for the same person. yeah that gets me"
+    },
+    {
+      "id": "gallery-mria57fe-sprinkle-naruto",
+      "entryId": "gallery-mria57fe",
+      "authorId": "regular-fandom-naruto",
+      "parentId": null,
+      "body": "sometimes the strongest move is not answering your brother immediately"
+    },
+    {
+      "id": "gallery-mtlmxsis-sprinkle-dragon-ball",
+      "entryId": "gallery-mtlmxsis",
+      "authorId": "regular-fandom-dragon-ball",
+      "parentId": null,
+      "body": "everybody discussing height like it gives a combat multiplier"
+    },
+    {
+      "id": "gallery-msly6h53-sprinkle-pokemon",
+      "entryId": "gallery-msly6h53",
+      "authorId": "regular-fandom-pokemon",
+      "parentId": null,
+      "body": "i would remember that name before half the royal family's names"
+    },
+    {
+      "id": "gallery-mslvnfjl-sprinkle-ghibli",
+      "entryId": "gallery-mslvnfjl",
+      "authorId": "regular-fandom-ghibli",
+      "parentId": null,
+      "body": "i like the cove. sorry to the dragons but i would happily sit there"
+    },
+    {
+      "id": "gallery-mri1fb1a-sprinkle-atla",
+      "entryId": "gallery-mri1fb1a",
+      "authorId": "regular-fandom-atla",
+      "parentId": null,
+      "body": "being related to someone and agreeing with them are apparently very different quests"
+    },
+    {
+      "id": "gallery-mslv2fqv-sprinkle-arcane",
+      "entryId": "gallery-mslv2fqv",
+      "authorId": "regular-fandom-arcane",
+      "parentId": null,
+      "body": "i was laughing until i thought about having to sleep next to the person you're still furious with"
+    },
+    {
+      "id": "gallery-mskqis7u-sprinkle-league",
+      "entryId": "gallery-mskqis7u",
+      "authorId": "regular-fandom-league",
+      "parentId": null,
+      "body": "queuing against someone who remembers your childhood mistakes is a terrible matchmaking system"
+    },
+    {
+      "id": "gallery-mslvvyhv-sprinkle-minecraft",
+      "entryId": "gallery-mslvvyhv",
+      "authorId": "regular-fandom-minecraft",
+      "parentId": null,
+      "body": "the grill is the one thing here that should not need a committee"
+    },
+    {
+      "id": "gallery-mriadr0v-sprinkle-souls",
+      "entryId": "gallery-mriadr0v",
+      "authorId": "regular-fandom-souls",
+      "parentId": null,
+      "body": "some days the difficult part is getting up for the next attempt. fair enough"
+    },
+    {
+      "id": "gallery-mslv4ypi-sprinkle-gta",
+      "entryId": "gallery-mslv4ypi",
+      "authorId": "regular-fandom-gta",
+      "parentId": null,
+      "body": "two princes on bikes is the first travel plan here i could actually afford"
+    },
+    {
+      "id": "gallery-mslvt2d0-sprinkle-sims",
+      "entryId": "gallery-mslvt2d0",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "you can plan every detail of the visit and still not control what the family says"
+    },
+    {
+      "id": "gallery-msly6h53-sprinkle-zelda",
+      "entryId": "gallery-msly6h53",
+      "authorId": "regular-fandom-zelda",
+      "parentId": null,
+      "body": "would absolutely abandon the main task to find out more about that dragon"
+    },
+    {
+      "id": "gallery-msly6vmo-sprinkle-dnd",
+      "entryId": "gallery-msly6vmo",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "it is very hard to win a disagreement with the person describing the room"
+    },
+    {
+      "id": "gallery-mri95avc-sprinkle-warhammer",
+      "entryId": "gallery-mri95avc",
+      "authorId": "regular-fandom-warhammer",
+      "parentId": null,
+      "body": "dark setting fans can still think a guy needs to stop enjoying himself"
+    },
+    {
+      "id": "gallery-mri8nlag-sprinkle-warcraft",
+      "entryId": "gallery-mri8nlag",
+      "authorId": "regular-fandom-warcraft",
+      "parentId": null,
+      "body": "Reliable people somehow always end up with extra duties. Funny how that works."
+    },
+    {
+      "id": "gallery-mslvb2l8-sprinkle-fallout",
+      "entryId": "gallery-mslvb2l8",
+      "authorId": "regular-fandom-fallout",
+      "parentId": null,
+      "body": "the caption sounds like he went on a walk and claimed it as a policy achievement"
+    },
+    {
+      "id": "gallery-mri9nayi-sprinkle-elder-scrolls",
+      "entryId": "gallery-mri9nayi",
+      "authorId": "regular-fandom-elder-scrolls",
+      "parentId": null,
+      "body": "you get used to having backup and then suddenly every little noise is your problem"
+    },
+    {
+      "id": "gallery-mslvf3sd-sprinkle-musicals",
+      "entryId": "gallery-mslvf3sd",
+      "authorId": "regular-fandom-musicals",
+      "parentId": null,
+      "body": "the trial has lost the plot and apparently also the count"
+    },
+    {
+      "id": "gallery-mri9x0ro-sprinkle-hamilton",
+      "entryId": "gallery-mri9x0ro",
+      "authorId": "regular-fandom-hamilton",
+      "parentId": null,
+      "body": "the promotion announcement has barely finished and we're already campaigning for the next job"
+    },
+    {
+      "id": "gallery-mslvv0jd-sprinkle-epic",
+      "entryId": "gallery-mslvv0jd",
+      "authorId": "regular-fandom-epic",
+      "parentId": null,
+      "body": "the version where going home is just going home. i'd take it"
+    },
+    {
+      "id": "gallery-mri95xhy-sprinkle-wicked",
+      "entryId": "gallery-mri95xhy",
+      "authorId": "regular-fandom-wicked",
+      "parentId": null,
+      "body": "i can enjoy a harmless moment without signing up to defend the rest of his week"
+    },
+    {
+      "id": "gallery-mri9nayi-sprinkle-hadestown",
+      "entryId": "gallery-mri9nayi",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "it's the quiet after someone leaves that always does it"
+    },
+    {
+      "id": "gallery-mria6m2b-sprinkle-stephen-king",
+      "entryId": "gallery-mria6m2b",
+      "authorId": "regular-fandom-stephen-king",
+      "parentId": null,
+      "body": "A cave is a perfectly good place to decide to be somewhere else."
+    },
+    {
+      "id": "gallery-mslvqeek-sprinkle-mythology",
+      "entryId": "gallery-mslvqeek",
+      "authorId": "regular-fandom-mythology",
+      "parentId": null,
+      "body": "the boat has a dragon epithet now. someone is going to need a longer ticket"
+    },
+    {
+      "id": "gallery-mslvp15b-sprinkle-history",
+      "entryId": "gallery-mslvp15b",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "AC doing very different work in this caption. took me a second"
+    },
+    {
+      "id": "gallery-mri9yw60-sprinkle-true-crime",
+      "entryId": "gallery-mri9yw60",
+      "authorId": "regular-fandom-true-crime",
+      "parentId": null,
+      "body": "that pause when a name suddenly connects to something you wish it didn't"
+    },
+    {
+      "id": "gallery-mtlmy3j4-sprinkle-disco-elysium",
+      "entryId": "gallery-mtlmy3j4",
+      "authorId": "regular-fandom-disco-elysium",
+      "parentId": null,
+      "body": "wake up. consider responsibilities. close eyes again. extremely familiar sequence"
+    },
+    {
+      "id": "gallery-mri8nlag-sprinkle-baldurs-gate",
+      "entryId": "gallery-mri8nlag",
+      "authorId": "regular-fandom-baldurs-gate",
+      "parentId": null,
+      "body": "the problem with being dependable is everyone quietly builds their plans around you"
+    },
+    {
+      "id": "gallery-mslvs4e3-sprinkle-stardew",
+      "entryId": "gallery-mslvs4e3",
+      "authorId": "regular-fandom-stardew",
+      "parentId": null,
+      "body": "the family having an ordinary day out is unexpectedly nice"
+    },
+    {
+      "id": "gallery-mri8m3qz-sprinkle-wrestling",
+      "entryId": "gallery-mri8m3qz",
+      "authorId": "regular-fandom-wrestling",
+      "parentId": null,
+      "body": "caption writer is not even pretending to be a neutral commentator. respect"
+    },
+    {
+      "id": "gallery-mtlmy3pe-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mtlmy3pe",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "the caption has the number. the discussion can end now"
+    },
+    {
+      "id": "gallery-mtlmy3pe-cast-visit-maela-targaryen",
+      "entryId": "gallery-mtlmy3pe",
+      "authorId": "cast-maela-targaryen",
+      "parentId": "gallery-mtlmy3pe-cast-visit-jacaelon-targaryen",
+      "body": "you replying has definitely ended it. well done."
+    },
+    {
+      "id": "gallery-mtlmy3j4-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mtlmy3j4",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "it was one alarm. the other five are between me and the alarm"
+    },
+    {
+      "id": "gallery-mtlmy3j4-cast-visit-lorenah-dayne",
+      "entryId": "gallery-mtlmy3j4",
+      "authorId": "cast-lorenah-dayne",
+      "parentId": "gallery-mtlmy3j4-cast-visit-jacaelon-targaryen",
+      "body": "you could put the phone down before the first one."
+    },
+    {
+      "id": "gallery-mslvvyhv-cast-visit-baelenys-targaryen",
+      "entryId": "gallery-mslvvyhv",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": null,
+      "body": "I would like one meal at which nobody mistakes the tongs for an appointment."
+    },
+    {
+      "id": "gallery-mslvvyhv-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mslvvyhv",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "gallery-mslvvyhv-cast-visit-baelenys-targaryen",
+      "body": "then stop asking everyone what they intend to do with them"
+    },
+    {
+      "id": "gallery-mslvvyhv-cast-visit-gaelor-targaryen",
+      "entryId": "gallery-mslvvyhv",
+      "authorId": "cast-gaelor-targaryen",
+      "parentId": "gallery-mslvvyhv-cast-visit-baelenys-targaryen",
+      "body": "give them here. i can manage a grill"
+    },
+    {
+      "id": "gallery-mslv4ypi-cast-visit-gaelor-targaryen",
+      "entryId": "gallery-mslv4ypi",
+      "authorId": "cast-gaelor-targaryen",
+      "parentId": null,
+      "body": "one afternoon. we managed one afternoon"
+    },
+    {
+      "id": "gallery-mslv4ypi-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mslv4ypi",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "gallery-mslv4ypi-cast-visit-gaelor-targaryen",
+      "body": "and you've already made it sound like a military achievement"
+    },
+    {
+      "id": "gallery-mslv4ypi-cast-visit-naella-velaryon",
+      "entryId": "gallery-mslv4ypi",
+      "authorId": "cast-naella-velaryon",
+      "parentId": "gallery-mslv4ypi-cast-visit-gaelor-targaryen",
+      "body": "please don't start arguing while you're still on the bikes."
+    },
+    {
+      "id": "gallery-mriaadun-cast-visit-visenor-targaryen",
+      "entryId": "gallery-mriaadun",
+      "authorId": "cast-visenor-targaryen",
+      "parentId": null,
+      "body": "there was more to the conversation than this"
+    },
+    {
+      "id": "gallery-mriaadun-cast-visit-baelenys-targaryen",
+      "entryId": "gallery-mriaadun",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": "gallery-mriaadun-cast-visit-visenor-targaryen",
+      "body": "There generally is when you are avoiding the question."
+    },
+    {
+      "id": "gallery-mri9nayi-cast-visit-alester-dayne",
+      "entryId": "gallery-mri9nayi",
+      "authorId": "cast-alester-dayne",
+      "parentId": null,
+      "body": "Try sleeping before deciding the room is haunted."
+    },
+    {
+      "id": "gallery-mri9nayi-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mri9nayi",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "gallery-mri9nayi-cast-visit-alester-dayne",
+      "body": "extremely helpful. come back and tell the room yourself"
+    },
+    {
+      "id": "gallery-mtj55kzy-cast-visit-saera-targaryen",
+      "entryId": "gallery-mtj55kzy",
+      "authorId": "cast-saera-targaryen",
+      "parentId": null,
+      "body": "the quotation marks can go. we're allowed to travel."
+    },
+    {
+      "id": "gallery-mtj55kzy-cast-visit-alester-dayne",
+      "entryId": "gallery-mtj55kzy",
+      "authorId": "cast-alester-dayne",
+      "parentId": "gallery-mtj55kzy-cast-visit-saera-targaryen",
+      "body": "I thought the destination was clear."
+    },
+    {
+      "id": "gallery-mslvaimb-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mslvaimb",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "yes. that's the decision. please don't convene anything"
+    },
+    {
+      "id": "gallery-mslvaimb-cast-visit-lorenah-dayne",
+      "entryId": "gallery-mslvaimb",
+      "authorId": "cast-lorenah-dayne",
+      "parentId": "gallery-mslvaimb-cast-visit-jacaelon-targaryen",
+      "body": "good. now order before you reconsider."
+    },
+    {
+      "id": "gallery-mri9x0ro-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mri9x0ro",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "i didn't make the caption"
+    },
+    {
+      "id": "gallery-mslvf3sd-cast-visit-saathos-maris",
+      "entryId": "gallery-mslvf3sd",
+      "authorId": "cast-saathos-maris",
+      "parentId": null,
+      "body": "Count them again. Slowly."
+    },
+    {
+      "id": "gallery-mslvf3sd-cast-visit-gaelor-targaryen",
+      "entryId": "gallery-mslvf3sd",
+      "authorId": "cast-gaelor-targaryen",
+      "parentId": "gallery-mslvf3sd-cast-visit-saathos-maris",
+      "body": "i'm not asking him to explain the joke"
+    },
+    {
+      "id": "gallery-mslv2fqv-cast-visit-gaelor-targaryen",
+      "entryId": "gallery-mslv2fqv",
+      "authorId": "cast-gaelor-targaryen",
+      "parentId": null,
+      "body": "he started talking again before i could even lie down"
+    },
+    {
+      "id": "gallery-mslv2fqv-cast-visit-jacaelon-targaryen",
+      "entryId": "gallery-mslv2fqv",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "gallery-mslv2fqv-cast-visit-gaelor-targaryen",
+      "body": "and yet you've found the strength to comment"
+    },
+    {
+      "id": "gallery-mslv2fqv-cast-visit-baelenys-targaryen",
+      "entryId": "gallery-mslv2fqv",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": "gallery-mslv2fqv-cast-visit-gaelor-targaryen",
+      "body": "Rest. Both of you."
+    },
+    {
+      "id": "gallery-mslvt2d0-cast-visit-naella-velaryon",
+      "entryId": "gallery-mslvt2d0",
+      "authorId": "cast-naella-velaryon",
+      "parentId": null,
+      "body": "one visit without the whole family supplying commentary. that's all i'm asking"
+    },
+    {
+      "id": "gallery-mri1czah-cast-reply-alester",
+      "entryId": "gallery-mri1czah",
+      "authorId": "cast-alester-dayne",
+      "parentId": "gallery-mri1czah-comment-2",
+      "body": "One glass would have been enough. Thank you."
+    },
+    {
+      "id": "gallery-mri9apme-institution-citadel",
+      "entryId": "gallery-mri9apme",
+      "authorId": "institution-citadel",
+      "parentId": null,
+      "body": "please give the new notes a title before sending them. 'more lore' is currently several different piles."
+    },
+    {
+      "id": "gallery-mrj7m7zs-institution-citadel",
+      "entryId": "gallery-mrj7m7zs",
+      "authorId": "institution-citadel",
+      "parentId": null,
+      "body": "once the raven has left, editing the draft does not update the letter. we wish it did."
+    },
+    {
+      "id": "gallery-mslv4ypi-institution-city-watch",
+      "entryId": "gallery-mslv4ypi",
+      "authorId": "institution-city-watch",
+      "parentId": null,
+      "body": "happy to see the outing went well. please finish the sibling argument before the next junction."
+    },
+    {
+      "id": "gallery-mslvb2l8-institution-city-watch",
+      "entryId": "gallery-mslvb2l8",
+      "authorId": "institution-city-watch",
+      "parentId": null,
+      "body": "lovely visit. the caption is longer than the route description we were given."
+    },
+    {
+      "id": "gallery-hrrms-genius-opening-1",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "i need to stop assuming a side character is safe just because the scene seems funny"
+    },
+    {
+      "id": "gallery-hrrms-genius-opening-2",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "opened the tags. would like to appeal on behalf of Zekar."
+    },
+    {
+      "id": "gallery-hrrms-genius-opening-3",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-fandom-anime",
+      "parentId": null,
+      "body": "he is going to call this character development and i am going to fall for it again"
+    },
+    {
+      "id": "gallery-hrrms-genius-opening-4",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-fandom-friends",
+      "parentId": null,
+      "body": "I would still like one afternoon where the performers get to go home."
+    },
+    {
+      "id": "gallery-hrrms-genius-opening-5",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-great",
+      "parentId": null,
+      "body": "the narrator has far too much control over the part where we suffer"
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-opening-6",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "daily is a fairly ambitious schedule for making me sad"
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-opening-7",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "regular-fandom-twilight",
+      "parentId": null,
+      "body": "i knew what it said before opening it. that's on me"
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-opening-8",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "a happy moment for someone else can still hurt when you are the one standing outside it"
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-opening-9",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "the sad edit folder is getting worryingly organised"
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-opening-10",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": ":("
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-opening-11",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "cast-alester-dayne",
+      "parentId": null,
+      "body": "Does it have to be daily?"
     }
   ]
 }

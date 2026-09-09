@@ -1,5 +1,41 @@
 [
   {
+    "id": "gallery-hrrms-genius",
+    "src": "/videos/reels/hrrms-genius.mp4",
+    "caption": "he can't keep getting away with it",
+    "characterIds": ["hrrm", "zekar-alasyr"],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": "the-mummers-blood",
+    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-10",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-your-daily-sad-alester-edit",
+    "src": "/videos/reels/your-daily-sad-alester-edit.mp4",
+    "caption": "your daily sad Alester edit",
+    "characterIds": ["alester-dayne", "saera-targaryen", "rickard-stark", "mother-marya"],
+    "houseIds": ["dayne", "targaryen", "stark"],
+    "dragonIds": [],
+    "chapterId": "the-glass-flower",
+    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-10",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-alester-winterfell-window",
+    "src": "/images/gallery/alester-winterfell-window.jpeg",
+    "caption": "Alester at Winterfell",
+    "characterIds": ["alester-dayne", "saera-targaryen", "rickard-stark", "mother-marya"],
+    "houseIds": ["dayne", "targaryen", "stark"],
+    "dragonIds": [],
+    "chapterId": "the-glass-flower",
+    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-10",
+    "category": "raven"
+  },
+  {
     "id": "gallery-the-oldtown-massacre",
     "src": "/images/gallery/the-oldtown-massacre.jpeg",
     "caption": "The Oldtown Massacre",

@@ -5,6 +5,12 @@
 .footer { border-top: 1px solid var(--border, #443b31); padding-top: 14px; margin-bottom: 0; }
 .thread, .replies { list-style: none; padding: 0; margin: 0; }
 .comment { margin-top: 17px; min-width: 0; }
+.pinned { padding: 12px; border: 1px solid #8fbef440; border-radius: 10px; background: #8fbef407; }
+.pinLabel { color: #a2bfe0; font: 11px/1.5 system-ui; margin-bottom: 5px; }
+.verified { color: #8bc2ff; flex-shrink: 0; display: inline-flex; }
+.institution { color: #e3ba70; }
+.identitySource { color: var(--muted, #b4a99b); font-size: 11px; }
+.identitySource a { color: #a9c9ef; text-underline-offset: 3px; }
 .profile summary { display: flex; align-items: center; gap: 9px; cursor: pointer; min-height: 44px; list-style: none; border-radius: 5px; }
 .profile summary::-webkit-details-marker { display: none; }
 .profile summary:focus-visible, .toggle:focus-visible { outline: 2px solid #d6b56f; outline-offset: 3px; }
