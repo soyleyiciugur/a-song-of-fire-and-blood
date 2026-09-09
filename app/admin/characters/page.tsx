@@ -6,6 +6,7 @@ import Link from "next/link";
 import { PromptModal, ConfirmModal } from "../_components/Modal";
 import { NumberStepper } from "../_components/NumberStepper";
 import charactersData from "../../../data/characters/characters.json";
+import chaptersData from "../../../data/chapters.json";
 import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json";
 import worldDate from "../../../data/worldDate.json";
@@ -142,8 +143,16 @@ const SECRET_STATUS_OPTIONS = [
   ...STATUS_OPTIONS,
 ];
 
+const DEBUT_OPTIONS = [
+  { id: "-", name: "Not set" },
+  ...(chaptersData as { slug: string; title: string }[]).map((chapter) => ({
+    id: chapter.slug,
+    name: chapter.title,
+  })),
+];
+
 const CHARACTER_FIELD_ORDER = [
-  "id", "name", "nickname", "aliases", "hidden", "house", "title", "status", "secret",
+  "id", "name", "nickname", "aliases", "hidden", "house", "title", "debutChapter", "status", "secret",
   "nameday", "death", "age", "height", "portraitAgeState", "portrait", "miniPortrait", "father", "mother", "spouse", "siblings", "children",
   "mentor", "dragon", "traits", "goals", "relationships", "summary", "quotes",
 ];
@@ -439,6 +448,15 @@ function CharactersTab({
                   )}
                 </div>
               </div>
+
+              <SearchableSelect
+                label="Debut chapter"
+                value={activeChar.debutChapter || "-"}
+                options={DEBUT_OPTIONS}
+                onChange={(value: string) =>
+                  handleChange("debutChapter", value === "-" ? undefined : value)
+                }
+              />
 
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <span style={{ fontSize: "0.9rem", opacity: 0.8, textTransform: "uppercase", letterSpacing: "1px" }}>Death date</span>

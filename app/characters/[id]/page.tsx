@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCharacter, getQuotesByCharacterId } from "@/lib/characters";
 import { computeAge, resolvePortraitAgeState } from "@/lib/age";
 import { getCharacterPortraitVariants } from "@/lib/characterPortraits";
+import { getCharacterDebut } from "@/lib/character-debut";
 import worldDate from "@/data/worldDate.json";
 import CharacterInfoBox from "@/components/character/CharacterInfoBox";
 import CharacterQuote from "@/components/character/CharacterQuote";
@@ -38,6 +39,7 @@ export default async function CharacterPage({ params }: Props) {
   );
 
   const portraitVariants = getCharacterPortraitVariants(character.id);
+  const debut = getCharacterDebut(character);
 
   return (
     <main className={`page ${styles.page}`}>
@@ -82,6 +84,7 @@ export default async function CharacterPage({ params }: Props) {
             character={character}
             currentAgeState={currentAgeState}
             portraitVariants={portraitVariants}
+            debut={debut}
           />
         </div>
       </div>

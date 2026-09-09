@@ -575,15 +575,20 @@
 }
 
 .nickname {
+  display: inline-flex;
   flex: 0 1 auto;
   min-width: 0;
-  overflow: hidden;
   color: var(--gold);
   font-size: 0.68rem;
   font-style: italic;
   line-height: 1.25;
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.nicknameText {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .metaLine {

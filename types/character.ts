@@ -114,6 +114,8 @@ export interface Character {
 
   house: string;
   title: string;
+  /** The first chapter in which the character appears on-page, not merely by mention. */
+  debutChapter?: string;
 
   status: CharacterStatus;
   secret?: { status: CharacterStatus; note?: string };

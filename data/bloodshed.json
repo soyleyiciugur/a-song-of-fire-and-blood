@@ -1,5 +1,27 @@
 [
   {
+    "id": "royal-kitchen-executions",
+    "title": "The Royal Kitchen Executions",
+    "kind": "massacre",
+    "day": 17,
+    "moon": 2,
+    "year": 99,
+    "location": "Red Keep",
+    "chapterSlug": "the-poison-beneath-the-crown",
+    "participants": [
+      "baelenys-targaryen",
+      "saera-targaryen",
+      "visenor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houses": [
+      "targaryen"
+    ],
+    "summary": "At Baelenys's command, every member of the royal kitchens is executed after the attempt on the King's life.",
+    "cause": "Terrified that betrayal had reached his own table, Baelenys chose collective punishment before the poisoner or any accomplices had been identified.",
+    "consequence": "Years of loyal kitchen servants die for one infiltrator's crime, deepening the Red Keep's climate of fear and destroying trust in the Crown's justice."
+  },
+  {
     "id": "massacre-at-oldtown",
     "title": "The Massacre at Oldtown",
     "kind": "battle",

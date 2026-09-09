@@ -29,6 +29,7 @@ type Props = {
   character: Character;
   currentAgeState: CharacterAgeState;
   portraitVariants: PortraitVariants;
+  debut: { slug: string; title: string } | null;
 };
 
 type GalleryEntry = {
@@ -229,6 +230,7 @@ export default function CharacterInfoBox({
   character,
   currentAgeState,
   portraitVariants,
+  debut,
 }: Props) {
   const [activeAgeState, setActiveAgeState] =
     useState<CharacterAgeState>(currentAgeState);
@@ -419,6 +421,16 @@ export default function CharacterInfoBox({
             />
 
             <InfoRow label="Title" value={character.title} />
+            {debut && (
+              <InfoRow
+                label="Debut"
+                value={
+                  <Link href={`/chapters/${debut.slug}`} className={styles.entityLink}>
+                    {debut.title}
+                  </Link>
+                }
+              />
+            )}
             <InfoRow label="Age" value={age !== undefined ? String(age) : "-"} />
 
             <InfoRow

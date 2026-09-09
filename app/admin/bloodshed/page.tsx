@@ -9,12 +9,12 @@ import { ConfirmModal, PromptModal } from "../_components/Modal";
 import styles from "./bloodshed.module.css";
 
 type Entry = {
-  id: string; title: string; kind: "battle" | "duel" | "tourney";
+  id: string; title: string; kind: "battle" | "duel" | "tourney" | "massacre";
   day: number; moon: number; year: number; location: string; chapterSlug: string;
   participants: string[]; houses: string[]; summary: string; cause: string; consequence: string;
 };
 
-const kinds: Entry["kind"][] = ["battle", "duel", "tourney"];
+const kinds: Entry["kind"][] = ["battle", "duel", "tourney", "massacre"];
 const toId = (value: string) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export default function AdminBloodshedPage() {

@@ -62,7 +62,17 @@ function formatNickname(nickname?: string | null) {
     .trim()
     .replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, "");
 
-  return clean ? `"${clean}"` : null;
+  return clean || null;
+}
+
+function Nickname({ value }: { value: string }) {
+  return (
+    <span className={styles.nickname}>
+      <span aria-hidden="true">&quot;</span>
+      <span className={styles.nicknameText}>{value}</span>
+      <span aria-hidden="true">&quot;</span>
+    </span>
+  );
 }
 
 function RawMiniPortrait({
@@ -363,7 +373,9 @@ export default function Characters() {
                   <span className={styles.successionIdentity}>
                     <strong>{displayName(character.name)}</strong>
                     {formatNickname(character.nickname) && (
-                      <small>{formatNickname(character.nickname)}</small>
+                      <small>
+                        &quot;{formatNickname(character.nickname)}&quot;
+                      </small>
                     )}
                   </span>
                 </Link>
@@ -452,7 +464,7 @@ export default function Characters() {
                         <span className={styles.nameLine}>
                           <strong>{name}</strong>
                           {nickname && (
-                            <span className={styles.nickname}>{nickname}</span>
+                            <Nickname value={nickname} />
                           )}
                         </span>
 

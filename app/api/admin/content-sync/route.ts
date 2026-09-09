@@ -57,11 +57,12 @@ Your job is to read a chapter and extract structured data changes to update the 
 The data files use these schemas. Follow them EXACTLY — field names, casing, and value style matter because
 the output is merged directly into these files.
 
-- characters: { id, name, nickname, aliases[], house, title, status, age, nameday: { day, moon, year }, height,
+- characters: { id, name, nickname, aliases[], house, title, debutChapter?, status, age, nameday: { day, moon, year }, height,
   father, mother, spouse, siblings[], children[], mentor (string or string[]), dragon, traits[], goals[], relationships: { otherCharacterId: "one sentence" },
   summary, quotes[] }
   -- traits[] MUST be short (1-3 word) adjectives or noun-phrases, e.g. "Loyal", "Quietly Ruthless", "Battle-Scarred".
      NEVER a full sentence. If unsure, omit rather than pad.
+  -- debutChapter is the first chapter where the character physically appears on-page. A mention, letter reference, memory, or discussion does NOT count.
   -- summary is 2-5 sentences of prose.
   -- relationships values are ONE sentence each, written from that character's point of view about the other person.
 - houses: { id, name, words, seat, sigilSrc, color, secondaryColor, description }

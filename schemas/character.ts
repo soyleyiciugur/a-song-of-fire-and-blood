@@ -34,6 +34,7 @@ export const CharacterSchema = z
     hidden: z.boolean().optional(),
     house: z.string().default("-"),
     title: z.string().default("-"),
+    debutChapter: z.string().optional(),
     status: CharacterStatusSchema.default("Unknown"),
     secret: z
       .object({
