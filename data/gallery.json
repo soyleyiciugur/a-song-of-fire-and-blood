@@ -1,5 +1,17 @@
 [
   {
+    "id": "gallery-the-oldtown-massacre",
+    "src": "/images/gallery/the-oldtown-massacre.jpeg",
+    "caption": "The Oldtown Massacre",
+    "characterIds": ["gaelor-targaryen", "saathos-maris", "timos-hightower", "alysanne-hightower", "brant-costayne", "melessa-hightower", "almar-larchmont"],
+    "houseIds": ["targaryen", "hightower"],
+    "dragonIds": [],
+    "chapterId": "fathers-and-their-sins",
+    "worldDate": { "day": 5, "moon": 5, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-09",
+    "category": "raven"
+  },
+  {
     "id": "gallery-a-feast-for-butchers",
     "src": "/images/gallery/a-feast-for-butchers.webp",
     "caption": "sıradaki chapterlarda gaelor'u bekleyen sürpriz 🥰🥰😋",
