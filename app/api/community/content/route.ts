@@ -5,6 +5,7 @@ import forum from "@/data/forum.json";
 import gallery from "@/data/gallery.json";
 import community from "@/data/flea-bottom.json";
 import { publishCommunity } from "@/lib/communityPublication.mjs";
+import type { ForumSource } from "@/lib/communityTypes";
 const schema=z.discriminatedUnion("kind",[
  z.object({kind:z.literal("thread"),title:z.string().trim().min(3).max(140),body:z.string().trim().min(1).max(10000),category:z.string().trim().min(1).max(60).default("Community")}),
  z.object({kind:z.literal("post"),threadId:z.string().min(1).max(160),parentId:z.string().min(1).max(160).nullable().optional(),body:z.string().trim().min(1).max(10000)}),
@@ -16,7 +17,7 @@ export async function POST(request:Request){
  if(!profile){const {error:profileError}=await supabase.rpc("ensure_own_profile");if(profileError){console.error("Profile repair failed",{code:profileError.code,message:profileError.message});return NextResponse.json({error:"Your member profile is not ready. Apply the latest database migration and try again."},{status:409});}}
  const parsed=schema.safeParse(await request.json().catch(()=>null));if(!parsed.success)return NextResponse.json({error:"Check the required fields and length limits."},{status:400});
  const input=parsed.data;
- const published = publishCommunity(community, [], Date.now(), forum);
+ const published = publishCommunity(community, [], Date.now(), forum as unknown as ForumSource);
  if(input.kind!=="thread" && input.parentId){
   const parentTable=input.kind==="post"?"forum_posts":"raven_comments";
   const entry=input.kind==="post"?input.threadId:input.entryId;
