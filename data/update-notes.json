@@ -2,6 +2,8 @@
   {
     "date": "2026-09-10",
     "items": [
+      "Fixed signed-in navbar collisions and replaced the Direct Raven control with a clearer message icon.",
+      "Made the initial Vahaemon Mogged community conversation available immediately while preserving its scheduled follow-ups.",
       "Moved Succession into the Houses menu to give signed-in navigation more room.",
       "Added the Vahaemon Mogged reel to the Raven's Eye.",
       "Added community conversations and scheduled replies to the Vahaemon Mogged reel.",

@@ -44,9 +44,8 @@ export default function DirectRavenNavButton() {
   return (
     <Link href="/messages" className={`${styles.notificationsButton} ${styles.directRavenButton}`} aria-label={unread ? `Direct Raven, ${unread} unread` : "Direct Raven"} title="Direct Raven">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3.5 8.5 12 3l8.5 5.5v9A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5v-9Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="m4 9 8 5 8-5M8.5 7.1 12 5l3.5 2.1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M15.6 5.9c1.6-1.2 3.2-1.4 4.6-.5-1.1.2-1.8.7-2.3 1.6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+        <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
       {unread > 0 && <span className={styles.navBadge}>{unread > 99 ? "99+" : unread}</span>}
     </Link>
