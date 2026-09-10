@@ -1,0 +1,20 @@
+.page { min-height: 100vh; padding: 40px 24px 80px; background: var(--background); color: var(--text); }
+.container { max-width: 850px; margin: auto; }
+.back { display: inline-flex; align-items: center; min-height: 48px; color: var(--gold); text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.back:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.eyebrow { margin-top: 24px; color: var(--muted); font: 600 11px var(--font-geist); letter-spacing: .15em; text-transform: uppercase; }
+.page h1 { margin: 0; color: var(--gold); font: 700 clamp(30px, 6vw, 46px)/1.2 var(--font-hotd); }
+.lead { margin: 12px 0 32px; color: var(--muted); font-size: 17px; line-height: 1.5; }
+.entries { display: grid; gap: 20px; }
+.entry { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); overflow-wrap: anywhere; }
+.entry h2 { margin: 0 0 16px; color: var(--gold); font: 600 22px/1.4 var(--font-hotd); }
+.entry ul { margin: 0; padding-left: 22px; }
+.entry li { padding-left: 4px; font-size: 16px; line-height: 1.65; }
+.entry li + li { margin-top: 10px; }
+.entry li::marker { color: var(--gold); }
+@media (max-width: 600px) {
+  .page { padding: 24px 16px 56px; }
+  .entry { padding: 20px 16px; }
+  .entry h2 { font-size: 20px; }
+}
