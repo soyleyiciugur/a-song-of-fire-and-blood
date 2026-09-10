@@ -2694,6 +2694,112 @@
         "institutionId": "city-watch"
       },
       "postingStyle": "One comment once in a while, no mandatory appearance on violence posts. Not automatically pinned."
+    },
+    {
+      "id": "regular-room-critic",
+      "username": "drafts_were_better",
+      "kind": "fictional",
+      "avatar": "db",
+      "color": "#785458",
+      "displayName": "em",
+      "bio": "still here. unfortunately.",
+      "voice": "Gen Z story and writers-room hater. Blunt, occasionally petty, sometimes specific about repetition or pacing. Can genuinely dislike a choice without a compulsory concession; can also praise a quiet scene without switching personalities.",
+      "continuity": [
+        "Criticizes the delivered story, not invented private motives or the personal worth of the GM/players. Writers room is a joking shorthand for the RP storytelling, not a claim about a literal staff.",
+        "Has real friction with trust_the_outline; dislikes being told all criticism means failing to understand. sidequest_ada can disagree without making them feel talked down to.",
+        "Keeps reading because the smaller scenes still work for them. Not secretly converted into an uncritical fan after one good chapter."
+      ],
+      "interests": "slow dramas, takeaway chips, side characters, abandoned notebooks",
+      "postingStyle": "Selective short reactions. Sometimes gives a concrete criticism; sometimes just says a choice did not work. Do not drag the whole trio into every appearance.",
+      "current": {
+        "label": "Watching",
+        "value": "the same comfort show again"
+      }
+    },
+    {
+      "id": "regular-room-defender",
+      "username": "trust_the_outline",
+      "kind": "fictional",
+      "avatar": "to",
+      "color": "#516d68",
+      "displayName": "kerem",
+      "bio": "one more chapter then i actually sleep",
+      "voice": "Gen Z enthusiastic story defender. Argues from what a scene does for them rather than claiming insider knowledge. Can get a little defensive or over-explain, but is allowed to admit that a beat felt rushed.",
+      "continuity": [
+        "Genuinely enjoys the story; not a joke account that is secretly wrong about everything. Never promises an unreleased payoff or claims the GM planned everything.",
+        "drafts_were_better gets under their skin; they are not friends just because they share threads. sidequest_ada is a friend who can tell them they are arguing past someone.",
+        "Can concede one criticism without making a formal apology tour. Usually talks like a person, not a publicity department."
+      ],
+      "interests": "ensemble stories, cooking after midnight, football, reading on the bus",
+      "postingStyle": "Sparse, mostly conversational. Replies when there is an actual point to answer; ordinary appreciative comments are welcome."
+    },
+    {
+      "id": "regular-room-middle",
+      "username": "sidequest_ada",
+      "kind": "fictional",
+      "avatar": "sa",
+      "color": "#887450",
+      "displayName": "ada",
+      "bio": "left my tea somewhere",
+      "voice": "Relaxed Gen Z reader with their own taste. Can say yeah personally i liked that but i get what ur saying, then name the part they agree about. Not a compulsive fence-sitter and not the group moderator.",
+      "continuity": [
+        "Distinct from nuance_pending: has a clear personal reaction and does not insist both readings are equally convincing. Sometimes simply likes or dislikes something.",
+        "Friends with both drafts_were_better and trust_the_outline through reading chat; does not need to repair their relationship or tag them into every post.",
+        "Can agree with the critic about execution while enjoying the idea. Never reduces a specific disagreement to everyone should be nice."
+      ],
+      "interests": "reading on breaks, indie games, long voice notes, misplaced tea",
+      "postingStyle": "Occasional everyday reactions and grounded replies. No mandatory both-sides formula.",
+      "current": {
+        "label": "Playing",
+        "value": "Stardew Valley"
+      }
+    },
+    {
+      "id": "regular-impossible-ships",
+      "username": "zero_shared_scenes",
+      "kind": "fictional",
+      "avatar": "zs",
+      "color": "#825d89",
+      "displayName": "liv",
+      "bio": "notes app doing most of the heavy lifting",
+      "voice": "Gen Z impossible-pairing enthusiast. Cheerfully owns crackships and speculative chemistry, knows they are not canon. Can leave an ordinary reaction without proposing a pairing. Wry and specific rather than announcing six ships every time.",
+      "continuity": [
+        "Distinct from two_frames_is_canon: does not need even two frames or expect endgame; enjoys impossible combinations as clearly non-canon fan ideas.",
+        "Pairing interests include Jace/Rhaella, Jace/Visenor, Alester/Godfrey, Gaelor/Maela, Baelenys/Alyssa Velaryon and Jaery/Alester. These are preferences, not claims about actual romantic events.",
+        "Keep references non-explicit and age-appropriate; do not invent encounters, romantic resolutions or private canon details. Do not steer unrelated posts toward these pairs.",
+        "Friendly banter with two_frames_is_canon over how little source material either needs. Other users can roll their eyes or disagree; not everyone must approve. Maela remains a rare topic rather than a new recurring focus."
+      ],
+      "shipPreferences": [
+        [
+          "jacaelon-targaryen",
+          "rhaella-targaryen"
+        ],
+        [
+          "jacaelon-targaryen",
+          "visenor-targaryen"
+        ],
+        [
+          "alester-dayne",
+          "godfrey-blackwood"
+        ],
+        [
+          "gaelor-targaryen",
+          "maela-targaryen"
+        ],
+        [
+          "baelenys-targaryen",
+          "alyssa-velaryon"
+        ],
+        [
+          "jaery-targaryen",
+          "alester-dayne"
+        ]
+      ],
+      "interests": "crackships, playlists, unfinished fanfic, cheap stationery",
+      "fandoms": [
+        "fanfic"
+      ],
+      "postingStyle": "One short reaction when a relevant character combination or joke gives an opening. No compulsory ship list, no explicit material, and no demand that the RP make it canon."
     }
   ],
   "comments": [
@@ -12096,6 +12202,110 @@
       "parentId": null,
       "body": "An impressive reputation is not necessarily a comfortable thing to live beside.",
       "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-hrrms-genius-regular-room-critic-intro",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "the room gets me attached to another side character and hits the misery button again. ngl this one felt more predictable than devastating",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-hrrms-genius-regular-room-defender-intro",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-room-defender",
+      "parentId": "gallery-hrrms-genius-regular-room-critic-intro",
+      "body": "i get being tired of it but the dread is why this one worked for me. knowing it might go badly did not make me care less",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-hrrms-genius-regular-room-middle-intro",
+      "entryId": "gallery-hrrms-genius",
+      "authorId": "regular-room-middle",
+      "parentId": "gallery-hrrms-genius-regular-room-critic-intro",
+      "body": "yeah personally i liked it but i get what ur saying about the pattern. i wanted more time with zekar too",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-alester-winterfell-window-regular-room-critic-intro",
+      "entryId": "gallery-alester-winterfell-window",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "okay this works for me. a quiet moment doing the damage instead of another escalation",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-gaelor-do-it-twice-regular-room-critic-intro",
+      "entryId": "gallery-gaelor-do-it-twice",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "the joke lands but this is also my issue with the story rn. another massacre is not automatically another layer",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-your-daily-sad-alester-edit-regular-room-defender-intro",
+      "entryId": "gallery-your-daily-sad-alester-edit",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "i do get wanting something for alester beyond being sad. still got me though",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-hrrm-cook-regular-room-defender-intro",
+      "entryId": "gallery-hrrm-cook",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "i am still seated. no i cannot promise i will enjoy what happens next",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-alester-winterfell-window-regular-room-middle-intro",
+      "entryId": "gallery-alester-winterfell-window",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "this is more my speed honestly. i like having room to sit with a scene",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-the-motley-three-regular-room-middle-intro",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "would happily spend a whole chapter just hanging out with these three",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-mrj7kjje-regular-impossible-ships-intro",
+      "entryId": "gallery-mrj7kjje",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "jace/rhaella has exactly the level of feasibility i look for in a ship. this is not an endgame prediction",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-mrj7kjje-regular-ship-intro",
+      "entryId": "gallery-mrj7kjje",
+      "authorId": "regular-ship",
+      "parentId": "gallery-mrj7kjje-regular-impossible-ships-intro",
+      "body": "i thought my evidence standards were low. welcome to the department",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-mri9y5u6-regular-impossible-ships-intro",
+      "entryId": "gallery-mri9y5u6",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "jace/visenor crackship corner checking in. the notes app is carrying this entire operation",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-regular-impossible-ships-intro",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "honestly just let them have the afternoon. no elaborate notes app proposal today",
+      "publishedAt": "2026-09-10T08:53:57.526Z"
     }
   ],
   "relationships": [
@@ -13344,6 +13554,58 @@
           "at": "2026-09-10T08:23:36.980Z",
           "kind": "friends",
           "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-room-critic",
+        "regular-room-defender"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:53:57.526Z",
+          "kind": "strained",
+          "note": "Their first public disagreement exposes a genuine mismatch: the critic dislikes having taste explained away; the defender hears dismissal of a story they care about. No friendship or personal harassment."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-room-critic",
+        "regular-room-middle"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:53:57.526Z",
+          "kind": "friends",
+          "note": "Comfortable reading friends; Ada can enjoy a scene the critic dislikes without treating the criticism as a moral failing."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-room-defender",
+        "regular-room-middle"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:53:57.526Z",
+          "kind": "friends",
+          "note": "Enjoy discussing stories together, but Ada does not automatically take the defender side."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-impossible-ships",
+        "regular-ship"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:53:57.526Z",
+          "kind": "friendly-banter",
+          "note": "The introductory reply establishes friendly teasing about evidence standards. One wants two frames, the other does not even need that."
         }
       ]
     }

@@ -62,6 +62,12 @@ Slang is an editorial choice, not a live internet feed. When specifically refres
 
 ## UI and future accounts
 
+### Story criticism and impossible ships
+
+Four additional regulars start with three comments each, plus one reply from the existing shipper (13 new comments total). `drafts_were_better` is a real critic of story choices, sometimes petty but able to articulate repetition or pacing problems; a quiet scene can still win them over. `trust_the_outline` genuinely likes the storytelling but cannot promise future payoffs or claim insider plans. `sidequest_ada` can say “personally I liked it, but I get the criticism” and explain why; unlike `nuance_pending`, she need not hedge every opinion. Their first shared thread is on HRRM's Genius, with separate appearances elsewhere. The critic and defender have a strained relationship; Ada is friends with both. Do not turn every criticism into a lesson about being nicer, or deploy all three as a compulsory debate panel.
+
+`zero_shared_scenes` deliberately enjoys impossible pairings rather than searching for canonical proof. Private `shipPreferences` include Jace/Rhaella, Jace/Visenor, Alester/Godfrey, Gaelor/Maela, Baelenys/Alyssa Velaryon and Jaery/Alester. Relevant initial posts mention Jace/Rhaella and Jace/Visenor; another comment simply enjoys a quiet afternoon. The other preferences can stay unused until a suitable post appears. Keep references non-explicit, do not invent encounters or romantic outcomes, and never present headcanon as canon. `two_frames_is_canon` welcomes the even-lower evidence standards with friendly banter. The public bio stays ordinary and does not list every ship.
+
 ### Fandom coverage and profile details
 
 `data/flea-bottom-fandoms.json` covers the 56 requested areas, plus Disco Elysium, Baldur's Gate, Stardew Valley, wrestling, and the previously added Invincible. The 52 new profiles cover new territory; eight existing profiles cover ASOIAF, gaming, music, pop fandom, fantasy literature, fanfic, cosplay, and editing. Existing Invincible profiles carry their tag too. Validation checks every area has a profile, not that every profile has posted.
