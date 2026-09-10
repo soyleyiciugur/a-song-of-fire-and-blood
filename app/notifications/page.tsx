@@ -1,0 +1,65 @@
+"use client";
+
+import { Suspense, useState } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCommunity, refreshCommunity } from "@/lib/communityStore";
+import { getCommentEntryLabel, getCommentLink } from "@/lib/communityLinks";
+import MiniPortrait from "@/components/MiniPortrait";
+import styles from "./notifications.module.css";
+
+const dateLabel = (value: string) => new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Istanbul" }).format(new Date(value));
+
+function Notifications() {
+  const data = useCommunity();
+  const router = useRouter();
+  const params = useSearchParams();
+  const tab = params.get("tab") === "updates" ? "updates" : "comments";
+  const [limit, setLimit] = useState(30);
+  const users = new Map(data.users.map((user) => [user.id, user]));
+  const comments = data.comments.map((comment, order) => ({ comment, order })).sort((a, b) => Date.parse(b.comment.publishedAt) - Date.parse(a.comment.publishedAt) || b.order - a.order).map(({ comment }) => comment);
+  return (
+    <main className={styles.page}>
+      <Link href="/ravens-eye" className={styles.back}>← The Raven&apos;s Eye</Link>
+      <h1>Notifications</h1>
+      <p className={styles.intro}>New conversations and notes from the archive.</p>
+      <div className={styles.tabs} role="tablist" aria-label="Notification sections" onKeyDown={(event) => {
+        if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+          event.preventDefault();
+          const next = event.key === "Home" ? "comments" : event.key === "End" ? "updates" : tab === "comments" ? "updates" : "comments";
+          router.replace(`/notifications${next === "updates" ? "?tab=updates" : ""}`, { scroll: false });
+          document.getElementById(`tab-${next}`)?.focus();
+        }
+      }}>
+        {(["comments", "updates"] as const).map((value) => <button key={value} id={`tab-${value}`} type="button" role="tab" aria-selected={tab === value} aria-controls={`panel-${value}`} tabIndex={tab === value ? 0 : -1} onClick={() => router.replace(`/notifications${value === "updates" ? "?tab=updates" : ""}`, { scroll: false })}>{value === "comments" ? "Latest comments" : "Update notes"}</button>)}
+      </div>
+      {!data.loaded && !data.error && <p role="status">Loading notifications…</p>}
+      {data.error && <p role="status">{data.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
+      <section id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`}>
+        {tab === "comments" ? <>
+          <ol className={styles.feed}>
+            {comments.slice(0, limit).map((comment) => {
+              const user = users.get(comment.authorId);
+              if (!user) return null;
+              return <li key={comment.id}><Link href={getCommentLink(comment)} className={styles.card}>
+                {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={34} /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
+                <div className={styles.content}>
+                  <div className={styles.byline}><strong>@{user.username}</strong> {comment.parentId ? "replied" : "wrote"}</div>
+                  <p className={styles.quote}>“{comment.body}”</p>
+                  <div className={styles.meta}>{getCommentEntryLabel(comment.entryId)} <span>·</span> <time dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time></div>
+                </div>
+                <span aria-hidden="true">↗</span>
+              </Link></li>;
+            })}
+          </ol>
+          {data.loaded && !comments.length && <p>No comments yet.</p>}
+          {comments.length > limit && <button className={styles.more} onClick={() => setLimit(limit + 30)}>Load more comments</button>}
+        </> : <ol className={styles.feed}>{data.updates.map((update) => <li key={update.id} className={styles.update}><time dateTime={update.publishedAt}>{dateLabel(update.publishedAt)} TRT</time><h2>{update.title}</h2><p>{update.body}</p></li>)}</ol>}
+      </section>
+    </main>
+  );
+}
+
+export default function NotificationsPage() {
+  return <Suspense fallback={<main className={styles.page}>Loading notifications…</main>}><Notifications /></Suspense>;
+}

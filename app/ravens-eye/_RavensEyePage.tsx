@@ -18,6 +18,7 @@ import chaptersData from "@/data/chapters.json";
 import { Select } from "../_components/Select";
 import styles from "./ravens-eye.module.css";
 import GutterComments from "@/components/gallery/GutterComments";
+import { useCommunity } from "@/lib/communityStore";
 import { getGutterComments, isGutterEntry } from "@/lib/fleaBottom";
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -1178,6 +1179,7 @@ function RavensEyePageInner({
 }: {
   forcedTab?: RavensEyeTab;
 }) {
+  useCommunity();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -1233,13 +1235,16 @@ function RavensEyePageInner({
         const keepCharacterFilter =
           !characterFilter || globalEntry.characterIds.includes(characterFilter);
 
-        router.replace(
+        const correctedUrl = new URL(
           mediaUrl(
             correctTab,
             globalEntry.id,
             keepCharacterFilter ? characterFilter || undefined : undefined
-          )
+          ), window.location.origin
         );
+        const targetComment = searchParams.get("comment");
+        if (targetComment) correctedUrl.searchParams.set("comment", targetComment);
+        router.replace(correctedUrl.pathname + correctedUrl.search + (targetComment ? `#comment-${encodeURIComponent(targetComment)}` : ""));
       }
 
       return;
@@ -1324,6 +1329,8 @@ function RavensEyePageInner({
 
   const handleActiveReel = useCallback(
     (entry: GalleryEntry) => {
+      const current = new URLSearchParams(window.location.search);
+      if (current.get("item") === entry.id && current.has("comment")) return;
       setBrowserUrl(
         mediaUrl("reels", entry.id, characterFilter || undefined),
         "replace"

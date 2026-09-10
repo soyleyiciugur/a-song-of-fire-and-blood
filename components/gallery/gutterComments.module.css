@@ -5,6 +5,8 @@
 .footer { border-top: 1px solid var(--border, #443b31); padding-top: 14px; margin-bottom: 0; }
 .thread, .replies { list-style: none; padding: 0; margin: 0; }
 .comment { margin-top: 17px; min-width: 0; }
+.comment { scroll-margin-block: 80px; }
+.comment[data-highlighted="true"] { outline: 2px solid #cbaa67; outline-offset: 5px; border-radius: 8px; }
 .pinned { padding: 12px; border: 1px solid #8fbef440; border-radius: 10px; background: #8fbef407; }
 .pinLabel { color: #a2bfe0; font: 11px/1.5 system-ui; margin-bottom: 5px; }
 .verified { color: #8bc2ff; flex-shrink: 0; display: inline-flex; }

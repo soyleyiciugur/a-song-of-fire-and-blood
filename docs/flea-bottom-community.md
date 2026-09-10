@@ -1,6 +1,6 @@
 # Flea Bottom regulars
 
-The community lives in `data/flea-bottom.json`. It covers **all Flea Bottom images and all reels**; video records do not consistently have the `fleabottom` category. `gallery.json` IDs join posts to comments. Do not change those IDs when changing captions or assets.
+The community lives in `data/flea-bottom.json`. It covers **every gallery entry**, including Raven's Eye canon images, Flea Bottom images and all reels. `gallery.json` IDs join posts to comments. Do not change those IDs when changing captions or assets. Canon media remains canon; casual reader reactions and comic social-AU cameos are not new canonical events.
 
 ## Adding a post
 
@@ -8,7 +8,7 @@ The community lives in `data/flea-bottom.json`. It covers **all Flea Bottom imag
 2. Inspect the image/video where tools allow, read its caption, character tags and relevant chapter context. Do not invent visual details from a filename. If an asset cannot be inspected, react to the verified caption/lore instead.
 3. Read the user profiles (`voice`, `continuity`, public `bio`, and `interests`/`postingStyle` where present) and their existing comments. Pick a varied subset of 5–10 distinct users. Selection happens once while authoring, never randomly on page load. Prioritize variety over volume: there is no mandatory core cast. Look at the last few comparable posts and favor relevant accounts readers have seen less often. Most participants should differ from nearby threads; do not routinely bring the same meme account, lore corrector, and prince defenders to every post. Usually give each selected account one comment, with an occasional reply. Include interested fans but let unrelated users skip many posts. Keep the Gen Alpha account occasional.
 4. Write English-first internet reactions to this specific joke. Vary length, spelling, intensity and punctuation. A Turkish phrase from the source meme can remain. Include occasional replies with real conversational logic; not every comment needs a reply, faction argument or catchphrase. Users can be wrong, but theories must read as theories and modern AU jokes must not become canon. Avoid recycling whole comments.
-5. Save comments with stable `id`, `entryId`, `authorId`, `parentId` and `body`. Roots use `null`; replies point to an earlier root in the same post. One reply level is currently supported. Existing conversations are persisted, not regenerated. Add a continuity note when a recurring new relationship or running joke develops; do not rewrite a user's loyalties on a whim.
+5. Save comments with stable `id`, `entryId`, `authorId`, `parentId`, `body` and an explicit UTC ISO `publishedAt`. Roots use `null`; replies point to an earlier root in the same post and cannot publish before it. One reply level is currently supported. Existing conversations are persisted, not regenerated. Add a continuity note when a recurring new relationship or running joke develops; do not rewrite a user's loyalties on a whim.
 6. Run `npm.cmd run validate:comments`, then relevant UI/type checks if code changed. Review tone and lore yourself; structural validation cannot judge a joke.
 
 ## Established relationships
@@ -72,7 +72,19 @@ Handle patterns deliberately mix names, initials, old nicknames, small number su
 
 The expandable profile now supports optional `displayName`, `pronouns`, `location`, and a single `current` detail with a label and value. These are authored profile snapshots, not a live activity feed. Not everybody fills every field. Display names do not replace stable handles or author IDs. The profile also shows comment and distinct-post counts calculated from the stored comments. Avoid fabricated followers, verification, online states and join dates. Public profile details do not expose the author's full personality instructions or a wall of fandom badges.
 
-Image cards show comment counts. Open a meme for its thread; reels have an expandable Gutter talk panel. Clicking a username opens the persistent profile bio. The page and profiles identify this cast as fictional regulars. No fabricated likes, online indicators, timestamps, or nonfunctional submit forms are present.
+Image cards show published comment counts. Open any image for its thread; reels have an expandable Gutter talk panel. Clicking a username opens the persistent profile bio. The page and profiles identify this cast as fictional regulars. No fabricated likes, online indicators or nonfunctional submit forms are present. Publication dates refer to site publication, not invented historical activity.
+
+### Publication, notifications and friends
+
+`/api/community` is the sole server publication boundary, using the server clock with `Cache-Control: private, no-store`. Never import `flea-bottom.json` or scheduled bodies into a client module. Public responses omit future comments entirely, suppress replies until their parent is visible, and strip authoring instructions and friend IDs. Counts, character pins and notifications are derived from this same published snapshot. A shared client store refreshes every 15 seconds while visible and immediately on focus; an open page may show a released comment up to 15 seconds after its timestamp. No cron job, external service or runtime AI generation is required, but deployment needs a running Next server (not a static export).
+
+The initial archive was assigned its actual migration time on 10 September 2026; no historical conversation dates were invented. Three comments on the newest entries are scheduled for 10 September 18:00, 11 September 12:00 and 11 September 23:50, Europe/Istanbul (UTC+03:00). Future content editing may add a few similarly spaced comments to new entries. Persist the explicit UTC date; never calculate a fresh relative delay at build or request time.
+
+The navbar bell opens `/notifications`. Latest comments sorts by publication time descending, with reverse source order breaking ties. Links preserve entry and comment IDs, open the correct image/reel, expand its thread and focus the target reply or root. Unpublished or missing IDs show a generic unavailable state. The second tab reads `community-updates.json`, newest first; this release starts with one note for the comment feature, with no retrospective changelog.
+
+Profiles show friend counts derived from reciprocal, distinct `friendIds` in the persisted fictional community graph. These are social-AU account connections, not a canonical relationship index or fabricated real-member metrics. Zero friends is valid. Do not regenerate connections when rendering. Character avatars reuse the existing canonical mini portraits and their standard fallback.
+
+Run `node scripts/test-community-publication.mjs` for the exact release boundary and privacy checks, `npm.cmd run validate:comments` for all posts and friendships, and `node scripts/check-gutter.cjs` for browser checks.
 
 ### Verified character and institution cameos
 

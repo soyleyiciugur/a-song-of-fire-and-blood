@@ -12,7 +12,7 @@ const institutionIds = new Set(institutions.map((institution) => institution.id)
 const representedAccounts = new Set();
 const fandomIds = new Set(fandoms.map((fandom) => fandom.id));
 assert.equal(fandomIds.size, fandoms.length, "Duplicate fandom IDs");
-const eligible = gallery.filter((entry) => entry.category === "fleabottom" || /\.(mp4|webm|mov)$/i.test(entry.src.split(/[?#]/)[0]));
+const eligible = gallery;
 
 if (process.argv.includes("--pending")) {
   console.log(JSON.stringify(eligible.filter((entry) => !comments.some((comment) => comment.entryId === entry.id)), null, 2));
@@ -28,6 +28,12 @@ assert.equal(userMap.size, users.length, "Duplicate user IDs");
 assert.equal(new Set(users.map((user) => user.username.toLowerCase())).size, users.length, "Duplicate usernames");
 assert.equal(commentMap.size, comments.length, "Duplicate comment IDs");
 for (const user of users) {
+  assert(Array.isArray(user.friendIds), `Missing friendship list: ${user.id}`);
+  assert.equal(new Set(user.friendIds).size, user.friendIds.length, `Duplicate friends: ${user.id}`);
+  for (const friend of user.friendIds) {
+    assert(friend !== user.id && userMap.has(friend), `Invalid friend: ${user.id}/${friend}`);
+    assert(userMap.get(friend).friendIds?.includes(user.id), `Friendship must be mutual: ${user.id}/${friend}`);
+  }
   assert(["fictional", "member"].includes(user.kind), `Invalid user kind: ${user.id}`);
   assert(/^[a-zA-Z0-9_.]{3,30}$/.test(user.username), `Invalid handle: ${user.id}`);
   assert(/^#[0-9a-f]{6}$/i.test(user.color), `Invalid avatar color: ${user.id}`);
@@ -57,6 +63,7 @@ for (const fandom of fandoms) {
   assert(users.some((user) => user.fandoms?.includes(fandom.id)), `No profile for fandom: ${fandom.label}`);
 }
 for (const comment of comments) {
+  assert(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/.test(comment.publishedAt) && Number.isFinite(Date.parse(comment.publishedAt)), `Invalid publication timestamp: ${comment.id}`);
   assert(entryIds.has(comment.entryId), `Comment on missing or non-gutter entry: ${comment.id}`);
   assert(userMap.has(comment.authorId), `Unknown author: ${comment.id}`);
   assert(typeof comment.body === "string" && comment.body.trim().length > 0 && comment.body.length <= 1000, `Invalid body: ${comment.id}`);
@@ -64,6 +71,7 @@ for (const comment of comments) {
     const parent = commentMap.get(comment.parentId);
     assert(parent && parent.entryId === comment.entryId, `Reply must stay in the same thread: ${comment.id}`);
     assert.equal(parent.parentId, null, `Reply must target a root comment: ${comment.id}`);
+    assert(Date.parse(parent.publishedAt) <= Date.parse(comment.publishedAt), `Reply publishes before parent: ${comment.id}`);
     assert.notEqual(parent.authorId, comment.authorId, `Self reply: ${comment.id}`);
     assert(comments.indexOf(parent) < comments.indexOf(comment), `Reply precedes parent: ${comment.id}`);
   }

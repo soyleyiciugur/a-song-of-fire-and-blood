@@ -1,37 +1,12 @@
-import community from "@/data/flea-bottom.json";
+import { getCommunitySnapshot } from "@/lib/communityStore";
+import type { GutterUser, GutterComment } from "@/lib/communityTypes";
+export type { GutterUser, GutterComment } from "@/lib/communityTypes";
 import characters from "@/data/characters/characters.json";
 import worldDate from "@/data/worldDate.json";
 import institutions from "@/data/gutter-institutions.json";
 import { computeAge } from "@/lib/age";
 
-export interface GutterUser {
-  id: string;
-  username: string;
-  kind: "fictional" | "member";
-  bio: string;
-  avatar: string;
-  color: string;
-  voice: string;
-  continuity: string[];
-  fandoms?: string[];
-  displayName?: string;
-  pronouns?: string;
-  location?: string;
-  current?: { label: "Reading" | "Watching" | "Playing" | "On repeat" | "Making"; value: string };
-  account?: { type: "character"; characterId: string } | { type: "institution"; institutionId: string };
-}
-
-export interface GutterComment {
-  id: string;
-  entryId: string;
-  authorId: string;
-  parentId: string | null;
-  body: string;
-}
-
-export const gutterUsers = community.users as GutterUser[];
-export const gutterComments = community.comments as GutterComment[];
-export const gutterUserMap = new Map(gutterUsers.map((user) => [user.id, user]));
+export const gutterUserMap = { get: (id: string) => getCommunitySnapshot().users.find((user) => user.id === id) };
 const characterMap = new Map(characters.map((character) => [character.id, character]));
 const institutionMap = new Map(institutions.map((institution) => [institution.id, institution]));
 
@@ -63,27 +38,15 @@ export function getGutterThreads(entryId: string) {
     return { comment, replies, pinned: isCharacterComment(comment) || replies.some(isCharacterComment) };
   }).sort((a, b) => Number(b.pinned) - Number(a.pinned));
 }
-const threads = new Map<string, GutterComment[]>();
-const authorStats = new Map<string, { comments: number; entries: Set<string> }>();
-for (const comment of gutterComments) {
-  const thread = threads.get(comment.entryId) ?? [];
-  thread.push(comment);
-  threads.set(comment.entryId, thread);
-  const stats = authorStats.get(comment.authorId) ?? { comments: 0, entries: new Set<string>() };
-  stats.comments += 1;
-  stats.entries.add(comment.entryId);
-  authorStats.set(comment.authorId, stats);
-}
-
 export function getGutterUserStats(authorId: string) {
-  const stats = authorStats.get(authorId);
-  return { comments: stats?.comments ?? 0, posts: stats?.entries.size ?? 0 };
+  const comments = getCommunitySnapshot().comments.filter((comment) => comment.authorId === authorId);
+  return { comments: comments.length, posts: new Set(comments.map((comment) => comment.entryId)).size };
 }
 
 export function getGutterComments(entryId: string): GutterComment[] {
-  return threads.get(entryId) ?? [];
+  return getCommunitySnapshot().comments.filter((comment) => comment.entryId === entryId);
 }
 
 export function isGutterEntry(entry: { category?: string; src: string }) {
-  return entry.category === "fleabottom" || /\.(mp4|webm|mov)$/i.test(entry.src.split(/[?#]/)[0]);
+  return Boolean(entry.src);
 }
