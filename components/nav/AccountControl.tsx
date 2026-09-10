@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/(auth)/actions";
@@ -14,6 +14,7 @@ const initialState: AccountState = { profile: null, signedIn: false, profileRead
 export default function AccountControl() {
   const [state, setState] = useState(initialState);
   const pathname = usePathname();
+  const detailsRef = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -39,8 +40,24 @@ export default function AccountControl() {
     return () => { active=false; data.subscription.unsubscribe(); window.removeEventListener("profile-updated", update); };
   }, [pathname]);
 
+  useEffect(() => {
+    const close = (event: PointerEvent) => {
+      const details = detailsRef.current;
+      if (details?.open && event.target instanceof Node && !details.contains(event.target)) details.open = false;
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && detailsRef.current?.open) {
+        detailsRef.current.open = false;
+        detailsRef.current.querySelector<HTMLElement>("summary")?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", escape);
+    return () => { document.removeEventListener("pointerdown", close); document.removeEventListener("keydown", escape); };
+  }, []);
+
   if (!state.loaded) return null;
   if (!state.signedIn || !state.profile) return <span className={styles.authLinks}><Link href="/login">Sign in</Link><Link href="/register">Join</Link></span>;
   const profile=state.profile;
-  return <details className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>{profile.display_name}</b></summary><div><p className={styles.accountIdentity}><strong>{profile.display_name}</strong><small>@{profile.username}</small></p>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/messages">Direct Raven</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
+  return <details ref={detailsRef} className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>{profile.display_name}</b></summary><div><p className={styles.accountIdentity}><strong>{profile.display_name}</strong><small>@{profile.username}</small></p>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
 }

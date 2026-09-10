@@ -28,7 +28,10 @@
       "Added profile banners, browsable member threads and replies, and friend requests with acceptance and removal controls.",
       "Added likes on member contributions and direct replies to Taverns and Raven's Eye comments, with clearer mobile conversation ordering controls.",
       "Refined the navbar account menu and reduced inbox and reaction loading to summarized database queries.",
-      "Aligned the Vahaemon Mogged follow-up conversation with the community's three active publication windows."
+      "Aligned the Vahaemon Mogged follow-up conversation with the community's three active publication windows.",
+      "Added a community authoring inbox workflow so future fictional-account batches can respond to live member forum and Raven’s Eye activity.",
+      "Notifications now separate activity addressed to you from the wider community feed and show a new-activity dot in the navigation.",
+      "Polished mobile navigation and account behavior: Direct Raven stays in the navigation, the account menu closes outside/Escape, and the long site title moves into the mobile menu on small screens."
     ]
   },
   {

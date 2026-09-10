@@ -30,6 +30,8 @@ export interface GutterComment {
   publishedAt: string;
   authorType?: "user" | "character" | "legacy";
   canEdit?: boolean;
+  parentSource?: "supabase";
+  liveThreadId?: string;
 }
 
 export interface CommunityUpdate {

@@ -1,0 +1,32 @@
+ASOFAB COMMUNITY WORKFLOW — KISA REHBER
+
+EN KOLAY KOMUT:
+npm run community
+
+Bu komut:
+- Supabase'ten yeni oyuncu aktivitelerini çeker.
+- .tmp/community-inbox.json dosyasını günceller.
+- Checkpoint'i ilerletmez; yani aktiviteler kaybolmaz.
+
+TÜM AKTİVİTELERİ TEKRAR ÇEKMEK İÇİN:
+npm run community -- --all
+
+BELİRLİ BİR TARİHTEN SONRASINI ÇEKMEK İÇİN:
+npm run community -- --since=2026-09-10T00:00:00Z
+
+WORKFLOW TAMAMEN İŞLENDİKTEN SONRA CHECKPOINT İLERLETMEK İÇİN:
+npm run community -- --mark-seen
+
+NORMAL KULLANIM:
+1. Yeni görsel/video/forum içeriğini ekle.
+2. Terminalde: npm run community
+3. Sonra ChatGPT'ye: "community workflow'u çalıştır" de.
+4. Bot yorumları/thread/reply'ları hazırlandıktan ve dosyalara işlendiğinden emin ol.
+5. İstersen en son: npm run community -- --mark-seen
+
+NOT:
+- .env.local içinde şu iki değer olmalı:
+  NEXT_PUBLIC_SUPABASE_URL=...
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+- .env.local GitHub'a gönderilmemeli.
+- DM verileri bu workflow'a dahil değildir.

@@ -12579,6 +12579,33 @@
       "parentId": "gallery-vahaemon-mogged-elder",
       "body": "and then everyone keeps turning it into a joke :(",
       "publishedAt": "2026-09-11T20:50:00.000Z"
+    },
+    {
+      "id": "live-vahaemon-mogged-luck-reply-power",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-fandom-dragon-ball",
+      "parentId": "6a06f839-18f9-4494-b55e-539dcf5e5c3b",
+      "parentSource": "supabase",
+      "body": "hydrogen bomb still had to sprint in and save the coughing baby which somehow makes it worse",
+      "publishedAt": "2026-09-10T21:15:00.000Z"
+    },
+    {
+      "id": "live-vahaemon-mogged-luck-reply-baelenys",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": "6a06f839-18f9-4494-b55e-539dcf5e5c3b",
+      "parentSource": "supabase",
+      "body": "A needlessly dramatic comparison. Not an inaccurate one.",
+      "publishedAt": "2026-09-11T05:40:00.000Z"
+    },
+    {
+      "id": "live-vahaemon-mogged-luck-followup-cooked",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-cooked",
+      "parentId": "6a06f839-18f9-4494-b55e-539dcf5e5c3b",
+      "parentSource": "supabase",
+      "body": "the fact that this is the cleanest summary of the edit is ruining my morning",
+      "publishedAt": "2026-09-11T09:00:00.000Z"
     }
   ],
   "relationships": [

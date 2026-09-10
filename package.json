@@ -10,7 +10,8 @@
     "validate:data": "node scripts/validate-gutter.mjs && node scripts/validate-data.mjs",
     "validate:comments": "node scripts/validate-gutter.mjs && node scripts/validate-forum.mjs",
     "test:social": "node scripts/test-member-social.mjs && node scripts/test-comment-threads.mjs",
-    "test:raven-ui": "node scripts/test-raven-ui.mjs"
+    "test:raven-ui": "node scripts/test-raven-ui.mjs",
+    "community:inbox": "node scripts/community-inbox.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

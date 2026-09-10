@@ -20,9 +20,15 @@ for(const t of forum.threads){
   if(t.chapterSlug)assert(participants.size>=5 && participants.size<=10,`${t.id} needs 5–10 regular participants`);
 }
 for(const [index,c] of forum.comments.entries()){
-  assert(threads.has(c.entryId));assert(users.has(c.authorId));assert(c.body.trim()&&c.body.length<=6000);
-  assert(Number.isFinite(Date.parse(c.publishedAt)));assert(Date.parse(c.publishedAt)>=Date.parse(threads.get(c.entryId).publishedAt));
-  if(c.parentId){const p=comments.get(c.parentId);assert(p&&p.entryId===c.entryId);assert(forum.comments.indexOf(p)<index);assert(Date.parse(p.publishedAt)<=Date.parse(c.publishedAt));assert(p.authorId!==c.authorId);}
+  const localThread=threads.get(c.entryId);
+  assert(localThread || (c.liveThreadId===c.entryId && /^[0-9a-f-]{36}$/i.test(c.entryId)), `Unknown forum thread: ${c.id}`);
+  assert(users.has(c.authorId));assert(c.body.trim()&&c.body.length<=6000);
+  assert(Number.isFinite(Date.parse(c.publishedAt)));
+  if(localThread) assert(Date.parse(c.publishedAt)>=Date.parse(localThread.publishedAt));
+  if(c.parentId){
+    if(c.parentSource==='supabase') assert(/^[0-9a-f-]{36}$/i.test(c.parentId), `Live reply parent must be a Supabase UUID: ${c.id}`);
+    else {const p=comments.get(c.parentId);assert(p&&p.entryId===c.entryId);assert(forum.comments.indexOf(p)<index);assert(Date.parse(p.publishedAt)<=Date.parse(c.publishedAt));assert(p.authorId!==c.authorId);}
+  }
   assert.equal(new Set(c.upvoterIds).size,c.upvoterIds.length);
   assert(c.upvoterIds.every(id=>users.has(id)&&id!==c.authorId));
   assert(c.awards.every(a=>users.has(a.fromUserId)&&a.fromUserId!==c.authorId&&Number.isInteger(a.amount)&&a.amount>0));

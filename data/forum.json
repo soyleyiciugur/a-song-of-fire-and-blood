@@ -2591,6 +2591,98 @@
         "regular-d"
       ],
       "awards": []
+    },
+    {
+      "id": "live-new-reader-luck-why-site-gate",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-gate",
+      "parentId": "bfdfe704-e5b6-465d-9c33-e0ab54f5e353",
+      "parentSource": "supabase",
+      "body": "started as a way to keep the chapters and family tree in one place. then apparently nobody knew when to stop adding tabs.",
+      "publishedAt": "2026-09-10T21:15:00.000Z",
+      "upvoterIds": [
+        "regular-newbie"
+      ],
+      "awards": []
+    },
+    {
+      "id": "live-new-reader-luck-why-site-newbie",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-newbie",
+      "parentId": "bfdfe704-e5b6-465d-9c33-e0ab54f5e353",
+      "parentSource": "supabase",
+      "body": "so i can be confused in several beautifully indexed locations instead of one 👍",
+      "publishedAt": "2026-09-11T05:40:00.000Z",
+      "upvoterIds": [
+        "regular-gate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "live-admin-appreciation-room-critic",
+      "entryId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "liveThreadId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "beautiful subtavern yes. i am withholding \"best admins in the known world\" pending several peer reviews.",
+      "publishedAt": "2026-09-10T21:15:00.000Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "live-admin-appreciation-jace",
+      "entryId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "liveThreadId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "Finally, a thread with standards.",
+      "publishedAt": "2026-09-11T05:40:00.000Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "live-admin-appreciation-ada-reply-jace",
+      "entryId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "liveThreadId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "authorId": "regular-room-middle",
+      "parentId": "live-admin-appreciation-jace",
+      "body": "you found this thread suspiciously fast",
+      "publishedAt": "2026-09-11T09:00:00.000Z",
+      "upvoterIds": [
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "live-great-game-luck-fun-mert",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-great",
+      "parentId": "16fea4e2-86c5-459b-8c1f-24592727b3bc",
+      "parentSource": "supabase",
+      "body": "correct answer. i will remember this philosophy right up until i lose twice and start moving cards around like furniture.",
+      "publishedAt": "2026-09-10T21:15:00.000Z",
+      "upvoterIds": [
+        "regular-fandom-league"
+      ],
+      "awards": []
+    },
+    {
+      "id": "live-great-game-luck-fun-league",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-fandom-league",
+      "parentId": "16fea4e2-86c5-459b-8c1f-24592727b3bc",
+      "parentSource": "supabase",
+      "body": "building for fun until the first extremely avoidable loss changes my entire personality for six minutes",
+      "publishedAt": "2026-09-11T09:00:00.000Z",
+      "upvoterIds": [
+        "regular-great",
+        "regular-cooked"
+      ],
+      "awards": []
     }
   ]
 }
