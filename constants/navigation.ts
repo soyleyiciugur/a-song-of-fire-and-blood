@@ -34,7 +34,9 @@ export const NAV_ITEMS: NavigationEntry[] = [
     { label: "Dogs", href: "/bestiary/dogs" },
     { label: "Cats", href: "/bestiary/cats" },
   ] },
-  { label: "Houses", href: "/houses" },
+  { label: "Houses", href: "/houses", items: [
+    { label: "Succession", href: "/succession" },
+  ] },
   { label: "The Known World", href: "/map", items: [
     { label: "Map", href: "/map" },
     { label: "Locations", href: "/locations" },
@@ -44,7 +46,6 @@ export const NAV_ITEMS: NavigationEntry[] = [
     { label: "Annals", href: "/chronicle" },
     { label: "The Bloodshed", href: "/wars" },
   ] },
-  { label: "Succession", href: "/succession" },
   { label: "The Collection", href: "/collection", items: [
     { label: "Artifacts", href: "/collection" },
   ] },

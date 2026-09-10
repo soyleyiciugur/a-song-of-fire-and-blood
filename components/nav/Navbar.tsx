@@ -124,7 +124,12 @@ export default function Navbar() {
               >
                 <Link
                   href={item.href || "#"}
-                  className={`${styles.navLink} ${pathname.startsWith(item.href || "") ? styles.active : ""}`}
+                  className={`${styles.navLink} ${
+                    (item.href && pathname.startsWith(item.href)) ||
+                    item.items.some((sub) => pathname.startsWith(sub.href))
+                      ? styles.active
+                      : ""
+                  }`}
                 >
                   {item.label}
                 </Link>

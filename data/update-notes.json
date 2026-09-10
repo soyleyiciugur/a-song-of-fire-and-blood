@@ -2,6 +2,7 @@
   {
     "date": "2026-09-10",
     "items": [
+      "Moved Succession into the Houses menu to give signed-in navigation more room.",
       "Added the Vahaemon Mogged reel to the Raven's Eye.",
       "Added community conversations and scheduled replies to the Vahaemon Mogged reel.",
       "Fixed member profile recovery, Taverns posting after sign-in and compact navbar account states.",
