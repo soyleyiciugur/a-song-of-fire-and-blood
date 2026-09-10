@@ -2,6 +2,7 @@
   {
     "date": "2026-09-10",
     "items": [
+      "Fixed member profile recovery, Taverns posting after sign-in and compact navbar account states.",
       "Added secure member accounts with email confirmation, password recovery, public profiles and avatars across Taverns and Raven's Eye.",
       "Authenticated members can now start Taverns discussions, reply to threads and join Raven's Eye conversations while existing fictional and character-authored discussions remain intact.",
       "Added a new Raven's Eye portrait of Baelenys carrying Vhaemys.",
