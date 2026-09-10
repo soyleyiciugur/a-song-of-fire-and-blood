@@ -40,5 +40,5 @@ export default function AccountControl() {
   if (!state.loaded) return null;
   if (!state.signedIn || !state.profile) return <span className={styles.authLinks}><Link href="/login">Sign in</Link><Link href="/register">Join</Link></span>;
   const profile=state.profile;
-  return <details className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>@{profile.username}</b></summary><div>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
+  return <details className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>@{profile.username}</b></summary><div>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/messages">Direct Raven</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
 }

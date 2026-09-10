@@ -593,3 +593,22 @@
 .profilePending{position:absolute;right:164px;color:var(--muted);font:11px var(--font-geist)}.profileNotice{margin:0;padding:9px;color:var(--muted);font:11px/1.4 var(--font-geist)}
 @media (max-width:1400px) and (min-width:1151px){.inner>.authLinks a:last-child{display:none}.inner>.authLinks{right:166px}.inner>.accountMenu summary b{display:none}}
 @media(max-width:1150px){.inner>.profilePending{display:none}.mobileNav .profilePending{position:static;display:block;padding:12px;color:var(--muted)}}
+
+/* Direct Raven adds a third utility icon to the right-side rookery controls. */
+.inner { padding-right: 218px; }
+.accountMenu,.authLinks { right: 212px; }
+.searchWrap { right: 164px; }
+.notificationsButton { right: 116px; }
+.directRavenButton { right: 68px; }
+.forumButton { right: 20px; }
+.navBadge{position:absolute;right:-4px;top:-4px;display:grid;place-items:center;min-width:16px;height:16px;padding:0 3px;box-sizing:border-box;border:1px solid #1a1113;border-radius:999px;background:#8f2638;color:#fff;font:700 8px var(--font-geist);line-height:1}
+@media(max-width:1150px){
+  .inner { padding-right: 206px; }
+  .searchWrap { right: 158px; }
+  .notificationsButton { right: 110px; }
+  .directRavenButton { right: 62px; }
+  .forumButton { right: 14px; }
+}
+@media (max-width: 1150px) {
+  .playBanner .directRavenButton { display:grid; position:static; transform:none; width:44px; height:44px; flex:0 0 44px; }
+}
