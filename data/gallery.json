@@ -1,5 +1,17 @@
 [
   {
+    "id": "gallery-vahaemon-mogged",
+    "src": "/videos/reels/vahaemon-mogged.mp4",
+    "caption": "spawn diff",
+    "characterIds": ["vahaemon-targaryen", "baelenys-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": ["maelwing"],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-10",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-baelenys-carrying-vhaemys",
     "src": "/images/gallery/baelenys-carrying-vhaemys.jpeg",
     "caption": "Baelenys (56) carrying Vhaemys (5)",

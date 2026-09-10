@@ -12459,6 +12459,126 @@
       "parentId": "gallery-baelenys-carrying-vhaemys-scheduled-3",
       "body": "jace carry me tomorrow. i will bring biscuits",
       "publishedAt": "2026-09-11T20:50:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-cooked",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-cooked",
+      "parentId": null,
+      "body": "vahaemon entered the dragon claiming cutscene and got assigned spectator",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-power",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-fandom-dragon-ball",
+      "parentId": null,
+      "body": "losing the aura battle before the dragon even picks is rough",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-critic",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "the worst part is baelenys did not even arrive to compete. he came to save him",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-ada",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-room-middle",
+      "parentId": "gallery-vahaemon-mogged-critic",
+      "body": "saved his life and accidentally won the entire argument",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-render",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "that cut from vahaemon approaching maelwing to baelenys claiming her is vicious work",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-lurk",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "maelwing made her choice very clear...",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-elder",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "Being rescued by the brother you hoped to surpass is the sort of wound a family remembers for decades.",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-sims",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "one family outing and the succession tension has gained a dragon",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-baelenys",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": "gallery-vahaemon-mogged-critic",
+      "body": "He was alive. That was sufficient.",
+      "publishedAt": "2026-09-10T16:20:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-scheduled-1",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-fandom-pokemon",
+      "parentId": null,
+      "body": "imagine the dragon you wanted becoming your brother's lifelong companion",
+      "publishedAt": "2026-09-10T19:15:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-scheduled-2",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-cooked",
+      "parentId": "gallery-vahaemon-mogged-power",
+      "body": "maelwing saw the matchup and skipped straight to the result screen",
+      "publishedAt": "2026-09-10T19:15:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-scheduled-3",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-divorced",
+      "parentId": null,
+      "body": "A difficult day for Vahaemon. An even more difficult story to hear repeated at family dinners.",
+      "publishedAt": "2026-09-11T09:10:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-scheduled-4",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "the edit treats a family grievance like a coronation anthem and honestly it works",
+      "publishedAt": "2026-09-11T09:10:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-scheduled-5",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-room-critic",
+      "parentId": "gallery-vahaemon-mogged-baelenys",
+      "body": "your definition of sufficient continues to explain a lot",
+      "publishedAt": "2026-09-11T17:40:00.000Z"
+    },
+    {
+      "id": "gallery-vahaemon-mogged-scheduled-6",
+      "entryId": "gallery-vahaemon-mogged",
+      "authorId": "regular-lurk",
+      "parentId": "gallery-vahaemon-mogged-elder",
+      "body": "and then everyone keeps turning it into a joke :(",
+      "publishedAt": "2026-09-11T17:40:00.000Z"
     }
   ],
   "relationships": [

@@ -37,4 +37,6 @@ $$;
 revoke all on function public.ensure_own_profile() from public;
 grant execute on function public.ensure_own_profile() to authenticated;
 
+notify pgrst, 'reload schema';
+
 commit;
