@@ -24,6 +24,22 @@ export default function ChronicleTimeline() {
             <h2 id="chronicle-timeline-title">Aegon&apos;s Conquest &rarr; The Unknown</h2>
           </div>
         </div>
+      <ol className={styles.mobileTimeline} aria-label="The Known Chronicle">
+        <li className={styles.mobileEpoch}>Aegon&apos;s Conquest</li>
+        {timeline.map((chapter) => (
+          <li key={chapter.chapterSlug} className={styles.mobileChapter}>
+            <Link href={`/timeline#${chapter.chapterSlug}`}>
+              <span className={styles.chapter}>{chapter.chapterTitle}</span>
+              {chapter.date && <span className={styles.date}>{chapter.date}</span>}
+            </Link>
+          </li>
+        ))}
+        <li className={`${styles.mobileEpoch} ${styles.mobilePresent}`}>
+          Present
+          <span className={styles.date}>{worldDate.day}/{worldDate.moon}/{worldDate.year} {worldDate.era}</span>
+        </li>
+        <li className={styles.mobileFuture}>Unknown</li>
+      </ol>
       <div className={styles.viewport}>
         <div className={styles.track}>
           <span className={styles.progress} style={{ width: `${currentPosition}%` }} />
