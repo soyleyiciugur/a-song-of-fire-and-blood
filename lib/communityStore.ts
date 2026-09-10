@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import type { CommunitySnapshot } from "./communityTypes";
 
-const empty = { users: [], comments: [], updates: [], serverTime: "", loaded: false, error: "" } as CommunitySnapshot & { loaded: boolean; error: string };
+const empty = { users: [], comments: [], forumThreads: [], updates: [], serverTime: "", loaded: false, error: "" } as CommunitySnapshot & { loaded: boolean; error: string };
 let snapshot = empty;
 const listeners = new Set<() => void>();
 let timer: ReturnType<typeof setInterval> | undefined;

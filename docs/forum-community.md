@@ -1,0 +1,21 @@
+# Forum authoring
+
+`data/forum.json` stores persistent threads and comments. `/forum` lists them; `/forum?thread=<id>&comment=<id>#comment-<id>` opens a conversation and focuses a specific reply. The same fictional profiles and relationship histories from `flea-bottom.json` appear here. Do not duplicate users. Member registration, submissions, voting and purchases are future work; the current upvotes and Hasocash are authored fictional activity, not real financial transactions or fake interactive buttons.
+
+## Chapter discussions
+
+Maintain one thread per actual slug in `data/chapters.json`. Titles and chapter links are resolved from that dataset on the server, so title corrections propagate. Do not invent a chapter called Jace the Hand: Chapter III, The Weight of Loyalty, hosts that discussion. Read the chapter passages relevant to each reaction. Keep 5–10 distinct ordinary participants per chapter thread, with variable comment counts; longer two-person conversations can have 5–10 exchanges without adding new people each time. The occasional cast/moderator cameo is additional. This participant range is specific to the forum request, not a reinstated minimum for gallery comments.
+
+Each chapter thread's `spoilerThrough` is its own chapter slug. Do not use later discoveries, outcomes or identities even if the profiles know them elsewhere. Theories must stay distinguishable from facts; a character's claim is not automatically the narrator's verdict. Readers may discuss secrets revealed in the chapter, but a cast cameo must not invent a new confession, outcome or revelation. Avoid sexualized discussion of young characters. Keep Maela sparse.
+
+Four additional threads start the forum: ghost-dragon theory, quiet-chapter writing discussion, impossible pairings, and council-meeting humour. They allow current-chapter spoilers and have less activity than the chapter discussions. Do not turn every thread into the same six accounts with swapped nouns. Paragraphs, short replies, sincere observations, trolling and sharp disagreement should coexist. The writers-room critic need not be corrected or converted every time; the middle-ground account has independent taste.
+
+## Replies, moderation and rewards
+
+Comments reference `entryId` (thread ID), independent `authorId`, optional `parentId`, stable ID, body and UTC ISO `publishedAt`. Parents precede descendants in the file and publish no later than descendants. Multiple reply levels are supported; visual indentation stops growing after two levels, but parent links retain the complete conversation. The shared publication boundary withholds future threads, comments and descendants of unpublished parents. Forum comments join gallery comments in notifications and profile counts.
+
+Jace (`cast-jacaelon-targaryen`) is the fictional moderator. A warning has `moderation: {rule, targetCommentId}` and is a reply to the affected comment. Only this account can issue stored moderator warnings. He responds to a specific violation, such as a personal insult, not merely criticism of the story or of himself. Initial rules: argue the take rather than the person; respect the spoiler boundary; no spam or pile-ons. Sharpness, disagreement and silly bait are not all moderation incidents. Do not silently erase an argument to make everybody friends.
+
+`upvoterIds` contains distinct existing accounts other than the author. `awards` contains `{fromUserId, amount}` for positive integer amounts of fictional Hasocash, also never from the recipient. Choose reactions that make sense for those accounts; do not blindly have the target of an insult upvote the insult. The public projection exposes only upvote count and Hasocash total. The hexagonal H medallion is a community award with no wallet, purchase or monetary claim.
+
+Append real release notes to `community-updates.json` when the forum gains a feature; do not invent historical launch dates. Preserve existing comments and IDs. Run `npm.cmd run validate:comments`, `node scripts/test-community-publication.mjs`, and relevant browser/type checks after code changes. `scripts/validate-forum.mjs` checks chapter coverage, participant range, reply ancestry, identities, moderation, rewards and publication timing.

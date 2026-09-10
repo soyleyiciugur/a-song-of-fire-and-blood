@@ -1,0 +1,1904 @@
+{
+  "version": 1,
+  "threads": [
+    {
+      "id": "chapter-the-poison-beneath-the-crown",
+      "chapterSlug": "the-poison-beneath-the-crown",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-archive",
+      "body": "The poisoning, the hatchlings, and the first cracks in the family. What did you trust by the end of this chapter?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-poison-beneath-the-crown"
+    },
+    {
+      "id": "chapter-the-price-of-trust",
+      "chapterSlug": "the-price-of-trust",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-arcane",
+      "body": "The escape plan is one thing. What did the family confrontation change about how you read the brothers?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-price-of-trust"
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty",
+      "chapterSlug": "the-weight-of-loyalty",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-grad",
+      "body": "Jace the Hand: a promotion, a responsibility, or another way to keep a son inside the king’s reach? Discuss Chapter III here.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-weight-of-loyalty"
+    },
+    {
+      "id": "chapter-the-broken-knight",
+      "chapterSlug": "the-broken-knight",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-baldurs-gate",
+      "body": "The knight’s survival and the Hand’s first work in a restless court: which side of the chapter stayed with you?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-broken-knight"
+    },
+    {
+      "id": "chapter-fathers-and-their-sins",
+      "chapterSlug": "fathers-and-their-sins",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-true-crime",
+      "body": "Oldtown and the cost of the king’s retribution. Please keep the people harmed in view as well as the princes.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "fathers-and-their-sins"
+    },
+    {
+      "id": "chapter-a-crown-of-thorns",
+      "chapterSlug": "a-crown-of-thorns",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-club",
+      "body": "Paranoia at home, fragile hope in Dorne, and Alester’s return. How do those threads change each other?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "a-crown-of-thorns"
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel",
+      "chapterSlug": "the-climb-and-the-kneel",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-ecology",
+      "body": "A mountain climb and a knight’s vows: what does earning a bond look like in this chapter?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-climb-and-the-kneel"
+    },
+    {
+      "id": "chapter-the-viper-in-silk",
+      "chapterSlug": "the-viper-in-silk",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-dune",
+      "body": "Power, a new dragonrider, and the threat behind the tourney preparations. Spoilers stop at Chapter VIII.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-viper-in-silk"
+    },
+    {
+      "id": "chapter-the-brothers-tilt",
+      "chapterSlug": "the-brothers-tilt",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-sport",
+      "body": "The lists finally turn the brothers’ rivalry into a public result. Match reactions, character readings and terrible imaginary predictions welcome.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-brothers-tilt"
+    },
+    {
+      "id": "chapter-fireflies",
+      "chapterSlug": "fireflies",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-ghibli",
+      "body": "After the violence of the lists, what does the recovery chapter actually repair?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "fireflies"
+    },
+    {
+      "id": "chapter-the-manders-pact",
+      "chapterSlug": "the-manders-pact",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-grad",
+      "body": "Visenor’s journey north and the argument about justice back in the capital. What do you think the pact is buying?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-manders-pact"
+    },
+    {
+      "id": "chapter-the-trial",
+      "chapterSlug": "the-trial",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-legal",
+      "body": "The Trial: sentence, legitimacy, and the gap between what the Crown calls justice and what Costayne will accept.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-trial"
+    },
+    {
+      "id": "chapter-the-broken-oak",
+      "chapterSlug": "the-broken-oak",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-horror",
+      "body": "The judgment’s aftermath and the private confrontations it produces. How much authority does the Hand really have?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-broken-oak"
+    },
+    {
+      "id": "chapter-the-reunion",
+      "chapterSlug": "the-reunion",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-friends",
+      "body": "An uncomfortable reunion and an old Riverlands feud. Which conversation did you most want to escape?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-reunion"
+    },
+    {
+      "id": "chapter-the-glass-flower",
+      "chapterSlug": "the-glass-flower",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-club",
+      "body": "The Glass Flower: the gift, the perspective, and what Alester can and cannot offer. This thread may discuss the whole chapter.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-glass-flower"
+    },
+    {
+      "id": "chapter-the-mummers-blood",
+      "chapterSlug": "the-mummers-blood",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-fandom-dnd",
+      "body": "The Mummer’s Blood: inherited temper, performance, and old dragon lore. What changed for you after the flashback?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "theory-ghost-dragon",
+      "chapterSlug": null,
+      "title": "Ghost dragon theories: camouflage is not invisibility",
+      "category": "Theory",
+      "authorId": "regular-fandom-mythology",
+      "body": "What can the lore conversation actually support? Current-chapter spoilers; distinguish a theory from an established trait.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "meta-quiet-chapters",
+      "chapterSlug": null,
+      "title": "Hot take: the quiet chapters are doing the heavy lifting",
+      "category": "Writing & meta",
+      "authorId": "regular-room-critic",
+      "body": "I remember the missing-person conversations and the window more clearly than some of the big collisions. Do you want more breathing room, or does the pace work for you?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-crackship-desk",
+      "chapterSlug": null,
+      "title": "The extremely unofficial impossible-pairing desk",
+      "category": "Fandom",
+      "authorId": "regular-impossible-ships",
+      "body": "No endgame predictions. No fake receipts. Just combinations the notes app has decided to care about. Keep it non-explicit and let people dislike a pairing without making it personal.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-council-break-room",
+      "chapterSlug": null,
+      "title": "Which council meeting should have been a raven?",
+      "category": "Off-topic",
+      "authorId": "regular-fandom-the-office",
+      "body": "Current-chapter spoilers. Choose one meeting you would have escaped, or defend the need for everyone to be in the same room.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "spoilerThrough": "the-mummers-blood"
+    }
+  ],
+  "comments": [
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-1",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "The last words are an accusation, not a solved case. Gaelor kills the person who might have explained them.\n\nThat is the interesting failure to me: he obtains information and destroys the possibility of checking it in the same scene.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-d",
+        "regular-u",
+        "regular-fandom-star-wars",
+        "regular-fandom-hunger-games"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-newbie",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-2",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-d",
+      "parentId": null,
+      "body": "the hand. two words. derrin discourse has entered the building",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-l"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-3",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "The kitchen executions are where the opening lands for me. The servants become disposable because the king is frightened. Saera argues for their lives; Jace also argues that you cannot run a kingdom like this. Neither argument saves them.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-l",
+        "regular-d",
+        "regular-fandom-star-wars",
+        "regular-fandom-hunger-games"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-4",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-fandom-star-wars",
+      "parentId": null,
+      "body": "three hatchlings arrive and they immediately become an allocation dispute. incredible family",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-l",
+        "regular-d",
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-5",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-fandom-hunger-games",
+      "parentId": null,
+      "body": "i like that the celebration and the panic happen together. the dragons do not pause their lives for a succession crisis",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-6",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "so the last words give us a suspect, not the whole conspiracy?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-l"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-poison-beneath-the-crown-comment-7",
+      "entryId": "chapter-the-poison-beneath-the-crown",
+      "authorId": "regular-l",
+      "parentId": "chapter-the-poison-beneath-the-crown-comment-6",
+      "body": "Correct. At this chapter boundary, we have the accusation and the letter concerning Rhaella; neither establishes the full poisoning conspiracy.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-d",
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-price-of-trust-comment-1",
+      "entryId": "chapter-the-price-of-trust",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "jace helping visenor off the floor before everything turns strategic again. that is the bit i keep thinking about",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-dune",
+        "regular-fandom-baldurs-gate",
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-price-of-trust-comment-2",
+      "entryId": "chapter-the-price-of-trust",
+      "authorId": "regular-fandom-dune",
+      "parentId": null,
+      "body": "Dorne versus Essos is not just the helpful brother offering a better holiday. Jace understands that an exiled claimant can become someone else’s weapon.\n\nThe rescue is compassionate and controlling at once. I like not having to choose only one reading.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-fandom-baldurs-gate",
+        "regular-elder",
+        "regular-it"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-price-of-trust-comment-3",
+      "entryId": "chapter-the-price-of-trust",
+      "authorId": "regular-fandom-baldurs-gate",
+      "parentId": null,
+      "body": "alester leaving the guards breathing matters. the escape does not become another excuse to kill everyone in the corridor",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-price-of-trust-comment-4",
+      "entryId": "chapter-the-price-of-trust",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "Rhaella asking whether there would have been a marriage without the letters is painful. That is a person trying to find out which part of her life is real.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-fandom-dune"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-price-of-trust-comment-5",
+      "entryId": "chapter-the-price-of-trust",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "the cover story has one source of truth and approximately a million ways to fail",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-fandom-dune",
+        "regular-fandom-baldurs-gate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-price-of-trust-comment-6",
+      "entryId": "chapter-the-price-of-trust",
+      "authorId": "regular-fandom-the-office",
+      "parentId": null,
+      "body": "bring lorenah to court. simple work trip. nothing else happened. normal expense report",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-1",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Jace getting the Hand position makes sense to me. He is already thinking about what holds the family and the court together, even while he is terrified about the people he sent away.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-2",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-weight-of-loyalty-comment-1",
+      "body": "Being good at keeping this court together is not automatically a compliment. The machinery itself is the problem. He is being promoted inside it.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-3",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-j",
+      "parentId": "chapter-the-weight-of-loyalty-comment-2",
+      "body": "sure but somebody still has to make decisions tomorrow morning. being capable of that is not nothing",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u",
+        "regular-ledger",
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-4",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-weight-of-loyalty-comment-3",
+      "body": "I did not say it was nothing. I am saying competence has a direction. Who benefits when the machine runs more smoothly?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-5",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-j",
+      "parentId": "chapter-the-weight-of-loyalty-comment-4",
+      "body": "and i think the chapter leaves that question open. the stuff with vhaemys makes him feel like a person trying to protect people, not a walking institution",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-6",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-weight-of-loyalty-comment-5",
+      "body": "The Vhaemys scene works on me too. That is why I want to separate affection from governing. A man can be tender with his family and still preserve something ugly.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-7",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-j",
+      "parentId": "chapter-the-weight-of-loyalty-comment-6",
+      "body": "okay that is fair. i read your first reply as saying the appointment tells us nothing about him",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u",
+        "regular-ledger",
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-8",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-weight-of-loyalty-comment-7",
+      "body": "It tells us a lot. I just do not think all of it is flattering. Also yes, I did feel something when he admitted missing Alester. Annoying of the story.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": [
+        {
+          "fromUserId": "regular-room-critic",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-9",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "Promotion discourse aside, someone now has to carry the administration while everybody else manufactures emergencies. The job is not only the pin.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-10",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "Vhaemys looking for Alester gives his absence a life outside the escape plot. Other people have lost their ordinary routines too.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-11",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "Gaelor hears the confession himself. What a reader knows at the end of this chapter and what the court can establish are still different questions.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-u",
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-weight-of-loyalty-comment-12",
+      "entryId": "chapter-the-weight-of-loyalty",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "i like the small missing-alester conversation more than the promotion. the title is big, the absence feels specific",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-knight-comment-1",
+      "entryId": "chapter-the-broken-knight",
+      "authorId": "regular-s",
+      "parentId": null,
+      "body": "i came here to say alester needs rest and ended up rereading the title for ten minutes",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-warcraft"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-knight-comment-2",
+      "entryId": "chapter-the-broken-knight",
+      "authorId": "regular-fandom-warcraft",
+      "parentId": null,
+      "body": "Loyalty has a physical cost here. It is easy for a court to discuss an oath as if the person fulfilling it never needs to stop.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s",
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-knight-comment-3",
+      "entryId": "chapter-the-broken-knight",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "The Master of Coin is asking what happens after the victory. That is a real question, not cowardice. Taking money and immediately putting it into another war is not a recovery plan.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s",
+        "regular-fandom-warcraft",
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-knight-comment-4",
+      "entryId": "chapter-the-broken-knight",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "Jace calling the campaign a message to the whole realm is why I resist the harmless clever-prince reading. He understands the intimidation and can make its case.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-knight-comment-5",
+      "entryId": "chapter-the-broken-knight",
+      "authorId": "regular-fandom-hamilton",
+      "parentId": null,
+      "body": "the first days of a new job but the job is making everyone remember their place",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-knight-comment-6",
+      "entryId": "chapter-the-broken-knight",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "i liked moving between the court and the people actually trying to survive. the contrast makes the confident council talk sound different",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s",
+        "regular-fandom-warcraft"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-1",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "The language of royal authority does not make this less of a massacre. A command moving down the hierarchy does not remove the choices of the person carrying it out.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-g",
+        "regular-fandom-history",
+        "regular-shield"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-2",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "i am not defending what happened to the people at oldtown. i still think the father-son part matters if we are talking about how gaelor got here",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-3",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-fandom-history",
+      "parentId": "chapter-fathers-and-their-sins-comment-2",
+      "body": "Explanation matters. It just does not have to become exoneration. The title invites the inherited-pattern reading without requiring us to forgive the son.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-4",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "Saathos being loyal cannot be the end of the conversation about Saathos either. I follow him separately from Gaelor, and that means looking at the ugly parts too.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u",
+        "regular-g"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-5",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "this is where the scale of the cruelty starts crowding out the individual people for me. i wanted more space with them before the prince becomes the centre of the discussion again",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u",
+        "regular-g",
+        "regular-fandom-history"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-6",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-fathers-and-their-sins-comment-5",
+      "body": "i understand that. for me the horror is that the court can turn all of those lives into a political consequence. i do not think being horrified means the scene failed",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-fathers-and-their-sins-comment-7",
+      "entryId": "chapter-fathers-and-their-sins",
+      "authorId": "regular-faith",
+      "parentId": null,
+      "body": "The people who suffer do not have to become useful lessons for the ruling family to matter.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-a-crown-of-thorns-comment-1",
+      "entryId": "chapter-a-crown-of-thorns",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "Jace worrying about what Vhaemys is learning from the king is a much more interesting concern than deciding the child is already beyond help. She is watching the adults.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-atla",
+        "regular-gym"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-a-crown-of-thorns-comment-2",
+      "entryId": "chapter-a-crown-of-thorns",
+      "authorId": "regular-fandom-atla",
+      "parentId": "chapter-a-crown-of-thorns-comment-1",
+      "body": "yes. getting her a different influence is an actual response, not just being upset that she copies him",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder",
+        "regular-gym",
+        "regular-s"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-a-crown-of-thorns-comment-3",
+      "entryId": "chapter-a-crown-of-thorns",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "training with someone who can still challenge you is good. being surrounded by people who only tell you how impressive you are is not training",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-a-crown-of-thorns-comment-4",
+      "entryId": "chapter-a-crown-of-thorns",
+      "authorId": "regular-s",
+      "parentId": null,
+      "body": "alester kneeling when he should barely be standing. i would like to personally remove oaths from the room for five minutes",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-a-crown-of-thorns-comment-5",
+      "entryId": "chapter-a-crown-of-thorns",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "That ending makes loyalty feel both beautiful and frightening. I can admire the devotion and want someone to tell him he has done enough.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder",
+        "regular-fandom-atla"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-a-crown-of-thorns-comment-6",
+      "entryId": "chapter-a-crown-of-thorns",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "the dorne sections gave me enough breathing room to finish this one. i needed somewhere in the story that still allowed hope",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder",
+        "regular-fandom-atla",
+        "regular-gym"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-fandom-tolkien",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel-comment-1",
+      "entryId": "chapter-the-climb-and-the-kneel",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "visenor packing actual supplies before going up the mountain. a rare win for preparation enthusiasts",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel-comment-2",
+      "entryId": "chapter-the-climb-and-the-kneel",
+      "authorId": "regular-prep",
+      "parentId": null,
+      "body": "Food, water, rope, blankets. I appreciate a dangerous journey that remembers a body has ordinary requirements.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel-comment-3",
+      "entryId": "chapter-the-climb-and-the-kneel",
+      "authorId": "regular-fandom-pokemon",
+      "parentId": null,
+      "body": "boneskin not immediately deciding the silver-haired man is his best friend. respect",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-prep"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel-comment-4",
+      "entryId": "chapter-the-climb-and-the-kneel",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "The waiting and shared food matter more to me than the idea of blood as an instant access pass. He has to stay with an animal that has its own reasons to be wary.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-prep",
+        "regular-fandom-pokemon"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel-comment-5",
+      "entryId": "chapter-the-climb-and-the-kneel",
+      "authorId": "regular-fandom-naruto",
+      "parentId": null,
+      "body": "the climb and the kneeling feel like two ways of having to earn something rather than just being born near it",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-climb-and-the-kneel-comment-6",
+      "entryId": "chapter-the-climb-and-the-kneel",
+      "authorId": "regular-fandom-epic",
+      "parentId": null,
+      "body": "coming back and telling the whole journey over wine is such a good release after the climb",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-viper-in-silk-comment-1",
+      "entryId": "chapter-the-viper-in-silk",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "Cordin presenting terror as fifteen years of peace tells us how he sells the reign. I would not automatically adopt his definition of peace as the narrator’s verdict.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-k",
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-viper-in-silk-comment-2",
+      "entryId": "chapter-the-viper-in-silk",
+      "authorId": "regular-k",
+      "parentId": null,
+      "body": "A deterrent can prevent wars. That is not a ridiculous argument simply because Cordin makes it.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-u",
+        "regular-ecology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-viper-in-silk-comment-3",
+      "entryId": "chapter-the-viper-in-silk",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-viper-in-silk-comment-2",
+      "body": "Preventing open war and making ordinary people safe are different measures. The account of peace needs to include whose fear is doing the work.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-viper-in-silk-comment-4",
+      "entryId": "chapter-the-viper-in-silk",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "Boneskin refusing to leave the egg makes the relocation a negotiation. The dragon has a priority that is not Visenor’s title.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-viper-in-silk-comment-5",
+      "entryId": "chapter-the-viper-in-silk",
+      "authorId": "regular-fandom-fallout",
+      "parentId": null,
+      "body": "the council working out how to sell a war as liberation is bleak. they know exactly which values they need to borrow",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-k"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-viper-in-silk-comment-6",
+      "entryId": "chapter-the-viper-in-silk",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "ending on dark sister in the room is more than enough threat for me. no theory essay. just dread",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-k",
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-1",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "By the end I am less interested in who won than who let the tilt keep turning into this. The horses did not sign up for the family argument.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-2",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-fandom-wrestling",
+      "parentId": null,
+      "body": "both men stop behaving like they are trying to win a normal match. the crowd gets a spectacle and nobody gets a sensible decision",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-horse"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-3",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-scale",
+      "parentId": null,
+      "body": "Gaelor staying mounted is the result. It does not settle every hypothetical sword fight or prove Jace has never trained. Different contest.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-horse",
+        "regular-fandom-wrestling"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-4",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "yes he fell. i have accepted this. please stop sending my imaginary inbox the same result",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-horse",
+        "regular-fandom-wrestling",
+        "regular-scale"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-5",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-g",
+      "parentId": "chapter-the-brothers-tilt-comment-4",
+      "body": "i would like the record to show that i have sent zero messages and thought about it several times",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-6",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-fandom-true-crime",
+      "parentId": null,
+      "body": "Costayne appearing here means Oldtown has a survivor who can act, not just a memory for the princes to process. That changes the scene for me.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-horse"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-brothers-tilt-comment-7",
+      "entryId": "chapter-the-brothers-tilt",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "alester/godfrey corner has received crumbs. this is a fan interpretation, please do not summon the evidence committee",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-horse",
+        "regular-fandom-wrestling"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fireflies-comment-1",
+      "entryId": "chapter-fireflies",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "Putting two injured sons near each other does not repair their relationship. The king can command proximity much more easily than trust.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-arcane",
+        "regular-room-defender",
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fireflies-comment-2",
+      "entryId": "chapter-fireflies",
+      "authorId": "regular-fandom-arcane",
+      "parentId": null,
+      "body": "the quiet hurts more because nobody has suddenly become good at talking",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-fireflies-comment-3",
+      "entryId": "chapter-fireflies",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "i liked slowing down after the tourney. if every chapter immediately reaches for the next collision, the injuries stop feeling like anything",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fireflies-comment-4",
+      "entryId": "chapter-fireflies",
+      "authorId": "regular-room-critic",
+      "parentId": "chapter-fireflies-comment-3",
+      "body": "same on the slowdown. i am less sold on asking the exhausted-father image to carry sympathy without sitting longer with how he made this situation",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder",
+        "regular-fandom-arcane"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fireflies-comment-5",
+      "entryId": "chapter-fireflies",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "for me the fireflies give the moment tenderness without making it forgiveness",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-elder",
+        "regular-fandom-arcane",
+        "regular-room-defender"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-fireflies-comment-6",
+      "entryId": "chapter-fireflies",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "Steffon winning by default while the two people everyone watched destroy each other is a very funny footnote to a miserable day.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": [
+        {
+          "fromUserId": "regular-fandom-hadestown",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-1",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "the carved boneskin gift was a nice moment before my anxiety returned to full-time employment",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-dune"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-2",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-fandom-dune",
+      "parentId": null,
+      "body": "The nameday starts with something personal and ends up entangled with claims and alliances again. Even the peaceful moments have politics waiting outside the door.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-3",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "Jace suggesting trial by combat is not a neutral explanation of available procedure if he also knows who will step into the circle. The advice has an intended consequence.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-fandom-dune",
+        "regular-faith"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-4",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-faith",
+      "parentId": null,
+      "body": "Costayne asking what justice approves of killing children challenges the legitimacy of the court itself. It is not just an appeal for a lighter sentence.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-5",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-d",
+      "parentId": null,
+      "body": "oldtown. citadel. a new set of doors to knock on. i remain convinced the hightower part of this story has more to give",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-6",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-l",
+      "parentId": "chapter-the-manders-pact-comment-5",
+      "body": "More story is plausible. That does not establish any particular comeback theory.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-fandom-dune"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-manders-pact-comment-7",
+      "entryId": "chapter-the-manders-pact",
+      "authorId": "regular-fandom-hamilton",
+      "parentId": null,
+      "body": "prove yourself in war, then everyone will accept you. that bargain feels like it can always demand one more war",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-v",
+        "regular-fandom-dune",
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-1",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "The Wall sentence matters because Jace is trying to exercise authority without simply giving Gaelor the ending he wants. That does not mean Costayne accepts the institution that hands it down.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-2",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-g",
+      "parentId": "chapter-the-trial-comment-1",
+      "body": "he tried to kill a prince. twice. everyone keeps writing around that as though it is a minor administrative issue",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-3",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-legal",
+      "parentId": "chapter-the-trial-comment-2",
+      "body": "Nobody needs to erase the attempts to ask whether this court is impartial. The political history is part of why the defendant rejects its claim to justice.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-g",
+        "cast-jacaelon-targaryen"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-4",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-g",
+      "parentId": "chapter-the-trial-comment-3",
+      "body": "and the victims of his revenge are just meant to wait while we workshop the philosophy?",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal",
+        "cast-jacaelon-targaryen",
+        "regular-faith"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-5",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-legal",
+      "parentId": "chapter-the-trial-comment-4",
+      "body": "That is not what I wrote. You are arguing with the easiest version of the point rather than the one in front of you.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-6",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-g",
+      "parentId": "chapter-the-trial-comment-5",
+      "body": "you are genuinely too stupid to read a plain sentence when a prince you dislike is in it",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-7",
+      "entryId": "chapter-the-trial",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "chapter-the-trial-comment-6",
+      "body": "You can call the sentence wrong. You can call my decisions wrong. Calling another reader stupid is where this stops. Rule 1: argue the take, not the person. Keep the next reply on the chapter.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal",
+        "regular-g"
+      ],
+      "awards": [],
+      "moderation": {
+        "rule": "No personal attacks",
+        "targetCommentId": "chapter-the-trial-comment-6"
+      }
+    },
+    {
+      "id": "chapter-the-trial-comment-8",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-g",
+      "parentId": "chapter-the-trial-comment-7",
+      "body": "fine. my actual objection is that the sentence does not answer the second attempt on gaelor. that is what i wanted addressed",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal",
+        "cast-jacaelon-targaryen",
+        "regular-faith"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-9",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-legal",
+      "parentId": "chapter-the-trial-comment-8",
+      "body": "That is a specific objection I can answer. My reading is that the sentence contains him; it is not an agreement that his revenge was justified.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-10",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-faith",
+      "parentId": null,
+      "body": "A sentence can end a proceeding without restoring anyone’s belief in justice. Costayne’s final insistence makes that divide very clear.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-11",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-fandom-disco-elysium",
+      "parentId": null,
+      "body": "everyone in this room is using the word justice for a different thing and insisting the others know exactly what they mean",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal",
+        "regular-g"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-12",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "i found the mess more convincing than a clean victory for jace. i can also see why someone would find it frustrating to read",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal",
+        "regular-g",
+        "cast-jacaelon-targaryen"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-13",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "The Crown and the Faith are not interchangeable voices here. The competing claims to legitimate judgment are the point worth following.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-trial-comment-14",
+      "entryId": "chapter-the-trial",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "this thread has helped me separate the actual sentence from what costayne thinks of it. thanks",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-1",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "having the office and being allowed to use it are clearly not the same problem",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-the-office",
+        "regular-fandom-dune"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-2",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-fandom-the-office",
+      "parentId": null,
+      "body": "management would like you to take responsibility but not make any decisions it dislikes",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-fandom-dune",
+        "regular-fandom-mythology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-3",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-fandom-dune",
+      "parentId": null,
+      "body": "The confrontation makes the title feel conditional. Baelenys can demand a strong Hand and still experience independent judgment as a challenge to himself.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-4",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-fandom-mythology",
+      "parentId": null,
+      "body": "The ghost-dragon descendant is a lead at this point, not an identified creature. I like the possibility of old stories becoming politically useful again.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-5",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-d",
+      "parentId": null,
+      "body": "a rumour can be useful before anyone knows if it is true. finally a chapter understands my workflow",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-fandom-the-office"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-room-critic",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-6",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-l",
+      "parentId": "chapter-the-broken-oak-comment-5",
+      "body": "Useful is not verified. I am putting that underneath this one in advance.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-j",
+        "regular-fandom-the-office",
+        "regular-fandom-dune"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-broken-oak-comment-7",
+      "entryId": "chapter-the-broken-oak",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "the title promises something broken and the office really does feel less secure by the end. that part worked for me",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-reunion-comment-1",
+      "entryId": "chapter-the-reunion",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "The Blackwood account is still an account from an interested party. Jace asking what the Crown can establish is not the same as proving the death was accidental.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-reunion-comment-2",
+      "entryId": "chapter-the-reunion",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "And Tully’s marriage connection complicates the apparently easy answer of asking the liege lord to settle it. The chapter makes the available channels feel compromised.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-fandom-sims"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-reunion-comment-3",
+      "entryId": "chapter-the-reunion",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "the riverlands have brought a centuries-old household argument to somebody else’s desk",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-legal",
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-reunion-comment-4",
+      "entryId": "chapter-the-reunion",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "Tariffs, fishing rights, then a demand to authorize a war. Very normal progression for the morning queue.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-reunion-comment-5",
+      "entryId": "chapter-the-reunion",
+      "authorId": "regular-fandom-arcane",
+      "parentId": null,
+      "body": "the reunion title sounds so much gentler than the experience of reading this family in a room",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-reunion-comment-6",
+      "entryId": "chapter-the-reunion",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "lorenah playing the harp is one of the details i was happy to linger on. she has a life when the princes are busy",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-1",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-s",
+      "parentId": null,
+      "body": "Alester wants to give Saera something extraordinary, but he cannot control what the restored sight means to her.\n\nThat is why the window hurts. His effort and her happiness do not arrange themselves into the story he might have wanted.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-hadestown",
+        "regular-feminist",
+        "regular-fandom-twilight",
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-2",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "The flower breaking makes the gift feel temporary before the emotional meaning has even settled. I do not read it as a simple punishment for loving someone.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-3",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-feminist",
+      "parentId": null,
+      "body": "Rickard saying what a princess ultimately desires is Rickard making a claim. Saera does not become an equation that either man has solved because he speaks confidently.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-4",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-fandom-twilight",
+      "parentId": "chapter-the-glass-flower-comment-3",
+      "body": "yes. i can feel bad for alester without turning saera into someone who owes him the correct reaction",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s",
+        "regular-fandom-hadestown"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-5",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "this is the kind of damage i find more effective than another body count. the chapter lets several people want different things in the same small space",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s",
+        "regular-fandom-hadestown",
+        "regular-feminist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-6",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "personally this is one of my favourites. i get why the symbolism could feel heavy to someone else but the emotional situation carried it for me",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-glass-flower-comment-7",
+      "entryId": "chapter-the-glass-flower",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "The proposal and the northern section both ask what being chosen actually means, but in very different registers. I liked reading them together.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-s"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-1",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "Seeing the young Baelenys makes the later family patterns harder to treat as isolated outbursts. A flashback can explain a shape without forgiving what it becomes.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-room-critic",
+        "regular-room-defender"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-2",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "i understand the parallel. i still wanted more time with the performers before another royal reaction becomes the main event. that criticism is about emphasis, not me missing that gaelor is cruel",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-room-defender",
+        "regular-fandom-mythology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-3",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-the-mummers-blood-comment-2",
+      "body": "i read the performance as people briefly getting to speak back to power, which is why the response hurt. but wanting more of them as people is a fair criticism",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-4",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-fandom-mythology",
+      "parentId": null,
+      "body": "The dragon-lore conversation is careful about camouflage versus literal transparency. Those are different claims. I would keep that distinction in any ghost-dragon theory.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-quiet",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-5",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-ecology",
+      "parentId": "chapter-the-mummers-blood-comment-4",
+      "body": "yes, colour and light can explain the account without immediately inventing invisibility powers",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-6",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-fandom-one-piece",
+      "parentId": null,
+      "body": "zekar, mydan, merryn. i want to remember the names and not just call this the gaelor scene",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history",
+        "regular-room-critic",
+        "regular-room-defender"
+      ],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-7",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "Not everything should become an argument about whether a follower had better intentions than his prince. The people on the other end still experience the violence.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-mummers-blood-comment-8",
+      "entryId": "chapter-the-mummers-blood",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "came for the lore. stayed for the very bad feeling.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-fandom-history"
+      ],
+      "awards": []
+    },
+    {
+      "id": "theory-ghost-dragon-comment-1",
+      "entryId": "theory-ghost-dragon",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "The account gives us colour, texture and changing light. I would start there before adding a power the conversation does not establish.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-d",
+        "regular-fandom-mythology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "theory-ghost-dragon-comment-2",
+      "entryId": "theory-ghost-dragon",
+      "authorId": "regular-d",
+      "parentId": null,
+      "body": "counterpoint: the phrase ghost dragon is doing excellent marketing work on me",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-ecology",
+        "regular-fandom-mythology",
+        "regular-fandom-nolan"
+      ],
+      "awards": []
+    },
+    {
+      "id": "theory-ghost-dragon-comment-3",
+      "entryId": "theory-ghost-dragon",
+      "authorId": "regular-fandom-mythology",
+      "parentId": "theory-ghost-dragon-comment-2",
+      "body": "That is fair as atmosphere. I am only resisting the leap from a striking name to a confirmed supernatural mechanism.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "theory-ghost-dragon-comment-4",
+      "entryId": "theory-ghost-dragon",
+      "authorId": "regular-fandom-nolan",
+      "parentId": null,
+      "body": "so my elaborate diagram currently proves that i own a pen",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-ecology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "meta-quiet-chapters-comment-1",
+      "entryId": "meta-quiet-chapters",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "I think the collisions make the quiet moments matter more, but I do not need every ending to escalate. Fireflies worked for me precisely because it stayed with the aftermath.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-room-middle",
+        "regular-reformed"
+      ],
+      "awards": []
+    },
+    {
+      "id": "meta-quiet-chapters-comment-2",
+      "entryId": "meta-quiet-chapters",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "yeah personally i like the balance more than em does. but if someone asks for more time with side characters, answering that they just cannot handle tragedy is dodging the point",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-room-defender",
+        "regular-reformed",
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "meta-quiet-chapters-comment-3",
+      "entryId": "meta-quiet-chapters",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "my draft said skill issue. i have chosen growth today",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-quiet-chapters-comment-4",
+      "entryId": "meta-quiet-chapters",
+      "authorId": "regular-room-critic",
+      "parentId": "meta-quiet-chapters-comment-3",
+      "body": "rare good patch notes from this account",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-room-defender"
+      ],
+      "awards": []
+    },
+    {
+      "id": "meta-quiet-chapters-comment-5",
+      "entryId": "meta-quiet-chapters",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "The question for me is whether a scene changes how I understand a person. Quiet or loud is less important than whether the change feels earned.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-room-defender",
+        "regular-room-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-crackship-desk-comment-1",
+      "entryId": "community-crackship-desk",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "alester/godfrey remains in the folder. i am asking for zero changes to canon and several hours of my own free time",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-ship",
+        "regular-unship",
+        "regular-fic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-crackship-desk-comment-2",
+      "entryId": "community-crackship-desk",
+      "authorId": "regular-ship",
+      "parentId": null,
+      "body": "two shared frames is a luxury in this economy",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-crackship-desk-comment-3",
+      "entryId": "community-crackship-desk",
+      "authorId": "regular-unship",
+      "parentId": null,
+      "body": "i do not see that pairing at all but i respect the commitment to saying it is your invention",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-impossible-ships"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-crackship-desk-comment-4",
+      "entryId": "community-crackship-desk",
+      "authorId": "regular-fic",
+      "parentId": null,
+      "body": "headcanon labelled as headcanon. the filing department is briefly at peace",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-impossible-ships",
+        "regular-ship"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-break-room-comment-1",
+      "entryId": "community-council-break-room",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "If a meeting authorizes another war, I unfortunately want the people controlling the money in the room. The raven can carry the apology for how long it takes.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-it",
+        "cast-jacaelon-targaryen",
+        "regular-fandom-the-office"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-break-room-comment-2",
+      "entryId": "community-council-break-room",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "please stop putting the same person in charge of the incident and the incident report",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-council-break-room-comment-3",
+      "entryId": "community-council-break-room",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "If I send the raven, someone asks for a meeting to discuss the raven.",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-break-room-comment-4",
+      "entryId": "community-council-break-room",
+      "authorId": "regular-fandom-the-office",
+      "parentId": "community-council-break-room-comment-3",
+      "body": "first useful management statement i have seen all week",
+      "publishedAt": "2026-09-10T09:27:21.752Z",
+      "upvoterIds": [
+        "regular-ledger",
+        "regular-it"
+      ],
+      "awards": []
+    }
+  ]
+}

@@ -533,8 +533,10 @@
 }
 
 .inner { max-width:none; gap:18px; padding-right:74px; min-height:58px; }
-.navLinks { flex-wrap:wrap; column-gap:14px; row-gap:9px; }
+.navLinks { flex-wrap:wrap; column-gap:10px; row-gap:9px; }
 .navGroup { flex-shrink:0; }
+.navGroupCaretBtn { width: 14px; height: 32px; padding: 0; flex-shrink: 0; }
+.navGroupCaret { font-size: 10px; }
 .searchWrap { position:absolute; right:20px; top:50%; transform:translateY(-50%); width:36px; min-width:36px; height:36px; margin:0; z-index:80; }
 .searchInput { position:absolute; right:0; width:36px; height:36px; padding:8px 34px 8px 0; cursor:pointer; transition:width .25s ease,padding .25s ease,background .25s ease; }
 .searchInput::placeholder { color:transparent; }
@@ -553,13 +555,14 @@
 .mobileNavGroupHeader { width:40px; flex:none; }
 }
 @media(prefers-reduced-motion:reduce) { .searchInput { transition:none; } }
-.inner { padding-right: 122px; }
-.searchWrap { right: 68px; }
-.searchWrap:focus-within .searchInput { width: min(320px, calc(100vw - 92px)); }
-.notificationsButton { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 999px; color: var(--gold); background: var(--surface); }
+.inner { padding-right: 170px; }
+.searchWrap { right: 116px; }
+.searchWrap:focus-within .searchInput { width: min(320px, calc(100vw - 140px)); }
+.notificationsButton { position: absolute; right: 68px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 999px; color: var(--gold); background: var(--surface); }
+.forumButton { right: 20px; }
 .notificationsButton { box-sizing: border-box; }
 .notificationsButton svg { width: 18px; height: 18px; }
 .notificationsButton:hover { border-color: var(--gold); background: var(--surface-hover); }
 .notificationsButton:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .playBannerCollapsed .notificationsButton { display: none; }
-@media(max-width:1150px) { .inner { padding-right: 110px; } .searchWrap { right: 62px; } .notificationsButton { right: 14px; } }
+@media(max-width:1150px) { .inner { padding-right: 158px; } .homeLink { flex-shrink: 1; min-width: 0; } .menuButton { flex-shrink: 0; } .searchWrap { right: 110px; } .notificationsButton { right: 62px; } .forumButton { right: 14px; } }

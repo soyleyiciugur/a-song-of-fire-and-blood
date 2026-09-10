@@ -1,7 +1,9 @@
 import gallery from "@/data/gallery.json";
 import type { GutterComment } from "./communityTypes";
+import { getCommunitySnapshot } from './communityStore';
 
-export function getCommentLink(comment: Pick<GutterComment, "id" | "entryId">) {
+export function getCommentLink(comment: Pick<GutterComment, "id" | "entryId" | "surface">) {
+  if (comment.surface === 'forum') return `/forum?thread=${encodeURIComponent(comment.entryId)}&comment=${encodeURIComponent(comment.id)}#comment-${encodeURIComponent(comment.id)}`;
   const entry = gallery.find((item) => item.id === comment.entryId);
   if (!entry) return "/ravens-eye";
   const base = /\.(mp4|webm|mov)$/i.test(entry.src.split(/[?#]/)[0]) ? "/ravens-eye/reels" : entry.category === "fleabottom" ? "/ravens-eye/memes" : "/ravens-eye";
@@ -10,6 +12,8 @@ export function getCommentLink(comment: Pick<GutterComment, "id" | "entryId">) {
 }
 
 export function getCommentEntryLabel(entryId: string) {
+  const thread = getCommunitySnapshot().forumThreads?.find(t=>t.id===entryId);
+  if(thread) return thread.title;
   const entry = gallery.find((item) => item.id === entryId);
   return entry?.caption?.trim().split("\n")[0].slice(0, 130) || "From the Raven's Eye";
 }

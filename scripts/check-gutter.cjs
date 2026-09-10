@@ -1,6 +1,7 @@
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const community = require('../data/flea-bottom.json');
+community.comments.push(...require('../data/forum.json').comments.map(c=>({...c,surface:'forum'})));
 community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <= Date.now());
 
 (async () => {
@@ -158,15 +159,16 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
       const firstTarget = new URL(await latest.getAttribute('href'), base).searchParams.get('comment');
       await latest.click();
       const focused = page.locator(`[data-comment-id="${firstTarget}"]`);
-      await page.waitForFunction(id => document.getElementById(`comment-${id}`)?.dataset.highlighted === 'true', firstTarget);
+      await page.waitForFunction(id => {const el=document.getElementById(`comment-${id}`);return el?.dataset.highlighted === 'true' && document.activeElement===el;}, firstTarget);
       assert(await focused.evaluate(el=>document.activeElement===el), 'Feed link focuses exact comment');
       const box = await focused.boundingBox();
       assert(box.y>=0 && box.y < viewport.height, 'Target is visible');
-      await page.getByRole('button',{name:'Close',exact:true}).click();
+      if(new URL(page.url()).pathname==='/forum')await page.getByRole('link',{name:'All threads',exact:false}).click();
+      else await page.getByRole('button',{name:'Close',exact:true}).click();
       await page.goto(`${base}/notifications?tab=updates`);
       assert.equal(await page.getByRole('tab',{name:'Update notes'}).getAttribute('aria-selected'),'true');
       await page.getByRole('heading',{name:"Comments across the Raven's Eye"}).waitFor();
-      assert.equal(await page.locator('[role="tabpanel"] li').count(),1);
+      assert.equal(await page.locator('[role="tabpanel"] li').count(),require('../data/community-updates.json').filter(u=>Date.parse(u.publishedAt)<=Date.now()).length);
       const bell = page.getByRole('link',{name:'Notifications',exact:true});
       const search = page.getByRole('textbox', {name:'Search the realm'});
       const bellBox = await bell.boundingBox();
@@ -215,6 +217,43 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
     await page.screenshot({path:`${process.env.TEMP}/community-time-groups.png`});
     await page.unroute('**/api/community');
     console.log('PASS: visible notification sections and unduplicated entries on mobile');
+    for(const viewport of [{width:1440,height:900},{width:390,height:844},{width:320,height:740}]){
+      await page.setViewportSize(viewport);
+      await page.goto(`${base}/forum`);
+      await page.getByRole('link',{name:/Chapter XVI: The Mummer/}).waitFor();
+      const cards=page.locator('ol').filter({has:page.locator('a[href^="/forum?thread="]')}).first();
+      assert.equal(await cards.locator(':scope > li').count(),20);
+      await page.getByRole('button',{name:'Chapter discussions',exact:true}).click();
+      assert.equal(await cards.locator(':scope > li').count(),16);
+      await page.getByRole('button',{name:'Theory & community',exact:true}).click();
+      assert.equal(await cards.locator(':scope > li').count(),4);
+      const bell=await page.getByRole('link',{name:'Notifications',exact:true}).boundingBox();
+      const forumButton=await page.getByRole('link',{name:'Forum',exact:true}).boundingBox();
+      const search=page.getByRole('textbox',{name:'Search the realm'});
+      const searchBox=await search.boundingBox();
+      for(const box of [bell,forumButton,searchBox])assert(box.width===36&&box.height===36,'All three navbar actions are 36px');
+      assert(searchBox.x+searchBox.width<bell.x && bell.x+bell.width<forumButton.x,'Action order: search, notifications, forum');
+      if(viewport.width===1440){
+        const gaps=await page.locator('header nav').first().evaluate(nav=>{const rects=[...nav.children].map(e=>e.getBoundingClientRect());return rects.slice(1).flatMap((r,i)=>Math.abs(r.y-rects[i].y)<20?[r.x-rects[i].right]:[]);});
+        assert(gaps.every(gap=>Math.abs(gap-10)<1),'Uniform gaps after dropdowns and plain links');
+      }
+      await search.click();await page.waitForTimeout(300);
+      assert((await search.boundingBox()).x>=0,'Expanded search fits viewport');
+      await page.keyboard.press('Escape');
+      await page.getByRole('button',{name:'Chapter discussions',exact:true}).click();
+      await page.getByRole('link',{name:/Chapter XII: The Trial/}).click();
+      await page.getByText('Moderator warning · No personal attacks',{exact:true}).waitFor();
+      assert.equal(await page.locator('[data-comment-id]').count(),14);
+      const lastReply='chapter-the-trial-comment-9';
+      await page.goto(`${base}/forum?thread=chapter-the-trial&comment=${lastReply}#comment-${lastReply}`);
+      await page.waitForFunction(id=>document.activeElement?.id===`comment-${id}`,lastReply);
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Long forum conversations fit viewport');
+      await page.screenshot({path:`${process.env.TEMP}/forum-trial-${viewport.width}.png`});
+      await page.goto(`${base}/forum?thread=chapter-the-poison-beneath-the-crown`);
+      await page.getByLabel('1 Hasocash',{exact:true}).first().waitFor();
+      await page.getByRole('link',{name:/Read Chapter I:/}).waitFor();
+      console.log(`PASS ${viewport.width}px: forum filters, chapter discussions, moderation, awards, nested links, navbar size and spacing`);
+    }
     assert.deepEqual(errors, [], 'No browser errors');
   } finally {
     await browser.close();

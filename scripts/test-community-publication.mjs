@@ -20,7 +20,7 @@ const reply = { id:'reply', parentId:'root', body:'reply', publishedAt:'2026-09-
 assert.equal(publishCommunity({users:[],comments:[root,reply]},[],Date.parse(reply.publishedAt)).comments.length,0,'Even malformed early replies stay hidden');
 const publicData = publishCommunity(data, updates, Date.parse('2026-09-10T12:00:00.000Z'));
 assert.equal(publicData.comments.length, data.comments.length - 3);
-assert.equal(publicData.updates.length, 1);
+assert.equal(publicData.updates.length, updates.filter(u=>Date.parse(u.publishedAt)<=Date.parse(publicData.serverTime)).length);
 for (const user of publicData.users) {
   const expected = communityFriendships(data, Date.parse(publicData.serverTime)).get(user.id);
   assert.deepEqual(user.friendIds, expected);

@@ -1,0 +1,96 @@
+"use client";
+
+import { Suspense, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import MiniPortrait from '@/components/MiniPortrait';
+import FriendAccounts from '@/components/gallery/FriendAccounts';
+import { useCommunity, refreshCommunity } from '@/lib/communityStore';
+import { getGutterIdentity, getGutterUserStats } from '@/lib/fleaBottom';
+import { getCommentLink } from '@/lib/communityLinks';
+import type { GutterComment, GutterUser } from '@/lib/communityTypes';
+import styles from './forum.module.css';
+
+const dateLabel=(date:string)=>new Intl.DateTimeFormat('en-GB',{dateStyle:'medium',timeStyle:'short',timeZone:'Europe/Istanbul'}).format(new Date(date));
+function Account({user}:{user:GutterUser}) {
+  const identity=getGutterIdentity(user);
+  const stats=getGutterUserStats(user.id);
+  return <details className={styles.account}><summary>
+    {user.account?.type==='character'?<MiniPortrait id={user.account.characterId} alt={identity?.name??user.username} size={28}/>:<span className={styles.avatar} style={{backgroundColor:user.color}} aria-hidden="true">{user.avatar}</span>}
+    <span>@{user.username}</span>{identity&&<span className={styles.verified} title={`Verified ${identity.type} account · fictional`} aria-label={`Verified ${identity.type} account`}>✓</span>}
+    {user.id==='cast-jacaelon-targaryen'&&<span className={styles.mod}>MOD</span>}
+  </summary><div className={styles.profile}>
+    <strong>{user.displayName??user.username}</strong><span className={styles.muted}> · {user.kind==='fictional'?'Fictional account':'Community member'}</span>
+    <p>{user.bio}</p>{identity?.href&&<Link href={identity.href}>{identity.name} ↗</Link>}
+    {user.current&&<p>{user.current.label}: {user.current.value}</p>}
+    <p className={styles.muted}>{stats.comments} comments across {stats.posts} posts</p><FriendAccounts user={user}/>
+  </div></details>;
+}
+function Rewards({comment}:{comment:GutterComment}) {
+  return <div className={styles.rewards}><span title="Upvotes from community regulars" aria-label={`${comment.upvotes??0} upvotes`}><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m3 10 7-7 7 7h-4v7H7v-7H3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg> {comment.upvotes??0}</span>
+    {!!comment.hasocash&&<span className={styles.cash} title="Hasocash · a fictional community award" aria-label={`${comment.hasocash} Hasocash`}><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 1 9.5 5.5v11L12 23l-9.5-5.5v-11Z" fill="currentColor" fillOpacity=".13" stroke="currentColor"/><path d="M8 7v10M16 7v10M8 12h8" stroke="currentColor" strokeWidth="2"/></svg>{comment.hasocash} Hasocash</span>}
+    <Link href={getCommentLink(comment)} className={styles.permalink}>Permalink</Link>
+  </div>;
+}
+function Forum() {
+  const data=useCommunity();
+  const params=useSearchParams();
+  const threadId=params.get('thread');
+  const target=params.get('comment');
+  const handled=useRef<string|null>(null);
+  const [filter,setFilter]=useState('all');
+  const [sort,setSort]=useState('conversation');
+  const users=new Map(data.users.map(u=>[u.id,u]));
+  const thread=data.forumThreads.find(t=>t.id===threadId);
+  const comments=data.comments.filter(c=>c.surface==='forum'&&c.entryId===threadId);
+  const byParent=new Map<string|null,GutterComment[]>();
+  for(const c of comments){const list=byParent.get(c.parentId)??[];list.push(c);byParent.set(c.parentId,list);}
+  const roots=[...(byParent.get(null)??[])];
+  if(sort==='top')roots.sort((a,b)=>(b.upvotes??0)-(a.upvotes??0));
+  const ordered:{comment:GutterComment;depth:number}[]=[];
+  const visit=(c:GutterComment,depth:number)=>{ordered.push({comment:c,depth});for(const reply of byParent.get(c.id)??[])visit(reply,depth+1);};
+  roots.forEach(c=>visit(c,0));
+  useEffect(()=>{
+    if(!target){handled.current=null;return;}
+    if(!comments.some(c=>c.id===target)||handled.current===target)return;
+    const timer=setTimeout(()=>{const el=document.getElementById(`comment-${target}`);if(el){el.scrollIntoView({block:'center',behavior:'instant'});el.focus({preventScroll:true});handled.current=target;}},100);
+    return()=>clearTimeout(timer);
+  },[target,comments]);
+  const filtered=data.forumThreads.filter(t=>filter==='all'||(filter==='chapters'?!!t.chapterSlug:!t.chapterSlug));
+  const sorted=[...filtered].sort((a,b)=>{
+    const latest=(id:string)=>Math.max(0,...data.comments.filter(c=>c.surface==='forum'&&c.entryId===id).map(c=>Date.parse(c.publishedAt)));
+    return latest(b.id)-latest(a.id)||data.forumThreads.indexOf(b)-data.forumThreads.indexOf(a);
+  });
+  return <main className={styles.page}>
+    <header className={styles.header}><div><Link className={styles.eyebrow} href="/forum">THE FORUM</Link><h1>{thread?thread.title:'The small council nobody asked for.'}</h1><p className={styles.muted}>Familiar faces, chapter arguments and extremely confident theories.</p></div></header>
+    <details className={styles.rules}><summary>Community rules · Jace is watching</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Fictional community and awards. Member posting is coming later.</p></details>
+    {data.error&&<p role="status">{data.error} <button onClick={()=>void refreshCommunity()}>Retry</button></p>}
+    {!data.loaded&&<p role="status">Loading the forum…</p>}
+    {threadId ? thread ? <>
+      <Link href="/forum" className={styles.back}>← All threads</Link>
+      <section className={styles.op}><div className={styles.meta}><span>{thread.category}</span><span>Spoilers through {thread.spoilerThrough.replaceAll('-',' ')}</span><time dateTime={thread.publishedAt}>{dateLabel(thread.publishedAt)} TRT</time></div>
+        {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
+        {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}
+      </section>
+      <div className={styles.discussionBar}><h2>{comments.length} comments</h2><label>Order <select value={sort} onChange={e=>setSort(e.target.value)}><option value="conversation">Conversation</option><option value="top">Top conversations</option></select></label></div>
+      {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
+      <ol className={styles.comments}>{ordered.map(({comment,depth})=>{
+        const user=users.get(comment.authorId);if(!user)return null;
+        const parent=comments.find(c=>c.id===comment.parentId);
+        return <li key={comment.id} id={`comment-${comment.id}`} tabIndex={-1} data-comment-id={comment.id} className={`${styles.comment} ${comment.moderation?styles.warning:''}`} style={{marginLeft:`${Math.min(depth,2)*14}px`}} data-highlighted={target===comment.id||undefined}>
+          {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}
+          <Account user={user}/><time className={styles.time} dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time>
+          {comment.moderation&&<p className={styles.modNote}>Moderator warning · {comment.moderation.rule}</p>}
+          <p className={styles.body}>{comment.body}</p><Rewards comment={comment}/>
+        </li>;
+      })}</ol>
+    </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to the forum</Link></p> : <>
+      <div className={styles.filters} aria-label="Thread categories">{[['all','All threads'],['chapters','Chapter discussions'],['other','Theory & community']].map(([value,label])=><button key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)}>{label}</button>)}</div>
+      <ol className={styles.threads}>{sorted.map(t=>{
+        const replies=data.comments.filter(c=>c.surface==='forum'&&c.entryId===t.id);
+        return <li key={t.id}><Link href={`/forum?thread=${encodeURIComponent(t.id)}`} className={styles.threadCard}><span className={styles.category}>{t.category}</span><h2>{t.title}</h2><p>{t.body.split('\n')[0]}</p><div className={styles.meta}><span>@{users.get(t.authorId)?.username}</span><span>{replies.length} comments</span><span>{new Set(replies.map(c=>c.authorId)).size} participants</span></div></Link></li>;
+      })}</ol>
+    </>}
+  </main>;
+}
+export default function ForumPage(){return <Suspense fallback={<main className={styles.page}>Loading the forum…</main>}><Forum/></Suspense>;}

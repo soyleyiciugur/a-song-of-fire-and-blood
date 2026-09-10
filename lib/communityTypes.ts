@@ -15,6 +15,10 @@ export interface GutterUser {
 }
 
 export interface GutterComment {
+  surface?: 'forum';
+  upvotes?: number;
+  hasocash?: number;
+  moderation?: {rule:string; targetCommentId:string};
   id: string;
   entryId: string;
   authorId: string;
@@ -31,8 +35,26 @@ export interface CommunityUpdate {
 }
 
 export interface CommunitySnapshot {
+  forumThreads: ForumThread[];
   users: GutterUser[];
   comments: GutterComment[];
   updates: CommunityUpdate[];
   serverTime: string;
+}
+
+export interface ForumThread {
+  id: string;
+  chapterSlug: string | null;
+  chapterTitle: string | null;
+  spoilerThrough: string;
+  title: string;
+  category: string;
+  authorId: string;
+  body: string;
+  publishedAt: string;
+}
+
+export interface ForumSource {
+  threads: Array<Omit<ForumThread, 'title' | 'chapterTitle'> & {title:string|null}>;
+  comments: Array<GutterComment & {upvoterIds:string[]; awards:Array<{fromUserId:string;amount:number}>}>;
 }

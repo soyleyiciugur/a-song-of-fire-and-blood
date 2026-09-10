@@ -1,5 +1,7 @@
 # Flea Bottom community continuity
 
+Forum work follows `../docs/forum-community.md`. `forum.json` shares community identities, but supports longer chapter discussions and multi-level replies. Add a discussion when adding a chapter. Each chapter thread has 5–10 distinct ordinary participants; this is not a fixed comment count and does not apply to gallery images. Keep spoilers within the named chapter. Forum reactions use real fictional account IDs; only Jace issues moderator warnings. Never import private forum data into client modules.
+
 When adding or updating `gallery.json`, follow `../docs/flea-bottom-community.md` for every gallery entry: Raven's Eye canon images, Flea Bottom images and every reel. Keep `flea-bottom.json` synchronized in the same change. Raven's Eye media is canon; reader jokes and social-AU character cameos do not create new canon.
 
 The user requested English-first, AI-authored comments saved at content-editing time. Do not introduce runtime AI generation or an external AI API dependency. The local `/api/community` endpoint handles scheduled publication using server time; never import private comment data into client components. Read the profiles and existing comments before writing: select a naturally varying number of distinct recurring accounts per new post; there is no five-comment minimum, preserve their voices and relationships, and write specific reactions and occasional replies. Never replace old conversations just to generate fresh ones.
