@@ -3,6 +3,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/auth";
 import SendRavenButton from "@/components/direct-raven/SendRavenButton";
+import ProfileActivity from "@/components/community/ProfileActivity";
+import ProfileFriends from "@/components/community/ProfileFriends";
 import styles from "./profile.module.css";
 
 export default async function Page({ params }: { params: Promise<{ username: string }> }) {
@@ -12,14 +14,15 @@ export default async function Page({ params }: { params: Promise<{ username: str
   if (!p) notFound();
 
   const [{ count: threads }, { count: posts }, { count: raven }, viewer] = await Promise.all([
-    supabase.from("forum_threads").select("*", { count: "exact", head: true }).eq("user_author_id", p.id),
-    supabase.from("forum_posts").select("*", { count: "exact", head: true }).eq("user_author_id", p.id),
-    supabase.from("raven_comments").select("*", { count: "exact", head: true }).eq("user_author_id", p.id),
+    supabase.from("forum_threads").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
+    supabase.from("forum_posts").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
+    supabase.from("raven_comments").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
     getCurrentUser(),
   ]);
 
   return (
     <main className={styles.page}>
+      <div className={styles.banner}>{p.banner_url && <img src={p.banner_url} alt="" />}</div>
       <section className={styles.card}>
         <div className={styles.avatar}>{p.avatar_url ? <img src={p.avatar_url} alt="" /> : p.display_name.slice(0, 2).toUpperCase()}</div>
         <div>
@@ -38,6 +41,8 @@ export default async function Page({ params }: { params: Promise<{ username: str
         <div><dt>Replies</dt><dd>{posts ?? 0}</dd></div>
         <div><dt>Raven’s Eye comments</dt><dd>{raven ?? 0}</dd></div>
       </dl>
+      <ProfileFriends profileId={p.id} viewerId={viewer?.id ?? null} />
+      <ProfileActivity userId={p.id} />
     </main>
   );
 }

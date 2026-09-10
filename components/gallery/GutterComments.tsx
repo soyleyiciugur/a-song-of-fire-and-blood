@@ -11,6 +11,8 @@ import { getGutterComments, getGutterIdentity, getGutterThreads, getGutterUserSt
 import styles from "./gutterComments.module.css";
 import Composer from "@/components/community/Composer";
 import ContentActions from "@/components/community/ContentActions";
+import LikeButton from "@/components/community/LikeButton";
+import { getCommentLink } from "@/lib/communityLinks";
 
 function Comment({ comment, replies, pinned = false }: { comment: GutterComment; replies: GutterComment[]; pinned?: boolean }) {
   const user = gutterUserMap.get(comment.authorId);
@@ -21,6 +23,7 @@ function Comment({ comment, replies, pinned = false }: { comment: GutterComment;
     <li id={`comment-${comment.id}`} tabIndex={-1} className={`${styles.comment} ${pinned ? styles.pinned : ""}`} data-comment-id={comment.id} data-pinned={pinned || undefined}>
       {pinned && <div className={styles.pinLabel}>Pinned · {identity?.type === "character" ? "From the cast" : "Character replied"}</div>}
       <article>
+        {comment.parentId && <Link href={getCommentLink({ ...comment, id: comment.parentId })} className={styles.parentLink}>? Reply to comment</Link>}
         <details className={styles.profile}>
           <summary>
             {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={identity?.name ?? user.username} size={30} /> : user.avatarUrl ? <img className={styles.avatar} src={user.avatarUrl} alt="" /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
@@ -53,7 +56,7 @@ function Comment({ comment, replies, pinned = false }: { comment: GutterComment;
             <FriendAccounts user={user} />
           </div>
         </details>
-        <p className={styles.body}>{comment.body}</p>{comment.canEdit && <ContentActions kind="raven" id={comment.id} body={comment.body} />}
+        <p className={styles.body}>{comment.body}</p>{comment.authorType && <LikeButton kind="raven" id={comment.id} />}<Composer kind="raven" entryId={comment.entryId} parentId={comment.id} />{comment.canEdit && <ContentActions kind="raven" id={comment.id} body={comment.body} />}
       </article>
       {replies.length > 0 && (
         <ol className={styles.replies} aria-label={`Replies to @${user.username}`}>

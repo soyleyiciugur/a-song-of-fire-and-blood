@@ -13,7 +13,7 @@ export default async function DirectRavenConversationPage({ params }: { params: 
     <main className={styles.page}>
       <div className={styles.shell}>
         <DirectRavenInbox conversations={data.conversations} selectedId={id} />
-        <RavenConversation conversationId={id} userId={data.userId} partner={data.selected.partner} initialMessages={data.messages} blockedByMe={data.blockedByMe} blockedByThem={data.blockedByThem} />
+        <RavenConversation key={id} conversationId={id} userId={data.userId} partner={data.selected.partner} initialMessages={data.messages} blockedByMe={data.blockedByMe} blockedByThem={data.blockedByThem} />
       </div>
     </main>
   );

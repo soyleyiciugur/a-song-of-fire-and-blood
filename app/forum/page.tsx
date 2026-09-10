@@ -13,6 +13,8 @@ import type { GutterComment, GutterUser } from '@/lib/communityTypes';
 import styles from './forum.module.css';
 import Composer from '@/components/community/Composer';
 import ContentActions from '@/components/community/ContentActions';
+import LikeButton from '@/components/community/LikeButton';
+import { groupCommentThreads } from '@/lib/commentThreads';
 
 const dateLabel=(date:string)=>new Intl.DateTimeFormat('en-GB',{dateStyle:'medium',timeStyle:'short',timeZone:'Europe/Istanbul'}).format(new Date(date));
 function Account({user}:{user:GutterUser}) {
@@ -46,13 +48,9 @@ function Forum() {
   const users=new Map(data.users.map(u=>[u.id,u]));
   const thread=data.forumThreads.find(t=>t.id===threadId);
   const comments=data.comments.filter(c=>c.surface==='forum'&&c.entryId===threadId);
-  const byParent=new Map<string|null,GutterComment[]>();
-  for(const c of comments){const list=byParent.get(c.parentId)??[];list.push(c);byParent.set(c.parentId,list);}
-  const roots=[...(byParent.get(null)??[])];
-  if(sort==='top')roots.sort((a,b)=>(b.upvotes??0)-(a.upvotes??0));
-  const ordered:{comment:GutterComment;depth:number}[]=[];
-  const visit=(c:GutterComment,depth:number)=>{ordered.push({comment:c,depth});for(const reply of byParent.get(c.id)??[])visit(reply,depth+1);};
-  roots.forEach(c=>visit(c,0));
+  const groups=groupCommentThreads(comments);
+  if(sort==='top')groups.sort((a,b)=>(b.comment.upvotes??0)-(a.comment.upvotes??0));
+  const ordered=groups.flatMap(({comment,replies})=>[{comment,depth:0},...replies.map(reply=>({comment:reply,depth:reply.parentId===comment.id?1:2}))]);
   useEffect(()=>{
     if(!target){handled.current=null;return;}
     if(!comments.some(c=>c.id===target)||handled.current===target)return;
@@ -69,14 +67,14 @@ function Forum() {
       {!threadId&&<div className={styles.banner}><Image src="/images/taverns/tavern-banner.jpeg" alt="Visenor, Gaelor and Jace Targaryen" fill sizes="(max-width: 980px) 100vw, 936px" preload className={styles.bannerImage}/></div>}
       <div className={styles.headerContent}><Link className={styles.eyebrow} href="/forum">TAVERNS</Link><h1>{thread?thread.title:'Taverns'}</h1><p className={styles.muted}>Pull up a chair by the hearth. Chapter tales, whispered theories and familiar faces await.</p></div>
     </header>
-    <details className={styles.rules}><summary>House rules · Jace keeps the peace</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Fictional community and awards. Member posting is coming later.</p></details>
+    <details className={styles.rules}><summary>House rules · Jace keeps the peace</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Sign in to post, reply and like member contributions. Fictional regulars and awards are editorially managed.</p></details>
     {data.error&&<p role="status">{data.error} <button onClick={()=>void refreshCommunity()}>Retry</button></p>}
     {!data.loaded&&<p role="status">Opening the tavern doors…</p>}
     {threadId ? thread ? <>
       <Link href="/forum" className={styles.back}>← All tables</Link>
       <section className={styles.op}><div className={styles.meta}><span>{thread.category}</span><span>Spoilers through {thread.spoilerThrough.replaceAll('-',' ')}</span><time dateTime={thread.publishedAt}>{dateLabel(thread.publishedAt)} TRT</time></div>
         {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
-        {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
+        {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}{thread.authorType&&<LikeButton kind="thread" id={thread.id}/ >}{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
       </section>
       <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><label>Order <select value={sort} onChange={e=>setSort(e.target.value)}><option value="conversation">Conversation</option><option value="top">Top conversations</option></select></label></div>
       {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
@@ -87,7 +85,7 @@ function Forum() {
           {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}
           <Account user={user}/><time className={styles.time} dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time>
           {comment.moderation&&<p className={styles.modNote}>Moderator warning · {comment.moderation.rule}</p>}
-          <p className={styles.body}>{comment.body}</p><Rewards comment={comment}/>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>}
+          <p className={styles.body}>{comment.body}</p><Rewards comment={comment}/>{comment.authorType && <LikeButton kind="post" id={comment.id}/>}<Composer kind="post" threadId={thread.id} parentId={comment.id}/>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>}
         </li>;
       })}</ol>
     </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to Taverns</Link></p> : <>

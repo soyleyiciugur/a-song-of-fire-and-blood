@@ -22,7 +22,13 @@
       "Expanded Taverns with eight community discussions, including three scheduled threads and later replies across new and existing conversations.",
       "Added a responsive Taverns banner featuring Visenor, Gaelor and Jace.",
       "Corrected Vhaemys's comment profile so Gaelor is no longer listed as her friend.",
-      "Redesigned Taverns with the site's black, crimson and gold visual language, clearer discussion cards and improved mobile controls."
+      "Redesigned Taverns with the site's black, crimson and gold visual language, clearer discussion cards and improved mobile controls.",
+      "Kept the Direct Raven composer in view with independent message scrolling, mobile inbox navigation and a New Raven member picker.",
+      "Added private photo and GIF uploads, emoji, message replies, editing, withdrawal, likes and read receipts to Direct Raven.",
+      "Added profile banners, browsable member threads and replies, and friend requests with acceptance and removal controls.",
+      "Added likes on member contributions and direct replies to Taverns and Raven's Eye comments, with clearer mobile conversation ordering controls.",
+      "Refined the navbar account menu and reduced inbox and reaction loading to summarized database queries.",
+      "Aligned the Vahaemon Mogged follow-up conversation with the community's three active publication windows."
     ]
   },
   {

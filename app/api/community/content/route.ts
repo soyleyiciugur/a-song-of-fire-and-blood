@@ -3,6 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
 import forum from "@/data/forum.json";
 import gallery from "@/data/gallery.json";
+import community from "@/data/flea-bottom.json";
+import { publishCommunity } from "@/lib/communityPublication.mjs";
 const schema=z.discriminatedUnion("kind",[
  z.object({kind:z.literal("thread"),title:z.string().trim().min(3).max(140),body:z.string().trim().min(1).max(10000),category:z.string().trim().min(1).max(60).default("Community")}),
  z.object({kind:z.literal("post"),threadId:z.string().min(1).max(160),parentId:z.string().min(1).max(160).nullable().optional(),body:z.string().trim().min(1).max(10000)}),
@@ -13,10 +15,19 @@ export async function POST(request:Request){
  const {data:profile}=await supabase.from("profiles").select("id").eq("id",user.id).maybeSingle();
  if(!profile){const {error:profileError}=await supabase.rpc("ensure_own_profile");if(profileError){console.error("Profile repair failed",{code:profileError.code,message:profileError.message});return NextResponse.json({error:"Your member profile is not ready. Apply the latest database migration and try again."},{status:409});}}
  const parsed=schema.safeParse(await request.json().catch(()=>null));if(!parsed.success)return NextResponse.json({error:"Check the required fields and length limits."},{status:400});
- const input=parsed.data; let result:{error:{message:string;code?:string}|null};
+ const input=parsed.data;
+ const published = publishCommunity(community, [], Date.now(), forum);
+ if(input.kind!=="thread" && input.parentId){
+  const parentTable=input.kind==="post"?"forum_posts":"raven_comments";
+  const entry=input.kind==="post"?input.threadId:input.entryId;
+  const staticParent=published.comments.some(c=>c.id===input.parentId&&c.entryId===entry&&(input.kind==="post"?c.surface==="forum":!c.surface));
+  const {data:liveParent}=staticParent?{data:null}:await supabase.from(parentTable).select("id").eq("id",input.parentId).eq(input.kind==="post"?"thread_id":"entry_id",entry).eq("is_visible",true).maybeSingle();
+  if(!staticParent&&!liveParent)return NextResponse.json({error:"The comment you are replying to is unavailable."},{status:404});
+ }
+ let result:{error:{message:string;code?:string}|null};
  if(input.kind==="thread")result=await supabase.from("forum_threads").insert({title:input.title,body:input.body,category:input.category,author_type:"user",user_author_id:user.id});
  else if(input.kind==="post"){
-  const staticThread=forum.threads.some(t=>t.id===input.threadId);const {data:liveThread}=staticThread?{data:null}:await supabase.from("forum_threads").select("id,is_locked").eq("id",input.threadId).maybeSingle();
+  const staticThread=published.forumThreads.some((t:{id:string})=>t.id===input.threadId);const {data:liveThread}=staticThread?{data:null}:await supabase.from("forum_threads").select("id,is_locked").eq("id",input.threadId).maybeSingle();
   if(!staticThread&&(!liveThread||liveThread.is_locked))return NextResponse.json({error:"This discussion is unavailable or locked."},{status:404});
   result=await supabase.from("forum_posts").insert({thread_id:input.threadId,parent_id:input.parentId??null,body:input.body,author_type:"user",user_author_id:user.id});
  } else {

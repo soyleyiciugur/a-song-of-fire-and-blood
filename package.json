@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "validate:data": "node scripts/validate-gutter.mjs && node scripts/validate-data.mjs",
-    "validate:comments": "node scripts/validate-gutter.mjs && node scripts/validate-forum.mjs"
+    "validate:comments": "node scripts/validate-gutter.mjs && node scripts/validate-forum.mjs",
+    "test:social": "node scripts/test-member-social.mjs && node scripts/test-comment-threads.mjs",
+    "test:raven-ui": "node scripts/test-raven-ui.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -20,6 +22,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

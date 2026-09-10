@@ -46,3 +46,4 @@
 .toggle > :last-child { color: #d6b56f; }
 .reelPanel { max-height: 45dvh; overflow-y: auto; overscroll-behavior: contain; padding: 0 14px 14px; touch-action: pan-y; }
 @media (max-width: 600px) { .body { margin-left: 0; } .bio { margin-left: 0; } .replies { margin-left: 8px; padding-left: 12px; } }
+.parentLink{display:inline-block;color:#ad977a;font:11px var(--font-geist);padding:4px 0 8px;text-decoration:none}

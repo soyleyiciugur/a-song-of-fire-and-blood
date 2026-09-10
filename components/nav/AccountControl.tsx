@@ -33,12 +33,14 @@ export default function AccountControl() {
       if (active) setState({ profile:profile??fallback, signedIn:true, profileReady:!!profile, loaded:true });
     };
     void load();
+    const update = () => { void load(); };
+    window.addEventListener("profile-updated", update);
     const { data } = supabase.auth.onAuthStateChange(() => window.setTimeout(() => void load(), 0));
-    return () => { active=false; data.subscription.unsubscribe(); };
+    return () => { active=false; data.subscription.unsubscribe(); window.removeEventListener("profile-updated", update); };
   }, [pathname]);
 
   if (!state.loaded) return null;
   if (!state.signedIn || !state.profile) return <span className={styles.authLinks}><Link href="/login">Sign in</Link><Link href="/register">Join</Link></span>;
   const profile=state.profile;
-  return <details className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>@{profile.username}</b></summary><div>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/messages">Direct Raven</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
+  return <details className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>{profile.display_name}</b></summary><div><p className={styles.accountIdentity}><strong>{profile.display_name}</strong><small>@{profile.username}</small></p>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/messages">Direct Raven</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
 }

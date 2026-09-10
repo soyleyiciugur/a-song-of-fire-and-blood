@@ -5,6 +5,7 @@ import characters from "@/data/characters/characters.json";
 import worldDate from "@/data/worldDate.json";
 import institutions from "@/data/gutter-institutions.json";
 import { computeAge } from "@/lib/age";
+import { groupCommentThreads } from "@/lib/commentThreads";
 
 export const gutterUserMap = { get: (id: string) => getCommunitySnapshot().users.find((user) => user.id === id) };
 const characterMap = new Map(characters.map((character) => [character.id, character]));
@@ -33,8 +34,7 @@ export function isCharacterComment(comment: GutterComment) {
 
 export function getGutterThreads(entryId: string) {
   const comments = getGutterComments(entryId);
-  return comments.filter((comment) => comment.parentId === null).map((comment) => {
-    const replies = comments.filter((reply) => reply.parentId === comment.id);
+  return groupCommentThreads(comments).map(({ comment, replies }) => {
     return { comment, replies, pinned: isCharacterComment(comment) || replies.some(isCharacterComment) };
   }).sort((a, b) => Number(b.pinned) - Number(a.pinned));
 }

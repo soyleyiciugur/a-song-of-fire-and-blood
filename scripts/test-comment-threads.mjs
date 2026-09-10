@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import ts from 'typescript';
+import { readFile } from 'node:fs/promises';
+const source = await readFile(new URL('../lib/commentThreads.ts', import.meta.url), 'utf8');
+const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } });
+const { groupCommentThreads } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+const comments = [{id:'root',parentId:null},{id:'reply',parentId:'root'},{id:'nested',parentId:'reply'},{id:'orphan',parentId:'removed'},{id:'cycle-a',parentId:'cycle-b'},{id:'cycle-b',parentId:'cycle-a'}];
+const threads = groupCommentThreads(comments);
+assert.deepEqual(threads[0].replies.map(c=>c.id), ['reply','nested']);
+assert.equal(threads[1].comment.id,'orphan');
+const flattened = threads.flatMap(t=>[t.comment,...t.replies]).map(c=>c.id);
+assert.equal(flattened.length,comments.length);
+assert.equal(new Set(flattened).size,comments.length);
+console.log('Comment threads: nested replies, removed parents and cycle safety passed.');
