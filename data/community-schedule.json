@@ -4,17 +4,23 @@
     {
       "id": "september-window-1",
       "publishedAt": "2026-09-10T09:20:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-2",
       "publishedAt": "2026-09-10T11:45:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-3",
       "publishedAt": "2026-09-10T15:00:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-4",
@@ -23,22 +29,41 @@
         "gallery-hrrms-genius-scheduled-1",
         "gallery-baelenys-carrying-vhaemys-scheduled-1",
         "gallery-baelenys-carrying-vhaemys-scheduled-2"
+      ],
+      "forumThreadIds": [
+        "community-great-game-table"
+      ],
+      "forumCommentIds": [
+        "community-reading-snacks-community-jace",
+        "meta-edit-first-impressions-community-caption",
+        "community-new-reader-desk-community-desk",
+        "community-great-game-table-community-favourite",
+        "community-great-game-table-community-support",
+        "community-great-game-table-community-win",
+        "meta-quiet-chapters-community-breathing",
+        "community-council-break-room-community-agenda"
       ]
     },
     {
       "id": "september-window-5",
       "publishedAt": "2026-09-10T21:15:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-6",
       "publishedAt": "2026-09-11T05:40:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-7",
       "publishedAt": "2026-09-11T09:00:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-8",
@@ -47,12 +72,28 @@
         "gallery-your-daily-sad-alester-edit-scheduled-2",
         "gallery-baelenys-carrying-vhaemys-scheduled-3",
         "gallery-baelenys-carrying-vhaemys-scheduled-4"
+      ],
+      "forumThreadIds": [
+        "community-dragon-ranking-fatigue"
+      ],
+      "forumCommentIds": [
+        "community-reading-snacks-community-cake-return",
+        "community-modern-day-jobs-community-reply",
+        "community-retracted-takes-community-later",
+        "community-great-game-table-community-loss",
+        "community-dragon-ranking-fatigue-community-scale",
+        "community-dragon-ranking-fatigue-community-ecology",
+        "community-dragon-ranking-fatigue-community-art",
+        "community-dragon-ranking-fatigue-community-garden",
+        "community-crackship-desk-community-playlist"
       ]
     },
     {
       "id": "september-window-9",
       "publishedAt": "2026-09-11T17:30:00.000Z",
-      "commentIds": []
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     },
     {
       "id": "september-window-10",
@@ -60,6 +101,19 @@
       "commentIds": [
         "gallery-alester-winterfell-window-scheduled-3",
         "gallery-baelenys-carrying-vhaemys-scheduled-5"
+      ],
+      "forumThreadIds": [
+        "meta-one-ordinary-afternoon"
+      ],
+      "forumCommentIds": [
+        "community-great-game-table-community-paper",
+        "community-dragon-ranking-fatigue-community-fence",
+        "community-dragon-ranking-fatigue-community-caveat",
+        "meta-one-ordinary-afternoon-community-servant",
+        "meta-one-ordinary-afternoon-community-craft",
+        "meta-one-ordinary-afternoon-community-quiet",
+        "meta-one-ordinary-afternoon-community-avoid",
+        "theory-ghost-dragon-community-diagram"
       ]
     }
   ]

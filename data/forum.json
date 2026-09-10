@@ -200,6 +200,86 @@
       "body": "Current-chapter spoilers. Choose one meeting you would have escaped, or defend the need for everyone to be in the same room.",
       "publishedAt": "2026-09-10T09:27:21.752Z",
       "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-reading-snacks",
+      "chapterSlug": null,
+      "title": "What are you eating while reading? Crumbs are already in the book.",
+      "category": "Off-topic",
+      "authorId": "regular-food",
+      "body": "I made the mistake of bringing something flaky to my reread. What is everyone having? This is a snack thread, not a test of whether your dinner is sufficiently medieval.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "meta-edit-first-impressions",
+      "chapterSlug": null,
+      "title": "Did an edit give you completely the wrong first impression?",
+      "category": "Fandom",
+      "authorId": "regular-render",
+      "body": "Not asking editors to submit a sworn statement. I mean when a crop, a reaction shot or the order of clips makes you expect a different person before you read. What do you notice once you go back to the source?",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-modern-day-jobs",
+      "chapterSlug": null,
+      "title": "Modern AU: give someone an ordinary job they would actually keep",
+      "category": "Off-topic",
+      "authorId": "regular-fandom-sims",
+      "body": "No king, CEO or assassin. I want a job with a rota and a slightly broken kettle. Entirely non-canon. Bonus points if they could make it through probation.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-retracted-takes",
+      "chapterSlug": null,
+      "title": "A take you have actually changed your mind about",
+      "category": "Writing & meta",
+      "authorId": "regular-reformed",
+      "body": "A real one. Not \"I thought my favourite was great but they are even greater\". You can also have liked something less on a reread. No compulsory redemption arc for your opinion.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-new-reader-desk",
+      "chapterSlug": null,
+      "title": "Small questions desk: names, navigation, things you lost track of",
+      "category": "Fandom",
+      "authorId": "regular-gate",
+      "body": "Ask the thing you think everyone else already knows. Please say which chapter you have reached so replies do not ruin the next one. No need to apologise for mixing up a name.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-great-game-table",
+      "chapterSlug": null,
+      "title": "The Great Game table: are you building to win or refusing to cut your favourite?",
+      "category": "Off-topic",
+      "authorId": "regular-great",
+      "body": "I can tell myself a card belongs in the plan for a suspiciously long time when I like the character. Talk deckbuilding habits, favourite picks and bad decisions here. If you suggest a specific interaction, check the actual card text first.",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "community-dragon-ranking-fatigue",
+      "chapterSlug": null,
+      "title": "Can we have one dragon thread without making a tier list?",
+      "category": "Fandom",
+      "authorId": "regular-ecology",
+      "body": "Favourite details, questions about habitat, a design you like. Anything except turning every trait into who beats whom. Unconfirmed ideas are welcome if you label them as ideas.",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "meta-one-ordinary-afternoon",
+      "chapterSlug": null,
+      "title": "One ordinary afternoon from a side character: who gets the page?",
+      "category": "Writing & meta",
+      "authorId": "regular-fandom-tolkien",
+      "body": "Not a reveal chapter or a secret mastermind pitch. Pick someone whose ordinary day you would like to understand. What would their attention settle on that the princes would miss?",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "spoilerThrough": "the-mummers-blood"
     }
   ],
   "comments": [
@@ -1897,6 +1977,618 @@
       "upvoterIds": [
         "regular-ledger",
         "regular-it"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-cake",
+      "entryId": "community-reading-snacks",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": null,
+      "body": "cake. but i ate the top first",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-soup",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-fandom-stardew",
+      "parentId": null,
+      "body": "soup and a chapter on my break. luxurious until the break ends",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-soup-reply",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-room-middle",
+      "parentId": "community-reading-snacks-community-soup",
+      "body": "the chapter gets longer as the break gets shorter. known phenomenon",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-tea",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Tea and biscuits here. Put a little plate underneath, dear. Saves the keyboard.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-plate",
+      "entryId": "community-reading-snacks",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": "community-reading-snacks-community-tea",
+      "body": "the plate has another cake on it",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-fandom-pokemon",
+        "regular-lurk"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-nothing",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "opened this for meal ideas and realised i forgot lunch",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-toast",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-food",
+      "parentId": "community-reading-snacks-community-nothing",
+      "body": "Toast counts. Go and make some before another chapter.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-crumbs",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "my keyboard has a geological record",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-jace",
+      "entryId": "community-reading-snacks",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "leaving this thread open as evidence that plates have been explained",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [
+        "regular-fandom-the-office"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-snacks-community-cake-return",
+      "entryId": "community-reading-snacks",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": "community-reading-snacks-community-jace",
+      "body": "i know what plates are jace",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-edit-first-impressions-community-intent",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "A reaction shot moved three seconds can make someone look like they planned the whole conversation. That is the part I keep checking.\n\nI still enjoy an edit with a point of view. I just want to know when my memory of the scene is actually my memory of the edit.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-render",
+        "regular-archive"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-fandom-nolan",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "meta-edit-first-impressions-community-mood",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-eveedit",
+      "parentId": null,
+      "body": "sometimes i know it is misleading and watch it six more times. the mood got me",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-edit-first-impressions-community-receipts",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-archive",
+      "parentId": "meta-edit-first-impressions-community-intent",
+      "body": "Worth keeping the chapter reference in a caption when possible. Lets people find the scene without asking the same question under every repost.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-edit-first-impressions-community-homework",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-nihilist",
+      "parentId": "meta-edit-first-impressions-community-receipts",
+      "body": "reels with homework. we have lost the war",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-edit-first-impressions-community-optional",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-render",
+      "parentId": "meta-edit-first-impressions-community-homework",
+      "body": "a reference is not an assignment. you can keep scrolling",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-edit-first-impressions-community-new",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "oh. i have definitely been remembering a caption as dialogue",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-edit-first-impressions-community-caption",
+      "entryId": "meta-edit-first-impressions",
+      "authorId": "regular-fandom-harry-potter",
+      "parentId": "meta-edit-first-impressions-community-new",
+      "body": "the worst part is being very confident about it until someone asks which chapter",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [
+        "regular-reformed"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-modern-day-jobs-community-saathos",
+      "entryId": "community-modern-day-jobs",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "Saathos: the shift supervisor who knows which cupboard has the working equipment. People ignore him until something breaks.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-it",
+        "regular-supply"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-modern-day-jobs-community-retention",
+      "entryId": "community-modern-day-jobs",
+      "authorId": "regular-career",
+      "parentId": "community-modern-day-jobs-community-saathos",
+      "body": "that is the person management calls indispensable immediately before refusing the pay rise",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-modern-day-jobs-community-alester",
+      "entryId": "community-modern-day-jobs",
+      "authorId": "regular-fandom-warcraft",
+      "parentId": null,
+      "body": "Alester on overnight reception. you get the key, you get the directions, nobody demands your life story",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-modern-day-jobs-community-babysit",
+      "entryId": "community-modern-day-jobs",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "jace would last one shift before trying to reorganise the rota",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-modern-day-jobs-community-rota",
+      "entryId": "community-modern-day-jobs",
+      "authorId": "regular-ledger",
+      "parentId": "community-modern-day-jobs-community-babysit",
+      "body": "And discover that three people have the same name in the payroll export.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-modern-day-jobs-community-reply",
+      "entryId": "community-modern-day-jobs",
+      "authorId": "cast-saathos-maris",
+      "parentId": "community-modern-day-jobs-community-saathos",
+      "body": "The cupboard is labelled. This has not helped.",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [
+        "regular-it",
+        "regular-fandom-warcraft"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-critic",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "i used to think a quiet scene was automatically doing more character work. sometimes it is just repeating something we already know, slower.\n\nstill want more breathing room. i am less impressed by breathing room as an argument on its own.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-fandom-cinema"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-defender",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-room-defender",
+      "parentId": "community-retracted-takes-community-critic",
+      "body": "i agree with that more than i expected. although repetition can show someone is stuck rather than the story being stuck",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-critic-again",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-room-critic",
+      "parentId": "community-retracted-takes-community-defender",
+      "body": "sure. but at some point i need a different consequence, not another reminder that they are miserable",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-defender-again",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-room-defender",
+      "parentId": "community-retracted-takes-community-critic-again",
+      "body": "fair. i think i have sometimes treated recognising an intention as the same thing as liking the result",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-fandom-cinema",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "community-retracted-takes-community-ada",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-room-middle",
+      "parentId": "community-retracted-takes-community-defender-again",
+      "body": "yeah that is where i land too. i can see what a scene is going for and still wish it landed differently",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-bait",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "two critics agreeing. thread is washed",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-no",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-room-critic",
+      "parentId": "community-retracted-takes-community-bait",
+      "body": "we agreed on one sentence. please respect our privacy",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-reformed"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-retracted-takes-community-later",
+      "entryId": "community-retracted-takes",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "i used to treat wanting a happier outcome as proof the sad ending worked. sometimes yes. sometimes i just wanted another possibility to feel like it had a chance.",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [
+        "regular-fic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-new-reader-desk-community-names",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "not a plot question but does anyone else keep the family tree open the entire time",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-new-reader-desk-community-tabs",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-fandom-mythology",
+      "parentId": "community-new-reader-desk-community-names",
+      "body": "family tree, chapter, character profile, unrelated tab i cannot explain. yes",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-student"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-new-reader-desk-community-uncle",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "I keep notes on paper. This is not a superior method; I have now misplaced the paper.",
+      "publishedAt": "2026-09-10T14:12:29.141Z",
+      "upvoterIds": [
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-new-reader-desk-community-desk",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-elder",
+      "parentId": "community-new-reader-desk-community-names",
+      "body": "A bookmark helps more than my elaborate notebook ever did. Start with the people in the scene; the rest can wait.",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-great-game-table-community-favourite",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-fandom-pokemon",
+      "parentId": null,
+      "body": "collecting favourites and making a sensible deck are two separate hobbies that keep charging me the same attention",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [
+        "regular-great"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-great-game-table-community-support",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "i want the boring support piece to get credit when it makes the whole thing function",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-great-game-table-community-win",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-great",
+      "parentId": "community-great-game-table-community-favourite",
+      "body": "then when i win i will say it was strategic and when i lose i will say it was a theme deck. covered both exits",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [
+        "regular-fandom-league"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-great-game-table-community-loss",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-fandom-league",
+      "parentId": null,
+      "body": "my favourite archetype is blaming the draw",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [
+        "regular-cooked"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-great-game-table-community-paper",
+      "entryId": "community-great-game-table",
+      "authorId": "regular-ledger",
+      "parentId": "community-great-game-table-community-loss",
+      "body": "Write down why you kept the hand before you see the result. Much harder to retrofit a genius explanation afterwards.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [],
+      "awards": [
+        {
+          "fromUserId": "regular-great",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "community-dragon-ranking-fatigue-community-scale",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "regular-scale",
+      "parentId": null,
+      "body": "ranking the thread premise C tier",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [
+        "regular-viltrumite"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-ranking-fatigue-community-ecology",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "regular-ecology",
+      "parentId": "community-dragon-ranking-fatigue-community-scale",
+      "body": "you have been here for twelve seconds",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [
+        "regular-fandom-zelda"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-ranking-fatigue-community-art",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "regular-fandom-minecraft",
+      "parentId": null,
+      "body": "i like looking at how much space an animal that size would need. makes every building around it feel temporary",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-ranking-fatigue-community-garden",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": null,
+      "body": "can we have a little dragon garden",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-ranking-fatigue-community-fence",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "regular-craft",
+      "parentId": "community-dragon-ranking-fatigue-community-garden",
+      "body": "The fence would have a very short career.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [
+        "regular-pirate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-ranking-fatigue-community-caveat",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "regular-literal",
+      "parentId": null,
+      "body": "i do actually want more of the size comparison stuff. not to pick a winner. i am bad at picturing numbers",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-one-ordinary-afternoon-community-servant",
+      "entryId": "meta-one-ordinary-afternoon",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "someone who has to clean the room after the dramatic exit. i want to know how late they get home",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "meta-one-ordinary-afternoon-community-craft",
+      "entryId": "meta-one-ordinary-afternoon",
+      "authorId": "regular-cosplay",
+      "parentId": null,
+      "body": "the person fixing a damaged sleeve while everyone talks over them. they are trying to match thread, not interpret a prophecy",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [
+        "regular-fandom-ghibli"
+      ],
+      "awards": []
+    },
+    {
+      "id": "meta-one-ordinary-afternoon-community-quiet",
+      "entryId": "meta-one-ordinary-afternoon",
+      "authorId": "regular-club",
+      "parentId": "meta-one-ordinary-afternoon-community-craft",
+      "body": "I would read that. Especially if they misread the grand conversation because they have a more urgent problem of their own.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "meta-one-ordinary-afternoon-community-avoid",
+      "entryId": "meta-one-ordinary-afternoon",
+      "authorId": "regular-grad",
+      "parentId": "meta-one-ordinary-afternoon-community-quiet",
+      "body": "Yes. Let an ordinary person have incomplete information without making them foolish. Readers already know more than any one person in the room.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-fandom-tolkien",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "meta-quiet-chapters-community-breathing",
+      "entryId": "meta-quiet-chapters",
+      "authorId": "regular-fandom-epic",
+      "parentId": "meta-quiet-chapters-comment-5",
+      "body": "coming back to this: a pause can change what i am hoping for, even if it does not change what happened. that is the useful kind of breathing room for me.",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "community-council-break-room-community-agenda",
+      "entryId": "community-council-break-room",
+      "authorId": "regular-fandom-warcraft",
+      "parentId": null,
+      "body": "put the decision at the top of the raven. if i have to scroll to find out why i am here i am already against it",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "upvoterIds": [
+        "regular-it"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-crackship-desk-community-playlist",
+      "entryId": "community-crackship-desk",
+      "authorId": "regular-impossible-ships",
+      "parentId": "community-crackship-desk-comment-4",
+      "body": "update: the alester/godfrey folder now has a playlist. evidence remains unchanged.",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "theory-ghost-dragon-community-diagram",
+      "entryId": "theory-ghost-dragon",
+      "authorId": "regular-fandom-nolan",
+      "parentId": "theory-ghost-dragon-comment-3",
+      "body": "i have revised the diagram. it now says maybe in a larger font.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [
+        "regular-d"
       ],
       "awards": []
     }

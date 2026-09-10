@@ -10,7 +10,7 @@ assert.equal(threads.size,forum.threads.length);assert.equal(comments.size,forum
 assert.equal(new Set([...community.comments.map(c=>c.id),...comments.keys()]).size,community.comments.length+comments.size);
 const slugs=new Set(chapters.map(c=>c.slug));
 for(const chapter of chapters)assert.equal(forum.threads.filter(t=>t.chapterSlug===chapter.slug).length,1,`One discussion for ${chapter.slug}`);
-assert(forum.threads.filter(t=>!t.chapterSlug).length>=3 && forum.threads.filter(t=>!t.chapterSlug).length<=5);
+assert(forum.threads.filter(t=>!t.chapterSlug).length>=3, 'Preserve community discussions; expansion has no fixed thread cap');
 for(const t of forum.threads){
   assert(users.has(t.authorId));assert(t.body.trim());assert(Number.isFinite(Date.parse(t.publishedAt)));
   assert(slugs.has(t.spoilerThrough));
@@ -41,4 +41,30 @@ const fixture={threads:[{id:'test',publishedAt:'2026-09-12T10:00:00Z'}],comments
 assert.equal(publishForum(fixture,[],Date.parse('2026-09-12T10:30:00Z')).comments.length,0,'No descendant before parent');
 assert.equal(publishForum(fixture,[],Date.parse('2026-09-12T11:00:00Z')).comments.length,3,'Nested discussion unfolds with parent');
 assert.equal(publishForum(fixture,[],Date.parse('2026-09-12T09:00:00Z')).threads.length,0,'No future thread');
+const schedule=read('community-schedule.json');
+const scheduledThreadIds=schedule.slots.flatMap(slot=>slot.forumThreadIds ?? []);
+const scheduledCommentIds=schedule.slots.flatMap(slot=>slot.forumCommentIds ?? []);
+assert.equal(new Set(scheduledThreadIds).size,scheduledThreadIds.length);
+assert.equal(new Set(scheduledCommentIds).size,scheduledCommentIds.length);
+for(const slot of schedule.slots){
+  const threadIds=slot.forumThreadIds ?? [], commentIds=slot.forumCommentIds ?? [];
+  if(threadIds.length || commentIds.length)assert(slot.commentIds.length,'Forum activity uses the same three selected publication windows');
+  const time=Date.parse(slot.publishedAt);
+  const before=publishForum(forum,chapters,time-1), at=publishForum(forum,chapters,time);
+  for(const id of threadIds){
+    const thread=threads.get(id);
+    assert.equal(thread?.publishedAt,slot.publishedAt,`Scheduled thread time: ${id}`);
+    assert(!before.threads.some(t=>t.id===id),'Future thread hidden');
+    assert(!before.comments.some(c=>c.entryId===id),'Future thread replies hidden');
+    assert(!JSON.stringify(before).includes(thread.body),'Future thread body private');
+    assert(at.threads.some(t=>t.id===id),'Thread appears at exact publication time');
+  }
+  for(const id of commentIds){
+    const comment=comments.get(id);
+    assert.equal(comment?.publishedAt,slot.publishedAt,`Scheduled reply time: ${id}`);
+    assert(!before.comments.some(c=>c.id===id),'Future reply hidden');
+    assert(!JSON.stringify(before).includes(comment.body),'Future reply body private');
+    assert(at.comments.some(c=>c.id===id),'Reply appears at exact publication time');
+  }
+}
 console.log(`Forum valid: ${threads.size} threads, ${comments.size} comments, complete chapter coverage, valid replies/votes/awards, publication boundaries.`);
