@@ -4,15 +4,16 @@
 .back:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .back svg { flex-shrink: 0; }
 @media(prefers-reduced-motion:reduce) { .back { transition: none; } }
-.page h1 { font-size: clamp(26px, 5vw, 38px); margin: 16px 0 8px; }
+.page h1 { margin: 24px 0 8px; color: var(--gold); font: 700 clamp(30px, 6vw, 46px)/1.2 var(--font-hotd); }
 .intro { color: var(--muted); font-size: 14px; }
 .tabs { display: flex; gap: 8px; padding: 16px 0 20px; }
-.tabs button, .more { min-height: 44px; padding: 10px 15px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
-.tabs button[aria-selected="true"] { border-color: #c3a166; color: #d7b97e; }
+.tabs a { display: inline-flex; align-items: center; box-sizing: border-box; text-decoration: none; font-size: 14px; }
+.tabs a, .more { min-height: 44px; padding: 10px 15px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
+.tabs a[aria-current="page"] { border-color: #c3a166; color: #d7b97e; }
 .feed { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .card { display: flex; align-items: flex-start; gap: 12px; padding: 17px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); }
 .card:hover { border-color: #9d8655; }
-.card:focus-visible, .tabs button:focus-visible, .more:focus-visible { outline: 2px solid #c3a166; outline-offset: 3px; }
+.card:focus-visible, .tabs a:focus-visible, .more:focus-visible { outline: 2px solid #c3a166; outline-offset: 3px; }
 .avatar { flex-shrink: 0; width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; color: white; font: 600 12px system-ui; }
 .content { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .byline { font: 12px/1.6 system-ui; color: var(--muted); }

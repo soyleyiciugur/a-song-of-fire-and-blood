@@ -62,12 +62,12 @@ function Forum() {
     return latest(b.id)-latest(a.id)||data.forumThreads.indexOf(b)-data.forumThreads.indexOf(a);
   });
   return <main className={styles.page}>
-    <header className={styles.header}><div><Link className={styles.eyebrow} href="/forum">THE FORUM</Link><h1>{thread?thread.title:'The small council nobody asked for.'}</h1><p className={styles.muted}>Familiar faces, chapter arguments and extremely confident theories.</p></div></header>
-    <details className={styles.rules}><summary>Community rules · Jace is watching</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Fictional community and awards. Member posting is coming later.</p></details>
+    <header className={styles.header}><div><Link className={styles.eyebrow} href="/forum">TAVERNS</Link><h1>{thread?thread.title:'Taverns'}</h1><p className={styles.muted}>Pull up a chair by the hearth. Chapter tales, whispered theories and familiar faces await.</p></div></header>
+    <details className={styles.rules}><summary>House rules · Jace keeps the peace</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Fictional community and awards. Member posting is coming later.</p></details>
     {data.error&&<p role="status">{data.error} <button onClick={()=>void refreshCommunity()}>Retry</button></p>}
-    {!data.loaded&&<p role="status">Loading the forum…</p>}
+    {!data.loaded&&<p role="status">Opening the tavern doors…</p>}
     {threadId ? thread ? <>
-      <Link href="/forum" className={styles.back}>← All threads</Link>
+      <Link href="/forum" className={styles.back}>← All tables</Link>
       <section className={styles.op}><div className={styles.meta}><span>{thread.category}</span><span>Spoilers through {thread.spoilerThrough.replaceAll('-',' ')}</span><time dateTime={thread.publishedAt}>{dateLabel(thread.publishedAt)} TRT</time></div>
         {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
         {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}
@@ -84,8 +84,8 @@ function Forum() {
           <p className={styles.body}>{comment.body}</p><Rewards comment={comment}/>
         </li>;
       })}</ol>
-    </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to the forum</Link></p> : <>
-      <div className={styles.filters} aria-label="Thread categories">{[['all','All threads'],['chapters','Chapter discussions'],['other','Theory & community']].map(([value,label])=><button key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)}>{label}</button>)}</div>
+    </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to Taverns</Link></p> : <>
+      <div className={styles.filters} aria-label="Thread categories">{[['all','All tables'],['chapters','Chapter discussions'],['other','Theory & community']].map(([value,label])=><button key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)}>{label}</button>)}</div>
       <ol className={styles.threads}>{sorted.map(t=>{
         const replies=data.comments.filter(c=>c.surface==='forum'&&c.entryId===t.id);
         return <li key={t.id}><Link href={`/forum?thread=${encodeURIComponent(t.id)}`} className={styles.threadCard}><span className={styles.category}>{t.category}</span><h2>{t.title}</h2><p>{t.body.split('\n')[0]}</p><div className={styles.meta}><span>@{users.get(t.authorId)?.username}</span><span>{replies.length} comments</span><span>{new Set(replies.map(c=>c.authorId)).size} participants</span></div></Link></li>;
@@ -93,4 +93,4 @@ function Forum() {
     </>}
   </main>;
 }
-export default function ForumPage(){return <Suspense fallback={<main className={styles.page}>Loading the forum…</main>}><Forum/></Suspense>;}
+export default function ForumPage(){return <Suspense fallback={<main className={styles.page}>Opening the tavern doors…</main>}><Forum/></Suspense>;}

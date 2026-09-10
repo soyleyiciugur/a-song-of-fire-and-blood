@@ -1,5 +1,17 @@
 [
   {
+    "id": "gallery-baelenys-carrying-vhaemys",
+    "src": "/images/gallery/baelenys-carrying-vhaemys.jpeg",
+    "caption": "Baelenys (56) carrying Vhaemys (5)",
+    "characterIds": ["baelenys-targaryen", "vhaemys-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-10",
+    "category": "raven"
+  },
+  {
     "id": "gallery-hrrms-genius",
     "src": "/videos/reels/hrrms-genius.mp4",
     "caption": "he can't keep getting away with it",

@@ -33,6 +33,21 @@ export default function Navbar() {
     setOpenGroup(null);
   }, [isPlayPage, pathname]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        headerRef.current?.querySelector<HTMLButtonElement>('[aria-controls="site-mobile-nav"]')?.focus();
+      }
+    };
+    const media = window.matchMedia("(min-width: 1151px)");
+    const resize = () => { if (media.matches) setMenuOpen(false); };
+    document.addEventListener("keydown", close);
+    media.addEventListener("change", resize);
+    return () => { document.removeEventListener("keydown", close); media.removeEventListener("change", resize); };
+  }, [menuOpen]);
+
   return (
     <header
       ref={headerRef}
@@ -47,6 +62,23 @@ export default function Navbar() {
         .join(" ")}
     >
       <div className={styles.inner}>
+        <button
+          type="button"
+          className={styles.menuButton}
+          aria-expanded={menuOpen}
+          aria-controls="site-mobile-nav"
+          aria-label="Toggle navigation"
+          onClick={() => setMenuOpen((value) => !value)}
+        >
+          <span className={styles.menuIcon} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        </button>
+
+
+
         <Link href="/" className={styles.homeLink}>
           A Song of Fire and Blood
         </Link>
@@ -138,31 +170,19 @@ export default function Navbar() {
           )}
         </nav>
 
-        <button
-          type="button"
-          className={styles.menuButton}
-          aria-expanded={menuOpen}
-          aria-controls="site-mobile-nav"
-          aria-label="Toggle navigation"
-          onClick={() => setMenuOpen((value) => !value)}
-        >
-          <span className={styles.menuIcon} aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </span>
-        </button>
-
         <SearchBar />
         <Link href="/notifications" className={styles.notificationsButton} aria-label="Notifications" title="Notifications">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </Link>
-        <Link href="/forum" className={`${styles.notificationsButton} ${styles.forumButton}`} aria-label="Forum" title="Forum">
+        <Link href="/forum" className={`${styles.notificationsButton} ${styles.forumButton}`} aria-label="Taverns" title="Taverns">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M8 8h8M8 12h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
         </Link>
       </div>
 
-      <div
+      {menuOpen && <button className={styles.menuBackdrop} tabIndex={-1} aria-label="Close navigation" onClick={() => setMenuOpen(false)} />}
+      <nav
+        aria-label="Mobile navigation"
+        inert={!menuOpen}
         id="site-mobile-nav"
         className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ""}`}
       >
@@ -223,7 +243,7 @@ export default function Navbar() {
             </Link>
           )
         )}
-      </div>
+      </nav>
     </header>
   );
 }

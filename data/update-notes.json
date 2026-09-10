@@ -1,35 +1,23 @@
 [
   {
-    "id": "forum-launch",
-    "publishedAt": "2026-09-10T09:32:19.331Z",
-    "title": "The forum is open",
-    "body": "Chapter discussions now have a home: sixteen chapter threads, longer conversations, theories and community topics. Familiar accounts can earn upvotes and Hasocash awards, with Jace moderating personal attacks. Forum replies appear in Latest comments too."
-  },
-  {
-    "id": "community-comments-launch",
-    "publishedAt": "2026-09-10T07:39:43.000Z",
-    "title": "Comments across the Raven's Eye",
-    "body": "Conversations now accompany canon images, memes and reels. Character accounts use mini portraits and pinned conversations. Profiles show their friends, and this page brings you new comments and direct links to each conversation. Some comments will arrive over time."
-  },
-  {
-    "id": "site-updates-2026-09-10",
-    "publishedAt": "2026-09-09T21:00:00.000Z",
-    "dateOnly": true,
-    "title": "Site updates",
-    "body": "",
+    "date": "2026-09-10",
     "items": [
+      "Added a new Raven's Eye portrait of Baelenys carrying Vhaemys.",
       "The Known Chronicle now uses a vertical timeline on mobile, with visible chapter titles, dates and tappable chapter links.",
-      "Added Update Notes: a daily, dated record of site improvements, accessible from the homepage's Latest Updates section."
+      "Added Update Notes: a daily, dated record of site improvements, accessible from the homepage's Latest Updates section.",
+      "Mobile navigation now opens from the left, with a compact header for the site name, search, notifications and Taverns.",
+      "Renamed the forum to Taverns with a warm hearth-inspired theme and added it as the twelfth homepage shortcut.",
+      "Notifications now links directly to the Update Notes page, with a matching title style and a Back to Home button.",
+      "Opened sixteen chapter discussion threads and community topics in Taverns, with upvotes, Hasocash awards, moderation and reply notifications.",
+      "Unified release notes into one daily Update Notes archive shared by homepage and notification links.",
+      "Added conversations and scheduled replies to the Baelenys carrying Vhaemys portrait, with a verified Vhaemys account, mini portrait and family friendships."
     ]
   },
   {
-    "id": "site-updates-2026-09-09",
-    "publishedAt": "2026-09-08T21:00:00.000Z",
-    "dateOnly": true,
-    "title": "Site updates",
-    "body": "",
+    "date": "2026-09-09",
     "items": [
-      "Added comments across Raven's Eye images, memes and reels, with character portraits, pinned character conversations and community profiles."
+      "Added comments across Raven's Eye images, memes and reels, with character portraits, pinned character conversations and community profiles.",
+      "Community profiles show friends, and Latest comments links directly to conversations; scheduled comments appear when their publication time arrives."
     ]
   }
 ]

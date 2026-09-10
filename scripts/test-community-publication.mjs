@@ -6,7 +6,10 @@ import { notificationTimeGroup, groupNotifications } from '../lib/notificationTi
 const data = JSON.parse(fs.readFileSync(new URL('../data/flea-bottom.json', import.meta.url), 'utf8'));
 const updates = JSON.parse(fs.readFileSync(new URL('../data/update-notes.json', import.meta.url), 'utf8'));
 const scheduled = data.comments.filter(c => c.id.includes('-scheduled-'));
-assert.equal(scheduled.length, 3);
+const schedule = JSON.parse(fs.readFileSync(new URL('../data/community-schedule.json', import.meta.url), 'utf8'));
+assert.equal(schedule.slots.length, 10);
+assert.equal(schedule.slots.filter(slot => slot.commentIds.length).length, 3);
+assert.deepEqual(scheduled.map(c => c.id).sort(), schedule.slots.flatMap(slot => slot.commentIds).sort());
 for (const c of scheduled) {
   const time = Date.parse(c.publishedAt);
   const before = publishCommunity(data, updates, time - 1);
@@ -19,8 +22,8 @@ const root = { id:'root', parentId:null, body:'future root', publishedAt:'2026-0
 const reply = { id:'reply', parentId:'root', body:'reply', publishedAt:'2026-09-11T00:00:00.000Z' };
 assert.equal(publishCommunity({users:[],comments:[root,reply]},[],Date.parse(reply.publishedAt)).comments.length,0,'Even malformed early replies stay hidden');
 const publicData = publishCommunity(data, updates, Date.parse('2026-09-10T12:00:00.000Z'));
-assert.equal(publicData.comments.length, data.comments.length - 3);
-assert.equal(publicData.updates.length, updates.filter(u=>Date.parse(u.publishedAt)<=Date.parse(publicData.serverTime)).length);
+assert.equal(publicData.comments.length, data.comments.filter(c => Date.parse(c.publishedAt) <= Date.parse(publicData.serverTime)).length);
+assert.equal(publicData.updates.length, updates.filter(u=>Date.parse(`${u.date}T00:00:00+03:00`)<=Date.parse(publicData.serverTime)).length);
 for (const user of publicData.users) {
   const expected = communityFriendships(data, Date.parse(publicData.serverTime)).get(user.id);
   assert.deepEqual(user.friendIds, expected);
@@ -28,9 +31,14 @@ for (const user of publicData.users) {
   for (const field of ['history','voice','continuity','fandoms','interests']) assert(!(field in user));
 }
 assert(!('relationships' in publicData));
-assert.equal(new Set(updates.map(u=>u.id)).size,updates.length);
-assert(updates.some(u=>u.dateOnly && u.items?.length),'Preserve daily notes');
-assert(updates.some(u=>u.id==='forum-launch'),'Preserve community release notes');
+assert.equal(new Set(updates.map(u=>u.date)).size,updates.length, 'One record per day');
+assert(updates.every(u=>/^\d{4}-\d{2}-\d{2}$/.test(u.date) && u.items?.length),'Daily canonical schema');
+assert.deepEqual(updates.map(u=>u.date),updates.map(u=>u.date).sort().reverse());
+assert(updates.some(u=>u.items.some(item=>item.includes('Hasocash'))),'Preserve community release notes');
+assert(updates.find(u=>u.date==='2026-09-09').items.some(item=>item.includes('Added comments')),'Keep the designated comment launch date');
+const midnight = Date.parse('2026-09-10T00:00:00+03:00');
+assert(!publishCommunity(data, updates, midnight - 1).updates.some(u=>u.id==='site-updates-2026-09-10'));
+assert(publishCommunity(data, updates, midnight).updates.some(u=>u.id==='site-updates-2026-09-10'));
 assert.equal(notificationTimeGroup('2026-09-10T00:00:00+03:00',Date.parse('2026-09-10T01:00:00+03:00'),true),'Today','Day-only entries must not claim elapsed-hour precision');
 const graph=communityFriendships(data,Date.parse(publicData.serverTime));
 assert(!graph.get('regular-g').includes('regular-u'),'Real antagonism is not friendship');

@@ -2800,6 +2800,31 @@
         "fanfic"
       ],
       "postingStyle": "One short reaction when a relevant character combination or joke gives an opening. No compulsory ship list, no explicit material, and no demand that the RP make it canon."
+    },
+    {
+      "id": "cast-vhaemys-targaryen",
+      "username": "vhaemys",
+      "kind": "fictional",
+      "avatar": "VT",
+      "color": "#bf829a",
+      "displayName": "Vhaemys",
+      "bio": "i saved you a biscuit. maybe",
+      "current": {
+        "label": "Watching",
+        "value": "one more video"
+      },
+      "voice": "Seven at the current world date. Short, direct child speech: affectionate, curious, occasionally possessive or stubborn. Simple spelling and occasional emphatic capitals, not adult Gen Z irony or political essays. Sometimes takes a meme literally. Do not make every message a food joke.",
+      "continuity": [
+        "Fictional social-media AU, not new canon. Current age comes from nameday and worldDate; she is five in the carrying portrait but seven while commenting.",
+        "Spends a lot of time scrolling reels while eating tarts, cake or biscuits. Often comes back with another small thought, but also notices flowers, dragons and familiar people.",
+        "Admires Baelenys; feels safest with Jace, is deeply attached to Alester and affectionate toward Gaelor. Lorenah is a tentative warming relationship, not an instant best friend.",
+        "Never disclose secrets or invent canon outcomes. Keep her away from sexual shipping and adult innuendo. Affection for family does not mean endorsing their violence."
+      ],
+      "account": {
+        "type": "character",
+        "characterId": "vhaemys-targaryen"
+      },
+      "postingStyle": "High-frequency exception to the sparse cast rule: may appear on most suitable new images and reels, with occasional follow-up replies. No mandatory quota. Vary between literal questions, small observations, family affection and snack distractions."
     }
   ],
   "comments": [
@@ -12306,6 +12331,134 @@
       "parentId": null,
       "body": "honestly just let them have the afternoon. no elaborate notes app proposal today",
       "publishedAt": "2026-09-10T08:53:57.526Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-vhaemys",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": null,
+      "body": "i could walk. i just did not want to",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-baelenys",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": "gallery-baelenys-carrying-vhaemys-vhaemys",
+      "body": "You were quite firm on the matter.",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-sims",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "her transport arrangements are none of our business",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-lurker",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "the little flower in her hair :(",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-craft",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-cosplay",
+      "parentId": "gallery-baelenys-carrying-vhaemys-lurker",
+      "body": "and the embroidery on the sleeves. someone needs to stop me starting another project",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-cinema",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "the red behind them makes that tiny bit of pink stand out so much",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-critic",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "see this is the kind of small family thing i actually want more of. let it sit for a minute",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-ada",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-room-middle",
+      "parentId": "gallery-baelenys-carrying-vhaemys-critic",
+      "body": "yeah i like that neither of them is smiling for us. feels less like an announcement",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-elder",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "She looks very certain that she belongs right there.",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-cooked",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-cooked",
+      "parentId": null,
+      "body": "me after saying the walk would be good for me",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-ghibli",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-fandom-ghibli",
+      "parentId": null,
+      "body": "her little arm around his neck. oh",
+      "publishedAt": "2026-09-10T14:05:14.614Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-scheduled-1",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-fandom-pokemon",
+      "parentId": null,
+      "body": "she has the exact face i make when someone suggests putting me down",
+      "publishedAt": "2026-09-10T18:30:00.000Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-scheduled-2",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": "gallery-baelenys-carrying-vhaemys-lurker",
+      "body": "i want that flower again",
+      "publishedAt": "2026-09-10T18:30:00.000Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-scheduled-3",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "vhaemys admitting she can walk in public. saving this",
+      "publishedAt": "2026-09-11T13:10:00.000Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-scheduled-4",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "regular-divorced",
+      "parentId": null,
+      "body": "Being comfortable with your dad and everyone else being uncomfortable with him. Quite a family photo.",
+      "publishedAt": "2026-09-11T13:10:00.000Z"
+    },
+    {
+      "id": "gallery-baelenys-carrying-vhaemys-scheduled-5",
+      "entryId": "gallery-baelenys-carrying-vhaemys",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": "gallery-baelenys-carrying-vhaemys-scheduled-3",
+      "body": "jace carry me tomorrow. i will bring biscuits",
+      "publishedAt": "2026-09-11T20:50:00.000Z"
     }
   ],
   "relationships": [
@@ -13606,6 +13759,58 @@
           "at": "2026-09-10T08:53:57.526Z",
           "kind": "friendly-banter",
           "note": "The introductory reply establishes friendly teasing about evidence standards. One wants two frames, the other does not even need that."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-vhaemys-targaryen",
+        "cast-baelenys-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T14:05:14.614Z",
+          "kind": "friends",
+          "note": "Her trust in her father underlies the carrying-photo exchange. Social-AU friendship reflects her affection, not a moral judgement of his rule."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-vhaemys-targaryen",
+        "cast-jacaelon-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T14:05:14.614Z",
+          "kind": "friends",
+          "note": "Feels safe with Jace and expects his attention; affectionate sibling teasing rather than genuine hostility."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-vhaemys-targaryen",
+        "cast-alester-dayne"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T14:05:14.614Z",
+          "kind": "friends",
+          "note": "Her established attachment to Alester carries into the social AU; no invented reunion."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-vhaemys-targaryen",
+        "cast-gaelor-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T14:05:14.614Z",
+          "kind": "friends",
+          "note": "Established affectionate sibling bond. Their social friendship does not excuse his actions."
         }
       ]
     }

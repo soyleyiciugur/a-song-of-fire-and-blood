@@ -563,6 +563,28 @@
 .notificationsButton { box-sizing: border-box; }
 .notificationsButton svg { width: 18px; height: 18px; }
 .notificationsButton:hover { border-color: var(--gold); background: var(--surface-hover); }
+.menuBackdrop { display: none; }
 .notificationsButton:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .playBannerCollapsed .notificationsButton { display: none; }
 @media(max-width:1150px) { .inner { padding-right: 158px; } .homeLink { flex-shrink: 1; min-width: 0; } .menuButton { flex-shrink: 0; } .searchWrap { right: 110px; } .notificationsButton { right: 62px; } .forumButton { right: 14px; } }
+
+@media (max-width: 1150px) {
+  .playBanner .playNavToggle { display: none; }
+  .playBanner .inner { min-height: 60px; padding: 8px; gap: 4px; }
+  .playBanner .menuButton { display: inline-flex; margin: 0; width: 44px; height: 44px; flex: 0 0 44px; }
+  .playBanner .homeLink { flex: 1; max-width: none; white-space: normal; font-size: 12px; line-height: 1.35; opacity: 1; }
+  .playBanner .searchWrap { display: block; position: relative; inset: auto; transform: none; width: 44px; min-width: 44px; height: 44px; flex: 0 0 44px; order: 0; }
+  .searchInput { width: 44px; height: 44px; }
+  .searchIcon { top: 13px; right: 13px; }
+  .searchWrap:focus-within .searchInput { width: min(320px, calc(100vw - 112px)); }
+  .dropdown { max-width: calc(100vw - 112px); top: 50px; }
+  .playBanner .notificationsButton { display: grid; position: static; transform: none; width: 44px; height: 44px; flex: 0 0 44px; }
+  .menuBackdrop { display: block; position: absolute; top: 100%; left: 0; width: 100%; height: calc(100dvh - var(--site-nav-height, 60px)); border: 0; background: #0009; }
+  .playBanner .mobileNav { display: flex; position: absolute; top: 100%; left: 0; width: min(320px, 85vw); height: calc(100dvh - var(--site-nav-height, 60px)); max-height: none; box-sizing: border-box; margin: 0; padding: 16px; flex-direction: column; flex-wrap: nowrap; overflow-y: auto; overscroll-behavior: contain; background: var(--surface); border-right: 1px solid var(--border); transform: translateX(-100%); visibility: hidden; transition: transform .22s ease, visibility .22s; }
+  .playBanner .mobileNavOpen { transform: translateX(0); visibility: visible; }
+  .mobileNavLink { justify-content: flex-start; min-height: 44px; box-sizing: border-box; border-radius: 8px; }
+  .mobileNavGroupHeaderRow > .mobileNavLink { flex: 1; }
+  .mobileNavGroupHeader { min-height: 44px; width: 44px; }
+  .menuButton:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { .playBanner .mobileNav { transition: none; } }
