@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import MiniPortrait from "@/components/MiniPortrait";
+import FriendAccounts from './FriendAccounts';
 import gallery from "@/data/gallery.json";
 import { useCommunity, refreshCommunity } from "@/lib/communityStore";
 import { getGutterComments, getGutterIdentity, getGutterThreads, getGutterUserStats, gutterUserMap, type GutterComment } from "@/lib/fleaBottom";
@@ -47,7 +48,7 @@ function Comment({ comment, replies, pinned = false }: { comment: GutterComment;
               </dl>
             )}
             <p className={styles.activity}>{stats.comments} {stats.comments === 1 ? "comment" : "comments"} across {stats.posts} {stats.posts === 1 ? "post" : "posts"}</p>
-            <p className={styles.activity}>{user.friendCount ?? 0} {(user.friendCount ?? 0) === 1 ? "friend" : "friends"}</p>
+            <FriendAccounts user={user} />
           </div>
         </details>
         <p className={styles.body}>{comment.body}</p>

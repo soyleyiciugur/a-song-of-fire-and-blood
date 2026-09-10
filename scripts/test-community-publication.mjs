@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { publishCommunity } from '../lib/communityPublication.mjs';
+import { communityFriendships } from '../lib/communityRelationships.mjs';
 import { notificationTimeGroup, groupNotifications } from '../lib/notificationTime.mjs';
 const data = JSON.parse(fs.readFileSync(new URL('../data/flea-bottom.json', import.meta.url), 'utf8'));
 const updates = JSON.parse(fs.readFileSync(new URL('../data/community-updates.json', import.meta.url), 'utf8'));
@@ -21,9 +22,22 @@ const publicData = publishCommunity(data, updates, Date.parse('2026-09-10T12:00:
 assert.equal(publicData.comments.length, data.comments.length - 3);
 assert.equal(publicData.updates.length, 1);
 for (const user of publicData.users) {
-  assert.equal(user.friendCount, data.users.find(u=>u.id===user.id).friendIds.length);
-  for (const field of ['friendIds','voice','continuity','fandoms','interests']) assert(!(field in user));
+  const expected = communityFriendships(data, Date.parse(publicData.serverTime)).get(user.id);
+  assert.deepEqual(user.friendIds, expected);
+  assert.equal(user.friendCount, expected.length);
+  for (const field of ['history','voice','continuity','fandoms','interests']) assert(!(field in user));
 }
+assert(!('relationships' in publicData));
+const graph=communityFriendships(data,Date.parse(publicData.serverTime));
+assert(!graph.get('regular-g').includes('regular-u'),'Real antagonism is not friendship');
+assert(graph.get('regular-s').includes('regular-j'),'Friendly rivalry can be friendship');
+assert(graph.get('regular-u').includes('regular-k'),'Political disagreement can coexist with affection');
+const evolution={users:[{id:'a'},{id:'b'}],relationships:[{users:['a','b'],history:[
+  {at:'2026-09-10T12:00:00Z',kind:'friends'},
+  {at:'2026-09-11T12:00:00Z',kind:'rivals'},
+  {at:'2026-09-12T12:00:00Z',kind:'friendly-banter'},
+]}]};
+for(const [time,expected] of [['2026-09-10T11:59:59Z',[]],['2026-09-10T12:00:00Z',['b']],['2026-09-11T12:00:00Z',[]],['2026-09-12T12:00:00Z',['b']]])assert.deepEqual(communityFriendships(evolution,Date.parse(time)).get('a'),expected);
 console.log('PASS: exact publication boundaries, parent gating, private data projection, friendship counts and initial release note.');
 const now=Date.parse('2026-09-11T20:00:00+03:00');
 for(const [date,label] of [

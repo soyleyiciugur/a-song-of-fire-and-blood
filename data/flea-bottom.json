@@ -17,12 +17,7 @@
       "current": {
         "label": "Watching",
         "value": "the replies, unfortunately"
-      },
-      "friendIds": [
-        "regular-j",
-        "regular-m",
-        "regular-u"
-      ]
+      }
     },
     {
       "id": "regular-d",
@@ -40,11 +35,7 @@
       "current": {
         "label": "Reading",
         "value": "the chapter again"
-      },
-      "friendIds": [
-        "regular-fandom-naruto",
-        "regular-l"
-      ]
+      }
     },
     {
       "id": "regular-u",
@@ -58,15 +49,7 @@
         "Argues with crown_enjoyer and gaelord_apologist. Will not endorse Jace just because he is charming."
       ],
       "displayName": "bee",
-      "pronouns": "they/them",
-      "friendIds": [
-        "regular-b",
-        "regular-feminist",
-        "regular-g",
-        "regular-j",
-        "regular-k",
-        "regular-sport"
-      ]
+      "pronouns": "they/them"
     },
     {
       "id": "regular-k",
@@ -78,12 +61,6 @@
       "voice": "Young pompous monarchist; law-and-order takes undermined by petty inconveniences.",
       "continuity": [
         "Defends the institution, especially Baelenys; debates breadpilled. Wants quiet streets and punctual ferries."
-      ],
-      "friendIds": [
-        "regular-j",
-        "regular-m",
-        "regular-market",
-        "regular-u"
       ]
     },
     {
@@ -96,13 +73,6 @@
       "voice": "Dry lore nerd; precise short corrections, restrained slang.",
       "continuity": [
         "Debunks derrin.exe. Distinguishes an edit or AU from canon; never invents chapter facts."
-      ],
-      "friendIds": [
-        "regular-a",
-        "regular-d",
-        "regular-fandom-zelda",
-        "regular-m",
-        "regular-v"
       ]
     },
     {
@@ -120,16 +90,7 @@
       "current": {
         "label": "Making",
         "value": "space on my phone"
-      },
-      "friendIds": [
-        "regular-b",
-        "regular-g",
-        "regular-great",
-        "regular-j",
-        "regular-k",
-        "regular-l",
-        "regular-v"
-      ]
+      }
     },
     {
       "id": "regular-e",
@@ -141,10 +102,6 @@
       "voice": "Older Gen Z edgelord; deadpan bleak jokes, sparse punctuation.",
       "continuity": [
         "Roasts princes and plot armor, never sincere praise of civilian deaths."
-      ],
-      "friendIds": [
-        "regular-b",
-        "regular-grad"
       ]
     },
     {
@@ -162,11 +119,7 @@
       "current": {
         "label": "Reading",
         "value": "the bits with Alester"
-      },
-      "friendIds": [
-        "regular-fandom-stephen-king",
-        "regular-j"
-      ]
+      }
     },
     {
       "id": "regular-v",
@@ -178,12 +131,6 @@
       "voice": "Gen Z Visenor defender; gaming disconnect metaphors, evasive excuses.",
       "continuity": [
         "Calls retreats strategic; embarrassed by dad approval seeking. Cannot defend every decision."
-      ],
-      "friendIds": [
-        "regular-cooked",
-        "regular-j",
-        "regular-l",
-        "regular-m"
       ]
     },
     {
@@ -201,13 +148,7 @@
       "current": {
         "label": "Reading",
         "value": "with a cup of tea"
-      },
-      "friendIds": [
-        "regular-e",
-        "regular-lurk",
-        "regular-m",
-        "regular-u"
-      ]
+      }
     },
     {
       "id": "regular-a",
@@ -224,10 +165,7 @@
       "current": {
         "label": "Playing",
         "value": "whatever everyone else installed"
-      },
-      "friendIds": [
-        "regular-l"
-      ]
+      }
     },
     {
       "id": "regular-j",
@@ -244,17 +182,7 @@
       "current": {
         "label": "Watching",
         "value": "the height discourse return"
-      },
-      "friendIds": [
-        "regular-fandom-disney",
-        "regular-g",
-        "regular-k",
-        "regular-m",
-        "regular-music",
-        "regular-s",
-        "regular-u",
-        "regular-v"
-      ]
+      }
     },
     {
       "id": "regular-render",
@@ -276,10 +204,7 @@
       "current": {
         "label": "Making",
         "value": "a much shorter edit this time"
-      },
-      "friendIds": [
-        "regular-reform"
-      ]
+      }
     },
     {
       "id": "regular-horse",
@@ -293,8 +218,7 @@
         "Judges riders by how they treat mounts, not their houses. Wants horses included in journey recaps."
       ],
       "interests": "Travel, mounted knights, retreats.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": []
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-ecology",
@@ -308,10 +232,7 @@
         "Allied with nobody. Questions dragon upkeep rather than inventing biological facts."
       ],
       "interests": "Dragons, Dorne journeys, royal resources.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-fandom-anime"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-ledger",
@@ -325,10 +246,7 @@
         "Finds common ground with breadpilled on pay but wants working accounts more than revolution."
       ],
       "interests": "Government, staffing, damage bills, GM workload.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-feminist"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-odds",
@@ -342,8 +260,7 @@
         "Repeatedly misreads Visenor; envies people who supported Derrin early. Never gives real gambling advice."
       ],
       "interests": "Rivalries, comebacks, choice memes.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": []
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-sept",
@@ -357,10 +274,7 @@
         "Likes StannisOnFacebook's concern for safety. Thinks princes need apologies more than grand titles."
       ],
       "interests": "Weddings, family behaviour, cruelty, reunions.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-fandom-gta"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-local",
@@ -374,10 +288,7 @@
         "Finds breadpilled's speeches tiring even when agreeing. Wants streets safe and shops open."
       ],
       "interests": "City violence, public services, royal disorder.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-literal"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-it",
@@ -391,10 +302,7 @@
         "Thinks HRRM is simultaneously admin and incident generator. Refuses to support anyone's unpaid help desk."
       ],
       "interests": "GM power, suspicious kings, authority and mistakes.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-gym"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-gym",
@@ -408,11 +316,7 @@
         "Does not count intimidation as strength. Likes discipline more than Alester's edit aura."
       ],
       "interests": "Training, combat posture, stressful family arguments.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-fandom-wicked",
-        "regular-it"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-club",
@@ -426,10 +330,7 @@
         "Enjoys Saera and Alester but worries about everybody. Tries to bring quieter characters into discussions."
       ],
       "interests": "Character recaps, reunions, sad edits, family fallout.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-thinkmert"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-grad",
@@ -445,11 +346,7 @@
       "interests": "Court rituals, storytelling, political language.",
       "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
       "displayName": "defne",
-      "location": "library, usually",
-      "friendIds": [
-        "regular-e",
-        "regular-student"
-      ]
+      "location": "library, usually"
     },
     {
       "id": "regular-lorenah",
@@ -463,8 +360,7 @@
         "Pushes back on jacejpeg's habit of making every scene about Jace. Likes women with their own plans."
       ],
       "interests": "Jace relationships, Dorne, royal celebrity.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": []
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-maela",
@@ -478,10 +374,7 @@
         "Not interested in joining either brother's faction. Notices whose perspective is absent."
       ],
       "interests": "Royal style, family ensembles, sibling quarrels.",
-      "postingStyle": "Occasional ordinary fashion or social observations. Maela references are rare and only directly relevant; do not steer unrelated threads back to her.",
-      "friendIds": [
-        "regular-fandom-star-trek"
-      ]
+      "postingStyle": "Occasional ordinary fashion or social observations. Maela references are rare and only directly relevant; do not steer unrelated threads back to her."
     },
     {
       "id": "regular-shield",
@@ -495,10 +388,7 @@
         "Wants Saathos judged separately from his prince; does not invent acts of heroism."
       ],
       "interests": "Gaelor scenes, bodyguards, dangerous orders.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-traditional"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-supply",
@@ -512,8 +402,7 @@
         "Shares feeding concerns with newtposting. Skeptical of dramatic travel plans."
       ],
       "interests": "Journeys, war, timeskips, food.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": []
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-pirate",
@@ -527,10 +416,7 @@
         "Distrusts both court factions. Has more patience for workers and snacks than speeches."
       ],
       "interests": "Royal travel, respect, trade, practical work.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-fandom-cinema"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-north",
@@ -544,10 +430,7 @@
         "Thinks most capital disputes are voluntary nonsense. Dislikes direwolf branding on random products."
       ],
       "interests": "Court infighting, northern references, realm-wide popularity claims.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-unship"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-career",
@@ -561,8 +444,7 @@
         "Believes networking can solve anything until meeting HRRM's power over NPCs."
       ],
       "interests": "Appointments, resumes, public image and promotions.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": []
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-music",
@@ -585,11 +467,7 @@
       "current": {
         "label": "On repeat",
         "value": "a playlist with no consistent genre"
-      },
-      "friendIds": [
-        "regular-fandom-minecraft",
-        "regular-j"
-      ]
+      }
     },
     {
       "id": "regular-student",
@@ -608,11 +486,7 @@
       "current": {
         "label": "Reading",
         "value": "everything except the assignment"
-      },
-      "friendIds": [
-        "regular-grad",
-        "regular-story"
-      ]
+      }
     },
     {
       "id": "regular-food",
@@ -631,8 +505,7 @@
       "current": {
         "label": "Making",
         "value": "lunch"
-      },
-      "friendIds": []
+      }
     },
     {
       "id": "regular-lurk",
@@ -646,11 +519,7 @@
         "Rarely joins disputes; moved by reunions and dislikes hostile family scenes."
       ],
       "interests": "Quiet character moments and emotionally intense edits.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-b",
-        "regular-fandom-hamilton"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-legal",
@@ -664,10 +533,7 @@
         "Unimpressed by both princes' self-justification. Needles gaelord_apologist rather than becoming their lawyer."
       ],
       "interests": "Confessions, punishment, succession claims, trials.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": [
-        "regular-cosplay"
-      ]
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-naella",
@@ -681,8 +547,7 @@
         "Tired of wives being treated as props. Can disagree with lemoncake.mp3 without inventing canon feuds."
       ],
       "interests": "Marriage, family reputation, Gaelor's decisions.",
-      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts.",
-      "friendIds": []
+      "postingStyle": "Occasional; 1–3 comments per suitable thread at most, usually one. Skip unrelated posts."
     },
     {
       "id": "regular-anti",
@@ -697,10 +562,7 @@
         "Claims not to care but remembers details. Never invents proof or harasses real people."
       ],
       "interests": "bad reality TV, night buses, sibling drama",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-wrestling"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-aesthetic",
@@ -715,10 +577,7 @@
         "Fierce about fashion yet sentimentally attached to an ugly old hoodie."
       ],
       "interests": "costumes, music, secondhand shopping, drama",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-batman"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-nihilist",
@@ -733,10 +592,7 @@
         "Bleak persona collapses around sincere affection. Doesn't celebrate civilian victims."
       ],
       "interests": "horror, cats, fantasy, cheap headphones",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-middle"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-reformed",
@@ -751,11 +607,7 @@
         "Claims to have mellowed, still gets baited by smug replies."
       ],
       "interests": "cooking, arguments, sleep, old games",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-naruto",
-        "regular-selective"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-middle",
@@ -770,11 +622,7 @@
         "Unshakeable anti-olive views coexist with endless qualifications on politics."
       ],
       "interests": "public policy, lunch, family dynamics",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-the-office",
-        "regular-nihilist"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-apolitical",
@@ -789,10 +637,7 @@
         "Says they skip politics, remembers one small personal detail perfectly."
       ],
       "interests": "creatures, snacks, spectacle, school-run podcasts",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fic"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-traditional",
@@ -807,10 +652,7 @@
         "Disapproves of scandal in principle; secretly roots for an inconvenient romance."
       ],
       "interests": "gardening, courtship, family photos, recipes",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-shield"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-faith",
@@ -825,10 +667,7 @@
         "Religious but impatient with powerful people using piety as insulation."
       ],
       "interests": "baking, ethics, music, community",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-arcane"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-reform",
@@ -843,11 +682,7 @@
         "Keeps hoping despite low expectations; no endless policy monologues."
       ],
       "interests": "civic life, buses, family stories, repair videos",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-elder",
-        "regular-render"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-sect",
@@ -862,8 +697,7 @@
         "Demanding ideological standards, very unreliable attendance."
       ],
       "interests": "politics, group projects, soup, indie games",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-market",
@@ -878,11 +712,7 @@
         "Preaches independence but wants help carrying his desk."
       ],
       "interests": "commerce, furniture, travel, petty bureaucracy",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-elder-scrolls",
-        "regular-k"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-selective",
@@ -905,11 +735,7 @@
       "current": {
         "label": "On repeat",
         "value": "the same three pop songs"
-      },
-      "friendIds": [
-        "regular-prep",
-        "regular-reformed"
-      ]
+      }
     },
     {
       "id": "regular-archive",
@@ -924,8 +750,7 @@
         "Keeps everything but cannot find everyday items."
       ],
       "interests": "archives, cameras, old forums, reunions",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-gate",
@@ -948,10 +773,7 @@
       "current": {
         "label": "Reading",
         "value": "A Song of Ice and Fire"
-      },
-      "friendIds": [
-        "regular-fandom-baldurs-gate"
-      ]
+      }
     },
     {
       "id": "regular-newbie",
@@ -966,10 +788,7 @@
         "Accidentally asks the most politically charged question while trying to understand dinner seating."
       ],
       "interests": "edits, names, recaps, pets",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-marvel"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-fic",
@@ -993,10 +812,7 @@
       "current": {
         "label": "Making",
         "value": "chapter four (still)"
-      },
-      "friendIds": [
-        "regular-apolitical"
-      ]
+      }
     },
     {
       "id": "regular-ship",
@@ -1011,8 +827,7 @@
         "Loudly certain about headcanon but awkwardly shy when complimented."
       ],
       "interests": "relationships, tiny gestures, photo edits",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-unship",
@@ -1027,11 +842,7 @@
         "Says they're over it but still likes a reunion."
       ],
       "interests": "music, breakups, comedy, recovery",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-stranger-things",
-        "regular-north"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-queer",
@@ -1046,8 +857,7 @@
         "Can analyse silence in a scene and miss a friend's obvious hint."
       ],
       "interests": "literature, friendship, music, clothing",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-feminist",
@@ -1062,11 +872,7 @@
         "Patient with an honest question, impatient with recycled bad-faith takes."
       ],
       "interests": "characters, reality TV, friendship, reading",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-ledger",
-        "regular-u"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-scale",
@@ -1081,10 +887,7 @@
         "Wants everything quantified except the time spent arguing."
       ],
       "interests": "matchups, spreadsheets, snacks, games",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-ghibli"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-sport",
@@ -1099,11 +902,7 @@
         "Very certain about strategy; habitually late to watch it happen."
       ],
       "interests": "sport, food, rivalry, family",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-chain",
-        "regular-u"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-insta",
@@ -1118,8 +917,7 @@
         "Curated feed, chaotic room."
       ],
       "interests": "colours, plants, outfits, cafés",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-wellness",
@@ -1134,10 +932,7 @@
         "Recommends logging off while replying at unreasonable hours."
       ],
       "interests": "walks, relationships, sleep, comfort shows",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-warcraft"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-chain",
@@ -1154,11 +949,7 @@
       "interests": "family, cooking, flowers, television",
       "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
       "displayName": "Gülay",
-      "location": "Karadeniz",
-      "friendIds": [
-        "regular-poll",
-        "regular-sport"
-      ]
+      "location": "Karadeniz"
     },
     {
       "id": "regular-craft",
@@ -1173,8 +964,7 @@
         "Claims to be retired but cannot leave a fixable problem alone."
       ],
       "interests": "repairs, gardening, tea, journeys",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-elder",
@@ -1197,11 +987,7 @@
       "current": {
         "label": "Reading",
         "value": "another very long fantasy novel"
-      },
-      "friendIds": [
-        "regular-fandom-true-crime",
-        "regular-reform"
-      ]
+      }
     },
     {
       "id": "regular-divorced",
@@ -1216,10 +1002,7 @@
         "Cynical about grand promises, hopeful about small acts of care."
       ],
       "interests": "relationships, DIY, holidays, humour",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-tolkien"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-story",
@@ -1234,10 +1017,7 @@
         "Makes every story about themselves then is embarrassed about it."
       ],
       "interests": "old jobs, commuting, family mishaps",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-student"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-brand",
@@ -1252,8 +1032,7 @@
         "Demands professionalism in the feed, cannot maintain it in replies."
       ],
       "interests": "tourism, lunch breaks, reviews, royal reputation",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-literal",
@@ -1268,11 +1047,7 @@
         "Needs irony explained sometimes, spots bad arithmetic immediately."
       ],
       "interests": "creatures, rocks, maps, numbers",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-percy-jackson",
-        "regular-local"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-quiet",
@@ -1288,10 +1063,7 @@
       ],
       "interests": "music, night scrolling, family scenes",
       "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "displayName": "03:17",
-      "friendIds": [
-        "regular-fandom-doctor-who"
-      ]
+      "displayName": "03:17"
     },
     {
       "id": "regular-great",
@@ -1311,10 +1083,7 @@
       "current": {
         "label": "Playing",
         "value": "The Great Game"
-      },
-      "friendIds": [
-        "regular-m"
-      ]
+      }
     },
     {
       "id": "regular-doomer",
@@ -1329,10 +1098,7 @@
         "Intends to leave, stays for a sincere conversation."
       ],
       "interests": "recaps, work, snacks, sleep",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-dragon-ball"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-grammar",
@@ -1347,8 +1113,7 @@
         "Values precise words but uses vague excuses for being late."
       ],
       "interests": "language, food, puns, captions",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-poll",
@@ -1363,11 +1128,7 @@
         "Can organize ten opinions and still not choose lunch."
       ],
       "interests": "choices, parties, fandom opinions, snacks",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-chain",
-        "regular-fandom-twilight"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-bilingual",
@@ -1382,10 +1143,7 @@
         "Great at helping friends, chaotic with their own plans."
       ],
       "interests": "family humour, translation, bad dates, music",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-fandom-dnd"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-prep",
@@ -1400,10 +1158,7 @@
         "Always has a backup cable and somehow forgets the main device."
       ],
       "interests": "travel, chargers, weather, group outings",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": [
-        "regular-selective"
-      ]
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-optimist",
@@ -1418,8 +1173,7 @@
         "Hopeful about people but a sore loser at board games."
       ],
       "interests": "plants, friendship, crafts, baking",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
-      "friendIds": []
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
     },
     {
       "id": "regular-cosplay",
@@ -1442,11 +1196,7 @@
       "current": {
         "label": "Making",
         "value": "a sleeve that fits"
-      },
-      "friendIds": [
-        "regular-fandom-mythology",
-        "regular-legal"
-      ]
+      }
     },
     {
       "id": "regular-viltrumite",
@@ -1465,11 +1215,7 @@
       "fandoms": [
         "invincible"
       ],
-      "displayName": "oz",
-      "friendIds": [
-        "regular-fridgelore",
-        "regular-thinkmert"
-      ]
+      "displayName": "oz"
     },
     {
       "id": "regular-thinkmert",
@@ -1488,11 +1234,7 @@
       "fandoms": [
         "invincible"
       ],
-      "displayName": "mert",
-      "friendIds": [
-        "regular-club",
-        "regular-viltrumite"
-      ]
+      "displayName": "mert"
     },
     {
       "id": "regular-eveedit",
@@ -1515,8 +1257,7 @@
       "current": {
         "label": "Watching",
         "value": "Invincible"
-      },
-      "friendIds": []
+      }
     },
     {
       "id": "regular-cooked",
@@ -1539,11 +1280,7 @@
       "current": {
         "label": "Playing",
         "value": "the unfinished backlog"
-      },
-      "friendIds": [
-        "regular-fandom-twilight",
-        "regular-v"
-      ]
+      }
     },
     {
       "id": "regular-fridgelore",
@@ -1558,10 +1295,7 @@
         "Frequently bewildered by their own feed; capable of an earnest question or simple enjoyment."
       ],
       "interests": "odd captions, snacks, everyday mysteries, fantasy",
-      "postingStyle": "Rare and brief. Absurdity should connect to the specific caption; skip rather than force a joke.",
-      "friendIds": [
-        "regular-viltrumite"
-      ]
+      "postingStyle": "Rare and brief. Absurdity should connect to the specific caption; skip rather than force a joke."
     },
     {
       "id": "regular-fandom-star-wars",
@@ -1584,8 +1318,7 @@
         "label": "Watching",
         "value": "Star Wars"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-tolkien",
@@ -1608,11 +1341,7 @@
         "label": "Reading",
         "value": "The Lord of the Rings"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-divorced",
-        "regular-fandom-one-piece"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-harry-potter",
@@ -1634,8 +1363,7 @@
         "label": "Reading",
         "value": "a library stack"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-marvel",
@@ -1658,10 +1386,7 @@
         "label": "Watching",
         "value": "Marvel rewatches"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-newbie"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-dc",
@@ -1683,10 +1408,7 @@
         "label": "Reading",
         "value": "a borrowed comic"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-sims"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-batman",
@@ -1709,10 +1431,7 @@
         "label": "Playing",
         "value": "Batman: Arkham City"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-aesthetic"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-dune",
@@ -1735,8 +1454,7 @@
         "label": "Reading",
         "value": "Dune"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-star-trek",
@@ -1758,11 +1476,7 @@
         "label": "Watching",
         "value": "Star Trek: Deep Space Nine"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-hadestown",
-        "regular-maela"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-doctor-who",
@@ -1785,10 +1499,7 @@
         "label": "Making",
         "value": "a scarf"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-quiet"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-disney",
@@ -1810,10 +1521,7 @@
         "label": "Making",
         "value": "a holiday playlist"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-j"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-twilight",
@@ -1836,11 +1544,7 @@
         "label": "Watching",
         "value": "Twilight"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-cooked",
-        "regular-poll"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-hunger-games",
@@ -1862,8 +1566,7 @@
         "label": "Reading",
         "value": "The Hunger Games"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-percy-jackson",
@@ -1885,10 +1588,7 @@
         "label": "Reading",
         "value": "Percy Jackson"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-literal"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-breaking-bad",
@@ -1910,8 +1610,7 @@
         "label": "Watching",
         "value": "Better Call Saul"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-stranger-things",
@@ -1934,11 +1633,7 @@
         "label": "On repeat",
         "value": "an old mixtape"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-horror",
-        "regular-unship"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-friends",
@@ -1960,8 +1655,7 @@
         "label": "Watching",
         "value": "Friends"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-the-office",
@@ -1984,10 +1678,7 @@
         "label": "Watching",
         "value": "The Office"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-middle"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-nolan",
@@ -2009,10 +1700,7 @@
         "label": "Watching",
         "value": "The Prestige"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-souls"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-cinema",
@@ -2035,10 +1723,7 @@
         "label": "Watching",
         "value": "a weekend double bill"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-pirate"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-horror",
@@ -2060,10 +1745,7 @@
         "label": "Watching",
         "value": "a horror rewatch"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-stranger-things"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-anime",
@@ -2086,11 +1768,7 @@
         "label": "Watching",
         "value": "the unfinished watchlist"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-ecology",
-        "regular-fandom-epic"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-one-piece",
@@ -2112,10 +1790,7 @@
         "label": "Reading",
         "value": "One Piece"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-tolkien"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-naruto",
@@ -2137,11 +1812,7 @@
         "label": "On repeat",
         "value": "the night-bus playlist"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-d",
-        "regular-reformed"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-dragon-ball",
@@ -2163,10 +1834,7 @@
         "label": "Watching",
         "value": "Dragon Ball"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-doomer"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-pokemon",
@@ -2189,8 +1857,7 @@
         "label": "Playing",
         "value": "Pokémon"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-ghibli",
@@ -2213,10 +1880,7 @@
         "label": "Making",
         "value": "a recipe notebook"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-scale"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-atla",
@@ -2238,8 +1902,7 @@
         "label": "Watching",
         "value": "Avatar: The Last Airbender"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-arcane",
@@ -2262,10 +1925,7 @@
         "label": "Making",
         "value": "a sketchbook page"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-faith"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-league",
@@ -2287,8 +1947,7 @@
         "label": "Playing",
         "value": "League of Legends"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-minecraft",
@@ -2310,10 +1969,7 @@
         "label": "Playing",
         "value": "Minecraft"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-music"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-souls",
@@ -2336,10 +1992,7 @@
         "label": "Playing",
         "value": "Elden Ring"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-nolan"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-gta",
@@ -2361,10 +2014,7 @@
         "label": "Playing",
         "value": "Grand Theft Auto"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-sept"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-sims",
@@ -2387,10 +2037,7 @@
         "label": "Playing",
         "value": "The Sims"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-dc"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-zelda",
@@ -2413,11 +2060,7 @@
         "label": "Playing",
         "value": "The Legend of Zelda"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-musicals",
-        "regular-l"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-dnd",
@@ -2440,10 +2083,7 @@
         "label": "Making",
         "value": "session notes"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-bilingual"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-warhammer",
@@ -2465,8 +2105,7 @@
         "label": "Making",
         "value": "painted miniatures"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-warcraft",
@@ -2488,11 +2127,7 @@
         "label": "Playing",
         "value": "World of Warcraft"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-stardew",
-        "regular-wellness"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-fallout",
@@ -2515,8 +2150,7 @@
         "label": "Playing",
         "value": "Fallout"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-elder-scrolls",
@@ -2538,10 +2172,7 @@
         "label": "Playing",
         "value": "Skyrim"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-market"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-musicals",
@@ -2564,10 +2195,7 @@
         "label": "Making",
         "value": "rehearsal notes"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-zelda"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-hamilton",
@@ -2589,10 +2217,7 @@
         "label": "On repeat",
         "value": "Hamilton"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-lurk"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-epic",
@@ -2615,10 +2240,7 @@
         "label": "On repeat",
         "value": "EPIC: The Musical"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-anime"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-wicked",
@@ -2640,10 +2262,7 @@
         "label": "On repeat",
         "value": "Wicked"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-gym"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-hadestown",
@@ -2666,10 +2285,7 @@
         "label": "On repeat",
         "value": "Hadestown"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-star-trek"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-stephen-king",
@@ -2691,10 +2307,7 @@
         "label": "Reading",
         "value": "a Stephen King paperback"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-s"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-mythology",
@@ -2717,10 +2330,7 @@
         "label": "Reading",
         "value": "a mythology collection"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-cosplay"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-history",
@@ -2742,8 +2352,7 @@
         "label": "Reading",
         "value": "a history book"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-true-crime",
@@ -2766,10 +2375,7 @@
         "label": "Making",
         "value": "a crochet square"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-elder"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-disco-elysium",
@@ -2792,8 +2398,7 @@
         "label": "Playing",
         "value": "Disco Elysium"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": []
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-baldurs-gate",
@@ -2815,10 +2420,7 @@
         "label": "Playing",
         "value": "Baldur's Gate 3"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-gate"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-stardew",
@@ -2841,10 +2443,7 @@
         "label": "Playing",
         "value": "Stardew Valley"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-fandom-warcraft"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "regular-fandom-wrestling",
@@ -2866,10 +2465,7 @@
         "label": "Watching",
         "value": "old wrestling highlights"
       },
-      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota.",
-      "friendIds": [
-        "regular-anti"
-      ]
+      "postingStyle": "Gen Z by default unless the voice specifies otherwise. Skip unless the caption, verified scene, or conversation gives a natural reason to join. No compulsory reference, slogan, catchphrase, or comment quota."
     },
     {
       "id": "cast-jacaelon-targaryen",
@@ -2888,14 +2484,7 @@
         "type": "character",
         "characterId": "jacaelon-targaryen"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-alester-dayne",
-        "cast-lorenah-dayne",
-        "cast-maela-targaryen",
-        "cast-saera-targaryen",
-        "cast-visenor-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-gaelor-targaryen",
@@ -2914,11 +2503,7 @@
         "type": "character",
         "characterId": "gaelor-targaryen"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-naella-velaryon",
-        "cast-saathos-maris"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-visenor-targaryen",
@@ -2937,10 +2522,7 @@
         "type": "character",
         "characterId": "visenor-targaryen"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-jacaelon-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-alester-dayne",
@@ -2959,12 +2541,7 @@
         "type": "character",
         "characterId": "alester-dayne"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-jacaelon-targaryen",
-        "cast-lorenah-dayne",
-        "cast-saera-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-saera-targaryen",
@@ -2983,12 +2560,7 @@
         "type": "character",
         "characterId": "saera-targaryen"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-alester-dayne",
-        "cast-jacaelon-targaryen",
-        "cast-maela-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-baelenys-targaryen",
@@ -3007,8 +2579,7 @@
         "type": "character",
         "characterId": "baelenys-targaryen"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": []
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-lorenah-dayne",
@@ -3027,11 +2598,7 @@
         "type": "character",
         "characterId": "lorenah-dayne"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-alester-dayne",
-        "cast-jacaelon-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-naella-velaryon",
@@ -3050,10 +2617,7 @@
         "type": "character",
         "characterId": "naella-velaryon"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-gaelor-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "cast-maela-targaryen",
@@ -3072,11 +2636,7 @@
         "type": "character",
         "characterId": "maela-targaryen"
       },
-      "postingStyle": "Very rare: low editorial priority. Only appear when Maela herself is directly relevant; do not use her as the default sibling reply or insert her into general royal conversations.",
-      "friendIds": [
-        "cast-jacaelon-targaryen",
-        "cast-saera-targaryen"
-      ]
+      "postingStyle": "Very rare: low editorial priority. Only appear when Maela herself is directly relevant; do not use her as the default sibling reply or insert her into general royal conversations."
     },
     {
       "id": "cast-saathos-maris",
@@ -3095,10 +2655,7 @@
         "type": "character",
         "characterId": "saathos-maris"
       },
-      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically.",
-      "friendIds": [
-        "cast-gaelor-targaryen"
-      ]
+      "postingStyle": "Occasional relevant appearances; root comments or replies. All conversations involving a character are pinned automatically."
     },
     {
       "id": "institution-citadel",
@@ -3117,8 +2674,7 @@
         "type": "institution",
         "institutionId": "citadel"
       },
-      "postingStyle": "Rare, only relevant admin replies. Institution verification does not pin a conversation.",
-      "friendIds": []
+      "postingStyle": "Rare, only relevant admin replies. Institution verification does not pin a conversation."
     },
     {
       "id": "institution-city-watch",
@@ -3137,8 +2693,7 @@
         "type": "institution",
         "institutionId": "city-watch"
       },
-      "postingStyle": "One comment once in a while, no mandatory appearance on violence posts. Not automatically pinned.",
-      "friendIds": []
+      "postingStyle": "One comment once in a while, no mandatory appearance on violence posts. Not automatically pinned."
     }
   ],
   "comments": [
@@ -9735,6 +9290,30 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-alester-winterfell-window-raven-3",
+      "entryId": "gallery-alester-winterfell-window",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "the distance is the part that gets me",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-winterfell-window-raven-4",
+      "entryId": "gallery-alester-winterfell-window",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "A quiet scene can be the hardest one to sit with.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-winterfell-window-raven-5",
+      "entryId": "gallery-alester-winterfell-window",
+      "authorId": "regular-eveedit",
+      "parentId": null,
+      "body": "not even reaching for a joke on this one",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-the-oldtown-massacre-raven-1",
       "entryId": "gallery-the-oldtown-massacre",
       "authorId": "regular-fandom-true-crime",
@@ -9759,11 +9338,59 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-the-oldtown-massacre-raven-4",
+      "entryId": "gallery-the-oldtown-massacre",
+      "authorId": "regular-fandom-hunger-games",
+      "parentId": null,
+      "body": "really hard to go back to cheering for a house after this",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-the-oldtown-massacre-raven-5",
+      "entryId": "gallery-the-oldtown-massacre",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "some of these chapters need a walk afterwards",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-the-motley-three-raven-1",
       "entryId": "gallery-the-motley-three",
       "authorId": "regular-fandom-one-piece",
       "parentId": null,
       "body": "i get attached to a group so fast it is embarrassing",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-the-motley-three-raven-2",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-fandom-musicals",
+      "parentId": null,
+      "body": "the exclamation mark is doing a lot for my morale",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-the-motley-three-raven-3",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "three is a very good number for trouble",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-the-motley-three-raven-4",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "i would absolutely trust this party. this explains my campaigns",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-the-motley-three-raven-5",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-selective",
+      "parentId": null,
+      "body": "merryn has my attention",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -9831,11 +9458,59 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-alester-jace-fleabottom-raven-4",
+      "entryId": "gallery-alester-jace-fleabottom",
+      "authorId": "regular-fandom-baldurs-gate",
+      "parentId": null,
+      "body": "i like them more together than either of their solo drama",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-jace-fleabottom-raven-5",
+      "entryId": "gallery-alester-jace-fleabottom",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "starting to understand why everyone keeps posting these two",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-alester-jace-training-raven-1",
       "entryId": "gallery-alester-jace-training",
       "authorId": "regular-gym",
       "parentId": null,
       "body": "honestly just glad to get more of these two, bro",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-jace-training-raven-2",
+      "entryId": "gallery-alester-jace-training",
+      "authorId": "regular-fandom-naruto",
+      "parentId": null,
+      "body": "their dynamic works on me every time",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-jace-training-raven-3",
+      "entryId": "gallery-alester-jace-training",
+      "authorId": "regular-fandom-league",
+      "parentId": null,
+      "body": "jace and alester duo queue is the only queue i trust",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-jace-training-raven-4",
+      "entryId": "gallery-alester-jace-training",
+      "authorId": "regular-fandom-warcraft",
+      "parentId": null,
+      "body": "A familiar pair. Good to see them together.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-alester-jace-training-raven-5",
+      "entryId": "gallery-alester-jace-training",
+      "authorId": "regular-cooked",
+      "parentId": null,
+      "body": "me opening another jace alester post like i have other hobbies",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -9903,6 +9578,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-lorenah-jace-alester-proposal-raven-4",
+      "entryId": "gallery-lorenah-jace-alester-proposal",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "whose chapter do you go back to most out of these three?",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-lorenah-jace-alester-proposal-raven-5",
+      "entryId": "gallery-lorenah-jace-alester-proposal",
+      "authorId": "regular-fandom-twilight",
+      "parentId": "gallery-lorenah-jace-alester-proposal-raven-4",
+      "body": "lorenah lately. surprised myself a bit",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-vhaemys-jace-alester-breakfast-raven-1",
       "entryId": "gallery-vhaemys-jace-alester-breakfast",
       "authorId": "regular-fandom-stardew",
@@ -9935,11 +9626,51 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-vhaemys-jace-alester-breakfast-raven-5",
+      "entryId": "gallery-vhaemys-jace-alester-breakfast",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "a little more time with this trio is good",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-vhaemys-jace-alester-toy-raven-1",
       "entryId": "gallery-vhaemys-jace-alester-toy",
       "authorId": "regular-fandom-percy-jackson",
       "parentId": null,
       "body": "vhaemys with these two again :)",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-vhaemys-jace-alester-toy-raven-2",
+      "entryId": "gallery-vhaemys-jace-alester-toy",
+      "authorId": "regular-fic",
+      "parentId": null,
+      "body": "small moments do so much of the attachment work",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-vhaemys-jace-alester-toy-raven-3",
+      "entryId": "gallery-vhaemys-jace-alester-toy",
+      "authorId": "regular-fandom-harry-potter",
+      "parentId": null,
+      "body": "yeah this is exactly the kind of post i save",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-vhaemys-jace-alester-toy-raven-4",
+      "entryId": "gallery-vhaemys-jace-alester-toy",
+      "authorId": "regular-fandom-atla",
+      "parentId": null,
+      "body": "i have a weakness for a recurring trio",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-vhaemys-jace-alester-toy-raven-5",
+      "entryId": "gallery-vhaemys-jace-alester-toy",
+      "authorId": "regular-traditional",
+      "parentId": null,
+      "body": "A pleasure to see Vhaemys included as well.",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10007,11 +9738,59 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtoxzyds-raven-4",
+      "entryId": "gallery-mtoxzyds",
+      "authorId": "regular-fandom-warhammer",
+      "parentId": null,
+      "body": "Another one for the reference folder.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtoxzyds-raven-5",
+      "entryId": "gallery-mtoxzyds",
+      "authorId": "regular-apolitical",
+      "parentId": null,
+      "body": "this is what i came to the gallery for",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mtoxzqrz-raven-1",
       "entryId": "gallery-mtoxzqrz",
       "authorId": "regular-fandom-zelda",
       "parentId": null,
       "body": "jadefyre is such a good name",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtoxzqrz-raven-2",
+      "entryId": "gallery-mtoxzqrz",
+      "authorId": "regular-insta",
+      "parentId": null,
+      "body": "saving this one",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtoxzqrz-raven-3",
+      "entryId": "gallery-mtoxzqrz",
+      "authorId": "regular-fandom-mythology",
+      "parentId": null,
+      "body": "the dragon names here are half the appeal for me",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtoxzqrz-raven-4",
+      "entryId": "gallery-mtoxzqrz",
+      "authorId": "regular-fandom-anime",
+      "parentId": null,
+      "body": "yeah this gets its own tab",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtoxzqrz-raven-5",
+      "entryId": "gallery-mtoxzqrz",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "glad the dragons have individual entries",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10047,6 +9826,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtow0gb8-raven-5",
+      "entryId": "gallery-mtow0gb8",
+      "authorId": "regular-fandom-dune",
+      "parentId": null,
+      "body": "we really do meet him with so much history already attached",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mtow0c5n-raven-1",
       "entryId": "gallery-mtow0c5n",
       "authorId": "regular-fandom-horror",
@@ -10068,6 +9855,22 @@
       "authorId": "regular-fandom-batman",
       "parentId": null,
       "body": "the reputation alone is doing crowd control",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtow0c5n-raven-4",
+      "entryId": "gallery-mtow0c5n",
+      "authorId": "regular-literal",
+      "parentId": null,
+      "body": "the people who saw them are not ideal witnesses though",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtow0c5n-raven-5",
+      "entryId": "gallery-mtow0c5n",
+      "authorId": "regular-fandom-nolan",
+      "parentId": "gallery-mtow0c5n-raven-4",
+      "body": "okay that last point is going to stay with me",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10135,6 +9938,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtow03d3-raven-4",
+      "entryId": "gallery-mtow03d3",
+      "authorId": "regular-fandom-doctor-who",
+      "parentId": null,
+      "body": "and now i am sentimental about a dragon again",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtow03d3-raven-5",
+      "entryId": "gallery-mtow03d3",
+      "authorId": "regular-quiet",
+      "parentId": "gallery-mtow03d3-raven-4",
+      "body": "understandable, honestly",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mtow015w-raven-1",
       "entryId": "gallery-mtow015w",
       "authorId": "regular-fandom-dune",
@@ -10156,6 +9975,22 @@
       "authorId": "regular-fandom-disco-elysium",
       "parentId": null,
       "body": "the man and the symbol are hard to separate",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtow015w-raven-4",
+      "entryId": "gallery-mtow015w",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "I can see why that comparison works.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtow015w-raven-5",
+      "entryId": "gallery-mtow015w",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "good title. leaves room to sit with it",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10183,11 +10018,59 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtovzxh6-raven-4",
+      "entryId": "gallery-mtovzxh6",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Lovely to see the beginning. 💛",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzxh6-raven-5",
+      "entryId": "gallery-mtovzxh6",
+      "authorId": "regular-fandom-baldurs-gate",
+      "parentId": null,
+      "body": "knowing where they end up makes this hit harder",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mtovzwbm-raven-1",
       "entryId": "gallery-mtovzwbm",
       "authorId": "regular-fandom-history",
       "parentId": null,
       "body": "the throne as a record of force is a hell of an image",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzwbm-raven-2",
+      "entryId": "gallery-mtovzwbm",
+      "authorId": "regular-craft",
+      "parentId": null,
+      "body": "A chair with that much history is not really just furniture anymore.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzwbm-raven-3",
+      "entryId": "gallery-mtovzwbm",
+      "authorId": "regular-fandom-fallout",
+      "parentId": null,
+      "body": "interior design by conquest",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzwbm-raven-4",
+      "entryId": "gallery-mtovzwbm",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "would not volunteer to settle ownership of the individual swords",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzwbm-raven-5",
+      "entryId": "gallery-mtovzwbm",
+      "authorId": "regular-fandom-warhammer",
+      "parentId": null,
+      "body": "That is quite a collection to dust.",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10204,6 +10087,30 @@
       "authorId": "regular-fandom-ghibli",
       "parentId": null,
       "body": "that caption has a whole atmosphere on its own",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzqqe-raven-3",
+      "entryId": "gallery-mtovzqqe",
+      "authorId": "regular-fandom-stephen-king",
+      "parentId": null,
+      "body": "I would prefer a very ordinary streetlamp.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzqqe-raven-4",
+      "entryId": "gallery-mtovzqqe",
+      "authorId": "regular-fandom-dc",
+      "parentId": null,
+      "body": "visibility poor. survival instincts excellent",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzqqe-raven-5",
+      "entryId": "gallery-mtovzqqe",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "fog can keep whatever is in it",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10231,6 +10138,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtovznf3-raven-4",
+      "entryId": "gallery-mtovznf3",
+      "authorId": "regular-nihilist",
+      "parentId": null,
+      "body": "fine. maybe one reason to keep going",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovznf3-raven-5",
+      "entryId": "gallery-mtovznf3",
+      "authorId": "regular-fandom-friends",
+      "parentId": null,
+      "body": "A surprisingly achievable fantasy, for once.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mtovzji8-raven-1",
       "entryId": "gallery-mtovzji8",
       "authorId": "regular-fandom-dune",
@@ -10244,6 +10167,30 @@
       "authorId": "regular-fandom-hamilton",
       "parentId": null,
       "body": "the ambition is bigger than one lifetime",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzji8-raven-3",
+      "entryId": "gallery-mtovzji8",
+      "authorId": "regular-k",
+      "parentId": null,
+      "body": "A king should have a purpose beyond the next feast.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzji8-raven-4",
+      "entryId": "gallery-mtovzji8",
+      "authorId": "regular-fandom-history",
+      "parentId": "gallery-mtovzji8-raven-3",
+      "body": "purpose and consequences still need separate conversations",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovzji8-raven-5",
+      "entryId": "gallery-mtovzji8",
+      "authorId": "regular-fandom-star-trek",
+      "parentId": null,
+      "body": "A long view is useful. So is noticing who pays for it.",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10276,6 +10223,14 @@
       "authorId": "regular-scale",
       "parentId": null,
       "body": "reputation doing numbers",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtovz5fw-raven-5",
+      "entryId": "gallery-mtovz5fw",
+      "authorId": "regular-fridgelore",
+      "parentId": null,
+      "body": "imagine having to introduce yourself after that",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10327,11 +10282,75 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtj5wuc5-raven-2",
+      "entryId": "gallery-mtj5wuc5",
+      "authorId": "regular-fandom-hamilton",
+      "parentId": null,
+      "body": "the branding department had a good day",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5wuc5-raven-3",
+      "entryId": "gallery-mtj5wuc5",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "this one sticks with me",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5wuc5-raven-4",
+      "entryId": "gallery-mtj5wuc5",
+      "authorId": "regular-fandom-naruto",
+      "parentId": null,
+      "body": "i keep getting invested in jace despite myself",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5wuc5-raven-5",
+      "entryId": "gallery-mtj5wuc5",
+      "authorId": "regular-reformed",
+      "parentId": "gallery-mtj5wuc5-raven-4",
+      "body": "you are allowed to enjoy a character without filing a defence",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mtj5vqun-raven-1",
       "entryId": "gallery-mtj5vqun",
       "authorId": "regular-fandom-souls",
       "parentId": null,
       "body": "the title after the winged hand is brutal",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5vqun-raven-2",
+      "entryId": "gallery-mtj5vqun",
+      "authorId": "regular-fandom-arcane",
+      "parentId": null,
+      "body": "that change in wording hurt more than expected",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5vqun-raven-3",
+      "entryId": "gallery-mtj5vqun",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "Rough day. You still have to get back up.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5vqun-raven-4",
+      "entryId": "gallery-mtj5vqun",
+      "authorId": "regular-fandom-nolan",
+      "parentId": null,
+      "body": "the two titles work far too well together",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5vqun-raven-5",
+      "entryId": "gallery-mtj5vqun",
+      "authorId": "regular-eveedit",
+      "parentId": null,
+      "body": "need a minute between those two posts",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10348,6 +10367,30 @@
       "authorId": "regular-fandom-mythology",
       "parentId": null,
       "body": "it sounds curious rather than threatening. i like that",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5ooc5-raven-3",
+      "entryId": "gallery-mtj5ooc5",
+      "authorId": "regular-fandom-minecraft",
+      "parentId": null,
+      "body": "adding it to my increasingly unreasonable build list",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5ooc5-raven-4",
+      "entryId": "gallery-mtj5ooc5",
+      "authorId": "regular-apolitical",
+      "parentId": null,
+      "body": "more dragon posts is always a yes",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5ooc5-raven-5",
+      "entryId": "gallery-mtj5ooc5",
+      "authorId": "regular-fandom-zelda",
+      "parentId": null,
+      "body": "i opened the gallery for this and then forgot to leave",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10375,6 +10418,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mtj5nnr3-raven-4",
+      "entryId": "gallery-mtj5nnr3",
+      "authorId": "regular-fandom-disney",
+      "parentId": null,
+      "body": "The sightseeing queue would be dreadful.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mtj5nnr3-raven-5",
+      "entryId": "gallery-mtj5nnr3",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "i just like seeing dragons placed in their surroundings",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-msly5nxf-raven-1",
       "entryId": "gallery-msly5nxf",
       "authorId": "regular-lorenah",
@@ -10388,6 +10447,30 @@
       "authorId": "regular-fandom-wicked",
       "parentId": null,
       "body": "i always stop for lorenah",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly5nxf-raven-3",
+      "entryId": "gallery-msly5nxf",
+      "authorId": "regular-insta",
+      "parentId": null,
+      "body": "very glad this has its own entry",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly5nxf-raven-4",
+      "entryId": "gallery-msly5nxf",
+      "authorId": "regular-fandom-twilight",
+      "parentId": null,
+      "body": "i had a normal reaction. do not check my saved posts",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly5nxf-raven-5",
+      "entryId": "gallery-msly5nxf",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "one of my favourites here",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10412,6 +10495,22 @@
       "authorId": "regular-fandom-wrestling",
       "parentId": null,
       "body": "the pre-match confidence is half the event",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly2r2f-raven-4",
+      "entryId": "gallery-msly2r2f",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "i am feeling confident. historically a terrible sign",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly2r2f-raven-5",
+      "entryId": "gallery-msly2r2f",
+      "authorId": "regular-fandom-star-wars",
+      "parentId": "gallery-msly2r2f-raven-4",
+      "body": "please do not make that the horse's problem",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10447,6 +10546,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-msly0t5x-raven-5",
+      "entryId": "gallery-msly0t5x",
+      "authorId": "regular-anti",
+      "parentId": null,
+      "body": "okay i can let this one be nice",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-msly0ac8-raven-1",
       "entryId": "gallery-msly0ac8",
       "authorId": "regular-fandom-dune",
@@ -10460,6 +10567,30 @@
       "authorId": "regular-traditional",
       "parentId": null,
       "body": "The title carries a great deal with it.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly0ac8-raven-3",
+      "entryId": "gallery-msly0ac8",
+      "authorId": "regular-fandom-dc",
+      "parentId": null,
+      "body": "easy to forget how much of the cast orbits this man",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly0ac8-raven-4",
+      "entryId": "gallery-msly0ac8",
+      "authorId": "regular-fandom-the-office",
+      "parentId": null,
+      "body": "father and management. exhausting combination",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-msly0ac8-raven-5",
+      "entryId": "gallery-msly0ac8",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "i like the older generation getting room here",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10495,6 +10626,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mslxze5a-raven-5",
+      "entryId": "gallery-mslxze5a",
+      "authorId": "regular-s",
+      "parentId": null,
+      "body": "alester post. attendance taken",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mslvmmr9-raven-1",
       "entryId": "gallery-mslvmmr9",
       "authorId": "regular-naella",
@@ -10519,6 +10658,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mslvmmr9-raven-4",
+      "entryId": "gallery-mslvmmr9",
+      "authorId": "regular-fandom-percy-jackson",
+      "parentId": null,
+      "body": "this is one of the pages i keep coming back to",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mslvmmr9-raven-5",
+      "entryId": "gallery-mslvmmr9",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "happy this one is in the archive",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mslvk81f-raven-1",
       "entryId": "gallery-mslvk81f",
       "authorId": "regular-fandom-harry-potter",
@@ -10540,6 +10695,22 @@
       "authorId": "regular-fandom-sims",
       "parentId": null,
       "body": "opening her character page again like anything has changed",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mslvk81f-raven-4",
+      "entryId": "gallery-mslvk81f",
+      "authorId": "regular-queer",
+      "parentId": null,
+      "body": "she holds my attention without needing the loudest scene",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mslvk81f-raven-5",
+      "entryId": "gallery-mslvk81f",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Lovely, Lorenah. 🌼",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10575,6 +10746,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mslv7yau-raven-5",
+      "entryId": "gallery-mslv7yau",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "This is why people come to a tilt.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mria3lqb-raven-1",
       "entryId": "gallery-mria3lqb",
       "authorId": "regular-fandom-star-wars",
@@ -10604,6 +10783,14 @@
       "authorId": "regular-fandom-hunger-games",
       "parentId": null,
       "body": "being born into the spectacle is its own problem",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mria3lqb-raven-5",
+      "entryId": "gallery-mria3lqb",
+      "authorId": "regular-fandom-one-piece",
+      "parentId": null,
+      "body": "i get attached to all of them and then complain about the stress",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10668,6 +10855,22 @@
       "authorId": "regular-insta",
       "parentId": null,
       "body": "keeping this one",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mria2tr6-raven-4",
+      "entryId": "gallery-mria2tr6",
+      "authorId": "regular-grammar",
+      "parentId": null,
+      "body": "two words, very effective",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mria2tr6-raven-5",
+      "entryId": "gallery-mria2tr6",
+      "authorId": "regular-fandom-doctor-who",
+      "parentId": null,
+      "body": "a little too attached to saera at this point",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10743,6 +10946,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mria1c10-raven-5",
+      "entryId": "gallery-mria1c10",
+      "authorId": "regular-fandom-minecraft",
+      "parentId": null,
+      "body": "me checking my build from spectator mode",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri9y5u6-raven-1",
       "entryId": "gallery-mri9y5u6",
       "authorId": "regular-v",
@@ -10775,6 +10986,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri9y5u6-raven-5",
+      "entryId": "gallery-mri9y5u6",
+      "authorId": "regular-fandom-breaking-bad",
+      "parentId": null,
+      "body": "this is not a duo i would give my password to",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri9xkcb-raven-1",
       "entryId": "gallery-mri9xkcb",
       "authorId": "regular-fandom-hamilton",
@@ -10796,6 +11015,22 @@
       "authorId": "regular-career",
       "parentId": null,
       "body": "Visibility is not the same as a sustainable workload. For once I mean that.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9xkcb-raven-4",
+      "entryId": "gallery-mri9xkcb",
+      "authorId": "regular-fandom-star-trek",
+      "parentId": null,
+      "body": "Responsibility is a less glamorous word than power.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9xkcb-raven-5",
+      "entryId": "gallery-mri9xkcb",
+      "authorId": "regular-fandom-fallout",
+      "parentId": null,
+      "body": "the onboarding must be atrocious",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -10863,6 +11098,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri9q1l1-raven-4",
+      "entryId": "gallery-mri9q1l1",
+      "authorId": "regular-fandom-hadestown",
+      "parentId": null,
+      "body": "no clever comment today",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9q1l1-raven-5",
+      "entryId": "gallery-mri9q1l1",
+      "authorId": "regular-fic",
+      "parentId": null,
+      "body": "yeah. letting this one sit",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri9p5oh-raven-1",
       "entryId": "gallery-mri9p5oh",
       "authorId": "regular-fandom-doctor-who",
@@ -10892,6 +11143,14 @@
       "authorId": "regular-eveedit",
       "parentId": null,
       "body": "the alester posts are taking a toll today",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9p5oh-raven-5",
+      "entryId": "gallery-mri9p5oh",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "hoping for a gentler moment for them",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -11039,6 +11298,22 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri9ihjh-raven-4",
+      "entryId": "gallery-mri9ihjh",
+      "authorId": "regular-fandom-hamilton",
+      "parentId": null,
+      "body": "i keep coming back to this character",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9ihjh-raven-5",
+      "entryId": "gallery-mri9ihjh",
+      "authorId": "regular-fandom-naruto",
+      "parentId": null,
+      "body": "same. the messy ones get you",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri9hjbo-raven-1",
       "entryId": "gallery-mri9hjbo",
       "authorId": "regular-food",
@@ -11063,11 +11338,59 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri9hjbo-raven-4",
+      "entryId": "gallery-mri9hjbo",
+      "authorId": "regular-fandom-stardew",
+      "parentId": null,
+      "body": "this is the kind of downtime i want more of",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9hjbo-raven-5",
+      "entryId": "gallery-mri9hjbo",
+      "authorId": "regular-fandom-gta",
+      "parentId": null,
+      "body": "i would still manage to turn this into a complicated evening",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri9cqw8-raven-1",
       "entryId": "gallery-mri9cqw8",
       "authorId": "regular-fandom-ghibli",
       "parentId": null,
       "body": "dornish meadows sound like somewhere i would lose an afternoon",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-raven-2",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "let them have the quiet for a little longer",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-raven-3",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-wellness",
+      "parentId": null,
+      "body": "yes to a day that does not involve court",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-raven-4",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-fandom-elder-scrolls",
+      "parentId": null,
+      "body": "i would immediately forget the main quest here",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-raven-5",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "An excellent place for a walk. Take water.",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -11103,6 +11426,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri9bsbh-raven-5",
+      "entryId": "gallery-mri9bsbh",
+      "authorId": "regular-fandom-epic",
+      "parentId": null,
+      "body": "some duos just make the whole story land",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri900nu-raven-1",
       "entryId": "gallery-mri900nu",
       "authorId": "regular-shield",
@@ -11116,6 +11447,30 @@
       "authorId": "regular-fandom-warcraft",
       "parentId": null,
       "body": "An evening off would be nice.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri900nu-raven-3",
+      "entryId": "gallery-mri900nu",
+      "authorId": "regular-fandom-breaking-bad",
+      "parentId": null,
+      "body": "gaelor in an alehouse is not helping my sense of calm",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri900nu-raven-4",
+      "entryId": "gallery-mri900nu",
+      "authorId": "regular-pirate",
+      "parentId": null,
+      "body": "A quiet drink. That should not be an ambitious request.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri900nu-raven-5",
+      "entryId": "gallery-mri900nu",
+      "authorId": "regular-fandom-dnd",
+      "parentId": "gallery-mri900nu-raven-4",
+      "body": "it is with this party",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -11191,6 +11546,14 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri8wt4w-raven-5",
+      "entryId": "gallery-mri8wt4w",
+      "authorId": "regular-fandom-cinema",
+      "parentId": null,
+      "body": "glad this has room to be complicated",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-mri8tg1j-raven-1",
       "entryId": "gallery-mri8tg1j",
       "authorId": "regular-naella",
@@ -11204,6 +11567,30 @@
       "authorId": "regular-fandom-wicked",
       "parentId": null,
       "body": "the two names deserve equal attention",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri8tg1j-raven-3",
+      "entryId": "gallery-mri8tg1j",
+      "authorId": "regular-fandom-dune",
+      "parentId": null,
+      "body": "titles make even a pair of people feel like a political statement",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri8tg1j-raven-4",
+      "entryId": "gallery-mri8tg1j",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "I keep rereading their part of the story.",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-mri8tg1j-raven-5",
+      "entryId": "gallery-mri8tg1j",
+      "authorId": "regular-fandom-percy-jackson",
+      "parentId": null,
+      "body": "still figuring out how i feel about them",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -11279,11 +11666,51 @@
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
+      "id": "gallery-mri8qxl2-raven-5",
+      "entryId": "gallery-mri8qxl2",
+      "authorId": "regular-fandom-dc",
+      "parentId": null,
+      "body": "that is why the family parts interest me most",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
       "id": "gallery-001-raven-1",
       "entryId": "gallery-001",
       "authorId": "regular-fandom-one-piece",
       "parentId": null,
       "body": "getting attached to the whole group was my first mistake",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-001-raven-2",
+      "entryId": "gallery-001",
+      "authorId": "regular-fandom-star-wars",
+      "parentId": null,
+      "body": "the family is the story and the problem",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-001-raven-3",
+      "entryId": "gallery-001",
+      "authorId": "regular-fandom-hunger-games",
+      "parentId": null,
+      "body": "children and dynastic expectations. never an easy combination",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-001-raven-4",
+      "entryId": "gallery-001",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "i like having them all together in the archive",
+      "publishedAt": "2026-09-10T07:51:49.179Z"
+    },
+    {
+      "id": "gallery-001-raven-5",
+      "entryId": "gallery-001",
+      "authorId": "regular-fandom-stranger-things",
+      "parentId": null,
+      "body": "i am sure my investment in this family will be emotionally affordable",
       "publishedAt": "2026-09-10T07:51:49.179Z"
     },
     {
@@ -11309,6 +11736,1616 @@
       "parentId": null,
       "body": "came back to this and it is somehow worse the second time",
       "publishedAt": "2026-09-11T20:50:00.000Z"
+    },
+    {
+      "id": "gallery-alester-winterfell-window-variety-1",
+      "entryId": "gallery-alester-winterfell-window",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": null,
+      "body": "sometimes the kindest moment for one person is the hardest to watch for another",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-the-oldtown-massacre-variety-1",
+      "entryId": "gallery-the-oldtown-massacre",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "The smaller names in a tragedy are still people. I am glad the archive keeps them.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-the-motley-three-variety-1",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-fandom-wrestling",
+      "parentId": null,
+      "body": "i always get attached before i remember what story i am reading",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-the-motley-three-variety-2",
+      "entryId": "gallery-the-motley-three",
+      "authorId": "regular-reformed",
+      "parentId": "gallery-the-motley-three-variety-1",
+      "body": "knowing better has never once helped me with that",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-alester-jace-fleabottom-variety-1",
+      "entryId": "gallery-alester-jace-fleabottom",
+      "authorId": "regular-fandom-atla",
+      "parentId": null,
+      "body": "they have completely taken over my gallery browsing",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-alester-jace-training-variety-1",
+      "entryId": "gallery-alester-jace-training",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "these two keep making me care about the bits between the big events",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-alester-jace-training-variety-2",
+      "entryId": "gallery-alester-jace-training",
+      "authorId": "regular-fandom-baldurs-gate",
+      "parentId": "gallery-alester-jace-training-variety-1",
+      "body": "the bits between are usually where they get you",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-grance-myles-variety-1",
+      "entryId": "gallery-grance-myles",
+      "authorId": "regular-fandom-warcraft",
+      "parentId": null,
+      "body": "Always appreciate a reminder that the supporting cast has a life too.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-lorenah-jace-alester-proposal-variety-1",
+      "entryId": "gallery-lorenah-jace-alester-proposal",
+      "authorId": "regular-feminist",
+      "parentId": null,
+      "body": "lorenah being here makes the whole dynamic more interesting to me",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-lorenah-jace-alester-proposal-variety-2",
+      "entryId": "gallery-lorenah-jace-alester-proposal",
+      "authorId": "regular-naella",
+      "parentId": "gallery-lorenah-jace-alester-proposal-variety-1",
+      "body": "same. i like when there are more perspectives than just the prince",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-vhaemys-jace-alester-breakfast-variety-1",
+      "entryId": "gallery-vhaemys-jace-alester-breakfast",
+      "authorId": "regular-fandom-friends",
+      "parentId": null,
+      "body": "I could happily spend more time with this part of the cast.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtoy01sa-variety-1",
+      "entryId": "gallery-mtoy01sa",
+      "authorId": "regular-fandom-zelda",
+      "parentId": null,
+      "body": "opened one dragon entry and lost my original train of thought",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtoy01sa-variety-2",
+      "entryId": "gallery-mtoy01sa",
+      "authorId": "regular-fandom-minecraft",
+      "parentId": "gallery-mtoy01sa-variety-1",
+      "body": "you had an original train of thought? impressive",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtoxzyds-variety-1",
+      "entryId": "gallery-mtoxzyds",
+      "authorId": "regular-fandom-anime",
+      "parentId": null,
+      "body": "the dragon side of this archive is dangerous for my free time",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtoxzqrz-variety-1",
+      "entryId": "gallery-mtoxzqrz",
+      "authorId": "regular-fandom-ghibli",
+      "parentId": null,
+      "body": "i keep coming back to jadefyre for no complicated reason",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtow0gb8-variety-1",
+      "entryId": "gallery-mtow0gb8",
+      "authorId": "regular-fandom-epic",
+      "parentId": null,
+      "body": "meeting the younger version after knowing the older one always gets me",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtow0gb8-variety-2",
+      "entryId": "gallery-mtow0gb8",
+      "authorId": "regular-fandom-hamilton",
+      "parentId": "gallery-mtow0gb8-variety-1",
+      "body": "suddenly the titles feel very far away",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtow0c5n-variety-1",
+      "entryId": "gallery-mtow0c5n",
+      "authorId": "regular-fandom-warhammer",
+      "parentId": null,
+      "body": "A reputation like that saves a great deal of introduction.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtow081l-variety-1",
+      "entryId": "gallery-mtow081l",
+      "authorId": "regular-fandom-dragon-ball",
+      "parentId": null,
+      "body": "the dragonbreath versus the drowned servant sounds like nobody is having a normal day",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtow081l-variety-2",
+      "entryId": "gallery-mtow081l",
+      "authorId": "regular-thinkmert",
+      "parentId": "gallery-mtow081l-variety-1",
+      "body": "my normal day ended when i opened the gallery",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtow03d3-variety-1",
+      "entryId": "gallery-mtow03d3",
+      "authorId": "regular-fandom-ghibli",
+      "parentId": null,
+      "body": "this one feels worth coming back to after the louder scenes",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtovznf3-variety-1",
+      "entryId": "gallery-mtovznf3",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Walnuts, a view, and no urgent business. That sounds lovely.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtovznf3-variety-2",
+      "entryId": "gallery-mtovznf3",
+      "authorId": "regular-traditional",
+      "parentId": "gallery-mtovznf3-variety-1",
+      "body": "The no urgent business part is essential.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtovzji8-variety-1",
+      "entryId": "gallery-mtovzji8",
+      "authorId": "regular-fandom-disco-elysium",
+      "parentId": null,
+      "body": "i keep wondering where devotion ends and having no other way to live begins",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtj61vlo-variety-1",
+      "entryId": "gallery-mtj61vlo",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "the potential for an extremely long argument is immense",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtj61vlo-variety-2",
+      "entryId": "gallery-mtj61vlo",
+      "authorId": "regular-great",
+      "parentId": "gallery-mtj61vlo-variety-1",
+      "body": "i would not introduce a rules dispute into that room",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtj5wuc5-variety-1",
+      "entryId": "gallery-mtj5wuc5",
+      "authorId": "regular-fandom-marvel",
+      "parentId": null,
+      "body": "sometimes a title just works. this is one of those",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtj5vqun-variety-1",
+      "entryId": "gallery-mtj5vqun",
+      "authorId": "regular-fandom-naruto",
+      "parentId": null,
+      "body": "you get attached and then even the gallery captions start landing hits",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtj5vqun-variety-2",
+      "entryId": "gallery-mtj5vqun",
+      "authorId": "regular-reformed",
+      "parentId": "gallery-mtj5vqun-variety-1",
+      "body": "should have known the archive was not a safe zone",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mtj5nnr3-variety-1",
+      "entryId": "gallery-mtj5nnr3",
+      "authorId": "regular-fandom-minecraft",
+      "parentId": null,
+      "body": "the scale of a city gets a lot more interesting when there is a dragon above it",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-msly2r2f-variety-1",
+      "entryId": "gallery-msly2r2f",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "hope the preparation includes knowing when to stop, bro",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-msly2r2f-variety-2",
+      "entryId": "gallery-msly2r2f",
+      "authorId": "regular-horse",
+      "parentId": "gallery-msly2r2f-variety-1",
+      "body": "this. for the rider and the horse",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-msly0t5x-variety-1",
+      "entryId": "gallery-msly0t5x",
+      "authorId": "regular-fandom-one-piece",
+      "parentId": null,
+      "body": "this is exactly how i trick myself into hoping everyone can get along",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mslxze5a-variety-1",
+      "entryId": "gallery-mslxze5a",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "finally a pair i would trust with the practical part of the plan",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mslxze5a-variety-2",
+      "entryId": "gallery-mslxze5a",
+      "authorId": "regular-supply",
+      "parentId": "gallery-mslxze5a-variety-1",
+      "body": "someone still has to ask what the practical part costs",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mslvmmr9-variety-1",
+      "entryId": "gallery-mslvmmr9",
+      "authorId": "regular-fandom-twilight",
+      "parentId": null,
+      "body": "glad to get a naella post where i can just think about naella",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mria39tk-variety-1",
+      "entryId": "gallery-mria39tk",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "I am increasingly here for Saera on her own terms.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mria39tk-variety-2",
+      "entryId": "gallery-mria39tk",
+      "authorId": "regular-elder",
+      "parentId": "gallery-mria39tk-variety-1",
+      "body": "That is usually when a character becomes most interesting.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri9y5u6-variety-1",
+      "entryId": "gallery-mri9y5u6",
+      "authorId": "regular-fandom-the-office",
+      "parentId": null,
+      "body": "neither half of that title sounds like an easy person to share a meeting with",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-variety-1",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-fandom-stardew",
+      "parentId": null,
+      "body": "i would like the plot to leave them here for one afternoon",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri9cqw8-variety-2",
+      "entryId": "gallery-mri9cqw8",
+      "authorId": "regular-fandom-harry-potter",
+      "parentId": "gallery-mri9cqw8-variety-1",
+      "body": "one afternoon. i feel like we are being very reasonable",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri900nu-variety-1",
+      "entryId": "gallery-mri900nu",
+      "authorId": "regular-fandom-the-office",
+      "parentId": null,
+      "body": "i hope saathos at least gets to finish his drink before the next problem",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri8wt4w-variety-1",
+      "entryId": "gallery-mri8wt4w",
+      "authorId": "regular-fandom-wicked",
+      "parentId": null,
+      "body": "i am interested in the awkward parts as much as the nice ones",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri8wt4w-variety-2",
+      "entryId": "gallery-mri8wt4w",
+      "authorId": "regular-fandom-musicals",
+      "parentId": "gallery-mri8wt4w-variety-1",
+      "body": "honestly that is usually where the story is",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    },
+    {
+      "id": "gallery-mri8qxl2-variety-1",
+      "entryId": "gallery-mri8qxl2",
+      "authorId": "regular-fandom-star-trek",
+      "parentId": null,
+      "body": "An impressive reputation is not necessarily a comfortable thing to live beside.",
+      "publishedAt": "2026-09-10T08:31:11.930Z"
+    }
+  ],
+  "relationships": [
+    {
+      "users": [
+        "regular-music",
+        "regular-render"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Established edit-making friends; soundtrack suggestions and practical feedback."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-b",
+        "regular-food"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Food and sensible outings are a comfortable shared topic."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-b",
+        "regular-sept"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Both care about safety and manners; warm, unhurried conversation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-b",
+        "regular-e"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "The literal uncle sometimes makes the deadpan regular laugh; their warmth is not factional."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-b",
+        "regular-lurk"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Patient replies give the shy regular room to join in."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-ledger",
+        "regular-u"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Agree on unpaid work without agreeing on every political remedy."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-feminist",
+        "regular-u"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Comfortable allies who can disagree about their favourite characters."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-archive",
+        "regular-l"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Trust each other to separate public story facts from interpretation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-grad",
+        "regular-l"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Fact-checking and thematic reading complement each other."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-d",
+        "regular-odds"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Derrin optimism gives them common ground; neither is a reliable predictor."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-cooked",
+        "regular-v"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Shared self-deprecating gaming humour, not blind agreement on Visenor."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-ecology",
+        "regular-supply"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Dragon upkeep and implausible travel plans are a recurring shared interest."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-gym",
+        "regular-horse"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Practical care and sensible limits matter more to both than intimidation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-it",
+        "regular-ledger"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Work frustrations connect them without needing every reply to be a work joke."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-club",
+        "regular-elder"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Comfortable reading companions, especially for quieter character scenes."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-club",
+        "regular-fic"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Enjoy emotional discussion; fanfic remains clearly separate from canon."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-grad",
+        "regular-student"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Procrastination and gentle reminders; not a teacher-student relationship."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-insta",
+        "regular-maela"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Shared style interests, with plenty of ordinary chat outside Maela."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-warcraft",
+        "regular-shield"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Reliable companions and support roles matter to both."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-local",
+        "regular-pirate"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Care about everyday people and practical inconveniences."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-north",
+        "regular-prep"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Dry travel complaints meet practical preparation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-breaking-bad",
+        "regular-legal"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Enjoy dismantling implausible excuses without pretending to give legal advice."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-aesthetic",
+        "regular-fandom-batman"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Theatrical taste and ordinary forgetfulness; neither excuses cruelty for aesthetics."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-doomer",
+        "regular-nihilist"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Share tired humour but know when the other needs a sincere reply."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-reformed",
+        "regular-selective"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Can admit a bad take and move on without keeping score."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-the-office",
+        "regular-middle"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Mundane pet peeves and understated sarcasm, not endless mediation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-apolitical",
+        "regular-fandom-pokemon"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Dragon enthusiasm and small observations; little appetite for faction wars."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-chain",
+        "regular-traditional"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Warm family and food chat; not automatic agreement on every tradition."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-faith",
+        "regular-reform"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Sincere concern for ordinary people survives disagreements about institutions."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-craft",
+        "regular-market"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Practical projects and unsolicited help carrying things."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-archive",
+        "regular-gate"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Long-time reading habits, with different levels of patience for new fans."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-star-trek",
+        "regular-newbie"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Patient explanations without turning every exchange into instruction."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fic",
+        "regular-queer"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Interpretation and gentler imagined outcomes; no invented canon proof."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-divorced",
+        "regular-unship"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Disappointed by grand promises, still soft about small acts of care."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-feminist",
+        "regular-naella"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Both dislike women being treated as accessories to a prince."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-scale",
+        "regular-viltrumite"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Can enjoy hypothetical matchups and concede when a joke lands."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-odds",
+        "regular-sport"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Sports-style commentary; imaginary bets are not real gambling activity."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-optimist",
+        "regular-wellness"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Warm encouragement, with permission not to find an upside in grief."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-cosplay",
+        "regular-craft"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Making things is comfortable common ground across generations."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-story",
+        "regular-student"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Ordinary distractions and slightly wandering anecdotes."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-percy-jackson",
+        "regular-literal"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Sincere questions are welcome; neither needs constant ironic fluency."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-music",
+        "regular-quiet"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "A shared music interest can stay quiet rather than becoming public banter."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-dnd",
+        "regular-great"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Enjoy group games without pretending the site card game uses tabletop rules."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-bilingual",
+        "regular-grammar"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Language play is occasional; most conversation is ordinary."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-twilight",
+        "regular-poll"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Comfortable asking small questions and admitting indecision."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-thinkmert",
+        "regular-viltrumite"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Invincible jokes, plus genuine reactions when the mood turns."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-eveedit",
+        "regular-render"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Edit craft and emotional scenes, without mandatory superhero references."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-cooked",
+        "regular-fridgelore"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Absurd jokes usually aimed at themselves rather than each other."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-atla",
+        "regular-fandom-star-wars"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Messy families and people trying to grow; not a franchise debate club."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-one-piece",
+        "regular-fandom-tolkien"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Friendships and journeys appeal to both despite very different favourites."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-harry-potter",
+        "regular-fandom-stardew"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Comfort media and ordinary life, without requiring nostalgia agreement."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-dc",
+        "regular-fandom-marvel"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Enjoy each other more than franchise rivalry; no compulsory DC versus Marvel fights."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-dune",
+        "regular-fandom-history"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Qualified discussion of power and expectations, with room for short jokes."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-doctor-who",
+        "regular-fandom-hadestown"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Shared softness about departures, not a stream of lyrics or references."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-disney",
+        "regular-fandom-friends"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Comfort viewing and the small irritations of group plans."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-fallout",
+        "regular-fandom-hunger-games"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Attention to the people beneath political spectacle."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-horror",
+        "regular-fandom-stranger-things"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Nervous humour and attachment to ensembles."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-cinema",
+        "regular-fandom-nolan"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Can overthink a scene together and still enjoy a silly edit."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-anime",
+        "regular-fandom-ghibli"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Enjoy quiet scenes without demanding the same tastes in everything."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-dragon-ball",
+        "regular-fandom-naruto"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Friendly competition, with enough trust to admit an overstatement."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-league",
+        "regular-fandom-souls"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Rueful gaming chat; not constant insults about skill."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-minecraft",
+        "regular-fandom-zelda"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Exploring and making places comfortable."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-gta",
+        "regular-fandom-sims"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Ordinary plans going sideways is a shared source of amusement."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-cosplay",
+        "regular-fandom-warhammer"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Patient craft talk can cross hobbies without forcing a collaboration claim."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-baldurs-gate",
+        "regular-fandom-elder-scrolls"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Party stories, wandering and getting distracted."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-musicals",
+        "regular-fandom-wicked"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Performance and friendship, with no obligatory song quotations."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-epic",
+        "regular-fandom-hamilton"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Ambition and difficult choices are shared interests, not mandatory references."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-stephen-king",
+        "regular-fandom-true-crime"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Both know unease is different from making victims a joke."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-mythology",
+        "regular-fandom-tolkien"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Curious readers who keep adaptations separate from source traditions."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-arcane",
+        "regular-fandom-disco-elysium"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Introspective reactions to strained relationships."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-wrestling",
+        "regular-sport"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Enjoy theatrical rivalries without confusing them with personal hostility."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-j",
+        "regular-s"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "Explicitly friendly rivalry over Alester appreciation; neither actually wants the other gone."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-k",
+        "regular-u"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "Political arguments continue, but food and ordinary city frustrations have built mutual fondness."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-g",
+        "regular-m"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "The PR jokes annoy the stan briefly, but these two can laugh together. No approval of cruelty."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-m",
+        "regular-v"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "Strategic-disconnect excuses are a running joke both can participate in."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-a",
+        "regular-l"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "Arithmetic corrections are affectionate exasperation rather than genuine hostility."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-lorenah",
+        "regular-naella"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "Different favourites, shared dislike of wives and sisters being treated as props."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-ship",
+        "regular-unship"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "One overreads everything, the other rolls their eyes; both still enjoy the conversation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-fandom-naruto",
+        "regular-reformed"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friendly-banter",
+          "note": "Rivalry jokes can bait a draft, but they know when to stop."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-g",
+        "regular-u"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "Gaelor apologism versus concern for victims has become genuine irritation, not friendly sparring."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-anti",
+        "regular-g"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "The anti-fan and defensive stan do not enjoy each other. No mutual friendship."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-g",
+        "regular-j"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "Factional one-upmanship is not evidence of liking each other."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-d",
+        "regular-l"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "Repeated conspiracy claims have worn down the maester; corrections are not a friendship."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-sect",
+        "regular-u"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "The sectarian account treats breadpilled as insufficiently committed; the feeling is exhausting."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-j",
+        "regular-lorenah"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "Jace-centric framing is a real source of annoyance; do not call it friendship yet."
+        }
+      ]
+    },
+    {
+      "users": [
+        "regular-g",
+        "regular-legal"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "rivals",
+          "note": "Needling the apologetics is pointed disagreement, not an offer to be their lawyer or friend."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-jacaelon-targaryen",
+        "cast-lorenah-dayne"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-jacaelon-targaryen",
+        "cast-maela-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-jacaelon-targaryen",
+        "cast-saera-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-jacaelon-targaryen",
+        "cast-visenor-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-gaelor-targaryen",
+        "cast-naella-velaryon"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-gaelor-targaryen",
+        "cast-saathos-maris"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-alester-dayne",
+        "cast-jacaelon-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-alester-dayne",
+        "cast-lorenah-dayne"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-alester-dayne",
+        "cast-saera-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
+    },
+    {
+      "users": [
+        "cast-maela-targaryen",
+        "cast-saera-targaryen"
+      ],
+      "history": [
+        {
+          "at": "2026-09-10T08:23:36.980Z",
+          "kind": "friends",
+          "note": "Existing fictional social-AU connection; no new canon outcome or private revelation."
+        }
+      ]
     }
   ]
 }

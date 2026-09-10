@@ -6,6 +6,15 @@
 .thread, .replies { list-style: none; padding: 0; margin: 0; }
 .comment { margin-top: 17px; min-width: 0; }
 .comment { scroll-margin-block: 80px; }
+.friends { margin-top: 5px; }
+.friendToggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 0; border: 0; background: transparent; color: var(--gold); font: 12px system-ui; cursor: pointer; }
+.friendToggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.friendPanel { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+.friendList { list-style: none; margin: 0; padding: 0; }
+.friendAccount summary { gap: 8px; }
+.friendAvatar { display: grid; place-items: center; width: 24px; height: 24px; flex-shrink: 0; border-radius: 7px; color: white; font: 11px system-ui; }
+.friendBio { padding: 5px 0 10px 32px; overflow-wrap: anywhere; font: 12px/1.6 system-ui; }
+.friendBio strong { display: block; margin-bottom: 5px; }
 .comment[data-highlighted="true"] { outline: 2px solid #cbaa67; outline-offset: 5px; border-radius: 8px; }
 .pinned { padding: 12px; border: 1px solid #8fbef440; border-radius: 10px; background: #8fbef407; }
 .pinLabel { color: #a2bfe0; font: 11px/1.5 system-ui; margin-bottom: 5px; }

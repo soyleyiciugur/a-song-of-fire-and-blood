@@ -9,6 +9,7 @@ export interface GutterUser {
   pronouns?: string;
   location?: string;
   friendCount?: number;
+  friendIds?: string[];
   current?: { label: "Reading" | "Watching" | "Playing" | "On repeat" | "Making"; value: string };
   account?: { type: "character"; characterId: string } | { type: "institution"; institutionId: string };
 }

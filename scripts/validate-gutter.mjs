@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import assert from "node:assert/strict";
+import { communityFriendships } from '../lib/communityRelationships.mjs';
 
 const read = (name) => JSON.parse(fs.readFileSync(new URL(`../data/${name}`, import.meta.url), "utf8"));
 const gallery = read("gallery.json");
-const { version, users, comments } = read("flea-bottom.json");
+const { version, users, comments, relationships } = read("flea-bottom.json");
 const fandoms = read("flea-bottom-fandoms.json");
 const characters = read("characters/characters.json");
 const institutions = read("gutter-institutions.json");
@@ -22,6 +23,25 @@ if (process.argv.includes("--pending")) {
 assert.equal(version, 1, "Unsupported community data version");
 assert(Array.isArray(users) && Array.isArray(comments), "Community users and comments must be arrays");
 const userMap = new Map(users.map((user) => [user.id, user]));
+const relationshipPairs = new Set();
+assert(Array.isArray(relationships), 'Missing relationship histories');
+for(const relationship of relationships){
+  assert.equal(relationship.users.length,2);
+  const [a,b]=relationship.users;
+  assert(a!==b && userMap.has(a) && userMap.has(b),'Relationship requires two existing distinct accounts');
+  const pair=[a,b].sort().join(':');
+  assert(!relationshipPairs.has(pair),`Duplicate relationship: ${pair}`);
+  relationshipPairs.add(pair);
+  assert(relationship.history.length>0,`Empty relationship history: ${pair}`);
+  let previous=-Infinity;
+  for(const event of relationship.history){
+    assert(['friends','friendly-banter','strained','rivals','acquaintances'].includes(event.kind),`Unknown dynamic: ${pair}`);
+    assert(Number.isFinite(Date.parse(event.at)) && Date.parse(event.at)>previous,`History must be dated and chronological: ${pair}`);
+    assert(typeof event.note==='string' && event.note.trim(),`Missing continuity note: ${pair}`);
+    previous=Date.parse(event.at);
+  }
+}
+const friendships=communityFriendships({users,relationships});
 const commentMap = new Map(comments.map((comment) => [comment.id, comment]));
 const schedule = read('community-schedule.json');
 assert.equal(schedule.timeZone, 'Europe/Istanbul');
@@ -40,11 +60,12 @@ assert.equal(userMap.size, users.length, "Duplicate user IDs");
 assert.equal(new Set(users.map((user) => user.username.toLowerCase())).size, users.length, "Duplicate usernames");
 assert.equal(commentMap.size, comments.length, "Duplicate comment IDs");
 for (const user of users) {
-  assert(Array.isArray(user.friendIds), `Missing friendship list: ${user.id}`);
-  assert.equal(new Set(user.friendIds).size, user.friendIds.length, `Duplicate friends: ${user.id}`);
-  for (const friend of user.friendIds) {
+  assert(!('friendIds' in user), `Friendships derive from history, not duplicate user fields: ${user.id}`);
+  const friendIds=friendships.get(user.id);
+  assert.equal(new Set(friendIds).size, friendIds.length, `Duplicate friends: ${user.id}`);
+  for (const friend of friendIds) {
     assert(friend !== user.id && userMap.has(friend), `Invalid friend: ${user.id}/${friend}`);
-    assert(userMap.get(friend).friendIds?.includes(user.id), `Friendship must be mutual: ${user.id}/${friend}`);
+    assert(friendships.get(friend)?.includes(user.id), `Friendship must be mutual: ${user.id}/${friend}`);
   }
   assert(["fictional", "member"].includes(user.kind), `Invalid user kind: ${user.id}`);
   assert(/^[a-zA-Z0-9_.]{3,30}$/.test(user.username), `Invalid handle: ${user.id}`);

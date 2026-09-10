@@ -4,6 +4,9 @@ const community = require('../data/flea-bottom.json');
 community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <= Date.now());
 
 (async () => {
+  const { communityFriendships } = await import('../lib/communityRelationships.mjs');
+  const friendships = communityFriendships(community);
+  for(const user of community.users)user.friendIds=friendships.get(user.id);
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   const page = await browser.newPage();
   const errors = [];
@@ -31,6 +34,31 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
       await profilePanel.getByText(author.current.value, { exact: true }).waitFor();
       await profilePanel.getByText(`${authorComments.length} comments across ${authorPosts} posts`, { exact: true }).waitFor();
       await profilePanel.getByText(`${author.friendIds.length} ${author.friendIds.length === 1 ? 'friend' : 'friends'}`, { exact: true }).waitFor();
+      const friendButton = profilePanel.getByRole('button',{name:/^\d+ friends?$/});
+      const friendPanel = profilePanel.getByRole('region',{name:`Friends of @${author.username}`});
+      if(viewport.width>500){
+        await friendButton.hover();
+        await friendPanel.waitFor();
+        await page.mouse.move(0,0);
+        await friendPanel.waitFor({state:'hidden'});
+      }
+      await friendButton.click();
+      await friendPanel.waitFor();
+      assert.equal(await friendPanel.locator('li').count(),author.friendIds.length);
+      assert.equal(await friendPanel.getByText('@breadpilled',{exact:true}).count(),0,'An antagonist is not listed as a friend');
+      const firstFriend=community.users.find(u=>u.id===author.friendIds[0]);
+      await friendPanel.getByText(`@${firstFriend.username}`,{exact:true}).click();
+      await friendPanel.getByText(firstFriend.bio,{exact:true}).waitFor();
+      assert(await friendPanel.evaluate(el=>el.scrollWidth<=el.clientWidth),'Friend accounts fit the profile');
+      await page.screenshot({path:`${process.env.TEMP}/community-friends-${viewport.width}.png`});
+      await page.keyboard.press('Escape');
+      await friendPanel.waitFor({state:'hidden'});
+      assert(await thread.isVisible(),'Escape closes friends without dismissing the gallery');
+      await profile.focus();
+      await friendButton.focus();
+      await friendPanel.waitFor();
+      await page.keyboard.press('Escape');
+      await friendPanel.waitFor({state:'hidden'});
       assert(await profilePanel.evaluate((el) => el.scrollWidth <= el.clientWidth), 'Profile details fit the viewport');
       const footer = thread.getByText(/Member accounts & comments/);
       await footer.scrollIntoViewIfNeeded();
