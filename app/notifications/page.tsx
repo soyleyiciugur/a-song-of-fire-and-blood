@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCommunity, refreshCommunity } from "@/lib/communityStore";
 import { getCommentEntryLabel, getCommentLink } from "@/lib/communityLinks";
+import { groupNotifications } from "@/lib/notificationTime.mjs";
 import MiniPortrait from "@/components/MiniPortrait";
 import styles from "./notifications.module.css";
 
@@ -18,9 +19,14 @@ function Notifications() {
   const [limit, setLimit] = useState(30);
   const users = new Map(data.users.map((user) => [user.id, user]));
   const comments = data.comments.map((comment, order) => ({ comment, order })).sort((a, b) => Date.parse(b.comment.publishedAt) - Date.parse(a.comment.publishedAt) || b.order - a.order).map(({ comment }) => comment);
+  const now = data.serverTime ? Date.parse(data.serverTime) : Date.now();
+  const groups = groupNotifications(comments.slice(0, limit), now);
   return (
     <main className={styles.page}>
-      <Link href="/ravens-eye" className={styles.back}>← The Raven&apos;s Eye</Link>
+      <Link href="/ravens-eye" className={styles.back}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        The Raven&apos;s Eye
+      </Link>
       <h1>Notifications</h1>
       <p className={styles.intro}>New conversations and notes from the archive.</p>
       <div className={styles.tabs} role="tablist" aria-label="Notification sections" onKeyDown={(event) => {
@@ -37,8 +43,10 @@ function Notifications() {
       {data.error && <p role="status">{data.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
       <section id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`}>
         {tab === "comments" ? <>
+          {groups.map(({label, entries}) => <section key={label} className={styles.timeGroup} aria-label={label}>
+          <h2 className={styles.timeHeading}>{label}</h2>
           <ol className={styles.feed}>
-            {comments.slice(0, limit).map((comment) => {
+            {entries.map((comment: typeof comments[number]) => {
               const user = users.get(comment.authorId);
               if (!user) return null;
               return <li key={comment.id}><Link href={getCommentLink(comment)} className={styles.card}>
@@ -52,9 +60,10 @@ function Notifications() {
               </Link></li>;
             })}
           </ol>
+          </section>)}
           {data.loaded && !comments.length && <p>No comments yet.</p>}
           {comments.length > limit && <button className={styles.more} onClick={() => setLimit(limit + 30)}>Load more comments</button>}
-        </> : <ol className={styles.feed}>{data.updates.map((update) => <li key={update.id} className={styles.update}><time dateTime={update.publishedAt}>{dateLabel(update.publishedAt)} TRT</time><h2>{update.title}</h2><p>{update.body}</p></li>)}</ol>}
+        </> : groupNotifications(data.updates, now).map(({label, entries}) => <section key={label} className={styles.timeGroup} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{entries.map((update: typeof data.updates[number]) => <li key={update.id} className={styles.update}><time dateTime={update.publishedAt}>{dateLabel(update.publishedAt)} TRT</time><h3>{update.title}</h3><p>{update.body}</p></li>)}</ol></section>)}
       </section>
     </main>
   );

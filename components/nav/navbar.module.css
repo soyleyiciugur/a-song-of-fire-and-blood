@@ -556,7 +556,10 @@
 .inner { padding-right: 122px; }
 .searchWrap { right: 68px; }
 .searchWrap:focus-within .searchInput { width: min(320px, calc(100vw - 92px)); }
-.notificationsButton { position: absolute; right: 17px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 9px; color: var(--gold); background: var(--surface); }
+.notificationsButton { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 999px; color: var(--gold); background: var(--surface); }
+.notificationsButton { box-sizing: border-box; }
+.notificationsButton svg { width: 18px; height: 18px; }
+.notificationsButton:hover { border-color: var(--gold); background: var(--surface-hover); }
 .notificationsButton:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .playBannerCollapsed .notificationsButton { display: none; }
-@media(max-width:1150px) { .inner { padding-right: 110px; } .searchWrap { right: 62px; } .notificationsButton { right: 11px; } }
+@media(max-width:1150px) { .inner { padding-right: 110px; } .searchWrap { right: 62px; } .notificationsButton { right: 14px; } }

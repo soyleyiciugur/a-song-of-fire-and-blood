@@ -1,0 +1,61 @@
+{
+  "timeZone": "Europe/Istanbul",
+  "slots": [
+    {
+      "id": "september-window-1",
+      "publishedAt": "2026-09-10T09:20:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-2",
+      "publishedAt": "2026-09-10T11:45:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-3",
+      "publishedAt": "2026-09-10T15:00:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-4",
+      "publishedAt": "2026-09-10T18:30:00.000Z",
+      "commentIds": [
+        "gallery-hrrms-genius-scheduled-1"
+      ]
+    },
+    {
+      "id": "september-window-5",
+      "publishedAt": "2026-09-10T21:15:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-6",
+      "publishedAt": "2026-09-11T05:40:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-7",
+      "publishedAt": "2026-09-11T09:00:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-8",
+      "publishedAt": "2026-09-11T13:10:00.000Z",
+      "commentIds": [
+        "gallery-your-daily-sad-alester-edit-scheduled-2"
+      ]
+    },
+    {
+      "id": "september-window-9",
+      "publishedAt": "2026-09-11T17:30:00.000Z",
+      "commentIds": []
+    },
+    {
+      "id": "september-window-10",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "commentIds": [
+        "gallery-alester-winterfell-window-scheduled-3"
+      ]
+    }
+  ]
+}

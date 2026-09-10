@@ -1,5 +1,9 @@
 .page { max-width: 880px; margin: 0 auto; padding: 36px 20px 80px; color: var(--text); }
-.back { display: inline-block; padding: 10px 0; color: var(--muted); font-size: 13px; }
+.back { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 10px 15px; border: 1px solid var(--border); border-radius: var(--radius-md, 8px); background: var(--surface); color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-decoration: none; transition: border-color .18s ease, background .18s ease; }
+.back:hover { border-color: var(--gold); background: var(--surface-hover); }
+.back:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.back svg { flex-shrink: 0; }
+@media(prefers-reduced-motion:reduce) { .back { transition: none; } }
 .page h1 { font-size: clamp(26px, 5vw, 38px); margin: 16px 0 8px; }
 .intro { color: var(--muted); font-size: 14px; }
 .tabs { display: flex; gap: 8px; padding: 16px 0 20px; }
@@ -19,6 +23,9 @@
 .more { margin-top: 20px; width: 100%; }
 .update { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
 .update time { color: var(--muted); font-size: 12px; }
-.update h2 { font-size: 20px; margin: 12px 0; }
+.update h3 { font-size: 20px; margin: 12px 0; }
+.timeGroup + .timeGroup { margin-top: 28px; }
+.timeHeading { display: flex; align-items: center; gap: 12px; margin: 0 0 13px; color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.timeHeading::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 .update p { line-height: 1.7; }
 @media(max-width:500px) { .page { padding: 20px 14px 60px; } .card { padding: 13px; gap: 9px; } }

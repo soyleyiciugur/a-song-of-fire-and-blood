@@ -115,7 +115,7 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
     await page.goto(`${base}/ravens-eye?item=gallery-alester-jace-fleabottom`);
     await page.getByRole('button', { name: 'Close', exact: true }).waitFor();
     await page.getByRole('region', { name: 'Gallery comments' }).locator('article').first().waitFor();
-    assert.equal(await page.getByRole('region', { name: 'Gallery comments' }).locator('article').count(), 5, 'Canon Raven images have comments');
+    assert.equal(await page.getByRole('region', { name: 'Gallery comments' }).locator('article').count(), community.comments.filter(c=>c.entryId==='gallery-alester-jace-fleabottom').length, 'Canon Raven images show their authored comment count');
     for (const viewport of [{width:1440,height:900},{width:390,height:844}]) {
       await page.setViewportSize(viewport);
       await page.goto(`${base}/notifications`);
@@ -174,6 +174,19 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
     assert((await page.locator('[role="tabpanel"] li a').first().getAttribute('href')).includes(scheduled.id),'Just-published comment leads notification feed');
     await page.unroute('**/api/community');
     console.log('PASS: scheduled comment unfolds through polling, exact target opens, notification leads feed');
+    const groupNow = Date.parse('2026-09-11T20:00:00+03:00');
+    const groupedFixture = publishCommunity(privateData, [], groupNow);
+    const dates = ['2026-09-11T19:59:00+03:00','2026-09-11T17:00:00+03:00','2026-09-11T10:00:00+03:00','2026-09-11T07:00:00+03:00','2026-09-10T18:00:00+03:00','2026-09-09T12:00:00+03:00'];
+    groupedFixture.comments = groupedFixture.comments.slice(0,dates.length).map((c,i)=>({...c,publishedAt:dates[i]}));
+    await page.route('**/api/community',route=>route.fulfill({json:groupedFixture}));
+    await page.goto(`${base}/notifications`);
+    await page.getByRole('heading',{name:'Yesterday',exact:true}).waitFor();
+    assert.deepEqual(await page.locator('[role="tabpanel"] h2').allTextContents(),['Now','3 hours ago','10 hours ago','Today','Yesterday','9 September 2026']);
+    assert.equal(await page.locator('[role="tabpanel"] li a').count(),dates.length,'Grouping preserves every notification');
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Grouped feed fits mobile');
+    await page.screenshot({path:`${process.env.TEMP}/community-time-groups.png`});
+    await page.unroute('**/api/community');
+    console.log('PASS: visible notification sections and unduplicated entries on mobile');
     assert.deepEqual(errors, [], 'No browser errors');
   } finally {
     await browser.close();

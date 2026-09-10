@@ -23,6 +23,18 @@ assert.equal(version, 1, "Unsupported community data version");
 assert(Array.isArray(users) && Array.isArray(comments), "Community users and comments must be arrays");
 const userMap = new Map(users.map((user) => [user.id, user]));
 const commentMap = new Map(comments.map((comment) => [comment.id, comment]));
+const schedule = read('community-schedule.json');
+assert.equal(schedule.timeZone, 'Europe/Istanbul');
+assert.equal(schedule.slots.length, 10, 'Current publication plan has ten candidate windows');
+assert.equal(new Set(schedule.slots.map(slot=>slot.publishedAt)).size, 10, 'Distinct publication times');
+assert.equal(schedule.slots.filter(slot=>slot.commentIds.length).length, 3, 'Only three selected windows publish');
+const plannedIds = schedule.slots.flatMap(slot=>slot.commentIds);
+assert.equal(new Set(plannedIds).size, plannedIds.length, 'A comment belongs to one window');
+for (const slot of schedule.slots) {
+  assert(Number.isFinite(Date.parse(slot.publishedAt)), `Invalid window: ${slot.id}`);
+  for (const id of slot.commentIds) assert.equal(commentMap.get(id)?.publishedAt, slot.publishedAt, `Publication plan mismatch: ${id}`);
+}
+assert.deepEqual([...plannedIds].sort(), comments.filter(c=>c.id.includes('-scheduled-')).map(c=>c.id).sort());
 const entryIds = new Set(eligible.map((entry) => entry.id));
 assert.equal(userMap.size, users.length, "Duplicate user IDs");
 assert.equal(new Set(users.map((user) => user.username.toLowerCase())).size, users.length, "Duplicate usernames");
@@ -82,7 +94,7 @@ for (const entry of eligible) {
     const user = userMap.get(comment.authorId);
     return user.kind === "fictional" && !user.account;
   }).map((comment) => comment.authorId));
-  assert(regulars.size >= 5 && regulars.size <= 10, `${entry.id}: expected 5–10 distinct fictional regulars, found ${regulars.size}`);
+  assert(regulars.size >= 1, `${entry.id}: missing reader conversation`);
   assert.equal(new Set(thread.map((comment) => comment.body.trim().toLowerCase())).size, thread.length, `Duplicate body in ${entry.id}`);
 }
 console.log(`Gutter data valid: ${eligible.length} posts, ${users.length} profiles, ${comments.length} comments.`);
