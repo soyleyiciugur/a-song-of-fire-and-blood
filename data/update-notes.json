@@ -1,13 +1,33 @@
 [
   {
-    "date": "2026-09-10",
+    "id": "forum-launch",
+    "publishedAt": "2026-09-10T09:32:19.331Z",
+    "title": "The forum is open",
+    "body": "Chapter discussions now have a home: sixteen chapter threads, longer conversations, theories and community topics. Familiar accounts can earn upvotes and Hasocash awards, with Jace moderating personal attacks. Forum replies appear in Latest comments too."
+  },
+  {
+    "id": "community-comments-launch",
+    "publishedAt": "2026-09-10T07:39:43.000Z",
+    "title": "Comments across the Raven's Eye",
+    "body": "Conversations now accompany canon images, memes and reels. Character accounts use mini portraits and pinned conversations. Profiles show their friends, and this page brings you new comments and direct links to each conversation. Some comments will arrive over time."
+  },
+  {
+    "id": "site-updates-2026-09-10",
+    "publishedAt": "2026-09-09T21:00:00.000Z",
+    "dateOnly": true,
+    "title": "Site updates",
+    "body": "",
     "items": [
       "The Known Chronicle now uses a vertical timeline on mobile, with visible chapter titles, dates and tappable chapter links.",
       "Added Update Notes: a daily, dated record of site improvements, accessible from the homepage's Latest Updates section."
     ]
   },
   {
-    "date": "2026-09-09",
+    "id": "site-updates-2026-09-09",
+    "publishedAt": "2026-09-08T21:00:00.000Z",
+    "dateOnly": true,
+    "title": "Site updates",
+    "body": "",
     "items": [
       "Added comments across Raven's Eye images, memes and reels, with character portraits, pinned character conversations and community profiles."
     ]

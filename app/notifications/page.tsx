@@ -7,6 +7,7 @@ import { useCommunity, refreshCommunity } from "@/lib/communityStore";
 import { getCommentEntryLabel, getCommentLink } from "@/lib/communityLinks";
 import { groupNotifications } from "@/lib/notificationTime.mjs";
 import MiniPortrait from "@/components/MiniPortrait";
+import UpdatesFeed from '@/components/UpdatesFeed';
 import styles from "./notifications.module.css";
 
 const dateLabel = (value: string) => new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Istanbul" }).format(new Date(value));
@@ -63,7 +64,7 @@ function Notifications() {
           </section>)}
           {data.loaded && !comments.length && <p>No comments yet.</p>}
           {comments.length > limit && <button className={styles.more} onClick={() => setLimit(limit + 30)}>Load more comments</button>}
-        </> : groupNotifications(data.updates, now).map(({label, entries}) => <section key={label} className={styles.timeGroup} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{entries.map((update: typeof data.updates[number]) => <li key={update.id} className={styles.update}><time dateTime={update.publishedAt}>{dateLabel(update.publishedAt)} TRT</time><h3>{update.title}</h3><p>{update.body}</p></li>)}</ol></section>)}
+        </> : data.loaded && <UpdatesFeed updates={data.updates} now={now}/>}
       </section>
     </main>
   );

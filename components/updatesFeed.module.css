@@ -1,0 +1,12 @@
+.group + .group { margin-top: 28px; }
+.heading { display: flex; align-items: center; gap: 12px; margin: 0 0 13px; color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.heading::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.entry { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px; overflow-wrap: anywhere; }
+.entry time { color: var(--muted); font-size: 12px; }
+.entry h3 { font-size: 20px; margin: 12px 0; }
+.entry p,.entry li { line-height: 1.7; }
+.entry ul { padding-left: 22px; }
+.entry li + li { margin-top: 8px; }
+.entry li::marker { color: var(--gold); }
+@media(max-width:500px) { .entry { padding: 18px 16px; } }

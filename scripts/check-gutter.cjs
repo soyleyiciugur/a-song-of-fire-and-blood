@@ -168,7 +168,11 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
       await page.goto(`${base}/notifications?tab=updates`);
       assert.equal(await page.getByRole('tab',{name:'Update notes'}).getAttribute('aria-selected'),'true');
       await page.getByRole('heading',{name:"Comments across the Raven's Eye"}).waitFor();
-      assert.equal(await page.locator('[role="tabpanel"] li').count(),require('../data/community-updates.json').filter(u=>Date.parse(u.publishedAt)<=Date.now()).length);
+      assert.equal(await page.locator('[data-update-id]').count(),require('../data/update-notes.json').filter(u=>Date.parse(u.publishedAt)<=Date.now()).length);
+      const notificationNotes=await page.locator('[data-update-id]').allTextContents();
+      await page.goto(`${base}/update-notes`);
+      await page.locator('[data-update-id]').first().waitFor();
+      assert.deepEqual(await page.locator('[data-update-id]').allTextContents(),notificationNotes,'Both update-note entry points render the same complete records');
       const bell = page.getByRole('link',{name:'Notifications',exact:true});
       const search = page.getByRole('textbox', {name:'Search the realm'});
       const bellBox = await bell.boundingBox();
@@ -192,7 +196,7 @@ community.comments = community.comments.filter(c => Date.parse(c.publishedAt) <=
     const privateData = JSON.parse(require('node:fs').readFileSync(require.resolve('../data/flea-bottom.json'), 'utf8'));
     const scheduled = privateData.comments.find(c=>c.id==='gallery-alester-winterfell-window-scheduled-3');
     let serverClock = Date.parse(scheduled.publishedAt)-1;
-    await page.route('**/api/community', route=>route.fulfill({json:publishCommunity(privateData, require('../data/community-updates.json'), serverClock)}));
+    await page.route('**/api/community', route=>route.fulfill({json:publishCommunity(privateData, require('../data/update-notes.json'), serverClock)}));
     await page.goto(`${base}/ravens-eye?item=${scheduled.entryId}&comment=${scheduled.id}`);
     await page.getByText('This comment is not available yet.',{exact:true}).waitFor();
     assert.equal(await page.locator(`[data-comment-id="${scheduled.id}"]`).count(),0);

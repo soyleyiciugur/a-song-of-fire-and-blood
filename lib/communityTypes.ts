@@ -28,6 +28,8 @@ export interface GutterComment {
 }
 
 export interface CommunityUpdate {
+  dateOnly?: boolean;
+  items?: string[];
   id: string;
   publishedAt: string;
   title: string;

@@ -4,7 +4,7 @@ import { publishCommunity } from '../lib/communityPublication.mjs';
 import { communityFriendships } from '../lib/communityRelationships.mjs';
 import { notificationTimeGroup, groupNotifications } from '../lib/notificationTime.mjs';
 const data = JSON.parse(fs.readFileSync(new URL('../data/flea-bottom.json', import.meta.url), 'utf8'));
-const updates = JSON.parse(fs.readFileSync(new URL('../data/community-updates.json', import.meta.url), 'utf8'));
+const updates = JSON.parse(fs.readFileSync(new URL('../data/update-notes.json', import.meta.url), 'utf8'));
 const scheduled = data.comments.filter(c => c.id.includes('-scheduled-'));
 assert.equal(scheduled.length, 3);
 for (const c of scheduled) {
@@ -28,6 +28,10 @@ for (const user of publicData.users) {
   for (const field of ['history','voice','continuity','fandoms','interests']) assert(!(field in user));
 }
 assert(!('relationships' in publicData));
+assert.equal(new Set(updates.map(u=>u.id)).size,updates.length);
+assert(updates.some(u=>u.dateOnly && u.items?.length),'Preserve daily notes');
+assert(updates.some(u=>u.id==='forum-launch'),'Preserve community release notes');
+assert.equal(notificationTimeGroup('2026-09-10T00:00:00+03:00',Date.parse('2026-09-10T01:00:00+03:00'),true),'Today','Day-only entries must not claim elapsed-hour precision');
 const graph=communityFriendships(data,Date.parse(publicData.serverTime));
 assert(!graph.get('regular-g').includes('regular-u'),'Real antagonism is not friendship');
 assert(graph.get('regular-s').includes('regular-j'),'Friendly rivalry can be friendship');

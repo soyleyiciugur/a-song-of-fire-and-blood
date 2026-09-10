@@ -1,5 +1,5 @@
 import community from "@/data/flea-bottom.json";
-import updates from "@/data/community-updates.json";
+import updates from "@/data/update-notes.json";
 import forum from '@/data/forum.json';
 import chapters from '@/data/chapters.json';
 import { publishCommunity } from "@/lib/communityPublication.mjs";
