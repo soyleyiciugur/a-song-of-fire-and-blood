@@ -4,6 +4,7 @@ export interface GutterUser {
   kind: "fictional" | "member";
   bio: string;
   avatar: string;
+  avatarUrl?: string | null;
   color: string;
   displayName?: string;
   pronouns?: string;
@@ -12,6 +13,8 @@ export interface GutterUser {
   friendIds?: string[];
   current?: { label: "Reading" | "Watching" | "Playing" | "On repeat" | "Making"; value: string };
   account?: { type: "character"; characterId: string } | { type: "institution"; institutionId: string };
+  profileHref?: string;
+  role?: "member" | "moderator" | "admin";
 }
 
 export interface GutterComment {
@@ -25,6 +28,8 @@ export interface GutterComment {
   parentId: string | null;
   body: string;
   publishedAt: string;
+  authorType?: "user" | "character" | "legacy";
+  canEdit?: boolean;
 }
 
 export interface CommunityUpdate {
@@ -54,6 +59,8 @@ export interface ForumThread {
   authorId: string;
   body: string;
   publishedAt: string;
+  authorType?: "user" | "character" | "legacy";
+  canEdit?: boolean;
 }
 
 export interface ForumSource {

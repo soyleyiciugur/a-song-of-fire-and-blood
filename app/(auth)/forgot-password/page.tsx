@@ -1,0 +1,2 @@
+import AuthForm from "../AuthForm"; import { forgotPassword } from "../actions";
+export default function Page(){return <AuthForm title="Recover your account" intro="We’ll send a secure password-reset link to your email." action={forgotPassword} fields={[{name:"email",label:"Email",type:"email",autoComplete:"email"}]} submit="Send reset link" footer={{text:"Remembered it?",href:"/login",label:"Sign in"}}/>}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { NAV_ITEMS, isNavigationGroup } from "@/constants/navigation";
 import SearchBar from "./SearchBar";
+import AccountControl from "./AccountControl";
 
 import styles from "./navbar.module.css";
 
@@ -171,6 +172,7 @@ export default function Navbar() {
         </nav>
 
         <SearchBar />
+        <AccountControl />
         <Link href="/notifications" className={styles.notificationsButton} aria-label="Notifications" title="Notifications">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </Link>
@@ -186,6 +188,7 @@ export default function Navbar() {
         id="site-mobile-nav"
         className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ""}`}
       >
+        <AccountControl />
         {NAV_ITEMS.map((item) =>
           isNavigationGroup(item) ? (
             <div key={item.label} className={styles.mobileNavGroup}>

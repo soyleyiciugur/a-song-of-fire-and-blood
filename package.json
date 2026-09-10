@@ -11,6 +11,8 @@
     "validate:comments": "node scripts/validate-gutter.mjs && node scripts/validate-forum.mjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
     "@vercel/analytics": "^2.0.1",
     "next": "16.2.9",
     "react": "19.2.4",

@@ -9,6 +9,8 @@ import gallery from "@/data/gallery.json";
 import { useCommunity, refreshCommunity } from "@/lib/communityStore";
 import { getGutterComments, getGutterIdentity, getGutterThreads, getGutterUserStats, gutterUserMap, type GutterComment } from "@/lib/fleaBottom";
 import styles from "./gutterComments.module.css";
+import Composer from "@/components/community/Composer";
+import ContentActions from "@/components/community/ContentActions";
 
 function Comment({ comment, replies, pinned = false }: { comment: GutterComment; replies: GutterComment[]; pinned?: boolean }) {
   const user = gutterUserMap.get(comment.authorId);
@@ -21,7 +23,7 @@ function Comment({ comment, replies, pinned = false }: { comment: GutterComment;
       <article>
         <details className={styles.profile}>
           <summary>
-            {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={identity?.name ?? user.username} size={30} /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
+            {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={identity?.name ?? user.username} size={30} /> : user.avatarUrl ? <img className={styles.avatar} src={user.avatarUrl} alt="" /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
             <span className={styles.username}>@{user.username}</span>
             {identity && <span className={`${styles.verified} ${identity.type === "institution" ? styles.institution : ""}`} role="img" aria-label={`Verified ${identity.type} account`} title={`Verified ${identity.type} account · fictional`}>
               <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="m10 0 2.3 2 3-.1.6 3 2.5 1.7-1.3 2.7.6 3-2.8 1.1-1.4 2.7-2.9-.8-2.6 1.5-2-2.3-3-.4.1-3L1 8.9l1.9-2.3.2-3 3-.6L8 .5z"/><path d="m6 9.5 2.4 2.4 5-5" fill="none" stroke="#10151d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -47,11 +49,11 @@ function Comment({ comment, replies, pinned = false }: { comment: GutterComment;
                 {user.current && <div><dt>{user.current.label}</dt><dd>{user.current.value}</dd></div>}
               </dl>
             )}
-            <p className={styles.activity}>{stats.comments} {stats.comments === 1 ? "comment" : "comments"} across {stats.posts} {stats.posts === 1 ? "post" : "posts"}</p>
+            <p className={styles.activity}>{stats.comments} {stats.comments === 1 ? "comment" : "comments"} across {stats.posts} {stats.posts === 1 ? "post" : "posts"}</p>{user.profileHref && <Link href={user.profileHref}>View profile →</Link>}
             <FriendAccounts user={user} />
           </div>
         </details>
-        <p className={styles.body}>{comment.body}</p>
+        <p className={styles.body}>{comment.body}</p>{comment.canEdit && <ContentActions kind="raven" id={comment.id} body={comment.body} />}
       </article>
       {replies.length > 0 && (
         <ol className={styles.replies} aria-label={`Replies to @${user.username}`}>
@@ -106,7 +108,8 @@ export default function GutterComments({ entryId, collapsible = false }: { entry
             {threads.map(({ comment, replies, pinned }) => <Comment key={comment.id} comment={comment} replies={replies} pinned={pinned} />)}
           </ol>
         ) : <p className={styles.intro}>The gutters are quiet. For now.</p>}
-        <p className={styles.footer}>Member accounts & comments are coming later. For now, meet the regulars.</p>
+        <Composer kind="raven" entryId={entryId} />
+        <p className={styles.footer}>Sign in to join the conversation. Fictional regulars and cast accounts remain editorially managed.</p>
       </div>
     </section>
   );

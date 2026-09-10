@@ -1,0 +1,1 @@
+import {redirect}from "next/navigation";import{getCurrentProfile}from "@/lib/auth";import ProfileSettings from "./ProfileSettings";export default async function Page(){const profile=await getCurrentProfile();if(!profile)redirect("/login");return <ProfileSettings profile={profile}/>}
