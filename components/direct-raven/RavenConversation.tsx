@@ -61,6 +61,7 @@ export default function RavenConversation({
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [actionMenuId, setActionMenuId] = useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerTab, setPickerTab] = useState<PickerTab>("emoji");
   const [portraitSearch, setPortraitSearch] = useState("");
@@ -167,10 +168,12 @@ export default function RavenConversation({
   useEffect(() => {
     const closeMenu = (event: PointerEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) setMenuOpen(false);
+      if (!(event.target as Element | null)?.closest?.('[data-raven-message-menu]')) setActionMenuId(null);
     };
     const closeWithEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
+        setActionMenuId(null);
         setPickerOpen(false);
       }
     };
@@ -530,39 +533,60 @@ export default function RavenConversation({
                     {mine && !message.deleted_at ? (partnerRead >= message.created_at ? " · Seen" : " · Sent") : ""}
                   </span>
                   {!message.deleted_at && (
-                    <div className={styles.messageActions}>
-                      <LikeButton kind="message" id={message.id} />
-                      {!closed && (
+                    <>
+                      <div className={styles.messageCornerMenu} data-raven-message-menu>
                         <button
                           type="button"
-                          onClick={() => {
-                            setReply(message);
-                            setEditing(null);
-                            inputRef.current?.focus({ preventScroll: true });
+                          className={styles.messageMenuButton}
+                          aria-label="Message options"
+                          aria-expanded={actionMenuId === message.id}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setActionMenuId((current) => current === message.id ? null : message.id);
                           }}
                         >
-                          Reply
+                          <span aria-hidden="true">⌄</span>
                         </button>
-                      )}
-                      {parseRavenBody(message.body).text && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            void navigator.clipboard
-                              .writeText(parseRavenBody(message.body).text)
-                              .catch(() => setError("Could not copy text."))
-                          }
-                        >
-                          Copy
-                        </button>
-                      )}
-                      {mine && (
-                        <>
-                          <button type="button" disabled={closed} onClick={() => beginEdit(message)}>Edit</button>
-                          <button type="button" onClick={() => void withdraw(message)}>Withdraw</button>
-                        </>
-                      )}
-                    </div>
+                        {actionMenuId === message.id && (
+                          <div className={styles.messageMenu} onPointerDown={(event) => event.stopPropagation()}>
+                            {parseRavenBody(message.body).text && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setActionMenuId(null);
+                                  void navigator.clipboard
+                                    .writeText(parseRavenBody(message.body).text)
+                                    .catch(() => setError("Could not copy text."));
+                                }}
+                              >
+                                Copy
+                              </button>
+                            )}
+                            {mine && (
+                              <>
+                                <button type="button" disabled={closed} onClick={() => { setActionMenuId(null); beginEdit(message); }}>Edit</button>
+                                <button type="button" className={styles.destructiveMenuItem} onClick={() => { setActionMenuId(null); void withdraw(message); }}>Withdraw</button>
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      <div className={styles.messageActions}>
+                        <LikeButton kind="message" id={message.id} />
+                        {!closed && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setReply(message);
+                              setEditing(null);
+                              inputRef.current?.focus({ preventScroll: true });
+                            }}
+                          >
+                            Reply
+                          </button>
+                        )}
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -607,28 +631,7 @@ export default function RavenConversation({
             )}
 
             {pickerOpen && (
-              <div className={styles.reactionPicker} aria-label="Emoji and mini portraits">
-                <div className={styles.pickerTabs} role="tablist" aria-label="Raven reactions">
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={pickerTab === "emoji"}
-                    className={pickerTab === "emoji" ? styles.pickerTabActive : ""}
-                    onClick={() => setPickerTab("emoji")}
-                  >
-                    Emoji
-                  </button>
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={pickerTab === "portraits"}
-                    className={pickerTab === "portraits" ? styles.pickerTabActive : ""}
-                    onClick={() => setPickerTab("portraits")}
-                  >
-                    Mini portraits
-                  </button>
-                </div>
-
+              <div className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
                 {pickerTab === "emoji" ? (
                   <div className={styles.emojiPicker} aria-label="Choose emoji">
                     {emojis.map((emoji) => (

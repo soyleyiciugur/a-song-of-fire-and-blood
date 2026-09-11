@@ -19,7 +19,6 @@ export function isNavigationGroup(entry: NavigationEntry): entry is NavigationGr
 }
 
 export const NAV_ITEMS: NavigationEntry[] = [
-  { label: "Latest Updates", href: "/update-notes" },
   { label: "Chapters", href: "/chapters" },
   { 
     label: "Characters", 

@@ -42,6 +42,15 @@ export function ravenBodySummary(value: string) {
   return "Raven";
 }
 
+export function RavenMessagePreview({ body }: { body: string }) {
+  return <>{body.split(/(\[\[portrait:[a-z0-9-]+\]\])/gi).map((part, index) => {
+    const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (!match || !characterNames.has(match[1].toLowerCase())) return part;
+    const id = match[1].toLowerCase();
+    return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} /></span>;
+  })}</>;
+}
+
 export default function RavenMessageContent({ body }: { body: string }) {
   return <p>{body.split(/(\[\[portrait:[a-z0-9-]+\]\])/gi).map((part, index) => {
     const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);

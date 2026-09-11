@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: Promise<{ username: str
 
   const viewerProfile=viewer?await getCurrentProfile():null;
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-theme={p.profile_theme ?? "default"}>
       <div className={styles.banner}>{p.banner_url && <img src={p.banner_url} alt="" />}</div>
       <section className={styles.card}>
         <div className={styles.avatar}>{p.avatar_url ? <img src={p.avatar_url} alt="" /> : p.display_name.slice(0, 2).toUpperCase()}</div>
@@ -47,9 +47,11 @@ export default async function Page({ params }: { params: Promise<{ username: str
         <div><dt>Replies</dt><dd>{posts ?? 0}</dd></div>
         <div><dt>Raven’s Eye comments</dt><dd>{raven ?? 0}</dd></div>
       </dl>
-      <ProfileFriends key={p.id} profileId={p.id} viewerId={viewer?.id ?? null} />
-      <ProfileAffinity key={p.id} profileId={p.id} values={p.affinity??{}} catalog={affinityCatalog().map(field=>viewer?.id===p.id?field:{...field,options:field.options.filter(option=>option.id===p.affinity?.[field.key])})} editable={viewer?.id===p.id} />
-      <ProfileWallet key={p.id} profileId={p.id} viewerId={viewer?.id??null} />
+      <div className={styles.socialGrid}>
+        <ProfileFriends key={p.id} profileId={p.id} viewerId={viewer?.id ?? null} />
+        <ProfileWallet key={p.id} profileId={p.id} viewerId={viewer?.id??null} />
+      </div>
+      <ProfileAffinity key={p.id} profileId={p.id} values={p.affinity??{}} catalog={affinityCatalog().map(field=>({...field,options:field.options.filter(option=>option.id===p.affinity?.[field.key])}))} editable={false} />
       <ProfileGuestbook key={p.id} profileId={p.id} viewerId={viewer?.id??null} canModerate={viewerProfile?.role==="admin"||viewerProfile?.role==="moderator"} />
       <ProfileActivity key={p.id} userId={p.id} />
       <ProfileReactions key={p.id} userId={p.id} />

@@ -12638,6 +12638,70 @@
       "parentId": null,
       "body": "the edit is good. the arc still needs more than a soundtrack.",
       "publishedAt": "2026-09-11T20:50:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-music",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "whoever synced the turn with the beat knew exactly what they were doing. unfortunately this is cinema",
+      "publishedAt": "2026-09-11T10:35:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-render",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-render",
+      "parentId": "gallery-gaelor-supervillain-music",
+      "body": "the color grade is doing half the evilmaxxing by itself and i mean that as praise",
+      "publishedAt": "2026-09-11T10:41:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-cooked",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-cooked",
+      "parentId": null,
+      "body": "bro got one ominous soundtrack and immediately unlocked a boss health bar",
+      "publishedAt": "2026-09-11T10:54:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-vhaemys",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": null,
+      "body": "why is Gaelor a super villain. did he do another bad thing",
+      "publishedAt": "2026-09-11T11:08:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-g-reply-vhaemys",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-g",
+      "parentId": "gallery-gaelor-supervillain-vhaemys",
+      "body": "no your highness this is targeted media framing and i am handling it",
+      "publishedAt": "2026-09-11T11:13:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-gaelor",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "cast-gaelor-targaryen",
+      "parentId": "gallery-gaelor-supervillain-apologist",
+      "body": "Make it seven. I have notes.",
+      "publishedAt": "2026-09-11T11:24:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-cooked-reply",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-cooked",
+      "parentId": "gallery-gaelor-supervillain-apologist",
+      "body": "HE LOGGED ON 😭",
+      "publishedAt": "2026-09-11T11:27:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-lurk",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "the scary part is the edit barely had to exaggerate anything",
+      "publishedAt": "2026-09-11T11:34:00.000Z"
     }
   ],
   "relationships": [

@@ -11,14 +11,15 @@
       "Separated Update Notes into Features and Fixes, accessible through Latest Updates.",
       "Distinguished forum Favor from comment Likes and added reaction lists and profile activity.",
       "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.",
-      "Matched homepage card spacing and heading accents, and refined the mobile chat composer."
+      "Matched homepage card spacing and heading accents, and refined the mobile chat composer.",
+      "Moved ASOFAB favorites and profile themes into Profile Settings with persistent public-profile presentation.",
+      "Moved GIPHY search behind a server-side API route so the API key is no longer exposed to the browser.",
+      "Removed Latest Updates from site navigation and restored the linked homepage section heading.",
+      "Expanded the Gaelor Supervillain reel conversation with more community and character reactions.",
+      "Refined Direct Raven previews, floating emoji/portrait pickers, message action menus and reaction lists."
     ],
     "features": [
-      "Added the Gaelor Supervillain edit to the Raven's Eye reels.",
-      "Added community reactions and scheduled follow-ups to the Gaelor Supervillain reel.",
-      "Added profile guestbooks, mutual friends and linked ASOFAB favorites.",
-      "Added separate HasoCash wallets and secure member-to-member grants.",
-      "Added GIPHY search and inline mini portraits to Direct Raven."
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites."
     ],
     "links": {
       "Added the Gaelor Supervillain edit to the Raven's Eye reels.": "/ravens-eye/reels",
@@ -26,7 +27,8 @@
       "Added GIPHY search and inline mini portraits to Direct Raven.": "/messages",
       "Separated Update Notes into Features and Fixes, accessible through Latest Updates.": "/update-notes",
       "Distinguished forum Favor from comment Likes and added reaction lists and profile activity.": "/forum",
-      "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.": "/ravens-eye"
+      "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.": "/ravens-eye",
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites.": "/settings"
     }
   },
   {
@@ -65,10 +67,7 @@
     ],
     "features": [
       "Added secure member accounts with email confirmation, password recovery, public profiles and avatars across Taverns and Raven's Eye.",
-      "Authenticated members can now start Taverns discussions, reply to threads and join Raven's Eye conversations while existing fictional and character-authored discussions remain intact.",
-      "Added Update Notes: a daily, dated record of site improvements, accessible from the homepage's Latest Updates section.",
-      "Added private photo and GIF uploads, emoji, message replies, editing, withdrawal, likes and read receipts to Direct Raven.",
-      "Added profile banners, browsable member threads and replies, and friend requests with acceptance and removal controls."
+      "Renamed the forum to Taverns with a warm hearth-inspired theme and added it as a homepage shortcut below the hero."
     ]
   },
   {

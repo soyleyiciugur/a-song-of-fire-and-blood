@@ -6,6 +6,7 @@ import type { RavenConversationSummary } from "@/lib/directRaven";
 import styles from "./direct-raven.module.css";
 import NewRaven from "./NewRaven";
 import RavenIcon from "./RavenIcon";
+import { RavenMessagePreview } from "./RavenMessageContent";
 
 const time = (value: string) => new Intl.DateTimeFormat("en", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(value));
 
@@ -30,7 +31,7 @@ export default function DirectRavenInbox({ conversations, selectedId }: { conver
             <span className={styles.conversationCopy}>
               <span className={styles.conversationTop}><b>{partner.display_name}</b><time>{time(lastMessage?.created_at ?? conversation.updated_at)}</time></span>
               <span className={styles.handle}>@{partner.username}</span>
-              <span className={styles.preview}>{lastMessage ? (lastMessage.deleted_at ? "A message was withdrawn." : lastMessage.body || "Photo / GIF") : "No message yet."}</span>
+              <span className={styles.preview}>{lastMessage ? (lastMessage.deleted_at ? "A message was withdrawn." : lastMessage.body ? <RavenMessagePreview body={lastMessage.body} /> : "Photo / GIF") : "No message yet."}</span>
             </span>
             {unread > 0 && <span className={styles.unreadBadge}>{unread > 99 ? "99+" : unread}</span>}
           </Link>
