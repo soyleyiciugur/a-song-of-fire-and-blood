@@ -60,17 +60,35 @@
 .intro,.footer{font-family:var(--font-geist)}
 .username,.body,.bio,.profileHint,.badge,.activity,.identitySource,.profileFacts dt,.friendToggle,.friendBio,.pinLabel{font-family:var(--font-geist)}
 
-/* True threaded comments: each reply branch owns its rail and can be collapsed. */
-.commentShell { position: relative; display: grid; grid-template-columns: 18px minmax(0, 1fr); column-gap: 8px; min-width: 0; }
+/* Lightweight Reddit-style threaded replies. */
 .commentContent { min-width: 0; }
-.branchToggle { align-self: stretch; position: relative; width: 18px; min-height: 34px; padding: 0; border: 0; background: transparent; color: #8f7b63; cursor: pointer; }
-.branchToggle::after { content: ""; position: absolute; top: 23px; bottom: -18px; left: 8px; width: 1px; background: #443b31; transition: background .16s ease; }
-.branchToggle span { position: sticky; top: 8px; z-index: 1; display: grid; place-items: center; width: 17px; height: 17px; border: 1px solid #514538; border-radius: 50%; background: #13110f; color: #c7ab78; font: 600 13px/1 var(--font-geist); }
-.branchToggle:hover::after { background: #8d744f; }
-.branchToggle:hover span { border-color: #9e8358; color: #e2c590; }
-.branchToggle:focus-visible, .replyToggle:focus-visible { outline: 2px solid #d6b56f; outline-offset: 2px; }
-.replyToggle { margin: 8px 0 0 39px; padding: 3px 0; border: 0; background: transparent; color: #b99d70; cursor: pointer; font: 600 10px var(--font-geist); letter-spacing: .025em; }
+.replyToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 7px 0 0 39px;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: #b99d70;
+  cursor: pointer;
+  font: 600 10px var(--font-geist);
+  letter-spacing: .02em;
+}
+.replyToggle::before { content: '▾'; font-size: 9px; transform: translateY(-1px); }
+.replyToggle[aria-expanded=false]::before { content: '▸'; }
 .replyToggle:hover { color: #e0c28a; }
-.replies { margin: 0 0 0 17px; padding: 0 0 0 10px; border-left: 1px solid #342e28; }
-.replies > .comment { margin-top: 12px; }
-@media (max-width:600px) { .commentShell { grid-template-columns: 15px minmax(0,1fr); column-gap: 6px; } .branchToggle { width: 15px; } .branchToggle::after { left: 7px; } .branchToggle span { width: 15px; height: 15px; font-size: 11px; } .replies { margin-left: 10px; padding-left: 7px; } .replyToggle { margin-left: 0; } }
+.replyToggle:focus-visible { outline: 2px solid #d6b56f; outline-offset: 2px; }
+.replies {
+  list-style: none;
+  margin: 9px 0 0 18px;
+  padding: 0 0 0 12px;
+  border-left: 1px solid #3a332c;
+}
+.replies > .comment { margin-top: 10px; }
+.replies .replies { margin-left: 12px; padding-left: 10px; }
+@media(max-width:600px){
+  .replies{margin-left:8px;padding-left:8px}
+  .replies .replies{margin-left:6px;padding-left:7px}
+  .replyToggle{margin-left:0}
+}

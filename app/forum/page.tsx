@@ -38,12 +38,10 @@ function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNod
   const {comment,children}=node;
   const [expanded,setExpanded]=useState(true);
   const user=users.get(comment.authorId);
-  if(!user)return null;
+  if(!user)return <>{children.map(child=><ForumComment key={child.comment.id} node={child} users={users} comments={comments} threadId={threadId} target={target}/>)}</>;
   const parent=comments.find(c=>c.id===comment.parentId);
   const descendantCount=countDescendants(node);
   return <li id={`comment-${comment.id}`} tabIndex={-1} data-comment-id={comment.id} className={`${styles.comment} ${comment.moderation?styles.warning:''}`} data-highlighted={target===comment.id||undefined}>
-    <div className={styles.commentShell}>
-      {children.length>0&&<button type="button" className={styles.branchToggle} aria-expanded={expanded} aria-label={`${expanded?'Collapse':'Expand'} ${descendantCount} ${descendantCount===1?'reply':'replies'}`} onClick={()=>setExpanded(value=>!value)}><span aria-hidden="true">{expanded?'−':'+'}</span></button>}
       <article className={styles.commentContent}>
         {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}
         <Account user={user}/><time className={styles.time} dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time>
@@ -51,7 +49,6 @@ function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNod
         <p className={styles.body}>{comment.body}</p><div className={styles.commentMetaRow}><LikeButton kind="post" id={comment.id} legacyReactorIds={comment.legacyFavorIds}/><Rewards comment={comment}/></div><Composer kind="post" threadId={threadId} parentId={comment.id}/>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>} 
         {children.length>0&&<button type="button" className={styles.replyToggle} aria-expanded={expanded} onClick={()=>setExpanded(value=>!value)}>{expanded?'Hide':'Show'} {descendantCount} {descendantCount===1?'reply':'replies'}</button>}
       </article>
-    </div>
     {children.length>0&&expanded&&<ol className={styles.replies} aria-label={`Replies to @${user.username}`}>{children.map(child=><ForumComment key={child.comment.id} node={child} users={users} comments={comments} threadId={threadId} target={target}/>)}</ol>}
   </li>;
 }

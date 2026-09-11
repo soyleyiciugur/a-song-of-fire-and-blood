@@ -19,25 +19,15 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
   const { comment, children } = node;
   const user = gutterUserMap.get(comment.authorId);
   const [expanded, setExpanded] = useState(true);
-  if (!user) return null;
+  if (!user) {
+    return <>{children.map((child) => <Comment key={child.comment.id} node={child} />)}</>;
+  }
   const stats = getGutterUserStats(user.id);
   const identity = getGutterIdentity(user);
   const descendantCount = countDescendants(node);
   return (
     <li id={`comment-${comment.id}`} tabIndex={-1} className={`${styles.comment} ${pinned ? styles.pinned : ""}`} data-comment-id={comment.id} data-pinned={pinned || undefined}>
-      <div className={styles.commentShell}>
-        {children.length > 0 && (
-          <button
-            type="button"
-            className={styles.branchToggle}
-            aria-expanded={expanded}
-            aria-label={`${expanded ? "Collapse" : "Expand"} ${descendantCount} ${descendantCount === 1 ? "reply" : "replies"}`}
-            onClick={() => setExpanded((value) => !value)}
-          >
-            <span aria-hidden="true">{expanded ? "−" : "+"}</span>
-          </button>
-        )}
-        <article className={styles.commentContent}>
+      <article className={styles.commentContent}>
           {pinned && <div className={styles.pinLabel}>Pinned · {identity?.type === "character" ? "From the cast" : "Character replied"}</div>}
           {comment.parentId && <Link href={getCommentLink({ ...comment, id: comment.parentId })} className={styles.parentLink}>View parent comment</Link>}
           <details className={styles.profile}>
@@ -81,8 +71,7 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
               {expanded ? "Hide" : "Show"} {descendantCount} {descendantCount === 1 ? "reply" : "replies"}
             </button>
           )}
-        </article>
-      </div>
+      </article>
       {children.length > 0 && expanded && (
         <ol className={styles.replies} aria-label={`Replies to @${user.username}`}>
           {children.map((child) => <Comment key={child.comment.id} node={child} />)}
