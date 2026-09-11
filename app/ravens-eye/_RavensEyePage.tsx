@@ -1286,9 +1286,12 @@ function RavensEyePageInner({
   );
 
   const closeLightbox = useCallback(() => {
+    // When this lightbox was opened from another page, keep the overlay mounted
+    // until Next has replaced the route. Clearing it first briefly exposes the
+    // Raven's Eye page and causes the visible 1–2 second flash.
+    if (returnTo) { router.replace(returnTo); return; }
     setLightboxList(null);
     setLightboxIdx(null);
-    if (returnTo) { router.replace(returnTo); return; }
     setBrowserUrl(mediaUrl(tab, undefined, characterFilter || undefined));
   }, [characterFilter, returnTo, router, tab]);
 
@@ -1327,9 +1330,11 @@ function RavensEyePageInner({
   );
 
   const closeReels = useCallback(() => {
+    // Same no-flash behavior as the image lightbox: do not reveal the Raven's
+    // Eye route underneath while returning to the originating page.
+    if (returnTo) { router.replace(returnTo); return; }
     setReelsList(null);
     setReelsStartIdx(null);
-    if (returnTo) { router.replace(returnTo); return; }
     setBrowserUrl(
       mediaUrl("reels", undefined, characterFilter || undefined)
     );

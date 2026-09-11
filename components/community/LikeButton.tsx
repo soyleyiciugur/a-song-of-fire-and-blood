@@ -36,7 +36,21 @@ export default function LikeButton({ kind, id, legacyReactorIds = [] }: { kind:"
     setPeople([...legacy,...members]);
   }
 
-  async function toggle(){setBusy(true);setError("");try{const {data:{user}}=await supabase.auth.getUser();if(!user){setError(favor?"Sign in to grant Favor.":"Sign in to like.");return;}const query=liked?supabase.from("member_likes").delete().eq("user_id",user.id).eq("target_kind",kind).eq("target_id",id):supabase.from("member_likes").upsert({user_id:user.id,target_kind:kind,target_id:id},{onConflict:"user_id,target_kind,target_id",ignoreDuplicates:true});const {error:saveError}=await query;if(saveError)throw saveError;const state=await loadLikeState(kind,id);setLiked(state.liked);setMemberCount(state.count);setPeople(null);if(favor)void refreshCommunity();}catch{setError("Could not save your reaction. Try again.");}finally{setBusy(false);}}
+  async function toggle(){
+    setBusy(true); setError("");
+    try {
+      const {data:{user}}=await supabase.auth.getUser();
+      if(!user){setError(favor?"Sign in to grant Favor.":"Sign in to like.");return;}
+      const {error:saveError}=await supabase.rpc("toggle_member_reaction",{kind,target:id});
+      if(saveError){console.error("Reaction save failed",{kind,id,saveError});throw saveError;}
+      const state=await loadLikeState(kind,id);
+      setLiked(state.liked); setMemberCount(state.count); setPeople(null);
+      if(favor)void refreshCommunity();
+    } catch(error) {
+      console.error("Could not save reaction",error);
+      setError("Could not save your reaction. Try again.");
+    } finally { setBusy(false); }
+  }
   const label=favor?(liked?"Remove Favor":"Grant Favor"):(liked?"Unlike":"Like");
 
   return <span className={styles.likeWrap}>
