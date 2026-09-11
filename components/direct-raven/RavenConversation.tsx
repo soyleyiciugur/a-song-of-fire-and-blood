@@ -512,6 +512,19 @@ export default function RavenConversation({
                 <div className={styles.dateDivider}>{day(message.created_at)}</div>
               )}
               <div id={`raven-${message.id}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
+                {isGuild && !mine && (() => {
+                  const sender = memberMap.get(message.sender_id);
+                  const avatar = (
+                    <span className={styles.guildMessageAvatar} aria-hidden="true">
+                      {sender?.avatar_url
+                        ? <img src={sender.avatar_url} alt="" />
+                        : (sender?.display_name ?? "Guild member").slice(0, 2).toUpperCase()}
+                    </span>
+                  );
+                  return sender?.username
+                    ? <Link className={styles.guildMessageAvatarLink} href={`/users/${sender.username}`} aria-label={`Open ${sender.display_name}'s profile`}>{avatar}</Link>
+                    : avatar;
+                })()}
                 <div className={`${styles.messageBubble} ${message.deleted_at ? styles.deletedMessage : ""}`}>
                   {isGuild && !mine && !message.deleted_at && <span className={styles.guildSenderName}>{memberMap.get(message.sender_id)?.display_name ?? "Guild member"}</span>}
                   {!message.deleted_at && message.reply_to && (

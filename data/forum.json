@@ -2728,6 +2728,28 @@
       "publishedAt": "2026-09-11T13:10:00.000Z",
       "upvoterIds": [],
       "awards": []
+    },
+    {
+      "id": "live-dragon-ranking-luck-ecology-reply",
+      "entryId": "community-dragon-ranking-fatigue",
+      "authorId": "regular-ecology",
+      "parentId": "3ab51f85-c40a-43a0-b752-c34c1ec8d1ce",
+      "parentSource": "supabase",
+      "body": "the horns are a great detail. i am filing this under shape and habitat, not combat statistics.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "live-reading-snacks-hrrm-food-reply",
+      "entryId": "community-reading-snacks",
+      "authorId": "regular-food",
+      "parentId": "521c4e91-3d19-46ce-8d19-919124b88cc1",
+      "parentSource": "supabase",
+      "body": "then I withdraw the snack audit and replace it with a respectful author lunch break. preferably with Adana.",
+      "publishedAt": "2026-09-11T20:50:00.000Z",
+      "upvoterIds": [],
+      "awards": []
     }
   ]
 }
