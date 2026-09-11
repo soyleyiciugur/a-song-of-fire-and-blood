@@ -59,6 +59,44 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
       return boxes.some((a,i)=>boxes.slice(i+1).some(b=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1));
     });
     assert.equal(navOverlaps,false,'Navbar controls do not overlap');
+    const title = page.locator('header a').filter({hasText:'A Song of Fire and Blood'}).first();
+    if(await title.isVisible()) assert.equal(await title.evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap','Site title stays on one line');
+    const dot=page.locator('[class*="notificationDot"]');
+    if(await dot.count()) assert.equal(await dot.evaluate(el=>el.offsetParent===el.parentElement),true,'Notification dot is anchored to its own icon');
+    const messageList=page.locator('[class*="messages"]').first();
+    for(const edge of ['top','bottom']) {
+      await messageList.evaluate((el,edge)=>el.scrollTop=edge==='top'?0:el.scrollHeight,edge);
+      await page.waitForTimeout(100);
+      const option=page.getByRole('button',{name:'Message options',exact:true});
+      await (edge==='top'?option.first():option.last()).click();
+      const menu=page.locator('[data-raven-message-menu] > div');
+      const box=await menu.boundingBox(),bounds=await messageList.boundingBox();
+      assert.ok(box.y>=bounds.y&&box.y+box.height<=bounds.y+bounds.height,'Message menu stays inside the message viewport');
+      await page.keyboard.press('Escape');
+    }
+    await messageList.evaluate((el) => {
+      el.scrollTop = 0;
+      el.dispatchEvent(new Event('scroll', { bubbles: true }));
+    });
+    await page.waitForTimeout(400);
+    const afterManualScroll = await messageList.evaluate((el) => el.scrollTop);
+    assert.ok(afterManualScroll < 100, 'Conversation should stay where the user left it rather than snapping back to the newest message');
+    const account=page.getByLabel('Account menu',{exact:true});
+    await account.click();
+    await page.getByRole('link',{name:'Sign in',exact:true}).waitFor();
+    await page.getByRole('link',{name:'Join',exact:true}).waitFor();
+    await page.keyboard.press('Escape');
+    assert.equal(await account.evaluate(el=>el.parentElement.open),false,'Anonymous account menu closes on Escape');
+    const utilities=await page.locator('header').first().evaluate(el=>{
+      const row=el.firstElementChild;
+      return [...row.children].filter(el=>el.matches('[class*="searchWrap"],[class*="forumButton"],[class*="directRavenButton"],[class*="notificationsButton"],[class*="accountMenu"]')).map(el=>el.className);
+    });
+    assert.ok(utilities[0].includes('searchWrap')&&utilities[1].includes('forumButton')&&utilities.at(-1).includes('accountMenu'),'Utility order: search, forum, optional DM, notifications, account');
+    if(viewport.width>760){
+      const sound=page.getByRole('button',{name:'Enable notification sounds',exact:true});
+      await sound.click();await page.getByRole('button',{name:'Mute notification sounds',exact:true}).click();
+      assert.equal(await sound.innerText(),'','Sound control uses only an icon');
+    }
     const before=await input.boundingBox();
     for(let i=0;i<12;i++){await input.fill(`New message ${i}`);await input.press('Enter');await page.getByText(`New message ${i}`,{exact:true}).waitFor();}
     const after=await input.boundingBox();
@@ -90,6 +128,13 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     assert.equal(await page.evaluate(()=>window.scrollY),0);
     await mkdir(path.join(root,'test-results'),{recursive:true});await page.screenshot({path:path.join(root,'test-results',`raven-${viewport.width}.png`)});
     await page.goto(fixtureUrl+'?inbox=1');await page.getByRole('button',{name:'New Raven',exact:true}).click();await page.getByPlaceholder('Search @username').fill('bran');await page.getByRole('button',{name:/Brandon of the Rookery/}).waitFor();
+    await page.goto('http://localhost:3107/forum');
+    const banner=page.locator('[class*="bannerImage"]');
+    await banner.waitFor();await banner.hover();await page.waitForTimeout(750);
+    assert.equal(await banner.evaluate(el=>{
+      const parent=el.parentElement;
+      return getComputedStyle(parent).overflow==='hidden'&&Number(getComputedStyle(parent,'::after').zIndex)>Number(getComputedStyle(el).zIndex);
+    }),true,'Taverns hover image stays clipped beneath the overlay');
     if (!process.env.RAVEN_ONLY) {
     await page.goto(fixtureUrl+'?profile=1');
     await page.getByRole('tab',{name:'Threads',exact:true}).click();await page.getByText('A member thread',{exact:true}).waitFor();

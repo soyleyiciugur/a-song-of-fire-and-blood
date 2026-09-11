@@ -22,7 +22,7 @@ export function unlockSound() {
 }
 
 export function playRavenSound(kind: "message" | "notification" = "message") {
-  if (!soundEnabled() || !context || context.state !== "running" || document.visibilityState !== "visible" || Date.now() - lastPlayed < 4000) return;
+  if (!soundEnabled() || !context || context.state !== "running" || Date.now() - lastPlayed < 4000) return;
   lastPlayed = Date.now();
   const oscillator = context.createOscillator();
   const gain = context.createGain();

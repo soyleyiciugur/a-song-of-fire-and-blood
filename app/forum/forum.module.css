@@ -7,10 +7,10 @@
 .header { position: relative; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--tavern-border); border-top-color: rgba(201,162,39,.48); border-radius: var(--radius-md); background: #0d0d11; box-shadow: 0 22px 55px rgba(0,0,0,.34); }
 .header::after { content: ''; position: absolute; inset: auto 30px 0; height: 1px; background: linear-gradient(90deg,transparent,rgba(201,162,39,.52),transparent); }
 .headerContent { position: relative; padding: 32px 34px 34px; background: linear-gradient(90deg,rgba(141,40,50,.12),transparent 42%),linear-gradient(180deg,rgba(255,255,255,.025),transparent); }
-.banner { position: relative; height: clamp(230px,34vw,350px); border-bottom: 1px solid var(--tavern-border); background: #0b0b0e; }
-.bannerImage { object-fit: cover; object-position: center 30%; filter: saturate(.82) contrast(1.06) brightness(.9); transition: transform .7s ease,filter .7s ease; }
+.banner { position: relative; overflow: hidden; isolation: isolate; height: clamp(230px,34vw,350px); border-bottom: 1px solid var(--tavern-border); background: #0b0b0e; }
+.bannerImage { z-index: 0; object-fit: cover; object-position: center 30%; filter: saturate(.82) contrast(1.06) brightness(.9); transition: transform .7s ease,filter .7s ease; }
 .header:hover .bannerImage { transform: scale(1.012); filter: saturate(.92) contrast(1.06) brightness(.94); }
-.banner::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(7,7,9,.34),transparent 24%,transparent 76%,rgba(7,7,9,.34)),linear-gradient(180deg,transparent 46%,#0d0d11 100%); }
+.banner::after { content: ''; z-index: 1; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(7,7,9,.34),transparent 24%,transparent 76%,rgba(7,7,9,.34)),linear-gradient(180deg,transparent 46%,#0d0d11 100%); }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--tavern-gold-soft); font: 600 11px var(--font-geist); letter-spacing: .22em; text-decoration: none; }
 .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; opacity: .7; }
 .header h1 { max-width: 820px; margin: 12px 0 8px; color: var(--text); font: 700 clamp(30px,4.8vw,48px)/1.12 var(--font-hotd); letter-spacing: .01em; text-wrap: balance; }

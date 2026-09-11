@@ -5,6 +5,7 @@
       "Added the Gaelor Supervillain edit to the Raven's Eye reels.",
       "Added community reactions and scheduled follow-ups to the Gaelor Supervillain reel.",
       "Added context-aware editorial replies to new live Raven's Eye and Taverns activity.",
+      "Addressed a new live member reply in the Gaelor Supervillain reel conversation.",
       "Extended the dragon discussion and snack thread with selective live-member replies.",
       "Extended two live Taverns conversations with context-aware replies from established community and character accounts.",
       "Added profile guestbooks, mutual friends and linked ASOFAB favorites.",
@@ -22,7 +23,11 @@
       "Fixed navbar account overlap and empty signed-out messaging space, and stabilized initial Direct Raven positioning.",
       "Themed native form controls and added optional subtle message and notification sounds in Direct Raven.",
       "Replaced the browser deletion dialog for community contributions with an inline confirmation and retry feedback.",
-      "Kept Direct Raven emoji, portrait and GIF panels above the composer so mobile send controls stay accessible."
+      "Kept Direct Raven emoji, portrait and GIF panels above the composer so mobile send controls stay accessible.",
+      "Enabled optional Raven sounds in background tabs, kept the navbar title on one line, and anchored mobile notification badges to their icons.",
+      "Replaced notification arrows with matching line icons and made message menus open toward available space.",
+      "Reordered navbar utilities with the account on the right and added a compact anonymous sign-in menu on desktop and mobile.",
+      "Replaced Raven sound labels with speaker icons and contained the Taverns banner hover image beneath its overlay."
     ],
     "features": [
       "Added profile guestbooks, mutual friends and linked ASOFAB favorites."

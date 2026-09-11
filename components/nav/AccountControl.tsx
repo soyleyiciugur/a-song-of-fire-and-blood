@@ -56,8 +56,8 @@ export default function AccountControl() {
     return () => { document.removeEventListener("pointerdown", close); document.removeEventListener("keydown", escape); };
   }, []);
 
-  if (!state.loaded) return null;
-  if (!state.signedIn || !state.profile) return <span className={styles.authLinks}><Link href="/login">Sign in</Link><Link href="/register">Join</Link></span>;
+
+  if (!state.signedIn || !state.profile) return <details ref={detailsRef} className={`${styles.accountMenu} ${styles.anonymousAccount}`}><summary aria-label="Account menu" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 20v-1a7 7 0 0 1 14 0v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg></summary><div onClick={() => { if (detailsRef.current) detailsRef.current.open = false; }}><Link href="/login">Sign in</Link><Link href="/register">Join</Link></div></details>;
   const profile=state.profile;
   return <details ref={detailsRef} className={styles.accountMenu}><summary aria-label="Account menu"><span>{profile.avatar_url?<img src={profile.avatar_url} alt=""/>:profile.display_name.slice(0,2).toUpperCase()}</span><b>{profile.display_name}</b></summary><div onClick={(event) => { if ((event.target as HTMLElement).closest("a,button") && detailsRef.current) detailsRef.current.open = false; }}><p className={styles.accountIdentity}><strong>{profile.display_name}</strong><small>@{profile.username}</small></p>{state.profileReady?<><Link href={`/users/${profile.username}`}>Profile</Link><Link href="/settings">Settings</Link></>:<p className={styles.profileNotice}>Profile setup pending</p>}<form action={logout}><button>Sign out</button></form></div></details>;
 }

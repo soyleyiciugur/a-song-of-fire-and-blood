@@ -635,7 +635,21 @@
 .inner>.authLinks{white-space:nowrap}
 .inner>.authLinks a:last-child{display:inline}
 .navLinks{flex:1 1 auto}
-.homeLink{flex-shrink:1;max-width:180px;white-space:normal}
+.homeLink{flex-shrink:0;max-width:none;white-space:nowrap}
 .playBannerCollapsed .inner{padding-top:3px;padding-bottom:3px}
 }
 @media(max-width:640px){.playBanner .inner>.searchWrap{margin-left:auto}}
+
+.playBanner .homeLink{white-space:nowrap}
+@media(max-width:1150px){.playBanner .notificationsButton,.playBanner .directRavenButton{position:relative;inset:auto}}
+
+/* The account remains the rightmost utility on every viewport. */
+.inner>.accountMenu{position:relative;inset:auto;transform:none;flex-shrink:0}
+.anonymousAccount summary{display:grid;place-items:center;width:38px;height:38px;padding:0;border-color:var(--border);background:var(--surface);color:var(--gold)}
+.anonymousAccount>div{min-width:132px}
+@media(max-width:1150px){
+.playBanner .inner>.accountMenu{display:block;flex:0 0 44px}
+.inner>.accountMenu summary{display:flex;justify-content:center;width:44px;height:44px;padding:0}
+.inner>.accountMenu summary b{display:none}
+.inner>.accountMenu>div{position:absolute;right:0;top:50px}
+}

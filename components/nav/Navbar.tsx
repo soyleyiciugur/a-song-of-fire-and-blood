@@ -179,12 +179,12 @@ export default function Navbar() {
         </nav>
 
         <SearchBar />
-        <AccountControl />
-        <NotificationNavButton />
-        <DirectRavenNavButton />
         <Link href="/forum" className={`${styles.notificationsButton} ${styles.forumButton}`} aria-label="Taverns" title="Taverns">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M8 8h8M8 12h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
         </Link>
+        <DirectRavenNavButton />
+        <NotificationNavButton />
+        <AccountControl />
       </div>
 
       {menuOpen && <button className={styles.menuBackdrop} tabIndex={-1} aria-label="Close navigation" onClick={() => setMenuOpen(false)} />}
@@ -195,7 +195,7 @@ export default function Navbar() {
         className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ""}`}
       >
         <Link href="/" className={styles.mobileSiteTitle} onClick={() => setMenuOpen(false)}>A Song of Fire and Blood</Link>
-        <AccountControl />
+
         {NAV_ITEMS.map((item) =>
           isNavigationGroup(item) ? (
             <div key={item.label} className={styles.mobileNavGroup}>

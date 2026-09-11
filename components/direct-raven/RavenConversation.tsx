@@ -69,6 +69,7 @@ export default function RavenConversation({
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const actionMenuRef = useRef<HTMLDivElement>(null);
   const [actionMenuId, setActionMenuId] = useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerTab, setPickerTab] = useState<PickerTab>("emoji");
@@ -107,6 +108,31 @@ export default function RavenConversation({
       (character) => character.name.toLowerCase().includes(query) || character.id.includes(query)
     );
   }, [portraitSearch]);
+
+  useLayoutEffect(() => {
+    const menu = actionMenuRef.current;
+    const list = listRef.current;
+    if (!actionMenuId || !menu || !list) return;
+    const bounds = list.getBoundingClientRect();
+    menu.style.top = "24px";
+    menu.style.bottom = "auto";
+    menu.style.left = "auto";
+    menu.style.right = "0";
+    const rect = menu.getBoundingClientRect();
+    if (rect.left < bounds.left + 8) {
+      menu.style.left = "0";
+      menu.style.right = "auto";
+    }
+    const anchor = menu.parentElement!.getBoundingClientRect();
+    if (rect.bottom > bounds.bottom - 8 && anchor.top - bounds.top > bounds.bottom - anchor.bottom) {
+      menu.style.top = "auto";
+      menu.style.bottom = "24px";
+    }
+    const close = () => setActionMenuId(null);
+    list.addEventListener("scroll", close, { passive: true });
+    window.addEventListener("resize", close);
+    return () => { list.removeEventListener("scroll", close); window.removeEventListener("resize", close); };
+  }, [actionMenuId]);
 
   const scrollBottom = () => {
     const element = listRef.current;
@@ -238,12 +264,21 @@ export default function RavenConversation({
 
       if (!active) return;
       if (data) {
-        if (!nearBottom.current && data.some((message) => !loadedMessages.current.some((old) => old.id === message.id))) {
+        const incoming = data as DirectRavenMessage[];
+        if (!nearBottom.current && incoming.some((message) => !loadedMessages.current.some((old) => old.id === message.id))) {
           setNewMessages(true);
         }
         setMessages((current) => {
           const map = new Map<string, DirectRavenMessage>(current.map((message) => [message.id, message]));
-          (data as DirectRavenMessage[]).forEach((message) => map.set(message.id, message));
+          let changed = current.length !== incoming.length;
+          for (const message of incoming) {
+            const previous = map.get(message.id);
+            if (!previous || previous.sender_id !== message.sender_id || previous.body !== message.body || previous.created_at !== message.created_at || previous.deleted_at !== message.deleted_at || previous.edited_at !== message.edited_at || previous.reply_to !== message.reply_to || previous.attachment_path !== message.attachment_path || previous.gif?.url !== message.gif?.url) {
+              changed = true;
+            }
+            map.set(message.id, message);
+          }
+          if (!changed && current.length === incoming.length) return current;
           return [...map.values()].sort(
             (a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id)
           );
@@ -617,10 +652,9 @@ export default function RavenConversation({
                             setActionMenuId((current) => current === message.id ? null : message.id);
                           }}
                         >
-                          <span aria-hidden="true">⌄</span>
-                        </button>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
                         {actionMenuId === message.id && (
-                          <div className={styles.messageMenu} onPointerDown={(event) => event.stopPropagation()}>
+                          <div ref={actionMenuRef} className={styles.messageMenu} onPointerDown={(event) => event.stopPropagation()}>
                             {parseRavenBody(message.body).text && (
                               <button
                                 type="button"

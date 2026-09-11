@@ -39,3 +39,5 @@
 .tabs button[aria-pressed="true"]{border-color:#c3a166;color:#d7b97e}
 .tabs button:focus-visible{outline:2px solid #c3a166;outline-offset:3px}
 @media(max-width:500px){.tabs{flex-wrap:wrap}.tabs>*{flex:1 1 auto;justify-content:center}}
+
+.openArrow{flex:0 0 16px;margin-top:3px;color:var(--gold)}
