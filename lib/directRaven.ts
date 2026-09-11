@@ -1,12 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
-import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
+import type { DirectRavenConversation, DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
 
 export type RavenConversationSummary = {
   conversation: DirectRavenConversation;
-  partner: Profile | null;
-  members: Profile[];
-  memberships: DirectRavenMember[];
+  partner: Profile;
   lastMessage: DirectRavenMessage | null;
   unread: number;
 };
@@ -20,45 +18,29 @@ export async function loadDirectRavenInbox(): Promise<{ userId: string; profile:
   const conversations = (rows ?? []) as DirectRavenConversation[];
   if (conversations.length === 0) return { userId: user.id, profile, conversations: [] };
 
-  const ids = conversations.map((conversation) => conversation.id);
-  const [{ data: memberRows, error: memberError }, { data: summaries, error: summaryError }] = await Promise.all([
-    supabase.from("direct_raven_members").select("*").in("conversation_id", ids),
+  const partnerIds = [...new Set(conversations.map((c) => c.user_a === user.id ? c.user_b : c.user_a))];
+  const [{ data: profiles }, { data: summaries, error: summaryError }] = await Promise.all([
+    supabase.from("profiles").select("*").in("id", partnerIds),
     supabase.rpc("direct_raven_summaries"),
   ]);
-  if (memberError || summaryError) throw new Error("The raven inbox could not be loaded.");
-
-  const memberships = (memberRows ?? []) as DirectRavenMember[];
-  const profileIds = [...new Set(memberships.map((membership) => membership.user_id))];
-  const { data: profiles, error: profileError } = profileIds.length
-    ? await supabase.from("profiles").select("*").in("id", profileIds)
-    : { data: [], error: null };
-  if (profileError) throw new Error("The raven inbox could not be loaded.");
-
-  const profileMap = new Map((profiles ?? []).map((member) => [member.id, member as Profile]));
-  const summaryMap = new Map((summaries as { conversation_id: string; last_message: DirectRavenMessage | null; unread: number }[] ?? []).map((summary) => [summary.conversation_id, summary]));
+  if (summaryError) throw new Error("The raven inbox could not be loaded.");
+  const profileMap = new Map((profiles ?? []).map((p) => [p.id, p as Profile]));
+  const summaryMap = new Map((summaries as { conversation_id: string; last_message: DirectRavenMessage | null; unread: number }[] ?? []).map(s => [s.conversation_id, s]));
 
   return {
     userId: user.id,
     profile,
-    conversations: conversations.map((conversation) => {
-      const conversationMemberships = memberships.filter((membership) => membership.conversation_id === conversation.id);
-      const members = conversationMemberships.flatMap((membership) => {
-        const member = profileMap.get(membership.user_id);
-        return member ? [member] : [];
-      });
-      const partnerId = conversation.kind === "raven"
-        ? (conversation.user_a === user.id ? conversation.user_b : conversation.user_a)
-        : null;
-      const partner = partnerId ? profileMap.get(partnerId) ?? null : null;
+    conversations: conversations.flatMap((conversation) => {
+      const partnerId = conversation.user_a === user.id ? conversation.user_b : conversation.user_a;
+      const partner = profileMap.get(partnerId);
+      if (!partner) return [];
       const summary = summaryMap.get(conversation.id);
-      return {
+      return [{
         conversation,
         partner,
-        members,
-        memberships: conversationMemberships,
         lastMessage: summary?.last_message ?? null,
         unread: Number(summary?.unread ?? 0),
-      };
+      }];
     }),
   };
 }
@@ -69,20 +51,93 @@ export async function loadDirectRavenConversation(id: string) {
   const summary = inbox.conversations.find((item) => item.conversation.id === id);
   if (!summary) return { ...inbox, selected: null, messages: [] as DirectRavenMessage[], blockedByMe: false, blockedByThem: false };
   const supabase = await createClient();
-
-  const messagePromise = supabase.from("direct_raven_messages").select("*").eq("conversation_id", id).order("created_at", { ascending: false }).order("id", { ascending: false }).limit(100);
-  const blockPromise = summary.conversation.kind === "raven" && summary.partner
-    ? supabase.from("direct_raven_blocks").select("*").or(`and(blocker_id.eq.${inbox.userId},blocked_id.eq.${summary.partner.id}),and(blocker_id.eq.${summary.partner.id},blocked_id.eq.${inbox.userId})`)
-    : Promise.resolve({ data: [], error: null });
-
-  const [{ data: messages, error: messageError }, { data: blocks, error: blockError }] = await Promise.all([messagePromise, blockPromise]);
+  const [{ data: messages, error: messageError }, { data: blocks, error: blockError }] = await Promise.all([
+    supabase.from("direct_raven_messages").select("*").eq("conversation_id", id).order("created_at", { ascending: false }).order("id", { ascending: false }).limit(100),
+    supabase.from("direct_raven_blocks").select("*").or(`and(blocker_id.eq.${inbox.userId},blocked_id.eq.${summary.partner.id}),and(blocker_id.eq.${summary.partner.id},blocked_id.eq.${inbox.userId})`),
+  ]);
   if (messageError || blockError) throw new Error("The conversation could not be loaded.");
   const blockRows = (blocks ?? []) as { blocker_id: string; blocked_id: string }[];
   return {
     ...inbox,
     selected: summary,
     messages: ((messages ?? []) as DirectRavenMessage[]).reverse(),
-    blockedByMe: summary.partner ? blockRows.some((block) => block.blocker_id === inbox.userId) : false,
-    blockedByThem: summary.partner ? blockRows.some((block) => block.blocker_id === summary.partner?.id) : false,
+    blockedByMe: blockRows.some((b) => b.blocker_id === inbox.userId),
+    blockedByThem: blockRows.some((b) => b.blocker_id === summary.partner.id),
+  };
+}
+
+
+export async function loadDirectRavenConversationOnly(id: string) {
+  const user = await getCurrentUser();
+  if (!user) return null;
+
+  const supabase = await createClient();
+  const { data: conversation, error: conversationError } = await supabase
+    .from("direct_raven_conversations")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (conversationError) throw new Error("The conversation could not be loaded.");
+  if (!conversation) {
+    return {
+      userId: user.id,
+      selected: null,
+      messages: [] as DirectRavenMessage[],
+      blockedByMe: false,
+      blockedByThem: false,
+    };
+  }
+
+  const row = conversation as DirectRavenConversation;
+  const partnerId = row.user_a === user.id ? row.user_b : row.user_a;
+  if (row.user_a !== user.id && row.user_b !== user.id) {
+    return {
+      userId: user.id,
+      selected: null,
+      messages: [] as DirectRavenMessage[],
+      blockedByMe: false,
+      blockedByThem: false,
+    };
+  }
+
+  const [{ data: partner, error: partnerError }, { data: messages, error: messageError }, { data: blocks, error: blockError }] = await Promise.all([
+    supabase.from("profiles").select("*").eq("id", partnerId).maybeSingle(),
+    supabase
+      .from("direct_raven_messages")
+      .select("*")
+      .eq("conversation_id", id)
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: false })
+      .limit(100),
+    supabase
+      .from("direct_raven_blocks")
+      .select("*")
+      .or(`and(blocker_id.eq.${user.id},blocked_id.eq.${partnerId}),and(blocker_id.eq.${partnerId},blocked_id.eq.${user.id})`),
+  ]);
+
+  if (partnerError || messageError || blockError) throw new Error("The conversation could not be loaded.");
+  if (!partner) {
+    return {
+      userId: user.id,
+      selected: null,
+      messages: [] as DirectRavenMessage[],
+      blockedByMe: false,
+      blockedByThem: false,
+    };
+  }
+
+  const blockRows = (blocks ?? []) as { blocker_id: string; blocked_id: string }[];
+  return {
+    userId: user.id,
+    selected: {
+      conversation: row,
+      partner: partner as Profile,
+      lastMessage: null,
+      unread: 0,
+    } satisfies RavenConversationSummary,
+    messages: ((messages ?? []) as DirectRavenMessage[]).reverse(),
+    blockedByMe: blockRows.some((b) => b.blocker_id === user.id),
+    blockedByThem: blockRows.some((b) => b.blocker_id === partnerId),
   };
 }
