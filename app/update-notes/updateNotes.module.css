@@ -18,3 +18,5 @@
   .entry { padding: 20px 16px; }
   .entry h2 { font-size: 20px; }
 }
+
+.tabs{display:flex;gap:8px;margin:24px 0}.tabs button{min-height:42px;padding:8px 20px;border:1px solid #715233;border-radius:6px;background:#111012;color:#bba78f;cursor:pointer}.tabs button[aria-selected=true]{background:#271b1e;color:#e1c29a;border-color:#c39a50}

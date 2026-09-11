@@ -15,7 +15,7 @@ await db.exec(`
   create function storage.foldername(text) returns text[] language sql immutable as $$ select string_to_array($1,'/') $$;
   create publication supabase_realtime;
 `);
-for (const file of ['20260910120000_auth_ownership.sql', '20260910143000_repair_missing_profiles.sql', '20260910203000_direct_raven.sql', '20260910220000_member_social.sql']) {
+for (const file of ['20260910120000_auth_ownership.sql', '20260910143000_repair_missing_profiles.sql', '20260910203000_direct_raven.sql', '20260910220000_member_social.sql', '20260911120000_profile_identity_currency.sql', '20260911121000_raven_giphy.sql', '20260911122000_profile_reactions.sql']) {
   await db.exec(await readFile(new URL(`../supabase/migrations/${file}`, import.meta.url), 'utf8'));
 }
 await db.exec(`grant usage on schema public,auth,storage to anon,authenticated; grant select,insert,update,delete on all tables in schema public,storage to authenticated; grant select on all tables in schema public,storage to anon;`);
@@ -64,5 +64,45 @@ await rejects(`update public.direct_raven_messages set deleted_at=null where id=
 await rejects(`insert into storage.objects(bucket_id,name,owner_id) values('raven-media',$1,$2)`,[`${conversation}/${a}/blocked.png`,a],/row-level security/);
 await db.query(`update public.profiles set banner_url=$1 where id=$2`,[`https://example.test/storage/v1/object/public/avatars/${a}/banner.png`,a]);
 await rejects(`update public.profiles set banner_url=$1 where id=$2`,[`https://example.test/storage/v1/object/public/avatars/${b}/banner.png`,a],/invalid_banner/);
+// Currency authorization and idempotency use the actual PostgreSQL function.
+await db.exec('reset role');
+await db.query('delete from public.direct_raven_blocks');
+assert.equal(Number((await db.query('select balance from public.member_wallets where user_id=$1',[a])).rows[0].balance),0);
+await db.query('update public.member_wallets set balance=100 where user_id=$1',[a]);
+await as(a);
+assert.equal((await db.query('update public.member_wallets set balance=999 where user_id=$1 returning user_id',[a])).rows.length,0);
+await rejects('insert into public.member_wallets(user_id,balance) values($1,1000)',[a],/row-level security/);
+const transfer='00000000-0000-4000-8002-000000000001';
+assert.equal(Number((await db.query('select public.grant_hasocash($1,30,$2) balance',[b,transfer])).rows[0].balance),70);
+assert.equal(Number((await db.query('select public.grant_hasocash($1,30,$2) balance',[b,transfer])).rows[0].balance),70);
+await rejects('select public.grant_hasocash($1,31,$2)',[b,transfer],/request_conflict/);
+await rejects('select public.grant_hasocash($1,80,gen_random_uuid())',[b],/insufficient_hasocash/);
+await rejects('select public.grant_hasocash($1,-1,gen_random_uuid())',[b],/invalid_transfer/);
+await as(b);
+assert.equal(Number((await db.query('select balance from public.member_wallets where user_id=$1',[b])).rows[0].balance),30);
+const guest=(await db.query("insert into public.profile_guestbook(profile_id,author_id,body) values($1,$2,'Good evening') returning id",[a,b])).rows[0].id;
+await as(outsider);
+assert.equal((await db.query('delete from public.profile_guestbook where id=$1 returning id',[guest])).rows.length,0);
+assert.equal((await db.query('select * from public.hasocash_transfers')).rows.length,0);
+await as(a);
+assert.equal((await db.query('delete from public.profile_guestbook where id=$1 returning id',[guest])).rows.length,1);
+const gif={id:'abc123',url:'https://media.giphy.com/media/abc123/200.gif',title:'Wave'};
+await db.query("insert into public.direct_raven_messages(conversation_id,sender_id,body,gif) values($1,$2,'',$3)",[conversation,a,JSON.stringify(gif)]);
+await rejects("insert into public.direct_raven_messages(conversation_id,sender_id,body,gif) values($1,$2,'',$3)",[conversation,a,JSON.stringify({...gif,url:'https://example.com/x.gif'})],/invalid_gif/);
+await as(a);
+const attempts=await Promise.allSettled([db.query('select public.grant_hasocash($1,50,gen_random_uuid())',[b]),db.query('select public.grant_hasocash($1,50,gen_random_uuid())',[b])]);
+assert.equal(attempts.filter(r=>r.status==='fulfilled').length,1,'Competing grants cannot overspend');
+await db.exec('reset role');
+const balances=(await db.query('select balance from public.member_wallets where user_id in($1,$2)',[a,b])).rows.map(r=>Number(r.balance));
+assert.equal(balances.reduce((x,y)=>x+y,0),100,'Transfers conserve the total balance');
+assert.ok(balances.every(n=>n>=0));
+await as(a);
+const thread=(await db.query("insert into public.forum_threads(title,body,user_author_id,author_type) values('Test table','A meaningful discussion',$1,'user') returning id",[a])).rows[0].id;
+await as(b);
+await db.query("insert into public.member_likes(user_id,target_kind,target_id) values($1,'thread',$2)",[b,thread]);
+const reactions=(await db.query('select * from public.profile_reactions($1)',[a])).rows;
+assert.ok(reactions.some(r=>r.target_kind==='thread'&&r.direction==='received'&&Number(r.total)===1));
+assert.ok(reactions.every(r=>r.target_kind!=='message'),'Profile reactions never disclose private messages');
 await db.close();
+console.log('Currency idempotency, overspending, guestbook moderation, GIF validation and public reaction activity passed.');
 console.log('Member social: migrations, private media, message ownership, read receipts, likes, friend acceptance and blocks passed.');

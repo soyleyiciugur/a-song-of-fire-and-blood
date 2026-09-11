@@ -23,7 +23,7 @@ export default function ProfileActivity({ userId }: { userId: string }) {
     });
     return () => { active = false; };
   }, [tab, page, userId, supabase]);
-  return <section className={styles.activity}>
+  return <section className={styles.activity}><h2>Activity</h2>
     <div className={styles.tabs} role="tablist" aria-label="Profile activity">{([["thread", "Threads"], ["post", "Replies"], ["raven", "Raven's Eye"]] as const).map(([key, label]) => <button role="tab" aria-selected={tab === key} aria-controls="profile-activity" key={key} onClick={() => { if (key === tab) return; setTab(key); setPage(0); setRows([]); }}>{label}</button>)}</div>
     <div id="profile-activity" role="tabpanel" aria-label={tab}>
       {rows.map(row => {

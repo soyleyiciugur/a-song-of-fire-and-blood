@@ -2683,6 +2683,29 @@
         "regular-cooked"
       ],
       "awards": []
+    },
+    {
+      "id": "live-new-reader-luck-how-did-you-know-gate",
+      "entryId": "community-new-reader-desk",
+      "authorId": "regular-gate",
+      "parentId": "ace17a50-9ef5-472a-87dc-03f524719d9a",
+      "parentSource": "supabase",
+      "body": "because that is exactly what I said when the fifth tab appeared.",
+      "publishedAt": "2026-09-11T09:17:49.208Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "live-admin-appreciation-luck-cooked-jace",
+      "entryId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "liveThreadId": "4badd542-d627-49e9-9480-0f1fb8de2e4d",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "b10ddb46-5eac-407f-8b7f-ca78de081fd2",
+      "parentSource": "supabase",
+      "body": "I prefer 'efficiently informed.'",
+      "publishedAt": "2026-09-11T09:17:49.208Z",
+      "upvoterIds": [],
+      "awards": []
     }
   ]
 }

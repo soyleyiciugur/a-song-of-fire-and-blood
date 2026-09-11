@@ -60,7 +60,7 @@ function Notifications() {
       <nav className={styles.tabs} aria-label="Notification sections">
         <button type="button" aria-pressed={filter === "for-you"} onClick={() => { setFilter("for-you"); setLimit(30); }}>For you</button>
         <button type="button" aria-pressed={filter === "all"} onClick={() => { setFilter("all"); setLimit(30); }}>All activity</button>
-        <Link href="/update-notes">Update notes</Link>
+
       </nav>
       {!data.loaded && !data.error && <p role="status">Loading notifications…</p>}
       {data.error && <p role="status">{data.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}

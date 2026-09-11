@@ -12606,6 +12606,38 @@
       "parentSource": "supabase",
       "body": "the fact that this is the cleanest summary of the edit is ruining my morning",
       "publishedAt": "2026-09-11T09:00:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-gaelorflop",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-anti",
+      "parentId": null,
+      "body": "annoying news for me personally: the edit goes hard",
+      "publishedAt": "2026-09-11T09:58:47.988Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-apologist",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "supervillain is a hostile editorial choice. the statement is now six pages.",
+      "publishedAt": "2026-09-11T09:58:47.988Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-scheduled-1",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-e",
+      "parentId": "gallery-gaelor-supervillain-apologist",
+      "body": "page seven is just the word allegations",
+      "publishedAt": "2026-09-11T13:10:00.000Z"
+    },
+    {
+      "id": "gallery-gaelor-supervillain-scheduled-2",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "the edit is good. the arc still needs more than a soundtrack.",
+      "publishedAt": "2026-09-11T20:50:00.000Z"
     }
   ],
   "relationships": [

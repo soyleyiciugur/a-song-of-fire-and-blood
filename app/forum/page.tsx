@@ -32,8 +32,7 @@ function Account({user}:{user:GutterUser}) {
   </div></details>;
 }
 function Rewards({comment}:{comment:GutterComment}) {
-  return <div className={styles.rewards}><span title="Upvotes from community regulars" aria-label={`${comment.upvotes??0} upvotes`}><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m3 10 7-7 7 7h-4v7H7v-7H3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg> {comment.upvotes??0}</span>
-    {!!comment.hasocash&&<span className={styles.cash} title="Hasocash · a fictional community award" aria-label={`${comment.hasocash} Hasocash`}><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 1 9.5 5.5v11L12 23l-9.5-5.5v-11Z" fill="currentColor" fillOpacity=".13" stroke="currentColor"/><path d="M8 7v10M16 7v10M8 12h8" stroke="currentColor" strokeWidth="2"/></svg>{comment.hasocash} Hasocash</span>}
+  return <div className={styles.rewards}>{!comment.authorType&&<span title="Favor from community regulars" aria-label={`${comment.upvotes??0} Favor`}><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m3 10 7-7 7 7h-4v7H7v-7H3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg> {comment.upvotes??0}</span>}
     <Link href={getCommentLink(comment)} className={styles.permalink}>Permalink</Link>
   </div>;
 }
@@ -67,7 +66,7 @@ function Forum() {
       {!threadId&&<div className={styles.banner}><Image src="/images/taverns/tavern-banner.jpeg" alt="Visenor, Gaelor and Jace Targaryen" fill sizes="(max-width: 980px) 100vw, 936px" preload className={styles.bannerImage}/></div>}
       <div className={styles.headerContent}><Link className={styles.eyebrow} href="/forum">TAVERNS</Link><h1>{thread?thread.title:'Taverns'}</h1><p className={styles.muted}>Pull up a chair by the hearth. Chapter tales, whispered theories and familiar faces await.</p></div>
     </header>
-    <details className={styles.rules}><summary>House rules · Jace keeps the peace</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Sign in to post, reply and like member contributions. Fictional regulars and awards are editorially managed.</p></details>
+    <details className={styles.rules}><summary>House rules · Jace keeps the peace</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Sign in to post, reply and grant Favor to member contributions. Fictional regulars and awards are editorially managed.</p></details>
     {data.error&&<p role="status">{data.error} <button onClick={()=>void refreshCommunity()}>Retry</button></p>}
     {!data.loaded&&<p role="status">Opening the tavern doors…</p>}
     {threadId ? thread ? <>
@@ -76,7 +75,7 @@ function Forum() {
         {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
         {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}{thread.authorType&&<LikeButton kind="thread" id={thread.id}/ >}{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
       </section>
-      <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><label>Order <select value={sort} onChange={e=>setSort(e.target.value)}><option value="conversation">Conversation</option><option value="top">Top conversations</option></select></label></div>
+      <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><label>Order <select value={sort} onChange={e=>setSort(e.target.value)}><option value="conversation">Conversation</option><option value="top">Most Favored</option></select></label></div>
       {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
       <ol className={styles.comments}>{ordered.map(({comment,depth})=>{
         const user=users.get(comment.authorId);if(!user)return null;

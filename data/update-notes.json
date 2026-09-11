@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-09-11",
+    "items": [
+      "Added the Gaelor Supervillain edit to the Raven's Eye reels.",
+      "Added community reactions and scheduled follow-ups to the Gaelor Supervillain reel.",
+      "Extended two live Taverns conversations with context-aware replies from established community and character accounts.",
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites.",
+      "Added separate HasoCash wallets and secure member-to-member grants.",
+      "Added GIPHY search and inline mini portraits to Direct Raven.",
+      "Separated Update Notes into Features and Fixes, accessible through Latest Updates.",
+      "Distinguished forum Favor from comment Likes and added reaction lists and profile activity.",
+      "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.",
+      "Matched homepage card spacing and heading accents, and refined the mobile chat composer."
+    ],
+    "features": [
+      "Added the Gaelor Supervillain edit to the Raven's Eye reels.",
+      "Added community reactions and scheduled follow-ups to the Gaelor Supervillain reel.",
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites.",
+      "Added separate HasoCash wallets and secure member-to-member grants.",
+      "Added GIPHY search and inline mini portraits to Direct Raven."
+    ],
+    "links": {
+      "Added the Gaelor Supervillain edit to the Raven's Eye reels.": "/ravens-eye/reels",
+      "Added community reactions and scheduled follow-ups to the Gaelor Supervillain reel.": "/ravens-eye/reels",
+      "Added GIPHY search and inline mini portraits to Direct Raven.": "/messages",
+      "Separated Update Notes into Features and Fixes, accessible through Latest Updates.": "/update-notes",
+      "Distinguished forum Favor from comment Likes and added reaction lists and profile activity.": "/forum",
+      "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.": "/ravens-eye"
+    }
+  },
+  {
     "date": "2026-09-10",
     "items": [
       "Fixed signed-in navbar collisions and replaced the Direct Raven control with a clearer message icon.",
@@ -32,6 +62,13 @@
       "Added a community authoring inbox workflow so future fictional-account batches can respond to live member forum and Raven’s Eye activity.",
       "Notifications now separate activity addressed to you from the wider community feed and show a new-activity dot in the navigation.",
       "Polished mobile navigation and account behavior: Direct Raven stays in the navigation, the account menu closes outside/Escape, and the long site title moves into the mobile menu on small screens."
+    ],
+    "features": [
+      "Added secure member accounts with email confirmation, password recovery, public profiles and avatars across Taverns and Raven's Eye.",
+      "Authenticated members can now start Taverns discussions, reply to threads and join Raven's Eye conversations while existing fictional and character-authored discussions remain intact.",
+      "Added Update Notes: a daily, dated record of site improvements, accessible from the homepage's Latest Updates section.",
+      "Added private photo and GIF uploads, emoji, message replies, editing, withdrawal, likes and read receipts to Direct Raven.",
+      "Added profile banners, browsable member threads and replies, and friend requests with acceptance and removal controls."
     ]
   },
   {
@@ -39,6 +76,9 @@
     "items": [
       "Added comments across Raven's Eye images, memes and reels, with character portraits, pinned character conversations and community profiles.",
       "Community profiles show friends, and Latest comments links directly to conversations; scheduled comments appear when their publication time arrives."
+    ],
+    "features": [
+      "Added comments across Raven's Eye images, memes and reels, with character portraits, pinned character conversations and community profiles."
     ]
   }
 ]

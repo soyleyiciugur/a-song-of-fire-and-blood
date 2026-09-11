@@ -1,7 +1,12 @@
+import ProfileReactions from "@/components/community/ProfileReactions";
+import ProfileGuestbook from "@/components/community/ProfileGuestbook";
+import ProfileWallet from "@/components/community/ProfileWallet";
+import ProfileAffinity from "@/components/community/ProfileAffinity";
+import { affinityCatalog } from "@/lib/profileAffinity";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, getCurrentProfile } from "@/lib/auth";
 import SendRavenButton from "@/components/direct-raven/SendRavenButton";
 import ProfileActivity from "@/components/community/ProfileActivity";
 import ProfileFriends from "@/components/community/ProfileFriends";
@@ -20,6 +25,7 @@ export default async function Page({ params }: { params: Promise<{ username: str
     getCurrentUser(),
   ]);
 
+  const viewerProfile=viewer?await getCurrentProfile():null;
   return (
     <main className={styles.page}>
       <div className={styles.banner}>{p.banner_url && <img src={p.banner_url} alt="" />}</div>
@@ -41,8 +47,12 @@ export default async function Page({ params }: { params: Promise<{ username: str
         <div><dt>Replies</dt><dd>{posts ?? 0}</dd></div>
         <div><dt>Raven’s Eye comments</dt><dd>{raven ?? 0}</dd></div>
       </dl>
-      <ProfileFriends profileId={p.id} viewerId={viewer?.id ?? null} />
-      <ProfileActivity userId={p.id} />
+      <ProfileFriends key={p.id} profileId={p.id} viewerId={viewer?.id ?? null} />
+      <ProfileAffinity key={p.id} profileId={p.id} values={p.affinity??{}} catalog={affinityCatalog().map(field=>viewer?.id===p.id?field:{...field,options:field.options.filter(option=>option.id===p.affinity?.[field.key])})} editable={viewer?.id===p.id} />
+      <ProfileWallet key={p.id} profileId={p.id} viewerId={viewer?.id??null} />
+      <ProfileGuestbook key={p.id} profileId={p.id} viewerId={viewer?.id??null} canModerate={viewerProfile?.role==="admin"||viewerProfile?.role==="moderator"} />
+      <ProfileActivity key={p.id} userId={p.id} />
+      <ProfileReactions key={p.id} userId={p.id} />
     </main>
   );
 }

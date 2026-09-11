@@ -1,5 +1,17 @@
 [
   {
+    "id": "gallery-gaelor-supervillain",
+    "src": "/videos/reels/gaelor-supervillain.mov",
+    "caption": "evilmaxxing",
+    "characterIds": ["gaelor-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-11",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-vahaemon-mogged",
     "src": "/videos/reels/vahaemon-mogged.mp4",
     "caption": "spawn diff",

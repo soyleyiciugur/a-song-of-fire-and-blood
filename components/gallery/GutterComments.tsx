@@ -23,7 +23,7 @@ function Comment({ comment, replies, pinned = false }: { comment: GutterComment;
     <li id={`comment-${comment.id}`} tabIndex={-1} className={`${styles.comment} ${pinned ? styles.pinned : ""}`} data-comment-id={comment.id} data-pinned={pinned || undefined}>
       {pinned && <div className={styles.pinLabel}>Pinned · {identity?.type === "character" ? "From the cast" : "Character replied"}</div>}
       <article>
-        {comment.parentId && <Link href={getCommentLink({ ...comment, id: comment.parentId })} className={styles.parentLink}>? Reply to comment</Link>}
+        {comment.parentId && <Link href={getCommentLink({ ...comment, id: comment.parentId })} className={styles.parentLink}>View parent comment</Link>}
         <details className={styles.profile}>
           <summary>
             {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={identity?.name ?? user.username} size={30} /> : user.avatarUrl ? <img className={styles.avatar} src={user.avatarUrl} alt="" /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
@@ -112,7 +112,7 @@ export default function GutterComments({ entryId, collapsible = false }: { entry
           </ol>
         ) : <p className={styles.intro}>The gutters are quiet. For now.</p>}
         <Composer kind="raven" entryId={entryId} />
-        <p className={styles.footer}>Sign in to join the conversation. Fictional regulars and cast accounts remain editorially managed.</p>
+
       </div>
     </section>
   );

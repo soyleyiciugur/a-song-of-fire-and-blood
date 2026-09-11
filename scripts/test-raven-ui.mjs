@@ -5,7 +5,9 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 
 const root = process.cwd();
-const fixture = path.join(root, 'app', 'social-test');
+const fixtureName = `social-test-${process.pid}`;
+const fixtureUrl = `http://localhost:3107/${fixtureName}`;
+const fixture = path.join(root, 'app', fixtureName);
 try { await access(fixture); throw Error('Refusing to overwrite an existing fixture directory.'); } catch (e) { if (e.code !== 'ENOENT') throw e; }
 const me = '00000000-0000-4000-8000-000000000001', partner = '00000000-0000-4000-8000-000000000002', conversation = '00000000-0000-4000-8000-000000000004';
 const profile = { id:partner, username:'brandon', display_name:'Brandon of the Rookery', avatar_url:null, bio:null, role:'member', created_at:'2026-09-10T10:00:00Z', updated_at:'2026-09-10T10:00:00Z' };
@@ -22,12 +24,13 @@ let server;
 let browser;
 let logs='';
 try {
-server = spawn(process.execPath, ['node_modules/next/dist/bin/next','dev','--port','3107'], { cwd:root, env:{...process.env,NEXT_PUBLIC_SUPABASE_URL:'http://127.0.0.1:54329',NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'test-key'}, stdio:['ignore','pipe','pipe'], windowsHide:true });
+server = spawn(process.execPath, ['node_modules/next/dist/bin/next','dev','--port','3107'], { cwd:root, env:{...process.env,NEXT_PUBLIC_SUPABASE_URL:'http://127.0.0.1:54329',NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'test-key',NEXT_PUBLIC_GIPHY_API_KEY:'test-giphy-key'}, stdio:['ignore','pipe','pipe'], windowsHide:true });
 server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
-  for(let n=0;n<90;n++){try{if((await fetch('http://localhost:3107/social-test')).ok)break;}catch{} await new Promise(r=>setTimeout(r,500));if(n===89)throw Error(logs.slice(-3000));}
+  for(let n=0;n<90;n++){try{if((await fetch(fixtureUrl)).ok)break;}catch{} await new Promise(r=>setTimeout(r,500));if(n===89)throw Error(logs.slice(-3000));}
   browser=await chromium.launch({headless:true,executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || path.join(process.env.LOCALAPPDATA,'ms-playwright','chromium-1194','chrome-win','chrome.exe')});
   for (const viewport of [{width:1440,height:900},{width:390,height:844},{width:320,height:568}]) {
     const page=await browser.newPage({viewport});
+    const pageErrors=[];page.on("pageerror",error=>pageErrors.push(error.message));
     let messages=[...initial], failNext=false;let friendships=[];
     await page.route('http://127.0.0.1:54329/**',async route=>{
       const url=new URL(route.request().url()), method=route.request().method();
@@ -45,8 +48,10 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
       else if(url.pathname.includes('start_direct_raven'))data=conversation;
       return route.fulfill({status:200,json:data,headers:{'access-control-allow-origin':'*'}});
     });
-    await page.goto('http://localhost:3107/social-test');
+    await page.goto(fixtureUrl);
+    await page.addStyleTag({content:'nextjs-portal{pointer-events:none}'});
     const input=page.getByRole('textbox',{name:'Message',exact:true});await input.waitFor();
+    await page.getByRole("link",{name:"Sign in",exact:true}).first().waitFor();
     await page.evaluate(()=>document.fonts.ready); await page.waitForTimeout(500);
     const before=await input.boundingBox();
     for(let i=0;i<12;i++){await input.fill(`New message ${i}`);await input.press('Enter');await page.getByText(`New message ${i}`,{exact:true}).waitFor();}
@@ -56,22 +61,37 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     const composerBox=await page.locator('[class*="composerArea"]').boundingBox();
     assert.ok(toolsBox.y+toolsBox.height<=composerBox.y+composerBox.height,"Attachment and emoji tools are not clipped");
     await mkdir(path.join(root,"test-results"),{recursive:true});await page.screenshot({path:path.join(root,"test-results",`raven-debug-${viewport.width}.png`)});
-    assert.ok(Math.abs(before.y-after.y)<2,'Composer does not drift after sending');
+    assert.ok(Math.abs(before.y-after.y)<2,`Composer does not drift after sending at ${viewport.width}: ${before.y} -> ${after.y}`);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'No horizontal overflow');
     assert.equal(await page.evaluate(()=>window.scrollY),0,'Sending never scrolls the document');
     failNext=true;await input.fill('Keep this failed draft');await input.press('Enter');await page.getByText('The raven could not be sent. Your draft is still here.',{exact:true}).waitFor();assert.equal(await input.inputValue(),'Keep this failed draft');
     await page.getByRole('button',{name:'Emoji',exact:false}).click();await page.getByRole('button',{name:'🔥',exact:true}).click();assert.ok((await input.inputValue()).endsWith('🔥'));
+    await input.fill('Before after');await input.evaluate(el=>el.setSelectionRange(7,7));
+    await page.getByRole('button',{name:'Portraits',exact:false}).click();
+    await page.getByRole('button',{name:/^Add .* mini portrait$/}).first().click();
+    assert.match(await input.inputValue(),/^Before \[\[portrait:[a-z0-9-]+\]\]after$/);
+    await page.getByRole('button',{name:'Send',exact:true}).click();
+    await page.locator('[class*="inlinePortrait"]').first().waitFor();
+    assert.equal(await page.locator('[class*="inlinePortrait"]').count(),1);
+    await page.route('https://api.giphy.com/**',route=>route.fulfill({json:{data:[{id:'abc123',title:'Test wave',images:{fixed_height:{url:'https://media.giphy.com/media/abc123/200.gif'}}}]}}));
+    await page.getByRole('button',{name:'GIF',exact:true}).click();await page.getByRole('searchbox',{name:'Search GIFs'}).fill('wave');
+    await page.getByRole('button',{name:'Select Test wave'}).click();await page.getByRole('button',{name:'Send',exact:true}).click();
+    await page.getByAltText('Test wave').waitFor();
+    await page.waitForFunction(()=>document.querySelector('textarea[aria-label="Message"]')?.value==='');
+    assert.equal(messages.at(-1).gif.id,'abc123');
+    if(viewport.width<760){await page.setViewportSize({width:viewport.width,height:400});await input.focus();await page.waitForTimeout(300);const box=await input.boundingBox();assert.ok(box.y>=0&&box.y+box.height<=400,'Composer fits keyboard-sized viewport');await page.setViewportSize(viewport);}
     const list=page.locator('[class*="messages"]').first();await list.evaluate(el=>el.scrollTop=0);await page.waitForTimeout(100);
     assert.equal(await page.evaluate(()=>window.scrollY),0);
     await mkdir(path.join(root,'test-results'),{recursive:true});await page.screenshot({path:path.join(root,'test-results',`raven-${viewport.width}.png`)});
-    await page.goto('http://localhost:3107/social-test?inbox=1');await page.getByRole('button',{name:'New Raven',exact:true}).click();await page.getByPlaceholder('Search @username').fill('bran');await page.getByRole('button',{name:/Brandon of the Rookery/}).waitFor();
-    await page.goto('http://localhost:3107/social-test?profile=1');
+    await page.goto(fixtureUrl+'?inbox=1');await page.getByRole('button',{name:'New Raven',exact:true}).click();await page.getByPlaceholder('Search @username').fill('bran');await page.getByRole('button',{name:/Brandon of the Rookery/}).waitFor();
+    await page.goto(fixtureUrl+'?profile=1');
     await page.getByRole('tab',{name:'Threads',exact:true}).click();await page.getByText('A member thread',{exact:true}).waitFor();
     await page.getByRole('tab',{name:'Replies',exact:true}).click();await page.getByText('No replies yet.',{exact:true}).waitFor();
     await page.getByRole('button',{name:'Add friend',exact:false}).click();await page.getByRole('button',{name:'Cancel request',exact:true}).waitFor();await page.getByRole('button',{name:'Cancel request',exact:true}).click();
     await page.locator('input[name="banner"]').setInputFiles({name:'banner.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aTZkAAAAASUVORK5CYII=','base64')});
     await page.getByAltText('Banner preview').waitFor();await page.getByRole('button',{name:'Save profile',exact:true}).click();await page.getByText('Profile updated.',{exact:true}).waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Profile has no horizontal overflow');
+    assert.deepEqual(pageErrors,[],"No browser runtime errors");
     await page.close();console.log(`Raven UI ${viewport.width}x${viewport.height}: composer, send, failed draft, emoji, overflow, recipient search, profile banner, activity tabs and friend requests passed.`);
   }
 }finally{

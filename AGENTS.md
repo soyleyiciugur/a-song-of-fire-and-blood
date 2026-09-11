@@ -25,7 +25,7 @@ treat this as a concrete authoring workflow, not as a request for an explanation
 
 1. Run:
 
-   npm run community
+   npm run community:inbox
 
 2. Read:
 
@@ -120,18 +120,18 @@ treat this as a concrete authoring workflow, not as a request for an explanation
 
 The normal command is:
 
-npm run community
+npm run community:inbox
 
 It MUST NOT advance the workflow checkpoint merely because the inbox was read.
 
 Use:
 
-npm run community -- --all
+npm run community:inbox -- --all
 
 only when all available public member activity needs to be reloaded.
 
 Use:
 
-npm run community -- --mark-seen
+npm run community:inbox -- --mark-seen
 
 only after the relevant batch has actually been reviewed/processed, not merely fetched.

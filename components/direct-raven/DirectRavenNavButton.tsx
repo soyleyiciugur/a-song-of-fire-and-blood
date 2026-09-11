@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import styles from "@/components/nav/navbar.module.css";
 
 export default function DirectRavenNavButton() {
+  const pathname = usePathname();
   const [unread, setUnread] = useState(0);
   const [signedIn, setSignedIn] = useState(false);
 
@@ -38,7 +40,7 @@ export default function DirectRavenNavButton() {
       window.removeEventListener("direct-raven-read", onRead);
       if (channel) void supabase.removeChannel(channel);
     };
-  }, []);
+  }, [pathname]);
 
   if (!signedIn) return null;
   return (

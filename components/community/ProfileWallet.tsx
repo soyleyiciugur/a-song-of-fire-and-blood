@@ -1,0 +1,13 @@
+"use client";
+import { useEffect,useMemo,useRef,useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import styles from "@/app/users/[username]/profile.module.css";
+type Transfer={id:string;sender_id:string;recipient_id:string;amount:number;created_at:string};
+export default function ProfileWallet({profileId,viewerId}:{profileId:string;viewerId:string|null}){
+ const db=useMemo(()=>createClient(),[]),lock=useRef(false),request=useRef<{id:string;amount:number}|null>(null);
+ const [balance,setBalance]=useState<number|null>(null),[history,setHistory]=useState<Transfer[]>([]),[amount,setAmount]=useState(""),[message,setMessage]=useState(""),[busy,setBusy]=useState(false),[revision,setRevision]=useState(0);
+ useEffect(()=>{if(!viewerId)return;let active=true;void db.from("member_wallets").select("balance").eq("user_id",viewerId).single().then(({data,error})=>{if(active){setBalance(error?null:Number(data.balance));if(error)setMessage("HasoCash is currently unavailable.");}});if(profileId===viewerId)void db.from("hasocash_transfers").select("*").order("created_at",{ascending:false}).limit(20).then(({data})=>{if(active)setHistory(data??[])});return()=>{active=false};},[db,viewerId,profileId,revision]);
+ async function grant(event:React.FormEvent){event.preventDefault();const value=Number(amount);if(lock.current||!Number.isSafeInteger(value)||value<=0||balance===null||value>balance)return;lock.current=true;setBusy(true);setMessage("");if(!request.current||request.current.amount!==value)request.current={id:crypto.randomUUID(),amount:value};try{const {data,error}=await db.rpc("grant_hasocash",{recipient:profileId,amount:value,request_id:request.current.id});if(error)throw error;setBalance(Number(data));request.current=null;setAmount("");setMessage("HasoCash granted.");setRevision(v=>v+1);}catch{setMessage("Transfer could not be confirmed. Retry the same amount to safely check or complete it.");}finally{lock.current=false;setBusy(false);}}
+ if(!viewerId)return null;
+ return <section className={styles.friends}><h2>HasoCash</h2><p>Your balance: {balance===null?"Unavailable":balance.toLocaleString()} HasoCash</p>{profileId!==viewerId?<form onSubmit={grant}><label>Grant HasoCash <input type="number" min={1} max={balance??0} step={1} required value={amount} disabled={busy} onChange={e=>setAmount(e.target.value)} /></label><button disabled={busy||!balance}>Grant HasoCash</button></form>:<details><summary>Recent transfers</summary>{history.length?history.map(t=><p key={t.id}>{t.sender_id===viewerId?"Sent":"Received"} {t.amount} HasoCash · {new Date(t.created_at).toLocaleDateString("en-GB")}</p>):<p>No transfers yet.</p>}</details>}{message&&<p role="status">{message}</p>}</section>;
+}

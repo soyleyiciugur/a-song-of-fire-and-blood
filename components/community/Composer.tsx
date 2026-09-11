@@ -22,7 +22,7 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
     finally { setPending(false); }
   }
   return <div className={`${styles.wrap} ${parentId ? styles.replyComposer : ""}`}>
-    {!open ? <button onClick={() => setOpen(true)}>{parentId ? "Reply" : kind === "thread" ? "Start a discussion" : kind === "post" ? "Reply at this table" : "Join the discussion"}</button> : <form onSubmit={submit}>
+    {!open ? <button onClick={() => setOpen(true)}>{parentId ? "Reply" : kind === "thread" ? "Start a discussion" : kind === "post" ? "Reply at this table" : "Write a comment"}</button> : <form onSubmit={submit}>
       {kind === "thread" && <input name="title" aria-label="Discussion title" disabled={pending} required minLength={3} maxLength={140} placeholder="Discussion title" />}
       <textarea name="body" aria-label={parentId ? "Write a reply" : "Write your contribution"} disabled={pending} required maxLength={kind === "raven" ? 4000 : 10000} placeholder={parentId ? "Write a reply…" : "Write your contribution…"} />
       <div><button disabled={pending}>{pending ? "Posting…" : "Post"}</button><button type="button" disabled={pending} onClick={() => setOpen(false)}>Cancel</button></div>

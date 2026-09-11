@@ -43,23 +43,10 @@ export function ravenBodySummary(value: string) {
 }
 
 export default function RavenMessageContent({ body }: { body: string }) {
-  const { text, portraitIds } = parseRavenBody(body);
-
-  return (
-    <>
-      {text && <p>{text}</p>}
-      {portraitIds.length > 0 && (
-        <div className={styles.messagePortraits} aria-label="Mini portraits">
-          {portraitIds.map((id, index) => {
-            const name = characterNames.get(id) ?? id.replaceAll("-", " ");
-            return (
-              <span className={styles.messagePortrait} key={`${id}-${index}`} title={name}>
-                <MiniPortrait id={id} alt={name} size={58} />
-              </span>
-            );
-          })}
-        </div>
-      )}
-    </>
-  );
+  return <p>{body.split(/(\[\[portrait:[a-z0-9-]+\]\])/gi).map((part, index) => {
+    const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (!match || !characterNames.has(match[1].toLowerCase())) return part;
+    const id = match[1].toLowerCase();
+    return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} /></span>;
+  })}</p>;
 }

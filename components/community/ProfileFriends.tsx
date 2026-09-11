@@ -23,6 +23,8 @@ export default function ProfileFriends({ profileId, viewerId }: { profileId: str
     };
     void load(); return () => { active = false; };
   }, [profileId, viewerId, revision, supabase]);
+  const [mutual,setMutual]=useState<string[]>([]);
+  useEffect(()=>{if(!viewerId||viewerId===profileId)return;let active=true;void supabase.from("member_friendships").select("requester_id,recipient_id").not("accepted_at","is",null).or(`requester_id.eq.${viewerId},recipient_id.eq.${viewerId}`).then(({data})=>{if(active)setMutual((data??[]).map(r=>r.requester_id===viewerId?r.recipient_id:r.requester_id));});return()=>{active=false};},[supabase,viewerId,profileId,revision]);
   const own = profileId === viewerId;
   const connection = rows.find(r => r.requester_id === viewerId || r.recipient_id === viewerId);
   async function act(action: "request" | "accept" | "remove", id?: string) {
@@ -39,6 +41,7 @@ export default function ProfileFriends({ profileId, viewerId }: { profileId: str
     <div className={styles.friendHeader}><h2>Friends {ready && <small>{rows.filter(r => r.accepted_at).length}</small>}</h2>
       {viewerId && !own && ready && <div className={styles.actions}>{!connection ? <button className={styles.actionButton} disabled={busy} onClick={() => void act("request")}>＋ Add friend</button> : <><button className={styles.actionButton} disabled={busy} onClick={() => void act("remove", connection.id)}>{connection.accepted_at ? "Remove friend" : connection.requester_id === viewerId ? "Cancel request" : "Decline"}</button>{!connection.accepted_at && connection.recipient_id === viewerId && <button className={styles.actionButton} disabled={busy} onClick={() => void act("accept", connection.id)}>Accept request</button>}</>}</div>}
     </div>
+    {viewerId&&!own&&<div><h3>Mutual friends</h3>{people.filter(p=>mutual.includes(p.id)&&rows.some(r=>r.accepted_at&&(r.requester_id===p.id||r.recipient_id===p.id))).map(p=><Link key={p.id} href={`/users/${p.username}`}>{p.display_name} </Link>)}{!people.some(p=>mutual.includes(p.id)&&rows.some(r=>r.accepted_at&&(r.requester_id===p.id||r.recipient_id===p.id)))&&<p>No mutual friends yet.</p>}</div>}
     {!viewerId && <p><Link href="/login">Sign in</Link> to see friends and send requests.</p>}
     {rows.filter(row => row.accepted_at || own).map(row => {
       const person = people.find(p => p.id === (row.requester_id === profileId ? row.recipient_id : row.requester_id));

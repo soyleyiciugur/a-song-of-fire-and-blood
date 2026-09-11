@@ -237,3 +237,9 @@
   .reactionPicker{max-height:180px}
   .portraitGrid{max-height:112px}
 }
+
+.inlinePortrait { display:inline-flex; vertical-align:middle; margin:0 2px; width:28px; height:28px; }
+
+@media(max-width:760px){.composerArea{max-height:calc((var(--direct-raven-viewport-height,100dvh) - var(--site-nav-height,58px)) * .6)}.reactionPicker{max-height:160px;overflow-y:auto}.portraitGrid{max-height:100px}.threadHeader{min-height:48px}.composer textarea{min-height:44px}}
+
+@media(max-width:760px){.page:has(.thread){position:fixed;left:0;right:0;top:var(--raven-mobile-top,var(--site-nav-height,58px));height:var(--raven-mobile-height,calc(100dvh - var(--site-nav-height,58px)));}.composerArea{max-height:calc(var(--raven-mobile-height,70dvh) * .6)}}

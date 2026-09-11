@@ -7,10 +7,10 @@ import MiniPortrait from "@/components/MiniPortrait";
 import LikeButton from "@/components/community/LikeButton";
 import { createClient } from "@/lib/supabase/client";
 import type { DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
+import GiphyPicker, { type RavenGif } from "./GiphyPicker";
 import RavenAttachment from "./RavenAttachment";
 import RavenIcon from "./RavenIcon";
 import RavenMessageContent, {
-  encodeRavenBody,
   parseRavenBody,
   ravenBodySummary,
 } from "./RavenMessageContent";
@@ -55,6 +55,8 @@ export default function RavenConversation({
 }: Props) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState(initialMessages);
+  const [gif,setGif]=useState<RavenGif|null>(null);
+  const [gifOpen,setGifOpen]=useState(false);
   const [body, setBody] = useState("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
@@ -62,7 +64,6 @@ export default function RavenConversation({
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerTab, setPickerTab] = useState<PickerTab>("emoji");
   const [portraitSearch, setPortraitSearch] = useState("");
-  const [selectedPortraits, setSelectedPortraits] = useState<string[]>([]);
   const [blockedByMe, setBlockedByMe] = useState(initialBlockedByMe);
   const [blockedByThem, setBlockedByThem] = useState(initialBlockedByThem);
   const [file, setFile] = useState<File | null>(null);
@@ -98,7 +99,6 @@ export default function RavenConversation({
   };
 
   const resetDraftExtras = () => {
-    setSelectedPortraits([]);
     setPickerOpen(false);
     setPortraitSearch("");
   };
@@ -109,6 +109,7 @@ export default function RavenConversation({
       setPickerOpen(false);
       return;
     }
+    setGifOpen(false);
     setPickerTab(tab);
     setPickerOpen(true);
     inputRef.current?.blur();
@@ -134,6 +135,11 @@ export default function RavenConversation({
 
     const updateViewport = () => {
       const height = viewport?.height ?? window.innerHeight;
+      const offset = viewport?.offsetTop ?? 0;
+      const navBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
+      const visibleNav = Math.max(0, navBottom - offset);
+      document.documentElement.style.setProperty("--raven-mobile-top", `${offset + visibleNav}px`);
+      document.documentElement.style.setProperty("--raven-mobile-height", `${Math.max(0,height-visibleNav)}px`);
       document.documentElement.style.setProperty("--direct-raven-viewport-height", `${height}px`);
 
       requestAnimationFrame(() => {
@@ -153,6 +159,8 @@ export default function RavenConversation({
       viewport?.removeEventListener("scroll", updateViewport);
       window.removeEventListener("resize", updateViewport);
       document.documentElement.style.removeProperty("--direct-raven-viewport-height");
+      document.documentElement.style.removeProperty("--raven-mobile-top");
+      document.documentElement.style.removeProperty("--raven-mobile-height");
     };
   }, []);
 
@@ -277,19 +285,25 @@ export default function RavenConversation({
   }
 
   function addPortrait(id: string) {
-    if (selectedPortraits.length >= MAX_PORTRAITS) {
-      setError(`You can attach up to ${MAX_PORTRAITS} mini portraits to one raven.`);
+    if (parseRavenBody(body).portraitIds.length >= MAX_PORTRAITS) {
+      setError(`You can insert up to ${MAX_PORTRAITS} mini portraits to one raven.`);
       return;
     }
     setError("");
-    setSelectedPortraits((current) => [...current, id]);
+    const input = inputRef.current;
+    const start = input?.selectionStart ?? body.length;
+    const end = input?.selectionEnd ?? start;
+    const token = `[[portrait:${id}]]`;
+    if (body.length - (end - start) + token.length > 4000) return;
+    setBody(body.slice(0, start) + token + body.slice(end));
+    requestAnimationFrame(() => input?.setSelectionRange(start + token.length, start + token.length));
   }
 
   function beginEdit(message: DirectRavenMessage) {
-    const parsed = parseRavenBody(message.body);
+    setGif(null);
+    setGifOpen(false);
     setEditing(message.id);
-    setBody(parsed.text);
-    setSelectedPortraits(parsed.portraitIds);
+    setBody(message.body);
     setReply(null);
     setFile(null);
     setPickerOpen(false);
@@ -298,8 +312,8 @@ export default function RavenConversation({
 
   async function send(event: React.FormEvent) {
     event.preventDefault();
-    const encodedBody = encodeRavenBody(body, selectedPortraits);
-    if ((!encodedBody && !file) || sendLock.current || closed) return;
+    const encodedBody = body.trim();
+    if ((!encodedBody && !file && !gif) || sendLock.current || closed) return;
 
     sendLock.current = true;
     setSending(true);
@@ -332,6 +346,7 @@ export default function RavenConversation({
             conversation_id: conversationId,
             sender_id: userId,
             body: encodedBody,
+            ...(gif ? {gif} : {}),
             ...(path ? { attachment_path: path } : {}),
             ...(reply ? { reply_to: reply.id } : {}),
           });
@@ -346,6 +361,8 @@ export default function RavenConversation({
           : [...current, data]
       );
       setBody("");
+      setGif(null);
+      setGifOpen(false);
       setFile(null);
       setReply(null);
       setEditing(null);
@@ -505,6 +522,7 @@ export default function RavenConversation({
                       }}
                     />
                   )}
+                  {!message.deleted_at && message.gif && /^https:\/\/media[0-9]*\.giphy\.com\/media\//.test(message.gif.url) && <div className={styles.attachment}><img src={message.gif.url} alt={message.gif.title||"GIPHY GIF"} onLoad={()=>{if(nearBottom.current)scrollBottom();}}/><small>GIPHY</small></div>}
                   {message.deleted_at ? <p>This raven was withdrawn.</p> : <RavenMessageContent body={message.body} />}
                   <span>
                     <time dateTime={message.created_at}>{time(message.created_at)}</time>
@@ -520,7 +538,6 @@ export default function RavenConversation({
                           onClick={() => {
                             setReply(message);
                             setEditing(null);
-                            setSelectedPortraits([]);
                             inputRef.current?.focus({ preventScroll: true });
                           }}
                         >
@@ -580,30 +597,12 @@ export default function RavenConversation({
               </div>
             )}
 
+            {gifOpen && <GiphyPicker onSelect={value=>{setGif(value);setGifOpen(false);}}/>}
+            {gif && <div className={styles.mediaPreview}><img src={gif.url} alt={gif.title}/><button type="button" disabled={sending} onClick={()=>setGif(null)}>Remove GIF</button></div>}
             {preview && (
               <div className={styles.mediaPreview}>
                 <img src={preview} alt="Attachment preview" />
                 <button type="button" disabled={sending} onClick={() => setFile(null)}>Remove image</button>
-              </div>
-            )}
-
-            {selectedPortraits.length > 0 && (
-              <div className={styles.selectedPortraits} aria-label="Selected mini portraits">
-                {selectedPortraits.map((id, index) => {
-                  const character = portraitCharacters.find((item) => item.id === id);
-                  return (
-                    <button
-                      type="button"
-                      key={`${id}-${index}`}
-                      className={styles.selectedPortrait}
-                      title={`Remove ${character?.name ?? id}`}
-                      onClick={() => setSelectedPortraits((current) => current.filter((_, itemIndex) => itemIndex !== index))}
-                    >
-                      <MiniPortrait id={id} alt={character?.name ?? id} size={42} />
-                      <span>×</span>
-                    </button>
-                  );
-                })}
               </div>
             )}
 
@@ -657,7 +656,7 @@ export default function RavenConversation({
                         <button
                           key={character.id}
                           type="button"
-                          disabled={sending || selectedPortraits.length >= MAX_PORTRAITS}
+                          disabled={sending || parseRavenBody(body).portraitIds.length >= MAX_PORTRAITS}
                           onClick={() => addPortrait(character.id)}
                           title={character.name}
                           aria-label={`Add ${character.name} mini portrait`}
@@ -706,13 +705,14 @@ export default function RavenConversation({
               />
               <button
                 type="submit"
-                disabled={sending || (!body.trim() && !file && selectedPortraits.length === 0)}
+                disabled={sending || (!body.trim() && !file && !gif)}
               >
                 <RavenIcon size={18} /> {sending ? "Sending…" : editing ? "Save" : "Send"}
               </button>
             </form>
 
             <div className={styles.composerTools}>
+              <button type="button" disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
               <label className={styles.fileButton} aria-disabled={!!editing || sending}>
                 ＋ Photo / GIF
                 <input
