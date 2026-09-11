@@ -66,3 +66,20 @@
 @media (prefers-reduced-motion:reduce) { .bannerImage,.threadCard,.filters button,.discussionBar select,.back { transition: none; } }
 .discussionBar{min-width:0;gap:14px}.discussionBar label{display:flex;align-items:center;gap:10px;min-width:0}.discussionBar select{box-sizing:border-box;min-width:0;max-width:100%;margin:0;line-height:1.4;flex:1;cursor:pointer;color-scheme:dark}.discussionBar h2{flex-shrink:0}@media(max-width:520px){.discussionBar label{width:100%}.discussionBar select{width:0;min-height:48px}}
 .commentMetaRow{display:flex;align-items:center;gap:10px;min-height:28px;margin-top:5px}.commentMetaRow .rewards{margin:0}.rewards{gap:9px}.permalink{font-size:10px}
+
+/* Reddit-style recursive reply tree. */
+.comment { margin-bottom: 10px; }
+.commentShell { position: relative; display: grid; grid-template-columns: 20px minmax(0,1fr); column-gap: 9px; min-width: 0; }
+.commentContent { min-width: 0; }
+.branchToggle { position: relative; align-self: stretch; width: 20px; min-height: 38px; padding: 0; border: 0; background: transparent; color: var(--tavern-muted); cursor: pointer; }
+.branchToggle::after { content: ''; position: absolute; top: 25px; bottom: -22px; left: 9px; width: 1px; background: #3d3d45; transition: background .16s ease; }
+.branchToggle span { position: sticky; top: 10px; z-index: 1; display: grid; place-items: center; width: 19px; height: 19px; border: 1px solid #4a494f; border-radius: 50%; background: var(--tavern-surface); color: #c9b47a; font: 600 13px/1 var(--font-geist); }
+.branchToggle:hover::after { background: rgba(201,162,39,.62); }
+.branchToggle:hover span { border-color: rgba(201,162,39,.7); color: #f0d786; }
+.branchToggle:focus-visible,.replyToggle:focus-visible { outline: 2px solid var(--tavern-gold); outline-offset: 2px; }
+.replyToggle { margin-top: 8px; padding: 3px 0; border: 0; background: transparent; color: var(--tavern-gold-soft); cursor: pointer; font: 600 10px var(--font-geist); letter-spacing: .025em; }
+.replyToggle:hover { color: #f1d98a; }
+.replies { list-style: none; margin: 0 0 0 20px; padding: 0 0 0 12px; border-left: 1px solid #303039; }
+.replies > .comment { margin-top: 9px; margin-bottom: 0; }
+.replies .comment { border-top-color: #2d2d34; background: #111116; box-shadow: none; }
+@media(max-width:520px){ .commentShell{grid-template-columns:16px minmax(0,1fr);column-gap:6px}.branchToggle{width:16px}.branchToggle::after{left:7px}.branchToggle span{width:15px;height:15px;font-size:11px}.replies{margin-left:9px;padding-left:7px}.replies .comment{padding:13px 10px} }

@@ -8,7 +8,7 @@ import styles from "@/app/users/[username]/profile.module.css";
 
 type Tab = "thread" | "post" | "raven" | "reactions";
 type Activity = { id: string; title?: string; body: string; created_at: string; thread_id?: string; entry_id?: string; parent_id?: string | null };
-type Reaction = { target_kind: string; target_id: string; direction: string; total: number; latest: string; href: string };
+type Reaction = { target_kind: string; target_id: string; direction: string; total: number; latest: string; href: string; target_title?: string | null };
 
 export default function ProfileActivity({ userId }: { userId: string }) {
   const [tab, setTab] = useState<Tab>("thread");
@@ -58,7 +58,7 @@ export default function ProfileActivity({ userId }: { userId: string }) {
       {tab === "reactions" ? reactionRows.map((row) => <article key={`${row.target_kind}-${row.target_id}`} className={styles.activityCard}>
         <Link href={row.href}>
           <span className={styles.activityKicker}>{row.target_kind === "raven" ? "Liked" : "Granted Favor"}</span>
-          <h3>{row.target_kind === "raven" ? "Raven's Eye comment" : row.target_kind === "thread" ? "Taverns thread" : "Taverns reply"}</h3>
+          <h3>{row.target_title || (row.target_kind === "raven" ? "Raven's Eye comment" : "Taverns thread")}</h3>
           <small>{new Date(row.latest).toLocaleDateString("en-GB")}</small>
         </Link>
       </article>) : rows.map(row => {
