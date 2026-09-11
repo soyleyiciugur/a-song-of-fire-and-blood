@@ -86,5 +86,16 @@
     "moon": 8,
     "year": 99,
     "description": "Gaelor kills two mummers with Blackfyre during a satire of the royal family. The trapped audience stampedes into the City Watch cordon. Twenty die: two actors and eighteen smallfolk (three children, four women and eleven men). Roughly a dozen more are badly wounded, and panic spreads through Flea Bottom."
+  },
+  {
+    "id": "rhaella-boneskin-pyre",
+    "title": "The Death of Rhaella Targaryen",
+    "type": "battle",
+    "location": "Starfall",
+    "chapterSlug": "the-children-pay",
+    "day": 15,
+    "moon": 8,
+    "year": 99,
+    "description": "After Rhaella is attacked near Boneskin's cave, the dragon kills her assailants and then obeys the grievously wounded princess's final command to burn her."
   }
 ]

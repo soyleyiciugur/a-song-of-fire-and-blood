@@ -512,12 +512,12 @@
       "Counter Jace before he can undermine Gaelor's future reign",
       "Use Cordin's men to watch Jace and his inner circle",
       "Investigate whether Alester Dayne killed Curtass Whent",
-      "Assume command of the City Watch in a couple of days, double security checks, and build a private network of informers"
+      "Endure his banishment to Driftmark and whatever further punishment the King imposes"
     ],
     "relationships": {
       "alester-dayne": "Now suspects Alester may be the large blond knight connected to Curtass Whent's death. Gaelor fed Cordin a false claim that a Red Keep headcount left only Alester unaccounted for and ordered the matter investigated.",
       "alysanne-hightower": "He never knew Alysanne personally, but his campaign against Oldtown brought her life to an end. She watched his forces arrive from the Hightower and was killed in the chaos that followed Timos's execution.",
-      "baelenys-targaryen": "His loyalty has brought him closer to the King, who has named him heir should Visenor not return; he accepts full responsibility for the Oldtown Massacre on Gaelor's behalf, though neither man fully forgives the other for it.",
+      "baelenys-targaryen": "His loyalty brought him closer to the King, who named him heir should Visenor not return, but the Mummers' Blood exhausted that indulgence. Baelenys stripped away his promised City Watch command and banished him to Driftmark pending further punishment.",
       "baelor-targaryen": "Greeted his great-uncle warmly on the road back from Oldtown, before Baelor's visible horror at the massacre made clear how badly the campaign had been received.",
       "baran-strong": "He saw in Baran a large, capable knight wasting away on Dragonstone and offered him a path back toward the Red Keep. The invitation began as curiosity and usefulness more than trust, but Gaelor was willing to put his name behind it.",
       "berholt-caswell": "He expected the Faith to answer Oldtown's blood more decisively and never received the condemnation he might have wanted. Berholt refused to excommunicate him, partly from uncertainty over whether such a gesture would serve the gods or merely inflame the realm.",
@@ -528,7 +528,7 @@
       "daria-sand": "Unknown to him, Lorenah Dayne's maid Daria has learned of his alliance with Cordin and his move to take command of the City Watch, and reported both to Lorenah.",
       "derrin-hightower": "He suspected Derrin before the proof was complete and helped build the false-prisoner trap meant to catch the Hand acting against the supposed poisoner. Gaelor's failed night watch produced no confession, but the doubt it fed helped prepare Derrin's eventual fall.",
       "godfrey-blackwood": "Tackled Costayne in the tourney lists when the knight's assassination attempt threatened to end Gaelor's life; Gaelor owes him a debt he has not yet named.",
-      "jacaelon-targaryen": "Their rivalry has hardened into political fear. Gaelor believes he saw a genuine desire to kill in Jace during the tourney and now expects his brother to undermine him if he ever becomes king. He has begun covertly preparing against him with Cordin.",
+      "jacaelon-targaryen": "Their rivalry has hardened into political fear. After the Flea Bottom massacre, Jace ended Gaelor's claim to the City Watch, took charge of the surviving mummer's case and began publicly separating the Crown from his brother's actions.",
       "jaery-targaryen": "His mother, who loves him fiercely but repeatedly reminds him that being heir demands more discipline than he naturally possesses.",
       "lorenah-dayne": "He now treats Lorenah as part of Jace's political power rather than merely a Dornish guest. Naella warned that Jace's intended wife could become a second coordinated threat, and Gaelor accepted the logic of watching her along with the rest of his brother's inner circle.",
       "maela-targaryen": "Discovered her in flagrant violation of her Kingsguard's vows and handled the aftermath himself — brutally and permanently — without ever telling her what he did to Vance. The secret sits between them like a drawn sword.",
@@ -544,10 +544,10 @@
       "tion-lannister": "He has little patience for Tion's caution and treasury-minded objections. Their council exchanges regularly reduce to Tion calling Gaelor reckless and Gaelor dismissing him as timid.",
       "vhaemys-targaryen": "The little princess he has promised will always be his most loved, however many nieces and nephews may follow; she, in turn, defends him against everyone in the family who calls him a monster.",
       "visenor-targaryen": "Frustrated by what he sees as weakness, though it was Gaelor who beat the poisoner's confession out of the dying assassin himself.",
-      "oswald": "Resents the impending loss of command, but is offered a place at Gaelor's right hand with unchanged pay.",
+      "oswald": "Gaelor's promised takeover of the City Watch ended after the Flea Bottom massacre. Oswald remains commander while Gaelor is banished to Driftmark.",
       "zekar-alasyr": "One of the renowned Motley Three whose royal satire Gaelor interrupted in Flea Bottom. Gaelor killed Zekar with Blackfyre on the Fourteenth Day of the Eighth Moon, 99 AC."
     },
-    "summary": "Gaelor's rivalry with Jace has moved beyond bruised pride. After the tourney and Brant Costayne's trial, he has begun treating his brother as a future political threat to his reign. At Naella's urging, Gaelor approached Maester Cordin in secret and authorized surveillance of Jace and his inner circle. Cordin also agreed to investigate Gaelor's suspicion that Ser Alester Dayne may have been involved in Curtass Whent's death, a theory Gaelor strengthened with a deliberate lie about a Red Keep headcount. Cordin further urged him to ask King Baelenys for command of the City Watch, giving Gaelor an independent network of armed men and information throughout King's Landing.  On the Fourteenth Day of the Eighth Moon, Baelenys agrees to give him command of the City Watch in a couple of days, conditional on keeping peace with Jace. Gaelor begins inspecting the Watch and proposes doubled checks and personal informers. That night in Flea Bottom, he kills two actors with Blackfyre during a satire of the royal family. His cordon traps the fleeing audience; panic, trampling and Watch swords leave eighteen additional smallfolk dead and roughly a dozen badly wounded. He eventually orders the guards to let the crowd go.",
+    "summary": "Gaelor's attempt to turn the City Watch into his own base of power ended in catastrophe. On the Fourteenth Day of the Eighth Moon he killed two members of the Motley Three with Blackfyre and trapped their fleeing audience inside a gold-cloak cordon; eighteen more people died and roughly a dozen were badly wounded. By the following morning Baelenys had sent him from King's Landing to Driftmark. The promised Watch command was cancelled, the surviving mummer's fate passed to Jace, and the Crown began publicly distancing itself from the prince now being called the Prince of Massacres.",
     "quotes": []
   },
   {
@@ -630,7 +630,7 @@
       "visenya-targaryen": "His cousin, Vahaemon's daughter — who climbed into his bed in a Flea Bottom brothel believing him to be Gaelor, held Dark Sister to his throat throughout, and vanished before he or Alester could catch her. The encounter left a cut on his neck and a great deal of unanswered questions.",
       "weylar-rocke": "His personal spymaster, pardoned from the black cells to ensure loyalty born of terror; first brought him news of Gaelor's brothel visit, and more recently delivered early warning of the Oldtown Massacre's worst details."
     },
-    "summary": "Prince Jacaelon remains Hand of the King, knight, conspirator, and one of the sharpest political minds in the royal family, but his private life has crossed a threshold just as dangerous as his public one. On the Ninth Day of the Eighth Moon, in a secluded valley reachable only by dragonback, Jace asked Lorenah Dayne to marry him. Jhagar carried the gift: a necklace crafted from Cloudgazer's shed horn-scales. Lorenah accepted, making the pair formally betrothed in all but whatever negotiations remain with their houses. Saera helped arrange the moment, Vhaemys watched with jealous fascination, and Alester stood close by. Jace now intends to travel toward Dorne while Gaelor, unknown to him, has begun building a private surveillance network around Maester Cordin specifically to watch Jace and everyone close to him. He asks Daria to oversee Vhaemys's lessons, then discusses Melessa Hightower's conciliatory letter with Baelor. He promises to support Baelor's eventual return to the Citadel once the realm is settled. His questions about Dreamers and camouflaged dragons lead to accounts of Ghost, an ancient pale she-dragon presumed dead by Baelor. Jace requests a discreet investigation concerning Visenya Targaryen.",
+    "summary": "The morning after the Mummers' Blood forces Jacaelon into the hardest public test of his Handship. He ends Gaelor's promised command of the City Watch, takes responsibility for the surviving actor, urges restraint toward the anger in Flea Bottom and persuades High Septon Berholt to support the Crown's effort to prevent riots. In exchange, the Crown agrees to revisit funding for the sept's works. Jace keeps Ser Oswald in command after the shaken knight removes every gold cloak directly involved from duty. At sunset, Baelenys summons Jace alone to the throne room and begins a story he once told Visenor.",
     "quotes": []
   },
   {
@@ -904,15 +904,20 @@
     "aliases": [],
     "house": "House Targaryen",
     "title": "Princess Rhaella of House Targaryen",
-    "status": "Alive",
+    "status": "Dead",
     "secret": {
-      "status": "Alive",
-      "note": "Hiding at the scholars' retreat near Starfall under Lorenah Dayne's protection. Pregnant with Visenor's child. Visenor is no longer with her and is secretly operating in Oldtown as Maester Arthur Sand. On the Tenth Day of the Eighth Moon, Visenor dispatched a coded raven toward her using a Dornish cipher, hoping Maester Edmyn Uller would be able to decipher it."
+      "status": "Dead",
+      "note": "Killed near Starfall on the Fifteenth Day of the Eighth Moon, 99 AC. After Boneskin burned the men who attacked her, the grievously wounded Rhaella commanded the dragon to burn her as well. Visenor does not yet know that his wife and unborn child are dead."
     },
     "nameday": {
       "day": 18,
       "moon": 12,
       "year": 82
+    },
+    "death": {
+      "day": 15,
+      "moon": 8,
+      "year": 99
     },
     "height": "-",
     "father": "vahaemon-targaryen",
@@ -930,13 +935,7 @@
       "Determined",
       "Resilient"
     ],
-    "goals": [
-      "Survive",
-      "Protect her unborn child",
-      "Remain hidden at the scholars' retreat near Starfall",
-      "Learn whether Visenor is safe",
-      "Reconnect with her scattered family when it can be done safely"
-    ],
+    "goals": [],
     "relationships": {
       "alester-dayne": "Watched him nearly die protecting her and Visenor, and has called him a true hero to the realm ever since.",
       "baelenys-targaryen": "Lives in constant fear of him, and with good reason.",
@@ -945,10 +944,10 @@
       "lorenah-dayne": "Received sanctuary from her at Starfall and again at the scholars' retreat, where Lorenah had already dispatched a maid and maester to attend her.",
       "naela-targaryen": "Her mother, Princess Naela Targaryen, whose present whereabouts and condition are unknown.",
       "vahaemon-targaryen": "Her exiled father, whose disgrace hangs over her at court, though it was not to him that her secret warning was sent — it was to her siblings.",
-      "visenor-targaryen": "Her husband and greatest love. He has now left Dorne and is operating secretly in Oldtown; on the Tenth Day of the Eighth Moon he sent a coded raven toward her to signal that he was alive, though whether the message reaches her safely remains uncertain.",
+      "visenor-targaryen": "Her husband and greatest love. She died near Starfall while he was operating secretly in the Reach, before learning whether his coded raven had reached her; Visenor remains unaware of her death and that of their unborn child.",
       "visenya-targaryen": "Her sister, whose current whereabouts and allegiances remain unknown to Rhaella."
     },
-    "summary": "Daughter of the exiled Vahaemon Targaryen and wife of Crown Prince Visenor, Rhaella remains concealed at the scholars' retreat near Starfall under House Dayne's protection. Pregnant with Visenor's child, she is now separated from her husband after his departure into the Reach. Visenor, living secretly in Oldtown as Maester Arthur Sand, has attempted to contact her through a coded raven using a Dornish cipher that he hopes Maester Edmyn Uller can break. Rhaella's immediate world has narrowed to survival, her unborn child, and the hope that news from her husband reaches her before the Crown does.",
+    "summary": "Daughter of the exiled Vahaemon Targaryen and wife of Crown Prince Visenor, Rhaella lived in hiding near Starfall under House Dayne's protection while carrying Visenor's child. On the Fifteenth Day of the Eighth Moon, 99 AC, riders attacked her near Boneskin's cave. The dragon burned her assailants, but Rhaella had been grievously wounded. She blocked Boneskin's path and repeatedly commanded Dracarys until the dragon understood, dying with her unborn child in the fire. Visenor remains unaware of their deaths.",
     "quotes": []
   },
   {
@@ -1599,7 +1598,7 @@
       "Maintain the identity of Maester Arthur Sand in Oldtown",
       "Keep House Hightower and House Tyrell from collapsing into a Reach civil war",
       "Prevent House Gardener from winning King Baelenys' support",
-      "Construct a convincing false link between Lord Gardener and Vahaemon without exposing himself",
+      "Complete the forged letter linking Lord Gardener to Vahaemon and the supposed discovery of Vhagar",
       "Build support without becoming dependent on House Tyrell",
       "Return home a king worth trusting",
       "Deepen his bond with Boneskin",
@@ -1627,7 +1626,7 @@
       "vahaemon-targaryen": "His exiled uncle and a threat to the Crown whose name Visenor is now prepared to weaponize. Visenor has proposed forging evidence of a secret Vahaemon-Gardener pact in order to turn Baelenys against Lord Gardener.",
       "vhaemys-targaryen": "His youngest sister, still a child when he vanished from King's Landing. He has always regarded her with the protective affection of an elder brother, though his exile has left them separated."
     },
-    "summary": "The missing Crown Prince now lives in the Hightower under the identity of Maester Arthur Sand, publicly tutoring Melessa Hightower and Leo Tyrell while a small inner circle guards the truth. His stay in Oldtown has become increasingly political. With House Gardener distributing grain across the Reach and seeking a possible audience with King Baelenys, Visenor fears his father's hatred of the Tyrells could be turned into royal support for their rivals. Rather than reconcile the factions, he has begun considering a more dangerous solution with Maester Almar: forge a Tyroshi letter implying a secret alliance between Lord Gardener and the exiled Vahaemon, then leak it through the Citadel so that Gardener walks into King's Landing expecting parley and instead meets royal judgment. At the same time, Visenor has used a Dornish cipher to send a secret raven toward Rhaella near Starfall, hoping Maester Edmyn Uller can decipher his message and tell her that he is alive. Clarisse Flowers now serves as his protector and sparring partner, while Boneskin remains his greatest hidden advantage.",
+    "summary": "Under the identity of Maester Arthur Sand, Visenor searches Baelor's abandoned Citadel papers and finds uncertain accounts that Vhagar wandered beyond Volantis. He turns that possibility into the heart of a forged letter: Vahaemon will appear to thank Lord Gardener for financing his sellswords, promise an invasion through the Reach's western ports and claim to have found Vhagar. Visenor carries the plan to Highgarden with Leo Tyrell, Clarisse Flowers and Martyn Mullendore. Renrose agrees to seize Gardener lands once the Crown names their lord a traitor, while privately resolving to raise House Tyrell above every other house. Visenor does not know that Rhaella and their unborn child have died near Starfall.",
     "quotes": []
   },
   {
@@ -1927,7 +1926,8 @@
       "Secure the position of Hand of the King under Visenor's future reign",
       "Cement the Tyrell-Targaryen alliance through a marriage between their children",
       "Maintain eyes on Visenor's movements through Leo's presence in Oldtown",
-      "Expand House Tyrell's influence across the Reach in the power vacuum left by the Hightower's collapse"
+      "Seize House Gardener's lands as soon as the Crown brands its lord a traitor",
+      "Raise House Tyrell above every rival, including Visenor Targaryen"
     ],
     "relationships": {
       "almar-larchmont": "He regards Almar as part of the machinery keeping Oldtown stable and Melessa protected. Almar, however, watches Renrose's influence over the weakened Hightowers carefully and is wary of how easily assistance can become control.",
@@ -1935,9 +1935,9 @@
       "leo-tyrell": "Dispatched his fourteen-year-old son to Oldtown under the guise of education alongside Melessa Hightower — in practice, a political foothold and a pair of eyes inside the Hightower.",
       "martyn-mullendore": "Relies on Mullendore as a trusted sword arm operating in Visenor's orbit; Martyn's loyalty to the prince rather than to Renrose directly is a variable he has not yet been forced to reckon with.",
       "melessa-hightower": "Sees her as a piece to be positioned rather than a person; inserting Leo into her household is partly about influence over the last Hightower heir.",
-      "visenor-targaryen": "Pledged the full strength of the Reach behind Visenor's claim at the Mander's Pact, extracting the promise of the Handship and a future marriage alliance in return; views Visenor as a means to an end as much as a true ally."
+      "visenor-targaryen": "He welcomes Visenor's plan to frame Lord Gardener and agrees to seize the rival house's lands. Although Visenor likes and trusts him, Renrose privately resolves that House Tyrell's ambition must ultimately rise above the prince as well."
     },
-    "summary": "Lord Renrose Tyrell is the calculating master of Highgarden, a man who weathered the Crown's punishment of his house — Derrin Hightower paid the price for the conspiracy, not the Tyrells — and emerged with his seat and his ambitions intact. At the Mander's Pact he bound himself to Visenor's cause in exchange for the Handship and a marriage between their children, making him the exiled prince's most powerful backer and most dangerous liability in equal measure. His decision to send Leo to Oldtown reveals his instinct to keep agents close to any power he cannot directly control — an instinct Visenor has already begun quietly working against.",
+    "summary": "Lord Renrose Tyrell receives Visenor at Highgarden and embraces the plan to frame House Gardener as Vahaemon's secret ally. His role is to invade and secure Gardener lands the moment the Crown declares their lord a traitor. Yet after Visenor places the scheme in his hands, Lady Liana warns Renrose not to mistake the prince's trust for permission to demand more. Renrose rejects her restraint and privately resolves that the only worthy course is one that places House Tyrell above every other family—including Visenor's.",
     "quotes": []
   },
   {
@@ -2023,7 +2023,7 @@
       "gaelor-targaryen": "Never formally sanctioned him for Alysanne Hightower's murder — not from fear alone, but from a genuine uncertainty about whether an excommunication would serve the gods or simply detonate a crisis he could not contain. He is not sure he made the right call, and that uncertainty coloured everything he said at the trial.",
       "jacaelon-targaryen": "Respects him as the steadiest hand in the room at the trial; aligned with his Wall verdict because it was the most just outcome he could honestly defend — not because Jace pressured him into it."
     },
-    "summary": "High Septon Berholt Caswell is a man of genuine faith and genuine limits — and he is honest enough with himself to know the difference. He is not a villain and not a coward in the simple sense; he is a man who has spent seventy-four years learning how much justice the world will actually bear, and who has sometimes let that calculation shade into inaction. His failure to sanction Gaelor for Alysanne Hightower's murder was not pure timidity — it was a considered judgment that the fallout would cost more than the principle was worth — but he is no longer entirely sure he was right, and that doubt sat with him throughout the trial. At the antechamber recess he argued for the Wall with quiet conviction, not to defy Baelor or please Jace, but because it was the most honest answer he could give the gods. A good man. Not an especially brave one. Aware of the gap.",
+    "summary": "High Septon Berholt Caswell is a man of genuine faith and genuine limits. After the Mummers' Blood, he answers Jace's request for the Faith to calm Flea Bottom by raising the sept works that Baelor had delayed. Berholt stops short of an ultimatum or Gaelor's excommunication; the Crown promises financial help, and he agrees to conduct rites for the dead and stand before the grieving city on the Crown's behalf.",
     "quotes": []
   },
   {
@@ -3346,7 +3346,7 @@
   },
   {
     "id": "oswald",
-    "name": "Ser Oswald",
+    "name": "Ser Oswald Eagle",
     "nickname": "-",
     "aliases": [],
     "house": "-",
@@ -3367,7 +3367,7 @@
       "gaelor-targaryen": "Resents the impending loss of command, but is offered a place at Gaelor's right hand with unchanged pay.",
       "baelor-targaryen": "The Grand Maester anticipates his resentment at losing command."
     },
-    "summary": "A seasoned commander in his late forties, Oswald learns that King Baelenys has promised his post to Prince Gaelor in a couple of days. Until then the title remains his. Gaelor offers to retain his pay and most duties. Resentful of the impending demotion, Oswald nevertheless begins discussing security reforms after learning of Visenya's undetected entry into the capital.",
+    "summary": "A seasoned commander in his late forties, Oswald remains in charge of the City Watch after Gaelor's promised appointment collapses with the Flea Bottom massacre. Before dawn he removes every gold cloak directly involved from duty and surrenders them for judgment. Though he considers resigning under the weight of the Watch's disgrace, he decides that abandoning the city would dishonor his years of service and accepts Jace's request to stay.",
     "quotes": []
   }
 ]

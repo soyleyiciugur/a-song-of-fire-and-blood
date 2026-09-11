@@ -89,5 +89,20 @@
     "summary": "Gaelor kills two mummers with Blackfyre during a satire of the royal family. The trapped audience stampedes into the City Watch cordon.",
     "cause": "A satirical play enrages Gaelor, who orders gold cloaks to surround the tent before attacking the actors.",
     "consequence": "Twenty die: two actors and eighteen smallfolk (three children, four women and eleven men). Roughly a dozen more are badly wounded, and panic spreads through Flea Bottom."
+  },
+  {
+    "id": "rhaella-boneskin-pyre",
+    "title": "The Death of Rhaella Targaryen",
+    "kind": "massacre",
+    "day": 15,
+    "moon": 8,
+    "year": 99,
+    "location": "Near Starfall",
+    "chapterSlug": "the-children-pay",
+    "participants": ["rhaella-targaryen"],
+    "houses": ["targaryen"],
+    "summary": "Boneskin burns the men who attacked Rhaella, then obeys the princess's final command and burns her as well.",
+    "cause": "A band of riders assaults the isolated and pregnant princess near the dragon's cave, leaving her grievously wounded.",
+    "consequence": "The attackers and Rhaella die in dragonfire, leaving Visenor's wife and unborn child lost without his knowledge."
   }
 ]

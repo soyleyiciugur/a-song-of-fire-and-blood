@@ -280,6 +280,16 @@
       "body": "Not a reveal chapter or a secret mastermind pitch. Pick someone whose ordinary day you would like to understand. What would their attention settle on that the princes would miss?",
       "publishedAt": "2026-09-11T20:50:00.000Z",
       "spoilerThrough": "the-mummers-blood"
+    },
+    {
+      "id": "chapter-the-children-pay",
+      "chapterSlug": "the-children-pay",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-room-middle",
+      "body": "The Children Pay moves from political aftermath to a devastating personal ending. How did the chapter change your reading of protection, complicity and inherited ambition? Please discuss the assault with care and keep spoilers within Chapter XVII.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "spoilerThrough": "the-children-pay"
     }
   ],
   "comments": [
@@ -2749,6 +2759,467 @@
       "body": "then I withdraw the snack audit and replace it with a respectful author lunch break. preferably with Adana.",
       "publishedAt": "2026-09-11T20:50:00.000Z",
       "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-1",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "The council scenes make the title feel institutional before the ending makes it painfully literal. Everyone is discussing who will pay for Gaelor's act, and almost every proposed answer shifts the cost onto someone else.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "upvoterIds": ["regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-2",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "I think the intercut ending is powerful, but it is also intentionally exhausting. Renrose choosing ambition while Rhaella loses every choice except the last one is the chapter's ugliest contrast.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "upvoterIds": ["regular-room-middle"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-3",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "Oswald's decision to surrender the involved gold cloaks for judgment matters. It does not absolve the Watch, but it is the first concrete institutional response in a room otherwise full of reputation management.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "upvoterIds": ["regular-archive", "regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-4",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "Boneskin understanding both rescue and the final command is devastating. The intelligence Visenor admired is not presented as a convenient human morality; she understands Rhaella, and that is worse here.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-5",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "The body in the opening surf had me waiting for Edmyn to return in the worst possible way. Leaving it unidentified keeps the dread alive instead of turning it into a clean answer.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "upvoterIds": ["regular-room-critic"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-6",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-grad",
+      "parentId": "chapter-the-children-pay-comment-1",
+      "body": "Yes. Even the Faith's help becomes a funding negotiation. Jace is effective, but the chapter refuses to pretend effective government and justice are the same thing.",
+      "publishedAt": "2026-09-12T09:00:00.000Z",
+      "upvoterIds": ["regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-7",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "No. I am not going to call that ending brave because it was difficult to read. The explicit rape scene is prolonged, graphic and built around destroying a woman who had already spent the story suffering for men's choices. I genuinely do not know if I can continue with this fandom after this chapter.",
+      "publishedAt": "2026-09-12T09:02:00.000Z",
+      "upvoterIds": ["regular-u", "regular-fandom-horror"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-8",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-the-children-pay-comment-7",
+      "body": "I hated reading it too, but depicting something unbearable is not automatically endorsing it. Rhaella's last decision and Boneskin's response are clearly meant to be horrifying, not titillating.",
+      "publishedAt": "2026-09-12T09:03:00.000Z",
+      "upvoterIds": ["regular-ecology"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-9",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-children-pay-comment-8",
+      "body": "That answers a different question. Nobody said the chapter approves of it. The criticism is that HRRM chose this degree of explicit detail and made Rhaella carry it. Intent does not erase execution.",
+      "publishedAt": "2026-09-12T09:04:00.000Z",
+      "upvoterIds": ["regular-room-critic", "regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-10",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-the-children-pay-comment-9",
+      "body": "Fair. I was reacting to people elsewhere calling any depiction exploitation. Here the duration and detail are absolutely choices worth challenging.",
+      "publishedAt": "2026-09-12T09:05:00.000Z",
+      "upvoterIds": ["regular-room-middle"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-11",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-grad",
+      "parentId": "chapter-the-children-pay-comment-7",
+      "body": "You do not owe a story your continued attention. I am staying for now, but this crossed a line for me too. A content warning would not fix the writing decision, though it would at least let readers choose when or whether to encounter it.",
+      "publishedAt": "2026-09-12T09:06:00.000Z",
+      "upvoterIds": ["regular-u", "regular-room-critic"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-12",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "Rhaella survived the court, exile, hiding and pregnancy only to die alone while the people who love her believe she is safe. I had to stop reading for a while. The cruelty is not only what happens to her; it is the distance between her death and everyone else's knowledge.",
+      "publishedAt": "2026-09-12T09:08:00.000Z",
+      "upvoterIds": ["regular-archive", "regular-ecology", "regular-d"],
+      "awards": [{"fromUserId": "regular-room-middle", "amount": 1}]
+    },
+    {
+      "id": "chapter-the-children-pay-comment-13",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-d",
+      "parentId": "chapter-the-children-pay-comment-12",
+      "body": "Visenor is at breakfast explaining the future while his entire future is already ash. He has no idea. I am unwell.",
+      "publishedAt": "2026-09-12T09:09:00.000Z",
+      "upvoterIds": ["regular-room-defender", "regular-fandom-mythology"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-14",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-ecology",
+      "parentId": "chapter-the-children-pay-comment-12",
+      "body": "Boneskin waiting, understanding and obeying broke me. The dragon saved her from the attackers and still could not save her. When Visenor returns to that cave, Boneskin is the only living witness he can never question in words.",
+      "publishedAt": "2026-09-12T09:10:00.000Z",
+      "upvoterIds": ["regular-fandom-horror", "regular-d"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-15",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-mythology",
+      "parentId": "chapter-the-children-pay-comment-14",
+      "body": "And his songs were how he first taught Boneskin that a human voice could be trusted. Now the same dragon has obeyed Rhaella's last Valyrian command. That parallel is going to destroy him if he learns it.",
+      "publishedAt": "2026-09-12T09:11:00.000Z",
+      "upvoterIds": ["regular-ecology", "regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-16",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "Theory question: the riders arrive while Rhaella is isolated, Lord Dayne is away and Edmyn is missing. That is coordination, not random bad luck. Who benefits from removing her without exposing the sanctuary?",
+      "publishedAt": "2026-09-12T09:13:00.000Z",
+      "upvoterIds": ["regular-d", "regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-17",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-d",
+      "parentId": "chapter-the-children-pay-comment-16",
+      "body": "RENROSE. He wants Visenor dependent on the Reach and a living Dornish wife carrying an heir complicates every marriage bargain he extracted. He smiles through breakfast while this happens. Come on.",
+      "publishedAt": "2026-09-12T09:14:00.000Z",
+      "upvoterIds": ["regular-fandom-horror"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-18",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-archive",
+      "parentId": "chapter-the-children-pay-comment-17",
+      "body": "Renrose did not know where Rhaella was from anything established in this chapter. Motive is not access. If you are accusing him, show the information chain.",
+      "publishedAt": "2026-09-12T09:15:00.000Z",
+      "upvoterIds": ["regular-legal", "regular-l"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-19",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-d",
+      "parentId": "chapter-the-children-pay-comment-18",
+      "body": "Leo in Oldtown, Almar sending messages, Tyrell reach across the Reach. You all demand a signed receipt from the villain before accepting a theory.",
+      "publishedAt": "2026-09-12T09:16:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-20",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-legal",
+      "parentId": "chapter-the-children-pay-comment-19",
+      "body": "Almar helping Visenor does not establish that he knows the refuge, and Leo being fourteen near a tower is not an intelligence network. Theory is fine. Declaring the case solved is not.",
+      "publishedAt": "2026-09-12T09:17:00.000Z",
+      "upvoterIds": ["regular-archive", "regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-21",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-mythology",
+      "parentId": "chapter-the-children-pay-comment-16",
+      "body": "I suspect someone inside the Dayne household. The attackers know her route and timing, and Nymos checks the corridor before speaking. That may show caution, but it also tells us the household is not secure.",
+      "publishedAt": "2026-09-12T09:19:00.000Z",
+      "upvoterIds": ["regular-legal", "regular-room-critic"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-22",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-children-pay-comment-21",
+      "body": "Could be a Dayne faction without being Lorenah or Darren. People keep saying 'the Daynes did it' like a whole castle shares one brain. The servants, household knights and whoever followed Edmyn all have separate opportunities.",
+      "publishedAt": "2026-09-12T09:20:00.000Z",
+      "upvoterIds": ["regular-fandom-mythology", "regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-23",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-the-children-pay-comment-16",
+      "body": "Vahaemon's enemies are another possibility. Rhaella and the child are dynastic leverage, and the opening corpse may be Edmyn after someone intercepted him. I do not think the text proves the body is his, though.",
+      "publishedAt": "2026-09-12T09:21:00.000Z",
+      "upvoterIds": ["regular-fandom-horror", "regular-l"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-24",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-horror",
+      "parentId": "chapter-the-children-pay-comment-23",
+      "body": "The chapter wants us to connect the body and Edmyn because it cuts straight from anonymous death to Rhaella asking where he is. That is horror grammar, not confirmation. He could still be alive and captured.",
+      "publishedAt": "2026-09-12T09:22:00.000Z",
+      "upvoterIds": ["regular-fandom-mythology", "regular-room-defender"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-25",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-critic",
+      "parentId": "chapter-the-children-pay-comment-17",
+      "body": "Renrose being morally rotten in the final intercut does not mean he ordered this specific crime. Honestly, making him responsible would cheapen the ending further by converting gendered brutality into a tidy succession clue.",
+      "publishedAt": "2026-09-12T09:24:00.000Z",
+      "upvoterIds": ["regular-u", "regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-26",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-d",
+      "parentId": "chapter-the-children-pay-comment-25",
+      "body": "Or the intercut exists because plots connect. Not every structural observation is 'cheapening' something. Some of us are reading the chapter instead of grading HRRM's morality essay.",
+      "publishedAt": "2026-09-12T09:25:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-27",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-children-pay-comment-26",
+      "body": "You can disagree without implying the person criticizing a rape scene failed to read it. That is a disgusting little move.",
+      "publishedAt": "2026-09-12T09:26:00.000Z",
+      "upvoterIds": ["regular-room-critic", "regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-28",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-d",
+      "parentId": "chapter-the-children-pay-comment-27",
+      "body": "I said the theory was being dismissed for a meta argument. Do not invent words and then perform outrage at them.",
+      "publishedAt": "2026-09-12T09:27:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-29",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "chapter-the-children-pay-comment-28",
+      "body": "Discuss the interpretation. Stop assigning motives or reading ability to the person making it.",
+      "publishedAt": "2026-09-12T09:28:00.000Z",
+      "upvoterIds": ["regular-room-middle"],
+      "awards": [],
+      "moderation": {"rule": "Argue the take rather than the person.", "targetCommentId": "chapter-the-children-pay-comment-28"}
+    },
+    {
+      "id": "chapter-the-children-pay-comment-30",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Can we talk about the council deciding what history will remember before the bodies are buried? Jace understands immediately that killing the mummers made them a legend. He is governing the story of the massacre as much as the city.",
+      "publishedAt": "2026-09-12T09:31:00.000Z",
+      "upvoterIds": ["regular-grad", "regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-31",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-grad",
+      "parentId": "chapter-the-children-pay-comment-30",
+      "body": "His best policy is also openly narrative: let the walls blame Gaelor, have the Faith embody the Crown at the rites, do not let gold cloaks turn mockery into rebellion. He is frighteningly good at separating dynasty from dynast.",
+      "publishedAt": "2026-09-12T09:32:00.000Z",
+      "upvoterIds": ["regular-archive", "regular-room-defender"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-32",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-legal",
+      "parentId": "chapter-the-children-pay-comment-30",
+      "body": "And he correctly distinguishes protest from rebellion. Arresting everyone with charcoal would turn an atrocity by the Watch into an ongoing policy of the Watch. That is the clearest legal instinct anyone shows in the room.",
+      "publishedAt": "2026-09-12T09:33:00.000Z",
+      "upvoterIds": ["regular-u"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-33",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-critic",
+      "parentId": "chapter-the-children-pay-comment-31",
+      "body": "He is effective, yes. But the chapter also shows him buying institutional legitimacy from Berholt. The dead receive rites because the sept receives money. That is not justice; it is competent damage control with incense.",
+      "publishedAt": "2026-09-12T09:34:00.000Z",
+      "upvoterIds": ["regular-grad", "regular-fandom-horror"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-34",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-the-children-pay-comment-33",
+      "body": "Both can be true. Berholt is opportunistic, and feeding orphanages or repairing poorhouses still matters to the people who use them. Material relief does not become fake because the bargain behind it is ugly.",
+      "publishedAt": "2026-09-12T09:35:00.000Z",
+      "upvoterIds": ["regular-u", "regular-ecology"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-35",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-children-pay-comment-34",
+      "body": "Exactly. People in Flea Bottom cannot eat moral purity. I still want Gaelor punished, the Watch investigated and the families compensated, but money reaching the poor is not the corrupt part of this equation.",
+      "publishedAt": "2026-09-12T09:36:00.000Z",
+      "upvoterIds": ["regular-room-defender", "regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-36",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-mythology",
+      "parentId": null,
+      "body": "Visenor weaponizing Baelor's uncertainty about Vhagar is clever because the forgery does not need to prove the dragon exists. It only needs to resemble the private shape of Baelor's hope closely enough that he supplies belief himself.",
+      "publishedAt": "2026-09-12T09:39:00.000Z",
+      "upvoterIds": ["regular-grad", "regular-d"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-37",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-archive",
+      "parentId": "chapter-the-children-pay-comment-36",
+      "body": "The marginal note is practically an instruction manual for deceiving him: Baelor knows he may have assembled a story rather than proven a history. Visenor plans to give that story one forged piece of apparent confirmation.",
+      "publishedAt": "2026-09-12T09:40:00.000Z",
+      "upvoterIds": ["regular-fandom-mythology", "regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-38",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-d",
+      "parentId": "chapter-the-children-pay-comment-36",
+      "body": "And Renrose immediately plans to profit from the lie beyond the agreed goal. Visenor thinks he found a partner. He found another man measuring the crown while smiling at him.",
+      "publishedAt": "2026-09-12T09:41:00.000Z",
+      "upvoterIds": ["regular-room-critic"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-39",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "Saera tying the direwolf down for a dragon flight is one tiny practical image in a brutal chapter, and I needed it. Also: arriving on the seventeenth means the capital gets two more days to curdle before she sees what Gaelor did.",
+      "publishedAt": "2026-09-12T09:43:00.000Z",
+      "upvoterIds": ["regular-fandom-horror", "regular-u"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-40",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-fandom-horror",
+      "parentId": "chapter-the-children-pay-comment-39",
+      "body": "She is flying toward one family disaster while another has already happened behind her. Nobody in this family ever receives the warning in time.",
+      "publishedAt": "2026-09-12T09:44:00.000Z",
+      "upvoterIds": ["regular-d", "regular-ecology"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-41",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The Baelenys and Jace scene ending mid-story is either excellent restraint or another cliffhanger stacked onto a chapter already carrying too much. I am leaning toward the second tonight.",
+      "publishedAt": "2026-09-12T09:46:00.000Z",
+      "upvoterIds": ["regular-room-middle"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-42",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-room-defender",
+      "parentId": "chapter-the-children-pay-comment-41",
+      "body": "For me it works because Baelenys asks Jace to become the listening child again while Renrose is explaining why children should inherit punishment. The missing story is functioning as part of the title, not only sequel bait.",
+      "publishedAt": "2026-09-12T09:47:00.000Z",
+      "upvoterIds": ["regular-grad", "regular-fandom-mythology"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-43",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-grad",
+      "parentId": "chapter-the-children-pay-comment-42",
+      "body": "Yes, and Jace spends the whole day acting older than his father before Baelenys abruptly places him in the role Visenor once occupied. Whether the story is confession, warning or manipulation changes that scene completely.",
+      "publishedAt": "2026-09-12T09:48:00.000Z",
+      "upvoterIds": ["regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-44",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "One thing the council never settles: what happens to Mydan Gerren. Jace taking the case away from Cordin is probably safer, but the surviving victim is still treated as an administrative object passed between powerful men.",
+      "publishedAt": "2026-09-12T09:50:00.000Z",
+      "upvoterIds": ["regular-room-critic", "regular-u"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-45",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-u",
+      "parentId": "chapter-the-children-pay-comment-44",
+      "body": "And Gaelor gets a boat to Driftmark while Watchmen face judgment. Banishment from the capital is visible, sure, but it is still a prince being sent to another castle after twenty deaths.",
+      "publishedAt": "2026-09-12T09:51:00.000Z",
+      "upvoterIds": ["regular-legal", "regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "chapter-the-children-pay-comment-46",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-archive",
+      "parentId": "chapter-the-children-pay-comment-45",
+      "body": "Jace says the same thing in softer language: sending Gaelor away was right and was not enough. The unresolved question is whether Baelenys's private punishment will ever become public accountability.",
+      "publishedAt": "2026-09-12T09:52:00.000Z",
+      "upvoterIds": ["regular-grad", "regular-legal"],
       "awards": []
     }
   ]

@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-09-12",
+    "items": [
+      "Synchronized Chapter XVII across the chronicle, character records, houses, dragons, Bloodshed and the Known World map.",
+      "Advanced the current story date to the Fifteenth Day of the Eighth Moon, 99 AC.",
+      "Opened The Children Pay chapter discussion in Taverns with spoiler-aware community reactions.",
+      "Expanded The Children Pay discussion with sustained debate about its ending, political aftermath and competing theories."
+    ],
+    "features": [
+      "Added the complete Chapter XVII chronology and its Taverns discussion."
+    ],
+    "links": {
+      "Synchronized Chapter XVII across the chronicle, character records, houses, dragons, Bloodshed and the Known World map.": "/chapters/the-children-pay",
+      "Opened The Children Pay chapter discussion in Taverns with spoiler-aware community reactions.": "/forum"
+    }
+  },
+  {
     "date": "2026-09-11",
     "items": [
       "Added the Gaelor Supervillain edit to the Raven's Eye reels.",
