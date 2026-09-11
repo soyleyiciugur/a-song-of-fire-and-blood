@@ -1,6 +1,4 @@
-import ProfileReactions from "@/components/community/ProfileReactions";
 import ProfileGuestbook from "@/components/community/ProfileGuestbook";
-import ProfileWallet from "@/components/community/ProfileWallet";
 import ProfileAffinity from "@/components/community/ProfileAffinity";
 import { affinityCatalog } from "@/lib/profileAffinity";
 import { notFound } from "next/navigation";
@@ -47,14 +45,10 @@ export default async function Page({ params }: { params: Promise<{ username: str
         <div><dt>Replies</dt><dd>{posts ?? 0}</dd></div>
         <div><dt>Raven’s Eye comments</dt><dd>{raven ?? 0}</dd></div>
       </dl>
-      <div className={styles.socialGrid}>
-        <ProfileFriends key={p.id} profileId={p.id} viewerId={viewer?.id ?? null} />
-        <ProfileWallet key={p.id} profileId={p.id} viewerId={viewer?.id??null} />
-      </div>
-      <ProfileAffinity key={p.id} profileId={p.id} values={p.affinity??{}} catalog={affinityCatalog().map(field=>({...field,options:field.options.filter(option=>option.id===p.affinity?.[field.key])}))} editable={false} />
+      <ProfileFriends key={p.id} profileId={p.id} viewerId={viewer?.id ?? null} />
+      <ProfileAffinity key={p.id} profileId={p.id} values={p.affinity??{}} catalog={affinityCatalog().map(field=>({...field,options:field.options.filter(option=>option.id===p.affinity?.[field.key]).map(option=>({ ...option, href: option.href.startsWith("/ravens-eye") ? `${option.href}${option.href.includes("?") ? "&" : "?"}returnTo=${encodeURIComponent(`/users/${p.username}`)}` : option.href }))}))} editable={false} />
       <ProfileGuestbook key={p.id} profileId={p.id} viewerId={viewer?.id??null} canModerate={viewerProfile?.role==="admin"||viewerProfile?.role==="moderator"} />
       <ProfileActivity key={p.id} userId={p.id} />
-      <ProfileReactions key={p.id} userId={p.id} />
     </main>
   );
 }

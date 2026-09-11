@@ -20,6 +20,7 @@ export interface GutterUser {
 export interface GutterComment {
   surface?: 'forum';
   upvotes?: number;
+  legacyFavorIds?: string[];
   hasocash?: number;
   moderation?: {rule:string; targetCommentId:string};
   id: string;

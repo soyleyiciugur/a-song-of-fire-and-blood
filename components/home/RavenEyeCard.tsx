@@ -8,7 +8,7 @@ export default function RavenEyeCard() {
   if (!item) return null;
 
   return (
-    <Link href={`/ravens-eye?item=${item.id}`} className={`${styles.card} card card-padding`}>
+    <Link href={`/ravens-eye?item=${item.id}&returnTo=${encodeURIComponent("/")}`} className={`${styles.card} card card-padding`}>
       <span className="home-quote-label">From the Raven&apos;s Eye</span>
       <div className={styles.imageWrap}>
         <Image src={item.src} alt={item.caption || "Raven's Eye"} fill className={styles.image} />

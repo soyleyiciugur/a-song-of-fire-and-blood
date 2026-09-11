@@ -251,3 +251,37 @@
 .messageBubble{position:relative;padding-top:20px}.messageCornerMenu{position:absolute;top:4px;right:5px;z-index:12}.messageMenuButton{display:grid!important;place-items:center;min-width:26px!important;width:26px;height:24px;min-height:24px!important;padding:0!important;border:0!important;border-radius:6px!important;background:transparent!important;color:#887b70!important;font:18px/1 var(--font-geist)!important;opacity:.45;cursor:pointer}.messageBubble:hover .messageMenuButton,.messageMenuButton[aria-expanded=true]{opacity:1;background:#0003!important;color:#d8c09f!important}.messageMenu{position:absolute;right:0;top:27px;z-index:30;display:grid;min-width:128px;padding:5px;border:1px solid #4c3d32;border-radius:9px;background:linear-gradient(180deg,#1c1718,#100e10);box-shadow:0 12px 34px #000b}.messageMenu button{min-height:34px;padding:7px 10px;border:0;border-radius:6px;background:transparent;color:#d2bda3;font:11px var(--font-geist);text-align:left;cursor:pointer}.messageMenu button:hover{background:#ffffff0b;color:#f1ddc2}.messageMenu button:disabled{opacity:.4;cursor:not-allowed}.messageMenu .destructiveMenuItem{color:#ce8989}.messageActions{padding-right:22px}
 @media(max-width:760px){.composerArea{overflow:visible;max-height:none}.reactionPicker{position:absolute;left:8px;bottom:56px;width:min(360px,calc(100% - 16px));max-height:min(300px,45dvh);overflow:hidden}.emojiPopover{width:min(300px,calc(100% - 16px))}.portraitPopover{width:min(440px,calc(100% - 16px))}.emojiPopover .emojiPicker{max-height:180px}.portraitPopover .portraitGrid{max-height:min(210px,31dvh)}.messageMenuButton{opacity:.8}}
 .preview{white-space:nowrap;line-height:20px}.previewPortrait{display:inline-flex;width:18px;height:18px;margin:0 1px;vertical-align:-4px}.previewPortrait img{width:18px!important;height:18px!important;border-radius:4px}
+
+/* v4 compact message chrome + themed GIF picker */
+.messageBubble{padding:8px 11px 7px;padding-top:12px}
+.messageCornerMenu{top:-9px;right:4px;z-index:120}
+.messageMenuButton{width:24px!important;min-width:24px!important;height:22px;min-height:22px!important;border:1px solid #49382f!important;border-radius:50%!important;background:#151113!important;color:#9e8b79!important;opacity:.72;box-shadow:0 4px 12px #0008}
+.messageBubble:hover .messageMenuButton,.messageMenuButton:hover,.messageMenuButton[aria-expanded=true]{opacity:1;background:#151113!important;border-color:#725942!important;color:#e1c8a4!important}
+.messageMenu{top:auto;bottom:27px;right:0;z-index:1000;min-width:132px}
+.messageMenu button:hover{background:#241a1c;color:#f1ddc2}
+.messageFooter{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:27px;margin-top:4px}
+.messageActions{display:flex;align-items:center;gap:2px;margin:0;padding:0;min-width:78px}
+.messageActions>button{min-height:26px;height:26px;padding:0 4px;border-radius:4px}
+.messageActions>button:hover{background:transparent;color:#f0d5ad}
+.messageMeta{flex:none;margin:0!important;color:#8d8176!important;font:9px/1 var(--font-geist)!important;text-align:right;white-space:nowrap}
+.gifPopover{position:absolute;left:12px;bottom:58px;z-index:70;width:min(430px,calc(100% - 24px));margin:0}
+.giphyPicker{overflow:hidden;border:1px solid #594534;border-radius:12px;background:linear-gradient(180deg,#1a1517,#0f0d0f);box-shadow:0 18px 46px #000c;color:#ddcfbb}
+.giphyHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;border-bottom:1px solid #342a25}
+.giphyHeader>span{font:600 13px var(--font-hotd);letter-spacing:.03em;color:#ead8bb}
+.giphyHeader a{color:#9e8768;font:9px var(--font-geist);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+.giphyHeader a:hover{color:#d3b680}
+.giphySearchWrap{display:flex;align-items:center;gap:7px;margin:10px 10px 7px;padding:0 10px;border:1px solid #493b31;border-radius:8px;background:#100e10;color:#8c7866}
+.giphySearchWrap:focus-within{border-color:#80633e;box-shadow:0 0 0 1px #80633e33}
+.giphySearchWrap input{min-width:0;width:100%;height:38px;padding:0;border:0;outline:0;background:transparent;color:#e4d8c8;font:12px var(--font-geist);appearance:none;-webkit-appearance:none}
+.giphySearchWrap input::-webkit-search-cancel-button{display:none}
+.giphySearchWrap input::placeholder{color:#71675e}
+.giphyGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;max-height:250px;overflow-y:auto;padding:5px 10px 11px;overscroll-behavior:contain}
+.giphyResult{position:relative;min-width:0;height:92px;padding:0;border:1px solid #3c322c;border-radius:7px;overflow:hidden;background:#0b0a0b;cursor:pointer;box-shadow:none}
+.giphyResult:hover{border-color:#8a6941;background:#0b0a0b}
+.giphyResult img{display:block;width:100%;height:100%;object-fit:cover}
+.giphyStatus{margin:8px 12px 12px;color:#978a7e;font:11px/1.4 var(--font-geist)}
+.giphyError{color:#c88d8d}
+.emojiPicker{display:grid;grid-template-columns:repeat(6,40px);gap:3px;justify-content:start;padding:3px;max-height:230px;overflow:auto}
+.emojiPicker button{width:40px;height:40px;border:0;border-radius:7px;background:transparent;font-size:21px}
+.emojiPicker button:hover{background:#2a2021}
+@media(max-width:760px){.gifPopover{left:8px;bottom:56px;width:min(430px,calc(100% - 16px))}.giphyGrid{max-height:min(230px,32dvh)}.messageBubble{padding-top:12px}.messageCornerMenu{top:-8px}.messageMenu{bottom:26px}.messageFooter{gap:5px}.emojiPicker{grid-template-columns:repeat(6,38px)}.emojiPicker button{width:38px;height:38px}}

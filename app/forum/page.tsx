@@ -32,9 +32,7 @@ function Account({user}:{user:GutterUser}) {
   </div></details>;
 }
 function Rewards({comment}:{comment:GutterComment}) {
-  return <div className={styles.rewards}>{!comment.authorType&&<span title="Favor from community regulars" aria-label={`${comment.upvotes??0} Favor`}><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m3 10 7-7 7 7h-4v7H7v-7H3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg> {comment.upvotes??0}</span>}
-    <Link href={getCommentLink(comment)} className={styles.permalink}>Permalink</Link>
-  </div>;
+  return <div className={styles.rewards}><Link href={getCommentLink(comment)} className={styles.permalink}>Permalink</Link></div>;
 }
 function Forum() {
   const data=useCommunity();
@@ -73,7 +71,7 @@ function Forum() {
       <Link href="/forum" className={styles.back}>← All tables</Link>
       <section className={styles.op}><div className={styles.meta}><span>{thread.category}</span><span>Spoilers through {thread.spoilerThrough.replaceAll('-',' ')}</span><time dateTime={thread.publishedAt}>{dateLabel(thread.publishedAt)} TRT</time></div>
         {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
-        {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}{thread.authorType&&<LikeButton kind="thread" id={thread.id}/ >}{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
+        {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}<LikeButton kind="thread" id={thread.id}/>{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
       </section>
       <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><label>Order <select value={sort} onChange={e=>setSort(e.target.value)}><option value="conversation">Conversation</option><option value="top">Most Favored</option></select></label></div>
       {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
@@ -84,7 +82,7 @@ function Forum() {
           {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}
           <Account user={user}/><time className={styles.time} dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time>
           {comment.moderation&&<p className={styles.modNote}>Moderator warning · {comment.moderation.rule}</p>}
-          <p className={styles.body}>{comment.body}</p><Rewards comment={comment}/>{comment.authorType && <LikeButton kind="post" id={comment.id}/>}<Composer kind="post" threadId={thread.id} parentId={comment.id}/>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>}
+          <p className={styles.body}>{comment.body}</p><div className={styles.commentMetaRow}><LikeButton kind="post" id={comment.id} legacyReactorIds={comment.legacyFavorIds}/><Rewards comment={comment}/></div><Composer kind="post" threadId={thread.id} parentId={comment.id}/>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>}
         </li>;
       })}</ol>
     </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to Taverns</Link></p> : <>

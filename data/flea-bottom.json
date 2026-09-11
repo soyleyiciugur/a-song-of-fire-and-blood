@@ -12567,9 +12567,9 @@
     {
       "id": "gallery-vahaemon-mogged-scheduled-5",
       "entryId": "gallery-vahaemon-mogged",
-      "authorId": "regular-room-critic",
-      "parentId": "gallery-vahaemon-mogged-baelenys",
-      "body": "your definition of sufficient continues to explain a lot",
+      "authorId": "regular-room-middle",
+      "parentId": "gallery-vahaemon-mogged-critic",
+      "body": "and his definition of sufficient continues to explain a lot",
       "publishedAt": "2026-09-11T20:50:00.000Z"
     },
     {
@@ -12702,6 +12702,15 @@
       "parentId": null,
       "body": "the scary part is the edit barely had to exaggerate anything",
       "publishedAt": "2026-09-11T11:34:00.000Z"
+    },
+    {
+      "id": "live-gaelor-supervillain-luck-g-reply",
+      "entryId": "gallery-gaelor-supervillain",
+      "authorId": "regular-g",
+      "parentId": "37da1b3c-8d7d-4d04-9eea-35aae81ed410",
+      "parentSource": "supabase",
+      "body": "the statement currently says please stop approaching the villain edit with your heart. i am not sure it is working.",
+      "publishedAt": "2026-09-11T13:10:00.000Z"
     }
   ],
   "relationships": [

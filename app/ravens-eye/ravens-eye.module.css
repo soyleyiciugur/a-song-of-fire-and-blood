@@ -742,3 +742,10 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+/* Gutter lightbox toolbar — no browser-default controls. */
+.gutterToolbar{padding:9px 12px;border-bottom:1px solid #3e332b;background:linear-gradient(180deg,#171315f7,#100e10f7);box-shadow:0 6px 18px #0005}
+.gutterToolbar button{min-height:36px;padding:7px 11px;border:1px solid #4d3d31;border-radius:7px;background:#141113;color:#cdb99d;font:600 10px var(--font-geist);letter-spacing:.035em;transition:border-color .15s ease,color .15s ease}
+.gutterToolbar button:hover{border-color:#7c6040;background:#141113;color:#efd9b7}
+.gutterToolbar button:disabled{opacity:.32}
+.commentCount{border:1px solid #594534;border-radius:999px;background:#151113e8;color:#d9c6aa;font:600 10px/1.4 var(--font-geist);box-shadow:0 4px 14px #0007}

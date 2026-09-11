@@ -47,3 +47,15 @@
 .reelPanel { max-height: 45dvh; overflow-y: auto; overscroll-behavior: contain; padding: 0 14px 14px; touch-action: pan-y; }
 @media (max-width: 600px) { .body { margin-left: 0; } .bio { margin-left: 0; } .replies { margin-left: 8px; padding-left: 12px; } }
 .parentLink{display:inline-block;color:#ad977a;font:11px var(--font-geist);padding:4px 0 8px;text-decoration:none}
+
+/* Reels discussion chrome aligned with the rest of ASOFAB. */
+.section{font-family:var(--font-geist)}
+.collapsible{overflow:hidden;border:1px solid #4a3b30;border-radius:11px;background:linear-gradient(180deg,#171315f4,#0e0d0ff4);box-shadow:0 12px 34px #0006}
+.toggle{position:relative;align-items:center;min-height:48px;padding:11px 14px;border:0;background:linear-gradient(90deg,#2a171c88,transparent 48%);color:#d7c8b5;font:600 11px var(--font-geist);letter-spacing:.035em}
+.toggle::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:2px;background:#b78b4e;opacity:.8}
+.toggle:hover{background:linear-gradient(90deg,#321b2288,transparent 55%)}
+.toggle>span:first-child{color:#e8d8c0;text-transform:uppercase;letter-spacing:.08em}
+.toggle>span:last-child{display:inline-flex;align-items:center;min-height:27px;padding:0 9px;border:1px solid #5b4937;border-radius:999px;background:#161214;color:#c6a66d;font:600 9px var(--font-geist);text-transform:uppercase;letter-spacing:.07em}
+.reelPanel{border-top:1px solid #302821;padding:3px 14px 14px;background:#0e0d0f66}
+.intro,.footer{font-family:var(--font-geist)}
+.username,.body,.bio,.profileHint,.badge,.activity,.identitySource,.profileFacts dt,.friendToggle,.friendBio,.pinLabel{font-family:var(--font-geist)}

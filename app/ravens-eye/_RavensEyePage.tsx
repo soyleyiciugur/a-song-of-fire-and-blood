@@ -364,13 +364,15 @@ function ExpandableCaption({
 function mediaUrl(
   tab: RavensEyeTab,
   id?: string,
-  characterId?: string
+  characterId?: string,
+  returnTo?: string
 ) {
   const base = TAB_META[tab].href;
   const params = new URLSearchParams();
 
   if (characterId) params.set("character", characterId);
   if (id) params.set("item", id);
+  if (returnTo) params.set("returnTo", returnTo);
 
   const query = params.toString();
   return query ? `${base}?${query}` : base;
@@ -1185,6 +1187,7 @@ function RavensEyePageInner({
 
   const tab: RavensEyeTab = forcedTab ?? "raven";
   const characterFilter = searchParams.get("character") ?? "";
+  const returnTo = searchParams.get("returnTo") ?? "";
 
   const [lightboxList, setLightboxList] = useState<GalleryEntry[] | null>(null);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -1243,6 +1246,7 @@ function RavensEyePageInner({
           ), window.location.origin
         );
         const targetComment = searchParams.get("comment");
+        if (returnTo) correctedUrl.searchParams.set("returnTo", returnTo);
         if (targetComment) correctedUrl.searchParams.set("comment", targetComment);
         router.replace(correctedUrl.pathname + correctedUrl.search + (targetComment ? `#comment-${encodeURIComponent(targetComment)}` : ""));
       }
@@ -1266,6 +1270,7 @@ function RavensEyePageInner({
     characterFilter,
     router,
     searchParams,
+    returnTo,
     tab,
   ]);
 
@@ -1274,17 +1279,18 @@ function RavensEyePageInner({
       setLightboxList(list);
       setLightboxIdx(idx);
       setBrowserUrl(
-        mediaUrl(tab, list[idx].id, characterFilter || undefined)
+        mediaUrl(tab, list[idx].id, characterFilter || undefined, returnTo || undefined)
       );
     },
-    [characterFilter, tab]
+    [characterFilter, returnTo, tab]
   );
 
   const closeLightbox = useCallback(() => {
     setLightboxList(null);
     setLightboxIdx(null);
+    if (returnTo) { router.replace(returnTo); return; }
     setBrowserUrl(mediaUrl(tab, undefined, characterFilter || undefined));
-  }, [characterFilter, tab]);
+  }, [characterFilter, returnTo, router, tab]);
 
   const moveLightbox = useCallback(
     (direction: -1 | 1) => {
@@ -1298,14 +1304,15 @@ function RavensEyePageInner({
           mediaUrl(
             tab,
             lightboxList[next].id,
-            characterFilter || undefined
+            characterFilter || undefined,
+            returnTo || undefined
           ),
           "replace"
         );
         return next;
       });
     },
-    [characterFilter, lightboxList, tab]
+    [characterFilter, lightboxList, returnTo, tab]
   );
 
   const openReels = useCallback(
@@ -1313,30 +1320,31 @@ function RavensEyePageInner({
       setReelsList(list);
       setReelsStartIdx(idx);
       setBrowserUrl(
-        mediaUrl("reels", list[idx].id, characterFilter || undefined)
+        mediaUrl("reels", list[idx].id, characterFilter || undefined, returnTo || undefined)
       );
     },
-    [characterFilter]
+    [characterFilter, returnTo]
   );
 
   const closeReels = useCallback(() => {
     setReelsList(null);
     setReelsStartIdx(null);
+    if (returnTo) { router.replace(returnTo); return; }
     setBrowserUrl(
       mediaUrl("reels", undefined, characterFilter || undefined)
     );
-  }, [characterFilter]);
+  }, [characterFilter, returnTo, router]);
 
   const handleActiveReel = useCallback(
     (entry: GalleryEntry) => {
       const current = new URLSearchParams(window.location.search);
       if (current.get("item") === entry.id && current.has("comment")) return;
       setBrowserUrl(
-        mediaUrl("reels", entry.id, characterFilter || undefined),
+        mediaUrl("reels", entry.id, characterFilter || undefined, returnTo || undefined),
         "replace"
       );
     },
-    [characterFilter]
+    [characterFilter, returnTo]
   );
 
   // Native browser back/forward should open/close the current media correctly.

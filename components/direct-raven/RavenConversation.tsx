@@ -21,7 +21,7 @@ const time = (value: string) =>
 const day = (value: string) =>
   new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(new Date(value));
 
-const emojis = ["😀", "😂", "🥹", "😍", "❤️", "🔥", "👍", "👀", "😭", "💀", "🐦‍⬛", "🐉", "✨", "🙏", "🎉", "🍷"];
+const emojis = ["😀","😃","😄","😁","😂","🤣","🥹","😊","😍","🥰","😘","😏","😒","🙄","😬","🤨","🫡","🤔","🤭","🤫","😈","😭","😢","😤","😡","🤬","💀","☠️","👀","❤️","♥️","💔","🔥","✨","⭐","💫","👍","👎","👏","🙏","🤝","💅","🫶","👌","✌️","🤞","🖕","🎉","🍷","🍺","⚔️","🗡️","🛡️","👑","🐉","🐺","🦌","🦁","🐙","🐦‍⬛","🌹","🌙","☀️","❄️","🌊","🏰","📜","🕯️","🩸","⚰️","💰","🪙"];
 const MAX_PORTRAITS = 8;
 
 type CharacterOption = {
@@ -527,11 +527,13 @@ export default function RavenConversation({
                   )}
                   {!message.deleted_at && message.gif && /^https:\/\/media[0-9]*\.giphy\.com\/media\//.test(message.gif.url) && <div className={styles.attachment}><img src={message.gif.url} alt={message.gif.title||"GIPHY GIF"} onLoad={()=>{if(nearBottom.current)scrollBottom();}}/><small>GIPHY</small></div>}
                   {message.deleted_at ? <p>This raven was withdrawn.</p> : <RavenMessageContent body={message.body} />}
-                  <span>
-                    <time dateTime={message.created_at}>{time(message.created_at)}</time>
-                    {message.edited_at && !message.deleted_at ? " · edited" : ""}
-                    {mine && !message.deleted_at ? (partnerRead >= message.created_at ? " · Seen" : " · Sent") : ""}
-                  </span>
+                  <div className={styles.messageFooter}>
+                    {!message.deleted_at && <div className={styles.messageActions}>
+                      <LikeButton kind="message" id={message.id} />
+                      {!closed && <button type="button" onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
+                    </div>}
+                    <span className={styles.messageMeta}><time dateTime={message.created_at}>{time(message.created_at)}</time>{message.edited_at && !message.deleted_at ? " · edited" : ""}{mine && !message.deleted_at ? (partnerRead >= message.created_at ? " · Seen" : " · Sent") : ""}</span>
+                  </div>
                   {!message.deleted_at && (
                     <>
                       <div className={styles.messageCornerMenu} data-raven-message-menu>
@@ -571,21 +573,7 @@ export default function RavenConversation({
                           </div>
                         )}
                       </div>
-                      <div className={styles.messageActions}>
-                        <LikeButton kind="message" id={message.id} />
-                        {!closed && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setReply(message);
-                              setEditing(null);
-                              inputRef.current?.focus({ preventScroll: true });
-                            }}
-                          >
-                            Reply
-                          </button>
-                        )}
-                      </div>
+
                     </>
                   )}
                 </div>
@@ -621,7 +609,7 @@ export default function RavenConversation({
               </div>
             )}
 
-            {gifOpen && <GiphyPicker onSelect={value=>{setGif(value);setGifOpen(false);}}/>}
+            {gifOpen && <div className={styles.gifPopover}><GiphyPicker onSelect={value=>{setGif(value);setGifOpen(false);}}/></div>}
             {gif && <div className={styles.mediaPreview}><img src={gif.url} alt={gif.title}/><button type="button" disabled={sending} onClick={()=>setGif(null)}>Remove GIF</button></div>}
             {preview && (
               <div className={styles.mediaPreview}>
