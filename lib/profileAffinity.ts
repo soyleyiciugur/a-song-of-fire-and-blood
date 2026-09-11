@@ -59,7 +59,7 @@ export function affinityCatalog(): AffinityField[] {
     {
       key: "dragon",
       label: "Favorite Dragon",
-      options: dragons.map((d) => ({ id: d.id, title: d.name, href: `/bestiary/${d.id}`, image: d.image })),
+      options: dragons.map((d) => ({ id: d.id, title: d.name, href: `/dragons/${d.id}`, image: d.image })),
     },
     {
       key: "chapter",

@@ -63,7 +63,7 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
             </div>
           </details>
           <p className={styles.body}>{comment.body}</p>
-          {comment.authorType && <LikeButton kind="raven" id={comment.id} />}
+          <LikeButton kind="raven" id={comment.id} />
           <Composer kind="raven" entryId={comment.entryId} parentId={comment.id} />
           {comment.canEdit && <ContentActions kind="raven" id={comment.id} body={comment.body} />}
           {children.length > 0 && (
