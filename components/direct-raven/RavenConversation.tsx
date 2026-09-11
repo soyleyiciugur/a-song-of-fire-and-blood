@@ -82,6 +82,8 @@ export default function RavenConversation({
   const [hasOlder, setHasOlder] = useState(initialMessages.length === 100);
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [partnerRead, setPartnerRead] = useState("");
+  const [guildReads, setGuildReads] = useState<{ user_id: string; last_read_at: string }[]>([]);
+  const [seenPanelId, setSeenPanelId] = useState<string | null>(null);
   const [newMessages, setNewMessages] = useState(false);
   const [guildInfoOpen, setGuildInfoOpen] = useState(false);
 
@@ -226,10 +228,13 @@ export default function RavenConversation({
       const readPromise = !isGuild && partner
         ? supabase.from("direct_raven_reads").select("last_read_at").eq("conversation_id", conversationId).eq("user_id", partner.id).maybeSingle()
         : Promise.resolve({ data: null, error: null });
+      const guildReadPromise = isGuild
+        ? supabase.from("direct_raven_reads").select("user_id,last_read_at").eq("conversation_id", conversationId)
+        : Promise.resolve({ data: [], error: null });
       const blockPromise = !isGuild && partner
         ? supabase.from("direct_raven_blocks").select("blocker_id,blocked_id").or(`and(blocker_id.eq.${userId},blocked_id.eq.${partner.id}),and(blocker_id.eq.${partner.id},blocked_id.eq.${userId})`)
         : Promise.resolve({ data: [], error: null });
-      const [{ data }, { data: reads }, { data: blocks }] = await Promise.all([query, readPromise, blockPromise]);
+      const [{ data }, { data: reads }, { data: guildReadRows }, { data: blocks }] = await Promise.all([query, readPromise, guildReadPromise, blockPromise]);
 
       if (!active) return;
       if (data) {
@@ -245,6 +250,7 @@ export default function RavenConversation({
         });
       }
       setPartnerRead(reads?.last_read_at ?? "");
+      if (isGuild) setGuildReads((guildReadRows ?? []) as { user_id: string; last_read_at: string }[]);
       if (!isGuild && partner && blocks) {
         setBlockedByMe(blocks.some((block) => block.blocker_id === userId));
         setBlockedByThem(blocks.some((block) => block.blocker_id === partner.id));
@@ -260,6 +266,11 @@ export default function RavenConversation({
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "direct_raven_messages", filter: `conversation_id=eq.${conversationId}` },
+        () => void sync()
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "direct_raven_reads", filter: `conversation_id=eq.${conversationId}` },
         () => void sync()
       )
       .subscribe();
@@ -447,6 +458,24 @@ export default function RavenConversation({
 
   const threadTitle = isGuild ? (activeConversation.title ?? "Guild Parley") : (partner?.display_name ?? "Direct Raven");
 
+  const seenFor = (message: DirectRavenMessage) => {
+    if (!isGuild || message.sender_id !== userId) return [];
+    const eligible = new Set(
+      memberships
+        .filter((membership) => membership.user_id !== userId && membership.joined_at <= message.created_at)
+        .map((membership) => membership.user_id)
+    );
+    return guildReads
+      .filter((receipt) => eligible.has(receipt.user_id) && receipt.last_read_at >= message.created_at)
+      .sort((a, b) => a.last_read_at.localeCompare(b.last_read_at));
+  };
+
+  const eligibleCountFor = (message: DirectRavenMessage) =>
+    memberships.filter((membership) => membership.user_id !== userId && membership.joined_at <= message.created_at).length;
+
+  const seenPanelMessage = seenPanelId ? messages.find((message) => message.id === seenPanelId) ?? null : null;
+  const seenPanelRows = seenPanelMessage ? seenFor(seenPanelMessage) : [];
+
   return (
     <section className={styles.thread} aria-label={isGuild ? `Guild Parley: ${threadTitle}` : `Conversation with ${threadTitle}`}>
       <header className={styles.threadHeader}>
@@ -551,7 +580,29 @@ export default function RavenConversation({
                       <LikeButton kind="message" id={message.id} />
                       {!closed && <button type="button" onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
                     </div>}
-                    <span className={styles.messageMeta}><time dateTime={message.created_at}>{time(message.created_at)}</time>{message.edited_at && !message.deleted_at ? " · edited" : ""}{mine && !message.deleted_at ? (isGuild ? " · Sent" : (partnerRead >= message.created_at ? " · Seen" : " · Sent")) : ""}</span>
+                    <span className={styles.messageMeta}>
+                      <time dateTime={message.created_at}>{time(message.created_at)}</time>
+                      {message.edited_at && !message.deleted_at ? " · edited" : ""}
+                      {mine && !message.deleted_at && !isGuild ? (partnerRead >= message.created_at ? " · Seen" : " · Sent") : ""}
+                      {mine && !message.deleted_at && isGuild && (() => {
+                        const seen = seenFor(message);
+                        const eligible = eligibleCountFor(message);
+                        if (seen.length === 0) return " · Sent";
+                        return (
+                          <>
+                            {" · "}
+                            <button
+                              type="button"
+                              className={styles.seenByButton}
+                              onClick={() => setSeenPanelId(message.id)}
+                              aria-label="Show who has seen this message"
+                            >
+                              {eligible > 0 && seen.length === eligible ? "Seen by all" : `Seen by ${seen.length}`}
+                            </button>
+                          </>
+                        );
+                      })()}
+                    </span>
                   </div>
                   {!message.deleted_at && (
                     <>
@@ -747,6 +798,34 @@ export default function RavenConversation({
         )}
         {error && <p role="alert" className={styles.error}>{error}</p>}
       </div>
+
+      {seenPanelMessage && (
+        <div className={styles.seenOverlay} role="presentation" onPointerDown={() => setSeenPanelId(null)}>
+          <section className={styles.seenPanel} role="dialog" aria-modal="true" aria-label="Message read receipts" onPointerDown={(event) => event.stopPropagation()}>
+            <div className={styles.seenPanelHeader}>
+              <div>
+                <p className={styles.kicker}>Guild Parley</p>
+                <h3>{eligibleCountFor(seenPanelMessage) > 0 && seenPanelRows.length === eligibleCountFor(seenPanelMessage) ? "Seen by all" : `Seen by ${seenPanelRows.length}`}</h3>
+              </div>
+              <button type="button" className={styles.seenPanelClose} aria-label="Close read receipts" onClick={() => setSeenPanelId(null)}>×</button>
+            </div>
+            <div className={styles.seenList}>
+              {seenPanelRows.length === 0 && <p className={styles.seenEmpty}>No one else has seen this raven yet.</p>}
+              {seenPanelRows.map((receipt) => {
+                const member = memberMap.get(receipt.user_id);
+                if (!member) return null;
+                return (
+                  <Link key={receipt.user_id} href={`/users/${member.username}`} className={styles.seenRow}>
+                    <span className={styles.seenAvatar}>{member.avatar_url ? <img src={member.avatar_url} alt="" /> : member.display_name.slice(0, 2).toUpperCase()}</span>
+                    <span className={styles.seenIdentity}><b>{member.display_name}</b><small>@{member.username}</small></span>
+                    <time dateTime={receipt.last_read_at}>{time(receipt.last_read_at)}</time>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        </div>
+      )}
     </section>
   );
 }

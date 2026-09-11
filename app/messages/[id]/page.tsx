@@ -12,8 +12,11 @@ export default async function DirectRavenConversationPage({ params }: { params: 
     <RavenConversation
       key={id}
       conversationId={id}
+      conversation={data.selected.conversation}
       userId={data.userId}
       partner={data.selected.partner}
+      members={data.selected.members}
+      memberships={data.selected.memberships}
       initialMessages={data.messages}
       blockedByMe={data.blockedByMe}
       blockedByThem={data.blockedByThem}
