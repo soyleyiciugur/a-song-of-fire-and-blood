@@ -7,6 +7,7 @@ import type { RavenConversationSummary } from "@/lib/directRaven";
 import type { DirectRavenMessage } from "@/lib/supabase/database.types";
 import { createClient } from "@/lib/supabase/client";
 import styles from "./direct-raven.module.css";
+import RavenSoundToggle from "./RavenSoundToggle";
 import NewRaven from "./NewRaven";
 import NewGuildParley from "./NewGuildParley";
 import GuildAvatar from "./GuildAvatar";
@@ -88,6 +89,7 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
       <div className={styles.inboxHeader}>
         <p className={styles.kicker}>Private correspondence</p>
         <h1><RavenIcon /> Direct Raven</h1>
+        <RavenSoundToggle />
         <div className={styles.inboxCreateActions}><NewRaven /><NewGuildParley /></div>
         <input
           className={styles.inboxSearch}
@@ -113,6 +115,7 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
             <Link
               key={conversation.id}
               href={`/messages/${conversation.id}`}
+              scroll={false}
               prefetch
               className={`${styles.conversationItem} ${selectedId === conversation.id ? styles.selectedConversation : ""}`}
             >

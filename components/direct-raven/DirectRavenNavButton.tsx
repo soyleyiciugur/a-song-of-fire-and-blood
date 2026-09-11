@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { playRavenSound, unlockSound } from "@/lib/ravenSound";
 import styles from "@/components/nav/navbar.module.css";
 
 export default function DirectRavenNavButton() {
@@ -14,11 +15,15 @@ export default function DirectRavenNavButton() {
   useEffect(() => {
     const supabase = createClient();
     let active = true;
+    let currentUser: string | undefined;
+    document.addEventListener("pointerdown", unlockSound);
+    document.addEventListener("keydown", unlockSound);
     let channel: ReturnType<typeof supabase.channel> | null = null;
 
     const load = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!active) return;
+      currentUser = user?.id;
       setSignedIn(Boolean(user));
       if (!user) { setUnread(0); return; }
       const { data } = await supabase.rpc("direct_raven_unread_count");
@@ -28,7 +33,10 @@ export default function DirectRavenNavButton() {
     void load();
     channel = supabase
       .channel("direct-raven-navbar")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "direct_raven_messages" }, () => void load())
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "direct_raven_messages" }, (payload) => {
+        if (currentUser && payload.new.sender_id !== currentUser) playRavenSound();
+        void load();
+      })
       .subscribe();
     const { data: authListener } = supabase.auth.onAuthStateChange(() => window.setTimeout(() => void load(), 0));
 
@@ -36,6 +44,8 @@ export default function DirectRavenNavButton() {
     window.addEventListener("direct-raven-read", onRead);
     return () => {
       active = false;
+      document.removeEventListener("pointerdown", unlockSound);
+      document.removeEventListener("keydown", unlockSound);
       authListener.subscription.unsubscribe();
       window.removeEventListener("direct-raven-read", onRead);
       if (channel) void supabase.removeChannel(channel);

@@ -18,7 +18,11 @@
       "Moved GIPHY search behind a server-side API route so the API key is no longer exposed to the browser.",
       "Removed Latest Updates from site navigation and restored the linked homepage section heading.",
       "Expanded the Gaelor Supervillain reel conversation with more community and character reactions.",
-      "Refined Direct Raven previews, floating emoji/portrait pickers, message action menus and reaction lists."
+      "Refined Direct Raven previews, floating emoji/portrait pickers, message action menus and reaction lists.",
+      "Fixed navbar account overlap and empty signed-out messaging space, and stabilized initial Direct Raven positioning.",
+      "Themed native form controls and added optional subtle message and notification sounds in Direct Raven.",
+      "Replaced the browser deletion dialog for community contributions with an inline confirmation and retry feedback.",
+      "Kept Direct Raven emoji, portrait and GIF panels above the composer so mobile send controls stay accessible."
     ],
     "features": [
       "Added profile guestbooks, mutual friends and linked ASOFAB favorites."

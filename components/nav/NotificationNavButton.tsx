@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useCommunity } from "@/lib/communityStore";
 import styles from "./navbar.module.css";
+
+import { playRavenSound } from "@/lib/ravenSound";
 
 const STORAGE_KEY = "asofab:notifications:last-seen";
 
@@ -29,6 +31,13 @@ export default function NotificationNavButton() {
     window.localStorage.setItem(STORAGE_KEY, seen);
     setLastSeen(seen);
   }, [pathname, data.serverTime]);
+
+  const latest = useRef<string | null>(null);
+  useEffect(() => {
+    if (!data.serverTime) return;
+    if (latest.current && userId && data.comments.some(comment => comment.authorId !== userId && Date.parse(comment.publishedAt) > Date.parse(latest.current!))) playRavenSound("notification");
+    latest.current = data.serverTime;
+  }, [data.serverTime, data.comments, userId]);
 
   const unread = data.comments.reduce((count, comment) => {
     if (comment.authorId === userId) return count;

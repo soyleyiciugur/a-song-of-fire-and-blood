@@ -51,8 +51,14 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     await page.goto(fixtureUrl);
     await page.addStyleTag({content:'nextjs-portal{pointer-events:none}'});
     const input=page.getByRole('textbox',{name:'Message',exact:true});await input.waitFor();
-    await page.getByRole("link",{name:"Sign in",exact:true}).first().waitFor();
+    // Authentication controls may be inside the closed mobile drawer.
     await page.evaluate(()=>document.fonts.ready); await page.waitForTimeout(500);
+    const navOverlaps=await page.locator('header').first().evaluate(header=>{
+      const inner=header.firstElementChild;
+      const boxes=[...inner.children].filter(el=>!el.matches('button[aria-label*="site navigation"]')).map(el=>el.getBoundingClientRect()).filter(r=>r.width&&r.height);
+      return boxes.some((a,i)=>boxes.slice(i+1).some(b=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1));
+    });
+    assert.equal(navOverlaps,false,'Navbar controls do not overlap');
     const before=await input.boundingBox();
     for(let i=0;i<12;i++){await input.fill(`New message ${i}`);await input.press('Enter');await page.getByText(`New message ${i}`,{exact:true}).waitFor();}
     const after=await input.boundingBox();
@@ -73,7 +79,7 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     await page.getByRole('button',{name:'Send',exact:true}).click();
     await page.locator('[class*="inlinePortrait"]').first().waitFor();
     assert.equal(await page.locator('[class*="inlinePortrait"]').count(),1);
-    await page.route('https://api.giphy.com/**',route=>route.fulfill({json:{data:[{id:'abc123',title:'Test wave',images:{fixed_height:{url:'https://media.giphy.com/media/abc123/200.gif'}}}]}}));
+    await page.route('**/api/giphy/search?**',route=>route.fulfill({json:{data:[{id:'abc123',title:'Test wave',url:'https://media.giphy.com/media/abc123/200.gif'}]}}));
     await page.getByRole('button',{name:'GIF',exact:true}).click();await page.getByRole('searchbox',{name:'Search GIFs'}).fill('wave');
     await page.getByRole('button',{name:'Select Test wave'}).click();await page.getByRole('button',{name:'Send',exact:true}).click();
     await page.getByAltText('Test wave').waitFor();
@@ -84,6 +90,7 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     assert.equal(await page.evaluate(()=>window.scrollY),0);
     await mkdir(path.join(root,'test-results'),{recursive:true});await page.screenshot({path:path.join(root,'test-results',`raven-${viewport.width}.png`)});
     await page.goto(fixtureUrl+'?inbox=1');await page.getByRole('button',{name:'New Raven',exact:true}).click();await page.getByPlaceholder('Search @username').fill('bran');await page.getByRole('button',{name:/Brandon of the Rookery/}).waitFor();
+    if (!process.env.RAVEN_ONLY) {
     await page.goto(fixtureUrl+'?profile=1');
     await page.getByRole('tab',{name:'Threads',exact:true}).click();await page.getByText('A member thread',{exact:true}).waitFor();
     await page.getByRole('tab',{name:'Replies',exact:true}).click();await page.getByText('No replies yet.',{exact:true}).waitFor();
@@ -91,8 +98,9 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     await page.locator('input[name="banner"]').setInputFiles({name:'banner.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aTZkAAAAASUVORK5CYII=','base64')});
     await page.getByAltText('Banner preview').waitFor();await page.getByRole('button',{name:'Save profile',exact:true}).click();await page.getByText('Profile updated.',{exact:true}).waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Profile has no horizontal overflow');
+    }
     assert.deepEqual(pageErrors,[],"No browser runtime errors");
-    await page.close();console.log(`Raven UI ${viewport.width}x${viewport.height}: composer, send, failed draft, emoji, overflow, recipient search, profile banner, activity tabs and friend requests passed.`);
+    await page.close();console.log(`Raven UI ${viewport.width}x${viewport.height}: composer, send, failed draft, emoji, GIF, navbar, overflow and recipient search passed. Profile checks: ${process.env.RAVEN_ONLY ? "skipped" : "passed"}.`);
   }
 }finally{
   await browser?.close();

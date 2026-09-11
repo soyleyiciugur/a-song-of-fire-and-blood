@@ -468,3 +468,12 @@
 .seenIdentity small{overflow:hidden;color:#8c8176;font-size:11px;text-overflow:ellipsis;white-space:nowrap}
 .seenRow time{color:#81776e;font-size:10px;white-space:nowrap}
 .seenEmpty{margin:0;padding:24px 16px;text-align:center;color:#8f857b;font-size:12px}
+
+.soundToggle{margin-top:8px;min-height:32px;padding:4px 8px;border:1px solid #594534;border-radius:8px;color:#bda787;background:#171315;font:11px var(--font-geist)}
+
+/* Explicit composer size avoids native rows/font-metric shifts on first input. */
+.composer textarea{height:68px}
+@media(max-width:760px){.composer textarea{height:62px}}
+
+/* Picker panels must clear the entire composer, including the send button. */
+.reactionPicker,.gifPopover{bottom:calc(100% + 8px)}

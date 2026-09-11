@@ -626,3 +626,16 @@
   .inner{padding-left:8px}
   .mobileNavOpen .mobileSiteTitle{display:block;grid-column:1/-1;text-align:center}
 }
+
+/* Utility controls occupy only their actual width, including signed-out state. */
+@media(min-width:1151px){
+.playBanner .inner{padding:12px 20px;gap:12px}
+.inner>.authLinks,.inner>.accountMenu,.inner>.profilePending,.inner>.searchWrap,.inner>.notificationsButton{position:relative;inset:auto;transform:none;flex-shrink:0}
+.inner>.searchWrap{flex:0 0 36px;order:0}
+.inner>.authLinks{white-space:nowrap}
+.inner>.authLinks a:last-child{display:inline}
+.navLinks{flex:1 1 auto}
+.homeLink{flex-shrink:1;max-width:180px;white-space:normal}
+.playBannerCollapsed .inner{padding-top:3px;padding-bottom:3px}
+}
+@media(max-width:640px){.playBanner .inner>.searchWrap{margin-left:auto}}

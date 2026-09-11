@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import charactersData from "@/data/characters/characters.json";
 import MiniPortrait from "@/components/MiniPortrait";
@@ -132,7 +132,7 @@ export default function RavenConversation({
     inputRef.current?.blur();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     loadedMessages.current = messages;
     if (nearBottom.current) scrollBottom();
   }, [messages]);
@@ -147,7 +147,7 @@ export default function RavenConversation({
     return () => URL.revokeObjectURL(url);
   }, [file]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const viewport = window.visualViewport;
 
     const updateViewport = () => {

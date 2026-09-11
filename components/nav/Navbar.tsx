@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,7 +14,7 @@ import styles from "./navbar.module.css";
 
 export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const header = headerRef.current;
     if (!header) return;
     const measure = () => document.documentElement.style.setProperty("--site-nav-height", `${header.getBoundingClientRect().height}px`);
