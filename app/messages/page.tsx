@@ -14,7 +14,7 @@ export default async function DirectRavenPage() {
           <div className={styles.ravenMark} aria-hidden="true">◆</div>
           <p className={styles.kicker}>The rookery is quiet</p>
           <h2>Select a correspondence</h2>
-          <p>Private ravens are visible only to the two members of a conversation.</p>
+          <p>Direct Ravens are private between two members. Guild Parleys are visible only to their invited members.</p>
         </section>
       </div>
     </main>

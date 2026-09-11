@@ -6,8 +6,10 @@ import charactersData from "@/data/characters/characters.json";
 import MiniPortrait from "@/components/MiniPortrait";
 import LikeButton from "@/components/community/LikeButton";
 import { createClient } from "@/lib/supabase/client";
-import type { DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
+import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
 import GiphyPicker, { type RavenGif } from "./GiphyPicker";
+import GuildAvatar from "./GuildAvatar";
+import GuildParleyInfo from "./GuildParleyInfo";
 import RavenAttachment from "./RavenAttachment";
 import RavenIcon from "./RavenIcon";
 import RavenMessageContent, {
@@ -38,8 +40,11 @@ type PickerTab = "emoji" | "portraits";
 
 type Props = {
   conversationId: string;
+  conversation?: DirectRavenConversation;
   userId: string;
-  partner: Profile;
+  partner: Profile | null;
+  members?: Profile[];
+  memberships?: DirectRavenMember[];
   initialMessages: DirectRavenMessage[];
   blockedByMe: boolean;
   blockedByThem: boolean;
@@ -47,8 +52,11 @@ type Props = {
 
 export default function RavenConversation({
   conversationId,
+  conversation,
   userId,
   partner,
+  members = [],
+  memberships = [],
   initialMessages,
   blockedByMe: initialBlockedByMe,
   blockedByThem: initialBlockedByThem,
@@ -75,6 +83,7 @@ export default function RavenConversation({
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [partnerRead, setPartnerRead] = useState("");
   const [newMessages, setNewMessages] = useState(false);
+  const [guildInfoOpen, setGuildInfoOpen] = useState(false);
 
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -83,7 +92,12 @@ export default function RavenConversation({
   const loadedMessages = useRef(messages);
   const sendLock = useRef(false);
 
-  const closed = blockedByMe || blockedByThem;
+  const activeConversation: DirectRavenConversation = conversation ?? {
+    id: conversationId, user_a: userId, user_b: partner?.id ?? null, kind: "raven", title: null, description: null, avatar_path: null, owner_id: null, created_at: "", updated_at: "",
+  };
+  const isGuild = activeConversation.kind === "guild";
+  const memberMap = useMemo(() => new Map(members.map((member) => [member.id, member])), [members]);
+  const closed = !isGuild && (blockedByMe || blockedByThem);
   const filteredPortraits = useMemo(() => {
     const query = portraitSearch.trim().toLowerCase();
     if (!query) return portraitCharacters;
@@ -209,21 +223,13 @@ export default function RavenConversation({
       const oldest = loadedMessages.current[0];
       if (oldest) query = query.gte("created_at", oldest.created_at);
 
-      const [{ data }, { data: reads }, { data: blocks }] = await Promise.all([
-        query,
-        supabase
-          .from("direct_raven_reads")
-          .select("last_read_at")
-          .eq("conversation_id", conversationId)
-          .eq("user_id", partner.id)
-          .maybeSingle(),
-        supabase
-          .from("direct_raven_blocks")
-          .select("blocker_id,blocked_id")
-          .or(
-            `and(blocker_id.eq.${userId},blocked_id.eq.${partner.id}),and(blocker_id.eq.${partner.id},blocked_id.eq.${userId})`
-          ),
-      ]);
+      const readPromise = !isGuild && partner
+        ? supabase.from("direct_raven_reads").select("last_read_at").eq("conversation_id", conversationId).eq("user_id", partner.id).maybeSingle()
+        : Promise.resolve({ data: null, error: null });
+      const blockPromise = !isGuild && partner
+        ? supabase.from("direct_raven_blocks").select("blocker_id,blocked_id").or(`and(blocker_id.eq.${userId},blocked_id.eq.${partner.id}),and(blocker_id.eq.${partner.id},blocked_id.eq.${userId})`)
+        : Promise.resolve({ data: [], error: null });
+      const [{ data }, { data: reads }, { data: blocks }] = await Promise.all([query, readPromise, blockPromise]);
 
       if (!active) return;
       if (data) {
@@ -231,7 +237,7 @@ export default function RavenConversation({
           setNewMessages(true);
         }
         setMessages((current) => {
-          const map = new Map(current.map((message) => [message.id, message]));
+          const map = new Map<string, DirectRavenMessage>(current.map((message) => [message.id, message]));
           (data as DirectRavenMessage[]).forEach((message) => map.set(message.id, message));
           return [...map.values()].sort(
             (a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id)
@@ -239,7 +245,7 @@ export default function RavenConversation({
         });
       }
       setPartnerRead(reads?.last_read_at ?? "");
-      if (blocks) {
+      if (!isGuild && partner && blocks) {
         setBlockedByMe(blocks.some((block) => block.blocker_id === userId));
         setBlockedByThem(blocks.some((block) => block.blocker_id === partner.id));
       }
@@ -275,7 +281,7 @@ export default function RavenConversation({
       element?.removeEventListener("scrollend", read);
       void supabase.removeChannel(channel);
     };
-  }, [conversationId, supabase, userId, partner.id]);
+  }, [conversationId, supabase, userId, partner, isGuild]);
 
   function chooseFile(next: File | undefined) {
     if (!next) return;
@@ -402,12 +408,9 @@ export default function RavenConversation({
   }
 
   async function toggleBlock() {
+    if (!partner || isGuild) return;
     const { error: blockError } = blockedByMe
-      ? await supabase
-          .from("direct_raven_blocks")
-          .delete()
-          .eq("blocker_id", userId)
-          .eq("blocked_id", partner.id)
+      ? await supabase.from("direct_raven_blocks").delete().eq("blocker_id", userId).eq("blocked_id", partner.id)
       : await supabase.from("direct_raven_blocks").insert({ blocker_id: userId, blocked_id: partner.id });
 
     if (blockError) setError("Could not update this raven path.");
@@ -442,38 +445,40 @@ export default function RavenConversation({
     setLoadingOlder(false);
   }
 
+  const threadTitle = isGuild ? (activeConversation.title ?? "Guild Parley") : (partner?.display_name ?? "Direct Raven");
+
   return (
-    <section className={styles.thread} aria-label={`Conversation with ${partner.display_name}`}>
+    <section className={styles.thread} aria-label={isGuild ? `Guild Parley: ${threadTitle}` : `Conversation with ${threadTitle}`}>
       <header className={styles.threadHeader}>
         <Link href="/messages" className={styles.backInbox} aria-label="Back to inbox">←</Link>
-        <Link href={`/users/${partner.username}`} className={styles.partnerIdentity}>
-          <span className={styles.avatar}>
-            {partner.avatar_url ? <img src={partner.avatar_url} alt="" /> : partner.display_name.slice(0, 2).toUpperCase()}
-          </span>
-          <span>
-            <b>{partner.display_name}</b>
-            <small>@{partner.username}</small>
-          </span>
-        </Link>
-        <div className={styles.threadMenuWrap} ref={menuRef}>
-          <button
-            type="button"
-            className={styles.threadMenuButton}
-            onClick={() => setMenuOpen((current) => !current)}
-            aria-expanded={menuOpen}
-            aria-label="Conversation options"
-          >
-            •••
+        {isGuild ? (
+          <button type="button" className={`${styles.partnerIdentity} ${styles.guildIdentityButton}`} onClick={() => setGuildInfoOpen(true)}>
+            <GuildAvatar path={activeConversation.avatar_path} name={threadTitle} />
+            <span><b>{threadTitle}</b><small>Guild Parley · {members.length} members</small></span>
           </button>
+        ) : partner ? (
+          <Link href={`/users/${partner.username}`} className={styles.partnerIdentity}>
+            <span className={styles.avatar}>{partner.avatar_url ? <img src={partner.avatar_url} alt="" /> : partner.display_name.slice(0, 2).toUpperCase()}</span>
+            <span><b>{partner.display_name}</b><small>@{partner.username}</small></span>
+          </Link>
+        ) : null}
+        <div className={styles.threadMenuWrap} ref={menuRef}>
+          <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options">•••</button>
           {menuOpen && (
             <div className={styles.threadMenu}>
-              <button type="button" onClick={() => void toggleBlock()}>
-                {blockedByMe ? "Unblock user" : "Block user"}
-              </button>
+              {isGuild ? (
+                <button type="button" onClick={() => { setMenuOpen(false); setGuildInfoOpen(true); }}>Guild info</button>
+              ) : (
+                <button type="button" onClick={() => void toggleBlock()}>{blockedByMe ? "Unblock user" : "Block user"}</button>
+              )}
             </div>
           )}
         </div>
       </header>
+
+      {isGuild && (
+        <GuildParleyInfo open={guildInfoOpen} onClose={() => setGuildInfoOpen(false)} conversation={activeConversation} members={members} memberships={memberships} userId={userId} />
+      )}
 
       <div
         className={styles.messages}
@@ -493,8 +498,8 @@ export default function RavenConversation({
         {!messages.length && (
           <div className={styles.emptyThread}>
             <RavenIcon size={64} />
-            <h2>A clear sky between two keeps.</h2>
-            <p>Send the first raven to {partner.display_name}.</p>
+            <h2>{isGuild ? "The hall is gathered." : "A clear sky between two keeps."}</h2>
+            <p>{isGuild ? `Begin the first parley in ${threadTitle}.` : `Send the first raven to ${partner?.display_name ?? "this member"}.`}</p>
           </div>
         )}
 
@@ -508,6 +513,7 @@ export default function RavenConversation({
               )}
               <div id={`raven-${message.id}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
                 <div className={`${styles.messageBubble} ${message.deleted_at ? styles.deletedMessage : ""}`}>
+                  {isGuild && !mine && !message.deleted_at && <span className={styles.guildSenderName}>{memberMap.get(message.sender_id)?.display_name ?? "Guild member"}</span>}
                   {!message.deleted_at && message.reply_to && (
                     <div className={styles.replyQuote}>
                       {parent
@@ -532,7 +538,7 @@ export default function RavenConversation({
                       <LikeButton kind="message" id={message.id} />
                       {!closed && <button type="button" onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
                     </div>}
-                    <span className={styles.messageMeta}><time dateTime={message.created_at}>{time(message.created_at)}</time>{message.edited_at && !message.deleted_at ? " · edited" : ""}{mine && !message.deleted_at ? (partnerRead >= message.created_at ? " · Seen" : " · Sent") : ""}</span>
+                    <span className={styles.messageMeta}><time dateTime={message.created_at}>{time(message.created_at)}</time>{message.edited_at && !message.deleted_at ? " · edited" : ""}{mine && !message.deleted_at ? (isGuild ? " · Sent" : (partnerRead >= message.created_at ? " · Seen" : " · Sent")) : ""}</span>
                   </div>
                   {!message.deleted_at && (
                     <>
@@ -670,7 +676,7 @@ export default function RavenConversation({
                 onChange={(event) => setBody(event.target.value)}
                 maxLength={4000}
                 rows={2}
-                placeholder="Write your raven…"
+                placeholder={isGuild ? "Write to the Guild Parley…" : "Write your raven…"}
                 aria-label="Message"
                 onFocus={() => {
                   setPickerOpen(false);

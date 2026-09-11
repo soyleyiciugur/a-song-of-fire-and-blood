@@ -285,3 +285,57 @@
 .emojiPicker button{width:40px;height:40px;border:0;border-radius:7px;background:transparent;font-size:21px}
 .emojiPicker button:hover{background:#2a2021}
 @media(max-width:760px){.gifPopover{left:8px;bottom:56px;width:min(430px,calc(100% - 16px))}.giphyGrid{max-height:min(230px,32dvh)}.messageBubble{padding-top:12px}.messageCornerMenu{top:-8px}.messageMenu{bottom:26px}.messageFooter{gap:5px}.emojiPicker{grid-template-columns:repeat(6,38px)}.emojiPicker button{width:38px;height:38px}}
+
+/* v5: keep the message options chevron attached to the bubble, not floating above it. */
+.messageBubble{
+  padding:8px 36px 7px 11px;
+}
+.messageCornerMenu{
+  top:5px;
+  right:6px;
+  z-index:140;
+}
+.messageMenuButton{
+  width:22px!important;
+  min-width:22px!important;
+  height:20px;
+  min-height:20px!important;
+  border:0!important;
+  border-radius:5px!important;
+  background:transparent!important;
+  color:#8f8174!important;
+  opacity:0;
+  box-shadow:none;
+  transition:opacity .14s ease,color .14s ease;
+}
+.messageBubble:hover .messageMenuButton,
+.messageMenuButton:focus-visible,
+.messageMenuButton[aria-expanded=true]{
+  opacity:.9;
+  background:transparent!important;
+  color:#d8c09f!important;
+}
+.messageMenuButton:hover{
+  background:transparent!important;
+  color:#efd5ae!important;
+}
+.messageMenu{
+  right:0;
+  top:auto;
+  bottom:24px;
+  z-index:2000;
+}
+@media(max-width:760px){
+  .messageBubble{padding-right:34px}
+  .messageMenuButton{opacity:.55}
+  .messageBubble:hover .messageMenuButton,.messageMenuButton[aria-expanded=true]{opacity:1}
+}
+
+/* v6: composer overlays must sit above all message chrome while open. */
+.gifPopover{z-index:5000}
+
+/* Guild Parley */
+.inboxCreateActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}.inboxCreateActions .newRaven{margin-top:0}.inboxCreateActions .sendRavenButton,.guildCreateButton{width:100%;min-height:38px;justify-content:center}.guildCreateButton{display:inline-flex;align-items:center;gap:7px;padding:0 12px;border:1px solid #67503a;border-radius:8px;background:linear-gradient(180deg,#2b2320,#191517);color:#d7bc91;font:600 11px var(--font-geist);letter-spacing:.03em;cursor:pointer}.guildCreateButton:hover{border-color:#8a6b47;color:#f0d5aa}.guildHandle{display:block;margin-top:1px;color:#a58b66;font:600 9px var(--font-geist);letter-spacing:.07em;text-transform:uppercase}.guildAvatar{display:grid;place-items:center;flex:none;overflow:hidden;border:1px solid #7c603f;border-radius:50%;background:radial-gradient(circle at 35% 25%,#654137,#2b1b20 58%,#171216);color:#ead7b8;font:700 10px var(--font-geist);box-shadow:inset 0 0 0 1px #ffffff08}.guildAvatar img{width:100%;height:100%;object-fit:cover}.guildAvatar>span{display:grid;place-items:center;width:100%;height:100%}.guildIdentityButton{border:0;background:none;padding:0;text-align:left;cursor:pointer}.guildIdentityButton:hover b{color:#f2d6aa}.guildSenderName{display:block!important;margin:0 28px 4px 0!important;color:#c49b63!important;font:700 10px var(--font-geist)!important;text-align:left!important;letter-spacing:.02em}
+.guildModalBackdrop,.guildInfoBackdrop{position:fixed;inset:0;z-index:2200;background:#050506bd;backdrop-filter:blur(7px);display:grid;place-items:center;padding:18px}.guildModal{width:min(620px,calc(100vw - 28px));max-height:min(760px,calc(100dvh - 36px));overflow:hidden;display:grid;grid-template-rows:auto auto auto minmax(180px,1fr) auto auto;gap:14px;padding:20px;border:1px solid #5c4936;border-radius:16px;background:radial-gradient(circle at 90% 0,#43242a55,transparent 34%),#121012;box-shadow:0 28px 80px #000d}.guildModalHeader,.guildInfoTopbar,.guildSectionHeading,.guildPickerTop{display:flex;align-items:center;justify-content:space-between;gap:12px}.guildModalHeader h2{margin:2px 0 0;color:#eadcc4;font:600 24px var(--font-hotd)}.iconClose,.backInfoButton{display:grid;place-items:center;width:38px;height:38px;border:1px solid #4c3d32;border-radius:50%;background:#171315;color:#cbb798;font-size:21px;cursor:pointer}.iconClose:hover,.backInfoButton:hover{border-color:#806444;color:#efd3a8}.guildField{display:grid;gap:6px}.guildField>span,.guildPickerTop>span,.guildSectionHeading>span{color:#cdbb9f;font:600 11px var(--font-geist);letter-spacing:.05em}.guildField small,.guildPickerTop small,.guildSectionHeading small{color:#7f7468;font:10px var(--font-geist)}.guildField input,.guildField textarea,.guildMemberPicker>input,.guildInviteRow input,.guildTitleInput,.guildDescriptionInput{appearance:none;width:100%;box-sizing:border-box;border:1px solid #4c3c31;border-radius:9px;outline:none;background:#0c0c0e;color:#e5d7c3;font:14px/1.45 var(--font-geist)}.guildField input,.guildMemberPicker>input,.guildInviteRow input,.guildTitleInput{min-height:42px;padding:0 12px}.guildField textarea,.guildDescriptionInput{padding:10px 12px;resize:vertical}.guildField input:focus,.guildField textarea:focus,.guildMemberPicker>input:focus,.guildInviteRow input:focus,.guildTitleInput:focus,.guildDescriptionInput:focus{border-color:#8c6d45;box-shadow:0 0 0 2px #8c6d451c}.guildMemberPicker{min-height:0;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:8px;padding:12px;border:1px solid #3d322b;border-radius:12px;background:#0d0c0e}.guildMemberList{min-height:0;overflow:auto;display:grid;align-content:start;gap:4px;padding-right:2px}.guildMemberList>button{display:grid;grid-template-columns:42px minmax(0,1fr) 28px;align-items:center;gap:10px;width:100%;padding:7px 8px;border:1px solid transparent;border-radius:9px;background:transparent;color:#d8c8b2;text-align:left;cursor:pointer}.guildMemberList>button:hover{border-color:#44372f;background:#1b1517}.guildMemberList>button>span:nth-child(2){display:grid;min-width:0}.guildMemberList b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:600 12px var(--font-geist)}.guildMemberList small{color:#847a70;font:10px var(--font-geist)}.guildMemberList i{display:grid;place-items:center;width:24px;height:24px;border:1px solid #4c3c31;border-radius:50%;color:#9d876a;font:700 12px var(--font-geist);font-style:normal}.guildMemberList .guildMemberSelected{border-color:#74573d;background:#251a1d}.guildMemberList .guildMemberSelected i{border-color:#a57c4d;background:#7d2838;color:#f4dfbd}.guildModalActions{display:flex;justify-content:flex-end;gap:8px}.ghostButton,.guildPrimaryButton,.leaveGuildButton,.guildInviteRow button{min-height:38px;padding:0 14px;border-radius:8px;font:600 11px var(--font-geist);cursor:pointer}.ghostButton{border:1px solid #4b3d33;background:#151214;color:#a99b8b}.guildPrimaryButton,.guildInviteRow button{border:1px solid #8b6b43;background:linear-gradient(180deg,#45262a,#2a191c);color:#f0d1a0}.guildPrimaryButton:disabled,.guildInviteRow button:disabled,.leaveGuildButton:disabled{opacity:.45;cursor:not-allowed}
+.guildInfoBackdrop{place-items:stretch end;padding:0;background:#0505069e}.guildInfoPanel{width:min(430px,100vw);height:100dvh;overflow:auto;box-sizing:border-box;border-left:1px solid #594534;background:radial-gradient(circle at 50% -10%,#46263055,transparent 28%),#111012;box-shadow:-22px 0 70px #000b}.guildInfoTopbar{position:sticky;top:0;z-index:2;min-height:64px;padding:0 14px;border-bottom:1px solid #3a3029;background:#121012eF;backdrop-filter:blur(10px)}.guildInfoTopbar>b{color:#e6d5bd;font:600 16px var(--font-hotd)}.guildHero{display:grid;justify-items:center;gap:10px;padding:28px 22px 24px;border-bottom:1px solid #332b27;text-align:center}.guildPhotoButton{position:relative;border:0;background:none;padding:0;cursor:pointer}.guildPhotoButton>span:last-child{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);white-space:nowrap;padding:4px 7px;border-radius:99px;background:#0d0b0dd9;color:#ddc59e;font:600 8px var(--font-geist);letter-spacing:.04em}.guildHero h2{margin:2px 0 0;color:#ebdcc5;font:600 24px var(--font-hotd)}.guildHero>p{max-width:34ch;margin:0;color:#a79989;font:13px/1.55 var(--font-body)}.guildHero>small{color:#8e7e6d;font:10px var(--font-geist);letter-spacing:.05em;text-transform:uppercase}.guildTitleInput{text-align:center;font:600 18px var(--font-hotd)}.guildDescriptionInput{max-width:100%;min-height:76px}.guildInfoSection{padding:18px 16px}.guildInviteRow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:12px 0}.guildRoster{display:grid;gap:4px}.guildRosterItem{display:grid;grid-template-columns:42px minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:8px;border-radius:9px}.guildRosterItem:hover{background:#1a1516}.guildRosterItem>span:nth-child(2){display:grid;min-width:0}.guildRosterItem b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#dbccb8;font:600 12px var(--font-geist)}.guildRosterItem small{color:#81776e;font:10px var(--font-geist)}.guildRosterItem em{padding:4px 7px;border:1px solid #755936;border-radius:99px;color:#c9a66f;font:600 8px var(--font-geist);font-style:normal;text-transform:uppercase;letter-spacing:.06em}.guildRosterItem>button{border:0;background:none;color:#9e7d6b;font:10px var(--font-geist);cursor:pointer}.guildRosterItem>button:hover{color:#d99a93}.leaveGuildButton{display:block;margin:0 16px 20px;border:1px solid #663940;background:#261619;color:#d99191}.leaveConfirm{margin:0 16px 20px;padding:12px;border:1px solid #5e3940;border-radius:10px;background:#211517}.leaveConfirm p{margin:0 0 10px;color:#b99d96;font:12px/1.45 var(--font-geist)}.leaveConfirm>div{display:flex;justify-content:flex-end;gap:8px}.leaveConfirm .leaveGuildButton{display:inline-flex;margin:0}.guildInfoPanel>.error{margin:0 16px 12px}
+@media(max-width:760px){.inboxCreateActions{grid-template-columns:1fr}.guildModalBackdrop{padding:8px}.guildModal{width:100%;max-height:calc(100dvh - 16px);padding:16px}.guildInfoPanel{width:100vw;border-left:0}.guildRosterItem{grid-template-columns:42px minmax(0,1fr) auto}.guildRosterItem>button{grid-column:2/4;justify-self:start}.guildInviteRow{grid-template-columns:1fr}.guildInviteRow button{width:100%}}
