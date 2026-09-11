@@ -25,3 +25,8 @@
 .friends button,.actionButton{font:600 11px var(--font-geist);transition:border-color .15s,background .15s,transform .15s}.friends button:hover,.actionButton:hover{border-color:#9a7345;background:#302023}.friends button:active,.actionButton:active{transform:translateY(1px)}
 .tabs{overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{white-space:nowrap;padding:0 12px}
 @media(max-width:540px){.tabs{justify-content:flex-start}.tabs button{flex:0 0 auto;min-width:110px}}
+
+
+/* Guestbook avatars */
+.guestbookRow{display:flex;align-items:flex-start;gap:12px}.guestbookAvatar{display:grid!important;place-items:center;flex:0 0 40px;width:40px;height:40px;overflow:hidden;border:1px solid #5a4632;border-radius:50%;background:#351a22;color:#ead6b5!important;text-decoration:none;font:600 12px var(--font-hotd)}.guestbookAvatar img{width:100%;height:100%;object-fit:cover}.guestbookBody{min-width:0;flex:1}.guestbookMeta{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.guestbookMeta>a{color:#d7b66f;text-decoration:none;font:600 13px var(--font-geist)}.guestbookMeta small{color:#8f8171;font:10px var(--font-geist)}.guestbookBody p{margin:8px 0 10px}.guestbookEntry{padding-left:0;padding-right:0}.page[data-theme]:not([data-theme="default"]) .guestbookAvatar{border-color:color-mix(in srgb,var(--profile-accent) 58%,#45372d)}
+@media(max-width:540px){.guestbookRow{gap:10px}.guestbookAvatar{flex-basis:34px;width:34px;height:34px}.guestbookMeta{gap:6px}}
