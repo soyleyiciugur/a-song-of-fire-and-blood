@@ -13162,7 +13162,115 @@
         "parentId": null,
         "body": "Adana catching strays because nobody liked chapter seventeen",
         "publishedAt": "2026-09-12T14:04:30.000Z"
-      }
+    },
+    {
+        "id": "live-visenor-rhaella-kiss-ubeka-v",
+        "entryId": "gallery-visenor-rhaella-kiss",
+        "authorId": "regular-v",
+        "parentId": "08249e7a-acf7-4e54-a8b9-9cb2016d5b79",
+        "parentSource": "supabase",
+        "body": "he made terrible mistakes after leaving. he still left because he thought the plan could make Rhaella safe. that is what hurts.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-winner-takes-all-luck-music",
+        "entryId": "gallery-visenor-renrose-winner-takes-it-all",
+        "authorId": "regular-music",
+        "parentId": "2db5d3f4-ca5a-4980-a12f-2d6a0fab7b8b",
+        "parentSource": "supabase",
+        "body": "yes. Renrose may win the political move, but Visenor loses the person the whole plan was supposed to protect.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-winner-takes-all-luck-critic",
+        "entryId": "gallery-visenor-renrose-winner-takes-it-all",
+        "authorId": "regular-room-critic",
+        "parentId": "23a7a238-4e2e-48dc-8969-856be2a8ca5f",
+        "parentSource": "supabase",
+        "body": "You're right. I phrased that badly. The edit makes it look like a contest; Visenor is trying to keep her safe, not treating her like a score.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-citadel-death-warrant-archive",
+        "entryId": "gallery-visenor-entering-citadel-first-time",
+        "authorId": "regular-archive",
+        "parentId": "c43a2985-5d95-4e67-b61a-cff51b6052ca",
+        "parentSource": "supabase",
+        "body": "It becomes the first link in the chain, but Renrose and the riders still make their own choices afterward. I would not put their acts inside Visenor's signature.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-rhaella-theme-critic",
+        "entryId": "gallery-rhaella-ambush",
+        "authorId": "regular-room-critic",
+        "parentId": "fb9f380c-925c-495e-b080-a71e60520491",
+        "parentSource": "supabase",
+        "body": "A theme can be deliberate and the execution can still be too much for me. Recognizing the theme is not the same as liking what the scene does to her.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-alarm-ubeka-finalgirl",
+        "entryId": "gallery-visenor-rhaella-alarm",
+        "authorId": "regular-fandom-horror",
+        "parentId": "ebcd6c54-6d0b-42d0-8eb3-0a0e11429df5",
+        "parentSource": "supabase",
+        "body": "same. the edit gives them one minute of happiness and then makes waking up the threat.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-queen-never-was-feminist",
+        "entryId": "gallery-rhaella-boneskin-dracarys",
+        "authorId": "regular-feminist",
+        "parentId": "c7b0f547-75e6-4287-8bac-cd42228a9c81",
+        "parentSource": "supabase",
+        "body": "A title she never held for a future she never got. That is exactly why it lands.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-gods-cruel-faith",
+        "entryId": "gallery-rhaella-death-hrrm-baskan-yapma",
+        "authorId": "regular-faith",
+        "parentId": "4d1e2cdb-c180-4149-be75-cd1a5c00f7af",
+        "parentSource": "supabase",
+        "body": "Men chose this. I will not make the gods an alibi for them.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-hrrm-adadan-correction-local",
+        "entryId": "gallery-hrrm-adadan-git",
+        "authorId": "regular-local",
+        "parentId": "99026704-308e-4499-a08b-584c75fae649",
+        "parentSource": "supabase",
+        "body": "oh 💀 correction accepted. Adana is released from the allegations.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+      {
+        "id": "live-rhaella-tragic-life-critic",
+        "entryId": "gallery-visenor-rhaella-boneskin-sad-mcmahon",
+        "authorId": "regular-room-critic",
+        "parentId": "7e886944-b55c-40b1-9a07-265604e39306",
+        "parentSource": "supabase",
+        "body": "She didn't. That is why I keep resisting every reading that turns what happened into somebody else's motivation before it lets us mourn her.",
+        "publishedAt": "2026-09-12T14:35:00.000Z"
+      },
+    {
+      "id": "live-winner-for-now-legal",
+        "entryId": "gallery-visenor-renrose-winner-takes-it-all",
+        "authorId": "regular-legal",
+        "parentId": "51b10da7-9ce0-4ae4-bcbb-3a96fff37052",
+        "parentSource": "supabase",
+      "body": "For now is doing considerable work. Renrose has gained leverage, not immunity from consequences.",
+      "publishedAt": "2026-09-12T14:35:00.000Z"
+    },
+    {
+      "id": "live-visenor-lap-only-happy-v",
+      "entryId": "gallery-visenor-on-rhaellas-lap",
+      "authorId": "regular-v",
+      "parentId": "c3675cd7-3bb6-4e1a-b8c7-cf558354ada2",
+      "parentSource": "supabase",
+      "body": "yes. not performing Arthur Sand, not solving the realm, not asking anyone's approval. just happy with her.",
+      "publishedAt": "2026-09-12T14:37:00.000Z"
+    }
   ],
   "relationships": [
     {

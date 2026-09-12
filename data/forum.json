@@ -6441,6 +6441,22 @@
       "publishedAt": "2026-09-12T14:04:30.000Z",
       "upvoterIds": [],
       "awards": []
+    },
+    {
+      "id": "live-hrrm-ama-comprehension-jace-warning",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "4304eb3f-6043-46da-94b9-366f55f5c501",
+      "parentSource": "supabase",
+      "body": "Argue the writing choice. Do not insult another poster for asking the question.",
+      "publishedAt": "2026-09-12T14:35:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "4304eb3f-6043-46da-94b9-366f55f5c501"
+      }
     }
   ]
 }

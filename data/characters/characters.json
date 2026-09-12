@@ -158,7 +158,7 @@
       "maela-targaryen": "His daughter and Jace's twin. He remains protective of her place within the dynasty even as Queen Jaery takes the lead in arranging her future marriage.",
       "malaenar-targaryen": "His elder brother, whose nameday brought the family to Dragonstone and their oldest wounds back to the surface; by the end of the night they stood together on the balcony, which is the closest these two get to peace.",
       "myles-mooton": "A Riverlands knight who rode in his party to Cloudpass on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared.",
-      "oswald": "Cancels Gaelor's appointment after the massacre, leaving Oswald in command of the Watch.",
+      "oswald-eagle": "Cancels Gaelor's appointment after the massacre, leaving Oswald in command of the Watch.",
       "naella-velaryon": "Received news of her pregnancy with rare, genuine warmth — one of the few unguarded moments of tenderness in an otherwise bleak season.",
       "orwell-morrigen": "Commands the Kingsguard in his name; Morrigen serves with rigid, unquestioning discipline.",
       "rhaella-targaryen": "Considers her a political liability and the daughter of a traitor he has never forgiven.",
@@ -216,7 +216,7 @@
       "berholt-caswell": "He pushed Berholt hard during the Costayne dispute and found the High Septon's serene refusal infuriating. Their clash was unequal in pressure but not in resolve, and Baelor learned that Berholt could not simply be argued into submission. Berholt raises Baelor's earlier refusal to fund the sept works during the Chapter XVII negotiations.",
       "cordin-poole": "Displaced him as Grand Maester, though the two continue to work together on the council's finances.",
       "melessa-hightower": "Received her conciliatory raven from Oldtown inviting him to reclaim his place at the Citadel, though he doubted that the unexpectedly political message reflected Melessa's will alone.",
-      "oswald": "Warned Gaelor that the veteran commander would resent losing control of the City Watch, accurately anticipating Oswald's anger at the royal decision.",
+      "oswald-eagle": "Warned Gaelor that the veteran commander would resent losing control of the City Watch, accurately anticipating Oswald's anger at the royal decision.",
       "gaelor-targaryen": "Greeted warmly on the road from Oldtown, though visibly and vocally horrified upon learning of the massacre; called the decision to send two thousand men to execute a fifteen-year-old boy flawed from its very inception.",
       "jacaelon-targaryen": "The King himself compares the two as kindred spirits — scholars and dissenters born into a family of warriors. Baelor embraced him warmly upon arrival and found, to his relief, the sharpest mind at the council table.",
       "jaery-targaryen": "He became one of Jaery's steadier supports during the worst of the royal family's fracturing. Baelor urged her to return to the King's side after Baelenys struck her, and she trusted his counsel enough to do so.",
@@ -545,7 +545,7 @@
       "tion-lannister": "He has little patience for Tion's caution and treasury-minded objections. Their council exchanges regularly reduce to Tion calling Gaelor reckless and Gaelor dismissing him as timid.",
       "vhaemys-targaryen": "The little princess he has promised will always be his most loved, however many nieces and nephews may follow; she, in turn, defends him against everyone in the family who calls him a monster.",
       "visenor-targaryen": "Frustrated by what he sees as weakness, though it was Gaelor who beat the poisoner's confession out of the dying assassin himself.",
-      "oswald": "The veteran commander remains in office after Gaelor loses the promised appointment. Oswald surrenders the men involved in Gaelor's bloodshed for judgment.",
+      "oswald-eagle": "The veteran commander remains in office after Gaelor loses the promised appointment. Oswald surrenders the men involved in Gaelor's bloodshed for judgment.",
       "zekar-alasyr": "One of the renowned Motley Three whose royal satire Gaelor interrupted in Flea Bottom. Gaelor killed Zekar with Blackfyre on the Fourteenth Day of the Eighth Moon, 99 AC."
     },
     "summary": "Gaelor's attempt to turn the City Watch into his own base of power ended in catastrophe. On the Fourteenth Day of the Eighth Moon he killed two members of the Motley Three with Blackfyre and trapped their fleeing audience inside a gold-cloak cordon; eighteen more people died and roughly a dozen were badly wounded. By the following morning Baelenys had sent him from King's Landing to Driftmark. The promised Watch command was cancelled, the surviving mummer's fate passed to Jace, and the Crown began publicly distancing itself from the prince now being called the Prince of Massacres.",
@@ -630,7 +630,7 @@
       "visenor-targaryen": "Once looked down on him and considered him weak; risking everything to save him and Rhaella changed that completely.",
       "visenya-targaryen": "His cousin, Vahaemon's daughter — who climbed into his bed in a Flea Bottom brothel believing him to be Gaelor, held Dark Sister to his throat throughout, and vanished before he or Alester could catch her. The encounter left a cut on his neck and a great deal of unanswered questions.",
       "weylar-rocke": "His personal spymaster, pardoned from the black cells to ensure loyalty born of terror; first brought him news of Gaelor's brothel visit, and more recently delivered early warning of the Oldtown Massacre's worst details.",
-      "oswald": "Recognizes that Oswald neither attended nor ordered the massacre. Thanks him for surrendering the implicated gold cloaks and asks him to stay in command without answering public anger with force."
+      "oswald-eagle": "Recognizes that Oswald neither attended nor ordered the massacre. Thanks him for surrendering the implicated gold cloaks and asks him to stay in command without answering public anger with force."
     },
     "summary": "The morning after the Mummers' Blood forces Jacaelon into the hardest public test of his Handship. He ends Gaelor's promised command of the City Watch, takes responsibility for the surviving actor, urges restraint toward the anger in Flea Bottom and persuades High Septon Berholt to support the Crown's effort to prevent riots. In exchange, the Crown agrees to revisit funding for the sept's works. Jace keeps Ser Oswald in command after the shaken knight removes every gold cloak directly involved from duty. At sunset, Baelenys summons Jace alone to the throne room and begins a story he once told Visenor.",
     "quotes": []
@@ -906,7 +906,7 @@
     "aliases": [],
     "house": "House Targaryen",
     "title": "Princess Rhaella of House Targaryen",
-    "status": "Dead",
+    "status": "Unknown",
     "secret": {
       "status": "Dead",
       "note": "Killed near Starfall on the Fifteenth Day of the Eighth Moon, 99 AC. After Boneskin burned the men who attacked her, the grievously wounded Rhaella commanded the dragon to burn her as well. Visenor does not yet know that his wife and unborn child are dead."
@@ -1255,7 +1255,7 @@
       "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence; openly assessed him ready for knighthood, told him he could not quite beat Alester yet but was close, and watched Jace choose Alester's hand over his for the ceremony itself. The slight was real. He showed no sign of minding.",
       "reyenald-reyne": "Trains the talented young swordsman and warns him against arrogance.",
       "lucas-corbray": "Welcomes his fellow Kingsguard back from the Vale and entrusts Vhaemys to him.",
-      "oswald": "Reassures Oswald that he is not being judged for Gaelor's orders and helps the council discuss the Watch's conduct after the massacre."
+      "oswald-eagle": "Reassures Oswald that he is not being judged for Gaelor's orders and helps the council discuss the Watch's conduct after the massacre."
     },
     "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told. He trained both Alester Dayne and Prince Jacaelon; the latter chose his sworn shield's sword over his Lord Commander's for the knighting ceremony, which Morrigen absorbed in silence and has not mentioned since. He privately trains thirteen-year-old Reyenald Reyne, warning him against arrogance, before Vhaemys interrupts. He welcomes Lucas Corbray back from the Vale and leaves the princess in his care.",
     "quotes": []
@@ -3400,7 +3400,7 @@
     "quotes": []
   },
   {
-    "id": "oswald",
+    "id": "oswald-eagle",
     "name": "Ser Oswald Eagle",
     "nickname": "-",
     "aliases": [],

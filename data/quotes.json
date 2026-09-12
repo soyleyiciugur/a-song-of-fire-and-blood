@@ -1270,5 +1270,301 @@
     "chapterSlug": "the-glass-flower",
     "chapterTitle": "Chapter XV: The Glass Flower",
     "note": "as the flower's stem draws blood from Alester"
+  },
+  {
+    "text": "Is he not ready, or is that simply what you wish to believe?",
+    "speakerId": "derrin-hightower",
+    "speakerName": "Derrin Hightower",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "challenging Baelenys over Vahaemon's attempt to claim Maelwing"
+  },
+  {
+    "text": "I will gladly forfeit your friendship if it means keeping you alive.",
+    "speakerId": "derrin-hightower",
+    "speakerName": "Derrin Hightower",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "refusing to flatter the young Baelenys during the ride to Maelwing"
+  },
+  {
+    "text": "You lost your right! You tried before and failed! You lost your right! This is supposed to be my nameday!",
+    "speakerId": "vahaemon-targaryen",
+    "speakerName": "Vahaemon Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "to Baelenys as the brothers confront Maelwing"
+  },
+  {
+    "text": "Prince Gaelor possesses more pride than sense, but rarely moves unless someone whispers into his ear.",
+    "speakerId": "lorenah-dayne",
+    "speakerName": "Lorenah Dayne",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "assessing Gaelor's alliance with Cordin and Naella"
+  },
+  {
+    "text": "Is this truly the King's command, or did our prince wake this morning and decide he fancied an army?",
+    "speakerId": "oswald-eagle",
+    "speakerName": "Ser Oswald Eagle",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "challenging Gaelor's claim to command the City Watch"
+  },
+  {
+    "text": "Ser Lucas, what is the penalty for treason?",
+    "speakerId": "vhaemys-targaryen",
+    "speakerName": "Vhaemys Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "after the maids bring blueberry pie instead of raspberry"
+  },
+  {
+    "text": "But, my princess, if we take their heads today, who will bake these wonderful pies for you tomorrow?",
+    "speakerId": "lucas-corbray",
+    "speakerName": "Ser Lucas Corbray",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "talking Vhaemys out of executing her maids"
+  },
+  {
+    "text": "You're right. Throw them in the dungeons instead. We can put them on trial later.",
+    "speakerId": "vhaemys-targaryen",
+    "speakerName": "Vhaemys Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "revising the punishment for her maids"
+  },
+  {
+    "text": "I don't know. I just got here. I'm eating pie.",
+    "speakerId": "vhaemys-targaryen",
+    "speakerName": "Vhaemys Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "when Jace asks whether she liked or dismissed the maids"
+  },
+  {
+    "text": "Because you are such a just and forgiving princess, you rewarded the maids who baked this marvelous pie by granting them the day to walk the city. Have I understood correctly?",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "gently exposing Vhaemys's attempt to punish her maids"
+  },
+  {
+    "text": "Everything my hand touches belongs to me. Father said so!",
+    "speakerId": "vhaemys-targaryen",
+    "speakerName": "Vhaemys Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "refusing to surrender Lorenah's earrings"
+  },
+  {
+    "text": "The Red Keep brings me little joy.",
+    "speakerId": "baelor-targaryen",
+    "speakerName": "Baelor Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "considering the invitation to return to the Citadel"
+  },
+  {
+    "text": "I do not think it brings anyone much joy.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "answering Baelor's complaint about the Red Keep"
+  },
+  {
+    "text": "Let us drag this cart free of the mud before we start discussing where next to ride it.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "asking Baelor to remain until the realm is settled"
+  },
+  {
+    "text": "The survival of our house rested upon one girl making a man believe what she saw in her sleep.",
+    "speakerId": "baelor-targaryen",
+    "speakerName": "Baelor Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "on Daenys the Dreamer and the Doom of Valyria"
+  },
+  {
+    "text": "Is that what I look like?",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "watching the Motley Three's caricature of him"
+  },
+  {
+    "text": "I was laughing at the other one, my prince! Was that supposed to be you?",
+    "speakerId": "saathos-maris",
+    "speakerName": "Ser Saathos Maris",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "lying after Gaelor catches him laughing at the farce"
+  },
+  {
+    "text": "Brother... that's not a child. Leave him alone.",
+    "speakerId": "mydan-gerren",
+    "speakerName": "Mydan Gerren",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "playing Jacaelon in the Motley Three's royal farce"
+  },
+  {
+    "text": "Daddy, shouldn't we bring your dragon instead?",
+    "speakerId": "mydan-gerren",
+    "speakerName": "Mydan Gerren",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "playing Jacaelon and setting up the farce's joke about Maelwing"
+  },
+  {
+    "text": "Then who gets to be heir?",
+    "speakerId": "mydan-gerren",
+    "speakerName": "Mydan Gerren",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "playing Jacaelon in the Motley Three's royal farce"
+  },
+  {
+    "text": "He ran away!",
+    "speakerId": "mydan-gerren",
+    "speakerName": "Mydan Gerren",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "playing Jacaelon when the farce asks whether Visenor is present"
+  },
+  {
+    "text": "Look! I don't just kill children!",
+    "speakerId": "gaelor-targaryen",
+    "speakerName": "Gaelor Targaryen",
+    "chapterSlug": "the-mummers-blood",
+    "chapterTitle": "Chapter XVI: The Mummer's Blood",
+    "note": "after murdering two of the Motley Three"
+  },
+  {
+    "text": "Of course. I was already intending to discuss it with my future Hand.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "referring to Renrose Tyrell"
+  },
+  {
+    "text": "She is. In truth, she is the reason any of this began. It is why I left the capital in the first place. To protect mine.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "to Renrose about Rhaella being the closest soul to him"
+  },
+  {
+    "text": "Wonderful. The Prince of Massacres.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "upon learning what Gaelor did in Flea Bottom"
+  },
+  {
+    "text": "Those mummers had a successful little farce. People would have laughed, drunk, gone home and forgotten half the lines within a moon. Gaelor's pride has turned them into legend.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "condemning Gaelor's slaughter of the Motley Three and their audience"
+  },
+  {
+    "text": "Because a spoiled boy decided there was nothing in this realm he was forbidden to cut down.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "on Gaelor's massacre in Flea Bottom"
+  },
+  {
+    "text": "We cannot restore the dead. We cannot pretend the deed can be repaired. But we can keep the wound from poisoning the whole city.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "urging the High Septon to help contain the aftermath in Flea Bottom"
+  },
+  {
+    "text": "Whatever punishment Gaelor deserves, I will give him myself.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "to the small council after Gaelor's banishment"
+  },
+  {
+    "text": "Why am I meant to answer that? You are the council. Solve it.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "when asked how the Crown should answer the bloodshed in Flea Bottom"
+  },
+  {
+    "text": "A good wife is worth more to a man than children, mother or father, in my eyes. Those people give us life or come from us. A wife is the one person we choose to share the whole of that life with.",
+    "speakerId": "renrose-tyrell",
+    "speakerName": "Renrose Tyrell",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "to Visenor at Highgarden"
+  },
+  {
+    "text": "So, in truth... fuck Visenor Targaryen as well.",
+    "speakerId": "renrose-tyrell",
+    "speakerName": "Renrose Tyrell",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "rejecting loyalty to Visenor behind his back"
+  },
+  {
+    "text": "From this day forward, the only course worthy of this family is the one that places it above every other.",
+    "speakerId": "renrose-tyrell",
+    "speakerName": "Renrose Tyrell",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "declaring his ambition for House Tyrell"
+  },
+  {
+    "text": "Renrose, I do not think you are as clever as you believe yourself to be.",
+    "speakerId": "liana-tyrell",
+    "speakerName": "Liana Tyrell",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "warning her husband after Visenor's departure"
+  },
+  {
+    "text": "You surrender too easily to what you want.",
+    "speakerId": "liana-tyrell",
+    "speakerName": "Liana Tyrell",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "warning Renrose against overreaching"
+  },
+  {
+    "text": "But if I abandon my post while the city is in this state, after all the years I have given it, then I dishonor the work more surely than Gaelor ever could.",
+    "speakerId": "oswald-eagle",
+    "speakerName": "Ser Oswald Eagle",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "choosing to remain Commander of the City Watch"
+  },
+  {
+    "text": "Dracarys.",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-children-pay",
+    "chapterTitle": "Chapter XVII: The Children Pay",
+    "note": "her final command to Boneskin"
   }
 ]
