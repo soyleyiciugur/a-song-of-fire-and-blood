@@ -1,5 +1,5 @@
 import { PGlite } from '@electric-sql/pglite';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 // Run the actual migrations against PostgreSQL, with minimal Supabase auth/storage scaffolding.
@@ -17,6 +17,11 @@ await db.exec(`
 `);
 for (const file of ['20260910120000_auth_ownership.sql', '20260910143000_repair_missing_profiles.sql', '20260910203000_direct_raven.sql', '20260910220000_member_social.sql', '20260911120000_profile_identity_currency.sql', '20260911121000_raven_giphy.sql', '20260911122000_profile_reactions.sql']) {
   await db.exec(await readFile(new URL(`../supabase/migrations/${file}`, import.meta.url), 'utf8'));
+}
+for (const file of (await readdir(new URL('../supabase/migrations/', import.meta.url))).sort()) {
+  if (/_(repair_npc_favor_and_activity_titles|static_raven_reactions|community_reaction_targets|reaction_target_access)\.sql$/.test(file)) {
+    await db.exec(await readFile(new URL(`../supabase/migrations/${file}`, import.meta.url), 'utf8'));
+  }
 }
 await db.exec(`grant usage on schema public,auth,storage to anon,authenticated; grant select,insert,update,delete on all tables in schema public,storage to authenticated; grant select on all tables in schema public,storage to anon;`);
 const a = '00000000-0000-4000-8000-000000000001', b = '00000000-0000-4000-8000-000000000002', outsider = '00000000-0000-4000-8000-000000000003';
@@ -52,6 +57,7 @@ assert.equal((await db.query(`select * from public.direct_raven_reads`)).rows.le
 assert.equal((await db.query(`select * from public.member_friendships`)).rows.length,0,'Pending requests stay private');
 await rejects(`insert into public.direct_raven_messages(conversation_id,sender_id,body) values($1,$2,'Intruder')`,[conversation,outsider],/row-level security/);
 await rejects(`insert into public.member_likes(user_id,target_kind,target_id) values($1,'message',$2)`,[outsider,m],/row-level security/);
+await rejects(`select public.toggle_member_reaction('message',$1)`,[m],/invalid_reaction_target/);
 await as(b);
 await rejects(`update public.member_friendships set requester_id=$1,accepted_at=now() where id=$2`,[outsider,request],/protected_friendship/);
 await db.query(`update public.member_friendships set accepted_at=now() where id=$1`,[request]);
@@ -103,6 +109,26 @@ await db.query("insert into public.member_likes(user_id,target_kind,target_id) v
 const reactions=(await db.query('select * from public.profile_reactions($1)',[a])).rows;
 assert.ok(reactions.some(r=>r.target_kind==='thread'&&r.direction==='received'&&Number(r.total)===1));
 assert.ok(reactions.every(r=>r.target_kind!=='message'),'Profile reactions never disclose private messages');
+// Newly authored NPC comments must work through the same authenticated RPC
+// as old comments, without opening registry writes to members.
+const forum = JSON.parse(await readFile(new URL('../data/forum.json', import.meta.url), 'utf8'));
+const flea = JSON.parse(await readFile(new URL('../data/flea-bottom.json', import.meta.url), 'utf8'));
+const expectedTargets = [
+  ...forum.threads.map(c => ['thread',c.id]),
+  ...forum.comments.map(c => ['post',c.id]),
+  ...flea.comments.map(c => ['raven',c.id]),
+];
+const registry = new Set((await db.query('select target_kind,target_id from public.community_reaction_targets')).rows.map(r => `${r.target_kind}:${r.target_id}`));
+for (const [kind,id] of expectedTargets) assert.ok(registry.has(`${kind}:${id}`),`Missing reaction target ${kind}:${id}`);
+const npc = 'chapter-the-children-pay-comment-13';
+assert.equal((await db.query("select public.toggle_member_reaction('post',$1) enabled",[npc])).rows[0].enabled,true);
+assert.equal(Number((await db.query("select total from public.member_like_counts('post',array[$1])",[npc])).rows[0].total),1);
+assert.ok((await db.query('select * from public.profile_reactions($1)',[b])).rows.some(r=>r.target_id===npc && r.target_title.includes('The Children Pay')));
+assert.equal((await db.query("select public.toggle_member_reaction('post',$1) enabled",[npc])).rows[0].enabled,false);
+assert.equal((await db.query('select * from public.member_likes where target_id=$1',[npc])).rows.length,0);
+await rejects("select public.toggle_member_reaction('post','not-a-real-comment')",[],/invalid_reaction_target/);
+await rejects("insert into public.community_reaction_targets(target_kind,target_id,href) values('post','forged-target','/forum')",[],/row-level security/);
+console.log('NPC reactions: complete registry, authenticated Favor/unfavor, counts, profile titles and forged-target rejection passed.');
 await db.close();
 console.log('Currency idempotency, overspending, guestbook moderation, GIF validation and public reaction activity passed.');
 console.log('Member social: migrations, private media, message ownership, read receipts, likes, friend acceptance and blocks passed.');
