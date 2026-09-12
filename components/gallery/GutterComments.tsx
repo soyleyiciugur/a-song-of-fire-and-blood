@@ -109,7 +109,7 @@ export default function GutterComments({ entryId, collapsible = false }: { entry
     return () => clearTimeout(timer);
   }, [target]);
   return (
-    <section className={`${styles.section} ${collapsible ? styles.collapsible : ""}`} data-ready={community.loaded} aria-label="Gallery comments" onKeyDown={(event) => {
+    <section className={`${styles.section} ${collapsible ? styles.collapsible : ""} ${collapsible && !open ? styles.collapsed : ""}`} data-ready={community.loaded} aria-label="Gallery comments" onKeyDown={(event) => {
       if (event.key !== "Escape") event.stopPropagation();
     }}>
       {collapsible ? (

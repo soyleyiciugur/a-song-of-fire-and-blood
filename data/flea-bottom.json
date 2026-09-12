@@ -13569,6 +13569,81 @@
       "parentId": null,
       "body": "the bar is underground and somehow he still brought Blackfyre to dig",
       "publishedAt": "2026-09-12T16:30:00.000Z"
+    },
+    {
+      "id": "live-rhaella-one-away-luck-club",
+      "entryId": "gallery-visenor-rhaella-the-one-that-got-away",
+      "authorId": "regular-club",
+      "parentId": "4ddf4991-4742-4bd2-ab26-a6e8ce903c9f",
+      "parentSource": "supabase",
+      "body": "same. I thought I had recovered and then the caption said 'another life.'",
+      "publishedAt": "2026-09-12T16:56:00.000Z"
+    },
+    {
+      "id": "live-rhaella-one-away-ubeka-ashtray",
+      "entryId": "gallery-visenor-rhaella-the-one-that-got-away",
+      "authorId": "regular-e",
+      "parentId": "dd6a39d0-4a13-49b8-98ae-1aedf19fbfd9",
+      "parentSource": "supabase",
+      "body": "man is one bad memory away from becoming the smoke signal",
+      "publishedAt": "2026-09-12T16:58:00.000Z"
+    },
+    {
+      "id": "live-visenor-cuddle-ubeka-v-reply",
+      "entryId": "gallery-visenor-rhaella-cuddle-room",
+      "authorId": "regular-v",
+      "parentId": "c980669f-c697-4b89-b0f1-e37dda04fd45",
+      "parentSource": "supabase",
+      "body": "still is. I said delete the objective, not that he found the settings menu.",
+      "publishedAt": "2026-09-12T17:01:00.000Z"
+    },
+    {
+      "id": "gallery-jhaella-impossible-wedding",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "admin gave me a full royal wedding render and still thinks 'hope ubeka doesn't see this' is adequate containment",
+      "publishedAt": "2026-09-12T17:05:00.000Z"
+    },
+    {
+      "id": "gallery-jhaella-two-frames-evidence",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-ship",
+      "parentId": "gallery-jhaella-impossible-wedding",
+      "body": "this is no longer two frames. we have a ceremony, flowers and a production budget. unprecedented evidence",
+      "publishedAt": "2026-09-12T17:05:00.000Z"
+    },
+    {
+      "id": "gallery-jhaella-dorne-objection",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "reporting this for catastrophic continuity violations and also because the lighting is annoyingly good",
+      "publishedAt": "2026-09-12T17:05:00.000Z"
+    },
+    {
+      "id": "gallery-jhaella-impossible-hostile-witness",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-impossible-ships",
+      "parentId": "gallery-jhaella-dorne-objection",
+      "body": "objection noted. adding it to the ship manifesto under hostile witness",
+      "publishedAt": "2026-09-12T17:05:00.000Z"
+    },
+    {
+      "id": "gallery-jhaella-unship-excellent",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-unship",
+      "parentId": null,
+      "body": "opened this ready to object and unfortunately they look excellent",
+      "publishedAt": "2026-09-12T17:05:00.000Z"
+    },
+    {
+      "id": "gallery-jhaella-fic-epilogue",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-fic",
+      "parentId": "gallery-jhaella-unship-excellent",
+      "body": "not canon, just the admin handing my notes app a fully funded epilogue",
+      "publishedAt": "2026-09-12T17:05:00.000Z"
     }
   ],
   "relationships": [

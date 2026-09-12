@@ -1,5 +1,17 @@
 [
   {
+    "id": "gallery-jhaella",
+    "src": "/images/gallery/jhaella.webp",
+    "caption": "a treat for jhaella fans by the admin :) hope ubeka (visenor) doesn't see this",
+    "characterIds": ["jacaelon-targaryen", "rhaella-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-12",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-rhaella-targaryen-portrait",
     "src": "/images/gallery/rhaella-targaryen.jpeg",
     "caption": "Rhaella Targaryen.",
