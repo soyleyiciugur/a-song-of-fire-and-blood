@@ -6457,6 +6457,60 @@
         "rule": "Argue the take rather than the person.",
         "targetCommentId": "4304eb3f-6043-46da-94b9-366f55f5c501"
       }
+    },
+    {
+      "id": "live-children-pay-justice-legal-reply",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "regular-legal",
+      "parentId": "ddb3ece9-9035-426a-a4df-33d04a17b981",
+      "parentSource": "supabase",
+      "body": "Justice and torture are not synonyms. Rhaella can be owed the first without turning the second into her memorial.",
+      "publishedAt": "2026-09-12T15:09:30.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "live-hrrm-ama-comprehension-jace-followup",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "e2be995e-56ba-4d8a-ba43-43242a58747e",
+      "parentSource": "supabase",
+      "body": "Then explain the disagreement without making another reader's comprehension the subject.",
+      "publishedAt": "2026-09-12T15:09:30.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "e2be995e-56ba-4d8a-ba43-43242a58747e"
+      }
+    },
+    {
+      "id": "live-hrrm-ama-ending-plan-defender-reply",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-room-defender",
+      "parentId": "b90b05d9-7c72-4f04-94f7-da38c1f8cead",
+      "parentSource": "supabase",
+      "body": "That helps. So the destination was planned, but the route was still allowed to become whatever the table produced. The seam I was noticing is real, then.",
+      "publishedAt": "2026-09-12T16:30:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "live-children-pay-hrrm-username-jace-warning",
+      "entryId": "chapter-the-children-pay",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "cebf41c9-df24-4201-af92-61c5bdabad7e",
+      "parentSource": "supabase",
+      "body": "That is a username joke, not an answer. Keep the next reply on the argument.",
+      "publishedAt": "2026-09-12T16:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "cebf41c9-df24-4201-af92-61c5bdabad7e"
+      }
     }
   ]
 }
