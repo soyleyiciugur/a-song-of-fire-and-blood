@@ -153,7 +153,7 @@
       "gaelor-targaryen": "Sees growing potential in him and has named him heir should Visenor not return; though Gaelor's massacre at Oldtown embarrassed the Crown, the King accepts full responsibility for the order that caused it. After the Flea Bottom massacre, he cancels Gaelor's Watch appointment, sends him to Driftmark and reserves further punishment to himself.",
       "grance-morrigen": "A knight who accompanied him to Cloudpass in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing.",
       "harrik-greyjoy": "He remembers Harrik as one of the great opponents of his Iron Islands campaigns. Their clash survived in family legend as the Dragonbreath against the Drowned Servant, turning an old enemy into part of Baelenys's martial mythology.",
-      "jacaelon-targaryen": "Respects his intelligence and has made him Hand of the King, though he still despises his constant opposition. During the worst of the family's fracturing, confessed to Jace that he sees himself reflected in his son's relentless need to prove himself — and that this is not a compliment. Leaves him to manage the massacre's aftermath, then summons him privately at sunset to hear a story once told to Visenor. The story and any change of heir remain unrevealed.",
+      "jacaelon-targaryen": "Entrusts Jace with the secret of Aegon's dream, declares that Gaelor will not inherit and intends to name Jace heir once the present troubles are settled. He calls the succession a cruelty rather than a reward.",
       "jaery-targaryen": "Trusts her more than most, but rarely lets her influence his decisions; struck her in a moment of drunken fury and has not acknowledged it since.",
       "maela-targaryen": "His daughter and Jace's twin. He remains protective of her place within the dynasty even as Queen Jaery takes the lead in arranging her future marriage.",
       "malaenar-targaryen": "His elder brother, whose nameday brought the family to Dragonstone and their oldest wounds back to the surface; by the end of the night they stood together on the balcony, which is the closest these two get to peace.",
@@ -169,11 +169,11 @@
       "tansy-riverside": "He regards Tansy with open contempt and called her his brother's 'wench' before the entire hall. Her refusal to flinch only sharpened the hostility between them.",
       "tion-lannister": "He values Tion's usefulness with coin far more than his advice on war or royal pride. Baelenys has repeatedly cut him short when the Master of Coin's caution clashes with what the King wants done.",
       "vahaemon-targaryen": "His exiled brother, now believed to be sheltering in the Free Cities with a dragon of his own — a fact that has consumed the King's council and his paranoia in equal measure.",
-      "vhaemys-targaryen": "His youngest daughter admires him without understanding the fear he inspires in everyone else; Baelenys has shown her only the softest side of himself.",
+      "vhaemys-targaryen": "Comforts Vhaemys after her terrifying dream and later agrees with Jace that her repeating visions may mark her as a Dreamer. He calls her the most precious thing the family possesses and orders Jace to stay close to her.",
       "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
       "visenor-targaryen": "Formerly his most trusted heir. That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
     },
-    "summary": "King Baelenys has ruled the realm through fear, strength, and absolute authority. The poisoning attempt transformed him even further, earning him the name 'Baelenys the Formidable.' Once capable of calculated restraint, he now sees traitors in every shadow. The revelation of Rhaella's secret correspondence with his own exiled brother Vahaemon shattered his already fragile trust in his children, especially Visenor, whom he struck down before the entire court and gave an impossible choice: kill his wife, or lose everything. Having named Jacaelon his new Hand after Derrin Hightower's treason and secret execution, Baelenys now moves toward war with House Tyrell, Hightower, and ultimately his own exiled brother with the same merciless certainty that has defined his reign. His drunken violence against Queen Jaery and the drawn sword leveled at his own sons in a midnight corridor suggest a man whose grip on himself is loosening even as his grip on the realm tightens. A history lesson recounts how he rescued Vahaemon and claimed Maelwing at Cloudpass on the Twelfth Day of the Second Moon, 56 AC. On the Fourteenth Day of the Eighth Moon, 99 AC, he promises Gaelor command of the City Watch in a couple of days, on condition that the prince keep peace with Jacaelon.",
+    "summary": "Baelenys passes the secret of Aegon's dream—learned from Jaehaerys—to Jacaelon and rejects Gaelor as his successor. He intends to name Jace heir when the present troubles are settled, framing the crown as a final cruelty and a duty to preserve the realm for the prince that was promised. After Vhaemys wakes terrified by a dream, he accepts that she may possess the rare gift of a Dreamer and orders Jace to investigate the great white dragon in her visions while guarding her closely.",
     "quotes": []
   },
   {
@@ -594,19 +594,22 @@
       "Protect House Targaryen, whatever the cost",
       "Consolidate his power as Hand of the King",
       "Build a powerful spy network",
-      "Bring Visenor and Rhaella home safely, in secret",
       "Identify what Visenya is doing in King's Landing and whose orders she follows",
       "Marry Lorenah Dayne and protect the future they have chosen together",
       "Travel to Dorne after the proposal",
-      "Keep Gaelor from turning their rivalry into open civil conflict"
+      "Keep Gaelor from turning their rivalry into open civil conflict",
+      "Carry Aegon's dream in secret and prepare the realm for the prince that was promised",
+      "Prove worthy of being named Baelenys' heir",
+      "Learn whether Vhaemys is a Dreamer and identify the great white dragon in her visions",
+      "Help Mydan Gerren and Flea Bottom recover from the Mummers' Blood"
     ],
     "relationships": {
       "alester-dayne": "His closest friend, mentor, and the man he sent into mortal danger to save Visenor. Alester knighted him in a private ceremony — the only honor Jace has ever asked for that was not given by the crown.",
-      "baelenys-targaryen": "A complicated love-hate relationship driven by a desperate need for approval — one his father finally granted him by naming him Hand, and then complicated again by the King's drunken, drawn-sword breakdown in the corridor. Opposes mass arrests over wall writings after the massacre, then attends his father at sunset for a promised story previously told to Visenor. No succession announcement has yet occurred.",
+      "baelenys-targaryen": "Baelenys entrusts Jace with Aegon's dream, tells him Gaelor will not sit the Iron Throne and intends to name Jace heir once the present troubles are settled. Jace accepts the burden and promises to make him proud.",
       "baelor-targaryen": "Embraced him warmly on arrival and considers him the one voice at council that matches his own measured counsel.",
       "baran-strong": "He received Baran respectfully as a capable knight but made clear that Gaelor could not unilaterally decide appointments around the Red Keep. Jace sees room for Baran in royal service, though on the Hand's terms rather than his brother's whim.",
       "berholt-caswell": "Negotiates Berholt's public support after the massacre, rejects bargaining over Gaelor's excommunication, and accepts Crown assistance for the sept's works. Entrusts him with rites for the dead without princes or gold cloaks crowding the ceremony.",
-      "brant-costayne": "He questioned Costayne personally in the black cells, acknowledged the horror done to Oldtown, and quietly pointed the knight toward trial by combat as the only narrow road away from immediate execution. Jace later sat in judgment over a man whose grievance he partly understood.",
+      "brant-costayne": "Offers to seek a new route out of the black cells while Gaelor's absence delays the trial by combat. Jace respects Brant's refusal to abandon the judgment he demanded and promises to find a date as soon as possible.",
       "cordin-poole": "Lorenah has told him of Cordin's surveillance for Gaelor. At the council he challenges Cordin's closeness to his brother, takes responsibility for the surviving actor and dismisses Cordin from subsequent business.",
       "daria-sand": "Lorenah's trusted maid and observer. After finding her in their chambers, Jace quietly instructed Daria to watch Vhaemys and ensure that the princess attended her lessons.",
       "derrin-hightower": "Exposed his treason, extracted his confession in private, and executed him himself. Only the King knows the truth.",
@@ -626,13 +629,14 @@
       "steffon-baratheon": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown; unhorsed him in the tourney lists and the insult still burns on both sides.",
       "tion-lannister": "He has found an uneasy economic ally in Tion. Their temperaments differ, but both argued in council that spectacle and bloodshed are poor substitutes for policy, and Jace often values the Master of Coin's practicality even when they disagree.",
       "vahaemon-targaryen": "He treats his exiled uncle as one of the central strategic problems of his Handship. Jace is helping design the Crown's pressure campaign to drive Vahaemon through the Free Cities toward Tyrosh, while Visenya's return has made the family threat painfully personal.",
-      "vhaemys-targaryen": "His youngest sister remains intensely attached to him and openly jealous of Lorenah. During the proposal outing he softened the tension by giving Vhaemys earrings crafted from Cloudgazer's shed horn-scales.",
+      "vhaemys-targaryen": "After Vhaemys dreams of Visenor crying out amid fire, Jace begins recording her visions and suspects she is a Dreamer. He promises to keep the Dragonet close while investigating the enormous white dragon she repeatedly sees herself riding.",
       "visenor-targaryen": "Once looked down on him and considered him weak; risking everything to save him and Rhaella changed that completely.",
       "visenya-targaryen": "His cousin, Vahaemon's daughter — who climbed into his bed in a Flea Bottom brothel believing him to be Gaelor, held Dark Sister to his throat throughout, and vanished before he or Alester could catch her. The encounter left a cut on his neck and a great deal of unanswered questions.",
       "weylar-rocke": "His personal spymaster, pardoned from the black cells to ensure loyalty born of terror; first brought him news of Gaelor's brothel visit, and more recently delivered early warning of the Oldtown Massacre's worst details.",
-      "oswald-eagle": "Recognizes that Oswald neither attended nor ordered the massacre. Thanks him for surrendering the implicated gold cloaks and asks him to stay in command without answering public anger with force."
+      "oswald-eagle": "Recognizes that Oswald neither attended nor ordered the massacre. Thanks him for surrendering the implicated gold cloaks and asks him to stay in command without answering public anger with force.",
+      "mydan-gerren": "Visits the last surviving member of the Motley Three in the black cells, hears his account of the massacre, apologizes for the Crown's failure and promises protection and help rebuilding if Mydan ever returns to the stage."
     },
-    "summary": "The morning after the Mummers' Blood forces Jacaelon into the hardest public test of his Handship. He ends Gaelor's promised command of the City Watch, takes responsibility for the surviving actor, urges restraint toward the anger in Flea Bottom and persuades High Septon Berholt to support the Crown's effort to prevent riots. In exchange, the Crown agrees to revisit funding for the sept's works. Jace keeps Ser Oswald in command after the shaken knight removes every gold cloak directly involved from duty. At sunset, Baelenys summons Jace alone to the throne room and begins a story he once told Visenor.",
+    "summary": "Baelenys entrusts Jacaelon with Aegon's dream and announces his intention to name him heir after the present crisis, a burden Jace accepts despite never wanting the throne. He comforts Vhaemys after a prophetic nightmare, comes to believe she may be a Dreamer and begins investigating the enormous white dragon she sees herself riding. In the black cells he hears Mydan Gerren's account of the Mummers' Blood, promises help rebuilding the troupe's stage, and offers Brant Costayne another path while the knight waits for Gaelor's return. He also sends Weylar into Flea Bottom to learn what the city truly believes. On the Seventeenth Day he welcomes Saera home and immediately recognizes that Alester has returned from Winterfell deeply troubled.",
     "quotes": []
   },
   {
@@ -688,7 +692,8 @@
       "steffon-baratheon": "She witnessed Steffon's disastrous audience with Jace and openly mocked the Young Stag's lack of tact. Even so, Jaery considered House Baratheon seriously enough to send Maela to Storm's End as a possible marriage match.",
       "vaenarr-targaryen": "Her brother, Prince Vaenarr Targaryen.",
       "vhaemys-targaryen": "Her youngest, whom she shelters as much as possible from the ugliness radiating out of the throne room.",
-      "visenor-targaryen": "Desperate for news of her missing son; wept openly and begged Jace to keep searching."
+      "visenor-targaryen": "Desperate for news of her missing son; wept openly and begged Jace to keep searching.",
+      "rhaella-targaryen": "When Rhaella was twelve, Jaery told the former hostage that she loved her as a daughter, believed no one better suited to Visenor and hoped Rhaella would one day follow her as queen."
     },
     "summary": "Queen Jaery remains one of the few people willing to quietly move around Baelenys rather than confront him head-on. She approved Saera's return to Winterfell before the King had even been informed, confident that Baelenys would not overrule something that made her so happy. Before departure she personally entrusted Saera to Ser Alester Dayne and invoked a bond deeper than ordinary Kingsguard duty: after Alester's parents died, the royal household took him in and raised him alongside Jaery's own children. Her understanding of Alester's feelings for Saera was equally clear, though she chose not to name them.",
     "quotes": []
@@ -906,7 +911,7 @@
     "aliases": [],
     "house": "House Targaryen",
     "title": "Princess Rhaella of House Targaryen",
-    "status": "Unknown",
+    "status": "Missing",
     "secret": {
       "status": "Dead",
       "note": "Killed near Starfall on the Fifteenth Day of the Eighth Moon, 99 AC. After Boneskin burned the men who attacked her, the grievously wounded Rhaella commanded the dragon to burn her as well. Visenor does not yet know that his wife and unborn child are dead."
@@ -948,7 +953,9 @@
       "vahaemon-targaryen": "Her exiled father, whose disgrace hangs over her at court, though it was not to him that her secret warning was sent — it was to her siblings.",
       "visenor-targaryen": "Her husband and greatest love. She died near Starfall while he was operating secretly in the Reach, before learning whether his coded raven had reached her; Visenor remains unaware of her death and that of their unborn child.",
       "visenya-targaryen": "Her sister, whose current whereabouts and allegiances remain unknown to Rhaella.",
-      "nymos": "The younger maester she questions about Edmyn's disappearance and Lorenah's safety. He understands her guarded questions and agrees to arrange food for the villages."
+      "nymos": "The younger maester she questions about Edmyn's disappearance and Lorenah's safety. He understands her guarded questions and agrees to arrange food for the villages.",
+      "jaery-targaryen": "At twelve, Rhaella was told by Jaery that she was loved as a daughter and destined to stand beside Visenor as queen. Rhaella vowed that every breath she drew would be for the prince.",
+      "vhaemys-targaryen": "Knew Vhaemys from infancy, when the screaming baby was already called the Dragonet. Rhaella instinctively tried to comfort her during the conversation in which Jaery promised Rhaella a future beside Visenor."
     },
     "summary": "Daughter of the exiled Vahaemon Targaryen and wife of Crown Prince Visenor, Rhaella lived in hiding near Starfall under House Dayne's protection while carrying Visenor's child. On the Fifteenth Day of the Eighth Moon, 99 AC, riders attacked her near Boneskin's cave. The dragon burned her assailants, but Rhaella had been grievously wounded. She blocked Boneskin's path and repeatedly commanded Dracarys until the dragon understood, dying with her unborn child in the fire. Visenor remains unaware of their deaths.",
     "quotes": []
@@ -1045,7 +1052,7 @@
       "Understand Mother Marya's strange ability to briefly restore her sight"
     ],
     "relationships": {
-      "alester-dayne": "Their quiet attachment survived the journey north, but Winterfell has made it more painful. Saera worried constantly about making him uncomfortable and wanted him beside her, while Alester watched Rickard's courtship from increasingly close range without saying what he felt. Alester accompanies her and the white direwolf on the southbound flight from Winterfell.",
+      "alester-dayne": "Returns to King's Landing with him on Cloudgazer. Saera is glad to be home, while Alester's exhaustion and formal withdrawal show that Winterfell has left him deeply troubled.",
       "baelenys-targaryen": "Frequently opposes the King's decisions and is the only child willing to do so in open court; called him out publicly over the Oldtown Massacre and earned a threat of the black cells for it.",
       "baelor-targaryen": "Working alongside him to find a way to frame the Tyrosh campaign that Saera might actually agree to; she remains resistant to being used as a weapon in a war of succession.",
       "benjen-stark": "Greeted Rickard's fifteen-year-old younger brother with an immediate embrace when she returned to Winterfell and treated him with easy familiarity.",
@@ -1060,7 +1067,7 @@
       "vhaemys-targaryen": "Her youngest sister, whom Saera instinctively protects when the Red Keep becomes frightening. Vhaemys often gravitates toward Saera when Jace or Alester are unavailable, and Saera tries to shield her from the family's worst influences.",
       "visenor-targaryen": "Supported him during the Rhaella affair and helped shield the truth from their father as long as she could."
     },
-    "summary": "Saera's return to Winterfell has transformed what had been a tentative diplomatic affection into something far more immediate. She flew north with Alester under Queen Jaery's quiet approval, was welcomed by Benjen Stark, and spent most of her time with Rickard once he returned. Rickard made no secret to Alester that he intends to offer Saera not merely affection but a future beside him ruling the North. On the Fourteenth Day of the Eighth Moon he presented Saera with a white direwolf pup. Mother Marya blew herbal vapor into Saera's face, and for several miraculous seconds the clouding vanished from her eyes; Saera saw Rickard and the pup perfectly before embracing him. Alester witnessed the moment from a distance. Whatever Saera chooses next now carries consequences for Winterfell, the Red Keep, and the man who has guarded her since childhood. On the fifteenth day of the eighth moon, Saera and Alester leave Winterfell on Cloudgazer with the white direwolf, expecting to reach King's Landing on the seventeenth if the weather holds.",
+    "summary": "Saera returns from Winterfell to King's Landing on the Seventeenth Day of the Eighth Moon with Alester and the white direwolf Rickard Stark gave her. She is welcomed warmly by Jace, Jaery and Vhaemys, but Alester withdraws into the Red Keep in visible exhaustion. The choice between the future Rickard offers and the unspoken bond beside her has followed Saera home.",
     "quotes": []
   },
   {
@@ -1119,13 +1126,13 @@
       "rhaella-targaryen": "He nearly died twice protecting Rhaella and Visenor on the road south. Rhaella has since spoken of him as a true hero of the realm, while Alester regards the ordeal simply as the duty he accepted when Jace entrusted them to him.",
       "rickard-stark": "A courteous but increasingly painful rival for Saera's affection. Rickard privately told Alester that he intends to offer Saera the entire North and can give her what no one else can. Alester answered that Saera is a dragon, not a wolf, but could not say more.",
       "saathos-maris": "Traded barbed pleasantries with him in the infirmary; the two understand each other's roles perfectly and trust each other roughly as far as their princes allow.",
-      "saera-targaryen": "His feelings have become impossible for him to dismiss. He accompanied her to Winterfell because he could not bear being separated without knowing where she was, then watched Rickard court her openly while repeatedly failing to say what he himself wanted. Leaves Winterfell behind her on Cloudgazer with the white direwolf, continuing his duty as her protector.",
+      "saera-targaryen": "Returns beside Saera on Cloudgazer, carrying the unresolved pain of Rickard's courtship back to King's Landing. His exhaustion and unusual formality are immediately apparent to Jace.",
       "steffon-baratheon": "Faced him in the tourney semi-finals in what witnesses called one of the finest jousts the realm had seen in years; lost in the final pass to a two-handed lance thrust to the gut, and shook the man's hand from the dirt.",
       "vhaemys-targaryen": "The little princess adores him and did not stop asking after him the entire time he was gone; he owes her several stories.",
       "visenor-targaryen": "Escorted him and Rhaella out of King's Landing under cover of darkness and nearly died protecting them twice over; considers the debt repaid by Visenor's own courage through the journey.",
       "visenya-targaryen": "He burst into Jace's chamber while Visenya held Dark Sister to the prince's throat and physically grappled with her as she fled. She slipped his grip, nearly cut him with a concealed dagger, and escaped into King's Landing before he and Jace could catch her."
     },
-    "summary": "Ser Alester Dayne's return to the North has forced old and new loyalties into the same narrow space. Born to Maron Dayne and Lyarra Karstark, he lost his father at nine and his mother at eleven; Queen Jaery has now stated plainly that the royal family opened its doors to him afterward and raised him alongside her own children. That history followed him to Winterfell when Jaery entrusted Saera personally to his protection. Benjen Stark welcomed him as a child of Northern blood, while Mother Marya greeted him with a rare glass-like flower and a cryptic warning about beauty whose thorns run deep. Rickard Stark then made his intentions toward Saera unmistakable, telling Alester that he plans to offer her the whole North. Alester spent the following day watching them together, unable to speak his own feelings. When he finally went to Saera's chambers determined to act, he found her outside with Rickard and Mother Marya. He watched Marya briefly restore Saera's sight, watched Rickard present her with a white direwolf pup, and watched Saera embrace him. The knight who survived Curtass Whent and six armed men has discovered a battlefield on which drawing steel would solve nothing. On the fifteenth day of the eighth moon, Saera and Alester leave Winterfell on Cloudgazer with the white direwolf, expecting to reach King's Landing on the seventeenth if the weather holds.",
+    "summary": "Alester returns from Winterfell beside Saera on Cloudgazer on the Seventeenth Day of the Eighth Moon. He has protected her and watched Rickard offer her the future he cannot, leaving the normally steadfast knight exhausted and withdrawn. Jace recognizes at once that something beyond the flight has happened, but allows his friend to postpone the conversation.",
     "quotes": []
   },
   {
@@ -1208,7 +1215,7 @@
       "alester-dayne": "He encountered Alester after the tourney assassination attempt and again when the Kingsguard accompanied Jace into the black cells. Costayne has no personal quarrel with him, but Alester stood physically beside the Crown while Costayne answered for Oldtown.",
       "berholt-caswell": "He found an unexpected measure of understanding in Berholt. The High Septon saw in Costayne a man who acted on conviction where Berholt himself had hesitated, and that recognition helped move him toward mercy.",
       "gaelor-targaryen": "Stood against him at the gates of the Hightower under oath; survived the massacre that followed as one of its few breathing witnesses. Entered the tourney lists disguised as a Riverlands knight, unhorsed Gaelor's horse with a longsword after being unhorsed himself, and came within a stroke of killing the prince before Ser Blackwood tackled him into the mud.",
-      "jacaelon-targaryen": "He expected little mercy from the Hand, yet Jace entered the black cells willing to hear his grievance and openly condemned the slaughter at Oldtown. The prince also hinted that trial by combat was Costayne's only realistic chance to escape a simple execution.",
+      "jacaelon-targaryen": "Jace offers to explore a different route to freedom while Gaelor's banishment delays their trial by combat. Brant refuses to burden the Hand further and chooses to wait for the judgment he demanded; mutual respect between them deepens.",
       "timos-hightower": "Swore to defend him under oath and screamed for his revenge the moment the boy was executed; the grief has not dimmed."
     },
     "summary": "A hard-edged survivor of the Oldtown Massacre, Brant Costayne watched his lord beheaded and his brothers slaughtered and spent the months since looking for a way to make it mean something. He found it in the tourney lists — entering disguised as a Riverlands knight, taking Gaelor's horse with a longsword through the chest after losing his own saddle, and very nearly taking the prince's life before Ser Godfrey Blackwood intervened. He is now in the black cells of the Red Keep, claimed personally by Gaelor, and he went there without resistance. He came to die. He has not yet been permitted to.",
@@ -1506,7 +1513,7 @@
   {
     "id": "vhaemys-targaryen",
     "name": "Vhaemys Targaryen",
-    "nickname": "-",
+    "nickname": "The Dragonet",
     "aliases": [],
     "house": "House Targaryen",
     "title": "Princess Vhaemys of House Targaryen",
@@ -1516,7 +1523,7 @@
       "moon": 4,
       "year": 92
     },
-    "height": "-",
+    "height": "115 cm",
     "father": "baelenys-targaryen",
     "mother": "jaery-targaryen",
     "spouse": "-",
@@ -1542,19 +1549,19 @@
     "relationships": {
       "alester-dayne": "Deeply attached to him and often followed him around the castle before his disappearance; she missed him openly and without shame the entire time he was gone.",
       "annara-celtigar": "Her closest friend at the Red Keep, a nine-year-old Celtigar girl who remains one of the few companions near Vhaemys's own age.",
-      "baelenys-targaryen": "Admires her father without understanding the fear he inspires in everyone else; cheered openly for Gaelor after the Oldtown Massacre, absorbing the King's framing entirely.",
+      "baelenys-targaryen": "After a nightmare convinces her Baelenys has died, she must see him alive before she can calm down. Baelenys comforts her and later calls her the family's most precious treasure.",
       "daria-sand": "The maid Jace quietly tasked with watching Vhaemys and making certain she attended her lessons after the chaos in the royal kitchens.",
       "gaelor-targaryen": "Her bond with Gaelor is intensely affectionate. He promises she will always be his most loved, no matter how many nieces and nephews follow, and she has defended him fiercely when the rest of the family called him a monster.",
-      "jacaelon-targaryen": "Feels safest around him and remains possessive of his attention. She interrupted his proposal outing partly out of jealousy, but Jace soothed her with a special pair of earrings carried by Jhagar.",
+      "jacaelon-targaryen": "Runs to Jace after dreaming of Visenor shouting that someone has died amid fire. She trusts Jace with her repeating visions, including an immense white dragon she sees herself riding, and accepts his promise to listen to every dream.",
       "jaery-targaryen": "Her mother, beside whom she sheltered during the worst of the family's fracturing.",
       "lorenah-dayne": "Still jealous of the attention Jace gives Lorenah, but their hostility has begun to thaw. During Jace's proposal outing Vhaemys allowed Lorenah to kiss her cheek and happily accepted earrings that Lorenah fastened for her, though she remained jealous of Lorenah's necklace.",
       "maela-targaryen": "Her older sister and Jace's twin. Vhaemys looks to Maela as another familiar presence within the royal family even if their bond has not yet been tested by the same crises as her attachments to Jace, Saera, Gaelor, and Alester.",
       "reyenald-reyne": "Met the young swordsman after interrupting his practice with Lord Commander Orwell Morrigen; Reyenald immediately knelt and introduced himself.",
-      "saera-targaryen": "Her older sister, toward whom she gravitates when the castle turns frightening and Jace or Alester are unavailable.",
+      "saera-targaryen": "Greets Saera's return from Winterfell with delight, immediately becoming fascinated by the white direwolf pup Saera carries and asking whether it is her present.",
       "visenor-targaryen": "Her eldest brother among the King's children. His disappearance is one of the great absences in the family, though Vhaemys is too young to understand the politics that forced him away.",
       "lucas-corbray": "Her beloved Mustang carries her on his shoulders and indulges her, while secretly sparing servants from her punishments."
     },
-    "summary": "The youngest child of King Baelenys remains affectionate, jealous, and dangerously impressionable. Her attachment to Jace has made Lorenah an obvious rival for his attention, but the hostility is no longer absolute. During the Cloudpass proposal Vhaemys watched Jace ask Lorenah to marry him, grudgingly allowed Lorenah to kiss her cheek, and delighted in a pair of earrings made from Cloudgazer's shed horn-scales, which Lorenah personally fastened for her. The little princess still wanted the necklace too. She reunites with Lucas Corbray, her adored Mustang, after his absence in the Vale. Lucas quietly spares the kitchen maids whom she orders imprisoned, while Jace presses her to thank them, clean up and attend her lessons.",
+    "summary": "Known since infancy as the Dragonet, Vhaemys begins to emerge as a possible Dreamer. She wakes screaming after seeing Visenor call out that someone has died amid fire, then tells Jace that she repeatedly dreams of riding a white dragon larger than Maelwing. Jace promises to hear every vision and Baelenys orders him to keep her close. She still covets Lorenah's horn-scale necklace, summons her friend Annara Celtigar to court, and is immediately enchanted by the white direwolf Saera brings home from Winterfell.",
     "quotes": []
   },
   {
@@ -1620,7 +1627,7 @@
       "gaelor-targaryen": "Often disagrees with his methods, though it was Gaelor who first argued Visenor should never split his clutch of dragons among the family.",
       "jacaelon-targaryen": "His opinion of Jace changed completely after learning of his secret help and the price Ser Alester nearly paid for it.",
       "jaery-targaryen": "His mother, who is desperate for news of him and has openly wept over his disappearance.",
-      "leo-tyrell": "Renrose Tyrell's young heir and one of Visenor's pupils in Oldtown. Leo knows Arthur Sand's true identity and initially approached him partly as his father's representative. Their relationship has since become more genuinely that of pupil and tutor, strengthened by lessons and private sword practice. Drills Leo throughout the journey to Highgarden and praises his progress to Renrose at breakfast.",
+      "leo-tyrell": "On the road from Highgarden, Visenor tries to reassure his uneasy pupil that Renrose is an honorable ally and future Hand. He does not know Leo overheard his parents' dangerous private conversation and has begun questioning the alliance.",
       "lorenah-dayne": "Granted him and Rhaella sanctuary despite the danger it posed to her own house. Visenor has promised to repay her hospitality when he is able.",
       "maela-targaryen": "His sister now carries Jadefyre, the one hatchling of his own clutch to survive.",
       "martyn-mullendore": "The Reach knight who recognised Visenor beneath his disguise during the Oldtown street ambush and chose to protect rather than expose him. Martyn brought him to Melessa Hightower, accompanied him to Highgarden, and remains among the small circle who know Arthur Sand is actually the Crown Prince.",
@@ -1633,7 +1640,7 @@
       "liana-tyrell": "Renrose introduces Liana as his wife and confidante while she listens to their Highgarden conversation. Visenor does not witness her later warning to Renrose.",
       "renrose-tyrell-daughter": "Notices Renrose's daughter watching him at Highgarden and wonders whether she knows who he really is."
     },
-    "summary": "Under the identity of Maester Arthur Sand, Visenor searches Baelor's abandoned Citadel papers and finds uncertain accounts that Vhagar wandered beyond Volantis. He turns that possibility into the heart of a forged letter: Vahaemon will appear to thank Lord Gardener for financing his sellswords, promise an invasion through the Reach's western ports and claim to have found Vhagar. Visenor carries the plan to Highgarden with Leo Tyrell, Clarisse Flowers and Martyn Mullendore. Renrose agrees to seize Gardener lands once the Crown names their lord a traitor, while privately resolving to raise House Tyrell above every other house. Visenor does not know that Rhaella and their unborn child have died near Starfall.",
+    "summary": "Visenor leaves Highgarden wearing Elinor Tyrell's golden-rose brooch and treating Renrose as an honorable ally and future Hand. He tries to reassure Leo on the road, unaware that the boy overheard his parents and now doubts the plot around them. Visenor still misses his family and remains ignorant that Rhaella and their unborn child are dead. In King's Landing, Vhaemys dreams of him crying out that someone has died amid fire.",
     "quotes": []
   },
   {
@@ -1672,7 +1679,7 @@
     ],
     "relationships": {
       "daria-sand": "Lorenah Dayne's maid and spy, who has been watching his increasingly conspicuous drunken behavior in Flea Bottom. Lorenah instructed Daria to speak with him and make him stop drawing attention.",
-      "jacaelon-targaryen": "The prince who spared him from the black cells and transformed his terror into absolute, unwavering service. His most recent intelligence — news of Gaelor's brothel visit and word of Visenya Targaryen's presence in Flea Bottom — has proved valuable enough to earn him something approaching genuine standing."
+      "jacaelon-targaryen": "After drunkenly wasting his coin while searching inns for Visenya, Weylar receives a final warning. Jace sends him back into Flea Bottom to quietly learn what victims and families believe about Gaelor, the Watch and the Crown."
     },
     "summary": "Jace's personal spymaster, and proof that terror makes for sturdier loyalty than trust ever could. Weylar once fed the Prince a hollow report and spent time in the black cells for it; the pardon bought Jace an informant who now bows low enough to scrape the floor. His network has paid off repeatedly: first bringing word of Gaelor's brothel visit days after the wedding, then relaying early confirmation of the Oldtown Massacre. He has since been tasked with finding a tutor for young Vhaemys, a task he approaches with the same mixture of eagerness and dread that characterizes everything he does for the Hand.",
     "quotes": []
@@ -2080,8 +2087,8 @@
       "almar-larchmont": "The Hightower maester who oversees much of the household surrounding Leo and Melessa. Almar is particularly strict about ensuring Leo remembers that Visenor must always be treated as Maester Arthur Sand whenever the disguise matters.",
       "martyn-mullendore": "Rode from Highgarden to Oldtown in his company. Martyn treats him with the patience of an experienced knight accustomed to the pride of a young lord.",
       "melessa-hightower": "Sent to Oldtown to receive an education alongside the young Lady of Oldtown. Their proximity also strengthens the political connection between Highgarden and the weakened House Hightower.",
-      "renrose-tyrell": "His father, who dispatched him to Oldtown ostensibly for his education. Leo understands that his presence also makes him his father's representative within the Hightower, even if he does not yet grasp every implication of that role.",
-      "visenor-targaryen": "Knows his tutor Maester Arthur Sand is truly Prince Visenor Targaryen and is among the small circle trusted with the secret. Initially approached him partly as his father's representative, even offering Tyrell swords for his protection, but their relationship has begun shifting toward that of pupil and tutor. During a private practice bout Leo surprised Visenor with his speed and landed a clean blow to the prince's head. Several days of demanding road training deepen their teacher-pupil relationship before the return to Highgarden.",
+      "renrose-tyrell": "Overhears Renrose and Liana discussing the danger surrounding their secret ambitions. The discovery leaves him withdrawn and uncertain even as Visenor praises his father as an honorable future Hand.",
+      "visenor-targaryen": "Still admires his princely tutor, but begins asking what Visenor will do to his family if he takes the throne. Leo's affection is now complicated by the dangerous conversation he overheard at Highgarden.",
       "renrose-tyrell-daughter": "His unnamed sister is present at Highgarden when the traveling party returns. Her response to Leo's training has not been shown.",
       "clarisse-flowers": "Joins swordplay and endurance lessons with Clarisse during the journey to Highgarden."
     },
@@ -3293,9 +3300,10 @@
     "relationships": {
       "zekar-alasyr": "His former mentor in improvisation, mimicry and commanding a crowd, later his professional equal in the Motley Three.",
       "merryn-whitespring": "His former mentor in stagecraft and comic timing, later his professional equal in the Motley Three.",
-      "gaelor-targaryen": "Faced the real prince during the troupe's royal satire, survived the massacre and was taken prisoner by Gaelor's soldiers."
+      "gaelor-targaryen": "Faced the real prince during the troupe's royal satire, survived the massacre and was taken prisoner by Gaelor's soldiers.",
+      "jacaelon-targaryen": "Receives Jace in the black cells and gives him a firsthand account of the massacre. He refuses to become a Crown mouthpiece, but listens when Jace promises protection, restitution and help rebuilding the Motley Three's stage."
     },
-    "summary": "Mydan Gerren was the youngest member of the Motley Three, though no longer an apprentice by the time the troupe performed its infamous royal farce. Zekar Alasyr and Merryn Whitespring taught him acting, improvisation, vocal and physical mimicry, how to read an audience and how far a dangerous joke could be pushed. Serious, controlled and extraordinarily adaptable, he became an actor's actor capable of disappearing into sharply different roles. The old habits of mentor and pupil sometimes lingered, but professionally he stood as the equal third name in one of Westeros's most skilled and socially influential troupes. Their Flea Bottom appearances honored their beginnings rather than reflecting low status. After Zekar and Merryn were killed during Gaelor's assault on the Fourteenth Day of the Eighth Moon, 99 AC, Mydan was seized by the soldiers and taken toward the Red Keep as a prisoner.",
+    "summary": "The last surviving member of the Motley Three remains imprisoned after Gaelor killed Zekar Alasyr and Merryn Whitespring and the trapped audience stampeded. Jace visits him in the black cells, hears his testimony and promises that the Crown will help repair the troupe's property and protect any future performance. Mydan does not know whether he can ever act again, but Jace urges him not to let the site of his masters' deaths become the final meaning of their stage.",
     "quotes": []
   },
   {
@@ -3487,7 +3495,7 @@
   },
   {
     "id": "renrose-tyrell-daughter",
-    "name": "Unnamed Daughter of Renrose Tyrell",
+    "name": "Elinor Tyrell",
     "nickname": "-",
     "aliases": [],
     "house": "House Tyrell",
@@ -3508,9 +3516,9 @@
     "relationships": {
       "renrose-tyrell": "Her father, beside whom she stands when Visenor arrives at Highgarden.",
       "leo-tyrell": "Her brother, Renrose's heir, who returns to Highgarden with Visenor's party. No private exchange between the siblings is shown.",
-      "visenor-targaryen": "Watches the visitor known as Maester Arthur Sand with fascination. Whether she knows his true identity is unconfirmed."
+      "visenor-targaryen": "Presents Visenor with a golden-rose brooch before his departure from Highgarden. Visenor fastens it to his clothing at once, visibly delighting her."
     },
-    "summary": "Renrose Tyrell's unnamed daughter stands beside him when Visenor arrives for breakfast at Highgarden. She appears to be about eighteen and watches the visitor with open fascination. Visenor cannot tell whether she knows that Maester Arthur Sand is a disguised prince. Her name, exact age, mother and intentions are not established.",
+    "summary": "Elinor Tyrell is Lord Renrose's daughter and Leo's sister. After watching the visitor known as Maester Arthur Sand with fascination at Highgarden, she addresses him openly as her prince before his departure and presents him with a finely worked golden-rose brooch, which he immediately wears. Her exact age, knowledge and intentions remain unconfirmed.",
     "quotes": []
   }
 ]

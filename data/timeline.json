@@ -843,5 +843,118 @@
         "location": "King's Landing"
       }
     ]
+  },
+  {
+    "chapterSlug": "until-the-last-breath",
+    "chapterTitle": "Chapter XVIII: Until The Last Breath",
+    "date": "15th–17th of the 8th Moon, 99 AC (with a flashback to approximately 95 AC)",
+    "events": [
+      {
+        "title": "Jaery promises Rhaella a future beside Visenor",
+        "description": "In a memory from Rhaella's twelfth year, Queen Jaery tells the former hostage that she loves her like a daughter and hopes to see her become Visenor's queen. An infant Vhaemys is already known as the Dragonet while Visenor protects Jace from Gaelor in the yard below.",
+        "date": "Early 1st Moon, 95 AC (approximate placement)",
+        "characters": [
+          "rhaella-targaryen",
+          "jaery-targaryen",
+          "vhaemys-targaryen",
+          "visenor-targaryen",
+          "jacaelon-targaryen",
+          "gaelor-targaryen"
+        ],
+        "kind": "memory",
+        "location": "King's Landing"
+      },
+      {
+        "title": "The ash at Boneskin's cave",
+        "description": "Dayne soldiers find seven or eight burned bodies on the coast near Starfall. The cave is empty, and neither Rhaella nor Boneskin is found there.",
+        "date": "15th of the 8th Moon",
+        "characters": [
+          "rhaella-targaryen"
+        ],
+        "kind": "aftermath",
+        "location": "Near Starfall"
+      },
+      {
+        "title": "Baelenys entrusts Jace with Aegon's dream",
+        "description": "Baelenys passes Jace the secret learned from Jaehaerys: their house must preserve the realm for the prince that was promised. He declares that Gaelor will not inherit and intends to name Jace heir once the present troubles are settled.",
+        "date": "15th of the 8th Moon",
+        "characters": [
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "gaelor-targaryen",
+          "visenor-targaryen"
+        ],
+        "kind": "revelation",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Vhaemys dreams of fire and a white dragon",
+        "description": "Vhaemys wakes screaming after seeing Visenor call out that someone has died amid fire. The next morning she tells Jace of repeated dreams in which she rides a white dragon larger than Maelwing; Jace and Baelenys begin treating her as a possible Dreamer.",
+        "date": "15th–16th of the 8th Moon",
+        "characters": [
+          "vhaemys-targaryen",
+          "jacaelon-targaryen",
+          "baelenys-targaryen",
+          "visenor-targaryen"
+        ],
+        "kind": "revelation",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Jace hears the last of the Motley Three",
+        "description": "Jace apologizes to the imprisoned Mydan Gerren, listens to his account of the massacre and promises that the Crown will help rebuild what was destroyed. Mydan is not yet released, but Jace asks him not to abandon the stage forever.",
+        "date": "15th of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "mydan-gerren",
+          "gaelor-targaryen",
+          "zekar-alasyr",
+          "merryn-whitespring"
+        ],
+        "kind": "aftermath",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Brant Costayne chooses his trial",
+        "description": "With Gaelor banished, Jace offers to seek another path out of the black cells. Brant refuses to abandon the judgment he demanded and waits for his delayed trial by combat.",
+        "date": "15th of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "brant-costayne",
+          "gaelor-targaryen"
+        ],
+        "kind": "politics",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Leo carries Highgarden's secret",
+        "description": "Leo overhears Renrose and Liana discussing the danger of Renrose's ambitions. On the road the next day, Visenor speaks of Renrose as an honorable future Hand, unaware that his young pupil now doubts the alliance around them.",
+        "date": "15th–16th of the 8th Moon",
+        "characters": [
+          "leo-tyrell",
+          "renrose-tyrell",
+          "liana-tyrell",
+          "visenor-targaryen",
+          "clarisse-flowers",
+          "martyn-mullendore"
+        ],
+        "kind": "politics",
+        "location": "Highgarden"
+      },
+      {
+        "title": "Saera and Alester return from the North",
+        "description": "Cloudgazer reaches King's Landing carrying Saera, Alester and the white direwolf. The family welcomes Saera home, but Jace immediately notices Alester's exhausted withdrawal.",
+        "date": "17th of the 8th Moon",
+        "characters": [
+          "saera-targaryen",
+          "alester-dayne",
+          "jacaelon-targaryen",
+          "jaery-targaryen",
+          "vhaemys-targaryen"
+        ],
+        "kind": "travel",
+        "location": "King's Landing"
+      }
+    ]
   }
 ]

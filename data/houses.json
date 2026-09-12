@@ -7,7 +7,7 @@
     "sigilSrc": "/images/houses/targaryen.webp",
     "color": "#B22222",
     "secondaryColor": "#000000",
-    "description": "The ruling house of the Seven Kingdoms, bound as much by dragonfire as by blood. After Gaelor's attack on the Motley Three leaves twenty dead in Flea Bottom, King Baelenys banishes him to Driftmark and Jacaelon uses the Crown, Faith and City Watch to contain the outrage. Far from court, Rhaella and her unborn child die in Boneskin's fire near Starfall, though the royal family does not yet know it."
+    "description": "The ruling house enters a new succession crisis in silence. Baelenys entrusts Jacaelon with Aegon's dream and intends to name him heir, while Gaelor remains banished and Visenor remains hidden in the Reach, unaware that Rhaella and their unborn child are dead. Vhaemys's repeating visions suggest the Dragonet may be a Dreamer, and Saera returns from Winterfell with Alester and a white direwolf."
   },
   {
     "id": "tyrell",
@@ -17,7 +17,7 @@
     "sigilSrc": "/images/houses/tyrell.webp",
     "color": "#228B22",
     "secondaryColor": "#F4C430",
-    "description": "Lords of the Reach, House Tyrell has secretly pledged its strength to Visenor's claim in return for the future Handship and a marriage alliance. When Visenor brings Highgarden a scheme to frame Lord Gardener as Vahaemon's financier and partner, Renrose agrees to seize Gardener lands the instant the Crown declares them traitors. In private, however, he rejects his wife's counsel to be satisfied with Visenor's trust and resolves to place House Tyrell above every rival—including the prince he claims to serve."
+    "description": "House Tyrell remains bound to Visenor's secret claim and forged case against Lord Gardener, but the alliance has begun to crack from within. Leo overhears Renrose and Liana discussing the danger of their ambitions, then leaves Highgarden beside a prince who still calls Renrose an honorable future Hand. Elinor sends Visenor away wearing a golden-rose brooch."
   },
   {
     "id": "hightower",
@@ -47,7 +47,7 @@
     "sigilSrc": "/images/houses/dayne.webp",
     "color": "#DDA0DD",
     "secondaryColor": "#E6E6FA",
-    "description": "A Dornish house drawn into the heart of the realm's troubles through Ser Alester's service to Jacaelon and Lady Lorenah's protection of Visenor and Rhaella. While Lord Darren is away in Sunspear and Maester Edmyn remains missing, Rhaella is attacked near Boneskin's cave outside Starfall and dies with her unborn child in the dragon's fire."
+    "description": "House Dayne remains entangled in both the Crown and its fugitives. Soldiers find the ash and bodies outside Boneskin's empty coastal cave but no sign of the dragon or Rhaella, while Ser Alester returns from Winterfell to King's Landing visibly burdened by what occurred there."
   },
   {
     "id": "velaryon",

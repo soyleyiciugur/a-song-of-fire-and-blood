@@ -108,5 +108,27 @@
     "moon": 8,
     "year": 99,
     "description": "Renrose receives Visenor's party at breakfast. Visenor shares the Vhagar forgery and asks Renrose to seize Gardener lands if the Crown declares their lord a traitor. Liana listens; Renrose's unnamed daughter is also present."
+  },
+  {
+    "id": "baelenys-entrusts-aegons-dream",
+    "title": "The Burden of Aegon's Dream",
+    "type": "revelation",
+    "location": "King's Landing",
+    "chapterSlug": "until-the-last-breath",
+    "day": 15,
+    "moon": 8,
+    "year": 99,
+    "description": "King Baelenys entrusts Jacaelon with Aegon's dream, rejects Gaelor as successor and says he intends to name Jace heir once the realm's present troubles are settled."
+  },
+  {
+    "id": "saera-returns-from-winterfell",
+    "title": "Saera Returns from Winterfell",
+    "type": "arrival",
+    "location": "King's Landing",
+    "chapterSlug": "until-the-last-breath",
+    "day": 17,
+    "moon": 8,
+    "year": 99,
+    "description": "Cloudgazer returns Princess Saera, Ser Alester Dayne and Rickard Stark's white direwolf gift to the Red Keep."
   }
 ]

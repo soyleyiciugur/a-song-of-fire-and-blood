@@ -1002,5 +1002,83 @@
     "nymos": "Starfall",
     "liana-tyrell": "Highgarden",
     "renrose-tyrell-daughter": "Highgarden"
+  },
+  "until-the-last-breath": {
+    "baelenys-targaryen": "King's Landing",
+    "baelor-targaryen": "King's Landing",
+    "cordin-poole": "King's Landing",
+    "darren-dayne": "Sunspear",
+    "gaelor-targaryen": [
+      "King's Landing",
+      "Driftmark"
+    ],
+    "jacaelon-targaryen": "King's Landing",
+    "jaery-targaryen": "King's Landing",
+    "lorenah-dayne": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "malaenar-targaryen": "Dragonstone",
+    "naella-velaryon": "King's Landing",
+    "rhaella-targaryen": "Dead",
+    "rickard-stark": "Winterfell",
+    "saera-targaryen": [
+      "The North",
+      "King's Landing"
+    ],
+    "alester-dayne": [
+      "The North",
+      "King's Landing"
+    ],
+    "brant-costayne": "King's Landing",
+    "orwell-morrigen": "King's Landing",
+    "saathos-maris": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vhaemys-targaryen": "King's Landing",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "-",
+    "melessa-hightower": "Oldtown",
+    "godfrey-blackwood": "Raventree Hall",
+    "visenor-targaryen": [
+      "Highgarden",
+      "The Reach"
+    ],
+    "renrose-tyrell": "Highgarden",
+    "martyn-mullendore": [
+      "Highgarden",
+      "The Reach"
+    ],
+    "berholt-caswell": "King's Landing",
+    "leo-tyrell": [
+      "Highgarden",
+      "The Reach"
+    ],
+    "almar-larchmont": "Oldtown",
+    "baran-strong": "Dragonstone",
+    "tansy-riverside": "Dragonstone",
+    "perric-bracken": "Stone Hedge",
+    "clover-tully": "Riverrun",
+    "clarisse-flowers": [
+      "Highgarden",
+      "The Reach"
+    ],
+    "benjen-stark": "Winterfell",
+    "mother-marya": "Winterfell",
+    "naela-targaryen": "-",
+    "vahaemon-targaryen": "-",
+    "visenya-targaryen": "-",
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "brannyn-vance": "Dead",
+    "curtass-whent": "Dead",
+    "derrin-hightower": "Dead",
+    "timos-hightower": "Dead",
+    "lucas-corbray": "King's Landing",
+    "reyenald-reyne": "King's Landing",
+    "oswald-eagle": "King's Landing",
+    "daria-sand": "King's Landing",
+    "nymos": "Starfall",
+    "liana-tyrell": "Highgarden",
+    "renrose-tyrell-daughter": "Highgarden",
+    "mydan-gerren": "King's Landing"
   }
 }

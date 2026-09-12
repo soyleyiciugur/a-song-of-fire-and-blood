@@ -350,6 +350,56 @@
       "body": "Not every bad outcome is railroading and not every cruel surprise is good GMing. What information does a player need for you to feel that a consequence belongs to their choice? General RP discussion; story examples can include Chapter XVII.",
       "publishedAt": "2026-09-12T08:25:26.949Z",
       "spoilerThrough": "the-children-pay"
+    },
+    {
+      "id": "chapter-until-the-last-breath",
+      "chapterSlug": "until-the-last-breath",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-room-middle",
+      "body": "Chapter XVIII: Until The Last Breath. The old Rhaella memory, Aegon's dream, Jace's succession, Vhaemys's visions, Mydan and Brant in the cells, the Tyrell alliance and Saera's return. Full Chapter XVIII spoilers.",
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "theory-white-dragon-dream",
+      "chapterSlug": null,
+      "title": "Vhaemys, Ghost, and the white dragon: evidence board",
+      "category": "Theory",
+      "authorId": "regular-ecology",
+      "body": "Chapter XVIII spoilers. Vhaemys repeatedly dreams of riding a white dragon larger than Maelwing. Jace connects Visenya's movements and Baelor's research. What is evidence for Ghost, and what is still projection?",
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "meta-jace-heir-not-crowned",
+      "chapterSlug": null,
+      "title": "Jace is intended heir, not heir yet",
+      "category": "Politics & lore",
+      "authorId": "regular-legal",
+      "body": "Baelenys says he will name Jace when the present troubles are settled. Until a proclamation, who benefits from the secret and who is endangered by it? Chapter XVIII spoilers.",
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "community-side-character-pet-draft",
+      "chapterSlug": null,
+      "title": "Draft one animal companion for a side character",
+      "category": "Fandom",
+      "authorId": "regular-horse",
+      "body": "Direwolves and dragons are taken. Pick a side character, give them one ordinary animal, and explain why the pairing works. Keep it non-canon and kind to the animal.",
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "offtopic-sunday-small-wins",
+      "chapterSlug": null,
+      "title": "Sunday small wins thread",
+      "category": "Off-topic",
+      "authorId": "regular-optimist",
+      "body": "Tell us one small thing that went right. Finished a chore, made food, answered a message, rested without apologizing—counts as a win.",
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
     }
   ],
   "comments": [
@@ -6511,6 +6561,960 @@
         "rule": "Argue the take rather than the person.",
         "targetCommentId": "cebf41c9-df24-4201-af92-61c5bdabad7e"
       }
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-001",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Opening with twelve-year-old Rhaella being promised a whole life beside Visenor, immediately after we watched that life end, was cruel in a very deliberate way."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-002",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-archive",
+      "parentId": "c18-001",
+      "body": "And it belongs years earlier in the chronology, not on the fifteenth day. Vhaemys is an infant and Rhaella is explicitly twelve. The chapter is making us carry the promise forward into the ash."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-003",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The flashback worked for me more than the assault did last chapter. Jaery loving Rhaella as a daughter gives her history inside the family instead of inventing one last reason to pity her."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-004",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-defender",
+      "parentId": "c18-003",
+      "body": "same. It also makes the title hurt without asking the death scene to do even more work."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-005",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "little Vhaemys stopping mid-scream to stare at the curtains... I know it is tiny but I loved that."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-006",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "the cave is empty. seven bodies cooked. dragon gone. excellent morning for the dayne patrol"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-007",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-ecology",
+      "parentId": "c18-006",
+      "body": "Boneskin leaving is the detail I cannot stop thinking about. That is grief behavior until the text gives us another explanation."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-008",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-l",
+      "parentId": "c18-007",
+      "body": "Reasonable reading, but still a reading. We know the cave is empty; we do not yet know where she went or why."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-009",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "\"I am honored that you would trust me with such a burden, Father,\" he said quietly. \"Whatever duty remains to me in service of our house, I will do everything in my power to fulfill it well. I will try to make you proud.\" lol apparently it's Jace's turn to kiss daddy's ass"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-010",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "c18-009",
+      "body": "What ass-kissing, ffs? What would you know about Aegon's dream—have you even heard of it? 🤣🤣🤣 Visenor would know. People who don't know Aegon's dream need to stop talking, please 😂😂😂"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-011",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-v",
+      "parentId": "c18-010",
+      "body": "Visenor is busy getting fucked right now; he can't deal with Aegon's dream."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-012",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": "c18-011",
+      "body": "finally an honest Visenor update from his own department"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-013",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "c18-011",
+      "body": "one day you will defend that man without disconnecting halfway through. not today apparently"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-014",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "c18-009",
+      "body": "All three princes want their father's approval. Jace just received the version that comes with an apocalypse secret and unpaid lifetime labor."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-015",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Confirmation at last: Baelenys learned the dream from Jaehaerys, not Aenys, and he already told Visenor. Jace is now the second son in this generation trusted with it."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-016",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-l",
+      "parentId": "c18-015",
+      "body": "Also important: Baelenys does not say Jace is the prince that was promised. He says Jace may need to prepare whoever is. Different claim."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-017",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": "c18-016",
+      "body": "thank you because I absolutely read it as jace being the chosen one for five minutes"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-018",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "I liked that Jace's first response to being heir is basically: I know exactly why I don't want it, which may be why I have to accept it. Very him, and also a dangerous amount of self-belief."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-019",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-critic",
+      "parentId": "c18-018",
+      "body": "The cheek pat did more damage to him than the entire tourney."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-020",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "Gaelor disinherited offscreen while on his Driftmark timeout. PR department has entered administration."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-021",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "c18-020",
+      "body": "Could not have happened to a more qualified candidate."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-022",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "\"Unless you have some better proposal\" is not a formal proclamation. Jace is the intended heir, not the publicly established heir. That distinction will become lethal if leaked."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-023",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "c18-022",
+      "body": "market currently refusing all succession bets due to princes"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-024",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Vhaemys dreaming Visenor screaming that someone died on the exact day Rhaella dies is the chapter's real horror scene."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-025",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-v",
+      "parentId": "c18-024",
+      "body": "He does not know yet. The dream may be future Visenor rather than present Visenor and I hate both options."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-026",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-l",
+      "parentId": "c18-025",
+      "body": "Yes. The fire and three figures are too imprecise to lock the timing or identity. The Rhaella connection is strong, not confirmed within the vision."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-027",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "A white dragon larger than Maelwing, repeatedly seen on Dragonstone, with Vhaemys riding. Ghost theory just stopped being a side quest."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-028",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "c18-027",
+      "body": "Jace collecting his seven-year-old sister's dreams like intelligence reports is adorable and terrifyingly on brand."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-029",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-v",
+      "parentId": "c18-028",
+      "body": "and expertly redirecting her away from Lorenah's necklace. man has survived councils with less danger"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-030",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "cake from an unknown pocket age. finally a mystery I can solve: do not eat that"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-031",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-l",
+      "parentId": "c18-030",
+      "body": "I agree. Cake should be stored in a covered container. Regards."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-032",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Mydan refusing release if the price is becoming Crown propaganda was excellent. Jace arrived with a repair plan; the prisoner still established the terms."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-033",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "c18-032",
+      "body": "Jace understands art is political right up until the art calls him a bootlicker."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-034",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "c18-033",
+      "body": "he asked for a slightly more flattering boot. reasonable artistic note"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-035",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "The Mydan scene was my favorite. No instant healing, no demand that he perform forgiveness, just the possibility that the stage might mean something other than the massacre one day."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-036",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-critic",
+      "parentId": "c18-035",
+      "body": "Agreed. Keep him uncertain. Grief becoming useful on schedule would ruin it."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-037",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Brant declining an easier route is not foolish in context. His trial is the only public mechanism left that names what happened at Oldtown as something requiring judgment."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-038",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": "c18-037",
+      "body": "gaelor creates disasters faster than the court can schedule his existing disasters"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-039",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "Clarisse putting Martyn on one knee was clean. Also grateful that an entire road scene passed without anyone ruining a horse."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-040",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Leo heard Renrose and Liana. Visenor calling Renrose honorable the next morning lands completely differently because Leo now knows more about Visenor's ally than Visenor does."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-041",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-v",
+      "parentId": "c18-040",
+      "body": "the pupil has the intel advantage. teacher build compromised"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-042",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "Leo asking what Visenor will do to his family is such a good question because it is both political and a frightened kid trying to understand the adult he trusted."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-043",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": "c18-042",
+      "body": "Visenor: your dad is honorable. Leo, who just heard the villain speech through a hedge: 🙂"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-044",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Elinor giving him the rose brooch and Visenor putting it on immediately was a perfect little court gesture. Pretty, warm, and politically radioactive."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-045",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "Saera is home. Alester is home. Neither of those statements means the problem stayed in Winterfell."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-046",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": "c18-045",
+      "body": "Jace noticing and not pushing him made me emotional. He knew."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-047",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "c18-046",
+      "body": "best friend radar works even after forty minutes of apocalypse lore and two dungeon visits"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-048",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Vhaemys seeing the direwolf and immediately assuming it must be her gift is the first time I breathed normally all chapter."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-049",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Structurally crowded, but the recurring question is clear: what burden do parents hand children, and what do those children pass on? Rhaella, Jace, Leo, Vhaemys, even Alester."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-050",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-defender",
+      "parentId": "c18-049",
+      "body": "That is why the title works for me. Nobody reaches a last breath without carrying something an older person put in their hands."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-051",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "chapter MVP poll: Mydan / Vhaemys / Leo / pocket cake"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-052",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "c18-051",
+      "body": "pocket cake. survived the chapter and asked nothing of the crown"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-053",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "c18-051",
+      "body": "Jace omitted from ballot. election challenged."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-054",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "c18-053",
+      "body": "welcome to succession politics"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-055",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Not shipping anything today. I am respectfully observing that Jace carried Vhaemys straight to the throne room and my heart has stopped."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-056",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-defender",
+      "parentId": "c18-055",
+      "body": "growth. proud of you."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-057",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "One unresolved item: Saathos was dismissed and barred from the Red Keep, but we have not seen Baelenys formally strip the white cloak. Orwell's action is clear; the final office is not."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-058",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-l",
+      "parentId": "c18-057",
+      "body": "Correct. Suspension or dismissal by the Lord Commander and removal from the order by the Crown may not be identical here."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-059",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "jace promoted to future king, amateur dream archivist, theatre recovery office, prison scheduling clerk and flea bottom focus group manager in one afternoon"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "c18-060",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-room-middle",
+      "parentId": "c18-059",
+      "body": "and Saera came home safely. I am taking the one good thing and leaving before the next chapter."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-1",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "Evidence: repeated white-dragon dreams, Dragonstone imagery, Baelor's prior Ghost research and Jace's independent investigation. Not evidence: certainty that every pale dragon is Ghost."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-2",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "The dream changing from wonder to Visenor screaming amid fire makes me think the dragon plot and family deaths are converging."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-3",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-ecology",
+      "parentId": "white-2",
+      "body": "Could be, but those are two dreams as described. I do not want to splice them into one sequence yet."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-4",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "Is Ghost confirmed alive?"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-5",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-l",
+      "parentId": "white-4",
+      "body": "No. Baelor believed her dead. Chapter XVIII gives Jace enough overlap to investigate, not an answer."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-6",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Baelenys heard larger than Vhagar and authorized the side quest instantly. completely understandable."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-7",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-v",
+      "parentId": "white-6",
+      "body": "Visenor already has the premium pale dragon package."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-8",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-ecology",
+      "parentId": "white-7",
+      "body": "Boneskin is pale, not white, and nowhere near the described size."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-9",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "prediction poll: Ghost / unknown dragon / symbolic dream / Vhaemys exaggerating because she is seven"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "white-10",
+      "entryId": "theory-white-dragon-dream",
+      "authorId": "regular-club",
+      "parentId": "white-9",
+      "body": "She is seven, but Jace says the patterns repeat. I am voting unknown dragon and worrying."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-1",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Jace benefits from preparation but is endangered by discovery. Gaelor and Visenor both become threats to a decision they have not heard."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-2",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "counterpoint: no proclamation no disinheritance. gaelor nation remains technically alive"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-3",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-legal",
+      "parentId": "heir-2",
+      "body": "Politically, yes. Baelenys's private intent is not yet public law. Personally, the sentence could hardly be clearer."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-4",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Jace got the dream, the burden and the cheek pat. crown is just paperwork now."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-5",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-u",
+      "parentId": "heir-4",
+      "body": "The paperwork is where civil wars live."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-6",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "Visenor being told the dream first matters. Baelenys trusted him with the same duty before everything broke."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-7",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-l",
+      "parentId": "heir-6",
+      "body": "Agreed. It complicates the claim that Jace alone was ever worthy; the order reflects changing trust, not necessarily deeper understanding."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "heir-8",
+      "entryId": "meta-jace-heir-not-crowned",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "The scene is less a coronation than Baelenys admitting which son still answers him."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-1",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "Ser Oswald Eagle should have a senior dog that enjoys routine and does not attend council meetings. Regards."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-2",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "Mydan gets a theatre cat that sleeps in the prop crown"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-3",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-grad",
+      "parentId": "pet-2",
+      "body": "and walks onstage during every tragedy. perfect."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-4",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "Clarisse gets a mule with excellent balance and no patience for men showing off."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-5",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "weylar gets a pigeon that keeps finding its way back to the wrong inn"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-6",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-j",
+      "parentId": "pet-5",
+      "body": "more reliable intelligence network than current operations"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "pet-7",
+      "entryId": "community-side-character-pet-draft",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "maybe Annara has a very calm little rabbit so Vhaemys has to learn to be quiet around it"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-1",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "found the tea I lost before it went cold"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-2",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "opened the notebook. wrote nothing. still counts because it is open."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-3",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-room-defender",
+      "parentId": "wins-2",
+      "body": "counts. no outline speech from me, promise."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-4",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "left work on time for once"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-5",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "made soup and there is enough for tomorrow"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-6",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-b",
+      "parentId": "wins-5",
+      "body": "That is excellent planning. I hope it reheats well. Regards."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-7",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "sent a message I had been putting off... it was fine"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wins-8",
+      "entryId": "offtopic-sunday-small-wins",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "charged my phone before 2%. unprecedented"
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "live-hrrm-ama-not-dbz-powerscaling",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-fandom-dnd",
+      "parentId": "10a846e8-edf1-4e41-bac2-22df91cb1d7b",
+      "parentSource": "supabase",
+      "body": "fair. power-scaling question withdrawn; character consequences remain on the table."
+    },
+    {
+      "publishedAt": "2026-09-13T06:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "live-hrrm-ama-control-room-critic",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-room-critic",
+      "parentId": "1434bc30-9a61-4a95-a416-447bc1fa6524",
+      "parentSource": "supabase",
+      "body": "honestly this may be the most revealing answer in the AMA."
     }
   ]
 }

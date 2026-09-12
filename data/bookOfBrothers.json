@@ -305,7 +305,7 @@
     "id": "saathos-maris",
     "characterId": "saathos-maris",
     "appointedDate": "recently",
-    "endDate": "",
+    "endDate": "15th of the 8th Moon, 99 AC",
     "oath": "I shall keep the king I serve from harm, obey his commands, keep his secrets, counsel him when he asks it and no other time, and give my life for his if need be — forsaking lands, titles, and a wife of my own, all my days.",
     "deeds": [
       {
@@ -314,9 +314,13 @@
       {
         "date": "14th of the 8th Moon, 99 AC",
         "description": "Gathered gold cloaks around a mummers' tent on Gaelor's orders. During the ensuing massacre, used his shield and the flat of his sword rather than its edge."
+      },
+      {
+        "date": "15th of the 8th Moon, 99 AC",
+        "description": "Dismissed from his duties by Lord Commander Orwell Morrigen and forbidden from entering the Red Keep after his part in the Mummers' Blood."
       }
     ],
-    "notes": "",
+    "notes": "Dismissed from active Kingsguard duty by Lord Commander Orwell Morrigen after the Mummers' Blood; his final standing has not yet been judged by the King.",
     "published": true
   },
   {
