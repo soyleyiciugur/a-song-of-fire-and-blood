@@ -940,7 +940,10 @@
     "baelor-targaryen": "King's Landing",
     "cordin-poole": "King's Landing",
     "darren-dayne": "Sunspear",
-    "gaelor-targaryen": ["King's Landing", "Driftmark"],
+    "gaelor-targaryen": [
+      "King's Landing",
+      "Driftmark"
+    ],
     "jacaelon-targaryen": "King's Landing",
     "jaery-targaryen": "King's Landing",
     "lorenah-dayne": "King's Landing",
@@ -949,8 +952,14 @@
     "naella-velaryon": "King's Landing",
     "rhaella-targaryen": "Dead",
     "rickard-stark": "Winterfell",
-    "saera-targaryen": ["Winterfell", "The North"],
-    "alester-dayne": ["Winterfell", "The North"],
+    "saera-targaryen": [
+      "Winterfell",
+      "The North"
+    ],
+    "alester-dayne": [
+      "Winterfell",
+      "The North"
+    ],
     "brant-costayne": "King's Landing",
     "orwell-morrigen": "King's Landing",
     "saathos-maris": "King's Landing",
@@ -958,10 +967,13 @@
     "tion-lannister": "King's Landing",
     "vhaemys-targaryen": "King's Landing",
     "weylar-rocke": "King's Landing",
-    "edmyn-uller": "Missing",
+    "edmyn-uller": "-",
     "melessa-hightower": "Oldtown",
     "godfrey-blackwood": "Raventree Hall",
-    "visenor-targaryen": ["Oldtown", "Highgarden"],
+    "visenor-targaryen": [
+      "Oldtown",
+      "Highgarden"
+    ],
     "renrose-tyrell": "Highgarden",
     "martyn-mullendore": "Highgarden",
     "berholt-caswell": "King's Landing",
@@ -986,6 +998,9 @@
     "lucas-corbray": "King's Landing",
     "reyenald-reyne": "King's Landing",
     "oswald": "King's Landing",
-    "daria-sand": "King's Landing"
+    "daria-sand": "King's Landing",
+    "nymos": "Starfall",
+    "liana-tyrell": "Highgarden",
+    "renrose-tyrell-daughter": "Highgarden"
   }
 }

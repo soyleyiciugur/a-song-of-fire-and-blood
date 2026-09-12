@@ -97,5 +97,16 @@
     "moon": 8,
     "year": 99,
     "description": "After Rhaella is attacked near Boneskin's cave, the dragon kills her assailants and then obeys the grievously wounded princess's final command to burn her."
+  },
+  {
+    "id": "highgarden-forged-letter-breakfast",
+    "title": "The Highgarden Breakfast",
+    "type": "feast",
+    "location": "Highgarden",
+    "chapterSlug": "the-children-pay",
+    "day": 15,
+    "moon": 8,
+    "year": 99,
+    "description": "Renrose receives Visenor's party at breakfast. Visenor shares the Vhagar forgery and asks Renrose to seize Gardener lands if the Crown declares their lord a traitor. Liana listens; Renrose's unnamed daughter is also present."
   }
 ]

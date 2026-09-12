@@ -36,3 +36,7 @@ When asked to "run the community workflow":
 This is intentionally batch-based rather than a permanent local bot. If a player comments and the workflow is not run for a day, that comment remains unanswered for a day. The next authoring pass can then create a reply whose publication time is after the pass/deployment, making the delayed response feel natural. Additional future comments may be scheduled at the same time.
 
 Once a player replies again, do not continue an old prewritten branch as though that reply never happened. The next workflow pass should read the new live context and continue from there.
+
+## Publication cadence
+
+The current publication policy is a persisted 24-hour batch, with at least one authored response in every consecutive hourly window and a randomized minute from 1 to 59 (seconds may vary too). Store explicit UTC timestamps once; never reroll on requests, builds or visits. `community-schedule.json.policy` describes the cadence and `currentBatchId` selects its 24 slots. Older slots remain as publication history with their original timestamps. Gallery and forum responses may occupy a window independently; a forum response does not require a gallery comment. Replies must follow their parents. This is a finite authored batch, not an autonomous reply bot; review new public member activity before preparing another batch.

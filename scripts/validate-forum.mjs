@@ -54,7 +54,6 @@ assert.equal(new Set(scheduledThreadIds).size,scheduledThreadIds.length);
 assert.equal(new Set(scheduledCommentIds).size,scheduledCommentIds.length);
 for(const slot of schedule.slots){
   const threadIds=slot.forumThreadIds ?? [], commentIds=slot.forumCommentIds ?? [];
-  if(threadIds.length || commentIds.length)assert(slot.commentIds.length,'Forum activity uses the same three selected publication windows');
   const time=Date.parse(slot.publishedAt);
   const before=publishForum(forum,chapters,time-1), at=publishForum(forum,chapters,time);
   for(const id of threadIds){

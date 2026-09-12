@@ -7,8 +7,8 @@ const data = JSON.parse(fs.readFileSync(new URL('../data/flea-bottom.json', impo
 const updates = JSON.parse(fs.readFileSync(new URL('../data/update-notes.json', import.meta.url), 'utf8'));
 const scheduled = data.comments.filter(c => c.id.includes('-scheduled-'));
 const schedule = JSON.parse(fs.readFileSync(new URL('../data/community-schedule.json', import.meta.url), 'utf8'));
-assert.equal(schedule.slots.length, 10);
-assert.equal(schedule.slots.filter(slot => slot.commentIds.length).length, 3);
+const { validateCommunitySchedule } = await import('./lib/validate-community-schedule.mjs');
+validateCommunitySchedule(schedule);
 assert.deepEqual(scheduled.map(c => c.id).sort(), schedule.slots.flatMap(slot => slot.commentIds).sort());
 for (const c of scheduled) {
   const time = Date.parse(c.publishedAt);

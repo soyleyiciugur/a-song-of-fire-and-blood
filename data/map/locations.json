@@ -223,5 +223,10 @@
     "name": "Raventree Hall",
     "xPct": 15.2,
     "yPct": 42.54
+  },
+  {
+    "name": "The North",
+    "xPct": 15.8,
+    "yPct": 28
   }
 ]

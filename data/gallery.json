@@ -1,4 +1,16 @@
 [
+    {
+    "id": "gallery-baelenys-jace-kid",
+    "src": "/images/gallery/baelenys-jace-kid.webp",
+    "caption": "\"Like when you were little. I will speak. You will listen.\"",
+    "characterIds": ["baelenys-targaryen", "jacaelon-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "the-children-pay",
+    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-12",
+    "category": "raven"
+  },
   {
     "id": "gallery-gaelor-supervillain",
     "src": "/videos/reels/gaelor-supervillain.mov",

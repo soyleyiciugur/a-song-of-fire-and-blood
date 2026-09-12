@@ -12,7 +12,13 @@
       "Restored member Likes and Favor on newly added fictional community comments, including Chapter XVII.",
       "Added reaction-target coverage validation to the community authoring workflow.",
       "Restricted private-message reactions to conversation participants.",
-      "Expanded Chapter XVII discussion of Vhaemys's necklace callback and the theory that Baelenys will share Aegon's dream and choose Jace as heir."
+      "Expanded Chapter XVII discussion of Vhaemys's necklace callback and the theory that Baelenys will share Aegon's dream and choose Jace as heir.",
+      "Added selective fictional-account replies to new live Taverns reactions about Chapter XVII and The Great Game.",
+      "Completed Chapter XVII character and relationship records, added Nymos, Lady Liana and Renrose's unnamed daughter, and synchronized their map positions and chronicle links.",
+      "Expanded Taverns with six discussions spanning Chapter XVII, adaptation, roleplaying and everyday life.",
+      "Opened HRRM's AMA with broad community participation and a further 24 questions scheduled hourly at varied minutes.",
+      "Restored Edmyn's last-known map marker and added a North region marker for Saera and Alester's southbound flight.",
+      "Added a continuity-aware Raven's Eye conversation for Baelenys and Jace's Chapter XVII memory."
     ],
     "features": [
       "Added the complete Chapter XVII chronology and its Taverns discussion."

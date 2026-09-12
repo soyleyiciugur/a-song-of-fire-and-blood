@@ -12738,6 +12738,62 @@
       "body": "the statement has lost to a one-word reply. rough night for the press office.",
       "parentSource": "supabase",
       "publishedAt": "2026-09-11T23:52:58.782Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-jacejpeg",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "posting tiny Jace under THAT line is emotional sabotage actually",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-archive",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "The chapter moves from 'like when you were little' to the story Baelenys once told Visenor. This image makes that comparison feel painfully literal before we even hear the story.",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-elder",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "regular-elder",
+      "parentId": null,
+      "body": "He is nearly grown, yet his father asks for one evening in which he can be the listening child again. That tenderness makes me nervous.",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-critic",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "This is a much stronger cliffhanger for me than a formal heir announcement would have been. One quiet line and suddenly their whole history is sitting in the room.",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-ada",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "regular-room-middle",
+      "parentId": "gallery-baelenys-jace-kid-critic",
+      "body": "yeah. and Jace doesn't even know yet whether he's being comforted, trusted, or handed a burden. probably all three.",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-jace",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "I was not that small.",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
+    },
+    {
+      "id": "gallery-baelenys-jace-kid-baelenys",
+      "entryId": "gallery-baelenys-jace-kid",
+      "authorId": "cast-baelenys-targaryen",
+      "parentId": "gallery-baelenys-jace-kid-jace",
+      "body": "You were.",
+      "publishedAt": "2026-09-12T08:34:25.674Z"
     }
   ],
   "relationships": [

@@ -45,9 +45,8 @@ const friendships=communityFriendships({users,relationships});
 const commentMap = new Map(comments.map((comment) => [comment.id, comment]));
 const schedule = read('community-schedule.json');
 assert.equal(schedule.timeZone, 'Europe/Istanbul');
-assert.equal(schedule.slots.length, 10, 'Current publication plan has ten candidate windows');
-assert.equal(new Set(schedule.slots.map(slot=>slot.publishedAt)).size, 10, 'Distinct publication times');
-assert.equal(schedule.slots.filter(slot=>slot.commentIds.length).length, 3, 'Only three selected windows publish');
+const { validateCommunitySchedule } = await import('./lib/validate-community-schedule.mjs');
+validateCommunitySchedule(schedule);
 const plannedIds = schedule.slots.flatMap(slot=>slot.commentIds);
 assert.equal(new Set(plannedIds).size, plannedIds.length, 'A comment belongs to one window');
 for (const slot of schedule.slots) {

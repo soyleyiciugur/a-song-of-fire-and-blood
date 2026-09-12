@@ -81,9 +81,9 @@
       "Unusually Intelligent",
       "Avoided Humans by Choice, Not Fear",
       "Now Ridden — Bareback, No Saddle or Chains",
-      "Relocated His Own Egg to a New Nest"
+      "Relocated Her Own Egg to a New Nest"
     ],
-    "description": "A wild dragon Visenor found roosting alone in a cave in Dorne's Red Mountains. Small, lean and unusually intelligent, Boneskin accepted Visenor after days of patient contact and carried him and her egg to a hidden sea cave. Rhaella continued visiting her there. On the Fifteenth Day of the Eighth Moon, 99 AC, Boneskin burned the riders who attacked the princess, then obeyed Rhaella's repeated final command and burned her as well."
+    "description": "A wild dragon Visenor found roosting alone in a cave in Dorne's Red Mountains. Small, lean and unusually intelligent, Boneskin accepted Visenor after days of patient contact and carried Visenor and her egg to a hidden sea cave. Rhaella continued visiting her there. On the Fifteenth Day of the Eighth Moon, 99 AC, Boneskin burned the riders who attacked the princess, then obeyed Rhaella's repeated final command and burned her as well."
   },
   {
     "id": "boneskins-egg",
@@ -92,11 +92,11 @@
     "image": "/images/dragons/boneskin-egg.webp",
     "traits": [
       "Recovered from a Cave in the Red Mountains",
-      "Carried by Boneskin Himself",
+      "Carried by Boneskin Herself",
       "Hidden in a Sea Cave in Dorne",
       "Unclaimed"
     ],
-    "description": "The dragon egg found alongside Boneskin in his mountain cave. Visenor and Boneskin relocated it together by night flight to a damp, salt-scented sea cave along the Dornish coast — safe from scorpions and, more importantly, from men. Its fate remains unclaimed."
+    "description": "The dragon egg found alongside Boneskin in her mountain cave. Visenor and Boneskin relocated it together by night flight to a damp, salt-scented sea cave along the Dornish coast — safe from scorpions and, more importantly, from men. Its fate remains unclaimed."
   },
   {
     "id": "ashfyre",

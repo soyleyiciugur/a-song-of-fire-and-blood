@@ -741,7 +741,12 @@
         "title": "Visenor builds the Vhagar deception",
         "description": "In Baelor's old Citadel chambers, Visenor finds accounts suggesting Vhagar wandered beyond Volantis. He and Almar shape the lore into a forged letter claiming Vahaemon has found the ancient dragon and that House Gardener is financing his return.",
         "date": "9th of the 8th Moon",
-        "characters": ["visenor-targaryen", "almar-larchmont", "baelor-targaryen", "vahaemon-targaryen"],
+        "characters": [
+          "visenor-targaryen",
+          "almar-larchmont",
+          "baelor-targaryen",
+          "vahaemon-targaryen"
+        ],
         "kind": "politics",
         "location": "Oldtown"
       },
@@ -749,7 +754,12 @@
         "title": "Rhaella waits for the missing maester",
         "description": "At Starfall, Rhaella grows alarmed that Edmyn Uller has not returned. With Lord Darren away in Sunspear, Maester Nymos quietly helps preserve the secrecy surrounding her pregnancy and refuge.",
         "date": "14th of the 8th Moon",
-        "characters": ["rhaella-targaryen", "edmyn-uller", "darren-dayne"],
+        "characters": [
+          "rhaella-targaryen",
+          "edmyn-uller",
+          "darren-dayne",
+          "nymos"
+        ],
         "kind": "revelation",
         "location": "Starfall"
       },
@@ -757,7 +767,10 @@
         "title": "Saera begins the flight south",
         "description": "Saera, Alester and the white direwolf leave Winterfell upon Cloudgazer, expecting to reach King's Landing on the seventeenth.",
         "date": "15th of the 8th Moon",
-        "characters": ["saera-targaryen", "alester-dayne"],
+        "characters": [
+          "saera-targaryen",
+          "alester-dayne"
+        ],
         "kind": "travel",
         "location": "The North"
       },
@@ -765,7 +778,15 @@
         "title": "Gaelor is banished to Driftmark",
         "description": "The Small Council confronts the Mummers' Blood. Baelenys sends Gaelor to Driftmark, cancels his promised command of the City Watch, and leaves Jace to contain the anger spreading through Flea Bottom.",
         "date": "15th of the 8th Moon",
-        "characters": ["gaelor-targaryen", "baelenys-targaryen", "jacaelon-targaryen", "baelor-targaryen", "cordin-poole", "tion-lannister", "orwell-morrigen"],
+        "characters": [
+          "gaelor-targaryen",
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "baelor-targaryen",
+          "cordin-poole",
+          "tion-lannister",
+          "orwell-morrigen"
+        ],
         "kind": "politics",
         "location": "King's Landing"
       },
@@ -773,7 +794,14 @@
         "title": "Crown and Faith answer the massacre",
         "description": "Jace secures High Septon Berholt's help in calming Flea Bottom and promises Crown support for the sept's works. Ser Oswald removes the gold cloaks involved from duty and remains commander of the City Watch.",
         "date": "15th of the 8th Moon",
-        "characters": ["jacaelon-targaryen", "berholt-caswell", "tion-lannister", "oswald", "orwell-morrigen", "baelor-targaryen"],
+        "characters": [
+          "jacaelon-targaryen",
+          "berholt-caswell",
+          "tion-lannister",
+          "oswald",
+          "orwell-morrigen",
+          "baelor-targaryen"
+        ],
         "kind": "politics",
         "location": "King's Landing"
       },
@@ -781,7 +809,15 @@
         "title": "Visenor brings the plot to Highgarden",
         "description": "Visenor reveals the forged-letter plan to Renrose Tyrell. Renrose agrees to seize Gardener lands when the Crown brands the house traitorous, then privately resolves to place House Tyrell above every rival—including Visenor.",
         "date": "15th of the 8th Moon",
-        "characters": ["visenor-targaryen", "renrose-tyrell", "leo-tyrell", "martyn-mullendore", "clarisse-flowers"],
+        "characters": [
+          "visenor-targaryen",
+          "renrose-tyrell",
+          "leo-tyrell",
+          "martyn-mullendore",
+          "clarisse-flowers",
+          "liana-tyrell",
+          "renrose-tyrell-daughter"
+        ],
         "kind": "politics",
         "location": "Highgarden"
       },
@@ -789,9 +825,22 @@
         "title": "The death of Rhaella Targaryen",
         "description": "Rhaella is attacked near Boneskin's cave. The dragon burns her assailants, then obeys Rhaella's final command and gives the grievously wounded princess the death she asks for.",
         "date": "15th of the 8th Moon, 99 AC",
-        "characters": ["rhaella-targaryen"],
+        "characters": [
+          "rhaella-targaryen"
+        ],
         "kind": "death",
         "location": "Near Starfall"
+      },
+      {
+        "title": "A story at sunset",
+        "description": "Baelenys summons Jacaelon to the throne room and promises a story he once told Visenor. Its content and any succession decision remain unrevealed.",
+        "date": "15th of the 8th Moon",
+        "characters": [
+          "baelenys-targaryen",
+          "jacaelon-targaryen"
+        ],
+        "kind": "revelation",
+        "location": "King's Landing"
       }
     ]
   }
