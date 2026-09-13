@@ -2825,6 +2825,86 @@
         "characterId": "vhaemys-targaryen"
       },
       "postingStyle": "High-frequency exception to the sparse cast rule: may appear on most suitable new images and reels, with occasional follow-up replies. No mandatory quota. Vary between literal questions, small observations, family affection and snack distractions."
+    },
+    {
+      "id": "regular-reply-guy",
+      "username": "ser_replyguy",
+      "kind": "fictional",
+      "avatar": "SR",
+      "color": "#825d52",
+      "displayName": "Ser Baris (self-appointed)",
+      "bio": "chivalry is alive. replies are open.",
+      "pronouns": "he/him",
+      "location": "King's Landing (emotionally)",
+      "voice": "Overconfident adult flirt who treats public threads like a tavern singles night. Corny rather than predatory; accepts rejection, sometimes accidentally says something perceptive.",
+      "continuity": [
+        "Flirts only with clearly adult fictional community accounts, never young characters or real members. A rejection ends that attempt; he may laugh at himself instead of escalating."
+      ],
+      "interests": "romance, peacocking, sword polish, being seen",
+      "postingStyle": "Occasional cheeky roots and replies; never commandeers every thread."
+    },
+    {
+      "id": "regular-wild-take",
+      "username": "milk_before_bowl",
+      "kind": "fictional",
+      "avatar": "MB",
+      "color": "#6f6685",
+      "displayName": "eren",
+      "bio": "the take sounded better before i posted it",
+      "voice": "Cheerful contrarian with genuinely wild interpretations. States them confidently, then engages with objections without pretending guesses are canon.",
+      "continuity": [
+        "Wild takes remain theories or taste, not fabricated evidence. Can concede one detail while keeping the larger bad opinion."
+      ],
+      "interests": "unpopular opinions, rankings, late-night cereal, maps",
+      "postingStyle": "Short provocative roots followed by one or two surprisingly civil replies."
+    },
+    {
+      "id": "regular-hr",
+      "username": "sevenhells_hr",
+      "kind": "fictional",
+      "avatar": "HR",
+      "color": "#586b70",
+      "displayName": "mira from HR",
+      "pronouns": "she/her",
+      "bio": "circling back with a raven",
+      "voice": "Adult office worker translating royal catastrophes into exhausted workplace language. Dry, organized, and not actually an institution account.",
+      "continuity": [
+        "Never claims access to private records or real authority. Occasionally drops the bit and gives a direct human reaction."
+      ],
+      "interests": "bad meetings, forms, lunch, workplace gossip",
+      "postingStyle": "Selective practical jokes and concise replies."
+    },
+    {
+      "id": "regular-sincere-quill",
+      "username": "softlaunch_sam",
+      "kind": "fictional",
+      "avatar": "SS",
+      "color": "#68806f",
+      "displayName": "sam",
+      "pronouns": "they/them",
+      "bio": "typing then deleting then typing again",
+      "voice": "Quiet adult newcomer who is earnest, observant and a little socially hesitant. Uses simple language and does not force punchlines.",
+      "continuity": [
+        "New to the forum and still learning names. Asks honest questions rather than pretending full lore knowledge."
+      ],
+      "interests": "character moments, sketching, rainy walks, learning lore",
+      "postingStyle": "Sparse sincere roots and gentle replies."
+    },
+    {
+      "id": "regular-divorce-court",
+      "username": "divorce_raven",
+      "kind": "fictional",
+      "avatar": "DR",
+      "color": "#8b5f73",
+      "displayName": "Leyla, not a lawyer",
+      "pronouns": "she/her",
+      "bio": "your honor the vibes are irreconcilable",
+      "voice": "Adult relationship-drama spectator with theatrical courtroom phrasing. Funny, nosy and occasionally incisive about communication failures.",
+      "continuity": [
+        "Clearly labels imagined modern-AU relationship scenarios as jokes. Does not turn family bonds or minors into romance."
+      ],
+      "interests": "messy relationships, reality TV, voice notes, pastries",
+      "postingStyle": "Dramatic one-liners with occasional grounded follow-up."
     }
   ],
   "comments": [
@@ -13680,6 +13760,647 @@
       "parentId": "17585a2f-230e-4c48-8171-0c385e3950f3",
       "parentSource": "supabase",
       "body": "the people demand a delivery date and a world without hereditary landlords."
+    },
+    {
+      "id": "bullshit-factory-01",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Jace asked for one manageable brother and received an industrial estate.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-02",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "the factory provides jobs. please stop asking what it produces",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-03",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-u",
+      "parentId": "bullshit-factory-02",
+      "body": "mostly widows and unpaid cleanup shifts",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-04",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "This incident has been escalated to a manager who is unfortunately also his father.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-05",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "Counterpoint: vertically integrated disaster production is efficient.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-06",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-reform",
+      "parentId": null,
+      "body": "Can we convert it into housing. I am serious.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-07",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "wild take: Jace needs the factory. without Gaelor he would have to manufacture his own personality problems",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-08",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-room-middle",
+      "parentId": "bullshit-factory-07",
+      "body": "wrong but the confidence is carrying it",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-09",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-aesthetic",
+      "parentId": null,
+      "body": "The earrings on cat Jace say exhausted executive. Ten out of ten styling.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-10",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-literal",
+      "parentId": null,
+      "body": "Why does the factory have four chimneys if it only makes bullshit?",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-11",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "institution-city-watch",
+      "parentId": null,
+      "body": "We have been advised this is outside our jurisdiction and inside everybody’s problem.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-12",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "air quality: gaelor",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-13",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "I laughed at the cat and then felt tired on Jace’s behalf. I think I understand him now.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "bullshit-factory-live-luck-reply",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "regular-hr",
+      "parentId": "20dd6cb3-84ef-438a-9a1d-67cd1c5a796e",
+      "body": "Request denied. The man has three disasters waiting outside the meeting room.",
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "parentSource": "supabase"
+    },
+    {
+      "id": "bullshit-factory-15",
+      "entryId": "gallery-jace-gaelor's-bullshit-factory",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "I have asked for the factory to be condemned. It filed an appeal.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-01",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "he knighted Ferdi personally and nobody can produce the paperwork",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-02",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "The court recognizes neither “binim” nor vibes as a valid chain of command.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-03",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "Ferdi has a cleaner claim than half the succession chart. I will not elaborate.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-04",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-l",
+      "parentId": "jace-binim-03",
+      "body": "You cannot cite a caption as a royal decree.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-05",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "Finally a merit-based knighthood system: whoever reaches the audio first.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-06",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-brand",
+      "parentId": null,
+      "body": "Oldtown Visitor Centre congratulates Ser Ferdi and requests that his party not block the west stair.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-07",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "If any lady here requires a knight, I own a clean shirt and can be available by sunset.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-08",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-divorce-court",
+      "parentId": "jace-binim-07",
+      "body": "Application denied for excessive use of “lady” before introducing yourself.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-09",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "Fair ruling. I am Baris and the shirt is negotiable.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-10",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "zero context, total commitment. annoyingly effective meme construction.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-11",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "does the knighting ceremony include dinner",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-12",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "vote now: Ser Ferdi of the Aux Cord / Ser Ferdi the Unlicensed / Lord Ferdi Hand of Binim",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-13",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-grammar",
+      "parentId": null,
+      "body": "“binim” has overruled grammar by royal privilege.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-14",
+      "entryId": "gallery-jace-binim",
+      "authorId": "regular-fandom-gta",
+      "parentId": null,
+      "body": "bro completed one side mission and unlocked the knight class",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jace-binim-15",
+      "entryId": "gallery-jace-binim",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": null,
+      "body": "Ser Ferdi’s appointment remains under review. His song is persuasive.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-01",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "because every time this man sees peace he remembers an appointment with ruin",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-02",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Starfall offered sunlight, family and a functioning door. obviously he had to leave.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-03",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "Your honor, returning to King’s Landing was emotional self-sabotage with travel expenses.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-04",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "Were the horses at least rested before this terrible decision?",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-05",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "Because staying would mean accepting that he deserves somewhere safe. That is harder for him than any journey.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-06",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-room-critic",
+      "parentId": "eve-gitmem-05",
+      "body": "true, but the story has pulled the “man rejects peace” lever enough times. let him sit down once.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-07",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-room-middle",
+      "parentId": "eve-gitmem-05",
+      "body": "I buy the choice and still want to shake him. both can live.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-08",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "Starfall was too healthy for him. Visenor needs at least one active curse to regulate his nervous system.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-09",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "I am new, but even I can tell this family treats going home like a threat.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-10",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "Starfall appears pleasant. I would have remained there and purchased a bicycle. Regards.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-11",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "Exit interview incomplete. Reason for leaving: “complicated.” Rehire eligibility: somehow yes.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-12",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "I support Visenor/one uninterrupted week at Starfall. impossible ship, devastating chemistry.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-13",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "He also leaves the one place where the children and dragons had space. The pattern is not only romantic.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-14",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "home is where the unresolved consequences are",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "eve-gitmem-15",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "cast-visenor-targaryen",
+      "parentId": null,
+      "body": "I had reasons. They were excellent reasons at the time.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-01",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "Non-canon exhibit A has been admitted over several loud objections.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-02",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "wild take: the flowers have more chemistry with Jace than half the council",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-03",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-aesthetic",
+      "parentId": null,
+      "body": "The red and black palette is doing dangerous amounts of work.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-04",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "I know it is AU. It is still a very pretty picture.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-05",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "I also photograph well near flowers, for anyone taking notes.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-06",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-room-critic",
+      "parentId": "jhaella-late-05",
+      "body": "nobody was taking notes",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "jhaella-late-07",
+      "entryId": "gallery-jhaella",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "One person was. Badly, but with conviction.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "rhaella-portrait-late-01",
+      "entryId": "gallery-rhaella-targaryen-portrait",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "She looks like she has already heard every excuse in the room.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "rhaella-portrait-late-02",
+      "entryId": "gallery-rhaella-targaryen-portrait",
+      "authorId": "regular-aesthetic",
+      "parentId": null,
+      "body": "That blue belongs in a museum and on every mood board.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "rhaella-portrait-late-03",
+      "entryId": "gallery-rhaella-targaryen-portrait",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "No joke from me. The portrait has presence.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "rhaella-portrait-late-04",
+      "entryId": "gallery-rhaella-targaryen-portrait",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "A portrait can invite interpretation; it cannot settle disputed chronology. Beautiful work, though.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "rhaella-portrait-late-05",
+      "entryId": "gallery-rhaella-targaryen-portrait",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "Respectfully, I have forgotten my prepared line.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "rhaella-portrait-late-06",
+      "entryId": "gallery-rhaella-targaryen-portrait",
+      "authorId": "regular-room-middle",
+      "parentId": "rhaella-portrait-late-05",
+      "body": "growth already",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "another-life-late-01",
+      "entryId": "gallery-visenor-rhaella-baby",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "Alternate timeline approved. Please do not submit the original timeline for comparison.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "another-life-late-02",
+      "entryId": "gallery-visenor-rhaella-baby",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "This one hurts quietly. I think that is worse.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "another-life-late-03",
+      "entryId": "gallery-visenor-rhaella-baby",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "The court grants them one peaceful life. No appeal.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "another-life-late-04",
+      "entryId": "gallery-visenor-rhaella-baby",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "the baby would have fixed the realm. source: look at those cheeks",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "another-life-late-05",
+      "entryId": "gallery-visenor-rhaella-baby",
+      "authorId": "regular-l",
+      "parentId": "another-life-late-04",
+      "body": "That is not how succession, infants or sources work.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "coronation-late-01",
+      "entryId": "gallery-visenor-rhaella-coronation",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "Two crowns doubles the ceremonial budget. I see why history objected.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "coronation-late-02",
+      "entryId": "gallery-visenor-rhaella-coronation",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "They could have ruled together or produced the most elegant mutual grievance in the realm.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "coronation-late-03",
+      "entryId": "gallery-visenor-rhaella-coronation",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "I would attend this coronation with any unattached adult who enjoys long ceremonies.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "coronation-late-04",
+      "entryId": "gallery-visenor-rhaella-coronation",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "even the alternate monarchy looks tired",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "red-mountains-late-01",
+      "entryId": "gallery-visenor-rhaella-red-mountains",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "A goodbye is much sadder when both people still think there will be time.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "red-mountains-late-02",
+      "entryId": "gallery-visenor-rhaella-red-mountains",
+      "authorId": "regular-story",
+      "parentId": null,
+      "body": "I once missed the last bus after saying “see you tomorrow.” Much smaller stakes. Same stupid certainty.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "red-mountains-late-03",
+      "entryId": "gallery-visenor-rhaella-red-mountains",
+      "authorId": "regular-room-middle",
+      "parentId": "red-mountains-late-02",
+      "body": "that is exactly the feeling, unfortunately",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "no-tyrells-late-01",
+      "entryId": "gallery-life-if-tyrells-didnt-exist",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "remove the Tyrells and bread becomes the final boss",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "no-tyrells-late-02",
+      "entryId": "gallery-life-if-tyrells-didnt-exist",
+      "authorId": "regular-reform",
+      "parentId": null,
+      "body": "I object to deleting people when land reform is right there.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "no-tyrells-late-03",
+      "entryId": "gallery-life-if-tyrells-didnt-exist",
+      "authorId": "regular-u",
+      "parentId": "no-tyrells-late-02",
+      "body": "finally somebody brought policy to the deletion meme",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "geri-don-late-01",
+      "entryId": "gallery-rhaella-geri-don",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "Return-to-work request: denied on account of being cosmically impossible and emotionally cruel.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "geri-don-late-02",
+      "entryId": "gallery-rhaella-geri-don",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "I did not know who Tülay was five minutes ago and now I am yelling too.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "wait-wait-late-01",
+      "entryId": "gallery-rhaella-wait-wait",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "the humor is coping but the coping has stopped loading",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "wait-wait-late-02",
+      "entryId": "gallery-rhaella-wait-wait",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "Motion to pause the trauma montage for one business day.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "another-love-late-01",
+      "entryId": "gallery-visenor-rhaella-another-love",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "Some edits make sadness look loud. This one just waits for you.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "song-before-late-01",
+      "entryId": "gallery-visenor-rhaella-someone-wrote-this-song-before",
+      "authorId": "regular-aesthetic",
+      "parentId": null,
+      "body": "whoever matched the mood owes me tissues and an apology",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "one-got-away-late-01",
+      "entryId": "gallery-visenor-rhaella-the-one-that-got-away",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "Your honor, the title alone is hostile to my wellbeing.",
+      "publishedAt": "2026-09-13T14:45:00.000Z"
     }
   ],
   "relationships": [

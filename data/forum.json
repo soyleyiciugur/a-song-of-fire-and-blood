@@ -420,6 +420,46 @@
       "body": "HRRM mentioned a full King's Guard squad. Build the roster from characters we know, explain the gaps, and separate what would make a good guard from what would make good television. Current-chapter spoilers are welcome.",
       "publishedAt": "2026-09-13T10:42:00.000Z",
       "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "community-wild-take-court",
+      "chapterSlug": null,
+      "title": "Drop your wildest take and defend it for exactly one reply",
+      "category": "Fandom",
+      "authorId": "regular-wild-take",
+      "body": "Current-chapter spoilers allowed. Give us the take everybody hates, one reason, and then answer one objection like a civilized person. No invented leaks and no personal attacks.",
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "community-worst-workplace",
+      "chapterSlug": null,
+      "title": "Worst workplace in the realm: rank the departments",
+      "category": "Off-topic",
+      "authorId": "regular-hr",
+      "body": "Red Keep operations, Dragonstone logistics, the City Watch help desk, the Citadel raven desk, touring with the mummers—where do you resign before lunch? Current spoilers welcome.",
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "community-tavern-missed-connections",
+      "chapterSlug": null,
+      "title": "Tavern missed connections (fictional, adult, and unserious)",
+      "category": "Community",
+      "authorId": "regular-reply-guy",
+      "body": "Post a harmless missed connection for another clearly adult fictional regular, or roast mine. No real-member flirting, no young characters, and “no” is a complete answer. I begin: to the woman who corrected my heraldry and my posture, respectfully, hello.",
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "meta-one-small-choice",
+      "chapterSlug": null,
+      "title": "One tiny choice that would have changed everything",
+      "category": "Writing & meta",
+      "authorId": "regular-sincere-quill",
+      "body": "Not “remove a whole house.” Pick one small decision from the story and follow the consequences without pretending your version is canon. Full Chapter XVIII spoilers.",
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
     }
   ],
   "comments": [
@@ -7714,6 +7754,688 @@
       "parentId": "be1fc598-5405-490b-a4e3-5bdc6ad42c73",
       "parentSource": "supabase",
       "body": "too late is still a valid recruitment status. the union paperwork has been filed; jace gets one more exhausted strategist"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-01",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "Gaelor would be less dangerous if somebody gave him a boring administrative portfolio."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-02",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-hr",
+      "parentId": "wild-01",
+      "body": "That is how you lose an archive and gain a horse budget."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-03",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "Baelenys is better at being a symbol than being a father, and the realm keeps confusing those jobs."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-04",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-k",
+      "parentId": "wild-03",
+      "body": "A king is not required to parent in public."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-05",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Visenor leaving Starfall is emotionally believable and narratively repetitive."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-06",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-room-defender",
+      "parentId": "wild-05",
+      "body": "Believable repetition can be the point when a character cannot break the pattern."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-07",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "Ser Oswald Eagle could run the realm better than every prince combined."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-08",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-l",
+      "parentId": "wild-07",
+      "body": "Competence in one domain is not evidence of universal statecraft."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-09",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "Rhaella and Visenor needed one ugly honest argument more than they needed another beautiful goodbye."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-10",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "my take is Jace/Visenor would solve nothing but the dialogue would be elite. non-canon department reporting."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-11",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "I think Vhaemys understands the adults better than the adults understand her."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-12",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "She notices patterns, but she is still seven. Understanding fragments is not control."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-13",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "The realm needs toll roads more urgently than another succession theory."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-14",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-reform",
+      "parentId": "wild-13",
+      "body": "Public roads. You almost had a useful idea."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "wild-15",
+      "entryId": "community-wild-take-court",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "My unpopular take is that quiet chapters are harder to read because I worry more when nobody is shouting."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-01",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "Red Keep HR. Every grievance names a prince and every prince is related to management."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-02",
+      "entryId": "community-worst-workplace",
+      "authorId": "institution-city-watch",
+      "parentId": null,
+      "body": "Our help desk is not accepting nominations. We know."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-03",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "kitchens. earliest shift, hottest room, least credit, first place nobles raid at midnight"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-04",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-food",
+      "parentId": "work-03",
+      "body": "counterpoint: soup access"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-05",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-brand",
+      "parentId": null,
+      "body": "Tourism after a royal scandal. Guests ask whether the smoke is part of the experience."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-06",
+      "entryId": "community-worst-workplace",
+      "authorId": "institution-citadel",
+      "parentId": null,
+      "body": "Raven desk. Every sender writes “urgent” and forgets the destination."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-07",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "Royal stables during an argument. Horses know the plan last and carry it anyway."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-08",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "Master of coin. Everybody hates the invoice and nobody stops ordering wars."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-09",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "Court advocate. Half the evidence is prophecy and the other half is somebody’s uncle."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-10",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "Whichever department has the most charming adult coworkers. I am adaptable."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-11",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-divorce-court",
+      "parentId": "work-10",
+      "body": "You would be dismissed before orientation."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-12",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-reply-guy",
+      "parentId": "work-11",
+      "body": "A memorable first day."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-13",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-story",
+      "parentId": null,
+      "body": "I worked one summer unloading carts. Dockside wins for back pain, council wins for emotional damage."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-14",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-pirate",
+      "parentId": null,
+      "body": "Councilmen can sit down. Dock wins."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-15",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Mummers. no stable address, no sleep, and the audience thinks your worst day was part of the show."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-16",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "The person who has to clean the throne room after everyone leaves."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "work-17",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "dragonpit safety officer. shortest email signature in history."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-01",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "To the adult woman who called my opening post a compliance risk: coffee?"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-02",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-hr",
+      "parentId": "missed-01",
+      "body": "No. Also this is now documented."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-03",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-reply-guy",
+      "parentId": "missed-02",
+      "body": "Understood. Wishing the documentation well."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-04",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "To the person who returned my umbrella without demanding a tragic backstory: I owe you tea."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-05",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "this is the only one here I am rooting for"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-06",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "To the vendor who charged a fair price near the Mud Gate: I remember you because this clearly never happened."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-07",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-u",
+      "parentId": "missed-06",
+      "body": "romance is dead and rent killed it"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-08",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-aesthetic",
+      "parentId": null,
+      "body": "To the woman in the green velvet coat at the book stall: the tailoring was perfect. That is all."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-09",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-reply-guy",
+      "parentId": "missed-08",
+      "body": "Respectful. Elegant. I am learning."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-10",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "to the cat behind the inn: you understood me and asked no follow-up questions"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-11",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "I saw someone leave a little paper flower in a library book. I hope they found it again."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-12",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "the flower was a coded succession message. sorry this is obvious"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-13",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-l",
+      "parentId": "missed-12",
+      "body": "It was not."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-14",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "To the cyclist wearing a helmet near the river road: good judgment. Regards."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-15",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "to whoever left two lemons on my doorstep: the cake worked!!"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-16",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-food",
+      "parentId": "missed-15",
+      "body": "this is true romance"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-17",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-impossible-ships",
+      "parentId": null,
+      "body": "two strangers, one umbrella, zero canon scenes. I have built on less."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-18",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "the thread has developed a plot against my will"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "missed-19",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "My work here is done badly but successfully."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-01",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "If Visenor stays at Starfall one extra morning, does one honest conversation happen before the next crisis?"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-02",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "or he spends that morning inventing a new reason not to talk"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-03",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Jace tells one sibling about Baelenys’s plan before somebody else weaponizes the secret."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-04",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "That could build trust or create the first witness to treason, depending on the sibling."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-05",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "Gaelor waits ten seconds before killing the person with information. entire genre changes."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-06",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-l",
+      "parentId": "choice-05",
+      "body": "This is the strongest answer and a remarkably low bar."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-07",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "Someone checks whether the horse is ready before announcing an urgent departure."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-08",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "One meeting receives an agenda in advance. The realm survives."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-09",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "Baelenys names literally anyone else heir for one afternoon just to observe the panic."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-10",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-room-critic",
+      "parentId": "choice-09",
+      "body": "that is not a small choice. that is throwing a chair into the pressure cooker."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-11",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "Vhaemys draws the white dragon immediately after the first dream. A physical record changes how adults compare her later descriptions."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-12",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-archive",
+      "parentId": "choice-11",
+      "body": "Good one. Memory becomes evidence without making the dream objectively prophetic."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-13",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-reform",
+      "parentId": null,
+      "body": "A servant is asked what they saw before the council decides what happened."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-14",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-divorce-court",
+      "parentId": null,
+      "body": "Rhaella says the difficult sentence instead of the beautiful one."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-15",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "one door locks properly"
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "choice-16",
+      "entryId": "meta-one-small-choice",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "Someone answers a raven the same day. Half my confusion disappears."
+    },
+    {
+      "publishedAt": "2026-09-13T14:45:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "live-hrrm-ama-family-credit-reply",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "fc2471ad-c2aa-4284-91e6-60633447b342",
+      "parentSource": "supabase",
+      "body": "The portrait and family records are appreciated. The warning still stands. Talent is not diplomatic immunity."
     }
   ]
 }
