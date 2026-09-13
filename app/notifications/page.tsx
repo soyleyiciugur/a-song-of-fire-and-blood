@@ -1,5 +1,6 @@
 "use client";
 
+import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
@@ -89,7 +90,7 @@ function Notifications() {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
         Back to Home
       </Link>
-      <h1 className="realm-page-title">Notifications</h1>
+      <h1 className="realm-page-title">Notifications<PageTitleIcon name="notifications" /></h1>
       <p className={styles.intro}>Replies that concern you, plus the wider conversation across the realm.</p>
       <nav className={styles.tabs} aria-label="Notification sections">
         <button type="button" aria-pressed={filter === "for-you"} onClick={() => { setFilter("for-you"); setLimit(30); }}>For you</button>

@@ -46,7 +46,7 @@ export default function Timeline() {
 
         <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Chronicle sections">
           <Link aria-current="page" className={styles.activeTab} href="/timeline">Timeline</Link>
-          <Link href="/chronicle">Annals</Link>
+          <Link href="/chronicle">Annals</Link><Link href="/calendar">Calendar</Link>
           <Link href="/wars">The Bloodshed</Link>
         </nav>
 

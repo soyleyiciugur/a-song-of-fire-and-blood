@@ -2,6 +2,8 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Added selective fictional replies to two new HRRM AMA answers in Taverns.",
+      "Added canonical height details for twenty characters across the character archive.",
       "Synchronized notification read state across signed-in desktop and mobile sessions, and matched plain mobile navigation links to the grouped menu style.",
       "Added a single community sync command that generates reaction migrations and pushes them to the linked Supabase project.",
       "Refined navbar separators and utility icons, moved The Raven's Eye beside the card game, and corrected the Direct Raven mark's sizing.",
@@ -47,7 +49,13 @@
       "Added an animated hamburger beside the collapsed desktop Targaryen mark and refined the mobile menu control.",
       "Matched profile tabs, guestbook counters, form controls, avatars and borders to the selected profile accent.",
       "Unified Direct Raven icons around the outlined raven and its eye, and refined the Raven?s Eye mark with a raven-like eyelid and round pupil.",
-      "Refined desktop navigation separators into thin, taller lines using the site?s muted gold, without glow."
+      "Refined desktop navigation separators into thin, taller lines using the site?s muted gold, without glow.",
+      "Replaced The Realm Today with a thirty-day moon calendar, highlighting the current story date and limiting its events to namedays, feasts, weddings, battles, trials and tourneys.",
+      "Added Calendar to the Chronicle menu and tabs, with moon and year navigation, event details, upcoming namedays and events, and Aegon?s Conquest at 1/1/0 AC.",
+      "Connected the full timeline to the calendar, preserving multi-day events, historical flashbacks and approximate dates without inventing exact days.",
+      "Restored desktop navigation dropdowns for hover, click and keyboard use, and made the gold separators consistently thin.",
+      "Restyled the navigation drawer with Chronicle typography and a full-screen backdrop beneath its controls.",
+      "Added matching decorative utility icons to page titles and removed the redundant day count from the miniature calendar."
     ],
     "features": [],
     "links": {

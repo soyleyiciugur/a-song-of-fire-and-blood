@@ -3,6 +3,7 @@ import type { MapEvent } from "@/types/map";
 import charactersData from "@/data/characters/characters.json";
 import eventsData from "@/data/events.json";
 import { daysUntilNextNameday, type WorldDate } from "@/lib/age";
+import { CALENDAR_TYPES } from "@/lib/calendar";
 
 const DAYS_PER_MOON = 30;
 const YEAR_LENGTH = 12 * DAYS_PER_MOON;
@@ -13,6 +14,7 @@ export type UpcomingEventType =
   | "wedding"
   | "battle"
   | "trial"
+  | "tournament"
   | "other";
 
 export interface UpcomingEvent {
@@ -102,7 +104,7 @@ export function getUpcomingEvents(
 
   const calendarEvents: UpcomingEvent[] = (eventsData as any[])
     .filter((event) =>
-      isStillUpcoming(event.day, event.moon, event.year, worldDate)
+      CALENDAR_TYPES.includes(event.type) && isStillUpcoming(event.day, event.moon, event.year, worldDate)
     )
     .map((event) => ({
       title: event.title,
@@ -111,7 +113,9 @@ export function getUpcomingEvents(
       moon: event.moon,
       year: event.year,
       description: event.description,
-      daysUntil: daysUntil(event.day, event.moon, worldDate),
+      daysUntil: event.year === undefined ? daysUntil(event.day, event.moon, worldDate)
+        : (event.year - worldDate.year) * YEAR_LENGTH + dayOfYear(event.moon, event.day) - dayOfYear(worldDate.moon, worldDate.day),
+      href: event.chapterSlug ? `/chapters/${event.chapterSlug}` : undefined,
     }));
 
   return [...namedayEvents, ...calendarEvents]

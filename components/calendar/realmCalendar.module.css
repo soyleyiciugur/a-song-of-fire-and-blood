@@ -1,0 +1,62 @@
+.calendar{min-width:0;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);color:var(--text);padding:28px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.eyebrow{color:var(--muted);font:600 10px var(--font-geist);letter-spacing:.14em;text-transform:uppercase}
+.header h2{margin:6px 0 0;font:500 32px var(--font-hotd);color:var(--gold)}
+.header a{color:inherit;text-decoration:none}
+.presentDate{margin:16px 0 24px;font:14px/1.5 var(--font-geist);color:var(--text)}
+.presentDate>span{display:block;margin-top:4px;font-size:10px;letter-spacing:.06em;color:var(--muted)}
+.todayButton,.controls button{display:grid;place-items:center;min-width:36px;min-height:36px;box-sizing:border-box;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--gold);cursor:pointer}
+.todayButton{padding:8px 12px;font:11px var(--font-geist)}
+.calendar button:hover{background:var(--surface-hover);border-color:color-mix(in srgb,var(--gold) 55%,var(--border))}
+.calendar button:disabled{opacity:.25;cursor:default}
+.calendar button:focus-visible,.calendar a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.controls{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid var(--border)}
+.moonControl,.yearControl{display:flex;align-items:center;gap:6px;min-width:0}
+.select{min-width:0;width:136px}
+.yearControl .select{width:106px}
+.select>div{display:block;min-width:0;width:100%}
+.select button{width:100%;display:flex;justify-content:space-between;font:12px var(--font-geist);color:var(--text);padding:8px 10px}
+.select input{width:100%;box-sizing:border-box;min-width:0}
+.moonHeading{display:flex;justify-content:space-between;gap:10px;padding:0 0 12px;font:11px var(--font-geist);color:var(--muted)}
+.moonHeading>span:first-child{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.day{display:flex;flex-direction:column;align-items:flex-start;gap:7px;position:relative;min-width:0;min-height:106px;border:0;border-radius:0;padding:12px;background:var(--surface);color:var(--text);text-align:left;cursor:pointer;transition:background .15s ease,box-shadow .15s ease}
+.blankDay{background:color-mix(in srgb,var(--surface) 55%,var(--background))}
+.dayNumber{display:grid;place-items:center;min-width:25px;min-height:25px;font:500 14px var(--font-geist);border-radius:50%}
+.day[aria-current=date] .dayNumber{background:var(--gold);color:var(--background);font-weight:700}
+.day[aria-pressed=true]{background:color-mix(in srgb,var(--gold) 7%,var(--surface));box-shadow:inset 0 0 0 1px var(--gold)}
+.calendar .day:focus-visible{outline-offset:-3px;z-index:1}
+.dots{display:flex;align-items:center;gap:3px;min-height:5px;line-height:5px;font-size:8px}
+.dots i,.legend i{display:inline-block;width:4px;height:4px;flex:none;border-radius:50%;background:var(--gold)}
+.dots i[data-kind=nameday],.legend i[data-kind=nameday]{background:var(--text)}
+.dots i[data-kind=battle],.dots i[data-kind=trial],.legend i[data-kind=battle]{background:#b85d56}
+.dayCaption{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:10px/1.4 var(--font-geist);color:var(--muted);overflow-wrap:anywhere}
+.dayCaption small{display:block;color:var(--gold);font-size:9px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;padding:14px 0;color:var(--muted);font:10px var(--font-geist)}
+.legend>span{display:flex;align-items:center;gap:7px}
+.details,.approximate{border-top:1px solid var(--border);padding-top:20px;margin-top:6px}
+.details h3,.approximate h3{margin:0 0 16px;font:500 21px var(--font-hotd);color:var(--gold)}
+.event{padding:16px 0;border-top:1px solid var(--border)}
+.eventMeta{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted);font:10px var(--font-geist)}
+.eventType{color:var(--gold);text-transform:uppercase;letter-spacing:.08em}
+.event h4{margin:8px 0;font:500 22px/1.25 var(--font-hotd);overflow-wrap:anywhere}
+.event p{margin:10px 0;color:var(--muted);font:13px/1.7 var(--font-geist)}
+.event small{color:var(--muted);font:10px var(--font-geist)}
+.event a,.fullLink{color:var(--gold);font:11px/1.5 var(--font-geist);text-decoration:none}
+.event a:hover,.fullLink:hover{text-decoration:underline}
+.empty{color:var(--muted);font:12px/1.6 var(--font-geist)}
+.fullLink{display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:16px;margin-top:12px}
+.compact{padding:20px}
+.compact .header h2{font-size:27px}
+.compact .presentDate{font-size:12px;margin-bottom:16px}
+.compact .controls{flex-direction:column;gap:8px;padding:14px 0}
+.compact .moonControl,.compact .yearControl{justify-content:space-between}
+.compact .select{width:auto;flex:1}
+.compact .day{align-items:center;min-height:46px;padding:4px 1px;gap:3px}
+.compact .dayNumber{font-size:11px;min-width:22px;min-height:22px}
+.compact .legend{gap:12px;font-size:9px}
+.compact .details h3{font-size:18px}
+.compact .event h4{font-size:19px}
+.compact .event p{font-size:12px}
+@media(max-width:680px){.calendar{padding:18px}.header h2{font-size:27px}.controls{flex-wrap:wrap;gap:10px}.moonControl,.yearControl{flex:1 1 200px}.select,.yearControl .select{width:auto;flex:1}.day{min-height:68px;padding:7px 3px;align-items:center}.dayCaption{display:none}.dayNumber{font-size:12px}.event h4{font-size:21px}.presentDate{font-size:12px}.compact{padding:16px}.compact .moonControl,.compact .yearControl{flex:initial}}
+@media(prefers-reduced-motion:reduce){.day{transition:none}}

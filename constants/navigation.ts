@@ -44,6 +44,7 @@ export const NAV_ITEMS: NavigationEntry[] = [
   { label: "The Chronicle", href: "/chronicle", items: [
     { label: "Timeline", href: "/timeline" },
     { label: "Annals", href: "/chronicle" },
+    { label: "Calendar", href: "/calendar" },
     { label: "The Bloodshed", href: "/wars" },
   ] },
   { label: "The Collection", href: "/collection", items: [

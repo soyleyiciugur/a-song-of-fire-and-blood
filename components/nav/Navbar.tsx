@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar";
 import AccountControl from "./AccountControl";
 import DirectRavenNavButton from "@/components/direct-raven/DirectRavenNavButton";
 import NotificationNavButton from "./NotificationNavButton";
+import UtilityIcon from "./UtilityIcon";
 
 import styles from "./navbar.module.css";
 
@@ -26,6 +27,7 @@ export default function Navbar() {
   }, []);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
   const pathname = usePathname();
   const [navExpanded, setNavExpanded] = useState(true);
@@ -42,7 +44,21 @@ export default function Navbar() {
   useEffect(() => {
     setMenuOpen(false);
     setOpenGroup(null);
+    setHoveredGroup(null);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!openGroup && !hoveredGroup) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        headerRef.current?.querySelector<HTMLButtonElement>('[data-group-toggle][aria-expanded="true"]')?.focus();
+        setOpenGroup(null);
+        setHoveredGroup(null);
+      }
+    };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [openGroup, hoveredGroup]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -65,6 +81,7 @@ export default function Navbar() {
       className={[
         styles.banner,
         styles.playBanner,
+        menuOpen ? styles.drawerOpen : "",
         !navExpanded
           ? styles.playBannerCollapsed
           : "",
@@ -115,6 +132,7 @@ export default function Navbar() {
             setNavExpanded((expanded) => !expanded);
             setMenuOpen(false);
             setOpenGroup(null);
+            setHoveredGroup(null);
           }}
         >
           <span
@@ -137,8 +155,9 @@ export default function Navbar() {
               <div
                 key={item.label}
                 className={styles.navGroup}
-                onMouseEnter={() => setOpenGroup(item.label)}
-                onMouseLeave={() => setOpenGroup(null)}
+                onMouseEnter={() => { setHoveredGroup(item.label); setOpenGroup(null); }}
+                onMouseLeave={() => { setHoveredGroup(null); setOpenGroup(null); }}
+                onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) { setHoveredGroup(null); setOpenGroup(null); } }}
               >
                 <Link
                   href={item.href || "#"}
@@ -155,19 +174,21 @@ export default function Navbar() {
                 <button
                   type="button"
                   className={styles.navGroupCaretBtn}
-                  aria-expanded={openGroup === item.label}
+                  data-group-toggle
+                  aria-expanded={openGroup === item.label || hoveredGroup === item.label}
                   onClick={(e) => {
                     e.preventDefault();
+                    setHoveredGroup(null);
                     setOpenGroup((current) => (current === item.label ? null : item.label));
                   }}
                   aria-label={`Toggle ${item.label} menu`}
                 >
                   <span className={styles.navGroupCaret} aria-hidden="true">
-                    ▾
+                    <svg viewBox="0 0 12 8" fill="none"><path d="m2 2 4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>
                 </button>
 
-                {openGroup === item.label && (
+                {(openGroup === item.label || hoveredGroup === item.label) && (
                   <div className={styles.navGroupMenu}>
                     {item.items.map((sub) => (
                       <Link
@@ -196,21 +217,13 @@ export default function Navbar() {
 
         <SearchBar />
         <Link href="/ravens-eye" className={`${styles.notificationsButton} ${styles.ravenEyeButton}`} aria-label="The Raven's Eye" title="The Raven's Eye">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M2.5 12.5 6 9.2C8.1 7.3 10.3 6.7 12.5 7c3.7.4 6.5 2.6 9 5.1-2.9 1.3-5 4.8-9.1 4.9-4 .1-7.4-2.1-9.9-4.5Z" fill="currentColor" fillOpacity=".1" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-            <circle cx="12.1" cy="11.9" r="3.25" fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="12.1" cy="11.9" r="1.25" fill="currentColor" />
-          </svg>
+          <UtilityIcon name="eye" size={19} />
         </Link>
         <Link href="/cards" className={`${styles.notificationsButton} ${styles.gameButton}`} aria-label="The Great Game" title="The Great Game">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="5.5" y="3.5" width="13" height="17" rx="1.8" fill="currentColor" fillOpacity=".1" stroke="currentColor" strokeWidth="1.5" transform="rotate(8 12 12)" />
-            <rect x="4.5" y="4.5" width="13" height="17" rx="1.8" fill="var(--surface)" stroke="currentColor" strokeWidth="1.5" transform="rotate(-8 12 12)" />
-            <path d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z" fill="currentColor" transform="rotate(-8 12 12) translate(11 13) scale(.4) translate(-22 -22)" />
-          </svg>
+          <UtilityIcon name="cards" size={19} />
         </Link>
         <Link href="/forum" className={`${styles.notificationsButton} ${styles.forumButton}`} aria-label="Taverns" title="Taverns">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12v12H5Z" fill="currentColor" fillOpacity=".1" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/><path d="M17 9h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2M5 8a2 2 0 0 1 0-4 2.5 2.5 0 0 1 4-1 3 3 0 0 1 5 1 2 2 0 1 1 3 4M9 11v6m4-6v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <UtilityIcon name="taverns" size={19} />
         </Link>
         <DirectRavenNavButton />
         <NotificationNavButton />
@@ -254,7 +267,7 @@ export default function Navbar() {
                   aria-label={`Toggle ${item.label} menu`}
                 >
                   <span className={styles.navGroupCaret} aria-hidden="true">
-                    {openMobileGroup === item.label ? "▴" : "▾"}
+                    <svg viewBox="0 0 12 8" fill="none"><path d="m2 2 4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>
                 </button>
               </div>

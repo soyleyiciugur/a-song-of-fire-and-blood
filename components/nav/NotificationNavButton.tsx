@@ -1,5 +1,6 @@
 "use client";
 
+import UtilityIcon from "./UtilityIcon";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -58,7 +59,7 @@ export default function NotificationNavButton() {
 
   return (
     <Link href="/notifications" className={styles.notificationsButton} aria-label={unread ? `Notifications, ${unread} new` : "Notifications"} title="Notifications">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      <UtilityIcon name="notifications" />
       {unread > 0 && <span className={styles.notificationDot} aria-hidden="true">{unread > 99 ? "99+" : unread}</span>}
     </Link>
   );

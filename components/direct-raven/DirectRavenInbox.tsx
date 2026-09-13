@@ -1,5 +1,6 @@
 "use client";
 
+import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -11,7 +12,7 @@ import RavenSoundToggle from "./RavenSoundToggle";
 import NewRaven from "./NewRaven";
 import NewGuildParley from "./NewGuildParley";
 import GuildAvatar from "./GuildAvatar";
-import RavenIcon from "./RavenIcon";
+
 import { RavenMessagePreview } from "./RavenMessageContent";
 
 const time = (value: string) =>
@@ -88,7 +89,7 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
     <aside className={styles.inbox} aria-label="Ravens and Guild Parleys">
       <div className={styles.inboxHeader}>
         <p className={styles.kicker}>Private correspondence</p>
-        <h1><RavenIcon /> Direct Raven</h1>
+        <h1>Direct Raven<PageTitleIcon name="raven" /></h1>
         <RavenSoundToggle />
         <div className={styles.inboxCreateActions}><NewRaven /><NewGuildParley /></div>
         <input

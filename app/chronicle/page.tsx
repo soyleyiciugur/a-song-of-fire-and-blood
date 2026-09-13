@@ -15,6 +15,7 @@ export default function ChroniclePage() {
         <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Chronicle sections">
           <Link href="/timeline">Timeline</Link>
           <Link aria-current="page" className={styles.activeTab} href="/chronicle">Annals</Link>
+          <Link href="/calendar">Calendar</Link>
           <Link href="/wars">The Bloodshed</Link>
         </nav>
         <h2 className={styles.sectionTitle}>Annals</h2>

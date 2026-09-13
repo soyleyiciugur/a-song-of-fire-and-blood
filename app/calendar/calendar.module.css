@@ -1,0 +1,17 @@
+.container{max-width:1200px;margin:auto}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.upcoming{min-width:0;padding:24px 20px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface)}
+.eyebrow{font:600 10px var(--font-geist);letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.upcoming h2{margin:7px 0 10px;color:var(--gold);font:500 29px var(--font-hotd)}
+.intro{margin:0 0 22px;color:var(--muted);font:11px/1.6 var(--font-geist)}
+.event{display:flex;gap:12px;align-items:flex-start;padding:17px 0;border-top:1px solid var(--border);text-decoration:none;color:var(--text)}
+.dateTile{display:flex;flex-direction:column;align-items:center;flex:0 0 43px;border:1px solid color-mix(in srgb,var(--gold) 35%,var(--border));border-radius:5px;padding:7px 0;color:var(--gold)}
+.dateTile strong{font:500 22px var(--font-hotd)}
+.dateTile small{font:8px var(--font-geist);margin-top:4px}
+.eventBody{display:flex;flex-direction:column;gap:7px;min-width:0}
+.eventBody>small{color:var(--gold);font:9px/1.5 var(--font-geist)}
+.eventBody>strong{font:500 18px/1.3 var(--font-hotd);overflow-wrap:anywhere}
+.eventBody>span,.eventBody small span{color:var(--muted);font:9px/1.5 var(--font-geist)}
+.event:hover strong{color:var(--gold)}
+.event:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media(max-width:1050px){.layout{grid-template-columns:minmax(0,1fr)}.upcoming{padding:22px}.event{padding:16px 0}}

@@ -1,5 +1,6 @@
 "use client";
 
+import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import Link from "next/link";
 import {
   useState,
@@ -157,7 +158,7 @@ export default function CardsPage() {
               styles.headerTitle
             }
           >
-            The Great Game
+            The Great Game<PageTitleIcon name="cards" />
           </h1>
         </div>
 

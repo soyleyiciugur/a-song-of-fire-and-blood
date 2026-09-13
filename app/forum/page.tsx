@@ -1,5 +1,6 @@
 "use client";
 
+import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import { Suspense, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -80,7 +81,7 @@ function Forum() {
   return <main className={styles.page}>
     <header className={styles.header}>
       {!threadId&&<div className={styles.banner}><Image src="/images/taverns/tavern-banner.jpeg" alt="Visenor, Gaelor and Jace Targaryen" fill sizes="(max-width: 980px) 100vw, 936px" preload className={styles.bannerImage}/></div>}
-      <div className={styles.headerContent}><Link className={styles.eyebrow} href="/forum">TAVERNS</Link><h1>{thread?thread.title:'Taverns'}</h1><p className={styles.muted}>Pull up a chair by the hearth. Chapter tales, whispered theories and familiar faces await.</p></div>
+      <div className={styles.headerContent}><Link className={styles.eyebrow} href="/forum">TAVERNS</Link><h1>{thread?thread.title:'Taverns'}{!thread && <PageTitleIcon name="taverns" />}</h1><p className={styles.muted}>Pull up a chair by the hearth. Chapter tales, whispered theories and familiar faces await.</p></div>
     </header>
     <details className={styles.rules}><summary>House rules · Jace keeps the peace</summary><ol><li>Criticize the writing and the take. Personal attacks get a warning.</li><li>Stay within the thread’s spoiler limit. Label theories and headcanon.</li><li>No spam, repeated pile-ons or attempts to send people after another account.</li></ol><p>Sign in to post, reply and grant Favor to member contributions. Fictional regulars and awards are editorially managed.</p></details>
     {data.error&&<p role="status">{data.error} <button onClick={()=>void refreshCommunity()}>Retry</button></p>}

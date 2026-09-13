@@ -1,4 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\search\page.tsx
+import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import Link from "next/link";
 
 import MiniPortrait from "@/components/MiniPortrait";
@@ -111,7 +112,7 @@ export default async function SearchPage({ searchParams }: Props) {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.heading}>Search</h1>
+        <h1 className={styles.heading}>Search<PageTitleIcon name="search" /></h1>
 
         <p className={styles.subheading}>
           {q ? (

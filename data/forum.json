@@ -6293,6 +6293,30 @@
       "awards": []
     },
     {
+      "id": "live-hrrm-ama-tears-club",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-club",
+      "parentId": "62fefc41-82ab-4218-b069-01a186d7dfc4",
+      "parentSource": "supabase",
+      "body": "I did, too. Chapter XVII has that particular kind of sorrow where everyone keeps moving because they have no other choice. I had to put the book down for a minute.",
+      "publishedAt": "2026-09-13T09:12:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "live-hrrm-ama-blindside-critic",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-room-critic",
+      "parentId": "ab84cb54-ace2-4c8e-929c-908dd8f6fc97",
+      "parentSource": "supabase",
+      "body": "blindside works when the groundwork is there. otherwise it is just the story throwing a chair at me and calling it structure.",
+      "publishedAt": "2026-09-13T09:38:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
       "id": "live-hrrm-ama-players-gaelor-followup",
       "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
       "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",

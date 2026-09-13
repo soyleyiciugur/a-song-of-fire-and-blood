@@ -1,6 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\nav\SearchBar.tsx
 "use client";
 
+import UtilityIcon from "./UtilityIcon";
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -55,7 +56,7 @@ export default function SearchBar() {
 
   return (
     <div className={styles.searchWrap}>
-      <svg className={styles.searchIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5"/><path d="m14.24 14.24 5.76 5.76" stroke="currentColor" strokeWidth="1.5"/></svg>
+      <UtilityIcon name="search" className={styles.searchIcon} />
       <input
         ref={inputRef}
         type="text"
