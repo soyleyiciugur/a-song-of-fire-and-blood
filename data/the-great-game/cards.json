@@ -1792,5 +1792,978 @@
     ],
     "deckable": false,
     "special": "royal-favor"
+  },
+  {
+    "id": "benjen-stark",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Benjen Stark",
+    "cost": 3,
+    "power": 4,
+    "influence": 3,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "winter-s-welcome",
+        "name": "Winter's Welcome",
+        "trigger": "arrival",
+        "text": "When Benjen arrives, another Stark Character gains +1 Power this turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Young Wolf",
+    "linkedCharacterId": "benjen-stark",
+    "houseId": "stark"
+  },
+  {
+    "id": "mother-marya",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Mother Marya",
+    "cost": 3,
+    "power": 0,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-moment-of-sight",
+        "name": "A Moment of Sight",
+        "trigger": "arrival",
+        "text": "Look at the top 3 cards of your deck. Put one into your hand and the rest back in any order."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Keeper of the Glass Flower",
+    "linkedCharacterId": "mother-marya"
+  },
+  {
+    "id": "annara-celtigar",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Annara Celtigar",
+    "cost": 2,
+    "power": 1,
+    "influence": 3,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-friend-summoned",
+        "name": "A Friend Summoned",
+        "trigger": "arrival",
+        "text": "If Vhaemys Targaryen is in play, both Characters gain +1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Dragonet's Friend",
+    "linkedCharacterId": "annara-celtigar",
+    "houseId": "celtigar"
+  },
+  {
+    "id": "daria-sand",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Daria Sand",
+    "cost": 3,
+    "power": 2,
+    "influence": 5,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "seen-from-the-doorway",
+        "name": "Seen From the Doorway",
+        "trigger": "arrival",
+        "text": "Reveal one random card from an opponent's hand."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Quiet Observer",
+    "linkedCharacterId": "daria-sand"
+  },
+  {
+    "id": "myles-mooton",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Myles Mooton",
+    "cost": 3,
+    "power": 4,
+    "influence": 2,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "pull-him-clear",
+        "name": "Pull Him Clear",
+        "trigger": "arrival",
+        "text": "Prevent 2 damage to another allied Character."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "The King's Companion",
+    "linkedCharacterId": "myles-mooton",
+    "houseId": "mooton"
+  },
+  {
+    "id": "grance-morrigen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Grance Morrigen",
+    "cost": 3,
+    "power": 4,
+    "influence": 2,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "hold-fast",
+        "name": "Hold Fast",
+        "trigger": "arrival",
+        "text": "Grance gains +2 Health while defending."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Cloudpass Veteran",
+    "linkedCharacterId": "grance-morrigen",
+    "houseId": "morrigen"
+  },
+  {
+    "id": "drack-harlaw",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Drack Harlaw",
+    "cost": 4,
+    "power": 6,
+    "influence": 1,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "pay-the-iron-price",
+        "name": "Pay the Iron Price",
+        "trigger": "arrival",
+        "text": "After Drack wins a Conflict, his Ruler gains 1 Command."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Ironborn Reaver",
+    "linkedCharacterId": "drack-harlaw",
+    "houseId": "harlaw"
+  },
+  {
+    "id": "zekar-alasyr",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Zekar Alasyr",
+    "cost": 3,
+    "power": 2,
+    "influence": 5,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "read-the-crowd",
+        "name": "Read the Crowd",
+        "trigger": "arrival",
+        "text": "After an opponent plays an Event, Zekar gains +2 Influence this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Master of Improvisation",
+    "linkedCharacterId": "zekar-alasyr"
+  },
+  {
+    "id": "mydan-gerren",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Mydan Gerren",
+    "cost": 3,
+    "power": 2,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-stage-remains",
+        "name": "The Stage Remains",
+        "trigger": "arrival",
+        "text": "When another allied Character falls, draw 1 card."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Last of the Motley Three",
+    "linkedCharacterId": "mydan-gerren"
+  },
+  {
+    "id": "merryn-whitespring",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Merryn Whitespring",
+    "cost": 3,
+    "power": 2,
+    "influence": 5,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "perfect-timing",
+        "name": "Perfect Timing",
+        "trigger": "arrival",
+        "text": "The next Event played by Merryn's Ruler costs 1 less Command."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Master of Stagecraft",
+    "linkedCharacterId": "merryn-whitespring"
+  },
+  {
+    "id": "lucas-corbray",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ser Lucas Corbray",
+    "cost": 5,
+    "power": 7,
+    "influence": 3,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "quiet-protection",
+        "name": "Quiet Protection",
+        "trigger": "arrival",
+        "text": "The weakest allied Character cannot be targeted by enemy abilities this turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "The Mustang",
+    "linkedCharacterId": "lucas-corbray",
+    "houseId": "corbray"
+  },
+  {
+    "id": "reyenald-reyne",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Reyenald Reyne",
+    "cost": 2,
+    "power": 4,
+    "influence": 1,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "promising-blade",
+        "name": "Promising Blade",
+        "trigger": "arrival",
+        "text": "Whenever Reyenald survives a Conflict, he gains +1 Power permanently."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Crimson Prodigy",
+    "linkedCharacterId": "reyenald-reyne",
+    "houseId": "reyne"
+  },
+  {
+    "id": "oswald-eagle",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Oswald Eagle",
+    "cost": 4,
+    "power": 5,
+    "influence": 6,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "before-dawn",
+        "name": "Before Dawn",
+        "trigger": "arrival",
+        "text": "Exhaust an enemy Character involved in the last Conflict."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Commander of the City Watch",
+    "linkedCharacterId": "oswald-eagle"
+  },
+  {
+    "id": "nymos",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Nymos",
+    "cost": 2,
+    "power": 1,
+    "influence": 4,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "guarded-questions",
+        "name": "Guarded Questions",
+        "trigger": "arrival",
+        "text": "Look at one random card in an opponent's hand, then draw and discard a card."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Younger Maester",
+    "linkedCharacterId": "nymos"
+  },
+  {
+    "id": "liana-tyrell",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Liana Tyrell",
+    "cost": 4,
+    "power": 1,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "know-when-enough-is-enough",
+        "name": "Know When Enough Is Enough",
+        "trigger": "arrival",
+        "text": "Prevent an allied Character from losing Influence this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Highgarden's Counsel",
+    "linkedCharacterId": "liana-tyrell",
+    "houseId": "tyrell"
+  },
+  {
+    "id": "renrose-tyrell-daughter",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Elinor Tyrell",
+    "cost": 3,
+    "power": 1,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "golden-rose-brooch",
+        "name": "Golden Rose Brooch",
+        "trigger": "arrival",
+        "text": "Give another allied Character +2 Influence while Elinor remains in play."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Elinor Tyrell",
+    "linkedCharacterId": "renrose-tyrell-daughter",
+    "houseId": "tyrell"
+  },
+  {
+    "id": "darren-dayne",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Darren Dayne",
+    "cost": 4,
+    "power": 4,
+    "influence": 6,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "starfall-s-shelter",
+        "name": "Starfall's Shelter",
+        "trigger": "arrival",
+        "text": "Prevent the first 2 damage dealt to another allied Character each turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lord of the Torrentine",
+    "linkedCharacterId": "darren-dayne",
+    "houseId": "dayne"
+  },
+  {
+    "id": "aenys-targaryen-ii",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Aenys Targaryen II",
+    "cost": 6,
+    "power": 7,
+    "influence": 9,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-crown-of-command",
+        "name": "A Crown of Command",
+        "trigger": "arrival",
+        "text": "Other Targaryen Characters gain +1 Influence and cannot retreat voluntarily."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Severe King",
+    "linkedCharacterId": "aenys-targaryen-ii",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "vhaemys-targaryen-elder",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Vhaemys Targaryen",
+    "cost": 5,
+    "power": 2,
+    "influence": 9,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "endure-the-crown",
+        "name": "Endure the Crown",
+        "trigger": "arrival",
+        "text": "Whenever another allied Character loses Influence, Vhaemys gains 1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Long-Suffering Queen",
+    "linkedCharacterId": "vhaemys-targaryen-elder",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "alysa-targaryen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Alysa Targaryen",
+    "cost": 4,
+    "power": 2,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "dragonstone-household",
+        "name": "Dragonstone Household",
+        "trigger": "arrival",
+        "text": "The first Targaryen Character deployed after Alysa costs 1 less Command."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Dragonstone",
+    "linkedCharacterId": "alysa-targaryen",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "vaenarr-targaryen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Vaenarr Targaryen",
+    "cost": 4,
+    "power": 5,
+    "influence": 6,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "blood-of-the-crown",
+        "name": "Blood of the Crown",
+        "trigger": "arrival",
+        "text": "Vaenarr gains +1 Power and Influence while another Targaryen is in play."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The King's Brother",
+    "linkedCharacterId": "vaenarr-targaryen",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "tygett-lannister",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Tygett Lannister",
+    "cost": 6,
+    "power": 7,
+    "influence": 8,
+    "health": 8,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-lion-s-levy",
+        "name": "The Lion's Levy",
+        "trigger": "arrival",
+        "text": "Gain 1 Command whenever a Location enters play under your control."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Warden of the West",
+    "linkedCharacterId": "tygett-lannister",
+    "houseId": "lannister"
+  },
+  {
+    "id": "ella-lannister",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ella Lannister",
+    "cost": 4,
+    "power": 2,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "western-court",
+        "name": "Western Court",
+        "trigger": "arrival",
+        "text": "Choose an allied Lannister Character to gain +2 Influence this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Casterly Rock",
+    "linkedCharacterId": "ella-lannister",
+    "houseId": "lannister"
+  },
+  {
+    "id": "myrielle-marbrand",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Myrielle Marbrand",
+    "cost": 3,
+    "power": 3,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "ember-of-ashemark",
+        "name": "Ember of Ashemark",
+        "trigger": "arrival",
+        "text": "Deal 1 damage to a Character that reduces Myrielle's Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Ashemark",
+    "linkedCharacterId": "myrielle-marbrand",
+    "houseId": "marbrand"
+  },
+  {
+    "id": "harrik-greyjoy",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Harrik Greyjoy",
+    "cost": 6,
+    "power": 9,
+    "influence": 3,
+    "health": 8,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "ironborn-defiance",
+        "name": "Ironborn Defiance",
+        "trigger": "arrival",
+        "text": "After Harrik wins a Conflict, discard the top card of the defeated Ruler's deck."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "The Salt King",
+    "linkedCharacterId": "harrik-greyjoy",
+    "houseId": "greyjoy"
+  },
+  {
+    "id": "maron-dayne",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Maron Dayne",
+    "cost": 4,
+    "power": 6,
+    "influence": 4,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-father-s-legacy",
+        "name": "A Father's Legacy",
+        "trigger": "arrival",
+        "text": "When Maron falls, another Dayne Character gains +2 Power permanently."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Knight of Starfall",
+    "linkedCharacterId": "maron-dayne",
+    "houseId": "dayne"
+  },
+  {
+    "id": "lyarra-karstark",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Lyarra Karstark",
+    "cost": 4,
+    "power": 4,
+    "influence": 6,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "north-and-dorne",
+        "name": "North and Dorne",
+        "trigger": "arrival",
+        "text": "Lyarra counts as both a Stark and Dayne ally for abilities."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Blood of Karhold",
+    "linkedCharacterId": "lyarra-karstark",
+    "houseId": "karstark"
+  },
+  {
+    "id": "elwood-tully",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Elwood Tully",
+    "cost": 3,
+    "power": 3,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-next-lord",
+        "name": "The Next Lord",
+        "trigger": "arrival",
+        "text": "Whenever a Tully Location enters play, Elwood gains +1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Heir to Riverrun",
+    "linkedCharacterId": "elwood-tully",
+    "houseId": "tully"
+  },
+  {
+    "id": "oscar-tully",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Oscar Tully",
+    "cost": 3,
+    "power": 5,
+    "influence": 3,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "river-knight",
+        "name": "River Knight",
+        "trigger": "arrival",
+        "text": "Oscar gains +2 Power while defending a Tully Character."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Knight of House Tully",
+    "linkedCharacterId": "oscar-tully",
+    "houseId": "tully"
+  },
+  {
+    "id": "bethany-bracken",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Bethany Bracken",
+    "cost": 3,
+    "power": 3,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "guard-the-household",
+        "name": "Guard the Household",
+        "trigger": "arrival",
+        "text": "Prevent an allied Bracken Character from being exhausted."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Stone Hedge",
+    "linkedCharacterId": "bethany-bracken",
+    "houseId": "bracken"
+  },
+  {
+    "id": "ronnel-arryn",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ronnel Arryn",
+    "cost": 5,
+    "power": 6,
+    "influence": 8,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-eyrie-s-pride",
+        "name": "The Eyrie's Pride",
+        "trigger": "arrival",
+        "text": "Enemy Characters with less Influence cannot challenge Ronnel directly."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Warden of the East",
+    "linkedCharacterId": "ronnel-arryn",
+    "houseId": "arryn"
+  },
+  {
+    "id": "edwyle-stark",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Edwyle Stark",
+    "cost": 5,
+    "power": 6,
+    "influence": 8,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-debt-remembered",
+        "name": "A Debt Remembered",
+        "trigger": "arrival",
+        "text": "When Edwyle falls, draw 2 cards and restore 2 Standing."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Old Warden",
+    "linkedCharacterId": "edwyle-stark",
+    "houseId": "stark"
+  },
+  {
+    "id": "nymor-martell",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Nymor Martell",
+    "cost": 5,
+    "power": 5,
+    "influence": 8,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "dornish-patience",
+        "name": "Dornish Patience",
+        "trigger": "arrival",
+        "text": "The first hostile Event played against Nymor each round has no effect."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Prince of Dorne",
+    "linkedCharacterId": "nymor-martell",
+    "houseId": "martell"
+  },
+  {
+    "id": "meria-martell",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Meria Martell",
+    "cost": 5,
+    "power": 4,
+    "influence": 9,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "unbowed-counsel",
+        "name": "Unbowed Counsel",
+        "trigger": "arrival",
+        "text": "Allied Martell Characters cannot lose Influence during the round Meria arrives."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Princess of Dorne",
+    "linkedCharacterId": "meria-martell",
+    "houseId": "martell"
+  },
+  {
+    "id": "alyssa-velaryon",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Alyssa Velaryon",
+    "cost": 4,
+    "power": 3,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "tides-of-court",
+        "name": "Tides of Court",
+        "trigger": "arrival",
+        "text": "Move 1 Influence from an enemy Character to an allied Velaryon Character."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Driftmark",
+    "linkedCharacterId": "alyssa-velaryon",
+    "houseId": "velaryon"
   }
 ]
