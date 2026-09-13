@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "reinstallRequired": false,
-  "reason": "",
-  "fingerprint": "eeaffa5b7706ef554097fe46b38093c86bf25aee7124314c5b1ae7acfc3fe392"
+  "version": 2,
+  "reinstallRequired": true,
+  "reason": "The app's seal has been renewed. Add The Rookery 🐦‍⬛ to your Home Screen anew to receive the changes properly.",
+  "fingerprint": "d992b3b3ba01b824266915aae667aa7c4ab94b0a33d5c10706d4ebd143e62179"
 }
