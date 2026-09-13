@@ -707,4 +707,16 @@
   .playBannerCollapsed .inner > .accountMenu {
     margin-left: auto;
   }
+
+  .playBannerCollapsed .inner {
+    min-height: 42px;
+    padding: 3px 20px;
+  }
+
+  .playBannerCollapsed .homeLink,
+  .playBannerCollapsed .navLinks,
+  .playBannerCollapsed .searchWrap,
+  .playBannerCollapsed .notificationsButton {
+    display: none;
+  }
 }

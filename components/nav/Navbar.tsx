@@ -28,14 +28,12 @@ export default function Navbar() {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
   const pathname = usePathname();
-  const isPlayPage = pathname === "/cards" || pathname.startsWith("/cards/");
-  const [navExpanded, setNavExpanded] = useState(() => !isPlayPage);
+  const [navExpanded, setNavExpanded] = useState(true);
 
   useEffect(() => {
-    setNavExpanded(!isPlayPage);
     setMenuOpen(false);
     setOpenGroup(null);
-  }, [isPlayPage, pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;
