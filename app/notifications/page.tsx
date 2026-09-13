@@ -54,10 +54,15 @@ function Notifications() {
   useEffect(() => {
     if (!authReady || markedRead.current || !data.serverTime) return;
     const seen = data.serverTime || new Date().toISOString();
+    setReadCutoff(seen);
     window.localStorage.setItem(STORAGE_KEY, seen);
     window.dispatchEvent(new CustomEvent("asofab:notifications-seen", { detail: seen }));
     markedRead.current = true;
-    if (userId) void supabase.from("profiles").update({ notification_last_seen_at: seen }).eq("id", userId);
+    if (userId) {
+      void supabase.from("profiles").update({ notification_last_seen_at: seen }).eq("id", userId).then(({ error }) => {
+        if (error) console.error("Notification read state could not be saved.", error);
+      });
+    }
   }, [authReady, data.serverTime, supabase, userId]);
 
   const allComments = data.comments

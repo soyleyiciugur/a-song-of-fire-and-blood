@@ -128,9 +128,13 @@
 }
 
 .playBannerCollapsed .inner {
-  min-height: 34px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 0;
+    padding: 8px 20px;
+    pointer-events: none;
 }
 
 .playBannerCollapsed .homeLink {
@@ -138,11 +142,16 @@
   opacity: 0.72;
 }
 
-.playBannerCollapsed .navLinks,
-.playBannerCollapsed .menuButton,
-.playBannerCollapsed .searchWrap,
-.playBannerCollapsed .mobileNav {
-  display: none;
+  .playBannerCollapsed .navLinks,
+  .playBannerCollapsed .menuButton,
+  .playBannerCollapsed .searchWrap,
+  .playBannerCollapsed .notificationsButton,
+  .playBannerCollapsed .homeLink,
+  .playBannerCollapsed .mobileNav {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
 }
 
 .navLinks {
@@ -290,6 +299,23 @@
   from {
     opacity: 0;
     transform: translateY(-4px);
+  .playBannerCollapsed {
+    height: 0;
+    border-bottom-color: transparent;
+    background: transparent;
+    backdrop-filter: none;
+    overflow: visible;
+  }
+
+  .playBannerCollapsed .houseMark,
+  .playBannerCollapsed .accountMenu,
+  .playBannerCollapsed .playNavToggle {
+    pointer-events: auto;
+  }
+
+  .playBannerCollapsed .playNavToggle {
+    top: 8px;
+    bottom: auto;
   }
   to {
     opacity: 1;

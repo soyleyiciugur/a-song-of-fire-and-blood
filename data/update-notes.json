@@ -10,6 +10,8 @@
       "Kept the Great Game navbar expanded by default like the rest of the site, while preserving manual collapse.",
       "Made desktop navbar collapse fully into the Targaryen mark, account control, and centered expand handle.",
       "Set an explicit mobile viewport and compacted the utility navbar to prevent initial zoom and right-side horizontal overflow.",
+      "Made desktop navbar collapse into a transparent zero-height layer with floating logo/account controls and a centered top expand handle, with smooth visibility transitions.",
+      "Fixed notification pages so reading activity updates immediately and persists across refreshes, with a schema reload for the account read-state field.",
       "Fixed notification read-state races so signed-in users keep their account-specific read cutoff across logout and login.",
       "Hardened Profile Settings for mobile widths with shrinkable selectors, wrapped long options, and contained gallery controls.",
       "Replaced the Direct Raven navbar envelope with its gold outlined raven mark.",
