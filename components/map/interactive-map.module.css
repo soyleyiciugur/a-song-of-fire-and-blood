@@ -37,6 +37,12 @@
   background: #050507;
   border-radius: var(--radius-md);
   cursor: grab;
+  /* Mobile: one finger can still scroll the page. Two-finger gestures are
+     intercepted by useMapViewport for native-feeling pan + pinch zoom. */
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .viewport:active {

@@ -46,6 +46,22 @@ export function useMapViewport({
   const [scale, setScale] = useState(1);
   const [pan, setPan] = useState<Pan>({ x: 0, y: 0 });
 
+  const scaleRef = useRef(scale);
+  const panRef = useRef(pan);
+  const manualStartRef = useRef(onManualInteractionStart);
+
+  useEffect(() => {
+    manualStartRef.current = onManualInteractionStart;
+  }, [onManualInteractionStart]);
+
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
+
+  useEffect(() => {
+    panRef.current = pan;
+  }, [pan]);
+
   const dragState = useRef({
     dragging: false,
     moved: false,
@@ -53,6 +69,17 @@ export function useMapViewport({
     startY: 0,
     panStartX: 0,
     panStartY: 0,
+  });
+
+  const touchState = useRef({
+    active: false,
+    moved: false,
+    startDistance: 0,
+    startMidX: 0,
+    startMidY: 0,
+    startScale: 1,
+    startPanX: 0,
+    startPanY: 0,
   });
 
   const zoomAt = useCallback(
@@ -79,14 +106,17 @@ export function useMapViewport({
     [minScale, maxScale]
   );
 
-  // Native, non-passive wheel listener — see doc comment above for why.
+  // Native, non-passive wheel + touch listeners. Touch intentionally starts
+  // only with two fingers: one finger remains available for normal page
+  // scrolling, while two fingers pan the map and pinch to zoom like a native
+  // map view.
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
 
     const onWheel = (event: WheelEvent) => {
       event.preventDefault();
-      onManualInteractionStart?.();
+      manualStartRef.current?.();
 
       const rect = viewport.getBoundingClientRect();
       const cursorX = event.clientX - rect.left;
@@ -105,9 +135,105 @@ export function useMapViewport({
       zoomAt(cursorX, cursorY, zoomFactor);
     };
 
+    const touchPoint = (touch: Touch, rect: DOMRect) => ({
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    });
+
+    const beginTouchGesture = (event: TouchEvent) => {
+      if (event.touches.length < 2) return false;
+
+      const rect = viewport.getBoundingClientRect();
+      const a = touchPoint(event.touches[0], rect);
+      const b = touchPoint(event.touches[1], rect);
+      const distance = Math.max(1, Math.hypot(b.x - a.x, b.y - a.y));
+
+      touchState.current = {
+        active: true,
+        moved: false,
+        startDistance: distance,
+        startMidX: (a.x + b.x) / 2,
+        startMidY: (a.y + b.y) / 2,
+        startScale: scaleRef.current,
+        startPanX: panRef.current.x,
+        startPanY: panRef.current.y,
+      };
+
+      manualStartRef.current?.();
+      return true;
+    };
+
+    const onTouchStart = (event: TouchEvent) => {
+      if (!beginTouchGesture(event)) return;
+      event.preventDefault();
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      if (event.touches.length < 2) return;
+      if (!touchState.current.active) beginTouchGesture(event);
+      if (!touchState.current.active) return;
+
+      event.preventDefault();
+
+      const rect = viewport.getBoundingClientRect();
+      const a = touchPoint(event.touches[0], rect);
+      const b = touchPoint(event.touches[1], rect);
+      const midX = (a.x + b.x) / 2;
+      const midY = (a.y + b.y) / 2;
+      const distance = Math.max(1, Math.hypot(b.x - a.x, b.y - a.y));
+      const state = touchState.current;
+
+      const nextScale = Math.min(
+        maxScale,
+        Math.max(minScale, state.startScale * (distance / state.startDistance))
+      );
+
+      const mapX = (state.startMidX - state.startPanX) / state.startScale;
+      const mapY = (state.startMidY - state.startPanY) / state.startScale;
+      const nextPan = {
+        x: midX - mapX * nextScale,
+        y: midY - mapY * nextScale,
+      };
+
+      if (
+        Math.abs(midX - state.startMidX) > CLICK_DRAG_THRESHOLD ||
+        Math.abs(midY - state.startMidY) > CLICK_DRAG_THRESHOLD ||
+        Math.abs(nextScale - state.startScale) > 0.01
+      ) {
+        state.moved = true;
+      }
+
+      scaleRef.current = nextScale;
+      panRef.current = nextPan;
+      setScale(nextScale);
+      setPan(nextPan);
+    };
+
+    const endTouchGesture = (event: TouchEvent) => {
+      if (!touchState.current.active) return;
+
+      // If one finger remains, release the map immediately so that finger can
+      // resume normal page scrolling instead of getting trapped in the map.
+      if (event.touches.length < 2) {
+        dragState.current.moved = dragState.current.moved || touchState.current.moved;
+        touchState.current.active = false;
+      }
+    };
+
     viewport.addEventListener("wheel", onWheel, { passive: false });
-    return () => viewport.removeEventListener("wheel", onWheel);
-  }, [onManualInteractionStart, zoomAt, zoomSensitivity]);
+    viewport.addEventListener("touchstart", onTouchStart, { passive: false });
+    viewport.addEventListener("touchmove", onTouchMove, { passive: false });
+    viewport.addEventListener("touchend", endTouchGesture, { passive: true });
+    viewport.addEventListener("touchcancel", endTouchGesture, { passive: true });
+
+    return () => {
+      viewport.removeEventListener("wheel", onWheel);
+      viewport.removeEventListener("touchstart", onTouchStart);
+      viewport.removeEventListener("touchmove", onTouchMove);
+      viewport.removeEventListener("touchend", endTouchGesture);
+      viewport.removeEventListener("touchcancel", endTouchGesture);
+    };
+  }, [maxScale, minScale, zoomAt, zoomSensitivity]);
 
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {

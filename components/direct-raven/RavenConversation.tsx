@@ -175,17 +175,21 @@ export default function RavenConversation({
 
   useLayoutEffect(() => {
     const viewport = window.visualViewport;
+    let raf = 0;
 
     const updateViewport = () => {
-      const height = viewport?.height ?? window.innerHeight;
-      const offset = viewport?.offsetTop ?? 0;
-      const navBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
-      const visibleNav = Math.max(0, navBottom - offset);
-      document.documentElement.style.setProperty("--raven-mobile-top", `${offset + visibleNav}px`);
-      document.documentElement.style.setProperty("--raven-mobile-height", `${Math.max(0,height-visibleNav)}px`);
-      document.documentElement.style.setProperty("--direct-raven-viewport-height", `${height}px`);
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const height = viewport?.height ?? window.innerHeight;
+        const offset = viewport?.offsetTop ?? 0;
+        const navBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
+        const visibleNav = Math.max(0, navBottom - offset);
+        const root = document.documentElement;
 
-      requestAnimationFrame(() => {
+        root.style.setProperty("--raven-mobile-top", `${offset + visibleNav}px`);
+        root.style.setProperty("--raven-mobile-height", `${Math.max(0, height - visibleNav)}px`);
+        root.style.setProperty("--direct-raven-viewport-height", `${height}px`);
+
         if (document.activeElement === inputRef.current && nearBottom.current) {
           scrollBottom();
         }
@@ -198,6 +202,7 @@ export default function RavenConversation({
     window.addEventListener("resize", updateViewport);
 
     return () => {
+      cancelAnimationFrame(raf);
       viewport?.removeEventListener("resize", updateViewport);
       viewport?.removeEventListener("scroll", updateViewport);
       window.removeEventListener("resize", updateViewport);
@@ -778,9 +783,14 @@ export default function RavenConversation({
                 aria-label="Message"
                 onFocus={() => {
                   setPickerOpen(false);
+                  requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                      if (nearBottom.current) scrollBottom();
+                    });
+                  });
                   window.setTimeout(() => {
                     if (nearBottom.current) scrollBottom();
-                  }, 250);
+                  }, 120);
                 }}
                 onPaste={(event) => {
                   if (!editing) {

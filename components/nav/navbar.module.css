@@ -557,6 +557,7 @@
 .menuButton { display:inline-flex; }
 .homeLink { max-width:calc(100% - 52px); overflow:hidden; text-overflow:ellipsis; font-size:12px; }
 .searchWrap { right:14px; width:36px; min-width:36px; flex:none; margin:0; }
+.searchInput { font-size:16px; }
 .mobileNavOpen { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); max-height:65dvh; overflow-y:auto; }
 .mobileNavGroup { grid-column:span 2; }
 .mobileNavGroupHeader { width:40px; flex:none; }

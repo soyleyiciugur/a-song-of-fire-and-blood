@@ -60,6 +60,12 @@ export default function SearchBar() {
       <input
         ref={inputRef}
         type="text"
+        inputMode="search"
+        enterKeyHint="search"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="none"
+        spellCheck={false}
         aria-label="Search the realm"
         value={query}
         placeholder="Search the realm..."
