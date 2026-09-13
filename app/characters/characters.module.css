@@ -176,7 +176,7 @@
 }
 
 .rawMiniPortrait[src$=".webp"] {
-  background: var(--surface-hover) url("/images/miniportraits/default.png") center / cover no-repeat;
+  background: var(--surface-hover) url("/images/miniportraits/default.webp") center / cover no-repeat;
 }
 
 .crownIdentity {

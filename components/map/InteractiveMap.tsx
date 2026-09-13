@@ -31,7 +31,7 @@ import type { Character } from "@/types/character";
 import styles from "./interactive-map.module.css";
 
 const MAP_SRC = "/images/map/known-world.webp";
-const MINI_FALLBACK = "/images/miniportraits/default.png";
+const MINI_FALLBACK = "/images/miniportraits/default.webp";
 const MAX_VISIBLE_AVATARS = 3;
 
 const ALL_EVENT_TYPES: MapEventType[] = [

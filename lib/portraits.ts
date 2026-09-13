@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\portraits.ts
 import type { CharacterId } from "@/types/character";
 
-const DEFAULT_MINI = "/images/miniportraits/default.png";
+const DEFAULT_MINI = "/images/miniportraits/default.webp";
 
 export function getMiniPortrait(id: CharacterId) {
   return `/images/miniportraits/${id}.webp`;

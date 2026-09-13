@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const FALLBACK = "/images/miniportraits/default.png";
+const FALLBACK = "/images/miniportraits/default.webp";
 const EXTENSIONS = ["webp", "png", "jpg", "jpeg"] as const;
 
 type Props = {

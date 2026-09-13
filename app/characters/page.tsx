@@ -88,7 +88,7 @@ function RawMiniPortrait({
 
   const src =
     extIndex >= MINI_PORTRAIT_EXTS.length
-      ? "/images/miniportraits/default.png"
+      ? "/images/miniportraits/default.webp"
       : `/images/miniportraits/${id}.${MINI_PORTRAIT_EXTS[extIndex]}`;
 
   const onError =
