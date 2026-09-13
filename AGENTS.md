@@ -130,7 +130,10 @@ treat this as a concrete authoring workflow, not as a request for an explanation
 15. Apply the resulting editorial changes directly to the appropriate repository
     JSON/data files and validate them.
 
-16. After completing user-visible site changes, update data/update-notes.json
+16. Run `npm.cmd run community:push` after reaction-target generation to apply
+   pending migrations to the linked Supabase project before publishing.
+
+17. After completing user-visible site changes, update data/update-notes.json
     according to the Daily update notes rules in this file.
 
 ## Community inbox command

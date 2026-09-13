@@ -7560,6 +7560,40 @@
       "parentId": "391d599a-1749-42bb-9f91-e4b605eb8b95",
       "parentSource": "supabase",
       "body": "okay... maybe the rabbit learns to be loud instead"
+    },
+    {
+      "publishedAt": "2026-09-13T01:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "live-hrrm-ama-verbal-combat-followup",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-m",
+      "parentId": "de584092-9c05-417a-b615-bc0ad7f2685e",
+      "parentSource": "supabase",
+      "body": "the court is already a badly managed group chat and now you want live verbal combat. HRRM please mute the room"
+    },
+    {
+      "publishedAt": "2026-09-13T01:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "live-until-last-breath-jace-canon-followup",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-j",
+      "parentId": "28016017-7c7d-48d3-8dfa-21aac74ce3e6",
+      "parentSource": "supabase",
+      "body": "exactly. the chapter gives him a succession problem, not a prophecy certificate. team jace can survive that distinction"
+    },
+    {
+      "publishedAt": "2026-09-13T01:30:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "id": "live-until-last-breath-team-jace-followup",
+      "entryId": "chapter-until-the-last-breath",
+      "authorId": "regular-u",
+      "parentId": "be1fc598-5405-490b-a4e3-5bdc6ad42c73",
+      "parentSource": "supabase",
+      "body": "too late is still a valid recruitment status. the union paperwork has been filed; jace gets one more exhausted strategist"
     }
   ]
 }

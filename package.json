@@ -12,7 +12,8 @@
     "test:social": "node scripts/test-member-social.mjs && node scripts/test-comment-threads.mjs",
     "test:raven-ui": "node scripts/test-raven-ui.mjs",
     "community:inbox": "node scripts/community-inbox.mjs",
-    "community:reactions": "node scripts/community-reaction-targets.mjs --write"
+    "community:reactions": "node scripts/community-reaction-targets.mjs --write",
+    "community:push": "npx --yes supabase db push --linked"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
