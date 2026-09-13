@@ -6,6 +6,7 @@
       "Added a single community sync command that generates reaction migrations and pushes them to the linked Supabase project.",
       "Refined navbar separators and utility icons, moved The Raven's Eye beside the card game, and corrected the Direct Raven mark's sizing.",
       "Removed the duplicate Targaryen mark from the mobile navbar while keeping it in the hamburger menu.",
+      "Centered the Raven's Eye mark without lashes and made the foreground card icon opaque so its rear card lines stay behind it.",
       "Replaced the Direct Raven navbar envelope with its gold outlined raven mark.",
       "Restored navbar text sizing, improved its gold separators, rendered the Targaryen mark at full quality, and moved The Great Game into the utility icon row.",
       "Synchronized Chapter XVIII across the chronicle, character records, houses, dragons, Kingsguard book and Known World map.",
