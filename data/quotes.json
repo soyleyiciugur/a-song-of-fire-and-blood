@@ -91,8 +91,8 @@
     "text": "I just need to sleep.",
     "speakerId": "rhaella-targaryen",
     "speakerName": "Rhaella Targaryen",
-    "chapterSlug": "the-weight-of-loyalty",
-    "chapterTitle": "Chapter II: The Weight of Loyalty",
+    "chapterSlug": "the-broken-knight",
+    "chapterTitle": "Chapter IV: The Broken Knight",
     "note": null
   },
   {
@@ -142,6 +142,54 @@
     "chapterSlug": "the-price-of-trust",
     "chapterTitle": "Chapter II: The Price of Trust",
     "note": "to Visenor"
+  },
+  {
+    "text": "I wanted to be like you.",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-price-of-trust",
+    "chapterTitle": "Chapter II: The Price of Trust",
+    "note": "explaining to Visenor, Saera and Jace that she had always wanted to belong among them"
+  },
+  {
+    "text": "No matter how hard your Queen tried... I was never truly one of you here.",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-price-of-trust",
+    "chapterTitle": "Chapter II: The Price of Trust",
+    "note": "admitting that despite Jaery's efforts to embrace her, she never truly felt that she belonged in the Red Keep"
+  },
+  {
+    "text": "I wanted brothers and sisters I could call my own. Brothers and sisters who would claim me as theirs, as I might claim them.",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-price-of-trust",
+    "chapterTitle": "Chapter II: The Price of Trust",
+    "note": "explaining why she secretly maintained contact with the family she had left behind"
+  },
+  {
+    "text": "I only wanted to know how my little siblings were. I wanted to be a sister to them, Visenor. Nothing more.",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-price-of-trust",
+    "chapterTitle": "Chapter II: The Price of Trust",
+    "note": "insisting that her secret letters were motivated by concern for her younger siblings rather than conspiracy"
+  },
+  {
+    "text": "I did not betray you.",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-price-of-trust",
+    "chapterTitle": "Chapter II: The Price of Trust",
+    "note": "insisting to Visenor that her secret correspondence was not a betrayal"
+  },
+  {
+    "text": "If there had been no letters... Would I still have been your wife?",
+    "speakerId": "rhaella-targaryen",
+    "speakerName": "Rhaella Targaryen",
+    "chapterSlug": "the-price-of-trust",
+    "chapterTitle": "Chapter II: The Price of Trust",
+    "note": "asking Visenor whether their marriage would have survived even without the discovery of her secret letters"
   },
   {
     "text": "Love alone cannot preserve a dynasty.",
@@ -1832,7 +1880,7 @@
   {
     "text": "And one day, I hope you suffer the same joy.",
     "speakerId": "jaery-targaryen",
-    "speakerName": "Queen Jaery Targaryen",
+    "speakerName": "Jaery Targaryen",
     "chapterSlug": "until-the-last-breath",
     "chapterTitle": "Chapter XVIII: Until The Last Breath",
     "note": "to Rhaella while reflecting on the painful joy of motherhood"
@@ -1840,7 +1888,7 @@
   {
     "text": "I never intended to become King. Yet men like us do not always receive the luxury of wanting our responsibilities before they are laid upon us.",
     "speakerId": "baelenys-targaryen",
-    "speakerName": "King Baelenys Targaryen",
+    "speakerName": "Baelenys Targaryen",
     "chapterSlug": "until-the-last-breath",
     "chapterTitle": "Chapter XVIII: Until The Last Breath",
     "note": "to Jace while reflecting on the burden of the Iron Throne"
