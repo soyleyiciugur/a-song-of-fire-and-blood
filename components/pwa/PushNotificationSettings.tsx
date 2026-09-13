@@ -21,15 +21,19 @@ export default function PushNotificationSettings() {
   const supabase = useMemo(() => createClient(), []);
   const [state, setState] = useState<State>("loading");
   const [message, setMessage] = useState("");
+  const [platform, setPlatform] = useState<"ios" | "android" | "other">("other");
 
   useEffect(() => {
     let active = true;
+    const android = /Android/i.test(navigator.userAgent);
+    const apple = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    setPlatform(android ? "android" : apple ? "ios" : "other");
     const check = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!active) return;
       if (!user) return setState("signed-out");
       if (!("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)) return setState("unsupported");
-      const ios = /iP(hone|ad|od)/.test(navigator.userAgent);
+      const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
       if (ios && !isStandalone()) return setState("needs-install");
       if (Notification.permission === "denied") return setState("denied");
       const registration = await navigator.serviceWorker.ready;
@@ -115,12 +119,16 @@ export default function PushNotificationSettings() {
         ? "This browser cannot receive Web Push from ASOFAB. Your in-site notification history will still work."
         : state === "signed-out"
           ? "Sign in first. Delivery subscriptions, unread state, and notification history belong to your account rather than this device."
-          : "Choose whether ravens may arrive on this device while ASOFAB is closed.";
+          : platform === "android"
+            ? isStandalone()
+              ? "Ravens may arrive through the installed Android web app while ASOFAB is closed."
+              : "Ravens can reach this Android device now. Installing ASOFAB also gives you the full-screen app experience."
+            : "Choose whether ravens may arrive on this device while ASOFAB is closed.";
 
   const statusLabel = state === "enabled" ? "Ravens permitted" : state === "denied" ? "Permission blocked" : state === "needs-install" ? "Home Screen required" : state === "unsupported" ? "Not supported" : state === "signed-out" ? "Sign in required" : "Not enabled";
 
   return <section className={`${styles.section} ${styles.deviceNotifications}`}>
-    <div className={styles.notificationSubhead}><span>Delivery</span><small>iOS Home Screen web app</small></div>
+    <div className={styles.notificationSubhead}><span>Delivery</span><small>{platform === "android" ? (isStandalone() ? "Android installed web app" : "Android / Chrome") : platform === "ios" ? "iOS Home Screen web app" : "This browser"}</small></div>
     <div className={styles.deviceNotificationCard}>
       <span className={`${styles.deliveryGlyph} ${state === "enabled" ? styles.deliveryGlyphOn : ""}`} aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg>

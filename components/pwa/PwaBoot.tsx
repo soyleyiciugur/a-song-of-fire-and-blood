@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import ShellUpdate from "./ShellUpdate";
+import AndroidInstallPrompt from "./AndroidInstallPrompt";
 import { restorePush } from "@/lib/pwa/client";
 import { useRouter } from "next/navigation";
 
@@ -41,5 +42,8 @@ export default function PwaBoot() {
     return () => { cancelled = true; window.removeEventListener("load", register); };
   }, []);
 
-  return <ShellUpdate />;
+  return <>
+    <ShellUpdate />
+    <AndroidInstallPrompt />
+  </>;
 }

@@ -152,7 +152,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
   }, { onConflict: "user_id" });
 
   const [{ data: subscriptions }, unreadResult] = await Promise.all([
-    admin.from("push_subscriptions").select("endpoint,p256dh,auth").eq("user_id", input.recipientUserId),
+    admin.from("push_subscriptions").select("endpoint,p256dh,auth,user_agent").eq("user_id", input.recipientUserId),
     admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null),
   ]);
   const badgeCount = unreadResult.count ?? undefined;
@@ -161,11 +161,12 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
 
   await Promise.all((subscriptions ?? []).map(async (subscription) => {
     try {
+      const appleWebPush = /iP(hone|ad|od)|Macintosh.*Mobile/i.test(subscription.user_agent ?? "");
       const response = await sendWebPush(subscription, {
         title: rendered.title,
-        body: `${rendered.body} — ${mascotMeta.name}`,
+        body: appleWebPush ? `${rendered.body} — ${mascotMeta.name}` : rendered.body,
         icon: mascotMeta.portrait,
-        badge: "/icon.png",
+        badge: "/notification-badge.png",
         url: notificationUrl,
         tag: `asofab-${data.id}`,
         badgeCount,

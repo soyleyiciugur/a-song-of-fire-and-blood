@@ -31,6 +31,9 @@ export function standalone() {
 export function iosDevice() {
   return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 }
+export function androidDevice() {
+  return /Android/i.test(navigator.userAgent);
+}
 export function installation(baseline: number): Installation {
   try {
     const saved = JSON.parse(localStorage.getItem(key) || "null");
