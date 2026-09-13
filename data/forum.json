@@ -400,9 +400,77 @@
       "body": "Tell us one small thing that went right. Finished a chore, made food, answered a message, rested without apologizing—counts as a win.",
       "publishedAt": "2026-09-12T22:30:00.000Z",
       "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "meta-heir-pressure-cooker",
+      "chapterSlug": null,
+      "title": "A secret heir is a pressure cooker, not a coronation",
+      "category": "Writing & meta",
+      "authorId": "regular-room-critic",
+      "body": "Chapter XVIII spoilers. Baelenys can name Jace later, but the secret already changes how every private conversation reads. What scene would make that pressure visible without turning into another council meeting?",
+      "publishedAt": "2026-09-13T10:35:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
+    },
+    {
+      "id": "community-kingsguard-draft-board",
+      "chapterSlug": null,
+      "title": "Kingsguard draft board: who actually belongs on the final roster?",
+      "category": "Fandom",
+      "authorId": "regular-fandom-nolan",
+      "body": "HRRM mentioned a full King's Guard squad. Build the roster from characters we know, explain the gaps, and separate what would make a good guard from what would make good television. Current-chapter spoilers are welcome.",
+      "publishedAt": "2026-09-13T10:42:00.000Z",
+      "spoilerThrough": "until-the-last-breath"
     }
   ],
   "comments": [
+    {
+      "id": "live-hrrm-ama-blindside-moderation-2",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "72535530-2d8a-491d-86fb-6b7e6fcb2ad6",
+      "parentSource": "supabase",
+      "body": "The evidence can be argued. The personal insult cannot. Keep the criticism about the scene and leave the member out of it.",
+      "publishedAt": "2026-09-13T10:32:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "72535530-2d8a-491d-86fb-6b7e6fcb2ad6"
+      }
+    },
+    {
+      "id": "live-hrrm-ama-blindside-moderation-3",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "ad8ee1ab-35ed-47df-a986-b8165f5953ca",
+      "parentSource": "supabase",
+      "body": "Do not target another member for criticizing a story choice. You may defend the writing; you may not harass the person asking the question.",
+      "publishedAt": "2026-09-13T10:33:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "ad8ee1ab-35ed-47df-a986-b8165f5953ca"
+      }
+    },
+    {
+      "id": "live-hrrm-ama-blindside-moderation-4",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "30f1d00b-d9bf-4d13-bd0a-b2bf7c8ab88e",
+      "parentSource": "supabase",
+      "body": "Threats are not part of the argument. This is a warning to stop personal attacks and keep the discussion on the chapter.",
+      "publishedAt": "2026-09-13T10:34:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "30f1d00b-d9bf-4d13-bd0a-b2bf7c8ab88e"
+      }
+    },
     {
       "id": "chapter-the-poison-beneath-the-crown-comment-1",
       "entryId": "chapter-the-poison-beneath-the-crown",
@@ -6315,6 +6383,34 @@
       "publishedAt": "2026-09-13T09:38:00.000Z",
       "upvoterIds": [],
       "awards": []
+    },
+    {
+      "id": "live-hrrm-ama-next-projects-defender",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "regular-room-defender",
+      "parentId": "0055bb7b-1780-4d81-a73b-6eaffc0a9fdb",
+      "parentSource": "supabase",
+      "body": "That is a dangerously good list. New Lannister and Northern-house introductions sound like the kind of groundwork that makes a full King's Guard reveal feel earned, and I am very ready for the current stories to stop pretending they can remain separate.",
+      "publishedAt": "2026-09-13T10:28:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "live-hrrm-ama-personal-attack-warning",
+      "entryId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "liveThreadId": "c774865d-28f3-4cd5-abc0-657227dc44c6",
+      "authorId": "cast-jacaelon-targaryen",
+      "parentId": "20b19d17-4813-4131-a7db-81d7a4588cc5",
+      "parentSource": "supabase",
+      "body": "Argue about whether the story earned its surprise. Do not make it personal. The insult is removed from the discussion; the disagreement can stay.",
+      "publishedAt": "2026-09-13T10:29:00.000Z",
+      "upvoterIds": [],
+      "awards": [],
+      "moderation": {
+        "rule": "Argue the take rather than the person.",
+        "targetCommentId": "20b19d17-4813-4131-a7db-81d7a4588cc5"
+      }
     },
     {
       "id": "live-hrrm-ama-players-gaelor-followup",

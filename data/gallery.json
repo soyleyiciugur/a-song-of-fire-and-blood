@@ -1,5 +1,17 @@
 [
   {
+    "id": "gallery-jace-gaelor's-bullshit-factory",
+    "src": "/images/gallery/jace-gaelor's-bullshit-factory.jpeg",
+    "caption": "bro creates disasters faster than the court can attend to his existing ones 💀💀💀",
+    "characterIds": ["jacaelon-targaryen", "gaelor-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-13",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-jhaella",
     "src": "/images/gallery/jhaella.webp",
     "caption": "a treat for jhaella fans by the admin :) hope ubeka (visenor) doesn't see this",
@@ -58,6 +70,30 @@
     "worldDate": null,
     "uploadedAt": "2026-09-12",
     "category": "raven"
+  },
+  {
+    "id": "gallery-jace-binim",
+    "src": "/videos/reels/jace-binim.mp4",
+    "caption": "ferdiyi knight yapan binim",
+    "characterIds": ["jacaelon-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-13",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-visenor-eve-gitmem-gerek",
+    "src": "/videos/reels/visenor-eve-gitmem-gerek.mp4",
+    "caption": "neden starfall'da kalmadın be adam",
+    "characterIds": ["visenor-targaryen", "rhaella-targaryen", "jacaelon-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-13",
+    "category": "fleabottom"
   },
   {
     "id": "gallery-life-if-tyrells-didnt-exist",
