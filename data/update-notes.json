@@ -2,6 +2,8 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Reworked Raven's Eye filters into a compact single-row toolbar with a right-aligned sort control and responsive small-screen wrapping.",
+      "Moved chapter-reader controls and chapter-list headings below the collapsed navbar utilities while keeping the account control visible.",
       "Added selective fictional replies to two new HRRM AMA answers in Taverns.",
       "Added canonical height details for twenty characters across the character archive.",
       "Synchronized notification read state across signed-in desktop and mobile sessions, and matched plain mobile navigation links to the grouped menu style.",

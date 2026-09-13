@@ -75,10 +75,20 @@
 
 .filterBar {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   margin-bottom: 12px;
+  padding: 10px;
   align-items: center;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(201, 162, 39, 0.18);
+  border-radius: var(--radius-sm);
+}
+
+.filterBar > .te-select {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
 }
 
 .filterRight {
@@ -86,6 +96,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 0 1 220px;
+  min-width: 0;
+}
+
+.filterRight > .te-select {
+  flex: 1 1 150px;
+  width: auto;
+  min-width: 0;
 }
 
 .clearBtn {
@@ -101,6 +119,27 @@
 
 .clearBtn:hover {
   opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .filterBar {
+    flex-wrap: wrap;
+  }
+
+  .filterBar > .te-select {
+    flex: 1 1 calc(50% - 5px);
+  }
+
+  .filterRight {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterBar > .te-select {
+    flex-basis: 100%;
+  }
 }
 
 .resultCount {

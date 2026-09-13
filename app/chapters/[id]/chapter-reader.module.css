@@ -92,7 +92,7 @@
 /* language toggle — two independent pill buttons (bug #1, matches hub) */
 .langToggle {
   position: fixed;
-  top: 24px;
+  top: 64px;
   right: 28px;
   z-index: 200;
   display: flex;
@@ -124,7 +124,7 @@
 
 .backLink {
   position: fixed;
-  top: 24px;
+  top: 64px;
   left: 28px;
   z-index: 200;
   /* font-family: var(--hd-font);  ← removed */
@@ -170,7 +170,7 @@
 .chapterListPanel {
   width: min(360px, calc(100vw - 32px));
   height: 100%;
-  padding: 28px 20px 24px;
+  padding: 76px 20px 24px;
   color: var(--p-light);
   background:
     linear-gradient(145deg, rgba(49, 27, 10, 0.98), rgba(14, 8, 3, 0.99)),
