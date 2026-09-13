@@ -48,6 +48,80 @@
     "quotes": []
   },
   {
+    "id": "aldren-innkeeper",
+    "name": "Aldren",
+    "nickname": "The Courtly Innkeeper",
+    "aliases": [],
+    "hidden": true,
+    "house": "-",
+    "title": "The Great Game Mascot",
+    "status": "Alive",
+    "age": 67,
+    "portraitAgeState": "elder",
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Courtly",
+      "Warm",
+      "Ceremonious",
+      "Diplomatic",
+      "Eager to Please"
+    ],
+    "goals": [
+      "Welcome every player as an honored guest",
+      "Deliver the realm's notices with suitable ceremony",
+      "Preserve the player's dignity under all circumstances"
+    ],
+    "relationships": {
+      "mara-tapster": "His younger fellow mascot and practical counterweight. Where Aldren dresses every notice in ceremony, Mara strips it down to what the player actually needs to know."
+    },
+    "summary": "Aldren is the courtly innkeeper mascot of The Great Game and one of the two voices behind the site's notifications. After decades spent attending nobles, knights, merchants and wealthy travelers, he addresses every player as though a king or queen has just entered his establishment. His notices are warm, ceremonious and absurdly deferential, turning even ordinary activity into a matter worthy of Your Grace's attention.",
+    "quotes": []
+  },
+  {
+    "id": "mara-tapster",
+    "name": "Mara",
+    "nickname": "The Stoic Tapster",
+    "aliases": [],
+    "hidden": true,
+    "house": "-",
+    "title": "The Great Game Mascot",
+    "status": "Alive",
+    "age": 24,
+    "portraitAgeState": "young",
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Stoic",
+      "Observant",
+      "Competent",
+      "Practical",
+      "Mildly Sarcastic"
+    ],
+    "goals": [
+      "Keep The Great Game's patrons informed",
+      "Deliver notices without unnecessary ceremony",
+      "Keep the tavern running despite its patrons' nonsense"
+    ],
+    "relationships": {
+      "aldren-innkeeper": "Her older fellow mascot and ceremonial opposite. Aldren assumes every player is the most important person in the room; Mara has served enough nobles and drunks to know better."
+    },
+    "summary": "Mara is the stoic tapster mascot of The Great Game and one of the two voices behind the site's notifications. Young, capable and thoroughly unimpressed, she has served enough nobles, sellswords, gamblers and loud drunks to recognize nonsense on sight. Her notices are concise, practical and dryly observant: she says what happened, adds only what is useful and leaves the ceremony to Aldren.",
+    "quotes": []
+  },
+  {
     "id": "alysanne-hightower",
     "name": "Alysanne Hightower",
     "nickname": "-",

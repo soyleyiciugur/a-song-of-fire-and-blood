@@ -21,5 +21,5 @@ export async function POST() {
   });
   return notification
     ? NextResponse.json({ ok: true, notificationId: notification.id })
-    : NextResponse.json({ error: "The test raven could not be prepared. Check the notification migration and SUPABASE_SERVICE_ROLE_KEY." }, { status: 500 });
+    : NextResponse.json({ error: "The test raven could not be prepared. Apply the mascot notification migration and add SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_SECRET_KEY) to Vercel, then redeploy." }, { status: 500 });
 }

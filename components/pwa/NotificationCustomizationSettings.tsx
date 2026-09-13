@@ -131,7 +131,6 @@ export default function NotificationCustomizationSettings() {
         <h2 className={styles.sectionTitle}>Raven notifications</h2>
         <p className={styles.sectionIntro}>Choose which tidings may reach you. Mara and Aldren share delivery automatically, with the balance kept on your account.</p>
       </div>
-      <span className={styles.notificationSeal} aria-hidden="true">✦</span>
     </div>
 
     {!ready && <p className={styles.status}>Reading your raven preferences…</p>}

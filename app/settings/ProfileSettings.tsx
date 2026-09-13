@@ -1,14 +1,11 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import type { Profile } from "@/lib/supabase/database.types";
 import type { AffinityField, AffinityOption } from "@/lib/profileAffinity";
 import { Select } from "@/app/_components/Select";
 import styles from "./settings.module.css";
-import PushNotificationSettings from "@/components/pwa/PushNotificationSettings";
-import NotificationCustomizationSettings from "@/components/pwa/NotificationCustomizationSettings";
 
 const THEMES = [
   ["default", "Default"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
@@ -108,9 +105,7 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
   const setChoice = (key: string, value: string) => setAffinity((current) => ({ ...current, [key]: value }));
   const normalFields = ["character", "house", "dragon", "chapter"].map((key) => fields[key]).filter(Boolean);
 
-  return <main className={styles.page}><section className={styles.panel}>
-    <Link className={styles.back} href={`/users/${profile.username}`}>← Your profile</Link>
-    <h1 className={styles.title}>Profile settings</h1><p className={styles.handle}>@{profile.username}</p>
+  return <>
     <form className={styles.form} onSubmit={e => { e.preventDefault(); void save(new FormData(e.currentTarget)); }}>
       <fieldset disabled={busy} className={styles.fieldset}>
         <div className={styles.section}>
@@ -137,6 +132,5 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
       </fieldset>
       {message && <p className={styles.status} role="status">{message}</p>}
     </form>
-    <div className={styles.notificationsBlock} id="raven-notifications"><NotificationCustomizationSettings /><PushNotificationSettings /></div>
-  </section></main>;
+  </>;
 }

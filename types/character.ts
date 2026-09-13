@@ -8,6 +8,8 @@ export type CharacterAgeState =
   | "elder";
 
 export type CharacterId =
+  | "aldren-innkeeper"
+  | "mara-tapster"
   | "renrose-tyrell-daughter"
   | "liana-tyrell"
   | "nymos"

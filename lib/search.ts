@@ -40,6 +40,8 @@ export function buildSearchIndex(): SearchResult[] {
   const results: SearchResult[] = [];
 
   for (const character of Object.values(characters)) {
+    if (character.hidden) continue;
+
     const keywordParts = [
       character.name,
       character.nickname,

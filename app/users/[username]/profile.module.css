@@ -168,7 +168,7 @@
     width: 20px;
     height: 20px;
     color: #b9894d;
-    background: #151114;
+    background: transparent;
     text-shadow: 0 0 10px rgba(189,140,80,.26);
     font-size: 10px;
     line-height: 1;
@@ -198,7 +198,7 @@
 
 .page[data-theme]:not([data-theme="default"]) .tabs::after {
   color: var(--profile-accent);
-  background: var(--profile-surface);
+  background: transparent;
 }
 .page[data-theme]:not([data-theme="default"]) .tabs::before {
   opacity: .9;

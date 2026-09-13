@@ -11,6 +11,7 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
+  const autoRevealUntilRef = useRef(0);
 
   const revealComposer = useCallback((behavior: ScrollBehavior = "smooth") => {
     const form = formRef.current;
@@ -38,29 +39,41 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
     const textarea = textareaRef.current;
     if (!textarea) return;
 
-    // Focus inside the user gesture lifecycle without letting Safari perform
-    // its own abrupt focus-scroll. visualViewport then keeps the action row
-    // just above the keyboard while it animates in.
+    // Keep the composer visible only while the keyboard is initially opening.
+    // Once that short settling window has passed, the user is free to scroll
+    // the page normally even while the reply box remains open.
     const frame = requestAnimationFrame(() => {
       if (document.activeElement !== textarea) textarea.focus();
-      revealComposer("smooth");
+      if (performance.now() <= autoRevealUntilRef.current) revealComposer("smooth");
     });
 
     const viewport = window.visualViewport;
     let settleTimer = 0;
     const sync = () => {
+      if (performance.now() > autoRevealUntilRef.current) return;
       window.clearTimeout(settleTimer);
-      settleTimer = window.setTimeout(() => revealComposer("smooth"), 24);
+      settleTimer = window.setTimeout(() => {
+        if (performance.now() <= autoRevealUntilRef.current) revealComposer("smooth");
+      }, 24);
     };
+    const releaseAutoReveal = () => {
+      autoRevealUntilRef.current = 0;
+      window.clearTimeout(settleTimer);
+    };
+
     viewport?.addEventListener("resize", sync);
     viewport?.addEventListener("scroll", sync);
     window.addEventListener("orientationchange", sync);
+    window.addEventListener("touchstart", releaseAutoReveal, { passive: true });
+    window.addEventListener("wheel", releaseAutoReveal, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
       window.clearTimeout(settleTimer);
       viewport?.removeEventListener("resize", sync);
       viewport?.removeEventListener("scroll", sync);
       window.removeEventListener("orientationchange", sync);
+      window.removeEventListener("touchstart", releaseAutoReveal);
+      window.removeEventListener("wheel", releaseAutoReveal);
     };
   }, [open, revealComposer]);
 
@@ -70,6 +83,7 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
     // plain synchronous focus (preventScroll can suppress the keyboard in some
     // standalone Safari/PWA builds). The viewport listener below takes over the
     // scrolling once the keyboard begins its animation.
+    autoRevealUntilRef.current = performance.now() + 900;
     flushSync(() => setOpen(true));
     const textarea = textareaRef.current;
     if (textarea) {
@@ -105,7 +119,9 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
   return <div className={`${styles.wrap} ${parentId ? styles.replyComposer : ""}`}>
     {!open ? <button type="button" onClick={openComposer}>{parentId ? "Reply" : kind === "thread" ? "Start a discussion" : kind === "post" ? "Reply at this table" : "Write a comment"}</button> : <form ref={formRef} onSubmit={submit}>
       {kind === "thread" && <input name="title" aria-label="Discussion title" disabled={pending} required minLength={3} maxLength={140} placeholder="Discussion title" />}
-      <textarea ref={textareaRef} name="body" aria-label={parentId ? "Write a reply" : "Write your contribution"} disabled={pending} required maxLength={kind === "raven" ? 4000 : 10000} placeholder={parentId ? "Write a reply…" : "Write your contribution…"} onFocus={() => requestAnimationFrame(() => revealComposer("smooth"))} />
+      <textarea ref={textareaRef} name="body" aria-label={parentId ? "Write a reply" : "Write your contribution"} disabled={pending} required maxLength={kind === "raven" ? 4000 : 10000} placeholder={parentId ? "Write a reply…" : "Write your contribution…"} onFocus={() => {
+        if (performance.now() <= autoRevealUntilRef.current) requestAnimationFrame(() => revealComposer("smooth"));
+      }} />
       <div ref={actionsRef}><button disabled={pending}>{pending ? "Posting…" : "Post"}</button><button type="button" disabled={pending} onClick={() => setOpen(false)}>Cancel</button></div>
       {message === "signin" ? <p><Link href="/login">Sign in</Link> or <Link href="/register">join</Link> to post.</p> : message && <p role="alert">{message}</p>}
     </form>}
