@@ -16,21 +16,22 @@ import LikeButton from "@/components/community/LikeButton";
 import { getCommentLink } from "@/lib/communityLinks";
 import { formatCompactTime } from "@/lib/formatCompactTime";
 
-function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boolean }) {
+function Comment({ node, pinned = false, knownIds }: { node: CommentTreeNode; pinned?: boolean; knownIds: Set<string> }) {
   const { comment, children } = node;
   const user = gutterUserMap.get(comment.authorId);
   const [expanded, setExpanded] = useState(true);
   if (!user) {
-    return <>{children.map((child) => <Comment key={child.comment.id} node={child} />)}</>;
+    return <>{children.map((child) => <Comment key={child.comment.id} node={child} knownIds={knownIds} />)}</>;
   }
   const stats = getGutterUserStats(user.id);
   const identity = getGutterIdentity(user);
   const descendantCount = countDescendants(node);
+  const orphanReply = Boolean(comment.parentId && !knownIds.has(comment.parentId));
   return (
-    <li id={`comment-${comment.id}`} tabIndex={-1} className={`${styles.comment} ${pinned ? styles.pinned : ""}`} data-comment-id={comment.id} data-pinned={pinned || undefined}>
+    <li id={`comment-${comment.id}`} tabIndex={-1} className={`${styles.comment} ${pinned ? styles.pinned : ""} ${orphanReply ? styles.orphanReply : ""}`} data-comment-id={comment.id} data-pinned={pinned || undefined}>
       <article className={styles.commentContent}>
           {pinned && <div className={styles.pinLabel}>Pinned · {identity?.type === "character" ? "From the cast" : "Character replied"}</div>}
-          {comment.parentId && <Link href={getCommentLink({ ...comment, id: comment.parentId })} className={styles.parentLink}>View parent comment</Link>}
+          {comment.parentId && !orphanReply && <Link href={getCommentLink({ ...comment, id: comment.parentId })} className={styles.parentLink}>View parent comment</Link>}{orphanReply && <span className={styles.orphanReplyLabel}>↳ Reply to an earlier comment</span>}
           <details className={styles.profile}>
             <summary>
               {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={identity?.name ?? user.username} size={30} /> : user.avatarUrl ? <img className={styles.avatar} src={user.avatarUrl} alt="" /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
@@ -67,8 +68,7 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
             </div>
           </details>
           <p className={styles.body}>{comment.body}</p>
-          <LikeButton kind="raven" id={comment.id} />
-          <Composer kind="raven" entryId={comment.entryId} parentId={comment.id} />
+          <div className={styles.commentActions}><LikeButton kind="raven" id={comment.id} /><Composer kind="raven" entryId={comment.entryId} parentId={comment.id} /><Link href={getCommentLink(comment)} className={styles.permalinkIcon} aria-label="Open permalink" title="Permalink"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.2 12.8 5.5 14.5a3.2 3.2 0 0 1-4.5-4.5l2.8-2.8a3.2 3.2 0 0 1 4.5 0M12.8 7.2l1.7-1.7A3.2 3.2 0 1 1 19 10l-2.8 2.8a3.2 3.2 0 0 1-4.5 0M6.8 13.2l6.4-6.4" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round"/></svg></Link></div>
           {comment.canEdit && <ContentActions kind="raven" id={comment.id} body={comment.body} />}
           {children.length > 0 && (
             <button type="button" className={styles.replyToggle} aria-expanded={expanded} onClick={() => setExpanded((value) => !value)}>
@@ -78,7 +78,7 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
       </article>
       {children.length > 0 && expanded && (
         <ol className={styles.replies} aria-label={`Replies to @${user.username}`}>
-          {children.map((child) => <Comment key={child.comment.id} node={child} />)}
+          {children.map((child) => <Comment key={child.comment.id} node={child} knownIds={knownIds} />)}
         </ol>
       )}
     </li>
@@ -91,6 +91,7 @@ export default function GutterComments({ entryId, collapsible = false }: { entry
   const requestedComment = searchParams.get("comment");
   const comments = getGutterComments(entryId);
   const target = comments.find((comment) => comment.id === requestedComment);
+  const knownIds = new Set(comments.map((comment) => comment.id));
   const [open, setOpen] = useState(!collapsible || !!target);
   const handledTarget = useRef<string | null>(null);
   const entry = gallery.find((item) => item.id === entryId);
@@ -128,7 +129,7 @@ export default function GutterComments({ entryId, collapsible = false }: { entry
         {requestedComment && searchParams.get("item") === entryId && community.loaded && !target && <p role="status">This comment is not available yet.</p>}
         {threads.length ? (
           <ol className={styles.thread}>
-            {threads.map(({ node, pinned }) => <Comment key={node.comment.id} node={node} pinned={pinned} />)}
+            {threads.map(({ node, pinned }) => <Comment key={node.comment.id} node={node} pinned={pinned} knownIds={knownIds} />)}
           </ol>
         ) : <p className={styles.intro}>The gutters are quiet. For now.</p>}
         <Composer kind="raven" entryId={entryId} />

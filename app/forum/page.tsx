@@ -34,7 +34,7 @@ function Account({user}:{user:GutterUser}) {
   </div></details>;
 }
 function Rewards({comment}:{comment:GutterComment}) {
-  return <div className={styles.rewards}><Link href={getCommentLink(comment)} className={styles.permalink}>Permalink</Link></div>;
+  return <Link href={getCommentLink(comment)} className={styles.permalink} aria-label="Open permalink" title="Permalink"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.2 12.8 5.5 14.5a3.2 3.2 0 0 1-4.5-4.5l2.8-2.8a3.2 3.2 0 0 1 4.5 0M12.8 7.2l1.7-1.7A3.2 3.2 0 1 1 19 10l-2.8 2.8a3.2 3.2 0 0 1-4.5 0M6.8 13.2l6.4-6.4" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>;
 }
 function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNode;users:Map<string,GutterUser>;comments:GutterComment[];threadId:string;target:string|null}) {
   const {comment,children}=node;
@@ -42,13 +42,14 @@ function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNod
   const user=users.get(comment.authorId);
   if(!user)return <>{children.map(child=><ForumComment key={child.comment.id} node={child} users={users} comments={comments} threadId={threadId} target={target}/>)}</>;
   const parent=comments.find(c=>c.id===comment.parentId);
+  const orphanReply=Boolean(comment.parentId&&!parent);
   const descendantCount=countDescendants(node);
-  return <li id={`comment-${comment.id}`} tabIndex={-1} data-comment-id={comment.id} className={`${styles.comment} ${comment.moderation?styles.warning:''}`} data-highlighted={target===comment.id||undefined}>
+  return <li id={`comment-${comment.id}`} tabIndex={-1} data-comment-id={comment.id} className={`${styles.comment} ${comment.moderation?styles.warning:''} ${orphanReply?styles.orphanReply:''}`} data-highlighted={target===comment.id||undefined}>
       <article className={styles.commentContent}>
-        {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}
+        {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}{orphanReply&&<span className={styles.orphanReplyLabel}>↳ Reply to an earlier comment</span>}
         <Account user={user}/><time className={styles.time} dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time>
         {comment.moderation&&<p className={styles.modNote}>Moderator warning · {comment.moderation.rule}</p>}
-        <p className={styles.body}>{comment.body}</p><div className={styles.commentMetaRow}><LikeButton kind="post" id={comment.id} legacyReactorIds={comment.legacyFavorIds}/><Rewards comment={comment}/></div><Composer kind="post" threadId={threadId} parentId={comment.id}/>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>} 
+        <p className={styles.body}>{comment.body}</p><div className={styles.commentActions}><LikeButton kind="post" id={comment.id} legacyReactorIds={comment.legacyFavorIds}/><Composer kind="post" threadId={threadId} parentId={comment.id}/><Rewards comment={comment}/></div>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>} 
         {children.length>0&&<button type="button" className={styles.replyToggle} aria-expanded={expanded} onClick={()=>setExpanded(value=>!value)}>{expanded?'Hide':'Show'} {descendantCount} {descendantCount===1?'reply':'replies'}</button>}
       </article>
     {children.length>0&&expanded&&<ol className={styles.replies} aria-label={`Replies to @${user.username}`}>{children.map(child=><ForumComment key={child.comment.id} node={child} users={users} comments={comments} threadId={threadId} target={target}/>)}</ol>}

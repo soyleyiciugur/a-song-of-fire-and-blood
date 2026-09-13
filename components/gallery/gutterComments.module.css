@@ -114,3 +114,7 @@
 .viewProfile svg { width: 13px; height: 13px; }
 .viewProfile:hover { border-color: #a47b45; color: #ecd09d; background:#291d20; }
 .viewProfile:focus-visible { outline: 2px solid #d6b56f; outline-offset: 2px; }
+
+/* Unified Raven's Eye comment actions. */
+.commentActions{display:flex;align-items:center;gap:6px;min-height:34px;margin:6px 0 0 39px;flex-wrap:wrap}.commentActions>div{margin:0}.commentActions>div:has(form){order:3;flex:1 0 100%;width:100%}.permalinkIcon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border:1px solid transparent;border-radius:7px;color:#9d8b76;text-decoration:none;transition:background .15s,border-color .15s,color .15s}.permalinkIcon svg{width:16px;height:16px}.permalinkIcon:hover{border-color:#5b4734;background:#ffffff08;color:#ddbc84}.permalinkIcon:focus-visible{outline:2px solid #d6b56f;outline-offset:2px}.orphanReply{margin-left:18px;padding-left:12px;border-left:1px solid #514033}.orphanReplyLabel{display:inline-block;margin:0 0 7px 39px;color:#9c8669;font:10px/1.4 var(--font-geist)}
+@media(max-width:600px){.commentActions{margin-left:0;gap:4px}.permalinkIcon{width:28px;height:28px;flex-basis:28px}.orphanReply{margin-left:8px;padding-left:8px}.orphanReplyLabel{margin-left:0}}

@@ -10,7 +10,7 @@ import { notificationTargetHref } from "@/lib/notifications/target";
 import { createClient } from "@/lib/supabase/client";
 import { useCommunity, refreshCommunity } from "@/lib/communityStore";
 import { getCommentEntryLabel, getCommentLink } from "@/lib/communityLinks";
-import { groupNotifications } from "@/lib/notificationTime.mjs";
+import { groupNotifications, notificationTimeGroup } from "@/lib/notificationTime.mjs";
 import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -58,6 +58,7 @@ function Notifications() {
   const [items, setItems] = useState<SiteNotification[]>([]), [extra, setExtra] = useState<SiteNotification | null>(null);
   const [limit, setLimit] = useState(PAGE_SIZE), [activityLimit, setActivityLimit] = useState(30), [activityFilter, setActivityFilter] = useState<ActivityFilter>("for-you");
   const [loading, setLoading] = useState(true), [error, setError] = useState(""), [hasMore, setHasMore] = useState(false);
+  const [fallbackNow] = useState(() => Date.now());
   const [ledgerTab, setLedgerTab] = useState<LedgerTab>("personal");
   const [markingAll, setMarkingAll] = useState(false), [readStatus, setReadStatus] = useState("");
   const [dismissedOpenId, setDismissedOpenId] = useState<string | null>(null);
@@ -204,7 +205,8 @@ function Notifications() {
   const allComments = useMemo(() => community.comments.map((comment, order) => ({ comment, order })).sort((a, b) => Date.parse(b.comment.publishedAt) - Date.parse(a.comment.publishedAt) || b.order - a.order).map(({ comment }) => comment).filter((comment) => comment.authorId !== userId), [community.comments, userId]);
   const forYou = useMemo(() => userId ? allComments.filter((comment) => { const parent = comment.parentId ? commentsById.get(comment.parentId) : null; if (parent?.authorId === userId) return true; if (comment.surface === "forum" && threadsById.get(comment.entryId)?.authorId === userId) return true; return false; }) : [], [allComments, commentsById, threadsById, userId]);
   const activityComments = activityFilter === "for-you" && userId ? forYou : allComments;
-  const activityGroups = groupNotifications(activityComments.slice(0, activityLimit), community.serverTime ? Date.parse(community.serverTime) : Date.now());
+  const activityNow = community.serverTime ? Date.parse(community.serverTime) : fallbackNow;
+  const activityGroups = groupNotifications(activityComments.slice(0, activityLimit), activityNow);
   const activePreview = useMemo(() => {
     if (!activeNotification) return null;
     const context = activeNotification.context ?? {};
@@ -225,6 +227,26 @@ function Notifications() {
       actorLabel: actor ? `@${actor.username}` : (typeof context.actorName === "string" ? context.actorName : "Someone"),
     };
   }, [activeNotification, commentsById, users]);
+
+  const renderActivityCard = (comment: (typeof community.comments)[number], nested = false) => {
+    const user = users.get(comment.authorId); if (!user) return null;
+    const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye";
+    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={styles.legacyCard}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
+  };
+
+  const renderActivityEntries = (entries: (typeof community.comments)[number][]) => {
+    const byEntry = new Map<string, (typeof community.comments)[number][]>();
+    for (const comment of entries) {
+      const key = `${comment.surface === "forum" ? "forum" : "raven"}:${comment.entryId}`;
+      byEntry.set(key, [...(byEntry.get(key) ?? []), comment]);
+    }
+    return [...byEntry.entries()].map(([key, entryComments]) => {
+      if (entryComments.length === 1) return renderActivityCard(entryComments[0]);
+      const latest = entryComments[0];
+      const source: NotificationSource = latest.surface === "forum" ? "tavern" : "ravens-eye";
+      return <li key={key} className={styles.activityClusterItem}><details className={styles.activityCluster}><summary><span className={styles.clusterIdentity}><NotificationSourceIcon source={source} size={13} /><span><strong>{getCommentEntryLabel(latest.entryId)}</strong><small>{entryComments.length} new {entryComments.length === 1 ? "word" : "words"}</small></span></span><span className={styles.clusterMeta}><time dateTime={latest.publishedAt}>{notificationTimeGroup(latest.publishedAt, activityNow)}</time><span className={styles.clusterChevron} aria-hidden="true">⌄</span></span></summary><ol className={styles.clusterFeed}>{entryComments.map((comment) => renderActivityCard(comment, true))}</ol></details></li>;
+    });
+  };
 
   return <main className={styles.page}>
     <div className={styles.topRow}><Link href="/" className={styles.back}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>Back to Home</Link>{userId && <Link className={styles.settingsLink} href="/settings#notifications" aria-label="Raven settings" title="Raven settings"><svg className={styles.settingsIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.09a2 2 0 0 1 1 1.73v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.73l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z" /><circle cx="12" cy="12" r="3" /></svg><span className={styles.settingsText}>Raven settings</span></Link>}</div>
@@ -252,7 +274,7 @@ function Notifications() {
       <div className={styles.communityHeader}><div><span className={styles.sectionKicker}>Across the realm</span><h2>Community activity</h2><p>The familiar web activity feed remains here alongside the new personal raven ledger.</p></div><nav className={styles.activityTabs} aria-label="Community activity filters"><button type="button" aria-pressed={activityFilter === "for-you"} disabled={!userId} onClick={() => { setActivityFilter("for-you"); setActivityLimit(30); }}>For you</button><button type="button" aria-pressed={activityFilter === "all" || !userId} onClick={() => { setActivityFilter("all"); setActivityLimit(30); }}>All activity</button></nav></div>
       {!community.loaded && !community.error && <p className={styles.communityStatus}>Loading community activity…</p>}
       {community.error && <p className={styles.error}>{community.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
-      {activityGroups.map(({ label, entries }) => <section key={label} className={styles.legacyTimeGroup} aria-label={label}><h3 className={styles.timeHeading}>{label}</h3><ol className={styles.legacyFeed}>{entries.map((comment: (typeof community.comments)[number]) => { const user = users.get(comment.authorId); if (!user) return null; const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye"; return <li key={comment.id}><Link href={getCommentLink(comment)} className={styles.legacyCard}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{ageLabel(comment.publishedAt)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>; })}</ol></section>)}
+      {activityGroups.map(({ label, entries }) => <section key={label} className={styles.legacyTimeGroup} aria-label={label}><h3 className={styles.timeHeading}>{label}</h3><ol className={styles.legacyFeed}>{renderActivityEntries(entries)}</ol></section>)}
       {community.loaded && !activityComments.length && <p className={styles.communityStatus}>{activityFilter === "for-you" && userId ? "Nothing addressed to you yet." : "No community activity yet."}</p>}
       {activityComments.length > activityLimit && <button className={styles.more} onClick={() => setActivityLimit((value) => value + 30)}>Load more activity</button>}
     </section>

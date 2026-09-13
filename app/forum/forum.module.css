@@ -150,3 +150,7 @@
   .discussionBar { align-items: center; }
   .orderControl { grid-template-columns: auto minmax(0,1fr); width: 100%; }
 }
+
+/* Compact comment actions: Favor + Reply together, permalink as an icon. */
+.commentActions{display:flex;align-items:center;gap:6px;min-height:34px;margin-top:6px;flex-wrap:wrap}.commentActions>div{margin:0}.commentActions>div:has(form){order:3;flex:1 0 100%;width:100%}.permalink{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;margin-left:1px;border:1px solid transparent;border-radius:7px;color:#9d8b76;text-decoration:none;transition:background .15s,border-color .15s,color .15s}.permalink svg{width:16px;height:16px}.permalink:hover{border-color:#5b4734;background:#ffffff08;color:#ddbc84}.permalink:focus-visible{outline:2px solid #cba669;outline-offset:2px}.orphanReply{margin-left:18px;padding-left:12px;border-left:1px solid #514033}.orphanReplyLabel{display:inline-block;margin-bottom:6px;color:#9c8669;font:10px/1.4 var(--font-geist)}
+@media(max-width:600px){.commentActions{gap:4px}.permalink{width:28px;height:28px;flex-basis:28px}.orphanReply{margin-left:8px;padding-left:8px}}
