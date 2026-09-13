@@ -270,6 +270,16 @@ export default function ChapterReader() {
   const [spreadIndex, setSpreadIndex] = useState<number>(0);
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [pageInputValue, setPageInputValue] = useState<string>("1");
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobilePageIndex, setMobilePageIndex] = useState(0);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 700px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   // ── DOM refs
   const pageAreaRef = useRef<HTMLDivElement>(null);
@@ -277,6 +287,7 @@ export default function ChapterReader() {
 
   const totalSpreads = Math.max(1, 1 + Math.ceil(columnPages.length / 2));
   const totalPages = totalSpreads * 2;
+  const mobileTotalPages = Math.max(2, 2 + columnPages.length);
 
   // ── build pages whenever chapter changes (book view only — no need to
   // paginate while in scroll view, but we still keep this running so the
@@ -309,7 +320,16 @@ export default function ChapterReader() {
       // but don't reset to page 1
       setSpreadIndex((prev) => Math.max(0, Math.min(prev, total - 1)));
     }
-  }, [chapter, lang, viewMode]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [chapter, lang, viewMode, isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setMobilePageIndex((prev) => Math.max(0, Math.min(prev, mobileTotalPages - 1)));
+  }, [mobileTotalPages]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    setMobilePageIndex(Math.max(0, Math.min(spreadIndex * 2, mobileTotalPages - 1)));
+  }, [isMobile]); // intentionally only when entering/leaving mobile layout
 
   // keep the editable page-number field in sync — shows the LEFT page
   // number of the current spread
@@ -346,6 +366,14 @@ export default function ChapterReader() {
   const goNextSpread = useCallback(() => goToSpread(spreadIndex + 1), [goToSpread, spreadIndex]);
   const goPrevSpread = useCallback(() => goToSpread(spreadIndex - 1), [goToSpread, spreadIndex]);
 
+  const goNextMobilePage = useCallback(() => {
+    setMobilePageIndex((prev) => Math.min(prev + 1, mobileTotalPages - 1));
+  }, [mobileTotalPages]);
+
+  const goPrevMobilePage = useCallback(() => {
+    setMobilePageIndex((prev) => Math.max(prev - 1, 0));
+  }, []);
+
   // ── chapter nav
   const prevChapter = chapterIndex > 0 ? allChapters[chapterIndex - 1] : null;
   const nextChapter = chapterIndex < allChapters.length - 1 ? allChapters[chapterIndex + 1] : null;
@@ -363,8 +391,14 @@ export default function ChapterReader() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (viewMode === "book") {
-        if (e.key === "ArrowRight" || e.key === "ArrowDown") goNextSpread();
-        if (e.key === "ArrowLeft" || e.key === "ArrowUp") goPrevSpread();
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+          if (isMobile) goNextMobilePage();
+          else goNextSpread();
+        }
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          if (isMobile) goPrevMobilePage();
+          else goPrevSpread();
+        }
       }
       if (e.key === "Escape") {
         if (chapterListOpen) {
@@ -376,7 +410,7 @@ export default function ChapterReader() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [goNextSpread, goPrevSpread, router, lang, viewMode, chapterListOpen]);
+  }, [goNextSpread, goPrevSpread, goNextMobilePage, goPrevMobilePage, isMobile, router, lang, viewMode, chapterListOpen]);
 
   // page-number input handlers (bug #12) — input is a PAGE number,
   // convert to spread by integer division
@@ -399,6 +433,14 @@ export default function ChapterReader() {
     const right = (columnPages[colIdx + 1] || []).map(parseBlock);
     return { leftBlocks: left, rightBlocks: right };
   }, [columnPages, spreadIndex, isFirstSpread]);
+
+  const mobileBodyBlocks = useMemo(() => {
+    if (mobilePageIndex < 2) return [] as Block[];
+    return (columnPages[mobilePageIndex - 2] || []).map(parseBlock);
+  }, [columnPages, mobilePageIndex]);
+
+  const isFirstMobilePage = mobilePageIndex === 0;
+  const isLastMobilePage = mobilePageIndex === mobileTotalPages - 1;
 
   // ── full chapter blocks (scroll view) — the whole chapter, unpaginated
   const fullChapterBlocks: Block[] = useMemo(() => {
@@ -587,192 +629,271 @@ export default function ChapterReader() {
       {topControls}
 
       <div className={styles.scene}>
-        {/* hidden ruler for measuring paragraph heights */}
         <div
           ref={rulerRef}
           aria-hidden
           className={styles.paginationRuler}
         />
 
-        {/* ════════ THE OPEN BOOK ════════ */}
-      <div className={styles.book}>
+        {isMobile ? (
+          <div className={[styles.book, styles.mobileBook].join(" ")}>
+            <div
+              className={[
+                styles.mobilePage,
+                turning === "next" ? styles.turningNext : "",
+                turning === "prev" ? styles.turningPrev : "",
+              ].filter(Boolean).join(" ")}
+            >
+              <div className={styles.pageTexture} />
 
-        {/* spine */}
-        <div className={styles.spine}>
-          <span className={styles.spineTitle}>{displayTitle}</span>
-        </div>
+              {mobilePageIndex === 0 ? (
+                <div className={styles.pageContent} ref={pageAreaRef}>
+                  <div className={styles.chapterHeader}>
+                    {chapter.image && (
+                      <div className={styles.chapterImageWrap}>
+                        <ChapterCover
+                          key={chapter.image}
+                          src={chapter.image}
+                          alt={displayTitle}
+                          width={340}
+                          height={180}
+                          className={styles.chapterImage}
+                          priority
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : mobilePageIndex === 1 ? (
+                <div className={styles.synopsisBlock} ref={pageAreaRef}>
+                  <h1 className={styles.chapterTitle}>{displayTitle}</h1>
+                  <div className={styles.chapterDivider}>✦</div>
+                  <div className={styles.synopsisLabel}>
+                    {lang === "en" ? "Synopsis" : "Özet"}
+                  </div>
+                  <p className={styles.synopsisText}>
+                    {chapterSynopsis(chapter, lang)}
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.pageContent} ref={pageAreaRef}>
+                  {renderBlocks(mobileBodyBlocks)}
+                </div>
+              )}
 
-        {/* page spread */}
-        <div
-          className={[
-            styles.spread,
-            turning === "next" ? styles.turningNext : "",
-            turning === "prev" ? styles.turningPrev : "",
-          ].filter(Boolean).join(" ")}
-        >
-          {/* ── LEFT PAGE ── */}
-          <div className={styles.pageLeft}>
-            <div className={styles.pageTexture} />
+              <div className={styles.mobilePageFooter}>
+                <span className={styles.pageNumForm}>
+                  {lang === "en"
+                    ? `Page ${mobilePageIndex + 1} of ${mobileTotalPages}`
+                    : `Sayfa ${mobilePageIndex + 1} / ${mobileTotalPages}`}
+                </span>
+              </div>
 
-            {isFirstSpread ? (
-              // left page: image only
-              <div className={styles.pageContent} ref={pageAreaRef}>
-                <div className={styles.chapterHeader}>
-                  {chapter.image && (
-                    <div className={styles.chapterImageWrap}>
-                      <ChapterCover
-                        key={chapter.image}
-                        src={chapter.image}
-                        alt={displayTitle}
-                        width={340}
-                        height={180}
-                        className={styles.chapterImage}
-                        priority
-                      />
+              <button
+                type="button"
+                className={[
+                  styles.pageCorner,
+                  styles.pageCornerLeft,
+                  isFirstMobilePage && !prevChapter ? styles.pageCornerDisabled : "",
+                ].filter(Boolean).join(" ")}
+                onClick={() => {
+                  if (isFirstMobilePage) {
+                    if (prevChapter) goChapter(prevChapter.slug);
+                  } else {
+                    goPrevMobilePage();
+                  }
+                }}
+                aria-label={
+                  isFirstMobilePage
+                    ? (lang === "en" ? "Previous chapter" : "Önceki bölüm")
+                    : (lang === "en" ? "Previous page" : "Önceki sayfa")
+                }
+              />
+
+              <button
+                type="button"
+                className={[
+                  styles.pageCorner,
+                  styles.pageCornerRight,
+                  isLastMobilePage && !nextChapter ? styles.pageCornerDisabled : "",
+                ].filter(Boolean).join(" ")}
+                onClick={() => {
+                  if (isLastMobilePage) {
+                    if (nextChapter) goChapter(nextChapter.slug);
+                  } else {
+                    goNextMobilePage();
+                  }
+                }}
+                aria-label={
+                  isLastMobilePage
+                    ? (lang === "en" ? "Next chapter" : "Sonraki bölüm")
+                    : (lang === "en" ? "Next page" : "Sonraki sayfa")
+                }
+              />
+            </div>
+          </div>
+        ) : (
+          <div className={styles.book}>
+            <div className={styles.spine}>
+              <span className={styles.spineTitle}>{displayTitle}</span>
+            </div>
+
+            <div
+              className={[
+                styles.spread,
+                turning === "next" ? styles.turningNext : "",
+                turning === "prev" ? styles.turningPrev : "",
+              ].filter(Boolean).join(" ")}
+            >
+              <div className={styles.pageLeft}>
+                <div className={styles.pageTexture} />
+
+                {isFirstSpread ? (
+                  <div className={styles.pageContent} ref={pageAreaRef}>
+                    <div className={styles.chapterHeader}>
+                      {chapter.image && (
+                        <div className={styles.chapterImageWrap}>
+                          <ChapterCover
+                            key={chapter.image}
+                            src={chapter.image}
+                            alt={displayTitle}
+                            width={340}
+                            height={180}
+                            className={styles.chapterImage}
+                            priority
+                          />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className={styles.pageContent} ref={pageAreaRef}>
-                {renderBlocks(leftBlocks)}
-              </div>
-            )}
+                  </div>
+                ) : (
+                  <div className={styles.pageContent} ref={pageAreaRef}>
+                    {renderBlocks(leftBlocks)}
+                  </div>
+                )}
 
-            {/* left-page footer: editable page number */}
-            <div className={styles.pageFooter}>
-              <form
-                className={styles.pageNumForm}
-                onSubmit={(e) => { e.preventDefault(); commitPageInput(); }}
-              >
-                <span>{lang === "en" ? "Page" : "Sayfa"}</span>
-                <input
-                  className={styles.pageNumInput}
-                  type="number"
-                  min={1}
-                  max={totalPages}
-                  value={pageInputValue}
-                  onChange={(e) => setPageInputValue(e.target.value)}
-                  onBlur={commitPageInput}
-                  aria-label={lang === "en" ? "Go to page" : "Sayfaya git"}
+                <div className={styles.pageFooter}>
+                  <form
+                    className={styles.pageNumForm}
+                    onSubmit={(e) => { e.preventDefault(); commitPageInput(); }}
+                  >
+                    <span>{lang === "en" ? "Page" : "Sayfa"}</span>
+                    <input
+                      className={styles.pageNumInput}
+                      type="number"
+                      min={1}
+                      max={totalPages}
+                      value={pageInputValue}
+                      onChange={(e) => setPageInputValue(e.target.value)}
+                      onBlur={commitPageInput}
+                      aria-label={lang === "en" ? "Go to page" : "Sayfaya git"}
+                    />
+                    <span>{lang === "en" ? `of ${totalPages}` : `/ ${totalPages}`}</span>
+                  </form>
+                </div>
+
+                <div
+                  className={[
+                    styles.pageCorner,
+                    styles.pageCornerLeft,
+                    (isFirstSpread && !prevChapter) ? styles.pageCornerDisabled : "",
+                  ].filter(Boolean).join(" ")}
+                  onClick={() => {
+                    if (isFirstSpread) {
+                      if (prevChapter) goChapter(prevChapter.slug);
+                    } else {
+                      goPrevSpread();
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  title={
+                    isFirstSpread
+                      ? (prevChapter
+                          ? chapterTitle(prevChapter as Chapter, lang)
+                          : (lang === "en" ? "No previous chapter" : "Önceki bölüm yok"))
+                      : (lang === "en" ? "Previous page" : "Önceki sayfa")
+                  }
+                  aria-label={
+                    isFirstSpread
+                      ? (lang === "en" ? "Previous chapter" : "Önceki bölüm")
+                      : (lang === "en" ? "Previous page" : "Önceki sayfa")
+                  }
                 />
-                <span>{lang === "en" ? `of ${totalPages}` : `/ ${totalPages}`}</span>
-              </form>
-            </div>
+                {isFirstSpread && prevChapter && (
+                  <span className={[styles.cornerLabel, styles.cornerLabelLeft].join(" ")}>
+                    ← {lang === "en" ? "Previous chapter" : "Önceki bölüm"}
+                  </span>
+                )}
+              </div>
 
-            {/* bug #13: corner-curl hit area, embedded in the page itself.
-                First spread → previous chapter. Otherwise → previous spread. */}
-            <div
-              className={[
-                styles.pageCorner,
-                styles.pageCornerLeft,
-                (isFirstSpread && !prevChapter) ? styles.pageCornerDisabled : "",
-              ].filter(Boolean).join(" ")}
-              onClick={() => {
-                if (isFirstSpread) {
-                  if (prevChapter) goChapter(prevChapter.slug);
-                } else {
-                  goPrevSpread();
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              title={
-                isFirstSpread
-                  ? (prevChapter
-                      ? chapterTitle(prevChapter as Chapter, lang)
-                      : (lang === "en" ? "No previous chapter" : "Önceki bölüm yok"))
-                  : (lang === "en" ? "Previous page" : "Önceki sayfa")
-              }
-              aria-label={
-                isFirstSpread
-                  ? (lang === "en" ? "Previous chapter" : "Önceki bölüm")
-                  : (lang === "en" ? "Previous page" : "Önceki sayfa")
-              }
-            />
-            {isFirstSpread && prevChapter && (
-              <span className={[styles.cornerLabel, styles.cornerLabelLeft].join(" ")}>
-                ← {lang === "en" ? "Previous chapter" : "Önceki bölüm"}
-              </span>
-            )}
-          </div>
+              <div className={styles.gutter} aria-hidden />
 
-          {/* gutter shadow */}
-          <div className={styles.gutter} aria-hidden />
+              <div className={styles.pageRight}>
+                <div className={styles.pageTexture} />
 
-          {/* ── RIGHT PAGE ── */}
-          <div className={styles.pageRight}>
-            <div className={styles.pageTexture} />
+                {isFirstSpread ? (
+                  <div className={styles.synopsisBlock}>
+                    <h1 className={styles.chapterTitle}>{displayTitle}</h1>
+                    <div className={styles.chapterDivider}>✦</div>
+                    <div className={styles.synopsisLabel}>
+                      {lang === "en" ? "Synopsis" : "Özet"}
+                    </div>
+                    <p className={styles.synopsisText}>
+                      {chapterSynopsis(chapter, lang)}
+                    </p>
+                  </div>
+                ) : (
+                  <div className={styles.pageContentRight}>
+                    {renderBlocks(rightBlocks)}
+                  </div>
+                )}
 
-            {isFirstSpread ? (
-              // right page: title + synopsis only
-              <div className={styles.synopsisBlock}>
-                <h1 className={styles.chapterTitle}>{displayTitle}</h1>
-                <div className={styles.chapterDivider}>✦</div>
-                <div className={styles.synopsisLabel}>
-                  {lang === "en" ? "Synopsis" : "Özet"}
+                <div className={styles.pageFooterRight}>
+                  <span className={styles.pageNumForm}>
+                    {lang === "en"
+                      ? `Page ${spreadIndex * 2 + 2} of ${totalPages}`
+                      : `Sayfa ${spreadIndex * 2 + 2} / ${totalPages}`}
+                  </span>
                 </div>
-                <p className={styles.synopsisText}>
-                  {chapterSynopsis(chapter, lang)}
-                </p>
-              </div>
-            ) : (
-              // bug #10: the right page now renders real content instead
-              // of being empty.
-              <div className={styles.pageContentRight}>
-                {renderBlocks(rightBlocks)}
-              </div>
-            )}
 
-            {/* right-page footer: read-only indicator, one page ahead of the left */}
-            <div className={styles.pageFooterRight}>
-              <span className={styles.pageNumForm}>
-                {lang === "en"
-                  ? `Page ${spreadIndex * 2 + 2} of ${totalPages}`
-                  : `Sayfa ${spreadIndex * 2 + 2} / ${totalPages}`}
-              </span>
+                <div
+                  className={[
+                    styles.pageCorner,
+                    styles.pageCornerRight,
+                    (isLastSpread && !nextChapter) ? styles.pageCornerDisabled : "",
+                  ].filter(Boolean).join(" ")}
+                  onClick={() => {
+                    if (isLastSpread) {
+                      if (nextChapter) goChapter(nextChapter.slug);
+                    } else {
+                      goNextSpread();
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  title={
+                    isLastSpread
+                      ? (nextChapter
+                          ? chapterTitle(nextChapter as Chapter, lang)
+                          : (lang === "en" ? "No next chapter" : "Sonraki bölüm yok"))
+                      : (lang === "en" ? "Next page" : "Sonraki sayfa")
+                  }
+                  aria-label={
+                    isLastSpread
+                      ? (lang === "en" ? "Next chapter" : "Sonraki bölüm")
+                      : (lang === "en" ? "Next page" : "Sonraki sayfa")
+                  }
+                />
+                {isLastSpread && nextChapter && (
+                  <span className={[styles.cornerLabel, styles.cornerLabelRight].join(" ")}>
+                    {lang === "en" ? "Next chapter" : "Sonraki bölüm"} →
+                  </span>
+                )}
+              </div>
             </div>
-
-            {/* bug #13: corner-curl hit area for next page / next chapter */}
-            <div
-              className={[
-                styles.pageCorner,
-                styles.pageCornerRight,
-                (isLastSpread && !nextChapter) ? styles.pageCornerDisabled : "",
-              ].filter(Boolean).join(" ")}
-              onClick={() => {
-                if (isLastSpread) {
-                  if (nextChapter) goChapter(nextChapter.slug);
-                } else {
-                  goNextSpread();
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              title={
-                isLastSpread
-                  ? (nextChapter
-                      ? chapterTitle(nextChapter as Chapter, lang)
-                      : (lang === "en" ? "No next chapter" : "Sonraki bölüm yok"))
-                  : (lang === "en" ? "Next page" : "Sonraki sayfa")
-              }
-              aria-label={
-                isLastSpread
-                  ? (lang === "en" ? "Next chapter" : "Sonraki bölüm")
-                  : (lang === "en" ? "Next page" : "Sonraki sayfa")
-              }
-            />
-            {isLastSpread && nextChapter && (
-              <span className={[styles.cornerLabel, styles.cornerLabelRight].join(" ")}>
-                {lang === "en" ? "Next chapter" : "Sonraki bölüm"} →
-              </span>
-            )}
-
           </div>
-        </div>
-        {/* end spread */}
-        </div>
-        {/* end book */}
+        )}
       </div>
     </>
   );
