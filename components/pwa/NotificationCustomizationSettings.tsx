@@ -22,6 +22,8 @@ const GROUPS: PreferenceGroup[] = [
     options: [
       { key: "tavern_answers", label: "Answers to your words", note: "When someone answers you or continues a discussion you began." },
       { key: "tavern_favor", label: "Favor at the tavern", note: "When another patron grants Favor to your words." },
+      { key: "new_tavern_threads", label: "New tavern discussions", note: "When a member opens a fresh discussion. Off by default." },
+      { key: "tavern_participant_activity", label: "Activity at tables you joined", note: "Fresh words in discussions you have taken part in. Off by default." },
     ],
   },
   {
@@ -31,6 +33,7 @@ const GROUPS: PreferenceGroup[] = [
     options: [
       { key: "ravens_eye_answers", label: "Answers in the Eye", note: "When someone answers your words beneath a sighting." },
       { key: "ravens_eye_likes", label: "Approval in the Eye", note: "When someone shows approval for your words." },
+      { key: "ravens_eye_root_comments", label: "New comments beneath sightings", note: "Fresh root comments under Raven’s Eye entries. Off by default." },
       { key: "ravens_eye_images", label: "Fresh sightings", note: "New images brought before the Raven's Eye." },
       { key: "gutter_memes", label: "Gutter Memes", note: "Fresh mockery and mischief from Flea Bottom." },
       { key: "gutter_reels", label: "Gutter Reels", note: "New moving spectacle from the Gutter." },
@@ -43,6 +46,15 @@ const GROUPS: PreferenceGroup[] = [
     options: [
       { key: "direct_ravens", label: "Direct Ravens", note: "When someone sends word directly to you." },
       { key: "guild_parley", label: "Guild Parley", note: "Fresh words in a Guild Parley you belong to." },
+    ],
+  },
+  {
+    source: "guestbook",
+    title: "Guestbook",
+    copy: "Public words left upon your profile and answers written in return.",
+    options: [
+      { key: "guestbook_entries", label: "New guestbook entries", note: "When someone leaves a public note on your profile." },
+      { key: "guestbook_replies", label: "Replies to your guestbook words", note: "When someone answers your guestbook entry or reply, on any profile." },
     ],
   },
   {

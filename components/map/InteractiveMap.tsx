@@ -334,6 +334,12 @@ export default function InteractiveMap() {
   const manualControlRef =
     useRef(false);
 
+  // A portrait chosen from the chapter summary should only recenter the map
+  // once. It must not start the cinematic trail-follow camera, otherwise the
+  // viewport keeps taking control back from the user after the tap.
+  const suppressFollowOnceRef =
+    useRef(false);
+
   const {
     viewportRef,
     scale,
@@ -974,6 +980,14 @@ export default function InteractiveMap() {
   useEffect(() => {
     const resolvedNaturalSize =
       naturalSize;
+
+    if (suppressFollowOnceRef.current) {
+      suppressFollowOnceRef.current = false;
+      cancelFollow();
+      setTravelPos(null);
+      manualControlRef.current = true;
+      return;
+    }
 
     if (
       !selectedCharacterId ||
@@ -2856,11 +2870,29 @@ export default function InteractiveMap() {
                                       ? `${character?.name ?? entry.id} (passing by)`
                                       : character?.name ?? entry.id
                               }
-                              onClick={() =>
-                                setSelectedCharacterId(
-                                  entry.id
-                                )
-                              }
+                              onClick={() => {
+                                // Summary portraits behave like map shortcuts:
+                                // focus this location once, then immediately
+                                // return control to the user.
+                                suppressFollowOnceRef.current = true;
+                                setSelectedCharacterId(entry.id);
+
+                                const targetLocation =
+                                  getMapLocation(location);
+
+                                if (
+                                  targetLocation &&
+                                  naturalSize
+                                ) {
+                                  centerOn(
+                                    targetLocation.xPct,
+                                    targetLocation.yPct,
+                                    naturalSize.width,
+                                    naturalSize.height,
+                                    scale
+                                  );
+                                }
+                              }}
                             >
                               <Avatar
                                 characterId={

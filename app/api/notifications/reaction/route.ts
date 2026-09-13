@@ -28,28 +28,32 @@ export async function POST(request: Request) {
   let recipient: string | null = null;
   let href = "/notifications";
   let sourceLabel: string | null = null;
+  let notificationContext: Record<string, unknown> = { targetKind: kind, targetId };
   const notificationKind: "tavern_favor" | "ravens_eye_like" = kind === "raven" ? "ravens_eye_like" : "tavern_favor";
 
   if (kind === "thread") {
-    const { data: thread } = await supabase.from("forum_threads").select("user_author_id,title").eq("id", targetId).maybeSingle();
+    const { data: thread } = await supabase.from("forum_threads").select("user_author_id,title,body").eq("id", targetId).maybeSingle();
     recipient = thread?.user_author_id ?? null;
     sourceLabel = thread?.title ?? "Tavern discussion";
+    notificationContext = { ...notificationContext, parentBody: thread?.body ?? null };
     href = `/forum?thread=${encodeURIComponent(targetId)}`;
   } else if (kind === "post") {
-    const { data: post } = await supabase.from("forum_posts").select("user_author_id,thread_id").eq("id", targetId).maybeSingle();
+    const { data: post } = await supabase.from("forum_posts").select("user_author_id,thread_id,body").eq("id", targetId).maybeSingle();
     recipient = post?.user_author_id ?? null;
     if (post?.thread_id) {
       const { data: thread } = await supabase.from("forum_threads").select("title").eq("id", post.thread_id).maybeSingle();
       sourceLabel = thread?.title ?? "Tavern discussion";
       href = `/forum?thread=${encodeURIComponent(post.thread_id)}&comment=${encodeURIComponent(targetId)}#comment-${encodeURIComponent(targetId)}`;
+      notificationContext = { ...notificationContext, threadId: post.thread_id, parentBody: post.body };
     }
   } else {
-    const { data: comment } = await supabase.from("raven_comments").select("user_author_id,entry_id").eq("id", targetId).maybeSingle();
+    const { data: comment } = await supabase.from("raven_comments").select("user_author_id,entry_id,body").eq("id", targetId).maybeSingle();
     recipient = comment?.user_author_id ?? null;
     if (comment?.entry_id) {
       const entry = gallery.find((item) => item.id === comment.entry_id);
       sourceLabel = entry?.caption?.trim().split("\n")[0].slice(0, 130) || "The Raven's Eye";
       href = ravenLink(comment.entry_id, targetId);
+      notificationContext = { ...notificationContext, entryId: comment.entry_id, commentId: targetId, parentBody: comment.body };
     }
   }
 
@@ -61,7 +65,8 @@ export async function POST(request: Request) {
     kind: notificationKind,
     href,
     sourceLabel,
-    context: { targetKind: kind, targetId },
+    context: notificationContext,
+    groupKey: `reaction:${kind}:${targetId}`,
     dedupeKey: `reaction:${user.id}:${kind}:${targetId}:${like.created_at}`,
   }));
   return NextResponse.json({ ok: true, notified: true });

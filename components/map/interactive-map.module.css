@@ -785,6 +785,8 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .summaryLocationName {
@@ -796,10 +798,13 @@
 
 .summaryAvatarRow {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
+  max-width: 100%;
 }
 
 .summaryAvatarButton {
+  flex: 0 0 auto;
   padding: 0;
   border: 1px solid var(--border);
   border-radius: 6px;

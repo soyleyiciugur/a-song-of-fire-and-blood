@@ -18,6 +18,7 @@ export default async function DirectRavenConversationPage({ params }: { params: 
       members={data.selected.members}
       memberships={data.selected.memberships}
       initialMessages={data.messages}
+      initialSystemEvents={data.systemEvents ?? []}
       blockedByMe={data.blockedByMe}
       blockedByThem={data.blockedByThem}
     />

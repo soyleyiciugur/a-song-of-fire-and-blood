@@ -6,6 +6,7 @@ export const NOTIFICATION_SOURCE_LABELS: Record<NotificationSource, string> = {
   "direct-raven": "Direct Raven",
   "guild-parley": "Guild Parley",
   chronicle: "The Chronicle",
+  guestbook: "Guestbook",
   realm: "The Realm",
 };
 

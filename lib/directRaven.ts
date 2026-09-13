@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
-import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
+import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, DirectRavenSystemEvent, Profile } from "@/lib/supabase/database.types";
 
 export type RavenConversationSummary = {
   conversation: DirectRavenConversation;
@@ -117,6 +117,9 @@ export async function loadDirectRavenConversationOnly(id: string) {
   const profilePromise = memberIds.length
     ? supabase.from("profiles").select("*").in("id", memberIds)
     : Promise.resolve({ data: [], error: null });
+  const systemEventPromise = row.kind === "guild"
+    ? supabase.from("direct_raven_system_events").select("*").eq("conversation_id", id).order("created_at", { ascending: true }).order("id", { ascending: true }).limit(300)
+    : Promise.resolve({ data: [], error: null });
 
   const partnerId = row.kind === "raven"
     ? (row.user_a === user.id ? row.user_b : row.user_a)
@@ -132,9 +135,10 @@ export async function loadDirectRavenConversationOnly(id: string) {
     { data: messages, error: messageError },
     { data: profiles, error: profileError },
     { data: blocks, error: blockError },
-  ] = await Promise.all([messagePromise, profilePromise, blockPromise]);
+    { data: systemEvents, error: systemEventError },
+  ] = await Promise.all([messagePromise, profilePromise, blockPromise, systemEventPromise]);
 
-  if (messageError || profileError || blockError) throw new Error("The conversation could not be loaded.");
+  if (messageError || profileError || blockError || systemEventError) throw new Error("The conversation could not be loaded.");
 
   const members = (profiles ?? []) as Profile[];
   const profileMap = new Map(members.map((member) => [member.id, member]));
@@ -156,6 +160,7 @@ export async function loadDirectRavenConversationOnly(id: string) {
     } satisfies RavenConversationSummary,
     // Nothing is deleted here: load the newest 100 and let RavenConversation fetch older pages.
     messages: ((messages ?? []) as DirectRavenMessage[]).reverse(),
+    systemEvents: (systemEvents ?? []) as DirectRavenSystemEvent[],
     blockedByMe: partner ? blockRows.some((block) => block.blocker_id === user.id) : false,
     blockedByThem: partner ? blockRows.some((block) => block.blocker_id === partner.id) : false,
   };

@@ -52,6 +52,17 @@ export interface DirectRavenMessage {
   deleted_at: string | null;
 }
 
+
+export interface DirectRavenSystemEvent {
+  id: string;
+  conversation_id: string;
+  event_type: "member_added" | "member_removed" | "details_changed";
+  actor_id: string | null;
+  target_user_id: string | null;
+  detail: Record<string, unknown>;
+  created_at: string;
+}
+
 export interface DirectRavenRead {
   conversation_id: string;
   user_id: string;
@@ -116,6 +127,7 @@ export interface Database {
       direct_raven_conversations: { Row: DirectRavenConversation; Insert: Omit<DirectRavenConversation, "id" | "created_at" | "updated_at"> & Partial<Pick<DirectRavenConversation, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<DirectRavenConversation, "title" | "description" | "avatar_path" | "owner_id" | "updated_at">>; Relationships: [] };
       direct_raven_members: { Row: DirectRavenMember; Insert: Omit<DirectRavenMember, "joined_at"> & Partial<Pick<DirectRavenMember, "joined_at">>; Update: Partial<Pick<DirectRavenMember, "role">>; Relationships: [] };
       direct_raven_messages: { Row: DirectRavenMessage; Insert: Pick<DirectRavenMessage, "conversation_id" | "sender_id" | "body"> & Partial<Pick<DirectRavenMessage, "id" | "created_at" | "edited_at" | "deleted_at" | "attachment_path" | "reply_to" | "gif">>; Update: Partial<Pick<DirectRavenMessage, "body" | "edited_at" | "deleted_at">>; Relationships: [] };
+      direct_raven_system_events: { Row: DirectRavenSystemEvent; Insert: Omit<DirectRavenSystemEvent, "id" | "created_at"> & Partial<Pick<DirectRavenSystemEvent, "id" | "created_at">>; Update: never; Relationships: [] };
       direct_raven_reads: { Row: DirectRavenRead; Insert: DirectRavenRead; Update: Pick<DirectRavenRead, "last_read_at">; Relationships: [] };
       direct_raven_blocks: { Row: DirectRavenBlock; Insert: Omit<DirectRavenBlock, "created_at"> & Partial<Pick<DirectRavenBlock, "created_at">>; Update: never; Relationships: [] };
       push_subscriptions: { Row: PushSubscription; Insert: Omit<PushSubscription, "id" | "created_at" | "updated_at"> & Partial<Pick<PushSubscription, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PushSubscription, "p256dh" | "auth" | "user_agent" | "updated_at">>; Relationships: [] };

@@ -20,12 +20,6 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.startsWith("/_next/") || url.pathname.startsWith("/api/") || url.pathname === "/sw.js") return;
-  // Installation metadata must come from the current deploy, even when an old
-  // worker is still controlling Safari during the guided re-add flow.
-  if (["/manifest.webmanifest", "/icon.png", "/apple-icon.png"].includes(url.pathname)) {
-    event.respondWith(fetch(event.request, { cache: "no-store" }).catch(async () => (await caches.match(event.request)) || Response.error()));
-    return;
-  }
 
   if (event.request.mode === "navigate") {
     event.respondWith(
@@ -54,13 +48,17 @@ self.addEventListener("push", (event) => {
   let payload = {};
   try { payload = event.data?.json() ?? {}; } catch { payload = { body: event.data?.text() ?? "" }; }
 
-  const title = payload.title || "A Song of Fire and Blood";
+  const title = payload.title || "The Rookery";
   const options = {
     body: payload.body || "A new raven has arrived.",
     icon: payload.icon || "/icon.png",
-    badge: payload.badge || "/icon.png",
+    badge: payload.badge || "/notification-badge.svg",
     tag: payload.tag || "asofab-notification",
-    data: { url: payload.url || "/notifications", ...(payload.data || {}) },
+    data: {
+      url: payload.url || "/notifications",
+      notificationId: payload.notificationId || payload.data?.notificationId || null,
+      ...(payload.data || {}),
+    },
     renotify: Boolean(payload.renotify),
   };
 
@@ -72,41 +70,62 @@ self.addEventListener("push", (event) => {
   })());
 });
 
+function rookeryTarget(data = {}) {
+  if (data.notificationId) {
+    return new URL(`/notifications?open=${encodeURIComponent(data.notificationId)}`, self.location.origin).href;
+  }
+
+  try {
+    const candidate = new URL(data.url || "/notifications", self.location.origin);
+    if (candidate.origin === self.location.origin && candidate.pathname === "/notifications") return candidate.href;
+  } catch {}
+
+  return new URL("/notifications", self.location.origin).href;
+}
+
+async function askClientToOpen(client, target) {
+  if (!("postMessage" in client)) return false;
+  try {
+    const channel = new MessageChannel();
+    const acknowledged = new Promise((resolve) => {
+      const timer = setTimeout(() => resolve(false), 800);
+      channel.port1.onmessage = () => {
+        clearTimeout(timer);
+        try { channel.port1.close(); } catch {}
+        resolve(true);
+      };
+    });
+    client.postMessage({ type: "ASOFAB_OPEN_NOTIFICATION", url: target }, [channel.port2]);
+    return await acknowledged;
+  } catch {
+    return false;
+  }
+}
+
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  const data = event.notification.data || {};
-  const targetUrl = new URL("/notifications", self.location.origin);
-  // Prefer the recorded notification identity over a generic/legacy URL.
-  if (typeof data.notificationId === "string") targetUrl.searchParams.set("open", data.notificationId);
-  else {
-    try {
-      const supplied = new URL(data.url || "/notifications", self.location.origin);
-      if (supplied.origin === self.location.origin && supplied.pathname === "/notifications") targetUrl.search = supplied.search;
-    } catch { /* Malformed legacy payload: open the ledger. */ }
-  }
-  const target = targetUrl.href;
+  const target = rookeryTarget(event.notification.data || {});
+
   event.waitUntil((async () => {
     const windows = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
-    for (const client of windows.filter(client => new URL(client.url).origin === self.location.origin)) {
+
+    for (const client of windows) {
       try {
-        // Wake the existing app first. Its router handles the deep link without
-        // relying solely on WindowClient.navigate on a suspended iOS window.
+        if (!("focus" in client)) continue;
         await client.focus();
-        const handled = await new Promise(resolve => {
-          const channel = new MessageChannel();
-          const finish = value => { clearTimeout(timer); channel.port1.close(); resolve(value); };
-          const timer = setTimeout(() => finish(false), 1200);
-          channel.port1.onmessage = message => finish(message.data === "navigated");
-          try { client.postMessage({ type: "ASOFAB_OPEN_NOTIFICATION", url: target }, [channel.port2]); }
-          catch { finish(false); }
-        });
-        if (handled) return;
-        const navigated = await client.navigate(target);
-        if (navigated) return;
+
+        if (await askClientToOpen(client, target)) return;
+
+        // Legacy/fallback path for clients that do not have the current PwaBoot listener yet.
+        if ("navigate" in client) {
+          await client.navigate(target);
+          return;
+        }
       } catch {
-        // A stale/closed client must not prevent another client or a new window.
+        // The client may have disappeared between matchAll() and focus(). Try the next one.
       }
     }
-    return self.clients.openWindow(target);
+
+    await self.clients.openWindow(target);
   })());
 });

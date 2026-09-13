@@ -91,6 +91,8 @@ export type DispatchNotificationInput = {
   sourceLabel?: string | null;
   context?: Record<string, unknown>;
   dedupeKey?: string | null;
+  groupKey?: string | null;
+  groupWindowMs?: number;
 };
 
 export async function dispatchSiteNotification(input: DispatchNotificationInput): Promise<SiteNotification | null> {
@@ -110,12 +112,54 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
     actorName = actor?.display_name ?? null;
   }
 
+  const groupWindowMs = Math.max(0, input.groupWindowMs ?? 45_000);
+  if (input.groupKey && groupWindowMs > 0) {
+    const since = new Date(Date.now() - groupWindowMs).toISOString();
+    const { data: recent } = await admin.from("site_notifications")
+      .select("*")
+      .eq("user_id", input.recipientUserId)
+      .eq("source", meta.source)
+      .contains("context", { groupKey: input.groupKey })
+      .gte("created_at", since)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (recent) {
+      const count = Math.max(1, Number(recent.context?.groupCount ?? 1)) + 1;
+      const mascot = recent.mascot as NotificationMascot;
+      const groupedBody = mascot === "mara"
+        ? `${count} fresh tidings from the same place. Kept to one raven.`
+        : `${count} fresh tidings from the same quarter have arrived together, my liege.`;
+      const context = { ...(recent.context ?? {}), ...(input.context ?? {}), groupKey: input.groupKey, groupCount: count, ...(actorName ? { actorName } : {}) };
+      const { data: updated } = await admin.from("site_notifications").update({
+        body: groupedBody, href: input.href || recent.href, source_label: input.sourceLabel ?? recent.source_label, context, read_at: null,
+      }).eq("id", recent.id).select("*").single();
+      const [{ data: subscriptions }, unreadResult] = await Promise.all([
+        admin.from("push_subscriptions").select("endpoint,p256dh,auth").eq("user_id", input.recipientUserId),
+        admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null),
+      ]);
+      const badgeCount = unreadResult.count ?? undefined;
+      const notificationUrl = `/notifications?open=${encodeURIComponent(recent.id)}`;
+      await Promise.all((subscriptions ?? []).map(async (subscription) => {
+        try {
+          const response = await sendWebPush(subscription, {
+            title: recent.title, body: `${groupedBody} — ${MASCOT_META[mascot].name}`, icon: MASCOT_META[mascot].portrait, badge: "/icon.png",
+            url: notificationUrl, tag: `asofab-group-${input.groupKey}`, renotify: true, badgeCount,
+            data: { notificationId: recent.id, source: meta.source, mascot },
+          });
+          if (response.status === 404 || response.status === 410) await admin.from("push_subscriptions").delete().eq("endpoint", subscription.endpoint);
+        } catch (error) { console.error("Grouped Web Push delivery failed.", { kind: input.kind, error }); }
+      }));
+      return updated as unknown as SiteNotification;
+    }
+  }
+
   const mascot = chooseMascot(preferences);
   const { index: variantIndex, template } = chooseVariant(input.kind, mascot, preferences);
   const rendered = input.context?.shellVersion
     ? reinstallCopy[mascot]
     : renderNotificationCopy(template, { actor: actorName, source: input.sourceLabel });
-  const context = { ...(input.context ?? {}), ...(actorName ? { actorName } : {}) };
+  const context = { ...(input.context ?? {}), ...(input.groupKey ? { groupKey: input.groupKey, groupCount: 1 } : {}), ...(actorName ? { actorName } : {}) };
 
   const insert = {
     user_id: input.recipientUserId,
@@ -152,7 +196,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
   }, { onConflict: "user_id" });
 
   const [{ data: subscriptions }, unreadResult] = await Promise.all([
-    admin.from("push_subscriptions").select("endpoint,p256dh,auth,user_agent").eq("user_id", input.recipientUserId),
+    admin.from("push_subscriptions").select("endpoint,p256dh,auth").eq("user_id", input.recipientUserId),
     admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null),
   ]);
   const badgeCount = unreadResult.count ?? undefined;
@@ -161,14 +205,13 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
 
   await Promise.all((subscriptions ?? []).map(async (subscription) => {
     try {
-      const appleWebPush = /iP(hone|ad|od)|Macintosh.*Mobile/i.test(subscription.user_agent ?? "");
       const response = await sendWebPush(subscription, {
         title: rendered.title,
-        body: appleWebPush ? `${rendered.body} — ${mascotMeta.name}` : rendered.body,
+        body: `${rendered.body} — ${mascotMeta.name}`,
         icon: mascotMeta.portrait,
-        badge: "/notification-badge.png",
+        badge: "/icon.png",
         url: notificationUrl,
-        tag: `asofab-${data.id}`,
+        tag: input.groupKey ? `asofab-group-${input.groupKey}` : `asofab-${data.id}`,
         badgeCount,
         data: { notificationId: data.id, source: meta.source, mascot },
       });

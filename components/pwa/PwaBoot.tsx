@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import ShellUpdate from "./ShellUpdate";
-import AndroidInstallPrompt from "./AndroidInstallPrompt";
 import { restorePush } from "@/lib/pwa/client";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +15,7 @@ export default function PwaBoot() {
         const target = new URL(event.data.url, location.origin);
         if (target.origin !== location.origin || target.pathname !== "/notifications") return;
         const href = `${target.pathname}${target.search}`;
-        if (location.pathname === target.pathname) window.history.replaceState(null, "", href);
+        if (location.pathname === target.pathname) router.replace(href, { scroll: false });
         else router.push(href);
         event.ports[0]?.postMessage("navigated");
       } catch { /* Ignore invalid notification destinations. */ }
@@ -42,8 +41,5 @@ export default function PwaBoot() {
     return () => { cancelled = true; window.removeEventListener("load", register); };
   }, []);
 
-  return <>
-    <ShellUpdate />
-    <AndroidInstallPrompt />
-  </>;
+  return <ShellUpdate />;
 }

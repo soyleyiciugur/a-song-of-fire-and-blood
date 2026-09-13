@@ -5,7 +5,7 @@ import forum from "@/data/forum.json";
 import gallery from "@/data/gallery.json";
 import community from "@/data/flea-bottom.json";
 import { publishCommunity } from "@/lib/communityPublication.mjs";
-import { dispatchSiteNotification } from "@/lib/notifications/server";
+import { broadcastSiteNotification, dispatchSiteNotification } from "@/lib/notifications/server";
 import type { ForumSource } from "@/lib/communityTypes";
 
 const schema = z.discriminatedUnion("kind", [
@@ -55,11 +55,17 @@ export async function POST(request: Request) {
   }
 
   if (input.kind === "thread") {
-    const { error } = await supabase.from("forum_threads").insert({ title: input.title, body: input.body, category: input.category, author_type: "user", user_author_id: user.id });
-    if (error) {
+    const { data: insertedThread, error } = await supabase.from("forum_threads").insert({ title: input.title, body: input.body, category: input.category, author_type: "user", user_author_id: user.id }).select("id").single();
+    if (error || !insertedThread) {
       console.error("Community insert failed", { code: error.code, message: error.message });
       return NextResponse.json({ error: error.code === "42501" ? "Your session does not have permission to post. Sign out and sign in again." : "Your contribution could not be saved. Please try again." }, { status: 400 });
     }
+    after(() => broadcastSiteNotification({
+      actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "new_tavern_thread",
+      href: `/forum?thread=${encodeURIComponent(insertedThread.id)}`, sourceLabel: input.title,
+      context: { threadId: insertedThread.id, threadBody: input.body }, groupKey: "new-tavern-threads",
+      dedupeKey: `new-thread:${insertedThread.id}:{recipient}`,
+    }));
     return NextResponse.json({ ok: true }, { status: 201 });
   }
 
@@ -75,9 +81,12 @@ export async function POST(request: Request) {
     }
 
     let recipient: string | null = null;
+    let parentBody: string | null = null;
     if (input.parentId) {
-      const { data: parent } = await supabase.from("forum_posts").select("user_author_id").eq("id", input.parentId).maybeSingle();
-      recipient = parent?.user_author_id ?? null;
+      const staticParent = published.comments.find((comment) => comment.id === input.parentId && comment.surface === "forum");
+      const { data: parent } = staticParent ? { data: null } : await supabase.from("forum_posts").select("user_author_id,body").eq("id", input.parentId).maybeSingle();
+      recipient = parent?.user_author_id ?? staticParent?.authorId ?? null;
+      parentBody = parent?.body ?? staticParent?.body ?? null;
     }
     if (!recipient && liveThread?.user_author_id) recipient = liveThread.user_author_id;
     const sourceLabel = staticThread?.title ?? liveThread?.title ?? "Tavern discussion";
@@ -88,9 +97,20 @@ export async function POST(request: Request) {
       kind: "tavern_answer",
       href: `/forum?thread=${encodeURIComponent(input.threadId)}&comment=${encodeURIComponent(inserted.id)}#comment-${encodeURIComponent(inserted.id)}`,
       sourceLabel,
-      context: { threadId: input.threadId, commentId: inserted.id },
+      context: { threadId: input.threadId, commentId: inserted.id, parentId: input.parentId ?? null, parentBody, replyBody: input.body },
+      groupKey: `forum-thread:${input.threadId}`,
       dedupeKey: `forum-post:${inserted.id}:${recipient}`,
     }));
+    after(async () => {
+      const { data: participants } = await supabase.from("forum_posts").select("user_author_id").eq("thread_id", input.threadId).not("user_author_id", "is", null);
+      const recipients = [...new Set((participants ?? []).map((row) => row.user_author_id).filter((id): id is string => Boolean(id) && id !== user.id && id !== recipient))];
+      for (const participant of recipients) await dispatchSiteNotification({
+        recipientUserId: participant, actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "tavern_participant_activity",
+        href: `/forum?thread=${encodeURIComponent(input.threadId)}&comment=${encodeURIComponent(inserted.id)}#comment-${encodeURIComponent(inserted.id)}`,
+        sourceLabel, context: { threadId: input.threadId, commentId: inserted.id, replyBody: input.body }, groupKey: `forum-thread:${input.threadId}`,
+        dedupeKey: `forum-participant:${inserted.id}:${participant}`,
+      });
+    });
     return NextResponse.json({ ok: true }, { status: 201 });
   }
 
@@ -101,8 +121,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error?.code === "42501" ? "Your session does not have permission to post. Sign out and sign in again." : "Your contribution could not be saved. Please try again." }, { status: 400 });
   }
   if (input.parentId) {
-    const { data: parent } = await supabase.from("raven_comments").select("user_author_id").eq("id", input.parentId).maybeSingle();
-    const recipient = parent?.user_author_id ?? null;
+    const staticParent = published.comments.find((comment) => comment.id === input.parentId && !comment.surface);
+    const { data: parent } = staticParent ? { data: null } : await supabase.from("raven_comments").select("user_author_id,body").eq("id", input.parentId).maybeSingle();
+    const recipient = parent?.user_author_id ?? staticParent?.authorId ?? null;
+    const parentBody = parent?.body ?? staticParent?.body ?? null;
     if (recipient && recipient !== user.id) after(() => dispatchSiteNotification({
       recipientUserId: recipient,
       actorUserId: user.id,
@@ -110,8 +132,16 @@ export async function POST(request: Request) {
       kind: "ravens_eye_answer",
       href: ravenEntryLink(input.entryId, inserted.id),
       sourceLabel: galleryLabel(input.entryId),
-      context: { entryId: input.entryId, commentId: inserted.id },
+      context: { entryId: input.entryId, commentId: inserted.id, parentId: input.parentId, parentBody, replyBody: input.body },
+      groupKey: `raven-entry:${input.entryId}`,
       dedupeKey: `raven-comment:${inserted.id}:${recipient}`,
+    }));
+  } else {
+    after(() => broadcastSiteNotification({
+      actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "ravens_eye_root_comment",
+      href: ravenEntryLink(input.entryId, inserted.id), sourceLabel: galleryLabel(input.entryId),
+      context: { entryId: input.entryId, commentId: inserted.id, replyBody: input.body }, groupKey: `raven-entry:${input.entryId}`,
+      dedupeKey: `raven-root:${inserted.id}:{recipient}`,
     }));
   }
   return NextResponse.json({ ok: true }, { status: 201 });

@@ -1384,5 +1384,635 @@
         "body": "A fresh matter has arisen, my liege. Nothing that cannot await your dignified consideration."
       }
     ]
+  },
+  "guestbook_entry": {
+    "mara": [
+      {
+        "title": "A mark in your guestbook.",
+        "body": "{actor} left a few words on your page."
+      },
+      {
+        "title": "Someone wrote upon your page.",
+        "body": "Someone stopped by and wrote something down."
+      },
+      {
+        "title": "Fresh ink in the guestbook.",
+        "body": "There is fresh ink waiting on your profile."
+      },
+      {
+        "title": "Your guestbook has company.",
+        "body": "A visitor has left a public note for you."
+      },
+      {
+        "title": "A visitor left words behind.",
+        "body": "Someone thought your guestbook looked too empty."
+      },
+      {
+        "title": "A mark in your guestbook.",
+        "body": "{actor} left a few words on your page."
+      },
+      {
+        "title": "Someone wrote upon your page.",
+        "body": "Someone stopped by and wrote something down."
+      },
+      {
+        "title": "Fresh ink in the guestbook.",
+        "body": "There is fresh ink waiting on your profile."
+      },
+      {
+        "title": "Your guestbook has company.",
+        "body": "A visitor has left a public note for you."
+      },
+      {
+        "title": "A visitor left words behind.",
+        "body": "Someone thought your guestbook looked too empty."
+      },
+      {
+        "title": "A mark in your guestbook.",
+        "body": "{actor} left a few words on your page."
+      },
+      {
+        "title": "Someone wrote upon your page.",
+        "body": "Someone stopped by and wrote something down."
+      },
+      {
+        "title": "Fresh ink in the guestbook.",
+        "body": "There is fresh ink waiting on your profile."
+      },
+      {
+        "title": "Your guestbook has company.",
+        "body": "A visitor has left a public note for you."
+      },
+      {
+        "title": "A visitor left words behind.",
+        "body": "Someone thought your guestbook looked too empty."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "A visitor has signed your guestbook!",
+        "body": "{actor} has left words in your guestbook, my liege."
+      },
+      {
+        "title": "Fresh words upon your page.",
+        "body": "A visitor has taken the liberty of leaving a note upon your page."
+      },
+      {
+        "title": "Your guestbook has received a visitor!",
+        "body": "Your Grace, fresh ink now graces your guestbook."
+      },
+      {
+        "title": "A note has been left for you.",
+        "body": "Someone has left a public word for you, my liege."
+      },
+      {
+        "title": "Your page has fresh company!",
+        "body": "A most courteous visitor has signed your page."
+      },
+      {
+        "title": "A visitor has signed your guestbook!",
+        "body": "{actor} has left words in your guestbook, my liege."
+      },
+      {
+        "title": "Fresh words upon your page.",
+        "body": "A visitor has taken the liberty of leaving a note upon your page."
+      },
+      {
+        "title": "Your guestbook has received a visitor!",
+        "body": "Your Grace, fresh ink now graces your guestbook."
+      },
+      {
+        "title": "A note has been left for you.",
+        "body": "Someone has left a public word for you, my liege."
+      },
+      {
+        "title": "Your page has fresh company!",
+        "body": "A most courteous visitor has signed your page."
+      },
+      {
+        "title": "A visitor has signed your guestbook!",
+        "body": "{actor} has left words in your guestbook, my liege."
+      },
+      {
+        "title": "Fresh words upon your page.",
+        "body": "A visitor has taken the liberty of leaving a note upon your page."
+      },
+      {
+        "title": "Your guestbook has received a visitor!",
+        "body": "Your Grace, fresh ink now graces your guestbook."
+      },
+      {
+        "title": "A note has been left for you.",
+        "body": "Someone has left a public word for you, my liege."
+      },
+      {
+        "title": "Your page has fresh company!",
+        "body": "A most courteous visitor has signed your page."
+      }
+    ]
+  },
+  "guestbook_reply": {
+    "mara": [
+      {
+        "title": "Your guestbook words drew an answer.",
+        "body": "{actor} answered your words in the guestbook."
+      },
+      {
+        "title": "Someone answered in the guestbook.",
+        "body": "Apparently the note was not the end of it."
+      },
+      {
+        "title": "A reply waits on the page.",
+        "body": "Someone has written back to you."
+      },
+      {
+        "title": "The guestbook conversation moved.",
+        "body": "There is an answer waiting beneath your guestbook words."
+      },
+      {
+        "title": "More ink in return.",
+        "body": "The page has another turn in the exchange."
+      },
+      {
+        "title": "Your guestbook words drew an answer.",
+        "body": "{actor} answered your words in the guestbook."
+      },
+      {
+        "title": "Someone answered in the guestbook.",
+        "body": "Apparently the note was not the end of it."
+      },
+      {
+        "title": "A reply waits on the page.",
+        "body": "Someone has written back to you."
+      },
+      {
+        "title": "The guestbook conversation moved.",
+        "body": "There is an answer waiting beneath your guestbook words."
+      },
+      {
+        "title": "More ink in return.",
+        "body": "The page has another turn in the exchange."
+      },
+      {
+        "title": "Your guestbook words drew an answer.",
+        "body": "{actor} answered your words in the guestbook."
+      },
+      {
+        "title": "Someone answered in the guestbook.",
+        "body": "Apparently the note was not the end of it."
+      },
+      {
+        "title": "A reply waits on the page.",
+        "body": "Someone has written back to you."
+      },
+      {
+        "title": "The guestbook conversation moved.",
+        "body": "There is an answer waiting beneath your guestbook words."
+      },
+      {
+        "title": "More ink in return.",
+        "body": "The page has another turn in the exchange."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "An answer awaits in the guestbook!",
+        "body": "{actor} has answered your words in the guestbook, my liege."
+      },
+      {
+        "title": "Your words have drawn a reply.",
+        "body": "Your Grace, an answer now waits beneath your note."
+      },
+      {
+        "title": "Fresh words in return!",
+        "body": "Someone has continued the exchange upon the page."
+      },
+      {
+        "title": "The guestbook conversation continues.",
+        "body": "Fresh words have been offered in return, my liege."
+      },
+      {
+        "title": "A visitor has answered you!",
+        "body": "The guestbook has become a small correspondence of its own."
+      },
+      {
+        "title": "An answer awaits in the guestbook!",
+        "body": "{actor} has answered your words in the guestbook, my liege."
+      },
+      {
+        "title": "Your words have drawn a reply.",
+        "body": "Your Grace, an answer now waits beneath your note."
+      },
+      {
+        "title": "Fresh words in return!",
+        "body": "Someone has continued the exchange upon the page."
+      },
+      {
+        "title": "The guestbook conversation continues.",
+        "body": "Fresh words have been offered in return, my liege."
+      },
+      {
+        "title": "A visitor has answered you!",
+        "body": "The guestbook has become a small correspondence of its own."
+      },
+      {
+        "title": "An answer awaits in the guestbook!",
+        "body": "{actor} has answered your words in the guestbook, my liege."
+      },
+      {
+        "title": "Your words have drawn a reply.",
+        "body": "Your Grace, an answer now waits beneath your note."
+      },
+      {
+        "title": "Fresh words in return!",
+        "body": "Someone has continued the exchange upon the page."
+      },
+      {
+        "title": "The guestbook conversation continues.",
+        "body": "Fresh words have been offered in return, my liege."
+      },
+      {
+        "title": "A visitor has answered you!",
+        "body": "The guestbook has become a small correspondence of its own."
+      }
+    ]
+  },
+  "new_tavern_thread": {
+    "mara": [
+      {
+        "title": "A new table has opened.",
+        "body": "{actor} opened a new tavern discussion."
+      },
+      {
+        "title": "Fresh talk at the tavern.",
+        "body": "A fresh matter is being argued over."
+      },
+      {
+        "title": "Someone started a new matter.",
+        "body": "Someone has put new words on the table."
+      },
+      {
+        "title": "A new conversation is underway.",
+        "body": "The tavern has found something else to discuss."
+      },
+      {
+        "title": "There is another table to ignore.",
+        "body": "A new discussion has begun. It was only a matter of time."
+      },
+      {
+        "title": "A new table has opened.",
+        "body": "{actor} opened a new tavern discussion."
+      },
+      {
+        "title": "Fresh talk at the tavern.",
+        "body": "A fresh matter is being argued over."
+      },
+      {
+        "title": "Someone started a new matter.",
+        "body": "Someone has put new words on the table."
+      },
+      {
+        "title": "A new conversation is underway.",
+        "body": "The tavern has found something else to discuss."
+      },
+      {
+        "title": "There is another table to ignore.",
+        "body": "A new discussion has begun. It was only a matter of time."
+      },
+      {
+        "title": "A new table has opened.",
+        "body": "{actor} opened a new tavern discussion."
+      },
+      {
+        "title": "Fresh talk at the tavern.",
+        "body": "A fresh matter is being argued over."
+      },
+      {
+        "title": "Someone started a new matter.",
+        "body": "Someone has put new words on the table."
+      },
+      {
+        "title": "A new conversation is underway.",
+        "body": "The tavern has found something else to discuss."
+      },
+      {
+        "title": "There is another table to ignore.",
+        "body": "A new discussion has begun. It was only a matter of time."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "A new table has gathered!",
+        "body": "{actor} has opened a new tavern discussion, my liege."
+      },
+      {
+        "title": "Fresh conversation at the tavern!",
+        "body": "A fresh matter has been placed before the company."
+      },
+      {
+        "title": "A new matter is before the company.",
+        "body": "Your Grace, a new conversation has begun at the tavern."
+      },
+      {
+        "title": "The tavern has a fresh discussion!",
+        "body": "The patrons have gathered around a new subject."
+      },
+      {
+        "title": "New words have drawn a table together.",
+        "body": "A new table awaits your judgment, should you care to offer it."
+      },
+      {
+        "title": "A new table has gathered!",
+        "body": "{actor} has opened a new tavern discussion, my liege."
+      },
+      {
+        "title": "Fresh conversation at the tavern!",
+        "body": "A fresh matter has been placed before the company."
+      },
+      {
+        "title": "A new matter is before the company.",
+        "body": "Your Grace, a new conversation has begun at the tavern."
+      },
+      {
+        "title": "The tavern has a fresh discussion!",
+        "body": "The patrons have gathered around a new subject."
+      },
+      {
+        "title": "New words have drawn a table together.",
+        "body": "A new table awaits your judgment, should you care to offer it."
+      },
+      {
+        "title": "A new table has gathered!",
+        "body": "{actor} has opened a new tavern discussion, my liege."
+      },
+      {
+        "title": "Fresh conversation at the tavern!",
+        "body": "A fresh matter has been placed before the company."
+      },
+      {
+        "title": "A new matter is before the company.",
+        "body": "Your Grace, a new conversation has begun at the tavern."
+      },
+      {
+        "title": "The tavern has a fresh discussion!",
+        "body": "The patrons have gathered around a new subject."
+      },
+      {
+        "title": "New words have drawn a table together.",
+        "body": "A new table awaits your judgment, should you care to offer it."
+      }
+    ]
+  },
+  "tavern_participant_activity": {
+    "mara": [
+      {
+        "title": "The table kept talking.",
+        "body": "{actor} added more to a discussion you joined."
+      },
+      {
+        "title": "More words in a discussion you joined.",
+        "body": "Someone spoke again at a table you have visited."
+      },
+      {
+        "title": "That conversation moved again.",
+        "body": "The conversation has another turn in it."
+      },
+      {
+        "title": "The tavern carried on without you.",
+        "body": "There are fresh words in a discussion you took part in."
+      },
+      {
+        "title": "Another voice at your table.",
+        "body": "The table did not fall silent. Naturally."
+      },
+      {
+        "title": "The table kept talking.",
+        "body": "{actor} added more to a discussion you joined."
+      },
+      {
+        "title": "More words in a discussion you joined.",
+        "body": "Someone spoke again at a table you have visited."
+      },
+      {
+        "title": "That conversation moved again.",
+        "body": "The conversation has another turn in it."
+      },
+      {
+        "title": "The tavern carried on without you.",
+        "body": "There are fresh words in a discussion you took part in."
+      },
+      {
+        "title": "Another voice at your table.",
+        "body": "The table did not fall silent. Naturally."
+      },
+      {
+        "title": "The table kept talking.",
+        "body": "{actor} added more to a discussion you joined."
+      },
+      {
+        "title": "More words in a discussion you joined.",
+        "body": "Someone spoke again at a table you have visited."
+      },
+      {
+        "title": "That conversation moved again.",
+        "body": "The conversation has another turn in it."
+      },
+      {
+        "title": "The tavern carried on without you.",
+        "body": "There are fresh words in a discussion you took part in."
+      },
+      {
+        "title": "Another voice at your table.",
+        "body": "The table did not fall silent. Naturally."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "Your table is lively again!",
+        "body": "{actor} has added fresh words to a discussion you joined, my liege."
+      },
+      {
+        "title": "Fresh words in a discussion you joined.",
+        "body": "Your Grace, the table has continued in your absence."
+      },
+      {
+        "title": "The conversation continues, my liege.",
+        "body": "A conversation bearing your earlier words has stirred again."
+      },
+      {
+        "title": "Another voice has joined your table.",
+        "body": "The company has offered another turn in the exchange."
+      },
+      {
+        "title": "The tavern has more to report!",
+        "body": "Fresh words await at a table already graced by your presence."
+      },
+      {
+        "title": "Your table is lively again!",
+        "body": "{actor} has added fresh words to a discussion you joined, my liege."
+      },
+      {
+        "title": "Fresh words in a discussion you joined.",
+        "body": "Your Grace, the table has continued in your absence."
+      },
+      {
+        "title": "The conversation continues, my liege.",
+        "body": "A conversation bearing your earlier words has stirred again."
+      },
+      {
+        "title": "Another voice has joined your table.",
+        "body": "The company has offered another turn in the exchange."
+      },
+      {
+        "title": "The tavern has more to report!",
+        "body": "Fresh words await at a table already graced by your presence."
+      },
+      {
+        "title": "Your table is lively again!",
+        "body": "{actor} has added fresh words to a discussion you joined, my liege."
+      },
+      {
+        "title": "Fresh words in a discussion you joined.",
+        "body": "Your Grace, the table has continued in your absence."
+      },
+      {
+        "title": "The conversation continues, my liege.",
+        "body": "A conversation bearing your earlier words has stirred again."
+      },
+      {
+        "title": "Another voice has joined your table.",
+        "body": "The company has offered another turn in the exchange."
+      },
+      {
+        "title": "The tavern has more to report!",
+        "body": "Fresh words await at a table already graced by your presence."
+      }
+    ]
+  },
+  "ravens_eye_root_comment": {
+    "mara": [
+      {
+        "title": "Fresh words beneath a sighting.",
+        "body": "{actor} left fresh words beneath a sighting."
+      },
+      {
+        "title": "Someone spoke beneath the Eye.",
+        "body": "Someone has added a remark beneath the Raven’s Eye."
+      },
+      {
+        "title": "The sighting drew a voice.",
+        "body": "A new voice has joined the talk beneath the sighting."
+      },
+      {
+        "title": "More murmurs beneath the Raven’s Eye.",
+        "body": "There are fresh words under the spectacle."
+      },
+      {
+        "title": "The Gutter has something to say.",
+        "body": "Someone found the sighting worth commenting on."
+      },
+      {
+        "title": "Fresh words beneath a sighting.",
+        "body": "{actor} left fresh words beneath a sighting."
+      },
+      {
+        "title": "Someone spoke beneath the Eye.",
+        "body": "Someone has added a remark beneath the Raven’s Eye."
+      },
+      {
+        "title": "The sighting drew a voice.",
+        "body": "A new voice has joined the talk beneath the sighting."
+      },
+      {
+        "title": "More murmurs beneath the Raven’s Eye.",
+        "body": "There are fresh words under the spectacle."
+      },
+      {
+        "title": "The Gutter has something to say.",
+        "body": "Someone found the sighting worth commenting on."
+      },
+      {
+        "title": "Fresh words beneath a sighting.",
+        "body": "{actor} left fresh words beneath a sighting."
+      },
+      {
+        "title": "Someone spoke beneath the Eye.",
+        "body": "Someone has added a remark beneath the Raven’s Eye."
+      },
+      {
+        "title": "The sighting drew a voice.",
+        "body": "A new voice has joined the talk beneath the sighting."
+      },
+      {
+        "title": "More murmurs beneath the Raven’s Eye.",
+        "body": "There are fresh words under the spectacle."
+      },
+      {
+        "title": "The Gutter has something to say.",
+        "body": "Someone found the sighting worth commenting on."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "Fresh words beneath the Raven’s Eye!",
+        "body": "{actor} has left fresh words beneath the Raven’s Eye, my liege."
+      },
+      {
+        "title": "A new voice beneath the sighting.",
+        "body": "A new voice has joined the talk beneath the sighting."
+      },
+      {
+        "title": "The Eye has drawn fresh commentary!",
+        "body": "Your Grace, the latest spectacle has drawn fresh commentary."
+      },
+      {
+        "title": "More murmurs from the Gutter.",
+        "body": "Another remark has arrived beneath the Eye."
+      },
+      {
+        "title": "A fresh remark has reached the Eye.",
+        "body": "The little birds report fresh words around the sighting."
+      },
+      {
+        "title": "Fresh words beneath the Raven’s Eye!",
+        "body": "{actor} has left fresh words beneath the Raven’s Eye, my liege."
+      },
+      {
+        "title": "A new voice beneath the sighting.",
+        "body": "A new voice has joined the talk beneath the sighting."
+      },
+      {
+        "title": "The Eye has drawn fresh commentary!",
+        "body": "Your Grace, the latest spectacle has drawn fresh commentary."
+      },
+      {
+        "title": "More murmurs from the Gutter.",
+        "body": "Another remark has arrived beneath the Eye."
+      },
+      {
+        "title": "A fresh remark has reached the Eye.",
+        "body": "The little birds report fresh words around the sighting."
+      },
+      {
+        "title": "Fresh words beneath the Raven’s Eye!",
+        "body": "{actor} has left fresh words beneath the Raven’s Eye, my liege."
+      },
+      {
+        "title": "A new voice beneath the sighting.",
+        "body": "A new voice has joined the talk beneath the sighting."
+      },
+      {
+        "title": "The Eye has drawn fresh commentary!",
+        "body": "Your Grace, the latest spectacle has drawn fresh commentary."
+      },
+      {
+        "title": "More murmurs from the Gutter.",
+        "body": "Another remark has arrived beneath the Eye."
+      },
+      {
+        "title": "A fresh remark has reached the Eye.",
+        "body": "The little birds report fresh words around the sighting."
+      }
+    ]
   }
 }

@@ -6,6 +6,7 @@ export type NotificationSource =
   | "direct-raven"
   | "guild-parley"
   | "chronicle"
+  | "guestbook"
   | "realm";
 
 export type NotificationPreferenceKey =
@@ -19,6 +20,11 @@ export type NotificationPreferenceKey =
   | "gutter_memes"
   | "gutter_reels"
   | "new_chapters"
+  | "guestbook_entries"
+  | "guestbook_replies"
+  | "new_tavern_threads"
+  | "tavern_participant_activity"
+  | "ravens_eye_root_comments"
   | "realm_notices";
 
 export type NotificationKind =
@@ -32,6 +38,11 @@ export type NotificationKind =
   | "gutter_meme"
   | "gutter_reel"
   | "new_chapter"
+  | "guestbook_entry"
+  | "guestbook_reply"
+  | "new_tavern_thread"
+  | "tavern_participant_activity"
+  | "ravens_eye_root_comment"
   | "realm_notice";
 
 export type MascotMode = "balanced" | "mara" | "aldren";
@@ -83,6 +94,11 @@ export const DEFAULT_NOTIFICATION_FLAGS: NotificationPreferenceFlags = {
   gutter_memes: true,
   gutter_reels: true,
   new_chapters: true,
+  guestbook_entries: true,
+  guestbook_replies: true,
+  new_tavern_threads: false,
+  tavern_participant_activity: false,
+  ravens_eye_root_comments: false,
   realm_notices: true,
 };
 
@@ -101,6 +117,11 @@ export const NOTIFICATION_KIND_META: Record<NotificationKind, {
   gutter_meme: { source: "ravens-eye", preference: "gutter_memes", label: "Gutter Meme" },
   gutter_reel: { source: "ravens-eye", preference: "gutter_reels", label: "Gutter Reel" },
   new_chapter: { source: "chronicle", preference: "new_chapters", label: "Chronicle" },
+  guestbook_entry: { source: "guestbook", preference: "guestbook_entries", label: "Guestbook entry" },
+  guestbook_reply: { source: "guestbook", preference: "guestbook_replies", label: "Guestbook reply" },
+  new_tavern_thread: { source: "tavern", preference: "new_tavern_threads", label: "New Tavern thread" },
+  tavern_participant_activity: { source: "tavern", preference: "tavern_participant_activity", label: "Tavern activity" },
+  ravens_eye_root_comment: { source: "ravens-eye", preference: "ravens_eye_root_comments", label: "Raven's Eye comment" },
   realm_notice: { source: "realm", preference: "realm_notices", label: "Realm notice" },
 };
 

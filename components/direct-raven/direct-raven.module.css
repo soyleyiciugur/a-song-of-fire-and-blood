@@ -479,3 +479,5 @@
 .reactionPicker,.gifPopover{bottom:calc(100% + 8px)}
 
 .soundToggle{display:inline-grid;place-items:center;width:36px;height:36px;padding:0;border-radius:50%}.soundToggle[aria-pressed="true"]{color:#e2c18b;border-color:#8c6b42}
+
+.systemEvent{display:flex;align-items:center;justify-content:center;gap:8px;max-width:min(88%,560px);margin:14px auto;padding:7px 11px;border:1px solid #3b322b;border-radius:999px;background:linear-gradient(90deg,transparent,#171214 18%,#171214 82%,transparent);color:#877a6e;text-align:center}.systemEvent>span{color:#9d7b4e;font-size:8px}.systemEvent p{margin:0;color:#9c8e7f;font:10px/1.45 var(--font-geist)}.systemEvent time{flex:none;color:#655c54;font:8px var(--font-geist)}@media(max-width:560px){.systemEvent{max-width:94%;gap:6px;padding:6px 9px}.systemEvent p{font-size:9.5px}.systemEvent time{display:none}}

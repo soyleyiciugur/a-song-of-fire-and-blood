@@ -853,3 +853,20 @@
     visibility: hidden;
   }
 }
+
+/* Mobile PWA utility hit-target isolation: each top-bar action owns only its box. */
+@media (max-width: 1150px) {
+  .playBanner .ravenEyeButton,
+  .playBanner .gameButton,
+  .playBanner .forumButton,
+  .playBanner .directRavenButton,
+  .playBanner .notificationsButton {
+    position: relative;
+    inset: auto;
+    transform: none;
+    isolation: isolate;
+    pointer-events: auto;
+  }
+  .playBanner .forumButton,
+  .playBanner .directRavenButton { z-index: 2; }
+}

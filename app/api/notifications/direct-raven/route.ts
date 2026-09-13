@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   const parsed = schema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid raven." }, { status: 400 });
 
-  const { data: message } = await supabase.from("direct_raven_messages").select("id,conversation_id,sender_id,created_at").eq("id", parsed.data.messageId).maybeSingle();
+  const { data: message } = await supabase.from("direct_raven_messages").select("id,conversation_id,sender_id,body,created_at").eq("id", parsed.data.messageId).maybeSingle();
   if (!message || message.sender_id !== user.id) return NextResponse.json({ error: "Raven not found." }, { status: 404 });
   const [{ data: conversation }, { data: members }, { data: actor }] = await Promise.all([
     supabase.from("direct_raven_conversations").select("id,kind,title").eq("id", message.conversation_id).maybeSingle(),
@@ -31,7 +31,8 @@ export async function POST(request: Request) {
     kind,
     href: `/messages/${conversation.id}`,
     sourceLabel,
-    context: { conversationId: conversation.id, messageId: message.id },
+    context: { conversationId: conversation.id, messageId: message.id, replyBody: message.body },
+    groupKey: `direct-raven:${conversation.id}`,
     dedupeKey: `direct-raven:${message.id}:${recipient}`,
   }));
   return NextResponse.json({ ok: true, recipients: recipients.length });

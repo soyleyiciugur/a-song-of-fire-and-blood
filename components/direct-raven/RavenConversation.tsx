@@ -6,7 +6,7 @@ import charactersData from "@/data/characters/characters.json";
 import MiniPortrait from "@/components/MiniPortrait";
 import LikeButton from "@/components/community/LikeButton";
 import { createClient } from "@/lib/supabase/client";
-import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, Profile } from "@/lib/supabase/database.types";
+import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, DirectRavenSystemEvent, Profile } from "@/lib/supabase/database.types";
 import GiphyPicker, { type RavenGif } from "./GiphyPicker";
 import GuildAvatar from "./GuildAvatar";
 import GuildParleyInfo from "./GuildParleyInfo";
@@ -46,6 +46,7 @@ type Props = {
   members?: Profile[];
   memberships?: DirectRavenMember[];
   initialMessages: DirectRavenMessage[];
+  initialSystemEvents?: DirectRavenSystemEvent[];
   blockedByMe: boolean;
   blockedByThem: boolean;
 };
@@ -58,11 +59,13 @@ export default function RavenConversation({
   members = [],
   memberships = [],
   initialMessages,
+  initialSystemEvents = [],
   blockedByMe: initialBlockedByMe,
   blockedByThem: initialBlockedByThem,
 }: Props) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState(initialMessages);
+  const [systemEvents, setSystemEvents] = useState(initialSystemEvents);
   const [gif,setGif]=useState<RavenGif|null>(null);
   const [gifOpen,setGifOpen]=useState(false);
   const [body, setBody] = useState("");
@@ -100,6 +103,18 @@ export default function RavenConversation({
   };
   const isGuild = activeConversation.kind === "guild";
   const memberMap = useMemo(() => new Map(members.map((member) => [member.id, member])), [members]);
+  const timeline = useMemo(() => [
+    ...messages.map((message) => ({ type: "message" as const, at: message.created_at, id: message.id, message })),
+    ...systemEvents.map((event) => ({ type: "system" as const, at: event.created_at, id: event.id, event })),
+  ].sort((a, b) => Date.parse(a.at) - Date.parse(b.at) || a.id.localeCompare(b.id)), [messages, systemEvents]);
+  const systemEventText = (event: DirectRavenSystemEvent) => {
+    const actor = typeof event.detail.actorName === "string" ? event.detail.actorName : memberMap.get(event.actor_id ?? "")?.display_name ?? "A member";
+    const target = typeof event.detail.targetName === "string" ? event.detail.targetName : memberMap.get(event.target_user_id ?? "")?.display_name ?? "a member";
+    if (event.event_type === "member_added") return `${actor} added ${target} to the parley.`;
+    if (event.event_type === "member_removed") return `${actor} removed ${target} from the parley.`;
+    const nextTitle = typeof event.detail.newTitle === "string" ? event.detail.newTitle : null;
+    return nextTitle ? `${actor} changed the parley details · ${nextTitle}` : `${actor} changed the parley details.`;
+  };
   const closed = !isGuild && (blockedByMe || blockedByThem);
   const filteredPortraits = useMemo(() => {
     const query = portraitSearch.trim().toLowerCase();
@@ -518,6 +533,20 @@ export default function RavenConversation({
   const eligibleCountFor = (message: DirectRavenMessage) =>
     memberships.filter((membership) => membership.user_id !== userId && membership.joined_at <= message.created_at).length;
 
+
+  useEffect(() => {
+    if (!isGuild) return;
+    const channel = supabase.channel(`direct-raven-system:${conversationId}`).on(
+      "postgres_changes",
+      { event: "INSERT", schema: "public", table: "direct_raven_system_events", filter: `conversation_id=eq.${conversationId}` },
+      (payload) => {
+        const event = payload.new as DirectRavenSystemEvent;
+        setSystemEvents((current) => current.some((item) => item.id === event.id) ? current : [...current, event]);
+      },
+    ).subscribe();
+    return () => { void supabase.removeChannel(channel); };
+  }, [conversationId, isGuild, supabase]);
+
   const seenPanelMessage = seenPanelId ? messages.find((message) => message.id === seenPanelId) ?? null : null;
   const seenPanelRows = seenPanelMessage ? seenFor(seenPanelMessage) : [];
 
@@ -569,7 +598,7 @@ export default function RavenConversation({
           </button>
         )}
 
-        {!messages.length && (
+        {!timeline.length && (
           <div className={styles.emptyThread}>
             <RavenIcon size={64} />
             <h2>{isGuild ? "The hall is gathered." : "A clear sky between two keeps."}</h2>
@@ -577,12 +606,20 @@ export default function RavenConversation({
           </div>
         )}
 
-        {messages.map((message, index) => {
+        {timeline.map((item, index) => {
+          const previousAt = index > 0 ? timeline[index - 1].at : null;
+          if (item.type === "system") return (
+            <div key={`system-${item.id}`}>
+              {(!previousAt || day(item.at) !== day(previousAt)) && <div className={styles.dateDivider}>{day(item.at)}</div>}
+              <div className={styles.systemEvent}><span aria-hidden="true">✦</span><p>{systemEventText(item.event)}</p><time dateTime={item.at}>{time(item.at)}</time></div>
+            </div>
+          );
+          const message = item.message;
           const mine = message.sender_id === userId;
-          const parent = messages.find((item) => item.id === message.reply_to);
+          const parent = messages.find((entry) => entry.id === message.reply_to);
           return (
             <div key={message.id}>
-              {(index === 0 || day(message.created_at) !== day(messages[index - 1].created_at)) && (
+              {(!previousAt || day(message.created_at) !== day(previousAt)) && (
                 <div className={styles.dateDivider}>{day(message.created_at)}</div>
               )}
               <div id={`raven-${message.id}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>

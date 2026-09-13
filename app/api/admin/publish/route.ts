@@ -1,5 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\api\admin\publish\route.ts
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { z } from "zod";
 import { CharacterSchema } from "../../../../schemas/character";
 import { HouseListSchema } from "../../../../schemas/house";
@@ -15,6 +15,9 @@ import { GalleryListSchema } from "../../../../schemas/gallery";
 import { MapEventListSchema } from "../../../../schemas/map";
 import { BloodshedListSchema } from "../../../../schemas/bloodshed";
 import { updateMultipleFilesOnGithub } from "@/lib/github";
+import currentGallery from "@/data/gallery.json";
+import currentChapters from "@/data/chapters.json";
+import { broadcastSiteNotification } from "@/lib/notifications/server";
 
 export async function POST(request: Request) {
   try {
@@ -115,6 +118,22 @@ export async function POST(request: Request) {
     }
 
     await updateMultipleFilesOnGithub(files, "Publish changes via admin panel");
+
+    if (gallery) {
+      const previousIds = new Set((currentGallery as { id: string }[]).map((item) => item.id));
+      const added = (gallery as Array<{ id: string; src: string; caption?: string; category?: string }>).filter((item) => !previousIds.has(item.id));
+      for (const item of added) {
+        const isVideo = /\.(mp4|webm|mov)(?:[?#].*)?$/i.test(item.src);
+        const kind = isVideo ? "gutter_reel" as const : item.category === "fleabottom" ? "gutter_meme" as const : "ravens_eye_image" as const;
+        const href = kind === "gutter_reel" ? `/ravens-eye/reels?item=${encodeURIComponent(item.id)}` : kind === "gutter_meme" ? `/ravens-eye/memes?item=${encodeURIComponent(item.id)}` : `/ravens-eye?item=${encodeURIComponent(item.id)}`;
+        after(() => broadcastSiteNotification({ kind, href, sourceLabel: item.caption?.trim().split("\n")[0].slice(0, 140) || "Fresh sighting", context: { entryId: item.id }, groupKey: `publish:${kind}`, dedupeKey: `publish:${kind}:${item.id}:{recipient}` }));
+      }
+    }
+    if (chapters) {
+      const previousSlugs = new Set((currentChapters as { slug: string }[]).map((item) => item.slug));
+      const added = (chapters as Array<{ slug: string; title?: string }>).filter((item) => !previousSlugs.has(item.slug));
+      for (const chapter of added) after(() => broadcastSiteNotification({ kind: "new_chapter", href: `/chapters/${encodeURIComponent(chapter.slug)}`, sourceLabel: chapter.title ?? "A new chapter", context: { chapterSlug: chapter.slug }, groupKey: "publish:new-chapter", dedupeKey: `publish:chapter:${chapter.slug}:{recipient}` }));
+    }
 
     return NextResponse.json({ success: true, message: "Published successfully!" });
   } catch (error) {
