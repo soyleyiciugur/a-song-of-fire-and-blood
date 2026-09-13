@@ -689,16 +689,18 @@
   }
 
   .navLinks > *:not(:last-child)::after {
-    width: 2px;
-    height: 22px;
-    margin: 0 5px 0 12px;
+    width: 1px;
+    height: 18px;
+    margin: 0 3px 0 7px;
     border-radius: 999px;
     background: linear-gradient(180deg, transparent, rgba(212, 175, 55, .72) 22%, rgba(230, 205, 135, .9) 50%, rgba(212, 175, 55, .72) 78%, transparent);
-    box-shadow: 0 0 7px rgba(212, 175, 55, .2);
+    box-shadow: 0 0 5px rgba(212, 175, 55, .18);
   }
 
   .navLink,
   .navGroup { font-size: 14px; }
+
+  .navGroup::after { margin-left: -5px; }
 
   .playBannerCollapsed .inner > .accountMenu {
     margin-left: auto;

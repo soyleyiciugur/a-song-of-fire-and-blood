@@ -59,7 +59,6 @@ export const NAV_ITEMS: NavigationEntry[] = [
       { label: "Echoes of the Realm", href: "/quotes" },
     ],
   },
-  { label: "The Raven's Eye", href: "/ravens-eye" },
 ];
 
 // Flattened version — every group's children pulled up into a single flat

@@ -4,6 +4,7 @@
     "items": [
       "Synchronized notification read state across signed-in desktop and mobile sessions, and matched plain mobile navigation links to the grouped menu style.",
       "Added a single community sync command that generates reaction migrations and pushes them to the linked Supabase project.",
+      "Refined navbar separators and utility icons, moved The Raven's Eye beside the card game, and corrected the Direct Raven mark's sizing.",
       "Replaced the Direct Raven navbar envelope with its gold outlined raven mark.",
       "Restored navbar text sizing, improved its gold separators, rendered the Targaryen mark at full quality, and moved The Great Game into the utility icon row.",
       "Synchronized Chapter XVIII across the chronicle, character records, houses, dragons, Kingsguard book and Known World map.",
