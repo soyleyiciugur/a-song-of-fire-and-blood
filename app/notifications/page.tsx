@@ -59,6 +59,10 @@ function Notifications() {
   const [limit, setLimit] = useState(PAGE_SIZE), [activityLimit, setActivityLimit] = useState(30), [activityFilter, setActivityFilter] = useState<ActivityFilter>("for-you");
   const [loading, setLoading] = useState(true), [error, setError] = useState(""), [hasMore, setHasMore] = useState(false);
   const [ledgerTab, setLedgerTab] = useState<LedgerTab>("personal");
+  const [markingAll, setMarkingAll] = useState(false), [readStatus, setReadStatus] = useState("");
+  const [dismissedOpenId, setDismissedOpenId] = useState<string | null>(null);
+  const readOverrides = useRef(new Map<string, string>());
+  const bulkOverrides = useRef(new Map<string, string>());
   const closeRef = useRef<HTMLButtonElement>(null); const openId = params.get("open");
 
   const load = useCallback(async (id: string | null, requestedLimit = limit) => {
@@ -66,28 +70,132 @@ function Notifications() {
     if (!id) { setItems([]); setHasMore(false); setLoading(false); return; }
     const { data, error: readError } = await supabase.from("site_notifications").select("*").eq("user_id", id).order("created_at", { ascending: false }).limit(requestedLimit + 1);
     if (readError) { setError("The personal raven ledger could not be gathered. Community activity remains below."); setLoading(false); return; }
-    const normalized = (data ?? []).map((row) => normalize(row as unknown as Record<string, unknown>)).filter((row): row is SiteNotification => Boolean(row));
+    const normalized = (data ?? [])
+      .map((row) => normalize(row as unknown as Record<string, unknown>))
+      .filter((row): row is SiteNotification => Boolean(row))
+      .map((item) => {
+        const bulk = bulkOverrides.current.get(id);
+        return {
+          ...item,
+          read_at: item.read_at ?? readOverrides.current.get(item.id) ?? (bulk && item.created_at <= bulk ? bulk : null),
+        };
+      });
     setHasMore(normalized.length > requestedLimit); setItems(normalized.slice(0, requestedLimit)); setLoading(false);
-    const readAt = new Date().toISOString();
-    const { error: markError } = await supabase.from("site_notifications").update({ read_at: readAt }).eq("user_id", id).is("read_at", null);
-    if (!markError) { try { if ("clearAppBadge" in navigator) await navigator.clearAppBadge(); } catch {} window.dispatchEvent(new CustomEvent("asofab:notifications-changed", { detail: { unread: 0 } })); }
   }, [limit, supabase]);
+
+  const markRead = useCallback(async (id?: string) => {
+    if (!userId || (id && readOverrides.current.has(id))) return;
+    const readAt = new Date().toISOString();
+    const previousBulk = bulkOverrides.current.get(userId);
+
+    if (id) readOverrides.current.set(id, readAt);
+    else {
+      bulkOverrides.current.set(userId, readAt);
+      setMarkingAll(true);
+    }
+
+    const mark = (item: SiteNotification) =>
+      (!id || item.id === id) && item.created_at <= readAt
+        ? { ...item, read_at: item.read_at ?? readAt }
+        : item;
+
+    setItems((current) => current.map(mark));
+    setExtra((current) => current ? mark(current) : current);
+    setReadStatus("");
+
+    try {
+      let query = supabase
+        .from("site_notifications")
+        .update({ read_at: readAt })
+        .eq("user_id", userId)
+        .is("read_at", null);
+
+      query = id ? query.eq("id", id) : query.lte("created_at", readAt);
+      const { error: markError } = await query;
+      if (markError) throw markError;
+
+      if (!id) {
+        try { if ("clearAppBadge" in navigator) await navigator.clearAppBadge(); } catch {}
+        setReadStatus("Every waiting raven has been heard.");
+      }
+      window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
+    } catch {
+      if (id) readOverrides.current.delete(id);
+      else if (previousBulk) bulkOverrides.current.set(userId, previousBulk);
+      else bulkOverrides.current.delete(userId);
+
+      await load(userId, limit);
+      setReadStatus("The ledger could not be sealed. Please try again.");
+    } finally {
+      if (!id) setMarkingAll(false);
+    }
+  }, [limit, load, supabase, userId]);
 
   useEffect(() => { let alive = true; const resolveUser = async () => { const { data: { user } } = await supabase.auth.getUser(); if (!alive) return; setUserId(user?.id ?? null); setAuthReady(true); }; void resolveUser(); const { data } = supabase.auth.onAuthStateChange((_event, session) => { if (!alive) return; setUserId(session?.user.id ?? null); setAuthReady(true); setLimit(PAGE_SIZE); }); return () => { alive = false; data.subscription.unsubscribe(); }; }, [supabase]);
   useEffect(() => { if (!authReady) return; const timer = window.setTimeout(() => void load(userId, limit), 0); return () => window.clearTimeout(timer); }, [authReady, limit, load, userId]);
   useEffect(() => { if (!userId) return; const refresh = () => void load(userId, limit); const onVisible = () => { if (document.visibilityState === "visible") refresh(); }; window.addEventListener("focus", refresh); document.addEventListener("visibilitychange", onVisible); const channel = supabase.channel(`site-notifications-page:${userId}`).on("postgres_changes", { event: "INSERT", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` }, refresh).subscribe(); return () => { window.removeEventListener("focus", refresh); document.removeEventListener("visibilitychange", onVisible); void supabase.removeChannel(channel); }; }, [limit, load, supabase, userId]);
   useEffect(() => { if (!openId || !userId || items.some((item) => item.id === openId)) return; let active = true; void supabase.from("site_notifications").select("*").eq("user_id", userId).eq("id", openId).maybeSingle().then(({ data }) => { if (active) setExtra(data ? normalize(data as unknown as Record<string, unknown>) : null); }); return () => { active = false; }; }, [items, openId, supabase, userId]);
 
-  const activeNotification = openId ? items.find((item) => item.id === openId) ?? extra : null;
-  useEffect(() => { if (activeNotification) setLedgerTab("personal"); }, [activeNotification?.id]);
-  useEffect(() => { if (authReady && !userId) setLedgerTab("realm"); }, [authReady, userId]);
+  const activeNotification = openId && openId !== dismissedOpenId
+    ? items.find((item) => item.id === openId) ?? (extra?.id === openId ? extra : null)
+    : null;
 
-  useEffect(() => { if (!activeNotification) return; const old = document.body.style.overflow; document.body.style.overflow = "hidden"; const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") closeLightbox(); }; window.addEventListener("keydown", onKey); const frame = requestAnimationFrame(() => closeRef.current?.focus({ preventScroll: true })); return () => { document.body.style.overflow = old; window.removeEventListener("keydown", onKey); cancelAnimationFrame(frame); }; /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [activeNotification?.id]);
+  useEffect(() => {
+    if (openId && openId !== dismissedOpenId) setDismissedOpenId(null);
+  }, [openId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (activeNotification) {
+      setLedgerTab("personal");
+      if (!activeNotification.read_at) void markRead(activeNotification.id);
+    }
+  }, [activeNotification?.id, markRead]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (authReady && !userId) setLedgerTab("realm");
+  }, [authReady, userId]);
+
+  useEffect(() => {
+    if (!activeNotification) return;
+    const old = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") closeLightbox(); };
+    window.addEventListener("keydown", onKey);
+    const frame = requestAnimationFrame(() => closeRef.current?.focus({ preventScroll: true }));
+    return () => {
+      document.body.style.overflow = old;
+      window.removeEventListener("keydown", onKey);
+      cancelAnimationFrame(frame);
+    };
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [activeNotification?.id]);
+
   useEffect(() => { if (params.get("tab") === "updates") router.replace("/update-notes"); }, [params, router]);
-  function setOpen(id: string) { const next = new URLSearchParams(params.toString()); next.set("open", id); next.delete("tab"); router.replace(`/notifications?${next.toString()}`, { scroll: false }); }
-  function closeLightbox() { const next = new URLSearchParams(params.toString()); next.delete("open"); next.delete("tab"); const query = next.toString(); router.replace(`/notifications${query ? `?${query}` : ""}`, { scroll: false }); }
+
+  function setOpen(id: string) {
+    setDismissedOpenId(null);
+    const next = new URLSearchParams(params.toString());
+    next.set("open", id);
+    next.delete("tab");
+    router.replace(`/notifications?${next.toString()}`, { scroll: false });
+  }
+
+  function closeLightbox() {
+    if (openId) setDismissedOpenId(openId);
+
+    const next = new URL(window.location.href);
+    next.searchParams.delete("open");
+    next.searchParams.delete("tab");
+    const href = `${next.pathname}${next.search}${next.hash}`;
+
+    // Close immediately even if Next's search-param propagation is delayed in an
+    // awakened iOS Home Screen window.
+    window.history.replaceState(window.history.state, "", href);
+    router.replace(href, { scroll: false });
+  }
 
   const grouped = useMemo(() => { const groups = new Map<string, SiteNotification[]>(); for (const item of items) { const label = groupLabel(item.created_at); groups.set(label, [...(groups.get(label) ?? []), item]); } return [...groups]; }, [items]);
+  const unreadCount = items.reduce((count, item) => count + (item.read_at ? 0 : 1), 0);
 
   // Legacy/community activity remains visible instead of being replaced by the mascot ledger.
   const users = useMemo(() => new Map(community.users.map((user) => [user.id, user])), [community.users]);
@@ -106,7 +214,16 @@ function Notifications() {
     const replyBody = typeof context.replyBody === "string" ? context.replyBody : typeof context.threadBody === "string" ? context.threadBody : commentId ? commentsById.get(commentId)?.body ?? null : null;
     if (!parentBody && !replyBody) return null;
     const actor = activeNotification.actor_id ? users.get(activeNotification.actor_id) : null;
-    return { parentBody, replyBody, actorLabel: actor ? `@${actor.username}` : (typeof context.actorName === "string" ? context.actorName : "Someone") };
+    const contextTitle =
+      typeof context.threadTitle === "string" ? context.threadTitle
+      : typeof context.entryTitle === "string" ? context.entryTitle
+      : activeNotification.source_label;
+    return {
+      contextTitle,
+      parentBody,
+      replyBody,
+      actorLabel: actor ? `@${actor.username}` : (typeof context.actorName === "string" ? context.actorName : "Someone"),
+    };
   }, [activeNotification, commentsById, users]);
 
   return <main className={styles.page}>
@@ -114,48 +231,34 @@ function Notifications() {
     <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">Notifications<PageTitleIcon name="notifications" /></h1><p>Personal ravens from Mara and Aldren, followed by the wider conversation across the realm.</p></header>
 
     <nav className={styles.ledgerTabs} role="tablist" aria-label="Rookery ledgers">
-      <button
-        type="button"
-        role="tab"
-        id="rookery-personal-tab"
-        aria-selected={ledgerTab === "personal"}
-        aria-controls="rookery-personal-panel"
-        onClick={() => setLedgerTab("personal")}
-      >Personal Ravens</button>
-      <button
-        type="button"
-        role="tab"
-        id="rookery-realm-tab"
-        aria-selected={ledgerTab === "realm"}
-        aria-controls="rookery-realm-panel"
-        onClick={() => setLedgerTab("realm")}
-      >Across the Realm</button>
+      <button type="button" role="tab" aria-selected={ledgerTab === "personal"} onClick={() => setLedgerTab("personal")}>Personal Ravens</button>
+      <button type="button" role="tab" aria-selected={ledgerTab === "realm"} onClick={() => setLedgerTab("realm")}>Across the Realm</button>
     </nav>
 
-    {ledgerTab === "personal" && <div className={styles.ledgerPanel} id="rookery-personal-panel" role="tabpanel" aria-labelledby="rookery-personal-tab">
-      {!authReady || loading && userId ? <div className={styles.loadingLedger}><span aria-hidden="true">✦</span><p>Gathering the ravens…</p></div> : null}
-      {authReady && !userId && <section className={styles.signedOut}><span className={styles.signedOutSigil} aria-hidden="true">✦</span><h2>No name upon the ledger</h2><p>Sign in for personal ravens, account-synced unread state, and Mara/Aldren history.</p><div><Link href="/login">Sign in</Link><Link href="/register">Join the realm</Link></div></section>}
-      {error && userId && <p className={styles.error} role="status">{error} <button type="button" onClick={() => void load(userId, limit)}>Try again</button></p>}
+    {ledgerTab === "personal" && <div className={styles.ledgerPanel}>
+    {!authReady || loading && userId ? <div className={styles.loadingLedger}><span aria-hidden="true">✦</span><p>Gathering the ravens…</p></div> : null}
+    {authReady && !userId && <section className={styles.signedOut}><span className={styles.signedOutSigil} aria-hidden="true">✦</span><h2>No name upon the ledger</h2><p>Sign in for personal ravens, account-synced unread state, and Mara/Aldren history. Public community activity remains available below.</p><div><Link href="/login">Sign in</Link><Link href="/register">Join the realm</Link></div></section>}
+    {error && userId && <p className={styles.error} role="status">{error} <button type="button" onClick={() => void load(userId, limit)}>Try again</button></p>}
 
-      {userId && <section className={styles.personalLedger} aria-label="Personal raven notifications"><div className={styles.sectionHeading}><span>Personal ravens</span><small>Mara & Aldren</small></div>
-        {!loading && !error && !items.length && <section className={styles.empty}><span aria-hidden="true">✦</span><h2>The rookery is quiet</h2><p>No personal tidings await you.</p></section>}
-        {grouped.map(([label, notifications]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{notifications.map((item) => <li key={item.id}><button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}><NotificationPortrait mascot={item.mascot} source={item.source} size={52} /><span className={styles.cardContent}><span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>{!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}<svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg></button></li>)}</ol></section>)}
-        {hasMore && <button className={styles.more} type="button" onClick={() => setLimit((value) => value + PAGE_SIZE)}>Gather older ravens</button>}
-      </section>}
+    {userId && <section className={styles.personalLedger} aria-label="Personal raven notifications"><div className={styles.sectionHeading}><span>Personal ravens</span>{unreadCount > 0 && <button className={styles.markAll} type="button" disabled={markingAll || loading} onClick={() => void markRead()}>{markingAll ? "Sealing the ledger…" : "Let no raven go unheard"}</button>}</div>{readStatus && <p className={styles.readStatus} role="status">{readStatus}</p>}
+      {!loading && !error && !items.length && <section className={styles.empty}><span aria-hidden="true">✦</span><h2>The rookery is quiet</h2><p>No personal tidings await you.</p></section>}
+      {grouped.map(([label, notifications]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{notifications.map((item) => <li key={item.id}><button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}><NotificationPortrait mascot={item.mascot} source={item.source} size={52} /><span className={styles.cardContent}><span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>{!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}<svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg></button></li>)}</ol></section>)}
+      {hasMore && <button className={styles.more} type="button" onClick={() => setLimit((value) => value + PAGE_SIZE)}>Gather older ravens</button>}
+    </section>}
     </div>}
 
-    {ledgerTab === "realm" && <div className={styles.ledgerPanel} id="rookery-realm-panel" role="tabpanel" aria-labelledby="rookery-realm-tab">
-      <section className={styles.communityLedger} aria-label="Community activity">
-        <div className={styles.communityHeader}><div><span className={styles.sectionKicker}>Across the realm</span><h2>Community activity</h2><p>The wider conversation carried by players across the realm.</p></div><nav className={styles.activityTabs} aria-label="Community activity filters"><button type="button" aria-pressed={activityFilter === "for-you"} disabled={!userId} onClick={() => { setActivityFilter("for-you"); setActivityLimit(30); }}>For You</button><button type="button" aria-pressed={activityFilter === "all" || !userId} onClick={() => { setActivityFilter("all"); setActivityLimit(30); }}>All Activity</button></nav></div>
-        {!community.loaded && !community.error && <p className={styles.communityStatus}>Loading community activity…</p>}
-        {community.error && <p className={styles.error}>{community.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
-        {activityGroups.map(({ label, entries }) => <section key={label} className={styles.legacyTimeGroup} aria-label={label}><h3 className={styles.timeHeading}>{label}</h3><ol className={styles.legacyFeed}>{entries.map((comment: (typeof community.comments)[number]) => { const user = users.get(comment.authorId); if (!user) return null; const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye"; return <li key={comment.id}><Link href={getCommentLink(comment)} className={styles.legacyCard}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{ageLabel(comment.publishedAt)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>; })}</ol></section>)}
-        {community.loaded && !activityComments.length && <p className={styles.communityStatus}>{activityFilter === "for-you" && userId ? "Nothing addressed to you yet." : "No community activity yet."}</p>}
-        {activityComments.length > activityLimit && <button className={styles.more} onClick={() => setActivityLimit((value) => value + 30)}>Load more activity</button>}
-      </section>
+    {ledgerTab === "realm" && <div className={styles.ledgerPanel}>
+    <section className={styles.communityLedger} aria-label="Community activity">
+      <div className={styles.communityHeader}><div><span className={styles.sectionKicker}>Across the realm</span><h2>Community activity</h2><p>The familiar web activity feed remains here alongside the new personal raven ledger.</p></div><nav className={styles.activityTabs} aria-label="Community activity filters"><button type="button" aria-pressed={activityFilter === "for-you"} disabled={!userId} onClick={() => { setActivityFilter("for-you"); setActivityLimit(30); }}>For you</button><button type="button" aria-pressed={activityFilter === "all" || !userId} onClick={() => { setActivityFilter("all"); setActivityLimit(30); }}>All activity</button></nav></div>
+      {!community.loaded && !community.error && <p className={styles.communityStatus}>Loading community activity…</p>}
+      {community.error && <p className={styles.error}>{community.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
+      {activityGroups.map(({ label, entries }) => <section key={label} className={styles.legacyTimeGroup} aria-label={label}><h3 className={styles.timeHeading}>{label}</h3><ol className={styles.legacyFeed}>{entries.map((comment: (typeof community.comments)[number]) => { const user = users.get(comment.authorId); if (!user) return null; const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye"; return <li key={comment.id}><Link href={getCommentLink(comment)} className={styles.legacyCard}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{ageLabel(comment.publishedAt)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>; })}</ol></section>)}
+      {community.loaded && !activityComments.length && <p className={styles.communityStatus}>{activityFilter === "for-you" && userId ? "Nothing addressed to you yet." : "No community activity yet."}</p>}
+      {activityComments.length > activityLimit && <button className={styles.more} onClick={() => setActivityLimit((value) => value + 30)}>Load more activity</button>}
+    </section>
     </div>}
 
-    {activeNotification && <div className={styles.lightboxBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeLightbox(); }}><section className={styles.lightbox} role="dialog" aria-modal="true" aria-labelledby="notification-lightbox-title"><button ref={closeRef} className={styles.closeButton} type="button" aria-label="Close notification" onClick={closeLightbox}>×</button><div className={styles.lightboxOrnament} aria-hidden="true"><span>✦</span></div><NotificationPortrait mascot={activeNotification.mascot} source={activeNotification.source} size={92} className={styles.lightboxPortrait} /><span className={styles.lightboxSource}><NotificationSourceIcon source={activeNotification.source} size={13} /> {notificationSourceLabel(activeNotification.source)}</span><h2 id="notification-lightbox-title">{activeNotification.title}</h2><p className={styles.lightboxBody}>{activeNotification.body}</p><p className={styles.lightboxSignature}>— {MASCOT_META[activeNotification.mascot].name}</p>{activePreview && <div className={styles.lightboxPreview} aria-label="Notification preview">{activePreview.parentBody && <div className={styles.previewLine}><span>You</span><p>“{activePreview.parentBody}”</p></div>}{activePreview.replyBody && <div className={`${styles.previewLine} ${styles.previewReply}`}><span>{activePreview.actorLabel}</span><p>“{activePreview.replyBody}”</p></div>}</div>}{activeNotification.source_label && <p className={styles.lightboxContext}>{activeNotification.source_label}</p>}<time className={styles.lightboxTime} dateTime={activeNotification.created_at}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(activeNotification.created_at))}</time><div className={styles.lightboxActions}>{notificationTargetHref(activeNotification) !== "/notifications" && <Link className={styles.primaryAction} href={notificationTargetHref(activeNotification)}>{ctaLabel(activeNotification.source)} <span aria-hidden="true">→</span></Link>}<button type="button" className={styles.dismissAction} onClick={closeLightbox}>Return to the rookery</button></div></section></div>}
+    {activeNotification && <div className={styles.lightboxBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeLightbox(); }}><section className={styles.lightbox} role="dialog" aria-modal="true" aria-labelledby="notification-lightbox-title"><button ref={closeRef} className={styles.closeButton} type="button" aria-label="Close notification" onClick={closeLightbox}>×</button><div className={styles.lightboxOrnament} aria-hidden="true"><span>✦</span></div><NotificationPortrait mascot={activeNotification.mascot} source={activeNotification.source} size={92} className={styles.lightboxPortrait} /><span className={styles.lightboxSource}><NotificationSourceIcon source={activeNotification.source} size={13} /> {notificationSourceLabel(activeNotification.source)}</span><h2 id="notification-lightbox-title">{activeNotification.title}</h2><p className={styles.lightboxBody}>{activeNotification.body}</p><p className={styles.lightboxSignature}>— {MASCOT_META[activeNotification.mascot].name}</p>{activePreview && <div className={styles.lightboxPreview} aria-label="Notification preview">{activePreview.contextTitle && <div className={styles.previewContext}>{activePreview.contextTitle}</div>}{activePreview.parentBody && <div className={styles.previewMessage}><span>You</span><p>“{activePreview.parentBody}”</p></div>}{activePreview.parentBody && activePreview.replyBody && <div className={styles.previewDivider} aria-hidden="true"><span>✦</span></div>}{activePreview.replyBody && <div className={`${styles.previewMessage} ${styles.previewReply}`}><span>{activePreview.actorLabel}</span><p>“{activePreview.replyBody}”</p></div>}</div>}{activeNotification.source_label && !activePreview?.contextTitle && <p className={styles.lightboxContext}>{activeNotification.source_label}</p>}<time className={styles.lightboxTime} dateTime={activeNotification.created_at}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(activeNotification.created_at))}</time><div className={styles.lightboxActions}>{notificationTargetHref(activeNotification) !== "/notifications" && <Link className={styles.primaryAction} href={notificationTargetHref(activeNotification)}>{ctaLabel(activeNotification.source)} <span aria-hidden="true">→</span></Link>}<button type="button" className={styles.dismissAction} onClick={closeLightbox}>Return to the rookery</button></div></section></div>}
   </main>;
 }
 
