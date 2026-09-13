@@ -1,0 +1,10 @@
+.dialog,.guide{color:#e9dfcc;background:linear-gradient(145deg,#211b16,#100f0e);border:1px solid #82673d;border-radius:18px;padding:clamp(20px,5vw,34px);width:min(540px,calc(100vw - 28px));font-family:var(--font-body),serif;box-shadow:0 24px 90px #0009}
+.dialog{margin:auto;max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 32px);overflow:auto}
+.dialog::backdrop{background:#050403c9;backdrop-filter:blur(7px)}
+.guide{margin:calc(150px + env(safe-area-inset-top)) auto 60px}
+.messenger{display:flex;align-items:center;gap:14px;color:#d7b675;font-size:22px}.messenger img{border-radius:50%;border:1px solid #947744;object-fit:cover}.messenger small{display:block;color:#b0a490;font-size:14px}
+.dialog h2,.guide h2{font-family:var(--font-hotd),serif;font-size:24px;line-height:1.4;margin:22px 0 14px}
+.dialog p,.guide p,.dialog li,.guide li{font-size:17px;line-height:1.6;margin:12px 0}.dialog ol,.guide ol{padding-left:24px}.reason{border-left:2px solid #947744;padding-left:14px}
+.dialog a,.guide a{color:#e0c38b;text-decoration:underline;text-underline-offset:3px}.address{overflow-wrap:anywhere;font-size:15px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px}
+.dialog button,.guide button,.button{display:inline-block;border:1px solid #947744;border-radius:8px;background:#33291b;color:#f0dbac;padding:12px 17px;font:inherit;cursor:pointer;min-height:44px}.dialog button:disabled,.guide button:disabled{opacity:.6;cursor:wait}.dialog :focus-visible,.guide :focus-visible{outline:2px solid #eed09c;outline-offset:4px}.option{display:flex;gap:10px;align-items:center;margin:18px 0;font-size:16px}

@@ -85,9 +85,14 @@ function Notifications() {
     setItems((current) => current.map((item) => item.id === id ? { ...item, read_at: item.read_at ?? readAt } : item));
     setExtra((current) => current?.id === id ? { ...current, read_at: current.read_at ?? readAt } : current);
     if (userId) void supabase.from("site_notifications").update({ read_at: readAt }).eq("user_id", userId).eq("id", id).is("read_at", null);
-    const next = new URLSearchParams(params.toString()); next.set("open", id); next.delete("tab"); router.replace(`/notifications?${next.toString()}`, { scroll: false });
+    const next = new URL(window.location.href); next.searchParams.set("open", id); next.searchParams.delete("tab"); window.history.replaceState(null, "", `${next.pathname}${next.search}${next.hash}`);
   }
-  function closeLightbox() { const next = new URLSearchParams(params.toString()); next.delete("open"); next.delete("tab"); const query = next.toString(); router.replace(`/notifications${query ? `?${query}` : ""}`, { scroll: false }); }
+  function closeLightbox() {
+    const next = new URL(window.location.href);
+    next.searchParams.delete("open");
+    next.searchParams.delete("tab");
+    window.history.replaceState(null, "", `${next.pathname}${next.search}${next.hash}`);
+  }
 
   const grouped = useMemo(() => { const groups = new Map<string, SiteNotification[]>(); for (const item of items) { const label = groupLabel(item.created_at); groups.set(label, [...(groups.get(label) ?? []), item]); } return [...groups]; }, [items]);
 
@@ -102,7 +107,7 @@ function Notifications() {
   const activityGroups = groupNotifications(activityComments.slice(0, activityLimit), community.serverTime ? Date.parse(community.serverTime) : Date.now());
 
   return <main className={styles.page}>
-    <div className={styles.topRow}><Link href="/" className={styles.back}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>Back to Home</Link>{userId && <Link className={styles.settingsLink} href="/settings#notifications"><span aria-hidden="true">⚙</span> Raven settings</Link>}</div>
+    <div className={styles.topRow}><Link href="/" className={styles.back}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>Back to Home</Link>{userId && <Link className={styles.settingsLink} href="/settings#notifications" aria-label="Raven settings" title="Raven settings"><svg className={styles.settingsIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.09a2 2 0 0 1 1 1.73v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.73l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z" /><circle cx="12" cy="12" r="3" /></svg><span className={styles.settingsText}>Raven settings</span></Link>}</div>
     <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">The Rookery<PageTitleIcon name="notifications" /></h1><p>Choose your personal raven ledger or look across the wider conversation in the realm.</p></header>
 
     <nav className={styles.ledgerTabs} role="tablist" aria-label="Notification ledgers">

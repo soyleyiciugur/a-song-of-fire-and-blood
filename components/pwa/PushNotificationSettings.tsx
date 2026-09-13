@@ -64,6 +64,7 @@ export default function PushNotificationSettings() {
         updated_at: new Date().toISOString(),
       }, { onConflict: "endpoint" });
       if (error) throw error;
+      localStorage.removeItem("asofab:push-disabled");
       setState("enabled");
       setMessage("Ravens may now reach this device even while ASOFAB is closed.");
       window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
@@ -90,6 +91,7 @@ export default function PushNotificationSettings() {
   async function disable() {
     setMessage("");
     try {
+      localStorage.setItem("asofab:push-disabled", "true");
       const registration = await navigator.serviceWorker.ready;
       const subscription = await registration.pushManager.getSubscription();
       if (subscription) {

@@ -20,6 +20,12 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.startsWith("/_next/") || url.pathname.startsWith("/api/") || url.pathname === "/sw.js") return;
+  // Installation metadata must come from the current deploy, even when an old
+  // worker is still controlling Safari during the guided re-add flow.
+  if (["/manifest.webmanifest", "/icon.png", "/apple-icon.png"].includes(url.pathname)) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }).catch(async () => (await caches.match(event.request)) || Response.error()));
+    return;
+  }
 
   if (event.request.mode === "navigate") {
     event.respondWith(

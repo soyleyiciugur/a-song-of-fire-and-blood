@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import ShellUpdate from "./ShellUpdate";
+import { restorePush } from "@/lib/pwa/client";
 
 export default function PwaBoot() {
   useEffect(() => {
@@ -10,6 +12,8 @@ export default function PwaBoot() {
       try {
         const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/" });
         if (!cancelled) void registration.update();
+        await navigator.serviceWorker.ready;
+        if (!cancelled) void restorePush().catch(() => { /* Raven Settings offers explicit recovery. */ });
       } catch (error) {
         console.error("ASOFAB service worker could not be registered.", error);
       }
@@ -19,5 +23,5 @@ export default function PwaBoot() {
     return () => { cancelled = true; window.removeEventListener("load", register); };
   }, []);
 
-  return null;
+  return <ShellUpdate />;
 }

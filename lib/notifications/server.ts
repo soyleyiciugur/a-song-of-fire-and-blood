@@ -1,7 +1,9 @@
 import "server-only";
+import { chooseMascot } from "./rotation";
 
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendWebPush } from "@/lib/webPush";
+import { reinstallCopy } from "@/lib/pwa/release";
 import { notificationCopyOptions, renderNotificationCopy } from "./catalog";
 import {
   DEFAULT_NOTIFICATION_FLAGS,
@@ -46,36 +48,6 @@ function normalizePreferences(userId: string, row: Record<string, unknown> | nul
     aldren_count: Math.max(0, Number(row.aldren_count ?? 0)),
     last_variants: row.last_variants && typeof row.last_variants === "object" ? row.last_variants as Record<string, number> : {},
   };
-}
-
-function weightedPick(items: Array<[NotificationMascot, number]>) {
-  const total = items.reduce((sum, [, weight]) => sum + weight, 0);
-  let roll = Math.random() * total;
-  for (const [item, weight] of items) {
-    roll -= weight;
-    if (roll <= 0) return item;
-  }
-  return items.at(-1)?.[0] ?? "mara";
-}
-
-/**
- * Balanced mode is deliberately random, but has a catch-up mechanic:
- * the mascot who has appeared less often gains weight, and a repeated mascot
- * makes the other one increasingly likely. A third identical delivery in a
- * row is prevented outright so the pair never feels stuck on one speaker.
- */
-function chooseMascot(preferences: NotificationPreferences): NotificationMascot {
-  const last = preferences.last_mascot;
-  if (last && preferences.mascot_streak >= 2) return last === "mara" ? "aldren" : "mara";
-
-  let maraWeight = 1;
-  let aldrenWeight = 1;
-  const balance = preferences.mara_count - preferences.aldren_count;
-  if (balance > 0) aldrenWeight += Math.min(4, balance * .8);
-  if (balance < 0) maraWeight += Math.min(4, -balance * .8);
-  if (last === "mara") aldrenWeight += 2.5 + preferences.mascot_streak * 1.5;
-  if (last === "aldren") maraWeight += 2.5 + preferences.mascot_streak * 1.5;
-  return weightedPick([["mara", maraWeight], ["aldren", aldrenWeight]]);
 }
 
 function chooseVariant(kind: NotificationKind, mascot: NotificationMascot, preferences: NotificationPreferences) {
@@ -140,7 +112,9 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
 
   const mascot = chooseMascot(preferences);
   const { index: variantIndex, template } = chooseVariant(input.kind, mascot, preferences);
-  const rendered = renderNotificationCopy(template, { actor: actorName, source: input.sourceLabel });
+  const rendered = input.context?.shellVersion
+    ? reinstallCopy[mascot]
+    : renderNotificationCopy(template, { actor: actorName, source: input.sourceLabel });
   const context = { ...(input.context ?? {}), ...(actorName ? { actorName } : {}) };
 
   const insert = {

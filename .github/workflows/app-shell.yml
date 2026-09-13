@@ -1,0 +1,55 @@
+name: ASOFAB Home Screen release audit
+on:
+  push:
+  pull_request:
+  deployment_status:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  shell:
+    if: github.event_name != 'deployment_status'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Check installation metadata
+        id: audit
+        continue-on-error: true
+        run: npm run shell:check
+        env:
+          SHELL_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      - name: Notify repository owner of a required reinstall review
+        if: github.event_name == 'push'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const release = JSON.parse(fs.readFileSync('data/app-shell-release.json', 'utf8'));
+            const failed = '${{ steps.audit.outcome }}' === 'failure';
+            if (!failed && !release.reinstallRequired) return;
+            const title = failed ? 'ASOFAB: Home Screen reinstall review required' : `ASOFAB: Home Screen reinstall release v${release.version}`;
+            const issues = await github.paginate(github.rest.issues.listForRepo, { ...context.repo, state: 'all', creator: 'github-actions[bot]', per_page: 100 });
+            if (issues.some(issue => issue.title === title && (!failed || issue.state === 'open'))) return;
+            await github.rest.issues.create({ ...context.repo, title, body: `@${context.actor}\n\n${failed ? 'The shell audit detected install-time changes without a matching release. Deployment is blocked by the build check. Run the shell release command and review the reason.' : 'This release requires existing Home Screen installations to be added again. Review data/app-shell-release.json for the member-facing reason.'}\n\nAudit: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` });
+      - if: steps.audit.outcome == 'failure'
+        run: exit 1
+  publish:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && (github.event.deployment.environment == 'Production' || github.event.deployment.environment == 'production')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deliver the production shell release
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo '::error::Set the same CRON_SECRET in GitHub Actions and Vercel to enable release delivery.'
+            exit 1
+          fi
+          curl --fail --silent --show-error --max-time 60 -H "Authorization: Bearer $CRON_SECRET" https://a-song-of-fire-and-blood.vercel.app/api/app-shell/publish
