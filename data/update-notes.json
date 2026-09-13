@@ -13,6 +13,7 @@
       "Made desktop navbar collapse into a transparent zero-height layer with floating logo/account controls and a centered top expand handle, with smooth visibility transitions.",
       "Fixed notification pages so reading activity updates immediately and persists across refreshes, with a schema reload for the account read-state field.",
       "Fixed notification read-state races so signed-in users keep their account-specific read cutoff across logout and login.",
+      "Fixed the navbar CSS keyframe nesting that caused production builds to fail with an unclosed block error.",
       "Hardened Profile Settings for mobile widths with shrinkable selectors, wrapped long options, and contained gallery controls.",
       "Replaced the Direct Raven navbar envelope with its gold outlined raven mark.",
       "Restored navbar text sizing, improved its gold separators, rendered the Targaryen mark at full quality, and moved The Great Game into the utility icon row.",
