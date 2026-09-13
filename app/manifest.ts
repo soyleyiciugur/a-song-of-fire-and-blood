@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
     name: "A Song of Fire and Blood",
-    short_name: "ASOFAB",
+    short_name: "The Rookery 🐦‍⬛",
     description: "A Song of Fire and Blood",
     start_url: "/",
     scope: "/",

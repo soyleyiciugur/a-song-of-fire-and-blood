@@ -18,7 +18,11 @@ export function refreshCommunity() {
       const data = await response.json() as CommunitySnapshot;
       snapshot = { ...data, loaded: true, error: "" };
     } catch {
-      snapshot = { ...snapshot, error: "Comments could not be refreshed. Try again." };
+      // Keep a successfully loaded snapshot visible when a background poll or
+      // focus refresh fails briefly. Only the initial load needs a blocking error.
+      if (!snapshot.loaded) {
+        snapshot = { ...snapshot, error: "Comments could not be refreshed. Try again." };
+      }
     } finally {
       request = undefined;
       listeners.forEach((listener) => listener());

@@ -118,7 +118,7 @@ export default function PushNotificationSettings() {
   const statusLabel = state === "enabled" ? "Ravens permitted" : state === "denied" ? "Permission blocked" : state === "needs-install" ? "Home Screen required" : state === "unsupported" ? "Not supported" : state === "signed-out" ? "Sign in required" : "Not enabled";
 
   return <section className={`${styles.section} ${styles.deviceNotifications}`}>
-    <div className={styles.notificationSubhead}><span>Delivery to this device</span><small>iOS Home Screen web app</small></div>
+    <div className={styles.notificationSubhead}><span>Delivery</span><small>iOS Home Screen web app</small></div>
     <div className={styles.deviceNotificationCard}>
       <span className={`${styles.deliveryGlyph} ${state === "enabled" ? styles.deliveryGlyphOn : ""}`} aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg>

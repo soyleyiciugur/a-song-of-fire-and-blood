@@ -2,63 +2,63 @@
   "tavern_answer": {
     "mara": [
       {
-        "title": "Your words drew an answer",
+        "title": "Your words drew an answer.",
         "body": "Apparently the matter was not settled."
       },
       {
-        "title": "More words at the tavern",
+        "title": "More words at the tavern.",
         "body": "Someone answered what you said."
       },
       {
-        "title": "The talk carries on",
+        "title": "The talk carries on.",
         "body": "Your words brought another voice to the table."
       },
       {
-        "title": "An answer waits",
+        "title": "An answer waits.",
         "body": "Someone had more to say to you."
       },
       {
-        "title": "The tavern answered back",
+        "title": "The tavern answered back.",
         "body": "Your words did not go unanswered."
       },
       {
-        "title": "Someone took up your words",
+        "title": "Someone took up your words.",
         "body": "The exchange has another turn in it."
       },
       {
-        "title": "A voice from the table",
+        "title": "A voice from the table.",
         "body": "Someone answered while you were away."
       },
       {
-        "title": "The matter continues",
+        "title": "The matter continues.",
         "body": "There are fresh words waiting for you."
       },
       {
-        "title": "Another word in return",
+        "title": "Another word in return.",
         "body": "Someone has answered you at the tavern."
       },
       {
-        "title": "Your name came with an answer",
+        "title": "Your name came with an answer.",
         "body": "Someone returned to the matter."
       },
       {
-        "title": "The conversation moved",
+        "title": "The conversation moved.",
         "body": "Someone answered your part of it."
       },
       {
-        "title": "Words in return",
+        "title": "Words in return.",
         "body": "There is an answer waiting at the tavern."
       },
       {
-        "title": "The table was not finished",
+        "title": "The table was not finished.",
         "body": "Someone picked up where you left off."
       },
       {
-        "title": "A patron answered",
+        "title": "A patron answered.",
         "body": "Your words earned a response."
       },
       {
-        "title": "Still talking",
+        "title": "Still talking.",
         "body": "Someone found another thing to say. Of course they did."
       }
     ],
@@ -72,11 +72,11 @@
         "body": "Fresh words have been offered in answer to yours, my liege."
       },
       {
-        "title": "A patron seeks your ear",
+        "title": "A patron seeks your ear.",
         "body": "Your Grace, someone has answered the words you left at the table."
       },
       {
-        "title": "Fresh words at the tavern",
+        "title": "Fresh words at the tavern.",
         "body": "An answer has arrived for you, my liege. The company remains most engaged."
       },
       {
@@ -84,43 +84,43 @@
         "body": "Someone has replied in kind to your words, Your Grace."
       },
       {
-        "title": "Your words have stirred an answer",
+        "title": "Your words have stirred an answer.",
         "body": "A patron has taken up the matter, my liege. Your attention may be required."
       },
       {
-        "title": "Another voice joins the matter",
+        "title": "Another voice joins the matter.",
         "body": "Someone has answered you with admirable promptness, Your Grace."
       },
       {
-        "title": "The table awaits you",
+        "title": "The table awaits you.",
         "body": "New words have been spoken in answer to yours, my liege."
       },
       {
-        "title": "An answer from the tavern",
+        "title": "An answer from the tavern.",
         "body": "A fresh response awaits your consideration, Your Grace."
       },
       {
-        "title": "The company has answered",
+        "title": "The company has answered.",
         "body": "Your words have not gone unnoticed, my liege. Someone has spoken in return."
       },
       {
-        "title": "Fresh talk for Your Grace",
+        "title": "Fresh talk for Your Grace.",
         "body": "A patron has added their voice to your exchange."
       },
       {
-        "title": "The tavern calls you back",
+        "title": "The tavern calls you back.",
         "body": "Someone has answered your words, my liege. The matter appears pleasantly unfinished."
       },
       {
-        "title": "A response, my liege",
+        "title": "A response, my liege.",
         "body": "The conversation has advanced in your absence, though surely not beyond recovery."
       },
       {
-        "title": "Your exchange grows",
+        "title": "Your exchange grows.",
         "body": "Another answer has joined the tavern talk, Your Grace."
       },
       {
-        "title": "Words await your judgment",
+        "title": "Words await your judgment.",
         "body": "Someone has spoken in return, my liege. I trust you will find their effort worthy."
       }
     ]
@@ -128,63 +128,63 @@
   "tavern_favor": {
     "mara": [
       {
-        "title": "Your words found favor",
+        "title": "Your words found favor.",
         "body": "Someone approved of what you said."
       },
       {
-        "title": "A little favor",
+        "title": "A little favor.",
         "body": "Your words pleased someone. Enjoy it while it lasts."
       },
       {
-        "title": "Approval at the tavern",
+        "title": "Approval at the tavern.",
         "body": "Someone thought your words worth favoring."
       },
       {
-        "title": "Favor found you",
+        "title": "Favor found you.",
         "body": "A patron approved of your contribution."
       },
       {
-        "title": "Your words were well received",
+        "title": "Your words were well received.",
         "body": "Someone granted them favor."
       },
       {
-        "title": "A nod from the table",
+        "title": "A nod from the table.",
         "body": "Someone approved of what you said."
       },
       {
-        "title": "Someone approved",
+        "title": "Someone approved.",
         "body": "Your tavern words found favor."
       },
       {
-        "title": "Favor for your words",
+        "title": "Favor for your words.",
         "body": "A patron chose to show approval."
       },
       {
-        "title": "Your words earned a nod",
+        "title": "Your words earned a nod.",
         "body": "Someone at the tavern approved."
       },
       {
-        "title": "A small mark of favor",
+        "title": "A small mark of favor.",
         "body": "Someone thought your words worthy of it."
       },
       {
-        "title": "The table approves",
+        "title": "The table approves.",
         "body": "At least one patron found favor in what you had to say."
       },
       {
-        "title": "Some favor, for once",
+        "title": "Some favor, for once.",
         "body": "Your words earned approval at the tavern."
       },
       {
-        "title": "Your words landed well",
+        "title": "Your words landed well.",
         "body": "Someone granted them favor."
       },
       {
-        "title": "A patron showed favor",
+        "title": "A patron showed favor.",
         "body": "Your contribution did not pass unnoticed."
       },
       {
-        "title": "Favor at the table",
+        "title": "Favor at the table.",
         "body": "Someone approved. Try not to let it change you."
       }
     ],
@@ -194,7 +194,7 @@
         "body": "Someone has shown their appreciation, my liege. A discerning soul, no doubt."
       },
       {
-        "title": "Favor for Your Grace",
+        "title": "Favor for Your Grace.",
         "body": "A patron has seen fit to honor your words with their approval."
       },
       {
@@ -202,11 +202,11 @@
         "body": "Someone has granted favor to your contribution, my liege."
       },
       {
-        "title": "A mark of approval",
+        "title": "A mark of approval.",
         "body": "Your words have earned a patron’s favor, Your Grace."
       },
       {
-        "title": "The tavern shows its favor",
+        "title": "The tavern shows its favor.",
         "body": "Someone has offered their approval, my liege. Entirely deserved, naturally."
       },
       {
@@ -214,11 +214,11 @@
         "body": "Your contribution has found favor with one of the company, Your Grace."
       },
       {
-        "title": "Your words pleased the company",
+        "title": "Your words pleased the company.",
         "body": "A patron has granted them favor, my liege."
       },
       {
-        "title": "A patron salutes your words",
+        "title": "A patron salutes your words.",
         "body": "Your contribution has been met with approval, Your Grace."
       },
       {
@@ -226,27 +226,27 @@
         "body": "Someone has judged your words worthy, my liege. Sound judgment, I am sure."
       },
       {
-        "title": "A worthy nod of approval",
+        "title": "A worthy nod of approval.",
         "body": "Your words have earned favor at the tavern, Your Grace."
       },
       {
-        "title": "The company approves",
+        "title": "The company approves.",
         "body": "A patron has shown appreciation for your words, my liege."
       },
       {
-        "title": "Your contribution is favored",
+        "title": "Your contribution is favored.",
         "body": "Someone has marked your words with approval, Your Grace."
       },
       {
-        "title": "A pleasant bit of acclaim",
+        "title": "A pleasant bit of acclaim.",
         "body": "Your words have found favor, my liege. How gratifying."
       },
       {
-        "title": "The table honors your words",
+        "title": "The table honors your words.",
         "body": "A patron has offered their favor, Your Grace."
       },
       {
-        "title": "Another admirer, my liege",
+        "title": "Another admirer, my liege.",
         "body": "Someone has granted favor to your words. One cannot fault their taste."
       }
     ]
@@ -254,63 +254,63 @@
   "ravens_eye_answer": {
     "mara": [
       {
-        "title": "Your words drew an answer",
+        "title": "Your words drew an answer.",
         "body": "Someone answered you beneath the Raven’s Eye."
       },
       {
-        "title": "The Gutter answered back",
+        "title": "The Gutter answered back.",
         "body": "Your words found another voice in Flea Bottom."
       },
       {
-        "title": "A voice from the Gutter",
+        "title": "A voice from the Gutter.",
         "body": "Someone had more to say to you."
       },
       {
-        "title": "Your remark was noticed",
+        "title": "Your remark was noticed.",
         "body": "Someone answered beneath the Raven’s Eye."
       },
       {
-        "title": "More words in Flea Bottom",
+        "title": "More words in Flea Bottom.",
         "body": "Your words drew an answer."
       },
       {
-        "title": "The spectacle continues",
+        "title": "The spectacle continues.",
         "body": "Someone answered your words in the Gutter."
       },
       {
-        "title": "An answer beneath the Eye",
+        "title": "An answer beneath the Eye.",
         "body": "Someone returned to what you said."
       },
       {
-        "title": "The Gutter has a response",
+        "title": "The Gutter has a response.",
         "body": "Your words did not pass quietly."
       },
       {
-        "title": "Someone answered you",
+        "title": "Someone answered you.",
         "body": "There are fresh words beneath the Raven’s Eye."
       },
       {
-        "title": "Your words stirred the Gutter",
+        "title": "Your words stirred the Gutter.",
         "body": "Someone answered. Flea Bottom remains awake."
       },
       {
-        "title": "Another voice in the crowd",
+        "title": "Another voice in the crowd.",
         "body": "Someone took up your words beneath the Eye."
       },
       {
-        "title": "The Gutter kept talking",
+        "title": "The Gutter kept talking.",
         "body": "Your words have an answer waiting."
       },
       {
-        "title": "An answer from Flea Bottom",
+        "title": "An answer from Flea Bottom.",
         "body": "Someone responded to what you said."
       },
       {
-        "title": "Your remark drew company",
+        "title": "Your remark drew company.",
         "body": "Someone joined your exchange beneath the Raven’s Eye."
       },
       {
-        "title": "Still not settled",
+        "title": "Still not settled.",
         "body": "Someone answered your words. Apparently that was necessary."
       }
     ],
@@ -320,15 +320,15 @@
         "body": "Someone has taken up your words in Flea Bottom, my liege."
       },
       {
-        "title": "The Gutter answers Your Grace",
+        "title": "The Gutter answers Your Grace.",
         "body": "A fresh response awaits beneath the Raven’s Eye."
       },
       {
-        "title": "Fresh whispers from Flea Bottom",
+        "title": "Fresh whispers from Flea Bottom.",
         "body": "Someone has answered your words, my liege. The little birds were attentive."
       },
       {
-        "title": "Your words have stirred the Gutter",
+        "title": "Your words have stirred the Gutter.",
         "body": "An answer has appeared beneath the Raven’s Eye, Your Grace."
       },
       {
@@ -336,15 +336,15 @@
         "body": "Someone has replied to your words in Flea Bottom, my liege."
       },
       {
-        "title": "The Raven’s Eye brings an answer",
+        "title": "The Raven’s Eye brings an answer.",
         "body": "Your Grace, another voice has joined your exchange."
       },
       {
-        "title": "The Gutter speaks in return",
+        "title": "The Gutter speaks in return.",
         "body": "Someone has answered what you said, my liege."
       },
       {
-        "title": "A fresh answer, Your Grace",
+        "title": "A fresh answer, Your Grace.",
         "body": "The little birds report new words beneath the Raven’s Eye."
       },
       {
@@ -352,27 +352,27 @@
         "body": "Someone in Flea Bottom has taken up the matter, my liege."
       },
       {
-        "title": "Word from beneath the Eye",
+        "title": "Word from beneath the Eye.",
         "body": "A new answer awaits your attention, Your Grace."
       },
       {
-        "title": "The crowd has answered",
+        "title": "The crowd has answered.",
         "body": "Your words have drawn a response in the Gutter, my liege."
       },
       {
-        "title": "The little birds bring word",
+        "title": "The little birds bring word.",
         "body": "Someone has answered you beneath the Raven’s Eye, Your Grace."
       },
       {
-        "title": "Flea Bottom calls you back",
+        "title": "Flea Bottom calls you back.",
         "body": "A fresh response has joined your exchange, my liege."
       },
       {
-        "title": "Your words did not pass unnoticed",
+        "title": "Your words did not pass unnoticed.",
         "body": "Someone has answered beneath the Eye, Your Grace."
       },
       {
-        "title": "Another voice for your attention",
+        "title": "Another voice for your attention.",
         "body": "The Gutter has offered an answer, my liege. One hopes it is worthy of you."
       }
     ]
@@ -380,63 +380,63 @@
   "ravens_eye_like": {
     "mara": [
       {
-        "title": "Your words found favor",
+        "title": "Your words found favor.",
         "body": "Someone approved beneath the Raven’s Eye."
       },
       {
-        "title": "A nod from the Gutter",
+        "title": "A nod from the Gutter.",
         "body": "Someone approved of what you said. Stranger things happen."
       },
       {
-        "title": "Favor beneath the Eye",
+        "title": "Favor beneath the Eye.",
         "body": "Your words pleased someone in Flea Bottom."
       },
       {
-        "title": "Someone approved",
+        "title": "Someone approved.",
         "body": "Your remark beneath the Raven’s Eye found favor."
       },
       {
-        "title": "Your words landed well",
+        "title": "Your words landed well.",
         "body": "Someone in the Gutter showed approval."
       },
       {
-        "title": "A little acclaim",
+        "title": "A little acclaim.",
         "body": "Your words found favor beneath the Eye."
       },
       {
-        "title": "The Gutter approves",
+        "title": "The Gutter approves.",
         "body": "Someone thought your remark worth favoring."
       },
       {
-        "title": "A mark of approval",
+        "title": "A mark of approval.",
         "body": "Your words beneath the Eye earned it."
       },
       {
-        "title": "Your words found favor",
+        "title": "Your words found favor.",
         "body": "The Gutter has shown a rare bit of agreement."
       },
       {
-        "title": "Your remark found favor",
+        "title": "Your remark found favor.",
         "body": "Someone beneath the Raven’s Eye approved."
       },
       {
-        "title": "A nod from Flea Bottom",
+        "title": "A nod from Flea Bottom.",
         "body": "Your words pleased someone in the crowd."
       },
       {
-        "title": "Approval from the Gutter",
+        "title": "Approval from the Gutter.",
         "body": "Someone saw merit in what you said."
       },
       {
-        "title": "Your words were noticed",
+        "title": "Your words were noticed.",
         "body": "Someone granted them favor beneath the Eye."
       },
       {
-        "title": "A small bit of favor",
+        "title": "A small bit of favor.",
         "body": "Someone approved of your remark."
       },
       {
-        "title": "The crowd agrees, briefly",
+        "title": "The crowd agrees, briefly.",
         "body": "Your words found favor beneath the Raven’s Eye."
       }
     ],
@@ -446,7 +446,7 @@
         "body": "Someone beneath the Raven’s Eye has shown their appreciation, my liege."
       },
       {
-        "title": "Acclaim from Flea Bottom",
+        "title": "Acclaim from Flea Bottom.",
         "body": "Your remark has earned favor in the Gutter, Your Grace."
       },
       {
@@ -454,15 +454,15 @@
         "body": "Someone has granted favor to your words, my liege. A perceptive soul."
       },
       {
-        "title": "Favor beneath the Raven’s Eye",
+        "title": "Favor beneath the Raven’s Eye.",
         "body": "Your words have been met with approval, Your Grace."
       },
       {
-        "title": "A discerning voice in the crowd",
+        "title": "A discerning voice in the crowd.",
         "body": "Someone has shown favor to your remark, my liege."
       },
       {
-        "title": "Your words are well received",
+        "title": "Your words are well received.",
         "body": "The little birds report a mark of approval, Your Grace."
       },
       {
@@ -470,35 +470,35 @@
         "body": "Someone in Flea Bottom has approved of your words, my liege."
       },
       {
-        "title": "The crowd honors your remark",
+        "title": "The crowd honors your remark.",
         "body": "Your words have found favor beneath the Eye, Your Grace."
       },
       {
-        "title": "Approval from the Gutter",
+        "title": "Approval from the Gutter.",
         "body": "Someone has shown appreciation for what you said, my liege."
       },
       {
-        "title": "Your Grace has found favor",
+        "title": "Your Grace has found favor.",
         "body": "A voice beneath the Raven’s Eye has marked your words with approval."
       },
       {
-        "title": "The little birds bring acclaim",
+        "title": "The little birds bring acclaim.",
         "body": "Someone has favored your remark, my liege."
       },
       {
-        "title": "Your words pleased the crowd",
+        "title": "Your words pleased the crowd.",
         "body": "A patron of the Gutter has shown approval, Your Grace."
       },
       {
-        "title": "A mark of favor from Flea Bottom",
+        "title": "A mark of favor from Flea Bottom.",
         "body": "Someone has judged your words worthy, my liege."
       },
       {
-        "title": "The Raven’s Eye sees approval",
+        "title": "The Raven’s Eye sees approval.",
         "body": "Your remark has found favor, Your Grace."
       },
       {
-        "title": "Another admirer in the Gutter",
+        "title": "Another admirer in the Gutter.",
         "body": "Someone has favored your words, my liege. Their judgment appears sound."
       }
     ]
@@ -506,63 +506,63 @@
   "direct_raven": {
     "mara": [
       {
-        "title": "A raven for you",
+        "title": "A raven for you.",
         "body": "{actor} has sent word."
       },
       {
-        "title": "A raven arrived",
+        "title": "A raven arrived.",
         "body": "There is a new missive from {actor}."
       },
       {
-        "title": "Word by raven",
+        "title": "Word by raven.",
         "body": "{actor} sent something for you."
       },
       {
-        "title": "A fresh missive",
+        "title": "A fresh missive.",
         "body": "There is word from {actor}."
       },
       {
-        "title": "The rookery has work",
+        "title": "The rookery has work.",
         "body": "A raven from {actor} is waiting."
       },
       {
-        "title": "Someone sent word",
+        "title": "Someone sent word.",
         "body": "{actor} has a new missive for you."
       },
       {
-        "title": "A bird at the window",
+        "title": "A bird at the window.",
         "body": "It carries word from {actor}."
       },
       {
-        "title": "New correspondence",
+        "title": "New correspondence.",
         "body": "A raven has come from {actor}."
       },
       {
-        "title": "Word from {actor}",
+        "title": "Word from {actor}.",
         "body": "A fresh raven is waiting for you."
       },
       {
-        "title": "A raven waits",
+        "title": "A raven waits.",
         "body": "{actor} has sent another missive by wing."
       },
       {
-        "title": "Fresh word",
+        "title": "Fresh word.",
         "body": "A missive from {actor} has arrived."
       },
       {
-        "title": "The bird made it",
+        "title": "The bird made it.",
         "body": "There is a new raven from {actor}."
       },
       {
-        "title": "A letter by wing",
+        "title": "A letter by wing.",
         "body": "{actor} has sent word your way."
       },
       {
-        "title": "Another raven",
+        "title": "Another raven.",
         "body": "This one comes from {actor}."
       },
       {
-        "title": "The rookery calls",
+        "title": "The rookery calls.",
         "body": "{actor} sent word. Best see what they want."
       }
     ],
@@ -572,11 +572,11 @@
         "body": "{actor} has sent word, my liege. It would seem they require your attention."
       },
       {
-        "title": "A missive for Your Grace",
+        "title": "A missive for Your Grace.",
         "body": "A raven has arrived from {actor}, bearing fresh correspondence."
       },
       {
-        "title": "Word has come by raven",
+        "title": "Word has come by raven.",
         "body": "{actor} has sent a missive for you, my liege."
       },
       {
@@ -584,39 +584,39 @@
         "body": "A fresh raven from {actor} awaits Your Grace."
       },
       {
-        "title": "Correspondence has arrived",
+        "title": "Correspondence has arrived.",
         "body": "My liege, {actor} has sent word and the bird has delivered it faithfully."
       },
       {
-        "title": "A raven from {actor}",
+        "title": "A raven from {actor}.",
         "body": "Your Grace, a new missive awaits your attention."
       },
       {
-        "title": "Fresh word for Your Grace",
+        "title": "Fresh word for Your Grace.",
         "body": "{actor} has entrusted a raven with fresh word for you."
       },
       {
-        "title": "A bird has reached the rookery",
+        "title": "A bird has reached the rookery.",
         "body": "It bears new word from {actor}, my liege."
       },
       {
-        "title": "A new missive awaits",
+        "title": "A new missive awaits.",
         "body": "{actor} has sent correspondence, Your Grace."
       },
       {
-        "title": "The raven has landed",
+        "title": "The raven has landed.",
         "body": "Fresh word from {actor} awaits you, my liege."
       },
       {
-        "title": "A missive borne by wing",
+        "title": "A missive borne by wing.",
         "body": "Your Grace, {actor} has sent a raven."
       },
       {
-        "title": "The rookery requests your attention",
+        "title": "The rookery requests your attention.",
         "body": "A missive from {actor} has arrived, my liege."
       },
       {
-        "title": "Word from afar, Your Grace",
+        "title": "Word from afar, Your Grace.",
         "body": "A raven from {actor} has found its way to you."
       },
       {
@@ -624,7 +624,7 @@
         "body": "{actor} has sent fresh word, my liege."
       },
       {
-        "title": "A raven seeks Your Grace",
+        "title": "A raven seeks Your Grace.",
         "body": "It carries a new missive from {actor}. I would not presume to keep it waiting."
       }
     ]
@@ -632,63 +632,63 @@
   "guild_parley": {
     "mara": [
       {
-        "title": "The parley moved",
+        "title": "The parley moved.",
         "body": "{actor} spoke in the Guild Parley."
       },
       {
-        "title": "New words at the council",
+        "title": "New words at the council.",
         "body": "{actor} added something to the parley."
       },
       {
-        "title": "The guild is talking",
+        "title": "The guild is talking.",
         "body": "There are fresh words from {actor}."
       },
       {
-        "title": "A voice in the parley",
+        "title": "A voice in the parley.",
         "body": "{actor} has spoken."
       },
       {
-        "title": "The council carries on",
+        "title": "The council carries on.",
         "body": "{actor} added new words."
       },
       {
-        "title": "Fresh word from the guild",
+        "title": "Fresh word from the guild.",
         "body": "{actor} spoke while you were away."
       },
       {
-        "title": "The parley has company",
+        "title": "The parley has company.",
         "body": "{actor} added to the discussion."
       },
       {
-        "title": "More from the council",
+        "title": "More from the council.",
         "body": "{actor} has something to say."
       },
       {
-        "title": "The guild spoke",
+        "title": "The guild spoke.",
         "body": "Fresh words from {actor} are waiting."
       },
       {
-        "title": "A new word in council",
+        "title": "A new word in council.",
         "body": "{actor} added to the parley."
       },
       {
-        "title": "The parley is not quiet",
+        "title": "The parley is not quiet.",
         "body": "{actor} has spoken again."
       },
       {
-        "title": "Fresh words among the guild",
+        "title": "Fresh words among the guild.",
         "body": "There is new word from {actor}."
       },
       {
-        "title": "The council waits",
+        "title": "The council waits.",
         "body": "{actor} added something for the guild."
       },
       {
-        "title": "Another voice at council",
+        "title": "Another voice at council.",
         "body": "{actor} spoke in your absence."
       },
       {
-        "title": "The guild carried on",
+        "title": "The guild carried on.",
         "body": "{actor} had more to say. Councils do that."
       }
     ],
@@ -698,19 +698,19 @@
         "body": "{actor} has spoken before the council, my liege."
       },
       {
-        "title": "Fresh word from the guild",
+        "title": "Fresh word from the guild.",
         "body": "Your Grace, {actor} has added their voice to the parley."
       },
       {
-        "title": "The council awaits you",
+        "title": "The council awaits you.",
         "body": "New words from {actor} have reached the Guild Parley, my liege."
       },
       {
-        "title": "A voice rises in council",
+        "title": "A voice rises in council.",
         "body": "{actor} has spoken, Your Grace. The parley continues."
       },
       {
-        "title": "The guild has fresh counsel",
+        "title": "The guild has fresh counsel.",
         "body": "{actor} has added new words for your consideration, my liege."
       },
       {
@@ -718,19 +718,19 @@
         "body": "Your Grace, {actor} has spoken in council."
       },
       {
-        "title": "The council grows lively",
+        "title": "The council grows lively.",
         "body": "Fresh words from {actor} await you, my liege."
       },
       {
-        "title": "A new matter in parley",
+        "title": "A new matter in parley.",
         "body": "{actor} has addressed the guild, Your Grace."
       },
       {
-        "title": "The guild requests your ear",
+        "title": "The guild requests your ear.",
         "body": "New words from {actor} await in the parley, my liege."
       },
       {
-        "title": "Fresh counsel has arrived",
+        "title": "Fresh counsel has arrived.",
         "body": "{actor} has spoken before the guild, Your Grace."
       },
       {
@@ -738,19 +738,19 @@
         "body": "My liege, {actor} has added something to the council."
       },
       {
-        "title": "The council has not adjourned",
+        "title": "The council has not adjourned.",
         "body": "Fresh words from {actor} await Your Grace."
       },
       {
-        "title": "A guildmate has spoken",
+        "title": "A guildmate has spoken.",
         "body": "{actor} has added their voice to the parley, my liege."
       },
       {
-        "title": "New words before the council",
+        "title": "New words before the council.",
         "body": "Your Grace, {actor} has spoken in your absence."
       },
       {
-        "title": "The guild seeks your attention",
+        "title": "The guild seeks your attention.",
         "body": "{actor} has brought fresh words to the parley, my liege. No doubt they will benefit from your judgment."
       }
     ]
@@ -758,63 +758,63 @@
   "ravens_eye_image": {
     "mara": [
       {
-        "title": "Fresh sights beneath the Eye",
+        "title": "Fresh sights beneath the Eye.",
         "body": "New images have reached the Raven’s Eye."
       },
       {
-        "title": "The little birds saw something",
+        "title": "The little birds saw something.",
         "body": "There are fresh images to look over."
       },
       {
-        "title": "New sights from the realm",
+        "title": "New sights from the realm.",
         "body": "The Raven’s Eye has something new."
       },
       {
-        "title": "Fresh images at the Raven’s Eye",
+        "title": "Fresh images at the Raven’s Eye.",
         "body": "The collection has grown."
       },
       {
-        "title": "More for the Eye",
+        "title": "More for the Eye.",
         "body": "New sights have arrived."
       },
       {
-        "title": "The ravens brought images",
+        "title": "The ravens brought images.",
         "body": "There is something fresh to see."
       },
       {
-        "title": "New sights in the collection",
+        "title": "New sights in the collection.",
         "body": "The Raven’s Eye has been fed again."
       },
       {
-        "title": "Something new to look at",
+        "title": "Something new to look at.",
         "body": "Fresh images have reached the Eye."
       },
       {
-        "title": "The Eye has fresh sights",
+        "title": "The Eye has fresh sights.",
         "body": "The collection carries something new."
       },
       {
-        "title": "New images arrived",
+        "title": "New images arrived.",
         "body": "The Raven’s Eye has more to show."
       },
       {
-        "title": "Fresh sightings",
+        "title": "Fresh sightings.",
         "body": "The little birds have brought something back."
       },
       {
-        "title": "More beneath the Raven’s Eye",
+        "title": "More beneath the Raven’s Eye.",
         "body": "New images are waiting."
       },
       {
-        "title": "The collection grew",
+        "title": "The collection grew.",
         "body": "There are fresh sights under the Eye."
       },
       {
-        "title": "A new sight for the realm",
+        "title": "A new sight for the realm.",
         "body": "The Raven’s Eye has another image."
       },
       {
-        "title": "The Eye found something",
+        "title": "The Eye found something.",
         "body": "There are fresh images. It never seems to tire."
       }
     ],
@@ -824,15 +824,15 @@
         "body": "Fresh images have reached the Raven’s Eye, Your Grace."
       },
       {
-        "title": "New sights beneath the Eye",
+        "title": "New sights beneath the Eye.",
         "body": "My liege, the little birds have returned with fresh images."
       },
       {
-        "title": "The Raven’s Eye has fresh visions",
+        "title": "The Raven’s Eye has fresh visions.",
         "body": "New images await Your Grace’s inspection."
       },
       {
-        "title": "A fresh sight for Your Grace",
+        "title": "A fresh sight for Your Grace.",
         "body": "The collection has grown, my liege."
       },
       {
@@ -840,31 +840,31 @@
         "body": "They bring new images for the Raven’s Eye, Your Grace."
       },
       {
-        "title": "Fresh images have arrived",
+        "title": "Fresh images have arrived.",
         "body": "My liege, the Raven’s Eye has new sights to offer."
       },
       {
-        "title": "The Eye has seen something new",
+        "title": "The Eye has seen something new.",
         "body": "Fresh images await your attention, Your Grace."
       },
       {
-        "title": "New visions from the realm",
+        "title": "New visions from the realm.",
         "body": "The little birds have brought back fresh sights, my liege."
       },
       {
-        "title": "The Raven’s Eye grows watchful",
+        "title": "The Raven’s Eye grows watchful.",
         "body": "New images have joined the collection, Your Grace."
       },
       {
-        "title": "A new sight awaits",
+        "title": "A new sight awaits.",
         "body": "My liege, the Raven’s Eye has fresh images for you."
       },
       {
-        "title": "Fresh sightings for Your Grace",
+        "title": "Fresh sightings for Your Grace.",
         "body": "The collection has received new images."
       },
       {
-        "title": "The ravens have returned",
+        "title": "The ravens have returned.",
         "body": "They carry fresh sights for the Raven’s Eye, my liege."
       },
       {
@@ -872,11 +872,11 @@
         "body": "Your Grace, there is fresh spectacle to inspect."
       },
       {
-        "title": "The collection welcomes new sights",
+        "title": "The collection welcomes new sights.",
         "body": "Fresh images have arrived, my liege."
       },
       {
-        "title": "A small feast for the eyes",
+        "title": "A small feast for the eyes.",
         "body": "The Raven’s Eye has new images, Your Grace. One hopes they prove worthy of the name."
       }
     ]
@@ -884,63 +884,63 @@
   "gutter_meme": {
     "mara": [
       {
-        "title": "Fresh mockery in the Gutter",
+        "title": "Fresh mockery in the Gutter.",
         "body": "Flea Bottom has found something new to laugh at."
       },
       {
-        "title": "The Gutter is laughing again",
+        "title": "The Gutter is laughing again.",
         "body": "A new bit of mockery has appeared."
       },
       {
-        "title": "New jests from Flea Bottom",
+        "title": "New jests from Flea Bottom.",
         "body": "The crowd has found fresh amusement."
       },
       {
-        "title": "More nonsense in the Gutter",
+        "title": "More nonsense in the Gutter.",
         "body": "There is a fresh jest waiting."
       },
       {
-        "title": "Flea Bottom found a joke",
+        "title": "Flea Bottom found a joke.",
         "body": "The Gutter has fresh mockery."
       },
       {
-        "title": "Fresh mischief below",
+        "title": "Fresh mischief below.",
         "body": "A new jest has reached the Gutter."
       },
       {
-        "title": "The crowd has new amusement",
+        "title": "The crowd has new amusement.",
         "body": "Flea Bottom is laughing at something else now."
       },
       {
-        "title": "A fresh jest in the Gutter",
+        "title": "A fresh jest in the Gutter.",
         "body": "The little spectacle is waiting."
       },
       {
-        "title": "New mockery beneath the Eye",
+        "title": "New mockery beneath the Eye.",
         "body": "Flea Bottom has added another joke."
       },
       {
-        "title": "The Gutter has opinions",
+        "title": "The Gutter has opinions.",
         "body": "A new piece of mockery has appeared."
       },
       {
-        "title": "Fresh laughter from below",
+        "title": "Fresh laughter from below.",
         "body": "There is new amusement in Flea Bottom."
       },
       {
-        "title": "Another jest made the rounds",
+        "title": "Another jest made the rounds.",
         "body": "The Gutter has something new."
       },
       {
-        "title": "Flea Bottom is entertained",
+        "title": "Flea Bottom is entertained.",
         "body": "A fresh bit of mockery has arrived."
       },
       {
-        "title": "New foolishness in the Gutter",
+        "title": "New foolishness in the Gutter.",
         "body": "The crowd seems pleased with it."
       },
       {
-        "title": "The Gutter found another joke",
+        "title": "The Gutter found another joke.",
         "body": "Apparently there was room for one more."
       }
     ],
@@ -954,11 +954,11 @@
         "body": "A fresh piece of mockery awaits beneath the Raven’s Eye, Your Grace."
       },
       {
-        "title": "New merriment from Flea Bottom",
+        "title": "New merriment from Flea Bottom.",
         "body": "The little birds whisper of a fresh jest, my liege."
       },
       {
-        "title": "A new jest for Your Grace",
+        "title": "A new jest for Your Grace.",
         "body": "The Gutter has found fresh amusement."
       },
       {
@@ -966,15 +966,15 @@
         "body": "My liege, a new piece of mockery has made the rounds."
       },
       {
-        "title": "Fresh amusement beneath the Eye",
+        "title": "Fresh amusement beneath the Eye.",
         "body": "Your Grace, the Gutter has produced another jest."
       },
       {
-        "title": "The crowd has found a new joke",
+        "title": "The crowd has found a new joke.",
         "body": "A fresh bit of mockery awaits, my liege."
       },
       {
-        "title": "New mischief in Flea Bottom",
+        "title": "New mischief in Flea Bottom.",
         "body": "The little birds report fresh laughter, Your Grace."
       },
       {
@@ -982,27 +982,27 @@
         "body": "My liege, the crowd appears thoroughly entertained."
       },
       {
-        "title": "Fresh mockery for the realm",
+        "title": "Fresh mockery for the realm.",
         "body": "Flea Bottom has something new to laugh over, Your Grace."
       },
       {
-        "title": "The Gutter offers entertainment",
+        "title": "The Gutter offers entertainment.",
         "body": "A new jest awaits your inspection, my liege."
       },
       {
-        "title": "A fresh laugh from below",
+        "title": "A fresh laugh from below.",
         "body": "Your Grace, the crowd has found new amusement."
       },
       {
-        "title": "The little birds bring a jest",
+        "title": "The little birds bring a jest.",
         "body": "Something new is amusing Flea Bottom, my liege."
       },
       {
-        "title": "New laughter beneath the Raven’s Eye",
+        "title": "New laughter beneath the Raven’s Eye.",
         "body": "The Gutter has received a fresh piece of mockery, Your Grace."
       },
       {
-        "title": "A modest diversion, my liege",
+        "title": "A modest diversion, my liege.",
         "body": "Flea Bottom has found another joke. I am told the crowd is delighted."
       }
     ]
@@ -1010,63 +1010,63 @@
   "gutter_reel": {
     "mara": [
       {
-        "title": "Fresh spectacle in Flea Bottom",
+        "title": "Fresh spectacle in Flea Bottom.",
         "body": "The Gutter has found something else to stare at."
       },
       {
-        "title": "New reels in the Gutter",
+        "title": "New reels in the Gutter.",
         "body": "There is fresh spectacle below."
       },
       {
-        "title": "The Gutter has something new",
+        "title": "The Gutter has something new.",
         "body": "A fresh reel has reached Flea Bottom."
       },
       {
-        "title": "More spectacle beneath the Eye",
+        "title": "More spectacle beneath the Eye.",
         "body": "The crowd has a new reel."
       },
       {
-        "title": "Flea Bottom is watching",
+        "title": "Flea Bottom is watching.",
         "body": "Something new is making the rounds."
       },
       {
-        "title": "A fresh reel appeared",
+        "title": "A fresh reel appeared.",
         "body": "The Gutter has new entertainment."
       },
       {
-        "title": "The crowd found another spectacle",
+        "title": "The crowd found another spectacle.",
         "body": "There is a new reel beneath the Raven’s Eye."
       },
       {
-        "title": "Fresh entertainment below",
+        "title": "Fresh entertainment below.",
         "body": "Flea Bottom has something new to watch."
       },
       {
-        "title": "The Gutter is staring again",
+        "title": "The Gutter is staring again.",
         "body": "A new reel has appeared."
       },
       {
-        "title": "Another reel made the rounds",
+        "title": "Another reel made the rounds.",
         "body": "The crowd has fresh entertainment."
       },
       {
-        "title": "New spectacle from the Gutter",
+        "title": "New spectacle from the Gutter.",
         "body": "There is something fresh beneath the Eye."
       },
       {
-        "title": "Flea Bottom found a diversion",
+        "title": "Flea Bottom found a diversion.",
         "body": "A new reel is waiting."
       },
       {
-        "title": "The Eye has fresh spectacle",
+        "title": "The Eye has fresh spectacle.",
         "body": "The Gutter has something new to watch."
       },
       {
-        "title": "A fresh sight from below",
+        "title": "A fresh sight from below.",
         "body": "A new reel has reached Flea Bottom."
       },
       {
-        "title": "The Gutter found something else",
+        "title": "The Gutter found something else.",
         "body": "A fresh reel is making the rounds. Naturally."
       }
     ],
@@ -1080,11 +1080,11 @@
         "body": "The Gutter has new entertainment for Your Grace."
       },
       {
-        "title": "The little birds bring a reel",
+        "title": "The little birds bring a reel.",
         "body": "A fresh spectacle is making the rounds below, my liege."
       },
       {
-        "title": "New entertainment beneath the Eye",
+        "title": "New entertainment beneath the Eye.",
         "body": "Your Grace, Flea Bottom has found something fresh to watch."
       },
       {
@@ -1092,19 +1092,19 @@
         "body": "A new reel awaits your attention, my liege."
       },
       {
-        "title": "Flea Bottom is watching",
+        "title": "Flea Bottom is watching.",
         "body": "The little birds report a fresh reel, Your Grace."
       },
       {
-        "title": "A new reel for Your Grace",
+        "title": "A new reel for Your Grace.",
         "body": "Fresh entertainment has reached the Gutter."
       },
       {
-        "title": "The Raven’s Eye brings spectacle",
+        "title": "The Raven’s Eye brings spectacle.",
         "body": "My liege, a new reel is making its way through Flea Bottom."
       },
       {
-        "title": "Fresh diversion in the Gutter",
+        "title": "Fresh diversion in the Gutter.",
         "body": "Your Grace, the crowd has found new entertainment."
       },
       {
@@ -1112,19 +1112,19 @@
         "body": "A fresh reel has appeared in Flea Bottom, my liege."
       },
       {
-        "title": "New spectacle from below",
+        "title": "New spectacle from below.",
         "body": "The Gutter has something fresh for your attention, Your Grace."
       },
       {
-        "title": "A reel has reached Flea Bottom",
+        "title": "A reel has reached Flea Bottom.",
         "body": "My liege, the crowd appears quite taken with it."
       },
       {
-        "title": "Fresh sights beneath the Eye",
+        "title": "Fresh sights beneath the Eye.",
         "body": "A new reel awaits Your Grace in the Gutter."
       },
       {
-        "title": "The Gutter is lively tonight",
+        "title": "The Gutter is lively tonight.",
         "body": "Fresh spectacle has arrived, my liege."
       },
       {
@@ -1136,63 +1136,63 @@
   "new_chapter": {
     "mara": [
       {
-        "title": "The chronicle has grown",
+        "title": "The chronicle has grown.",
         "body": "New pages are ready to be read."
       },
       {
-        "title": "Fresh pages in the chronicle",
+        "title": "Fresh pages in the chronicle.",
         "body": "A new chapter has been writ."
       },
       {
-        "title": "A new chapter awaits",
+        "title": "A new chapter awaits.",
         "body": "The chronicle has more to tell."
       },
       {
-        "title": "More pages have been writ",
+        "title": "More pages have been writ.",
         "body": "There is a fresh chapter in the chronicle."
       },
       {
-        "title": "The story moves on",
+        "title": "The story moves on.",
         "body": "A new chapter is waiting."
       },
       {
-        "title": "Fresh ink in the chronicle",
+        "title": "Fresh ink in the chronicle.",
         "body": "New pages have arrived."
       },
       {
-        "title": "The next chapter is writ",
+        "title": "The next chapter is writ.",
         "body": "The chronicle continues."
       },
       {
-        "title": "New pages await",
+        "title": "New pages await.",
         "body": "The story has moved forward."
       },
       {
-        "title": "The chronicle continues",
+        "title": "The chronicle continues.",
         "body": "A fresh chapter is ready."
       },
       {
-        "title": "Another chapter has been writ",
+        "title": "Another chapter has been writ.",
         "body": "There are new pages to read."
       },
       {
-        "title": "Fresh ink, fresh trouble",
+        "title": "Fresh ink, fresh trouble.",
         "body": "A new chapter has joined the chronicle."
       },
       {
-        "title": "The tale moves forward",
+        "title": "The tale moves forward.",
         "body": "New pages are waiting in the chronicle."
       },
       {
-        "title": "A new piece of the chronicle",
+        "title": "A new piece of the chronicle.",
         "body": "The next chapter is ready."
       },
       {
-        "title": "More of the tale is writ",
+        "title": "More of the tale is writ.",
         "body": "Fresh pages await you."
       },
       {
-        "title": "The ink is barely dry",
+        "title": "The ink is barely dry.",
         "body": "A new chapter is ready. Make of that what you will."
       }
     ],
@@ -1202,7 +1202,7 @@
         "body": "My liege, the chronicle has grown. New pages await you."
       },
       {
-        "title": "Fresh pages for Your Grace",
+        "title": "Fresh pages for Your Grace.",
         "body": "A new chapter has joined the chronicle, my liege."
       },
       {
@@ -1210,11 +1210,11 @@
         "body": "Your Grace, fresh pages are ready for your reading."
       },
       {
-        "title": "A new chapter awaits",
+        "title": "A new chapter awaits.",
         "body": "My liege, the tale has moved forward once more."
       },
       {
-        "title": "Fresh ink in the chronicle",
+        "title": "Fresh ink in the chronicle.",
         "body": "New pages await Your Grace’s attention."
       },
       {
@@ -1222,19 +1222,19 @@
         "body": "A new chapter has been writ, my liege."
       },
       {
-        "title": "More of the chronicle is ready",
+        "title": "More of the chronicle is ready.",
         "body": "Your Grace, fresh pages have arrived."
       },
       {
-        "title": "A new piece of the tale",
+        "title": "A new piece of the tale.",
         "body": "The chronicle has grown again, my liege."
       },
       {
-        "title": "Fresh pages await Your Grace",
+        "title": "Fresh pages await Your Grace.",
         "body": "A new chapter is ready to be read."
       },
       {
-        "title": "The scribes have been busy",
+        "title": "The scribes have been busy.",
         "body": "My liege, another chapter has joined the chronicle."
       },
       {
@@ -1242,19 +1242,19 @@
         "body": "New pages await your judgment, Your Grace."
       },
       {
-        "title": "A fresh chapter for the realm",
+        "title": "A fresh chapter for the realm.",
         "body": "The chronicle continues, my liege."
       },
       {
-        "title": "New ink has dried",
+        "title": "New ink has dried.",
         "body": "Your Grace, a fresh chapter is ready."
       },
       {
-        "title": "The chronicle has grown once more",
+        "title": "The chronicle has grown once more.",
         "body": "New pages await you, my liege."
       },
       {
-        "title": "A new chapter, Your Grace",
+        "title": "A new chapter, Your Grace.",
         "body": "The tale has advanced in your absence. I trust the scribes have not disappointed you."
       }
     ]
@@ -1262,73 +1262,73 @@
   "realm_notice": {
     "mara": [
       {
-        "title": "Word from the realm",
+        "title": "Word from the realm.",
         "body": "There is something new worth knowing."
       },
       {
-        "title": "A notice has been posted",
+        "title": "A notice has been posted.",
         "body": "Fresh word is waiting for you."
       },
       {
-        "title": "New word",
+        "title": "New word.",
         "body": "Something in the realm has changed."
       },
       {
-        "title": "A matter for your attention",
+        "title": "A matter for your attention.",
         "body": "There is fresh news to read."
       },
       {
-        "title": "The realm has news",
+        "title": "The realm has news.",
         "body": "A new notice is waiting."
       },
       {
-        "title": "Fresh word from the keep",
+        "title": "Fresh word from the keep.",
         "body": "There is something new to see."
       },
       {
-        "title": "A new notice",
+        "title": "A new notice.",
         "body": "The realm has something worth your attention."
       },
       {
-        "title": "Word has arrived",
+        "title": "Word has arrived.",
         "body": "There is a fresh matter to look over."
       },
       {
-        "title": "Something changed",
+        "title": "Something changed.",
         "body": "A new notice explains the rest."
       },
       {
-        "title": "Fresh news",
+        "title": "Fresh news.",
         "body": "There is new word from the realm."
       },
       {
-        "title": "A notice awaits",
+        "title": "A notice awaits.",
         "body": "Something new has been announced."
       },
       {
-        "title": "Word from the hall",
+        "title": "Word from the hall.",
         "body": "There is a fresh matter for you."
       },
       {
-        "title": "The realm moved on",
+        "title": "The realm moved on.",
         "body": "A new notice has been posted."
       },
       {
-        "title": "A fresh proclamation",
+        "title": "A fresh proclamation.",
         "body": "There is new word to read."
       },
       {
-        "title": "News, apparently",
+        "title": "News, apparently.",
         "body": "Something changed while you were away."
       }
     ],
     "aldren": [
       {
-        "title": "Word from the realm, my liege",
+        "title": "Word from the realm, my liege.",
         "body": "A matter worthy of Your Grace’s attention has arisen."
       },
       {
-        "title": "A notice for Your Grace",
+        "title": "A notice for Your Grace.",
         "body": "Fresh word from the realm awaits your attention."
       },
       {
@@ -1336,31 +1336,31 @@
         "body": "My liege, a new matter has been announced."
       },
       {
-        "title": "A matter of note",
+        "title": "A matter of note.",
         "body": "Your Grace, there is fresh word from the realm."
       },
       {
-        "title": "A new proclamation awaits",
+        "title": "A new proclamation awaits.",
         "body": "My liege, something has changed and I thought it prudent to inform you."
       },
       {
-        "title": "Fresh word for Your Grace",
+        "title": "Fresh word for Your Grace.",
         "body": "A new notice has been posted for the realm."
       },
       {
-        "title": "The realm brings news",
+        "title": "The realm brings news.",
         "body": "My liege, a fresh matter awaits your consideration."
       },
       {
-        "title": "An announcement has arrived",
+        "title": "An announcement has arrived.",
         "body": "Your Grace, there is new word to read."
       },
       {
-        "title": "A new matter before the realm",
+        "title": "A new matter before the realm.",
         "body": "Fresh news awaits you, my liege."
       },
       {
-        "title": "Word has reached the hall",
+        "title": "Word has reached the hall.",
         "body": "Your Grace, a new notice has arrived."
       },
       {
@@ -1368,19 +1368,19 @@
         "body": "My liege, the realm has something new to announce."
       },
       {
-        "title": "News worthy of your attention",
+        "title": "News worthy of your attention.",
         "body": "A fresh notice awaits Your Grace."
       },
       {
-        "title": "The hall has fresh word",
+        "title": "The hall has fresh word.",
         "body": "My liege, a new matter has been set before the realm."
       },
       {
-        "title": "A notice from the realm",
+        "title": "A notice from the realm.",
         "body": "Your Grace, something new has been announced."
       },
       {
-        "title": "Your attention, if I may",
+        "title": "Your attention, if I may.",
         "body": "A fresh matter has arisen, my liege. Nothing that cannot await your dignified consideration."
       }
     ]

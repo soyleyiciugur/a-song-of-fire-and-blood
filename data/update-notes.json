@@ -2,6 +2,9 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Cleared personal-raven highlights as soon as notifications are opened, compacted the mobile Raven Settings control, and kept loaded community activity visible through transient refresh failures.",
+      "Separated personal mascot notifications and realm-wide community activity into polished top-level tabs, and renamed the installed app to The Rookery with its raven mark.",
+      "Standardized every mascot notification title with terminal punctuation.",
       "Added Aldren and Mara as hidden character profiles for The Great Game's notification mascots.",
       "Introduced account-synced mascot notifications with Mara and Aldren, iOS Home Screen push delivery, source-badged notification portraits, deep-linked notification lightboxes, per-category controls, and anti-repeat delivery balancing.",
       "Published two new Tavern topics about the pressure of Jace's succession and the planned full Kingsguard roster.",
