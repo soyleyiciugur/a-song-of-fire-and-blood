@@ -674,7 +674,7 @@
   {
     "id": "gallery-alester-jace-fleabottom",
     "src": "/images/gallery/alester-jace-fleabottom.webp",
-    "caption": null,
+    "caption": "Jace and Alester, caught between duty and friendship.",
     "characterIds": [
       "jacaelon-targaryen",
       "alester-dayne"
@@ -692,7 +692,7 @@
   {
     "id": "gallery-alester-jace-training",
     "src": "/images/gallery/alester-jace-training.webp",
-    "caption": null,
+    "caption": "Jace and Alester train until neither of them can stand.",
     "characterIds": [
       "jacaelon-targaryen",
       "alester-dayne"
@@ -710,7 +710,7 @@
   {
     "id": "gallery-grance-myles",
     "src": "/images/gallery/grance-myles.webp",
-    "caption": null,
+    "caption": "Grance and Myles share a rare quiet moment.",
     "characterIds": [
       "grance-morrigen",
       "myles-mooton"
@@ -728,7 +728,7 @@
   {
     "id": "gallery-lorenah-jace-alester-proposal",
     "src": "/images/gallery/lorenah-jace-alester-proposal.webp",
-    "caption": null,
+    "caption": "A proposal watched over by friends, family and Jhagar.",
     "characterIds": [
       "lorenah-dayne",
       "jacaelon-targaryen",
@@ -747,7 +747,7 @@
   {
     "id": "gallery-vhaemys-jace-alester-breakfast",
     "src": "/images/gallery/vhaemys-jace-alester-breakfast.webp",
-    "caption": null,
+    "caption": "Vhaemys finds Jace and Alester at breakfast.",
     "characterIds": [
       "vhaemys-targaryen",
       "jacaelon-targaryen",
@@ -766,7 +766,7 @@
   {
     "id": "gallery-vhaemys-jace-alester-toy",
     "src": "/images/gallery/vhaemys-jace-alester-toy.webp",
-    "caption": null,
+    "caption": "A toy dragon, a royal breakfast and a little princess's attention.",
     "characterIds": [
       "vhaemys-targaryen",
       "jacaelon-targaryen",

@@ -82,10 +82,10 @@ export default function Navbar() {
         </button>
 
         <Link
-          href="/houses/targaryen"
+          href="/"
           className={styles.houseMark}
-          aria-label="House Targaryen"
-          title="House Targaryen"
+          aria-label="Home"
+          title="Home"
         >
           <Image src="/images/houses/targaryen.webp" alt="" width={24} height={24} />
         </Link>

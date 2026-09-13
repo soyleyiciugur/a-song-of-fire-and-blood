@@ -24,6 +24,12 @@
 .tabs button:hover { color: var(--text); }
 .tabs button[aria-selected=true] { background: var(--gold); color: #1a1210; }
 .tabs button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-.goLink { display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 0; padding: 6px 10px; border: 1px solid rgba(212, 175, 55, .42); border-radius: 999px; color: var(--gold); font: 600 11px var(--font-geist); letter-spacing: .04em; text-decoration: none; white-space: nowrap; transition: border-color .18s ease, background-color .18s ease, color .18s ease; }
+.list .entry { display: flex; align-items: center; gap: 14px; }
+.list .entry > span:first-child { min-width: 0; flex: 1 1 auto; }
+.goLink { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; gap: 7px; margin: 0; padding: 5px 10px; border: 1px solid rgba(212, 175, 55, .42); border-radius: 999px; color: var(--gold); font: 600 11px/1 var(--font-geist); letter-spacing: .04em; text-decoration: none; white-space: nowrap; transition: border-color .18s ease, background-color .18s ease, color .18s ease; }
 .goLink:hover { background: rgba(212, 175, 55, .1); border-color: var(--gold); color: var(--text); }
 .goLink:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .list .entry { align-items: flex-start; gap: 10px; }
+  .goLink { margin-top: 1px; }
+}
