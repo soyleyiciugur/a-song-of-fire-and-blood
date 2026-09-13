@@ -872,29 +872,213 @@
 
 /* ── Mobile ──────────────────────────────────────────────── */
 @media (max-width: 700px) {
-  .langToggle {
-    position: fixed;
-    top: 76px;
-    right: 12px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    max-width: calc(100% - 24px);
+  :root {
+    --pg-h: 520px;
+    --pg-pad: 24px 20px 48px;
+    --spine-w: 0px;
   }
 
+  /*
+    Keep the reader controls in two clean rows on narrow screens.
+    Row 1: chapter list
+    Row 2: full-chapter toggle + EN/TR
+  */
   .backLink {
     position: fixed;
-    top: 120px;
+    top: 76px;
     left: 12px;
+    z-index: 220;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
   }
 
+  .langToggle {
+    position: fixed;
+    top: 118px;
+    left: 12px;
+    right: 12px;
+    z-index: 220;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 5px;
+    max-width: none;
+  }
+
+  /* The long Full Chapter / Back to Book label may wrap instead of
+     forcing EN/TR off-screen. */
+  .langToggle > button:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+    line-height: 1.25;
+    padding: 6px 9px;
+    font-size: 0.7rem;
+  }
+
+  .langBtn {
+    flex: 0 0 auto;
+    padding: 6px 9px;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+
+  /*
+    A desktop two-page spread is wider than a phone viewport. Instead of
+    shrinking both pages until the copy becomes unreadable, stack the two
+    physical pages vertically. Pagination still works exactly as before:
+    each spread contains its left page followed by its right page.
+  */
   .scene {
-    padding-top: 130px;
+    height: auto;
+    min-height: calc(100dvh - var(--site-nav-height, 58px));
+    padding: 174px 10px 32px;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: none;
   }
 
   .book {
-    height: min(
-      var(--pg-h),
-      calc(100dvh - var(--site-nav-height, 58px) - 165px)
-    );
+    display: block;
+    width: min(92vw, 380px);
+    max-width: min(92vw, 380px);
+    height: auto;
+    max-height: none;
+    margin: 0 auto;
+    flex-shrink: 0;
+    border-radius: 4px;
+    box-shadow:
+      0 20px 52px rgba(0,0,0,0.62),
+      0 6px 18px rgba(0,0,0,0.42);
+  }
+
+  .spine,
+  .gutter {
+    display: none;
+  }
+
+  .spread {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    transform-style: flat;
+    gap: 14px;
+  }
+
+  .pageLeft,
+  .pageRight {
+    width: 100%;
+    min-width: 0;
+    height: var(--pg-h);
+    min-height: var(--pg-h);
+    flex: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .pageContent,
+  .pageContentRight {
+    padding: var(--pg-pad);
+    padding-bottom: 16px;
+  }
+
+  .paragraph {
+    font-size: 0.86rem;
+    line-height: 1.68;
+    text-align: left;
+    hyphens: auto;
+  }
+
+  .sectionDivider {
+    margin: 0.45em 0;
+  }
+
+  .chapterTitle {
+    font-size: 1.05rem;
+  }
+
+  .synopsisBlock {
+    margin: auto 18px;
+    padding: 16px 18px;
+  }
+
+  .synopsisText {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .chapterImageWrap {
+    max-width: 280px;
+    margin-bottom: 14px;
+  }
+
+  .pageFooter,
+  .pageFooterRight {
+    padding: 0 18px 14px;
+  }
+
+  .pageNumForm {
+    font-size: 0.62rem;
+    gap: 4px;
+  }
+
+  /* Chapter labels are useful on desktop but collide with the footer and
+     curl hit-area on narrow pages. The curl itself remains interactive. */
+  .cornerLabel {
+    display: none;
+  }
+
+  .pageCorner,
+  .pageCorner:hover {
+    width: 44px;
+    height: 44px;
+  }
+
+  .pageCornerDisabled:hover {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Drawer stays usable below the fixed reader controls. */
+  .chapterListPanel {
+    width: min(340px, calc(100vw - 20px));
+    padding: 18px 16px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --pg-h: 500px;
+    --pg-pad: 22px 18px 46px;
+  }
+
+  .scene {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .book {
+    width: min(94vw, 360px);
+    max-width: min(94vw, 360px);
+  }
+
+  .paragraph {
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .langToggle > button:first-child {
+    font-size: 0.66rem;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .langBtn {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }

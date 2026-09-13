@@ -943,7 +943,7 @@
 .bookWrap { flex-shrink:0; }
 .langToggle {
   position: absolute;
-  top: 32px;
+  top: 56px;
 }
 .continueBanner { position:absolute; bottom:20px; max-width:calc(100% - 32px); }
 .tocPageInner { min-height:0; }
