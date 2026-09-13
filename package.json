@@ -14,7 +14,8 @@
     "community:inbox": "node scripts/community-inbox.mjs",
     "community:reactions": "node scripts/community-reaction-targets.mjs --write",
     "community:push": "npx --yes supabase db push --linked",
-    "community:sync": "npm run community:reactions && npm run community:push"
+    "community:sync": "npm run community:reactions && npm run community:push",
+    "push:keys": "node scripts/generate-vapid.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

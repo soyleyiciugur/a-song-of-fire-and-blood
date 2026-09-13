@@ -7,6 +7,7 @@ import type { Profile } from "@/lib/supabase/database.types";
 import type { AffinityField, AffinityOption } from "@/lib/profileAffinity";
 import { Select } from "@/app/_components/Select";
 import styles from "./settings.module.css";
+import PushNotificationSettings from "@/components/pwa/PushNotificationSettings";
 
 const THEMES = [
   ["default", "Default"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
@@ -135,5 +136,6 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
       </fieldset>
       {message && <p className={styles.status} role="status">{message}</p>}
     </form>
+    <PushNotificationSettings />
   </section></main>;
 }

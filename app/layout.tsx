@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 import Navbar from "@/components/nav/Navbar";
+import PwaBoot from "@/components/pwa/PwaBoot";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -63,6 +64,14 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
 
+  manifest: "/manifest.webmanifest",
+
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ASOFAB",
+  },
+
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -74,6 +83,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#090706",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -86,6 +97,7 @@ export default function RootLayout({
       <body
         className={`${geist.variable} ${cinzel.variable} ${crimsonText.variable}`}
       >
+        <PwaBoot />
         <Navbar />
         {children}
         <Analytics />

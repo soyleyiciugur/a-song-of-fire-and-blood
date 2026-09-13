@@ -58,6 +58,17 @@ export interface DirectRavenRead {
   last_read_at: string;
 }
 
+export interface PushSubscription {
+  id: string;
+  user_id: string;
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+  user_agent: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface DirectRavenBlock {
   blocker_id: string;
   blocked_id: string;
@@ -76,6 +87,7 @@ export interface Database {
       direct_raven_messages: { Row: DirectRavenMessage; Insert: Pick<DirectRavenMessage, "conversation_id" | "sender_id" | "body"> & Partial<Pick<DirectRavenMessage, "id" | "created_at" | "edited_at" | "deleted_at" | "attachment_path" | "reply_to" | "gif">>; Update: Partial<Pick<DirectRavenMessage, "body" | "edited_at" | "deleted_at">>; Relationships: [] };
       direct_raven_reads: { Row: DirectRavenRead; Insert: DirectRavenRead; Update: Pick<DirectRavenRead, "last_read_at">; Relationships: [] };
       direct_raven_blocks: { Row: DirectRavenBlock; Insert: Omit<DirectRavenBlock, "created_at"> & Partial<Pick<DirectRavenBlock, "created_at">>; Update: never; Relationships: [] };
+      push_subscriptions: { Row: PushSubscription; Insert: Omit<PushSubscription, "id" | "created_at" | "updated_at"> & Partial<Pick<PushSubscription, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PushSubscription, "p256dh" | "auth" | "user_agent" | "updated_at">>; Relationships: [] };
     };
     Views: Record<string, never>;
     Functions: {

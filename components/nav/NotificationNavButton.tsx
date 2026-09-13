@@ -57,6 +57,17 @@ export default function NotificationNavButton() {
     return count;
   }, 0);
 
+  useEffect(() => {
+    if (!("setAppBadge" in navigator) || !("clearAppBadge" in navigator)) return;
+    const syncBadge = async () => {
+      try {
+        if (unread > 0) await navigator.setAppBadge(unread);
+        else await navigator.clearAppBadge();
+      } catch { /* Badging can be unavailable until notification permission is granted. */ }
+    };
+    void syncBadge();
+  }, [unread]);
+
   return (
     <Link href="/notifications" className={styles.notificationsButton} aria-label={unread ? `Notifications, ${unread} new` : "Notifications"} title="Notifications">
       <UtilityIcon name="notifications" />

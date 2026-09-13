@@ -25,3 +25,12 @@
 .colorStudio input::-moz-range-track{height:7px;border:1px solid #55483b;border-radius:99px;background:linear-gradient(90deg,#29262a,#d6cbd4)}.colorStudio .hueRange::-moz-range-track{background:linear-gradient(90deg,#b33,#bb3,#3b3,#3bb,#33b,#b3b,#b33)}.colorStudio input::-moz-range-thumb{width:16px;height:16px;border:2px solid #0a090a;border-radius:50%;background:#f0dfc4;box-shadow:0 0 0 1px #9e8058}
 .colorStudio{overflow:hidden;padding:0}.colorStudioHead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px}.colorStudioHead span{color:#ded2c2;font:600 14px var(--font-geist)}.colorStudioHead strong{font:600 11px var(--font-geist)}.colorMap{position:relative;height:210px;touch-action:none;cursor:crosshair;background:linear-gradient(to bottom,transparent,#000),linear-gradient(to right,#fff0,#fff0),linear-gradient(to right,#fff,var(--picker-hue));box-shadow:inset 0 0 0 1px #ffffff12}.colorCursor{position:absolute;width:18px;height:18px;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 5px #000;transform:translate(-50%,-50%);pointer-events:none}.hueControl{padding:15px 18px 8px}.colorValues{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 18px 16px}.colorValues span{display:grid;gap:3px;padding:8px 10px;border:1px solid #3c3530;border-radius:7px;color:#85796e;font:9px var(--font-geist)}.colorValues strong{color:#d9cdbd;font:600 11px var(--font-geist)}
 @media(max-width:680px){.colorMap{height:180px}.colorValues{grid-template-columns:1fr}}
+
+
+/* PWA / Web Push */
+.notificationSettingRow{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 15px;border:1px solid #493d33;border-radius:10px;background:#0a090a}
+.notificationSettingRow>div{display:grid;gap:5px;min-width:0}.notificationSettingRow strong{color:#e0d2bf;font:600 13px var(--font-geist)}.notificationSettingRow small{color:#8f8377;font:10px/1.5 var(--font-geist)}
+@media(max-width:680px){.notificationSettingRow{align-items:stretch;flex-direction:column}.notificationSettingRow .secondaryButton{width:100%}}
+
+.notificationActions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+@media(max-width:680px){.notificationActions{display:grid;grid-template-columns:1fr 1fr}.notificationActions .secondaryButton{width:100%}}
