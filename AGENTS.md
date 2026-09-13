@@ -5,6 +5,23 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+# Character debut records
+
+Character debut means the chapter in which the character first physically
+appears on the page. A name being mentioned, a title referring to an absent
+character, or another character recalling them does not count as a debut.
+
+Store the confirmed chapter slug explicitly in the character's
+`debutChapter` field in `data/characters/characters.json`. Do not infer or
+overwrite debut records through an automated name search. Read the scene in
+`data/chapters.json` and, when relevant, compare the earlier session notes and
+established character identity. An unnamed role may count only when the text
+or later continuity identifies that person reliably, such as an unnamed
+maester later established to be the same named character.
+
+When the first physical appearance remains ambiguous, leave `debutChapter`
+unset and ask the user rather than treating the earliest mention as a debut.
+
 # Daily update notes
 
 Records is reserved for in-world records. Keep Update Notes accessible only from the homepage's lower Latest Updates section heading, not from the navbar, hero shortcut grid, Notifications, or Records menu. The user designated 2026-09-09 as the date for the comment-system launch note.
