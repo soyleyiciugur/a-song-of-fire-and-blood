@@ -9,11 +9,10 @@ import { Select } from "@/app/_components/Select";
 import styles from "./settings.module.css";
 
 const THEMES = [
-  ["default", "Default"], ["targaryen", "House Targaryen"], ["stark", "House Stark"],
-  ["arryn", "House Arryn"], ["tully", "House Tully"], ["greyjoy", "House Greyjoy"],
-  ["lannister", "House Lannister"], ["baratheon", "House Baratheon"], ["tyrell", "House Tyrell"],
-  ["martell", "House Martell"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
-  ["oldtown", "Oldtown"], ["royal", "Royal Gold"], ["night", "The Night"], ["custom", "Custom colors"],
+  ["default", "Default"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
+  ["arryn", "The Eyrie"], ["tully", "Riverrun"], ["greyjoy", "Pyke"],
+  ["lannister", "Casterly Rock"], ["baratheon", "Storm's End"], ["tyrell", "Highgarden"],
+  ["martell", "Sunspear"], ["oldtown", "Oldtown"], ["royal", "Royal Gold"], ["night", "The Night"],
 ] as const;
 
 function asOptions(options: AffinityOption[]) { return options.map((option) => ({ id: option.id, name: option.title })); }
@@ -40,10 +39,11 @@ function MediaPicker({ field, value, onChange }: { field: AffinityField; value: 
   </div>;
 }
 
-function ColorMap({ affinity, onChange }: { affinity: Record<string, string>; onChange: (key: string, value: string) => void }) {
+function ColorMap({ affinity, onChange, onCustomize }: { affinity: Record<string, string>; onChange: (key: string, value: string) => void; onCustomize: () => void }) {
   const hue = Number(affinity.theme_hue ?? 348), saturation = Number(affinity.theme_saturation ?? 58), lightness = Number(affinity.theme_lightness ?? 52);
   const accent = `hsl(${hue} ${saturation}% ${lightness}%)`;
-  return <div className={styles.colorStudio}><div className={styles.colorPreview} style={{ "--chosen-color": accent } as React.CSSProperties}><span>Live accent</span><strong>{accent}</strong></div><label>Hue map<input className={styles.hueRange} type="range" min="0" max="360" value={hue} onChange={(e) => onChange("theme_hue", e.target.value)} /></label><div className={styles.colorSplit}><label>Saturation<input type="range" min="20" max="100" value={saturation} onChange={(e) => onChange("theme_saturation", e.target.value)} /><output>{saturation}%</output></label><label>Brightness<input type="range" min="28" max="76" value={lightness} onChange={(e) => onChange("theme_lightness", e.target.value)} /><output>{lightness}%</output></label></div></div>;
+  const pick=(event:React.PointerEvent<HTMLDivElement>)=>{const box=event.currentTarget.getBoundingClientRect(),sat=Math.round(Math.max(0,Math.min(1,(event.clientX-box.left)/box.width))*100),lit=Math.round((1-Math.max(0,Math.min(1,(event.clientY-box.top)/box.height)))*100);onCustomize();onChange("theme_saturation",String(sat));onChange("theme_lightness",String(lit));};
+  return <div className={styles.colorStudio}><div className={styles.colorStudioHead}><span>Custom colour picker</span><strong style={{color:accent}}>{accent}</strong></div><div className={styles.colorMap} style={{"--picker-hue":`hsl(${hue} 100% 50%)`} as React.CSSProperties} onPointerDown={event=>{event.currentTarget.setPointerCapture(event.pointerId);pick(event)}} onPointerMove={event=>{if(event.currentTarget.hasPointerCapture(event.pointerId))pick(event)}} role="slider" aria-label="Custom profile saturation and brightness" aria-valuetext={`${saturation}% saturation, ${lightness}% brightness`} tabIndex={0}><span className={styles.colorCursor} style={{left:`${saturation}%`,top:`${100-lightness}%`,background:accent}} /></div><label className={styles.hueControl}><span>Hue</span><input className={styles.hueRange} type="range" min="0" max="360" value={hue} onChange={(e) => {onCustomize();onChange("theme_hue",e.target.value)}} /></label><div className={styles.colorValues}><span>Colour <strong>{accent}</strong></span><span>HSL <strong>{hue}°, {saturation}%, {lightness}%</strong></span></div></div>;
 }
 
 export default function ProfileSettings({ profile, affinityCatalog }: { profile: Profile; affinityCatalog: AffinityField[] }) {
@@ -123,10 +123,10 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Profile customization</h2>
           <p className={styles.sectionIntro}>Choose the pieces of the chronicle that define your profile.</p>
-          <div className={styles.field}><span>Profile theme</span><div className={styles.selectWrap}><Select value={theme} options={THEMES.map(([id, name]) => ({ id, name }))} onChange={setTheme} /></div><small className={styles.hint}>Changes the accents and atmosphere of your public profile only.</small></div>
-          {theme === "custom" && <ColorMap affinity={affinity} onChange={setChoice} />}
+          <div className={styles.field}><span>Profile theme</span><div className={styles.selectWrap}><Select value={theme} options={THEMES.map(([id, name]) => ({ id, name }))} onChange={setTheme} placeholder={theme==="custom"?"Custom colour":"Choose a theme"} /></div><small className={styles.hint}>Choose a chronicle preset, or override it with the custom picker below.</small></div>
+          <ColorMap affinity={affinity} onChange={setChoice} onCustomize={()=>setTheme("custom")} />
           {normalFields.map((field) => <div className={styles.field} key={field.key}><span>{field.label}</span><div className={styles.selectWrap}><Select searchable value={affinity[field.key] ?? ""} options={asOptions(field.options)} onChange={(value) => setChoice(field.key, value)} placeholder="Not selected" /></div>{affinity[field.key] && <button className={styles.clearChoice} type="button" onClick={() => setChoice(field.key, "")}>Clear selection</button>}</div>)}
-          {fields.quote && <div className={styles.field}><span>Favorite Quote</span><div className={styles.quoteGrid}><div className={styles.selectWrap}><Select searchable value={quoteSpeaker} options={quoteSpeakers} onChange={(value) => { setQuoteSpeaker(value); setChoice("quote", ""); }} placeholder="Choose character" /></div><div className={styles.selectWrap}><Select searchable value={affinity.quote ?? ""} options={asOptions(quoteOptions)} onChange={(value) => setChoice("quote", value)} placeholder={quoteSpeaker ? "Choose quote" : "Choose a character first"} /></div></div>{affinity.quote && <button className={styles.clearChoice} type="button" onClick={() => setChoice("quote", "")}>Clear selection</button>}</div>}
+          {fields.quote && <div className={styles.field}><span>Favorite Quote</span><div className={styles.quoteGrid}><div className={styles.selectWrap}><Select searchable value={quoteSpeaker} options={quoteSpeakers} onChange={(value) => { setQuoteSpeaker(value); setChoice("quote", ""); }} placeholder="Choose character" /></div><div className={styles.selectWrap}><Select searchable value={affinity.quote ?? ""} options={quoteOptions.map(option=>({id:option.id,name:[option.title,option.context,option.chapterTitle].filter(Boolean).join(" · ")}))} onChange={(value) => setChoice("quote", value)} placeholder={quoteSpeaker ? "Choose quote" : "Choose a character first"} /></div></div>{affinity.quote && <button className={styles.clearChoice} type="button" onClick={() => setChoice("quote", "")}>Clear selection</button>}</div>}
           {fields.meme && <MediaPicker field={fields.meme} value={affinity.meme ?? ""} onChange={(value) => setChoice("meme", value)} />}
           {fields.reel && <MediaPicker field={fields.reel} value={affinity.reel ?? ""} onChange={(value) => setChoice("reel", value)} />}
           {fields.image && <MediaPicker field={fields.image} value={affinity.image ?? ""} onChange={(value) => setChoice("image", value)} />}

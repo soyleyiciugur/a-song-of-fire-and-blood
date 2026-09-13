@@ -26,11 +26,10 @@ export default function NotificationNavButton() {
   }, [supabase]);
 
   useEffect(() => {
-    if (pathname !== "/notifications") return;
-    const seen = data.serverTime || new Date().toISOString();
-    window.localStorage.setItem(STORAGE_KEY, seen);
-    setLastSeen(seen);
-  }, [pathname, data.serverTime]);
+    const seen = (event: Event) => setLastSeen((event as CustomEvent<string>).detail);
+    window.addEventListener("asofab:notifications-seen", seen);
+    return () => window.removeEventListener("asofab:notifications-seen", seen);
+  }, [pathname]);
 
   const latest = useRef<string | null>(null);
   useEffect(() => {
@@ -48,7 +47,7 @@ export default function NotificationNavButton() {
   return (
     <Link href="/notifications" className={styles.notificationsButton} aria-label={unread ? `Notifications, ${unread} new` : "Notifications"} title="Notifications">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      {unread > 0 && <span className={styles.notificationDot} aria-hidden="true" />}
+      {unread > 0 && <span className={styles.notificationDot} aria-hidden="true">{unread > 99 ? "99+" : unread}</span>}
     </Link>
   );
 }

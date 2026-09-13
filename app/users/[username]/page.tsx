@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: Promise<{ username: str
 
   const viewerProfile=viewer?await getCurrentProfile():null;
   const rawHue=Number(p.affinity?.theme_hue??348),rawSat=Number(p.affinity?.theme_saturation??58),rawLight=Number(p.affinity?.theme_lightness??52);
-  const customAccent=`hsl(${Math.min(360,Math.max(0,rawHue))} ${Math.min(100,Math.max(20,rawSat))}% ${Math.min(76,Math.max(28,rawLight))}%)`;
+  const customAccent=`hsl(${Math.min(360,Math.max(0,rawHue))} ${Math.min(100,Math.max(0,rawSat))}% ${Math.min(100,Math.max(0,rawLight))}%)`;
   return (
     <main className={styles.page} data-theme={p.profile_theme ?? "default"} style={p.profile_theme==="custom"?{"--profile-accent":customAccent,"--profile-glow":`hsl(${rawHue} ${rawSat}% ${rawLight}% / .22)`} as React.CSSProperties:undefined}>
       <div className={styles.banner}>{p.banner_url && <img src={p.banner_url} alt="" />}</div>

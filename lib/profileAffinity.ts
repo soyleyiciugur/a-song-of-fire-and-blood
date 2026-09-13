@@ -15,6 +15,8 @@ export type AffinityOption = {
   portrait?: string;
   mediaSrc?: string;
   mediaType?: "image" | "video";
+  chapterTitle?: string | null;
+  context?: string | null;
 };
 export type AffinityField = { key: string; label: string; options: AffinityOption[] };
 
@@ -77,6 +79,8 @@ export function affinityCatalog(): AffinityField[] {
         title: `${q.text} — ${q.speakerName}`,
         href: q.chapterSlug ? `/chapters/${q.chapterSlug}` : "/quotes",
         portrait: q.speakerId ?? undefined,
+        chapterTitle: q.chapterTitle,
+        context: q.note,
       })),
     },
     { key: "meme", label: "Favorite Meme", options: memes },
