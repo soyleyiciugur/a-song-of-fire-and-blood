@@ -2,6 +2,7 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Opened a high-participation Chapter XVIII succession debate with most replies immediately visible and a small set of near-term follow-ups.",
       "Corrected an anachronistic place reference in Chapter XVIII in both English and Turkish.",
       "Fixed notification popups closing through Return to the rookery, the close button, Escape, and backdrop taps without waiting for page navigation.",
       "Cleared personal-raven highlights as soon as notifications are opened, compacted the mobile Raven Settings control, and kept loaded community activity visible through transient refresh failures.",
@@ -73,7 +74,8 @@
       "Restyled the navigation drawer with Chronicle typography and a full-screen backdrop beneath its controls.",
       "Added matching decorative utility icons to page titles and removed the redundant day count from the miniature calendar.",
       "Expanded Raven’s Eye conversations across the newest reels, meme and earlier media, and opened four varied Taverns discussions with five new community voices.",
-      "Added a guided Home Screen reinstall flow with Mara and Aldren, per-device account acknowledgments, sign-in and raven-delivery recovery, and automated install-metadata release checks."
+      "Added a guided Home Screen reinstall flow with Mara and Aldren, per-device account acknowledgments, sign-in and raven-delivery recovery, and automated install-metadata release checks.",
+      "Fixed push-notification links in an already-open app, synchronized read highlights and raven badges, and added ?Let no raven go unheard? to mark all personal notifications as read."
     ],
     "features": [],
     "links": {

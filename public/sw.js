@@ -74,13 +74,37 @@ self.addEventListener("push", (event) => {
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  const target = new URL(event.notification.data?.url || "/notifications", self.location.origin).href;
+  const data = event.notification.data || {};
+  const targetUrl = new URL("/notifications", self.location.origin);
+  // Prefer the recorded notification identity over a generic/legacy URL.
+  if (typeof data.notificationId === "string") targetUrl.searchParams.set("open", data.notificationId);
+  else {
+    try {
+      const supplied = new URL(data.url || "/notifications", self.location.origin);
+      if (supplied.origin === self.location.origin && supplied.pathname === "/notifications") targetUrl.search = supplied.search;
+    } catch { /* Malformed legacy payload: open the ledger. */ }
+  }
+  const target = targetUrl.href;
   event.waitUntil((async () => {
     const windows = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
-    for (const client of windows) {
-      if ("focus" in client) {
-        if ("navigate" in client) await client.navigate(target);
-        return client.focus();
+    for (const client of windows.filter(client => new URL(client.url).origin === self.location.origin)) {
+      try {
+        // Wake the existing app first. Its router handles the deep link without
+        // relying solely on WindowClient.navigate on a suspended iOS window.
+        await client.focus();
+        const handled = await new Promise(resolve => {
+          const channel = new MessageChannel();
+          const finish = value => { clearTimeout(timer); channel.port1.close(); resolve(value); };
+          const timer = setTimeout(() => finish(false), 1200);
+          channel.port1.onmessage = message => finish(message.data === "navigated");
+          try { client.postMessage({ type: "ASOFAB_OPEN_NOTIFICATION", url: target }, [channel.port2]); }
+          catch { finish(false); }
+        });
+        if (handled) return;
+        const navigated = await client.navigate(target);
+        if (navigated) return;
+      } catch {
+        // A stale/closed client must not prevent another client or a new window.
       }
     }
     return self.clients.openWindow(target);

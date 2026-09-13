@@ -13,6 +13,7 @@ export default function NotificationNavButton() {
   const [unread, setUnread] = useState(0);
   const initialized = useRef(false);
   const previousUnread = useRef(0);
+  const refreshRequest = useRef(0);
 
   const syncBadge = useCallback(async (count: number, signedIn: boolean) => {
     if (!("setAppBadge" in navigator) || !("clearAppBadge" in navigator)) return;
@@ -23,6 +24,7 @@ export default function NotificationNavButton() {
   }, []);
 
   const refresh = useCallback(async (id = userId) => {
+    const request = ++refreshRequest.current;
     if (!id) {
       setUnread(0);
       previousUnread.current = 0;
@@ -31,7 +33,7 @@ export default function NotificationNavButton() {
       return;
     }
     const { count, error } = await supabase.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", id).is("read_at", null);
-    if (error) return;
+    if (error || request !== refreshRequest.current) return;
     const next = count ?? 0;
     if (initialized.current && next > previousUnread.current) playRavenSound("notification");
     previousUnread.current = next;
@@ -64,6 +66,7 @@ export default function NotificationNavButton() {
     const onChanged = (event: Event) => {
       const detail = (event as CustomEvent<{ unread?: number }>).detail;
       if (typeof detail?.unread === "number") {
+        refreshRequest.current += 1;
         previousUnread.current = detail.unread;
         initialized.current = true;
         setUnread(detail.unread);
