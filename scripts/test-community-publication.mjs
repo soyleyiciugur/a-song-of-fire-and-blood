@@ -21,6 +21,10 @@ for (const c of scheduled) {
 const root = { id:'root', parentId:null, body:'future root', publishedAt:'2026-09-12T00:00:00.000Z' };
 const reply = { id:'reply', parentId:'root', body:'reply', publishedAt:'2026-09-11T00:00:00.000Z' };
 assert.equal(publishCommunity({users:[],comments:[root,reply]},[],Date.parse(reply.publishedAt)).comments.length,0,'Even malformed early replies stay hidden');
+const nestedRoot = { id:'nested-root', parentId:null, body:'root', publishedAt:'2026-09-11T00:00:00.000Z' };
+const nestedReply = { id:'nested-reply', parentId:'nested-root', body:'reply', publishedAt:'2026-09-11T00:01:00.000Z' };
+const nestedGrandchild = { id:'nested-grandchild', parentId:'nested-reply', body:'grandchild', publishedAt:'2026-09-11T00:02:00.000Z' };
+assert.deepEqual(publishCommunity({users:[],comments:[nestedRoot,nestedReply,nestedGrandchild]},[],Date.parse(nestedGrandchild.publishedAt)).comments.map(item=>item.id),['nested-root','nested-reply','nested-grandchild'],'Nested replies publish with their full ancestor chain');
 const publicData = publishCommunity(data, updates, Date.parse('2026-09-10T12:00:00.000Z'));
 assert.equal(publicData.comments.length, data.comments.filter(c => Date.parse(c.publishedAt) <= Date.parse(publicData.serverTime)).length);
 assert.equal(publicData.updates.length, updates.filter(u=>Date.parse(`${u.date}T00:00:00+03:00`)<=Date.parse(publicData.serverTime)).length);

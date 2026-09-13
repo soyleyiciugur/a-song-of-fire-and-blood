@@ -2,6 +2,8 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Kept multi-level Raven’s Eye replies inside their parent conversations instead of listing them as new root comments.",
+      "Reworked the Jace Binim reel discussion around its boastful repetition and self-crediting meme style.",
       "Published two new Tavern topics about the pressure of Jace's succession and the planned full Kingsguard roster.",
       "Addressed HRRM's new roadmap answer and moderated a personal attack in the live Taverns AMA.",
       "Lowered the expanded-navbar chapter-list heading slightly while keeping the collapsed layout unchanged.",

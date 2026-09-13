@@ -105,7 +105,6 @@ for (const comment of comments) {
     } else {
       const parent = commentMap.get(comment.parentId);
       assert(parent && parent.entryId === comment.entryId, `Reply must stay in the same thread: ${comment.id}`);
-      assert.equal(parent.parentId, null, `Reply must target a root comment: ${comment.id}`);
       assert(Date.parse(parent.publishedAt) <= Date.parse(comment.publishedAt), `Reply publishes before parent: ${comment.id}`);
       assert.notEqual(parent.authorId, comment.authorId, `Self reply: ${comment.id}`);
       assert(comments.indexOf(parent) < comments.indexOf(comment), `Reply precedes parent: ${comment.id}`);
