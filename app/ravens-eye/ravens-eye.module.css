@@ -96,14 +96,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  flex: 0 1 220px;
-  min-width: 0;
+  flex: 0 0 auto;
 }
 
 .filterRight > .te-select {
-  flex: 1 1 150px;
+  flex: 0 0 210px;
   width: auto;
-  min-width: 0;
 }
 
 .clearBtn {
