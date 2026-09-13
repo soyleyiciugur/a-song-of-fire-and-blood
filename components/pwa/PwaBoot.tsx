@@ -1,31 +1,44 @@
 "use client";
 
 import { useEffect } from "react";
-import ShellUpdate from "./ShellUpdate";
-import { restorePush } from "@/lib/pwa/client";
 import { useRouter } from "next/navigation";
+import ShellUpdate from "./ShellUpdate";
+import AndroidInstallPrompt from "./AndroidInstallPrompt";
+import PullToRefresh from "./PullToRefresh";
+import { restorePush } from "@/lib/pwa/client";
 
 export default function PwaBoot() {
   const router = useRouter();
+
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
+
     const receive = (event: MessageEvent) => {
       if (event.data?.type !== "ASOFAB_OPEN_NOTIFICATION" || typeof event.data.url !== "string") return;
+
       try {
         const target = new URL(event.data.url, location.origin);
         if (target.origin !== location.origin || target.pathname !== "/notifications") return;
+
         const href = `${target.pathname}${target.search}`;
         if (location.pathname === target.pathname) router.replace(href, { scroll: false });
         else router.push(href);
+
         event.ports[0]?.postMessage("navigated");
-      } catch { /* Ignore invalid notification destinations. */ }
+      } catch {
+        // Ignore invalid notification destinations.
+      }
     };
+
     navigator.serviceWorker.addEventListener("message", receive);
     return () => navigator.serviceWorker.removeEventListener("message", receive);
   }, [router]);
+
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
+
     let cancelled = false;
+
     const register = async () => {
       try {
         const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/" });
@@ -36,10 +49,19 @@ export default function PwaBoot() {
         console.error("ASOFAB service worker could not be registered.", error);
       }
     };
+
     if (document.readyState === "complete") void register();
     else window.addEventListener("load", register, { once: true });
-    return () => { cancelled = true; window.removeEventListener("load", register); };
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", register);
+    };
   }, []);
 
-  return <ShellUpdate />;
+  return <>
+    <ShellUpdate />
+    <AndroidInstallPrompt />
+    <PullToRefresh />
+  </>;
 }
