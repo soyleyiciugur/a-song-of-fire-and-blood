@@ -109,26 +109,30 @@ const DIVIDER_MARKER = "✧ ✦ ✧";
 function paginateContent(
   blocks: string[],
   columnHeightPx: number,
-  rulerEl: HTMLElement
+  rulerEl: HTMLElement,
+  mobile: boolean
 ): string[][] {
   const pages: string[][] = [];
   let current: string[] = [];
   let usedHeight = 0;
 
-  for (const block of blocks) {
+  const measure = (block: string) => {
     rulerEl.innerHTML = "";
     const el = document.createElement("p");
-    el.className = "ruler-para";
     el.style.cssText = `
-      margin: 0 0 1em 0;
-      font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-      font-size: 0.93rem;
-      line-height: 1.85;
+      margin: 0 0 ${mobile ? "0.8em" : "0.85em"} 0;
+      font-family: "House of the Dragon", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      font-size: ${mobile ? "0.88rem" : "0.93rem"};
+      line-height: ${mobile ? "1.72" : "1.85"};
       width: 100%;
+      box-sizing: border-box;
+      white-space: normal;
+      overflow-wrap: anywhere;
     `;
+
     const imgMatch = block.match(IMAGE_RE);
     if (imgMatch) {
-      el.style.height = "220px";
+      el.style.height = mobile ? "180px" : "220px";
       el.style.display = "block";
     } else if (block === DIVIDER_MARKER) {
       el.style.height = "28px";
@@ -137,20 +141,77 @@ function paginateContent(
     } else {
       el.textContent = block;
     }
-    rulerEl.appendChild(el);
-    const h = el.getBoundingClientRect().height + 16; // +margin
 
-    if (usedHeight + h > columnHeightPx && current.length > 0) {
-      pages.push(current);
-      current = [block];
-      usedHeight = h;
-    } else {
+    rulerEl.appendChild(el);
+    const computed = getComputedStyle(el);
+    return el.getBoundingClientRect().height + parseFloat(computed.marginBottom || "0");
+  };
+
+  const pushPage = () => {
+    if (current.length) pages.push(current);
+    current = [];
+    usedHeight = 0;
+  };
+
+  for (const rawBlock of blocks) {
+    const block = rawBlock.trim();
+    if (!block) continue;
+
+    // Images and ornamental dividers are atomic. Text is allowed to flow
+    // across a page boundary so one JSON paragraph no longer equals one page.
+    if (IMAGE_RE.test(block) || block === DIVIDER_MARKER) {
+      const h = measure(block);
+      if (current.length && usedHeight + h > columnHeightPx) pushPage();
       current.push(block);
       usedHeight += h;
+      continue;
+    }
+
+    let words = block.split(/\s+/).filter(Boolean);
+    while (words.length) {
+      const remaining = Math.max(0, columnHeightPx - usedHeight);
+
+      // If nothing useful can fit below existing content, continue the same
+      // paragraph on a fresh page instead of moving the whole paragraph.
+      if (current.length && remaining < (mobile ? 34 : 40)) {
+        pushPage();
+        continue;
+      }
+
+      const targetHeight = current.length ? remaining : columnHeightPx;
+      let low = 1;
+      let high = words.length;
+      let fit = 0;
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        const candidate = words.slice(0, mid).join(" ");
+        if (measure(candidate) <= targetHeight) {
+          fit = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      // On a partly-filled page the next word may not fit. Continue the same
+      // paragraph on a fresh page; on an empty page always make progress.
+      if (fit === 0 && current.length) {
+        pushPage();
+        continue;
+      }
+      if (fit === 0) fit = 1;
+
+      const chunk = words.slice(0, fit).join(" ");
+      const h = measure(chunk);
+      current.push(chunk);
+      usedHeight += h;
+      words = words.slice(fit);
+
+      if (words.length) pushPage();
     }
   }
 
-  if (current.length > 0) pages.push(current);
+  pushPage();
   return pages.length > 0 ? pages : [[]];
 }
 
@@ -298,29 +359,41 @@ export default function ChapterReader() {
     if (viewMode !== "book") return;
     if (!chapter || !rulerRef.current || !pageAreaRef.current) return;
 
-    const blocks = chapterContent(chapter, lang);
-    const h = pageAreaRef.current.getBoundingClientRect().height;
-    if (h < 50) return;
+    const pageArea = pageAreaRef.current;
+    const ruler = rulerRef.current;
 
-    const built = paginateContent(blocks, h * 0.92, rulerRef.current);
-    setColumnPages(built);
+    const buildPages = () => {
+      const style = getComputedStyle(pageArea);
+      const paddingX = parseFloat(style.paddingLeft || "0") + parseFloat(style.paddingRight || "0");
+      const paddingY = parseFloat(style.paddingTop || "0") + parseFloat(style.paddingBottom || "0");
+      const contentWidth = Math.max(120, pageArea.clientWidth - paddingX);
+      const contentHeight = Math.max(120, pageArea.clientHeight - paddingY);
+      ruler.style.width = `${contentWidth}px`;
 
-    const total = 1 + Math.ceil(built.length / 2);
-    const chapterChanged = prevChapterSlugRef.current !== chapter.slug;
-    prevChapterSlugRef.current = chapter.slug;
+      const blocks = chapterContent(chapter, lang);
+      const built = paginateContent(blocks, contentHeight, ruler, isMobile);
+      setColumnPages(built);
 
-    const fromUrl = searchParams.get("page");
-    if (fromUrl) {
-      const n = parseInt(fromUrl, 10);
-      setSpreadIndex(isNaN(n) ? 0 : Math.max(0, Math.min(n, total - 1)));
-    } else if (chapterChanged) {
-      setSpreadIndex(0);
-    } else {
-      // lang-only change: clamp current position into the new total,
-      // but don't reset to page 1
-      setSpreadIndex((prev) => Math.max(0, Math.min(prev, total - 1)));
-    }
-  }, [chapter, lang, viewMode, isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
+      const total = 1 + Math.ceil(built.length / 2);
+      const chapterChanged = prevChapterSlugRef.current !== chapter.slug;
+      prevChapterSlugRef.current = chapter.slug;
+
+      const fromUrl = searchParams.get("page");
+      if (fromUrl) {
+        const n = parseInt(fromUrl, 10);
+        setSpreadIndex(isNaN(n) ? 0 : Math.max(0, Math.min(n, total - 1)));
+      } else if (chapterChanged) {
+        setSpreadIndex(0);
+      } else {
+        setSpreadIndex((prev) => Math.max(0, Math.min(prev, total - 1)));
+      }
+    };
+
+    buildPages();
+    const observer = new ResizeObserver(buildPages);
+    observer.observe(pageArea);
+    return () => observer.disconnect();
+  }, [chapter, lang, viewMode, isMobile, searchParams]);
 
   useEffect(() => {
     setMobilePageIndex((prev) => Math.max(0, Math.min(prev, mobileTotalPages - 1)));
@@ -462,15 +535,26 @@ export default function ChapterReader() {
   // ── shared top controls (language toggle, back link, view toggle) ──
   const topControls = (
     <>
-      <div className={styles.langToggle}>
+      <div className={styles.readerControls}>
+        <button
+          type="button"
+          className={styles.backLink}
+          onClick={() => setChapterListOpen(true)}
+          aria-expanded={chapterListOpen}
+          aria-controls="chapter-list-panel"
+        >
+          ☰ {lang === "en" ? "Chapter list" : "Bölüm listesi"}
+        </button>
+
+        <div className={styles.langToggle}>
         <button
           className={fc.fcToggleBtn}
           onClick={toggleViewMode}
           aria-pressed={viewMode === "scroll"}
         >
           {viewMode === "book"
-            ? (lang === "en" ? "Click to read the full chapter" : "Bölümün tamamını oku")
-            : (lang === "en" ? "Back to book view" : "Kitap görünümüne dön")}
+            ? (lang === "en" ? "Parchment" : "Parşömen")
+            : (lang === "en" ? "Book" : "Kitap")}
         </button>
         <button
           className={[styles.langBtn, lang === "en" ? styles.langBtnActive : ""].filter(Boolean).join(" ")}
@@ -490,17 +574,8 @@ export default function ChapterReader() {
         >
           TR
         </button>
+        </div>
       </div>
-
-      <button
-        type="button"
-        className={styles.backLink}
-        onClick={() => setChapterListOpen(true)}
-        aria-expanded={chapterListOpen}
-        aria-controls="chapter-list-panel"
-      >
-        ☰ {lang === "en" ? "Chapter list" : "Bölüm listesi"}
-      </button>
 
       {chapterListOpen && (
         <div
@@ -603,7 +678,7 @@ export default function ChapterReader() {
             )}
 
             <button className={fc.fcBackToBook} onClick={toggleViewMode}>
-              {lang === "en" ? "Back to book view" : "Kitap görünümüne dön"}
+              {lang === "en" ? "Book" : "Kitap"}
             </button>
 
             {nextChapter ? (

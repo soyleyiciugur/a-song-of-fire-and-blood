@@ -843,8 +843,9 @@ function TabBar({
             }`}
             aria-current={active === id ? "page" : undefined}
           >
-            {meta.label}
-            {count > 0 ? ` (${count})` : ""}
+            <span className={styles.tabLabelFull}>{meta.label}</span>
+            <span className={styles.tabLabelMobile}>{id === "raven" ? "Raven's Eye" : id === "flea" ? "Memes" : "Reels"}</span>
+            {count > 0 && <span className={styles.tabCount}>{count}</span>}
           </a>
         );
       })}

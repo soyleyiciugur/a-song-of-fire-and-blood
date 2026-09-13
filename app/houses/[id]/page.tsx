@@ -76,7 +76,7 @@ export default async function HousePage({ params }: Props) {
               >
                 <MiniPortrait id={member.id} alt={member.name} />
 
-                <span>
+                <span className={styles.memberCopy}>
                   <span className={styles.memberName}>{member.name}</span>
                   <span className={styles.memberTitle}>
                     {member.title !== "-" ? member.title : ""}

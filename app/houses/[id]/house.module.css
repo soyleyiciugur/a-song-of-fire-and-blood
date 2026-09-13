@@ -148,3 +148,21 @@
   word-break: break-word;
   color: var(--muted);
 }
+/* Keep member identity beside the portrait; long titles wrap inside the copy column. */
+.memberCard {
+  flex-wrap: nowrap;
+}
+.memberCopy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .memberCard:hover { border-color: var(--house-color, var(--gold)); }
+}
+@media (hover: none) {
+  .memberCard:hover { border-color: var(--border); }
+}
+.memberCard:focus-visible {
+  outline: 2px solid var(--house-color, var(--gold));
+  outline-offset: 2px;
+}

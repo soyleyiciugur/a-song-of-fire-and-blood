@@ -95,3 +95,22 @@
   .replies .replies{margin-left:6px;padding-left:7px}
   .replyToggle{margin-left:0}
 }
+
+.commentTime { flex: 0 0 auto; color: #8d8073; font: 10px/1 var(--font-geist); }
+.viewProfile {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 5px 9px;
+  border: 1px solid #5d4936;
+  border-radius: 7px;
+  background: linear-gradient(145deg,#21181a,#121012);
+  color: #d1af74;
+  text-decoration: none;
+  font: 600 10px var(--font-geist);
+  letter-spacing: .025em;
+}
+.viewProfile svg { width: 13px; height: 13px; }
+.viewProfile:hover { border-color: #a47b45; color: #ecd09d; background:#291d20; }
+.viewProfile:focus-visible { outline: 2px solid #d6b56f; outline-offset: 2px; }

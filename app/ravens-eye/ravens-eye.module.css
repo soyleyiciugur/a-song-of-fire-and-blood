@@ -786,3 +786,88 @@
 .gutterToolbar button:hover{border-color:#7c6040;background:#141113;color:#efd9b7}
 .gutterToolbar button:disabled{opacity:.32}
 .commentCount{border:1px solid #594534;border-radius:999px;background:#151113e8;color:#d9c6aa;font:600 10px/1.4 var(--font-geist);box-shadow:0 4px 14px #0007}
+
+/* Compact, fixed Raven's Eye navigation: no draggable overflow on phones. */
+.tabLabelMobile { display: none; }
+.tabCount {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  padding: 0 5px;
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, var(--border));
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* Shared filters for Images / Memes / Reels. */
+.filterBar :global(.te-select-trigger) {
+  min-height: 36px;
+  padding: 7px 10px;
+  border-color: rgba(201,162,39,.24);
+  border-radius: 7px;
+  background: linear-gradient(145deg,rgba(29,23,22,.9),rgba(13,12,14,.9));
+  font-size: 12px;
+}
+.filterBar :global(.te-select-panel) {
+  border-color: rgba(201,162,39,.32);
+  background: #121014;
+}
+.filterBar :global(.te-select-option) { padding: 8px 10px; font-size: 12px; }
+.clearBtn {
+  min-height: 34px;
+  padding: 6px 9px;
+  border: 1px solid rgba(201,162,39,.22);
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+@media (max-width: 720px) {
+  .tabBar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+  }
+  .tabBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    gap: 3px;
+    padding: 9px 3px;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .tabLabelFull { display: none; }
+  .tabLabelMobile { display: inline; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .tabCount { min-width: 17px; height: 17px; margin-left: 2px; padding: 0 3px; font-size: 9px; }
+
+  .filterBar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    padding: 8px;
+  }
+  .filterBar > :global(.te-select) {
+    width: 100%;
+    min-width: 0;
+  }
+  .filterRight {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 7px;
+    width: 100%;
+    margin: 0;
+  }
+  .filterRight > :global(.te-select) { width: 100%; min-width: 0; }
+  .clearBtn { white-space: nowrap; }
+}

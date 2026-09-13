@@ -341,3 +341,58 @@
 .fcFooterLink,.fcBackToBook { font-family:var(--font-geist); font-size:12px; line-height:1.5; padding:10px 14px; border:1px solid var(--fc-gold); border-radius:4px; color:var(--fc-parchment-light); background:#241c12; }
 .fcFooterLink { flex:1; }
 .fcFooterLink:hover,.fcBackToBook:hover { color:#f0c050; background:#33281a; border-color:var(--fc-gold-bright); }
+
+/* The decorative initial occupies only the opening line; following lines return to the normal margin. */
+.fcDropCap {
+  float: none;
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: .78;
+  margin: 0 .18em 0 0;
+  padding: 0;
+  transform: translateY(.08em);
+}
+
+/* Parchment navigation uses the same compact dark-and-gold control language as the reader toolbar. */
+.fcFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 10px;
+}
+.fcFooterLink,
+.fcBackToBook,
+.fcFooterLinkDisabled {
+  box-sizing: border-box;
+  min-height: 42px;
+  margin: 0;
+}
+.fcFooterLink,
+.fcBackToBook {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1px solid var(--fc-gold);
+  border-radius: 4px;
+  background: #241c12;
+  color: var(--fc-parchment-light);
+  font: 600 12px/1.35 var(--font-geist);
+  text-align: center;
+}
+.fcFooterLink:first-child { justify-content: flex-start; }
+.fcFooterLink:last-child { justify-content: flex-end; }
+.fcBackToBook { min-width: 74px; color: #f0c050; }
+
+@media (max-width: 560px) {
+  .fcScene { padding-top: 76px; }
+  .fcFooter {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .fcBackToBook {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+  }
+  .fcFooterLink { min-width: 0; font-size: 11px; }
+}

@@ -14,6 +14,7 @@ import Composer from "@/components/community/Composer";
 import ContentActions from "@/components/community/ContentActions";
 import LikeButton from "@/components/community/LikeButton";
 import { getCommentLink } from "@/lib/communityLinks";
+import { formatCompactTime } from "@/lib/formatCompactTime";
 
 function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boolean }) {
   const { comment, children } = node;
@@ -34,6 +35,9 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
             <summary>
               {user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={identity?.name ?? user.username} size={30} /> : user.avatarUrl ? <img className={styles.avatar} src={user.avatarUrl} alt="" /> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}
               <span className={styles.username}>@{user.username}</span>
+              <time suppressHydrationWarning className={styles.commentTime} dateTime={comment.publishedAt} title={new Date(comment.publishedAt).toLocaleString()}>
+                {formatCompactTime(comment.publishedAt)}
+              </time>
               {identity && <span className={`${styles.verified} ${identity.type === "institution" ? styles.institution : ""}`} role="img" aria-label={`Verified ${identity.type} account`} title={`Verified ${identity.type} account · fictional`}>
                 <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="m10 0 2.3 2 3-.1.6 3 2.5 1.7-1.3 2.7.6 3-2.8 1.1-1.4 2.7-2.9-.8-2.6 1.5-2-2.3-3-.4.1-3L1 8.9l1.9-2.3.2-3 3-.6L8 .5z"/><path d="m6 9.5 2.4 2.4 5-5" fill="none" stroke="#10151d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </span>}
@@ -58,7 +62,7 @@ function Comment({ node, pinned = false }: { node: CommentTreeNode; pinned?: boo
                   {user.current && <div><dt>{user.current.label}</dt><dd>{user.current.value}</dd></div>}
                 </dl>
               )}
-              <p className={styles.activity}>{stats.comments} {stats.comments === 1 ? "comment" : "comments"} across {stats.posts} {stats.posts === 1 ? "post" : "posts"}</p>{user.profileHref && <Link href={user.profileHref}>View profile →</Link>}
+              <p className={styles.activity}>{stats.comments} {stats.comments === 1 ? "comment" : "comments"} across {stats.posts} {stats.posts === 1 ? "post" : "posts"}</p>{user.profileHref && <Link href={user.profileHref} className={styles.viewProfile}>View profile <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}
               <FriendAccounts user={user} />
             </div>
           </details>

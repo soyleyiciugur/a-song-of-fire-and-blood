@@ -125,3 +125,63 @@ a.person:hover {
   align-items: center;
   gap: 4px;
 }
+
+/* Mobile tree compaction: preserve relationships instead of turning each node into a card stack. */
+@media (max-width: 700px) {
+  .person {
+    --mini-portrait-size: 24px;
+    gap: 6px;
+    width: auto;
+    max-width: 118px;
+    min-height: 32px;
+    padding: 4px 8px 4px 4px;
+    font-size: 10.5px;
+    border-radius: 18px;
+  }
+
+  .personName {
+    max-width: 80px;
+    line-height: 1.12;
+  }
+
+  .unlinkedAvatar {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+
+  .unionRow {
+    flex-wrap: nowrap;
+    gap: 5px;
+  }
+
+  .unionConnector {
+    flex: 0 0 auto;
+    font-size: 11px;
+  }
+
+  .familyUnit {
+    max-width: 100%;
+    padding: 10px 7px;
+    border-radius: 7px;
+  }
+
+  .dropline {
+    height: 12px;
+    margin: 2px 0;
+  }
+
+  .childrenLabel {
+    margin-bottom: 6px;
+    font-size: 8px;
+    letter-spacing: .7px;
+  }
+
+  .childrenRow {
+    gap: 6px;
+  }
+
+  .subUnion {
+    gap: 2px;
+  }
+}

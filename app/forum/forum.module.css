@@ -108,3 +108,45 @@
   .replies>.comment{padding-left:8px}
   .replies .replies{margin-left:6px;padding-left:7px}
 }
+
+.viewProfile {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: 1px solid #5c4935;
+  border-radius: 7px;
+  background: linear-gradient(145deg,#251a1d,#141216);
+  color: var(--tavern-gold-soft) !important;
+  text-decoration: none;
+  font: 600 10px var(--font-geist);
+}
+.viewProfile svg { width: 13px; height: 13px; }
+.viewProfile:hover { border-color: var(--tavern-gold); background:#2b1d21; }
+
+.orderControl {
+  display: grid;
+  grid-template-columns: auto minmax(150px, 190px);
+  align-items: center;
+  gap: 9px;
+  color: var(--tavern-muted);
+  font: 600 10px var(--font-geist);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.orderControl :global(.te-select-trigger) {
+  min-height: 38px;
+  padding: 7px 10px;
+  border-color: #4d4034;
+  border-radius: 7px;
+  background: linear-gradient(145deg,#1b1719,#111114);
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+@media (max-width: 520px) {
+  .discussionBar { align-items: center; }
+  .orderControl { grid-template-columns: auto minmax(0,1fr); width: 100%; }
+}

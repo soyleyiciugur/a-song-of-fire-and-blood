@@ -816,3 +816,40 @@
 .navGroupCaret svg { display:block; width:12px; height:8px; transition:transform .2s ease; }
 .navGroupCaretBtn[aria-expanded="true"] svg,.mobileNavGroupHeader[aria-expanded="true"] svg { transform:rotate(180deg); }
 @media(prefers-reduced-motion:reduce) { .navGroupCaret svg { transition:none; } }
+
+/* Mobile search expands across the utility lane toward the account instead of growing off-screen to the left. */
+@media (max-width: 640px) {
+  .playBanner .searchWrap:focus-within {
+    position: absolute;
+    left: 48px;
+    right: 46px;
+    top: 50%;
+    width: auto;
+    min-width: 0;
+    height: 38px;
+    transform: translateY(-50%);
+    z-index: 96;
+  }
+  .playBanner .searchWrap:focus-within .searchInput {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    height: 38px;
+    padding: 7px 36px 7px 12px;
+    box-shadow: 0 8px 24px #0008;
+  }
+  .playBanner .searchWrap:focus-within .searchIcon {
+    top: 10px;
+    right: 10px;
+  }
+  .playBanner .searchWrap:focus-within .dropdown {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  .playBanner .inner:has(.searchWrap:focus-within) .homeLink {
+    visibility: hidden;
+  }
+}

@@ -41,6 +41,7 @@ function groupResults(results: SearchResult[]) {
 export default function SearchBar() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const focusScrollYRef = useRef(0);
 
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -70,11 +71,22 @@ export default function SearchBar() {
         value={query}
         placeholder="Search the realm..."
         className={styles.searchInput}
+        onPointerDown={(event) => {
+          if (typeof window === "undefined" || !window.matchMedia("(pointer: coarse)").matches) return;
+          event.preventDefault();
+          focusScrollYRef.current = window.scrollY;
+          inputRef.current?.focus({ preventScroll: true });
+          const restore = () => window.scrollTo({ top: focusScrollYRef.current, left: 0, behavior: "auto" });
+          requestAnimationFrame(restore);
+          window.setTimeout(restore, 120);
+          window.setTimeout(restore, 280);
+        }}
         onChange={(e) => {
           setQuery(e.target.value);
           setOpen(true);
         }}
         onFocus={() => {
+          focusScrollYRef.current = window.scrollY;
           if (query.trim()) setOpen(true);
         }}
         onBlur={() => setOpen(false)}

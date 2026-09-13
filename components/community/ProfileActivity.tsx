@@ -100,15 +100,28 @@ export default function ProfileActivity({ userId }: { userId: string }) {
     }
 
     const table = tab === "thread" ? "forum_threads" : tab === "post" ? "forum_posts" : "raven_comments";
-    void supabase.from(table).select("*").eq("user_author_id", userId).eq("is_visible", true).order("created_at", { ascending: false }).order("id").range(page * 20, page * 20 + 19).then(({ data, error: queryError }) => {
+    void (async () => {
+      const { data, error: queryError } = await supabase.from(table).select("*").eq("user_author_id", userId).eq("is_visible", true).order("created_at", { ascending: false }).order("id").range(page * 20, page * 20 + 19);
       if (!active) return;
-      if (queryError) setError("Activity could not be loaded.");
-      else {
-        setRows((old) => page === 0 ? data ?? [] : [...old, ...(data ?? [])]);
-        setMore(data?.length === 20);
+      if (queryError) {
+        setError("Activity could not be loaded.");
+      } else {
+        const nextRows = (data ?? []) as Activity[];
+        setRows((old) => page === 0 ? nextRows : [...old, ...nextRows]);
+        setMore(nextRows.length === 20);
+
+        if (tab === "post") {
+          const threadIds = [...new Set(nextRows.map((row) => row.thread_id).filter((id): id is string => Boolean(id && !threadTitles.has(id))))];
+          if (threadIds.length) {
+            const { data: liveThreads } = await supabase.from("forum_threads").select("id,title").in("id", threadIds);
+            if (active && liveThreads?.length) {
+              setTitles((current) => ({ ...current, ...Object.fromEntries(liveThreads.map((thread) => [`thread:${thread.id}`, thread.title])) }));
+            }
+          }
+        }
       }
-      setLoading(false);
-    });
+      if (active) setLoading(false);
+    })();
     return () => { active = false; };
   }, [tab, page, userId, supabase]);
 
@@ -135,13 +148,13 @@ export default function ProfileActivity({ userId }: { userId: string }) {
     postGroups.set(key, [...(postGroups.get(key) ?? []), row]);
   }
 
-  const postTitle = (threadId: string) => threadTitles.get(threadId) ?? "Tavern discussion";
+  const postTitle = (threadId: string) => threadTitles.get(threadId) ?? titles[`thread:${threadId}`] ?? "Tavern discussion";
   const ravenTitle = (entryId?: string) => captions.get(entryId ?? "") ?? "Untitled Raven's Eye item";
 
   const renderReactionGroups = () => [...grouped].map(([key, group]) => {
     const first = group[0];
     const title = first.target_title || titles[`${first.target_kind}:${first.target_id}`] || "Taverns";
-    return <details key={key} className={styles.reactionGroup}><summary><span><span className={styles.activityKicker}>{first.target_kind === "raven" ? "Raven's Eye" : "Taverns"}</span><strong>{title}</strong></span><span>{group.length} {group.length === 1 ? "activity" : "activities"}</span></summary><div>{group.map((row) => <article key={`${row.target_kind}-${row.target_id}`} className={styles.activityCard}><Link href={row.href}><span className={styles.activityKicker}>{row.target_kind === "raven" ? "Liked comment" : "Granted Favor"}</span><small>{new Date(row.latest).toLocaleDateString("en-GB")}</small>{row.preview && <p>{row.preview}</p>}<span className={styles.permalink}>Open permalink ↗</span></Link></article>)}</div></details>;
+    return <details key={key} className={styles.reactionGroup}><summary><span><span className={styles.activityKicker}>{first.target_kind === "raven" ? "Raven's Eye" : "Taverns"}</span><strong>{title}</strong></span><span>{group.length} {group.length === 1 ? "activity" : "activities"}</span></summary><div>{group.map((row) => <article key={`${row.target_kind}-${row.target_id}`} className={styles.activityCard}><Link href={row.href}><span className={styles.activityKicker}>{row.target_kind === "raven" ? "Liked comment" : "Granted Favor"}</span><small>{new Date(row.latest).toLocaleDateString("en-GB")}</small>{row.preview && <p>{row.preview}</p>}<span className={styles.permalink}>Open permalink <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg></span></Link></article>)}</div></details>;
   });
 
   const renderPostGroups = () => [...postGroups].map(([key, group]) => <details key={key} className={styles.reactionGroup}><summary><span><span className={styles.activityKicker}>Tavern Talks</span><strong>{postTitle(key)}</strong></span><span>{group.length} {group.length === 1 ? "reply" : "replies"}</span></summary><div>{group.map((row) => <article key={row.id} className={styles.activityCard}><Link href={getCommentLink({ id: row.id, entryId: row.thread_id ?? "", surface: "forum" })}><small>{row.parent_id ? "Reply · " : ""}{new Date(row.created_at).toLocaleDateString("en-GB")}</small><p>{row.body}</p></Link><LikeButton kind="post" id={row.id} /></article>)}</div></details>);

@@ -1100,3 +1100,92 @@
     top: 106px;
   }
 }
+
+/* Unified reader toolbar: Chapter list | view | EN | TR, on one baseline. */
+.readerControls {
+  position: fixed;
+  top: calc(var(--site-nav-height, 58px) + 14px);
+  left: 28px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  pointer-events: none;
+}
+.readerControls .backLink,
+.readerControls .langToggle {
+  position: static;
+  inset: auto;
+  transform: none;
+  pointer-events: auto;
+}
+.readerControls .langToggle {
+  margin-left: auto;
+  flex-wrap: nowrap;
+}
+.readerControls .backLink,
+.readerControls .langBtn {
+  box-sizing: border-box;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.readerControls .backLink {
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .readerControls {
+    top: calc(var(--site-nav-height, 58px) + 8px);
+    left: 10px;
+    right: 10px;
+    gap: 6px;
+  }
+  .readerControls .backLink {
+    padding: 6px 9px;
+    min-height: 34px;
+    font-size: .68rem;
+    letter-spacing: .045em;
+  }
+  .readerControls .langToggle {
+    max-width: none;
+    gap: 4px;
+  }
+  .readerControls .langBtn {
+    min-height: 34px;
+    padding: 6px 8px;
+    font-size: .68rem;
+  }
+  .scene {
+    padding-top: 74px;
+  }
+}
+
+@media (max-width: 420px) {
+  .readerControls { left: 8px; right: 8px; gap: 4px; }
+  .readerControls .backLink { padding-inline: 7px; }
+  .readerControls .langBtn { padding-inline: 7px; }
+}
+
+/* Keep every item in the compact reader toolbar on the same visual baseline. */
+.readerControls .langToggle > button,
+.readerControls .viewToggle,
+.readerControls .chapterListButton {
+  min-height: 36px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .readerControls .langToggle > button,
+  .readerControls .viewToggle,
+  .readerControls .chapterListButton {
+    min-height: 34px;
+  }
+}

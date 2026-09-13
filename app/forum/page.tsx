@@ -15,6 +15,7 @@ import styles from './forum.module.css';
 import Composer from '@/components/community/Composer';
 import ContentActions from '@/components/community/ContentActions';
 import LikeButton from '@/components/community/LikeButton';
+import { Select } from '@/app/_components/Select';
 import { buildCommentTree, countDescendants, type CommentTreeNode } from '@/lib/commentThreads';
 
 const dateLabel=(date:string)=>new Intl.DateTimeFormat('en-GB',{dateStyle:'medium',timeStyle:'short',timeZone:'Europe/Istanbul'}).format(new Date(date));
@@ -29,7 +30,7 @@ function Account({user}:{user:GutterUser}) {
     <strong>{user.displayName??user.username}</strong><span className={styles.muted}> · {user.kind==='fictional'?'Fictional account':'Community member'}</span>
     <p>{user.bio}</p>{identity?.href&&<Link href={identity.href}>{identity.name} ↗</Link>}
     {user.current&&<p>{user.current.label}: {user.current.value}</p>}
-    <p className={styles.muted}>{stats.comments} comments across {stats.posts} posts</p>{user.profileHref&&<Link href={user.profileHref}>View profile →</Link>}<FriendAccounts user={user}/>
+    <p className={styles.muted}>{stats.comments} comments across {stats.posts} posts</p>{user.profileHref&&<Link href={user.profileHref} className={styles.viewProfile}>View profile <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}<FriendAccounts user={user}/>
   </div></details>;
 }
 function Rewards({comment}:{comment:GutterComment}) {
@@ -92,7 +93,7 @@ function Forum() {
         {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
         {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}<LikeButton kind="thread" id={thread.id}/>{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
       </section>
-      <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><label>Order <select value={sort} onChange={e=>setSort(e.target.value)}><option value="conversation">Conversation</option><option value="top">Most Favored</option></select></label></div>
+      <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><div className={styles.orderControl}><span>Order conversation</span><Select value={sort} options={[{id:"conversation",name:"Conversation"},{id:"top",name:"Most Favored"}]} onChange={setSort} /></div></div>
       {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
       <ol className={styles.comments}>{groups.map(node=><ForumComment key={node.comment.id} node={node} users={users} comments={comments} threadId={thread.id} target={target}/>)}</ol>
     </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to Taverns</Link></p> : <>

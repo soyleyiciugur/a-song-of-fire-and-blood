@@ -176,3 +176,28 @@
   padding: 2px 7px;
   font-size: 0.68rem;
 }
+
+/* Select options are real controls; opening a list never summons the keyboard. */
+.te-select-option {
+  display: block;
+  width: 100%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+}
+.te-select-search-wrap input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #0c0b0d;
+  color: var(--text);
+  font: 16px var(--font-geist);
+  outline: none;
+}
+.te-select-search-wrap input:focus { border-color: var(--gold); }

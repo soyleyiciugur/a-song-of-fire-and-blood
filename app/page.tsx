@@ -10,6 +10,7 @@ import RavenEyeCard from "@/components/home/RavenEyeCard";
 import ChronicleTimeline from "@/components/home/ChronicleTimeline";
 import LatestUpdates from "@/components/home/LatestUpdates";
 import RealmLedgerCard from "@/components/home/RealmLedgerCard";
+import HomeScrollRestorer from "@/components/home/HomeScrollRestorer";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export default function Home() {
   const featuredQuote = getRandomQuote();
   return (
     <main className="home-page">
+      <HomeScrollRestorer />
       <div className="hero">
         <Image
           src="/images/home/a-song-of-fire-and-blood.webp"

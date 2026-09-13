@@ -98,3 +98,15 @@
     filter: drop-shadow(0 0 13px rgba(201, 162, 39, 0.6));
   }
 }
+
+@media (max-width: 700px) {
+  .page { padding: 28px 7px 48px; }
+  .container { width: 100%; max-width: none; }
+  .heading { font-size: 30px; }
+  .subheading { margin-bottom: 30px; font-size: 13px; }
+  .house { margin-bottom: 38px; }
+  .houseTitle { font-size: 20px; padding-bottom: 8px; }
+  .houseNote { margin: 9px 4px 16px; font-size: 11px; line-height: 1.45; }
+  .generationLabel { margin: 17px 0 8px; font-size: 8px; letter-spacing: 1px; }
+  .generationRow { gap: 7px; }
+}
