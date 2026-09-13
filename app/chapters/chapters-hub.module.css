@@ -941,7 +941,10 @@
 
 .scene { height:calc(100dvh - var(--site-nav-height,58px)); min-height:0; padding:66px 16px 110px; overflow:clip; --book-h:min(560px,calc(100dvh - var(--site-nav-height,58px) - 190px)); }
 .bookWrap { flex-shrink:0; }
-.langToggle { position:absolute; top:20px; }
+.langToggle {
+  position: absolute;
+  top: 32px;
+}
 .continueBanner { position:absolute; bottom:20px; max-width:calc(100% - 32px); }
 .tocPageInner { min-height:0; }
 .tocList { display:flex; flex-direction:column; padding-bottom:20px; }
