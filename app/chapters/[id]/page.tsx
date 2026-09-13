@@ -513,10 +513,11 @@ export default function ChapterReader() {
   // ════════════════ SCROLL VIEW (full chapter, single page) ════════════════
   if (viewMode === "scroll") {
     return (
-      <div className={fc.fcScene}>
+      <>
         {topControls}
 
-        <article className={fc.fcParchment}>
+        <div className={fc.fcScene}>
+          <article className={fc.fcParchment}>
           <div className={fc.fcSeal} aria-hidden>
             <span className={fc.fcSealGlyph}>✦</span>
           </div>
@@ -574,24 +575,26 @@ export default function ChapterReader() {
               <span className={fc.fcFooterLinkDisabled}>—</span>
             )}
           </footer>
-        </article>
-      </div>
+          </article>
+        </div>
+      </>
     );
   }
 
   // ════════════════ BOOK VIEW (page-flip, default) ════════════════
   return (
-    <div className={styles.scene}>
-      {/* hidden ruler for measuring paragraph heights */}
-      <div
-        ref={rulerRef}
-        aria-hidden
-        className={styles.paginationRuler}
-      />
-
+    <>
       {topControls}
 
-      {/* ════════ THE OPEN BOOK ════════ */}
+      <div className={styles.scene}>
+        {/* hidden ruler for measuring paragraph heights */}
+        <div
+          ref={rulerRef}
+          aria-hidden
+          className={styles.paginationRuler}
+        />
+
+        {/* ════════ THE OPEN BOOK ════════ */}
       <div className={styles.book}>
 
         {/* spine */}
@@ -768,8 +771,9 @@ export default function ChapterReader() {
           </div>
         </div>
         {/* end spread */}
+        </div>
+        {/* end book */}
       </div>
-      {/* end book */}
-    </div>
+    </>
   );
 }
