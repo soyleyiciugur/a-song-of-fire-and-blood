@@ -24,17 +24,7 @@ export function unlockSound() {
 export function playRavenSound(kind: "message" | "notification" = "message") {
   if (!soundEnabled() || !context || context.state !== "running" || Date.now() - lastPlayed < 4000) return;
   lastPlayed = Date.now();
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
   const now = context.currentTime;
-  oscillator.type = "sine";
-  oscillator.frequency.setValueAtTime(kind === "message" ? 660 : 520, now);
-  oscillator.frequency.exponentialRampToValueAtTime(kind === "message" ? 880 : 660, now + .16);
-  gain.gain.setValueAtTime(0, now);
-  gain.gain.linearRampToValueAtTime(.025, now + .015);
-  gain.gain.exponentialRampToValueAtTime(.0001, now + .28);
-  oscillator.connect(gain).connect(context.destination);
-  oscillator.start(now);
-  oscillator.stop(now + .3);
-  oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
+  const notes=kind==="message"?[[659,.00,.16],[880,.13,.23]]:[[392,.00,.28]];
+  for(const [frequency,delay,duration] of notes){const oscillator=context.createOscillator(),gain=context.createGain(),start=now+delay;oscillator.type=kind==="message"?"sine":"triangle";oscillator.frequency.setValueAtTime(frequency,start);if(kind==="notification")oscillator.frequency.exponentialRampToValueAtTime(294,start+duration);gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(kind==="message"?.022:.017,start+.018);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);oscillator.connect(gain).connect(context.destination);oscillator.start(start);oscillator.stop(start+duration+.02);oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};}
 }

@@ -10,6 +10,15 @@
 .page[data-theme="oldtown"]{--profile-accent:#d5c27b;--profile-glow:rgba(176,151,75,.20)}
 .page[data-theme="royal"]{--profile-accent:#d7b66f;--profile-glow:rgba(201,162,39,.24)}
 .page[data-theme="night"]{--profile-accent:#8d8fae;--profile-glow:rgba(81,84,125,.22)}
+.page[data-theme="targaryen"]{--profile-accent:#c43f4f;--profile-glow:rgba(145,24,37,.25)}
+.page[data-theme="stark"]{--profile-accent:#b8c2ca;--profile-glow:rgba(120,137,151,.21)}
+.page[data-theme="arryn"]{--profile-accent:#79aee2;--profile-glow:rgba(54,113,171,.22)}
+.page[data-theme="tully"]{--profile-accent:#7f9ed0;--profile-glow:rgba(46,87,153,.22)}
+.page[data-theme="greyjoy"]{--profile-accent:#d1b24c;--profile-glow:rgba(164,133,35,.22)}
+.page[data-theme="lannister"]{--profile-accent:#d7a644;--profile-glow:rgba(160,37,38,.25)}
+.page[data-theme="baratheon"]{--profile-accent:#e1c54d;--profile-glow:rgba(185,151,33,.22)}
+.page[data-theme="tyrell"]{--profile-accent:#79b76a;--profile-glow:rgba(61,130,59,.22)}
+.page[data-theme="martell"]{--profile-accent:#e78645;--profile-glow:rgba(184,78,34,.24)}
 .page[data-theme]:not([data-theme="default"]) .banner{border-color:var(--profile-accent);box-shadow:inset 0 -30px 70px var(--profile-glow)}
 .page[data-theme]:not([data-theme="default"]) .card,.page[data-theme]:not([data-theme="default"]) .friends,.page[data-theme]:not([data-theme="default"]) .activity{border-color:color-mix(in srgb,var(--profile-accent) 52%,#342d29)}
 .page[data-theme]:not([data-theme="default"]) .role,.page[data-theme]:not([data-theme="default"]) .friends h2,.page[data-theme]:not([data-theme="default"]) .activity>h2{color:var(--profile-accent)}
@@ -21,6 +30,7 @@
 .friends h3{margin:18px 0 8px;color:#cdb895;font:600 16px var(--font-hotd)}
 .mutualBlock{margin-top:14px;padding-top:14px;border-top:1px solid #332a26}.mutualList{display:flex;flex-wrap:wrap;gap:8px}.mutualChip{display:inline-flex!important;align-items:center;gap:8px;padding:6px 9px 6px 6px;border:1px solid #3b312a;border-radius:999px;background:#0d0c0d;color:#d8c8b0!important;text-decoration:none;font:600 11px var(--font-geist)}.mutualChip:hover{border-color:#7b5d3c;background:#181315}.mutualChip .friendAvatar{width:28px;height:28px}.subtle{color:#8f8377!important}
 .activityCard{position:relative}.activityKicker{display:block;margin-bottom:5px;color:#c39b62;font:700 9px var(--font-geist);letter-spacing:.12em;text-transform:uppercase}.activityCard h3{color:#dfd2bf}.activityCard small{font:11px var(--font-geist)}
+.reactionGroup{border-bottom:1px solid #332a26}.reactionGroup summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:68px;padding:12px 20px;list-style:none;cursor:pointer}.reactionGroup summary::-webkit-details-marker{display:none}.reactionGroup summary>span:first-child{min-width:0}.reactionGroup summary strong{display:block;overflow:hidden;color:#dfd2bf;text-overflow:ellipsis;white-space:nowrap;font:600 17px var(--font-hotd)}.reactionGroup summary>span:last-child{flex:none;color:#928474;font:10px var(--font-geist)}.reactionGroup summary::after{content:"+";display:grid;place-items:center;flex:none;width:25px;height:25px;border:1px solid #574535;border-radius:50%;color:#c39b62}.reactionGroup[open] summary::after{content:"−"}.reactionGroup[open] summary{background:#191416}.reactionGroup .activityCard{margin:0 16px 12px;padding:14px;border:1px solid #40332b;border-radius:9px}.permalink{display:block;margin-top:8px;color:#b99565;font:10px var(--font-geist)}
 .friends textarea{min-height:96px;resize:vertical}.friends input:focus,.friends textarea:focus,.friends select:focus{outline:0;border-color:#9d7943;box-shadow:0 0 0 2px rgba(157,121,67,.15)}
 .friends button,.actionButton{font:600 11px var(--font-geist);transition:border-color .15s,background .15s,transform .15s}.friends button:hover,.actionButton:hover{border-color:#9a7345;background:#302023}.friends button:active,.actionButton:active{transform:translateY(1px)}
 .tabs{overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{white-space:nowrap;padding:0 12px}

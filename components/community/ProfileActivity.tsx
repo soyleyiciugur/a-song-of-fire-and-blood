@@ -4,62 +4,32 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { getCommentLink } from "@/lib/communityLinks";
 import forumData from "@/data/forum.json";
+import fleaData from "@/data/flea-bottom.json";
+import gallery from "@/data/gallery.json";
 import LikeButton from "./LikeButton";
 import styles from "@/app/users/[username]/profile.module.css";
 
-type Tab = "thread" | "post" | "raven" | "reactions";
-type Activity = { id:string; title?:string; body:string; created_at:string; thread_id?:string; entry_id?:string; parent_id?:string|null };
-type Reaction = { target_kind:string; target_id:string; direction:string; total:number; latest:string; href:string; target_title?:string|null };
-
-const staticThreadTitles = new Map((forumData.threads ?? []).map(thread => [thread.id, thread.title] as const));
-const staticPostThreads = new Map((forumData.comments ?? []).map(comment => [comment.id, comment.entryId] as const));
+type Tab="thread"|"post"|"raven"|"reactions";
+type Activity={id:string;title?:string;body:string;created_at:string;thread_id?:string;entry_id?:string;parent_id?:string|null};
+type Reaction={target_kind:string;target_id:string;direction:string;latest:string;href:string;target_title?:string|null;preview?:string;groupKey?:string};
+const threadTitles=new Map((forumData.threads??[]).map(x=>[x.id,x.title] as const));
+const postThreads=new Map((forumData.comments??[]).map(x=>[x.id,x.entryId] as const));
+const bodies=new Map([...(forumData.comments??[]),...(fleaData.comments??[])].map(x=>[x.id,x.body] as const));
+const captions=new Map(gallery.map(x=>[x.id,x.caption?.trim().split("\n")[0]||"Raven's Eye"] as const));
 
 export default function ProfileActivity({userId}:{userId:string}){
- const [tab,setTab]=useState<Tab>("thread"),[rows,setRows]=useState<Activity[]>([]),[reactionRows,setReactionRows]=useState<Reaction[]>([]),[reactionTitles,setReactionTitles]=useState<Record<string,string>>({}),[page,setPage]=useState(0),[more,setMore]=useState(false),[loading,setLoading]=useState(true),[error,setError]=useState("");
+ const [tab,setTab]=useState<Tab>("thread"),[rows,setRows]=useState<Activity[]>([]),[reactions,setReactions]=useState<Reaction[]>([]),[titles,setTitles]=useState<Record<string,string>>({}),[page,setPage]=useState(0),[more,setMore]=useState(false),[loading,setLoading]=useState(true),[error,setError]=useState("");
  const supabase=useMemo(()=>createClient(),[]);
  useEffect(()=>{let active=true;setLoading(true);setError("");
-  if(tab==="reactions"){
-   void (async()=>{
-    const {data,error}=await supabase.rpc("profile_reactions",{member_id:userId});
-    if(!active)return;
-    if(error){setError("Activity could not be loaded.");setLoading(false);return;}
-    const reactions=((data??[]) as Reaction[]).filter(row=>row.direction==="given");
-    setReactionRows(reactions);
-    const titles:Record<string,string>={};
-    const liveThreadIds=new Set<string>(); const livePostIds:string[]=[];
-    for(const row of reactions){
-      if(row.target_title){titles[`${row.target_kind}:${row.target_id}`]=row.target_title;continue;}
-      if(row.target_kind==="thread"){
-        const title=staticThreadTitles.get(row.target_id); if(title)titles[`thread:${row.target_id}`]=title; else liveThreadIds.add(row.target_id);
-      } else if(row.target_kind==="post"){
-        const threadId=staticPostThreads.get(row.target_id); const title=threadId?staticThreadTitles.get(threadId):undefined;
-        if(title)titles[`post:${row.target_id}`]=title; else livePostIds.push(row.target_id);
-      }
-    }
-    if(livePostIds.length){
-      const {data:posts}=await supabase.from("forum_posts").select("id,thread_id").in("id",livePostIds);
-      for(const post of posts??[])liveThreadIds.add(post.thread_id);
-      const postThread=new Map((posts??[]).map(post=>[post.id,post.thread_id]));
-      if(liveThreadIds.size){
-        const {data:threads}=await supabase.from("forum_threads").select("id,title").in("id",[...liveThreadIds]);
-        const byId=new Map((threads??[]).map(thread=>[thread.id,thread.title]));
-        for(const id of liveThreadIds){const title=byId.get(id);if(title)titles[`thread:${id}`]=title;}
-        for(const [postId,threadId] of postThread){const title=byId.get(threadId);if(title)titles[`post:${postId}`]=title;}
-      }
-    } else if(liveThreadIds.size){
-      const {data:threads}=await supabase.from("forum_threads").select("id,title").in("id",[...liveThreadIds]);
-      for(const thread of threads??[])titles[`thread:${thread.id}`]=thread.title;
-    }
-    if(active){setReactionTitles(titles);setMore(false);setLoading(false);}
-   })();
-   return()=>{active=false};
-  }
-  const table=tab==="thread"?"forum_threads":tab==="post"?"forum_posts":"raven_comments";
-  void supabase.from(table).select("*").eq("user_author_id",userId).eq("is_visible",true).order("created_at",{ascending:false}).order("id").range(page*20,page*20+19).then(({data,error})=>{if(!active)return;if(error)setError("Activity could not be loaded.");else{setRows(previous=>page===0?data??[]:[...previous,...(data??[])]);setMore(data?.length===20);}setLoading(false);});
-  return()=>{active=false};
+  if(tab==="reactions"){void(async()=>{const {data,error}=await supabase.rpc("profile_reactions",{member_id:userId});if(!active)return;if(error){setError("Activity could not be loaded.");setLoading(false);return;}const list=((data??[]) as Reaction[]).filter(x=>x.direction==="given"),ids=list.filter(x=>x.target_kind==="raven"&&!bodies.has(x.target_id)).map(x=>x.target_id),live=new Map<string,{entry_id:string;body:string}>();if(ids.length){const {data:comments}=await supabase.from("raven_comments").select("id,entry_id,body").in("id",ids);for(const x of comments??[])live.set(x.id,x);}const resolved:Record<string,string>={},needThreads=new Set<string>(),needPosts:string[]=[];
+   for(const row of list){if(row.target_kind==="raven"){const found=live.get(row.target_id),stored=(fleaData.comments??[]).find(x=>x.id===row.target_id),entry=found?.entry_id??stored?.entryId??new URL(row.href,"https://local").searchParams.get("item")??row.target_id;row.target_title=captions.get(entry)??"Raven's Eye";row.preview=found?.body??bodies.get(row.target_id);row.groupKey=`raven:${entry}`;}else{const thread=row.target_kind==="thread"?row.target_id:postThreads.get(row.target_id)??new URL(row.href,"https://local").searchParams.get("thread")??row.target_id;row.groupKey=`thread:${thread}`;row.preview=bodies.get(row.target_id);if(row.target_title)resolved[`${row.target_kind}:${row.target_id}`]=row.target_title;else if(row.target_kind==="thread"){const title=threadTitles.get(row.target_id);if(title)resolved[`thread:${row.target_id}`]=title;else needThreads.add(row.target_id);}else needPosts.push(row.target_id);}}
+   if(needPosts.length){const {data:posts}=await supabase.from("forum_posts").select("id,thread_id,body").in("id",needPosts);for(const post of posts??[]){needThreads.add(post.thread_id);const row=list.find(x=>x.target_id===post.id);if(row)row.preview=post.body;}const postMap=new Map((posts??[]).map(x=>[x.id,x.thread_id]));const {data:threads}=needThreads.size?await supabase.from("forum_threads").select("id,title").in("id",[...needThreads]):{data:[]};const byId=new Map((threads??[]).map(x=>[x.id,x.title]));for(const [id,thread] of postMap){const title=byId.get(thread);if(title)resolved[`post:${id}`]=title;}}else if(needThreads.size){const {data:threads}=await supabase.from("forum_threads").select("id,title").in("id",[...needThreads]);for(const x of threads??[])resolved[`thread:${x.id}`]=x.title;}
+   if(active){setReactions(list);setTitles(resolved);setMore(false);setLoading(false);}})();return()=>{active=false};}
+  const table=tab==="thread"?"forum_threads":tab==="post"?"forum_posts":"raven_comments";void supabase.from(table).select("*").eq("user_author_id",userId).eq("is_visible",true).order("created_at",{ascending:false}).order("id").range(page*20,page*20+19).then(({data,error})=>{if(!active)return;if(error)setError("Activity could not be loaded.");else{setRows(old=>page===0?data??[]:[...old,...(data??[])]);setMore(data?.length===20);}setLoading(false);});return()=>{active=false};
  },[tab,page,userId,supabase]);
- const switchTab=(next:Tab)=>{if(next===tab)return;setTab(next);setPage(0);setRows([]);setReactionRows([]);setReactionTitles({});};
+ const switchTab=(next:Tab)=>{if(next===tab)return;setTab(next);setPage(0);setRows([]);setReactions([]);setTitles({});};
+ const grouped=new Map<string,Reaction[]>();for(const row of reactions){const key=row.groupKey??`${row.target_kind}:${row.target_id}`;grouped.set(key,[...(grouped.get(key)??[]),row]);}
  return <section className={styles.activity}><h2>Activity</h2><div className={styles.tabs} role="tablist" aria-label="Profile activity">{([["thread","Threads"],["post","Replies"],["raven","Raven's Eye"],["reactions","Likes & Favor"]] as const).map(([key,label])=><button role="tab" aria-selected={tab===key} aria-controls="profile-activity" key={key} onClick={()=>switchTab(key)}>{label}</button>)}</div><div id="profile-activity" role="tabpanel" aria-label={tab}>
- {tab==="reactions"?reactionRows.map(row=>{const title=row.target_kind==="raven"?"Raven's Eye comment":row.target_title||reactionTitles[`${row.target_kind}:${row.target_id}`]||"Taverns";return <article key={`${row.target_kind}-${row.target_id}`} className={styles.activityCard}><Link href={row.href}><span className={styles.activityKicker}>{row.target_kind==="raven"?"Liked":"Granted Favor"}</span><h3>{title}</h3><small>{new Date(row.latest).toLocaleDateString("en-GB")}</small></Link></article>}):rows.map(row=>{const href=tab==="thread"?`/forum?thread=${row.id}`:getCommentLink({id:row.id,entryId:row.thread_id??row.entry_id??"",surface:tab==="post"?"forum":undefined});return <article key={row.id} className={styles.activityCard}><Link href={href}>{row.title&&<h3>{row.title}</h3>}<small>{row.parent_id?"Reply · ":""}{new Date(row.created_at).toLocaleDateString("en-GB")}</small><p>{row.body}</p></Link><LikeButton kind={tab} id={row.id}/></article>})}
- {loading&&<p role="status">Loading activity…</p>}{error&&<p role="alert">{error}</p>}{!loading&&!error&&tab==="reactions"&&!reactionRows.length&&<p className={styles.empty}>No recent likes or Favor granted.</p>}{!loading&&!error&&tab!=="reactions"&&!rows.length&&<p className={styles.empty}>No {tab==="thread"?"threads":tab==="post"?"replies":"comments"} yet.</p>}{more&&tab!=="reactions"&&<button className={styles.actionButton} disabled={loading} onClick={()=>setPage(p=>p+1)}>Load more</button>}</div></section>;
+ {tab==="reactions"?[...grouped].map(([key,group])=>{const first=group[0],title=first.target_title||titles[`${first.target_kind}:${first.target_id}`]||"Taverns";return <details key={key} className={styles.reactionGroup}><summary><span><span className={styles.activityKicker}>{first.target_kind==="raven"?"Raven's Eye":"Taverns"}</span><strong>{title}</strong></span><span>{group.length} {group.length===1?"activity":"activities"}</span></summary><div>{group.map(row=><article key={`${row.target_kind}-${row.target_id}`} className={styles.activityCard}><Link href={row.href}><span className={styles.activityKicker}>{row.target_kind==="raven"?"Liked comment":"Granted Favor"}</span><small>{new Date(row.latest).toLocaleDateString("en-GB")}</small>{row.preview&&<p>{row.preview}</p>}<span className={styles.permalink}>Open permalink ↗</span></Link></article>)}</div></details>}):rows.map(row=>{const href=tab==="thread"?`/forum?thread=${row.id}`:getCommentLink({id:row.id,entryId:row.thread_id??row.entry_id??"",surface:tab==="post"?"forum":undefined});return <article key={row.id} className={styles.activityCard}><Link href={href}>{row.title&&<h3>{row.title}</h3>}<small>{row.parent_id?"Reply · ":""}{new Date(row.created_at).toLocaleDateString("en-GB")}</small><p>{row.body}</p></Link><LikeButton kind={tab} id={row.id}/></article>})}
+ {loading&&<p role="status">Loading activity…</p>}{error&&<p role="alert">{error}</p>}{!loading&&!error&&tab==="reactions"&&!reactions.length&&<p className={styles.empty}>No recent likes or Favor granted.</p>}{!loading&&!error&&tab!=="reactions"&&!rows.length&&<p className={styles.empty}>No {tab==="thread"?"threads":tab==="post"?"replies":"comments"} yet.</p>}{more&&tab!=="reactions"&&<button className={styles.actionButton} disabled={loading} onClick={()=>setPage(x=>x+1)}>Load more</button>}</div></section>;
 }

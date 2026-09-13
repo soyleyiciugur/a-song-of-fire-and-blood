@@ -43,6 +43,9 @@ export function affinityCatalog(): AffinityField[] {
       mediaType: "image" as const,
     }));
 
+  const memes = fleaBottom.filter((item) => item.mediaType === "image");
+  const reels = fleaBottom.filter((item) => item.mediaType === "video");
+
   const fields: AffinityField[] = [
     {
       key: "character",
@@ -76,7 +79,8 @@ export function affinityCatalog(): AffinityField[] {
         portrait: q.speakerId ?? undefined,
       })),
     },
-    { key: "meme", label: "Favorite Meme", options: fleaBottom },
+    { key: "meme", label: "Favorite Meme", options: memes },
+    { key: "reel", label: "Favorite Reel", options: reels },
     { key: "image", label: "Favorite Image", options: ravenImages },
   ];
 

@@ -9,22 +9,41 @@ import { Select } from "@/app/_components/Select";
 import styles from "./settings.module.css";
 
 const THEMES = [
-  ["default", "Default"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
-  ["oldtown", "Oldtown"], ["royal", "Royal Gold"], ["night", "The Night"],
+  ["default", "Default"], ["targaryen", "House Targaryen"], ["stark", "House Stark"],
+  ["arryn", "House Arryn"], ["tully", "House Tully"], ["greyjoy", "House Greyjoy"],
+  ["lannister", "House Lannister"], ["baratheon", "House Baratheon"], ["tyrell", "House Tyrell"],
+  ["martell", "House Martell"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
+  ["oldtown", "Oldtown"], ["royal", "Royal Gold"], ["night", "The Night"], ["custom", "Custom colors"],
 ] as const;
 
 function asOptions(options: AffinityOption[]) { return options.map((option) => ({ id: option.id, name: option.title })); }
 
 function MediaPicker({ field, value, onChange }: { field: AffinityField; value: string; onChange: (value: string) => void }) {
+  const [open, setOpen] = useState(false), [query, setQuery] = useState(""), [visible, setVisible] = useState(36);
+  const selected = field.options.find((option) => option.id === value);
+  const matches = useMemo(() => field.options.filter((option) => option.title.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())), [field.options, query]);
+  useEffect(() => {
+    if (!open) return;
+    const before = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", close);
+    return () => { document.body.style.overflow = before; window.removeEventListener("keydown", close); };
+  }, [open]);
   return <div className={styles.field}>
     <span>{field.label}</span>
-    <div className={styles.mediaPicker} role="listbox" aria-label={field.label}>
-      {field.options.map((option) => <button type="button" role="option" aria-selected={value === option.id} title={option.title} key={option.id} className={`${styles.mediaItem} ${value === option.id ? styles.mediaItemSelected : ""}`} onClick={() => onChange(option.id)}>
-        {option.mediaType === "video" && option.mediaSrc ? <video src={option.mediaSrc} muted playsInline preload="metadata" /> : option.image ? <img src={option.image} alt="" /> : <span>{option.title}</span>}
-      </button>)}
-    </div>
+    <button className={styles.mediaChoice} type="button" onClick={() => { setQuery(""); setVisible(36); setOpen(true); }}>
+      {selected ? <><span className={styles.mediaThumb}>{selected.mediaType === "video" ? <video src={selected.mediaSrc} muted playsInline preload="metadata" /> : <img src={selected.image} alt="" />}</span><span><strong>{selected.title}</strong><small>Change selection</small></span></> : <><span className={styles.emptyThumb}>+</span><span><strong>Choose from gallery</strong><small>Search and preview the archive.</small></span></>}
+    </button>
     {value && <button className={styles.clearChoice} type="button" onClick={() => onChange("")}>Clear selection</button>}
+    {open && <div className={styles.pickerBackdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><section className={styles.pickerDialog} role="dialog" aria-modal="true" aria-label={`Choose ${field.label}`}><header><div><span>Gallery selection</span><h3>{field.label}</h3></div><button type="button" className={styles.iconButton} onClick={() => setOpen(false)} aria-label="Close gallery">×</button></header><label className={styles.searchBox}><span aria-hidden="true">⌕</span><input autoFocus value={query} onChange={(event) => { setQuery(event.target.value); setVisible(36); }} placeholder={`Filter ${field.label.toLowerCase()}s by caption…`} /></label><div className={styles.resultCount}>{matches.length} items</div><div className={styles.mediaPicker} role="listbox" aria-label={field.label}>{matches.slice(0, visible).map((option) => <button type="button" role="option" aria-selected={value === option.id} key={option.id} className={`${styles.mediaItem} ${value === option.id ? styles.mediaItemSelected : ""}`} onClick={() => { onChange(option.id); setOpen(false); }}>{option.mediaType === "video" && option.mediaSrc ? <video src={option.mediaSrc} muted playsInline preload="metadata" /> : option.image ? <img src={option.image} loading="lazy" alt="" /> : null}<span>{option.title}</span></button>)}</div>{!matches.length && <p className={styles.noResults}>No gallery items match that caption.</p>}{visible < matches.length && <button className={styles.loadMore} type="button" onClick={() => setVisible((count) => count + 36)}>Show more</button>}</section></div>}
   </div>;
+}
+
+function ColorMap({ affinity, onChange }: { affinity: Record<string, string>; onChange: (key: string, value: string) => void }) {
+  const hue = Number(affinity.theme_hue ?? 348), saturation = Number(affinity.theme_saturation ?? 58), lightness = Number(affinity.theme_lightness ?? 52);
+  const accent = `hsl(${hue} ${saturation}% ${lightness}%)`;
+  return <div className={styles.colorStudio}><div className={styles.colorPreview} style={{ "--chosen-color": accent } as React.CSSProperties}><span>Live accent</span><strong>{accent}</strong></div><label>Hue map<input className={styles.hueRange} type="range" min="0" max="360" value={hue} onChange={(e) => onChange("theme_hue", e.target.value)} /></label><div className={styles.colorSplit}><label>Saturation<input type="range" min="20" max="100" value={saturation} onChange={(e) => onChange("theme_saturation", e.target.value)} /><output>{saturation}%</output></label><label>Brightness<input type="range" min="28" max="76" value={lightness} onChange={(e) => onChange("theme_lightness", e.target.value)} /><output>{lightness}%</output></label></div></div>;
 }
 
 export default function ProfileSettings({ profile, affinityCatalog }: { profile: Profile; affinityCatalog: AffinityField[] }) {
@@ -105,9 +124,11 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
           <h2 className={styles.sectionTitle}>Profile customization</h2>
           <p className={styles.sectionIntro}>Choose the pieces of the chronicle that define your profile.</p>
           <div className={styles.field}><span>Profile theme</span><div className={styles.selectWrap}><Select value={theme} options={THEMES.map(([id, name]) => ({ id, name }))} onChange={setTheme} /></div><small className={styles.hint}>Changes the accents and atmosphere of your public profile only.</small></div>
+          {theme === "custom" && <ColorMap affinity={affinity} onChange={setChoice} />}
           {normalFields.map((field) => <div className={styles.field} key={field.key}><span>{field.label}</span><div className={styles.selectWrap}><Select searchable value={affinity[field.key] ?? ""} options={asOptions(field.options)} onChange={(value) => setChoice(field.key, value)} placeholder="Not selected" /></div>{affinity[field.key] && <button className={styles.clearChoice} type="button" onClick={() => setChoice(field.key, "")}>Clear selection</button>}</div>)}
           {fields.quote && <div className={styles.field}><span>Favorite Quote</span><div className={styles.quoteGrid}><div className={styles.selectWrap}><Select searchable value={quoteSpeaker} options={quoteSpeakers} onChange={(value) => { setQuoteSpeaker(value); setChoice("quote", ""); }} placeholder="Choose character" /></div><div className={styles.selectWrap}><Select searchable value={affinity.quote ?? ""} options={asOptions(quoteOptions)} onChange={(value) => setChoice("quote", value)} placeholder={quoteSpeaker ? "Choose quote" : "Choose a character first"} /></div></div>{affinity.quote && <button className={styles.clearChoice} type="button" onClick={() => setChoice("quote", "")}>Clear selection</button>}</div>}
           {fields.meme && <MediaPicker field={fields.meme} value={affinity.meme ?? ""} onChange={(value) => setChoice("meme", value)} />}
+          {fields.reel && <MediaPicker field={fields.reel} value={affinity.reel ?? ""} onChange={(value) => setChoice("reel", value)} />}
           {fields.image && <MediaPicker field={fields.image} value={affinity.image ?? ""} onChange={(value) => setChoice("image", value)} />}
         </div>
         <button className={styles.saveButton}>{busy ? "Saving…" : "Save profile"}</button>

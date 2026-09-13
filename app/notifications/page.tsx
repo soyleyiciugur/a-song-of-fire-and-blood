@@ -46,7 +46,11 @@ function Notifications() {
 
   const comments = filter === "for-you" && userId ? forYou : allComments;
   const now = data.serverTime ? Date.parse(data.serverTime) : Date.now();
-  const groups = groupNotifications(comments.slice(0, limit), now);
+  const entryGroups = new Map<string, typeof comments>();
+  for (const comment of comments.slice(0, limit)) {
+    const key = `${comment.surface === "forum" ? "thread" : "media"}:${comment.entryId}`;
+    entryGroups.set(key, [...(entryGroups.get(key) ?? []), comment]);
+  }
   if (params.get("tab") === "updates") redirect("/update-notes");
 
   return (
@@ -66,9 +70,11 @@ function Notifications() {
       {data.error && <p role="status">{data.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
       <section aria-label={filter === "for-you" ? "Notifications for you" : "All community activity"}>
         {filter === "for-you" && !userId && data.loaded && <p className={styles.emptyHint}>Sign in to see replies and discussion activity addressed to you. Showing all activity instead.</p>}
-        {groups.map(({label, entries}) => <section key={label} className={styles.timeGroup} aria-label={label}>
-          <h2 className={styles.timeHeading}>{label}</h2>
-          <ol className={styles.feed}>
+        {[...entryGroups].map(([entryKey, entryComments]) => {
+          const first=entryComments[0], timeGroups=groupNotifications(entryComments,now), isThread=first.surface==="forum";
+          return <details key={entryKey} className={styles.entryGroup}>
+            <summary><span className={styles.entryIcon} aria-hidden="true">{isThread?"T":"R"}</span><span className={styles.entrySummary}><small>{isThread?"Taverns thread":"Raven's Eye media"}</small><strong>{getCommentEntryLabel(first.entryId)}</strong></span><span className={styles.entryCount}>{entryComments.length}</span></summary>
+            <div className={styles.entryBody}>{timeGroups.map(({label,entries})=><section key={label} className={styles.timeGroup} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>
             {entries.map((comment: typeof comments[number]) => {
               const user = users.get(comment.authorId);
               if (!user) return null;
@@ -81,9 +87,9 @@ function Notifications() {
                 </div>
                 <svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </Link></li>;
-            })}
-          </ol>
-        </section>)}
+            })}</ol></section>)}</div>
+          </details>;
+        })}
         {data.loaded && !comments.length && <p className={styles.emptyHint}>{filter === "for-you" ? "Nothing addressed to you yet." : "No comments yet."}</p>}
         {comments.length > limit && <button className={styles.more} onClick={() => setLimit(limit + 30)}>Load more comments</button>}
       </section>

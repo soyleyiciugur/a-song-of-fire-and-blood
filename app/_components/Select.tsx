@@ -50,14 +50,16 @@ export function Select({
   const current = options.find((o) => o.id === value)?.name || placeholder;
 
   return (
-    <div ref={ref} className="te-select">
-      <div
+    <div ref={ref} className={`te-select${open ? " te-select-open" : ""}`}>
+      <button
+        type="button"
+        aria-expanded={open}
         className={`te-select-trigger${open ? " te-select-trigger-open" : ""}`}
         onClick={() => (open ? close() : setOpen(true))}
       >
         <span className="te-select-value">{current}</span>
         <span className="te-select-caret">▼</span>
-      </div>
+      </button>
 
       {open && (
         <div className="te-select-panel dropdown-enter custom-scroll">
