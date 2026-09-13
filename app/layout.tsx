@@ -1,5 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { Cinzel } from "next/font/google";
 import { Crimson_Text } from "next/font/google";
@@ -68,6 +68,12 @@ export const metadata: Metadata = {
     shortcut: "/icon.png",
     apple: "/apple-icon.png",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

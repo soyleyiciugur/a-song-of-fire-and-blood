@@ -68,7 +68,8 @@
    finally look like the same product. Paired with app/_components/Select.tsx. */
 .te-select {
   position: relative;
-  min-width: 160px;
+  width: 100%;
+  min-width: 0;
 }
 .te-select-open { z-index: 300; }
 
@@ -86,6 +87,7 @@
   font-size: 0.85rem;
   transition: border-color 0.2s ease, background 0.2s ease;
   width: 100%;
+  min-width: 0;
   text-align: left;
   font-family: inherit;
 }
@@ -134,6 +136,7 @@
 
 .te-select-option {
   padding: 10px 12px;
+  overflow-wrap: anywhere;
   cursor: pointer;
   border-bottom: 1px solid var(--border);
   color: var(--text);

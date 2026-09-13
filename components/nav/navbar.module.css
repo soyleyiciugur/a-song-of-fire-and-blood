@@ -663,6 +663,19 @@
 
 @media (max-width: 1150px) { .playBanner .houseMark { display: none; } }
 
+@media (max-width: 640px) {
+  .playBanner .inner { gap: 2px; padding-inline: 6px; }
+  .playBanner .menuButton,
+  .playBanner .notificationsButton,
+  .playBanner .directRavenButton,
+  .playBanner .inner > .accountMenu summary { width: 38px; height: 38px; flex-basis: 38px; }
+  .playBanner .menuButton { margin: 0; }
+  .playBanner .searchWrap { width: 38px; min-width: 38px; height: 38px; flex-basis: 38px; }
+  .playBanner .searchInput { width: 38px; height: 38px; }
+  .playBanner .searchIcon { top: 10px; right: 10px; }
+  .playBanner .inner > .accountMenu { flex-basis: 38px; }
+}
+
 .playBanner .homeLink{white-space:nowrap}
 @media(max-width:1150px){.playBanner .notificationsButton,.playBanner .directRavenButton{position:relative;inset:auto}}
 

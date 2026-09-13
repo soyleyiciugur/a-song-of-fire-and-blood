@@ -30,14 +30,20 @@ function Notifications() {
   const threadsById = new Map(data.forumThreads.map(thread => [thread.id, thread]));
 
   useEffect(() => {
+    let loadVersion = 0;
     const load = async (id: string | null) => {
-      let cutoff = window.localStorage.getItem(STORAGE_KEY);
+      const version = ++loadVersion;
+      let cutoff: string | null = null;
       if (id) {
         const { data } = await supabase.from("profiles").select("notification_last_seen_at").eq("id", id).maybeSingle();
-        cutoff = data?.notification_last_seen_at ?? cutoff;
+        if (version !== loadVersion) return;
+        cutoff = data?.notification_last_seen_at ?? null;
+      } else {
+        cutoff = window.localStorage.getItem(STORAGE_KEY);
       }
       setUserId(id);
       setReadCutoff(cutoff);
+      markedRead.current = false;
       setAuthReady(true);
     };
     void supabase.auth.getUser().then(({ data: { user } }) => load(user?.id ?? null));

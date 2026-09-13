@@ -43,9 +43,9 @@ export default async function Page({ params }: { params: Promise<{ username: str
         </div>
       </section>
       <dl className={styles.stats}>
-        <div><dt>Threads</dt><dd>{threads ?? 0}</dd></div>
-        <div><dt>Replies</dt><dd>{posts ?? 0}</dd></div>
-        <div><dt>Raven’s Eye comments</dt><dd>{raven ?? 0}</dd></div>
+        <div><dt>Tavern Topics</dt><dd>{threads ?? 0}</dd></div>
+        <div><dt>Tavern Talks</dt><dd>{posts ?? 0}</dd></div>
+        <div><dt>Comments</dt><dd>{raven ?? 0}</dd></div>
       </dl>
       <ProfileFriends key={p.id} profileId={p.id} viewerId={viewer?.id ?? null} />
       <ProfileAffinity key={p.id} profileId={p.id} values={p.affinity??{}} catalog={affinityCatalog().map(field=>({...field,options:field.options.filter(option=>option.id===p.affinity?.[field.key]).map(option=>({ ...option, href: option.href.startsWith("/ravens-eye") ? `${option.href}${option.href.includes("?") ? "&" : "?"}returnTo=${encodeURIComponent(`/users/${p.username}`)}` : option.href }))}))} editable={false} />
