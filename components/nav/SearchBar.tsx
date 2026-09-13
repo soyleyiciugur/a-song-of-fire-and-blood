@@ -55,7 +55,7 @@ export default function SearchBar() {
 
   return (
     <div className={styles.searchWrap}>
-      <svg className={styles.searchIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5"/><path d="m15 15 5 5" stroke="currentColor" strokeWidth="1.5"/></svg>
+      <svg className={styles.searchIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5"/><path d="m14.24 14.24 5.76 5.76" stroke="currentColor" strokeWidth="1.5"/></svg>
       <input
         ref={inputRef}
         type="text"

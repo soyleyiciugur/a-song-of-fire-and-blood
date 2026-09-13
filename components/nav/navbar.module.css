@@ -143,11 +143,9 @@
 }
 
   .playBannerCollapsed .navLinks,
-  .playBannerCollapsed .menuButton,
   .playBannerCollapsed .searchWrap,
   .playBannerCollapsed .notificationsButton,
-  .playBannerCollapsed .homeLink,
-  .playBannerCollapsed .mobileNav {
+  .playBannerCollapsed .homeLink {
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -714,11 +712,12 @@
 
   .navLinks > *:not(:last-child)::after {
     width: 1px;
-    height: 18px;
+    flex: 0 0 1px;
+    height: 24px;
     margin: 0 3px 0 7px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, transparent, rgba(212, 175, 55, .72) 22%, rgba(230, 205, 135, .9) 50%, rgba(212, 175, 55, .72) 78%, transparent);
-    box-shadow: 0 0 5px rgba(212, 175, 55, .18);
+    border-radius: 0;
+    background: var(--gold);
+    opacity: .6;
   }
 
   .navLink,
@@ -769,3 +768,30 @@
     bottom: auto;
   }
 }
+
+/* Collapsed desktop access uses the same drawer as mobile. */
+@media (min-width: 1151px) {
+  .menuBackdrop { display: block; position: absolute; top: 100%; left: 0; width: 100%; height: calc(100dvh - var(--site-nav-height, 60px)); border: 0; background: #0009; }
+  .playBanner .mobileNav { display: flex; position: absolute; top: 100%; left: 0; width: min(320px, 85vw); height: calc(100dvh - var(--site-nav-height, 60px)); max-height: none; box-sizing: border-box; margin: 0; padding: 16px; flex-direction: column; flex-wrap: nowrap; overflow-y: auto; overscroll-behavior: contain; background: var(--surface); border-right: 1px solid var(--border); transform: translateX(-100%); visibility: hidden; transition: transform .22s ease, visibility .22s; }
+  .playBanner .mobileNavOpen { transform: translateX(0); visibility: visible; }
+  .mobileNavLink { justify-content: flex-start; min-height: 44px; box-sizing: border-box; border-radius: 8px; }
+  .mobileNavGroupHeaderRow > .mobileNavLink { flex: 1; }
+  .mobileNavGroupHeader { min-height: 44px; width: 44px; }
+  .menuButton:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.playBanner .menuButton { display:inline-flex; position:absolute; left:68px; top:8px; width:36px; height:36px; margin:0; opacity:0; visibility:hidden; transform:translateX(-8px); pointer-events:none; }
+.playBannerCollapsed .menuButton { opacity:1; visibility:visible; transform:translateX(0); pointer-events:auto; }
+.playBanner .mobileNav { top:56px; height:calc(100dvh - 56px); opacity:1; pointer-events:auto; }
+.playBanner .menuBackdrop { top:56px; height:calc(100dvh - 56px); }
+}
+
+.menuButton { color:var(--gold); border-color:rgba(212,175,55,.36); background:linear-gradient(145deg,#241d20,#111014); box-shadow:inset 0 1px 0 #ffffff08; transition:opacity .24s ease,transform .24s ease,visibility .24s,border-color .2s,background .2s; }
+.menuButton:hover,.menuButton[aria-expanded="true"] { border-color:var(--gold); background:var(--surface-hover); }
+.menuIcon { position:relative; width:18px; height:14px; display:block; }
+.menuIcon span { position:absolute; left:0; width:18px; height:1.5px; transition:transform .22s ease,opacity .22s ease; }
+.menuIcon span:nth-child(1) { top:0; }
+.menuIcon span:nth-child(2) { top:6px; width:13px; }
+.menuIcon span:nth-child(3) { top:12px; }
+.menuButton[aria-expanded="true"] .menuIcon span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+.menuButton[aria-expanded="true"] .menuIcon span:nth-child(2) { opacity:0; }
+.menuButton[aria-expanded="true"] .menuIcon span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+@media(prefers-reduced-motion:reduce) { .menuButton,.menuIcon span,.playBanner .mobileNav { transition:none; } }

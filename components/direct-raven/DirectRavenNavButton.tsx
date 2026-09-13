@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { playRavenSound, unlockSound } from "@/lib/ravenSound";
 import styles from "@/components/nav/navbar.module.css";
+import RavenIcon from "./RavenIcon";
 
 export default function DirectRavenNavButton() {
   const pathname = usePathname();
@@ -55,9 +56,7 @@ export default function DirectRavenNavButton() {
   if (!signedIn) return null;
   return (
     <Link href="/messages" className={`${styles.notificationsButton} ${styles.directRavenButton}`} aria-label={unread ? `Direct Raven, ${unread} unread` : "Direct Raven"} title="Direct Raven">
-      <svg width="19" height="19" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <path d="m3 6 12 6 6-7 5 1 3 5-5 1-3 9-8 2-6 5 2-8L3 6Z" fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-      </svg>
+      <RavenIcon size={19} />
       {unread > 0 && <span className={styles.navBadge}>{unread > 99 ? "99+" : unread}</span>}
     </Link>
   );

@@ -31,6 +31,15 @@ export default function Navbar() {
   const [navExpanded, setNavExpanded] = useState(true);
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 1150px)");
+    const restoreMobileNav = () => {
+      if (media.matches) setNavExpanded(true);
+    };
+    media.addEventListener("change", restoreMobileNav);
+    return () => media.removeEventListener("change", restoreMobileNav);
+  }, []);
+
+  useEffect(() => {
     setMenuOpen(false);
     setOpenGroup(null);
   }, [pathname]);
@@ -188,19 +197,20 @@ export default function Navbar() {
         <SearchBar />
         <Link href="/ravens-eye" className={`${styles.notificationsButton} ${styles.ravenEyeButton}`} aria-label="The Raven's Eye" title="The Raven's Eye">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M2.5 12s3.7-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.7 5.5-9.5 5.5-9.5-5.5-9.5-5.5Z" fill="currentColor" fillOpacity=".12" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-            <circle cx="12" cy="12" r="2.6" fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.5" />
+            <path d="M2.5 12.5 6 9.2C8.1 7.3 10.3 6.7 12.5 7c3.7.4 6.5 2.6 9 5.1-2.9 1.3-5 4.8-9.1 4.9-4 .1-7.4-2.1-9.9-4.5Z" fill="currentColor" fillOpacity=".1" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+            <circle cx="12.1" cy="11.9" r="3.25" fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.5" />
+            <circle cx="12.1" cy="11.9" r="1.25" fill="currentColor" />
           </svg>
         </Link>
         <Link href="/cards" className={`${styles.notificationsButton} ${styles.gameButton}`} aria-label="The Great Game" title="The Great Game">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="5.5" y="3.5" width="13" height="17" rx="1.8" fill="currentColor" fillOpacity=".1" stroke="currentColor" strokeWidth="1.5" transform="rotate(8 12 12)" />
             <rect x="4.5" y="4.5" width="13" height="17" rx="1.8" fill="var(--surface)" stroke="currentColor" strokeWidth="1.5" transform="rotate(-8 12 12)" />
-            <path d="M9 10h.01M15 14h.01M9 14h.01M15 10h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z" fill="currentColor" transform="rotate(-8 12 12) translate(11 13) scale(.4) translate(-22 -22)" />
           </svg>
         </Link>
         <Link href="/forum" className={`${styles.notificationsButton} ${styles.forumButton}`} aria-label="Taverns" title="Taverns">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M8 8h8M8 12h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12v12H5Z" fill="currentColor" fillOpacity=".1" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/><path d="M17 9h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2M5 8a2 2 0 0 1 0-4 2.5 2.5 0 0 1 4-1 3 3 0 0 1 5 1 2 2 0 1 1 3 4M9 11v6m4-6v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </Link>
         <DirectRavenNavButton />
         <NotificationNavButton />
