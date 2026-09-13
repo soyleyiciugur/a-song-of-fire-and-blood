@@ -19,9 +19,18 @@ export default function NotificationNavButton() {
   const [lastSeen, setLastSeen] = useState<string | null>(null);
 
   useEffect(() => {
-    setLastSeen(window.localStorage.getItem(STORAGE_KEY));
-    void supabase.auth.getUser().then(({ data: { user } }) => setUserId(user?.id ?? null));
-    const { data: auth } = supabase.auth.onAuthStateChange((_event, session) => setUserId(session?.user.id ?? null));
+    const load = async (id: string | null) => {
+      if (!id) {
+        setLastSeen(window.localStorage.getItem(STORAGE_KEY));
+        setUserId(null);
+        return;
+      }
+      const { data } = await supabase.from("profiles").select("notification_last_seen_at").eq("id", id).maybeSingle();
+      setLastSeen(data?.notification_last_seen_at ?? window.localStorage.getItem(STORAGE_KEY));
+      setUserId(id);
+    };
+    void supabase.auth.getUser().then(({ data: { user } }) => load(user?.id ?? null));
+    const { data: auth } = supabase.auth.onAuthStateChange((_event, session) => void load(session?.user.id ?? null));
     return () => auth.subscription.unsubscribe();
   }, [supabase]);
 

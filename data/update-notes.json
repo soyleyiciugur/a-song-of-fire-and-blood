@@ -2,6 +2,10 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Synchronized notification read state across signed-in desktop and mobile sessions, and matched plain mobile navigation links to the grouped menu style.",
+      "Added a single community sync command that generates reaction migrations and pushes them to the linked Supabase project.",
+      "Replaced the Direct Raven navbar envelope with its gold outlined raven mark.",
+      "Restored navbar text sizing, improved its gold separators, rendered the Targaryen mark at full quality, and moved The Great Game into the utility icon row.",
       "Synchronized Chapter XVIII across the chronicle, character records, houses, dragons, Kingsguard book and Known World map.",
       "Advanced the current story date to the Seventeenth Day of the Eighth Moon, 99 AC.",
       "Placed Chapter XVIII's Rhaella and Jaery flashback chronologically in the participating characters' personal timelines.",

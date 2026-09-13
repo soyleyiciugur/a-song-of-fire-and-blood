@@ -60,7 +60,6 @@ export const NAV_ITEMS: NavigationEntry[] = [
     ],
   },
   { label: "The Raven's Eye", href: "/ravens-eye" },
-  { label: "The Great Game", href: "/cards" },
 ];
 
 // Flattened version — every group's children pulled up into a single flat

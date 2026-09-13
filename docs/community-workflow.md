@@ -18,7 +18,7 @@ npm run community:inbox -- --since=2026-09-10T00:00:00.000Z
 
 ## Authoring pass
 
-When asked to "run the community workflow":
+When asked to "run the community workflow" or "run community sync":
 
 1. Run `npm run community:inbox` first.
 2. Read `.tmp/community-inbox.json` together with `data/flea-bottom.json`, `data/forum.json`, `docs/flea-bottom-community.md`, `docs/forum-community.md`, `data/community-schedule.json`, the relevant gallery/chapter entry and any relevant character lore.
@@ -28,7 +28,7 @@ When asked to "run the community workflow":
 6. A repository-authored reply inside a live Supabase forum thread may set `liveThreadId` to the live thread UUID and use that same value as `entryId`.
 7. Schedule future editorial activity with explicit `publishedAt` timestamps. A single authoring pass may write several future replies so the conversation continues after deployment without another authoring pass.
 8. Never schedule a reply before its live parent existed. Avoid long pre-scripted chains that assume a human will respond in a particular way.
-9. Run `npm run community:reactions` after adding editorial threads/comments, then run `npm.cmd run community:push` to apply migrations to the linked Supabase project before publishing the content. The script uses `npx --yes supabase db push --linked`, so npx does not pause for package-install confirmation. Supabase must register each repository ID before members can Like it or grant Favor; fetching the inbox does not synchronize this registry.
+9. Run `npm.cmd run community:sync` after adding editorial threads/comments. It generates reaction-target migrations and then applies them to the linked Supabase project with `npx --yes supabase db push --linked`, so npx does not pause for package-install confirmation. Supabase must register each repository ID before members can Like it or grant Favor; fetching the inbox does not synchronize this registry.
 10. Run `npm run validate:comments` before delivery. This also checks that every repository thread/comment has a reaction-target migration. A successful local check does not replace applying that migration remotely.
 
 ## Timing model

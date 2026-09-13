@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 import { useCommunity, refreshCommunity } from "@/lib/communityStore";
@@ -21,26 +21,38 @@ function Notifications() {
   const [limit, setLimit] = useState(30);
   const [filter, setFilter] = useState<Filter>("for-you");
   const [userId, setUserId] = useState<string | null>(null);
+  const [authReady, setAuthReady] = useState(false);
   const [readCutoff, setReadCutoff] = useState<string | null | undefined>(undefined);
+  const markedRead = useRef(false);
   const supabase = useMemo(() => createClient(), []);
   const users = new Map(data.users.map((user) => [user.id, user]));
   const commentsById = new Map(data.comments.map(comment => [comment.id, comment]));
   const threadsById = new Map(data.forumThreads.map(thread => [thread.id, thread]));
 
   useEffect(() => {
-    void supabase.auth.getUser().then(({ data: { user } }) => setUserId(user?.id ?? null));
-    const { data: auth } = supabase.auth.onAuthStateChange((_event, session) => setUserId(session?.user.id ?? null));
+    const load = async (id: string | null) => {
+      let cutoff = window.localStorage.getItem(STORAGE_KEY);
+      if (id) {
+        const { data } = await supabase.from("profiles").select("notification_last_seen_at").eq("id", id).maybeSingle();
+        cutoff = data?.notification_last_seen_at ?? cutoff;
+      }
+      setUserId(id);
+      setReadCutoff(cutoff);
+      setAuthReady(true);
+    };
+    void supabase.auth.getUser().then(({ data: { user } }) => load(user?.id ?? null));
+    const { data: auth } = supabase.auth.onAuthStateChange((_event, session) => void load(session?.user.id ?? null));
     return () => auth.subscription.unsubscribe();
   }, [supabase]);
 
   useEffect(() => {
-    if (readCutoff !== undefined) return;
-    const previous = window.localStorage.getItem(STORAGE_KEY);
-    setReadCutoff(previous);
+    if (!authReady || markedRead.current || !data.serverTime) return;
     const seen = data.serverTime || new Date().toISOString();
     window.localStorage.setItem(STORAGE_KEY, seen);
     window.dispatchEvent(new CustomEvent("asofab:notifications-seen", { detail: seen }));
-  }, [data.serverTime, readCutoff]);
+    markedRead.current = true;
+    if (userId) void supabase.from("profiles").update({ notification_last_seen_at: seen }).eq("id", userId);
+  }, [authReady, data.serverTime, supabase, userId]);
 
   const allComments = data.comments
     .map((comment, order) => ({ comment, order }))

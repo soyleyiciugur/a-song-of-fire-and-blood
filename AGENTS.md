@@ -34,9 +34,16 @@ When the user says:
 
 - "community workflow'u çalıştır"
 - "run the community workflow"
+- "run community workflow"
+- "run community sync"
 - "yeni fotoğraf/video/forum içeriği için community'yi çalıştır"
 
 treat this as a concrete authoring workflow, not as a request for an explanation.
+
+The phrases "run community workflow" and "run community sync" both mean the
+full workflow below. "community sync" is not limited to pushing migrations:
+review the inbox and editorial context first, author only appropriate activity,
+then run `npm.cmd run community:sync` after the data changes.
 
 ## Workflow
 
@@ -130,8 +137,9 @@ treat this as a concrete authoring workflow, not as a request for an explanation
 15. Apply the resulting editorial changes directly to the appropriate repository
     JSON/data files and validate them.
 
-16. Run `npm.cmd run community:push` after reaction-target generation to apply
-   pending migrations to the linked Supabase project before publishing.
+16. Run `npm.cmd run community:sync` after reaction-target generation to create
+   and apply pending migrations to the linked Supabase project before
+   publishing.
 
 17. After completing user-visible site changes, update data/update-notes.json
     according to the Daily update notes rules in this file.

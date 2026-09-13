@@ -87,7 +87,7 @@ export default function Navbar() {
           aria-label="Home"
           title="Home"
         >
-          <Image src="/images/houses/targaryen.webp" alt="" width={24} height={24} />
+          <Image src="/images/houses/targaryen.webp" alt="" width={36} height={36} quality={100} sizes="36px" />
         </Link>
 
 
@@ -188,6 +188,13 @@ export default function Navbar() {
         </nav>
 
         <SearchBar />
+        <Link href="/cards" className={`${styles.notificationsButton} ${styles.gameButton}`} aria-label="The Great Game" title="The Great Game">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="5.5" y="3.5" width="13" height="17" rx="1.8" stroke="currentColor" strokeWidth="1.5" transform="rotate(8 12 12)" />
+            <rect x="4.5" y="4.5" width="13" height="17" rx="1.8" stroke="currentColor" strokeWidth="1.5" transform="rotate(-8 12 12)" />
+            <path d="M9 10h.01M15 14h.01M9 14h.01M15 10h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </Link>
         <Link href="/forum" className={`${styles.notificationsButton} ${styles.forumButton}`} aria-label="Taverns" title="Taverns">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M8 8h8M8 12h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
         </Link>
@@ -205,7 +212,7 @@ export default function Navbar() {
       >
         <Link href="/" className={styles.mobileSiteTitle} onClick={() => setMenuOpen(false)}>
           <span className={styles.mobileSiteMark} aria-hidden="true">
-            <Image src="/images/houses/targaryen.webp" alt="" width={22} height={22} />
+            <Image src="/images/houses/targaryen.webp" alt="" width={30} height={30} quality={100} sizes="30px" />
           </span>
           <span>A Song of Fire and Blood</span>
         </Link>
@@ -257,14 +264,15 @@ export default function Navbar() {
               )}
             </div>
           ) : (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={styles.mobileNavLink}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
+            <div key={item.href} className={styles.mobileNavPlainItem}>
+              <Link
+                href={item.href}
+                className={styles.mobileNavLink}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            </div>
           )
         )}
       </nav>

@@ -653,6 +653,9 @@
 .mobileNavGroupHeaderRow > .mobileNavLink { min-height: 44px; border: 0; border-radius: 0; justify-content: flex-start; padding-inline: 14px; color: var(--text); font-weight: 600; }
 .mobileNavGroupHeader { min-height: 44px; border: 0; border-left: 1px solid var(--border); border-radius: 0; padding-inline: 13px; color: var(--gold); }
 .mobileNavGroupHeader:hover, .mobileNavGroupHeader[aria-expanded="true"] { background: rgba(212, 175, 55, .08); color: var(--gold); }
+.mobileNavPlainItem { width: 100%; border: 1px solid var(--border); border-radius: 10px; background: rgba(255, 255, 255, .02); overflow: hidden; }
+.mobileNavPlainItem .mobileNavLink { min-height: 44px; border: 0; border-radius: 0; justify-content: flex-start; padding-inline: 14px; color: var(--text); font-weight: 600; }
+.mobileNavPlainItem:hover, .mobileNavPlainItem:focus-within { border-color: rgba(212, 175, 55, .42); background: rgba(212, 175, 55, .05); }
 .mobileNavGroupItems { gap: 2px; margin-left: 14px; padding: 4px 0 2px 14px; border-left: 1px solid rgba(212, 175, 55, .32); }
 .mobileNavGroupItems .mobileNavLink { min-height: 38px; padding: 8px 12px; border: 0; border-radius: 6px; justify-content: flex-start; color: var(--muted); }
 .mobileNavGroupItems .mobileNavLink:hover, .mobileNavGroupItems .mobileNavLink:focus-visible { background: var(--surface-hover); color: var(--gold); }
@@ -686,13 +689,16 @@
   }
 
   .navLinks > *:not(:last-child)::after {
-    width: 1px;
-    height: 15px;
-    margin: 0 3px 0 9px;
-    border-radius: 0;
-    background: rgba(212, 175, 55, .46);
-    box-shadow: 0 0 5px rgba(212, 175, 55, .14);
+    width: 2px;
+    height: 22px;
+    margin: 0 5px 0 12px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, transparent, rgba(212, 175, 55, .72) 22%, rgba(230, 205, 135, .9) 50%, rgba(212, 175, 55, .72) 78%, transparent);
+    box-shadow: 0 0 7px rgba(212, 175, 55, .2);
   }
+
+  .navLink,
+  .navGroup { font-size: 14px; }
 
   .playBannerCollapsed .inner > .accountMenu {
     margin-left: auto;
