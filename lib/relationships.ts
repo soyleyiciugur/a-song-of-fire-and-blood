@@ -1,17 +1,23 @@
 import charactersData from "@/data/characters/characters.json";
+import { dragons, type Dragon } from "@/data/dragons";
 import type { Character, CharacterId } from "@/types/character";
 
 export type EffectiveRelationship = {
   id: string;
   name: string;
   description: string;
+  kind: "character" | "dragon";
   character?: Character;
+  dragon?: Dragon;
 };
 
 const allCharacters = charactersData as Character[];
 const publicCharacters = allCharacters.filter((character) => !character.hidden);
 const byId = new Map<CharacterId, Character>(
   publicCharacters.map((character) => [character.id, character])
+);
+const dragonsByName = new Map(
+  dragons.map((dragon) => [dragon.name.toLocaleLowerCase("en"), dragon])
 );
 
 function displayNameFromId(id: string) {
@@ -47,7 +53,7 @@ export function getEffectiveRelationships(
   const character = byId.get(characterId);
   if (!character) return [];
 
-  return Object.entries(character.relationships ?? {})
+  const characterRelationships = Object.entries(character.relationships ?? {})
     .flatMap(([id, description]) => {
       const resolved = byId.get(id as CharacterId);
 
@@ -60,6 +66,7 @@ export function getEffectiveRelationships(
           id,
           name: resolved?.name ?? displayNameFromId(id),
           description,
+          kind: "character" as const,
           character: resolved,
         },
       ];
@@ -71,4 +78,29 @@ export function getEffectiveRelationships(
         { sensitivity: "base" }
       )
     );
+
+  const bondedDragon = character.dragon
+    ? dragonsByName.get(character.dragon.toLocaleLowerCase("en"))
+    : undefined;
+
+  if (!bondedDragon || bondedDragon.riderId !== character.id) {
+    return characterRelationships;
+  }
+
+  return [
+    ...characterRelationships,
+    {
+      id: bondedDragon.id,
+      name: bondedDragon.name,
+      description: bondedDragon.description,
+      kind: "dragon" as const,
+      dragon: bondedDragon,
+    },
+  ].sort((a, b) =>
+    sortableCharacterName(a.name).localeCompare(
+      sortableCharacterName(b.name),
+      "en",
+      { sensitivity: "base" }
+    )
+  );
 }

@@ -620,11 +620,13 @@
 
 /* Community/social polish */
 .notificationDot{position:absolute;right:-5px;top:-5px;display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border:2px solid #171316;border-radius:99px;background:#b62f42;box-sizing:border-box;color:#fff;font:800 9px/1 var(--font-geist);font-variant-numeric:tabular-nums}
-.mobileSiteTitle{display:none;color:var(--gold);text-decoration:none;font:700 13px/1.3 var(--font-geist);padding:7px 4px 13px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.mobileSiteTitle{display:none;align-items:center;justify-content:center;gap:8px;color:var(--gold);text-decoration:none;font:700 13px/1.3 var(--font-geist);padding:7px 4px 13px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.mobileSiteMark{display:grid;place-items:center;width:30px;height:30px;box-sizing:border-box;border:1px solid rgba(212,175,55,.58);border-radius:50%;background:var(--surface);overflow:hidden;flex:0 0 30px}
+.mobileSiteMark img{width:22px;height:22px;object-fit:contain}
 @media(max-width:640px){
   .inner>.homeLink{display:none}
   .inner{padding-left:8px}
-  .mobileNavOpen .mobileSiteTitle{display:block;grid-column:1/-1;text-align:center}
+  .mobileNavOpen .mobileSiteTitle{display:flex;grid-column:1/-1;text-align:center}
 }
 
 /* Utility controls occupy only their actual width, including signed-out state. */
@@ -639,6 +641,22 @@
 .playBannerCollapsed .inner{padding-top:3px;padding-bottom:3px}
 }
 @media(max-width:640px){.playBanner .inner>.searchWrap{margin-left:auto}}
+
+.houseMark { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; box-sizing: border-box; border: 1px solid rgba(212, 175, 55, .58); border-radius: 999px; background: var(--surface); overflow: hidden; transition: border-color .18s ease, background-color .18s ease, transform .18s ease; }
+.houseMark img { width: 24px; height: 24px; object-fit: contain; }
+.houseMark:hover { border-color: var(--gold); background: var(--surface-hover); transform: translateY(-1px); }
+.houseMark:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.navLinks > *:not(:last-child)::after { content: ""; display: inline-block; width: 3px; height: 3px; margin: 0 2px 0 10px; flex: 0 0 3px; border-radius: 50%; background: var(--gold); opacity: .7; vertical-align: middle; }
+.navGroup::after { align-self: center; }
+.mobileNavGroup { gap: 5px; padding: 4px 0; }
+.mobileNavGroupHeaderRow { border: 1px solid var(--border); border-radius: 10px; background: rgba(255, 255, 255, .02); overflow: hidden; }
+.mobileNavGroupHeaderRow > .mobileNavLink { min-height: 44px; border: 0; border-radius: 0; justify-content: flex-start; padding-inline: 14px; color: var(--text); font-weight: 600; }
+.mobileNavGroupHeader { min-height: 44px; border: 0; border-left: 1px solid var(--border); border-radius: 0; padding-inline: 13px; color: var(--gold); }
+.mobileNavGroupHeader:hover, .mobileNavGroupHeader[aria-expanded="true"] { background: rgba(212, 175, 55, .08); color: var(--gold); }
+.mobileNavGroupItems { gap: 2px; margin-left: 14px; padding: 4px 0 2px 14px; border-left: 1px solid rgba(212, 175, 55, .32); }
+.mobileNavGroupItems .mobileNavLink { min-height: 38px; padding: 8px 12px; border: 0; border-radius: 6px; justify-content: flex-start; color: var(--muted); }
+.mobileNavGroupItems .mobileNavLink:hover, .mobileNavGroupItems .mobileNavLink:focus-visible { background: var(--surface-hover); color: var(--gold); }
+@media (max-width: 1150px) { .navLinks > *:not(:last-child)::after { display: none; } .houseMark { flex-basis: 40px; width: 40px; height: 40px; } }
 
 .playBanner .homeLink{white-space:nowrap}
 @media(max-width:1150px){.playBanner .notificationsButton,.playBanner .directRavenButton{position:relative;inset:auto}}

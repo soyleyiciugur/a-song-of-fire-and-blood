@@ -46,6 +46,7 @@ export function buildSearchIndex(): SearchResult[] {
       ...(character.aliases ?? []),
       character.title,
       character.house,
+      character.dragon,
     ].filter((value) => value && value !== "-");
 
     results.push({
@@ -103,6 +104,11 @@ export function buildSearchIndex(): SearchResult[] {
           | { name: string }
           | undefined)
       : undefined;
+    const previousRider = dragon.previousRiderId
+      ? (characters[dragon.previousRiderId as keyof typeof characters] as
+          | { name: string }
+          | undefined)
+      : undefined;
 
     results.push({
       type: "dragon",
@@ -110,7 +116,9 @@ export function buildSearchIndex(): SearchResult[] {
       title: dragon.name,
       subtitle: rider ? `Ridden by ${rider.name}` : "Dragon",
       href: `/dragons/${dragon.id}`,
-      keywords: normalize(`${dragon.name} ${rider?.name ?? ""} dragon`),
+      keywords: normalize(
+        `${dragon.name} ${rider?.name ?? ""} ${previousRider?.name ?? ""} ${dragon.traits.join(" ")} ${dragon.description} dragon`
+      ),
       thumbnail: {
         src: dragon.image,
         alt: dragon.name,

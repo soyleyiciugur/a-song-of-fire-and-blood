@@ -19,4 +19,11 @@
   .entry h2 { font-size: 20px; }
 }
 
-.tabs{display:flex;gap:8px;margin:24px 0}.tabs button{min-height:42px;padding:8px 20px;border:1px solid #715233;border-radius:6px;background:#111012;color:#bba78f;cursor:pointer}.tabs button[aria-selected=true]{background:#271b1e;color:#e1c29a;border-color:#c39a50}
+.tabs { display: inline-flex; gap: 4px; margin: 24px 0 28px; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; }
+.tabs button { min-height: 38px; padding: 7px 18px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font: 600 11px var(--font-geist); letter-spacing: .08em; text-transform: uppercase; transition: color .18s ease, background-color .18s ease; }
+.tabs button:hover { color: var(--text); }
+.tabs button[aria-selected=true] { background: var(--gold); color: #1a1210; }
+.tabs button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.goLink { display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 0; padding: 6px 10px; border: 1px solid rgba(212, 175, 55, .42); border-radius: 999px; color: var(--gold); font: 600 11px var(--font-geist); letter-spacing: .04em; text-decoration: none; white-space: nowrap; transition: border-color .18s ease, background-color .18s ease, color .18s ease; }
+.goLink:hover { background: rgba(212, 175, 55, .1); border-color: var(--gold); color: var(--text); }
+.goLink:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }

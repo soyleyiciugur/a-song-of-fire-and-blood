@@ -12,6 +12,7 @@
 .sectionHeader {
   display: flex;
   align-items: flex-end;
+.relationshipDragonThumb { border: 1px solid var(--gold); border-radius: 50%; object-fit: cover; }
   justify-content: space-between;
   gap: 18px;
   margin-bottom: 18px;

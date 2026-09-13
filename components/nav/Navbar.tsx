@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { NAV_ITEMS, isNavigationGroup } from "@/constants/navigation";
@@ -80,6 +81,14 @@ export default function Navbar() {
           </span>
         </button>
 
+        <Link
+          href="/houses/targaryen"
+          className={styles.houseMark}
+          aria-label="House Targaryen"
+          title="House Targaryen"
+        >
+          <Image src="/images/houses/targaryen.webp" alt="" width={24} height={24} />
+        </Link>
 
 
         <Link href="/" className={styles.homeLink}>
@@ -194,7 +203,12 @@ export default function Navbar() {
         id="site-mobile-nav"
         className={`${styles.mobileNav} ${menuOpen ? styles.mobileNavOpen : ""}`}
       >
-        <Link href="/" className={styles.mobileSiteTitle} onClick={() => setMenuOpen(false)}>A Song of Fire and Blood</Link>
+        <Link href="/" className={styles.mobileSiteTitle} onClick={() => setMenuOpen(false)}>
+          <span className={styles.mobileSiteMark} aria-hidden="true">
+            <Image src="/images/houses/targaryen.webp" alt="" width={22} height={22} />
+          </span>
+          <span>A Song of Fire and Blood</span>
+        </Link>
 
         {NAV_ITEMS.map((item) =>
           isNavigationGroup(item) ? (

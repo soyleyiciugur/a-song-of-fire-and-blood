@@ -22,7 +22,7 @@ type Props = {
 };
 
 type RelatedEntry = EffectiveRelationship & {
-  character: Character;
+  character?: Character;
 };
 
 const WIDTH = 720;
@@ -163,7 +163,7 @@ export default function CharacterRelationships({ characterId }: Props) {
   const known = useMemo<RelatedEntry[]>(
     () =>
       entries.flatMap((entry) =>
-        entry.character ? [{ ...entry, character: entry.character }] : []
+        entry.character || entry.dragon ? [{ ...entry }] : []
       ),
     [entries]
   );
@@ -192,6 +192,18 @@ export default function CharacterRelationships({ characterId }: Props) {
     ? known.find((entry) => entry.id === selectedId) ?? null
     : null;
   const activeId = hoveredId ?? selectedId;
+
+  function entryColor(entry: RelatedEntry) {
+    return entry.character
+      ? colorForCharacter(entry.character.id, entry.character.house)
+      : "#9b8b6c";
+  }
+
+  function entryStroke(entry: RelatedEntry) {
+    return entry.character
+      ? secondaryColorForHouse(entry.character.house) ?? "var(--background)"
+      : "#d5b35a";
+  }
 
   return (
     <section className={styles.sectionPanel}>
@@ -282,15 +294,9 @@ export default function CharacterRelationships({ characterId }: Props) {
                 >
                   <circle
                     r={highlighted ? 10 : 7}
-                    fill={colorForCharacter(
-                      entry.character.id,
-                      entry.character.house
-                    )}
+                    fill={entryColor(entry)}
                     stroke={
-                      highlighted
-                        ? "var(--gold)"
-                        : secondaryColorForHouse(entry.character.house) ??
-                          "var(--background)"
+                      highlighted ? "var(--gold)" : entryStroke(entry)
                     }
                     strokeWidth={highlighted ? 2 : 1.5}
                   />
@@ -302,7 +308,7 @@ export default function CharacterRelationships({ characterId }: Props) {
                       highlighted ? styles.relationshipNodeLabelActive : ""
                     }`}
                   >
-                    {shortLabel(entry.character.name)}
+                    {shortLabel(entry.name)}
                   </text>
                 </g>
               );
@@ -314,23 +320,44 @@ export default function CharacterRelationships({ characterId }: Props) {
           {selected ? (
             <>
               <div className={styles.relationshipSidebarHeader}>
-                <MiniPortrait
-                  key={selected.character.id}
-                  id={selected.character.id}
-                  alt={selected.character.name}
-                  size={34}
-                />
+                {selected.character ? (
+                  <MiniPortrait
+                    key={selected.character.id}
+                    id={selected.character.id}
+                    alt={selected.character.name}
+                    size={34}
+                  />
+                ) : (
+                  <img
+                    className={styles.relationshipDragonThumb}
+                    src={selected.dragon?.image ?? ""}
+                    alt={selected.name}
+                    width={34}
+                    height={34}
+                  />
+                )}
                 <div>
-                  <Link
-                    href={`/characters/${selected.character.id}`}
-                    className={styles.relationshipSidebarName}
-                  >
-                    {selected.character.name}
-                  </Link>
+                  {selected.character ? (
+                    <Link
+                      href={`/characters/${selected.character.id}`}
+                      className={styles.relationshipSidebarName}
+                    >
+                      {selected.character.name}
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/dragons/${selected.dragon?.id ?? selected.id}`}
+                      className={styles.relationshipSidebarName}
+                    >
+                      {selected.name}
+                    </Link>
+                  )}
                   <div className={styles.relationshipSidebarHouse}>
-                    {selected.character.house !== "-"
-                      ? selected.character.house
-                      : selected.character.title}
+                    {selected.character
+                      ? selected.character.house !== "-"
+                        ? selected.character.house
+                        : selected.character.title
+                      : "Bonded dragon"}
                   </div>
                 </div>
               </div>
