@@ -2,76 +2,91 @@
 
 import UtilityIcon from "./UtilityIcon";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useCommunity } from "@/lib/communityStore";
+import { playRavenSound } from "@/lib/ravenSound";
 import styles from "./navbar.module.css";
 
-import { playRavenSound } from "@/lib/ravenSound";
-
-const STORAGE_KEY = "asofab:notifications:last-seen";
-
 export default function NotificationNavButton() {
-  const data = useCommunity();
-  const pathname = usePathname();
   const supabase = useMemo(() => createClient(), []);
   const [userId, setUserId] = useState<string | null>(null);
-  const [lastSeen, setLastSeen] = useState<string | null>(null);
+  const [unread, setUnread] = useState(0);
+  const initialized = useRef(false);
+  const previousUnread = useRef(0);
+
+  const syncBadge = useCallback(async (count: number, signedIn: boolean) => {
+    if (!("setAppBadge" in navigator) || !("clearAppBadge" in navigator)) return;
+    try {
+      if (!signedIn || count <= 0) await navigator.clearAppBadge();
+      else await navigator.setAppBadge(count);
+    } catch { /* Badging may remain unavailable until notification permission exists. */ }
+  }, []);
+
+  const refresh = useCallback(async (id = userId) => {
+    if (!id) {
+      setUnread(0);
+      previousUnread.current = 0;
+      initialized.current = false;
+      await syncBadge(0, false);
+      return;
+    }
+    const { count, error } = await supabase.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", id).is("read_at", null);
+    if (error) return;
+    const next = count ?? 0;
+    if (initialized.current && next > previousUnread.current) playRavenSound("notification");
+    previousUnread.current = next;
+    initialized.current = true;
+    setUnread(next);
+    await syncBadge(next, true);
+  }, [supabase, syncBadge, userId]);
 
   useEffect(() => {
-    let loadVersion = 0;
+    let alive = true;
     const load = async (id: string | null) => {
-      const version = ++loadVersion;
+      if (!alive) return;
+      setUserId(id);
+      initialized.current = false;
+      previousUnread.current = 0;
       if (!id) {
-        setLastSeen(window.localStorage.getItem(STORAGE_KEY));
-        setUserId(null);
+        setUnread(0);
+        await syncBadge(0, false);
         return;
       }
-      const { data } = await supabase.from("profiles").select("notification_last_seen_at").eq("id", id).maybeSingle();
-      if (version !== loadVersion) return;
-      setLastSeen(data?.notification_last_seen_at ?? null);
-      setUserId(id);
+      await refresh(id);
     };
     void supabase.auth.getUser().then(({ data: { user } }) => load(user?.id ?? null));
-    const { data: auth } = supabase.auth.onAuthStateChange((_event, session) => void load(session?.user.id ?? null));
-    return () => auth.subscription.unsubscribe();
-  }, [supabase]);
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => void load(session?.user.id ?? null));
+    return () => { alive = false; data.subscription.unsubscribe(); };
+  }, [refresh, supabase, syncBadge]);
 
   useEffect(() => {
-    const seen = (event: Event) => setLastSeen((event as CustomEvent<string>).detail);
-    window.addEventListener("asofab:notifications-seen", seen);
-    return () => window.removeEventListener("asofab:notifications-seen", seen);
-  }, [pathname]);
-
-  const latest = useRef<string | null>(null);
-  useEffect(() => {
-    if (!data.serverTime) return;
-    if (latest.current && userId && data.comments.some(comment => comment.authorId !== userId && Date.parse(comment.publishedAt) > Date.parse(latest.current!))) playRavenSound("notification");
-    latest.current = data.serverTime;
-  }, [data.serverTime, data.comments, userId]);
-
-  const unread = data.comments.reduce((count, comment) => {
-    if (comment.authorId === userId) return count;
-    if (!lastSeen || Date.parse(comment.publishedAt) > Date.parse(lastSeen)) return count + 1;
-    return count;
-  }, 0);
-
-  useEffect(() => {
-    if (!("setAppBadge" in navigator) || !("clearAppBadge" in navigator)) return;
-    const syncBadge = async () => {
-      try {
-        if (unread > 0) await navigator.setAppBadge(unread);
-        else await navigator.clearAppBadge();
-      } catch { /* Badging can be unavailable until notification permission is granted. */ }
+    if (!userId) return;
+    const onChanged = (event: Event) => {
+      const detail = (event as CustomEvent<{ unread?: number }>).detail;
+      if (typeof detail?.unread === "number") {
+        previousUnread.current = detail.unread;
+        initialized.current = true;
+        setUnread(detail.unread);
+        void syncBadge(detail.unread, true);
+      } else void refresh(userId);
     };
-    void syncBadge();
-  }, [unread]);
+    const onVisible = () => { if (document.visibilityState === "visible") void refresh(userId); };
+    window.addEventListener("asofab:notifications-changed", onChanged);
+    window.addEventListener("focus", onVisible);
+    document.addEventListener("visibilitychange", onVisible);
+    const timer = window.setInterval(() => { if (document.visibilityState === "visible") void refresh(userId); }, 30_000);
+    const channel = supabase.channel(`site-notifications-nav:${userId}`).on("postgres_changes", { event: "*", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` }, () => void refresh(userId)).subscribe();
+    return () => {
+      window.removeEventListener("asofab:notifications-changed", onChanged);
+      window.removeEventListener("focus", onVisible);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.clearInterval(timer);
+      void supabase.removeChannel(channel);
+    };
+  }, [refresh, supabase, syncBadge, userId]);
 
-  return (
-    <Link href="/notifications" className={styles.notificationsButton} aria-label={unread ? `Notifications, ${unread} new` : "Notifications"} title="Notifications">
-      <UtilityIcon name="notifications" />
-      {unread > 0 && <span className={styles.notificationDot} aria-hidden="true">{unread > 99 ? "99+" : unread}</span>}
-    </Link>
-  );
+  return <Link href="/notifications" className={styles.notificationsButton} aria-label={userId && unread ? `Notifications, ${unread} unread` : "Notifications"} title="Notifications">
+    <UtilityIcon name="notifications" />
+    {userId && unread > 0 && <span className={styles.notificationDot} aria-hidden="true">{unread > 99 ? "99+" : unread}</span>}
+  </Link>;
 }

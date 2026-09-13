@@ -69,6 +69,37 @@ export interface PushSubscription {
   updated_at: string;
 }
 
+
+export interface NotificationPreferencesRow {
+  user_id: string;
+  mascot_mode: "balanced" | "mara" | "aldren";
+  preferences: Record<string, boolean>;
+  last_mascot: "mara" | "aldren" | null;
+  mascot_streak: number;
+  mara_count: number;
+  aldren_count: number;
+  last_variants: Record<string, number>;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SiteNotificationRow {
+  id: string;
+  user_id: string;
+  actor_id: string | null;
+  kind: string;
+  source: string;
+  mascot: "mara" | "aldren";
+  title: string;
+  body: string;
+  href: string;
+  source_label: string | null;
+  context: Record<string, unknown>;
+  dedupe_key: string | null;
+  created_at: string;
+  read_at: string | null;
+}
+
 export interface DirectRavenBlock {
   blocker_id: string;
   blocked_id: string;
@@ -88,6 +119,8 @@ export interface Database {
       direct_raven_reads: { Row: DirectRavenRead; Insert: DirectRavenRead; Update: Pick<DirectRavenRead, "last_read_at">; Relationships: [] };
       direct_raven_blocks: { Row: DirectRavenBlock; Insert: Omit<DirectRavenBlock, "created_at"> & Partial<Pick<DirectRavenBlock, "created_at">>; Update: never; Relationships: [] };
       push_subscriptions: { Row: PushSubscription; Insert: Omit<PushSubscription, "id" | "created_at" | "updated_at"> & Partial<Pick<PushSubscription, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PushSubscription, "p256dh" | "auth" | "user_agent" | "updated_at">>; Relationships: [] };
+      notification_preferences: { Row: NotificationPreferencesRow; Insert: Pick<NotificationPreferencesRow, "user_id"> & Partial<Omit<NotificationPreferencesRow, "user_id">>; Update: Partial<Pick<NotificationPreferencesRow, "mascot_mode" | "preferences" | "last_mascot" | "mascot_streak" | "mara_count" | "aldren_count" | "last_variants" | "updated_at">>; Relationships: [] };
+      site_notifications: { Row: SiteNotificationRow; Insert: Omit<SiteNotificationRow, "id" | "created_at" | "read_at"> & Partial<Pick<SiteNotificationRow, "id" | "created_at" | "read_at" | "dedupe_key">>; Update: Partial<Pick<SiteNotificationRow, "read_at">>; Relationships: [] };
     };
     Views: Record<string, never>;
     Functions: {

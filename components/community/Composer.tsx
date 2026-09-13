@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import Link from "next/link";
 import { refreshCommunity } from "@/lib/communityStore";
 import styles from "./composer.module.css";
@@ -41,7 +42,7 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
     // its own abrupt focus-scroll. visualViewport then keeps the action row
     // just above the keyboard while it animates in.
     const frame = requestAnimationFrame(() => {
-      textarea.focus({ preventScroll: true });
+      if (document.activeElement !== textarea) textarea.focus();
       revealComposer("smooth");
     });
 
@@ -63,6 +64,28 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
     };
   }, [open, revealComposer]);
 
+  function openComposer() {
+    // iOS only guarantees the software keyboard when focus happens inside the
+    // original tap/click gesture. Flush the textarea into the DOM, then use a
+    // plain synchronous focus (preventScroll can suppress the keyboard in some
+    // standalone Safari/PWA builds). The viewport listener below takes over the
+    // scrolling once the keyboard begins its animation.
+    flushSync(() => setOpen(true));
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.focus();
+      try {
+        const end = textarea.value.length;
+        textarea.setSelectionRange(end, end);
+      } catch {}
+    }
+
+    requestAnimationFrame(() => {
+      revealComposer("smooth");
+      requestAnimationFrame(() => revealComposer("smooth"));
+    });
+  }
+
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (pending) return;
@@ -80,9 +103,9 @@ export default function Composer({ kind, threadId, entryId, parentId }: Props) {
   }
 
   return <div className={`${styles.wrap} ${parentId ? styles.replyComposer : ""}`}>
-    {!open ? <button type="button" onClick={() => setOpen(true)}>{parentId ? "Reply" : kind === "thread" ? "Start a discussion" : kind === "post" ? "Reply at this table" : "Write a comment"}</button> : <form ref={formRef} onSubmit={submit}>
+    {!open ? <button type="button" onClick={openComposer}>{parentId ? "Reply" : kind === "thread" ? "Start a discussion" : kind === "post" ? "Reply at this table" : "Write a comment"}</button> : <form ref={formRef} onSubmit={submit}>
       {kind === "thread" && <input name="title" aria-label="Discussion title" disabled={pending} required minLength={3} maxLength={140} placeholder="Discussion title" />}
-      <textarea ref={textareaRef} name="body" aria-label={parentId ? "Write a reply" : "Write your contribution"} disabled={pending} required maxLength={kind === "raven" ? 4000 : 10000} placeholder={parentId ? "Write a reply…" : "Write your contribution…"} />
+      <textarea ref={textareaRef} name="body" aria-label={parentId ? "Write a reply" : "Write your contribution"} disabled={pending} required maxLength={kind === "raven" ? 4000 : 10000} placeholder={parentId ? "Write a reply…" : "Write your contribution…"} onFocus={() => requestAnimationFrame(() => revealComposer("smooth"))} />
       <div ref={actionsRef}><button disabled={pending}>{pending ? "Posting…" : "Post"}</button><button type="button" disabled={pending} onClick={() => setOpen(false)}>Cancel</button></div>
       {message === "signin" ? <p><Link href="/login">Sign in</Link> or <Link href="/register">join</Link> to post.</p> : message && <p role="alert">{message}</p>}
     </form>}

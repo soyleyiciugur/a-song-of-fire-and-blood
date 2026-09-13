@@ -991,7 +991,7 @@
 
   .mobilePage .pageContent,
   .mobilePage .pageContentRight {
-    padding: 26px 23px 46px;
+    padding: 26px 23px 24px;
     overflow: hidden;
   }
 
@@ -1084,7 +1084,7 @@
 
   .mobilePage .pageContent,
   .mobilePage .pageContentRight {
-    padding: 24px 20px 44px;
+    padding: 24px 20px 23px;
   }
 
   .mobilePage .paragraph {

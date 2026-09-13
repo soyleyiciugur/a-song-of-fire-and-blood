@@ -2,6 +2,7 @@
   {
     "date": "2026-09-13",
     "items": [
+      "Introduced account-synced mascot notifications with Mara and Aldren, iOS Home Screen push delivery, source-badged notification portraits, deep-linked notification lightboxes, per-category controls, and anti-repeat delivery balancing.",
       "Published two new Tavern topics about the pressure of Jace's succession and the planned full Kingsguard roster.",
       "Addressed HRRM's new roadmap answer and moderated a personal attack in the live Taverns AMA.",
       "Lowered the expanded-navbar chapter-list heading slightly while keeping the collapsed layout unchanged.",
@@ -65,15 +66,7 @@
       "Restored desktop navigation dropdowns for hover, click and keyboard use, and made the gold separators consistently thin.",
       "Restyled the navigation drawer with Chronicle typography and a full-screen backdrop beneath its controls.",
       "Added matching decorative utility icons to page titles and removed the redundant day count from the miniature calendar.",
-      "Expanded Raven’s Eye conversations across the newest reels, meme and earlier media, and opened four varied Taverns discussions with five new community voices.",
-      "Polished mobile navigation search so it expands within the utility row without page zoom or focus jumps.",
-      "Unified chapter reader controls and parchment navigation, and improved book pagination so text fills pages naturally instead of breaking by source paragraph.",
-      "Refined chapter drop caps so following lines return to the normal text margin.",
-      "Compacted the mobile family tree and added house-sigil and four-point-star portrait fallbacks.",
-      "Fixed long house-member names and titles so they stay aligned beside portraits on touch layouts.",
-      "Restored the homepage scroll position after closing Latest Images media from The Raven's Eye.",
-      "Improved Raven's Eye and Taverns mobile replies with keyboard-aware focus, compact tabs and filters, concise comment timestamps, and themed conversation controls.",
-      "Refined profile activity, live Tavern topic titles, permalink and profile actions, and Profile Settings touch, dropdown, colour-picker and notification spacing behavior."
+      "Expanded Raven’s Eye conversations across the newest reels, meme and earlier media, and opened four varied Taverns discussions with five new community voices."
     ],
     "features": [],
     "links": {

@@ -38,6 +38,7 @@ export default function LikeButton({ kind, id, legacyReactorIds = [] }: { kind:"
 
   async function toggle(){
     setBusy(true); setError("");
+    const wasLiked=liked;
     try {
       const {data:{user}}=await supabase.auth.getUser();
       if(!user){setError(favor?"Sign in to grant Favor.":"Sign in to like.");return;}
@@ -45,6 +46,7 @@ export default function LikeButton({ kind, id, legacyReactorIds = [] }: { kind:"
       if(saveError){console.error("Reaction save failed",{kind,id,saveError});throw saveError;}
       const state=await loadLikeState(kind,id);
       setLiked(state.liked); setMemberCount(state.count); setPeople(null);
+      if(!wasLiked&&state.liked&&kind!=="message") void fetch("/api/notifications/reaction",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({kind,targetId:id})}).catch(()=>{});
       if(favor)void refreshCommunity();
     } catch(error) {
       console.error("Could not save reaction",error);

@@ -1,6 +1,11 @@
 import { parseTimelineDate, timelineDateOrder } from "./timeline-date";
 
 export type CalendarDate = { day: number; moon: number; year: number };
+export type CalendarCharacterRef = {
+  id: string;
+  name: string;
+  nickname?: string;
+};
 export type CalendarEvent = {
   id: string;
   title: string;
@@ -16,6 +21,7 @@ export type CalendarEvent = {
   href?: string;
   chapterTitle?: string;
   location?: string;
+  characters?: CalendarCharacterRef[];
 };
 
 export const CALENDAR_TYPES = ["nameday", "feast", "battle", "trial", "wedding", "tournament"] as const;

@@ -55,6 +55,11 @@ function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNod
   </li>;
 }
 
+
+function conversationFavorScore(node: CommentTreeNode): number {
+  return (node.comment.upvotes ?? 0) + node.children.reduce((total, child) => total + conversationFavorScore(child), 0);
+}
+
 function Forum() {
   const data=useCommunity();
   const params=useSearchParams();
@@ -67,7 +72,7 @@ function Forum() {
   const thread=data.forumThreads.find(t=>t.id===threadId);
   const comments=data.comments.filter(c=>c.surface==='forum'&&c.entryId===threadId);
   const groups=buildCommentTree(comments);
-  if(sort==='top')groups.sort((a,b)=>(b.comment.upvotes??0)-(a.comment.upvotes??0));
+  if(sort==='top')groups.sort((a,b)=>conversationFavorScore(b)-conversationFavorScore(a)||Date.parse(b.comment.publishedAt)-Date.parse(a.comment.publishedAt));
   useEffect(()=>{
     if(!target){handled.current=null;return;}
     if(!comments.some(c=>c.id===target)||handled.current===target)return;
@@ -93,7 +98,7 @@ function Forum() {
         {users.get(thread.authorId)&&<Account user={users.get(thread.authorId)!}/>}<p className={styles.body}>{thread.body}</p>
         {thread.chapterSlug&&<Link href={`/chapters/${thread.chapterSlug}`} className={styles.readChapter}>Read {thread.chapterTitle} ↗</Link>}<LikeButton kind="thread" id={thread.id}/>{thread.canEdit&&<ContentActions kind="thread" id={thread.id} body={thread.body}/>}
       </section>
-      <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><div className={styles.orderControl}><span>Order conversation</span><Select value={sort} options={[{id:"conversation",name:"Conversation"},{id:"top",name:"Most Favored"}]} onChange={setSort} /></div></div>
+      <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><div className={styles.orderControl}><span>Order</span><Select value={sort} options={[{id:"conversation",name:"Conversation"},{id:"top",name:"Most Favored"}]} onChange={setSort} /></div></div>
       {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
       <ol className={styles.comments}>{groups.map(node=><ForumComment key={node.comment.id} node={node} users={users} comments={comments} threadId={thread.id} target={target}/>)}</ol>
     </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to Taverns</Link></p> : <>

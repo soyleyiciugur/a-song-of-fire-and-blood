@@ -413,6 +413,11 @@ export default function RavenConversation({
 
       const { data, error: sendError } = await query.select("*").single();
       if (sendError || !data) throw Error("The raven could not be sent. Your draft is still here.");
+      if (!editing) void fetch("/api/notifications/direct-raven", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messageId: data.id }),
+      }).catch(() => {});
 
       nearBottom.current = true;
       setMessages((current) =>

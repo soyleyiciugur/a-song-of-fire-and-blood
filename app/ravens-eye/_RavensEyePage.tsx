@@ -130,7 +130,7 @@ const TAB_META: Record<
     intro: (n) => `${n} ${n === 1 ? "image" : "images"} in the archive.`,
   },
   flea: {
-    label: "Memes from the Gutters of Flea Bottom",
+    label: "Gutter Memes",
     href: "/ravens-eye/memes",
     entries: fleaEntries,
     emptyLabel:
@@ -844,7 +844,7 @@ function TabBar({
             aria-current={active === id ? "page" : undefined}
           >
             <span className={styles.tabLabelFull}>{meta.label}</span>
-            <span className={styles.tabLabelMobile}>{id === "raven" ? "Raven's Eye" : id === "flea" ? "Memes" : "Reels"}</span>
+            <span className={styles.tabLabelMobile}>{meta.label}</span>
             {count > 0 && <span className={styles.tabCount}>{count}</span>}
           </a>
         );
@@ -937,6 +937,9 @@ function FilterBar({
     dragons,
     anyFilter,
   } = filters;
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
+  const toolbarRef = useRef<HTMLDivElement>(null);
 
   const charOptions = [{ id: "", name: "All characters" }, ...characters];
   const houseOptions = [
@@ -944,57 +947,134 @@ function FilterBar({
     ...houses.map((h) => ({ id: h.id, name: h.name })),
   ];
   const dragonOptions = [{ id: "", name: "All dragons" }, ...dragons];
+  const activeFilterCount = [filterChar, filterHouse, filterDragon].filter(Boolean).length;
+  const activeSort = SORT_OPTIONS.find((option) => option.id === sort)?.name ?? "Sort";
+
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent) => {
+      if (!toolbarRef.current?.contains(event.target as Node)) {
+        setFilterOpen(false);
+        setSortOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFilterOpen(false);
+        setSortOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
 
   return (
-    <div className={styles.filterBar}>
-      {characters.length > 0 && (
-        <Select
-          value={filterChar}
-          options={charOptions}
-          onChange={setFilterChar}
-          searchable
-        />
-      )}
+    <div className={styles.filterToolbar} ref={toolbarRef}>
+      <div className={styles.filterToolbarRow}>
+        <button
+          type="button"
+          className={`${styles.filterMenuButton} ${filterOpen ? styles.filterMenuButtonActive : ""}`}
+          aria-expanded={filterOpen}
+          aria-controls="ravens-eye-filter-panel"
+          onClick={() => {
+            setFilterOpen((open) => !open);
+            setSortOpen(false);
+          }}
+        >
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M3 4.5h14L11.7 10v4.2l-3.4 1.5V10L3 4.5Z" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinejoin="round" />
+          </svg>
+          <span>Filters</span>
+          {activeFilterCount > 0 && <span className={styles.filterBadge}>{activeFilterCount}</span>}
+        </button>
 
-      {houses.length > 0 && (
-        <Select
-          value={filterHouse}
-          options={houseOptions}
-          onChange={setFilterHouse}
-          searchable
-        />
-      )}
+        <div className={styles.filterToolbarRule} aria-hidden="true" />
 
-      {dragons.length > 0 && (
-        <Select
-          value={filterDragon}
-          options={dragonOptions}
-          onChange={setFilterDragon}
-          searchable
-        />
-      )}
-
-      <div className={styles.filterRight}>
-        {anyFilter && (
+        <div className={styles.sortMenuWrap}>
           <button
             type="button"
+            className={`${styles.sortIconButton} ${sortOpen ? styles.sortIconButtonActive : ""}`}
+            aria-label={`Sort · ${activeSort}`}
+            aria-expanded={sortOpen}
+            aria-controls="ravens-eye-sort-menu"
+            title={`Sort · ${activeSort}`}
             onClick={() => {
-              setFilterChar("");
-              setFilterHouse("");
-              setFilterDragon("");
+              setSortOpen((open) => !open);
+              setFilterOpen(false);
             }}
-            className={styles.clearBtn}
           >
-            Clear filters
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M5 4v11m0 0-2.5-2.5M5 15l2.5-2.5M15 16V5m0 0-2.5 2.5M15 5l2.5 2.5" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
-        )}
 
-        <Select
-          value={sort}
-          options={SORT_OPTIONS}
-          onChange={(v) => setSort(v as SortKey)}
-        />
+          {sortOpen && (
+            <div id="ravens-eye-sort-menu" className={styles.sortMenu} role="menu" aria-label="Sort Raven's Eye">
+              <span className={styles.sortMenuLabel}>Sort</span>
+              {SORT_OPTIONS.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  role="menuitemradio"
+                  aria-checked={sort === option.id}
+                  className={sort === option.id ? styles.sortOptionActive : ""}
+                  onClick={() => {
+                    setSort(option.id as SortKey);
+                    setSortOpen(false);
+                  }}
+                >
+                  <span>{option.name}</span>
+                  {sort === option.id && <span className={styles.sortCheck} aria-hidden="true">✦</span>}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+
+      {filterOpen && (
+        <div id="ravens-eye-filter-panel" className={styles.filterPanel}>
+          <div className={styles.filterPanelHeading}>
+            <span>Filter the archive</span>
+            {anyFilter && (
+              <button
+                type="button"
+                onClick={() => {
+                  setFilterChar("");
+                  setFilterHouse("");
+                  setFilterDragon("");
+                }}
+                className={styles.clearBtn}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          <div className={styles.filterSelectStack}>
+            {characters.length > 0 && (
+              <label>
+                <span>Character</span>
+                <Select value={filterChar} options={charOptions} onChange={setFilterChar} searchable />
+              </label>
+            )}
+            {houses.length > 0 && (
+              <label>
+                <span>House</span>
+                <Select value={filterHouse} options={houseOptions} onChange={setFilterHouse} searchable />
+              </label>
+            )}
+            {dragons.length > 0 && (
+              <label>
+                <span>Dragon</span>
+                <Select value={filterDragon} options={dragonOptions} onChange={setFilterDragon} searchable />
+              </label>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

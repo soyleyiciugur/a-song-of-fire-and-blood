@@ -7,14 +7,29 @@ import { getCommentLink } from "@/lib/communityLinks";
 import forumData from "@/data/forum.json";
 import fleaData from "@/data/flea-bottom.json";
 import gallery from "@/data/gallery.json";
+import { getAllChapters } from "@/data/chapters";
 import LikeButton from "./LikeButton";
 import styles from "@/app/users/[username]/profile.module.css";
 
 type Tab = "thread" | "post" | "raven" | "reactions";
-type Activity = { id: string; title?: string; body: string; created_at: string; thread_id?: string; entry_id?: string; parent_id?: string | null };
+type Activity = { id: string; title?: string | null; body: string; created_at: string; thread_id?: string; entry_id?: string; parent_id?: string | null; chapter_slug?: string | null };
 type Reaction = { target_kind: string; target_id: string; direction: string; latest: string; href: string; target_title?: string | null; preview?: string; groupKey?: string };
 
-const threadTitles = new Map((forumData.threads ?? []).map((item) => [item.id, item.title] as const));
+const chapterTitles = new Map(getAllChapters().map((chapter) => [chapter.slug, chapter.title] as const));
+const chapterDiscussionTitle = (chapterSlug?: string | null, storedTitle?: string | null) => {
+  if (chapterSlug) {
+    const chapterTitle = chapterTitles.get(chapterSlug);
+    if (chapterTitle) return `${chapterTitle} — Discussion Thread`;
+  }
+  if (storedTitle && storedTitle.trim() && !/^tavern discussion$/i.test(storedTitle.trim())) return storedTitle;
+  return storedTitle?.trim() || "Taverns";
+};
+const threadTitles = new Map(
+  (forumData.threads ?? []).map((item) => [
+    item.id,
+    chapterDiscussionTitle(item.chapterSlug, item.title ?? item.category),
+  ] as const)
+);
 const postThreads = new Map((forumData.comments ?? []).map((item) => [item.id, item.entryId] as const));
 const bodies = new Map([...(forumData.comments ?? []), ...(fleaData.comments ?? [])].map((item) => [item.id, item.body] as const));
 const captions = new Map(gallery.map((item) => [item.id, item.caption?.trim().split("\n")[0] || "Untitled Raven's Eye item"] as const));
@@ -79,15 +94,15 @@ export default function ProfileActivity({ userId }: { userId: string }) {
             if (row) row.preview = post.body;
           }
           const postMap = new Map((posts ?? []).map((post) => [post.id, post.thread_id]));
-          const { data: threads } = needThreads.size ? await supabase.from("forum_threads").select("id,title").in("id", [...needThreads]) : { data: [] };
-          const byId = new Map((threads ?? []).map((thread) => [thread.id, thread.title]));
+          const { data: threads } = needThreads.size ? await supabase.from("forum_threads").select("id,title,chapter_slug").in("id", [...needThreads]) : { data: [] };
+          const byId = new Map((threads ?? []).map((thread) => [thread.id, chapterDiscussionTitle(thread.chapter_slug, thread.title)]));
           for (const [id, thread] of postMap) {
             const title = byId.get(thread);
             if (title) resolved[`post:${id}`] = title;
           }
         } else if (needThreads.size) {
-          const { data: threads } = await supabase.from("forum_threads").select("id,title").in("id", [...needThreads]);
-          for (const thread of threads ?? []) resolved[`thread:${thread.id}`] = thread.title;
+          const { data: threads } = await supabase.from("forum_threads").select("id,title,chapter_slug").in("id", [...needThreads]);
+          for (const thread of threads ?? []) resolved[`thread:${thread.id}`] = chapterDiscussionTitle(thread.chapter_slug, thread.title);
         }
         if (active) {
           setReactions(list);
@@ -113,9 +128,9 @@ export default function ProfileActivity({ userId }: { userId: string }) {
         if (tab === "post") {
           const threadIds = [...new Set(nextRows.map((row) => row.thread_id).filter((id): id is string => Boolean(id && !threadTitles.has(id))))];
           if (threadIds.length) {
-            const { data: liveThreads } = await supabase.from("forum_threads").select("id,title").in("id", threadIds);
+            const { data: liveThreads } = await supabase.from("forum_threads").select("id,title,chapter_slug").in("id", threadIds);
             if (active && liveThreads?.length) {
-              setTitles((current) => ({ ...current, ...Object.fromEntries(liveThreads.map((thread) => [`thread:${thread.id}`, thread.title])) }));
+              setTitles((current) => ({ ...current, ...Object.fromEntries(liveThreads.map((thread) => [`thread:${thread.id}`, chapterDiscussionTitle(thread.chapter_slug, thread.title)])) }));
             }
           }
         }
@@ -148,7 +163,7 @@ export default function ProfileActivity({ userId }: { userId: string }) {
     postGroups.set(key, [...(postGroups.get(key) ?? []), row]);
   }
 
-  const postTitle = (threadId: string) => threadTitles.get(threadId) ?? titles[`thread:${threadId}`] ?? "Tavern discussion";
+  const postTitle = (threadId: string) => threadTitles.get(threadId) ?? titles[`thread:${threadId}`] ?? "Taverns";
   const ravenTitle = (entryId?: string) => captions.get(entryId ?? "") ?? "Untitled Raven's Eye item";
 
   const renderReactionGroups = () => [...grouped].map(([key, group]) => {
@@ -161,7 +176,8 @@ export default function ProfileActivity({ userId }: { userId: string }) {
 
   const renderRows = () => rows.map((row) => {
     const href = tab === "thread" ? `/forum?thread=${row.id}` : getCommentLink({ id: row.id, entryId: row.thread_id ?? row.entry_id ?? "", surface: undefined });
-    return <article key={row.id} className={styles.activityCard}><Link href={href}>{tab === "raven" && <span className={styles.activityKicker}>Raven&apos;s Eye</span>}{tab === "raven" ? <h3>{ravenTitle(row.entry_id)}</h3> : row.title && <h3>{row.title}</h3>}<small>{row.parent_id ? "Reply · " : ""}{new Date(row.created_at).toLocaleDateString("en-GB")}</small><p>{row.body}</p></Link>{tab === "raven" && <LikeButton kind="raven" id={row.id} />}</article>;
+    const rowTitle = tab === "thread" ? chapterDiscussionTitle(row.chapter_slug, row.title) : row.title;
+    return <article key={row.id} className={styles.activityCard}><Link href={href}>{tab === "raven" && <span className={styles.activityKicker}>Raven&apos;s Eye</span>}{tab === "raven" ? <h3>{ravenTitle(row.entry_id)}</h3> : rowTitle && <h3>{rowTitle}</h3>}<small>{row.parent_id ? "Reply · " : ""}{new Date(row.created_at).toLocaleDateString("en-GB")}</small><p>{row.body}</p></Link>{tab === "raven" && <LikeButton kind="raven" id={row.id} />}</article>;
   });
 
   const activityContent = tab === "reactions" ? renderReactionGroups() : tab === "post" ? renderPostGroups() : renderRows();

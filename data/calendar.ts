@@ -1,7 +1,39 @@
 import characters from "./characters/characters.json";
 import annals from "./events.json";
 import { timeline } from "./timeline";
-import { calendarTimelineDate, type CalendarEvent } from "@/lib/calendar";
+import { calendarTimelineDate, type CalendarCharacterRef, type CalendarEvent } from "@/lib/calendar";
+
+
+const characterById = new Map(characters.map(character => [character.id, character]));
+
+function toCalendarCharacter(id: string): CalendarCharacterRef | null {
+  const character = characterById.get(id);
+  if (!character) return null;
+  return {
+    id: character.id,
+    name: character.name,
+    nickname: typeof character.nickname === "string" ? character.nickname : undefined,
+  };
+}
+
+function titleMentionsCharacter(title: string, character: (typeof characters)[number]): boolean {
+  const plainName = character.name.replace(/^(?:Grand Maester|Maester|Ser|King|Queen|Prince|Princess|Lord|Lady)\s+/i, "");
+  const firstName = plainName.split(/\s+/)[0];
+  const candidates = [character.name, plainName, firstName, typeof character.nickname === "string" ? character.nickname : ""]
+    .filter((value): value is string => Boolean(value && value.length >= 3));
+
+  return candidates.some(candidate => {
+    const escaped = candidate.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`(^|[^A-Za-z])${escaped}(?=$|[^A-Za-z])`, "i").test(title);
+  });
+}
+
+function inferTitleCharacters(title: string): CalendarCharacterRef[] {
+  return characters
+    .filter(character => !character.hidden && titleMentionsCharacter(title, character))
+    .map(character => toCalendarCharacter(character.id))
+    .filter((character): character is CalendarCharacterRef => character !== null);
+}
 
 // These records describe the same scene under different editorial titles.
 const annalTimelineTitles: Record<string, string> = {
@@ -26,7 +58,8 @@ export function getCalendarEvents(): CalendarEvent[] {
       if (!date) return;
       entries.push({ id: `timeline-${chapter.chapterSlug}-${index}`, ...date,
         title: event.title, description: event.description, type: "history",
-        href: `/chapters/${chapter.chapterSlug}`, chapterTitle: chapter.chapterTitle, location: event.location });
+        href: `/chapters/${chapter.chapterSlug}`, chapterTitle: chapter.chapterTitle, location: event.location,
+        characters: (event.characters ?? []).map(toCalendarCharacter).filter((character): character is CalendarCharacterRef => character !== null) });
     });
   }
 
@@ -37,7 +70,8 @@ export function getCalendarEvents(): CalendarEvent[] {
     if (existing) { existing.day = event.day; existing.type = event.type; existing.location = event.location; continue; }
     entries.push({ id: event.id, title: event.title, description: event.description, type: event.type,
       year: event.year, moon: event.moon, day: event.day, location: event.location,
-      href: `/chapters/${event.chapterSlug}`, chapterTitle: timeline.find(chapter => chapter.chapterSlug === event.chapterSlug)?.chapterTitle });
+      href: `/chapters/${event.chapterSlug}`, chapterTitle: timeline.find(chapter => chapter.chapterSlug === event.chapterSlug)?.chapterTitle,
+      characters: inferTitleCharacters(event.title) });
   }
 
   for (const character of characters) {
@@ -48,7 +82,7 @@ export function getCalendarEvents(): CalendarEvent[] {
     entries.push({ id: `nameday-${character.id}`, title: `${character.name}'s Nameday`, type: "nameday",
       description: `The nameday of ${character.name}.`, day, moon, fromYear: year,
       until: character.status === "Dead" ? character.death : undefined,
-      href: `/characters/${character.id}` });
+      href: `/characters/${character.id}`, characters: [toCalendarCharacter(character.id)!] });
   }
   return entries;
 }

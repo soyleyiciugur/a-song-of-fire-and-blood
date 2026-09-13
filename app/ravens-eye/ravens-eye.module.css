@@ -871,3 +871,250 @@
   .filterRight > :global(.te-select) { width: 100%; min-width: 0; }
   .clearBtn { white-space: nowrap; }
 }
+
+/* ── Archive toolbar: compact filter drawer + icon sort menu ───────────── */
+.filterToolbar {
+  position: relative;
+  margin: 0 0 14px;
+  border: 1px solid rgba(201,162,39,.20);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(201,162,39,.055), transparent 38%),
+    linear-gradient(145deg, rgba(25,20,21,.94), rgba(10,9,11,.96));
+  box-shadow: inset 0 1px rgba(255,255,255,.018), 0 8px 24px rgba(0,0,0,.16);
+}
+
+.filterToolbarRow {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 5px 7px;
+}
+
+.filterMenuButton,
+.sortIconButton {
+  border: 1px solid transparent;
+  background: transparent;
+  color: #b8a993;
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease, background .16s ease, transform .12s ease;
+}
+
+.filterMenuButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font: 600 11px/1 var(--font-geist);
+  letter-spacing: .045em;
+}
+
+.filterMenuButton svg,
+.sortIconButton svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+
+.filterMenuButton:hover,
+.filterMenuButtonActive,
+.sortIconButton:hover,
+.sortIconButtonActive {
+  color: #ecd4aa;
+  border-color: rgba(201,162,39,.28);
+  background: rgba(201,162,39,.07);
+}
+
+.filterMenuButton:active,
+.sortIconButton:active { transform: scale(.96); }
+
+.filterBadge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border: 1px solid rgba(201,162,39,.38);
+  border-radius: 999px;
+  color: #e3c487;
+  background: rgba(201,162,39,.10);
+  font: 700 9px/1 var(--font-geist);
+}
+
+.filterToolbarRule {
+  flex: 1;
+  height: 1px;
+  margin: 0 10px;
+  background: linear-gradient(90deg, rgba(201,162,39,.18), rgba(201,162,39,.04) 72%, transparent);
+}
+
+.sortMenuWrap { position: relative; flex: none; }
+
+.sortIconButton {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 7px;
+}
+
+.sortMenu {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(246px, calc(100vw - 38px));
+  padding: 7px;
+  border: 1px solid rgba(201,162,39,.32);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #181416 0%, #0e0d0f 100%);
+  box-shadow: 0 18px 50px rgba(0,0,0,.58), inset 0 1px rgba(255,255,255,.025);
+}
+
+.sortMenuLabel {
+  display: block;
+  padding: 5px 8px 7px;
+  color: #806f5e;
+  font: 700 9px/1 var(--font-geist);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.sortMenu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 9px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #bcae9d;
+  text-align: left;
+  font: 500 11px/1.3 var(--font-geist);
+  cursor: pointer;
+}
+
+.sortMenu button:hover,
+.sortMenu .sortOptionActive {
+  color: #ecd7b4;
+  background: linear-gradient(90deg, rgba(201,162,39,.105), rgba(141,40,50,.055));
+}
+
+.sortCheck { color: #cda64e; font-size: 11px; }
+
+.filterPanel {
+  padding: 4px 10px 12px;
+  border-top: 1px solid rgba(201,162,39,.12);
+  animation: ravenFilterReveal .16s ease-out;
+}
+
+@keyframes ravenFilterReveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.filterPanelHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 38px;
+  padding: 5px 2px 7px;
+  color: #927f68;
+  font: 600 10px/1 var(--font-geist);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.filterPanel .clearBtn {
+  min-height: 28px;
+  padding: 5px 8px;
+  border: 1px solid rgba(201,162,39,.22);
+  border-radius: 6px;
+  background: rgba(201,162,39,.035);
+  color: #c9a969;
+  text-decoration: none;
+  font: 600 9px/1 var(--font-geist);
+  letter-spacing: .04em;
+  text-transform: none;
+}
+
+.filterSelectStack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 9px;
+  width: min(420px, 100%);
+}
+
+.filterSelectStack label {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.filterSelectStack label > span {
+  padding-left: 2px;
+  color: #76695d;
+  font: 600 9px/1 var(--font-geist);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.filterSelectStack :global(.te-select) { width: 100%; min-width: 0; }
+.filterSelectStack :global(.te-select-trigger) {
+  min-height: 38px;
+  padding: 7px 9px;
+  border-color: rgba(201,162,39,.22);
+  border-radius: 7px;
+  background: linear-gradient(145deg, rgba(29,23,22,.88), rgba(13,12,14,.92));
+  font-size: 11px;
+}
+.filterSelectStack :global(.te-select-panel) {
+  z-index: 90;
+  border-color: rgba(201,162,39,.32);
+  background: #121014;
+}
+.filterSelectStack :global(.te-select-option) { padding: 8px 10px; font-size: 11px; }
+
+@media (max-width: 720px) {
+  .tabBar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+  }
+  .tabBtn {
+    gap: 2px;
+    padding: 9px 2px;
+    font-size: 9.5px;
+    letter-spacing: -.01em;
+  }
+  .tabLabelMobile {
+    display: inline;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+  .tabCount {
+    min-width: 15px;
+    height: 15px;
+    margin-left: 1px;
+    padding: 0 2px;
+    font-size: 8px;
+  }
+  .filterToolbar { margin-bottom: 12px; }
+  .filterToolbarRow { min-height: 44px; }
+  .filterSelectStack { grid-template-columns: 1fr; gap: 9px; }
+  .filterPanel { padding: 5px 9px 11px; }
+  .filterToolbarRule { margin-inline: 7px; }
+}
+
+@media (max-width: 360px) {
+  .tabBtn { font-size: 8.75px; padding-inline: 1px; }
+  .tabCount { min-width: 14px; height: 14px; font-size: 7.5px; }
+}

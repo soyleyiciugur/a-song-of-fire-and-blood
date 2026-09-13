@@ -19,7 +19,13 @@ export async function GET() {
     const liveUsers=(profiles??[]).map(p=>({id:p.id,username:p.username,displayName:p.display_name,kind:"member" as const,bio:p.bio??"",avatar:p.display_name.slice(0,2).toUpperCase(),avatarUrl:p.avatar_url,color:"#65353d",profileHref:`/users/${p.username}`,role:p.role}));
     const viewerRole=liveUsers.find(p=>p.id===user?.id)?.role,mayModerate=viewerRole==="moderator"||viewerRole==="admin";
     snapshot.users.push(...liveUsers);
-    snapshot.forumThreads.push(...(threads??[]).map(t=>({id:t.id,title:t.title,body:t.body,category:t.category,chapterSlug:t.chapter_slug,chapterTitle:null,spoilerThrough:t.spoiler_through??"current discussion",authorId:t.user_author_id??t.legacy_author_id??t.character_id??"",publishedAt:t.created_at,authorType:t.author_type,canEdit:!!user&&(t.user_author_id===user.id||mayModerate)})));
+    const chapterBySlug = new Map((chapters as { slug: string; title: string }[]).map((chapter) => [chapter.slug, chapter.title]));
+    snapshot.forumThreads.push(...(threads??[]).map(t=>{
+      const chapterTitle=t.chapter_slug?chapterBySlug.get(t.chapter_slug)??null:null;
+      const storedTitle=typeof t.title==="string"?t.title.trim():"";
+      const title=chapterTitle?`${chapterTitle} — Discussion Thread`:storedTitle||"Tavern Discussion";
+      return {id:t.id,title,body:t.body,category:t.category,chapterSlug:t.chapter_slug,chapterTitle,spoilerThrough:t.spoiler_through??"current discussion",authorId:t.user_author_id??t.legacy_author_id??t.character_id??"",publishedAt:t.created_at,authorType:t.author_type,canEdit:!!user&&(t.user_author_id===user.id||mayModerate)};
+    }));
     const { data: favors } = await supabase.rpc("member_like_counts", {kind:"post",targets:(posts??[]).map(p=>p.id)});
     const favorCounts = new Map((favors??[]).map((r:{target_id:string;total:number})=>[r.target_id,Number(r.total)]));
     snapshot.comments.push(...(posts??[]).map(p=>({id:p.id,entryId:p.thread_id,parentId:p.parent_id,body:p.body,authorId:p.user_author_id??p.legacy_author_id??p.character_id??"",publishedAt:p.created_at,surface:"forum" as const,upvotes:favorCounts.get(p.id)??0,authorType:p.author_type,canEdit:!!user&&(p.user_author_id===user.id||mayModerate)})),...(raven??[]).map(c=>({id:c.id,entryId:c.entry_id,parentId:c.parent_id,body:c.body,authorId:c.user_author_id??c.legacy_author_id??c.character_id??"",publishedAt:c.created_at,authorType:c.author_type,canEdit:!!user&&(c.user_author_id===user.id||mayModerate)})));

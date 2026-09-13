@@ -153,39 +153,17 @@ function paginateContent(
     usedHeight = 0;
   };
 
-  for (const rawBlock of blocks) {
-    const block = rawBlock.trim();
-    if (!block) continue;
-
-    // Images and ornamental dividers are atomic. Text is allowed to flow
-    // across a page boundary so one JSON paragraph no longer equals one page.
-    if (IMAGE_RE.test(block) || block === DIVIDER_MARKER) {
-      const h = measure(block);
-      if (current.length && usedHeight + h > columnHeightPx) pushPage();
-      current.push(block);
-      usedHeight += h;
-      continue;
-    }
-
+  const splitOversizedParagraph = (block: string) => {
     let words = block.split(/\s+/).filter(Boolean);
     while (words.length) {
-      const remaining = Math.max(0, columnHeightPx - usedHeight);
-
-      // If nothing useful can fit below existing content, continue the same
-      // paragraph on a fresh page instead of moving the whole paragraph.
-      if (current.length && remaining < (mobile ? 34 : 40)) {
-        pushPage();
-        continue;
-      }
-
-      const targetHeight = current.length ? remaining : columnHeightPx;
       let low = 1;
       let high = words.length;
       let fit = 0;
+
       while (low <= high) {
         const mid = Math.floor((low + high) / 2);
         const candidate = words.slice(0, mid).join(" ");
-        if (measure(candidate) <= targetHeight) {
+        if (measure(candidate) <= columnHeightPx) {
           fit = mid;
           low = mid + 1;
         } else {
@@ -193,22 +171,45 @@ function paginateContent(
         }
       }
 
-      // On a partly-filled page the next word may not fit. Continue the same
-      // paragraph on a fresh page; on an empty page always make progress.
-      if (fit === 0 && current.length) {
-        pushPage();
-        continue;
-      }
+      // Extremely long unbroken tokens still need to make progress.
       if (fit === 0) fit = 1;
-
       const chunk = words.slice(0, fit).join(" ");
-      const h = measure(chunk);
       current.push(chunk);
-      usedHeight += h;
+      usedHeight = measure(chunk);
       words = words.slice(fit);
-
       if (words.length) pushPage();
     }
+  };
+
+  for (const rawBlock of blocks) {
+    const block = rawBlock.trim();
+    if (!block) continue;
+
+    const height = measure(block);
+
+    // Images, dividers and normal JSON paragraph blocks are atomic whenever
+    // they can fit on an empty page. If a complete paragraph would cross the
+    // bottom reading boundary, move the whole paragraph to the next page.
+    if (height <= columnHeightPx) {
+      if (current.length && usedHeight + height > columnHeightPx) pushPage();
+      current.push(block);
+      usedHeight += height;
+      continue;
+    }
+
+    // Only paragraphs taller than a page by themselves are split. This keeps
+    // ordinary source paragraphs intact while preventing genuinely huge blocks
+    // from overflowing the paper. Images/dividers stay atomic.
+    if (IMAGE_RE.test(block) || block === DIVIDER_MARKER) {
+      if (current.length) pushPage();
+      current.push(block);
+      usedHeight = Math.min(height, columnHeightPx);
+      pushPage();
+      continue;
+    }
+
+    if (current.length) pushPage();
+    splitOversizedParagraph(block);
   }
 
   pushPage();

@@ -3,13 +3,61 @@
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import SearchableSelect from "@/components/SearchableSelect";
-import { CALENDAR_LABELS, calendarDateLabel, calendarHref, eventsInMoon, eventsOnDay, ordinal, type CalendarDate, type CalendarEvent } from "@/lib/calendar";
+import MiniPortrait from "@/components/MiniPortrait";
+import { CALENDAR_LABELS, calendarDateLabel, calendarHref, eventsInMoon, eventsOnDay, ordinal, type CalendarCharacterRef, type CalendarDate, type CalendarEvent } from "@/lib/calendar";
 import styles from "./realmCalendar.module.css";
 
 type Props = { today: CalendarDate; events: CalendarEvent[]; compact?: boolean; initialDate?: CalendarDate };
 
 function Arrow({ right = false }: { right?: boolean }) {
   return <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d={right ? "m6 3 5 5-5 5" : "m10 3-5 5 5 5"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+const TITLE_PREFIXES = /^(?:Grand Maester|Maester|Ser|King|Queen|Prince|Princess|Lord|Lady)\s+/i;
+
+function characterTitleCandidates(character: CalendarCharacterRef): string[] {
+  const plainName = character.name.replace(TITLE_PREFIXES, "");
+  const firstName = plainName.split(/\s+/)[0];
+  return [...new Set([character.name, plainName, character.nickname, firstName].filter((value): value is string => Boolean(value && value.length >= 3)))]
+    .sort((a, b) => b.length - a.length);
+}
+
+function renderCalendarTitle(title: string, characters: CalendarCharacterRef[] = []) {
+  if (!characters.length) return title;
+
+  const matches: Array<{ start: number; end: number; character: CalendarCharacterRef }> = [];
+  for (const character of characters) {
+    for (const candidate of characterTitleCandidates(character)) {
+      const index = title.toLocaleLowerCase().indexOf(candidate.toLocaleLowerCase());
+      if (index < 0) continue;
+      const before = title[index - 1];
+      const after = title[index + candidate.length];
+      if ((before && /[A-Za-z]/.test(before)) || (after && /[A-Za-z]/.test(after))) continue;
+      matches.push({ start: index, end: index + candidate.length, character });
+      break;
+    }
+  }
+
+  const accepted = matches
+    .sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start))
+    .filter((match, index, all) => !all.slice(0, index).some(previous => match.start < previous.end && match.end > previous.start));
+
+  if (!accepted.length) return title;
+
+  const parts: React.ReactNode[] = [];
+  let cursor = 0;
+  accepted.forEach((match, index) => {
+    if (match.start > cursor) parts.push(title.slice(cursor, match.start));
+    parts.push(
+      <span className={styles.inlineCharacter} key={`${match.character.id}-${match.start}-${index}`}>
+        <MiniPortrait id={match.character.id} alt={match.character.name} size={18} className={styles.inlinePortrait} fallbackGlyph="✦" />
+        <span>{title.slice(match.start, match.end)}</span>
+      </span>,
+    );
+    cursor = match.end;
+  });
+  if (cursor < title.length) parts.push(title.slice(cursor));
+  return parts;
 }
 
 export default function RealmCalendar({ today, events, compact = false, initialDate }: Props) {
@@ -28,7 +76,7 @@ export default function RealmCalendar({ today, events, compact = false, initialD
   };
   const eventCard = (event: CalendarEvent) => <article key={event.id} className={styles.event}>
     <div className={styles.eventMeta}><span className={styles.eventType} data-kind={event.type}>{CALENDAR_LABELS[event.type] ?? "Chronicle"}</span>{event.location && <span>{event.location}</span>}</div>
-    <h4>{event.title}</h4>
+    <h4>{renderCalendarTitle(event.title, event.characters)}</h4>
     {event.dateLabel && <small>{event.dateLabel}</small>}
     <p>{event.description}</p>
     {event.href && <Link href={event.href}>{event.type === "nameday" ? "View character" : event.chapterTitle ?? "Read the chapter"} <span aria-hidden="true">→</span></Link>}
@@ -69,7 +117,7 @@ export default function RealmCalendar({ today, events, compact = false, initialD
           }}>
           <span className={styles.dayNumber}>{day}</span>
           <span className={styles.dots} aria-hidden="true">{kinds.slice(0, 3).map(kind => <i key={kind} data-kind={kind} />)}{kinds.length > 3 && <span>+</span>}</span>
-          {!compact && entries.length > 0 && <span className={styles.dayCaption}>{entries[0].title}{entries.length > 1 && <small>+{entries.length - 1} more</small>}</span>}
+          {!compact && entries.length > 0 && <span className={styles.dayCaption}>{renderCalendarTitle(entries[0].title, entries[0].characters)}{entries.length > 1 && <small>+{entries.length - 1} more</small>}</span>}
         </button>;
       })}
       {Array.from({ length: 5 }, (_, index) => <span key={`blank-${index}`} className={styles.blankDay} aria-hidden="true" />)}

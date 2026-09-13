@@ -8,6 +8,7 @@ import type { AffinityField, AffinityOption } from "@/lib/profileAffinity";
 import { Select } from "@/app/_components/Select";
 import styles from "./settings.module.css";
 import PushNotificationSettings from "@/components/pwa/PushNotificationSettings";
+import NotificationCustomizationSettings from "@/components/pwa/NotificationCustomizationSettings";
 
 const THEMES = [
   ["default", "Default"], ["dragonfire", "Dragonfire"], ["winterfell", "Winterfell"],
@@ -136,6 +137,6 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
       </fieldset>
       {message && <p className={styles.status} role="status">{message}</p>}
     </form>
-    <div className={styles.notificationsBlock}><PushNotificationSettings /></div>
+    <div className={styles.notificationsBlock} id="raven-notifications"><NotificationCustomizationSettings /><PushNotificationSettings /></div>
   </section></main>;
 }
