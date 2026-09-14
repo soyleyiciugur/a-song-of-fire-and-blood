@@ -55,6 +55,7 @@ type Props = {
   blockedByThem: boolean;
   initialLastReadAt?: string | null;
   focusUnread?: boolean;
+  focusMessageId?: string | null;
 };
 
 export default function RavenConversation({
@@ -70,6 +71,7 @@ export default function RavenConversation({
   blockedByThem: initialBlockedByThem,
   initialLastReadAt = null,
   focusUnread = false,
+  focusMessageId = null,
 }: Props) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState(initialMessages);
@@ -102,9 +104,10 @@ export default function RavenConversation({
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  const nearBottom = useRef(!focusUnread);
+  const nearBottom = useRef(false);
   const loadedMessages = useRef(messages);
   const sendLock = useRef(false);
+  const openedReadDone = useRef(false);
 
   const activeConversation: DirectRavenConversation = conversation ?? {
     id: conversationId, user_a: userId, user_b: partner?.id ?? null, kind: "raven", title: null, description: null, avatar_path: null, owner_id: null, created_at: "", updated_at: "",
@@ -115,10 +118,12 @@ export default function RavenConversation({
     ...messages.map((message) => ({ type: "message" as const, at: message.created_at, id: message.id, message })),
     ...systemEvents.map((event) => ({ type: "system" as const, at: event.created_at, id: event.id, event })),
   ].sort((a, b) => Date.parse(a.at) - Date.parse(b.at) || a.id.localeCompare(b.id)), [messages, systemEvents]);
-  const firstUnreadId = useMemo(() => messages.find((message) =>
+  const unreadMessages = useMemo(() => initialMessages.filter((message) =>
     message.sender_id !== userId && !message.deleted_at && (!initialLastReadAt || message.created_at > initialLastReadAt)
-  )?.id ?? null, [messages, userId, initialLastReadAt]);
-  const unreadFocusDone = useRef(false);
+  ), [initialMessages, userId, initialLastReadAt]);
+  const firstUnreadId = unreadMessages[0]?.id ?? null;
+  const unreadCount = unreadMessages.length;
+  const initialPositionDone = useRef(false);
   const systemEventText = (event: DirectRavenSystemEvent) => {
     const actor = typeof event.detail.actorName === "string" ? event.detail.actorName : memberMap.get(event.actor_id ?? "")?.display_name ?? "A member";
     const target = typeof event.detail.targetName === "string" ? event.detail.targetName : memberMap.get(event.target_user_id ?? "")?.display_name ?? "a member";
@@ -191,14 +196,33 @@ export default function RavenConversation({
   }, [messages]);
 
   useLayoutEffect(() => {
-    if (!focusUnread || unreadFocusDone.current || !firstUnreadId) return;
-    const target = document.getElementById(`raven-${firstUnreadId}`);
-    if (!target) return;
-    unreadFocusDone.current = true;
-    target.scrollIntoView({ block: "center" });
+    if (initialPositionDone.current) return;
     const element = listRef.current;
-    if (element) nearBottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 80;
-  }, [focusUnread, firstUnreadId]);
+    if (!element) return;
+
+    if (focusMessageId) {
+      const target = document.getElementById(`raven-${focusMessageId}`);
+      if (!target) return;
+      initialPositionDone.current = true;
+      target.scrollIntoView({ block: "center" });
+      nearBottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 80;
+      return;
+    }
+
+    if (firstUnreadId) {
+      const divider = document.getElementById("raven-unread-divider");
+      if (!divider) return;
+      initialPositionDone.current = true;
+      const targetTop = divider.offsetTop - element.clientHeight * 0.22;
+      element.scrollTop = Math.max(0, targetTop);
+      nearBottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 80;
+      return;
+    }
+
+    initialPositionDone.current = true;
+    element.scrollTop = element.scrollHeight;
+    nearBottom.current = true;
+  }, [focusMessageId, firstUnreadId]);
 
   useEffect(() => {
     if (!file) {
@@ -280,6 +304,35 @@ export default function RavenConversation({
 
 
   useEffect(() => {
+    if (openedReadDone.current || document.visibilityState !== "visible") return;
+    const latest = loadedMessages.current.at(-1);
+    if (!latest) return;
+    openedReadDone.current = true;
+
+    const markOpenedRead = async () => {
+      const readAt = new Date().toISOString();
+      const { error: readError } = await supabase.from("direct_raven_reads").upsert(
+        { conversation_id: conversationId, user_id: userId, last_read_at: latest.created_at },
+        { onConflict: "conversation_id,user_id" }
+      );
+      if (readError) return;
+
+      await supabase
+        .from("site_notifications")
+        .update({ read_at: readAt })
+        .eq("user_id", userId)
+        .is("read_at", null)
+        .contains("context", { conversationId });
+
+      window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId } }));
+      window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
+    };
+
+    void markOpenedRead();
+  }, [conversationId, supabase, userId]);
+
+
+  useEffect(() => {
     let active = true;
 
     const markNotificationRead = async (notificationId?: string) => {
@@ -304,6 +357,22 @@ export default function RavenConversation({
       if (!lastReadAt) return;
       const { error: readError } = await supabase.from("direct_raven_reads").upsert(
         { conversation_id: conversationId, user_id: userId, last_read_at: lastReadAt },
+        { onConflict: "conversation_id,user_id" }
+      );
+      if (readError) return;
+      await markNotificationRead();
+      window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId } }));
+    };
+
+    const markConversationOpened = async () => {
+      if (document.visibilityState !== "visible") return;
+      const latest = loadedMessages.current.at(-1);
+      if (!latest) {
+        await markNotificationRead();
+        return;
+      }
+      const { error: readError } = await supabase.from("direct_raven_reads").upsert(
+        { conversation_id: conversationId, user_id: userId, last_read_at: latest.created_at },
         { onConflict: "conversation_id,user_id" }
       );
       if (readError) return;
@@ -357,7 +426,7 @@ export default function RavenConversation({
       void markReadAt();
     };
 
-    if (!focusUnread || !firstUnreadId) scrollBottom();
+    void markConversationOpened();
     void sync();
 
     const channel = supabase
@@ -424,18 +493,18 @@ export default function RavenConversation({
   }
 
   function addPortrait(id: string) {
-    const parsed = parseRavenBody(body);
+    const parsed = parseRavenBody(body, true);
     if (parsed.portraitIds.length >= MAX_PORTRAITS) {
       setError(`You can insert up to ${MAX_PORTRAITS} mini portraits to one raven.`);
       return;
     }
     setError("");
-    setBody(encodeRavenBody(parsed.text, [...parsed.portraitIds, id]));
+    setBody(encodeRavenBody(parsed.text, [...parsed.portraitIds, id], true));
   }
 
   function removeDraftPortrait(index: number) {
-    const parsed = parseRavenBody(body);
-    setBody(encodeRavenBody(parsed.text, parsed.portraitIds.filter((_, portraitIndex) => portraitIndex !== index)));
+    const parsed = parseRavenBody(body, true);
+    setBody(encodeRavenBody(parsed.text, parsed.portraitIds.filter((_, portraitIndex) => portraitIndex !== index), true));
   }
 
   function beginEdit(message: DirectRavenMessage) {
@@ -451,43 +520,59 @@ export default function RavenConversation({
 
   async function send(event: React.FormEvent) {
     event.preventDefault();
-    const encodedBody = body.trim();
-    if ((!encodedBody && !file && !gif) || sendLock.current || closed) return;
+    const outgoingBody = body.trim();
+    const outgoingFile = file;
+    const outgoingGif = gif;
+    const outgoingReply = reply;
+    const outgoingEditing = editing;
+    if ((!outgoingBody && !outgoingFile && !outgoingGif) || sendLock.current || closed) return;
 
     sendLock.current = true;
     setSending(true);
     setError("");
     let path: string | null = null;
 
+    // A sent raven should feel immediate: clear the submitted draft while keeping
+    // the composer mounted and focused so the next message can be typed at once.
+    if (!outgoingEditing) {
+      setBody("");
+      setGif(null);
+      setGifOpen(false);
+      setFile(null);
+      setReply(null);
+      resetDraftExtras();
+      requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
+    }
+
     try {
-      if (file && !editing) {
+      if (outgoingFile && !outgoingEditing) {
         const extension = {
           "image/jpeg": "jpg",
           "image/png": "png",
           "image/webp": "webp",
           "image/gif": "gif",
-        }[file.type];
+        }[outgoingFile.type];
         path = `${conversationId}/${userId}/${crypto.randomUUID()}.${extension}`;
         const { error: uploadError } = await supabase.storage
           .from("raven-media")
-          .upload(path, file, { contentType: file.type });
+          .upload(path, outgoingFile, { contentType: outgoingFile.type });
         if (uploadError) throw Error("The image could not be uploaded. Please try again.");
       }
 
-      const query = editing
+      const query = outgoingEditing
         ? supabase
             .from("direct_raven_messages")
-            .update({ body: encodedBody })
-            .eq("id", editing)
+            .update({ body: outgoingBody })
+            .eq("id", outgoingEditing)
             .eq("sender_id", userId)
             .is("deleted_at", null)
         : supabase.from("direct_raven_messages").insert({
             conversation_id: conversationId,
             sender_id: userId,
-            body: encodedBody,
-            ...(gif ? {gif} : {}),
+            body: outgoingBody,
+            ...(outgoingGif ? { gif: outgoingGif } : {}),
             ...(path ? { attachment_path: path } : {}),
-            ...(reply ? { reply_to: reply.id } : {}),
+            ...(outgoingReply ? { reply_to: outgoingReply.id } : {}),
           });
 
       const { data, error: sendError } = await query.select("*").single();
@@ -498,15 +583,13 @@ export default function RavenConversation({
           ? current.map((message) => (message.id === data.id ? data : message))
           : [...current, data]
       );
-      setBody("");
-      setGif(null);
-      setGifOpen(false);
-      setFile(null);
-      setReply(null);
-      setEditing(null);
-      resetDraftExtras();
+      if (outgoingEditing) {
+        setBody("");
+        setEditing(null);
+        resetDraftExtras();
+      }
       window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId } }));
-      if (!editing) requestAnimationFrame(() => {
+      if (!outgoingEditing) requestAnimationFrame(() => {
         void fetch("/api/notifications/direct-raven", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -515,10 +598,17 @@ export default function RavenConversation({
       });
     } catch (caught) {
       if (path) await supabase.storage.from("raven-media").remove([path]);
+      if (!outgoingEditing) {
+        setBody((current) => current.length ? current : body);
+        if (outgoingGif) setGif((current) => current ?? outgoingGif);
+        if (outgoingFile) setFile((current) => current ?? outgoingFile);
+        if (outgoingReply) setReply((current) => current ?? outgoingReply);
+      }
       setError(caught instanceof Error ? caught.message : "Could not send. Please try again.");
     } finally {
       sendLock.current = false;
       setSending(false);
+      requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
     }
   }
 
@@ -687,7 +777,7 @@ export default function RavenConversation({
               {(!previousAt || day(message.created_at) !== day(previousAt)) && (
                 <div className={styles.dateDivider}>{day(message.created_at)}</div>
               )}
-              {message.id === firstUnreadId && <div className={styles.unreadDivider}><span>Unread ravens</span></div>}
+              {message.id === firstUnreadId && <div id="raven-unread-divider" className={styles.unreadDivider}><span>{unreadCount} unread {unreadCount === 1 ? "raven" : "ravens"}</span></div>}
               <div id={`raven-${message.id}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
                 {isGuild && !mine && (() => {
                   const sender = memberMap.get(message.sender_id);
@@ -722,7 +812,7 @@ export default function RavenConversation({
                     />
                   )}
                   {!message.deleted_at && message.gif && /^https:\/\/media[0-9]*\.giphy\.com\/media\//.test(message.gif.url) && <div className={styles.attachment}><img src={message.gif.url} alt={message.gif.title||"GIPHY GIF"} onLoad={()=>{if(nearBottom.current)scrollBottom();}}/><small>GIPHY</small></div>}
-                  {message.deleted_at ? <p>This raven was withdrawn.</p> : <RavenMessageContent body={message.body} />}
+                  {message.deleted_at ? <p>This raven was withdrawn.</p> : <RavenMessageContent body={message.body} returnTo={`/messages/${conversationId}?focus=${message.id}`} />}
                   <div className={styles.messageFooter}>
                     {!message.deleted_at && <div className={styles.messageActions}>
                       <MessageReactions messageId={message.id} userId={userId} />
@@ -838,7 +928,7 @@ export default function RavenConversation({
             {pickerOpen && (
               <div className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
                 {pickerTab === "emoji" ? (
-                  <EmojiPicker onSelect={(emoji) => setBody((value) => encodeRavenBody((parseRavenBody(value).text + emoji).slice(0, 4000), parseRavenBody(value).portraitIds))} />
+                  <EmojiPicker onSelect={(emoji) => setBody((value) => encodeRavenBody((parseRavenBody(value, true).text + emoji).slice(0, 4000), parseRavenBody(value, true).portraitIds, true))} />
                 ) : (
                   <div className={styles.portraitPicker}>
                     <input
@@ -853,7 +943,7 @@ export default function RavenConversation({
                         <button
                           key={character.id}
                           type="button"
-                          disabled={sending || parseRavenBody(body).portraitIds.length >= MAX_PORTRAITS}
+                          disabled={sending || parseRavenBody(body, true).portraitIds.length >= MAX_PORTRAITS}
                           onClick={() => addPortrait(character.id)}
                           title={character.name}
                           aria-label={`Add ${character.name} mini portrait`}
@@ -870,8 +960,8 @@ export default function RavenConversation({
 
             <form className={styles.composer} onSubmit={send}>
               <div className={styles.richComposerInput}>
-                {parseRavenBody(body).portraitIds.length > 0 && <div className={styles.draftPortraits} aria-label="Mini portraits in this raven">
-                  {parseRavenBody(body).portraitIds.map((id, index) => {
+                {parseRavenBody(body, true).portraitIds.length > 0 && <div className={styles.draftPortraits} aria-label="Mini portraits in this raven">
+                  {parseRavenBody(body, true).portraitIds.map((id, index) => {
                     const option = portraitCharacters.find((character) => character.id === id);
                     return <span key={`${id}-${index}`} className={styles.draftPortrait}>
                       <MiniPortrait id={id} alt={option?.name ?? id} size={28} fallbackSrc={option?.fallbackSrc} />
@@ -883,9 +973,9 @@ export default function RavenConversation({
                 </div>}
               <textarea
                 ref={inputRef}
-                disabled={sending}
-                value={parseRavenBody(body).text}
-                onChange={(event) => setBody(encodeRavenBody(event.target.value, parseRavenBody(body).portraitIds))}
+                disabled={sending && !!editing}
+                value={parseRavenBody(body, true).text}
+                onChange={(event) => setBody(encodeRavenBody(event.target.value, parseRavenBody(body, true).portraitIds, true))}
                 maxLength={4000}
                 rows={2}
                 placeholder={isGuild ? "Write to the Guild Parley…" : "Write your raven…"}

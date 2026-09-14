@@ -49,27 +49,34 @@ function reelSummary(id: string) {
   return caption ? `Gutter Reel · ${caption}` : "Gutter Reel";
 }
 
-export function parseRavenBody(value: string) {
+export function parseRavenBody(value: string, preserveWhitespace = false) {
   const portraitIds: string[] = [];
-  const text = value
+  const normalized = value
     .replace(PORTRAIT_TOKEN, (_match, id: string) => {
       portraitIds.push(id.toLowerCase());
       return "";
     })
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
+    .replace(/\n{3,}/g, "\n\n");
+  const text = preserveWhitespace
+    ? normalized.replace(/\n[ \t]*$/, "")
+    : normalized.trim();
 
   return { text, portraitIds };
 }
 
-export function encodeRavenBody(text: string, portraitIds: string[]) {
-  const cleanText = text.trim();
+export function encodeRavenBody(text: string, portraitIds: string[], preserveWhitespace = false) {
+  const cleanText = preserveWhitespace ? text.replace(/\n{3,}/g, "\n\n") : text.trim();
   const tokens = portraitIds.map((id) => `[[portrait:${id}]]`).join(" ");
   return [cleanText, tokens].filter(Boolean).join("\n");
 }
 
 export function ravenBodySummary(value: string) {
   const reelMatch = /\[\[reel:([a-z0-9-]+)\]\]/i.exec(value);
+  const visibleText = value
+    .replace(CONTENT_TOKEN, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (visibleText) return visibleText;
   if (reelMatch) return reelSummary(reelMatch[1].toLowerCase());
 
   const { text, portraitIds } = parseRavenBody(value);
@@ -97,7 +104,7 @@ export function RavenMessagePreview({ body }: { body: string }) {
   })}</>;
 }
 
-export default function RavenMessageContent({ body }: { body: string }) {
+export default function RavenMessageContent({ body, returnTo }: { body: string; returnTo?: string }) {
   return <p>{body.split(CONTENT_TOKEN).map((part, index) => {
     const portraitMatch = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
     if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
@@ -111,7 +118,11 @@ export default function RavenMessageContent({ body }: { body: string }) {
       const entry = reelMap.get(id);
       if (!entry) return <span key={index}>Shared Gutter Reel</span>;
       return (
-        <Link key={index} href={`/ravens-eye/reels?item=${encodeURIComponent(id)}`} className={styles.sharedReelCard}>
+        <Link
+          key={index}
+          href={`/ravens-eye/reels?item=${encodeURIComponent(id)}${returnTo ? `&returnTo=${encodeURIComponent(returnTo)}` : ""}`}
+          className={styles.sharedReelCard}
+        >
           <span className={styles.sharedReelPoster}>
             <img src={reelPosterSrc(entry.src)} alt="" loading="lazy" decoding="async" />
             <span className={styles.sharedReelPlay} aria-hidden="true">

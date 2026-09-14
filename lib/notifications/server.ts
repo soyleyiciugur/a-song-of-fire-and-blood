@@ -171,7 +171,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
       }).eq("id", recent.id).select("*").single();
       const [{ data: subscriptions }, unreadResult] = await Promise.all([
         admin.from("push_subscriptions").select("endpoint,p256dh,auth").eq("user_id", input.recipientUserId),
-        admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null),
+        admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null).neq("source", "direct-raven").neq("source", "guild-parley"),
       ]);
       const badgeCount = unreadResult.count ?? undefined;
       const notificationUrl = `/notifications?open=${encodeURIComponent(recent.id)}`;
@@ -244,7 +244,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
 
   const [{ data: subscriptions }, unreadResult] = await Promise.all([
     admin.from("push_subscriptions").select("endpoint,p256dh,auth").eq("user_id", input.recipientUserId),
-    admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null),
+    admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null).neq("source", "direct-raven").neq("source", "guild-parley"),
   ]);
   const badgeCount = unreadResult.count ?? undefined;
   const mascotMeta = MASCOT_META[mascot];

@@ -32,7 +32,7 @@ export default function NotificationNavButton() {
       await syncBadge(0, false);
       return;
     }
-    const { count, error } = await supabase.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", id).is("read_at", null);
+    const { count, error } = await supabase.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", id).is("read_at", null).neq("source", "direct-raven").neq("source", "guild-parley");
     if (error || request !== refreshRequest.current) return;
     const next = count ?? 0;
     if (initialized.current && next > previousUnread.current) playRavenSound("notification");

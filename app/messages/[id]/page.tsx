@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import RavenConversation from "@/components/direct-raven/RavenConversation";
 import { loadDirectRavenConversationOnly } from "@/lib/directRaven";
 
-export default async function DirectRavenConversationPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ unread?: string }> }) {
+export default async function DirectRavenConversationPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ unread?: string; focus?: string }> }) {
   const { id } = await params;
   const query = await searchParams;
   const data = await loadDirectRavenConversationOnly(id);
@@ -24,6 +24,7 @@ export default async function DirectRavenConversationPage({ params, searchParams
       blockedByThem={data.blockedByThem}
       initialLastReadAt={data.initialLastReadAt}
       focusUnread={query.unread === "1"}
+      focusMessageId={query.focus ?? null}
     />
   );
 }

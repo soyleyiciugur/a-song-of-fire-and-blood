@@ -710,6 +710,7 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState("");
   const [copied, setCopied] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -747,7 +748,7 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
       const response = await fetch("/api/direct-raven/share-reel", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ entryId: entry.id, conversationIds: selected }),
+        body: JSON.stringify({ entryId: entry.id, conversationIds: selected, message }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || "The reel could not be sent.");
@@ -803,6 +804,17 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
             <p>{entry.caption || "A reel from Flea Bottom"}</p>
           </div>
         </div>
+
+        <label className={styles.reelShareMessage}>
+          <span>Add a message</span>
+          <textarea
+            value={message}
+            onChange={(event) => setMessage(event.target.value.slice(0, 1200))}
+            placeholder="Say something with this reel…"
+            rows={2}
+            maxLength={1200}
+          />
+        </label>
 
         <label className={styles.reelShareSearch}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.8" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="m15 15 5 5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
@@ -917,11 +929,6 @@ function ReelSlide({
     if (initialCommentsOpen) setCommentsOpen(true);
   }, [initialCommentsOpen]);
 
-  const pauseForPanel = () => {
-    videoRef.current?.pause();
-    setIsPlaying(false);
-  };
-
   const flashIcon = () => {
     setShowIcon(true);
     if (iconTimeout.current) clearTimeout(iconTimeout.current);
@@ -1002,49 +1009,49 @@ function ReelSlide({
         )}
       </div>
 
-      <div className={styles.reelActionRail} aria-label="Reel actions">
-        <button
-          type="button"
-          className={styles.reelActionButton}
-          onClick={(event) => {
-            event.stopPropagation();
-            pauseForPanel();
-            setShareOpen(false);
-            setCommentsOpen(true);
-          }}
-          aria-label={`Open ${getGutterComments(entry.id).length} comments`}
-        >
-          <span className={styles.reelActionIcon}><CommentGlyph /></span>
-          <small>{getGutterComments(entry.id).length}</small>
-        </button>
-        <button
-          type="button"
-          className={styles.reelActionButton}
-          onClick={(event) => {
-            event.stopPropagation();
-            pauseForPanel();
-            setCommentsOpen(false);
-            setShareOpen(true);
-          }}
-          aria-label="Share this reel"
-        >
-          <span className={styles.reelActionIcon}><ShareGlyph /></span>
-        </button>
-      </div>
-
-      {(entry.caption || flatTagsFor(entry).length > 0) && (
-        <div className={styles.reelSlideMeta}>
-          {entry.caption && (
-            <ExpandableCaption
-              text={entry.caption}
-              className={styles.reelCaption}
-              limit={165}
-              scrollWhenExpanded
-            />
-          )}
-          <GroupedTags entry={entry} small />
+      <div className={styles.reelDesktopCluster}>
+        <div className={styles.reelActionRail} aria-label="Reel actions">
+          <button
+            type="button"
+            className={styles.reelActionButton}
+            onClick={(event) => {
+              event.stopPropagation();
+              setShareOpen(false);
+              setCommentsOpen(true);
+            }}
+            aria-label={`Open ${getGutterComments(entry.id).length} comments`}
+          >
+            <span className={styles.reelActionIcon}><CommentGlyph /></span>
+            <small>{getGutterComments(entry.id).length}</small>
+          </button>
+          <button
+            type="button"
+            className={styles.reelActionButton}
+            onClick={(event) => {
+              event.stopPropagation();
+              setCommentsOpen(false);
+              setShareOpen(true);
+            }}
+            aria-label="Share this reel"
+          >
+            <span className={styles.reelActionIcon}><ShareGlyph /></span>
+          </button>
         </div>
-      )}
+
+        {(entry.caption || flatTagsFor(entry).length > 0) && (
+          <div className={styles.reelSlideMeta}>
+            {entry.caption && (
+              <ExpandableCaption
+                text={entry.caption}
+                className={styles.reelCaption}
+                limit={165}
+                scrollWhenExpanded
+              />
+            )}
+            <GroupedTags entry={entry} small />
+          </div>
+        )}
+      </div>
 
       {commentsOpen && <ReelCommentsSheet entry={entry} onClose={() => setCommentsOpen(false)} />}
       {shareOpen && <ReelShareSheet entry={entry} onClose={() => setShareOpen(false)} />}

@@ -2,6 +2,8 @@
   {
     "date": "2026-09-14",
     "items": [
+      "Refined Direct Raven unread handling with numbered dividers, upper-viewport unread positioning, immediate badge clearing on open, preserved spacing, and persistent composer focus after sending.",
+      "Aligned desktop Gutter Reel captions and tags to the right beneath the comment/share actions, fixed action taps from pausing video, and added optional text to shared Reel ravens with return-to-message navigation.",
       "Redesigned Gutter Reels with a translucent Instagram-style action rail, dedicated comments sheet and an in-world Direct Raven share panel.",
       "Made shared Gutter Reels appear as rich poster cards in Direct Raven and carry normal Raven and Guild Parley notifications to recipients.",
       "Added selective Raven's Eye conversations for the new Highgarden portraits and the Lorent, royal-brothers and Gaelor reels.",

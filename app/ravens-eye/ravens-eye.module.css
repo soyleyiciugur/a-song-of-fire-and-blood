@@ -1134,6 +1134,7 @@
 }
 
 /* Reels action rail + Direct Raven share sheet. */
+.reelDesktopCluster { display: contents; }
 .reelActionRail {
   position: absolute;
   z-index: 7;
@@ -1253,7 +1254,7 @@
 }
 .reelCommentsScroll > :first-child { margin-top: 0; border-top: 0; padding-top: 14px; }
 
-.reelShareSheet { grid-template-rows: auto auto auto minmax(90px, 1fr) auto auto; }
+.reelShareSheet { grid-template-rows: auto auto auto auto minmax(90px, 1fr) auto auto; }
 .reelSharePreview {
   display: grid;
   grid-template-columns: 46px minmax(0,1fr);
@@ -1269,6 +1270,33 @@
 .reelSharePreview > div { min-width: 0; }
 .reelSharePreview span { color: #ad8f64; font: 700 8px var(--font-geist); letter-spacing: .1em; text-transform: uppercase; }
 .reelSharePreview p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; margin: 4px 0 0; color: #d8c9b5; font: 12px/1.35 var(--font-geist); }
+.reelShareMessage {
+  display: grid;
+  gap: 6px;
+  margin: 0 13px 8px;
+}
+.reelShareMessage > span {
+  color: #9d886c;
+  font: 600 9px/1.2 var(--font-geist);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.reelShareMessage textarea {
+  width: 100%;
+  min-height: 58px;
+  max-height: 112px;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 9px 10px;
+  border: 1px solid rgba(104, 81, 61, .43);
+  border-radius: 9px;
+  outline: 0;
+  background: #121012;
+  color: #e5d8c6;
+  font: 12px/1.4 var(--font-geist);
+}
+.reelShareMessage textarea:focus { border-color: rgba(177, 135, 80, .72); }
+.reelShareMessage textarea::placeholder { color: #746b62; }
 .reelShareSearch {
   display: flex;
   align-items: center;
@@ -1372,4 +1400,61 @@
   .reelSheetHeader { padding-top: 12px; }
   .reelCommentsScroll { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
   .reelShareFooter { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+}
+
+/* Desktop reel composition: actions sit directly above right-aligned metadata. */
+@media (min-width: 721px) {
+  .reelDesktopCluster {
+    position: absolute;
+    z-index: 7;
+    right: calc(50vw - min(50vw, 28.125dvh) + 18px);
+    bottom: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    width: min(360px, calc(min(100vw, 56.25dvh) - 36px));
+    max-width: calc(100vw - 72px);
+    pointer-events: none;
+  }
+
+  .reelDesktopCluster .reelActionRail {
+    position: static;
+    display: grid;
+    justify-items: end;
+    gap: 12px;
+    pointer-events: auto;
+  }
+
+  .reelDesktopCluster .reelActionButton {
+    justify-items: end;
+  }
+
+  .reelDesktopCluster .reelSlideMeta {
+    position: static;
+    width: 100%;
+    padding: 74px 0 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.15) 25%, rgba(0,0,0,.58) 100%);
+    color: #fff;
+    text-align: right;
+    pointer-events: none;
+  }
+
+  .reelDesktopCluster .reelSlideMeta > * {
+    pointer-events: auto;
+  }
+
+  .reelDesktopCluster .reelCaption {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .reelDesktopCluster .tagGroups {
+    align-items: flex-end;
+  }
+
+  .reelDesktopCluster .tagGroup {
+    justify-content: flex-end;
+  }
 }

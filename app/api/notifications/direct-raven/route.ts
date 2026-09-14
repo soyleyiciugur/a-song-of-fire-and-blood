@@ -45,12 +45,16 @@ export async function POST(request: Request) {
   const reelLabel = reelEntry?.caption?.trim()
     ? `Shared a Gutter Reel: ${reelEntry.caption.trim()}`
     : "Shared a Gutter Reel";
+  const attachedText = message.body
+    .replace(/\[\[(?:portrait|reel):[a-z0-9-]+\]\]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   const cleanText = message.body
     .replace(/\[\[portrait:[a-z0-9-]+\]\]/gi, " mini portrait ")
     .replace(/\[\[reel:[a-z0-9-]+\]\]/gi, ` ${reelLabel} `)
     .replace(/\s+/g, " ")
     .trim();
-  const rawPreview = cleanText || (message.attachment_path ? "Photo" : message.gif ? "GIF" : "New raven");
+  const rawPreview = attachedText || cleanText || (message.attachment_path ? "Photo" : message.gif ? "GIF" : "New raven");
   const messagePreview = rawPreview.length > 110 ? `${rawPreview.slice(0, 107).trimEnd()}...` : rawPreview;
   let guildAvatarUrl: string | undefined;
   if (conversation.kind === "guild" && conversation.avatar_path) {

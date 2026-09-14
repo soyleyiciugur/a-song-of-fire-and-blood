@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 const shareSchema = z.object({
   entryId: z.string().min(1).max(120),
   conversationIds: z.array(z.string().uuid()).min(1).max(12),
+  message: z.string().max(1200).optional().default(""),
 });
 
 type GalleryRecord = {
@@ -89,7 +90,8 @@ export async function POST(request: Request) {
   if (membershipError) return NextResponse.json({ error: "Raven paths could not be checked." }, { status: 500 });
 
   const allowed = new Set((memberships ?? []).map((row) => row.conversation_id));
-  const body = `[[reel:${entry.id}]]`;
+  const attachedMessage = parsed.data.message.trim();
+  const body = [attachedMessage, `[[reel:${entry.id}]]`].filter(Boolean).join("\n");
   const messages: { id: string; conversationId: string }[] = [];
   const failed: string[] = [];
 
