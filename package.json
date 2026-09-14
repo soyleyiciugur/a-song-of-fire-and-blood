@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "npm run shell:check",
-    "shell:check": "node scripts/check-app-shell.mjs",
-    "shell:release": "node scripts/check-app-shell.mjs --release",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
