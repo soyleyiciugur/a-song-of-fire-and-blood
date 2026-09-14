@@ -70,23 +70,29 @@ function Notifications() {
   const closeRef = useRef<HTMLButtonElement>(null); const openId = params.get("open");
 
   const setRookeryView = useCallback((view: "personal" | "for-you" | "all") => {
-    const next = new URLSearchParams(params.toString());
+    // Read the browser's actual URL. On iOS/PWA, useSearchParams() can lag
+    // behind a fast tab interaction by one render.
+    const next = new URLSearchParams(window.location.search);
     next.set("view", view);
     next.delete("tab");
     if (view !== "personal") next.delete("open");
     const query = next.toString();
     const href = `/notifications${query ? `?${query}` : ""}`;
-    // Write the current history entry synchronously so an immediate navigation
-    // away from the Rookery still returns to the exact sub-view on Back.
-    window.history.replaceState(window.history.state, "", href);
-    router.replace(href, { scroll: false });
-    if (view === "personal") setLedgerTab("personal");
-    else {
+
+    // Commit the visual state first so a delayed params render cannot bounce
+    // the user back to Personal Ravens.
+    if (view === "personal") {
+      setLedgerTab("personal");
+    } else {
       setLedgerTab("realm");
       setActivityFilter(view);
       setActivityLimit(30);
     }
-  }, [params, router]);
+
+    // Native history updates are synchronous and are observed by Next 16.
+    // Avoid a competing router.replace transition on mobile.
+    window.history.replaceState(window.history.state, "", href);
+  }, []);
 
   const load = useCallback(async (id: string | null, requestedLimit = limit) => {
     setLoading(true); setError(""); setExtra(null);
@@ -162,14 +168,18 @@ function Notifications() {
 
   useEffect(() => {
     if (effectiveOpenId) return;
-    const view = params.get("view");
+
+    // window.location is already updated synchronously by setRookeryView,
+    // while useSearchParams() can briefly still contain the previous tab.
+    const view = new URLSearchParams(window.location.search).get("view");
+
     if (view === "for-you" || view === "all") {
       setLedgerTab("realm");
       setActivityFilter(view);
     } else {
       setLedgerTab("personal");
     }
-  }, [openId, params]);
+  }, [effectiveOpenId, params]);
 
   const activeNotification = effectiveOpenId && effectiveOpenId !== dismissedOpenId
     ? items.find((item) => item.id === effectiveOpenId) ?? (extra?.id === effectiveOpenId ? extra : null)
@@ -213,29 +223,39 @@ function Notifications() {
   function setOpen(id: string) {
     setOpenedId(id);
     setDismissedOpenId(null);
-    const next = new URLSearchParams(params.toString());
-    next.set("open", id);
-    next.set("view", "personal");
-    next.delete("tab");
-    const href = `/notifications?${next.toString()}`;
-    window.history.replaceState(window.history.state, "", href);
-    router.replace(href, { scroll: false });
+
+    const next = new URL(window.location.href);
+    next.searchParams.set("open", id);
+    next.searchParams.set("view", "personal");
+    next.searchParams.delete("tab");
+
+    // Local state opens the lightbox immediately. Keep the deep-link URL in
+    // sync without starting a second Next navigation/render cycle.
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${next.pathname}${next.search}${next.hash}`,
+    );
   }
 
   function closeLightbox() {
     if (effectiveOpenId) setDismissedOpenId(effectiveOpenId);
     setOpenedId(null);
+    setExtra(null);
 
     const next = new URL(window.location.href);
     next.searchParams.delete("open");
     next.searchParams.delete("tab");
     next.searchParams.set("view", "personal");
-    const href = `${next.pathname}${next.search}${next.hash}`;
 
-    // Close immediately even if Next's search-param propagation is delayed in an
-    // awakened iOS Home Screen window.
-    window.history.replaceState(window.history.state, "", href);
-    router.replace(href, { scroll: false });
+    // Closing is a local UI action, not a route transition. Updating history
+    // alone preserves the deep-link state without the visible desktop
+    // refresh/flicker caused by a competing router.replace().
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${next.pathname}${next.search}${next.hash}`,
+    );
   }
 
   const grouped = useMemo(() => { const groups = new Map<string, SiteNotification[]>(); for (const item of items) { const label = groupLabel(item.created_at); groups.set(label, [...(groups.get(label) ?? []), item]); } return [...groups]; }, [items]);
