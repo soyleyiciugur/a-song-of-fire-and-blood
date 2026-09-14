@@ -78,8 +78,9 @@ export async function GET() {
         (chapters as { slug: string; title: string }[]).map((chapter) => [chapter.slug, chapter.title]),
       );
 
+      const existingThreadIds = new Set(snapshot.forumThreads.map((thread: { id: string }) => thread.id));
       snapshot.forumThreads.push(
-        ...threads.map((thread) => {
+        ...threads.filter((thread) => !existingThreadIds.has(thread.id)).map((thread) => {
           const chapterTitle = thread.chapter_slug
             ? chapterBySlug.get(thread.chapter_slug) ?? null
             : null;
@@ -129,8 +130,9 @@ export async function GET() {
         }
       }
 
+      const existingCommentIds = new Set(snapshot.comments.map((comment: { id: string }) => comment.id));
       snapshot.comments.push(
-        ...posts.map((post) => ({
+        ...posts.filter((post) => !existingCommentIds.has(post.id)).map((post) => ({
           id: post.id,
           entryId: post.thread_id,
           parentId: post.parent_id,
@@ -148,7 +150,7 @@ export async function GET() {
             !!user &&
             (post.user_author_id === user.id || mayModerate),
         })),
-        ...raven.map((comment) => ({
+        ...raven.filter((comment) => !existingCommentIds.has(comment.id)).map((comment) => ({
           id: comment.id,
           entryId: comment.entry_id,
           parentId: comment.parent_id,

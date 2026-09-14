@@ -113,6 +113,17 @@
         ]
       },
       {
+        "title": "Lorent Tyrell is executed",
+        "description": "After being summoned from Highgarden, Lorent Tyrell is condemned by King Baelenys for conspiring with Derrin Hightower and executed in King's Landing. Renrose succeeds him as Lord of Highgarden and Warden of the South.",
+        "date": "5th of the 3rd Moon",
+        "characters": [
+          "lorent-tyrell",
+          "baelenys-targaryen",
+          "derrin-hightower",
+          "renrose-tyrell"
+        ]
+      },
+      {
         "title": "Ambush in the Dornish woods",
         "description": "Curtass Whent and five hired sellswords corner Ser Alester Dayne while he escorts Visenor and Rhaella south. Alester survives; none of his attackers do.",
         "date": "Early 3rd Moon",

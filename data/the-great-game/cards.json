@@ -292,6 +292,38 @@
     "linkedCharacterId": "alester-dayne"
   },
   {
+    "id": "lorent-tyrell",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Lorent Tyrell",
+    "subtitle": "The Fallen Rose",
+    "houseId": "tyrell",
+    "cost": 5,
+    "power": 2,
+    "influence": 8,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue",
+      "schemer"
+    ],
+    "abilities": [
+      {
+        "id": "a-son-forewarned",
+        "name": "A Son Forewarned",
+        "trigger": "fall",
+        "text": "Draw 1 card. If you control Renrose Tyrell, gain 2 Standing."
+      }
+    ],
+    "roles": [
+      "political",
+      "support",
+      "value"
+    ],
+    "flavorQuote": "The realm cannot survive another of his wars.",
+    "linkedCharacterId": "lorent-tyrell"
+  },
+  {
     "id": "renrose-tyrell",
     "cardType": "character",
     "tierId": "a",

@@ -4,6 +4,7 @@ import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import NotificationPortrait from "@/components/notifications/NotificationPortrait";
 import NotificationSourceIcon from "@/components/notifications/NotificationSourceIcon";
 import MiniPortrait from "@/components/MiniPortrait";
+import { RavenMessagePreview } from "@/components/direct-raven/RavenMessageContent";
 import { MASCOT_META, type NotificationMascot, type NotificationSource, type SiteNotification } from "@/lib/notifications/types";
 import { notificationSourceLabel } from "@/lib/notifications/source";
 import { notificationTargetHref } from "@/lib/notifications/target";
@@ -52,6 +53,21 @@ function groupLabel(value: string, now = new Date()) {
 }
 function ctaLabel(source: NotificationSource) { if (source === "tavern") return "Enter the tavern"; if (source === "ravens-eye") return "Follow the sighting"; if (source === "direct-raven") return "Read the raven"; if (source === "guild-parley") return "Enter the parley"; if (source === "chronicle") return "Open the Chronicle"; if (source === "guestbook") return "Open the guestbook"; return "See the notice"; }
 
+function personalGroupKey(item: SiteNotification) {
+  const context = item.context ?? {};
+  const explicit = typeof context.groupKey === "string" ? context.groupKey : null;
+  if (explicit) return `${item.source}:${explicit}`;
+  const conversationId = typeof context.conversationId === "string" ? context.conversationId : null;
+  if (conversationId) return `${item.source}:conversation:${conversationId}`;
+  const threadId = typeof context.threadId === "string" ? context.threadId : null;
+  if (threadId) return `${item.source}:thread:${threadId}`;
+  const entryId = typeof context.entryId === "string" ? context.entryId : null;
+  if (entryId) return `${item.source}:entry:${entryId}`;
+  const profileId = typeof context.profileId === "string" ? context.profileId : null;
+  if (profileId) return `${item.source}:profile:${profileId}`;
+  return null;
+}
+
 function Notifications() {
   const community = useCommunity(); const params = useSearchParams(); const router = useRouter(); const supabase = useMemo(() => createClient(), []);
   const [userId, setUserId] = useState<string | null>(null), [authReady, setAuthReady] = useState(false);
@@ -67,7 +83,9 @@ function Notifications() {
   const [openedId, setOpenedId] = useState<string | null>(null);
   const readOverrides = useRef(new Map<string, string>());
   const bulkOverrides = useRef(new Map<string, string>());
-  const closeRef = useRef<HTMLButtonElement>(null); const openId = params.get("open");
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const openId = params.get("open");
 
   const setRookeryView = useCallback((view: "personal" | "for-you" | "all") => {
     // Read the browser's actual URL. On iOS/PWA, useSearchParams() can lag
@@ -95,8 +113,8 @@ function Notifications() {
   }, []);
 
   const load = useCallback(async (id: string | null, requestedLimit = limit) => {
-    setLoading(true); setError(""); setExtra(null);
-    if (!id) { setItems([]); setHasMore(false); setLoading(false); return; }
+    setLoading(true); setError("");
+    if (!id) { setItems([]); setExtra(null); setHasMore(false); setLoading(false); return; }
     const { data, error: readError } = await supabase.from("site_notifications").select("*").eq("user_id", id).order("created_at", { ascending: false }).limit(requestedLimit + 1);
     if (readError) { setError("The personal raven ledger could not be gathered. Community activity remains below."); setLoading(false); return; }
     const normalized = (data ?? [])
@@ -207,7 +225,27 @@ function Notifications() {
     if (!activeNotification) return;
     const old = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") closeLightbox(); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const focusable = [...dialog.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')]
+        .filter((node) => !node.hasAttribute("hidden"));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
     const frame = requestAnimationFrame(() => closeRef.current?.focus({ preventScroll: true }));
     return () => {
@@ -259,6 +297,18 @@ function Notifications() {
   }
 
   const grouped = useMemo(() => { const groups = new Map<string, SiteNotification[]>(); for (const item of items) { const label = groupLabel(item.created_at); groups.set(label, [...(groups.get(label) ?? []), item]); } return [...groups]; }, [items]);
+  const personalGroups = useMemo(() => grouped.map(([label, notifications]) => {
+    const buckets: { key: string; items: SiteNotification[] }[] = [];
+    const indexed = new Map<string, { key: string; items: SiteNotification[] }>();
+    for (const item of notifications) {
+      const semanticKey = personalGroupKey(item);
+      if (!semanticKey) { buckets.push({ key: item.id, items: [item] }); continue; }
+      const existing = indexed.get(semanticKey);
+      if (existing) existing.items.push(item);
+      else { const bucket = { key: semanticKey, items: [item] }; indexed.set(semanticKey, bucket); buckets.push(bucket); }
+    }
+    return [label, buckets] as const;
+  }), [grouped]);
   const unreadCount = items.reduce((count, item) => count + (item.read_at ? 0 : 1), 0);
 
   // Legacy/community activity remains visible instead of being replaced by the mascot ledger.
@@ -290,15 +340,33 @@ function Notifications() {
       contextTitle,
       parentBody,
       replyBody,
+      ravenPreview: activeNotification.source === "direct-raven" || activeNotification.source === "guild-parley",
       parentLabel: parentAuthorId && parentAuthorId === userId ? "You" : parentAuthor ? `@${parentAuthor.username}` : "Earlier words",
       actorLabel: actor ? `@${actor.username}` : (typeof context.actorName === "string" ? context.actorName : "Someone"),
     };
   }, [activeNotification, commentsById, userId, users]);
 
+  const renderPersonalCard = (item: SiteNotification, nested = false) => (
+    <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
+      <button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}>
+        <NotificationPortrait mascot={item.mascot} source={item.source} size={nested ? 44 : 52} />
+        <span className={styles.cardContent}>
+          <span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
+          <strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span>
+        </span>
+        {!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}
+        <svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </button>
+    </li>
+  );
+
   const renderActivityCard = (comment: (typeof community.comments)[number], nested = false) => {
-    const user = users.get(comment.authorId); if (!user) return null;
+    const user = users.get(comment.authorId);
     const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye";
-    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={styles.legacyCard} onClick={() => { const current = new URL(window.location.href); current.searchParams.set("view", activityFilter); current.searchParams.delete("open"); window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`); }}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
+    const username = user?.username ?? "unknown-patron";
+    const displayName = user?.displayName ?? user?.username ?? "Unknown patron";
+    const avatar = user?.avatar ?? displayName.slice(0, 2).toUpperCase();
+    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={styles.legacyCard} onClick={() => { const current = new URL(window.location.href); current.searchParams.set("view", activityFilter); current.searchParams.delete("open"); window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`); }}>{user?.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={displayName} size={36} /> : user?.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user?.color ?? "#51363d" }} aria-hidden="true">{avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
   };
 
   const renderActivityEntries = (entries: (typeof community.comments)[number][]) => {
@@ -317,7 +385,7 @@ function Notifications() {
 
   return <main className={styles.page}>
     <div className={styles.topRow}><Link href="/" className={styles.back}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>Back to Home</Link>{userId && <Link className={styles.settingsLink} href="/settings#notifications" aria-label="Raven settings" title="Raven settings"><svg className={styles.settingsIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.09a2 2 0 0 1 1 1.73v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.73l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z" /><circle cx="12" cy="12" r="3" /></svg><span className={styles.settingsText}>Raven settings</span></Link>}</div>
-    <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">Notifications<PageTitleIcon name="notifications" /></h1><p>Personal ravens from Mara and Aldren, followed by the wider conversation across the realm.</p></header>
+    <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">The Rookery<PageTitleIcon name="notifications" /></h1><p>Personal ravens from Mara and Aldren, followed by the wider conversation across the realm.</p></header>
 
     <nav className={styles.ledgerTabs} role="tablist" aria-label="Rookery ledgers">
       <button type="button" role="tab" aria-selected={ledgerTab === "personal"} onClick={() => setRookeryView("personal")}>Personal Ravens</button>
@@ -331,7 +399,12 @@ function Notifications() {
 
     {userId && <section className={styles.personalLedger} aria-label="Personal raven notifications"><div className={styles.sectionHeading}><span>Personal ravens</span>{unreadCount > 0 && <button className={styles.markAll} type="button" disabled={markingAll || loading} onClick={() => void markRead()}>{markingAll ? "Sealing the ledger…" : "Let no raven go unheard"}</button>}</div>{readStatus && <p className={styles.readStatus} role="status">{readStatus}</p>}
       {!loading && !error && !items.length && <section className={styles.empty}><span aria-hidden="true">✦</span><h2>The rookery is quiet</h2><p>No personal tidings await you.</p></section>}
-      {grouped.map(([label, notifications]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{notifications.map((item) => <li key={item.id}><button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}><NotificationPortrait mascot={item.mascot} source={item.source} size={52} /><span className={styles.cardContent}><span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>{!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}<svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg></button></li>)}</ol></section>)}
+      {personalGroups.map(([label, buckets]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{buckets.map((bucket) => {
+        if (bucket.items.length === 1) return renderPersonalCard(bucket.items[0]);
+        const latest = bucket.items[0];
+        const unread = bucket.items.some((item) => !item.read_at);
+        return <li key={bucket.key} className={styles.personalClusterItem}><details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}><summary><span className={styles.personalClusterIdentity}><NotificationPortrait mascot={latest.mascot} source={latest.source} size={44} /><span><strong>{latest.source_label ?? notificationSourceLabel(latest.source)}</strong><small>{bucket.items.length} fresh tidings · {latest.body}</small></span></span><span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span></summary><ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol></details></li>;
+      })}</ol></section>)}
       {hasMore && <button className={styles.more} type="button" onClick={() => setLimit((value) => value + PAGE_SIZE)}>Gather older ravens</button>}
     </section>}
     </div>}
@@ -347,7 +420,7 @@ function Notifications() {
     </section>
     </div>}
 
-    {activeNotification && <div className={styles.lightboxBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeLightbox(); }}><section className={styles.lightbox} role="dialog" aria-modal="true" aria-labelledby="notification-lightbox-title"><button ref={closeRef} className={styles.closeButton} type="button" aria-label="Close notification" onClick={closeLightbox}>×</button><div className={styles.lightboxOrnament} aria-hidden="true"><span>✦</span></div><NotificationPortrait mascot={activeNotification.mascot} source={activeNotification.source} size={92} className={styles.lightboxPortrait} /><span className={styles.lightboxSource}><NotificationSourceIcon source={activeNotification.source} size={13} /> {notificationSourceLabel(activeNotification.source)}</span><h2 id="notification-lightbox-title">{activeNotification.title}</h2><p className={styles.lightboxBody}>{activeNotification.body}</p><p className={styles.lightboxSignature}>— {MASCOT_META[activeNotification.mascot].name}</p>{activePreview && <div className={styles.lightboxPreview} aria-label="Notification preview">{activePreview.contextTitle && <div className={styles.previewContext}>{activePreview.contextTitle}</div>}{activePreview.parentBody && <div className={styles.previewMessage}><span>{activePreview.parentLabel}</span><p>“{activePreview.parentBody}”</p></div>}{activePreview.parentBody && activePreview.replyBody && <div className={styles.previewDivider} aria-hidden="true"><span>✦</span></div>}{activePreview.replyBody && <div className={`${styles.previewMessage} ${styles.previewReply}`}><span>{activePreview.actorLabel}</span><p>“{activePreview.replyBody}”</p></div>}</div>}{activeNotification.source_label && !activePreview?.contextTitle && <p className={styles.lightboxContext}>{activeNotification.source_label}</p>}<time className={styles.lightboxTime} dateTime={activeNotification.created_at}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(activeNotification.created_at))}</time><div className={styles.lightboxActions}>{notificationTargetHref(activeNotification) !== "/notifications" && <Link className={styles.primaryAction} href={notificationTargetHref(activeNotification)}>{ctaLabel(activeNotification.source)} <span aria-hidden="true">→</span></Link>}<button type="button" className={styles.dismissAction} onClick={closeLightbox}>Return to the rookery</button></div></section></div>}
+    {activeNotification && <div className={styles.lightboxBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeLightbox(); }}><section ref={dialogRef} className={styles.lightbox} role="dialog" aria-modal="true" aria-labelledby="notification-lightbox-title"><button ref={closeRef} className={styles.closeButton} type="button" aria-label="Close notification" onClick={closeLightbox}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg></button><div className={styles.lightboxOrnament} aria-hidden="true"><span>✦</span></div><NotificationPortrait mascot={activeNotification.mascot} source={activeNotification.source} size={92} className={styles.lightboxPortrait} /><span className={styles.lightboxSource}><NotificationSourceIcon source={activeNotification.source} size={13} /> {notificationSourceLabel(activeNotification.source)}</span><h2 id="notification-lightbox-title">{activeNotification.title}</h2><p className={styles.lightboxBody}>{activeNotification.body}</p><p className={styles.lightboxSignature}>— {MASCOT_META[activeNotification.mascot].name}</p>{activePreview && <div className={styles.lightboxPreview} aria-label="Notification preview">{activePreview.contextTitle && <div className={styles.previewContext}>{activePreview.contextTitle}</div>}{activePreview.parentBody && <div className={styles.previewMessage}><span>{activePreview.parentLabel}</span><p>{activePreview.ravenPreview ? <RavenMessagePreview body={activePreview.parentBody} /> : <>“{activePreview.parentBody}”</>}</p></div>}{activePreview.parentBody && activePreview.replyBody && <div className={styles.previewDivider} aria-hidden="true"><span>✦</span></div>}{activePreview.replyBody && <div className={`${styles.previewMessage} ${styles.previewReply}`}><span>{activePreview.actorLabel}</span><p>{activePreview.ravenPreview ? <RavenMessagePreview body={activePreview.replyBody} /> : <>“{activePreview.replyBody}”</>}</p></div>}</div>}{activeNotification.source_label && !activePreview?.contextTitle && <p className={styles.lightboxContext}>{activeNotification.source_label}</p>}<time className={styles.lightboxTime} dateTime={activeNotification.created_at}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(activeNotification.created_at))}</time><div className={styles.lightboxActions}>{notificationTargetHref(activeNotification) !== "/notifications" && <Link className={styles.primaryAction} href={notificationTargetHref(activeNotification)}>{ctaLabel(activeNotification.source)} <svg className={styles.actionArrow} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}<button type="button" className={styles.dismissAction} onClick={closeLightbox}>Return to the rookery</button></div></section></div>}
   </main>;
 }
 

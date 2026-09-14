@@ -82,7 +82,7 @@ export default function AndroidInstallPrompt() {
 
   return (
     <aside className={styles.installCard} role="dialog" aria-label="Install ASOFAB on Android">
-      <button className={styles.close} type="button" onClick={dismiss} aria-label="Dismiss install suggestion">×</button>
+      <button className={styles.close} type="button" onClick={dismiss} aria-label="Dismiss install suggestion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round"/></svg></button>
       <div className={styles.seal} aria-hidden="true">✦</div>
       <div className={styles.copy}>
         <span className={styles.eyebrow}>The Rookery · Android</span>

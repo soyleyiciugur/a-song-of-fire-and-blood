@@ -168,10 +168,26 @@ export default async function FamilyTree({ searchParams }: Props) {
 
           <div className={styles.generationRow}>
             <FamilyUnit
+              parentA={{ id: "lorent-tyrell" }}
+              childrenLabel="Children"
+            >
+              <Union
+                a={{ id: "renrose-tyrell" }}
+                b={{ id: "liana-tyrell" }}
+              />
+            </FamilyUnit>
+          </div>
+
+          <p className={styles.generationLabel}>Renrose&apos;s Children</p>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit
               parentA={{ id: "renrose-tyrell" }}
+              parentB={{ id: "liana-tyrell" }}
               childrenLabel="Children"
             >
               <PersonNode id="leo-tyrell" />
+              <PersonNode id="renrose-tyrell-daughter" />
             </FamilyUnit>
           </div>
         </section>

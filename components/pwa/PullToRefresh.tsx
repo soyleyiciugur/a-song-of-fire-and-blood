@@ -152,7 +152,7 @@ export default function PullToRefresh() {
     role="status"
     aria-live="polite"
   >
-    <span aria-hidden="true">{refreshing ? "✦" : "↓"}</span>
+    <span aria-hidden="true">{refreshing ? <svg viewBox="0 0 24 24" width="16" height="16"><path d="m12 3 1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8L12 3Z" fill="currentColor"/></svg> : <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 4v14m-5-5 5 5 5-5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round"/></svg>}</span>
     <b>{refreshing ? "Gathering fresh ravens…" : ready ? "Release to refresh" : "Pull to refresh"}</b>
   </div>;
 }

@@ -424,7 +424,7 @@
       "baelenys-targaryen"
     ],
     "allies": [
-      "renrose-tyrell"
+      "lorent-tyrell"
     ],
     "flavorQuote": "Love alone cannot preserve a dynasty.",
     "linkedCharacterId": "derrin-hightower"
@@ -499,6 +499,41 @@
     "linkedCharacterId": "lorenah-dayne"
   },
   {
+    "id": "lorent-tyrell",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Lorent Tyrell",
+    "subtitle": "The Fallen Rose",
+    "houseId": "tyrell",
+    "power": 3,
+    "influence": 8,
+    "keywords": [
+      "Lord",
+      "Schemer",
+      "Conspirator",
+      "Condemned"
+    ],
+    "abilities": [
+      {
+        "name": "Seeds of Treason",
+        "description": "Draws a trusted court ally into a conspiracy against the opposing ruler."
+      },
+      {
+        "name": "A Son Forewarned",
+        "description": "When Lorent falls, Renrose gains influence and foreknowledge of the enemy ruler's next action."
+      }
+    ],
+    "nemesis": [
+      "baelenys-targaryen"
+    ],
+    "allies": [
+      "derrin-hightower",
+      "renrose-tyrell"
+    ],
+    "flavorQuote": "The realm cannot survive another of his wars.",
+    "linkedCharacterId": "lorent-tyrell"
+  },
+  {
     "id": "renrose-tyrell",
     "cardType": "character",
     "tierId": "a",
@@ -529,7 +564,8 @@
     "allies": [
       "visenor-targaryen",
       "martyn-mullendore",
-      "leo-tyrell"
+      "leo-tyrell",
+      "lorent-tyrell"
     ],
     "flavorQuote": "My father loved these gardens dearly. Before your father had him executed, of course.",
     "linkedCharacterId": "renrose-tyrell"

@@ -61,11 +61,27 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
   useEffect(() => {
     const channel = supabase
       .channel("direct-raven:inbox")
-      .on("postgres_changes", { event: "*", schema: "public", table: "direct_raven_messages" }, scheduleSummarySync)
+      .on("postgres_changes", { event: "*", schema: "public", table: "direct_raven_messages" }, (payload) => {
+        const message = payload.new as Partial<DirectRavenMessage> | undefined;
+        const conversationId = message?.conversation_id;
+        if (payload.eventType === "INSERT" && conversationId === selectedId && message?.id) {
+          // The selected thread is visible beside the inbox. Reflect the message
+          // immediately while keeping its unread count at zero; the read upsert
+          // will reconcile the server summary a moment later.
+          setItems((current) => current.map((item) => item.conversation.id === conversationId
+            ? { ...item, lastMessage: message as DirectRavenMessage, unread: 0 }
+            : item));
+        }
+        scheduleSummarySync();
+      })
       .on("postgres_changes", { event: "*", schema: "public", table: "direct_raven_reads" }, scheduleSummarySync)
       .subscribe();
 
-    const onRead = () => scheduleSummarySync();
+    const onRead = (event: Event) => {
+      const conversationId = (event as CustomEvent<{ conversationId?: string }>).detail?.conversationId;
+      if (conversationId) setItems((current) => current.map((item) => item.conversation.id === conversationId ? { ...item, unread: 0 } : item));
+      scheduleSummarySync();
+    };
     const onVisible = () => document.visibilityState === "visible" && scheduleSummarySync();
     window.addEventListener("direct-raven-read", onRead);
     document.addEventListener("visibilitychange", onVisible);
@@ -76,7 +92,7 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
       document.removeEventListener("visibilitychange", onVisible);
       void supabase.removeChannel(channel);
     };
-  }, [scheduleSummarySync, supabase]);
+  }, [scheduleSummarySync, selectedId, supabase]);
 
   const visible = items.filter(({ conversation, partner, members }) => {
     const haystack = conversation.kind === "guild"

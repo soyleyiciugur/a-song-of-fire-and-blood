@@ -387,9 +387,9 @@
     {"id":"september-13-kingship-17","batchId":"september-13-kingship","publishedAt":"2026-09-14T13:06:14.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-089"]},
     {"id":"september-13-kingship-18","batchId":"september-13-kingship","publishedAt":"2026-09-14T14:42:31.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-090"]},
     {"id":"september-13-kingship-19","batchId":"september-13-kingship","publishedAt":"2026-09-14T15:18:47.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-091"]},
-    {"id":"september-13-kingship-20","batchId":"september-13-kingship","publishedAt":"2026-09-14T16:35:06.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-092"]},
-    {"id":"september-13-kingship-21","batchId":"september-13-kingship","publishedAt":"2026-09-14T17:09:53.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-093"]},
-    {"id":"september-13-kingship-22","batchId":"september-13-kingship","publishedAt":"2026-09-14T18:48:29.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-094"]},
+    {"id":"september-13-kingship-20","batchId":"september-13-kingship","publishedAt":"2026-09-14T16:35:06.000Z","commentIds":["gaelor-teror-scheduled-cast"],"forumThreadIds":[],"forumCommentIds":["king18-092"]},
+    {"id":"september-13-kingship-21","batchId":"september-13-kingship","publishedAt":"2026-09-14T17:09:53.000Z","commentIds":["uclu-scheduled-j"],"forumThreadIds":[],"forumCommentIds":["king18-093"]},
+    {"id":"september-13-kingship-22","batchId":"september-13-kingship","publishedAt":"2026-09-14T18:48:29.000Z","commentIds":["lorent-ideas-scheduled-l"],"forumThreadIds":[],"forumCommentIds":["king18-094"]},
     {"id":"september-13-kingship-23","batchId":"september-13-kingship","publishedAt":"2026-09-14T19:24:11.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-095"]},
     {"id":"september-13-kingship-24","batchId":"september-13-kingship","publishedAt":"2026-09-14T20:52:36.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-096"]}
   ],

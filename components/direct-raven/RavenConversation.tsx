@@ -248,17 +248,44 @@ export default function RavenConversation({
   }, []);
 
   useEffect(() => {
+    document.documentElement.dataset.activeRavenConversation = conversationId;
+    return () => {
+      if (document.documentElement.dataset.activeRavenConversation === conversationId) {
+        delete document.documentElement.dataset.activeRavenConversation;
+      }
+    };
+  }, [conversationId]);
+
+  useEffect(() => {
     let active = true;
 
-    const markRead = async () => {
+    const markNotificationRead = async (notificationId?: string) => {
+      if (document.visibilityState !== "visible") return;
+      const readAt = new Date().toISOString();
+      let query = supabase
+        .from("site_notifications")
+        .update({ read_at: readAt })
+        .eq("user_id", userId)
+        .is("read_at", null);
+      query = notificationId
+        ? query.eq("id", notificationId)
+        : query.contains("context", { conversationId });
+      await query;
+      window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
+    };
+
+    const markReadAt = async (at?: string) => {
       if (document.visibilityState !== "visible" || !nearBottom.current) return;
       const latest = loadedMessages.current.at(-1);
-      if (!latest) return;
-      await supabase.from("direct_raven_reads").upsert(
-        { conversation_id: conversationId, user_id: userId, last_read_at: latest.created_at },
+      const lastReadAt = at ?? latest?.created_at;
+      if (!lastReadAt) return;
+      const { error: readError } = await supabase.from("direct_raven_reads").upsert(
+        { conversation_id: conversationId, user_id: userId, last_read_at: lastReadAt },
         { onConflict: "conversation_id,user_id" }
       );
-      window.dispatchEvent(new Event("direct-raven-read"));
+      if (readError) return;
+      await markNotificationRead();
+      window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId } }));
     };
 
     const sync = async () => {
@@ -285,23 +312,17 @@ export default function RavenConversation({
       if (!active) return;
       if (data) {
         const incoming = data as DirectRavenMessage[];
-        if (!nearBottom.current && incoming.some((message) => !loadedMessages.current.some((old) => old.id === message.id))) {
-          setNewMessages(true);
-        }
+        if (!nearBottom.current && incoming.some((message) => !loadedMessages.current.some((old) => old.id === message.id))) setNewMessages(true);
         setMessages((current) => {
           const map = new Map<string, DirectRavenMessage>(current.map((message) => [message.id, message]));
           let changed = current.length !== incoming.length;
           for (const message of incoming) {
             const previous = map.get(message.id);
-            if (!previous || previous.sender_id !== message.sender_id || previous.body !== message.body || previous.created_at !== message.created_at || previous.deleted_at !== message.deleted_at || previous.edited_at !== message.edited_at || previous.reply_to !== message.reply_to || previous.attachment_path !== message.attachment_path || previous.gif?.url !== message.gif?.url) {
-              changed = true;
-            }
+            if (!previous || previous.sender_id !== message.sender_id || previous.body !== message.body || previous.created_at !== message.created_at || previous.deleted_at !== message.deleted_at || previous.edited_at !== message.edited_at || previous.reply_to !== message.reply_to || previous.attachment_path !== message.attachment_path || previous.gif?.url !== message.gif?.url) changed = true;
             map.set(message.id, message);
           }
           if (!changed && current.length === incoming.length) return current;
-          return [...map.values()].sort(
-            (a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id)
-          );
+          return [...map.values()].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
         });
       }
       setPartnerRead(reads?.last_read_at ?? "");
@@ -310,7 +331,7 @@ export default function RavenConversation({
         setBlockedByMe(blocks.some((block) => block.blocker_id === userId));
         setBlockedByThem(blocks.some((block) => block.blocker_id === partner.id));
       }
-      void markRead();
+      void markReadAt();
     };
 
     scrollBottom();
@@ -320,7 +341,21 @@ export default function RavenConversation({
       .channel(`direct-raven:${conversationId}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "direct_raven_messages", filter: `conversation_id=eq.${conversationId}` },
+        { event: "INSERT", schema: "public", table: "direct_raven_messages", filter: `conversation_id=eq.${conversationId}` },
+        (payload) => {
+          const message = payload.new as DirectRavenMessage;
+          setMessages((current) => current.some((entry) => entry.id === message.id)
+            ? current.map((entry) => entry.id === message.id ? message : entry)
+            : [...current, message].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id)));
+          if (nearBottom.current) {
+            requestAnimationFrame(scrollBottom);
+            void markReadAt(message.created_at);
+          } else setNewMessages(true);
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "direct_raven_messages", filter: `conversation_id=eq.${conversationId}` },
         () => void sync()
       )
       .on(
@@ -328,13 +363,19 @@ export default function RavenConversation({
         { event: "*", schema: "public", table: "direct_raven_reads", filter: `conversation_id=eq.${conversationId}` },
         () => void sync()
       )
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` },
+        (payload) => {
+          const row = payload.new as { id?: string; context?: Record<string, unknown> };
+          if (document.visibilityState === "visible" && row.context?.conversationId === conversationId) void markNotificationRead(row.id);
+        }
+      )
       .subscribe();
 
     const timer = setInterval(() => void sync(), 10000);
-    const visible = () => void sync();
-    const read = () => {
-      if (nearBottom.current) void markRead();
-    };
+    const visible = () => { if (document.visibilityState === "visible") void sync(); };
+    const read = () => { if (nearBottom.current) void markReadAt(); };
 
     document.addEventListener("visibilitychange", visible);
     const element = listRef.current;
@@ -428,12 +469,6 @@ export default function RavenConversation({
 
       const { data, error: sendError } = await query.select("*").single();
       if (sendError || !data) throw Error("The raven could not be sent. Your draft is still here.");
-      if (!editing) void fetch("/api/notifications/direct-raven", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messageId: data.id }),
-      }).catch(() => {});
-
       nearBottom.current = true;
       setMessages((current) =>
         current.some((message) => message.id === data.id)
@@ -447,7 +482,14 @@ export default function RavenConversation({
       setReply(null);
       setEditing(null);
       resetDraftExtras();
-      window.dispatchEvent(new Event("direct-raven-read"));
+      window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId } }));
+      if (!editing) requestAnimationFrame(() => {
+        void fetch("/api/notifications/direct-raven", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messageId: data.id }),
+        }).catch(() => {});
+      });
     } catch (caught) {
       if (path) await supabase.storage.from("raven-media").remove([path]);
       setError(caught instanceof Error ? caught.message : "Could not send. Please try again.");
@@ -553,7 +595,7 @@ export default function RavenConversation({
   return (
     <section className={styles.thread} aria-label={isGuild ? `Guild Parley: ${threadTitle}` : `Conversation with ${threadTitle}`}>
       <header className={styles.threadHeader}>
-        <Link href="/messages" className={styles.backInbox} aria-label="Back to inbox">←</Link>
+        <Link href="/messages" className={styles.backInbox} aria-label="Back to inbox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>
         {isGuild ? (
           <button type="button" className={`${styles.partnerIdentity} ${styles.guildIdentityButton}`} onClick={() => setGuildInfoOpen(true)}>
             <GuildAvatar path={activeConversation.avatar_path} name={threadTitle} />
@@ -566,7 +608,7 @@ export default function RavenConversation({
           </Link>
         ) : null}
         <div className={styles.threadMenuWrap} ref={menuRef}>
-          <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options">•••</button>
+          <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
           {menuOpen && (
             <div className={styles.threadMenu}>
               {isGuild ? (
@@ -735,7 +777,7 @@ export default function RavenConversation({
       </div>
 
       <div className={styles.composerArea}>
-        {newMessages && <button className={styles.olderButton} onClick={scrollBottom}>New ravens ↓</button>}
+        {newMessages && <button className={styles.olderButton} onClick={scrollBottom}>New ravens <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v13m-5-5 5 5 5-5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></button>}
         {closed ? (
           <div className={styles.closedNotice}>
             {blockedByMe ? "You closed this raven path. Unblock this user to send again." : "This raven path is closed."}
@@ -861,7 +903,7 @@ export default function RavenConversation({
             <div className={styles.composerTools}>
               <button type="button" disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
               <label className={styles.fileButton} aria-disabled={!!editing || sending}>
-                ＋ Photo / GIF
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Photo / GIF
                 <input
                   type="file"
                   disabled={!!editing || sending}
@@ -873,10 +915,10 @@ export default function RavenConversation({
                 />
               </label>
               <button type="button" disabled={sending} onClick={() => openPicker("emoji")} aria-expanded={pickerOpen}>
-                ☺ Emoji
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5"/><path d="M9 10h.01M15 10h.01M8.5 14c1 1.4 2.1 2 3.5 2s2.5-.6 3.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> Emoji
               </button>
               <button type="button" disabled={sending} onClick={() => openPicker("portraits")} aria-expanded={pickerOpen}>
-                ◫ Portraits
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" strokeWidth="1.4"/><path d="M8.5 16c.9-1.6 2.1-2.4 3.5-2.4s2.6.8 3.5 2.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg> Portraits
               </button>
               <small>Shift + Enter for a new line</small>
             </div>
@@ -893,7 +935,7 @@ export default function RavenConversation({
                 <p className={styles.kicker}>Guild Parley</p>
                 <h3>{eligibleCountFor(seenPanelMessage) > 0 && seenPanelRows.length === eligibleCountFor(seenPanelMessage) ? "Seen by all" : `Seen by ${seenPanelRows.length}`}</h3>
               </div>
-              <button type="button" className={styles.seenPanelClose} aria-label="Close read receipts" onClick={() => setSeenPanelId(null)}>×</button>
+              <button type="button" className={styles.seenPanelClose} aria-label="Close read receipts" onClick={() => setSeenPanelId(null)}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round"/></svg></button>
             </div>
             <div className={styles.seenList}>
               {seenPanelRows.length === 0 && <p className={styles.seenEmpty}>No one else has seen this raven yet.</p>}

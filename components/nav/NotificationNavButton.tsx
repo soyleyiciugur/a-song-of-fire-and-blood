@@ -78,7 +78,17 @@ export default function NotificationNavButton() {
     window.addEventListener("focus", onVisible);
     document.addEventListener("visibilitychange", onVisible);
     const timer = window.setInterval(() => { if (document.visibilityState === "visible") void refresh(userId); }, 30_000);
-    const channel = supabase.channel(`site-notifications-nav:${userId}`).on("postgres_changes", { event: "*", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` }, () => void refresh(userId)).subscribe();
+    const channel = supabase.channel(`site-notifications-nav:${userId}`).on("postgres_changes", { event: "*", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` }, (payload) => {
+      const row = payload.new as { source?: string; context?: { conversationId?: string } } | undefined;
+      const sameOpenRaven = payload.eventType === "INSERT"
+        && document.visibilityState === "visible"
+        && (row?.source === "direct-raven" || row?.source === "guild-parley")
+        && row.context?.conversationId
+        && row.context.conversationId === document.documentElement.dataset.activeRavenConversation;
+      // RavenConversation/PwaBoot will mark this notification read immediately.
+      // Skipping this transient INSERT prevents a badge/sound flash before that write lands.
+      if (!sameOpenRaven) void refresh(userId);
+    }).subscribe();
     return () => {
       window.removeEventListener("asofab:notifications-changed", onChanged);
       window.removeEventListener("focus", onVisible);

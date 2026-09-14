@@ -1035,6 +1035,38 @@ function destroyCharacterMutable(
     `${card.name} is destroyed.`,
     unit.ownerId
   );
+
+  if (
+    card.id ===
+    "lorent-tyrell"
+  ) {
+    logAbilityActivation(
+      state,
+      card.id,
+      "a-son-forewarned",
+      unit.ownerId
+    );
+
+    drawCardMutable(
+      state,
+      unit.ownerId
+    );
+
+    if (
+      playerControlsCard(
+        state,
+        unit.ownerId,
+        "renrose-tyrell"
+      )
+    ) {
+      gainStandingMutable(
+        state,
+        unit.ownerId,
+        2,
+        "A Son Forewarned"
+      );
+    }
+  }
 }
 
 function damageUnitMutable(

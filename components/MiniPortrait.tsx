@@ -43,9 +43,9 @@ export default function MiniPortrait({ id, alt, size = 36, className, fallbackSr
 
   const houseFallback = useMemo(() => automaticHouseFallback(id), [id]);
   const fallbackCandidates = useMemo(() => {
-    if (fallbackSrc) return [fallbackSrc];
     const candidates: string[] = [];
     if (houseFallback) candidates.push(houseFallback);
+    if (fallbackSrc) candidates.push(fallbackSrc);
     if (!fallbackGlyph) candidates.push(FALLBACK);
     return [...new Set(candidates)];
   }, [fallbackGlyph, fallbackSrc, houseFallback]);
@@ -88,6 +88,7 @@ export default function MiniPortrait({ id, alt, size = 36, className, fallbackSr
   }
 
   const usingFallback = fallbackIndex >= 0;
+  const usingHouseFallback = usingFallback && Boolean(houseFallback) && fallbackCandidates[fallbackIndex] === houseFallback;
   const src = usingFallback
     ? fallbackCandidates[fallbackIndex] ?? FALLBACK
     : `/images/miniportraits/${id}.${EXTENSIONS[extensionIndex]}`;
@@ -116,7 +117,7 @@ export default function MiniPortrait({ id, alt, size = 36, className, fallbackSr
         }
         setFallbackFailed(true);
       }}
-      style={sharedStyle}
+      style={{ ...sharedStyle, objectFit: usingHouseFallback ? "contain" : "cover", padding: usingHouseFallback ? 2 : undefined }}
     />
   );
 }

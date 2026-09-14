@@ -49,6 +49,7 @@ export type CharacterId =
   | "jacaelon-targaryen"
   | "jaery-targaryen"
   | "leo-tyrell"
+  | "lorent-tyrell"
   | "lorenah-dayne"
   | "lyarra-karstark"
   | "maela-targaryen"

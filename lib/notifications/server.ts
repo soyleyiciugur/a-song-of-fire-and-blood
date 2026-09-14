@@ -132,6 +132,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
         : `${count} fresh tidings from the same quarter have arrived together, my liege.`;
       const context = { ...(recent.context ?? {}), ...(input.context ?? {}), groupKey: input.groupKey, groupCount: count, ...(actorName ? { actorName } : {}) };
       const { data: updated } = await admin.from("site_notifications").update({
+        actor_id: input.actorUserId ?? recent.actor_id,
         body: groupedBody, href: input.href || recent.href, source_label: input.sourceLabel ?? recent.source_label, context, read_at: null,
       }).eq("id", recent.id).select("*").single();
       const [{ data: subscriptions }, unreadResult] = await Promise.all([
@@ -143,9 +144,13 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
       await Promise.all((subscriptions ?? []).map(async (subscription) => {
         try {
           const response = await sendWebPush(subscription, {
-            title: recent.title, body: `${groupedBody} — ${MASCOT_META[mascot].name}`, icon: MASCOT_META[mascot].portrait, badge: "/icon.png",
+            title: recent.title, body: `${groupedBody} — ${MASCOT_META[mascot].name}`, icon: MASCOT_META[mascot].portrait, badge: "/notification-badge.png",
             url: notificationUrl, tag: `asofab-group-${input.groupKey}`, renotify: true, badgeCount,
-            data: { notificationId: recent.id, source: meta.source, mascot },
+            data: {
+              notificationId: recent.id, source: meta.source, mascot,
+              conversationId: typeof context.conversationId === "string" ? context.conversationId : undefined,
+              targetHref: input.href || recent.href,
+            },
           });
           if (response.status === 404 || response.status === 410) await admin.from("push_subscriptions").delete().eq("endpoint", subscription.endpoint);
         } catch (error) { console.error("Grouped Web Push delivery failed.", { kind: input.kind, error }); }
@@ -159,7 +164,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
   const rendered = input.context?.shellVersion
     ? reinstallCopy[mascot]
     : renderNotificationCopy(template, { actor: actorName, source: input.sourceLabel });
-  const context = { ...(input.context ?? {}), ...(input.groupKey ? { groupKey: input.groupKey, groupCount: 1 } : {}), ...(actorName ? { actorName } : {}) };
+  const context: Record<string, unknown> = { ...(input.context ?? {}), ...(input.groupKey ? { groupKey: input.groupKey, groupCount: 1 } : {}), ...(actorName ? { actorName } : {}) };
 
   const insert = {
     user_id: input.recipientUserId,
@@ -209,11 +214,15 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
         title: rendered.title,
         body: `${rendered.body} — ${mascotMeta.name}`,
         icon: mascotMeta.portrait,
-        badge: "/icon.png",
+        badge: "/notification-badge.png",
         url: notificationUrl,
         tag: input.groupKey ? `asofab-group-${input.groupKey}` : `asofab-${data.id}`,
         badgeCount,
-        data: { notificationId: data.id, source: meta.source, mascot },
+        data: {
+          notificationId: data.id, source: meta.source, mascot,
+          conversationId: typeof context.conversationId === "string" ? context.conversationId : undefined,
+          targetHref: input.href || data.href,
+        },
       });
       if (response.status === 404 || response.status === 410) {
         await admin.from("push_subscriptions").delete().eq("endpoint", subscription.endpoint);

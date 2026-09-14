@@ -18,6 +18,10 @@ function lastStop(location: CharacterLocation): string {
   return Array.isArray(location) ? location[location.length - 1] : location;
 }
 
+function endsInDeath(location: CharacterLocation): location is string[] {
+  return Array.isArray(location) && location[location.length - 1] === "Dead";
+}
+
 /**
  * Walks chapters in the given order and, for each chapter, resolves every
  * character's effective map location + status.
@@ -29,6 +33,8 @@ function lastStop(location: CharacterLocation): string {
  * - "Dead" freezes the character at their last-known *single* location
  *   (just the final stop, not the whole hop path) and marks status "dead".
  *   If they never had a real location before, they don't render.
+ * - A route ending in "Dead" records movement and death in the same chapter;
+ *   the marker freezes as dead at the final real stop.
  * - "-" does the same, marking status "unknown" instead.
  * - If a "Dead" or "-" character later gets a real location again, they
  *   snap back to "alive" at that new location automatically.
@@ -47,6 +53,21 @@ export function resolveCharacterPositionsInOrder(
       CharacterId,
       CharacterLocation,
     ][]) {
+      if (endsInDeath(rawValue)) {
+        const route = rawValue.slice(0, -1);
+        const finalLocation = route[route.length - 1];
+
+        if (finalLocation) {
+          lastKnownStop[charId] = finalLocation;
+          resolvedChapter[charId] = {
+            location: route.length === 1 ? finalLocation : route,
+            status: "dead",
+          };
+        }
+
+        continue;
+      }
+
       if (rawValue === "Dead") {
         const frozen = lastKnownStop[charId];
         if (frozen) {

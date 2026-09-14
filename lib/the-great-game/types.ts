@@ -64,6 +64,7 @@ export type AbilityTrigger =
   | "bond";
 
 export type AbilityId =
+  | "a-son-forewarned"
   | "silent-verdict"
   | "housebreaker"
   | "dawns-edge"

@@ -14428,6 +14428,174 @@
       "parentSource": "supabase",
       "body": "welcome aboard. this department recognizes AU jurisdiction only.",
       "publishedAt": "2026-09-14T10:50:00.000Z"
+    },
+    {
+      "id": "almar-renrose-citation",
+      "entryId": "gallery-almar-and-renrose",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "Almar bowing does not mean Oldtown belongs to Renrose. It does mean Renrose wants the room to look that way.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "almar-renrose-career",
+      "entryId": "gallery-almar-and-renrose",
+      "authorId": "regular-career",
+      "parentId": null,
+      "body": "Executive presence is when the maester has to bend at a medically concerning angle.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "almar-renrose-legal",
+      "entryId": "gallery-almar-and-renrose",
+      "authorId": "regular-legal",
+      "parentId": "almar-renrose-citation",
+      "body": "Correct. Posture is not a deed of transfer, however pleased Renrose looks.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "renrose-breakfast-food",
+      "entryId": "gallery-renrose-gardens-breakfast",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "Bread, fruit, roses, sunlight. Finally a Highgarden policy I can support.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "renrose-breakfast-local",
+      "entryId": "gallery-renrose-gardens-breakfast",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "that breakfast has a better view than most castles have defenses",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "renrose-rose-optimist",
+      "entryId": "gallery-renrose-rose-gardens",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "Okay, the roses are genuinely beautiful. I understand why this family thinks in symbols.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "renrose-rose-u",
+      "entryId": "gallery-renrose-rose-gardens",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "lovely flowers. would love to hear from the people doing all the lovely flower labor behind him",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "renrose-desk-ledger",
+      "entryId": "gallery-renrose-work-desk",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "That is the face of a man whose worksheet has one column labeled allies and another labeled temporary allies.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "renrose-desk-grad",
+      "entryId": "gallery-renrose-work-desk",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "The desk portrait makes ambition look less like a speech and more like several years of very organized paperwork.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "gaelor-teror-g",
+      "entryId": "gallery-gaelor-teror-orgutu-lideri",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "I opened the comments ready to defend him and honestly the branding department has given me nothing to work with.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "gaelor-teror-e",
+      "entryId": "gallery-gaelor-teror-orgutu-lideri",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "not a leader. more of a recurring security incident with a title",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "gaelor-teror-watch",
+      "entryId": "gallery-gaelor-teror-orgutu-lideri",
+      "authorId": "institution-city-watch",
+      "parentId": null,
+      "body": "The City Watch cannot confirm organizational leadership. We can confirm the incident ledger is no longer a single volume.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "gaelor-teror-scheduled-cast",
+      "entryId": "gallery-gaelor-teror-orgutu-lideri",
+      "authorId": "cast-gaelor-targaryen",
+      "parentId": "gaelor-teror-e",
+      "body": "You people will call anything an incident.",
+      "publishedAt": "2026-09-14T16:35:06.000Z"
+    },
+    {
+      "id": "uclu-m",
+      "entryId": "gallery-jace-gaelor-visenor-bu-uclu-cok-guclu",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "three princes combining their strengths to create one fully operational disagreement",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "uclu-gym",
+      "entryId": "gallery-jace-gaelor-visenor-bu-uclu-cok-guclu",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "bro this is three spotters arguing while the bar stays on the floor",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "uclu-v",
+      "entryId": "gallery-jace-gaelor-visenor-bu-uclu-cok-guclu",
+      "authorId": "regular-v",
+      "parentId": "uclu-m",
+      "body": "Visenor is contributing strategic distance from the disagreement",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "uclu-scheduled-j",
+      "entryId": "gallery-jace-gaelor-visenor-bu-uclu-cok-guclu",
+      "authorId": "regular-j",
+      "parentId": "uclu-v",
+      "body": "and Jace is contributing the paperwork generated by that distance",
+      "publishedAt": "2026-09-14T17:09:53.000Z"
+    },
+    {
+      "id": "lorent-ideas-grad",
+      "entryId": "gallery-lorent-renrose-a-man-will-die-but-not-his-ideas",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "The edit gets the inheritance right: Renrose does not merely receive Highgarden. He receives an unfinished argument with the Crown.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "lorent-ideas-club",
+      "entryId": "gallery-lorent-renrose-a-man-will-die-but-not-his-ideas",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "A son turning grief into purpose can look noble and still lead somewhere terrible. That is what makes this hurt.",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "lorent-ideas-u",
+      "entryId": "gallery-lorent-renrose-a-man-will-die-but-not-his-ideas",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "when aristocrats say the ideas survived they usually mean the rest of us are about to fund the sequel",
+      "publishedAt": "2026-09-14T15:35:00.000Z"
+    },
+    {
+      "id": "lorent-ideas-scheduled-l",
+      "entryId": "gallery-lorent-renrose-a-man-will-die-but-not-his-ideas",
+      "authorId": "regular-l",
+      "parentId": "lorent-ideas-grad",
+      "body": "Exactly. Renrose inherits Lorent's hostility toward the Crown, but his plan to raise House Tyrell above every rival is his own escalation.",
+      "publishedAt": "2026-09-14T18:48:29.000Z"
     }
   ],
   "relationships": [

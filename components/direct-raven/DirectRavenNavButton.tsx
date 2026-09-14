@@ -35,8 +35,13 @@ export default function DirectRavenNavButton() {
     channel = supabase
       .channel("direct-raven-navbar")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "direct_raven_messages" }, (payload) => {
-        if (currentUser && payload.new.sender_id !== currentUser) playRavenSound();
-        void load();
+        const sameOpenConversation = document.visibilityState === "visible"
+          && document.documentElement.dataset.activeRavenConversation === payload.new.conversation_id;
+        if (currentUser && payload.new.sender_id !== currentUser && !sameOpenConversation) playRavenSound();
+        // The open conversation writes its read marker immediately. Avoid querying
+        // unread totals in the tiny window before that upsert lands, otherwise the
+        // navbar badge can flash for a message the user is already looking at.
+        if (!sameOpenConversation) void load();
       })
       .subscribe();
     const { data: authListener } = supabase.auth.onAuthStateChange(() => window.setTimeout(() => void load(), 0));

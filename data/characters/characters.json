@@ -224,6 +224,7 @@
       "cordin-poole": "Replaced him as Grand Maester with Baelor Targaryen; still keeps Cordin on the council for administrative continuity, though he treats him with barely concealed contempt.",
       "curtass-whent": "Recalled him from obscurity and hired him in secret to retrieve Prince Visenor; received word of his death with cold indifference.",
       "derrin-hightower": "His oldest friend and, until his execution, his most trusted Hand — a betrayal that cut deeper than the poison itself.",
+      "lorent-tyrell": "The former Lord of Highgarden, summoned to King's Landing after the poisoning conspiracy came to light. Baelenys judged Lorent's attempt to remove him as treason and ordered his execution on the Fifth Day of the Third Moon, 99 AC.",
       "edwyle-stark": "The late Lord of Winterfell had aided Baelenys' father, King Aenys, in ways Baelenys still considered important decades later. That old service left him with a lasting sense of obligation toward Edwyle's descendants.",
       "gaelor-targaryen": "Sees growing potential in him and has named him heir should Visenor not return; though Gaelor's massacre at Oldtown embarrassed the Crown, the King accepts full responsibility for the order that caused it. After the Flea Bottom massacre, he cancels Gaelor's Watch appointment, sends him to Driftmark and reserves further punishment to himself.",
       "grance-morrigen": "A knight who accompanied him to Cloudpass in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing.",
@@ -536,7 +537,7 @@
       "jacaelon-targaryen": "The prince who exposed his treason, led him into a locked room at Driftmark under false pretenses, extracted his full confession — including the name of the Lord of Highgarden — and executed him on the spot before disposing of the body at sea.",
       "melessa-hightower": "His surviving daughter, whose life was spared only by chance in the Oldtown massacre.",
       "myles-mooton": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC.",
-      "the-lord-of-highgarden": "His co-conspirator; it was the Lord of Highgarden who first approached him with the plan to poison the King, sharing his belief that the realm could not survive another of Baelenys's wars.",
+      "lorent-tyrell": "His co-conspirator; Lorent first approached him with the plan to poison the King, sharing his belief that the realm could not survive another of Baelenys's wars.",
       "timos-hightower": "His son, condemned and killed for a treason he never had any part in."
     },
     "summary": "For decades Derrin Hightower served as Baelenys' Hand and closest political adviser. After the poisoning attempt, he became the center of suspicion when the dying assassin allegedly whispered only two words: 'the Hand.' Confronted alone by Jacaelon at Driftmark, Derrin confessed everything: he had conspired with the Lord of Highgarden to poison the King, believing the realm could no longer survive Baelenys' wars and taxes, and that he acted for House Targaryen's future rather than against it. Jace executed him on the spot and disposed of his body at sea. To the realm, Derrin Hightower remains simply missing — his true fate known only to the King, his new Hand, and the sea.",
@@ -2015,6 +2016,51 @@
     "debutChapter": "the-brothers-tilt"
   },
   {
+    "id": "lorent-tyrell",
+    "name": "Lorent Tyrell",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Tyrell",
+    "title": "Former Lord of Highgarden and Warden of the South",
+    "status": "Dead",
+    "nameday": {
+      "day": 26,
+      "moon": 5,
+      "year": 35
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [
+      "renrose-tyrell"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Politically Ambitious",
+      "Secretive",
+      "Treasonous"
+    ],
+    "goals": [
+      "Remove King Baelenys from power before another war could bleed the realm"
+    ],
+    "relationships": {
+      "baelenys-targaryen": "The king he conspired to poison, believing Baelenys's appetite for war would bleed the realm dry. Summoned from Highgarden to King's Landing, Lorent was condemned and executed by Baelenys's order.",
+      "derrin-hightower": "His co-conspirator in the plot to poison King Baelenys. Lorent first approached Derrin with the plan, believing the realm could not endure another of the King's wars.",
+      "renrose-tyrell": "His son and successor, twenty-five years his junior, who inherited Highgarden and the wardenship of the South after Lorent's execution."
+    },
+    "summary": "Lorent Tyrell was Lord of Highgarden and Warden of the South before his son Renrose. Convinced that the realm could not survive another of King Baelenys's wars, he drew Derrin Hightower into the conspiracy to poison the King. When the plot began to unravel, Lorent obeyed a royal summons and rode from Highgarden to King's Landing. On the Fifth Day of the Third Moon, five days after Derrin's secret death, Baelenys condemned Lorent for treason and ordered his execution in the capital. Renrose inherited Highgarden two moons before the Oldtown Massacre.",
+    "quotes": [],
+    "death": {
+      "day": 5,
+      "moon": 3,
+      "year": 99
+    },
+    "debutChapter": "the-weight-of-loyalty"
+  },
+  {
     "id": "renrose-tyrell",
     "name": "Renrose Tyrell",
     "nickname": "-",
@@ -2028,7 +2074,7 @@
       "year": 60
     },
     "height": "179 cm",
-    "father": "-",
+    "father": "lorent-tyrell",
     "mother": "-",
     "spouse": "liana-tyrell",
     "siblings": [],
@@ -2055,6 +2101,7 @@
       "almar-larchmont": "He regards Almar as part of the machinery keeping Oldtown stable and Melessa protected. Almar, however, watches Renrose's influence over the weakened Hightowers carefully and is wary of how easily assistance can become control.",
       "gaelor-targaryen": "He considers Gaelor the principal obstacle between Visenor and the throne and has privately argued that the prince must be removed for the sake of the realm and Oldtown's dead. Renrose's hostility is political, strategic, and increasingly tied to succession.",
       "leo-tyrell": "Dispatched his fourteen-year-old son to Oldtown under the guise of education alongside Melessa Hightower — in practice, a political foothold and a pair of eyes inside the Hightower.",
+      "lorent-tyrell": "His father and predecessor, twenty-five years his senior. Renrose inherited Highgarden and the wardenship of the South after Lorent was executed for treason shortly after Derrin Hightower's death.",
       "martyn-mullendore": "Relies on Mullendore as a trusted sword arm operating in Visenor's orbit; Martyn's loyalty to the prince rather than to Renrose directly is a variable he has not yet been forced to reckon with.",
       "melessa-hightower": "Sees her as a piece to be positioned rather than a person; inserting Leo into her household is partly about influence over the last Hightower heir.",
       "visenor-targaryen": "He welcomes Visenor's plan to frame Lord Gardener and agrees to seize the rival house's lands. Although Visenor likes and trusts him, Renrose privately resolves that House Tyrell's ambition must ultimately rise above the prince as well.",

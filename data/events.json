@@ -22,6 +22,17 @@
     "description": "The Velaryon seat of High Tide hosts a grand wedding, drawing half the nobility of the eastern coast to Driftmark's harbor."
   },
   {
+    "id": "execution-lorent-tyrell",
+    "title": "The Execution of Lorent Tyrell",
+    "type": "trial",
+    "location": "King's Landing",
+    "chapterSlug": "the-weight-of-loyalty",
+    "day": 5,
+    "moon": 3,
+    "year": 99,
+    "description": "Summoned from Highgarden as the poisoning conspiracy unraveled, Lord Lorent Tyrell is condemned for treason by King Baelenys and executed in King's Landing. His son Renrose inherits Highgarden and the wardenship of the South."
+  },
+  {
     "id": "battle-oldtown",
     "title": "The Massacre at Oldtown",
     "type": "battle",

@@ -14,7 +14,7 @@ type Props = {
 };
 
 // Houses that also have a dedicated section on the family tree page
-const FAMILY_TREE_HOUSES = ["targaryen", "hightower", "stark", "dayne"];
+const FAMILY_TREE_HOUSES = ["targaryen", "hightower", "tyrell", "stark", "dayne"];
 
 export async function generateStaticParams() {
   return houses.map((house) => ({ id: house.id }));

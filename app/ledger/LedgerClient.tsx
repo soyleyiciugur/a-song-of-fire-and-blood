@@ -74,6 +74,8 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   const [pickerActiveIndex, setPickerActiveIndex] = useState(-1);
   const [deleteTarget, setDeleteTarget] = useState<PrivateLedgerEntry | null>(null);
   const saveTimers = useRef(new Map<string, number>());
+  const pendingPatches = useRef(new Map<string, EntryPatch>());
+  const saveChains = useRef(new Map<string, Promise<void>>());
 
   const load = useCallback(async () => {
     setLoading(true); setMessage("");
@@ -83,7 +85,68 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     setLoading(false);
   }, [supabase, userId]);
 
-  useEffect(() => { void load(); return () => { for (const timer of saveTimers.current.values()) window.clearTimeout(timer); }; }, [load]);
+  const flushSave = useCallback((id: string) => {
+    const timer = saveTimers.current.get(id);
+    if (timer) {
+      window.clearTimeout(timer);
+      saveTimers.current.delete(id);
+    }
+
+    const previous = saveChains.current.get(id) ?? Promise.resolve();
+    const next = previous.catch(() => undefined).then(async () => {
+      while (pendingPatches.current.has(id)) {
+        const patch = pendingPatches.current.get(id);
+        if (!patch) break;
+        pendingPatches.current.delete(id);
+        setSaveState("saving");
+
+        const { error } = await supabase
+          .from("private_ledger_entries")
+          .update({ ...patch, updated_at: new Date().toISOString() })
+          .eq("id", id)
+          .eq("user_id", userId);
+
+        if (error) {
+          pendingPatches.current.set(id, { ...patch, ...(pendingPatches.current.get(id) ?? {}) });
+          setSaveState("error");
+          setMessage("A change could not be sealed. Your words remain on this screen; try again before leaving.");
+          break;
+        }
+
+        setSaveState("saved");
+      }
+
+      if (!pendingPatches.current.size) {
+        window.setTimeout(() => setSaveState((current) => current === "saved" ? "idle" : current), 1500);
+      }
+    }).finally(() => {
+      if (saveChains.current.get(id) === next) saveChains.current.delete(id);
+    });
+
+    saveChains.current.set(id, next);
+    return next;
+  }, [supabase, userId]);
+
+  useEffect(() => { const timer = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(timer); }, [load]);
+
+  useEffect(() => {
+    const timers = saveTimers.current;
+    const flushAll = () => {
+      for (const id of pendingPatches.current.keys()) void flushSave(id);
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") flushAll();
+    };
+    window.addEventListener("pagehide", flushAll);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      window.removeEventListener("pagehide", flushAll);
+      document.removeEventListener("visibilitychange", onVisibility);
+      flushAll();
+      for (const timer of timers.values()) window.clearTimeout(timer);
+      timers.clear();
+    };
+  }, [flushSave]);
   useEffect(() => {
     if (!picker && !deleteTarget) return;
     const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape") { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); } };
@@ -143,16 +206,17 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   }
 
   function scheduleSave(id: string, patch: EntryPatch) {
-    const previous = saveTimers.current.get(id); if (previous) window.clearTimeout(previous);
+    pendingPatches.current.set(id, { ...(pendingPatches.current.get(id) ?? {}), ...patch });
+    const previous = saveTimers.current.get(id);
+    if (previous) window.clearTimeout(previous);
     setSaveState("saving");
-    const timer = window.setTimeout(async () => {
+    const timer = window.setTimeout(() => {
       saveTimers.current.delete(id);
-      const { error } = await supabase.from("private_ledger_entries").update({ ...patch, updated_at: new Date().toISOString() }).eq("id", id).eq("user_id", userId);
-      if (error) { setSaveState("error"); setMessage("A change could not be sealed. Your words remain on this screen; try again before leaving."); }
-      else { setSaveState("saved"); window.setTimeout(() => setSaveState("idle"), 1500); }
+      void flushSave(id);
     }, 650);
     saveTimers.current.set(id, timer);
   }
+
 
   async function newEntry() {
     if (creating) return;
@@ -211,7 +275,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
 
     <div className={styles.filters}>
       <div className={styles.segmented} role="tablist" aria-label="Ledger status">
-        {(["open", "settled", "all"] as Filter[]).map((value) => <button key={value} type="button" aria-selected={!archived && filter === value} onClick={() => { setArchived(false); setFilter(value); }}>{value === "open" ? "Open" : value === "settled" ? "Settled" : "All"}</button>)}
+        {(["open", "settled", "all"] as Filter[]).map((value) => <button key={value} type="button" role="tab" aria-selected={!archived && filter === value} onClick={() => { setArchived(false); setFilter(value); }}>{value === "open" ? "Open" : value === "settled" ? "Settled" : "All"}</button>)}
       </div>
       <button className={`${styles.archiveFilter} ${archived ? styles.archiveActive : ""}`} type="button" onClick={() => setArchived((value) => !value)}><Icon name="archive"/>{archived ? "Leave the Archive" : "The Archive"}</button>
     </div>
@@ -238,7 +302,12 @@ export default function LedgerClient({ userId, username }: { userId: string; use
             .includes(pickerNeedle);
         });
         const availableChapters = chapters.filter((chapter) => !pickerNeedle || [chapter.title, chapter.slug, chapter.synopsis ?? ""].join(" ").toLocaleLowerCase().includes(pickerNeedle));
-        const chapterOptions = [{ slug: null as string | null, title: "No chapter bound" }, ...availableChapters.map((chapter) => ({ slug: chapter.slug as string | null, title: chapter.title }))];
+        const unboundTerms = ["none", "unbound", "no chapter", "no chapter bound"];
+        const showUnbound = !pickerNeedle || unboundTerms.some((term) => term.startsWith(pickerNeedle) || pickerNeedle.startsWith(term));
+        const chapterOptions = [
+          ...(showUnbound ? [{ slug: null as string | null, title: "No chapter bound" }] : []),
+          ...availableChapters.map((chapter) => ({ slug: chapter.slug as string | null, title: chapter.title })),
+        ];
         return <article className={`${styles.entry} ${entry.pinned ? styles.pinned : ""} ${entry.status === "settled" ? styles.settled : ""}`} key={entry.id}>
           <button type="button" className={styles.entrySummary} onClick={() => { setExpandedId(expanded ? null : entry.id); closePicker(); }} aria-expanded={expanded}>
             <span className={styles.entryMain}><span className={styles.entryMeta}>{entry.pinned && <b>Pinned</b>}{entry.status === "settled" && <b>Settled</b>}{entry.archived && <b>Archived</b>}<small>Last amended {age(entry.updated_at)}</small></span><strong>{entry.heading || "Untitled entry"}</strong>{entry.matter && <span className={styles.matterPreview}>{entry.matter}</span>}<span className={styles.progress}>{entry.checklist.length ? `${done} of ${entry.checklist.length} settled` : "No listed matters"}</span></span>
