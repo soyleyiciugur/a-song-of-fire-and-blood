@@ -20,7 +20,7 @@ export function notificationTargetHref(notification: Pick<SiteNotification, "kin
 
   if (notification.kind === "direct_raven" || notification.kind === "guild_parley") {
     const conversationId = text(context.conversationId);
-    return conversationId ? `/messages/${encodeURIComponent(conversationId)}` : stored;
+    return conversationId ? `/messages/${encodeURIComponent(conversationId)}?unread=1` : stored;
   }
 
   if (notification.kind === "tavern_answer" || notification.kind === "tavern_participant_activity" || notification.kind === "new_tavern_thread") {

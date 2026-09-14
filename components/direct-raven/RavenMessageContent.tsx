@@ -11,9 +11,16 @@ type CharacterRecord = {
   name: string;
 };
 
-const characterNames = new Map(
-  (charactersData as CharacterRecord[]).map((character) => [character.id, character.name])
-);
+const characterNames = new Map([
+  ...(charactersData as CharacterRecord[]).map((character) => [character.id, character.name] as const),
+  ["mara", "Mara"] as const,
+  ["aldren", "Aldren"] as const,
+]);
+
+const mascotFallback: Record<string, string> = {
+  mara: "/images/miniportraits/MaraMiniPortrait.webp",
+  aldren: "/images/miniportraits/AldrenMiniPortrait.webp",
+};
 
 export function parseRavenBody(value: string) {
   const portraitIds: string[] = [];
@@ -47,7 +54,7 @@ export function RavenMessagePreview({ body }: { body: string }) {
     const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
     if (!match || !characterNames.has(match[1].toLowerCase())) return part;
     const id = match[1].toLowerCase();
-    return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} /></span>;
+    return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} fallbackSrc={mascotFallback[id]} /></span>;
   })}</>;
 }
 
@@ -56,6 +63,6 @@ export default function RavenMessageContent({ body }: { body: string }) {
     const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
     if (!match || !characterNames.has(match[1].toLowerCase())) return part;
     const id = match[1].toLowerCase();
-    return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} /></span>;
+    return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} fallbackSrc={mascotFallback[id]} /></span>;
   })}</p>;
 }

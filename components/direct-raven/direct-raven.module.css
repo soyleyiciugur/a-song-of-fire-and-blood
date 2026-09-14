@@ -484,3 +484,40 @@
 
 /* Functional controls use designed SVGs rather than font glyphs. */
 .backInbox svg,.threadMenuButton svg,.seenPanelClose svg{display:block}.olderButton{display:flex;align-items:center;justify-content:center;gap:6px}.composerTools button,.fileButton{gap:6px}
+
+
+/* Direct Raven composer polish: pickers always own the interaction plane above messages. */
+.reactionPicker,.gifPopover{z-index:5000;isolation:isolate}
+.thread:has(.reactionPicker) .messageCornerMenu,.thread:has(.gifPopover) .messageCornerMenu{z-index:1;pointer-events:none;visibility:hidden}
+.richComposerInput{display:flex;align-items:flex-start;gap:7px;min-width:0;min-height:48px;box-sizing:border-box;padding:7px 8px;border:1px solid #45382f;border-radius:10px;background:#181517;transition:border-color .16s ease}
+.richComposerInput:focus-within{border-color:#85683e}
+.richComposerInput textarea{flex:1;min-width:0;min-height:34px;max-height:136px;padding:4px 5px;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important}
+.draftPortraits{display:flex;align-items:center;gap:5px;flex-wrap:wrap;max-width:45%}
+.draftPortrait{position:relative;display:inline-flex;flex:0 0 auto}
+.draftPortrait>button{position:absolute;top:-5px;right:-5px;display:grid!important;place-items:center;width:16px!important;min-width:16px!important;height:16px!important;min-height:16px!important;padding:0!important;border:1px solid #6e5642!important;border-radius:50%!important;background:#171214!important;color:#d8c3a4!important}
+.draftPortrait>button svg{width:9px;height:9px}
+@media(max-width:760px){.draftPortraits{max-width:52%}.richComposerInput{padding:6px}.richComposerInput textarea{min-height:32px}}
+
+/* v8: modern chat typography, unread boundary, categorized emoji + message reactions. */
+.messageBubble p,.replyQuote,.composer textarea,.richComposerInput textarea{font-family:var(--font-geist),Arial,Helvetica,sans-serif}
+.messageBubble p{font-size:14px;line-height:1.48;font-weight:400;letter-spacing:-.005em}
+.composer textarea,.richComposerInput textarea{font-size:15px;line-height:1.4;font-weight:400}
+.composer textarea::placeholder,.richComposerInput textarea::placeholder{font-family:var(--font-geist),Arial,Helvetica,sans-serif}
+.unreadDivider{display:flex;align-items:center;gap:10px;margin:18px 0 12px;color:#a88962;font:600 9px var(--font-geist);letter-spacing:.1em;text-transform:uppercase}
+.unreadDivider::before,.unreadDivider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,#76583b66)}
+.unreadDivider::after{background:linear-gradient(90deg,#76583b66,transparent)}
+.unreadDivider span{flex:none;padding:3px 8px;border:1px solid #59432f66;border-radius:999px;background:#171315;color:#b89568}
+.fullEmojiPicker{display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0;overflow:hidden;border-radius:9px;background:#151214}
+.emojiCategories{display:flex;align-items:center;gap:2px;overflow-x:auto;padding:5px;border-bottom:1px solid #352c27;scrollbar-width:none}.emojiCategories::-webkit-scrollbar{display:none}
+.emojiCategories button{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;padding:0;border:0;border-radius:7px;background:transparent;color:#9e8d7d;font:16px/1 var(--font-geist);cursor:pointer}.emojiCategories button:hover,.emojiCategories .emojiCategoryActive{background:#2a2021;color:#f0d7ae}
+.emojiGrid{display:grid;grid-template-columns:repeat(7,38px);align-content:start;justify-content:start;gap:2px;max-height:238px;overflow:auto;overscroll-behavior:contain;padding:6px}.emojiGrid button{display:grid;place-items:center;width:38px;height:38px;padding:0;border:0;border-radius:7px;background:transparent;font-size:21px;cursor:pointer}.emojiGrid button:hover{background:#2a2021}
+.emojiPopover{width:min(310px,calc(100% - 24px))}.emojiPopover .fullEmojiPicker{max-height:300px}
+.compactEmojiPicker{width:296px;max-width:calc(100vw - 32px)}.compactEmojiPicker .emojiGrid{max-height:190px}.compactEmojiPicker .emojiCategories button{flex-basis:30px;width:30px;height:30px}
+.messageReactionWrap{position:relative;display:inline-flex;align-items:center;gap:3px;font-family:var(--font-geist),Arial,Helvetica,sans-serif}
+.messageReactionTrigger{display:grid!important;place-items:center;min-width:26px!important;width:26px;height:26px!important;padding:0!important;border:0!important;background:transparent!important;color:#9c8a79!important}.messageReactionTrigger:hover,.messageReactionActive{color:#d7b27b!important}
+.messageReactionSummary{display:inline-flex;align-items:center;gap:2px}.messageReactionSummary button{display:inline-flex!important;align-items:center;gap:2px;min-height:24px!important;height:24px!important;padding:0 5px!important;border:1px solid #493930!important;border-radius:999px!important;background:#171315!important;color:#dfcaaa!important;font:14px/1 var(--font-geist)!important;cursor:pointer}.messageReactionSummary small{color:#9b8c7e;font:9px var(--font-geist)}
+.quickReactionPopover{position:absolute;left:0;bottom:34px;z-index:6500;display:grid;gap:5px;padding:5px;border:1px solid #594534;border-radius:12px;background:linear-gradient(180deg,#1b1618,#100e10);box-shadow:0 16px 42px #000c}
+.quickReactionRow{display:flex;align-items:center;gap:2px}.quickReactionRow>button{display:grid!important;place-items:center;width:38px!important;min-width:38px!important;height:38px!important;min-height:38px!important;padding:0!important;border:0!important;border-radius:8px!important;background:transparent!important;font-size:20px!important;cursor:pointer}.quickReactionRow>button:hover,.quickReactionSelected{background:#302326!important}.quickReactionRow .moreReactionButton{color:#c2a982!important}.moreReactionButton svg{display:block}
+.customReactionPicker{display:block;border-top:1px solid #352c27;padding-top:4px}.reactionError{padding:0 5px 4px;color:#c88989;font:9px var(--font-geist)}
+.thread:has(.quickReactionPopover) .messageCornerMenu,.thread:has(.customReactionPicker) .messageCornerMenu{pointer-events:none}
+@media(max-width:760px){.emojiGrid{grid-template-columns:repeat(7,36px);gap:1px}.emojiGrid button{width:36px;height:36px;font-size:20px}.quickReactionPopover{position:fixed;left:50%;bottom:max(86px,calc(env(safe-area-inset-bottom) + 72px));transform:translateX(-50%);max-width:calc(100vw - 20px)}.messageReactionSummary{max-width:150px;overflow:hidden}.unreadDivider{margin:15px 0 10px}}

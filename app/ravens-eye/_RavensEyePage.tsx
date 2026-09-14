@@ -58,9 +58,15 @@ function isVideo(src: string) {
   return VIDEO_EXT.some((ext) => clean.endsWith(ext));
 }
 
-function withPosterFrame(src: string) {
-  return `${src}#t=0.1`;
+function reelPosterSrc(src: string) {
+  const clean = src.split("?")[0].split("#")[0];
+  const filename = clean.split("/").pop() ?? "reel";
+  const base = filename.replace(/\.[^.]+$/, "");
+  return `/videos/reels/posters/${encodeURIComponent(base)}.webp`;
 }
+
+const MEDIA_BATCH_INITIAL = 30;
+const MEDIA_BATCH_STEP = 24;
 
 function ordinal(n: number) {
   const s = ["th", "st", "nd", "rd"];
@@ -606,12 +612,36 @@ function ReelProgress({
 
 // ── Reels viewer ────────────────────────────────────────────────────────────
 
+function ReelPoster({ entry, className }: { entry: GalleryEntry; className: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return <div className={`${className} ${styles.reelPosterFallback}`} aria-hidden="true" />;
+  }
+
+  return (
+    <img
+      src={reelPosterSrc(entry.src)}
+      alt=""
+      className={className}
+      loading="lazy"
+      decoding="async"
+      onError={() => setFailed(true)}
+      aria-hidden="true"
+    />
+  );
+}
+
 function ReelSlide({
   entry,
   onActive,
+  loadVideo,
+  isActive,
 }: {
   entry: GalleryEntry;
   onActive: (entry: GalleryEntry) => void;
+  loadVideo: boolean;
+  isActive: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -622,22 +652,24 @@ function ReelSlide({
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const video = videoRef.current;
     const slide = slideRef.current;
-    if (!video || !slide) return;
+    if (!slide) return;
 
     const observer = new IntersectionObserver(
       ([intersection]) => {
+        const video = videoRef.current;
         if (
           intersection.isIntersecting &&
           intersection.intersectionRatio > 0.6
         ) {
           onActive(entry);
-          video
-            .play()
-            .then(() => setIsPlaying(true))
-            .catch(() => setIsPlaying(false));
-        } else {
+          if (video) {
+            video
+              .play()
+              .then(() => setIsPlaying(true))
+              .catch(() => setIsPlaying(false));
+          }
+        } else if (video) {
           video.pause();
           setIsPlaying(false);
         }
@@ -647,7 +679,7 @@ function ReelSlide({
 
     observer.observe(slide);
     return () => observer.disconnect();
-  }, [entry, onActive]);
+  }, [entry, onActive, loadVideo]);
 
   useEffect(() => {
     return () => {
@@ -689,17 +721,22 @@ function ReelSlide({
 
   return (
     <div ref={slideRef} className={styles.reelSlide}>
-      <video
-        ref={videoRef}
-        src={entry.src}
-        className={styles.reelVideo}
-        loop
-        playsInline
-        preload="metadata"
-        onTimeUpdate={updateProgress}
-        onLoadedMetadata={updateProgress}
-        onDurationChange={updateProgress}
-      />
+      {loadVideo ? (
+        <video
+          ref={videoRef}
+          src={entry.src}
+          poster={reelPosterSrc(entry.src)}
+          className={styles.reelVideo}
+          loop
+          playsInline
+          preload={isActive ? "auto" : "metadata"}
+          onTimeUpdate={updateProgress}
+          onLoadedMetadata={updateProgress}
+          onDurationChange={updateProgress}
+        />
+      ) : (
+        <ReelPoster entry={entry} className={styles.reelVideo} />
+      )}
 
       <div className={styles.reelTapCatcher} onClick={handleTap} />
 
@@ -745,11 +782,13 @@ function ReelSlide({
         </div>
       )}
 
-      <ReelProgress
-        videoRef={videoRef}
-        progress={progress}
-        onSeek={setProgress}
-      />
+      {loadVideo && (
+        <ReelProgress
+          videoRef={videoRef}
+          progress={progress}
+          onSeek={setProgress}
+        />
+      )}
     </div>
   );
 }
@@ -766,6 +805,16 @@ function ReelsViewer({
   onActiveEntry: (entry: GalleryEntry) => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(startIndex);
+
+  const handleActive = useCallback(
+    (entry: GalleryEntry) => {
+      const index = entries.findIndex((candidate) => candidate.id === entry.id);
+      if (index >= 0) setActiveIndex(index);
+      onActiveEntry(entry);
+    },
+    [entries, onActiveEntry]
+  );
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -792,11 +841,13 @@ function ReelsViewer({
 
   return (
     <div className={styles.reelsViewer} ref={containerRef}>
-      {entries.map((entry) => (
+      {entries.map((entry, index) => (
         <ReelSlide
           key={entry.id}
           entry={entry}
-          onActive={onActiveEntry}
+          onActive={handleActive}
+          loadVideo={Math.abs(index - activeIndex) <= 1}
+          isActive={index === activeIndex}
         />
       ))}
 
@@ -1096,6 +1147,27 @@ function GallerySection({
 }) {
   const filters = useGalleryFilters(entries, initialCharacter);
   const { filtered, anyFilter } = filters;
+  const [visibleCount, setVisibleCount] = useState(MEDIA_BATCH_INITIAL);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || visibleCount >= filtered.length) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisibleCount((current) => Math.min(filtered.length, current + MEDIA_BATCH_STEP));
+        }
+      },
+      { rootMargin: "900px 0px" }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [filtered.length, visibleCount]);
+
+  const visibleEntries = filtered.slice(0, visibleCount);
 
   return (
     <>
@@ -1117,7 +1189,7 @@ function GallerySection({
         </div>
       ) : (
         <div className={styles.masonry}>
-          {filtered.map((entry, idx) => {
+          {visibleEntries.map((entry, idx) => {
             const tags = flatTagsFor(entry);
 
             return (
@@ -1138,7 +1210,9 @@ function GallerySection({
                 <img
                   src={entry.src}
                   alt={entry.caption || "Gallery image"}
-                  loading="lazy"
+                  loading={idx < 6 ? "eager" : "lazy"}
+                  fetchPriority={idx < 3 ? "high" : "auto"}
+                  decoding="async"
                   className={styles.cardImg}
                 />
                 {isGutterEntry(entry) && (
@@ -1172,6 +1246,10 @@ function GallerySection({
           })}
         </div>
       )}
+
+      {visibleCount < filtered.length && (
+        <div ref={sentinelRef} className={styles.mediaLoadSentinel} aria-hidden="true" />
+      )}
     </>
   );
 }
@@ -1193,6 +1271,27 @@ function ReelsGridSection({
 }) {
   const filters = useGalleryFilters(entries, initialCharacter);
   const { filtered, anyFilter } = filters;
+  const [visibleCount, setVisibleCount] = useState(MEDIA_BATCH_INITIAL);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || visibleCount >= filtered.length) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisibleCount((current) => Math.min(filtered.length, current + MEDIA_BATCH_STEP));
+        }
+      },
+      { rootMargin: "900px 0px" }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [filtered.length, visibleCount]);
+
+  const visibleEntries = filtered.slice(0, visibleCount);
 
   return (
     <>
@@ -1214,7 +1313,7 @@ function ReelsGridSection({
         </div>
       ) : (
         <div className={styles.reelsGrid}>
-          {filtered.map((entry, idx) => (
+          {visibleEntries.map((entry, idx) => (
             <div
               key={entry.id}
               onClick={() => onOpen(filtered, idx)}
@@ -1229,13 +1328,7 @@ function ReelsGridSection({
                 }
               }}
             >
-              <video
-                src={withPosterFrame(entry.src)}
-                className={styles.reelThumb}
-                muted
-                playsInline
-                preload="metadata"
-              />
+              <ReelPoster entry={entry} className={styles.reelThumb} />
               <span className={styles.commentCount}>{getGutterComments(entry.id).length} comments</span>
 
               <div className={styles.reelPlayIcon}>
@@ -1251,6 +1344,10 @@ function ReelsGridSection({
             </div>
           ))}
         </div>
+      )}
+
+      {visibleCount < filtered.length && (
+        <div ref={sentinelRef} className={styles.mediaLoadSentinel} aria-hidden="true" />
       )}
     </>
   );
@@ -1513,6 +1610,7 @@ function RavensEyePageInner({
 
       {reelsList && reelsStartIdx !== null && (
         <ReelsViewer
+          key={`${reelsList[reelsStartIdx]?.id ?? "reel"}-${reelsStartIdx}`}
           entries={reelsList}
           startIndex={reelsStartIdx}
           onClose={closeReels}

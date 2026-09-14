@@ -613,7 +613,7 @@
   },
   {
     "id": "gallery-gaelor-supervillain",
-    "src": "/videos/reels/gaelor-supervillain.mov",
+    "src": "/videos/reels/gaelor-supervillain.mp4",
     "caption": "evilmaxxing",
     "characterIds": ["gaelor-targaryen"],
     "houseIds": ["targaryen"],
@@ -1442,7 +1442,7 @@
   },
   {
     "id": "gallery-auray5ov",
-    "src": "/videos/reels/baelenys-him.mov",
+    "src": "/videos/reels/baelenys-him.mp4",
     "caption": "aura.",
     "characterIds": [
       "baelenys-targaryen"

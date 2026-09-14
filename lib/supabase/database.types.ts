@@ -69,6 +69,19 @@ export interface DirectRavenRead {
   last_read_at: string;
 }
 
+export interface DirectRavenPresence {
+  conversation_id: string;
+  user_id: string;
+  active_until: string;
+  updated_at: string;
+}
+
+export interface DirectRavenPagePresence {
+  user_id: string;
+  active_until: string;
+  updated_at: string;
+}
+
 export interface PushSubscription {
   id: string;
   user_id: string;
@@ -151,6 +164,8 @@ export interface Database {
       direct_raven_messages: { Row: DirectRavenMessage; Insert: Pick<DirectRavenMessage, "conversation_id" | "sender_id" | "body"> & Partial<Pick<DirectRavenMessage, "id" | "created_at" | "edited_at" | "deleted_at" | "attachment_path" | "reply_to" | "gif">>; Update: Partial<Pick<DirectRavenMessage, "body" | "edited_at" | "deleted_at">>; Relationships: [] };
       direct_raven_system_events: { Row: DirectRavenSystemEvent; Insert: Omit<DirectRavenSystemEvent, "id" | "created_at"> & Partial<Pick<DirectRavenSystemEvent, "id" | "created_at">>; Update: never; Relationships: [] };
       direct_raven_reads: { Row: DirectRavenRead; Insert: DirectRavenRead; Update: Pick<DirectRavenRead, "last_read_at">; Relationships: [] };
+      direct_raven_presence: { Row: DirectRavenPresence; Insert: DirectRavenPresence; Update: Partial<Pick<DirectRavenPresence, "active_until" | "updated_at">>; Relationships: [] };
+      direct_raven_page_presence: { Row: DirectRavenPagePresence; Insert: DirectRavenPagePresence; Update: Partial<Pick<DirectRavenPagePresence, "active_until" | "updated_at">>; Relationships: [] };
       direct_raven_blocks: { Row: DirectRavenBlock; Insert: Omit<DirectRavenBlock, "created_at"> & Partial<Pick<DirectRavenBlock, "created_at">>; Update: never; Relationships: [] };
       push_subscriptions: { Row: PushSubscription; Insert: Omit<PushSubscription, "id" | "created_at" | "updated_at"> & Partial<Pick<PushSubscription, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PushSubscription, "p256dh" | "auth" | "user_agent" | "updated_at">>; Relationships: [] };
       notification_preferences: { Row: NotificationPreferencesRow; Insert: Pick<NotificationPreferencesRow, "user_id"> & Partial<Omit<NotificationPreferencesRow, "user_id">>; Update: Partial<Pick<NotificationPreferencesRow, "mascot_mode" | "preferences" | "last_mascot" | "mascot_streak" | "mara_count" | "aldren_count" | "last_variants" | "updated_at">>; Relationships: [] };
@@ -171,6 +186,7 @@ export interface Database {
       direct_raven_unread_count: { Args: Record<string, never>; Returns: number };
       is_direct_raven_participant: { Args: { conversation_uuid: string }; Returns: boolean };
       can_send_direct_raven: { Args: { conversation_uuid: string }; Returns: boolean };
+      set_message_reaction: { Args: { target: string; reaction: string }; Returns: string | null };
     };
     Enums: { user_role: UserRole; content_author_type: AuthorType };
     CompositeTypes: Record<string, never>;

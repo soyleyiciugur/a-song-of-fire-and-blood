@@ -5,6 +5,7 @@ import NotificationPortrait from "@/components/notifications/NotificationPortrai
 import NotificationSourceIcon from "@/components/notifications/NotificationSourceIcon";
 import MiniPortrait from "@/components/MiniPortrait";
 import { RavenMessagePreview } from "@/components/direct-raven/RavenMessageContent";
+import GuildAvatar from "@/components/direct-raven/GuildAvatar";
 import { MASCOT_META, type NotificationMascot, type NotificationSource, type SiteNotification } from "@/lib/notifications/types";
 import { notificationSourceLabel } from "@/lib/notifications/source";
 import { notificationTargetHref } from "@/lib/notifications/target";
@@ -66,6 +67,23 @@ function personalGroupKey(item: SiteNotification) {
   const profileId = typeof context.profileId === "string" ? context.profileId : null;
   if (profileId) return `${item.source}:profile:${profileId}`;
   return null;
+}
+
+function PersonalNotificationPortrait({ item, size }: { item: SiteNotification; size: number }) {
+  const context = item.context ?? {};
+  if (item.source === "guild-parley") {
+    const path = typeof context.guildAvatarPath === "string" ? context.guildAvatarPath : null;
+    const title = typeof context.conversationTitle === "string" ? context.conversationTitle : item.source_label || "Guild Parley";
+    return <GuildAvatar path={path} name={title} size={size} />;
+  }
+  if (item.source === "direct-raven") {
+    const avatarUrl = typeof context.actorAvatarUrl === "string" ? context.actorAvatarUrl : null;
+    const username = typeof context.actorUsername === "string" ? context.actorUsername : "DR";
+    return <span className={styles.messageNotificationAvatar} style={{ width: size, height: size }} aria-hidden="true">
+      {avatarUrl ? <img src={avatarUrl} alt="" /> : username.slice(0, 2).toUpperCase()}
+    </span>;
+  }
+  return <NotificationPortrait mascot={item.mascot} source={item.source} size={size} />;
 }
 
 function Notifications() {
@@ -349,7 +367,7 @@ function Notifications() {
   const renderPersonalCard = (item: SiteNotification, nested = false) => (
     <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
       <button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}>
-        <NotificationPortrait mascot={item.mascot} source={item.source} size={nested ? 44 : 52} />
+        <PersonalNotificationPortrait item={item} size={nested ? 44 : 52} />
         <span className={styles.cardContent}>
           <span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
           <strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span>
@@ -403,7 +421,7 @@ function Notifications() {
         if (bucket.items.length === 1) return renderPersonalCard(bucket.items[0]);
         const latest = bucket.items[0];
         const unread = bucket.items.some((item) => !item.read_at);
-        return <li key={bucket.key} className={styles.personalClusterItem}><details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}><summary><span className={styles.personalClusterIdentity}><NotificationPortrait mascot={latest.mascot} source={latest.source} size={44} /><span><strong>{latest.source_label ?? notificationSourceLabel(latest.source)}</strong><small>{bucket.items.length} fresh tidings · {latest.body}</small></span></span><span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span></summary><ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol></details></li>;
+        return <li key={bucket.key} className={styles.personalClusterItem}><details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}><summary><span className={styles.personalClusterIdentity}><PersonalNotificationPortrait item={latest} size={44} /><span><strong>{latest.source_label ?? notificationSourceLabel(latest.source)}</strong><small>{bucket.items.length} fresh tidings · {latest.body}</small></span></span><span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span></summary><ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol></details></li>;
       })}</ol></section>)}
       {hasMore && <button className={styles.more} type="button" onClick={() => setLimit((value) => value + PAGE_SIZE)}>Gather older ravens</button>}
     </section>}
@@ -420,7 +438,7 @@ function Notifications() {
     </section>
     </div>}
 
-    {activeNotification && <div className={styles.lightboxBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeLightbox(); }}><section ref={dialogRef} className={styles.lightbox} role="dialog" aria-modal="true" aria-labelledby="notification-lightbox-title"><button ref={closeRef} className={styles.closeButton} type="button" aria-label="Close notification" onClick={closeLightbox}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg></button><div className={styles.lightboxOrnament} aria-hidden="true"><span>✦</span></div><NotificationPortrait mascot={activeNotification.mascot} source={activeNotification.source} size={92} className={styles.lightboxPortrait} /><span className={styles.lightboxSource}><NotificationSourceIcon source={activeNotification.source} size={13} /> {notificationSourceLabel(activeNotification.source)}</span><h2 id="notification-lightbox-title">{activeNotification.title}</h2><p className={styles.lightboxBody}>{activeNotification.body}</p><p className={styles.lightboxSignature}>— {MASCOT_META[activeNotification.mascot].name}</p>{activePreview && <div className={styles.lightboxPreview} aria-label="Notification preview">{activePreview.contextTitle && <div className={styles.previewContext}>{activePreview.contextTitle}</div>}{activePreview.parentBody && <div className={styles.previewMessage}><span>{activePreview.parentLabel}</span><p>{activePreview.ravenPreview ? <RavenMessagePreview body={activePreview.parentBody} /> : <>“{activePreview.parentBody}”</>}</p></div>}{activePreview.parentBody && activePreview.replyBody && <div className={styles.previewDivider} aria-hidden="true"><span>✦</span></div>}{activePreview.replyBody && <div className={`${styles.previewMessage} ${styles.previewReply}`}><span>{activePreview.actorLabel}</span><p>{activePreview.ravenPreview ? <RavenMessagePreview body={activePreview.replyBody} /> : <>“{activePreview.replyBody}”</>}</p></div>}</div>}{activeNotification.source_label && !activePreview?.contextTitle && <p className={styles.lightboxContext}>{activeNotification.source_label}</p>}<time className={styles.lightboxTime} dateTime={activeNotification.created_at}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(activeNotification.created_at))}</time><div className={styles.lightboxActions}>{notificationTargetHref(activeNotification) !== "/notifications" && <Link className={styles.primaryAction} href={notificationTargetHref(activeNotification)}>{ctaLabel(activeNotification.source)} <svg className={styles.actionArrow} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}<button type="button" className={styles.dismissAction} onClick={closeLightbox}>Return to the rookery</button></div></section></div>}
+    {activeNotification && <div className={styles.lightboxBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeLightbox(); }}><section ref={dialogRef} className={styles.lightbox} role="dialog" aria-modal="true" aria-labelledby="notification-lightbox-title"><button ref={closeRef} className={styles.closeButton} type="button" aria-label="Close notification" onClick={closeLightbox}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg></button><div className={styles.lightboxOrnament} aria-hidden="true"><span>✦</span></div><div className={styles.lightboxPortrait}><PersonalNotificationPortrait item={activeNotification} size={92} /></div><span className={styles.lightboxSource}><NotificationSourceIcon source={activeNotification.source} size={13} /> {notificationSourceLabel(activeNotification.source)}</span><h2 id="notification-lightbox-title">{activeNotification.title}</h2><p className={styles.lightboxBody}>{activeNotification.body}</p><p className={styles.lightboxSignature}>— {MASCOT_META[activeNotification.mascot].name}</p>{activePreview && <div className={styles.lightboxPreview} aria-label="Notification preview">{activePreview.contextTitle && <div className={styles.previewContext}>{activePreview.contextTitle}</div>}{activePreview.parentBody && <div className={styles.previewMessage}><span>{activePreview.parentLabel}</span><p>{activePreview.ravenPreview ? <RavenMessagePreview body={activePreview.parentBody} /> : <>“{activePreview.parentBody}”</>}</p></div>}{activePreview.parentBody && activePreview.replyBody && <div className={styles.previewDivider} aria-hidden="true"><span>✦</span></div>}{activePreview.replyBody && <div className={`${styles.previewMessage} ${styles.previewReply}`}><span>{activePreview.actorLabel}</span><p>{activePreview.ravenPreview ? <RavenMessagePreview body={activePreview.replyBody} /> : <>“{activePreview.replyBody}”</>}</p></div>}</div>}{activeNotification.source_label && !activePreview?.contextTitle && <p className={styles.lightboxContext}>{activeNotification.source_label}</p>}<time className={styles.lightboxTime} dateTime={activeNotification.created_at}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(activeNotification.created_at))}</time><div className={styles.lightboxActions}>{notificationTargetHref(activeNotification) !== "/notifications" && <Link className={styles.primaryAction} href={notificationTargetHref(activeNotification)}>{ctaLabel(activeNotification.source)} <svg className={styles.actionArrow} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}<button type="button" className={styles.dismissAction} onClick={closeLightbox}>Return to the rookery</button></div></section></div>}
   </main>;
 }
 

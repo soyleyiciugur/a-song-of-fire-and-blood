@@ -854,19 +854,31 @@
   }
 }
 
-/* Mobile PWA utility hit-target isolation: each top-bar action owns only its box. */
-@media (max-width: 1150px) {
-  .playBanner .ravenEyeButton,
-  .playBanner .gameButton,
-  .playBanner .forumButton,
-  .playBanner .directRavenButton,
-  .playBanner .notificationsButton {
-    position: relative;
-    inset: auto;
-    transform: none;
-    isolation: isolate;
-    pointer-events: auto;
+
+/* Mobile focused search: occupy the full utility lane while leaving the hamburger comfortably clear. */
+@media (max-width: 640px) {
+  .playBanner .searchWrap:focus-within {
+    position: absolute;
+    left: 52px;
+    right: 6px;
+    top: 50%;
+    width: auto;
+    min-width: 0;
+    height: 40px;
+    margin: 0;
+    transform: translateY(-50%);
+    z-index: 120;
   }
-  .playBanner .forumButton,
-  .playBanner .directRavenButton { z-index: 2; }
+  .playBanner .searchWrap:focus-within .searchInput {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 42px;
+    box-shadow: 0 0 0 1px color-mix(in srgb,var(--gold) 72%,transparent), 0 10px 30px #0008;
+  }
+  .playBanner .searchWrap:focus-within .searchIcon { right: 12px; top: 11px; }
 }

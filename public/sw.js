@@ -2,6 +2,10 @@ const ASOFAB_NOTIFICATION_ROOT = "/notifications";
 
 function safeTarget(data = {}) {
   try {
+    if (data.messageNotification && typeof data.targetHref === "string") {
+      const messageTarget = new URL(data.targetHref, self.location.origin);
+      if (messageTarget.origin === self.location.origin) return messageTarget.href;
+    }
     if (data.notificationId) {
       return new URL(`${ASOFAB_NOTIFICATION_ROOT}?open=${encodeURIComponent(String(data.notificationId))}`, self.location.origin).href;
     }

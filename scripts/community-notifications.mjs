@@ -77,6 +77,9 @@ const KIND_META = {
   new_tavern_thread: ['tavern', 'new_tavern_threads'],
   tavern_participant_activity: ['tavern', 'tavern_participant_activity'],
   ravens_eye_root_comment: ['ravens-eye', 'ravens_eye_root_comments'],
+  ravens_eye_image: ['ravens-eye', 'ravens_eye_images'],
+  gutter_meme: ['ravens-eye', 'gutter_memes'],
+  gutter_reel: ['ravens-eye', 'gutter_reels'],
 };
 const MASCOTS = {
   mara: { name: 'Mara', portrait: '/images/miniportraits/MaraMiniPortrait.webp' },
@@ -134,6 +137,10 @@ function galleryLabel(id) {
   const entry = gallery.find((item) => item.id === id);
   return entry?.caption?.trim().split('\n')[0].slice(0, 130) || "The Raven's Eye";
 }
+function galleryHref(entryId) {
+  const entry = gallery.find((item) => item.id === entryId);
+  return `${sourceBase(entry)}?item=${encodeURIComponent(entryId)}`;
+}
 function ravenHref(entryId, commentId) {
   const entry = gallery.find((item) => item.id === entryId);
   const base = sourceBase(entry);
@@ -152,6 +159,29 @@ const [{ data: prefRows }, { data: profiles }] = await Promise.all([
 ]);
 const prefMap = new Map((prefRows ?? []).map((row) => [row.user_id, normalizePrefs(row.user_id, row)]));
 for (const profile of profiles ?? []) if (!prefMap.has(profile.id)) prefMap.set(profile.id, normalizePrefs(profile.id, null));
+
+// New Raven's Eye/Gutter content itself, not only the comments beneath it.
+// Dedupe keys make deployment/workflow reruns safe, while page-level push batching keeps
+// a batch of newly uploaded items to a single device notification instead of a burst.
+const newGalleryEvents = [];
+for (const entry of gallery.filter((item) => due(item.uploadedAt))) {
+  const src = String(entry?.src ?? '').split(/[?#]/)[0];
+  const kind = /\.(mp4|webm|mov)$/i.test(src) ? 'gutter_reel' : entry?.category === 'fleabottom' ? 'gutter_meme' : 'ravens_eye_image';
+  for (const profile of profiles ?? []) {
+    if (!preferenceEnabled(profile.id, kind)) continue;
+    newGalleryEvents.push({
+      eventKey: `npc:gallery:${entry.id}:${profile.id}`,
+      recipient: profile.id,
+      kind,
+      actorName: null,
+      sourceLabel: galleryLabel(entry.id),
+      href: galleryHref(entry.id),
+      publishedAt: entry.uploadedAt,
+      groupKey: `npc:new-gallery:${kind}:${profile.id}`,
+      context: { entryId: entry.id, entryTitle: galleryLabel(entry.id), contentKind: kind },
+    });
+  }
+}
 
 const forumReplyCandidates = (forum.comments ?? []).filter((comment) => comment.parentSource === 'supabase' && comment.parentId && due(comment.publishedAt));
 const ravenReplyCandidates = (flea.comments ?? []).filter((comment) => comment.parentSource === 'supabase' && comment.parentId && due(comment.publishedAt));
@@ -189,7 +219,7 @@ function explicitPreferenceEnabled(userId, kind) {
   return Boolean(row && flags(row)[key] === true);
 }
 
-const events = [];
+const events = [...newGalleryEvents];
 for (const comment of forumReplyCandidates) {
   const parent = forumParents.get(comment.parentId);
   if (!parent?.user_author_id) continue;

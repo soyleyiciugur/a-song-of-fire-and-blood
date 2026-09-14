@@ -22,8 +22,16 @@ type ForegroundNotification = {
     mascot?: NotificationMascot;
     conversationId?: string;
     targetHref?: string;
+    actorUsername?: string;
+    actorAvatarUrl?: string;
+    conversationTitle?: string;
+    guildAvatarUrl?: string;
+    messagePreview?: string;
+    messageNotification?: boolean;
   };
 };
+
+type BannerState = ForegroundNotification & { burstCount: number };
 
 function validSource(value: unknown): value is NotificationSource {
   return ["tavern", "ravens-eye", "direct-raven", "guild-parley", "chronicle", "guestbook", "realm"].includes(String(value));
@@ -33,7 +41,7 @@ function validMascot(value: unknown): value is NotificationMascot { return value
 export default function PwaBoot() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
-  const [banner, setBanner] = useState<ForegroundNotification | null>(null);
+  const [banner, setBanner] = useState<BannerState | null>(null);
 
   useEffect(() => {
     if (!banner) return;
@@ -66,10 +74,10 @@ export default function PwaBoot() {
 
       const notification: ForegroundNotification = { title: raw.title, body: raw.body, data: { ...data, source: data.source, mascot: data.mascot } };
       const activeConversation = document.documentElement.dataset.activeRavenConversation;
+      const ravenWorkspaceOpen = document.documentElement.dataset.directRavenWorkspaceActive === "1";
       const sameOpenRaven = document.visibilityState === "visible"
         && (data.source === "direct-raven" || data.source === "guild-parley")
-        && typeof data.conversationId === "string"
-        && data.conversationId === activeConversation;
+        && (ravenWorkspaceOpen || (typeof data.conversationId === "string" && data.conversationId === activeConversation));
 
       if (sameOpenRaven) {
         event.ports[0]?.postMessage({ handled: true, action: "suppressed" });
@@ -86,7 +94,13 @@ export default function PwaBoot() {
       }
 
       window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
-      setBanner(notification);
+      setBanner((current) => {
+        const sameBurst = Boolean(
+          current?.data.messageNotification && notification.data.messageNotification &&
+          current.data.conversationId && current.data.conversationId === notification.data.conversationId
+        );
+        return { ...notification, burstCount: sameBurst ? current!.burstCount + 1 : 1 };
+      });
       event.ports[0]?.postMessage({ handled: true, action: "in-app" });
     };
     navigator.serviceWorker.addEventListener("message", receive);
@@ -114,21 +128,37 @@ export default function PwaBoot() {
   const openBanner = () => {
     if (!banner) return;
     const id = banner.data.notificationId;
+    const target = banner.data.messageNotification && banner.data.targetHref
+      ? banner.data.targetHref
+      : id ? `/notifications?open=${encodeURIComponent(id)}` : "/notifications";
     setBanner(null);
-    router.push(id ? `/notifications?open=${encodeURIComponent(id)}` : "/notifications");
+    router.push(target);
   };
 
   return <>
     <ShellUpdate />
     <AndroidInstallPrompt />
     <PullToRefresh />
-    {banner && banner.data.source && banner.data.mascot && <aside className={styles.banner} role="status" aria-label="New raven notification">
+    {banner && banner.data.source && banner.data.mascot && <aside className={`${styles.banner} ${banner.data.messageNotification ? styles.messageBanner : ""}`} role="status" aria-label="New raven notification">
       <button type="button" className={styles.bannerButton} onClick={openBanner}>
-        <NotificationPortrait mascot={banner.data.mascot} source={banner.data.source} size={48} />
+        {banner.data.messageNotification ? (
+          <span className={styles.messageAvatar} aria-hidden="true">
+            {(banner.data.source === "guild-parley" ? banner.data.guildAvatarUrl : banner.data.actorAvatarUrl)
+              ? <img src={(banner.data.source === "guild-parley" ? banner.data.guildAvatarUrl : banner.data.actorAvatarUrl)!} alt="" />
+              : <span>{(banner.data.source === "guild-parley" ? banner.data.conversationTitle : banner.data.actorUsername)?.slice(0, 2).toUpperCase() || "DR"}</span>}
+          </span>
+        ) : <NotificationPortrait mascot={banner.data.mascot} source={banner.data.source} size={48} />}
         <span className={styles.copy}>
-          <span className={styles.source}><NotificationSourceIcon source={banner.data.source} size={12} />{notificationSourceLabel(banner.data.source)}</span>
-          <strong>{banner.title}</strong>
-          <p>{banner.body}</p>
+          <span className={styles.source}><NotificationSourceIcon source={banner.data.source} size={12} />{notificationSourceLabel(banner.data.source)}{banner.burstCount > 1 && <em>{banner.burstCount} new</em>}</span>
+          {banner.data.messageNotification ? (
+            <>
+              <strong>{banner.data.source === "guild-parley" ? banner.data.conversationTitle || "Guild Parley" : `@${banner.data.actorUsername || "raven"}`}</strong>
+              <p>{banner.data.source === "guild-parley" && banner.data.actorUsername ? `@${banner.data.actorUsername}: ` : ""}{banner.data.messagePreview || banner.body}</p>
+            </>
+          ) : <>
+            <strong>{banner.title}</strong>
+            <p>{banner.body}</p>
+          </>}
         </span>
       </button>
       <button type="button" className={styles.close} aria-label="Dismiss notification" onClick={() => setBanner(null)}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg></button>

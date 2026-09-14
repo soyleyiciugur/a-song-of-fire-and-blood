@@ -106,6 +106,13 @@ export async function loadDirectRavenConversationOnly(id: string) {
   }
 
   const memberIds = memberships.map((membership) => membership.user_id);
+  const ownReadPromise = supabase
+    .from("direct_raven_reads")
+    .select("last_read_at")
+    .eq("conversation_id", id)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
   const messagePromise = supabase
     .from("direct_raven_messages")
     .select("*")
@@ -136,9 +143,28 @@ export async function loadDirectRavenConversationOnly(id: string) {
     { data: profiles, error: profileError },
     { data: blocks, error: blockError },
     { data: systemEvents, error: systemEventError },
-  ] = await Promise.all([messagePromise, profilePromise, blockPromise, systemEventPromise]);
+    { data: ownRead, error: ownReadError },
+  ] = await Promise.all([messagePromise, profilePromise, blockPromise, systemEventPromise, ownReadPromise]);
 
-  if (messageError || profileError || blockError || systemEventError) throw new Error("The conversation could not be loaded.");
+  if (messageError || profileError || blockError || systemEventError || ownReadError) throw new Error("The conversation could not be loaded.");
+
+  let messageRows = ((messages ?? []) as DirectRavenMessage[]).reverse();
+  if (messageRows.length === 100) {
+    let unreadQuery = supabase
+      .from("direct_raven_messages")
+      .select("*")
+      .eq("conversation_id", id)
+      .order("created_at", { ascending: true })
+      .order("id", { ascending: true })
+      .limit(500);
+    if (ownRead?.last_read_at) unreadQuery = unreadQuery.gt("created_at", ownRead.last_read_at);
+    const { data: unreadRows, error: unreadError } = await unreadQuery;
+    if (!unreadError && unreadRows?.length) {
+      const map = new Map(messageRows.map((message) => [message.id, message]));
+      for (const message of unreadRows as DirectRavenMessage[]) map.set(message.id, message);
+      messageRows = [...map.values()].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
+    }
+  }
 
   const members = (profiles ?? []) as Profile[];
   const profileMap = new Map(members.map((member) => [member.id, member]));
@@ -159,9 +185,10 @@ export async function loadDirectRavenConversationOnly(id: string) {
       unread: 0,
     } satisfies RavenConversationSummary,
     // Nothing is deleted here: load the newest 100 and let RavenConversation fetch older pages.
-    messages: ((messages ?? []) as DirectRavenMessage[]).reverse(),
+    messages: messageRows,
     systemEvents: (systemEvents ?? []) as DirectRavenSystemEvent[],
     blockedByMe: partner ? blockRows.some((block) => block.blocker_id === user.id) : false,
     blockedByThem: partner ? blockRows.some((block) => block.blocker_id === partner.id) : false,
+    initialLastReadAt: ownRead?.last_read_at ?? null,
   };
 }

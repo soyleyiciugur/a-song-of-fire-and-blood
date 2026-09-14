@@ -4,37 +4,41 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import charactersData from "@/data/characters/characters.json";
 import MiniPortrait from "@/components/MiniPortrait";
-import LikeButton from "@/components/community/LikeButton";
 import { createClient } from "@/lib/supabase/client";
 import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, DirectRavenSystemEvent, Profile } from "@/lib/supabase/database.types";
 import GiphyPicker, { type RavenGif } from "./GiphyPicker";
+import EmojiPicker from "./EmojiPicker";
+import MessageReactions from "./MessageReactions";
 import GuildAvatar from "./GuildAvatar";
 import GuildParleyInfo from "./GuildParleyInfo";
 import RavenAttachment from "./RavenAttachment";
 import RavenIcon from "./RavenIcon";
 import RavenMessageContent, {
+  encodeRavenBody,
   parseRavenBody,
   ravenBodySummary,
 } from "./RavenMessageContent";
 import styles from "./direct-raven.module.css";
 
 const time = (value: string) =>
-  new Intl.DateTimeFormat("en", { hour: "2-digit", minute: "2-digit" }).format(new Date(value));
+  new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value));
 const day = (value: string) =>
   new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(new Date(value));
 
-const emojis = ["😀","😃","😄","😁","😂","🤣","🥹","😊","😍","🥰","😘","😏","😒","🙄","😬","🤨","🫡","🤔","🤭","🤫","😈","😭","😢","😤","😡","🤬","💀","☠️","👀","❤️","♥️","💔","🔥","✨","⭐","💫","👍","👎","👏","🙏","🤝","💅","🫶","👌","✌️","🤞","🖕","🎉","🍷","🍺","⚔️","🗡️","🛡️","👑","🐉","🐺","🦌","🦁","🐙","🐦‍⬛","🌹","🌙","☀️","❄️","🌊","🏰","📜","🕯️","🩸","⚰️","💰","🪙"];
 const MAX_PORTRAITS = 8;
 
 type CharacterOption = {
   id: string;
   name: string;
   hidden?: boolean;
+  fallbackSrc?: string;
 };
 
-const portraitCharacters = (charactersData as CharacterOption[])
-  .filter((character) => !character.hidden)
-  .sort((a, b) => a.name.localeCompare(b.name));
+const portraitCharacters: CharacterOption[] = [
+  ...(charactersData as CharacterOption[]).filter((character) => !character.hidden),
+  { id: "mara", name: "Mara", fallbackSrc: "/images/miniportraits/MaraMiniPortrait.webp" },
+  { id: "aldren", name: "Aldren", fallbackSrc: "/images/miniportraits/AldrenMiniPortrait.webp" },
+].sort((a, b) => a.name.localeCompare(b.name));
 
 type PickerTab = "emoji" | "portraits";
 
@@ -49,6 +53,8 @@ type Props = {
   initialSystemEvents?: DirectRavenSystemEvent[];
   blockedByMe: boolean;
   blockedByThem: boolean;
+  initialLastReadAt?: string | null;
+  focusUnread?: boolean;
 };
 
 export default function RavenConversation({
@@ -62,6 +68,8 @@ export default function RavenConversation({
   initialSystemEvents = [],
   blockedByMe: initialBlockedByMe,
   blockedByThem: initialBlockedByThem,
+  initialLastReadAt = null,
+  focusUnread = false,
 }: Props) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState(initialMessages);
@@ -94,7 +102,7 @@ export default function RavenConversation({
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  const nearBottom = useRef(true);
+  const nearBottom = useRef(!focusUnread);
   const loadedMessages = useRef(messages);
   const sendLock = useRef(false);
 
@@ -107,6 +115,10 @@ export default function RavenConversation({
     ...messages.map((message) => ({ type: "message" as const, at: message.created_at, id: message.id, message })),
     ...systemEvents.map((event) => ({ type: "system" as const, at: event.created_at, id: event.id, event })),
   ].sort((a, b) => Date.parse(a.at) - Date.parse(b.at) || a.id.localeCompare(b.id)), [messages, systemEvents]);
+  const firstUnreadId = useMemo(() => messages.find((message) =>
+    message.sender_id !== userId && !message.deleted_at && (!initialLastReadAt || message.created_at > initialLastReadAt)
+  )?.id ?? null, [messages, userId, initialLastReadAt]);
+  const unreadFocusDone = useRef(false);
   const systemEventText = (event: DirectRavenSystemEvent) => {
     const actor = typeof event.detail.actorName === "string" ? event.detail.actorName : memberMap.get(event.actor_id ?? "")?.display_name ?? "A member";
     const target = typeof event.detail.targetName === "string" ? event.detail.targetName : memberMap.get(event.target_user_id ?? "")?.display_name ?? "a member";
@@ -177,6 +189,16 @@ export default function RavenConversation({
     loadedMessages.current = messages;
     if (nearBottom.current) scrollBottom();
   }, [messages]);
+
+  useLayoutEffect(() => {
+    if (!focusUnread || unreadFocusDone.current || !firstUnreadId) return;
+    const target = document.getElementById(`raven-${firstUnreadId}`);
+    if (!target) return;
+    unreadFocusDone.current = true;
+    target.scrollIntoView({ block: "center" });
+    const element = listRef.current;
+    if (element) nearBottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 80;
+  }, [focusUnread, firstUnreadId]);
 
   useEffect(() => {
     if (!file) {
@@ -256,6 +278,7 @@ export default function RavenConversation({
     };
   }, [conversationId]);
 
+
   useEffect(() => {
     let active = true;
 
@@ -334,7 +357,7 @@ export default function RavenConversation({
       void markReadAt();
     };
 
-    scrollBottom();
+    if (!focusUnread || !firstUnreadId) scrollBottom();
     void sync();
 
     const channel = supabase
@@ -388,7 +411,7 @@ export default function RavenConversation({
       element?.removeEventListener("scrollend", read);
       void supabase.removeChannel(channel);
     };
-  }, [conversationId, supabase, userId, partner, isGuild]);
+  }, [conversationId, supabase, userId, partner, isGuild, focusUnread, firstUnreadId]);
 
   function chooseFile(next: File | undefined) {
     if (!next) return;
@@ -401,18 +424,18 @@ export default function RavenConversation({
   }
 
   function addPortrait(id: string) {
-    if (parseRavenBody(body).portraitIds.length >= MAX_PORTRAITS) {
+    const parsed = parseRavenBody(body);
+    if (parsed.portraitIds.length >= MAX_PORTRAITS) {
       setError(`You can insert up to ${MAX_PORTRAITS} mini portraits to one raven.`);
       return;
     }
     setError("");
-    const input = inputRef.current;
-    const start = input?.selectionStart ?? body.length;
-    const end = input?.selectionEnd ?? start;
-    const token = `[[portrait:${id}]]`;
-    if (body.length - (end - start) + token.length > 4000) return;
-    setBody(body.slice(0, start) + token + body.slice(end));
-    requestAnimationFrame(() => input?.setSelectionRange(start + token.length, start + token.length));
+    setBody(encodeRavenBody(parsed.text, [...parsed.portraitIds, id]));
+  }
+
+  function removeDraftPortrait(index: number) {
+    const parsed = parseRavenBody(body);
+    setBody(encodeRavenBody(parsed.text, parsed.portraitIds.filter((_, portraitIndex) => portraitIndex !== index)));
   }
 
   function beginEdit(message: DirectRavenMessage) {
@@ -664,6 +687,7 @@ export default function RavenConversation({
               {(!previousAt || day(message.created_at) !== day(previousAt)) && (
                 <div className={styles.dateDivider}>{day(message.created_at)}</div>
               )}
+              {message.id === firstUnreadId && <div className={styles.unreadDivider}><span>Unread ravens</span></div>}
               <div id={`raven-${message.id}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
                 {isGuild && !mine && (() => {
                   const sender = memberMap.get(message.sender_id);
@@ -701,7 +725,7 @@ export default function RavenConversation({
                   {message.deleted_at ? <p>This raven was withdrawn.</p> : <RavenMessageContent body={message.body} />}
                   <div className={styles.messageFooter}>
                     {!message.deleted_at && <div className={styles.messageActions}>
-                      <LikeButton kind="message" id={message.id} />
+                      <MessageReactions messageId={message.id} userId={userId} />
                       {!closed && <button type="button" onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
                     </div>}
                     <span className={styles.messageMeta}>
@@ -814,18 +838,7 @@ export default function RavenConversation({
             {pickerOpen && (
               <div className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
                 {pickerTab === "emoji" ? (
-                  <div className={styles.emojiPicker} aria-label="Choose emoji">
-                    {emojis.map((emoji) => (
-                      <button
-                        key={emoji}
-                        type="button"
-                        disabled={sending}
-                        onClick={() => setBody((value) => (value + emoji).slice(0, 4000))}
-                      >
-                        {emoji}
-                      </button>
-                    ))}
-                  </div>
+                  <EmojiPicker onSelect={(emoji) => setBody((value) => encodeRavenBody((parseRavenBody(value).text + emoji).slice(0, 4000), parseRavenBody(value).portraitIds))} />
                 ) : (
                   <div className={styles.portraitPicker}>
                     <input
@@ -845,7 +858,7 @@ export default function RavenConversation({
                           title={character.name}
                           aria-label={`Add ${character.name} mini portrait`}
                         >
-                          <MiniPortrait id={character.id} alt="" size={44} />
+                          <MiniPortrait id={character.id} alt="" size={44} fallbackSrc={character.fallbackSrc} />
                           <span>{character.name}</span>
                         </button>
                       ))}
@@ -856,11 +869,23 @@ export default function RavenConversation({
             )}
 
             <form className={styles.composer} onSubmit={send}>
+              <div className={styles.richComposerInput}>
+                {parseRavenBody(body).portraitIds.length > 0 && <div className={styles.draftPortraits} aria-label="Mini portraits in this raven">
+                  {parseRavenBody(body).portraitIds.map((id, index) => {
+                    const option = portraitCharacters.find((character) => character.id === id);
+                    return <span key={`${id}-${index}`} className={styles.draftPortrait}>
+                      <MiniPortrait id={id} alt={option?.name ?? id} size={28} fallbackSrc={option?.fallbackSrc} />
+                      <button type="button" aria-label={`Remove ${option?.name ?? "mini portrait"}`} onClick={() => removeDraftPortrait(index)} disabled={sending}>
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></svg>
+                      </button>
+                    </span>;
+                  })}
+                </div>}
               <textarea
                 ref={inputRef}
                 disabled={sending}
-                value={body}
-                onChange={(event) => setBody(event.target.value)}
+                value={parseRavenBody(body).text}
+                onChange={(event) => setBody(encodeRavenBody(event.target.value, parseRavenBody(body).portraitIds))}
                 maxLength={4000}
                 rows={2}
                 placeholder={isGuild ? "Write to the Guild Parley…" : "Write your raven…"}
@@ -892,6 +917,7 @@ export default function RavenConversation({
                   }
                 }}
               />
+              </div>
               <button
                 type="submit"
                 disabled={sending || (!body.trim() && !file && !gif)}

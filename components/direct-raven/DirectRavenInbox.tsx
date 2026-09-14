@@ -16,7 +16,7 @@ import GuildAvatar from "./GuildAvatar";
 import { RavenMessagePreview } from "./RavenMessageContent";
 
 const time = (value: string) =>
-  new Intl.DateTimeFormat("en", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(value));
+  new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value));
 
 const summaryStamp = (item: RavenConversationSummary) => item.lastMessage?.created_at ?? item.conversation.updated_at;
 
@@ -29,6 +29,45 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
   const syncTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => setItems(conversations), [conversations]);
+
+  useEffect(() => {
+    document.documentElement.dataset.directRavenWorkspaceActive = "1";
+    return () => { delete document.documentElement.dataset.directRavenWorkspaceActive; };
+  }, []);
+
+  useEffect(() => {
+    let disposed = false;
+    let currentUserId = "";
+    const clearPresence = () => {
+      if (currentUserId) void supabase.from("direct_raven_page_presence").delete().eq("user_id", currentUserId);
+    };
+    const writePresence = async () => {
+      if (disposed) return;
+      if (document.visibilityState !== "visible") { clearPresence(); return; }
+      if (!currentUserId) {
+        const { data: { user } } = await supabase.auth.getUser();
+        currentUserId = user?.id ?? "";
+      }
+      if (!currentUserId || disposed || document.visibilityState !== "visible") return;
+      await supabase.from("direct_raven_page_presence").upsert({
+        user_id: currentUserId,
+        active_until: new Date(Date.now() + 20_000).toISOString(),
+        updated_at: new Date().toISOString(),
+      }, { onConflict: "user_id" });
+    };
+    void writePresence();
+    const timer = window.setInterval(() => void writePresence(), 8_000);
+    const visibility = () => document.visibilityState === "visible" ? void writePresence() : clearPresence();
+    document.addEventListener("visibilitychange", visibility);
+    window.addEventListener("pagehide", clearPresence);
+    return () => {
+      disposed = true;
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", visibility);
+      window.removeEventListener("pagehide", clearPresence);
+      clearPresence();
+    };
+  }, [supabase]);
 
   const syncSummaries = useCallback(async () => {
     const { data, error } = await supabase.rpc("direct_raven_summaries");
