@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import MiniPortrait from "@/components/MiniPortrait";
 import { getCharacters } from "@/lib/characters";
 import { getAllChapters } from "@/data/chapters";
@@ -86,7 +86,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   useEffect(() => { void load(); return () => { for (const timer of saveTimers.current.values()) window.clearTimeout(timer); }; }, [load]);
   useEffect(() => {
     if (!picker && !deleteTarget) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); } };
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape") { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); } };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [picker, deleteTarget]);
@@ -120,7 +120,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     setPickerActiveIndex(-1);
   }
 
-  function pickerKeyDown(event: KeyboardEvent<HTMLInputElement>, count: number, selectAt: (index: number) => void) {
+  function pickerKeyDown(event: ReactKeyboardEvent<HTMLInputElement>, count: number, selectAt: (index: number) => void) {
     if (!count) return;
     if (event.key === "ArrowDown") {
       event.preventDefault();
