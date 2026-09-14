@@ -204,7 +204,7 @@ for (const comment of forumReplyCandidates) {
     href: forumHref(threadId, comment.id),
     publishedAt: comment.publishedAt,
     groupKey: `npc:tavern:${threadId}:${parent.user_author_id}`,
-    context: { threadId, threadTitle: thread?.title || 'Tavern discussion', parentId: comment.parentId, parentBody: parent.body, commentId: comment.id, replyBody: comment.body },
+    context: { threadId, threadTitle: thread?.title || 'Tavern discussion', parentId: comment.parentId, parentBody: parent.body, parentAuthorId: parent.user_author_id || parent.legacy_author_id || parent.character_id || null, commentId: comment.id, replyBody: comment.body },
   });
 }
 for (const comment of ravenReplyCandidates) {
@@ -219,7 +219,7 @@ for (const comment of ravenReplyCandidates) {
     href: ravenHref(comment.entryId, comment.id),
     publishedAt: comment.publishedAt,
     groupKey: `npc:raven:${comment.entryId}:${parent.user_author_id}`,
-    context: { entryId: comment.entryId, entryTitle: galleryLabel(comment.entryId), parentId: comment.parentId, parentBody: parent.body, commentId: comment.id, replyBody: comment.body },
+    context: { entryId: comment.entryId, entryTitle: galleryLabel(comment.entryId), parentId: comment.parentId, parentBody: parent.body, parentAuthorId: parent.user_author_id || parent.legacy_author_id || parent.character_id || null, commentId: comment.id, replyBody: comment.body },
   });
 }
 
@@ -240,7 +240,18 @@ for (const comment of (forum.comments ?? []).filter((item) => due(item.published
       href: forumHref(threadId, comment.id),
       publishedAt: comment.publishedAt,
       groupKey: `npc:tavern-participant:${threadId}:${recipient}`,
-      context: { threadId, threadTitle: thread?.title || 'Tavern discussion', commentId: comment.id, replyBody: comment.body },
+      context: (() => {
+        const parent = comment.parentId ? forumParents.get(comment.parentId) : null;
+        return {
+          threadId,
+          threadTitle: thread?.title || 'Tavern discussion',
+          parentId: comment.parentId || null,
+          parentBody: parent?.body || null,
+          parentAuthorId: parent?.user_author_id || parent?.legacy_author_id || parent?.character_id || null,
+          commentId: comment.id,
+          replyBody: comment.body,
+        };
+      })(),
     });
   }
 }
@@ -318,37 +329,100 @@ async function sendPush(subscription, payload) {
   return fetch(subscription.endpoint, { method:'POST', headers:{ Authorization:authorization, 'Content-Encoding':'aes128gcm', 'Content-Type':'application/octet-stream', TTL:'86400' }, body });
 }
 
-async function deliverPush(notification, source, groupKey) {
+async function getPushSubscriptions(userId) {
   const [{ data: subscriptions }, unread] = await Promise.all([
-    supabase.from('push_subscriptions').select('endpoint,p256dh,auth').eq('user_id', notification.user_id),
-    supabase.from('site_notifications').select('id', { count:'exact', head:true }).eq('user_id', notification.user_id).is('read_at', null),
+    supabase.from('push_subscriptions').select('endpoint,p256dh,auth').eq('user_id', userId),
+    supabase.from('site_notifications').select('id', { count:'exact', head:true }).eq('user_id', userId).is('read_at', null),
   ]);
-  if (!(subscriptions ?? []).length) return false;
+  return { subscriptions: subscriptions ?? [], unreadCount: unread.count ?? undefined };
+}
+
+async function deliverPagePush(batch) {
+  const { subscriptions, unreadCount } = await getPushSubscriptions(batch.recipient);
+  if (!subscriptions.length) return false;
   if (!process.env.NEXT_PUBLIC_WEB_PUSH_VAPID_PUBLIC_KEY || !process.env.WEB_PUSH_VAPID_PRIVATE_KEY) {
-    console.log(`Community notifications: recorded ${notification.kind}, but VAPID keys are unavailable for push delivery.`);
+    console.log(`Community notifications: recorded ${batch.count} ${batch.source} event(s), but VAPID keys are unavailable for push delivery.`);
     return false;
   }
-  const mascot = notification.mascot;
-  const notificationUrl = `/notifications?open=${encodeURIComponent(notification.id)}&view=personal`;
+
+  const pref = prefMap.get(batch.recipient) ?? normalizePrefs(batch.recipient, null);
+  const mascot = chooseMascot(pref);
+  const mascotName = MASCOTS[mascot].name;
+  const count = Math.max(1, batch.count);
+  const sourceName = batch.source === 'tavern' ? 'Tavern' : batch.source === 'ravens-eye' ? "Raven's Eye" : 'Rookery';
+
+  let title;
+  let body;
+  if (batch.source === 'tavern') {
+    title = mascot === 'mara' ? 'The tavern carries on' : 'The tavern is abuzz!';
+    body = count === 1
+      ? (mascot === 'mara' ? 'Fresh words await you in the Tavern.' : 'Fresh words await you in the Tavern, my liege.')
+      : (mascot === 'mara' ? `${count} fresh tidings await you in the Tavern.` : `${count} fresh tidings await you in the Tavern, my liege.`);
+  } else if (batch.source === 'ravens-eye') {
+    title = mascot === 'mara' ? 'Fresh murmurs from the Eye' : "The Eye has fresh tidings!";
+    body = count === 1
+      ? (mascot === 'mara' ? "Fresh activity waits beneath the Raven's Eye." : "Fresh activity awaits beneath the Raven's Eye, my liege.")
+      : (mascot === 'mara' ? `${count} fresh tidings wait beneath the Raven's Eye.` : `${count} fresh tidings await beneath the Raven's Eye, my liege.`);
+  } else {
+    title = mascot === 'mara' ? 'Fresh tidings from the realm' : 'Fresh tidings await!';
+    body = count === 1 ? `A fresh tiding awaits in ${sourceName}.` : `${count} fresh tidings await in ${sourceName}.`;
+  }
+
+  const notificationUrl = '/notifications?view=personal';
   let delivered = false;
-  for (const sub of subscriptions ?? []) {
+  for (const sub of subscriptions) {
     try {
       const response = await sendPush(sub, {
-        title: notification.title,
-        body: `${notification.body} — ${MASCOTS[mascot].name}`,
+        title,
+        body: `${body} — ${mascotName}`,
         icon: MASCOTS[mascot].portrait,
         badge: '/icon.png',
         url: notificationUrl,
-        tag: groupKey ? `asofab-group-${groupKey}` : `asofab-${notification.id}`,
-        renotify: Boolean(groupKey),
-        badgeCount: unread.count ?? undefined,
-        data: { notificationId: notification.id, source, mascot },
+        tag: `asofab-page-${batch.source}`,
+        renotify: true,
+        badgeCount: unreadCount,
+        data: { source: batch.source, mascot, groupedPagePush: true },
       });
       if (response?.status === 404 || response?.status === 410) await supabase.from('push_subscriptions').delete().eq('endpoint', sub.endpoint);
       else if (response?.ok) delivered = true;
-    } catch (error) { console.error('NPC community push failed.', error); }
+    } catch (error) { console.error('NPC community page push failed.', error); }
   }
+
+  if (delivered) {
+    const nextStreak = pref.last_mascot === mascot ? pref.mascot_streak + 1 : 1;
+    const next = {
+      ...pref,
+      last_mascot: mascot,
+      mascot_streak: nextStreak,
+      mara_count: pref.mara_count + (mascot === 'mara' ? 1 : 0),
+      aldren_count: pref.aldren_count + (mascot === 'aldren' ? 1 : 0),
+    };
+    prefMap.set(batch.recipient, next);
+    await supabase.from('notification_preferences').upsert({
+      user_id: batch.recipient,
+      mascot_mode: 'balanced',
+      preferences: next.preferences,
+      last_mascot: mascot,
+      mascot_streak: nextStreak,
+      mara_count: next.mara_count,
+      aldren_count: next.aldren_count,
+      last_variants: next.last_variants,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'user_id' });
+  }
+
   return delivered;
+}
+
+const pendingPagePushes = new Map();
+function queuePagePush(event, notificationId) {
+  const [source] = KIND_META[event.kind];
+  const key = `${event.recipient}:${source}`;
+  const current = pendingPagePushes.get(key) ?? { recipient:event.recipient, source, count:0, notificationIds:new Set(), eventKeys:new Set() };
+  current.count += 1;
+  if (notificationId) current.notificationIds.add(notificationId);
+  current.eventKeys.add(event.eventKey);
+  pendingPagePushes.set(key, current);
 }
 
 async function dispatch(event) {
@@ -357,10 +431,9 @@ async function dispatch(event) {
 
   const { data: already } = await supabase.from('site_notifications').select('*').eq('user_id', event.recipient).contains('context', { eventKeys:[event.eventKey] }).limit(1).maybeSingle();
   if (already) {
-    if (already.context?.pushDelivered === false) {
-      const delivered = await deliverPush(already, source, event.groupKey);
-      if (delivered) await supabase.from('site_notifications').update({ context:{ ...already.context, pushDelivered:true } }).eq('id', already.id);
-    }
+    // If an earlier run recorded the event but could not deliver push, retry it
+    // only through the source/page batch. Already delivered events stay quiet.
+    if (already.context?.pushDelivered === false) queuePagePush(event, already.id);
     return { skipped:true, reason:'already-recorded' };
   }
 
@@ -374,10 +447,7 @@ async function dispatch(event) {
     const groupedBody = recent.mascot === 'mara' ? `${count} fresh tidings from the same place. Kept to one raven.` : `${count} fresh tidings from the same quarter have arrived together, my liege.`;
     const context = { ...(recent.context ?? {}), ...(event.context ?? {}), actorName:event.actorName, groupKey:event.groupKey, groupCount:count, eventKeys:[...(recent.context?.eventKeys ?? []), event.eventKey], pushDelivered:false };
     const { data: updated } = await supabase.from('site_notifications').update({ body:groupedBody, href:event.href, source_label:event.sourceLabel, context, read_at:null, created_at:event.publishedAt }).eq('id',recent.id).select('*').single();
-    if (updated) {
-      const delivered = await deliverPush(updated, source, event.groupKey);
-      if (delivered) await supabase.from('site_notifications').update({ context:{...context,pushDelivered:true} }).eq('id',updated.id);
-    }
+    if (updated) queuePagePush(event, updated.id);
     return { grouped:true };
   }
 
@@ -397,8 +467,7 @@ async function dispatch(event) {
   const next = { ...pref, last_mascot:mascot, mascot_streak:nextStreak, mara_count:pref.mara_count+(mascot==='mara'?1:0), aldren_count:pref.aldren_count+(mascot==='aldren'?1:0), last_variants:{...pref.last_variants,[`${event.kind}:${mascot}`]:rendered.index} };
   prefMap.set(event.recipient,next);
   await supabase.from('notification_preferences').upsert({ user_id:event.recipient, mascot_mode:'balanced', preferences:next.preferences, last_mascot:mascot, mascot_streak:nextStreak, mara_count:next.mara_count, aldren_count:next.aldren_count, last_variants:next.last_variants, updated_at:new Date().toISOString() },{onConflict:'user_id'});
-  const delivered = await deliverPush(data, source, event.groupKey);
-  if (delivered) await supabase.from('site_notifications').update({ context:{...context,pushDelivered:true} }).eq('id',data.id);
+  queuePagePush(event, data.id);
   return { inserted:true };
 }
 
@@ -410,5 +479,18 @@ for (const event of events) {
   else if (result?.error) errors++;
   else skipped++;
 }
-console.log(`Community notifications: ${events.length} candidate deliveries; ${inserted} new, ${grouped} grouped, ${skipped} skipped/deduped, ${errors} errors. Lookback: ${lookbackHours}h.`);
+
+let pagePushes = 0;
+for (const batch of pendingPagePushes.values()) {
+  const delivered = await deliverPagePush(batch);
+  if (!delivered) continue;
+  pagePushes++;
+  for (const id of batch.notificationIds) {
+    const { data: row } = await supabase.from('site_notifications').select('context').eq('id', id).maybeSingle();
+    if (!row) continue;
+    await supabase.from('site_notifications').update({ context:{ ...(row.context ?? {}), pushDelivered:true } }).eq('id', id);
+  }
+}
+
+console.log(`Community notifications: ${events.length} candidate deliveries; ${inserted} new, ${grouped} grouped, ${skipped} skipped/deduped, ${errors} errors; ${pagePushes} page-level push(es). Lookback: ${lookbackHours}h.`);
 if (errors) process.exitCode = 1;
