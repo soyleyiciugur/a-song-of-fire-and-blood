@@ -68,7 +68,7 @@ export async function GET() {
         };
       });
 
-      const existingUserIds = new Set(snapshot.users.map((person) => person.id));
+      const existingUserIds = new Set(snapshot.users.map((person: { id: string }) => person.id));
       snapshot.users.push(...liveUsers.filter((person) => !existingUserIds.has(person.id)));
 
       const viewerRole = liveUsers.find((person) => person.id === user?.id)?.role;
