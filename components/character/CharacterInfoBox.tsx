@@ -318,7 +318,7 @@ export default function CharacterInfoBox({
   const hasFamily = [
     character.father,
     character.mother,
-    character.spouse,
+    ...(Array.isArray(character.spouse) ? character.spouse : [character.spouse]),
     ...(character.siblings ?? []),
     ...(character.children ?? []),
   ].some(isValidValue);
@@ -421,6 +421,12 @@ export default function CharacterInfoBox({
             />
 
             <InfoRow label="Title" value={character.title} />
+            {character.reign && (
+              <InfoRow
+                label="Reign"
+                value={`${character.reign.from}–${character.reign.to ?? "present"}`}
+              />
+            )}
             {debut && (
               <InfoRow
                 label="Debut"
@@ -504,11 +510,15 @@ export default function CharacterInfoBox({
                 />
               )}
 
-              {isValidValue(character.spouse) && (
+              {(Array.isArray(character.spouse)
+                ? character.spouse.some(isValidValue)
+                : isValidValue(character.spouse)) && (
                 <InfoRow
-                  label="Spouse"
+                  label={Array.isArray(character.spouse) && character.spouse.length > 1 ? "Spouses" : "Spouse"}
                   compact
-                  value={<CharacterValue value={character.spouse} />}
+                  value={Array.isArray(character.spouse)
+                    ? <CharacterListValue values={character.spouse} />
+                    : <CharacterValue value={character.spouse} />}
                 />
               )}
 

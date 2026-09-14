@@ -1,6 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\api\admin\content-sync\route.ts
 
 import { NextRequest, NextResponse } from "next/server";
+import { isLuckAdmin } from "@/lib/adminAccess";
 
 // Maps each detection type to the data file(s) it should be checked against,
 // relative to the repo's data directory. A type can map to more than one file
@@ -211,6 +212,7 @@ function repairJson(raw: string): unknown {
 }
 
 export async function POST(req: NextRequest) {
+  if (!(await isLuckAdmin())) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   const body = await req.json();
   const {
     chapter,

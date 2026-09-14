@@ -14,6 +14,20 @@ export type CharacterId =
   | "liana-tyrell"
   | "nymos"
   | "aenys-targaryen-ii"
+  | "aegon-targaryen-i"
+  | "queen-visenya-targaryen"
+  | "queen-rhaenys-targaryen"
+  | "aenys-targaryen-i"
+  | "queen-alyssa-velaryon"
+  | "maegor-targaryen-i"
+  | "ceryse-hightower"
+  | "alys-harroway"
+  | "tyanna-of-the-tower"
+  | "elinor-costayne"
+  | "jeyne-westerling-maegor"
+  | "rhaena-targaryen-maegor"
+  | "jaehaerys-targaryen-i"
+  | "queen-alysanne-targaryen"
   | "alester-dayne"
   | "almar-larchmont"
   | "alysa-targaryen"
@@ -140,7 +154,7 @@ export interface Character {
   height?: string;
   father: string;
   mother: string;
-  spouse?: string;
+  spouse?: string | string[];
   siblings: string[];
   children?: string[];
   mentor?: string | string[];
@@ -155,4 +169,11 @@ export interface Character {
   quotes?: CharacterQuote[];
   portrait?: string;
   miniPortrait?: string;
+  reign?: { from: string; to?: string };
+  personalTimeline?: Array<{
+    title: string;
+    date: string;
+    description?: string;
+    order: number;
+  }>;
 }

@@ -18,8 +18,10 @@ import { updateMultipleFilesOnGithub } from "@/lib/github";
 import currentGallery from "@/data/gallery.json";
 import currentChapters from "@/data/chapters.json";
 import { broadcastSiteNotification } from "@/lib/notifications/server";
+import { isLuckAdmin } from "@/lib/adminAccess";
 
 export async function POST(request: Request) {
+  if (!(await isLuckAdmin())) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   try {
     const body = await request.json();
     const {

@@ -511,14 +511,9 @@ export default function RavenConversation({
   }, [conversationId, supabase, userId, partner, isGuild, focusUnread, firstUnreadId]);
 
   function openNativeFilePicker(input: HTMLInputElement | null) {
-    if (!input) return;
-    try {
-      const picker = input as HTMLInputElement & { showPicker?: () => void };
-      if (typeof picker.showPicker === "function") picker.showPicker();
-      else input.click();
-    } catch {
-      input.click();
-    }
+    // A synchronous click is the most reliable path on iOS Safari/PWA and
+    // keeps the picker tied to the user's gesture.
+    input?.click();
   }
 
   function startSwipeReply(event: React.PointerEvent<HTMLDivElement>, message: DirectRavenMessage) {

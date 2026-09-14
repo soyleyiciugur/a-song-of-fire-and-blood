@@ -28,6 +28,38 @@ export default async function FamilyTree({ searchParams }: Props) {
         <section id="house-targaryen" className={styles.house}>
           <h2 className={styles.houseTitle}>House Targaryen</h2>
 
+          <p className={styles.generationLabel}>The Conquerors</p>
+
+          <div className={styles.generationRow}>
+            <Union a={{ id: "aegon-targaryen-i" }} b={{ id: "queen-visenya-targaryen" }} />
+            <Union a={{ id: "aegon-targaryen-i" }} b={{ id: "queen-rhaenys-targaryen" }} />
+          </div>
+
+          <p className={styles.generationLabel}>The Sons of the Dragon</p>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit parentA={{ id: "aegon-targaryen-i" }} parentB={{ id: "queen-visenya-targaryen" }} childrenLabel="Children">
+              <PersonNode id="maegor-targaryen-i" />
+            </FamilyUnit>
+            <FamilyUnit parentA={{ id: "aegon-targaryen-i" }} parentB={{ id: "queen-rhaenys-targaryen" }} childrenLabel="Children">
+              <Union a={{ id: "aenys-targaryen-i" }} b={{ id: "queen-alyssa-velaryon" }} />
+            </FamilyUnit>
+          </div>
+
+          <p className={styles.generationLabel}>The Conciliator&apos;s Line</p>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit parentA={{ id: "aenys-targaryen-i" }} parentB={{ id: "queen-alyssa-velaryon" }} childrenLabel="Children">
+              <Union a={{ id: "jaehaerys-targaryen-i" }} b={{ id: "queen-alysanne-targaryen" }} />
+            </FamilyUnit>
+          </div>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit parentA={{ id: "jaehaerys-targaryen-i" }} parentB={{ id: "queen-alysanne-targaryen" }} childrenLabel="Children">
+              <Union a={{ id: "aenys-targaryen-ii" }} b={{ id: "queen-vhaemys-targaryen" }} />
+            </FamilyUnit>
+          </div>
+
           <p className={styles.generationLabel}>The Elder Generation</p>
 
           <div className={styles.generationRow}>

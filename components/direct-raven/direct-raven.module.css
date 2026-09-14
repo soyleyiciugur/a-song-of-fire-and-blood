@@ -587,3 +587,34 @@
 .guildInfoBackdrop{top:var(--site-nav-height,58px)!important;bottom:0!important;height:calc(100dvh - var(--site-nav-height,58px));}
 .guildInfoPanel{height:100%!important}
 .iconClose svg,.backInfoButton svg{display:block;margin:auto}
+
+/* v12: mobile attachment reliability + compact composer safe area */
+@media (hover:hover) and (pointer:fine){
+  .cameraSourceButton{display:none!important}
+}
+@media(max-width:760px){
+  .composerArea{
+    padding:4px 10px 3px!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  .composerTools{padding-bottom:0!important;margin-bottom:0!important}
+  .attachmentSourceMenu{
+    position:fixed!important;
+    left:12px!important;
+    right:12px!important;
+    bottom:calc(env(safe-area-inset-bottom) + 62px)!important;
+    width:auto!important;
+    max-width:340px;
+    z-index:12000!important;
+  }
+  .reactionPicker,.gifPopover{
+    z-index:12000!important;
+  }
+}
+
+@media(min-width:761px){
+  .attachmentSourceMenu>button{grid-template-columns:28px minmax(0,1fr)!important;align-items:center!important}
+  .attachmentSourceMenu>button>span{align-content:center;text-align:left!important}
+  .attachmentSourceMenu b,.attachmentSourceMenu small{display:block;text-align:left!important;margin:0!important}
+}

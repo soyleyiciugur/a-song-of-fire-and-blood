@@ -6,7 +6,8 @@ import styles from "./characterTimeline.module.css";
 
 export default function CharacterTimeline({ character }: { character: Character }) {
   const moments = timeline.flatMap((chapter) => chapter.events.filter((event) => event.characters?.includes(character.id)).map((event) => ({ ...event, chapterSlug: chapter.chapterSlug, chapterTitle: chapter.chapterTitle, order: parseTimelineDate(event.date, chapter.date) })));
-  if (!character.nameday && !character.death && moments.length === 0) return null;
+  const historicalMoments = character.personalTimeline ?? [];
+  if (!character.nameday && !character.death && moments.length === 0 && historicalMoments.length === 0) return null;
   const entries = [
     ...moments.map((moment) => ({
       key: `${moment.chapterSlug}-${moment.title}`,
@@ -16,6 +17,15 @@ export default function CharacterTimeline({ character }: { character: Character 
         <span>{moment.date ?? moment.chapterTitle}</span>
         <p>{moment.description}</p>
         <Link href={`/chapters/${moment.chapterSlug}`}>Read chapter →</Link>
+      </div>,
+    })),
+    ...historicalMoments.map((moment) => ({
+      key: `history-${moment.title}-${moment.date}`,
+      order: moment.order,
+      content: <div>
+        <strong>{moment.title}</strong>
+        <span>{moment.date}</span>
+        {moment.description && <p>{moment.description}</p>}
       </div>,
     })),
     ...([ ["Born", character.nameday], ["Death", character.death] ] as const).flatMap(([label, date]) => date ? [{

@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\SearchableSelect.tsx
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import styles from "./SearchableSelect.module.css";
 
 export interface SearchableSelectOption {
@@ -31,6 +31,8 @@ export default function SearchableSelect({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [placement, setPlacement] = useState<"down" | "up">("down");
+  const [panelHeight, setPanelHeight] = useState(280);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -43,6 +45,21 @@ export default function SearchableSelect({
     if (!q) return options;
     return options.filter((o) => o.label.toLowerCase().includes(q));
   }, [options, query]);
+
+
+  const measurePanel = () => {
+    const rect = rootRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const gutter = 12;
+    const navHeight = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--site-nav-height")) || 58;
+    const below = Math.max(0, window.innerHeight - rect.bottom - gutter);
+    const above = Math.max(0, rect.top - Math.max(gutter, navHeight + gutter));
+    const nextPlacement = below >= 220 || below >= above ? "down" : "up";
+    const available = nextPlacement === "down" ? below : above;
+    setPlacement(nextPlacement);
+    setPanelHeight(Math.max(140, Math.min(320, available)));
+  };
+
 
   useEffect(() => {
     if (!open) return;
@@ -77,6 +94,7 @@ export default function SearchableSelect({
 
   const commit = (option: SearchableSelectOption) => {
     onChange(option.value);
+    setQuery("");
     setOpen(false);
   };
 
@@ -103,7 +121,14 @@ export default function SearchableSelect({
         type="button"
         id={id}
         className={styles.trigger}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => {
+          if (open) {
+            setOpen(false);
+          } else {
+            measurePanel();
+            setOpen(true);
+          }
+        }}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={rest["aria-label"]}
@@ -128,7 +153,11 @@ export default function SearchableSelect({
       </button>
 
       {open && (
-        <div className={`${styles.panel} dropdown-enter`} onKeyDown={handleKeyDown}>
+        <div
+          className={`${styles.panel} ${placement === "up" ? styles.panelUp : ""} dropdown-enter`}
+          style={{ "--select-panel-max-height": `${panelHeight}px` } as CSSProperties}
+          onKeyDown={handleKeyDown}
+        >
           <input
             ref={searchRef}
             type="text"
@@ -154,7 +183,11 @@ export default function SearchableSelect({
                   index === activeIndex ? styles.optionActive : ""
                 } ${option.value === value ? styles.optionSelected : ""}`}
                 onMouseEnter={() => setActiveIndex(index)}
-                onClick={() => commit(option)}
+                onPointerDown={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  commit(option);
+                }}
               >
                 {option.label}
               </li>

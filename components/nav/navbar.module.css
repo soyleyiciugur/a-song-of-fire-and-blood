@@ -902,3 +902,84 @@
   .playBanner .inner:has(.searchWrap:focus-within)>.directRavenButton,
   .playBanner .inner:has(.searchWrap:focus-within)>.accountMenu{pointer-events:none}
 }
+
+/* v12: compact single-line desktop nav + workbench wrench + corrected focused-search lane */
+.workbenchButton{color:var(--gold)!important}
+@media(min-width:1151px){
+  .playBanner .inner{
+    flex-wrap:nowrap!important;
+    gap:7px!important;
+    padding:10px 12px!important;
+    min-height:58px;
+  }
+  .playBanner .houseMark{flex:0 0 36px;width:36px;height:36px}
+  .playBanner .homeLink{font-size:13px;max-width:190px}
+  .playBanner .navLinks{
+    flex:1 1 auto!important;
+    flex-wrap:nowrap!important;
+    gap:5px!important;
+    min-width:0;
+    overflow:visible;
+  }
+  .playBanner .navLink,.playBanner .navGroup{font-size:12px!important}
+  .playBanner .navLinks > *:not(:last-child)::after{margin-left:4px;margin-right:2px;height:20px}
+  .playBanner .navGroupCaretBtn{width:12px;height:28px}
+  .playBanner .searchWrap,
+  .playBanner .notificationsButton,
+  .playBanner .directRavenButton,
+  .playBanner .inner>.accountMenu{
+    position:relative!important;
+    inset:auto!important;
+    transform:none!important;
+    flex:0 0 36px;
+  }
+  .playBanner .notificationsButton,.playBanner .directRavenButton{width:36px;height:36px}
+  .playBanner .inner>.accountMenu{flex-basis:auto}
+  .playBanner .searchWrap{width:36px;min-width:36px;height:36px;margin-left:auto;z-index:130}
+  .playBanner .searchInput{
+    left:0!important;
+    right:auto!important;
+    width:36px!important;
+    height:36px;
+    padding:8px 0!important;
+    cursor:pointer;
+  }
+  .playBanner .searchIcon{
+    left:9px!important;
+    right:auto!important;
+    top:9px!important;
+    z-index:3;
+  }
+  .playBanner .searchWrap:focus-within{z-index:180}
+  .playBanner .searchWrap:focus-within .searchInput{
+    width:294px!important;
+    max-width:min(294px,calc(100vw - 190px))!important;
+    padding:8px 14px 8px 38px!important;
+    box-shadow:0 8px 28px #000b,0 0 0 1px color-mix(in srgb,var(--gold) 55%,transparent)!important;
+    cursor:text;
+  }
+  .playBanner .searchWrap:focus-within .searchIcon{left:11px!important;right:auto!important}
+  .playBanner .searchWrap:focus-within .dropdown{
+    left:0!important;right:auto!important;width:294px!important;max-width:min(294px,calc(100vw - 190px))!important;
+  }
+  .playBanner .inner:has(.searchWrap:focus-within)>.notificationsButton,
+  .playBanner .inner:has(.searchWrap:focus-within)>.directRavenButton{
+    pointer-events:none!important;opacity:0!important;
+  }
+  .playBanner .inner:has(.searchWrap:focus-within)>.accountMenu{
+    opacity:1!important;pointer-events:auto!important;z-index:185;
+  }
+}
+@media(min-width:1151px) and (max-width:1320px){
+  .playBanner .homeLink{max-width:155px;font-size:12px}
+  .playBanner .navLink,.playBanner .navGroup{font-size:11px!important}
+  .playBanner .navLinks{gap:3px!important}
+  .playBanner .navLinks > *:not(:last-child)::after{margin-left:2px;margin-right:1px}
+}
+@media(max-width:640px){
+  .playBanner .searchWrap:focus-within{left:48px!important;right:46px!important;width:auto!important}
+  .playBanner .searchWrap:focus-within .searchInput{
+    width:100%!important;max-width:none!important;padding:7px 12px 7px 38px!important
+  }
+  .playBanner .searchWrap:focus-within .searchIcon{left:11px!important;right:auto!important;top:10px!important}
+}

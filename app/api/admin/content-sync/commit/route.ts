@@ -1,12 +1,14 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\api\admin\content-sync\commit\route.ts
 
 import { NextRequest, NextResponse } from "next/server";
+import { isLuckAdmin } from "@/lib/adminAccess";
 
 function resolveGithubToken(): string | undefined {
   return process.env.GITHUB_TOKEN || undefined;
 }
 
 export async function POST(req: NextRequest) {
+  if (!(await isLuckAdmin())) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   const body = await req.json();
   const { repo, branch = "main", path, content, message } = body as {
     repo?: string;

@@ -20,6 +20,7 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
   const wrapRef = useRef<HTMLSpanElement>(null);
   const longPressTimer = useRef<number | null>(null);
   const suppressClick = useRef(false);
+  const longPressFired = useRef(false);
 
   const refresh = useCallback(async () => {
     const { data, error: loadError } = await supabase.from("member_likes").select("user_id,reaction").eq("target_kind", "message").eq("target_id", messageId);
@@ -74,6 +75,7 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
   async function showWhoReacted(emoji: string) {
     cancelLongPress();
     suppressClick.current = true;
+    longPressFired.current = true;
     const ids = rows.filter((row) => row.reaction === emoji).map((row) => row.user_id);
     if (!ids.length) return;
     const { data } = await supabase.from("profiles").select("id,display_name,username,avatar_url").in("id", ids);
@@ -81,7 +83,7 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
     setDetails({ emoji, users: profiles });
     setOpen(false);
     setCustomOpen(false);
-    window.setTimeout(() => { suppressClick.current = false; }, 0);
+
   }
 
   async function choose(reaction: string) {
@@ -102,7 +104,7 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
     <button type="button" className={`${styles.messageReactionTrigger} ${mine ? styles.messageReactionActive : ""}`} aria-label="React to message" aria-expanded={open} onClick={() => { setOpen((value) => !value); setCustomOpen(false); }}>
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M12 20.2 5.4 14a5.1 5.1 0 0 1-.5-6.7 4.5 4.5 0 0 1 7.1-.2 4.5 4.5 0 0 1 7.1.2 5.1 5.1 0 0 1-.5 6.7L12 20.2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
     </button>
-    {summary.length > 0 && <span className={styles.messageReactionSummary}>{summary.slice(0, 4).map(([emoji, count]) => <button key={emoji} type="button" onPointerDown={(event) => { event.preventDefault(); cancelLongPress(); longPressTimer.current = window.setTimeout(() => void showWhoReacted(emoji), 450); }} onPointerUp={cancelLongPress} onPointerCancel={cancelLongPress} onPointerLeave={cancelLongPress} onContextMenu={(event) => { event.preventDefault(); void showWhoReacted(emoji); }} onClick={() => { if (suppressClick.current) return; void choose(emoji); }} aria-label={`${emoji} ${count}. Hold to see who reacted.`}>{emoji}<small>{count}</small></button>)}</span>}
+    {summary.length > 0 && <span className={styles.messageReactionSummary}>{summary.slice(0, 4).map(([emoji, count]) => <button key={emoji} type="button" onPointerDown={(event) => { event.preventDefault(); suppressClick.current = false; longPressFired.current = false; cancelLongPress(); longPressTimer.current = window.setTimeout(() => void showWhoReacted(emoji), 450); }} onPointerUp={cancelLongPress} onPointerCancel={() => { cancelLongPress(); suppressClick.current = false; longPressFired.current = false; }} onPointerLeave={cancelLongPress} onContextMenu={(event) => { event.preventDefault(); void showWhoReacted(emoji); }} onClick={() => { if (suppressClick.current || longPressFired.current) { suppressClick.current = false; longPressFired.current = false; return; } void choose(emoji); }} aria-label={`${emoji} ${count}. Hold to see who reacted.`}>{emoji}<small>{count}</small></button>)}</span>}
     {details && <span className={styles.reactionDetailsPopover} onPointerDown={(event) => event.stopPropagation()}>
       <span className={styles.reactionDetailsTitle}>{details.emoji}<small>{details.users.length} {details.users.length === 1 ? "reaction" : "reactions"}</small></span>
       <span className={styles.reactionDetailsList}>{details.users.map((profile) => <span key={profile.id} className={styles.reactionDetailsUser}>
