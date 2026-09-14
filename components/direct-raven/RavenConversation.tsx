@@ -14,7 +14,6 @@ import GuildParleyInfo from "./GuildParleyInfo";
 import RavenAttachment from "./RavenAttachment";
 import RavenIcon from "./RavenIcon";
 import RavenMessageContent, {
-  encodeRavenBody,
   parseRavenBody,
   ravenBodySummary,
 } from "./RavenMessageContent";
@@ -100,9 +99,12 @@ export default function RavenConversation({
   const [seenPanelId, setSeenPanelId] = useState<string | null>(null);
   const [newMessages, setNewMessages] = useState(false);
   const [guildInfoOpen, setGuildInfoOpen] = useState(false);
+  const [attachmentMenuOpen, setAttachmentMenuOpen] = useState(false);
 
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const photoLibraryRef = useRef<HTMLInputElement>(null);
+  const cameraRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const nearBottom = useRef(false);
   const loadedMessages = useRef(messages);
@@ -178,6 +180,19 @@ export default function RavenConversation({
     setPortraitSearch("");
   };
 
+  const insertComposerText = (text: string) => {
+    const input = inputRef.current;
+    const start = input?.selectionStart ?? body.length;
+    const end = input?.selectionEnd ?? start;
+    const next = `${body.slice(0, start)}${text}${body.slice(end)}`.slice(0, 4000);
+    setBody(next);
+    requestAnimationFrame(() => {
+      const caret = Math.min(start + text.length, next.length);
+      inputRef.current?.focus({ preventScroll: true });
+      inputRef.current?.setSelectionRange(caret, caret);
+    });
+  };
+
   const openPicker = (tab: PickerTab) => {
     const shouldClose = pickerOpen && pickerTab === tab;
     if (shouldClose) {
@@ -185,6 +200,7 @@ export default function RavenConversation({
       return;
     }
     setGifOpen(false);
+    setAttachmentMenuOpen(false);
     setPickerTab(tab);
     setPickerOpen(true);
     inputRef.current?.blur();
@@ -250,6 +266,8 @@ export default function RavenConversation({
         root.style.setProperty("--raven-mobile-top", `${offset + visibleNav}px`);
         root.style.setProperty("--raven-mobile-height", `${Math.max(0, height - visibleNav)}px`);
         root.style.setProperty("--direct-raven-viewport-height", `${height}px`);
+        const keyboardOpen = height < window.innerHeight - 100;
+        root.style.setProperty("--raven-composer-bottom-pad", keyboardOpen ? "4px" : "max(6px, env(safe-area-inset-bottom))");
 
         if (document.activeElement === inputRef.current && nearBottom.current) {
           scrollBottom();
@@ -270,6 +288,7 @@ export default function RavenConversation({
       document.documentElement.style.removeProperty("--direct-raven-viewport-height");
       document.documentElement.style.removeProperty("--raven-mobile-top");
       document.documentElement.style.removeProperty("--raven-mobile-height");
+      document.documentElement.style.removeProperty("--raven-composer-bottom-pad");
     };
   }, []);
 
@@ -308,6 +327,7 @@ export default function RavenConversation({
     const latest = loadedMessages.current.at(-1);
     if (!latest) return;
     openedReadDone.current = true;
+    window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId, cleared: unreadCount } }));
 
     const markOpenedRead = async () => {
       const readAt = new Date().toISOString();
@@ -329,7 +349,7 @@ export default function RavenConversation({
     };
 
     void markOpenedRead();
-  }, [conversationId, supabase, userId]);
+  }, [conversationId, supabase, userId, unreadCount]);
 
 
   useEffect(() => {
@@ -490,21 +510,24 @@ export default function RavenConversation({
     }
     setError("");
     setFile(next);
+    setAttachmentMenuOpen(false);
   }
 
   function addPortrait(id: string) {
-    const parsed = parseRavenBody(body, true);
-    if (parsed.portraitIds.length >= MAX_PORTRAITS) {
+    const count = parseRavenBody(body, true).portraitIds.length;
+    if (count >= MAX_PORTRAITS) {
       setError(`You can insert up to ${MAX_PORTRAITS} mini portraits to one raven.`);
       return;
     }
     setError("");
-    setBody(encodeRavenBody(parsed.text, [...parsed.portraitIds, id], true));
-  }
-
-  function removeDraftPortrait(index: number) {
-    const parsed = parseRavenBody(body, true);
-    setBody(encodeRavenBody(parsed.text, parsed.portraitIds.filter((_, portraitIndex) => portraitIndex !== index), true));
+    const input = inputRef.current;
+    const start = input?.selectionStart ?? body.length;
+    const before = body.slice(0, start);
+    const after = body.slice(input?.selectionEnd ?? start);
+    const token = `[[portrait:${id}]]`;
+    const prefix = before && !/\s$/.test(before) ? " " : "";
+    const suffix = after && !/^\s/.test(after) ? " " : "";
+    insertComposerText(`${prefix}${token}${suffix}`);
   }
 
   function beginEdit(message: DirectRavenMessage) {
@@ -528,6 +551,7 @@ export default function RavenConversation({
     if ((!outgoingBody && !outgoingFile && !outgoingGif) || sendLock.current || closed) return;
 
     sendLock.current = true;
+    if (!outgoingEditing) inputRef.current?.focus({ preventScroll: true });
     setSending(true);
     setError("");
     let path: string | null = null;
@@ -674,7 +698,12 @@ export default function RavenConversation({
   const threadTitle = isGuild ? (activeConversation.title ?? "Guild Parley") : (partner?.display_name ?? "Direct Raven");
 
   const seenFor = (message: DirectRavenMessage) => {
-    if (!isGuild || message.sender_id !== userId) return [];
+    if (message.sender_id !== userId) return [];
+    if (!isGuild) {
+      return partner && partnerRead >= message.created_at
+        ? [{ user_id: partner.id, last_read_at: partnerRead }]
+        : [];
+    }
     const eligible = new Set(
       memberships
         .filter((membership) => membership.user_id !== userId && membership.joined_at <= message.created_at)
@@ -686,7 +715,9 @@ export default function RavenConversation({
   };
 
   const eligibleCountFor = (message: DirectRavenMessage) =>
-    memberships.filter((membership) => membership.user_id !== userId && membership.joined_at <= message.created_at).length;
+    isGuild
+      ? memberships.filter((membership) => membership.user_id !== userId && membership.joined_at <= message.created_at).length
+      : partner ? 1 : 0;
 
 
   useEffect(() => {
@@ -819,25 +850,27 @@ export default function RavenConversation({
                       {!closed && <button type="button" onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
                     </div>}
                     <span className={styles.messageMeta}>
+                      {message.edited_at && !message.deleted_at && <small>edited</small>}
                       <time dateTime={message.created_at}>{time(message.created_at)}</time>
-                      {message.edited_at && !message.deleted_at ? " · edited" : ""}
-                      {mine && !message.deleted_at && !isGuild ? (partnerRead >= message.created_at ? " · Seen" : " · Sent") : ""}
-                      {mine && !message.deleted_at && isGuild && (() => {
+                      {mine && !message.deleted_at && (() => {
                         const seen = seenFor(message);
                         const eligible = eligibleCountFor(message);
-                        if (seen.length === 0) return " · Sent";
+                        const allSeen = eligible > 0 && seen.length === eligible;
+                        const someSeen = seen.length > 0;
                         return (
-                          <>
-                            {" · "}
-                            <button
-                              type="button"
-                              className={styles.seenByButton}
-                              onClick={() => setSeenPanelId(message.id)}
-                              aria-label="Show who has seen this message"
-                            >
-                              {eligible > 0 && seen.length === eligible ? "Seen by all" : `Seen by ${seen.length}`}
-                            </button>
-                          </>
+                          <button
+                            type="button"
+                            className={`${styles.receiptButton} ${allSeen ? styles.receiptSeenAll : ""}`}
+                            onClick={() => setSeenPanelId(message.id)}
+                            aria-label={allSeen ? (isGuild ? "Seen by all. Show read receipts" : "Seen. Show read receipt") : someSeen ? `Seen by ${seen.length}. Show read receipts` : "Sent. Show read receipts"}
+                            title={allSeen ? (isGuild ? "Seen by all" : "Seen") : someSeen ? `Seen by ${seen.length}` : "Sent"}
+                          >
+                            {someSeen ? (
+                              <svg viewBox="0 0 22 14" aria-hidden="true"><path d="m1.5 7.3 3.1 3.2 6-7"/><path d="m8 8.7 2 1.8 7-8"/></svg>
+                            ) : (
+                              <svg viewBox="0 0 14 14" aria-hidden="true"><path d="m1.7 7.4 3.2 3.1 7-7.2"/></svg>
+                            )}
+                          </button>
                         );
                       })()}
                     </span>
@@ -928,7 +961,7 @@ export default function RavenConversation({
             {pickerOpen && (
               <div className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
                 {pickerTab === "emoji" ? (
-                  <EmojiPicker onSelect={(emoji) => setBody((value) => encodeRavenBody((parseRavenBody(value, true).text + emoji).slice(0, 4000), parseRavenBody(value, true).portraitIds, true))} />
+                  <EmojiPicker onSelect={(emoji) => insertComposerText(emoji)} />
                 ) : (
                   <div className={styles.portraitPicker}>
                     <input
@@ -960,22 +993,11 @@ export default function RavenConversation({
 
             <form className={styles.composer} onSubmit={send}>
               <div className={styles.richComposerInput}>
-                {parseRavenBody(body, true).portraitIds.length > 0 && <div className={styles.draftPortraits} aria-label="Mini portraits in this raven">
-                  {parseRavenBody(body, true).portraitIds.map((id, index) => {
-                    const option = portraitCharacters.find((character) => character.id === id);
-                    return <span key={`${id}-${index}`} className={styles.draftPortrait}>
-                      <MiniPortrait id={id} alt={option?.name ?? id} size={28} fallbackSrc={option?.fallbackSrc} />
-                      <button type="button" aria-label={`Remove ${option?.name ?? "mini portrait"}`} onClick={() => removeDraftPortrait(index)} disabled={sending}>
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></svg>
-                      </button>
-                    </span>;
-                  })}
-                </div>}
               <textarea
                 ref={inputRef}
                 disabled={sending && !!editing}
-                value={parseRavenBody(body, true).text}
-                onChange={(event) => setBody(encodeRavenBody(event.target.value, parseRavenBody(body, true).portraitIds, true))}
+                value={body}
+                onChange={(event) => setBody(event.target.value)}
                 maxLength={4000}
                 rows={2}
                 placeholder={isGuild ? "Write to the Guild Parley…" : "Write your raven…"}
@@ -1010,6 +1032,7 @@ export default function RavenConversation({
               </div>
               <button
                 type="submit"
+                onPointerDown={(event) => event.preventDefault()}
                 disabled={sending || (!body.trim() && !file && !gif)}
               >
                 <RavenIcon size={18} /> {sending ? "Sending…" : editing ? "Save" : "Send"}
@@ -1017,19 +1040,24 @@ export default function RavenConversation({
             </form>
 
             <div className={styles.composerTools}>
-              <button type="button" disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
-              <label className={styles.fileButton} aria-disabled={!!editing || sending}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Photo / GIF
-                <input
-                  type="file"
-                  disabled={!!editing || sending}
-                  accept="image/jpeg,image/png,image/webp,image/gif"
-                  onChange={(event) => {
-                    chooseFile(event.target.files?.[0]);
-                    event.target.value = "";
-                  }}
-                />
-              </label>
+              <button type="button" disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);setAttachmentMenuOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
+              <div className={styles.attachmentToolWrap}>
+                <button type="button" className={styles.fileButton} disabled={!!editing || sending} onClick={() => { setAttachmentMenuOpen((value) => !value); setGifOpen(false); setPickerOpen(false); }} aria-expanded={attachmentMenuOpen}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Photo / GIF
+                </button>
+                {attachmentMenuOpen && <div className={styles.attachmentSourceMenu} onPointerDown={(event) => event.stopPropagation()}>
+                  <button type="button" onClick={() => photoLibraryRef.current?.click()}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m6.5 17 4.2-4 2.5 2.2 2.2-2 2.2 3.8"/></svg>
+                    <span><b>Photo Library</b><small>Choose a photo or GIF</small></span>
+                  </button>
+                  <button type="button" onClick={() => cameraRef.current?.click()}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h3l1.3-2h5.4L16 8h3a2 2 0 0 1 2 2v8H3v-8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="3"/></svg>
+                    <span><b>Camera</b><small>Take a new photo</small></span>
+                  </button>
+                </div>}
+                <input ref={photoLibraryRef} className={styles.hiddenFileInput} type="file" disabled={!!editing || sending} accept="image/jpeg,image/png,image/webp,image/gif" onChange={(event) => { chooseFile(event.target.files?.[0]); event.target.value = ""; }} />
+                <input ref={cameraRef} className={styles.hiddenFileInput} type="file" disabled={!!editing || sending} accept="image/*" capture="environment" onChange={(event) => { chooseFile(event.target.files?.[0]); event.target.value = ""; }} />
+              </div>
               <button type="button" disabled={sending} onClick={() => openPicker("emoji")} aria-expanded={pickerOpen}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5"/><path d="M9 10h.01M15 10h.01M8.5 14c1 1.4 2.1 2 3.5 2s2.5-.6 3.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> Emoji
               </button>
@@ -1048,15 +1076,15 @@ export default function RavenConversation({
           <section className={styles.seenPanel} role="dialog" aria-modal="true" aria-label="Message read receipts" onPointerDown={(event) => event.stopPropagation()}>
             <div className={styles.seenPanelHeader}>
               <div>
-                <p className={styles.kicker}>Guild Parley</p>
-                <h3>{eligibleCountFor(seenPanelMessage) > 0 && seenPanelRows.length === eligibleCountFor(seenPanelMessage) ? "Seen by all" : `Seen by ${seenPanelRows.length}`}</h3>
+                <p className={styles.kicker}>{isGuild ? "Guild Parley" : "Direct Raven"}</p>
+                <h3>{eligibleCountFor(seenPanelMessage) > 0 && seenPanelRows.length === eligibleCountFor(seenPanelMessage) ? (isGuild ? "Seen by all" : "Seen") : seenPanelRows.length ? `Seen by ${seenPanelRows.length}` : "Not seen yet"}</h3>
               </div>
               <button type="button" className={styles.seenPanelClose} aria-label="Close read receipts" onClick={() => setSeenPanelId(null)}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round"/></svg></button>
             </div>
             <div className={styles.seenList}>
               {seenPanelRows.length === 0 && <p className={styles.seenEmpty}>No one else has seen this raven yet.</p>}
               {seenPanelRows.map((receipt) => {
-                const member = memberMap.get(receipt.user_id);
+                const member = isGuild ? memberMap.get(receipt.user_id) : (partner?.id === receipt.user_id ? partner : undefined);
                 if (!member) return null;
                 return (
                   <Link key={receipt.user_id} href={`/users/${member.username}`} className={styles.seenRow}>

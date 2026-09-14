@@ -17,6 +17,7 @@ export default function DirectRavenNavButton() {
     const supabase = createClient();
     let active = true;
     let currentUser: string | undefined;
+    let optimisticReadUntil = 0;
     document.addEventListener("pointerdown", unlockSound);
     document.addEventListener("keydown", unlockSound);
     let channel: ReturnType<typeof supabase.channel> | null = null;
@@ -28,7 +29,7 @@ export default function DirectRavenNavButton() {
       setSignedIn(Boolean(user));
       if (!user) { setUnread(0); return; }
       const { data } = await supabase.rpc("direct_raven_unread_count");
-      if (active) setUnread(Number(data ?? 0));
+      if (active && Date.now() >= optimisticReadUntil) setUnread(Number(data ?? 0));
     };
 
     void load();
@@ -46,7 +47,15 @@ export default function DirectRavenNavButton() {
       .subscribe();
     const { data: authListener } = supabase.auth.onAuthStateChange(() => window.setTimeout(() => void load(), 0));
 
-    const onRead = () => void load();
+    const onRead = (event: Event) => {
+      const detail = (event as CustomEvent<{ cleared?: number }>).detail;
+      const cleared = Number(detail?.cleared ?? 0);
+      if (cleared > 0) {
+        optimisticReadUntil = Date.now() + 600;
+        setUnread((current) => Math.max(0, current - cleared));
+      }
+      window.setTimeout(() => void load(), cleared > 0 ? 650 : 80);
+    };
     window.addEventListener("direct-raven-read", onRead);
     return () => {
       active = false;

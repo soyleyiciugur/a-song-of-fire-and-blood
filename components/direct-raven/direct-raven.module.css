@@ -536,3 +536,27 @@
 .sharedReelCopy strong{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;margin-top:5px;color:#e2d3bf;font:600 12px/1.35 var(--font-geist)}
 .sharedReelCopy em{margin-top:6px;color:#8e8175;font:normal 9px/1.2 var(--font-geist)}
 @media(max-width:760px){.sharedReelCard{width:min(300px,100%)}.sharedReelPoster{flex-basis:52px;width:52px;height:74px}}
+
+/* v10: compact composer, custom attachment source menu, read receipts and reaction details. */
+.composerArea{padding-bottom:var(--raven-composer-bottom-pad,max(6px,env(safe-area-inset-bottom)))}
+.composerTools{margin-top:2px}
+.attachmentToolWrap{position:relative;display:inline-flex;flex:0 0 auto}
+.fileButton{position:relative;overflow:visible!important}
+.hiddenFileInput{position:fixed!important;left:-10000px!important;top:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+.attachmentSourceMenu{position:absolute;left:0;bottom:44px;z-index:90;display:grid;width:238px;padding:6px;border:1px solid #594534;border-radius:12px;background:linear-gradient(180deg,#1b1618,#100e10);box-shadow:0 16px 42px #000c}
+.attachmentSourceMenu>button{display:grid!important;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:9px;width:100%!important;min-height:48px!important;padding:6px 8px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#dbc5a7!important;text-align:left;cursor:pointer}
+.attachmentSourceMenu>button:hover,.attachmentSourceMenu>button:focus-visible{background:#2a2021!important;outline:none}
+.attachmentSourceMenu>button>svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+.attachmentSourceMenu>button>span{display:grid;gap:2px}.attachmentSourceMenu b{font:600 11px var(--font-geist);color:#e8d7c0}.attachmentSourceMenu small{font:9px var(--font-geist);color:#8f8174}
+.messageMeta{display:inline-flex!important;align-items:center;justify-content:flex-end;gap:5px;margin-right:-27px!important}
+.messageMeta>small{color:#796f68;font:8px/1 var(--font-geist)}
+.receiptButton{display:grid!important;place-items:center;width:24px!important;min-width:24px!important;height:22px!important;min-height:22px!important;padding:0!important;border:0!important;border-radius:5px!important;background:transparent!important;color:#8f8174!important;cursor:pointer}
+.receiptButton:hover,.receiptButton:focus-visible{color:#d9c09a!important;background:#ffffff08!important;outline:none}
+.receiptButton svg{display:block;width:19px;height:13px;overflow:visible}.receiptButton svg path{fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.receiptSeenAll{color:#d3a84f!important}.receiptSeenAll:hover,.receiptSeenAll:focus-visible{color:#edc36a!important}
+.reactionDetailsPopover{position:absolute;left:0;bottom:32px;z-index:6600;display:grid;gap:7px;min-width:210px;max-width:min(280px,calc(100vw - 30px));padding:8px;border:1px solid #594534;border-radius:12px;background:linear-gradient(180deg,#1b1618,#100e10);box-shadow:0 16px 42px #000c;color:#ded0bc}
+.mine .reactionDetailsPopover{left:auto;right:0}
+.reactionDetailsTitle{display:flex;align-items:center;gap:7px;padding:1px 3px 6px;border-bottom:1px solid #352c27;font:18px/1 var(--font-geist)}.reactionDetailsTitle small{color:#9d8d7c;font:9px var(--font-geist)}
+.reactionDetailsList{display:grid;gap:3px;max-height:190px;overflow:auto}.reactionDetailsUser{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:8px;padding:4px;border-radius:7px}.reactionDetailsUser>span:last-child{display:grid;min-width:0}.reactionDetailsUser b,.reactionDetailsUser small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.reactionDetailsUser b{color:#e4d4bd;font:600 10px var(--font-geist)}.reactionDetailsUser small{color:#887c71;font:9px var(--font-geist)}
+.reactionDetailsAvatar{display:grid;place-items:center;width:28px;height:28px;overflow:hidden;border:1px solid #594534;border-radius:50%;background:#2c1a1e;color:#d7b887;font:700 8px var(--font-geist)}.reactionDetailsAvatar img{width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.composerArea{padding:6px 10px var(--raven-composer-bottom-pad,4px)}.composerTools{margin-top:1px}.composerTools button,.fileButton{min-height:34px;padding-inline:7px}.attachmentSourceMenu{bottom:39px;width:min(238px,calc(100vw - 24px))}.messageMeta{margin-right:-25px!important}.reactionDetailsPopover{max-width:calc(100vw - 24px)}}

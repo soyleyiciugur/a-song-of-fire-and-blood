@@ -2,6 +2,7 @@
 "use client";
 
 import PageTitleIcon from "@/components/nav/PageTitleIcon";
+import RavenIcon from "@/components/direct-raven/RavenIcon";
 import {
   Suspense,
   useCallback,
@@ -659,14 +660,6 @@ function CommentGlyph() {
   );
 }
 
-function ShareGlyph() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21 3 9.6 14.4M21 3l-6.2 18-5.2-6.6L3 9.2 21 3Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function LinkGlyph() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -857,7 +850,7 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
             <span>{copied ? "Copied" : "Copy link"}</span>
           </button>
           <button type="button" className={styles.reelSendButton} disabled={!selected.length || sending} onClick={() => void send()}>
-            <ShareGlyph />
+            <RavenIcon size={16} />
             <span>{sending ? "Sending…" : selected.length > 1 ? `Send to ${selected.length}` : "Send"}</span>
           </button>
         </div>
@@ -999,6 +992,7 @@ function ReelSlide({
           </svg>
         ) : (
           <svg
+            className={styles.reelPlayGlyph}
             width="28"
             height="28"
             viewBox="0 0 24 24"
@@ -1034,7 +1028,7 @@ function ReelSlide({
             }}
             aria-label="Share this reel"
           >
-            <span className={styles.reelActionIcon}><ShareGlyph /></span>
+            <span className={styles.reelActionIcon}><RavenIcon size={24} /></span>
           </button>
         </div>
 

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
     name: "A Song of Fire and Blood",
-    short_name: "The Rookery 🐦‍⬛",
+    short_name: "ASOFAB",
     description: "A Song of Fire and Blood",
     start_url: "/",
     scope: "/",
@@ -19,22 +19,22 @@ export default function manifest(): MetadataRoute.Manifest {
 
     icons: [
       {
-        src: "/icon.png",
-        sizes: "any",
+        src: "/icons/pwa-192.png",
+        sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon.png",
-        sizes: "any",
+        src: "/icons/pwa-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/icons/pwa-maskable-512.png",
+        sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
-      },
-      {
-        src: "/apple-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-        purpose: "any",
       },
     ],
     shortcuts: [

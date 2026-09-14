@@ -1458,3 +1458,7 @@
     justify-content: flex-end;
   }
 }
+
+/* Reel icon optical centering. */
+.reelActionIcon > svg{margin:auto}
+.reelPlayGlyph{transform:translateX(2px)}
