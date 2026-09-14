@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import MiniPortrait from "@/components/MiniPortrait";
 import { getCharacters } from "@/lib/characters";
 import { getAllChapters } from "@/data/chapters";
@@ -70,6 +70,8 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [message, setMessage] = useState("");
   const [picker, setPicker] = useState<PickerState>(null);
+  const [pickerQuery, setPickerQuery] = useState("");
+  const [pickerActiveIndex, setPickerActiveIndex] = useState(-1);
   const [deleteTarget, setDeleteTarget] = useState<PrivateLedgerEntry | null>(null);
   const saveTimers = useRef(new Map<string, number>());
 
@@ -84,10 +86,56 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   useEffect(() => { void load(); return () => { for (const timer of saveTimers.current.values()) window.clearTimeout(timer); }; }, [load]);
   useEffect(() => {
     if (!picker && !deleteTarget) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") { setPicker(null); setDeleteTarget(null); } };
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); } };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [picker, deleteTarget]);
+  useEffect(() => {
+    if (!picker) return;
+    const selector = `[data-ledger-picker="${picker.entryId}-${picker.kind}"]`;
+    const onPointerDown = (event: PointerEvent) => {
+      const root = document.querySelector(selector);
+      if (root && event.target instanceof Node && root.contains(event.target)) return;
+      setPicker(null);
+      setPickerQuery("");
+      setPickerActiveIndex(-1);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [picker]);
+
+  function closePicker() {
+    setPicker(null);
+    setPickerQuery("");
+    setPickerActiveIndex(-1);
+  }
+
+  function togglePicker(entryId: string, kind: PickerKind, open: boolean) {
+    if (open) {
+      closePicker();
+      return;
+    }
+    setPicker({ entryId, kind });
+    setPickerQuery("");
+    setPickerActiveIndex(-1);
+  }
+
+  function pickerKeyDown(event: KeyboardEvent<HTMLInputElement>, count: number, selectAt: (index: number) => void) {
+    if (!count) return;
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setPickerActiveIndex((current) => current < 0 ? 0 : Math.min(current + 1, count - 1));
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setPickerActiveIndex((current) => current < 0 ? count - 1 : Math.max(current - 1, 0));
+    } else if (event.key === "Enter" && pickerActiveIndex >= 0 && pickerActiveIndex < count) {
+      event.preventDefault();
+      selectAt(pickerActiveIndex);
+    } else if (event.key === "Escape") {
+      event.preventDefault();
+      closePicker();
+    }
+  }
 
   function localPatch(id: string, patch: EntryPatch) {
     setEntries((current) => current.map((entry) => entry.id === id ? { ...entry, ...patch, updated_at: new Date().toISOString() } : entry));
@@ -180,8 +228,19 @@ export default function LedgerClient({ userId, username }: { userId: string; use
         const linkedChapter = chapters.find((chapter) => chapter.slug === entry.chapter_slug);
         const characterPickerOpen = picker?.entryId === entry.id && picker.kind === "character";
         const chapterPickerOpen = picker?.entryId === entry.id && picker.kind === "chapter";
+        const pickerNeedle = pickerQuery.trim().toLocaleLowerCase();
+        const availableCharacters = characters.filter((char) => {
+          if (entry.character_ids.includes(char.id)) return false;
+          if (!pickerNeedle) return true;
+          return [char.name, char.nickname ?? "", ...char.aliases, char.house]
+            .join(" ")
+            .toLocaleLowerCase()
+            .includes(pickerNeedle);
+        });
+        const availableChapters = chapters.filter((chapter) => !pickerNeedle || [chapter.title, chapter.slug, chapter.synopsis ?? ""].join(" ").toLocaleLowerCase().includes(pickerNeedle));
+        const chapterOptions = [{ slug: null as string | null, title: "No chapter bound" }, ...availableChapters.map((chapter) => ({ slug: chapter.slug as string | null, title: chapter.title }))];
         return <article className={`${styles.entry} ${entry.pinned ? styles.pinned : ""} ${entry.status === "settled" ? styles.settled : ""}`} key={entry.id}>
-          <button type="button" className={styles.entrySummary} onClick={() => { setExpandedId(expanded ? null : entry.id); setPicker(null); }} aria-expanded={expanded}>
+          <button type="button" className={styles.entrySummary} onClick={() => { setExpandedId(expanded ? null : entry.id); closePicker(); }} aria-expanded={expanded}>
             <span className={styles.entryMain}><span className={styles.entryMeta}>{entry.pinned && <b>Pinned</b>}{entry.status === "settled" && <b>Settled</b>}{entry.archived && <b>Archived</b>}<small>Last amended {age(entry.updated_at)}</small></span><strong>{entry.heading || "Untitled entry"}</strong>{entry.matter && <span className={styles.matterPreview}>{entry.matter}</span>}<span className={styles.progress}>{entry.checklist.length ? `${done} of ${entry.checklist.length} settled` : "No listed matters"}</span></span>
             <span className={styles.summarySide}>{linkedCharacters.slice(0, 4).map((char) => char && <MiniPortrait key={char.id} id={char.id} alt={char.name} size={30} />)}{linkedCharacters.length > 4 && <i>+{linkedCharacters.length - 4}</i>}<span className={`${styles.summaryChevron} ${expanded ? styles.summaryChevronOpen : ""}`}><Icon name="chevron"/></span></span>
           </button>
@@ -205,20 +264,34 @@ export default function LedgerClient({ userId, username }: { userId: string; use
             <section className={styles.linksPanel}>
               <div className={styles.linkColumn}>
                 <span className={styles.fieldLabel}>Names bound to this entry</span>
-                <div className={styles.customSelect} data-open={characterPickerOpen || undefined}>
-                  <button type="button" className={styles.selectButton} onClick={() => setPicker(characterPickerOpen ? null : { entryId: entry.id, kind: "character" })} aria-expanded={characterPickerOpen}><span>Choose a character…</span><Icon name="chevron"/></button>
-                  {characterPickerOpen && <div className={styles.selectMenu} role="listbox">{characters.filter((char) => !entry.character_ids.includes(char.id)).map((char) => <button type="button" role="option" aria-selected="false" key={char.id} onClick={() => { localPatch(entry.id, { character_ids: [...entry.character_ids, char.id] }); setPicker(null); }}><MiniPortrait id={char.id} alt={char.name} size={26}/><span>{char.name}</span></button>)}</div>}
+                <div className={styles.customSelect} data-open={characterPickerOpen || undefined} data-ledger-picker={`${entry.id}-character`}>
+                  <button type="button" className={styles.selectButton} onClick={() => togglePicker(entry.id, "character", characterPickerOpen)} aria-expanded={characterPickerOpen}><span>Choose a character…</span><Icon name="chevron"/></button>
+                  {characterPickerOpen && <div className={styles.selectMenu} role="listbox" aria-label="Choose a character">
+                    <div className={styles.selectSearchWrap}>
+                      <Icon name="search" className={styles.selectSearchIcon}/>
+                      <input type="text" role="searchbox" className={styles.selectSearch} value={pickerQuery} onChange={(event) => { setPickerQuery(event.target.value); setPickerActiveIndex(-1); }} onKeyDown={(event) => pickerKeyDown(event, availableCharacters.length, (index) => { const char = availableCharacters[index]; if (!char) return; localPatch(entry.id, { character_ids: [...entry.character_ids, char.id] }); closePicker(); })} placeholder="Search characters…" inputMode="search" autoComplete="off" autoCorrect="off" spellCheck={false} aria-label="Search characters"/>
+                      {pickerQuery && <button type="button" className={styles.selectSearchClear} aria-label="Clear character search" onPointerDown={(event) => event.preventDefault()} onClick={() => { setPickerQuery(""); setPickerActiveIndex(-1); }}><Icon name="close"/></button>}
+                    </div>
+                    <div className={styles.selectOptions}>{availableCharacters.length ? availableCharacters.map((char, index) => <button type="button" role="option" aria-selected="false" data-active={pickerActiveIndex === index || undefined} key={char.id} onPointerEnter={() => setPickerActiveIndex(index)} onClick={() => { localPatch(entry.id, { character_ids: [...entry.character_ids, char.id] }); closePicker(); }}><MiniPortrait id={char.id} alt={char.name} size={26}/><span>{char.name}</span></button>) : <p className={styles.selectEmpty}>No names answer that search.</p>}</div>
+                  </div>}
                 </div>
                 <div className={styles.characterChips}>{linkedCharacters.map((char) => char && <button key={char.id} type="button" onClick={() => localPatch(entry.id, { character_ids: entry.character_ids.filter((id) => id !== char.id) })} title={`Remove ${char.name}`}><MiniPortrait id={char.id} alt={char.name} size={30}/><span>{char.name}</span><Icon name="close"/></button>)}</div>
               </div>
 
               <div className={styles.chapterField}>
                 <span className={styles.fieldLabel}>Bound chapter</span>
-                <div className={styles.customSelect} data-open={chapterPickerOpen || undefined}>
-                  <button type="button" className={styles.selectButton} onClick={() => setPicker(chapterPickerOpen ? null : { entryId: entry.id, kind: "chapter" })} aria-expanded={chapterPickerOpen}><span>{linkedChapter?.title ?? "No chapter bound"}</span><Icon name="chevron"/></button>
-                  {chapterPickerOpen && <div className={styles.selectMenu} role="listbox"><button type="button" role="option" aria-selected={!entry.chapter_slug} onClick={() => { localPatch(entry.id, { chapter_slug: null }); setPicker(null); }}><Icon name="book"/><span>No chapter bound</span></button>{chapters.map((chapter) => <button type="button" role="option" aria-selected={chapter.slug === entry.chapter_slug} key={chapter.slug} onClick={() => { localPatch(entry.id, { chapter_slug: chapter.slug }); setPicker(null); }}><Icon name="book"/><span>{chapter.title}</span></button>)}</div>}
+                <div className={styles.customSelect} data-open={chapterPickerOpen || undefined} data-ledger-picker={`${entry.id}-chapter`}>
+                  <button type="button" className={styles.selectButton} onClick={() => togglePicker(entry.id, "chapter", chapterPickerOpen)} aria-expanded={chapterPickerOpen}><span>{linkedChapter?.title ?? "No chapter bound"}</span><Icon name="chevron"/></button>
+                  {chapterPickerOpen && <div className={styles.selectMenu} role="listbox" aria-label="Choose a chapter">
+                    <div className={styles.selectSearchWrap}>
+                      <Icon name="search" className={styles.selectSearchIcon}/>
+                      <input type="text" role="searchbox" className={styles.selectSearch} value={pickerQuery} onChange={(event) => { setPickerQuery(event.target.value); setPickerActiveIndex(-1); }} onKeyDown={(event) => pickerKeyDown(event, chapterOptions.length, (index) => { const option = chapterOptions[index]; if (!option) return; localPatch(entry.id, { chapter_slug: option.slug }); closePicker(); })} placeholder="Search chapters…" inputMode="search" autoComplete="off" autoCorrect="off" spellCheck={false} aria-label="Search chapters"/>
+                      {pickerQuery && <button type="button" className={styles.selectSearchClear} aria-label="Clear chapter search" onPointerDown={(event) => event.preventDefault()} onClick={() => { setPickerQuery(""); setPickerActiveIndex(-1); }}><Icon name="close"/></button>}
+                    </div>
+                    <div className={styles.selectOptions}>{chapterOptions.length ? chapterOptions.map((option, index) => <button type="button" role="option" aria-selected={option.slug === (entry.chapter_slug ?? null)} data-active={pickerActiveIndex === index || undefined} key={option.slug ?? "none"} onPointerEnter={() => setPickerActiveIndex(index)} onClick={() => { localPatch(entry.id, { chapter_slug: option.slug }); closePicker(); }}><Icon name="book"/><span>{option.title}</span></button>) : <p className={styles.selectEmpty}>No chapter answers that search.</p>}</div>
+                  </div>}
                 </div>
-                {linkedChapter && <small>{linkedChapter.synopsis}</small>}
+                {linkedChapter && <div className={styles.chapterDetails}><p>{linkedChapter.synopsis}</p><Link className={styles.chapterLink} href={`/chapters/${linkedChapter.slug}`}><Icon name="book"/><span>Open chapter</span></Link></div>}
               </div>
             </section>
 
