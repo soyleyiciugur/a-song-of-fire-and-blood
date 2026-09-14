@@ -52,17 +52,6 @@ export interface DirectRavenMessage {
   deleted_at: string | null;
 }
 
-
-export interface DirectRavenSystemEvent {
-  id: string;
-  conversation_id: string;
-  event_type: "member_added" | "member_removed" | "details_changed";
-  actor_id: string | null;
-  target_user_id: string | null;
-  detail: Record<string, unknown>;
-  created_at: string;
-}
-
 export interface DirectRavenRead {
   conversation_id: string;
   user_id: string;
@@ -111,6 +100,28 @@ export interface SiteNotificationRow {
   read_at: string | null;
 }
 
+
+export interface LedgerChecklistItem {
+  id: string;
+  text: string;
+  done: boolean;
+}
+
+export interface PrivateLedgerEntry {
+  id: string;
+  user_id: string;
+  heading: string;
+  matter: string;
+  checklist: LedgerChecklistItem[];
+  pinned: boolean;
+  status: "open" | "settled";
+  archived: boolean;
+  character_ids: string[];
+  chapter_slug: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface DirectRavenBlock {
   blocker_id: string;
   blocked_id: string;
@@ -127,12 +138,12 @@ export interface Database {
       direct_raven_conversations: { Row: DirectRavenConversation; Insert: Omit<DirectRavenConversation, "id" | "created_at" | "updated_at"> & Partial<Pick<DirectRavenConversation, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<DirectRavenConversation, "title" | "description" | "avatar_path" | "owner_id" | "updated_at">>; Relationships: [] };
       direct_raven_members: { Row: DirectRavenMember; Insert: Omit<DirectRavenMember, "joined_at"> & Partial<Pick<DirectRavenMember, "joined_at">>; Update: Partial<Pick<DirectRavenMember, "role">>; Relationships: [] };
       direct_raven_messages: { Row: DirectRavenMessage; Insert: Pick<DirectRavenMessage, "conversation_id" | "sender_id" | "body"> & Partial<Pick<DirectRavenMessage, "id" | "created_at" | "edited_at" | "deleted_at" | "attachment_path" | "reply_to" | "gif">>; Update: Partial<Pick<DirectRavenMessage, "body" | "edited_at" | "deleted_at">>; Relationships: [] };
-      direct_raven_system_events: { Row: DirectRavenSystemEvent; Insert: Omit<DirectRavenSystemEvent, "id" | "created_at"> & Partial<Pick<DirectRavenSystemEvent, "id" | "created_at">>; Update: never; Relationships: [] };
       direct_raven_reads: { Row: DirectRavenRead; Insert: DirectRavenRead; Update: Pick<DirectRavenRead, "last_read_at">; Relationships: [] };
       direct_raven_blocks: { Row: DirectRavenBlock; Insert: Omit<DirectRavenBlock, "created_at"> & Partial<Pick<DirectRavenBlock, "created_at">>; Update: never; Relationships: [] };
       push_subscriptions: { Row: PushSubscription; Insert: Omit<PushSubscription, "id" | "created_at" | "updated_at"> & Partial<Pick<PushSubscription, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PushSubscription, "p256dh" | "auth" | "user_agent" | "updated_at">>; Relationships: [] };
       notification_preferences: { Row: NotificationPreferencesRow; Insert: Pick<NotificationPreferencesRow, "user_id"> & Partial<Omit<NotificationPreferencesRow, "user_id">>; Update: Partial<Pick<NotificationPreferencesRow, "mascot_mode" | "preferences" | "last_mascot" | "mascot_streak" | "mara_count" | "aldren_count" | "last_variants" | "updated_at">>; Relationships: [] };
       site_notifications: { Row: SiteNotificationRow; Insert: Omit<SiteNotificationRow, "id" | "created_at" | "read_at"> & Partial<Pick<SiteNotificationRow, "id" | "created_at" | "read_at" | "dedupe_key">>; Update: Partial<Pick<SiteNotificationRow, "read_at">>; Relationships: [] };
+      private_ledger_entries: { Row: PrivateLedgerEntry; Insert: Omit<PrivateLedgerEntry, "id" | "created_at" | "updated_at"> & Partial<Pick<PrivateLedgerEntry, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PrivateLedgerEntry, "heading" | "matter" | "checklist" | "pinned" | "status" | "archived" | "character_ids" | "chapter_slug" | "updated_at">>; Relationships: [] };
     };
     Views: Record<string, never>;
     Functions: {
