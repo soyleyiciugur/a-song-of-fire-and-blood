@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "npm run shell:check",
+    "shell:check": "node scripts/check-app-shell.mjs",
+    "shell:release": "node scripts/check-app-shell.mjs --release",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,8 +17,10 @@
     "community:inbox": "node scripts/community-inbox.mjs",
     "community:reactions": "node scripts/community-reaction-targets.mjs --write",
     "community:push": "npx --yes supabase db push --linked",
-    "community:sync": "npm run community:reactions && npm run community:push",
-    "push:keys": "node scripts/generate-vapid.mjs"
+    "community:sync": "npm run community:reactions && npm run community:push && npm run community:notify",
+    "push:keys": "node scripts/generate-vapid.mjs",
+    "community:notify": "node scripts/community-notifications.mjs",
+    "postbuild": "node scripts/community-notifications.mjs --production-build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

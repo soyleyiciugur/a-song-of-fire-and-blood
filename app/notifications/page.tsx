@@ -64,6 +64,7 @@ function Notifications() {
   const [ledgerTab, setLedgerTab] = useState<LedgerTab>(requestedView === "for-you" || requestedView === "all" ? "realm" : "personal");
   const [markingAll, setMarkingAll] = useState(false), [readStatus, setReadStatus] = useState("");
   const [dismissedOpenId, setDismissedOpenId] = useState<string | null>(null);
+  const [openedId, setOpenedId] = useState<string | null>(null);
   const readOverrides = useRef(new Map<string, string>());
   const bulkOverrides = useRef(new Map<string, string>());
   const closeRef = useRef<HTMLButtonElement>(null); const openId = params.get("open");
@@ -74,7 +75,11 @@ function Notifications() {
     next.delete("tab");
     if (view !== "personal") next.delete("open");
     const query = next.toString();
-    router.replace(`/notifications${query ? `?${query}` : ""}`, { scroll: false });
+    const href = `/notifications${query ? `?${query}` : ""}`;
+    // Write the current history entry synchronously so an immediate navigation
+    // away from the Rookery still returns to the exact sub-view on Back.
+    window.history.replaceState(window.history.state, "", href);
+    router.replace(href, { scroll: false });
     if (view === "personal") setLedgerTab("personal");
     else {
       setLedgerTab("realm");
@@ -152,10 +157,11 @@ function Notifications() {
   useEffect(() => { let alive = true; const resolveUser = async () => { const { data: { user } } = await supabase.auth.getUser(); if (!alive) return; setUserId(user?.id ?? null); setAuthReady(true); }; void resolveUser(); const { data } = supabase.auth.onAuthStateChange((_event, session) => { if (!alive) return; setUserId(session?.user.id ?? null); setAuthReady(true); setLimit(PAGE_SIZE); }); return () => { alive = false; data.subscription.unsubscribe(); }; }, [supabase]);
   useEffect(() => { if (!authReady) return; const timer = window.setTimeout(() => void load(userId, limit), 0); return () => window.clearTimeout(timer); }, [authReady, limit, load, userId]);
   useEffect(() => { if (!userId) return; const refresh = () => void load(userId, limit); const onVisible = () => { if (document.visibilityState === "visible") refresh(); }; window.addEventListener("focus", refresh); document.addEventListener("visibilitychange", onVisible); const channel = supabase.channel(`site-notifications-page:${userId}`).on("postgres_changes", { event: "INSERT", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` }, refresh).subscribe(); return () => { window.removeEventListener("focus", refresh); document.removeEventListener("visibilitychange", onVisible); void supabase.removeChannel(channel); }; }, [limit, load, supabase, userId]);
-  useEffect(() => { if (!openId || !userId || items.some((item) => item.id === openId)) return; let active = true; void supabase.from("site_notifications").select("*").eq("user_id", userId).eq("id", openId).maybeSingle().then(({ data }) => { if (active) setExtra(data ? normalize(data as unknown as Record<string, unknown>) : null); }); return () => { active = false; }; }, [items, openId, supabase, userId]);
+  const effectiveOpenId = openedId ?? openId;
+  useEffect(() => { if (!effectiveOpenId || !userId || items.some((item) => item.id === effectiveOpenId)) return; let active = true; void supabase.from("site_notifications").select("*").eq("user_id", userId).eq("id", effectiveOpenId).maybeSingle().then(({ data }) => { if (active) setExtra(data ? normalize(data as unknown as Record<string, unknown>) : null); }); return () => { active = false; }; }, [effectiveOpenId, items, supabase, userId]);
 
   useEffect(() => {
-    if (openId) return;
+    if (effectiveOpenId) return;
     const view = params.get("view");
     if (view === "for-you" || view === "all") {
       setLedgerTab("realm");
@@ -165,12 +171,15 @@ function Notifications() {
     }
   }, [openId, params]);
 
-  const activeNotification = openId && openId !== dismissedOpenId
-    ? items.find((item) => item.id === openId) ?? (extra?.id === openId ? extra : null)
+  const activeNotification = effectiveOpenId && effectiveOpenId !== dismissedOpenId
+    ? items.find((item) => item.id === effectiveOpenId) ?? (extra?.id === effectiveOpenId ? extra : null)
     : null;
 
   useEffect(() => {
-    if (openId && openId !== dismissedOpenId) setDismissedOpenId(null);
+    if (openId && openId !== dismissedOpenId) {
+      setOpenedId(openId);
+      setDismissedOpenId(null);
+    }
   }, [openId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -202,16 +211,20 @@ function Notifications() {
   useEffect(() => { if (params.get("tab") === "updates") router.replace("/update-notes"); }, [params, router]);
 
   function setOpen(id: string) {
+    setOpenedId(id);
     setDismissedOpenId(null);
     const next = new URLSearchParams(params.toString());
     next.set("open", id);
     next.set("view", "personal");
     next.delete("tab");
-    router.replace(`/notifications?${next.toString()}`, { scroll: false });
+    const href = `/notifications?${next.toString()}`;
+    window.history.replaceState(window.history.state, "", href);
+    router.replace(href, { scroll: false });
   }
 
   function closeLightbox() {
-    if (openId) setDismissedOpenId(openId);
+    if (effectiveOpenId) setDismissedOpenId(effectiveOpenId);
+    setOpenedId(null);
 
     const next = new URL(window.location.href);
     next.searchParams.delete("open");
@@ -261,7 +274,7 @@ function Notifications() {
   const renderActivityCard = (comment: (typeof community.comments)[number], nested = false) => {
     const user = users.get(comment.authorId); if (!user) return null;
     const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye";
-    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={styles.legacyCard}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
+    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={styles.legacyCard} onClick={() => { const current = new URL(window.location.href); current.searchParams.set("view", activityFilter); current.searchParams.delete("open"); window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`); }}>{user.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={user.displayName ?? user.username} size={36} /> : user.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user.color }} aria-hidden="true">{user.avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{user.username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
   };
 
   const renderActivityEntries = (entries: (typeof community.comments)[number][]) => {
@@ -280,7 +293,7 @@ function Notifications() {
 
   return <main className={styles.page}>
     <div className={styles.topRow}><Link href="/" className={styles.back}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>Back to Home</Link>{userId && <Link className={styles.settingsLink} href="/settings#notifications" aria-label="Raven settings" title="Raven settings"><svg className={styles.settingsIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.09a2 2 0 0 1 1 1.73v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.73l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z" /><circle cx="12" cy="12" r="3" /></svg><span className={styles.settingsText}>Raven settings</span></Link>}</div>
-    <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">Notifications<PageTitleIcon name="notifications" /></h1><p>Personal ravens from Mara and Aldren, followed by the wider conversation across the realm.</p></header>
+    <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">The Rookery<PageTitleIcon name="notifications" /></h1><p>Personal ravens from Mara and Aldren, followed by the wider conversation across the realm.</p></header>
 
     <nav className={styles.ledgerTabs} role="tablist" aria-label="Rookery ledgers">
       <button type="button" role="tab" aria-selected={ledgerTab === "personal"} onClick={() => setRookeryView("personal")}>Personal Ravens</button>
