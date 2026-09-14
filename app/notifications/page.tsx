@@ -56,15 +56,32 @@ function Notifications() {
   const community = useCommunity(); const params = useSearchParams(); const router = useRouter(); const supabase = useMemo(() => createClient(), []);
   const [userId, setUserId] = useState<string | null>(null), [authReady, setAuthReady] = useState(false);
   const [items, setItems] = useState<SiteNotification[]>([]), [extra, setExtra] = useState<SiteNotification | null>(null);
-  const [limit, setLimit] = useState(PAGE_SIZE), [activityLimit, setActivityLimit] = useState(30), [activityFilter, setActivityFilter] = useState<ActivityFilter>("for-you");
+  const requestedView = params.get("view");
+  const initialRealmView = requestedView === "all" ? "all" : "for-you";
+  const [limit, setLimit] = useState(PAGE_SIZE), [activityLimit, setActivityLimit] = useState(30), [activityFilter, setActivityFilter] = useState<ActivityFilter>(initialRealmView);
   const [loading, setLoading] = useState(true), [error, setError] = useState(""), [hasMore, setHasMore] = useState(false);
   const [fallbackNow] = useState(() => Date.now());
-  const [ledgerTab, setLedgerTab] = useState<LedgerTab>("personal");
+  const [ledgerTab, setLedgerTab] = useState<LedgerTab>(requestedView === "for-you" || requestedView === "all" ? "realm" : "personal");
   const [markingAll, setMarkingAll] = useState(false), [readStatus, setReadStatus] = useState("");
   const [dismissedOpenId, setDismissedOpenId] = useState<string | null>(null);
   const readOverrides = useRef(new Map<string, string>());
   const bulkOverrides = useRef(new Map<string, string>());
   const closeRef = useRef<HTMLButtonElement>(null); const openId = params.get("open");
+
+  const setRookeryView = useCallback((view: "personal" | "for-you" | "all") => {
+    const next = new URLSearchParams(params.toString());
+    next.set("view", view);
+    next.delete("tab");
+    if (view !== "personal") next.delete("open");
+    const query = next.toString();
+    router.replace(`/notifications${query ? `?${query}` : ""}`, { scroll: false });
+    if (view === "personal") setLedgerTab("personal");
+    else {
+      setLedgerTab("realm");
+      setActivityFilter(view);
+      setActivityLimit(30);
+    }
+  }, [params, router]);
 
   const load = useCallback(async (id: string | null, requestedLimit = limit) => {
     setLoading(true); setError(""); setExtra(null);
@@ -137,6 +154,17 @@ function Notifications() {
   useEffect(() => { if (!userId) return; const refresh = () => void load(userId, limit); const onVisible = () => { if (document.visibilityState === "visible") refresh(); }; window.addEventListener("focus", refresh); document.addEventListener("visibilitychange", onVisible); const channel = supabase.channel(`site-notifications-page:${userId}`).on("postgres_changes", { event: "INSERT", schema: "public", table: "site_notifications", filter: `user_id=eq.${userId}` }, refresh).subscribe(); return () => { window.removeEventListener("focus", refresh); document.removeEventListener("visibilitychange", onVisible); void supabase.removeChannel(channel); }; }, [limit, load, supabase, userId]);
   useEffect(() => { if (!openId || !userId || items.some((item) => item.id === openId)) return; let active = true; void supabase.from("site_notifications").select("*").eq("user_id", userId).eq("id", openId).maybeSingle().then(({ data }) => { if (active) setExtra(data ? normalize(data as unknown as Record<string, unknown>) : null); }); return () => { active = false; }; }, [items, openId, supabase, userId]);
 
+  useEffect(() => {
+    if (openId) return;
+    const view = params.get("view");
+    if (view === "for-you" || view === "all") {
+      setLedgerTab("realm");
+      setActivityFilter(view);
+    } else {
+      setLedgerTab("personal");
+    }
+  }, [openId, params]);
+
   const activeNotification = openId && openId !== dismissedOpenId
     ? items.find((item) => item.id === openId) ?? (extra?.id === openId ? extra : null)
     : null;
@@ -177,6 +205,7 @@ function Notifications() {
     setDismissedOpenId(null);
     const next = new URLSearchParams(params.toString());
     next.set("open", id);
+    next.set("view", "personal");
     next.delete("tab");
     router.replace(`/notifications?${next.toString()}`, { scroll: false });
   }
@@ -187,6 +216,7 @@ function Notifications() {
     const next = new URL(window.location.href);
     next.searchParams.delete("open");
     next.searchParams.delete("tab");
+    next.searchParams.set("view", "personal");
     const href = `${next.pathname}${next.search}${next.hash}`;
 
     // Close immediately even if Next's search-param propagation is delayed in an
@@ -253,8 +283,8 @@ function Notifications() {
     <header className={styles.hero}><span className={styles.heroEyebrow}>The innkeepers have kept your ravens</span><h1 className="realm-page-title">Notifications<PageTitleIcon name="notifications" /></h1><p>Personal ravens from Mara and Aldren, followed by the wider conversation across the realm.</p></header>
 
     <nav className={styles.ledgerTabs} role="tablist" aria-label="Rookery ledgers">
-      <button type="button" role="tab" aria-selected={ledgerTab === "personal"} onClick={() => setLedgerTab("personal")}>Personal Ravens</button>
-      <button type="button" role="tab" aria-selected={ledgerTab === "realm"} onClick={() => setLedgerTab("realm")}>Across the Realm</button>
+      <button type="button" role="tab" aria-selected={ledgerTab === "personal"} onClick={() => setRookeryView("personal")}>Personal Ravens</button>
+      <button type="button" role="tab" aria-selected={ledgerTab === "realm"} onClick={() => setRookeryView(activityFilter)}>Across the Realm</button>
     </nav>
 
     {ledgerTab === "personal" && <div className={styles.ledgerPanel}>
@@ -271,7 +301,7 @@ function Notifications() {
 
     {ledgerTab === "realm" && <div className={styles.ledgerPanel}>
     <section className={styles.communityLedger} aria-label="Community activity">
-      <div className={styles.communityHeader}><div><span className={styles.sectionKicker}>Across the realm</span><h2>Community activity</h2><p>The familiar web activity feed remains here alongside the new personal raven ledger.</p></div><nav className={styles.activityTabs} aria-label="Community activity filters"><button type="button" aria-pressed={activityFilter === "for-you"} disabled={!userId} onClick={() => { setActivityFilter("for-you"); setActivityLimit(30); }}>For you</button><button type="button" aria-pressed={activityFilter === "all" || !userId} onClick={() => { setActivityFilter("all"); setActivityLimit(30); }}>All activity</button></nav></div>
+      <div className={styles.communityHeader}><div><span className={styles.sectionKicker}>Across the realm</span><h2>Community activity</h2><p>The familiar web activity feed remains here alongside the new personal raven ledger.</p></div><nav className={styles.activityTabs} aria-label="Community activity filters"><button type="button" aria-pressed={activityFilter === "for-you"} disabled={!userId} onClick={() => setRookeryView("for-you")}>For you</button><button type="button" aria-pressed={activityFilter === "all" || !userId} onClick={() => setRookeryView("all")}>All activity</button></nav></div>
       {!community.loaded && !community.error && <p className={styles.communityStatus}>Loading community activity…</p>}
       {community.error && <p className={styles.error}>{community.error} <button onClick={() => void refreshCommunity()}>Retry</button></p>}
       {activityGroups.map(({ label, entries }) => <section key={label} className={styles.legacyTimeGroup} aria-label={label}><h3 className={styles.timeHeading}>{label}</h3><ol className={styles.legacyFeed}>{renderActivityEntries(entries)}</ol></section>)}
