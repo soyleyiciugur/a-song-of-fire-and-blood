@@ -2323,7 +2323,7 @@
     "houseId": "targaryen"
   },
   {
-    "id": "vhaemys-targaryen-elder",
+    "id": "queen-vhaemys-targaryen",
     "cardType": "character",
     "tierId": "b",
     "name": "Vhaemys Targaryen",
@@ -2347,7 +2347,7 @@
       "support"
     ],
     "subtitle": "The Long-Suffering Queen",
-    "linkedCharacterId": "vhaemys-targaryen-elder",
+    "linkedCharacterId": "queen-vhaemys-targaryen",
     "houseId": "targaryen"
   },
   {

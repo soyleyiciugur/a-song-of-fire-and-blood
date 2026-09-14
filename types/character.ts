@@ -83,7 +83,7 @@ export type CharacterId =
   | "vaenarr-targaryen"
   | "vahaemon-targaryen"
   | "vhaemys-targaryen"
-  | "vhaemys-targaryen-elder"
+  | "queen-vhaemys-targaryen"
   | "visenor-targaryen"
   | "visenya-targaryen"
   | "weylar-rocke"

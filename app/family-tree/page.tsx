@@ -35,7 +35,7 @@ export default async function FamilyTree({ searchParams }: Props) {
 
             <Union
               a={{ id: "aenys-targaryen-ii" }}
-              b={{ id: "vhaemys-targaryen-elder" }}
+              b={{ id: "queen-vhaemys-targaryen" }}
             />
           </div>
 
@@ -46,7 +46,7 @@ export default async function FamilyTree({ searchParams }: Props) {
           <div className={styles.generationRow}>
             <FamilyUnit
               parentA={{ id: "aenys-targaryen-ii" }}
-              parentB={{ id: "vhaemys-targaryen-elder" }}
+              parentB={{ id: "queen-vhaemys-targaryen" }}
               childrenLabel="Children"
             >
               <Union

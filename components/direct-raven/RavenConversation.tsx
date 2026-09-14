@@ -105,7 +105,10 @@ export default function RavenConversation({
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const photoLibraryRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
+  const attachmentMenuRef = useRef<HTMLDivElement>(null);
+  const pickerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const swipeRef = useRef<{ id: string; startX: number; startY: number; lastX: number; row: HTMLDivElement; horizontal: boolean } | null>(null);
   const nearBottom = useRef(false);
   const loadedMessages = useRef(messages);
   const sendLock = useRef(false);
@@ -294,8 +297,13 @@ export default function RavenConversation({
 
   useEffect(() => {
     const closeMenu = (event: PointerEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) setMenuOpen(false);
-      if (!(event.target as Element | null)?.closest?.('[data-raven-message-menu]')) setActionMenuId(null);
+      const target = event.target as Node;
+      const element = event.target as Element | null;
+      if (menuRef.current && !menuRef.current.contains(target)) setMenuOpen(false);
+      if (!element?.closest?.('[data-raven-message-menu]')) setActionMenuId(null);
+      if (attachmentMenuRef.current && !attachmentMenuRef.current.contains(target) && !element?.closest?.('[data-attachment-trigger]')) setAttachmentMenuOpen(false);
+      if (pickerRef.current && !pickerRef.current.contains(target) && !element?.closest?.('[data-composer-picker-trigger]')) setPickerOpen(false);
+      if (!element?.closest?.('[data-gif-picker]') && !element?.closest?.('[data-gif-trigger]')) setGifOpen(false);
     };
     const closeWithEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -501,6 +509,49 @@ export default function RavenConversation({
       void supabase.removeChannel(channel);
     };
   }, [conversationId, supabase, userId, partner, isGuild, focusUnread, firstUnreadId]);
+
+  function openNativeFilePicker(input: HTMLInputElement | null) {
+    if (!input) return;
+    try {
+      const picker = input as HTMLInputElement & { showPicker?: () => void };
+      if (typeof picker.showPicker === "function") picker.showPicker();
+      else input.click();
+    } catch {
+      input.click();
+    }
+  }
+
+  function startSwipeReply(event: React.PointerEvent<HTMLDivElement>, message: DirectRavenMessage) {
+    if (event.pointerType !== "touch" || closed || message.deleted_at) return;
+    swipeRef.current = { id: message.id, startX: event.clientX, startY: event.clientY, lastX: event.clientX, row: event.currentTarget, horizontal: false };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  }
+
+  function moveSwipeReply(event: React.PointerEvent<HTMLDivElement>) {
+    const swipe = swipeRef.current;
+    if (!swipe || swipe.id !== event.currentTarget.dataset.messageId) return;
+    const dx = event.clientX - swipe.startX;
+    const dy = event.clientY - swipe.startY;
+    swipe.lastX = event.clientX;
+    if (!swipe.horizontal && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.25) swipe.horizontal = true;
+    if (!swipe.horizontal) return;
+    const offset = Math.max(0, Math.min(62, dx * .72));
+    swipe.row.style.setProperty("--raven-swipe-x", `${offset}px`);
+  }
+
+  function endSwipeReply(event: React.PointerEvent<HTMLDivElement>, message: DirectRavenMessage) {
+    const swipe = swipeRef.current;
+    if (!swipe || swipe.id !== message.id) return;
+    const dx = swipe.lastX - swipe.startX;
+    swipe.row.style.setProperty("--raven-swipe-x", "0px");
+    if (swipe.horizontal && dx > 52) {
+      setReply(message);
+      setEditing(null);
+      requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
+    }
+    swipeRef.current = null;
+    try { event.currentTarget.releasePointerCapture?.(event.pointerId); } catch {}
+  }
 
   function chooseFile(next: File | undefined) {
     if (!next) return;
@@ -809,7 +860,12 @@ export default function RavenConversation({
                 <div className={styles.dateDivider}>{day(message.created_at)}</div>
               )}
               {message.id === firstUnreadId && <div id="raven-unread-divider" className={styles.unreadDivider}><span>{unreadCount} unread {unreadCount === 1 ? "raven" : "ravens"}</span></div>}
-              <div id={`raven-${message.id}`} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}>
+              <div id={`raven-${message.id}`} data-message-id={message.id} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}
+                onPointerDown={(event) => startSwipeReply(event, message)}
+                onPointerMove={moveSwipeReply}
+                onPointerUp={(event) => endSwipeReply(event, message)}
+                onPointerCancel={(event) => endSwipeReply(event, message)}
+              >
                 {isGuild && !mine && (() => {
                   const sender = memberMap.get(message.sender_id);
                   const avatar = (
@@ -847,7 +903,7 @@ export default function RavenConversation({
                   <div className={styles.messageFooter}>
                     {!message.deleted_at && <div className={styles.messageActions}>
                       <MessageReactions messageId={message.id} userId={userId} />
-                      {!closed && <button type="button" onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
+                      {!closed && <button type="button" className={styles.inlineReplyButton} onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
                     </div>}
                     <span className={styles.messageMeta}>
                       {message.edited_at && !message.deleted_at && <small>edited</small>}
@@ -904,6 +960,7 @@ export default function RavenConversation({
                                 Copy
                               </button>
                             )}
+                            {!closed && <button type="button" onClick={() => { setActionMenuId(null); setReply(message); setEditing(null); requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true })); }}>Reply</button>}
                             {mine && (
                               <>
                                 <button type="button" disabled={closed} onClick={() => { setActionMenuId(null); beginEdit(message); }}>Edit</button>
@@ -932,10 +989,15 @@ export default function RavenConversation({
         ) : (
           <>
             {(reply || editing) && (
-              <div className={styles.draftContext}>
-                <span>{editing ? "Editing raven" : `Replying: ${reply ? ravenBodySummary(reply.body) : "Raven"}`}</span>
+              <div className={`${styles.draftContext} ${reply ? styles.replyDraftContext : ""}`}>
+                <span className={styles.draftContextCopy}>
+                  <small>{editing ? "Editing raven" : "Replying to"}</small>
+                  <b>{editing ? "Your message" : (reply ? ravenBodySummary(reply.body || "") || (reply.attachment_path ? "Photo" : "Raven") : "Raven")}</b>
+                </span>
                 <button
                   type="button"
+                  className={styles.draftContextClose}
+                  aria-label={editing ? "Cancel edit" : "Cancel reply"}
                   disabled={sending}
                   onClick={() => {
                     setReply(null);
@@ -944,12 +1006,12 @@ export default function RavenConversation({
                     resetDraftExtras();
                   }}
                 >
-                  Cancel
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
                 </button>
               </div>
             )}
 
-            {gifOpen && <div className={styles.gifPopover}><GiphyPicker onSelect={value=>{setGif(value);setGifOpen(false);}}/></div>}
+            {gifOpen && <div className={styles.gifPopover} data-gif-picker><GiphyPicker onSelect={value=>{setGif(value);setGifOpen(false);}}/></div>}
             {gif && <div className={styles.mediaPreview}><img src={gif.url} alt={gif.title}/><button type="button" disabled={sending} onClick={()=>setGif(null)}>Remove GIF</button></div>}
             {preview && (
               <div className={styles.mediaPreview}>
@@ -959,7 +1021,7 @@ export default function RavenConversation({
             )}
 
             {pickerOpen && (
-              <div className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
+              <div ref={pickerRef} className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
                 {pickerTab === "emoji" ? (
                   <EmojiPicker onSelect={(emoji) => insertComposerText(emoji)} />
                 ) : (
@@ -1040,17 +1102,17 @@ export default function RavenConversation({
             </form>
 
             <div className={styles.composerTools}>
-              <button type="button" disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);setAttachmentMenuOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
-              <div className={styles.attachmentToolWrap}>
-                <button type="button" className={styles.fileButton} disabled={!!editing || sending} onClick={() => { setAttachmentMenuOpen((value) => !value); setGifOpen(false); setPickerOpen(false); }} aria-expanded={attachmentMenuOpen}>
+              <button type="button" data-gif-trigger disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);setAttachmentMenuOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
+              <div ref={attachmentMenuRef} className={styles.attachmentToolWrap}>
+                <button type="button" data-attachment-trigger className={styles.fileButton} disabled={!!editing || sending} onClick={() => { setAttachmentMenuOpen((value) => !value); setGifOpen(false); setPickerOpen(false); }} aria-expanded={attachmentMenuOpen}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Photo / GIF
                 </button>
                 {attachmentMenuOpen && <div className={styles.attachmentSourceMenu} onPointerDown={(event) => event.stopPropagation()}>
-                  <button type="button" onClick={() => photoLibraryRef.current?.click()}>
+                  <button type="button" onClick={() => openNativeFilePicker(photoLibraryRef.current)}>
                     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m6.5 17 4.2-4 2.5 2.2 2.2-2 2.2 3.8"/></svg>
                     <span><b>Photo Library</b><small>Choose a photo or GIF</small></span>
                   </button>
-                  <button type="button" onClick={() => cameraRef.current?.click()}>
+                  <button type="button" className={styles.cameraSourceButton} onClick={() => openNativeFilePicker(cameraRef.current)}>
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h3l1.3-2h5.4L16 8h3a2 2 0 0 1 2 2v8H3v-8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="3"/></svg>
                     <span><b>Camera</b><small>Take a new photo</small></span>
                   </button>
@@ -1058,10 +1120,10 @@ export default function RavenConversation({
                 <input ref={photoLibraryRef} className={styles.hiddenFileInput} type="file" disabled={!!editing || sending} accept="image/jpeg,image/png,image/webp,image/gif" onChange={(event) => { chooseFile(event.target.files?.[0]); event.target.value = ""; }} />
                 <input ref={cameraRef} className={styles.hiddenFileInput} type="file" disabled={!!editing || sending} accept="image/*" capture="environment" onChange={(event) => { chooseFile(event.target.files?.[0]); event.target.value = ""; }} />
               </div>
-              <button type="button" disabled={sending} onClick={() => openPicker("emoji")} aria-expanded={pickerOpen}>
+              <button type="button" data-composer-picker-trigger disabled={sending} onClick={() => openPicker("emoji")} aria-expanded={pickerOpen}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5"/><path d="M9 10h.01M15 10h.01M8.5 14c1 1.4 2.1 2 3.5 2s2.5-.6 3.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> Emoji
               </button>
-              <button type="button" disabled={sending} onClick={() => openPicker("portraits")} aria-expanded={pickerOpen}>
+              <button type="button" data-composer-picker-trigger disabled={sending} onClick={() => openPicker("portraits")} aria-expanded={pickerOpen}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" strokeWidth="1.4"/><path d="M8.5 16c.9-1.6 2.1-2.4 3.5-2.4s2.6.8 3.5 2.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg> Portraits
               </button>
               <small>Shift + Enter for a new line</small>

@@ -10,7 +10,7 @@ const SECTIONS = [
   { href: "/admin/ravens-eye", label: "The Raven's Eye", description: "Watch over the realm's latest happenings." },
   { href: "/admin/timeline", label: "Timeline", description: "Dated events across every chapter." },
   { href: "/admin/records", label: "Records", description: "Scrolls of the Citadel and The Book of Brothers." },
-  { href: "/admin/tools", label: "Tools", description: "Calendar, travel calculator, and name generator." },
+  { href: "/admin/tools", label: "Tools", description: "World date and realm state controls." },
 ];
 
 const styles = `

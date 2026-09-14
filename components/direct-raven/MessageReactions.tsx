@@ -36,6 +36,25 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
   }, [refresh]);
   useEffect(() => {
     if (!open && !details) return;
+    const frame = window.requestAnimationFrame(() => {
+      const popovers = wrapRef.current?.querySelectorAll<HTMLElement>(
+        `.${styles.quickReactionPopover}, .${styles.reactionDetailsPopover}`,
+      );
+      popovers?.forEach((popover) => {
+        popover.style.setProperty("--reaction-popover-shift", "0px");
+        const rect = popover.getBoundingClientRect();
+        const gutter = 10;
+        let shift = 0;
+        if (rect.left < gutter) shift = gutter - rect.left;
+        else if (rect.right > window.innerWidth - gutter) shift = window.innerWidth - gutter - rect.right;
+        popover.style.setProperty("--reaction-popover-shift", `${shift}px`);
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [open, details, customOpen]);
+
+  useEffect(() => {
+    if (!open && !details) return;
     const close = (event: PointerEvent) => { if (!wrapRef.current?.contains(event.target as Node)) { setOpen(false); setCustomOpen(false); setDetails(null); } };
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") { setOpen(false); setCustomOpen(false); setDetails(null); } };
     document.addEventListener("pointerdown", close);
@@ -83,7 +102,7 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
     <button type="button" className={`${styles.messageReactionTrigger} ${mine ? styles.messageReactionActive : ""}`} aria-label="React to message" aria-expanded={open} onClick={() => { setOpen((value) => !value); setCustomOpen(false); }}>
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M12 20.2 5.4 14a5.1 5.1 0 0 1-.5-6.7 4.5 4.5 0 0 1 7.1-.2 4.5 4.5 0 0 1 7.1.2 5.1 5.1 0 0 1-.5 6.7L12 20.2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
     </button>
-    {summary.length > 0 && <span className={styles.messageReactionSummary}>{summary.slice(0, 4).map(([emoji, count]) => <button key={emoji} type="button" onPointerDown={() => { cancelLongPress(); longPressTimer.current = window.setTimeout(() => void showWhoReacted(emoji), 450); }} onPointerUp={cancelLongPress} onPointerCancel={cancelLongPress} onPointerLeave={cancelLongPress} onContextMenu={(event) => { event.preventDefault(); void showWhoReacted(emoji); }} onClick={() => { if (suppressClick.current) return; void choose(emoji); }} aria-label={`${emoji} ${count}. Hold to see who reacted.`}>{emoji}<small>{count}</small></button>)}</span>}
+    {summary.length > 0 && <span className={styles.messageReactionSummary}>{summary.slice(0, 4).map(([emoji, count]) => <button key={emoji} type="button" onPointerDown={(event) => { event.preventDefault(); cancelLongPress(); longPressTimer.current = window.setTimeout(() => void showWhoReacted(emoji), 450); }} onPointerUp={cancelLongPress} onPointerCancel={cancelLongPress} onPointerLeave={cancelLongPress} onContextMenu={(event) => { event.preventDefault(); void showWhoReacted(emoji); }} onClick={() => { if (suppressClick.current) return; void choose(emoji); }} aria-label={`${emoji} ${count}. Hold to see who reacted.`}>{emoji}<small>{count}</small></button>)}</span>}
     {details && <span className={styles.reactionDetailsPopover} onPointerDown={(event) => event.stopPropagation()}>
       <span className={styles.reactionDetailsTitle}>{details.emoji}<small>{details.users.length} {details.users.length === 1 ? "reaction" : "reactions"}</small></span>
       <span className={styles.reactionDetailsList}>{details.users.map((profile) => <span key={profile.id} className={styles.reactionDetailsUser}>

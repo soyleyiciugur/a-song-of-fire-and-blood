@@ -33,11 +33,28 @@ function proceduralByname(): string {
   return capitalize(pick(BYNAME_PREFIXES).toLowerCase() + pick(BYNAME_SUFFIXES));
 }
 
+function expandedCuratedGivenPool(cultureId: string, gender: Gender): string[] {
+  const culture = getCulture(cultureId);
+  if (!culture) return [];
+  const base = culture.given[gender];
+  const bank = culture.syllables.given[gender];
+  const forged: string[] = [];
+  // Deterministic culture-shaped additions enlarge the selectable pool without
+  // drifting into unrelated phonetics. Existing hand-written names remain first.
+  for (let i = 0; i < bank.start.length; i += 1) {
+    for (let step = 1; step <= Math.min(4, bank.end.length); step += 1) {
+      const ending = bank.end[(i * 3 + step * 2) % bank.end.length];
+      forged.push(capitalize(bank.start[i] + ending.toLowerCase()));
+    }
+  }
+  return [...new Set([...base, ...forged])];
+}
+
 export function generateCuratedName(cultureId: string, gender: Gender, includeByname: boolean): GeneratedName | null {
   const culture = getCulture(cultureId);
   if (!culture) return null;
 
-  const given = pick(culture.given[gender]);
+  const given = pick(expandedCuratedGivenPool(cultureId, gender));
   const surname = culture.hasSurnames && culture.surnames.length > 0 ? pick(culture.surnames) : undefined;
   const byname = includeByname && culture.bynames.length > 0 ? pick(culture.bynames) : undefined;
 

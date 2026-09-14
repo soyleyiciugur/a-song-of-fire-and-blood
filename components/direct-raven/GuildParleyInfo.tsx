@@ -97,9 +97,9 @@ export default function GuildParleyInfo({ open, onClose, conversation, members, 
     <div className={styles.guildInfoBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
       <aside className={styles.guildInfoPanel} role="dialog" aria-modal="true" aria-label="Guild Parley details">
         <div className={styles.guildInfoTopbar}>
-          <button type="button" className={styles.backInfoButton} onClick={onClose}>←</button>
+          <button type="button" className={styles.backInfoButton} aria-label="Back" onClick={onClose}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
           <b>Guild Parley</b>
-          <button type="button" className={styles.iconClose} onClick={onClose}>×</button>
+          <button type="button" className={styles.iconClose} aria-label="Close" onClick={onClose}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round"/></svg></button>
         </div>
 
         <div className={styles.guildHero}>

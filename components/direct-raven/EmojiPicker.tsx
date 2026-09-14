@@ -27,7 +27,7 @@ export default function EmojiPicker({ onSelect, compact = false }: { onSelect: (
 
   return <div className={`${styles.fullEmojiPicker} ${compact ? styles.compactEmojiPicker : ""}`}>
     <div className={styles.emojiCategories} role="tablist" aria-label="Emoji categories">
-      <button type="button" className={category === "recent" ? styles.emojiCategoryActive : ""} onClick={() => setCategory("recent")} title="Recent" aria-label="Recent emojis">◷</button>
+      <button type="button" className={category === "recent" ? styles.emojiCategoryActive : ""} onClick={() => setCategory("recent")} title="Recent" aria-label="Recent emojis"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5"/><path d="M12 7.5v5l3.2 1.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
       {EMOJI_CATEGORIES.map((item) => <button key={item.id} type="button" className={category === item.id ? styles.emojiCategoryActive : ""} onClick={() => setCategory(item.id)} title={item.label} aria-label={item.label}>{item.icon}</button>)}
     </div>
     <div className={styles.emojiGrid} aria-label="Choose emoji">

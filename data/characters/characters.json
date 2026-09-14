@@ -58,7 +58,7 @@
     "status": "Alive",
     "age": 67,
     "portraitAgeState": "elder",
-    "height": "-",
+    "height": "165 cm",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -95,7 +95,7 @@
     "status": "Alive",
     "age": 24,
     "portraitAgeState": "young",
-    "height": "-",
+    "height": "167 cm",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -185,7 +185,7 @@
     },
     "height": "185 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "mother": "queen-vhaemys-targaryen",
     "spouse": "jaery-targaryen",
     "siblings": [
       "malaenar-targaryen",
@@ -246,7 +246,7 @@
       "tion-lannister": "He values Tion's usefulness with coin far more than his advice on war or royal pride. Baelenys has repeatedly cut him short when the Master of Coin's caution clashes with what the King wants done.",
       "vahaemon-targaryen": "His exiled brother, now believed to be sheltering in the Free Cities with a dragon of his own — a fact that has consumed the King's council and his paranoia in equal measure.",
       "vhaemys-targaryen": "Comforts Vhaemys after her terrifying dream and later agrees with Jace that her repeating visions may mark her as a Dreamer. He calls her the most precious thing the family possesses and orders Jace to stay close to her.",
-      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
+      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
       "visenor-targaryen": "Formerly his most trusted heir. That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
     },
     "summary": "Baelenys passes the secret of Aegon's dream—learned from Jaehaerys—to Jacaelon and rejects Gaelor as his successor. He intends to name Jace heir when the present troubles are settled, framing the crown as a final cruelty and a duty to preserve the realm for the prince that was promised. After Vhaemys wakes terrified by a dream, he accepts that she may possess the rare gift of a Dreamer and orders Jace to investigate the great white dragon in her visions while guarding her closely.",
@@ -909,7 +909,7 @@
     },
     "height": "177 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "mother": "queen-vhaemys-targaryen",
     "spouse": "alysa-targaryen",
     "siblings": [
       "baelenys-targaryen",
@@ -937,7 +937,7 @@
       "gaelor-targaryen": "He sees in Gaelor another young Targaryen being pulled toward the same dynastic wounds that scarred Malaenar's own generation. The Dragonstone nameday brought the prince into the middle of arguments over succession, Vahaemon, and Baelenys's old violence.",
       "tansy-riverside": "His companion of two years, who organized the nameday feast that summoned the royal family without telling him first; he was heavily drunk throughout and seemed more amused than alarmed by the chaos that followed.",
       "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name.",
-      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
+      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
     },
     "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar renounced his own claim to the Iron Throne due to an infirmity and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor,' Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust.",
     "quotes": [],
@@ -1569,7 +1569,7 @@
     },
     "height": "180 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "mother": "queen-vhaemys-targaryen",
     "spouse": "naela-targaryen",
     "siblings": [
       "baelenys-targaryen",
@@ -1602,7 +1602,7 @@
       "myles-mooton": "One of the knights who pulled him back from Maelwing during the disastrous Cloudpass incident on his nameday in 56 AC.",
       "naela-targaryen": "His wife; her current whereabouts and condition are unknown.",
       "rhaella-targaryen": "His daughter in exile; her secret letters to her siblings reignited the very suspicion that nearly destroyed her marriage, though the warning was never addressed to him.",
-      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen.",
+      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen.",
       "visenor-targaryen": "His nephew Visenor now treats Vahaemon's name as both a family danger and a political weapon. Without Vahaemon's knowledge, Visenor has considered forging evidence of an alliance between him and the Gardeners to redirect the Crown's fury.",
       "visenya-targaryen": "His other daughter, who is apparently neither in exile nor in Essos — but in King's Landing, walking freely through Flea Bottom with Dark Sister at her hip."
     },
@@ -1795,6 +1795,10 @@
     "house": "-",
     "title": "Maester of the Scholars' Retreat",
     "status": "Missing",
+    "secret": {
+      "status": "Dead",
+      "note": "The unidentified body rolling in the waves on the Dornish coast at the opening of Chapter XVII is Edmyn Uller. He died on the Sixth Day of the Eighth Moon, 99 AC; the exact cause of death has not yet been established."
+    },
     "nameday": {
       "day": 18,
       "moon": 8,
@@ -1828,6 +1832,11 @@
     },
     "summary": "A Dornish maester dispatched by Lady Lorenah Dayne to attend Prince Visenor and Princess Rhaella at the scholars' retreat near Starfall. Unimpressed by titles and unusually direct in his delivery, he was the one who confirmed Rhaella's pregnancy and the one who briefed Visenor on the state of the realm — including the massacres, embargoes, and political collapses — with a vocabulary and frankness that made the Crown Prince laugh for the first time in weeks. His Dornish accent is heavy and his tongue is foul, which Visenor described privately as the most honest thing he had encountered since leaving King's Landing. By the fourteenth day of the eighth moon, he has been absent for days and Rhaella is increasingly alarmed. Nymos has no news of him. The unidentified body on the Dornish coast is not confirmed to be Edmyn.",
     "quotes": [],
+    "death": {
+      "day": 6,
+      "moon": 8,
+      "year": 99
+    },
     "debutChapter": "a-crown-of-thorns"
   },
   {
@@ -2104,7 +2113,7 @@
       "martyn-mullendore": "Relies on Mullendore as a trusted sword arm operating in Visenor's orbit; Martyn's loyalty to the prince rather than to Renrose directly is a variable he has not yet been forced to reckon with.",
       "melessa-hightower": "Sees her as a piece to be positioned rather than a person; inserting Leo into her household is partly about influence over the last Hightower heir.",
       "visenor-targaryen": "He welcomes Visenor's plan to frame Lord Gardener and agrees to seize the rival house's lands. Although Visenor likes and trusts him, Renrose privately resolves that House Tyrell's ambition must ultimately rise above the prince as well.",
-      "liana-tyrell": "His wife and closest confidante. He welcomes her knowledge of his dealings with Visenor, but rejects her warning against pursuing still greater power.",
+      "liana-tyrell": "His wife, distant Tyrell cousin and closest confidante. He welcomes her knowledge of his dealings with Visenor, but rejects her warning against pursuing still greater power.",
       "renrose-tyrell-daughter": "His unnamed daughter, present beside him at the breakfast welcoming Visenor to Highgarden."
     },
     "summary": "Lord Renrose Tyrell receives Visenor at Highgarden and embraces the plan to frame House Gardener as Vahaemon's secret ally. His role is to invade and secure Gardener lands the moment the Crown declares their lord a traitor. Yet after Visenor places the scheme in his hands, Lady Liana warns Renrose not to mistake the prince's trust for permission to demand more. Renrose rejects her restraint and privately resolves that the only worthy course is one that places House Tyrell above every other family—including Visenor's.",
@@ -2476,7 +2485,7 @@
     "height": "181 cm",
     "father": "-",
     "mother": "-",
-    "spouse": "vhaemys-targaryen-elder",
+    "spouse": "queen-vhaemys-targaryen",
     "siblings": [],
     "children": [
       "malaenar-targaryen",
@@ -2495,7 +2504,7 @@
       "edwyle-stark": "The Lord of Winterfell was an important ally who aided Aenys in ways that remained significant to House Targaryen long after both men's deaths. The exact nature of Edwyle's service has not yet been revealed.",
       "malaenar-targaryen": "His eldest son.",
       "vahaemon-targaryen": "His youngest son.",
-      "vhaemys-targaryen-elder": "His queen and wife."
+      "queen-vhaemys-targaryen": "His queen and wife."
     },
     "summary": "The late King Aenys Targaryen II, father of Malaenar, Baelenys, and Vahaemon. His reign and treatment of his family left wounds that still shape the royal house. Among the great lords who supported him was Edwyle Stark of Winterfell, whose service to Aenys remained important enough that Baelenys still remembered the debt decades later.",
     "quotes": [],
@@ -2506,8 +2515,8 @@
     }
   },
   {
-    "id": "vhaemys-targaryen-elder",
-    "name": "Vhaemys Targaryen",
+    "id": "queen-vhaemys-targaryen",
+    "name": "Queen Vhaemys Targaryen",
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
@@ -3291,7 +3300,7 @@
     "house": "House Mooton",
     "title": "Former Sworn Brother of the Kingsguard",
     "debutChapter": "the-mummers-blood",
-    "status": "Unknown",
+    "status": "Dead",
     "nameday": {
       "day": 7,
       "moon": 1,
@@ -3327,7 +3336,7 @@
     "house": "House Morrigen",
     "title": "Former Sworn Brother of the Kingsguard",
     "debutChapter": "the-mummers-blood",
-    "status": "Unknown",
+    "status": "Dead",
     "nameday": {
       "day": 22,
       "moon": 1,
@@ -3645,7 +3654,8 @@
     "aliases": [],
     "house": "-",
     "title": "Maester",
-    "height": "173 cm",
+    "age": 46,
+    "height": "171 cm",
     "debutChapter": "the-children-pay",
     "status": "Alive",
     "father": "-",
@@ -3675,6 +3685,11 @@
     "aliases": [],
     "house": "House Tyrell",
     "title": "Lady of Highgarden",
+    "nameday": {
+      "day": 14,
+      "moon": 4,
+      "year": 63
+    },
     "height": "168 cm",
     "debutChapter": "the-children-pay",
     "status": "Alive",
@@ -3692,10 +3707,10 @@
     ],
     "goals": [],
     "relationships": {
-      "renrose-tyrell": "Her husband, who calls her his closest confidante. She warns that his appetite for power risks wasting Visenor's trust and endangering their family; he rejects her restraint.",
+    "renrose-tyrell": "Her husband and distant Tyrell cousin, three years her senior, who calls her his closest confidante. She warns that his appetite for power risks wasting Visenor's trust and endangering their family; he rejects her restraint.",
       "visenor-targaryen": "Recognizes that Visenor likes and trusts Renrose. She urges her husband to preserve that advantage rather than exploit it without limit."
     },
-    "summary": "Lady Liana is Renrose Tyrell's wife and closest confidante. She listens as Visenor and Renrose discuss their alliance at Highgarden. That evening she warns her husband that the prince's affection and trust can benefit their family if Renrose accepts their limits. She sees his appetite for greater power as a danger, but her warning does not dissuade him from placing House Tyrell above every other family. Her birth house and age have not been established.",
+  "summary": "Lady Liana is Renrose Tyrell's wife, distant Tyrell cousin and closest confidante. Three years younger than her husband, she listens as Visenor and Renrose discuss their alliance at Highgarden. That evening she warns Renrose that the prince's affection and trust can benefit their family if he accepts their limits. She sees his appetite for greater power as a danger, but her warning does not dissuade him from placing House Tyrell above every other family.",
     "quotes": []
   },
   {

@@ -6,7 +6,7 @@ import charactersData from "@/data/characters/characters.json";
 import housesData from "@/data/houses.json";
 
 const FALLBACK = "/images/miniportraits/default.webp";
-const EXTENSIONS = ["webp", "png", "jpg", "jpeg"] as const;
+const EXTENSIONS = ["webp"] as const;
 
 type Props = {
   id: string;

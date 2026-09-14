@@ -216,6 +216,9 @@ export default function Navbar() {
         </nav>
 
         <SearchBar />
+        <Link href="/workbench" className={`${styles.notificationsButton} ${styles.workbenchButton}`} aria-label="The Workbench" title="The Workbench">
+          <UtilityIcon name="workbench" size={19} />
+        </Link>
         <Link href="/ravens-eye" className={`${styles.notificationsButton} ${styles.ravenEyeButton}`} aria-label="The Raven's Eye" title="The Raven's Eye">
           <UtilityIcon name="eye" size={19} />
         </Link>

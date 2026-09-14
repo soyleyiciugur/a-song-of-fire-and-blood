@@ -560,3 +560,30 @@
 .reactionDetailsList{display:grid;gap:3px;max-height:190px;overflow:auto}.reactionDetailsUser{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:8px;padding:4px;border-radius:7px}.reactionDetailsUser>span:last-child{display:grid;min-width:0}.reactionDetailsUser b,.reactionDetailsUser small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.reactionDetailsUser b{color:#e4d4bd;font:600 10px var(--font-geist)}.reactionDetailsUser small{color:#887c71;font:9px var(--font-geist)}
 .reactionDetailsAvatar{display:grid;place-items:center;width:28px;height:28px;overflow:hidden;border:1px solid #594534;border-radius:50%;background:#2c1a1e;color:#d7b887;font:700 8px var(--font-geist)}.reactionDetailsAvatar img{width:100%;height:100%;object-fit:cover}
 @media(max-width:760px){.composerArea{padding:6px 10px var(--raven-composer-bottom-pad,4px)}.composerTools{margin-top:1px}.composerTools button,.fileButton{min-height:34px;padding-inline:7px}.attachmentSourceMenu{bottom:39px;width:min(238px,calc(100vw - 24px))}.messageMeta{margin-right:-25px!important}.reactionDetailsPopover{max-width:calc(100vw - 24px)}}
+
+/* v11: swipe-to-reply, anchored reactions and compact mobile composer polish. */
+.messageRow{transform:translateX(var(--raven-swipe-x,0px));transition:transform .16s ease;touch-action:pan-y}
+.messageReactionWrap,.messageReactionWrap button,.quickReactionPopover,.reactionDetailsPopover{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.quickReactionPopover{left:50%!important;right:auto!important;transform:translateX(calc(-50% + var(--reaction-popover-shift,0px)))!important;transform-origin:50% 100%}
+.reactionDetailsPopover{left:50%!important;right:auto!important;transform:translateX(calc(-50% + var(--reaction-popover-shift,0px)))!important}
+.threadMenuButton{display:grid;place-items:center;padding:0}
+.threadMenuButton svg{margin:auto}
+.draftContext{display:flex;align-items:center;gap:10px;min-height:46px;padding:7px 8px 7px 11px;border:1px solid #4b3a2f;border-left:2px solid #9b7548;border-radius:9px;background:#171315}
+.draftContextCopy{display:grid;min-width:0;flex:1;gap:2px}
+.draftContextCopy small{color:#a98a61;font:600 8px/1 var(--font-geist);letter-spacing:.07em;text-transform:uppercase}
+.draftContextCopy b{display:block;overflow:hidden;color:#cfc0ad;font:500 11px/1.35 var(--font-geist);white-space:nowrap;text-overflow:ellipsis}
+.draftContextClose{display:grid!important;place-items:center;width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important;padding:0!important;border:0!important;background:transparent!important;color:#94867a!important}
+.draftContextClose:hover{color:#dfc7a4!important;background:#ffffff08!important}
+.emojiCategories button>svg{display:block;margin:auto}
+@media(min-width:761px){.cameraSourceButton{display:none!important}.attachmentSourceMenu{width:220px}}
+@media(max-width:760px){
+  .inlineReplyButton{display:none!important}
+  .quickReactionPopover{position:absolute!important;left:50%!important;right:auto!important;transform:translateX(calc(-50% + var(--reaction-popover-shift,0px)))!important;max-width:calc(100vw - 18px)}
+  .reactionDetailsPopover{left:50%!important;right:auto!important;transform:translateX(calc(-50% + var(--reaction-popover-shift,0px)))!important;max-width:calc(100vw - 18px)}
+  .composerArea{padding:4px 10px var(--raven-composer-bottom-pad,2px)!important}
+  .composerTools{margin-top:0!important;gap:3px!important;min-height:34px}
+  .composerTools button,.fileButton{min-height:32px!important;padding-inline:6px!important}
+}
+.guildInfoBackdrop{top:var(--site-nav-height,58px)!important;bottom:0!important;height:calc(100dvh - var(--site-nav-height,58px));}
+.guildInfoPanel{height:100%!important}
+.iconClose svg,.backInfoButton svg{display:block;margin:auto}

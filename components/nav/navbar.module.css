@@ -882,3 +882,23 @@
   }
   .playBanner .searchWrap:focus-within .searchIcon { right: 12px; top: 11px; }
 }
+
+/* Workbench utility + focused-search lane. */
+.workbenchButton{color:#c9a56f}
+@media(min-width:1151px){
+  .playBanner .inner{gap:9px}
+  .playBanner .searchWrap{z-index:92}
+  .playBanner .searchWrap:focus-within{z-index:140}
+  .playBanner .searchWrap:focus-within .searchInput{left:0;right:auto;width:318px;max-width:calc(100vw - 220px);padding-left:14px;padding-right:40px;box-shadow:0 8px 28px #000b,0 0 0 1px color-mix(in srgb,var(--gold) 55%,transparent)}
+  .playBanner .searchWrap:focus-within .searchIcon{left:auto;right:9px}
+  .playBanner .searchWrap:focus-within .dropdown{left:0;right:auto;width:318px;max-width:calc(100vw - 220px)}
+  .playBanner .inner:has(.searchWrap:focus-within)>.notificationsButton,
+  .playBanner .inner:has(.searchWrap:focus-within)>.directRavenButton{pointer-events:none}
+  .playBanner .inner:has(.searchWrap:focus-within)>.notificationsButton{opacity:.18}
+  .playBanner .inner:has(.searchWrap:focus-within)>.accountMenu{z-index:145;pointer-events:auto;opacity:1}
+}
+@media(max-width:640px){
+  .playBanner .inner:has(.searchWrap:focus-within)>.notificationsButton,
+  .playBanner .inner:has(.searchWrap:focus-within)>.directRavenButton,
+  .playBanner .inner:has(.searchWrap:focus-within)>.accountMenu{pointer-events:none}
+}
