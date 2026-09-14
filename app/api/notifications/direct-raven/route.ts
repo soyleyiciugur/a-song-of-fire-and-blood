@@ -3,6 +3,7 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { dispatchSiteNotification } from "@/lib/notifications/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import galleryData from "@/data/gallery.json";
 
 const schema = z.object({ messageId: z.string().uuid() });
 
@@ -37,7 +38,18 @@ export async function POST(request: Request) {
   const kind = conversation.kind === "guild" ? "guild_parley" as const : "direct_raven" as const;
   const actorUsername = actor?.username ?? actor?.display_name ?? "someone";
   const sourceLabel = conversation.kind === "guild" ? conversation.title || "Guild Parley" : `@${actorUsername}`;
-  const cleanText = message.body.replace(/\[\[portrait:[a-z0-9-]+\]\]/gi, " mini portrait ").replace(/\s+/g, " ").trim();
+  const reelMatch = /\[\[reel:([a-z0-9-]+)\]\]/i.exec(message.body);
+  const reelEntry = reelMatch
+    ? (galleryData as { id: string; caption?: string | null }[]).find((entry) => entry.id === reelMatch[1].toLowerCase())
+    : null;
+  const reelLabel = reelEntry?.caption?.trim()
+    ? `Shared a Gutter Reel: ${reelEntry.caption.trim()}`
+    : "Shared a Gutter Reel";
+  const cleanText = message.body
+    .replace(/\[\[portrait:[a-z0-9-]+\]\]/gi, " mini portrait ")
+    .replace(/\[\[reel:[a-z0-9-]+\]\]/gi, ` ${reelLabel} `)
+    .replace(/\s+/g, " ")
+    .trim();
   const rawPreview = cleanText || (message.attachment_path ? "Photo" : message.gif ? "GIF" : "New raven");
   const messagePreview = rawPreview.length > 110 ? `${rawPreview.slice(0, 107).trimEnd()}...` : rawPreview;
   let guildAvatarUrl: string | undefined;

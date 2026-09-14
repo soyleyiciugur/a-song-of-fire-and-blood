@@ -632,16 +632,240 @@ function ReelPoster({ entry, className }: { entry: GalleryEntry; className: stri
   );
 }
 
+
+type RavenShareTarget = {
+  id: string;
+  kind: "raven" | "guild";
+  title: string;
+  subtitle: string;
+  avatarUrl: string | null;
+  initials: string;
+  updatedAt: string;
+};
+
+function CloseGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m7 7 10 10M17 7 7 17" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CommentGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5.2 5.8A7.7 7.7 0 0 1 12 2.8a7.7 7.7 0 0 1 6.8 3 7.3 7.3 0 0 1 .7 7.9A7.7 7.7 0 0 1 12 18.2c-1.1 0-2.2-.2-3.2-.6L4.4 20l1-4.5A7.3 7.3 0 0 1 5.2 5.8Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ShareGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 3 9.6 14.4M21 3l-6.2 18-5.2-6.6L3 9.2 21 3Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function LinkGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9.6 14.4 14.4 9.6M8 17H6.5a4.5 4.5 0 0 1 0-9H10M16 7h1.5a4.5 4.5 0 0 1 0 9H14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ReelCommentsSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () => void }) {
+  return (
+    <>
+      <button type="button" className={styles.reelSheetBackdrop} onClick={onClose} aria-label="Close comments" />
+      <aside
+        className={`${styles.reelSheet} ${styles.reelCommentsSheet}`}
+        aria-label="Reel comments"
+        onClick={(event) => event.stopPropagation()}
+        onPointerDown={(event) => event.stopPropagation()}
+      >
+        <div className={styles.reelSheetHeader}>
+          <div>
+            <span>Flea Bottom</span>
+            <strong>Gutter talk</strong>
+          </div>
+          <button type="button" className={styles.reelSheetClose} onClick={onClose} aria-label="Close comments">
+            <CloseGlyph />
+          </button>
+        </div>
+        <div className={styles.reelCommentsScroll}>
+          <GutterComments entryId={entry.id} />
+        </div>
+      </aside>
+    </>
+  );
+}
+
+function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () => void }) {
+  const [targets, setTargets] = useState<RavenShareTarget[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setStatus("");
+    void fetch("/api/direct-raven/share-reel", { signal: controller.signal })
+      .then(async (response) => {
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload.error || "Raven paths could not be loaded.");
+        setTargets(Array.isArray(payload.targets) ? payload.targets : []);
+      })
+      .catch((error) => {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setStatus(error instanceof Error ? error.message : "Raven paths could not be loaded.");
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
+  }, []);
+
+  const visibleTargets = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    if (!needle) return targets;
+    return targets.filter((target) => `${target.title} ${target.subtitle}`.toLowerCase().includes(needle));
+  }, [query, targets]);
+
+  const toggleTarget = (id: string) => {
+    setSelected((current) => current.includes(id) ? current.filter((value) => value !== id) : [...current, id]);
+  };
+
+  const send = async () => {
+    if (!selected.length || sending) return;
+    setSending(true);
+    setStatus("");
+    try {
+      const response = await fetch("/api/direct-raven/share-reel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ entryId: entry.id, conversationIds: selected }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || "The reel could not be sent.");
+      const messages = Array.isArray(payload.messages) ? payload.messages : [];
+      await Promise.allSettled(messages.map((message: { id: string }) => fetch("/api/notifications/direct-raven", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messageId: message.id }),
+      })));
+      setStatus(messages.length === 1 ? "Reel sent by raven." : `Reel sent down ${messages.length} Raven paths.`);
+      window.setTimeout(onClose, 650);
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "The reel could not be sent.");
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const copyLink = async () => {
+    try {
+      const url = `${window.location.origin}${mediaUrl("reels", entry.id)}`;
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1400);
+    } catch {
+      setStatus("The link could not be copied on this device.");
+    }
+  };
+
+  return (
+    <>
+      <button type="button" className={styles.reelSheetBackdrop} onClick={onClose} aria-label="Close share panel" />
+      <aside
+        className={`${styles.reelSheet} ${styles.reelShareSheet}`}
+        aria-label="Share reel"
+        onClick={(event) => event.stopPropagation()}
+        onPointerDown={(event) => event.stopPropagation()}
+      >
+        <div className={styles.reelSheetHeader}>
+          <div>
+            <span>Send by raven</span>
+            <strong>Share this reel</strong>
+          </div>
+          <button type="button" className={styles.reelSheetClose} onClick={onClose} aria-label="Close share panel">
+            <CloseGlyph />
+          </button>
+        </div>
+
+        <div className={styles.reelSharePreview}>
+          <ReelPoster entry={entry} className={styles.reelSharePoster} />
+          <div>
+            <span>Gutter Reel</span>
+            <p>{entry.caption || "A reel from Flea Bottom"}</p>
+          </div>
+        </div>
+
+        <label className={styles.reelShareSearch}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.8" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="m15 15 5 5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search ravens and parleys" />
+        </label>
+
+        <div className={styles.reelShareTargets}>
+          {loading && <p className={styles.reelShareEmpty}>Calling the rookery…</p>}
+          {!loading && !visibleTargets.length && !status && <p className={styles.reelShareEmpty}>No Raven paths found.</p>}
+          {visibleTargets.map((target) => {
+            const checked = selected.includes(target.id);
+            return (
+              <button
+                type="button"
+                key={target.id}
+                className={`${styles.reelShareTarget} ${checked ? styles.reelShareTargetSelected : ""}`}
+                onClick={() => toggleTarget(target.id)}
+                aria-pressed={checked}
+              >
+                <span className={styles.reelShareAvatar}>
+                  {target.avatarUrl ? <img src={target.avatarUrl} alt="" /> : target.initials}
+                </span>
+                <span className={styles.reelShareIdentity}>
+                  <strong>{target.title}</strong>
+                  <small>{target.subtitle}</small>
+                </span>
+                <span className={styles.reelShareCheck} aria-hidden="true">
+                  {checked && <svg viewBox="0 0 24 24"><path d="m6.5 12.5 3.3 3.3 7.7-8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {status && <p className={styles.reelShareStatus} role="status">{status}</p>}
+
+        <div className={styles.reelShareFooter}>
+          <button type="button" className={styles.reelCopyLink} onClick={() => void copyLink()}>
+            <LinkGlyph />
+            <span>{copied ? "Copied" : "Copy link"}</span>
+          </button>
+          <button type="button" className={styles.reelSendButton} disabled={!selected.length || sending} onClick={() => void send()}>
+            <ShareGlyph />
+            <span>{sending ? "Sending…" : selected.length > 1 ? `Send to ${selected.length}` : "Send"}</span>
+          </button>
+        </div>
+      </aside>
+    </>
+  );
+}
+
 function ReelSlide({
   entry,
   onActive,
   loadVideo,
   isActive,
+  initialCommentsOpen = false,
 }: {
   entry: GalleryEntry;
   onActive: (entry: GalleryEntry) => void;
   loadVideo: boolean;
   isActive: boolean;
+  initialCommentsOpen?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -650,6 +874,8 @@ function ReelSlide({
   const [showIcon, setShowIcon] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [commentsOpen, setCommentsOpen] = useState(initialCommentsOpen);
+  const [shareOpen, setShareOpen] = useState(false);
 
   useEffect(() => {
     const slide = slideRef.current;
@@ -686,6 +912,15 @@ function ReelSlide({
       if (iconTimeout.current) clearTimeout(iconTimeout.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (initialCommentsOpen) setCommentsOpen(true);
+  }, [initialCommentsOpen]);
+
+  const pauseForPanel = () => {
+    videoRef.current?.pause();
+    setIsPlaying(false);
+  };
 
   const flashIcon = () => {
     setShowIcon(true);
@@ -767,7 +1002,37 @@ function ReelSlide({
         )}
       </div>
 
-      {(entry.caption || flatTagsFor(entry).length > 0 || isGutterEntry(entry)) && (
+      <div className={styles.reelActionRail} aria-label="Reel actions">
+        <button
+          type="button"
+          className={styles.reelActionButton}
+          onClick={(event) => {
+            event.stopPropagation();
+            pauseForPanel();
+            setShareOpen(false);
+            setCommentsOpen(true);
+          }}
+          aria-label={`Open ${getGutterComments(entry.id).length} comments`}
+        >
+          <span className={styles.reelActionIcon}><CommentGlyph /></span>
+          <small>{getGutterComments(entry.id).length}</small>
+        </button>
+        <button
+          type="button"
+          className={styles.reelActionButton}
+          onClick={(event) => {
+            event.stopPropagation();
+            pauseForPanel();
+            setCommentsOpen(false);
+            setShareOpen(true);
+          }}
+          aria-label="Share this reel"
+        >
+          <span className={styles.reelActionIcon}><ShareGlyph /></span>
+        </button>
+      </div>
+
+      {(entry.caption || flatTagsFor(entry).length > 0) && (
         <div className={styles.reelSlideMeta}>
           {entry.caption && (
             <ExpandableCaption
@@ -778,9 +1043,11 @@ function ReelSlide({
             />
           )}
           <GroupedTags entry={entry} small />
-          <GutterComments entryId={entry.id} collapsible />
         </div>
       )}
+
+      {commentsOpen && <ReelCommentsSheet entry={entry} onClose={() => setCommentsOpen(false)} />}
+      {shareOpen && <ReelShareSheet entry={entry} onClose={() => setShareOpen(false)} />}
 
       {loadVideo && (
         <ReelProgress
@@ -805,6 +1072,8 @@ function ReelsViewer({
   onActiveEntry: (entry: GalleryEntry) => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const requestedCommentItem = searchParams.get("comment") ? searchParams.get("item") : null;
   const [activeIndex, setActiveIndex] = useState(startIndex);
 
   const handleActive = useCallback(
@@ -848,6 +1117,7 @@ function ReelsViewer({
           onActive={handleActive}
           loadVideo={Math.abs(index - activeIndex) <= 1}
           isActive={index === activeIndex}
+          initialCommentsOpen={requestedCommentItem === entry.id}
         />
       ))}
 
@@ -857,7 +1127,7 @@ function ReelsViewer({
         className={styles.reelsCloseBtn}
         aria-label="Close"
       >
-        ✕
+        <CloseGlyph />
       </button>
     </div>
   );

@@ -1132,3 +1132,244 @@
     radial-gradient(circle at 50% 42%, rgba(201, 162, 39, 0.08), transparent 36%),
     linear-gradient(160deg, rgba(40, 18, 22, 0.96), rgba(10, 8, 9, 0.98));
 }
+
+/* Reels action rail + Direct Raven share sheet. */
+.reelActionRail {
+  position: absolute;
+  z-index: 7;
+  right: calc(50vw - min(50vw, 28.125dvh) + 14px);
+  bottom: calc(104px + env(safe-area-inset-bottom));
+  display: grid;
+  justify-items: center;
+  gap: 13px;
+  pointer-events: auto;
+}
+.reelActionButton {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f0e6d8;
+  cursor: pointer;
+}
+.reelActionIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(205, 169, 111, .27);
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(35, 25, 28, .58), rgba(8, 8, 10, .42));
+  box-shadow: 0 7px 22px rgba(0, 0, 0, .34), inset 0 1px rgba(255,255,255,.04);
+  backdrop-filter: blur(12px) saturate(115%);
+  -webkit-backdrop-filter: blur(12px) saturate(115%);
+  transition: border-color .16s ease, background .16s ease, transform .16s ease, color .16s ease;
+}
+.reelActionIcon svg { width: 24px; height: 24px; display: block; }
+.reelActionButton small {
+  color: rgba(239, 226, 207, .92);
+  font: 600 10px/1 var(--font-geist);
+  text-shadow: 0 1px 4px #000;
+}
+.reelActionButton:hover .reelActionIcon,
+.reelActionButton:focus-visible .reelActionIcon {
+  border-color: rgba(213, 174, 111, .66);
+  background: linear-gradient(145deg, rgba(77, 42, 47, .68), rgba(18, 13, 16, .58));
+  color: #f2d9ae;
+  transform: translateY(-1px);
+}
+.reelActionButton:focus-visible { outline: none; }
+.reelSlideMeta { padding-right: 82px; }
+
+.reelSheetBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  border: 0;
+  background: rgba(0, 0, 0, .24);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  cursor: default;
+}
+.reelSheet {
+  position: absolute;
+  z-index: 10;
+  right: calc(50vw - min(50vw, 28.125dvh) + 72px);
+  bottom: calc(34px + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(420px, calc(100vw - 110px));
+  max-height: min(720px, 78dvh);
+  overflow: hidden;
+  border: 1px solid rgba(151, 116, 73, .48);
+  border-radius: 15px;
+  background: linear-gradient(165deg, rgba(28, 21, 23, .985), rgba(13, 12, 14, .985));
+  box-shadow: 0 28px 80px rgba(0,0,0,.72), inset 0 1px rgba(255,255,255,.025);
+  color: #e9dcc9;
+  font-family: var(--font-geist);
+  pointer-events: auto;
+}
+.reelSheetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 62px;
+  padding: 11px 12px 10px 15px;
+  border-bottom: 1px solid rgba(109, 85, 62, .35);
+  background: linear-gradient(90deg, rgba(75, 35, 42, .19), transparent 64%);
+}
+.reelSheetHeader > div { display: grid; gap: 2px; }
+.reelSheetHeader span {
+  color: #9d886c;
+  font: 600 9px/1.2 var(--font-geist);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.reelSheetHeader strong { color: #eadbc4; font: 600 15px/1.25 var(--font-geist); }
+.reelSheetClose {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(124, 95, 66, .38);
+  border-radius: 50%;
+  background: rgba(14, 12, 14, .62);
+  color: #bdac97;
+  cursor: pointer;
+}
+.reelSheetClose svg { width: 17px; height: 17px; }
+.reelSheetClose:hover { border-color: #86633f; color: #eed7b3; }
+
+.reelCommentsSheet { grid-template-rows: auto minmax(0,1fr); }
+.reelCommentsScroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 15px 16px;
+}
+.reelCommentsScroll > :first-child { margin-top: 0; border-top: 0; padding-top: 14px; }
+
+.reelShareSheet { grid-template-rows: auto auto auto minmax(90px, 1fr) auto auto; }
+.reelSharePreview {
+  display: grid;
+  grid-template-columns: 46px minmax(0,1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 11px 13px 8px;
+  padding: 8px;
+  border: 1px solid rgba(99, 75, 56, .34);
+  border-radius: 10px;
+  background: rgba(255,255,255,.025);
+}
+.reelSharePoster { width: 46px; height: 64px; border-radius: 7px; object-fit: cover; background: #09090a; }
+.reelSharePreview > div { min-width: 0; }
+.reelSharePreview span { color: #ad8f64; font: 700 8px var(--font-geist); letter-spacing: .1em; text-transform: uppercase; }
+.reelSharePreview p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; margin: 4px 0 0; color: #d8c9b5; font: 12px/1.35 var(--font-geist); }
+.reelShareSearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 13px 8px;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid rgba(104, 81, 61, .43);
+  border-radius: 9px;
+  background: #121012;
+  color: #8e806f;
+}
+.reelShareSearch:focus-within { border-color: rgba(177, 135, 80, .72); }
+.reelShareSearch svg { flex: 0 0 17px; width: 17px; height: 17px; }
+.reelShareSearch input { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #e5d8c6; font: 12px var(--font-geist); }
+.reelShareSearch input::placeholder { color: #746b62; }
+.reelShareTargets { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 2px 8px 6px; }
+.reelShareTarget {
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr) 24px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 7px 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.reelShareTarget:hover { background: rgba(255,255,255,.035); }
+.reelShareTargetSelected { border-color: rgba(173, 132, 76, .38); background: rgba(107, 55, 61, .18); }
+.reelShareAvatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px solid rgba(151, 116, 73, .48);
+  border-radius: 50%;
+  background: #2b171d;
+  color: #d5b88a;
+  font: 700 9px var(--font-geist);
+}
+.reelShareAvatar img { width: 100%; height: 100%; object-fit: cover; }
+.reelShareIdentity { display: grid; gap: 2px; min-width: 0; }
+.reelShareIdentity strong,.reelShareIdentity small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.reelShareIdentity strong { color: #e5d8c5; font: 600 12px var(--font-geist); }
+.reelShareIdentity small { color: #8f8275; font: 10px var(--font-geist); }
+.reelShareCheck { display: grid; place-items: center; width: 20px; height: 20px; border: 1px solid #574536; border-radius: 50%; color: #ead2a8; }
+.reelShareTargetSelected .reelShareCheck { border-color: #aa7f48; background: #5a3130; }
+.reelShareCheck svg { width: 13px; height: 13px; }
+.reelShareEmpty,.reelShareStatus { margin: 0; padding: 14px; color: #958a7f; text-align: center; font: 11px/1.45 var(--font-geist); }
+.reelShareStatus { padding: 6px 13px; color: #c6a978; }
+.reelShareFooter {
+  display: grid;
+  grid-template-columns: auto minmax(110px,1fr);
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid rgba(91, 70, 54, .36);
+}
+.reelCopyLink,.reelSendButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 13px;
+  border-radius: 9px;
+  font: 600 10px var(--font-geist);
+  letter-spacing: .025em;
+  cursor: pointer;
+}
+.reelCopyLink { border: 1px solid #4c3d31; background: #141214; color: #b9a58c; }
+.reelSendButton { border: 1px solid #89663d; background: linear-gradient(180deg,#4a2829,#2c191d); color: #ead0a4; }
+.reelCopyLink svg,.reelSendButton svg { width: 16px; height: 16px; }
+.reelSendButton:disabled { opacity: .42; cursor: not-allowed; }
+
+.reelsCloseBtn svg { width: 17px; height: 17px; display: block; }
+
+@media (max-width: 720px) {
+  .reelActionRail { right: 10px; bottom: calc(100px + env(safe-area-inset-bottom)); gap: 11px; }
+  .reelActionIcon { width: 42px; height: 42px; }
+  .reelActionIcon svg { width: 23px; height: 23px; }
+  .reelSlideMeta { padding-right: 66px; }
+  .reelSheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: min(78dvh, 720px);
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 16px 16px 0 0;
+  }
+  .reelShareSheet { max-height: min(80dvh, 720px); }
+  .reelSheetHeader { padding-top: 12px; }
+  .reelCommentsScroll { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
+  .reelShareFooter { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+}

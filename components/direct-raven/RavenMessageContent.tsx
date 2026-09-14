@@ -1,14 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import MiniPortrait from "@/components/MiniPortrait";
 import charactersData from "@/data/characters/characters.json";
+import galleryData from "@/data/gallery.json";
 import styles from "./direct-raven.module.css";
 
 const PORTRAIT_TOKEN = /\[\[portrait:([a-z0-9-]+)\]\]/gi;
+const CONTENT_TOKEN = /(\[\[(?:portrait|reel):[a-z0-9-]+\]\])/gi;
 
 type CharacterRecord = {
   id: string;
   name: string;
+};
+
+type GalleryRecord = {
+  id: string;
+  src: string;
+  caption?: string | null;
 };
 
 const characterNames = new Map([
@@ -17,10 +26,28 @@ const characterNames = new Map([
   ["aldren", "Aldren"] as const,
 ]);
 
+const reelMap = new Map(
+  (galleryData as GalleryRecord[]).map((entry) => [entry.id, entry] as const)
+);
+
 const mascotFallback: Record<string, string> = {
   mara: "/images/miniportraits/MaraMiniPortrait.webp",
   aldren: "/images/miniportraits/AldrenMiniPortrait.webp",
 };
+
+function reelPosterSrc(src: string) {
+  const clean = src.split("?")[0].split("#")[0];
+  const filename = clean.split("/").pop() ?? "reel";
+  const base = filename.replace(/\.[^.]+$/, "");
+  return `/videos/reels/posters/${encodeURIComponent(base)}.webp`;
+}
+
+function reelSummary(id: string) {
+  const entry = reelMap.get(id);
+  if (!entry) return "Gutter Reel";
+  const caption = entry.caption?.trim();
+  return caption ? `Gutter Reel · ${caption}` : "Gutter Reel";
+}
 
 export function parseRavenBody(value: string) {
   const portraitIds: string[] = [];
@@ -42,6 +69,9 @@ export function encodeRavenBody(text: string, portraitIds: string[]) {
 }
 
 export function ravenBodySummary(value: string) {
+  const reelMatch = /\[\[reel:([a-z0-9-]+)\]\]/i.exec(value);
+  if (reelMatch) return reelSummary(reelMatch[1].toLowerCase());
+
   const { text, portraitIds } = parseRavenBody(value);
   if (text) return text;
   if (portraitIds.length === 1) return "Mini portrait";
@@ -50,19 +80,53 @@ export function ravenBodySummary(value: string) {
 }
 
 export function RavenMessagePreview({ body }: { body: string }) {
-  return <>{body.split(/(\[\[portrait:[a-z0-9-]+\]\])/gi).map((part, index) => {
-    const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
-    if (!match || !characterNames.has(match[1].toLowerCase())) return part;
-    const id = match[1].toLowerCase();
-    return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} fallbackSrc={mascotFallback[id]} /></span>;
+  return <>{body.split(CONTENT_TOKEN).map((part, index) => {
+    const portraitMatch = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
+      const id = portraitMatch[1].toLowerCase();
+      return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} fallbackSrc={mascotFallback[id]} /></span>;
+    }
+
+    const reelMatch = /^\[\[reel:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (reelMatch) {
+      const entry = reelMap.get(reelMatch[1].toLowerCase());
+      return <span key={index}><span className={styles.previewReel}>Reel</span>{entry?.caption?.trim() ? ` ${entry.caption.trim()}` : ""}</span>;
+    }
+
+    return part;
   })}</>;
 }
 
 export default function RavenMessageContent({ body }: { body: string }) {
-  return <p>{body.split(/(\[\[portrait:[a-z0-9-]+\]\])/gi).map((part, index) => {
-    const match = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
-    if (!match || !characterNames.has(match[1].toLowerCase())) return part;
-    const id = match[1].toLowerCase();
-    return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} fallbackSrc={mascotFallback[id]} /></span>;
+  return <p>{body.split(CONTENT_TOKEN).map((part, index) => {
+    const portraitMatch = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
+      const id = portraitMatch[1].toLowerCase();
+      return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} fallbackSrc={mascotFallback[id]} /></span>;
+    }
+
+    const reelMatch = /^\[\[reel:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (reelMatch) {
+      const id = reelMatch[1].toLowerCase();
+      const entry = reelMap.get(id);
+      if (!entry) return <span key={index}>Shared Gutter Reel</span>;
+      return (
+        <Link key={index} href={`/ravens-eye/reels?item=${encodeURIComponent(id)}`} className={styles.sharedReelCard}>
+          <span className={styles.sharedReelPoster}>
+            <img src={reelPosterSrc(entry.src)} alt="" loading="lazy" decoding="async" />
+            <span className={styles.sharedReelPlay} aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 6.7v10.6L17.5 12 9 6.7Z" fill="currentColor" /></svg>
+            </span>
+          </span>
+          <span className={styles.sharedReelCopy}>
+            <small>Gutter Reel</small>
+            <strong>{entry.caption?.trim() || "A reel from Flea Bottom"}</strong>
+            <em>Open in Raven&apos;s Eye</em>
+          </span>
+        </Link>
+      );
+    }
+
+    return part;
   })}</p>;
 }

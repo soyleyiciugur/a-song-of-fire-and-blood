@@ -2057,8 +2057,7 @@
       "day": 5,
       "moon": 3,
       "year": 99
-    },
-    "debutChapter": "the-weight-of-loyalty"
+    }
   },
   {
     "id": "renrose-tyrell",
@@ -3645,7 +3644,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "-",
-    "title": "Maester at Starfall",
+    "title": "Maester",
     "height": "173 cm",
     "debutChapter": "the-children-pay",
     "status": "Alive",
@@ -3700,12 +3699,12 @@
     "quotes": []
   },
   {
-    "id": "renrose-tyrell-daughter",
+    "id": "elinor-tyrell",
     "name": "Elinor Tyrell",
     "nickname": "-",
     "aliases": [],
     "house": "House Tyrell",
-    "title": "Daughter of the Lord of Highgarden",
+    "title": "Lady Elinor Tyrell of Highgarden",
     "debutChapter": "the-children-pay",
     "status": "Alive",
     "father": "renrose-tyrell",
