@@ -594,7 +594,7 @@
 }
 @media(max-width:760px){
   .composerArea{
-    padding:4px 10px calc(var(--raven-composer-bottom-pad, max(6px, env(safe-area-inset-bottom))) + 14px)!important;
+    padding:4px 10px calc(var(--raven-composer-bottom-pad, max(6px, env(safe-area-inset-bottom))) + 7px)!important;
     max-height:none!important;
     overflow:visible!important;
   }
