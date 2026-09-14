@@ -14401,6 +14401,15 @@
       "parentId": null,
       "body": "Your honor, the title alone is hostile to my wellbeing.",
       "publishedAt": "2026-09-13T14:45:00.000Z"
+    },
+    {
+      "id": "live-eve-gitmem-greedy-visenor",
+      "entryId": "gallery-visenor-eve-gitmem-gerek",
+      "authorId": "cast-visenor-targaryen",
+      "parentId": "85fe2b13-231a-4cc9-b0cd-5353b4af7ff5",
+      "parentSource": "supabase",
+      "body": "Greed would have been simpler.",
+      "publishedAt": "2026-09-14T09:25:00.000Z"
     }
   ],
   "relationships": [
