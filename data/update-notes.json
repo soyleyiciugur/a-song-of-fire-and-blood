@@ -2,6 +2,11 @@
   {
     "date": "2026-09-15",
     "items": [
+      "Simplified Direct Raven attachments to Photo Library on desktop and the native picker on mobile, added mobile composer bottom spacing, and kept emoji category panels at a consistent height.",
+      "Adjusted focused mobile search to clear the hamburger button and extend to the right edge with a small inset.",
+      "Replaced the Roads & Ravens road mark with an iron-rimmed carriage wheel matching The Namesmith's fine-line icon style.",
+      "Scaled desktop navigation dropdown text, widths and spacing to match the compact menu labels.",
+      "Refined the Workbench icon with a forged wrench silhouette and sword-pommel detail to match the navigation icons.",
       "Established Baelor the Uncrowned as Jaehaerys and Alysanne's eldest son, whose undated choice of the Citadel cleared the later succession for Aenys II.",
       "Expanded the hidden Targaryen royal ancestry through Aegon I, Aenys I, Maegor I and Jaehaerys I, including their queens, family links, reigns and personal chronologies.",
       "Aligned Aenys II, Queen Vhaemys, Malaenar, Baelenys and Vahaemon with the finalized semi-canon succession dates.",

@@ -510,9 +510,9 @@
 .fullEmojiPicker{display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0;overflow:hidden;border-radius:9px;background:#151214}
 .emojiCategories{display:flex;align-items:center;gap:2px;overflow-x:auto;padding:5px;border-bottom:1px solid #352c27;scrollbar-width:none}.emojiCategories::-webkit-scrollbar{display:none}
 .emojiCategories button{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;padding:0;border:0;border-radius:7px;background:transparent;color:#9e8d7d;font:16px/1 var(--font-geist);cursor:pointer}.emojiCategories button:hover,.emojiCategories .emojiCategoryActive{background:#2a2021;color:#f0d7ae}
-.emojiGrid{display:grid;grid-template-columns:repeat(7,38px);align-content:start;justify-content:start;gap:2px;max-height:238px;overflow:auto;overscroll-behavior:contain;padding:6px}.emojiGrid button{display:grid;place-items:center;width:38px;height:38px;padding:0;border:0;border-radius:7px;background:transparent;font-size:21px;cursor:pointer}.emojiGrid button:hover{background:#2a2021}
+.emojiGrid{display:grid;grid-template-columns:repeat(7,38px);align-content:start;justify-content:start;gap:2px;height:238px;max-height:238px;overflow:auto;overscroll-behavior:contain;padding:6px}.emojiGrid button{display:grid;place-items:center;width:38px;height:38px;padding:0;border:0;border-radius:7px;background:transparent;font-size:21px;cursor:pointer}.emojiGrid button:hover{background:#2a2021}
 .emojiPopover{width:min(310px,calc(100% - 24px))}.emojiPopover .fullEmojiPicker{max-height:300px}
-.compactEmojiPicker{width:296px;max-width:calc(100vw - 32px)}.compactEmojiPicker .emojiGrid{max-height:190px}.compactEmojiPicker .emojiCategories button{flex-basis:30px;width:30px;height:30px}
+.compactEmojiPicker{width:296px;max-width:calc(100vw - 32px)}.compactEmojiPicker .emojiGrid{height:190px;max-height:190px}.compactEmojiPicker .emojiCategories button{flex-basis:30px;width:30px;height:30px}
 .messageReactionWrap{position:relative;display:inline-flex;align-items:center;gap:3px;font-family:var(--font-geist),Arial,Helvetica,sans-serif}
 .messageReactionTrigger{display:grid!important;place-items:center;min-width:26px!important;width:26px;height:26px!important;padding:0!important;border:0!important;background:transparent!important;color:#9c8a79!important}.messageReactionTrigger:hover,.messageReactionActive{color:#d7b27b!important}
 .messageReactionSummary{display:inline-flex;align-items:center;gap:2px}.messageReactionSummary button{display:inline-flex!important;align-items:center;gap:2px;min-height:24px!important;height:24px!important;padding:0 5px!important;border:1px solid #493930!important;border-radius:999px!important;background:#171315!important;color:#dfcaaa!important;font:14px/1 var(--font-geist)!important;cursor:pointer}.messageReactionSummary small{color:#9b8c7e;font:9px var(--font-geist)}
@@ -594,7 +594,7 @@
 }
 @media(max-width:760px){
   .composerArea{
-    padding:4px 10px 3px!important;
+    padding:4px 10px calc(var(--raven-composer-bottom-pad, max(6px, env(safe-area-inset-bottom))) + 14px)!important;
     max-height:none!important;
     overflow:visible!important;
   }

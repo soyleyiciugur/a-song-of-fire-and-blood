@@ -104,7 +104,6 @@ export default function RavenConversation({
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const photoLibraryRef = useRef<HTMLInputElement>(null);
-  const cameraRef = useRef<HTMLInputElement>(null);
   const attachmentMenuRef = useRef<HTMLDivElement>(null);
   const pickerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -1099,21 +1098,16 @@ export default function RavenConversation({
             <div className={styles.composerTools}>
               <button type="button" data-gif-trigger disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);setAttachmentMenuOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
               <div ref={attachmentMenuRef} className={styles.attachmentToolWrap}>
-                <button type="button" data-attachment-trigger className={styles.fileButton} disabled={!!editing || sending} onClick={() => { setAttachmentMenuOpen((value) => !value); setGifOpen(false); setPickerOpen(false); }} aria-expanded={attachmentMenuOpen}>
+                <button type="button" data-attachment-trigger className={styles.fileButton} disabled={!!editing || sending} onClick={() => { setGifOpen(false); setPickerOpen(false); if (window.matchMedia("(max-width: 760px), (pointer: coarse)").matches) { setAttachmentMenuOpen(false); openNativeFilePicker(photoLibraryRef.current); } else { setAttachmentMenuOpen((value) => !value); } }} aria-expanded={attachmentMenuOpen}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Photo / GIF
                 </button>
                 {attachmentMenuOpen && <div className={styles.attachmentSourceMenu} onPointerDown={(event) => event.stopPropagation()}>
-                  <button type="button" onClick={() => openNativeFilePicker(photoLibraryRef.current)}>
+                  <button type="button" onClick={() => { setAttachmentMenuOpen(false); openNativeFilePicker(photoLibraryRef.current); }}>
                     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m6.5 17 4.2-4 2.5 2.2 2.2-2 2.2 3.8"/></svg>
                     <span><b>Photo Library</b><small>Choose a photo or GIF</small></span>
                   </button>
-                  <button type="button" className={styles.cameraSourceButton} onClick={() => openNativeFilePicker(cameraRef.current)}>
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h3l1.3-2h5.4L16 8h3a2 2 0 0 1 2 2v8H3v-8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="3"/></svg>
-                    <span><b>Camera</b><small>Take a new photo</small></span>
-                  </button>
                 </div>}
                 <input ref={photoLibraryRef} className={styles.hiddenFileInput} type="file" disabled={!!editing || sending} accept="image/jpeg,image/png,image/webp,image/gif" onChange={(event) => { chooseFile(event.target.files?.[0]); event.target.value = ""; }} />
-                <input ref={cameraRef} className={styles.hiddenFileInput} type="file" disabled={!!editing || sending} accept="image/*" capture="environment" onChange={(event) => { chooseFile(event.target.files?.[0]); event.target.value = ""; }} />
               </div>
               <button type="button" data-composer-picker-trigger disabled={sending} onClick={() => openPicker("emoji")} aria-expanded={pickerOpen}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5"/><path d="M9 10h.01M15 10h.01M8.5 14c1 1.4 2.1 2 3.5 2s2.5-.6 3.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> Emoji

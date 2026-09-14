@@ -922,6 +922,16 @@
     overflow:visible;
   }
   .playBanner .navLink,.playBanner .navGroup{font-size:12px!important}
+  /* Keep dropdown proportions tied to the group's desktop type size. */
+  .playBanner .navGroupMenu{
+    font-size:inherit;
+    min-width:14.2857em;
+    padding:.5714em;
+    gap:.1429em;
+    top:calc(100% + .8571em);
+  }
+  .playBanner .navGroupMenu::before{top:-.8571em;height:.8571em}
+  .playBanner .navGroupMenuLink{font-size:inherit;padding:.5714em .7143em}
   .playBanner .navLinks > *:not(:last-child)::after{margin-left:4px;margin-right:2px;height:20px}
   .playBanner .navGroupCaretBtn{width:12px;height:28px}
   .playBanner .searchWrap,
@@ -977,7 +987,7 @@
   .playBanner .navLinks > *:not(:last-child)::after{margin-left:2px;margin-right:1px}
 }
 @media(max-width:640px){
-  .playBanner .searchWrap:focus-within{left:48px!important;right:46px!important;width:auto!important}
+  .playBanner .searchWrap:focus-within{left:52px!important;right:6px!important;width:auto!important}
   .playBanner .searchWrap:focus-within .searchInput{
     width:100%!important;max-width:none!important;padding:7px 12px 7px 38px!important
   }

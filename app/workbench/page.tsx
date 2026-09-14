@@ -20,7 +20,12 @@ const fmtRange = (a: number, b: number, unit: string) => `${Math.max(1, Math.rou
 
 function ToolMark({ kind }: { kind: "roads" | "names" }) {
   return kind === "roads" ? (
-    <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M6 22c4-8 5-12 5-17m11 18c-4-5-5-10-5-18M8.5 17.5h11M9.7 12h8.6" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round"/><path d="M14 4.5v19" stroke="currentColor" strokeWidth="1.1" strokeDasharray="2.2 3.2"/></svg>
+    <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="14" cy="14" r="9.5" />
+      <circle cx="14" cy="14" r="7.5" />
+      <path d="M14 6.5v5.5m0 4v5.5M6.5 14H12m4 0h5.5M8.7 8.7l3.9 3.9m2.8 2.8 3.9 3.9m-10.6 0 3.9-3.9m2.8-2.8 3.9-3.9" />
+      <circle cx="14" cy="14" r="2" />
+    </svg>
   ) : (
     <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M20.8 4.8c-5.2.8-9.8 4.5-12.5 10.4-.8 1.8-1.3 3.7-1.6 5.9 2.2-.2 4.2-.8 6-1.7 5.6-2.9 8.9-8 8.1-14.6Z" stroke="currentColor" strokeWidth="1.35"/><path d="M7.4 20.5c3.4-4.5 6.8-7.5 10.3-9.3M5.5 23h11" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round"/></svg>
   );
