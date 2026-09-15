@@ -69,7 +69,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black",
-    title: "ASOFAB",
+    title: "The Rookery 🐦‍⬛",
   },
 
   icons: {

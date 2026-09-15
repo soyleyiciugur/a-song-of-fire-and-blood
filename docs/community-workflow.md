@@ -1,6 +1,6 @@
 # Community authoring workflow
 
-This workflow keeps authored ASOFAB character/community accounts in the repository while letting future editorial batches react to live real-member activity stored in Supabase.
+This workflow keeps authored The Rookery 🐦‍⬛ character/community accounts in the repository while letting future editorial batches react to live real-member activity stored in Supabase.
 
 ## Run
 

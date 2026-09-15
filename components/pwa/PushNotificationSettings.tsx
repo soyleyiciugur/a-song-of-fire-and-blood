@@ -70,7 +70,7 @@ export default function PushNotificationSettings() {
       if (error) throw error;
       localStorage.removeItem("asofab:push-disabled");
       setState("enabled");
-      setMessage("Ravens may now reach this device even while ASOFAB is closed.");
+      setMessage("Ravens may now reach this device even while The Rookery 🐦‍⬛ is closed.");
       window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
     } catch (error) {
       console.error(error);
@@ -112,18 +112,18 @@ export default function PushNotificationSettings() {
   }
 
   const copy = state === "needs-install"
-    ? "On iPhone and iPad, add ASOFAB to the Home Screen and open it from that icon before enabling push delivery."
+    ? "On iPhone and iPad, add The Rookery 🐦‍⬛ to the Home Screen and open it from that icon before enabling push delivery."
     : state === "denied"
-      ? "iOS or your browser is blocking notifications for ASOFAB. Permission must be restored in device settings."
+      ? "iOS or your browser is blocking notifications for The Rookery 🐦‍⬛. Permission must be restored in device settings."
       : state === "unsupported"
-        ? "This browser cannot receive Web Push from ASOFAB. Your in-site notification history will still work."
+        ? "This browser cannot receive Web Push from The Rookery 🐦‍⬛. Your in-site notification history will still work."
         : state === "signed-out"
           ? "Sign in first. Delivery subscriptions, unread state, and notification history belong to your account rather than this device."
           : platform === "android"
             ? isStandalone()
-              ? "Ravens may arrive through the installed Android web app while ASOFAB is closed."
-              : "Ravens can reach this Android device now. Installing ASOFAB also gives you the full-screen app experience."
-            : "Choose whether ravens may arrive on this device while ASOFAB is closed.";
+              ? "Ravens may arrive through the installed Android web app while The Rookery 🐦‍⬛ is closed."
+              : "Ravens can reach this Android device now. Installing The Rookery 🐦‍⬛ also gives you the full-screen app experience."
+            : "Choose whether ravens may arrive on this device while The Rookery 🐦‍⬛ is closed.";
 
   const statusLabel = state === "enabled" ? "Ravens permitted" : state === "denied" ? "Permission blocked" : state === "needs-install" ? "Home Screen required" : state === "unsupported" ? "Not supported" : state === "signed-out" ? "Sign in required" : "Not enabled";
 

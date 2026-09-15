@@ -81,13 +81,13 @@ export default function AndroidInstallPrompt() {
   if (!visible) return null;
 
   return (
-    <aside className={styles.installCard} role="dialog" aria-label="Install ASOFAB on Android">
+    <aside className={styles.installCard} role="dialog" aria-label="Install The Rookery 🐦‍⬛ on Android">
       <button className={styles.close} type="button" onClick={dismiss} aria-label="Dismiss install suggestion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round"/></svg></button>
       <div className={styles.seal} aria-hidden="true">✦</div>
       <div className={styles.copy}>
         <span className={styles.eyebrow}>The Rookery · Android</span>
         <strong>Keep the realm close at hand</strong>
-        <p>Set ASOFAB upon your Home Screen for a full-screen app, quicker return, and ravens that may find you while it is closed.</p>
+        <p>Set The Rookery 🐦‍⬛ upon your Home Screen for a full-screen app, quicker return, and ravens that may find you while it is closed.</p>
       </div>
       <button className={styles.install} type="button" onClick={install} disabled={busy}>
         {busy ? "Preparing…" : "Install the Rookery"}

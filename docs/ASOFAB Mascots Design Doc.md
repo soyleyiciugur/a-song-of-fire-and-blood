@@ -1,12 +1,12 @@
-ASOFAB Notification Mascots & Copy Design Guide
+The Rookery 🐦‍⬛ Notification Mascots & Copy Design Guide
 
 Overview
 
-The ASOFAB website notification system uses two recurring in-universe mascots inspired by the character-driven notification approach of apps such as Duolingo.
+The The Rookery 🐦‍⬛ website notification system uses two recurring in-universe mascots inspired by the character-driven notification approach of apps such as Duolingo.
 
 These mascots are not merely decorative portraits. Each one has a distinct personality, vocabulary, punctuation style, and relationship with the user.
 
-Their role is to make notifications feel like they are coming from actual inhabitants of the ASOFAB world rather than from a modern social platform.
+Their role is to make notifications feel like they are coming from actual inhabitants of the The Rookery 🐦‍⬛ world rather than from a modern social platform.
 
 Every notification should therefore feel:
 
@@ -18,7 +18,7 @@ recognizable by voice
 
 concise enough for mobile notifications
 
-consistent with the website's existing ASOFAB tone
+consistent with the website's existing The Rookery 🐦‍⬛ tone
 
 readable even without knowing the mascot lore
 
@@ -458,7 +458,7 @@ The occasional joke is stronger if most of her dialogue remains functional.
 
 12. Shared Worldbuilding Rule
 
-Both mascots speak from inside the ASOFAB world.
+Both mascots speak from inside the ASOFAB/The Rookery 🐦‍⬛ world.
 
 Neither mascot should acknowledge the website as a modern platform.
 
@@ -466,7 +466,7 @@ Every modern digital action should be translated into something that could plaus
 
 Examples:
 
-Modern ConceptASOFAB Equivalent
+Modern Concept The Rookery 🐦‍⬛ Equivalent
 
 
 
@@ -1166,4 +1166,4 @@ Mara strips the information down.
 
 Both remain completely inside the same Westerosi world.
 
-That contrast should remain recognizable across notifications, tooltips, The Great Game, Raven's Eye, Tavern activity, Guild Parley, and any future ASOFAB social systems.
+That contrast should remain recognizable across notifications, tooltips, The Great Game, Raven's Eye, Tavern activity, Guild Parley, and any future The Rookery 🐦‍⬛ social systems.

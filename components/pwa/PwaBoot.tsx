@@ -117,7 +117,7 @@ export default function PwaBoot() {
         await navigator.serviceWorker.ready;
         if (!cancelled) void restorePush().catch(() => { /* Raven Settings offers explicit recovery. */ });
       } catch (error) {
-        console.error("ASOFAB service worker could not be registered.", error);
+        console.error("The Rookery 🐦‍⬛ service worker could not be registered.", error);
       }
     };
     if (document.readyState === "complete") void register();

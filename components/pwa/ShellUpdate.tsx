@@ -96,17 +96,17 @@ export default function ShellUpdate({ guide = false }: { guide?: boolean }) {
   const content = <>
     <div className={styles.messenger}><Image src={meta.portrait} alt={meta.name} width={64} height={64} /><span>{meta.name}<small>A message from the rookery</small></span></div>
     <h2 id={guide ? "update-guide-title" : "shell-update-title"}>{done ? "The fresh seal is yours." : unknown && release.reinstallRequired ? "Check your Home Screen seal." : release.reinstallRequired ? reinstallCopy[mascot].title : "Your Home Screen seal."}</h2>
-    {!done && <p>{unknown && release.reinstallRequired ? "A fresh seal has been issued, but this installation’s seal is not recorded. If you have already added the new icon, confirm it below. Otherwise, follow the guide." : release.reinstallRequired ? reinstallCopy[mascot].body : "No new seal is required at present. These instructions are here should you need to add ASOFAB again."} — {meta.name}</p>}
+    {!done && <p>{unknown && release.reinstallRequired ? "A fresh seal has been issued, but this installation’s seal is not recorded. If you have already added the new icon, confirm it below. Otherwise, follow the guide." : release.reinstallRequired ? reinstallCopy[mascot].body : "No new seal is required at present. These instructions are here should you need to add The Rookery 🐦‍⬛ again."} — {meta.name}</p>}
     {!done && release.reason && <p className={styles.reason}>{release.reason}</p>}
     {prepared && !done && <>
       <p>Your account keeps your profile, preferences, unread ravens, and messenger history. Unsynced changes on this device may be lost.</p>
       {!signedIn && <p><Link href="/login">Sign in to recover your account</Link>. If your session survives, the rookery welcomes you back without another sign-in.</p>}
-      <ol><li>Remove the old ASOFAB icon from your Home Screen.</li><li>Return to ASOFAB in Safari.</li><li>Tap Share.</li><li>Choose Add to Home Screen, then open the new icon.</li></ol>
+      <ol><li>Remove the old The Rookery 🐦‍⬛ icon from your Home Screen.</li><li>Return to The Rookery 🐦‍⬛ in Safari.</li><li>Tap Share.</li><li>Choose Add to Home Screen, then open the new icon.</li></ol>
       <p>Keep this address in Safari before removing the icon:</p>
       <a className={styles.address} href="https://a-song-of-fire-and-blood.vercel.app/app-update" target="_blank" rel="noreferrer">a-song-of-fire-and-blood.vercel.app/app-update</a>
       <p>Opening this link may stay inside the app. If it does, copy the address into Safari.</p>
-      <label className={styles.option}><input type="checkbox" checked={shortcut} onChange={e => setShortcut(e.target.checked)} /> I have the ASOFAB Updater Shortcut</label>
-      {shortcut && <a className={styles.button} href="shortcuts://run-shortcut?name=ASOFAB%20Updater">Run ASOFAB Updater</a>}
+      <label className={styles.option}><input type="checkbox" checked={shortcut} onChange={e => setShortcut(e.target.checked)} /> I have the The Rookery 🐦‍⬛ Updater Shortcut</label>
+      {shortcut && <a className={styles.button} href="shortcuts://run-shortcut?name=ASOFAB%20Updater">Run The Rookery 🐦‍⬛ Updater</a>}
       <p>The Shortcut can guide you and open the address. Removing and adding the icon remain yours to do. If the Shortcut is missing, follow the steps above.</p>
       {installed ? <button disabled={busy} onClick={acknowledge}>{busy ? "Recording your seal…" : "I’ve added it again"}</button> : <p>Open the new Home Screen icon to confirm your fresh seal.</p>}
     </>}

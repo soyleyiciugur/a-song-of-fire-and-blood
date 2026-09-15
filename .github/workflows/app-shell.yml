@@ -1,4 +1,4 @@
-name: ASOFAB Home Screen release audit
+name: The Rookery 🐦‍⬛ Home Screen release audit
 on:
   push:
   pull_request:
@@ -34,7 +34,7 @@ jobs:
             const release = JSON.parse(fs.readFileSync('data/app-shell-release.json', 'utf8'));
             const failed = '${{ steps.audit.outcome }}' === 'failure';
             if (!failed && !release.reinstallRequired) return;
-            const title = failed ? 'ASOFAB: Home Screen reinstall review required' : `ASOFAB: Home Screen reinstall release v${release.version}`;
+            const title = failed ? 'The Rookery 🐦‍⬛: Home Screen reinstall review required' : `The Rookery 🐦‍⬛: Home Screen reinstall release v${release.version}`;
             const issues = await github.paginate(github.rest.issues.listForRepo, { ...context.repo, state: 'all', creator: 'github-actions[bot]', per_page: 100 });
             if (issues.some(issue => issue.title === title && (!failed || issue.state === 'open'))) return;
             await github.rest.issues.create({ ...context.repo, title, body: `@${context.actor}\n\n${failed ? 'The shell audit detected install-time changes without a matching release. Deployment is blocked by the build check. Run the shell release command and review the reason.' : 'This release requires existing Home Screen installations to be added again. Review data/app-shell-release.json for the member-facing reason.'}\n\nAudit: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` });

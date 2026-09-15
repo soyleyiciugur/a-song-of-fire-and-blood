@@ -30,8 +30,8 @@ try {
     await page.reload();
     await modal.waitFor();
     await page.getByRole('button', { name: 'Prepare Update' }).click();
-    await page.getByText('I have the ASOFAB Updater Shortcut').click();
-    assert.equal(await page.getByRole('link', { name: 'Run ASOFAB Updater' }).getAttribute('href'), 'shortcuts://run-shortcut?name=ASOFAB%20Updater');
+    await page.getByText('I have the The Rookery 🐦‍⬛ Updater Shortcut').click();
+    assert.equal(await page.getByRole('link', { name: 'Run The Rookery 🐦‍⬛ Updater' }).getAttribute('href'), 'shortcuts://run-shortcut?name=ASOFAB%20Updater');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `modal fits ${width}`);
     fs.mkdirSync('.tmp', { recursive: true });
     await page.screenshot({ path: `.tmp/shell-update-${width}.png` });
