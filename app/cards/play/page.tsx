@@ -54,11 +54,40 @@ import type {
   UnitState,
 } from "@/lib/the-great-game/types";
 
+import type {
+  GreatGameOnlineMatchSummary,
+  GreatGameOnlineMatchView,
+} from "@/lib/the-great-game/online";
+import { normalizeMatchCode } from "@/lib/the-great-game/online";
+import { createClient as createSupabaseClient } from "@/lib/supabase/client";
+
 import styles from "./play.module.css";
 
 type PageMode =
   | "menu"
+  | "online-waiting"
   | "game";
+
+type StoredDeck = {
+  id: string;
+  name: string;
+  cards: Record<string, number>;
+  updatedAt: number;
+};
+
+const GREAT_GAME_DECK_STORAGE_KEY = "the-great-game:decks:v1";
+
+function storedDeckCardIds(deck: StoredDeck | null): string[] | undefined {
+  if (!deck) return undefined;
+
+  return Object.entries(deck.cards).flatMap(([cardId, count]) =>
+    Array.from({ length: Math.max(0, count) }, () => cardId)
+  );
+}
+
+function onlineOpponentName(match: GreatGameOnlineMatchView | null): string {
+  return match?.opponent?.displayName || match?.opponent?.username || "Opponent";
+}
 
 type PendingPlay =
   | {
@@ -919,6 +948,61 @@ export default function GreatGamePlayPage() {
       null
     );
 
+  const supabase = useMemo(
+    () => createSupabaseClient(),
+    []
+  );
+
+  const [
+    onlineMatch,
+    setOnlineMatch,
+  ] = useState<GreatGameOnlineMatchView | null>(null);
+
+  const [
+    onlineMatches,
+    setOnlineMatches,
+  ] = useState<GreatGameOnlineMatchSummary[]>([]);
+
+  const [
+    onlinePanelOpen,
+    setOnlinePanelOpen,
+  ] = useState(false);
+
+  const [
+    onlineBusy,
+    setOnlineBusy,
+  ] = useState(false);
+
+  const [
+    onlineActionPending,
+    setOnlineActionPending,
+  ] = useState(false);
+
+  const [
+    onlineMenuError,
+    setOnlineMenuError,
+  ] = useState<string | null>(null);
+
+  const [
+    onlineCode,
+    setOnlineCode,
+  ] = useState("");
+
+  const [
+    storedDecks,
+    setStoredDecks,
+  ] = useState<StoredDeck[]>([]);
+
+  const [
+    onlineDeckId,
+    setOnlineDeckId,
+  ] = useState("practice");
+
+  const [
+    inviteCopied,
+    setInviteCopied,
+  ] = useState(false);
+
   const [
     error,
     setError,
@@ -1445,7 +1529,315 @@ export default function GreatGamePlayPage() {
     }
   }
 
+  const selectedStoredDeck =
+    onlineDeckId === "practice"
+      ? null
+      : storedDecks.find((deck) => deck.id === onlineDeckId) ?? null;
+
+  function applyOnlineMatchView(match: GreatGameOnlineMatchView) {
+    setOnlineMatch(match);
+    setInviteCopied(false);
+    setOnlineMenuError(null);
+    setError(null);
+
+    // Remote state replaces any transient client-side targeting/drag state.
+    // This prevents stale previews from a previous authoritative version from
+    // leaking into the next turn after a Realtime refresh.
+    setPendingPlay(null);
+    setPendingConflict(null);
+    setDraggingHandInstanceId(null);
+    setDragCursor(null);
+    setAttackDrag(null);
+    setCombatPreview(null);
+    setActionPreview(null);
+    setInspectedUnitId(null);
+    setHoveredCommandCost(null);
+
+    if (match.status === "waiting") {
+      setGame(null);
+      setMode("online-waiting");
+      return;
+    }
+
+    if (match.status === "abandoned") {
+      setGame(null);
+      setMode("menu");
+      setOnlineMatch(null);
+      setOnlinePanelOpen(true);
+      setOnlineMenuError("The other player has left that table.");
+      return;
+    }
+
+    if (match.state) {
+      setGame(match.state);
+      setMode("game");
+      setHandoff(false);
+    }
+  }
+
+  async function parseOnlineResponse(response: Response) {
+    const payload = (await response.json().catch(() => ({}))) as {
+      error?: string;
+      match?: GreatGameOnlineMatchView | null;
+      matches?: GreatGameOnlineMatchSummary[];
+    };
+
+    if (!response.ok) {
+      if (payload.match) {
+        applyOnlineMatchView(payload.match);
+      }
+      throw new Error(payload.error ?? "Online play failed.");
+    }
+
+    return payload;
+  }
+
+  async function loadOnlineMatches() {
+    try {
+      const response = await fetch("/api/great-game", { cache: "no-store" });
+      if (response.status === 401) {
+        setOnlineMatches([]);
+        return;
+      }
+      const payload = await parseOnlineResponse(response);
+      setOnlineMatches(payload.matches ?? []);
+    } catch {
+      // The menu remains fully usable for local play if online services are down.
+    }
+  }
+
+  async function refreshOnlineMatch(matchId = onlineMatch?.id) {
+    if (!matchId) return;
+
+    try {
+      const response = await fetch(
+        `/api/great-game?match=${encodeURIComponent(matchId)}`,
+        { cache: "no-store" }
+      );
+      const payload = await parseOnlineResponse(response);
+      if (payload.match) {
+        applyOnlineMatchView(payload.match);
+      }
+    } catch (refreshError) {
+      setError(
+        refreshError instanceof Error
+          ? refreshError.message
+          : "Could not refresh the online table."
+      );
+    }
+  }
+
+  async function createOnlineMatch() {
+    setOnlineBusy(true);
+    setOnlineMenuError(null);
+
+    try {
+      const response = await fetch("/api/great-game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          op: "create",
+          deck: storedDeckCardIds(selectedStoredDeck),
+        }),
+      });
+      const payload = await parseOnlineResponse(response);
+      if (payload.match) {
+        applyOnlineMatchView(payload.match);
+      }
+    } catch (createError) {
+      setOnlineMenuError(
+        createError instanceof Error
+          ? createError.message
+          : "Could not open an online table."
+      );
+    } finally {
+      setOnlineBusy(false);
+    }
+  }
+
+  async function joinOnlineMatch(code = onlineCode) {
+    const normalizedCode = normalizeMatchCode(code);
+    setOnlineCode(normalizedCode);
+    setOnlineBusy(true);
+    setOnlineMenuError(null);
+
+    try {
+      const response = await fetch("/api/great-game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          op: "join",
+          code: normalizedCode,
+          deck: storedDeckCardIds(selectedStoredDeck),
+        }),
+      });
+      const payload = await parseOnlineResponse(response);
+      if (payload.match) {
+        applyOnlineMatchView(payload.match);
+      }
+    } catch (joinError) {
+      setOnlineMenuError(
+        joinError instanceof Error
+          ? joinError.message
+          : "Could not join that table."
+      );
+    } finally {
+      setOnlineBusy(false);
+    }
+  }
+
+  async function resumeOnlineMatch(matchId: string) {
+    setOnlineBusy(true);
+    setOnlineMenuError(null);
+    try {
+      const response = await fetch(
+        `/api/great-game?match=${encodeURIComponent(matchId)}`,
+        { cache: "no-store" }
+      );
+      const payload = await parseOnlineResponse(response);
+      if (payload.match) {
+        applyOnlineMatchView(payload.match);
+      }
+    } catch (resumeError) {
+      setOnlineMenuError(
+        resumeError instanceof Error
+          ? resumeError.message
+          : "Could not return to that table."
+      );
+    } finally {
+      setOnlineBusy(false);
+    }
+  }
+
+  async function leaveOnlineMatch() {
+    const matchId = onlineMatch?.id;
+    if (!matchId) return;
+
+    setOnlineBusy(true);
+    try {
+      await fetch("/api/great-game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ op: "leave", matchId }),
+      });
+    } finally {
+      setOnlineBusy(false);
+      setOnlineMatch(null);
+      setGame(null);
+      setMode("menu");
+      setOnlinePanelOpen(true);
+      setExitConfirm(false);
+      void loadOnlineMatches();
+    }
+  }
+
+  async function copyInviteLink() {
+    if (!onlineMatch) return;
+    const inviteUrl = `${window.location.origin}/cards/play?join=${onlineMatch.code}`;
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+      setInviteCopied(true);
+      window.setTimeout(() => setInviteCopied(false), 1800);
+    } catch {
+      setInviteCopied(false);
+    }
+  }
+
+  async function sendOnlineAction(action: GameAction): Promise<GreatGameOnlineMatchView | null> {
+    if (!onlineMatch || onlineActionPending) return null;
+
+    setOnlineActionPending(true);
+    try {
+      const response = await fetch("/api/great-game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          op: "action",
+          matchId: onlineMatch.id,
+          version: onlineMatch.version,
+          action,
+        }),
+      });
+      const payload = await parseOnlineResponse(response);
+      if (payload.match) {
+        applyOnlineMatchView(payload.match);
+        return payload.match;
+      }
+      return null;
+    } catch (actionError) {
+      setError(
+        actionError instanceof Error
+          ? actionError.message
+          : "The move could not be sent."
+      );
+      return null;
+    } finally {
+      setOnlineActionPending(false);
+    }
+  }
+
+  useEffect(() => {
+    try {
+      const parsed = JSON.parse(
+        localStorage.getItem(GREAT_GAME_DECK_STORAGE_KEY) ?? "[]"
+      ) as StoredDeck[];
+      if (Array.isArray(parsed)) {
+        // Hydrate browser-only deck storage after mount.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setStoredDecks(parsed);
+      }
+    } catch {
+      setStoredDecks([]);
+    }
+
+    const joinCode = normalizeMatchCode(
+      new URLSearchParams(window.location.search).get("join") ?? ""
+    );
+    if (joinCode) {
+      setOnlineCode(joinCode);
+      setOnlinePanelOpen(true);
+    }
+
+    void loadOnlineMatches();
+    // Initial menu hydration only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const matchId = onlineMatch?.id;
+    if (!matchId) return;
+
+    const channel = supabase
+      .channel(`great-game:${matchId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "great_game_events",
+          filter: `match_id=eq.${matchId}`,
+        },
+        () => {
+          void refreshOnlineMatch(matchId);
+        }
+      )
+      .subscribe((status) => {
+        // Re-fetch after the initial subscription and after a reconnect so a
+        // missed websocket event cannot leave the table on a stale version.
+        if (status === "SUBSCRIBED") {
+          void refreshOnlineMatch(matchId);
+        }
+      });
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+    // refreshOnlineMatch intentionally closes over the current setters only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onlineMatch?.id, supabase]);
+
   function startNewGame() {
+    setOnlineMatch(null);
     setGame(
       createGame()
     );
@@ -1486,6 +1878,7 @@ export default function GreatGamePlayPage() {
   }
 
   function exitToMenu() {
+    setOnlineMatch(null);
     setGame(null);
 
     setMode(
@@ -1601,6 +1994,21 @@ export default function GreatGamePlayPage() {
   ]);
 
   if (
+    mode === "online-waiting" &&
+    onlineMatch
+  ) {
+    return (
+      <OnlineWaitingScreen
+        match={onlineMatch}
+        busy={onlineBusy}
+        inviteCopied={inviteCopied}
+        onCopyInvite={() => void copyInviteLink()}
+        onLeave={() => void leaveOnlineMatch()}
+      />
+    );
+  }
+
+  if (
     mode === "menu"
   ) {
     return (
@@ -1608,6 +2016,22 @@ export default function GreatGamePlayPage() {
         onNewGame={
           startNewGame
         }
+        onlineOpen={onlinePanelOpen}
+        onToggleOnline={() => {
+          setOnlinePanelOpen((current) => !current);
+          setOnlineMenuError(null);
+        }}
+        decks={storedDecks}
+        deckId={onlineDeckId}
+        onDeckChange={setOnlineDeckId}
+        code={onlineCode}
+        onCodeChange={(value) => setOnlineCode(normalizeMatchCode(value))}
+        onlineBusy={onlineBusy}
+        onlineError={onlineMenuError}
+        matches={onlineMatches}
+        onCreateOnline={() => void createOnlineMatch()}
+        onJoinOnline={() => void joinOnlineMatch()}
+        onResumeOnline={(matchId) => void resumeOnlineMatch(matchId)}
       />
     );
   }
@@ -1635,6 +2059,24 @@ export default function GreatGamePlayPage() {
     currentGame.players[
       enemyPlayerId
     ];
+
+  const viewPlayerId: PlayerId =
+    onlineMatch?.playerId ?? activePlayerId;
+
+  const viewEnemyPlayerId =
+    opponentOf(viewPlayerId);
+
+  const viewPlayer =
+    currentGame.players[viewPlayerId];
+
+  const viewEnemyPlayer =
+    currentGame.players[viewEnemyPlayerId];
+
+  const onlineCanAct =
+    !onlineMatch ||
+    (onlineMatch.status === "active" &&
+      onlineMatch.playerId === activePlayerId &&
+      !onlineActionPending);
 
   const alliedCharacters =
     activePlayer.board.filter(
@@ -1700,12 +2142,47 @@ export default function GreatGamePlayPage() {
   const gameInteractionLocked =
     Boolean(
       currentGame.pendingEffect ||
-        drawAnimationActive
+        drawAnimationActive ||
+        !onlineCanAct
     );
 
   function dispatch(
     action: GameAction
   ): boolean {
+    if (onlineMatch) {
+      if (!onlineCanAct) {
+        setError("Wait for your turn.");
+        return false;
+      }
+
+      void (async () => {
+        const before = currentGame;
+        const nextMatch = await sendOnlineAction(action);
+        const nextState = nextMatch?.state;
+        if (!nextState) return;
+
+        const draws = collectNewDraws(
+          before,
+          nextState,
+          viewPlayerId
+        );
+
+        setError(null);
+        setPendingPlay(null);
+        setPendingConflict(null);
+        setDraggingHandInstanceId(null);
+        setHoveredCommandCost(null);
+        setDragCursor(null);
+        setInspectedUnitId(null);
+
+        if (draws.length > 0) {
+          startDrawSequence(draws);
+        }
+      })();
+
+      return true;
+    }
+
     const result =
       applyAction(
         currentGame,
@@ -1836,6 +2313,25 @@ export default function GreatGamePlayPage() {
   }
 
   function confirmMulligan() {
+    if (onlineMatch) {
+      if (!onlineCanAct) {
+        setError("Wait for your opening hand.");
+        return;
+      }
+
+      void (async () => {
+        const nextMatch = await sendOnlineAction({
+          type: "mulligan",
+          replaceHandInstanceIds: mulliganSelected,
+        });
+        if (!nextMatch) return;
+        setMulliganSelected([]);
+        setError(null);
+        setHandoff(false);
+      })();
+      return;
+    }
+
     const result =
       applyAction(
         currentGame,
@@ -1882,6 +2378,11 @@ export default function GreatGamePlayPage() {
   }
 
   function endTurn() {
+    if (onlineMatch && !onlineCanAct) {
+      setError("Wait for your turn.");
+      return;
+    }
+
     if (
       currentGame.pendingEffect ||
       drawAnimationActive
@@ -1892,6 +2393,32 @@ export default function GreatGamePlayPage() {
           : "Let the drawn card settle first."
       );
 
+      return;
+    }
+
+    if (onlineMatch) {
+      void (async () => {
+        const before = currentGame;
+        const nextMatch = await sendOnlineAction({ type: "end-turn" });
+        const nextState = nextMatch?.state;
+        if (!nextState) return;
+
+        const draws = collectNewDraws(
+          before,
+          nextState,
+          viewPlayerId
+        );
+        setError(null);
+        setPendingPlay(null);
+        setPendingConflict(null);
+        setDraggingHandInstanceId(null);
+        setDragCursor(null);
+        setInspectedUnitId(null);
+        setHandoff(false);
+        if (draws.length > 0) {
+          startDrawSequence(draws);
+        }
+      })();
       return;
     }
 
@@ -4623,6 +5150,26 @@ export default function GreatGamePlayPage() {
   }
 
   if (
+    onlineMatch &&
+    (currentGame.phase === "mulligan-player1" ||
+      currentGame.phase === "mulligan-player2") &&
+    currentGame.activePlayerId !== viewPlayerId
+  ) {
+    return (
+      <OnlineTurnWaitScreen
+        match={onlineMatch}
+        eyebrow="Opening Hand"
+        title="The other player is choosing their hand"
+        text="Their mulligan is private. The table will open as soon as they are ready."
+        onLeave={() => setExitConfirm(true)}
+        exitConfirm={exitConfirm}
+        onCancelExit={() => setExitConfirm(false)}
+        onConfirmExit={() => void leaveOnlineMatch()}
+      />
+    );
+  }
+
+  if (
     currentGame.phase ===
       "mulligan-player1" ||
     currentGame.phase ===
@@ -4655,14 +5202,18 @@ export default function GreatGamePlayPage() {
           )
         }
         onConfirmExit={
-          exitToMenu
+          onlineMatch
+            ? () => void leaveOnlineMatch()
+            : exitToMenu
         }
       />
     );
   }
 
   const prompt =
-    getPrompt();
+    onlineMatch && !onlineCanAct
+      ? null
+      : getPrompt();
 
   const activeLocation =
     currentGame.activeLocation
@@ -4909,6 +5460,27 @@ export default function GreatGamePlayPage() {
         </div>
       </header>
 
+      {onlineMatch && (
+        <section className={styles.onlineMatchBar}>
+          <div>
+            <span className={styles.onlineStatusDot} aria-hidden />
+            <strong>Online Table {onlineMatch.code}</strong>
+            <small>vs. {onlineOpponentName(onlineMatch)}</small>
+          </div>
+          <span
+            className={`${styles.onlineTurnPill} ${
+              onlineCanAct ? styles.onlineTurnPillActive : ""
+            }`}
+          >
+            {onlineActionPending
+              ? "Sending move…"
+              : onlineCanAct
+                ? "Your turn"
+                : `${onlineOpponentName(onlineMatch)} is playing`}
+          </span>
+        </section>
+      )}
+
       <section
         className={
           styles.locationBar
@@ -4977,7 +5549,7 @@ export default function GreatGamePlayPage() {
 
       <PlayerHeader
         playerId={
-          enemyPlayerId
+          viewEnemyPlayerId
         }
         state={currentGame}
         opponent
@@ -5026,9 +5598,10 @@ export default function GreatGamePlayPage() {
         }
       />
 
-      {currentGame.pendingEffect
-        ?.abilityId ===
-        "veiled-sight" && (
+      {onlineCanAct &&
+        currentGame.pendingEffect
+          ?.abilityId ===
+          "veiled-sight" && (
         <div
           className={
             styles.revealedHandBackdrop
@@ -5051,7 +5624,7 @@ export default function GreatGamePlayPage() {
             </div>
 
             <HorizontalHand>
-            {enemyPlayer.hand.map(
+            {viewEnemyPlayer.hand.map(
               (
                 handCard
               ) => {
@@ -5071,7 +5644,7 @@ export default function GreatGamePlayPage() {
                     cost={
                       getEffectiveCost(
                         currentGame,
-                        enemyPlayerId,
+                        viewEnemyPlayerId,
                         handCard
                       )
                     }
@@ -5093,7 +5666,7 @@ export default function GreatGamePlayPage() {
       <Board
         title="Opposing Realm"
         units={
-          enemyPlayer.board
+          viewEnemyPlayer.board
         }
         state={currentGame}
         targetable={
@@ -5142,7 +5715,7 @@ export default function GreatGamePlayPage() {
       <Board
         title="Your Realm"
         units={
-          activePlayer.board
+          viewPlayer.board
         }
         state={currentGame}
         targetable={
@@ -5296,10 +5869,10 @@ export default function GreatGamePlayPage() {
 
       <PlayerHeader
         playerId={
-          activePlayerId
+          viewPlayerId
         }
         state={currentGame}
-        onEndTurn={endTurn}
+        onEndTurn={onlineCanAct ? endTurn : undefined}
         endTurnDisabled={
           Boolean(
             currentGame.pendingEffect ||
@@ -5338,7 +5911,7 @@ export default function GreatGamePlayPage() {
           fanned
           active
         >
-          {activePlayer.hand.map(
+          {viewPlayer.hand.map(
             (handCard, index) => (
               <HandCard
                 key={
@@ -5351,7 +5924,7 @@ export default function GreatGamePlayPage() {
                   currentGame
                 }
                 playerId={
-                  activePlayerId
+                  viewPlayerId
                 }
                 selected={
                   pendingPlay?.handInstanceId ===
@@ -5363,7 +5936,7 @@ export default function GreatGamePlayPage() {
                 }
                 fanIndex={index}
                 fanCount={
-                  activePlayer.hand.length
+                  viewPlayer.hand.length
                 }
                 drawHidden={
                   hiddenDrawnIds.includes(
@@ -5383,13 +5956,13 @@ export default function GreatGamePlayPage() {
                   const hoveredCost =
                     getEffectiveCost(
                       currentGame,
-                      activePlayerId,
+                      viewPlayerId,
                       handCard
                     );
 
                   setHoveredCommandCost(
                     hoveredCost <=
-                      activePlayer.command
+                      viewPlayer.command
                       ? hoveredCost
                       : null
                   );
@@ -5560,16 +6133,22 @@ export default function GreatGamePlayPage() {
 
       {exitConfirm && (
         <ConfirmOverlay
-          title="Exit Game?"
-          text="The current local game will be lost."
-          confirmLabel="Exit Game"
+          title={onlineMatch ? "Leave Match?" : "Exit Game?"}
+          text={
+            onlineMatch
+              ? "Leaving an active online match closes the table for both players."
+              : "The current local game will be lost."
+          }
+          confirmLabel={onlineMatch ? "Leave Match" : "Exit Game"}
           onCancel={() =>
             setExitConfirm(
               false
             )
           }
           onConfirm={
-            exitToMenu
+            onlineMatch
+              ? () => void leaveOnlineMatch()
+              : exitToMenu
           }
         />
       )}
@@ -5579,17 +6158,41 @@ export default function GreatGamePlayPage() {
 
 function MainMenu({
   onNewGame,
+  onlineOpen,
+  onToggleOnline,
+  decks,
+  deckId,
+  onDeckChange,
+  code,
+  onCodeChange,
+  onlineBusy,
+  onlineError,
+  matches,
+  onCreateOnline,
+  onJoinOnline,
+  onResumeOnline,
 }: {
   onNewGame: () => void;
+  onlineOpen: boolean;
+  onToggleOnline: () => void;
+  decks: StoredDeck[];
+  deckId: string;
+  onDeckChange: (value: string) => void;
+  code: string;
+  onCodeChange: (value: string) => void;
+  onlineBusy: boolean;
+  onlineError: string | null;
+  matches: GreatGameOnlineMatchSummary[];
+  onCreateOnline: () => void;
+  onJoinOnline: () => void;
+  onResumeOnline: (matchId: string) => void;
 }) {
   return (
     <main
       className={`${styles.game} ${styles.mainMenu}`}
     >
       <div
-        className={
-          styles.pageBackground
-        }
+        className={styles.pageBackground}
         aria-hidden
       />
 
@@ -5597,76 +6200,249 @@ function MainMenu({
         className="greatGameNav greatGameNavMenu"
         aria-label="The Great Game"
       >
-        <Link href="/cards">
-          Cards
-        </Link>
-        <Link href="/cards/decks">
-          Decks
-        </Link>
-        <Link href="/cards/play" className="greatGameNavActive">
-          Play
-        </Link>
+        <Link href="/cards">Cards</Link>
+        <Link href="/cards/decks">Decks</Link>
+        <Link href="/cards/play" className="greatGameNavActive">Play</Link>
       </nav>
 
-      <div
-        className={
-          styles.menuCrest
-        }
-      >
-        ✦
-      </div>
+      <div className={styles.menuCrest}>✦</div>
 
-      <span
-        className={
-          styles.eyebrow
-        }
-      >
-        The Realm&apos;s
-        Reckoning
+      <span className={styles.eyebrow}>
+        The Realm&apos;s Reckoning
       </span>
 
-      <h1
-        className={
-          styles.menuTitle
-        }
-      >
+      <h1 className={styles.menuTitle}>
         The Great Game
       </h1>
 
-      <p
-        className={
-          styles.menuSubtitle
-        }
-      >
-        Power wins battles.
-        Influence wins realms.
+      <p className={styles.menuSubtitle}>
+        Power wins battles. Influence wins realms.
       </p>
 
-      <div
-        className={
-          styles.menuActions
-        }
-      >
+      <div className={styles.menuActions}>
         <button
-          className={
-            styles.primaryButton
-          }
-          onClick={
-            onNewGame
-          }
+          className={styles.primaryButton}
+          onClick={onNewGame}
         >
-          New Game
+          Local Game
+        </button>
+        <button
+          className={styles.secondaryButton}
+          onClick={onToggleOnline}
+          aria-expanded={onlineOpen}
+        >
+          Online Game
         </button>
       </div>
 
-      <div
-        className={
-          styles.menuFootnote
-        }
-      >
-        Local Hot-Seat ·
-        Two Players
+      {onlineOpen && (
+        <section className={styles.onlinePanel} aria-label="Online game">
+          <div className={styles.onlinePanelHeader}>
+            <span>Private Table</span>
+            <h2>Play across the realm</h2>
+            <p>
+              Open a table and send its six-character code, or enter a code you were given.
+            </p>
+          </div>
+
+          <label className={styles.onlineField}>
+            <span>Deck</span>
+            <select
+              value={deckId}
+              onChange={(event) => onDeckChange(event.target.value)}
+              disabled={onlineBusy}
+            >
+              <option value="practice">Practice Deck</option>
+              {decks.map((deck) => (
+                <option key={deck.id} value={deck.id}>
+                  {deck.name}
+                </option>
+              ))}
+            </select>
+            <small>
+              Saved decks are checked against the current thirty-card rules when the table opens.
+            </small>
+          </label>
+
+          <div className={styles.onlineCreateRow}>
+            <button
+              type="button"
+              className={styles.primaryButton}
+              onClick={onCreateOnline}
+              disabled={onlineBusy}
+            >
+              {onlineBusy ? "Opening…" : "Open a Table"}
+            </button>
+          </div>
+
+          <div className={styles.onlineDivider}>
+            <span>Join a table</span>
+          </div>
+
+          <div className={styles.onlineJoinRow}>
+            <input
+              value={code}
+              onChange={(event) => onCodeChange(event.target.value)}
+              placeholder="TABLE CODE"
+              maxLength={6}
+              autoCapitalize="characters"
+              autoComplete="off"
+              spellCheck={false}
+              aria-label="Table code"
+              disabled={onlineBusy}
+            />
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={onJoinOnline}
+              disabled={onlineBusy || code.length !== 6}
+            >
+              Join
+            </button>
+          </div>
+
+          {onlineError && (
+            <div className={styles.onlineError} role="alert">
+              <span>{onlineError}</span>
+              {onlineError.toLowerCase().includes("sign in") && (
+                <Link href="/login">Sign in</Link>
+              )}
+            </div>
+          )}
+
+          {matches.length > 0 && (
+            <div className={styles.onlineResumeList}>
+              <span className={styles.onlineResumeLabel}>Open Tables</span>
+              {matches.map((match) => (
+                <button
+                  type="button"
+                  key={match.id}
+                  className={styles.onlineResumeButton}
+                  onClick={() => onResumeOnline(match.id)}
+                  disabled={onlineBusy}
+                >
+                  <span>
+                    {match.status === "waiting"
+                      ? "Waiting for a player"
+                      : `vs. ${match.opponent?.displayName ?? match.opponent?.username ?? "Opponent"}`}
+                  </span>
+                  <strong>{match.code}</strong>
+                </button>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      <div className={styles.menuFootnote}>
+        Local Hot-Seat · Private Online Tables · Two Players
       </div>
+    </main>
+  );
+}
+
+function OnlineWaitingScreen({
+  match,
+  busy,
+  inviteCopied,
+  onCopyInvite,
+  onLeave,
+}: {
+  match: GreatGameOnlineMatchView;
+  busy: boolean;
+  inviteCopied: boolean;
+  onCopyInvite: () => void;
+  onLeave: () => void;
+}) {
+  return (
+    <main className={`${styles.game} ${styles.handoffScreen}`}>
+      <div className={styles.pageBackground} aria-hidden />
+      <section className={`${styles.handoffCard} ${styles.onlineWaitingCard}`}>
+        <span className={styles.eyebrow}>Private Online Table</span>
+        <h1>Waiting for an opponent</h1>
+        <p>
+          Share this code with the player you want across the table. The game begins automatically when they join.
+        </p>
+
+        <div className={styles.onlineTableCode} aria-label={`Table code ${match.code}`}>
+          {match.code}
+        </div>
+
+        <div className={styles.onlineWaitingActions}>
+          <button
+            type="button"
+            className={styles.primaryButton}
+            onClick={onCopyInvite}
+            disabled={busy}
+          >
+            {inviteCopied ? "Invite Copied" : "Copy Invite Link"}
+          </button>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={onLeave}
+            disabled={busy}
+          >
+            Close Table
+          </button>
+        </div>
+
+        <small className={styles.onlineWaitingNote}>
+          Your deck remains private while the table is open.
+        </small>
+      </section>
+    </main>
+  );
+}
+
+function OnlineTurnWaitScreen({
+  match,
+  eyebrow,
+  title,
+  text,
+  onLeave,
+  exitConfirm,
+  onCancelExit,
+  onConfirmExit,
+}: {
+  match: GreatGameOnlineMatchView;
+  eyebrow: string;
+  title: string;
+  text: string;
+  onLeave: () => void;
+  exitConfirm: boolean;
+  onCancelExit: () => void;
+  onConfirmExit: () => void;
+}) {
+  return (
+    <main className={`${styles.game} ${styles.handoffScreen}`}>
+      <div className={styles.pageBackground} aria-hidden />
+      <section className={`${styles.handoffCard} ${styles.onlineWaitingCard}`}>
+        <span className={styles.eyebrow}>{eyebrow}</span>
+        <h1>{title}</h1>
+        <p>{text}</p>
+        <div className={styles.onlineOpponentLine}>
+          <span>Across the table</span>
+          <strong>{onlineOpponentName(match)}</strong>
+        </div>
+        <button
+          type="button"
+          className={styles.secondaryButton}
+          onClick={onLeave}
+        >
+          Leave Match
+        </button>
+      </section>
+
+      {exitConfirm && (
+        <ConfirmOverlay
+          title="Leave Match?"
+          text="Leaving an active online match closes the table for both players."
+          confirmLabel="Leave Match"
+          onCancel={onCancelExit}
+          onConfirm={onConfirmExit}
+        />
+      )}
     </main>
   );
 }

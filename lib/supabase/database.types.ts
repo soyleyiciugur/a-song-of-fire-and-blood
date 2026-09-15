@@ -152,6 +152,31 @@ export interface DirectRavenBlock {
   created_at: string;
 }
 
+export interface GreatGameMatchRow {
+  id: string;
+  code: string;
+  host_id: string;
+  guest_id: string | null;
+  host_deck: unknown;
+  guest_deck: unknown | null;
+  state: unknown | null;
+  status: "waiting" | "active" | "finished" | "abandoned";
+  version: number;
+  winner_user_id: string | null;
+  abandoned_by: string | null;
+  created_at: string;
+  updated_at: string;
+  completed_at: string | null;
+}
+
+export interface GreatGameEventRow {
+  id: number;
+  match_id: string;
+  version: number;
+  event_type: "joined" | "state" | "left";
+  created_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -171,6 +196,8 @@ export interface Database {
       notification_preferences: { Row: NotificationPreferencesRow; Insert: Pick<NotificationPreferencesRow, "user_id"> & Partial<Omit<NotificationPreferencesRow, "user_id">>; Update: Partial<Pick<NotificationPreferencesRow, "mascot_mode" | "preferences" | "last_mascot" | "mascot_streak" | "mara_count" | "aldren_count" | "last_variants" | "updated_at">>; Relationships: [] };
       site_notifications: { Row: SiteNotificationRow; Insert: Omit<SiteNotificationRow, "id" | "created_at" | "read_at"> & Partial<Pick<SiteNotificationRow, "id" | "created_at" | "read_at" | "dedupe_key">>; Update: Partial<Pick<SiteNotificationRow, "read_at">>; Relationships: [] };
       private_ledger_entries: { Row: PrivateLedgerEntry; Insert: Omit<PrivateLedgerEntry, "id" | "created_at" | "updated_at"> & Partial<Pick<PrivateLedgerEntry, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PrivateLedgerEntry, "heading" | "matter" | "checklist" | "pinned" | "status" | "archived" | "character_ids" | "chapter_slug" | "updated_at">>; Relationships: [] };
+      great_game_matches: { Row: GreatGameMatchRow; Insert: Partial<GreatGameMatchRow> & Pick<GreatGameMatchRow, "code" | "host_id" | "host_deck">; Update: Partial<GreatGameMatchRow>; Relationships: [] };
+      great_game_events: { Row: GreatGameEventRow; Insert: Omit<GreatGameEventRow, "id" | "created_at"> & Partial<Pick<GreatGameEventRow, "id" | "created_at">>; Update: never; Relationships: [] };
     };
     Views: Record<string, never>;
     Functions: {
@@ -187,6 +214,7 @@ export interface Database {
       is_direct_raven_participant: { Args: { conversation_uuid: string }; Returns: boolean };
       can_send_direct_raven: { Args: { conversation_uuid: string }; Returns: boolean };
       set_message_reaction: { Args: { target: string; reaction: string }; Returns: string | null };
+      is_great_game_participant: { Args: { match_uuid: string }; Returns: boolean };
     };
     Enums: { user_role: UserRole; content_author_type: AuthorType };
     CompositeTypes: Record<string, never>;
