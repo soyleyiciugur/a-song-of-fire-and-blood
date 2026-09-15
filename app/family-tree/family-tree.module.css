@@ -116,32 +116,169 @@
   margin-bottom: 74px;
 }
 
+.targaryenMapShell {
+  margin-top: 18px;
+}
+
+.targaryenMapHud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.targaryenZoomGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.targaryenHudButton,
+.targaryenCollapseToggle {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--gold) 42%, var(--border));
+  background: linear-gradient(180deg, rgba(57, 40, 25, 0.78), rgba(22, 18, 19, 0.94));
+  color: color-mix(in srgb, var(--text) 88%, var(--gold));
+  border-radius: 999px;
+  font: 600 12px/1 var(--font-geist);
+  letter-spacing: .02em;
+  transition: border-color .16s ease, transform .12s ease, background-color .16s ease;
+}
+
+.targaryenHudButton {
+  min-width: 40px;
+  height: 34px;
+  padding: 0 12px;
+}
+
+.targaryenCollapseToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  padding: 8px 14px;
+  text-align: left;
+}
+
+.targaryenCollapseEyebrow {
+  font-size: 9px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 80%, var(--gold));
+}
+
+.targaryenHudButton:hover,
+.targaryenCollapseToggle:hover {
+  border-color: color-mix(in srgb, var(--gold) 72%, var(--border));
+  transform: translateY(-1px);
+}
+
 .targaryenViewport {
   position: relative;
   width: 100%;
-  margin-top: 18px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-inline: contain;
+  overflow: auto;
+  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(143, 107, 63, .45) transparent;
   -webkit-overflow-scrolling: touch;
+  border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top, rgba(201, 162, 39, 0.06), transparent 52%),
+    linear-gradient(180deg, rgba(14, 12, 16, .98), rgba(10, 10, 14, .99));
+  min-height: 380px;
 }
 
-.targaryenViewport::-webkit-scrollbar { height: 6px; }
+.targaryenViewport::-webkit-scrollbar { width: 10px; height: 10px; }
 .targaryenViewport::-webkit-scrollbar-track { background: transparent; }
 .targaryenViewport::-webkit-scrollbar-thumb {
-  background: rgba(143, 107, 63, .4);
+  background: rgba(143, 107, 63, .36);
   border-radius: 999px;
+}
+
+.targaryenCanvas {
+  position: relative;
 }
 
 .targaryenTree {
   --tree-line: color-mix(in srgb, var(--gold) 38%, var(--border));
   position: relative;
-  width: 1500px;
-  min-height: 360px;
-  margin: 0 auto;
-  padding: 8px 28px 30px;
+  min-width: 1280px;
+  min-height: 650px;
+  padding: 16px 40px 36px;
+}
+
+.earlierLinePanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.earlierLineLabel {
+  color: color-mix(in srgb, var(--muted) 82%, var(--gold));
+  font: 600 9px/1.2 var(--font-geist);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.earlierLineBranch {
+  position: relative;
+  width: 560px;
+  height: 98px;
+}
+
+.earlierLineBranch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 28px;
+  background: var(--tree-line);
+}
+
+.earlierLineBranch::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: calc(50% - 190px);
+  width: 190px;
+  height: 1px;
+  background: var(--tree-line);
+}
+
+.earlierSiblingNode {
+  position: absolute;
+  top: 50px;
+  left: calc(50% - 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.earlierSiblingNode::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 1px;
+  height: 22px;
+  background: var(--tree-line);
+}
+
+.earlierLineContinuation {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  width: 1px;
+  height: 70px;
+  background: linear-gradient(to bottom, var(--tree-line), color-mix(in srgb, var(--tree-line) 72%, transparent));
 }
 
 .targaryenRoot {
@@ -161,9 +298,9 @@
 .targaryenChildrenRail {
   position: relative;
   display: grid;
-  grid-template-columns: 180px 310px 430px 350px;
+  grid-template-columns: 320px 300px 390px;
   justify-content: center;
-  gap: 32px;
+  gap: 26px;
   padding-top: 22px;
 }
 
@@ -171,8 +308,8 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 8.2%;
-  right: 11.6%;
+  left: 6.6%;
+  right: 8%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--tree-line) 4%, var(--tree-line) 96%, transparent);
 }
@@ -208,26 +345,25 @@
 .targaryenLowerGrid {
   position: relative;
   display: grid;
-  grid-template-columns: 180px 310px 430px 350px;
+  grid-template-columns: 320px 300px 390px;
   justify-content: center;
-  gap: 32px;
-  margin-top: 2px;
+  gap: 26px;
+  margin-top: 6px;
 }
 
 .jaeryKinBranch {
   grid-column: 3;
   position: relative;
-  height: 42px;
-  margin-top: 1px;
-  pointer-events: none;
+  height: 76px;
+  margin-top: 14px;
 }
 
 .jaeryKinConnector {
   position: absolute;
   top: 0;
-  left: 50%;
-  width: 54px;
-  height: 24px;
+  left: 49%;
+  width: 50px;
+  height: 22px;
   border-left: 1px dashed color-mix(in srgb, var(--tree-line) 72%, transparent);
   border-bottom: 1px dashed color-mix(in srgb, var(--tree-line) 72%, transparent);
   border-bottom-left-radius: 9px;
@@ -235,30 +371,31 @@
 
 .jaeryKinCard {
   position: absolute;
-  top: 18px;
-  left: calc(50% + 50px);
+  top: 16px;
+  left: calc(49% + 46px);
   z-index: 2;
   display: flex;
   align-items: center;
   gap: 8px;
-  pointer-events: auto;
 }
 
 .descendantGroup {
   position: relative;
-  margin-top: 38px;
+  margin-top: 18px;
 }
 
 .royalDescendants {
-  grid-column: 1 / 4;
-  width: 980px;
+  grid-column: 2 / 4;
+  width: 880px;
   justify-self: end;
+  margin-top: 46px;
 }
 
 .vahaemonDescendants {
-  grid-column: 4;
-  width: 330px;
+  grid-column: 1;
+  width: 300px;
   justify-self: center;
+  margin-top: 88px;
 }
 
 .descendantStem {
@@ -269,7 +406,7 @@
 }
 
 .royalDescendants .descendantStem {
-  margin-left: 78.1%;
+  margin-left: 51%;
 }
 
 .vahaemonDescendants .descendantStem {
@@ -295,12 +432,12 @@
 .descendantRailSix {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
-.descendantRailSix::before { left: 7.8%; right: 7.8%; }
+.descendantRailSix::before { left: 6.5%; right: 6.5%; }
 
 .descendantRailTwo {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.descendantRailTwo::before { left: 24%; right: 24%; }
+.descendantRailTwo::before { left: 19%; right: 19%; }
 
 .descendantNode {
   position: relative;
@@ -319,28 +456,49 @@
   background: var(--tree-line);
 }
 
+.spouseBranch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
 @media (max-width: 700px) {
   .targaryenHouse { margin-bottom: 44px; }
+  .targaryenMapHud {
+    align-items: stretch;
+    gap: 10px;
+  }
+  .targaryenZoomGroup {
+    order: 2;
+  }
+  .targaryenCollapseToggle {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .targaryenViewport {
-    margin-inline: -1px;
-    padding-bottom: 5px;
-    scroll-snap-type: x proximity;
+    min-height: 265px;
+    border-radius: 16px;
   }
   .targaryenTree {
-    width: 1120px;
-    min-height: 300px;
-    padding-inline: 16px;
-    transform-origin: top left;
+    min-width: 1120px;
+    min-height: 520px;
+    padding: 12px 20px 28px;
   }
   .targaryenChildrenRail,
   .targaryenLowerGrid {
-    grid-template-columns: 130px 220px 320px 250px;
-    gap: 22px;
+    grid-template-columns: 280px 230px 340px;
+    gap: 18px;
   }
-  .royalDescendants { width: 710px; }
-  .vahaemonDescendants { width: 240px; }
+  .royalDescendants { width: 730px; margin-top: 36px; }
+  .vahaemonDescendants { width: 260px; margin-top: 82px; }
   .lineageNote { font-size: 7px; letter-spacing: .06em; }
-  .jaeryKinCard { left: calc(50% + 34px); gap: 5px; }
-  .jaeryKinConnector { width: 38px; }
+  .jaeryKinCard { left: calc(47% + 34px); gap: 5px; }
+  .jaeryKinConnector { width: 36px; left: 47%; }
   .descendantRail { gap: 8px; }
+  .earlierLineBranch { width: 430px; }
+  .earlierSiblingNode { left: calc(50% - 230px); }
+  .earlierLineBranch::after { left: calc(50% - 145px); width: 145px; }
 }
+

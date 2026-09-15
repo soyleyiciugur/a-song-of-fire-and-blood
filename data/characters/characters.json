@@ -188,7 +188,6 @@
     "mother": "vhaemys-targaryen-elder",
     "spouse": "jaery-targaryen",
     "siblings": [
-      "baelor-targaryen",
       "malaenar-targaryen",
       "vahaemon-targaryen"
     ],
@@ -268,13 +267,11 @@
       "year": 32
     },
     "height": "174 cm",
-    "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "father": "Jaehaerys Targaryen I",
+    "mother": "-",
     "spouse": "-",
     "siblings": [
-      "malaenar-targaryen",
-      "baelenys-targaryen",
-      "vahaemon-targaryen"
+      "aenys-targaryen-ii"
     ],
     "children": [],
     "mentor": "-",
@@ -294,7 +291,7 @@
       "Convince Saera to commit her dragon to the campaign against Vahaemon"
     ],
     "relationships": {
-      "baelenys-targaryen": "His great-nephew and King, who summoned him back from the Citadel after years of self-imposed exile and named him Grand Maester in Cordin's place; the two clash constantly over the Oldtown Massacre and the handling of Vahaemon.",
+      "baelenys-targaryen": "His nephew and King, who summoned him back from the Citadel after years of self-imposed exile and named him Grand Maester in Cordin's place; the two clash constantly over the Oldtown Massacre and the handling of Vahaemon.",
       "berholt-caswell": "He pushed Berholt hard during the Costayne dispute and found the High Septon's serene refusal infuriating. Their clash was unequal in pressure but not in resolve, and Baelor learned that Berholt could not simply be argued into submission. Berholt raises Baelor's earlier refusal to fund the sept works during the Chapter XVII negotiations.",
       "cordin-poole": "Displaced him as Grand Maester, though the two continue to work together on the council's finances.",
       "melessa-hightower": "Received her conciliatory raven from Oldtown inviting him to reclaim his place at the Citadel, though he doubted that the unexpectedly political message reflected Melessa's will alone.",
@@ -307,7 +304,8 @@
       "tion-lannister": "He works closely with Tion on the council's finances. Their shared preference for practical arithmetic over theatrical politics makes them occasional allies, even when neither man would call the other a friend.",
       "vahaemon-targaryen": "Spent years accumulating research on the Targaryen Dreamers while at Oldtown, some of which Visenor later discovered in an unmailed letter at the scholars' retreat near Starfall; that research now belongs to the fugitive prince.",
       "visenor-targaryen": "He has influenced Visenor from a distance through scholarship rather than counsel. In exile, the prince uncovered Baelor's research and private letters on dragons, dreamers, and Vahaemon, turning his great-uncle's abandoned studies into part of his own search for answers. Unbeknownst to Baelor, Visenor has searched his old Citadel papers and is building a forged Vhagar letter around the possibilities recorded there.",
-      "visenya-targaryen": "He remembers Visenya as the strange, grim child she once was and is now one of the few people at court trying to reason through what the woman she became may actually want. Her return turned an old family memory into a present strategic threat."
+      "visenya-targaryen": "He remembers Visenya as the strange, grim child she once was and is now one of the few people at court trying to reason through what the woman she became may actually want. Her return turned an old family memory into a present strategic threat.",
+      "aenys-targaryen-ii": "His younger brother, who inherited the Iron Throne after Baelor set aside his own claim for a life of scholarship at the Citadel."
     },
     "summary": "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid the Tyrell-Hightower treason crisis, Baelor arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
     "quotes": [],
@@ -917,7 +915,6 @@
     "mother": "vhaemys-targaryen-elder",
     "spouse": "alysa-targaryen",
     "siblings": [
-      "baelor-targaryen",
       "baelenys-targaryen",
       "vahaemon-targaryen"
     ],
@@ -1578,7 +1575,6 @@
     "mother": "vhaemys-targaryen-elder",
     "spouse": "naela-targaryen",
     "siblings": [
-      "baelor-targaryen",
       "malaenar-targaryen",
       "baelenys-targaryen"
     ],
@@ -2482,12 +2478,13 @@
       "year": 15
     },
     "height": "181 cm",
-    "father": "-",
+    "father": "Jaehaerys Targaryen I",
     "mother": "-",
     "spouse": "vhaemys-targaryen-elder",
-    "siblings": [],
+    "siblings": [
+      "baelor-targaryen"
+    ],
     "children": [
-      "baelor-targaryen",
       "malaenar-targaryen",
       "baelenys-targaryen",
       "vahaemon-targaryen"
@@ -2504,7 +2501,8 @@
       "edwyle-stark": "The Lord of Winterfell was an important ally who aided Aenys in ways that remained significant to House Targaryen long after both men's deaths. The exact nature of Edwyle's service has not yet been revealed.",
       "malaenar-targaryen": "His eldest son.",
       "vahaemon-targaryen": "His youngest son.",
-      "vhaemys-targaryen-elder": "His queen and wife."
+      "vhaemys-targaryen-elder": "His queen and wife.",
+      "baelor-targaryen": "His elder brother, who relinquished his own claim and entered the Citadel, leaving Aenys to inherit the Iron Throne."
     },
     "summary": "The late King Aenys Targaryen II, father of Malaenar, Baelenys, and Vahaemon. His reign and treatment of his family left wounds that still shape the royal house. Among the great lords who supported him was Edwyle Stark of Winterfell, whose service to Aenys remained important enough that Baelenys still remembered the debt decades later.",
     "quotes": [],
@@ -2533,7 +2531,6 @@
     "spouse": "aenys-targaryen-ii",
     "siblings": [],
     "children": [
-      "baelor-targaryen",
       "malaenar-targaryen",
       "baelenys-targaryen",
       "vahaemon-targaryen"
