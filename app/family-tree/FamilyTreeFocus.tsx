@@ -5,7 +5,16 @@ import styles from "./family-tree.module.css";
 
 export default function FamilyTreeFocus({ focusId }: { focusId?: string }) {
   useEffect(() => {
-    if (!focusId) return;
+    if (!focusId) {
+      const viewport = document.querySelector<HTMLElement>("[data-targaryen-viewport]");
+      if (viewport && window.matchMedia("(max-width: 700px)").matches) {
+        const timeout = window.setTimeout(() => {
+          viewport.scrollLeft = Math.max(0, (viewport.scrollWidth - viewport.clientWidth) / 2);
+        }, 40);
+        return () => window.clearTimeout(timeout);
+      }
+      return;
+    }
 
     const selector = `a[href="/characters/${CSS.escape(focusId)}"]`;
     const matches = Array.from(document.querySelectorAll<HTMLElement>(selector));

@@ -110,3 +110,237 @@
   .generationLabel { margin: 17px 0 8px; font-size: 8px; letter-spacing: 1px; }
   .generationRow { gap: 7px; }
 }
+
+/* House Targaryen: a single continuous dynasty line rather than stacked generation panels. */
+.targaryenHouse {
+  margin-bottom: 74px;
+}
+
+.targaryenViewport {
+  position: relative;
+  width: 100%;
+  margin-top: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(143, 107, 63, .45) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.targaryenViewport::-webkit-scrollbar { height: 6px; }
+.targaryenViewport::-webkit-scrollbar-track { background: transparent; }
+.targaryenViewport::-webkit-scrollbar-thumb {
+  background: rgba(143, 107, 63, .4);
+  border-radius: 999px;
+}
+
+.targaryenTree {
+  --tree-line: color-mix(in srgb, var(--gold) 38%, var(--border));
+  position: relative;
+  width: 1500px;
+  min-height: 360px;
+  margin: 0 auto;
+  padding: 8px 28px 30px;
+}
+
+.targaryenRoot {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.targaryenMainStem {
+  width: 1px;
+  height: 34px;
+  margin: 6px auto 0;
+  background: linear-gradient(to bottom, var(--tree-line), color-mix(in srgb, var(--tree-line) 65%, transparent));
+}
+
+.targaryenChildrenRail {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 310px 430px 350px;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 22px;
+}
+
+.targaryenChildrenRail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8.2%;
+  right: 11.6%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tree-line) 4%, var(--tree-line) 96%, transparent);
+}
+
+.targaryenChildBranch {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+}
+
+.targaryenChildBranch::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 1px;
+  height: 22px;
+  background: var(--tree-line);
+}
+
+.lineageNote {
+  color: color-mix(in srgb, var(--muted) 86%, var(--gold));
+  font: 600 9px/1.2 var(--font-geist);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.targaryenLowerGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 310px 430px 350px;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 2px;
+}
+
+.jaeryKinBranch {
+  grid-column: 3;
+  position: relative;
+  height: 42px;
+  margin-top: 1px;
+  pointer-events: none;
+}
+
+.jaeryKinConnector {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 54px;
+  height: 24px;
+  border-left: 1px dashed color-mix(in srgb, var(--tree-line) 72%, transparent);
+  border-bottom: 1px dashed color-mix(in srgb, var(--tree-line) 72%, transparent);
+  border-bottom-left-radius: 9px;
+}
+
+.jaeryKinCard {
+  position: absolute;
+  top: 18px;
+  left: calc(50% + 50px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.descendantGroup {
+  position: relative;
+  margin-top: 38px;
+}
+
+.royalDescendants {
+  grid-column: 1 / 4;
+  width: 980px;
+  justify-self: end;
+}
+
+.vahaemonDescendants {
+  grid-column: 4;
+  width: 330px;
+  justify-self: center;
+}
+
+.descendantStem {
+  width: 1px;
+  height: 28px;
+  margin: 0 auto;
+  background: var(--tree-line);
+}
+
+.royalDescendants .descendantStem {
+  margin-left: 78.1%;
+}
+
+.vahaemonDescendants .descendantStem {
+  margin-left: 50%;
+}
+
+.descendantRail {
+  position: relative;
+  display: grid;
+  align-items: start;
+  gap: 14px;
+  padding-top: 18px;
+}
+
+.descendantRail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tree-line) 4%, var(--tree-line) 96%, transparent);
+}
+
+.descendantRailSix {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.descendantRailSix::before { left: 7.8%; right: 7.8%; }
+
+.descendantRailTwo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.descendantRailTwo::before { left: 24%; right: 24%; }
+
+.descendantNode {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.descendantNode::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 1px;
+  height: 18px;
+  background: var(--tree-line);
+}
+
+@media (max-width: 700px) {
+  .targaryenHouse { margin-bottom: 44px; }
+  .targaryenViewport {
+    margin-inline: -1px;
+    padding-bottom: 5px;
+    scroll-snap-type: x proximity;
+  }
+  .targaryenTree {
+    width: 1120px;
+    min-height: 300px;
+    padding-inline: 16px;
+    transform-origin: top left;
+  }
+  .targaryenChildrenRail,
+  .targaryenLowerGrid {
+    grid-template-columns: 130px 220px 320px 250px;
+    gap: 22px;
+  }
+  .royalDescendants { width: 710px; }
+  .vahaemonDescendants { width: 240px; }
+  .lineageNote { font-size: 7px; letter-spacing: .06em; }
+  .jaeryKinCard { left: calc(50% + 34px); gap: 5px; }
+  .jaeryKinConnector { width: 38px; }
+  .descendantRail { gap: 8px; }
+}

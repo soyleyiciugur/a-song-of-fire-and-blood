@@ -58,7 +58,7 @@
     "status": "Alive",
     "age": 67,
     "portraitAgeState": "elder",
-    "height": "165 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -95,7 +95,7 @@
     "status": "Alive",
     "age": 24,
     "portraitAgeState": "young",
-    "height": "167 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -169,12 +169,11 @@
   },
   {
     "id": "baelenys-targaryen",
-    "name": "Baelenys I Targaryen",
+    "name": "Baelenys Targaryen",
     "nickname": "Baelenys the Cruel",
     "aliases": [
       "Baelenys the Formidable",
-      "The Dragonbreath",
-      "Baelenys I"
+      "The Dragonbreath"
     ],
     "house": "House Targaryen",
     "title": "King of the Seven Kingdoms",
@@ -182,13 +181,14 @@
     "nameday": {
       "day": 8,
       "moon": 11,
-      "year": 44
+      "year": 40
     },
     "height": "185 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "queen-vhaemys-targaryen",
+    "mother": "vhaemys-targaryen-elder",
     "spouse": "jaery-targaryen",
     "siblings": [
+      "baelor-targaryen",
       "malaenar-targaryen",
       "vahaemon-targaryen"
     ],
@@ -228,13 +228,13 @@
       "lorent-tyrell": "The former Lord of Highgarden, summoned to King's Landing after the poisoning conspiracy came to light. Baelenys judged Lorent's attempt to remove him as treason and ordered his execution on the Fifth Day of the Third Moon, 99 AC.",
       "edwyle-stark": "The late Lord of Winterfell had aided Baelenys' father, King Aenys, in ways Baelenys still considered important decades later. That old service left him with a lasting sense of obligation toward Edwyle's descendants.",
       "gaelor-targaryen": "Sees growing potential in him and has named him heir should Visenor not return; though Gaelor's massacre at Oldtown embarrassed the Crown, the King accepts full responsibility for the order that caused it. After the Flea Bottom massacre, he cancels Gaelor's Watch appointment, sends him to Driftmark and reserves further punishment to himself.",
-      "grance-morrigen": "A knight who accompanied him to Ashenmist Valley in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing.",
+      "grance-morrigen": "A knight who accompanied him to Cloudpass in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing.",
       "harrik-greyjoy": "He remembers Harrik as one of the great opponents of his Iron Islands campaigns. Their clash survived in family legend as the Dragonbreath against the Drowned Servant, turning an old enemy into part of Baelenys's martial mythology.",
       "jacaelon-targaryen": "Entrusts Jace with the secret of Aegon's dream, declares that Gaelor will not inherit and intends to name Jace heir once the present troubles are settled. He calls the succession a cruelty rather than a reward.",
       "jaery-targaryen": "Trusts her more than most, but rarely lets her influence his decisions; struck her in a moment of drunken fury and has not acknowledged it since.",
       "maela-targaryen": "His daughter and Jace's twin. He remains protective of her place within the dynasty even as Queen Jaery takes the lead in arranging her future marriage.",
       "malaenar-targaryen": "His elder brother, whose nameday brought the family to Dragonstone and their oldest wounds back to the surface; by the end of the night they stood together on the balcony, which is the closest these two get to peace.",
-      "myles-mooton": "A Riverlands knight who rode in his party to Ashenmist Valley on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared.",
+      "myles-mooton": "A Riverlands knight who rode in his party to Cloudpass on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared.",
       "oswald-eagle": "Cancels Gaelor's appointment after the massacre, leaving Oswald in command of the Watch.",
       "naella-velaryon": "Received news of her pregnancy with rare, genuine warmth — one of the few unguarded moments of tenderness in an otherwise bleak season.",
       "orwell-morrigen": "Commands the Kingsguard in his name; Morrigen serves with rigid, unquestioning discipline.",
@@ -247,43 +247,34 @@
       "tion-lannister": "He values Tion's usefulness with coin far more than his advice on war or royal pride. Baelenys has repeatedly cut him short when the Master of Coin's caution clashes with what the King wants done.",
       "vahaemon-targaryen": "His exiled brother, now believed to be sheltering in the Free Cities with a dragon of his own — a fact that has consumed the King's council and his paranoia in equal measure.",
       "vhaemys-targaryen": "Comforts Vhaemys after her terrifying dream and later agrees with Jace that her repeating visions may mark her as a Dreamer. He calls her the most precious thing the family possesses and orders Jace to stay close to her.",
-      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
+      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
       "visenor-targaryen": "Formerly his most trusted heir. That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
     },
     "summary": "Baelenys passes the secret of Aegon's dream—learned from Jaehaerys—to Jacaelon and rejects Gaelor as his successor. He intends to name Jace heir when the present troubles are settled, framing the crown as a final cruelty and a duty to preserve the realm for the prince that was promised. After Vhaemys wakes terrified by a dream, he accepts that she may possess the rare gift of a Dreamer and orders Jace to investigate the great white dragon in her visions while guarding her closely.",
     "quotes": [],
-    "debutChapter": "the-poison-beneath-the-crown",
-    "reign": {
-      "from": "79 AC"
-    },
-    "personalTimeline": [
-      {
-        "title": "Ascends the Iron Throne",
-        "date": "20/6/79 AC",
-        "description": "Baelenys succeeds Aenys II and begins the reign that continues into the present day.",
-        "order": 28609
-      }
-    ]
+    "debutChapter": "the-poison-beneath-the-crown"
   },
   {
     "id": "baelor-targaryen",
     "name": "Baelor Targaryen",
-    "nickname": "Baelor the Uncrowned",
+    "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
     "title": "Grand Maester",
     "status": "Alive",
     "nameday": {
       "day": 5,
-      "moon": 3,
-      "year": 27
+      "moon": 4,
+      "year": 32
     },
     "height": "174 cm",
-    "father": "jaehaerys-targaryen-i",
-    "mother": "queen-alysanne-targaryen",
+    "father": "aenys-targaryen-ii",
+    "mother": "vhaemys-targaryen-elder",
     "spouse": "-",
     "siblings": [
-      "aenys-targaryen-ii"
+      "malaenar-targaryen",
+      "baelenys-targaryen",
+      "vahaemon-targaryen"
     ],
     "children": [],
     "mentor": "-",
@@ -303,11 +294,7 @@
       "Convince Saera to commit her dragon to the campaign against Vahaemon"
     ],
     "relationships": {
-      "baelenys-targaryen": "His nephew and King, who summoned him back from the Citadel after years of self-imposed exile and named him Grand Maester in Cordin's place; the two clash constantly over the Oldtown Massacre and the handling of Vahaemon.",
-      "jaehaerys-targaryen-i": "His father and king. Although born Jaehaerys's eldest son, Baelor had chosen the Citadel by the time his father's death opened the succession and did not stand for the Iron Throne.",
-      "queen-alysanne-targaryen": "His mother, whose intellectual curiosity and concern for the realm found a lasting echo in his own life of scholarship.",
-      "aenys-targaryen-ii": "His younger brother. Baelor had already left royal life for the Citadel before Jaehaerys died, so Aenys inherited the throne uncontested in 73 AC.",
-      "malaenar-targaryen": "His nephew, who later declined a crown of his own because of his infirmity. Their choices form a family parallel: Baelor chose the Citadel before succession reached him, while Malaenar stood aside when the throne passed to his generation.",
+      "baelenys-targaryen": "His great-nephew and King, who summoned him back from the Citadel after years of self-imposed exile and named him Grand Maester in Cordin's place; the two clash constantly over the Oldtown Massacre and the handling of Vahaemon.",
       "berholt-caswell": "He pushed Berholt hard during the Costayne dispute and found the High Septon's serene refusal infuriating. Their clash was unequal in pressure but not in resolve, and Baelor learned that Berholt could not simply be argued into submission. Berholt raises Baelor's earlier refusal to fund the sept works during the Chapter XVII negotiations.",
       "cordin-poole": "Displaced him as Grand Maester, though the two continue to work together on the council's finances.",
       "melessa-hightower": "Received her conciliatory raven from Oldtown inviting him to reclaim his place at the Citadel, though he doubted that the unexpectedly political message reflected Melessa's will alone.",
@@ -322,17 +309,9 @@
       "visenor-targaryen": "He has influenced Visenor from a distance through scholarship rather than counsel. In exile, the prince uncovered Baelor's research and private letters on dragons, dreamers, and Vahaemon, turning his great-uncle's abandoned studies into part of his own search for answers. Unbeknownst to Baelor, Visenor has searched his old Citadel papers and is building a forged Vhagar letter around the possibilities recorded there.",
       "visenya-targaryen": "He remembers Visenya as the strange, grim child she once was and is now one of the few people at court trying to reason through what the woman she became may actually want. Her return turned an old family memory into a present strategic threat."
     },
-    "summary": "Baelor the Uncrowned was the eldest son of Jaehaerys I and Queen Alysanne and the elder brother of Aenys II. At an uncertain point before his father's death, Baelor rejected royal life, entered the Citadel and committed himself to a maester's path. When Jaehaerys died in 73 AC, Aenys therefore inherited the Iron Throne without his elder brother standing as a rival claimant. At the Citadel Baelor earned a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid the Tyrell-Hightower treason crisis, Baelor arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
+    "summary": "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid the Tyrell-Hightower treason crisis, Baelor arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
     "quotes": [],
-    "debutChapter": "fathers-and-their-sins",
-    "personalTimeline": [
-      {
-        "title": "Chooses the Citadel",
-        "date": "Date unknown, before 73 AC",
-        "description": "The king's eldest son leaves royal life for the Citadel and commits himself to becoming a maester. The exact date is not recorded; by Jaehaerys's death, the succession is clear for Aenys.",
-        "order": 26279
-      }
-    ]
+    "debutChapter": "fathers-and-their-sins"
   },
   {
     "id": "brandon-stark",
@@ -529,7 +508,7 @@
     "nameday": {
       "day": 1,
       "moon": 1,
-      "year": 36
+      "year": 31
     },
     "height": "170 cm",
     "father": "-",
@@ -559,10 +538,10 @@
       "alysanne-hightower": "His daughter, killed in the chaos that followed his son's execution — an unintended consequence of the treason he set in motion.",
       "baelenys-targaryen": "Old friend and, until his fall, the King's most trusted Hand — a friendship of thirty years he betrayed for a cause he sincerely believed was greater than both of them.",
       "gaelor-targaryen": "He became the object of one of Gaelor's earliest attempts to expose the poisoning conspiracy. Gaelor helped build the false-prisoner trap and spent a night disguised as a gaoler waiting for Derrin to appear; Derrin never came, but suspicion only deepened.",
-      "grance-morrigen": "Rode with him in Prince Baelenys's party during the Ashenmist Valley incident of 56 AC; Derrin urged Grance to keep pace as they hurried after the prince.",
+      "grance-morrigen": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC; Derrin urged Grance to keep pace as they hurried after the prince.",
       "jacaelon-targaryen": "The prince who exposed his treason, led him into a locked room at Driftmark under false pretenses, extracted his full confession — including the name of the Lord of Highgarden — and executed him on the spot before disposing of the body at sea.",
       "melessa-hightower": "His surviving daughter, whose life was spared only by chance in the Oldtown massacre.",
-      "myles-mooton": "Rode with him in Prince Baelenys's party during the Ashenmist Valley incident of 56 AC.",
+      "myles-mooton": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC.",
       "lorent-tyrell": "His co-conspirator; Lorent first approached him with the plan to poison the King, sharing his belief that the realm could not survive another of Baelenys's wars.",
       "timos-hightower": "His son, condemned and killed for a treason he never had any part in."
     },
@@ -931,13 +910,14 @@
     "nameday": {
       "day": 4,
       "moon": 8,
-      "year": 43
+      "year": 38
     },
     "height": "177 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "queen-vhaemys-targaryen",
+    "mother": "vhaemys-targaryen-elder",
     "spouse": "alysa-targaryen",
     "siblings": [
+      "baelor-targaryen",
       "baelenys-targaryen",
       "vahaemon-targaryen"
     ],
@@ -957,14 +937,13 @@
     ],
     "relationships": {
       "aenys-targaryen-ii": "His father, King Aenys Targaryen II. Malaenar's generation was shaped by the damage and rivalries of Aenys' household.",
-      "baelor-targaryen": "His uncle, whose decision to leave royal life for the Citadel offers an older parallel to Malaenar's own refusal of the Iron Throne, though the two men withdrew from succession for different reasons.",
       "alysa-targaryen": "His late wife, who died before Tansy Riverside entered his life on Dragonstone.",
       "baelenys-targaryen": "His younger brother and King; their nameday reunion on Dragonstone devolved into a screaming match over old wounds — Vahaemon's treason, their father's violence against their mother, and Malaenar's choice to stand aside during the succession crisis. By the end of the evening they were drinking together on the balcony, which for this family constitutes reconciliation.",
       "baran-strong": "He has kept Baran as his sworn sword on Dragonstone and rates him among the finest knights in the realm. Malaenar is openly reluctant to lose him even when the royal princes begin drawing Baran back toward King's Landing.",
       "gaelor-targaryen": "He sees in Gaelor another young Targaryen being pulled toward the same dynastic wounds that scarred Malaenar's own generation. The Dragonstone nameday brought the prince into the middle of arguments over succession, Vahaemon, and Baelenys's old violence.",
       "tansy-riverside": "His companion of two years, who organized the nameday feast that summoned the royal family without telling him first; he was heavily drunk throughout and seemed more amused than alarmed by the chaos that followed.",
       "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name.",
-      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
+      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
     },
     "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar renounced his own claim to the Iron Throne due to an infirmity and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor,' Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust.",
     "quotes": [],
@@ -1592,15 +1571,16 @@
     "nameday": {
       "day": 12,
       "moon": 2,
-      "year": 46
+      "year": 44
     },
     "height": "180 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "queen-vhaemys-targaryen",
+    "mother": "vhaemys-targaryen-elder",
     "spouse": "naela-targaryen",
     "siblings": [
-      "baelenys-targaryen",
-      "malaenar-targaryen"
+      "baelor-targaryen",
+      "malaenar-targaryen",
+      "baelenys-targaryen"
     ],
     "children": [
       "rhaella-targaryen",
@@ -1623,17 +1603,17 @@
       "aenys-targaryen-ii": "His father, King Aenys Targaryen II. Vahaemon grew up as the youngest of Aenys' three sons in a family already marked by rivalry and violence.",
       "baelenys-targaryen": "His brother and King, who exiled him for treason during the seventh moon of his own reign — a cold war ended decisively, the realm was told, though the full details remain known only to those who lived through it.",
       "baelor-targaryen": "His uncle Baelor spent years studying Targaryen dreamers and the family's stranger histories at the Citadel. Some of that abandoned research later passed indirectly into Visenor's hands and now touches the struggle surrounding Vahaemon's name.",
-      "grance-morrigen": "One of the knights who pulled him away from Maelwing while he screamed at Baelenys during the Ashenmist Valley incident of 56 AC.",
+      "grance-morrigen": "One of the knights who pulled him away from Maelwing while he screamed at Baelenys during the Cloudpass incident of 56 AC.",
       "jacaelon-targaryen": "His nephew has become one of the principal minds directing the Crown's effort against him. Vahaemon may not know how much of the pressure campaign bears Jace's hand, but the conflict has already reached Jace directly through Visenya and Dark Sister.",
       "malaenar-targaryen": "His steady brother, who stayed loyal to Baelenys throughout and whose very steadiness has always been the sharpest rebuke to Vahaemon's choices.",
-      "myles-mooton": "One of the knights who pulled him back from Maelwing during the disastrous Ashenmist Valley incident on his nameday in 56 AC.",
+      "myles-mooton": "One of the knights who pulled him back from Maelwing during the disastrous Cloudpass incident on his nameday in 56 AC.",
       "naela-targaryen": "His wife; her current whereabouts and condition are unknown.",
       "rhaella-targaryen": "His daughter in exile; her secret letters to her siblings reignited the very suspicion that nearly destroyed her marriage, though the warning was never addressed to him.",
-      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen.",
+      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen.",
       "visenor-targaryen": "His nephew Visenor now treats Vahaemon's name as both a family danger and a political weapon. Without Vahaemon's knowledge, Visenor has considered forging evidence of an alliance between him and the Gardeners to redirect the Crown's fury.",
       "visenya-targaryen": "His other daughter, who is apparently neither in exile nor in Essos — but in King's Landing, walking freely through Flea Bottom with Dark Sister at her hip."
     },
-    "summary": "Exiled from Westeros years before the events of the poisoning, Vahaemon Targaryen lives on beyond the Seven Kingdoms' reach, now believed to be in Pentos after the Crown engineered his expulsion from Braavos through economic pressure. He possesses a dragon of unknown origin — a fact that has consumed the small council's planning and Baelor Targaryen's strategy alike. His daughter Rhaella is hidden in Dorne, pregnant with a Targaryen heir. His daughter Visenya has materialized in a Flea Bottom brothel with Dark Sister and a blade at a prince's throat. Whether either development is his doing remains the most urgent unanswered question at the Hand's table. As a boy of ten, on his nameday on the Twelfth Day of the Second Moon, 56 AC, Vahaemon led more than twenty men into Ashenmist Valley in an attempt to approach Maelwing; the dragon burned his companions, Baelenys arrived to save him, and then claimed the beast himself.",
+    "summary": "Exiled from Westeros years before the events of the poisoning, Vahaemon Targaryen lives on beyond the Seven Kingdoms' reach, now believed to be in Pentos after the Crown engineered his expulsion from Braavos through economic pressure. He possesses a dragon of unknown origin — a fact that has consumed the small council's planning and Baelor Targaryen's strategy alike. His daughter Rhaella is hidden in Dorne, pregnant with a Targaryen heir. His daughter Visenya has materialized in a Flea Bottom brothel with Dark Sister and a blade at a prince's throat. Whether either development is his doing remains the most urgent unanswered question at the Hand's table. As a boy of twelve, on his nameday on the Twelfth Day of the Second Moon, 56 AC, Vahaemon led more than twenty men into Cloudpass in an attempt to approach Maelwing; the dragon burned his companions, Baelenys arrived to save him, and then claimed the beast himself.",
     "quotes": [],
     "debutChapter": "the-mummers-blood"
   },
@@ -1822,10 +1802,6 @@
     "house": "-",
     "title": "Maester of the Scholars' Retreat",
     "status": "Missing",
-    "secret": {
-      "status": "Dead",
-      "note": "The unidentified body rolling in the waves on the Dornish coast at the opening of Chapter XVII is Edmyn Uller. He died on the Sixth Day of the Eighth Moon, 99 AC; the exact cause of death has not yet been established."
-    },
     "nameday": {
       "day": 18,
       "moon": 8,
@@ -1859,11 +1835,6 @@
     },
     "summary": "A Dornish maester dispatched by Lady Lorenah Dayne to attend Prince Visenor and Princess Rhaella at the scholars' retreat near Starfall. Unimpressed by titles and unusually direct in his delivery, he was the one who confirmed Rhaella's pregnancy and the one who briefed Visenor on the state of the realm — including the massacres, embargoes, and political collapses — with a vocabulary and frankness that made the Crown Prince laugh for the first time in weeks. His Dornish accent is heavy and his tongue is foul, which Visenor described privately as the most honest thing he had encountered since leaving King's Landing. By the fourteenth day of the eighth moon, he has been absent for days and Rhaella is increasingly alarmed. Nymos has no news of him. The unidentified body on the Dornish coast is not confirmed to be Edmyn.",
     "quotes": [],
-    "death": {
-      "day": 6,
-      "moon": 8,
-      "year": 99
-    },
     "debutChapter": "a-crown-of-thorns"
   },
   {
@@ -1983,7 +1954,7 @@
       "moon": 3,
       "year": 49
     },
-    "height": "160 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "vahaemon-targaryen",
@@ -2064,7 +2035,7 @@
       "moon": 5,
       "year": 35
     },
-    "height": "177 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -2093,7 +2064,8 @@
       "day": 5,
       "moon": 3,
       "year": 99
-    }
+    },
+    "debutChapter": "the-weight-of-loyalty"
   },
   {
     "id": "renrose-tyrell",
@@ -2140,7 +2112,7 @@
       "martyn-mullendore": "Relies on Mullendore as a trusted sword arm operating in Visenor's orbit; Martyn's loyalty to the prince rather than to Renrose directly is a variable he has not yet been forced to reckon with.",
       "melessa-hightower": "Sees her as a piece to be positioned rather than a person; inserting Leo into her household is partly about influence over the last Hightower heir.",
       "visenor-targaryen": "He welcomes Visenor's plan to frame Lord Gardener and agrees to seize the rival house's lands. Although Visenor likes and trusts him, Renrose privately resolves that House Tyrell's ambition must ultimately rise above the prince as well.",
-      "liana-tyrell": "His wife, distant Tyrell cousin and closest confidante. He welcomes her knowledge of his dealings with Visenor, but rejects her warning against pursuing still greater power.",
+      "liana-tyrell": "His wife and closest confidante. He welcomes her knowledge of his dealings with Visenor, but rejects her warning against pursuing still greater power.",
       "renrose-tyrell-daughter": "His unnamed daughter, present beside him at the breakfast welcoming Visenor to Highgarden."
     },
     "summary": "Lord Renrose Tyrell receives Visenor at Highgarden and embraces the plan to frame House Gardener as Vahaemon's secret ally. His role is to invade and secure Gardener lands the moment the Crown declares their lord a traitor. Yet after Visenor places the scheme in his hands, Lady Liana warns Renrose not to mistake the prince's trust for permission to demand more. Renrose rejects her restraint and privately resolves that the only worthy course is one that places House Tyrell above every other family—including Visenor's.",
@@ -2499,7 +2471,7 @@
   {
     "id": "aenys-targaryen-ii",
     "name": "Aenys Targaryen II",
-    "nickname": "Aenys the Rotten",
+    "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
     "title": "Former King of the Seven Kingdoms",
@@ -2507,16 +2479,15 @@
     "nameday": {
       "day": 15,
       "moon": 2,
-      "year": 28
+      "year": 15
     },
     "height": "181 cm",
-    "father": "jaehaerys-targaryen-i",
-    "mother": "queen-alysanne-targaryen",
-    "spouse": "queen-vhaemys-targaryen",
-    "siblings": [
-      "baelor-targaryen"
-    ],
+    "father": "-",
+    "mother": "-",
+    "spouse": "vhaemys-targaryen-elder",
+    "siblings": [],
     "children": [
+      "baelor-targaryen",
       "malaenar-targaryen",
       "baelenys-targaryen",
       "vahaemon-targaryen"
@@ -2533,55 +2504,36 @@
       "edwyle-stark": "The Lord of Winterfell was an important ally who aided Aenys in ways that remained significant to House Targaryen long after both men's deaths. The exact nature of Edwyle's service has not yet been revealed.",
       "malaenar-targaryen": "His eldest son.",
       "vahaemon-targaryen": "His youngest son.",
-      "queen-vhaemys-targaryen": "His queen and wife.",
-      "jaehaerys-targaryen-i": "His father and royal predecessor, the Conciliator.",
-      "queen-alysanne-targaryen": "His mother, remembered as the Good Queen."
-      ,"baelor-targaryen": "His elder brother, who had already chosen the Citadel and a maester's life before their father's death. With Baelor outside royal succession, Aenys inherited the crown in 73 AC."
+      "vhaemys-targaryen-elder": "His queen and wife."
     },
-    "summary": "The late King Aenys Targaryen II, son and successor of Jaehaerys I and Queen Alysanne. He ruled for six years, from 73 AC until his death in 79 AC, and fathered Malaenar, Baelenys and Vahaemon with Queen Vhaemys. His short reign and treatment of his family left wounds that still shape the royal house.",
+    "summary": "The late King Aenys Targaryen II, father of Malaenar, Baelenys, and Vahaemon. His reign and treatment of his family left wounds that still shape the royal house. Among the great lords who supported him was Edwyle Stark of Winterfell, whose service to Aenys remained important enough that Baelenys still remembered the debt decades later.",
     "quotes": [],
     "death": {
       "day": 20,
       "moon": 6,
-      "year": 79
-    },
-    "reign": {
-      "from": "73 AC",
-      "to": "79 AC"
-    },
-    "personalTimeline": [
-      {
-        "title": "Ascends the Iron Throne",
-        "date": "73 AC",
-        "order": 26280
-      },
-      {
-        "title": "Death and succession",
-        "date": "20/6/79 AC",
-        "description": "Aenys dies after a six-year reign. Baelenys succeeds him at the age of thirty-four.",
-        "order": 28609
-      }
-    ]
+      "year": 88
+    }
   },
   {
-    "id": "queen-vhaemys-targaryen",
-    "name": "Queen Vhaemys Targaryen",
+    "id": "vhaemys-targaryen-elder",
+    "name": "Vhaemys Targaryen",
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
-    "title": "Queen of the Seven Kingdoms, 73–79 AC",
+    "title": "Former Queen of the Seven Kingdoms",
     "status": "Dead",
     "nameday": {
       "day": 9,
       "moon": 6,
-      "year": 30
+      "year": 18
     },
-    "height": "168 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "aenys-targaryen-ii",
     "siblings": [],
     "children": [
+      "baelor-targaryen",
       "malaenar-targaryen",
       "baelenys-targaryen",
       "vahaemon-targaryen"
@@ -2598,25 +2550,13 @@
       "malaenar-targaryen": "Her eldest son.",
       "vahaemon-targaryen": "Her youngest son."
     },
-    "summary": "The late Queen Vhaemys Targaryen, wife and queen of Aenys II and mother of Malaenar, Baelenys and Vahaemon. She served as queen consort from 73 to 79 AC and died in 80 AC. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
+    "summary": "The late Queen Vhaemys Targaryen, wife of Aenys II and mother of Malaenar, Baelenys, and Vahaemon. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
     "quotes": [],
     "death": {
       "day": 4,
       "moon": 10,
-      "year": 80
-    },
-    "personalTimeline": [
-      {
-        "title": "Becomes queen",
-        "date": "73 AC",
-        "order": 26280
-      },
-      {
-        "title": "Widowed",
-        "date": "79 AC",
-        "order": 28440
-      }
-    ]
+      "year": 88
+    }
   },
   {
     "id": "alysa-targaryen",
@@ -2631,7 +2571,7 @@
       "moon": 9,
       "year": 44
     },
-    "height": "166 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "malaenar-targaryen",
@@ -2665,7 +2605,7 @@
       "moon": 4,
       "year": 48
     },
-    "height": "179 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -2696,7 +2636,7 @@
       "moon": 12,
       "year": 24
     },
-    "height": "182 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "ella-lannister",
@@ -2728,7 +2668,7 @@
       "moon": 12,
       "year": 27
     },
-    "height": "168 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "tygett-lannister",
@@ -2760,7 +2700,7 @@
       "moon": 11,
       "year": 51
     },
-    "height": "164 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "tion-lannister",
@@ -2825,7 +2765,7 @@
       "moon": 1,
       "year": 59
     },
-    "height": "186 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "lyarra-karstark",
@@ -2862,7 +2802,7 @@
       "moon": 1,
       "year": 61
     },
-    "height": "175 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "maron-dayne",
@@ -2899,7 +2839,7 @@
       "moon": 6,
       "year": 52
     },
-    "height": "175 cm",
+    "height": "-",
     "father": "clover-tully",
     "mother": "-",
     "spouse": "-",
@@ -2931,7 +2871,7 @@
       "moon": 10,
       "year": 74
     },
-    "height": "169 cm",
+    "height": "-",
     "father": "elwood-tully",
     "mother": "-",
     "spouse": "bethany-bracken",
@@ -2962,7 +2902,7 @@
       "moon": 3,
       "year": 78
     },
-    "height": "158 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "oscar-tully",
@@ -2993,7 +2933,7 @@
       "moon": 3,
       "year": 50
     },
-    "height": "182 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -3155,7 +3095,7 @@
       "moon": 4,
       "year": 28
     },
-    "height": "184 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -3293,7 +3233,7 @@
       "moon": 4,
       "year": 90
     },
-    "height": "130 cm",
+    "height": "-",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -3361,7 +3301,7 @@
     "house": "House Mooton",
     "title": "Former Sworn Brother of the Kingsguard",
     "debutChapter": "the-mummers-blood",
-    "status": "Dead",
+    "status": "Unknown",
     "nameday": {
       "day": 7,
       "moon": 1,
@@ -3381,12 +3321,12 @@
     ],
     "goals": [],
     "relationships": {
-      "baelenys-targaryen": "Rode in Prince Baelenys's roughly thirty-man party to Ashenmist Valley on the Twelfth Day of the Second Moon, 56 AC, when the prince went to retrieve his younger brother Vahaemon.",
-      "derrin-hightower": "Rode with Derrin Hightower during the Ashenmist Valley incident of 56 AC.",
-      "grance-morrigen": "Fellow knight in Baelenys's Ashenmist Valley party; together they approached Vahaemon and drew him back from Maelwing.",
+      "baelenys-targaryen": "Rode in Prince Baelenys's roughly thirty-man party to Cloudpass on the Twelfth Day of the Second Moon, 56 AC, when the prince went to retrieve his younger brother Vahaemon.",
+      "derrin-hightower": "Rode with Derrin Hightower during the Cloudpass incident of 56 AC.",
+      "grance-morrigen": "Fellow knight in Baelenys's Cloudpass party; together they approached Vahaemon and drew him back from Maelwing.",
       "vahaemon-targaryen": "Alongside Ser Grance Morrigen, helped pull the terrified young prince away after Maelwing emerged from the clouds."
     },
-    "summary": "Ser Myles Mooton was a thirty-five-year-old Riverlands knight on the Twelfth Day of the Second Moon, 56 AC. He rode with Prince Baelenys, Derrin Hightower, Ser Grance Morrigen and roughly thirty men toward Ashenmist Valley after Vahaemon's reckless attempt to approach Maelwing ended with more than twenty men burned to ash. When the dragon emerged, Myles and Grance advanced despite their fear and pulled Vahaemon back while Baelenys remained before the beast and ultimately claimed Maelwing.",
+    "summary": "Ser Myles Mooton was a thirty-five-year-old Riverlands knight on the Twelfth Day of the Second Moon, 56 AC. He rode with Prince Baelenys, Derrin Hightower, Ser Grance Morrigen and roughly thirty men toward Cloudpass after Vahaemon's reckless attempt to approach Maelwing ended with more than twenty men burned to ash. When the dragon emerged, Myles and Grance advanced despite their fear and pulled Vahaemon back while Baelenys remained before the beast and ultimately claimed Maelwing.",
     "quotes": []
   },
   {
@@ -3397,7 +3337,7 @@
     "house": "House Morrigen",
     "title": "Former Sworn Brother of the Kingsguard",
     "debutChapter": "the-mummers-blood",
-    "status": "Dead",
+    "status": "Unknown",
     "nameday": {
       "day": 22,
       "moon": 1,
@@ -3421,13 +3361,13 @@
     ],
     "goals": [],
     "relationships": {
-      "baelenys-targaryen": "Rode close behind the young prince during the Ashenmist Valley crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into.",
-      "derrin-hightower": "Rode with the young Derrin Hightower during the Ashenmist Valley incident; Derrin urged him to keep pace as the party hurried after Baelenys.",
-      "myles-mooton": "Fellow knight in the Ashenmist Valley party, with whom he approached Vahaemon and pulled the boy away from the dragon.",
+      "baelenys-targaryen": "Rode close behind the young prince during the Cloudpass crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into.",
+      "derrin-hightower": "Rode with the young Derrin Hightower during the Cloudpass incident; Derrin urged him to keep pace as the party hurried after Baelenys.",
+      "myles-mooton": "Fellow knight in the Cloudpass party, with whom he approached Vahaemon and pulled the boy away from the dragon.",
       "orwell-morrigen": "His brother, Ser Orwell Morrigen, who later became Lord Commander of the Kingsguard.",
       "vahaemon-targaryen": "Alongside Ser Myles Mooton, took hold of the terrified young prince and pulled him away as Baelenys faced Maelwing."
     },
-    "summary": "Ser Grance Morrigen was thirty-four years old on the Twelfth Day of the Second Moon, 56 AC, when he rode in Prince Baelenys's party to Ashenmist Valley. He was openly uneasy about the situation and muttered about what they had gotten themselves into as the party climbed into the clouds. After finding Vahaemon surrounded by the burned remains of his men and seeing Maelwing emerge, Grance nevertheless advanced with Ser Myles Mooton and helped drag the frightened young prince to safety while Baelenys stood his ground before the dragon.",
+    "summary": "Ser Grance Morrigen was thirty-four years old on the Twelfth Day of the Second Moon, 56 AC, when he rode in Prince Baelenys's party to Cloudpass. He was openly uneasy about the situation and muttered about what they had gotten themselves into as the party climbed into the clouds. After finding Vahaemon surrounded by the burned remains of his men and seeing Maelwing emerge, Grance nevertheless advanced with Ser Myles Mooton and helped drag the frightened young prince to safety while Baelenys stood his ground before the dragon.",
     "quotes": []
   },
   {
@@ -3714,9 +3654,8 @@
     "nickname": "-",
     "aliases": [],
     "house": "-",
-    "title": "Maester",
-    "age": 46,
-    "height": "171 cm",
+    "title": "Maester at Starfall",
+    "height": "173 cm",
     "debutChapter": "the-children-pay",
     "status": "Alive",
     "father": "-",
@@ -3746,11 +3685,6 @@
     "aliases": [],
     "house": "House Tyrell",
     "title": "Lady of Highgarden",
-    "nameday": {
-      "day": 14,
-      "moon": 4,
-      "year": 63
-    },
     "height": "168 cm",
     "debutChapter": "the-children-pay",
     "status": "Alive",
@@ -3768,19 +3702,19 @@
     ],
     "goals": [],
     "relationships": {
-      "renrose-tyrell": "Her husband and distant Tyrell cousin, three years her senior, who calls her his closest confidante. She warns that his appetite for power risks wasting Visenor's trust and endangering their family; he rejects her restraint.",
+      "renrose-tyrell": "Her husband, who calls her his closest confidante. She warns that his appetite for power risks wasting Visenor's trust and endangering their family; he rejects her restraint.",
       "visenor-targaryen": "Recognizes that Visenor likes and trusts Renrose. She urges her husband to preserve that advantage rather than exploit it without limit."
     },
-    "summary": "Lady Liana is Renrose Tyrell's wife, distant Tyrell cousin and closest confidante. Three years younger than her husband, she listens as Visenor and Renrose discuss their alliance at Highgarden. That evening she warns Renrose that the prince's affection and trust can benefit their family if he accepts their limits. She sees his appetite for greater power as a danger, but her warning does not dissuade him from placing House Tyrell above every other family.",
+    "summary": "Lady Liana is Renrose Tyrell's wife and closest confidante. She listens as Visenor and Renrose discuss their alliance at Highgarden. That evening she warns her husband that the prince's affection and trust can benefit their family if Renrose accepts their limits. She sees his appetite for greater power as a danger, but her warning does not dissuade him from placing House Tyrell above every other family. Her birth house and age have not been established.",
     "quotes": []
   },
   {
-    "id": "elinor-tyrell",
+    "id": "renrose-tyrell-daughter",
     "name": "Elinor Tyrell",
     "nickname": "-",
     "aliases": [],
     "house": "House Tyrell",
-    "title": "Lady Elinor Tyrell of Highgarden",
+    "title": "Daughter of the Lord of Highgarden",
     "debutChapter": "the-children-pay",
     "status": "Alive",
     "father": "renrose-tyrell",
@@ -3808,773 +3742,5 @@
     },
     "age": 18,
     "height": "163 cm"
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "Aerion Targaryen",
-    "mother": "Valaena Velaryon",
-    "spouse": [
-      "queen-visenya-targaryen",
-      "queen-rhaenys-targaryen"
-    ],
-    "siblings": [],
-    "children": [
-      "maegor-targaryen-i",
-      "aenys-targaryen-i"
-    ],
-    "mentor": "-",
-    "dragon": "Balerion",
-    "traits": [
-      "Resolute",
-      "Reserved",
-      "Visionary",
-      "Formidable"
-    ],
-    "goals": [
-      "Unite the Seven Kingdoms under one crown"
-    ],
-    "relationships": {
-      "queen-visenya-targaryen": "His elder sister-wife, fellow conqueror and sternest partner in rule.",
-      "queen-rhaenys-targaryen": "His younger sister-wife, fellow conqueror and the mother of Aenys I.",
-      "maegor-targaryen-i": "His son by Visenya.",
-      "aenys-targaryen-i": "His son and eventual successor by Rhaenys."
-    },
-    "quotes": [],
-    "id": "aegon-targaryen-i",
-    "name": "Aegon I Targaryen",
-    "house": "House Targaryen",
-    "title": "The Conqueror, First King of the Seven Kingdoms",
-    "reign": {
-      "from": "1 AC",
-      "to": "37 AC"
-    },
-    "summary": "Aegon the Conqueror united six of the Seven Kingdoms, founded the royal Targaryen dynasty and ruled beside his sister-queens Visenya and Rhaenys. In this chronicle's dynastic record he reigned from 1 AC until his death in 37 AC.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "27 BC",
-        "order": -27000
-      },
-      {
-        "title": "The Conquest begins",
-        "date": "1 AC",
-        "description": "Aegon begins the conquest and becomes the first Targaryen king of the unified realm.",
-        "order": 1000
-      },
-      {
-        "title": "Death",
-        "date": "37 AC",
-        "order": 37000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "Aerion Targaryen",
-    "mother": "Valaena Velaryon",
-    "spouse": "aegon-targaryen-i",
-    "siblings": [
-      "aegon-targaryen-i",
-      "queen-rhaenys-targaryen"
-    ],
-    "children": [
-      "maegor-targaryen-i"
-    ],
-    "mentor": "-",
-    "dragon": "Vhagar",
-    "traits": [
-      "Stern",
-      "Unforgiving",
-      "Martial",
-      "Politically Astute"
-    ],
-    "goals": [
-      "Defend the dynasty she helped establish",
-      "Advance Maegor's claim"
-    ],
-    "relationships": {
-      "aegon-targaryen-i": "Her younger brother-husband and fellow conqueror.",
-      "queen-rhaenys-targaryen": "Her younger sister and fellow queen.",
-      "maegor-targaryen-i": "Her only son, whose strength and claim she championed."
-    },
-    "quotes": [],
-    "id": "queen-visenya-targaryen",
-    "name": "Queen Visenya Targaryen",
-    "house": "House Targaryen",
-    "title": "Queen of the Seven Kingdoms",
-    "summary": "Aegon I's elder sister-wife, a dragonrider and warrior who wielded Dark Sister and helped forge both the Seven Kingdoms and the Kingsguard. Stern and politically formidable, she remained the chief champion of her son Maegor.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "29 BC",
-        "order": -29000
-      },
-      {
-        "title": "The Conquest begins",
-        "date": "1 AC",
-        "order": 1000
-      },
-      {
-        "title": "Maegor is born",
-        "date": "12 AC",
-        "order": 12000
-      },
-      {
-        "title": "Death",
-        "date": "44 AC",
-        "order": 44000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "Aerion Targaryen",
-    "mother": "Valaena Velaryon",
-    "spouse": "aegon-targaryen-i",
-    "siblings": [
-      "queen-visenya-targaryen",
-      "aegon-targaryen-i"
-    ],
-    "children": [
-      "aenys-targaryen-i"
-    ],
-    "mentor": "-",
-    "dragon": "Meraxes",
-    "traits": [
-      "Playful",
-      "Curious",
-      "Graceful",
-      "Diplomatic"
-    ],
-    "goals": [
-      "Help bind the conquered kingdoms to the new dynasty"
-    ],
-    "relationships": {
-      "aegon-targaryen-i": "Her elder brother-husband and fellow conqueror.",
-      "queen-visenya-targaryen": "Her elder sister and fellow queen.",
-      "aenys-targaryen-i": "Her son and the future second Targaryen king."
-    },
-    "quotes": [],
-    "id": "queen-rhaenys-targaryen",
-    "name": "Queen Rhaenys Targaryen",
-    "house": "House Targaryen",
-    "title": "Queen of the Seven Kingdoms",
-    "summary": "Aegon I's younger sister-wife, a dragonrider remembered for her warmth, curiosity and love of music and flight. She rode Meraxes during the Conquest and was lost with her dragon in Dorne in 10 AC.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "c. 26 BC",
-        "order": -26000
-      },
-      {
-        "title": "The Conquest begins",
-        "date": "1 AC",
-        "order": 1000
-      },
-      {
-        "title": "Aenys is born",
-        "date": "4 BC",
-        "description": "In this chronicle's adjusted royal chronology, Rhaenys gives birth to Aenys before the Conquest.",
-        "order": -4000
-      },
-      {
-        "title": "Death in Dorne",
-        "date": "10 AC",
-        "order": 10000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "aegon-targaryen-i",
-    "mother": "queen-rhaenys-targaryen",
-    "spouse": "queen-alyssa-velaryon",
-    "siblings": [
-      "maegor-targaryen-i"
-    ],
-    "children": [
-      "rhaena-targaryen-maegor",
-      "jaehaerys-targaryen-i",
-      "queen-alysanne-targaryen"
-    ],
-    "mentor": "-",
-    "dragon": "Quicksilver",
-    "traits": [
-      "Courteous",
-      "Indecisive",
-      "Generous",
-      "Conflict-Averse"
-    ],
-    "goals": [
-      "Preserve his father's realm"
-    ],
-    "relationships": {
-      "aegon-targaryen-i": "His father and royal predecessor.",
-      "queen-rhaenys-targaryen": "His mother.",
-      "queen-alyssa-velaryon": "His wife and queen.",
-      "maegor-targaryen-i": "His younger half-brother, who seized the throne after his death.",
-      "jaehaerys-targaryen-i": "His son, who ultimately followed Maegor on the throne."
-    },
-    "quotes": [],
-    "id": "aenys-targaryen-i",
-    "name": "Aenys I Targaryen",
-    "house": "House Targaryen",
-    "title": "Second King of the Seven Kingdoms",
-    "reign": {
-      "from": "37 AC",
-      "to": "42 AC"
-    },
-    "summary": "The elder son of Aegon I and Queen Rhaenys. Aenys inherited the Iron Throne in 37 AC, but rebellion and the Faith Militant exposed the weakness of his conciliatory rule. He died in 42 AC and was succeeded by his half-brother Maegor.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "c. 4 BC",
-        "order": -4000
-      },
-      {
-        "title": "Crowned king",
-        "date": "37 AC",
-        "order": 37000
-      },
-      {
-        "title": "Death",
-        "date": "42 AC",
-        "order": 42000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "Aethan Velaryon",
-    "mother": "Alarra Massey",
-    "spouse": "aenys-targaryen-i",
-    "siblings": [],
-    "children": [
-      "rhaena-targaryen-maegor",
-      "jaehaerys-targaryen-i",
-      "queen-alysanne-targaryen"
-    ],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Charming",
-      "Witty",
-      "Kind",
-      "Politically Resilient"
-    ],
-    "goals": [
-      "Protect her children and preserve their claim"
-    ],
-    "relationships": {
-      "aenys-targaryen-i": "Her first husband and king.",
-      "jaehaerys-targaryen-i": "Her son, for whom she served as queen regent."
-    },
-    "quotes": [],
-    "id": "queen-alyssa-velaryon",
-    "name": "Queen Alyssa Velaryon",
-    "house": "House Velaryon",
-    "title": "Queen and Queen Regent",
-    "summary": "The Velaryon queen of Aenys I and mother of Jaehaerys I. Canon remembers Alyssa for her charm, wit and political resilience, including her escape from Maegor and her service as regent; this chronicle moves her generation earlier to fit its alternate succession.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "c. 2 BC (adjusted chronology)",
-        "order": -2000
-      },
-      {
-        "title": "Aenys becomes king",
-        "date": "37 AC",
-        "order": 37000
-      },
-      {
-        "title": "Widowed",
-        "date": "42 AC",
-        "order": 42000
-      },
-      {
-        "title": "Serves as queen regent",
-        "date": "48 AC",
-        "order": 48000
-      },
-      {
-        "title": "Death",
-        "date": "54 AC",
-        "order": 54000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "aegon-targaryen-i",
-    "mother": "queen-visenya-targaryen",
-    "spouse": [
-      "ceryse-hightower",
-      "alys-harroway",
-      "tyanna-of-the-tower",
-      "elinor-costayne",
-      "jeyne-westerling-maegor",
-      "rhaena-targaryen-maegor"
-    ],
-    "siblings": [
-      "aenys-targaryen-i"
-    ],
-    "children": [],
-    "mentor": "-",
-    "dragon": "Balerion",
-    "traits": [
-      "Cruel",
-      "Implacable",
-      "Martial",
-      "Tyrannical"
-    ],
-    "goals": [
-      "Crush all resistance to his rule",
-      "Produce a surviving royal heir"
-    ],
-    "relationships": {
-      "aegon-targaryen-i": "His father.",
-      "queen-visenya-targaryen": "His mother and most determined political champion.",
-      "aenys-targaryen-i": "His elder half-brother, whose throne he seized after Aenys's death.",
-      "jaehaerys-targaryen-i": "His nephew and eventual successor."
-    },
-    "quotes": [],
-    "id": "maegor-targaryen-i",
-    "name": "Maegor I Targaryen",
-    "house": "House Targaryen",
-    "title": "Third King of the Seven Kingdoms",
-    "reign": {
-      "from": "42 AC",
-      "to": "48 AC"
-    },
-    "summary": "The son of Aegon I and Visenya, remembered as Maegor the Cruel. He seized the throne after Aenys I, waged war against the Faith and took six wives, yet left no surviving royal issue. His death in 48 AC opened the way for Jaehaerys I.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "12 AC",
-        "order": 12000
-      },
-      {
-        "title": "Crowned king",
-        "date": "42 AC",
-        "order": 42000
-      },
-      {
-        "title": "The Black Brides",
-        "date": "47 AC",
-        "description": "Maegor forcibly marries Elinor Costayne, Jeyne Westerling and Rhaena Targaryen in a single ceremony.",
-        "order": 47000
-      },
-      {
-        "title": "Death",
-        "date": "48 AC",
-        "order": 48000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "-",
-    "mother": "-",
-    "spouse": "maegor-targaryen-i",
-    "siblings": [],
-    "children": [],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Proud",
-      "Devout"
-    ],
-    "goals": [],
-    "relationships": {},
-    "quotes": [],
-    "id": "ceryse-hightower",
-    "name": "Queen Ceryse Hightower",
-    "house": "House Hightower",
-    "title": "Queen of the Seven Kingdoms",
-    "summary": "The daughter of Lord Manfred Hightower and niece of the High Septon. Ceryse married Maegor in 25 AC when she was twenty-three; their childless marriage later became the first of Maegor's six unions.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "2 AC",
-        "order": 2000
-      },
-      {
-        "title": "Marries Maegor",
-        "date": "25 AC",
-        "order": 25000
-      },
-      {
-        "title": "Death",
-        "date": "45 AC",
-        "order": 45000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "-",
-    "mother": "-",
-    "spouse": "maegor-targaryen-i",
-    "siblings": [],
-    "children": [],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Ambitious",
-      "Defiant"
-    ],
-    "goals": [],
-    "relationships": {},
-    "quotes": [],
-    "id": "alys-harroway",
-    "name": "Queen Alys Harroway",
-    "house": "House Harroway",
-    "title": "Queen of the Seven Kingdoms",
-    "summary": "Maegor's second wife, taken in a Valyrian ceremony in 39 AC despite his existing marriage. Her pregnancy ended in catastrophe, after which accusations engineered by Tyanna led to Alys's torture and death and the destruction of House Harroway.",
-    "personalTimeline": [
-      {
-        "title": "Marries Maegor",
-        "date": "39 AC",
-        "order": 39000
-      },
-      {
-        "title": "Death",
-        "date": "44 AC",
-        "order": 44000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "-",
-    "mother": "-",
-    "spouse": "maegor-targaryen-i",
-    "siblings": [],
-    "children": [],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Cunning",
-      "Ruthless",
-      "Secretive",
-      "Feared"
-    ],
-    "goals": [],
-    "relationships": {},
-    "quotes": [],
-    "id": "tyanna-of-the-tower",
-    "name": "Queen Tyanna of the Tower",
-    "house": "-",
-    "title": "Queen and Mistress of Whisperers",
-    "summary": "A Pentoshi courtesan who became Maegor's third wife and mistress of whisperers. Called the king's raven, Tyanna wielded fear, torture and secrets at court before Maegor killed her with Blackfyre in 48 AC.",
-    "personalTimeline": [
-      {
-        "title": "Marries Maegor",
-        "date": "42 AC",
-        "order": 42001
-      },
-      {
-        "title": "Death",
-        "date": "48 AC",
-        "order": 48000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "-",
-    "mother": "-",
-    "spouse": "maegor-targaryen-i",
-    "siblings": [],
-    "children": [],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Resilient",
-      "Devout"
-    ],
-    "goals": [],
-    "relationships": {},
-    "quotes": [],
-    "id": "elinor-costayne",
-    "name": "Queen Elinor Costayne",
-    "house": "House Costayne",
-    "title": "Queen of the Seven Kingdoms",
-    "summary": "The youngest of Maegor's three Black Brides. A widow and mother before her coerced marriage in 47 AC, Elinor survived Maegor's reign and later helped preserve an account of it.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "c. 28 AC",
-        "order": 28000
-      },
-      {
-        "title": "Forced to marry Maegor",
-        "date": "47 AC",
-        "order": 47000
-      },
-      {
-        "title": "Survives Maegor",
-        "date": "48 AC",
-        "order": 48000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "-",
-    "mother": "-",
-    "spouse": "maegor-targaryen-i",
-    "siblings": [],
-    "children": [],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Proud",
-      "Tragic"
-    ],
-    "goals": [],
-    "relationships": {},
-    "quotes": [],
-    "id": "jeyne-westerling-maegor",
-    "name": "Queen Jeyne Westerling",
-    "house": "House Westerling",
-    "title": "Queen of the Seven Kingdoms",
-    "summary": "A widow of Lord Alyn Tarbeck and one of Maegor's three coerced Black Brides. Jeyne married Maegor in 47 AC, delivered a stillborn child the following year and died soon afterward.",
-    "personalTimeline": [
-      {
-        "title": "Forced to marry Maegor",
-        "date": "47 AC",
-        "order": 47000
-      },
-      {
-        "title": "Death",
-        "date": "48 AC",
-        "order": 48000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "aenys-targaryen-i",
-    "mother": "queen-alyssa-velaryon",
-    "spouse": "maegor-targaryen-i",
-    "siblings": [],
-    "children": [],
-    "mentor": "-",
-    "dragon": "Dreamfyre",
-    "traits": [
-      "Defiant",
-      "Proud",
-      "Dragonrider"
-    ],
-    "goals": [],
-    "relationships": {},
-    "quotes": [],
-    "id": "rhaena-targaryen-maegor",
-    "name": "Queen Rhaena Targaryen",
-    "house": "House Targaryen",
-    "title": "Princess and Black Bride",
-    "summary": "A daughter of Aenys I and Alyssa Velaryon whom Maegor forced into marriage as one of his Black Brides. She escaped him on Dreamfyre in 48 AC, taking Blackfyre to support Jaehaerys's claim.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "23 AC",
-        "order": 23000
-      },
-      {
-        "title": "Forced to marry Maegor",
-        "date": "47 AC",
-        "order": 47000
-      },
-      {
-        "title": "Escapes and joins Jaehaerys",
-        "date": "48 AC",
-        "order": 48000
-      },
-      {
-        "title": "Death",
-        "date": "73 AC",
-        "order": 73000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "aenys-targaryen-i",
-    "mother": "queen-alyssa-velaryon",
-    "spouse": "queen-alysanne-targaryen",
-    "siblings": [
-      "rhaena-targaryen-maegor"
-    ],
-    "children": [
-      "baelor-targaryen",
-      "aenys-targaryen-ii"
-    ],
-    "mentor": "-",
-    "dragon": "-",
-    "traits": [
-      "Wise",
-      "Patient",
-      "Conciliatory",
-      "Reforming"
-    ],
-    "goals": [
-      "Give the realm lasting peace and coherent laws"
-    ],
-    "relationships": {
-      "aenys-targaryen-i": "His father.",
-      "queen-alyssa-velaryon": "His mother and regent during his youth.",
-      "maegor-targaryen-i": "His uncle and predecessor.",
-      "queen-alysanne-targaryen": "His sister-wife, queen and closest partner in rule.",
-      "aenys-targaryen-ii": "His son and successor."
-      ,"baelor-targaryen": "His eldest son, who chose the Citadel at an uncertain date before Jaehaerys's death and was already committed to a maester's life when Aenys II succeeded."
-    },
-    "quotes": [],
-    "id": "jaehaerys-targaryen-i",
-    "name": "Jaehaerys I Targaryen",
-    "house": "House Targaryen",
-    "title": "The Conciliator, Fourth King of the Seven Kingdoms",
-    "reign": {
-      "from": "48 AC",
-      "to": "73 AC"
-    },
-    "summary": "Known as the Conciliator and the Wise, Jaehaerys restored stability after Maegor and ruled alongside Queen Alysanne. This chronicle's semi-canon line places his life in 11–73 AC and his reign in 48–73 AC, ending with the succession of his son Aenys II.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "11 AC",
-        "order": 11000
-      },
-      {
-        "title": "Crowned king",
-        "date": "48 AC",
-        "order": 48000
-      },
-      {
-        "title": "Aenys II is born",
-        "date": "28 AC (adjusted chronology)",
-        "order": 28000
-      },
-      {
-        "title": "Death",
-        "date": "73 AC",
-        "description": "Aenys II succeeds him on the Iron Throne.",
-        "order": 73000
-      }
-    ]
-  },
-  {
-    "hidden": true,
-    "nickname": "-",
-    "aliases": [],
-    "status": "Dead",
-    "height": "-",
-    "father": "aenys-targaryen-i",
-    "mother": "queen-alyssa-velaryon",
-    "spouse": "jaehaerys-targaryen-i",
-    "siblings": [
-      "rhaena-targaryen-maegor",
-      "jaehaerys-targaryen-i"
-    ],
-    "children": [
-      "baelor-targaryen",
-      "aenys-targaryen-ii"
-    ],
-    "mentor": "-",
-    "dragon": "Silverwing",
-    "traits": [
-      "Compassionate",
-      "Intelligent",
-      "Politically Engaged",
-      "Beloved"
-    ],
-    "goals": [
-      "Improve the lives and legal protections of the realm's people"
-    ],
-    "relationships": {
-      "jaehaerys-targaryen-i": "Her brother-husband and lifelong partner in rule.",
-      "aenys-targaryen-ii": "Her son and the heir who followed Jaehaerys."
-      ,"baelor-targaryen": "Her eldest son, whose scholarly nature drew him into the Citadel well before the crown passed from Jaehaerys to Aenys."
-    },
-    "quotes": [],
-    "id": "queen-alysanne-targaryen",
-    "name": "Queen Alysanne Targaryen",
-    "house": "House Targaryen",
-    "title": "The Good Queen",
-    "summary": "The Good Queen, sister-wife and most important political partner of Jaehaerys I. Canon remembers her for her intelligence, compassion, progresses through the realm and reforms on behalf of women and the smallfolk; her generation is moved earlier in this chronicle's adjusted succession.",
-    "personalTimeline": [
-      {
-        "title": "Born",
-        "date": "c. 13 AC (adjusted chronology)",
-        "order": 13000
-      },
-      {
-        "title": "Aenys II is born",
-        "date": "28 AC",
-        "order": 28000
-      },
-      {
-        "title": "Jaehaerys becomes king",
-        "date": "48 AC",
-        "order": 48000
-      },
-      {
-        "title": "Death",
-        "date": "c. 72 AC (adjusted chronology)",
-        "order": 72000
-      }
-    ]
   }
 ]

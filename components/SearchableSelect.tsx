@@ -37,6 +37,8 @@ export default function SearchableSelect({
   const rootRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
+  const pointerMovedRef = useRef(false);
 
   const selected = options.find((o) => o.value === value) ?? null;
 
@@ -157,6 +159,7 @@ export default function SearchableSelect({
           className={`${styles.panel} ${placement === "up" ? styles.panelUp : ""} dropdown-enter`}
           style={{ "--select-panel-max-height": `${panelHeight}px` } as CSSProperties}
           onKeyDown={handleKeyDown}
+          onTouchMove={(event) => event.stopPropagation()}
         >
           <input
             ref={searchRef}
@@ -170,6 +173,7 @@ export default function SearchableSelect({
             ref={listRef}
             className={`${styles.list} custom-scroll`}
             role="listbox"
+            onTouchMove={(event) => event.stopPropagation()}
           >
             {filtered.length === 0 && (
               <li className={styles.empty}>No matches</li>
@@ -184,9 +188,26 @@ export default function SearchableSelect({
                 } ${option.value === value ? styles.optionSelected : ""}`}
                 onMouseEnter={() => setActiveIndex(index)}
                 onPointerDown={(event) => {
-                  event.preventDefault();
+                  pointerStartRef.current = { x: event.clientX, y: event.clientY };
+                  pointerMovedRef.current = false;
+                }}
+                onPointerMove={(event) => {
+                  const start = pointerStartRef.current;
+                  if (!start) return;
+                  if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > 7) {
+                    pointerMovedRef.current = true;
+                  }
+                }}
+                onPointerUp={(event) => {
                   event.stopPropagation();
-                  commit(option);
+                  const shouldCommit = !pointerMovedRef.current;
+                  pointerStartRef.current = null;
+                  pointerMovedRef.current = false;
+                  if (shouldCommit) commit(option);
+                }}
+                onPointerCancel={() => {
+                  pointerStartRef.current = null;
+                  pointerMovedRef.current = false;
                 }}
               >
                 {option.label}
