@@ -16,7 +16,7 @@ export default function TargaryenLineage() {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [showEarlierLine, setShowEarlierLine] = useState(false);
   const [scale, setScale] = useState(1);
-  const [contentSize, setContentSize] = useState({ width: 1280, height: 620 });
+  const [contentSize, setContentSize] = useState({ width: 1420, height: 760 });
   const [didAutoFit, setDidAutoFit] = useState(false);
 
   useLayoutEffect(() => {
@@ -26,8 +26,8 @@ export default function TargaryenLineage() {
       if (!contentRef.current) return;
       const rect = contentRef.current.getBoundingClientRect();
       setContentSize({
-        width: Math.ceil(contentRef.current.scrollWidth || rect.width || 1280),
-        height: Math.ceil(contentRef.current.scrollHeight || rect.height || 620),
+        width: Math.ceil(contentRef.current.scrollWidth || rect.width || 1420),
+        height: Math.ceil(contentRef.current.scrollHeight || rect.height || 760),
       });
     };
 
@@ -48,7 +48,7 @@ export default function TargaryenLineage() {
     const fit = () => {
       const paddingAllowance = window.matchMedia("(max-width: 700px)").matches ? 20 : 56;
       const fitScale = Math.min(1, (viewport.clientWidth - paddingAllowance) / contentSize.width);
-      const nextScale = Number(Math.max(0.42, fitScale).toFixed(3));
+      const nextScale = Number(Math.max(0.34, fitScale).toFixed(3));
 
       setScale((current) => {
         if (!didAutoFit) return nextScale;
@@ -57,7 +57,8 @@ export default function TargaryenLineage() {
       });
 
       requestAnimationFrame(() => {
-        const targetLeft = Math.max(0, (contentSize.width * (!didAutoFit ? nextScale : scale) - viewport.clientWidth) / 2);
+        const appliedScale = !didAutoFit ? nextScale : scale;
+        const targetLeft = Math.max(0, (contentSize.width * appliedScale - viewport.clientWidth) / 2);
         viewport.scrollLeft = targetLeft;
         if (!showEarlierLine) viewport.scrollTop = 0;
       });
@@ -70,13 +71,14 @@ export default function TargaryenLineage() {
     return () => window.removeEventListener("resize", fit);
   }, [contentSize, didAutoFit, scale, showEarlierLine]);
 
-  const zoomOut = () => setScale((current) => Math.max(0.42, Number((current - 0.08).toFixed(2))));
+  const zoomOut = () => setScale((current) => Math.max(0.34, Number((current - 0.08).toFixed(2))));
   const zoomIn = () => setScale((current) => Math.min(1.3, Number((current + 0.08).toFixed(2))));
   const zoomReset = () => {
     const viewport = viewportRef.current;
     if (!viewport) return;
-    const fitScale = Math.min(1, (viewport.clientWidth - 40) / contentSize.width);
-    const nextScale = Number(Math.max(0.42, fitScale).toFixed(2));
+    const paddingAllowance = window.matchMedia("(max-width: 700px)").matches ? 20 : 40;
+    const fitScale = Math.min(1, (viewport.clientWidth - paddingAllowance) / contentSize.width);
+    const nextScale = Number(Math.max(0.34, fitScale).toFixed(2));
     setScale(nextScale);
     requestAnimationFrame(() => {
       viewport.scrollLeft = Math.max(0, (contentSize.width * nextScale - viewport.clientWidth) / 2);
@@ -108,6 +110,7 @@ export default function TargaryenLineage() {
           <button type="button" className={styles.targaryenHudButton} onClick={zoomOut} aria-label="Zoom out">−</button>
           <button type="button" className={styles.targaryenHudButton} onClick={zoomReset}>Fit</button>
           <button type="button" className={styles.targaryenHudButton} onClick={zoomIn} aria-label="Zoom in">+</button>
+          <span className={styles.targaryenZoomReadout}>{Math.round(scale * 100)}%</span>
         </div>
         <button
           type="button"
@@ -115,33 +118,58 @@ export default function TargaryenLineage() {
           onClick={() => setShowEarlierLine((current) => !current)}
           aria-expanded={showEarlierLine}
         >
-          <span className={styles.targaryenCollapseEyebrow}>Earlier line</span>
-          <span>{showEarlierLine ? "Hide the line before Aenys II" : "Show the line before Aenys II"}</span>
+          <span className={styles.targaryenCollapseEyebrow}>Dynasty</span>
+          <span>{showEarlierLine ? "Hide earlier kings" : "Show earlier kings"}</span>
         </button>
       </div>
 
       <div ref={viewportRef} className={styles.targaryenViewport} data-targaryen-viewport>
         <div className={styles.targaryenCanvas} style={canvasStyle}>
           <div ref={contentRef} className={styles.targaryenTree} style={contentStyle}>
-            {showEarlierLine && (
-              <div className={styles.earlierLinePanel}>
-                <span className={styles.earlierLineLabel}>Earlier Targaryen kings</span>
-                <PersonNode name="Jaehaerys Targaryen I" dimmed />
-                <div className={styles.earlierLineBranch}>
-                  <div className={styles.earlierSiblingNode}>
-                    <PersonNode id="baelor-targaryen" />
-                    <span className={styles.lineageNote}>Elder son</span>
-                  </div>
-                  <div className={styles.earlierLineContinuation} aria-hidden="true" />
+            {showEarlierLine ? (
+              <div className={styles.earlierDynastyPanel}>
+                <div className={styles.earlierDynastyStage}>
+                  <PersonNode id="aegon-targaryen-i" />
+                  <span className={styles.lineageNote}>The Conqueror</span>
                 </div>
-              </div>
-            )}
 
-            <div className={styles.targaryenRoot} data-targaryen-root>
-              <Union
-                a={{ id: "aenys-targaryen-ii" }}
-                b={{ id: "vhaemys-targaryen-elder" }}
-              />
+                <div className={styles.earlierDynastyStem} aria-hidden="true" />
+
+                <div className={styles.earlierDynastyKingsRow}>
+                  <div className={styles.earlierDynastyBranch}>
+                    <PersonNode id="aenys-targaryen-i" />
+                  </div>
+                  <div className={styles.earlierDynastyBranch}>
+                    <PersonNode id="maegor-targaryen-i" />
+                  </div>
+                </div>
+
+                <div className={styles.earlierDynastyJaehaerys}>
+                  <div className={styles.earlierDynastyJaehaerysStem} aria-hidden="true" />
+                  <Union
+                    a={{ id: "jaehaerys-targaryen-i" }}
+                    b={{ id: "alysanne-targaryen" }}
+                  />
+                </div>
+
+                <div className={styles.earlierDynastyTransitionStem} aria-hidden="true" />
+              </div>
+            ) : null}
+
+            <div className={styles.targaryenRootBand}>
+              <div className={styles.rootSiblingBranch}>
+                <PersonNode id="baelor-targaryen" />
+                <span className={styles.lineageNote}>Elder son</span>
+              </div>
+
+              <div className={styles.rootUnionBranch}>
+                <Union
+                  a={{ id: "aenys-targaryen-ii" }}
+                  b={{ id: "queen-vhaemys-targaryen" }}
+                />
+              </div>
+
+              <div className={styles.rootSiblingSpacer} aria-hidden="true" />
             </div>
 
             <div className={styles.targaryenMainStem} aria-hidden="true" />
@@ -167,6 +195,8 @@ export default function TargaryenLineage() {
                   b={{ id: "jaery-targaryen" }}
                 />
               </ChildBranch>
+
+              <div className={styles.branchSpacer} aria-hidden="true" />
             </div>
 
             <div className={styles.targaryenLowerGrid}>
@@ -175,10 +205,10 @@ export default function TargaryenLineage() {
                 <div className={`${styles.descendantRail} ${styles.descendantRailTwo}`}>
                   <div className={styles.descendantNode}><PersonNode id="visenya-targaryen" /></div>
                   <div className={styles.descendantNode}>
-                    <div className={styles.spouseBranch}>
-                      <PersonNode id="rhaella-targaryen" />
-                      <span className={styles.lineageNote}>Wed to Visenor</span>
-                    </div>
+                    <Union
+                      a={{ id: "rhaella-targaryen" }}
+                      b={{ id: "visenor-targaryen" }}
+                    />
                   </div>
                 </div>
               </div>

@@ -1,5 +1,3 @@
-// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\familytree\PersonNode.tsx
-
 import Link from "next/link";
 
 import { getCharacter } from "@/lib/characters";
@@ -13,6 +11,39 @@ type Props = {
   name?: string;
   dimmed?: boolean;
 };
+
+const ROMAN_NUMERAL = /^(?:I|II|III|IV|V|VI|VII|VIII|IX|X)$/i;
+
+function splitDisplayName(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return { primary: "Unknown", secondary: undefined as string | undefined };
+
+  const parts = trimmed.split(/\s+/);
+  if (parts.length <= 1) return { primary: trimmed, secondary: undefined as string | undefined };
+
+  if (parts.length >= 3 && ROMAN_NUMERAL.test(parts[parts.length - 1])) {
+    return {
+      primary: parts.slice(0, -2).join(" "),
+      secondary: parts.slice(-2).join(" "),
+    };
+  }
+
+  return {
+    primary: parts.slice(0, -1).join(" "),
+    secondary: parts[parts.length - 1],
+  };
+}
+
+function PersonName({ value }: { value: string }) {
+  const { primary, secondary } = splitDisplayName(value);
+
+  return (
+    <span className={styles.personName}>
+      <span className={styles.personNamePrimary}>{primary}</span>
+      {secondary ? <span className={styles.personNameSecondary}>{secondary}</span> : null}
+    </span>
+  );
+}
 
 export default function PersonNode({ id, name, dimmed }: Props) {
   const character = id ? getCharacter(id) : undefined;
@@ -31,9 +62,7 @@ export default function PersonNode({ id, name, dimmed }: Props) {
           fallbackGlyph="✦"
         />
 
-        <span className={styles.personName}>
-          {character.name}
-        </span>
+        <PersonName value={character.name} />
       </Link>
     );
   }
@@ -46,9 +75,7 @@ export default function PersonNode({ id, name, dimmed }: Props) {
     >
       <span className={styles.unlinkedAvatar}>✦</span>
 
-      <span className={styles.personName}>
-        {name ?? "Unknown"}
-      </span>
+      <PersonName value={name ?? "Unknown"} />
     </span>
   );
 }

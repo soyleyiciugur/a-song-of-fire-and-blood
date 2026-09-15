@@ -21,15 +21,15 @@ export default async function FamilyTree({ searchParams }: Props) {
         <h1 className={`${styles.heading} realm-page-title`}>Family Tree</h1>
 
         <p className={styles.subheading}>
-          The bloodlines behind the crown. Dashed nodes mark relatives who
-          appear only by name in the records.
+          The bloodlines behind the crown. Use the dynasty toggle in House
+          Targaryen to extend the royal line back to Aegon the Conqueror.
         </p>
 
         {/* HOUSE TARGARYEN */}
         <section id="house-targaryen" className={`${styles.house} ${styles.targaryenHouse}`}>
           <h2 className={styles.houseTitle}>House Targaryen</h2>
           <p className={styles.houseNote}>
-            One bloodline, followed without breaking the dynasty into separate generation panels.
+            One bloodline, followed as a continuous royal line from the Conqueror down to the present court.
           </p>
           <TargaryenLineage />
         </section>

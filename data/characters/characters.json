@@ -267,8 +267,8 @@
       "year": 26
     },
     "height": "174 cm",
-    "father": "Jaehaerys Targaryen I",
-    "mother": "-",
+    "father": "jaehaerys-targaryen-i",
+    "mother": "alysanne-targaryen",
     "spouse": "-",
     "siblings": [
       "aenys-targaryen-ii"
@@ -2465,6 +2465,342 @@
     "quotes": []
   },
   {
+    "id": "aegon-targaryen-i",
+    "name": "Aegon Targaryen I",
+    "nickname": "Aegon the Conqueror",
+    "aliases": [
+      "Aegon I"
+    ],
+    "house": "House Targaryen",
+    "title": "Former King of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": -27
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [
+      "aenys-targaryen-i",
+      "maegor-targaryen-i"
+    ],
+    "mentor": "-",
+    "dragon": "Balerion",
+    "traits": [
+      "Conquering",
+      "Resolute"
+    ],
+    "goals": [],
+    "relationships": {
+      "aenys-targaryen-i": "His son and eventual successor.",
+      "maegor-targaryen-i": "His other royal son, born to Visenya.",
+      "rhaenys-targaryen-i": "One of his sister-wives.",
+      "visenya-targaryen-i": "One of his sister-wives."
+    },
+    "summary": "The Conqueror who forged the Seven Kingdoms into one realm. In this semicanon line he precedes the house line that eventually leads to Aenys II and Baelenys.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 37
+    }
+  },
+  {
+    "id": "rhaenys-targaryen-i",
+    "name": "Rhaenys Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Former Queen of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": -25
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "aegon-targaryen-i",
+    "siblings": [
+      "visenya-targaryen-i"
+    ],
+    "children": [
+      "aenys-targaryen-i"
+    ],
+    "mentor": "-",
+    "dragon": "Meraxes",
+    "traits": [
+      "Charming"
+    ],
+    "goals": [],
+    "relationships": {
+      "aegon-targaryen-i": "Her brother and husband.",
+      "aenys-targaryen-i": "Her son."
+    },
+    "summary": "A sister-wife of Aegon the Conqueror and mother of Aenys I.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 10
+    }
+  },
+  {
+    "id": "visenya-targaryen-i",
+    "name": "Visenya Targaryen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Former Queen of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": -29
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "aegon-targaryen-i",
+    "siblings": [
+      "rhaenys-targaryen-i"
+    ],
+    "children": [
+      "maegor-targaryen-i"
+    ],
+    "mentor": "-",
+    "dragon": "Vhagar",
+    "traits": [
+      "Formidable"
+    ],
+    "goals": [],
+    "relationships": {
+      "aegon-targaryen-i": "Her brother and husband.",
+      "maegor-targaryen-i": "Her son."
+    },
+    "summary": "A sister-wife of Aegon the Conqueror and mother of Maegor I.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 44
+    }
+  },
+  {
+    "id": "aenys-targaryen-i",
+    "name": "Aenys Targaryen I",
+    "nickname": "-",
+    "aliases": [
+      "Aenys I"
+    ],
+    "house": "House Targaryen",
+    "title": "Former King of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": -4
+    },
+    "height": "-",
+    "father": "aegon-targaryen-i",
+    "mother": "rhaenys-targaryen-i",
+    "spouse": "alyssa-velaryon-elder",
+    "siblings": [
+      "maegor-targaryen-i"
+    ],
+    "children": [
+      "jaehaerys-targaryen-i"
+    ],
+    "mentor": "-",
+    "dragon": "Quicksilver",
+    "traits": [
+      "Gentle"
+    ],
+    "goals": [],
+    "relationships": {
+      "jaehaerys-targaryen-i": "His son and dynastic successor.",
+      "maegor-targaryen-i": "His half-brother and successor in name before the realm passed on.",
+      "alyssa-velaryon-elder": "His queen and wife."
+    },
+    "summary": "The son of Aegon the Conqueror whose line eventually leads to Jaehaerys I and, generations later, Aenys II.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 42
+    }
+  },
+  {
+    "id": "alyssa-velaryon-elder",
+    "name": "Alyssa Velaryon",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Velaryon",
+    "title": "Former Queen of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": 7
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "aenys-targaryen-i",
+    "siblings": [],
+    "children": [
+      "jaehaerys-targaryen-i"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Capable"
+    ],
+    "goals": [],
+    "relationships": {
+      "aenys-targaryen-i": "Her husband and king.",
+      "jaehaerys-targaryen-i": "Her son."
+    },
+    "summary": "The Queen Alyssa Velaryon of the earlier semicanon line, mother of Jaehaerys I.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 50
+    }
+  },
+  {
+    "id": "maegor-targaryen-i",
+    "name": "Maegor Targaryen I",
+    "nickname": "Maegor the Cruel",
+    "aliases": [
+      "Maegor I"
+    ],
+    "house": "House Targaryen",
+    "title": "Former King of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": 12
+    },
+    "height": "-",
+    "father": "aegon-targaryen-i",
+    "mother": "visenya-targaryen-i",
+    "spouse": "-",
+    "siblings": [
+      "aenys-targaryen-i"
+    ],
+    "children": [],
+    "mentor": "-",
+    "dragon": "Balerion",
+    "traits": [
+      "Ruthless"
+    ],
+    "goals": [],
+    "relationships": {
+      "aenys-targaryen-i": "His half-brother and predecessor.",
+      "jaehaerys-targaryen-i": "The nephew whose succession followed the end of Maegor's reign."
+    },
+    "summary": "The harsh king between Aenys I and Jaehaerys I in the earlier semicanon dynasty line.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 48
+    }
+  },
+  {
+    "id": "jaehaerys-targaryen-i",
+    "name": "Jaehaerys Targaryen I",
+    "nickname": "The Conciliator",
+    "aliases": [
+      "Jaehaerys I"
+    ],
+    "house": "House Targaryen",
+    "title": "Former King of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": 11
+    },
+    "height": "-",
+    "father": "aenys-targaryen-i",
+    "mother": "alyssa-velaryon-elder",
+    "spouse": "alysanne-targaryen",
+    "siblings": [],
+    "children": [
+      "baelor-targaryen",
+      "aenys-targaryen-ii"
+    ],
+    "mentor": "-",
+    "dragon": "Vermithor",
+    "traits": [
+      "Patient",
+      "Pragmatic"
+    ],
+    "goals": [],
+    "relationships": {
+      "alysanne-targaryen": "His queen and wife.",
+      "baelor-targaryen": "His elder son.",
+      "aenys-targaryen-ii": "His younger son and eventual royal successor in this semicanon line."
+    },
+    "summary": "In the semicanon royal timeline, Jaehaerys I and Alysanne anchor the immediate line before Baelor and Aenys II.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 73
+    }
+  },
+  {
+    "id": "alysanne-targaryen",
+    "name": "Alysanne Targaryen",
+    "nickname": "Good Queen Alysanne",
+    "aliases": [],
+    "house": "House Targaryen",
+    "title": "Former Queen of the Seven Kingdoms",
+    "status": "Dead",
+    "nameday": {
+      "day": 1,
+      "moon": 1,
+      "year": 13
+    },
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "jaehaerys-targaryen-i",
+    "siblings": [],
+    "children": [
+      "baelor-targaryen",
+      "aenys-targaryen-ii"
+    ],
+    "mentor": "-",
+    "dragon": "Silverwing",
+    "traits": [
+      "Wise"
+    ],
+    "goals": [],
+    "relationships": {
+      "jaehaerys-targaryen-i": "Her king and husband.",
+      "baelor-targaryen": "Her elder son.",
+      "aenys-targaryen-ii": "Her younger son in the semicanon line."
+    },
+    "summary": "Good Queen Alysanne, kept here in the semicanon line as the wife of Jaehaerys I and the mother of Baelor and Aenys II.",
+    "quotes": [],
+    "death": {
+      "day": 1,
+      "moon": 1,
+      "year": 74
+    }
+  },
+  {
     "id": "aenys-targaryen-ii",
     "name": "Aenys Targaryen II",
     "nickname": "-",
@@ -2478,8 +2814,8 @@
       "year": 28
     },
     "height": "181 cm",
-    "father": "Jaehaerys Targaryen I",
-    "mother": "-",
+    "father": "jaehaerys-targaryen-i",
+    "mother": "alysanne-targaryen",
     "spouse": "queen-vhaemys-targaryen",
     "siblings": [
       "baelor-targaryen"
@@ -2514,7 +2850,7 @@
   },
   {
     "id": "queen-vhaemys-targaryen",
-    "name": "Queen Vhaemys Targaryen",
+    "name": "Vhaemys Targaryen",
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
