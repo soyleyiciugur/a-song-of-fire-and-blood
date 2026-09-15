@@ -181,11 +181,11 @@
     "nameday": {
       "day": 8,
       "moon": 11,
-      "year": 40
+      "year": 44
     },
     "height": "185 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "mother": "queen-vhaemys-targaryen",
     "spouse": "jaery-targaryen",
     "siblings": [
       "malaenar-targaryen",
@@ -246,7 +246,7 @@
       "tion-lannister": "He values Tion's usefulness with coin far more than his advice on war or royal pride. Baelenys has repeatedly cut him short when the Master of Coin's caution clashes with what the King wants done.",
       "vahaemon-targaryen": "His exiled brother, now believed to be sheltering in the Free Cities with a dragon of his own — a fact that has consumed the King's council and his paranoia in equal measure.",
       "vhaemys-targaryen": "Comforts Vhaemys after her terrifying dream and later agrees with Jace that her repeating visions may mark her as a Dreamer. He calls her the most precious thing the family possesses and orders Jace to stay close to her.",
-      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
+      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen. The violence and unhappiness within his parents' marriage remained one of the old family wounds Baelenys later argued about with Malaenar.",
       "visenor-targaryen": "Formerly his most trusted heir. That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
     },
     "summary": "Baelenys passes the secret of Aegon's dream—learned from Jaehaerys—to Jacaelon and rejects Gaelor as his successor. He intends to name Jace heir when the present troubles are settled, framing the crown as a final cruelty and a duty to preserve the realm for the prince that was promised. After Vhaemys wakes terrified by a dream, he accepts that she may possess the rare gift of a Dreamer and orders Jace to investigate the great white dragon in her visions while guarding her closely.",
@@ -264,7 +264,7 @@
     "nameday": {
       "day": 5,
       "moon": 4,
-      "year": 32
+      "year": 26
     },
     "height": "174 cm",
     "father": "Jaehaerys Targaryen I",
@@ -907,12 +907,12 @@
     "status": "Alive",
     "nameday": {
       "day": 4,
-      "moon": 8,
-      "year": 38
+      "moon": 12,
+      "year": 43
     },
     "height": "177 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "mother": "queen-vhaemys-targaryen",
     "spouse": "alysa-targaryen",
     "siblings": [
       "baelenys-targaryen",
@@ -940,7 +940,7 @@
       "gaelor-targaryen": "He sees in Gaelor another young Targaryen being pulled toward the same dynastic wounds that scarred Malaenar's own generation. The Dragonstone nameday brought the prince into the middle of arguments over succession, Vahaemon, and Baelenys's old violence.",
       "tansy-riverside": "His companion of two years, who organized the nameday feast that summoned the royal family without telling him first; he was heavily drunk throughout and seemed more amused than alarmed by the chaos that followed.",
       "vahaemon-targaryen": "His other brother, whose treason and exile still cast a long shadow over the family name.",
-      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
+      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
     },
     "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar renounced his own claim to the Iron Throne due to an infirmity and has held Dragonstone quietly and competently ever since. Standing between a brother who wears the crown and one who wears the name 'Traitor,' Malaenar's unremarkable steadiness has become its own kind of virtue — he is the one Targaryen sibling of his generation nobody has ever had reason to distrust.",
     "quotes": [],
@@ -1568,11 +1568,11 @@
     "nameday": {
       "day": 12,
       "moon": 2,
-      "year": 44
+      "year": 46
     },
     "height": "180 cm",
     "father": "aenys-targaryen-ii",
-    "mother": "vhaemys-targaryen-elder",
+    "mother": "queen-vhaemys-targaryen",
     "spouse": "naela-targaryen",
     "siblings": [
       "malaenar-targaryen",
@@ -1605,7 +1605,7 @@
       "myles-mooton": "One of the knights who pulled him back from Maelwing during the disastrous Cloudpass incident on his nameday in 56 AC.",
       "naela-targaryen": "His wife; her current whereabouts and condition are unknown.",
       "rhaella-targaryen": "His daughter in exile; her secret letters to her siblings reignited the very suspicion that nearly destroyed her marriage, though the warning was never addressed to him.",
-      "vhaemys-targaryen-elder": "His mother, the late Queen Vhaemys Targaryen.",
+      "queen-vhaemys-targaryen": "His mother, the late Queen Vhaemys Targaryen.",
       "visenor-targaryen": "His nephew Visenor now treats Vahaemon's name as both a family danger and a political weapon. Without Vahaemon's knowledge, Visenor has considered forging evidence of an alliance between him and the Gardeners to redirect the Crown's fury.",
       "visenya-targaryen": "His other daughter, who is apparently neither in exile nor in Essos — but in King's Landing, walking freely through Flea Bottom with Dark Sister at her hip."
     },
@@ -2475,12 +2475,12 @@
     "nameday": {
       "day": 15,
       "moon": 2,
-      "year": 15
+      "year": 28
     },
     "height": "181 cm",
     "father": "Jaehaerys Targaryen I",
     "mother": "-",
-    "spouse": "vhaemys-targaryen-elder",
+    "spouse": "queen-vhaemys-targaryen",
     "siblings": [
       "baelor-targaryen"
     ],
@@ -2501,7 +2501,7 @@
       "edwyle-stark": "The Lord of Winterfell was an important ally who aided Aenys in ways that remained significant to House Targaryen long after both men's deaths. The exact nature of Edwyle's service has not yet been revealed.",
       "malaenar-targaryen": "His eldest son.",
       "vahaemon-targaryen": "His youngest son.",
-      "vhaemys-targaryen-elder": "His queen and wife.",
+      "queen-vhaemys-targaryen": "His queen and wife.",
       "baelor-targaryen": "His elder brother, who relinquished his own claim and entered the Citadel, leaving Aenys to inherit the Iron Throne."
     },
     "summary": "The late King Aenys Targaryen II, father of Malaenar, Baelenys, and Vahaemon. His reign and treatment of his family left wounds that still shape the royal house. Among the great lords who supported him was Edwyle Stark of Winterfell, whose service to Aenys remained important enough that Baelenys still remembered the debt decades later.",
@@ -2509,12 +2509,12 @@
     "death": {
       "day": 20,
       "moon": 6,
-      "year": 79
+      "year": 81
     }
   },
   {
-    "id": "vhaemys-targaryen-elder",
-    "name": "Vhaemys Targaryen",
+    "id": "queen-vhaemys-targaryen",
+    "name": "Queen Vhaemys Targaryen",
     "nickname": "-",
     "aliases": [],
     "house": "House Targaryen",
@@ -2523,7 +2523,7 @@
     "nameday": {
       "day": 9,
       "moon": 6,
-      "year": 18
+      "year": 29
     },
     "height": "-",
     "father": "-",
@@ -2550,9 +2550,9 @@
     "summary": "The late Queen Vhaemys Targaryen, wife of Aenys II and mother of Malaenar, Baelenys, and Vahaemon. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
     "quotes": [],
     "death": {
-      "day": 4,
-      "moon": 10,
-      "year": 80
+      "day": 20,
+      "moon": 6,
+      "year": 82
     }
   },
   {
@@ -2741,12 +2741,12 @@
     "relationships": {
       "baelenys-targaryen": "A famed opponent from Baelenys's Iron Islands campaigns; their clash survived in royal family stories as 'the Dragon Breath vs. Harrik the Drowned Servant.'"
     },
-    "summary": "Harrik 'Drowned Servant' Greyjoy, a gigantic Ironborn warrior remembered as one of Baelenys Targaryen's most famous opponents in the Iron Islands. Harrik died in 77 AC at the age of forty-four, when Baelenys was thirty-six.",
+    "summary": "Harrik 'Drowned Servant' Greyjoy, a gigantic Ironborn warrior remembered as one of Baelenys Targaryen's most famous opponents in the Iron Islands. Harrik died in 80 AC at the age of forty-seven, when Baelenys was thirty-five.",
     "quotes": [],
     "death": {
       "day": 17,
       "moon": 6,
-      "year": 77
+      "year": 80
     }
   },
   {
