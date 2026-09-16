@@ -2871,7 +2871,9 @@
         "Uses sitcoms to unwind, doesn't paste a catchphrase into every social scene."
       ],
       "interests": "Friends, cafes, work lunches, decorating",
-      "fandoms": ["friends"],
+      "fandoms": [
+        "friends"
+      ],
       "displayName": "Ada",
       "current": {
         "label": "Watching",
@@ -2891,7 +2893,9 @@
         "Office analogies only when a scene actually resembles workplace nonsense."
       ],
       "interests": "The Office, spreadsheets, walks, takeaway lunches",
-      "fandoms": ["the-office"],
+      "fandoms": [
+        "the-office"
+      ],
       "displayName": "jamie",
       "pronouns": "he/they",
       "current": {
@@ -14610,84 +14614,12 @@
       "publishedAt": "2026-09-14T18:48:29.000Z"
     },
     {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-comment-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "the dream department has apparently started taking royal requests",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
       "id": "gallery-cursed-raven-comment-1",
       "entryId": "gallery-cursed-raven",
       "authorId": "regular-fandom-horror",
       "parentId": null,
       "body": "The cursed part is the eye contact plus the anatomy refusing to choose a species.",
       "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-comment-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "the childhood photo is doing dangerous amounts of PR for my client",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-comment-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "cast-vhaemys-targaryen",
-      "parentId": null,
-      "body": "I had cake. It was pocket cake. There should be more.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-comment-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-food",
-      "parentId": "gallery-vhaemys-pocket-cake-comment-1",
-      "body": "A pocket cake is just a portable dessert strategy and I support it.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-comment-1",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "Baelenys explained Aegon's Dream, but no official heir announcement means no celebrations. The trauma protocol is correct.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-comment-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "This is exactly the kind of face that appears in a dream and leaves you checking the room after you wake up.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-comment-3",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-m",
-      "parentId": "gallery-aenys-ii-bu-adami-ruyanizda-comment-2",
-      "body": "negative filter said have you seen this man and i said unfortunately yes",
-      "publishedAt": "2026-09-16T18:40:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-comment-4",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "The joke works because the caption is frightened before the image has even explained itself.",
-      "publishedAt": "2026-09-16T19:40:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-comment-5",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-stephen-king",
-      "parentId": null,
-      "body": "A cursed missing-person poster for someone who is already in the history books.",
-      "publishedAt": "2026-09-16T23:40:00.000Z"
     },
     {
       "id": "gallery-cursed-raven-comment-2",
@@ -14722,556 +14654,12 @@
       "publishedAt": "2026-09-16T23:40:00.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-comment-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "The save file generated a baby named Gaelor and accidentally made it look like a prequel nobody asked for.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-comment-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-l",
-      "parentId": "gallery-prince-gaelor-baby-ck3-agot-comment-2",
-      "body": "Not canon. Canon to the save file, perhaps, but not to this world. That distinction is the joke.",
-      "publishedAt": "2026-09-16T18:40:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-comment-4",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "I am requesting that the record reflect this is absolutely my client's canon baby portrait.",
-      "publishedAt": "2026-09-16T19:40:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-comment-5",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-anti",
-      "parentId": null,
-      "body": "even the alternate universe assigned him a reputation before he could walk",
-      "publishedAt": "2026-09-16T23:40:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-comment-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "The pocket cake is funny because it is a tiny ordinary pleasure inside an enormous political chapter.",
-      "publishedAt": "2026-09-16T18:40:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-comment-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "pocket cake has more stable coalition support than several princes",
-      "publishedAt": "2026-09-16T19:40:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-comment-5",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-poll",
-      "parentId": "gallery-vhaemys-pocket-cake-comment-4",
-      "body": "official ranking: cake first, constitutional crisis second",
-      "publishedAt": "2026-09-16T23:40:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-comment-2",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "1-0 at 89 minutes is not a trophy. Flea Bottom has learned its lesson.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-comment-3",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-legal",
-      "parentId": "gallery-jace-heir-olunca-comment-1",
-      "body": "Intent to designate is politically significant, but it is not the same instrument as a public designation.",
-      "publishedAt": "2026-09-16T18:40:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-comment-4",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "the heir announcement has entered stoppage time and nobody is doing a knee slide",
-      "publishedAt": "2026-09-16T19:40:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-comment-5",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "poll update: 100% of voters support celebrating after the paperwork exists",
-      "publishedAt": "2026-09-16T23:40:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-comment-tail",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "three days later and i still do not want that man appearing in my dreams",
-      "publishedAt": "2026-09-19T18:10:00.000Z"
-    },
-    {
       "id": "gallery-cursed-raven-comment-tail",
       "entryId": "gallery-cursed-raven",
       "authorId": "regular-lurk",
       "parentId": "gallery-cursed-raven-comment-1",
       "body": "I have recovered enough to look at the thumbnail again. This was a mistake.",
       "publishedAt": "2026-09-19T18:40:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-comment-tail",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-g",
-      "parentId": "gallery-prince-gaelor-baby-ck3-agot-comment-3",
-      "body": "The baby remains non-canon. The resemblance remains legally inconvenient.",
-      "publishedAt": "2026-09-19T19:10:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-comment-tail",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-food",
-      "parentId": "gallery-vhaemys-pocket-cake-comment-5",
-      "body": "The pocket-cake coalition has reconvened. It remains the only stable institution.",
-      "publishedAt": "2026-09-19T19:40:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-comment-tail",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-reformed",
-      "parentId": "gallery-jace-heir-olunca-comment-5",
-      "body": "Three days later: still waiting for the proclamation, still not uncorking anything.",
-      "publishedAt": "2026-09-19T20:10:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "I keep coming back to this because Aenys.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "The part that worked for me was the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Aenys.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-3",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-4",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-food",
-      "parentId": null,
-      "body": "I would not call it proof, but Aenys.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-5",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the family history is doing more work than the caption admits, and I prefer that for now.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-6",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Aenys.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-7",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-8",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Aenys.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-9",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-0-10",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "I do not need an answer yet. Aenys.",
-      "publishedAt": "2026-09-16T18:00:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the family history is doing more work than the caption admits. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "I would not call it proof, but Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-history",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the family history is doing more work than the caption admits, and I prefer that for now. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-3",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:03.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-4",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the family history is doing more work than the caption admits. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:04.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-5",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-6",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-doomer",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the family history is doing more work than the caption admits. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-7",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-stephen-king",
-      "parentId": null,
-      "body": "I do not need an answer yet. Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:07:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-8",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-middle",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-16T18:07:03.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-9",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-reformed",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Aenys.",
-      "publishedAt": "2026-09-16T18:07:04.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-10",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "My current read is the family history is doing more work than the caption admits, but I expect the thread to change my mind.",
-      "publishedAt": "2026-09-16T18:07:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-1-11",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "The strongest version of the argument is Aenys.",
-      "publishedAt": "2026-09-16T18:07:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-reformed",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Aenys. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:43:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the family history is doing more work than the caption admits. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:43:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Aenys. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:43:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-3",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the family history is doing more work than the caption admits. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:43:03.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-4",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "I do not need an answer yet. Aenys. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:43:04.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-5",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-selective",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because the family history is doing more work than the caption admits. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:43:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-6",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-north",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:43:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-7",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-supply",
-      "parentId": null,
-      "body": "My current read is the family history is doing more work than the caption admits, but I expect the thread to change my mind. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:43:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-2-8",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-elder",
-      "parentId": null,
-      "body": "The strongest version of the argument is Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:43:03.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-dune",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the family history is doing more work than the caption admits. That is my read for now.",
-      "publishedAt": "2026-09-16T20:47:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-nolan",
-      "parentId": null,
-      "body": "I do not need an answer yet. Aenys. That is my read for now.",
-      "publishedAt": "2026-09-16T20:47:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because the family history is doing more work than the caption admits. I am still sitting with that.",
-      "publishedAt": "2026-09-16T20:47:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-3",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-anti",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Aenys. I am still sitting with that.",
-      "publishedAt": "2026-09-16T20:47:03.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-4",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "My current read is the family history is doing more work than the caption admits, but I expect the thread to change my mind. I am still sitting with that.",
-      "publishedAt": "2026-09-16T20:47:04.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-5",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "The strongest version of the argument is Aenys. I am still sitting with that.",
-      "publishedAt": "2026-09-16T20:47:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-3-6",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-16T20:47:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-4-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-food",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Aenys. That is my read for now.",
-      "publishedAt": "2026-09-16T22:07:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-4-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "My current read is the family history is doing more work than the caption admits, but I expect the thread to change my mind. That is my read for now.",
-      "publishedAt": "2026-09-16T22:07:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-4-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "The strongest version of the argument is Aenys. That is my read for now.",
-      "publishedAt": "2026-09-16T22:07:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-5-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. the family history is doing more work than the caption admits. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-17T02:41:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-5-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but Aenys.",
-      "publishedAt": "2026-09-17T02:41:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-5-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-doomer",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-17T02:41:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-0",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "I am not ready to call this a pattern, although Aenys.",
-      "publishedAt": "2026-09-18T06:18:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-1",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-selective",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the family history is doing more work than the caption admits.",
-      "publishedAt": "2026-09-18T06:18:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-2",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-north",
-      "parentId": null,
-      "body": "I keep coming back to this because Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-18T06:18:02.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-3",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-supply",
-      "parentId": null,
-      "body": "The part that worked for me was the family history is doing more work than the caption admits. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-18T06:18:03.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-4",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-elder",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Aenys. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-18T06:18:04.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-5",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-dune",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the family history is doing more work than the caption admits. I am still sitting with that.",
-      "publishedAt": "2026-09-18T06:18:00.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-6",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-nolan",
-      "parentId": null,
-      "body": "I would not call it proof, but Aenys. I am still sitting with that.",
-      "publishedAt": "2026-09-18T06:18:01.000Z"
-    },
-    {
-      "id": "gallery-aenys-ii-bu-adami-ruyanizda-expanded-6-7",
-      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the family history is doing more work than the caption admits, and I prefer that for now. I am still sitting with that.",
-      "publishedAt": "2026-09-18T06:18:02.000Z"
     },
     {
       "id": "gallery-cursed-raven-expanded-0-0",
@@ -15714,1308 +15102,1844 @@
       "publishedAt": "2026-09-18T06:36:03.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "id": "gallery-jace-heir-olunca-rewrite-01",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Baelenys told Jace about Aegon's Dream, but until somebody says heir out loud in front of witnesses I am not celebrating anything.",
+      "publishedAt": "2026-09-16T18:30:00.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-02",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Fenerbahçe trauma has reached the Red Keep. no trophy lift before the final whistle, no heir party before the proclamation",
+      "publishedAt": "2026-09-16T18:30:01.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-03",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "the edit understanding that 'basically heir' and 'officially heir' are two completely different emotional states",
+      "publishedAt": "2026-09-16T18:30:02.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-04",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "Aegon's Dream revealed. succession implication detected. celebrations postponed pending paperwork.",
+      "publishedAt": "2026-09-16T18:30:03.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-05",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "one good thing happened to Jace and the fandom immediately checked the clock for stoppage time",
+      "publishedAt": "2026-09-16T18:30:04.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-06",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "I support the policy of refusing joy until the crown has filed the relevant documents.",
+      "publishedAt": "2026-09-16T18:30:05.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-07",
+      "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-g",
       "parentId": null,
-      "body": "I do not need an answer yet. Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
+      "body": "Baelenys can whisper every prophecy in Valyria. I need a herald and witnesses before the champagne comes out.",
+      "publishedAt": "2026-09-16T18:30:06.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-history",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "My current read is the joke only works because the resemblance is funny without turning the alternate save into story canon, but I expect the thread to change my mind.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-4",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "The strongest version of the argument is Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-5",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-doomer",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-6",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-stephen-king",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-7",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-middle",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-8",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "id": "gallery-jace-heir-olunca-rewrite-08",
+      "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-reformed",
       "parentId": null,
-      "body": "I am not ready to call this a pattern, although Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
+      "body": "jacejpeg has entered the 'do not unclench yet' phase of succession law",
+      "publishedAt": "2026-09-16T18:30:07.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-9",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-10",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "I keep coming back to this because Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-11",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "The part that worked for me was the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-0-12",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Gaelor.",
-      "publishedAt": "2026-09-16T18:02:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "My current read is the joke only works because the resemblance is funny without turning the alternate save into story canon, but I expect the thread to change my mind. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "The strongest version of the argument is Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:03.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-4",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-selective",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:04.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-5",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-north",
-      "parentId": null,
-      "body": "I am not ready to call this a pattern, although Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-6",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-supply",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-7",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-elder",
-      "parentId": null,
-      "body": "I keep coming back to this because Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-1-8",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-dune",
-      "parentId": null,
-      "body": "The part that worked for me was the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:15:03.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-nolan",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but Gaelor. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:53:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: the joke only works because the resemblance is funny without turning the alternate save into story canon. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:53:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-anti",
-      "parentId": null,
-      "body": "I am not ready to call this a pattern, although Gaelor. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:53:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the joke only works because the resemblance is funny without turning the alternate save into story canon. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:53:03.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-4",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "I keep coming back to this because Gaelor. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:53:04.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-5",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "The part that worked for me was the joke only works because the resemblance is funny without turning the alternate save into story canon. I am still sitting with that.",
-      "publishedAt": "2026-09-16T18:53:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-6",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T18:53:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-7",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:53:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-8",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-food",
-      "parentId": null,
-      "body": "I would not call it proof, but Gaelor.",
-      "publishedAt": "2026-09-16T18:53:03.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-9",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the joke only works because the resemblance is funny without turning the alternate save into story canon, and I prefer that for now.",
-      "publishedAt": "2026-09-16T18:53:04.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-10",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Gaelor.",
-      "publishedAt": "2026-09-16T18:53:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-11",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-16T18:53:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-2-12",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Gaelor.",
-      "publishedAt": "2026-09-16T18:53:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the joke only works because the resemblance is funny without turning the alternate save into story canon. That is my read for now.",
-      "publishedAt": "2026-09-16T20:59:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "I keep coming back to this because Gaelor. That is my read for now.",
-      "publishedAt": "2026-09-16T20:59:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "The part that worked for me was the joke only works because the resemblance is funny without turning the alternate save into story canon. That is my read for now.",
-      "publishedAt": "2026-09-16T20:59:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Gaelor. I am still sitting with that.",
-      "publishedAt": "2026-09-16T20:59:03.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-4",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T20:59:04.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-5",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "I would not call it proof, but Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T20:59:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-6",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "id": "gallery-jace-heir-olunca-rewrite-09",
+      "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-fandom-history",
       "parentId": null,
-      "body": "A less dramatic reading is probably the joke only works because the resemblance is funny without turning the alternate save into story canon, and I prefer that for now. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T20:59:01.000Z"
+      "body": "The football parallel is painfully exact: everyone can see what the result should be and nobody trusts the result until it is official.",
+      "publishedAt": "2026-09-16T18:30:08.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-3-7",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-16T20:59:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-4-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Gaelor. That is my read for now.",
-      "publishedAt": "2026-09-16T22:21:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-4-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "id": "gallery-jace-heir-olunca-rewrite-10",
+      "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-doomer",
       "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the joke only works because the resemblance is funny without turning the alternate save into story canon. I am still sitting with that.",
-      "publishedAt": "2026-09-16T22:21:01.000Z"
+      "body": "No knee slide. No fireworks. No 'HEIR' edit. We have suffered before.",
+      "publishedAt": "2026-09-16T18:30:09.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-5-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-selective",
+      "id": "gallery-jace-heir-olunca-rewrite-11",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-l",
       "parentId": null,
-      "body": "A less dramatic reading is probably the joke only works because the resemblance is funny without turning the alternate save into story canon, and I prefer that for now. I am still sitting with that.",
-      "publishedAt": "2026-09-17T02:57:00.000Z"
+      "body": "Conditional succession is not public designation. The meme is legally annoyingly correct.",
+      "publishedAt": "2026-09-16T18:49:00.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-5-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-north",
+      "id": "gallery-jace-heir-olunca-rewrite-12",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-k",
       "parentId": null,
-      "body": "The replies are making me rethink it. Gaelor. I am still sitting with that.",
-      "publishedAt": "2026-09-17T02:57:01.000Z"
+      "body": "Imagine being told the secret that justifies the dynasty and still thinking 'yeah but did he update the succession page'.",
+      "publishedAt": "2026-09-16T18:56:01.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-5-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-supply",
+      "id": "gallery-jace-heir-olunca-rewrite-13",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-odds",
       "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-17T02:57:02.000Z"
+      "body": "This family has trained its audience to treat good news as a threat with better lighting.",
+      "publishedAt": "2026-09-16T18:39:02.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-5-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-elder",
+      "id": "gallery-jace-heir-olunca-rewrite-14",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-room-critic",
       "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-17T02:57:03.000Z"
+      "body": "the funniest part is Jace would probably also refuse to celebrate because he would assume Baelenys has a second trap ready",
+      "publishedAt": "2026-09-16T18:42:03.000Z"
     },
     {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-6-0",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Gaelor. I am still sitting with that.",
-      "publishedAt": "2026-09-18T06:36:00.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-6-1",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the joke only works because the resemblance is funny without turning the alternate save into story canon.",
-      "publishedAt": "2026-09-18T06:36:01.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-6-2",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "I do not need an answer yet. Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-18T06:36:02.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-6-3",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because the joke only works because the resemblance is funny without turning the alternate save into story canon. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-18T06:36:03.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-6-4",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-food",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Gaelor. I am curious whether anyone else read it that way.",
-      "publishedAt": "2026-09-18T06:36:04.000Z"
-    },
-    {
-      "id": "gallery-prince-gaelor-baby-ck3-agot-expanded-6-5",
-      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "My current read is the joke only works because the resemblance is funny without turning the alternate save into story canon, but I expect the thread to change my mind. I am still sitting with that.",
-      "publishedAt": "2026-09-18T06:36:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-doomer",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but the pocket cake.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-stephen-king",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
+      "id": "gallery-jace-heir-olunca-rewrite-15",
+      "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-middle",
       "parentId": null,
-      "body": "I am not ready to call this a pattern, although the pocket cake.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
+      "body": "I have seen enough late equalizers. Wake me when the proclamation survives the night.",
+      "publishedAt": "2026-09-16T18:54:04.000Z"
     },
     {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
+      "id": "gallery-jace-heir-olunca-rewrite-16",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "The dream is ancient. The trust issues are extremely current.",
+      "publishedAt": "2026-09-16T18:32:05.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-17",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "He got the lore dump of a lifetime and the response is basically VAR check ongoing.",
+      "publishedAt": "2026-09-16T18:59:06.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-18",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "Until the crown says it with its whole chest, this is merely heir-adjacent content.",
+      "publishedAt": "2026-09-16T18:46:07.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-19",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "Aegon dreamed of ice and fire. Jace fans dream of a signed succession order.",
+      "publishedAt": "2026-09-16T18:58:08.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-20",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "This is not pessimism. This is match experience.",
+      "publishedAt": "2026-09-16T18:43:09.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-21",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "Baelenys told Jace about Aegon's Dream, but until somebody says heir out loud in front of witnesses I am not celebrating anything. genuinely.",
+      "publishedAt": "2026-09-16T19:19:00.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-22",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "Fenerbahçe trauma has reached the Red Keep. no trophy lift before the final whistle, no heir party before the proclamation this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:45:01.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-23",
+      "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-reformed",
       "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
+      "body": "the edit understanding that 'basically heir' and 'officially heir' are two completely different emotional states I hate that this works.",
+      "publishedAt": "2026-09-16T20:21:02.000Z"
     },
     {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-5",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "I keep coming back to this because the pocket cake.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-6",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "The part that worked for me was the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-7",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but the pocket cake.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-8",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-0-9",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-selective",
-      "parentId": null,
-      "body": "I would not call it proof, but the pocket cake.",
-      "publishedAt": "2026-09-16T18:03:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-north",
-      "parentId": null,
-      "body": "I am not ready to call this a pattern, although the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-supply",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-elder",
-      "parentId": null,
-      "body": "I keep coming back to this because the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-dune",
-      "parentId": null,
-      "body": "The part that worked for me was the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-nolan",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:04.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-5",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-6",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-anti",
-      "parentId": null,
-      "body": "I would not call it proof, but the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:19:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-7",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the small ordinary pleasure lands because everyone else is carrying a much larger political problem, and I prefer that for now.",
-      "publishedAt": "2026-09-16T18:19:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-8",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "The replies are making me rethink it. the pocket cake.",
-      "publishedAt": "2026-09-16T18:19:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-9",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:19:04.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-10",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: the pocket cake.",
-      "publishedAt": "2026-09-16T18:19:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-1-11",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-16T18:19:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "The part that worked for me was the small ordinary pleasure lands because everyone else is carrying a much larger political problem. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T18:58:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but the pocket cake. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T18:58:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: the small ordinary pleasure lands because everyone else is carrying a much larger political problem. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T18:58:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-food",
-      "parentId": null,
-      "body": "I would not call it proof, but the pocket cake. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T18:58:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the small ordinary pleasure lands because everyone else is carrying a much larger political problem, and I prefer that for now. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:58:04.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-5",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "The replies are making me rethink it. the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:58:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-6",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:58:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-2-7",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T18:58:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-3-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "I would not call it proof, but the pocket cake. The scene earns that hesitation.",
-      "publishedAt": "2026-09-16T21:05:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-3-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "A less dramatic reading is probably the small ordinary pleasure lands because everyone else is carrying a much larger political problem, and I prefer that for now. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T21:05:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-3-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-history",
-      "parentId": null,
-      "body": "The replies are making me rethink it. the pocket cake. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T21:05:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-3-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the small ordinary pleasure lands because everyone else is carrying a much larger political problem. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T21:05:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-3-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: the pocket cake. I can see the opposite reading too.",
-      "publishedAt": "2026-09-16T21:05:04.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-4-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. the small ordinary pleasure lands because everyone else is carrying a much larger political problem. The scene earns that hesitation.",
-      "publishedAt": "2026-09-16T22:28:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-4-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: the pocket cake. The scene earns that hesitation.",
-      "publishedAt": "2026-09-16T22:28:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-4-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-16T22:28:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-5-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-nolan",
-      "parentId": null,
-      "body": "I do not need an answer yet. the pocket cake.",
-      "publishedAt": "2026-09-17T03:05:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-5-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because the small ordinary pleasure lands because everyone else is carrying a much larger political problem.",
-      "publishedAt": "2026-09-17T03:05:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-5-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-anti",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: the pocket cake.",
-      "publishedAt": "2026-09-17T03:05:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-5-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "My current read is the small ordinary pleasure lands because everyone else is carrying a much larger political problem, but I expect the thread to change my mind.",
-      "publishedAt": "2026-09-17T03:05:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-5-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "The strongest version of the argument is the pocket cake.",
-      "publishedAt": "2026-09-17T03:05:04.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-0",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "My current read is the small ordinary pleasure lands because everyone else is carrying a much larger political problem, but I expect the thread to change my mind. That may be the most honest answer.",
-      "publishedAt": "2026-09-18T06:45:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-1",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "The strongest version of the argument is the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-18T06:45:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-2",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-18T06:45:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-3",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but the pocket cake. That may be the most honest answer.",
-      "publishedAt": "2026-09-18T06:45:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-4",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: the small ordinary pleasure lands because everyone else is carrying a much larger political problem. That may be the most honest answer.",
-      "publishedAt": "2026-09-18T06:45:04.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-5",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "I am not ready to call this a pattern, although the pocket cake. I can see the opposite reading too.",
-      "publishedAt": "2026-09-18T06:45:00.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-6",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-history",
-      "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: the small ordinary pleasure lands because everyone else is carrying a much larger political problem. I can see the opposite reading too.",
-      "publishedAt": "2026-09-18T06:45:01.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-7",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "I keep coming back to this because the pocket cake. I can see the opposite reading too.",
-      "publishedAt": "2026-09-18T06:45:02.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-8",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "The part that worked for me was the small ordinary pleasure lands because everyone else is carrying a much larger political problem. The scene earns that hesitation.",
-      "publishedAt": "2026-09-18T06:45:03.000Z"
-    },
-    {
-      "id": "gallery-vhaemys-pocket-cake-expanded-6-9",
-      "entryId": "gallery-vhaemys-pocket-cake",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but the pocket cake. The scene earns that hesitation.",
-      "publishedAt": "2026-09-18T06:45:04.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-0",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "I keep coming back to this because Jace.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-1",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "The part that worked for me was a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-2",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Jace.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-3",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-4",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-selective",
-      "parentId": null,
-      "body": "I would not call it proof, but Jace.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-5",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-north",
-      "parentId": null,
-      "body": "A less dramatic reading is probably a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke, and I prefer that for now.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-6",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-supply",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Jace.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-7",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-elder",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-8",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-dune",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Jace.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-9",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-nolan",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-0-10",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "I do not need an answer yet. Jace.",
-      "publishedAt": "2026-09-16T18:10:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-0",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-atla",
-      "parentId": null,
-      "body": "This is where the chapter feels most deliberate: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-1",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-anti",
-      "parentId": null,
-      "body": "I would not call it proof, but Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-2",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "A less dramatic reading is probably a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke, and I prefer that for now. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-3",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-legal",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-4",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:04.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-5",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-6",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-poll",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-7",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-food",
-      "parentId": null,
-      "body": "I do not need an answer yet. Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-16T18:29:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-8",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-club",
-      "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T18:29:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-9",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Jace.",
-      "publishedAt": "2026-09-16T18:29:04.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-10",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "My current read is a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke, but I expect the thread to change my mind.",
-      "publishedAt": "2026-09-16T18:29:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-11",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "The strongest version of the argument is Jace.",
-      "publishedAt": "2026-09-16T18:29:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-1-12",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T18:29:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-0",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-m",
-      "parentId": null,
-      "body": "The replies are making me rethink it. Jace. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T19:09:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-1",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-sincere-quill",
-      "parentId": null,
-      "body": "There is a difference between knowing something and being able to act on it. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T19:09:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-2",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-sims",
-      "parentId": null,
-      "body": "I am filing this under “not confirmed, still interesting”: Jace. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T19:09:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-3",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-l",
-      "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T19:09:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-4",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-g",
-      "parentId": null,
-      "body": "I do not need an answer yet. Jace. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T19:09:04.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-5",
+      "id": "gallery-jace-heir-olunca-rewrite-24",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-fandom-history",
       "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-16T19:09:00.000Z"
+      "body": "Aegon's Dream revealed. succession implication detected. celebrations postponed pending paperwork. no further questions.",
+      "publishedAt": "2026-09-16T19:36:03.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-2-6",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-16T19:09:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-7",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "My current read is a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke, but I expect the thread to change my mind. The distinction matters to me.",
-      "publishedAt": "2026-09-16T19:09:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-8",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "The strongest version of the argument is Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-16T19:09:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-2-9",
+      "id": "gallery-jace-heir-olunca-rewrite-25",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-doomer",
       "parentId": null,
-      "body": "I like that the text does not force one reaction here. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-16T19:09:04.000Z"
+      "body": "one good thing happened to Jace and the fandom immediately checked the clock for stoppage time",
+      "publishedAt": "2026-09-16T19:27:04.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-3-0",
+      "id": "gallery-jace-heir-olunca-rewrite-26",
       "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-doomer",
+      "authorId": "regular-l",
       "parentId": null,
-      "body": "The small consequence matters more than the grand speech here: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. It is a quieter choice than the obvious reading.",
-      "publishedAt": "2026-09-16T21:17:00.000Z"
+      "body": "I support the policy of refusing joy until the crown has filed the relevant documents. genuinely.",
+      "publishedAt": "2026-09-16T19:08:05.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-3-1",
+      "id": "gallery-jace-heir-olunca-rewrite-27",
       "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-stephen-king",
+      "authorId": "regular-k",
       "parentId": null,
-      "body": "I do not need an answer yet. Jace. It is a quieter choice than the obvious reading.",
-      "publishedAt": "2026-09-16T21:17:01.000Z"
+      "body": "Baelenys can whisper every prophecy in Valyria. I need a herald and witnesses before the champagne comes out. this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:10:06.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-3-2",
+      "id": "gallery-jace-heir-olunca-rewrite-28",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "jacejpeg has entered the 'do not unclench yet' phase of succession law I hate that this works.",
+      "publishedAt": "2026-09-16T19:18:07.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-29",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The football parallel is painfully exact: everyone can see what the result should be and nobody trusts the result until it is official. no further questions.",
+      "publishedAt": "2026-09-16T19:19:08.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-30",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-middle",
       "parentId": null,
-      "body": "The scene leaves just enough room for disagreement because a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. I am leaving room to revise this.",
+      "body": "No knee slide. No fireworks. No 'HEIR' edit. We have suffered before.",
+      "publishedAt": "2026-09-16T19:43:09.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-31",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Conditional succession is not public designation. The meme is legally annoyingly correct. genuinely.",
+      "publishedAt": "2026-09-16T22:24:00.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-32",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Imagine being told the secret that justifies the dynasty and still thinking 'yeah but did he update the succession page'. this is staying in the archive.",
+      "publishedAt": "2026-09-16T22:31:01.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-33",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "This family has trained its audience to treat good news as a threat with better lighting. I hate that this works.",
       "publishedAt": "2026-09-16T21:17:02.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-3-3",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-reformed",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Jace. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T21:17:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-3-4",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-u",
-      "parentId": null,
-      "body": "My current read is a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke, but I expect the thread to change my mind. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T21:17:04.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-3-5",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-room-critic",
-      "parentId": null,
-      "body": "The strongest version of the argument is Jace. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T21:17:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-3-6",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-room-defender",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. I am leaving room to revise this.",
-      "publishedAt": "2026-09-16T21:17:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-3-7",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-newbie",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but Jace.",
-      "publishedAt": "2026-09-16T21:17:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-3-8",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-selective",
-      "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-16T21:17:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-4-0",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-north",
-      "parentId": null,
-      "body": "This is the sort of thing that becomes clearer only after a reread: Jace. It is a quieter choice than the obvious reading.",
-      "publishedAt": "2026-09-16T22:41:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-4-1",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-supply",
-      "parentId": null,
-      "body": "My current read is a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke, but I expect the thread to change my mind. It is a quieter choice than the obvious reading.",
-      "publishedAt": "2026-09-16T22:41:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-5-0",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-sport",
-      "parentId": null,
-      "body": "I like that the text does not force one reaction here. a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. It is a quieter choice than the obvious reading.",
-      "publishedAt": "2026-09-17T03:19:00.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-5-1",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-archive",
-      "parentId": null,
-      "body": "The obvious answer is tempting, but Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-17T03:19:01.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-5-2",
+      "id": "gallery-jace-heir-olunca-rewrite-34",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-poll",
       "parentId": null,
-      "body": "That detail makes the larger conflict feel less abstract: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-17T03:19:02.000Z"
+      "body": "the funniest part is Jace would probably also refuse to celebrate because he would assume Baelenys has a second trap ready no further questions.",
+      "publishedAt": "2026-09-16T21:03:03.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-6-0",
+      "id": "gallery-jace-heir-olunca-rewrite-35",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "I have seen enough late equalizers. Wake me when the proclamation survives the night.",
+      "publishedAt": "2026-09-16T21:07:04.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-36",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "The dream is ancient. The trust issues are extremely current. genuinely.",
+      "publishedAt": "2026-09-17T01:45:00.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-37",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-g",
       "parentId": null,
-      "body": "I am not ready to call this a pattern, although Jace.",
-      "publishedAt": "2026-09-18T07:00:00.000Z"
+      "body": "He got the lore dump of a lifetime and the response is basically VAR check ongoing. this is staying in the archive.",
+      "publishedAt": "2026-09-17T01:08:01.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-6-1",
+      "id": "gallery-jace-heir-olunca-rewrite-38",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "Until the crown says it with its whole chest, this is merely heir-adjacent content. I hate that this works.",
+      "publishedAt": "2026-09-17T01:14:02.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-39",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-fandom-history",
       "parentId": null,
-      "body": "This is a very ordinary problem inside a very abnormal family: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke.",
-      "publishedAt": "2026-09-18T07:00:01.000Z"
+      "body": "Aegon dreamed of ice and fire. Jace fans dream of a signed succession order. genuinely.",
+      "publishedAt": "2026-09-17T08:28:00.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-6-2",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-horror",
-      "parentId": null,
-      "body": "I keep coming back to this because Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-18T07:00:02.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-6-3",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-lurk",
-      "parentId": null,
-      "body": "The part that worked for me was a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. The distinction matters to me.",
-      "publishedAt": "2026-09-18T07:00:03.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-6-4",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-fandom-cinema",
-      "parentId": null,
-      "body": "Maybe I am overreading it, but Jace. The distinction matters to me.",
-      "publishedAt": "2026-09-18T07:00:04.000Z"
-    },
-    {
-      "id": "gallery-jace-heir-olunca-expanded-6-5",
+      "id": "gallery-jace-heir-olunca-rewrite-40",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-doomer",
       "parentId": null,
-      "body": "This is where the chapter feels most deliberate: a conditional succession is not the same thing as a public proclamation, and the hesitation is the joke. I am leaving room to revise this.",
-      "publishedAt": "2026-09-18T07:00:00.000Z"
+      "body": "This is not pessimism. This is match experience. this is staying in the archive.",
+      "publishedAt": "2026-09-17T12:34:01.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-expanded-6-6",
+      "id": "gallery-jace-heir-olunca-rewrite-41",
       "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "Baelenys told Jace about Aegon's Dream, but until somebody says heir out loud in front of witnesses I am not celebrating anything. no further questions.",
+      "publishedAt": "2026-09-17T10:33:02.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-42",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-k",
+      "parentId": null,
+      "body": "Fenerbahçe trauma has reached the Red Keep. no trophy lift before the final whistle, no heir party before the proclamation this is staying in the archive.",
+      "publishedAt": "2026-09-18T18:43:00.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-43",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-odds",
+      "parentId": null,
+      "body": "the edit understanding that 'basically heir' and 'officially heir' are two completely different emotional states I hate that this works.",
+      "publishedAt": "2026-09-18T14:07:01.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-44",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Aegon's Dream revealed. succession implication detected. celebrations postponed pending paperwork. no further questions.",
+      "publishedAt": "2026-09-19T10:38:02.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-45",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "one good thing happened to Jace and the fandom immediately checked the clock for stoppage time",
+      "publishedAt": "2026-09-17T19:54:03.000Z"
+    },
+    {
+      "id": "gallery-jace-heir-olunca-rewrite-46",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "I support the policy of refusing joy until the crown has filed the relevant documents. genuinely.",
+      "publishedAt": "2026-09-17T21:34:04.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-01",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "she looks like she has solved politics. put cake in pocket. leave room.",
+      "publishedAt": "2026-09-16T18:30:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-02",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Pocket cake is now the only institution in King's Landing with cross-faction support.",
+      "publishedAt": "2026-09-16T18:30:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-03",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "I would like the recipe, please. It appears very practical for travel. — Martin",
+      "publishedAt": "2026-09-16T18:30:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-04",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "the Dragonet has provisions. aura restored",
+      "publishedAt": "2026-09-16T18:30:14.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-05",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "Jace has statecraft, Gaelor has Blackfyre, Vhaemys has pocket cake. I know who prepared correctly.",
+      "publishedAt": "2026-09-16T18:30:15.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-06",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "This is exactly how a running gag becomes law: one child eats a cake and the forum never recovers.",
+      "publishedAt": "2026-09-16T18:30:16.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-07",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "The cake has better survival instincts than half the court.",
+      "publishedAt": "2026-09-16T18:30:17.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-08",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Imagine being the baker and learning your pastry now has a political coalition.",
+      "publishedAt": "2026-09-16T18:30:18.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-09",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "Budget line approved: one pocket cake per royal crisis.",
+      "publishedAt": "2026-09-16T18:30:19.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-10",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "Tiny ordinary moments hit harder in this chapter because the adults have made everything else unbearable.",
+      "publishedAt": "2026-09-16T18:30:20.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-11",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "I understand the meme now. It is literally cake. In a pocket. Perfect.",
+      "publishedAt": "2026-09-16T18:48:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-12",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "Vhaemys said logistics first, prophecy later.",
+      "publishedAt": "2026-09-16T18:39:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-13",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "this image has done more for morale than the small council",
+      "publishedAt": "2026-09-16T18:37:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-14",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "Pocket cake truthers we have been vindicated.",
+      "publishedAt": "2026-09-16T18:46:14.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-15",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "She ate one cake and accidentally created the strongest brand in the realm.",
+      "publishedAt": "2026-09-16T18:36:15.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-16",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "No notes. Child has snack. Kingdom may proceed.",
+      "publishedAt": "2026-09-16T19:00:16.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-17",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "I came for dragons and somehow the cake has lore now.",
+      "publishedAt": "2026-09-16T18:39:17.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-18",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "POCKET CAKE has escaped the chapter and become a constitutional faction.",
+      "publishedAt": "2026-09-16T18:34:18.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-19",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "There is something deeply important about Vhaemys carrying emergency cake while everyone else carries dynastic trauma.",
+      "publishedAt": "2026-09-16T18:44:19.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-20",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "finally photographic evidence of the pocket cake incident",
+      "publishedAt": "2026-09-16T18:31:20.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-21",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "she looks like she has solved politics. put cake in pocket. leave room. genuinely.",
+      "publishedAt": "2026-09-16T19:26:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-22",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Pocket cake is now the only institution in King's Landing with cross-faction support. this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:39:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-23",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "I would like the recipe, please. It appears very practical for travel. — Martin I hate that this works.",
+      "publishedAt": "2026-09-16T19:07:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-24",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "the Dragonet has provisions. aura restored no further questions.",
+      "publishedAt": "2026-09-16T19:15:14.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-25",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "Jace has statecraft, Gaelor has Blackfyre, Vhaemys has pocket cake. I know who prepared correctly.",
+      "publishedAt": "2026-09-16T19:49:15.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-26",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "This is exactly how a running gag becomes law: one child eats a cake and the forum never recovers. genuinely.",
+      "publishedAt": "2026-09-16T20:14:16.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-27",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "The cake has better survival instincts than half the court. this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:19:17.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-28",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "Imagine being the baker and learning your pastry now has a political coalition. I hate that this works.",
+      "publishedAt": "2026-09-16T20:27:18.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-29",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "Budget line approved: one pocket cake per royal crisis. no further questions.",
+      "publishedAt": "2026-09-16T19:22:19.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-30",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Tiny ordinary moments hit harder in this chapter because the adults have made everything else unbearable.",
+      "publishedAt": "2026-09-16T19:45:20.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-31",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "I understand the meme now. It is literally cake. In a pocket. Perfect. genuinely.",
+      "publishedAt": "2026-09-16T20:42:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-32",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "Vhaemys said logistics first, prophecy later. this is staying in the archive.",
+      "publishedAt": "2026-09-16T22:53:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-33",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "this image has done more for morale than the small council I hate that this works.",
+      "publishedAt": "2026-09-16T21:16:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-34",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "Pocket cake truthers we have been vindicated. no further questions.",
+      "publishedAt": "2026-09-16T23:11:14.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-35",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-sept",
+      "parentId": null,
+      "body": "She ate one cake and accidentally created the strongest brand in the realm.",
+      "publishedAt": "2026-09-16T22:34:15.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-36",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "No notes. Child has snack. Kingdom may proceed. genuinely.",
+      "publishedAt": "2026-09-17T01:48:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-37",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "I came for dragons and somehow the cake has lore now. this is staying in the archive.",
+      "publishedAt": "2026-09-17T01:40:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-38",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "POCKET CAKE has escaped the chapter and become a constitutional faction. I hate that this works.",
+      "publishedAt": "2026-09-17T03:34:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-39",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "There is something deeply important about Vhaemys carrying emergency cake while everyone else carries dynastic trauma. genuinely.",
+      "publishedAt": "2026-09-17T07:07:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-40",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "finally photographic evidence of the pocket cake incident this is staying in the archive.",
+      "publishedAt": "2026-09-17T14:38:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-41",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "she looks like she has solved politics. put cake in pocket. leave room. no further questions.",
+      "publishedAt": "2026-09-17T14:55:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-42",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "Pocket cake is now the only institution in King's Landing with cross-faction support. this is staying in the archive.",
+      "publishedAt": "2026-09-19T04:33:11.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-43",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "I would like the recipe, please. It appears very practical for travel. — Martin I hate that this works.",
+      "publishedAt": "2026-09-18T18:16:12.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-44",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "the Dragonet has provisions. aura restored no further questions.",
+      "publishedAt": "2026-09-18T00:03:13.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-45",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "Jace has statecraft, Gaelor has Blackfyre, Vhaemys has pocket cake. I know who prepared correctly.",
+      "publishedAt": "2026-09-19T11:17:14.000Z"
+    },
+    {
+      "id": "gallery-vhaemys-pocket-cake-rewrite-46",
+      "entryId": "gallery-vhaemys-pocket-cake",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "This is exactly how a running gag becomes law: one child eats a cake and the forum never recovers. genuinely.",
+      "publishedAt": "2026-09-18T07:13:15.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-01",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "whoever posted this as canon baby Gaelor deserves one night in the black cells and a medal",
+      "publishedAt": "2026-09-16T18:30:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-02",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "the automatic name generator had one job and chose violence",
+      "publishedAt": "2026-09-16T18:30:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-03",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "I hate that 'Gaelor' appearing by chance is what turns this from weird screenshot into perfect fandom artifact.",
+      "publishedAt": "2026-09-16T18:30:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-04",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Imagine opening the save after all that mod chaos and the baby is just called Gaelor. I would close the game.",
+      "publishedAt": "2026-09-16T18:30:25.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-05",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-anti",
+      "parentId": null,
+      "body": "Historical note: none of this happened. Cultural note: we are never getting rid of this image.",
+      "publishedAt": "2026-09-16T18:30:26.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-06",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "I do not understand the modification involved, but I gather the coincidence is the joke. It is a very strange joke. — Martin",
+      "publishedAt": "2026-09-16T18:30:27.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-07",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "procedural generation aura: criminal",
+      "publishedAt": "2026-09-16T18:30:28.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-08",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "This is why 'canon' needs quotation marks large enough to be seen from Dragonstone.",
+      "publishedAt": "2026-09-16T18:30:29.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-09",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "Not our Gaelor. Spiritually devastating to our Gaelor anyway.",
+      "publishedAt": "2026-09-16T18:30:30.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-10",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "The save file accidentally manufactured anti-Gaelor propaganda.",
+      "publishedAt": "2026-09-16T18:30:31.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-11",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "The funniest possible random name and the game hit it first try.",
+      "publishedAt": "2026-09-16T18:45:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-12",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "Gaelor PR department requesting the seed number for litigation purposes.",
+      "publishedAt": "2026-09-16T18:53:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-13",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "Every fandom eventually invents a cursed baby image. Ours arrived pre-named.",
+      "publishedAt": "2026-09-16T18:39:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-14",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "I refuse to learn more about the mod. The screenshot has already told me too much.",
+      "publishedAt": "2026-09-16T18:45:25.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-15",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "a CK3 AGOT save generating a baby named Gaelor out of THAT pairing is the kind of procedural comedy writers cannot compete with",
+      "publishedAt": "2026-09-16T18:59:26.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-16",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "this is canon guys (it is absolutely not canon guys)",
+      "publishedAt": "2026-09-16T18:54:27.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-17",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "For the record: canon to somebody's cursed save file, not canon to ASOFAB. Unfortunately the name makes the screenshot much funnier.",
+      "publishedAt": "2026-09-16T18:59:28.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-18",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "the game saw the mpreg mod, saw Rhaegar and Robert, and decided the child needed to be named GAELOR. machine-generated slander",
+      "publishedAt": "2026-09-16T18:43:29.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-19",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "alternate-universe Gaelor catching allegations before he can even focus his eyes",
+      "publishedAt": "2026-09-16T18:51:30.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-20",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-anti",
+      "parentId": null,
+      "body": "My client rejects this alleged baby portrait while conceding that the name is catastrophically inconvenient.",
+      "publishedAt": "2026-09-16T18:38:31.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-21",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "whoever posted this as canon baby Gaelor deserves one night in the black cells and a medal genuinely.",
+      "publishedAt": "2026-09-16T19:21:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-22",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "the automatic name generator had one job and chose violence this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:20:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-23",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "I hate that 'Gaelor' appearing by chance is what turns this from weird screenshot into perfect fandom artifact. I hate that this works.",
+      "publishedAt": "2026-09-16T19:11:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-24",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "Imagine opening the save after all that mod chaos and the baby is just called Gaelor. I would close the game. no further questions.",
+      "publishedAt": "2026-09-16T19:51:25.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-25",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "Historical note: none of this happened. Cultural note: we are never getting rid of this image.",
+      "publishedAt": "2026-09-16T19:48:26.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-26",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "I do not understand the modification involved, but I gather the coincidence is the joke. It is a very strange joke. — Martin genuinely.",
+      "publishedAt": "2026-09-16T19:48:27.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-27",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "procedural generation aura: criminal this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:27:28.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-28",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "This is why 'canon' needs quotation marks large enough to be seen from Dragonstone. I hate that this works.",
+      "publishedAt": "2026-09-16T19:33:29.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-29",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Not our Gaelor. Spiritually devastating to our Gaelor anyway. no further questions.",
+      "publishedAt": "2026-09-16T19:45:30.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-30",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "The save file accidentally manufactured anti-Gaelor propaganda.",
+      "publishedAt": "2026-09-16T20:26:31.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-31",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "The funniest possible random name and the game hit it first try. genuinely.",
+      "publishedAt": "2026-09-16T21:43:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-32",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "Gaelor PR department requesting the seed number for litigation purposes. this is staying in the archive.",
+      "publishedAt": "2026-09-16T22:40:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-33",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "Every fandom eventually invents a cursed baby image. Ours arrived pre-named. I hate that this works.",
+      "publishedAt": "2026-09-16T23:26:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-34",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "I refuse to learn more about the mod. The screenshot has already told me too much. no further questions.",
+      "publishedAt": "2026-09-16T22:35:25.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-35",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-anti",
+      "parentId": null,
+      "body": "a CK3 AGOT save generating a baby named Gaelor out of THAT pairing is the kind of procedural comedy writers cannot compete with",
+      "publishedAt": "2026-09-16T20:55:26.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-36",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "this is canon guys (it is absolutely not canon guys) genuinely.",
+      "publishedAt": "2026-09-17T04:01:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-37",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "For the record: canon to somebody's cursed save file, not canon to ASOFAB. Unfortunately the name makes the screenshot much funnier. this is staying in the archive.",
+      "publishedAt": "2026-09-17T02:40:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-38",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "the game saw the mpreg mod, saw Rhaegar and Robert, and decided the child needed to be named GAELOR. machine-generated slander I hate that this works.",
+      "publishedAt": "2026-09-17T01:49:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-39",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "alternate-universe Gaelor catching allegations before he can even focus his eyes genuinely.",
+      "publishedAt": "2026-09-17T06:55:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-40",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "My client rejects this alleged baby portrait while conceding that the name is catastrophically inconvenient. this is staying in the archive.",
+      "publishedAt": "2026-09-17T07:39:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-41",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "whoever posted this as canon baby Gaelor deserves one night in the black cells and a medal no further questions.",
+      "publishedAt": "2026-09-17T06:11:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-42",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "the automatic name generator had one job and chose violence this is staying in the archive.",
+      "publishedAt": "2026-09-18T02:11:22.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-43",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "I hate that 'Gaelor' appearing by chance is what turns this from weird screenshot into perfect fandom artifact. I hate that this works.",
+      "publishedAt": "2026-09-18T22:34:23.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-44",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "Imagine opening the save after all that mod chaos and the baby is just called Gaelor. I would close the game. no further questions.",
+      "publishedAt": "2026-09-18T13:51:24.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-45",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "Historical note: none of this happened. Cultural note: we are never getting rid of this image.",
+      "publishedAt": "2026-09-19T11:10:25.000Z"
+    },
+    {
+      "id": "gallery-prince-gaelor-baby-ck3-agot-rewrite-46",
+      "entryId": "gallery-prince-gaelor-baby-ck3-agot",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "I do not understand the modification involved, but I gather the coincidence is the joke. It is a very strange joke. — Martin genuinely.",
+      "publishedAt": "2026-09-19T13:57:26.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-01",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "The merge works because neither half is allowed to become dominant. You are forced to perceive both. Regrettably.",
+      "publishedAt": "2026-09-16T18:30:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-02",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "I have no theory. I only have the instinct to close the tab.",
+      "publishedAt": "2026-09-16T18:30:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-03",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "new here. is the bird normally like this. please say no",
+      "publishedAt": "2026-09-16T18:30:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-04",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "whoever feather-masked the facial structure knew exactly how much information to preserve and should answer for it",
+      "publishedAt": "2026-09-16T18:30:36.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-05",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "permission denied. revoke raven privileges.",
+      "publishedAt": "2026-09-16T18:30:37.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-06",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "It has the posture of a raven and the psychological effect of a sleep paralysis visitor.",
+      "publishedAt": "2026-09-16T18:30:38.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-07",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "The beak-face transition is where mercy left the project.",
+      "publishedAt": "2026-09-16T18:30:39.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-08",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "Cursed is overused online. Here it is technically precise.",
+      "publishedAt": "2026-09-16T18:30:40.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-09",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "I zoomed in. This was an error.",
+      "publishedAt": "2026-09-16T18:30:41.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-10",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "There are edits you admire and edits you survive.",
+      "publishedAt": "2026-09-16T18:30:42.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-11",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "The Seven did not authorize this composite.",
+      "publishedAt": "2026-09-16T18:38:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-12",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "this is not a raven with a face. this is a face that has been sentenced to raven",
+      "publishedAt": "2026-09-16T19:00:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-13",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "The human-raven merge is exactly wrong enough that my eyes keep trying to separate it into two images.",
+      "publishedAt": "2026-09-16T18:31:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-14",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "delete the beak or delete the face. keeping both is hostile",
+      "publishedAt": "2026-09-16T18:48:36.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-15",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "For classification purposes: cursed edit. No further taxonomy is required.",
+      "publishedAt": "2026-09-16T18:46:37.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-16",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "negative aura. ancient curse. excellent post.",
+      "publishedAt": "2026-09-16T18:52:38.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-17",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "Every time I look away I remember it slightly worse.",
+      "publishedAt": "2026-09-16T18:59:39.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-18",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "I thought the first glance was the problem. The second glance is much worse.",
+      "publishedAt": "2026-09-16T18:58:40.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-19",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "I am sorry, but is this made by combining a portrait with a bird? I do not care for it. — Martin",
+      "publishedAt": "2026-09-16T18:54:41.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-20",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "archiving this under images that should not survive the century",
+      "publishedAt": "2026-09-16T18:56:42.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-21",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "The merge works because neither half is allowed to become dominant. You are forced to perceive both. Regrettably. genuinely.",
+      "publishedAt": "2026-09-16T19:24:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-22",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "I have no theory. I only have the instinct to close the tab. this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:29:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-23",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "new here. is the bird normally like this. please say no I hate that this works.",
+      "publishedAt": "2026-09-16T19:35:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-24",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "whoever feather-masked the facial structure knew exactly how much information to preserve and should answer for it no further questions.",
+      "publishedAt": "2026-09-16T20:28:36.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-25",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "permission denied. revoke raven privileges.",
+      "publishedAt": "2026-09-16T19:12:37.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-26",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "It has the posture of a raven and the psychological effect of a sleep paralysis visitor. genuinely.",
+      "publishedAt": "2026-09-16T20:22:38.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-27",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "The beak-face transition is where mercy left the project. this is staying in the archive.",
+      "publishedAt": "2026-09-16T20:00:39.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-28",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "Cursed is overused online. Here it is technically precise. I hate that this works.",
+      "publishedAt": "2026-09-16T20:27:40.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-29",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "I zoomed in. This was an error. no further questions.",
+      "publishedAt": "2026-09-16T19:06:41.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-30",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "There are edits you admire and edits you survive.",
+      "publishedAt": "2026-09-16T19:44:42.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-31",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "The Seven did not authorize this composite. genuinely.",
+      "publishedAt": "2026-09-16T23:19:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-32",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "this is not a raven with a face. this is a face that has been sentenced to raven this is staying in the archive.",
+      "publishedAt": "2026-09-16T22:45:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-33",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "The human-raven merge is exactly wrong enough that my eyes keep trying to separate it into two images. I hate that this works.",
+      "publishedAt": "2026-09-16T21:26:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-34",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "delete the beak or delete the face. keeping both is hostile no further questions.",
+      "publishedAt": "2026-09-16T21:48:36.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-35",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "For classification purposes: cursed edit. No further taxonomy is required.",
+      "publishedAt": "2026-09-16T21:50:37.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-36",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "negative aura. ancient curse. excellent post. genuinely.",
+      "publishedAt": "2026-09-17T01:11:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-37",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Every time I look away I remember it slightly worse. this is staying in the archive.",
+      "publishedAt": "2026-09-17T03:03:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-38",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "I thought the first glance was the problem. The second glance is much worse. I hate that this works.",
+      "publishedAt": "2026-09-17T04:29:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-39",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "I am sorry, but is this made by combining a portrait with a bird? I do not care for it. — Martin genuinely.",
+      "publishedAt": "2026-09-17T10:43:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-40",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "archiving this under images that should not survive the century this is staying in the archive.",
+      "publishedAt": "2026-09-17T16:40:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-41",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "The merge works because neither half is allowed to become dominant. You are forced to perceive both. Regrettably. no further questions.",
+      "publishedAt": "2026-09-17T13:26:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-42",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "I have no theory. I only have the instinct to close the tab. this is staying in the archive.",
+      "publishedAt": "2026-09-19T10:41:33.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-43",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "new here. is the bird normally like this. please say no I hate that this works.",
+      "publishedAt": "2026-09-19T15:45:34.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-44",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "whoever feather-masked the facial structure knew exactly how much information to preserve and should answer for it no further questions.",
+      "publishedAt": "2026-09-19T07:21:35.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-45",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "permission denied. revoke raven privileges.",
+      "publishedAt": "2026-09-19T00:57:36.000Z"
+    },
+    {
+      "id": "gallery-cursed-kuzgun-rewrite-46",
+      "entryId": "gallery-cursed-kuzgun",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "It has the posture of a raven and the psychological effect of a sleep paralysis visitor. genuinely.",
+      "publishedAt": "2026-09-19T12:18:37.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-01",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "new here and genuinely thought this was a horror subplot for five seconds",
+      "publishedAt": "2026-09-16T18:30:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-02",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "one invert filter and suddenly the royal archive is analog horror",
+      "publishedAt": "2026-09-16T18:30:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-03",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Have you seen this king in your dreams? If yes, please do not tell me.",
+      "publishedAt": "2026-09-16T18:30:46.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-04",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
       "authorId": "regular-fandom-stephen-king",
       "parentId": null,
-      "body": "I would not call it proof, but Jace. I am leaving room to revise this.",
-      "publishedAt": "2026-09-18T07:00:01.000Z"
+      "body": "Aenys II has been dead for years and still found a way to ruin somebody's sleep.",
+      "publishedAt": "2026-09-16T18:30:47.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-05",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "The face was already severe. The negative effect turned severity into a paranormal complaint.",
+      "publishedAt": "2026-09-16T18:30:48.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-06",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "I am choosing to believe the image cannot cross tabs.",
+      "publishedAt": "2026-09-16T18:30:49.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-07",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "This belongs in a folder called DO NOT OPEN AFTER MIDNIGHT.",
+      "publishedAt": "2026-09-16T18:30:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-08",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "The original meme walked so royal nightmare Aenys could stand motionless at the end of a hallway.",
+      "publishedAt": "2026-09-16T18:30:01.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-09",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "negative-filter Aenys II looks like he has been appearing in the same dream since 1999",
+      "publishedAt": "2026-09-16T18:30:02.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-10",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "The 'have you seen this man in your dreams' resemblance is doing all the work and I deeply resent it.",
+      "publishedAt": "2026-09-16T18:30:03.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-11",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The Turkish panic-caption makes this ten times funnier because it reads like somebody found the image at 3 AM and immediately needed an adult.",
+      "publishedAt": "2026-09-16T18:50:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-12",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "This is less a royal portrait and more a warning taped to a telephone pole.",
+      "publishedAt": "2026-09-16T18:47:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-13",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "For clarity: the dream-man resemblance is the meme. There is no canon mass-dreaming incident involving Aenys II.",
+      "publishedAt": "2026-09-16T18:39:46.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-14",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "bu sahte demi is exactly what I would type if this appeared on my screen uninvited",
+      "publishedAt": "2026-09-16T18:35:47.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-15",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "I do not know the original internet picture, but this gentleman does look extremely alarming in negative. — Martin",
+      "publishedAt": "2026-09-16T18:46:48.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-16",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "dream encounter aura: -9000",
+      "publishedAt": "2026-09-16T18:54:49.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-17",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "The worst part is that normal Aenys already has the face for this. The filter barely had to work.",
+      "publishedAt": "2026-09-17T17:52:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-18",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-stephen-king",
+      "parentId": null,
+      "body": "This image feels like evidence from a case nobody should reopen.",
+      "publishedAt": "2026-09-17T16:25:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-19",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "I remember the old dream-man meme and this is an offensively efficient casting choice.",
+      "publishedAt": "2026-09-17T13:59:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-20",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "The caption being terrified before anyone explains the reference is the correct viewing experience.",
+      "publishedAt": "2026-09-17T10:06:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-21",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "new here and genuinely thought this was a horror subplot for five seconds genuinely.",
+      "publishedAt": "2026-09-16T20:16:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-22",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "one invert filter and suddenly the royal archive is analog horror this is staying in the archive.",
+      "publishedAt": "2026-09-16T20:28:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-23",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "Have you seen this king in your dreams? If yes, please do not tell me. I hate that this works.",
+      "publishedAt": "2026-09-17T08:53:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-24",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "Aenys II has been dead for years and still found a way to ruin somebody's sleep. no further questions.",
+      "publishedAt": "2026-09-17T05:00:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-25",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The face was already severe. The negative effect turned severity into a paranormal complaint.",
+      "publishedAt": "2026-09-16T20:20:48.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-26",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "I am choosing to believe the image cannot cross tabs. genuinely.",
+      "publishedAt": "2026-09-16T19:33:49.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-27",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "This belongs in a folder called DO NOT OPEN AFTER MIDNIGHT. this is staying in the archive.",
+      "publishedAt": "2026-09-16T19:42:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-28",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "The original meme walked so royal nightmare Aenys could stand motionless at the end of a hallway. I hate that this works.",
+      "publishedAt": "2026-09-16T19:41:01.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-29",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "negative-filter Aenys II looks like he has been appearing in the same dream since 1999 no further questions.",
+      "publishedAt": "2026-09-16T23:54:00.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-30",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "The 'have you seen this man in your dreams' resemblance is doing all the work and I deeply resent it.",
+      "publishedAt": "2026-09-16T20:04:03.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-31",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "The Turkish panic-caption makes this ten times funnier because it reads like somebody found the image at 3 AM and immediately needed an adult. genuinely.",
+      "publishedAt": "2026-09-16T22:53:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-32",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-stephen-king",
+      "parentId": null,
+      "body": "This is less a royal portrait and more a warning taped to a telephone pole. this is staying in the archive.",
+      "publishedAt": "2026-09-16T21:41:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-33",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "For clarity: the dream-man resemblance is the meme. There is no canon mass-dreaming incident involving Aenys II. I hate that this works.",
+      "publishedAt": "2026-09-16T20:37:46.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-34",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-e",
+      "parentId": null,
+      "body": "bu sahte demi is exactly what I would type if this appeared on my screen uninvited no further questions.",
+      "publishedAt": "2026-09-16T23:11:47.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-35",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "I do not know the original internet picture, but this gentleman does look extremely alarming in negative. — Martin",
+      "publishedAt": "2026-09-16T20:46:48.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-36",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "dream encounter aura: -9000 genuinely.",
+      "publishedAt": "2026-09-17T04:09:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-37",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "The worst part is that normal Aenys already has the face for this. The filter barely had to work. this is staying in the archive.",
+      "publishedAt": "2026-09-17T02:52:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-38",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "This image feels like evidence from a case nobody should reopen. I hate that this works.",
+      "publishedAt": "2026-09-17T01:47:46.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-39",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "I remember the old dream-man meme and this is an offensively efficient casting choice. genuinely.",
+      "publishedAt": "2026-09-17T16:51:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-40",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-middle",
+      "parentId": null,
+      "body": "The caption being terrified before anyone explains the reference is the correct viewing experience. this is staying in the archive.",
+      "publishedAt": "2026-09-17T12:07:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-41",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "new here and genuinely thought this was a horror subplot for five seconds no further questions.",
+      "publishedAt": "2026-09-17T12:23:46.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-42",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "one invert filter and suddenly the royal archive is analog horror this is staying in the archive.",
+      "publishedAt": "2026-09-18T11:18:44.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-43",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Have you seen this king in your dreams? If yes, please do not tell me. I hate that this works.",
+      "publishedAt": "2026-09-18T20:30:45.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-44",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "Aenys II has been dead for years and still found a way to ruin somebody's sleep. no further questions.",
+      "publishedAt": "2026-09-18T09:38:46.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-45",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "The face was already severe. The negative effect turned severity into a paranormal complaint.",
+      "publishedAt": "2026-09-18T18:32:47.000Z"
+    },
+    {
+      "id": "gallery-aenys-ii-bu-adami-ruyanizda-rewrite-46",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-stephen-king",
+      "parentId": null,
+      "body": "I am choosing to believe the image cannot cross tabs. genuinely.",
+      "publishedAt": "2026-09-18T23:25:48.000Z"
     }
   ],
   "relationships": [

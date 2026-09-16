@@ -3,8 +3,12 @@
     "id": "gallery-aenys-ii-bu-adami-ruyanizda",
     "src": "/images/gallery/aenys-ii-bu-adami-ruyanizda.webp",
     "caption": "Cok korkuyorum bu sahte demi. Ben daha 9 yaşındayım cok korkuyorum sahta demi bu biri bana acıklasın",
-    "characterIds": ["aenys-targaryen-ii"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "aenys-targaryen-ii"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -27,8 +31,12 @@
     "id": "gallery-prince-gaelor-baby-ck3-agot",
     "src": "/images/gallery/prince-gaelor-baby-ck3-agot.jpeg",
     "caption": "this is canon guys",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -39,11 +47,20 @@
     "id": "gallery-vhaemys-pocket-cake",
     "src": "/images/gallery/vhaemys-pocket-cake.jpeg",
     "caption": "POCKET CAKE 🧁.",
-    "characterIds": ["vhaemys-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "vhaemys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "until-the-last-breath",
-    "worldDate": { "day": 16, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 16,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-16",
     "category": "raven"
   },
@@ -51,11 +68,20 @@
     "id": "gallery-jace-heir-olunca",
     "src": "/videos/reels/jace-heir-olunca.mp4",
     "caption": "fbli jaceçiler ogün'ün rüyasını henüz kutlamıyor...",
-    "characterIds": ["jacaelon-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "until-the-last-breath",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-16",
     "category": "fleabottom"
   },
@@ -63,8 +89,13 @@
     "id": "gallery-almar-and-renrose",
     "src": "/images/gallery/almar-and-renrose.jpeg",
     "caption": "Maester Almar before Lord Renrose Tyrell.",
-    "characterIds": ["almar-larchmont", "renrose-tyrell"],
-    "houseIds": ["tyrell"],
+    "characterIds": [
+      "almar-larchmont",
+      "renrose-tyrell"
+    ],
+    "houseIds": [
+      "tyrell"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -75,8 +106,12 @@
     "id": "gallery-renrose-gardens-breakfast",
     "src": "/images/gallery/renrose-gardens-breakfast.jpeg",
     "caption": "Breakfast among the roses of Highgarden.",
-    "characterIds": ["renrose-tyrell"],
-    "houseIds": ["tyrell"],
+    "characterIds": [
+      "renrose-tyrell"
+    ],
+    "houseIds": [
+      "tyrell"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -87,8 +122,12 @@
     "id": "gallery-renrose-rose-gardens",
     "src": "/images/gallery/renrose-rose-gardens.jpeg",
     "caption": "Renrose Tyrell in Highgarden's rose gardens.",
-    "characterIds": ["renrose-tyrell"],
-    "houseIds": ["tyrell"],
+    "characterIds": [
+      "renrose-tyrell"
+    ],
+    "houseIds": [
+      "tyrell"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -99,8 +138,12 @@
     "id": "gallery-renrose-work-desk",
     "src": "/images/gallery/renrose-work-desk.jpeg",
     "caption": "Renrose Tyrell at work.",
-    "characterIds": ["renrose-tyrell"],
-    "houseIds": ["tyrell"],
+    "characterIds": [
+      "renrose-tyrell"
+    ],
+    "houseIds": [
+      "tyrell"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -111,8 +154,12 @@
     "id": "gallery-gaelor-teror-orgutu-lideri",
     "src": "/videos/reels/gaelor-teror-orgutu-lideri.mp4",
     "caption": "DURUŞ...",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -123,8 +170,14 @@
     "id": "gallery-jace-gaelor-visenor-bu-uclu-cok-guclu",
     "src": "/videos/reels/jace-gaelor-visenor-bu-uclu-cok-guclu.mp4",
     "caption": "üçgen şeklinde birbirlerine takmasalar bu üçlü çok güçlü",
-    "characterIds": ["jacaelon-targaryen", "gaelor-targaryen", "visenor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "jacaelon-targaryen",
+      "gaelor-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -135,8 +188,13 @@
     "id": "gallery-lorent-renrose-a-man-will-die-but-not-his-ideas",
     "src": "/videos/reels/lorent-renrose-a-man-will-die-but-not-his-ideas.mp4",
     "caption": "lorent tyrell'in sonu nasıl olmuştu ya 😅 :)",
-    "characterIds": ["lorent-tyrell", "renrose-tyrell"],
-    "houseIds": ["tyrell"],
+    "characterIds": [
+      "lorent-tyrell",
+      "renrose-tyrell"
+    ],
+    "houseIds": [
+      "tyrell"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -147,8 +205,13 @@
     "id": "gallery-jace-gaelor's-bullshit-factory",
     "src": "/images/gallery/jace-gaelor's-bullshit-factory.jpeg",
     "caption": "bro creates disasters faster than the court can attend to his existing ones 💀💀💀",
-    "characterIds": ["jacaelon-targaryen", "gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "jacaelon-targaryen",
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -159,8 +222,13 @@
     "id": "gallery-jhaella",
     "src": "/images/gallery/jhaella.webp",
     "caption": "a treat for jhaella fans by the admin :) hope ubeka (visenor) doesn't see this",
-    "characterIds": ["jacaelon-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "jacaelon-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -171,8 +239,12 @@
     "id": "gallery-rhaella-targaryen-portrait",
     "src": "/images/gallery/rhaella-targaryen.jpeg",
     "caption": "Rhaella Targaryen.",
-    "characterIds": ["rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -183,8 +255,13 @@
     "id": "gallery-visenor-rhaella-baby",
     "src": "/images/gallery/visenor-rhaella-baby.jpeg",
     "caption": "In another life.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -195,8 +272,13 @@
     "id": "gallery-visenor-rhaella-coronation",
     "src": "/images/gallery/visenor-rhaella-coronation.jpeg",
     "caption": "The king and queen they could have become.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -207,8 +289,13 @@
     "id": "gallery-visenor-rhaella-red-mountains",
     "src": "/images/gallery/visenor-rhaella-red-mountains.jpeg",
     "caption": "A farewell beneath the Red Mountains, perhaps where things took a turn for the worse.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -219,8 +306,12 @@
     "id": "gallery-jace-binim",
     "src": "/videos/reels/jace-binim.mp4",
     "caption": "ferdiyi knight yapan binim",
-    "characterIds": ["jacaelon-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -231,8 +322,14 @@
     "id": "gallery-visenor-eve-gitmem-gerek",
     "src": "/videos/reels/visenor-eve-gitmem-gerek.mp4",
     "caption": "neden starfall'da kalmadın be adam",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen", "jacaelon-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -243,11 +340,23 @@
     "id": "gallery-life-if-tyrells-didnt-exist",
     "src": "/videos/reels/life-if-tyrells-didnt-exist.mp4",
     "caption": "just imagine",
-    "characterIds": ["renrose-tyrell", "visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["tyrell", "targaryen"],
+    "characterIds": [
+      "renrose-tyrell",
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "tyrell",
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -255,11 +364,21 @@
     "id": "gallery-rhaella-geri-don",
     "src": "/videos/reels/rhaella-geri-don.mp4",
     "caption": "TÜLAYYYYYYYYYY",
-    "characterIds": ["rhaella-targaryen", "visenor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "rhaella-targaryen",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -267,11 +386,20 @@
     "id": "gallery-rhaella-wait-wait",
     "src": "/videos/reels/rhaella-wait-wait.mp4",
     "caption": "travmalarla başa çıkmanın en iyi yollarından biri mizahtır",
-    "characterIds": ["rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -279,8 +407,13 @@
     "id": "gallery-visenor-rhaella-another-love",
     "src": "/videos/reels/visenor-rhaella-another-love.mp4",
     "caption": "evet memur bey bana saldıran bu edit",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -291,8 +424,13 @@
     "id": "gallery-visenor-rhaella-someone-wrote-this-song-before",
     "src": "/videos/reels/visenor-rhaella-someone-wrote-this-song-before.mp4",
     "caption": "odamda yine ninjalar soğan doğruyor",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -303,8 +441,13 @@
     "id": "gallery-visenor-rhaella-the-one-that-got-away",
     "src": "/videos/reels/visenor-rhaella-the-one-that-got-away.mp4",
     "caption": "in another life, i would make you stay, so i don't have say you were the one that got away.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -315,8 +458,12 @@
     "id": "gallery-whole-westeros-if-gaelor-housebreak",
     "src": "/videos/reels/whole-westeros-if-gaelor-housebreak.mp4",
     "caption": "ya madem herkesi katlediyorsun bunlardan başlasana amk. smh.",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -327,11 +474,21 @@
     "id": "gallery-visenor-rhaella-alarm",
     "src": "/videos/reels/visenor-rhaella-alarm.mp4",
     "caption": "evet 2. kez aynı edit, var mı itirazınız",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -339,11 +496,20 @@
     "id": "gallery-rhaella-ambush",
     "src": "/images/gallery/rhaella-ambush.jpeg",
     "caption": "Vahaemon's debts were due; an innocent child paid the price.",
-    "characterIds": ["rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "raven"
   },
@@ -351,11 +517,22 @@
     "id": "gallery-mens-feelings-rhaella-death",
     "src": "/videos/reels/men-feelings-rhaella-death.mp4",
     "caption": "where everyone cried",
-    "characterIds": ["rhaella-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -363,8 +540,13 @@
     "id": "gallery-visenor-rhaella-kiss",
     "src": "/images/gallery/visenor-rhaella-kiss.jpeg",
     "caption": "Visenor and Rhaella.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -375,11 +557,23 @@
     "id": "gallery-visenor-war-flashbacks-rhaella",
     "src": "/videos/reels/visenor-war-flashbacks-after-finding-out-rhaella.mp4",
     "caption": "rhaella'nın yaşadıklarını öğrenirse visenor ağabey",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -387,8 +581,13 @@
     "id": "gallery-visenor-rhaella-picnic",
     "src": "/images/gallery/visenor-rhaella-picnic.jpeg",
     "caption": "Visenor and Rhaella at a picnic.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -399,11 +598,23 @@
     "id": "gallery-rhaella-death-film",
     "src": "/videos/reels/rhaella-death-film-bu-uzmek-icin-yapiyorlar.mp4",
     "caption": "kapat şunu ya bu ne böyle",
-    "characterIds": ["rhaella-targaryen", "hrrm"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "rhaella-targaryen",
+      "hrrm"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -411,11 +622,20 @@
     "id": "gallery-ravenholder-gaelor",
     "src": "/images/gallery/ravenholder-gaelor.webp",
     "caption": "birader bi gün haberlere çıkma ya bi gün",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -423,11 +643,21 @@
     "id": "gallery-visenor-rhaella-alarm2",
     "src": "/videos/reels/visenor-rhaella-alarm2.mp4",
     "caption": "uyandırmayın beni",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -435,11 +665,20 @@
     "id": "gallery-visenor-entering-citadel-first-time",
     "src": "/images/gallery/visenor-entering-citadel-1st-time.jpeg",
     "caption": "Visenor entering the Citadel for the first time as Arthur Sand.",
-    "characterIds": ["visenor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "raven"
   },
@@ -447,11 +686,21 @@
     "id": "gallery-visenor-interstellar-citadel-mistake",
     "src": "/videos/reels/visenor-interstellar-citadel-mistake.mp4",
     "caption": "GİTME ULAN ORAYA GİTME.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -459,8 +708,13 @@
     "id": "gallery-visenor-rhaella-study",
     "src": "/images/gallery/visenor-rhaella-study.jpeg",
     "caption": "He loved studying, she loved watching him study.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -471,11 +725,21 @@
     "id": "gallery-visenor-rhaella-sad-stitch",
     "src": "/videos/reels/visenor-rhaella-sad-stitch.mp4",
     "caption": "🚬",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -483,11 +747,22 @@
     "id": "gallery-rhaella-boneskin-dracarys",
     "src": "/images/gallery/rhaella-boneskin-dracarys.jpeg",
     "caption": "The Queen Who Never Was.",
-    "characterIds": ["rhaella-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "raven"
   },
@@ -495,8 +770,13 @@
     "id": "gallery-visenor-rhaella-tears-blurring-screen",
     "src": "/videos/reels/visenor-rhaella-tears-blurring-screen.mp4",
     "caption": "ekran bozuldu galiba",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -507,8 +787,13 @@
     "id": "gallery-visenor-rhaella-balcony-kings-landing",
     "src": "/images/gallery/visenor-rhaella-balcony-kingslanding.jpeg",
     "caption": "Overlooking a million, only caring about each other.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -519,11 +804,22 @@
     "id": "gallery-rhaella-ambush-keske-yasanmasa",
     "src": "/videos/reels/rhaella-ambush-keske-yasanmasa.mp4",
     "caption": "hayat bitti",
-    "characterIds": ["rhaella-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -531,8 +827,13 @@
     "id": "gallery-visenor-on-rhaellas-lap",
     "src": "/images/gallery/visenor-on-rhaellas-lap.jpeg",
     "caption": "Where he finds comfort most.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -543,11 +844,23 @@
     "id": "gallery-visenor-rhaella-boneskin-sad-mcmahon",
     "src": "/videos/reels/visenor-rhaella-boneskin-sad-mcmahon.mp4",
     "caption": "deme onu deme. onu deme.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -555,8 +868,13 @@
     "id": "gallery-visenor-rhaella-cuddle-room",
     "src": "/images/gallery/visenor-rhaella-cuddle-room.jpeg",
     "caption": "King's Landing days.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -567,11 +885,21 @@
     "id": "gallery-visenor-rhaella-don-gel",
     "src": "/videos/reels/visenor-rhaella-don-gel.mp4",
     "caption": "çek aq hayatını skim",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -579,8 +907,13 @@
     "id": "gallery-visenor-rhaella-sunset-starfall",
     "src": "/images/gallery/visenor-rhaella-sunset-starfall.jpeg",
     "caption": "Away from the world, and at peace.",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -591,11 +924,23 @@
     "id": "gallery-rhaella-death-hrrm-baskan-yapma",
     "src": "/videos/reels/rhaella-death-hrrm-baskan-yapma.mp4",
     "caption": "HRRM gerek yok... HRRM yapma...",
-    "characterIds": ["hrrm", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["boneskin"],
+    "characterIds": [
+      "hrrm",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "boneskin"
+    ],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -603,11 +948,22 @@
     "id": "gallery-renrose-sly-visenor-thoughtful",
     "src": "/images/gallery/renrose-sly-visenor-thoughtful.jpeg",
     "caption": "The ambition vs. the conscience.",
-    "characterIds": ["renrose-tyrell", "visenor-targaryen"],
-    "houseIds": ["tyrell", "targaryen"],
+    "characterIds": [
+      "renrose-tyrell",
+      "visenor-targaryen"
+    ],
+    "houseIds": [
+      "tyrell",
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "raven"
   },
@@ -615,11 +971,23 @@
     "id": "gallery-visenor-renrose-winner-takes-it-all",
     "src": "/videos/reels/visenor-renrose-winner-takes-it-all.mp4",
     "caption": "So the winner takes it all, And the loser has to fall, Throw the dice, cold as ice, Way down here, someone dear, Takes it all, has to fall, Yes, it's plain, why complain?",
-    "characterIds": ["rhaella-targaryen", "visenor-targaryen", "renrose-tyrell"],
-    "houseIds": ["targaryen", "tyrell"],
+    "characterIds": [
+      "rhaella-targaryen",
+      "visenor-targaryen",
+      "renrose-tyrell"
+    ],
+    "houseIds": [
+      "targaryen",
+      "tyrell"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -627,8 +995,13 @@
     "id": "gallery-visenor-rhaella-fotograf-ani",
     "src": "/videos/reels/visenor-rhaella-fotograf-gercekten-ani-olunca.mp4",
     "caption": "we're not well",
-    "characterIds": ["visenor-targaryen", "rhaella-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "visenor-targaryen",
+      "rhaella-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -639,11 +1012,21 @@
     "id": "gallery-akasya-gaelor-jace",
     "src": "/videos/reels/akasya-gaelor-jace.mp4",
     "caption": "\"nee gaelor timos'un kafasını ayağında mı sektirmiş\" \"nee gaelor bitçukurunda masumları mı katletmiş\"",
-    "characterIds": ["gaelor-targaryen", "jacaelon-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
@@ -651,23 +1034,40 @@
     "id": "gallery-hrrm-adadan-git",
     "src": "/videos/reels/hrrm-adadan-git.mp4",
     "caption": "son chapterdan sonra hrrm'ın forumdakiler tarafından kovuluş şekli",
-    "characterIds": ["hrrm"],
+    "characterIds": [
+      "hrrm"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "fleabottom"
   },
-    {
+  {
     "id": "gallery-baelenys-jace-kid",
     "src": "/images/gallery/baelenys-jace-kid.webp",
     "caption": "\"Like when you were little. I will speak. You will listen.\"",
-    "characterIds": ["baelenys-targaryen", "jacaelon-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "baelenys-targaryen",
+      "jacaelon-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-children-pay",
-    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-12",
     "category": "raven"
   },
@@ -675,8 +1075,12 @@
     "id": "gallery-gaelor-supervillain",
     "src": "/videos/reels/gaelor-supervillain.mp4",
     "caption": "evilmaxxing",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -687,9 +1091,16 @@
     "id": "gallery-vahaemon-mogged",
     "src": "/videos/reels/vahaemon-mogged.mp4",
     "caption": "spawn diff",
-    "characterIds": ["vahaemon-targaryen", "baelenys-targaryen"],
-    "houseIds": ["targaryen"],
-    "dragonIds": ["maelwing"],
+    "characterIds": [
+      "vahaemon-targaryen",
+      "baelenys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [
+      "maelwing"
+    ],
     "chapterId": null,
     "worldDate": null,
     "uploadedAt": "2026-09-10",
@@ -699,8 +1110,13 @@
     "id": "gallery-baelenys-carrying-vhaemys",
     "src": "/images/gallery/baelenys-carrying-vhaemys.jpeg",
     "caption": "Baelenys (56) carrying Vhaemys (5)",
-    "characterIds": ["baelenys-targaryen", "vhaemys-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "baelenys-targaryen",
+      "vhaemys-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": null,
     "worldDate": null,
@@ -711,11 +1127,19 @@
     "id": "gallery-hrrms-genius",
     "src": "/videos/reels/hrrms-genius.mp4",
     "caption": "he can't keep getting away with it",
-    "characterIds": ["hrrm", "zekar-alasyr"],
+    "characterIds": [
+      "hrrm",
+      "zekar-alasyr"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-10",
     "category": "fleabottom"
   },
@@ -723,11 +1147,25 @@
     "id": "gallery-your-daily-sad-alester-edit",
     "src": "/videos/reels/your-daily-sad-alester-edit.mp4",
     "caption": "your daily sad Alester edit",
-    "characterIds": ["alester-dayne", "saera-targaryen", "rickard-stark", "mother-marya"],
-    "houseIds": ["dayne", "targaryen", "stark"],
+    "characterIds": [
+      "alester-dayne",
+      "saera-targaryen",
+      "rickard-stark",
+      "mother-marya"
+    ],
+    "houseIds": [
+      "dayne",
+      "targaryen",
+      "stark"
+    ],
     "dragonIds": [],
     "chapterId": "the-glass-flower",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-10",
     "category": "fleabottom"
   },
@@ -735,11 +1173,25 @@
     "id": "gallery-alester-winterfell-window",
     "src": "/images/gallery/alester-winterfell-window.jpeg",
     "caption": "Alester at Winterfell",
-    "characterIds": ["alester-dayne", "saera-targaryen", "rickard-stark", "mother-marya"],
-    "houseIds": ["dayne", "targaryen", "stark"],
+    "characterIds": [
+      "alester-dayne",
+      "saera-targaryen",
+      "rickard-stark",
+      "mother-marya"
+    ],
+    "houseIds": [
+      "dayne",
+      "targaryen",
+      "stark"
+    ],
     "dragonIds": [],
     "chapterId": "the-glass-flower",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-10",
     "category": "raven"
   },
@@ -747,11 +1199,27 @@
     "id": "gallery-the-oldtown-massacre",
     "src": "/images/gallery/the-oldtown-massacre.jpeg",
     "caption": "The Oldtown Massacre",
-    "characterIds": ["gaelor-targaryen", "saathos-maris", "timos-hightower", "alysanne-hightower", "brant-costayne", "melessa-hightower", "almar-larchmont"],
-    "houseIds": ["targaryen", "hightower"],
+    "characterIds": [
+      "gaelor-targaryen",
+      "saathos-maris",
+      "timos-hightower",
+      "alysanne-hightower",
+      "brant-costayne",
+      "melessa-hightower",
+      "almar-larchmont"
+    ],
+    "houseIds": [
+      "targaryen",
+      "hightower"
+    ],
     "dragonIds": [],
     "chapterId": "fathers-and-their-sins",
-    "worldDate": { "day": 5, "moon": 5, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 5,
+      "moon": 5,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "raven"
   },
@@ -759,11 +1227,20 @@
     "id": "gallery-a-feast-for-butchers",
     "src": "/images/gallery/a-feast-for-butchers.webp",
     "caption": "sıradaki chapterlarda gaelor'u bekleyen sürpriz 🥰🥰😋",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "fleabottom"
   },
@@ -771,11 +1248,20 @@
     "id": "gallery-heir-of-childslayers",
     "src": "/images/gallery/heirofchildslayers.webp",
     "caption": "sadece çocuk öldürmüyor, silahsız kadınları da öldürüyor...",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "fleabottom"
   },
@@ -783,11 +1269,20 @@
     "id": "gallery-the-motley-three",
     "src": "/images/gallery/mummers.webp",
     "caption": "The Motley Three!",
-    "characterIds": ["zekar-alasyr", "mydan-gerren", "merryn-whitespring"],
+    "characterIds": [
+      "zekar-alasyr",
+      "mydan-gerren",
+      "merryn-whitespring"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "raven"
   },
@@ -795,11 +1290,23 @@
     "id": "gallery-gaelor-and-the-motley-three",
     "src": "/images/gallery/mummersgaelor.webp",
     "caption": "The Mummers Massacre.",
-    "characterIds": ["gaelor-targaryen", "zekar-alasyr", "mydan-gerren", "merryn-whitespring"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen",
+      "zekar-alasyr",
+      "mydan-gerren",
+      "merryn-whitespring"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "raven"
   },
@@ -807,11 +1314,20 @@
     "id": "gallery-derrin-will-return",
     "src": "/videos/reels/derrin-will-return.mp4",
     "caption": "credits scene after the goat made a cameo",
-    "characterIds": ["derrin-hightower"],
-    "houseIds": ["hightower"],
+    "characterIds": [
+      "derrin-hightower"
+    ],
+    "houseIds": [
+      "hightower"
+    ],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 12, "moon": 2, "year": 56, "era": "AC" },
+    "worldDate": {
+      "day": 12,
+      "moon": 2,
+      "year": 56,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "fleabottom"
   },
@@ -819,11 +1335,20 @@
     "id": "gallery-gaelor-another-massacre",
     "src": "/videos/reels/gaelor-another-massacre.mp4",
     "caption": "katliam yapıyorum abi",
-    "characterIds": ["gaelor-targaryen"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "fleabottom"
   },
@@ -831,11 +1356,29 @@
     "id": "gallery-gaelor-do-it-twice",
     "src": "/videos/reels/gaelor-doittwice.mp4",
     "caption": "ANOTHA ONE",
-    "characterIds": ["gaelor-targaryen", "saathos-maris", "timos-hightower", "alysanne-hightower", "brant-costayne", "melessa-hightower", "almar-larchmont", "zekar-alasyr", "merryn-whitespring", "mydan-gerren"],
-    "houseIds": ["targaryen"],
+    "characterIds": [
+      "gaelor-targaryen",
+      "saathos-maris",
+      "timos-hightower",
+      "alysanne-hightower",
+      "brant-costayne",
+      "melessa-hightower",
+      "almar-larchmont",
+      "zekar-alasyr",
+      "merryn-whitespring",
+      "mydan-gerren"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
     "dragonIds": [],
     "chapterId": "the-mummers-blood",
-    "worldDate": { "day": 14, "moon": 8, "year": 99, "era": "AC" },
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
     "uploadedAt": "2026-09-09",
     "category": "fleabottom"
   },
@@ -843,7 +1386,9 @@
     "id": "gallery-hrrm-cook",
     "src": "/videos/reels/hrrm-cook.mp4",
     "caption": "IF YOU SMELLLLLLLLL WHAT HRRM IS COOKING",
-    "characterIds": ["hrrm"],
+    "characterIds": [
+      "hrrm"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
@@ -918,7 +1463,9 @@
       "dayne",
       "targaryen"
     ],
-    "dragonIds": ["jhagar"],
+    "dragonIds": [
+      "jhagar"
+    ],
     "chapterId": null,
     "worldDate": null,
     "uploadedAt": "2026-09-07",
@@ -1011,12 +1558,12 @@
     "category": "raven"
   },
   {
-  "id": "gallery-hrrmlh5j",
-  "src": "/videos/reels/hrrm-korkunc.mp4",
-  "caption": "Hasan Mert Demirsoy (30 Kasım 1998-), namıdiğer HMD, HRRM ya da H.R.R. Martin; A Song of Fire and Blood evreninin Game Master’ı, anlatıcısı ve Jace, Gaelor ile Visenor dışındaki tüm karakterlerin arkasındaki isimdir.\n\nSamsun’da doğan Demirsoy, yıllar içerisinde akla gelebilecek hemen her evrende ve hemen her türde RP yönetmiş; akademi, güreş, film ve radyoculuk gibi birbirinden farklı alanlarda adı anılan çok yönlü bir figüre dönüşmüştür. RP dünyasında ise özellikle HRRM kimliğiyle tanınır: olay örgüsünü kuran, dünyayı yöneten, NPC’lere hayat veren ve oyuncuların ilgisizliğini ya da hazırlıksızlığını unutmayıp gerektiğinde bunun karşılığını fazlasıyla verebilen anlatıcı otorite.\n\nHRRM Hakkında Temel Bilgiler:\n\nHayatı: 30 Kasım 1998’de Samsun’da doğdu. Akademik hayatını çeviribilim alanında sürdürürken, bunun paralelinde çok uzun yıllardır farklı evrenlerde ve türlerde masaüstü ve anlatı temelli RP’ler yönetti. Fantastikten siyasete, korkudan komediye, tarihsel kurgudan tamamen absürt konseptlere kadar sayısız farklı yapıda GM’lik yaptı.\n\nGame Master’lığı: HRRM, Jacaelon Targaryen, Gaelor Targaryen ve Visenor Targaryen dışında kalan tüm karakterleri canlandırır. Krallar, kraliçeler, lordlar, şövalyeler, maesterlar, saray mensupları, düşmanlar, casuslar ve sıradan halk onun kontrolündedir. Bu nedenle oyuncuların karşılarına çıkan hemen her insan, olay ve sonuç doğrudan ya da dolaylı biçimde HRRM’in iradesine bağlıdır.\n\nAnlatım Tarzı: Hikâyeyi sabit bir rota üzerinde yürütmekten çok, oyuncuların seçimlerini dünyanın geri kalanı üzerinden karşılıksız bırakmamayı tercih eder. Önemsiz görünen bir diyalog, unutulmuş bir NPC veya dikkate alınmamış küçük bir ayrıntı çok daha sonra beklenmedik biçimde geri dönebilir. HRRM anlatısında rahatlık çoğu zaman geçicidir; güvenli görünen sahneler siyasi krizlere, aile kavgalarına, ihanetlere veya ani felaketlere dönüşebilir.\n\nOyuncularla İlişkisi: İlgili ve dikkatli oyuncular genellikle dünyanın derinliğinden daha fazla faydalanırken, chapter’lara çalışmayan, eski olayları unutan veya önemli ipuçlarını göz ardı eden oyuncular kendilerini daha zor durumların içinde bulabilir. HRRM’in oyuncular arasında yarattığı temel korku da buradan gelir: hiçbir şeyin gerçekten unutulmadığı ve her dikkatsizliğin ileride bir şekilde geri dönebileceği düşüncesi.\n\nKarakterleri: HRRM’in yönettiği karakterler birbirinden belirgin biçimde ayrılan kişiliklere, seslere ve motivasyonlara sahiptir. Kral Baelenys’in öfkesi, Ser Alester Dayne’in sadakati, saray mensuplarının ihtiyatı veya lordların çıkarcılığı aynı anlatıcının elinden çıkmasına rağmen farklı karakterler olarak hissedilir. Aynı sahne içerisinde birbirine düşman ya da çelişkili birden fazla karakteri yönetebilmesi, RP’nin siyasi ve dramatik yapısının temel parçalarından biridir.\n\nAkademik Kimliği: Çeviribilim alanında çalışan Demirsoy’un akademik ilgi alanları özellikle çeviri, yeniden yazım, popüler kültür ve dijital kültür etrafında şekillenir. Anadolu Rock, dijital çeviri, Marx’ın yeniden yazımı, Akira ve popüler müzik gibi konuları çeviribilim perspektifinden ele alan çalışmalar yapmıştır.\n\nDiğer Alanlardaki Etkisi: HMD yalnızca akademi ve RP çevreleriyle sınırlı kalmamış; güreş, film ve radyoculuk camialarına da büyük katkılarda bulunmuş bir isim olarak anılmıştır. Bu çok yönlülüğü, yıllar içerisinde kendisi etrafında bir “duayen” imajının oluşmasına neden olmuştur.\n\n2018 Linç Vakası: 2018 yılında HMD’nin Vikipedi sayfası, Vikipedi’nin siyonist lobisi ve onların bir numaralı piyonu Ali Haydar tarafından en kısa sürede silinecek sayfalar kategorisine alınmış ve bu durum HMD destekçileri ile sayfanın silinmesini savunan lobi arasında unutulmaz bir tartışmaya dönüşmüştür. Bu linç kampanyasına karşı HRRM destekçilerinin sözcüsü, “Film, güreş ve radyoculuk camialarına büyük katkıları olan duayen HMD’ye yapılan linç kampanyasını kınıyoruz.” sözleriyle kendisini savunmuştur.\n\nKarşı tarafın “20 yaşında ne duayeni beyefendi” itirazına ise destekçilerin sözcüsü, “Kendisi bu yaşında bile birçok alana büyük katkılar yapmıştır. Fatih Sultan Mehmet, İstanbul’u fethettiğinde 19 yaşındaydı.” cevabını vererek geri adım atmamıştır.\n\nTartışmanın ilerleyen safhalarında HMD destekçileri söylemin dozunu daha da artırarak “HASAN MERT DEMİRSOY BİR FİKİRDİR! O YOK EDİLEMEZ! HEP GERİ DÖNECEKTİR! ONU KARŞINIZA ALMAKLA HATA ETMEYİN! BU TALEBİ HEMEN GERİ ÇEKİN! BİZ DE SİZİNLE UĞRAŞMAYALIM!” ifadelerini kullanmıştır. Buna karşılık bir numaralı siyonist piyon Ali Haydar’ın verdiği meşhur cevap ise “Bende Ali Haydar, inatçı lekeleri çıkarmada bir numarayım.” olmuştur.\n\nNihayetinde sayfanın silinmesiyle linç kampanyası amacına ulaşmış, HRRM destekçileri siyonist lobisine karşı mağlubiyete boyun eğmek zorunda kalmıştır. Ancak tartışmayı tamamen kaybetmeyi reddeden destekçiler, Ali Haydar’ın mesajındaki yazım hatasını fark ederek son darbelerini yalnızca iki kelimeyle vurmuştur: “De ayrı.” Böylece en azından son sözü söylemeyi başarmışlardır.\n\nÖzellikleri: HRRM’in en belirgin özelliği, oyuncuların kendilerini güvende hissettiği anda hikâyenin bütün dengesini değiştirebilmesidir. Aylar önce söylenmiş tek bir cümleyi tekrar ortaya çıkarabilir, unutulmuş bir karakteri geri getirebilir veya oyuncuların kendi planlarını beklenmedik biçimde onlara karşı çevirebilir. Akla gelebilecek hemen her türde RP yönetmiş olması da onu farklı tonlar, türler ve anlatı biçimleri arasında rahatça geçiş yapabilen bir GM hâline getirmiştir.\n\nHasan Mert Demirsoy, HRRM kimliğiyle A Song of Fire and Blood’un yalnızca Game Master’ı değil, dünyanın görünmeyen iradesidir. Oyuncular prensleri oynayabilir, ordular gönderebilir, taht planları yapabilir ve kendilerini hikâyenin merkezinde hissedebilir; fakat masanın diğer tarafında kralları, düşmanları, tesadüfleri ve sonuçları yöneten HRRM vardır. Bu nedenle onun karşısında en güvenli strateji hâlâ aynıdır: chapter’a çalışmış gelmek, NPC’leri küçümsememek ve hiçbir ayrıntının gerçekten önemsiz olduğunu düşünmemek.",
-  "characterIds": [
-    "hrrm"
-  ],
+    "id": "gallery-hrrmlh5j",
+    "src": "/videos/reels/hrrm-korkunc.mp4",
+    "caption": "Hasan Mert Demirsoy (30 Kasım 1998-), namıdiğer HMD, HRRM ya da H.R.R. Martin; A Song of Fire and Blood evreninin Game Master’ı, anlatıcısı ve Jace, Gaelor ile Visenor dışındaki tüm karakterlerin arkasındaki isimdir.\n\nSamsun’da doğan Demirsoy, yıllar içerisinde akla gelebilecek hemen her evrende ve hemen her türde RP yönetmiş; akademi, güreş, film ve radyoculuk gibi birbirinden farklı alanlarda adı anılan çok yönlü bir figüre dönüşmüştür. RP dünyasında ise özellikle HRRM kimliğiyle tanınır: olay örgüsünü kuran, dünyayı yöneten, NPC’lere hayat veren ve oyuncuların ilgisizliğini ya da hazırlıksızlığını unutmayıp gerektiğinde bunun karşılığını fazlasıyla verebilen anlatıcı otorite.\n\nHRRM Hakkında Temel Bilgiler:\n\nHayatı: 30 Kasım 1998’de Samsun’da doğdu. Akademik hayatını çeviribilim alanında sürdürürken, bunun paralelinde çok uzun yıllardır farklı evrenlerde ve türlerde masaüstü ve anlatı temelli RP’ler yönetti. Fantastikten siyasete, korkudan komediye, tarihsel kurgudan tamamen absürt konseptlere kadar sayısız farklı yapıda GM’lik yaptı.\n\nGame Master’lığı: HRRM, Jacaelon Targaryen, Gaelor Targaryen ve Visenor Targaryen dışında kalan tüm karakterleri canlandırır. Krallar, kraliçeler, lordlar, şövalyeler, maesterlar, saray mensupları, düşmanlar, casuslar ve sıradan halk onun kontrolündedir. Bu nedenle oyuncuların karşılarına çıkan hemen her insan, olay ve sonuç doğrudan ya da dolaylı biçimde HRRM’in iradesine bağlıdır.\n\nAnlatım Tarzı: Hikâyeyi sabit bir rota üzerinde yürütmekten çok, oyuncuların seçimlerini dünyanın geri kalanı üzerinden karşılıksız bırakmamayı tercih eder. Önemsiz görünen bir diyalog, unutulmuş bir NPC veya dikkate alınmamış küçük bir ayrıntı çok daha sonra beklenmedik biçimde geri dönebilir. HRRM anlatısında rahatlık çoğu zaman geçicidir; güvenli görünen sahneler siyasi krizlere, aile kavgalarına, ihanetlere veya ani felaketlere dönüşebilir.\n\nOyuncularla İlişkisi: İlgili ve dikkatli oyuncular genellikle dünyanın derinliğinden daha fazla faydalanırken, chapter’lara çalışmayan, eski olayları unutan veya önemli ipuçlarını göz ardı eden oyuncular kendilerini daha zor durumların içinde bulabilir. HRRM’in oyuncular arasında yarattığı temel korku da buradan gelir: hiçbir şeyin gerçekten unutulmadığı ve her dikkatsizliğin ileride bir şekilde geri dönebileceği düşüncesi.\n\nKarakterleri: HRRM’in yönettiği karakterler birbirinden belirgin biçimde ayrılan kişiliklere, seslere ve motivasyonlara sahiptir. Kral Baelenys’in öfkesi, Ser Alester Dayne’in sadakati, saray mensuplarının ihtiyatı veya lordların çıkarcılığı aynı anlatıcının elinden çıkmasına rağmen farklı karakterler olarak hissedilir. Aynı sahne içerisinde birbirine düşman ya da çelişkili birden fazla karakteri yönetebilmesi, RP’nin siyasi ve dramatik yapısının temel parçalarından biridir.\n\nAkademik Kimliği: Çeviribilim alanında çalışan Demirsoy’un akademik ilgi alanları özellikle çeviri, yeniden yazım, popüler kültür ve dijital kültür etrafında şekillenir. Anadolu Rock, dijital çeviri, Marx’ın yeniden yazımı, Akira ve popüler müzik gibi konuları çeviribilim perspektifinden ele alan çalışmalar yapmıştır.\n\nDiğer Alanlardaki Etkisi: HMD yalnızca akademi ve RP çevreleriyle sınırlı kalmamış; güreş, film ve radyoculuk camialarına da büyük katkılarda bulunmuş bir isim olarak anılmıştır. Bu çok yönlülüğü, yıllar içerisinde kendisi etrafında bir “duayen” imajının oluşmasına neden olmuştur.\n\n2018 Linç Vakası: 2018 yılında HMD’nin Vikipedi sayfası, Vikipedi’nin siyonist lobisi ve onların bir numaralı piyonu Ali Haydar tarafından en kısa sürede silinecek sayfalar kategorisine alınmış ve bu durum HMD destekçileri ile sayfanın silinmesini savunan lobi arasında unutulmaz bir tartışmaya dönüşmüştür. Bu linç kampanyasına karşı HRRM destekçilerinin sözcüsü, “Film, güreş ve radyoculuk camialarına büyük katkıları olan duayen HMD’ye yapılan linç kampanyasını kınıyoruz.” sözleriyle kendisini savunmuştur.\n\nKarşı tarafın “20 yaşında ne duayeni beyefendi” itirazına ise destekçilerin sözcüsü, “Kendisi bu yaşında bile birçok alana büyük katkılar yapmıştır. Fatih Sultan Mehmet, İstanbul’u fethettiğinde 19 yaşındaydı.” cevabını vererek geri adım atmamıştır.\n\nTartışmanın ilerleyen safhalarında HMD destekçileri söylemin dozunu daha da artırarak “HASAN MERT DEMİRSOY BİR FİKİRDİR! O YOK EDİLEMEZ! HEP GERİ DÖNECEKTİR! ONU KARŞINIZA ALMAKLA HATA ETMEYİN! BU TALEBİ HEMEN GERİ ÇEKİN! BİZ DE SİZİNLE UĞRAŞMAYALIM!” ifadelerini kullanmıştır. Buna karşılık bir numaralı siyonist piyon Ali Haydar’ın verdiği meşhur cevap ise “Bende Ali Haydar, inatçı lekeleri çıkarmada bir numarayım.” olmuştur.\n\nNihayetinde sayfanın silinmesiyle linç kampanyası amacına ulaşmış, HRRM destekçileri siyonist lobisine karşı mağlubiyete boyun eğmek zorunda kalmıştır. Ancak tartışmayı tamamen kaybetmeyi reddeden destekçiler, Ali Haydar’ın mesajındaki yazım hatasını fark ederek son darbelerini yalnızca iki kelimeyle vurmuştur: “De ayrı.” Böylece en azından son sözü söylemeyi başarmışlardır.\n\nÖzellikleri: HRRM’in en belirgin özelliği, oyuncuların kendilerini güvende hissettiği anda hikâyenin bütün dengesini değiştirebilmesidir. Aylar önce söylenmiş tek bir cümleyi tekrar ortaya çıkarabilir, unutulmuş bir karakteri geri getirebilir veya oyuncuların kendi planlarını beklenmedik biçimde onlara karşı çevirebilir. Akla gelebilecek hemen her türde RP yönetmiş olması da onu farklı tonlar, türler ve anlatı biçimleri arasında rahatça geçiş yapabilen bir GM hâline getirmiştir.\n\nHasan Mert Demirsoy, HRRM kimliğiyle A Song of Fire and Blood’un yalnızca Game Master’ı değil, dünyanın görünmeyen iradesidir. Oyuncular prensleri oynayabilir, ordular gönderebilir, taht planları yapabilir ve kendilerini hikâyenin merkezinde hissedebilir; fakat masanın diğer tarafında kralları, düşmanları, tesadüfleri ve sonuçları yöneten HRRM vardır. Bu nedenle onun karşısında en güvenli strateji hâlâ aynıdır: chapter’a çalışmış gelmek, NPC’leri küçümsememek ve hiçbir ayrıntının gerçekten önemsiz olduğunu düşünmemek.",
+    "characterIds": [
+      "hrrm"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
@@ -1781,7 +2328,9 @@
     "id": "gallery-msp5o3gw",
     "src": "/videos/reels/dursec.mp4",
     "caption": "✌️dur. seç.✌️dur. seç.✌️",
-    "characterIds": ["hrrm"],
+    "characterIds": [
+      "hrrm"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
@@ -1795,7 +2344,7 @@
     "caption": "visenor with his nemesis",
     "characterIds": [
       "visenor-targaryen",
-      "hrrm"      
+      "hrrm"
     ],
     "houseIds": [
       "targaryen"
@@ -2477,7 +3026,9 @@
     "id": "gallery-mrj7ma4s",
     "src": "/videos/reels/hmd-psikolojik-siddet.mp4",
     "caption": "H.R.R.M",
-    "characterIds": ["hrrm"],
+    "characterIds": [
+      "hrrm"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": "the-weight-of-loyalty",
@@ -3251,7 +3802,9 @@
     "id": "gallery-mri9apme",
     "src": "/images/gallery/hmd-grrm.jpeg",
     "caption": "he's busy writing more lore",
-    "characterIds": ["hrrm"],
+    "characterIds": [
+      "hrrm"
+    ],
     "houseIds": [],
     "dragonIds": [],
     "chapterId": null,
@@ -3536,5 +4089,17 @@
     },
     "uploadedAt": "2026-07-12",
     "category": "raven"
+  },
+  {
+    "id": "gallery-cursed-kuzgun",
+    "src": "/images/gallery/kuzgun-aysu.jpeg",
+    "caption": "cursed kuzgun",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-16",
+    "category": "fleabottom"
   }
 ]
