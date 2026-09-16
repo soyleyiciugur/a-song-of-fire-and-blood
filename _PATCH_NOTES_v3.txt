@@ -1,0 +1,16 @@
+ASOFAB Direct Raven / Personal Ravens v3
+
+Adds on top of the prior Direct Raven + Great Game v2 patch:
+- Mobile reply opens the keyboard immediately and keeps the composer/messages positioned correctly.
+- Tapping the transcript to dismiss the iOS keyboard restores the thread to the newest raven like pressing Done.
+- Personal Ravens cards show notification context/previews inline instead of requiring the notification lightbox.
+- Clicking a Personal Raven with a destination goes directly to that destination while marking it read.
+- Repeated-notification chevron SVG styling fixed (no more empty outlined circle).
+- Notification portrait/source spacing increased so TAVERNS / other source labels no longer sit behind the portrait/badge.
+- Generic title/body/signature copy made more compact.
+
+Validation:
+- npx tsc --noEmit: PASS
+- community:reactions: PASS (2320 repository threads/comments registered)
+- community:notify: PASS (0 candidate deliveries at run time)
+- community:push: NOT COMPLETED in this sandbox because npx Supabase CLI download/link step timed out without output. Run npm run community:push in the project environment.

@@ -6213,3 +6213,42 @@
   }
 }
 .turnNotice{position:fixed;left:50%;top:calc(var(--site-nav-height,58px) + 18px);z-index:90;display:grid;justify-items:center;gap:3px;min-width:170px;padding:10px 18px;border:1px solid rgba(202,160,88,.42);border-radius:10px;background:linear-gradient(160deg,rgba(42,25,29,.96),rgba(11,9,11,.96));box-shadow:0 18px 48px #0009,inset 0 1px #ffffff0a;color:#ead9b9;transform:translateX(-50%);pointer-events:none;animation:greatGameTurnNotice 2s ease both}.turnNotice span{color:#9e8564;font:700 8px/1 var(--font-geist);letter-spacing:.14em;text-transform:uppercase}.turnNotice strong{font:600 18px/1.15 var(--font-hotd);letter-spacing:.015em}@keyframes greatGameTurnNotice{0%{opacity:0;transform:translate(-50%,-8px) scale(.98)}12%,78%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-4px) scale(.99)}}@media(max-width:680px){.turnNotice{top:calc(var(--site-nav-height,58px) + 10px);min-width:150px;padding:9px 14px}.turnNotice strong{font-size:16px}}
+
+/* v24: online-view inspection and opponent-play presentation. */
+.inspectOnlyHandCard{cursor:zoom-in!important}
+.inspectOnlyHandCard:hover{filter:brightness(1.06)}
+
+.opponentPlayFlight{
+  position:fixed;
+  left:var(--opponent-play-start-x);
+  top:var(--opponent-play-start-y);
+  z-index:305;
+  width:clamp(132px,11.5vw,170px);
+  aspect-ratio:5/7;
+  overflow:hidden;
+  border:2px solid var(--tier-color,#8b1e2b);
+  background:#0e0b0e;
+  box-shadow:0 20px 54px rgba(0,0,0,.72),0 0 22px color-mix(in srgb,var(--tier-accent,#d4af37) 30%,transparent);
+  pointer-events:none;
+  isolation:isolate;
+  animation:opponentPlayFlight 820ms cubic-bezier(.2,.78,.24,1) both;
+}
+.opponentPlayFlight::after{content:"";position:absolute;inset:0;z-index:8;border:1px solid color-mix(in srgb,var(--tier-accent,#d4af37) 54%,transparent);box-shadow:inset 0 0 20px color-mix(in srgb,var(--tier-accent,#d4af37) 20%,transparent)}
+.opponentPlayTrail{position:absolute;inset:-35% -70%;z-index:7;background:linear-gradient(112deg,transparent 39%,rgba(255,234,169,.3) 49%,transparent 59%);transform:translateX(-42%);animation:drawCardGleam 820ms ease-out both}
+@keyframes opponentPlayFlight{
+  0%{left:var(--opponent-play-start-x);top:var(--opponent-play-start-y);opacity:0;transform:rotate(-8deg) scale(.58)}
+  15%{opacity:1}
+  55%{left:var(--opponent-play-middle-x);top:var(--opponent-play-middle-y);transform:rotate(2.5deg) scale(1.08)}
+  100%{left:var(--opponent-play-end-x);top:var(--opponent-play-end-y);opacity:.08;transform:rotate(0) scale(.82)}
+}
+
+.opponentSpellReveal{position:fixed;left:18px;top:50%;z-index:304;display:grid;gap:7px;transform:translateY(-50%);pointer-events:none;animation:opponentSpellReveal 3s ease both}
+.opponentSpellEyebrow{justify-self:center;padding:4px 9px;border:1px solid rgba(190,146,78,.34);border-radius:999px;background:rgba(13,10,12,.92);color:#b79a70;font:700 8px/1 var(--font-geist);letter-spacing:.13em;text-transform:uppercase;box-shadow:0 10px 28px #0008}
+.opponentSpellCard{position:relative;width:clamp(150px,12.5vw,188px);aspect-ratio:5/7;overflow:hidden;border:2px solid var(--tier-color,#8b1e2b);border-radius:10px;background:#0e0b0e;box-shadow:0 24px 70px #000c,0 0 26px color-mix(in srgb,var(--tier-accent,#d4af37) 30%,transparent);isolation:isolate}
+@keyframes opponentSpellReveal{0%{opacity:0;transform:translate(-18px,-50%) scale(.96)}10%,78%{opacity:1;transform:translate(0,-50%) scale(1)}100%{opacity:0;transform:translate(-8px,-50%) scale(.98)}}
+
+@media(max-width:700px){
+  .opponentSpellReveal{left:8px;top:42%}
+  .opponentSpellCard{width:132px}
+  .opponentSpellEyebrow{font-size:7px}
+}

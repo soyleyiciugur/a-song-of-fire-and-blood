@@ -1,10 +1,67 @@
-ASOFAB patch: Direct Raven page sharing + Great Game online turn UX/fix + profile friend notifications + @luck admin notification templates
+ASOFAB / The Rookery — Direct Raven + Great Game + Admin cumulative patch v2
+========================================================================
 
-Apply by extracting at the repository root, preserving paths.
-Then run:
-  npm run community:push
+This ZIP is path-preserving. Extract it into the repository root and overwrite
+the matching files.
 
-Validation performed:
-  npx tsc --noEmit
+Direct Raven
+------------
+- Long-press a message to open the Favor/reaction bubble.
+- Message action menus stay above following messages and media.
+- Image attachments open in an in-chat lightbox; tapping outside returns to chat.
+- Portrait and emoji pickers stay open for repeated inserts.
+- Messages from the conversation currently open are suppressed from the Raven
+  unread/foreground notification surface.
+- Incoming ravens while browsing elsewhere show a compact top preview banner;
+  tapping it opens the target conversation/message.
+- iOS composer safe-area padding drops to 0 while the keyboard is open and
+  restores when it closes.
+- Tapping the chat to dismiss the keyboard now restores the bottom position
+  consistently, like pressing Done.
+- Quote cards jump to the original message. If the original is outside the
+  currently loaded window, its surrounding messages are loaded first.
+- Media-only quote labels use meaningful labels (Image, GIF, Gutter Reel,
+  Shared page, Portrait) instead of the generic “Raven”.
+- Realtime/sync paths were tightened so normal chat behavior remains the same
+  without repeatedly refetching the full thread.
 
-PWA reinstall is not required.
+The Great Game
+--------------
+- During the opponent's turn, you keep your own viewpoint and can inspect your
+  own hand/cards. Actions remain locked.
+- Restores the player's card-draw flight animation for online state updates.
+- Opponent unit/board cards animate from the opponent Hand HUD area to the
+  destination on the board.
+- Opponent non-board cards (spells/events/etc.) appear at the left side of the
+  board for about 3 seconds, then dismiss automatically.
+- Online event detail payloads support the opponent-card animation without
+  exposing the opponent's hidden hand.
+- Turn-change notices and username-based online labels/log behavior from the
+  earlier social/Great Game patch are retained.
+
+Also retained from the previous cumulative patch
+-----------------------------------------------
+- Page-level Direct Raven sharing with optional comment.
+- Profile/friend notification support.
+- @luck-only Admin settings tab and manual/template notification sender.
+- Great Game private online tables and related server-authoritative safeguards.
+
+Database
+--------
+After applying the patch, run once from the repository root:
+
+    npm run community:push
+
+This applies the included Great Game event-detail migration and any earlier
+included social/online migrations that have not already been applied.
+
+Validation
+----------
+- TypeScript: `tsc --noEmit --incremental false` passes.
+- Targeted ESLint still reports the pre-existing react-hooks/set-state-in-effect
+  findings in the large Great Game page and RavenConversation, plus existing
+  <img> optimization warnings. No TypeScript errors remain.
+
+PWA reinstall
+-------------
+Not required for these changes.

@@ -26,6 +26,34 @@ const day = (value: string) =>
 
 const MAX_PORTRAITS = 8;
 
+type RavenQuoteKind = "image" | "gif" | "reel" | "page" | "portrait" | "raven";
+
+function quoteDescriptor(message: DirectRavenMessage) {
+  const body = message.body || "";
+  const visible = body
+    .replace(/\[\[(?:portrait|reel):[a-z0-9-]+\]\]/gi, " ")
+    .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (visible) return { label: visible, kind: null as RavenQuoteKind | null };
+  if (message.attachment_path) return { label: "Image", kind: "image" as const };
+  if (message.gif) return { label: "GIF", kind: "gif" as const };
+  if (/\[\[reel:/i.test(body)) return { label: ravenBodySummary(body), kind: "reel" as const };
+  if (/\[\[page:/i.test(body)) return { label: ravenBodySummary(body), kind: "page" as const };
+  const portraits = parseRavenBody(body, true).portraitIds.length;
+  if (portraits) return { label: portraits === 1 ? "Portrait" : `${portraits} portraits`, kind: "portrait" as const };
+  return { label: ravenBodySummary(body) || "Raven", kind: "raven" as const };
+}
+
+function QuoteGlyph({ kind }: { kind: RavenQuoteKind }) {
+  if (kind === "image") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m6.5 17 4.2-4 2.5 2.2 2.2-2 2.2 3.8"/></svg>;
+  if (kind === "gif") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M7.5 10.2c-.4-.5-1-.8-1.7-.8-1.3 0-2.2 1-2.2 2.6s.9 2.6 2.3 2.6c.7 0 1.2-.2 1.7-.6v-1.5H6.1M10 9.5v5M13 14.5v-5h3M13 12h2.5"/></svg>;
+  if (kind === "reel") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m10 8 6 4-6 4V8Z"/></svg>;
+  if (kind === "page") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V20H6V3.5Z"/><path d="M14 3.8V8h4M9 12h6M9 15.5h4.5"/></svg>;
+  if (kind === "portrait") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><circle cx="12" cy="10" r="2.2"/><path d="M8.5 16c.9-1.6 2.1-2.4 3.5-2.4s2.6.8 3.5 2.4"/></svg>;
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18.5c4.2-1 8.7-4.6 12.8-11.5-1.1 5.6-4.6 10.5-9.8 12.5"/><path d="M8 15c2.4-.4 4.7-1.7 6.7-3.7"/></svg>;
+}
+
 type CharacterOption = {
   id: string;
   name: string;
@@ -112,6 +140,10 @@ export default function RavenConversation({
   const loadedMessages = useRef(messages);
   const sendLock = useRef(false);
   const openedReadDone = useRef(false);
+  const messageHoldTimerRef = useRef<number | null>(null);
+  const messageHoldStartRef = useRef<{ id: string; x: number; y: number } | null>(null);
+  const keyboardWasOpenRef = useRef(false);
+  const restoreBottomAfterKeyboardRef = useRef(false);
 
   const activeConversation: DirectRavenConversation = conversation ?? {
     id: conversationId, user_a: userId, user_b: partner?.id ?? null, kind: "raven", title: null, description: null, avatar_path: null, owner_id: null, created_at: "", updated_at: "",
@@ -182,7 +214,7 @@ export default function RavenConversation({
     setPortraitSearch("");
   };
 
-  const insertComposerText = (text: string) => {
+  const insertComposerText = (text: string, refocus = true) => {
     const input = inputRef.current;
     const start = input?.selectionStart ?? body.length;
     const end = input?.selectionEnd ?? start;
@@ -190,7 +222,7 @@ export default function RavenConversation({
     setBody(next);
     requestAnimationFrame(() => {
       const caret = Math.min(start + text.length, next.length);
-      inputRef.current?.focus({ preventScroll: true });
+      if (refocus) inputRef.current?.focus({ preventScroll: true });
       inputRef.current?.setSelectionRange(caret, caret);
     });
   };
@@ -269,11 +301,26 @@ export default function RavenConversation({
         root.style.setProperty("--raven-mobile-height", `${Math.max(0, height - visibleNav)}px`);
         root.style.setProperty("--direct-raven-viewport-height", `${height}px`);
         const keyboardOpen = height < window.innerHeight - 100;
-        root.style.setProperty("--raven-composer-bottom-pad", keyboardOpen ? "4px" : "max(6px, env(safe-area-inset-bottom))");
+        root.style.setProperty("--raven-composer-bottom-pad", keyboardOpen ? "0px" : "max(6px, env(safe-area-inset-bottom))");
+
+        if (keyboardOpen && !keyboardWasOpenRef.current) {
+          restoreBottomAfterKeyboardRef.current = nearBottom.current || document.activeElement === inputRef.current;
+        }
 
         if (document.activeElement === inputRef.current && nearBottom.current) {
           scrollBottom();
         }
+
+        if (!keyboardOpen && keyboardWasOpenRef.current && restoreBottomAfterKeyboardRef.current) {
+          restoreBottomAfterKeyboardRef.current = false;
+          requestAnimationFrame(() => {
+            scrollBottom();
+            window.setTimeout(scrollBottom, 90);
+            window.setTimeout(scrollBottom, 240);
+          });
+        }
+
+        keyboardWasOpenRef.current = keyboardOpen;
       });
     };
 
@@ -330,6 +377,38 @@ export default function RavenConversation({
 
 
   useEffect(() => {
+    let disposed = false;
+    const clearPresence = () => {
+      void supabase.from("direct_raven_presence").delete().eq("conversation_id", conversationId).eq("user_id", userId);
+    };
+    const writePresence = async () => {
+      if (disposed) return;
+      if (document.visibilityState !== "visible") {
+        clearPresence();
+        return;
+      }
+      await supabase.from("direct_raven_presence").upsert({
+        conversation_id: conversationId,
+        user_id: userId,
+        active_until: new Date(Date.now() + 20_000).toISOString(),
+        updated_at: new Date().toISOString(),
+      }, { onConflict: "conversation_id,user_id" });
+    };
+    void writePresence();
+    const timer = window.setInterval(() => void writePresence(), 8_000);
+    const visibility = () => document.visibilityState === "visible" ? void writePresence() : clearPresence();
+    document.addEventListener("visibilitychange", visibility);
+    window.addEventListener("pagehide", clearPresence);
+    return () => {
+      disposed = true;
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", visibility);
+      window.removeEventListener("pagehide", clearPresence);
+      clearPresence();
+    };
+  }, [conversationId, supabase, userId]);
+
+  useEffect(() => {
     if (openedReadDone.current || document.visibilityState !== "visible") return;
     const latest = loadedMessages.current.at(-1);
     if (!latest) return;
@@ -377,8 +456,8 @@ export default function RavenConversation({
       window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
     };
 
-    const markReadAt = async (at?: string) => {
-      if (document.visibilityState !== "visible" || !nearBottom.current) return;
+    const markReadAt = async (at?: string, force = false) => {
+      if (document.visibilityState !== "visible" || (!force && !nearBottom.current)) return;
       const latest = loadedMessages.current.at(-1);
       const lastReadAt = at ?? latest?.created_at;
       if (!lastReadAt) return;
@@ -407,7 +486,7 @@ export default function RavenConversation({
       window.dispatchEvent(new CustomEvent("direct-raven-read", { detail: { conversationId } }));
     };
 
-    const sync = async () => {
+    const sync = async (includeMessages = true) => {
       if (document.visibilityState !== "visible") return;
       let query = supabase
         .from("direct_raven_messages")
@@ -416,6 +495,9 @@ export default function RavenConversation({
         .order("created_at");
       const oldest = loadedMessages.current[0];
       if (oldest) query = query.gte("created_at", oldest.created_at);
+      const messagePromise = includeMessages
+        ? query
+        : Promise.resolve({ data: null as DirectRavenMessage[] | null, error: null });
 
       const readPromise = !isGuild && partner
         ? supabase.from("direct_raven_reads").select("last_read_at").eq("conversation_id", conversationId).eq("user_id", partner.id).maybeSingle()
@@ -426,7 +508,7 @@ export default function RavenConversation({
       const blockPromise = !isGuild && partner
         ? supabase.from("direct_raven_blocks").select("blocker_id,blocked_id").or(`and(blocker_id.eq.${userId},blocked_id.eq.${partner.id}),and(blocker_id.eq.${partner.id},blocked_id.eq.${userId})`)
         : Promise.resolve({ data: [], error: null });
-      const [{ data }, { data: reads }, { data: guildReadRows }, { data: blocks }] = await Promise.all([query, readPromise, guildReadPromise, blockPromise]);
+      const [{ data }, { data: reads }, { data: guildReadRows }, { data: blocks }] = await Promise.all([messagePromise, readPromise, guildReadPromise, blockPromise]);
 
       if (!active) return;
       if (data) {
@@ -466,21 +548,23 @@ export default function RavenConversation({
           setMessages((current) => current.some((entry) => entry.id === message.id)
             ? current.map((entry) => entry.id === message.id ? message : entry)
             : [...current, message].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id)));
-          if (nearBottom.current) {
-            requestAnimationFrame(scrollBottom);
-            void markReadAt(message.created_at);
-          } else setNewMessages(true);
+          if (document.visibilityState === "visible") void markReadAt(message.created_at, true);
+          if (nearBottom.current) requestAnimationFrame(scrollBottom);
+          else setNewMessages(true);
         }
       )
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "direct_raven_messages", filter: `conversation_id=eq.${conversationId}` },
-        () => void sync()
+        (payload) => {
+          const message = payload.new as DirectRavenMessage;
+          setMessages((current) => current.map((entry) => entry.id === message.id ? message : entry));
+        }
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "direct_raven_reads", filter: `conversation_id=eq.${conversationId}` },
-        () => void sync()
+        () => void sync(false)
       )
       .on(
         "postgres_changes",
@@ -492,7 +576,7 @@ export default function RavenConversation({
       )
       .subscribe();
 
-    const timer = setInterval(() => void sync(), 10000);
+    const timer = setInterval(() => void sync(), 30000);
     const visible = () => { if (document.visibilityState === "visible") void sync(); };
     const read = () => { if (nearBottom.current) void markReadAt(); };
 
@@ -515,13 +599,34 @@ export default function RavenConversation({
     input?.click();
   }
 
+  function cancelMessageHold() {
+    if (messageHoldTimerRef.current !== null) window.clearTimeout(messageHoldTimerRef.current);
+    messageHoldTimerRef.current = null;
+    messageHoldStartRef.current = null;
+  }
+
   function startSwipeReply(event: React.PointerEvent<HTMLDivElement>, message: DirectRavenMessage) {
-    if (event.pointerType !== "touch" || closed || message.deleted_at) return;
+    if (message.deleted_at) return;
+
+    const interactive = (event.target as Element | null)?.closest?.("button,a,input,textarea,[role='button']");
+    if (!interactive && (event.pointerType === "touch" || event.pointerType === "pen")) {
+      cancelMessageHold();
+      messageHoldStartRef.current = { id: message.id, x: event.clientX, y: event.clientY };
+      messageHoldTimerRef.current = window.setTimeout(() => {
+        messageHoldTimerRef.current = null;
+        window.dispatchEvent(new CustomEvent("direct-raven-open-reactions", { detail: { messageId: message.id } }));
+      }, 430);
+    }
+
+    if (event.pointerType !== "touch" || closed) return;
     swipeRef.current = { id: message.id, startX: event.clientX, startY: event.clientY, lastX: event.clientX, row: event.currentTarget, horizontal: false };
     event.currentTarget.setPointerCapture?.(event.pointerId);
   }
 
   function moveSwipeReply(event: React.PointerEvent<HTMLDivElement>) {
+    const held = messageHoldStartRef.current;
+    if (held && (Math.abs(event.clientX - held.x) > 8 || Math.abs(event.clientY - held.y) > 8)) cancelMessageHold();
+
     const swipe = swipeRef.current;
     if (!swipe || swipe.id !== event.currentTarget.dataset.messageId) return;
     const dx = event.clientX - swipe.startX;
@@ -529,19 +634,43 @@ export default function RavenConversation({
     swipe.lastX = event.clientX;
     if (!swipe.horizontal && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.25) swipe.horizontal = true;
     if (!swipe.horizontal) return;
+    cancelMessageHold();
     const offset = Math.max(0, Math.min(62, dx * .72));
     swipe.row.style.setProperty("--raven-swipe-x", `${offset}px`);
   }
 
+  function focusComposerForReply() {
+    const input = inputRef.current;
+    if (!input) return;
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+
+    // On iOS the focus must remain inside the original user gesture. Delaying it
+    // through rAF can leave the reply state active without opening the keyboard.
+    if (mobile) input.focus();
+    else input.focus({ preventScroll: true });
+
+    restoreBottomAfterKeyboardRef.current = true;
+    requestAnimationFrame(() => {
+      input.scrollIntoView({ block: "nearest", inline: "nearest" });
+      scrollBottom();
+    });
+    window.setTimeout(scrollBottom, 120);
+  }
+
+  function beginReply(message: DirectRavenMessage) {
+    setReply(message);
+    setEditing(null);
+    focusComposerForReply();
+  }
+
   function endSwipeReply(event: React.PointerEvent<HTMLDivElement>, message: DirectRavenMessage) {
+    cancelMessageHold();
     const swipe = swipeRef.current;
     if (!swipe || swipe.id !== message.id) return;
     const dx = swipe.lastX - swipe.startX;
     swipe.row.style.setProperty("--raven-swipe-x", "0px");
     if (swipe.horizontal && dx > 52) {
-      setReply(message);
-      setEditing(null);
-      requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
+      beginReply(message);
     }
     swipeRef.current = null;
     try { event.currentTarget.releasePointerCapture?.(event.pointerId); } catch {}
@@ -572,7 +701,7 @@ export default function RavenConversation({
     const token = `[[portrait:${id}]]`;
     const prefix = before && !/\s$/.test(before) ? " " : "";
     const suffix = after && !/^\s/.test(after) ? " " : "";
-    insertComposerText(`${prefix}${token}${suffix}`);
+    insertComposerText(`${prefix}${token}${suffix}`, false);
   }
 
   function beginEdit(message: DirectRavenMessage) {
@@ -715,6 +844,52 @@ export default function RavenConversation({
     }
   }
 
+  function scrollToMessageNode(messageId: string) {
+    const target = document.getElementById(`raven-${messageId}`);
+    if (!target) return false;
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    target.classList.remove(styles.messageJumpTarget);
+    requestAnimationFrame(() => {
+      target.classList.add(styles.messageJumpTarget);
+      window.setTimeout(() => target.classList.remove(styles.messageJumpTarget), 1500);
+    });
+    return true;
+  }
+
+  async function jumpToMessage(messageId: string) {
+    if (scrollToMessageNode(messageId)) return;
+
+    const { data: targetMessage, error: targetError } = await supabase
+      .from("direct_raven_messages")
+      .select("*")
+      .eq("conversation_id", conversationId)
+      .eq("id", messageId)
+      .maybeSingle();
+
+    if (targetError || !targetMessage) {
+      setError("That earlier raven could not be found.");
+      return;
+    }
+
+    const [beforeResult, afterResult] = await Promise.all([
+      supabase.from("direct_raven_messages").select("*").eq("conversation_id", conversationId).lte("created_at", targetMessage.created_at).order("created_at", { ascending: false }).limit(40),
+      supabase.from("direct_raven_messages").select("*").eq("conversation_id", conversationId).gt("created_at", targetMessage.created_at).order("created_at", { ascending: true }).limit(40),
+    ]);
+
+    const around = [
+      ...((beforeResult.data ?? []) as DirectRavenMessage[]).reverse(),
+      ...((afterResult.data ?? []) as DirectRavenMessage[]),
+    ];
+
+    setMessages((current) => {
+      const map = new Map<string, DirectRavenMessage>();
+      for (const message of [...around, ...current]) map.set(message.id, message);
+      return [...map.values()].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
+    });
+    nearBottom.current = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => scrollToMessageNode(messageId)));
+  }
+
   async function older() {
     if (loadingOlder || !messages[0]) return;
     setLoadingOlder(true);
@@ -817,6 +992,19 @@ export default function RavenConversation({
       <div
         className={styles.messages}
         ref={listRef}
+        onPointerDown={() => {
+          if (document.activeElement === inputRef.current) {
+            // Tapping the transcript is another keyboard-dismiss path on iOS.
+            // Treat it exactly like pressing Done so the viewport settles back
+            // onto the newest raven instead of leaving the thread suspended.
+            restoreBottomAfterKeyboardRef.current = true;
+            inputRef.current?.blur();
+            requestAnimationFrame(scrollBottom);
+            window.setTimeout(scrollBottom, 90);
+            window.setTimeout(scrollBottom, 220);
+            window.setTimeout(scrollBottom, 420);
+          }
+        }}
         onScroll={(event) => {
           const element = event.currentTarget;
           nearBottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 80;
@@ -854,7 +1042,7 @@ export default function RavenConversation({
                 <div className={styles.dateDivider}>{day(message.created_at)}</div>
               )}
               {message.id === firstUnreadId && <div id="raven-unread-divider" className={styles.unreadDivider}><span>{unreadCount} unread {unreadCount === 1 ? "raven" : "ravens"}</span></div>}
-              <div id={`raven-${message.id}`} data-message-id={message.id} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs}`}
+              <div id={`raven-${message.id}`} data-message-id={message.id} className={`${styles.messageRow} ${mine ? styles.mine : styles.theirs} ${actionMenuId === message.id ? styles.messageRowMenuOpen : ""}`}
                 onPointerDown={(event) => startSwipeReply(event, message)}
                 onPointerMove={moveSwipeReply}
                 onPointerUp={(event) => endSwipeReply(event, message)}
@@ -876,13 +1064,21 @@ export default function RavenConversation({
                 <div className={`${styles.messageBubble} ${message.deleted_at ? styles.deletedMessage : ""}`}>
                   {isGuild && !mine && !message.deleted_at && <span className={styles.guildSenderName}>{memberMap.get(message.sender_id)?.display_name ?? "Guild member"}</span>}
                   {!message.deleted_at && message.reply_to && (
-                    <div className={styles.replyQuote}>
+                    <button
+                      type="button"
+                      className={styles.replyQuote}
+                      onClick={() => void jumpToMessage(message.reply_to!)}
+                      aria-label="Go to quoted raven"
+                    >
                       {parent
                         ? parent.deleted_at
-                          ? "Withdrawn raven"
-                          : ravenBodySummary(parent.body || "") || (parent.attachment_path ? "Photo" : "Raven")
-                        : "Reply to an earlier raven"}
-                    </div>
+                          ? <span className={styles.replyQuoteCopy}>Withdrawn raven</span>
+                          : (() => {
+                              const descriptor = quoteDescriptor(parent);
+                              return <span className={styles.replyQuoteCopy}>{descriptor.kind && <span className={styles.replyQuoteIcon}><QuoteGlyph kind={descriptor.kind} /></span>}<span>{descriptor.label}</span></span>;
+                            })()
+                        : <span className={styles.replyQuoteCopy}>Reply to an earlier raven</span>}
+                    </button>
                   )}
                   {!message.deleted_at && message.attachment_path && (
                     <RavenAttachment
@@ -897,7 +1093,7 @@ export default function RavenConversation({
                   <div className={styles.messageFooter}>
                     {!message.deleted_at && <div className={styles.messageActions}>
                       <MessageReactions messageId={message.id} userId={userId} />
-                      {!closed && <button type="button" className={styles.inlineReplyButton} onClick={() => { setReply(message); setEditing(null); inputRef.current?.focus({ preventScroll: true }); }}>Reply</button>}
+                      {!closed && <button type="button" className={styles.inlineReplyButton} onClick={() => beginReply(message)}>Reply</button>}
                     </div>}
                     <span className={styles.messageMeta}>
                       {message.edited_at && !message.deleted_at && <small>edited</small>}
@@ -954,7 +1150,7 @@ export default function RavenConversation({
                                 Copy
                               </button>
                             )}
-                            {!closed && <button type="button" onClick={() => { setActionMenuId(null); setReply(message); setEditing(null); requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true })); }}>Reply</button>}
+                            {!closed && <button type="button" onClick={() => { setActionMenuId(null); beginReply(message); }}>Reply</button>}
                             {mine && (
                               <>
                                 <button type="button" disabled={closed} onClick={() => { setActionMenuId(null); beginEdit(message); }}>Edit</button>
@@ -986,7 +1182,7 @@ export default function RavenConversation({
               <div className={`${styles.draftContext} ${reply ? styles.replyDraftContext : ""}`}>
                 <span className={styles.draftContextCopy}>
                   <small>{editing ? "Editing raven" : "Replying to"}</small>
-                  <b>{editing ? "Your message" : (reply ? ravenBodySummary(reply.body || "") || (reply.attachment_path ? "Photo" : "Raven") : "Raven")}</b>
+                  <b>{editing ? "Your message" : (reply ? (() => { const descriptor = quoteDescriptor(reply); return <span className={styles.draftQuoteSummary}>{descriptor.kind && <span className={styles.replyQuoteIcon}><QuoteGlyph kind={descriptor.kind} /></span>}<span>{descriptor.label}</span></span>; })() : "Raven")}</b>
                 </span>
                 <button
                   type="button"
@@ -1017,7 +1213,7 @@ export default function RavenConversation({
             {pickerOpen && (
               <div ref={pickerRef} className={`${styles.reactionPicker} ${pickerTab === "portraits" ? styles.portraitPopover : styles.emojiPopover}`} aria-label={pickerTab === "portraits" ? "Mini portraits" : "Emoji"}>
                 {pickerTab === "emoji" ? (
-                  <EmojiPicker onSelect={(emoji) => insertComposerText(emoji)} />
+                  <EmojiPicker onSelect={(emoji) => insertComposerText(emoji, false)} />
                 ) : (
                   <div className={styles.portraitPicker}>
                     <input
@@ -1099,7 +1295,7 @@ export default function RavenConversation({
               <button type="button" data-gif-trigger disabled={sending||!!editing} onClick={()=>{setGifOpen(v=>!v);setPickerOpen(false);setAttachmentMenuOpen(false);inputRef.current?.blur();}} aria-expanded={gifOpen}>GIF</button>
               <div ref={attachmentMenuRef} className={styles.attachmentToolWrap}>
                 <button type="button" data-attachment-trigger className={styles.fileButton} disabled={!!editing || sending} onClick={() => { setGifOpen(false); setPickerOpen(false); if (window.matchMedia("(max-width: 760px), (pointer: coarse)").matches) { setAttachmentMenuOpen(false); openNativeFilePicker(photoLibraryRef.current); } else { setAttachmentMenuOpen((value) => !value); } }} aria-expanded={attachmentMenuOpen}>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Photo / GIF
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" /></svg> Image / GIF
                 </button>
                 {attachmentMenuOpen && <div className={styles.attachmentSourceMenu} onPointerDown={(event) => event.stopPropagation()}>
                   <button type="button" onClick={() => { setAttachmentMenuOpen(false); openNativeFilePicker(photoLibraryRef.current); }}>

@@ -28,11 +28,13 @@ export async function POST(request: Request) {
   const activeUsers = new Set<string>();
   if (admin && recipients.length) {
     const now = new Date().toISOString();
-    const [{ data: pageActive }, { data: conversationActive }] = await Promise.all([
-      admin.from("direct_raven_page_presence").select("user_id").in("user_id", recipients).gt("active_until", now),
-      admin.from("direct_raven_presence").select("user_id").eq("conversation_id", conversation.id).in("user_id", recipients).gt("active_until", now),
-    ]);
-    for (const row of [...(pageActive ?? []), ...(conversationActive ?? [])]) activeUsers.add(row.user_id);
+    const { data: conversationActive } = await admin
+      .from("direct_raven_presence")
+      .select("user_id")
+      .eq("conversation_id", conversation.id)
+      .in("user_id", recipients)
+      .gt("active_until", now);
+    for (const row of conversationActive ?? []) activeUsers.add(row.user_id);
   }
 
   const kind = conversation.kind === "guild" ? "guild_parley" as const : "direct_raven" as const;
@@ -66,7 +68,7 @@ export async function POST(request: Request) {
     .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, ` ${pageLabel} `)
     .replace(/\s+/g, " ")
     .trim();
-  const rawPreview = attachedText || cleanText || (message.attachment_path ? "Photo" : message.gif ? "GIF" : "New raven");
+  const rawPreview = attachedText || cleanText || (message.attachment_path ? "Image" : message.gif ? "GIF" : "New raven");
   const messagePreview = rawPreview.length > 110 ? `${rawPreview.slice(0, 107).trimEnd()}...` : rawPreview;
   let guildAvatarUrl: string | undefined;
   if (conversation.kind === "guild" && conversation.avatar_path) {
@@ -79,7 +81,7 @@ export async function POST(request: Request) {
     actorUserId: user.id,
     actorName: actor?.display_name ?? actorUsername,
     kind,
-    href: `/messages/${conversation.id}?unread=1`,
+    href: `/messages/${conversation.id}?focus=${encodeURIComponent(message.id)}`,
     sourceLabel,
     context: {
       conversationId: conversation.id, messageId: message.id, replyBody: message.body, messagePreview,

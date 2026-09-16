@@ -187,7 +187,7 @@ export default function DirectRavenInbox({ conversations }: { conversations: Rav
                       ? "A message was withdrawn."
                       : lastMessage.body
                         ? <RavenMessagePreview body={lastMessage.body} />
-                        : "Photo / GIF"
+                        : "Image / GIF"
                     : guild ? "The parley awaits its first message." : "No message yet."}
                 </span>
               </span>

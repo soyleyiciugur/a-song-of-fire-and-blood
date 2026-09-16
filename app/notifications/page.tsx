@@ -338,45 +338,62 @@ function Notifications() {
   const activityComments = activityFilter === "for-you" && userId ? forYou : allComments;
   const activityNow = community.serverTime ? Date.parse(community.serverTime) : fallbackNow;
   const activityGroups = groupNotifications(activityComments.slice(0, activityLimit), activityNow);
-  const activePreview = useMemo(() => {
-    if (!activeNotification) return null;
-    const context = activeNotification.context ?? {};
+  const previewForNotification = useCallback((item: SiteNotification) => {
+    const context = item.context ?? {};
     const parentId = typeof context.parentId === "string" ? context.parentId : null;
     const commentId = typeof context.commentId === "string" ? context.commentId : null;
     const parentComment = parentId ? commentsById.get(parentId) ?? null : null;
     const parentBody = typeof context.parentBody === "string" ? context.parentBody : parentComment?.body ?? null;
     const replyBody = typeof context.replyBody === "string" ? context.replyBody : typeof context.threadBody === "string" ? context.threadBody : commentId ? commentsById.get(commentId)?.body ?? null : null;
     if (!parentBody && !replyBody) return null;
-    const actor = activeNotification.actor_id ? users.get(activeNotification.actor_id) : null;
+    const actor = item.actor_id ? users.get(item.actor_id) : null;
     const parentAuthorId = typeof context.parentAuthorId === "string" ? context.parentAuthorId : parentComment?.authorId ?? null;
     const parentAuthor = parentAuthorId ? users.get(parentAuthorId) : null;
     const contextTitle =
       typeof context.threadTitle === "string" ? context.threadTitle
       : typeof context.entryTitle === "string" ? context.entryTitle
-      : activeNotification.source_label;
+      : item.source_label;
     return {
       contextTitle,
       parentBody,
       replyBody,
-      ravenPreview: activeNotification.source === "direct-raven" || activeNotification.source === "guild-parley",
+      ravenPreview: item.source === "direct-raven" || item.source === "guild-parley",
       parentLabel: parentAuthorId && parentAuthorId === userId ? "You" : parentAuthor ? `@${parentAuthor.username}` : "Earlier words",
       actorLabel: actor ? `@${actor.username}` : (typeof context.actorName === "string" ? context.actorName : "Someone"),
     };
-  }, [activeNotification, commentsById, userId, users]);
+  }, [commentsById, userId, users]);
 
-  const renderPersonalCard = (item: SiteNotification, nested = false) => (
-    <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
-      <button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}>
-        <PersonalNotificationPortrait item={item} size={nested ? 44 : 52} />
-        <span className={styles.cardContent}>
-          <span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
-          <strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span>
-        </span>
-        {!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}
-        <svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg>
-      </button>
-    </li>
-  );
+  const activePreview = useMemo(() => activeNotification ? previewForNotification(activeNotification) : null, [activeNotification, previewForNotification]);
+
+  const renderInlinePreview = (item: SiteNotification) => {
+    const preview = previewForNotification(item);
+    if (!preview) return null;
+    return <span className={styles.cardPreview} aria-label="Notification preview">
+      {preview.contextTitle && <span className={styles.cardPreviewContext}>{preview.contextTitle}</span>}
+      {preview.parentBody && <span className={styles.cardPreviewMessage}><b>{preview.parentLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.parentBody} /> : <>“{preview.parentBody}”</>}</span></span>}
+      {preview.replyBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewReply}`}><b>{preview.actorLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.replyBody} /> : <>“{preview.replyBody}”</>}</span></span>}
+    </span>;
+  };
+
+  const renderPersonalCard = (item: SiteNotification, nested = false) => {
+    const target = notificationTargetHref(item);
+    const cardContents = <>
+      <PersonalNotificationPortrait item={item} size={nested ? 44 : 52} />
+      <span className={styles.cardContent}>
+        <span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
+        <span className={styles.cardCompactCopy}><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>
+        {renderInlinePreview(item)}
+      </span>
+      {!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}
+      <svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    </>;
+
+    return <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
+      {target !== "/notifications"
+        ? <Link className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} href={target} onClick={() => { if (!item.read_at) void markRead(item.id); }}>{cardContents}</Link>
+        : <button type="button" className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`} onClick={() => setOpen(item.id)}>{cardContents}</button>}
+    </li>;
+  };
 
   const renderActivityCard = (comment: (typeof community.comments)[number], nested = false) => {
     const user = users.get(comment.authorId);

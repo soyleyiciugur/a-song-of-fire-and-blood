@@ -174,6 +174,7 @@ export interface GreatGameEventRow {
   match_id: string;
   version: number;
   event_type: "joined" | "state" | "left";
+  detail: Record<string, unknown>;
   created_at: string;
 }
 

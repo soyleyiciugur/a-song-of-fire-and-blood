@@ -286,6 +286,32 @@ type DrawFlightProperties =
     "--draw-end-y": string;
   };
 
+type PendingOpponentPlayAnimation = {
+  version: number;
+  actorPlayerId: PlayerId;
+  cardId: string;
+  boardInstanceId: string | null;
+};
+
+type ActiveOpponentPlayAnimation = PendingOpponentPlayAnimation & {
+  animationId: number;
+  startX: number;
+  startY: number;
+  middleX: number;
+  middleY: number;
+  endX: number;
+  endY: number;
+};
+
+type OpponentPlayFlightProperties = CSSProperties & {
+  "--opponent-play-start-x": string;
+  "--opponent-play-start-y": string;
+  "--opponent-play-middle-x": string;
+  "--opponent-play-middle-y": string;
+  "--opponent-play-end-x": string;
+  "--opponent-play-end-y": string;
+};
+
 const TIER_MAP = new Map<
   TierId,
   {
@@ -489,6 +515,21 @@ function drawFlightStyle(
     "--draw-end-x": `${flight.endX}px`,
     "--draw-end-y": `${flight.endY}px`,
   } as DrawFlightProperties;
+}
+
+function opponentPlayFlightStyle(
+  flight: ActiveOpponentPlayAnimation,
+  card: GameCard
+): OpponentPlayFlightProperties {
+  return {
+    ...tierStyle(card),
+    "--opponent-play-start-x": `${flight.startX}px`,
+    "--opponent-play-start-y": `${flight.startY}px`,
+    "--opponent-play-middle-x": `${flight.middleX}px`,
+    "--opponent-play-middle-y": `${flight.middleY}px`,
+    "--opponent-play-end-x": `${flight.endX}px`,
+    "--opponent-play-end-y": `${flight.endY}px`,
+  } as OpponentPlayFlightProperties;
 }
 
 function tierLabel(
@@ -961,6 +1002,12 @@ export default function GreatGamePlayPage() {
       null
     );
 
+  const gameRef = useRef<GameState | null>(null);
+
+  useEffect(() => {
+    gameRef.current = game;
+  }, [game]);
+
   const supabase = useMemo(
     () => createSupabaseClient(),
     []
@@ -1195,6 +1242,11 @@ export default function GreatGamePlayPage() {
   ] = useState<string | null>(null);
 
   const [
+    inspectedHandInstanceId,
+    setInspectedHandInstanceId,
+  ] = useState<string | null>(null);
+
+  const [
     drawQueue,
     setDrawQueue,
   ] = useState<PendingDrawAnimation[]>([]);
@@ -1203,6 +1255,24 @@ export default function GreatGamePlayPage() {
     drawFlight,
     setDrawFlight,
   ] = useState<ActiveDrawAnimation | null>(null);
+
+  const [
+    pendingOpponentPlay,
+    setPendingOpponentPlay,
+  ] = useState<PendingOpponentPlayAnimation | null>(null);
+
+  const [
+    opponentPlayFlight,
+    setOpponentPlayFlight,
+  ] = useState<ActiveOpponentPlayAnimation | null>(null);
+
+  const [
+    opponentSpellReveal,
+    setOpponentSpellReveal,
+  ] = useState<{ key: number; cardId: string } | null>(null);
+
+  const opponentPlayAnimationIdRef = useRef(0);
+  const opponentSpellTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [
     hiddenDrawnIds,
@@ -1447,6 +1517,82 @@ export default function GreatGamePlayPage() {
     onComplete();
   }, [drawFlight, drawQueue]);
 
+  useEffect(() => {
+    if (!pendingOpponentPlay) return;
+
+    if (!pendingOpponentPlay.boardInstanceId) {
+      const reveal = { key: pendingOpponentPlay.version, cardId: pendingOpponentPlay.cardId };
+      const pendingVersion = pendingOpponentPlay.version;
+      const startTimer = setTimeout(() => {
+        setOpponentSpellReveal(reveal);
+        setPendingOpponentPlay((current) =>
+          current?.version === pendingVersion ? null : current,
+        );
+        if (opponentSpellTimerRef.current) clearTimeout(opponentSpellTimerRef.current);
+        opponentSpellTimerRef.current = setTimeout(() => {
+          setOpponentSpellReveal(null);
+          opponentSpellTimerRef.current = null;
+        }, 3000);
+      }, 0);
+      return () => clearTimeout(startTimer);
+    }
+
+    let cancelled = false;
+    let attempts = 0;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    const measure = () => {
+      if (cancelled) return;
+      attempts += 1;
+      const source =
+        document.querySelector<HTMLElement>(
+          `[data-hand-anchor="${pendingOpponentPlay.actorPlayerId}"]`,
+        ) ??
+        document.querySelector<HTMLElement>(
+          `[data-player-header="${pendingOpponentPlay.actorPlayerId}"]`,
+        );
+      const target = document.querySelector<HTMLElement>(
+        `[data-unit-instance-id="${pendingOpponentPlay.boardInstanceId}"]`,
+      );
+
+      if (!target) {
+        if (attempts < 24) timer = setTimeout(measure, 40);
+        return;
+      }
+
+      const sourceRect = source?.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const flightWidth = Math.min(170, Math.max(132, window.innerWidth * 0.115));
+      const startX = (sourceRect ? sourceRect.left + sourceRect.width * 0.72 : window.innerWidth * 0.72) - flightWidth / 2;
+      const startY = (sourceRect ? sourceRect.bottom + 10 : 92) - flightWidth * 0.35;
+      const endX = targetRect.left + targetRect.width / 2 - flightWidth / 2;
+      const endY = targetRect.top + targetRect.height / 2 - (flightWidth * 1.4) / 2;
+
+      opponentPlayAnimationIdRef.current += 1;
+      setOpponentPlayFlight({
+        ...pendingOpponentPlay,
+        animationId: opponentPlayAnimationIdRef.current,
+        startX,
+        startY,
+        middleX: startX + (endX - startX) * 0.52,
+        middleY: Math.max(34, Math.min(startY, endY) - 72),
+        endX,
+        endY,
+      });
+      setPendingOpponentPlay(null);
+    };
+
+    requestAnimationFrame(() => requestAnimationFrame(measure));
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [pendingOpponentPlay, game?.turnNumber, game?.log.length]);
+
+  useEffect(() => () => {
+    if (opponentSpellTimerRef.current) clearTimeout(opponentSpellTimerRef.current);
+  }, []);
+
   function collectNewDraws(
     before: GameState,
     after: GameState,
@@ -1611,6 +1757,7 @@ export default function GreatGamePlayPage() {
       : storedDecks.find((deck) => deck.id === onlineDeckId) ?? null;
 
   function applyOnlineMatchView(match: GreatGameOnlineMatchView) {
+    const previousStateForMatch = onlineMatch?.id === match.id ? gameRef.current : null;
     setOnlineMatch(match);
     setInviteCopied(false);
     setOnlineMenuError(null);
@@ -1645,9 +1792,17 @@ export default function GreatGamePlayPage() {
     }
 
     if (match.state) {
+      const previousState = previousStateForMatch;
+      const draws = previousState && previousState.phase === "playing" && match.state.phase === "playing"
+        ? collectNewDraws(previousState, match.state, match.playerId)
+        : [];
+
+      gameRef.current = match.state;
       setGame(match.state);
       setMode("game");
       setHandoff(false);
+
+      if (draws.length > 0) startDrawSequence(draws);
     }
   }
 
@@ -1893,7 +2048,27 @@ export default function GreatGamePlayPage() {
           table: "great_game_events",
           filter: `match_id=eq.${matchId}`,
         },
-        () => {
+        (payload) => {
+          const row = payload.new as {
+            version?: number;
+            detail?: Record<string, unknown>;
+          };
+          const detail = row.detail ?? {};
+          const actorPlayerId = detail.actorPlayerId;
+          const cardId = detail.cardId;
+          if (
+            detail.kind === "play-card" &&
+            actorPlayerId !== onlineMatch?.playerId &&
+            (actorPlayerId === "player1" || actorPlayerId === "player2") &&
+            typeof cardId === "string"
+          ) {
+            setPendingOpponentPlay({
+              version: Number(row.version ?? 0),
+              actorPlayerId,
+              cardId,
+              boardInstanceId: typeof detail.boardInstanceId === "string" ? detail.boardInstanceId : null,
+            });
+          }
           void refreshOnlineMatch(matchId);
         }
       )
@@ -2198,6 +2373,14 @@ export default function GreatGamePlayPage() {
         )
       : null;
 
+  const inspectedHandCard = inspectedHandInstanceId
+    ? viewPlayer.hand.find((handCard) => handCard.instanceId === inspectedHandInstanceId) ?? null
+    : null;
+
+  const inspectedHandDefinition = inspectedHandCard
+    ? getGameCard(inspectedHandCard.cardId)
+    : null;
+
   const inspectedUnit =
     inspectedUnitId
       ? [
@@ -2232,16 +2415,9 @@ export default function GreatGamePlayPage() {
       }
 
       void (async () => {
-        const before = currentGame;
         const nextMatch = await sendOnlineAction(action);
         const nextState = nextMatch?.state;
         if (!nextState) return;
-
-        const draws = collectNewDraws(
-          before,
-          nextState,
-          viewPlayerId
-        );
 
         setError(null);
         setPendingPlay(null);
@@ -2251,9 +2427,6 @@ export default function GreatGamePlayPage() {
         setDragCursor(null);
         setInspectedUnitId(null);
 
-        if (draws.length > 0) {
-          startDrawSequence(draws);
-        }
       })();
 
       return true;
@@ -2474,16 +2647,10 @@ export default function GreatGamePlayPage() {
 
     if (onlineMatch) {
       void (async () => {
-        const before = currentGame;
         const nextMatch = await sendOnlineAction({ type: "end-turn" });
         const nextState = nextMatch?.state;
         if (!nextState) return;
 
-        const draws = collectNewDraws(
-          before,
-          nextState,
-          viewPlayerId
-        );
         setError(null);
         setPendingPlay(null);
         setPendingConflict(null);
@@ -2491,9 +2658,6 @@ export default function GreatGamePlayPage() {
         setDragCursor(null);
         setInspectedUnitId(null);
         setHandoff(false);
-        if (draws.length > 0) {
-          startDrawSequence(draws);
-        }
       })();
       return;
     }
@@ -5438,6 +5602,41 @@ export default function GreatGamePlayPage() {
         );
       })()}
 
+      {opponentPlayFlight && (() => {
+        const playedCard = getGameCard(opponentPlayFlight.cardId);
+        return (
+          <div
+            key={opponentPlayFlight.animationId}
+            className={styles.opponentPlayFlight}
+            style={opponentPlayFlightStyle(opponentPlayFlight, playedCard)}
+            onAnimationEnd={(event) => {
+              if (event.currentTarget === event.target) setOpponentPlayFlight(null);
+            }}
+            aria-live="polite"
+            aria-label={`Opponent played ${playedCard.name}`}
+          >
+            <span className={styles.opponentPlayTrail} aria-hidden />
+            <CardArtwork card={playedCard} className={styles.fullCardArtwork} />
+            <CardChrome card={playedCard} cost={playedCard.cost} />
+            <CardInfoPanel card={playedCard} showDescription={false} />
+          </div>
+        );
+      })()}
+
+      {opponentSpellReveal && (() => {
+        const playedCard = getGameCard(opponentSpellReveal.cardId);
+        return (
+          <aside key={opponentSpellReveal.key} className={styles.opponentSpellReveal} aria-live="polite">
+            <span className={styles.opponentSpellEyebrow}>Opponent Played</span>
+            <div className={styles.opponentSpellCard} style={tierStyle(playedCard)} data-game-card="true">
+              <CardArtwork card={playedCard} className={styles.fullCardArtwork} />
+              <CardChrome card={playedCard} cost={playedCard.cost} detailed />
+              <CardInfoPanel card={playedCard} showTraitTooltips />
+            </div>
+          </aside>
+        );
+      })()}
+
       {dragCursor &&
         draggingHandInstanceId &&
         (() => {
@@ -6040,6 +6239,7 @@ export default function GreatGamePlayPage() {
                       pendingConflict
                   )
                 }
+                inspectOnly={Boolean(onlineMatch && !onlineCanAct)}
                 onMouseEnter={() => {
                   const hoveredCost =
                     getEffectiveCost(
@@ -6061,15 +6261,12 @@ export default function GreatGamePlayPage() {
                   )
                 }
                 onPlay={() => {
-                  if (
-                    suppressHandClickRef.current
-                  ) {
+                  if (suppressHandClickRef.current) return;
+                  if (onlineMatch && !onlineCanAct) {
+                    setInspectedHandInstanceId(handCard.instanceId);
                     return;
                   }
-
-                  beginPlayCard(
-                    handCard
-                  );
+                  beginPlayCard(handCard);
                 }}
                 onPointerDown={(event) =>
                   handleHandPointerDown(
@@ -6215,6 +6412,19 @@ export default function GreatGamePlayPage() {
             unit={inspectedUnit}
             state={currentGame}
             onClose={() => setInspectedUnitId(null)}
+          />
+        </>
+      )}
+
+      {inspectedHandCard && inspectedHandDefinition && (
+        <>
+          <div className={styles.selectionShade} onClick={() => setInspectedHandInstanceId(null)} />
+          <HandCardInspectOverlay
+            card={inspectedHandDefinition}
+            handCard={inspectedHandCard}
+            state={currentGame}
+            playerId={viewPlayerId}
+            onClose={() => setInspectedHandInstanceId(null)}
           />
         </>
       )}
@@ -6838,6 +7048,7 @@ function PlayerHeader({
 
   return (
     <section
+      data-player-header={playerId}
       className={`${styles.playerHeader} ${
         opponent
           ? styles.opponentPlayer
@@ -7004,6 +7215,9 @@ function PlayerHeader({
         <HudStat
           label="Hand"
           value={`${player.hand.length}/8`}
+          handAnchorPlayerId={
+            playerId
+          }
         />
 
         <HudStat
@@ -7086,6 +7300,7 @@ function HudStat({
   value,
   accent = false,
   deckAnchorPlayerId,
+  handAnchorPlayerId,
 }: {
   label: string;
   value:
@@ -7093,6 +7308,7 @@ function HudStat({
     | number;
   accent?: boolean;
   deckAnchorPlayerId?: PlayerId;
+  handAnchorPlayerId?: PlayerId;
 }) {
   return (
     <div
@@ -7103,6 +7319,9 @@ function HudStat({
       }`}
       data-deck-anchor={
         deckAnchorPlayerId
+      }
+      data-hand-anchor={
+        handAnchorPlayerId
       }
     >
       <span>
@@ -8273,6 +8492,7 @@ function HandCard({
   fanCount,
   drawHidden,
   interactionLocked,
+  inspectOnly = false,
   onPlay,
   onMouseEnter,
   onMouseLeave,
@@ -8290,6 +8510,7 @@ function HandCard({
   fanCount: number;
   drawHidden: boolean;
   interactionLocked: boolean;
+  inspectOnly?: boolean;
   onPlay: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -8341,6 +8562,10 @@ function HandCard({
           ? styles.draggingHandCard
           : "",
 
+        inspectOnly
+          ? styles.inspectOnlyHandCard
+          : "",
+
         drawHidden
           ? styles.drawHiddenHandCard
           : "",
@@ -8357,9 +8582,7 @@ function HandCard({
       data-hand-instance-id={
         handCard.instanceId
       }
-      disabled={
-        interactionLocked
-      }
+      disabled={interactionLocked && !inspectOnly}
       onClick={
         onPlay
       }
@@ -8370,18 +8593,10 @@ function HandCard({
         onMouseLeave
       }
       draggable={false}
-      onPointerDown={
-        onPointerDown
-      }
-      onPointerMove={
-        onPointerMove
-      }
-      onPointerUp={
-        onPointerUp
-      }
-      onPointerCancel={
-        onPointerCancel
-      }
+      onPointerDown={inspectOnly ? undefined : onPointerDown}
+      onPointerMove={inspectOnly ? undefined : onPointerMove}
+      onPointerUp={inspectOnly ? undefined : onPointerUp}
+      onPointerCancel={inspectOnly ? undefined : onPointerCancel}
       onDragStart={(event) =>
         event.preventDefault()
       }
@@ -9213,6 +9428,34 @@ function AbilityDisplay({
           {text}
         </p>
       )}
+    </div>
+  );
+}
+
+function HandCardInspectOverlay({
+  card,
+  handCard,
+  state,
+  playerId,
+  onClose,
+}: {
+  card: GameCard;
+  handCard: HandCardState;
+  state: GameState;
+  playerId: PlayerId;
+  onClose: () => void;
+}) {
+  const cost = getEffectiveCost(state, playerId, handCard);
+  return (
+    <div className={styles.selectedCardPreview}>
+      <div data-game-card="true" className={styles.selectedCardInner} style={tierStyle(card)}>
+        <CardArtwork card={card} className={styles.fullCardArtwork} />
+        <CardChrome card={card} cost={cost} detailed />
+        <CardInfoPanel card={card} showTraitTooltips />
+        <div className={styles.selectedActions}>
+          <button className={styles.selectedConfirm} onClick={onClose}>Close</button>
+        </div>
+      </div>
     </div>
   );
 }

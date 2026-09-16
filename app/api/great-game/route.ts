@@ -169,12 +169,14 @@ async function emitMatchEvent(
   admin: NonNullable<ReturnType<typeof createAdminClient>>,
   matchId: string,
   version: number,
-  eventType: "joined" | "state" | "left"
+  eventType: "joined" | "state" | "left",
+  detail: Record<string, unknown> = {}
 ) {
   await admin.from("great_game_events").insert({
     match_id: matchId,
     version,
     event_type: eventType,
+    detail,
   });
 }
 
@@ -396,8 +398,27 @@ export async function POST(request: Request) {
         return jsonError("It is not your turn.", 409);
       }
 
+      const playedHandCard = action.type === "play-card"
+        ? match.state.players[playerId].hand.find((card) => card.instanceId === action.handInstanceId) ?? null
+        : null;
+      const beforeBoardIds = action.type === "play-card"
+        ? new Set(match.state.players[playerId].board.map((unit) => unit.instanceId))
+        : null;
+
       const result = applyAction(match.state, action);
       if (!result.ok) return jsonError(result.error ?? "That move is not legal.", 422);
+
+      const addedBoardUnit = beforeBoardIds
+        ? result.state.players[playerId].board.find((unit) => !beforeBoardIds.has(unit.instanceId)) ?? null
+        : null;
+      const eventDetail: Record<string, unknown> = playedHandCard
+        ? {
+            kind: "play-card",
+            actorPlayerId: playerId,
+            cardId: playedHandCard.cardId,
+            boardInstanceId: addedBoardUnit?.instanceId ?? null,
+          }
+        : { kind: action.type, actorPlayerId: playerId };
 
       const nextVersion = match.version + 1;
       const finished = Boolean(result.state.winner || result.state.phase === "finished");
@@ -441,7 +462,7 @@ export async function POST(request: Request) {
         );
       }
 
-      await emitMatchEvent(admin, match.id, nextVersion, "state");
+      await emitMatchEvent(admin, match.id, nextVersion, "state", eventDetail);
       const view = await toMatchView(admin, updated as MatchRow, user.id);
       return NextResponse.json({ match: view });
     }

@@ -36,6 +36,18 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
     return () => { active = false; window.clearInterval(timer); document.removeEventListener("visibilitychange", run); };
   }, [refresh]);
   useEffect(() => {
+    const openFromMessageHold = (event: Event) => {
+      const detail = (event as CustomEvent<{ messageId?: string }>).detail;
+      if (detail?.messageId !== messageId) return;
+      setDetails(null);
+      setCustomOpen(false);
+      setOpen(true);
+    };
+    window.addEventListener("direct-raven-open-reactions", openFromMessageHold);
+    return () => window.removeEventListener("direct-raven-open-reactions", openFromMessageHold);
+  }, [messageId]);
+
+  useEffect(() => {
     if (!open && !details) return;
     const frame = window.requestAnimationFrame(() => {
       const popovers = wrapRef.current?.querySelectorAll<HTMLElement>(

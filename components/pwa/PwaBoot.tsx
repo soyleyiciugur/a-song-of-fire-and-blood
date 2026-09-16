@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import ShellUpdate from "./ShellUpdate";
 import AndroidInstallPrompt from "./AndroidInstallPrompt";
@@ -34,7 +34,7 @@ type ForegroundNotification = {
 type BannerState = ForegroundNotification & { burstCount: number };
 
 function validSource(value: unknown): value is NotificationSource {
-  return ["tavern", "ravens-eye", "direct-raven", "guild-parley", "chronicle", "guestbook", "realm"].includes(String(value));
+  return ["tavern", "ravens-eye", "direct-raven", "guild-parley", "chronicle", "guestbook", "profile", "realm"].includes(String(value));
 }
 function validMascot(value: unknown): value is NotificationMascot { return value === "mara" || value === "aldren"; }
 
@@ -42,6 +42,7 @@ export default function PwaBoot() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [banner, setBanner] = useState<BannerState | null>(null);
+  const seenForegroundIds = useRef(new Set<string>());
 
   useEffect(() => {
     if (!banner) return;
@@ -73,11 +74,18 @@ export default function PwaBoot() {
       }
 
       const notification: ForegroundNotification = { title: raw.title, body: raw.body, data: { ...data, source: data.source, mascot: data.mascot } };
+      if (typeof data.notificationId === "string") {
+        if (seenForegroundIds.current.has(data.notificationId)) {
+          event.ports[0]?.postMessage({ handled: true, action: "duplicate" });
+          return;
+        }
+        seenForegroundIds.current.add(data.notificationId);
+      }
       const activeConversation = document.documentElement.dataset.activeRavenConversation;
-      const ravenWorkspaceOpen = document.documentElement.dataset.directRavenWorkspaceActive === "1";
       const sameOpenRaven = document.visibilityState === "visible"
         && (data.source === "direct-raven" || data.source === "guild-parley")
-        && (ravenWorkspaceOpen || (typeof data.conversationId === "string" && data.conversationId === activeConversation));
+        && typeof data.conversationId === "string"
+        && data.conversationId === activeConversation;
 
       if (sameOpenRaven) {
         event.ports[0]?.postMessage({ handled: true, action: "suppressed" });
@@ -108,6 +116,66 @@ export default function PwaBoot() {
   }, [router, supabase]);
 
   useEffect(() => {
+    let channel: ReturnType<typeof supabase.channel> | null = null;
+    let disposed = false;
+
+    void (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || disposed) return;
+      channel = supabase
+        .channel(`foreground-ravens:${user.id}`)
+        .on("postgres_changes", { event: "INSERT", schema: "public", table: "site_notifications", filter: `user_id=eq.${user.id}` }, (payload) => {
+          const row = payload.new as {
+            id?: string; source?: unknown; mascot?: unknown; title?: string; body?: string; href?: string; context?: Record<string, unknown>;
+          };
+          if (row.source !== "direct-raven" && row.source !== "guild-parley") return;
+          if (!validSource(row.source) || !validMascot(row.mascot) || typeof row.id !== "string") return;
+          if (seenForegroundIds.current.has(row.id)) return;
+          seenForegroundIds.current.add(row.id);
+
+          const context = row.context ?? {};
+          const conversationId = typeof context.conversationId === "string" ? context.conversationId : undefined;
+          const activeConversation = document.documentElement.dataset.activeRavenConversation;
+          if (document.visibilityState === "visible" && conversationId && conversationId === activeConversation) {
+            const readAt = new Date().toISOString();
+            void supabase.from("site_notifications").update({ read_at: readAt }).eq("id", row.id).eq("user_id", user.id).is("read_at", null);
+            window.dispatchEvent(new CustomEvent("asofab:notifications-changed"));
+            return;
+          }
+
+          const notification: ForegroundNotification = {
+            title: row.title ?? "New raven",
+            body: row.body ?? "New words have arrived.",
+            data: {
+              notificationId: row.id,
+              source: row.source,
+              mascot: row.mascot,
+              conversationId,
+              targetHref: typeof row.href === "string" ? row.href : conversationId ? `/messages/${conversationId}` : "/messages",
+              actorUsername: typeof context.actorUsername === "string" ? context.actorUsername : undefined,
+              actorAvatarUrl: typeof context.actorAvatarUrl === "string" ? context.actorAvatarUrl : undefined,
+              conversationTitle: typeof context.conversationTitle === "string" ? context.conversationTitle : undefined,
+              guildAvatarUrl: typeof context.guildAvatarUrl === "string" ? context.guildAvatarUrl : undefined,
+              messagePreview: typeof context.messagePreview === "string" ? context.messagePreview : undefined,
+              messageNotification: true,
+            },
+          };
+
+          setBanner((current) => ({
+            ...notification,
+            burstCount: current?.data.messageNotification && current.data.conversationId === conversationId ? current.burstCount + 1 : 1,
+          }));
+        })
+        .subscribe();
+    })();
+
+    return () => {
+      disposed = true;
+      if (channel) void supabase.removeChannel(channel);
+    };
+  }, [supabase]);
+
+  useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
     let cancelled = false;
     const register = async () => {
@@ -117,7 +185,7 @@ export default function PwaBoot() {
         await navigator.serviceWorker.ready;
         if (!cancelled) void restorePush().catch(() => { /* Raven Settings offers explicit recovery. */ });
       } catch (error) {
-        console.error("The Rookery 🐦‍⬛ service worker could not be registered.", error);
+        console.error("ASOFAB service worker could not be registered.", error);
       }
     };
     if (document.readyState === "complete") void register();
