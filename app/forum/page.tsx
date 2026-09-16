@@ -15,6 +15,7 @@ import styles from './forum.module.css';
 import Composer from '@/components/community/Composer';
 import ContentActions from '@/components/community/ContentActions';
 import LikeButton from '@/components/community/LikeButton';
+import CommentActions from '@/components/direct-raven/CommentActions';
 import { Select } from '@/app/_components/Select';
 import { buildCommentTree, countDescendants, type CommentTreeNode } from '@/lib/commentThreads';
 
@@ -33,8 +34,8 @@ function Account({user}:{user:GutterUser}) {
     <p className={styles.muted}>{stats.comments} comments across {stats.posts} posts</p>{user.profileHref&&<Link href={user.profileHref} className={styles.viewProfile}>View profile <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}<FriendAccounts user={user}/>
   </div></details>;
 }
-function Rewards({comment}:{comment:GutterComment}) {
-  return <Link href={getCommentLink(comment)} className={styles.permalink} aria-label="Open permalink" title="Permalink"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.2 12.8 5.5 14.5a3.2 3.2 0 0 1-4.5-4.5l2.8-2.8a3.2 3.2 0 0 1 4.5 0M12.8 7.2l1.7-1.7A3.2 3.2 0 1 1 19 10l-2.8 2.8a3.2 3.2 0 0 1-4.5 0M6.8 13.2l6.4-6.4" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>;
+function Rewards({comment,author}:{comment:GutterComment;author:string}) {
+  return <CommentActions href={getCommentLink(comment)} body={comment.body} author={author} surface="Taverns"/>;
 }
 function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNode;users:Map<string,GutterUser>;comments:GutterComment[];threadId:string;target:string|null}) {
   const {comment,children}=node;
@@ -49,7 +50,7 @@ function ForumComment({node,users,comments,threadId,target}:{node:CommentTreeNod
         {parent&&<Link className={styles.replyTo} href={getCommentLink(parent)}>↳ Replying to @{users.get(parent.authorId)?.username}</Link>}{orphanReply&&<span className={styles.orphanReplyLabel}>↳ Reply to an earlier comment</span>}
         <Account user={user}/><time className={styles.time} dateTime={comment.publishedAt}>{dateLabel(comment.publishedAt)} TRT</time>
         {comment.moderation&&<p className={styles.modNote}>Moderator warning · {comment.moderation.rule}</p>}
-        <p className={styles.body}>{comment.body}</p><div className={styles.commentActions}><LikeButton kind="post" id={comment.id} legacyReactorIds={comment.legacyFavorIds}/><Composer kind="post" threadId={threadId} parentId={comment.id}/><Rewards comment={comment}/></div>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>} 
+        <p className={styles.body}>{comment.body}</p><div className={styles.commentActions}><LikeButton kind="post" id={comment.id} legacyReactorIds={comment.legacyFavorIds}/><Composer kind="post" threadId={threadId} parentId={comment.id}/><Rewards comment={comment} author={`@${user.username}`}/></div>{comment.canEdit&&<ContentActions kind="post" id={comment.id} body={comment.body}/>} 
         {children.length>0&&<button type="button" className={styles.replyToggle} aria-expanded={expanded} onClick={()=>setExpanded(value=>!value)}>{expanded?'Hide':'Show'} {descendantCount} {descendantCount===1?'reply':'replies'}</button>}
       </article>
     {children.length>0&&expanded&&<ol className={styles.replies} aria-label={`Replies to @${user.username}`}>{children.map(child=><ForumComment key={child.comment.id} node={child} users={users} comments={comments} threadId={threadId} target={target}/>)}</ol>}
@@ -68,6 +69,7 @@ function Forum() {
   const target=params.get('comment');
   const handled=useRef<string|null>(null);
   const [filter,setFilter]=useState('all');
+  const [highlightTarget,setHighlightTarget]=useState<string|null>(target);
   const [sort,setSort]=useState('conversation');
   const users=new Map(data.users.map(u=>[u.id,u]));
   const thread=data.forumThreads.find(t=>t.id===threadId);
@@ -75,10 +77,12 @@ function Forum() {
   const groups=buildCommentTree(comments);
   if(sort==='top')groups.sort((a,b)=>conversationFavorScore(b)-conversationFavorScore(a)||Date.parse(b.comment.publishedAt)-Date.parse(a.comment.publishedAt));
   useEffect(()=>{
-    if(!target){handled.current=null;return;}
+    if(!target){handled.current=null;setHighlightTarget(null);return;}
+    setHighlightTarget(target);
     if(!comments.some(c=>c.id===target)||handled.current===target)return;
     const timer=setTimeout(()=>{const el=document.getElementById(`comment-${target}`);if(el){el.scrollIntoView({block:'center',behavior:'instant'});el.focus({preventScroll:true});handled.current=target;}},100);
-    return()=>clearTimeout(timer);
+    const fadeTimer=setTimeout(()=>setHighlightTarget(current=>current===target?null:current),5000);
+    return()=>{clearTimeout(timer);clearTimeout(fadeTimer);};
   },[target,comments]);
   const filtered=data.forumThreads.filter(t=>filter==='all'||(filter==='chapters'?!!t.chapterSlug:!t.chapterSlug));
   const sorted=[...filtered].sort((a,b)=>{
@@ -101,7 +105,7 @@ function Forum() {
       </section>
       <Composer kind="post" threadId={thread.id}/><div className={styles.discussionBar}><h2>{comments.length} comments</h2><div className={styles.orderControl}><span>Order</span><Select value={sort} options={[{id:"conversation",name:"Conversation"},{id:"top",name:"Most Favored"}]} onChange={setSort} /></div></div>
       {target&&!comments.some(c=>c.id===target)&&data.loaded&&<p role="status">This comment is not available yet.</p>}
-      <ol className={styles.comments}>{groups.map(node=><ForumComment key={node.comment.id} node={node} users={users} comments={comments} threadId={thread.id} target={target}/>)}</ol>
+      <ol className={styles.comments}>{groups.map(node=><ForumComment key={node.comment.id} node={node} users={users} comments={comments} threadId={thread.id} target={highlightTarget}/>)}</ol>
     </>:data.loaded&&<p>Thread unavailable. <Link href="/forum">Back to Taverns</Link></p> : <>
       <div className={styles.filters} aria-label="Thread categories">{[['all','All tables'],['chapters','Chapter discussions'],['other','Theory & community']].map(([value,label])=><button key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)}>{label}</button>)}</div>
       <ol className={styles.threads}>{sorted.map(t=>{

@@ -7,7 +7,7 @@ import galleryData from "@/data/gallery.json";
 import styles from "./direct-raven.module.css";
 
 const PORTRAIT_TOKEN = /\[\[portrait:([a-z0-9-]+)\]\]/gi;
-const CONTENT_TOKEN = /(\[\[(?:portrait|reel|media):[a-z0-9-]+\]\]|\[\[page:[A-Za-z0-9_-]+\]\])/gi;
+const CONTENT_TOKEN = /(\[\[(?:portrait|reel|media):[a-z0-9-]+\]\]|\[\[(?:page|comment):[A-Za-z0-9_-]+\]\])/gi;
 
 type CharacterRecord = {
   id: string;
@@ -48,6 +48,12 @@ function decodePageToken(payload: string): { title: string; href: string; descri
     return null;
   }
 }
+
+
+function decodeCommentToken(payload: string): {href:string;body:string;author:string;surface:string}|null {
+  try { const n=payload.replace(/-/g,"+").replace(/_/g,"/"); const bytes=Uint8Array.from(atob(n+"=".repeat((4-n.length%4)%4)),c=>c.charCodeAt(0)); const p=JSON.parse(new TextDecoder().decode(bytes)); if(typeof p.href!=="string"||!p.href.startsWith("/")||typeof p.body!=="string") return null; return {href:p.href,body:p.body,author:typeof p.author==="string"?p.author:"Comment",surface:typeof p.surface==="string"?p.surface:"Community"}; } catch{return null}
+}
+function CommentGlyph(){return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14v10H9l-4 3v-13Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" strokeWidth="1.5"/><path d="M8 9h8M8 12h5" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>}
 
 function PageGlyph() {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V20H6V3.5Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/><path d="M14 3.8V8h4M9 12h6M9 15.5h4.5" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round"/></svg>;
@@ -119,6 +125,8 @@ export function ravenBodySummary(value: string) {
 }
 
 export function RavenMessagePreview({ body }: { body: string }) {
+  const sharedCommentMatch = /\[\[comment:([A-Za-z0-9_-]+)\]\]/i.exec(body);
+  if (sharedCommentMatch) { const comment=decodeCommentToken(sharedCommentMatch[1]); const message=body.replace(sharedCommentMatch[0]," ").replace(/\s+/g," ").trim(); return <>{message ? <>{message} · </> : null}<span className={styles.previewPageName}>{comment ? `Comment · ${comment.author}` : "Shared comment"}</span></>; }
   const sharedPageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(body);
   if (sharedPageMatch) {
     const page = decodePageToken(sharedPageMatch[1]);
@@ -156,6 +164,9 @@ export default function RavenMessageContent({ body, returnTo }: { body: string; 
       const id = portraitMatch[1].toLowerCase();
       return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} fallbackSrc={mascotFallback[id]} /></span>;
     }
+
+    const commentMatch = /^\[\[comment:([A-Za-z0-9_-]+)\]\]$/i.exec(part);
+    if (commentMatch) { const comment=decodeCommentToken(commentMatch[1]); if(!comment)return <span key={index}>Shared comment</span>; return <Link key={index} href={comment.href} className={styles.sharedPageCard}><span className={styles.sharedPageIcon}><CommentGlyph/></span><span className={styles.sharedReelCopy}><small>{comment.surface} comment · {comment.author}</small><strong>{comment.body}</strong><em>Open comment</em></span></Link>; }
 
     const pageMatch = /^\[\[page:([A-Za-z0-9_-]+)\]\]$/i.exec(part);
     if (pageMatch) {

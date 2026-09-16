@@ -26,19 +26,20 @@ const day = (value: string) =>
 
 const MAX_PORTRAITS = 8;
 
-type RavenQuoteKind = "image" | "gif" | "reel" | "page" | "portrait" | "raven";
+type RavenQuoteKind = "image" | "gif" | "reel" | "page" | "comment" | "portrait" | "raven";
 
 function quoteDescriptor(message: DirectRavenMessage) {
   const body = message.body || "";
   const visible = body
     .replace(/\[\[(?:portrait|reel):[a-z0-9-]+\]\]/gi, " ")
-    .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, " ")
+    .replace(/\[\[(?:page|comment):[A-Za-z0-9_-]+\]\]/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
   if (visible) return { label: visible, kind: null as RavenQuoteKind | null };
   if (message.attachment_path) return { label: "Image", kind: "image" as const };
   if (message.gif) return { label: "GIF", kind: "gif" as const };
   if (/\[\[reel:/i.test(body)) return { label: ravenBodySummary(body), kind: "reel" as const };
+  if (/\[\[comment:/i.test(body)) return { label: "Comment", kind: "comment" as const };
   if (/\[\[page:/i.test(body)) return { label: ravenBodySummary(body), kind: "page" as const };
   const portraits = parseRavenBody(body, true).portraitIds.length;
   if (portraits) return { label: portraits === 1 ? "Portrait" : `${portraits} portraits`, kind: "portrait" as const };
@@ -49,6 +50,7 @@ function QuoteGlyph({ kind }: { kind: RavenQuoteKind }) {
   if (kind === "image") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m6.5 17 4.2-4 2.5 2.2 2.2-2 2.2 3.8"/></svg>;
   if (kind === "gif") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M7.5 10.2c-.4-.5-1-.8-1.7-.8-1.3 0-2.2 1-2.2 2.6s.9 2.6 2.3 2.6c.7 0 1.2-.2 1.7-.6v-1.5H6.1M10 9.5v5M13 14.5v-5h3M13 12h2.5"/></svg>;
   if (kind === "reel") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m10 8 6 4-6 4V8Z"/></svg>;
+  if (kind === "comment") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14v10H9l-4 3v-13Z"/><path d="M8 9h8M8 12h5"/></svg>;
   if (kind === "page") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V20H6V3.5Z"/><path d="M14 3.8V8h4M9 12h6M9 15.5h4.5"/></svg>;
   if (kind === "portrait") return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><circle cx="12" cy="10" r="2.2"/><path d="M8.5 16c.9-1.6 2.1-2.4 3.5-2.4s2.6.8 3.5 2.4"/></svg>;
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18.5c4.2-1 8.7-4.6 12.8-11.5-1.1 5.6-4.6 10.5-9.8 12.5"/><path d="M8 15c2.4-.4 4.7-1.7 6.7-3.7"/></svg>;

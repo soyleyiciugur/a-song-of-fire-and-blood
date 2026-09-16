@@ -13,6 +13,7 @@ import styles from "./gutterComments.module.css";
 import Composer from "@/components/community/Composer";
 import ContentActions from "@/components/community/ContentActions";
 import LikeButton from "@/components/community/LikeButton";
+import CommentActions from "@/components/direct-raven/CommentActions";
 import { getCommentLink } from "@/lib/communityLinks";
 import { formatCompactTime } from "@/lib/formatCompactTime";
 
@@ -68,7 +69,7 @@ function Comment({ node, pinned = false, knownIds }: { node: CommentTreeNode; pi
             </div>
           </details>
           <p className={styles.body}>{comment.body}</p>
-          <div className={styles.commentActions}><LikeButton kind="raven" id={comment.id} /><Composer kind="raven" entryId={comment.entryId} parentId={comment.id} /><Link href={getCommentLink(comment)} className={styles.permalinkIcon} aria-label="Open permalink" title="Permalink"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.2 12.8 5.5 14.5a3.2 3.2 0 0 1-4.5-4.5l2.8-2.8a3.2 3.2 0 0 1 4.5 0M12.8 7.2l1.7-1.7A3.2 3.2 0 1 1 19 10l-2.8 2.8a3.2 3.2 0 0 1-4.5 0M6.8 13.2l6.4-6.4" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round"/></svg></Link></div>
+          <div className={styles.commentActions}><LikeButton kind="raven" id={comment.id} /><Composer kind="raven" entryId={comment.entryId} parentId={comment.id} /><CommentActions href={getCommentLink(comment)} body={comment.body} author={`@${user.username}`} surface="Raven's Eye"/></div>
           {comment.canEdit && <ContentActions kind="raven" id={comment.id} body={comment.body} />}
           {children.length > 0 && (
             <button type="button" className={styles.replyToggle} aria-expanded={expanded} onClick={() => setExpanded((value) => !value)}>
@@ -110,6 +111,7 @@ export default function GutterComments({ entryId, collapsible = false }: { entry
       element.focus({ preventScroll: true });
       element.dataset.highlighted = "true";
       handledTarget.current = target.id;
+      window.setTimeout(() => { if (element.dataset.highlighted === "true") delete element.dataset.highlighted; }, 5000);
     }, 150);
     return () => clearTimeout(timer);
   }, [target]);
