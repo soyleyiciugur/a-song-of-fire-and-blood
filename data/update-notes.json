@@ -4,7 +4,11 @@
     "items": [
       "Rebuilt The Great Game match board as a fixed full-viewport table with no page scrolling, a compact permanent utility rail, and the hand layered over the lower realm without changing card interactions.",
       "Made /cards/play open with the site navigation collapsed behind a half-visible top-center control, while restoring the normal navbar and collapse control when expanded.",
-      "Moved online table code, opponent, active player, turn state and Exit Game into the Table Whispers header so the former match masthead no longer consumes board space."
+      "Moved online table code, opponent, active player, turn state and Exit Game into the Table Whispers header so the former match masthead no longer consumes board space.",
+      "Restored the Gutter Reels hub Raven share control while keeping open media viewers above the hub control and anchoring mobile reel comments and sharing to the lower-right metadata edge.",
+      "Removed tag pills from Raven's Eye and Gutter Memes hub previews while restoring tags inside opened lightboxes on mobile and desktop.",
+      "Contained long shared-comment previews inside mobile Direct Raven bubbles with ellipsis truncation.",
+      "Realigned Rookery source icons to the source line and shifted activity avatars, usernames and copy onto the same left edge in regular and nested notifications."
     ],
     "features": [],
     "links": {}

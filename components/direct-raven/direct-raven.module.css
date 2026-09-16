@@ -679,3 +679,10 @@
 }
 :global(html[data-raven-keyboard-open="1"]) .composerArea{padding-bottom:0!important;transform:none!important}
 :global(html[data-raven-keyboard-open="1"]) .attachmentSourceMenu{bottom:56px!important}
+
+/* v16: shared-comment cards stay inside narrow Direct Raven bubbles on mobile. */
+@media(max-width:760px){
+  .sharedPageCard{width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow:hidden}
+  .sharedPageCard .sharedReelCopy{width:100%;max-width:100%;min-width:0;overflow:hidden}
+  .sharedPageCard .sharedReelCopy strong{display:block;width:100%;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}

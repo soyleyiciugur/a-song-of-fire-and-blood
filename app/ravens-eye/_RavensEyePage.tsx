@@ -1475,8 +1475,6 @@ function GallerySection({
       ) : (
         <div className={styles.masonry}>
           {visibleEntries.map((entry, idx) => {
-            const tags = flatTagsFor(entry);
-
             return (
               <div
                 key={entry.id}
@@ -1504,26 +1502,9 @@ function GallerySection({
                   <span className={styles.commentCount}>{getGutterComments(entry.id).length} comments</span>
                 )}
 
-                {(entry.caption || tags.length > 0) && (
+                {entry.caption && (
                   <div className={styles.cardOverlay}>
-                    {entry.caption && (
-                      <p className={styles.cardCaption}>{entry.caption}</p>
-                    )}
-
-                    <div className={styles.cardTags}>
-                      {tags.slice(0, 3).map((t) => (
-                        <TagButton
-                          key={`${t.type}-${t.id}`}
-                          tag={t}
-                          small
-                        />
-                      ))}
-                      {tags.length > 3 && (
-                        <span className="te-pill te-pill-sm">
-                          {`+${tags.length - 3}`}
-                        </span>
-                      )}
-                    </div>
+                    <p className={styles.cardCaption}>{entry.caption}</p>
                   </div>
                 )}
               </div>

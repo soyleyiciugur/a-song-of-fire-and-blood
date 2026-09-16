@@ -1380,7 +1380,7 @@
 .reelsCloseBtn svg { width: 17px; height: 17px; display: block; }
 
 @media (max-width: 720px) {
-  .reelActionRail { right: 10px; bottom: calc(100px + env(safe-area-inset-bottom)); gap: 11px; }
+  .reelActionRail { right: 10px; bottom: calc(30px + env(safe-area-inset-bottom)); gap: 11px; }
   .reelActionIcon { width: 42px; height: 42px; }
   .reelActionIcon svg { width: 23px; height: 23px; }
   .reelSlideMeta { padding-right: 66px; }
@@ -1512,7 +1512,6 @@
 .mediaRavenShareButton:hover,.mediaRavenShareButton:focus-visible{border-color:#c79b5e;background:linear-gradient(145deg,#47252b,#181215);outline:none}
 .lightboxCard{position:relative}
 @media(max-width:720px){
-  .lightboxTags{display:none!important}
   .reelSlideMeta{padding-right:66px}
   .mediaRavenShareButton{right:12px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px));width:40px;height:40px}
 }

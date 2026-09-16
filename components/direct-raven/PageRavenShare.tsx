@@ -65,7 +65,7 @@ export default function PageRavenShare() {
     return () => window.removeEventListener("great-game-session-change", sync);
   }, []);
 
-  const hidden = HIDDEN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || pathname === "/ravens-eye/reels" || (pathname === "/cards/play" && greatGameActive);
+  const hidden = HIDDEN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || (pathname === "/cards/play" && greatGameActive);
 
   useEffect(() => {
     if (!open) return;
