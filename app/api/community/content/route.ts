@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Sign in to join the discussion." }, { status: 401 });
 
-  const { data: profile } = await supabase.from("profiles").select("id,display_name").eq("id", user.id).maybeSingle();
+  const { data: profile } = await supabase.from("profiles").select("id,display_name,username").eq("id", user.id).maybeSingle();
   if (!profile) {
     const { error: profileError } = await supabase.rpc("ensure_own_profile");
     if (profileError) {
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
     after(() => broadcastSiteNotification({
       actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "new_tavern_thread",
       href: `/forum?thread=${encodeURIComponent(insertedThread.id)}`, sourceLabel: input.title,
-      context: { threadId: insertedThread.id, threadBody: input.body }, groupKey: "new-tavern-threads",
+      context: { threadId: insertedThread.id, threadBody: input.body, actorUsername: profile?.username ?? undefined }, groupKey: "new-tavern-threads",
       dedupeKey: `new-thread:${insertedThread.id}:{recipient}`,
     }));
     return NextResponse.json({ ok: true }, { status: 201 });
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
       kind: "tavern_answer",
       href: `/forum?thread=${encodeURIComponent(input.threadId)}&comment=${encodeURIComponent(inserted.id)}#comment-${encodeURIComponent(inserted.id)}`,
       sourceLabel,
-      context: { threadId: input.threadId, commentId: inserted.id, parentId: input.parentId ?? null, parentBody, replyBody: input.body },
+      context: { threadId: input.threadId, commentId: inserted.id, parentId: input.parentId ?? null, parentBody, replyBody: input.body, actorUsername: profile?.username ?? undefined },
       groupKey: `forum-thread:${input.threadId}`,
       dedupeKey: `forum-post:${inserted.id}:${recipient}`,
     }));
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       for (const participant of recipients) await dispatchSiteNotification({
         recipientUserId: participant, actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "tavern_participant_activity",
         href: `/forum?thread=${encodeURIComponent(input.threadId)}&comment=${encodeURIComponent(inserted.id)}#comment-${encodeURIComponent(inserted.id)}`,
-        sourceLabel, context: { threadId: input.threadId, commentId: inserted.id, replyBody: input.body }, groupKey: `forum-thread:${input.threadId}`,
+        sourceLabel, context: { threadId: input.threadId, commentId: inserted.id, replyBody: input.body, actorUsername: profile?.username ?? undefined }, groupKey: `forum-thread:${input.threadId}`,
         dedupeKey: `forum-participant:${inserted.id}:${participant}`,
       });
     });
@@ -132,7 +132,7 @@ export async function POST(request: Request) {
       kind: "ravens_eye_answer",
       href: ravenEntryLink(input.entryId, inserted.id),
       sourceLabel: galleryLabel(input.entryId),
-      context: { entryId: input.entryId, commentId: inserted.id, parentId: input.parentId, parentBody, replyBody: input.body },
+      context: { entryId: input.entryId, commentId: inserted.id, parentId: input.parentId, parentBody, replyBody: input.body, actorUsername: profile?.username ?? undefined },
       groupKey: `raven-entry:${input.entryId}`,
       dedupeKey: `raven-comment:${inserted.id}:${recipient}`,
     }));
@@ -140,7 +140,7 @@ export async function POST(request: Request) {
     after(() => broadcastSiteNotification({
       actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "ravens_eye_root_comment",
       href: ravenEntryLink(input.entryId, inserted.id), sourceLabel: galleryLabel(input.entryId),
-      context: { entryId: input.entryId, commentId: inserted.id, replyBody: input.body }, groupKey: `raven-entry:${input.entryId}`,
+      context: { entryId: input.entryId, commentId: inserted.id, replyBody: input.body, actorUsername: profile?.username ?? undefined }, groupKey: `raven-entry:${input.entryId}`,
       dedupeKey: `raven-root:${inserted.id}:{recipient}`,
     }));
   }

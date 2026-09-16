@@ -1,0 +1,14 @@
+ASOFAB Rookery v4.2 cumulative
+
+- Restores Personal Ravens semantic grouping that was accidentally flattened in v4.1.
+- Uses the same source-icon / portrait / content alignment for single cards, grouped summaries, and nested grouped cards.
+- Shows usernames in inline reply/content previews when available and replaces the literal “Replying to” label with a compact SVG reply glyph.
+- Vertically centers notifications that have no content preview.
+- Adds actorUsername context to new community, guestbook, reaction, and repository-authored community notifications for reliable @username display.
+- Processes the supplied @luck Pocket Cake Tavern inbox item with a selective @polls_and_vibes editorial reply.
+- Adds the new reaction target migration for that repository-authored reply.
+
+Validation:
+- TypeScript passes when the pre-existing app/social-test-7482 fixture is excluded; that unrelated fixture still has a missing affinityCatalog prop.
+- npm run validate:comments passes with 2321 registered reaction targets.
+- npm run community:sync reaches community:push but Supabase CLI/network times out in this environment; community:notify also times out here.

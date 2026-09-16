@@ -52,6 +52,7 @@ export async function POST(request: Request) {
         parentId: parent?.id ?? null,
         parentBody: parent?.body ?? null,
         replyBody: input.body,
+        actorUsername: actor?.username ?? undefined,
       },
       groupKey: `guestbook:${input.profileId}`,
       dedupeKey: `guestbook:${inserted.id}:${recipient}`,

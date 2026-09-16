@@ -11,7 +11,7 @@ import RavenIcon from "./RavenIcon";
 export default function DirectRavenNavButton() {
   const pathname = usePathname();
   const [unread, setUnread] = useState(0);
-  const [signedIn, setSignedIn] = useState(false);
+  const [signedIn, setSignedIn] = useState<boolean | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -67,9 +67,26 @@ export default function DirectRavenNavButton() {
     };
   }, [pathname]);
 
-  if (!signedIn) return null;
+  const navClassName = `${styles.notificationsButton} ${styles.directRavenButton}`;
+
+  // Keep the Raven slot mounted while Supabase restores the auth session. On a
+  // hard refresh the old version returned null for the first render, so every
+  // utility to its right slid left and then jumped back once getUser resolved.
+  // The hydrating placeholder is visually identical but inert; signed-out users
+  // keep an invisible slot so auth resolution never reflows the navbar.
+  if (signedIn !== true) {
+    return (
+      <span
+        className={`${navClassName} ${styles.directRavenAuthPlaceholder} ${signedIn === false ? styles.directRavenSignedOutPlaceholder : ""}`}
+        aria-hidden="true"
+      >
+        <RavenIcon size={19} />
+      </span>
+    );
+  }
+
   return (
-    <Link href="/messages" className={`${styles.notificationsButton} ${styles.directRavenButton}`} aria-label={unread ? `Direct Raven, ${unread} unread` : "Direct Raven"} title="Direct Raven">
+    <Link href="/messages" className={navClassName} aria-label={unread ? `Direct Raven, ${unread} unread` : "Direct Raven"} title="Direct Raven">
       <RavenIcon size={19} />
       {unread > 0 && <span className={styles.navBadge}>{unread > 99 ? "99+" : unread}</span>}
     </Link>

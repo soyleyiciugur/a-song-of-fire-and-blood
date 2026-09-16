@@ -1,0 +1,3 @@
+ASOFAB v4.1 cumulative hotfix
+- Direct Raven navbar slot no longer unmounts during auth hydration on hard refresh.
+- Logged-in users see a stable raven icon while session state restores; signed-out state preserves an invisible fixed-width slot to prevent neighboring utility icons from shifting.

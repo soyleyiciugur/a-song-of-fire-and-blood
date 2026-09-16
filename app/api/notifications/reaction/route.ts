@@ -23,12 +23,12 @@ export async function POST(request: Request) {
 
   const { data: like } = await supabase.from("member_likes").select("created_at").eq("user_id", user.id).eq("target_kind", kind).eq("target_id", targetId).maybeSingle();
   if (!like) return NextResponse.json({ ok: true, notified: false });
-  const { data: actor } = await supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle();
+  const { data: actor } = await supabase.from("profiles").select("display_name,username").eq("id", user.id).maybeSingle();
 
   let recipient: string | null = null;
   let href = "/notifications";
   let sourceLabel: string | null = null;
-  let notificationContext: Record<string, unknown> = { targetKind: kind, targetId };
+  let notificationContext: Record<string, unknown> = { targetKind: kind, targetId, actorUsername: actor?.username ?? undefined };
   const notificationKind: "tavern_favor" | "ravens_eye_like" = kind === "raven" ? "ravens_eye_like" : "tavern_favor";
 
   if (kind === "thread") {

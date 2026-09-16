@@ -151,6 +151,7 @@ function forumHref(threadId, commentId) {
 }
 
 const actorMap = new Map((flea.users ?? []).map((user) => [user.id, user.displayName || user.username || user.id]));
+const actorUsernameMap = new Map((flea.users ?? []).map((user) => [user.id, user.username || user.id]));
 const staticThreads = new Map((forum.threads ?? []).map((thread) => [thread.id, thread]));
 
 const [{ data: prefRows }, { data: profiles }] = await Promise.all([
@@ -234,7 +235,7 @@ for (const comment of forumReplyCandidates) {
     href: forumHref(threadId, comment.id),
     publishedAt: comment.publishedAt,
     groupKey: `npc:tavern:${threadId}:${parent.user_author_id}`,
-    context: { threadId, threadTitle: thread?.title || 'Tavern discussion', parentId: comment.parentId, parentBody: parent.body, parentAuthorId: parent.user_author_id || parent.legacy_author_id || parent.character_id || null, commentId: comment.id, replyBody: comment.body },
+    context: { threadId, threadTitle: thread?.title || 'Tavern discussion', parentId: comment.parentId, parentBody: parent.body, parentAuthorId: parent.user_author_id || parent.legacy_author_id || parent.character_id || null, commentId: comment.id, replyBody: comment.body, actorUsername: actorUsernameMap.get(comment.authorId) },
   });
 }
 for (const comment of ravenReplyCandidates) {
@@ -249,7 +250,7 @@ for (const comment of ravenReplyCandidates) {
     href: ravenHref(comment.entryId, comment.id),
     publishedAt: comment.publishedAt,
     groupKey: `npc:raven:${comment.entryId}:${parent.user_author_id}`,
-    context: { entryId: comment.entryId, entryTitle: galleryLabel(comment.entryId), parentId: comment.parentId, parentBody: parent.body, parentAuthorId: parent.user_author_id || parent.legacy_author_id || parent.character_id || null, commentId: comment.id, replyBody: comment.body },
+    context: { entryId: comment.entryId, entryTitle: galleryLabel(comment.entryId), parentId: comment.parentId, parentBody: parent.body, parentAuthorId: parent.user_author_id || parent.legacy_author_id || parent.character_id || null, commentId: comment.id, replyBody: comment.body, actorUsername: actorUsernameMap.get(comment.authorId) },
   });
 }
 
@@ -280,6 +281,7 @@ for (const comment of (forum.comments ?? []).filter((item) => due(item.published
           parentAuthorId: parent?.user_author_id || parent?.legacy_author_id || parent?.character_id || null,
           commentId: comment.id,
           replyBody: comment.body,
+          actorUsername: actorUsernameMap.get(comment.authorId),
         };
       })(),
     });
@@ -299,7 +301,7 @@ for (const comment of (flea.comments ?? []).filter((item) => !item.parentId && d
       href: ravenHref(comment.entryId, comment.id),
       publishedAt: comment.publishedAt,
       groupKey: `npc:raven-root:${comment.entryId}:${profile.id}`,
-      context: { entryId: comment.entryId, entryTitle: galleryLabel(comment.entryId), commentId: comment.id, replyBody: comment.body },
+      context: { entryId: comment.entryId, entryTitle: galleryLabel(comment.entryId), commentId: comment.id, replyBody: comment.body, actorUsername: actorUsernameMap.get(comment.authorId) },
     });
   }
 }
@@ -317,7 +319,7 @@ for (const thread of (forum.threads ?? []).filter((item) => due(item.publishedAt
       href: `/forum?thread=${encodeURIComponent(thread.id)}`,
       publishedAt: thread.publishedAt,
       groupKey: `npc:new-thread:${profile.id}`,
-      context: { threadId: thread.id, threadTitle: thread.title, threadBody: thread.body },
+      context: { threadId: thread.id, threadTitle: thread.title, threadBody: thread.body, actorUsername: actorUsernameMap.get(thread.authorId) },
     });
   }
 }

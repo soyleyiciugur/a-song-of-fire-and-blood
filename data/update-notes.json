@@ -7,7 +7,10 @@
       "Made Personal Ravens show useful reply context inline, route notification cards directly to their destinations, reserve lightbox previews for portrait taps, and send new push taps straight to the related page.",
       "Fixed notification-opened Raven's Eye media returning to the Rookery without leaving stale reel state, and tightened Gutter Reel action placement and comment-count spacing.",
       "Kept the mobile Guild Parley info navbar fixed during overscroll and pull-to-refresh gestures.",
-      "Refined The Great Game online board presentation so populated boards hug played cards and Military or Political controls remain fully visible inside the card frame."
+      "Refined The Great Game online board presentation so populated boards hug played cards and Military or Political controls remain fully visible inside the card frame.",
+      "Restored Personal Ravens grouping for repeated activity and aligned source icons, portraits, usernames and reply previews consistently across grouped and single notices.",
+      "Made context-free Personal Ravens sit vertically centered while reply context now uses a compact reply glyph instead of a repeated label.",
+      "Continued the Chapter XVIII kingship Tavern thread with a selective fictional reply to the live pocket-cake vote."
     ],
     "features": [],
     "links": {}

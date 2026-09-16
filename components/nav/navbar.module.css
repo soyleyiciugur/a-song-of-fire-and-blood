@@ -1004,3 +1004,7 @@
   z-index:250;
   transform:translateZ(0);
 }
+
+/* Keep the Direct Raven utility width stable while auth restores on refresh. */
+.directRavenAuthPlaceholder { pointer-events: none; user-select: none; }
+.directRavenSignedOutPlaceholder { visibility: hidden; }

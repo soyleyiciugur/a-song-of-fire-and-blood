@@ -54,6 +54,15 @@ function groupLabel(value: string, now = new Date()) {
 }
 function ctaLabel(source: NotificationSource) { if (source === "tavern") return "Enter the tavern"; if (source === "ravens-eye") return "Follow the sighting"; if (source === "direct-raven") return "Read the raven"; if (source === "guild-parley") return "Enter the parley"; if (source === "chronicle") return "Open the Chronicle"; if (source === "guestbook") return "Open the guestbook"; return "See the notice"; }
 
+function ReplyIndicator() {
+  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.25 8.25 5.5 12l3.75 3.75M6 12h6.25c3.45 0 5.75 1.8 6.25 5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+function notificationTidingsCount(item: SiteNotification) {
+  const value = Number(item.context?.groupCount ?? 1);
+  return Number.isFinite(value) && value > 1 ? Math.floor(value) : 1;
+}
+
 function personalGroupKey(item: SiteNotification) {
   const context = item.context ?? {};
   const explicit = typeof context.groupKey === "string" ? context.groupKey : null;
@@ -331,6 +340,14 @@ function Notifications() {
 
   // Legacy/community activity remains visible instead of being replaced by the mascot ledger.
   const users = useMemo(() => new Map(community.users.map((user) => [user.id, user])), [community.users]);
+  const usersByKnownName = useMemo(() => {
+    const map = new Map<string, (typeof community.users)[number]>();
+    for (const user of community.users) {
+      if (user.username) map.set(user.username.toLowerCase(), user);
+      if (user.displayName) map.set(user.displayName.toLowerCase(), user);
+    }
+    return map;
+  }, [community.users]);
   const commentsById = useMemo(() => new Map(community.comments.map((comment) => [comment.id, comment])), [community.comments]);
   const threadsById = useMemo(() => new Map(community.forumThreads.map((thread) => [thread.id, thread])), [community.forumThreads]);
   const allComments = useMemo(() => community.comments.map((comment, order) => ({ comment, order })).sort((a, b) => Date.parse(b.comment.publishedAt) - Date.parse(a.comment.publishedAt) || b.order - a.order).map(({ comment }) => comment).filter((comment) => comment.authorId !== userId), [community.comments, userId]);
@@ -346,22 +363,30 @@ function Notifications() {
     const parentBody = typeof context.parentBody === "string" ? context.parentBody : parentComment?.body ?? null;
     const replyBody = typeof context.replyBody === "string" ? context.replyBody : typeof context.threadBody === "string" ? context.threadBody : commentId ? commentsById.get(commentId)?.body ?? null : null;
     if (!parentBody && !replyBody) return null;
+
     const actor = item.actor_id ? users.get(item.actor_id) : null;
+    const contextActorUsername = typeof context.actorUsername === "string" && context.actorUsername.trim() ? context.actorUsername.trim().replace(/^@/, "") : null;
+    const contextActorName = typeof context.actorName === "string" && context.actorName.trim() ? context.actorName.trim() : null;
+    const actorByKnownName = contextActorName ? usersByKnownName.get(contextActorName.toLowerCase()) ?? null : null;
+    const actorUsername = contextActorUsername ?? actor?.username ?? actorByKnownName?.username ?? null;
+
     const parentAuthorId = typeof context.parentAuthorId === "string" ? context.parentAuthorId : parentComment?.authorId ?? null;
     const parentAuthor = parentAuthorId ? users.get(parentAuthorId) : null;
+    const parentUsername = parentAuthor?.username ?? null;
     const contextTitle =
       typeof context.threadTitle === "string" ? context.threadTitle
       : typeof context.entryTitle === "string" ? context.entryTitle
       : item.source_label;
+
     return {
       contextTitle,
       parentBody,
       replyBody,
       ravenPreview: item.source === "direct-raven" || item.source === "guild-parley",
-      parentLabel: parentAuthorId && parentAuthorId === userId ? "You" : parentAuthor ? `@${parentAuthor.username}` : "Earlier words",
-      actorLabel: actor ? `@${actor.username}` : (typeof context.actorName === "string" ? context.actorName : "Someone"),
+      parentLabel: parentUsername ? `@${parentUsername}` : parentAuthorId && parentAuthorId === userId ? "You" : "Earlier words",
+      actorLabel: actorUsername ? `@${actorUsername}` : contextActorName ?? "Someone",
     };
-  }, [commentsById, userId, users]);
+  }, [commentsById, userId, users, usersByKnownName]);
 
   const activePreview = useMemo(() => activeNotification ? previewForNotification(activeNotification) : null, [activeNotification, previewForNotification]);
 
@@ -373,19 +398,33 @@ function Notifications() {
     return `${url.pathname}${url.search}${url.hash}`;
   }, []);
 
-  const renderInlinePreview = (item: SiteNotification) => {
-    const preview = previewForNotification(item);
+  const renderInlinePreview = (item: SiteNotification, preview = previewForNotification(item)) => {
     if (!preview) return null;
     return <span className={styles.cardPreview} aria-label="Notification preview">
-      {preview.parentBody && <span className={styles.cardPreviewMessage}><b>Replying to {preview.parentLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.parentBody} /> : <>“{preview.parentBody}”</>}</span></span>}
-      {preview.replyBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewReply}`}><b>{preview.actorLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.replyBody} /> : <>“{preview.replyBody}”</>}</span></span>}
+      {preview.parentBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewParent}`}>
+        <span className={styles.cardPreviewMarker}><ReplyIndicator /></span>
+        <span className={styles.cardPreviewCopy}><b>{preview.parentLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.parentBody} /> : <>“{preview.parentBody}”</>}</span></span>
+      </span>}
+      {preview.replyBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewReply}`}>
+        <span className={`${styles.cardPreviewMarker} ${styles.cardPreviewMarkerEmpty}`} aria-hidden="true" />
+        <span className={styles.cardPreviewCopy}><b>{preview.actorLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.replyBody} /> : <>“{preview.replyBody}”</>}</span></span>
+      </span>}
     </span>;
   };
 
   const renderPersonalCard = (item: SiteNotification, nested = false) => {
     const target = personalTargetHref(item);
+    const preview = previewForNotification(item);
+    const hasTarget = target !== "/notifications";
     return <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
-      <div className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""}`}>
+      <div className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""} ${!preview ? styles.cardPlain : ""} ${!hasTarget ? styles.cardNoTarget : ""}`}>
+        {hasTarget && <Link
+          className={styles.cardDestinationLink}
+          href={target}
+          aria-label={`${item.title}. ${item.body}`}
+          onClick={() => { if (!item.read_at) void markRead(item.id); }}
+        />}
+        <span className={styles.cardSourceRail} aria-hidden="true"><NotificationSourceIcon source={item.source} size={13} /></span>
         <button
           type="button"
           className={styles.cardPortraitButton}
@@ -394,15 +433,13 @@ function Notifications() {
         >
           <PersonalNotificationPortrait item={item} size={nested ? 44 : 52} />
         </button>
-        <Link className={styles.cardMainLink} href={target} onClick={() => { if (!item.read_at) void markRead(item.id); }}>
-          <span className={styles.cardContent}>
-            <span className={styles.cardTopline}><span className={styles.source}><NotificationSourceIcon source={item.source} size={12} /><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
-            <span className={styles.cardCompactCopy}><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>
-            {renderInlinePreview(item)}
-          </span>
-          {!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}
-          <svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </Link>
+        <span className={styles.cardContent}>
+          <span className={styles.cardTopline}><span className={styles.source}><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
+          <span className={styles.cardCompactCopy}><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>
+          {renderInlinePreview(item, preview)}
+        </span>
+        {!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}
+        {hasTarget && <svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       </div>
     </li>;
   };
@@ -446,7 +483,25 @@ function Notifications() {
 
     {userId && <section className={styles.personalLedger} aria-label="Personal raven notifications"><div className={styles.sectionHeading}><span>Personal ravens</span>{unreadCount > 0 && <button className={styles.markAll} type="button" disabled={markingAll || loading} onClick={() => void markRead()}>{markingAll ? "Sealing the ledger…" : "Let no raven go unheard"}</button>}</div>{readStatus && <p className={styles.readStatus} role="status">{readStatus}</p>}
       {!loading && !error && !items.length && <section className={styles.empty}><span aria-hidden="true">✦</span><h2>The rookery is quiet</h2><p>No personal tidings await you.</p></section>}
-      {personalGroups.map(([label, buckets]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{buckets.flatMap((bucket) => bucket.items).map((item) => renderPersonalCard(item))}</ol></section>)}
+      {personalGroups.map(([label, buckets]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{buckets.map((bucket) => {
+        if (bucket.items.length === 1) return renderPersonalCard(bucket.items[0]);
+        const latest = bucket.items[0];
+        const unread = bucket.items.some((item) => !item.read_at);
+        const totalTidings = bucket.items.reduce((sum, item) => sum + notificationTidingsCount(item), 0);
+        return <li key={bucket.key} className={styles.personalClusterItem}>
+          <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}>
+            <summary>
+              <span className={styles.clusterSourceRail} aria-hidden="true"><NotificationSourceIcon source={latest.source} size={13} /></span>
+              <button type="button" className={styles.clusterPortraitButton} aria-label="Open latest raven preview" onClick={(event) => { event.preventDefault(); event.stopPropagation(); setOpen(latest.id); }}>
+                <PersonalNotificationPortrait item={latest} size={44} />
+              </button>
+              <span className={styles.personalClusterIdentity}><span className={styles.clusterSourceLine}><b>{notificationSourceLabel(latest.source)}</b>{latest.source_label && <em>· {latest.source_label}</em>}</span><strong>{latest.title}</strong><small>{totalTidings} fresh {totalTidings === 1 ? "tiding" : "tidings"} · {latest.body}</small></span>
+              <span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span>
+            </summary>
+            <ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol>
+          </details>
+        </li>;
+      })}</ol></section>)}
       {hasMore && <button className={styles.more} type="button" onClick={() => setLimit((value) => value + PAGE_SIZE)}>Gather older ravens</button>}
     </section>}
     </div>}
