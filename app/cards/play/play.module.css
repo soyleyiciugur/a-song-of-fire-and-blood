@@ -6421,3 +6421,23 @@
   .gameWithOnlineChat .handCard{flex-basis:158px;width:158px}
   .gameWithOnlineChat .handFanTrack>.handCard+.handCard{margin-left:-64px}
 }
+
+/* v4.6: the viewer HUD is a true viewport dock, not a sticky child of the board. */
+@media(min-width:981px){
+  .gameWithOnlineChat .activePlayerHeader{
+    position:fixed;
+    left:1rem;
+    right:calc(322px + 1rem);
+    bottom:0;
+    width:auto;
+    margin:0;
+    box-sizing:border-box;
+    z-index:132;
+    transform:translateZ(0);
+  }
+  /* Keep scrolling content/hand from disappearing permanently beneath the dock. */
+  .gameWithOnlineChat{padding-bottom:94px}
+}
+@media(min-width:981px) and (max-width:1240px){
+  .gameWithOnlineChat .activePlayerHeader{right:calc(306px + 1rem)}
+}
