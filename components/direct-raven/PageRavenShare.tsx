@@ -56,6 +56,7 @@ export default function PageRavenShare() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState("");
   const [greatGameActive, setGreatGameActive] = useState(false);
+  const [sentConversationId, setSentConversationId] = useState<string | null>(null);
 
   useEffect(() => {
     const sync = () => setGreatGameActive(document.documentElement.dataset.greatGameSessionActive === "1");
@@ -132,10 +133,13 @@ export default function PageRavenShare() {
         body: JSON.stringify({ messageId: item.id }),
       })));
       const count = messages.length || Number(payload.sent ?? 0);
+      const firstConversationId = messages[0]?.conversationId ?? selected[0] ?? null;
       setStatus(count === 1 ? "Page sent by raven." : `Page sent down ${count} Raven paths.`);
+      setSentConversationId(firstConversationId);
       window.setTimeout(() => {
         setOpen(false); setSelected([]); setQuery(""); setMessage(""); setStatus("");
-      }, 700);
+      }, 500);
+      window.setTimeout(() => setSentConversationId(null), 3000);
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "The page could not be sent.");
     } finally {
@@ -144,9 +148,14 @@ export default function PageRavenShare() {
   };
 
   return <>
-    <button type="button" className={styles.floatingButton} onClick={openSheet} aria-label="Send this page by raven" title="Send by raven">
-      <RavenIcon size={20} />
-    </button>
+    <div className={styles.floatingActions}>
+      {sentConversationId && <button type="button" className={styles.sentNotice} onClick={() => router.push(`/messages/${sentConversationId}`)}>
+        <RavenIcon size={15} /><span>Raven sent</span><strong>Go to message</strong>
+      </button>}
+      <button type="button" className={styles.floatingButton} onClick={openSheet} aria-label="Send this page by raven" title="Send by raven">
+        <RavenIcon size={20} />
+      </button>
+    </div>
     {open && <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
       <aside className={styles.sheet} role="dialog" aria-modal="true" aria-label="Send this page by raven">
         <header className={styles.header}>
