@@ -86,7 +86,20 @@ function storedDeckCardIds(deck: StoredDeck | null): string[] | undefined {
 }
 
 function onlineOpponentName(match: GreatGameOnlineMatchView | null): string {
-  return match?.opponent?.displayName || match?.opponent?.username || "Opponent";
+  return match?.opponent?.username ? `@${match.opponent.username}` : "Opponent";
+}
+
+function gamePlayerName(playerId: PlayerId, match: GreatGameOnlineMatchView | null): string {
+  if (!match) return playerName(playerId);
+  const player = playerId === "player1" ? match.host : match.guest;
+  return player?.username ? `@${player.username}` : playerName(playerId);
+}
+
+function onlineLogMessage(message: string, match: GreatGameOnlineMatchView | null): string {
+  if (!match) return message;
+  return message
+    .replace(/\bPlayer 1\b/g, gamePlayerName("player1", match))
+    .replace(/\bPlayer 2\b/g, gamePlayerName("player2", match));
 }
 
 type PendingPlay =
@@ -1003,6 +1016,10 @@ export default function GreatGamePlayPage() {
     setInviteCopied,
   ] = useState(false);
 
+  const [turnNotice, setTurnNotice] = useState<{ key: string; title: string; subtitle: string } | null>(null);
+  const lastTurnNoticeKeyRef = useRef<string | null>(null);
+  const turnNoticeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [
     error,
     setError,
@@ -1227,6 +1244,65 @@ export default function GreatGamePlayPage() {
   }, [
     game?.activePlayerId,
     game?.turnNumber,
+  ]);
+
+
+  const turnNoticeMatchId = onlineMatch?.id ?? null;
+  const turnNoticeStatus = onlineMatch?.status ?? null;
+  const turnNoticeViewerId = onlineMatch?.playerId ?? null;
+  const turnNoticePhase = game?.phase ?? null;
+  const turnNoticeNumber = game?.turnNumber ?? null;
+  const turnNoticeActiveId = game?.activePlayerId ?? null;
+  const turnNoticeActiveUsername = turnNoticeActiveId === "player1"
+    ? onlineMatch?.host.username ?? null
+    : turnNoticeActiveId === "player2"
+      ? onlineMatch?.guest?.username ?? null
+      : null;
+  const turnNoticeTurnsTaken = turnNoticeActiveId && game
+    ? game.players[turnNoticeActiveId].turnsTaken
+    : null;
+
+  useEffect(() => {
+    if (turnNoticeStatus !== "active" || turnNoticePhase !== "playing" || !turnNoticeMatchId || !turnNoticeActiveId || turnNoticeNumber == null) {
+      lastTurnNoticeKeyRef.current = null;
+      if (turnNoticeTimerRef.current) clearTimeout(turnNoticeTimerRef.current);
+      turnNoticeTimerRef.current = null;
+      const clearTimer = setTimeout(() => setTurnNotice(null), 0);
+      return () => clearTimeout(clearTimer);
+    }
+
+    const key = `${turnNoticeMatchId}:${turnNoticeNumber}:${turnNoticeActiveId}`;
+    if (lastTurnNoticeKeyRef.current === key) return;
+    lastTurnNoticeKeyRef.current = key;
+
+    const yours = turnNoticeActiveId === turnNoticeViewerId;
+    const title = yours
+      ? "Your Turn"
+      : turnNoticeActiveUsername
+        ? `@${turnNoticeActiveUsername}'s Turn`
+        : "Opponent's Turn";
+    const subtitle = `Turn ${turnNoticeTurnsTaken ?? turnNoticeNumber}`;
+
+    const showTimer = setTimeout(() => {
+      setTurnNotice({ key, title, subtitle });
+      if (turnNoticeTimerRef.current) clearTimeout(turnNoticeTimerRef.current);
+      turnNoticeTimerRef.current = setTimeout(() => setTurnNotice(null), 2000);
+    }, 0);
+
+    return () => {
+      clearTimeout(showTimer);
+      if (turnNoticeTimerRef.current) clearTimeout(turnNoticeTimerRef.current);
+      turnNoticeTimerRef.current = null;
+    };
+  }, [
+    turnNoticeActiveId,
+    turnNoticeActiveUsername,
+    turnNoticeMatchId,
+    turnNoticeNumber,
+    turnNoticePhase,
+    turnNoticeStatus,
+    turnNoticeTurnsTaken,
+    turnNoticeViewerId,
   ]);
 
   useEffect(() => {
@@ -3375,6 +3451,7 @@ export default function GreatGamePlayPage() {
   const highlightEndTurn =
     currentGame.phase ===
       "playing" &&
+    onlineCanAct &&
     !playerHasLegalAction();
 
   function isUnitTargetable(
@@ -5045,7 +5122,7 @@ export default function GreatGamePlayPage() {
             {currentGame.winner ===
             "draw"
               ? "The Realm Lies Broken"
-              : `${playerName(currentGame.winner)} Prevails`}
+              : `${gamePlayerName(currentGame.winner, onlineMatch)} Prevails`}
           </h1>
 
           <p>
@@ -5178,6 +5255,7 @@ export default function GreatGamePlayPage() {
     return (
       <MulliganScreen
         game={currentGame}
+        playerLabel={gamePlayerName(currentGame.activePlayerId, onlineMatch)}
         selectedIds={
           mulliganSelected
         }
@@ -5292,6 +5370,13 @@ export default function GreatGamePlayPage() {
         }
         aria-hidden
       />
+
+      {turnNotice && (
+        <div className={styles.turnNotice} role="status" aria-live="polite">
+          <span>{turnNotice.subtitle}</span>
+          <strong>{turnNotice.title}</strong>
+        </div>
+      )}
 
       {drawFlight && (() => {
         const drawnCard =
@@ -5433,8 +5518,9 @@ export default function GreatGamePlayPage() {
           }
         >
           <span>
-            {playerName(
-              currentGame.activePlayerId
+            {gamePlayerName(
+              currentGame.activePlayerId,
+              onlineMatch
             )}
           </span>
 
@@ -5551,6 +5637,7 @@ export default function GreatGamePlayPage() {
         playerId={
           viewEnemyPlayerId
         }
+        playerLabel={gamePlayerName(viewEnemyPlayerId, onlineMatch)}
         state={currentGame}
         opponent
         standingTarget={
@@ -5871,6 +5958,7 @@ export default function GreatGamePlayPage() {
         playerId={
           viewPlayerId
         }
+        playerLabel={gamePlayerName(viewPlayerId, onlineMatch)}
         state={currentGame}
         onEndTurn={onlineCanAct ? endTurn : undefined}
         endTurnDisabled={
@@ -6069,7 +6157,7 @@ export default function GreatGamePlayPage() {
 
                   <p>
                     {
-                      entry.message
+                      onlineLogMessage(entry.message, onlineMatch)
                     }
                   </p>
                 </div>
@@ -6324,7 +6412,7 @@ function MainMenu({
                   <span>
                     {match.status === "waiting"
                       ? "Waiting for a player"
-                      : `vs. ${match.opponent?.displayName ?? match.opponent?.username ?? "Opponent"}`}
+                      : `vs. ${match.opponent?.username ? `@${match.opponent.username}` : "Opponent"}`}
                   </span>
                   <strong>{match.code}</strong>
                 </button>
@@ -6449,6 +6537,7 @@ function OnlineTurnWaitScreen({
 
 function MulliganScreen({
   game,
+  playerLabel,
   selectedIds,
   onToggle,
   onConfirm,
@@ -6459,6 +6548,7 @@ function MulliganScreen({
   onConfirmExit,
 }: {
   game: GameState;
+  playerLabel?: string;
   selectedIds: string[];
   onToggle: (
     instanceId: string
@@ -6532,7 +6622,7 @@ function MulliganScreen({
         }
       >
         <span>
-          {playerName(
+          {playerLabel ?? playerName(
             playerId
           )}
         </span>
@@ -6703,6 +6793,7 @@ function MulliganScreen({
 
 function PlayerHeader({
   playerId,
+  playerLabel,
   state,
   opponent = false,
   standingTarget = false,
@@ -6719,6 +6810,7 @@ function PlayerHeader({
   attackStandingDropTarget = false,
 }: {
   playerId: PlayerId;
+  playerLabel?: string;
   state: GameState;
   opponent?: boolean;
   standingTarget?: boolean;
@@ -6800,7 +6892,7 @@ function PlayerHeader({
         }}
       >
         <span>
-          {playerName(
+          {playerLabel ?? playerName(
             playerId
           )}
         </span>

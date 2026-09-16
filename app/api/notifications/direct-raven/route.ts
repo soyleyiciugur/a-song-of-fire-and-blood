@@ -45,13 +45,25 @@ export async function POST(request: Request) {
   const reelLabel = reelEntry?.caption?.trim()
     ? `Shared a Gutter Reel: ${reelEntry.caption.trim()}`
     : "Shared a Gutter Reel";
+  const pageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(message.body);
+  let pageLabel = "Shared a page";
+  if (pageMatch) {
+    try {
+      const decoded = JSON.parse(Buffer.from(pageMatch[1], "base64url").toString("utf8")) as { title?: unknown };
+      if (typeof decoded.title === "string" && decoded.title.trim()) pageLabel = `Shared a page: ${decoded.title.trim()}`;
+    } catch {
+      // A malformed page token should not block delivery of the raven itself.
+    }
+  }
   const attachedText = message.body
     .replace(/\[\[(?:portrait|reel):[a-z0-9-]+\]\]/gi, " ")
+    .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
   const cleanText = message.body
     .replace(/\[\[portrait:[a-z0-9-]+\]\]/gi, " mini portrait ")
     .replace(/\[\[reel:[a-z0-9-]+\]\]/gi, ` ${reelLabel} `)
+    .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, ` ${pageLabel} `)
     .replace(/\s+/g, " ")
     .trim();
   const rawPreview = attachedText || cleanText || (message.attachment_path ? "Photo" : message.gif ? "GIF" : "New raven");

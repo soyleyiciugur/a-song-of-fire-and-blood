@@ -31,8 +31,13 @@ export default function ProfileFriends({ profileId, viewerId }: { profileId: str
     if (!viewerId || busy) return;
     setBusy(true); setError("");
     try {
-      const { error } = action === "request" ? await supabase.from("member_friendships").insert({ requester_id: viewerId, recipient_id: profileId }) : action === "accept" ? await supabase.from("member_friendships").update({ accepted_at: new Date().toISOString() }).eq("id", id!) : await supabase.from("member_friendships").delete().eq("id", id!);
-      if (error) throw error;
+      const response = await fetch("/api/community/friends", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(action === "request" ? { action, profileId } : { action, friendshipId: id }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || "friendship_failed");
       setRevision(v => v + 1);
     } catch { setError("Could not update friendship. Please try again."); }
     finally { setBusy(false); }

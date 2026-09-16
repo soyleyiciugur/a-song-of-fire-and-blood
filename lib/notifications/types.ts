@@ -7,6 +7,7 @@ export type NotificationSource =
   | "guild-parley"
   | "chronicle"
   | "guestbook"
+  | "profile"
   | "realm";
 
 export type NotificationPreferenceKey =
@@ -22,6 +23,8 @@ export type NotificationPreferenceKey =
   | "new_chapters"
   | "guestbook_entries"
   | "guestbook_replies"
+  | "friend_requests"
+  | "friend_accepts"
   | "new_tavern_threads"
   | "tavern_participant_activity"
   | "ravens_eye_root_comments"
@@ -40,6 +43,8 @@ export type NotificationKind =
   | "new_chapter"
   | "guestbook_entry"
   | "guestbook_reply"
+  | "friend_request"
+  | "friend_accept"
   | "new_tavern_thread"
   | "tavern_participant_activity"
   | "ravens_eye_root_comment"
@@ -96,6 +101,8 @@ export const DEFAULT_NOTIFICATION_FLAGS: NotificationPreferenceFlags = {
   new_chapters: true,
   guestbook_entries: true,
   guestbook_replies: true,
+  friend_requests: true,
+  friend_accepts: true,
   new_tavern_threads: false,
   tavern_participant_activity: false,
   ravens_eye_root_comments: false,
@@ -119,6 +126,8 @@ export const NOTIFICATION_KIND_META: Record<NotificationKind, {
   new_chapter: { source: "chronicle", preference: "new_chapters", label: "Chronicle" },
   guestbook_entry: { source: "guestbook", preference: "guestbook_entries", label: "Guestbook entry" },
   guestbook_reply: { source: "guestbook", preference: "guestbook_replies", label: "Guestbook reply" },
+  friend_request: { source: "profile", preference: "friend_requests", label: "Friend request" },
+  friend_accept: { source: "profile", preference: "friend_accepts", label: "Friend accepted" },
   new_tavern_thread: { source: "tavern", preference: "new_tavern_threads", label: "New Tavern thread" },
   tavern_participant_activity: { source: "tavern", preference: "tavern_participant_activity", label: "Tavern activity" },
   ravens_eye_root_comment: { source: "ravens-eye", preference: "ravens_eye_root_comments", label: "Raven's Eye comment" },

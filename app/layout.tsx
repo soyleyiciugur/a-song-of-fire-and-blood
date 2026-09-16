@@ -8,6 +8,7 @@ import "./globals.css";
 
 import Navbar from "@/components/nav/Navbar";
 import PwaBoot from "@/components/pwa/PwaBoot";
+import PageRavenShare from "@/components/direct-raven/PageRavenShare";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black",
-    title: "The Rookery 🐦‍⬛",
+    title: "ASOFAB",
   },
 
   icons: {
@@ -100,6 +101,7 @@ export default function RootLayout({
         <PwaBoot />
         <Navbar />
         {children}
+        <PageRavenShare />
         <Analytics />
       </body>
     </html>

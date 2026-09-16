@@ -12,6 +12,7 @@ import {
   type MascotMode,
   type NotificationKind,
   type NotificationMascot,
+  type NotificationCopy,
   type NotificationPreferenceFlags,
   type NotificationPreferences,
   type SiteNotification,
@@ -94,6 +95,8 @@ export type DispatchNotificationInput = {
   groupKey?: string | null;
   groupWindowMs?: number;
   collapseUnread?: boolean;
+  forceMascot?: NotificationMascot;
+  manualCopy?: Partial<Record<NotificationMascot, NotificationCopy>>;
 };
 
 function messagePreviewContext(input: DispatchNotificationInput, count = 1) {
@@ -200,11 +203,12 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
     }
   }
 
-  const mascot = chooseMascot(preferences);
+  const mascot = input.forceMascot ?? chooseMascot(preferences);
   const { index: variantIndex, template } = chooseVariant(input.kind, mascot, preferences);
-  const rendered = input.context?.shellVersion
-    ? reinstallCopy[mascot]
-    : renderNotificationCopy(template, { actor: actorName, source: input.sourceLabel });
+  const rendered = input.manualCopy?.[mascot]
+    ?? (input.context?.shellVersion
+      ? reinstallCopy[mascot]
+      : renderNotificationCopy(template, { actor: actorName, source: input.sourceLabel }));
   const context: Record<string, unknown> = { ...(input.context ?? {}), ...(input.groupKey ? { groupKey: input.groupKey, groupCount: 1 } : {}), ...(actorName ? { actorName } : {}) };
 
   const messageRecord = messagePreviewContext(input);

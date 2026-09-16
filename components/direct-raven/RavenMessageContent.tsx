@@ -7,7 +7,7 @@ import galleryData from "@/data/gallery.json";
 import styles from "./direct-raven.module.css";
 
 const PORTRAIT_TOKEN = /\[\[portrait:([a-z0-9-]+)\]\]/gi;
-const CONTENT_TOKEN = /(\[\[(?:portrait|reel):[a-z0-9-]+\]\])/gi;
+const CONTENT_TOKEN = /(\[\[(?:portrait|reel):[a-z0-9-]+\]\]|\[\[page:[A-Za-z0-9_-]+\]\])/gi;
 
 type CharacterRecord = {
   id: string;
@@ -34,6 +34,24 @@ const mascotFallback: Record<string, string> = {
   mara: "/images/miniportraits/MaraMiniPortrait.webp",
   aldren: "/images/miniportraits/AldrenMiniPortrait.webp",
 };
+
+
+function decodePageToken(payload: string): { title: string; href: string } | null {
+  try {
+    const normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
+    const bytes = Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
+    const parsed = JSON.parse(new TextDecoder().decode(bytes)) as { title?: unknown; href?: unknown };
+    if (typeof parsed.title !== "string" || typeof parsed.href !== "string" || !parsed.href.startsWith("/")) return null;
+    return { title: parsed.title.slice(0, 180), href: parsed.href.slice(0, 1200) };
+  } catch {
+    return null;
+  }
+}
+
+function PageGlyph() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V20H6V3.5Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/><path d="M14 3.8V8h4M9 12h6M9 15.5h4.5" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round"/></svg>;
+}
 
 function reelPosterSrc(src: string) {
   const clean = src.split("?")[0].split("#")[0];
@@ -72,12 +90,17 @@ export function encodeRavenBody(text: string, portraitIds: string[], preserveWhi
 
 export function ravenBodySummary(value: string) {
   const reelMatch = /\[\[reel:([a-z0-9-]+)\]\]/i.exec(value);
+  const pageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(value);
   const visibleText = value
     .replace(CONTENT_TOKEN, " ")
     .replace(/\s+/g, " ")
     .trim();
   if (visibleText) return visibleText;
   if (reelMatch) return reelSummary(reelMatch[1].toLowerCase());
+  if (pageMatch) {
+    const page = decodePageToken(pageMatch[1]);
+    return page ? `Shared page · ${page.title}` : "Shared page";
+  }
 
   const { text, portraitIds } = parseRavenBody(value);
   if (text) return text;
@@ -92,6 +115,13 @@ export function RavenMessagePreview({ body }: { body: string }) {
     if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
       const id = portraitMatch[1].toLowerCase();
       return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} fallbackSrc={mascotFallback[id]} /></span>;
+    }
+
+
+    const pageMatch = /^\[\[page:([A-Za-z0-9_-]+)\]\]$/i.exec(part);
+    if (pageMatch) {
+      const page = decodePageToken(pageMatch[1]);
+      return <span key={index}><span className={styles.previewReel}>Page</span>{page ? ` ${page.title}` : " Shared page"}</span>;
     }
 
     const reelMatch = /^\[\[reel:([a-z0-9-]+)\]\]$/i.exec(part);
@@ -110,6 +140,22 @@ export default function RavenMessageContent({ body, returnTo }: { body: string; 
     if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
       const id = portraitMatch[1].toLowerCase();
       return <span key={index} className={styles.inlinePortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt={characterNames.get(id)!} size={28} fallbackSrc={mascotFallback[id]} /></span>;
+    }
+
+    const pageMatch = /^\[\[page:([A-Za-z0-9_-]+)\]\]$/i.exec(part);
+    if (pageMatch) {
+      const page = decodePageToken(pageMatch[1]);
+      if (!page) return <span key={index}>Shared page</span>;
+      return (
+        <Link key={index} href={page.href} className={styles.sharedPageCard}>
+          <span className={styles.sharedPageIcon}><PageGlyph /></span>
+          <span className={styles.sharedReelCopy}>
+            <small>Shared page</small>
+            <strong>{page.title}</strong>
+            <em>Open page</em>
+          </span>
+        </Link>
+      );
     }
 
     const reelMatch = /^\[\[reel:([a-z0-9-]+)\]\]$/i.exec(part);

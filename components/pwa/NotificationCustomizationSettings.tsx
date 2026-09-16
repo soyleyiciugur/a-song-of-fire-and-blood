@@ -58,6 +58,15 @@ const GROUPS: PreferenceGroup[] = [
     ],
   },
   {
+    source: "profile",
+    title: "Profile & Friends",
+    copy: "Friendship requests and accepted bonds around your profile.",
+    options: [
+      { key: "friend_requests", label: "Friend requests", note: "When another member asks to be added as a friend." },
+      { key: "friend_accepts", label: "Accepted friendships", note: "When someone accepts a friendship request you sent." },
+    ],
+  },
+  {
     source: "chronicle",
     title: "Chronicle & Realm",
     copy: "Larger happenings worthy of a place in the record.",

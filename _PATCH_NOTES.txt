@@ -1,0 +1,10 @@
+ASOFAB patch: Direct Raven page sharing + Great Game online turn UX/fix + profile friend notifications + @luck admin notification templates
+
+Apply by extracting at the repository root, preserving paths.
+Then run:
+  npm run community:push
+
+Validation performed:
+  npx tsc --noEmit
+
+PWA reinstall is not required.

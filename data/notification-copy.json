@@ -2014,5 +2014,65 @@
         "body": "The little birds report fresh words around the sighting."
       }
     ]
+  },
+  "friend_request": {
+    "mara": [
+      {
+        "title": "A hand offered in friendship.",
+        "body": "{actor} has asked to be counted among your friends."
+      },
+      {
+        "title": "A familiar name at the door.",
+        "body": "{actor} sent a request for friendship."
+      },
+      {
+        "title": "Someone seeks your company.",
+        "body": "{actor} has offered friendship. Make of it what you will."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "A request for friendship, my liege!",
+        "body": "{actor} has asked to be welcomed among your friends."
+      },
+      {
+        "title": "A new bond has been offered.",
+        "body": "Your Grace, {actor} seeks the honor of your friendship."
+      },
+      {
+        "title": "Company calls at your door!",
+        "body": "{actor} has sent a most courteous request for friendship."
+      }
+    ]
+  },
+  "friend_accept": {
+    "mara": [
+      {
+        "title": "Friendship accepted.",
+        "body": "{actor} accepted your request. One less uncertainty in the realm."
+      },
+      {
+        "title": "Your offered hand was taken.",
+        "body": "{actor} is now counted among your friends."
+      },
+      {
+        "title": "The matter is settled.",
+        "body": "{actor} accepted your friendship."
+      }
+    ],
+    "aldren": [
+      {
+        "title": "Your friendship has been accepted!",
+        "body": "{actor} has welcomed your offered hand, my liege."
+      },
+      {
+        "title": "A new friendship is sealed.",
+        "body": "Your Grace, {actor} is now counted among your friends."
+      },
+      {
+        "title": "Good company gained!",
+        "body": "{actor} has accepted your request for friendship."
+      }
+    ]
   }
 }
