@@ -78,6 +78,15 @@ function personalGroupKey(item: SiteNotification) {
   return null;
 }
 
+type CommunityIdentity = {
+  username?: string | null;
+  displayName?: string | null;
+  avatarUrl?: string | null;
+  color?: string | null;
+  avatar?: string | null;
+  account?: { type?: string | null; characterId?: string | null } | null;
+};
+
 function PersonalNotificationPortrait({ item, size }: { item: SiteNotification; size: number }) {
   const context = item.context ?? {};
   if (item.source === "guild-parley") {
@@ -93,6 +102,16 @@ function PersonalNotificationPortrait({ item, size }: { item: SiteNotification; 
     </span>;
   }
   return <NotificationPortrait mascot={item.mascot} source={item.source} size={size} />;
+}
+
+function CommunityIdentityAvatar({ user, username, avatarUrl, size = 28 }: { user?: CommunityIdentity | null; username?: string | null; avatarUrl?: string | null; size?: number }) {
+  const displayName = user?.displayName ?? user?.username ?? username ?? "Unknown patron";
+  const initials = (user?.avatar ?? displayName).replace(/^@/, "").slice(0, 2).toUpperCase();
+  const finalAvatarUrl = avatarUrl ?? user?.avatarUrl ?? null;
+  const characterId = user?.account?.type === "character" && typeof user?.account?.characterId === "string" ? user.account.characterId : null;
+  if (characterId) return <MiniPortrait id={characterId} alt={displayName} size={size} />;
+  if (finalAvatarUrl) return <span className={styles.inlineIdentityAvatar} style={{ width: size, height: size }} aria-hidden="true"><img src={finalAvatarUrl} alt="" /></span>;
+  return <span className={styles.inlineIdentityAvatar} style={{ width: size, height: size, backgroundColor: user?.color ?? "#51363d" }} aria-hidden="true">{initials}</span>;
 }
 
 function Notifications() {
@@ -371,12 +390,14 @@ function Notifications() {
     const actorUsername = contextActorUsername ?? actor?.username ?? actorByKnownName?.username ?? null;
 
     const parentAuthorId = typeof context.parentAuthorId === "string" ? context.parentAuthorId : parentComment?.authorId ?? null;
-    const parentAuthor = parentAuthorId ? users.get(parentAuthorId) : null;
+    const parentAuthor = parentAuthorId ? users.get(parentAuthorId) ?? null : null;
     const parentUsername = parentAuthor?.username ?? null;
     const contextTitle =
       typeof context.threadTitle === "string" ? context.threadTitle
       : typeof context.entryTitle === "string" ? context.entryTitle
       : item.source_label;
+    const actorUser = actor ?? actorByKnownName ?? null;
+    const actorAvatarUrl = typeof context.actorAvatarUrl === "string" && context.actorAvatarUrl ? context.actorAvatarUrl : actorUser?.avatarUrl ?? null;
 
     return {
       contextTitle,
@@ -385,6 +406,10 @@ function Notifications() {
       ravenPreview: item.source === "direct-raven" || item.source === "guild-parley",
       parentLabel: parentUsername ? `@${parentUsername}` : parentAuthorId && parentAuthorId === userId ? "You" : "Earlier words",
       actorLabel: actorUsername ? `@${actorUsername}` : contextActorName ?? "Someone",
+      parentUser: parentAuthor,
+      actorUser,
+      actorAvatarUrl,
+      actorUsername,
     };
   }, [commentsById, userId, users, usersByKnownName]);
 
@@ -398,15 +423,17 @@ function Notifications() {
     return `${url.pathname}${url.search}${url.hash}`;
   }, []);
 
-  const renderInlinePreview = (item: SiteNotification, preview = previewForNotification(item)) => {
+  const renderInlinePreview = (item: SiteNotification, preview = previewForNotification(item), nested = false) => {
     if (!preview) return null;
-    return <span className={styles.cardPreview} aria-label="Notification preview">
+    return <span className={`${styles.cardPreview} ${nested ? styles.cardPreviewNested : ""}`} aria-label="Notification preview">
       {preview.parentBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewParent}`}>
         <span className={styles.cardPreviewMarker}><ReplyIndicator /></span>
+        <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={preview.parentUser} username={preview.parentLabel} size={nested ? 26 : 28} /></span>
         <span className={styles.cardPreviewCopy}><b>{preview.parentLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.parentBody} /> : <>“{preview.parentBody}”</>}</span></span>
       </span>}
       {preview.replyBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewReply}`}>
         <span className={`${styles.cardPreviewMarker} ${styles.cardPreviewMarkerEmpty}`} aria-hidden="true" />
+        <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={preview.actorUser} username={preview.actorUsername ?? preview.actorLabel} avatarUrl={preview.actorAvatarUrl} size={nested ? 26 : 28} /></span>
         <span className={styles.cardPreviewCopy}><b>{preview.actorLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.replyBody} /> : <>“{preview.replyBody}”</>}</span></span>
       </span>}
     </span>;
@@ -416,8 +443,9 @@ function Notifications() {
     const target = personalTargetHref(item);
     const preview = previewForNotification(item);
     const hasTarget = target !== "/notifications";
+    const simplifiedNested = nested && Boolean(preview);
     return <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
-      <div className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""} ${!preview ? styles.cardPlain : ""} ${!hasTarget ? styles.cardNoTarget : ""}`}>
+      <div className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""} ${!preview ? styles.cardPlain : ""} ${!hasTarget ? styles.cardNoTarget : ""} ${simplifiedNested ? styles.groupedReplyCard : ""}`}>
         {hasTarget && <Link
           className={styles.cardDestinationLink}
           href={target}
@@ -425,18 +453,20 @@ function Notifications() {
           onClick={() => { if (!item.read_at) void markRead(item.id); }}
         />}
         <span className={styles.cardSourceRail} aria-hidden="true"><NotificationSourceIcon source={item.source} size={13} /></span>
-        <button
+        {!simplifiedNested && <button
           type="button"
           className={styles.cardPortraitButton}
           aria-label="Open raven preview"
           onClick={() => setOpen(item.id)}
         >
           <PersonalNotificationPortrait item={item} size={nested ? 44 : 52} />
-        </button>
+        </button>}
         <span className={styles.cardContent}>
           <span className={styles.cardTopline}><span className={styles.source}><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
-          <span className={styles.cardCompactCopy}><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>
-          {renderInlinePreview(item, preview)}
+          {simplifiedNested ? renderInlinePreview(item, preview, true) : <>
+            <span className={styles.cardCompactCopy}><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>
+            {renderInlinePreview(item, preview)}
+          </>}
         </span>
         {!item.read_at && <span className={styles.unreadDot} aria-label="Unread" />}
         {hasTarget && <svg className={styles.openArrow} width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l7 7-7 7" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" /></svg>}
@@ -449,8 +479,11 @@ function Notifications() {
     const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye";
     const username = user?.username ?? "unknown-patron";
     const displayName = user?.displayName ?? user?.username ?? "Unknown patron";
-    const avatar = user?.avatar ?? displayName.slice(0, 2).toUpperCase();
-    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={styles.legacyCard} onClick={() => { const current = new URL(window.location.href); current.searchParams.set("view", activityFilter); current.searchParams.delete("open"); window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`); }}>{user?.account?.type === "character" ? <MiniPortrait id={user.account.characterId} alt={displayName} size={36} /> : user?.avatarUrl ? <span className={styles.avatar}><img src={user.avatarUrl} alt="" /></span> : <span className={styles.avatar} style={{ backgroundColor: user?.color ?? "#51363d" }} aria-hidden="true">{avatar}</span>}<span className={styles.legacyContent}><span className={styles.legacyTop}><span><NotificationSourceIcon source={source} size={12} /> <strong>@{username}</strong> {comment.parentId ? "answered" : "wrote"}</span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
+    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={`${styles.legacyCard} ${comment.parentId ? styles.legacyReplyCard : ""}`} onClick={() => { const current = new URL(window.location.href); current.searchParams.set("view", activityFilter); current.searchParams.delete("open"); window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`); }}>
+      <span className={styles.activitySourceRail} aria-hidden="true"><NotificationSourceIcon source={source} size={12} /></span>
+      <span className={`${styles.activityReplyRail} ${comment.parentId ? "" : styles.activityReplyRailEmpty}`} aria-hidden="true">{comment.parentId ? <ReplyIndicator /> : null}</span>
+      <CommunityIdentityAvatar user={user as CommunityIdentity | null} username={username} size={36} />
+      <span className={styles.legacyContent}><span className={styles.legacyTop}><span><strong>@{username}</strong></span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
   };
 
   const renderActivityEntries = (entries: (typeof community.comments)[number][]) => {
