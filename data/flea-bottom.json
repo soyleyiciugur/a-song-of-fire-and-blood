@@ -14742,14 +14742,6 @@
       "publishedAt": "2026-09-16T18:18:07.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-natural-01",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-j",
-      "parentId": null,
-      "body": "one good thing happened to Jace and everyone immediately checked whether there was still time on the clock",
-      "publishedAt": "2026-09-16T18:18:08.000Z"
-    },
-    {
       "id": "gallery-jace-heir-olunca-natural-02",
       "entryId": "gallery-jace-heir-olunca",
       "authorId": "regular-m",
@@ -15190,14 +15182,6 @@
       "publishedAt": "2026-09-17T07:13:01.000Z"
     },
     {
-      "id": "gallery-jace-heir-olunca-natural-07",
-      "entryId": "gallery-jace-heir-olunca",
-      "authorId": "regular-a",
-      "parentId": null,
-      "body": "do NOT unclench",
-      "publishedAt": "2026-09-17T09:39:00.000Z"
-    },
-    {
       "id": "gallery-cursed-kuzgun-natural-04",
       "entryId": "gallery-cursed-kuzgun",
       "authorId": "regular-a",
@@ -15284,6 +15268,30 @@
       "parentId": "gallery-cursed-raven-comment-1",
       "body": "I have recovered enough to look at the thumbnail again. This was a mistake.",
       "publishedAt": "2026-09-19T18:40:00.000Z"
+    },
+    {
+      "id": "sep16-jace-stoppage-time",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "one good thing happened to Jace and the fandom immediately checked the clock for stoppage time",
+      "publishedAt": "2026-09-16T18:18:00.000Z"
+    },
+    {
+      "id": "sep16-jace-unclench",
+      "entryId": "gallery-jace-heir-olunca",
+      "authorId": "regular-reformed",
+      "parentId": null,
+      "body": "jacejpeg has entered the 'do not unclench yet' phase of succession law",
+      "publishedAt": "2026-09-16T18:18:01.000Z"
+    },
+    {
+      "id": "sep16-aenys-sleep",
+      "entryId": "gallery-aenys-ii-bu-adami-ruyanizda",
+      "authorId": "regular-fandom-stephen-king",
+      "parentId": null,
+      "body": "Aenys II has been dead for years and still found a way to ruin somebody's sleep.",
+      "publishedAt": "2026-09-16T18:18:02.000Z"
     }
   ],
   "relationships": [
