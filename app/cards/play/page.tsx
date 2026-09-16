@@ -60,6 +60,7 @@ import type {
 } from "@/lib/the-great-game/online";
 import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
+import GreatGameChat from "@/components/the-great-game/GreatGameChat";
 
 import styles from "./play.module.css";
 
@@ -5537,7 +5538,7 @@ export default function GreatGamePlayPage() {
         draggingHandInstanceId
           ? styles.draggingGame
           : ""
-      }`}
+      } ${onlineMatch ? styles.gameWithOnlineChat : ""}`}
     >
       <div
         className={
@@ -6438,6 +6439,10 @@ export default function GreatGamePlayPage() {
             onClose={() => setInspectedHandInstanceId(null)}
           />
         </>
+      )}
+
+      {onlineMatch && onlineMatch.status === "active" && (
+        <GreatGameChat match={onlineMatch} />
       )}
 
       {exitConfirm && (

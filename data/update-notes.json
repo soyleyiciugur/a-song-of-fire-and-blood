@@ -10,7 +10,8 @@
       "Refined The Great Game online board presentation so populated boards hug played cards and Military or Political controls remain fully visible inside the card frame.",
       "Restored Personal Ravens grouping for repeated activity and aligned source icons, portraits, usernames and reply previews consistently across grouped and single notices.",
       "Made context-free Personal Ravens sit vertically centered while reply context now uses a compact reply glyph instead of a repeated label.",
-      "Continued the Chapter XVIII kingship Tavern thread with a selective fictional reply to the live pocket-cake vote."
+      "Continued the Chapter XVIII kingship Tavern thread with a selective fictional reply to the live pocket-cake vote.",
+      "Added private live chat to online Great Game tables, with participant-only history, a compact desktop right rail, and a collapsible mobile quill control."
     ],
     "features": [],
     "links": {}

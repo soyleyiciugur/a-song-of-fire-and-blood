@@ -6268,3 +6268,14 @@
   .unitCard .cardInfoPanelWithActions{height:63%;grid-template-rows:2rem .84rem .84rem minmax(2.15rem,1fr) .65rem 1.36rem;padding:.4rem .45rem .36rem}
   .unitCard .unitActions button{min-height:1.3rem;font-size:.43rem;padding:.2rem .08rem}
 }
+
+/* v25: reserve a quiet right rail for the private online table chat. */
+.gameWithOnlineChat{
+  padding-right:calc(2rem + 316px);
+}
+@media(max-width:980px){
+  .gameWithOnlineChat{padding-right:2rem}
+}
+@media(max-width:760px){
+  .gameWithOnlineChat{padding-right:1rem}
+}
