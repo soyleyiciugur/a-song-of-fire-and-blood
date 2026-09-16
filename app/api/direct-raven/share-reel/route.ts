@@ -77,9 +77,9 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Choose a Raven path first." }, { status: 400 });
 
   const entry = (galleryData as GalleryRecord[]).find(
-    (candidate) => candidate.id === parsed.data.entryId && isVideo(candidate.src)
+    (candidate) => candidate.id === parsed.data.entryId
   );
-  if (!entry) return NextResponse.json({ error: "That reel is no longer available." }, { status: 404 });
+  if (!entry) return NextResponse.json({ error: "That Raven's Eye item is no longer available." }, { status: 404 });
 
   const conversationIds = [...new Set(parsed.data.conversationIds)];
   const { data: memberships, error: membershipError } = await supabase
@@ -120,7 +120,7 @@ export async function POST(request: Request) {
 
   if (!messages.length) {
     return NextResponse.json(
-      { error: "The reel could not be sent down those Raven paths." },
+      { error: "The Raven's Eye item could not be sent down those Raven paths." },
       { status: 400 }
     );
   }

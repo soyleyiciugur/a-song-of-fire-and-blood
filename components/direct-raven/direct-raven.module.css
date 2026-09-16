@@ -669,3 +669,13 @@
 .sharedPageCard{grid-template-columns:48px minmax(0,1fr);padding:8px}.sharedPageIcon{width:46px;height:46px}
 .guildInfoBackdrop,.guildInfoPanel{overscroll-behavior-y:contain}
 .guildInfoPanel{-webkit-overflow-scrolling:touch}
+
+
+/* v15: desktop reaction containment and true iOS keyboard-safe composer. */
+@media(min-width:761px){
+  .messageRow{overflow:visible!important}
+  .messageBubble{overflow:visible!important}
+  .quickReactionPopover,.reactionDetailsPopover{max-width:min(330px,calc(100vw - 24px));z-index:14000!important}
+}
+:global(html[data-raven-keyboard-open="1"]) .composerArea{padding-bottom:0!important;transform:none!important}
+:global(html[data-raven-keyboard-open="1"]) .attachmentSourceMenu{bottom:56px!important}

@@ -56,10 +56,14 @@ export default function MessageReactions({ messageId, userId }: { messageId: str
       popovers?.forEach((popover) => {
         popover.style.setProperty("--reaction-popover-shift", "0px");
         const rect = popover.getBoundingClientRect();
+        const thread = wrapRef.current?.closest<HTMLElement>(`.${styles.thread}`);
+        const threadRect = thread?.getBoundingClientRect();
         const gutter = 10;
+        const leftBound = Math.max(gutter, (threadRect?.left ?? 0) + gutter);
+        const rightBound = Math.min(window.innerWidth - gutter, (threadRect?.right ?? window.innerWidth) - gutter);
         let shift = 0;
-        if (rect.left < gutter) shift = gutter - rect.left;
-        else if (rect.right > window.innerWidth - gutter) shift = window.innerWidth - gutter - rect.right;
+        if (rect.left < leftBound) shift = leftBound - rect.left;
+        else if (rect.right > rightBound) shift = rightBound - rect.right;
         popover.style.setProperty("--reaction-popover-shift", `${shift}px`);
       });
     });

@@ -7,7 +7,7 @@ import galleryData from "@/data/gallery.json";
 import styles from "./direct-raven.module.css";
 
 const PORTRAIT_TOKEN = /\[\[portrait:([a-z0-9-]+)\]\]/gi;
-const CONTENT_TOKEN = /(\[\[(?:portrait|reel):[a-z0-9-]+\]\]|\[\[page:[A-Za-z0-9_-]+\]\])/gi;
+const CONTENT_TOKEN = /(\[\[(?:portrait|reel|media):[a-z0-9-]+\]\]|\[\[page:[A-Za-z0-9_-]+\]\])/gi;
 
 type CharacterRecord = {
   id: string;
@@ -67,6 +67,13 @@ function reelSummary(id: string) {
   return caption ? `Gutter Reel · ${caption}` : "Gutter Reel";
 }
 
+function mediaSummary(id: string) {
+  const entry = reelMap.get(id);
+  if (!entry) return "Raven's Eye image";
+  const caption = entry.caption?.trim();
+  return caption ? `Raven's Eye · ${caption}` : "Raven's Eye image";
+}
+
 export function parseRavenBody(value: string, preserveWhitespace = false) {
   const portraitIds: string[] = [];
   const normalized = value
@@ -90,6 +97,7 @@ export function encodeRavenBody(text: string, portraitIds: string[], preserveWhi
 
 export function ravenBodySummary(value: string) {
   const reelMatch = /\[\[reel:([a-z0-9-]+)\]\]/i.exec(value);
+  const mediaMatch = /\[\[media:([a-z0-9-]+)\]\]/i.exec(value);
   const pageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(value);
   const visibleText = value
     .replace(CONTENT_TOKEN, " ")
@@ -97,6 +105,7 @@ export function ravenBodySummary(value: string) {
     .trim();
   if (visibleText) return visibleText;
   if (reelMatch) return reelSummary(reelMatch[1].toLowerCase());
+  if (mediaMatch) return mediaSummary(mediaMatch[1].toLowerCase());
   if (pageMatch) {
     const page = decodePageToken(pageMatch[1]);
     return page ? `Shared page · ${page.title}` : "Shared page";
@@ -128,6 +137,12 @@ export function RavenMessagePreview({ body }: { body: string }) {
     if (reelMatch) {
       const entry = reelMap.get(reelMatch[1].toLowerCase());
       return <span key={index}><span className={styles.previewReel}>Reel</span>{entry?.caption?.trim() ? ` ${entry.caption.trim()}` : ""}</span>;
+    }
+
+    const mediaMatch = /^\[\[media:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (mediaMatch) {
+      const entry = reelMap.get(mediaMatch[1].toLowerCase());
+      return <span key={index}><span className={styles.previewReel}>Image</span>{entry?.caption?.trim() ? ` ${entry.caption.trim()}` : ""}</span>;
     }
 
     return part;
@@ -180,6 +195,26 @@ export default function RavenMessageContent({ body, returnTo }: { body: string; 
             <small>Gutter Reel</small>
             <strong>{entry.caption?.trim() || "A reel from Flea Bottom"}</strong>
             <em>Open in Raven&apos;s Eye</em>
+          </span>
+        </Link>
+      );
+    }
+
+    const mediaMatch = /^\[\[media:([a-z0-9-]+)\]\]$/i.exec(part);
+    if (mediaMatch) {
+      const id = mediaMatch[1].toLowerCase();
+      const entry = reelMap.get(id);
+      if (!entry) return <span key={index}>Shared Raven&apos;s Eye image</span>;
+      const href = `/ravens-eye?item=${encodeURIComponent(id)}${returnTo ? `&returnTo=${encodeURIComponent(returnTo)}` : ""}`;
+      return (
+        <Link key={index} href={href} className={styles.sharedReelCard}>
+          <span className={styles.sharedReelPoster}>
+            <img src={entry.src} alt="" loading="lazy" decoding="async" />
+          </span>
+          <span className={styles.sharedReelCopy}>
+            <small>Raven&apos;s Eye</small>
+            <strong>{entry.caption?.trim() || "Shared image"}</strong>
+            <em>Open image</em>
           </span>
         </Link>
       );

@@ -355,3 +355,11 @@
   .activityMessageCopy>span{font-size:10px}
   .groupedActivityItem .activityMessageRow{grid-template-columns:15px 28px minmax(0,1fr)}
 }
+
+
+/* v4.7: Direct Raven/Guild Parley previews do not reserve a reply-marker column. */
+.cardPreviewRaven .cardPreviewRavenMessage{grid-template-columns:28px minmax(0,1fr)!important;column-gap:8px}
+.cardPreviewRaven .cardPreviewRavenMessage .cardPreviewAvatar{grid-column:1}
+.cardPreviewRaven .cardPreviewRavenMessage .cardPreviewCopy{grid-column:2}
+.groupedReplyCard .cardPreviewRaven{margin-left:0}
+@media(max-width:600px){.cardPreviewRaven .cardPreviewRavenMessage{grid-template-columns:26px minmax(0,1fr)!important;column-gap:7px}}

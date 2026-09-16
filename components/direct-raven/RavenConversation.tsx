@@ -144,6 +144,7 @@ export default function RavenConversation({
   const messageHoldStartRef = useRef<{ id: string; x: number; y: number } | null>(null);
   const keyboardWasOpenRef = useRef(false);
   const restoreBottomAfterKeyboardRef = useRef(false);
+  const maxViewportHeightRef = useRef(0);
 
   const activeConversation: DirectRavenConversation = conversation ?? {
     id: conversationId, user_a: userId, user_b: partner?.id ?? null, kind: "raven", title: null, description: null, avatar_path: null, owner_id: null, created_at: "", updated_at: "",
@@ -300,9 +301,18 @@ export default function RavenConversation({
         root.style.setProperty("--raven-mobile-top", `${offset + visibleNav}px`);
         root.style.setProperty("--raven-mobile-height", `${Math.max(0, height - visibleNav)}px`);
         root.style.setProperty("--direct-raven-viewport-height", `${height}px`);
-        const keyboardOpen = height < window.innerHeight - 100;
+        const layoutHeight = Math.max(window.innerHeight, document.documentElement.clientHeight || 0);
+        if (maxViewportHeightRef.current === 0 || height > maxViewportHeightRef.current - 32) {
+          maxViewportHeightRef.current = Math.max(maxViewportHeightRef.current, height);
+        }
+        const keyboardDelta = Math.max(
+          maxViewportHeightRef.current - height,
+          layoutHeight - height - offset,
+        );
+        const keyboardOpen = keyboardDelta > 100;
+        root.dataset.ravenKeyboardOpen = keyboardOpen ? "1" : "0";
         root.style.setProperty("--raven-composer-bottom-pad", keyboardOpen ? "0px" : "max(6px, env(safe-area-inset-bottom))");
-        root.style.setProperty("--raven-composer-keyboard-shift", keyboardOpen ? "7px" : "0px");
+        root.style.setProperty("--raven-composer-keyboard-shift", "0px");
 
         if (keyboardOpen && !keyboardWasOpenRef.current) {
           restoreBottomAfterKeyboardRef.current = nearBottom.current || document.activeElement === inputRef.current;
@@ -340,6 +350,7 @@ export default function RavenConversation({
       document.documentElement.style.removeProperty("--raven-mobile-height");
       document.documentElement.style.removeProperty("--raven-composer-bottom-pad");
       document.documentElement.style.removeProperty("--raven-composer-keyboard-shift");
+      delete document.documentElement.dataset.ravenKeyboardOpen;
     };
   }, []);
 

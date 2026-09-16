@@ -413,6 +413,8 @@ function Lightbox({
   hasPrev: boolean;
   hasNext: boolean;
 }) {
+  const [shareOpen, setShareOpen] = useState(false);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -484,7 +486,17 @@ function Lightbox({
           )}
           {isGutterEntry(entry) && <GutterComments key={entry.id} entryId={entry.id} />}
         </div>
+        <button
+          type="button"
+          className={styles.mediaRavenShareButton}
+          onClick={(event) => { event.stopPropagation(); setShareOpen(true); }}
+          aria-label="Send this image by raven"
+          title="Send by raven"
+        >
+          <RavenIcon size={20} />
+        </button>
       </div>
+      {shareOpen && <ReelShareSheet entry={entry} onClose={() => setShareOpen(false)} />}
 
       {hasNext && !isGutterEntry(entry) && (
         <button
@@ -744,17 +756,18 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
         body: JSON.stringify({ entryId: entry.id, conversationIds: selected, message }),
       });
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.error || "The reel could not be sent.");
+      if (!response.ok) throw new Error(payload.error || "The Raven's Eye item could not be sent.");
       const messages = Array.isArray(payload.messages) ? payload.messages : [];
       await Promise.allSettled(messages.map((message: { id: string }) => fetch("/api/notifications/direct-raven", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messageId: message.id }),
       })));
-      setStatus(messages.length === 1 ? "Reel sent by raven." : `Reel sent down ${messages.length} Raven paths.`);
+      const itemName = isVideo(entry.src) ? "Reel" : "Image";
+      setStatus(messages.length === 1 ? `${itemName} sent by raven.` : `${itemName} sent down ${messages.length} Raven paths.`);
       window.setTimeout(onClose, 650);
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : "The reel could not be sent.");
+      setStatus(error instanceof Error ? error.message : "The Raven's Eye item could not be sent.");
     } finally {
       setSending(false);
     }
@@ -762,7 +775,8 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
 
   const copyLink = async () => {
     try {
-      const url = `${window.location.origin}${mediaUrl("reels", entry.id)}`;
+      const tab: RavensEyeTab = isVideo(entry.src) ? "reels" : entry.category === "fleabottom" ? "flea" : "raven";
+      const url = `${window.location.origin}${mediaUrl(tab, entry.id)}`;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1400);
@@ -783,7 +797,7 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
         <div className={styles.reelSheetHeader}>
           <div>
             <span>Send by raven</span>
-            <strong>Share this reel</strong>
+            <strong>{isVideo(entry.src) ? "Share this reel" : "Share this image"}</strong>
           </div>
           <button type="button" className={styles.reelSheetClose} onClick={onClose} aria-label="Close share panel">
             <CloseGlyph />
@@ -793,8 +807,8 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
         <div className={styles.reelSharePreview}>
           <ReelPoster entry={entry} className={styles.reelSharePoster} />
           <div>
-            <span>Gutter Reel</span>
-            <p>{entry.caption || "A reel from Flea Bottom"}</p>
+            <span>{isVideo(entry.src) ? "Gutter Reel" : entry.category === "fleabottom" ? "Flea Bottom" : "Raven's Eye"}</span>
+            <p>{entry.caption || (isVideo(entry.src) ? "A reel from Flea Bottom" : "An image from Raven's Eye")}</p>
           </div>
         </div>
 
@@ -803,7 +817,7 @@ function ReelShareSheet({ entry, onClose }: { entry: GalleryEntry; onClose: () =
           <textarea
             value={message}
             onChange={(event) => setMessage(event.target.value.slice(0, 1200))}
-            placeholder="Say something with this reel…"
+            placeholder={isVideo(entry.src) ? "Say something with this reel…" : "Say something with this image…"}
             rows={2}
             maxLength={1200}
           />

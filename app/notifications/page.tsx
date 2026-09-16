@@ -429,17 +429,27 @@ function Notifications() {
 
   const renderInlinePreview = (item: SiteNotification, preview = previewForNotification(item), nested = false) => {
     if (!preview) return null;
-    return <span className={`${styles.cardPreview} ${nested ? styles.cardPreviewNested : ""}`} aria-label="Notification preview">
-      {preview.parentBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewParent}`}>
-        <span className={styles.cardPreviewMarker}><ReplyIndicator /></span>
-        <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={preview.parentUser} username={preview.parentLabel} size={nested ? 26 : 28} /></span>
-        <span className={styles.cardPreviewCopy}><b>{preview.parentLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.parentBody} /> : <>“{preview.parentBody}”</>}</span></span>
-      </span>}
-      {preview.replyBody && <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewReply}`}>
-        <span className={`${styles.cardPreviewMarker} ${styles.cardPreviewMarkerEmpty}`} aria-hidden="true" />
-        <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={preview.actorUser} username={preview.actorUsername ?? preview.actorLabel} avatarUrl={preview.actorAvatarUrl} size={nested ? 26 : 28} /></span>
-        <span className={styles.cardPreviewCopy}><b>{preview.actorLabel}</b><span>{preview.ravenPreview ? <RavenMessagePreview body={preview.replyBody} /> : <>“{preview.replyBody}”</>}</span></span>
-      </span>}
+    const ravenMessageRow = (body: string, label: string, user: CommunityIdentity | null | undefined, username?: string | null, avatarUrl?: string | null, extraClass = "") => (
+      <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewRavenMessage} ${extraClass}`}>
+        <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={user} username={username ?? label} avatarUrl={avatarUrl} size={nested ? 26 : 28} /></span>
+        <span className={styles.cardPreviewCopy}><b>{label}</b><span><RavenMessagePreview body={body} /></span></span>
+      </span>
+    );
+    return <span className={`${styles.cardPreview} ${nested ? styles.cardPreviewNested : ""} ${preview.ravenPreview ? styles.cardPreviewRaven : ""}`} aria-label="Notification preview">
+      {preview.parentBody && (preview.ravenPreview
+        ? ravenMessageRow(preview.parentBody, preview.parentLabel, preview.parentUser, preview.parentLabel, null, styles.cardPreviewParent)
+        : <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewParent}`}>
+            <span className={styles.cardPreviewMarker}><ReplyIndicator /></span>
+            <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={preview.parentUser} username={preview.parentLabel} size={nested ? 26 : 28} /></span>
+            <span className={styles.cardPreviewCopy}><b>{preview.parentLabel}</b><span>“{preview.parentBody}”</span></span>
+          </span>)}
+      {preview.replyBody && (preview.ravenPreview
+        ? ravenMessageRow(preview.replyBody, preview.actorLabel, preview.actorUser, preview.actorUsername ?? preview.actorLabel, preview.actorAvatarUrl, styles.cardPreviewReply)
+        : <span className={`${styles.cardPreviewMessage} ${styles.cardPreviewReply}`}>
+            <span className={`${styles.cardPreviewMarker} ${styles.cardPreviewMarkerEmpty}`} aria-hidden="true" />
+            <span className={styles.cardPreviewAvatar}><CommunityIdentityAvatar user={preview.actorUser} username={preview.actorUsername ?? preview.actorLabel} avatarUrl={preview.actorAvatarUrl} size={nested ? 26 : 28} /></span>
+            <span className={styles.cardPreviewCopy}><b>{preview.actorLabel}</b><span>“{preview.replyBody}”</span></span>
+          </span>)}
     </span>;
   };
 
