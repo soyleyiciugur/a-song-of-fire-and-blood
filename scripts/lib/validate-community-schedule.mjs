@@ -4,7 +4,19 @@ export function validateCommunitySchedule(schedule) {
   assert.equal(schedule.timeZone, 'Europe/Istanbul');
   assert.equal(new Set(schedule.slots.map(s => s.id)).size, schedule.slots.length);
   assert.equal(new Set(schedule.slots.map(s => s.publishedAt)).size, schedule.slots.length);
-  assert.deepEqual(schedule.policy, { windowHours: 24, responsesPerHour: 1, randomMinute: true, persisted: true });
+  assert.deepEqual(schedule.policy, {
+    windowHours: 24,
+    responsesPerHour: 1,
+    randomMinute: true,
+    persisted: true,
+    releaseStages: [
+      { id: 'launch', offsetMinutes: 0, targetCount: 10 },
+      { id: 'half-hour', offsetMinutes: 30, targetCount: 10 },
+      { id: 'one-hour', offsetMinutes: 90, targetCount: 5 },
+      { id: 'five-hour', offsetMinutes: 390, targetCount: 5 },
+      { id: 'three-day-tail', offsetMinutes: 4710, targetCount: 10 },
+    ],
+  });
   const active = schedule.slots.filter(s => s.batchId === schedule.currentBatchId);
   assert.equal(active.length, 24, 'Current batch covers 24 hours');
   const hours = active.map(s => Math.floor(Date.parse(s.publishedAt) / 3600000)).sort((a,b) => a-b);

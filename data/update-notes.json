@@ -2,6 +2,9 @@
   {
     "date": "2026-09-16",
     "items": [
+      "Added six Tavern discussions and staged fictional reactions for the new Jace, pocket-cake, Gaelor, cursed-raven and Aenys II memes.",
+      "Added a persisted decremental community release profile with launch, half-hour, one-hour, five-hour and three-day follow-up stages.",
+      "Added four new gallery images and the Jace heir reel, including a generated WebP poster for the video.",
       "Added compact page sharing through Direct Raven with page-specific titles and previews, while hiding the share control during active Great Game tables.",
       "Refined Direct Raven replies on mobile with smoother swipe gestures, quoted usernames, tappable reply context, aligned media labels and tighter keyboard safe-area behavior.",
       "Made Personal Ravens show useful reply context inline, route notification cards directly to their destinations, reserve lightbox previews for portrait taps, and send new push taps straight to the related page.",

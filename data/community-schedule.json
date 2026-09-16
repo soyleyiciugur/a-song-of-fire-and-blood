@@ -397,7 +397,14 @@
     "windowHours": 24,
     "responsesPerHour": 1,
     "randomMinute": true,
-    "persisted": true
+    "persisted": true,
+    "releaseStages": [
+      { "id": "launch", "offsetMinutes": 0, "targetCount": 10 },
+      { "id": "half-hour", "offsetMinutes": 30, "targetCount": 10 },
+      { "id": "one-hour", "offsetMinutes": 90, "targetCount": 5 },
+      { "id": "five-hour", "offsetMinutes": 390, "targetCount": 5 },
+      { "id": "three-day-tail", "offsetMinutes": 4710, "targetCount": 10 }
+    ]
   },
   "currentBatchId": "september-13-kingship"
 }

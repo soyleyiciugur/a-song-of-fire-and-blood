@@ -1,5 +1,65 @@
 [
   {
+    "id": "gallery-aenys-ii-bu-adami-ruyanizda",
+    "src": "/images/gallery/aenys-ii-bu-adami-ruyanizda.webp",
+    "caption": "Cok korkuyorum bu sahte demi. Ben daha 9 yaşındayım cok korkuyorum sahta demi bu biri bana acıklasın",
+    "characterIds": ["aenys-targaryen-ii"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-16",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-cursed-raven",
+    "src": "/images/gallery/cursed-raven.jpeg",
+    "caption": "cursed fleabottom images",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-16",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-prince-gaelor-baby-ck3-agot",
+    "src": "/images/gallery/prince-gaelor-baby-ck3-agot.jpeg",
+    "caption": "this is canon guys",
+    "characterIds": ["gaelor-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-16",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-vhaemys-pocket-cake",
+    "src": "/images/gallery/vhaemys-pocket-cake.jpeg",
+    "caption": "POCKET CAKE 🧁.",
+    "characterIds": ["vhaemys-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "until-the-last-breath",
+    "worldDate": { "day": 16, "moon": 8, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-16",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-jace-heir-olunca",
+    "src": "/videos/reels/jace-heir-olunca.mp4",
+    "caption": "fbli jace'çiler ogün'ün rüyasını henüz kutlamıyor...",
+    "characterIds": ["jacaelon-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "until-the-last-breath",
+    "worldDate": { "day": 15, "moon": 8, "year": 99, "era": "AC" },
+    "uploadedAt": "2026-09-16",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-almar-and-renrose",
     "src": "/images/gallery/almar-and-renrose.jpeg",
     "caption": "Maester Almar before Lord Renrose Tyrell.",
