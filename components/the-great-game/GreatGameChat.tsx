@@ -327,11 +327,28 @@ export default function GreatGameChat({
               {unread > 0 && desktopCollapsed && <span className={styles.desktopUnread}>{unread > 9 ? "9+" : unread}</span>}
             </button>
           )}
+
           <div className={styles.heading}>
-            <span>Online Table</span>
+            <span className={styles.tableCode}><i aria-hidden="true" />Table {match.code}</span>
             <strong>Table Whispers</strong>
-            <small>{opponent?.username ? `with ${opponent.username}` : match.code}</small>
+            <small>vs. {opponent?.username ?? "Opponent"}</small>
           </div>
+
+          {status && (
+            <div className={styles.headerGameMeta} aria-label="Online table status">
+              <div className={styles.gameMetaTurn}>
+                <span>{status.activePlayerName}</span>
+                <strong>Turn {status.turnNumber}</strong>
+              </div>
+              <button type="button" className={styles.gameMetaExit} onClick={status.onExit}>
+                Exit Game
+              </button>
+              <div className={`${styles.gameMetaState} ${status.canAct ? styles.gameMetaStateActive : ""}`}>
+                {status.statusText}
+              </div>
+            </div>
+          )}
+
           <button
             type="button"
             className={styles.close}
@@ -342,41 +359,28 @@ export default function GreatGameChat({
           </button>
         </header>
 
-        {status && (
-          <div className={styles.gameMeta} aria-label="Online table status">
-            <div className={styles.gameMetaTable}>
-              <span><i aria-hidden="true" />Table {match.code}</span>
-              <small>vs. {opponent?.username ?? "Opponent"}</small>
-            </div>
-            <div className={styles.gameMetaTurn}>
-              <span>{status.activePlayerName}</span>
-              <strong>Turn {status.turnNumber}</strong>
-            </div>
-            <button type="button" className={styles.gameMetaExit} onClick={status.onExit}>
-              Exit Game
-            </button>
-            <div className={`${styles.gameMetaState} ${status.canAct ? styles.gameMetaStateActive : ""}`}>
-              {status.statusText}
-            </div>
-          </div>
-        )}
-
         <div ref={listRef} className={styles.messages} aria-live="polite">
           {loading && <p className={styles.empty}>Listening at the table…</p>}
           {!loading && messages.length === 0 && !error && (
             <p className={styles.empty}>No words have crossed the table yet.</p>
           )}
 
-          {messages.map((message) => {
+          {messages.map((message, index) => {
             const own = message.user_id === viewerId;
             const sender = players.get(message.user_id);
             const username = sender?.username ?? "player";
+            const grouped = index > 0 && messages[index - 1]?.user_id === message.user_id;
+
             return (
               <article
                 key={message.id}
-                className={`${styles.message} ${own ? styles.messageOwn : styles.messageOther}`}
+                className={[
+                  styles.message,
+                  own ? styles.messageOwn : styles.messageOther,
+                  grouped ? styles.messageGrouped : "",
+                ].filter(Boolean).join(" ")}
               >
-                {!own && (
+                {!own && !grouped && (
                   <span className={styles.avatar} aria-hidden="true">
                     {sender?.avatarUrl ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -386,12 +390,16 @@ export default function GreatGameChat({
                     )}
                   </span>
                 )}
+                {!own && grouped && <span className={styles.avatarSpacer} aria-hidden="true" />}
+
                 <div className={styles.messageBody}>
-                  <span className={styles.meta}>
-                    <strong>{own ? "You" : username}</strong>
-                    <time dateTime={message.created_at}>{messageTime(message.created_at)}</time>
-                  </span>
-                  <p>{message.body}</p>
+                  {!grouped && (
+                    <span className={styles.meta}>
+                      <strong>{own ? "You" : username}</strong>
+                      <time dateTime={message.created_at}>{messageTime(message.created_at)}</time>
+                    </span>
+                  )}
+                  <p title={grouped ? messageTime(message.created_at) : undefined}>{message.body}</p>
                 </div>
               </article>
             );

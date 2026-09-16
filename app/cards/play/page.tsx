@@ -5532,6 +5532,17 @@ export default function GreatGamePlayPage() {
         !currentGame.pendingEffect
     );
 
+  const playerEndTurnDisabled =
+    !onlineCanAct ||
+    Boolean(
+      currentGame.pendingEffect ||
+        turnDrawPending
+    );
+
+  const preservePlayerEndTurnAppearance =
+    turnDrawPending &&
+    !currentGame.pendingEffect;
+
   return (
     <main
       className={`${styles.game} ${
@@ -5832,7 +5843,21 @@ export default function GreatGamePlayPage() {
         actionPreview={
           actionPreview
         }
+        showCommandMeter={false}
+        showEndTurn={false}
       />
+
+      <section
+        className={styles.opponentCommandDock}
+        aria-label={`${gamePlayerName(viewEnemyPlayerId, onlineMatch)} command`}
+      >
+        <CommandMeter
+          command={viewEnemyPlayer.command}
+          maxCommand={viewEnemyPlayer.maxCommand}
+          nextCommandBonus={viewEnemyPlayer.nextCommandBonus}
+          compact
+        />
+      </section>
 
       {onlineCanAct &&
         currentGame.pendingEffect
@@ -6112,26 +6137,14 @@ export default function GreatGamePlayPage() {
         }
         playerLabel={gamePlayerName(viewPlayerId, onlineMatch)}
         state={currentGame}
-        onEndTurn={onlineCanAct ? endTurn : undefined}
-        endTurnDisabled={
-          Boolean(
-            currentGame.pendingEffect ||
-              turnDrawPending
-          )
-        }
-        preserveEndTurnAppearance={
-          turnDrawPending &&
-          !currentGame.pendingEffect
-        }
-        highlightEndTurn={
-          highlightEndTurn
-        }
         previewCommandCost={
           hoveredCommandCost
         }
         actionPreview={
           actionPreview
         }
+        showCommandMeter={false}
+        showEndTurn={false}
       />
 
       {attackDrag && (
@@ -6315,6 +6328,48 @@ export default function GreatGamePlayPage() {
               }
             )}
         </div>
+      </section>
+
+      <section
+        className={styles.playerCommandDock}
+        aria-label="Your command and turn controls"
+      >
+        <CommandMeter
+          command={viewPlayer.command}
+          maxCommand={viewPlayer.maxCommand}
+          nextCommandBonus={viewPlayer.nextCommandBonus}
+          previewCost={hoveredCommandCost}
+          compact
+        />
+
+        <button
+          type="button"
+          className={[
+            styles.endTurnButton,
+            styles.commandDockEndTurnButton,
+            highlightEndTurn
+              ? styles.endTurnReady
+              : "",
+            preservePlayerEndTurnAppearance
+              ? styles.endTurnDisabledStable
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          disabled={playerEndTurnDisabled}
+          onClick={endTurn}
+          title={
+            !onlineCanAct
+              ? "Wait for your turn"
+              : playerEndTurnDisabled
+                ? preservePlayerEndTurnAppearance
+                  ? "Wait for the turn draw to finish"
+                  : "Resolve the current effect first"
+                : "End your turn"
+          }
+        >
+          End Turn
+        </button>
       </section>
 
       {showSelectedPreview &&
@@ -6990,6 +7045,8 @@ function PlayerHeader({
   conflictPreview = null,
   actionPreview = null,
   attackStandingDropTarget = false,
+  showCommandMeter = true,
+  showEndTurn = true,
 }: {
   className?: string;
   playerId: PlayerId;
@@ -7013,6 +7070,8 @@ function PlayerHeader({
   conflictPreview?: CombatPreviewState | null;
   actionPreview?: ActionPreviewState | null;
   attackStandingDropTarget?: boolean;
+  showCommandMeter?: boolean;
+  showEndTurn?: boolean;
 }) {
   const player =
     state.players[
@@ -7208,24 +7267,26 @@ function PlayerHeader({
           }
         />
 
-        <CommandMeter
-          command={
-            player.command
-          }
-          maxCommand={
-            player.maxCommand
-          }
-          nextCommandBonus={
-            player.nextCommandBonus
-          }
-          previewCost={
-            previewCommandCost
-          }
-          compact
-        />
+        {showCommandMeter && (
+          <CommandMeter
+            command={
+              player.command
+            }
+            maxCommand={
+              player.maxCommand
+            }
+            nextCommandBonus={
+              player.nextCommandBonus
+            }
+            previewCost={
+              previewCommandCost
+            }
+            compact
+          />
+        )}
       </div>
 
-      {onEndTurn ? (
+      {showEndTurn && (onEndTurn ? (
         <button
           type="button"
           className={[
@@ -7263,7 +7324,7 @@ function PlayerHeader({
           }
           aria-hidden
         />
-      )}
+      ))}
     </section>
   );
 }

@@ -8,7 +8,8 @@
       "Restored the Gutter Reels hub Raven share control while keeping open media viewers above the hub control and anchoring mobile reel comments and sharing to the lower-right metadata edge.",
       "Removed tag pills from Raven's Eye and Gutter Memes hub previews while restoring tags inside opened lightboxes on mobile and desktop.",
       "Contained long shared-comment previews inside mobile Direct Raven bubbles with ellipsis truncation.",
-      "Realigned Rookery source icons to the source line and shifted activity avatars, usernames and copy onto the same left edge in regular and nested notifications."
+      "Realigned Rookery source icons to the source line and shifted activity avatars, usernames and copy onto the same left edge in regular and nested notifications.",
+      "Refined The Great Game board into left-side vertical stat stacks, a bottom-right Command and End Turn dock beneath Chronicle, a viewport-bottom clipped hand shelf, and a denser Table Whispers header with grouped consecutive messages."
     ],
     "features": [],
     "links": {}
