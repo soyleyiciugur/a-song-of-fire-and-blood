@@ -10,11 +10,13 @@ export function validateCommunitySchedule(schedule) {
     randomMinute: true,
     persisted: true,
     releaseStages: [
-      { id: 'launch', offsetMinutes: 0, targetCount: 10 },
-      { id: 'half-hour', offsetMinutes: 30, targetCount: 10 },
-      { id: 'one-hour', offsetMinutes: 90, targetCount: 5 },
-      { id: 'five-hour', offsetMinutes: 390, targetCount: 5 },
-      { id: 'three-day-tail', offsetMinutes: 4710, targetCount: 10 },
+      { id: 'launch', minOffsetMinutes: 0, maxOffsetMinutes: 0, minCount: 10, maxCount: 15 },
+      { id: 'half-hour', minOffsetMinutes: 1, maxOffsetMinutes: 30, minCount: 10, maxCount: 15 },
+      { id: 'two-hour', minOffsetMinutes: 31, maxOffsetMinutes: 120, minCount: 10, maxCount: 15 },
+      { id: 'five-hour', minOffsetMinutes: 121, maxOffsetMinutes: 300, minCount: 5, maxCount: 10 },
+      { id: 'ten-hour', minOffsetMinutes: 301, maxOffsetMinutes: 600, minCount: 3, maxCount: 5 },
+      { id: 'twenty-four-hour', minOffsetMinutes: 601, maxOffsetMinutes: 1440, minCount: 3, maxCount: 5 },
+      { id: 'seventy-two-hour', minOffsetMinutes: 1441, maxOffsetMinutes: 4320, minCount: 5, maxCount: 10 },
     ],
   });
   const active = schedule.slots.filter(s => s.batchId === schedule.currentBatchId);

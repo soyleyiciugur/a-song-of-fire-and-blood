@@ -368,30 +368,252 @@
         "hrrm-ama-150"
       ]
     },
-    {"id":"september-13-kingship-1","batchId":"september-13-kingship","publishedAt":"2026-09-13T21:17:13.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-073"]},
-    {"id":"september-13-kingship-2","batchId":"september-13-kingship","publishedAt":"2026-09-13T22:43:26.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-074"]},
-    {"id":"september-13-kingship-3","batchId":"september-13-kingship","publishedAt":"2026-09-13T23:08:41.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-075"]},
-    {"id":"september-13-kingship-4","batchId":"september-13-kingship","publishedAt":"2026-09-14T00:36:18.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-076"]},
-    {"id":"september-13-kingship-5","batchId":"september-13-kingship","publishedAt":"2026-09-14T01:22:57.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-077"]},
-    {"id":"september-13-kingship-6","batchId":"september-13-kingship","publishedAt":"2026-09-14T02:51:09.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-078"]},
-    {"id":"september-13-kingship-7","batchId":"september-13-kingship","publishedAt":"2026-09-14T03:14:33.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-079"]},
-    {"id":"september-13-kingship-8","batchId":"september-13-kingship","publishedAt":"2026-09-14T04:47:52.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-080"]},
-    {"id":"september-13-kingship-9","batchId":"september-13-kingship","publishedAt":"2026-09-14T05:29:16.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-081"]},
-    {"id":"september-13-kingship-10","batchId":"september-13-kingship","publishedAt":"2026-09-14T06:04:48.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-082"]},
-    {"id":"september-13-kingship-11","batchId":"september-13-kingship","publishedAt":"2026-09-14T07:38:25.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-083"]},
-    {"id":"september-13-kingship-12","batchId":"september-13-kingship","publishedAt":"2026-09-14T08:19:44.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-084"]},
-    {"id":"september-13-kingship-13","batchId":"september-13-kingship","publishedAt":"2026-09-14T09:46:37.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-085"]},
-    {"id":"september-13-kingship-14","batchId":"september-13-kingship","publishedAt":"2026-09-14T10:11:58.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-086"]},
-    {"id":"september-13-kingship-15","batchId":"september-13-kingship","publishedAt":"2026-09-14T11:54:22.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-087"]},
-    {"id":"september-13-kingship-16","batchId":"september-13-kingship","publishedAt":"2026-09-14T12:27:39.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-088"]},
-    {"id":"september-13-kingship-17","batchId":"september-13-kingship","publishedAt":"2026-09-14T13:06:14.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-089"]},
-    {"id":"september-13-kingship-18","batchId":"september-13-kingship","publishedAt":"2026-09-14T14:42:31.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-090"]},
-    {"id":"september-13-kingship-19","batchId":"september-13-kingship","publishedAt":"2026-09-14T15:18:47.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-091"]},
-    {"id":"september-13-kingship-20","batchId":"september-13-kingship","publishedAt":"2026-09-14T16:35:06.000Z","commentIds":["gaelor-teror-scheduled-cast"],"forumThreadIds":[],"forumCommentIds":["king18-092"]},
-    {"id":"september-13-kingship-21","batchId":"september-13-kingship","publishedAt":"2026-09-14T17:09:53.000Z","commentIds":["uclu-scheduled-j"],"forumThreadIds":[],"forumCommentIds":["king18-093"]},
-    {"id":"september-13-kingship-22","batchId":"september-13-kingship","publishedAt":"2026-09-14T18:48:29.000Z","commentIds":["lorent-ideas-scheduled-l"],"forumThreadIds":[],"forumCommentIds":["king18-094"]},
-    {"id":"september-13-kingship-23","batchId":"september-13-kingship","publishedAt":"2026-09-14T19:24:11.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-095"]},
-    {"id":"september-13-kingship-24","batchId":"september-13-kingship","publishedAt":"2026-09-14T20:52:36.000Z","commentIds":[],"forumThreadIds":[],"forumCommentIds":["king18-096"]}
+    {
+      "id": "september-13-kingship-1",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-13T21:17:13.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-073"
+      ]
+    },
+    {
+      "id": "september-13-kingship-2",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-13T22:43:26.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-074"
+      ]
+    },
+    {
+      "id": "september-13-kingship-3",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-13T23:08:41.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-075"
+      ]
+    },
+    {
+      "id": "september-13-kingship-4",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T00:36:18.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-076"
+      ]
+    },
+    {
+      "id": "september-13-kingship-5",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T01:22:57.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-077"
+      ]
+    },
+    {
+      "id": "september-13-kingship-6",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T02:51:09.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-078"
+      ]
+    },
+    {
+      "id": "september-13-kingship-7",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T03:14:33.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-079"
+      ]
+    },
+    {
+      "id": "september-13-kingship-8",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T04:47:52.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-080"
+      ]
+    },
+    {
+      "id": "september-13-kingship-9",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T05:29:16.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-081"
+      ]
+    },
+    {
+      "id": "september-13-kingship-10",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T06:04:48.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-082"
+      ]
+    },
+    {
+      "id": "september-13-kingship-11",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T07:38:25.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-083"
+      ]
+    },
+    {
+      "id": "september-13-kingship-12",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T08:19:44.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-084"
+      ]
+    },
+    {
+      "id": "september-13-kingship-13",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T09:46:37.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-085"
+      ]
+    },
+    {
+      "id": "september-13-kingship-14",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T10:11:58.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-086"
+      ]
+    },
+    {
+      "id": "september-13-kingship-15",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T11:54:22.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-087"
+      ]
+    },
+    {
+      "id": "september-13-kingship-16",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T12:27:39.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-088"
+      ]
+    },
+    {
+      "id": "september-13-kingship-17",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T13:06:14.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-089"
+      ]
+    },
+    {
+      "id": "september-13-kingship-18",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T14:42:31.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-090"
+      ]
+    },
+    {
+      "id": "september-13-kingship-19",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T15:18:47.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-091"
+      ]
+    },
+    {
+      "id": "september-13-kingship-20",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T16:35:06.000Z",
+      "commentIds": [
+        "gaelor-teror-scheduled-cast"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-092"
+      ]
+    },
+    {
+      "id": "september-13-kingship-21",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T17:09:53.000Z",
+      "commentIds": [
+        "uclu-scheduled-j"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-093"
+      ]
+    },
+    {
+      "id": "september-13-kingship-22",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T18:48:29.000Z",
+      "commentIds": [
+        "lorent-ideas-scheduled-l"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-094"
+      ]
+    },
+    {
+      "id": "september-13-kingship-23",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T19:24:11.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-095"
+      ]
+    },
+    {
+      "id": "september-13-kingship-24",
+      "batchId": "september-13-kingship",
+      "publishedAt": "2026-09-14T20:52:36.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "king18-096"
+      ]
+    }
   ],
   "policy": {
     "windowHours": 24,
@@ -399,11 +621,55 @@
     "randomMinute": true,
     "persisted": true,
     "releaseStages": [
-      { "id": "launch", "offsetMinutes": 0, "targetCount": 10 },
-      { "id": "half-hour", "offsetMinutes": 30, "targetCount": 10 },
-      { "id": "one-hour", "offsetMinutes": 90, "targetCount": 5 },
-      { "id": "five-hour", "offsetMinutes": 390, "targetCount": 5 },
-      { "id": "three-day-tail", "offsetMinutes": 4710, "targetCount": 10 }
+      {
+        "id": "launch",
+        "minOffsetMinutes": 0,
+        "maxOffsetMinutes": 0,
+        "minCount": 10,
+        "maxCount": 15
+      },
+      {
+        "id": "half-hour",
+        "minOffsetMinutes": 1,
+        "maxOffsetMinutes": 30,
+        "minCount": 10,
+        "maxCount": 15
+      },
+      {
+        "id": "two-hour",
+        "minOffsetMinutes": 31,
+        "maxOffsetMinutes": 120,
+        "minCount": 10,
+        "maxCount": 15
+      },
+      {
+        "id": "five-hour",
+        "minOffsetMinutes": 121,
+        "maxOffsetMinutes": 300,
+        "minCount": 5,
+        "maxCount": 10
+      },
+      {
+        "id": "ten-hour",
+        "minOffsetMinutes": 301,
+        "maxOffsetMinutes": 600,
+        "minCount": 3,
+        "maxCount": 5
+      },
+      {
+        "id": "twenty-four-hour",
+        "minOffsetMinutes": 601,
+        "maxOffsetMinutes": 1440,
+        "minCount": 3,
+        "maxCount": 5
+      },
+      {
+        "id": "seventy-two-hour",
+        "minOffsetMinutes": 1441,
+        "maxOffsetMinutes": 4320,
+        "minCount": 5,
+        "maxCount": 10
+      }
     ]
   },
   "currentBatchId": "september-13-kingship"
