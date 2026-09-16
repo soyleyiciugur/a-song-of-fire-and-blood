@@ -5,7 +5,7 @@
   bottom:16px;
   z-index:72;
   display:grid;
-  grid-template-rows:auto minmax(0,1fr) auto auto;
+  grid-template-rows:auto auto minmax(0,1fr) auto auto;
   width:288px;
   overflow:hidden;
   border:1px solid rgba(146,105,65,.42);
@@ -90,3 +90,26 @@
 /* v4.6: match the square Location / Chronicle utility panels. */
 .panel{border-radius:0}
 @media(max-width:980px){.panel{border-radius:0}}
+
+
+/* Full-board presentation: Table Whispers becomes the permanent top panel of
+   the right utility rail, with match state folded into its header area. */
+.gameMeta{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"table turn exit" "state state state";align-items:center;gap:6px 8px;padding:7px 9px 8px;border-bottom:1px solid rgba(111,81,53,.34);background:linear-gradient(180deg,rgba(20,13,16,.96),rgba(11,9,11,.93));font-family:var(--font-geist),sans-serif}
+.gameMetaTable{grid-area:table;display:grid;min-width:0;gap:2px}.gameMetaTable>span{display:flex;align-items:center;gap:5px;min-width:0;color:#c3a26d;font:700 7px/1.2 var(--font-geist);letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}.gameMetaTable i{width:6px;height:6px;flex:none;border-radius:50%;background:#bda45f;box-shadow:0 0 8px rgba(189,164,95,.38)}.gameMetaTable small{overflow:hidden;color:#746a61;font:8px/1.2 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}
+.gameMetaTurn{grid-area:turn;display:grid;justify-items:end;gap:1px;min-width:58px}.gameMetaTurn span{overflow:hidden;max-width:88px;color:#8e8275;font:8px/1.1 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}.gameMetaTurn strong{color:#d4b76f;font:700 9px/1.1 var(--font-hotd),serif;letter-spacing:.05em;text-transform:uppercase}
+.gameMetaExit{grid-area:exit;min-height:27px;padding:0 8px;border:1px solid rgba(157,111,65,.48);border-radius:6px;background:rgba(65,37,38,.55);color:#d8b37c;font:700 7px/1 var(--font-geist);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.gameMetaExit:hover,.gameMetaExit:focus-visible{border-color:rgba(200,156,98,.72);background:rgba(85,47,46,.72);color:#efd5aa;outline:none}
+.gameMetaState{grid-area:state;overflow:hidden;padding-top:5px;border-top:1px solid rgba(90,67,52,.28);color:#8f7567;font:700 7px/1.2 var(--font-geist);letter-spacing:.08em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}.gameMetaStateActive{color:#d1b46d}
+.mobileToggleEmbedded{display:none!important}
+.panelEmbedded{top:calc(var(--site-nav-height,0px) + 7px);right:7px;bottom:auto;width:calc(var(--game-rail-width,300px) - 14px);height:var(--game-chat-height,clamp(245px,43dvh,388px));max-height:calc(100dvh - var(--site-nav-height,0px) - 14px);border-radius:0;transform:none!important;opacity:1!important;pointer-events:auto!important;transition:none;z-index:76}
+.panelEmbedded .header{grid-template-columns:30px minmax(0,1fr);min-height:48px;padding:7px 9px}
+.panelEmbedded .headerIcon{width:28px;height:28px}
+.panelEmbedded .close{display:none!important}
+.panelEmbedded .messages{padding:7px 8px 8px}
+.panelEmbedded .message{margin-bottom:7px}.panelEmbedded .messageBody p{padding:6px 7px;font-size:10px}.panelEmbedded .composer{padding:7px 8px}.panelEmbedded .composer textarea{min-height:32px;font-size:10px}.panelEmbedded .composer button{width:32px;height:32px}
+.panelEmbedded.panelCollapsed{width:calc(var(--game-rail-width,300px) - 14px);transform:none!important;box-shadow:0 22px 60px rgba(0,0,0,.58),inset 0 1px rgba(255,255,255,.035)}
+.panelEmbedded.panelCollapsed .heading,.panelEmbedded.panelCollapsed .messages,.panelEmbedded.panelCollapsed .composer,.panelEmbedded.panelCollapsed .error{opacity:1;pointer-events:auto}
+
+@media(max-width:980px){
+  .panelEmbedded{top:calc(var(--site-nav-height,0px) + 5px);left:auto;right:5px;bottom:auto;width:calc(var(--game-rail-width,240px) - 10px);height:var(--game-chat-height,clamp(210px,41dvh,340px));max-height:calc(100dvh - var(--site-nav-height,0px) - 10px);transform:none!important;opacity:1!important;pointer-events:auto!important;border-radius:0;z-index:76}
+  .panelEmbedded .header{min-height:44px}.panelEmbedded .heading strong{font-size:11px}.panelEmbedded .heading small{font-size:8px}.panelEmbedded .gameMeta{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"table exit" "turn turn" "state state";gap:5px 7px}.panelEmbedded .gameMetaTurn{grid-area:turn;display:flex;justify-content:space-between;min-width:0}.panelEmbedded .gameMetaTurn span{max-width:120px}.panelEmbedded .messageOther{padding-right:4px}.panelEmbedded .messageOwn{padding-left:8px}.panelEmbedded .avatar{width:22px;height:22px;flex-basis:22px}
+}

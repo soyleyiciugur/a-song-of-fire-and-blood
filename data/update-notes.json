@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-17",
+    "items": [
+      "Rebuilt The Great Game match board as a fixed full-viewport table with no page scrolling, a compact permanent utility rail, and the hand layered over the lower realm without changing card interactions.",
+      "Made /cards/play open with the site navigation collapsed behind a half-visible top-center control, while restoring the normal navbar and collapse control when expanded.",
+      "Moved online table code, opponent, active player, turn state and Exit Game into the Table Whispers header so the former match masthead no longer consumes board space."
+    ],
+    "features": [],
+    "links": {}
+  },
+  {
     "date": "2026-09-16",
     "items": [
       "Introduced a subtle conspiracy-reader account who appears selectively in existing theory and meta discussions without taking over the community voice.",

@@ -21,6 +21,14 @@ type PlayerIdentity = {
   avatarUrl: string | null;
 };
 
+type GreatGameChatStatus = {
+  activePlayerName: string;
+  turnNumber: number;
+  statusText: string;
+  canAct: boolean;
+  onExit: () => void;
+};
+
 const MAX_CHAT_LENGTH = 500;
 
 function QuillIcon({ size = 20 }: { size?: number }) {
@@ -114,8 +122,12 @@ function messageTime(value: string) {
 
 export default function GreatGameChat({
   match,
+  status,
+  embedded = false,
 }: {
   match: GreatGameOnlineMatchView;
+  status?: GreatGameChatStatus;
+  embedded?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -282,7 +294,7 @@ export default function GreatGameChat({
     <>
       <button
         type="button"
-        className={styles.mobileToggle}
+        className={`${styles.mobileToggle} ${embedded ? styles.mobileToggleEmbedded : ""}`}
         onClick={() => setMobileOpen((current) => !current)}
         aria-label={mobileOpen ? "Close match chat" : "Open match chat"}
         aria-expanded={mobileOpen}
@@ -293,22 +305,28 @@ export default function GreatGameChat({
       </button>
 
       <aside
-        className={`${styles.panel} ${mobileOpen ? styles.panelOpen : ""} ${desktopCollapsed ? styles.panelCollapsed : ""}`}
+        className={`${styles.panel} ${embedded ? styles.panelEmbedded : ""} ${mobileOpen ? styles.panelOpen : ""} ${desktopCollapsed ? styles.panelCollapsed : ""}`}
         aria-label="Online table chat"
         data-selection-ui="true"
       >
         <header className={styles.header}>
-          <button
-            type="button"
-            className={styles.desktopCollapse}
-            onClick={() => setDesktopCollapsed((current) => !current)}
-            aria-label={desktopCollapsed ? "Expand table chat" : "Collapse table chat"}
-            aria-expanded={!desktopCollapsed}
-          >
-            <QuillIcon size={17} />
-            <span className={styles.desktopCollapseChevron}><CollapseIcon collapsed={desktopCollapsed} /></span>
-            {unread > 0 && desktopCollapsed && <span className={styles.desktopUnread}>{unread > 9 ? "9+" : unread}</span>}
-          </button>
+          {embedded ? (
+            <span className={styles.headerIcon} aria-hidden="true">
+              <QuillIcon size={17} />
+            </span>
+          ) : (
+            <button
+              type="button"
+              className={styles.desktopCollapse}
+              onClick={() => setDesktopCollapsed((current) => !current)}
+              aria-label={desktopCollapsed ? "Expand table chat" : "Collapse table chat"}
+              aria-expanded={!desktopCollapsed}
+            >
+              <QuillIcon size={17} />
+              <span className={styles.desktopCollapseChevron}><CollapseIcon collapsed={desktopCollapsed} /></span>
+              {unread > 0 && desktopCollapsed && <span className={styles.desktopUnread}>{unread > 9 ? "9+" : unread}</span>}
+            </button>
+          )}
           <div className={styles.heading}>
             <span>Online Table</span>
             <strong>Table Whispers</strong>
@@ -323,6 +341,25 @@ export default function GreatGameChat({
             <CloseIcon />
           </button>
         </header>
+
+        {status && (
+          <div className={styles.gameMeta} aria-label="Online table status">
+            <div className={styles.gameMetaTable}>
+              <span><i aria-hidden="true" />Table {match.code}</span>
+              <small>vs. {opponent?.username ?? "Opponent"}</small>
+            </div>
+            <div className={styles.gameMetaTurn}>
+              <span>{status.activePlayerName}</span>
+              <strong>Turn {status.turnNumber}</strong>
+            </div>
+            <button type="button" className={styles.gameMetaExit} onClick={status.onExit}>
+              Exit Game
+            </button>
+            <div className={`${styles.gameMetaState} ${status.canAct ? styles.gameMetaStateActive : ""}`}>
+              {status.statusText}
+            </div>
+          </div>
+        )}
 
         <div ref={listRef} className={styles.messages} aria-live="polite">
           {loading && <p className={styles.empty}>Listening at the table…</p>}

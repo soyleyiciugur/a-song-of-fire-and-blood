@@ -5538,7 +5538,7 @@ export default function GreatGamePlayPage() {
         draggingHandInstanceId
           ? styles.draggingGame
           : ""
-      } ${onlineMatch ? styles.gameWithOnlineChat : ""}`}
+      } ${styles.boardGame} ${onlineMatch ? styles.gameWithOnlineChat : ""}`}
     >
       <div
         className={
@@ -5699,82 +5699,19 @@ export default function GreatGamePlayPage() {
           );
         })()}
 
-      <header
-        className={
-          styles.topbar
-        }
-      >
-        <div>
-          <span
-            className={
-              styles.eyebrow
-            }
-          >
-            The Realm&apos;s
-            Reckoning
-          </span>
-
-          <h1
-            className={
-              styles.title
-            }
-          >
-            The Great Game
-          </h1>
-        </div>
-
-        <div
-          className={
-            styles.turnInfo
-          }
-        >
-          <span>
-            {gamePlayerName(
-              currentGame.activePlayerId,
-              onlineMatch
-            )}
-          </span>
-
-          <strong>
-            Turn{" "}
-            {
-              activePlayer.turnsTaken
-            }
-          </strong>
-
-          <button
-            className={
-              styles.smallButton
-            }
-            onClick={() =>
-              setExitConfirm(
-                true
-              )
-            }
-          >
+      {!onlineMatch && (
+        <section className={styles.localMatchStatus} data-selection-ui="true">
+          <div>
+            <span>Local Table</span>
+            <strong>{gamePlayerName(currentGame.activePlayerId, null)}</strong>
+          </div>
+          <div>
+            <span>Turn</span>
+            <strong>{activePlayer.turnsTaken}</strong>
+          </div>
+          <button type="button" onClick={() => setExitConfirm(true)}>
             Exit Game
           </button>
-        </div>
-      </header>
-
-      {onlineMatch && (
-        <section className={styles.onlineMatchBar}>
-          <div>
-            <span className={styles.onlineStatusDot} aria-hidden />
-            <strong>Online Table {onlineMatch.code}</strong>
-            <small>vs. {onlineOpponentName(onlineMatch)}</small>
-          </div>
-          <span
-            className={`${styles.onlineTurnPill} ${
-              onlineCanAct ? styles.onlineTurnPillActive : ""
-            }`}
-          >
-            {onlineActionPending
-              ? "Sending move…"
-              : onlineCanAct
-                ? "Your turn"
-                : `${onlineOpponentName(onlineMatch)} is playing`}
-          </span>
         </section>
       )}
 
@@ -5845,6 +5782,7 @@ export default function GreatGamePlayPage() {
       )}
 
       <PlayerHeader
+        className={styles.opponentHud}
         playerId={
           viewEnemyPlayerId
         }
@@ -5962,6 +5900,7 @@ export default function GreatGamePlayPage() {
       )}
 
       <Board
+        className={styles.opponentBoardSection}
         title="Opposing Realm"
         units={
           viewEnemyPlayer.board
@@ -6011,6 +5950,7 @@ export default function GreatGamePlayPage() {
       </div>
 
       <Board
+        className={styles.playerBoardSection}
         title="Your Realm"
         units={
           viewPlayer.board
@@ -6166,6 +6106,7 @@ export default function GreatGamePlayPage() {
       />
 
       <PlayerHeader
+        className={styles.playerHud}
         playerId={
           viewPlayerId
         }
@@ -6442,7 +6383,21 @@ export default function GreatGamePlayPage() {
       )}
 
       {onlineMatch && onlineMatch.status === "active" && (
-        <GreatGameChat match={onlineMatch} />
+        <GreatGameChat
+          match={onlineMatch}
+          embedded
+          status={{
+            activePlayerName: gamePlayerName(currentGame.activePlayerId, onlineMatch),
+            turnNumber: activePlayer.turnsTaken,
+            statusText: onlineActionPending
+              ? "Sending move…"
+              : onlineCanAct
+                ? "Your turn"
+                : `${onlineOpponentName(onlineMatch)} is playing`,
+            canAct: onlineCanAct,
+            onExit: () => setExitConfirm(true),
+          }}
+        />
       )}
 
       {exitConfirm && (
@@ -7018,6 +6973,7 @@ function MulliganScreen({
 }
 
 function PlayerHeader({
+  className = "",
   playerId,
   playerLabel,
   state,
@@ -7035,6 +6991,7 @@ function PlayerHeader({
   actionPreview = null,
   attackStandingDropTarget = false,
 }: {
+  className?: string;
   playerId: PlayerId;
   playerLabel?: string;
   state: GameState;
@@ -7069,7 +7026,7 @@ function PlayerHeader({
         opponent
           ? styles.opponentPlayer
           : styles.activePlayerHeader
-      }`}
+      } ${className}`}
     >
       <button
         className={`${styles.standingBox} ${
@@ -7511,6 +7468,7 @@ function CommandMeter({
 }
 
 function Board({
+  className = "",
   title,
   units,
   state,
@@ -7536,6 +7494,7 @@ function Board({
   attackDrag,
   onUnitHover,
 }: {
+  className?: string;
   title: string;
   units: UnitState[];
   state: GameState;
@@ -7595,9 +7554,7 @@ function Board({
 
   return (
     <section
-      className={
-        styles.boardSection
-      }
+      className={`${styles.boardSection} ${className}`}
     >
       <div
         className={

@@ -6441,3 +6441,515 @@
 @media(min-width:981px) and (max-width:1240px){
   .gameWithOnlineChat .activePlayerHeader{right:calc(306px + 1rem)}
 }
+
+/* v27 — full-viewport board table. The active match is the page: no title
+   masthead, no document scroll, and every gameplay surface remains inside the
+   viewport while the hand continues to overlap the lower realm. */
+.boardGame {
+  --game-rail-width: clamp(270px, 20vw, 360px);
+  --game-chat-height: clamp(248px, 43dvh, 388px);
+  --game-location-height: 82px;
+  --game-hud-height: clamp(70px, 10.2dvh, 90px);
+
+  width: 100%;
+  max-width: none;
+  height: calc(100dvh - var(--site-nav-height, 0px));
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--game-rail-width);
+  grid-template-rows:
+    var(--game-hud-height)
+    minmax(0, 1fr)
+    32px
+    minmax(0, 1fr)
+    var(--game-hud-height);
+  gap: 0;
+  isolation: isolate;
+}
+
+.boardGame.gameWithOnlineChat {
+  max-width: none;
+  padding: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+
+.boardGame .opponentHud,
+.boardGame .playerHud {
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  z-index: 108;
+  width: auto;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 6px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: clamp(82px, 7.1vw, 108px) minmax(0, 1fr) clamp(92px, 8vw, 116px);
+  align-items: stretch;
+  gap: 5px;
+  border-color: rgba(212, 175, 55, 0.24);
+  background: rgba(9, 7, 10, 0.94);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(10px);
+}
+
+.boardGame .opponentHud {
+  grid-column: 1;
+  grid-row: 1;
+  border-color: rgba(145, 61, 61, 0.34);
+}
+
+.boardGame .playerHud {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.boardGame .playerHud.activePlayerHeader,
+.boardGame .opponentHud.opponentPlayer {
+  position: relative;
+}
+
+.boardGame .standingBox {
+  width: auto;
+  min-width: 0;
+  flex-basis: auto;
+  padding: 3px;
+}
+
+.boardGame .standingBox strong {
+  font-size: clamp(1rem, 1.6dvh, 1.35rem);
+}
+
+.boardGame .playerStats {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(44px, 0.72fr)) minmax(150px, 1.8fr);
+  gap: 5px;
+}
+
+.boardGame .hudStat {
+  min-width: 0;
+  padding: 4px 7px;
+}
+
+.boardGame .hudStat span {
+  font-size: clamp(0.42rem, 0.8dvh, 0.52rem);
+}
+
+.boardGame .hudStat strong {
+  font-size: clamp(0.72rem, 1.3dvh, 0.92rem);
+}
+
+.boardGame .commandMeterCompact {
+  width: 100%;
+  min-width: 0;
+  padding: 5px 7px;
+}
+
+.boardGame .commandMeterHeading {
+  margin-bottom: 3px;
+}
+
+.boardGame .commandPips {
+  min-height: 0;
+}
+
+.boardGame .headerEndTurnButton,
+.boardGame .headerEndTurnSpacer {
+  width: auto;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+}
+
+.boardGame .headerEndTurnButton {
+  padding: 6px 8px;
+  font-size: clamp(0.58rem, 0.9dvh, 0.72rem);
+}
+
+.boardGame .opponentBoardSection,
+.boardGame .playerBoardSection {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  overflow: visible;
+}
+
+.boardGame .opponentBoardSection {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.boardGame .playerBoardSection {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.boardGame .opponentBoardSection > .sectionHeading,
+.boardGame .playerBoardSection > .sectionHeading {
+  display: none;
+}
+
+.boardGame .board {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: clamp(5px, 0.65dvh, 9px);
+  gap: clamp(4px, 0.55vw, 10px);
+  overflow: visible;
+  align-items: start;
+  border-left-color: rgba(212, 175, 55, 0.12);
+  border-right-color: rgba(212, 175, 55, 0.12);
+}
+
+.boardGame .boardPlacementCell,
+.boardGame .unitCardWrapper {
+  min-height: 0;
+  height: auto;
+  align-self: start;
+}
+
+.boardGame .battleLine {
+  grid-column: 1;
+  grid-row: 3;
+  height: 32px;
+  min-height: 32px;
+  margin: 0;
+  padding: 0 10px;
+  gap: 0.75rem;
+  place-items: center stretch;
+  box-sizing: border-box;
+  background: rgba(7, 6, 8, 0.76);
+  border-top: 1px solid rgba(212, 175, 55, 0.08);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+}
+
+.boardGame .battleLine > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.boardGame .handSection {
+  position: absolute;
+  left: 0;
+  right: var(--game-rail-width);
+  bottom: calc(var(--game-hud-height) - 16px);
+  z-index: 118;
+  width: auto;
+  height: clamp(160px, 27dvh, 232px);
+  margin: 0;
+  transform: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.boardGame .handSection .hand {
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+}
+
+.boardGame .handSection .handFanTrack {
+  height: 100%;
+  min-height: 0;
+  padding: 0 8px;
+  align-items: flex-end;
+  overflow: visible;
+}
+
+.boardGame .handCard {
+  flex-basis: clamp(112px, 10.2vw, 172px);
+  width: clamp(112px, 10.2vw, 172px);
+}
+
+.boardGame .handFanTrack > .handCard + .handCard {
+  margin-left: clamp(-62px, -3.6vw, -42px);
+}
+
+.boardGame .fannedHand .handCard:hover:not(:disabled) {
+  transform: translateY(-14px) rotate(0deg) scale(1.035);
+}
+
+.boardGame .fannedHand .selectedHandCard {
+  transform: translateY(-16px) rotate(0deg) scale(1.035);
+}
+
+.boardGame > .error,
+.boardGame > .prompt {
+  position: absolute;
+  left: clamp(110px, 11vw, 190px);
+  right: calc(var(--game-rail-width) + 12px);
+  z-index: 156;
+  margin: 0;
+  padding: 7px 10px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(9px);
+}
+
+.boardGame > .error {
+  top: 8px;
+}
+
+.boardGame > .prompt {
+  top: 42px;
+}
+
+.boardGame .localMatchStatus {
+  position: fixed;
+  top: calc(var(--site-nav-height, 0px) + 7px);
+  right: 7px;
+  z-index: 76;
+  width: calc(var(--game-rail-width) - 14px);
+  min-height: 64px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 9px;
+  border: 1px solid rgba(146, 105, 65, 0.42);
+  background: linear-gradient(165deg, rgba(27, 18, 21, 0.97), rgba(9, 8, 10, 0.985) 72%);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.46);
+}
+
+.boardGame .localMatchStatus > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.boardGame .localMatchStatus span {
+  color: #8f785e;
+  font: 700 7px/1.1 var(--font-geist);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.boardGame .localMatchStatus strong {
+  overflow: hidden;
+  color: #e6d4b8;
+  font: 600 11px/1.15 var(--font-hotd), serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.boardGame .localMatchStatus button {
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid rgba(157, 111, 65, 0.48);
+  border-radius: 6px;
+  background: rgba(65, 37, 38, 0.55);
+  color: #d8b37c;
+  font: 700 7px/1 var(--font-geist);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.boardGame .locationBar {
+  position: fixed;
+  right: 7px;
+  z-index: 74;
+  width: calc(var(--game-rail-width) - 14px);
+  height: var(--game-location-height);
+  min-height: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px 10px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  border-color: rgba(212, 175, 55, 0.28);
+  background: rgba(17, 12, 16, 0.96);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(10px);
+}
+
+.boardGame.gameWithOnlineChat .locationBar {
+  top: calc(var(--site-nav-height, 0px) + 14px + var(--game-chat-height));
+}
+
+.boardGame:not(.gameWithOnlineChat) .locationBar {
+  top: calc(var(--site-nav-height, 0px) + 78px);
+}
+
+.boardGame .locationBar > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.boardGame .locationBar strong {
+  overflow: hidden;
+  font-size: clamp(0.72rem, 1.25dvh, 0.88rem);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.boardGame .locationBar small {
+  max-width: none;
+  overflow: hidden;
+  color: rgba(245, 230, 200, 0.48);
+  font-size: clamp(0.5rem, 0.95dvh, 0.62rem);
+  line-height: 1.3;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.boardGame .logSection {
+  position: fixed;
+  right: 7px;
+  bottom: 7px;
+  z-index: 73;
+  width: calc(var(--game-rail-width) - 14px);
+  min-height: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  margin: 0;
+  padding: 7px 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  background: rgba(8, 7, 10, 0.94);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.48);
+}
+
+.boardGame.gameWithOnlineChat .logSection {
+  top: calc(var(--site-nav-height, 0px) + 22px + var(--game-chat-height) + var(--game-location-height));
+}
+
+.boardGame:not(.gameWithOnlineChat) .logSection {
+  top: calc(var(--site-nav-height, 0px) + 167px);
+}
+
+.boardGame .logSection > .sectionTitle {
+  padding: 0 9px 6px;
+}
+
+.boardGame .log {
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.boardGame .logEntry {
+  gap: 6px;
+  padding: 6px 8px;
+  font-size: clamp(0.48rem, 0.9dvh, 0.6rem);
+}
+
+.boardGame .logEntry > span {
+  flex-basis: 1.45rem;
+}
+
+.boardGame .selectedCardPreview,
+.boardGame .unitDetailOverlay {
+  top: 50%;
+  max-height: calc(100dvh - var(--site-nav-height, 0px) - 24px);
+}
+
+@media (max-width: 1100px) {
+  .boardGame {
+    --game-rail-width: clamp(220px, 25vw, 285px);
+    --game-hud-height: clamp(62px, 9.5dvh, 80px);
+    --game-chat-height: clamp(220px, 41dvh, 330px);
+    --game-location-height: 74px;
+    grid-template-rows: var(--game-hud-height) minmax(0, 1fr) 28px minmax(0, 1fr) var(--game-hud-height);
+  }
+
+  .boardGame .opponentHud,
+  .boardGame .playerHud {
+    grid-template-columns: clamp(66px, 7vw, 82px) minmax(0, 1fr) clamp(72px, 8vw, 92px);
+    gap: 3px;
+    padding: 4px;
+  }
+
+  .boardGame .playerStats {
+    grid-template-columns: repeat(4, minmax(34px, 1fr)) minmax(112px, 1.6fr);
+    gap: 3px;
+  }
+
+  .boardGame .hudStat { padding: 3px 4px; }
+  .boardGame .commandMeterCompact { padding: 4px; }
+  .boardGame .handSection { height: clamp(138px, 24dvh, 196px); }
+  .boardGame .handCard { flex-basis: clamp(88px, 10vw, 132px); width: clamp(88px, 10vw, 132px); }
+  .boardGame .handFanTrack > .handCard + .handCard { margin-left: clamp(-48px, -4vw, -30px); }
+}
+
+@media (max-width: 760px) {
+  .boardGame {
+    --game-rail-width: clamp(156px, 39vw, 214px);
+    --game-hud-height: clamp(56px, 9dvh, 70px);
+    --game-chat-height: clamp(196px, 39dvh, 286px);
+    --game-location-height: 68px;
+    grid-template-rows: var(--game-hud-height) minmax(0, 1fr) 24px minmax(0, 1fr) var(--game-hud-height);
+  }
+
+  .boardGame .opponentHud,
+  .boardGame .playerHud {
+    grid-template-columns: clamp(48px, 12vw, 64px) minmax(0, 1fr) clamp(54px, 13vw, 68px);
+    padding: 3px;
+  }
+
+  .boardGame .playerStats {
+    grid-template-columns: repeat(4, minmax(24px, 1fr)) minmax(72px, 1.4fr);
+    gap: 2px;
+  }
+
+  .boardGame .hudStat { padding: 2px 3px; }
+  .boardGame .hudStat span { font-size: 0.36rem; }
+  .boardGame .hudStat strong { font-size: 0.58rem; }
+  .boardGame .commandMeterHeading span { font-size: 0.38rem; }
+  .boardGame .commandMeterHeading strong { font-size: 0.58rem; }
+  .boardGame .commandPip { max-width: 16px; }
+  .boardGame .standingBox span,
+  .boardGame .standingBox small { font-size: 0.36rem; }
+  .boardGame .standingBox strong { font-size: 0.78rem; }
+  .boardGame .headerEndTurnButton { padding: 3px; font-size: 0.46rem; }
+  .boardGame .battleLine { height: 24px; min-height: 24px; padding-inline: 4px; font-size: 0.42rem; }
+  .boardGame .handSection { bottom: calc(var(--game-hud-height) - 10px); height: clamp(112px, 21dvh, 158px); }
+  .boardGame .handCard { flex-basis: clamp(62px, 11vw, 92px); width: clamp(62px, 11vw, 92px); }
+  .boardGame .handFanTrack > .handCard + .handCard { margin-left: clamp(-36px, -5vw, -20px); }
+  .boardGame > .error,
+  .boardGame > .prompt { left: 5px; right: calc(var(--game-rail-width) + 5px); padding: 5px 7px; font-size: 0.62rem; }
+  .boardGame > .prompt { top: 34px; }
+  .boardGame .localMatchStatus { right: 5px; top: calc(var(--site-nav-height, 0px) + 5px); width: calc(var(--game-rail-width) - 10px); min-height: 54px; padding: 6px; grid-template-columns: minmax(0,1fr) auto; }
+  .boardGame .localMatchStatus > div:nth-child(2) { display: none; }
+  .boardGame .localMatchStatus button { min-height: 26px; padding-inline: 6px; }
+  .boardGame .locationBar,
+  .boardGame .logSection { right: 5px; width: calc(var(--game-rail-width) - 10px); }
+  .boardGame:not(.gameWithOnlineChat) .locationBar { top: calc(var(--site-nav-height,0px) + 64px); }
+  .boardGame:not(.gameWithOnlineChat) .logSection { top: calc(var(--site-nav-height,0px) + 139px); }
+  .boardGame.gameWithOnlineChat .locationBar { top: calc(var(--site-nav-height,0px) + 10px + var(--game-chat-height)); }
+  .boardGame.gameWithOnlineChat .logSection { top: calc(var(--site-nav-height,0px) + 16px + var(--game-chat-height) + var(--game-location-height)); }
+  .boardGame .locationBar { padding: 6px; }
+  .boardGame .locationLabel { font-size: 0.46rem; }
+  .boardGame .locationBar strong { font-size: 0.62rem; }
+  .boardGame .locationBar small { font-size: 0.44rem; }
+  .boardGame .logSection > .sectionTitle { padding: 0 6px 4px; font-size: 0.52rem; }
+  .boardGame .logEntry { gap: 3px; padding: 4px 5px; font-size: 0.44rem; }
+}

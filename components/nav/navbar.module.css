@@ -1008,3 +1008,70 @@
 /* Keep the Direct Raven utility width stable while auth restores on refresh. */
 .directRavenAuthPlaceholder { pointer-events: none; user-select: none; }
 .directRavenSignedOutPlaceholder { visibility: hidden; }
+
+/* The Great Game board owns the viewport. When its navigation is collapsed,
+   only a half-visible control remains at the very top edge. */
+.playBoardBanner.playBannerCollapsed {
+  height: 0 !important;
+  min-height: 0 !important;
+  border-bottom-color: transparent !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  overflow: visible !important;
+}
+
+.playBoardBanner.playBannerCollapsed .inner {
+  position: absolute !important;
+  inset: 0 0 auto !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+.playBoardBanner.playBannerCollapsed .inner > *:not(.playNavToggle) {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.playBoardBanner.playBannerCollapsed .playNavToggle {
+  position: fixed !important;
+  left: 50% !important;
+  top: -17px !important;
+  bottom: auto !important;
+  z-index: 420 !important;
+  display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  border-radius: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+.playBoardBanner.playBannerCollapsed .playNavToggle:hover,
+.playBoardBanner.playBannerCollapsed .playNavToggle:focus-visible {
+  transform: translateX(-50%) translateY(1px) !important;
+}
+
+.playBoardBanner.playBannerCollapsed .playNavToggleIcon {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1150px) {
+  .playBoardBanner.playBannerCollapsed .menuButton,
+  .playBoardBanner.playBannerCollapsed .houseMark,
+  .playBoardBanner.playBannerCollapsed .accountMenu,
+  .playBoardBanner.playBannerCollapsed .mobileNav,
+  .playBoardBanner.playBannerCollapsed .menuBackdrop {
+    display: none !important;
+  }
+}
