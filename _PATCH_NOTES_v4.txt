@@ -1,0 +1,14 @@
+ASOFAB cumulative social / Rookery / Great Game v4
+Date: 2026-09-16
+
+This patch includes the previous v3 Direct Raven / Personal Ravens / Great Game work plus the latest fixes:
+- Direct Raven quoted-user labels, smooth locked swipe-to-reply, tappable Replying-to context, GIF quote alignment, and 7px tighter keyboard-open bottom spacing.
+- Personal Ravens: inline reply context without duplicate headings, no inherited underlines, portrait-only lightbox opening, direct card destinations, and notification-to-Raven's-Eye return routing.
+- Push notifications keep their copy but now open their semantic destination rather than the notification lightbox.
+- Gutter Reels: far-right desktop controls/meta, tighter comment count spacing, and stale notification reel/returnTo cleanup.
+- Guild Parley info keeps the navbar stationary during mobile overscroll/pull-to-refresh.
+- Page sharing uses consistent typography, carries page-specific title/description previews, cleaner inbox summaries, and hides during an active Great Game table.
+- The Great Game populated board collapses to played-card height and action cards keep Military/Political controls inside the card frame.
+- data/update-notes.json updated for 2026-09-16.
+
+Validation: npx tsc --noEmit passed.

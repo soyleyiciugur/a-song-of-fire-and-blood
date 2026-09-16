@@ -8,6 +8,7 @@ const BLOCKED_PREFIXES = ["/messages", "/settings", "/admin", "/notifications", 
 const shareSchema = z.object({
   pageHref: z.string().min(1).max(1200),
   pageTitle: z.string().trim().min(1).max(180),
+  pageDescription: z.string().trim().max(280).optional().default(""),
   conversationIds: z.array(z.string().uuid()).min(1).max(12),
   message: z.string().max(1200).optional().default(""),
 });
@@ -19,8 +20,8 @@ function safeHref(value: string) {
   return value;
 }
 
-function pageToken(title: string, href: string) {
-  const encoded = Buffer.from(JSON.stringify({ title, href }), "utf8").toString("base64url");
+function pageToken(title: string, href: string, description: string) {
+  const encoded = Buffer.from(JSON.stringify({ title, href, description: description.slice(0, 280) }), "utf8").toString("base64url");
   return `[[page:${encoded}]]`;
 }
 
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
   const { data: memberships, error: membershipError } = await supabase.from("direct_raven_members").select("conversation_id").eq("user_id", user.id).in("conversation_id", ids);
   if (membershipError) return NextResponse.json({ error: "Raven paths could not be checked." }, { status: 500 });
   const allowed = new Set((memberships ?? []).map((row) => row.conversation_id));
-  const body = [parsed.data.message.trim(), pageToken(parsed.data.pageTitle, href)].filter(Boolean).join("\n");
+  const body = [parsed.data.message.trim(), pageToken(parsed.data.pageTitle, href, parsed.data.pageDescription)].filter(Boolean).join("\n");
   const messages: { id: string; conversationId: string }[] = [];
 
   for (const conversationId of ids) {

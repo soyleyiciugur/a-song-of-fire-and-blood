@@ -1,5 +1,6 @@
 import "server-only";
 import { chooseMascot } from "./rotation";
+import { notificationTargetHref } from "./target";
 
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendWebPush } from "@/lib/webPush";
@@ -177,17 +178,17 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
         admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null).neq("source", "direct-raven").neq("source", "guild-parley"),
       ]);
       const badgeCount = unreadResult.count ?? undefined;
-      const notificationUrl = `/notifications?open=${encodeURIComponent(recent.id)}`;
+      const pushTargetHref = notificationTargetHref((updated ?? { ...recent, href: input.href || recent.href, context }) as SiteNotification);
       await Promise.all((subscriptions ?? []).map(async (subscription) => {
         try {
           const pushCopy = pushCopyFor(input, mascot, recent.title, groupedBody, count);
           const response = await sendWebPush(subscription, {
             title: pushCopy.title, body: pushCopy.body, icon: pushIconFor(input, mascot), badge: "/notification-badge.png",
-            url: input.href || notificationUrl, tag: `asofab-group-${input.groupKey}`, renotify: true, badgeCount,
+            url: pushTargetHref, tag: `asofab-group-${input.groupKey}`, renotify: true, badgeCount,
             data: {
               notificationId: recent.id, source: meta.source, mascot,
               conversationId: typeof context.conversationId === "string" ? context.conversationId : undefined,
-              targetHref: input.href || recent.href,
+              targetHref: pushTargetHref,
               actorUsername: typeof context.actorUsername === "string" ? context.actorUsername : undefined,
               actorAvatarUrl: typeof context.actorAvatarUrl === "string" ? context.actorAvatarUrl : undefined,
               conversationTitle: typeof context.conversationTitle === "string" ? context.conversationTitle : undefined,
@@ -252,7 +253,7 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
   ]);
   const badgeCount = unreadResult.count ?? undefined;
   const mascotMeta = MASCOT_META[mascot];
-  const notificationUrl = `/notifications?open=${encodeURIComponent(data.id)}`;
+  const pushTargetHref = notificationTargetHref(data as unknown as SiteNotification);
 
   await Promise.all((subscriptions ?? []).map(async (subscription) => {
     try {
@@ -262,13 +263,13 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
         body: pushCopy.body,
         icon: pushIconFor(input, mascot),
         badge: "/notification-badge.png",
-        url: input.href || notificationUrl,
+        url: pushTargetHref,
         tag: input.groupKey ? `asofab-group-${input.groupKey}` : `asofab-${data.id}`,
         badgeCount,
         data: {
           notificationId: data.id, source: meta.source, mascot,
           conversationId: typeof context.conversationId === "string" ? context.conversationId : undefined,
-          targetHref: input.href || data.href,
+          targetHref: pushTargetHref,
           actorUsername: typeof context.actorUsername === "string" ? context.actorUsername : undefined,
           actorAvatarUrl: typeof context.actorAvatarUrl === "string" ? context.actorAvatarUrl : undefined,
           conversationTitle: typeof context.conversationTitle === "string" ? context.conversationTitle : undefined,

@@ -6252,3 +6252,19 @@
   .opponentSpellCard{width:132px}
   .opponentSpellEyebrow{font-size:7px}
 }
+
+/* v23: populated boards hug their cards instead of reserving an empty fixed-height lane. */
+.populatedBoard{min-height:0}
+.boardPlacementCell,.unitCardWrapper{height:auto;align-self:start}
+/* Action cards have one extra row. Keep it inside the 5:7 frame rather than clipping the controls. */
+.unitCard .cardInfoPanelWithActions{
+  height:62%;
+  grid-template-rows:2.18rem .92rem .92rem minmax(2.65rem,1fr) .72rem 1.48rem;
+  padding:.46rem .52rem .42rem;
+}
+.unitCard .unitActions{gap:.16rem;min-height:0}
+.unitCard .unitActions button{min-height:1.42rem;padding:.24rem .12rem;font-size:.47rem;line-height:1.05}
+@media(max-width:760px){
+  .unitCard .cardInfoPanelWithActions{height:63%;grid-template-rows:2rem .84rem .84rem minmax(2.15rem,1fr) .65rem 1.36rem;padding:.4rem .45rem .36rem}
+  .unitCard .unitActions button{min-height:1.3rem;font-size:.43rem;padding:.2rem .08rem}
+}

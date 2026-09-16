@@ -1638,6 +1638,7 @@ function RavensEyePageInner({
   const tab: RavensEyeTab = forcedTab ?? "raven";
   const characterFilter = searchParams.get("character") ?? "";
   const returnTo = searchParams.get("returnTo") ?? "";
+  const liveReturnTo = () => typeof window === "undefined" ? returnTo : (new URLSearchParams(window.location.search).get("returnTo") ?? "");
 
   const [lightboxList, setLightboxList] = useState<GalleryEntry[] | null>(null);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -1772,17 +1773,25 @@ function RavensEyePageInner({
     (list: GalleryEntry[], idx: number) => {
       setReelsList(list);
       setReelsStartIdx(idx);
+      const currentReturnTo = liveReturnTo();
       setBrowserUrl(
-        mediaUrl("reels", list[idx].id, characterFilter || undefined, returnTo || undefined)
+        mediaUrl("reels", list[idx].id, characterFilter || undefined, currentReturnTo || undefined)
       );
     },
     [characterFilter, returnTo]
   );
 
   const closeReels = useCallback(() => {
-    // Same no-flash behavior as the image lightbox: do not reveal the Raven's
-    // Eye route underneath while returning to the originating page.
-    if (returnTo) { router.replace(returnTo); return; }
+    // Read returnTo from the live URL rather than a possibly stale
+    // useSearchParams render. This prevents a notification-opened reel from
+    // contaminating later hub clicks with the old item/return target.
+    const currentReturnTo = liveReturnTo();
+    if (currentReturnTo) {
+      setReelsList(null);
+      setReelsStartIdx(null);
+      router.replace(currentReturnTo);
+      return;
+    }
     setReelsList(null);
     setReelsStartIdx(null);
     setBrowserUrl(
@@ -1794,8 +1803,9 @@ function RavensEyePageInner({
     (entry: GalleryEntry) => {
       const current = new URLSearchParams(window.location.search);
       if (current.get("item") === entry.id && current.has("comment")) return;
+      const currentReturnTo = current.get("returnTo") ?? "";
       setBrowserUrl(
-        mediaUrl("reels", entry.id, characterFilter || undefined, returnTo || undefined),
+        mediaUrl("reels", entry.id, characterFilter || undefined, currentReturnTo || undefined),
         "replace"
       );
     },

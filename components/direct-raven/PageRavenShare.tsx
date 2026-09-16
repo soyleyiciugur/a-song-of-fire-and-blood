@@ -27,7 +27,21 @@ function SearchGlyph() {
 
 function pageTitle() {
   if (typeof document === "undefined") return "A Song of Fire and Blood";
+  const heading = document.querySelector<HTMLElement>("main h1")?.textContent?.replace(/\s+/g, " ").trim();
+  if (heading) return heading;
   return document.title.replace(/\s*\|\s*A Song of Fire and Blood\s*$/i, "").trim() || "A Song of Fire and Blood";
+}
+
+function pageDescription() {
+  if (typeof document === "undefined") return "";
+  const main = document.querySelector("main");
+  const heading = main?.querySelector("h1");
+  const candidates = [
+    heading?.parentElement?.querySelector("p")?.textContent,
+    main?.querySelector("p")?.textContent,
+    document.querySelector<HTMLMetaElement>('meta[name="description"]')?.content,
+  ];
+  return candidates.find((value) => value?.trim())?.replace(/\s+/g, " ").trim().slice(0, 260) ?? "";
 }
 
 export default function PageRavenShare() {
@@ -41,8 +55,16 @@ export default function PageRavenShare() {
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState("");
+  const [greatGameActive, setGreatGameActive] = useState(false);
 
-  const hidden = HIDDEN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || pathname === "/ravens-eye/reels";
+  useEffect(() => {
+    const sync = () => setGreatGameActive(document.documentElement.dataset.greatGameSessionActive === "1");
+    sync();
+    window.addEventListener("great-game-session-change", sync);
+    return () => window.removeEventListener("great-game-session-change", sync);
+  }, []);
+
+  const hidden = HIDDEN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || pathname === "/ravens-eye/reels" || (pathname === "/cards/play" && greatGameActive);
 
   useEffect(() => {
     if (!open) return;
@@ -99,7 +121,7 @@ export default function PageRavenShare() {
       const response = await fetch("/api/direct-raven/share-page", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pageHref: href, pageTitle: pageTitle(), conversationIds: selected, message }),
+        body: JSON.stringify({ pageHref: href, pageTitle: pageTitle(), pageDescription: pageDescription(), conversationIds: selected, message }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || "The page could not be sent.");

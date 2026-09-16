@@ -1462,3 +1462,15 @@
 /* Reel icon optical centering. */
 .reelActionIcon > svg{margin:auto}
 .reelPlayGlyph{transform:translateX(2px)}
+
+/* v14: keep desktop reel controls/meta anchored to the viewport's far right. */
+.reelActionButton{gap:1px}
+.reelActionButton small{margin-top:-1px}
+@media(min-width:721px){
+  .reelDesktopCluster{
+    right:18px;
+    width:min(380px,calc(100vw - 36px));
+    max-width:min(420px,calc(100vw - 36px));
+  }
+  .reelDesktopCluster .reelActionRail{margin-right:2px}
+}

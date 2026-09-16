@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-09-16",
+    "items": [
+      "Added compact page sharing through Direct Raven with page-specific titles and previews, while hiding the share control during active Great Game tables.",
+      "Refined Direct Raven replies on mobile with smoother swipe gestures, quoted usernames, tappable reply context, aligned media labels and tighter keyboard safe-area behavior.",
+      "Made Personal Ravens show useful reply context inline, route notification cards directly to their destinations, reserve lightbox previews for portrait taps, and send new push taps straight to the related page.",
+      "Fixed notification-opened Raven's Eye media returning to the Rookery without leaving stale reel state, and tightened Gutter Reel action placement and comment-count spacing.",
+      "Kept the mobile Guild Parley info navbar fixed during overscroll and pull-to-refresh gestures.",
+      "Refined The Great Game online board presentation so populated boards hug played cards and Military or Political controls remain fully visible inside the card frame."
+    ],
+    "features": [],
+    "links": {}
+  },
+  {
     "date": "2026-09-15",
     "items": [
       "Simplified Direct Raven attachments to Photo Library on desktop and the native picker on mobile, added mobile composer bottom spacing, and kept emoji category panels at a consistent height.",
@@ -171,14 +184,14 @@
       "Addressed a new live member reply in the Gaelor Supervillain reel conversation.",
       "Extended the dragon discussion and snack thread with selective live-member replies.",
       "Extended two live Taverns conversations with context-aware replies from established community and character accounts.",
-      "Added profile guestbooks, mutual friends and linked The Rookery 🐦‍⬛ favorites.",
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites.",
       "Added separate HasoCash wallets and secure member-to-member grants.",
       "Added GIPHY search and inline mini portraits to Direct Raven.",
       "Separated Update Notes into Features and Fixes, accessible through Latest Updates.",
       "Distinguished forum Favor from comment Likes and added reaction lists and profile activity.",
       "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.",
       "Matched homepage card spacing and heading accents, and refined the mobile chat composer.",
-      "Moved The Rookery 🐦‍⬛ favorites and profile themes into Profile Settings with persistent public-profile presentation.",
+      "Moved ASOFAB favorites and profile themes into Profile Settings with persistent public-profile presentation.",
       "Moved GIPHY search behind a server-side API route so the API key is no longer exposed to the browser.",
       "Removed Latest Updates from site navigation and restored the linked homepage section heading.",
       "Expanded the Gaelor Supervillain reel conversation with more community and character reactions.",
@@ -193,7 +206,7 @@
       "Replaced Raven sound labels with speaker icons and contained the Taverns banner hover image beneath its overlay."
     ],
     "features": [
-      "Added profile guestbooks, mutual friends and linked The Rookery 🐦‍⬛ favorites."
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites."
     ],
     "links": {
       "Added the Gaelor Supervillain edit to the Raven's Eye reels.": "/ravens-eye/reels",
@@ -202,7 +215,7 @@
       "Separated Update Notes into Features and Fixes, accessible through Latest Updates.": "/update-notes",
       "Distinguished forum Favor from comment Likes and added reaction lists and profile activity.": "/forum",
       "Fixed post-login messaging access, account-menu dismissal and outdated Raven's Eye comment prompts.": "/ravens-eye",
-      "Added profile guestbooks, mutual friends and linked The Rookery 🐦‍⬛ favorites.": "/settings"
+      "Added profile guestbooks, mutual friends and linked ASOFAB favorites.": "/settings"
     }
   },
   {

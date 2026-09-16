@@ -1008,6 +1008,17 @@ export default function GreatGamePlayPage() {
     gameRef.current = game;
   }, [game]);
 
+  useEffect(() => {
+    const active = mode !== "menu";
+    if (active) document.documentElement.dataset.greatGameSessionActive = "1";
+    else delete document.documentElement.dataset.greatGameSessionActive;
+    window.dispatchEvent(new CustomEvent("great-game-session-change", { detail: { active } }));
+    return () => {
+      delete document.documentElement.dataset.greatGameSessionActive;
+      window.dispatchEvent(new CustomEvent("great-game-session-change", { detail: { active: false } }));
+    };
+  }, [mode]);
+
   const supabase = useMemo(
     () => createSupabaseClient(),
     []
@@ -7607,6 +7618,8 @@ function Board({
       <div
         ref={boardRef}
         className={`${styles.board} ${
+          units.length ? styles.populatedBoard : ""
+        } ${
           canReceivePlay
             ? styles.playableBoard
             : ""

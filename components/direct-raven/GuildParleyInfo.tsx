@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { DirectRavenConversation, DirectRavenMember, Profile } from "@/lib/supabase/database.types";
@@ -28,6 +28,12 @@ export default function GuildParleyInfo({ open, onClose, conversation, members, 
   const [error, setError] = useState("");
   const [confirmLeave, setConfirmLeave] = useState(false);
   const isGuildmaster = conversation.owner_id === userId;
+
+  useEffect(() => {
+    if (!open) return;
+    document.documentElement.dataset.guildInfoOpen = "1";
+    return () => { delete document.documentElement.dataset.guildInfoOpen; };
+  }, [open]);
 
   if (!open) return null;
 

@@ -647,3 +647,25 @@
   .ravenImageLightboxInner{height:92dvh}
   .ravenImageLightboxClose{top:4px;right:4px}
 }
+
+/* v14: reply gesture/quote polish. */
+.messageRow{overscroll-behavior-x:none;touch-action:pan-y pinch-zoom}
+.messageRow[data-raven-swiping="true"]{transition:none!important;will-change:transform}
+.thread{overscroll-behavior-x:none}
+.replyQuote{max-height:76px}
+.replyQuoteStack{display:grid;min-width:0;gap:3px}
+.replyQuoteAuthor{overflow:hidden;color:#c7a36f;font:700 9px/1.15 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}
+.replyQuoteCopy,.draftQuoteSummary{line-height:16px}
+.replyQuoteIcon{align-self:center;line-height:1;vertical-align:middle}
+.replyQuoteIcon svg{display:block;margin:auto}
+.draftContextJump{display:block!important;min-width:0!important;flex:1!important;min-height:0!important;padding:0!important;border:0!important;background:transparent!important;color:inherit!important;text-align:left!important;cursor:pointer!important}
+.draftContextJump:disabled{cursor:default!important}
+.draftContextJump:focus-visible{outline:1px solid #8d6a43!important;outline-offset:3px}
+@media(max-width:760px){
+  .composerArea{transform:translateY(var(--raven-composer-keyboard-shift,0px));transition:transform .12s ease-out}
+}
+.previewPageName{color:#c9aa76;font-weight:650}
+.sharedPageDescription{display:-webkit-box;overflow:hidden;color:#8f8275;font:9.5px/1.35 var(--font-geist);-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.sharedPageCard{grid-template-columns:48px minmax(0,1fr);padding:8px}.sharedPageIcon{width:46px;height:46px}
+.guildInfoBackdrop,.guildInfoPanel{overscroll-behavior-y:contain}
+.guildInfoPanel{-webkit-overflow-scrolling:touch}

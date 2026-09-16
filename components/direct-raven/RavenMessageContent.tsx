@@ -36,14 +36,14 @@ const mascotFallback: Record<string, string> = {
 };
 
 
-function decodePageToken(payload: string): { title: string; href: string } | null {
+function decodePageToken(payload: string): { title: string; href: string; description: string } | null {
   try {
     const normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
     const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
     const bytes = Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
-    const parsed = JSON.parse(new TextDecoder().decode(bytes)) as { title?: unknown; href?: unknown };
+    const parsed = JSON.parse(new TextDecoder().decode(bytes)) as { title?: unknown; href?: unknown; description?: unknown };
     if (typeof parsed.title !== "string" || typeof parsed.href !== "string" || !parsed.href.startsWith("/")) return null;
-    return { title: parsed.title.slice(0, 180), href: parsed.href.slice(0, 1200) };
+    return { title: parsed.title.slice(0, 180), href: parsed.href.slice(0, 1200), description: typeof parsed.description === "string" ? parsed.description.slice(0, 280) : "" };
   } catch {
     return null;
   }
@@ -110,18 +110,18 @@ export function ravenBodySummary(value: string) {
 }
 
 export function RavenMessagePreview({ body }: { body: string }) {
+  const sharedPageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(body);
+  if (sharedPageMatch) {
+    const page = decodePageToken(sharedPageMatch[1]);
+    const message = body.replace(sharedPageMatch[0], " ").replace(/\s+/g, " ").trim();
+    return <>{message ? <>{message} · </> : null}<span className={styles.previewPageName}>{page?.title || "Shared page"}</span></>;
+  }
+
   return <>{body.split(CONTENT_TOKEN).map((part, index) => {
     const portraitMatch = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
     if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
       const id = portraitMatch[1].toLowerCase();
       return <span key={index} className={styles.previewPortrait} title={characterNames.get(id)}><MiniPortrait id={id} alt="" size={18} fallbackSrc={mascotFallback[id]} /></span>;
-    }
-
-
-    const pageMatch = /^\[\[page:([A-Za-z0-9_-]+)\]\]$/i.exec(part);
-    if (pageMatch) {
-      const page = decodePageToken(pageMatch[1]);
-      return <span key={index}><span className={styles.previewReel}>Page</span>{page ? ` ${page.title}` : " Shared page"}</span>;
     }
 
     const reelMatch = /^\[\[reel:([a-z0-9-]+)\]\]$/i.exec(part);
@@ -152,6 +152,7 @@ export default function RavenMessageContent({ body, returnTo }: { body: string; 
           <span className={styles.sharedReelCopy}>
             <small>Shared page</small>
             <strong>{page.title}</strong>
+            {page.description && <span className={styles.sharedPageDescription}>{page.description}</span>}
             <em>Open page</em>
           </span>
         </Link>

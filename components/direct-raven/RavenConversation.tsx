@@ -302,6 +302,7 @@ export default function RavenConversation({
         root.style.setProperty("--direct-raven-viewport-height", `${height}px`);
         const keyboardOpen = height < window.innerHeight - 100;
         root.style.setProperty("--raven-composer-bottom-pad", keyboardOpen ? "0px" : "max(6px, env(safe-area-inset-bottom))");
+        root.style.setProperty("--raven-composer-keyboard-shift", keyboardOpen ? "7px" : "0px");
 
         if (keyboardOpen && !keyboardWasOpenRef.current) {
           restoreBottomAfterKeyboardRef.current = nearBottom.current || document.activeElement === inputRef.current;
@@ -338,6 +339,7 @@ export default function RavenConversation({
       document.documentElement.style.removeProperty("--raven-mobile-top");
       document.documentElement.style.removeProperty("--raven-mobile-height");
       document.documentElement.style.removeProperty("--raven-composer-bottom-pad");
+      document.documentElement.style.removeProperty("--raven-composer-keyboard-shift");
     };
   }, []);
 
@@ -620,6 +622,7 @@ export default function RavenConversation({
 
     if (event.pointerType !== "touch" || closed) return;
     swipeRef.current = { id: message.id, startX: event.clientX, startY: event.clientY, lastX: event.clientX, row: event.currentTarget, horizontal: false };
+    event.currentTarget.dataset.ravenSwiping = "true";
     event.currentTarget.setPointerCapture?.(event.pointerId);
   }
 
@@ -632,10 +635,14 @@ export default function RavenConversation({
     const dx = event.clientX - swipe.startX;
     const dy = event.clientY - swipe.startY;
     swipe.lastX = event.clientX;
-    if (!swipe.horizontal && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.25) swipe.horizontal = true;
+    if (!swipe.horizontal && dx > 7 && Math.abs(dx) > Math.abs(dy) * 1.18) swipe.horizontal = true;
     if (!swipe.horizontal) return;
+    event.preventDefault();
     cancelMessageHold();
-    const offset = Math.max(0, Math.min(62, dx * .72));
+    const positive = Math.max(0, dx);
+    // A little resistance at the end keeps fast flicks from snapping the row
+    // across the screen while still making the reply threshold feel immediate.
+    const offset = Math.min(64, positive <= 46 ? positive * .86 : 39.5 + (positive - 46) * .22);
     swipe.row.style.setProperty("--raven-swipe-x", `${offset}px`);
   }
 
@@ -668,8 +675,9 @@ export default function RavenConversation({
     const swipe = swipeRef.current;
     if (!swipe || swipe.id !== message.id) return;
     const dx = swipe.lastX - swipe.startX;
+    delete swipe.row.dataset.ravenSwiping;
     swipe.row.style.setProperty("--raven-swipe-x", "0px");
-    if (swipe.horizontal && dx > 52) {
+    if (swipe.horizontal && dx > 48) {
       beginReply(message);
     }
     swipeRef.current = null;
@@ -1075,7 +1083,9 @@ export default function RavenConversation({
                           ? <span className={styles.replyQuoteCopy}>Withdrawn raven</span>
                           : (() => {
                               const descriptor = quoteDescriptor(parent);
-                              return <span className={styles.replyQuoteCopy}>{descriptor.kind && <span className={styles.replyQuoteIcon}><QuoteGlyph kind={descriptor.kind} /></span>}<span>{descriptor.label}</span></span>;
+                              const quotedProfile = memberMap.get(parent.sender_id);
+                              const quotedUsername = quotedProfile?.username ? `@${quotedProfile.username}` : (parent.sender_id === userId ? "You" : "Guild member");
+                              return <span className={styles.replyQuoteStack}><b className={styles.replyQuoteAuthor}>{quotedUsername}</b><span className={styles.replyQuoteCopy}>{descriptor.kind && <span className={styles.replyQuoteIcon}><QuoteGlyph kind={descriptor.kind} /></span>}<span>{descriptor.label}</span></span></span>;
                             })()
                         : <span className={styles.replyQuoteCopy}>Reply to an earlier raven</span>}
                     </button>
@@ -1180,10 +1190,18 @@ export default function RavenConversation({
           <>
             {(reply || editing) && (
               <div className={`${styles.draftContext} ${reply ? styles.replyDraftContext : ""}`}>
-                <span className={styles.draftContextCopy}>
-                  <small>{editing ? "Editing raven" : "Replying to"}</small>
-                  <b>{editing ? "Your message" : (reply ? (() => { const descriptor = quoteDescriptor(reply); return <span className={styles.draftQuoteSummary}>{descriptor.kind && <span className={styles.replyQuoteIcon}><QuoteGlyph kind={descriptor.kind} /></span>}<span>{descriptor.label}</span></span>; })() : "Raven")}</b>
-                </span>
+                <button
+                  type="button"
+                  className={styles.draftContextJump}
+                  disabled={!reply}
+                  onClick={() => { if (reply) void jumpToMessage(reply.id); }}
+                  aria-label={reply ? "Go to replied raven" : undefined}
+                >
+                  <span className={styles.draftContextCopy}>
+                    <small>{editing ? "Editing raven" : reply ? (() => { const profile = memberMap.get(reply.sender_id); return `Replying to ${profile?.username ? `@${profile.username}` : (reply.sender_id === userId ? "you" : "member")}`; })() : "Replying to"}</small>
+                    <b>{editing ? "Your message" : (reply ? (() => { const descriptor = quoteDescriptor(reply); return <span className={styles.draftQuoteSummary}>{descriptor.kind && <span className={styles.replyQuoteIcon}><QuoteGlyph kind={descriptor.kind} /></span>}<span>{descriptor.label}</span></span>; })() : "Raven")}</b>
+                  </span>
+                </button>
                 <button
                   type="button"
                   className={styles.draftContextClose}

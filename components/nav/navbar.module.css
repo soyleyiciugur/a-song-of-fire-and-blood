@@ -993,3 +993,14 @@
   }
   .playBanner .searchWrap:focus-within .searchIcon{left:11px!important;right:auto!important;top:10px!important}
 }
+
+/* Keep the site chrome stationary while the mobile Guild Info sheet consumes overscroll. */
+:global(html[data-guild-info-open="1"]) .banner{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  z-index:250;
+  transform:translateZ(0);
+}
