@@ -58,6 +58,10 @@ function ReplyIndicator() {
   return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.25 8.25 5.5 12l3.75 3.75M6 12h6.25c3.45 0 5.75 1.8 6.25 5" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
+function visualNotificationSource(source: NotificationSource): NotificationSource {
+  return source === "guild-parley" ? "direct-raven" : source;
+}
+
 function notificationTidingsCount(item: SiteNotification) {
   const value = Number(item.context?.groupCount ?? 1);
   return Number.isFinite(value) && value > 1 ? Math.floor(value) : 1;
@@ -452,7 +456,7 @@ function Notifications() {
           aria-label={`${item.title}. ${item.body}`}
           onClick={() => { if (!item.read_at) void markRead(item.id); }}
         />}
-        <span className={styles.cardSourceRail} aria-hidden="true"><NotificationSourceIcon source={item.source} size={13} /></span>
+        <span className={styles.cardSourceRail} aria-hidden="true"><NotificationSourceIcon source={visualNotificationSource(item.source)} size={13} /></span>
         {!simplifiedNested && <button
           type="button"
           className={styles.cardPortraitButton}
@@ -476,14 +480,47 @@ function Notifications() {
 
   const renderActivityCard = (comment: (typeof community.comments)[number], nested = false) => {
     const user = users.get(comment.authorId);
+    const parentComment = comment.parentId ? commentsById.get(comment.parentId) ?? null : null;
+    const parentUser = parentComment ? users.get(parentComment.authorId) ?? null : null;
     const source: NotificationSource = comment.surface === "forum" ? "tavern" : "ravens-eye";
     const username = user?.username ?? "unknown-patron";
-    const displayName = user?.displayName ?? user?.username ?? "Unknown patron";
-    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}><Link href={getCommentLink(comment)} className={`${styles.legacyCard} ${comment.parentId ? styles.legacyReplyCard : ""}`} onClick={() => { const current = new URL(window.location.href); current.searchParams.set("view", activityFilter); current.searchParams.delete("open"); window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`); }}>
-      <span className={styles.activitySourceRail} aria-hidden="true"><NotificationSourceIcon source={source} size={12} /></span>
-      <span className={`${styles.activityReplyRail} ${comment.parentId ? "" : styles.activityReplyRailEmpty}`} aria-hidden="true">{comment.parentId ? <ReplyIndicator /> : null}</span>
-      <CommunityIdentityAvatar user={user as CommunityIdentity | null} username={username} size={36} />
-      <span className={styles.legacyContent}><span className={styles.legacyTop}><span><strong>@{username}</strong></span><time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time></span><span className={styles.legacyQuote}>“{comment.body}”</span><small>{getCommentEntryLabel(comment.entryId)}</small></span><svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link></li>;
+    const parentUsername = parentUser?.username ?? (parentComment ? "unknown-patron" : null);
+    const contextLabel = getCommentEntryLabel(comment.entryId);
+    const returnView = activityFilter;
+
+    return <li key={comment.id} className={nested ? styles.groupedActivityItem : undefined}>
+      <Link
+        href={getCommentLink(comment)}
+        className={`${styles.legacyCard} ${comment.parentId ? styles.legacyReplyCard : ""}`}
+        onClick={() => {
+          const current = new URL(window.location.href);
+          current.searchParams.set("view", returnView);
+          current.searchParams.delete("open");
+          window.history.replaceState(window.history.state, "", `${current.pathname}${current.search}${current.hash}`);
+        }}
+      >
+        <span className={styles.activitySourceRail} aria-hidden="true"><NotificationSourceIcon source={source} size={12} /></span>
+        <span className={styles.legacyContent}>
+          <span className={styles.activityContextLine}>
+            <span><b>{notificationSourceLabel(source)}</b><em>· {contextLabel}</em></span>
+            <time dateTime={comment.publishedAt}>{notificationTimeGroup(comment.publishedAt, activityNow)}</time>
+          </span>
+          <span className={styles.activityConversation}>
+            {parentComment && <span className={`${styles.activityMessageRow} ${styles.activityParentRow}`}>
+              <span className={styles.activityReplyMarker}><ReplyIndicator /></span>
+              <CommunityIdentityAvatar user={parentUser as CommunityIdentity | null} username={parentUsername} size={nested ? 30 : 32} />
+              <span className={styles.activityMessageCopy}><b>@{parentUsername}</b><span>“{parentComment.body}”</span></span>
+            </span>}
+            <span className={`${styles.activityMessageRow} ${styles.activityReplyRow}`}>
+              <span className={`${styles.activityReplyMarker} ${styles.activityReplyMarkerEmpty}`} aria-hidden="true" />
+              <CommunityIdentityAvatar user={user as CommunityIdentity | null} username={username} size={nested ? 30 : 32} />
+              <span className={styles.activityMessageCopy}><b>@{username}</b><span>“{comment.body}”</span></span>
+            </span>
+          </span>
+        </span>
+        <svg className={styles.openArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </Link>
+    </li>;
   };
 
   const renderActivityEntries = (entries: (typeof community.comments)[number][]) => {
@@ -524,10 +561,10 @@ function Notifications() {
         return <li key={bucket.key} className={styles.personalClusterItem}>
           <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}>
             <summary>
-              <span className={styles.clusterSourceRail} aria-hidden="true"><NotificationSourceIcon source={latest.source} size={13} /></span>
-              <button type="button" className={styles.clusterPortraitButton} aria-label="Open latest raven preview" onClick={(event) => { event.preventDefault(); event.stopPropagation(); setOpen(latest.id); }}>
+              <span className={styles.clusterSourceRail} aria-hidden="true"><NotificationSourceIcon source={visualNotificationSource(latest.source)} size={13} /></span>
+              <span className={styles.clusterPortraitStatic} aria-hidden="true">
                 <PersonalNotificationPortrait item={latest} size={44} />
-              </button>
+              </span>
               <span className={styles.personalClusterIdentity}><span className={styles.clusterSourceLine}><b>{notificationSourceLabel(latest.source)}</b>{latest.source_label && <em>· {latest.source_label}</em>}</span><strong>{latest.title}</strong><small>{totalTidings} fresh {totalTidings === 1 ? "tiding" : "tidings"} · {latest.body}</small></span>
               <span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span>
             </summary>

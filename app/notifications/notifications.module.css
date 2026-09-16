@@ -312,3 +312,46 @@
   .activityReplyRail{width:15px;height:15px;margin-top:10px}
   .legacyTop{gap:8px}
 }
+
+/* v4.4: group summaries only toggle; nested source icons are optically centered. */
+.clusterPortraitStatic{display:grid;grid-column:2;place-items:center;width:44px;height:44px;align-self:center}
+.groupedReplyCard .cardSourceRail,.groupedPersonalItem .groupedReplyCard .cardSourceRail{align-self:center;margin-top:0}
+.groupedReplyCard .cardContent{align-self:center}
+/* Guild Parley uses the same Raven source rail and portrait footprint as other personal ravens. */
+.cardPortraitButton>[class*="guildAvatar"]{width:52px!important;height:52px!important}
+.clusterPortraitStatic>[class*="guildAvatar"]{width:44px!important;height:44px!important}
+
+/* Across the Realm mirrors the Personal Raven parent/reply hierarchy, minus mascot chrome. */
+.legacyCard{display:grid;grid-template-columns:22px minmax(0,1fr);align-items:stretch;column-gap:10px;padding:10px 38px 10px 11px}
+.activitySourceRail{grid-column:1;grid-row:1;display:grid;place-items:center;width:22px;height:100%;min-height:42px;margin:0;color:#a88961}
+.legacyContent{grid-column:2;grid-row:1;display:grid;gap:7px;min-width:0}
+.activityContextLine{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;color:#8d7c6b;font:8.5px/1.3 var(--font-geist);letter-spacing:.025em}
+.activityContextLine>span{display:flex;align-items:center;min-width:0;gap:4px}
+.activityContextLine b{flex:none;color:#a98a61;font-weight:800}
+.activityContextLine em{min-width:0;overflow:hidden;color:#70665d;font-style:normal;text-overflow:ellipsis;white-space:nowrap}
+.activityContextLine time{flex:none;color:#6d6259;font-size:8px}
+.activityConversation{display:grid;gap:7px;min-width:0}
+.activityMessageRow{display:grid;grid-template-columns:16px 32px minmax(0,1fr);align-items:start;column-gap:8px;min-width:0}
+.activityReplyMarker{display:grid;place-items:center;width:16px;height:16px;margin-top:6px;color:#aa8759}
+.activityReplyMarker svg{display:block;width:14px;height:14px}
+.activityReplyMarkerEmpty{visibility:hidden}
+.activityMessageCopy{display:grid;gap:2px;min-width:0;padding-top:1px}
+.activityMessageCopy b{overflow:hidden;color:#c5a16d;font:700 9px/1.25 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}
+.activityMessageCopy>span{display:-webkit-box;overflow:hidden;color:#c4b5a5;font:10.5px/1.48 var(--font-geist);-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.activityParentRow .activityMessageCopy>span{color:#998d80}
+.activityReplyRow .activityMessageCopy>span{color:#d0bfad}
+.groupedActivityItem .legacyCard{padding:9px 31px 9px 9px}
+.groupedActivityItem .activitySourceRail{align-self:center;min-height:0}
+.groupedActivityItem .activityMessageRow{grid-template-columns:16px 30px minmax(0,1fr)}
+
+@media(max-width:600px){
+  .legacyCard{grid-template-columns:20px minmax(0,1fr);column-gap:8px;padding:9px 31px 9px 8px}
+  .activitySourceRail{width:20px}
+  .activityContextLine{font-size:8px}
+  .activityMessageRow{grid-template-columns:15px 30px minmax(0,1fr);column-gap:7px}
+  .activityReplyMarker{width:15px;height:15px;margin-top:5px}
+  .activityReplyMarker svg{width:13px;height:13px}
+  .activityMessageCopy b{font-size:8.5px}
+  .activityMessageCopy>span{font-size:10px}
+  .groupedActivityItem .activityMessageRow{grid-template-columns:15px 28px minmax(0,1fr)}
+}

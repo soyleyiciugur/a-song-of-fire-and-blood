@@ -11,7 +11,10 @@
       "Restored Personal Ravens grouping for repeated activity and aligned source icons, portraits, usernames and reply previews consistently across grouped and single notices.",
       "Made context-free Personal Ravens sit vertically centered while reply context now uses a compact reply glyph instead of a repeated label.",
       "Continued the Chapter XVIII kingship Tavern thread with a selective fictional reply to the live pocket-cake vote.",
-      "Added private live chat to online Great Game tables, with participant-only history, a compact desktop right rail, and a collapsible mobile quill control."
+      "Added private live chat to online Great Game tables, with participant-only history, a compact desktop right rail, and a collapsible mobile quill control.",
+      "Reworked online Great Game tables into a compact arena layout with sticky player HUDs, a collapsible right-side Table Whispers rail, and separate location and Chronicle panels.",
+      "Tightened Great Game hand sizing, realm spacing and card action controls so Military and Political buttons remain visible across desktop zoom levels, while online usernames display without @ prefixes.",
+      "Unified Personal Ravens and Across the Realm reply previews with parent-and-reply avatars, source context above the conversation, consistent grouped expansion, and aligned Guild Parley source treatment."
     ],
     "features": [],
     "links": {}

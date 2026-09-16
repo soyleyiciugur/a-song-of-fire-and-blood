@@ -68,3 +68,21 @@
   .messages{padding-bottom:8px}
 }
 @media(prefers-reduced-motion:reduce){.panel,.mobileToggle{transition:none}.messages{scroll-behavior:auto}}
+
+/* v2 table chat: compact desktop rail with rightward collapse. */
+.desktopCollapse{position:relative;display:grid;grid-template-columns:1fr;place-items:center;width:32px;height:32px;padding:0;border:1px solid rgba(175,132,75,.36);border-radius:50%;background:rgba(47,27,31,.76);color:#c89c62;cursor:pointer}
+.desktopCollapse>svg{width:17px;height:17px}
+.desktopCollapseChevron{position:absolute;right:-5px;bottom:-4px;display:grid;place-items:center;width:14px;height:14px;border:1px solid rgba(128,94,58,.48);border-radius:50%;background:#171013;color:#aa8759}
+.desktopCollapseChevron svg{width:9px;height:9px}
+.desktopUnread{position:absolute;left:-4px;top:-5px;display:grid;place-items:center;min-width:15px;height:15px;padding:0 3px;border:1px solid #2b1115;border-radius:999px;background:#9f3d45;color:#fff3e7;font:700 7px/1 var(--font-geist);box-shadow:0 3px 8px #0008}
+.panel{height:min(42dvh,390px);bottom:auto;transition:transform .2s cubic-bezier(.2,.8,.2,1),width .2s ease,box-shadow .2s ease}
+.panelCollapsed{transform:translateX(calc(100% - 42px));box-shadow:0 14px 38px rgba(0,0,0,.42)}
+.panelCollapsed .heading,.panelCollapsed .messages,.panelCollapsed .composer,.panelCollapsed .error,.panelCollapsed .close{opacity:0;pointer-events:none}
+.panelCollapsed .header{grid-template-columns:32px minmax(0,1fr) 30px}
+@media(max-width:980px){
+  .desktopCollapse{display:none}
+  .panel{height:min(58dvh,510px)}
+  .panelCollapsed{transform:translateY(calc(100% + 86px));opacity:0;pointer-events:none}
+  .panelOpen.panelCollapsed{transform:translateY(0);opacity:1;pointer-events:auto}
+  .panelOpen .heading,.panelOpen .messages,.panelOpen .composer,.panelOpen .error,.panelOpen .close{opacity:1;pointer-events:auto}
+}

@@ -87,13 +87,13 @@ function storedDeckCardIds(deck: StoredDeck | null): string[] | undefined {
 }
 
 function onlineOpponentName(match: GreatGameOnlineMatchView | null): string {
-  return match?.opponent?.username ? `@${match.opponent.username}` : "Opponent";
+  return match?.opponent?.username ? match.opponent.username : "Opponent";
 }
 
 function gamePlayerName(playerId: PlayerId, match: GreatGameOnlineMatchView | null): string {
   if (!match) return playerName(playerId);
   const player = playerId === "player1" ? match.host : match.guest;
-  return player?.username ? `@${player.username}` : playerName(playerId);
+  return player?.username ? player.username : playerName(playerId);
 }
 
 function onlineLogMessage(message: string, match: GreatGameOnlineMatchView | null): string {
@@ -1361,7 +1361,7 @@ export default function GreatGamePlayPage() {
     const title = yours
       ? "Your Turn"
       : turnNoticeActiveUsername
-        ? `@${turnNoticeActiveUsername}'s Turn`
+        ? `${turnNoticeActiveUsername}'s Turn`
         : "Opponent's Turn";
     const subtitle = `Turn ${turnNoticeTurnsTaken ?? turnNoticeNumber}`;
 
@@ -6638,7 +6638,7 @@ function MainMenu({
                   <span>
                     {match.status === "waiting"
                       ? "Waiting for a player"
-                      : `vs. ${match.opponent?.username ? `@${match.opponent.username}` : "Opponent"}`}
+                      : `vs. ${match.opponent?.username ? match.opponent.username : "Opponent"}`}
                   </span>
                   <strong>{match.code}</strong>
                 </button>
@@ -7068,7 +7068,7 @@ function PlayerHeader({
       className={`${styles.playerHeader} ${
         opponent
           ? styles.opponentPlayer
-          : ""
+          : styles.activePlayerHeader
       }`}
     >
       <button

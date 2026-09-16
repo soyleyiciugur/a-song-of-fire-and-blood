@@ -63,6 +63,21 @@ function CloseIcon() {
   );
 }
 
+function CollapseIcon({ collapsed }: { collapsed: boolean }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d={collapsed ? "m9 6 6 6-6 6" : "m15 6-6 6 6 6"}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.55"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function SendIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -109,12 +124,14 @@ export default function GreatGameChat({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopCollapsed, setDesktopCollapsed] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const [unread, setUnread] = useState(0);
   const listRef = useRef<HTMLDivElement | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const mobileOpenRef = useRef(false);
+  const desktopCollapsedRef = useRef(false);
   const isCompactRef = useRef(false);
   const loadedRef = useRef(false);
 
@@ -133,6 +150,11 @@ export default function GreatGameChat({
     mobileOpenRef.current = mobileOpen;
     if (mobileOpen) setUnread(0);
   }, [mobileOpen]);
+
+  useEffect(() => {
+    desktopCollapsedRef.current = desktopCollapsed;
+    if (!desktopCollapsed) setUnread(0);
+  }, [desktopCollapsed]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -191,8 +213,8 @@ export default function GreatGameChat({
           if (
             loadedRef.current &&
             next.user_id !== viewerId &&
-            isCompactRef.current &&
-            !mobileOpenRef.current
+            ((isCompactRef.current && !mobileOpenRef.current) ||
+              (!isCompactRef.current && desktopCollapsedRef.current))
           ) {
             setUnread((current) => Math.min(99, current + 1));
           }
@@ -271,16 +293,26 @@ export default function GreatGameChat({
       </button>
 
       <aside
-        className={`${styles.panel} ${mobileOpen ? styles.panelOpen : ""}`}
+        className={`${styles.panel} ${mobileOpen ? styles.panelOpen : ""} ${desktopCollapsed ? styles.panelCollapsed : ""}`}
         aria-label="Online table chat"
         data-selection-ui="true"
       >
         <header className={styles.header}>
-          <span className={styles.headerIcon}><QuillIcon size={17} /></span>
+          <button
+            type="button"
+            className={styles.desktopCollapse}
+            onClick={() => setDesktopCollapsed((current) => !current)}
+            aria-label={desktopCollapsed ? "Expand table chat" : "Collapse table chat"}
+            aria-expanded={!desktopCollapsed}
+          >
+            <QuillIcon size={17} />
+            <span className={styles.desktopCollapseChevron}><CollapseIcon collapsed={desktopCollapsed} /></span>
+            {unread > 0 && desktopCollapsed && <span className={styles.desktopUnread}>{unread > 9 ? "9+" : unread}</span>}
+          </button>
           <div className={styles.heading}>
             <span>Online Table</span>
             <strong>Table Whispers</strong>
-            <small>{opponent?.username ? `with @${opponent.username}` : match.code}</small>
+            <small>{opponent?.username ? `with ${opponent.username}` : match.code}</small>
           </div>
           <button
             type="button"
@@ -319,7 +351,7 @@ export default function GreatGameChat({
                 )}
                 <div className={styles.messageBody}>
                   <span className={styles.meta}>
-                    <strong>{own ? "You" : `@${username}`}</strong>
+                    <strong>{own ? "You" : username}</strong>
                     <time dateTime={message.created_at}>{messageTime(message.created_at)}</time>
                   </span>
                   <p>{message.body}</p>

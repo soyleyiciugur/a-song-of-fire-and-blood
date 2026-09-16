@@ -6279,3 +6279,145 @@
 @media(max-width:760px){
   .gameWithOnlineChat{padding-right:1rem}
 }
+
+/* v26: online board is a two-column arena: realms on the left, table rail on the right. */
+@media(min-width:981px){
+  .gameWithOnlineChat{
+    max-width:none;
+    padding-left:1rem;
+    padding-right:322px;
+  }
+
+  /* Orange HUD strips remain in view like the site navbar while their realm is active. */
+  .gameWithOnlineChat .playerHeader{
+    display:grid;
+    grid-template-columns:96px minmax(0,1fr) 112px;
+    align-items:stretch;
+    gap:.5rem;
+    margin-bottom:.45rem;
+    padding:.45rem;
+    z-index:112;
+    border-color:rgba(212,175,55,.24);
+    background:rgba(10,8,12,.94);
+    box-shadow:0 8px 24px #0007,inset 0 1px #ffffff08;
+    backdrop-filter:blur(12px);
+  }
+  .gameWithOnlineChat .opponentPlayer{position:sticky;top:calc(var(--site-nav-height,58px) + 8px)}
+  .gameWithOnlineChat .activePlayerHeader{position:sticky;bottom:8px}
+  .gameWithOnlineChat .standingBox{width:auto;min-width:0;flex-basis:auto}
+  .gameWithOnlineChat .playerStats{
+    width:100%;
+    grid-template-columns:repeat(4,minmax(56px,.7fr)) minmax(185px,1.7fr);
+    gap:.36rem;
+  }
+  .gameWithOnlineChat .headerEndTurnButton,.gameWithOnlineChat .headerEndTurnSpacer{width:112px;min-width:112px;margin:0}
+  .gameWithOnlineChat .hudStat{padding:.35rem .46rem}
+  .gameWithOnlineChat .commandMeterCompact{min-width:0;width:100%}
+
+  /* Purple board lanes stay broad, but the fixed hand no longer overwhelms them. */
+  .gameWithOnlineChat .boardSection{margin-bottom:.35rem}
+  .gameWithOnlineChat .board{min-height:248px;padding:.65rem;gap:.6rem}
+  .gameWithOnlineChat .populatedBoard{min-height:0}
+  .gameWithOnlineChat .handSection{
+    left:calc((100vw - 322px)/2);
+    width:min(980px,calc(100vw - 350px));
+    bottom:-5.75rem;
+  }
+  .gameWithOnlineChat .handCard{flex-basis:170px;width:170px}
+  .gameWithOnlineChat .handFanTrack>.handCard+.handCard{margin-left:-58px}
+  .gameWithOnlineChat .fannedHand .handCard:hover:not(:disabled){transform:translateY(-15px) rotate(0deg) scale(1.035)}
+
+  /* Compact, truly centered realm divider. */
+  .gameWithOnlineChat .battleLine{
+    height:34px;
+    min-height:34px;
+    margin:.12rem 0 .22rem;
+    gap:.65rem;
+    line-height:1;
+    place-items:center stretch;
+  }
+  .gameWithOnlineChat .battleLine>span{display:flex;height:100%;align-items:center;justify-content:center;line-height:1}
+
+  /* Right-side utility rail: chat / location / Chronicle. */
+  .gameWithOnlineChat .locationBar{
+    position:fixed;
+    z-index:74;
+    top:calc(var(--site-nav-height,58px) + 16px + min(42dvh,390px) + 10px);
+    right:max(14px,env(safe-area-inset-right));
+    width:288px;
+    min-height:56px;
+    box-sizing:border-box;
+    margin:0;
+    padding:.62rem .72rem;
+    gap:.45rem;
+    align-items:flex-start;
+    flex-direction:column;
+    border-color:rgba(212,175,55,.28);
+    background:rgba(17,12,16,.94);
+    box-shadow:0 12px 30px #0007;
+  }
+  .gameWithOnlineChat .locationBar small{max-width:none;text-align:left;font-size:.62rem;line-height:1.35}
+  .gameWithOnlineChat .locationBar strong{font-size:.82rem}
+
+  .gameWithOnlineChat .logSection{
+    position:fixed;
+    z-index:73;
+    top:calc(var(--site-nav-height,58px) + 16px + min(42dvh,390px) + 84px);
+    right:max(14px,env(safe-area-inset-right));
+    bottom:16px;
+    width:288px;
+    display:grid;
+    grid-template-rows:auto minmax(0,1fr);
+    box-sizing:border-box;
+    margin:0;
+    padding:.7rem 0 0;
+    overflow:hidden;
+    border:1px solid rgba(212,175,55,.16);
+    background:rgba(8,7,10,.92);
+    box-shadow:0 16px 38px #0008;
+  }
+  .gameWithOnlineChat .logSection>.sectionTitle{padding:0 .72rem .5rem}
+  .gameWithOnlineChat .log{height:100%;max-height:none;margin:0;overflow-y:auto;border-right:0;border-bottom:0;border-left:0}
+  .gameWithOnlineChat .logEntry{gap:.45rem;padding:.42rem .55rem;font-size:.6rem}
+  .gameWithOnlineChat .logEntry>span{flex-basis:1.55rem}
+
+  /* Attack controls are pinned inside the card frame, so browser zoom cannot crop them. */
+  .gameWithOnlineChat .unitCard .cardInfoPanelWithActions{
+    height:62%;
+    grid-template-rows:2rem .82rem .82rem minmax(1.8rem,1fr) .65rem;
+    padding:.42rem .46rem 2.05rem;
+    overflow:hidden;
+  }
+  .gameWithOnlineChat .unitCard .unitActions{
+    position:absolute;
+    z-index:12;
+    left:.42rem;
+    right:.42rem;
+    bottom:.38rem;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.18rem;
+    min-height:1.42rem;
+  }
+  .gameWithOnlineChat .unitCard .unitActions button{
+    min-width:0;
+    min-height:1.38rem;
+    padding:.22rem .1rem;
+    overflow:hidden;
+    font-size:.45rem;
+    line-height:1;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}
+
+@media(min-width:981px) and (max-width:1240px){
+  .gameWithOnlineChat{padding-right:306px}
+  .gameWithOnlineChat .playerHeader{grid-template-columns:88px minmax(0,1fr) 96px}
+  .gameWithOnlineChat .playerStats{grid-template-columns:repeat(4,minmax(48px,1fr));grid-template-rows:auto auto}
+  .gameWithOnlineChat .playerStats .commandMeterCompact{grid-column:1/-1}
+  .gameWithOnlineChat .headerEndTurnButton,.gameWithOnlineChat .headerEndTurnSpacer{width:96px;min-width:96px}
+  .gameWithOnlineChat .handSection{left:calc((100vw - 306px)/2);width:calc(100vw - 328px)}
+  .gameWithOnlineChat .handCard{flex-basis:158px;width:158px}
+  .gameWithOnlineChat .handFanTrack>.handCard+.handCard{margin-left:-64px}
+}
