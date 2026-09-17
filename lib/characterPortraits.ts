@@ -47,3 +47,35 @@ export function getCharacterPortraitVariants(
 
   return variants;
 }
+
+/**
+ * Resolve the portrait state that can actually be rendered.
+ *
+ * Characters do not necessarily have artwork for every age bucket. Never let
+ * the UI fall through to a hard-coded `adult` portrait (or an empty image)
+ * just because the age-derived bucket is missing. Prefer the requested state,
+ * then the nearest available age bucket; ties prefer the older state so a
+ * character never visually regresses when crossing an age boundary.
+ */
+export function resolveAvailablePortraitState(
+  requestedState: CharacterAgeState,
+  variants: CharacterPortraitVariants
+): CharacterAgeState {
+  if (variants[requestedState]) return requestedState;
+
+  const requestedIndex = CHARACTER_AGE_STATES.indexOf(requestedState);
+  const available = CHARACTER_AGE_STATES.filter((state) => Boolean(variants[state]));
+
+  if (available.length === 0) return requestedState;
+
+  return available.reduce((best, state) => {
+    const stateIndex = CHARACTER_AGE_STATES.indexOf(state);
+    const bestIndex = CHARACTER_AGE_STATES.indexOf(best);
+    const distance = Math.abs(stateIndex - requestedIndex);
+    const bestDistance = Math.abs(bestIndex - requestedIndex);
+
+    if (distance < bestDistance) return state;
+    if (distance === bestDistance && stateIndex > bestIndex) return state;
+    return best;
+  });
+}
