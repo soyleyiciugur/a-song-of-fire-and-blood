@@ -686,3 +686,12 @@
   .sharedPageCard .sharedReelCopy{width:100%;max-width:100%;min-width:0;overflow:hidden}
   .sharedPageCard .sharedReelCopy strong{display:block;width:100%;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
+
+/* v17: rich/shared payloads must never widen a Direct Raven bubble or the thread. */
+.messageRow,.messageBubble,.messageBubble>p{min-width:0}
+.messageBubble{box-sizing:border-box;overflow-wrap:anywhere}
+.messageBubble>p{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.sharedPageCard{width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow:hidden}
+.sharedPageCard .sharedReelCopy{width:100%;max-width:100%;min-width:0;overflow:hidden}
+.sharedPageCard .sharedReelCopy small,.sharedPageCard .sharedReelCopy strong,.sharedPageCard .sharedReelCopy em{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.sharedPageCard .sharedReelCopy strong{display:block;white-space:nowrap}
