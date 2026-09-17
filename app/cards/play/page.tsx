@@ -5866,7 +5866,6 @@ export default function GreatGamePlayPage() {
             <strong>Turn {activePlayer.turnsTaken}</strong>
           </div>
           <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
-          <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)} is playing</small>
         </section>
       )}
 
@@ -6484,7 +6483,7 @@ export default function GreatGamePlayPage() {
               ? "Sending move…"
               : onlineCanAct
                 ? "Your turn"
-                : `${onlineOpponentName(onlineMatch)} is playing`,
+                : `${onlineOpponentName(onlineMatch)}'s turn`,
             canAct: onlineCanAct,
             onExit: () => setExitConfirm(true),
           }}

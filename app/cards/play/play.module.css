@@ -7023,7 +7023,7 @@
 .boardGame .opponentCommandDock .commandMeterCompact{height:100%;box-sizing:border-box;display:grid;align-content:center}
 .boardGame .opponentStatusDock{
   position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:7px;z-index:81;width:calc((var(--game-rail-width) - 20px) * .48);height:var(--game-top-dock-height);box-sizing:border-box;
-  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) auto;gap:4px 6px;align-items:center;padding:6px 7px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);gap:4px 6px;align-items:center;padding:6px 7px;
   border:1px solid rgba(212,175,55,.22);background:linear-gradient(165deg,rgba(27,18,21,.97),rgba(9,8,10,.985) 72%);box-shadow:0 12px 28px #0008
 }
 .boardGame .opponentStatusIdentity{min-width:0;display:grid;gap:2px}.boardGame .opponentStatusIdentity span{overflow:hidden;color:#968571;font:7px/1 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}.boardGame .opponentStatusIdentity strong{color:#d5b86f;font:700 8px/1 var(--font-hotd),serif;text-transform:uppercase;white-space:nowrap}
@@ -7059,7 +7059,7 @@
 
 /* v30 — annotated viewport corrections. */
 .boardGame{
-  --game-chat-height:clamp(185px,25dvh,250px);
+  --game-chat-height:clamp(340px,44dvh,420px);
   --game-turn-control-width:clamp(96px,7.2vw,124px);
   --game-half-battle-line:16px;
 }
@@ -7099,10 +7099,10 @@
 }
 .boardGame .unitCard{
   flex:none;
-  width:clamp(116px,7.4vw,164px)!important;
+  width:100%!important;
   height:auto!important;
-  max-width:calc(100% - 8px);
-  max-height:none;
+  max-width:100%;
+  max-height:100%;
   aspect-ratio:5/7;
 }
 
@@ -7145,16 +7145,16 @@
   min-width:0;
   min-height:0;
   display:grid;
-  place-items:start center;
-  padding:clamp(12px,1.5dvh,20px) 6px 8px;
+  place-items:start start;
+  padding:clamp(10px,1.35dvh,18px) 0 0;
   box-sizing:border-box;
-  overflow:hidden;
+  overflow:visible;
   border-top:1px solid rgba(212,175,55,.12);
   background:linear-gradient(180deg,rgba(8,6,9,.24),rgba(5,4,6,.7));
 }
 .boardGame .deckStack{
   position:relative;
-  width:min(72%,76px);
+  width:min(144%,152px);
   aspect-ratio:5/7;
   filter:drop-shadow(0 12px 16px rgba(0,0,0,.52));
   transition:opacity .18s ease;
@@ -7188,24 +7188,118 @@
 
 @media(max-width:1100px){
   .boardGame{
-    --game-chat-height:clamp(165px,25dvh,230px);
+    --game-chat-height:clamp(280px,40dvh,360px);
     --game-turn-control-width:clamp(72px,8.4vw,92px);
     --game-half-battle-line:14px;
   }
-  .boardGame .unitCard{width:clamp(92px,8vw,132px)!important}
-  .boardGame .deckStack{width:min(70%,66px)}
+  .boardGame .unitCard{width:100%!important;max-width:100%}
+  .boardGame .deckStack{width:min(144%,132px)}
 }
 
 @media(max-width:760px){
   .boardGame{
-    --game-chat-height:clamp(150px,25dvh,215px);
+    --game-chat-height:clamp(220px,38dvh,300px);
     --game-turn-control-width:clamp(54px,13vw,70px);
     --game-half-battle-line:12px;
   }
-  .boardGame .unitCard{width:clamp(58px,10vw,88px)!important;max-width:calc(100% - 4px)}
-  .boardGame .deckStack{width:min(68%,54px)}
+  .boardGame .unitCard{width:100%!important;max-width:100%}
+  .boardGame .deckStack{width:min(138%,108px)}
   .boardGame .opponentStatusIdentity span{font-size:6px}
   .boardGame .opponentStatusIdentity strong{font-size:7px}
   .boardGame .opponentStatusDock button{font-size:5.5px;padding-inline:3px}
   .boardGame .opponentStatusDock small{font-size:5px}
+}
+
+
+/* v31 — board scale, deck shelf, rail proportions and turn feedback. */
+.boardGame .opponentBoardSection .board{
+  padding-top:clamp(6px,.65dvh,10px);
+}
+
+/* Six equal board slots fill the realm. Each card uses the full slot width;
+   5:7 aspect ratio keeps the artwork proportional while exactly six cards fit. */
+.boardGame .board{
+  grid-template-columns:repeat(6,minmax(0,1fr));
+}
+.boardGame .boardPlacementCell,
+.boardGame .unitCardWrapper{
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+}
+.boardGame .unitCard{
+  width:100%!important;
+  height:auto!important;
+  max-width:100%;
+  max-height:100%;
+  aspect-ratio:5/7;
+}
+
+/* Visual deck is pinned to the far left and doubled from the v30 footprint,
+   growing to the right and downward without recentering in the stat column. */
+.boardGame .playerDeckWell{
+  justify-items:start;
+  align-items:start;
+  padding-left:0;
+  padding-right:0;
+  overflow:visible;
+}
+.boardGame .deckStack{
+  width:min(144%,152px);
+  transform-origin:top left;
+}
+
+/* End Turn keeps the hard-edged board-control language. */
+.boardGame .commandDockEndTurnButton{
+  border-radius:0!important;
+}
+
+/* With the redundant playing-status line removed, the opponent status dock is
+   one centered row, still exactly symmetric with the End Turn side below. */
+.boardGame .opponentStatusDock{
+  grid-template-rows:minmax(0,1fr);
+}
+
+/* Standing result markers need to read at a glance from the narrow HUD rail. */
+.boardGame .standingBox .conflictValuePreview{
+  font-size:clamp(2.55rem,5.1dvh,3.45rem)!important;
+}
+.boardGame .standingBox .conflictValueLethal{
+  font-size:clamp(2.95rem,5.8dvh,3.9rem)!important;
+}
+
+/* The turn announcement is a true screen-center overlay: ~1.5x wider and
+   ~4x taller than the compact divider badge, while retaining the 3s fade. */
+.boardGame .turnNotice{
+  position:fixed;
+  left:50vw;
+  top:50dvh;
+  z-index:970;
+  width:min(320px,58vw);
+  min-width:0;
+  min-height:112px;
+  box-sizing:border-box;
+  display:grid;
+  place-content:center;
+  justify-items:center;
+  gap:7px;
+  padding:18px 24px;
+  border-radius:6px;
+  transform:translate(-50%,-50%);
+}
+.boardGame .turnNotice span{font-size:7px}
+.boardGame .turnNotice strong{font-size:clamp(19px,2.2vw,26px);text-align:center}
+
+@media(max-width:1100px){
+  .boardGame .deckStack{width:min(144%,132px)}
+  .boardGame .turnNotice{width:min(300px,62vw);min-height:104px;padding:16px 20px}
+}
+
+@media(max-width:760px){
+  .boardGame .deckStack{width:min(138%,108px)}
+  .boardGame .standingBox .conflictValuePreview{font-size:clamp(1.85rem,5dvh,2.6rem)!important}
+  .boardGame .standingBox .conflictValueLethal{font-size:clamp(2.2rem,5.6dvh,3rem)!important}
+  .boardGame .turnNotice{width:min(270px,68vw);min-height:94px;padding:14px 16px}
+  .boardGame .turnNotice strong{font-size:18px}
 }
