@@ -4089,5 +4089,35 @@
     },
     "uploadedAt": "2026-07-12",
     "category": "raven"
+  },
+  {
+    "id": "gallery-cursed-kuzgun",
+    "src": "/images/gallery/kuzgun-aysu.jpeg",
+    "caption": "cursed kuzgun",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-16",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-vhaemys-just-a-kid",
+    "src": "/videos/reels/vhaemys-just-a-kid.mp4",
+    "caption": "everyone give it up for westeros's favorite dreamin dragonet",
+    "characterIds": [
+      "vhaemys-targaryen",
+      "jacaelon-targaryen",
+      "alester-dayne"
+    ],
+    "houseIds": [
+      "targaryen"
+    ],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-17",
+    "category": "fleabottom"
   }
 ]
