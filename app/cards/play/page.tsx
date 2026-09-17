@@ -1404,6 +1404,9 @@ export default function GreatGamePlayPage() {
 
         const source =
           document.querySelector<HTMLElement>(
+            `[data-visual-deck-anchor="${draw.playerId}"]`
+          ) ??
+          document.querySelector<HTMLElement>(
             `[data-deck-anchor="${draw.playerId}"]`
           );
 
@@ -6154,6 +6157,31 @@ export default function GreatGamePlayPage() {
         showCommandMeter={false}
         showEndTurn={false}
       />
+      <div
+        className={styles.playerDeckWell}
+        data-selection-ui="true"
+        aria-label={`${viewPlayer.deck.length} cards remaining in your deck`}
+      >
+        <div
+          className={`${styles.deckStack} ${
+            viewPlayer.deck.length === 0
+              ? styles.deckStackEmpty
+              : ""
+          }`}
+          data-visual-deck-anchor={viewPlayerId}
+          aria-hidden="true"
+        >
+          <span className={styles.deckCardBack}>
+            <svg viewBox="0 0 100 140" focusable="false">
+              <rect className={styles.deckBackFrame} x="7" y="7" width="86" height="126" rx="4" />
+              <path className={styles.deckBackOrnament} d="M50 18 78 42 72 98 50 122 28 98 22 42Z" />
+              <path className={styles.deckBackOrnament} d="M50 31 66 49 62 91 50 108 38 91 34 49Z" />
+              <circle className={styles.deckBackSeal} cx="50" cy="70" r="12" />
+              <path className={styles.deckBackMark} d="M50 58 55 67 65 70 55 73 50 82 45 73 35 70 45 67Z" />
+            </svg>
+          </span>
+        </div>
+      </div>
 
       {attackDrag && (
         <AttackDragOverlay
