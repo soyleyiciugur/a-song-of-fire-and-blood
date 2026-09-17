@@ -195,7 +195,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 12px 10px 10px;
+  padding: 8px 10px 9px;
+  box-sizing: border-box;
+  overflow: hidden;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -205,7 +207,8 @@
 }
 
 .cardCaption {
-  margin: 0 0 6px;
+  margin: 0;
+  max-width: 100%;
   font-size: 0.78rem;
   line-height: 1.4;
   color: #fff;
@@ -216,9 +219,7 @@
 }
 
 .cardTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  display: none;
 }
 
 /* ── Expandable captions ───────────────────────────────────────────────── */
@@ -324,7 +325,7 @@
 .lightboxBackdrop {
   position: fixed;
   inset: 0;
-  z-index: 2000;
+  z-index: 1000;
   background: rgba(0, 0, 0, 0.92);
   backdrop-filter: blur(6px);
   display: flex;
@@ -695,7 +696,7 @@
 
   .cardOverlay {
     opacity: 1;
-    padding: 30px 8px 8px;
+    padding: 7px 8px 7px;
   }
 
   .lightboxBackdrop {
@@ -1380,7 +1381,7 @@
 .reelsCloseBtn svg { width: 17px; height: 17px; display: block; }
 
 @media (max-width: 720px) {
-  .reelActionRail { right: 10px; bottom: calc(30px + env(safe-area-inset-bottom)); gap: 11px; }
+  .reelActionRail { right: 10px; bottom: calc(100px + env(safe-area-inset-bottom)); gap: 11px; }
   .reelActionIcon { width: 42px; height: 42px; }
   .reelActionIcon svg { width: 23px; height: 23px; }
   .reelSlideMeta { padding-right: 66px; }
@@ -1508,10 +1509,12 @@
 
 
 /* v4.8: Direct Raven media share + compact mobile previews. */
-.mediaRavenShareButton{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(18px,calc(env(safe-area-inset-bottom) + 12px));z-index:6000;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid rgba(184,139,76,.52);border-radius:50%;background:linear-gradient(145deg,rgba(48,27,30,.96),rgba(15,12,14,.97));color:#d7b278;box-shadow:0 12px 30px #0009,inset 0 1px #ffffff0b;backdrop-filter:blur(10px);cursor:pointer}
+.mediaRavenShareButton{position:absolute;right:14px;bottom:14px;z-index:8;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid rgba(184,139,76,.52);border-radius:50%;background:linear-gradient(145deg,rgba(48,27,30,.96),rgba(15,12,14,.97));color:#d7b278;box-shadow:0 12px 30px #0009,inset 0 1px #ffffff0b;backdrop-filter:blur(10px);cursor:pointer}
 .mediaRavenShareButton:hover,.mediaRavenShareButton:focus-visible{border-color:#c79b5e;background:linear-gradient(145deg,#47252b,#181215);outline:none}
 .lightboxCard{position:relative}
 @media(max-width:720px){
+  .lightboxTags{display:none!important}
+  .reelSlideMeta .tagGroups{display:none!important}
   .reelSlideMeta{padding-right:66px}
-  .mediaRavenShareButton{right:12px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px));width:40px;height:40px}
+  .mediaRavenShareButton{right:12px;bottom:max(12px,calc(env(safe-area-inset-bottom) + 8px));width:40px;height:40px}
 }
