@@ -875,6 +875,715 @@
       ],
       "forumThreadIds": [],
       "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-1-01",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T17:23:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-01",
+        "community-xviii-leo-knows-tail-01"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-02",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T18:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-02",
+        "community-xviii-leo-knows-tail-02",
+        "community-xviii-boneskin-left-tail-01",
+        "community-xviii-two-sons-dream-tail-01",
+        "community-xviii-rhaella-opening-tail-01"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-03",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T19:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-03",
+        "community-xviii-boneskin-left-tail-02"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-04",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T20:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-04",
+        "community-xviii-leo-knows-tail-03",
+        "community-xviii-two-sons-dream-tail-02",
+        "community-xviii-rhaella-opening-tail-02"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-05",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T21:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-05",
+        "community-xviii-leo-knows-tail-04",
+        "community-xviii-boneskin-left-tail-03",
+        "community-xviii-two-sons-dream-tail-03",
+        "community-xviii-rhaella-opening-tail-03"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-06",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T22:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-06",
+        "community-xviii-leo-knows-tail-05",
+        "community-xviii-leo-knows-tail-06",
+        "community-xviii-boneskin-left-tail-04",
+        "community-xviii-two-sons-dream-tail-04"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-07",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-17T23:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-07",
+        "community-xviii-leo-knows-tail-07",
+        "community-xviii-boneskin-left-tail-05",
+        "community-xviii-boneskin-left-tail-06",
+        "community-xviii-boneskin-left-tail-07",
+        "community-xviii-two-sons-dream-tail-05",
+        "community-xviii-two-sons-dream-tail-06",
+        "community-xviii-two-sons-dream-tail-07",
+        "community-xviii-rhaella-opening-tail-04",
+        "community-xviii-rhaella-opening-tail-05",
+        "community-xviii-rhaella-opening-tail-06"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-08",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T00:56:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-08",
+        "community-xviii-rhaella-opening-tail-07"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-09",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T01:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-09",
+        "community-xviii-leo-knows-tail-08",
+        "community-xviii-boneskin-left-tail-08"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-10",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T02:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-10",
+        "community-xviii-two-sons-dream-tail-08",
+        "community-xviii-rhaella-opening-tail-08"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-11",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T03:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-11",
+        "community-xviii-mydan-no-tail-09"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-12",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T04:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-12",
+        "community-xviii-leo-knows-tail-09",
+        "community-xviii-boneskin-left-tail-09"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-13",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T05:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-13",
+        "community-xviii-two-sons-dream-tail-09"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-14",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T06:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-14",
+        "community-xviii-rhaella-opening-tail-09"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-15",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T07:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-15"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-16",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T08:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-vhaemys-dream-tail-16",
+        "community-xviii-mydan-no-tail-10",
+        "community-xviii-leo-knows-tail-10",
+        "community-xviii-boneskin-left-tail-10"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-17",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T09:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-01",
+        "community-xviii-two-sons-dream-tail-10",
+        "community-xviii-rhaella-opening-tail-10"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-18",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T10:23:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-02"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-19",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T11:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-03"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-20",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T12:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-04"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-21",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T13:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-05",
+        "community-xviii-mydan-no-tail-11",
+        "community-xviii-leo-knows-tail-11",
+        "community-xviii-boneskin-left-tail-11",
+        "community-xviii-two-sons-dream-tail-11"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-22",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T14:56:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-06",
+        "community-xviii-rhaella-opening-tail-11"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-23",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T15:31:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-07"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-1-24",
+      "batchId": "ch18-long-tail-1",
+      "publishedAt": "2026-09-18T16:23:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-08"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-01",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T17:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-02",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T18:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-12",
+        "community-xviii-leo-knows-tail-12"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-03",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T19:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-boneskin-left-tail-12",
+        "community-xviii-two-sons-dream-tail-12"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-04",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T20:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-rhaella-opening-tail-12"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-05",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T21:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-06",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T22:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-07",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-18T23:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-08",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T00:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-13"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-09",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T01:36:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-leo-knows-tail-13",
+        "community-xviii-boneskin-left-tail-13",
+        "community-xviii-two-sons-dream-tail-13"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-10",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T02:31:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-rhaella-opening-tail-13"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-11",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T03:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-12",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T04:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-13",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T05:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-14",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T06:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-15",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T07:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-16",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T08:07:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-17",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T09:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-18",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T10:23:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-14"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-19",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T11:36:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-leo-knows-tail-14",
+        "community-xviii-boneskin-left-tail-14"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-20",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T12:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-two-sons-dream-tail-14",
+        "community-xviii-rhaella-opening-tail-14"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-2-21",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T13:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-22",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T14:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-23",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T15:07:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-2-24",
+      "batchId": "ch18-long-tail-2",
+      "publishedAt": "2026-09-19T16:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-01",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T17:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-02",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T18:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-03",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T19:52:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-04",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T20:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-05",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T21:23:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-06",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T22:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-15",
+        "community-xviii-leo-knows-tail-15"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-3-07",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-19T23:31:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-boneskin-left-tail-15",
+        "community-xviii-two-sons-dream-tail-15",
+        "community-xviii-rhaella-opening-tail-15"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-3-08",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T00:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-09",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T01:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-10",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T02:41:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-11",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T03:52:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-12",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T04:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-13",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T05:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-14",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T06:36:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-15",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T07:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-16",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T08:11:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-17",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T09:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-18",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T10:07:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-mydan-no-tail-16",
+        "community-xviii-leo-knows-tail-16"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-3-19",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T11:19:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-xviii-boneskin-left-tail-16",
+        "community-xviii-two-sons-dream-tail-16",
+        "community-xviii-rhaella-opening-tail-16"
+      ]
+    },
+    {
+      "id": "ch18-long-tail-3-20",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T12:27:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-21",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T13:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-22",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T14:56:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-23",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T15:14:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "ch18-long-tail-3-24",
+      "batchId": "ch18-long-tail-3",
+      "publishedAt": "2026-09-20T16:47:00Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     }
   ],
   "policy": {
@@ -934,5 +1643,5 @@
       }
     ]
   },
-  "currentBatchId": "september-16-gallery-natural"
+  "currentBatchId": "ch18-long-tail-1"
 }
