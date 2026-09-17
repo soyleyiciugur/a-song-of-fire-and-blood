@@ -1368,7 +1368,7 @@ export default function GreatGamePlayPage() {
     const showTimer = setTimeout(() => {
       setTurnNotice({ key, title, subtitle });
       if (turnNoticeTimerRef.current) clearTimeout(turnNoticeTimerRef.current);
-      turnNoticeTimerRef.current = setTimeout(() => setTurnNotice(null), 2000);
+      turnNoticeTimerRef.current = setTimeout(() => setTurnNotice(null), 3000);
     }, 0);
 
     return () => {
@@ -2182,11 +2182,13 @@ export default function GreatGamePlayPage() {
       Boolean(
         pendingConflict ||
           inspectedUnitId ||
+          inspectedHandInstanceId ||
           pendingPlay?.hidePreview
       );
 
     const clearCancelableSelection = () => {
       setInspectedUnitId(null);
+      setInspectedHandInstanceId(null);
 
       if (game?.pendingEffect) {
         return;
@@ -2212,7 +2214,8 @@ export default function GreatGamePlayPage() {
       if (
         pendingPlay ||
         pendingConflict ||
-        inspectedUnitId
+        inspectedUnitId ||
+        inspectedHandInstanceId
       ) {
         event.preventDefault();
         clearCancelableSelection();
@@ -2252,6 +2255,7 @@ export default function GreatGamePlayPage() {
     exitConfirm,
     game?.pendingEffect,
     inspectedUnitId,
+    inspectedHandInstanceId,
     pendingConflict,
     pendingPlay,
   ]);
@@ -5558,13 +5562,6 @@ export default function GreatGamePlayPage() {
         aria-hidden
       />
 
-      {turnNotice && (
-        <div className={styles.turnNotice} role="status" aria-live="polite">
-          <span>{turnNotice.subtitle}</span>
-          <strong>{turnNotice.title}</strong>
-        </div>
-      )}
-
       {drawFlight && (() => {
         const drawnCard =
           getGameCard(
@@ -5859,6 +5856,17 @@ export default function GreatGamePlayPage() {
         />
       </section>
 
+      {onlineMatch && (
+        <section className={styles.opponentStatusDock} aria-label="Online match status">
+          <div className={styles.opponentStatusIdentity}>
+            <span>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}</span>
+            <strong>Turn {activePlayer.turnsTaken}</strong>
+          </div>
+          <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
+          <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)} is playing</small>
+        </section>
+      )}
+
       {onlineCanAct &&
         currentGame.pendingEffect
           ?.abilityId ===
@@ -5964,14 +5972,14 @@ export default function GreatGamePlayPage() {
         }
       />
 
-      <div
-        className={
-          styles.battleLine
-        }
-      >
-        <span>
-          ✦ The Realms ✦
-        </span>
+      <div className={styles.battleLine}>
+        <span>✦ The Realms ✦</span>
+        {turnNotice && (
+          <div className={styles.turnNotice} role="status" aria-live="polite">
+            <span>{turnNotice.subtitle}</span>
+            <strong>{turnNotice.title}</strong>
+          </div>
+        )}
       </div>
 
       <Board

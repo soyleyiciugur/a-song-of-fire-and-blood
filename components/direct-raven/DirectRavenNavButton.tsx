@@ -74,12 +74,11 @@ export default function DirectRavenNavButton() {
   // utility to its right slid left and then jumped back once getUser resolved.
   // The hydrating placeholder is visually identical but inert; signed-out users
   // keep an invisible slot so auth resolution never reflows the navbar.
-  if (signedIn !== true) {
+  if (signedIn === false) return null;
+
+  if (signedIn === null) {
     return (
-      <span
-        className={`${navClassName} ${styles.directRavenAuthPlaceholder} ${signedIn === false ? styles.directRavenSignedOutPlaceholder : ""}`}
-        aria-hidden="true"
-      >
+      <span className={`${navClassName} ${styles.directRavenAuthPlaceholder}`} aria-hidden="true">
         <RavenIcon size={19} />
       </span>
     );

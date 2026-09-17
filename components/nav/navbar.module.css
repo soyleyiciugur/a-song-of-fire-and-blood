@@ -1075,3 +1075,6 @@
     display: none !important;
   }
 }
+
+/* v29 board-nav arrow optical alignment. */
+.playBoardBanner.playBannerCollapsed .playNavToggleIcon{transform:translateY(-2px)}

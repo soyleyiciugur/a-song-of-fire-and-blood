@@ -335,18 +335,20 @@ export default function GreatGameChat({
           </div>
 
           {status && (
-            <div className={styles.headerGameMeta} aria-label="Online table status">
-              <div className={styles.gameMetaTurn}>
-                <span>{status.activePlayerName}</span>
-                <strong>Turn {status.turnNumber}</strong>
-              </div>
-              <button type="button" className={styles.gameMetaExit} onClick={status.onExit}>
-                Exit Game
-              </button>
-              <div className={`${styles.gameMetaState} ${status.canAct ? styles.gameMetaStateActive : ""}`}>
+            embedded ? (
+              <div className={`${styles.gameMetaState} ${styles.gameMetaStateEmbedded} ${status.canAct ? styles.gameMetaStateActive : ""}`}>
                 {status.statusText}
               </div>
-            </div>
+            ) : (
+              <div className={styles.headerGameMeta} aria-label="Online table status">
+                <div className={styles.gameMetaTurn}>
+                  <span>{status.activePlayerName}</span>
+                  <strong>Turn {status.turnNumber}</strong>
+                </div>
+                <button type="button" className={styles.gameMetaExit} onClick={status.onExit}>Exit Game</button>
+                <div className={`${styles.gameMetaState} ${status.canAct ? styles.gameMetaStateActive : ""}`}>{status.statusText}</div>
+              </div>
+            )
           )}
 
           <button

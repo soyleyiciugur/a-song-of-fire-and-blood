@@ -6987,3 +6987,72 @@
   .boardGame .logSection > .sectionTitle { padding: 0 6px 4px; font-size: 0.5rem; }
   .boardGame .logEntry { gap: 3px; padding: 4px 5px; font-size: 0.42rem; }
 }
+
+/* v29 — viewport board refinements. */
+.boardGame{
+  --game-hand-height:clamp(190px,28dvh,292px);
+  --game-top-dock-height:clamp(62px,8.5dvh,78px);
+  grid-template-rows:minmax(0,1fr) var(--game-battle-line-height) minmax(0,1fr) var(--game-hand-height);
+}
+.boardGame .opponentHud{grid-row:1}
+.boardGame .playerHud{grid-row:3}
+.boardGame .opponentBoardSection{grid-row:1}
+.boardGame .playerBoardSection{grid-row:3}
+.boardGame .battleLine{grid-row:2}
+.boardGame .handSection{grid-row:4;grid-column:2;z-index:118;overflow:visible;border-top:1px solid rgba(212,175,55,.12);background:linear-gradient(180deg,rgba(8,6,9,.28),rgba(5,4,6,.72))}
+.boardGame .handSection .hand{overflow:visible}
+.boardGame .handSection .handFanTrack{justify-content:center;overflow:visible;transform:translateY(34px);padding-inline:clamp(6px,1vw,14px)}
+.boardGame .handCard{flex-basis:clamp(92px,8.4vw,146px);width:clamp(92px,8.4vw,146px)}
+.boardGame .handFanTrack>.handCard+.handCard{margin-left:clamp(-38px,-2.1vw,-22px)}
+.boardGame .fannedHand .handCard:hover:not(:disabled){transform:translateY(-28px) rotate(0deg) scale(1.035)}
+.boardGame .fannedHand .selectedHandCard{transform:translateY(-30px) rotate(0deg) scale(1.035)}
+
+/* Stats share the same vertical limits as their respective realm, never the hand shelf. */
+.boardGame .playerHud{height:100%;align-self:stretch}
+
+/* Keep every unit completely inside its realm with a small four-sided margin. */
+.boardGame .board{padding:clamp(6px,.65dvh,10px);align-items:stretch}
+.boardGame .boardPlacementCell,.boardGame .unitCardWrapper{min-height:0;height:100%;display:flex;align-items:center;justify-content:center;overflow:visible}
+.boardGame .unitCard{width:auto!important;height:auto!important;max-width:100%;max-height:100%;aspect-ratio:5/7}
+
+/* Opponent command + mirrored match controls occupy the full width above Table Whispers. */
+.boardGame .opponentCommandDock{
+  position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:calc(7px + (var(--game-rail-width) - 14px) * .48 + 6px);z-index:81;
+  width:calc((var(--game-rail-width) - 20px) * .52);min-width:0;height:var(--game-top-dock-height);margin:0;pointer-events:auto;
+}
+.boardGame .opponentCommandDock .commandMeterCompact{height:100%;box-sizing:border-box;display:grid;align-content:center}
+.boardGame .opponentStatusDock{
+  position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:7px;z-index:81;width:calc((var(--game-rail-width) - 20px) * .48);height:var(--game-top-dock-height);box-sizing:border-box;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) auto;gap:4px 6px;align-items:center;padding:6px 7px;
+  border:1px solid rgba(212,175,55,.22);background:linear-gradient(165deg,rgba(27,18,21,.97),rgba(9,8,10,.985) 72%);box-shadow:0 12px 28px #0008
+}
+.boardGame .opponentStatusIdentity{min-width:0;display:grid;gap:2px}.boardGame .opponentStatusIdentity span{overflow:hidden;color:#968571;font:7px/1 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}.boardGame .opponentStatusIdentity strong{color:#d5b86f;font:700 8px/1 var(--font-hotd),serif;text-transform:uppercase;white-space:nowrap}
+.boardGame .opponentStatusDock button{min-height:25px;padding:0 6px;border:1px solid rgba(157,111,65,.48);border-radius:4px;background:rgba(65,37,38,.55);color:#d8b37c;font:700 6px/1 var(--font-geist);letter-spacing:.06em;text-transform:uppercase}
+.boardGame .opponentStatusDock small{grid-column:1/-1;overflow:hidden;color:#9d816f;font:700 6px/1 var(--font-geist);letter-spacing:.05em;text-align:right;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+
+/* The chat starts below the mirrored top dock. */
+.boardGame.gameWithOnlineChat .locationBar{top:calc(var(--site-nav-height,0px) + 21px + var(--game-top-dock-height) + var(--game-chat-height))}
+.boardGame.gameWithOnlineChat .logSection{top:calc(var(--site-nav-height,0px) + 29px + var(--game-top-dock-height) + var(--game-chat-height) + var(--game-location-height))}
+
+/* Non-board card reveals live against the right edge of the board, just left of the utility rail. */
+.boardGame .opponentSpellReveal{left:auto;right:calc(var(--game-rail-width) + 10px);top:50%;transform:translateY(-50%)}
+@keyframes opponentSpellReveal{0%{opacity:0;transform:translate(18px,-50%) scale(.96)}10%,78%{opacity:1;transform:translate(0,-50%) scale(1)}100%{opacity:0;transform:translate(8px,-50%) scale(.98)}}
+
+/* Turn change replaces The Realms copy for three seconds, centered on the divider. */
+.boardGame .battleLine{position:relative}
+.boardGame .turnNotice{position:absolute;left:50%;top:50%;z-index:170;min-width:190px;padding:5px 14px;gap:1px;border-radius:6px;transform:translate(-50%,-50%);animation:greatGameTurnNotice 3s ease both}
+.boardGame .turnNotice span{font-size:6px}.boardGame .turnNotice strong{font-size:13px}
+@keyframes greatGameTurnNotice{0%{opacity:0;transform:translate(-50%,-50%) scale(.97)}9%,82%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.985)}}
+
+/* Inspected cards must eclipse every board/HUD layer. */
+.boardGame .selectionShade{z-index:990}
+.boardGame .selectedCardPreview,.boardGame .unitDetailOverlay{z-index:1000}
+
+/* Restore the square attack controls from the original board treatment. */
+.boardGame .unitActions button{border-radius:0!important}
+
+@media(max-width:1100px){
+  .boardGame{--game-hand-height:clamp(150px,25dvh,220px);--game-top-dock-height:58px}
+  .boardGame .handCard{flex-basis:clamp(76px,8vw,112px);width:clamp(76px,8vw,112px)}
+  .boardGame .handFanTrack>.handCard+.handCard{margin-left:clamp(-28px,-2vw,-16px)}
+}

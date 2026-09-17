@@ -128,3 +128,14 @@
   .panelEmbedded .messages{padding:5px}.panelEmbedded .messageBody p{font-size:8px;padding:4px 5px}.panelEmbedded .meta{font-size:6px}.panelEmbedded .meta time{font-size:5.5px}
   .panelEmbedded .composer{padding:4px 5px}.panelEmbedded .composer textarea{min-height:24px;max-height:44px;padding:4px 5px;font-size:7px}.panelEmbedded .composer button{width:24px;height:24px}.panelEmbedded .composer button svg{width:13px;height:13px}
 }
+
+/* v29 embedded table rail: top dock belongs to the board; chat keeps its own title and tiny turn state. */
+.panelEmbedded{top:calc(var(--site-nav-height,0px) + 13px + var(--game-top-dock-height,72px));height:var(--game-chat-height,clamp(210px,35dvh,320px))}
+.panelEmbedded .header{grid-template-columns:28px minmax(0,1fr) auto;min-height:50px;padding:6px 8px}
+.panelEmbedded .headerIcon{align-self:center;margin-top:0}
+.gameMetaStateEmbedded{align-self:center;justify-self:end;max-width:82px;padding:3px 6px;font-size:6px}
+@media(max-width:980px){
+  .panelEmbedded{top:calc(var(--site-nav-height,0px) + 11px + var(--game-top-dock-height,58px));height:var(--game-chat-height,clamp(170px,31dvh,230px))}
+  .panelEmbedded .header{grid-template-columns:21px minmax(0,1fr) auto;grid-template-areas:"icon heading meta";min-height:44px}
+  .panelEmbedded .headerGameMeta{display:none}.panelEmbedded .gameMetaStateEmbedded{grid-area:meta;max-width:58px;font-size:5px;padding:2px 4px}
+}
