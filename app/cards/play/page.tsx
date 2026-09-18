@@ -103,6 +103,38 @@ function onlineLogMessage(message: string, match: GreatGameOnlineMatchView | nul
     .replace(/\bPlayer 2\b/g, gamePlayerName("player2", match));
 }
 
+function isMobileGameViewport(): boolean {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(pointer: coarse)").matches &&
+    (window.matchMedia("(max-width: 980px)").matches ||
+      window.matchMedia("(max-height: 560px)").matches)
+  );
+}
+
+function requestMobileLandscape(): void {
+  if (!isMobileGameViewport()) return;
+
+  const orientation = window.screen.orientation as ScreenOrientation & {
+    lock?: (orientation: "landscape") => Promise<void>;
+  };
+
+  if (typeof orientation?.lock === "function") {
+    void orientation.lock("landscape").catch(() => {
+      // iOS Safari does not expose orientation locking. The entry curtain
+      // remains in place until the player turns the device themselves.
+    });
+  }
+}
+
+function releaseMobileLandscape(): void {
+  if (typeof window === "undefined") return;
+  const orientation = window.screen.orientation as ScreenOrientation & {
+    unlock?: () => void;
+  };
+  orientation?.unlock?.();
+}
+
 type PendingPlay =
   | {
       kind: "deploy";
@@ -1005,6 +1037,11 @@ export default function GreatGamePlayPage() {
 
   const gameRef = useRef<GameState | null>(null);
 
+  const [tableEntryVisible, setTableEntryVisible] = useState(false);
+  const [tableEntryWaitingForLandscape, setTableEntryWaitingForLandscape] = useState(false);
+  const tableEntryStartedAtRef = useRef(0);
+  const tableEntryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   useEffect(() => {
     gameRef.current = game;
   }, [game]);
@@ -1017,6 +1054,78 @@ export default function GreatGamePlayPage() {
     return () => {
       delete document.documentElement.dataset.greatGameSessionActive;
       window.dispatchEvent(new CustomEvent("great-game-session-change", { detail: { active: false } }));
+    };
+  }, [mode]);
+
+  useEffect(() => {
+    if (tableEntryTimerRef.current) {
+      clearTimeout(tableEntryTimerRef.current);
+      tableEntryTimerRef.current = null;
+    }
+
+    let orientationFrame: number | null = null;
+
+    const clearEntryState = () => {
+      setTableEntryVisible(false);
+      setTableEntryWaitingForLandscape(false);
+    };
+
+    if (mode !== "game") {
+      orientationFrame = window.requestAnimationFrame(clearEntryState);
+      if (mode === "menu") releaseMobileLandscape();
+      return () => {
+        if (orientationFrame !== null) window.cancelAnimationFrame(orientationFrame);
+      };
+    }
+
+    if (!isMobileGameViewport()) {
+      orientationFrame = window.requestAnimationFrame(clearEntryState);
+      return () => {
+        if (orientationFrame !== null) window.cancelAnimationFrame(orientationFrame);
+      };
+    }
+
+    const minimumCurtainMs = 1050;
+    tableEntryStartedAtRef.current = Date.now();
+    requestMobileLandscape();
+
+    const syncOrientation = () => {
+      const portrait = window.matchMedia("(orientation: portrait)").matches;
+      setTableEntryWaitingForLandscape(portrait);
+
+      if (tableEntryTimerRef.current) {
+        clearTimeout(tableEntryTimerRef.current);
+        tableEntryTimerRef.current = null;
+      }
+
+      if (portrait) {
+        // Keep the curtain over the table on iOS until the device is actually
+        // landscape, so the board never flashes in a cramped portrait layout.
+        setTableEntryVisible(true);
+        return;
+      }
+
+      setTableEntryVisible(true);
+      const elapsed = Date.now() - tableEntryStartedAtRef.current;
+      const delay = Math.max(160, minimumCurtainMs - elapsed);
+      tableEntryTimerRef.current = setTimeout(() => {
+        setTableEntryVisible(false);
+        tableEntryTimerRef.current = null;
+      }, delay);
+    };
+
+    orientationFrame = window.requestAnimationFrame(syncOrientation);
+    window.addEventListener("orientationchange", syncOrientation);
+    window.addEventListener("resize", syncOrientation);
+
+    return () => {
+      window.removeEventListener("orientationchange", syncOrientation);
+      window.removeEventListener("resize", syncOrientation);
+      if (orientationFrame !== null) window.cancelAnimationFrame(orientationFrame);
+      if (tableEntryTimerRef.current) {
+        clearTimeout(tableEntryTimerRef.current);
+        tableEntryTimerRef.current = null;
+      }
     };
   }, [mode]);
 
@@ -1403,9 +1512,6 @@ export default function GreatGamePlayPage() {
           drawQueue[0];
 
         const source =
-          document.querySelector<HTMLElement>(
-            `[data-visual-deck-anchor="${draw.playerId}"]`
-          ) ??
           document.querySelector<HTMLElement>(
             `[data-deck-anchor="${draw.playerId}"]`
           );
@@ -1812,6 +1918,14 @@ export default function GreatGamePlayPage() {
         ? collectNewDraws(previousState, match.state, match.playerId)
         : [];
 
+      if (mode !== "game" && isMobileGameViewport()) {
+        setTableEntryVisible(true);
+        setTableEntryWaitingForLandscape(
+          window.matchMedia("(orientation: portrait)").matches
+        );
+        requestMobileLandscape();
+      }
+
       gameRef.current = match.state;
       setGame(match.state);
       setMode("game");
@@ -2103,6 +2217,14 @@ export default function GreatGamePlayPage() {
   }, [onlineMatch?.id, supabase]);
 
   function startNewGame() {
+    if (isMobileGameViewport()) {
+      setTableEntryVisible(true);
+      setTableEntryWaitingForLandscape(
+        window.matchMedia("(orientation: portrait)").matches
+      );
+      requestMobileLandscape();
+    }
+
     setOnlineMatch(null);
     setGame(
       createGame()
@@ -5416,16 +5538,21 @@ export default function GreatGamePlayPage() {
     currentGame.activePlayerId !== viewPlayerId
   ) {
     return (
-      <OnlineTurnWaitScreen
-        match={onlineMatch}
-        eyebrow="Opening Hand"
-        title="The other player is choosing their hand"
-        text="Their mulligan is private. The table will open as soon as they are ready."
-        onLeave={() => setExitConfirm(true)}
-        exitConfirm={exitConfirm}
-        onCancelExit={() => setExitConfirm(false)}
-        onConfirmExit={() => void leaveOnlineMatch()}
-      />
+      <>
+        <OnlineTurnWaitScreen
+          match={onlineMatch}
+          eyebrow="Opening Hand"
+          title="The other player is choosing their hand"
+          text="Their mulligan is private. The table will open as soon as they are ready."
+          onLeave={() => setExitConfirm(true)}
+          exitConfirm={exitConfirm}
+          onCancelExit={() => setExitConfirm(false)}
+          onConfirmExit={() => void leaveOnlineMatch()}
+        />
+        {tableEntryVisible && (
+          <TableEntryOverlay waitingForLandscape={tableEntryWaitingForLandscape} />
+        )}
+      </>
     );
   }
 
@@ -5436,38 +5563,43 @@ export default function GreatGamePlayPage() {
       "mulligan-player2"
   ) {
     return (
-      <MulliganScreen
-        game={currentGame}
-        playerLabel={gamePlayerName(currentGame.activePlayerId, onlineMatch)}
-        selectedIds={
-          mulliganSelected
-        }
-        onToggle={
-          toggleMulliganCard
-        }
-        onConfirm={
-          confirmMulligan
-        }
-        onExit={() =>
-          setExitConfirm(
-            true
-          )
-        }
-        error={error}
-        exitConfirm={
-          exitConfirm
-        }
-        onCancelExit={() =>
-          setExitConfirm(
-            false
-          )
-        }
-        onConfirmExit={
-          onlineMatch
-            ? () => void leaveOnlineMatch()
-            : exitToMenu
-        }
-      />
+      <>
+        <MulliganScreen
+          game={currentGame}
+          playerLabel={gamePlayerName(currentGame.activePlayerId, onlineMatch)}
+          selectedIds={
+            mulliganSelected
+          }
+          onToggle={
+            toggleMulliganCard
+          }
+          onConfirm={
+            confirmMulligan
+          }
+          onExit={() =>
+            setExitConfirm(
+              true
+            )
+          }
+          error={error}
+          exitConfirm={
+            exitConfirm
+          }
+          onCancelExit={() =>
+            setExitConfirm(
+              false
+            )
+          }
+          onConfirmExit={
+            onlineMatch
+              ? () => void leaveOnlineMatch()
+              : exitToMenu
+          }
+        />
+        {tableEntryVisible && (
+          <TableEntryOverlay waitingForLandscape={tableEntryWaitingForLandscape} />
+        )}
+      </>
     );
   }
 
@@ -5564,6 +5696,10 @@ export default function GreatGamePlayPage() {
         }
         aria-hidden
       />
+
+      {tableEntryVisible && (
+        <TableEntryOverlay waitingForLandscape={tableEntryWaitingForLandscape} />
+      )}
 
       {drawFlight && (() => {
         const drawnCard =
@@ -5866,6 +6002,7 @@ export default function GreatGamePlayPage() {
             <strong>Turn {activePlayer.turnsTaken}</strong>
           </div>
           <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
+          <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)} is playing</small>
         </section>
       )}
 
@@ -6156,31 +6293,6 @@ export default function GreatGamePlayPage() {
         showCommandMeter={false}
         showEndTurn={false}
       />
-      <div
-        className={styles.playerDeckWell}
-        data-selection-ui="true"
-        aria-label={`${viewPlayer.deck.length} cards remaining in your deck`}
-      >
-        <div
-          className={`${styles.deckStack} ${
-            viewPlayer.deck.length === 0
-              ? styles.deckStackEmpty
-              : ""
-          }`}
-          data-visual-deck-anchor={viewPlayerId}
-          aria-hidden="true"
-        >
-          <span className={styles.deckCardBack}>
-            <svg viewBox="0 0 100 140" focusable="false">
-              <rect className={styles.deckBackFrame} x="7" y="7" width="86" height="126" rx="4" />
-              <path className={styles.deckBackOrnament} d="M50 18 78 42 72 98 50 122 28 98 22 42Z" />
-              <path className={styles.deckBackOrnament} d="M50 31 66 49 62 91 50 108 38 91 34 49Z" />
-              <circle className={styles.deckBackSeal} cx="50" cy="70" r="12" />
-              <path className={styles.deckBackMark} d="M50 58 55 67 65 70 55 73 50 82 45 73 35 70 45 67Z" />
-            </svg>
-          </span>
-        </div>
-      </div>
 
       {attackDrag && (
         <AttackDragOverlay
@@ -6483,7 +6595,7 @@ export default function GreatGamePlayPage() {
               ? "Sending move…"
               : onlineCanAct
                 ? "Your turn"
-                : `${onlineOpponentName(onlineMatch)}'s turn`,
+                : `${onlineOpponentName(onlineMatch)} is playing`,
             canAct: onlineCanAct,
             onExit: () => setExitConfirm(true),
           }}
@@ -6512,6 +6624,52 @@ export default function GreatGamePlayPage() {
         />
       )}
     </main>
+  );
+}
+
+function TableEntryOverlay({
+  waitingForLandscape,
+}: {
+  waitingForLandscape: boolean;
+}) {
+  return (
+    <div
+      className={`${styles.tableEntryOverlay} ${
+        waitingForLandscape ? styles.tableEntryAwaitingLandscape : ""
+      }`}
+      role="status"
+      aria-live="polite"
+      aria-label={
+        waitingForLandscape
+          ? "Turn your device left to play The Great Game in landscape"
+          : "Preparing The Great Game table"
+      }
+      data-selection-ui="true"
+    >
+      <div className={styles.tableEntryVignette} aria-hidden="true" />
+      <div className={styles.tableEntryContent}>
+        <div className={styles.tableEntryDevice} aria-hidden="true">
+          <span className={styles.tableEntryDeviceNotch} />
+          <span className={styles.tableEntryDeviceBoard}>
+            <i />
+            <i />
+            <i />
+          </span>
+        </div>
+        <span className={styles.tableEntryEyebrow}>The Great Game</span>
+        <strong>
+          {waitingForLandscape ? "Turn the table" : "Taking your seat"}
+        </strong>
+        <p>
+          {waitingForLandscape
+            ? "Rotate your device to the left. The table opens in landscape."
+            : "Preparing the board and settling the realm."}
+        </p>
+        <span className={styles.tableEntryProgress} aria-hidden="true">
+          <i />
+        </span>
+      </div>
+    </div>
   );
 }
 

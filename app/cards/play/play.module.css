@@ -7023,7 +7023,7 @@
 .boardGame .opponentCommandDock .commandMeterCompact{height:100%;box-sizing:border-box;display:grid;align-content:center}
 .boardGame .opponentStatusDock{
   position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:7px;z-index:81;width:calc((var(--game-rail-width) - 20px) * .48);height:var(--game-top-dock-height);box-sizing:border-box;
-  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr);gap:4px 6px;align-items:center;padding:6px 7px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) auto;gap:4px 6px;align-items:center;padding:6px 7px;
   border:1px solid rgba(212,175,55,.22);background:linear-gradient(165deg,rgba(27,18,21,.97),rgba(9,8,10,.985) 72%);box-shadow:0 12px 28px #0008
 }
 .boardGame .opponentStatusIdentity{min-width:0;display:grid;gap:2px}.boardGame .opponentStatusIdentity span{overflow:hidden;color:#968571;font:7px/1 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}.boardGame .opponentStatusIdentity strong{color:#d5b86f;font:700 8px/1 var(--font-hotd),serif;text-transform:uppercase;white-space:nowrap}
@@ -7057,249 +7057,440 @@
   .boardGame .handFanTrack>.handCard+.handCard{margin-left:clamp(-28px,-2vw,-16px)}
 }
 
-/* v30 — annotated viewport corrections. */
-.boardGame{
-  --game-chat-height:clamp(340px,44dvh,420px);
-  --game-turn-control-width:clamp(96px,7.2vw,124px);
-  --game-half-battle-line:16px;
+/* v30 — mobile table entry + true landscape arena. */
+.tableEntryOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding:
+    max(18px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    max(18px, env(safe-area-inset-bottom))
+    max(18px, env(safe-area-inset-left));
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(113, 66, 54, 0.24), transparent 34%),
+    linear-gradient(155deg, #1a1116 0%, #0c090c 54%, #070608 100%);
+  color: #eadbc4;
+  font-family: var(--font-geist), sans-serif;
+  isolation: isolate;
 }
 
-/* The realm divider belongs to the board only. The left HUDs meet at the same
-   midpoint with a thin seam instead of reserving a 32px empty strip. */
-.boardGame .battleLine{
-  grid-column:2;
-}
-.boardGame .opponentHud{
-  height:calc(100% + var(--game-half-battle-line));
-  border-bottom:1px solid rgba(212,175,55,.16);
-}
-.boardGame .playerHud{
-  height:calc(100% + var(--game-half-battle-line));
-  margin-top:calc(0px - var(--game-half-battle-line));
-  border-top:1px solid rgba(212,175,55,.16);
+.tableEntryVignette {
+  position: absolute;
+  inset: -15%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(212, 175, 55, 0.06) 49.8%, rgba(212, 175, 55, 0.06) 50.2%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(212, 175, 55, 0.035) 49.8%, rgba(212, 175, 55, 0.035) 50.2%, transparent 52%);
+  transform: rotate(-10deg) scale(1.15);
+  opacity: 0.72;
 }
 
-/* v29 made board cards auto-sized inside percentage-height wrappers, which can
-   collapse their intrinsic width to almost nothing. Make the card width the
-   sizing source again, then let the 5:7 aspect ratio determine its height. */
-.boardGame .board{
-  align-items:center;
-  grid-auto-rows:minmax(0,1fr);
-}
-.boardGame .boardPlacementCell,
-.boardGame .unitCardWrapper{
-  min-width:0;
-  min-height:0;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:visible;
-}
-.boardGame .unitCard{
-  flex:none;
-  width:100%!important;
-  height:auto!important;
-  max-width:100%;
-  max-height:100%;
-  aspect-ratio:5/7;
+.tableEntryContent {
+  display: grid;
+  justify-items: center;
+  width: min(360px, 88vw);
+  text-align: center;
 }
 
-/* Mirror the lower Command / End Turn split exactly in the upper rail. */
-.boardGame .playerCommandDock{
-  grid-template-columns:minmax(0,1fr) var(--game-turn-control-width);
-}
-.boardGame .opponentStatusDock{
-  width:var(--game-turn-control-width);
-}
-.boardGame .opponentCommandDock{
-  right:calc(13px + var(--game-turn-control-width));
-  width:calc(var(--game-rail-width) - 20px - var(--game-turn-control-width));
-}
-.boardGame .opponentCommandDock .commandMeterHeading span{
-  font-size:.48rem;
-}
-.boardGame .opponentCommandDock .commandMeterHeading strong{
-  font-size:.72rem;
-}
-.boardGame .opponentStatusIdentity span{
-  font-size:7.5px;
-}
-.boardGame .opponentStatusIdentity strong{
-  font-size:9px;
-}
-.boardGame .opponentStatusDock button{
-  font-size:7px;
-}
-.boardGame .opponentStatusDock small{
-  font-size:6.5px;
+.tableEntryDevice {
+  position: relative;
+  width: 70px;
+  height: 126px;
+  margin-bottom: 26px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(210, 169, 103, 0.64);
+  border-radius: 14px;
+  background: linear-gradient(155deg, rgba(47, 31, 36, 0.96), rgba(13, 10, 13, 0.98));
+  box-shadow:
+    0 22px 52px rgba(0, 0, 0, 0.56),
+    inset 0 0 0 3px rgba(5, 4, 5, 0.84),
+    inset 0 1px rgba(255, 255, 255, 0.055);
+  transform-origin: 50% 50%;
+  animation: greatGameTurnDevice 940ms cubic-bezier(.2, .78, .2, 1) forwards;
 }
 
-/* A visible deck occupies the otherwise empty lower-left shelf. Draw flights
-   prefer this element as their source, so cards now visibly leave the deck. */
-.boardGame .playerDeckWell{
-  grid-column:1;
-  grid-row:4;
-  z-index:119;
-  min-width:0;
-  min-height:0;
-  display:grid;
-  place-items:start start;
-  padding:clamp(10px,1.35dvh,18px) 0 0;
-  box-sizing:border-box;
-  overflow:visible;
-  border-top:1px solid rgba(212,175,55,.12);
-  background:linear-gradient(180deg,rgba(8,6,9,.24),rgba(5,4,6,.7));
+.tableEntryDeviceNotch {
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  z-index: 2;
+  width: 24px;
+  height: 5px;
+  border-radius: 0 0 5px 5px;
+  background: #070608;
+  transform: translateX(-50%);
 }
-.boardGame .deckStack{
-  position:relative;
-  width:min(144%,152px);
-  aspect-ratio:5/7;
-  filter:drop-shadow(0 12px 16px rgba(0,0,0,.52));
-  transition:opacity .18s ease;
-}
-.boardGame .deckStack::before,
-.boardGame .deckStack::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border:1px solid rgba(176,133,72,.3);
-  background:#120d11;
-}
-.boardGame .deckStack::before{transform:translate(5px,5px);opacity:.45}
-.boardGame .deckStack::after{transform:translate(2px,2px);opacity:.72}
-.boardGame .deckStackEmpty{opacity:.35}
-.boardGame .deckCardBack{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  display:block;
-  overflow:hidden;
-  border:1px solid rgba(212,175,55,.52);
-  background:radial-gradient(circle at 50% 42%,rgba(116,39,48,.28),transparent 48%),linear-gradient(150deg,#201319,#0b090c 72%);
-  box-shadow:inset 0 0 0 3px rgba(212,175,55,.035),inset 0 0 22px rgba(0,0,0,.62);
-}
-.boardGame .deckCardBack svg{display:block;width:100%;height:100%}
-.boardGame .deckBackFrame{fill:none;stroke:rgba(209,174,100,.44);stroke-width:1.3}
-.boardGame .deckBackOrnament{fill:none;stroke:rgba(137,91,62,.62);stroke-width:1.15}
-.boardGame .deckBackSeal{fill:rgba(75,30,37,.9);stroke:rgba(212,175,55,.58);stroke-width:1.4}
-.boardGame .deckBackMark{fill:rgba(212,175,55,.58)}
 
-@media(max-width:1100px){
-  .boardGame{
-    --game-chat-height:clamp(280px,40dvh,360px);
-    --game-turn-control-width:clamp(72px,8.4vw,92px);
-    --game-half-battle-line:14px;
+.tableEntryDeviceBoard {
+  position: absolute;
+  inset: 9px 7px;
+  display: grid;
+  grid-template-rows: 1fr 1px 1fr;
+  gap: 5px;
+  padding: 8px 6px;
+  box-sizing: border-box;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  background:
+    linear-gradient(180deg, rgba(100, 49, 52, 0.18), rgba(14, 11, 14, 0.1)),
+    #0b090c;
+}
+
+.tableEntryDeviceBoard::before,
+.tableEntryDeviceBoard::after {
+  content: "";
+  display: block;
+  border: 1px solid rgba(183, 139, 79, 0.18);
+  background:
+    linear-gradient(90deg,
+      transparent 0 8%, rgba(183, 139, 79, 0.16) 8% 20%,
+      transparent 20% 28%, rgba(183, 139, 79, 0.12) 28% 40%,
+      transparent 40% 48%, rgba(183, 139, 79, 0.16) 48% 60%,
+      transparent 60% 68%, rgba(183, 139, 79, 0.12) 68% 80%,
+      transparent 80% 100%);
+}
+
+.tableEntryDeviceBoard > i {
+  display: block;
+  grid-row: 2;
+  width: 100%;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.32);
+}
+.tableEntryDeviceBoard > i:nth-child(2),
+.tableEntryDeviceBoard > i:nth-child(3) { display: none; }
+
+.tableEntryEyebrow {
+  margin-bottom: 7px;
+  color: #9e8060;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.tableEntryContent > strong {
+  color: #ead7b7;
+  font: 600 clamp(22px, 6vw, 31px)/1.05 var(--font-hotd), serif;
+  letter-spacing: 0.01em;
+}
+
+.tableEntryContent > p {
+  max-width: 300px;
+  margin: 9px 0 18px;
+  color: rgba(231, 215, 193, 0.58);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.tableEntryProgress {
+  position: relative;
+  display: block;
+  width: min(190px, 58vw);
+  height: 1px;
+  overflow: hidden;
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.tableEntryProgress > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 48%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.78), transparent);
+  animation: greatGameEntryProgress 900ms ease-in-out infinite;
+}
+
+.tableEntryAwaitingLandscape .tableEntryDevice {
+  animation-duration: 820ms;
+}
+
+.tableEntryAwaitingLandscape .tableEntryProgress > i {
+  animation-duration: 1.25s;
+}
+
+@keyframes greatGameTurnDevice {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.88);
   }
-  .boardGame .unitCard{width:100%!important;max-width:100%}
-  .boardGame .deckStack{width:min(144%,132px)}
-}
-
-@media(max-width:760px){
-  .boardGame{
-    --game-chat-height:clamp(220px,38dvh,300px);
-    --game-turn-control-width:clamp(54px,13vw,70px);
-    --game-half-battle-line:12px;
+  18% { opacity: 1; }
+  100% {
+    opacity: 1;
+    transform: rotate(-90deg) scale(1);
   }
-  .boardGame .unitCard{width:100%!important;max-width:100%}
-  .boardGame .deckStack{width:min(138%,108px)}
-  .boardGame .opponentStatusIdentity span{font-size:6px}
-  .boardGame .opponentStatusIdentity strong{font-size:7px}
-  .boardGame .opponentStatusDock button{font-size:5.5px;padding-inline:3px}
-  .boardGame .opponentStatusDock small{font-size:5px}
 }
 
-
-/* v31 — board scale, deck shelf, rail proportions and turn feedback. */
-.boardGame .opponentBoardSection .board{
-  padding-top:clamp(6px,.65dvh,10px);
+@keyframes greatGameEntryProgress {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(320%); }
 }
 
-/* Six equal board slots fill the realm. Each card uses the full slot width;
-   5:7 aspect ratio keeps the artwork proportional while exactly six cards fit. */
-.boardGame .board{
-  grid-template-columns:repeat(6,minmax(0,1fr));
-}
-.boardGame .boardPlacementCell,
-.boardGame .unitCardWrapper{
-  width:100%;
-  height:100%;
-  min-width:0;
-  min-height:0;
-}
-.boardGame .unitCard{
-  width:100%!important;
-  height:auto!important;
-  max-width:100%;
-  max-height:100%;
-  aspect-ratio:5/7;
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 560px) {
+  .boardGame {
+    --game-stats-width: clamp(60px, 8.2vw, 76px);
+    --game-rail-width: clamp(158px, 21vw, 190px);
+    --game-chat-height: 0px;
+    --game-location-height: clamp(46px, 12dvh, 54px);
+    --game-command-height: clamp(52px, 14dvh, 62px);
+    --game-battle-line-height: 20px;
+    --game-hand-height: clamp(108px, 31dvh, 132px);
+    --game-top-dock-height: clamp(48px, 13dvh, 56px);
+
+    width: 100vw;
+    height: calc(100dvh - var(--site-nav-height, 0px));
+    padding:
+      env(safe-area-inset-top)
+      env(safe-area-inset-right)
+      env(safe-area-inset-bottom)
+      env(safe-area-inset-left);
+    grid-template-columns:
+      var(--game-stats-width)
+      minmax(0, 1fr)
+      var(--game-rail-width);
+    grid-template-rows:
+      minmax(0, 1fr)
+      var(--game-battle-line-height)
+      minmax(0, 1fr)
+      var(--game-hand-height);
+  }
+
+  .boardGame .opponentHud,
+  .boardGame .playerHud,
+  .boardGame.gameWithOnlineChat .activePlayerHeader {
+    padding: 2px;
+    gap: 2px;
+    grid-template-rows: minmax(42px, .9fr) minmax(0, 4fr);
+  }
+
+  .boardGame .standingBox {
+    padding: 2px 1px;
+  }
+
+  .boardGame .standingBox strong {
+    font-size: clamp(.78rem, 3.3dvh, .94rem);
+  }
+
+  .boardGame .standingBox span,
+  .boardGame .standingBox small {
+    font-size: clamp(.32rem, 1.45dvh, .4rem);
+  }
+
+  .boardGame .playerStats { gap: 2px; }
+  .boardGame .hudStat { padding: 1px 2px; }
+  .boardGame .hudStat span { font-size: clamp(.31rem, 1.35dvh, .38rem); }
+  .boardGame .hudStat strong { font-size: clamp(.56rem, 2.2dvh, .68rem); }
+
+  .boardGame .board {
+    padding: 4px;
+    gap: clamp(3px, .55vw, 6px);
+    align-items: stretch;
+  }
+
+  .boardGame .opponentBoardSection .board {
+    padding-top: 4px;
+  }
+
+  .boardGame .boardPlacementCell,
+  .boardGame .unitCardWrapper {
+    height: 100%;
+    align-self: stretch;
+  }
+
+  .boardGame .unitCard {
+    width: auto !important;
+    height: 100% !important;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .boardGame .battleLine {
+    padding-inline: 4px;
+    font-size: .4rem;
+  }
+
+  .boardGame .turnNotice {
+    min-width: 170px;
+    padding: 4px 12px;
+  }
+
+  .boardGame .turnNotice strong { font-size: 12px; }
+
+  .boardGame .handSection {
+    border-top-color: rgba(212, 175, 55, .1);
+  }
+
+  .boardGame .handSection .handFanTrack {
+    padding: 0 4px 2px;
+    transform: translateY(13px);
+  }
+
+  .boardGame .handCard {
+    flex-basis: clamp(68px, 8.8vw, 82px);
+    width: clamp(68px, 8.8vw, 82px);
+  }
+
+  .boardGame .handFanTrack > .handCard + .handCard {
+    margin-left: clamp(-26px, -3vw, -20px);
+  }
+
+  .boardGame .fannedHand .handCard:hover:not(:disabled),
+  .boardGame .fannedHand .selectedHandCard {
+    transform: translateY(-13px) rotate(0deg) scale(1.025);
+  }
+
+  .boardGame .opponentCommandDock {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + 4px);
+    right: calc(env(safe-area-inset-right) + 4px + (var(--game-rail-width) - 8px) * .48 + 4px);
+    width: calc((var(--game-rail-width) - 12px) * .52);
+    height: var(--game-top-dock-height);
+  }
+
+  .boardGame .opponentStatusDock {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + 4px);
+    right: calc(env(safe-area-inset-right) + 4px);
+    width: calc((var(--game-rail-width) - 12px) * .48);
+    height: var(--game-top-dock-height);
+    grid-template-rows: minmax(0, 1fr);
+    padding: 4px;
+    gap: 3px;
+  }
+
+  .boardGame .opponentStatusDock small { display: none; }
+  .boardGame .opponentStatusIdentity span { font-size: 5.5px; }
+  .boardGame .opponentStatusIdentity strong { font-size: 6.5px; }
+  .boardGame .opponentStatusDock button { min-height: 22px; padding-inline: 4px; font-size: 5.5px; }
+
+  .boardGame .opponentCommandDock .commandMeterCompact { padding: 3px 4px; }
+  .boardGame .opponentCommandDock .commandMeterHeading { margin-bottom: 2px; }
+  .boardGame .opponentCommandDock .commandMeterHeading span { font-size: 5.5px; }
+  .boardGame .opponentCommandDock .commandMeterHeading strong { font-size: 7px; }
+  .boardGame .opponentCommandDock .commandPip { max-width: 13px; }
+
+  .boardGame .localMatchStatus {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + 4px);
+    right: calc(env(safe-area-inset-right) + 4px);
+    width: calc(var(--game-rail-width) - 8px);
+    min-height: var(--game-top-dock-height);
+    padding: 4px 5px;
+  }
+
+  .boardGame .locationBar,
+  .boardGame .logSection {
+    right: calc(env(safe-area-inset-right) + 4px);
+    width: calc(var(--game-rail-width) - 8px);
+  }
+
+  .boardGame.gameWithOnlineChat .locationBar {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + var(--game-top-dock-height) + 9px);
+  }
+
+  .boardGame.gameWithOnlineChat .logSection {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + var(--game-top-dock-height) + var(--game-location-height) + 14px);
+  }
+
+  .boardGame:not(.gameWithOnlineChat) .locationBar {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + var(--game-top-dock-height) + 9px);
+  }
+
+  .boardGame:not(.gameWithOnlineChat) .logSection {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + var(--game-top-dock-height) + var(--game-location-height) + 14px);
+  }
+
+  .boardGame .locationBar {
+    height: var(--game-location-height);
+    padding: 4px 6px;
+    gap: 2px;
+  }
+
+  .boardGame .locationLabel { font-size: 5px; }
+  .boardGame .locationBar strong { font-size: 7px; }
+  .boardGame .locationBar small {
+    font-size: 5.5px;
+    -webkit-line-clamp: 1;
+  }
+
+  .boardGame .logSection {
+    bottom: calc(env(safe-area-inset-bottom) + var(--game-command-height) + 8px);
+    padding-top: 4px;
+  }
+
+  .boardGame .logSection > .sectionTitle {
+    padding: 0 5px 3px;
+    font-size: 6px;
+  }
+
+  .boardGame .logEntry {
+    gap: 3px;
+    padding: 3px 4px;
+    font-size: 5.5px;
+  }
+
+  .boardGame .logEntry > span { flex-basis: 1.2rem; }
+
+  .boardGame .playerCommandDock {
+    right: calc(env(safe-area-inset-right) + 4px);
+    bottom: calc(env(safe-area-inset-bottom) + 4px);
+    width: calc(var(--game-rail-width) - 8px);
+    height: var(--game-command-height);
+    grid-template-columns: minmax(0, 1fr) clamp(52px, 7.5vw, 64px);
+    gap: 3px;
+    padding: 3px;
+  }
+
+  .boardGame .playerCommandDock .commandMeterCompact { padding: 3px 4px; }
+  .boardGame .playerCommandDock .commandMeterHeading { margin-bottom: 2px; }
+  .boardGame .playerCommandDock .commandMeterHeading span { font-size: 5px; }
+  .boardGame .playerCommandDock .commandMeterHeading strong { font-size: 6.5px; }
+  .boardGame .playerCommandDock .commandPip { max-width: 12px; }
+  .boardGame .commandDockEndTurnButton { padding: 3px; font-size: 5.5px; }
+
+  .boardGame > .error,
+  .boardGame > .prompt {
+    left: calc(env(safe-area-inset-left) + var(--game-stats-width) + 5px);
+    right: calc(env(safe-area-inset-right) + var(--game-rail-width) + 5px);
+    padding: 4px 6px;
+    font-size: 7px;
+  }
+
+  .boardGame > .error { top: calc(env(safe-area-inset-top) + 4px); }
+  .boardGame > .prompt { top: calc(env(safe-area-inset-top) + 31px); }
+
+  .boardGame .opponentSpellReveal {
+    right: calc(env(safe-area-inset-right) + var(--game-rail-width) + 7px);
+  }
+
+  .boardGame .selectedCardPreview,
+  .boardGame .unitDetailOverlay {
+    max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 12px);
+  }
+
+  .boardGame .selectedCardInner {
+    width: min(230px, 30vw);
+  }
+
+  .boardGame .unitDetailOverlay {
+    width: min(650px, calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 24px));
+    max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 14px);
+    grid-template-columns: minmax(190px, 240px) minmax(220px, 1fr);
+  }
+
+  .boardGame .unitDetailCard {
+    max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 14px);
+  }
 }
 
-/* Visual deck is pinned to the far left and doubled from the v30 footprint,
-   growing to the right and downward without recentering in the stat column. */
-.boardGame .playerDeckWell{
-  justify-items:start;
-  align-items:start;
-  padding-left:0;
-  padding-right:0;
-  overflow:visible;
-}
-.boardGame .deckStack{
-  width:min(144%,152px);
-  transform-origin:top left;
-}
-
-/* End Turn keeps the hard-edged board-control language. */
-.boardGame .commandDockEndTurnButton{
-  border-radius:0!important;
-}
-
-/* With the redundant playing-status line removed, the opponent status dock is
-   one centered row, still exactly symmetric with the End Turn side below. */
-.boardGame .opponentStatusDock{
-  grid-template-rows:minmax(0,1fr);
-}
-
-/* Standing result markers need to read at a glance from the narrow HUD rail. */
-.boardGame .standingBox .conflictValuePreview{
-  font-size:clamp(2.55rem,5.1dvh,3.45rem)!important;
-}
-.boardGame .standingBox .conflictValueLethal{
-  font-size:clamp(2.95rem,5.8dvh,3.9rem)!important;
-}
-
-/* The turn announcement is a true screen-center overlay: ~1.5x wider and
-   ~4x taller than the compact divider badge, while retaining the 3s fade. */
-.boardGame .turnNotice{
-  position:fixed;
-  left:50vw;
-  top:50dvh;
-  z-index:970;
-  width:min(320px,58vw);
-  min-width:0;
-  min-height:112px;
-  box-sizing:border-box;
-  display:grid;
-  place-content:center;
-  justify-items:center;
-  gap:7px;
-  padding:18px 24px;
-  border-radius:6px;
-  transform:translate(-50%,-50%);
-}
-.boardGame .turnNotice span{font-size:7px}
-.boardGame .turnNotice strong{font-size:clamp(19px,2.2vw,26px);text-align:center}
-
-@media(max-width:1100px){
-  .boardGame .deckStack{width:min(144%,132px)}
-  .boardGame .turnNotice{width:min(300px,62vw);min-height:104px;padding:16px 20px}
-}
-
-@media(max-width:760px){
-  .boardGame .deckStack{width:min(138%,108px)}
-  .boardGame .standingBox .conflictValuePreview{font-size:clamp(1.85rem,5dvh,2.6rem)!important}
-  .boardGame .standingBox .conflictValueLethal{font-size:clamp(2.2rem,5.6dvh,3rem)!important}
-  .boardGame .turnNotice{width:min(270px,68vw);min-height:94px;padding:14px 16px}
-  .boardGame .turnNotice strong{font-size:18px}
+@media (prefers-reduced-motion: reduce) {
+  .tableEntryDevice {
+    animation: none;
+    opacity: 1;
+    transform: rotate(-90deg);
+  }
+  .tableEntryProgress > i { animation: none; width: 100%; opacity: .6; }
 }
