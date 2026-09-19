@@ -1,5 +1,211 @@
 [
   {
+    "id": "gallery-baelenys-blackfyre-small-council",
+    "src": "/images/gallery/baelenys-blackfyre-small-council.jpeg",
+    "caption": "Baelenys & Blackfyre.",
+    "characterIds": ["baelenys-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "the-children-pay",
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-gaelor-brant-oldtown-beforemath",
+    "src": "/images/gallery/gaelor-brant-oldtown-beforemath.jpeg",
+    "caption": "Prince Gaelor Targaryen and Ser Brant Costayne in Oldtown.",
+    "characterIds": ["gaelor-targaryen", "brant-costayne", "saathos-maris"],
+    "houseIds": ["targaryen", "hightower"],
+    "dragonIds": [],
+    "chapterId": "fathers-and-their-sins",
+    "worldDate": {
+      "day": 5,
+      "moon": 5,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "raven"
+  },
+  {
+    "id": "gallery-blackfyre-gaelordan-alininca-jace",
+    "src": "/videos/reels/blackfyre-gaelordan-alininca-jace.mp4",
+    "caption": "common jaYce W",
+    "characterIds": ["jacaelon-targaryen", "baelenys-targaryen", "gaelor-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "the-children-pay",
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-gaelor-benden-massacre-disinda-bise-beklemeyin",
+    "src": "/videos/reels/gaelor-benden-massacre-disinda-bise-beklemeyin.mp4",
+    "caption": "sabahleyin bi massacre yaparım. saat yidide bi massacre yaparım. ondan sonra bi yatarım, yidi buçuk ajansını dinlerim. yidi buçuk ajansı bittikten sonra bi massacre yaparım. ",
+    "characterIds": ["gaelor-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-gaelor-blackfyrei-kaybedince-bizziko",
+    "src": "/videos/reels/gaelor-blackfyrei-kaybedince-bizziko.mp4",
+    "caption": "GOODBYE LIVERPOOL GOODBYE",
+    "characterIds": ["gaelor-targaryen", "baelenys-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "the-children-pay",
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-gaelor-masum-dolu-bir-yere-girince-saathos-panik-oldu",
+    "src": "/videos/reels/gaelor-masum-dolu-bir-yere-girince-saathos-panik-oldu.mp4",
+    "caption": "başımız belaya girecek",
+    "characterIds": ["saathos-maris", "gaelor-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-gaelord-oldtowni-anlatiyor",
+    "src": "/videos/reels/gaelord-oldtowni-anlatiyor.mp4",
+    "caption": "gaelor oldtowndan dönünce olanları anlatıyor",
+    "characterIds": ["gaelor-targaryen", "saathos-maris", "brant-costayne"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "fathers-and-their-sins",
+    "worldDate": {
+      "day": 5,
+      "moon": 5,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-gosteri-cadirina-city-watch-girince-izleyicilerin-panik",
+    "src": "/videos/reels/gosteri-cadirina-city-watch-girince-izleyicilerin-panik.mp4",
+    "caption": "dışarıda tank görüyorum faruk hayırdır bi kutlama mı var",
+    "characterIds": [],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": "the-mummers-blood",
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-hrrm-foreshadowing-tehdidi",
+    "src": "/videos/reels/hrrm-foreshadowing-tehdidi.mp4",
+    "caption": "bugünlük bu kadar yeter der chapterı kaparız mesela",
+    "characterIds": ["hrrm", "edmyn-uller"],
+    "houseIds": [],
+    "dragonIds": [],
+    "chapterId": "the-children-pay",
+    "worldDate": {
+      "day": 14,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-leo-duyduklarini-anlatirsa-visenor",
+    "src": "/videos/reels/leo-duyduklarini-anlatirsa-visenor.mp4",
+    "caption": "\"Your father has shown himself a trustworthy friend. An honorable man.\" HE DOESN'T KNOW 🤣🤣",
+    "characterIds": ["visenor-targaryen", "leo-tyrell", "renrose-tyrell"],
+    "houseIds": ["targaryen", "tyrell"],
+    "dragonIds": [],
+    "chapterId": "until-the-last-breath",
+    "worldDate": {
+      "day": 16,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-muhalif-jacein-heir-olunca-yuzsuzluk",
+    "src": "/videos/reels/muhalif-jacein-heir-olunca-yuzsuzluk.mp4",
+    "caption": "birden ogün'ün rüyasındaki prens binim oldu nedense",
+    "characterIds": ["jacaelon-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": "until-the-last-breath",
+    "worldDate": {
+      "day": 15,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-rhaellaya-salute",
+    "src": "/videos/reels/rhaellaya-salute.mp4",
+    "caption": "ATATARG İZİNDEYİZ",
+    "characterIds": ["rhaella-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": [],
+    "chapterId": null,
+    "worldDate": null,
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
+    "id": "gallery-van-dijk-her-seyi-anladi",
+    "src": "/videos/reels/van-dijk-her-seyi-anladi.mp4",
+    "caption": "gizlice renrose'u dinlerken leo baba",
+    "characterIds": ["leo-tyrell", "renrose-tyrell", "liana-tyrell"],
+    "houseIds": ["tyrell"],
+    "dragonIds": [],
+    "chapterId": "until-the-last-breath",
+    "worldDate": {
+      "day": 16,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-19",
+    "category": "fleabottom"
+  },
+  {
     "id": "gallery-aenys-ii-bu-adami-ruyanizda",
     "src": "/images/gallery/aenys-ii-bu-adami-ruyanizda.webp",
     "caption": "Cok korkuyorum bu sahte demi. Ben daha 9 yaşındayım cok korkuyorum sahta demi bu biri bana acıklasın",
@@ -4089,18 +4295,6 @@
     },
     "uploadedAt": "2026-07-12",
     "category": "raven"
-  },
-  {
-    "id": "gallery-cursed-kuzgun",
-    "src": "/images/gallery/kuzgun-aysu.jpeg",
-    "caption": "cursed kuzgun",
-    "characterIds": [],
-    "houseIds": [],
-    "dragonIds": [],
-    "chapterId": null,
-    "worldDate": null,
-    "uploadedAt": "2026-09-16",
-    "category": "fleabottom"
   },
   {
     "id": "gallery-vhaemys-just-a-kid",

@@ -1,0 +1,23 @@
+{
+  "effectiveFrom": "2026-09-19",
+  "gallery": {
+    "minimumTotalComments": 15,
+    "targetAverageComments": 25,
+    "maximumTotalComments": 50,
+    "countBasis": "repository-authored published and scheduled comments, including replies",
+    "additionalEntryIds": [
+      "gallery-vhaemys-pocket-cake",
+      "gallery-baelenys-carrying-vhaemys",
+      "gallery-vhaemys-jace-alester-breakfast",
+      "gallery-vhaemys-jace-alester-toy",
+      "gallery-vhaemys-just-a-kid"
+    ],
+    "priorityCharacterIds": ["vhaemys-targaryen"],
+    "priorityTargetRange": [35, 50],
+    "preservedExistingTotals": {
+      "gallery-vhaemys-just-a-kid": 57
+    }
+  },
+  "scope": "New uploads from effectiveFrom and the explicitly selected existing entries. The older archive is not retroactively expanded. Real member participation is never capped or deleted to meet an editorial target.",
+  "arcs": "All fictional accounts may gradually change opinions, sympathies, relationships and even factions through authored interactions. Preserve the path of change; do not reset history, force reconciliation or run autonomous activity."
+}

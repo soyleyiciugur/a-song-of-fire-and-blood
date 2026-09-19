@@ -5,16 +5,22 @@ import { communityFriendships } from '../lib/communityRelationships.mjs';
 import { notificationTimeGroup, groupNotifications } from '../lib/notificationTime.mjs';
 const data = JSON.parse(fs.readFileSync(new URL('../data/flea-bottom.json', import.meta.url), 'utf8'));
 const updates = JSON.parse(fs.readFileSync(new URL('../data/update-notes.json', import.meta.url), 'utf8'));
-const scheduled = data.comments.filter(c => c.id.includes('-scheduled-'));
 const schedule = JSON.parse(fs.readFileSync(new URL('../data/community-schedule.json', import.meta.url), 'utf8'));
+const plannedIds = schedule.slots.flatMap(slot => slot.commentIds);
+const plannedIdSet = new Set(plannedIds);
+const scheduled = data.comments.filter(c => plannedIdSet.has(c.id));
 const { validateCommunitySchedule } = await import('./lib/validate-community-schedule.mjs');
 validateCommunitySchedule(schedule);
-assert.deepEqual(scheduled.map(c => c.id).sort(), schedule.slots.flatMap(slot => slot.commentIds).sort());
+assert.equal(plannedIds.length, plannedIdSet.size, 'One slot per scheduled comment');
+assert.deepEqual(scheduled.map(c => c.id).sort(), [...plannedIds].sort());
+for (const c of data.comments.filter(c => c.id.includes('-scheduled-'))) {
+  assert(plannedIdSet.has(c.id), `Missing publication plan: ${c.id}`);
+}
 for (const c of scheduled) {
   const time = Date.parse(c.publishedAt);
   const before = publishCommunity(data, updates, time - 1);
   assert(!before.comments.some(item => item.id === c.id));
-  assert(!JSON.stringify(before).includes(c.body), 'Future body must not reach clients');
+  assert(!JSON.stringify(before).includes(JSON.stringify(c.body)), 'Future complete body must not reach clients');
   assert(publishCommunity(data, updates, time).comments.some(item => item.id === c.id), 'Publishes at exact timestamp');
   assert(publishCommunity(data, updates, time + 1).comments.some(item => item.id === c.id));
 }

@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-09-19",
+    "items": [
+      "Registered thirteen new Raven's Eye media templates and generated WebP poster frames for all eleven new reels.",
+      "Restored a missing legacy Raven's Eye image and repaired the affected gallery publication window.",
+      "Added English community conversations for thirteen new gallery posts, with linked member replies and follow-ups scheduled over three days.",
+      "Continued the pocket cake and Jace headquarters jokes, repaired reply scheduling, and reattached seven existing cursed-raven comments.",
+      "Expanded the latest thirteen gallery discussions and four Vhaemys conversations with more linked replies, a more active Vhaemys account, and gradual community character arcs."
+    ],
+    "features": [],
+    "links": {}
+  },
+  {
     "date": "2026-09-17",
     "items": [
       "Rebuilt The Great Game match board as a fixed full-viewport table with no page scrolling, a compact permanent utility rail, and the hand layered over the lower realm without changing card interactions.",

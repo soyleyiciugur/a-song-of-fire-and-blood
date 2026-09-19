@@ -30,6 +30,33 @@ After implementing site changes, update `data/update-notes.json` in the same cha
 
 # Community workflow
 
+## Activity density and evolving accounts
+
+From 2026-09-19, new gallery images and videos should have at least 15 total
+authored comments, including replies and scheduled follow-ups, with an average
+around 25 across a normal release. Vary conversation sizes; 50 is the upper
+editorial limit. Vhaemys posts are community favourites and should generally
+sit toward the upper range (roughly 35-50). Real member comments are not capped.
+
+The current expansion covers the latest thirteen uploads and the selected
+active Vhaemys posts in `data/community-authoring-policy.json`, not the entire
+old archive. The existing 57-comment `gallery-vhaemys-just-a-kid` conversation
+is explicitly preserved by the user; do not trim it or keep adding to it to
+meet the new targets.
+
+Vhaemys is a frequent, recurring commenter with comically long social-AU
+screen time. She can browse different suitable posts and return to reply,
+while retaining her seven-year-old voice and varied childlike interests.
+Other cast accounts remain selective, especially Maela.
+
+All fictional community accounts can develop personal arcs, reconsider views,
+warm to people from other factions, change relationships, or eventually
+change allegiance. This is a general rule, not a special case for any single
+account. Show the steps through actual conversations and persist dated
+continuity notes. Preserve old opinions as history; avoid instant conversions,
+automatic reconciliation, uniform niceness, or autonomous NPC activity.
+See `docs/community-running-jokes.md` for current evidence and scheduled steps.
+
 When the user says:
 
 - "community workflow'u çalıştır"

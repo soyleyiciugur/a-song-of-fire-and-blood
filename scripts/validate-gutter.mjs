@@ -14,6 +14,7 @@ const representedAccounts = new Set();
 const fandomIds = new Set(fandoms.map((fandom) => fandom.id));
 assert.equal(fandomIds.size, fandoms.length, "Duplicate fandom IDs");
 const eligible = gallery;
+const authoringPolicy = read('community-authoring-policy.json');
 
 if (process.argv.includes("--pending")) {
   console.log(JSON.stringify(eligible.filter((entry) => !comments.some((comment) => comment.entryId === entry.id)), null, 2));
@@ -53,7 +54,12 @@ for (const slot of schedule.slots) {
   assert(Number.isFinite(Date.parse(slot.publishedAt)), `Invalid window: ${slot.id}`);
   for (const id of slot.commentIds) assert.equal(commentMap.get(id)?.publishedAt, slot.publishedAt, `Publication plan mismatch: ${id}`);
 }
-assert.deepEqual([...plannedIds].sort(), comments.filter(c=>c.id.includes('-scheduled-')).map(c=>c.id).sort());
+// Explicit slot membership also supports stable IDs authored before the naming convention.
+// Keep requiring every conventionally named scheduled comment to have a slot.
+const plannedIdSet = new Set(plannedIds);
+for (const comment of comments.filter(c=>c.id.includes('-scheduled-'))) {
+  assert(plannedIdSet.has(comment.id), `Missing publication plan: ${comment.id}`);
+}
 const entryIds = new Set(eligible.map((entry) => entry.id));
 assert.equal(userMap.size, users.length, "Duplicate user IDs");
 assert.equal(new Set(users.map((user) => user.username.toLowerCase())).size, users.length, "Duplicate usernames");
@@ -119,6 +125,16 @@ for (const entry of eligible) {
   }).map((comment) => comment.authorId));
   assert(regulars.size >= 1, `${entry.id}: missing reader conversation`);
   assert.equal(new Set(thread.map((comment) => comment.body.trim().toLowerCase())).size, thread.length, `Duplicate body in ${entry.id}`);
+  const policy = authoringPolicy.gallery;
+  if (entry.uploadedAt >= authoringPolicy.effectiveFrom || policy.additionalEntryIds.includes(entry.id)) {
+    assert(thread.length >= policy.minimumTotalComments, `${entry.id}: expected at least ${policy.minimumTotalComments} authored comments including scheduled replies`);
+    const preserved = policy.preservedExistingTotals[entry.id];
+    if (preserved !== undefined) {
+      assert.equal(thread.length, preserved, `${entry.id}: preserve the explicitly grandfathered conversation`);
+    } else {
+      assert(thread.length <= policy.maximumTotalComments, `${entry.id}: exceeds the ${policy.maximumTotalComments}-comment editorial ceiling`);
+    }
+  }
 }
 console.log(`Gutter data valid: ${eligible.length} posts, ${users.length} profiles, ${comments.length} comments.`);
 console.log(`All ${fandoms.length} fandom areas represented. Quiet profiles do not need a forced comment.`);

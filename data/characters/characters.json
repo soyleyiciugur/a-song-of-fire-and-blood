@@ -1798,10 +1798,19 @@
     "house": "-",
     "title": "Maester of the Scholars' Retreat",
     "status": "Missing",
+    "secret": {
+      "status": "Dead",
+      "note": "Killed near Starfall on the Eighth Day of the Eighth Moon, 99 AC, at the hands of the men sent by Renrose Tyrell. "
+    },
     "nameday": {
       "day": 18,
       "moon": 8,
       "year": 38
+    },
+    "death": {
+      "day": 8,
+      "moon": 8,
+      "year": 99
     },
     "height": "170 cm",
     "father": "-",
