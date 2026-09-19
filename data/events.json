@@ -163,5 +163,16 @@
     "moon": 8,
     "year": 99,
     "description": "Crown intelligence reveals that Vahaemon has spent his exile building power in Essos with Tyroshi support, blood magic, Vaenarr Targaryen and multiple dragons. His son Aegor is revealed as Sunfyre's rider, the Dragon Knight."
+  },
+  {
+    "id": "visenya-kings-landing-incursion",
+    "title": "Visenya's Secret Incursion",
+    "type": "arrival",
+    "location": "King's Landing",
+    "chapterSlug": "the-viper-in-silk",
+    "description": "Visenya Targaryen secretly enters King's Landing, confronts Jace in his chambers and escapes the Red Keep after Alester intervenes. She subsequently vanishes from the capital and returns across the Narrow Sea.",
+    "day": 17,
+    "moon": 7,
+    "year": 99
   }
 ]

@@ -148,8 +148,21 @@
     "traits": [
       "Golden",
       "Bonded to Aegor Targaryen",
-      "Most Beautiful Dragon Ever Seen"
+      "One of Vahaemon’s Essosi Dragons"
     ],
     "description": "A golden dragon bonded to Aegor Targaryen, Vahaemon's son. Sunfyre is revealed beyond the Narrow Sea when three dragons rise around Vahaemon's camp; the golden beast lands beside Aegor and curls its neck around him with unmistakable familiarity. The revelation confirms that Vahaemon's exiled branch possesses multiple dragons, not merely the single beast the Crown once suspected."
+  },
+  {
+    "id": "sheepstealer",
+    "name": "Sheepstealer",
+    "status": "Unknown",
+    "previousRiderId": "aenys-targaryen-ii",
+    "image": "/images/dragons/sheepstealer.webp",
+    "traits": [
+      "Wild-Born",
+      "Old",
+      "Once Ridden by Aenys II"
+    ],
+    "description": "An old dragon remembered from the reign of Aenys II. Aenys claimed Sheepstealer only for a brief period, and the dragon later appears in Baelenys's childhood memory beneath the Dragonpit, where Aenys ordered Sheepstealer to kill the small dragon secretly claimed by the seventeen-year-old Malaenar. Sheepstealer's later fate is not established."
   }
 ]

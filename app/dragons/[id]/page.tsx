@@ -6,6 +6,7 @@ import { dragons, getDragon } from "@/data/dragons";
 import { getCharacter } from "@/lib/characters";
 import SigilImage from "@/components/SigilImage";
 import MiniPortrait from "@/components/MiniPortrait";
+import BestiaryTabs from "@/components/BestiaryTabs";
 
 import styles from "./dragon.module.css";
 
@@ -31,6 +32,8 @@ export default async function DragonPage({ params }: Props) {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <BestiaryTabs active="dragons" />
+
         <div className={styles.header}>
           <SigilImage
             src={dragon.image}
@@ -45,22 +48,19 @@ export default async function DragonPage({ params }: Props) {
 
             <span
               className={`${styles.statusBadge} ${
-                dragon.status === "Alive" ? styles.statusAlive : styles.statusDead
+                dragon.status === "Alive"
+                  ? styles.statusAlive
+                  : dragon.status === "Dead"
+                    ? styles.statusDead
+                    : styles.statusUnknown
               }`}
             >
-              {dragon.status === "Alive" ? "●" : "✕"} {dragon.status}
+              <span className={styles.statusDot} aria-hidden="true" /> {dragon.status}
             </span>
           </div>
         </div>
 
         <p className={styles.description}>{dragon.description}</p>
-
-        <nav className={styles.tabs} aria-label="Bestiary sections">
-          <Link className={styles.activeTab} href="/bestiary/dragons">Dragons</Link>
-          <Link href="/bestiary/direwolves">Direwolves</Link>
-          <Link href="/bestiary/dogs">Dogs</Link>
-          <Link href="/bestiary/cats">Cats</Link>
-        </nav>
 
         <h2 className={styles.sectionHeading}>Traits</h2>
         <div className={styles.traits}>

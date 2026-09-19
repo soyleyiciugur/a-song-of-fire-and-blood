@@ -149,3 +149,20 @@
 .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 .tabs a { padding: 8px 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; text-decoration: none; }
 .tabs a:hover, .tabs .activeTab { color: var(--gold); border-color: var(--gold); }
+
+.container > :global(.realm-section-tabs) {
+  margin: 0 0 30px;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.statusUnknown {
+  color: var(--muted);
+}

@@ -1362,7 +1362,7 @@
       "Eventually address what Alester Dayne did and did not do"
     ],
     "relationships": {
-      "alester-dayne": "Trained him personally; considers him the finest blade he has ever produced. His unauthorized absence protecting Prince Visenor has not gone unnoticed and will not go unpunished forever.",
+      "alester-dayne": "He breaks up Alester's overly violent spar with Jace, slaps his former pupil when he notices Baelenys watching, and reminds him that however close they are, a knight cannot forget the distance between himself and a prince.",
       "baelenys-targaryen": "Serves him with rigid, unquestioning discipline.",
       "grance-morrigen": "His brother, Ser Grance Morrigen.",
       "jacaelon-targaryen": "Trained the prince rigorously in Alester's absence; openly assessed him ready for knighthood, told him he could not quite beat Alester yet but was close, and watched Jace choose Alester's hand over his for the ceremony itself. The slight was real. He showed no sign of minding.",
@@ -1796,7 +1796,7 @@
     ],
     "relationships": {
       "daria-sand": "Lorenah Dayne's maid and spy, who has been watching his increasingly conspicuous drunken behavior in Flea Bottom. Lorenah instructed Daria to speak with him and make him stop drawing attention.",
-      "jacaelon-targaryen": "After drunkenly wasting his coin while searching inns for Visenya, Weylar receives a final warning. Jace sends him back into Flea Bottom to quietly learn what victims and families believe about Gaelor, the Watch and the Crown."
+      "jacaelon-targaryen": "Jace gives Weylar a new secret assignment after the Starfall report: use his own contacts to investigate Rhaella and Nymos's disappearance, with the black cells waiting if the matter leaks."
     },
     "summary": "Jace's personal spymaster, and proof that terror makes for sturdier loyalty than trust ever could. Weylar once fed the Prince a hollow report and spent time in the black cells for it; the pardon bought Jace an informant who now bows low enough to scrape the floor. His network has paid off repeatedly: first bringing word of Gaelor's brothel visit days after the wedding, then relaying early confirmation of the Oldtown Massacre. He has since been tasked with finding a tutor for young Vhaemys, a task he approaches with the same mixture of eagerness and dread that characterizes everything he does for the Hand.",
     "quotes": [],
@@ -4040,7 +4040,9 @@
     "relationships": {
       "rhaella-targaryen": "Attends the hidden princess, knows of her pregnancy and answers her questions discreetly before her maid. Agrees to prepare provisions for her charitable village walk.",
       "edmyn-uller": "The missing older maester whose absence he cannot explain to Rhaella. No account of what happened to Edmyn is confirmed.",
-      "darren-dayne": "Reports that Lord Dayne left Starfall for Sunspear four days before his conversation with Rhaella. No secret orders from Darren are established."
+      "darren-dayne": "Reports that Lord Dayne left Starfall for Sunspear four days before his conversation with Rhaella. No secret orders from Darren are established.",
+      "jacaelon-targaryen": "Jace is told that Nymos disappeared alongside Rhaella and immediately treats the unfamiliar maester as part of the Starfall mystery, sending Weylar to investigate quietly.",
+      "lorenah-dayne": "Lorenah has never heard of Nymos despite his supposed place at Starfall. His disappearance alongside Rhaella makes his identity itself suspicious to her."
     },
     "summary": "A younger maester who appeared at Starfall while Edmyn Uller was missing and attended Rhaella with unusual discretion. He knew of her pregnancy, answered her questions carefully and arranged provisions for her village walk. By the Eighteenth Day of the Eighth Moon, 99 AC, both he and Rhaella have failed to return for a full day. Lorenah Dayne has never heard his name, turning his unexplained presence and disappearance into one of the central mysteries surrounding Starfall.",
     "quotes": []

@@ -2,14 +2,37 @@
   {
     "date": "2026-09-19",
     "items": [
+      "Synchronized Chapter XIX across character records, houses, dragons, Bloodshed, the Known Chronicle and the Known World map.",
+      "Added Aegor Targaryen and Sunfyre while keeping the Essosi Targaryens publicly unknown and their living status behind secret records.",
+      "Added Sheepstealer to the dragon archive as Aenys II's brief former mount and recorded the Dragonpit memory without inventing the dragon's later fate.",
+      "Updated the Targaryen family tree for Aegor and refined its controls and spacing so branches remain readable at different viewport sizes.",
+      "Restored Visenya's Chapter VIII King's Landing appearance to the Known World map.",
+      "Added Lady Forlorn, Lucas Corbray's Valyrian steel sword, to The Collection.",
+      "Opened the Chapter XIX Judgment by Blood discussion in Taverns.",
+      "Fixed the Great Game opening-hand screen so its replacement cards can scroll on desktop and mobile instead of trapping players before the board.",
+      "Moved Bestiary navigation above dragon portraits and records on individual dragon pages.",
+      "Refreshed Latest Updates and separated linked record buttons from update text more clearly.",
       "Registered thirteen new Raven's Eye media templates and generated WebP poster frames for all eleven new reels.",
       "Restored a missing legacy Raven's Eye image and repaired the affected gallery publication window.",
       "Added English community conversations for thirteen new gallery posts, with linked member replies and follow-ups scheduled over three days.",
       "Continued the pocket cake and Jace headquarters jokes, repaired reply scheduling, and reattached seven existing cursed-raven comments.",
       "Expanded the latest thirteen gallery discussions and four Vhaemys conversations with more linked replies, a more active Vhaemys account, and gradual community character arcs."
     ],
-    "features": [],
-    "links": {}
+    "features": [
+      "Synchronized Chapter XIX across character records, houses, dragons, Bloodshed, the Known Chronicle and the Known World map.",
+      "Updated the Targaryen family tree for Aegor and refined its controls and spacing so branches remain readable at different viewport sizes.",
+      "Added Lady Forlorn, Lucas Corbray's Valyrian steel sword, to The Collection.",
+      "Opened the Chapter XIX Judgment by Blood discussion in Taverns."
+    ],
+    "links": {
+      "Synchronized Chapter XIX across character records, houses, dragons, Bloodshed, the Known Chronicle and the Known World map.": "/chapters/judgment-by-blood",
+      "Updated the Targaryen family tree for Aegor and refined its controls and spacing so branches remain readable at different viewport sizes.": "/family-tree",
+      "Restored Visenya's Chapter VIII King's Landing appearance to the Known World map.": "/map",
+      "Added Lady Forlorn, Lucas Corbray's Valyrian steel sword, to The Collection.": "/collection",
+      "Opened the Chapter XIX Judgment by Blood discussion in Taverns.": "/forum",
+      "Fixed the Great Game opening-hand screen so its replacement cards can scroll on desktop and mobile instead of trapping players before the board.": "/cards/play",
+      "Moved Bestiary navigation above dragon portraits and records on individual dragon pages.": "/bestiary/dragons"
+    }
   },
   {
     "date": "2026-09-17",

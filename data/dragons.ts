@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\data\dragons.ts
 import dragonsData from "./dragons.json";
 
-export type DragonStatus = "Alive" | "Dead";
+export type DragonStatus = "Alive" | "Dead" | "Unknown";
 
 export type Dragon = {
   id: string;

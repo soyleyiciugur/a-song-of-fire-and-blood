@@ -6999,9 +6999,7 @@ function MulliganScreen({
 
   return (
     <main
-      className={
-        styles.game
-      }
+      className={`${styles.game} ${styles.mulliganScreen}`}
     >
       <div
         className={

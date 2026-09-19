@@ -33,3 +33,26 @@
   .list .entry { align-items: flex-start; gap: 10px; }
   .goLink { margin-top: 1px; }
 }
+
+/* Linked update rows need a deliberate gutter so the record action never
+   reads as though it is attached to the sentence. */
+.list .entry {
+  column-gap: 22px;
+}
+
+.list .entry > span:first-child {
+  padding-right: 4px;
+}
+
+@media (max-width: 600px) {
+  .list .entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+  }
+
+  .goLink {
+    justify-self: start;
+    margin-top: 0;
+  }
+}

@@ -11,6 +11,12 @@ function ChildBranch({ children }: { children: ReactNode }) {
   return <div className={styles.targaryenChildBranch}>{children}</div>;
 }
 
+function HudIcon({ kind }: { kind: "minus" | "plus" | "fit" }) {
+  if (kind === "minus") return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10" /></svg>;
+  if (kind === "plus") return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 5v10M5 10h10" /></svg>;
+  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4H4v3M13 4h3v3M7 16H4v-3M13 16h3v-3" /></svg>;
+}
+
 export default function TargaryenLineage() {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -107,9 +113,9 @@ export default function TargaryenLineage() {
     <div className={styles.targaryenMapShell}>
       <div className={styles.targaryenMapHud}>
         <div className={styles.targaryenZoomGroup}>
-          <button type="button" className={styles.targaryenHudButton} onClick={zoomOut} aria-label="Zoom out">−</button>
-          <button type="button" className={styles.targaryenHudButton} onClick={zoomReset}>Fit</button>
-          <button type="button" className={styles.targaryenHudButton} onClick={zoomIn} aria-label="Zoom in">+</button>
+          <button type="button" className={styles.targaryenHudButton} onClick={zoomOut} aria-label="Zoom out"><HudIcon kind="minus" /></button>
+          <button type="button" className={`${styles.targaryenHudButton} ${styles.targaryenFitButton}`} onClick={zoomReset}><HudIcon kind="fit" /><span>Fit</span></button>
+          <button type="button" className={styles.targaryenHudButton} onClick={zoomIn} aria-label="Zoom in"><HudIcon kind="plus" /></button>
           <span className={styles.targaryenZoomReadout}>{Math.round(scale * 100)}%</span>
         </div>
         <button
@@ -202,8 +208,9 @@ export default function TargaryenLineage() {
             <div className={styles.targaryenLowerGrid}>
               <div className={`${styles.descendantGroup} ${styles.vahaemonDescendants}`}>
                 <div className={styles.descendantStem} aria-hidden="true" />
-                <div className={`${styles.descendantRail} ${styles.descendantRailTwo}`}>
+                <div className={`${styles.descendantRail} ${styles.descendantRailThree}`}>
                   <div className={styles.descendantNode}><PersonNode id="visenya-targaryen" /></div>
+                  <div className={styles.descendantNode}><PersonNode id="aegor-targaryen" /></div>
                   <div className={styles.descendantNode}>
                     <Union
                       a={{ id: "rhaella-targaryen" }}
