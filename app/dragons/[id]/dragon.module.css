@@ -166,3 +166,34 @@
 .statusUnknown {
   color: var(--muted);
 }
+
+/* Keep long dragon names inside the mobile viewport. */
+.header > div:last-child {
+  min-width: 0;
+}
+
+.dragonName {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 36px 16px;
+  }
+
+  .header {
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .header > :first-child {
+    flex: 0 0 auto;
+  }
+
+  .dragonName {
+    font-size: clamp(25px, 8vw, 31px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+}

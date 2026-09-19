@@ -130,6 +130,10 @@
   color: #39d353;
 }
 
+.statusUnknown {
+  color: var(--muted-gold, #c9a227);
+}
+
 .statusDead {
   color: #f85149;
 }
