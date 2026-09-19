@@ -5846,21 +5846,6 @@ export default function GreatGamePlayPage() {
           );
         })()}
 
-      {!onlineMatch && (
-        <section className={styles.localMatchStatus} data-selection-ui="true">
-          <div>
-            <span>Local Table</span>
-            <strong>{gamePlayerName(currentGame.activePlayerId, null)}</strong>
-          </div>
-          <div>
-            <span>Turn</span>
-            <strong>{activePlayer.turnsTaken}</strong>
-          </div>
-          <button type="button" onClick={() => setExitConfirm(true)}>
-            Exit Game
-          </button>
-        </section>
-      )}
 
       <section
         className={
@@ -5983,6 +5968,10 @@ export default function GreatGamePlayPage() {
         showEndTurn={false}
       />
 
+      <div className={styles.deckPile} data-deck-anchor={viewPlayerId}
+        aria-label={`Your deck: ${viewPlayer.deck.length} cards remaining`}>
+        <div className={styles.deckBack} aria-hidden="true"><span>THE GREAT<br />GAME</span><b>&#10022;</b></div>
+      </div>
       <section
         className={styles.opponentCommandDock}
         aria-label={`${gamePlayerName(viewEnemyPlayerId, onlineMatch)} command`}
@@ -5995,16 +5984,14 @@ export default function GreatGamePlayPage() {
         />
       </section>
 
-      {onlineMatch && (
-        <section className={styles.opponentStatusDock} aria-label="Online match status">
+      <section className={styles.opponentStatusDock} aria-label="Match status">
           <div className={styles.opponentStatusIdentity}>
             <span>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}</span>
             <strong>Turn {activePlayer.turnsTaken}</strong>
           </div>
           <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
-          <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)} is playing</small>
-        </section>
-      )}
+          <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}&apos;s turn</small>
+      </section>
 
       {onlineCanAct &&
         currentGame.pendingEffect
@@ -7430,9 +7417,7 @@ function PlayerHeader({
           value={
             player.deck.length
           }
-          deckAnchorPlayerId={
-            playerId
-          }
+          deckAnchorPlayerId={opponent ? playerId : undefined}
         />
 
         <HudStat
@@ -7854,6 +7839,9 @@ function Board({
             : undefined
         }
       >
+        <div className={styles.realmSlots} aria-hidden="true">
+          {Array.from({ length: BOARD_LIMIT }, (_, index) => <span key={index} />)}
+        </div>
         {units.length ===
           0 && (
           <div

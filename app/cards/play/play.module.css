@@ -7584,3 +7584,54 @@
     width: calc(var(--game-rail-width) - 8px - var(--game-control-button-width) - var(--game-dock-gap));
   }
 }
+/* Shared realm geometry: the HUDs meet halfway through the divider. */
+.boardGame {
+  overflow: clip;
+  --game-command-height: clamp(56px, 8dvh, 68px);
+  --game-top-dock-height: var(--game-command-height);
+  --game-control-button-width: clamp(112px, 9vw, 156px);
+  grid-template-rows: minmax(0, 1fr) calc(var(--game-battle-line-height) / 2) calc(var(--game-battle-line-height) / 2) minmax(0, 1fr) var(--game-hand-height);
+}
+.boardGame .opponentHud { grid-row: 1 / 3; border: 1px solid #793b3b; box-shadow: inset 0 0 12px #9b25251a, 0 0 7px #9b252526; }
+.boardGame .playerHud, .boardGame.gameWithOnlineChat .activePlayerHeader { grid-row: 3 / 5; border: 1px solid #857039; box-shadow: inset 0 0 12px #d4af3714, 0 0 7px #d4af3726; }
+.boardGame .playerBoardSection { grid-row: 4; }
+.boardGame .handSection { grid-row: 5; }
+.boardGame .battleLine { grid-column: 2; grid-row: 2 / 4; width: 100%; border: 1px solid #783535; }
+.boardGame .board {
+  --board-pad: 4px;
+  --board-gap: 6px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  padding: var(--board-pad);
+  gap: var(--board-gap);
+  grid-template-rows: minmax(0, 1fr);
+}
+.boardGame .opponentBoardSection .board { padding: var(--board-pad); }
+.boardGame .unitCardWrapper { width: 100%; height: 100%; container-type: size; }
+.boardGame .unitCard { width: min(100cqw, calc(100cqh * 5 / 7)) !important; height: auto !important; aspect-ratio: 5 / 7; flex: none; box-sizing: border-box; }
+.boardGame .boardDropSlot { --board-pad: inherit; --board-gap: inherit; height: calc(100% - 2 * var(--board-pad)); aspect-ratio: auto; box-sizing: border-box; }
+.boardGame .boardPlacementCell[data-shift-for-drop="true"] { transform: translateX(calc(100% + var(--board-gap))); }
+.boardGame .opponentStatusDock { width: var(--game-control-button-width); height: var(--game-command-height); padding: 5px; gap: 3px; }
+.boardGame .opponentStatusDock small { display: block; }
+.boardGame .opponentCommandDock { height: var(--game-command-height); }
+.boardGame :is(.standingBox, .hudStat, .unitCard, .handCard, .cardInfoPanel, .turnNotice, .selectedCardInner, .commandMeterCompact, .opponentStatusDock, .commandDockEndTurnButton),
+.boardGame button { border-radius: 0; }
+.deckPile { grid-column: 1; grid-row: 5; display: grid; place-items: center; min-height: 0; padding: 10px; }
+.deckBack { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 100%; max-height: 90%; aspect-ratio: 5 / 7; border: 1px solid #947840; outline: 1px solid #443324; outline-offset: -5px; background: repeating-linear-gradient(45deg, #a27b3010 0 1px, transparent 1px 7px), linear-gradient(135deg,#291b22,#100d12); color: #b69b60; box-shadow: 3px 3px #19131b, 4px 4px #655232, 7px 7px #19131b, 8px 8px #655232; }
+.deckBack span { text-align: center; font: 600 clamp(6px,.65vw,10px)/1.5 var(--font-hotd),serif; letter-spacing: .12em; }
+.deckBack b { font-size: 22px; }
+@media(max-width:700px) {
+  .boardGame { --game-control-button-width: 82px; --game-command-height: 52px; }
+  .boardGame .opponentStatusDock { right: calc(env(safe-area-inset-right) + 4px); }
+}
+/* Cosmetic realm artwork never changes the six deployment columns. */
+.boardGame .board {
+  background-image: linear-gradient(#09070a66, #09070a66), url('/images/cards/boards/targaryen-stark.webp');
+  background-size: 100% 100%, 100% 200%;
+  background-position: center, center bottom;
+  border: 1px solid #756348;
+  box-shadow: inset 0 0 0 3px #101014, inset 0 0 0 4px #8e724433;
+}
+.boardGame .opponentBoardSection .board { background-position: center, center top; border-color: #774737; }
+.realmSlots { position: absolute; inset: var(--board-pad); display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: var(--board-gap); pointer-events: none; }
+.realmSlots span { border: 1px solid #b7975933; background: #07080b33; }
+.boardGame .emptyBoard { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; pointer-events: none; }

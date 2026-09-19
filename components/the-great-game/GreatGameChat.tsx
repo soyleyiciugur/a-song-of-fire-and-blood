@@ -334,18 +334,7 @@ export default function GreatGameChat({
             <small>vs. {opponent?.username ?? "Opponent"}</small>
           </div>
 
-          {status && (
-            embedded ? (
-              <div className={styles.embeddedGameMeta} aria-label="Online table status">
-                <div className={styles.embeddedTurnIndicator}>
-                  <span>{status.activePlayerName}</span>
-                  <strong>Turn {status.turnNumber}</strong>
-                </div>
-                <div className={`${styles.gameMetaState} ${styles.gameMetaStateEmbedded} ${status.canAct ? styles.gameMetaStateActive : ""}`}>
-                  {status.statusText}
-                </div>
-              </div>
-            ) : (
+          {status && !embedded && (
               <div className={styles.headerGameMeta} aria-label="Online table status">
                 <div className={styles.gameMetaTurn}>
                   <span>{status.activePlayerName}</span>
@@ -354,7 +343,6 @@ export default function GreatGameChat({
                 <button type="button" className={styles.gameMetaExit} onClick={status.onExit}>Exit Game</button>
                 <div className={`${styles.gameMetaState} ${status.canAct ? styles.gameMetaStateActive : ""}`}>{status.statusText}</div>
               </div>
-            )
           )}
 
           <button

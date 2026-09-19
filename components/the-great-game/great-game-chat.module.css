@@ -235,3 +235,16 @@
   }
   .panelEmbedded .composer button { width: 25px; height: 25px; }
 }
+/* Table identity stays in chat; turn controls belong to the board dock. */
+.panelEmbedded .header { grid-template-columns: auto minmax(0,1fr); grid-template-areas: none; }
+.panelEmbedded .headerIcon, .panelEmbedded .heading { grid-area: auto; }
+.panel .messageGrouped, .panelEmbedded .messageGrouped { margin-top: 0; margin-bottom: 6px; }
+.panelEmbedded, .panelEmbedded * { border-radius: 0; }
+.panelEmbedded .composer { align-items: center; padding-block: 4px; }
+.panelEmbedded .composer textarea { height: 30px; min-height: 30px; padding: 6px 8px; line-height: 16px; box-sizing: border-box; }
+.panelEmbedded .composer button { height: 30px; width: 30px; }
+.panelEmbedded .messageBody p,
+.panelEmbedded .composer textarea,
+.panelEmbedded .composer button,
+.panelEmbedded .headerIcon,
+.panelEmbedded .avatar { border-radius: 0; }
