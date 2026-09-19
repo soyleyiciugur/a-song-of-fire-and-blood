@@ -6459,6 +6459,8 @@
   --game-location-height: clamp(70px, 9.5dvh, 84px);
   --game-command-height: clamp(72px, 10dvh, 90px);
   --game-battle-line-height: 32px;
+  /* Reduced from v29 default — the top dock is now more compact per design. */
+  --game-top-dock-height: clamp(52px, 7dvh, 64px);
 
   width: 100vw;
   max-width: none;
@@ -6674,6 +6676,14 @@
   height: 100%;
   line-height: 1;
   white-space: nowrap;
+  text-align: center;
+}
+
+/* Left and right arrow spans fill their 1fr column and center their glyph. */
+.boardGame .battleLine > span:first-child,
+.boardGame .battleLine > span:last-child {
+  flex: 1;
+  justify-content: center;
 }
 
 /* The hand now owns exactly the turquoise lower-board rectangle. Clipping the
@@ -6765,6 +6775,14 @@
   margin-bottom: 4px;
 }
 
+.boardGame .playerCommandDock .commandMeterHeading span {
+  font-size: clamp(0.48rem, 0.82dvh, 0.6rem);
+}
+
+.boardGame .playerCommandDock .commandMeterHeading strong {
+  font-size: clamp(0.72rem, 1.15dvh, 0.9rem);
+}
+
 .boardGame .playerCommandDock .commandPips {
   min-height: 1rem;
 }
@@ -6775,7 +6793,9 @@
   height: 100%;
   margin: 0;
   padding: 5px;
-  font-size: clamp(0.58rem, 0.95dvh, 0.74rem);
+  /* Increased per design: was clamp(0.58rem, 0.95dvh, 0.74rem) */
+  font-size: clamp(0.66rem, 1.1dvh, 0.84rem);
+  letter-spacing: 0.09em;
 }
 
 .boardGame > .error,
@@ -6994,8 +7014,9 @@
   --game-top-dock-height:clamp(62px,8.5dvh,78px);
   grid-template-rows:minmax(0,1fr) var(--game-battle-line-height) minmax(0,1fr) var(--game-hand-height);
 }
-.boardGame .opponentHud{grid-row:1}
-.boardGame .playerHud{grid-row:3}
+/* Stat columns span into the battle-line row so no blank gap appears between the two HUDs. */
+.boardGame .opponentHud{grid-row:1 / 3}
+.boardGame .playerHud{grid-row:3 / 5}
 .boardGame .opponentBoardSection{grid-row:1}
 .boardGame .playerBoardSection{grid-row:3}
 .boardGame .battleLine{grid-row:2}
@@ -7011,24 +7032,29 @@
 .boardGame .playerHud{height:100%;align-self:stretch}
 
 /* Keep every unit completely inside its realm with a small four-sided margin. */
-.boardGame .board{padding:clamp(6px,.65dvh,10px);align-items:stretch}
+/* overflow:clip keeps drop-slot outlines inside the board frame without affecting positioned children. */
+.boardGame .board{padding:clamp(6px,.65dvh,10px);align-items:stretch;overflow:clip}
 .boardGame .boardPlacementCell,.boardGame .unitCardWrapper{min-height:0;height:100%;display:flex;align-items:center;justify-content:center;overflow:visible}
 .boardGame .unitCard{width:auto!important;height:auto!important;max-width:100%;max-height:100%;aspect-ratio:5/7}
 
 /* Opponent command + mirrored match controls occupy the full width above Table Whispers. */
+/* 50/50 symmetric split between Command meter and Status dock — the gap is 6px. */
 .boardGame .opponentCommandDock{
-  position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:calc(7px + (var(--game-rail-width) - 14px) * .48 + 6px);z-index:81;
-  width:calc((var(--game-rail-width) - 20px) * .52);min-width:0;height:var(--game-top-dock-height);margin:0;pointer-events:auto;
+  position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:calc(7px + (var(--game-rail-width) - 20px) * .5 + 6px);z-index:81;
+  width:calc((var(--game-rail-width) - 20px) * .5);min-width:0;height:var(--game-top-dock-height);margin:0;pointer-events:auto;
 }
 .boardGame .opponentCommandDock .commandMeterCompact{height:100%;box-sizing:border-box;display:grid;align-content:center}
 .boardGame .opponentStatusDock{
-  position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:7px;z-index:81;width:calc((var(--game-rail-width) - 20px) * .48);height:var(--game-top-dock-height);box-sizing:border-box;
+  position:fixed;top:calc(var(--site-nav-height,0px) + 7px);right:7px;z-index:81;width:calc((var(--game-rail-width) - 20px) * .5);height:var(--game-top-dock-height);box-sizing:border-box;
   display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) auto;gap:4px 6px;align-items:center;padding:6px 7px;
   border:1px solid rgba(212,175,55,.22);background:linear-gradient(165deg,rgba(27,18,21,.97),rgba(9,8,10,.985) 72%);box-shadow:0 12px 28px #0008
 }
-.boardGame .opponentStatusIdentity{min-width:0;display:grid;gap:2px}.boardGame .opponentStatusIdentity span{overflow:hidden;color:#968571;font:7px/1 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}.boardGame .opponentStatusIdentity strong{color:#d5b86f;font:700 8px/1 var(--font-hotd),serif;text-transform:uppercase;white-space:nowrap}
-.boardGame .opponentStatusDock button{min-height:25px;padding:0 6px;border:1px solid rgba(157,111,65,.48);border-radius:4px;background:rgba(65,37,38,.55);color:#d8b37c;font:700 6px/1 var(--font-geist);letter-spacing:.06em;text-transform:uppercase}
-.boardGame .opponentStatusDock small{grid-column:1/-1;overflow:hidden;color:#9d816f;font:700 6px/1 var(--font-geist);letter-spacing:.05em;text-align:right;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+.boardGame .opponentStatusIdentity{min-width:0;display:grid;gap:2px}.boardGame .opponentStatusIdentity span{overflow:hidden;color:#968571;font:700 8.5px/1 var(--font-geist);text-overflow:ellipsis;white-space:nowrap}.boardGame .opponentStatusIdentity strong{color:#d5b86f;font:700 10px/1.1 var(--font-hotd),serif;text-transform:uppercase;white-space:nowrap}
+.boardGame .opponentStatusDock button{min-height:26px;padding:0 7px;border:1px solid rgba(157,111,65,.48);border-radius:4px;background:rgba(65,37,38,.55);color:#d8b37c;font:700 7px/1 var(--font-geist);letter-spacing:.06em;text-transform:uppercase}
+.boardGame .opponentStatusDock small{grid-column:1/-1;overflow:hidden;color:#9d816f;font:700 7px/1 var(--font-geist);letter-spacing:.05em;text-align:right;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+
+/* In online matches the opponent command + status docks replace the local match status bar. */
+.boardGame.gameWithOnlineChat .localMatchStatus { display: none !important; }
 
 /* The chat starts below the mirrored top dock. */
 .boardGame.gameWithOnlineChat .locationBar{top:calc(var(--site-nav-height,0px) + 21px + var(--game-top-dock-height) + var(--game-chat-height))}
@@ -7048,8 +7074,9 @@
 .boardGame .selectionShade{z-index:990}
 .boardGame .selectedCardPreview,.boardGame .unitDetailOverlay{z-index:1000}
 
-/* Restore the square attack controls from the original board treatment. */
+/* Restore square corners on all game cards and controls — no rounding anywhere on the board. */
 .boardGame .unitActions button{border-radius:0!important}
+.unitCard,.handCard,.mulliganCard,.selectedCardInner,.unitDetailCard,.dragGhostCard{border-radius:0!important}
 
 @media(max-width:1100px){
   .boardGame{--game-hand-height:clamp(150px,25dvh,220px);--game-top-dock-height:58px}

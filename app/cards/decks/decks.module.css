@@ -583,6 +583,9 @@
 }
 
 .nonDeckableActions > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-inline: 0;
   color: rgba(242, 223, 189, 0.46);
   font-size: 0.52rem;
@@ -626,9 +629,11 @@
   cursor: var(--realm-help-cursor) !important;
 }
 
-/* Five cards across on a normal desktop collection view. */
+/* Five cards across on a normal desktop collection view.
+   minmax(155px, 1fr) prevents cards collapsing to unreadable widths
+   inside the constrained middle workspace column. */
 .cardGrid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(155px, 1fr));
   gap: .85rem;
 }
 
@@ -645,17 +650,17 @@
 }
 
 @media (max-width: 1450px) {
-  .cardGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cardGrid { grid-template-columns: repeat(4, minmax(145px, 1fr)); }
 }
 
 @media (max-width: 1180px) {
-  .cardGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cardGrid { grid-template-columns: repeat(3, minmax(140px, 1fr)); }
 }
 
 @media (max-width: 920px) {
-  .cardGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cardGrid { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
 }
 
 @media (max-width: 650px) {
-  .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cardGrid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
 }

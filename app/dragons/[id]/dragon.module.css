@@ -167,14 +167,16 @@
   color: var(--muted);
 }
 
-/* Keep long dragon names inside the mobile viewport. */
+/* Keep long dragon names on one line without pushing the page wider. */
 .header > div:last-child {
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .dragonName {
-  overflow-wrap: anywhere;
-  word-break: normal;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 
 @media (max-width: 520px) {
@@ -192,8 +194,9 @@
   }
 
   .dragonName {
-    font-size: clamp(25px, 8vw, 31px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    /* Sheepstealer and other long names stay intact; scale instead of wrapping. */
+    font-size: clamp(18px, 6vw, 26px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
   }
 }
