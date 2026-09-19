@@ -53,3 +53,11 @@ The following are authored steps with publication timestamps, not claims that th
 - Vhaemys: the cake, carrying, breakfast and toy branches let her be an active participant rather than an object of adult commentary. A toy harbour develops through her own short replies; the flower and bedtime exchange makes long screen time a small social-AU habit. These details do not create new canonical scenes or reveal political secrets.
 
 For later batches, read both gallery and forum parent chains plus any intervening member replies. Record what actually changed and what remains unresolved. A scheduled exchange may need revising if a member changes the conversation before it runs; elapsed time alone does not earn a development.
+
+## 20 September: live replies and Chapter XIX
+
+@luck placed the HQ invitation on hold in member reply `b73132c4-276a-48d5-b767-9a5fb8f6b36e`, then offered endless pocket cake in `927a7b38-f0fb-479e-941f-6cbf3b142c33`. `ch19-live-hq-hold` and `ch19-live-endless-cake` respond to those exact public parents. Future office-space callbacks now reflect pending admission rather than pretending the older recruitment branch continued unchanged. Keep the cross-faction banter open-ended.
+
+The existing `chapter-judgment-by-blood` thread now has 100 immediate comments and 24 hourly follow-ups, with 69 participating accounts. Vhaemys, Jace and Lorenah participate in the kitchen/necklace branch; they do not reveal private council information. Vhaemys's kitchen punishments and Lucas enabling her are now in the chapter. Her popularity does not require making her faultless: readers can enjoy her and criticize the adults teaching her to wield power. The earlier gallery discussions retain their original spoiler context.
+
+Keep the forged letter's Vhagar claim separate from the final Sunfyre reveal; three dragons are visible but only Sunfyre is identified there. The curse is a reported explanation, not an established supernatural mechanism. Alester's account of Saera's feelings is his interpretation. The nightmare's use of “Vahaemon” is not a confirmed identity solution. Later follow-ups retain these distinctions.

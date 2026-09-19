@@ -25,7 +25,7 @@ function Account({user}:{user:GutterUser}) {
   const stats=getGutterUserStats(user.id);
   return <details className={styles.account}><summary>
     {user.account?.type==='character'?<MiniPortrait id={user.account.characterId} alt={identity?.name??user.username} size={28}/>:user.avatarUrl?<img className={styles.avatar} src={user.avatarUrl} alt=""/>:<span className={styles.avatar} style={{backgroundColor:user.color}} aria-hidden="true">{user.avatar}</span>}
-    <span>@{user.username}</span>{identity&&<span className={styles.verified} title={`Verified ${identity.type} account · fictional`} aria-label={`Verified ${identity.type} account`}>✓</span>}
+    <span>@{user.username}</span>{identity&&<span className={`${styles.verified} ${identity.type==='institution'?styles.institution:''}`} role="img" title={`Verified ${identity.type} account · fictional`} aria-label={`Verified ${identity.type} account`}>✓</span>}
     {user.id==='cast-jacaelon-targaryen'&&<span className={styles.mod}>MOD</span>}
   </summary><div className={styles.profile}>
     <strong>{user.displayName??user.username}</strong><span className={styles.muted}> · {user.kind==='fictional'?'Fictional account':'Community member'}</span>

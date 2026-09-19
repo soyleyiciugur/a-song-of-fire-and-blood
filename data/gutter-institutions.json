@@ -1,4 +1,17 @@
 [
-  { "id": "citadel", "name": "The Citadel", "description": "Fictional social account for the Citadel; the raven-desk admin is a comedy invention." },
-  { "id": "city-watch", "name": "City Watch of King's Landing", "description": "Fictional social account for the City Watch; the public-facing admin is a comedy invention." }
+  {
+    "id": "citadel",
+    "name": "The Citadel",
+    "description": "Fictional social account for the Citadel; the raven-desk admin is a comedy invention."
+  },
+  {
+    "id": "city-watch",
+    "name": "City Watch of King's Landing",
+    "description": "Fictional social account for the City Watch; the public-facing admin is a comedy invention."
+  },
+  {
+    "id": "oldtown-visitor-centre",
+    "name": "Oldtown Visitor Centre",
+    "description": "Fictional Oldtown tourism desk; its public-facing admin is a social-AU comedy invention, not a real organization or a source of new canon policy."
+  }
 ]

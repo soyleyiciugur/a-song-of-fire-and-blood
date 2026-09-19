@@ -50,6 +50,8 @@
 .comment[data-highlighted=true] { border-color: var(--tavern-gold); border-left-color: var(--tavern-gold); outline: 2px solid rgba(201,162,39,.32); outline-offset: 3px; background: linear-gradient(90deg,rgba(201,162,39,.07),transparent 50%),var(--tavern-surface); }
 .warning { border-color: rgba(137,171,215,.35); border-left-color: #89abd7; background: linear-gradient(90deg,rgba(82,123,173,.09),transparent 45%),var(--tavern-surface); }
 .modNote,.mod,.verified { color: #a9c8ed; } .modNote { font-size: 11px; } .mod { font-size: 9px; letter-spacing: .08em; }
+.verified { display: inline-flex; flex-shrink: 0; }
+.verified.institution { color: #e3ba70; }
 .account summary { display: flex; align-items: center; gap: 8px; min-height: 36px; overflow-wrap: anywhere; list-style: none; cursor: pointer; font: 600 12px var(--font-geist); }
 .account summary::-webkit-details-marker { display: none; }
 .avatar { display: grid; place-items: center; width: 30px; height: 30px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.11); border-radius: 7px; color: white; font-size: 11px; box-shadow: 0 3px 9px rgba(0,0,0,.25); }

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { publishForum } from '../lib/forumPublication.mjs';
 const read=name=>JSON.parse(fs.readFileSync(new URL(`../data/${name}`,import.meta.url),'utf8'));
 const forum=read('forum.json'), chapters=read('chapters.json'), community=read('flea-bottom.json');
+const requirements=read('community-authoring-policy.json').forum?.chapterRequirements ?? {};
 const users=new Map(community.users.map(u=>[u.id,u]));
 const threads=new Map(forum.threads.map(t=>[t.id,t]));
 const comments=new Map(forum.comments.map(c=>[c.id,c]));
@@ -17,7 +18,15 @@ for(const t of forum.threads){
   if(t.chapterSlug){assert(slugs.has(t.chapterSlug));assert.equal(t.spoilerThrough,t.chapterSlug);}
   else assert(t.title.trim());
   const participants=new Set(forum.comments.filter(c=>c.entryId===t.id&&!users.get(c.authorId)?.account).map(c=>c.authorId));
-  if(t.chapterSlug)assert(participants.size>=5 && participants.size<=10,`${t.id} needs 5–10 regular participants`);
+  if(t.chapterSlug) {
+    assert(participants.size>=5,`${t.id} needs at least 5 regular participants`);
+    const requirement=requirements[t.chapterSlug];
+    if(requirement) {
+      const conversation=forum.comments.filter(c=>c.entryId===t.id);
+      assert(new Set(conversation.map(c=>c.authorId)).size>=requirement.minimumParticipants,`${t.id}: insufficient participants`);
+      assert(conversation.length>=requirement.minimumComments,`${t.id}: insufficient comments`);
+    }
+  }
 }
 for(const [index,c] of forum.comments.entries()){
   const localThread=threads.get(c.entryId);

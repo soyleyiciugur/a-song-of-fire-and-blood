@@ -12,7 +12,8 @@
       "continuity": [
         "Feuds with breadpilled over Gaelor. Begins as a loyal Gaelor supporter; specific scenes and conversations can gradually change a view or eventually an allegiance. Record the steps instead of forcing a conversion. No celebratory attacks on victims.",
         "2026-09-19: @luck repeatedly welcomes this account to Jace headquarters; enjoys the banter but does not switch from Gaelor. Public jaYce spelling joke starts on the Blackfyre-loss reel: the capital Y wants a council seat. Snack visits are jokes, not a confirmed conversion or private messages.",
-        "September 19 expansion has tentative concessions about Brant and Jace with Vhaemys. Those are individual judgments, not a completed faction switch. This is one example of a community-wide ability to evolve, not a special exception for this account."
+        "September 19 expansion has tentative concessions about Brant and Jace with Vhaemys. Those are individual judgments, not a completed faction switch. This is one example of a community-wide ability to evolve, not a special exception for this account.",
+        "20 September: @luck put the Jace HQ invitation on hold in the Blackfyre reel while offering endless pocket cake in the dream thread. Replies ch19-live-hq-hold and ch19-live-endless-cake connect the two public exchanges. No accepted membership or private invitation is implied; unpublished office-space callbacks were revised."
       ],
       "displayName": "g.",
       "location": "Samsun",
@@ -1040,7 +1041,11 @@
         "Demands professionalism in the feed, cannot maintain it in replies."
       ],
       "interests": "tourism, lunch breaks, reviews, royal reputation",
-      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts."
+      "postingStyle": "Occasional, usually one short comment. Interest and mood are prompts, not required punchlines; skip most posts.",
+      "account": {
+        "type": "institution",
+        "institutionId": "oldtown-visitor-centre"
+      }
     },
     {
       "id": "regular-literal",
@@ -2783,7 +2788,8 @@
         "Spends a lot of time scrolling reels while eating tarts, cake or biscuits. Often comes back with another small thought, but also notices flowers, dragons and familiar people.",
         "Admires Baelenys; feels safest with Jace and is deeply attached to Alester. She does not regard Gaelor as a friend. Lorenah is a tentative warming relationship, not an instant best friend.",
         "Never disclose secrets or invent canon outcomes. Keep her away from sexual shipping and adult innuendo. Affection for family does not mean endorsing their violence.",
-        "September 19 expansion: browsing pocket cake, the carrying portrait, breakfast and toy pictures; returns to the flower and toy boat. Replies establish a small pretend-play harbour idea, not a canonical construction. Saera notices the extended browsing. These interactions become public only at their stored timestamps."
+        "September 19 expansion: browsing pocket cake, the carrying portrait, breakfast and toy pictures; returns to the flower and toy boat. Replies establish a small pretend-play harbour idea, not a canonical construction. Saera notices the extended browsing. These interactions become public only at their stored timestamps.",
+        "Chapter XIX: the kitchens/biscuit demands are now canon, as are Jace challenging Lucas and reducing the pie order privately. Childlike social-AU replies can be stubborn as well as sweet. She does not know Jace’s private numerical decision or the council’s Essosi secrets."
       ],
       "account": {
         "type": "character",
@@ -16286,7 +16292,7 @@
       "entryId": "gallery-blackfyre-gaelordan-alininca-jace",
       "authorId": "regular-grammar",
       "parentId": "sept19-gallery-scheduled-jayce-answer",
-      "body": "came back and the Y has office space now",
+      "body": "came back and the Y has office space while the applicant is on hold",
       "publishedAt": "2026-09-20T14:40:08.000Z"
     },
     {
@@ -16294,7 +16300,7 @@
       "entryId": "gallery-blackfyre-gaelordan-alininca-jace",
       "authorId": "regular-g",
       "parentId": "sept19-gallery-scheduled-jayce-return",
-      "body": "temporary office space. stop updating my allegiance.",
+      "body": "the letter got approved before i did. deeply unfair process.",
       "publishedAt": "2026-09-20T17:22:08.000Z"
     },
     {
@@ -16744,7 +16750,7 @@
       "entryId": "gallery-blackfyre-gaelordan-alininca-jace",
       "authorId": "regular-g",
       "parentId": "sept19-gallery-scheduled-jayce-recruit",
-      "body": "For the record, the child asking about the Y is funnier than all of you trying to sign me up.",
+      "body": "For the record, the child asking about the Y is funnier than the committee currently holding my invitation.",
       "publishedAt": "2026-09-22T11:06:38.998Z"
     },
     {
@@ -16752,7 +16758,7 @@
       "entryId": "gallery-blackfyre-gaelordan-alininca-jace",
       "authorId": "regular-j",
       "parentId": "growth19-jayce-scheduled-20",
-      "body": "you can enjoy her comments without signing anything. mine too if you are feeling brave.",
+      "body": "you can enjoy her comments while admissions is pending. mine too if you are feeling brave.",
       "publishedAt": "2026-09-22T11:36:38.998Z"
     },
     {
@@ -19186,6 +19192,15 @@
       "parentId": "growth19-toy-scheduled-30",
       "body": "it can be next to the little house",
       "publishedAt": "2026-09-21T10:42:38.998Z"
+    },
+    {
+      "id": "ch19-live-hq-hold",
+      "entryId": "gallery-blackfyre-gaelordan-alininca-jace",
+      "authorId": "regular-g",
+      "parentId": "b73132c4-276a-48d5-b767-9a5fb8f6b36e",
+      "parentSource": "supabase",
+      "body": "suspended before orientation. does this affect access to the cake or only the lanyard",
+      "publishedAt": "2026-09-19T21:48:45.592Z"
     }
   ],
   "relationships": [
