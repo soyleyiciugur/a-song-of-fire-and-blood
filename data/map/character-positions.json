@@ -1022,7 +1022,7 @@
     "daria-sand": "King's Landing",
     "nymos": "Starfall",
     "liana-tyrell": "Highgarden",
-    "renrose-tyrell-daughter": "Highgarden"
+    "elinor-tyrell": "Highgarden"
   },
   "until-the-last-breath": {
     "baelenys-targaryen": "King's Landing",
@@ -1100,7 +1100,82 @@
     "daria-sand": "King's Landing",
     "nymos": "Starfall",
     "liana-tyrell": "Highgarden",
-    "renrose-tyrell-daughter": "Highgarden",
+    "elinor-tyrell": "Highgarden",
     "mydan-gerren": "King's Landing"
+  },
+  "judgment-by-blood": {
+    "baelenys-targaryen": "King's Landing",
+    "baelor-targaryen": "King's Landing",
+    "cordin-poole": "King's Landing",
+    "darren-dayne": "Sunspear",
+    "gaelor-targaryen": [
+      "Driftmark",
+      "King's Landing"
+    ],
+    "jacaelon-targaryen": "King's Landing",
+    "jaery-targaryen": "King's Landing",
+    "lorenah-dayne": "King's Landing",
+    "maela-targaryen": "King's Landing",
+    "malaenar-targaryen": "Dragonstone",
+    "naella-velaryon": [
+      "Driftmark",
+      "King's Landing"
+    ],
+    "rhaella-targaryen": "Dead",
+    "rickard-stark": "Winterfell",
+    "saera-targaryen": "King's Landing",
+    "alester-dayne": "King's Landing",
+    "brant-costayne": [
+      "King's Landing",
+      "Dead"
+    ],
+    "orwell-morrigen": "King's Landing",
+    "saathos-maris": "King's Landing",
+    "steffon-baratheon": "King's Landing",
+    "tion-lannister": "King's Landing",
+    "vhaemys-targaryen": "King's Landing",
+    "weylar-rocke": "King's Landing",
+    "edmyn-uller": "-",
+    "melessa-hightower": "Oldtown",
+    "godfrey-blackwood": "Raventree Hall",
+    "visenor-targaryen": "Oldtown",
+    "lorent-tyrell": "Dead",
+    "renrose-tyrell": "Highgarden",
+    "martyn-mullendore": [
+      "Highgarden",
+      "The Reach"
+    ],
+    "berholt-caswell": "King's Landing",
+    "leo-tyrell": "Oldtown",
+    "almar-larchmont": "Oldtown",
+    "baran-strong": "Dragonstone",
+    "tansy-riverside": "Dragonstone",
+    "perric-bracken": "Stone Hedge",
+    "clover-tully": "Riverrun",
+    "clarisse-flowers": [
+      "Highgarden",
+      "The Reach"
+    ],
+    "benjen-stark": "Winterfell",
+    "mother-marya": "Winterfell",
+    "naela-targaryen": "-",
+    "vahaemon-targaryen": "Tyrosh",
+    "visenya-targaryen": "Tyrosh",
+    "alysanne-hightower": "Dead",
+    "brandon-stark": "Dead",
+    "brannyn-vance": "Dead",
+    "curtass-whent": "Dead",
+    "derrin-hightower": "Dead",
+    "timos-hightower": "Dead",
+    "lucas-corbray": "King's Landing",
+    "reyenald-reyne": "King's Landing",
+    "oswald-eagle": "King's Landing",
+    "daria-sand": "King's Landing",
+    "nymos": "-",
+    "liana-tyrell": "Highgarden",
+    "elinor-tyrell": "Highgarden",
+    "mydan-gerren": "King's Landing",
+    "vaenarr-targaryen": "Tyrosh",
+    "aegor-targaryen": "Tyrosh"
   }
 }

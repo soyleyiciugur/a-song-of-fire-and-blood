@@ -138,5 +138,18 @@
       "Complicates the Crown's Pursuit of Vahaemon"
     ],
     "description": "A dragon reportedly bonded to the exiled Prince Vahaemon during his time in the Free Cities. How or when he acquired it remains unknown to the Crown, but its existence has forced the Small Council to reconsider any direct military action against him, including the proposed campaign toward Tyrosh."
+  },
+  {
+    "id": "sunfyre",
+    "name": "Sunfyre",
+    "status": "Alive",
+    "riderId": "aegor-targaryen",
+    "image": "/images/dragons/sunfyre.webp",
+    "traits": [
+      "Golden",
+      "Bonded to Aegor Targaryen",
+      "Most Beautiful Dragon Ever Seen"
+    ],
+    "description": "A golden dragon bonded to Aegor Targaryen, Vahaemon's son. Sunfyre is revealed beyond the Narrow Sea when three dragons rise around Vahaemon's camp; the golden beast lands beside Aegor and curls its neck around him with unmistakable familiarity. The revelation confirms that Vahaemon's exiled branch possesses multiple dragons, not merely the single beast the Crown once suspected."
   }
 ]

@@ -14,6 +14,7 @@ export type CharacterId =
   | "liana-tyrell"
   | "nymos"
   | "aenys-targaryen-ii"
+  | "aegor-targaryen"
   | "aegon-targaryen-i"
   | "queen-visenya-targaryen"
   | "queen-rhaenys-targaryen"

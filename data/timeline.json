@@ -967,5 +967,171 @@
         "location": "King's Landing"
       }
     ]
+  },
+  {
+    "chapterSlug": "judgment-by-blood",
+    "chapterTitle": "Chapter XIX: Judgment by Blood",
+    "date": "18th–20th of the 8th Moon, 99 AC (with an earlier memory from Baelenys’s childhood)",
+    "events": [
+      {
+        "title": "Aenys destroys Malaenar's dragon",
+        "description": "In a nightmare drawn from Baelenys's childhood, seventeen-year-old Malaenar is forced by Aenys II to crawl across the floor beneath the Dragonpit for the right to keep a small dragon. After humiliating him, Aenys orders Sheepstealer to kill the beast while young Baelenys watches and fails to intervene.",
+        "date": "Years earlier — Baelenys’s childhood",
+        "characters": [
+          "aenys-targaryen-ii",
+          "malaenar-targaryen",
+          "baelenys-targaryen"
+        ],
+        "kind": "family",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Rhaella and Nymos are reported missing",
+        "description": "A raven from Dorne tells Lorenah and Jace that Rhaella has failed to return for a full day and that the maester Nymos is missing as well. Burned bodies and an unburned basket matching Rhaella’s are found near Starfall. Jace sends Weylar to investigate in secret while Lorenah activates Dayne contacts.",
+        "date": "18th of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "lorenah-dayne",
+          "rhaella-targaryen",
+          "nymos",
+          "weylar-rocke",
+          "daria-sand"
+        ],
+        "kind": "revelation",
+        "location": "Starfall"
+      },
+      {
+        "title": "Jace forces Costayne's trial forward",
+        "description": "Jace summons Grand Maester Baelor and Lord Commander Orwell Morrigen and orders that Gaelor either name a champion or return within two days. Security preparations begin and Saathos Maris is to be found.",
+        "date": "18th of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "baelor-targaryen",
+          "orwell-morrigen",
+          "gaelor-targaryen",
+          "brant-costayne",
+          "saathos-maris"
+        ],
+        "kind": "politics",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Alester finally speaks about Saera",
+        "description": "A rough spar between Jace and Alester ends with Jace bloodied and Orwell intervening. Alester admits he believes Saera loves Rickard Stark, says she made the northern lord a promise and confesses that he never found the courage to tell her what he wanted. Jace promises to speak with Saera.",
+        "date": "18th of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "alester-dayne",
+          "saera-targaryen",
+          "rickard-stark",
+          "orwell-morrigen",
+          "baelenys-targaryen"
+        ],
+        "kind": "family",
+        "location": "King's Landing"
+      },
+      {
+        "title": "The Gardener forgery is completed",
+        "description": "Back in Oldtown, Visenor dictates the false Vahaemon letter to Almar. It claims Gardener gold funds sellswords, western ports are being prepared for invasion and Vhagar has been found near Volantis. Almar warns that Lord Gardener may already be travelling quietly toward King’s Landing.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "almar-larchmont",
+          "vahaemon-targaryen"
+        ],
+        "kind": "politics",
+        "location": "Oldtown"
+      },
+      {
+        "title": "Leo searches Almar's chambers",
+        "description": "While Visenor, Almar and Melessa are distracted by a raven from Dorne, Leo Tyrell slips into Almar's private chambers and searches through parchments, books and shelves, acting on suspicions first raised in Highgarden.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "leo-tyrell",
+          "almar-larchmont",
+          "visenor-targaryen",
+          "melessa-hightower"
+        ],
+        "kind": "revelation",
+        "location": "Oldtown"
+      },
+      {
+        "title": "The Starfall dragon report reaches Oldtown",
+        "description": "Dorne circulates word that several men have been burned near Starfall by a possible dragon. Visenor privately suspects Boneskin, remembers that Rhaella had been feeding him and begins considering an immediate journey south. Almar instead worries about why Nymos has not returned.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "almar-larchmont",
+          "rhaella-targaryen",
+          "nymos",
+          "melessa-hightower"
+        ],
+        "kind": "revelation",
+        "location": "Oldtown"
+      },
+      {
+        "title": "Gaelor returns to a hostile capital",
+        "description": "Gaelor rides back from Driftmark with thirty men and Naella. King’s Landing greets him with boos and thrown tomatoes. Cordin warns him that Jace has grown closer to Baelenys and hears Gaelor’s plan to go to Essos, secure Braavosi support and take the Stepstones.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "naella-velaryon",
+          "cordin-poole",
+          "jacaelon-targaryen",
+          "baelenys-targaryen"
+        ],
+        "kind": "travel",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Brant Costayne dies in trial by combat",
+        "description": "Before the Crown and hundreds of spectators, Brant wounds Gaelor’s left forearm deeply but is eventually struck through the mouth and face. Gaelor kills him, lifts the severed head and throws it toward the royal seats. The crowd, which had entered chanting for Brant, begins accepting the victory as the gods’ judgment.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "gaelor-targaryen",
+          "brant-costayne",
+          "baelenys-targaryen",
+          "jaery-targaryen",
+          "jacaelon-targaryen",
+          "vhaemys-targaryen",
+          "saera-targaryen",
+          "baelor-targaryen"
+        ],
+        "kind": "death",
+        "location": "King's Landing"
+      },
+      {
+        "title": "The Crown learns what Vahaemon has built",
+        "description": "The Master of Whisperers reports that Vahaemon's circle believes a bloodline curse disrupts dragon bonds, that Vahaemon's family has become involved in blood magic, that Vaenarr Targaryen has joined them and that multiple dragons are now in Essos. Aegor Targaryen is identified as a dragonrider already known as the Dragon Knight.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "baelor-targaryen",
+          "cordin-poole",
+          "tion-lannister",
+          "orwell-morrigen",
+          "vahaemon-targaryen",
+          "vaenarr-targaryen",
+          "visenya-targaryen",
+          "aegor-targaryen"
+        ],
+        "kind": "revelation",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Aegor and Sunfyre are revealed",
+        "description": "Across the Narrow Sea, Vahaemon stands with Vaenarr, Visenya and his son Aegor as three dragons rise around them. The golden Sunfyre lands beside Aegor, confirming the Dragon Knight’s bond and the scale of the exiled branch’s preparations.",
+        "date": "20th of the 8th Moon",
+        "characters": [
+          "vahaemon-targaryen",
+          "vaenarr-targaryen",
+          "visenya-targaryen",
+          "aegor-targaryen"
+        ],
+        "kind": "revelation",
+        "location": "Tyrosh"
+      }
+    ]
   }
 ]

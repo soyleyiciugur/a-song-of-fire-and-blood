@@ -7,7 +7,7 @@
     "sigilSrc": "/images/houses/targaryen.webp",
     "color": "#B22222",
     "secondaryColor": "#000000",
-    "description": "The ruling house enters a new succession crisis in silence. Baelenys entrusts Jacaelon with Aegon's dream and intends to name him heir, while Gaelor remains banished and Visenor remains hidden in the Reach, unaware that Rhaella and their unborn child are dead. Vhaemys's repeating visions suggest the Dragonet may be a Dreamer, and Saera returns from Winterfell with Alester and a white direwolf."
+    "description": "House Targaryen's succession crisis is overtaken by a larger dynastic threat. Baelenys still intends Jacaelon to succeed him, while Gaelor returns from Driftmark long enough to kill Brant Costayne in trial by combat and then plans a new Stepstones campaign from Essos. In the shadows, Vahaemon is revealed alive and preparing in Tyrosh with Vaenarr, Visenya, his son Aegor and multiple dragons. Aegor rides Sunfyre and is already known as the Dragon Knight. The same chapter reopens an older wound: Baelenys remembers Aenys II forcing the disabled Malaenar to crawl before ordering Sheepstealer to kill his small dragon."
   },
   {
     "id": "tyrell",
@@ -17,7 +17,7 @@
     "sigilSrc": "/images/houses/tyrell.webp",
     "color": "#228B22",
     "secondaryColor": "#F4C430",
-    "description": "House Tyrell passed to Renrose after his father Lorent was summoned from Highgarden to King's Landing and executed for his part in the plot against King Baelenys on the Fifth Day of the Third Moon, 99 AC. The house remains bound to Visenor's secret claim and forged case against Lord Gardener, but the alliance has begun to crack from within. Leo overhears Renrose and Liana discussing the danger of their ambitions, then leaves Highgarden beside a prince who still calls Renrose an honorable future Hand. Elinor sends Visenor away wearing a golden-rose brooch."
+    "description": "Renrose Tyrell remains committed to Visenor's plan to destroy House Gardener and seize advantage from the Crown's response. Visenor returns to Oldtown convinced their alliance is secure, but Leo's trust has fractured: the boy follows him there, notices the suspicious work with Almar and secretly searches the maester's private chambers. The alliance now carries a hidden internal witness who may understand more than either side expects."
   },
   {
     "id": "hightower",
@@ -27,7 +27,7 @@
     "sigilSrc": "/images/houses/hightower.webp",
     "color": "#6F7478",
     "secondaryColor": "#FFFFFF",
-    "description": "Once counted among the Crown's most trusted allies through Derrin Hightower's decades as Hand, House Hightower now barely stands. Derrin's treason and the royal assault on Oldtown cost the house its lord, its heirs, and two hundred knights, leaving thirteen-year-old Lady Melessa Hightower to inherit what remained. Her household secretly shelters Prince Visenor beneath the identity of Maester Arthur Sand, but Oldtown's posture has grown markedly cautious. The Hightowers remain naturally closer to the Tyrells than to their rivals, yet no longer possess the strength to commit themselves recklessly to another great struggle. As the contest between Tyrell and Gardener threatens to divide the Reach, Melessa and Maester Almar increasingly seek neutrality, survival, and above all the prevention of another war fought on Oldtown's doorstep."
+    "description": "House Hightower remains broken but politically dangerous through what it shelters. In Oldtown, Melessa continues protecting Visenor while Maester Almar helps him complete a forged letter designed to frame House Gardener as Vahaemon's ally. A raven reporting a dragon and burned men near Starfall shifts Visenor's attention toward Dorne, while Leo Tyrell quietly slips into Almar's private chambers and begins searching his papers."
   },
   {
     "id": "stark",
@@ -47,7 +47,7 @@
     "sigilSrc": "/images/houses/dayne.webp",
     "color": "#DDA0DD",
     "secondaryColor": "#E6E6FA",
-    "description": "House Dayne remains entangled in both the Crown and its fugitives. Soldiers find the ash and bodies outside Boneskin's empty coastal cave but no sign of the dragon or Rhaella, while Ser Alester returns from Winterfell to King's Landing visibly burdened by what occurred there."
+    "description": "House Dayne is pulled into a new mystery around Starfall. Rhaella and the younger maester Nymos are both reported missing, burned bodies lie along the coast and an unburned basket matching Rhaella's has been found nearby. Lord Darren remains in Sunspear while Lorenah quietly mobilizes her father's men from King's Landing. Alester, meanwhile, returns from Winterfell and finally admits to Jace how deeply Saera's promise to Rickard Stark has affected him."
   },
   {
     "id": "velaryon",
@@ -187,7 +187,7 @@
     "sigilSrc": "/images/houses/martell.webp",
     "color": "#D97925",
     "secondaryColor": "#C0392B",
-    "description": "The ruling house of Dorne, proud guardians of a realm that has always kept its own counsel. Though the troubles surrounding Prince Visenor have repeatedly carried Targaryen blood across Dornish lands, House Martell itself has yet to hear about them and to openly take a side in the gathering struggle for the Iron Throne."
+    "description": "Dorne responds quickly to reports that several men were burned near the Starfall coast, publicly circulating the sighting so the realm cannot later accuse it of concealing a dragon. The incident draws attention back toward House Dayne's lands just as Rhaella and Maester Nymos disappear, while Lord Darren Dayne remains in Sunspear."
   },
   {
     "id": "gardener",
@@ -197,7 +197,7 @@
     "sigilSrc": "/images/houses/gardener.webp",
     "color": "#2E7D32",
     "secondaryColor": "#F2F2ED",
-    "description": "Descendants of the ancient Kings of the Reach, House Gardener has emerged from the margins of regional politics to openly challenge Tyrell legitimacy. They claim the Reach by a bloodline stretching back thousands of years to the kings who ruled before Highgarden passed to House Tyrell, and their challenge is no longer merely symbolic. Gardener wealth now exceeds that of the Tyrells, while their grain is being distributed through the starving corners of the Reach in an increasingly visible campaign for influence among the smallfolk. Lord Gardener is believed to be seeking an audience with King Baelenys, hoping that the Crown's hostility toward House Tyrell might restore political weight to his family's ancient claim. The prospect has alarmed both Highgarden and Oldtown enough that Prince Visenor has begun considering how the meeting might be prevented — or turned against the Gardeners themselves."
+    "description": "House Gardener is now the target of an active frame-up. Visenor and Almar complete a false letter in Vahaemon's name claiming Gardener gold funds sellswords, western ports are being prepared for invasion and Vhagar has been found near Volantis. Almar believes Lord Gardener may already be travelling quietly toward King's Landing, making the timing of the forgery urgent."
   },
   {
     "id": "karstark",
@@ -246,7 +246,7 @@
     "seat": "-",
     "sigilSrc": "",
     "color": "#777777",
-    "description": "The family of Ser Lucas Corbray, the Kingsguard known as the Mustang, who returns from the Vale in the sixteenth chapter."
+    "description": "House Corbray is represented at court by Ser Lucas Corbray, the Kingsguard known as the Mustang. His affection for Princess Vhaemys repeatedly makes him too indulgent: Jace catches him helping her evade the spirit of a kitchen punishment and reminds him that friendship with a princess cannot outrank a white-cloak oath."
   },
   {
     "id": "reyne",

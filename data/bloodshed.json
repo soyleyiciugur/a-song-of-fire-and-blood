@@ -99,10 +99,34 @@
     "year": 99,
     "location": "Near Starfall",
     "chapterSlug": "the-children-pay",
-    "participants": ["rhaella-targaryen"],
-    "houses": ["targaryen"],
+    "participants": [
+      "rhaella-targaryen"
+    ],
+    "houses": [
+      "targaryen"
+    ],
     "summary": "Boneskin burns the men who attacked Rhaella, then obeys the princess's final command and burns her as well.",
     "cause": "A band of riders assaults the isolated and pregnant princess near the dragon's cave, leaving her grievously wounded.",
     "consequence": "The attackers and Rhaella die in dragonfire, leaving Visenor's wife and unborn child lost without his knowledge."
+  },
+  {
+    "id": "costayne-trial-by-combat",
+    "title": "The Trial by Combat of Brant Costayne",
+    "kind": "duel",
+    "day": 20,
+    "moon": 8,
+    "year": 99,
+    "location": "King's Landing",
+    "chapterSlug": "judgment-by-blood",
+    "participants": [
+      "gaelor-targaryen",
+      "brant-costayne"
+    ],
+    "houses": [
+      "targaryen"
+    ],
+    "summary": "Prince Gaelor Targaryen and Ser Brant Costayne fight before the Crown in the Red Keep's outer yard. Brant badly wounds Gaelor's left forearm, but Gaelor eventually cuts through his face, kills him and raises his severed head before the crowd.",
+    "cause": "Brant rejected the sentence of the Wall and demanded trial by combat over his attack on Gaelor and the unresolved bloodshed of Oldtown.",
+    "consequence": "Brant dies, Gaelor is declared the gods' victor by the logic of the trial, and some of the crowd that entered hoping to see the prince die accepts the verdict. Gaelor remains wounded and is still expected to leave the capital again."
   }
 ]

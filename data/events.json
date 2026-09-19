@@ -141,5 +141,27 @@
     "moon": 8,
     "year": 99,
     "description": "Cloudgazer returns Princess Saera, Ser Alester Dayne and Rickard Stark's white direwolf gift to the Red Keep."
+  },
+  {
+    "id": "costayne-trial-by-combat",
+    "title": "The Trial by Combat of Brant Costayne",
+    "type": "trial",
+    "location": "King's Landing",
+    "chapterSlug": "judgment-by-blood",
+    "day": 20,
+    "moon": 8,
+    "year": 99,
+    "description": "Gaelor returns from Driftmark to face Brant Costayne before the Crown. Brant wounds the prince badly, but Gaelor kills and beheads him, ending the delayed judgment demanded after the tourney."
+  },
+  {
+    "id": "vahaemon-essos-revelation",
+    "title": "Vahaemon's Essosi Dragon Circle",
+    "type": "revelation",
+    "location": "Tyrosh",
+    "chapterSlug": "judgment-by-blood",
+    "day": 20,
+    "moon": 8,
+    "year": 99,
+    "description": "Crown intelligence reveals that Vahaemon has spent his exile building power in Essos with Tyroshi support, blood magic, Vaenarr Targaryen and multiple dragons. His son Aegor is revealed as Sunfyre's rider, the Dragon Knight."
   }
 ]
