@@ -1053,7 +1053,7 @@
       "nymos": "The younger maester she questions about Edmyn's disappearance and Lorenah's safety. He understands her guarded questions and agrees to arrange food for the villages.",
       "jaery-targaryen": "At twelve, Rhaella was told by Jaery that she was loved as a daughter and destined to stand beside Visenor as queen. Rhaella vowed that every breath she drew would be for the prince.",
       "vhaemys-targaryen": "Knew Vhaemys from infancy, when the screaming baby was already called the Dragonet. Rhaella instinctively tried to comfort her during the conversation in which Jaery promised Rhaella a future beside Visenor.",
-      "aegor-targaryen": "Her brother, revealed in Essos after her death as the dragonrider known as the Dragon Knight. Rhaella never lives to see what Vahaemon has built around him."
+      "aegor-targaryen": "Her brother, revealed in Essos after her death as the dragonrider known as the Young Dragon. Rhaella never lives to see what Vahaemon has built around him."
     },
     "summary": "Daughter of the exiled Vahaemon Targaryen and wife of Crown Prince Visenor, Rhaella lived in hiding near Starfall under House Dayne's protection while carrying Visenor's child. On the Fifteenth Day of the Eighth Moon, 99 AC, riders attacked her near Boneskin's cave. The dragon burned her assailants, but Rhaella had been grievously wounded. She blocked Boneskin's path and repeatedly commanded Dracarys until the dragon understood, dying with her unborn child in the fire. Visenor remains unaware of their deaths.",
     "quotes": [],
@@ -1619,7 +1619,7 @@
       "visenor-targaryen": "His nephew Visenor now treats Vahaemon's name as both a family danger and a political weapon. Without Vahaemon's knowledge, Visenor has considered forging evidence of an alliance between him and the Gardeners to redirect the Crown's fury.",
       "visenya-targaryen": "His daughter is back beside him in Essos after her unexplained appearance in King's Landing. Crown intelligence strongly suspects that she has a dragon of her own.",
       "vaenarr-targaryen": "Queen Jaery's brother has joined Vahaemon in Essos and stands openly at his side as the exiled prince's preparations enter a new phase.",
-      "aegor-targaryen": "His son, already known in Essos as the Dragon Knight, rides the golden dragon Sunfyre and appears to be one of the central weapons in Vahaemon's long preparation for war."
+      "aegor-targaryen": "His son, already known in Essos as the Young Dragon, rides the golden dragon Sunfyre and appears to be one of the central weapons in Vahaemon's long preparation for war."
     },
     "summary": "Vahaemon is no longer merely an exiled name whispered about in the Red Keep. The Crown's spies discover that he has spent years building a secret network in Essos, has been welcomed by Tyrosh and the Triarchy, has promised future council seats to influential Tyroshi men, and is involved with blood magic tied to a supposed curse upon the Targaryen bloodline. Vaenarr Targaryen now stands beside him, his son Aegor rides Sunfyre and at least three dragons are seen circling his camp. From a hill across the Narrow Sea, Vahaemon looks west toward the kingdom that cast him out.",
     "quotes": [],
@@ -1950,7 +1950,7 @@
       "naela-targaryen": "Her mother, Princess Naela Targaryen, whose current location and condition remain unknown.",
       "rhaella-targaryen": "Her sister, whose current location and condition she presumably does not know.",
       "vahaemon-targaryen": "She is revealed back at her father's side in Essos. The Crown now suspects her earlier appearance in King's Landing was connected to Vahaemon's wider preparations.",
-      "aegor-targaryen": "Her brother Aegor is revealed beside the same Essosi circle, already bonded to Sunfyre and known as the Dragon Knight."
+      "aegor-targaryen": "Her brother Aegor is revealed beside the same Essosi circle, already bonded to Sunfyre and known as the Young Dragon."
     },
     "summary": "After infiltrating King's Landing with Dark Sister and disappearing again, Visenya is revealed alive in Essos beside her father Vahaemon and uncle Vaenarr. The Crown's Master of Whisperers believes she likely has a dragon of her own, though its identity is unknown. Her brief visit to the capital now appears to have been one move inside a much larger preparation involving blood magic, Tyroshi support and several dragons gathered around Vahaemon.",
     "quotes": [],
@@ -4115,7 +4115,7 @@
   {
     "id": "aegor-targaryen",
     "name": "Aegor Targaryen",
-    "nickname": "The Dragon Knight",
+    "nickname": "The Young Dragon",
     "aliases": [],
     "house": "House Targaryen",
     "title": "Prince Aegor of House Targaryen",
@@ -4147,11 +4147,11 @@
       "visenya-targaryen": "His sister, also present beside Vahaemon in Essos and suspected by the Crown of possessing a dragon of her own.",
       "rhaella-targaryen": "His sister, already dead near Starfall by the time Aegor is revealed to the reader; whether he knows her fate is not established."
     },
-    "summary": "Vahaemon Targaryen's son, revealed in Essos as a dragonrider already famous enough to have earned the name the Dragon Knight. He is bonded to the golden dragon Sunfyre. On a hill overlooking the Narrow Sea, Aegor stands between Vahaemon, Vaenarr and Visenya as three dragons rise into the sky—making him the clearest living proof that the exiled branch of House Targaryen has become far more dangerous than the Crown believed.",
+    "summary": "Vahaemon Targaryen's son, revealed in Essos as a dragonrider already famous enough to have earned the name the Young Dragon. He is bonded to the golden dragon Sunfyre. On a hill overlooking the Narrow Sea, Aegor stands between Vahaemon, Vaenarr and Visenya as three dragons rise into the sky—making him the clearest living proof that the exiled branch of House Targaryen has become far more dangerous than the Crown believed.",
     "quotes": [],
     "secret": {
       "status": "Alive",
-      "note": "Alive in Essos. Vahaemon's son is secretly confirmed as the dragonrider known as the Dragon Knight, bonded to Sunfyre."
+      "note": "Alive in Essos. Vahaemon's son is secretly confirmed as the dragonrider known as the Young Dragon, bonded to Sunfyre."
     }
   }
 ]

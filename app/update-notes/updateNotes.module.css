@@ -56,3 +56,12 @@
     margin-top: 0;
   }
 }
+
+/* Keep linked actions visually separate from the update sentence. */
+.linkedEntry { display: flex !important; align-items: center; gap: 20px; }
+.linkedEntry > span:first-child { min-width: 0; flex: 1 1 auto; }
+.linkedEntry .goLink { margin-left: auto; }
+@media (max-width: 600px) {
+  .linkedEntry { display: grid !important; grid-template-columns: minmax(0, 1fr); gap: 11px; }
+  .linkedEntry .goLink { margin-left: 0; justify-self: start; }
+}
