@@ -5998,7 +5998,6 @@ export default function GreatGamePlayPage() {
       {onlineMatch && (
         <section className={styles.opponentStatusDock} aria-label="Online match status">
           <div className={styles.opponentStatusIdentity}>
-            <span>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}</span>
             <strong>Turn {activePlayer.turnsTaken}</strong>
           </div>
           <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
@@ -7541,14 +7540,23 @@ function HudStat({
         accent
           ? styles.hudStatAccent
           : ""
-      }`}
-      data-deck-anchor={
+      } ${
         deckAnchorPlayerId
-      }
+          ? styles.hudStatDeck
+          : ""
+      }`}
       data-hand-anchor={
         handAnchorPlayerId
       }
     >
+      {deckAnchorPlayerId && (
+        <div
+          className={styles.hudDeckStack}
+          data-deck-anchor={deckAnchorPlayerId}
+          aria-hidden
+        />
+      )}
+
       <span>
         {label}
       </span>

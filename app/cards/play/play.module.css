@@ -7611,3 +7611,214 @@
     width: calc(var(--game-rail-width) - 8px - var(--game-control-button-width) - var(--game-dock-gap));
   }
 }
+
+/* =========================================================
+   v31 — TCG board geometry / dock / draw polish
+   ========================================================= */
+
+/* The visible deck back is also the actual draw-animation anchor. */
+.hudDeckStack { display: none; }
+.boardGame .hudStatDeck {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  align-items: center;
+  column-gap: 5px;
+  padding-inline: 5px;
+}
+.boardGame .hudDeckStack {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: block;
+  width: 19px;
+  aspect-ratio: 5 / 7;
+  justify-self: center;
+  border: 1px solid rgba(211, 177, 93, .62);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(214, 184, 108, .18), transparent 34%),
+    linear-gradient(145deg, rgba(92, 35, 42, .96), rgba(25, 15, 20, .98));
+  box-shadow:
+    -2px 2px 0 rgba(13, 9, 12, .98),
+    -3px 3px 0 rgba(150, 109, 58, .34),
+    0 4px 9px rgba(0, 0, 0, .42),
+    inset 0 0 0 1px rgba(255, 255, 255, .025);
+}
+.boardGame .hudDeckStack::before,
+.boardGame .hudDeckStack::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.boardGame .hudDeckStack::before {
+  inset: 3px;
+  border: 1px solid rgba(214, 184, 108, .28);
+}
+.boardGame .hudDeckStack::after {
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border: 1px solid rgba(229, 198, 116, .64);
+  background: rgba(214, 184, 108, .08);
+}
+.boardGame .hudStatDeck > span,
+.boardGame .hudStatDeck > strong {
+  grid-column: 2;
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+}
+.boardGame .hudStatDeck > span { align-self: end; }
+.boardGame .hudStatDeck > strong { align-self: start; }
+
+/* One source of truth for board padding/gap keeps the drop preview and the
+   translated cards on exactly the same grid geometry. That removes the snap
+   when a dragged card is committed to the realm. */
+.boardGame .board {
+  --board-columns: 6;
+  --board-gap: clamp(4px, .55vw, 10px);
+  --board-pad: clamp(6px, .65dvh, 10px);
+  gap: var(--board-gap);
+  padding: var(--board-pad);
+  overflow: clip;
+}
+.boardGame .boardDropSlot {
+  --board-columns: 6;
+  --board-gap: clamp(4px, .55vw, 10px);
+  --board-pad: clamp(6px, .65dvh, 10px);
+  max-height: calc(100% - (2 * var(--board-pad)));
+  box-sizing: border-box;
+}
+.boardPlacementCell[data-shift-for-drop="true"] {
+  transform: translateX(calc(100% + var(--board-gap, .75rem)));
+}
+
+/* There is only one border at each arena-row boundary. The board frame keeps
+   the separation; the divider/hand shelf no longer draw a second line on top. */
+.boardGame .battleLine {
+  border-top: 0;
+  border-bottom: 0;
+}
+.boardGame .handSection { border-top: 0; }
+
+/* Offline tables keep the opponent command meter in the realm, where v28 put
+   it. The fixed top rail is an online-only layout. */
+.boardGame:not(.gameWithOnlineChat) .opponentCommandDock {
+  position: relative;
+  top: auto;
+  right: auto;
+  grid-column: 2;
+  grid-row: 1;
+  z-index: 112;
+  align-self: start;
+  justify-self: center;
+  width: min(44%, 430px);
+  min-width: 210px;
+  height: auto;
+  margin-top: 6px;
+  pointer-events: none;
+}
+.boardGame:not(.gameWithOnlineChat) .opponentCommandDock .commandMeterCompact {
+  height: auto;
+  pointer-events: auto;
+}
+
+/* Online top dock mirrors the bottom dock exactly: same command width, same
+   control width, same gap, same outer rail insets. This final block is placed
+   after v30 intentionally so later legacy rules cannot reintroduce overlap. */
+.boardGame.gameWithOnlineChat .opponentCommandDock {
+  position: fixed;
+  top: calc(var(--site-nav-height, 0px) + 7px);
+  right: calc(7px + var(--game-control-button-width) + var(--game-dock-gap));
+  width: calc(var(--game-rail-width) - 14px - var(--game-control-button-width) - var(--game-dock-gap));
+  min-width: 0;
+  height: var(--game-command-height);
+  margin: 0;
+  pointer-events: auto;
+}
+.boardGame.gameWithOnlineChat .opponentStatusDock {
+  position: fixed;
+  top: calc(var(--site-nav-height, 0px) + 7px);
+  right: 7px;
+  width: var(--game-control-button-width);
+  height: var(--game-command-height);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(26px, 1fr) auto;
+  gap: 4px;
+  padding: 5px;
+  text-align: center;
+}
+.boardGame.gameWithOnlineChat .opponentStatusIdentity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.boardGame.gameWithOnlineChat .opponentStatusIdentity strong {
+  font-size: clamp(8px, .85dvh, 10px);
+  line-height: 1;
+}
+.boardGame.gameWithOnlineChat .opponentStatusDock button {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  padding-inline: 4px;
+}
+.boardGame.gameWithOnlineChat .opponentStatusDock small {
+  grid-column: 1;
+  text-align: center;
+  font-size: 6px;
+}
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 560px) {
+  .boardGame .hudStatDeck {
+    grid-template-columns: 18px minmax(0, 1fr);
+    column-gap: 3px;
+    padding-inline: 2px;
+  }
+  .boardGame .hudDeckStack { width: 14px; }
+  .boardGame .board {
+    --board-gap: clamp(3px, .55vw, 6px);
+    --board-pad: 4px;
+  }
+  .boardGame .boardDropSlot {
+    --board-gap: clamp(3px, .55vw, 6px);
+    --board-pad: 4px;
+  }
+  .boardGame.gameWithOnlineChat .opponentCommandDock {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + 4px);
+    right: calc(env(safe-area-inset-right) + 4px + var(--game-control-button-width) + var(--game-dock-gap));
+    width: calc(var(--game-rail-width) - 8px - var(--game-control-button-width) - var(--game-dock-gap));
+    height: var(--game-command-height);
+  }
+  .boardGame.gameWithOnlineChat .opponentStatusDock {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + 4px);
+    right: calc(env(safe-area-inset-right) + 4px);
+    width: var(--game-control-button-width);
+    height: var(--game-command-height);
+    grid-template-rows: auto minmax(20px, 1fr);
+    padding: 3px;
+  }
+  .boardGame.gameWithOnlineChat .opponentStatusDock small { display: none; }
+}
+
+/* Keep the right rail below the mirrored top command/control dock. The online
+   dock uses --game-command-height, so downstream rail positions must use the
+   same value rather than the older --game-top-dock-height token. */
+.boardGame.gameWithOnlineChat .locationBar {
+  top: calc(var(--site-nav-height, 0px) + 21px + var(--game-command-height) + var(--game-chat-height));
+}
+.boardGame.gameWithOnlineChat .logSection {
+  top: calc(var(--site-nav-height, 0px) + 29px + var(--game-command-height) + var(--game-chat-height) + var(--game-location-height));
+}
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 560px) {
+  .boardGame.gameWithOnlineChat .locationBar {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + var(--game-command-height) + 9px);
+  }
+  .boardGame.gameWithOnlineChat .logSection {
+    top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + var(--game-command-height) + var(--game-location-height) + 14px);
+  }
+}
