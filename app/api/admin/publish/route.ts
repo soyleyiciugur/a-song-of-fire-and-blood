@@ -14,7 +14,6 @@ import { ChapterListSchema } from "../../../../schemas/chapter";
 import { GalleryListSchema } from "../../../../schemas/gallery";
 import { MapEventListSchema } from "../../../../schemas/map";
 import { BloodshedListSchema } from "../../../../schemas/bloodshed";
-import { HouseOfDragonTreeSchema } from "../../../../schemas/houseOfDragonTree";
 import { updateMultipleFilesOnGithub } from "@/lib/github";
 import currentGallery from "@/data/gallery.json";
 import currentChapters from "@/data/chapters.json";
@@ -40,7 +39,6 @@ export async function POST(request: Request) {
       gallery,
       events,
       bloodshed,
-      houseOfDragonTree,
     } = body;
 
     const files: { path: string; content: unknown }[] = [];
@@ -112,11 +110,6 @@ export async function POST(request: Request) {
     if (bloodshed) {
       const validatedBloodshed = BloodshedListSchema.parse(bloodshed);
       files.push({ path: "data/bloodshed.json", content: validatedBloodshed });
-    }
-
-    if (houseOfDragonTree) {
-      const validatedTree = HouseOfDragonTreeSchema.parse(houseOfDragonTree);
-      files.push({ path: "data/house-of-the-dragon.json", content: validatedTree });
     }
 
     if (files.length === 0) {

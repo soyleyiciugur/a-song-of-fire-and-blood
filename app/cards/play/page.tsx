@@ -63,6 +63,8 @@ import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import GreatGameChat from "@/components/the-great-game/GreatGameChat";
 
+import { getTraitHighlights } from "@/lib/the-great-game/trait-highlights";
+
 import styles from "./play.module.css";
 
 type PageMode =
@@ -5602,6 +5604,10 @@ export default function GreatGamePlayPage() {
         )
       : null;
 
+  const highlightedTraits = (unit: UnitState) => onlineCanAct
+    ? getTraitHighlights(currentGame, viewPlayerId, unit, attackDrag ?? pendingConflict)
+    : [];
+
   const militaryStandingTarget =
     pendingConflict?.kind ===
       "military" &&
@@ -6055,6 +6061,7 @@ export default function GreatGamePlayPage() {
           viewEnemyPlayer.board
         }
         state={currentGame}
+        highlightedTraits={highlightedTraits}
         targetable={
           isUnitTargetable
         }
@@ -6105,6 +6112,7 @@ export default function GreatGamePlayPage() {
           viewPlayer.board
         }
         state={currentGame}
+        highlightedTraits={highlightedTraits}
         targetable={
           isUnitTargetable
         }
@@ -6541,6 +6549,7 @@ export default function GreatGamePlayPage() {
           />
 
           <UnitDetailOverlay
+            activeTraits={highlightedTraits(inspectedUnit)}
             unit={inspectedUnit}
             state={currentGame}
             onClose={() => setInspectedUnitId(null)}
@@ -7699,6 +7708,7 @@ function Board({
   title,
   units,
   state,
+  highlightedTraits,
   targetable,
   onUnitClick,
   onInspectUnit,
@@ -7725,6 +7735,7 @@ function Board({
   title: string;
   units: UnitState[];
   state: GameState;
+  highlightedTraits: (unit: UnitState) => Trait[];
   targetable: (
     unit: UnitState
   ) => boolean;
@@ -7868,6 +7879,7 @@ function Board({
               }
             >
             <BoardUnit
+              activeTraits={highlightedTraits(unit)}
               key={
                 unit.instanceId
               }
@@ -8036,6 +8048,7 @@ function AttackDragOverlay({
 
 function BoardUnit({
   unit,
+  activeTraits,
   state,
   targetable,
   selected,
@@ -8056,6 +8069,7 @@ function BoardUnit({
   actions,
 }: {
   unit: UnitState;
+  activeTraits: Trait[];
   state: GameState;
   targetable: boolean;
   selected: boolean;
@@ -8604,6 +8618,7 @@ function BoardUnit({
       </div>
 
       <CardInfoPanel
+        activeTraits={activeTraits}
         card={card}
         artifactId={
           unit.attachedArtifactId
@@ -9113,11 +9128,11 @@ function CardChrome({
   );
 }
 
-function TraitIcon({ trait }: { trait: Trait }) {
+function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }) {
   const paths: Record<Trait, string> = {
     unique: "M10 2 18 10 10 18 2 10Z",
     dragon: "M3 15 6 6 10 10 15 3 17 12 12 10 9 16Z",
-    dragonrider: "M3 16 7 9 11 12 17 5M8 5a2 2 0 1 0 4 0 2 2 0 1 0-4 0M10 7 8 12",
+    dragonrider: "M2 16Q8 19 11 13L10 10 5 12 7 4 12 8 14 5 14 2 16 4 18 5 17 8 14 9Q17 16 10 17M7 4 8 10M14 12 17 14",
     guard: "M10 2 17 5 16 12 10 18 4 12 3 5Z",
     intrigue: "M2 10Q10 1 18 10Q10 19 2 10ZM7 10a3 3 0 1 0 6 0 3 3 0 1 0-6 0",
     swift: "M12 2 4 11 10 11 8 18 16 8 10 8Z",
@@ -9125,7 +9140,7 @@ function TraitIcon({ trait }: { trait: Trait }) {
     challenge: "M4 3 15 14M3 13 7 17M13 3 4 14M13 17 17 13",
     confront: "M3 4 8 10 3 16M17 4 12 10 17 16M8 10H12",
   };
-  return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>;
+  return <svg className={active ? styles.traitIconActive : undefined} data-trait-active={active || undefined} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>;
 }
 
 function TraitRuleTooltip({
@@ -9304,6 +9319,7 @@ function EquippedArtifactBadge({
 
 function CardInfoPanel({
   card,
+  activeTraits = [],
   artifactId,
   artifactBadgeDetailed = false,
   runtimeStats,
@@ -9314,6 +9330,7 @@ function CardInfoPanel({
   showTraitTooltips = false,
 }: {
   card: GameCard;
+  activeTraits?: Trait[];
   artifactId?: string | null;
   artifactBadgeDetailed?: boolean;
   runtimeStats?: {
@@ -9361,15 +9378,6 @@ function CardInfoPanel({
         .filter(Boolean)
         .join(" ")}
     >
-      {artifactId && (
-        <EquippedArtifactBadge
-          artifactId={artifactId}
-          detailed={
-            artifactBadgeDetailed
-          }
-        />
-      )}
-
       <div
         className={
           styles.cardIdentity
@@ -9381,10 +9389,17 @@ function CardInfoPanel({
             {traits.map(trait => {
               const label = trait[0].toUpperCase() + trait.slice(1);
               return showTraitTooltips ? (
-                <TraitRuleTooltip key={trait} label={label} rule={traitRule(trait) ?? label} icon={<TraitIcon trait={trait} />} />
-              ) : <span key={trait} title={label} aria-label={label}><TraitIcon trait={trait} /></span>;
+                <TraitRuleTooltip key={trait} label={label} rule={traitRule(trait) ?? label} icon={<TraitIcon trait={trait} active={activeTraits.includes(trait)} />} />
+              ) : <span key={trait} title={label} aria-label={label}><TraitIcon trait={trait} active={activeTraits.includes(trait)} /></span>;
             })}
           </div>}
+
+          {artifactId && (
+            <EquippedArtifactBadge
+              artifactId={artifactId}
+              detailed={artifactBadgeDetailed}
+            />
+          )}
         </div>
 
         <strong>
@@ -9817,10 +9832,12 @@ function UnitEffectsTooltip({
 
 function UnitDetailOverlay({
   unit,
+  activeTraits,
   state,
   onClose,
 }: {
   unit: UnitState;
+  activeTraits: Trait[];
   state: GameState;
   onClose: () => void;
 }) {
@@ -9872,6 +9889,7 @@ function UnitDetailOverlay({
         />
 
         <CardInfoPanel
+          activeTraits={activeTraits}
           card={card}
           artifactId={
             unit.attachedArtifactId

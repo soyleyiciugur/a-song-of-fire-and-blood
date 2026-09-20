@@ -2345,23 +2345,15 @@
 }
 
 .equippedArtifactBadge {
-  position: absolute;
+  position: static;
 
-  /*
-   * Anchored to the CardInfoPanel rather than the whole card.
-   * This keeps the artifact in exactly the same identity/stat band
-   * on opponent cards and allied cards with action buttons.
-   * The right edge stays fixed while the icon grows left/up/down.
-   */
-  right: 0.52rem;
-  top: 2.56rem;
+  /* Reserve space beside the traits instead of covering identity or ability text. */
+  width: clamp(14px, 12cqw, 26px);
+  height: auto;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
 
-  z-index: 12;
-
-  width: 2.82rem;
-  height: 2.82rem;
-
-  transform: translateY(-50%);
+  transform: none;
 
   display: block;
   box-sizing: border-box;
@@ -2392,11 +2384,8 @@
 }
 
 .equippedArtifactBadgeDetailed {
-  right: 0.95rem;
-  top: 3.34rem;
-
-  width: 4.08rem;
-  height: 4.08rem;
+  width: 30px;
+  height: auto;
 }
 
 /*
@@ -7773,4 +7762,16 @@
   .boardGame .unitCard .skillProgress strong { min-width: 10px; }
   .boardGame .unitCard .skillProgressMeter { gap: 1px; }
   .boardGame .unitCard .skillProgressMeter i { width: 3px; height: 3px; }
+}
+.traitIcons { margin-left: auto; }
+.traitIconActive {
+  color: #ffe39a;
+  filter: drop-shadow(0 0 2px #ffd365) drop-shadow(0 0 5px #df9b32);
+  animation: traitGlow 1.8s ease-in-out infinite alternate;
+}
+@keyframes traitGlow {
+  to { filter: drop-shadow(0 0 3px #ffe49b) drop-shadow(0 0 8px #eab347); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .traitIconActive { animation: none; }
 }

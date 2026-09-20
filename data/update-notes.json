@@ -14,7 +14,9 @@
       "Kept mobile Table Whispers in a closable popup and made chat and Chronicle adapt to the space below expanded navigation.",
       "Added Houses → House of the Dragon as an interactive Targaryen dynasty map with mini portraits, house-colored selection, a highlighted royal spine, crowned kings and admin-only publishing.",
       "Simplified House Targaryen on the main Family Tree page to the present royal branch and linked the full dynasty to House of the Dragon.",
-      "Completed Aegor and Vaenarr's profile details and added Master of Whisperers Denlon Wickfen."
+      "Completed Aegor and Vaenarr's profile details and added Master of Whisperers Denlon Wickfen.",
+      "Added a dragon-shaped Dragonrider icon and private contextual trait glows for combat, deployment readiness and bonded dragons in hand.",
+      "Kept equipped artifacts beside card trait icons without covering card names, stats or ability text."
     ]
   },
   {

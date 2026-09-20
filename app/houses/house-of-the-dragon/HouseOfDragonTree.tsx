@@ -50,7 +50,19 @@ const KINGS = new Set([
   "baelenys-targaryen",
 ]);
 
-const CHARACTER_IDS = new Set((charactersData as Array<{ id: string }>).map((item) => item.id));
+type CharacterRecord = {
+  id: string;
+  name: string;
+  nickname?: string;
+  title?: string;
+  house?: string;
+  status?: string;
+  dragon?: string;
+};
+
+const CHARACTER_RECORDS = charactersData as CharacterRecord[];
+const CHARACTER_BY_ID = new Map(CHARACTER_RECORDS.map((item) => [item.id, item]));
+const CHARACTER_IDS = new Set(CHARACTER_RECORDS.map((item) => item.id));
 const HOUSE_BY_NAME = new Map(
   (housesData as Array<{ id: string; name: string; color?: string; sigilSrc?: string }>).map((house) => [house.name, house]),
 );
@@ -378,16 +390,17 @@ function PersonCard({
   person,
   selected,
   related,
-  editable,
+  editMode,
   onSelect,
+  onPreview,
 }: {
   person: HouseOfDragonPerson;
   selected: boolean;
   related: boolean;
-  editable: boolean;
+  editMode: boolean;
   onSelect: (id: string) => void;
+  onPreview: (id: string) => void;
 }) {
-  const linked = CHARACTER_IDS.has(person.id);
   const color = houseColor(person.house);
   const contents = (
     <>
@@ -412,35 +425,25 @@ function PersonCard({
     </>
   );
 
-  const shared = {
-    "data-tree-card": person.id,
-    className: `${styles.personCard} ${selected ? styles.selectedCard : ""} ${related ? styles.relatedCard : ""} ${ROYAL_SET.has(person.id) ? styles.royalCard : ""}`,
-    style: {
-      left: person.x ?? 0,
-      top: person.y ?? 0,
-      "--house-color": color,
-    } as CSSProperties,
-  };
-
-  if (!editable && linked) {
-    return (
-      <Link {...shared} href={`/characters/${person.id}`} draggable={false}>
-        {contents}
-      </Link>
-    );
-  }
-
-  if (!editable) {
-    return <div {...shared}>{contents}</div>;
-  }
-
   return (
     <button
-      {...shared}
+      data-tree-card={person.id}
+      className={`${styles.personCard} ${selected ? styles.selectedCard : ""} ${related ? styles.relatedCard : ""} ${ROYAL_SET.has(person.id) ? styles.royalCard : ""}`}
+      style={{
+        left: person.x ?? 0,
+        top: person.y ?? 0,
+        "--house-color": color,
+      } as CSSProperties}
       type="button"
+      draggable={false}
       onClick={(event) => {
-        if (editable && event.detail === 0) onSelect(person.id);
+        if (editMode) {
+          if (event.detail === 0) onSelect(person.id);
+          return;
+        }
+        onPreview(person.id);
       }}
+      aria-label={`${person.name}${editMode ? ", select for editing" : ", open character card"}`}
     >
       {contents}
     </button>
@@ -450,6 +453,8 @@ function PersonCard({
 export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTree: TreeData; canEdit: boolean }) {
   const [tree, setTree] = useState<TreeData>(() => cloneTree(initialTree));
   const [view, setView] = useState<View>({ x: 44, y: 48, k: 0.72 });
+  const [editMode, setEditMode] = useState(false);
+  const [previewId, setPreviewId] = useState<string | null>(null);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [primary, setPrimary] = useState<string | null>(null);
   const [guideY, setGuideY] = useState<number | null>(null);
@@ -544,7 +549,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
     return () => window.removeEventListener("beforeunload", beforeUnload);
   }, [dirty]);
 
-  const zoomAt = (clientX: number, clientY: number, factor: number) => {
+  const zoomAt = useCallback((clientX: number, clientY: number, factor: number) => {
     const stage = stageRef.current;
     if (!stage) return;
     const rect = stage.getBoundingClientRect();
@@ -558,10 +563,22 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
         y: py - (py - current.y) * (nextK / current.k),
       };
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      zoomAt(event.clientX, event.clientY, Math.exp(-event.deltaY * 0.0015));
+    };
+    stage.addEventListener("wheel", handleWheel, { passive: false });
+    return () => stage.removeEventListener("wheel", handleWheel);
+  }, [zoomAt]);
 
   const selectSingle = (id: string) => {
-    if (!canEdit) return;
+    if (!editMode) return;
     setSelected(new Set([id]));
     setPrimary(id);
   };
@@ -572,7 +589,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
   };
 
   const startMarquee = (pointerId: number, startX: number, startY: number, additive: boolean) => {
-    if (!canEdit || !pointerRef.current.has(pointerId) || !panRef.current || panRef.current.pointerId !== pointerId || panRef.current.moved) return;
+    if (!editMode || !pointerRef.current.has(pointerId) || !panRef.current || panRef.current.pointerId !== pointerId || panRef.current.moved) return;
     const base = additive ? new Set(selected) : new Set<string>();
     marqueeRef.current = { pointerId, startX, startY, currentX: startX, currentY: startY, base };
     panRef.current = null;
@@ -627,7 +644,12 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
     const card = target.closest<HTMLElement>("[data-tree-card]");
     const additive = event.ctrlKey || event.metaKey;
 
-    if (card && canEdit) {
+    if (card && !editMode) {
+      pointerRef.current.delete(event.pointerId);
+      return;
+    }
+
+    if (card && editMode) {
       event.preventDefault();
       const id = card.dataset.treeCard!;
       let activeIds: string[];
@@ -676,7 +698,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
         viewY: view.y,
         moved: false,
       };
-      if (canEdit) {
+      if (editMode) {
         const sx = event.clientX;
         const sy = event.clientY;
         const pid = event.pointerId;
@@ -707,7 +729,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
     }
 
     const drag = dragRef.current;
-    if (drag && canEdit) {
+    if (drag && editMode) {
       const dx = event.clientX - drag.startX;
       const dy = event.clientY - drag.startY;
       if (!drag.moved && Math.hypot(dx, dy) > 4) drag.moved = true;
@@ -787,7 +809,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
 
     const pan = panRef.current;
     if (pan) {
-      if (!pan.moved && canEdit) clearSelection();
+      if (!pan.moved && editMode) clearSelection();
       panRef.current = null;
     }
     try { stageRef.current?.releasePointerCapture(event.pointerId); } catch { /* no-op */ }
@@ -900,20 +922,27 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
     applyTree(next, before);
   };
 
+  const toggleEditMode = () => {
+    if (!canEdit) return;
+    if (editMode) clearSelection();
+    else setPreviewId(null);
+    setEditMode(!editMode);
+  };
+
   const publish = async () => {
     if (!canEdit || publishing) return;
     setPublishing(true);
     setPublishMessage("Publishing…");
     try {
-      const response = await fetch("/api/admin/publish", {
+      const response = await fetch("/api/admin/house-of-the-dragon", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ houseOfDragonTree: tree }),
+        body: JSON.stringify({ tree }),
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result?.message || result?.error || "Publish failed");
       setDirty(false);
-      setPublishMessage("Published. The live deployment will pick up the new lineage data.");
+      setPublishMessage("Published to Supabase. The live lineage is updated immediately.");
     } catch (error) {
       setPublishMessage(error instanceof Error ? error.message : "Publish failed.");
     } finally {
@@ -922,20 +951,34 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
   };
 
   const activePerson = primary ? tree.people[primary] : null;
+  const previewPerson = previewId ? tree.people[previewId] : null;
+  const previewProfile = previewId ? CHARACTER_BY_ID.get(previewId) : undefined;
   const activeUnions = activePerson
     ? tree.unions.filter((union) => union.a === activePerson.id || union.b === activePerson.id)
     : [];
 
   return (
-    <div className={`${styles.toolLayout} ${canEdit ? styles.editorLayout : ""}`}>
+    <div className={`${styles.toolLayout} ${editMode ? styles.editorLayout : ""}`}>
       <section className={styles.mapPanel}>
         <div className={`${styles.toolbar} ${styles.toolChrome}`}>
           <div className={styles.toolbarIdentity}>
             <span className={styles.toolbarEyebrow}>Targaryen Dynasty</span>
-            <strong>{canEdit ? "Lineage Editor" : "House of the Dragon"}</strong>
+            <strong>{editMode ? "Lineage Editor" : "House of the Dragon"}</strong>
           </div>
           <div className={styles.toolbarActions}>
             {canEdit ? (
+              <button
+                type="button"
+                className={styles.adminToggleButton}
+                aria-pressed={editMode}
+                onClick={toggleEditMode}
+              >
+                {editMode ? "Exit Admin View" : "Admin View"}
+              </button>
+            ) : (
+              <span className={styles.readOnlyPill}>Read only</span>
+            )}
+            {editMode ? (
               <>
                 <button type="button" onClick={addPerson}>Add person</button>
                 <button type="button" onClick={arrange}>Arrange</button>
@@ -945,9 +988,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
                   {publishing ? "Publishing…" : dirty ? "Publish changes" : "Published"}
                 </button>
               </>
-            ) : (
-              <span className={styles.readOnlyPill}>Read only</span>
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -958,10 +999,6 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
           onPointerMove={onPointerMove}
           onPointerUp={endPointer}
           onPointerCancel={endPointer}
-          onWheel={(event) => {
-            event.preventDefault();
-            zoomAt(event.clientX, event.clientY, Math.exp(-event.deltaY * 0.0015));
-          }}
           onContextMenu={(event) => event.preventDefault()}
         >
           <div className={styles.brandWatermark} aria-hidden="true">
@@ -969,6 +1006,47 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
             <span>House Targaryen</span>
             <strong>A Song of Fire and Blood</strong>
           </div>
+
+          {previewPerson && !editMode ? (
+            <div
+              className={`${styles.characterPreview} ${styles.toolChrome}`}
+              style={{ "--house-color": houseColor(previewPerson.house) } as CSSProperties}
+            >
+              <button
+                type="button"
+                className={styles.characterPreviewClose}
+                onClick={() => setPreviewId(null)}
+                aria-label="Close character card"
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" /></svg>
+              </button>
+              <MiniPortrait
+                id={previewPerson.id}
+                alt={previewPerson.name}
+                size={52}
+                className={styles.characterPreviewPortrait}
+                fallbackSrc={houseSigil(previewPerson.house)}
+              />
+              <div className={styles.characterPreviewCopy}>
+                <strong>{previewPerson.name}</strong>
+                <span className={styles.characterPreviewTitle}>
+                  {previewProfile?.title || previewPerson.epi || previewPerson.house}
+                </span>
+                <span className={styles.characterPreviewMeta}>
+                  {previewPerson.house}
+                  {previewPerson.dr && previewPerson.dr !== "-" ? ` · ${previewPerson.dr}` : ""}
+                </span>
+                {CHARACTER_IDS.has(previewPerson.id) ? (
+                  <Link href={`/characters/${previewPerson.id}`} className={styles.characterPreviewLink}>
+                    View full profile
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" /></svg>
+                  </Link>
+                ) : (
+                  <span className={styles.characterPreviewRecord}>Lineage record</span>
+                )}
+              </div>
+            </div>
+          ) : null}
 
           <div
             className={styles.world}
@@ -1003,10 +1081,11 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
                 <PersonCard
                   key={id}
                   person={person}
-                  selected={selected.has(id)}
+                  selected={selected.has(id) || previewId === id}
                   related={related.has(id)}
-                  editable={canEdit}
+                  editMode={editMode}
                   onSelect={selectSingle}
+                  onPreview={setPreviewId}
                 />
               );
             })}
@@ -1015,9 +1094,9 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
           {marqueeRect ? <div className={styles.marquee} style={marqueeRect} /> : null}
 
           <div className={`${styles.hint} ${styles.toolChrome}`}>
-            {canEdit
+            {editMode
               ? "Drag cards · Ctrl/Cmd + click for multi-select · hold and drag empty space to box-select · generations snap into alignment"
-              : "Drag empty space to pan · use the wheel or controls to zoom · select a portrait to open the character"}
+              : "Drag empty space to pan · wheel to zoom · click a character to open their card"}
           </div>
 
           <div className={`${styles.zoomHud} ${styles.toolChrome}`}>
@@ -1040,7 +1119,7 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
         {publishMessage ? <p className={styles.publishMessage}>{publishMessage}</p> : null}
       </section>
 
-      {canEdit ? (
+      {editMode ? (
         <aside className={styles.inspector}>
           {!activePerson ? (
             <div className={styles.inspectorEmpty}>
