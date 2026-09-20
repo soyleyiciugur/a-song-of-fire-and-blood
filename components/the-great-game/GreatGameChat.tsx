@@ -170,7 +170,7 @@ export default function GreatGameChat({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const query = window.matchMedia("(max-width: 980px)");
+    const query = window.matchMedia("(max-width: 980px), (hover: none) and (max-height: 560px)");
     const sync = () => {
       isCompactRef.current = query.matches;
       setIsCompact(query.matches);

@@ -8,7 +8,10 @@
       "Added cosmetic Targaryen and Stark realm backgrounds while preserving card placement and slide animations.",
       "Fixed queued multi-card draw animations and allowed locations and global events to be dropped on either realm.",
       "Made hand costs and card text more compact, matched tier badges to detail views, enlarged Standing damage previews and moved selection prompts below the allied realm.",
-      "Enlarged the cosmetic draw pile and centered its emblem without a text label."
+      "Enlarged the cosmetic draw pile and centered its emblem without a text label.",
+      "Prioritized dedicated card artwork in the Great Game play view while retaining archive portrait and missing-art fallbacks.",
+      "Fixed mobile board navigation controls, aligned mobile table proportions with desktop and kept realms at a fixed size when the navigation opens.",
+      "Kept mobile Table Whispers in a closable popup and made chat and Chronicle adapt to the space below expanded navigation."
     ]
   },
   {

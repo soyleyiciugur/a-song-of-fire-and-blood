@@ -909,47 +909,18 @@ const ART_EXTENSIONS = [
 function getArtworkCandidates(
   card: GameCard
 ): string[] {
-  const paths: string[] = [];
+  // Dedicated card art wins over archive portraits and avoids failed portrait requests.
+  const paths = ART_EXTENSIONS.map(extension =>
+    `/images/cards/${card.id}.${extension}`
+  );
 
-  if (
-    card.cardType ===
-    "character"
-  ) {
-    const id =
-      card.linkedCharacterId ??
-      card.id;
-
-    for (
-      const extension of
-      ART_EXTENSIONS
-    ) {
-      paths.push(
-        `/images/characters/${id}.${extension}`
-      );
-    }
+  if (card.cardType === "character") {
+    const id = card.linkedCharacterId ?? card.id;
+    paths.push(...ART_EXTENSIONS.map(extension => `/images/characters/${id}.${extension}`));
   }
 
-  if (
-    card.cardType ===
-    "dragon"
-  ) {
-    for (
-      const extension of
-      ART_EXTENSIONS
-    ) {
-      paths.push(
-        `/images/dragons/${card.id}.${extension}`
-      );
-    }
-  }
-
-  for (
-    const extension of
-    ART_EXTENSIONS
-  ) {
-    paths.push(
-      `/images/cards/${card.id}.${extension}`
-    );
+  if (card.cardType === "dragon") {
+    paths.push(...ART_EXTENSIONS.map(extension => `/images/dragons/${card.id}.${extension}`));
   }
 
   return paths;
@@ -999,6 +970,7 @@ function CardArtwork({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
+      key={candidates[candidateIndex]}
       src={
         candidates[
           candidateIndex
@@ -1010,10 +982,7 @@ function CardArtwork({
       }
       draggable={false}
       onError={() =>
-        setCandidateIndex(
-          (current) =>
-            current + 1
-        )
+        setCandidateIndex(current => current === candidateIndex ? current + 1 : current)
       }
     />
   );

@@ -248,3 +248,13 @@
 .panelEmbedded .composer button,
 .panelEmbedded .headerIcon,
 .panelEmbedded .avatar { border-radius: 0; }
+/* Mobile chat is the only floating utility panel; its close control owns a column. */
+@media (max-width: 980px), (hover: none) and (max-height: 560px) {
+  .mobileToggle.mobileToggleEmbedded { display: grid !important; right: calc(env(safe-area-inset-right) + 7px); bottom: calc(env(safe-area-inset-bottom) + var(--game-command-height, 40px) + 10px); z-index: 905; width: 34px; height: 34px; border-radius: 0; }
+  .panelEmbedded { top: calc(var(--site-nav-height, 0px) + env(safe-area-inset-top) + 5px); right: calc(env(safe-area-inset-right) + 5px); left: auto; bottom: auto; width: min(318px, 44vw); height: max(120px, calc(min(74dvh, 290px) - var(--site-nav-height, 0px))); z-index: 904; transform: translateX(calc(100% + 24px)) !important; opacity: 0 !important; pointer-events: none !important; }
+  .panelEmbedded.panelOpen { transform: translateX(0) !important; opacity: 1 !important; pointer-events: auto !important; }
+  .panelEmbedded .header { grid-template-columns: 23px minmax(0, 1fr) 26px; grid-template-areas: "icon heading close"; }
+  .panelEmbedded .headerIcon { grid-area: icon; }
+  .panelEmbedded .heading { grid-area: heading; }
+  .panelEmbedded .close { grid-area: close; display: grid !important; }
+}

@@ -1014,7 +1014,7 @@
 .playBoardBanner.playBannerCollapsed {
   height: 0 !important;
   min-height: 0 !important;
-  border-bottom-color: transparent !important;
+  border-bottom: 0 !important;
   background: transparent !important;
   backdrop-filter: none !important;
   overflow: visible !important;
@@ -1082,3 +1082,25 @@
 /* v30: preserve the horizontal centering transform while nudging the double
    chevron upward inside the half-visible board-nav control. */
 .playBoardBanner.playBannerCollapsed .playNavToggleIcon{transform:translate(-50%,-2px)}
+/* Board navigation remains reachable before and after expanding on touch screens. */
+@media (max-width: 1150px) {
+  .playBoardBanner .playNavToggle {
+    display: inline-flex;
+    width: 44px;
+    height: 32px;
+    bottom: -32px;
+    border-radius: 0;
+    touch-action: manipulation;
+  }
+  .playBoardBanner.playBannerCollapsed .playNavToggle {
+    top: 0 !important;
+    width: 44px !important;
+    height: 32px !important;
+    border-radius: 0 !important;
+  }
+  .playBoardBanner.playBannerCollapsed .playNavToggleIcon {
+    bottom: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
