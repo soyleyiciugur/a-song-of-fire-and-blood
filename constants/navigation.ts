@@ -35,6 +35,7 @@ export const NAV_ITEMS: NavigationEntry[] = [
     { label: "Cats", href: "/bestiary/cats" },
   ] },
   { label: "Houses", href: "/houses", items: [
+    { label: "House of the Dragon", href: "/houses/house-of-the-dragon" },
     { label: "Succession", href: "/succession" },
   ] },
   { label: "The Known World", href: "/map", items: [

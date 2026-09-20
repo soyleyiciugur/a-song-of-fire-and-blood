@@ -11,7 +11,10 @@
       "Enlarged the cosmetic draw pile and centered its emblem without a text label.",
       "Prioritized dedicated card artwork in the Great Game play view while retaining archive portrait and missing-art fallbacks.",
       "Fixed mobile board navigation controls, aligned mobile table proportions with desktop and kept realms at a fixed size when the navigation opens.",
-      "Kept mobile Table Whispers in a closable popup and made chat and Chronicle adapt to the space below expanded navigation."
+      "Kept mobile Table Whispers in a closable popup and made chat and Chronicle adapt to the space below expanded navigation.",
+      "Added Houses → House of the Dragon as an interactive Targaryen dynasty map with mini portraits, house-colored selection, a highlighted royal spine, crowned kings and admin-only publishing.",
+      "Simplified House Targaryen on the main Family Tree page to the present royal branch and linked the full dynasty to House of the Dragon.",
+      "Completed Aegor and Vaenarr's profile details and added Master of Whisperers Denlon Wickfen."
     ]
   },
   {

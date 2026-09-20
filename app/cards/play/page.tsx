@@ -1395,6 +1395,24 @@ export default function GreatGamePlayPage() {
     setTurnDrawPending,
   ] = useState(false);
 
+  useEffect(() => {
+    const board = document.querySelector<HTMLElement>('[data-realm-board="true"]');
+    if (!board) return;
+    const measure = () => {
+      const rect = board.getBoundingClientRect();
+      document.documentElement.style.setProperty("--game-board-center", `${rect.left + rect.width / 2}px`);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(board);
+    window.addEventListener("resize", measure);
+    measure();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+      document.documentElement.style.removeProperty("--game-board-center");
+    };
+  }, [mode, game?.phase, handoff]);
+
   const completedDrawAnimationRef = useRef(0);
   const finishDrawFlight = useCallback((flight: ActiveDrawAnimation) => {
     // Animation events can repeat; only remove the card that actually landed.
@@ -5822,6 +5840,7 @@ export default function GreatGamePlayPage() {
         className={
           styles.locationBar
         }
+        style={{ "--location-art": `url("/images/cards/locations/${activeLocation?.id ?? "default"}.webp")` } as CSSProperties}
       >
         <div>
           <span
@@ -5957,11 +5976,10 @@ export default function GreatGamePlayPage() {
 
       <section className={styles.opponentStatusDock} aria-label="Match status">
           <div className={styles.opponentStatusIdentity}>
-            <span>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}</span>
             <strong>Turn {activePlayer.turnsTaken}</strong>
+            <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}&apos;s turn</small>
           </div>
           <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
-          <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}&apos;s turn</small>
       </section>
 
       {onlineCanAct &&
@@ -7764,6 +7782,7 @@ function Board({
   return (
     <section
       className={`${styles.boardSection} ${className}`}
+      data-realm-board="true"
     >
       <div
         className={
@@ -9094,12 +9113,29 @@ function CardChrome({
   );
 }
 
+function TraitIcon({ trait }: { trait: Trait }) {
+  const paths: Record<Trait, string> = {
+    unique: "M10 2 18 10 10 18 2 10Z",
+    dragon: "M3 15 6 6 10 10 15 3 17 12 12 10 9 16Z",
+    dragonrider: "M3 16 7 9 11 12 17 5M8 5a2 2 0 1 0 4 0 2 2 0 1 0-4 0M10 7 8 12",
+    guard: "M10 2 17 5 16 12 10 18 4 12 3 5Z",
+    intrigue: "M2 10Q10 1 18 10Q10 19 2 10ZM7 10a3 3 0 1 0 6 0 3 3 0 1 0-6 0",
+    swift: "M12 2 4 11 10 11 8 18 16 8 10 8Z",
+    schemer: "M3 16 13 3 17 3 17 7 7 17 3 17ZM7 13 11 13M3 19H17",
+    challenge: "M4 3 15 14M3 13 7 17M13 3 4 14M13 17 17 13",
+    confront: "M3 4 8 10 3 16M17 4 12 10 17 16M8 10H12",
+  };
+  return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>;
+}
+
 function TraitRuleTooltip({
   label,
   rule,
+  icon,
 }: {
   label: string;
   rule: string;
+  icon?: ReactNode;
 }) {
   const triggerRef =
     useRef<HTMLSpanElement | null>(
@@ -9182,13 +9218,16 @@ function TraitRuleTooltip({
           styles.traitTooltipTrigger
         }
         tabIndex={0}
+        aria-label={label}
+        onPointerDown={event => event.stopPropagation()}
+        onClick={event => { event.stopPropagation(); updatePosition(); setOpen(true); }}
         onMouseEnter={() => {
           updatePosition();
           setOpen(true);
         }}
-        onMouseLeave={() =>
-          setOpen(false)
-        }
+        onMouseLeave={() => {
+          if (document.activeElement !== triggerRef.current) setOpen(false);
+        }}
         onFocus={() => {
           updatePosition();
           setOpen(true);
@@ -9197,7 +9236,7 @@ function TraitRuleTooltip({
           setOpen(false)
         }
       >
-        {label}
+        {icon ?? label}
       </span>
 
       {open &&
@@ -9217,6 +9256,7 @@ function TraitRuleTooltip({
                 position.top,
             }}
           >
+            <strong>{label}</strong>
             {rule}
           </span>,
           document.body
@@ -9335,15 +9375,17 @@ function CardInfoPanel({
           styles.cardIdentity
         }
       >
-        <span
-          className={
-            styles.cardType
-          }
-        >
-          {
-            card.cardType
-          }
-        </span>
+        <div className={styles.cardTypeRow}>
+          <span className={styles.cardType}>{card.cardType}</span>
+          {traits.length > 0 && <div className={styles.traitIcons}>
+            {traits.map(trait => {
+              const label = trait[0].toUpperCase() + trait.slice(1);
+              return showTraitTooltips ? (
+                <TraitRuleTooltip key={trait} label={label} rule={traitRule(trait) ?? label} icon={<TraitIcon trait={trait} />} />
+              ) : <span key={trait} title={label} aria-label={label}><TraitIcon trait={trait} /></span>;
+            })}
+          </div>}
+        </div>
 
         <strong>
           {card.name}
@@ -9475,56 +9517,6 @@ function CardInfoPanel({
         )}
       </div>
 
-      <div
-        className={[
-          styles.traits,
-          traits.length === 0
-            ? styles.emptyTraits
-            : "",
-          showTraitTooltips
-            ? styles.interactiveTraits
-            : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-        aria-hidden={
-          traits.length === 0
-            ? true
-            : undefined
-        }
-      >
-        {traits.length > 0 && (
-          <>
-          {traits.map((trait) => {
-            const rule =
-              traitRule(trait);
-
-            const interactive =
-              showTraitTooltips &&
-              Boolean(rule);
-
-            if (
-              interactive &&
-              rule
-            ) {
-              return (
-                <TraitRuleTooltip
-                  key={trait}
-                  label={trait}
-                  rule={rule}
-                />
-              );
-            }
-
-            return (
-              <span key={trait}>
-                {trait}
-              </span>
-            );
-          })}
-          </>
-        )}
-      </div>
 
       {card.abilities[0] ? (
         <AbilityDisplay

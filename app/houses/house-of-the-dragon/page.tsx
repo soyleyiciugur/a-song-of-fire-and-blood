@@ -1,0 +1,39 @@
+import Image from "next/image";
+
+import treeData from "@/data/house-of-the-dragon.json";
+import { isLuckAdmin } from "@/lib/adminAccess";
+import { HouseOfDragonTreeSchema } from "@/schemas/houseOfDragonTree";
+
+import HouseOfDragonTree from "./HouseOfDragonTree";
+import styles from "./house-of-the-dragon.module.css";
+
+export default async function HouseOfTheDragonPage() {
+  const canEdit = await isLuckAdmin();
+  const tree = HouseOfDragonTreeSchema.parse(treeData);
+
+  return (
+    <main className={styles.page}>
+      <div className={styles.container}>
+        <header className={styles.hero}>
+          <Image
+            src="/images/houses/targaryen.webp"
+            alt="House Targaryen"
+            width={92}
+            height={92}
+            className={styles.heroSigil}
+            priority
+          />
+          <div>
+            <span className={styles.eyebrow}>Houses · House Targaryen</span>
+            <h1 className={`${styles.title} realm-page-title`}>House of the Dragon</h1>
+          </div>
+          <p className={styles.subtitle}>
+            The blood of the dragon from Aegon the Conqueror to the present royal court. The golden spine follows the kingship line to Baelenys; crowned cards mark those who have sat the Iron Throne.
+          </p>
+        </header>
+
+        <HouseOfDragonTree initialTree={tree} canEdit={canEdit} />
+      </div>
+    </main>
+  );
+}

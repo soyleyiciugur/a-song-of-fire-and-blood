@@ -2955,13 +2955,19 @@
     "aliases": [],
     "house": "House Targaryen",
     "title": "Prince Vaenarr of House Targaryen",
+    "debutChapter": "judgment-by-blood",
     "status": "Unknown",
-    "nameday": {
-      "day": 15,
-      "moon": 4,
-      "year": 48
+    "secret": {
+      "status": "Alive",
+      "note": "Alive in Essos beside Vahaemon. His allegiance and whereabouts are known only through the Crown's secret intelligence."
     },
-    "height": "-",
+    "nameday": {
+      "day": 9,
+      "moon": 5,
+      "year": 50
+    },
+    "age": 49,
+    "height": "180 cm",
     "father": "-",
     "mother": "-",
     "spouse": "-",
@@ -2983,12 +2989,7 @@
       "vahaemon-targaryen": "He has joined Vahaemon in Essos and now stands openly beside him as the exile gathers dragons, blood magic and political support."
     },
     "summary": "Queen Jaery's brother is revealed to be in Essos with Vahaemon Targaryen. He stands beside the exiled prince overlooking the Narrow Sea while dragons circle overhead, confirming that Vahaemon's cause has drawn support from inside the wider Targaryen family itself.",
-    "quotes": [],
-    "debutChapter": "judgment-by-blood",
-    "secret": {
-      "status": "Alive",
-      "note": "Alive in Essos beside Vahaemon. His allegiance and whereabouts are known only through the Crown's secret intelligence."
-    }
+    "quotes": []
   },
   {
     "id": "tygett-lannister",
@@ -4121,8 +4122,17 @@
     "title": "Prince Aegor of House Targaryen",
     "debutChapter": "judgment-by-blood",
     "status": "Unknown",
-    "nameday": null,
-    "height": "-",
+    "secret": {
+      "status": "Alive",
+      "note": "Alive in Essos. Vahaemon's son is secretly confirmed as the dragonrider known as the Young Dragon, bonded to Sunfyre."
+    },
+    "nameday": {
+      "day": 17,
+      "moon": 8,
+      "year": 83
+    },
+    "age": 16,
+    "height": "175 cm",
     "father": "vahaemon-targaryen",
     "mother": "-",
     "spouse": "-",
@@ -4148,10 +4158,34 @@
       "rhaella-targaryen": "His sister, already dead near Starfall by the time Aegor is revealed to the reader; whether he knows her fate is not established."
     },
     "summary": "Vahaemon Targaryen's son, revealed in Essos as a dragonrider already famous enough to have earned the name the Young Dragon. He is bonded to the golden dragon Sunfyre. On a hill overlooking the Narrow Sea, Aegor stands between Vahaemon, Vaenarr and Visenya as three dragons rise into the sky—making him the clearest living proof that the exiled branch of House Targaryen has become far more dangerous than the Crown believed.",
-    "quotes": [],
-    "secret": {
-      "status": "Alive",
-      "note": "Alive in Essos. Vahaemon's son is secretly confirmed as the dragonrider known as the Young Dragon, bonded to Sunfyre."
-    }
+    "quotes": []
+  },
+  {
+    "id": "denlon-wickfen",
+    "name": "Denlon Wickfen",
+    "nickname": "-",
+    "aliases": [],
+    "house": "-",
+    "title": "Master of Whisperers",
+    "status": "Alive",
+    "nameday": {
+      "day": 12,
+      "moon": 6,
+      "year": 62
+    },
+    "age": 37,
+    "height": "179 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {},
+    "summary": "Denlon Wickfen is the realm's Master of Whisperers.",
+    "quotes": []
   }
 ]

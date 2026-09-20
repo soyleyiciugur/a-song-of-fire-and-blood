@@ -1,12 +1,13 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\family-tree\page.tsx
 
+import Link from "next/link";
+
 import FamilyUnit from "@/components/familytree/FamilyUnit";
 import Union from "@/components/familytree/Union";
 import PersonNode from "@/components/familytree/PersonNode";
 
 import styles from "./family-tree.module.css";
 import FamilyTreeFocus from "./FamilyTreeFocus";
-import TargaryenLineage from "./TargaryenLineage";
 
 type Props = {
   searchParams: Promise<{ focus?: string }>;
@@ -21,17 +22,56 @@ export default async function FamilyTree({ searchParams }: Props) {
         <h1 className={`${styles.heading} realm-page-title`}>Family Tree</h1>
 
         <p className={styles.subheading}>
-          The bloodlines behind the crown. Use the dynasty toggle in House
-          Targaryen to extend the royal line back to Aegon the Conqueror.
+          The bloodlines behind the crown and the great houses of the realm.
         </p>
 
         {/* HOUSE TARGARYEN */}
-        <section id="house-targaryen" className={`${styles.house} ${styles.targaryenHouse}`}>
+        <section id="house-targaryen" className={styles.house}>
           <h2 className={styles.houseTitle}>House Targaryen</h2>
           <p className={styles.houseNote}>
-            One bloodline, followed as a continuous royal line from the Conqueror down to the present court.
+            The present royal branch. The complete dynasty is charted in House of the Dragon.
           </p>
-          <TargaryenLineage />
+
+          <div className={styles.generationRow}>
+            <FamilyUnit
+              parentA={{ id: "aenys-targaryen-ii" }}
+              parentB={{ id: "queen-vhaemys-targaryen" }}
+              childrenLabel="Children"
+            >
+              <Union a={{ id: "malaenar-targaryen" }} b={{ id: "alysa-targaryen" }} />
+              <Union
+                a={{ id: "baelenys-targaryen" }}
+                b={{ id: "jaery-targaryen" }}
+              />
+              <Union a={{ id: "vahaemon-targaryen" }} b={{ id: "naela-targaryen" }} />
+            </FamilyUnit>
+          </div>
+
+          <p className={styles.generationLabel}>Baelenys&apos;s Children</p>
+
+          <div className={styles.generationRow}>
+            <FamilyUnit
+              parentA={{ id: "baelenys-targaryen" }}
+              parentB={{ id: "jaery-targaryen" }}
+              childrenLabel="Children"
+            >
+              <Union a={{ id: "visenor-targaryen" }} b={{ id: "rhaella-targaryen" }} />
+              <PersonNode id="saera-targaryen" />
+              <Union a={{ id: "gaelor-targaryen" }} b={{ id: "naella-velaryon" }} />
+              <PersonNode id="maela-targaryen" />
+              <div className={styles.betrothedPair}>
+                <PersonNode id="jacaelon-targaryen" />
+                <span className={styles.betrothedConnector}>Betrothed</span>
+                <PersonNode id="lorenah-dayne" />
+              </div>
+              <PersonNode id="vhaemys-targaryen" />
+            </FamilyUnit>
+          </div>
+
+          <Link href="/houses/house-of-the-dragon" className={styles.dynastyLink}>
+            Explore the complete Targaryen dynasty
+            <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h9M10 5l4 4-4 4" /></svg>
+          </Link>
         </section>
 
         {/* HOUSE VELARYON */}

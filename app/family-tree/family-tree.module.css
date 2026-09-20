@@ -659,3 +659,67 @@
 .targaryenCollapseToggle:hover { transform: none; background: rgba(201, 162, 39, .055); border-color: color-mix(in srgb, var(--gold) 58%, var(--border)); }
 .targaryenHudButton:focus-visible,
 .targaryenCollapseToggle:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
+
+.dynastyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--border));
+  border-radius: 9px;
+  color: color-mix(in srgb, var(--text) 84%, var(--gold));
+  background: rgba(201, 162, 39, .035);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color .16s ease, background .16s ease, transform .14s ease;
+}
+
+.dynastyLink:hover {
+  border-color: color-mix(in srgb, var(--gold) 72%, var(--border));
+  background: rgba(201, 162, 39, .07);
+  transform: translateY(-1px);
+}
+
+.dynastyLink svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.betrothedPair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.betrothedConnector {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid color-mix(in srgb, var(--gold) 30%, var(--border));
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--muted) 84%, var(--gold));
+  background: rgba(201, 162, 39, .025);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .betrothedPair { gap: 4px; }
+  .betrothedConnector {
+    min-height: 18px;
+    padding: 0 5px;
+    font-size: 6.5px;
+  }
+}

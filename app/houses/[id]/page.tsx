@@ -53,14 +53,18 @@ export default async function HousePage({ params }: Props) {
 
         <p className={styles.description}>{house.description}</p>
 
-        {FAMILY_TREE_HOUSES.includes(house.id) && (
+        {house.id === "targaryen" ? (
+          <Link href="/houses/house-of-the-dragon" className={styles.treeLink}>
+            Explore House of the Dragon →
+          </Link>
+        ) : FAMILY_TREE_HOUSES.includes(house.id) ? (
           <Link
             href={`/family-tree#house-${house.id}`}
             className={styles.treeLink}
           >
             View full family tree →
           </Link>
-        )}
+        ) : null}
 
         <h2 className={styles.membersHeading}>Members</h2>
 

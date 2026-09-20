@@ -1104,3 +1104,6 @@
     transform: translate(-50%, -50%);
   }
 }
+/* On the play route the handle sits over the gap between the two middle slots. */
+.playBoardBanner .playNavToggle,
+.playBoardBanner.playBannerCollapsed .playNavToggle { left: var(--game-board-center, 50%) !important; }
