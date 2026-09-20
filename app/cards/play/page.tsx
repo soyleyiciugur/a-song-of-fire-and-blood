@@ -9378,6 +9378,7 @@ function CardInfoPanel({
         .filter(Boolean)
         .join(" ")}
     >
+      <div className={`${styles.cardMetadata} ${artifactId ? styles.cardMetadataWithArtifact : ""}`}>
       <div
         className={
           styles.cardIdentity
@@ -9394,12 +9395,7 @@ function CardInfoPanel({
             })}
           </div>}
 
-          {artifactId && (
-            <EquippedArtifactBadge
-              artifactId={artifactId}
-              detailed={artifactBadgeDetailed}
-            />
-          )}
+
         </div>
 
         <strong>
@@ -9532,6 +9528,14 @@ function CardInfoPanel({
         )}
       </div>
 
+
+          {artifactId && (
+            <EquippedArtifactBadge
+              artifactId={artifactId}
+              detailed={artifactBadgeDetailed}
+            />
+          )}
+      </div>
 
       {card.abilities[0] ? (
         <AbilityDisplay

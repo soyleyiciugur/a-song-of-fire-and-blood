@@ -16,7 +16,8 @@
       "Simplified House Targaryen on the main Family Tree page to the present royal branch and linked the full dynasty to House of the Dragon.",
       "Completed Aegor and Vaenarr's profile details and added Master of Whisperers Denlon Wickfen.",
       "Added a dragon-shaped Dragonrider icon and private contextual trait glows for combat, deployment readiness and bonded dragons in hand.",
-      "Kept equipped artifacts beside card trait icons without covering card names, stats or ability text."
+      "Kept equipped artifacts beside card trait icons without covering card names, stats or ability text.",
+      "Aligned equipped artifacts beneath trait icons at the right edge without shifting card names, stats or descriptions."
     ]
   },
   {

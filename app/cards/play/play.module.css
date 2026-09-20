@@ -2345,11 +2345,14 @@
 }
 
 .equippedArtifactBadge {
-  position: static;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 
-  /* Reserve space beside the traits instead of covering identity or ability text. */
-  width: clamp(14px, 12cqw, 26px);
-  height: auto;
+  /* Fit the subtitle/stat band below the trait row without changing its height. */
+  width: auto;
+  height: 52%;
+  max-width: 22%;
   aspect-ratio: 1;
   flex: 0 0 auto;
 
@@ -2384,8 +2387,7 @@
 }
 
 .equippedArtifactBadgeDetailed {
-  width: 30px;
-  height: auto;
+  height: 52%;
 }
 
 /*
@@ -7774,4 +7776,13 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .traitIconActive { animation: none; }
+}
+.cardMetadata {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.cardMetadataWithArtifact .cardIdentity > small,
+.cardMetadataWithArtifact .cardStats {
+  max-width: 76%;
 }

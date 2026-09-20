@@ -724,7 +724,8 @@
 .formGrid input,
 .formGrid select,
 .formGrid textarea,
-.inspectorSection select {
+.inspectorSection select,
+.inspectorSection input {
   width: 100%;
   min-width: 0;
   padding: 8px 9px;
@@ -744,7 +745,8 @@
 .formGrid input:focus,
 .formGrid select:focus,
 .formGrid textarea:focus,
-.inspectorSection select:focus {
+.inspectorSection select:focus,
+.inspectorSection input:focus {
   border-color: color-mix(in srgb, var(--gold) 58%, var(--border));
 }
 
@@ -762,22 +764,62 @@
 
 .unionRow {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 7px;
-  padding: 7px 8px;
+  align-items: flex-start;
+  gap: 9px;
+  margin-bottom: 9px;
+  padding: 9px;
   border: 1px solid rgba(45, 45, 51, .8);
-  border-radius: 7px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, .018);
   color: #b9b1aa;
   font-size: 11px;
 }
 
-.unionRow button {
-  min-height: 25px;
-  padding: 0 7px;
-  color: #b98d93;
+.unionEditor {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.unionPartner {
+  overflow: hidden;
+  color: color-mix(in srgb, var(--text) 88%, var(--gold));
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unionFields {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 7px;
+}
+
+.unionFields label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+  color: #7f7771;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: .035em;
+}
+
+.unionFields input:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+}
+
+.unionRemoveButton {
+  min-height: 27px !important;
+  flex: 0 0 auto;
+  padding: 0 8px !important;
+  color: #b98d93 !important;
 }
 
 .deleteButton {
@@ -897,5 +939,9 @@
 
   .formGrid .wide {
     grid-column: auto;
+  }
+
+  .unionFields {
+    grid-template-columns: 1fr;
   }
 }

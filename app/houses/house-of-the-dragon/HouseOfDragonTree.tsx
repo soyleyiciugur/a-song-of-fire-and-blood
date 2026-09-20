@@ -77,6 +77,34 @@ const EXTRA_HOUSE_COLORS: Record<string, string> = {
   "-": "#82776d",
 };
 
+const UNION_LABEL_PRESETS = [
+  { value: "", label: "Marriage / unlabelled" },
+  { value: "betrothed", label: "Betrothed" },
+  { value: "sibling", label: "Sibling" },
+  { value: "cousin", label: "Cousin" },
+] as const;
+
+const UNION_LABEL_ALIASES: Record<string, string> = {
+  "nişanlı": "betrothed",
+  "nisanli": "betrothed",
+  "kardeş": "sibling",
+  "kardes": "sibling",
+  "kuzen": "cousin",
+};
+
+function normaliseUnionLabel(label: string) {
+  const trimmed = label.trim();
+  const alias = UNION_LABEL_ALIASES[trimmed.toLocaleLowerCase("tr-TR")];
+  return alias ?? trimmed;
+}
+
+function unionPresetValue(label: string) {
+  const normalised = normaliseUnionLabel(label);
+  return UNION_LABEL_PRESETS.some((preset) => preset.value === normalised)
+    ? normalised
+    : "__custom__";
+}
+
 const svgCrown = (
   <svg viewBox="0 0 20 20" aria-hidden="true">
     <path d="m2.8 7 3.3 2.8L10 4.4l3.9 5.4L17.2 7l-1.4 8H4.2L2.8 7Z" />
@@ -922,6 +950,17 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
     applyTree(next, before);
   };
 
+  const updateUnionLabel = (union: HouseOfDragonUnion, label: string) => {
+    const before = serialise(tree);
+    const next = cloneTree(tree);
+    const index = next.unions.findIndex(
+      (item) => item.a === union.a && item.b === union.b && item.label === union.label,
+    );
+    if (index < 0) return;
+    next.unions[index].label = normaliseUnionLabel(label);
+    applyTree(next, before);
+  };
+
   const toggleEditMode = () => {
     if (!canEdit) return;
     if (editMode) clearSelection();
@@ -1155,10 +1194,43 @@ export default function HouseOfDragonTree({ initialTree, canEdit }: { initialTre
                 <h3>Unions</h3>
                 {activeUnions.length ? activeUnions.map((union, index) => {
                   const otherId = union.a === activePerson.id ? union.b : union.a;
+                  const presetValue = unionPresetValue(union.label);
                   return (
                     <div className={styles.unionRow} key={`${union.a}-${union.b}-${index}`}>
-                      <span>{tree.people[otherId]?.name ?? otherId}</span>
-                      <button type="button" onClick={() => removeUnion(union)}>Remove</button>
+                      <div className={styles.unionEditor}>
+                        <span className={styles.unionPartner}>{tree.people[otherId]?.name ?? otherId}</span>
+                        <div className={styles.unionFields}>
+                          <label>
+                            Relationship
+                            <select
+                              value={presetValue}
+                              onChange={(event) => {
+                                const value = event.target.value;
+                                if (value === "__custom__") {
+                                  if (presetValue !== "__custom__") updateUnionLabel(union, union.label || "custom");
+                                  return;
+                                }
+                                updateUnionLabel(union, value);
+                              }}
+                            >
+                              {UNION_LABEL_PRESETS.map((preset) => (
+                                <option key={preset.value || "unlabelled"} value={preset.value}>{preset.label}</option>
+                              ))}
+                              <option value="__custom__">Custom…</option>
+                            </select>
+                          </label>
+                          <label>
+                            Custom label
+                            <input
+                              value={presetValue === "__custom__" ? union.label : ""}
+                              placeholder="e.g. sworn partners"
+                              disabled={presetValue !== "__custom__"}
+                              onChange={(event) => updateUnionLabel(union, event.target.value)}
+                            />
+                          </label>
+                        </div>
+                      </div>
+                      <button type="button" className={styles.unionRemoveButton} onClick={() => removeUnion(union)}>Remove</button>
                     </div>
                   );
                 }) : <p className={styles.muted}>No unions recorded.</p>}
