@@ -19,7 +19,8 @@
       "Added a dragon-shaped Dragonrider icon and private contextual trait glows for combat, deployment readiness and bonded dragons in hand.",
       "Kept equipped artifacts beside card trait icons without covering card names, stats or ability text.",
       "Aligned equipped artifacts beneath trait icons at the right edge without shifting card names, stats or descriptions.",
-      "Balanced artifact spacing beneath trait icons, vertically centered combat button labels and allowed board-wide cards to be dropped on The Realms divider."
+      "Balanced artifact spacing beneath trait icons, vertically centered combat button labels and allowed board-wide cards to be dropped on The Realms divider.",
+      "Fixed mobile table safe-area alignment, kept full hands above the system bar, scaled combat stat icons and prevented sticky touch hover panels."
     ]
   },
   {

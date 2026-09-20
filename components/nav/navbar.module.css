@@ -1107,3 +1107,11 @@
 /* On the play route the handle sits over the gap between the two middle slots. */
 .playBoardBanner .playNavToggle,
 .playBoardBanner.playBannerCollapsed .playNavToggle { left: var(--game-board-center, 50%) !important; }
+@media (max-width: 980px), (hover: none) and (max-height: 560px) {
+  .playBoardBanner .playNavToggle,
+  .playBoardBanner.playBannerCollapsed .playNavToggle {
+    width: 24px !important;
+    height: 24px !important;
+    bottom: -24px;
+  }
+}
