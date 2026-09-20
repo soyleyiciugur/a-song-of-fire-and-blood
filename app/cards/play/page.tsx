@@ -5356,10 +5356,7 @@ export default function GreatGamePlayPage() {
       );
     }
 
-    requestAnimationFrame(() => {
-      suppressHandClickRef.current =
-        false;
-    });
+    // Keep the compatibility click suppressed until a fresh pointer gesture.
   }
 
   function handleHandPointerCancel(
@@ -5377,10 +5374,7 @@ export default function GreatGamePlayPage() {
       true;
     clearPointerDrag();
 
-    requestAnimationFrame(() => {
-      suppressHandClickRef.current =
-        false;
-    });
+    // Keep the compatibility click suppressed until a fresh pointer gesture.
   }
 
   if (
@@ -5678,6 +5672,16 @@ export default function GreatGamePlayPage() {
 
   return (
     <main
+      onPointerDownCapture={() => { suppressHandClickRef.current = false; }}
+      onKeyDownCapture={event => {
+        if (event.key === "Enter" || event.key === " ") suppressHandClickRef.current = false;
+      }}
+      onClickCapture={event => {
+        if (suppressHandClickRef.current && event.detail !== 0) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }}
       className={`${styles.game} ${
         draggingHandInstanceId
           ? styles.draggingGame
@@ -9129,6 +9133,15 @@ function CardChrome({
   );
 }
 
+function StatIcon({ kind }: { kind: "military" | "political" | "health" }) {
+  const paths = {
+    military: "M4 2 15 13M2 13 7 18M13 2 4 13M12 18 18 12M3 2 3 6M13 2 17 2",
+    political: "M3 6 6 10 10 3 14 10 17 6 15 16H5ZM5 19H15",
+    health: "M10 17 3 10C-2 4 6 0 10 6C14 0 22 4 17 10Z",
+  };
+  return <svg viewBox="0 0 20 20" width="100%" height="100%" fill={kind === "health" ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true"><path d={paths[kind]} /></svg>;
+}
+
 function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }) {
   const paths: Record<Trait, string> = {
     unique: "M10 2 18 10 10 18 2 10Z",
@@ -9454,7 +9467,7 @@ function CardInfoPanel({
               }
               aria-hidden
             >
-              ⚔
+              <StatIcon kind="military" />
             </i>
 
             <b>
@@ -9483,8 +9496,8 @@ function CardInfoPanel({
                 }
                 aria-hidden
               >
-                ♛
-              </i>
+              <StatIcon kind="political" />
+            </i>
 
               <b>
                 {runtimeStats
@@ -9516,7 +9529,7 @@ function CardInfoPanel({
               }
               aria-hidden
             >
-              ♥
+              <StatIcon kind="health" />
             </i>
 
             <b>

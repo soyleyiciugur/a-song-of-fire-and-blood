@@ -291,6 +291,8 @@
       "Convince Saera to commit her dragon to the campaign against Vahaemon"
     ],
     "relationships": {
+      "jaehaerys-targaryen-i": "His father and king.",
+      "alysanne-targaryen": "His mother and queen.",
       "baelenys-targaryen": "His nephew and King, who summoned him back from the Citadel after years of self-imposed exile and named him Grand Maester in Cordin's place; the two clash constantly over the Oldtown Massacre and the handling of Vahaemon.",
       "berholt-caswell": "He pushed Berholt hard during the Costayne dispute and found the High Septon's serene refusal infuriating. Their clash was unequal in pressure but not in resolve, and Baelor learned that Berholt could not simply be argued into submission. Berholt raises Baelor's earlier refusal to fund the sept works during the Chapter XVII negotiations.",
       "cordin-poole": "Displaced him as Grand Maester, though the two continue to work together on the council's finances.",
@@ -1671,6 +1673,7 @@
       "jaery-targaryen": "Her mother, beside whom she sheltered during the worst of the family's fracturing.",
       "lorenah-dayne": "Still jealous of the attention Jace gives Lorenah, but their hostility has begun to thaw. During Jace's proposal outing Vhaemys allowed Lorenah to kiss her cheek and happily accepted earrings that Lorenah fastened for her, though she remained jealous of Lorenah's necklace.",
       "maela-targaryen": "Her older sister and Jace's twin. Vhaemys looks to Maela as another familiar presence within the royal family even if their bond has not yet been tested by the same crises as her attachments to Jace, Saera, Gaelor, and Alester.",
+      "rhaella-targaryen": "Knew Rhaella from infancy. As a screaming baby already called the Dragonet, Vhaemys was instinctively comforted by her future sister-in-law during Jaery's promise that Rhaella would one day stand beside Visenor as queen.",
       "reyenald-reyne": "Met the young swordsman after interrupting his practice with Lord Commander Orwell Morrigen; Reyenald immediately knelt and introduced himself.",
       "saera-targaryen": "Greets Saera's return from Winterfell with delight, immediately becoming fascinated by the white direwolf pup Saera carries and asking whether it is her present.",
       "visenor-targaryen": "Her eldest brother among the King's children. His disappearance is one of the great absences in the family, though Vhaemys is too young to understand the politics that forced him away.",
@@ -2563,7 +2566,8 @@
     "goals": [],
     "relationships": {
       "aegon-targaryen-i": "Her brother and husband.",
-      "aenys-targaryen-i": "Her son."
+      "aenys-targaryen-i": "Her son.",
+      "visenya-targaryen-i": "Her elder sister and Aegon's other sister-wife."
     },
     "summary": "A sister-wife of Aegon the Conqueror and mother of Aenys I.",
     "quotes": [],
@@ -2604,7 +2608,8 @@
     "goals": [],
     "relationships": {
       "aegon-targaryen-i": "Her brother and husband.",
-      "maegor-targaryen-i": "Her son."
+      "maegor-targaryen-i": "Her son.",
+      "rhaenys-targaryen-i": "Her younger sister and Aegon's other sister-wife."
     },
     "summary": "A sister-wife of Aegon the Conqueror and mother of Maegor I.",
     "quotes": [],
@@ -2646,6 +2651,8 @@
     ],
     "goals": [],
     "relationships": {
+      "aegon-targaryen-i": "His father and royal predecessor.",
+      "rhaenys-targaryen-i": "His mother.",
       "jaehaerys-targaryen-i": "His son and dynastic successor.",
       "maegor-targaryen-i": "His half-brother and successor in name before the realm passed on.",
       "alyssa-velaryon-elder": "His queen and wife."
@@ -2727,6 +2734,8 @@
     ],
     "goals": [],
     "relationships": {
+      "aegon-targaryen-i": "His father.",
+      "visenya-targaryen-i": "His mother.",
       "aenys-targaryen-i": "His half-brother and predecessor.",
       "jaehaerys-targaryen-i": "The nephew whose succession followed the end of Maegor's reign."
     },
@@ -2770,6 +2779,9 @@
     ],
     "goals": [],
     "relationships": {
+      "aenys-targaryen-i": "His father and dynastic predecessor.",
+      "alyssa-velaryon-elder": "His mother.",
+      "maegor-targaryen-i": "His uncle and royal predecessor, whose reign ended before Jaehaerys's succession.",
       "alysanne-targaryen": "His queen and wife.",
       "baelor-targaryen": "His elder son.",
       "aenys-targaryen-ii": "His younger son and eventual royal successor in this semicanon line."
@@ -2856,6 +2868,8 @@
     ],
     "goals": [],
     "relationships": {
+      "jaehaerys-targaryen-i": "His father and royal predecessor in the semicanon line.",
+      "alysanne-targaryen": "His mother, Good Queen Alysanne.",
       "baelenys-targaryen": "Young Baelenys witnessed Aenys's humiliation of Malaenar and the killing of his dragon. He froze when Malaenar begged him to intervene and carried the memory into adulthood as a recurring nightmare.",
       "edwyle-stark": "The Lord of Winterfell was an important ally who aided Aenys in ways that remained significant to House Targaryen long after both men's deaths. The exact nature of Edwyle's service has not yet been revealed.",
       "malaenar-targaryen": "When Malaenar was seventeen, Aenys mocked his disability, forced him to crawl across the Dragonpit floor to prove he deserved a dragon, and then ordered Sheepstealer to kill the small beast in front of him.",

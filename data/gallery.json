@@ -1,5 +1,22 @@
 [
   {
+    "id": "gallery-targaryens-in-essos",
+    "src": "/images/gallery/targaryens-in-essos.webp",
+    "caption": "The Traitors.",
+    "characterIds": ["vahaemon-targaryen", "aegor-targaryen", "visenya-targaryen", "vaenarr-targaryen"],
+    "houseIds": ["targaryen"],
+    "dragonIds": ["sunfyre"],
+    "chapterId": "judgment-by-blood",
+    "worldDate": {
+      "day": 20,
+      "moon": 8,
+      "year": 99,
+      "era": "AC"
+    },
+    "uploadedAt": "2026-09-20",
+    "category": "raven"
+  },
+  {
     "id": "gallery-baelenys-blackfyre-small-council",
     "src": "/images/gallery/baelenys-blackfyre-small-council.jpeg",
     "caption": "Baelenys & Blackfyre.",

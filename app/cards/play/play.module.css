@@ -7827,3 +7827,41 @@
 @media (hover: none) and (pointer: coarse) {
   .boardGame .unitCardWrapper:hover .unitEffectsTooltip { display: none; }
 }
+/* Table card chrome uses one coordinate system on desktop and mobile. */
+.boardGame :is(.handCard, .unitCard) .uniqueMark { top: 2cqw; right: 2cqw; width: 8cqw; height: 8cqw; font-size: 6cqw; }
+.boardGame :is(.handCard, .unitCard) .tierBadge { min-width: 10cqw; height: 7.5cqw; padding: .7cqw 1.2cqw 0; font-size: 4cqw; top: -.7cqw; }
+.boardGame .handCard .cost { top: 3cqw; left: 3cqw; width: 18cqw; height: 18cqw; }
+.boardGame :is(.handCard, .unitCard) .cardInfoPanel { --trait-icon-size: 5.5cqw; }
+.boardGame :is(.handCard, .unitCard) .traitIcons { gap: 1.5cqw; }
+.boardGame :is(.handCard, .unitCard) .traitIcons > span { width: 5.5cqw; height: 5.5cqw; }
+.boardGame :is(.handCard, .unitCard) .cardTypeRow { gap: 2cqw; }
+.boardGame :is(.handCard, .unitCard) .cardIdentity > strong { font-size: 5.5cqw; }
+.boardGame :is(.handCard, .unitCard) .cardIdentity > small { font-size: 3.5cqw; }
+.boardGame :is(.handCard, .unitCard) .cardType { font-size: 3.5cqw; }
+.boardGame :is(.handCard, .unitCard) .cardStats { font-size: 5cqw; }
+.boardGame :is(.handCard, .unitCard) .cardStatIcon { display: inline-flex; width: 5cqw; height: 5cqw; flex: 0 0 5cqw; font-size: inherit; }
+.cardStatIcon svg { display: block; width: 100%; height: 100%; }
+.boardGame :is(.handCard, .unitCard) .abilityHeading :is(span, strong, b) { font-size: 3.8cqw; }
+.boardGame :is(.handCard, .unitCard) .abilityDisplay p { font-size: 4.2cqw; }
+.boardGame .unitCard .unitActions { gap: 1.5cqw; }
+.boardGame .unitCard .unitActions button { font-size: 3.5cqw; padding: 1.5cqw 1cqw; }
+.boardGame .unitCard .skillProgress { min-height: 5cqw; font-size: 3cqw; gap: 1.5cqw; padding-block: 1cqw; }
+.boardGame .unitCard .skillProgress strong { min-width: 5cqw; }
+.boardGame .unitCard .skillProgressMeter { gap: 1.5cqw; }
+.boardGame .unitCard .skillProgressMeter i { width: 3cqw; height: 3cqw; }
+.boardGame .unitCard .statusOverlay { top: 3cqw; left: 3cqw; gap: 1.5cqw; }
+.boardGame .unitCard .statusOverlay span { font-size: 3.5cqw; padding: 1cqw 2cqw; }
+.boardGame .unitCard :is(.combatValuePreview, .combatDeathPreview, .combatGroundPreview) { font-size: 20cqw; max-width: 90%; }
+.boardGame .unitCard .combatDeathPreview { font-size: 25cqw; }
+.boardGame .standingBox { container-type: inline-size; }
+.boardGame .standingBox .conflictValuePreview { font-size: 32cqw; max-width: 95%; padding: 0; }
+@media (max-width: 980px), (hover: none) and (max-height: 560px) {
+  .boardGame .handSection { background: transparent; box-shadow: none; clip-path: inset(-20px 0 0); }
+  .boardGame .handSection .hand { background: transparent; box-shadow: none; }
+  .boardGame :is(.opponentCommandDock, .playerCommandDock) .commandMeterHeading span { font-size: 4.5px; }
+  .boardGame :is(.opponentCommandDock, .playerCommandDock) .commandMeterHeading strong { font-size: 7px; }
+  .boardGame .opponentStatusIdentity strong { font-size: 5px; }
+  .boardGame .opponentStatusIdentity small { font-size: 4px; }
+  .boardGame .opponentStatusDock button { font-size: 4px; padding: 2px; min-height: 16px; }
+  .boardGame .commandDockEndTurnButton { font-size: 5px; }
+}

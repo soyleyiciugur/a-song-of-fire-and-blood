@@ -47,7 +47,6 @@ export default function Home() {
             if (!href) return null;
             return <Link key={href} href={href} className="button">{item.label}</Link>;
           })}
-          <Link href="/forum" className="button">Taverns</Link>
         </div>
 
         <div className="home-divider" aria-hidden="true">

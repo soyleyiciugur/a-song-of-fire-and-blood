@@ -2,6 +2,11 @@
   {
     "date": "2026-09-20",
     "items": [
+      "Completed reciprocal character relationship records across the royal genealogy and Rhaella's bond with Vhaemys.",
+      "Added a 25-comment Raven's Eye discussion for the Targaryens in Essos reveal, preserving the chapter's distinction between confirmed dragons and reported threats.",
+      "Removed the Taverns shortcut from the homepage chronicle hub and centered the remaining eight destinations in two rows of four.",
+      "Added Houses, House of the Dragon and Succession section tabs to the Houses hub.",
+      "Kept birth first and death last in every character chronology while sorting year-only historical events into their proper place.",
       "Expanded Chapter XIX discussion with 100 immediate comments and 24 scheduled follow-ups, including Vhaemys and relevant cast accounts.",
       "Added three Chapter XIX Taverns discussions about Malaenar, Gaelor's trial and the missing Maester Nymos, with varied reader conversations and selective member replies.",
       "Registered Oldtown Visitor Centre as a verified fictional institution and made institution badges gold in Taverns.",
@@ -20,7 +25,9 @@
       "Kept equipped artifacts beside card trait icons without covering card names, stats or ability text.",
       "Aligned equipped artifacts beneath trait icons at the right edge without shifting card names, stats or descriptions.",
       "Balanced artifact spacing beneath trait icons, vertically centered combat button labels and allowed board-wide cards to be dropped on The Realms divider.",
-      "Fixed mobile table safe-area alignment, kept full hands above the system bar, scaled combat stat icons and prevented sticky touch hover panels."
+      "Fixed mobile table safe-area alignment, kept full hands above the system bar, scaled combat stat icons and prevented sticky touch hover panels.",
+      "Unified table-card proportions across desktop and mobile, replaced stat emoji with SVG icons, scaled combat indicators and prevented delayed clicks after dragging cards.",
+      "Reduced mobile utility labels and confined the hand background and shadows to the hand area."
     ]
   },
   {

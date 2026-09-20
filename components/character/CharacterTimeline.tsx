@@ -12,6 +12,7 @@ export default function CharacterTimeline({ character }: { character: Character 
     ...moments.map((moment) => ({
       key: `${moment.chapterSlug}-${moment.title}`,
       order: moment.order,
+      boundary: 1,
       content: <div>
         <strong>{moment.title}</strong>
         <span>{moment.date ?? moment.chapterTitle}</span>
@@ -22,6 +23,7 @@ export default function CharacterTimeline({ character }: { character: Character 
     ...historicalMoments.map((moment) => ({
       key: `history-${moment.title}-${moment.date}`,
       order: moment.order,
+      boundary: 1,
       content: <div>
         <strong>{moment.title}</strong>
         <span>{moment.date}</span>
@@ -31,9 +33,10 @@ export default function CharacterTimeline({ character }: { character: Character 
     ...([ ["Born", character.nameday], ["Death", character.death] ] as const).flatMap(([label, date]) => date ? [{
       key: label,
       order: timelineDateOrder(date),
+      boundary: label === "Born" ? 0 : 2,
       content: <><strong>{label}</strong><span>{date.day}/{date.moon}/{date.year} AC</span></>,
     }] : []),
-  ].sort((a, b) => a.order - b.order);
+  ].sort((a, b) => a.boundary - b.boundary || a.order - b.order);
   return (
     <section className={styles.section}>
       <div className={styles.heading}>
