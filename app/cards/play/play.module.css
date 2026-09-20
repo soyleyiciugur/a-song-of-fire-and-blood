@@ -2347,7 +2347,7 @@
 .equippedArtifactBadge {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: calc(50% + (var(--trait-icon-size, 11px) + var(--metadata-gap, 0.08rem)) / 2);
 
   /* Fit the subtitle/stat band below the trait row without changing its height. */
   width: auto;
@@ -2356,7 +2356,7 @@
   aspect-ratio: 1;
   flex: 0 0 auto;
 
-  transform: none;
+  transform: translateY(-50%);
 
   display: block;
   box-sizing: border-box;
@@ -7785,4 +7785,11 @@
 .cardMetadataWithArtifact .cardIdentity > small,
 .cardMetadataWithArtifact .cardStats {
   max-width: 76%;
+}
+.cardInfoPanel { --trait-icon-size: 11px; --metadata-gap: 0.08rem; }
+.boardGame :is(.handCard, .unitCard) .cardInfoPanel { --metadata-gap: 1cqw; }
+.selectedCardInner .cardInfoPanel, .unitDetailCard .cardInfoPanel { --trait-icon-size: 15px; }
+.unitActions button { display: flex; align-items: center; justify-content: center; }
+@media (max-width: 980px), (hover: none) and (max-height: 560px) {
+  .boardGame :is(.handCard, .unitCard) .cardInfoPanel { --trait-icon-size: 8px; }
 }

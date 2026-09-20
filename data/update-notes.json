@@ -17,7 +17,8 @@
       "Completed Aegor and Vaenarr's profile details and added Master of Whisperers Denlon Wickfen.",
       "Added a dragon-shaped Dragonrider icon and private contextual trait glows for combat, deployment readiness and bonded dragons in hand.",
       "Kept equipped artifacts beside card trait icons without covering card names, stats or ability text.",
-      "Aligned equipped artifacts beneath trait icons at the right edge without shifting card names, stats or descriptions."
+      "Aligned equipped artifacts beneath trait icons at the right edge without shifting card names, stats or descriptions.",
+      "Balanced artifact spacing beneath trait icons, vertically centered combat button labels and allowed board-wide cards to be dropped on The Realms divider."
     ]
   },
   {

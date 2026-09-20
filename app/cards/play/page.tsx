@@ -4113,8 +4113,9 @@ export default function GreatGamePlayPage() {
       )
       .find(Boolean) ?? null;
 
-    // Board-wide effects resolve from either realm, even above a unit card.
-    if (boardElement && dragged && draggedCard && !isUnitCard(draggedCard) && canDropHandCardOnBoard(dragged)) {
+    const realmsDivider = elements.some(element => element.closest('[data-realms-divider="true"]'));
+    // Board-wide effects also resolve from the divider between the realms.
+    if ((boardElement || realmsDivider) && dragged && draggedCard && !isUnitCard(draggedCard) && canDropHandCardOnBoard(dragged)) {
       return { kind: "board", boardIndex: activePlayer.board.length };
     }
 
@@ -6095,7 +6096,7 @@ export default function GreatGamePlayPage() {
         }
       />
 
-      <div className={styles.battleLine}>
+      <div className={styles.battleLine} data-realms-divider="true">
         <span>✦ The Realms ✦</span>
         {turnNotice && (
           <div className={styles.turnNotice} role="status" aria-live="polite">
