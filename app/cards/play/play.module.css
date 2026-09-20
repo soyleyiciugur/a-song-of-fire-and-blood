@@ -7635,3 +7635,34 @@
 .realmSlots { position: absolute; inset: var(--board-pad); display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: var(--board-gap); pointer-events: none; }
 .realmSlots span { border: 1px solid #b7975933; background: #07080b33; }
 .boardGame .emptyBoard { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; pointer-events: none; }
+/* Compact table cards retain full text in their inspection views. */
+.boardGame .deckPile { padding: 4px; }
+.boardGame .deckBack { width: 100%; max-height: 94%; }
+.boardGame .deckBack b { font-size: clamp(32px, 3vw, 48px); line-height: 1; }
+.boardGame .handCard, .boardGame .unitCard { container-type: inline-size; }
+.boardGame .handCard .cost { top: 5px; left: 5px; width: clamp(18px, 18cqw, 26px); height: clamp(18px, 18cqw, 26px); }
+.boardGame :is(.handCard, .unitCard) .tierBadge { min-width: 1.72rem; height: 1.16rem; padding: .18rem .42rem 0; font-size: .56rem; border-radius: 0; }
+.boardGame :is(.handCard, .unitCard) .cardInfoPanel { padding: 3cqw 4cqw; gap: 1cqw; grid-template-rows: auto auto auto minmax(0, 1fr) auto; }
+.boardGame .unitCard .cardInfoPanelWithActions { grid-template-rows: auto auto auto minmax(0, 1fr) auto auto; }
+.boardGame :is(.handCard, .unitCard) .cardIdentity { grid-template-rows: auto auto auto; gap: 1cqw; }
+.boardGame :is(.handCard, .unitCard) .cardIdentity > strong { font-size: clamp(5px, 5.5cqw, 10px); line-height: 1.15; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.boardGame :is(.handCard, .unitCard) .cardIdentity > small { font-size: clamp(4px, 3.7cqw, 7px); line-height: 1.15; }
+.boardGame :is(.handCard, .unitCard) .cardType { font-size: clamp(4px, 3.5cqw, 7px); line-height: 1.1; }
+.boardGame :is(.handCard, .unitCard) .cardStats { font-size: clamp(5px, 5cqw, 10px); gap: 4cqw; height: auto; }
+.boardGame :is(.handCard, .unitCard) .cardStat { height: auto; gap: 1cqw; }
+.boardGame :is(.handCard, .unitCard) .cardStatIcon { width: 5cqw; height: 5cqw; }
+.boardGame :is(.handCard, .unitCard) .traits { gap: 2cqw; min-height: 0; }
+.boardGame :is(.handCard, .unitCard) .traits span { font-size: clamp(4px, 3.6cqw, 7px); padding: 1cqw; }
+.boardGame .unitCard .unitActions button { min-height: 0; padding: 2cqw 1cqw; font-size: clamp(4px, 3.5cqw, 7px); }
+.boardGame .standingBox .conflictValuePreview { font-size: clamp(1.8rem, 3.6dvh, 2.5rem); }
+.boardGame > .prompt { position: relative; inset: auto; grid-column: 2; grid-row: 5; align-self: start; justify-self: center; width: fit-content; max-width: calc(100% - 12px); box-sizing: border-box; margin-top: 4px; padding: 4px 7px; gap: 10px; font-size: clamp(8px, .65vw, 11px); line-height: 1.25; border-radius: 0; }
+.boardGame > .prompt button { min-height: 22px; padding: 3px 8px; font-size: inherit; }
+.boardGame :is(.handCard, .unitCard) .abilityHeading :is(span, strong, b) { font-size: clamp(4px, 3.8cqw, 8px); }
+.boardGame :is(.handCard, .unitCard) .abilityDisplay { padding-top: 2cqw; }
+.boardGame :is(.handCard, .unitCard) .abilityDisplay p { font-size: clamp(4px, 4.2cqw, 9px); line-height: 1.3; }
+.boardGame :is(.opponentCommandDock, .playerCommandDock) .commandMeterCompact { min-width: 0; overflow: hidden; }
+.boardGame :is(.opponentCommandDock, .playerCommandDock) .commandMeterHeading { flex-wrap: wrap; gap: 3px; }
+.boardGame :is(.opponentCommandDock, .playerCommandDock) .commandMeterHeading span { font-size: clamp(6px, .6vw, 9px); letter-spacing: .05em; }
+.boardGame :is(.opponentCommandDock, .playerCommandDock) .commandMeterHeading strong { font-size: clamp(8px, .8vw, 12px); }
+.boardGame :is(.opponentCommandDock, .playerCommandDock) .commandPips { gap: 2px; min-width: 0; }
+.boardGame :is(.opponentCommandDock, .playerCommandDock) .commandPip { flex: 0 1 calc((100% - 18px) / 10); min-width: 0; }

@@ -5,7 +5,10 @@
       "Expanded Chapter XIX discussion with 100 immediate comments and 24 scheduled follow-ups, including Vhaemys and relevant cast accounts.",
       "Registered Oldtown Visitor Centre as a verified fictional institution and made institution badges gold in Taverns.",
       "Refined the Great Game board with joined stat panels, mirrored command controls, square cards, a visible draw pile and clearer Table Whispers spacing.",
-      "Added cosmetic Targaryen and Stark realm backgrounds while preserving card placement and slide animations."
+      "Added cosmetic Targaryen and Stark realm backgrounds while preserving card placement and slide animations.",
+      "Fixed queued multi-card draw animations and allowed locations and global events to be dropped on either realm.",
+      "Made hand costs and card text more compact, matched tier badges to detail views, enlarged Standing damage previews and moved selection prompts below the allied realm.",
+      "Enlarged the cosmetic draw pile and centered its emblem without a text label."
     ]
   },
   {

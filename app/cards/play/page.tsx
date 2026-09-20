@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import {
   Fragment,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -1425,6 +1426,29 @@ export default function GreatGamePlayPage() {
     setTurnDrawPending,
   ] = useState(false);
 
+  const completedDrawAnimationRef = useRef(0);
+  const finishDrawFlight = useCallback((flight: ActiveDrawAnimation) => {
+    // Animation events can repeat; only remove the card that actually landed.
+    if (flight.animationId <= completedDrawAnimationRef.current) return;
+    completedDrawAnimationRef.current = flight.animationId;
+    setHiddenDrawnIds(current => current.filter(id => id !== flight.handInstanceId));
+    setDrawFlight(current => current?.animationId === flight.animationId ? null : current);
+    setDrawQueue(current => current.filter(draw => draw.handInstanceId !== flight.handInstanceId));
+    setDrawGapActive(true);
+    if (drawGapTimerRef.current) clearTimeout(drawGapTimerRef.current);
+    drawGapTimerRef.current = setTimeout(() => {
+      setDrawGapActive(false);
+      drawGapTimerRef.current = null;
+    }, 250);
+  }, []);
+
+  useEffect(() => {
+    if (!drawFlight) return;
+    // A cancelled/missing CSS event must never leave an invisible, locked card.
+    const timer = setTimeout(() => finishDrawFlight(drawFlight), 1100);
+    return () => clearTimeout(timer);
+  }, [drawFlight, finishDrawFlight]);
+
   /*
    * Command-spend preview is strictly turn-local.
    * A hover from the outgoing player must never leak into
@@ -1761,8 +1785,13 @@ export default function GreatGamePlayPage() {
       return;
     }
 
-    drawSequenceCompleteRef.current =
-      onComplete ?? null;
+    if (onComplete) {
+      const previousComplete = drawSequenceCompleteRef.current;
+      drawSequenceCompleteRef.current = () => {
+        previousComplete?.();
+        onComplete();
+      };
+    }
 
     setHiddenDrawnIds(
       (current) => [
@@ -1776,44 +1805,10 @@ export default function GreatGamePlayPage() {
       ]
     );
 
-    setDrawQueue(draws);
-  }
-
-  function finishDrawFlight() {
-    if (!drawFlight) {
-      return;
-    }
-
-    const finishedId =
-      drawFlight.handInstanceId;
-
-    setHiddenDrawnIds(
-      (current) =>
-        current.filter(
-          (id) =>
-            id !== finishedId
-        )
-    );
-
-    setDrawFlight(null);
-
-    setDrawQueue(
-      (current) =>
-        current.slice(1)
-    );
-
-    if (drawQueue.length > 1) {
-      setDrawGapActive(true);
-
-      if (drawGapTimerRef.current) {
-        clearTimeout(drawGapTimerRef.current);
-      }
-
-      drawGapTimerRef.current = setTimeout(() => {
-        setDrawGapActive(false);
-        drawGapTimerRef.current = null;
-      }, 250);
-    }
+    setDrawQueue(current => {
+      const queuedIds = new Set(current.map(draw => draw.handInstanceId));
+      return [...current, ...draws.filter(draw => !queuedIds.has(draw.handInstanceId))];
+    });
   }
 
   function beginHandoffTurn() {
@@ -4129,6 +4124,11 @@ export default function GreatGamePlayPage() {
       )
       .find(Boolean) ?? null;
 
+    // Board-wide effects resolve from either realm, even above a unit card.
+    if (boardElement && dragged && draggedCard && !isUnitCard(draggedCard) && canDropHandCardOnBoard(dragged)) {
+      return { kind: "board", boardIndex: activePlayer.board.length };
+    }
+
     /*
      * Unit placement is resolved from the board's fixed six-column geometry,
      * not from animated card rectangles. That keeps the insertion index stable
@@ -5724,9 +5724,11 @@ export default function GreatGamePlayPage() {
             onAnimationEnd={(event) => {
               if (
                 event.currentTarget ===
-                event.target
+                event.target &&
+                !event.nativeEvent.pseudoElement &&
+                event.animationName.includes("drawCardFlight")
               ) {
-                finishDrawFlight();
+                finishDrawFlight(drawFlight);
               }
             }}
             aria-live="polite"
@@ -5970,7 +5972,7 @@ export default function GreatGamePlayPage() {
 
       <div className={styles.deckPile} data-deck-anchor={viewPlayerId}
         aria-label={`Your deck: ${viewPlayer.deck.length} cards remaining`}>
-        <div className={styles.deckBack} aria-hidden="true"><span>THE GREAT<br />GAME</span><b>&#10022;</b></div>
+        <div className={styles.deckBack} aria-hidden="true"><b>&#10022;</b></div>
       </div>
       <section
         className={styles.opponentCommandDock}
@@ -6061,6 +6063,7 @@ export default function GreatGamePlayPage() {
       <Board
         className={styles.opponentBoardSection}
         title="Opposing Realm"
+        pointerDropBoard={Boolean(draggedHandCard && draggedCardDefinition && !isUnitCard(draggedCardDefinition) && canDropHandCardOnBoard(draggedHandCard))}
         units={
           viewEnemyPlayer.board
         }
