@@ -530,6 +530,36 @@
       "body": "Judgment by Blood: the Dragonpit memory, Costayne's trial, the Starfall disappearances and the threat gathering across the Narrow Sea. Discuss Chapter XIX here.",
       "publishedAt": "2026-09-19T20:30:00.000Z",
       "spoilerThrough": "judgment-by-blood"
+    },
+    {
+      "id": "community-xix-malaenar-witness",
+      "chapterSlug": null,
+      "title": "Baelenys did nothing—and the chapter refuses to let him forget it",
+      "category": "Writing & meta",
+      "authorId": "regular-room-critic",
+      "body": "The Dragonpit memory is not only about Aenys being monstrous. Malaenar looks directly at Baelenys and asks him to act, and Baelenys runs. The nightmare keeps the cruelty centered on the victim while still making the witness's silence matter. I think that distinction is why the opening lands so hard.",
+      "publishedAt": "2026-09-20T17:35:10.000Z",
+      "spoilerThrough": "judgment-by-blood"
+    },
+    {
+      "id": "community-xix-gods-spoken",
+      "chapterSlug": null,
+      "title": "The crowd changing its mind after Gaelor wins is the real horror",
+      "category": "Fandom",
+      "authorId": "regular-legal",
+      "body": "They enter the yard chanting Brant's name and hoping Gaelor dies. Minutes later, victory becomes judgment because that is the language the realm taught them. The fight proves Gaelor is the better fighter. It does not prove the massacre was righteous, but the institution lets strength impersonate innocence.",
+      "publishedAt": "2026-09-20T17:50:20.000Z",
+      "spoilerThrough": "judgment-by-blood"
+    },
+    {
+      "id": "community-xix-where-is-nymos",
+      "chapterSlug": null,
+      "title": "Forget the dragon for one minute: where is Nymos?",
+      "category": "Theories",
+      "authorId": "regular-margin-notes",
+      "body": "Rhaella is missing, the unfamiliar maester serving in Edmyn's place is missing, and Visenor privately wonders whether their man completed his work. Boneskin may explain the burned men, but she does not explain who installed Nymos or where he went. That feels like the human trail inside the dragon mystery.",
+      "publishedAt": "2026-09-20T18:05:30.000Z",
+      "spoilerThrough": "judgment-by-blood"
     }
   ],
   "comments": [
@@ -13128,6 +13158,390 @@
       "parentSource": "supabase",
       "body": "endless cake in this thread, invite on hold in the other. your admissions department and catering need to speak to each other",
       "publishedAt": "2026-09-19T21:48:45.592Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c01",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "Malaenar asking Baelenys to say something hurt more than any accusation could have. He was asking for the smallest possible act of courage.",
+      "publishedAt": "2026-09-20T17:38:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c02",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "And the memory gives Baelenys no convenient excuse. He understands what is happening, looks sick, and leaves anyway.",
+      "publishedAt": "2026-09-20T17:40:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c03",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-room-defender",
+      "parentId": "xix-malaenar-c02",
+      "body": "He is also a young person trapped under the same father. That explains the fear. It does not rescue the choice.",
+      "publishedAt": "2026-09-20T17:42:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c04",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-room-middle",
+      "parentId": "xix-malaenar-c03",
+      "body": "Exactly. The scene can hold both facts without pretending Baelenys suffered the same thing Malaenar did.",
+      "publishedAt": "2026-09-20T17:44:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c05",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "The nightmare reproduces Malaenar's exact appeal before Vhaemys calls Baelenys by another name. That connection is present; its meaning is not yet confirmed.",
+      "publishedAt": "2026-09-20T17:46:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c06",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-wild-take",
+      "parentId": "xix-malaenar-c05",
+      "body": "My theory is that the name belongs to the guilt, not secretly to one person. I reserve the right to be extremely wrong.",
+      "publishedAt": "2026-09-20T17:47:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c07",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "The worst image is not the dragon. It is Aenys making his son crawl toward him first. The violence begins well before Sheepstealer moves.",
+      "publishedAt": "2026-09-20T17:48:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c08",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-hr",
+      "parentId": "xix-malaenar-c07",
+      "body": "Dropping the bit: yes. The humiliation is deliberate, public and staged by his father. That was difficult to read.",
+      "publishedAt": "2026-09-20T17:49:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c09",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "a dynasty can call itself exceptional for generations and still be built from one frightened person watching another get crushed",
+      "publishedAt": "2026-09-20T17:50:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c10",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-fandom-history",
+      "parentId": "xix-malaenar-c09",
+      "body": "And later titles do not clean the moment. The chapter introduces Aenys II through what he did before it asks us to remember him as a king.",
+      "publishedAt": "2026-09-20T17:51:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c11",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "the little dragon staying close to him until the end. awful.",
+      "publishedAt": "2026-09-20T17:52:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-malaenar-c12",
+      "entryId": "community-xix-malaenar-witness",
+      "authorId": "regular-ecology",
+      "parentId": "xix-malaenar-c11",
+      "body": "That closeness matters. The small dragon is frightened too and still presses toward Malaenar rather than away from him.",
+      "publishedAt": "2026-09-20T17:53:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c01",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "The narration is explicit: many accept the language they were raised to understand. It describes social belief, not objective divine confirmation.",
+      "publishedAt": "2026-09-20T17:54:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c02",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "counterpoint: two swords. extremely persuasive legal scholarship",
+      "publishedAt": "2026-09-20T17:55:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c03",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-legal",
+      "parentId": "xix-gods-c02",
+      "body": "Overruled on the grounds that you have accidentally summarized the entire institution.",
+      "publishedAt": "2026-09-20T17:56:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c04",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "Brant gets the crowd, Gaelor gets the result, and justice gets quietly escorted out of the yard.",
+      "publishedAt": "2026-09-20T17:57:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c05",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "I liked that the fight was competitive. Making Brant helpless from the start would have turned it into spectacle without the crowd's hope curdling in real time.",
+      "publishedAt": "2026-09-20T17:58:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c06",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-room-defender",
+      "parentId": "xix-gods-c05",
+      "body": "The cut on Gaelor's arm matters for the same reason. For a moment the expected ending genuinely looks unstable.",
+      "publishedAt": "2026-09-20T17:59:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c07",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Jace saying pity to the severed head is such a cold little punctuation mark.",
+      "publishedAt": "2026-09-20T18:00:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c08",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-room-middle",
+      "parentId": "xix-gods-c07",
+      "body": "Especially because it is too quiet for Gaelor to hear. It is not a performance or a challenge. It is just Jace's verdict.",
+      "publishedAt": "2026-09-20T18:01:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c09",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "Vhaemys looking to Baelenys before deciding whether to cheer bothered me. She is learning what judgment looks like from the adults around her.",
+      "publishedAt": "2026-09-20T18:02:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c10",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-u",
+      "parentId": "xix-gods-c09",
+      "body": "same chapter where they teach her kitchen workers are disposable until the pie supply is threatened. excellent civic education all around",
+      "publishedAt": "2026-09-20T18:03:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c11",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-fandom-dnd",
+      "parentId": null,
+      "body": "A ritual can produce a socially binding answer without producing a morally true one. Everyone in the yard still has to live with the first kind.",
+      "publishedAt": "2026-09-20T18:04:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-gods-c12",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-archive",
+      "parentId": "xix-gods-c11",
+      "body": "And Baelenys immediately converts that social answer into political rehabilitation: perhaps some stain has been washed away in a few eyes.",
+      "publishedAt": "2026-09-20T18:05:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c01",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "Confirmed pieces only: Lorenah has never heard the name, Nymos was serving in Edmyn's place, and Visenor calls him their man in private thought.",
+      "publishedAt": "2026-09-20T18:07:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c02",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-fandom-true-crime",
+      "parentId": "xix-nymos-c01",
+      "body": "Which makes the safest question not 'what did he do?' but 'who accepted his credentials and when?' The access came before the disappearance.",
+      "publishedAt": "2026-09-20T18:09:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c03",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-margin-notes",
+      "parentId": "xix-nymos-c02",
+      "body": "Yes. Someone did not merely vanish; someone first became ordinary enough to receive ravens and stand where a known maester should be.",
+      "publishedAt": "2026-09-20T18:11:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c04",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "Dorne sent a report because it did not want to be accused of hiding a dragon while an actual infiltrator may have been sitting in the mail room. brutal.",
+      "publishedAt": "2026-09-20T18:12:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c05",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-g",
+      "parentId": "xix-nymos-c04",
+      "body": "dragon: visible from the coast. suspicious maester: wearing the universal stealth disguise of holding paperwork",
+      "publishedAt": "2026-09-20T18:13:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c06",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Important separation: Visenor suspects Boneskin burned the men. He does not know why, and the chapter does not say Nymos caused those deaths.",
+      "publishedAt": "2026-09-20T18:15:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c07",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-room-middle",
+      "parentId": "xix-nymos-c06",
+      "body": "The uncertainty is better. Rhaella, Nymos, the basket, the bodies and Boneskin occupy the same crisis without becoming one solved chain yet.",
+      "publishedAt": "2026-09-20T18:17:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c08",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "Nymos is in the basket. I have no dimensions, evidence or dignity left.",
+      "publishedAt": "2026-09-20T18:19:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c09",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-l",
+      "parentId": "xix-nymos-c08",
+      "body": "The basket is described as the sort Rhaella carried. No maester capacity is provided.",
+      "publishedAt": "2026-09-20T18:20:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c10",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "The unburned basket beside burned bodies is an excellent wrong detail. It gives you something recognizable and makes the whole scene less reassuring.",
+      "publishedAt": "2026-09-20T18:22:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c11",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-sincere-quill",
+      "parentId": null,
+      "body": "I keep coming back to Lorenah realizing she no longer knows who will receive her questions. The mystery instantly becomes personal and practical.",
+      "publishedAt": "2026-09-20T18:24:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "xix-nymos-c12",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-room-critic",
+      "parentId": "xix-nymos-c11",
+      "body": "That line did more for the infiltration plot than another paragraph of villain explanation would have. Their information network is contaminated at the point of trust.",
+      "publishedAt": "2026-09-20T18:26:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch19-live-jace-alester-release-valve",
+      "entryId": "chapter-judgment-by-blood",
+      "liveThreadId": "chapter-judgment-by-blood",
+      "authorId": "regular-room-middle",
+      "parentId": "4c81db54-4c84-4b9a-b14b-39d7708e0e14",
+      "parentSource": "supabase",
+      "body": "That is how I read it too: Jace starts the spar because Alester will not speak, then keeps the consequences from swallowing him once the anger finally comes out. He is helping, but in the most Jace-shaped hazardous way possible.",
+      "publishedAt": "2026-09-20T18:27:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch19-live-jace-alester-not-a-plan",
+      "entryId": "chapter-judgment-by-blood",
+      "liveThreadId": "chapter-judgment-by-blood",
+      "authorId": "regular-j",
+      "parentId": "d853f266-a651-408f-b3fa-b0a2648b351a",
+      "parentSource": "supabase",
+      "body": "he absolutely wanted Alester to let it out. I refuse to call getting hit in the mouth the plan when Jace was losing that badly though",
+      "publishedAt": "2026-09-20T18:28:00.000Z",
       "upvoterIds": [],
       "awards": []
     }
