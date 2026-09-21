@@ -9,7 +9,7 @@ export const beastTypes = [
 ] as const;
 
 export default function BestiaryTabs({ active }: { active: string }) {
-  return <nav className="realm-section-tabs" aria-label="Bestiary sections">{beastTypes.map((beast) => <Link key={beast.id} href={`/bestiary/${beast.id}`} aria-current={active === beast.id ? "page" : undefined}>{beast.name}</Link>)}<Link href="/dragons/scale" aria-current={active === "scale" ? "page" : undefined}>The Measure of Fire</Link></nav>;
+  return <nav className="realm-section-tabs" aria-label="Bestiary sections">{beastTypes.map((beast) => <Link key={beast.id} href={`/bestiary/${beast.id}`} aria-current={active === beast.id ? "page" : undefined}>{beast.name}</Link>)}</nav>;
 }
 
 export function BackToBestiary() {

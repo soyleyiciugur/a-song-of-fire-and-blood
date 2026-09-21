@@ -2,7 +2,10 @@
   {
     "date": "2026-09-21",
     "items": [
-      "Rebuilt The Measure of Fire with 28 illustrated dragon records, a shared metre scale, selectable overlays, separate rows, source filters and zoom controls."
+      "Rebuilt The Measure of Fire with 28 illustrated dragon records, a shared metre scale, selectable overlays, separate rows, source filters and zoom controls.",
+      "Moved The Measure of Fire inside Dragons, placed the dragon picker beside the live comparison stage, and replaced raster outlines with smooth scalable SVG silhouettes.",
+      "Stabilized the dragon comparison frame during hover and zoom, increased its default scale fourfold, and grouped source filters under a collapsed Filters control.",
+      "Set the dragon comparison?s 100% zoom to the full 0?120 m range and added a proportional 1.85 m human reference anchored safely left of zero."
     ]
   },
   {
