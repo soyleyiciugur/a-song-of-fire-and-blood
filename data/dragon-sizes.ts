@@ -192,6 +192,16 @@ export const dragonSizes = [
     "color": "#3e83c9"
   },
   {
+    "id": "boneskin",
+    "name": "Boneskin",
+    "length": 20,
+    "wingspan": 42,
+    "source": "ASoFaB",
+    "minimum": false,
+    "uncertain": false,
+    "color": "#ab9774"
+  },
+  {
     "id": "moondancer",
     "name": "Moondancer",
     "length": 19,
