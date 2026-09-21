@@ -7887,3 +7887,18 @@
   .boardGame .opponentStatusDock button { font-size: 4px; padding: 2px; min-height: 16px; }
   .boardGame .commandDockEndTurnButton { font-size: 5px; }
 }
+/* A draw keeps its hand slot, but only becomes visible when the flight lands. */
+.boardGame .handCard.drawHiddenHandCard {
+  visibility: hidden;
+  opacity: 0;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+/* Avoid repainting every overlapping translucent card as a flight passes it. */
+.boardGame .handCard .cardInfoPanel {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.boardGame .handCard {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

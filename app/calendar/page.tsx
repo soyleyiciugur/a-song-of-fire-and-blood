@@ -9,6 +9,7 @@ import { CALENDAR_LABELS, calendarDateFromOrder, calendarDateLabel, calendarHref
 import { timelineDateOrder } from "@/lib/timeline-date";
 import chronicle from "@/app/chronicle/chronicle.module.css";
 import styles from "./calendar.module.css";
+import ChronicleTabs from "@/components/chronicle/ChronicleTabs";
 
 export const metadata: Metadata = { title: "Calendar | A Song of Fire and Blood", description: "The moons of the realm: namedays, feasts and the events of the Chronicle." };
 
@@ -25,9 +26,7 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
     <p className={chronicle.eyebrow}>Twelve moons. Thirty days. The history of a realm.</p>
     <h1 className="realm-page-title">Calendar</h1>
     <p className={chronicle.lead}>Namedays, gatherings, and the days that shaped the Seven Kingdoms.</p>
-    <nav className={`${chronicle.tabs} realm-section-tabs`} aria-label="Chronicle sections">
-      <Link href="/timeline">Timeline</Link><Link href="/chronicle">Annals</Link><Link aria-current="page" className={chronicle.activeTab} href="/calendar">Calendar</Link><Link href="/wars">The Bloodshed</Link>
-    </nav>
+    <ChronicleTabs active="calendar" className={chronicle.tabs} activeClassName={chronicle.activeTab} />
     <div className={styles.layout}>
       <RealmCalendar key={`${date.year}-${date.moon}-${date.day}`} today={worldDate} initialDate={date} events={getCalendarEvents()} />
       <aside className={styles.upcoming} aria-label="Upcoming namedays and events">

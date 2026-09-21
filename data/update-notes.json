@@ -5,7 +5,18 @@
       "Rebuilt The Measure of Fire with 28 illustrated dragon records, a shared metre scale, selectable overlays, separate rows, source filters and zoom controls.",
       "Moved The Measure of Fire inside Dragons, placed the dragon picker beside the live comparison stage, and replaced raster outlines with smooth scalable SVG silhouettes.",
       "Stabilized the dragon comparison frame during hover and zoom, increased its default scale fourfold, and grouped source filters under a collapsed Filters control.",
-      "Set the dragon comparison?s 100% zoom to the full 0?120 m range and added a proportional 1.85 m human reference anchored safely left of zero."
+      "Set the dragon comparison?s 100% zoom to the full 0?120 m range and added a proportional 1.85 m human reference anchored safely left of zero.",
+      "Unified the Dragons archive and comparison headers and tabs, anchored the comparison origin at the lower left at every zoom, and restored smooth vector contours for eight edited dragon silhouettes.",
+      "Stabilized hand rendering during card draws and kept interaction locked through the complete draw sequence.",
+      "Closed gaps where dragon wings meet bodies and legs with continuous backing fills while preserving the original wing holes.",
+      "Added direct Measure of Fire links to supported dragon profiles and moved comparison scale, placement, filters and silhouette metadata into a shared JSON configuration.",
+      "Kept Measure of Fire hover previews visible and synchronized with the dragon beneath the pointer while scrolling the picker.",
+      "Replaced Echoes of the Realm's browser-default sort menu with a styled archive dropdown.",
+      "Restored Raven's Eye tags inside opened images and reels on mobile while keeping them hidden on hub previews.",
+      "Added a nested Dragons menu to Bestiary with direct access to the Dragon Archive and The Measure of Fire.",
+      "Rebuilt global search as a keyboard-accessible command palette with broader public-archive coverage, category-specific result artwork, balanced suggestions and expandable filtered result groups.",
+      "Added shared Houses section tabs above the House of the Dragon and Succession page titles.",
+      "Standardized Chronicle navigation and Annals around the Known World event categories, refined narrative-event icons, and restored the map chapter slider's circular thumb."
     ]
   },
   {

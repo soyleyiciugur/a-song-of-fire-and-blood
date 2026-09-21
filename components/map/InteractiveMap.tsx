@@ -21,7 +21,7 @@ import {
 import { getAllChapters } from "@/data/chapters";
 import { getCharacters } from "@/lib/characters";
 import { getTitleRank } from "@/constants/titles";
-import type { MapEventType } from "@/types/map";
+import { MAP_EVENT_TYPES, type MapEventType } from "@/types/map";
 import {
   MAP_EVENT_TYPE_ICONS,
   MAP_EVENT_TYPE_LABELS,
@@ -34,13 +34,7 @@ const MAP_SRC = "/images/map/known-world.webp";
 const MINI_FALLBACK = "/images/miniportraits/default.webp";
 const MAX_VISIBLE_AVATARS = 3;
 
-const ALL_EVENT_TYPES: MapEventType[] = [
-  "battle",
-  "feast",
-  "tournament",
-  "wedding",
-  "trial",
-];
+const ALL_EVENT_TYPES: MapEventType[] = MAP_EVENT_TYPES;
 
 const MIN_MARKER_DISTANCE_PX = 46;
 

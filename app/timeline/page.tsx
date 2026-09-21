@@ -7,6 +7,7 @@ import { timeline, getTimelineEventKind } from "@/data/timeline";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
 import SearchableSelect from "@/components/SearchableSelect";
+import ChronicleTabs from "@/components/chronicle/ChronicleTabs";
 
 import styles from "./timeline.module.css";
 
@@ -44,11 +45,7 @@ export default function Timeline() {
           The major turns of the realm, chapter by chapter.
         </p>
 
-        <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Chronicle sections">
-          <Link aria-current="page" className={styles.activeTab} href="/timeline">Timeline</Link>
-          <Link href="/chronicle">Annals</Link><Link href="/calendar">Calendar</Link>
-          <Link href="/wars">The Bloodshed</Link>
-        </nav>
+        <ChronicleTabs active="timeline" className={styles.tabs} activeClassName={styles.activeTab} />
 
         <div className={styles.filters}>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the timeline…" aria-label="Search timeline" />

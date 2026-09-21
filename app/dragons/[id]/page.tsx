@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { dragons, getDragon } from "@/data/dragons";
+import { dragonSizeIds } from "@/data/dragon-size-comparison";
 import { getCharacter } from "@/lib/characters";
 import SigilImage from "@/components/SigilImage";
 import MiniPortrait from "@/components/MiniPortrait";
@@ -61,6 +62,18 @@ export default async function DragonPage({ params }: Props) {
         </div>
 
         <p className={styles.description}>{dragon.description}</p>
+
+        {dragonSizeIds.has(dragon.id) && (
+          <Link
+            href={`/dragons/scale?dragon=${encodeURIComponent(dragon.id)}`}
+            className={styles.measureLink}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 17.5h16M6 14V5m4 9V8m4 6V6m4 8v-4" />
+            </svg>
+            Show in The Measure of Fire
+          </Link>
+        )}
 
         <h2 className={styles.sectionHeading}>Traits</h2>
         <div className={styles.traits}>

@@ -44,7 +44,7 @@ function trace(labels,w,h,target) {
   }
   return result;
 }
-(async()=>{
+if (require.main === module) (async()=>{
   fs.mkdirSync('public/images/dragons/sizes/clean',{recursive:true});
   let total=0;
   for(const [id,shape] of Object.entries(shapes)) {
@@ -77,3 +77,5 @@ function trace(labels,w,h,target) {
   }
   console.log('Vector bytes:',total);
 })().catch(error=>{console.error(error);process.exitCode=1;});
+
+module.exports = { trace };

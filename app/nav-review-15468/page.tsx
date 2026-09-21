@@ -1,0 +1,1 @@
+import Inbox from '@/components/direct-raven/DirectRavenInbox';export default function Page(){return <main style={{maxWidth:400}}><Inbox conversations={[]}/></main>}

@@ -1,6 +1,12 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\types\map.ts
 export type MapEventType = "battle" | "feast" | "tournament" | "wedding" | "trial";
 
+export const MAP_EVENT_TYPES: MapEventType[] = ["battle", "feast", "tournament", "wedding", "trial"];
+
+export function isMapEventType(value: string): value is MapEventType {
+  return MAP_EVENT_TYPES.includes(value as MapEventType);
+}
+
 export interface MapEvent {
   id: string;
   title: string;

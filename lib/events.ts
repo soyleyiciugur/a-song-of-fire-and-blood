@@ -1,5 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\lib\events.ts
-import type { MapEvent } from "@/types/map";
+import { isMapEventType, type MapEvent } from "@/types/map";
 import charactersData from "@/data/characters/characters.json";
 import eventsData from "@/data/events.json";
 import { daysUntilNextNameday, type WorldDate } from "@/lib/age";
@@ -130,7 +130,7 @@ export function getUpcomingEvents(
  */
 export function getMapEvents(): MapEvent[] {
   return (eventsData as any[]).filter(
-    (event) => event.location && event.chapterSlug
+    (event) => event.location && event.chapterSlug && isMapEventType(event.type)
   );
 }
 

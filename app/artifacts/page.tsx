@@ -1,8 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
+import { artifacts } from "@/data/artifacts";
 import styles from "./artifacts.module.css";
 
-const artifacts = [["blackfyre", "Blackfyre", "The black blade of Targaryen kings, carried as much for the claim it represented as for the edge it kept."], ["dark-sister", "Dark Sister", "A slender Valyrian steel sword, remembered in the hands of warriors who made speed and precision their answer to strength."], ["ice", "Ice", "The great Valyrian blade of House Stark, a symbol of northern judgment and the weight of an ancient house."], ["watchers-howl", "Watcher’s Howl", "A hunting bow whose name is spoken in the same breath as the watchful forests and the men who know their paths."], ["dawn", "Dawn", "The pale sword of House Dayne, granted to the knight deemed worthy to bear the title Sword of the Morning."], ["lady-forlorn", "Lady Forlorn", "The Valyrian steel sword of House Corbray, presently carried by Ser Lucas Corbray."]] as const;
-
 export const metadata = { title: "The Collection" };
-export default function ArtifactsPage() { return <main className={styles.page}><div className={styles.container}><p className={styles.eyebrow}>Relics of the Realm</p><h1 className="realm-page-title">The Collection</h1><p className={styles.lead}>Artifacts remembered for the stories they carry, not the games they might be played in.</p><nav className={`${styles.tabs} realm-section-tabs`} aria-label="Collection sections"><Link aria-current="page" className={styles.activeTab} href="/collection">Artifacts</Link></nav><h2 className={styles.sectionTitle}>Artifacts</h2><div className={styles.grid}>{artifacts.map(([id, name, description]) => <article className={styles.card} key={id}><div className={styles.image}><Image src={`/images/cards/${id}.webp`} alt={name} fill sizes="(max-width: 700px) 50vw, 220px" /></div><div className={styles.body}><h3>{name}</h3><p>{description}</p></div></article>)}</div></div></main>; }
+
+export default function ArtifactsPage() {
+  return <main className={styles.page}><div className={styles.container}>
+    <p className={styles.eyebrow}>Relics of the Realm</p>
+    <h1 className="realm-page-title">The Collection</h1>
+    <p className={styles.lead}>Artifacts remembered for the stories they carry, not the games they might be played in.</p>
+    <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Collection sections"><Link aria-current="page" className={styles.activeTab} href="/collection">Artifacts</Link></nav>
+    <h2 className={styles.sectionTitle}>Artifacts</h2>
+    <div className={styles.grid}>{artifacts.map(([id, name, description]) => <article id={id} className={styles.card} key={id}>
+      <div className={styles.image}><Image src={`/images/cards/${id}.webp`} alt={name} fill sizes="(max-width: 700px) 50vw, 220px" /></div>
+      <div className={styles.body}><h3>{name}</h3><p>{description}</p></div>
+    </article>)}</div>
+  </div></main>;
+}

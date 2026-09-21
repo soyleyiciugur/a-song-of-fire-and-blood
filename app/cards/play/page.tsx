@@ -2519,7 +2519,9 @@ export default function GreatGamePlayPage() {
 
   const drawAnimationActive =
     Boolean(
-      drawFlight ||
+      turnDrawPending ||
+        drawGapActive ||
+        drawFlight ||
         drawQueue.length > 0
     );
 

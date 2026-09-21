@@ -1513,8 +1513,6 @@
 .mediaRavenShareButton:hover,.mediaRavenShareButton:focus-visible{border-color:#c79b5e;background:linear-gradient(145deg,#47252b,#181215);outline:none}
 .lightboxCard{position:relative}
 @media(max-width:720px){
-  .lightboxTags{display:none!important}
-  .reelSlideMeta .tagGroups{display:none!important}
   .reelSlideMeta{padding-right:66px}
   .mediaRavenShareButton{right:12px;bottom:max(12px,calc(env(safe-area-inset-bottom) + 8px));width:40px;height:40px}
 }

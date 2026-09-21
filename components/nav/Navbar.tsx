@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import { NAV_ITEMS, isNavigationGroup } from "@/constants/navigation";
+import { NAV_ITEMS, isNavigationGroup, type NavigationItem } from "@/constants/navigation";
 import SearchBar from "./SearchBar";
 import AccountControl from "./AccountControl";
 import DirectRavenNavButton from "@/components/direct-raven/DirectRavenNavButton";
@@ -13,6 +13,10 @@ import NotificationNavButton from "./NotificationNavButton";
 import UtilityIcon from "./UtilityIcon";
 
 import styles from "./navbar.module.css";
+
+function itemMatchesPath(item: NavigationItem, pathname: string): boolean {
+  return pathname.startsWith(item.href) || Boolean(item.items?.some((child) => itemMatchesPath(child, pathname)));
+}
 
 export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
@@ -29,6 +33,7 @@ export default function Navbar() {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
+  const [openMobileSubgroup, setOpenMobileSubgroup] = useState<string | null>(null);
   const pathname = usePathname();
   const isGreatGameBoard = pathname === "/cards/play";
   const [navExpanded, setNavExpanded] = useState(() => !isGreatGameBoard);
@@ -46,6 +51,7 @@ export default function Navbar() {
     setMenuOpen(false);
     setOpenGroup(null);
     setHoveredGroup(null);
+    setOpenMobileSubgroup(null);
     setNavExpanded(!isGreatGameBoard);
   }, [isGreatGameBoard, pathname]);
 
@@ -166,7 +172,7 @@ export default function Navbar() {
                   href={item.href || "#"}
                   className={`${styles.navLink} ${
                     (item.href && pathname.startsWith(item.href)) ||
-                    item.items.some((sub) => pathname.startsWith(sub.href))
+                    item.items.some((sub) => itemMatchesPath(sub, pathname))
                       ? styles.active
                       : ""
                   }`}
@@ -193,13 +199,21 @@ export default function Navbar() {
 
                 {(openGroup === item.label || hoveredGroup === item.label) && (
                   <div className={styles.navGroupMenu}>
-                    {item.items.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className={styles.navGroupMenuLink}
-                        onClick={() => setOpenGroup(null)}
-                      >
+                    {item.items.map((sub) => sub.items ? (
+                      <div key={sub.href} className={styles.navSubgroup}>
+                        <Link href={sub.href} className={styles.navGroupMenuLink} onClick={() => setOpenGroup(null)}>
+                          {sub.label}<span className={styles.navSubgroupCaret} aria-hidden="true">›</span>
+                        </Link>
+                        <div className={styles.navSubgroupMenu}>
+                          {sub.items.map((child) => (
+                            <Link key={child.href} href={child.href} className={styles.navGroupMenuLink} onClick={() => setOpenGroup(null)}>
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <Link key={sub.href} href={sub.href} className={styles.navGroupMenuLink} onClick={() => setOpenGroup(null)}>
                         {sub.label}
                       </Link>
                     ))}
@@ -280,16 +294,32 @@ export default function Navbar() {
 
               {openMobileGroup === item.label && (
                 <div className={styles.mobileNavGroupItems}>
-                  {item.items.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      className={styles.mobileNavLink}
-                      onClick={() => {
-                        setMenuOpen(false);
-                        setOpenMobileGroup(null);
-                      }}
-                    >
+                  {item.items.map((sub) => sub.items ? (
+                    <div key={sub.href} className={styles.mobileNavSubgroup}>
+                      <div className={styles.mobileNavSubgroupRow}>
+                        <Link href={sub.href} className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>{sub.label}</Link>
+                        <button
+                          type="button"
+                          className={styles.mobileNavSubgroupToggle}
+                          aria-expanded={openMobileSubgroup === sub.label}
+                          aria-label={`Toggle ${sub.label} menu`}
+                          onClick={() => setOpenMobileSubgroup((current) => current === sub.label ? null : sub.label)}
+                        >
+                          <span className={styles.navGroupCaret} aria-hidden="true"><svg viewBox="0 0 12 8" fill="none"><path d="m2 2 4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+                        </button>
+                      </div>
+                      {openMobileSubgroup === sub.label && (
+                        <div className={styles.mobileNavSubgroupItems}>
+                          {sub.items.map((child) => (
+                            <Link key={child.href} href={child.href} className={styles.mobileNavLink} onClick={() => { setMenuOpen(false); setOpenMobileGroup(null); setOpenMobileSubgroup(null); }}>
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link key={sub.href} href={sub.href} className={styles.mobileNavLink} onClick={() => { setMenuOpen(false); setOpenMobileGroup(null); }}>
                       {sub.label}
                     </Link>
                   ))}

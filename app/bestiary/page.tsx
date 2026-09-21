@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { beastTypes } from "@/components/BestiaryTabs";
+import { beastTypes } from "@/data/bestiary";
 import styles from "./bestiary.module.css";
 
 export default function BestiaryPage() {

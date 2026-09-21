@@ -3,6 +3,7 @@
 export type NavigationItem = {
   label: string;
   href: string;
+  items?: NavigationItem[];
 };
 
 export type NavigationGroup = {
@@ -29,7 +30,10 @@ export const NAV_ITEMS: NavigationEntry[] = [
     ],
   },
   { label: "Bestiary", href: "/bestiary", items: [
-    { label: "Dragons", href: "/bestiary/dragons" },
+    { label: "Dragons", href: "/bestiary/dragons", items: [
+      { label: "Dragon Archive", href: "/bestiary/dragons" },
+      { label: "The Measure of Fire", href: "/dragons/scale" },
+    ] },
     { label: "Direwolves", href: "/bestiary/direwolves" },
     { label: "Dogs", href: "/bestiary/dogs" },
     { label: "Cats", href: "/bestiary/cats" },
@@ -55,10 +59,10 @@ export const NAV_ITEMS: NavigationEntry[] = [
     label: "Records", 
     href: "/records", 
     items: [
-      { label: "The Realm's Ledger", href: "/stats" },
       { label: "Scrolls from the Realm", href: "/scrolls" },
       { label: "The Book of Brothers", href: "/book-of-brothers" },
-      { label: "Echoes of the Realm", href: "/quotes" },
+      { label: "The Realm's Ledger", href: "/stats" },
+      { label: "Echoes of the Realm", href: "/quotes" }
     ],
   },
 ];

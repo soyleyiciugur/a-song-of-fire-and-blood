@@ -3,11 +3,13 @@ import { dragons } from "@/data/dragons";
 import { getCharacter } from "@/lib/characters";
 import MiniPortrait from "@/components/MiniPortrait";
 import SigilImage from "@/components/SigilImage";
-import BestiaryTabs, { BackToBestiary } from "@/components/BestiaryTabs";
+import { BackToBestiary } from "@/components/BestiaryTabs";
+import DragonSectionHeader from "@/components/DragonSectionHeader";
+import layout from "@/app/dragons/scale/scale.module.css";
 import styles from "../../dragons/dragons.module.css";
 
 export default function DragonsPage() {
-  return <main className={styles.page}><div className={styles.container}><h1 className="realm-page-title">Dragons</h1><p className={styles.subheading}>The living fire of House Targaryen, and the flames that went out too soon.</p><BestiaryTabs active="dragons" /><nav className="realm-section-tabs" aria-label="Dragon pages"><Link href="/bestiary/dragons" aria-current="page">Dragon archive</Link><Link href="/dragons/scale">The Measure of Fire</Link></nav>{(["Alive", "Unknown", "Dead"] as const).map((status) => <section className={styles.group} key={status}><h2 className={styles.groupHeading}>{status === "Alive" ? "Living" : status === "Unknown" ? "Unknown" : "Lost"}</h2><div className={styles.grid}>{dragons.filter((dragon) => dragon.status === status).map((dragon) => <DragonCard key={dragon.id} dragon={dragon}/>)}</div></section>)}<BackToBestiary /></div></main>;
+  return <main className={layout.page}><div className={layout.container}><DragonSectionHeader active="archive" />{(["Alive", "Unknown", "Dead"] as const).map((status) => <section className={styles.group} key={status}><h2 className={styles.groupHeading}>{status === "Alive" ? "Living" : status === "Unknown" ? "Unknown" : "Lost"}</h2><div className={styles.grid}>{dragons.filter((dragon) => dragon.status === status).map((dragon) => <DragonCard key={dragon.id} dragon={dragon}/>)}</div></section>)}<BackToBestiary /></div></main>;
 }
 
 function DragonCard({ dragon }: { dragon: (typeof dragons)[number] }) {

@@ -1,163 +1,51 @@
-// This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\search\page.tsx
 import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import Link from "next/link";
-
-import MiniPortrait from "@/components/MiniPortrait";
-import SigilImage from "@/components/SigilImage";
-import { searchIndex, type SearchResult } from "@/lib/search";
-
+import { SEARCH_TYPE_LABELS, SEARCH_TYPE_ORDER, searchIndex, type SearchResult, type SearchResultType } from "@/lib/search";
+import SearchResultGroup, { type SearchDisplayResult } from "./SearchResultGroup";
 import styles from "./search.module.css";
 
-type Props = {
-  searchParams: Promise<{ q?: string }>;
-};
-
-const TYPE_LABELS: Record<SearchResult["type"], string> = {
-  character: "Characters",
-  chapter: "Chapters",
-  house: "Houses",
-  dragon: "Dragons",
-  event: "Events",
-  location: "Locations",
-  artifact: "Artifacts",
-};
-
-const TYPE_ORDER: SearchResult["type"][] = ["character", "chapter", "house", "dragon", "event", "location", "artifact"];
-
-// A small wax-seal medallion with the chapter number pressed into it — the
-// same raven-letter/seal motif used for correspondence across Westeros.
-// Unlike a Roman numeral, an Arabic number stays legible at any chapter
-// count, so the font just steps down a size as the digit count grows.
-// The number is a plain HTML span centered with flexbox on top of the SVG
-// seal, rather than SVG <text> — SVG baseline centering is font/browser
-// dependent and drifted for some digits, flexbox centering is exact.
-function ChapterThumb({ number }: { number: number }) {
-  const digits = String(number).length;
-  const fontSize = digits <= 1 ? 15 : digits === 2 ? 13 : digits === 3 ? 10.5 : 8.5;
-
-  return (
-    <div className={styles.chapterThumb}>
-      <svg viewBox="0 0 44 44" width={44} height={44}>
-        {/* drip at the base of the seal */}
-        <ellipse cx="22" cy="35" rx="5" ry="4" fill="#5c0f14" />
-        {/* main wax body */}
-        <circle cx="22" cy="21" r="17" fill="#7a1620" />
-        <circle cx="22" cy="21" r="17" fill="none" stroke="#4a0d12" strokeWidth="1.5" />
-        {/* pressed inner rim, like a seal stamp impression */}
-        <circle cx="22" cy="21" r="13" fill="none" stroke="var(--gold)" strokeWidth="1" opacity="0.7" />
-        {/* subtle highlight for a molded, glossy wax look */}
-        <ellipse cx="17" cy="15" rx="6" ry="4" fill="#a53442" opacity="0.35" />
-      </svg>
-      <span
-        className={styles.chapterThumbNumber}
-        style={{ fontSize }}
-      >
-        {number}
-      </span>
-    </div>
-  );
-}
-
-function renderThumbnail(item: SearchResult) {
-  if (!item.thumbnail) return null;
-
-  if (item.thumbnail.kind === "character") {
-    return <MiniPortrait id={item.id} alt={item.thumbnail.alt} size={44} />;
-  }
-
-  if (item.thumbnail.kind === "house") {
-    return (
-      <SigilImage
-        src={item.thumbnail.src}
-        alt={item.thumbnail.alt}
-        size={44}
-        shape="rounded"
-      />
-    );
-  }
-
-  if (item.thumbnail.kind === "chapter") {
-    return <ChapterThumb number={item.thumbnail.number} />;
-  }
-
-  return (
-    <div className={styles.dragonThumb}>
-      <img src={item.thumbnail.src} alt={item.thumbnail.alt} width={44} height={44} />
-    </div>
-  );
-}
+type Props = { searchParams: Promise<{ q?: string; type?: string }> };
 
 function groupResults(results: SearchResult[]) {
   const groups = new Map<SearchResult["type"], SearchResult[]>();
-
-  for (const type of TYPE_ORDER) groups.set(type, []);
-
-  for (const result of results) {
-    groups.get(result.type)?.push(result);
-  }
-
-  return TYPE_ORDER.map((type) => ({
+  for (const type of SEARCH_TYPE_ORDER) groups.set(type, []);
+  for (const result of results) groups.get(result.type)?.push(result);
+  return SEARCH_TYPE_ORDER.map((type) => ({
     type,
-    label: TYPE_LABELS[type],
-    items: groups.get(type) ?? [],
+    label: SEARCH_TYPE_LABELS[type],
+    items: (groups.get(type) ?? []).map((result) => {
+      const item = { ...result } as Partial<SearchResult>;
+      delete item.keywords;
+      return item as SearchDisplayResult;
+    }),
   })).filter((group) => group.items.length > 0);
 }
 
 export default async function SearchPage({ searchParams }: Props) {
-  const { q = "" } = await searchParams;
-
-  const results = searchIndex(q, 50);
+  const { q = "", type: requestedType = "" } = await searchParams;
+  const activeType = SEARCH_TYPE_ORDER.includes(requestedType as SearchResultType) ? requestedType as SearchResultType : undefined;
+  const allResults = searchIndex(q);
+  const results = activeType ? allResults.filter((item) => item.type === activeType) : allResults;
   const grouped = groupResults(results);
+  const counts = new Map<SearchResultType, number>();
+  for (const result of allResults) counts.set(result.type, (counts.get(result.type) ?? 0) + 1);
 
-  return (
-    <main className={styles.page}>
-      <div className={styles.container}>
-        <h1 className={styles.heading}>Search<PageTitleIcon name="search" /></h1>
+  return <main className={styles.page}><div className={styles.container}>
+    <h1 className={styles.heading}>Search<PageTitleIcon name="search" /></h1>
+    <form action="/search" className={styles.searchForm}>
+      <input name="q" defaultValue={q} placeholder="Search the public archives…" aria-label="Search query" />
+      <button type="submit">Search</button>
+    </form>
+    <p className={styles.subheading}>{q ? <>{allResults.length} {allResults.length === 1 ? "result" : "results"} for <q>{q}</q></> : "Type something in the search bar above to look through the realm."}</p>
 
-        <p className={styles.subheading}>
-          {q ? (
-            <>
-              Results for <q>{q}</q>
-            </>
-          ) : (
-            "Type something in the search bar above to look through the realm."
-          )}
-        </p>
+    {q && allResults.length > 0 && <nav className={styles.filters} aria-label="Filter search results">
+      <Link className={!activeType ? styles.filterActive : ""} href={`/search?q=${encodeURIComponent(q)}`}>All <span>{allResults.length}</span></Link>
+      {SEARCH_TYPE_ORDER.filter((type) => counts.has(type)).map((type) => <Link key={type} className={activeType === type ? styles.filterActive : ""} href={`/search?q=${encodeURIComponent(q)}&type=${type}`}>
+        {SEARCH_TYPE_LABELS[type]} <span>{counts.get(type)}</span>
+      </Link>)}
+    </nav>}
 
-        {q && grouped.length === 0 && (
-          <p className={styles.empty}>
-            Nothing in the records matches <q>{q}</q>.
-          </p>
-        )}
-
-        <div className={styles.groups}>
-          {grouped.map((group) => (
-            <section key={group.type} className={styles.group}>
-              <h2 className={styles.groupHeading}>{group.label}</h2>
-
-              <ul className={styles.list}>
-                {group.items.map((item) => (
-                  <li key={`${item.type}-${item.id}`}>
-                    <Link href={item.href} className={styles.card}>
-                      {item.thumbnail && (
-                        <div className={styles.thumbnail}>{renderThumbnail(item)}</div>
-                      )}
-
-                      <div className={styles.cardText}>
-                        <span className={styles.cardTitle}>{item.title}</span>
-
-                        {item.subtitle && (
-                          <span className={styles.cardSubtitle}>{item.subtitle}</span>
-                        )}
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
+    {q && grouped.length === 0 && <p className={styles.empty}>Nothing in the records matches <q>{q}</q>.</p>}
+    <div className={styles.groups}>{grouped.map((group) => <SearchResultGroup key={group.type} label={group.label} items={group.items} />)}</div>
+  </div></main>;
 }

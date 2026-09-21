@@ -1,9 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 import events from "@/data/events.json";
 import { getAllChapters } from "@/data/chapters";
+import { isMapEventType, MAP_EVENT_TYPE_ICONS, MAP_EVENT_TYPE_LABELS, type MapEventType } from "@/types/map";
+import ChronicleTabs from "@/components/chronicle/ChronicleTabs";
 import styles from "./chronicle.module.css";
 
 const chapters = getAllChapters();
+const annalEvents = events.filter((event) => isMapEventType(event.type)) as Array<(typeof events)[number] & { type: MapEventType }>;
 
 export default function ChroniclePage() {
   return (
@@ -12,19 +16,14 @@ export default function ChroniclePage() {
         <p className={styles.eyebrow}>The Historical Record</p>
         <h1 className="realm-page-title">The Chronicle</h1>
         <p className={styles.lead}>The turning points, secrets, and reckonings of the realm.</p>
-        <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Chronicle sections">
-          <Link href="/timeline">Timeline</Link>
-          <Link aria-current="page" className={styles.activeTab} href="/chronicle">Annals</Link>
-          <Link href="/calendar">Calendar</Link>
-          <Link href="/wars">The Bloodshed</Link>
-        </nav>
+        <ChronicleTabs active="annals" className={styles.tabs} activeClassName={styles.activeTab} />
         <h2 className={styles.sectionTitle}>Annals</h2>
         <div className={styles.grid}>
-          {events.map((event) => {
+          {annalEvents.map((event) => {
             const chapter = chapters.find((item) => item.slug === event.chapterSlug);
             return (
-              <article className={styles.card} key={event.id}>
-                <span>{event.type} · {event.day}/{event.moon}/{event.year} AC</span>
+              <article id={event.id} className={styles.card} key={event.id}>
+                <div className={styles.cardKind}><Image src={MAP_EVENT_TYPE_ICONS[event.type]} alt="" width={22} height={22} /><span>{MAP_EVENT_TYPE_LABELS[event.type]} · {event.day}/{event.moon}/{event.year} AC</span></div>
                 <h2>{event.title}</h2>
                 <p>{event.description}</p>
                 <div className={styles.cardLinks}>

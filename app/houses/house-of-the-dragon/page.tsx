@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { isLuckAdmin } from "@/lib/adminAccess";
 import { getHouseOfDragonTree } from "@/lib/houseOfDragonStore";
@@ -14,6 +15,12 @@ export default async function HouseOfTheDragonPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <nav className="realm-section-tabs" aria-label="House sections">
+          <Link href="/houses">Houses</Link>
+          <Link aria-current="page" href="/houses/house-of-the-dragon">House of the Dragon</Link>
+          <Link href="/succession">Succession</Link>
+        </nav>
+
         <header className={styles.hero}>
           <Image
             src="/images/houses/targaryen.webp"
