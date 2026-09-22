@@ -405,6 +405,14 @@
 .groupedPersonalCard .cardCompactCopy .cardBody{grid-column:1/-1;min-width:0}
 .groupedPersonalCard .cardCompactCopy .deliveredBy{grid-column:2;grid-row:1;align-self:end}
 .groupedPersonalCard .cardPreview{margin-top:5px}
+.personalMessageCluster .personalClusterIdentity>strong{
+  display:-webkit-box;
+  overflow:hidden;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
 
 /* The detailed raven is the full record. It may scroll as a whole, but its copy
    is never silently shortened with an ellipsis or line clamp. */

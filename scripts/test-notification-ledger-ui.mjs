@@ -16,6 +16,11 @@ try {
     // Browser-only cookie getter: fake auth never reaches the real server/proxy.
     await context.addInitScript(value => Object.defineProperty(document, 'cookie', { configurable: true, get: () => value, set: () => {} }), cookie);
     const rows = Array.from({ length: 45 }, (_, index) => ({ id: `00000000-0000-4000-8000-${String(index+10).padStart(12,'0')}`, user_id:userId, actor_id:null, kind:'realm_notice',source:'realm',mascot:index%2?'aldren':'mara', title:`Raven number ${index+1}.`,body:'A message awaits you in the realm.',href:'/offline',source_label:null,context:index === 35 ? {groupKey:'fixture-conversation',groupCount:3} : index === 36 ? {groupKey:'fixture-conversation',groupCount:1} : index === 37 ? {groupKey:'legacy-bundle',groupCount:3} : {},created_at:new Date(Date.now()-index*1000-10000).toISOString(),read_at:null }));
+    rows[1] = { ...rows[1], title:rows[0].title, body:rows[0].body, href:rows[0].href, source_label:rows[0].source_label };
+    rows[5] = { ...rows[5], kind:'direct_raven', source:'direct-raven', title:'New messages from @arya', body:'First raven', href:'/messages/conversation-arya', source_label:'@arya', context:{conversationId:'conversation-arya',actorUsername:'arya',replyBody:'First raven'} };
+    rows[6] = { ...rows[6], kind:'direct_raven', source:'direct-raven', title:'New messages from @bran', body:'Second raven', href:'/messages/conversation-bran', source_label:'@bran', context:{conversationId:'conversation-bran',actorUsername:'bran',replyBody:'Second raven'} };
+    rows[7] = { ...rows[7], kind:'direct_raven', source:'direct-raven', title:'New messages from @arya', body:'Third raven', href:'/messages/conversation-arya', source_label:'@arya', context:{conversationId:'conversation-arya',actorUsername:'arya',replyBody:'Third raven'} };
+    rows[8] = { ...rows[8], kind:'tavern_answer', source:'tavern', title:'An answer waits.', source_label:'Reply context fixture', context:{threadId:'reply-fixture',parentId:'parent-fixture',parentBody:'The original words',replyBody:'The direct answer',actorUsername:'replying-user'} };
     let patches = 0, failNext = false;
     await context.route('**/auth/v1/**', route => route.fulfill({ json:user }));
     await context.route('**/rest/v1/**', async route => {
@@ -37,6 +42,14 @@ try {
     page.on('pageerror', error => console.error(error.message));
     await page.goto(`${baseUrl}/notifications`);
     await expect(page.getByRole('link',{name:/Raven number 1\./})).toBeVisible();
+    await expect(page.getByRole('link',{name:/Raven number 1\./})).toHaveCount(1);
+    const directRavens = page.locator('details').filter({hasText:'New messages from @arya and @bran'});
+    await expect(directRavens).toBeVisible();
+    await directRavens.locator('summary').click();
+    await expect(directRavens.getByText('First raven',{exact:true})).toBeVisible();
+    await expect(directRavens.getByText('Second raven',{exact:true})).toBeVisible();
+    await expect(page.getByText('The original words',{exact:true})).toBeVisible();
+    await expect(page.getByText('The direct answer',{exact:true})).toBeVisible();
     const groupedRavens = page.locator('details').filter({hasText:'2 fresh tidings'});
     await expect(groupedRavens).toBeVisible();
     const ledgerUrl = page.url();

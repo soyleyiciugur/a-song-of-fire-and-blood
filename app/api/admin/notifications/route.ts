@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createHash } from "node:crypto";
 import { z } from "zod";
 import { getChapters } from "@/lib/chapters";
 import { isLuckAdmin } from "@/lib/adminAccess";
@@ -64,6 +65,11 @@ export async function POST(request: Request) {
     mara: { title: input.title, body: input.body },
     aldren: { title: input.title, body: input.body },
   };
+  const deliveryFingerprint = createHash("sha256")
+    .update(JSON.stringify({ kind, href, sourceLabel: template?.sourceLabel ?? "The Realm", manualCopy }))
+    .digest("hex")
+    .slice(0, 24);
+  const deliveryWindow = Math.floor(Date.now() / (10 * 60_000));
 
   let delivered = 0;
   for (const recipient of recipients) {
@@ -74,6 +80,7 @@ export async function POST(request: Request) {
       sourceLabel: template?.sourceLabel ?? "The Realm",
       forceMascot: forcedMascot,
       manualCopy,
+      dedupeKey: `manual:${deliveryFingerprint}:${deliveryWindow}:${recipient.id}`,
       context: { manualAdmin: true, templateId: input.templateId, latestChapter: latest.title },
     });
     if (result) delivered += 1;

@@ -2,11 +2,14 @@
   {
     "date": "2026-09-23",
     "items": [
-      "Added map-aligned Great House regional boundaries to Westeros with restrained heraldic fills that remain synchronized through pan, zoom, and responsive resizing.",
+      "Added toggleable Westeros regions with coastline-following translucent Great House colors and sigils, aligned through pan, zoom and mobile resizing; corrected map initialization for cached images.",
       "Added spoiler-aware Dragon Appearances to dragon profiles and linked each chapter's physically present dragons from Chapter Companion.",
       "Added combined character and chapter filters to Echoes of the Realm with a compact responsive archive toolbar.",
       "Added conversation search, a shared-content archive, and a restrained raven wing-flap for incoming Direct Ravens.",
-      "Cleaned up Personal Ravens with accurate expandable counts, non-repeating grouped entries, aligned copy, safer wrapping, and complete text in detailed views."
+      "Cleaned up Personal Ravens with accurate expandable counts, duplicate-announcement protection, unified multi-sender message groups, consistent reply context, aligned copy, safer wrapping, and complete text in detailed views.",
+      "Aligned the map chapter action with the map's compact gold-framed control styling.",
+      "Replaced the browser-default head-to-head profile link with the profile's compact themed control styling.",
+      "Kept tab and section menus fixed in place when switching between content of different lengths."
     ]
   },
   {

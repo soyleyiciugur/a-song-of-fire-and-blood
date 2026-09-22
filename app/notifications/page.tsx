@@ -64,6 +64,7 @@ function visualNotificationSource(source: NotificationSource): NotificationSourc
 
 function personalGroupKey(item: SiteNotification) {
   const context = item.context ?? {};
+  if (item.source === "direct-raven") return "direct-raven:inbox";
   const explicit = typeof context.groupKey === "string" ? context.groupKey : null;
   if (explicit) return `${item.source}:${explicit}`;
   const conversationId = typeof context.conversationId === "string" ? context.conversationId : null;
@@ -75,6 +76,32 @@ function personalGroupKey(item: SiteNotification) {
   const profileId = typeof context.profileId === "string" ? context.profileId : null;
   if (profileId) return `${item.source}:profile:${profileId}`;
   return null;
+}
+
+function directRavenSenders(items: SiteNotification[]) {
+  return [...new Set(items.map((item) => {
+    const username = item.context?.actorUsername;
+    return typeof username === "string" && username.trim() ? `@${username.trim().replace(/^@/, "")}` : null;
+  }).filter((name): name is string => Boolean(name)))];
+}
+
+function joinedNames(names: string[]) {
+  if (names.length < 2) return names[0] ?? "someone";
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`;
+}
+
+function personalDisplayItems(items: SiteNotification[]) {
+  const recentRealmNotices = new Map<string, number>();
+  return items.filter((item) => {
+    if (item.source !== "realm") return true;
+    const signature = [item.kind, item.href, item.source_label ?? "", item.title, item.body].join("\u001f");
+    const createdAt = Date.parse(item.created_at);
+    const previous = recentRealmNotices.get(signature);
+    if (previous !== undefined && Math.abs(previous - createdAt) <= 5 * 60_000) return false;
+    recentRealmNotices.set(signature, createdAt);
+    return true;
+  });
 }
 
 type CommunityIdentity = {
@@ -342,7 +369,17 @@ function Notifications() {
     );
   }
 
-  const grouped = useMemo(() => { const groups = new Map<string, SiteNotification[]>(); for (const item of items) { const label = groupLabel(item.created_at); groups.set(label, [...(groups.get(label) ?? []), item]); } return [...groups]; }, [items]);
+  const displayedPersonalItems = useMemo(() => personalDisplayItems(items), [items]);
+  const grouped = useMemo(() => {
+    const groups = new Map<string, SiteNotification[]>();
+    const directRavens = displayedPersonalItems.filter((item) => item.source === "direct-raven");
+    const directRavenLabel = directRavens[0] ? groupLabel(directRavens[0].created_at) : null;
+    for (const item of displayedPersonalItems) {
+      const label = item.source === "direct-raven" && directRavenLabel ? directRavenLabel : groupLabel(item.created_at);
+      groups.set(label, [...(groups.get(label) ?? []), item]);
+    }
+    return [...groups];
+  }, [displayedPersonalItems]);
   const personalGroups = useMemo(() => grouped.map(([label, notifications]) => {
     const buckets: { key: string; items: SiteNotification[] }[] = [];
     const indexed = new Map<string, { key: string; items: SiteNotification[] }>();
@@ -355,7 +392,7 @@ function Notifications() {
     }
     return [label, buckets] as const;
   }), [grouped]);
-  const unreadCount = items.reduce((count, item) => count + (item.read_at ? 0 : 1), 0);
+  const unreadCount = displayedPersonalItems.reduce((count, item) => count + (item.read_at ? 0 : 1), 0);
 
   // Legacy/community activity remains visible instead of being replaced by the mascot ledger.
   const users = useMemo(() => new Map(community.users.map((user) => [user.id, user])), [community.users]);
@@ -564,14 +601,17 @@ function Notifications() {
         const latest = bucket.items[0];
         const unread = bucket.items.some((item) => !item.read_at);
         const totalTidings = bucket.items.length;
+        const messageSenders = latest.source === "direct-raven" ? directRavenSenders(bucket.items) : [];
+        const clusterTitle = messageSenders.length ? `New messages from ${joinedNames(messageSenders)}` : latest.title;
+        const clusterBody = messageSenders.length ? `${totalTidings} new ${totalTidings === 1 ? "message" : "messages"} across ${messageSenders.length} ${messageSenders.length === 1 ? "conversation" : "conversations"}.` : `${totalTidings} fresh ${totalTidings === 1 ? "tiding" : "tidings"} · ${latest.body}`;
         return <li key={bucket.key} className={styles.personalClusterItem}>
-          <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}>
+          <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""} ${messageSenders.length ? styles.personalMessageCluster : ""}`}>
             <summary>
               <span className={styles.clusterSourceRail} aria-hidden="true"><NotificationSourceIcon source={visualNotificationSource(latest.source)} size={13} /></span>
               <span className={styles.clusterPortraitStatic} aria-hidden="true">
                 <PersonalNotificationPortrait item={latest} size={44} />
               </span>
-              <span className={styles.personalClusterIdentity}><span className={styles.clusterSourceLine}><b>{notificationSourceLabel(latest.source)}</b>{latest.source_label && <em>· {latest.source_label}</em>}</span><strong>{latest.title}</strong><small>{totalTidings} fresh {totalTidings === 1 ? "tiding" : "tidings"} · {latest.body}</small></span>
+              <span className={styles.personalClusterIdentity}><span className={styles.clusterSourceLine}><b>{notificationSourceLabel(latest.source)}</b>{!messageSenders.length && latest.source_label && <em>· {latest.source_label}</em>}</span><strong>{clusterTitle}</strong><small>{clusterBody}</small></span>
               <span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span>
             </summary>
             <ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol>

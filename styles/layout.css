@@ -34,6 +34,9 @@ a {
 /* Site-wide scrollbar (Firefox + WebKit) so the browser default
    never shows through on any page, including the main window scroll. */
 html {
+  /* Keep centered page chrome in the same horizontal position when tab
+     content changes whether the document needs a vertical scrollbar. */
+  scrollbar-gutter: stable;
   scrollbar-width: thin;
   scrollbar-color: var(--border) var(--background);
 }

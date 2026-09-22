@@ -89,7 +89,7 @@ export async function POST(request: Request) {
       conversationTitle: conversation.kind === "guild" ? conversation.title || "Guild Parley" : undefined,
       guildAvatarPath: conversation.avatar_path ?? undefined, guildAvatarUrl,
     },
-    groupKey: `direct-raven:${conversation.id}`,
+    groupKey: "direct-raven:inbox",
     groupWindowMs: 0,
     collapseUnread: true,
     dedupeKey: `direct-raven:${message.id}:${recipient}`,

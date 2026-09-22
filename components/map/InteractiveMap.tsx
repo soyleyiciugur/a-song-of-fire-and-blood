@@ -13,7 +13,7 @@ import {
   getMapLocation,
 } from "@/data/map/locations";
 import { MAP_EVENTS } from "@/data/map/map-events";
-import { MAP_REGIONS } from "@/data/map/regions";
+import RegionOverlay from "./RegionOverlay";
 import { getCharacterPositionsForChapter } from "@/data/map/character-positions";
 import {
   resolveCharacterPositionsInOrder,
@@ -241,6 +241,8 @@ export default function InteractiveMap() {
   const searchParams = useSearchParams();
   const requestedLocation = searchParams.get("location");
   const requestedChapter = searchParams.get("chapter");
+  const [showRegions, setShowRegions] = useState(true);
+  const mapImageRef = useRef<HTMLImageElement | null>(null);
 
   const [visibleCard, setVisibleCard] =
     useState<Character | null>(null);
@@ -355,10 +357,8 @@ export default function InteractiveMap() {
 
   const handleImageLoad = useCallback(
     (
-      event: React.SyntheticEvent<HTMLImageElement>
+      img: HTMLImageElement
     ) => {
-      const img = event.currentTarget;
-
       const width = img.naturalWidth;
       const height = img.naturalHeight;
 
@@ -381,6 +381,13 @@ export default function InteractiveMap() {
     },
     [centerOn, requestedLocation]
   );
+
+  // A cached map can finish loading before hydration attaches onLoad. Ensure
+  // its native dimensions (and the initial focus) are initialized in that case.
+  useEffect(() => {
+    const img = mapImageRef.current;
+    if (img?.complete && img.naturalWidth > 0) handleImageLoad(img);
+  }, [handleImageLoad]);
 
   useEffect(() => {
     if (!naturalSize || !requestedLocation) return;
@@ -1577,44 +1584,17 @@ export default function InteractiveMap() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              ref={mapImageRef}
               src={MAP_SRC}
               alt="The Known World"
               className={
                 styles.mapImage
               }
               draggable={false}
-              onLoad={
-                handleImageLoad
-              }
+              onLoad={(event) => handleImageLoad(event.currentTarget)}
             />
 
-            <svg
-                className={styles.regionOverlay}
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <title>Regional boundaries of Westeros</title>
-                {MAP_REGIONS.map((region) => (
-                  <g
-                    key={region.id}
-                    style={
-                      {
-                        "--region-color": region.color,
-                      } as React.CSSProperties
-                    }
-                  >
-                    <path
-                      className={styles.regionBoundaryShadow}
-                      d={region.path}
-                    />
-                    <path
-                      className={styles.regionBoundary}
-                      d={region.path}
-                    />
-                  </g>
-                ))}
-            </svg>
+            {showRegions && <RegionOverlay />}
 
             {selectedCharacterId &&
               naturalSize &&
@@ -2444,6 +2424,14 @@ export default function InteractiveMap() {
               event.stopPropagation()
             }
           >
+            <label className={styles.regionToggle} onClick={(event) => event.stopPropagation()}>
+              <input
+                type="checkbox"
+                checked={showRegions}
+                onChange={(event) => setShowRegions(event.target.checked)}
+              />
+              <span>Regions &amp; sigils</span>
+            </label>
             <div
               className={
                 styles.legendTitle

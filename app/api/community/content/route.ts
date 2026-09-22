@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       for (const participant of recipients) await dispatchSiteNotification({
         recipientUserId: participant, actorUserId: user.id, actorName: profile?.display_name ?? null, kind: "tavern_participant_activity",
         href: `/forum?thread=${encodeURIComponent(input.threadId)}&comment=${encodeURIComponent(inserted.id)}#comment-${encodeURIComponent(inserted.id)}`,
-        sourceLabel, context: { threadId: input.threadId, commentId: inserted.id, replyBody: input.body, actorUsername: profile?.username ?? undefined }, groupKey: `forum-thread:${input.threadId}`,
+        sourceLabel, context: { threadId: input.threadId, commentId: inserted.id, parentId: input.parentId ?? null, parentBody, replyBody: input.body, actorUsername: profile?.username ?? undefined }, groupKey: `forum-thread:${input.threadId}`,
         dedupeKey: `forum-participant:${inserted.id}:${participant}`,
       });
     });
