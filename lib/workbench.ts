@@ -44,12 +44,23 @@ function describeKinship(steps: Array<{ id: string; relation: string }>, byId: M
   const targetFemale = /\b(queen|princess|lady|septa|mother)\b/i.test(target?.title ?? "");
   let label = "Family connection";
   if (!steps.length) label = "Same person";
-  else if (rels.length === 1) label = rels[0] === "child" ? "Parent and child" : rels[0] === "spouse" ? "Spouses" : "Child and parent";
+  else if (rels.length === 1) label = rels[0] === "child" ? "Parent and child" : rels[0] === "spouse" ? "Spouses" : rels[0] === "sibling" ? "Siblings" : "Child and parent";
   else if (rels.every((r) => r === "father" || r === "mother")) label = rels.length === 2 ? "Grandchild and grandparent" : `${rels.length - 1}× great-grandchild and ancestor`;
   else if (rels.every((r) => r === "child")) label = rels.length === 2 ? "Grandparent and grandchild" : `Ancestor and ${rels.length - 1}× great-grandchild`;
   else if (rels.length === 2 && ["father", "mother"].includes(rels[0]) && rels[1] === "child") label = "Siblings";
   else if (rels.at(-1) === "sibling" && rels.slice(0, -1).every(isUp)) label = `${"Great-".repeat(Math.max(0, rels.length - 2))}${targetFemale ? "aunt" : "uncle"}`;
   else if (rels[0] === "sibling" && rels.slice(1).every((r) => r === "child")) label = rels.length === 2 ? "Niece/nephew" : `${"Great-".repeat(rels.length - 2)}niece/nephew`;
+  else if (rels.includes("sibling")) {
+    const siblingIndex = rels.indexOf("sibling");
+    const cousinUp = siblingIndex;
+    const cousinDown = rels.length - siblingIndex - 1;
+    const validCousinPath = rels.slice(0, siblingIndex).every(isUp) && rels.slice(siblingIndex + 1).every((r) => r === "child");
+    if (validCousinPath && cousinUp > 0 && cousinDown > 0) {
+      const degree = Math.min(cousinUp, cousinDown);
+      const removed = Math.abs(cousinUp - cousinDown);
+      label = `${ordinalWord(degree)} cousins${removed ? `, ${removed} time${removed === 1 ? "" : "s"} removed` : ""}`;
+    }
+  }
   else if (throughAncestor && up === 2 && down === 1) label = "Niece/nephew and aunt/uncle";
   else if (throughAncestor && up === 1 && down === 2) label = "Aunt/uncle and niece/nephew";
   else if (throughAncestor && up >= 2 && down >= 2) {

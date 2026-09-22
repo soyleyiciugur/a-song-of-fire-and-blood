@@ -83,6 +83,20 @@ export function projectGameStateForPlayer(
     }));
   }
 
+  projected.log = projected.log.filter((entry) => {
+    if (entry.visibility === "owner") return entry.playerId === viewerId;
+
+    // Matches created before log visibility metadata existed can still be
+    // resumed. Keep their known private draw lines out of the opponent view.
+    if (entry.playerId !== viewerId && /^Drew .+\. \(\d+ cards remain in deck\)$/.test(entry.message)) {
+      return false;
+    }
+    if (entry.playerId !== viewerId && /^As I Was Saying reduces .+ cost by 1 Command/.test(entry.message)) {
+      return false;
+    }
+    return true;
+  });
+
   return projected;
 }
 

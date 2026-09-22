@@ -56,6 +56,7 @@ import { getAllChapters } from "@/data/chapters";
 import styles from "./chapter-reader.module.css";
 import fc from "./full-chapter.module.css";
 import { useReadingProgress } from "@/components/reading/ReadingProgressProvider";
+import ChapterCompanion from "@/components/reading/ChapterCompanion";
 
 // ─── types ────────────────────────────────────────────────────────────────────
 
@@ -735,6 +736,7 @@ export default function ChapterReader() {
           </footer>
           </article>
         </div>
+        <ChapterCompanion chapterSlug={chapter.slug} />
       </>
     );
   }
@@ -1011,6 +1013,7 @@ export default function ChapterReader() {
           </div>
         )}
       </div>
+      <ChapterCompanion chapterSlug={chapter.slug} />
     </>
   );
 }

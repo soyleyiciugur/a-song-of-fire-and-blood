@@ -146,64 +146,6 @@ export async function dispatchSiteNotification(input: DispatchNotificationInput)
     actorName = actor?.display_name ?? null;
   }
 
-  const groupWindowMs = Math.max(0, input.groupWindowMs ?? 45_000);
-  if (input.groupKey && (groupWindowMs > 0 || input.collapseUnread)) {
-    let recentQuery = admin.from("site_notifications")
-      .select("*")
-      .eq("user_id", input.recipientUserId)
-      .eq("source", meta.source)
-      .contains("context", { groupKey: input.groupKey });
-    if (input.collapseUnread) recentQuery = recentQuery.is("read_at", null);
-    else recentQuery = recentQuery.gte("created_at", new Date(Date.now() - groupWindowMs).toISOString());
-    const { data: recent } = await recentQuery
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    if (recent) {
-      const count = Math.max(1, Number(recent.context?.groupCount ?? 1)) + 1;
-      const mascot = recent.mascot as NotificationMascot;
-      const groupedBody = mascot === "mara"
-        ? `${count} fresh tidings from the same place. Kept to one raven.`
-        : `${count} fresh tidings from the same quarter have arrived together, my liege.`;
-      const context = { ...(recent.context ?? {}), ...(input.context ?? {}), groupKey: input.groupKey, groupCount: count, ...(actorName ? { actorName } : {}) };
-      const messageRecord = messagePreviewContext(input, count);
-      const { data: updated } = await admin.from("site_notifications").update({
-        actor_id: input.actorUserId ?? recent.actor_id,
-        title: messageRecord?.title ?? recent.title,
-        body: messageRecord?.body ?? groupedBody,
-        href: input.href || recent.href, source_label: input.sourceLabel ?? recent.source_label, context, read_at: null, created_at: new Date().toISOString(),
-      }).eq("id", recent.id).select("*").single();
-      const [{ data: subscriptions }, unreadResult] = await Promise.all([
-        admin.from("push_subscriptions").select("endpoint,p256dh,auth").eq("user_id", input.recipientUserId),
-        admin.from("site_notifications").select("id", { count: "exact", head: true }).eq("user_id", input.recipientUserId).is("read_at", null).neq("source", "direct-raven").neq("source", "guild-parley"),
-      ]);
-      const badgeCount = unreadResult.count ?? undefined;
-      const pushTargetHref = notificationTargetHref((updated ?? { ...recent, href: input.href || recent.href, context }) as SiteNotification);
-      await Promise.all((subscriptions ?? []).map(async (subscription) => {
-        try {
-          const pushCopy = pushCopyFor(input, mascot, recent.title, groupedBody, count);
-          const response = await sendWebPush(subscription, {
-            title: pushCopy.title, body: pushCopy.body, icon: pushIconFor(input, mascot), badge: "/notification-badge.png",
-            url: pushTargetHref, tag: `asofab-group-${input.groupKey}`, renotify: true, badgeCount,
-            data: {
-              notificationId: recent.id, source: meta.source, mascot,
-              conversationId: typeof context.conversationId === "string" ? context.conversationId : undefined,
-              targetHref: pushTargetHref,
-              actorUsername: typeof context.actorUsername === "string" ? context.actorUsername : undefined,
-              actorAvatarUrl: typeof context.actorAvatarUrl === "string" ? context.actorAvatarUrl : undefined,
-              conversationTitle: typeof context.conversationTitle === "string" ? context.conversationTitle : undefined,
-              guildAvatarUrl: typeof context.guildAvatarUrl === "string" ? context.guildAvatarUrl : undefined,
-              messagePreview: typeof context.messagePreview === "string" ? context.messagePreview : undefined,
-              messageNotification: input.kind === "direct_raven" || input.kind === "guild_parley",
-            },
-          });
-          if (response.status === 404 || response.status === 410) await admin.from("push_subscriptions").delete().eq("endpoint", subscription.endpoint);
-        } catch (error) { console.error("Grouped Web Push delivery failed.", { kind: input.kind, error }); }
-      }));
-      return updated as unknown as SiteNotification;
-    }
-  }
-
   const mascot = input.forceMascot ?? chooseMascot(preferences);
   const { index: variantIndex, template } = chooseVariant(input.kind, mascot, preferences);
   const rendered = input.manualCopy?.[mascot]

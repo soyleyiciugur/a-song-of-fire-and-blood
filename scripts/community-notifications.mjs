@@ -470,19 +470,6 @@ async function dispatch(event) {
   }
 
   const pref = prefMap.get(event.recipient) ?? normalizePrefs(event.recipient, null);
-  const eventTime = Date.parse(event.publishedAt);
-  const low = new Date(eventTime - 45_000).toISOString(), high = new Date(eventTime + 45_000).toISOString();
-  const { data: recent } = await supabase.from('site_notifications').select('*').eq('user_id', event.recipient).eq('source', source).contains('context',{ groupKey:event.groupKey }).gte('created_at',low).lte('created_at',high).order('created_at',{ascending:false}).limit(1).maybeSingle();
-
-  if (recent) {
-    const count = Math.max(1, Number(recent.context?.groupCount ?? 1)) + 1;
-    const groupedBody = recent.mascot === 'mara' ? `${count} fresh tidings from the same place. Kept to one raven.` : `${count} fresh tidings from the same quarter have arrived together, my liege.`;
-    const context = { ...(recent.context ?? {}), ...(event.context ?? {}), actorName:event.actorName, groupKey:event.groupKey, groupCount:count, eventKeys:[...(recent.context?.eventKeys ?? []), event.eventKey], pushDelivered:false };
-    const { data: updated } = await supabase.from('site_notifications').update({ body:groupedBody, href:event.href, source_label:event.sourceLabel, context, read_at:null, created_at:event.publishedAt }).eq('id',recent.id).select('*').single();
-    if (updated) queuePagePush(event, updated.id);
-    return { grouped:true };
-  }
-
   const mascot = chooseMascot(pref);
   const rendered = render(event.kind, mascot, pref, event.actorName, event.sourceLabel);
   const context = { ...(event.context ?? {}), actorName:event.actorName, groupKey:event.groupKey, groupCount:1, eventKeys:[event.eventKey], pushDelivered:false };
@@ -503,11 +490,10 @@ async function dispatch(event) {
   return { inserted:true };
 }
 
-let inserted=0, grouped=0, skipped=0, errors=0;
+let inserted=0, skipped=0, errors=0;
 for (const event of events) {
   const result = await dispatch(event);
   if (result?.inserted) inserted++;
-  else if (result?.grouped) grouped++;
   else if (result?.error) errors++;
   else skipped++;
 }
@@ -524,5 +510,5 @@ for (const batch of pendingPagePushes.values()) {
   }
 }
 
-console.log(`Community notifications: ${events.length} candidate deliveries; ${inserted} new, ${grouped} grouped, ${skipped} skipped/deduped, ${errors} errors; ${pagePushes} page-level push(es). Lookback: ${lookbackHours}h.`);
+console.log(`Community notifications: ${events.length} candidate deliveries; ${inserted} new, ${skipped} skipped/deduped, ${errors} errors; ${pagePushes} page-level push(es). Lookback: ${lookbackHours}h.`);
 if (errors) process.exitCode = 1;

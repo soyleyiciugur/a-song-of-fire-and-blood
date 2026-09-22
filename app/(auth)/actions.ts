@@ -1,20 +1,31 @@
 "use server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { getSiteUrl } from "@/lib/site-url";
 
 export type AuthState = { error?: string; success?: string };
 const usernamePattern = /^[a-z0-9][a-z0-9_-]{2,29}$/;
 function message(error: string) {
   const value=error.toLowerCase();
-  if(value.includes("invalid login")) return "The email or password is incorrect.";
+  if(value.includes("invalid login")) return "The username, email, or password is incorrect.";
   if(value.includes("email not confirmed")) return "Confirm your email before signing in.";
   if(value.includes("already registered")||value.includes("duplicate")||value.includes("unique")) return "That email or username is already in use.";
   if(value.includes("password")) return "Use a stronger password with at least 8 characters.";
   return "The request could not be completed. Please try again.";
 }
 export async function login(_:AuthState, form:FormData):Promise<AuthState>{
-  const email=String(form.get("email")??"").trim(), password=String(form.get("password")??"");
+  const identifier=String(form.get("identifier")??"").trim(), password=String(form.get("password")??"");
+  let email=identifier;
+  if(!identifier.includes("@")){
+    const admin=createAdminClient();
+    if(!admin)return{error:"The username, email, or password is incorrect."};
+    const {data:profile,error:profileError}=await admin.from("profiles").select("id").eq("username",identifier.toLowerCase()).maybeSingle();
+    if(profileError||!profile)return{error:"The username, email, or password is incorrect."};
+    const {data:userData,error:userError}=await admin.auth.admin.getUserById(profile.id);
+    if(userError||!userData.user.email)return{error:"The username, email, or password is incorrect."};
+    email=userData.user.email;
+  }
   const {error}=await (await createClient()).auth.signInWithPassword({email,password}); if(error)return{error:message(error.message)}; redirect("/forum");
 }
 export async function register(_:AuthState, form:FormData):Promise<AuthState>{

@@ -14,7 +14,7 @@ import { useCommunity, refreshCommunity } from "@/lib/communityStore";
 import { getCommentEntryLabel, getCommentLink } from "@/lib/communityLinks";
 import { groupNotifications, notificationTimeGroup } from "@/lib/notificationTime.mjs";
 import Link from "next/link";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./notifications.module.css";
 
@@ -254,11 +254,10 @@ function Notifications() {
     : null;
 
   useEffect(() => {
-    if (openId && openId !== dismissedOpenId) {
+    if (openId) {
       setOpenedId(openId);
-      setDismissedOpenId(null);
     }
-  }, [openId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [openId]);
 
   useEffect(() => {
     if (activeNotification) {
@@ -271,12 +270,14 @@ function Notifications() {
     if (authReady && !userId) setLedgerTab("realm");
   }, [authReady, userId]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!activeNotification) return;
     const old = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         closeLightbox();
         return;
       }
@@ -296,11 +297,11 @@ function Notifications() {
         first.focus();
       }
     };
-    window.addEventListener("keydown", onKey);
+    document.addEventListener("keydown", onKey, true);
     const frame = requestAnimationFrame(() => closeRef.current?.focus({ preventScroll: true }));
     return () => {
       document.body.style.overflow = old;
-      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("keydown", onKey, true);
       cancelAnimationFrame(frame);
     };
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
@@ -564,7 +565,7 @@ function Notifications() {
     {userId && <section className={styles.personalLedger} aria-label="Personal raven notifications"><div className={styles.sectionHeading}><span>Personal ravens</span>{unreadCount > 0 && <button className={styles.markAll} type="button" disabled={markingAll || loading} onClick={() => void markRead()}>{markingAll ? "Sealing the ledger…" : "Let no raven go unheard"}</button>}</div>{readStatus && <p className={styles.readStatus} role="status">{readStatus}</p>}
       {!loading && !error && !items.length && <section className={styles.empty}><span aria-hidden="true">✦</span><h2>The rookery is quiet</h2><p>No personal tidings await you.</p></section>}
       {personalGroups.map(([label, buckets]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{buckets.map((bucket) => {
-        if (bucket.items.length === 1) return renderPersonalCard(bucket.items[0]);
+        if (bucket.items.length === 1 && notificationTidingsCount(bucket.items[0]) === 1) return renderPersonalCard(bucket.items[0]);
         const latest = bucket.items[0];
         const unread = bucket.items.some((item) => !item.read_at);
         const totalTidings = bucket.items.reduce((sum, item) => sum + notificationTidingsCount(item), 0);
@@ -579,6 +580,7 @@ function Notifications() {
               <span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span>
             </summary>
             <ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol>
+            {totalTidings > bucket.items.length && <p className={styles.legacyBundleNote}>This older bundle retained only its latest destination. New ravens keep every tiding separately.</p>}
           </details>
         </li>;
       })}</ol></section>)}

@@ -392,6 +392,8 @@ export interface GameLogEntry {
 
   playerId?: PlayerId;
 
+  visibility?: "public" | "owner";
+
   message: string;
 }
 

@@ -92,7 +92,8 @@ function nextRuntimeId(
 function addLog(
   state: GameState,
   message: string,
-  playerId?: PlayerId
+  playerId?: PlayerId,
+  visibility: "public" | "owner" = "public"
 ) {
   state.log.push({
     id:
@@ -102,6 +103,8 @@ function addLog(
       state.turnNumber,
 
     playerId,
+
+    visibility,
 
     message,
   });
@@ -630,7 +633,8 @@ function drawCardMutable(
     addLog(
       state,
       `Drew ${getGameCard(cardId).name}. (${player.deck.length} cards remain in deck)`,
-      playerId
+      playerId,
+      "owner"
     );
   }
 
@@ -3802,7 +3806,8 @@ function processCordinStartOfTurn(
         addLog(
           state,
           `As I Was Saying reduces ${getGameCard(result.cardId).name}'s cost by 1 Command this turn.`,
-          playerId
+          playerId,
+          "owner"
         );
       }
     }

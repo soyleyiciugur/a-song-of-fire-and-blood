@@ -3,6 +3,7 @@
 import UtilityIcon from "./UtilityIcon";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { flushSync } from "react-dom";
 import { useRouter } from "next/navigation";
 import type { SearchResult } from "@/lib/search";
 import SearchResultVisual from "@/components/search/SearchResultVisual";
@@ -74,6 +75,11 @@ export default function SearchBar() {
     setResults([]);
   }
 
+  function openSearch() {
+    flushSync(() => setOpen(true));
+    inputRef.current?.focus({ preventScroll: true });
+  }
+
   function navigate(href: string) {
     close();
     router.push(href);
@@ -86,7 +92,7 @@ export default function SearchBar() {
 
   return (
     <div className={`${styles.searchWrap} ${styles.commandSearch}`}>
-      <button type="button" className={styles.commandTrigger} onClick={() => setOpen(true)} aria-label="Search the realm" aria-haspopup="dialog">
+      <button type="button" className={styles.commandTrigger} onClick={openSearch} aria-label="Search the realm" aria-haspopup="dialog">
         <UtilityIcon name="search" className={styles.commandTriggerIcon} />
         <span className={styles.commandTriggerLabel}>Search</span>
         <kbd className={styles.commandShortcut}>⌘K</kbd>

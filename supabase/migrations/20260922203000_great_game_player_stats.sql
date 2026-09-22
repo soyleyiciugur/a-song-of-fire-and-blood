@@ -80,7 +80,13 @@ begin
   end loop;
 end $$;
 
-create or replace view public.great_game_player_stats with(security_barrier=true) as
+drop view if exists public.great_game_leaderboard;
+drop view if exists public.great_game_match_history;
+drop view if exists public.great_game_head_to_head;
+drop view if exists public.great_game_deck_stats;
+drop view if exists public.great_game_player_stats;
+
+create view public.great_game_player_stats with(security_barrier=true) as
 with o as(
  select r.*,sum(case when result<>'win' then 1 else 0 end)over(partition by user_id order by completed_at desc,match_id desc) recent_break,
  sum(case when result<>'win' then 1 else 0 end)over(partition by user_id order by completed_at,match_id) streak_group

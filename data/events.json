@@ -121,28 +121,6 @@
     "description": "Renrose receives Visenor's party at breakfast. Visenor shares the Vhagar forgery and asks Renrose to seize Gardener lands if the Crown declares their lord a traitor. Liana listens; Renrose's unnamed daughter is also present."
   },
   {
-    "id": "baelenys-entrusts-aegons-dream",
-    "title": "The Burden of Aegon's Dream",
-    "type": "revelation",
-    "location": "King's Landing",
-    "chapterSlug": "until-the-last-breath",
-    "day": 15,
-    "moon": 8,
-    "year": 99,
-    "description": "King Baelenys entrusts Jacaelon with Aegon's dream, rejects Gaelor as successor and says he intends to name Jace heir once the realm's present troubles are settled."
-  },
-  {
-    "id": "saera-returns-from-winterfell",
-    "title": "Saera Returns from Winterfell",
-    "type": "arrival",
-    "location": "King's Landing",
-    "chapterSlug": "until-the-last-breath",
-    "day": 17,
-    "moon": 8,
-    "year": 99,
-    "description": "Cloudgazer returns Princess Saera, Ser Alester Dayne and Rickard Stark's white direwolf gift to the Red Keep."
-  },
-  {
     "id": "costayne-trial-by-combat",
     "title": "The Trial by Combat of Brant Costayne",
     "type": "trial",
@@ -152,27 +130,5 @@
     "moon": 8,
     "year": 99,
     "description": "Gaelor returns from Driftmark to face Brant Costayne before the Crown. Brant wounds the prince badly, but Gaelor kills and beheads him, ending the delayed judgment demanded after the tourney."
-  },
-  {
-    "id": "vahaemon-essos-revelation",
-    "title": "Vahaemon's Essosi Dragon Circle",
-    "type": "revelation",
-    "location": "Tyrosh",
-    "chapterSlug": "judgment-by-blood",
-    "day": 20,
-    "moon": 8,
-    "year": 99,
-    "description": "Crown intelligence reveals that Vahaemon has spent his exile building power in Essos with Tyroshi support, blood magic, Vaenarr Targaryen and multiple dragons. His son Aegor is revealed as Sunfyre's rider, the Young Dragon."
-  },
-  {
-    "id": "visenya-kings-landing-incursion",
-    "title": "Visenya's Secret Incursion",
-    "type": "arrival",
-    "location": "King's Landing",
-    "chapterSlug": "the-viper-in-silk",
-    "description": "Visenya Targaryen secretly enters King's Landing, confronts Jace in his chambers and escapes the Red Keep after Alester intervenes. She subsequently vanishes from the capital and returns across the Narrow Sea.",
-    "day": 17,
-    "moon": 7,
-    "year": 99
   }
 ]

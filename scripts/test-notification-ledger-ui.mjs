@@ -9,12 +9,13 @@ const user = { id: userId, aud: 'authenticated', role: 'authenticated', email: '
 const jwt = [Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url'), Buffer.from(JSON.stringify({ sub: userId, exp: Math.floor(Date.now()/1000)+3600, role: 'authenticated' })).toString('base64url'), 'fixture'].join('.');
 const cookie = `sb-${project}-auth-token=base64-${Buffer.from(JSON.stringify({ access_token: jwt, refresh_token: 'fixture', token_type: 'bearer', expires_at: Math.floor(Date.now()/1000)+3600, expires_in:3600, user })).toString('base64url')}`;
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const baseUrl = process.env.NOTIFICATION_TEST_BASE_URL ?? 'http://localhost:3112';
 try {
   for (const width of [390, 320, 1440]) {
     const context = await browser.newContext({ viewport: { width, height: 900 } });
     // Browser-only cookie getter: fake auth never reaches the real server/proxy.
     await context.addInitScript(value => Object.defineProperty(document, 'cookie', { configurable: true, get: () => value, set: () => {} }), cookie);
-    const rows = Array.from({ length: 45 }, (_, index) => ({ id: `00000000-0000-4000-8000-${String(index+10).padStart(12,'0')}`, user_id:userId, actor_id:null, kind:'realm_notice',source:'realm',mascot:index%2?'aldren':'mara', title:`Raven number ${index+1}.`,body:'A message awaits you in the realm.',href:'/offline',source_label:null,context:{},created_at:new Date(Date.now()-index*1000-10000).toISOString(),read_at:null }));
+    const rows = Array.from({ length: 45 }, (_, index) => ({ id: `00000000-0000-4000-8000-${String(index+10).padStart(12,'0')}`, user_id:userId, actor_id:null, kind:'realm_notice',source:'realm',mascot:index%2?'aldren':'mara', title:`Raven number ${index+1}.`,body:'A message awaits you in the realm.',href:'/offline',source_label:null,context:index === 35 || index === 36 ? {groupKey:'fixture-conversation',groupCount:1} : {},created_at:new Date(Date.now()-index*1000-10000).toISOString(),read_at:null }));
     let patches = 0, failNext = false;
     await context.route('**/auth/v1/**', route => route.fulfill({ json:user }));
     await context.route('**/rest/v1/**', async route => {
@@ -34,8 +35,15 @@ try {
     });
     const page = await context.newPage();
     page.on('pageerror', error => console.error(error.message));
-    await page.goto('http://localhost:3112/notifications');
-    await expect(page.getByRole('button',{name:/Raven number 1\./})).toBeVisible();
+    await page.goto(`${baseUrl}/notifications`);
+    await expect(page.getByRole('link',{name:/Raven number 1\./})).toBeVisible();
+    const groupedRavens = page.locator('details').filter({hasText:'2 fresh tidings'});
+    await expect(groupedRavens).toBeVisible();
+    const ledgerUrl = page.url();
+    await groupedRavens.locator('summary').click();
+    assert.equal(page.url(),ledgerUrl,'opening a Personal Ravens group must not navigate away');
+    await expect(groupedRavens.getByRole('link',{name:/Raven number 36\./})).toBeVisible();
+    await expect(groupedRavens.getByRole('link',{name:/Raven number 37\./})).toBeVisible();
     assert.equal(patches,0,'merely loading the ledger must not mark everything read');
     await expect(page.getByLabel('Unread',{exact:true})).toHaveCount(40);
     const sendClick = id => page.evaluate(async notificationId => {
@@ -65,17 +73,17 @@ try {
       if(exit==='backdrop') await page.locator('[class*="lightboxBackdrop"]').click({position:{x:3,y:3}});
       if(exit==='return') await page.getByRole('button',{name:'Return to the rookery'}).click();
       await expect(page.getByRole('dialog'), `${exit} closes the popup at ${width}px`).toHaveCount(0);
-      await expect(page.getByRole('button',{name:new RegExp(`Raven number ${index+1}\\.`)}).getByLabel('Unread',{exact:true})).toHaveCount(0);
+      await expect(page.getByRole('link',{name:new RegExp(`Raven number ${index+1}\\.`)}).locator('..').getByLabel('Unread',{exact:true})).toHaveCount(0);
       await expect.poll(()=>rows[index].read_at).not.toBeNull();
     }
-    await page.goto('http://localhost:3112/offline');
+    await page.goto(`${baseUrl}/offline`);
     await expect(page.getByText('FI',{exact:true})).toBeVisible();
     assert.equal(await sendClick(rows[4].id),'navigated');
     await expect(page.getByRole('heading',{name:rows[4].title})).toBeVisible();
     await page.getByRole('link',{name:'See the notice'}).click();
     await expect(page).toHaveURL(/\/offline$/);
     await expect.poll(()=>rows[4].read_at).not.toBeNull();
-    await page.goto('http://localhost:3112/notifications');
+    await page.goto(`${baseUrl}/notifications`);
     await expect(page.getByLabel('Unread',{exact:true})).toHaveCount(35);
     failNext=true;
     await page.getByRole('button',{name:'Let no raven go unheard'}).click();

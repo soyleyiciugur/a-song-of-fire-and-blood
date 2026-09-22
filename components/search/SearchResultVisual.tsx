@@ -21,14 +21,6 @@ function LineIcon({ kind }: { kind: string }) {
       {kind === "trial" && <><path d="M12 3v18M6 6h12M4 17h6l-3-6ZM14 17h6l-3-6ZM8 21h8"/></>}
       {kind === "battle" && <><path d="m5 4 14 15M19 4 5 19M4 3l3 1-3 3M20 3l-3 1 3 3"/></>}
       {kind === "tournament" && <><path d="M5 4h14v6c0 5-3 8-7 10-4-2-7-5-7-10Z"/><path d="m8 13 8-5"/></>}
-      {kind === "revelation" && <>
-        <path d="M8.5 20v-2.2c0-1.5-1.5-2.5-1.5-5.2A5.3 5.3 0 0 1 12.3 7c3 0 5.2 2.2 5.2 5.1 0 1.6-.7 2.7-1.8 3.6V20Z"/>
-        <path d="M12 2v2M5.2 5.2l1.5 1.5M18.8 5.2l-1.5 1.5M3 11h2M19 11h2"/>
-      </>}
-      {kind === "arrival" && <>
-        <path d="M5 21V8h3V4h3v4h2V4h3v4h3v13Z"/>
-        <path d="M9 21v-5a3 3 0 0 1 6 0v5M5 11h14"/>
-      </>}
       {kind === "event" && <><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></>}
     </g>
   </svg>;

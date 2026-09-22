@@ -40,8 +40,6 @@ const annalTimelineTitles: Record<string, string> = {
   "battle-oldtown": "The Oldtown Massacre",
   "nameday-malaenar": "The Nameday Feast on Dragonstone",
   "highgarden-forged-letter-breakfast": "Visenor brings the plot to Highgarden",
-  "baelenys-entrusts-aegons-dream": "Baelenys entrusts Jace with Aegon's dream",
-  "saera-returns-from-winterfell": "Saera and Alester return from the North",
 };
 
 /** Only the public fields needed by the calendar cross the server/client boundary. */
