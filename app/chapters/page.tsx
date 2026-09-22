@@ -1,9 +1,10 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapters-hub.module.css";
+import { useReadingProgress } from "@/components/reading/ReadingProgressProvider";
 
 // ─── types ────────────────────────────────────────────────────────────────────
 
@@ -42,6 +43,7 @@ function ChaptersHubContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const chapters = getAllChapters() as Chapter[];
+  const { progress } = useReadingProgress();
 
   // ── state
   const [lang, setLang] = useState<Lang>("en");
@@ -52,7 +54,7 @@ function ChaptersHubContent() {
   const [bubble, setBubble] = useState<BubbleState | null>(null);
 
   // bookmark
-  const [bookmark, setBookmark] = useState<{ slug: string; page: number } | null>(null);
+  const bookmark = useMemo(() => progress ? { slug: progress.chapterSlug, page: progress.page } : null, [progress]);
 
   // ── init: read persisted lang & bookmark
   useEffect(() => {
@@ -60,8 +62,6 @@ function ChaptersHubContent() {
       try {
         const saved = localStorage.getItem("asofiab-lang") as Lang | null;
         if (saved === "en" || saved === "tr") setLang(saved);
-        const bm = localStorage.getItem("asofiab-bookmark");
-        if (bm) setBookmark(JSON.parse(bm));
       } catch {}
     });
     return () => window.cancelAnimationFrame(frame);

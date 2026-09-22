@@ -5,6 +5,8 @@ import { Select } from "@/app/_components/Select";
 import CharacterQuote from "@/components/character/CharacterQuote";
 import recordsStyles from "../records/records.module.css";
 import styles from "./quotes.module.css";
+import { useReadingProgress } from "@/components/reading/ReadingProgressProvider";
+import { isWithinSpoilerBoundary } from "@/lib/reading-progress";
 
 type Quote = {
   text: string;
@@ -16,11 +18,12 @@ type Quote = {
 };
 
 export default function QuotesContent({ quotes }: { quotes: Quote[] }) {
+  const { progress, ready } = useReadingProgress();
   const [sort, setSort] = useState<"newest" | "oldest">("newest");
   const ordered = useMemo(() => {
-    const chapterQuotes = quotes.filter((quote) => quote.chapterSlug);
+    const chapterQuotes = quotes.filter((quote) => quote.chapterSlug && (!ready || isWithinSpoilerBoundary(quote.chapterSlug, progress?.chapterSlug)));
     return sort === "newest" ? [...chapterQuotes].reverse() : chapterQuotes;
-  }, [quotes, sort]);
+  }, [progress?.chapterSlug, quotes, ready, sort]);
 
   return <>
     <div className={styles.toolbar}>
@@ -37,7 +40,7 @@ export default function QuotesContent({ quotes }: { quotes: Quote[] }) {
       </div>
     </div>
     <div className={recordsStyles.shelf}>
-      {ordered.map((quote, index) => <article className={recordsStyles.recordCard} key={`${quote.speakerId ?? quote.speakerName}-${quote.chapterSlug}-${index}`}><CharacterQuote quote={quote} showAttribution /></article>)}
+      {ordered.map((quote, index) => <article id={`quote-${quote.chapterSlug}-${index + 1}`} className={recordsStyles.recordCard} key={`${quote.speakerId ?? quote.speakerName}-${quote.chapterSlug}-${index}`}><CharacterQuote quote={quote} showAttribution /></article>)}
     </div>
   </>;
 }

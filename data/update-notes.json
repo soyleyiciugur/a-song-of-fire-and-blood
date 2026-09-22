@@ -1,5 +1,30 @@
 [
   {
+    "date": "2026-09-22",
+    "items": [
+      "Added a hidden Q7 keyboard easter egg to The Measure of Fire's human scale reference.",
+      "Added complete Supabase-backed Great Game records with separate abandons, win streaks, deck and faction performance, favourite decks, match pace, head-to-head records, Elo ratings, a leaderboard and recent match history.",
+      "Corrected The Great Game's winner message for the defeated account and made background-tab card draws settle without leaving cards hidden or the table locked.",
+      "Expanded The Workbench into a compact grouped tool collection with culture-aware naming, kinship, chronology, nameday, travel, and Supabase-backed continuity instruments.",
+      "Expanded Namesmith's canon-house suggestions from the complete regional catalogs and refined Workbench administration, kinship paths, eras, numeric fields, and nameday controls.",
+      "Added a direct Inner Court shortcut to the account menu for members with an assigned character.",
+      "Replaced duplicate other recorded ties with a conditional Noteworthy summary for betrothals and expected children.",
+      "Added compact played-character links to member profiles, including a dedicated GM treatment for HRRM.",
+      "Restored the navbar search control as a circular utility icon and replaced the mobile command palette's Esc label with a close icon.",
+      "Synced Continue Reading and the shared spoiler boundary to member accounts across devices, with a reading-progress control in Settings.",
+      "Applied the shared reading boundary to character appearances, current statuses and relationships, Timeline events, character-linked Raven's Eye media and Echoes of the Realm, and added stable content anchors for deep links.",
+      "Made chapter progress explicit with fixed-size Mark as read and Mark as unread controls, so revisiting earlier chapters never changes the saved spoiler boundary or Continue Reading position.",
+      "Added chapter-linked Character Appearances to profiles and spoiler-sealed future entries within each character's existing personal chronology.",
+      "Opened The Inner Court for played characters, with chapter-aware character-owned thoughts and resilient player attribution.",
+      "Organized character profiles into smooth archive-style tabs while keeping biography, traits and relationships together and the character card continuously visible.",
+      "Added Continue Reading actions to spoiler-sealed character records and ordered notable quotes from the latest chapter back to the earliest.",
+      "Connected The Inner Court to character-owned Supabase records so assigned players can create, revise and resolve their character's chapter-aware thoughts without transferring history between accounts.",
+      "Added custom Inner Court selectors, chapter and creation-date sorting, and persistent drag ordering for assigned players.",
+      "Completed Inner Court drag-and-drop feedback with before-and-after placement previews, animated spacing and a restrained settling transition.",
+      "Standardized character relationships with separate overview and latest-development records, reciprocal editing, and matching detail views across the character archive and Web of Loyalties."
+    ]
+  },
+  {
     "date": "2026-09-21",
     "items": [
       "Rebuilt The Measure of Fire with 28 illustrated dragon records, a shared metre scale, selectable overlays, separate rows, source filters and zoom controls.",

@@ -180,6 +180,9 @@ export default function CardsPage() {
           <Link href="/cards/play">
             Play
           </Link>
+          <Link href="/cards/leaderboard">
+            Ranks
+          </Link>
         </nav>
       </div>
 

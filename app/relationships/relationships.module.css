@@ -251,3 +251,20 @@
     position: static;
   }
 }
+
+.relationshipDescription strong,
+.relationshipDescription span {
+  display: block;
+}
+
+.relationshipDescription strong {
+  margin-top: 0.55rem;
+  color: var(--gold);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.relationshipDescription strong:first-child {
+  margin-top: 0;
+}

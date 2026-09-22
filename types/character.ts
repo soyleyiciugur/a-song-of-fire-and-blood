@@ -124,6 +124,13 @@ export interface CharacterDeath {
   year: number;
 }
 
+export interface CharacterRelationship {
+  /** The durable context of the bond, before its newest recorded change. */
+  overview: string;
+  /** The newest known event or shift affecting the bond. */
+  latestDevelopment: string;
+}
+
 export interface Character {
   id: CharacterId;
   name: string;
@@ -163,7 +170,7 @@ export interface Character {
 
   traits: string[];
   goals: string[];
-  relationships: Partial<Record<CharacterId, string>>;
+  relationships: Partial<Record<CharacterId, CharacterRelationship>>;
   summary: string;
 
   quote?: CharacterQuote;
@@ -176,5 +183,7 @@ export interface Character {
     date: string;
     description?: string;
     order: number;
+    /** Story chapter in which this knowledge becomes available. */
+    chapterSlug?: string;
   }>;
 }

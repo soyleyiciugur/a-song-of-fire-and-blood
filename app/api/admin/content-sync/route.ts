@@ -59,13 +59,13 @@ The data files use these schemas. Follow them EXACTLY — field names, casing, a
 the output is merged directly into these files.
 
 - characters: { id, name, nickname, aliases[], house, title, debutChapter?, status, age, nameday: { day, moon, year }, height,
-  father, mother, spouse, siblings[], children[], mentor (string or string[]), dragon, traits[], goals[], relationships: { otherCharacterId: "one sentence" },
+  father, mother, spouse, siblings[], children[], mentor (string or string[]), dragon, traits[], goals[], relationships: { otherCharacterId: { overview: "durable relationship context", latestDevelopment: "newest event or shift" } },
   summary, quotes[] }
   -- traits[] MUST be short (1-3 word) adjectives or noun-phrases, e.g. "Loyal", "Quietly Ruthless", "Battle-Scarred".
      NEVER a full sentence. If unsure, omit rather than pad.
   -- debutChapter is the first chapter where the character physically appears on-page. A mention, letter reference, memory, or discussion does NOT count.
   -- summary is 2-5 sentences of prose.
-  -- relationships values are ONE sentence each, written from that character's point of view about the other person.
+  -- relationship records always contain both overview and latestDevelopment. Keep reciprocal records factually consistent and update both characters together.
 - houses: { id, name, words, seat, sigilSrc, color, secondaryColor, description }
 - dragons: { id, name, status, riderId, previousRiderId, image, traits[], description }
   -- traits[] follow the same short-phrase rule as characters.

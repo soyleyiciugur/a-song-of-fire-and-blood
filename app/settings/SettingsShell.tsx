@@ -9,6 +9,7 @@ import AdminNotificationSettings from "./AdminNotificationSettings";
 import NotificationCustomizationSettings from "@/components/pwa/NotificationCustomizationSettings";
 import PushNotificationSettings from "@/components/pwa/PushNotificationSettings";
 import styles from "./settings.module.css";
+import ReadingBoundarySettings from "./ReadingBoundarySettings";
 
 type SettingsTab = "profile" | "notifications" | "admin";
 
@@ -58,7 +59,7 @@ export default function SettingsShell({ profile, affinityCatalog, isAdmin, lates
         {isAdmin ? <button type="button" role="tab" aria-selected={tab === "admin"} className={tab === "admin" ? styles.settingsTabActive : ""} onClick={() => choose("admin")}>Admin</button> : null}
       </nav>
       <div className={styles.settingsTabBody}>
-        {tab === "profile" ? <ProfileSettings profile={profile} affinityCatalog={affinityCatalog} /> : null}
+        {tab === "profile" ? <><ReadingBoundarySettings /><ProfileSettings profile={profile} affinityCatalog={affinityCatalog} /></> : null}
         {tab === "notifications" ? <div className={styles.notificationsTab} id="raven-notifications"><NotificationCustomizationSettings /><PushNotificationSettings /></div> : null}
         {tab === "admin" && isAdmin ? <AdminNotificationSettings latestChapter={latestChapter} /> : null}
       </div>

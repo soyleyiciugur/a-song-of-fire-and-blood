@@ -12,6 +12,11 @@ import CharacterBiography from "@/components/character/CharacterBiography";
 import CharacterTraits from "@/components/character/CharacterTraits";
 import CharacterRelationships from "@/components/character/CharacterRelationships";
 import CharacterTimeline from "@/components/character/CharacterTimeline";
+import CharacterAppearances from "@/components/character/CharacterAppearances";
+import CharacterPlayerAttribution from "@/components/character/CharacterPlayerAttribution";
+import CharacterProfileTabs from "@/components/character/CharacterProfileTabs";
+import { getPlayedCharacterAssignment } from "@/data/character-inner-court";
+import { getAllChapters } from "@/data/chapters";
 import type { Character } from "@/types/character";
 import contentStyles from "@/components/character/characterContent.module.css";
 import styles from "./characterDetail.module.css";
@@ -23,7 +28,15 @@ type Props = {
 export default async function CharacterPage({ params }: Props) {
   const { id } = await params;
   const character = getCharacter(id) as Character | undefined;
-  const quotes = getQuotesByCharacterId(id);
+  const chapterOrder = new Map(getAllChapters().map((chapter, index) => [chapter.slug, index]));
+  const quotes = [...getQuotesByCharacterId(id)].sort((a, b) => {
+    const aOrder = a.chapterSlug ? chapterOrder.get(a.chapterSlug) : undefined;
+    const bOrder = b.chapterSlug ? chapterOrder.get(b.chapterSlug) : undefined;
+    if (aOrder === undefined && bOrder === undefined) return 0;
+    if (aOrder === undefined) return 1;
+    if (bOrder === undefined) return -1;
+    return bOrder - aOrder;
+  });
 
   if (!character) notFound();
 
@@ -41,23 +54,29 @@ export default async function CharacterPage({ params }: Props) {
   const portraitVariants = getCharacterPortraitVariants(character.id);
   const availableAgeState = resolveAvailablePortraitState(currentAgeState, portraitVariants);
   const debut = getCharacterDebut(character);
+  const playedBy = getPlayedCharacterAssignment(character.id);
 
   return (
     <main className={`page ${styles.page}`}>
       <div className="container">
         <CharacterHeader character={character} />
+        {playedBy && <CharacterPlayerAttribution characterId={character.id} assignment={playedBy} />}
 
         <div className={styles.detailGrid}>
           <div className={styles.mainColumn}>
-            <CharacterBiography summary={character.summary} />
-            <CharacterTraits traits={character.traits} />
-
-            <CharacterRelationships
-              characterId={character.id}
-              relationships={character.relationships as Record<string, string>}
-            />
-
-            {quotes.length > 0 && (
+            <CharacterProfileTabs
+              overview={(
+                <>
+                  <CharacterBiography summary={character.summary} />
+                  <CharacterTraits traits={character.traits} />
+                  <CharacterRelationships
+                    characterId={character.id}
+                    relationships={character.relationships}
+                  />
+                </>
+              )}
+              appearances={<CharacterAppearances character={character} />}
+              quotes={quotes.length > 0 ? (
               <section className={contentStyles.sectionPanel}>
                 <div className={contentStyles.sectionHeader}>
                   <div className={contentStyles.sectionTitleGroup}>
@@ -77,8 +96,19 @@ export default async function CharacterPage({ params }: Props) {
                   ))}
                 </div>
               </section>
-            )}
-            <CharacterTimeline character={character} />
+              ) : (
+                <section className={contentStyles.sectionPanel}>
+                  <div className={contentStyles.sectionHeader}>
+                    <div className={contentStyles.sectionTitleGroup}>
+                      <span className={contentStyles.sectionEyebrow}>Words remembered</span>
+                      <h2 className={contentStyles.sectionTitle}>Notable Quotes</h2>
+                    </div>
+                  </div>
+                  <p className={contentStyles.sectionHint}>No words have been recorded yet.</p>
+                </section>
+              )}
+              chronology={<CharacterTimeline character={character} />}
+            />
           </div>
 
           <CharacterInfoBox

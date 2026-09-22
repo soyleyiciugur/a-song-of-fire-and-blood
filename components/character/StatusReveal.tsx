@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { CharacterStatus } from "@/types/character";
 
 import styles from "./statusReveal.module.css";
+import { getAllChapters } from "@/data/chapters";
+import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
 
 const statusMap: Record<
   CharacterStatus,
@@ -62,7 +64,13 @@ function EyeIcon({ open }: { open: boolean }) {
 }
 
 export default function StatusReveal({ status, secret }: Props) {
+  const { canReveal } = useSpoilerBoundary();
   const [revealed, setRevealed] = useState(false);
+  const currentSnapshotChapter = getAllChapters().at(-1)?.slug;
+
+  if (!canReveal(currentSnapshotChapter)) {
+    return <span className={styles.note}>Hidden beyond your reading boundary.</span>;
+  }
 
   const publicItem = statusMap[status];
 

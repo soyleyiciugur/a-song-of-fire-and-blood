@@ -14,9 +14,9 @@
 //   Reads ?lang= from URL (set by hub) and falls back to localStorage.
 //   Falls back to EN if no TR fields exist on chapter data.
 //
-// BOOKMARKING:
-//   On every spread turn, writes { slug, spread } to localStorage
-//   "asofiab-bookmark".
+// READING PROGRESS:
+//   The chapter boundary advances only through Mark as read. Page turns update
+//   the saved position only while reading that already-selected chapter.
 //
 // Fixes in this revision:
 //  #1  lang toggle is two independent buttons, doesn't swap position.
@@ -55,6 +55,7 @@ import ChapterCover from "@/components/ChapterCover";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapter-reader.module.css";
 import fc from "./full-chapter.module.css";
+import { useReadingProgress } from "@/components/reading/ReadingProgressProvider";
 
 // ─── types ────────────────────────────────────────────────────────────────────
 
@@ -291,6 +292,7 @@ export default function ChapterReader() {
   const params = useParams<{ id: string }>();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { progress, setProgress, clearProgress, updatePosition } = useReadingProgress();
 
   const allChapters = getAllChapters() as Chapter[];
   const chapterIndex = allChapters.findIndex(c => c.slug === params.id);
@@ -334,6 +336,7 @@ export default function ChapterReader() {
   const [pageInputValue, setPageInputValue] = useState<string>("1");
   const [isMobile, setIsMobile] = useState(false);
   const [mobilePageIndex, setMobilePageIndex] = useState(0);
+  const readerInteractionRef = useRef(false);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 700px)");
@@ -411,22 +414,26 @@ export default function ChapterReader() {
     setPageInputValue(String(spreadIndex * 2 + 1));
   }, [spreadIndex]);
 
-  // ── save bookmark on spread change (book view only)
+  // Only update the saved page inside the current reading-boundary chapter.
+  // Merely visiting an older or newer chapter must not move the boundary.
   useEffect(() => {
-    if (!chapter || viewMode !== "book") return;
-    try {
-      localStorage.setItem("asofiab-bookmark", JSON.stringify({
-        slug: chapter.slug,
-        page: spreadIndex,
-      }));
-    } catch {}
-  }, [chapter, spreadIndex, viewMode]);
+    if (!chapter || viewMode !== "book" || !readerInteractionRef.current) return;
+    const timer = window.setTimeout(() => void updatePosition(chapter.slug, spreadIndex), 350);
+    return () => window.clearTimeout(timer);
+  }, [chapter, spreadIndex, updatePosition, viewMode]);
+
+  useEffect(() => {
+    if (!chapter || viewMode !== "book" || !isMobile || !readerInteractionRef.current) return;
+    const timer = window.setTimeout(() => void updatePosition(chapter.slug, Math.floor(mobilePageIndex / 2)), 350);
+    return () => window.clearTimeout(timer);
+  }, [chapter, isMobile, mobilePageIndex, updatePosition, viewMode]);
 
   // ── spread turn logic
   const turnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const goToSpread = useCallback((target: number) => {
     if (target < 0 || target >= totalSpreads) return;
+    readerInteractionRef.current = true;
     if (turnTimeoutRef.current) clearTimeout(turnTimeoutRef.current);
     const dir = target > spreadIndex ? "next" : "prev";
     setTurning(dir);
@@ -441,10 +448,12 @@ export default function ChapterReader() {
   const goPrevSpread = useCallback(() => goToSpread(spreadIndex - 1), [goToSpread, spreadIndex]);
 
   const goNextMobilePage = useCallback(() => {
+    readerInteractionRef.current = true;
     setMobilePageIndex((prev) => Math.min(prev + 1, mobileTotalPages - 1));
   }, [mobileTotalPages]);
 
   const goPrevMobilePage = useCallback(() => {
+    readerInteractionRef.current = true;
     setMobilePageIndex((prev) => Math.max(prev - 1, 0));
   }, []);
 
@@ -532,6 +541,17 @@ export default function ChapterReader() {
   }
 
   const displayTitle = chapterTitle(chapter, lang);
+  const alreadyRead = Boolean(progress?.chapterSlug && chapterIndex <= allChapters.findIndex((item) => item.slug === progress.chapterSlug));
+  const toggleReadState = () => {
+    const page = isMobile ? Math.floor(mobilePageIndex / 2) : spreadIndex;
+    if (!alreadyRead) {
+      void setProgress(chapter.slug, page);
+      return;
+    }
+    const previousChapter = allChapters[chapterIndex - 1];
+    if (previousChapter) void setProgress(previousChapter.slug, 0);
+    else void clearProgress();
+  };
 
   // ── shared top controls (language toggle, back link, view toggle) ──
   const topControls = (
@@ -548,6 +568,26 @@ export default function ChapterReader() {
         </button>
 
         <div className={styles.langToggle}>
+        <button
+          type="button"
+          className={`${fc.fcToggleBtn} ${styles.readStateButton}`}
+          onClick={toggleReadState}
+          aria-pressed={alreadyRead}
+        >
+          <span className={`${styles.readStateIcon} ${alreadyRead ? styles.readStateIconRead : styles.readStateIconUnread}`} aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path className={styles.bookOutline} d="M4.5 4.5c2.8-.7 5.2-.25 7.5 1.35v13.2c-2.3-1.6-4.7-2.05-7.5-1.35V4.5Zm15 0c-2.8-.7-5.2-.25-7.5 1.35v13.2c2.3-1.6 4.7-2.05 7.5-1.35V4.5Z" />
+              {alreadyRead
+                ? <path className={styles.stateMark} d="m7.7 11.7 2.8 2.8 5.8-6" />
+                : <path className={styles.stateMark} d="m8.4 8 7.2 7.2m0-7.2-7.2 7.2" />}
+            </svg>
+          </span>
+          <span className={styles.readStateLabel}>
+            {alreadyRead
+              ? (lang === "en" ? "Mark as unread" : "Okunmadı işaretle")
+              : (lang === "en" ? "Mark as read" : "Okundu işaretle")}
+          </span>
+        </button>
         <button
           className={fc.fcToggleBtn}
           onClick={toggleViewMode}

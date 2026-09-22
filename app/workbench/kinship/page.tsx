@@ -1,0 +1,1 @@
+import { KinshipTool } from "../ChronologyTools";import { WorkbenchHeader } from "../WorkbenchShell";import styles from "../workbench.module.css";export default function Page(){return <main className={styles.page}><WorkbenchHeader title="Kinship Finder">Follow the shortest recorded family connection between two characters.</WorkbenchHeader><KinshipTool/></main>}

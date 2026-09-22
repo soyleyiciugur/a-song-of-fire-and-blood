@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { createGame, applyAction } from "@/lib/the-great-game/engine";
 import { createTestDeck, validateDeck } from "@/lib/the-great-game/deck";
+import { getGameCard } from "@/lib/the-great-game/cards";
 import {
   normalizeMatchCode,
   playerIdForUser,
@@ -25,6 +26,11 @@ type MatchRow = {
   guest_id: string | null;
   host_deck: string[];
   guest_deck: string[] | null;
+  host_deck_name: string | null;
+  guest_deck_name: string | null;
+  host_faction: string | null;
+  guest_faction: string | null;
+  started_at: string | null;
   state: GameState | null;
   status: GreatGameMatchStatus;
   version: number;
@@ -66,6 +72,24 @@ function asDeck(input: unknown): string[] {
     throw new Error(validation.errors[0] ?? "That deck is not legal.");
   }
   return deck;
+}
+
+function asDeckName(input: unknown): string {
+  if (typeof input !== "string") return "Practice Deck";
+  const value = input.trim().replace(/\s+/g, " ");
+  return value.slice(0, 60) || "Practice Deck";
+}
+
+function deckFaction(deck: string[]): string {
+  const counts = new Map<string, number>();
+  for (const cardId of deck) {
+    const house = getGameCard(cardId).houseId;
+    if (!house || house === "-") continue;
+    counts.set(house, (counts.get(house) ?? 0) + 1);
+  }
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (!ranked[0]) return "mixed";
+  return ranked[1]?.[1] === ranked[0][1] ? "mixed" : ranked[0][0];
 }
 
 function asAction(input: unknown): GameAction {
@@ -261,6 +285,7 @@ export async function POST(request: Request) {
   try {
     if (op === "create") {
       const deck = asDeck(body.deck);
+      const deckName = asDeckName(body.deckName);
 
       // A host does not need several stale empty tables. Retire old invitations.
       await admin
@@ -284,6 +309,8 @@ export async function POST(request: Request) {
             code,
             host_id: user.id,
             host_deck: deck,
+            host_deck_name: deckName,
+            host_faction: deckFaction(deck),
             status: "waiting",
             version: 0,
           })
@@ -306,6 +333,7 @@ export async function POST(request: Request) {
       const code = normalizeMatchCode(String(body.code ?? ""));
       if (code.length !== 6) return jsonError("Enter a six-character table code.");
       const deck = asDeck(body.deck);
+      const deckName = asDeckName(body.deckName);
 
       const { data, error } = await admin
         .from("great_game_matches")
@@ -340,6 +368,9 @@ export async function POST(request: Request) {
         .update({
           guest_id: user.id,
           guest_deck: deck,
+          guest_deck_name: deckName,
+          guest_faction: deckFaction(deck),
+          started_at: now,
           state,
           status: "active",
           version: nextVersion,

@@ -12,13 +12,19 @@ import {
   colorForHouse,
   secondaryColorForHouse,
 } from "@/lib/graph-layout";
-import type { Character, CharacterId } from "@/types/character";
+import type {
+  Character,
+  CharacterId,
+  CharacterRelationship,
+} from "@/types/character";
 import styles from "./characterContent.module.css";
+import { getAllChapters } from "@/data/chapters";
+import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
 
 type Props = {
   characterId: CharacterId;
   /** Kept optional for backwards compatibility with older character page calls. */
-  relationships?: Record<string, string>;
+  relationships?: Record<string, CharacterRelationship>;
 };
 
 type RelatedEntry = EffectiveRelationship & {
@@ -154,6 +160,7 @@ function labelPlacement(x: number) {
 }
 
 export default function CharacterRelationships({ characterId }: Props) {
+  const { canReveal } = useSpoilerBoundary();
   const currentCharacter = byId.get(characterId);
   const entries = useMemo(
     () => getEffectiveRelationships(characterId),
@@ -168,10 +175,46 @@ export default function CharacterRelationships({ characterId }: Props) {
     [entries]
   );
 
-  const unresolved = useMemo(
-    () => entries.filter((entry) => !entry.character),
-    [entries]
-  );
+  const noteworthy = useMemo(() => {
+    if (!currentCharacter) return [];
+
+    const items: string[] = [];
+    for (const entry of entries) {
+      const context = `${entry.overview} ${entry.latestDevelopment}`;
+      if (entry.character && /betroth/i.test(context)) {
+        items.push(`Betrothed to ${entry.character.name}`);
+      }
+    }
+
+    const spouseIds = Array.isArray(currentCharacter.spouse)
+      ? currentCharacter.spouse
+      : currentCharacter.spouse && currentCharacter.spouse !== "-"
+        ? [currentCharacter.spouse]
+        : [];
+
+    const expectingWith = spouseIds
+      .map((id) => byId.get(id as CharacterId))
+      .find(
+        (spouse) =>
+          spouse?.status === "Alive" &&
+          /pregnan|expecting (?:a |their |his |her )?child|carrying (?:a |their |his |her )?child/i.test(
+            `${currentCharacter.summary} ${spouse.summary}`
+          )
+      );
+
+    if (expectingWith) {
+      items.push(`Expecting a child with ${expectingWith.name}`);
+    } else if (
+      currentCharacter.status === "Alive" &&
+      /pregnan|expecting (?:a |their |his |her )?child|carrying (?:a |their |his |her )?child/i.test(
+        currentCharacter.summary
+      )
+    ) {
+      items.push("Expecting a child");
+    }
+
+    return [...new Set(items)];
+  }, [currentCharacter, entries]);
 
   const layout = useMemo(
     () => buildRadialLayout(known.map((entry) => entry.id)),
@@ -186,7 +229,8 @@ export default function CharacterRelationships({ characterId }: Props) {
     setHoveredId(null);
   }, [characterId]);
 
-  if (entries.length === 0 || !currentCharacter) return null;
+  const currentSnapshotChapter = getAllChapters().at(-1)?.slug;
+  if (entries.length === 0 || !currentCharacter || !canReveal(currentSnapshotChapter)) return null;
 
   const selected = selectedId
     ? known.find((entry) => entry.id === selectedId) ?? null
@@ -362,9 +406,16 @@ export default function CharacterRelationships({ characterId }: Props) {
                 </div>
               </div>
 
-              <p className={styles.relationshipDescription}>
-                {selected.description}
-              </p>
+              <div className={styles.relationshipDescription}>
+                <strong>Relationship</strong>
+                <p>{selected.overview}</p>
+                {selected.latestDevelopment !== selected.overview && (
+                  <>
+                    <strong>Latest development</strong>
+                    <p>{selected.latestDevelopment}</p>
+                  </>
+                )}
+              </div>
             </>
           ) : (
             <p className={styles.relationshipSidebarEmpty}>
@@ -374,13 +425,13 @@ export default function CharacterRelationships({ characterId }: Props) {
         </aside>
       </div>
 
-      {unresolved.length > 0 && (
+      {noteworthy.length > 0 && (
         <div className={styles.unresolvedBlock}>
-          <h3 className={styles.unresolvedTitle}>Other recorded ties</h3>
+          <h3 className={styles.unresolvedTitle}>Noteworthy</h3>
           <ul className={styles.unresolvedList}>
-            {unresolved.map((entry) => (
-              <li key={entry.id} className={styles.unresolvedItem}>
-                <strong>{entry.name}</strong> — {entry.description}
+            {noteworthy.map((item) => (
+              <li key={item} className={styles.unresolvedItem}>
+                {item}
               </li>
             ))}
           </ul>

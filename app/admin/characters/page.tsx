@@ -274,17 +274,71 @@ function CharactersTab({
     showNotification("Character removed from draft.", "success");
   };
 
-  const handleRelationshipChange = (charId: string, desc: string) => {
+  const handleRelationshipChange = (
+    charId: string,
+    field: "overview" | "latestDevelopment",
+    value: string
+  ) => {
     if (!activeChar) return;
-    const newRels = { ...(activeChar.relationships || {}), [charId]: desc };
-    handleChange("relationships", newRels);
+    const current = activeChar.relationships?.[charId] ?? {
+      overview: "",
+      latestDevelopment: "",
+    };
+    const relationship = { ...current, [field]: value };
+
+    setChars(
+      chars.map((character) => {
+        if (character.id === activeChar.id) {
+          return {
+            ...character,
+            relationships: {
+              ...(character.relationships || {}),
+              [charId]: relationship,
+            },
+          };
+        }
+
+        if (character.id === charId) {
+          return {
+            ...character,
+            relationships: {
+              ...(character.relationships || {}),
+              [activeChar.id]: relationship,
+            },
+          };
+        }
+
+        return character;
+      })
+    );
+  };
+
+  const addRelationship = (charId: string) => {
+    if (!activeChar) return;
+    const relationship = { overview: "", latestDevelopment: "" };
+    setChars(
+      chars.map((character) => {
+        if (character.id === activeChar.id) {
+          return { ...character, relationships: { ...(character.relationships || {}), [charId]: relationship } };
+        }
+        if (character.id === charId) {
+          return { ...character, relationships: { ...(character.relationships || {}), [activeChar.id]: relationship } };
+        }
+        return character;
+      })
+    );
   };
 
   const removeRelationship = (charId: string) => {
     if (!activeChar) return;
-    const newRels = { ...activeChar.relationships };
-    delete newRels[charId];
-    handleChange("relationships", newRels);
+    setChars(
+      chars.map((character) => {
+        if (character.id !== activeChar.id && character.id !== charId) return character;
+        const relationships = { ...(character.relationships || {}) };
+        delete relationships[character.id === activeChar.id ? charId : activeChar.id];
+        return { ...character, relationships };
+      })
+    );
   };
 
   const handleQuoteChange = (globalIndex: number, field: string, value: string) => {
@@ -606,11 +660,11 @@ function CharactersTab({
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
                   <h3 style={{ margin: 0, color: "var(--gold)" }}>Relationships</h3>
                   <div style={{ width: "250px" }}>
-                    <SearchableSelect label="" placeholder="+ Add Character..." options={charOptions.filter(o => o.id !== "-" && o.id !== activeChar.id && !Object.keys(activeChar.relationships || {}).includes(o.id))} onChange={(v: string) => handleRelationshipChange(v, "")} />
+                    <SearchableSelect label="" placeholder="+ Add Character..." options={charOptions.filter(o => o.id !== "-" && o.id !== activeChar.id && !Object.keys(activeChar.relationships || {}).includes(o.id))} onChange={addRelationship} />
                   </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                  {Object.entries(activeChar.relationships || {}).map(([relId, desc]) => {
+                  {Object.entries(activeChar.relationships || {}).map(([relId, relationship]) => {
                     const relChar = chars.find(c => c.id === relId);
                     return (
                       <div key={relId} style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "6px", padding: "15px" }}>
@@ -621,7 +675,14 @@ function CharactersTab({
                           </div>
                           <button onClick={() => removeRelationship(relId)} style={{ background: "transparent", color: "#ff4c4c", border: "none", cursor: "pointer", fontSize: "0.9rem", padding: "0 5px" }}>Remove</button>
                         </div>
-                        <textarea value={desc as string} onChange={(e) => handleRelationshipChange(relId, e.target.value)} className="custom-scroll" placeholder="Describe their relationship..." style={{ width: "100%", padding: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "inherit", borderRadius: "4px", minHeight: "60px", fontFamily: "inherit", resize: "vertical", outline: "none" }} />
+                        <label style={{ display: "grid", gap: "6px", marginBottom: "10px" }}>
+                          <span style={{ fontSize: "0.78rem", opacity: 0.72 }}>Shared relationship overview</span>
+                          <textarea value={(relationship as any).overview ?? ""} onChange={(e) => handleRelationshipChange(relId, "overview", e.target.value)} className="custom-scroll" placeholder="Describe the enduring relationship..." style={{ width: "100%", padding: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "inherit", borderRadius: "4px", minHeight: "60px", fontFamily: "inherit", resize: "vertical", outline: "none" }} />
+                        </label>
+                        <label style={{ display: "grid", gap: "6px" }}>
+                          <span style={{ fontSize: "0.78rem", opacity: 0.72 }}>Latest development</span>
+                          <textarea value={(relationship as any).latestDevelopment ?? ""} onChange={(e) => handleRelationshipChange(relId, "latestDevelopment", e.target.value)} className="custom-scroll" placeholder="Describe the newest event or change..." style={{ width: "100%", padding: "10px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "inherit", borderRadius: "4px", minHeight: "60px", fontFamily: "inherit", resize: "vertical", outline: "none" }} />
+                        </label>
                       </div>
                     );
                   })}

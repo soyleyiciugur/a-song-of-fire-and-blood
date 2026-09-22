@@ -57,6 +57,18 @@ function text(...parts: unknown[]) {
   return normalize(parts.flat(Infinity).filter(Boolean).join(" "));
 }
 
+function relationshipText(
+  relationships: Partial<
+    Record<string, { overview: string; latestDevelopment: string }>
+  >
+) {
+  return Object.values(relationships).flatMap((relationship) =>
+    relationship
+      ? [relationship.overview, relationship.latestDevelopment]
+      : []
+  );
+}
+
 function ravenHref(entry: (typeof gallery)[number]) {
   const source = entry.src.toLowerCase();
   const base = /\.(mp4|webm|mov)(?:[?#]|$)/.test(source)
@@ -77,7 +89,7 @@ export function buildSearchIndex(): SearchResult[] {
     results.push({ type: "character", id: character.id, title: character.name,
       subtitle: character.title && character.title !== "-" ? character.title : character.house,
       href: `/characters/${character.id}`,
-      keywords: text(keywordParts, character.status, character.traits, character.goals, character.summary, character.quotes, character.relationships, character.death),
+      keywords: text(keywordParts, character.status, character.traits, character.goals, character.summary, character.quotes, relationshipText(character.relationships), character.death),
       thumbnail: { src: `/images/miniportraits/${character.id}.webp`, alt: character.name, kind: "character" } });
   }
 

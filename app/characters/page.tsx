@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { getCharacters } from "@/lib/characters";
 
 import styles from "./characters.module.css";
+import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
 
 const ROYAL_PARENT_IDS = ["baelenys-targaryen", "jaery-targaryen"] as const;
 
@@ -202,9 +203,10 @@ function StyledSelect({
 }
 
 export default function Characters() {
+  const { canReveal } = useSpoilerBoundary();
   const characters = useMemo(
-    () => getCharacters().filter((character) => !character.hidden),
-    []
+    () => getCharacters().filter((character) => !character.hidden && canReveal(character.debutChapter)),
+    [canReveal]
   );
 
   const byId = useMemo(

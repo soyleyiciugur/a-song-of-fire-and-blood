@@ -10,9 +10,38 @@ export interface Profile {
   profile_theme?: string;
   banner_url?: string | null;
   notification_last_seen_at?: string | null;
+  played_character_id?: string | null;
   role: UserRole;
   bio: string | null;
   created_at: string;
+  updated_at: string;
+}
+
+export interface ReadingProgressRow {
+  user_id: string;
+  chapter_slug: string;
+  page_index: number;
+  updated_at: string;
+}
+
+export interface CharacterInnerCourtRow {
+  id: string;
+  character_id: string;
+  chapter_slug: string;
+  kind: "thought" | "suspicion" | "preference" | "belief" | "theory" | "question";
+  subject: string | null;
+  body: string;
+  status: "active" | "changed" | "resolved";
+  supersedes: string | null;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+  sort_order: number;
+}
+
+export interface CharacterPlayerAssignmentRow {
+  character_id: string;
+  player_username: string;
   updated_at: string;
 }
 
@@ -178,10 +207,32 @@ export interface GreatGameEventRow {
   created_at: string;
 }
 
+export interface GreatGamePlayerStatsRow {
+  user_id: string;
+  games_played: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  abandons: number;
+  win_rate: number;
+  current_win_streak: number;
+  longest_win_streak: number;
+  average_duration_seconds: number;
+  average_turns: number;
+  last_played_at: string | null;
+}
+
+export interface GreatGameDeckStatsRow { user_id:string; deck_name:string; faction:string; games_played:number; wins:number; losses:number; abandons:number; win_rate:number }
+export interface GreatGameHeadToHeadRow { user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; games_played:number; wins:number; losses:number; abandons:number; last_played_at:string }
+export interface GreatGameHistoryRow { match_id:string; user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; opponent_avatar_url:string|null; result:"win"|"loss"|"draw"|"abandon"; deck_name:string; faction:string; duration_seconds:number; turns:number; rating_before:number; rating_after:number; completed_at:string }
+export interface GreatGameLeaderboardRow { rank:number; user_id:string; username:string; display_name:string; avatar_url:string|null; rating:number; peak_rating:number; rated_games:number; games_played:number; wins:number; losses:number; abandons:number; win_rate:number; current_win_streak:number }
+
 export interface Database {
   public: {
     Tables: {
-      profiles: { Row: Profile; Insert: Omit<Profile, "created_at" | "updated_at" | "role"> & Partial<Pick<Profile, "created_at" | "updated_at" | "role">>; Update: Partial<Pick<Profile, "affinity" | "profile_theme" | "display_name" | "avatar_url" | "banner_url" | "bio" | "notification_last_seen_at" | "updated_at">>; Relationships: [] };
+      profiles: { Row: Profile; Insert: Omit<Profile, "created_at" | "updated_at" | "role"> & Partial<Pick<Profile, "created_at" | "updated_at" | "role">>; Update: Partial<Pick<Profile, "affinity" | "profile_theme" | "display_name" | "avatar_url" | "banner_url" | "bio" | "notification_last_seen_at" | "played_character_id" | "updated_at">>; Relationships: [] };
+      character_inner_court: { Row: CharacterInnerCourtRow; Insert: Pick<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body"> & Partial<Omit<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body">>; Update: Partial<Pick<CharacterInnerCourtRow, "chapter_slug" | "kind" | "subject" | "body" | "status" | "supersedes" | "sort_order" | "updated_at">>; Relationships: [] };
+      character_player_assignments: { Row: CharacterPlayerAssignmentRow; Insert: Pick<CharacterPlayerAssignmentRow, "character_id" | "player_username"> & Partial<Pick<CharacterPlayerAssignmentRow, "updated_at">>; Update: Partial<Pick<CharacterPlayerAssignmentRow, "player_username" | "updated_at">>; Relationships: [] };
       forum_threads: { Row: { id:string; title:string; body:string; category:string; chapter_slug:string|null; spoiler_through:string|null; author_type:AuthorType; user_author_id:string|null; character_id:string|null; legacy_author_id:string|null; is_locked:boolean; is_pinned:boolean; is_visible:boolean; created_at:string; updated_at:string }; Insert: { id?:string; title:string; body:string; category?:string; chapter_slug?:string|null; spoiler_through?:string|null; author_type?:AuthorType; user_author_id?:string|null; character_id?:string|null; legacy_author_id?:string|null; is_locked?:boolean; is_pinned?:boolean; is_visible?:boolean; created_at?:string; updated_at?:string }; Update: Partial<Database["public"]["Tables"]["forum_threads"]["Insert"]>; Relationships: [] };
       forum_posts: { Row: { id:string; thread_id:string; parent_id:string|null; body:string; author_type:AuthorType; user_author_id:string|null; character_id:string|null; legacy_author_id:string|null; is_visible:boolean; created_at:string; updated_at:string }; Insert: { id?:string; thread_id:string; parent_id?:string|null; body:string; author_type?:AuthorType; user_author_id?:string|null; character_id?:string|null; legacy_author_id?:string|null; is_visible?:boolean; created_at?:string; updated_at?:string }; Update: Partial<Database["public"]["Tables"]["forum_posts"]["Insert"]>; Relationships: [] };
       raven_comments: { Row: { id:string; entry_id:string; parent_id:string|null; body:string; author_type:AuthorType; user_author_id:string|null; character_id:string|null; legacy_author_id:string|null; is_visible:boolean; created_at:string; updated_at:string }; Insert: { id?:string; entry_id:string; parent_id?:string|null; body:string; author_type?:AuthorType; user_author_id?:string|null; character_id?:string|null; legacy_author_id?:string|null; is_visible?:boolean; created_at?:string; updated_at?:string }; Update: Partial<Database["public"]["Tables"]["raven_comments"]["Insert"]>; Relationships: [] };
@@ -200,7 +251,13 @@ export interface Database {
       great_game_matches: { Row: GreatGameMatchRow; Insert: Partial<GreatGameMatchRow> & Pick<GreatGameMatchRow, "code" | "host_id" | "host_deck">; Update: Partial<GreatGameMatchRow>; Relationships: [] };
       great_game_events: { Row: GreatGameEventRow; Insert: Omit<GreatGameEventRow, "id" | "created_at"> & Partial<Pick<GreatGameEventRow, "id" | "created_at">>; Update: never; Relationships: [] };
     };
-    Views: Record<string, never>;
+    Views: {
+      great_game_player_stats: { Row: GreatGamePlayerStatsRow; Relationships: [] };
+      great_game_deck_stats: { Row: GreatGameDeckStatsRow; Relationships: [] };
+      great_game_head_to_head: { Row: GreatGameHeadToHeadRow; Relationships: [] };
+      great_game_match_history: { Row: GreatGameHistoryRow; Relationships: [] };
+      great_game_leaderboard: { Row: GreatGameLeaderboardRow; Relationships: [] };
+    };
     Functions: {
       ensure_own_profile: { Args: Record<string, never>; Returns: Profile };
       start_direct_raven: { Args: { target_username: string }; Returns: string };

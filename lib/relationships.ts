@@ -1,11 +1,17 @@
 import charactersData from "@/data/characters/characters.json";
 import { dragons, type Dragon } from "@/data/dragons";
-import type { Character, CharacterId } from "@/types/character";
+import type {
+  Character,
+  CharacterId,
+  CharacterRelationship,
+} from "@/types/character";
 
 export type EffectiveRelationship = {
   id: string;
   name: string;
   description: string;
+  overview: string;
+  latestDevelopment: string;
   kind: "character" | "dragon";
   character?: Character;
   dragon?: Dragon;
@@ -26,6 +32,14 @@ function displayNameFromId(id: string) {
     .filter(Boolean)
     .map((part) => part.charAt(0).toLocaleUpperCase("tr-TR") + part.slice(1))
     .join(" ");
+}
+
+function relationshipDescription(relationship: CharacterRelationship) {
+  if (relationship.overview === relationship.latestDevelopment) {
+    return relationship.overview;
+  }
+
+  return `${relationship.overview} Latest development: ${relationship.latestDevelopment}`;
 }
 
 export function sortableCharacterName(name: string) {
@@ -54,7 +68,7 @@ export function getEffectiveRelationships(
   if (!character) return [];
 
   const characterRelationships = Object.entries(character.relationships ?? {})
-    .flatMap(([id, description]) => {
+    .flatMap(([id, relationship]) => {
       const resolved = byId.get(id as CharacterId);
 
       // If this id exists in characters.json but is hidden, omit it entirely.
@@ -65,7 +79,9 @@ export function getEffectiveRelationships(
         {
           id,
           name: resolved?.name ?? displayNameFromId(id),
-          description,
+          description: relationshipDescription(relationship),
+          overview: relationship.overview,
+          latestDevelopment: relationship.latestDevelopment,
           kind: "character" as const,
           character: resolved,
         },
@@ -93,6 +109,8 @@ export function getEffectiveRelationships(
       id: bondedDragon.id,
       name: bondedDragon.name,
       description: bondedDragon.description,
+      overview: bondedDragon.description,
+      latestDevelopment: bondedDragon.description,
       kind: "dragon" as const,
       dragon: bondedDragon,
     },

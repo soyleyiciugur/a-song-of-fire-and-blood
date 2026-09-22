@@ -22,6 +22,7 @@ import {
 import worldDate from "@/data/worldDate.json";
 import StatusReveal from "./StatusReveal";
 import styles from "./characterInfoBox.module.css";
+import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
 
 type PortraitVariants = Partial<Record<CharacterAgeState, string>>;
 
@@ -232,6 +233,7 @@ export default function CharacterInfoBox({
   portraitVariants,
   debut,
 }: Props) {
+  const { canReveal } = useSpoilerBoundary();
   const [activeAgeState, setActiveAgeState] =
     useState<CharacterAgeState>(currentAgeState);
   const [imageFailed, setImageFailed] = useState(false);
@@ -327,8 +329,9 @@ export default function CharacterInfoBox({
     () =>
       allGalleryEntries
         .filter((entry) => entry.characterIds.includes(character.id))
+        .filter((entry) => canReveal(entry.chapterId))
         .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt)),
-    [character.id]
+    [canReveal, character.id]
   );
 
   const sortedSiblings = useMemo(

@@ -10,9 +10,12 @@ import SearchableSelect from "@/components/SearchableSelect";
 import ChronicleTabs from "@/components/chronicle/ChronicleTabs";
 
 import styles from "./timeline.module.css";
+import { useReadingProgress } from "@/components/reading/ReadingProgressProvider";
+import { isWithinSpoilerBoundary } from "@/lib/reading-progress";
 
 export default function Timeline() {
-  const sortedTimeline = [...timeline].reverse();
+  const { progress, ready } = useReadingProgress();
+  const sortedTimeline = timeline.filter((chapter) => !ready || isWithinSpoilerBoundary(chapter.chapterSlug, progress?.chapterSlug)).reverse();
   const [query, setQuery] = useState("");
   const [kind, setKind] = useState("all");
   const [characterFilter, setCharacterFilter] = useState("all");

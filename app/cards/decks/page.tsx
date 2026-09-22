@@ -314,6 +314,7 @@ export default function DecksPage() {
           <Link href="/cards">Cards</Link>
           <Link href="/cards/decks" className="greatGameNavActive">Decks</Link>
           <Link href="/cards/play">Play</Link>
+          <Link href="/cards/leaderboard">Ranks</Link>
         </nav>
       </header>
 

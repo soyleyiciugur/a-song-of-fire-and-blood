@@ -1,0 +1,1 @@
+import { NamedayTool } from "../ChronologyTools";import { WorkbenchHeader } from "../WorkbenchShell";import styles from "../workbench.module.css";export default function Page(){return <main className={styles.page}><WorkbenchHeader title="Nameday Randomizer">Generate lore-ready dates with optional character and age constraints.</WorkbenchHeader><NamedayTool/></main>}

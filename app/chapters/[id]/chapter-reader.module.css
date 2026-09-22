@@ -1125,6 +1125,48 @@
   margin-left: auto;
   flex-wrap: nowrap;
 }
+.readStateButton {
+  width: 172px;
+  min-width: 172px;
+  padding-inline: 11px !important;
+  gap: 8px;
+  text-align: center;
+}
+.readStateIcon {
+  display: inline-grid;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+}
+.readStateIcon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+.bookOutline {
+  fill: rgba(12, 8, 4, .76);
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linejoin: round;
+}
+.stateMark {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.readStateIconRead { color: #f0c050; filter: drop-shadow(0 0 4px rgba(240,192,80,.22)); }
+.readStateIconUnread { color: #c74747; filter: drop-shadow(0 0 4px rgba(199,71,71,.2)); }
+.readStateLabel {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+}
 .readerControls .backLink,
 .readerControls .langBtn {
   box-sizing: border-box;
@@ -1143,7 +1185,9 @@
     top: calc(var(--site-nav-height, 58px) + 8px);
     left: 10px;
     right: 10px;
-    gap: 6px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px 6px;
   }
   .readerControls .backLink {
     padding: 6px 9px;
@@ -1152,16 +1196,29 @@
     letter-spacing: .045em;
   }
   .readerControls .langToggle {
+    grid-column: 1 / -1;
+    width: 100%;
     max-width: none;
     gap: 4px;
+    justify-content: flex-end;
   }
+  .readStateButton {
+    width: 154px;
+    min-width: 154px;
+    padding-inline: 7px !important;
+    gap: 5px;
+    font-size: .61rem !important;
+    letter-spacing: .025em !important;
+  }
+  .readStateIcon,
+  .readStateIcon svg { width: 21px; height: 21px; flex-basis: 21px; }
   .readerControls .langBtn {
     min-height: 34px;
     padding: 6px 8px;
     font-size: .68rem;
   }
   .scene {
-    padding-top: 74px;
+    padding-top: 112px;
   }
 }
 
@@ -1169,6 +1226,11 @@
   .readerControls { left: 8px; right: 8px; gap: 4px; }
   .readerControls .backLink { padding-inline: 7px; }
   .readerControls .langBtn { padding-inline: 7px; }
+  .readStateButton {
+    width: 148px;
+    min-width: 148px;
+    font-size: .58rem !important;
+  }
 }
 
 /* Keep every item in the compact reader toolbar on the same visual baseline. */

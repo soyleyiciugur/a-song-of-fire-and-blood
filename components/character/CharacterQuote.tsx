@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import characters from "@/data/characters/characters.json";
 import styles from "./characterContent.module.css";
+import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
 
 type Quote = {
   text: string;
@@ -22,7 +25,8 @@ export default function CharacterQuote({
   compact = false,
   showAttribution = false,
 }: Props) {
-  const quotes = Array.isArray(quote) ? quote : quote ? [quote] : [];
+  const { canReveal } = useSpoilerBoundary();
+  const quotes = (Array.isArray(quote) ? quote : quote ? [quote] : []).filter((entry) => canReveal(entry.chapterSlug));
 
   if (!quotes.length) return null;
 

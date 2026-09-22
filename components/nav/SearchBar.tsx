@@ -124,7 +124,7 @@ export default function SearchBar() {
                 spellCheck={false}
               />
               {loading && <span className={styles.commandLoading} role="status">Searching…</span>}
-              <button type="button" className={styles.commandClose} onClick={close} aria-label="Close search">Esc</button>
+              <button type="button" className={styles.commandClose} onClick={close} aria-label="Close search"><span className={styles.commandCloseDesktop}>Esc</span><span className={styles.commandCloseMobile} aria-hidden="true">×</span></button>
             </div>
 
             <div className={styles.commandResults} id="realm-search-results" role="listbox">

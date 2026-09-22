@@ -1,0 +1,1 @@
+import { AgeTool } from "../ChronologyTools";import { WorkbenchHeader } from "../WorkbenchShell";import styles from "../workbench.module.css";export default function Page(){return <main className={styles.page}><WorkbenchHeader title="Age at Date">Calculate exact ages and reverse a known nameday into an age-year range.</WorkbenchHeader><AgeTool/></main>}

@@ -11,6 +11,7 @@ import styles from "./scale.module.css";
 
 const { stage, human, filters, defaultSelected, dragons } = dragonSizeComparison;
 const measure = (dragon: DragonSizeRecord) => `${dragon.minimum ? "≥" : "≈"} ${dragon.length} m`;
+const quaresmaAspectRatio = 986 / 1012;
 
 function Shape({ dragon, width }: { dragon: DragonSizeRecord; width: number }) {
   const height = width * dragon.intrinsicHeight / dragon.intrinsicWidth;
@@ -28,7 +29,9 @@ export default function DragonComparison({ initialSelected }: { initialSelected?
   const [width, setWidth] = useState(1000);
   const [viewportHeight, setViewportHeight] = useState(600);
   const [mode, setMode] = useState<DragonSizeMode>(stage.defaultMode as DragonSizeMode);
+  const [quaresmaRevealed, setQuaresmaRevealed] = useState(false);
   const viewport = useRef<HTMLDivElement>(null);
+  const easterEggProgress = useRef(0);
   const pointerPosition = useRef<{ x: number; y: number } | null>(null);
   const previewFrame = useRef<number | null>(null);
   useEffect(() => {
@@ -41,8 +44,24 @@ export default function DragonComparison({ initialSelected }: { initialSelected?
   useEffect(() => () => {
     if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current);
   }, []);
+  useEffect(() => {
+    function handleEasterEgg(event: KeyboardEvent) {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      const key = event.key.toLowerCase();
+      if (easterEggProgress.current === 1 && key === "7") {
+        setQuaresmaRevealed(true);
+        easterEggProgress.current = 0;
+        return;
+      }
+      easterEggProgress.current = key === "q" ? 1 : 0;
+    }
+    window.addEventListener("keydown", handleEasterEgg);
+    return () => window.removeEventListener("keydown", handleEasterEgg);
+  }, []);
   const horizontalPadding = stage.originX + stage.endPadding;
   const ppm = Math.max(0.1, (width - horizontalPadding) / stage.axisMaxMetres) * zoom;
+  const quaresmaWidth = human.heightMetres * quaresmaAspectRatio * ppm;
+  const quaresmaLeft = Math.max(5, stage.originX - human.gapFromOrigin - quaresmaWidth);
   const stageWidth = Math.max(width, stage.axisMaxMetres * ppm + horizontalPadding);
   const active = dragons.filter(d => selected.includes(d.id) || preview === d.id);
   const filtered = dragons.filter(d => (filter === "All" || (filter === "Unknown shape" ? d.uncertain : d.source === filter)) && d.name.toLowerCase().includes(query.toLowerCase()));
@@ -84,10 +103,10 @@ export default function DragonComparison({ initialSelected }: { initialSelected?
           <div className={styles.gridLines} aria-hidden="true">{Array.from({ length: Math.floor(stage.axisMaxMetres / stage.axisStepMetres) + 1 }, (_, i) => <i key={i} style={{ left: stage.originX + i * stage.axisStepMetres * ppm }} />)}</div>
           {mode === "overlay" ? <div className={styles.overlay} style={{ height }}>
             {active.map((d, i) => <div key={d.id} className={styles.silhouette} style={{ left: stage.originX, bottom: 0, zIndex: preview === d.id ? 40 : i + 1, opacity: preview && preview !== d.id ? 0.32 : selected.includes(d.id) ? 1 : 0.65 }}><Shape dragon={d} width={d.length * ppm} /></div>)}
-            <svg className={styles.human} aria-label={`Human reference, ${human.heightMetres} metres tall`} role="img" style={{ left: stage.originX - human.gapFromOrigin - human.widthMetres * ppm }} width={human.widthMetres * ppm} height={human.heightMetres * ppm} viewBox="0 0 56 185">
+            {quaresmaRevealed ? <Image className={styles.human} unoptimized src="/images/dragons/sizes/clean/quaresma.webp" alt={`Quaresma reference, ${human.heightMetres} metres tall`} style={{ left: quaresmaLeft, width: quaresmaWidth, height: human.heightMetres * ppm, objectFit: "contain" }} width={quaresmaWidth} height={human.heightMetres * ppm} draggable={false} /> : <svg className={styles.human} aria-label={`Human reference, ${human.heightMetres} metres tall`} role="img" style={{ left: stage.originX - human.gapFromOrigin - human.widthMetres * ppm }} width={human.widthMetres * ppm} height={human.heightMetres * ppm} viewBox="0 0 56 185">
               <ellipse cx="28" cy="12" rx="9" ry="12" />
               <path d="M23 23Q23 28 19 30L12 33Q8 35 7 44L2 77Q0 86 4 90Q7 92 9 86L14 59L15 85Q12 99 15 116L17 167L14 178Q11 182 13 185H25L27 177L26 130L28 111L30 130L29 177L31 185H43Q45 182 42 178L39 167L41 116Q44 99 41 85L42 59L47 86Q49 92 52 90Q56 86 54 77L49 44Q48 35 44 33L37 30Q33 28 33 23Z" />
-            </svg>
+            </svg>}
           </div> : <div className={styles.rows}>{active.map(d => <div className={styles.row} key={d.id}><div className={styles.rowLabel}>{d.name}<span>{measure(d)}</span></div><div style={{ marginLeft: stage.originX }}><Shape dragon={d} width={d.length * ppm} /></div></div>)}</div>}
           {!active.length && <p className={styles.empty}>Choose a dragon to cast its shadow.</p>}
           <div className={styles.ruler} aria-hidden="true">{Array.from({ length: Math.floor(stage.axisMaxMetres / stage.axisStepMetres) + 1 }, (_, i) => <span key={i} style={{ left: stage.originX + i * stage.axisStepMetres * ppm }}>{i * stage.axisStepMetres}<small> m</small></span>)}</div>

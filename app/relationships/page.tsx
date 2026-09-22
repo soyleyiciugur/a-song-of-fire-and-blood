@@ -348,6 +348,8 @@ export default function RelationshipsPage() {
               id: relatedCharacter.id,
               name: relatedCharacter.name,
               description: entry.description,
+              overview: entry.overview,
+              latestDevelopment: entry.latestDevelopment,
             },
           ];
         }
@@ -703,9 +705,14 @@ export default function RelationshipsPage() {
                               styles.relationshipDescription
                             }
                           >
-                            {
-                              rel.description
-                            }
+                            <strong>Relationship</strong>
+                            <span>{rel.overview}</span>
+                            {rel.latestDevelopment !== rel.overview && (
+                              <>
+                                <strong>Latest development</strong>
+                                <span>{rel.latestDevelopment}</span>
+                              </>
+                            )}
                           </span>
                         </li>
                       )

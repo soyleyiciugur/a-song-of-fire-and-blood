@@ -1438,6 +1438,37 @@ export default function GreatGamePlayPage() {
     return () => clearTimeout(timer);
   }, [drawFlight, finishDrawFlight]);
 
+  useEffect(() => {
+    const settleBackgroundDraws = () => {
+      if (document.visibilityState === "visible") return;
+
+      // Browsers suspend requestAnimationFrame and heavily throttle timers in
+      // background tabs. Draw flights are cosmetic, so never leave the real
+      // hand hidden or the table locked while the authoritative state advances.
+      if (handoffDrawDelayTimerRef.current) {
+        clearTimeout(handoffDrawDelayTimerRef.current);
+        handoffDrawDelayTimerRef.current = null;
+      }
+      if (drawGapTimerRef.current) {
+        clearTimeout(drawGapTimerRef.current);
+        drawGapTimerRef.current = null;
+      }
+
+      setHiddenDrawnIds([]);
+      setDrawQueue([]);
+      setDrawFlight(null);
+      setDrawGapActive(false);
+      setTurnDrawPending(false);
+
+      const onComplete = drawSequenceCompleteRef.current;
+      drawSequenceCompleteRef.current = null;
+      onComplete?.();
+    };
+
+    document.addEventListener("visibilitychange", settleBackgroundDraws);
+    return () => document.removeEventListener("visibilitychange", settleBackgroundDraws);
+  }, []);
+
   /*
    * Command-spend preview is strictly turn-local.
    * A hover from the outgoing player must never leak into
@@ -1774,6 +1805,11 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    if (document.visibilityState !== "visible") {
+      onComplete?.();
+      return;
+    }
+
     if (onComplete) {
       const previousComplete = drawSequenceCompleteRef.current;
       drawSequenceCompleteRef.current = () => {
@@ -1982,6 +2018,7 @@ export default function GreatGamePlayPage() {
         body: JSON.stringify({
           op: "create",
           deck: storedDeckCardIds(selectedStoredDeck),
+          deckName: selectedStoredDeck?.name ?? "Practice Deck",
         }),
       });
       const payload = await parseOnlineResponse(response);
@@ -2013,6 +2050,7 @@ export default function GreatGamePlayPage() {
           op: "join",
           code: normalizedCode,
           deck: storedDeckCardIds(selectedStoredDeck),
+          deckName: selectedStoredDeck?.name ?? "Practice Deck",
         }),
       });
       const payload = await parseOnlineResponse(response);
@@ -5420,7 +5458,9 @@ export default function GreatGamePlayPage() {
             {currentGame.winner ===
             "draw"
               ? "Neither claimant remains standing."
-              : "The opposing claimant has lost all Standing."}
+              : currentGame.winner === viewPlayerId
+                ? "The opposing claimant has lost all Standing."
+                : "Your claimant has lost all Standing."}
           </p>
 
           <div
@@ -6713,6 +6753,7 @@ function MainMenu({
         <Link href="/cards">Cards</Link>
         <Link href="/cards/decks">Decks</Link>
         <Link href="/cards/play" className="greatGameNavActive">Play</Link>
+        <Link href="/cards/leaderboard">Ranks</Link>
       </nav>
 
       <div className={styles.menuCrest}>✦</div>

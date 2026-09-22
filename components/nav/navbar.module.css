@@ -698,7 +698,7 @@
   padding: 0;
   justify-content: center;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: 50%;
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   color: var(--muted);
   cursor: pointer;
@@ -745,6 +745,7 @@
 .commandInput { width: 100%; min-width: 0; height: 68px; padding: 0 116px 0 54px; border: 0; outline: 0; background: transparent; color: var(--text); font: 18px/1.3 var(--font-geist), sans-serif; }
 .commandInput::placeholder { color: color-mix(in srgb, var(--muted) 78%, transparent); }
 .commandClose { position: absolute; right: 14px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); color: var(--muted); font-size: 11px; cursor: pointer; }
+.commandCloseMobile { display: none; }
 .commandLoading { position: absolute; right: 58px; color: var(--muted); font-size: 11px; }
 .commandResults { min-height: 180px; overflow-y: auto; padding: 8px; overscroll-behavior: contain; }
 .commandHint, .commandEmpty { min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin: 0; padding: 30px; color: var(--muted); text-align: center; }
@@ -780,6 +781,9 @@
   .commandInputRow { min-height: 62px; padding-top: env(safe-area-inset-top); }
   .commandResults { flex: 1; }
   .commandResultType { display: none; }
+  .commandClose { width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border-radius: 50%; color: var(--text); font-size: 25px; line-height: 1; }
+  .commandCloseDesktop { display: none; }
+  .commandCloseMobile { display: block; transform: translateY(-1px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
