@@ -15,7 +15,7 @@ try {
     const context = await browser.newContext({ viewport: { width, height: 900 } });
     // Browser-only cookie getter: fake auth never reaches the real server/proxy.
     await context.addInitScript(value => Object.defineProperty(document, 'cookie', { configurable: true, get: () => value, set: () => {} }), cookie);
-    const rows = Array.from({ length: 45 }, (_, index) => ({ id: `00000000-0000-4000-8000-${String(index+10).padStart(12,'0')}`, user_id:userId, actor_id:null, kind:'realm_notice',source:'realm',mascot:index%2?'aldren':'mara', title:`Raven number ${index+1}.`,body:'A message awaits you in the realm.',href:'/offline',source_label:null,context:index === 35 || index === 36 ? {groupKey:'fixture-conversation',groupCount:1} : {},created_at:new Date(Date.now()-index*1000-10000).toISOString(),read_at:null }));
+    const rows = Array.from({ length: 45 }, (_, index) => ({ id: `00000000-0000-4000-8000-${String(index+10).padStart(12,'0')}`, user_id:userId, actor_id:null, kind:'realm_notice',source:'realm',mascot:index%2?'aldren':'mara', title:`Raven number ${index+1}.`,body:'A message awaits you in the realm.',href:'/offline',source_label:null,context:index === 35 ? {groupKey:'fixture-conversation',groupCount:3} : index === 36 ? {groupKey:'fixture-conversation',groupCount:1} : index === 37 ? {groupKey:'legacy-bundle',groupCount:3} : {},created_at:new Date(Date.now()-index*1000-10000).toISOString(),read_at:null }));
     let patches = 0, failNext = false;
     await context.route('**/auth/v1/**', route => route.fulfill({ json:user }));
     await context.route('**/rest/v1/**', async route => {
@@ -44,6 +44,9 @@ try {
     assert.equal(page.url(),ledgerUrl,'opening a Personal Ravens group must not navigate away');
     await expect(groupedRavens.getByRole('link',{name:/Raven number 36\./})).toBeVisible();
     await expect(groupedRavens.getByRole('link',{name:/Raven number 37\./})).toBeVisible();
+    await expect(groupedRavens.locator('[class*="cardPortraitButton"]')).toHaveCount(0);
+    await expect(page.locator('details').filter({hasText:'3 fresh tidings'})).toHaveCount(0);
+    await expect(page.getByRole('link',{name:/Raven number 38\./})).toBeVisible();
     assert.equal(patches,0,'merely loading the ledger must not mark everything read');
     await expect(page.getByLabel('Unread',{exact:true})).toHaveCount(40);
     const sendClick = id => page.evaluate(async notificationId => {

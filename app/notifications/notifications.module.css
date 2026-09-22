@@ -386,3 +386,53 @@
   .activityReplyMarker{left:-22px;top:4px;margin-top:0}
   .groupedActivityItem .activityMessageRow{grid-template-columns:28px minmax(0,1fr)}
 }
+
+/* Personal Ravens cleanup: summaries count only rows that can actually be opened,
+   and expanded rows use one compact source/copy rail without repeating a mascot. */
+.groupedPersonalItem .groupedPersonalCard{
+  grid-template-columns:22px minmax(0,1fr);
+  column-gap:9px;
+  align-items:start;
+  min-height:0;
+  padding:10px 34px 10px 10px;
+}
+.groupedPersonalCard .cardSourceRail{grid-column:1;grid-row:1;margin:0}
+.groupedPersonalCard .cardContent{grid-column:2;grid-row:1;align-self:start;min-height:0}
+.groupedPersonalCard .cardTopline{gap:10px}
+.groupedPersonalCard .source{min-width:0}
+.groupedPersonalCard .cardCompactCopy{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;margin-top:5px}
+.groupedPersonalCard .cardCompactCopy .cardTitle{grid-column:1;min-width:0}
+.groupedPersonalCard .cardCompactCopy .cardBody{grid-column:1/-1;min-width:0}
+.groupedPersonalCard .cardCompactCopy .deliveredBy{grid-column:2;grid-row:1;align-self:end}
+.groupedPersonalCard .cardPreview{margin-top:5px}
+
+/* The detailed raven is the full record. It may scroll as a whole, but its copy
+   is never silently shortened with an ellipsis or line clamp. */
+.lightbox{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.lightbox h2,.lightboxBody,.lightboxContext,.previewMessage p{
+  display:block;
+  overflow:visible;
+  max-width:100%;
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:initial;
+  text-overflow:clip;
+}
+.previewContext{white-space:normal;overflow-wrap:anywhere;text-overflow:clip}
+.previewMessage p{overflow-wrap:anywhere}
+
+@media(max-width:600px){
+  .groupedPersonalItem .groupedPersonalCard{grid-template-columns:20px minmax(0,1fr);column-gap:8px;padding:9px 29px 9px 8px}
+  .groupedPersonalCard .cardCompactCopy{grid-template-columns:minmax(0,1fr);gap:3px}
+  .groupedPersonalCard .cardCompactCopy .cardTitle,
+  .groupedPersonalCard .cardCompactCopy .cardBody,
+  .groupedPersonalCard .cardCompactCopy .deliveredBy{grid-column:1;grid-row:auto}
+}
+
+@media(max-height:700px){
+  .lightbox h2,.lightboxBody,.lightboxContext,.previewMessage p{-webkit-line-clamp:unset}
+}
+
+@media(max-height:560px){
+  .lightboxBody{-webkit-line-clamp:unset}
+  .lightboxContext{display:block}
+}

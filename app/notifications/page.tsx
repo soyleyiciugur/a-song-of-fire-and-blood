@@ -62,11 +62,6 @@ function visualNotificationSource(source: NotificationSource): NotificationSourc
   return source === "guild-parley" ? "direct-raven" : source;
 }
 
-function notificationTidingsCount(item: SiteNotification) {
-  const value = Number(item.context?.groupCount ?? 1);
-  return Number.isFinite(value) && value > 1 ? Math.floor(value) : 1;
-}
-
 function personalGroupKey(item: SiteNotification) {
   const context = item.context ?? {};
   const explicit = typeof context.groupKey === "string" ? context.groupKey : null;
@@ -460,7 +455,7 @@ function Notifications() {
     const hasTarget = target !== "/notifications";
     const simplifiedNested = nested && Boolean(preview);
     return <li key={item.id} className={nested ? styles.groupedPersonalItem : undefined}>
-      <div className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""} ${!preview ? styles.cardPlain : ""} ${!hasTarget ? styles.cardNoTarget : ""} ${simplifiedNested ? styles.groupedReplyCard : ""}`}>
+      <div className={`${styles.card} ${!item.read_at ? styles.unreadCard : ""} ${!preview ? styles.cardPlain : ""} ${!hasTarget ? styles.cardNoTarget : ""} ${nested ? styles.groupedPersonalCard : ""} ${simplifiedNested ? styles.groupedReplyCard : ""}`}>
         {hasTarget && <Link
           className={styles.cardDestinationLink}
           href={target}
@@ -468,7 +463,7 @@ function Notifications() {
           onClick={() => { if (!item.read_at) void markRead(item.id); }}
         />}
         <span className={styles.cardSourceRail} aria-hidden="true"><NotificationSourceIcon source={visualNotificationSource(item.source)} size={13} /></span>
-        {!simplifiedNested && <button
+        {!nested && <button
           type="button"
           className={styles.cardPortraitButton}
           aria-label="Open raven preview"
@@ -565,10 +560,10 @@ function Notifications() {
     {userId && <section className={styles.personalLedger} aria-label="Personal raven notifications"><div className={styles.sectionHeading}><span>Personal ravens</span>{unreadCount > 0 && <button className={styles.markAll} type="button" disabled={markingAll || loading} onClick={() => void markRead()}>{markingAll ? "Sealing the ledger…" : "Let no raven go unheard"}</button>}</div>{readStatus && <p className={styles.readStatus} role="status">{readStatus}</p>}
       {!loading && !error && !items.length && <section className={styles.empty}><span aria-hidden="true">✦</span><h2>The rookery is quiet</h2><p>No personal tidings await you.</p></section>}
       {personalGroups.map(([label, buckets]) => <section className={styles.timeGroup} key={label} aria-label={label}><h2 className={styles.timeHeading}>{label}</h2><ol className={styles.feed}>{buckets.map((bucket) => {
-        if (bucket.items.length === 1 && notificationTidingsCount(bucket.items[0]) === 1) return renderPersonalCard(bucket.items[0]);
+        if (bucket.items.length === 1) return renderPersonalCard(bucket.items[0]);
         const latest = bucket.items[0];
         const unread = bucket.items.some((item) => !item.read_at);
-        const totalTidings = bucket.items.reduce((sum, item) => sum + notificationTidingsCount(item), 0);
+        const totalTidings = bucket.items.length;
         return <li key={bucket.key} className={styles.personalClusterItem}>
           <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""}`}>
             <summary>
@@ -580,7 +575,6 @@ function Notifications() {
               <span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span>
             </summary>
             <ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol>
-            {totalTidings > bucket.items.length && <p className={styles.legacyBundleNote}>This older bundle retained only its latest destination. New ravens keep every tiding separately.</p>}
           </details>
         </li>;
       })}</ol></section>)}

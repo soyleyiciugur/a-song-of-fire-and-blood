@@ -1588,8 +1588,7 @@ export default function InteractiveMap() {
               }
             />
 
-            {naturalSize && (
-              <svg
+            <svg
                 className={styles.regionOverlay}
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
@@ -1615,8 +1614,7 @@ export default function InteractiveMap() {
                     />
                   </g>
                 ))}
-              </svg>
-            )}
+            </svg>
 
             {selectedCharacterId &&
               naturalSize &&
