@@ -39,6 +39,7 @@
 
 /* Community profile polish */
 .affinityVisual video{width:100%;height:100%;object-fit:cover}.affinityMeta{display:block!important;margin-top:5px;color:#948575!important;font:10px/1.45 var(--font-geist)!important;letter-spacing:0!important;text-transform:none!important}
+.affinityVisual svg{width:28px;height:34px;fill:rgba(185,149,93,.08);stroke:currentColor;stroke-width:1.35}.affinityCard:focus-visible,.playedCharacterLink:focus-visible,.characterConnections a:focus-visible{outline:2px solid var(--profile-accent,#d7b66f);outline-offset:3px}.affinityCard>div:last-child{overflow:hidden}.affinityCard strong,.affinityMeta{overflow-wrap:anywhere}
 .card .actions>a,.card .actions button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:7px 13px;border:1px solid #755736;border-radius:8px;background:linear-gradient(145deg,#281b1e,#171214);color:#e1c29a!important;text-decoration:none;font:600 12px var(--font-geist);cursor:pointer}
 .friends{background:linear-gradient(150deg,#141113,#0e0d0e)}
 .friends h3{margin:18px 0 8px;color:#cdb895;font:600 16px var(--font-hotd)}
@@ -113,6 +114,7 @@
 .playedCharacterPortrait img{object-fit:cover;object-position:top center}
 .playedCharacterBody{min-width:0;padding:12px 0}.playedCharacterBody small{display:block;margin-bottom:5px;color:#8f8171;font:700 9px var(--font-geist);letter-spacing:.09em;text-transform:uppercase}.playedCharacterBody strong{display:block;color:#eadbc5;font:600 20px/1.2 var(--font-hotd);overflow-wrap:anywhere}.playedCharacterBody>span{display:block;margin-top:5px;color:#a99c8c;font:12px/1.45 var(--font-geist)}
 .playedCharacterArrow{color:#b99565;font-size:20px}.gmCharacter{background:radial-gradient(circle at 88% 20%,rgba(183,137,74,.10),transparent 35%),linear-gradient(145deg,#181214,#0e0e10)}
+.characterConnections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}.characterConnections a{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:38px;padding:7px 9px;border:1px solid #392f29;border-radius:8px;background:#0c0c0e;color:#cdb995!important;text-decoration:none;font:600 10px var(--font-geist);transition:border-color .15s,background .15s,color .15s}.characterConnections a:hover{border-color:#80623e;background:#151113;color:#ead8b9!important}.characterConnections svg{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .page[data-theme]:not([data-theme="default"]) .gmTag{border-color:var(--profile-border);color:var(--profile-accent-soft)}
 .page[data-theme]:not([data-theme="default"]) .playedCharacter{border-color:color-mix(in srgb,var(--profile-accent) 52%,#342d29);background:var(--profile-surface)}
 .page[data-theme]:not([data-theme="default"]) .playedCharacterLink{border-color:var(--profile-border-soft);background:var(--profile-surface-raised)}
@@ -121,8 +123,10 @@
 .page[data-theme]:not([data-theme="default"]) .playedCharacterBody strong{color:var(--profile-text)}
 .page[data-theme]:not([data-theme="default"]) .playedCharacterBody small,.page[data-theme]:not([data-theme="default"]) .playedCharacterBody>span{color:var(--profile-muted)}
 .page[data-theme]:not([data-theme="default"]) .playedCharacterArrow{color:var(--profile-accent-soft)}
+.page[data-theme]:not([data-theme="default"]) .characterConnections a{border-color:var(--profile-border-soft);background:var(--profile-surface-raised);color:var(--profile-accent-soft)!important}.page[data-theme]:not([data-theme="default"]) .characterConnections a:hover{border-color:var(--profile-accent)}
 .page[data-theme]:not([data-theme="default"]) .gameRecord{border-color:color-mix(in srgb,var(--profile-accent) 52%,#342d29);background:var(--profile-surface)}.page[data-theme]:not([data-theme="default"]) .gameStats{border-color:var(--profile-border-soft);background:var(--profile-border-soft)}.page[data-theme]:not([data-theme="default"]) .gameStats div{background:var(--profile-surface-raised)}.page[data-theme]:not([data-theme="default"]) .gameStats dt{color:var(--profile-muted)}.page[data-theme]:not([data-theme="default"]) .gameStats dd{color:var(--profile-text)}.page[data-theme]:not([data-theme="default"]) .gameRecord .sectionHeading a{color:var(--profile-accent-soft)}
 @media(max-width:540px){.playedCharacter{padding:16px}.playedCharacterLink{grid-template-columns:78px minmax(0,1fr) 20px;gap:11px}.playedCharacterPortrait{width:78px;height:98px}.playedCharacterBody strong{font-size:18px}.playedCharacterBody>span{font-size:11px}.playedCharacterArrow{font-size:17px;margin-right:7px}}
+@media(max-width:540px){.characterConnections{grid-template-columns:1fr}.characterConnections a{justify-content:flex-start;padding-inline:12px}.affinityCard{align-items:flex-start}.affinityVisual{flex-basis:48px;width:48px;height:48px}.sectionHeading{align-items:flex-start;gap:10px}}
 @media(max-width:540px){.gameRecord{padding:16px}.gameRecord .sectionHeading{align-items:flex-start;gap:10px}.gameStats{grid-template-columns:repeat(2,minmax(0,1fr))}.gameStats div{padding:12px}.gameStats dd{font-size:21px}.gameRow{align-items:flex-start}}
 
 /* Profile activity tabs stay visible as one compact four-cell strip on phones. */

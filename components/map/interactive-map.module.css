@@ -63,6 +63,39 @@
   user-select: none;
 }
 
+/* Image-coordinate regional context. This SVG lives inside mapWrapper, so it
+   receives the exact same translate/scale transform as the illustrated map. */
+.regionOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.regionBoundaryShadow,
+.regionBoundary {
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.regionBoundaryShadow {
+  fill: none;
+  stroke: rgba(9, 8, 7, 0.38);
+  stroke-width: 2.4px;
+}
+
+.regionBoundary {
+  fill: var(--region-color);
+  fill-opacity: 0.055;
+  stroke: color-mix(in srgb, var(--region-color) 58%, #d7c28b 42%);
+  stroke-opacity: 0.52;
+  stroke-width: 1px;
+}
+
 /* ---------- Trail ---------- */
 
 .trailSvg {

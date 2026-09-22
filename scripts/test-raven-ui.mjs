@@ -64,6 +64,17 @@ server.stdout.on('data',d=>logs+=d); server.stderr.on('data',d=>logs+=d);
     const dot=page.locator('[class*="notificationDot"]');
     if(await dot.count()) assert.equal(await dot.evaluate(el=>el.offsetParent===el.parentElement),true,'Notification dot is anchored to its own icon');
     const messageList=page.locator('[class*="messages"]').first();
+    await page.getByRole('button',{name:'Conversation options',exact:true}).click();
+    await page.getByRole('button',{name:'Search in conversation',exact:true}).click();
+    const conversationSearch=page.getByRole('searchbox',{name:'Search messages',exact:true});
+    await conversationSearch.fill('northern keep');
+    await page.getByText('Raven 59: A letter from the northern keep.',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Conversation search does not overflow');
+    await page.getByRole('button',{name:'Back to conversation',exact:true}).click();
+    await page.getByRole('button',{name:'Conversation options',exact:true}).click();
+    await page.getByRole('button',{name:'Shared in this conversation',exact:true}).click();
+    await page.getByText('Nothing has been shared in this conversation yet.',{exact:true}).waitFor();
+    await page.keyboard.press('Escape');
     for(const edge of ['top','bottom']) {
       await messageList.evaluate((el,edge)=>el.scrollTop=edge==='top'?0:el.scrollHeight,edge);
       await page.waitForTimeout(100);

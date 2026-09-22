@@ -6,6 +6,7 @@ import quotes from "@/data/quotes.json";
 import gallery from "@/data/gallery.json";
 import houses from "@/data/houses.json";
 import dragons from "@/data/dragons.json";
+import { getAllGameCards } from "@/lib/the-great-game/cards";
 
 export type AffinityOption = {
   id: string;
@@ -17,6 +18,10 @@ export type AffinityOption = {
   mediaType?: "image" | "video";
   chapterTitle?: string | null;
   context?: string | null;
+  cardId?: string;
+  cardType?: string;
+  tierId?: string;
+  houseId?: string;
 };
 export type AffinityField = { key: string; label: string; options: AffinityOption[] };
 
@@ -82,6 +87,22 @@ export function affinityCatalog(): AffinityField[] {
         chapterTitle: q.chapterTitle,
         context: q.note,
       })),
+    },
+    {
+      key: "tgg_card",
+      label: "Favorite TGG Card",
+      options: getAllGameCards()
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((card) => ({
+          id: card.id,
+          title: card.name,
+          href: `/cards/decks?card=${encodeURIComponent(card.id)}`,
+          cardId: card.id,
+          cardType: card.cardType,
+          tierId: card.tierId,
+          houseId: card.houseId,
+          portrait: card.cardType === "character" ? card.linkedCharacterId ?? card.id : undefined,
+        })),
     },
     { key: "meme", label: "Favorite Meme", options: memes },
     { key: "reel", label: "Favorite Reel", options: reels },

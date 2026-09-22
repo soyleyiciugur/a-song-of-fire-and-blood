@@ -13,6 +13,7 @@ import {
   getMapLocation,
 } from "@/data/map/locations";
 import { MAP_EVENTS } from "@/data/map/map-events";
+import { MAP_REGIONS } from "@/data/map/regions";
 import { getCharacterPositionsForChapter } from "@/data/map/character-positions";
 import {
   resolveCharacterPositionsInOrder,
@@ -1586,6 +1587,36 @@ export default function InteractiveMap() {
                 handleImageLoad
               }
             />
+
+            {naturalSize && (
+              <svg
+                className={styles.regionOverlay}
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <title>Regional boundaries of Westeros</title>
+                {MAP_REGIONS.map((region) => (
+                  <g
+                    key={region.id}
+                    style={
+                      {
+                        "--region-color": region.color,
+                      } as React.CSSProperties
+                    }
+                  >
+                    <path
+                      className={styles.regionBoundaryShadow}
+                      d={region.path}
+                    />
+                    <path
+                      className={styles.regionBoundary}
+                      d={region.path}
+                    />
+                  </g>
+                ))}
+              </svg>
+            )}
 
             {selectedCharacterId &&
               naturalSize &&

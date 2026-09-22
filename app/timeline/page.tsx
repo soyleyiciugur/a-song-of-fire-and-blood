@@ -1,7 +1,7 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\timeline\page.tsx
 "use client";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { timeline, getTimelineEventKind } from "@/data/timeline";
 import { getCharacter } from "@/lib/characters";
@@ -19,6 +19,12 @@ export default function Timeline() {
   const [query, setQuery] = useState("");
   const [kind, setKind] = useState("all");
   const [characterFilter, setCharacterFilter] = useState("all");
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("character");
+    if (!requested) return;
+    const timer = window.setTimeout(() => setCharacterFilter(requested), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
   const kinds = ["all", "conflict", "death", "politics", "family", "travel", "revelation"];
   const humanizeLabel = (value: string) => value.split(/[-_\s]+/).filter(Boolean).map((part) => part.charAt(0).toLocaleUpperCase("en-US") + part.slice(1)).join(" ");
   const characterOptions = Array.from(new Set(sortedTimeline.flatMap((chapter) => chapter.events.flatMap((event) => event.characters ?? []))))

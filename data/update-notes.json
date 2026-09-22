@@ -2,8 +2,10 @@
   {
     "date": "2026-09-22",
     "items": [
+      "Added map-aligned Great House regional boundaries to Westeros with restrained heraldic fills that remain synchronized through pan, zoom, and responsive resizing.",
       "Allowed members to sign in with either their username or email address.",
       "Added spoiler-aware chapter companions with cast links, mapped locations and routes, related Raven's Eye art, and direct chapter discussions.",
+      "Added spoiler-aware Dragon Appearances to dragon profiles and linked each chapter's physically present dragons from Chapter Companion.",
       "Corrected an archived discussion reply that used the wrong pronouns for Vhaemys Targaryen.",
       "Kept every Personal Raven as a separate ledger entry while grouping related tidings into expandable conversations, batching device alerts, and preventing dismissed notices from reopening.",
       "Added a hidden Q7 keyboard easter egg to The Measure of Fire's human scale reference.",
@@ -11,6 +13,8 @@
       "Corrected The Great Game's winner message for the defeated account and made background-tab card draws settle without leaving cards hidden or the table locked.",
       "Protected hidden information in online Great Game chronicles so opponents can see public plays and damage but never private card draws or hand-linked effects.",
       "Moved deployed-status markers from the right edge to the matching position on the left side of Great Game cards.",
+      "Expanded member profiles with a live card-catalog Favorite TGG Card affinity, polished responsive affinity states, and consistent links to played-character appearances, events and Inner Court records.",
+      "Aligned the profile Direct Raven action with the site's shared raven SVG language and added deep links that open the selected game card or character archive section directly.",
       "Expanded The Workbench into a compact grouped tool collection with culture-aware naming, kinship, chronology, nameday, travel, and Supabase-backed continuity instruments.",
       "Expanded Namesmith's canon-house suggestions from the complete regional catalogs and refined Workbench administration, kinship paths, eras, numeric fields, and nameday controls.",
       "Added a direct Inner Court shortcut to the account menu for members with an assigned character.",
@@ -30,7 +34,9 @@
       "Connected The Inner Court to character-owned Supabase records so assigned players can create, revise and resolve their character's chapter-aware thoughts without transferring history between accounts.",
       "Added custom Inner Court selectors, chapter and creation-date sorting, and persistent drag ordering for assigned players.",
       "Completed Inner Court drag-and-drop feedback with before-and-after placement previews, animated spacing and a restrained settling transition.",
-      "Standardized character relationships with separate overview and latest-development records, reciprocal editing, and matching detail views across the character archive and Web of Loyalties."
+      "Added combined character and chapter filters to Echoes of the Realm with a compact responsive archive toolbar.",
+      "Standardized character relationships with separate overview and latest-development records, reciprocal editing, and matching detail views across the character archive and Web of Loyalties.",
+      "Added conversation search, a shared-content archive, and a restrained raven wing-flap for incoming Direct Ravens."
     ]
   },
   {

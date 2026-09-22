@@ -8,6 +8,7 @@ import { getCharacter } from "@/lib/characters";
 import SigilImage from "@/components/SigilImage";
 import MiniPortrait from "@/components/MiniPortrait";
 import BestiaryTabs from "@/components/BestiaryTabs";
+import DragonAppearances from "@/components/dragon/DragonAppearances";
 
 import styles from "./dragon.module.css";
 
@@ -120,6 +121,8 @@ export default async function DragonPage({ params }: Props) {
             </div>
           </>
         )}
+
+        <DragonAppearances dragonId={dragon.id} />
 
         <Link href="/bestiary/dragons" className={styles.backLink}>
           ← Back to Dragons

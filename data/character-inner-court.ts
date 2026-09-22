@@ -29,7 +29,7 @@ export type PlayedCharacterAssignment = {
 export const playedCharacterAssignments: PlayedCharacterAssignment[] = [
   { characterId: "jacaelon-targaryen", playerUsername: "luck", playerProfileHref: "/users/luck" },
   { characterId: "visenor-targaryen", playerUsername: "ubeka", playerProfileHref: "/users/ubeka" },
-  { characterId: "gaelor-targaryen", playerUsername: "tay" },
+  { characterId: "gaelor-targaryen", playerUsername: "taylan", playerProfileHref: "/users/taylan" },
   { characterId: "hrrm", playerUsername: "hrrm", playerProfileHref: "/users/hrrm" },
 ];
 

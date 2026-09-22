@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import styles from "./characterProfileTabs.module.css";
 
 type TabId = "overview" | "appearances" | "quotes" | "chronology";
@@ -24,6 +24,12 @@ export default function CharacterProfileTabs({
   chronology: ReactNode;
 }) {
   const [active, setActive] = useState<TabId>("overview");
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("tab") as TabId | null;
+    if (!requested || !tabs.some((tab) => tab.id === requested)) return;
+    const timer = window.setTimeout(() => setActive(requested), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
   const panels: Record<TabId, ReactNode> = { overview, appearances, quotes, chronology };
 
   return (

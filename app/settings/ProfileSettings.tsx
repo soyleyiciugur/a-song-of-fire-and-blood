@@ -103,7 +103,7 @@ export default function ProfileSettings({ profile, affinityCatalog }: { profile:
   }
 
   const setChoice = (key: string, value: string) => setAffinity((current) => ({ ...current, [key]: value }));
-  const normalFields = ["character", "house", "dragon", "chapter"].map((key) => fields[key]).filter(Boolean);
+  const normalFields = ["character", "house", "dragon", "chapter", "tgg_card"].map((key) => fields[key]).filter(Boolean);
 
   return <>
     <form className={styles.form} onSubmit={e => { e.preventDefault(); void save(new FormData(e.currentTarget)); }}>

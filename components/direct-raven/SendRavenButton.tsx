@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import styles from "./direct-raven.module.css";
+import RavenIcon from "./RavenIcon";
 
 export default function SendRavenButton({ username, className = "" }: { username: string; className?: string }) {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function SendRavenButton({ username, className = "" }: { username
   return (
     <span className={`${styles.sendWrap} ${className}`.trim()}>
       <button type="button" className={styles.sendRavenButton} onClick={start} disabled={busy}>
-        <span aria-hidden="true">✦</span> {busy ? "Calling raven…" : "Send a Raven"}
+        <RavenIcon size={17} /> {busy ? "Calling raven…" : "Send a Raven"}
       </button>
       {error && <small className={styles.inlineError}>{error}</small>}
     </span>

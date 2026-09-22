@@ -1,9 +1,63 @@
 .toolbar {
+  margin: 0 0 20px;
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+  border-radius: 10px;
+  background: radial-gradient(circle at 18% 0%, rgb(201 162 39 / 5.5%), transparent 38%), linear-gradient(145deg, rgb(25 20 21 / 94%), rgb(10 9 11 / 96%));
+  box-shadow: inset 0 1px rgb(255 255 255 / 1.8%), 0 8px 24px rgb(0 0 0 / 16%);
+}
+.toolbarRow {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  min-width: 0;
+  min-height: 46px;
+  padding: 5px 7px;
+}
+.filterButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #b8a993;
+  cursor: pointer;
+  font: 600 11px/1 var(--font-geist);
+  letter-spacing: .045em;
+  transition: color .16s ease, border-color .16s ease, background .16s ease, transform .12s ease;
+}
+.filterButton svg { width: 17px; height: 17px; flex: none; }
+.filterButton:hover,
+.filterButtonActive {
+  color: #ecd4aa;
+  border-color: rgb(201 162 39 / 28%);
+  background: rgb(201 162 39 / 7%);
+}
+.filterButton:active { transform: scale(.96); }
+.filterBadge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border: 1px solid rgb(201 162 39 / 38%);
+  border-radius: 999px;
+  background: rgb(201 162 39 / 10%);
+  color: #e3c487;
+  font: 700 9px/1 var(--font-geist);
+}
+.toolbarRule {
+  flex: 1;
+  height: 1px;
+  margin: 0 10px;
+  background: linear-gradient(90deg, rgb(201 162 39 / 18%), rgb(201 162 39 / 4%) 72%, transparent);
+}
+.sortControl {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  margin: 0 0 20px;
+  min-width: 0;
 }
 .sortLabel {
   color: var(--muted);
@@ -13,6 +67,7 @@
 }
 .sortSelect {
   width: 154px;
+  flex: none;
 }
 .sortSelect :global(.te-select) { width: 100%; }
 .sortSelect :global(.te-select-trigger) {
@@ -31,4 +86,83 @@
   padding: 9px 11px;
   font-size: 12px;
 }
-@media (max-width: 600px) { .toolbar { justify-content: space-between; } .sortSelect { width: 150px; } }
+.filterPanel {
+  padding: 4px 10px 12px;
+  border-top: 1px solid rgb(201 162 39 / 12%);
+  animation: filterReveal .16s ease-out;
+}
+@keyframes filterReveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.filterPanelHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 38px;
+  padding: 5px 2px 7px;
+  color: #927f68;
+  font: 600 10px/1 var(--font-geist);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.filterPanelHeading button {
+  min-height: 28px;
+  padding: 5px 8px;
+  border: 1px solid rgb(201 162 39 / 22%);
+  border-radius: 6px;
+  background: rgb(201 162 39 / 3.5%);
+  color: #c9a969;
+  cursor: pointer;
+  font: 600 9px/1 var(--font-geist);
+  letter-spacing: .04em;
+  text-transform: none;
+}
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.filterGrid label { display: grid; min-width: 0; gap: 6px; }
+.filterGrid label > span {
+  padding-left: 2px;
+  color: #76695d;
+  font: 600 9px/1 var(--font-geist);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.filterGrid :global(.te-select) { width: 100%; min-width: 0; }
+.filterGrid :global(.te-select-trigger) {
+  min-height: 38px;
+  padding: 7px 9px;
+  border-color: rgb(201 162 39 / 22%);
+  border-radius: 7px;
+  background: linear-gradient(145deg, rgb(29 23 22 / 88%), rgb(13 12 14 / 92%));
+  font-size: 11px;
+}
+.filterGrid :global(.te-select-panel) {
+  z-index: 90;
+  border-color: rgb(201 162 39 / 32%);
+  background: #121014;
+}
+.filterGrid :global(.te-select-option) { padding: 8px 10px; font-size: 11px; }
+.emptyState {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 28px 18px;
+  border: 1px dashed color-mix(in srgb, var(--gold) 24%, var(--border));
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  text-align: center;
+  font: italic 14px/1.5 "House of the Dragon", serif;
+}
+@media (max-width: 600px) {
+  .toolbarRule { margin: 0 6px; }
+  .sortLabel { display: none; }
+  .sortSelect { width: 132px; }
+  .filterGrid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filterPanel { animation: none; }
+}

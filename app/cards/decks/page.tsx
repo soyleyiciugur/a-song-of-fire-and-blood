@@ -233,6 +233,13 @@ export default function DecksPage() {
   }, []);
 
   useEffect(() => {
+    const cardId = new URLSearchParams(window.location.search).get("card");
+    if (!cardId || !ALL.some((card) => card.id === cardId)) return;
+    const timer = window.setTimeout(() => setInspect(cardId), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     if (decks.length) localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
     else localStorage.removeItem(STORAGE_KEY);
   }, [decks]);

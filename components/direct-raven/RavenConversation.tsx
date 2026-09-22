@@ -70,6 +70,15 @@ const portraitCharacters: CharacterOption[] = [
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 type PickerTab = "emoji" | "portraits";
+type ConversationView = "search" | "shared" | null;
+
+function hasSharedContent(message: DirectRavenMessage) {
+  return Boolean(
+    message.attachment_path
+    || message.gif
+    || /\[\[(?:portrait|reel|media|page|comment):/i.test(message.body),
+  );
+}
 
 type Props = {
   conversationId: string;
@@ -130,6 +139,11 @@ export default function RavenConversation({
   const [newMessages, setNewMessages] = useState(false);
   const [guildInfoOpen, setGuildInfoOpen] = useState(false);
   const [attachmentMenuOpen, setAttachmentMenuOpen] = useState(false);
+  const [conversationView, setConversationView] = useState<ConversationView>(null);
+  const [conversationSearch, setConversationSearch] = useState("");
+  const [archiveMessages, setArchiveMessages] = useState<DirectRavenMessage[] | null>(null);
+  const [archiveLoading, setArchiveLoading] = useState(false);
+  const [archiveError, setArchiveError] = useState("");
 
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -137,6 +151,7 @@ export default function RavenConversation({
   const attachmentMenuRef = useRef<HTMLDivElement>(null);
   const pickerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const conversationSearchRef = useRef<HTMLInputElement>(null);
   const swipeRef = useRef<{ id: string; startX: number; startY: number; lastX: number; row: HTMLDivElement; horizontal: boolean } | null>(null);
   const nearBottom = useRef(false);
   const loadedMessages = useRef(messages);
@@ -179,6 +194,60 @@ export default function RavenConversation({
       (character) => character.name.toLowerCase().includes(query) || character.id.includes(query)
     );
   }, [portraitSearch]);
+  const searchableMessages = useMemo(() => {
+    const map = new Map<string, DirectRavenMessage>();
+    for (const message of [...(archiveMessages ?? []), ...messages]) map.set(message.id, message);
+    return [...map.values()].sort((a, b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id));
+  }, [archiveMessages, messages]);
+  const searchResults = useMemo(() => {
+    const query = conversationSearch.trim().toLocaleLowerCase();
+    if (!query) return [];
+    return searchableMessages.filter((message) => !message.deleted_at && ravenBodySummary(message.body).toLocaleLowerCase().includes(query));
+  }, [conversationSearch, searchableMessages]);
+  const sharedMessages = useMemo(() => searchableMessages.filter((message) => !message.deleted_at && hasSharedContent(message)), [searchableMessages]);
+
+  async function loadConversationArchive() {
+    if (archiveMessages || archiveLoading) return;
+    setArchiveLoading(true);
+    setArchiveError("");
+    const collected: DirectRavenMessage[] = [];
+    const pageSize = 500;
+    let from = 0;
+    while (true) {
+      const { data, error: loadError } = await supabase
+        .from("direct_raven_messages")
+        .select("*")
+        .eq("conversation_id", conversationId)
+        .order("created_at", { ascending: false })
+        .range(from, from + pageSize - 1);
+      if (loadError) {
+        setArchiveError("The rookery could not open the full conversation archive.");
+        break;
+      }
+      const page = (data ?? []) as DirectRavenMessage[];
+      collected.push(...page);
+      if (page.length < pageSize) break;
+      from += pageSize;
+    }
+    setArchiveMessages(collected);
+    setArchiveLoading(false);
+  }
+
+  function openConversationView(view: Exclude<ConversationView, null>) {
+    setMenuOpen(false);
+    setConversationView(view);
+    void loadConversationArchive();
+  }
+
+  function closeConversationView() {
+    setConversationView(null);
+    setConversationSearch("");
+  }
+
+  useEffect(() => {
+    if (conversationView !== "search") return;
+    requestAnimationFrame(() => conversationSearchRef.current?.focus({ preventScroll: true }));
+  }, [conversationView]);
 
   useLayoutEffect(() => {
     const menu = actionMenuRef.current;
@@ -368,6 +437,8 @@ export default function RavenConversation({
     };
     const closeWithEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        setConversationView(null);
+        setConversationSearch("");
         setMenuOpen(false);
         setActionMenuId(null);
         setPickerOpen(false);
@@ -996,6 +1067,8 @@ export default function RavenConversation({
           <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
           {menuOpen && (
             <div className={styles.threadMenu}>
+              <button type="button" onClick={() => openConversationView("search")}>Search in conversation</button>
+              <button type="button" onClick={() => openConversationView("shared")}>Shared in this conversation</button>
               {isGuild ? (
                 <button type="button" onClick={() => { setMenuOpen(false); setGuildInfoOpen(true); }}>Guild info</button>
               ) : (
@@ -1008,6 +1081,45 @@ export default function RavenConversation({
 
       {isGuild && (
         <GuildParleyInfo open={guildInfoOpen} onClose={() => setGuildInfoOpen(false)} conversation={activeConversation} members={members} memberships={memberships} userId={userId} />
+      )}
+
+      {conversationView && (
+        <div className={styles.conversationViewBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) closeConversationView(); }}>
+          <aside className={styles.conversationView} role="dialog" aria-modal="true" aria-label={conversationView === "search" ? "Search in conversation" : "Shared in this conversation"}>
+            <div className={styles.conversationViewHeader}>
+              <button type="button" className={styles.backInfoButton} aria-label="Back to conversation" onClick={closeConversationView}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
+              <span><small>{isGuild ? "Guild Parley" : "Direct Raven"}</small><b>{conversationView === "search" ? "Search in Conversation" : "Shared in this Conversation"}</b></span>
+              <button type="button" className={styles.iconClose} aria-label="Close" onClick={closeConversationView}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round"/></svg></button>
+            </div>
+            {conversationView === "search" && (
+              <label className={styles.conversationSearchBox}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4 4"/></svg>
+                <input ref={conversationSearchRef} type="search" value={conversationSearch} onChange={(event) => setConversationSearch(event.target.value)} placeholder="Search ravens…" aria-label="Search messages" />
+                {conversationSearch && <button type="button" aria-label="Clear search" onClick={() => { setConversationSearch(""); conversationSearchRef.current?.focus(); }}>×</button>}
+              </label>
+            )}
+            <div className={styles.conversationViewBody}>
+              {archiveLoading && <div className={styles.conversationViewEmpty}><RavenIcon size={28}/><p>Unrolling earlier ravens…</p></div>}
+              {!archiveLoading && archiveError && <p className={styles.conversationViewError} role="alert">{archiveError}</p>}
+              {conversationView === "search" && !archiveLoading && !conversationSearch.trim() && <div className={styles.conversationViewEmpty}><span aria-hidden="true">⌕</span><p>Search the words carried in this conversation.</p></div>}
+              {conversationView === "search" && !archiveLoading && conversationSearch.trim() && searchResults.length === 0 && <div className={styles.conversationViewEmpty}><RavenIcon size={28}/><p>No ravens matched “{conversationSearch.trim()}”.</p></div>}
+              {conversationView === "search" && searchResults.map((message) => {
+                const sender = message.sender_id === userId ? "You" : memberMap.get(message.sender_id)?.display_name ?? partner?.display_name ?? "Member";
+                return <button key={message.id} type="button" className={styles.conversationSearchResult} onClick={() => { closeConversationView(); requestAnimationFrame(() => void jumpToMessage(message.id)); }}><span><b>{sender}</b><time dateTime={message.created_at}>{day(message.created_at)} · {time(message.created_at)}</time></span><p>{ravenBodySummary(message.body)}</p></button>;
+              })}
+              {conversationView === "shared" && !archiveLoading && sharedMessages.length === 0 && <div className={styles.conversationViewEmpty}><RavenIcon size={28}/><p>Nothing has been shared in this conversation yet.</p></div>}
+              {conversationView === "shared" && sharedMessages.map((message) => {
+                const sender = message.sender_id === userId ? "You" : memberMap.get(message.sender_id)?.display_name ?? partner?.display_name ?? "Member";
+                return <article key={message.id} className={styles.sharedConversationItem}>
+                  <button type="button" className={styles.sharedConversationMeta} onClick={() => { closeConversationView(); requestAnimationFrame(() => void jumpToMessage(message.id)); }}><b>{sender}</b><time dateTime={message.created_at}>{day(message.created_at)} · {time(message.created_at)}</time></button>
+                  {message.attachment_path && <RavenAttachment path={message.attachment_path} />}
+                  {message.gif && /^https:\/\/media[0-9]*\.giphy\.com\/media\//.test(message.gif.url) && <div className={styles.attachment}><img src={message.gif.url} alt={message.gif.title || "Shared GIF"}/><small>GIPHY</small></div>}
+                  {/\[\[(?:portrait|reel|media|page|comment):/i.test(message.body) && <RavenMessageContent body={message.body} returnTo={`/messages/${conversationId}?focus=${message.id}`} />}
+                </article>;
+              })}
+            </div>
+          </aside>
+        </div>
       )}
 
       <div

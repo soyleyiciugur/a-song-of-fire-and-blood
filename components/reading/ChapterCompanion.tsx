@@ -9,6 +9,7 @@ import forumData from "@/data/forum.json";
 import galleryData from "@/data/gallery.json";
 import characterPositionsData from "@/data/map/character-positions.json";
 import { timeline } from "@/data/timeline";
+import { getChapterDragonAppearances } from "@/data/dragon-appearances";
 import styles from "./chapterCompanion.module.css";
 
 type CharacterRow = { id: string; name: string; hidden?: boolean };
@@ -52,6 +53,8 @@ export default function ChapterCompanion({ chapterSlug }: { chapterSlug: string 
   });
   const art = (galleryData as GalleryRow[]).filter((entry) => entry.chapterId === chapterSlug);
   const discussion = (forumData.threads as ForumThread[]).find((thread) => thread.chapterSlug === chapterSlug);
+  const dragonAppearances = getChapterDragonAppearances(chapterSlug);
+  const chapterDragons = [...new Map(dragonAppearances.map((appearance) => [appearance.dragonId, appearance])).values()];
   const revealed = canReveal(chapterSlug);
 
   return (
@@ -76,6 +79,10 @@ export default function ChapterCompanion({ chapterSlug }: { chapterSlug: string 
             {cast.length ? <ul className={styles.castList}>{cast.map((character) => (
               <li key={character.id}><Link href={`/characters/${character.id}`}><MiniPortrait id={character.id} alt="" size={42} /><span>{character.name}</span><b aria-hidden="true">›</b></Link></li>
             ))}</ul> : <p className={styles.empty}>No cast appearances have been recorded for this chapter yet.</p>}
+            {chapterDragons.length > 0 && <div className={styles.chapterDragons}><small>Dragons in this chapter</small><div>{chapterDragons.map((dragon) => {
+              const sceneCount = dragonAppearances.filter((item) => item.dragonId === dragon.dragonId).length;
+              return <Link key={dragon.dragonId} href={`/dragons/${dragon.dragonId}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15c4-1 6-4 7-9 2 3 5 5 9 5-2 2-3 4-3 7-3-2-6-2-9 0 0-2-1-3-4-3Z" /></svg><span>{dragon.dragonName}</span><b>{sceneCount} {sceneCount === 1 ? "scene" : "scenes"}</b></Link>;
+            })}</div></div>}
           </section>
 
           <section className={styles.panel}>

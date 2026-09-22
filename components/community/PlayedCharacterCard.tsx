@@ -57,6 +57,11 @@ export default function PlayedCharacterCard({
         </span>
         <span className={styles.playedCharacterArrow} aria-hidden="true">→</span>
       </Link>
+      <nav className={styles.characterConnections} aria-label={`${character.name} profile connections`}>
+        <Link href={`/characters/${character.id}?tab=appearances`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5" /></svg>Appearances</Link>
+        <Link href={`/timeline?character=${character.id}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14M9 7h10M9 12h7M9 17h9" /></svg>Events</Link>
+        <Link href={`/characters/${character.id}/thoughts`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5c2.5-1.2 5.2-1.8 8-1.8s5.5.6 8 1.8M7 14V8l5-4 5 4v6M9.5 14v-3.5h5V14" /></svg>Inner Court</Link>
+      </nav>
     </section>
   );
 }
