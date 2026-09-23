@@ -5,6 +5,9 @@
 .realm-section-tabs.realm-section-tabs a:hover,.realm-section-tabs.realm-section-tabs a[aria-current="page"] { color:var(--gold); border-color:var(--gold); background:rgba(201,162,39,.08); }
 .realm-section-tabs.realm-section-tabs a:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
 
+/* Anchor sibling-page titles and switchers independently of their content width. */
+.realm-section-header { position:relative; left:50%; width:min(1050px,calc(100vw - 48px)); transform:translateX(-50%); }
+
 /* Shared geometry for real in-page tab controls. Page themes still own their
    colours, borders and active treatments; this only prevents state changes
    from changing the control box or alignment. */
@@ -13,6 +16,7 @@
 :where([role="tablist"]) > :where([role="tab"]):focus-visible { outline:2px solid var(--gold); outline-offset:-3px; }
 
 @media (max-width:640px) {
+  .realm-section-header { width:calc(100vw - 32px); }
   .realm-section-tabs.realm-section-tabs { flex-wrap:nowrap; max-width:100%; margin:20px 0 24px; padding-bottom:10px; overflow-x:auto; overscroll-behavior-inline:contain; scrollbar-width:none; }
   .realm-section-tabs.realm-section-tabs::-webkit-scrollbar { display:none; }
   :where([role="tablist"]) { max-width:100%; overscroll-behavior-inline:contain; scrollbar-width:none; }

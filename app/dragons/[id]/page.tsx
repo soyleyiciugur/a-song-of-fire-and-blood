@@ -34,7 +34,7 @@ export default async function DragonPage({ params }: Props) {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <BestiaryTabs active="dragons" />
+        <div className="realm-section-header"><BestiaryTabs active="dragons" /></div>
 
         <div className={styles.header}>
           <SigilImage

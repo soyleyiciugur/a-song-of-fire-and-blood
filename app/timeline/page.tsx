@@ -48,6 +48,7 @@ export default function Timeline() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <div className="realm-section-header">
         <h1 className={`${styles.heading} realm-page-title`}>Timeline</h1>
 
         <p className={styles.subheading}>
@@ -55,6 +56,7 @@ export default function Timeline() {
         </p>
 
         <ChronicleTabs active="timeline" className={styles.tabs} activeClassName={styles.activeTab} />
+        </div>
 
         <div className={styles.filters}>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the timeline…" aria-label="Search timeline" />

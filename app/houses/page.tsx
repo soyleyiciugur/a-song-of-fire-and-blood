@@ -13,18 +13,20 @@ export default function Houses() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <div className="realm-section-header">
         <h1 className={`${styles.heading} realm-page-title`}>Houses</h1>
+
+        <p className={styles.subheading}>
+          The great and lesser houses whose banners, words, and blood shape
+          the realm.
+        </p>
 
         <nav className="realm-section-tabs" aria-label="House sections">
           <Link aria-current="page" href="/houses">Houses</Link>
           <Link href="/houses/house-of-the-dragon">House of the Dragon</Link>
           <Link href="/succession">Succession</Link>
         </nav>
-
-        <p className={styles.subheading}>
-          The great and lesser houses whose banners, words, and blood shape
-          the realm.
-        </p>
+        </div>
 
         <div className={styles.grid}>
           {[...houses]

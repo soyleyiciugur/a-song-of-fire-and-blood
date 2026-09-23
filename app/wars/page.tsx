@@ -23,10 +23,12 @@ export default function BloodshedPage() {
   const relatedChapter = useMemo(() => selected ? timeline.find((chapter) => chapter.chapterSlug === selected.chapterSlug) : null, [selected]);
 
   return <main className={styles.page}><div className={styles.container}>
+    <div className="realm-section-header">
     <p className={styles.eyebrow}>Wars · Duels · Tourneys</p>
     <h1 className={`${styles.heading} realm-page-title`}>The Bloodshed</h1>
     <p className={styles.subheading}>The battles, trials, and contests that left their mark upon the realm.</p>
     <ChronicleTabs active="bloodshed" className={styles.tabs} activeClassName={styles.activeTab} />
+    </div>
     <div className={styles.intro}><span className={styles.introMark}>⚔</span><p>Every victory has a cost. Every peace remembers the blade.</p></div>
     <div className={styles.contentGrid}>
       <section className={styles.list} aria-label="Bloodshed events">{entries.map((event) => <article key={event.id} className={`${styles.event} ${selectedId === event.id ? styles.eventSelected : ""}`} onClick={() => setSelectedId(event.id)}>

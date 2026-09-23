@@ -23,10 +23,12 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
   const upcoming = getUpcomingEvents(worldDate, 10);
 
   return <main className={chronicle.page}><div className={styles.container}>
+    <div className="realm-section-header">
     <p className={chronicle.eyebrow}>Twelve moons. Thirty days. The history of a realm.</p>
     <h1 className="realm-page-title">Calendar</h1>
     <p className={chronicle.lead}>Namedays, gatherings, and the days that shaped the Seven Kingdoms.</p>
     <ChronicleTabs active="calendar" className={chronicle.tabs} activeClassName={chronicle.activeTab} />
+    </div>
     <div className={styles.layout}>
       <RealmCalendar key={`${date.year}-${date.moon}-${date.day}`} today={worldDate} initialDate={date} events={getCalendarEvents()} />
       <aside className={styles.upcoming} aria-label="Upcoming namedays and events">

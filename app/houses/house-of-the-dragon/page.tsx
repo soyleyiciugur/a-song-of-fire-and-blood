@@ -15,12 +15,7 @@ export default async function HouseOfTheDragonPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <nav className="realm-section-tabs" aria-label="House sections">
-          <Link href="/houses">Houses</Link>
-          <Link aria-current="page" href="/houses/house-of-the-dragon">House of the Dragon</Link>
-          <Link href="/succession">Succession</Link>
-        </nav>
-
+        <div className="realm-section-header">
         <header className={styles.hero}>
           <Image
             src="/images/houses/targaryen.webp"
@@ -38,6 +33,13 @@ export default async function HouseOfTheDragonPage() {
             The blood of the dragon from Aegon the Conqueror to the present royal court. The golden spine follows the kingship line to Baelenys; crowned cards mark those who have sat the Iron Throne.
           </p>
         </header>
+
+        <nav className="realm-section-tabs" aria-label="House sections">
+          <Link href="/houses">Houses</Link>
+          <Link aria-current="page" href="/houses/house-of-the-dragon">House of the Dragon</Link>
+          <Link href="/succession">Succession</Link>
+        </nav>
+        </div>
 
         <HouseOfDragonTree initialTree={tree} canEdit={canEdit} />
       </div>

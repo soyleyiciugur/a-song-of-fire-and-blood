@@ -13,10 +13,12 @@ export default function ChroniclePage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <div className="realm-section-header">
         <p className={styles.eyebrow}>The Historical Record</p>
         <h1 className="realm-page-title">The Chronicle</h1>
         <p className={styles.lead}>The turning points, secrets, and reckonings of the realm.</p>
         <ChronicleTabs active="annals" className={styles.tabs} activeClassName={styles.activeTab} />
+        </div>
         <h2 className={styles.sectionTitle}>Annals</h2>
         <div className={styles.grid}>
           {annalEvents.map((event) => {

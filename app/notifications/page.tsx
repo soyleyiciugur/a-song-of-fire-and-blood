@@ -406,6 +406,16 @@ function Notifications() {
   }, [community.users]);
   const commentsById = useMemo(() => new Map(community.comments.map((comment) => [comment.id, comment])), [community.comments]);
   const threadsById = useMemo(() => new Map(community.forumThreads.map((thread) => [thread.id, thread])), [community.forumThreads]);
+  const resolvedSourceLabel = useCallback((item: SiteNotification) => {
+    const context = item.context ?? {};
+    const threadTitle = typeof context.threadTitle === "string" && context.threadTitle.trim() ? context.threadTitle.trim() : null;
+    const threadId = typeof context.threadId === "string" ? context.threadId : null;
+    const resolvedThreadTitle = threadId ? threadsById.get(threadId)?.title ?? null : null;
+    const entryTitle = typeof context.entryTitle === "string" && context.entryTitle.trim() ? context.entryTitle.trim() : null;
+    const stored = item.source_label?.trim() || null;
+    if (item.source === "tavern" && (!stored || stored === "Tavern discussion")) return threadTitle ?? resolvedThreadTitle ?? stored;
+    return threadTitle ?? entryTitle ?? stored;
+  }, [threadsById]);
   const allComments = useMemo(() => community.comments.map((comment, order) => ({ comment, order })).sort((a, b) => Date.parse(b.comment.publishedAt) - Date.parse(a.comment.publishedAt) || b.order - a.order).map(({ comment }) => comment).filter((comment) => comment.authorId !== userId), [community.comments, userId]);
   const forYou = useMemo(() => userId ? allComments.filter((comment) => { const parent = comment.parentId ? commentsById.get(comment.parentId) : null; if (parent?.authorId === userId) return true; if (comment.surface === "forum" && threadsById.get(comment.entryId)?.authorId === userId) return true; return false; }) : [], [allComments, commentsById, threadsById, userId]);
   const activityComments = activityFilter === "for-you" && userId ? forYou : allComments;
@@ -429,10 +439,7 @@ function Notifications() {
     const parentAuthorId = typeof context.parentAuthorId === "string" ? context.parentAuthorId : parentComment?.authorId ?? null;
     const parentAuthor = parentAuthorId ? users.get(parentAuthorId) ?? null : null;
     const parentUsername = parentAuthor?.username ?? null;
-    const contextTitle =
-      typeof context.threadTitle === "string" ? context.threadTitle
-      : typeof context.entryTitle === "string" ? context.entryTitle
-      : item.source_label;
+    const contextTitle = resolvedSourceLabel(item);
     const actorUser = actor ?? actorByKnownName ?? null;
     const actorAvatarUrl = typeof context.actorAvatarUrl === "string" && context.actorAvatarUrl ? context.actorAvatarUrl : actorUser?.avatarUrl ?? null;
 
@@ -448,7 +455,7 @@ function Notifications() {
       actorAvatarUrl,
       actorUsername,
     };
-  }, [commentsById, userId, users, usersByKnownName]);
+  }, [commentsById, resolvedSourceLabel, userId, users, usersByKnownName]);
 
   const activePreview = useMemo(() => activeNotification ? previewForNotification(activeNotification) : null, [activeNotification, previewForNotification]);
 
@@ -509,7 +516,7 @@ function Notifications() {
           <PersonalNotificationPortrait item={item} size={nested ? 44 : 52} />
         </button>}
         <span className={styles.cardContent}>
-          <span className={styles.cardTopline}><span className={styles.source}><b>{notificationSourceLabel(item.source)}</b>{item.source_label && <em>· {item.source_label}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
+          <span className={styles.cardTopline}><span className={styles.source}><b>{notificationSourceLabel(item.source)}</b>{resolvedSourceLabel(item) && <em>· {resolvedSourceLabel(item)}</em>}</span><time dateTime={item.created_at}>{ageLabel(item.created_at)}</time></span>
           {simplifiedNested ? renderInlinePreview(item, preview, true) : <>
             <span className={styles.cardCompactCopy}><strong className={styles.cardTitle}>{item.title}</strong><span className={styles.cardBody}>{item.body}</span><span className={styles.deliveredBy}>— {MASCOT_META[item.mascot].name}</span></span>
             {renderInlinePreview(item, preview)}
@@ -602,16 +609,19 @@ function Notifications() {
         const unread = bucket.items.some((item) => !item.read_at);
         const totalTidings = bucket.items.length;
         const messageSenders = latest.source === "direct-raven" ? directRavenSenders(bucket.items) : [];
+        const isMessageCluster = latest.source === "direct-raven" || latest.source === "guild-parley";
         const clusterTitle = messageSenders.length ? `New messages from ${joinedNames(messageSenders)}` : latest.title;
-        const clusterBody = messageSenders.length ? `${totalTidings} new ${totalTidings === 1 ? "message" : "messages"} across ${messageSenders.length} ${messageSenders.length === 1 ? "conversation" : "conversations"}.` : `${totalTidings} fresh ${totalTidings === 1 ? "tiding" : "tidings"} · ${latest.body}`;
+        const clusterBody = isMessageCluster
+          ? `${totalTidings} new ${totalTidings === 1 ? "message" : "messages"}${messageSenders.length ? ` from ${joinedNames(messageSenders)}` : ""}.`
+          : `${totalTidings} fresh ${totalTidings === 1 ? "tiding" : "tidings"} · ${latest.body}`;
         return <li key={bucket.key} className={styles.personalClusterItem}>
-          <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""} ${messageSenders.length ? styles.personalMessageCluster : ""}`}>
+          <details className={`${styles.personalCluster} ${unread ? styles.personalClusterUnread : ""} ${isMessageCluster ? styles.personalMessageCluster : ""}`}>
             <summary>
               <span className={styles.clusterSourceRail} aria-hidden="true"><NotificationSourceIcon source={visualNotificationSource(latest.source)} size={13} /></span>
               <span className={styles.clusterPortraitStatic} aria-hidden="true">
                 <PersonalNotificationPortrait item={latest} size={44} />
               </span>
-              <span className={styles.personalClusterIdentity}><span className={styles.clusterSourceLine}><b>{notificationSourceLabel(latest.source)}</b>{!messageSenders.length && latest.source_label && <em>· {latest.source_label}</em>}</span><strong>{clusterTitle}</strong><small>{clusterBody}</small></span>
+              <span className={styles.personalClusterIdentity}><span className={styles.clusterSourceLine}><b>{notificationSourceLabel(latest.source)}</b>{!messageSenders.length && resolvedSourceLabel(latest) && <em>· {resolvedSourceLabel(latest)}</em>}</span><strong>{clusterTitle}</strong><small>{clusterBody}</small></span>
               <span className={styles.personalClusterMeta}><time dateTime={latest.created_at}>{ageLabel(latest.created_at)}</time><span className={styles.clusterChevron} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" /></svg></span></span>
             </summary>
             <ol className={styles.personalClusterFeed}>{bucket.items.map((item) => renderPersonalCard(item, true))}</ol>

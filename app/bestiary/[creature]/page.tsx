@@ -5,5 +5,5 @@ export default async function CreaturePage({ params }: { params: Promise<{ creat
   const { creature } = await params;
   const beast = beastTypes.find((type) => type.id === creature);
   if (!beast) notFound();
-  return <main className={styles.page}><div className={styles.container}><p className={styles.eyebrow}>The Bestiary</p><h1 className="realm-page-title">{beast.name}</h1><p className={styles.lead}>{beast.description}</p><BestiaryTabs active={creature}/><section className={styles.panel}><h2>The record is unwritten</h2><p>No {beast.name.toLowerCase()} have been recorded here yet.</p></section><BackToBestiary /></div></main>;
+  return <main className={styles.page}><div className={styles.container}><div className="realm-section-header"><p className={styles.eyebrow}>The Bestiary</p><h1 className="realm-page-title">{beast.name}</h1><p className={styles.lead}>{beast.description}</p><BestiaryTabs active={creature}/></div><section className={styles.panel}><h2>The record is unwritten</h2><p>No {beast.name.toLowerCase()} have been recorded here yet.</p></section><BackToBestiary /></div></main>;
 }

@@ -405,6 +405,16 @@
 .groupedPersonalCard .cardCompactCopy .cardBody{grid-column:1/-1;min-width:0}
 .groupedPersonalCard .cardCompactCopy .deliveredBy{grid-column:2;grid-row:1;align-self:end}
 .groupedPersonalCard .cardPreview{margin-top:5px}
+.cardCompactCopy{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:baseline;
+  gap:3px 8px;
+  width:100%;
+}
+.cardCompactCopy .cardTitle{grid-column:1;min-width:0;text-align:left}
+.cardCompactCopy .cardBody{grid-column:1/-1;width:100%;text-align:left}
+.cardCompactCopy .deliveredBy{grid-column:2;grid-row:1;align-self:end;text-align:right}
 .personalMessageCluster .personalClusterIdentity>strong{
   display:-webkit-box;
   overflow:hidden;
@@ -434,6 +444,9 @@
   .groupedPersonalCard .cardCompactCopy .cardTitle,
   .groupedPersonalCard .cardCompactCopy .cardBody,
   .groupedPersonalCard .cardCompactCopy .deliveredBy{grid-column:1;grid-row:auto}
+  .cardCompactCopy{grid-template-columns:minmax(0,1fr)}
+  .cardCompactCopy .cardTitle,.cardCompactCopy .cardBody,.cardCompactCopy .deliveredBy{grid-column:1;grid-row:auto}
+  .cardCompactCopy .deliveredBy{text-align:left}
 }
 
 @media(max-height:700px){

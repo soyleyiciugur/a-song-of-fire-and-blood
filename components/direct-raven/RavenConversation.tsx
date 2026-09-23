@@ -72,13 +72,22 @@ const portraitCharacters: CharacterOption[] = [
 
 type PickerTab = "emoji" | "portraits";
 type ConversationView = "search" | "shared" | null;
+type SharedCategory = "images" | "reels" | "links";
+
+const sharedCategoryDetails: Record<SharedCategory, { label: string }> = {
+  images: { label: "Images" },
+  reels: { label: "Reels" },
+  links: { label: "Links" },
+};
+
+function isInSharedCategory(message: DirectRavenMessage, category: SharedCategory) {
+  if (category === "images") return Boolean(message.attachment_path || message.gif || /\[\[media:/i.test(message.body));
+  if (category === "reels") return /\[\[reel:/i.test(message.body);
+  return /\[\[(?:page|comment):/i.test(message.body);
+}
 
 function hasSharedContent(message: DirectRavenMessage) {
-  return Boolean(
-    message.attachment_path
-    || message.gif
-    || /\[\[(?:portrait|reel|media|page|comment):/i.test(message.body),
-  );
+  return (["images", "reels", "links"] as SharedCategory[]).some((category) => isInSharedCategory(message, category));
 }
 
 type Props = {
@@ -141,6 +150,7 @@ export default function RavenConversation({
   const [guildInfoOpen, setGuildInfoOpen] = useState(false);
   const [attachmentMenuOpen, setAttachmentMenuOpen] = useState(false);
   const [conversationView, setConversationView] = useState<ConversationView>(null);
+  const [sharedCategory, setSharedCategory] = useState<SharedCategory>("images");
   const [conversationSearch, setConversationSearch] = useState("");
   const [archiveMessages, setArchiveMessages] = useState<DirectRavenMessage[] | null>(null);
   const [archiveLoading, setArchiveLoading] = useState(false);
@@ -206,6 +216,10 @@ export default function RavenConversation({
     return searchableMessages.filter((message) => !message.deleted_at && ravenBodySummary(message.body).toLocaleLowerCase().includes(query));
   }, [conversationSearch, searchableMessages]);
   const sharedMessages = useMemo(() => searchableMessages.filter((message) => !message.deleted_at && hasSharedContent(message)), [searchableMessages]);
+  const sharedCategories = useMemo(() => (["images", "reels", "links"] as SharedCategory[])
+    .filter((category) => sharedMessages.some((message) => isInSharedCategory(message, category))), [sharedMessages]);
+  const activeSharedCategory = sharedCategories.includes(sharedCategory) ? sharedCategory : sharedCategories[0] ?? "images";
+  const activeSharedMessages = useMemo(() => sharedMessages.filter((message) => isInSharedCategory(message, activeSharedCategory)), [activeSharedCategory, sharedMessages]);
 
   async function loadConversationArchive() {
     if (archiveMessages || archiveLoading) return;
@@ -1065,19 +1079,14 @@ export default function RavenConversation({
             <span><b>{partner.display_name}</b><small>@{partner.username}</small></span>
           </Link>
         ) : null}
-        <div className={styles.threadMenuWrap} ref={menuRef}>
-          <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
-          {menuOpen && (
-            <div className={styles.threadMenu}>
-              <button type="button" onClick={() => openConversationView("search")}><UtilityIcon name="search" size={18} /><span>Search in conversation</span></button>
-              <button type="button" onClick={() => openConversationView("shared")}><UtilityIcon name="shared" size={18} /><span>Shared in this conversation</span></button>
-              {isGuild ? (
-                <button type="button" onClick={() => { setMenuOpen(false); setGuildInfoOpen(true); }}><UtilityIcon name="info" size={18} /><span>Guild info</span></button>
-              ) : (
-                <button type="button" onClick={() => void toggleBlock()}><UtilityIcon name="block" size={18} /><span>{blockedByMe ? "Unblock user" : "Block user"}</span></button>
-              )}
-            </div>
-          )}
+        <div className={styles.threadActions} aria-label="Conversation actions">
+          <button type="button" className={styles.threadActionButton} onClick={() => openConversationView("search")} aria-label="Search in conversation" title="Search in conversation"><UtilityIcon name="search" size={18} /></button>
+          <button type="button" className={styles.threadActionButton} onClick={() => openConversationView("shared")} aria-label="Shared in this conversation" title="Shared in this conversation"><UtilityIcon name="shared" size={18} /></button>
+          {isGuild && <button type="button" className={styles.threadActionButton} onClick={() => setGuildInfoOpen(true)} aria-label="Guild info" title="Guild info"><UtilityIcon name="info" size={18} /></button>}
+          {!isGuild && <div className={styles.threadMenuWrap} ref={menuRef}>
+            <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
+            {menuOpen && <div className={styles.threadMenu}><button type="button" onClick={() => void toggleBlock()}><UtilityIcon name="block" size={18} /><span>{blockedByMe ? "Unblock user" : "Block user"}</span></button></div>}
+          </div>}
         </div>
       </header>
 
@@ -1100,6 +1109,11 @@ export default function RavenConversation({
                 {conversationSearch && <button type="button" aria-label="Clear search" onClick={() => { setConversationSearch(""); conversationSearchRef.current?.focus(); }}>×</button>}
               </label>
             )}
+            {conversationView === "shared" && sharedCategories.length > 0 && (
+              <div className={styles.sharedCategoryTabs} role="tablist" aria-label="Shared content categories">
+                {sharedCategories.map((category) => <button key={category} type="button" role="tab" aria-selected={activeSharedCategory === category} className={activeSharedCategory === category ? styles.sharedCategoryTabActive : undefined} onClick={() => setSharedCategory(category)}><span>{sharedCategoryDetails[category].label}</span><small>{sharedMessages.filter((message) => isInSharedCategory(message, category)).length}</small></button>)}
+              </div>
+            )}
             <div className={styles.conversationViewBody}>
               {archiveLoading && <div className={styles.conversationViewEmpty}><RavenIcon size={28}/><p>Unrolling earlier ravens…</p></div>}
               {!archiveLoading && archiveError && <p className={styles.conversationViewError} role="alert">{archiveError}</p>}
@@ -1110,7 +1124,7 @@ export default function RavenConversation({
                 return <button key={message.id} type="button" className={styles.conversationSearchResult} onClick={() => { closeConversationView(); requestAnimationFrame(() => void jumpToMessage(message.id)); }}><span><b>{sender}</b><time dateTime={message.created_at}>{day(message.created_at)} · {time(message.created_at)}</time></span><p>{ravenBodySummary(message.body)}</p></button>;
               })}
               {conversationView === "shared" && !archiveLoading && sharedMessages.length === 0 && <div className={styles.conversationViewEmpty}><RavenIcon size={28}/><p>Nothing has been shared in this conversation yet.</p></div>}
-              {conversationView === "shared" && sharedMessages.map((message) => {
+              {conversationView === "shared" && activeSharedMessages.map((message) => {
                 const sender = message.sender_id === userId ? "You" : memberMap.get(message.sender_id)?.display_name ?? partner?.display_name ?? "Member";
                 return <article key={message.id} className={styles.sharedConversationItem}>
                   <button type="button" className={styles.sharedConversationMeta} onClick={() => { closeConversationView(); requestAnimationFrame(() => void jumpToMessage(message.id)); }}><b>{sender}</b><time dateTime={message.created_at}>{day(message.created_at)} · {time(message.created_at)}</time></button>

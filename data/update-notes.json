@@ -28,8 +28,10 @@
       "Kept tab and section menus fixed in place when switching between content of different lengths.",
       "Unified dragon icons across search, Dragon Appearances and Chapter Companion, and refined the quote icon.",
       "Added icons to conversation menu actions and search and shared-content shortcuts to Guild Info.",
+      "Moved Direct Raven search, shared content and Guild Info into compact header controls, and organized conversation shares into responsive Images, Reels and Links history tabs.",
       "Kept spoiler-protected chapter details sealed during reading-progress loading, including direct links to Dragon Appearances and Chapter Companion.",
       "Standardized tab sizing, alignment, focus states and narrow-screen scrolling across the site while preserving each section's established visual treatment.",
+      "Anchored section titles and tab switchers to one consistent responsive frame across Bestiary, Chronicle, Houses, Known World and Collection pages without changing their content layouts.",
       "Reconciled the semicanon royal chronology from Jaehaerys I through Baelenys, including namedays, parentage, reigns, the late-78 AC coronation, and the 77 AC Iron Islands campaign."
     ]
   },

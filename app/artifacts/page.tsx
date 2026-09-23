@@ -7,10 +7,12 @@ export const metadata = { title: "The Collection" };
 
 export default function ArtifactsPage() {
   return <main className={styles.page}><div className={styles.container}>
+    <div className="realm-section-header">
     <p className={styles.eyebrow}>Relics of the Realm</p>
     <h1 className="realm-page-title">The Collection</h1>
     <p className={styles.lead}>Artifacts remembered for the stories they carry, not the games they might be played in.</p>
     <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Collection sections"><Link aria-current="page" className={styles.activeTab} href="/collection">Artifacts</Link></nav>
+    </div>
     <h2 className={styles.sectionTitle}>Artifacts</h2>
     <div className={styles.grid}>{artifacts.map(([id, name, description]) => <article id={id} className={styles.card} key={id}>
       <div className={styles.image}><Image src={`/images/cards/${id}.webp`} alt={name} fill sizes="(max-width: 700px) 50vw, 220px" /></div>

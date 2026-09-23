@@ -9,6 +9,7 @@ export default function MapPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <div className="realm-section-header">
         <h1 className={`${styles.heading} realm-page-title`}>The Known World</h1>
         <p className={styles.subheading}>
           Follow the chronicle chapter by chapter. Drag to explore, scroll to
@@ -16,6 +17,7 @@ export default function MapPage() {
         </p>
 
         <nav className={`${styles.tabs} realm-section-tabs`} aria-label="Known World sections"><Link aria-current="page" className={styles.activeTab} href="/map">Map</Link><Link href="/locations">Locations</Link></nav>
+        </div>
         <Suspense fallback={<div style={{ minHeight: 520 }} aria-busy="true" /> }><InteractiveMap /></Suspense>
       </div>
     </main>
