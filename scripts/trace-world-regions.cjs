@@ -51,25 +51,13 @@ add('shadow-lands','Shadow Lands and Asshai','#626666',[[1747,918],[1790,887],[1
 
 // Explicit additions requested after the coloured-territory reference pass.
 // Valyria follows the marked peninsula, excluding Mantarys and the Rhoyne.
+add('valyria','Valyria','#aa2428',[[814,814],[830,816],[830,845],[843,844],[856,855],[865,866],[854,882],[866,901],[857,924],[860,952],[844,980],[822,1018],[779,1018],[753,995],[737,972],[738,945],[750,920],[748,904],[724,906],[729,881],[750,856],[773,849],[788,832],[801,825]]);
 // Envelope includes the western and southern fragments in the supplied cutout.
 // Its eastern neck follows the mainland shore, west of Elyria's separate island;
 // coast clipping and shared-arc smoothing supply the final organic outline.
-add('valyria','Valyria','#aa2428',[[810,814],[819,814],[819,822],[825,834],[829,847],[845,850],[863,858],[871,873],[865,890],[870,913],[872,939],[859,978],[830,1020],[772,1020],[741,996],[723,976],[721,951],[728,927],[725,911],[724,888],[736,870],[751,860],[765,851],[778,837],[792,829],[799,818]]);
+add('valyria','Valyria','#aa2428',[[810,808],[828,808],[830,816],[829,834],[829,847],[845,850],[863,858],[871,873],[865,890],[870,913],[872,939],[859,978],[830,1020],[772,1020],[741,996],[723,976],[721,951],[728,927],[725,911],[724,888],[736,870],[751,860],[765,851],[778,837],[792,829],[799,818]]);
 add('sothoryos','Sothoryos','#72916c',[[820,1233],[820,1162],[854,1129],[919,1130],[950,1106],[993,1121],[1020,1113],[1080,1108],[1111,1081],[1183,1072],[1203,1097],[1174,1149],[1167,1233]]);
-add('ulthos','Ulthos','#9c8768',[[1590,1233],[1590,1200],[1630,1180],[1680,1167],[1745,1157],[1760,1130],[1795,1124],[1804,1084],[1850,1084],[1850,1233]]);
-
-// Fill only enclosed holes of a selected continent, never open coastal bays.
-function fillInterior(mask) {
- const exterior=new Uint8Array(W*H),queue=new Int32Array(W*H);
- let head=0,tail=0;
- const seed=p=>{if(!mask[p]&&!exterior[p]){exterior[p]=1;queue[tail++]=p;}};
- for(let x=0;x<W;x++){seed(x);seed((H-1)*W+x);}
- for(let y=0;y<H;y++){seed(y*W);seed(y*W+W-1);}
- while(head<tail){const p=queue[head++],x=p%W,y=Math.floor(p/W);
-   if(x)seed(p-1);if(x<W-1)seed(p+1);if(y)seed(p-W);if(y<H-1)seed(p+W);
- }
- for(let i=0;i<mask.length;i++)if(!exterior[i])mask[i]=1;
-}
+add('ulthos','Ulthos','#9c8768',rectangle(1600,1163,1850,1233));
 
 async function main(){
  const {data}=await sharp('public/images/map/known-world.webp').resize(W,H).removeAlpha().raw().toBuffer({resolveWithObject:true});
@@ -80,7 +68,6 @@ async function main(){
    const r=data[i*3],g=data[i*3+1],b=data[i*3+2];
    land[i]=(!(b>r*1.025&&b>g*.98)||(r>180&&Math.max(r,g,b)-Math.min(r,g,b)<35))&&(r+g+b)>130?1:0;
  }
- const originalLand=land.slice();
  // Connected components remove offshore lettering. Fill enclosed terrain-colour
  // holes, but retain open bays and large lakes. This is an offline operation.
  function components(value,visit){
@@ -101,27 +88,13 @@ async function main(){
    const i=y*W+x;if(!land[i]||westernMask[i*4+3]>0)continue;
    for(let j=0;j<definitions.length;j++){
      const a=bounds[j];if(x<a.minX||x>a.maxX||y<a.minY||y>a.maxY)continue;
-     if(inside(x+.5,y+.5,definitions[j].ring)){
-       // Do not turn the northern Valyrian lake/river into land when closing
-       // small terrain holes elsewhere in the artwork.
-       if(definitions[j].id==='valyria'&&y<850&&!originalLand[i])continue;
-       owners[i]=j;break;
-     }
+     if(inside(x+.5,y+.5,definitions[j].ring)){owners[i]=j;break;}
    }
- }
- // Leave a one-grid-pixel separation at Elyria so curve smoothing cannot
- // bleed Valyria into the island's independent territory.
- const valyriaIndex=definitions.findIndex(r=>r.id==='valyria');
- const elyriaIndex=definitions.findIndex(r=>r.id==='elyria');
- for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
-   const i=y*W+x;if(owners[i]!==valyriaIndex)continue;
-   if([-W-1,-W,-W+1,-1,1,W-1,W,W+1].some(d=>owners[i+d]===elyriaIndex))owners[i]=-1;
  }
  const junctions=new Set(),owner=(x,y)=>x<0||y<0||x>=W||y>=H?-1:owners[y*W+x];
  for(let y=0;y<=H;y++)for(let x=0;x<=W;x++)if(new Set([owner(x-1,y-1),owner(x,y-1),owner(x-1,y),owner(x,y)]).size>2)junctions.add(y*(W+1)+x);
  const regions=definitions.map((r,index)=>{
    const mask=new Uint8Array(W*H);for(let i=0;i<mask.length;i++)mask[i]=owners[i]===index?1:0;
-   if(r.id==='sothoryos')fillInterior(mask);
    return{id:r.id,name:r.name,color:r.color,path:trace(mask,junctions,grid)};
  }).filter(r=>r.path);
  fs.writeFileSync('data/map/world-region-geometry.json',JSON.stringify({width:7400,height:4932,regions},null,2)+'\n');
