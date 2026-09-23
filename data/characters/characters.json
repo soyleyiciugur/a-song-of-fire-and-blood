@@ -842,8 +842,8 @@
     "status": "Alive",
     "nameday": {
       "day": 7,
-      "moon": 2,
-      "year": 81
+      "moon": 12,
+      "year": 80
     },
     "height": "189 cm",
     "father": "baelenys-targaryen",
@@ -1485,7 +1485,7 @@
     "nameday": {
       "day": 4,
       "moon": 8,
-      "year": 38
+      "year": 39
     },
     "height": "177 cm",
     "father": "aenys-targaryen-ii",
@@ -4380,8 +4380,8 @@
     "status": "Dead",
     "nameday": {
       "day": 9,
-      "moon": 6,
-      "year": 23
+      "moon": 1,
+      "year": 24
     },
     "height": "-",
     "father": "jaehaerys-targaryen-i",

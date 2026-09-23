@@ -177,6 +177,10 @@ async function main() {
     // The marked northern Stepstones island is not part of either mainland
     // realm. Exclude it in native artwork coordinates, without moving borders.
     const mapX=crop.left+(x+.5)*2,mapY=crop.top+(y+.5)*2;
+    // Pale lettering in this offshore strip is the "The Narrow Sea" label,
+    // not land. Keep it out of Crownlands without touching Dragonstone/Driftmark.
+    if(match>=0&&['the-crownlands','the-stormlands'].includes(regions[match].id)
+      &&mapX>=1680&&mapY>=2140&&mapY<=2650)continue;
     if(match>=0&&['dorne','the-stormlands'].includes(regions[match].id)
       &&mapX>=1760&&mapX<=1832&&mapY>=2980&&mapY<=3160)continue;
     if(match>=0){masks[match][i]=1;owners[i]=match;}

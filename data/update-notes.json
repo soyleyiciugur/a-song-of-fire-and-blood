@@ -16,6 +16,8 @@
       "Restored Tyrosh's mainland territory within its shared region and included the remaining southeastern coastal tip of Sothoryos.",
       "Excluded the marked northern Stepstones island from the Dorne and Stormlands overlays.",
       "Improved map sigil readability with a larger black Baratheon stag on the yellow Stormlands and a clearer, larger Lannister lion.",
+      "Removed false Crownlands and Stormlands coverage from the full The Narrow Sea lettering strip while preserving Tarth and the real coastal islands.",
+      "Filled missing Beyond the Wall coverage over inland forests and mountain shadows while retaining coastal water and the Wall boundary.",
       "Styled regional hover names with dark, gold-framed labels that stay readable at every zoom level and dismiss during map gestures.",
       "Added spoiler-aware Dragon Appearances to dragon profiles and linked each chapter's physically present dragons from Chapter Companion.",
       "Added combined character and chapter filters to Echoes of the Realm with a compact responsive archive toolbar.",

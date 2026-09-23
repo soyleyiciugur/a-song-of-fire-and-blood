@@ -19,7 +19,7 @@ const regionRings=region=>region.rings||[region.ring];
 // Existing colours are retained; blank land is intentionally unowned:
 // do not add continent/hinterland catch-alls. Coordinates follow the base artwork.
 // Small states precede adjoining large regions; islands are coast-clipped.
-add('beyond-the-wall','Beyond the Wall','#8b9da6',rectangle(0,0,430,220));
+add('beyond-the-wall','Beyond the Wall','#8b9da6',rectangle(0,0,430,220),{solidify:true});
 add('ibben','Ibben','#949494',rectangle(1095,255,1330,425));
 add('summer-islands','Summer Islands','#f4ce50',rectangle(390,955,645,1233));
 add('moraq','Great Moraq','#d5f536',[[1260,933],[1338,938],[1358,984],[1358,1129],[1290,1129],[1262,1060],[1258,1009],[1232,977],[1235,952]]);
@@ -194,6 +194,14 @@ async function main(){
  const regions=definitions.map((r,index)=>{
    const mask=new Uint8Array(W*H);for(let i=0;i<mask.length;i++)mask[i]=owners[i]===index?1:0;
    if(r.solidify)solidifyInterior(mask);
+   // Northern forest and mountain shadows are land, not holes. Filling those
+   // interiors must still respect the Wall and existing northern territories.
+   if(r.id==='beyond-the-wall'){
+     const excluded=new Uint8Array(W*H);
+     for(let i=0;i<excluded.length;i++)excluded[i]=westernMask[i*4+3]>0?1:0;
+     const safeBoundary=dilate4(excluded,1);
+     for(let i=0;i<mask.length;i++)if(safeBoundary[i])mask[i]=0;
+   }
    return{id:r.id,name:r.name,color:r.color,group:r.group||r.id,path:trace(mask,junctions,grid)};
  }).filter(r=>r.path);
  fs.writeFileSync('data/map/world-region-geometry.json',JSON.stringify({width:7400,height:4932,regions},null,2)+'\n');
