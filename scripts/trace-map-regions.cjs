@@ -36,11 +36,11 @@ const regions = [
     ring:[...valeEdge,[800,540],[421,540]] },
   { id:'the-riverlands', name:'The Riverlands', house:'tully', label:[365,765], size:76,
     ring:[...northEdge.slice(0,-1),...valeEdge.slice(1,-1),...crownRiverEdge.slice(1),...reverse(riverReachEdge).slice(1),...reverse(westRiverEdge).slice(1),[0,774]] },
-  { id:'the-westerlands', name:'The Westerlands', house:'lannister', label:[226,928], size:83,
+  { id:'the-westerlands', name:'The Westerlands', house:'lannister', label:[226,928], size:101,
     ring:[[0,771],...westRiverEdge,...reverse(westReachEdge).slice(1)] },
   { id:'the-crownlands', name:'The Crownlands', house:'targaryen', label:[555,936], size:70,
     ring:[...crownRiverEdge,...crownReachEdge.slice(1),...crownStormEdge.slice(1),[800,851]] },
-  { id:'the-stormlands', name:'The Stormlands', house:'baratheon', label:[571,1164], size:80,
+  { id:'the-stormlands', name:'The Stormlands', house:'baratheon', label:[571,1164], size:94,
     ring:[...crownStormEdge,...reverse(dorneStormEdge),...reverse(reachStormEdge).slice(1)] },
   { id:'dorne', name:'Dorne', house:'martell', label:[452,1355], size:89,
     ring:[...dorneEdge,[800,1447],[0,1447]] },
@@ -174,6 +174,11 @@ async function main() {
     // Skagos and Skane are offshore, north of the Wall's latitude. Do not
     // extend the mainland region north of the Wall to include those islands.
     const match=rx>620 && ry>=-100 && ry<120 ? 0 : regions.findIndex(r=>inside(rx,ry,r.ring));
+    // The marked northern Stepstones island is not part of either mainland
+    // realm. Exclude it in native artwork coordinates, without moving borders.
+    const mapX=crop.left+(x+.5)*2,mapY=crop.top+(y+.5)*2;
+    if(match>=0&&['dorne','the-stormlands'].includes(regions[match].id)
+      &&mapX>=1760&&mapX<=1832&&mapY>=2980&&mapY<=3160)continue;
     if(match>=0){masks[match][i]=1;owners[i]=match;}
   }
   const junctions=new Set();

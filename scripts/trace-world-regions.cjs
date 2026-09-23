@@ -11,37 +11,42 @@ const W=1850,H=1233;
 const grid={width:W,height:H,left:0,top:0,scale:4};
 const rectangle=(x1,y1,x2,y2)=>[[x1,y1],[x2,y1],[x2,y2],[x1,y2]];
 const definitions=[];
-const add=(id,name,color,ring)=>definitions.push({id,name,color,ring});
+const add=(id,name,color,ring,options={})=>definitions.push({id,name,color,ring,rings:[ring],...options});
+const addMulti=(id,name,color,rings,options={})=>definitions.push({id,name,color,ring:rings[0],rings,...options});
+const regionRings=region=>region.rings||[region.ring];
 // Only explicitly coloured territories in the supplied references are included.
-// The Free Cities close-up takes precedence. Blank land is intentionally unowned:
+// The latest coloured western-Essos border reference takes precedence here.
+// Existing colours are retained; blank land is intentionally unowned:
 // do not add continent/hinterland catch-alls. Coordinates follow the base artwork.
 // Small states precede adjoining large regions; islands are coast-clipped.
 add('beyond-the-wall','Beyond the Wall','#8b9da6',rectangle(0,0,430,220));
 add('ibben','Ibben','#949494',rectangle(1095,255,1330,425));
 add('summer-islands','Summer Islands','#f4ce50',rectangle(390,955,645,1233));
 add('moraq','Great Moraq','#d5f536',[[1260,933],[1338,938],[1358,984],[1358,1129],[1290,1129],[1262,1060],[1258,1009],[1232,977],[1235,952]]);
-add('new-ghis','New Ghis','#ca9295',[[948,888],[978,894],[1000,905],[1042,912],[1066,934],[1048,971],[1020,986],[1020,1010],[950,1010],[950,945],[968,924]]);
-add('elyria','Elyria','#4f92b2',rectangle(825,816,851,851));
-add('tolos','Tolos','#4f92b2',[[851,803],[884,800],[895,822],[883,843],[852,843]]);
-add('mantarys','Mantarys','#c43a94',[[810,797],[824,795],[833,806],[825,817],[812,816],[806,808]]);
-add('lys','Lys','#bb438c',rectangle(509,808,548,849));
-add('lys-coast','Lys — coastal territory','#bb438c',[[536,786],[551,780],[566,790],[580,790],[598,810],[574,820],[544,807]]);
-add('tyrosh','Tyrosh','#195b9f',[[469,710],[510,710],[522,731],[539,735],[529,753],[526,780],[509,790],[489,767],[486,757],[469,745]]);
-add('lorath','Lorath','#9cbd2d',[[579,462],[638,461],[633,496],[651,504],[662,520],[670,538],[647,529],[623,522],[606,534],[581,543],[577,528],[588,504]]);
-add('braavos','Braavos','#8950c0',[[470,430],[580,430],[588,504],[577,528],[581,543],[560,548],[549,543],[530,550],[513,548],[487,567],[460,550]]);
-add('pentos','Pentos','#008653',[[488,597],[513,587],[533,580],[553,581],[568,594],[587,610],[596,625],[585,637],[580,657],[568,681],[550,701],[528,711],[499,696],[478,652]]);
-add('norvos','Norvos','#edc13f',[[581,543],[606,534],[623,522],[647,529],[670,538],[681,513],[704,504],[714,538],[699,558],[697,584],[683,617],[678,636],[691,650],[682,666],[675,673],[666,655],[646,652],[630,641],[615,636],[602,626],[596,625],[587,610],[568,594],[553,581],[549,560],[549,543],[560,548]]);
-add('qohor','Qohor','#ff5963',[[699,558],[727,555],[751,579],[765,610],[754,645],[754,669],[732,681],[709,675],[691,665],[682,666],[691,650],[678,636],[683,617],[697,584]]);
-add('myr','Myr','#ee9a3c',[[528,711],[550,701],[568,681],[580,686],[570,703],[575,715],[587,720],[594,741],[598,758],[589,776],[575,765],[564,750],[539,746],[539,735],[550,722]]);
-add('volantis','Volantis','#ad394f',[[675,748],[685,761],[689,779],[708,796],[730,801],[751,810],[764,830],[737,843],[710,838],[691,855],[670,851],[648,832],[623,815],[646,802],[651,782],[660,763]]);
+add('new-ghis','New Ghis','#ca9295',[[946,885],[963,892],[976,904],[993,908],[1011,917],[1034,914],[1049,925],[1054,945],[1046,961],[1024,968],[1005,957],[1009,986],[1010,1007],[966,1007],[956,973],[962,948],[953,933],[948,915]]);
+add('elyria','Elyria','#4f92b2',[[833,824],[845,823],[848,833],[845,842],[832,843],[829,832]]);
+add('tolos','Tolos','#4f92b2',[[860,821],[867,817],[875,819],[875,829],[869,835],[859,834]]);
+add('mantarys','Mantarys','#c43a94',[[795,809],[804,802],[819,798],[828,800],[828,807],[819,810],[810,815],[798,817]]);
+addMulti('lys','Lys','#bb438c',[rectangle(514,809,540,845),[[536,788],[545,789],[553,794],[558,800],[558,804],[551,803],[547,797],[539,794]]]);
+addMulti('tyrosh','Tyrosh','#195b9f',[
+  [[475,721],[485,718],[497,720],[501,729],[496,738],[486,742],[476,735]],
+  [[499,731],[518,729],[536,737],[528,754],[526,780],[509,790],[493,769],[487,754]]
+]);
+addMulti('lorath','Lorath','#9cbd2d',[[[584,466],[616,466],[626,484],[612,497],[584,491]],[[579,520],[595,511],[612,510],[633,500],[636,507],[623,515],[607,521],[592,524],[580,532]]]);
+add('braavos','Braavos','#8950c0',[[501,440],[581,440],[584,482],[580,502],[585,516],[576,531],[565,534],[558,548],[542,552],[532,551],[525,559],[492,567],[478,558]]);
+add('pentos','Pentos','#008653',[[490,594],[508,590],[526,581],[541,579],[554,587],[565,594],[576,600],[585,614],[584,625],[578,637],[560,644],[539,640],[521,647],[507,640],[490,627]]);
+add('norvos','Norvos','#edc13f',[[558,548],[576,539],[597,534],[616,527],[634,530],[659,528],[666,526],[662,539],[660,553],[664,567],[673,580],[677,592],[674,608],[666,620],[654,631],[640,638],[627,638],[613,635],[604,625],[595,620],[585,614],[576,600],[565,594],[554,587],[548,575],[544,564],[542,552]]);
+add('qohor','Qohor','#ff5963',[[704,574],[716,561],[730,548],[752,540],[766,550],[775,570],[777,588],[773,611],[777,628],[767,651],[755,658],[735,657],[719,655],[699,656],[688,650],[695,635],[697,616],[698,596]]);
+add('myr','Myr','#ee9a3c',[[553,707],[565,711],[571,720],[572,731],[566,740],[557,747],[548,742],[550,731],[557,720]]);
+add('volantis','Volantis','#ad394f',[[674,746],[683,748],[683,760],[679,771],[684,782],[683,795],[690,806],[708,808],[722,806],[733,813],[754,813],[761,821],[756,831],[737,835],[716,831],[708,836],[701,850],[684,851],[671,841],[658,836],[638,823],[622,820],[641,814],[657,804],[667,791],[667,778],[663,765],[666,753]]);
 add('saath','Saath','#bc9a2a',[[801,492],[827,487],[835,502],[825,512],[806,511]]);
 add('morosh','Morosh','#a5bf38',[[837,465],[862,462],[875,479],[859,490],[835,483]]);
-add('omber','Omber','#a86e21',[[917,485],[956,478],[978,498],[982,525],[965,542],[940,537],[928,529]]);
-add('meereen','Meereen','#885d23',[[944,767],[985,761],[1025,775],[1029,790],[1008,794],[993,790],[974,787],[946,790]]);
-add('yunkai','Yunkai','#4ed1a0',[[963,790],[974,787],[993,790],[998,809],[985,834],[980,847],[966,843],[968,822],[959,805]]);
-add('astapor','Astapor','#59b9d1',[[924,842],[947,842],[966,843],[980,847],[991,866],[978,881],[952,885],[925,871]]);
-add('lhazar','Lhazar','#2c9871',[[1025,775],[1059,772],[1096,767],[1137,770],[1161,785],[1154,810],[1127,832],[1098,840],[1061,823],[1029,790]]);
-add('dothraki-sea','Dothraki Sea','#8a63ac',[[751,579],[775,544],[798,507],[835,502],[835,483],[859,490],[875,479],[899,514],[928,529],[940,537],[965,542],[982,525],[978,498],[997,500],[1048,454],[1120,462],[1180,420],[1223,420],[1235,447],[1212,480],[1220,516],[1210,553],[1220,598],[1215,640],[1223,678],[1194,693],[1170,726],[1137,755],[1099,758],[1042,770],[982,759],[934,763],[901,798],[879,785],[854,779],[831,772],[819,753],[800,742],[786,757],[773,780],[760,782],[766,744],[778,711],[775,672],[754,645],[765,610]]);
+add('omber','Omber','#a86e21',[[917,485],[939,478],[960,481],[975,490],[979,504],[990,515],[987,532],[977,539],[963,533],[951,525],[938,524],[926,516],[913,509]]);
+add('meereen','Meereen','#885d23',[[986,768],[998,765],[1013,771],[1018,781],[1010,789],[1000,789],[991,783],[983,779]]);
+add('yunkai','Yunkai','#4ed1a0',[[965,794],[976,790],[984,793],[985,805],[980,817],[970,821],[963,817],[965,807],[960,801]]);
+add('astapor','Astapor','#59b9d1',[[942,853],[951,852],[961,858],[964,865],[956,868],[947,863]]);
+add('lhazar','Lhazar','#2c9871',[[1013,771],[1028,768],[1046,765],[1060,764],[1084,756],[1105,756],[1127,748],[1148,746],[1154,753],[1148,773],[1153,787],[1141,801],[1130,812],[1121,829],[1107,835],[1090,831],[1077,820],[1070,806],[1056,798],[1044,785],[1025,782],[1018,781]]);
+add('dothraki-sea','Dothraki Sea','#8a63ac',[[766,550],[775,534],[791,520],[804,514],[806,507],[825,512],[835,502],[835,483],[859,490],[875,479],[885,492],[894,514],[913,509],[926,516],[938,524],[951,525],[963,533],[977,539],[987,532],[997,525],[1000,509],[1015,512],[1032,530],[1055,526],[1080,515],[1110,510],[1141,508],[1170,502],[1200,494],[1220,498],[1212,530],[1210,553],[1220,598],[1215,640],[1223,678],[1194,693],[1170,726],[1148,746],[1127,748],[1105,756],[1084,756],[1060,764],[1046,765],[1028,768],[1013,771],[998,765],[986,768],[975,779],[963,782],[952,786],[946,778],[953,761],[952,750],[940,742],[916,740],[890,736],[866,733],[845,736],[823,734],[804,737],[788,728],[776,717],[770,703],[756,692],[751,678],[755,658],[767,651],[777,628],[773,611],[777,588],[775,570]]);
 add('qarth','Qarth and Qarkash','#973c6a',[[1183,901],[1188,888],[1210,881],[1241,884],[1277,878],[1316,892],[1338,904],[1339,930],[1305,940],[1277,934],[1230,943],[1207,929],[1183,929]]);
 add('nghai','Nghai','#95674e',[[1607,597],[1637,593],[1660,610],[1659,630],[1635,651],[1614,639],[1603,615]]);
 add('jogos-nhai','Plains of the Jogos Nhai','#ffc082',[[1495,519],[1515,510],[1550,542],[1574,557],[1600,590],[1623,594],[1603,615],[1614,639],[1635,651],[1646,706],[1616,748],[1567,737],[1534,715],[1493,710],[1463,690],[1431,671],[1412,641],[1403,616],[1416,604],[1394,586],[1400,567],[1435,580],[1460,572],[1482,550]]);
@@ -50,16 +55,81 @@ add('yi-ti','Yi Ti','#107850',[[1403,800],[1431,764],[1440,740],[1470,727],[1493
 add('shadow-lands','Shadow Lands and Asshai','#626666',[[1747,918],[1790,887],[1850,879],[1850,1055],[1795,1100],[1740,1140],[1695,1145],[1635,1178],[1640,1105],[1682,1020],[1698,995],[1729,958]]);
 
 // Explicit additions requested after the coloured-territory reference pass.
-// Valyria follows the marked peninsula, excluding Mantarys and the Rhoyne.
-add('valyria','Valyria','#aa2428',[[814,814],[830,816],[830,845],[843,844],[856,855],[865,866],[854,882],[866,901],[857,924],[860,952],[844,980],[822,1018],[779,1018],[753,995],[737,972],[738,945],[750,920],[748,904],[724,906],[729,881],[750,856],[773,849],[788,832],[801,825]]);
-// Envelope includes the western and southern fragments in the supplied cutout.
-// Its eastern neck follows the mainland shore, west of Elyria's separate island;
-// coast clipping and shared-arc smoothing supply the final organic outline.
-add('valyria','Valyria','#aa2428',[[810,808],[828,808],[830,816],[829,834],[829,847],[845,850],[863,858],[871,873],[865,890],[870,913],[872,939],[859,978],[830,1020],[772,1020],[741,996],[723,976],[721,951],[728,927],[725,911],[724,888],[736,870],[751,860],[765,851],[778,837],[792,829],[799,818]]);
-add('sothoryos','Sothoryos','#72916c',[[820,1233],[820,1162],[854,1129],[919,1130],[950,1106],[993,1121],[1020,1113],[1080,1108],[1111,1081],[1183,1072],[1203,1097],[1174,1149],[1167,1233]]);
-add('ulthos','Ulthos','#9c8768',rectangle(1600,1163,1850,1233));
+// Valyria is traced from the supplied transparent PNG rather than inferred from
+// terrain colour. This keeps the northern lake/river OUT of Valyria and retains
+// the small western/southern/eastern fragments shown in the annotated reference.
+add('valyria','Valyria','#aa2428',[[810,814],[819,814],[819,822],[825,834],[829,847],[845,850],[863,858],[871,873],[865,890],[870,913],[872,939],[859,978],[830,1020],[772,1020],[741,996],[723,976],[721,951],[728,927],[725,911],[724,888],[736,870],[751,860],[765,851],[778,837],[792,829],[799,818]]);
+
+// Sothoryos still follows the Known World coastline, but its dark jungle must not
+// punch holes through the region. `solidify` closes only narrow classifier gaps
+// before filling the resulting interior, while open coastal water remains outside.
+add('sothoryos','Sothoryos','#72916c',[[820,1233],[820,1162],[854,1129],[919,1130],[950,1106],[993,1121],[1020,1113],[1080,1108],[1111,1081],[1183,1072],[1203,1097],[1174,1149],[1190,1180],[1210,1233]],{solidify:true});
+
+// Ulthos is traced from the supplied WebP: the full south-eastern landmass plus
+// the two detached islands. The mainland continues through the map's bottom/right
+// crop, so those edges intentionally terminate at W/H.
+addMulti('ulthos','Ulthos','#9c8768',[
+  [[1850,1084],[1850,1233],[1593,1233],[1593,1226],[1604,1223],[1609,1216],[1616,1217],[1617,1210],[1621,1206],[1624,1208],[1625,1203],[1629,1200],[1625,1198],[1626,1194],[1629,1191],[1632,1194],[1640,1193],[1645,1189],[1647,1182],[1649,1185],[1652,1185],[1657,1179],[1666,1179],[1684,1173],[1691,1174],[1700,1168],[1704,1172],[1714,1170],[1720,1174],[1735,1174],[1738,1171],[1744,1172],[1746,1176],[1754,1174],[1765,1163],[1781,1163],[1791,1156],[1798,1156],[1804,1148],[1803,1142],[1805,1140],[1811,1145],[1824,1145],[1835,1139],[1837,1141],[1842,1137],[1847,1137],[1849,1134],[1850,1134]],
+  [[1817,1097],[1816,1101],[1813,1102],[1821,1108],[1818,1109],[1819,1112],[1814,1119],[1817,1122],[1816,1127],[1823,1125],[1832,1127],[1839,1118],[1835,1112],[1842,1104],[1837,1100]],
+  [[1791,1138],[1770,1140],[1765,1144],[1763,1153],[1769,1148],[1776,1148],[1786,1144]]
+],{clipToLand:false});
+
+// Fill only enclosed holes of a selected continent, never open coastal bays.
+function fillInterior(mask) {
+ const exterior=new Uint8Array(W*H),queue=new Int32Array(W*H);
+ let head=0,tail=0;
+ const seed=p=>{if(!mask[p]&&!exterior[p]){exterior[p]=1;queue[tail++]=p;}};
+ for(let x=0;x<W;x++){seed(x);seed((H-1)*W+x);}
+ for(let y=0;y<H;y++){seed(y*W);seed(y*W+W-1);}
+ while(head<tail){const p=queue[head++],x=p%W,y=Math.floor(p/W);
+   if(x)seed(p-1);if(x<W-1)seed(p+1);if(y)seed(p-W);if(y<H-1)seed(p+W);
+ }
+ for(let i=0;i<mask.length;i++)if(!exterior[i])mask[i]=1;
+}
+
+// Close narrow holes/corridors caused by dark terrain being mistaken for water.
+// A small 4-neighbour diamond is deliberately conservative at real coastlines.
+function dilate4(mask,passes=2){
+ let src=mask;
+ for(let pass=0;pass<passes;pass++){
+   const out=src.slice();
+   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+     const i=y*W+x;
+     if(src[i]||(x&&src[i-1])||(x<W-1&&src[i+1])||(y&&src[i-W])||(y<H-1&&src[i+W]))out[i]=1;
+   }
+   src=out;
+ }
+ return src;
+}
+function erode4(mask,passes=2){
+ let src=mask;
+ for(let pass=0;pass<passes;pass++){
+   const out=src.slice();
+   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+     const i=y*W+x;
+     if(!src[i]||(x&&!src[i-1])||(x<W-1&&!src[i+1])||(y&&!src[i-W])||(y<H-1&&!src[i+W]))out[i]=0;
+   }
+   src=out;
+ }
+ return src;
+}
+function solidifyInterior(mask){
+ const closed=erode4(dilate4(mask,2),2);
+ mask.set(closed);
+ // The continent continues beyond the artwork. Seal the cropped bottom edge
+ // before flood filling so dark interior terrain cannot leak to the exterior.
+ const bottom=(H-1)*W;
+ let first=-1,last=-1;
+ for(let x=0;x<W;x++)if(mask[bottom+x]){if(first<0)first=x;last=x;}
+ if(first>=0)for(let x=first;x<=last;x++)mask[bottom+x]=1;
+ fillInterior(mask);
+}
 
 async function main(){
+ // Pixel registration against the matching terrain in the supplied PNG.
+ // Its alpha, not a guessed land-colour threshold, defines Valyria's coverage.
+ const valyriaReference=await sharp('data/map/valyria-reference.png').ensureAlpha().raw().toBuffer({resolveWithObject:true});
+ const valyriaPlacement={x:720.9,y:782.9,scale:0.725};
  const {data}=await sharp('public/images/map/known-world.webp').resize(W,H).removeAlpha().raw().toBuffer({resolveWithObject:true});
  const west=JSON.parse(fs.readFileSync('data/map/region-geometry.json','utf8'));
  const westernMask=await sharp(Buffer.from(`<svg width="${W}" height="${H}" viewBox="0 0 7400 4932" xmlns="http://www.w3.org/2000/svg">${west.regions.map(r=>`<path d="${r.path}" fill="white"/>`).join('')}</svg>`)).ensureAlpha().raw().toBuffer();
@@ -82,20 +152,49 @@ async function main(){
  }
  components(1,pixels=>{if(pixels.length<14)for(const p of pixels)land[p]=0;});
  components(0,(pixels,edge)=>{if(!edge&&pixels.length<1500)for(const p of pixels)land[p]=1;});
+ const originalLand=land.slice();
  const owners=new Int8Array(W*H).fill(-1);
- const bounds=definitions.map(r=>({minX:Math.min(...r.ring.map(p=>p[0])),maxX:Math.max(...r.ring.map(p=>p[0])),minY:Math.min(...r.ring.map(p=>p[1])),maxY:Math.max(...r.ring.map(p=>p[1]))}));
+ const bounds=definitions.map(r=>{
+   const points=regionRings(r).flat();
+   return{minX:Math.min(...points.map(p=>p[0])),maxX:Math.max(...points.map(p=>p[0])),minY:Math.min(...points.map(p=>p[1])),maxY:Math.max(...points.map(p=>p[1]))};
+ });
+ const referenceIndex=definitions.findIndex(r=>r.id==='valyria');
+ bounds[referenceIndex]={minX:720,maxX:883,minY:782,maxY:1020};
  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
-   const i=y*W+x;if(!land[i]||westernMask[i*4+3]>0)continue;
+   const i=y*W+x;if(westernMask[i*4+3]>0)continue;
    for(let j=0;j<definitions.length;j++){
-     const a=bounds[j];if(x<a.minX||x>a.maxX||y<a.minY||y>a.maxY)continue;
-     if(inside(x+.5,y+.5,definitions[j].ring)){owners[i]=j;break;}
+     const region=definitions[j],a=bounds[j];
+     if(x<a.minX||x>a.maxX||y<a.minY||y>a.maxY)continue;
+     if(region.id==='valyria'){
+       const px=Math.floor((x+.5-valyriaPlacement.x)/valyriaPlacement.scale);
+       const py=Math.floor((y+.5-valyriaPlacement.y)/valyriaPlacement.scale);
+       if(px>=0&&py>=0&&px<valyriaReference.info.width&&py<valyriaReference.info.height&&valyriaReference.data[(py*valyriaReference.info.width+px)*4+3]>=128)owners[i]=j;
+       if(owners[i]===j)break;
+       continue;
+     }
+     if(region.clipToLand!==false&&!land[i])continue;
+     // Preserve the northern Valyrian lake/river as water.
+     if(region.id==='valyria'&&y<850&&!originalLand[i])continue;
+     if(regionRings(region).some(ring=>inside(x+.5,y+.5,ring))){owners[i]=j;break;}
    }
+ }
+ // Leave a one-grid-pixel separation at Elyria so curve smoothing cannot
+ // bleed Valyria into the island's independent territory.
+ const valyriaIndex=definitions.findIndex(r=>r.id==='valyria');
+ const elyriaIndex=definitions.findIndex(r=>r.id==='elyria');
+ for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+   const i=y*W+x;if(owners[i]!==valyriaIndex)continue;
+   if([-W-1,-W,-W+1,-1,1,W-1,W,W+1].some(d=>owners[i+d]===elyriaIndex))owners[i]=-1;
  }
  const junctions=new Set(),owner=(x,y)=>x<0||y<0||x>=W||y>=H?-1:owners[y*W+x];
  for(let y=0;y<=H;y++)for(let x=0;x<=W;x++)if(new Set([owner(x-1,y-1),owner(x,y-1),owner(x-1,y),owner(x,y)]).size>2)junctions.add(y*(W+1)+x);
+ // Crop edges must be straight, not rounded into the land by midpoint curves.
+ for(let x=0;x<=W;x++){junctions.add(x);junctions.add(H*(W+1)+x);}
+ for(let y=0;y<=H;y++){junctions.add(y*(W+1));junctions.add(y*(W+1)+W);}
  const regions=definitions.map((r,index)=>{
    const mask=new Uint8Array(W*H);for(let i=0;i<mask.length;i++)mask[i]=owners[i]===index?1:0;
-   return{id:r.id,name:r.name,color:r.color,path:trace(mask,junctions,grid)};
+   if(r.solidify)solidifyInterior(mask);
+   return{id:r.id,name:r.name,color:r.color,group:r.group||r.id,path:trace(mask,junctions,grid)};
  }).filter(r=>r.path);
  fs.writeFileSync('data/map/world-region-geometry.json',JSON.stringify({width:7400,height:4932,regions},null,2)+'\n');
  const paths=[...west.regions,...regions].map(r=>`<path d="${r.path}" fill="${r.color}" fill-opacity=".25" stroke="${r.color}" stroke-width="2"/>`).join('');
