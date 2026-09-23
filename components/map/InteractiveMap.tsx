@@ -14,6 +14,7 @@ import {
 } from "@/data/map/locations";
 import { MAP_EVENTS } from "@/data/map/map-events";
 import RegionOverlay from "./RegionOverlay";
+import MapLayerToggle from "./MapLayerToggle";
 import { getCharacterPositionsForChapter } from "@/data/map/character-positions";
 import {
   resolveCharacterPositionsInOrder,
@@ -2424,113 +2425,18 @@ export default function InteractiveMap() {
               event.stopPropagation()
             }
           >
-            <label className={styles.regionToggle} onClick={(event) => event.stopPropagation()}>
-              <input
-                type="checkbox"
-                checked={showRegions}
-                onChange={(event) => setShowRegions(event.target.checked)}
-              />
-              <span>Regions &amp; sigils</span>
-            </label>
-            <div
-              className={
-                styles.legendTitle
-              }
-            >
-              Events
-            </div>
-
-            {ALL_EVENT_TYPES.map(
-              (type) => {
-                const isChecked =
-                  activeEventTypes.has(
-                    type
-                  );
-
-                return (
-                  <div
-                    key={type}
-                    className={
-                      styles.legendRow
-                    }
-                    onClick={() =>
-                      toggleEventType(
-                        type
-                      )
-                    }
-                    style={{
-                      cursor:
-                        "pointer",
-                      userSelect:
-                        "none",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width:
-                          "12px",
-                        height:
-                          "12px",
-                        borderRadius:
-                          "4px",
-                        flexShrink: 0,
-                        border:
-                          isChecked
-                            ? "1px solid var(--gold)"
-                            : "1px solid rgba(255,255,255,0.3)",
-                        background:
-                          isChecked
-                            ? "var(--gold)"
-                            : "rgba(0,0,0,0.2)",
-                        display:
-                          "flex",
-                        alignItems:
-                          "center",
-                        justifyContent:
-                          "center",
-                        transition:
-                          "all 0.15s",
-                      }}
-                    >
-                      {isChecked && (
-                        <svg
-                          width="8"
-                          height="6"
-                          viewBox="0 0 11 9"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 4.5L4 7.5L10 1.5"
-                            stroke="#000"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      )}
-                    </div>
-
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={
-                        MAP_EVENT_TYPE_ICONS[
-                          type
-                        ]
-                      }
-                      alt=""
-                      width={16}
-                      height={16}
-                    />
-
-                    {
-                      MAP_EVENT_TYPE_LABELS[
-                        type
-                      ]
-                    }
-                  </div>
-                );
-              }
-            )}
+            <MapLayerToggle checked={showRegions} onChange={() => setShowRegions((visible) => !visible)} separated>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" aria-hidden="true"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5ZM9 3v16M15 5v16" /></svg>
+              <span>Regions</span>
+            </MapLayerToggle>
+            <div className={styles.legendTitle}>Events</div>
+            {ALL_EVENT_TYPES.map((type) => (
+              <MapLayerToggle key={type} checked={activeEventTypes.has(type)} onChange={() => toggleEventType(type)}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={MAP_EVENT_TYPE_ICONS[type]} alt="" width={16} height={16} />
+                <span>{MAP_EVENT_TYPE_LABELS[type]}</span>
+              </MapLayerToggle>
+            ))}
           </div>
 
           {/* Selected character card */}

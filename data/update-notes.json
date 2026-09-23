@@ -3,6 +3,12 @@
     "date": "2026-09-23",
     "items": [
       "Added toggleable Westeros regions with coastline-following translucent Great House colors and sigils, aligned through pan, zoom and mobile resizing; corrected map initialization for cached images.",
+      "Corrected southern regional borders and central junctions, smoothed map outlines with shared curves, and unified the Regions & sigils and event filter controls.",
+      "Added subtle regional hover illumination and brighter outlined borders to the map, with smooth restoration when the pointer leaves.",
+      "Extended the regional map layer to Beyond the Wall and reference-colored territories beyond Westeros, without additional sigils; refined Free Cities borders and kept uncolored territories free of overlays and hover effects.",
+      "Matched the Regions & sigils icon to the map controls' gold color.",
+      "Matched Essos region colors to the supplied references, prioritizing the Free Cities close-up while preserving subtle translucent fills.",
+      "Styled regional hover names with dark, gold-framed labels that stay readable at every zoom level and dismiss during map gestures.",
       "Added spoiler-aware Dragon Appearances to dragon profiles and linked each chapter's physically present dragons from Chapter Companion.",
       "Added combined character and chapter filters to Echoes of the Realm with a compact responsive archive toolbar.",
       "Added conversation search, a shared-content archive, and a restrained raven wing-flap for incoming Direct Ravens.",

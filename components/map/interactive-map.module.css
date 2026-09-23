@@ -81,34 +81,90 @@
   fill-opacity: 0.22;
   stroke-opacity: 0.65;
   stroke-width: 0.85px;
+  transition: fill-opacity 180ms ease, stroke-opacity 180ms ease,
+    stroke-width 180ms ease, stroke 180ms ease, filter 180ms ease;
+}
+
+/* Only the actual land paths receive hover; gestures still bubble to the map.
+   Touch devices retain the passive overlay and cannot leave a sticky hover. */
+@media (hover: hover) and (pointer: fine) {
+  .regionBoundary {
+    pointer-events: visibleFill;
+  }
+
+  .regionBoundary:hover {
+    fill-opacity: 0.34;
+    stroke: color-mix(in srgb, currentColor 40%, #f5dfa0);
+    stroke-opacity: 1;
+    stroke-width: 2px;
+    filter: drop-shadow(0 0 2px rgba(235, 202, 118, 0.65));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .regionBoundary {
+    transition: none;
+  }
 }
 
 .regionSigil {
   opacity: 0.58;
 }
 
+/* A screen-sized label only; regional geometry stays in map coordinates. */
+.regionNameTooltip {
+  position: fixed;
+  z-index: 120;
+  pointer-events: none;
+  max-width: min(240px, calc(50vw - 24px));
+  padding: 7px 11px;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  border-radius: var(--radius-sm, 6px);
+  background: rgba(12, 12, 15, 0.96);
+  color: var(--gold);
+  font-family: var(--font-heading, Georgia, serif);
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0.035em;
+  overflow-wrap: anywhere;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
 .regionToggle {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 32px;
   padding-bottom: 8px;
   margin-bottom: 3px;
   border-bottom: 1px solid rgba(201, 162, 39, 0.24);
-  font-size: 12px;
-  color: var(--gold);
-  cursor: pointer;
 }
 
-.regionToggle input {
-  width: 14px;
-  height: 14px;
+.layerInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
   margin: 0;
-  accent-color: var(--gold);
-  cursor: pointer;
 }
 
-.regionToggle:focus-within {
+.layerCheckbox {
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .15s, border-color .15s;
+}
+
+.layerInput:checked + .layerCheckbox {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+
+.layerInput:focus-visible + .layerCheckbox {
   outline: 1px solid var(--gold);
   outline-offset: 3px;
 }
