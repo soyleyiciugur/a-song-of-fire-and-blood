@@ -11,9 +11,7 @@ const W=1850,H=1233;
 const grid={width:W,height:H,left:0,top:0,scale:4};
 const rectangle=(x1,y1,x2,y2)=>[[x1,y1],[x2,y1],[x2,y2],[x1,y2]];
 const definitions=[];
-const add=(id,name,color,ring,options={})=>definitions.push({id,name,color,ring,rings:[ring],...options});
-const addMulti=(id,name,color,rings,options={})=>definitions.push({id,name,color,ring:rings[0],rings,...options});
-const regionRings=region=>region.rings||[region.ring];
+const add=(id,name,color,ring)=>definitions.push({id,name,color,ring});
 // Only explicitly coloured territories in the supplied references are included.
 // The Free Cities close-up takes precedence. Blank land is intentionally unowned:
 // do not add continent/hinterland catch-alls. Coordinates follow the base artwork.
@@ -26,10 +24,15 @@ add('new-ghis','New Ghis','#ca9295',[[948,888],[978,894],[1000,905],[1042,912],[
 add('elyria','Elyria','#4f92b2',rectangle(825,816,851,851));
 add('tolos','Tolos','#4f92b2',[[851,803],[884,800],[895,822],[883,843],[852,843]]);
 add('mantarys','Mantarys','#c43a94',[[810,797],[824,795],[833,806],[825,817],[812,816],[806,808]]);
-addMulti('lys','Lys','#bb438c',[
+add('lys','Lys','#bb438c',
   rectangle(509,808,548,849),
-  [[536,786],[551,780],[566,790],[580,790],[598,810],[574,820],[544,807]]
-]);
+  {group:'lys'}
+);
+
+add('lys-coast','Lys — coastal territory','#bb438c',
+  [[536,786],[551,780],[566,790],[580,790],[598,810],[574,820],[544,807]],
+  {group:'lys'}
+);
 add('tyrosh','Tyrosh','#195b9f',[[469,710],[510,710],[522,731],[539,735],[529,753],[526,780],[509,790],[489,767],[486,757],[469,745]]);
 add('lorath','Lorath','#9cbd2d',[[579,462],[638,461],[633,496],[651,504],[662,520],[670,538],[647,529],[623,522],[606,534],[581,543],[577,528],[588,504]]);
 add('braavos','Braavos','#8950c0',[[470,430],[580,430],[588,504],[577,528],[581,543],[560,548],[549,543],[530,550],[513,548],[487,567],[460,550]]);
@@ -54,24 +57,13 @@ add('yi-ti','Yi Ti','#107850',[[1403,800],[1431,764],[1440,740],[1470,727],[1493
 add('shadow-lands','Shadow Lands and Asshai','#626666',[[1747,918],[1790,887],[1850,879],[1850,1055],[1795,1100],[1740,1140],[1695,1145],[1635,1178],[1640,1105],[1682,1020],[1698,995],[1729,958]]);
 
 // Explicit additions requested after the coloured-territory reference pass.
-// Valyria is traced from the supplied transparent PNG rather than inferred from
-// terrain colour. This keeps the northern lake/river OUT of Valyria and retains
-// the small western/southern/eastern fragments shown in the annotated reference.
+// Valyria follows the marked peninsula, excluding Mantarys and the Rhoyne.
+// Envelope includes the western and southern fragments in the supplied cutout.
+// Its eastern neck follows the mainland shore, west of Elyria's separate island;
+// coast clipping and shared-arc smoothing supply the final organic outline.
 add('valyria','Valyria','#aa2428',[[810,814],[819,814],[819,822],[825,834],[829,847],[845,850],[863,858],[871,873],[865,890],[870,913],[872,939],[859,978],[830,1020],[772,1020],[741,996],[723,976],[721,951],[728,927],[725,911],[724,888],[736,870],[751,860],[765,851],[778,837],[792,829],[799,818]]);
-
-// Sothoryos still follows the Known World coastline, but its dark jungle must not
-// punch holes through the region. `solidify` closes only narrow classifier gaps
-// before filling the resulting interior, while open coastal water remains outside.
-add('sothoryos','Sothoryos','#72916c',[[820,1233],[820,1162],[854,1129],[919,1130],[950,1106],[993,1121],[1020,1113],[1080,1108],[1111,1081],[1183,1072],[1203,1097],[1174,1149],[1167,1233]],{solidify:true});
-
-// Ulthos is traced from the supplied WebP: the full south-eastern landmass plus
-// the two detached islands. The mainland continues through the map's bottom/right
-// crop, so those edges intentionally terminate at W/H.
-addMulti('ulthos','Ulthos','#9c8768',[
-  [[1850,1084],[1850,1233],[1593,1233],[1593,1226],[1604,1223],[1609,1216],[1616,1217],[1617,1210],[1621,1206],[1624,1208],[1625,1203],[1629,1200],[1625,1198],[1626,1194],[1629,1191],[1632,1194],[1640,1193],[1645,1189],[1647,1182],[1649,1185],[1652,1185],[1657,1179],[1666,1179],[1684,1173],[1691,1174],[1700,1168],[1704,1172],[1714,1170],[1720,1174],[1735,1174],[1738,1171],[1744,1172],[1746,1176],[1754,1174],[1765,1163],[1781,1163],[1791,1156],[1798,1156],[1804,1148],[1803,1142],[1805,1140],[1811,1145],[1824,1145],[1835,1139],[1837,1141],[1842,1137],[1847,1137],[1849,1134],[1850,1134]],
-  [[1817,1097],[1816,1101],[1813,1102],[1821,1108],[1818,1109],[1819,1112],[1814,1119],[1817,1122],[1816,1127],[1823,1125],[1832,1127],[1839,1118],[1835,1112],[1842,1104],[1837,1100]],
-  [[1791,1138],[1770,1140],[1765,1144],[1763,1153],[1769,1148],[1776,1148],[1786,1144]]
-],{clipToLand:false});
+add('sothoryos','Sothoryos','#72916c',[[820,1233],[820,1162],[854,1129],[919,1130],[950,1106],[993,1121],[1020,1113],[1080,1108],[1111,1081],[1183,1072],[1203,1097],[1174,1149],[1167,1233]]);
+add('ulthos','Ulthos','#9c8768',[[1590,1233],[1590,1200],[1630,1180],[1680,1167],[1745,1157],[1760,1130],[1795,1124],[1804,1084],[1850,1084],[1850,1233]]);
 
 // Fill only enclosed holes of a selected continent, never open coastal bays.
 function fillInterior(mask) {
@@ -86,38 +78,6 @@ function fillInterior(mask) {
  for(let i=0;i<mask.length;i++)if(!exterior[i])mask[i]=1;
 }
 
-// Close narrow holes/corridors caused by dark terrain being mistaken for water.
-// A small 4-neighbour diamond is deliberately conservative at real coastlines.
-function dilate4(mask,passes=2){
- let src=mask;
- for(let pass=0;pass<passes;pass++){
-   const out=src.slice();
-   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
-     const i=y*W+x;
-     if(src[i]||(x&&src[i-1])||(x<W-1&&src[i+1])||(y&&src[i-W])||(y<H-1&&src[i+W]))out[i]=1;
-   }
-   src=out;
- }
- return src;
-}
-function erode4(mask,passes=2){
- let src=mask;
- for(let pass=0;pass<passes;pass++){
-   const out=src.slice();
-   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
-     const i=y*W+x;
-     if(!src[i]||(x&&!src[i-1])||(x<W-1&&!src[i+1])||(y&&!src[i-W])||(y<H-1&&!src[i+W]))out[i]=0;
-   }
-   src=out;
- }
- return src;
-}
-function solidifyInterior(mask){
- const closed=erode4(dilate4(mask,2),2);
- mask.set(closed);
- fillInterior(mask);
-}
-
 async function main(){
  const {data}=await sharp('public/images/map/known-world.webp').resize(W,H).removeAlpha().raw().toBuffer({resolveWithObject:true});
  const west=JSON.parse(fs.readFileSync('data/map/region-geometry.json','utf8'));
@@ -127,6 +87,7 @@ async function main(){
    const r=data[i*3],g=data[i*3+1],b=data[i*3+2];
    land[i]=(!(b>r*1.025&&b>g*.98)||(r>180&&Math.max(r,g,b)-Math.min(r,g,b)<35))&&(r+g+b)>130?1:0;
  }
+ const originalLand=land.slice();
  // Connected components remove offshore lettering. Fill enclosed terrain-colour
  // holes, but retain open bays and large lakes. This is an offline operation.
  function components(value,visit){
@@ -141,21 +102,18 @@ async function main(){
  }
  components(1,pixels=>{if(pixels.length<14)for(const p of pixels)land[p]=0;});
  components(0,(pixels,edge)=>{if(!edge&&pixels.length<1500)for(const p of pixels)land[p]=1;});
- const originalLand=land.slice();
  const owners=new Int8Array(W*H).fill(-1);
- const bounds=definitions.map(r=>{
-   const points=regionRings(r).flat();
-   return{minX:Math.min(...points.map(p=>p[0])),maxX:Math.max(...points.map(p=>p[0])),minY:Math.min(...points.map(p=>p[1])),maxY:Math.max(...points.map(p=>p[1]))};
- });
+ const bounds=definitions.map(r=>({minX:Math.min(...r.ring.map(p=>p[0])),maxX:Math.max(...r.ring.map(p=>p[0])),minY:Math.min(...r.ring.map(p=>p[1])),maxY:Math.max(...r.ring.map(p=>p[1]))}));
  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
-   const i=y*W+x;if(westernMask[i*4+3]>0)continue;
+   const i=y*W+x;if(!land[i]||westernMask[i*4+3]>0)continue;
    for(let j=0;j<definitions.length;j++){
-     const region=definitions[j],a=bounds[j];
-     if(x<a.minX||x>a.maxX||y<a.minY||y>a.maxY)continue;
-     if(region.clipToLand!==false&&!land[i])continue;
-     // Preserve the northern Valyrian lake/river as water.
-     if(region.id==='valyria'&&y<850&&!originalLand[i])continue;
-     if(regionRings(region).some(ring=>inside(x+.5,y+.5,ring))){owners[i]=j;break;}
+     const a=bounds[j];if(x<a.minX||x>a.maxX||y<a.minY||y>a.maxY)continue;
+     if(inside(x+.5,y+.5,definitions[j].ring)){
+       // Do not turn the northern Valyrian lake/river into land when closing
+       // small terrain holes elsewhere in the artwork.
+       if(definitions[j].id==='valyria'&&y<850&&!originalLand[i])continue;
+       owners[i]=j;break;
+     }
    }
  }
  // Leave a one-grid-pixel separation at Elyria so curve smoothing cannot
@@ -170,7 +128,7 @@ async function main(){
  for(let y=0;y<=H;y++)for(let x=0;x<=W;x++)if(new Set([owner(x-1,y-1),owner(x,y-1),owner(x-1,y),owner(x,y)]).size>2)junctions.add(y*(W+1)+x);
  const regions=definitions.map((r,index)=>{
    const mask=new Uint8Array(W*H);for(let i=0;i<mask.length;i++)mask[i]=owners[i]===index?1:0;
-   if(r.solidify)solidifyInterior(mask);
+   if(r.id==='sothoryos')fillInterior(mask);
    return{id:r.id,name:r.name,color:r.color,path:trace(mask,junctions,grid)};
  }).filter(r=>r.path);
  fs.writeFileSync('data/map/world-region-geometry.json',JSON.stringify({width:7400,height:4932,regions},null,2)+'\n');
