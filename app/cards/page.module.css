@@ -364,9 +364,15 @@
   margin-bottom: 2rem;
 
   flex-wrap: wrap;
+
+  align-items: stretch;
 }
 
 .tab {
+  min-height: 44px;
+
+  box-sizing: border-box;
+
   padding:
     0.45rem 1.2rem;
 
@@ -444,7 +450,25 @@
       0.08
     ) !important;
 
-  font-weight: 700;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .tabs {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
 }
 
 /* ────────────────────────────────────────────

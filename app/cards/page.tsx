@@ -190,10 +190,16 @@ export default function CardsPage() {
 
       <div
         className={styles.tabs}
+        role="tablist"
+        aria-label="Card tiers"
       >
         {tiers.map((tier) => (
           <button
             key={tier.id}
+            type="button"
+            role="tab"
+            aria-selected={activeTier === tier.id}
+            aria-controls="card-tier-panel"
             className={`${styles.tab} ${
               activeTier ===
               tier.id
@@ -229,7 +235,9 @@ export default function CardsPage() {
       {/* CARD GRID */}
 
       <div
+        id="card-tier-panel"
         className={styles.grid}
+        role="tabpanel"
       >
         {tierCards.map(
           (card) => (

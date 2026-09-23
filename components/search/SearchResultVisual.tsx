@@ -10,11 +10,10 @@ import type { SearchResult } from "@/lib/search";
 type SearchVisualResult = Omit<SearchResult, "keywords">;
 
 function LineIcon({ kind }: { kind: string }) {
+  if (kind === "dragon" || kind === "quote") return <UtilityIcon name={kind} size={22} />;
   return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
     <g stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round">
       {kind === "chapter" && <><path d="M4 5.5c2.8-.9 5.3-.4 8 1.5v12c-2.7-1.9-5.2-2.4-8-1.5Z"/><path d="M20 5.5c-2.8-.9-5.3-.4-8 1.5v12c2.7-1.9 5.2-2.4 8-1.5Z"/></>}
-      {kind === "dragon" && <><path d="M4 17c3-5 4-9 3-13 4 2 6 4 7 7 2-1 4-1 6 0-3 1-4 3-4 6-3-2-5-2-7 0-2 2-4 2-5 0Z"/><path d="m8 10 3 1-2 2"/></>}
-      {kind === "quote" && <><path d="M5 19c4-1 9-5 13-14 1 5-1 11-6 14Z"/><path d="m8 16 7-7M4 21h10"/></>}
       {kind === "update" && <><path d="M6 3h9l3 3v15H6Z"/><path d="M15 3v4h4M9 11h6M9 15h6"/><path d="m4 8 1-2 1 2 2 1-2 1-1 2-1-2-2-1Z"/></>}
       {kind === "feast" && <><path d="M7 4h10v4c0 4-2 6-5 6S7 12 7 8Z"/><path d="M12 14v5M9 20h6M4 6h3M17 6h3c0 3-1 4-3 4"/></>}
       {kind === "wedding" && <><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></>}

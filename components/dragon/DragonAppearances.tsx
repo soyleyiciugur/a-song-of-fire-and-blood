@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import UtilityIcon from "@/components/nav/UtilityIcon";
 import ContinueReadingLink from "@/components/reading/ContinueReadingLink";
 import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
 import { getDragonAppearances } from "@/data/dragon-appearances";
@@ -16,7 +17,7 @@ export default function DragonAppearances({ dragonId }: { dragonId: string }) {
     <div className={styles.list}>
       {appearances.length === 0 && <p className={styles.empty}>No physical chapter appearances have been recorded yet.</p>}
       {visible.map((appearance, index) => <article className={styles.card} key={`${appearance.chapterSlug}-${appearance.label}-${index}`}>
-        <div className={styles.marker} aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15c4-1 6-4 7-9 2 3 5 5 9 5-2 2-3 4-3 7-3-2-6-2-9 0 0-2-1-3-4-3Z" /></svg></div>
+        <div className={styles.marker} aria-hidden="true"><UtilityIcon name="dragon" size={19} /></div>
         <div className={styles.copy}><span>{appearance.chapterTitle}</span><h3>{appearance.label}</h3><p>{appearance.excerpt}</p></div>
         <Link href={`/chapters/${appearance.chapterSlug}`}>Read chapter <span aria-hidden="true">→</span></Link>
       </article>)}

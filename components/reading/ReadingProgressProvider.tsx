@@ -111,6 +111,9 @@ export function useSpoilerBoundary() {
   return {
     boundaryChapterSlug: progress?.chapterSlug ?? null,
     ready,
-    canReveal: useCallback((chapterSlug?: string | null) => !ready || isWithinSpoilerBoundary(chapterSlug, progress?.chapterSlug), [progress?.chapterSlug, ready]),
+    // The server and first client render cannot know the local or remote
+    // boundary yet. Keep chapter-derived details sealed until hydration has
+    // resolved it so direct loads never put future content in the initial HTML.
+    canReveal: useCallback((chapterSlug?: string | null) => ready && isWithinSpoilerBoundary(chapterSlug, progress?.chapterSlug), [progress?.chapterSlug, ready]),
   };
 }

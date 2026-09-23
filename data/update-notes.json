@@ -8,6 +8,9 @@
       "Extended the regional map layer to Beyond the Wall and reference-colored territories beyond Westeros, without additional sigils; refined Free Cities borders and kept uncolored territories free of overlays and hover effects.",
       "Matched the Regions & sigils icon to the map controls' gold color.",
       "Matched Essos region colors to the supplied references, prioritizing the Free Cities close-up while preserving subtle translucent fills.",
+      "Unified regional label typography, strengthened translucent colors and outlines with clearer white and black territories, added Valyria, Sothoryos and Ulthos, and extended the southern Stormlands border slightly.",
+      "Refined Valyria's outline to the supplied peninsula cutout, including its offshore fragments while keeping Elyria separate and coastlines smooth.",
+      "Removed Valyria's northeastern protrusion and northern water coverage, expanded Ulthos to its full visible mainland and two islands, and closed the interior gap in Sothoryos.",
       "Styled regional hover names with dark, gold-framed labels that stay readable at every zoom level and dismiss during map gestures.",
       "Added spoiler-aware Dragon Appearances to dragon profiles and linked each chapter's physically present dragons from Chapter Companion.",
       "Added combined character and chapter filters to Echoes of the Realm with a compact responsive archive toolbar.",
@@ -15,7 +18,12 @@
       "Cleaned up Personal Ravens with accurate expandable counts, duplicate-announcement protection, unified multi-sender message groups, consistent reply context, aligned copy, safer wrapping, and complete text in detailed views.",
       "Aligned the map chapter action with the map's compact gold-framed control styling.",
       "Replaced the browser-default head-to-head profile link with the profile's compact themed control styling.",
-      "Kept tab and section menus fixed in place when switching between content of different lengths."
+      "Kept tab and section menus fixed in place when switching between content of different lengths.",
+      "Unified dragon icons across search, Dragon Appearances and Chapter Companion, and refined the quote icon.",
+      "Added icons to conversation menu actions and search and shared-content shortcuts to Guild Info.",
+      "Kept spoiler-protected chapter details sealed during reading-progress loading, including direct links to Dragon Appearances and Chapter Companion.",
+      "Standardized tab sizing, alignment, focus states and narrow-screen scrolling across the site while preserving each section's established visual treatment.",
+      "Reconciled the semicanon royal chronology from Jaehaerys I through Baelenys, including namedays, parentage, reigns, the late-78 AC coronation, and the 77 AC Iron Islands campaign."
     ]
   },
   {

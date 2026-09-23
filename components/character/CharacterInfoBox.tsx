@@ -918,7 +918,7 @@ function CharacterGalleryModal({
           <h2>{character.name}</h2>
         </div>
 
-        <div className={styles.galleryTabs}>
+        <div className={styles.galleryTabs} role="tablist" aria-label={`${character.name} gallery sections`}>
           {(
             [
               ["raven", "Raven's Eye"],
@@ -929,6 +929,9 @@ function CharacterGalleryModal({
             <button
               key={tab}
               type="button"
+              role="tab"
+              aria-selected={activeTab === tab}
+              aria-controls="character-gallery-panel"
               className={`${styles.galleryTab} ${
                 activeTab === tab ? styles.galleryTabActive : ""
               }`}
@@ -940,7 +943,7 @@ function CharacterGalleryModal({
           ))}
         </div>
 
-        <div className={styles.modalBody}>
+        <div id="character-gallery-panel" className={styles.modalBody} role="tabpanel">
           {activeEntries.length === 0 ? (
             <div className={styles.modalEmpty}>Nothing tagged here yet.</div>
           ) : (

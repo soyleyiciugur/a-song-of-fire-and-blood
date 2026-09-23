@@ -24,7 +24,7 @@ const crownStormEdge = [[509,1036],[534,1047],[557,1054],[583,1052],[602,1045],[
 // https://atlasoficeandfireblog.wordpress.com/2017/02/25/geographic-map-12-the-stormlands/
 const reachStormEdge = [[509,1036],[500,1060],[500,1085],[491,1105],[485,1125],[472,1147],[450,1160],[422,1165],[395,1177],[368,1184],[343,1190],[320,1200],[307,1220]];
 const dorneReachEdge = [[0,1446],[220,1446],[223,1364],[241,1340],[252,1318],[259,1297],[266,1275],[271,1253],[282,1233],[307,1220]];
-const dorneStormEdge = [[307,1220],[340,1210],[372,1203],[401,1188],[425,1178],[449,1175],[473,1186],[486,1200],[473,1220],[465,1240],[490,1270],[600,1270],[800,1270]];
+const dorneStormEdge = [[307,1220],[340,1216],[372,1213],[401,1201],[425,1192],[449,1189],[473,1200],[486,1214],[473,1232],[465,1250],[490,1270],[600,1270],[800,1270]];
 const dorneEdge = [...dorneReachEdge,...dorneStormEdge.slice(1)];
 const reverse = a => [...a].reverse();
 const regions = [
@@ -182,7 +182,9 @@ async function main() {
     if(new Set([owner(x-1,y-1),owner(x,y-1),owner(x-1,y),owner(x,y)]).size>2)junctions.add(y*(W+1)+x);
   }
   const houses=JSON.parse(fs.readFileSync('data/houses.json','utf8'));
-  const result=regions.map((r,i)=>({id:r.id,name:r.name,house:r.house,color:houses.find(h=>h.id===r.house).color,
+  // Map-specific reference palette; do not change canonical House brand colours.
+  const referenceColors={stark:'#ffffff',greyjoy:'#101014',arryn:'#0098e0',tully:'#a70819',lannister:'#c60012',targaryen:'#101014',baratheon:'#ffe21c',martell:'#ed8500',tyrell:'#008509'};
+  const result=regions.map((r,i)=>({id:r.id,name:r.name,house:r.house,color:referenceColors[r.house],
     sigil:houses.find(h=>h.id===r.house).sigilSrc,
     label:{x:Math.round(reference.left+r.label[0]*reference.width/800),y:Math.round(reference.top+r.label[1]*reference.width/800),size:Math.round(r.size*reference.width/800)},path:trace(masks[i],junctions)}));
   fs.writeFileSync('data/map/region-geometry.json',JSON.stringify({width:7400,height:4932,regions:result},null,2)+'\n');

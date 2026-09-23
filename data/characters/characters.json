@@ -199,7 +199,7 @@
     "nameday": {
       "day": 8,
       "moon": 11,
-      "year": 44
+      "year": 40
     },
     "height": "185 cm",
     "father": "aenys-targaryen-ii",
@@ -273,8 +273,8 @@
         "latestDevelopment": "After the Flea Bottom massacre, he cancels Gaelor's Watch appointment, sends him to Driftmark and reserves further punishment to himself."
       },
       "grance-morrigen": {
-        "overview": "A knight who accompanied him to Cloudpass in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing.",
-        "latestDevelopment": "A knight who accompanied him to Cloudpass in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing."
+        "overview": "A knight who accompanied him to Ashenmist Valley in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing.",
+        "latestDevelopment": "A knight who accompanied him to Ashenmist Valley in 56 AC and helped draw Vahaemon back while Baelenys faced and ultimately claimed Maelwing."
       },
       "harrik-greyjoy": {
         "overview": "He remembers Harrik as one of the great opponents of his Iron Islands campaigns.",
@@ -297,8 +297,8 @@
         "latestDevelopment": "The memory still returns in nightmares."
       },
       "myles-mooton": {
-        "overview": "A Riverlands knight who rode in his party to Cloudpass on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared.",
-        "latestDevelopment": "A Riverlands knight who rode in his party to Cloudpass on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared."
+        "overview": "A Riverlands knight who rode in his party to Ashenmist Valley on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared.",
+        "latestDevelopment": "A Riverlands knight who rode in his party to Ashenmist Valley on Vahaemon's nameday in 56 AC and helped pull the terrified young prince away when Maelwing appeared."
       },
       "oswald-eagle": {
         "overview": "Cancels Gaelor's appointment after the massacre, leaving Oswald in command of the Watch.",
@@ -359,6 +359,23 @@
     },
     "summary": "A nightmare forces Baelenys back into one of the ugliest memories of Aenys II's household: at seventeen, Malaenar was made to crawl across the Dragonpit floor before their father ordered Sheepstealer to kill the small dragon he had secretly claimed. Young Baelenys watched, froze when his brother begged for help and fled. In the present, Baelenys continues indulging Vhaemys's smaller tyrannies, watches Gaelor win Brant Costayne's trial by combat and warns his son that aggression is not enough to make a prince. The same day, the Master of Whisperers reveals that Vahaemon is not hiding in Essos but preparing—surrounded by Vaenarr, blood magic and multiple dragons.",
     "quotes": [],
+    "reign": {
+      "from": "Late 78 AC"
+    },
+    "personalTimeline": [
+      {
+        "title": "The Dragonbreath defeats Harrik",
+        "date": "17th of the 6th Moon, 77 AC",
+        "description": "Prince Baelenys defeats Harrik Greyjoy during the Iron Islands campaign, more than a year before taking the Iron Throne.",
+        "order": 27917
+      },
+      {
+        "title": "Crowned King",
+        "date": "Late 78 AC",
+        "description": "Baelenys succeeds Aenys II and is crowned at the age of thirty-eight.",
+        "order": 28460
+      }
+    ],
     "debutChapter": "the-poison-beneath-the-crown"
   },
   {
@@ -372,14 +389,15 @@
     "nameday": {
       "day": 5,
       "moon": 4,
-      "year": 26
+      "year": 22
     },
     "height": "174 cm",
     "father": "jaehaerys-targaryen-i",
     "mother": "alysanne-targaryen",
     "spouse": "-",
     "siblings": [
-      "aenys-targaryen-ii"
+      "aenys-targaryen-ii",
+      "queen-vhaemys-targaryen"
     ],
     "children": [],
     "mentor": "-",
@@ -464,12 +482,24 @@
         "latestDevelopment": "Her return turned an old family memory into a present strategic threat."
       },
       "aenys-targaryen-ii": {
-        "overview": "His younger brother, who inherited the Iron Throne after Baelor set aside his own claim for a life of scholarship at the Citadel.",
-        "latestDevelopment": "His younger brother, who inherited the Iron Throne after Baelor set aside his own claim for a life of scholarship at the Citadel."
+        "overview": "His younger brother, who inherited the Iron Throne after Baelor's earlier choice of a life of scholarship at the Citadel had already removed him from consideration.",
+        "latestDevelopment": "His younger brother, who inherited the Iron Throne after Baelor's earlier choice of a life of scholarship at the Citadel had already removed him from consideration."
+      },
+      "queen-vhaemys-targaryen": {
+        "overview": "His younger sister, who became queen to their brother Aenys II.",
+        "latestDevelopment": "His younger sister, who became queen to their brother Aenys II."
       }
     },
-    "summary": "Decades ago, Baelor Targaryen forsook his own claim to the Iron Throne for a quieter life of study at the Citadel, earning a reputation as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon. Recalled to King's Landing amid the Tyrell-Hightower treason crisis, Baelor arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
+    "summary": "Decades ago, before Jaehaerys I died and succession became immediate, Baelor Targaryen chose a quieter life of study at the Citadel. He was therefore not a claimant when his younger brother Aenys II inherited the Iron Throne. Known as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon — Baelor was recalled to King's Landing amid the Tyrell-Hightower treason crisis. He arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
     "quotes": [],
+    "personalTimeline": [
+      {
+        "title": "Chooses the Citadel",
+        "date": "Date unknown, before 73 AC",
+        "description": "Jaehaerys I's elder son chooses scholarship before the succession becomes immediate; he does not renounce the crown at his father's death.",
+        "order": 26279
+      }
+    ],
     "debutChapter": "fathers-and-their-sins"
   },
   {
@@ -767,8 +797,8 @@
         "latestDevelopment": "Gaelor helped build the false-prisoner trap and spent a night disguised as a gaoler waiting for Derrin to appear; Derrin never came, but suspicion only deepened."
       },
       "grance-morrigen": {
-        "overview": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC; Derrin urged Grance to keep pace as they hurried after the prince.",
-        "latestDevelopment": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC; Derrin urged Grance to keep pace as they hurried after the prince."
+        "overview": "Rode with him in Prince Baelenys's party during the Ashenmist Valley incident of 56 AC; Derrin urged Grance to keep pace as they hurried after the prince.",
+        "latestDevelopment": "Rode with him in Prince Baelenys's party during the Ashenmist Valley incident of 56 AC; Derrin urged Grance to keep pace as they hurried after the prince."
       },
       "jacaelon-targaryen": {
         "overview": "The prince who exposed his treason, led him into a locked room at Driftmark under false pretenses, extracted his full confession — including the name of the Lord of Highgarden — and executed him on the spot before disposing of the body at sea.",
@@ -779,8 +809,8 @@
         "latestDevelopment": "His surviving daughter, whose life was spared only by chance in the Oldtown massacre."
       },
       "myles-mooton": {
-        "overview": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC.",
-        "latestDevelopment": "Rode with him in Prince Baelenys's party during the Cloudpass incident of 56 AC."
+        "overview": "Rode with him in Prince Baelenys's party during the Ashenmist Valley incident of 56 AC.",
+        "latestDevelopment": "Rode with him in Prince Baelenys's party during the Ashenmist Valley incident of 56 AC."
       },
       "lorent-tyrell": {
         "overview": "His co-conspirator; Lorent first approached him with the plan to poison the King, sharing his belief that the realm could not survive another of Baelenys's wars.",
@@ -1454,8 +1484,8 @@
     "status": "Alive",
     "nameday": {
       "day": 4,
-      "moon": 12,
-      "year": 43
+      "moon": 8,
+      "year": 38
     },
     "height": "177 cm",
     "father": "aenys-targaryen-ii",
@@ -2449,7 +2479,7 @@
     "nameday": {
       "day": 12,
       "moon": 2,
-      "year": 46
+      "year": 44
     },
     "height": "180 cm",
     "father": "aenys-targaryen-ii",
@@ -2491,8 +2521,8 @@
         "latestDevelopment": "Some of that abandoned research later passed indirectly into Visenor's hands and now touches the struggle surrounding Vahaemon's name."
       },
       "grance-morrigen": {
-        "overview": "One of the knights who pulled him away from Maelwing while he screamed at Baelenys during the Cloudpass incident of 56 AC.",
-        "latestDevelopment": "One of the knights who pulled him away from Maelwing while he screamed at Baelenys during the Cloudpass incident of 56 AC."
+        "overview": "One of the knights who pulled him away from Maelwing while he screamed at Baelenys during the Ashenmist Valley incident of 56 AC.",
+        "latestDevelopment": "One of the knights who pulled him away from Maelwing while he screamed at Baelenys during the Ashenmist Valley incident of 56 AC."
       },
       "jacaelon-targaryen": {
         "overview": "His nephew has become one of the principal minds directing the Crown's effort against him.",
@@ -2503,8 +2533,8 @@
         "latestDevelopment": "His steady brother, who stayed loyal to Baelenys throughout and whose very steadiness has always been the sharpest rebuke to Vahaemon's choices."
       },
       "myles-mooton": {
-        "overview": "One of the knights who pulled him back from Maelwing during the disastrous Cloudpass incident on his nameday in 56 AC.",
-        "latestDevelopment": "One of the knights who pulled him back from Maelwing during the disastrous Cloudpass incident on his nameday in 56 AC."
+        "overview": "One of the knights who pulled him back from Maelwing during the disastrous Ashenmist Valley incident on his nameday in 56 AC.",
+        "latestDevelopment": "One of the knights who pulled him back from Maelwing during the disastrous Ashenmist Valley incident on his nameday in 56 AC."
       },
       "naela-targaryen": {
         "overview": "His wife; her current whereabouts and condition are unknown.",
@@ -3807,6 +3837,10 @@
     },
     "summary": "The Conqueror who forged the Seven Kingdoms into one realm. In this semicanon line he precedes the house line that eventually leads to Aenys II and Baelenys.",
     "quotes": [],
+    "reign": {
+      "from": "1 AC",
+      "to": "37 AC"
+    },
     "death": {
       "day": 1,
       "moon": 1,
@@ -3928,7 +3962,7 @@
     "nameday": {
       "day": 1,
       "moon": 1,
-      "year": -4
+      "year": -10
     },
     "height": "-",
     "father": "aegon-targaryen-i",
@@ -3938,7 +3972,8 @@
       "maegor-targaryen-i"
     ],
     "children": [
-      "jaehaerys-targaryen-i"
+      "jaehaerys-targaryen-i",
+      "alysanne-targaryen"
     ],
     "mentor": "-",
     "dragon": "Quicksilver",
@@ -3959,6 +3994,10 @@
         "overview": "His son and dynastic successor.",
         "latestDevelopment": "His son and dynastic successor."
       },
+      "alysanne-targaryen": {
+        "overview": "His daughter and later queen to Jaehaerys I.",
+        "latestDevelopment": "His daughter and later queen to Jaehaerys I."
+      },
       "maegor-targaryen-i": {
         "overview": "His half-brother and successor in name before the realm passed on.",
         "latestDevelopment": "His half-brother and successor in name before the realm passed on."
@@ -3970,6 +4009,10 @@
     },
     "summary": "The son of Aegon the Conqueror whose line eventually leads to Jaehaerys I and, generations later, Aenys II.",
     "quotes": [],
+    "reign": {
+      "from": "37 AC",
+      "to": "42 AC"
+    },
     "death": {
       "day": 1,
       "moon": 1,
@@ -3987,7 +4030,7 @@
     "nameday": {
       "day": 1,
       "moon": 1,
-      "year": 7
+      "year": -10
     },
     "height": "-",
     "father": "-",
@@ -3995,7 +4038,8 @@
     "spouse": "aenys-targaryen-i",
     "siblings": [],
     "children": [
-      "jaehaerys-targaryen-i"
+      "jaehaerys-targaryen-i",
+      "alysanne-targaryen"
     ],
     "mentor": "-",
     "dragon": "-",
@@ -4011,6 +4055,10 @@
       "jaehaerys-targaryen-i": {
         "overview": "Her son.",
         "latestDevelopment": "Her son."
+      },
+      "alysanne-targaryen": {
+        "overview": "Her daughter and later queen to Jaehaerys I.",
+        "latestDevelopment": "Her daughter and later queen to Jaehaerys I."
       }
     },
     "summary": "The Queen Alyssa Velaryon of the earlier semicanon line, mother of Jaehaerys I.",
@@ -4070,6 +4118,10 @@
     },
     "summary": "The harsh king between Aenys I and Jaehaerys I in the earlier semicanon dynasty line.",
     "quotes": [],
+    "reign": {
+      "from": "42 AC",
+      "to": "48 AC"
+    },
     "death": {
       "day": 1,
       "moon": 1,
@@ -4089,16 +4141,19 @@
     "nameday": {
       "day": 1,
       "moon": 1,
-      "year": 11
+      "year": 5
     },
     "height": "-",
     "father": "aenys-targaryen-i",
     "mother": "alyssa-velaryon-elder",
     "spouse": "alysanne-targaryen",
-    "siblings": [],
+    "siblings": [
+      "alysanne-targaryen"
+    ],
     "children": [
       "baelor-targaryen",
-      "aenys-targaryen-ii"
+      "aenys-targaryen-ii",
+      "queen-vhaemys-targaryen"
     ],
     "mentor": "-",
     "dragon": "Vermithor",
@@ -4121,8 +4176,8 @@
         "latestDevelopment": "His uncle and royal predecessor, whose reign ended before Jaehaerys's succession."
       },
       "alysanne-targaryen": {
-        "overview": "His queen and wife.",
-        "latestDevelopment": "His queen and wife."
+        "overview": "His sister, queen and wife.",
+        "latestDevelopment": "His sister, queen and wife."
       },
       "baelor-targaryen": {
         "overview": "His elder son.",
@@ -4131,10 +4186,26 @@
       "aenys-targaryen-ii": {
         "overview": "His younger son and eventual royal successor in this semicanon line.",
         "latestDevelopment": "His younger son and eventual royal successor in this semicanon line."
+      },
+      "queen-vhaemys-targaryen": {
+        "overview": "His daughter, who became queen to Aenys II.",
+        "latestDevelopment": "His daughter, who became queen to Aenys II."
       }
     },
     "summary": "In the semicanon royal timeline, Jaehaerys I and Alysanne anchor the immediate line before Baelor and Aenys II.",
     "quotes": [],
+    "reign": {
+      "from": "48 AC",
+      "to": "73 AC"
+    },
+    "personalTimeline": [
+      {
+        "title": "Aenys II succeeds Jaehaerys I",
+        "date": "73 AC",
+        "description": "Jaehaerys dies after a twenty-five-year reign; with Baelor already at the Citadel, his younger son Aenys II succeeds him.",
+        "order": 26280
+      }
+    ],
     "death": {
       "day": 1,
       "moon": 1,
@@ -4152,16 +4223,19 @@
     "nameday": {
       "day": 1,
       "moon": 1,
-      "year": 13
+      "year": 7
     },
     "height": "-",
-    "father": "-",
-    "mother": "-",
+    "father": "aenys-targaryen-i",
+    "mother": "alyssa-velaryon-elder",
     "spouse": "jaehaerys-targaryen-i",
-    "siblings": [],
+    "siblings": [
+      "jaehaerys-targaryen-i"
+    ],
     "children": [
       "baelor-targaryen",
-      "aenys-targaryen-ii"
+      "aenys-targaryen-ii",
+      "queen-vhaemys-targaryen"
     ],
     "mentor": "-",
     "dragon": "Silverwing",
@@ -4171,8 +4245,16 @@
     "goals": [],
     "relationships": {
       "jaehaerys-targaryen-i": {
-        "overview": "Her king and husband.",
-        "latestDevelopment": "Her king and husband."
+        "overview": "Her brother, king and husband.",
+        "latestDevelopment": "Her brother, king and husband."
+      },
+      "aenys-targaryen-i": {
+        "overview": "Her father.",
+        "latestDevelopment": "Her father."
+      },
+      "alyssa-velaryon-elder": {
+        "overview": "Her mother.",
+        "latestDevelopment": "Her mother."
       },
       "baelor-targaryen": {
         "overview": "Her elder son.",
@@ -4181,6 +4263,10 @@
       "aenys-targaryen-ii": {
         "overview": "Her younger son in the semicanon line.",
         "latestDevelopment": "Her younger son in the semicanon line."
+      },
+      "queen-vhaemys-targaryen": {
+        "overview": "Her daughter, who became queen to Aenys II.",
+        "latestDevelopment": "Her daughter, who became queen to Aenys II."
       }
     },
     "summary": "Good Queen Alysanne, kept here in the semicanon line as the wife of Jaehaerys I and the mother of Baelor and Aenys II.",
@@ -4202,14 +4288,15 @@
     "nameday": {
       "day": 15,
       "moon": 2,
-      "year": 28
+      "year": 23
     },
     "height": "181 cm",
     "father": "jaehaerys-targaryen-i",
     "mother": "alysanne-targaryen",
     "spouse": "queen-vhaemys-targaryen",
     "siblings": [
-      "baelor-targaryen"
+      "baelor-targaryen",
+      "queen-vhaemys-targaryen"
     ],
     "children": [
       "malaenar-targaryen",
@@ -4249,20 +4336,38 @@
         "latestDevelopment": "His youngest son."
       },
       "queen-vhaemys-targaryen": {
-        "overview": "His queen and wife.",
-        "latestDevelopment": "His queen and wife."
+        "overview": "His sister, queen and wife.",
+        "latestDevelopment": "His sister, queen and wife."
       },
       "baelor-targaryen": {
-        "overview": "His elder brother, who relinquished his own claim and entered the Citadel, leaving Aenys to inherit the Iron Throne.",
-        "latestDevelopment": "His elder brother, who relinquished his own claim and entered the Citadel, leaving Aenys to inherit the Iron Throne."
+        "overview": "His elder brother, whose earlier choice of the Citadel meant he was not a claimant when Jaehaerys I died.",
+        "latestDevelopment": "His elder brother, whose earlier choice of the Citadel meant he was not a claimant when Jaehaerys I died."
       }
     },
     "summary": "The late King Aenys Targaryen II left wounds far deeper than succession politics. A memory from Baelenys's childhood reveals him humiliating his disabled seventeen-year-old son Malaenar beneath the Dragonpit, forcing the boy to crawl across the floor for the right to keep a small dragon before ordering Sheepstealer to kill it. Young Baelenys watched and failed to intervene. The cruelty of Aenys's household continues to shape both surviving sons decades after his death.",
     "quotes": [],
+    "reign": {
+      "from": "73 AC",
+      "to": "Late 78 AC"
+    },
+    "personalTimeline": [
+      {
+        "title": "Succeeds Jaehaerys I",
+        "date": "73 AC",
+        "description": "Aenys inherits the Iron Throne after his father's death; his elder brother Baelor had already chosen the Citadel.",
+        "order": 26280
+      },
+      {
+        "title": "Death and succession",
+        "date": "Late 78 AC",
+        "description": "Aenys II dies after a reign of nearly six years and is succeeded by his thirty-eight-year-old son Baelenys.",
+        "order": 28460
+      }
+    ],
     "death": {
       "day": 20,
-      "moon": 6,
-      "year": 81
+      "moon": 12,
+      "year": 78
     }
   },
   {
@@ -4276,13 +4381,16 @@
     "nameday": {
       "day": 9,
       "moon": 6,
-      "year": 29
+      "year": 23
     },
     "height": "-",
-    "father": "-",
-    "mother": "-",
+    "father": "jaehaerys-targaryen-i",
+    "mother": "alysanne-targaryen",
     "spouse": "aenys-targaryen-ii",
-    "siblings": [],
+    "siblings": [
+      "baelor-targaryen",
+      "aenys-targaryen-ii"
+    ],
     "children": [
       "malaenar-targaryen",
       "baelenys-targaryen",
@@ -4296,8 +4404,20 @@
     "goals": [],
     "relationships": {
       "aenys-targaryen-ii": {
-        "overview": "Her husband and king.",
-        "latestDevelopment": "Her husband and king."
+        "overview": "Her brother, husband and king.",
+        "latestDevelopment": "Her brother, husband and king."
+      },
+      "jaehaerys-targaryen-i": {
+        "overview": "Her father and king.",
+        "latestDevelopment": "Her father and king."
+      },
+      "alysanne-targaryen": {
+        "overview": "Her mother and queen.",
+        "latestDevelopment": "Her mother and queen."
+      },
+      "baelor-targaryen": {
+        "overview": "Her elder brother, who chose the Citadel before their father's death.",
+        "latestDevelopment": "Her elder brother, who chose the Citadel before their father's death."
       },
       "baelenys-targaryen": {
         "overview": "Her son.",
@@ -4312,7 +4432,7 @@
         "latestDevelopment": "Her youngest son."
       }
     },
-    "summary": "The late Queen Vhaemys Targaryen, wife of Aenys II and mother of Malaenar, Baelenys, and Vahaemon. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
+    "summary": "The late Queen Vhaemys Targaryen, daughter of Jaehaerys I and Alysanne, sister and wife of Aenys II, and mother of Malaenar, Baelenys, and Vahaemon. She is distinct from King Baelenys's young daughter Princess Vhaemys.",
     "quotes": [],
     "death": {
       "day": 20,
@@ -4545,12 +4665,12 @@
         "latestDevelopment": "Harrik the Drowned Servant.'"
       }
     },
-    "summary": "Harrik 'Drowned Servant' Greyjoy, a gigantic Ironborn warrior remembered as one of Baelenys Targaryen's most famous opponents in the Iron Islands. Harrik died in 80 AC at the age of forty-seven, when Baelenys was thirty-five.",
+    "summary": "Harrik 'Drowned Servant' Greyjoy, a gigantic Ironborn warrior remembered as one of Baelenys Targaryen's most famous opponents in the Iron Islands. Harrik died on the Seventeenth Day of the Sixth Moon, 77 AC, at the age of forty-four, when Prince Baelenys was thirty-six.",
     "quotes": [],
     "death": {
       "day": 17,
       "moon": 6,
-      "year": 80
+      "year": 77
     }
   },
   {
@@ -5243,23 +5363,23 @@
     "goals": [],
     "relationships": {
       "baelenys-targaryen": {
-        "overview": "Rode in Prince Baelenys's roughly thirty-man party to Cloudpass on the Twelfth Day of the Second Moon, 56 AC, when the prince went to retrieve his younger brother Vahaemon.",
-        "latestDevelopment": "Rode in Prince Baelenys's roughly thirty-man party to Cloudpass on the Twelfth Day of the Second Moon, 56 AC, when the prince went to retrieve his younger brother Vahaemon."
+        "overview": "Rode in Prince Baelenys's roughly thirty-man party to Ashenmist Valley on the Twelfth Day of the Second Moon, 56 AC, when the prince went to retrieve his younger brother Vahaemon.",
+        "latestDevelopment": "Rode in Prince Baelenys's roughly thirty-man party to Ashenmist Valley on the Twelfth Day of the Second Moon, 56 AC, when the prince went to retrieve his younger brother Vahaemon."
       },
       "derrin-hightower": {
-        "overview": "Rode with Derrin Hightower during the Cloudpass incident of 56 AC.",
-        "latestDevelopment": "Rode with Derrin Hightower during the Cloudpass incident of 56 AC."
+        "overview": "Rode with Derrin Hightower during the Ashenmist Valley incident of 56 AC.",
+        "latestDevelopment": "Rode with Derrin Hightower during the Ashenmist Valley incident of 56 AC."
       },
       "grance-morrigen": {
-        "overview": "Fellow knight in Baelenys's Cloudpass party; together they approached Vahaemon and drew him back from Maelwing.",
-        "latestDevelopment": "Fellow knight in Baelenys's Cloudpass party; together they approached Vahaemon and drew him back from Maelwing."
+        "overview": "Fellow knight in Baelenys's Ashenmist Valley party; together they approached Vahaemon and drew him back from Maelwing.",
+        "latestDevelopment": "Fellow knight in Baelenys's Ashenmist Valley party; together they approached Vahaemon and drew him back from Maelwing."
       },
       "vahaemon-targaryen": {
         "overview": "Alongside Ser Grance Morrigen, helped pull the terrified young prince away after Maelwing emerged from the clouds.",
         "latestDevelopment": "Alongside Ser Grance Morrigen, helped pull the terrified young prince away after Maelwing emerged from the clouds."
       }
     },
-    "summary": "Ser Myles Mooton was a thirty-five-year-old Riverlands knight on the Twelfth Day of the Second Moon, 56 AC. He rode with Prince Baelenys, Derrin Hightower, Ser Grance Morrigen and roughly thirty men toward Cloudpass after Vahaemon's reckless attempt to approach Maelwing ended with more than twenty men burned to ash. When the dragon emerged, Myles and Grance advanced despite their fear and pulled Vahaemon back while Baelenys remained before the beast and ultimately claimed Maelwing.",
+    "summary": "Ser Myles Mooton was a thirty-five-year-old Riverlands knight on the Twelfth Day of the Second Moon, 56 AC. He rode with Prince Baelenys, Derrin Hightower, Ser Grance Morrigen and roughly thirty men toward Ashenmist Valley after Vahaemon's reckless attempt to approach Maelwing ended with more than twenty men burned to ash. When the dragon emerged, Myles and Grance advanced despite their fear and pulled Vahaemon back while Baelenys remained before the beast and ultimately claimed Maelwing.",
     "quotes": []
   },
   {
@@ -5295,16 +5415,16 @@
     "goals": [],
     "relationships": {
       "baelenys-targaryen": {
-        "overview": "Rode close behind the young prince during the Cloudpass crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into.",
-        "latestDevelopment": "Rode close behind the young prince during the Cloudpass crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into."
+        "overview": "Rode close behind the young prince during the Ashenmist Valley crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into.",
+        "latestDevelopment": "Rode close behind the young prince during the Ashenmist Valley crisis of 56 AC and followed him toward Maelwing despite openly dreading what the party had ridden into."
       },
       "derrin-hightower": {
-        "overview": "Rode with the young Derrin Hightower during the Cloudpass incident; Derrin urged him to keep pace as the party hurried after Baelenys.",
-        "latestDevelopment": "Rode with the young Derrin Hightower during the Cloudpass incident; Derrin urged him to keep pace as the party hurried after Baelenys."
+        "overview": "Rode with the young Derrin Hightower during the Ashenmist Valley incident; Derrin urged him to keep pace as the party hurried after Baelenys.",
+        "latestDevelopment": "Rode with the young Derrin Hightower during the Ashenmist Valley incident; Derrin urged him to keep pace as the party hurried after Baelenys."
       },
       "myles-mooton": {
-        "overview": "Fellow knight in the Cloudpass party, with whom he approached Vahaemon and pulled the boy away from the dragon.",
-        "latestDevelopment": "Fellow knight in the Cloudpass party, with whom he approached Vahaemon and pulled the boy away from the dragon."
+        "overview": "Fellow knight in the Ashenmist Valley party, with whom he approached Vahaemon and pulled the boy away from the dragon.",
+        "latestDevelopment": "Fellow knight in the Ashenmist Valley party, with whom he approached Vahaemon and pulled the boy away from the dragon."
       },
       "orwell-morrigen": {
         "overview": "His brother, Ser Orwell Morrigen, who later became Lord Commander of the Kingsguard.",
@@ -5315,7 +5435,7 @@
         "latestDevelopment": "Alongside Ser Myles Mooton, took hold of the terrified young prince and pulled him away as Baelenys faced Maelwing."
       }
     },
-    "summary": "Ser Grance Morrigen was thirty-four years old on the Twelfth Day of the Second Moon, 56 AC, when he rode in Prince Baelenys's party to Cloudpass. He was openly uneasy about the situation and muttered about what they had gotten themselves into as the party climbed into the clouds. After finding Vahaemon surrounded by the burned remains of his men and seeing Maelwing emerge, Grance nevertheless advanced with Ser Myles Mooton and helped drag the frightened young prince to safety while Baelenys stood his ground before the dragon.",
+    "summary": "Ser Grance Morrigen was thirty-four years old on the Twelfth Day of the Second Moon, 56 AC, when he rode in Prince Baelenys's party to Ashenmist Valley. He was openly uneasy about the situation and muttered about what they had gotten themselves into as the party climbed into the clouds. After finding Vahaemon surrounded by the burned remains of his men and seeing Maelwing emerge, Grance nevertheless advanced with Ser Myles Mooton and helped drag the frightened young prince to safety while Baelenys stood his ground before the dragon.",
     "quotes": []
   },
   {

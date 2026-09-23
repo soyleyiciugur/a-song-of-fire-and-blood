@@ -5,18 +5,20 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { DirectRavenConversation, DirectRavenMember, Profile } from "@/lib/supabase/database.types";
 import GuildAvatar from "./GuildAvatar";
+import UtilityIcon from "@/components/nav/UtilityIcon";
 import styles from "./direct-raven.module.css";
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  onOpenConversationView: (view: "search" | "shared") => void;
   conversation: DirectRavenConversation;
   members: Profile[];
   memberships: DirectRavenMember[];
   userId: string;
 };
 
-export default function GuildParleyInfo({ open, onClose, conversation, members, memberships, userId }: Props) {
+export default function GuildParleyInfo({ open, onClose, onOpenConversationView, conversation, members, memberships, userId }: Props) {
   const supabase = useMemo(() => createClient(), []);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -128,6 +130,11 @@ export default function GuildParleyInfo({ open, onClose, conversation, members, 
           )}
           <small>{members.length} members</small>
         </div>
+
+        <nav className={styles.guildConversationActions} aria-label="Guild conversation">
+          <button type="button" onClick={() => onOpenConversationView("search")}><UtilityIcon name="search" /><span>Search in conversation</span><span aria-hidden="true">›</span></button>
+          <button type="button" onClick={() => onOpenConversationView("shared")}><UtilityIcon name="shared" /><span>Shared in this conversation</span><span aria-hidden="true">›</span></button>
+        </nav>
 
         <div className={styles.guildInfoSection}>
           <div className={styles.guildSectionHeading}><span>Members</span><small>{members.length}</small></div>

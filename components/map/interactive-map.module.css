@@ -78,9 +78,9 @@
   vector-effect: non-scaling-stroke;
   stroke-linejoin: round;
   stroke-linecap: round;
-  fill-opacity: 0.22;
-  stroke-opacity: 0.65;
-  stroke-width: 0.85px;
+  fill-opacity: 0.29;
+  stroke-opacity: 0.8;
+  stroke-width: 1.1px;
   transition: fill-opacity 180ms ease, stroke-opacity 180ms ease,
     stroke-width 180ms ease, stroke 180ms ease, filter 180ms ease;
 }
@@ -93,7 +93,7 @@
   }
 
   .regionBoundary:hover {
-    fill-opacity: 0.34;
+    fill-opacity: 0.42;
     stroke: color-mix(in srgb, currentColor 40%, #f5dfa0);
     stroke-opacity: 1;
     stroke-width: 2px;
@@ -111,6 +111,26 @@
   opacity: 0.58;
 }
 
+.regionBoundary[data-region="the-north"] {
+  fill-opacity: 0.4;
+  stroke: #dce1e5;
+}
+
+.regionBoundary[data-region="the-crownlands"],
+.regionBoundary[data-region="iron-islands"] {
+  fill-opacity: 0.42;
+  stroke: #a4a7ad;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .regionBoundary[data-region="the-north"]:hover,
+  .regionBoundary[data-region="the-crownlands"]:hover,
+  .regionBoundary[data-region="iron-islands"]:hover {
+    fill-opacity: 0.5;
+    stroke: #f5dfa0;
+  }
+}
+
 /* A screen-sized label only; regional geometry stays in map coordinates. */
 .regionNameTooltip {
   position: fixed;
@@ -122,7 +142,7 @@
   border-radius: var(--radius-sm, 6px);
   background: rgba(12, 12, 15, 0.96);
   color: var(--gold);
-  font-family: var(--font-heading, Georgia, serif);
+  font-family: var(--font-geist), sans-serif;
   font-size: 12px;
   line-height: 1.45;
   letter-spacing: 0.035em;

@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import charactersData from "@/data/characters/characters.json";
 import MiniPortrait from "@/components/MiniPortrait";
+import UtilityIcon from "@/components/nav/UtilityIcon";
 import { createClient } from "@/lib/supabase/client";
 import type { DirectRavenConversation, DirectRavenMember, DirectRavenMessage, DirectRavenSystemEvent, Profile } from "@/lib/supabase/database.types";
 import GiphyPicker, { type RavenGif } from "./GiphyPicker";
@@ -235,6 +236,7 @@ export default function RavenConversation({
 
   function openConversationView(view: Exclude<ConversationView, null>) {
     setMenuOpen(false);
+    setGuildInfoOpen(false);
     setConversationView(view);
     void loadConversationArchive();
   }
@@ -1067,12 +1069,12 @@ export default function RavenConversation({
           <button type="button" className={styles.threadMenuButton} onClick={() => setMenuOpen((current) => !current)} aria-expanded={menuOpen} aria-label="Conversation options"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
           {menuOpen && (
             <div className={styles.threadMenu}>
-              <button type="button" onClick={() => openConversationView("search")}>Search in conversation</button>
-              <button type="button" onClick={() => openConversationView("shared")}>Shared in this conversation</button>
+              <button type="button" onClick={() => openConversationView("search")}><UtilityIcon name="search" size={18} /><span>Search in conversation</span></button>
+              <button type="button" onClick={() => openConversationView("shared")}><UtilityIcon name="shared" size={18} /><span>Shared in this conversation</span></button>
               {isGuild ? (
-                <button type="button" onClick={() => { setMenuOpen(false); setGuildInfoOpen(true); }}>Guild info</button>
+                <button type="button" onClick={() => { setMenuOpen(false); setGuildInfoOpen(true); }}><UtilityIcon name="info" size={18} /><span>Guild info</span></button>
               ) : (
-                <button type="button" onClick={() => void toggleBlock()}>{blockedByMe ? "Unblock user" : "Block user"}</button>
+                <button type="button" onClick={() => void toggleBlock()}><UtilityIcon name="block" size={18} /><span>{blockedByMe ? "Unblock user" : "Block user"}</span></button>
               )}
             </div>
           )}
@@ -1080,7 +1082,7 @@ export default function RavenConversation({
       </header>
 
       {isGuild && (
-        <GuildParleyInfo open={guildInfoOpen} onClose={() => setGuildInfoOpen(false)} conversation={activeConversation} members={members} memberships={memberships} userId={userId} />
+        <GuildParleyInfo open={guildInfoOpen} onClose={() => setGuildInfoOpen(false)} onOpenConversationView={openConversationView} conversation={activeConversation} members={members} memberships={memberships} userId={userId} />
       )}
 
       {conversationView && (

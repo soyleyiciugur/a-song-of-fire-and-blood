@@ -569,6 +569,15 @@
 .reactionDetailsPopover{left:50%!important;right:auto!important;transform:translateX(calc(-50% + var(--reaction-popover-shift,0px)))!important}
 .threadMenuButton{display:grid;place-items:center;padding:0}
 .threadMenuButton svg{margin:auto}
+.threadMenu{width:232px;max-width:calc(100vw - 32px)}
+.threadMenu button{display:flex;align-items:center;gap:10px;min-height:44px;line-height:1.4}
+.threadMenu button>svg{flex:none;color:#b89766}
+.threadMenu button>span{min-width:0}
+.guildConversationActions{display:grid;padding:10px 16px;border-bottom:1px solid #332b27}
+.guildConversationActions button{display:grid;grid-template-columns:20px minmax(0,1fr) 12px;align-items:center;gap:12px;min-height:48px;padding:10px 8px;border:0;border-radius:8px;background:transparent;color:#c8b8a6;text-align:left;font:12px/1.4 var(--font-geist);cursor:pointer}
+.guildConversationActions button:hover{background:#281b1d;color:#e8d7c1}
+.guildConversationActions svg,.guildConversationActions button>span:last-child{color:#b89766}
+.guildConversationActions button:focus-visible,.threadMenu button:focus-visible{outline:2px solid #b89766;outline-offset:-2px}
 .draftContext{display:flex;align-items:center;gap:10px;min-height:46px;padding:7px 8px 7px 11px;border:1px solid #4b3a2f;border-left:2px solid #9b7548;border-radius:9px;background:#171315}
 .draftContextCopy{display:grid;min-width:0;flex:1;gap:2px}
 .draftContextCopy small{color:#a98a61;font:600 8px/1 var(--font-geist);letter-spacing:.07em;text-transform:uppercase}
