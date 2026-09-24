@@ -29,7 +29,7 @@
     { "id": "relationships", "targets": ["reciprocal character relationships", "app/relationships", "profile relationship display"] },
     { "id": "dragons", "targets": ["data/dragons.json", "data/dragon-appearances.ts", "dragon profiles"] },
     { "id": "dynasty", "targets": ["data/houses.json", "data/house-of-the-dragon.json", "app/family-tree", "app/succession", "app/houses"] },
-    { "id": "chronology", "targets": ["data/timeline.json", "data/events.json", "app/timeline", "app/chronicle", "app/calendar"] },
+    { "id": "chronology", "targets": ["data/timeline.json", "timeline numeric-ordinal display dates", "data/events.json", "app/timeline", "app/chronicle", "app/calendar"] },
     { "id": "map", "targets": ["data/map/character-positions.json", "data/map/locations.json", "app/map", "app/locations"] },
     { "id": "bloodshed", "targets": ["data/bloodshed.json", "app/wars"] },
     { "id": "records", "targets": ["data/bookOfBrothers.json", "data/scrolls.json", "data/artifacts.ts", "app/records", "app/book-of-brothers", "app/scrolls", "app/artifacts", "app/stats"] },
@@ -43,7 +43,7 @@
     { "id": "community", "targets": ["data/flea-bottom.json", "data/community-schedule.json", "Supabase public member context", "reaction targets"] },
     { "id": "notifications", "targets": ["new_chapter", "notification dedupe", "Personal Ravens", "deep links"] },
     { "id": "updateNotes", "targets": ["data/update-notes.json"] },
-    { "id": "validation", "commands": ["npm.cmd run validate:data", "npm.cmd run validate:comments", "node scripts/test-community-publication.mjs", "npx.cmd tsc --noEmit", "npm.cmd run build", "git diff --check"] },
+    { "id": "validation", "commands": ["npm.cmd run validate:timeline-dates", "npm.cmd run validate:data", "npm.cmd run validate:comments", "node scripts/test-community-publication.mjs", "npx.cmd tsc --noEmit", "npm.cmd run build", "git diff --check"] },
     { "id": "smoke", "targets": ["desktop", "narrow mobile", "EN/TR", "long dates", "linked routes", "homepage derived views"] },
     { "id": "publication", "targets": ["atomic chapter visibility", "community sync", "notification target", "scheduled visibility", "post-publish deep links"] }
   ],

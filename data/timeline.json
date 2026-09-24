@@ -1137,12 +1137,12 @@
   {
     "chapterSlug": "the-eye-in-the-storm",
     "chapterTitle": "Chapter XX: The Eye in the Storm",
-    "date": "Twentieth–Twenty-First Days of the Eighth Moon, Ninety-Nine AC",
+    "date": "20th–21st of the 8th Moon, 99 AC",
     "events": [
       {
         "title": "Baelenys sends Jace after Visenya and Naela",
         "description": "After Denlon reports Naela's recurring treatment journeys north of Tyrosh, Baelenys publicly treats Jace as the man expected to inherit and commands him to kill Visenya and Naela in Essos. Orwell volunteers to accompany him; Jace begins assembling a discreet company and considers recalling Saathos, while Gaelor remains only a possibility.",
-        "date": "Twentieth Day of the Eighth Moon",
+        "date": "20th of the 8th Moon",
         "characters": ["baelenys-targaryen", "jacaelon-targaryen", "denlon-wickfen", "orwell-morrigen", "visenya-targaryen", "naela-targaryen", "saathos-maris", "gaelor-targaryen"],
         "kind": "politics",
         "location": "King's Landing"
@@ -1150,7 +1150,7 @@
       {
         "title": "Vahaemon offers Vaenarr a place in his future reign",
         "description": "Across the Narrow Sea, Vahaemon offers to name Vaenarr Hand and then to grant him Dragonstone. Vaenarr refuses both, points to Vahaemon's existing promises and remains silent when asked whether his return is still about Jaery.",
-        "date": "Twentieth Day of the Eighth Moon",
+        "date": "20th of the 8th Moon",
         "characters": ["vahaemon-targaryen", "vaenarr-targaryen", "jaery-targaryen", "aegor-targaryen", "visenya-targaryen", "naela-targaryen"],
         "kind": "politics",
         "location": "Tyrosh"
@@ -1158,7 +1158,7 @@
       {
         "title": "Vhaemys overhears the royal marriage fracture",
         "description": "Baelenys confronts Jaery over Vaenarr and old questions of trust. Listening outside their chamber, Vhaemys misunderstands the quarrel as proof that her mother never loved her father and that the family is turning against him.",
-        "date": "Twentieth Day of the Eighth Moon",
+        "date": "20th of the 8th Moon",
         "characters": ["baelenys-targaryen", "jaery-targaryen", "vhaemys-targaryen", "vaenarr-targaryen"],
         "kind": "family",
         "location": "King's Landing"
@@ -1166,7 +1166,7 @@
       {
         "title": "Visenor and Leo agree to seek the Dornish dragon",
         "description": "Visenor recognizes Leo's unease but accepts his request for time. The next day, speaking privately in the Proud Lantern, they acknowledge how their fathers shaped them and agree in principle to travel south to investigate the reported dragon in Dorne; they have not yet departed Oldtown.",
-        "date": "Twentieth–Twenty-First Days of the Eighth Moon",
+        "date": "20th–21st of the 8th Moon",
         "characters": ["visenor-targaryen", "leo-tyrell"],
         "kind": "revelation",
         "location": "Oldtown"
@@ -1174,7 +1174,7 @@
       {
         "title": "A white dragon meets Vhaemys in the storm",
         "description": "Compelled by a call only she understands, Vhaemys leads Saera, Jace and Cloudgazer into the storm above King's Landing. An enormous unidentified white dragon confronts them, ignores Jace's calming commands and fixes its attention on Vhaemys before closing its eye as she orders it to obey. Its identity and any bond with Vhaemys remain unconfirmed.",
-        "date": "Twenty-First Day of the Eighth Moon",
+        "date": "21st of the 8th Moon",
         "characters": ["vhaemys-targaryen", "saera-targaryen", "jacaelon-targaryen"],
         "kind": "revelation",
         "location": "King's Landing"

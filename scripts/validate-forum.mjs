@@ -59,8 +59,21 @@ assert.equal(publishForum(fixture,[],Date.parse('2026-09-12T09:00:00Z')).threads
 const schedule=read('community-schedule.json');
 const scheduledThreadIds=schedule.slots.flatMap(slot=>slot.forumThreadIds ?? []);
 const scheduledCommentIds=schedule.slots.flatMap(slot=>slot.forumCommentIds ?? []);
+const scheduledCommentIdSet=new Set(scheduledCommentIds);
 assert.equal(new Set(scheduledThreadIds).size,scheduledThreadIds.length);
 assert.equal(new Set(scheduledCommentIds).size,scheduledCommentIds.length);
+for(const t of forum.threads.filter(t=>t.chapterSlug)){
+  const requirement=requirements[t.chapterSlug];
+  if(!requirement) continue;
+  const conversation=forum.comments.filter(c=>c.entryId===t.id);
+  const scheduled=conversation.filter(c=>scheduledCommentIdSet.has(c.id));
+  const published=conversation.filter(c=>!scheduledCommentIdSet.has(c.id));
+  const publishedParticipants=new Set(published.map(c=>c.authorId));
+  const scheduledParticipants=new Set(scheduled.map(c=>c.authorId));
+  if(requirement.minimumPublishedParticipants) assert(publishedParticipants.size>=requirement.minimumPublishedParticipants,`${t.id}: insufficient published participants`);
+  if(requirement.minimumScheduledParticipants) assert(scheduledParticipants.size>=requirement.minimumScheduledParticipants,`${t.id}: insufficient scheduled participants`);
+  if(requirement.scheduledParticipantsMustBeNew) assert([...scheduledParticipants].every(id=>!publishedParticipants.has(id)),`${t.id}: scheduled participants must be new to the discussion`);
+}
 for(const slot of schedule.slots){
   const threadIds=slot.forumThreadIds ?? [], commentIds=slot.forumCommentIds ?? [];
   const time=Date.parse(slot.publishedAt);

@@ -26,10 +26,18 @@
   "scope": "New uploads from effectiveFrom and the explicitly selected existing entries. The older archive is not retroactively expanded. Real member participation is never capped or deleted to meet an editorial target.",
   "arcs": "All fictional accounts may gradually change opinions, sympathies, relationships and even factions through authored interactions. Preserve the path of change; do not reset history, force reconciliation or run autonomous activity.",
   "forum": {
+    "topicMix": "Taverns should mix chapter discussion with wider-world, character, theory, site-feature, community, game, poll and meme threads, balancing serious analysis with distinct memelord voices.",
     "chapterRequirements": {
       "judgment-by-blood": {
         "minimumParticipants": 30,
         "minimumComments": 100
+      },
+      "the-eye-in-the-storm": {
+        "minimumParticipants": 50,
+        "minimumComments": 50,
+        "minimumPublishedParticipants": 30,
+        "minimumScheduledParticipants": 20,
+        "scheduledParticipantsMustBeNew": true
       }
     }
   }

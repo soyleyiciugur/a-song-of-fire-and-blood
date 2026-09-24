@@ -570,6 +570,46 @@
       "body": "The Eye in the Storm: the Essos mission, the fractures inside the royal family, Visenor and Leo's proposed journey, and the unidentified white dragon above King's Landing. Discuss Chapter XX here without treating resemblance, belief or command as a confirmed identity or bond.",
       "publishedAt": "2026-09-23T23:40:00.000Z",
       "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-feature-that-changed-reading",
+      "chapterSlug": null,
+      "title": "Which site feature actually changed how you read the chronicle?",
+      "category": "Site & community",
+      "authorId": "regular-it",
+      "body": "Not asking for a feature request list. Which existing thing changed your reading habits: spoiler boundaries, Chapter Companion, the map, relationships, search, Direct Ravens, or something tiny you now cannot live without? Meme answers accepted, bug reports belong in their own thread.",
+      "publishedAt": "2026-09-24T07:05:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-realm-job-draft",
+      "chapterSlug": null,
+      "title": "The rent is due: choose one job in the realm",
+      "category": "Games & memes",
+      "authorId": "regular-local",
+      "body": "You need wages, not glory. Pick one: Red Keep kitchen night shift, dragon-feed logistics, council minute taker, royal sibling help desk, Citadel archive basement, or Toy Harbour zoning officer. Explain your survival plan.",
+      "publishedAt": "2026-09-24T07:18:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-unsolved-board",
+      "chapterSlug": null,
+      "title": "Unsolved board: one real clue, one irresponsible theory",
+      "category": "Theories",
+      "authorId": "regular-margin-notes",
+      "body": "Bring one unresolved question, cite one thing the published chapters actually establish, then add one clearly labelled irresponsible theory. Nymos, the white dragon, the Dragonstone silhouette, missing letters, all welcome. The Evidence Committee is already walking here.",
+      "publishedAt": "2026-09-24T07:31:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-character-patch-notes",
+      "chapterSlug": null,
+      "title": "Describe a character as patch notes — replies guess who",
+      "category": "Games & memes",
+      "authorId": "regular-m",
+      "body": "No names in the first post. Example format: diplomacy cooldown increased, sibling notifications muted, one sword mysteriously removed from inventory. Keep it chapter-safe and do not make victims the punchline.",
+      "publishedAt": "2026-09-24T07:44:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
     }
   ],
   "comments": [
@@ -13645,6 +13685,816 @@
       "body": "My responsible theory is Unknown White Dragon. My irresponsible theory has already bought a banner and been removed from the archive reading room.",
       "publishedAt": "2026-09-23T23:49:00.000Z",
       "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c09",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-g",
+      "parentId": "ch20-storm-c04",
+      "body": "Gaelor PR has reviewed the proposed Essos assignment and would like to stress that being considered for the mission is not the same as being trusted with diplomacy. This distinction is, for once, helping us.",
+      "publishedAt": "2026-09-24T00:07:00.000Z",
+      "upvoterIds": ["regular-m"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c10",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-u",
+      "parentId": "ch20-storm-c04",
+      "body": "The council discusses assassinations, heirs and dragon deployments while unnamed workers will provision every ship and absorb every consequence. Same institution, larger travel budget.",
+      "publishedAt": "2026-09-24T00:19:00.000Z",
+      "upvoterIds": ["regular-ledger", "regular-local"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c11",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-k",
+      "parentId": "ch20-storm-c04",
+      "body": "Acknowledging an heir while refusing the title is politically untidy, but the burden itself is unmistakable. The murder order is not made cleaner by calling it strategy.",
+      "publishedAt": "2026-09-24T00:36:00.000Z",
+      "upvoterIds": ["regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c12",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-l",
+      "parentId": "ch20-storm-c01",
+      "body": "Also worth separating resemblance from identity and attention from a rider bond. The chapter confirms neither, however persuasive the emotional association feels.",
+      "publishedAt": "2026-09-24T00:52:00.000Z",
+      "upvoterIds": ["regular-archive", "regular-margin-notes"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c13",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-m",
+      "parentId": "ch20-storm-c03",
+      "body": "brotherhood server came online for eight minutes and immediately connected a child to an unidentified dragon during a storm",
+      "publishedAt": "2026-09-24T01:08:00.000Z",
+      "upvoterIds": ["regular-a", "regular-it"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c14",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-e",
+      "parentId": "ch20-storm-c13",
+      "body": "status page says operational. the thunder says otherwise",
+      "publishedAt": "2026-09-24T01:21:00.000Z",
+      "upvoterIds": ["regular-m"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c15",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-s",
+      "parentId": "ch20-storm-c06",
+      "body": "Leo asking for time instead of offering easy forgiveness is exactly why the scene works. Affection remains, trust does not magically respawn, and the Dorne plan makes both facts dangerous.",
+      "publishedAt": "2026-09-24T01:39:00.000Z",
+      "upvoterIds": ["regular-club", "regular-queer"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c16",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-v",
+      "parentId": "ch20-storm-c06",
+      "body": "Visenor finally selected the honest dialogue option and still has three concealed quest flags active. I am calling this progress, not victory.",
+      "publishedAt": "2026-09-24T01:56:00.000Z",
+      "upvoterIds": ["regular-s"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c17",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-b",
+      "parentId": "ch20-storm-c08",
+      "body": "I appreciate that you have labelled the second theory irresponsible. Is there a page where the confirmed dragon details are collected? Regards.",
+      "publishedAt": "2026-09-24T02:13:00.000Z",
+      "upvoterIds": ["regular-newbie"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c18",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-a",
+      "parentId": "ch20-storm-c03",
+      "body": "vhaemys pulled up with weather boss aura",
+      "publishedAt": "2026-09-24T02:31:00.000Z",
+      "upvoterIds": ["regular-m"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c19",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-j",
+      "parentId": "ch20-storm-c03",
+      "body": "Jace believed his sister, brought Cloudgazer, and did not pretend the white dragon had accepted anybody. Rare competent older-brother sequence. I have archived the occasion.",
+      "publishedAt": "2026-09-24T02:48:00.000Z",
+      "upvoterIds": ["regular-archive", "regular-lorenah"],
+      "awards": [{"fromUserId":"regular-s","amount":2}]
+    },
+    {
+      "id": "ch20-storm-c20",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-render",
+      "parentId": "ch20-storm-c01",
+      "body": "The cut from the family argument into the storm sequence makes the dragon feel like an answer before the text permits us to know the question. Very effective, mildly evil edit logic.",
+      "publishedAt": "2026-09-24T03:04:00.000Z",
+      "upvoterIds": ["regular-music"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c21",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-horse",
+      "parentId": "ch20-storm-c07",
+      "body": "Every proposed journey gets discussed as politics first and animals, roads, weather and rest second. At least Leo understands that reaching Dorne is a plan, not a scene transition.",
+      "publishedAt": "2026-09-24T03:22:00.000Z",
+      "upvoterIds": ["regular-supply"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c22",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-ledger",
+      "parentId": "ch20-storm-c10",
+      "body": "Two foreign targets, several possible envoys, ships, guards, dragons and no visible cost column. The royal spreadsheet has achieved sentience and is requesting leave.",
+      "publishedAt": "2026-09-24T03:41:00.000Z",
+      "upvoterIds": ["regular-u", "regular-it"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c23",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-it",
+      "parentId": "ch20-storm-c13",
+      "body": "Incident summary: unauthorized dragon discovery, unclear permissions, three family accounts in production, zero rollback plan. GM has opened another ticket and assigned it to everyone else.",
+      "publishedAt": "2026-09-24T04:03:00.000Z",
+      "upvoterIds": ["regular-hr", "regular-m"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c24",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-club",
+      "parentId": "ch20-storm-c05",
+      "body": "Vhaemys is frightened because she loves her father, but the adults have made violence the grammar through which she understands love. That is much sadder than simply calling her brave in the dragon scene.",
+      "publishedAt": "2026-09-24T04:27:00.000Z",
+      "upvoterIds": ["regular-faith", "regular-feminist"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c25",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-grad",
+      "parentId": "ch20-storm-c05",
+      "body": "The chapter keeps converting private family feeling into state action: fear becomes surveillance, affection becomes succession, grief becomes foreign policy. I wrote that down instead of doing my actual reading.",
+      "publishedAt": "2026-09-24T04:46:00.000Z",
+      "upvoterIds": ["regular-club"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c26",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-lorenah",
+      "parentId": "ch20-storm-c19",
+      "body": "Competent, yes. He also heard Vhaemys describe danger and chose personal aerial reconnaissance with her present. Your archive needs a risk-assessment shelf.",
+      "publishedAt": "2026-09-24T05:09:00.000Z",
+      "upvoterIds": ["regular-room-middle"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c27",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-shield",
+      "parentId": "ch20-storm-c04",
+      "body": "If Gaelor joins the Essos party, Saathos inherits a mission with vague authority and catastrophic failure conditions. Competence cannot make that order responsible.",
+      "publishedAt": "2026-09-24T05:33:00.000Z",
+      "upvoterIds": ["regular-supply"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c28",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-supply",
+      "parentId": "ch20-storm-c27",
+      "body": "And nobody at that table has agreed on command, destination order, resupply or extraction. The mission currently consists of verbs and confidence.",
+      "publishedAt": "2026-09-24T05:58:00.000Z",
+      "upvoterIds": ["regular-ledger", "regular-shield"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c29",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-anti",
+      "parentId": "ch20-storm-c09",
+      "body": "gaelor patch notes: diplomacy feature still in closed beta. somehow this is the reassuring interpretation",
+      "publishedAt": "2026-09-24T06:21:00.000Z",
+      "upvoterIds": ["regular-g", "regular-m"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c30",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-food",
+      "parentId": "ch20-storm-c22",
+      "body": "Ships and councils still need feeding, and somehow the kitchen will receive the final guest count after the guests have sailed. This is not a recipe; it is a threat.",
+      "publishedAt": "2026-09-24T06:47:00.000Z",
+      "upvoterIds": ["regular-u", "regular-hr"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c01",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-newbie",
+      "parentId": null,
+      "body": "Chapter Companion. I used to open six tabs and still mix up who was physically there. Now I open three tabs, which is growth.",
+      "publishedAt": "2026-09-24T07:08:00.000Z",
+      "upvoterIds": ["regular-student"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c02",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Search, especially when an old phrase resurfaces. It rewards memory without requiring memory to be perfect.",
+      "publishedAt": "2026-09-24T07:12:00.000Z",
+      "upvoterIds": ["regular-margin-notes"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c03",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "spoiler boundary saved me from learning a man had made another terrible decision twelve minutes early",
+      "publishedAt": "2026-09-24T07:16:00.000Z",
+      "upvoterIds": ["regular-e", "regular-a"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c04",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "The map. Travel arguments become much more useful when everyone can see the route they are confidently underestimating.",
+      "publishedAt": "2026-09-24T07:22:00.000Z",
+      "upvoterIds": ["regular-supply"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c05",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-great",
+      "parentId": null,
+      "body": "The Great Game page changed how I read because every update makes me ask whether the game has moved one place deeper into the prophecy.",
+      "publishedAt": "2026-09-24T07:29:00.000Z",
+      "upvoterIds": ["regular-it", "regular-m"],
+      "awards": [{"fromUserId":"regular-student","amount":1}]
+    },
+    {
+      "id": "feature-reading-c06",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "Dragon Appearances. It separates being discussed, being represented in art and actually entering the scene, which prevents half the edit captions from becoming evidence.",
+      "publishedAt": "2026-09-24T07:36:00.000Z",
+      "upvoterIds": ["regular-l"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c07",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-b",
+      "parentId": "feature-reading-c01",
+      "body": "Three tabs is entirely respectable. I have written the character names on paper and this also works when the wireless is tired.",
+      "publishedAt": "2026-09-24T07:43:00.000Z",
+      "upvoterIds": ["regular-newbie"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-c08",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "Relationships. Not because a line tells me what to think, but because it makes the women around the princes harder to flatten into whichever romance argument is loudest.",
+      "publishedAt": "2026-09-24T07:51:00.000Z",
+      "upvoterIds": ["regular-feminist", "regular-naella"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c01",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "Kitchen night shift. I know the hours are impossible, but at least knives, onions and inventory obey physical laws. Princes do not.",
+      "publishedAt": "2026-09-24T07:20:00.000Z",
+      "upvoterIds": ["regular-u"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c02",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "Council minutes. I will record every unfinished Cordin sentence as an open action item until the institution collapses under its own backlog.",
+      "publishedAt": "2026-09-24T07:25:00.000Z",
+      "upvoterIds": ["regular-hr", "regular-m"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c03",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "Royal sibling help desk is a trap. Every ticket is marked urgent, nobody supplies logs, and the users can deploy dragons.",
+      "publishedAt": "2026-09-24T07:33:00.000Z",
+      "upvoterIds": ["regular-m", "regular-hr"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c04",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "Dragon-feed logistics, provided the job includes authority to say no when someone proposes adding another dragon without adding another supply chain.",
+      "publishedAt": "2026-09-24T07:40:00.000Z",
+      "upvoterIds": ["regular-supply"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c05",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "toy harbour zoning. zero commute. infinite aura permits",
+      "publishedAt": "2026-09-24T07:49:00.000Z",
+      "upvoterIds": ["regular-m"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c06",
+      "entryId": "community-realm-job-draft",
+      "authorId": "cast-vhaemys-targaryen",
+      "parentId": "realm-job-c05",
+      "body": "You need a boat first. And I say where it goes.",
+      "publishedAt": "2026-09-24T07:55:00.000Z",
+      "upvoterIds": ["regular-a", "regular-j"],
+      "awards": [{"fromUserId":"regular-m","amount":3}]
+    },
+    {
+      "id": "realm-job-c07",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-u",
+      "parentId": "realm-job-c01",
+      "body": "Kitchen Workers' Union accepts your application. First demand: nobody loses sleep because a royal child discovered a new pie quantity.",
+      "publishedAt": "2026-09-24T08:03:00.000Z",
+      "upvoterIds": ["regular-food"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-c08",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-career",
+      "parentId": null,
+      "body": "Toy Harbour zoning officer. This emerging infrastructure vertical offers direct executive exposure and a clear path to Chief Boat Officer.",
+      "publishedAt": "2026-09-24T08:11:00.000Z",
+      "upvoterIds": ["regular-e"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c01",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-d",
+      "parentId": null,
+      "body": "Real clue: the unfamiliar maester replaced Edmyn and vanished around the same crisis. Irresponsible theory: Nymos is three smaller maesters sharing one robe.",
+      "publishedAt": "2026-09-24T07:34:00.000Z",
+      "upvoterIds": ["regular-m", "regular-wild-take"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c02",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-l",
+      "parentId": "unsolved-board-c01",
+      "body": "The first sentence is supported. The second has been placed in a locked drawer for public safety.",
+      "publishedAt": "2026-09-24T07:39:00.000Z",
+      "upvoterIds": ["regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c03",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "Real clue: both Jace and Saera independently recognize something in the white dragon. Irresponsible theory: the dragon recognizes that this family needs supervision.",
+      "publishedAt": "2026-09-24T07:47:00.000Z",
+      "upvoterIds": ["regular-room-middle", "regular-m"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c04",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "Real clue: the Dragonstone shape is a distant report, not a confirmed identification. Irresponsible theory: every island now gets one ominous silhouette by statute.",
+      "publishedAt": "2026-09-24T07:54:00.000Z",
+      "upvoterIds": ["regular-margin-notes"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c05",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-gate",
+      "parentId": null,
+      "body": "The unresolved question I still care about is who benefited from replacing Edmyn. The newer mysteries are louder, but this one has paperwork somewhere.",
+      "publishedAt": "2026-09-24T08:02:00.000Z",
+      "upvoterIds": ["regular-margin-notes", "regular-fandom-true-crime"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c06",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-m",
+      "parentId": "unsolved-board-c05",
+      "body": "WHERE IS NYMOS has survived another dragon launch",
+      "publishedAt": "2026-09-24T08:09:00.000Z",
+      "upvoterIds": ["regular-d", "regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-c07",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-fandom-true-crime",
+      "parentId": "unsolved-board-c05",
+      "body": "Agreed. Missing people should not become set dressing for a more spectacular theory. The replacement and disappearance are the cleanest human questions we have.",
+      "publishedAt": "2026-09-24T08:16:00.000Z",
+      "upvoterIds": ["regular-margin-notes"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c01",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-g",
+      "parentId": null,
+      "body": "v20.0: diplomacy remains unavailable; overseas mission compatibility added; PR department now displays a persistent low-battery warning.",
+      "publishedAt": "2026-09-24T07:46:00.000Z",
+      "upvoterIds": ["regular-anti", "regular-m"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c02",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-anti",
+      "parentId": "patch-notes-c01",
+      "body": "gaelor. too easy. the low-battery warning has been on since oldtown",
+      "publishedAt": "2026-09-24T07:50:00.000Z",
+      "upvoterIds": ["regular-g"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c03",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Believes younger sisters by default. Receipts draw speed increased. Risk assessment still listed as optional downloadable content.",
+      "publishedAt": "2026-09-24T07:57:00.000Z",
+      "upvoterIds": ["regular-lorenah", "regular-s"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c04",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-lorenah",
+      "parentId": "patch-notes-c03",
+      "body": "Jace. Please install the risk assessment before the next flight.",
+      "publishedAt": "2026-09-24T08:04:00.000Z",
+      "upvoterIds": ["regular-j"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c05",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-s",
+      "parentId": null,
+      "body": "Quiet mode retained. Loyalty stat unchanged. Has accepted one impossible travel quest and still refuses to publish the feelings menu.",
+      "publishedAt": "2026-09-24T08:12:00.000Z",
+      "upvoterIds": ["regular-j", "regular-music"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c06",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-music",
+      "parentId": "patch-notes-c05",
+      "body": "Alester, and the feelings menu is absolutely hidden behind an unlabelled keyboard shortcut.",
+      "publishedAt": "2026-09-24T08:19:00.000Z",
+      "upvoterIds": ["regular-s"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c07",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "Family meeting permissions expanded. Listening functionality unchanged. Foreign assassination tasks can now be assigned without completing the succession form.",
+      "publishedAt": "2026-09-24T08:27:00.000Z",
+      "upvoterIds": ["regular-legal", "regular-it"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-c08",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-legal",
+      "parentId": "patch-notes-c07",
+      "body": "Baelenys. Objection to every part of the deployment process.",
+      "publishedAt": "2026-09-24T08:34:00.000Z",
+      "upvoterIds": ["regular-hr"],
+      "awards": []
+    },
+    {
+      "id": "other-thread-workplace-20",
+      "entryId": "community-worst-workplace",
+      "authorId": "regular-hr",
+      "parentId": null,
+      "body": "Updating my ranking after Chapter XX: royal sibling help desk has overtaken the kitchens. The kitchens at least agree that food exists.",
+      "publishedAt": "2026-09-24T08:41:00.000Z",
+      "upvoterIds": ["regular-food", "regular-it"],
+      "awards": []
+    },
+    {
+      "id": "other-thread-missed-20",
+      "entryId": "community-tavern-missed-connections",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "To the person who said 'one drink before Dorne' and then began planning a royal expedition: I respect the ambition and fear the itinerary.",
+      "publishedAt": "2026-09-24T08:49:00.000Z",
+      "upvoterIds": ["regular-divorce-court"],
+      "awards": []
+    },
+    {
+      "id": "other-thread-nymos-13",
+      "entryId": "community-xix-where-is-nymos",
+      "authorId": "regular-fandom-true-crime",
+      "parentId": null,
+      "body": "A new dragon has not made the missing-maester question less important. It has only made it easier for everyone to stop asking.",
+      "publishedAt": "2026-09-24T08:58:00.000Z",
+      "upvoterIds": ["regular-margin-notes", "regular-archive"],
+      "awards": []
+    },
+    {
+      "id": "other-thread-gods-14",
+      "entryId": "community-xix-gods-spoken",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "Chapter XX makes the earlier crowd scene look even more like an institutional habit: power creates the interpretation, then the public is asked to remember that interpretation as truth.",
+      "publishedAt": "2026-09-24T09:06:00.000Z",
+      "upvoterIds": ["regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s01",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-local",
+      "parentId": "ch20-storm-c10",
+      "body": "Meanwhile everyone in the city gets another afternoon of looking upward and deciding whether to close the shop. Royal policy arrives as weather now.",
+      "publishedAt": "2026-09-24T12:17:11.000Z",
+      "upvoterIds": ["regular-u"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s02",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-gym",
+      "parentId": "ch20-storm-c03",
+      "body": "Believing your little sister is good. Taking her into a storm near an unknown dragon is not progressive overload, bro. That is skipping the whole program.",
+      "publishedAt": "2026-09-24T13:43:27.000Z",
+      "upvoterIds": ["regular-lorenah"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s03",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-maela",
+      "parentId": "ch20-storm-c05",
+      "body": "A child hears the adults weaponize family and then behaves accordingly. The costumes changed; the lesson did not.",
+      "publishedAt": "2026-09-24T14:26:39.000Z",
+      "upvoterIds": ["regular-feminist"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s04",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-pirate",
+      "parentId": "ch20-storm-c28",
+      "body": "A voyage without agreed command or stores is not a mission. It is several important men boarding the same future argument.",
+      "publishedAt": "2026-09-24T15:08:52.000Z",
+      "upvoterIds": ["regular-supply"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s05",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-north",
+      "parentId": "ch20-storm-c01",
+      "body": "Capital discovers one pale shape in bad weather and schedules a dynasty crisis. Up here we call that visibility.",
+      "publishedAt": "2026-09-24T16:34:18.000Z",
+      "upvoterIds": ["regular-e"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s06",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-career",
+      "parentId": "ch20-storm-c04",
+      "body": "Key leadership lesson: when succession planning and international operations share one meeting, leave with neither role clarity nor psychological safety.",
+      "publishedAt": "2026-09-24T17:12:44.000Z",
+      "upvoterIds": ["regular-hr"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s07",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-music",
+      "parentId": "ch20-storm-c20",
+      "body": "The storm sequence feels loud even on the page, but the held recognition is what stayed with me. Nobody says the name the scene is inviting us to think.",
+      "publishedAt": "2026-09-24T18:51:06.000Z",
+      "upvoterIds": ["regular-render"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s08",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-student",
+      "parentId": "ch20-storm-c07",
+      "body": "I made a list called plans that have not happened and it became longer than my assignment, which has also not happened.",
+      "publishedAt": "2026-09-24T19:29:33.000Z",
+      "upvoterIds": ["regular-grad"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s09",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-lurk",
+      "parentId": "ch20-storm-c06",
+      "body": "The quiet part where Leo asks for time hurt more than the shouting. It sounded like he wanted to stay, but could not pretend staying fixed anything.",
+      "publishedAt": "2026-09-24T20:14:57.000Z",
+      "upvoterIds": ["regular-club"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s10",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-naella",
+      "parentId": "ch20-storm-c09",
+      "body": "Being considered for a mission is not trust, agreed. It is also not absolution. Your department may keep the distinction and the low battery.",
+      "publishedAt": "2026-09-24T21:37:21.000Z",
+      "upvoterIds": ["regular-g"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s11",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-aesthetic",
+      "parentId": "ch20-storm-c01",
+      "body": "White dragon in a thundercloud is immaculate theatre. The fact that I love the image does not make approaching it with a seven-year-old sensible.",
+      "publishedAt": "2026-09-24T22:03:48.000Z",
+      "upvoterIds": ["regular-gym"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s12",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-nihilist",
+      "parentId": "ch20-storm-c05",
+      "body": "every adult gives the child one more reason to expect murder and then looks surprised when she expects murder. cool family system",
+      "publishedAt": "2026-09-24T23:46:12.000Z",
+      "upvoterIds": ["regular-anti"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s13",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-reformed",
+      "parentId": "ch20-storm-c16",
+      "body": "I typed a defence of Visenor, reread the phrase 'three concealed quest flags,' and deleted it. Progress can be real while the concealment remains the problem.",
+      "publishedAt": "2026-09-25T00:22:36.000Z",
+      "upvoterIds": ["regular-v"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s14",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-middle",
+      "parentId": "ch20-storm-c04",
+      "body": "I can understand why Baelenys thinks speed matters and still think the order is plainly wrong. No olive-sized qualification available.",
+      "publishedAt": "2026-09-25T01:09:59.000Z",
+      "upvoterIds": ["regular-legal"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s15",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-apolitical",
+      "parentId": "ch20-storm-c17",
+      "body": "I came for the dragon and somehow my question is now whether Leo and Visenor are friends again. Are they? Actually do not answer, I think that is the point.",
+      "publishedAt": "2026-09-25T02:41:24.000Z",
+      "upvoterIds": ["regular-club"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s16",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-traditional",
+      "parentId": "ch20-storm-c06",
+      "body": "Leo is right to ask for time. Affection does not oblige a person to restore trust before the truth has even been fully offered.",
+      "publishedAt": "2026-09-25T03:18:42.000Z",
+      "upvoterIds": ["regular-sept"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s17",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-faith",
+      "parentId": "ch20-storm-c24",
+      "body": "Yes. A frightened child can be brave and still have been failed by the people who taught her what danger means.",
+      "publishedAt": "2026-09-25T04:52:08.000Z",
+      "upvoterIds": ["regular-club"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s18",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-reform",
+      "parentId": "ch20-storm-c22",
+      "body": "Could one council meeting end with named responsibilities, a written plan and somebody empowered to object? I remain committed to impossible institutional fantasies.",
+      "publishedAt": "2026-09-25T05:27:31.000Z",
+      "upvoterIds": ["regular-ledger"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s19",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-sect",
+      "parentId": "ch20-storm-c18",
+      "body": "Weather boss aura is not a programme. I will nevertheless attend the meeting if there is soup.",
+      "publishedAt": "2026-09-25T06:44:16.000Z",
+      "upvoterIds": ["regular-a"],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-s20",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-market",
+      "parentId": "ch20-storm-c28",
+      "body": "Private provisioning would solve at least two of these problems, provided the crown pays before departure and does not requisition my desk again.",
+      "publishedAt": "2026-09-25T07:16:53.000Z",
+      "upvoterIds": ["regular-ledger"],
+      "awards": []
+    },
+    {
+      "id": "feature-reading-s01",
+      "entryId": "community-feature-that-changed-reading",
+      "authorId": "regular-fandom-elder-scrolls",
+      "parentId": "feature-reading-c04",
+      "body": "The map turned my usual wandering into useful wandering. I now lose twenty minutes with geographic context.",
+      "publishedAt": "2026-09-25T08:31:14.000Z",
+      "upvoterIds": ["regular-horse"],
+      "awards": []
+    },
+    {
+      "id": "realm-job-s01",
+      "entryId": "community-realm-job-draft",
+      "authorId": "regular-fandom-stardew",
+      "parentId": "realm-job-c06",
+      "body": "Toy Harbour zoning, but I am bringing plants for the office and declining all dragon-adjacent overtime.",
+      "publishedAt": "2026-09-25T09:05:38.000Z",
+      "upvoterIds": ["regular-food"],
+      "awards": []
+    },
+    {
+      "id": "unsolved-board-s01",
+      "entryId": "community-unsolved-board",
+      "authorId": "regular-fandom-mythology",
+      "parentId": "unsolved-board-c03",
+      "body": "Real clue: recognition repeats across two observers. Irresponsible theory: the dragon is conducting its own family-tree audit and finds ours inadequate.",
+      "publishedAt": "2026-09-25T10:48:25.000Z",
+      "upvoterIds": ["regular-wild-take"],
+      "awards": []
+    },
+    {
+      "id": "patch-notes-s01",
+      "entryId": "community-character-patch-notes",
+      "authorId": "regular-fandom-sims",
+      "parentId": null,
+      "body": "Autonomy remains on high. Shoes removed again. Household members will follow into hazardous weather unless manually redirected.",
+      "publishedAt": "2026-09-25T11:23:47.000Z",
+      "upvoterIds": ["regular-m", "regular-a"],
       "awards": []
     }
   ]

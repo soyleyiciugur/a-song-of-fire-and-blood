@@ -77,7 +77,10 @@ A partial command must report which downstream stages remain pending.
    unions, family tree, royal chronology, and succession.
 9. **Timeline and events** — add major chapter beats to the timeline; add only
    independently dateable named occurrences to `data/events.json`. Flashbacks
-   use their historical date and do not masquerade as current events.
+   use their historical date and do not masquerade as current events. Timeline
+   display dates retain the compact archive convention (`20th of the 8th Moon`,
+   `20th–21st of the 8th Moon`, `99 AC`) rather than prose-style spelled-out
+   numbers.
 10. **Map and locations** — update real journeys and persistent current
     positions. Do not turn a short scene location into a permanent position.
     Register genuinely new canonical locations when necessary.
@@ -109,7 +112,9 @@ A partial command must report which downstream stages remain pending.
     IDs, parents, speakers, characters, dragons, houses, locations, and anchors.
 20. **Visible-number rule** — in applicable House of the Dragon-font in-world
     prose/display fields, spell out Arabic numerals and dates. Roman chapter
-    numerals and technical/UI values are exempt. Check only scoped fields.
+    numerals and technical/UI values are exempt. Timeline date labels are also
+    exempt and must use their established numeric-ordinal archive format. Check
+    only scoped fields.
 21. **Community workflow** — run the inbox-first workflow in `AGENTS.md`, author
     reactions from current context, generate reaction targets, sync Supabase,
     and advance checkpoints only after processing the relevant batch.

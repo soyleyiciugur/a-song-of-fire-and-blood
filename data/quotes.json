@@ -2044,5 +2044,133 @@
     "chapterSlug": "judgment-by-blood",
     "chapterTitle": "Chapter XIX: Judgment by Blood",
     "note": "dryly responding when Baelenys tells Gaelor that he is too aggressive"
+  },
+  {
+    "text": "He is not the warrior the songs pretend he is. But he is more dangerous than most warriors will ever be.",
+    "speakerId": "vahaemon-targaryen",
+    "speakerName": "Vahaemon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Vaenarr while warning him not to underestimate Baelenys despite his age and weakened state"
+  },
+  {
+    "text": "It suits a King.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Jace after confirming that Visenya carries Dark Sister"
+  },
+  {
+    "text": "I will bring it back with her head.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "promising Baelenys that he will return with Dark Sister and Visenya's head"
+  },
+  {
+    "text": "It will not be traitors elsewhere in the Seven Kingdoms who kill me! It will be my own damned family!",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "shouting during his argument with Jaery while Vhaemys listens from outside the chamber"
+  },
+  {
+    "text": "And men whose honor has become... debatable may still possess useful swords.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Orwell while suggesting that Ser Saathos Maris may still be useful for the mission in Essos"
+  },
+  {
+    "text": "After all this time?",
+    "speakerId": "vahaemon-targaryen",
+    "speakerName": "Vahaemon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Vaenarr after realizing that his reasons for remaining beside him may still involve Jaery"
+  },
+  {
+    "text": "You, naturally. You will command the entire operation, Maester Cordin.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "teasing Cordin after he hurriedly asks whom Jace is considering for his company"
+  },
+  {
+    "text": "Since we are speaking of men with complicated relationships to honor... Gaelor.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Orwell while considering whether Gaelor should join the mission to Essos"
+  },
+  {
+    "text": "It appears to have become something of a family tradition.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Lorenah after she asks whether Baelenys is sending his own heir toward death"
+  },
+  {
+    "text": "Fathers do seem to be the most troublesome members of any family.",
+    "speakerId": "leo-tyrell",
+    "speakerName": "Leo Tyrell",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Visenor at the Proud Lantern while the two discuss their troubled relationships with their fathers"
+  },
+  {
+    "text": "We are both sons who have grown weary of our fathers.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Leo while reflecting on one of the similarities that has drawn the two of them closer"
+  },
+  {
+    "text": "An heir... a man who means one day to possess that throne... must be prepared to lose everything for it.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "before the council while announcing the burden Jace must accept as heir to the Iron Throne"
+  },
+  {
+    "text": "Perhaps I should never have trusted you in any matter.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Jaery as their argument over Vaenarr and the trust between them escalates"
+  },
+  {
+    "text": "The happiest moments of my life have been away from politics.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Leo at the Proud Lantern while remembering the time he spent away from politics with his wife"
+  },
+  {
+    "text": "I always knew I should never trust anyone completely. I simply learned the truth of it in the most painful way possible. My father taught me.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Leo while discussing how their fathers shaped their distrust of others"
+  },
+  {
+    "text": "Would it be too bold to say that perhaps we are rather alike?",
+    "speakerId": "leo-tyrell",
+    "speakerName": "Leo Tyrell",
+    "chapterSlug": "the-eye-in-the-storm",
+    "chapterTitle": "Chapter XX: The Eye in the Storm",
+    "note": "to Visenor at the Proud Lantern after realizing how much the two of them have in common"
   }
 ]

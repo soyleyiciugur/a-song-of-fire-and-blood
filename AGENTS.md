@@ -74,6 +74,12 @@ URLs, script parameters, pagination, counters, and real statistics—may use
 Arabic numerals. Validate only the applicable display fields, not whole files
 with a blind numeral regex.
 
+Timeline date labels are a deliberate exception to the prose/display rule.
+Keep the established compact archive format beneath timeline events, such as
+`20th of the 8th Moon`; do not spell these labels as `Twentieth Day of the
+Eighth Moon`. Use numeric ordinals consistently for exact days, moons, ranges,
+and years throughout `data/timeline.json`.
+
 # Community workflow
 
 ## Activity density and evolving accounts
@@ -177,6 +183,15 @@ then run `npm.cmd run community:sync` after the data changes.
    - hostile/toxic/anti-story accounts do not need to become nicer
    - fictional accounts may criticize the scenario, writing, characters,
      moderation or other users if that matches their established personality
+
+   Taverns should read like a broad subreddit rather than a chapter-only
+   seminar. New threads may cover the wider setting, community regulars,
+   existing site features, character developments, theories, games, memes,
+   polls, ordinary-life prompts or other locally relevant subjects; they do
+   not need to concern the newest chapter. Keep a healthy mix of sincere
+   analysis and memelord participation. Give jokes their own natural threads
+   and voices as well as occasional callbacks, without turning every serious
+   discussion into the same running-joke checklist.
 
 9. When useful, schedule follow-up comments/replies over time instead of
    publishing an entire conversation immediately.

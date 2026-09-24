@@ -5822,6 +5822,198 @@
       "forumCommentIds": [
         "ch19-discussion-124"
       ]
+    },
+    {
+      "id": "ch20-followup-01",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T12:17:11.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s01"]
+    },
+    {
+      "id": "ch20-followup-02",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T13:43:27.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s02"]
+    },
+    {
+      "id": "ch20-followup-03",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T14:26:39.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s03"]
+    },
+    {
+      "id": "ch20-followup-04",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T15:08:52.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s04"]
+    },
+    {
+      "id": "ch20-followup-05",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T16:34:18.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s05"]
+    },
+    {
+      "id": "ch20-followup-06",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T17:12:44.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s06"]
+    },
+    {
+      "id": "ch20-followup-07",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T18:51:06.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s07"]
+    },
+    {
+      "id": "ch20-followup-08",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T19:29:33.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s08"]
+    },
+    {
+      "id": "ch20-followup-09",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T20:14:57.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s09"]
+    },
+    {
+      "id": "ch20-followup-10",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T21:37:21.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s10"]
+    },
+    {
+      "id": "ch20-followup-11",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T22:03:48.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s11"]
+    },
+    {
+      "id": "ch20-followup-12",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-24T23:46:12.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s12"]
+    },
+    {
+      "id": "ch20-followup-13",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T00:22:36.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s13"]
+    },
+    {
+      "id": "ch20-followup-14",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T01:09:59.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s14"]
+    },
+    {
+      "id": "ch20-followup-15",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T02:41:24.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s15"]
+    },
+    {
+      "id": "ch20-followup-16",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T03:18:42.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s16"]
+    },
+    {
+      "id": "ch20-followup-17",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T04:52:08.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s17"]
+    },
+    {
+      "id": "ch20-followup-18",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T05:27:31.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s18"]
+    },
+    {
+      "id": "ch20-followup-19",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T06:44:16.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s19"]
+    },
+    {
+      "id": "ch20-followup-20",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T07:16:53.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["ch20-storm-s20"]
+    },
+    {
+      "id": "ch20-followup-21",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T08:31:14.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["feature-reading-s01"]
+    },
+    {
+      "id": "ch20-followup-22",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T09:05:38.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["realm-job-s01"]
+    },
+    {
+      "id": "ch20-followup-23",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T10:48:25.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["unsolved-board-s01"]
+    },
+    {
+      "id": "ch20-followup-24",
+      "batchId": "ch20-organic-followups",
+      "publishedAt": "2026-09-25T11:23:47.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": ["patch-notes-s01"]
     }
   ],
   "policy": {
@@ -5874,5 +6066,5 @@
       }
     ]
   },
-  "currentBatchId": "ch19-discussion-hourly"
+  "currentBatchId": "ch20-organic-followups"
 }
