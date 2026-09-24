@@ -27,7 +27,8 @@ const ROYAL_IDS = new Set<string>([
 ]);
 
 type StatusFilter = "all" | "Alive" | "Dead" | "Missing" | "Unknown";
-type SortMode = "name" | "house";
+type SortMode = "name" | "house" | "height";
+type SortDirection = "ascending" | "descending";
 
 type SelectOption = {
   value: string;
@@ -52,6 +53,13 @@ function sortableName(name: string) {
 
 function houseLabel(house: string) {
   return house === "-" ? "Unaffiliated" : house.replace(/^House\s+/i, "");
+}
+
+function heightValue(height?: string) {
+  if (!height || height === "-") return null;
+
+  const value = Number.parseFloat(height);
+  return Number.isFinite(value) ? value : null;
 }
 
 const MINI_PORTRAIT_EXTS = ["webp", "png", "jpg", "jpeg"] as const;
@@ -240,6 +248,7 @@ export default function Characters() {
   const [query, setQuery] = useState("");
   const [houseFilter, setHouseFilter] = useState("all");
   const [sortBy, setSortBy] = useState<SortMode>("name");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("ascending");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
   const visibleCharacters = useMemo(() => {
@@ -269,21 +278,36 @@ export default function Characters() {
         return haystack.includes(normalizedQuery);
       })
       .sort((a, b) => {
+        let comparison = 0;
+
         if (sortBy === "house") {
-          const houseCompare = houseLabel(a.house).localeCompare(
+          comparison = houseLabel(a.house).localeCompare(
             houseLabel(b.house),
             "en",
             { sensitivity: "base" }
           );
+        } else if (sortBy === "height") {
+          const aHeight = heightValue(a.height);
+          const bHeight = heightValue(b.height);
 
-          if (houseCompare !== 0) return houseCompare;
+          if (aHeight === null && bHeight !== null) return 1;
+          if (aHeight !== null && bHeight === null) return -1;
+          if (aHeight !== null && bHeight !== null) comparison = aHeight - bHeight;
+        } else {
+          comparison = sortableName(a.name).localeCompare(sortableName(b.name), "en", {
+            sensitivity: "base",
+          });
+        }
+
+        if (comparison !== 0) {
+          return sortDirection === "ascending" ? comparison : -comparison;
         }
 
         return sortableName(a.name).localeCompare(sortableName(b.name), "en", {
           sensitivity: "base",
         });
       });
-  }, [otherCharacters, houseFilter, query, sortBy, statusFilter]);
+  }, [otherCharacters, houseFilter, query, sortBy, sortDirection, statusFilter]);
 
   const houseOptions = useMemo<SelectOption[]>(
     () => [
@@ -294,9 +318,12 @@ export default function Characters() {
   );
 
   const sortOptions: SelectOption[] = [
-    { value: "name", label: "Name A–Z" },
-    { value: "house", label: "House A–Z" },
+    { value: "name", label: "Name" },
+    { value: "house", label: "House" },
+    { value: "height", label: "Height" },
   ];
+
+  const sortDirectionLabel = sortDirection === "ascending" ? "Ascending" : "Descending";
 
   return (
     <main className="page-shell">
@@ -435,12 +462,35 @@ export default function Characters() {
               onChange={setHouseFilter}
             />
 
-            <StyledSelect
-              label="Sort"
-              value={sortBy}
-              options={sortOptions}
-              onChange={(value) => setSortBy(value as SortMode)}
-            />
+            <div className={styles.sortControls}>
+              <StyledSelect
+                label="Sort"
+                value={sortBy}
+                options={sortOptions}
+                onChange={(value) => setSortBy(value as SortMode)}
+              />
+              <button
+                type="button"
+                className={styles.sortDirectionButton}
+                aria-label={`Sort ${sortDirectionLabel.toLocaleLowerCase("en")}. Change direction`}
+                title={`${sortDirectionLabel} order`}
+                onClick={() =>
+                  setSortDirection((current) =>
+                    current === "ascending" ? "descending" : "ascending"
+                  )
+                }
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d={
+                      sortDirection === "ascending"
+                        ? "M8 13V3M4.5 6.5 8 3l3.5 3.5"
+                        : "M8 3v10m-3.5-3.5L8 13l3.5-3.5"
+                    }
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
 
           {visibleCharacters.length > 0 ? (

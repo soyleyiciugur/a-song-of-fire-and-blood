@@ -22,6 +22,13 @@ maester later established to be the same named character.
 When the first physical appearance remains ambiguous, leave `debutChapter`
 unset and ask the user rather than treating the earliest mention as a debut.
 
+Every chapter-update state sync must include an explicit debut audit: list each
+character who physically appears for the first time in that chapter, verify the
+scene itself, and confirm that `debutChapter` is stored before treating the
+character stage as complete. Also audit reciprocal parent/child and sibling
+fields for newly established family members; a correct debut does not make an
+incomplete family record acceptable.
+
 # Daily update notes
 
 Records is reserved for in-world records. Keep Update Notes accessible only from the homepage's lower Latest Updates section heading, not from the navbar, hero shortcut grid, Notifications (The Rookery), or Records menu. The user designated 2026-09-09 as the date for the comment-system launch note.

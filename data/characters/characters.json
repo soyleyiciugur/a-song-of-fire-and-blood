@@ -1152,8 +1152,8 @@
         "latestDevelopment": "Saera helped arrange and quietly supervise his proposal to Lorenah in the Cloudpass valley, then departed for Winterfell with Alester at Jace's urging."
       },
       "steffon-baratheon": {
-        "overview": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown; unhorsed him in the tourney lists and the insult still burns on both sides.",
-        "latestDevelopment": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown; unhorsed him in the tourney lists and the insult still burns on both sides."
+        "overview": "Humiliated him publicly before the court when the young lord came demanding debt repayment from the Crown. They later exchanged challenges before the King's Landing tourney but never met in the lists.",
+        "latestDevelopment": "Steffon watched from the rail when Jace and Gaelor's semi-final ended with both princes unable to rise."
       },
       "tion-lannister": {
         "overview": "He has found an uneasy economic ally in Tion.",
@@ -2315,8 +2315,8 @@
         "latestDevelopment": "Held in high esteem by the King for his house's past military service; Baelenys remains unaware of the insolence at the Hand's throne."
       },
       "jacaelon-targaryen": {
-        "overview": "Demanded overdue debts from him before the whole court and was humiliated for his trouble; was unhorsed by him in the tourney quarter-finals and correctly assessed that Jace was holding back.",
-        "latestDevelopment": "Demanded overdue debts from him before the whole court and was humiliated for his trouble; was unhorsed by him in the tourney quarter-finals and correctly assessed that Jace was holding back."
+        "overview": "Demanded overdue debts from him before the whole court and was humiliated for his trouble. They later exchanged challenges before the King's Landing tourney but never met in the lists.",
+        "latestDevelopment": "Steffon watched from the rail when Jace and Gaelor's semi-final ended with both princes unable to rise."
       },
       "jaery-targaryen": {
         "overview": "He remembers the Queen as one of the people who made his humiliating audience with Jace worse, laughing that the Young Stag was still too young.",
@@ -3088,6 +3088,7 @@
     "aliases": [],
     "house": "House Targaryen",
     "title": "Princess Naela of House Targaryen",
+    "debutChapter": "the-eye-in-the-storm",
     "status": "Unknown",
     "secret": {
       "status": "Alive",
@@ -3105,7 +3106,8 @@
     "siblings": [],
     "children": [
       "rhaella-targaryen",
-      "visenya-targaryen"
+      "visenya-targaryen",
+      "aegor-targaryen"
     ],
     "mentor": "-",
     "dragon": "-",
@@ -3114,6 +3116,10 @@
       "Unknown"
     ],
     "relationships": {
+      "aegor-targaryen": {
+        "overview": "Her son, raised in exile with Vahaemon's branch of House Targaryen.",
+        "latestDevelopment": "Aegor stands with the exiled family in Essos as the confirmed rider of Sunfyre."
+      },
       "rhaella-targaryen": {
         "overview": "Her daughter, currently in hiding in Dorne.",
         "latestDevelopment": "Her daughter, currently in hiding in Dorne."
@@ -5924,7 +5930,7 @@
     "age": 16,
     "height": "175 cm",
     "father": "vahaemon-targaryen",
-    "mother": "-",
+    "mother": "naela-targaryen",
     "spouse": "-",
     "siblings": [
       "rhaella-targaryen",
@@ -5943,6 +5949,10 @@
       "Prepare for the conflict Vahaemon believes is coming"
     ],
     "relationships": {
+      "naela-targaryen": {
+        "overview": "His mother, who remains with Vahaemon's circle in Essos and suffers from a recurring unexplained illness.",
+        "latestDevelopment": "Aegor remains beside the exiled family after Naela's latest return from treatment north of Tyrosh."
+      },
       "vahaemon-targaryen": {
         "overview": "His father, who has spent years gathering dragons, allies and occult knowledge in Essos.",
         "latestDevelopment": "Vahaemon presents Aegor as one of the strongest proofs that his preparations have succeeded."

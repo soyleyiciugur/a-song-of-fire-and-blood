@@ -380,6 +380,79 @@
         ]
       },
       {
+        "title": "Saathos defeats Ser Tarly",
+        "description": "Saathos Maris survives two hard passes before using his shield boss to throw Ser Tarly from the saddle on the third.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "saathos-maris"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Alester advances in the lists",
+        "description": "Alester Dayne gives a masterclass in chivalric riding and cleanly unhorses a minor Reach lord on their third pass.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "alester-dayne"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Steffon unhorses the Tully knight",
+        "description": "Steffon Baratheon leans beneath a Tully nephew's lance, rises in the same motion and drives the knight spinning from his saddle.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "steffon-baratheon"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Jace unhorses Godfrey Blackwood",
+        "description": "Jace and Godfrey Blackwood fight through six hard passes before the prince drives the Blackwood knight from his saddle; Godfrey accepts the defeat graciously.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "godfrey-blackwood"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Steffon defeats Alester",
+        "description": "Steffon Baratheon and Alester Dayne trade a series of brutal passes before Steffon drives the butt of his lance into Alester's stomach and unhorses him. Steffon immediately runs to his fallen opponent, and the two embrace after Alester rises.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "steffon-baratheon",
+          "alester-dayne"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Gaelor defeats Ser Aldwyn Glover",
+        "description": "Still wounded from Costayne's attack, Gaelor rides without a shield and clubs Ser Aldwyn Glover from the saddle; Glover's own horse then tramples his chest.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "gaelor-targaryen"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Jace defeats Saathos Maris",
+        "description": "Saathos shatters Jace's shield and tears open his hand, but Jace answers by breaking the knight's arm and unhorsing him before immediately checking whether he will live.",
+        "date": "18th of the 7th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "saathos-maris"
+        ],
+        "kind": "conflict",
+        "location": "King's Landing"
+      },
+      {
         "title": "The final tilt",
         "description": "In the tourney's brutal semi-final, Jace and Gaelor batter each other into mutual collapse, neither able to rise, ending the tournament without a victor.",
         "date": "18th of the 7th Moon",

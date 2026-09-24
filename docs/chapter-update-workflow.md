@@ -65,7 +65,9 @@ A partial command must report which downstream stages remain pending.
 5. **Characters** — review debut, public and secret status, title, location,
    biography, goals, aliases, death data, personal timeline, and the Inner
    Court surface. A mention is not a debut; aliases/disguises do not create new
-   characters. Do not manufacture player-owned private beliefs merely to bring
+   characters. Complete a named debut audit for every physical first appearance
+   before this stage passes, and verify reciprocal parent/child and sibling
+   fields for newly established family members. Do not manufacture player-owned private beliefs merely to bring
    `data/character-inner-court.ts` or `character_inner_court` up to the latest
    chapter; update only thoughts established by the player or existing canon.
 6. **Relationships** — update real changes reciprocally. Keep one-sided beliefs,
@@ -81,6 +83,11 @@ A partial command must report which downstream stages remain pending.
    display dates retain the compact archive convention (`20th of the 8th Moon`,
    `20th–21st of the 8th Moon`, `99 AC`) rather than prose-style spelled-out
    numbers.
+   When a tournament, duel, or comparable contest is recorded, include every
+   participating character who has a canonical character record so the shared
+   event appears in each participant's derived personal chronology. Record the
+   result accurately and synchronize any genuinely meaningful encounter in
+   both characters' relationship records.
 10. **Map and locations** — update real journeys and persistent current
     positions. Do not turn a short scene location into a permanent position.
     Register genuinely new canonical locations when necessary.

@@ -2,6 +2,7 @@
   {
     "date": "2026-09-24",
     "items": [
+      "Added ascending and descending controls to the character directory, including numeric height sorting with unknown heights kept at the end.",
       "Matched Bestiary, Houses, Known World and Chronicle headers to the same left-aligned responsive frame as the Dragons archive.",
       "Standardized public hub headers, including Characters, Family Tree and Relationships, on the original Dragons typography, content-driven spacing and tab treatment, with a consistent safe zone below each divider.",
       "Established bold primary hubs for Characters, The Bestiary and Houses while keeping secondary archive pages lighter, and shortened three navbar group labels without changing their page titles.",
@@ -13,7 +14,8 @@
       "Standardized Timeline event dates on the compact numeric-ordinal archive format and added a validation check to keep future chapter entries consistent.",
       "Expanded the Chapter XX Tavern discussion to thirty published participants with twenty additional new voices scheduled over the following days.",
       "Added Tavern discussions about reading features, realm jobs, unresolved clues and character patch notes, with a broader balance of analysis, games and meme voices.",
-      "Extended several existing Tavern conversations and formalized the wider subreddit-style topic mix in the community workflow."
+      "Extended several existing Tavern conversations and formalized the wider subreddit-style topic mix in the community workflow.",
+      "Completed Naela and Aegor's reciprocal family and debut records, restored every recorded King's Landing tourney pairing to participant timelines, and corrected the false Jace-Steffon match history."
     ]
   },
   {
