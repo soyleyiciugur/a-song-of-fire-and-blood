@@ -7,6 +7,7 @@ import { getCharacters } from "@/lib/characters";
 import { getAllChapters } from "@/data/chapters";
 import { createClient } from "@/lib/supabase/client";
 import type { LedgerChecklistItem, PrivateLedgerEntry } from "@/lib/supabase/database.types";
+import { LEDGER_IMPORT_MAX_BYTES, parseLedgerImport, type LedgerImportDraft } from "@/lib/ledger-import";
 import styles from "./ledger.module.css";
 
 type Filter = "open" | "settled" | "all";
@@ -14,11 +15,12 @@ type SaveState = "idle" | "saving" | "saved" | "error";
 type PickerKind = "character" | "chapter";
 type PickerState = { entryId: string; kind: PickerKind } | null;
 type EntryPatch = Partial<Pick<PrivateLedgerEntry, "heading" | "matter" | "checklist" | "pinned" | "status" | "archived" | "character_ids" | "chapter_slug">>;
+type ImportPreview = { fileName: string; entries: LedgerImportDraft[]; warnings: string[] };
 
 const characters = getCharacters().slice().sort((a, b) => a.name.localeCompare(b.name));
 const chapters = getAllChapters().slice();
 
-function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star" | "chevron" | "check" | "close" | "up" | "down" | "pin" | "flame" | "book"; className?: string }) {
+function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star" | "chevron" | "check" | "close" | "up" | "down" | "pin" | "flame" | "book" | "upload"; className?: string }) {
   const common = { className, viewBox: "0 0 24 24", fill: "none", "aria-hidden": true } as const;
   if (name === "search") return <svg {...common}><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>;
   if (name === "plus") return <svg {...common}><path d="M12 5v14M5 12h14"/></svg>;
@@ -31,6 +33,7 @@ function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star
   if (name === "down") return <svg {...common}><path d="m7 10 5 5 5-5"/></svg>;
   if (name === "pin") return <svg {...common}><path d="M8 4h8l-1.4 5 2.4 2.4v1.1H7v-1.1L9.4 9 8 4Z"/><path d="M12 12.5V21"/></svg>;
   if (name === "flame") return <svg {...common}><path d="M13.5 3.5c.6 3-1.8 4.3-1 6.6.5 1.4 1.8 1.9 2.7 1.1.6-.6.7-1.5.4-2.5 2.5 1.8 3.8 4 3.2 6.6-.7 3.1-3.3 5.2-6.7 5.2-3.8 0-6.8-2.4-6.8-6 0-2.7 1.5-5 4.3-7.2-.2 2 .4 3 1.5 3.2 1.3.2 2.5-1 2.1-2.8-.3-1.5-.6-2.6.3-4.2Z"/></svg>;
+  if (name === "upload") return <svg {...common}><path d="M12 16V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v5h14v-5"/></svg>;
   return <svg {...common}><path d="M5 4.5h10.5A3.5 3.5 0 0 1 19 8v11.5H8.5A3.5 3.5 0 0 0 5 23V4.5Z"/><path d="M8.5 7.5H16M8.5 11H16M8.5 14.5H13.5"/></svg>;
 }
 
@@ -61,7 +64,7 @@ function normalizeEntry(row: PrivateLedgerEntry): PrivateLedgerEntry {
 export default function LedgerClient({ userId, username }: { userId: string; username: string }) {
   const supabase = useMemo(() => createClient(), []);
   const [entries, setEntries] = useState<PrivateLedgerEntry[]>([]);
-  const [filter, setFilter] = useState<Filter>("open");
+  const [filter, setFilter] = useState<Filter>("all");
   const [archived, setArchived] = useState(false);
   const [query, setQuery] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -73,6 +76,9 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   const [pickerQuery, setPickerQuery] = useState("");
   const [pickerActiveIndex, setPickerActiveIndex] = useState(-1);
   const [deleteTarget, setDeleteTarget] = useState<PrivateLedgerEntry | null>(null);
+  const [importPreview, setImportPreview] = useState<ImportPreview | null>(null);
+  const [importing, setImporting] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const saveTimers = useRef(new Map<string, number>());
   const pendingPatches = useRef(new Map<string, EntryPatch>());
   const saveChains = useRef(new Map<string, Promise<void>>());
@@ -148,11 +154,11 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     };
   }, [flushSave]);
   useEffect(() => {
-    if (!picker && !deleteTarget) return;
-    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape") { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); } };
+    if (!picker && !deleteTarget && !importPreview) return;
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape" && !importing) { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); setImportPreview(null); } };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [picker, deleteTarget]);
+  }, [picker, deleteTarget, importPreview, importing]);
   useEffect(() => {
     if (!picker) return;
     const selector = `[data-ledger-picker="${picker.entryId}-${picker.kind}"]`;
@@ -224,8 +230,52 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     const draft = { user_id: userId, heading: "Untitled entry", matter: "", checklist: [], pinned: false, status: "open" as const, archived: false, character_ids: [], chapter_slug: null };
     const { data, error } = await supabase.from("private_ledger_entries").insert(draft).select("*").single();
     if (error || !data) setMessage("A new page could not be added to the ledger.");
-    else { const entry = normalizeEntry(data); setEntries((current) => [entry, ...current]); setExpandedId(entry.id); setFilter("open"); setArchived(false); }
+    else { const entry = normalizeEntry(data); setEntries((current) => [entry, ...current]); setExpandedId(entry.id); setFilter("all"); setArchived(false); }
     setCreating(false);
+  }
+
+  async function readImportFile(file: File) {
+    setMessage("");
+    if (!file.name.toLocaleLowerCase().endsWith(".json")) {
+      setMessage("Choose a JSON ledger file.");
+      return;
+    }
+    if (file.size > LEDGER_IMPORT_MAX_BYTES) {
+      setMessage("The ledger file is larger than 2 MB.");
+      return;
+    }
+    try {
+      const result = parseLedgerImport(
+        await file.text(),
+        new Set(characters.map((character) => character.id)),
+        new Set(chapters.map((chapter) => chapter.slug)),
+      );
+      setImportPreview({ fileName: file.name, ...result });
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "The ledger file could not be read.");
+    } finally {
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }
+
+  async function importEntries() {
+    if (!importPreview || importing) return;
+    setImporting(true);
+    setMessage("");
+    const payload = importPreview.entries.map((entry) => ({ ...entry, user_id: userId }));
+    const { data, error } = await supabase.from("private_ledger_entries").insert(payload).select("*");
+    if (error || !data) {
+      setMessage("The imported pages could not be sealed. No entries were added.");
+    } else {
+      const imported = data.map((entry) => normalizeEntry(entry));
+      setEntries((current) => [...imported, ...current]);
+      setArchived(false);
+      setFilter("all");
+      setQuery("");
+      setImportPreview(null);
+      setMessage(`${imported.length} ${imported.length === 1 ? "entry was" : "entries were"} imported into your private ledger.`);
+    }
+    setImporting(false);
   }
 
   function addMatter(entry: PrivateLedgerEntry) { localPatch(entry.id, { checklist: [...entry.checklist, { id: crypto.randomUUID(), text: "", done: false }] }); }
@@ -255,7 +305,10 @@ export default function LedgerClient({ userId, username }: { userId: string; use
       const charNames = entry.character_ids.map((id) => characters.find((char) => char.id === id)?.name ?? id).join(" ");
       const chapter = chapters.find((item) => item.slug === entry.chapter_slug)?.title ?? "";
       return [entry.heading, entry.matter, ...entry.checklist.map((item) => item.text), charNames, chapter].join(" ").toLocaleLowerCase().includes(needle);
-    }).sort((a, b) => Number(b.pinned) - Number(a.pinned) || Date.parse(b.updated_at) - Date.parse(a.updated_at));
+    }).sort((a, b) => {
+      if (filter === "all" && a.status !== b.status) return a.status === "open" ? -1 : 1;
+      return Number(b.pinned) - Number(a.pinned) || Date.parse(b.updated_at) - Date.parse(a.updated_at);
+    });
   }, [entries, filter, archived, query]);
 
   return <main className={styles.page}>
@@ -270,12 +323,14 @@ export default function LedgerClient({ userId, username }: { userId: string; use
 
     <section className={styles.toolbar} aria-label="Ledger tools">
       <label className={styles.search}><Icon name="search"/><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search the ledger…" /></label>
+      <input ref={fileInputRef} className={styles.fileInput} type="file" accept="application/json,.json" onChange={(event) => { const file = event.target.files?.[0]; if (file) void readImportFile(file); }} />
+      <button className={styles.importButton} type="button" onClick={() => fileInputRef.current?.click()} disabled={importing}><Icon name="upload"/>Import</button>
       <button className={styles.newEntryDesktop} type="button" onClick={() => void newEntry()} disabled={creating}><Icon name="plus"/>New Entry</button>
     </section>
 
     <div className={styles.filters}>
       <div className={styles.segmented} role="tablist" aria-label="Ledger status">
-        {(["open", "settled", "all"] as Filter[]).map((value) => <button key={value} type="button" role="tab" aria-selected={!archived && filter === value} onClick={() => { setArchived(false); setFilter(value); }}>{value === "open" ? "Open" : value === "settled" ? "Settled" : "All"}</button>)}
+        {(["all", "open", "settled"] as Filter[]).map((value) => <button key={value} type="button" role="tab" data-status={value} aria-selected={!archived && filter === value} onClick={() => { setArchived(false); setFilter(value); }}><span aria-hidden="true" />{value === "open" ? "Open" : value === "settled" ? "Settled" : "All"}</button>)}
       </div>
       <button className={`${styles.archiveFilter} ${archived ? styles.archiveActive : ""}`} type="button" onClick={() => setArchived((value) => !value)}><Icon name="archive"/>{archived ? "Leave the Archive" : "The Archive"}</button>
     </div>
@@ -285,7 +340,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     {!loading && !visible.length && <div className={styles.empty}><Icon name="star"/><h2>{archived ? "The archive is quiet" : filter === "settled" ? "Nothing settled yet" : "No matters await you"}</h2><p>{query ? "No entry answers that search." : "Add an entry when the realm gives you something worth remembering."}</p></div>}
 
     <section className={styles.entryList} aria-label="Ledger entries">
-      {visible.map((entry) => {
+      {visible.map((entry, index) => {
         const done = entry.checklist.filter((item) => item.done).length;
         const expanded = expandedId === entry.id;
         const linkedCharacters = entry.character_ids.map((id) => characters.find((char) => char.id === id)).filter(Boolean);
@@ -308,9 +363,13 @@ export default function LedgerClient({ userId, username }: { userId: string; use
           ...(showUnbound ? [{ slug: null as string | null, title: "No chapter bound" }] : []),
           ...availableChapters.map((chapter) => ({ slug: chapter.slug as string | null, title: chapter.title })),
         ];
-        return <article className={`${styles.entry} ${entry.pinned ? styles.pinned : ""} ${entry.status === "settled" ? styles.settled : ""}`} key={entry.id}>
+        const startsStatusGroup = filter === "all" && (index === 0 || visible[index - 1]?.status !== entry.status);
+        const statusCount = startsStatusGroup ? visible.filter((item) => item.status === entry.status).length : 0;
+        return <div className={styles.entryRow} key={entry.id}>
+          {startsStatusGroup && <div className={`${styles.groupHeading} ${entry.status === "open" ? styles.groupOpen : styles.groupSettled}`}><span>{entry.status === "open" ? "Open matters" : "Settled matters"}</span><small>{statusCount} {statusCount === 1 ? "entry" : "entries"}</small></div>}
+          <article className={`${styles.entry} ${entry.pinned ? styles.pinned : ""} ${entry.status === "settled" ? styles.settled : ""}`}>
           <button type="button" className={styles.entrySummary} onClick={() => { setExpandedId(expanded ? null : entry.id); closePicker(); }} aria-expanded={expanded}>
-            <span className={styles.entryMain}><span className={styles.entryMeta}>{entry.pinned && <b>Pinned</b>}{entry.status === "settled" && <b>Settled</b>}{entry.archived && <b>Archived</b>}<small>Last amended {age(entry.updated_at)}</small></span><strong>{entry.heading || "Untitled entry"}</strong>{entry.matter && <span className={styles.matterPreview}>{entry.matter}</span>}<span className={styles.progress}>{entry.checklist.length ? `${done} of ${entry.checklist.length} settled` : "No listed matters"}</span></span>
+            <span className={styles.entryMain}><span className={styles.entryMeta}>{entry.pinned && <b>Pinned</b>}<b className={entry.status === "open" ? styles.statusOpen : styles.statusSettled}>{entry.status === "open" ? "Open" : "Settled"}</b>{entry.archived && <b>Archived</b>}<small>Last amended {age(entry.updated_at)}</small></span><strong>{entry.heading || "Untitled entry"}</strong>{entry.matter && <span className={styles.matterPreview}>{entry.matter}</span>}<span className={styles.progress}>{entry.checklist.length ? `${done} of ${entry.checklist.length} settled` : "No listed matters"}</span></span>
             <span className={styles.summarySide}>{linkedCharacters.slice(0, 4).map((char) => char && <MiniPortrait key={char.id} id={char.id} alt={char.name} size={30} />)}{linkedCharacters.length > 4 && <i>+{linkedCharacters.length - 4}</i>}<span className={`${styles.summaryChevron} ${expanded ? styles.summaryChevronOpen : ""}`}><Icon name="chevron"/></span></span>
           </button>
 
@@ -371,12 +430,14 @@ export default function LedgerClient({ userId, username }: { userId: string; use
               <button type="button" className={styles.burn} onClick={() => setDeleteTarget(entry)}><Icon name="flame"/>Burn entry</button>
             </footer>
           </div>}
-        </article>;
+          </article>
+        </div>;
       })}
     </section>
 
     <button className={styles.sealButton} type="button" onClick={() => void newEntry()} disabled={creating} aria-label="New Entry"><Icon name="plus"/><small>New Entry</small></button>
 
     {deleteTarget && <div className={styles.modalBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) setDeleteTarget(null); }}><section className={styles.confirmModal} role="dialog" aria-modal="true" aria-labelledby="burn-entry-title"><div className={styles.modalIcon}><Icon name="flame"/></div><span className={styles.modalEyebrow}>A final measure</span><h2 id="burn-entry-title">Burn this entry?</h2><p>“{deleteTarget.heading || "Untitled entry"}” will be removed from your private ledger for good.</p><div className={styles.modalActions}><button type="button" onClick={() => setDeleteTarget(null)}>Keep the page</button><button type="button" className={styles.modalDanger} onClick={() => void burnEntry(deleteTarget)}><Icon name="flame"/>Burn it</button></div></section></div>}
+    {importPreview && <div className={styles.modalBackdrop} role="presentation" onPointerDown={(event) => { if (!importing && event.target === event.currentTarget) setImportPreview(null); }}><section className={styles.importModal} role="dialog" aria-modal="true" aria-labelledby="import-ledger-title"><div className={styles.importModalHeader}><div className={styles.importModalIcon}><Icon name="upload"/></div><div><span className={styles.modalEyebrow}>Private ledger import</span><h2 id="import-ledger-title">Seal these pages?</h2><p>{importPreview.fileName} contains {importPreview.entries.length} {importPreview.entries.length === 1 ? "entry" : "entries"}. Imported pages will belong only to your signed-in account.</p></div></div><div className={styles.importPreviewList}>{importPreview.entries.slice(0, 5).map((entry, index) => <div key={`${entry.heading}-${index}`}><strong>{entry.heading}</strong><span>{entry.checklist.length} {entry.checklist.length === 1 ? "matter" : "matters"}{entry.chapter_slug ? ` · ${entry.chapter_slug}` : ""}</span></div>)}{importPreview.entries.length > 5 && <p>And {importPreview.entries.length - 5} more…</p>}</div>{importPreview.warnings.length > 0 && <details className={styles.importWarnings}><summary>{importPreview.warnings.length} import {importPreview.warnings.length === 1 ? "notice" : "notices"}</summary><ul>{importPreview.warnings.slice(0, 20).map((warning, index) => <li key={`${warning}-${index}`}>{warning}</li>)}</ul>{importPreview.warnings.length > 20 && <p>{importPreview.warnings.length - 20} more notices are not shown.</p>}</details>}<div className={styles.modalActions}><button type="button" onClick={() => setImportPreview(null)} disabled={importing}>Cancel</button><button type="button" className={styles.importConfirm} onClick={() => void importEntries()} disabled={importing}><Icon name="upload"/>{importing ? "Sealing pages…" : `Import ${importPreview.entries.length}`}</button></div></section></div>}
   </main>;
 }
