@@ -83,6 +83,12 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   const [importPreview, setImportPreview] = useState<ImportPreview | null>(null);
   const [importing, setImporting] = useState(false);
   const [transferOpen, setTransferOpen] = useState(false);
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set());
+  const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [replaceExisting, setReplaceExisting] = useState(false);
+  const [replaceConfirm, setReplaceConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const transferRef = useRef<HTMLDivElement>(null);
   const saveTimers = useRef(new Map<string, number>());
@@ -160,11 +166,11 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     };
   }, [flushSave]);
   useEffect(() => {
-    if (!picker && !deleteTarget && !importPreview && !transferOpen) return;
-    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape" && !importing) { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); setImportPreview(null); setTransferOpen(false); } };
+    if (!picker && !deleteTarget && !importPreview && !transferOpen && !bulkDeleteOpen) return;
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape" && !importing && !bulkBusy) { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); setImportPreview(null); setTransferOpen(false); setBulkDeleteOpen(false); setReplaceConfirm(false); } };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [picker, deleteTarget, importPreview, importing, transferOpen]);
+  }, [picker, deleteTarget, importPreview, importing, transferOpen, bulkDeleteOpen, bulkBusy]);
   useEffect(() => {
     if (!transferOpen) return;
     const onPointerDown = (event: PointerEvent) => {
@@ -264,6 +270,8 @@ export default function LedgerClient({ userId, username }: { userId: string; use
         new Set(characters.map((character) => character.id)),
         new Set(chapters.map((chapter) => chapter.slug)),
       );
+      setReplaceExisting(false);
+      setReplaceConfirm(false);
       setImportPreview({ fileName: file.name, ...result });
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "The ledger file could not be read.");
@@ -272,10 +280,27 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     }
   }
 
-  async function importEntries() {
+  async function importEntries(replace = false) {
     if (!importPreview || importing) return;
     setImporting(true);
     setMessage("");
+    if (replace) {
+      const { error } = await supabase.rpc("replace_private_ledger_entries", { replacement: importPreview.entries });
+      if (error) {
+        setMessage("The existing ledger could not be replaced. No entries were changed; make certain the latest ledger migration has been applied.");
+      } else {
+        const count = importPreview.entries.length;
+        setImportPreview(null);
+        setReplaceConfirm(false);
+        setReplaceExisting(false);
+        setSelectedIds(new Set());
+        setSelectionMode(false);
+        await load();
+        setMessage(`${count} ${count === 1 ? "entry" : "entries"} replaced your previous private ledger.`);
+      }
+      setImporting(false);
+      return;
+    }
     const payload = importPreview.entries.map((entry) => ({ ...entry, user_id: userId }));
     const { data, error } = await supabase.from("private_ledger_entries").insert(payload).select("*");
     if (error || !data) {
@@ -290,6 +315,45 @@ export default function LedgerClient({ userId, username }: { userId: string; use
       setMessage(`${imported.length} ${imported.length === 1 ? "entry was" : "entries were"} imported into your private ledger.`);
     }
     setImporting(false);
+  }
+
+  function toggleSelected(id: string) {
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  }
+
+  async function bulkPatch(patch: EntryPatch, success: string) {
+    const ids = [...selectedIds];
+    if (!ids.length || bulkBusy) return;
+    setBulkBusy(true); setMessage("");
+    const nextPatch = { ...patch, updated_at: new Date().toISOString() };
+    const { error } = await supabase.from("private_ledger_entries").update(nextPatch).in("id", ids).eq("user_id", userId);
+    if (error) setMessage("The selected entries could not be amended.");
+    else {
+      setEntries((current) => current.map((entry) => selectedIds.has(entry.id) ? { ...entry, ...nextPatch } : entry));
+      setSelectedIds(new Set());
+      setMessage(success);
+    }
+    setBulkBusy(false);
+  }
+
+  async function bulkDelete() {
+    const ids = [...selectedIds];
+    if (!ids.length || bulkBusy) return;
+    setBulkBusy(true); setMessage("");
+    const { error } = await supabase.from("private_ledger_entries").delete().in("id", ids).eq("user_id", userId);
+    if (error) setMessage("The selected entries resisted the flame.");
+    else {
+      setEntries((current) => current.filter((entry) => !selectedIds.has(entry.id)));
+      setSelectedIds(new Set());
+      setBulkDeleteOpen(false);
+      setSelectionMode(false);
+      setMessage(`${ids.length} ${ids.length === 1 ? "entry was" : "entries were"} removed from your private ledger.`);
+    }
+    setBulkBusy(false);
   }
 
   function exportEntries() {
@@ -372,6 +436,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
       return Date.parse(b.created_at) - Date.parse(a.created_at);
     });
   }, [entries, filter, archived, query, sortMode]);
+  const allVisibleSelected = visible.length > 0 && visible.every((entry) => selectedIds.has(entry.id));
 
   return <main className={styles.page}>
     <header className={styles.hero}>
@@ -401,6 +466,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     </div>
 
     <div className={styles.sortBar}>
+      <button className={`${styles.selectModeButton} ${selectionMode ? styles.selectModeActive : ""}`} type="button" aria-pressed={selectionMode} onClick={() => { setSelectionMode((active) => !active); setSelectedIds(new Set()); }}><Icon name="check"/>{selectionMode ? "Done selecting" : "Select multiple"}</button>
       <label htmlFor="ledger-sort">Sort matters</label>
       <span className={styles.sortSelect}>
         <select id="ledger-sort" value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
@@ -412,6 +478,8 @@ export default function LedgerClient({ userId, username }: { userId: string; use
         <Icon name="chevron"/>
       </span>
     </div>
+
+    {selectionMode && <div className={styles.bulkBar} aria-label="Bulk ledger actions"><div><strong>{selectedIds.size} selected</strong><button type="button" onClick={() => setSelectedIds((current) => { const next = new Set(current); if (allVisibleSelected) visible.forEach((entry) => next.delete(entry.id)); else visible.forEach((entry) => next.add(entry.id)); return next; })}>{allVisibleSelected ? "Clear shown" : "Select all shown"}</button></div><span><button type="button" disabled={!selectedIds.size || bulkBusy} onClick={() => void bulkPatch({ status: "open" }, "Selected entries were reopened.")}>Set open</button><button type="button" disabled={!selectedIds.size || bulkBusy} onClick={() => void bulkPatch({ status: "settled" }, "Selected entries were settled.")}>Settle</button><button type="button" disabled={!selectedIds.size || bulkBusy} onClick={() => void bulkPatch({ archived: !archived }, archived ? "Selected entries were restored." : "Selected entries were archived.")}><Icon name="archive"/>{archived ? "Restore" : "Archive"}</button><button className={styles.bulkBurn} type="button" disabled={!selectedIds.size || bulkBusy} onClick={() => setBulkDeleteOpen(true)}><Icon name="flame"/>Delete</button></span></div>}
 
     {message && <p className={styles.message} role="status">{message}</p>}
     {loading && <div className={styles.empty}><Icon name="star"/><p>Opening the private ledger…</p></div>}
@@ -445,8 +513,9 @@ export default function LedgerClient({ userId, username }: { userId: string; use
         const statusCount = startsStatusGroup ? visible.filter((item) => item.status === entry.status).length : 0;
         return <div className={styles.entryRow} key={entry.id}>
           {startsStatusGroup && <div className={`${styles.groupHeading} ${entry.status === "open" ? styles.groupOpen : styles.groupSettled}`}><span>{entry.status === "open" ? "Open matters" : "Settled matters"}</span><small>{statusCount} {statusCount === 1 ? "entry" : "entries"}</small></div>}
-          <article className={`${styles.entry} ${entry.pinned ? styles.pinned : ""} ${entry.status === "settled" ? styles.settled : ""}`}>
-          <button type="button" className={styles.entrySummary} onClick={() => { setExpandedId(expanded ? null : entry.id); closePicker(); }} aria-expanded={expanded}>
+          <article className={`${styles.entry} ${entry.pinned ? styles.pinned : ""} ${entry.status === "settled" ? styles.settled : ""} ${selectionMode ? styles.selecting : ""} ${selectedIds.has(entry.id) ? styles.entrySelected : ""}`}>
+          {selectionMode && <button type="button" className={styles.selectionCheck} aria-label={`${selectedIds.has(entry.id) ? "Deselect" : "Select"} ${entry.heading || "Untitled entry"}`} aria-pressed={selectedIds.has(entry.id)} onClick={() => toggleSelected(entry.id)}>{selectedIds.has(entry.id) && <Icon name="check"/>}</button>}
+          <button type="button" className={styles.entrySummary} onClick={() => { if (selectionMode) toggleSelected(entry.id); else { setExpandedId(expanded ? null : entry.id); closePicker(); } }} aria-expanded={!selectionMode && expanded}>
             <span className={styles.entryMain}><span className={styles.entryMeta}>{entry.pinned && <b>Pinned</b>}<b className={entry.status === "open" ? styles.statusOpen : styles.statusSettled}>{entry.status === "open" ? "Open" : "Settled"}</b>{entry.archived && <b>Archived</b>}<small>Last amended {age(entry.updated_at)}</small></span><strong>{entry.heading || "Untitled entry"}</strong>{entry.matter && <span className={styles.matterPreview}>{entry.matter}</span>}<span className={styles.progress}>{entry.checklist.length ? `${done} of ${entry.checklist.length} settled` : "No listed matters"}</span></span>
             <span className={styles.summarySide}>{linkedCharacters.slice(0, 4).map((char) => char && <MiniPortrait key={char.id} id={char.id} alt={char.name} size={30} />)}{linkedCharacters.length > 4 && <i>+{linkedCharacters.length - 4}</i>}<span className={`${styles.summaryChevron} ${expanded ? styles.summaryChevronOpen : ""}`}><Icon name="chevron"/></span></span>
           </button>
@@ -516,6 +585,14 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     <button className={styles.sealButton} type="button" onClick={() => void newEntry()} disabled={creating} aria-label="New Entry"><Icon name="plus"/><small>New Entry</small></button>
 
     {deleteTarget && <div className={styles.modalBackdrop} role="presentation" onPointerDown={(event) => { if (event.target === event.currentTarget) setDeleteTarget(null); }}><section className={styles.confirmModal} role="dialog" aria-modal="true" aria-labelledby="burn-entry-title"><div className={styles.modalIcon}><Icon name="flame"/></div><span className={styles.modalEyebrow}>A final measure</span><h2 id="burn-entry-title">Burn this entry?</h2><p>“{deleteTarget.heading || "Untitled entry"}” will be removed from your private ledger for good.</p><div className={styles.modalActions}><button type="button" onClick={() => setDeleteTarget(null)}>Keep the page</button><button type="button" className={styles.modalDanger} onClick={() => void burnEntry(deleteTarget)}><Icon name="flame"/>Burn it</button></div></section></div>}
-    {importPreview && <div className={styles.modalBackdrop} role="presentation" onPointerDown={(event) => { if (!importing && event.target === event.currentTarget) setImportPreview(null); }}><section className={styles.importModal} role="dialog" aria-modal="true" aria-labelledby="import-ledger-title"><div className={styles.importModalHeader}><div className={styles.importModalIcon}><Icon name="upload"/></div><div><span className={styles.modalEyebrow}>Private ledger import</span><h2 id="import-ledger-title">Seal these pages?</h2><p>{importPreview.fileName} contains {importPreview.entries.length} {importPreview.entries.length === 1 ? "entry" : "entries"}. Imported pages will belong only to your signed-in account.</p></div></div><div className={styles.importPreviewList}>{importPreview.entries.slice(0, 5).map((entry, index) => <div key={`${entry.heading}-${index}`}><strong>{entry.heading}</strong><span>{entry.checklist.length} {entry.checklist.length === 1 ? "matter" : "matters"}{entry.chapter_slug ? ` · ${entry.chapter_slug}` : ""}</span></div>)}{importPreview.entries.length > 5 && <p>And {importPreview.entries.length - 5} more…</p>}</div>{importPreview.warnings.length > 0 && <details className={styles.importWarnings}><summary>{importPreview.warnings.length} import {importPreview.warnings.length === 1 ? "notice" : "notices"}</summary><ul>{importPreview.warnings.slice(0, 20).map((warning, index) => <li key={`${warning}-${index}`}>{warning}</li>)}</ul>{importPreview.warnings.length > 20 && <p>{importPreview.warnings.length - 20} more notices are not shown.</p>}</details>}<div className={styles.modalActions}><button type="button" onClick={() => setImportPreview(null)} disabled={importing}>Cancel</button><button type="button" className={styles.importConfirm} onClick={() => void importEntries()} disabled={importing}><Icon name="upload"/>{importing ? "Sealing pages…" : `Import ${importPreview.entries.length}`}</button></div></section></div>}
+    {importPreview && !replaceConfirm && <div className={styles.modalBackdrop} role="presentation" onPointerDown={(event) => { if (!importing && event.target === event.currentTarget) setImportPreview(null); }}><section className={styles.importModal} role="dialog" aria-modal="true" aria-labelledby="import-ledger-title">
+      <div className={styles.importModalHeader}><div className={styles.importModalIcon}><Icon name="upload"/></div><div><span className={styles.modalEyebrow}>Private ledger import</span><h2 id="import-ledger-title">Seal these pages?</h2><p>{importPreview.fileName} contains {importPreview.entries.length} {importPreview.entries.length === 1 ? "entry" : "entries"}. Imported pages will belong only to your signed-in account.</p></div></div>
+      <div className={styles.importPreviewList}>{importPreview.entries.slice(0, 5).map((entry, index) => <div key={`${entry.heading}-${index}`}><strong>{entry.heading}</strong><span>{entry.checklist.length} {entry.checklist.length === 1 ? "matter" : "matters"}{entry.chapter_slug ? ` · ${entry.chapter_slug}` : ""}</span></div>)}{importPreview.entries.length > 5 && <p>And {importPreview.entries.length - 5} more…</p>}</div>
+      {importPreview.warnings.length > 0 && <details className={styles.importWarnings}><summary>{importPreview.warnings.length} import {importPreview.warnings.length === 1 ? "notice" : "notices"}</summary><ul>{importPreview.warnings.slice(0, 20).map((warning, index) => <li key={`${warning}-${index}`}>{warning}</li>)}</ul>{importPreview.warnings.length > 20 && <p>{importPreview.warnings.length - 20} more notices are not shown.</p>}</details>}
+      <label className={`${styles.replaceOption} ${replaceExisting ? styles.replaceOptionActive : ""}`}><input type="checkbox" checked={replaceExisting} onChange={(event) => setReplaceExisting(event.target.checked)}/><span className={styles.replaceCheck}>{replaceExisting && <Icon name="check"/>}</span><span><strong>Replace existing entries</strong><small>Remove the current ledger and replace it with this file.</small></span></label>
+      <div className={styles.modalActions}><button type="button" onClick={() => setImportPreview(null)} disabled={importing}>Cancel</button><button type="button" className={styles.importConfirm} onClick={() => replaceExisting ? setReplaceConfirm(true) : void importEntries()} disabled={importing}><Icon name="upload"/>{importing ? "Sealing pages…" : replaceExisting ? "Review replacement" : `Import ${importPreview.entries.length}`}</button></div>
+    </section></div>}
+    {replaceConfirm && importPreview && <div className={styles.modalBackdrop} role="presentation"><section className={`${styles.confirmModal} ${styles.replaceConfirmModal}`} role="alertdialog" aria-modal="true" aria-labelledby="replace-ledger-title"><div className={styles.modalIcon}><Icon name="flame"/></div><span className={styles.modalEyebrow}>Irreversible replacement</span><h2 id="replace-ledger-title">Are you sure?</h2><p>All {entries.length} existing ledger {entries.length === 1 ? "entry" : "entries"} will be removed and replaced with {importPreview.entries.length} from this file. This cannot be undone unless you exported a backup.</p><div className={styles.modalActions}><button type="button" disabled={importing} onClick={() => setReplaceConfirm(false)}>Go back</button><button type="button" className={styles.modalDanger} disabled={importing} onClick={() => void importEntries(true)}><Icon name="flame"/>{importing ? "Replacing…" : "Replace ledger"}</button></div></section></div>}
+    {bulkDeleteOpen && <div className={styles.modalBackdrop} role="presentation" onPointerDown={(event) => { if (!bulkBusy && event.target === event.currentTarget) setBulkDeleteOpen(false); }}><section className={styles.confirmModal} role="alertdialog" aria-modal="true" aria-labelledby="bulk-delete-title"><div className={styles.modalIcon}><Icon name="flame"/></div><span className={styles.modalEyebrow}>A final measure</span><h2 id="bulk-delete-title">Burn selected entries?</h2><p>{selectedIds.size} selected {selectedIds.size === 1 ? "entry" : "entries"} will be removed from your private ledger for good.</p><div className={styles.modalActions}><button type="button" disabled={bulkBusy} onClick={() => setBulkDeleteOpen(false)}>Keep the pages</button><button type="button" className={styles.modalDanger} disabled={bulkBusy} onClick={() => void bulkDelete()}><Icon name="flame"/>{bulkBusy ? "Burning…" : "Burn selected"}</button></div></section></div>}
   </main>;
 }

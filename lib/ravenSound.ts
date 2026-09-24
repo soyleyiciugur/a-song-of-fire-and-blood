@@ -5,24 +5,24 @@ let context: AudioContext | undefined;
 let lastPlayed = 0;
 
 export function soundEnabled() {
-  try { return localStorage.getItem(key) === "on"; } catch { return false; }
+  try { return localStorage.getItem(key) !== "off"; } catch { return true; }
 }
 
 export function setSoundEnabled(enabled: boolean) {
   try { localStorage.setItem(key, enabled ? "on" : "off"); } catch { /* Session-only UI remains usable. */ }
-  if (enabled) unlockSound();
 }
 
-export function unlockSound() {
-  if (!soundEnabled()) return;
+export async function unlockSound() {
+  if (!soundEnabled()) return false;
   try {
     context ??= new AudioContext();
-    void context.resume().catch(() => {});
-  } catch { /* Audio is optional. */ }
+    if (context.state !== "running") await context.resume();
+    return context.state === "running";
+  } catch { return false; }
 }
 
-export function playRavenSound(kind: "message" | "notification" = "message") {
-  if (!soundEnabled() || !context || context.state !== "running" || Date.now() - lastPlayed < 4000) return;
+function playUnlockedRavenSound(kind: "message" | "notification", ignoreCooldown = false) {
+  if (!context || context.state !== "running" || (!ignoreCooldown && Date.now() - lastPlayed < 4000)) return;
   lastPlayed = Date.now();
   const now = context.currentTime;
   if (kind === "message") {
@@ -47,7 +47,7 @@ export function playRavenSound(kind: "message" | "notification" = "message") {
       filter.frequency.setValueAtTime(delay ? 520 : 680, start);
       filter.Q.setValueAtTime(.72, start);
       gain.gain.setValueAtTime(.0001, start);
-      gain.gain.exponentialRampToValueAtTime(delay ? .012 : .016, start + .018);
+      gain.gain.exponentialRampToValueAtTime(delay ? .055 : .07, start + .018);
       gain.gain.exponentialRampToValueAtTime(.0001, start + .13);
       source.connect(filter).connect(gain).connect(context.destination);
       source.start(start);
@@ -69,4 +69,19 @@ export function playRavenSound(kind: "message" | "notification" = "message") {
   oscillator.start(now);
   oscillator.stop(now + .3);
   oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
+}
+
+export function playRavenSound(kind: "message" | "notification" = "message") {
+  if (!soundEnabled() || Date.now() - lastPlayed < 4000) return;
+  if (context?.state === "running") {
+    playUnlockedRavenSound(kind);
+    return;
+  }
+  void unlockSound().then((unlocked) => {
+    if (unlocked) playUnlockedRavenSound(kind);
+  });
+}
+
+export async function previewRavenSound() {
+  if (await unlockSound()) playUnlockedRavenSound("message", true);
 }

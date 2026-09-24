@@ -175,6 +175,8 @@ export interface PrivateLedgerEntry {
   updated_at: string;
 }
 
+export type PrivateLedgerReplacement = Omit<PrivateLedgerEntry, "id" | "user_id" | "created_at" | "updated_at"> & Partial<Pick<PrivateLedgerEntry, "created_at" | "updated_at">>;
+
 export interface DirectRavenBlock {
   blocker_id: string;
   blocked_id: string;
@@ -260,6 +262,7 @@ export interface Database {
     };
     Functions: {
       ensure_own_profile: { Args: Record<string, never>; Returns: Profile };
+      replace_private_ledger_entries: { Args: { replacement: PrivateLedgerReplacement[] }; Returns: number };
       start_direct_raven: { Args: { target_username: string }; Returns: string };
       create_guild_parley: { Args: { guild_name: string; guild_description: string; member_ids: string[] }; Returns: string };
       update_guild_parley: { Args: { conversation_uuid: string; guild_name: string; guild_description: string; guild_avatar_path: string }; Returns: undefined };

@@ -38,7 +38,7 @@ export default function DirectRavenNavButton() {
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "direct_raven_messages" }, (payload) => {
         const sameOpenConversation = document.visibilityState === "visible"
           && document.documentElement.dataset.activeRavenConversation === payload.new.conversation_id;
-        if (currentUser && payload.new.sender_id !== currentUser && !sameOpenConversation) playRavenSound();
+        if (currentUser && payload.new.sender_id !== currentUser) playRavenSound();
         // The open conversation writes its read marker immediately. Avoid querying
         // unread totals in the tiny window before that upsert lands, otherwise the
         // navbar badge can flash for a message the user is already looking at.
