@@ -34,7 +34,7 @@
   justify-content: center;
   min-height: 44px;
   max-width: 100%;
-  margin-top: 2rem;
+  margin: 0 0 2rem;
   padding: 10px 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);

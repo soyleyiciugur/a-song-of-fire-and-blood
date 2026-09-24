@@ -664,6 +664,10 @@
   box-shadow: var(--shadow-card);
 }
 
+.characterCardAvatar {
+  display: contents;
+}
+
 .characterCardClose {
   position: absolute;
   top: 6px;
@@ -978,12 +982,43 @@
 
 @media (max-width: 720px) {
   .characterCard {
-    max-width: 170px;
+    width: min(48%, 170px);
+    max-width: none;
+    padding: 8px 27px 8px 8px;
+    gap: 7px;
     font-size: 11px;
   }
 
   .legend {
+    max-width: calc(48% - 14px);
     padding: 8px;
+  }
+
+  .legendRow,
+  .characterCard > div {
+    min-width: 0;
+  }
+
+  .legendRow span:last-child,
+  .characterCardName,
+  .characterCardTitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .characterCardAvatar {
+    display: none;
+  }
+
+  .characterCard {
+    width: min(44%, 138px);
+  }
+
+  .legend {
+    max-width: calc(54% - 14px);
   }
 }
 

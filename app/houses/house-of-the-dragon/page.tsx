@@ -27,7 +27,7 @@ export default async function HouseOfTheDragonPage() {
           />
           <div>
             <span className={styles.eyebrow}>Houses · House Targaryen</span>
-            <h1 className={styles.title}>House of the Dragon</h1>
+            <h1 className={`${styles.title} realm-page-title`}>House of the Dragon</h1>
           </div>
           <p className={styles.subtitle}>
             The blood of the dragon from Aegon the Conqueror to the present royal court. The golden spine follows the kingship line to Baelenys; crowned cards mark those who have sat the Iron Throne.

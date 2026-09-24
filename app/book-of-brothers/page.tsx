@@ -37,6 +37,9 @@ export default function BookOfBrothersPage() {
 
   return (
     <div className={styles.page}>
+      <Link href="/records" className={archiveStyles.backLink}>
+        ← Records of the Realm
+      </Link>
       <header className={styles.pageHeader}>
         <p className={styles.eyebrow}>The White Book</p>
         <h1 className={`${styles.pageTitle} realm-page-title`}>The Book of Brothers</h1>
@@ -78,9 +81,6 @@ export default function BookOfBrothersPage() {
           No entries have been recorded in the White Book yet.
         </p>
       )}
-      <Link href="/records" className={archiveStyles.backLink}>
-        ← Records of the Realm
-      </Link>
     </div>
   );
 }

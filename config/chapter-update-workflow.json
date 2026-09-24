@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "livingRegistry": true,
+  "documentation": "docs/chapter-update-workflow.md",
+  "specificRules": "docs/chapter-specific-rules.md",
+  "fullWorkflowAliases": [
+    "run update workflow",
+    "run the update workflow",
+    "run chapter update workflow",
+    "chapter update workflow'u çalıştır",
+    "chapter update'i çalıştır",
+    "yeni chapter için tüm update workflow'u çalıştır"
+  ],
+  "partialCommands": {
+    "run chapter canon extraction": ["canon", "knowledge"],
+    "run chapter state sync": ["world", "characters", "relationships", "dragons", "dynasty"],
+    "run chapter archive sync": ["chronology", "map", "bloodshed", "records", "gallery", "companion"],
+    "run chapter discovery checks": ["search", "spoilers", "navigation"],
+    "run chapter community": ["forum", "community", "notifications"],
+    "run chapter quotes": ["quotes"],
+    "run chapter validation": ["updateNotes", "validation", "smoke"],
+    "run chapter publish checks": ["publication"]
+  },
+  "stages": [
+    { "id": "canon", "targets": ["data/chapters.json", "scene ledger", "fact-report-lie-theory-dream-flashback classification"] },
+    { "id": "knowledge", "targets": ["character knowledge state", "public-secret boundary", "source reliability"] },
+    { "id": "world", "targets": ["data/worldDate.json", "homepage world date", "age calculations"] },
+    { "id": "characters", "targets": ["data/characters/characters.json", "data/character-inner-court.ts", "character_inner_court", "debutChapter", "personalTimeline", "status", "secret.status", "titles", "aliases", "locations", "goals"] },
+    { "id": "relationships", "targets": ["reciprocal character relationships", "app/relationships", "profile relationship display"] },
+    { "id": "dragons", "targets": ["data/dragons.json", "data/dragon-appearances.ts", "dragon profiles"] },
+    { "id": "dynasty", "targets": ["data/houses.json", "data/house-of-the-dragon.json", "app/family-tree", "app/succession", "app/houses"] },
+    { "id": "chronology", "targets": ["data/timeline.json", "data/events.json", "app/timeline", "app/chronicle", "app/calendar"] },
+    { "id": "map", "targets": ["data/map/character-positions.json", "data/map/locations.json", "app/map", "app/locations"] },
+    { "id": "bloodshed", "targets": ["data/bloodshed.json", "app/wars"] },
+    { "id": "records", "targets": ["data/bookOfBrothers.json", "data/scrolls.json", "data/artifacts.ts", "app/records", "app/book-of-brothers", "app/scrolls", "app/artifacts", "app/stats"] },
+    { "id": "quotes", "manual": true, "requiresUserSelection": true, "targets": ["data/quotes.json", "app/quotes"] },
+    { "id": "gallery", "targets": ["data/gallery.json", "public/images/gallery", "public/videos/reels", "public/videos/reels/posters", "app/ravens-eye"] },
+    { "id": "forum", "targets": ["data/forum.json", "data/community-schedule.json", "app/forum"] },
+    { "id": "companion", "derived": true, "targets": ["components/reading/ChapterCompanion.tsx"] },
+    { "id": "search", "derived": true, "targets": ["lib/search.ts", "app/search", "app/api/search"] },
+    { "id": "spoilers", "targets": ["reading boundary", "search snippets", "character and dragon appearances", "sealed deep links"] },
+    { "id": "navigation", "targets": ["Previous/Next", "Continue Reading", "mark read/unread", "chapter ordering"] },
+    { "id": "community", "targets": ["data/flea-bottom.json", "data/community-schedule.json", "Supabase public member context", "reaction targets"] },
+    { "id": "notifications", "targets": ["new_chapter", "notification dedupe", "Personal Ravens", "deep links"] },
+    { "id": "updateNotes", "targets": ["data/update-notes.json"] },
+    { "id": "validation", "commands": ["npm.cmd run validate:data", "npm.cmd run validate:comments", "node scripts/test-community-publication.mjs", "npx.cmd tsc --noEmit", "npm.cmd run build", "git diff --check"] },
+    { "id": "smoke", "targets": ["desktop", "narrow mobile", "EN/TR", "long dates", "linked routes", "homepage derived views"] },
+    { "id": "publication", "targets": ["atomic chapter visibility", "community sync", "notification target", "scheduled visibility", "post-publish deep links"] }
+  ],
+  "alwaysAsk": [
+    "manual quote selection",
+    "debatable Book of Brothers deed",
+    "ambiguous debut identity",
+    "unconfirmed dragon identity rider or claim",
+    "intentional mystery resolution",
+    "canon choice not settled by the prose or a current specific rule"
+  ],
+  "externalActionsNotImplied": ["git commit", "git push", "deployment", "unrelated database migrations"]
+}

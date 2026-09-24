@@ -42,17 +42,17 @@ export const NAV_ITEMS: NavigationEntry[] = [
     { label: "House of the Dragon", href: "/houses/house-of-the-dragon" },
     { label: "Succession", href: "/succession" },
   ] },
-  { label: "The Known World", href: "/map", items: [
+  { label: "Known World", href: "/map", items: [
     { label: "Map", href: "/map" },
     { label: "Locations", href: "/locations" },
   ] },
-  { label: "The Chronicle", href: "/chronicle", items: [
+  { label: "Chronicle", href: "/chronicle", items: [
     { label: "Timeline", href: "/timeline" },
-    { label: "Annals", href: "/chronicle" },
+    { label: "Annals", href: "/chronicle/annals" },
     { label: "Calendar", href: "/calendar" },
-    { label: "The Bloodshed", href: "/wars" },
+    { label: "Bloodshed", href: "/wars" },
   ] },
-  { label: "The Collection", href: "/collection", items: [
+  { label: "Collection", href: "/collection", items: [
     { label: "Artifacts", href: "/collection" },
   ] },
   { 

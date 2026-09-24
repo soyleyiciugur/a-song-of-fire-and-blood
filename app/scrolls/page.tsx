@@ -15,6 +15,9 @@ export default function ScrollsPage() {
 
   return (
     <div className={styles.page}>
+      <Link href="/records" className={archiveStyles.backLink}>
+        ← Records of the Realm
+      </Link>
       <header className={styles.pageHeader}>
         <p className={styles.eyebrow}>The Citadel&apos;s Archive</p>
         <h1 className={`${styles.pageTitle} realm-page-title`}>Scrolls from the Realm</h1>
@@ -62,9 +65,6 @@ export default function ScrollsPage() {
           No scrolls have been added to the archive yet.
         </p>
       )}
-      <Link href="/records" className={archiveStyles.backLink}>
-        ← Records of the Realm
-      </Link>
     </div>
   );
 }

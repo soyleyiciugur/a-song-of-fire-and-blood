@@ -28,6 +28,52 @@ Records is reserved for in-world records. Keep Update Notes accessible only from
 
 After implementing site changes, update `data/update-notes.json` in the same change. The `/update-notes` page renders this file. Use the actual implementation date in Europe/Istanbul as `YYYY-MM-DD`, with one entry per day and newest dates first. Append concise English bullet points to that day's `items`; create a new date entry when needed. Describe completed user-visible changes, not plans or unverified results. Preserve older entries and avoid duplicate notes. Do not invent historical updates or use in-world dates. Update the notes after the changes are applied and before final validation and delivery.
 
+# Chapter update workflow
+
+The canonical, evolving chapter-update procedure lives in
+`docs/chapter-update-workflow.md`. Its machine-readable feature inventory lives
+in `config/chapter-update-workflow.json`. Chapter- or character-specific
+instructions live separately in `docs/chapter-specific-rules.md`; do not turn a
+conditional fact from that file into a permanent global rule.
+
+When a new site feature or data surface becomes affected by chapter canon,
+update the workflow document and feature inventory in the same implementation.
+Do not silently let the checklist become stale.
+
+When the user says any of the following, perform the complete workflow rather
+than merely explaining it:
+
+- "run update workflow"
+- "run the update workflow"
+- "run chapter update workflow"
+- "chapter update workflow'u çalıştır"
+- "chapter update'i çalıştır"
+- "yeni chapter için tüm update workflow'u çalıştır"
+
+The complete workflow includes canon extraction, all applicable derived-data
+and archive updates, the community workflow and sync, Update Notes, final
+validation, and publication readiness checks. It does not authorize a Git
+commit, Git push, deployment, or unrelated migration unless the user asks for
+that action explicitly.
+
+The user may instead request one named partial command from the workflow
+document. Run only that stage plus the inspection and validation necessary to
+make that stage safe. Report downstream stages that remain pending; do not
+pretend a partial run completed the full workflow.
+
+Quotes are never selected automatically during a chapter update. Ask the user
+to choose quotations and handle `data/quotes.json` as a separate manual stage.
+The Book of Brothers records only genuinely major deeds. If a deed's importance
+is debatable, leave the record unchanged and ask the user.
+
+In House of the Dragon-font in-world prose/display fields, especially Chapters
+and Records, spell out narrative numbers and dates. Preserve Roman chapter
+numbers such as `Chapter XX`. Technical values and UI mechanics—including IDs,
+slugs, `chapterId`, JSON numeric date fields, ISO update-note dates, indexes,
+URLs, script parameters, pagination, counters, and real statistics—may use
+Arabic numerals. Validate only the applicable display fields, not whole files
+with a blind numeral regex.
+
 # Community workflow
 
 ## Activity density and evolving accounts

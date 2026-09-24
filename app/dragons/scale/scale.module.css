@@ -33,9 +33,9 @@
 @media(max-width:1100px){.workbench{grid-template-columns:minmax(0,1fr) 300px;gap:14px}.toolbar{gap:8px;padding:10px}.zoom{gap:6px}.zoom input{width:70px}.toolbar button{padding:8px 10px}}
 @media(max-width:850px){.workbench{grid-template-columns:1fr}.stagePanel{position:sticky;top:58px;z-index:3;background:var(--background);padding:6px 0 12px}.catalog{position:relative;top:auto;max-height:560px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.viewport{max-height:32svh}.stageHeading{padding:8px 12px}.stageFooter{padding:8px 12px}.selection{margin-top:8px;max-height:60px;overflow:auto}.catalogHeader>p{margin-bottom:0}.catalogControls{margin-top:12px}.filters button{padding:8px 10px}.detail{min-height:68px}.toolbar{padding:8px}.zoom{margin-left:auto;flex:initial}.subnav{margin-bottom:12px}.card{min-height:65px}.notes{margin-top:20px}}
 @media(max-width:460px){.toolbar{gap:6px}.toolbar button{font-size:10px;padding:7px 8px}.zoom{font-size:10px;gap:4px;order:0;width:auto}.zoom input{width:55px;flex:initial}.zoom span{min-width:30px}.cards{grid-template-columns:1fr}.catalog{max-height:500px}.stageFooter span:last-child{display:none}.seal{display:none}}
-.page{padding:38px 24px 80px}
+.page{padding:56px 24px 80px}
 .catalog{max-height:min(720px,calc(100svh - 105px))}
-@media(max-width:850px){.page{padding:25px 16px 55px}.catalog{max-height:560px}}
+@media(max-width:850px){.page{padding:40px 16px 55px}.catalog{max-height:560px}}
 @media(max-width:460px){.catalog{max-height:500px}}
 /* Stable frames: pointer previews never reflow the stage or the picker. */
 .viewport{height:clamp(380px,62svh,720px);max-height:none;scrollbar-gutter:stable;overflow-anchor:none}

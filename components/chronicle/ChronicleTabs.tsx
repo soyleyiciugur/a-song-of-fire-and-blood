@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const TABS = [
   { id: "timeline", label: "Timeline", href: "/timeline" },
-  { id: "annals", label: "Annals", href: "/chronicle" },
+  { id: "annals", label: "Annals", href: "/chronicle/annals" },
   { id: "calendar", label: "Calendar", href: "/calendar" },
-  { id: "bloodshed", label: "The Bloodshed", href: "/wars" },
+  { id: "bloodshed", label: "Bloodshed", href: "/wars" },
 ] as const;
 
 type ChronicleTab = (typeof TABS)[number]["id"];

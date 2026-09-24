@@ -38,7 +38,7 @@
       "Swift",
       "Prefers High Altitude"
     ],
-    "description": "Princess Saera's vast storm-grey dragon, crowned with translucent amethyst-like horns. Cloudgazer carries Saera, Alester Dayne and a white direwolf south from Winterfell and reaches King's Landing on the Seventeenth Day of the Eighth Moon, 99 AC."
+    "description": "Princess Saera's vast storm-grey dragon, crowned with translucent amethyst-like horns. On the Twenty-First Day of the Eighth Moon, Ninety-Nine AC, Cloudgazer carries Saera, Jace and Vhaemys into the storm above King's Landing, where an enormous unidentified white dragon confronts them. Cloudgazer panics and gathers flame before Saera calms her."
   },
   {
     "id": "bayle",
@@ -164,5 +164,18 @@
       "Once Ridden by Aenys II"
     ],
     "description": "An old dragon remembered from the reign of Aenys II. Aenys claimed Sheepstealer only for a brief period, and the dragon later appears in Baelenys's childhood memory beneath the Dragonpit, where Aenys ordered Sheepstealer to kill the small dragon secretly claimed by the seventeen-year-old Malaenar. Sheepstealer's later fate is not established."
+  },
+  {
+    "id": "unknown-white-dragon",
+    "name": "Unknown White Dragon",
+    "status": "Unknown",
+    "image": "/images/dragons/default.webp",
+    "traits": [
+      "White Scales",
+      "Enormous",
+      "Identity Unconfirmed",
+      "Rider Bond Unconfirmed"
+    ],
+    "description": "An enormous white dragon encountered by Cloudgazer above King's Landing during a summer storm on the Twenty-First Day of the Eighth Moon, 99 AC. Jace and Saera privately think of Meraxes when they recognize the pale head and ancient horn structure, but the resemblance does not establish the dragon's identity. The beast focuses on Vhaemys and closes its eye as she commands it to obey; no rider or claim is confirmed."
   }
 ]

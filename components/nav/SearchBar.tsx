@@ -12,7 +12,7 @@ import styles from "./navbar.module.css";
 const TYPE_LABELS: Record<SearchResult["type"], string> = {
   character: "Characters", chapter: "Chapters", house: "Houses", dragon: "Dragons",
   event: "Events", location: "Locations", artifact: "Artifacts", gallery: "Raven's Eye",
-  quote: "Quotes", scroll: "Scrolls", brother: "Book of Brothers", bloodshed: "The Bloodshed",
+  quote: "Quotes", scroll: "Scrolls", brother: "Book of Brothers", bloodshed: "Bloodshed",
   forum: "Taverns", bestiary: "Bestiary", card: "The Great Game", page: "Destinations", update: "Update Notes",
 };
 

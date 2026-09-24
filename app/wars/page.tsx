@@ -25,7 +25,7 @@ export default function BloodshedPage() {
   return <main className={styles.page}><div className={styles.container}>
     <div className="realm-section-header">
     <p className={styles.eyebrow}>Wars · Duels · Tourneys</p>
-    <h1 className={`${styles.heading} realm-page-title`}>The Bloodshed</h1>
+    <h1 className={`${styles.heading} realm-page-title`}>Bloodshed</h1>
     <p className={styles.subheading}>The battles, trials, and contests that left their mark upon the realm.</p>
     <ChronicleTabs active="bloodshed" className={styles.tabs} activeClassName={styles.activeTab} />
     </div>

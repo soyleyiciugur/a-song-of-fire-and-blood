@@ -182,7 +182,7 @@
 .tabs a { padding: 8px 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; text-decoration: none; }
 .tabs a:hover, .tabs .activeTab { color: var(--gold); border-color: var(--gold); }
 
-.container > :global(.realm-section-header) > :global(.realm-section-tabs) {
+.container > :global(.realm-section-tabs) {
   margin: 0 0 30px;
 }
 

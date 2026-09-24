@@ -1,6 +1,6 @@
 /* This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\app\houses\houses.module.css */
 .page {
-  padding: 60px 20px;
+  padding: 56px 24px 80px;
   min-height: 100vh;
 
   background: var(--background);
@@ -99,3 +99,5 @@
   letter-spacing: 0.5px;
   color: var(--muted);
 }
+
+@media (max-width:640px) { .page { padding:40px 16px 64px; } }

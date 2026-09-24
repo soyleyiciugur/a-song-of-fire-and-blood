@@ -2477,18 +2477,14 @@ export default function InteractiveMap() {
                 ×
               </button>
 
-              <Avatar
-                characterId={
-                  visibleCard.id
-                }
-                name={
-                  visibleCard.name
-                }
-                size={48}
-                status={
-                  selectedCharacterStatus
-                }
-              />
+              <span className={styles.characterCardAvatar}>
+                <Avatar
+                  characterId={visibleCard.id}
+                  name={visibleCard.name}
+                  size={48}
+                  status={selectedCharacterStatus}
+                />
+              </span>
 
               <div>
                 <div

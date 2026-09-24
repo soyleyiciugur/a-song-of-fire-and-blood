@@ -1,12 +1,11 @@
 .page {
   min-height: 100vh;
-  padding: 52px 20px 72px;
+  padding: 56px 24px 80px;
   background:
     radial-gradient(circle at 50% -10%, rgba(121, 26, 40, .12), transparent 36%),
     var(--background);
   color: var(--text);
 }
-
 .container {
   width: min(1520px, 100%);
   margin: 0 auto;
@@ -945,3 +944,4 @@
     grid-template-columns: 1fr;
   }
 }
+@media (max-width:640px) { .page { padding:40px 16px 64px; } }

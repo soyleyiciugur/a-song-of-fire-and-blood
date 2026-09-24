@@ -301,9 +301,9 @@ export default function Characters() {
   return (
     <main className="page-shell">
       <div className="page-shell-inner">
-        <header className={styles.pageHeader}>
+        <header className={`${styles.pageHeader} realm-section-header`}>
           <div>
-            <h1 className="page-heading realm-page-title">Characters</h1>
+            <h1 className="page-heading realm-page-title realm-page-title--strong">Characters</h1>
             <p className="page-subheading">
               The blood of the Crown, and every other soul moving through the
               realm.

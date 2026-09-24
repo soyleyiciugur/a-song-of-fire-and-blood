@@ -359,6 +359,7 @@ export default function RelationshipsPage() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+        <div className="realm-section-header">
         <h1 className={`${styles.heading} realm-page-title`}>
           Web of Loyalties
         </h1>
@@ -370,6 +371,7 @@ export default function RelationshipsPage() {
           pin their connections here, then click
           the name to view their profile.
         </p>
+        </div>
 
         <div className={styles.controls}>
           <label

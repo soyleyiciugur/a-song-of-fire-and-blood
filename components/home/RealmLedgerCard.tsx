@@ -8,7 +8,7 @@ const figures = [
   ["Characters", getCharacters().filter((character) => !character.hidden).length, "/characters"],
   ["Dragons", dragons.length, "/bestiary/dragons"],
   ["Chapters", getAllChapters().length, "/chapters"],
-  ["Annals", events.length, "/chronicle"],
+  ["Annals", events.length, "/chronicle/annals"],
 ] as const;
 
 export default function RealmLedgerCard() {

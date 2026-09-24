@@ -14,7 +14,7 @@ export default function Houses() {
     <main className={styles.page}>
       <div className={styles.container}>
         <div className="realm-section-header">
-        <h1 className={`${styles.heading} realm-page-title`}>Houses</h1>
+        <h1 className={`${styles.heading} realm-page-title realm-page-title--strong`}>Houses</h1>
 
         <p className={styles.subheading}>
           The great and lesser houses whose banners, words, and blood shape

@@ -18,6 +18,7 @@ const APPEARANCE_REFS: Record<string, AppearanceRef[]> = {
     { chapterSlug: "the-glass-flower", anchor: "High above in the clouds, Cloudgazer", label: "The high valley and the northern flight" },
     { chapterSlug: "the-children-pay", anchor: "Cloudgazer crouched beneath the pale morning sky", label: "Departure from Winterfell" },
     { chapterSlug: "until-the-last-breath", anchor: "Cloudgazer settled heavily upon the ground", label: "Return to King's Landing" },
+    { chapterSlug: "the-eye-in-the-storm", anchor: "The dragon spread her wings", label: "Into the storm" },
   ],
   jadefyre: [
     { chapterSlug: "the-poison-beneath-the-crown", anchor: "the dragon eggs began to crack", label: "Three hatchlings" },
@@ -34,6 +35,7 @@ const APPEARANCE_REFS: Record<string, AppearanceRef[]> = {
   palefyre: [{ chapterSlug: "the-poison-beneath-the-crown", anchor: "the dragon eggs began to crack", label: "Three hatchlings" }],
   sheepstealer: [{ chapterSlug: "judgment-by-blood", anchor: "Angos, Sheepstealer", label: "Beneath the Dragonpit" }],
   sunfyre: [{ chapterSlug: "judgment-by-blood", anchor: "Golden wings caught the light", label: "The dragons beyond the Narrow Sea" }],
+  "unknown-white-dragon": [{ chapterSlug: "the-eye-in-the-storm", anchor: "A dragon emerged through the storm", label: "The eye in the storm" }],
 };
 
 type ChapterRow = { slug: string; title: string; content: string[] };

@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-09-24",
+    "items": [
+      "Matched Bestiary, Houses, Known World and Chronicle headers to the same left-aligned responsive frame as the Dragons archive.",
+      "Standardized public hub headers, including Characters, Family Tree and Relationships, on the original Dragons typography, content-driven spacing and tab treatment, with a consistent safe zone below each divider.",
+      "Established bold primary hubs for Characters, The Bestiary and Houses while keeping secondary archive pages lighter, and shortened three navbar group labels without changing their page titles.",
+      "Shortened The Bloodshed to Bloodshed across its public page title, Chronicle navigation and search label.",
+      "Made Timeline the Chronicle landing page while preserving Annals at its own permanent route.",
+      "Moved Records return controls to the upper left of archive pages and prevented the mobile map character card from overlapping its layer filters.",
+      "Synchronized Chapter XX across the world date, character state, timeline, map, dragon appearances, Chapter Companion inputs and its canonical Tavern discussion.",
+      "Recorded the storm dragon as unidentified and kept Vhaemys's rider bond, the reported Dragonstone silhouette and the proposed Dorne journey unconfirmed."
+    ]
+  },
+  {
     "date": "2026-09-23",
     "items": [
       "Added toggleable Westeros regions with coastline-following translucent Great House colors and sigils, aligned through pan, zoom and mobile resizing; corrected map initialization for cached images.",

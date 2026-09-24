@@ -3,7 +3,7 @@
   min-height: 100vh;
   background: var(--background);
   color: var(--text);
-  padding: 32px 24px 64px;
+  padding: 56px 24px 80px;
 }
 
 .container {
@@ -25,3 +25,4 @@
 }
 
 .tabs{display:flex;gap:8px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid var(--border)}.tabs a{padding:8px 13px;color:var(--muted);border:1px solid var(--border);border-radius:999px;text-decoration:none;font:12px var(--font-geist)}.tabs a:hover,.tabs .activeTab{color:var(--gold);border-color:var(--gold)}
+@media(max-width:640px){.page{padding:40px 16px 64px}}

@@ -113,7 +113,7 @@ export function buildSearchIndex(): SearchResult[] {
 
   for (const event of events) results.push({ type: "event", id: event.id, title: event.title,
     subtitle: event.description,
-    href: isMapEventType(event.type) ? `/chronicle#${encodeURIComponent(event.id)}` : `/chapters/${event.chapterSlug}`,
+    href: isMapEventType(event.type) ? `/chronicle/annals#${encodeURIComponent(event.id)}` : `/chapters/${event.chapterSlug}`,
     keywords: text(event.title, event.description, event.location), iconVariant: event.type });
   for (const location of locations) results.push({ type: "location", id: location.name, title: location.name,
     subtitle: "Known World location", href: `/map?location=${encodeURIComponent(location.name)}`, keywords: text(location.name) });

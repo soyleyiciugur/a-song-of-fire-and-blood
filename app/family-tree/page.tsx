@@ -19,11 +19,13 @@ export default async function FamilyTree({ searchParams }: Props) {
     <main className={styles.page}>
       <FamilyTreeFocus focusId={focus} />
       <div className={styles.container}>
+        <div className="realm-section-header">
         <h1 className={`${styles.heading} realm-page-title`}>Family Tree</h1>
 
         <p className={styles.subheading}>
           The bloodlines behind the crown and the great houses of the realm.
         </p>
+        </div>
 
         {/* HOUSE TARGARYEN */}
         <section id="house-targaryen" className={styles.house}>

@@ -18,3 +18,4 @@
 
 .dragonList > a.panel { text-decoration:none; }
 .dragonList > a.panel:hover { border-color:var(--gold); }
+@media(max-width:640px){.page{padding:40px 16px 64px}}

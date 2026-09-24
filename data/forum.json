@@ -560,6 +560,16 @@
       "body": "Rhaella is missing, the unfamiliar maester serving in Edmyn's place is missing, and Almar privately wonders whether their man completed his work. Boneskin may explain the burned men, but she does not explain who installed Nymos or where he went. That feels like the human trail inside the dragon mystery.",
       "publishedAt": "2026-09-20T18:05:30.000Z",
       "spoilerThrough": "judgment-by-blood"
+    },
+    {
+      "id": "chapter-the-eye-in-the-storm",
+      "chapterSlug": "the-eye-in-the-storm",
+      "title": null,
+      "category": "Chapter discussion",
+      "authorId": "regular-archive",
+      "body": "The Eye in the Storm: the Essos mission, the fractures inside the royal family, Visenor and Leo's proposed journey, and the unidentified white dragon above King's Landing. Discuss Chapter XX here without treating resemblance, belief or command as a confirmed identity or bond.",
+      "publishedAt": "2026-09-23T23:40:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
     }
   ],
   "comments": [
@@ -13542,6 +13552,98 @@
       "parentSource": "supabase",
       "body": "he absolutely wanted Alester to let it out. I refuse to call getting hit in the mouth the plan when Jace was losing that badly though",
       "publishedAt": "2026-09-20T18:28:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch19-live-crowd-majority-clarification",
+      "entryId": "community-xix-gods-spoken",
+      "liveThreadId": "community-xix-gods-spoken",
+      "authorId": "regular-legal",
+      "parentId": "2f9854eb-ce49-47aa-b47a-f4180e3acc9e",
+      "parentSource": "supabase",
+      "body": "That distinction is fair. The chapter does not show Brant's whole majority reversing itself; it shows the surviving pro-Gaelor voices becoming loud enough to control the yard's final sound. The horror is institutional permission amplifying a minority, not proof that every supporter changed sides.",
+      "publishedAt": "2026-09-23T23:41:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c01",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "The text gives Jace and Saera the same impossible association, then pointedly keeps both of them from saying it aloud. Recognition is part of the scene; confirmation is not.",
+      "publishedAt": "2026-09-23T23:42:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c02",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-ecology",
+      "parentId": "ch20-storm-c01",
+      "body": "And the animal behavior stays specific: it reacts to Cloudgazer's fire, ignores the attempted calming words, studies Vhaemys, and closes an eye. That is meaningful behavior without becoming a completed claim.",
+      "publishedAt": "2026-09-23T23:43:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c03",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "Jace taking Vhaemys seriously before he has evidence is one of his better sibling moments. It is also how all three of them end up beside a dragon in a thundercloud, so the hazard remains extremely Jace-shaped.",
+      "publishedAt": "2026-09-23T23:44:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c04",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "Baelenys does not stage a clean proclamation, but he makes the succession burden public enough that everyone at the table understands what he is doing. Then he turns that acknowledgment into an order to murder two women abroad.",
+      "publishedAt": "2026-09-23T23:45:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c05",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-fandom-horror",
+      "parentId": null,
+      "body": "The frightening part of Vhaemys overhearing the argument is how little she needs to hear. Every missing piece is filled with the lesson the adults have already taught her: family disagreement means betrayal and betrayal means someone will kill Father.",
+      "publishedAt": "2026-09-23T23:46:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c06",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The Visenor and Leo tavern scene lets genuine affection grow inside an alliance built on concealment. Leo is not suddenly reconciled to anything; he is asking for time while agreeing to another dangerous plan with the person he cannot yet trust completely.",
+      "publishedAt": "2026-09-23T23:47:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c07",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-margin-notes",
+      "parentId": null,
+      "body": "Small but important: the Dragonstone silhouette is reported as possible, the Dorne journey is only agreed in principle, and Gaelor is merely considered for the Essos party. This chapter is full of plans that have not happened yet.",
+      "publishedAt": "2026-09-23T23:48:00.000Z",
+      "upvoterIds": [],
+      "awards": []
+    },
+    {
+      "id": "ch20-storm-c08",
+      "entryId": "chapter-the-eye-in-the-storm",
+      "authorId": "regular-wild-take",
+      "parentId": null,
+      "body": "My responsible theory is Unknown White Dragon. My irresponsible theory has already bought a banner and been removed from the archive reading room.",
+      "publishedAt": "2026-09-23T23:49:00.000Z",
       "upvoterIds": [],
       "awards": []
     }
