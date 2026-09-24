@@ -12,6 +12,8 @@ export interface LedgerImportDraft {
   archived: boolean;
   character_ids: string[];
   chapter_slug: string | null;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface LedgerImportResult {
@@ -27,6 +29,14 @@ function objectValue(value: unknown): Record<string, unknown> | null {
 
 function booleanValue(value: unknown, fallback = false) {
   return typeof value === "boolean" ? value : fallback;
+}
+
+function optionalTimestamp(value: unknown, rowNumber: number, field: "created_at" | "updated_at") {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== "string" || !Number.isFinite(Date.parse(value))) {
+    throw new Error(`Entry ${rowNumber}: ${field} must be a valid date.`);
+  }
+  return value;
 }
 
 function normalizeChecklist(value: unknown, rowNumber: number, warnings: string[]) {
@@ -92,6 +102,8 @@ export function parseLedgerImport(
     if (rawChapterSlug !== null && typeof rawChapterSlug !== "string") throw new Error(`Entry ${rowNumber}: chapter_slug must be text or null.`);
     const chapterSlug = rawChapterSlug && knownChapterSlugs.has(rawChapterSlug) ? rawChapterSlug : null;
     if (rawChapterSlug && !chapterSlug) warnings.push(`Entry ${rowNumber}: unknown chapter "${rawChapterSlug}" was left unbound.`);
+    const createdAt = optionalTimestamp(row.created_at, rowNumber, "created_at");
+    const updatedAt = optionalTimestamp(row.updated_at, rowNumber, "updated_at");
 
     return {
       heading: row.heading.trim(),
@@ -102,6 +114,8 @@ export function parseLedgerImport(
       archived: booleanValue(row.archived),
       character_ids: characterIds,
       chapter_slug: chapterSlug,
+      ...(createdAt ? { created_at: createdAt } : {}),
+      ...(updatedAt ? { updated_at: updatedAt } : {}),
     };
   });
 

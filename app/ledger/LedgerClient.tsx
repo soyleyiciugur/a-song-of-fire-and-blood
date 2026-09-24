@@ -22,7 +22,7 @@ const characters = getCharacters().slice().sort((a, b) => a.name.localeCompare(b
 const chapters = getAllChapters().slice();
 const chapterOrder = new Map(chapters.map((chapter, index) => [chapter.slug, index]));
 
-function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star" | "chevron" | "check" | "close" | "up" | "down" | "pin" | "flame" | "book" | "upload"; className?: string }) {
+function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star" | "chevron" | "check" | "close" | "up" | "down" | "pin" | "flame" | "book" | "upload" | "download"; className?: string }) {
   const common = { className, viewBox: "0 0 24 24", fill: "none", "aria-hidden": true } as const;
   if (name === "search") return <svg {...common}><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>;
   if (name === "plus") return <svg {...common}><path d="M12 5v14M5 12h14"/></svg>;
@@ -36,6 +36,7 @@ function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star
   if (name === "pin") return <svg {...common}><path d="M8 4h8l-1.4 5 2.4 2.4v1.1H7v-1.1L9.4 9 8 4Z"/><path d="M12 12.5V21"/></svg>;
   if (name === "flame") return <svg {...common}><path d="M13.5 3.5c.6 3-1.8 4.3-1 6.6.5 1.4 1.8 1.9 2.7 1.1.6-.6.7-1.5.4-2.5 2.5 1.8 3.8 4 3.2 6.6-.7 3.1-3.3 5.2-6.7 5.2-3.8 0-6.8-2.4-6.8-6 0-2.7 1.5-5 4.3-7.2-.2 2 .4 3 1.5 3.2 1.3.2 2.5-1 2.1-2.8-.3-1.5-.6-2.6.3-4.2Z"/></svg>;
   if (name === "upload") return <svg {...common}><path d="M12 16V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v5h14v-5"/></svg>;
+  if (name === "download") return <svg {...common}><path d="M12 4v12M7.5 11.5 12 16l4.5-4.5"/><path d="M5 14v5h14v-5"/></svg>;
   return <svg {...common}><path d="M5 4.5h10.5A3.5 3.5 0 0 1 19 8v11.5H8.5A3.5 3.5 0 0 0 5 23V4.5Z"/><path d="M8.5 7.5H16M8.5 11H16M8.5 14.5H13.5"/></svg>;
 }
 
@@ -81,7 +82,9 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   const [deleteTarget, setDeleteTarget] = useState<PrivateLedgerEntry | null>(null);
   const [importPreview, setImportPreview] = useState<ImportPreview | null>(null);
   const [importing, setImporting] = useState(false);
+  const [transferOpen, setTransferOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const transferRef = useRef<HTMLDivElement>(null);
   const saveTimers = useRef(new Map<string, number>());
   const pendingPatches = useRef(new Map<string, EntryPatch>());
   const saveChains = useRef(new Map<string, Promise<void>>());
@@ -157,11 +160,19 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     };
   }, [flushSave]);
   useEffect(() => {
-    if (!picker && !deleteTarget && !importPreview) return;
-    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape" && !importing) { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); setImportPreview(null); } };
+    if (!picker && !deleteTarget && !importPreview && !transferOpen) return;
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape" && !importing) { setPicker(null); setPickerQuery(""); setPickerActiveIndex(-1); setDeleteTarget(null); setImportPreview(null); setTransferOpen(false); } };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [picker, deleteTarget, importPreview, importing]);
+  }, [picker, deleteTarget, importPreview, importing, transferOpen]);
+  useEffect(() => {
+    if (!transferOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (transferRef.current && event.target instanceof Node && !transferRef.current.contains(event.target)) setTransferOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [transferOpen]);
   useEffect(() => {
     if (!picker) return;
     const selector = `[data-ledger-picker="${picker.entryId}-${picker.kind}"]`;
@@ -281,6 +292,41 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     setImporting(false);
   }
 
+  function exportEntries() {
+    setTransferOpen(false);
+    if (!entries.length) {
+      setMessage("There are no ledger entries to export.");
+      return;
+    }
+    const exported = {
+      version: 1,
+      exported_at: new Date().toISOString(),
+      entries: entries.map(({ heading, matter, checklist, pinned, status, archived: isArchived, character_ids, chapter_slug, created_at, updated_at }) => ({
+        heading,
+        matter,
+        checklist,
+        pinned,
+        status,
+        archived: isArchived,
+        character_ids,
+        chapter_slug,
+        created_at,
+        updated_at,
+      })),
+    };
+    const blob = new Blob([JSON.stringify(exported, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const owner = username.toLocaleLowerCase().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "") || "member";
+    link.href = url;
+    link.download = `${owner}-private-ledger-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    setMessage(`${entries.length} ${entries.length === 1 ? "entry was" : "entries were"} exported from your private ledger.`);
+  }
+
   function addMatter(entry: PrivateLedgerEntry) { localPatch(entry.id, { checklist: [...entry.checklist, { id: crypto.randomUUID(), text: "", done: false }] }); }
   function patchMatter(entry: PrivateLedgerEntry, itemId: string, patch: Partial<LedgerChecklistItem>) { localPatch(entry.id, { checklist: entry.checklist.map((item) => item.id === itemId ? { ...item, ...patch } : item) }); }
   function removeMatter(entry: PrivateLedgerEntry, itemId: string) { localPatch(entry.id, { checklist: entry.checklist.filter((item) => item.id !== itemId) }); }
@@ -340,7 +386,10 @@ export default function LedgerClient({ userId, username }: { userId: string; use
     <section className={styles.toolbar} aria-label="Ledger tools">
       <label className={styles.search}><Icon name="search"/><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search the ledger…" /></label>
       <input ref={fileInputRef} className={styles.fileInput} type="file" accept="application/json,.json" onChange={(event) => { const file = event.target.files?.[0]; if (file) void readImportFile(file); }} />
-      <button className={styles.importButton} type="button" onClick={() => fileInputRef.current?.click()} disabled={importing}><Icon name="upload"/>Import</button>
+      <div className={styles.transfer} ref={transferRef}>
+        <button className={styles.importButton} type="button" aria-haspopup="menu" aria-expanded={transferOpen} onClick={() => setTransferOpen((open) => !open)} disabled={importing}><Icon name="upload"/><span>Import / Export</span><Icon name="chevron"/></button>
+        {transferOpen && <div className={styles.transferMenu} role="menu"><button type="button" role="menuitem" onClick={() => { setTransferOpen(false); fileInputRef.current?.click(); }}><Icon name="upload"/><span><strong>Import ledger</strong><small>Restore entries from JSON</small></span></button><button type="button" role="menuitem" onClick={exportEntries} disabled={loading}><Icon name="download"/><span><strong>Export ledger</strong><small>Download every entry as JSON</small></span></button></div>}
+      </div>
       <button className={styles.newEntryDesktop} type="button" onClick={() => void newEntry()} disabled={creating}><Icon name="plus"/>New Entry</button>
     </section>
 
