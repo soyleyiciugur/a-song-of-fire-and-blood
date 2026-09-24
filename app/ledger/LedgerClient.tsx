@@ -11,6 +11,7 @@ import { LEDGER_IMPORT_MAX_BYTES, parseLedgerImport, type LedgerImportDraft } fr
 import styles from "./ledger.module.css";
 
 type Filter = "open" | "settled" | "all";
+type SortMode = "entry-latest" | "entry-oldest" | "chapter-latest" | "chapter-oldest";
 type SaveState = "idle" | "saving" | "saved" | "error";
 type PickerKind = "character" | "chapter";
 type PickerState = { entryId: string; kind: PickerKind } | null;
@@ -19,6 +20,7 @@ type ImportPreview = { fileName: string; entries: LedgerImportDraft[]; warnings:
 
 const characters = getCharacters().slice().sort((a, b) => a.name.localeCompare(b.name));
 const chapters = getAllChapters().slice();
+const chapterOrder = new Map(chapters.map((chapter, index) => [chapter.slug, index]));
 
 function Icon({ name, className }: { name: "search" | "plus" | "archive" | "star" | "chevron" | "check" | "close" | "up" | "down" | "pin" | "flame" | "book" | "upload"; className?: string }) {
   const common = { className, viewBox: "0 0 24 24", fill: "none", "aria-hidden": true } as const;
@@ -65,6 +67,7 @@ export default function LedgerClient({ userId, username }: { userId: string; use
   const supabase = useMemo(() => createClient(), []);
   const [entries, setEntries] = useState<PrivateLedgerEntry[]>([]);
   const [filter, setFilter] = useState<Filter>("all");
+  const [sortMode, setSortMode] = useState<SortMode>("entry-latest");
   const [archived, setArchived] = useState(false);
   const [query, setQuery] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -307,9 +310,22 @@ export default function LedgerClient({ userId, username }: { userId: string; use
       return [entry.heading, entry.matter, ...entry.checklist.map((item) => item.text), charNames, chapter].join(" ").toLocaleLowerCase().includes(needle);
     }).sort((a, b) => {
       if (filter === "all" && a.status !== b.status) return a.status === "open" ? -1 : 1;
-      return Number(b.pinned) - Number(a.pinned) || Date.parse(b.updated_at) - Date.parse(a.updated_at);
+      const pinnedOrder = Number(b.pinned) - Number(a.pinned);
+      if (pinnedOrder) return pinnedOrder;
+      if (sortMode === "entry-latest" || sortMode === "entry-oldest") {
+        const dateOrder = Date.parse(a.created_at) - Date.parse(b.created_at);
+        return sortMode === "entry-latest" ? -dateOrder : dateOrder;
+      }
+      const aChapter = a.chapter_slug ? chapterOrder.get(a.chapter_slug) : undefined;
+      const bChapter = b.chapter_slug ? chapterOrder.get(b.chapter_slug) : undefined;
+      if (aChapter === undefined && bChapter !== undefined) return 1;
+      if (aChapter !== undefined && bChapter === undefined) return -1;
+      if (aChapter !== undefined && bChapter !== undefined && aChapter !== bChapter) {
+        return sortMode === "chapter-latest" ? bChapter - aChapter : aChapter - bChapter;
+      }
+      return Date.parse(b.created_at) - Date.parse(a.created_at);
     });
-  }, [entries, filter, archived, query]);
+  }, [entries, filter, archived, query, sortMode]);
 
   return <main className={styles.page}>
     <header className={styles.hero}>
@@ -333,6 +349,19 @@ export default function LedgerClient({ userId, username }: { userId: string; use
         {(["all", "open", "settled"] as Filter[]).map((value) => <button key={value} type="button" role="tab" data-status={value} aria-selected={!archived && filter === value} onClick={() => { setArchived(false); setFilter(value); }}><span aria-hidden="true" />{value === "open" ? "Open" : value === "settled" ? "Settled" : "All"}</button>)}
       </div>
       <button className={`${styles.archiveFilter} ${archived ? styles.archiveActive : ""}`} type="button" onClick={() => setArchived((value) => !value)}><Icon name="archive"/>{archived ? "Leave the Archive" : "The Archive"}</button>
+    </div>
+
+    <div className={styles.sortBar}>
+      <label htmlFor="ledger-sort">Sort matters</label>
+      <span className={styles.sortSelect}>
+        <select id="ledger-sort" value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
+          <option value="entry-latest">Entry date · Latest first</option>
+          <option value="entry-oldest">Entry date · Oldest first</option>
+          <option value="chapter-latest">Relevant chapter · Latest first</option>
+          <option value="chapter-oldest">Relevant chapter · Oldest first</option>
+        </select>
+        <Icon name="chevron"/>
+      </span>
     </div>
 
     {message && <p className={styles.message} role="status">{message}</p>}

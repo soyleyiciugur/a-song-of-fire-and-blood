@@ -2,7 +2,7 @@
   {
     "date": "2026-09-24",
     "items": [
-      "Made All the default private Ledger view, grouped its entries into open and settled matters, and distinguished their status labels with yellow and green treatments.",
+      "Made All the default private Ledger view, grouped its entries into open and settled matters, added latest/oldest sorting by entry date or relevant chapter, distinguished status labels with yellow and green treatments, and kept the status tabs contained at desktop and mobile widths.",
       "Added validated JSON import to each member's private Ledger, with a review step, account-scoped Supabase writes and notices for unknown character or chapter links.",
       "Expanded the character directory to include the royal family, added ascending and descending name, house and numeric height sorting, and excluded records missing the selected house or height value.",
       "Matched Bestiary, Houses, Known World and Chronicle headers to the same left-aligned responsive frame as the Dragons archive.",
