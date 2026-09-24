@@ -21,11 +21,6 @@ const SUCCESSION_IDS = [
 
 const SUCCESSION_NUMERALS = ["I", "II", "III", "IV", "V", "VI"] as const;
 
-const ROYAL_IDS = new Set<string>([
-  ...ROYAL_PARENT_IDS,
-  ...SUCCESSION_IDS,
-]);
-
 type StatusFilter = "all" | "Alive" | "Dead" | "Missing" | "Unknown";
 type SortMode = "name" | "house" | "height";
 type SortDirection = "ascending" | "descending";
@@ -228,21 +223,18 @@ export default function Characters() {
 
   const succession = SUCCESSION_IDS.map((id) => byId.get(id)).filter(Boolean);
 
-  const otherCharacters = useMemo(
-    () => characters.filter((character) => !ROYAL_IDS.has(character.id)),
-    [characters]
-  );
+  const directoryCharacters = characters;
 
   const houses = useMemo(
     () =>
       Array.from(
         new Set(
-          otherCharacters
+          directoryCharacters
             .map((character) => character.house)
             .filter((house) => house && house !== "-")
         )
       ).sort((a, b) => houseLabel(a).localeCompare(houseLabel(b))),
-    [otherCharacters]
+    [directoryCharacters]
   );
 
   const [query, setQuery] = useState("");
@@ -254,8 +246,16 @@ export default function Characters() {
   const visibleCharacters = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("en");
 
-    return otherCharacters
+    return directoryCharacters
       .filter((character) => {
+        if (sortBy === "height" && heightValue(character.height) === null) {
+          return false;
+        }
+
+        if (sortBy === "house" && (!character.house || character.house === "-")) {
+          return false;
+        }
+
         if (statusFilter !== "all" && character.status !== statusFilter) {
           return false;
         }
@@ -307,7 +307,7 @@ export default function Characters() {
           sensitivity: "base",
         });
       });
-  }, [otherCharacters, houseFilter, query, sortBy, sortDirection, statusFilter]);
+  }, [directoryCharacters, houseFilter, query, sortBy, sortDirection, statusFilter]);
 
   const houseOptions = useMemo<SelectOption[]>(
     () => [
@@ -417,7 +417,7 @@ export default function Characters() {
           <div className={styles.directoryHeader}>
             <div>
               <span className={styles.eyebrow}>The Realm</span>
-              <h2 className={styles.sectionTitle}>Other Characters</h2>
+              <h2 className={styles.sectionTitle}>All Characters</h2>
             </div>
 
             <div className={styles.directoryHeaderTools}>
@@ -438,7 +438,7 @@ export default function Characters() {
               </div>
 
               <span className={styles.resultCount}>
-                {visibleCharacters.length} of {otherCharacters.length}
+                {visibleCharacters.length} of {directoryCharacters.length}
               </span>
             </div>
           </div>
