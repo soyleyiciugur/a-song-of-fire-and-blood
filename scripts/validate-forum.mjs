@@ -4,6 +4,7 @@ import { publishForum } from '../lib/forumPublication.mjs';
 const read=name=>JSON.parse(fs.readFileSync(new URL(`../data/${name}`,import.meta.url),'utf8'));
 const forum=read('forum.json'), chapters=read('chapters.json'), community=read('flea-bottom.json');
 const requirements=read('community-authoring-policy.json').forum?.chapterRequirements ?? {};
+const minimumCommunityParticipants=read('community-authoring-policy.json').forum?.minimumParticipantsPerNewCommunityThread ?? 0;
 const users=new Map(community.users.map(u=>[u.id,u]));
 const threads=new Map(forum.threads.map(t=>[t.id,t]));
 const comments=new Map(forum.comments.map(c=>[c.id,c]));
@@ -26,6 +27,9 @@ for(const t of forum.threads){
       assert(new Set(conversation.map(c=>c.authorId)).size>=requirement.minimumParticipants,`${t.id}: insufficient participants`);
       assert(conversation.length>=requirement.minimumComments,`${t.id}: insufficient comments`);
     }
+  }
+  else if(Date.parse(t.publishedAt)>=Date.parse('2026-09-25T00:00:00.000Z')) {
+    assert(participants.size>=minimumCommunityParticipants,`${t.id} needs at least ${minimumCommunityParticipants} regular participants`);
   }
 }
 for(const [index,c] of forum.comments.entries()){

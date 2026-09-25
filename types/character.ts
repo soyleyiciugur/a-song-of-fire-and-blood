@@ -10,7 +10,7 @@ export type CharacterAgeState =
 export type CharacterId =
   | "aldren-innkeeper"
   | "mara-tapster"
-  | "renrose-tyrell-daughter"
+  | "elinor-tyrell"
   | "liana-tyrell"
   | "nymos"
   | "aenys-targaryen-ii"

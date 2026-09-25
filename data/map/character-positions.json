@@ -1022,7 +1022,7 @@
     "daria-sand": "King's Landing",
     "nymos": "Starfall",
     "liana-tyrell": "Highgarden",
-    "renrose-tyrell-daughter": "Highgarden"
+    "elinor-tyrell": "Highgarden"
   },
   "until-the-last-breath": {
     "baelenys-targaryen": "King's Landing",
@@ -1100,7 +1100,7 @@
     "daria-sand": "King's Landing",
     "nymos": "Starfall",
     "liana-tyrell": "Highgarden",
-    "renrose-tyrell-daughter": "Highgarden",
+    "elinor-tyrell": "Highgarden",
     "mydan-gerren": "King's Landing"
   },
   "judgment-by-blood": {
@@ -1173,7 +1173,7 @@
     "daria-sand": "King's Landing",
     "nymos": "-",
     "liana-tyrell": "Highgarden",
-    "renrose-tyrell-daughter": "Highgarden",
+    "elinor-tyrell": "Highgarden",
     "mydan-gerren": "King's Landing",
     "vaenarr-targaryen": "Tyrosh",
     "aegor-targaryen": "Tyrosh"
@@ -1233,7 +1233,7 @@
     "daria-sand": "King's Landing",
     "nymos": "-",
     "liana-tyrell": "Highgarden",
-    "renrose-tyrell-daughter": "Highgarden",
+    "elinor-tyrell": "Highgarden",
     "mydan-gerren": "King's Landing",
     "vaenarr-targaryen": "Tyrosh",
     "aegor-targaryen": "Tyrosh"

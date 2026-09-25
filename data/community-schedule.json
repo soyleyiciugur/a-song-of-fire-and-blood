@@ -5829,7 +5829,9 @@
       "publishedAt": "2026-09-24T12:17:11.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s01"]
+      "forumCommentIds": [
+        "ch20-storm-s01"
+      ]
     },
     {
       "id": "ch20-followup-02",
@@ -5837,7 +5839,9 @@
       "publishedAt": "2026-09-24T13:43:27.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s02"]
+      "forumCommentIds": [
+        "ch20-storm-s02"
+      ]
     },
     {
       "id": "ch20-followup-03",
@@ -5845,7 +5849,9 @@
       "publishedAt": "2026-09-24T14:26:39.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s03"]
+      "forumCommentIds": [
+        "ch20-storm-s03"
+      ]
     },
     {
       "id": "ch20-followup-04",
@@ -5853,7 +5859,9 @@
       "publishedAt": "2026-09-24T15:08:52.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s04"]
+      "forumCommentIds": [
+        "ch20-storm-s04"
+      ]
     },
     {
       "id": "ch20-followup-05",
@@ -5861,7 +5869,9 @@
       "publishedAt": "2026-09-24T16:34:18.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s05"]
+      "forumCommentIds": [
+        "ch20-storm-s05"
+      ]
     },
     {
       "id": "ch20-followup-06",
@@ -5869,7 +5879,9 @@
       "publishedAt": "2026-09-24T17:12:44.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s06"]
+      "forumCommentIds": [
+        "ch20-storm-s06"
+      ]
     },
     {
       "id": "ch20-followup-07",
@@ -5877,7 +5889,9 @@
       "publishedAt": "2026-09-24T18:51:06.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s07"]
+      "forumCommentIds": [
+        "ch20-storm-s07"
+      ]
     },
     {
       "id": "ch20-followup-08",
@@ -5885,7 +5899,9 @@
       "publishedAt": "2026-09-24T19:29:33.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s08"]
+      "forumCommentIds": [
+        "ch20-storm-s08"
+      ]
     },
     {
       "id": "ch20-followup-09",
@@ -5893,7 +5909,9 @@
       "publishedAt": "2026-09-24T20:14:57.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s09"]
+      "forumCommentIds": [
+        "ch20-storm-s09"
+      ]
     },
     {
       "id": "ch20-followup-10",
@@ -5901,7 +5919,9 @@
       "publishedAt": "2026-09-24T21:37:21.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s10"]
+      "forumCommentIds": [
+        "ch20-storm-s10"
+      ]
     },
     {
       "id": "ch20-followup-11",
@@ -5909,7 +5929,9 @@
       "publishedAt": "2026-09-24T22:03:48.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s11"]
+      "forumCommentIds": [
+        "ch20-storm-s11"
+      ]
     },
     {
       "id": "ch20-followup-12",
@@ -5917,7 +5939,9 @@
       "publishedAt": "2026-09-24T23:46:12.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s12"]
+      "forumCommentIds": [
+        "ch20-storm-s12"
+      ]
     },
     {
       "id": "ch20-followup-13",
@@ -5925,7 +5949,9 @@
       "publishedAt": "2026-09-25T00:22:36.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s13"]
+      "forumCommentIds": [
+        "ch20-storm-s13"
+      ]
     },
     {
       "id": "ch20-followup-14",
@@ -5933,7 +5959,9 @@
       "publishedAt": "2026-09-25T01:09:59.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s14"]
+      "forumCommentIds": [
+        "ch20-storm-s14"
+      ]
     },
     {
       "id": "ch20-followup-15",
@@ -5941,7 +5969,9 @@
       "publishedAt": "2026-09-25T02:41:24.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s15"]
+      "forumCommentIds": [
+        "ch20-storm-s15"
+      ]
     },
     {
       "id": "ch20-followup-16",
@@ -5949,7 +5979,9 @@
       "publishedAt": "2026-09-25T03:18:42.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s16"]
+      "forumCommentIds": [
+        "ch20-storm-s16"
+      ]
     },
     {
       "id": "ch20-followup-17",
@@ -5957,7 +5989,9 @@
       "publishedAt": "2026-09-25T04:52:08.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s17"]
+      "forumCommentIds": [
+        "ch20-storm-s17"
+      ]
     },
     {
       "id": "ch20-followup-18",
@@ -5965,7 +5999,9 @@
       "publishedAt": "2026-09-25T05:27:31.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s18"]
+      "forumCommentIds": [
+        "ch20-storm-s18"
+      ]
     },
     {
       "id": "ch20-followup-19",
@@ -5973,7 +6009,9 @@
       "publishedAt": "2026-09-25T06:44:16.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s19"]
+      "forumCommentIds": [
+        "ch20-storm-s19"
+      ]
     },
     {
       "id": "ch20-followup-20",
@@ -5981,7 +6019,9 @@
       "publishedAt": "2026-09-25T07:16:53.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["ch20-storm-s20"]
+      "forumCommentIds": [
+        "ch20-storm-s20"
+      ]
     },
     {
       "id": "ch20-followup-21",
@@ -5989,7 +6029,9 @@
       "publishedAt": "2026-09-25T08:31:14.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["feature-reading-s01"]
+      "forumCommentIds": [
+        "feature-reading-s01"
+      ]
     },
     {
       "id": "ch20-followup-22",
@@ -5997,7 +6039,9 @@
       "publishedAt": "2026-09-25T09:05:38.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["realm-job-s01"]
+      "forumCommentIds": [
+        "realm-job-s01"
+      ]
     },
     {
       "id": "ch20-followup-23",
@@ -6005,7 +6049,9 @@
       "publishedAt": "2026-09-25T10:48:25.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["unsolved-board-s01"]
+      "forumCommentIds": [
+        "unsolved-board-s01"
+      ]
     },
     {
       "id": "ch20-followup-24",
@@ -6013,7 +6059,880 @@
       "publishedAt": "2026-09-25T11:23:47.000Z",
       "commentIds": [],
       "forumThreadIds": [],
-      "forumCommentIds": ["patch-notes-s01"]
+      "forumCommentIds": [
+        "patch-notes-s01"
+      ]
+    },
+    {
+      "id": "taverns-wave-01",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T17:13:00.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-01"
+      ]
+    },
+    {
+      "id": "taverns-wave-02",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T18:47:17.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-map-route-challenge"
+      ],
+      "forumCommentIds": [
+        "community-council-red-flags-c04",
+        "community-map-route-challenge-c01",
+        "community-map-route-challenge-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-03",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T19:22:34.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-04",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T20:56:51.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c04",
+        "community-map-route-challenge-c03",
+        "community-map-route-challenge-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-05",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T21:31:15.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-06",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T22:08:32.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-side-character-supper"
+      ],
+      "forumCommentIds": [
+        "community-side-character-supper-c01",
+        "community-side-character-supper-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-07",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-25T23:44:49.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-comfort-reread-c05",
+        "community-map-route-challenge-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-08",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T00:19:13.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-council-red-flags-c05",
+        "community-side-character-supper-c03"
+      ]
+    },
+    {
+      "id": "taverns-wave-09",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T01:52:30.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-10",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T02:27:47.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-evidence-cold-cases"
+      ],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c05",
+        "community-evidence-cold-cases-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-11",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T03:06:11.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c05",
+        "community-map-route-challenge-c05",
+        "community-side-character-supper-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-12",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T04:39:28.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-evidence-cold-cases-c03",
+        "community-evidence-cold-cases-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-13",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T05:16:45.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-02"
+      ]
+    },
+    {
+      "id": "taverns-wave-14",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T06:49:09.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-03"
+      ]
+    },
+    {
+      "id": "taverns-wave-15",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T07:24:26.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-wardrobe-repeat"
+      ],
+      "forumCommentIds": [
+        "community-side-character-supper-c05",
+        "community-evidence-cold-cases-c04",
+        "community-wardrobe-repeat-c01",
+        "community-wardrobe-repeat-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-16",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T08:58:43.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-map-route-challenge-c06"
+      ]
+    },
+    {
+      "id": "taverns-wave-17",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T09:34:07.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wardrobe-repeat-c03",
+        "community-wardrobe-repeat-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-18",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T10:11:24.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-04"
+      ]
+    },
+    {
+      "id": "taverns-wave-19",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T11:46:41.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-comfort-reread-c06",
+        "community-evidence-cold-cases-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-20",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-group-project"
+      ],
+      "forumCommentIds": [
+        "community-council-red-flags-c06",
+        "community-side-character-supper-c06",
+        "community-wardrobe-repeat-c04",
+        "community-group-project-c01",
+        "community-group-project-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-21",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T13:54:22.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-05"
+      ]
+    },
+    {
+      "id": "taverns-wave-22",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T14:29:39.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c06",
+        "community-map-route-challenge-c07",
+        "community-group-project-c03",
+        "community-group-project-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-23",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T15:07:03.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c06"
+      ]
+    },
+    {
+      "id": "taverns-wave-24",
+      "batchId": "taverns-three-day-wave-1",
+      "publishedAt": "2026-09-26T16:42:20.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-evidence-cold-cases-c06",
+        "community-wardrobe-repeat-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-25",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T17:13:37.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-group-project-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-26",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T18:47:01.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-castle-winter"
+      ],
+      "forumCommentIds": [
+        "community-side-character-supper-c07",
+        "community-castle-winter-c01",
+        "community-castle-winter-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-27",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T19:22:18.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-side-character-supper-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-28",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T20:56:35.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-castle-winter-c03",
+        "community-castle-winter-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-29",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T21:31:52.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-map-route-challenge-c08",
+        "community-wardrobe-repeat-c06",
+        "community-group-project-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-30",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T22:08:16.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-opening-dread"
+      ],
+      "forumCommentIds": [
+        "community-evidence-cold-cases-c07",
+        "community-opening-dread-c01",
+        "community-opening-dread-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-31",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-26T23:44:33.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-comfort-reread-c07"
+      ]
+    },
+    {
+      "id": "taverns-wave-32",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T00:19:50.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-council-red-flags-c07",
+        "community-opening-dread-c03",
+        "community-opening-dread-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-33",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T01:52:14.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c07",
+        "community-side-character-supper-c08"
+      ]
+    },
+    {
+      "id": "taverns-wave-34",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T02:27:31.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c07",
+        "community-group-project-c06"
+      ]
+    },
+    {
+      "id": "taverns-wave-35",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-dragon-logistics"
+      ],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c07",
+        "community-wardrobe-repeat-c07",
+        "community-castle-winter-c05",
+        "community-opening-dread-c04",
+        "community-dragon-logistics-c01",
+        "community-dragon-logistics-c02",
+        "community-dragon-logistics-c06"
+      ]
+    },
+    {
+      "id": "taverns-wave-36",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T04:39:12.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-06"
+      ]
+    },
+    {
+      "id": "taverns-wave-37",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T05:16:29.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-evidence-cold-cases-c08",
+        "community-dragon-logistics-c03",
+        "community-dragon-logistics-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-38",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T06:49:46.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-07"
+      ]
+    },
+    {
+      "id": "taverns-wave-39",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T07:24:10.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-opening-dread-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-40",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-headcanon-confessional"
+      ],
+      "forumCommentIds": [
+        "community-side-character-supper-c09",
+        "community-group-project-c07",
+        "community-castle-winter-c06",
+        "community-dragon-logistics-c04",
+        "community-headcanon-confessional-c01",
+        "community-headcanon-confessional-c02",
+        "community-headcanon-confessional-c07"
+      ]
+    },
+    {
+      "id": "taverns-wave-41",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T09:34:44.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wave-pulse-08"
+      ]
+    },
+    {
+      "id": "taverns-wave-42",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T10:11:08.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wardrobe-repeat-c08",
+        "community-headcanon-confessional-c03",
+        "community-headcanon-confessional-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-43",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T11:46:25.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-comfort-reread-c08"
+      ]
+    },
+    {
+      "id": "taverns-wave-44",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T12:21:42.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-council-red-flags-c08",
+        "community-evidence-cold-cases-c09",
+        "community-opening-dread-c06",
+        "community-dragon-logistics-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-45",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T13:54:06.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-council-bingo"
+      ],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c08",
+        "community-headcanon-confessional-c04",
+        "community-council-bingo-c01",
+        "community-council-bingo-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-46",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T14:29:23.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c08",
+        "community-castle-winter-c07"
+      ]
+    },
+    {
+      "id": "taverns-wave-47",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T15:07:40.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c08",
+        "community-group-project-c08",
+        "community-council-bingo-c03",
+        "community-council-bingo-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-48",
+      "batchId": "taverns-three-day-wave-2",
+      "publishedAt": "2026-09-27T16:42:04.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-evidence-cold-cases-c01"
+      ]
+    },
+    {
+      "id": "taverns-wave-49",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T17:13:21.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-wardrobe-repeat-c09",
+        "community-headcanon-confessional-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-50",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T18:47:38.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-reading-soundtrack"
+      ],
+      "forumCommentIds": [
+        "community-opening-dread-c07",
+        "community-council-bingo-c04",
+        "community-reading-soundtrack-c01",
+        "community-reading-soundtrack-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-51",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T19:22:02.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-castle-winter-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-52",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T20:56:19.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-reading-soundtrack-c03",
+        "community-reading-soundtrack-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-53",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T21:31:36.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-castle-winter-c08"
+      ]
+    },
+    {
+      "id": "taverns-wave-54",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T22:08:00.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-group-project-c09",
+        "community-headcanon-confessional-c06",
+        "community-council-bingo-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-55",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-best-nonromantic-bond"
+      ],
+      "forumCommentIds": [
+        "community-comfort-reread-c09",
+        "community-dragon-logistics-c07",
+        "community-reading-soundtrack-c04",
+        "community-best-nonromantic-bond-c01",
+        "community-best-nonromantic-bond-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-56",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T00:19:34.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-council-red-flags-c09"
+      ]
+    },
+    {
+      "id": "taverns-wave-57",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T01:52:51.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c09",
+        "community-opening-dread-c08",
+        "community-best-nonromantic-bond-c03",
+        "community-best-nonromantic-bond-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-58",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T02:27:15.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c09"
+      ]
+    },
+    {
+      "id": "taverns-wave-59",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T03:06:32.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c09",
+        "community-council-bingo-c06",
+        "community-reading-soundtrack-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-60",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T04:39:49.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-nymos-poster"
+      ],
+      "forumCommentIds": [
+        "community-castle-winter-c09",
+        "community-best-nonromantic-bond-c04",
+        "community-nymos-poster-c01",
+        "community-nymos-poster-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-61",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T05:16:13.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-comfort-reread-c04"
+      ]
+    },
+    {
+      "id": "taverns-wave-62",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T06:49:30.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-logistics-c08",
+        "community-nymos-poster-c03",
+        "community-nymos-poster-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-63",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T07:24:47.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c06"
+      ]
+    },
+    {
+      "id": "taverns-wave-64",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T08:58:11.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-opening-dread-c09",
+        "community-reading-soundtrack-c06",
+        "community-best-nonromantic-bond-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-65",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T09:34:28.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-reader-patch-notes"
+      ],
+      "forumCommentIds": [
+        "community-council-bingo-c07",
+        "community-nymos-poster-c04",
+        "community-reader-patch-notes-c01",
+        "community-reader-patch-notes-c02"
+      ]
+    },
+    {
+      "id": "taverns-wave-66",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T10:11:45.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-map-route-challenge-c09"
+      ]
+    },
+    {
+      "id": "taverns-wave-67",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T11:46:09.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-comfort-reread-c10",
+        "community-headcanon-confessional-c08",
+        "community-reader-patch-notes-c03",
+        "community-reader-patch-notes-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-68",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T12:21:26.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-council-red-flags-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-69",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T13:54:43.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-dragon-name-bracket-c10",
+        "community-dragon-logistics-c09",
+        "community-best-nonromantic-bond-c06",
+        "community-nymos-poster-c05"
+      ]
+    },
+    {
+      "id": "taverns-wave-70",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "commentIds": [],
+      "forumThreadIds": [
+        "community-no-politics-game-night"
+      ],
+      "forumCommentIds": [
+        "community-worst-travel-companion-c10",
+        "community-reading-soundtrack-c07",
+        "community-reader-patch-notes-c04",
+        "community-no-politics-game-night-c01",
+        "community-no-politics-game-night-c02",
+        "community-no-politics-game-night-c06",
+        "community-no-politics-game-night-c07",
+        "community-no-politics-game-night-c08",
+        "community-no-politics-game-night-c09",
+        "community-no-politics-game-night-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-71",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T15:07:24.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-unpopular-opinion-amnesty-c10"
+      ]
+    },
+    {
+      "id": "taverns-wave-72",
+      "batchId": "taverns-three-day-wave-3",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "commentIds": [],
+      "forumThreadIds": [],
+      "forumCommentIds": [
+        "community-headcanon-confessional-c09",
+        "community-council-bingo-c08",
+        "community-council-bingo-c09",
+        "community-reading-soundtrack-c08",
+        "community-reading-soundtrack-c09",
+        "community-best-nonromantic-bond-c07",
+        "community-best-nonromantic-bond-c08",
+        "community-best-nonromantic-bond-c09",
+        "community-nymos-poster-c06",
+        "community-nymos-poster-c07",
+        "community-nymos-poster-c08",
+        "community-nymos-poster-c09",
+        "community-reader-patch-notes-c05",
+        "community-reader-patch-notes-c06",
+        "community-reader-patch-notes-c07",
+        "community-reader-patch-notes-c08",
+        "community-reader-patch-notes-c09",
+        "community-no-politics-game-night-c03",
+        "community-no-politics-game-night-c04",
+        "community-no-politics-game-night-c05"
+      ]
     }
   ],
   "policy": {
@@ -6066,5 +6985,5 @@
       }
     ]
   },
-  "currentBatchId": "ch20-organic-followups"
+  "currentBatchId": "taverns-three-day-wave-1"
 }

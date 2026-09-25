@@ -2239,7 +2239,7 @@
     "houseId": "tyrell"
   },
   {
-    "id": "renrose-tyrell-daughter",
+    "id": "elinor-tyrell",
     "cardType": "character",
     "tierId": "c",
     "name": "Elinor Tyrell",
@@ -2263,7 +2263,7 @@
       "support"
     ],
     "subtitle": "Elinor Tyrell",
-    "linkedCharacterId": "renrose-tyrell-daughter",
+    "linkedCharacterId": "elinor-tyrell",
     "houseId": "tyrell"
   },
   {

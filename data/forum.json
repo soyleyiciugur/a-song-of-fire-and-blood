@@ -610,6 +610,206 @@
       "body": "No names in the first post. Example format: diplomacy cooldown increased, sibling notifications muted, one sword mysteriously removed from inventory. Keep it chapter-safe and do not make victims the punchline.",
       "publishedAt": "2026-09-24T07:44:00.000Z",
       "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-comfort-reread",
+      "chapterSlug": null,
+      "title": "What is your comfort reread when the realm gets unbearable?",
+      "category": "Reading room",
+      "authorId": "regular-club",
+      "body": "Not necessarily the happiest chapter. Which scene, conversation or small detail do you return to when the politics become exhausting, and why does it work for you?",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-council-red-flags",
+      "chapterSlug": null,
+      "title": "Small Council red-flag draft: choose one warning sign",
+      "category": "Games & memes",
+      "authorId": "regular-hr",
+      "body": "Draft one sign that a council meeting is already doomed before anyone finishes the first sentence. One pick each; duplicate picks must be defended before the Evidence Committee.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-dragon-name-bracket",
+      "chapterSlug": null,
+      "title": "Dragon-name bracket, with absolutely no identity claims",
+      "category": "Games & memes",
+      "authorId": "regular-poll",
+      "body": "Invent names for a completely hypothetical dragon based on weather, colour, temperament or snacks. This is a naming game, not evidence about the unidentified white dragon.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-worst-travel-companion",
+      "chapterSlug": null,
+      "title": "Choose your worst possible travel companion",
+      "category": "Games & memes",
+      "authorId": "regular-local",
+      "body": "Three days on the road, one horse cart, no royal escort. Pick the character who would make the journey most difficult and explain the exact hour at which it goes wrong.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty",
+      "chapterSlug": null,
+      "title": "Unpopular-opinion amnesty: one take, no faction speeches",
+      "category": "Site & community",
+      "authorId": "regular-middle",
+      "body": "Offer one specific opinion you expect the Taverns to disagree with. Replies may challenge the take, but not diagnose the person posting it. Keep it within Chapter XX spoilers.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-map-route-challenge",
+      "chapterSlug": null,
+      "title": "Map route challenge: plan one journey the hard way",
+      "category": "Games & maps",
+      "authorId": "regular-horse",
+      "body": "Choose two known locations and plan the safest plausible route using the map. Weather, food, horses and politics all count; teleportation and unnamed secret tunnels do not.",
+      "publishedAt": "2026-09-25T18:47:17.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-side-character-supper",
+      "chapterSlug": null,
+      "title": "Seat six side characters at supper",
+      "category": "Characters",
+      "authorId": "regular-food",
+      "body": "Build a supper table from characters who rarely control the room. Who speaks first, who listens, and who quietly leaves with the bread?",
+      "publishedAt": "2026-09-25T22:08:32.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-evidence-cold-cases",
+      "chapterSlug": null,
+      "title": "Evidence Committee: reopen one cold case",
+      "category": "Theories",
+      "authorId": "regular-archive",
+      "body": "Choose one unresolved question that has slipped behind newer disasters. Give one citation-level clue and one thing we still cannot honestly claim.",
+      "publishedAt": "2026-09-26T02:27:47.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-wardrobe-repeat",
+      "chapterSlug": null,
+      "title": "Wardrobe continuity appreciation thread",
+      "category": "Art & details",
+      "authorId": "regular-aesthetic",
+      "body": "Name a repeated colour, garment, piece of jewellery or visual detail that changed how you read a character. Observation first; symbolism may follow with a warning label.",
+      "publishedAt": "2026-09-26T07:24:26.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-group-project",
+      "chapterSlug": null,
+      "title": "The realm is a group project: assign the roles",
+      "category": "Games & memes",
+      "authorId": "regular-student",
+      "body": "Who writes the document, who presents, who disappears until the deadline, and who changes the entire plan five minutes before submission?",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-castle-winter",
+      "chapterSlug": null,
+      "title": "One castle for one winter — where are you staying?",
+      "category": "World & lore",
+      "authorId": "regular-north",
+      "body": "Choose for warmth, food, safety, company or architecture. You are a guest, not a conquering army, and current political conditions still apply.",
+      "publishedAt": "2026-09-26T18:47:01.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-opening-dread",
+      "chapterSlug": null,
+      "title": "Which kind of chapter opening creates instant dread?",
+      "category": "Reading room",
+      "authorId": "regular-doomer",
+      "body": "No need to rank specific deaths. Is it unfamiliar calm, a missing name, weather, a letter, a body, or somebody being unusually happy?",
+      "publishedAt": "2026-09-26T22:08:16.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-dragon-logistics",
+      "chapterSlug": null,
+      "title": "Dragon logistics questions nobody asks at council",
+      "category": "World & lore",
+      "authorId": "regular-supply",
+      "body": "Feed, shelter, noise, waste, roads, frightened livestock: ask one practical dragon question. Speculation is welcome; invented canon answers are not.",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-headcanon-confessional",
+      "chapterSlug": null,
+      "title": "Headcanon confessional: harmless edition",
+      "category": "Site & community",
+      "authorId": "regular-fic",
+      "body": "Share one tiny habit you imagine for a character, clearly labelled non-canon. No secret parentage, hidden survival or future plot claims — keep it domestic and harmless.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-council-bingo",
+      "chapterSlug": null,
+      "title": "Council meeting bingo card submissions",
+      "category": "Games & memes",
+      "authorId": "regular-m",
+      "body": "Submit one square. It must describe a recurring meeting behaviour, not invent a future event. The centre square is already “nobody answers the actual question.”",
+      "publishedAt": "2026-09-27T13:54:06.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-reading-soundtrack",
+      "chapterSlug": null,
+      "title": "What do you listen to while reading?",
+      "category": "Reading room",
+      "authorId": "regular-music",
+      "body": "Silence, rain, instrumentals, one cursed playlist, tavern noise? Share the mood rather than copyrighted lyrics, and say which kinds of scenes it helps or ruins.",
+      "publishedAt": "2026-09-27T18:47:38.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-best-nonromantic-bond",
+      "chapterSlug": null,
+      "title": "Best non-romantic bond, including difficult ones",
+      "category": "Characters",
+      "authorId": "regular-queer",
+      "body": "Friendship, siblings, mentorship, duty, rivalry, found family: choose a bond whose complications make both people clearer. Affection does not have to mean health.",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-nymos-poster",
+      "chapterSlug": null,
+      "title": "Draft the least useful “Where is Nymos?” poster",
+      "category": "Games & memes",
+      "authorId": "regular-margin-notes",
+      "body": "We still do not know where he is, who employed him or what happened. Write a deliberately unhelpful missing poster using only facts the Taverns actually has.",
+      "publishedAt": "2026-09-28T04:39:49.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-reader-patch-notes",
+      "chapterSlug": null,
+      "title": "Reader patch notes after Chapter XX",
+      "category": "Games & memes",
+      "authorId": "regular-great",
+      "body": "Describe your own reading-state update: theory inventory, trust settings, map tabs, emotional stability. Patch the reader, not the characters.",
+      "publishedAt": "2026-09-28T09:34:28.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
+    },
+    {
+      "id": "community-no-politics-game-night",
+      "chapterSlug": null,
+      "title": "Three-day Tavern game night: no crowns allowed",
+      "category": "Games & community",
+      "authorId": "regular-bilingual",
+      "body": "Bring one game the regulars could play without discussing succession for at least ten minutes. If your game secretly becomes politics, explain where it fails.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "spoilerThrough": "the-eye-in-the-storm"
     }
   ],
   "comments": [
@@ -13694,7 +13894,9 @@
       "parentId": "ch20-storm-c04",
       "body": "Gaelor PR has reviewed the proposed Essos assignment and would like to stress that being considered for the mission is not the same as being trusted with diplomacy. This distinction is, for once, helping us.",
       "publishedAt": "2026-09-24T00:07:00.000Z",
-      "upvoterIds": ["regular-m"],
+      "upvoterIds": [
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -13704,7 +13906,10 @@
       "parentId": "ch20-storm-c04",
       "body": "The council discusses assassinations, heirs and dragon deployments while unnamed workers will provision every ship and absorb every consequence. Same institution, larger travel budget.",
       "publishedAt": "2026-09-24T00:19:00.000Z",
-      "upvoterIds": ["regular-ledger", "regular-local"],
+      "upvoterIds": [
+        "regular-ledger",
+        "regular-local"
+      ],
       "awards": []
     },
     {
@@ -13714,7 +13919,9 @@
       "parentId": "ch20-storm-c04",
       "body": "Acknowledging an heir while refusing the title is politically untidy, but the burden itself is unmistakable. The murder order is not made cleaner by calling it strategy.",
       "publishedAt": "2026-09-24T00:36:00.000Z",
-      "upvoterIds": ["regular-legal"],
+      "upvoterIds": [
+        "regular-legal"
+      ],
       "awards": []
     },
     {
@@ -13724,7 +13931,10 @@
       "parentId": "ch20-storm-c01",
       "body": "Also worth separating resemblance from identity and attention from a rider bond. The chapter confirms neither, however persuasive the emotional association feels.",
       "publishedAt": "2026-09-24T00:52:00.000Z",
-      "upvoterIds": ["regular-archive", "regular-margin-notes"],
+      "upvoterIds": [
+        "regular-archive",
+        "regular-margin-notes"
+      ],
       "awards": []
     },
     {
@@ -13734,7 +13944,10 @@
       "parentId": "ch20-storm-c03",
       "body": "brotherhood server came online for eight minutes and immediately connected a child to an unidentified dragon during a storm",
       "publishedAt": "2026-09-24T01:08:00.000Z",
-      "upvoterIds": ["regular-a", "regular-it"],
+      "upvoterIds": [
+        "regular-a",
+        "regular-it"
+      ],
       "awards": []
     },
     {
@@ -13744,7 +13957,9 @@
       "parentId": "ch20-storm-c13",
       "body": "status page says operational. the thunder says otherwise",
       "publishedAt": "2026-09-24T01:21:00.000Z",
-      "upvoterIds": ["regular-m"],
+      "upvoterIds": [
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -13754,7 +13969,10 @@
       "parentId": "ch20-storm-c06",
       "body": "Leo asking for time instead of offering easy forgiveness is exactly why the scene works. Affection remains, trust does not magically respawn, and the Dorne plan makes both facts dangerous.",
       "publishedAt": "2026-09-24T01:39:00.000Z",
-      "upvoterIds": ["regular-club", "regular-queer"],
+      "upvoterIds": [
+        "regular-club",
+        "regular-queer"
+      ],
       "awards": []
     },
     {
@@ -13764,7 +13982,9 @@
       "parentId": "ch20-storm-c06",
       "body": "Visenor finally selected the honest dialogue option and still has three concealed quest flags active. I am calling this progress, not victory.",
       "publishedAt": "2026-09-24T01:56:00.000Z",
-      "upvoterIds": ["regular-s"],
+      "upvoterIds": [
+        "regular-s"
+      ],
       "awards": []
     },
     {
@@ -13774,7 +13994,9 @@
       "parentId": "ch20-storm-c08",
       "body": "I appreciate that you have labelled the second theory irresponsible. Is there a page where the confirmed dragon details are collected? Regards.",
       "publishedAt": "2026-09-24T02:13:00.000Z",
-      "upvoterIds": ["regular-newbie"],
+      "upvoterIds": [
+        "regular-newbie"
+      ],
       "awards": []
     },
     {
@@ -13784,7 +14006,9 @@
       "parentId": "ch20-storm-c03",
       "body": "vhaemys pulled up with weather boss aura",
       "publishedAt": "2026-09-24T02:31:00.000Z",
-      "upvoterIds": ["regular-m"],
+      "upvoterIds": [
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -13794,8 +14018,16 @@
       "parentId": "ch20-storm-c03",
       "body": "Jace believed his sister, brought Cloudgazer, and did not pretend the white dragon had accepted anybody. Rare competent older-brother sequence. I have archived the occasion.",
       "publishedAt": "2026-09-24T02:48:00.000Z",
-      "upvoterIds": ["regular-archive", "regular-lorenah"],
-      "awards": [{"fromUserId":"regular-s","amount":2}]
+      "upvoterIds": [
+        "regular-archive",
+        "regular-lorenah"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-s",
+          "amount": 2
+        }
+      ]
     },
     {
       "id": "ch20-storm-c20",
@@ -13804,7 +14036,9 @@
       "parentId": "ch20-storm-c01",
       "body": "The cut from the family argument into the storm sequence makes the dragon feel like an answer before the text permits us to know the question. Very effective, mildly evil edit logic.",
       "publishedAt": "2026-09-24T03:04:00.000Z",
-      "upvoterIds": ["regular-music"],
+      "upvoterIds": [
+        "regular-music"
+      ],
       "awards": []
     },
     {
@@ -13814,7 +14048,9 @@
       "parentId": "ch20-storm-c07",
       "body": "Every proposed journey gets discussed as politics first and animals, roads, weather and rest second. At least Leo understands that reaching Dorne is a plan, not a scene transition.",
       "publishedAt": "2026-09-24T03:22:00.000Z",
-      "upvoterIds": ["regular-supply"],
+      "upvoterIds": [
+        "regular-supply"
+      ],
       "awards": []
     },
     {
@@ -13824,7 +14060,10 @@
       "parentId": "ch20-storm-c10",
       "body": "Two foreign targets, several possible envoys, ships, guards, dragons and no visible cost column. The royal spreadsheet has achieved sentience and is requesting leave.",
       "publishedAt": "2026-09-24T03:41:00.000Z",
-      "upvoterIds": ["regular-u", "regular-it"],
+      "upvoterIds": [
+        "regular-u",
+        "regular-it"
+      ],
       "awards": []
     },
     {
@@ -13834,7 +14073,10 @@
       "parentId": "ch20-storm-c13",
       "body": "Incident summary: unauthorized dragon discovery, unclear permissions, three family accounts in production, zero rollback plan. GM has opened another ticket and assigned it to everyone else.",
       "publishedAt": "2026-09-24T04:03:00.000Z",
-      "upvoterIds": ["regular-hr", "regular-m"],
+      "upvoterIds": [
+        "regular-hr",
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -13844,7 +14086,10 @@
       "parentId": "ch20-storm-c05",
       "body": "Vhaemys is frightened because she loves her father, but the adults have made violence the grammar through which she understands love. That is much sadder than simply calling her brave in the dragon scene.",
       "publishedAt": "2026-09-24T04:27:00.000Z",
-      "upvoterIds": ["regular-faith", "regular-feminist"],
+      "upvoterIds": [
+        "regular-faith",
+        "regular-feminist"
+      ],
       "awards": []
     },
     {
@@ -13854,7 +14099,9 @@
       "parentId": "ch20-storm-c05",
       "body": "The chapter keeps converting private family feeling into state action: fear becomes surveillance, affection becomes succession, grief becomes foreign policy. I wrote that down instead of doing my actual reading.",
       "publishedAt": "2026-09-24T04:46:00.000Z",
-      "upvoterIds": ["regular-club"],
+      "upvoterIds": [
+        "regular-club"
+      ],
       "awards": []
     },
     {
@@ -13864,7 +14111,9 @@
       "parentId": "ch20-storm-c19",
       "body": "Competent, yes. He also heard Vhaemys describe danger and chose personal aerial reconnaissance with her present. Your archive needs a risk-assessment shelf.",
       "publishedAt": "2026-09-24T05:09:00.000Z",
-      "upvoterIds": ["regular-room-middle"],
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
       "awards": []
     },
     {
@@ -13874,7 +14123,9 @@
       "parentId": "ch20-storm-c04",
       "body": "If Gaelor joins the Essos party, Saathos inherits a mission with vague authority and catastrophic failure conditions. Competence cannot make that order responsible.",
       "publishedAt": "2026-09-24T05:33:00.000Z",
-      "upvoterIds": ["regular-supply"],
+      "upvoterIds": [
+        "regular-supply"
+      ],
       "awards": []
     },
     {
@@ -13884,7 +14135,10 @@
       "parentId": "ch20-storm-c27",
       "body": "And nobody at that table has agreed on command, destination order, resupply or extraction. The mission currently consists of verbs and confidence.",
       "publishedAt": "2026-09-24T05:58:00.000Z",
-      "upvoterIds": ["regular-ledger", "regular-shield"],
+      "upvoterIds": [
+        "regular-ledger",
+        "regular-shield"
+      ],
       "awards": []
     },
     {
@@ -13894,7 +14148,10 @@
       "parentId": "ch20-storm-c09",
       "body": "gaelor patch notes: diplomacy feature still in closed beta. somehow this is the reassuring interpretation",
       "publishedAt": "2026-09-24T06:21:00.000Z",
-      "upvoterIds": ["regular-g", "regular-m"],
+      "upvoterIds": [
+        "regular-g",
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -13904,7 +14161,10 @@
       "parentId": "ch20-storm-c22",
       "body": "Ships and councils still need feeding, and somehow the kitchen will receive the final guest count after the guests have sailed. This is not a recipe; it is a threat.",
       "publishedAt": "2026-09-24T06:47:00.000Z",
-      "upvoterIds": ["regular-u", "regular-hr"],
+      "upvoterIds": [
+        "regular-u",
+        "regular-hr"
+      ],
       "awards": []
     },
     {
@@ -13914,7 +14174,9 @@
       "parentId": null,
       "body": "Chapter Companion. I used to open six tabs and still mix up who was physically there. Now I open three tabs, which is growth.",
       "publishedAt": "2026-09-24T07:08:00.000Z",
-      "upvoterIds": ["regular-student"],
+      "upvoterIds": [
+        "regular-student"
+      ],
       "awards": []
     },
     {
@@ -13924,7 +14186,9 @@
       "parentId": null,
       "body": "Search, especially when an old phrase resurfaces. It rewards memory without requiring memory to be perfect.",
       "publishedAt": "2026-09-24T07:12:00.000Z",
-      "upvoterIds": ["regular-margin-notes"],
+      "upvoterIds": [
+        "regular-margin-notes"
+      ],
       "awards": []
     },
     {
@@ -13934,7 +14198,10 @@
       "parentId": null,
       "body": "spoiler boundary saved me from learning a man had made another terrible decision twelve minutes early",
       "publishedAt": "2026-09-24T07:16:00.000Z",
-      "upvoterIds": ["regular-e", "regular-a"],
+      "upvoterIds": [
+        "regular-e",
+        "regular-a"
+      ],
       "awards": []
     },
     {
@@ -13944,7 +14211,9 @@
       "parentId": null,
       "body": "The map. Travel arguments become much more useful when everyone can see the route they are confidently underestimating.",
       "publishedAt": "2026-09-24T07:22:00.000Z",
-      "upvoterIds": ["regular-supply"],
+      "upvoterIds": [
+        "regular-supply"
+      ],
       "awards": []
     },
     {
@@ -13954,8 +14223,16 @@
       "parentId": null,
       "body": "The Great Game page changed how I read because every update makes me ask whether the game has moved one place deeper into the prophecy.",
       "publishedAt": "2026-09-24T07:29:00.000Z",
-      "upvoterIds": ["regular-it", "regular-m"],
-      "awards": [{"fromUserId":"regular-student","amount":1}]
+      "upvoterIds": [
+        "regular-it",
+        "regular-m"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-student",
+          "amount": 1
+        }
+      ]
     },
     {
       "id": "feature-reading-c06",
@@ -13964,7 +14241,9 @@
       "parentId": null,
       "body": "Dragon Appearances. It separates being discussed, being represented in art and actually entering the scene, which prevents half the edit captions from becoming evidence.",
       "publishedAt": "2026-09-24T07:36:00.000Z",
-      "upvoterIds": ["regular-l"],
+      "upvoterIds": [
+        "regular-l"
+      ],
       "awards": []
     },
     {
@@ -13974,7 +14253,9 @@
       "parentId": "feature-reading-c01",
       "body": "Three tabs is entirely respectable. I have written the character names on paper and this also works when the wireless is tired.",
       "publishedAt": "2026-09-24T07:43:00.000Z",
-      "upvoterIds": ["regular-newbie"],
+      "upvoterIds": [
+        "regular-newbie"
+      ],
       "awards": []
     },
     {
@@ -13984,7 +14265,10 @@
       "parentId": null,
       "body": "Relationships. Not because a line tells me what to think, but because it makes the women around the princes harder to flatten into whichever romance argument is loudest.",
       "publishedAt": "2026-09-24T07:51:00.000Z",
-      "upvoterIds": ["regular-feminist", "regular-naella"],
+      "upvoterIds": [
+        "regular-feminist",
+        "regular-naella"
+      ],
       "awards": []
     },
     {
@@ -13994,7 +14278,9 @@
       "parentId": null,
       "body": "Kitchen night shift. I know the hours are impossible, but at least knives, onions and inventory obey physical laws. Princes do not.",
       "publishedAt": "2026-09-24T07:20:00.000Z",
-      "upvoterIds": ["regular-u"],
+      "upvoterIds": [
+        "regular-u"
+      ],
       "awards": []
     },
     {
@@ -14004,7 +14290,10 @@
       "parentId": null,
       "body": "Council minutes. I will record every unfinished Cordin sentence as an open action item until the institution collapses under its own backlog.",
       "publishedAt": "2026-09-24T07:25:00.000Z",
-      "upvoterIds": ["regular-hr", "regular-m"],
+      "upvoterIds": [
+        "regular-hr",
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -14014,7 +14303,10 @@
       "parentId": null,
       "body": "Royal sibling help desk is a trap. Every ticket is marked urgent, nobody supplies logs, and the users can deploy dragons.",
       "publishedAt": "2026-09-24T07:33:00.000Z",
-      "upvoterIds": ["regular-m", "regular-hr"],
+      "upvoterIds": [
+        "regular-m",
+        "regular-hr"
+      ],
       "awards": []
     },
     {
@@ -14024,7 +14316,9 @@
       "parentId": null,
       "body": "Dragon-feed logistics, provided the job includes authority to say no when someone proposes adding another dragon without adding another supply chain.",
       "publishedAt": "2026-09-24T07:40:00.000Z",
-      "upvoterIds": ["regular-supply"],
+      "upvoterIds": [
+        "regular-supply"
+      ],
       "awards": []
     },
     {
@@ -14034,7 +14328,9 @@
       "parentId": null,
       "body": "toy harbour zoning. zero commute. infinite aura permits",
       "publishedAt": "2026-09-24T07:49:00.000Z",
-      "upvoterIds": ["regular-m"],
+      "upvoterIds": [
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -14044,8 +14340,16 @@
       "parentId": "realm-job-c05",
       "body": "You need a boat first. And I say where it goes.",
       "publishedAt": "2026-09-24T07:55:00.000Z",
-      "upvoterIds": ["regular-a", "regular-j"],
-      "awards": [{"fromUserId":"regular-m","amount":3}]
+      "upvoterIds": [
+        "regular-a",
+        "regular-j"
+      ],
+      "awards": [
+        {
+          "fromUserId": "regular-m",
+          "amount": 3
+        }
+      ]
     },
     {
       "id": "realm-job-c07",
@@ -14054,7 +14358,9 @@
       "parentId": "realm-job-c01",
       "body": "Kitchen Workers' Union accepts your application. First demand: nobody loses sleep because a royal child discovered a new pie quantity.",
       "publishedAt": "2026-09-24T08:03:00.000Z",
-      "upvoterIds": ["regular-food"],
+      "upvoterIds": [
+        "regular-food"
+      ],
       "awards": []
     },
     {
@@ -14064,7 +14370,9 @@
       "parentId": null,
       "body": "Toy Harbour zoning officer. This emerging infrastructure vertical offers direct executive exposure and a clear path to Chief Boat Officer.",
       "publishedAt": "2026-09-24T08:11:00.000Z",
-      "upvoterIds": ["regular-e"],
+      "upvoterIds": [
+        "regular-e"
+      ],
       "awards": []
     },
     {
@@ -14074,7 +14382,10 @@
       "parentId": null,
       "body": "Real clue: the unfamiliar maester replaced Edmyn and vanished around the same crisis. Irresponsible theory: Nymos is three smaller maesters sharing one robe.",
       "publishedAt": "2026-09-24T07:34:00.000Z",
-      "upvoterIds": ["regular-m", "regular-wild-take"],
+      "upvoterIds": [
+        "regular-m",
+        "regular-wild-take"
+      ],
       "awards": []
     },
     {
@@ -14084,7 +14395,9 @@
       "parentId": "unsolved-board-c01",
       "body": "The first sentence is supported. The second has been placed in a locked drawer for public safety.",
       "publishedAt": "2026-09-24T07:39:00.000Z",
-      "upvoterIds": ["regular-archive"],
+      "upvoterIds": [
+        "regular-archive"
+      ],
       "awards": []
     },
     {
@@ -14094,7 +14407,10 @@
       "parentId": null,
       "body": "Real clue: both Jace and Saera independently recognize something in the white dragon. Irresponsible theory: the dragon recognizes that this family needs supervision.",
       "publishedAt": "2026-09-24T07:47:00.000Z",
-      "upvoterIds": ["regular-room-middle", "regular-m"],
+      "upvoterIds": [
+        "regular-room-middle",
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -14104,7 +14420,9 @@
       "parentId": null,
       "body": "Real clue: the Dragonstone shape is a distant report, not a confirmed identification. Irresponsible theory: every island now gets one ominous silhouette by statute.",
       "publishedAt": "2026-09-24T07:54:00.000Z",
-      "upvoterIds": ["regular-margin-notes"],
+      "upvoterIds": [
+        "regular-margin-notes"
+      ],
       "awards": []
     },
     {
@@ -14114,7 +14432,10 @@
       "parentId": null,
       "body": "The unresolved question I still care about is who benefited from replacing Edmyn. The newer mysteries are louder, but this one has paperwork somewhere.",
       "publishedAt": "2026-09-24T08:02:00.000Z",
-      "upvoterIds": ["regular-margin-notes", "regular-fandom-true-crime"],
+      "upvoterIds": [
+        "regular-margin-notes",
+        "regular-fandom-true-crime"
+      ],
       "awards": []
     },
     {
@@ -14124,7 +14445,10 @@
       "parentId": "unsolved-board-c05",
       "body": "WHERE IS NYMOS has survived another dragon launch",
       "publishedAt": "2026-09-24T08:09:00.000Z",
-      "upvoterIds": ["regular-d", "regular-archive"],
+      "upvoterIds": [
+        "regular-d",
+        "regular-archive"
+      ],
       "awards": []
     },
     {
@@ -14134,7 +14458,9 @@
       "parentId": "unsolved-board-c05",
       "body": "Agreed. Missing people should not become set dressing for a more spectacular theory. The replacement and disappearance are the cleanest human questions we have.",
       "publishedAt": "2026-09-24T08:16:00.000Z",
-      "upvoterIds": ["regular-margin-notes"],
+      "upvoterIds": [
+        "regular-margin-notes"
+      ],
       "awards": []
     },
     {
@@ -14144,7 +14470,10 @@
       "parentId": null,
       "body": "v20.0: diplomacy remains unavailable; overseas mission compatibility added; PR department now displays a persistent low-battery warning.",
       "publishedAt": "2026-09-24T07:46:00.000Z",
-      "upvoterIds": ["regular-anti", "regular-m"],
+      "upvoterIds": [
+        "regular-anti",
+        "regular-m"
+      ],
       "awards": []
     },
     {
@@ -14154,7 +14483,9 @@
       "parentId": "patch-notes-c01",
       "body": "gaelor. too easy. the low-battery warning has been on since oldtown",
       "publishedAt": "2026-09-24T07:50:00.000Z",
-      "upvoterIds": ["regular-g"],
+      "upvoterIds": [
+        "regular-g"
+      ],
       "awards": []
     },
     {
@@ -14164,7 +14495,10 @@
       "parentId": null,
       "body": "Believes younger sisters by default. Receipts draw speed increased. Risk assessment still listed as optional downloadable content.",
       "publishedAt": "2026-09-24T07:57:00.000Z",
-      "upvoterIds": ["regular-lorenah", "regular-s"],
+      "upvoterIds": [
+        "regular-lorenah",
+        "regular-s"
+      ],
       "awards": []
     },
     {
@@ -14174,7 +14508,9 @@
       "parentId": "patch-notes-c03",
       "body": "Jace. Please install the risk assessment before the next flight.",
       "publishedAt": "2026-09-24T08:04:00.000Z",
-      "upvoterIds": ["regular-j"],
+      "upvoterIds": [
+        "regular-j"
+      ],
       "awards": []
     },
     {
@@ -14184,7 +14520,10 @@
       "parentId": null,
       "body": "Quiet mode retained. Loyalty stat unchanged. Has accepted one impossible travel quest and still refuses to publish the feelings menu.",
       "publishedAt": "2026-09-24T08:12:00.000Z",
-      "upvoterIds": ["regular-j", "regular-music"],
+      "upvoterIds": [
+        "regular-j",
+        "regular-music"
+      ],
       "awards": []
     },
     {
@@ -14194,7 +14533,9 @@
       "parentId": "patch-notes-c05",
       "body": "Alester, and the feelings menu is absolutely hidden behind an unlabelled keyboard shortcut.",
       "publishedAt": "2026-09-24T08:19:00.000Z",
-      "upvoterIds": ["regular-s"],
+      "upvoterIds": [
+        "regular-s"
+      ],
       "awards": []
     },
     {
@@ -14204,7 +14545,10 @@
       "parentId": null,
       "body": "Family meeting permissions expanded. Listening functionality unchanged. Foreign assassination tasks can now be assigned without completing the succession form.",
       "publishedAt": "2026-09-24T08:27:00.000Z",
-      "upvoterIds": ["regular-legal", "regular-it"],
+      "upvoterIds": [
+        "regular-legal",
+        "regular-it"
+      ],
       "awards": []
     },
     {
@@ -14214,7 +14558,9 @@
       "parentId": "patch-notes-c07",
       "body": "Baelenys. Objection to every part of the deployment process.",
       "publishedAt": "2026-09-24T08:34:00.000Z",
-      "upvoterIds": ["regular-hr"],
+      "upvoterIds": [
+        "regular-hr"
+      ],
       "awards": []
     },
     {
@@ -14224,7 +14570,10 @@
       "parentId": null,
       "body": "Updating my ranking after Chapter XX: royal sibling help desk has overtaken the kitchens. The kitchens at least agree that food exists.",
       "publishedAt": "2026-09-24T08:41:00.000Z",
-      "upvoterIds": ["regular-food", "regular-it"],
+      "upvoterIds": [
+        "regular-food",
+        "regular-it"
+      ],
       "awards": []
     },
     {
@@ -14234,7 +14583,9 @@
       "parentId": null,
       "body": "To the person who said 'one drink before Dorne' and then began planning a royal expedition: I respect the ambition and fear the itinerary.",
       "publishedAt": "2026-09-24T08:49:00.000Z",
-      "upvoterIds": ["regular-divorce-court"],
+      "upvoterIds": [
+        "regular-divorce-court"
+      ],
       "awards": []
     },
     {
@@ -14244,7 +14595,10 @@
       "parentId": null,
       "body": "A new dragon has not made the missing-maester question less important. It has only made it easier for everyone to stop asking.",
       "publishedAt": "2026-09-24T08:58:00.000Z",
-      "upvoterIds": ["regular-margin-notes", "regular-archive"],
+      "upvoterIds": [
+        "regular-margin-notes",
+        "regular-archive"
+      ],
       "awards": []
     },
     {
@@ -14254,7 +14608,9 @@
       "parentId": null,
       "body": "Chapter XX makes the earlier crowd scene look even more like an institutional habit: power creates the interpretation, then the public is asked to remember that interpretation as truth.",
       "publishedAt": "2026-09-24T09:06:00.000Z",
-      "upvoterIds": ["regular-grad"],
+      "upvoterIds": [
+        "regular-grad"
+      ],
       "awards": []
     },
     {
@@ -14264,7 +14620,9 @@
       "parentId": "ch20-storm-c10",
       "body": "Meanwhile everyone in the city gets another afternoon of looking upward and deciding whether to close the shop. Royal policy arrives as weather now.",
       "publishedAt": "2026-09-24T12:17:11.000Z",
-      "upvoterIds": ["regular-u"],
+      "upvoterIds": [
+        "regular-u"
+      ],
       "awards": []
     },
     {
@@ -14274,7 +14632,9 @@
       "parentId": "ch20-storm-c03",
       "body": "Believing your little sister is good. Taking her into a storm near an unknown dragon is not progressive overload, bro. That is skipping the whole program.",
       "publishedAt": "2026-09-24T13:43:27.000Z",
-      "upvoterIds": ["regular-lorenah"],
+      "upvoterIds": [
+        "regular-lorenah"
+      ],
       "awards": []
     },
     {
@@ -14284,7 +14644,9 @@
       "parentId": "ch20-storm-c05",
       "body": "A child hears the adults weaponize family and then behaves accordingly. The costumes changed; the lesson did not.",
       "publishedAt": "2026-09-24T14:26:39.000Z",
-      "upvoterIds": ["regular-feminist"],
+      "upvoterIds": [
+        "regular-feminist"
+      ],
       "awards": []
     },
     {
@@ -14294,7 +14656,9 @@
       "parentId": "ch20-storm-c28",
       "body": "A voyage without agreed command or stores is not a mission. It is several important men boarding the same future argument.",
       "publishedAt": "2026-09-24T15:08:52.000Z",
-      "upvoterIds": ["regular-supply"],
+      "upvoterIds": [
+        "regular-supply"
+      ],
       "awards": []
     },
     {
@@ -14304,7 +14668,9 @@
       "parentId": "ch20-storm-c01",
       "body": "Capital discovers one pale shape in bad weather and schedules a dynasty crisis. Up here we call that visibility.",
       "publishedAt": "2026-09-24T16:34:18.000Z",
-      "upvoterIds": ["regular-e"],
+      "upvoterIds": [
+        "regular-e"
+      ],
       "awards": []
     },
     {
@@ -14314,7 +14680,9 @@
       "parentId": "ch20-storm-c04",
       "body": "Key leadership lesson: when succession planning and international operations share one meeting, leave with neither role clarity nor psychological safety.",
       "publishedAt": "2026-09-24T17:12:44.000Z",
-      "upvoterIds": ["regular-hr"],
+      "upvoterIds": [
+        "regular-hr"
+      ],
       "awards": []
     },
     {
@@ -14324,7 +14692,9 @@
       "parentId": "ch20-storm-c20",
       "body": "The storm sequence feels loud even on the page, but the held recognition is what stayed with me. Nobody says the name the scene is inviting us to think.",
       "publishedAt": "2026-09-24T18:51:06.000Z",
-      "upvoterIds": ["regular-render"],
+      "upvoterIds": [
+        "regular-render"
+      ],
       "awards": []
     },
     {
@@ -14334,7 +14704,9 @@
       "parentId": "ch20-storm-c07",
       "body": "I made a list called plans that have not happened and it became longer than my assignment, which has also not happened.",
       "publishedAt": "2026-09-24T19:29:33.000Z",
-      "upvoterIds": ["regular-grad"],
+      "upvoterIds": [
+        "regular-grad"
+      ],
       "awards": []
     },
     {
@@ -14344,7 +14716,9 @@
       "parentId": "ch20-storm-c06",
       "body": "The quiet part where Leo asks for time hurt more than the shouting. It sounded like he wanted to stay, but could not pretend staying fixed anything.",
       "publishedAt": "2026-09-24T20:14:57.000Z",
-      "upvoterIds": ["regular-club"],
+      "upvoterIds": [
+        "regular-club"
+      ],
       "awards": []
     },
     {
@@ -14354,7 +14728,9 @@
       "parentId": "ch20-storm-c09",
       "body": "Being considered for a mission is not trust, agreed. It is also not absolution. Your department may keep the distinction and the low battery.",
       "publishedAt": "2026-09-24T21:37:21.000Z",
-      "upvoterIds": ["regular-g"],
+      "upvoterIds": [
+        "regular-g"
+      ],
       "awards": []
     },
     {
@@ -14364,7 +14740,9 @@
       "parentId": "ch20-storm-c01",
       "body": "White dragon in a thundercloud is immaculate theatre. The fact that I love the image does not make approaching it with a seven-year-old sensible.",
       "publishedAt": "2026-09-24T22:03:48.000Z",
-      "upvoterIds": ["regular-gym"],
+      "upvoterIds": [
+        "regular-gym"
+      ],
       "awards": []
     },
     {
@@ -14374,7 +14752,9 @@
       "parentId": "ch20-storm-c05",
       "body": "every adult gives the child one more reason to expect murder and then looks surprised when she expects murder. cool family system",
       "publishedAt": "2026-09-24T23:46:12.000Z",
-      "upvoterIds": ["regular-anti"],
+      "upvoterIds": [
+        "regular-anti"
+      ],
       "awards": []
     },
     {
@@ -14384,7 +14764,9 @@
       "parentId": "ch20-storm-c16",
       "body": "I typed a defence of Visenor, reread the phrase 'three concealed quest flags,' and deleted it. Progress can be real while the concealment remains the problem.",
       "publishedAt": "2026-09-25T00:22:36.000Z",
-      "upvoterIds": ["regular-v"],
+      "upvoterIds": [
+        "regular-v"
+      ],
       "awards": []
     },
     {
@@ -14394,7 +14776,9 @@
       "parentId": "ch20-storm-c04",
       "body": "I can understand why Baelenys thinks speed matters and still think the order is plainly wrong. No olive-sized qualification available.",
       "publishedAt": "2026-09-25T01:09:59.000Z",
-      "upvoterIds": ["regular-legal"],
+      "upvoterIds": [
+        "regular-legal"
+      ],
       "awards": []
     },
     {
@@ -14404,7 +14788,9 @@
       "parentId": "ch20-storm-c17",
       "body": "I came for the dragon and somehow my question is now whether Leo and Visenor are friends again. Are they? Actually do not answer, I think that is the point.",
       "publishedAt": "2026-09-25T02:41:24.000Z",
-      "upvoterIds": ["regular-club"],
+      "upvoterIds": [
+        "regular-club"
+      ],
       "awards": []
     },
     {
@@ -14414,7 +14800,9 @@
       "parentId": "ch20-storm-c06",
       "body": "Leo is right to ask for time. Affection does not oblige a person to restore trust before the truth has even been fully offered.",
       "publishedAt": "2026-09-25T03:18:42.000Z",
-      "upvoterIds": ["regular-sept"],
+      "upvoterIds": [
+        "regular-sept"
+      ],
       "awards": []
     },
     {
@@ -14424,7 +14812,9 @@
       "parentId": "ch20-storm-c24",
       "body": "Yes. A frightened child can be brave and still have been failed by the people who taught her what danger means.",
       "publishedAt": "2026-09-25T04:52:08.000Z",
-      "upvoterIds": ["regular-club"],
+      "upvoterIds": [
+        "regular-club"
+      ],
       "awards": []
     },
     {
@@ -14434,7 +14824,9 @@
       "parentId": "ch20-storm-c22",
       "body": "Could one council meeting end with named responsibilities, a written plan and somebody empowered to object? I remain committed to impossible institutional fantasies.",
       "publishedAt": "2026-09-25T05:27:31.000Z",
-      "upvoterIds": ["regular-ledger"],
+      "upvoterIds": [
+        "regular-ledger"
+      ],
       "awards": []
     },
     {
@@ -14444,7 +14836,9 @@
       "parentId": "ch20-storm-c18",
       "body": "Weather boss aura is not a programme. I will nevertheless attend the meeting if there is soup.",
       "publishedAt": "2026-09-25T06:44:16.000Z",
-      "upvoterIds": ["regular-a"],
+      "upvoterIds": [
+        "regular-a"
+      ],
       "awards": []
     },
     {
@@ -14454,7 +14848,9 @@
       "parentId": "ch20-storm-c28",
       "body": "Private provisioning would solve at least two of these problems, provided the crown pays before departure and does not requisition my desk again.",
       "publishedAt": "2026-09-25T07:16:53.000Z",
-      "upvoterIds": ["regular-ledger"],
+      "upvoterIds": [
+        "regular-ledger"
+      ],
       "awards": []
     },
     {
@@ -14464,7 +14860,9 @@
       "parentId": "feature-reading-c04",
       "body": "The map turned my usual wandering into useful wandering. I now lose twenty minutes with geographic context.",
       "publishedAt": "2026-09-25T08:31:14.000Z",
-      "upvoterIds": ["regular-horse"],
+      "upvoterIds": [
+        "regular-horse"
+      ],
       "awards": []
     },
     {
@@ -14474,7 +14872,9 @@
       "parentId": "realm-job-c06",
       "body": "Toy Harbour zoning, but I am bringing plants for the office and declining all dragon-adjacent overtime.",
       "publishedAt": "2026-09-25T09:05:38.000Z",
-      "upvoterIds": ["regular-food"],
+      "upvoterIds": [
+        "regular-food"
+      ],
       "awards": []
     },
     {
@@ -14484,7 +14884,9 @@
       "parentId": "unsolved-board-c03",
       "body": "Real clue: recognition repeats across two observers. Irresponsible theory: the dragon is conducting its own family-tree audit and finds ours inadequate.",
       "publishedAt": "2026-09-25T10:48:25.000Z",
-      "upvoterIds": ["regular-wild-take"],
+      "upvoterIds": [
+        "regular-wild-take"
+      ],
       "awards": []
     },
     {
@@ -14494,7 +14896,2506 @@
       "parentId": null,
       "body": "Autonomy remains on high. Shoes removed again. Household members will follow into hazardous weather unless manually redirected.",
       "publishedAt": "2026-09-25T11:23:47.000Z",
-      "upvoterIds": ["regular-m", "regular-a"],
+      "upvoterIds": [
+        "regular-m",
+        "regular-a"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c01",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "The Cloudgazer necklace scene. It is gentle without pretending the court outside has stopped being dangerous.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-it"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c02",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-k",
+      "parentId": null,
+      "body": "Any scene where somebody eats before making a political decision. My standards for governance are now soup-based.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-gym"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c03",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-l",
+      "parentId": null,
+      "body": "The quieter sibling conversations, even when they hurt. The pauses feel as important as the declarations.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-club"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c04",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-m",
+      "parentId": "community-comfort-reread-c01",
+      "body": "I reread the tourney entrances. Everyone still believes presentation can control what follows.",
+      "publishedAt": "2026-09-28T05:16:13.000Z",
+      "upvoterIds": [
+        "regular-grad"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c05",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-e",
+      "parentId": "community-comfort-reread-c02",
+      "body": "Vhaemys asking a question adults cannot answer. Funny on the surface, devastating two paragraphs later.",
+      "publishedAt": "2026-09-25T23:44:49.000Z",
+      "upvoterIds": [
+        "regular-lorenah"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c06",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-s",
+      "parentId": "community-comfort-reread-c03",
+      "body": "Map open, chapter beside it, absolutely no intention of advancing the plot. That is my comfort ritual.",
+      "publishedAt": "2026-09-26T11:46:41.000Z",
+      "upvoterIds": [
+        "regular-shield"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c07",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-v",
+      "parentId": "community-comfort-reread-c01",
+      "body": "Lorenah holding her ground politely. Courtesy used as armour works on me every time.",
+      "publishedAt": "2026-09-26T23:44:33.000Z",
+      "upvoterIds": [
+        "regular-supply"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c08",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-b",
+      "parentId": "community-comfort-reread-c02",
+      "body": "The kitchen material, because workers quietly keeping a palace alive feels more real than another crown speech.",
+      "publishedAt": "2026-09-27T11:46:25.000Z",
+      "upvoterIds": [
+        "regular-pirate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c09",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-a",
+      "parentId": "community-comfort-reread-c03",
+      "body": "I return to scenes I disliked first. Finding one good sentence in them feels like making peace without surrendering the critique.",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "upvoterIds": [
+        "regular-north"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-comfort-reread-c10",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-j",
+      "parentId": "community-comfort-reread-c01",
+      "body": "Honestly, the comments after a brutal chapter. Shared disbelief is part of the reread now.",
+      "publishedAt": "2026-09-28T11:46:09.000Z",
+      "upvoterIds": [
+        "regular-career"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c01",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-horse",
+      "parentId": null,
+      "body": "Someone says this will be brief. First overall pick, no hesitation.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-student"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c02",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-ecology",
+      "parentId": null,
+      "body": "The map has knives holding down the corners. That meeting is becoming a campaign.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-food"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c03",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-ledger",
+      "parentId": null,
+      "body": "A chair is empty and nobody agrees why.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-lurk"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c04",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-odds",
+      "parentId": "community-council-red-flags-c01",
+      "body": "The person carrying the actual ledger is asked to wait outside.",
+      "publishedAt": "2026-09-25T18:47:17.000Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c05",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-sept",
+      "parentId": "community-council-red-flags-c02",
+      "body": "Cordin inhales to speak and three princes turn toward him. Historical danger signal.",
+      "publishedAt": "2026-09-26T00:19:13.000Z",
+      "upvoterIds": [
+        "regular-naella"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c06",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-local",
+      "parentId": "community-council-red-flags-c03",
+      "body": "There is wine but no food. They planned for courage, not endurance.",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "upvoterIds": [
+        "regular-anti"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c07",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-it",
+      "parentId": "community-council-red-flags-c01",
+      "body": "Someone calls a family dispute a matter of state before the agenda is read.",
+      "publishedAt": "2026-09-27T00:19:50.000Z",
+      "upvoterIds": [
+        "regular-aesthetic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c08",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-gym",
+      "parentId": "community-council-red-flags-c02",
+      "body": "The word merely appears in the opening proposal. Nothing merely happens here.",
+      "publishedAt": "2026-09-27T12:21:42.000Z",
+      "upvoterIds": [
+        "regular-nihilist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c09",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-club",
+      "parentId": "community-council-red-flags-c03",
+      "body": "Jace arrives with documents. That may be good governance, but somebody is about to be quoted against themselves.",
+      "publishedAt": "2026-09-28T00:19:34.000Z",
+      "upvoterIds": [
+        "regular-reformed"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-red-flags-c10",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-grad",
+      "parentId": "community-council-red-flags-c01",
+      "body": "The minutes begin with informal discussion. Congratulations, there will be no usable minutes.",
+      "publishedAt": "2026-09-28T12:21:26.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c01",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-shield",
+      "parentId": null,
+      "body": "Cloudbite. Sounds elegant until it steals an entire sheep.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-traditional"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c02",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-supply",
+      "parentId": null,
+      "body": "Milkglass, which is beautiful and also the name of a candle shop.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-faith"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c03",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-pirate",
+      "parentId": null,
+      "body": "Stormreceipt. Jace would approve; the dragon would not.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-reform"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c04",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-north",
+      "parentId": "community-dragon-name-bracket-c01",
+      "body": "Palescale is too sensible, so I know the bracket will eliminate it immediately.",
+      "publishedAt": "2026-09-25T19:22:34.000Z",
+      "upvoterIds": [
+        "regular-sect"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c05",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-career",
+      "parentId": "community-dragon-name-bracket-c02",
+      "body": "Winter Static. Yes, that sounds like a band. I stand by it.",
+      "publishedAt": "2026-09-26T01:52:30.000Z",
+      "upvoterIds": [
+        "regular-market"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c06",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-music",
+      "parentId": "community-dragon-name-bracket-c03",
+      "body": "Meringue. Fear arrives in many forms and some of them are dessert.",
+      "publishedAt": "2026-09-28T07:24:47.000Z",
+      "upvoterIds": [
+        "regular-selective"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c07",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-student",
+      "parentId": "community-dragon-name-bracket-c01",
+      "body": "Ghostwing, submitted by the part of me that was twelve and correct.",
+      "publishedAt": "2026-09-27T01:52:14.000Z",
+      "upvoterIds": [
+        "regular-archive"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c08",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-food",
+      "parentId": "community-dragon-name-bracket-c02",
+      "body": "Salt Comet for a sea dragon nobody has proved exists.",
+      "publishedAt": "2026-09-27T13:54:06.000Z",
+      "upvoterIds": [
+        "regular-gate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c09",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-lurk",
+      "parentId": "community-dragon-name-bracket-c03",
+      "body": "Ashmallow. I accept the lifetime ban from serious dragon scholarship.",
+      "publishedAt": "2026-09-28T01:52:51.000Z",
+      "upvoterIds": [
+        "regular-newbie"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-name-bracket-c10",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-legal",
+      "parentId": "community-dragon-name-bracket-c01",
+      "body": "Blank Page, because every observer would project a different story onto it.",
+      "publishedAt": "2026-09-28T13:54:43.000Z",
+      "upvoterIds": [
+        "regular-fic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c01",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-anti",
+      "parentId": null,
+      "body": "Gaelor. Hour one: route disagreement. Hour two: the route has become a border incident.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-unship"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c02",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-aesthetic",
+      "parentId": null,
+      "body": "Vhaemys, because I would lose her at a berry bush and spend the remaining days apologising to history.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-queer"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c03",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-nihilist",
+      "parentId": null,
+      "body": "Cordin. Lovely man, but every direction would be interrupted before the landmark.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-feminist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c04",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-reformed",
+      "parentId": "community-worst-travel-companion-c01",
+      "body": "Visenor would say he packed lightly and reveal six sealed problems at the first inn.",
+      "publishedAt": "2026-09-25T20:56:51.000Z",
+      "upvoterIds": [
+        "regular-scale"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c05",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-middle",
+      "parentId": "community-worst-travel-companion-c02",
+      "body": "Jace would be efficient, which means my unscheduled snack stops become evidence of moral failure.",
+      "publishedAt": "2026-09-26T02:27:47.000Z",
+      "upvoterIds": [
+        "regular-sport"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c06",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-apolitical",
+      "parentId": "community-worst-travel-companion-c03",
+      "body": "Alester. The silence would be fine; the number of armed strangers recognising him would not.",
+      "publishedAt": "2026-09-26T14:29:39.000Z",
+      "upvoterIds": [
+        "regular-insta"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c07",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-traditional",
+      "parentId": "community-worst-travel-companion-c01",
+      "body": "Lucas, because Vhaemys would somehow be in the cart despite not being on the passenger list.",
+      "publishedAt": "2026-09-27T02:27:31.000Z",
+      "upvoterIds": [
+        "regular-wellness"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c08",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-faith",
+      "parentId": "community-worst-travel-companion-c02",
+      "body": "Baelenys. We would arrive early at the wrong diplomatic crisis.",
+      "publishedAt": "2026-09-27T14:29:23.000Z",
+      "upvoterIds": [
+        "regular-chain"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c09",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-reform",
+      "parentId": "community-worst-travel-companion-c03",
+      "body": "Saathos. Not because he is difficult, but because danger appears to have his forwarding address.",
+      "publishedAt": "2026-09-28T02:27:15.000Z",
+      "upvoterIds": [
+        "regular-craft"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-worst-travel-companion-c10",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-sect",
+      "parentId": "community-worst-travel-companion-c01",
+      "body": "I choose the unidentified dragon. The itinerary is short and the insurance claim is easy.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c01",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-selective",
+      "parentId": null,
+      "body": "The map is more useful after a chapter than during it. Mid-scene checking breaks the tension for me.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-story"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c02",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-archive",
+      "parentId": null,
+      "body": "I prefer restrained dragon appearances. Scarcity makes every silhouette feel consequential.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-brand"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c03",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-gate",
+      "parentId": null,
+      "body": "Some council scenes need to be longer, not shorter. Confusion is often the point.",
+      "publishedAt": "2026-09-25T16:15:00.000Z",
+      "upvoterIds": [
+        "regular-literal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c04",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-newbie",
+      "parentId": "community-unpopular-opinion-amnesty-c01",
+      "body": "A sympathetic motive can make a bad decision more interesting without making it less bad.",
+      "publishedAt": "2026-09-25T21:31:15.000Z",
+      "upvoterIds": [
+        "regular-quiet"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c05",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-fic",
+      "parentId": "community-unpopular-opinion-amnesty-c02",
+      "body": "The funniest account here is the one that posts once a month and refuses to explain itself.",
+      "publishedAt": "2026-09-26T03:06:11.000Z",
+      "upvoterIds": [
+        "regular-great"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c06",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-ship",
+      "parentId": "community-unpopular-opinion-amnesty-c03",
+      "body": "I do not need every mystery solved. I do need the story to remember which questions it asked.",
+      "publishedAt": "2026-09-26T15:07:03.000Z",
+      "upvoterIds": [
+        "regular-doomer"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c07",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-unship",
+      "parentId": "community-unpopular-opinion-amnesty-c01",
+      "body": "The family tree is a horror interface disguised as a reference tool.",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-grammar"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c08",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-queer",
+      "parentId": "community-unpopular-opinion-amnesty-c02",
+      "body": "Jace is most compelling when he is correct and still unpleasant about it.",
+      "publishedAt": "2026-09-27T15:07:40.000Z",
+      "upvoterIds": [
+        "regular-poll"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c09",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-feminist",
+      "parentId": "community-unpopular-opinion-amnesty-c03",
+      "body": "Vhaemys can be adorable and exhausting in the same scene. That is why the scenes work.",
+      "publishedAt": "2026-09-28T03:06:32.000Z",
+      "upvoterIds": [
+        "regular-bilingual"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-unpopular-opinion-amnesty-c10",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-scale",
+      "parentId": "community-unpopular-opinion-amnesty-c01",
+      "body": "Theories are better when they risk being boringly wrong instead of secretly rewriting the whole chronicle.",
+      "publishedAt": "2026-09-28T15:07:24.000Z",
+      "upvoterIds": [
+        "regular-prep"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c01",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-insta",
+      "parentId": null,
+      "body": "I picked King’s Landing to Oldtown and immediately spent my budget avoiding every army-shaped inconvenience.",
+      "publishedAt": "2026-09-25T18:47:17.000Z",
+      "upvoterIds": [
+        "regular-cosplay"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c02",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-wellness",
+      "parentId": null,
+      "body": "The safe route changes depending on whose banners are visible, which is why this is secretly a politics thread.",
+      "publishedAt": "2026-09-25T18:47:17.000Z",
+      "upvoterIds": [
+        "regular-cooked"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c03",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Can I travel by sea if I admit in advance that I will regret it?",
+      "publishedAt": "2026-09-25T20:56:51.000Z",
+      "upvoterIds": [
+        "regular-fridgelore"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c04",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-craft",
+      "parentId": "community-map-route-challenge-c01",
+      "body": "Horse changes matter more than heroic speeches. Finally, a game for me.",
+      "publishedAt": "2026-09-25T23:44:49.000Z",
+      "upvoterIds": [
+        "regular-margin-notes"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c05",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-elder",
+      "parentId": "community-map-route-challenge-c02",
+      "body": "My route has three inns and no castles. This is not cowardice; this is logistics.",
+      "publishedAt": "2026-09-26T03:06:11.000Z",
+      "upvoterIds": [
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c06",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-divorced",
+      "parentId": "community-map-route-challenge-c03",
+      "body": "The map makes distance feel honest. Half the plans in council scenes need a calendar beside them.",
+      "publishedAt": "2026-09-26T08:58:43.000Z",
+      "upvoterIds": [
+        "regular-room-defender"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c07",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-story",
+      "parentId": "community-map-route-challenge-c01",
+      "body": "I chose Dorne and packed water before intrigue. Already outperforming several nobles.",
+      "publishedAt": "2026-09-26T14:29:39.000Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c08",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-fandom-tolkien",
+      "parentId": "community-map-route-challenge-c02",
+      "body": "Every river crossing becomes a paragraph titled consequences.",
+      "publishedAt": "2026-09-26T21:31:52.000Z",
+      "upvoterIds": [
+        "regular-reply-guy"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c09",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-literal",
+      "parentId": "community-map-route-challenge-c03",
+      "body": "I would pay a local guide and then actually listen, a revolutionary strategy.",
+      "publishedAt": "2026-09-28T10:11:45.000Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-map-route-challenge-c10",
+      "entryId": "community-map-route-challenge",
+      "authorId": "regular-quiet",
+      "parentId": "community-map-route-challenge-c01",
+      "body": "Winner should be the route with the fewest accidental succession crises.",
+      "publishedAt": "2026-09-25T20:56:51.000Z",
+      "upvoterIds": [
+        "regular-k"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c01",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-doomer",
+      "parentId": null,
+      "body": "Put the workers nearest the door so a prince cannot trap them in another emergency shift.",
+      "publishedAt": "2026-09-25T22:08:32.000Z",
+      "upvoterIds": [
+        "regular-m"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c02",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-grammar",
+      "parentId": null,
+      "body": "I want the quiet observers together. They have been collecting better information than the loud people.",
+      "publishedAt": "2026-09-25T22:08:32.000Z",
+      "upvoterIds": [
+        "regular-e"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c03",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-poll",
+      "parentId": null,
+      "body": "Saathos gets the chair with a clear exit. This is kindness and practical planning.",
+      "publishedAt": "2026-09-26T00:19:13.000Z",
+      "upvoterIds": [
+        "regular-s"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c04",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-bilingual",
+      "parentId": "community-side-character-supper-c01",
+      "body": "Cordin speaks first, but only if the table signs a non-interruption pact.",
+      "publishedAt": "2026-09-26T03:06:11.000Z",
+      "upvoterIds": [
+        "regular-v"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c05",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-prep",
+      "parentId": "community-side-character-supper-c02",
+      "body": "The person taking the bread is correct. Food left near nobility becomes policy somehow.",
+      "publishedAt": "2026-09-26T07:24:26.000Z",
+      "upvoterIds": [
+        "regular-b"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c06",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-optimist",
+      "parentId": "community-side-character-supper-c03",
+      "body": "No monarchs, no heirs, no swords on the table. Watch the conversation become useful.",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "upvoterIds": [
+        "regular-a"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c07",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-cosplay",
+      "parentId": "community-side-character-supper-c01",
+      "body": "I would seat one archivist beside one sailor and abandon the planned topic completely.",
+      "publishedAt": "2026-09-26T18:47:01.000Z",
+      "upvoterIds": [
+        "regular-j"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c08",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-cooked",
+      "parentId": "community-side-character-supper-c02",
+      "body": "Somebody invite the kitchen staff as guests, not staff. They have earned one hot meal seated down.",
+      "publishedAt": "2026-09-27T01:52:14.000Z",
+      "upvoterIds": [
+        "regular-render"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c09",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-fridgelore",
+      "parentId": "community-side-character-supper-c03",
+      "body": "The first silence would be awkward; the second would probably be peaceful.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-horse"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-side-character-supper-c10",
+      "entryId": "community-side-character-supper",
+      "authorId": "regular-margin-notes",
+      "parentId": "community-side-character-supper-c01",
+      "body": "This thread is fan fiction for competent hospitality and I support it.",
+      "publishedAt": "2026-09-26T19:22:18.000Z",
+      "upvoterIds": [
+        "regular-ecology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c01",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-room-defender",
+      "parentId": null,
+      "body": "Nymos: replacing Edmyn is evidence of access, not evidence of employer or guilt.",
+      "publishedAt": "2026-09-27T16:42:04.000Z",
+      "upvoterIds": [
+        "regular-odds"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c02",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-room-middle",
+      "parentId": null,
+      "body": "The white dragon: repeated recognition matters, but resemblance is not identity.",
+      "publishedAt": "2026-09-26T02:27:47.000Z",
+      "upvoterIds": [
+        "regular-sept"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c03",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-reply-guy",
+      "parentId": null,
+      "body": "Missing letters deserve a board of their own. Absence can be sabotage, delay or ordinary failure.",
+      "publishedAt": "2026-09-26T04:39:28.000Z",
+      "upvoterIds": [
+        "regular-local"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c04",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-u",
+      "parentId": null,
+      "body": "I want a clean list of who knew which travel plan and when. Knowledge is not consent.",
+      "publishedAt": "2026-09-26T07:24:26.000Z",
+      "upvoterIds": [
+        "regular-it"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c05",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-k",
+      "parentId": "community-evidence-cold-cases-c02",
+      "body": "The Dragonstone silhouette is a report, not a rider bond certificate.",
+      "publishedAt": "2026-09-26T11:46:41.000Z",
+      "upvoterIds": [
+        "regular-gym"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c06",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-l",
+      "parentId": "community-evidence-cold-cases-c03",
+      "body": "Almar’s wording is suspicious. Suspicious remains one rung below explanatory.",
+      "publishedAt": "2026-09-26T16:42:20.000Z",
+      "upvoterIds": [
+        "regular-club"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c07",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-m",
+      "parentId": null,
+      "body": "Every forged document creates two cases: who wrote it and who benefited from believing it.",
+      "publishedAt": "2026-09-26T22:08:16.000Z",
+      "upvoterIds": [
+        "regular-grad"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c08",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-e",
+      "parentId": "community-evidence-cold-cases-c02",
+      "body": "We keep treating silence as agreement when several characters use silence as defence.",
+      "publishedAt": "2026-09-27T05:16:29.000Z",
+      "upvoterIds": [
+        "regular-lorenah"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c09",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-s",
+      "parentId": "community-evidence-cold-cases-c03",
+      "body": "The coldest case is institutional: who was supposed to notice any of this?",
+      "publishedAt": "2026-09-27T12:21:42.000Z",
+      "upvoterIds": [
+        "regular-shield"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-evidence-cold-cases-c10",
+      "entryId": "community-evidence-cold-cases",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "Committee ruling: three clues admitted, nine red strings confiscated.",
+      "publishedAt": "2026-09-26T04:39:28.000Z",
+      "upvoterIds": [
+        "regular-supply"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c01",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-a",
+      "parentId": null,
+      "body": "Lorenah’s jewellery works because it is personal before it becomes evidence in anybody’s theory.",
+      "publishedAt": "2026-09-26T07:24:26.000Z",
+      "upvoterIds": [
+        "regular-north"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c02",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-j",
+      "parentId": null,
+      "body": "Repeated dark fabrics make small changes in texture do more storytelling than a new costume would.",
+      "publishedAt": "2026-09-26T07:24:26.000Z",
+      "upvoterIds": [
+        "regular-career"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c03",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-render",
+      "parentId": null,
+      "body": "I appreciate when travel actually changes clothes. Dust is continuity.",
+      "publishedAt": "2026-09-26T09:34:07.000Z",
+      "upvoterIds": [
+        "regular-music"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c04",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-horse",
+      "parentId": "community-wardrobe-repeat-c01",
+      "body": "A missing accessory can be louder than a crown if the earlier scene made us notice it.",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "upvoterIds": [
+        "regular-student"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c05",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-ecology",
+      "parentId": "community-wardrobe-repeat-c02",
+      "body": "My warning label says colour theory, but my evidence is mostly feelings and screenshots.",
+      "publishedAt": "2026-09-26T16:42:20.000Z",
+      "upvoterIds": [
+        "regular-food"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c06",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-ledger",
+      "parentId": "community-wardrobe-repeat-c03",
+      "body": "Armour at a family conversation is still armour even when nobody draws a sword.",
+      "publishedAt": "2026-09-26T21:31:52.000Z",
+      "upvoterIds": [
+        "regular-lurk"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c07",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-odds",
+      "parentId": "community-wardrobe-repeat-c01",
+      "body": "Children repeating one favourite object makes the world feel lived in.",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c08",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-sept",
+      "parentId": "community-wardrobe-repeat-c02",
+      "body": "Wardrobe departments are archivists with needles. Respect the craft.",
+      "publishedAt": "2026-09-27T10:11:08.000Z",
+      "upvoterIds": [
+        "regular-naella"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c09",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-local",
+      "parentId": "community-wardrobe-repeat-c03",
+      "body": "I notice sleeves because hands keep betraying what faces conceal.",
+      "publishedAt": "2026-09-27T17:13:21.000Z",
+      "upvoterIds": [
+        "regular-anti"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wardrobe-repeat-c10",
+      "entryId": "community-wardrobe-repeat",
+      "authorId": "regular-it",
+      "parentId": "community-wardrobe-repeat-c01",
+      "body": "This is the one thread where velvet_tax has jurisdiction and I fear the ruling.",
+      "publishedAt": "2026-09-26T09:34:07.000Z",
+      "upvoterIds": [
+        "regular-aesthetic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c01",
+      "entryId": "community-group-project",
+      "authorId": "regular-club",
+      "parentId": null,
+      "body": "Jace writes it, cites it and resents everyone by page two.",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "upvoterIds": [
+        "regular-reformed"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c02",
+      "entryId": "community-group-project",
+      "authorId": "regular-grad",
+      "parentId": null,
+      "body": "Gaelor changes the project title to Conquest and deletes the risk section.",
+      "publishedAt": "2026-09-26T12:21:05.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c03",
+      "entryId": "community-group-project",
+      "authorId": "regular-lorenah",
+      "parentId": null,
+      "body": "Visenor says his part is nearly done. The file has not been shared.",
+      "publishedAt": "2026-09-26T14:29:39.000Z",
+      "upvoterIds": [
+        "regular-apolitical"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c04",
+      "entryId": "community-group-project",
+      "authorId": "regular-shield",
+      "parentId": "community-group-project-c01",
+      "body": "Lorenah fixes the formatting without announcing that she also fixed the argument.",
+      "publishedAt": "2026-09-26T17:13:37.000Z",
+      "upvoterIds": [
+        "regular-traditional"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c05",
+      "entryId": "community-group-project",
+      "authorId": "regular-supply",
+      "parentId": "community-group-project-c02",
+      "body": "Vhaemys contributes one drawing that receives the highest audience score.",
+      "publishedAt": "2026-09-26T21:31:52.000Z",
+      "upvoterIds": [
+        "regular-faith"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c06",
+      "entryId": "community-group-project",
+      "authorId": "regular-pirate",
+      "parentId": "community-group-project-c03",
+      "body": "Cordin prepared excellent notes and was muted by the meeting host.",
+      "publishedAt": "2026-09-27T02:27:31.000Z",
+      "upvoterIds": [
+        "regular-reform"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c07",
+      "entryId": "community-group-project",
+      "authorId": "regular-north",
+      "parentId": "community-group-project-c01",
+      "body": "Baelenys submits early, then discovers the assignment required collaboration.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-sect"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c08",
+      "entryId": "community-group-project",
+      "authorId": "regular-career",
+      "parentId": "community-group-project-c02",
+      "body": "Alester did the field research nobody asked how he obtained.",
+      "publishedAt": "2026-09-27T15:07:40.000Z",
+      "upvoterIds": [
+        "regular-market"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c09",
+      "entryId": "community-group-project",
+      "authorId": "regular-music",
+      "parentId": "community-group-project-c03",
+      "body": "Saathos joined the wrong group and somehow inherited all their consequences.",
+      "publishedAt": "2026-09-27T22:08:00.000Z",
+      "upvoterIds": [
+        "regular-selective"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-group-project-c10",
+      "entryId": "community-group-project",
+      "authorId": "regular-student",
+      "parentId": "community-group-project-c01",
+      "body": "The kitchen workers print the final copy. Naturally, nobody credited them.",
+      "publishedAt": "2026-09-26T14:29:39.000Z",
+      "upvoterIds": [
+        "regular-archive"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c01",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-lurk",
+      "parentId": null,
+      "body": "The castle with the best pantry and the least interesting succession claim.",
+      "publishedAt": "2026-09-26T18:47:01.000Z",
+      "upvoterIds": [
+        "regular-newbie"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c02",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-legal",
+      "parentId": null,
+      "body": "I refuse any room described as historically significant. That is where hauntings invoice you.",
+      "publishedAt": "2026-09-26T18:47:01.000Z",
+      "upvoterIds": [
+        "regular-fic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c03",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-naella",
+      "parentId": null,
+      "body": "Dorne for the climate, then immediate regret when politics notices me.",
+      "publishedAt": "2026-09-26T20:56:35.000Z",
+      "upvoterIds": [
+        "regular-ship"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c04",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-anti",
+      "parentId": "community-castle-winter-c01",
+      "body": "Give me a modest holdfast with competent roof maintenance.",
+      "publishedAt": "2026-09-27T19:22:02.000Z",
+      "upvoterIds": [
+        "regular-unship"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c05",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-aesthetic",
+      "parentId": "community-castle-winter-c02",
+      "body": "The North, provided somebody explains layering before I arrive.",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-queer"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c06",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-nihilist",
+      "parentId": "community-castle-winter-c03",
+      "body": "Oldtown for books, stairs and the illusion that archives are safer than courts.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-feminist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c07",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-reformed",
+      "parentId": "community-castle-winter-c01",
+      "body": "I chose by kitchen quality and will not be taking questions.",
+      "publishedAt": "2026-09-27T14:29:23.000Z",
+      "upvoterIds": [
+        "regular-scale"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c08",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-middle",
+      "parentId": "community-castle-winter-c02",
+      "body": "A sea view is lovely until the sea contains news.",
+      "publishedAt": "2026-09-27T21:31:36.000Z",
+      "upvoterIds": [
+        "regular-sport"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c09",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-apolitical",
+      "parentId": "community-castle-winter-c03",
+      "body": "Wherever the ravens work reliably. I need advance warning of approaching plot.",
+      "publishedAt": "2026-09-28T04:39:49.000Z",
+      "upvoterIds": [
+        "regular-insta"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-castle-winter-c10",
+      "entryId": "community-castle-winter",
+      "authorId": "regular-traditional",
+      "parentId": "community-castle-winter-c01",
+      "body": "Can I spend winter in the map interface instead? Excellent lighting, no drafts.",
+      "publishedAt": "2026-09-26T20:56:35.000Z",
+      "upvoterIds": [
+        "regular-wellness"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c01",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-reform",
+      "parentId": null,
+      "body": "Unfamiliar calm. If the prose notices birds, somebody is about to ruin the morning.",
+      "publishedAt": "2026-09-26T22:08:16.000Z",
+      "upvoterIds": [
+        "regular-craft"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c02",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-sect",
+      "parentId": null,
+      "body": "A letter being opened slowly. Paper has done more damage here than several swords.",
+      "publishedAt": "2026-09-26T22:08:16.000Z",
+      "upvoterIds": [
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c03",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-market",
+      "parentId": null,
+      "body": "A character making plans for next week. Immediate alarm.",
+      "publishedAt": "2026-09-27T00:19:50.000Z",
+      "upvoterIds": [
+        "regular-divorced"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c04",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-selective",
+      "parentId": "community-opening-dread-c01",
+      "body": "Weather described before location. The sky knows too much.",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-story"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c05",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-archive",
+      "parentId": "community-opening-dread-c02",
+      "body": "A servant carrying a message and rehearsing how to say it.",
+      "publishedAt": "2026-09-27T07:24:10.000Z",
+      "upvoterIds": [
+        "regular-brand"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c06",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-gate",
+      "parentId": "community-opening-dread-c03",
+      "body": "An unnamed body, because the chapter makes the reader perform identification under pressure.",
+      "publishedAt": "2026-09-27T12:21:42.000Z",
+      "upvoterIds": [
+        "regular-literal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c07",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-newbie",
+      "parentId": "community-opening-dread-c01",
+      "body": "Children laughing in another room. Happiness with distance around it feels fragile.",
+      "publishedAt": "2026-09-27T18:47:38.000Z",
+      "upvoterIds": [
+        "regular-quiet"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c08",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-fic",
+      "parentId": "community-opening-dread-c02",
+      "body": "A familiar place with one object moved.",
+      "publishedAt": "2026-09-28T01:52:51.000Z",
+      "upvoterIds": [
+        "regular-great"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c09",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-ship",
+      "parentId": "community-opening-dread-c03",
+      "body": "Someone waking rested. The story is clearly gathering strength.",
+      "publishedAt": "2026-09-28T08:58:11.000Z",
+      "upvoterIds": [
+        "regular-doomer"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-opening-dread-c10",
+      "entryId": "community-opening-dread",
+      "authorId": "regular-unship",
+      "parentId": "community-opening-dread-c01",
+      "body": "The phrase at last. Nothing good has ever waited politely behind it.",
+      "publishedAt": "2026-09-27T00:19:50.000Z",
+      "upvoterIds": [
+        "regular-grammar"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c01",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-feminist",
+      "parentId": null,
+      "body": "Who compensates farmers when the royal dragon eats the non-royal sheep?",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-bilingual"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c02",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-scale",
+      "parentId": null,
+      "body": "How far away can horses smell a dragon before every travel plan collapses?",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-prep"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c03",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "Does a dragonkeeper schedule have anything resembling a day off?",
+      "publishedAt": "2026-09-27T05:16:29.000Z",
+      "upvoterIds": [
+        "regular-optimist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c04",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-insta",
+      "parentId": "community-dragon-logistics-c01",
+      "body": "The waste question is not glamorous, which is why it is definitely somebody’s full-time crisis.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-cosplay"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c05",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-wellness",
+      "parentId": "community-dragon-logistics-c02",
+      "body": "How much road traffic stops when one lands near a gate?",
+      "publishedAt": "2026-09-27T12:21:42.000Z",
+      "upvoterIds": [
+        "regular-cooked"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c06",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Feed storage must be an entire economy hidden behind three dramatic sentences.",
+      "publishedAt": "2026-09-27T03:06:48.000Z",
+      "upvoterIds": [
+        "regular-fridgelore"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c07",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-craft",
+      "parentId": "community-dragon-logistics-c01",
+      "body": "What does noise do to a city that cannot close a window properly?",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "upvoterIds": [
+        "regular-margin-notes"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c08",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-elder",
+      "parentId": "community-dragon-logistics-c02",
+      "body": "I need the Citadel paper that is ninety percent measurements and ten percent terrified marginalia.",
+      "publishedAt": "2026-09-28T06:49:30.000Z",
+      "upvoterIds": [
+        "regular-room-critic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c09",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-divorced",
+      "parentId": "community-dragon-logistics-c03",
+      "body": "Livestock insurance would become the strongest political faction within a year.",
+      "publishedAt": "2026-09-28T13:54:43.000Z",
+      "upvoterIds": [
+        "regular-room-defender"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-dragon-logistics-c10",
+      "entryId": "community-dragon-logistics",
+      "authorId": "regular-story",
+      "parentId": "community-dragon-logistics-c01",
+      "body": "Dragon logistics is where myth meets a wagon axle and both lose.",
+      "publishedAt": "2026-09-27T05:16:29.000Z",
+      "upvoterIds": [
+        "regular-room-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c01",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-literal",
+      "parentId": null,
+      "body": "Non-canon: Jace reorganises other people’s desks while waiting for them.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-u"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c02",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "Non-canon: Lorenah remembers everyone’s preferred tea and pretends this is not political intelligence.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-k"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c03",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-great",
+      "parentId": null,
+      "body": "Non-canon: Vhaemys gives names to corridors based on what snack she found there.",
+      "publishedAt": "2026-09-27T10:11:08.000Z",
+      "upvoterIds": [
+        "regular-l"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c04",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-doomer",
+      "parentId": "community-headcanon-confessional-c01",
+      "body": "Non-canon: Alester repairs a buckle instead of admitting he needs to rest.",
+      "publishedAt": "2026-09-27T13:54:06.000Z",
+      "upvoterIds": [
+        "regular-m"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c05",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-grammar",
+      "parentId": "community-headcanon-confessional-c02",
+      "body": "Non-canon: Cordin practices complete sentences alone and still gets interrupted by a knock.",
+      "publishedAt": "2026-09-27T17:13:21.000Z",
+      "upvoterIds": [
+        "regular-e"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c06",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-poll",
+      "parentId": "community-headcanon-confessional-c03",
+      "body": "Non-canon: Saathos checks exits in every room, including rooms with one door.",
+      "publishedAt": "2026-09-27T22:08:00.000Z",
+      "upvoterIds": [
+        "regular-s"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c07",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-bilingual",
+      "parentId": null,
+      "body": "Non-canon: Baelenys folds maps too sharply when angry.",
+      "publishedAt": "2026-09-27T08:58:27.000Z",
+      "upvoterIds": [
+        "regular-v"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c08",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-prep",
+      "parentId": "community-headcanon-confessional-c02",
+      "body": "Non-canon: Visenor owns one cup he refuses to replace despite the cracked handle.",
+      "publishedAt": "2026-09-28T11:46:09.000Z",
+      "upvoterIds": [
+        "regular-b"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c09",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-optimist",
+      "parentId": "community-headcanon-confessional-c03",
+      "body": "Non-canon: Gaelor believes volume is a substitute for knocking.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-a"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-headcanon-confessional-c10",
+      "entryId": "community-headcanon-confessional",
+      "authorId": "regular-cosplay",
+      "parentId": "community-headcanon-confessional-c01",
+      "body": "Non-canon: the kitchen knows every argument by the tray returned untouched.",
+      "publishedAt": "2026-09-27T10:11:08.000Z",
+      "upvoterIds": [
+        "regular-j"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c01",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-fridgelore",
+      "parentId": null,
+      "body": "Someone points at the map as though geography personally agreed with them.",
+      "publishedAt": "2026-09-27T13:54:06.000Z",
+      "upvoterIds": [
+        "regular-horse"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c02",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-margin-notes",
+      "parentId": null,
+      "body": "A private family grievance receives an official title.",
+      "publishedAt": "2026-09-27T13:54:06.000Z",
+      "upvoterIds": [
+        "regular-ecology"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c03",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-room-critic",
+      "parentId": null,
+      "body": "The quietest person says the most useful thing after everyone stands up.",
+      "publishedAt": "2026-09-27T15:07:40.000Z",
+      "upvoterIds": [
+        "regular-ledger"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c04",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-room-defender",
+      "parentId": "community-council-bingo-c01",
+      "body": "A messenger waits outside while the council debates why messages are late.",
+      "publishedAt": "2026-09-27T18:47:38.000Z",
+      "upvoterIds": [
+        "regular-odds"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c05",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-room-middle",
+      "parentId": "community-council-bingo-c02",
+      "body": "One proposal contains the phrase acceptable losses and no acceptable numbers.",
+      "publishedAt": "2026-09-27T22:08:00.000Z",
+      "upvoterIds": [
+        "regular-sept"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c06",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-reply-guy",
+      "parentId": "community-council-bingo-c03",
+      "body": "Jace produces a receipt from three chapters ago.",
+      "publishedAt": "2026-09-28T03:06:32.000Z",
+      "upvoterIds": [
+        "regular-local"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c07",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-u",
+      "parentId": "community-council-bingo-c01",
+      "body": "Cordin Full-Stop Watch reaches minute forty without a sighting.",
+      "publishedAt": "2026-09-28T09:34:28.000Z",
+      "upvoterIds": [
+        "regular-it"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c08",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-k",
+      "parentId": "community-council-bingo-c02",
+      "body": "The chair requests order immediately after causing disorder.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-gym"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c09",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-l",
+      "parentId": "community-council-bingo-c03",
+      "body": "Somebody volunteers a person who is not in the room.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-club"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-council-bingo-c10",
+      "entryId": "community-council-bingo",
+      "authorId": "regular-m",
+      "parentId": "community-council-bingo-c01",
+      "body": "Meeting adjourned; consequences remain in session.",
+      "publishedAt": "2026-09-27T15:07:40.000Z",
+      "upvoterIds": [
+        "regular-grad"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c01",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-s",
+      "parentId": null,
+      "body": "Rain for travel chapters, silence for council chapters. I need to hear every bad decision clearly.",
+      "publishedAt": "2026-09-27T18:47:38.000Z",
+      "upvoterIds": [
+        "regular-shield"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c02",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-v",
+      "parentId": null,
+      "body": "Instrumentals until a battle begins, then somehow I pause everything.",
+      "publishedAt": "2026-09-27T18:47:38.000Z",
+      "upvoterIds": [
+        "regular-supply"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c03",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-b",
+      "parentId": null,
+      "body": "Tavern ambience makes quiet conversations feel warmer and royal scenes feel stranger.",
+      "publishedAt": "2026-09-27T20:56:19.000Z",
+      "upvoterIds": [
+        "regular-pirate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c04",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-a",
+      "parentId": "community-reading-soundtrack-c01",
+      "body": "I use the same playlist every chapter and let emotional mismatch become part of the experience.",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "upvoterIds": [
+        "regular-north"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c05",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-j",
+      "parentId": "community-reading-soundtrack-c02",
+      "body": "No music. My laptop fan provides an ominous drone for free.",
+      "publishedAt": "2026-09-28T03:06:32.000Z",
+      "upvoterIds": [
+        "regular-career"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c06",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-render",
+      "parentId": "community-reading-soundtrack-c03",
+      "body": "Sea noise for Dragonstone material, but low enough that I do not start checking the weather.",
+      "publishedAt": "2026-09-28T08:58:11.000Z",
+      "upvoterIds": [
+        "regular-music"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c07",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-horse",
+      "parentId": "community-reading-soundtrack-c01",
+      "body": "A fireplace loop turns every archive visit into a responsible evening.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-student"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c08",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-ecology",
+      "parentId": "community-reading-soundtrack-c02",
+      "body": "I tried cheerful music during Gaelor material. It became horror immediately.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-food"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c09",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-ledger",
+      "parentId": "community-reading-soundtrack-c03",
+      "body": "Silence after a reveal is part of reading. I do not fill it.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-lurk"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reading-soundtrack-c10",
+      "entryId": "community-reading-soundtrack",
+      "authorId": "regular-odds",
+      "parentId": "community-reading-soundtrack-c01",
+      "body": "The perfect soundtrack is one I forget was playing until the chapter ends.",
+      "publishedAt": "2026-09-27T20:56:19.000Z",
+      "upvoterIds": [
+        "regular-legal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c01",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-local",
+      "parentId": null,
+      "body": "The brothers, because love and catastrophic communication occupy the same room.",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "upvoterIds": [
+        "regular-anti"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c02",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-it",
+      "parentId": null,
+      "body": "Vhaemys and the adults who indulge her reveal each adult’s limits differently.",
+      "publishedAt": "2026-09-27T23:44:17.000Z",
+      "upvoterIds": [
+        "regular-aesthetic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c03",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-gym",
+      "parentId": null,
+      "body": "Jace and anyone willing to challenge him without turning the exchange into worship.",
+      "publishedAt": "2026-09-28T01:52:51.000Z",
+      "upvoterIds": [
+        "regular-nihilist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c04",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-club",
+      "parentId": "community-best-nonromantic-bond-c01",
+      "body": "Lorenah’s careful connections interest me because courtesy never makes them simple.",
+      "publishedAt": "2026-09-28T04:39:49.000Z",
+      "upvoterIds": [
+        "regular-reformed"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c05",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-grad",
+      "parentId": "community-best-nonromantic-bond-c02",
+      "body": "Mentorship where the student notices the teacher’s failure is always compelling.",
+      "publishedAt": "2026-09-28T08:58:11.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c06",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-lorenah",
+      "parentId": "community-best-nonromantic-bond-c03",
+      "body": "Rivalries count. Sometimes an enemy pays closer attention than a friend.",
+      "publishedAt": "2026-09-28T13:54:43.000Z",
+      "upvoterIds": [
+        "regular-apolitical"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c07",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-shield",
+      "parentId": "community-best-nonromantic-bond-c01",
+      "body": "The best bonds have a language of small practical acts, not only declarations.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-traditional"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c08",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-supply",
+      "parentId": "community-best-nonromantic-bond-c02",
+      "body": "I like loyalty that survives disagreement better than loyalty that prevents it.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-faith"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c09",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-pirate",
+      "parentId": "community-best-nonromantic-bond-c03",
+      "body": "Found family becomes real when somebody has to do boring care work.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-reform"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-best-nonromantic-bond-c10",
+      "entryId": "community-best-nonromantic-bond",
+      "authorId": "regular-north",
+      "parentId": "community-best-nonromantic-bond-c01",
+      "body": "A damaged bond remembered honestly can be richer than a quick reconciliation.",
+      "publishedAt": "2026-09-28T01:52:51.000Z",
+      "upvoterIds": [
+        "regular-sect"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c01",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-music",
+      "parentId": null,
+      "body": "MISSING: one maester, probably. Last seen making the org chart worse.",
+      "publishedAt": "2026-09-28T04:39:49.000Z",
+      "upvoterIds": [
+        "regular-selective"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c02",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-student",
+      "parentId": null,
+      "body": "Distinctive feature: inspires more questions when described.",
+      "publishedAt": "2026-09-28T04:39:49.000Z",
+      "upvoterIds": [
+        "regular-archive"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c03",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-food",
+      "parentId": null,
+      "body": "May answer to Nymos, unless that is somehow also complicated.",
+      "publishedAt": "2026-09-28T06:49:30.000Z",
+      "upvoterIds": [
+        "regular-gate"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c04",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-lurk",
+      "parentId": "community-nymos-poster-c01",
+      "body": "If found, do not invent his employer before contacting the Evidence Committee.",
+      "publishedAt": "2026-09-28T09:34:28.000Z",
+      "upvoterIds": [
+        "regular-newbie"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c05",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-legal",
+      "parentId": "community-nymos-poster-c02",
+      "body": "Last known location: somewhere inside the published text, then not there.",
+      "publishedAt": "2026-09-28T13:54:43.000Z",
+      "upvoterIds": [
+        "regular-fic"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c06",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-naella",
+      "parentId": "community-nymos-poster-c03",
+      "body": "Reward: one red string and a sincere apology from the theory board.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-ship"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c07",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-anti",
+      "parentId": "community-nymos-poster-c01",
+      "body": "Warning: absence should not be treated as confession.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-unship"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c08",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-aesthetic",
+      "parentId": "community-nymos-poster-c02",
+      "body": "Poster image unavailable; please imagine suspiciously professional parchment.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-queer"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c09",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-nihilist",
+      "parentId": "community-nymos-poster-c03",
+      "body": "Contact Almar for one alarming phrase and no practical directions.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-feminist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-nymos-poster-c10",
+      "entryId": "community-nymos-poster",
+      "authorId": "regular-reformed",
+      "parentId": "community-nymos-poster-c01",
+      "body": "Update: the dragon discussion has again buried this poster.",
+      "publishedAt": "2026-09-28T06:49:30.000Z",
+      "upvoterIds": [
+        "regular-scale"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c01",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-apolitical",
+      "parentId": null,
+      "body": "Reader v20: white-dragon certainty reduced from loud to unavailable.",
+      "publishedAt": "2026-09-28T09:34:28.000Z",
+      "upvoterIds": [
+        "regular-insta"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c02",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-traditional",
+      "parentId": null,
+      "body": "Opened three map tabs; closed none. Memory usage critical.",
+      "publishedAt": "2026-09-28T09:34:28.000Z",
+      "upvoterIds": [
+        "regular-wellness"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c03",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-faith",
+      "parentId": null,
+      "body": "Trust settings now require two witnesses and a timestamp.",
+      "publishedAt": "2026-09-28T11:46:09.000Z",
+      "upvoterIds": [
+        "regular-chain"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c04",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-reform",
+      "parentId": "community-reader-patch-notes-c01",
+      "body": "Added automatic pause after the phrase royal command.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-craft"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c05",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-sect",
+      "parentId": "community-reader-patch-notes-c02",
+      "body": "Nymos reminder restored after being hidden by dragon effects.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-elder"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c06",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-market",
+      "parentId": "community-reader-patch-notes-c03",
+      "body": "Sibling optimism remains installed but is no longer supported.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-divorced"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c07",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-selective",
+      "parentId": "community-reader-patch-notes-c01",
+      "body": "Council comprehension improved by four percent; confidence fell by twelve.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-story"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c08",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-archive",
+      "parentId": "community-reader-patch-notes-c02",
+      "body": "Spoiler boundary working as intended. Curiosity repeatedly attempts bypass.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-brand"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c09",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-gate",
+      "parentId": "community-reader-patch-notes-c03",
+      "body": "Pocket cake module unaffected and somehow still popular.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-literal"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-reader-patch-notes-c10",
+      "entryId": "community-reader-patch-notes",
+      "authorId": "regular-newbie",
+      "parentId": "community-reader-patch-notes-c01",
+      "body": "Known issue: user mistakes emotional preparation for actual preparation.",
+      "publishedAt": "2026-09-28T11:46:09.000Z",
+      "upvoterIds": [
+        "regular-quiet"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c01",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-ship",
+      "parentId": null,
+      "body": "Charades fails when somebody draws crown and the room splits into factions.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-doomer"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c02",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-unship",
+      "parentId": null,
+      "body": "Cards, provided Jace is not allowed to keep a written record of everyone’s bluffs.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-grammar"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c03",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-queer",
+      "parentId": null,
+      "body": "A map puzzle with all capital-city pieces removed.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-poll"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c04",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-feminist",
+      "parentId": "community-no-politics-game-night-c01",
+      "body": "Cooking contest. The Kitchen Workers’ Union judges and receives the food.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-bilingual"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c05",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-scale",
+      "parentId": "community-no-politics-game-night-c02",
+      "body": "Dragon-name telephone. By round four every answer is Meringue.",
+      "publishedAt": "2026-09-28T16:42:41.000Z",
+      "upvoterIds": [
+        "regular-prep"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c06",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-sport",
+      "parentId": null,
+      "body": "Twenty questions, but Nymos is banned because we do not have twenty answers.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-optimist"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c07",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-insta",
+      "parentId": null,
+      "body": "Miniature painting until somebody assigns heraldry and ruins the peace.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-cosplay"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c08",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-wellness",
+      "parentId": null,
+      "body": "Story dice. Gaelor rolls conflict before touching the table.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-cooked"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c09",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-chain",
+      "parentId": null,
+      "body": "Quiet reading hour is a game if we award points for not opening another theory tab.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-fridgelore"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-no-politics-game-night-c10",
+      "entryId": "community-no-politics-game-night",
+      "authorId": "regular-craft",
+      "parentId": null,
+      "body": "The winner is whoever notices ten minutes passed without a crown. Nobody wins.",
+      "publishedAt": "2026-09-28T14:29:07.000Z",
+      "upvoterIds": [
+        "regular-margin-notes"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-01",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "Returning after a reread: the smaller practical detail is still what makes this thread work for me.",
+      "publishedAt": "2026-09-25T17:13:00.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-02",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "Late arrival, but I appreciate that the answers disagree without becoming the same faction argument again.",
+      "publishedAt": "2026-09-26T05:16:45.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-03",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-craft",
+      "parentId": null,
+      "body": "This became more useful once people started separating what the text shows from what we simply enjoy imagining.",
+      "publishedAt": "2026-09-26T06:49:09.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-04",
+      "entryId": "community-worst-travel-companion",
+      "authorId": "regular-fandom-history",
+      "parentId": null,
+      "body": "I changed my first answer after checking the map. Distance ruins several confident plans in a productive way.",
+      "publishedAt": "2026-09-26T10:11:24.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-05",
+      "entryId": "community-unpopular-opinion-amnesty",
+      "authorId": "regular-fandom-stardew",
+      "parentId": null,
+      "body": "The funniest answer here is also the one I would trust with an actual shift schedule.",
+      "publishedAt": "2026-09-26T13:54:22.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-06",
+      "entryId": "community-comfort-reread",
+      "authorId": "regular-optimist",
+      "parentId": null,
+      "body": "Saving this branch for the next reread because it notices a detail I walked past completely.",
+      "publishedAt": "2026-09-27T04:39:12.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-07",
+      "entryId": "community-council-red-flags",
+      "authorId": "regular-quiet",
+      "parentId": null,
+      "body": "A rare thread where the joke format clarified the criticism instead of replacing it.",
+      "publishedAt": "2026-09-27T06:49:46.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
+      "awards": []
+    },
+    {
+      "id": "community-wave-pulse-08",
+      "entryId": "community-dragon-name-bracket",
+      "authorId": "regular-craft",
+      "parentId": null,
+      "body": "My answer is still the boring logistical one, and the last twelve chapters keep rewarding that instinct.",
+      "publishedAt": "2026-09-27T09:34:44.000Z",
+      "upvoterIds": [
+        "regular-middle"
+      ],
       "awards": []
     }
   ]

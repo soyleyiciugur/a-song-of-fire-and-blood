@@ -736,19 +736,9 @@
   max-width: 300px;
   border-radius: 3px;
   overflow: hidden;
-
-  mask-image:
-    linear-gradient(to right,  transparent, #000 4%, #000 96%, transparent),
-    linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
-  mask-composite: intersect;
-
-  -webkit-mask-image:
-    linear-gradient(to right,  transparent, #000 4%, #000 96%, transparent),
-    linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
-  -webkit-mask-composite: source-in, xor;
 }
 
-/* Soft diffuse ambient shadow behind the faded image */
+/* Soft diffuse ambient shadow behind the image */
 .chapterImageWrap::before {
   content: "";
   position: absolute;

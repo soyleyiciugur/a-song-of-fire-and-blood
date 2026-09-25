@@ -136,7 +136,7 @@ export default async function FamilyTree({ searchParams }: Props) {
               childrenLabel="Children"
             >
               <PersonNode id="leo-tyrell" />
-              <PersonNode id="renrose-tyrell-daughter" />
+              <PersonNode id="elinor-tyrell" />
             </FamilyUnit>
           </div>
         </section>

@@ -2804,7 +2804,7 @@
         "overview": "Renrose introduces Liana as his wife and confidante while she listens to their Highgarden conversation.",
         "latestDevelopment": "Visenor does not witness her later warning to Renrose."
       },
-      "renrose-tyrell-daughter": {
+      "elinor-tyrell": {
         "overview": "Notices Renrose's daughter watching him at Highgarden and wonders whether she knows who he really is.",
         "latestDevelopment": "Notices Renrose's daughter watching him at Highgarden and wonders whether she knows who he really is."
       }
@@ -3270,7 +3270,7 @@
     "siblings": [],
     "children": [
       "leo-tyrell",
-      "renrose-tyrell-daughter"
+      "elinor-tyrell"
     ],
     "mentor": "-",
     "dragon": "-",
@@ -3320,7 +3320,7 @@
         "overview": "His wife and closest confidante.",
         "latestDevelopment": "He welcomes her knowledge of his dealings with Visenor, but rejects her warning against pursuing still greater power."
       },
-      "renrose-tyrell-daughter": {
+      "elinor-tyrell": {
         "overview": "His unnamed daughter, present beside him at the breakfast welcoming Visenor to Highgarden.",
         "latestDevelopment": "His unnamed daughter, present beside him at the breakfast welcoming Visenor to Highgarden."
       }
@@ -3463,7 +3463,7 @@
     "mother": "-",
     "spouse": "-",
     "siblings": [
-      "renrose-tyrell-daughter"
+      "elinor-tyrell"
     ],
     "children": [],
     "mentor": "-",
@@ -3504,7 +3504,7 @@
         "overview": "Leo remains beside Visenor but his trust has cracked.",
         "latestDevelopment": "In Oldtown he secretly investigates Almar while Visenor continues speaking as though the Tyrell alliance is secure."
       },
-      "renrose-tyrell-daughter": {
+      "elinor-tyrell": {
         "overview": "His unnamed sister is present at Highgarden when the traveling party returns.",
         "latestDevelopment": "Her response to Leo's training has not been shown."
       },
@@ -5866,7 +5866,7 @@
     "quotes": []
   },
   {
-    "id": "renrose-tyrell-daughter",
+    "id": "elinor-tyrell",
     "name": "Elinor Tyrell",
     "nickname": "-",
     "aliases": [],

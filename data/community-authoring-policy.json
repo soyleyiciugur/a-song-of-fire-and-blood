@@ -27,6 +27,7 @@
   "arcs": "All fictional accounts may gradually change opinions, sympathies, relationships and even factions through authored interactions. Preserve the path of change; do not reset history, force reconciliation or run autonomous activity.",
   "forum": {
     "topicMix": "Taverns should mix chapter discussion with wider-world, character, theory, site-feature, community, game, poll and meme threads, balancing serious analysis with distinct memelord voices.",
+    "minimumParticipantsPerNewCommunityThread": 10,
     "chapterRequirements": {
       "judgment-by-blood": {
         "minimumParticipants": 30,

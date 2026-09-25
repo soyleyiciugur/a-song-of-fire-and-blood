@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-09-25",
+    "items": [
+      "Opened five new Taverns discussions immediately and scheduled fifteen more across a three-day organic release wave covering reading habits, maps, characters, lore, theories, games and community prompts.",
+      "Added more than two hundred varied Tavern comments with at least ten distinct participants per new topic, persistent hourly follow-ups, chronological reply branches and private future-content boundaries.",
+      "Strengthened community validation so new Tavern topics cannot regress below the ten-participant floor and documented consecutive daily scheduling for longer editorial waves."
+    ]
+  },
+  {
     "date": "2026-09-24",
     "items": [
       "Made All the default private Ledger view, grouped its entries into open and settled matters, added latest/oldest sorting by entry date or relevant chapter, distinguished status labels with yellow and green treatments, and kept the status tabs contained at desktop and mobile widths.",
@@ -19,7 +27,8 @@
       "Added Tavern discussions about reading features, realm jobs, unresolved clues and character patch notes, with a broader balance of analysis, games and meme voices.",
       "Extended several existing Tavern conversations and formalized the wider subreddit-style topic mix in the community workflow.",
       "Completed Naela and Aegor's reciprocal family and debut records, restored every recorded King's Landing tourney pairing to participant timelines, and corrected the false Jace-Steffon match history.",
-      "Enabled Direct Raven sounds by default, made browser audio recovery more reliable, added an audible wing-flap preview when sound is switched on, and allowed restrained incoming-message audio while a conversation is open."
+      "Enabled Direct Raven sounds by default, made browser audio recovery more reliable, added an audible wing-flap preview when sound is switched on, and allowed restrained incoming-message audio while a conversation is open.",
+      "Removed directional fading from chapter cover images so artwork remains fully opaque at every edge."
     ]
   },
   {
