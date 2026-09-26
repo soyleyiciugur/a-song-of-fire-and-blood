@@ -1,5 +1,16 @@
 [
   {
+    "date": "2026-09-26",
+    "items": [
+      "Made missing character mini portraits fall back consistently to the character's own House sigil across the site, including the character directory, relationships, search, maps and administration views.",
+      "Added a persistent visual divider between House names and titles throughout the character directory so long titles remain clearly separated while truncating.",
+      "Added complete House pages and heraldry for Houses Caswell and Marbrand, and completed the sigils, seats and known records for Houses Corbray and Reyne.",
+      "Merged the marked Beyond the Wall land areas and six additional coastal and forest pockets into the filled region, removing interior cutouts while keeping adjacent seas outside.",
+      "Published the Baelenys and Jace hotel-lobby character-swap reel with twenty opening reactions and eighteen replies and comments scheduled across three days.",
+      "Smoothed the newly extended Beyond the Wall coastlines and filled the remaining marked inland gaps near the Bay of Ice."
+    ]
+  },
+  {
     "date": "2026-09-25",
     "items": [
       "Opened five new Taverns discussions immediately and scheduled fifteen more across a three-day organic release wave covering reading habits, maps, characters, lore, theories, games and community prompts.",

@@ -46,3 +46,5 @@ next-env.d.ts
 
 # Local community workflow snapshots
 .tmp/
+
+/public/images/miniportraits/ref/miniportraits

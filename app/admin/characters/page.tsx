@@ -11,6 +11,7 @@ import housesData from "../../../data/houses.json";
 import initialQuotes from "../../../data/quotes.json";
 import worldDate from "../../../data/worldDate.json";
 import { computeAge, formatNameday } from "../../../lib/age";
+import { getCharacterHouseSigil } from "../../../lib/characterMiniPortrait";
 
 const globalStyles = `
   .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -44,7 +45,16 @@ type Character = {
 };
 
 const Avatar = ({ id, name, size = 32, border = "1px solid rgba(255,255,255,0.1)" }: { id: string; name: string; size?: number; border?: string }) => {
-  const [imgError, setImgError] = useState(false);
+  const [fallbackIndex, setFallbackIndex] = useState(-1);
+  const houseSigil = useMemo(() => getCharacterHouseSigil(id), [id]);
+  const fallbackSources = useMemo(
+    () => [houseSigil].filter(Boolean) as string[],
+    [houseSigil],
+  );
+
+  useEffect(() => {
+    setFallbackIndex(-1);
+  }, [id]);
 
   const getInitials = (fullName: string) => {
     const titles = ["Ser", "Lord", "Lady", "Prince", "Princess", "Queen", "King", "Maester"];
@@ -55,7 +65,7 @@ const Avatar = ({ id, name, size = 32, border = "1px solid rgba(255,255,255,0.1)
     return (nameParts[0].charAt(0) + lastName.charAt(0)).toLocaleUpperCase("tr-TR");
   };
 
-  if (!id || imgError) {
+  if (!id || fallbackIndex >= fallbackSources.length) {
     return (
       <div style={{
         width: size, height: size, borderRadius: "50%", background: "var(--surface)",
@@ -70,10 +80,10 @@ const Avatar = ({ id, name, size = 32, border = "1px solid rgba(255,255,255,0.1)
 
   return (
     <img
-      src={`/images/miniportraits/${id}.webp`}
+      src={fallbackIndex >= 0 ? fallbackSources[fallbackIndex] : `/images/miniportraits/${id}.webp`}
       alt={name}
-      onError={() => setImgError(true)}
-      style={{ width: size, height: size, borderRadius: "50%", objectFit: "cover", border, flexShrink: 0, background: "var(--surface)" }}
+      onError={() => setFallbackIndex((current) => current + 1)}
+      style={{ width: size, height: size, borderRadius: "50%", objectFit: fallbackIndex >= 0 ? "contain" : "cover", padding: fallbackIndex >= 0 ? 2 : undefined, border, flexShrink: 0, background: "var(--surface)" }}
     />
   );
 };

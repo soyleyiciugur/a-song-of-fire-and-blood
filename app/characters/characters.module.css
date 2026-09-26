@@ -645,12 +645,9 @@
   min-width: 0;
 }
 
-.metaDot {
-  flex: 0 0 auto;
-  opacity: 0.5;
-}
-
 .title {
+  border-left: 1px solid rgba(201, 162, 39, 0.42);
+  padding-left: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -1,6 +1,5 @@
 // This file is C:\Users\Locpick-13\a-song-of-fire-and-blood\components\ui\MiniPortrait.tsx
-import Image from "next/image";
-import { getSafeMiniPortrait } from "@/lib/portraits";
+import CharacterMiniPortrait from "@/components/MiniPortrait";
 
 type MiniPortraitProps = {
   characterId?: string;
@@ -16,16 +15,11 @@ export default function MiniPortrait({
   className,
 }: MiniPortraitProps) {
   return (
-    <Image
-      src={getSafeMiniPortrait(characterId)}
+    <CharacterMiniPortrait
+      id={characterId ?? ""}
       alt={name}
-      width={size}
-      height={size}
+      size={size}
       className={className}
-      style={{
-        borderRadius: "6px",
-        objectFit: "cover",
-      }}
     />
   );
 }

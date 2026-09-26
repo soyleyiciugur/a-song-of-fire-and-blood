@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import Image from "next/image";
-import charactersData from "@/data/characters/characters.json";
-import housesData from "@/data/houses.json";
+import { getCharacterHouseSigil } from "@/lib/characterMiniPortrait";
 
 const FALLBACK = "/images/miniportraits/default.webp";
 const EXTENSIONS = ["webp"] as const;
@@ -17,31 +16,12 @@ type Props = {
   fallbackGlyph?: string;
 };
 
-type CharacterHouseRow = { id: string; house?: string };
-type HouseRow = { id: string; name: string; sigilSrc?: string };
-
-const CHARACTER_HOUSES = new Map(
-  (charactersData as CharacterHouseRow[]).map((character) => [character.id, character.house ?? ""]),
-);
-const HOUSES = housesData as HouseRow[];
-
-function automaticHouseFallback(characterId: string) {
-  const characterHouse = CHARACTER_HOUSES.get(characterId)?.trim();
-  if (!characterHouse || characterHouse === "-") return null;
-  const normalized = characterHouse.replace(/^House\s+/i, "").trim().toLocaleLowerCase();
-  const house = HOUSES.find((item) =>
-    item.name.toLocaleLowerCase() === characterHouse.toLocaleLowerCase() ||
-    item.id.toLocaleLowerCase() === normalized,
-  );
-  return house?.sigilSrc ?? (house ? `/images/houses/${house.id}.webp` : null);
-}
-
 export default function MiniPortrait({ id, alt, size = 36, className, fallbackSrc, fallbackGlyph }: Props) {
   const [extensionIndex, setExtensionIndex] = useState(0);
   const [fallbackIndex, setFallbackIndex] = useState(-1);
   const [fallbackFailed, setFallbackFailed] = useState(false);
 
-  const houseFallback = useMemo(() => automaticHouseFallback(id), [id]);
+  const houseFallback = useMemo(() => getCharacterHouseSigil(id), [id]);
   const fallbackCandidates = useMemo(() => {
     const candidates: string[] = [];
     if (houseFallback) candidates.push(houseFallback);
