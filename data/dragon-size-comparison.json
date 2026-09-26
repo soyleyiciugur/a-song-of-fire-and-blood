@@ -150,6 +150,20 @@
       "intrinsicHeight": 137
     },
     {
+      "id": "maelwing",
+      "name": "Maelwing",
+      "length": 46,
+      "wingspan": null,
+      "source": "ASoFaB",
+      "minimum": false,
+      "uncertain": false,
+      "color": "#792e29",
+      "asset": "/images/dragons/sizes/clean/maelwing.svg",
+      "groundOffset": 15,
+      "intrinsicWidth": 1908,
+      "intrinsicHeight": 742
+    },
+    {
       "id": "meleys",
       "name": "Meleys",
       "length": 45,

@@ -4,19 +4,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import rawCards from "@/data/the-great-game/cards.json";
+import { GameCardFace, GameCardModal } from "@/components/cards/GameCardFace";
+import type { GameCard } from "@/lib/the-great-game/types";
 import styles from "./decks.module.css";
 
 type CardType = "character" | "dragon" | "event" | "artifact" | "location";
-type Ability = { id: string; name: string; trigger: string; text: string };
-type Card = {
-  id: string; cardType: CardType; tierId: string; name: string; subtitle?: string;
-  houseId?: string; cost: number; power?: number; influence?: number; health?: number;
-  traits: string[]; abilities: Ability[]; roles?: string[]; deckable?: boolean;
-  linkedCharacterId?: string; balanceStatus?: string;
-};
+type Card = GameCard & { balanceStatus?: string };
 type Deck = { id: string; name: string; cards: Record<string, number>; updatedAt: number };
 
-const ALL = rawCards as Card[];
+const ALL = rawCards as unknown as Card[];
 const STORAGE_KEY = "the-great-game:decks:v1";
 const MAX_DECK = 30;
 const MAX_COPIES = 2;
@@ -396,34 +392,14 @@ export default function DecksPage() {
           <div className={styles.cardGrid}>
             {filtered.map(card => {
               const copies = selected?.cards[card.id] ?? 0;
-              return <article className={styles.card} data-tier={card.tierId} key={card.id} style={tierStyle(card)}>
-                <button className={styles.cardMain} onClick={() => setInspect(card.id)}>
-                  <CardArt card={card} className={styles.cardArt} />
-                  <div className={styles.cardShade} />
-                  <span className={styles.cost} title="Command cost" aria-label={`${card.cost} Command`}><CommandSigil value={card.cost} /></span>
-                  <span className={styles.tierBadge} title={`${tierLabel(card)} Tier`}>{tierLabel(card)}</span>
-                  {card.traits.includes("unique") && <UniqueDiamond />}
-                  <div className={styles.cardText}>
-                    <span className={styles.cardType}>{LABEL[card.cardType]}</span>
-                    <h3>{card.name}</h3>{card.subtitle && <small>{card.subtitle}</small>}
-                    {(card.cardType === "character" || card.cardType === "dragon") && <div className={styles.stats}>
-                      <span><b>{card.power ?? 0}</b> PWR</span>
-                      {card.cardType === "character" && <span><b>{card.influence ?? 0}</b> INF</span>}
-                      <span><b>{card.health ?? 0}</b> HP</span>
-                    </div>}
-                    <div className={styles.traits}>{card.traits.filter(t => !["unique","dragon"].includes(t)).slice(0,3).map(t => <span key={t}>{titleCase(t)}</span>)}</div>
-                    {card.abilities[0] && <p><strong><span>{titleCase(card.abilities[0].trigger)}</span>{card.abilities[0].name}</strong>{card.abilities[0].text}</p>}
-                  </div>
-                </button>
-                {card.deckable === false ? (
+              return <GameCardFace key={card.id} card={card} onSelect={setInspect} actions={card.deckable === false ? (
                   <div className={`${styles.cardActions} ${styles.nonDeckableActions}`}><span>NON-DECKABLE</span></div>
                 ) : (
                   <div className={styles.cardActions}>
                     <button disabled={!copies} onClick={() => removeCard(card.id)}>−</button><span>{copies}/{MAX_COPIES}</span>
                     <button disabled={!selected || total >= MAX_DECK || copies >= MAX_COPIES} onClick={() => addCard(card)}>+</button>
                   </div>
-                )}
-              </article>;
+                )} />;
             })}
           </div>
         </section>
@@ -449,23 +425,7 @@ export default function DecksPage() {
         </aside>
       </section>
 
-      {inspected && <div className={styles.modalBackdrop} onMouseDown={() => setInspect(null)}>
-        <article className={styles.modal} onMouseDown={e => e.stopPropagation()}>
-          <button className={styles.close} onClick={() => setInspect(null)}>×</button>
-          <div className={styles.modalArtWrap} style={tierStyle(inspected)}><CardArt card={inspected} className={styles.modalArt} /><div className={styles.modalShade}/><span className={`${styles.cost} ${styles.modalCost}`}><CommandSigil value={inspected.cost} /></span><span className={`${styles.tierBadge} ${styles.modalTierBadge}`}>{tierLabel(inspected)}</span>{inspected.traits.includes("unique") && <UniqueDiamond detailed />}</div>
-          <div className={styles.modalContent}>
-            <span className={styles.kicker}>{LABEL[inspected.cardType]} · {inspected.tierId.toUpperCase()}</span>
-            <h2>{inspected.name}</h2>{inspected.subtitle && <p className={styles.subtitle}>{inspected.subtitle}</p>}
-            {(inspected.cardType === "character" || inspected.cardType === "dragon") && <div className={styles.modalStats}>
-              <span><b>{inspected.power ?? 0}</b><small>Power</small></span>{inspected.cardType==="character"&&<span><b>{inspected.influence ?? 0}</b><small>Influence</small></span>}<span><b>{inspected.health ?? 0}</b><small>Health</small></span>
-            </div>}
-            <div className={styles.modalTraits}>{inspected.traits.filter(t => !["unique","dragon"].includes(t)).map(t => TRAIT_RULES[t] ? <HoverTooltip key={t} label={titleCase(t)} text={TRAIT_RULES[t]} /> : <span key={t}>{titleCase(t)}</span>)}{inspected.houseId&&<span>{titleCase(inspected.houseId)}</span>}</div>
-            <div className={styles.abilities}>{inspected.abilities.length ? inspected.abilities.map(a=><section key={a.id}><span>{titleCase(a.trigger)}</span><h3>{a.name}</h3><p>{a.text}</p></section>) : <p>No special ability.</p>}</div>
-            {inspected.balanceStatus === "provisional" && <div className={styles.provisional}>Balance values are provisional.</div>}
-            <button className={styles.modalAdd} disabled={inspected.deckable === false || !selected || total>=MAX_DECK || (selected.cards[inspected.id]??0)>=MAX_COPIES} onClick={()=>addCard(inspected)}>{inspected.deckable === false ? "Non-deckable" : `Add to ${selected?.name ?? "Deck"}`}</button>
-          </div>
-        </article>
-      </div>}
+      {inspected && <GameCardModal card={inspected} onClose={() => setInspect(null)} action={<button className={styles.modalAdd} disabled={inspected.deckable === false || !selected || total>=MAX_DECK || (selected.cards[inspected.id]??0)>=MAX_COPIES} onClick={()=>addCard(inspected)}>{inspected.deckable === false ? "Non-deckable" : `Add to ${selected?.name ?? "Deck"}`}</button>} />}
     </main>
   );
 }

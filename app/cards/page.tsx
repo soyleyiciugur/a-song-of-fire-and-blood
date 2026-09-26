@@ -8,18 +8,15 @@ import {
   useCallback,
 } from "react";
 
-import {
-  getTiers,
-  getCardsByTier,
-} from "@/lib/cards";
+import tiersData from "@/data/cards/tiers.json";
+import { getAllGameCards } from "@/lib/the-great-game/cards";
 
-import { CharacterCard } from "@/components/cards/CharacterCard";
-import { CardModal } from "@/components/cards/CardModal";
+import { GameCardFace, GameCardModal } from "@/components/cards/GameCardFace";
 
 import styles from "./page.module.css";
 
 export default function CardsPage() {
-  const tiers = getTiers();
+  const tiers = [{ id: "all", label: "All Cards", order: -1, color: "#d4af37", accentColor: "#d4af37" }, ...tiersData].sort((a, b) => a.order - b.order);
 
   const [activeTier, setActiveTier] =
     useState(tiers[0].id);
@@ -30,8 +27,7 @@ export default function CardsPage() {
   ] =
     useState<string | null>(null);
 
-  const tierCards =
-    getCardsByTier(activeTier);
+  const tierCards = getAllGameCards().filter((card) => activeTier === "all" || card.tierId === activeTier);
 
   const selectedIndex =
     tierCards.findIndex(
@@ -241,7 +237,7 @@ export default function CardsPage() {
       >
         {tierCards.map(
           (card) => (
-            <CharacterCard
+            <GameCardFace
               key={card.id}
               card={card}
               onSelect={
@@ -254,72 +250,12 @@ export default function CardsPage() {
 
       {/* MODAL */}
 
-      {selectedCardId && (
-        <div
-          className={
-            styles.overlay
-          }
-          onClick={() =>
-            setSelectedCardId(
-              null
-            )
-          }
-        >
-          <button
-            className={
-              styles.navArrow
-            }
-            onClick={(event) => {
-              event.stopPropagation();
-              handlePrev();
-            }}
-            aria-label="Previous card"
-            style={{
-              visibility:
-                selectedIndex > 0
-                  ? "visible"
-                  : "hidden",
-            }}
-          >
-            ‹
-          </button>
-
-          <CardModal
-            cardId={
-              selectedCardId
-            }
-            onClose={() =>
-              setSelectedCardId(
-                null
-              )
-            }
-            onSelectCard={
-              setSelectedCardId
-            }
-          />
-
-          <button
-            className={
-              styles.navArrow
-            }
-            onClick={(event) => {
-              event.stopPropagation();
-              handleNext();
-            }}
-            aria-label="Next card"
-            style={{
-              visibility:
-                selectedIndex <
-                tierCards.length -
-                  1
-                  ? "visible"
-                  : "hidden",
-            }}
-          >
-            ›
-          </button>
-        </div>
-      )}
+      {selectedCardId && selectedIndex >= 0 && <GameCardModal
+        card={tierCards[selectedIndex]}
+        onClose={() => setSelectedCardId(null)}
+        onPrev={selectedIndex > 0 ? handlePrev : undefined}
+        onNext={selectedIndex < tierCards.length - 1 ? handleNext : undefined}
+      />}
     </div>
   );
 }

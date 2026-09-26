@@ -62,6 +62,7 @@ import type {
 import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import GreatGameChat from "@/components/the-great-game/GreatGameChat";
+import { useDeckFront } from "@/components/cards/useDeckFront";
 
 import { getTraitHighlights } from "@/lib/the-great-game/trait-highlights";
 
@@ -740,7 +741,7 @@ function modifierDescription(
   addChange(modifier.power, "Power");
   addChange(modifier.influence, "Influence");
   addChange(modifier.health, "Health");
-  addChange(modifier.cost, "Command cost");
+  addChange(modifier.cost, "Command Cost");
 
   const duration = modifier.permanent
     ? "Permanent"
@@ -767,6 +768,17 @@ function CardSparkles() {
       <i />
     </span>
   );
+}
+
+function splitVeiledHand<T>(cards: T[]): T[][] {
+  if (cards.length <= 4) return [cards];
+  if (cards.length <= 8) {
+    const firstRowSize = Math.floor(cards.length / 2);
+    return [cards.slice(0, firstRowSize), cards.slice(firstRowSize)];
+  }
+  const rows: T[][] = [];
+  for (let start = 0; start < cards.length; start += 4) rows.push(cards.slice(start, start + 4));
+  return rows;
 }
 
 function HorizontalHand({
@@ -954,10 +966,9 @@ function CardArtwork({
     setCandidateIndex(0);
   }, [card.id]);
 
-  if (
-    candidateIndex >=
-    candidates.length
-  ) {
+  const deckFront = useDeckFront(candidateIndex >= candidates.length);
+
+  if (candidateIndex >= candidates.length && !deckFront) {
     return (
       <div
         className={`${styles.artworkFallback} ${
@@ -972,20 +983,20 @@ function CardArtwork({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      key={candidates[candidateIndex]}
+      key={candidates[candidateIndex] ?? deckFront}
       src={
         candidates[
           candidateIndex
-        ]
+        ] ?? deckFront ?? ""
       }
       alt={card.name}
       className={
         className
       }
       draggable={false}
-      onError={() =>
-        setCandidateIndex(current => current === candidateIndex ? current + 1 : current)
-      }
+      onError={() => {
+        if (candidateIndex < candidates.length) setCandidateIndex(current => current === candidateIndex ? current + 1 : current);
+      }}
     />
   );
 }
@@ -1008,6 +1019,29 @@ export default function GreatGamePlayPage() {
     );
 
   const gameRef = useRef<GameState | null>(null);
+
+  const [deckBackImages, setDeckBackImages] = useState<Record<PlayerId, string>>({
+    player1: "",
+    player2: "",
+  });
+  useEffect(() => {
+    if (mode !== "game") return;
+    const controller = new AbortController();
+    fetch("/api/cards/deck-backs", { cache: "no-store", signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Could not load deck backs");
+        return response.json() as Promise<{ images: string[] }>;
+      })
+      .then(({ images }) => {
+        if (controller.signal.aborted) return;
+        const pick = () => images[Math.floor(Math.random() * images.length)] ?? "";
+        setDeckBackImages({ player1: pick(), player2: pick() });
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setDeckBackImages({ player1: "", player2: "" });
+      });
+    return () => controller.abort();
+  }, [mode]);
 
   const [tableEntryVisible, setTableEntryVisible] = useState(false);
   const [tableEntryWaitingForLandscape, setTableEntryWaitingForLandscape] = useState(false);
@@ -3518,11 +3552,7 @@ export default function GreatGamePlayPage() {
       unit.ownerId !==
         currentGame.activePlayerId ||
       unit.exhausted ||
-      unit.grounded ||
-      getEffectivePower(
-        currentGame,
-        unit
-      ) <= 0
+      unit.grounded
     ) {
       return false;
     }
@@ -6013,7 +6043,7 @@ export default function GreatGamePlayPage() {
 
       <div className={styles.deckPile} data-deck-anchor={viewPlayerId}
         aria-label={`Your deck: ${viewPlayer.deck.length} cards remaining`}>
-        <div className={styles.deckBack} aria-hidden="true"><b>&#10022;</b></div>
+        <div className={`${styles.deckBack} ${deckBackImages[viewPlayerId] ? styles.deckBackArtwork : ""}`} style={deckBackImages[viewPlayerId] ? { backgroundImage: `url("${deckBackImages[viewPlayerId]}")` } : undefined} aria-hidden="true" />
       </div>
       <section
         className={styles.opponentCommandDock}
@@ -6060,8 +6090,10 @@ export default function GreatGamePlayPage() {
               Opponent&apos;s Hand
             </div>
 
-            <HorizontalHand>
-            {viewEnemyPlayer.hand.map(
+            <div className={styles.revealedHandRows}>
+            {splitVeiledHand(viewEnemyPlayer.hand).map((row, rowIndex) => (
+            <HorizontalHand key={rowIndex}>
+            {row.map(
               (
                 handCard
               ) => {
@@ -6096,6 +6128,8 @@ export default function GreatGamePlayPage() {
               }
             )}
           </HorizontalHand>
+          ))}
+          </div>
         </section>
         </div>
       )}
@@ -6413,6 +6447,7 @@ export default function GreatGamePlayPage() {
                   }
                   beginPlayCard(handCard);
                 }}
+                onInspect={() => setInspectedHandInstanceId(handCard.instanceId)}
                 onPointerDown={(event) =>
                   handleHandPointerDown(
                     event,
@@ -6537,7 +6572,7 @@ export default function GreatGamePlayPage() {
             .join(" ")}
           disabled={playerEndTurnDisabled}
           onClick={endTurn}
-          title={
+          data-game-hint={
             !onlineCanAct
               ? "Wait for your turn"
               : playerEndTurnDisabled
@@ -7377,10 +7412,8 @@ function PlayerHeader({
 
         {standingTarget && (
           <em>
-            {standingTargetType ===
-            "military"
-              ? "⚔ Attack"
-              : "♛ Claim"}
+            <IndicatorIcon kind={standingTargetType === "military" ? "military" : "political"} />
+            {standingTargetType === "military" ? " Attack" : " Claim"}
           </em>
         )}
 
@@ -7417,7 +7450,7 @@ function PlayerHeader({
                 ? "☠"
                 : conflictPreview.noPoliticalDamage
                   ? "?"
-                  : `${conflictPreview.kind === "military" ? "⚔" : "♛"}${conflictPreview.standingDamage}`}
+                  : <><IndicatorIcon kind={conflictPreview.kind === "military" ? "military" : "political"} />{conflictPreview.standingDamage}</>}
             </span>
           )}
 
@@ -7447,8 +7480,8 @@ function PlayerHeader({
               {preview.dies
                 ? "☠"
                 : preview.heal
-                  ? `♥${preview.heal}`
-                  : `⚔${preview.damage ?? 0}`}
+                  ? <><IndicatorIcon kind="health" />{preview.heal}</>
+                  : <><IndicatorIcon kind="military" />{preview.damage ?? 0}</>}
             </span>
           );
         })()}
@@ -7530,7 +7563,7 @@ function PlayerHeader({
           onClick={
             onEndTurn
           }
-          title={
+          data-game-hint={
             endTurnDisabled
               ? preserveEndTurnAppearance
                 ? "Wait for the turn draw to finish"
@@ -7670,7 +7703,7 @@ function CommandMeter({
           ? styles.commandMeterCompact
           : ""
       }`}
-      title={`${command} of ${maxCommand} Command available`}
+      data-game-hint={`${command} of ${maxCommand} Command available`}
     >
       <div
         className={
@@ -7734,7 +7767,7 @@ function CommandMeter({
               ]
                 .filter(Boolean)
                 .join(" ")}
-              title={
+              data-game-hint={
                 available
                   ? bonus
                     ? "Bonus Command available"
@@ -8077,10 +8110,7 @@ function AttackDragOverlay({
         }}
       >
         <strong>
-          {drag.kind ===
-            "military"
-            ? "⚔"
-            : "♛"}
+          <IndicatorIcon kind={drag.kind === "military" ? "military" : "political"} />
         </strong>
         <span>
           {drag.kind ===
@@ -8163,6 +8193,18 @@ function BoardUnit({
     useState<AttackKind | null>(
       null
     );
+  const [touchExpanded, setTouchExpanded] = useState(false);
+  const [effectsHovered, setEffectsHovered] = useState(false);
+  const effectsAnchorRef = useRef<HTMLDivElement | null>(null);
+  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const holdStart = useRef<{ x: number; y: number } | null>(null);
+  const held = useRef(false);
+  const clearHold = () => {
+    if (holdTimer.current) clearTimeout(holdTimer.current);
+    holdTimer.current = null;
+    holdStart.current = null;
+  };
+  useEffect(() => clearHold, []);
 
   if (!isUnitCard(card)) {
     return null;
@@ -8280,8 +8322,12 @@ function BoardUnit({
 
   return (
     <div
+      ref={effectsAnchorRef}
+      onMouseEnter={() => setEffectsHovered(true)}
+      onMouseLeave={() => setEffectsHovered(false)}
       className={[
         styles.unitCardWrapper,
+        touchExpanded ? styles.unitCardWrapperTouched : "",
         attackDragging &&
         !attackDrag?.sourceHovered
           ? styles.attackDraggingAway
@@ -8294,6 +8340,7 @@ function BoardUnit({
     <div
       className={[
         styles.unitCard,
+        touchExpanded && card.abilities.length > 0 ? styles.cardInfoTouchExpanded : "",
 
         targetable
           ? styles.targetableUnit
@@ -8369,6 +8416,8 @@ function BoardUnit({
       onPointerMove={(
         event
       ) => {
+        if (event.pointerType === "touch" && holdStart.current &&
+          Math.hypot(event.clientX - holdStart.current.x, event.clientY - holdStart.current.y) > 12) clearHold();
         onAttackPointerMove?.(
           event,
           unit
@@ -8399,6 +8448,7 @@ function BoardUnit({
         )
       }
       onPointerLeave={() => {
+        clearHold();
         if (
           !attackDragging
         ) {
@@ -8414,6 +8464,15 @@ function BoardUnit({
       onPointerDown={(
         event
       ) => {
+        if (event.pointerType === "touch" && !targetable) {
+          held.current = false;
+          holdStart.current = { x: event.clientX, y: event.clientY };
+          holdTimer.current = setTimeout(() => {
+            held.current = true;
+            onInspect();
+          }, 500);
+          return;
+        }
         const targetElement =
           event.target as HTMLElement;
 
@@ -8445,19 +8504,25 @@ function BoardUnit({
       }}
       onPointerUp={(
         event
-      ) =>
+      ) => {
+        clearHold();
         onAttackPointerUp?.(
           event,
           unit
-        )
-      }
-      onPointerCancel={() =>
-        onAttackPointerCancel?.()
-      }
+        );
+      }}
+      onPointerCancel={() => { clearHold(); onAttackPointerCancel?.(); }}
+      onContextMenu={(event) => event.preventDefault()}
       onClick={(
         event
       ) => {
         event.stopPropagation();
+
+        if (held.current) { held.current = false; return; }
+        if (event.nativeEvent.detail && window.matchMedia("(hover: none)").matches && !targetable) {
+          setTouchExpanded(value => !value);
+          return;
+        }
 
         if (
           suppressBoardClickRef
@@ -8518,7 +8583,7 @@ function BoardUnit({
               className={`${styles.combatValuePreview} ${styles.combatValueHeal}`}
               aria-hidden
             >
-              ♥{preview.heal}
+              <IndicatorIcon kind="health" />{preview.heal}
             </div>
           );
         }
@@ -8532,7 +8597,7 @@ function BoardUnit({
               className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
               aria-hidden
             >
-              ⚔{preview.damage}
+              <IndicatorIcon kind="military" />{preview.damage}
             </div>
           );
         }
@@ -8551,7 +8616,7 @@ function BoardUnit({
             className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
             aria-hidden
           >
-            ⚔{combatPreview.attackerDamageTaken}
+            <IndicatorIcon kind="military" />{combatPreview.attackerDamageTaken}
           </div>
         )}
 
@@ -8565,7 +8630,7 @@ function BoardUnit({
             className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}
             aria-hidden
           >
-            ⚔{combatPreview.defenderDamageTaken}
+            <IndicatorIcon kind="military" />{combatPreview.defenderDamageTaken}
           </div>
         )}
 
@@ -8587,7 +8652,7 @@ function BoardUnit({
           >
             {combatPreview.noPoliticalDamage
               ? "?"
-              : `♛${combatPreview.standingDamage}`}
+              : <><IndicatorIcon kind="political" />{combatPreview.standingDamage}</>}
           </div>
         )}
 
@@ -8666,6 +8731,7 @@ function BoardUnit({
       </div>
 
       <CardInfoPanel
+        compact
         activeTraits={activeTraits}
         card={card}
         artifactId={
@@ -8745,7 +8811,7 @@ function BoardUnit({
     </div>
 
     {hasEffects && (
-      <UnitEffectsTooltip unit={unit} />
+      <UnitEffectsTooltip unit={unit} open={(effectsHovered || touchExpanded) && (!attackDragging || Boolean(attackDrag?.sourceHovered))} anchorRef={effectsAnchorRef} />
     )}
     </div>
   );
@@ -8763,6 +8829,7 @@ function HandCard({
   interactionLocked,
   inspectOnly = false,
   onPlay,
+  onInspect,
   onMouseEnter,
   onMouseLeave,
   onPointerDown,
@@ -8781,6 +8848,7 @@ function HandCard({
   interactionLocked: boolean;
   inspectOnly?: boolean;
   onPlay: () => void;
+  onInspect: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   onPointerDown: (
@@ -8796,6 +8864,11 @@ function HandCard({
     event: ReactPointerEvent<HTMLButtonElement>
   ) => void;
 }) {
+  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const holdStart = useRef<{ x: number; y: number } | null>(null);
+  const held = useRef(false);
+  const clearHold = () => { if (holdTimer.current) clearTimeout(holdTimer.current); holdTimer.current = null; holdStart.current = null; };
+  useEffect(() => clearHold, []);
   const card =
     getGameCard(
       handCard.cardId
@@ -8814,6 +8887,7 @@ function HandCard({
     ].command >= cost;
 
   return (
+    <div className={styles.handCardSlot} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
     <button
       data-game-card="true"
       className={[
@@ -8852,20 +8926,27 @@ function HandCard({
         handCard.instanceId
       }
       disabled={interactionLocked && !inspectOnly}
-      onClick={
-        onPlay
-      }
-      onMouseEnter={
-        onMouseEnter
-      }
-      onMouseLeave={
-        onMouseLeave
-      }
+      onClick={() => { if (held.current) { held.current = false; return; } onPlay(); }}
       draggable={false}
-      onPointerDown={inspectOnly ? undefined : onPointerDown}
-      onPointerMove={inspectOnly ? undefined : onPointerMove}
-      onPointerUp={inspectOnly ? undefined : onPointerUp}
-      onPointerCancel={inspectOnly ? undefined : onPointerCancel}
+      onPointerDown={(event) => {
+        if (event.pointerType === "touch") {
+          held.current = false;
+          holdStart.current = { x: event.clientX, y: event.clientY };
+          holdTimer.current = setTimeout(() => {
+            held.current = true;
+            if (!inspectOnly) onPointerCancel(event);
+            onInspect();
+          }, 500);
+        }
+        if (!inspectOnly) onPointerDown(event);
+      }}
+      onPointerMove={(event) => {
+        if (holdStart.current && Math.hypot(event.clientX - holdStart.current.x, event.clientY - holdStart.current.y) > 12) clearHold();
+        if (!inspectOnly) onPointerMove(event);
+      }}
+      onPointerUp={(event) => { clearHold(); if (!inspectOnly) onPointerUp(event); }}
+      onPointerCancel={(event) => { clearHold(); if (!inspectOnly) onPointerCancel(event); }}
+      onContextMenu={(event) => event.preventDefault()}
       onDragStart={(event) =>
         event.preventDefault()
       }
@@ -8885,9 +8966,11 @@ function HandCard({
 
       <CardInfoPanel
         card={card}
-        showDescription={false}
+        compact
+        showTraitTooltips
       />
     </button>
+    </div>
   );
 }
 
@@ -8931,7 +9014,8 @@ function HandCardVisual({
 
       <CardInfoPanel
         card={card}
-        showDescription={false}
+        compact
+        showTraitTooltips
       />
     </button>
   );
@@ -8990,10 +9074,9 @@ function UniqueDiamond({
 
     setPosition({
       left:
-        rect.left +
-        rect.width / 2,
+        Math.max(8, Math.min(rect.right + 8, window.innerWidth - 226)),
       top:
-        rect.bottom + 8,
+        Math.max(8, Math.min(rect.top, window.innerHeight - 90)),
     });
   };
 
@@ -9077,6 +9160,15 @@ function UniqueDiamond({
         onBlur={
           closeTooltip
         }
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={(event) => { event.stopPropagation(); clearTimer(); updatePosition(); setOpen(value => !value); }}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            updatePosition();
+            setOpen(value => !value);
+          }
+        }}
       >
         ◆
       </span>
@@ -9126,8 +9218,8 @@ function CardChrome({
     <>
       {typeof cost ===
         "number" && (
-        <span
-          className={[
+        <TraitRuleTooltip
+          triggerClassName={[
             styles.cost,
             cost > card.cost
               ? styles.costIncreased
@@ -9138,30 +9230,13 @@ function CardChrome({
           ]
             .filter(Boolean)
             .join(" ")}
-          title={
-            cost === card.cost
-              ? "Command cost"
-              : `Command cost: ${cost} (base ${card.cost})`
-          }
-          aria-label={`${cost} Command`}
-        >
-          <CommandSigil
-            value={cost}
-          />
-        </span>
+          label="Command Cost"
+          rule={cost === card.cost ? `${cost} Command` : `${cost} Command (base ${card.cost})`}
+          icon={<CommandSigil value={cost} />}
+        />
       )}
 
-      <span
-        className={
-          styles.tierBadge
-        }
-        title={`${tierLabel(card)} Tier`}
-        aria-label={`${tierLabel(card)} Tier`}
-      >
-        {tierLabel(
-          card
-        )}
-      </span>
+      <TraitRuleTooltip triggerClassName={styles.tierBadge} label="Tier" rule={`${tierLabel(card)} Tier`} icon={tierLabel(card)} />
 
       {card.traits.includes(
         "unique"
@@ -9177,12 +9252,17 @@ function CardChrome({
 }
 
 function StatIcon({ kind }: { kind: "military" | "political" | "health" }) {
+  if (kind !== "health") {
+    return <i className={styles.statGlyph} data-stat-icon={kind} aria-hidden="true">{kind === "military" ? "⚔\uFE0E" : "♛\uFE0E"}</i>;
+  }
   const paths = {
-    military: "M4 2 15 13M2 13 7 18M13 2 4 13M12 18 18 12M3 2 3 6M13 2 17 2",
-    political: "M3 6 6 10 10 3 14 10 17 6 15 16H5ZM5 19H15",
     health: "M10 17 3 10C-2 4 6 0 10 6C14 0 22 4 17 10Z",
   };
-  return <svg viewBox="0 0 20 20" width="100%" height="100%" fill={kind === "health" ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true"><path d={paths[kind]} /></svg>;
+  return <svg viewBox="0 0 20 20" width="100%" height="100%" fill="currentColor" data-stat-icon="health" aria-hidden="true"><path d={paths.health} /></svg>;
+}
+
+function IndicatorIcon({ kind }: { kind: "military" | "political" | "health" }) {
+  return <i className={styles.indicatorIcon}><StatIcon kind={kind} /></i>;
 }
 
 function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }) {
@@ -9204,10 +9284,12 @@ function TraitRuleTooltip({
   label,
   rule,
   icon,
+  triggerClassName,
 }: {
   label: string;
   rule: string;
   icon?: ReactNode;
+  triggerClassName?: string;
 }) {
   const triggerRef =
     useRef<HTMLSpanElement | null>(
@@ -9240,10 +9322,9 @@ function TraitRuleTooltip({
 
     setPosition({
       left:
-        rect.left +
-        rect.width / 2,
+        Math.max(8, Math.min(rect.right + 8, window.innerWidth - 226)),
       top:
-        rect.top - 8,
+        Math.max(8, Math.min(rect.top, window.innerHeight - 90)),
     });
   };
 
@@ -9287,7 +9368,7 @@ function TraitRuleTooltip({
       <span
         ref={triggerRef}
         className={
-          styles.traitTooltipTrigger
+          [styles.traitTooltipTrigger, triggerClassName].filter(Boolean).join(" ")
         }
         tabIndex={0}
         aria-label={label}
@@ -9350,8 +9431,10 @@ function EquippedArtifactBadge({
     );
 
   return (
-    <div
-      className={[
+    <TraitRuleTooltip
+      label={artifact.name}
+      rule={artifact.abilities[0]?.text ?? "Equipped Artifact"}
+      triggerClassName={[
         styles.equippedArtifactBadge,
         detailed
           ? styles.equippedArtifactBadgeDetailed
@@ -9359,18 +9442,10 @@ function EquippedArtifactBadge({
       ]
         .filter(Boolean)
         .join(" ")}
-      title={
-        artifact.name
+      icon={
+        <CardArtwork card={artifact} className={styles.equippedArtifactArtwork} />
       }
-      aria-label={`Equipped Artifact: ${artifact.name}`}
-    >
-      <CardArtwork
-        card={artifact}
-        className={
-          styles.equippedArtifactArtwork
-        }
-      />
-    </div>
+    />
   );
 }
 
@@ -9385,6 +9460,7 @@ function CardInfoPanel({
   footer,
   showDescription = true,
   showTraitTooltips = false,
+  compact = false,
 }: {
   card: GameCard;
   activeTraits?: Trait[];
@@ -9405,6 +9481,7 @@ function CardInfoPanel({
   footer?: ReactNode;
   showDescription?: boolean;
   showTraitTooltips?: boolean;
+  compact?: boolean;
 }) {
   const traits =
     visibleTraits(
@@ -9431,6 +9508,7 @@ function CardInfoPanel({
         actions
           ? styles.cardInfoPanelWithActions
           : "",
+        compact ? styles.cardInfoCompact : "",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -9446,9 +9524,7 @@ function CardInfoPanel({
           {traits.length > 0 && <div className={styles.traitIcons}>
             {traits.map(trait => {
               const label = trait[0].toUpperCase() + trait.slice(1);
-              return showTraitTooltips ? (
-                <TraitRuleTooltip key={trait} label={label} rule={traitRule(trait) ?? label} icon={<TraitIcon trait={trait} active={activeTraits.includes(trait)} />} />
-              ) : <span key={trait} title={label} aria-label={label}><TraitIcon trait={trait} active={activeTraits.includes(trait)} /></span>;
+              return <TraitRuleTooltip key={trait} label={label} rule={traitRule(trait) ?? label} icon={<TraitIcon trait={trait} active={activeTraits.includes(trait)} />} />;
             })}
           </div>}
 
@@ -9459,7 +9535,7 @@ function CardInfoPanel({
           {card.name}
         </strong>
 
-        <small
+        {!compact && <small
           className={
             card.subtitle
               ? undefined
@@ -9473,7 +9549,7 @@ function CardInfoPanel({
         >
           {card.subtitle ??
             "\u00a0"}
-        </small>
+        </small>}
       </div>
 
       <div
@@ -9732,6 +9808,7 @@ function SelectedCardPreview({
   onCancel: () => void;
   onConfirm: () => void;
 }) {
+  const [touchExpanded, setTouchExpanded] = useState(false);
   const cost =
     getEffectiveCost(
       state,
@@ -9768,8 +9845,15 @@ function SelectedCardPreview({
       <div
         data-game-card="true"
         className={
-          styles.selectedCardInner
+          [styles.selectedCardInner, touchExpanded ? styles.selectedCardTouchExpanded : ""].filter(Boolean).join(" ")
         }
+        onClick={(event) => {
+          if (window.matchMedia("(hover: none)").matches &&
+            !(event.target as HTMLElement).closest("button, [role='button'], ." + styles.traitTooltipTrigger)) {
+            setTouchExpanded(value => !value);
+          }
+        }}
+        onContextMenu={(event) => event.preventDefault()}
         style={
           tierStyle(card)
         }
@@ -9790,6 +9874,7 @@ function SelectedCardPreview({
 
         <CardInfoPanel
           card={card}
+          compact
           showTraitTooltips
         />
 
@@ -9824,9 +9909,28 @@ function SelectedCardPreview({
 
 function UnitEffectsTooltip({
   unit,
+  open,
+  anchorRef,
 }: {
   unit: UnitState;
+  open: boolean;
+  anchorRef: { current: HTMLDivElement | null };
 }) {
+  const [position, setPosition] = useState<{ left: number; top: number; width: number } | null>(null);
+  useEffect(() => {
+    if (!open) return;
+    const updatePosition = () => {
+      const anchor = anchorRef.current;
+      if (!anchor) return;
+      const rect = anchor.getBoundingClientRect();
+      const width = Math.max(120, Math.min(230, rect.width * 1.15, window.innerWidth - rect.right - 16));
+      setPosition({ left: Math.min(rect.right + 6, window.innerWidth - width - 8), top: Math.max(8, Math.min(rect.top, window.innerHeight - 130)), width });
+    };
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition, true);
+    return () => { window.removeEventListener("resize", updatePosition); window.removeEventListener("scroll", updatePosition, true); };
+  }, [open, anchorRef]);
   const artifact =
     unit.attachedArtifactId
       ? getGameCard(
@@ -9834,12 +9938,12 @@ function UnitEffectsTooltip({
         )
       : null;
 
-  return (
+  if (!open || !position || typeof document === "undefined") return null;
+  return createPortal(
     <div
-      className={
-        styles.unitEffectsTooltip
-      }
+      className={`${styles.unitEffectsTooltip} ${styles.unitEffectsTooltipPortal}`}
       role="tooltip"
+      style={position}
     >
       <span
         className={
@@ -9887,7 +9991,7 @@ function UnitEffectsTooltip({
           </div>
         )
       )}
-    </div>
+    </div>, document.body
   );
 }
 
@@ -9931,7 +10035,9 @@ function UnitDetailOverlay({
       role="dialog"
       aria-modal="true"
       aria-label={`${card.name} details`}
+      onContextMenu={(event) => event.preventDefault()}
     >
+      <button type="button" className={styles.detailCornerClose} onClick={onClose} aria-label="Close card details">×</button>
       <div
         className={
           styles.unitDetailCard
@@ -9948,40 +10054,6 @@ function UnitDetailOverlay({
           card={card}
           detailed
         />
-
-        <CardInfoPanel
-          activeTraits={activeTraits}
-          card={card}
-          artifactId={
-            unit.attachedArtifactId
-          }
-          artifactBadgeDetailed
-          showTraitTooltips
-          runtimeStats={{
-            power: getEffectivePower(
-              state,
-              unit
-            ),
-            influence:
-              getEffectiveInfluence(
-                state,
-                unit
-              ),
-            health:
-              unit.currentHealth,
-            maxHealth:
-              getMaximumHealth(unit),
-          }}
-          baseStats={{
-            power: card.power,
-            influence:
-              card.cardType ===
-              "character"
-                ? card.influence
-                : undefined,
-            health: card.health,
-          }}
-        />
       </div>
 
       <aside
@@ -9989,15 +10061,12 @@ function UnitDetailOverlay({
           styles.unitDetailEffects
         }
       >
-        <span
-          className={
-            styles.effectsEyebrow
-          }
-        >
-          Active Effects
-        </span>
-
-        <h2>{card.name}</h2>
+        <div className={styles.detailExpandedInfo}>
+          <CardInfoPanel card={card} activeTraits={activeTraits} artifactId={unit.attachedArtifactId}
+            runtimeStats={{ power: getEffectivePower(state, unit), influence: getEffectiveInfluence(state, unit), health: unit.currentHealth, maxHealth: getMaximumHealth(unit) }}
+            baseStats={{ power: card.power, influence: card.cardType === "character" ? card.influence : undefined, health: card.health }}
+            showTraitTooltips />
+        </div>
 
         {!hasEffects && (
           <p
@@ -10015,6 +10084,7 @@ function UnitDetailOverlay({
           <div
             className={`${styles.effectDetailRow} ${styles.artifactEffect}`}
           >
+            <CardArtwork card={artifact} className={styles.detailArtifactArtwork} />
             <span>Artifact</span>
             <strong>
               ◆ {artifact.name}
@@ -10064,14 +10134,6 @@ function UnitDetailOverlay({
           }
         )}
 
-        <button
-          className={
-            styles.detailCloseButton
-          }
-          onClick={onClose}
-        >
-          Close
-        </button>
       </aside>
     </div>
   );

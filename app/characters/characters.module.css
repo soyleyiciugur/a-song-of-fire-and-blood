@@ -645,7 +645,20 @@
   min-width: 0;
 }
 
+.metaLine > span:first-child {
+  flex: 0 1 auto;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metaLine > span:only-child {
+  max-width: 100%;
+}
+
 .title {
+  flex: 1 1 0;
   border-left: 1px solid rgba(201, 162, 39, 0.42);
   padding-left: 6px;
   overflow: hidden;

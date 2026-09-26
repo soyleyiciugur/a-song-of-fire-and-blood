@@ -241,6 +241,8 @@
 .expandedCaptionShell {
   position: relative;
   width: min(720px, calc(100vw - 32px));
+  max-width: 100%;
+  min-width: 0;
   max-height: 42dvh;
   display: flex;
   flex-direction: column;
@@ -253,6 +255,9 @@
 }
 
 .expandedCaptionScroll {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
   max-height: 36dvh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -590,6 +595,19 @@
   font-size: 0.9rem;
   line-height: 1.4;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.reelSlideMeta .captionMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  opacity: 1;
+}
+
+.captionMoreBtn:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
 }
 
 .reelsCloseBtn {

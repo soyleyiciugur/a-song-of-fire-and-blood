@@ -4,6 +4,28 @@
    Card chrome consistency with /cards/play
    ========================================================= */
 
+.modalNavigation {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.modalNavigation button {
+  flex: 1;
+  border: 1px solid rgba(214, 184, 108, 0.36);
+  padding: 0.65rem;
+  color: #fff0cf;
+  background: rgba(142, 47, 45, 0.28);
+  cursor: pointer;
+  font-family: var(--font-hotd), Georgia, serif;
+}
+
+.modalNavigation button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+
 .card {
   aspect-ratio: auto;
   overflow: visible;
@@ -626,9 +648,9 @@
   cursor: var(--realm-help-cursor) !important;
 }
 
-/* Five cards across on a normal desktop collection view. */
+/* Four cards across on a normal desktop collection view. */
 .cardGrid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: .85rem;
 }
 

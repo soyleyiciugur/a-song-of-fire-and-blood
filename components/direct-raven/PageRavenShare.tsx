@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import RavenIcon from "./RavenIcon";
 import styles from "./page-raven-share.module.css";
 
@@ -45,7 +45,12 @@ function pageDescription() {
 }
 
 export default function PageRavenShare() {
+  return <Suspense fallback={null}><PageRavenShareContent /></Suspense>;
+}
+
+function PageRavenShareContent() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [targets, setTargets] = useState<ShareTarget[]>([]);
@@ -65,7 +70,8 @@ export default function PageRavenShare() {
     return () => window.removeEventListener("great-game-session-change", sync);
   }, []);
 
-  const hidden = HIDDEN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || (pathname === "/cards/play" && greatGameActive);
+  const mediaOpen = (pathname === "/ravens-eye" || pathname.startsWith("/ravens-eye/")) && searchParams.has("item");
+  const hidden = mediaOpen || HIDDEN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || (pathname === "/cards/play" && greatGameActive);
 
   useEffect(() => {
     if (!open) return;

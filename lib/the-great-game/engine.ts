@@ -444,6 +444,13 @@ export function getEffectiveCost(
       modifier.amount;
   }
 
+  if (card.cardType === "artifact" &&
+    state.players[opponentOf(playerId)].board.some(
+      (unit) => unit.attachedArtifactId === card.id
+    )) {
+    cost += 1;
+  }
+
   if (
     card.cardType ===
       "dragon" &&
@@ -2591,7 +2598,7 @@ function playCardMutable(
 
     assertRule(
       !duplicateUnit &&
-        !duplicateArtifact,
+        (card.cardType === "artifact" || !duplicateArtifact),
       `${card.name} is Unique and is already in play under your control.`
     );
   }
@@ -2860,6 +2867,14 @@ function playCardMutable(
       Boolean(target),
       "Artifact target disappeared."
     );
+
+    for (const owner of ["player1", "player2"] as const) {
+      for (const equipped of state.players[owner].board) {
+        if (equipped.attachedArtifactId === card.id) {
+          equipped.attachedArtifactId = null;
+        }
+      }
+    }
 
     target!
       .attachedArtifactId =

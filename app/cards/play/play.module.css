@@ -4167,8 +4167,6 @@
       rgba(177, 58, 46, 0.07) 42%,
       transparent 58%
     );
-  box-shadow:
-    inset 2px 0 rgba(224, 112, 91, 0.34);
 }
 
 .attackHalfPoliticalHover::before {
@@ -4179,8 +4177,6 @@
       rgba(173, 137, 50, 0.07) 42%,
       transparent 58%
     );
-  box-shadow:
-    inset -2px 0 rgba(225, 196, 100, 0.34);
 }
 
 .attackDragLayer {
@@ -4429,8 +4425,8 @@
     linear-gradient(
       90deg,
       rgba(177, 58, 46, 0.18) 0%,
-      rgba(177, 58, 46, 0.08) 48%,
-      transparent 64%
+      rgba(177, 58, 46, 0.08) 45%,
+      transparent 100%
     );
 }
 
@@ -4439,8 +4435,8 @@
     linear-gradient(
       270deg,
       rgba(173, 137, 50, 0.18) 0%,
-      rgba(173, 137, 50, 0.08) 48%,
-      transparent 64%
+      rgba(173, 137, 50, 0.08) 45%,
+      transparent 100%
     );
 }
 
@@ -4612,17 +4608,13 @@
 
 /* Single-mode units use the entire card as their attack drag affordance. */
 .attackOnlyMilitary.attackHalfMilitaryHover::before {
-  background: rgba(177, 58, 46, 0.11);
-  box-shadow:
-    inset 0 0 0 1px rgba(224, 112, 91, 0.22),
-    inset 0 0 30px rgba(177, 58, 46, 0.07);
+  background: linear-gradient(90deg, rgba(177, 58, 46, 0.16), rgba(177, 58, 46, 0.06) 55%, transparent);
+  box-shadow: none;
 }
 
 .attackOnlyPolitical.attackHalfPoliticalHover::before {
-  background: rgba(173, 137, 50, 0.11);
-  box-shadow:
-    inset 0 0 0 1px rgba(225, 196, 100, 0.22),
-    inset 0 0 30px rgba(173, 137, 50, 0.07);
+  background: linear-gradient(270deg, rgba(173, 137, 50, 0.16), rgba(173, 137, 50, 0.06) 55%, transparent);
+  box-shadow: none;
 }
 
 .standingBoxDragTarget {
@@ -6473,7 +6465,7 @@
   --game-command-height: clamp(72px, 10dvh, 90px);
   --game-battle-line-height: 32px;
 
-  width: 100vw;
+  width: 100%;
   max-width: none;
   height: calc(100dvh - var(--site-nav-height, 0px));
   min-height: 0;
@@ -7256,7 +7248,7 @@
     --game-hand-height: clamp(108px, 31dvh, 132px);
     --game-top-dock-height: clamp(48px, 13dvh, 56px);
 
-    width: 100vw;
+    width: 100%;
     height: calc(100dvh - var(--site-nav-height, 0px));
     padding:
       var(--game-safe-top, env(safe-area-inset-top))
@@ -7901,4 +7893,173 @@
 .boardGame .handCard {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* Board cards keep their artwork visible until their ability is requested. */
+.boardGame .unitCard .cardInfoPanel.cardInfoCompact {
+  height: auto;
+  min-height: 0;
+  padding: 2.2cqw 3cqw;
+  gap: 1cqw;
+  overflow: hidden;
+  transition: min-height 260ms cubic-bezier(.2,.75,.2,1);
+}
+.boardGame .unitCard .cardInfoCompact .cardIdentity { grid-template-rows: auto auto; }
+.boardGame .unitCard .cardInfoCompact .cardStats { margin-top: 1cqw; }
+.boardGame .unitCard .cardInfoCompact .abilityDisplay,
+.boardGame .unitCard .cardInfoCompact .cardFooter { display: none; }
+.boardGame .unitCard .cardInfoCompact .unitActions { margin-top: auto; }
+.boardGame .unitCard .unitActions button { padding-block: 1.5cqw; }
+@media (hover: hover) and (pointer: fine) {
+  .boardGame .unitCard:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)):hover .cardInfoPanel.cardInfoCompact {
+    min-height: 62%;
+  }
+  .boardGame .unitCard:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)):hover .cardInfoCompact .abilityDisplay,
+  .boardGame .unitCard:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)):hover .cardInfoCompact .cardFooter { display: block; }
+}
+.boardGame .unitCard.cardInfoTouchExpanded:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoPanel.cardInfoCompact { min-height: 62%; }
+.boardGame .unitCard.cardInfoTouchExpanded:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoCompact .abilityDisplay,
+.boardGame .unitCard.cardInfoTouchExpanded:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoCompact .cardFooter { display: block; }
+
+.boardGame .unitCardWrapper { z-index: 0; }
+.boardGame .unitCardWrapper:hover, .boardGame .unitCardWrapperTouched { z-index: 45; }
+.boardGame .unitCardWrapper .unitEffectsTooltip {
+  left: calc(100% + .35rem);
+  right: auto;
+  top: 0;
+  width: max(145px, 115%);
+  box-sizing: border-box;
+}
+.boardGame .unitCardWrapperTouched .unitEffectsTooltip { display: block; opacity: 1; transform: none; }
+
+/* Hand preview follows the same card proportions, scaled to its larger frame. */
+.selectedCardInner { container-type: inline-size; }
+.selectedCardInner .cardInfoPanel.cardInfoCompact {
+  bottom: 3.6rem;
+  height: 18%;
+  padding: 3cqw 4cqw;
+  overflow: hidden;
+  transition: height 260ms cubic-bezier(.2,.75,.2,1);
+}
+.selectedCardInner .cardInfoCompact .abilityDisplay,
+.selectedCardInner .cardInfoCompact .cardFooter { display: none; }
+.selectedCardInner.selectedCardTouchExpanded:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoPanel.cardInfoCompact { height: 60%; }
+.selectedCardInner.selectedCardTouchExpanded:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoCompact .abilityDisplay { display: block; }
+@media (hover: hover) and (pointer: fine) {
+  .selectedCardInner:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)):hover .cardInfoPanel.cardInfoCompact { height: 60%; }
+  .selectedCardInner:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)):hover .cardInfoCompact .abilityDisplay { display: block; }
+}
+.selectedCardInner .tierBadge, .unitDetailCard .tierBadge {
+  min-width: 10cqw;
+  height: 7.5cqw;
+  padding: .7cqw 1.2cqw 0;
+  font-size: 4cqw;
+  top: -.7cqw;
+}
+.selectedCardInner .cardIdentity > strong, .unitDetailCard .cardIdentity > strong { font-size: 5.5cqw; line-height: 1.15; }
+.selectedCardInner .cardType, .unitDetailCard .cardType { font-size: 3.5cqw; }
+.selectedCardInner .cardStats, .unitDetailCard .cardStats { font-size: 5cqw; }
+.selectedCardInner .cardStatIcon, .unitDetailCard .cardStatIcon { width: 5cqw; height: 5cqw; }
+.selectedCardInner .traitIcons, .unitDetailCard .traitIcons { gap: 1.5cqw; }
+.selectedCardInner .traitIcons > span, .unitDetailCard .traitIcons > span { width: 5.5cqw; height: 5.5cqw; }
+.selectedCardInner .abilityDisplay p, .unitDetailCard .abilityDisplay p { font-size: 4.2cqw; }
+.selectedCardInner .uniqueMark, .unitDetailCard .uniqueMark { width: 8cqw; height: 8cqw; font-size: 6cqw; top: 2cqw; right: 2cqw; }
+.selectedCardInner .cost, .unitDetailCard .cost { width: 12cqw; height: 12cqw; top: 2cqw; left: 2cqw; }
+.selectedActions button { padding-block: .62rem; }
+@media (hover: hover) and (pointer: fine) {
+  .boardGame .fannedHand .handCardSlot:hover .handCard:not(:disabled) { transform: translateY(-85px) rotate(0deg) scale(1.22); transform-origin: center bottom; z-index: 140; }
+  .boardGame .handSection:hover { z-index: 180; }
+}
+.boardGame .handSection { clip-path: none; overflow: visible; }
+.boardGame .handSection .hand, .boardGame .handSection .handFanTrack { overflow: visible; }
+.boardGame .handCardSlot { position: relative; flex: 0 0 auto; width: fit-content; pointer-events: auto; }
+.boardGame .handCardSlot:hover { z-index: 140; }
+.boardGame .handCardSlot .handCard { display: block; }
+.boardGame .handFanTrack > .handCardSlot + .handCardSlot { margin-left: clamp(-38px, -2.1vw, -22px); }
+@media (max-width: 760px) { .boardGame .handFanTrack > .handCardSlot + .handCardSlot { margin-left: clamp(-26px, -3vw, -20px); } }
+@media (max-width: 1100px) and (max-height: 700px) { .boardGame .handFanTrack > .handCardSlot + .handCardSlot { margin-left: -2.1vw; } }
+.boardGame .boardPlacementCell:nth-last-child(-n+2) .unitEffectsTooltip { left: calc(100% + .35rem); right: auto; }
+.boardGame .unitCardWrapper:hover, .boardGame .unitCardWrapperTouched { z-index: 220; }
+.unitEffectsTooltipPortal { position: fixed; z-index: 2400; right: auto; bottom: auto; box-sizing: border-box; opacity: 1; transform: none; pointer-events: none; }
+.indicatorIcon { display: inline-flex; width: 1em; height: 1em; flex: 0 0 1em; vertical-align: -.12em; align-items: center; justify-content: center; margin-right: .08em; font: inherit; color: inherit; }
+.indicatorIcon svg { display: block; width: 100%; height: 100%; filter: drop-shadow(0 2px 0 rgba(20,3,4,.98)) drop-shadow(0 0 7px currentColor); }
+.statGlyph { display: inline-block; font: inherit; font-style: normal; line-height: 1; color: inherit; }
+.cardStatIcon { font-size: inherit; }
+.combatValuePreview, .standingBox .conflictValuePreview { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+.attackDragBadge .indicatorIcon { margin-right: 0; }
+.boardGame .opponentStatusDock button { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.boardGame .locationBar { border: 1px solid rgba(212,175,55,.22); background-clip: padding-box; }
+.boardGame .locationBar::after { content: none; }
+.deckBack.deckBackArtwork { border: 0; outline: 0; background-color: #100d12; background-size: 100% 100%; background-position: center; background-repeat: no-repeat; }
+.cardStatIcon, .cardStatIcon svg, .traitTooltipTrigger, .uniqueMark { animation: none; transition-property: color, filter, text-shadow; }
+.cardStatIcon:is(:hover, :focus-visible), .traitTooltipTrigger:is(:hover, :focus-visible) { transform: none; }
+.cardStats .statBuffed .cardStatIcon { color: #f0cd68; filter: drop-shadow(0 0 3px #dfbd54); }
+.cardStats .statDebuffed .cardStatIcon { color: #dd7767; filter: drop-shadow(0 0 3px #df6d5d); }
+.cardStats .statDamaged .cardStatIcon { color: #cf8175; }
+.attackHalfMilitaryHover .cardStat:first-child .cardStatIcon { color: #df6d5d; filter: drop-shadow(0 0 4px #df6d5d); }
+.attackHalfPoliticalHover .cardStat:nth-child(2) .cardStatIcon { color: #dfbd54; filter: drop-shadow(0 0 4px #dfbd54); }
+.cardStats .healthStat.statBuffed .cardStatIcon { color: #72c98b; filter: drop-shadow(0 0 4px #72c98b); }
+
+/* Keep card help beside its trigger and above every card and modal layer. */
+.traitTooltipPortal { transform: none; z-index: 1400; max-width: calc(100vw - 16px); }
+.uniqueTooltipPortal { transform: none; z-index: 1400; }
+.game [data-game-hint] { position: relative; }
+.game [data-game-hint]:is(:hover, :focus-visible)::after { content: attr(data-game-hint); position: absolute; left: calc(100% + 8px); top: 0; z-index: 1400; width: max-content; max-width: min(220px, 70vw); padding: .45rem .55rem; border: 1px solid rgba(212,175,55,.48); background: linear-gradient(180deg, #241b18, #0c090b); color: #f5e6c8; box-shadow: 0 10px 25px #000b; font: .7rem/1.35 var(--font-body), serif; text-align: left; white-space: normal; pointer-events: none; }
+.game .commandMeter:has(.commandPip:hover)::after { content: none; }
+.equippedArtifactBadge { top: auto; bottom: 0; height: 68%; max-width: 24%; transform: none; pointer-events: auto; z-index: 5; cursor: var(--realm-action-cursor); }
+.equippedArtifactBadge.traitTooltipTrigger { display: block; }
+.cardMetadataWithArtifact { overflow: visible; }
+.boardGame .unitCard .cardInfoCompact { overflow: visible; }
+.boardGame .unitCard .cardInfoCompact .cardIdentity > small { line-height: 1.15; padding-block: .5cqw; }
+.cardIdentity > small { display: flex; align-items: center; padding-block: 0; }
+.boardGame .unitCard .unitActions button { display: flex; align-items: center; justify-content: center; line-height: 1; padding-block: 2cqw; }
+.boardGame .handCard .cardInfoPanel.cardInfoCompact, .revealedHandModal .handCard .cardInfoPanel.cardInfoCompact { height: auto; min-height: 0; padding: 2.2cqw 3cqw; gap: 1cqw; overflow: visible; transition: min-height 260ms cubic-bezier(.2,.75,.2,1); }
+.boardGame .handCard .cardInfoCompact .cardIdentity, .revealedHandModal .handCard .cardInfoCompact .cardIdentity { grid-template-rows: auto auto; }
+.boardGame .handCard .cardInfoCompact .cardStats, .revealedHandModal .handCard .cardInfoCompact .cardStats { margin-top: 1cqw; }
+.boardGame .handCard .cardInfoCompact .abilityDisplay, .boardGame .handCard .cardInfoCompact .cardFooter, .revealedHandModal .handCard .cardInfoCompact .abilityDisplay, .revealedHandModal .handCard .cardInfoCompact .cardFooter { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .boardGame .handCardSlot:hover .handCard:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoCompact { min-height: 60%; }
+  .boardGame .handCardSlot:hover .handCard:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoCompact .abilityDisplay { display: block; }
+}
+
+/* Veiled Sight centers each row independently, with at most four larger cards. */
+.revealedHandModal { width: min(92vw, 920px); display: flex; flex-direction: column; align-items: center; justify-content: center; max-height: calc(100dvh - 2rem); }
+.revealedHandTitle { text-align: center; }
+.revealedHandRows { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(8px, 2dvh, 22px); width: 100%; }
+.revealedHandRows .hand { width: 100%; }
+.revealedHandRows .handLinearTrack, .revealedHandRows .handFanTrack { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: clamp(6px, 1vw, 14px); width: 100%; margin: 0 auto; }
+.revealedHandRows .handCard { flex: 0 1 min(21vw, 180px, calc((100dvh - 8rem) * 5 / 16)); width: min(21vw, 180px, calc((100dvh - 8rem) * 5 / 16)); max-width: none; transform: none !important; }
+@media (max-width: 760px) { .revealedHandModal { width: 96vw; } .revealedHandRows .handCard { flex-basis: min(22vw, calc((100dvh - 6rem) * 5 / 16)); width: min(22vw, calc((100dvh - 6rem) * 5 / 16)); } }
+
+.unitDetailCard { container-type: inline-size; }
+.detailCornerClose {
+  position: absolute;
+  top: .55rem;
+  right: .55rem;
+  z-index: 15;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1px solid rgba(212,175,55,.4);
+  background: rgba(18,13,16,.86);
+  color: #e9d9ae;
+  font: 1rem/1 var(--font-hotd), serif;
+  cursor: pointer;
+}
+.unitDetailEffects { padding-top: 2.75rem; }
+.detailExpandedInfo { margin: 0 0 1rem; }
+.detailExpandedInfo .cardInfoPanel { position: relative; height: auto; min-height: 0; padding: 0 0 .85rem; background: transparent; border-top: 0; border-bottom: 1px solid rgba(212,175,55,.25); overflow: visible; }
+.detailExpandedInfo .cardInfoPanel .cardMetadata { flex: 0 0 auto; }
+.detailExpandedInfo .cardInfoPanel .cardIdentity > strong { font-size: 1rem; }
+.detailExpandedInfo .cardInfoPanel .abilityDisplay { min-height: 0; flex: 0 0 auto; margin-top: .65rem; }
+.detailExpandedInfo .cardInfoPanel .emptyAbility,
+.detailExpandedInfo .cardInfoPanel .cardFooter { display: none; }
+.artifactEffect { display: grid; grid-template-columns: 72px minmax(0,1fr); column-gap: .7rem; align-items: start; }
+.artifactEffect .detailArtifactArtwork { grid-row: 1 / 4; width: 72px; height: 96px; object-fit: cover; border: 1px solid rgba(212,175,55,.36); }
+.artifactEffect > :not(.detailArtifactArtwork) { grid-column: 2; }
+
+.boardGame, .selectedCardPreview, .unitDetailOverlay { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.boardGame img, .selectedCardPreview img, .unitDetailOverlay img { -webkit-user-drag: none; }
+@media (prefers-reduced-motion: reduce) {
+  .boardGame .unitCard .cardInfoPanel.cardInfoCompact,
+  .selectedCardInner .cardInfoPanel.cardInfoCompact { transition: none; }
 }

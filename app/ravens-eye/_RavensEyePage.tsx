@@ -306,12 +306,13 @@ function ExpandableCaption({
         <button
           type="button"
           className={styles.captionMoreBtn}
+          aria-expanded={false}
           onClick={(e) => {
             e.stopPropagation();
             setExpanded(true);
           }}
         >
-          more
+          Show more
         </button>
       </p>
     );
@@ -338,12 +339,13 @@ function ExpandableCaption({
           <button
             type="button"
             className={styles.captionMoreBtn}
+            aria-expanded={true}
             onClick={(e) => {
               e.stopPropagation();
               setExpanded(false);
             }}
           >
-            less
+            Show less
           </button>
         </div>
       </div>
@@ -356,12 +358,13 @@ function ExpandableCaption({
       <button
         type="button"
         className={styles.captionMoreBtn}
+        aria-expanded={true}
         onClick={(e) => {
           e.stopPropagation();
           setExpanded(false);
         }}
       >
-        less
+        Show less
       </button>
     </p>
   );
@@ -390,9 +393,9 @@ function setBrowserUrl(url: string, mode: "push" | "replace" = "push") {
   if (typeof window === "undefined") return;
 
   if (mode === "replace") {
-    window.history.replaceState(window.history.state, "", url);
+    window.history.replaceState(null, "", url);
   } else {
-    window.history.pushState(window.history.state, "", url);
+    window.history.pushState(null, "", url);
   }
 }
 
@@ -1908,4 +1911,3 @@ export function RavensEyePageContent({
     </Suspense>
   );
 }
-
