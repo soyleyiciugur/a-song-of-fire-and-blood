@@ -202,7 +202,24 @@ async function main(){
      const safeBoundary=dilate4(excluded,1);
      for(let i=0;i<mask.length;i++)if(safeBoundary[i])mask[i]=0;
    }
-   return{id:r.id,name:r.name,color:r.color,group:r.group||r.id,path:trace(mask,junctions,grid)};
+   if(r.id==='beyond-the-wall'){
+     // Union land additions into the mask before tracing. Appending overlapping
+     // SVG rings would cut holes under the overlay's evenodd fill rule.
+     const {polygons}=require('../data/map/beyond-the-wall-additions.json');
+     for(const polygon of polygons){
+       const minX=Math.floor(Math.min(...polygon.map(p=>p[0]))/grid.scale);
+       const maxX=Math.ceil(Math.max(...polygon.map(p=>p[0]))/grid.scale);
+       const minY=Math.floor(Math.min(...polygon.map(p=>p[1]))/grid.scale);
+       const maxY=Math.ceil(Math.max(...polygon.map(p=>p[1]))/grid.scale);
+       for(let y=minY;y<maxY;y++)for(let x=minX;x<maxX;x++){
+         if(inside((x+.5)*grid.scale,(y+.5)*grid.scale,polygon))mask[y*W+x]=1;
+       }
+     }
+   }
+   // Retain small headlands with a finer simplification tolerance while still
+   // rounding their contours; forcing every grid corner creates square steps.
+   const path=trace(mask,junctions,r.id==='beyond-the-wall'?{...grid,simplifyTolerance:.35}:grid);
+   return{id:r.id,name:r.name,color:r.color,group:r.group||r.id,path};
  }).filter(r=>r.path);
  fs.writeFileSync('data/map/world-region-geometry.json',JSON.stringify({width:7400,height:4932,regions},null,2)+'\n');
  const paths=[...west.regions,...regions].map(r=>`<path d="${r.path}" fill="${r.color}" fill-opacity=".25" stroke="${r.color}" stroke-width="2"/>`).join('');

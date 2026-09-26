@@ -242,19 +242,41 @@
   {
     "id": "corbray",
     "name": "House Corbray",
-    "words": "-",
-    "seat": "-",
-    "sigilSrc": "",
-    "color": "#777777",
+    "words": "Words Unrecorded",
+    "seat": "Heart's Home",
+    "sigilSrc": "/images/houses/corbray.webp",
+    "color": "#1C1C1C",
+    "secondaryColor": "#B22222",
     "description": "House Corbray is represented at court by Ser Lucas Corbray, the Kingsguard known as the Mustang. His affection for Princess Vhaemys repeatedly makes him too indulgent: Jace catches him helping her evade the spirit of a kitchen punishment and reminds him that friendship with a princess cannot outrank a white-cloak oath."
   },
   {
     "id": "reyne",
     "name": "House Reyne",
-    "words": "-",
-    "seat": "-",
-    "sigilSrc": "",
-    "color": "#777777",
-    "description": "The family of Reyenald Reyne, a thirteen-year-old swordsman training under Orwell Morrigen at the Red Keep."
+    "words": "Words Unrecorded",
+    "seat": "Castamere",
+    "sigilSrc": "/images/houses/reyne.webp",
+    "color": "#A80F1B",
+    "secondaryColor": "#E8E3D6",
+    "description": "An ancient and wealthy Westerlands house seated amid the mines, caves and subterranean halls of Castamere. In King's Landing, thirteen-year-old Reyenald Reyne trains beneath Lord Commander Orwell Morrigen, whose praise for the boy's talent is tempered by warnings that pride may prove deadlier than any opponent."
+  },
+  {
+    "id": "caswell",
+    "name": "House Caswell",
+    "words": "Words Unrecorded",
+    "seat": "Bitterbridge",
+    "sigilSrc": "/images/houses/caswell.webp",
+    "color": "#E0B800",
+    "secondaryColor": "#F2F2ED",
+    "description": "A Reach house seated at Bitterbridge, where the Roseroad crosses the Mander, whose lords traditionally bear the title Defender of the Fords. Its best-known living son is Berholt Caswell, the High Septon: a sincerely pious but politically cautious servant of the Faith who has agreed to lead rites for the dead of the Mummers' Blood and help calm Flea Bottom."
+  },
+  {
+    "id": "marbrand",
+    "name": "House Marbrand",
+    "words": "Burning Bright",
+    "seat": "Ashemark",
+    "sigilSrc": "/images/houses/marbrand.webp",
+    "color": "#E6601A",
+    "secondaryColor": "#C9C9C9",
+    "description": "A prominent Westerlands house ruling Ashemark beneath the banner of a burning orange tree. Through Lady Myrielle Marbrand's marriage to Tion Lannister, the house is joined to the Crown's Master of Coin and therefore stands close to the realm's financial and political affairs."
   }
 ]

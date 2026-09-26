@@ -6933,6 +6933,186 @@
         "community-no-politics-game-night-c04",
         "community-no-politics-game-night-c05"
       ]
+    },
+    {
+      "id": "hotel-lobby-followup-21",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-26T14:49:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c21"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-22",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-26T17:04:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c22"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-23",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-26T20:44:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c23"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-24",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-27T01:04:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c24"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-25",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-27T04:44:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c25"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-26",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-27T08:24:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c26"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-27",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-27T12:49:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c27"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-28",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-27T17:44:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c28"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-29",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-27T20:54:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c29"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-30",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-28T00:44:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c30"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-31",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-28T05:54:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c31"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-32",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-28T09:44:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c32"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-33",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-28T13:44:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c33"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-34",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-28T17:14:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c34"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-35",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-28T22:04:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c35"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-36",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-29T02:34:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c36"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-37",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-29T08:24:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c37"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
+    },
+    {
+      "id": "hotel-lobby-followup-38",
+      "batchId": "hotel-lobby-three-day-followups",
+      "publishedAt": "2026-09-29T13:04:00.000Z",
+      "commentIds": [
+        "gallery-baelenys-jacaelon-hotel-lobby-c38"
+      ],
+      "forumThreadIds": [],
+      "forumCommentIds": []
     }
   ],
   "policy": {

@@ -29,6 +29,7 @@ import {
   MAP_EVENT_TYPE_LABELS,
 } from "@/types/map";
 import type { Character } from "@/types/character";
+import { getCharacterHouseSigil } from "@/lib/characterMiniPortrait";
 
 import styles from "./interactive-map.module.css";
 
@@ -175,14 +176,22 @@ function Avatar({
   size?: number;
   status?: CharacterMapStatus;
 }) {
-  const [hasError, setHasError] = useState(false);
+  const [fallbackIndex, setFallbackIndex] = useState(-1);
+  const houseSigil = useMemo(
+    () => getCharacterHouseSigil(characterId),
+    [characterId],
+  );
+  const fallbackSources = useMemo(
+    () => [...new Set([houseSigil, MINI_FALLBACK].filter(Boolean))] as string[],
+    [houseSigil],
+  );
 
   useEffect(() => {
-    setHasError(false);
+    setFallbackIndex(-1);
   }, [characterId]);
 
-  const src = hasError
-    ? MINI_FALLBACK
+  const src = fallbackIndex >= 0
+    ? fallbackSources[fallbackIndex] ?? MINI_FALLBACK
     : `/images/miniportraits/${characterId}.webp`;
 
   return (
@@ -202,7 +211,11 @@ function Avatar({
         width={size}
         height={size}
         draggable={false}
-        onError={() => setHasError(true)}
+        onError={() => {
+          if (fallbackIndex < fallbackSources.length - 1) {
+            setFallbackIndex((current) => current + 1);
+          }
+        }}
         className={`${styles.avatarImg} ${
           status === "dead"
             ? styles.avatarDead

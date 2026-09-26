@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { getCharacters } from "@/lib/characters";
+import MiniPortrait from "@/components/MiniPortrait";
 
 import styles from "./characters.module.css";
 import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
@@ -57,8 +58,6 @@ function heightValue(height?: string) {
   return Number.isFinite(value) ? value : null;
 }
 
-const MINI_PORTRAIT_EXTS = ["webp", "png", "jpg", "jpeg"] as const;
-
 function formatNickname(nickname?: string | null) {
   if (!nickname || nickname === "-") return null;
 
@@ -88,28 +87,12 @@ function RawMiniPortrait({
   alt: string;
   size: number;
 }) {
-  const [extIndex, setExtIndex] = useState(0);
-
-  const src =
-    extIndex >= MINI_PORTRAIT_EXTS.length
-      ? "/images/miniportraits/default.webp"
-      : `/images/miniportraits/${id}.${MINI_PORTRAIT_EXTS[extIndex]}`;
-
-  const onError =
-    extIndex <= MINI_PORTRAIT_EXTS.length - 1
-      ? () => setExtIndex((current) => current + 1)
-      : undefined;
-
   return (
-    <img
-      src={src}
+    <MiniPortrait
+      id={id}
       alt={alt}
-      width={size}
-      height={size}
+      size={size}
       className={styles.rawMiniPortrait}
-      draggable={false}
-      decoding="async"
-      onError={onError}
     />
   );
 }
@@ -523,12 +506,9 @@ export default function Characters() {
                         <span className={styles.metaLine}>
                           <span>{houseLabel(character.house)}</span>
                           {title && (
-                            <>
-                              <span className={styles.metaDot}>·</span>
-                              <span className={styles.title} title={title}>
-                                {title}
-                              </span>
-                            </>
+                            <span className={styles.title} title={title}>
+                              {title}
+                            </span>
                           )}
                         </span>
                       </span>

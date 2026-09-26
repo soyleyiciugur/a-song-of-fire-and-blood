@@ -91,7 +91,7 @@ const defaultGrid = { width: W, height: H, left: crop.left, top: crop.top, scale
 function smoothArc(points, grid = defaultGrid) {
   const key=p=>p[1]*(grid.width+1)+p[0];
   const backwards=key(points[0])>key(points.at(-1));
-  let pts=simplify(backwards?[...points].reverse():points,1.3);
+  let pts=simplify(backwards?[...points].reverse():points,grid.simplifyTolerance ?? 1.3);
   if(backwards)pts=pts.reverse();
   const xy=([x,y])=>`${grid.left+x*grid.scale},${grid.top+y*grid.scale}`;
   const mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
