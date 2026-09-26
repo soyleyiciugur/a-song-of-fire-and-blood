@@ -12,23 +12,6 @@
     "category": "fleabottom"
   },
   {
-    "id": "gallery-baelenys-jacaelon-hotel-lobby",
-    "src": "/videos/reels/baelenys-jacaelon-hotel-lobby.mp4",
-    "caption": "Other Targaryen kids leave the palace for five minutes and suddenly Jace, now the heir, and Baelenys are getting along like this. Baelenys on the rap verse, Jace on hotel-lobby dance duty.",
-    "characterIds": [
-      "baelenys-targaryen",
-      "jacaelon-targaryen"
-    ],
-    "houseIds": [
-      "targaryen"
-    ],
-    "dragonIds": [],
-    "chapterId": null,
-    "worldDate": null,
-    "uploadedAt": "2026-09-26",
-    "category": "fleabottom"
-  },
-  {
     "id": "gallery-targaryens-in-essos",
     "src": "/images/gallery/targaryens-in-essos.webp",
     "caption": "The Traitors.",
