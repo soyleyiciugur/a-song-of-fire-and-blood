@@ -7972,7 +7972,7 @@
 }
 .boardGame .handSection { clip-path: none; overflow: visible; }
 .boardGame .handSection .hand, .boardGame .handSection .handFanTrack { overflow: visible; }
-.boardGame .handCardSlot { position: relative; flex: 0 0 auto; width: fit-content; pointer-events: auto; }
+.boardGame .handCardSlot { position: relative; flex: 0 0 auto; width: fit-content; pointer-events: auto; cursor: var(--realm-action-cursor); touch-action: none; }
 .boardGame .handCardSlot:hover { z-index: 140; }
 .boardGame .handCardSlot .handCard { display: block; }
 .boardGame .handFanTrack > .handCardSlot + .handCardSlot { margin-left: clamp(-38px, -2.1vw, -22px); }

@@ -9,6 +9,7 @@
       "Made Great Game deckback artwork update automatically from the images in the decks folder.",
       "Added automatic deckfront artwork as the fallback for Great Game cards without their own images.",
       "Smoothed Military and Political Attack hover tints and removed their hard red and gold edges from board cards.",
+      "Restored click and drag from the original hand-card position while keeping raised cards steady on hover.",
       "Fixed narrow-screen House and title separators in Characters, contained expandable reel captions with touch-friendly Show more controls, and removed the duplicate page-share button while Raven’s Eye media is open."
     ]
   },

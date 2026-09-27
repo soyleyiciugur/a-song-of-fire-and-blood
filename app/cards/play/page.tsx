@@ -5173,7 +5173,7 @@ export default function GreatGamePlayPage() {
   }
 
   function handleHandPointerDown(
-    event: ReactPointerEvent<HTMLButtonElement>,
+    event: ReactPointerEvent<HTMLDivElement>,
     handCard: HandCardState
   ) {
     if (
@@ -5203,7 +5203,7 @@ export default function GreatGamePlayPage() {
   }
 
   function handleHandPointerMove(
-    event: ReactPointerEvent<HTMLButtonElement>,
+    event: ReactPointerEvent<HTMLDivElement>,
     handCard: HandCardState
   ) {
     const session =
@@ -5365,7 +5365,7 @@ export default function GreatGamePlayPage() {
   }
 
   function handleHandPointerUp(
-    event: ReactPointerEvent<HTMLButtonElement>,
+    event: ReactPointerEvent<HTMLDivElement>,
     handCard: HandCardState
   ) {
     const session =
@@ -5430,7 +5430,7 @@ export default function GreatGamePlayPage() {
   }
 
   function handleHandPointerCancel(
-    event: ReactPointerEvent<HTMLButtonElement>
+    event: ReactPointerEvent<HTMLDivElement>
   ) {
     if (
       pointerDragRef.current
@@ -8852,16 +8852,16 @@ function HandCard({
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   onPointerDown: (
-    event: ReactPointerEvent<HTMLButtonElement>
+    event: ReactPointerEvent<HTMLDivElement>
   ) => void;
   onPointerMove: (
-    event: ReactPointerEvent<HTMLButtonElement>
+    event: ReactPointerEvent<HTMLDivElement>
   ) => void;
   onPointerUp: (
-    event: ReactPointerEvent<HTMLButtonElement>
+    event: ReactPointerEvent<HTMLDivElement>
   ) => void;
   onPointerCancel: (
-    event: ReactPointerEvent<HTMLButtonElement>
+    event: ReactPointerEvent<HTMLDivElement>
   ) => void;
 }) {
   const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -8887,7 +8887,35 @@ function HandCard({
     ].command >= cost;
 
   return (
-    <div className={styles.handCardSlot} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <div
+      className={styles.handCardSlot}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={() => {
+        if (interactionLocked && !inspectOnly) return;
+        if (held.current) { held.current = false; return; }
+        onPlay();
+      }}
+      onPointerDown={(event) => {
+        if (interactionLocked && !inspectOnly) return;
+        if (event.pointerType === "touch") {
+          held.current = false;
+          holdStart.current = { x: event.clientX, y: event.clientY };
+          holdTimer.current = setTimeout(() => {
+            held.current = true;
+            if (!inspectOnly) onPointerCancel(event);
+            onInspect();
+          }, 500);
+        }
+        if (!inspectOnly) onPointerDown(event);
+      }}
+      onPointerMove={(event) => {
+        if (holdStart.current && Math.hypot(event.clientX - holdStart.current.x, event.clientY - holdStart.current.y) > 12) clearHold();
+        if (!inspectOnly) onPointerMove(event);
+      }}
+      onPointerUp={(event) => { clearHold(); if (!inspectOnly) onPointerUp(event); }}
+      onPointerCancel={(event) => { clearHold(); if (!inspectOnly) onPointerCancel(event); }}
+    >
     <button
       data-game-card="true"
       className={[
@@ -8926,26 +8954,7 @@ function HandCard({
         handCard.instanceId
       }
       disabled={interactionLocked && !inspectOnly}
-      onClick={() => { if (held.current) { held.current = false; return; } onPlay(); }}
       draggable={false}
-      onPointerDown={(event) => {
-        if (event.pointerType === "touch") {
-          held.current = false;
-          holdStart.current = { x: event.clientX, y: event.clientY };
-          holdTimer.current = setTimeout(() => {
-            held.current = true;
-            if (!inspectOnly) onPointerCancel(event);
-            onInspect();
-          }, 500);
-        }
-        if (!inspectOnly) onPointerDown(event);
-      }}
-      onPointerMove={(event) => {
-        if (holdStart.current && Math.hypot(event.clientX - holdStart.current.x, event.clientY - holdStart.current.y) > 12) clearHold();
-        if (!inspectOnly) onPointerMove(event);
-      }}
-      onPointerUp={(event) => { clearHold(); if (!inspectOnly) onPointerUp(event); }}
-      onPointerCancel={(event) => { clearHold(); if (!inspectOnly) onPointerCancel(event); }}
       onContextMenu={(event) => event.preventDefault()}
       onDragStart={(event) =>
         event.preventDefault()
