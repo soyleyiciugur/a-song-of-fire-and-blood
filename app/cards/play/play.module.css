@@ -467,7 +467,10 @@
 
 .dangerButton {
   padding: 0.8rem 1.2rem;
+}
 
+.dangerButton,
+.boardGame .opponentStatusDock .dangerButton {
   color: #eca398;
 
   border-color:
@@ -477,7 +480,20 @@
     rgba(130, 35, 30, 0.18);
 }
 
-.dangerButton:hover {
+.boardGame .opponentStatusDock .dangerButton {
+  font-family: var(--font-hotd), serif;
+  font-weight: inherit;
+  letter-spacing: .07em;
+  line-height: 1;
+}
+.boardGame .opponentStatusDock .dangerButton > span {
+  display: block;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+.dangerButton:hover,
+.boardGame .opponentStatusDock .dangerButton:hover {
   border-color: #d96355;
 
   background:

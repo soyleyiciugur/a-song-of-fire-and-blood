@@ -5711,7 +5711,7 @@ export default function GreatGamePlayPage() {
             <strong>Turn {activePlayer.turnsTaken}</strong>
             <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}&apos;s turn</small>
           </div>
-          <button type="button" onClick={() => setExitConfirm(true)}>Exit Game</button>
+          <button type="button" className={styles.dangerButton} onClick={() => setExitConfirm(true)}><span>Exit Game</span></button>
       </section>
 
       {onlineCanAct &&

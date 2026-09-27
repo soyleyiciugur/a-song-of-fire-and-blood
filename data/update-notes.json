@@ -2,6 +2,7 @@
   {
     "date": "2026-09-28",
     "items": [
+      "Matched the top-right Exit Game button to its confirmation button's typography, colors, and hover styling, with vertically centered text and compact sizing.",
       "Hide The Realms instruction and Cancel controls while a card panel is open, keeping cancellation inside the active card panel.",
       "Moved selection instructions and Cancel into The Realms divider, right-aligned instructions beside a stationary Cancel button with shared End Turn colors and highlight styling, and refined Command-number outlines to remove sharp protrusions and heavy shadows.",
       "Kept Decks card controls below the shared Play card face so its artwork and proportions match Cards and Play."
