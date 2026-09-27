@@ -1,7 +1,22 @@
 [
   {
+    "date": "2026-09-28",
+    "items": [
+      "Hide The Realms instruction and Cancel controls while a card panel is open, keeping cancellation inside the active card panel.",
+      "Moved selection instructions and Cancel into The Realms divider, right-aligned instructions beside a stationary Cancel button with shared End Turn colors and highlight styling, and refined Command-number outlines to remove sharp protrusions and heavy shadows.",
+      "Kept Decks card controls below the shared Play card face so its artwork and proportions match Cards and Play."
+    ]
+  },
+  {
     "date": "2026-09-27",
     "items": [
+      "Doubled board Command gems and sized hand cards to fill the space from five pixels below the board to the page bottom, preserving board dimensions and the natural fan.",
+      "Combined card tiers and Command costs in tier-colored gems, with highlighted hover artwork, centered two-digit costs, red and green number fills with separate dark outlines, and compact board gems opposite the Unique marker.",
+      "Matched attack-hover stat numbers to their icons: red for Military and gold for Political.",
+      "Kept tier badges fixed on hover and positioned card rule tooltips directly beneath Active Effects with matching width as its content changes.",
+      "Removed overlapping equipped-artifact icon tooltips; artifact descriptions remain in Active Effects.",
+      "Extended hand-card detail backgrounds beneath their action buttons, displayed Challenge while Dark Sister is equipped, and made boosted card stats glow green.",
+      "Unified Cards, Decks, and opening-hand cards with the Play card design and square corners, and stabilized missing artwork with shared image loading and cached fallbacks.",
       "Refined Great Game card sword icons, button alignment, artifact and rules tooltips, compact hand cards, and centered Veiled Sight cards in rows of up to four.",
       "Balanced Veiled Sight hands into centered two-row groups, unified filled conflict and card stat icons with the health heart, and raised Active Effects above the board.",
       "Allowed units with zero Power to initiate Military attacks and take normal defender damage.",
@@ -10,6 +25,7 @@
       "Added automatic deckfront artwork as the fallback for Great Game cards without their own images.",
       "Smoothed Military and Political Attack hover tints and removed their hard red and gold edges from board cards.",
       "Restored click and drag from the original hand-card position while keeping raised cards steady on hover.",
+      "Enabled touch drag attacks from board cards to legal units or Standing on mobile.",
       "Fixed narrow-screen House and title separators in Characters, contained expandable reel captions with touch-friendly Show more controls, and removed the duplicate page-share button while Raven’s Eye media is open."
     ]
   },

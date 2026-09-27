@@ -648,6 +648,18 @@
   cursor: var(--realm-help-cursor) !important;
 }
 
+.catalogCard { position: relative; min-width: 0; align-self: start; border-radius: 0; }
+.catalogCard > button { cursor: pointer; }
+.catalogCard .cardActions { position: relative; right: auto; bottom: auto; left: auto; width: 100%; border-radius: 0; }
+.catalogModal { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: min(800px, calc(100vw - 32px)); border-radius: 0; color: #f5e6c8; font-family: var(--font-body), Georgia, serif; }
+.catalogModal > div { min-width: 0; }
+.catalogModal button { border-radius: 0; }
+.catalogModal > div:last-child { min-height: 0; }
+.additionalAbility { padding-block: .65rem; border-bottom: 1px solid rgba(212,175,55,.2); }
+.additionalAbility h3 { margin: 0 0 .4rem; color: #dfc07a; font: .75rem var(--font-hotd), serif; }
+.additionalAbility p { margin: 0; font-size: .8rem; line-height: 1.5; }
+@media (max-width: 650px) { .catalogModal { display: grid; grid-template-columns: minmax(0,1fr); max-height: 92dvh; overflow-y: auto; } }
+
 /* Four cards across on a normal desktop collection view. */
 .cardGrid {
   grid-template-columns: repeat(4, minmax(0, 1fr));

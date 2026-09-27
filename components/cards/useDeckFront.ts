@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 let frontRequest: Promise<string | null> | null = null;
 
-function loadDeckFront(): Promise<string | null> {
+export function loadDeckFront(): Promise<string | null> {
   frontRequest ??= fetch("/api/cards/deck-backs", { cache: "no-store" })
     .then((response) => response.ok ? response.json() as Promise<{ front: string | null }> : null)
     .then((result) => result?.front ?? null)
