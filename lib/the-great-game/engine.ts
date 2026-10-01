@@ -553,6 +553,18 @@ interface DrawResult {
   cardId?: string;
 }
 
+function handSizeForLimit(
+  player: PlayerState
+): number {
+  return player.hand.filter(
+    (handCard) =>
+      getGameCard(
+        handCard.cardId
+      ).special !==
+      "royal-favor"
+  ).length;
+}
+
 function drawCardMutable(
   state: GameState,
   playerId: PlayerId,
@@ -589,8 +601,9 @@ function drawCardMutable(
   }
 
   if (
-    player.hand.length >=
-    HAND_LIMIT
+    handSizeForLimit(
+      player
+    ) >= HAND_LIMIT
   ) {
     player.discard.push(
       cardId
@@ -3360,7 +3373,7 @@ function politicalAttackMutable(
 
   assertRule(
     attackerPoliticalPower > 0,
-    "A Character with 0 Political Strength cannot initiate a Political Conflict."
+    "A Character with 0 Influence cannot initiate a Political Conflict."
   );
 
   attacker!.exhausted =
@@ -3511,7 +3524,7 @@ function politicalAttackMutable(
 
   addLog(
     state,
-    `${attackerCard.name} challenges ${getGameCard(defender!.cardId).name} politically. (${attackerPoliticalPower} vs ${defenderPoliticalPower} Political Strength)`,
+    `${attackerCard.name} challenges ${getGameCard(defender!.cardId).name} politically. (${attackerPoliticalPower} vs ${defenderPoliticalPower} Influence)`,
     playerId
   );
 
@@ -4372,6 +4385,14 @@ export function createGame(
       }
     );
   }
+
+  // Second-player compensation: one additional normal opening card.
+  // Royal Favor is still granted separately after Player 2 finishes mulligan.
+  drawCardMutable(
+    state,
+    "player2",
+    { silent: true }
+  );
 
   return state;
 }
