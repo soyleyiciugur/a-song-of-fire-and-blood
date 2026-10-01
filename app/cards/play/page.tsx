@@ -188,6 +188,7 @@ type PendingConflict =
         | "defender"
         | "none";
       unopposed: boolean;
+      canAttackStanding: boolean;
     };
 
 type DragCursorState = {
@@ -3255,6 +3256,9 @@ export default function GreatGamePlayPage() {
 
       unopposed:
         defense.unopposed,
+
+      canAttackStanding:
+        defense.canAttackStanding,
     });
   }
 
@@ -3262,7 +3266,7 @@ export default function GreatGamePlayPage() {
     if (
       pendingConflict?.kind !==
         "political" ||
-      !pendingConflict.unopposed
+      !pendingConflict.canAttackStanding
     ) {
       return;
     }
@@ -3527,7 +3531,7 @@ export default function GreatGamePlayPage() {
           );
 
         if (
-          defense.unopposed ||
+          defense.canAttackStanding ||
           defense.defenderInstanceIds
             .length > 0
         ) {
@@ -3772,6 +3776,12 @@ export default function GreatGamePlayPage() {
         pendingConflict.unopposed
       ) {
         return "Political Conflict — enemy Standing is unopposed. Click Standing to confirm.";
+      }
+
+      if (
+        pendingConflict.canAttackStanding
+      ) {
+        return "CONFRONT — choose a Political defender or attack enemy Standing directly.";
       }
 
       return "Choose the Political defender.";
@@ -4464,7 +4474,7 @@ export default function GreatGamePlayPage() {
     }
 
     setCombatPreview(
-      pendingConflict.unopposed
+      pendingConflict.canAttackStanding
         ? buildPoliticalPreview(
             attacker
           )
@@ -4666,7 +4676,7 @@ export default function GreatGamePlayPage() {
       const legalStanding =
         !target &&
         standingHovered &&
-        defense.unopposed;
+        defense.canAttackStanding;
 
       canDrop =
         Boolean(
@@ -4826,7 +4836,7 @@ export default function GreatGamePlayPage() {
         });
       } else if (
         standing &&
-        defense.unopposed
+        defense.canAttackStanding
       ) {
         dispatch({
           type:
@@ -5422,7 +5432,7 @@ export default function GreatGamePlayPage() {
   const politicalStandingTarget =
     pendingConflict?.kind ===
       "political" &&
-    pendingConflict.unopposed;
+    pendingConflict.canAttackStanding;
 
   const selectedAttacker =
     pendingConflict
@@ -5740,7 +5750,7 @@ export default function GreatGamePlayPage() {
               : getPoliticalDefenseOptions(
                   currentGame,
                   attackDrag.attackerInstanceId
-                ).unopposed)
+                ).canAttackStanding)
           )
         }
         conflictPreview={

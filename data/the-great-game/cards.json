@@ -661,7 +661,7 @@
         "id": "rally-the-men",
         "name": "Rally the Men",
         "trigger": "passive",
-        "text": "Other allied Characters have +1 Strength and +1 Health."
+        "text": "Adjacent allied Characters have +1 Strength and +1 Health."
       }
     ],
     "roles": [
@@ -687,7 +687,7 @@
         "id": "command-the-room",
         "name": "Command the Room",
         "trigger": "passive",
-        "text": "Other allied Characters have +1 Influence and +1 Health."
+        "text": "Adjacent allied Characters have +1 Influence and +1 Health."
       }
     ],
     "roles": [
@@ -2188,7 +2188,7 @@
         "id": "brothers-tilt",
         "name": "The Brothers' Tilt",
         "trigger": "event",
-        "text": "Choose a Character. It gains +1 Strength for each other Character in play with lower Strength than it, up to +3. Then Exhaust it."
+        "text": "Choose any Character. Compare its current Strength before this Event's bonus to every other Character in play. It gains +1 Strength for each Character with lower Strength, up to +3. Then Exhaust it."
       }
     ],
     "roles": [
@@ -2298,7 +2298,7 @@
         "id": "oldtown",
         "name": "The Maester's Chain",
         "trigger": "passive",
-        "text": "The first time each Ruler gives a Character a positive Strength, Influence, or Health modifier each turn, increase that modifier by 1."
+        "text": "The first time each Ruler gives a Character a positive Strength, Influence, or Health modifier each turn, increase that modifier by 1. Passive auras and Artifact bonuses do not trigger or benefit from this effect."
       }
     ],
     "roles": [

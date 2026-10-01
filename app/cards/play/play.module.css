@@ -4778,6 +4778,45 @@
   color: #b47ed0;
 }
 
+.arrivalTargetLayer {
+  z-index: 110;
+}
+
+.arrivalTargetLayer .attackDragArrow {
+  height: 5px;
+  animation: arrival-target-pulse 0.85s ease-in-out infinite alternate;
+}
+
+.arrivalTargetDamage,
+.arrivalTargetDamage .attackDragArrow {
+  color: #df6d5d;
+}
+
+.arrivalTargetBuff,
+.arrivalTargetBuff .attackDragArrow {
+  color: #d9b84f;
+}
+
+.combatValueBuff {
+  color: #d9b84f;
+}
+
+@keyframes arrival-target-pulse {
+  from {
+    opacity: 0.72;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrivalTargetLayer .attackDragArrow {
+    animation: none;
+  }
+}
+
 /* A temporarily unavailable Political button on a Character does not turn the
    entire card into a Military surface. Only true single-action cards (currently
    Dragons) receive the whole-card Military tint. */

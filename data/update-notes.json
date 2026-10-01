@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-10-02",
+    "items": [
+      "Added source-to-target Arrival arrows and hover outcome indicators for Baelenys Targaryen's damage and Renrose Tyrell's Influence buff."
+    ]
+  },
+  {
     "date": "2026-09-29",
     "items": [
       "Connected legacy card helpers and Decks collection loading to the live Great Game card dataset so card surfaces use one current source."

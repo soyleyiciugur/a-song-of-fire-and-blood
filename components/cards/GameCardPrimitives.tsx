@@ -82,7 +82,7 @@ const TRAIT_RULES_BY_VOICE: Record<
     dragonrider:
       "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is ruled by the same Ruler.",
     guard:
-      "Enemy Units must face Ready Guard Units before attacking other legal Military targets or Standing.",
+      "Enemy Units must face Guard Units before attacking other legal Military targets or Standing.",
     intrigue:
       "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
     swift:
@@ -90,15 +90,15 @@ const TRAIT_RULES_BY_VOICE: Record<
     schemer:
       "This Character may initiate a Political Conflict on the turn it is deployed.",
     challenge:
-      "This Unit may ignore Guard when choosing a Military target.",
+      "This Unit ignores Guard restrictions and may choose any Military target or attack enemy Standing directly.",
     confront:
-      "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
+      "This Character ignores Political defender restrictions and may choose any Ready enemy Character or attack enemy Standing directly.",
   },
   courtly: {
     dragonrider:
       "A rare bond, my liege. Keep rider and Dragon beneath the same Ruler, and the Dragon's Bond discount is honored.",
     guard:
-      "Your faithful shield, my liege. A Ready Guard must be faced before lesser Military targets—or your Standing—may be attacked.",
+      "Your faithful shield, my liege. A Guard must be faced before lesser Military targets—or your Standing—may be attacked.",
     intrigue:
       "A watchful courtier, my liege. While Ready, Intrigue compels ordinary Political attackers to answer this Character first.",
     swift:
@@ -106,15 +106,15 @@ const TRAIT_RULES_BY_VOICE: Record<
     schemer:
       "Already whispering before the chair is warm, my liege. A Schemer may begin a Political Conflict on the turn it is deployed.",
     challenge:
-      "A bold soul, my liege. Challenge permits this Unit to ignore Guard when choosing a Military target.",
+      "A bold soul, my liege. Challenge ignores Guard entirely: this Unit may choose any Military target or strike enemy Standing directly.",
     confront:
-      "Direct and most useful, my liege. Confront lets this Character ignore Intrigue priority and choose any Ready enemy Character to defend.",
+      "Direct and most useful, my liege. Confront ignores Political defender restrictions: choose any Ready enemy Character or strike enemy Standing directly.",
   },
   stoic: {
     dragonrider:
       "Rider and Dragon share a bond. Same Ruler, Bond discount applies. Simple.",
     guard:
-      "Ready Guard stands in the way. Deal with it before other Military targets or Standing.",
+      "Guard stands in the way. Deal with it before other Military targets or Standing.",
     intrigue:
       "Ready Intrigue controls the Political defense. Ordinary schemes answer to it first.",
     swift:
@@ -122,9 +122,9 @@ const TRAIT_RULES_BY_VOICE: Record<
     schemer:
       "Schemer plots immediately. It may start a Political Conflict on deployment turn.",
     challenge:
-      "Challenge ignores Guard when choosing a Military target.",
+      "Challenge ignores Guard entirely. Choose any Military target or attack Standing directly.",
     confront:
-      "Confront ignores Intrigue priority. Pick any Ready enemy Character to defend.",
+      "Confront ignores Political defender restrictions. Pick any Ready enemy Character or attack Standing directly.",
   },
 };
 

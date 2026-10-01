@@ -107,43 +107,47 @@ export function validateDeck(
 
 export function createTestDeck(): string[] {
   // Practice / feature-coverage mirror deck.
-  // Goals: a healthy early curve, examples of every core Character trait,
-  // Military + Political threats, late-game aura cards, Dragons, Events,
-  // Artifacts and two of the more interaction-heavy Locations.
+  // Generic Characters are intentionally excluded except the two 7-Command
+  // positioning auras. The curve uses named Characters with live engine
+  // abilities so early, mid and late gameplay can all be exercised.
   const deck: string[] = [
-    // 1 Command — reliable opening plays and early trait coverage.
-    "dockside-runner",      // Swift
-    "little-bird",          // Schemer
-    "gate-sentry",          // Guard
-    "sept-initiate",        // Intrigue
-    "vale-spearman",        // vanilla baseline
+    // 2 Command — named early plays with working passive abilities.
+    "naela-targaryen",       // Ready: cannot be targeted by enemy Events.
+    "leo-tyrell",            // Grows when Visenor / Tyrell / Hightower arrives.
 
-    // 2 Command — tempo, protection and glass-cannon pressure.
-    "harbor-cutthroat",     // Hull Bladesman; stable id kept for saved decks.
-    "court-whisperer",      // Schemer
-    "tourneyman-squire",    // Challenge
-    "gatehouse-guard",      // Guard
-    "ironborn-reaver",      // Greyjoy glass cannon
+    // 3 Command — early Political / damage / Standing interactions.
+    "rhaella-targaryen",     // First enemy Political Conflict: -2 Influence while Ready.
+    "perric-bracken",        // First Event damage each turn: prevent 2.
+    "clover-tully",          // Both Rulers +2 Standing, then draw 1.
 
-    // 3 Command — Military / Political interaction.
-    "veteran-spearman",     // Challenge
-    "court-provocateur",    // Confront
-    "reach-courtier",       // Intrigue
-    "tully-river-guard",    // Guard
+    // 4 Command.
+    "cordin-poole",          // Start-turn draw engine.
+    "weylar-rocke",          // Long-term turn-cycle payoff.
+    "rickard-stark",         // Adjacent +1 Influence.
 
-    // Mid-game role coverage.
-    "silver-tongued-diplomat", // Confront
-    "orwell-morrigen",          // Guard + Experience Triumphs
-    "crown-envoy",              // Intrigue
-    "royal-spymaster",          // Intrigue + Confront
+    // 5 Command.
+    "renrose-tyrell",        // Required: The Mander's Pact + Confront.
+    "lorent-tyrell",         // Fall draw; Renrose synergy.
+    "saera-targaryen",       // Veiled Sight + Cloudgazer bond.
+    "orwell-morrigen",       // Experience Triumphs + Guard.
+    "saathos-maris",         // Adjacent +1 Health.
 
-    // Late-game passive and Dragon coverage.
-    "crownlands-champion",  // allied Strength / Health aura
-    "grand-counselor",      // allied Influence / Health aura
-    "cloudgazer",
+    // 6–8 Command named finishers / trait coverage.
+    "jacaelon-targaryen",    // Silent Verdict + Schemer + Jhagar bond.
+    "gaelor-targaryen",      // Housebreaker + Swift.
+    "alester-dayne",         // Dawn's Edge + Guard + Challenge.
+    "baelenys-targaryen",    // Required: Iron Wrath + Maelwing bond.
+
+    // The only generic Characters in the practice deck.
+    "crownlands-champion",    // Adjacent Strength / Health aura.
+    "grand-counselor",        // Adjacent Influence / Health aura.
+
+    // Bonded Dragons.
     "jhagar",
+    "cloudgazer",
+    "maelwing",
 
-    // Events — buffing, forced combat and board-wide damage.
+    // Events.
     "word-in-the-right-ear",
     "trial-by-combat",
     "brothers-tilt",
@@ -153,7 +157,7 @@ export function createTestDeck(): string[] {
     "blackfyre",
     "dark-sister",
 
-    // Locations — modifier amplification + delayed Military poison.
+    // Locations.
     "oldtown",
     "sunspear",
   ];

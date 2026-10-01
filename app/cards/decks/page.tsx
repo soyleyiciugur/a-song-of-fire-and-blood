@@ -24,12 +24,12 @@ const TIER_RANK: Record<string, number> = { "s-plus": 0, s: 1, a: 2, b: 3, c: 4 
 
 const TRAIT_RULES: Record<string, string> = {
   dragonrider: "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is under your control.",
-  guard: "Enemy units must face Ready Guard units before attacking other Military targets or Standing.",
+  guard: "Enemy units must face Guard units before attacking other Military targets or Standing.",
   intrigue: "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
   swift: "This unit may initiate a Military Conflict on the turn it is deployed.",
   schemer: "This Character may initiate a Political Conflict on the turn it is deployed.",
-  challenge: "This unit may ignore Guard when choosing a Military target.",
-  confront: "This Character may ignore Intrigue priority and choose any Ready enemy Character as the Political defender.",
+  challenge: "This Unit ignores Guard restrictions: it may choose any Military target or attack enemy Standing directly.",
+  confront: "This Character ignores Political defender restrictions: it may choose any Ready enemy Character or attack enemy Standing directly.",
 };
 
 const UNIQUE_RULE = "Unique — You cannot play another copy of this card while one is already in play under your control.";

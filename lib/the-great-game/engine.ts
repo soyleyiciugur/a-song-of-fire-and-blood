@@ -310,6 +310,56 @@ export function unitHasTrait(
   return false;
 }
 
+function adjacentAlliedUnits(
+  state: GameState,
+  unit: UnitState
+): UnitState[] {
+  const board =
+    state.players[unit.ownerId].board;
+
+  const index =
+    board.findIndex(
+      (candidate) =>
+        candidate.instanceId ===
+        unit.instanceId
+    );
+
+  if (index === -1) {
+    return [];
+  }
+
+  return [
+    board[index - 1],
+    board[index + 1],
+  ].filter(
+    (candidate): candidate is UnitState =>
+      Boolean(candidate)
+  );
+}
+
+function countAdjacentAuraSources(
+  state: GameState,
+  unit: UnitState,
+  sourceCardIds: readonly string[]
+): number {
+  const card =
+    getGameCard(unit.cardId);
+
+  if (card.cardType !== "character") {
+    return 0;
+  }
+
+  return adjacentAlliedUnits(
+    state,
+    unit
+  ).filter(
+    (ally) =>
+      sourceCardIds.includes(
+        ally.cardId
+      )
+  ).length;
+}
+
 export function getMilitaryPower(
   state: GameState,
   unit: UnitState
@@ -349,11 +399,11 @@ export function getMilitaryPower(
   }
 
   if (card.cardType === "character") {
-    strength += state.players[unit.ownerId].board.filter(
-      (ally) =>
-        ally.instanceId !== unit.instanceId &&
-        ally.cardId === "crownlands-champion"
-    ).length;
+    strength += countAdjacentAuraSources(
+      state,
+      unit,
+      ["crownlands-champion"]
+    );
   }
 
   return Math.max(
@@ -405,11 +455,11 @@ export function getPoliticalPower(
     politicalPower += 1;
   }
 
-  politicalPower += state.players[unit.ownerId].board.filter(
-    (ally) =>
-      ally.instanceId !== unit.instanceId &&
-      ally.cardId === "grand-counselor"
-  ).length;
+  politicalPower += countAdjacentAuraSources(
+    state,
+    unit,
+    ["grand-counselor", "rickard-stark"]
+  );
 
   return Math.max(
     0,
@@ -461,12 +511,15 @@ export function getBonusHealthCapacity(
   }
 
   if (card.cardType === "character") {
-    bonus += state.players[unit.ownerId].board.filter(
-      (ally) =>
-        ally.instanceId !== unit.instanceId &&
-        (ally.cardId === "crownlands-champion" ||
-          ally.cardId === "grand-counselor")
-    ).length;
+    bonus += countAdjacentAuraSources(
+      state,
+      unit,
+      [
+        "crownlands-champion",
+        "grand-counselor",
+        "saathos-maris",
+      ]
+    );
 
     if (
       state.activeLocation?.cardId === "castle-black" &&
@@ -1364,6 +1417,31 @@ function damageUnitMutable(
     amount;
 
   if (
+    card.id === "perric-bracken" &&
+    kind === "event" &&
+    !(unit.counters["perric-event-prevention-used"] ?? 0)
+  ) {
+    const prevented =
+      Math.min(
+        2,
+        finalDamage
+      );
+
+    finalDamage -= prevented;
+    unit.counters["perric-event-prevention-used"] = 1;
+
+    if (prevented > 0) {
+      logAbilityActivation(
+        state,
+        card.id,
+        "an-unfortunate-accident",
+        unit.ownerId,
+        `Prevents ${prevented} Event damage.`
+      );
+    }
+  }
+
+  if (
     card.id ===
       "alester-dayne" &&
     kind === "military"
@@ -1540,6 +1618,102 @@ function allCharacters(
 // ─────────────────────────────────────────────
 // Arrival queue
 // ─────────────────────────────────────────────
+
+function resolveImmediateArrivalAbilitiesMutable(
+  state: GameState,
+  unit: UnitState
+) {
+  const card = getGameCard(unit.cardId);
+
+  if (card.id === "clover-tully") {
+    logAbilityActivation(
+      state,
+      card.id,
+      "a-drunken-mistake",
+      unit.ownerId
+    );
+
+    gainStandingMutable(
+      state,
+      "player1",
+      2,
+      "A Drunken Mistake"
+    );
+    gainStandingMutable(
+      state,
+      "player2",
+      2,
+      "A Drunken Mistake"
+    );
+    drawCardMutable(
+      state,
+      unit.ownerId
+    );
+  }
+}
+
+function triggerLeoDeploymentMutable(
+  state: GameState,
+  deployed: UnitState
+) {
+  const deployedCard =
+    getGameCard(deployed.cardId);
+
+  if (deployedCard.cardType !== "character") {
+    return;
+  }
+
+  const qualifies =
+    deployedCard.id === "visenor-targaryen" ||
+    (
+      deployedCard.id !== "leo-tyrell" &&
+      (deployedCard.houseId === "tyrell" ||
+        deployedCard.houseId === "hightower")
+    );
+
+  if (!qualifies) {
+    return;
+  }
+
+  const leos =
+    state.players[deployed.ownerId].board.filter(
+      (candidate) =>
+        candidate.cardId === "leo-tyrell"
+    );
+
+  for (const leo of leos) {
+    const before =
+      getPoliticalPower(
+        state,
+        leo
+      );
+
+    addCharacterModifierMutable(
+      state,
+      deployed.ownerId,
+      leo,
+      {
+        id: nextRuntimeId(state, "proud-of-his-name"),
+        influence: 1,
+        permanent: true,
+      }
+    );
+
+    const after =
+      getPoliticalPower(
+        state,
+        leo
+      );
+
+    logAbilityActivation(
+      state,
+      leo.cardId,
+      "proud-of-his-name",
+      leo.ownerId,
+      `${deployedCard.name} is deployed; Leo gains +${after - before} Influence permanently.`
+    );
+  }
+}
 
 function queueArrivalEffectMutable(
   state: GameState,
@@ -2211,7 +2385,8 @@ export function getMilitaryTargetOptions(
       ),
 
     canAttackStanding:
-      guards.length === 0,
+      guards.length === 0 ||
+      challenge,
   };
 }
 
@@ -2221,6 +2396,8 @@ export function getMilitaryTargetOptions(
 
 export interface PoliticalDefenseOptions {
   unopposed: boolean;
+
+  canAttackStanding: boolean;
 
   defenderInstanceIds:
     string[];
@@ -2244,6 +2421,7 @@ export function getPoliticalDefenseOptions(
   if (!attacker) {
     return {
       unopposed: false,
+      canAttackStanding: false,
       defenderInstanceIds: [],
       selectionBy: "none",
     };
@@ -2279,6 +2457,8 @@ export function getPoliticalDefenseOptions(
     return {
       unopposed: true,
 
+      canAttackStanding: true,
+
       defenderInstanceIds:
         [],
 
@@ -2296,6 +2476,8 @@ export function getPoliticalDefenseOptions(
   ) {
     return {
       unopposed: false,
+
+      canAttackStanding: true,
 
       defenderInstanceIds:
         readyCharacters.map(
@@ -2324,6 +2506,8 @@ export function getPoliticalDefenseOptions(
     return {
       unopposed: false,
 
+      canAttackStanding: false,
+
       defenderInstanceIds:
         intrigue.map(
           (unit) =>
@@ -2337,6 +2521,8 @@ export function getPoliticalDefenseOptions(
 
   return {
     unopposed: false,
+
+    canAttackStanding: false,
 
     defenderInstanceIds:
       readyCharacters.map(
@@ -2352,6 +2538,22 @@ export function getPoliticalDefenseOptions(
 // ─────────────────────────────────────────────
 // Normal targeted card validation
 // ─────────────────────────────────────────────
+
+function assertEventMayTargetCharacter(
+  playerId: PlayerId,
+  target: UnitState
+) {
+  if (
+    target.ownerId !== playerId &&
+    target.cardId === "naela-targaryen" &&
+    !target.exhausted
+  ) {
+    assertRule(
+      false,
+      "Whereabouts Unknown prevents enemy Events from targeting Naela Targaryen while she is Ready."
+    );
+  }
+}
 
 function validatePlayTargets(
   state: GameState,
@@ -2433,6 +2635,11 @@ function validatePlayTargets(
           "character",
       "A Word in the Right Ear must target a Character."
     );
+
+    assertEventMayTargetCharacter(
+      playerId,
+      target!
+    );
   }
 
   if (
@@ -2482,6 +2689,11 @@ function validatePlayTargets(
           "character",
       "Trial by Combat's second target must be an enemy Character."
     );
+
+    assertEventMayTargetCharacter(
+      playerId,
+      enemy!
+    );
   }
 
   if (
@@ -2492,7 +2704,7 @@ function validatePlayTargets(
       Boolean(
         action.targetInstanceId
       ),
-      "The Brothers' Tilt requires a Character you control."
+      "The Brothers' Tilt requires a Character target."
     );
 
     const target =
@@ -2508,6 +2720,11 @@ function validatePlayTargets(
         ).cardType ===
           "character",
       "The Brothers' Tilt must target a Character."
+    );
+
+    assertEventMayTargetCharacter(
+      playerId,
+      target!
     );
   }
 }
@@ -2730,43 +2947,25 @@ function resolveEventMutable(
         target
       );
 
-    const enemyId =
-      opponentOf(
-        target.ownerId
-      );
-
-    const weakerReady =
-      state.players[
-        enemyId
-      ].board.filter(
-        (enemy) => {
-          const enemyCard =
-            getGameCard(
-              enemy.cardId
-            );
-
-          if (
-            enemyCard.cardType !==
-              "character" ||
-            enemy.exhausted
-          ) {
-            return false;
-          }
-
-          return (
-            beforePower >
-            getMilitaryPower(
-              state,
-              enemy
-            )
-          );
-        }
+    // Snapshot the chosen Character's effective Strength before The Brothers'
+    // Tilt applies its own modifier. Every other Character in play is compared
+    // against this fixed value independently; the threshold never increases
+    // as the Tilt grants Strength. Ready/Exhausted and controller do not matter.
+    const weakerCharacters =
+      allCharacters(state).filter(
+        (candidate) =>
+          candidate.instanceId !==
+            target.instanceId &&
+          getMilitaryPower(
+            state,
+            candidate
+          ) < beforePower
       );
 
     const bonus =
       Math.min(
         3,
-        weakerReady.length
+        weakerCharacters.length
       );
 
     if (
@@ -3114,6 +3313,16 @@ function playCardMutable(
       card.cardType ===
       "character"
     ) {
+      resolveImmediateArrivalAbilitiesMutable(
+        state,
+        unit
+      );
+
+      triggerLeoDeploymentMutable(
+        state,
+        unit
+      );
+
       queueArrivalEffectMutable(
         state,
         unit
@@ -3542,6 +3751,34 @@ function militaryAttackMutable(
       "Guard prevents a direct Military Attack."
     );
 
+    const guardsInPlay =
+      state.players[enemyId].board.filter(
+        (unit) =>
+          !unit.grounded &&
+          unitHasTrait(
+            state,
+            unit,
+            "guard"
+          )
+      );
+
+    if (
+      guardsInPlay.length > 0 &&
+      unitHasTrait(
+        state,
+        attacker!,
+        "challenge"
+      )
+    ) {
+      logTraitActivation(
+        state,
+        "challenge",
+        attacker!.cardId,
+        "bypasses Guard and attacks Standing directly.",
+        playerId
+      );
+    }
+
     attacker!.exhausted =
       true;
 
@@ -3867,7 +4104,7 @@ function politicalAttackMutable(
     "political"
   );
 
-  const attackerPoliticalPower =
+  let attackerPoliticalPower =
     getPoliticalPower(
       state,
       attacker!
@@ -3878,12 +4115,52 @@ function politicalAttackMutable(
     "A Character with 0 Influence cannot initiate a Political Conflict."
   );
 
+  const readyRhaella =
+    state.players[enemyId].board.find(
+      (unit) =>
+        unit.cardId === "rhaella-targaryen" &&
+        !unit.exhausted &&
+        !(unit.counters["dangerous-name-used"] ?? 0)
+    );
+
+  if (readyRhaella) {
+    const before = attackerPoliticalPower;
+    attackerPoliticalPower = Math.max(0, attackerPoliticalPower - 2);
+    readyRhaella.counters["dangerous-name-used"] = 1;
+
+    logAbilityActivation(
+      state,
+      readyRhaella.cardId,
+      "dangerous-name",
+      readyRhaella.ownerId,
+      `The first enemy Political Conflict loses ${before - attackerPoliticalPower} Influence. (${before} → ${attackerPoliticalPower})`
+    );
+  }
+
   attacker!.exhausted =
     true;
 
   if (
-    defense.unopposed
+    !action.defenderInstanceId &&
+    defense.canAttackStanding
   ) {
+    if (
+      !defense.unopposed &&
+      unitHasTrait(
+        state,
+        attacker!,
+        "confront"
+      )
+    ) {
+      logTraitActivation(
+        state,
+        "confront",
+        attacker!.cardId,
+        "bypasses Political defenders and attacks Standing directly.",
+        playerId
+      );
+    }
+
     if (
       attackerPoliticalPower > 0
     ) {
@@ -4486,6 +4763,8 @@ function resetPerTurnCounters(
       unit.counters[
         "dawns-edge-prevented"
       ] = 0;
+      unit.counters["perric-event-prevention-used"] = 0;
+      unit.counters["dangerous-name-used"] = 0;
     }
   }
 }

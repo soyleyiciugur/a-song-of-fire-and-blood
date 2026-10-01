@@ -15,10 +15,16 @@
 - Castle Black: Guard Characters get +1 bonus Health.
 - Braavos: leaving >=1 Command banks +1 next-turn Command and can exceed the normal 10 cap.
 - Tyrosh: end-turn discard/draw mini-mulligan, drawn card -1 Command while in hand, no use on consecutive own turns.
-- Crownlands Champion and Grand Counselor auras are live.
+- Crownlands Champion and Grand Counselor are live as **adjacent allied Character** auras, not board-wide auras.
+- Ser Saathos Maris (+1 adjacent Health) and Rickard Stark (+1 adjacent Influence) use the same board-adjacency system.
 - Ser Orwell Morrigen — Experience Triumphs is live.
+- Challenge now fully bypasses Guard restrictions: it may attack any legal Military unit **or enemy Standing directly** even while Guard is in play.
+- Confront now fully bypasses Political defender restrictions: it may choose any Ready enemy Character **or enemy Standing directly**.
+- The Brothers' Tilt may target an allied or enemy Character. It snapshots that target's effective pre-Tilt Strength once, compares every other Character in play against that fixed value, and gains +1 per strictly lower Character up to +3; Ready/Exhausted does not matter.
+- Oldtown wording now explicitly excludes passive auras and Artifact bonuses from its modifier amplification.
+- Five low-cost named abilities were wired into the engine so the practice deck has a real early curve without generic fillers: Naela Targaryen — Whereabouts Unknown; Leo Tyrell — Proud of His Name; Clover Tully — A Drunken Mistake; Perric Bracken — An Unfortunate Accident; Rhaella Targaryen — Dangerous Name.
 - Bonus Health is a separate damage layer. Damage always consumes bonus Health before base Health. Aura removal removes only remaining bonus Health.
-- Practice deck updated to a legal 30-card feature-coverage mirror deck with strong early curve, all major traits, Orwell, both aura cards, two Dragons, Events, Artifacts and 2 Locations.
+- Practice deck updated to a legal 30-card named-ability feature-coverage mirror deck. All generic Characters were removed except 1x Crownlands Champion and 1x Grand Counselor. Renrose Tyrell and Baelenys Targaryen are guaranteed inclusions. Named 2- and 3-Command Characters now provide the early curve; bonded Dragons, Events, Artifacts and 2 Locations remain for system coverage.
 - Duplicate cards.json copies removed from the working tree; canonical data is `data/the-great-game/cards.json`.
 
 ## Online-play latency changes
@@ -34,6 +40,16 @@
 
 - Focused TypeScript compile for `engine.ts`, `cards.ts`, `deck.ts`, `types.ts`: PASS.
 - Practice deck validation: 30 cards, legal: PASS.
+- Practice deck generic check: only Crownlands Champion / Grand Counselor remain: PASS.
+- Challenge-through-Guard direct Standing test: PASS.
+- Confront-with-ready-defenders direct Standing test: PASS.
+- Brothers' Tilt enemy-target + fixed-snapshot comparison test: PASS.
+- Champion/Counselor + Saathos/Rickard adjacency tests: PASS.
+- Naela enemy-Event immunity test: PASS.
+- Leo deployment-growth test: PASS.
+- Clover Standing/draw arrival test: PASS.
+- Perric first Event-damage prevention test: PASS.
+- Rhaella first enemy Political Conflict reduction test: PASS.
 - Generic stat-skeleton collisions: 0.
 - Health-layer assertions: `3+1` with 1 damage -> `3+0`; with 2 damage -> `2+0`: PASS.
 - Aura-removal assertions: remaining base Health is preserved: PASS.
@@ -49,7 +65,6 @@ The location/passive backlog discussed in chat is closed. However, the current c
 - **Visenor Targaryen — Hidden Claim** (`arrival`): Visenor's Ruler draws 1 card. If Visenor's Ruler controls no other Targaryen Character, the card drawn this way costs 1 less Command until the end of that turn.
 - **Jaery Targaryen — The People Have Suffered Enough** (`arrival`): Restore 3 Standing.
 - **Baelor Targaryen — The Argumentative One** (`arrival`): The next Event the opposing Ruler plays costs 2 more Command.
-- **Rhaella Targaryen — Dangerous Name** (`passive`): While Rhaella is Ready, the first enemy Political Conflict against you each turn has -2 Influence.
 - **Maela Targaryen — Buried Secret** (`victory`): After Maela wins a Political Conflict against a Character, the opposing Ruler's next card costs 1 more Command.
 - **Vahaemon Targaryen — Dark Sister's Legacy** (`arrival`): Choose an enemy Character. It cannot initiate a Political Conflict during that Character's Ruler's next turn.
 - **Derrin Hightower — The Confession** (`fall`): Derrin's Ruler draws 2 cards. The opposing Ruler draws 1 card.
@@ -59,12 +74,10 @@ The location/passive backlog discussed in chat is closed. However, the current c
 - **Naella Velaryon — Our Fleet Is Yours** (`arrival`): Summon two 1/0/1 Velaryon Sailors ruled by Naella's Ruler. While Driftmark is the active Location, Velaryon Sailors have +1 Strength.
 - **Berholt Caswell — The Gods Will Judge** (`fall`): Restore 3 Standing.
 - **Vhaemys Targaryen — Dreams of Things to Come** (`arrival`): Look at the top 3 cards of the opposing Ruler's deck. Vhaemys's Ruler may put one of them on the bottom of that deck. Return the others in the same order.
-- **Ser Saathos Maris — Innkeeper! Another!** (`passive`): Adjacent Characters have +1 Health while Saathos is in play.
 - **Steffon Baratheon — A Baratheon Kneels When He Feels Safe** (`passive`): Steffon's Strength and Influence cannot be reduced by enemy effects.
 - **Ser Brant Costayne — Knights of Oldtown** (`fall`): Other Characters ruled by Brant's Ruler gain +1 Strength until the end of Brant's Ruler's next turn.
 - **Melessa Hightower — The Last Name Standing** (`passive`): Other Hightower Characters ruled by Melessa's Ruler have +1 Influence.
 - **Godfrey Blackwood — Gracious in Defeat** (`fall`): Deal 2 damage to enemy Standing.
-- **Rickard Stark — When People Look Up** (`passive`): Adjacent Characters have +1 Influence while Rickard is in play.
 - **Timos Hightower — He Asked for Parley** (`fall`): Characters ruled by Timos's Ruler gain +1 Strength until the end of Timos's Ruler's next turn. If Timos was destroyed in a Military Conflict, they gain +2 Strength instead.
 - **Baran Strong — Seven Feet of Grievance** (`passive`): The first time Baran takes Military damage each turn, if he survives that damage, he gains +2 Strength until the end of the turn.
 - **Clarisse Flowers — I'm No Knight nor Lady** (`passive`): The first time Clarisse survives damage from a Military Conflict each turn, she gains +1 Strength permanently.
@@ -72,16 +85,12 @@ The location/passive backlog discussed in chat is closed. However, the current c
 - **Ser Brannyn Vance — I Cannot Draw Steel Against Royal Blood** (`passive`): Ser Brannyn Vance cannot initiate a Military Conflict against a Targaryen Character. When defending against a Military Conflict initiated by a Targaryen Character, Ser Brannyn Vance deals no Military damage back.
 - **Malaenar Targaryen — Dragonstone's Quiet** (`passive`): While Dragonstone is the active Location, Units ruled by Malaenar's current Ruler have +1 Health.
 - **Tansy Riverside — She Organized the Whole Thing** (`arrival`): The next Event Tansy's Ruler plays this turn costs 1 less Command.
-- **Naela Targaryen — Whereabouts Unknown** (`passive`): While Naela is Ready, she cannot be targeted by enemy Events.
 - **Brandon Stark — Death in His Own Bed** (`arrival`): Choose a Stark or Targaryen Character ruled by Brandon's Ruler. It gains +1 Influence permanently.
 - **Tion Lannister — Deal With the Money** (`passive`): The first Event or Location you play each turn costs 1 less Command.
 - **Martyn Mullendore — Safe Passage** (`arrival`): Choose another Character ruled by Martyn's Ruler. Enemy Characters cannot initiate Conflicts against it until the start of Martyn's Ruler's next turn.
-- **Leo Tyrell — Proud of His Name** (`passive`): Whenever you deploy Visenor Targaryen, another Tyrell Character, or a Hightower Character, Leo gains +1 Influence permanently.
 - **Almar Larchmont — Do Not Forget It, My Lady** (`passive`): The first time another Character ruled by Almar's Ruler would receive a negative stat modifier each turn, prevent that modifier.
 - **Edmyn Uller — They Are Utterly Fucked** (`arrival`): Look at the top 3 cards of Edmyn's Ruler's deck. Put one into that Ruler's hand and put the rest on the bottom of that deck in any order.
 - **Alysanne Hightower — Unintended** (`fall`): The Character that destroyed Alysanne gets -2 Influence permanently.
-- **Perric Bracken — An Unfortunate Accident** (`passive`): The first time Perric would take damage from an Event each turn, prevent 2 of that damage.
-- **Clover Tully — A Drunken Mistake** (`arrival`): Restore 2 Standing to both Rulers. Then Clover's Ruler draws 1 card.
 - **Benjen Stark — Winter's Welcome** (`arrival`): When Benjen arrives, another Stark Character gains +1 Strength this turn.
 - **Mother Marya — A Moment of Sight** (`arrival`): Look at the top 3 cards of your deck. Put one into your hand and the rest back in any order.
 - **Annara Celtigar — A Friend Summoned** (`arrival`): If Vhaemys Targaryen is in play, both Characters gain +1 Influence.
