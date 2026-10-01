@@ -486,6 +486,10 @@ function CommandGem({ tierId, value }: { tierId: TierId; value: number }) {
     <span className={styles.commandGem} aria-hidden="true">
       <Image src={`${src}.png`} alt="" fill sizes="96px" className={styles.commandGemNormal} draggable={false} />
       <Image src={`${src}-highlighted.png`} alt="" fill sizes="96px" className={styles.commandGemHighlighted} draggable={false} />
+      <span className={styles.commandGemInterior}>
+        <Image src={`${src}.png`} alt="" fill sizes="96px" className={styles.commandGemNormal} draggable={false} />
+        <Image src={`${src}-highlighted.png`} alt="" fill sizes="96px" className={styles.commandGemHighlighted} draggable={false} />
+      </span>
       <svg viewBox="0 0 100 100" className={styles.commandGemNumber}>
         <text x="50" y="50" textAnchor="middle" dominantBaseline="central" className={styles.commandCostText}>{value}</text>
       </svg>
@@ -540,6 +544,10 @@ export function CardChrome({
 }
 
 function StatIcon({ kind }: { kind: "military" | "political" | "health" }) {
+  if (kind === "political") {
+    // Original crown silhouette, with every interior cutout removed.
+    return <svg viewBox="0 0 20 20" width="100%" height="100%" fill="currentColor" data-stat-icon="political" aria-hidden="true"><path d="M8.7695 3.7891Q8.7695 3.4863 8.877 3.2568Q8.9844 3.0273 9.1553 2.8711Q9.3262 2.7148 9.541 2.6367Q9.7559 2.5586 9.9805 2.5586Q10.2051 2.5586 10.4297 2.6367Q10.6543 2.7148 10.8301 2.8662Q11.0059 3.0176 11.1182 3.252Q11.2305 3.4863 11.2305 3.7891Q11.2305 4.2773 10.9863 4.5605Q10.7422 4.8438 10.4004 4.9512L11.5137 9.873L13.0566 5.5762Q12.6855 5.459 12.4609 5.1514Q12.2363 4.8438 12.2363 4.4336Q12.2363 4.1309 12.3486 3.8965Q12.4609 3.6621 12.6416 3.5059Q12.8223 3.3496 13.042 3.2715Q13.2617 3.1934 13.4863 3.1934Q13.7109 3.1934 13.9355 3.2715Q14.1602 3.3496 14.3359 3.5059Q14.5117 3.6621 14.6191 3.8965Q14.7266 4.1309 14.7266 4.4336Q14.7266 4.6484 14.6533 4.8535Q14.5801 5.0586 14.4434 5.2197Q14.3066 5.3809 14.1113 5.4932Q13.916 5.6055 13.6719 5.6348L14.082 10.0586L16.1426 6.9043Q15.8594 6.748 15.6934 6.46Q15.5273 6.1719 15.5273 5.8203Q15.5273 5.5176 15.6396 5.2881Q15.752 5.0586 15.9277 4.9023Q16.1035 4.7461 16.3281 4.668Q16.5527 4.5898 16.7773 4.5898Q17.002 4.5898 17.2217 4.668Q17.4414 4.7461 17.6123 4.9023Q17.7832 5.0586 17.8906 5.2881Q17.998 5.5176 17.998 5.8203Q17.998 6.0547 17.915 6.2744Q17.832 6.4941 17.6758 6.665Q17.5195 6.8359 17.2949 6.9336Q17.0703 7.0313 16.7871 7.0313L16.6211 7.0313L15.8105 12.3633L15.8105 17.0605Q14.3945 17.2559 12.8857 17.3486Q11.377 17.4414 9.9805 17.4414Q8.5449 17.4414 7.0605 17.3486Q5.5762 17.2559 4.1699 17.0605L4.1699 12.3633L3.3789 7.0313L3.2129 7.0313Q2.9297 7.0313 2.7051 6.9336Q2.4805 6.8359 2.3242 6.665Q2.168 6.4941 2.085 6.2744Q2.002 6.0547 2.002 5.8203Q2.002 5.5176 2.1094 5.2881Q2.2168 5.0586 2.3877 4.9023Q2.5586 4.7461 2.7783 4.668Q2.998 4.5898 3.2227 4.5898Q3.4473 4.5898 3.6719 4.668Q3.8965 4.7461 4.0723 4.9023Q4.248 5.0586 4.3604 5.2881Q4.4727 5.5176 4.4727 5.8203Q4.4727 6.1719 4.3066 6.46Q4.1406 6.748 3.8574 6.9043L5.918 10.0586L6.3281 5.6348Q6.084 5.6055 5.8887 5.4932Q5.6934 5.3809 5.5566 5.2197Q5.4199 5.0586 5.3467 4.8535Q5.2734 4.6484 5.2734 4.4336Q5.2734 4.1309 5.3809 3.8965Q5.4883 3.6621 5.6641 3.5059Q5.8398 3.3496 6.0645 3.2715Q6.2891 3.1934 6.5137 3.1934Q6.7285 3.1934 6.9531 3.2715Q7.1777 3.3496 7.3584 3.5059Q7.5391 3.6621 7.6514 3.8965Q7.7637 4.1309 7.7637 4.4336Q7.7637 4.8438 7.5391 5.1514Q7.3145 5.459 6.9434 5.5762L8.4863 9.873L9.5996 4.9512Q9.2578 4.8438 9.0137 4.5605Q8.7695 4.2773 8.7695 3.7891Z" /></svg>;
+  }
   if (kind !== "health") {
     return <i className={styles.statGlyph} data-stat-icon={kind} aria-hidden="true">{kind === "military" ? "⚔\uFE0E" : "♛\uFE0E"}</i>;
   }
@@ -554,6 +562,23 @@ export function IndicatorIcon({ kind }: { kind: "military" | "political" | "heal
 }
 
 function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }) {
+  const withGlow = (artwork: ReactNode) => active ? (
+    <span className={styles.traitIconActive} data-trait-active="true" aria-hidden="true">
+      <span className={styles.traitIconGlow}>{artwork}</span>
+      {artwork}
+    </span>
+  ) : artwork;
+  if (trait !== "unique" && trait !== "dragon") {
+    return withGlow(<Image
+      className={styles.traitIconArtwork}
+      src={`/images/cards/keywords/${trait}.png`}
+      width={64}
+      height={64}
+      sizes="32px"
+      alt=""
+      aria-hidden="true"
+    />);
+  }
   const paths: Record<Trait, string> = {
     unique: "M10 2 18 10 10 18 2 10Z",
     dragon: "M3 15 6 6 10 10 15 3 17 12 12 10 9 16Z",
@@ -565,7 +590,7 @@ function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }
     challenge: "M4 3 15 14M3 13 7 17M13 3 4 14M13 17 17 13",
     confront: "M3 4 8 10 3 16M17 4 12 10 17 16M8 10H12",
   };
-  return <svg className={active ? styles.traitIconActive : undefined} data-trait-active={active || undefined} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>;
+  return withGlow(<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>);
 }
 
 function TraitRuleTooltip({
@@ -727,13 +752,13 @@ export function CardInfoPanel({
   artifactId?: string | null;
   artifactBadgeDetailed?: boolean;
   runtimeStats?: {
-    power: number;
+    strength: number;
     influence: number;
     health: number;
     maxHealth: number;
   };
   baseStats?: {
-    power: number;
+    strength: number;
     influence?: number;
     health: number;
   };
@@ -837,8 +862,8 @@ export function CardInfoPanel({
             className={[
               styles.cardStat,
               statTone(
-                runtimeStats?.power ?? card.power,
-                baseStats?.power
+                runtimeStats?.strength ?? card.strength,
+                baseStats?.strength
               ),
             ]
               .filter(Boolean)
@@ -855,8 +880,8 @@ export function CardInfoPanel({
 
             <b>
               {runtimeStats
-                ?.power ??
-                card.power}
+                ?.strength ??
+                card.strength}
             </b>
           </span>
 

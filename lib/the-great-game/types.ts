@@ -135,7 +135,7 @@ export interface CharacterCard
   extends BaseCard {
   cardType: "character";
 
-  power: number;
+  strength: number;
   influence: number;
   health: number;
 }
@@ -144,7 +144,7 @@ export interface DragonCard
   extends BaseCard {
   cardType: "dragon";
 
-  power: number;
+  strength: number;
   health: number;
 }
 
@@ -182,7 +182,7 @@ export type ModifierExpiration =
 export interface RuntimeModifier {
   id: string;
 
-  power?: number;
+  strength?: number;
   influence?: number;
   health?: number;
   cost?: number;

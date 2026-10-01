@@ -301,7 +301,7 @@ export function unitHasTrait(
   return false;
 }
 
-export function getEffectivePower(
+export function getMilitaryPower(
   state: GameState,
   unit: UnitState
 ): number {
@@ -314,38 +314,38 @@ export function getEffectivePower(
     return 0;
   }
 
-  let power =
-    card.power;
+  let strength =
+    card.strength;
 
   for (
     const modifier of
     unit.modifiers
   ) {
-    power +=
-      modifier.power ?? 0;
+    strength +=
+      modifier.strength ?? 0;
   }
 
   if (
     unit.attachedArtifactId ===
     "blackfyre"
   ) {
-    power += 2;
+    strength += 2;
   }
 
   if (
     unit.attachedArtifactId ===
     "dark-sister"
   ) {
-    power += 2;
+    strength += 2;
   }
 
   return Math.max(
     0,
-    power
+    strength
   );
 }
 
-export function getEffectiveInfluence(
+export function getPoliticalPower(
   state: GameState,
   unit: UnitState
 ): number {
@@ -361,14 +361,14 @@ export function getEffectiveInfluence(
     return 0;
   }
 
-  let influence =
+  let politicalPower =
     card.influence;
 
   for (
     const modifier of
     unit.modifiers
   ) {
-    influence +=
+    politicalPower +=
       modifier.influence ??
       0;
   }
@@ -377,7 +377,7 @@ export function getEffectiveInfluence(
     unit.attachedArtifactId ===
     "blackfyre"
   ) {
-    influence += 1;
+    politicalPower += 1;
   }
 
   if (
@@ -385,12 +385,12 @@ export function getEffectiveInfluence(
       ?.cardId ===
     "kings-landing"
   ) {
-    influence += 1;
+    politicalPower += 1;
   }
 
   return Math.max(
     0,
-    influence
+    politicalPower
   );
 }
 
@@ -1516,7 +1516,7 @@ function resolvePendingEffectMutable(
       );
 
       const before =
-        getEffectiveInfluence(
+        getPoliticalPower(
           state,
           target!
         );
@@ -1534,7 +1534,7 @@ function resolvePendingEffectMutable(
       });
 
       const after =
-        getEffectiveInfluence(
+        getPoliticalPower(
           state,
           target!
         );
@@ -1773,7 +1773,7 @@ export function getMilitaryCombatPreview(
     previewMilitaryDamage(
       defender,
       defenderCard,
-      getEffectivePower(
+      getMilitaryPower(
         state,
         attacker
       )
@@ -1785,7 +1785,7 @@ export function getMilitaryCombatPreview(
       : previewMilitaryDamage(
           attacker,
           attackerCard,
-          getEffectivePower(
+          getMilitaryPower(
             state,
             defender
           )
@@ -2247,7 +2247,7 @@ function resolveEventMutable(
       )!;
 
     const before =
-      getEffectiveInfluence(
+      getPoliticalPower(
         state,
         target
       );
@@ -2268,7 +2268,7 @@ function resolveEventMutable(
     });
 
     const after =
-      getEffectiveInfluence(
+      getPoliticalPower(
         state,
         target
       );
@@ -2306,13 +2306,13 @@ function resolveEventMutable(
       )!;
 
     const alliedPower =
-      getEffectivePower(
+      getMilitaryPower(
         state,
         allied
       );
 
     const enemyPower =
-      getEffectivePower(
+      getMilitaryPower(
         state,
         enemy
       );
@@ -2430,7 +2430,7 @@ function resolveEventMutable(
       )!;
 
     const beforePower =
-      getEffectivePower(
+      getMilitaryPower(
         state,
         target
       );
@@ -2460,7 +2460,7 @@ function resolveEventMutable(
 
           return (
             beforePower >
-            getEffectivePower(
+            getMilitaryPower(
               state,
               enemy
             )
@@ -2484,7 +2484,7 @@ function resolveEventMutable(
             "brothers-tilt"
           ),
 
-        power: bonus,
+        strength: bonus,
 
         permanent: true,
       });
@@ -2494,14 +2494,14 @@ function resolveEventMutable(
       true;
 
     const afterPower =
-      getEffectivePower(
+      getMilitaryPower(
         state,
         target
       );
 
     addLog(
       state,
-      `${getGameCard(target.cardId).name} gains +${bonus} Power and becomes Exhausted. (${beforePower} → ${afterPower} Power)`,
+      `${getGameCard(target.cardId).name} gains +${bonus} Strength and becomes Exhausted. (${beforePower} → ${afterPower} Strength)`,
       playerId
     );
   }
@@ -3068,7 +3068,7 @@ function militaryAttackMutable(
       true;
 
     const damage =
-      getEffectivePower(
+      getMilitaryPower(
         state,
         attacker!
       );
@@ -3162,13 +3162,13 @@ function militaryAttackMutable(
   }
 
   const attackerPower =
-    getEffectivePower(
+    getMilitaryPower(
       state,
       attacker!
     );
 
   const targetPower =
-    getEffectivePower(
+    getMilitaryPower(
       state,
       target!
     );
@@ -3352,15 +3352,15 @@ function politicalAttackMutable(
       attacker!.instanceId
     );
 
-  const attackerInfluence =
-    getEffectiveInfluence(
+  const attackerPoliticalPower =
+    getPoliticalPower(
       state,
       attacker!
     );
 
   assertRule(
-    attackerInfluence > 0,
-    "A Character with 0 Influence cannot initiate a Political Conflict."
+    attackerPoliticalPower > 0,
+    "A Character with 0 Political Strength cannot initiate a Political Conflict."
   );
 
   attacker!.exhausted =
@@ -3370,12 +3370,12 @@ function politicalAttackMutable(
     defense.unopposed
   ) {
     if (
-      attackerInfluence > 0
+      attackerPoliticalPower > 0
     ) {
       damageStandingMutable(
         state,
         enemyId,
-        attackerInfluence,
+        attackerPoliticalPower,
         {
           source:
             `${attackerCard.name} — Unopposed Political Conflict`,
@@ -3491,27 +3491,27 @@ function politicalAttackMutable(
     );
   }
 
-  const defenderInfluence =
-    getEffectiveInfluence(
+  const defenderPoliticalPower =
+    getPoliticalPower(
       state,
       defender!
     );
 
   if (
-    attackerInfluence >=
-    defenderInfluence
+    attackerPoliticalPower >=
+    defenderPoliticalPower
   ) {
     defender!.exhausted =
       true;
   }
 
   const difference =
-    attackerInfluence -
-    defenderInfluence;
+    attackerPoliticalPower -
+    defenderPoliticalPower;
 
   addLog(
     state,
-    `${attackerCard.name} challenges ${getGameCard(defender!.cardId).name} politically. (${attackerInfluence} vs ${defenderInfluence} Influence)`,
+    `${attackerCard.name} challenges ${getGameCard(defender!.cardId).name} politically. (${attackerPoliticalPower} vs ${defenderPoliticalPower} Political Strength)`,
     playerId
   );
 
@@ -3535,8 +3535,8 @@ function politicalAttackMutable(
   } else {
     addLog(
       state,
-      attackerInfluence <
-        defenderInfluence
+      attackerPoliticalPower <
+        defenderPoliticalPower
         ? `${getGameCard(defender!.cardId).name} dismisses the weaker Political challenge and remains Ready.`
         : `${getGameCard(defender!.cardId).name} prevents all Political Standing damage.`,
       defender!.ownerId

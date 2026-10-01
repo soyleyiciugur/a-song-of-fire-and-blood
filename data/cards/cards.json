@@ -1,76 +1,732 @@
 [
   {
+    "id": "castle-swordsman",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Starfall Swordsman",
+    "cost": 4,
+    "strength": 3,
+    "influence": 0,
+    "health": 5,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "military"
+    ],
+    "generic": true,
+    "houseId": "dayne"
+  },
+  {
+    "id": "court-page",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Oldtown Acolyte",
+    "cost": 1,
+    "strength": 0,
+    "influence": 1,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "political"
+    ],
+    "generic": true,
+    "houseId": "hightower"
+  },
+  {
+    "id": "northern-warrior",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Northern Warrior",
+    "houseId": "stark",
+    "cost": 3,
+    "strength": 3,
+    "influence": 0,
+    "health": 3,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "military"
+    ],
+    "generic": true
+  },
+  {
+    "id": "baratheon-man-at-arms",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Stormlands Man-at-Arms",
+    "houseId": "baratheon",
+    "cost": 2,
+    "strength": 3,
+    "influence": 0,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "tempo"
+    ],
+    "generic": true
+  },
+  {
+    "id": "dornish-sandshield",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Dornish Sandshield",
+    "houseId": "martell",
+    "cost": 2,
+    "strength": 2,
+    "influence": 0,
+    "health": 3,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "defensive"
+    ],
+    "generic": true
+  },
+  {
+    "id": "tully-river-guard",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Riverlands Guard",
+    "houseId": "tully",
+    "cost": 3,
+    "strength": 2,
+    "influence": 0,
+    "health": 3,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "french-vanilla",
+      "defensive"
+    ],
+    "generic": true
+  },
+  {
+    "id": "reach-courtier",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Reach Courtier",
+    "houseId": "tyrell",
+    "cost": 3,
+    "strength": 0,
+    "influence": 3,
+    "health": 2,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "french-vanilla",
+      "political",
+      "defensive"
+    ],
+    "generic": true
+  },
+  {
+    "id": "lannister-red-cloak",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Westerlands Red Cloak",
+    "houseId": "lannister",
+    "cost": 3,
+    "strength": 2,
+    "influence": 2,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "hybrid-vanilla"
+    ],
+    "generic": true
+  },
+  {
+    "id": "vale-spearman",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Vale Spearman",
+    "houseId": "arryn",
+    "cost": 1,
+    "strength": 1,
+    "influence": 0,
+    "health": 2,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "military"
+    ],
+    "generic": true
+  },
+  {
+    "id": "ironborn-reaver",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ironborn Reaver",
+    "houseId": "greyjoy",
+    "cost": 2,
+    "strength": 4,
+    "influence": 0,
+    "health": 1,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "vanilla",
+      "aggro"
+    ],
+    "generic": true
+  },
+  {
+    "id": "dragonstone-swordsman",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Dragonstone Soldier",
+    "houseId": "targaryen",
+    "cost": 4,
+    "strength": 3,
+    "influence": 2,
+    "health": 3,
+    "traits": [],
+    "abilities": [],
+    "roles": [
+      "hybrid-vanilla"
+    ],
+    "generic": true
+  },
+  {
+    "id": "dockside-runner",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Dockside Runner",
+    "cost": 1,
+    "strength": 1,
+    "influence": 0,
+    "health": 1,
+    "traits": [
+      "swift"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "little-bird",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Little Bird",
+    "cost": 1,
+    "strength": 0,
+    "influence": 1,
+    "health": 1,
+    "traits": [
+      "schemer"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "sept-initiate",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Sept Initiate",
+    "cost": 1,
+    "strength": 0,
+    "influence": 1,
+    "health": 1,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "gate-sentry",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Gate Sentry",
+    "cost": 1,
+    "strength": 0,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "harbor-cutthroat",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Harbor Cutthroat",
+    "cost": 2,
+    "strength": 2,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "swift"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "gatehouse-guard",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Gatehouse Guard",
+    "cost": 2,
+    "strength": 1,
+    "influence": 0,
+    "health": 3,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-whisperer",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Whisperer",
+    "cost": 2,
+    "strength": 0,
+    "influence": 2,
+    "health": 2,
+    "traits": [
+      "schemer"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "sept-whisperer",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Sept Whisperer",
+    "cost": 2,
+    "strength": 0,
+    "influence": 2,
+    "health": 2,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "tourneyman-squire",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Tourneyman Squire",
+    "cost": 2,
+    "strength": 2,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-provocateur",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Provocateur",
+    "cost": 3,
+    "strength": 1,
+    "influence": 3,
+    "health": 2,
+    "traits": [
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "veteran-spearman",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Veteran Spearman",
+    "cost": 3,
+    "strength": 3,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-emissary",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Emissary",
+    "cost": 3,
+    "strength": 1,
+    "influence": 3,
+    "health": 2,
+    "traits": [
+      "schemer"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "castle-veteran",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Castle Veteran",
+    "cost": 4,
+    "strength": 5,
+    "influence": 1,
+    "health": 5,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "hedge-knight",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Hedge Knight",
+    "cost": 4,
+    "strength": 5,
+    "influence": 1,
+    "health": 4,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "noble-advocate",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Noble Advocate",
+    "cost": 4,
+    "strength": 1,
+    "influence": 5,
+    "health": 5,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "silver-tongued-diplomat",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Silver-Tongued Diplomat",
+    "cost": 4,
+    "strength": 1,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "city-watch-soldier",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "City Watch Soldier",
+    "cost": 5,
+    "strength": 6,
+    "influence": 1,
+    "health": 6,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "veteran-captain",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Veteran Captain",
+    "cost": 5,
+    "strength": 6,
+    "influence": 2,
+    "health": 6,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "midrange"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "crown-envoy",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Crown Envoy",
+    "cost": 5,
+    "strength": 1,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-manipulator",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Manipulator",
+    "cost": 5,
+    "strength": 1,
+    "influence": 7,
+    "health": 4,
+    "traits": [
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "kingsguard-knight",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Kingsguard Knight",
+    "cost": 6,
+    "strength": 7,
+    "influence": 2,
+    "health": 7,
+    "traits": [
+      "guard",
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive",
+      "elite"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "royal-spymaster",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Royal Spymaster",
+    "cost": 6,
+    "strength": 2,
+    "influence": 8,
+    "health": 5,
+    "traits": [
+      "intrigue",
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "control",
+      "elite"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "crownlands-champion",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Crownlands Champion",
+    "cost": 7,
+    "strength": 7,
+    "influence": 3,
+    "health": 7,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "rally-the-men",
+        "name": "Rally the Men",
+        "trigger": "passive",
+        "text": "Other allied Characters have +1 Strength and +1 Health."
+      }
+    ],
+    "roles": [
+      "military",
+      "support",
+      "finisher"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "grand-counselor",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Grand Counselor",
+    "cost": 7,
+    "strength": 3,
+    "influence": 7,
+    "health": 7,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "command-the-room",
+        "name": "Command the Room",
+        "trigger": "passive",
+        "text": "Other allied Characters have +1 Influence and +1 Health."
+      }
+    ],
+    "roles": [
+      "political",
+      "support",
+      "finisher"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
     "id": "jacaelon-targaryen",
     "cardType": "character",
     "tierId": "s-plus",
     "name": "Jacaelon Targaryen",
     "subtitle": "Hand of the King",
     "houseId": "targaryen",
-    "power": 7,
-    "influence": 9,
-    "keywords": [
-      "Hand of the King",
-      "Knight",
-      "Dragonrider",
-      "Schemer"
+    "cost": 6,
+    "strength": 6,
+    "influence": 8,
+    "health": 6,
+    "traits": [
+      "unique",
+      "schemer",
+      "dragonrider"
     ],
     "abilities": [
       {
+        "id": "silent-verdict",
         "name": "Silent Verdict",
-        "description": "When judging a rival, weakens their standing at court without drawing blood."
-      },
-      {
-        "name": "Every Warning True",
-        "description": "Gains influence whenever a prior prediction is proven correct."
+        "trigger": "victory",
+        "text": "After Jacaelon wins a Political Conflict against a Character, the opposing Ruler loses 2 additional Standing."
       }
     ],
-    "nemesis": [
-      "gaelor-targaryen",
-      "derrin-hightower"
+    "roles": [
+      "core",
+      "political",
+      "control"
     ],
-    "allies": [
-      "alester-dayne",
-      "saera-targaryen",
-      "maela-targaryen"
-    ],
-    "flavorQuote": "If this man actually manages to kill Gaelor, he will have done the Crown a favor.",
     "linkedCharacterId": "jacaelon-targaryen"
-  },
-  {
-    "id": "baelenys-targaryen",
-    "cardType": "character",
-    "tierId": "s-plus",
-    "name": "Baelenys Targaryen",
-    "subtitle": "King of the Seven Kingdoms",
-    "houseId": "targaryen",
-    "power": 9,
-    "influence": 10,
-    "keywords": [
-      "King",
-      "Dragonrider",
-      "Tyrant",
-      "Paranoid"
-    ],
-    "abilities": [
-      {
-        "name": "Iron Wrath",
-        "description": "Crushes dissent instantly; nearby rivals lose standing when he enters the room."
-      },
-      {
-        "name": "Formidable",
-        "description": "Survives what should have killed him — permanently scarred but unbroken."
-      }
-    ],
-    "nemesis": [
-      "vahaemon-targaryen",
-      "derrin-hightower"
-    ],
-    "allies": [
-      "jaery-targaryen",
-      "baelor-targaryen"
-    ],
-    "flavorQuote": "So many years...",
-    "linkedCharacterId": "baelenys-targaryen"
   },
   {
     "id": "gaelor-targaryen",
@@ -79,179 +735,29 @@
     "name": "Gaelor Targaryen",
     "subtitle": "The Housebreaker",
     "houseId": "targaryen",
-    "power": 9,
-    "influence": 7,
-    "keywords": [
-      "Heir Presumptive",
-      "Knight",
-      "Dragonrider",
-      "Butcher"
+    "cost": 6,
+    "strength": 8,
+    "influence": 6,
+    "health": 7,
+    "traits": [
+      "unique",
+      "swift",
+      "dragonrider"
     ],
     "abilities": [
       {
-        "name": "Blackfyre's Weight",
-        "description": "Wielding the ancestral blade, deals devastating blows in single combat."
-      },
-      {
+        "id": "housebreaker",
         "name": "Housebreaker",
-        "description": "Massacres resistance entirely — at the cost of lasting infamy."
+        "trigger": "victory",
+        "text": "When Military damage dealt by Gaelor destroys an enemy Character during a Military Conflict, deal 2 damage to the opposing Ruler's Standing."
       }
     ],
-    "nemesis": [
-      "jacaelon-targaryen",
-      "brant-costayne"
+    "roles": [
+      "core",
+      "military",
+      "tempo"
     ],
-    "allies": [
-      "saathos-maris",
-      "naella-velaryon"
-    ],
-    "flavorQuote": "My head is still intact.",
     "linkedCharacterId": "gaelor-targaryen"
-  },
-  {
-    "id": "visenor-targaryen",
-    "cardType": "character",
-    "tierId": "s-plus",
-    "name": "Visenor Targaryen",
-    "subtitle": "Crown Prince in Exile",
-    "houseId": "targaryen",
-    "power": 6,
-    "influence": 9,
-    "keywords": [
-      "Fugitive",
-      "Scholar",
-      "Dragonrider",
-      "Rightful Heir"
-    ],
-    "abilities": [
-      {
-        "name": "Bond of Patience",
-        "description": "Tames the untamed — earned the trust of a wild, ancient dragon through patience alone."
-      },
-      {
-        "name": "Hidden Claim",
-        "description": "Gains hidden allies while believed dead or lost."
-      }
-    ],
-    "nemesis": [
-      "baelenys-targaryen"
-    ],
-    "allies": [
-      "rhaella-targaryen",
-      "alester-dayne",
-      "lorenah-dayne",
-      "renrose-tyrell"
-    ],
-    "flavorQuote": "I am supposed to want my throne, but for the first time in my life, I am at peace.",
-    "linkedCharacterId": "visenor-targaryen"
-  },
-  {
-    "id": "jaery-targaryen",
-    "cardType": "character",
-    "tierId": "s",
-    "name": "Jaery Targaryen",
-    "subtitle": "Queen of the Seven Kingdoms",
-    "houseId": "targaryen",
-    "power": 3,
-    "influence": 9,
-    "keywords": [
-      "Queen",
-      "Peacemaker",
-      "Mother",
-      "Last Barrier"
-    ],
-    "abilities": [
-      {
-        "name": "The People Have Suffered Enough",
-        "description": "Once per round, cancels a punishment or decree before it reaches the realm."
-      },
-      {
-        "name": "A Mother's Plea",
-        "description": "Compels two warring allies to stand down — at least until the next morning."
-      }
-    ],
-    "nemesis": [
-      "baelenys-targaryen"
-    ],
-    "allies": [
-      "jacaelon-targaryen",
-      "baelor-targaryen",
-      "vhaemys-targaryen"
-    ],
-    "flavorQuote": "I do not want to be with my husband anymore. You are not the man I knew.",
-    "linkedCharacterId": "jaery-targaryen"
-  },
-  {
-    "id": "baelor-targaryen",
-    "cardType": "character",
-    "tierId": "s",
-    "name": "Baelor Targaryen",
-    "subtitle": "Grand Maester",
-    "houseId": "targaryen",
-    "power": 2,
-    "influence": 9,
-    "keywords": [
-      "Grand Maester",
-      "Scholar",
-      "Dissenter",
-      "Strategist"
-    ],
-    "abilities": [
-      {
-        "name": "The Argumentative One",
-        "description": "Whenever a rash decree is issued, may force a recount of votes at the council table."
-      },
-      {
-        "name": "Economic Pressure",
-        "description": "Forces a rival city or house to expel a named target without open war."
-      }
-    ],
-    "nemesis": [
-      "cordin-poole"
-    ],
-    "allies": [
-      "jacaelon-targaryen",
-      "baelenys-targaryen",
-      "saera-targaryen"
-    ],
-    "flavorQuote": "Gaelor ruined my life. I had to abandon Oldtown. My entire reputation there was destroyed because of him.",
-    "linkedCharacterId": "baelor-targaryen"
-  },
-  {
-    "id": "saera-targaryen",
-    "cardType": "character",
-    "tierId": "s",
-    "name": "Saera Targaryen",
-    "subtitle": "Cloud Eyes",
-    "houseId": "targaryen",
-    "power": 6,
-    "influence": 7,
-    "keywords": [
-      "Dragonrider",
-      "Principled",
-      "Diplomat",
-      "Refusing to Be Used"
-    ],
-    "abilities": [
-      {
-        "name": "Cloud Eyes",
-        "description": "Sees through deception; cannot be misled by false reports or forged evidence."
-      },
-      {
-        "name": "Cloudgazer's Shadow",
-        "description": "When she commits her dragon, rivals cannot retreat or hide."
-      }
-    ],
-    "nemesis": [
-      "gaelor-targaryen"
-    ],
-    "allies": [
-      "jacaelon-targaryen",
-      "alester-dayne",
-      "visenor-targaryen"
-    ],
-    "flavorQuote": "My king, will you punish years of loyal service for the deeds of one stranger?",
-    "linkedCharacterId": "saera-targaryen"
   },
   {
     "id": "alester-dayne",
@@ -260,243 +766,29 @@
     "name": "Ser Alester Dayne",
     "subtitle": "Kingsguard",
     "houseId": "dayne",
-    "power": 10,
-    "influence": 4,
-    "keywords": [
-      "Kingsguard",
-      "Knight",
-      "Nearly Unkillable",
-      "Sworn Shield"
+    "cost": 7,
+    "strength": 9,
+    "influence": 3,
+    "health": 8,
+    "traits": [
+      "unique",
+      "guard",
+      "challenge"
     ],
     "abilities": [
       {
+        "id": "dawns-edge",
         "name": "Dawn's Edge",
-        "description": "In single combat, ignores the first wound dealt against him each round."
-      },
-      {
-        "name": "Rise, Ser Jacaelon",
-        "description": "May confer a knighthood. The knighted ally gains +2 power until end of game."
+        "trigger": "passive",
+        "text": "Prevent the first 2 points of Military damage that would be dealt to Alester each turn."
       }
     ],
-    "nemesis": [
-      "curtass-whent"
+    "roles": [
+      "military",
+      "control",
+      "defensive"
     ],
-    "allies": [
-      "jacaelon-targaryen",
-      "saera-targaryen",
-      "lorenah-dayne"
-    ],
-    "flavorQuote": "The only reason I am alive is King Baelenys.",
     "linkedCharacterId": "alester-dayne"
-  },
-  {
-    "id": "rhaella-targaryen",
-    "cardType": "character",
-    "tierId": "s",
-    "name": "Rhaella Targaryen",
-    "subtitle": "Princess in Hiding",
-    "houseId": "targaryen",
-    "power": 2,
-    "influence": 7,
-    "keywords": [
-      "Fugitive",
-      "Pregnant",
-      "Exiled Blood",
-      "Loyal"
-    ],
-    "abilities": [
-      {
-        "name": "Dangerous Name",
-        "description": "Merely being found with her costs an ally significant standing at court."
-      },
-      {
-        "name": "I Just Need to Sleep",
-        "description": "Removes one pursuit token from her location each round she remains hidden."
-      }
-    ],
-    "nemesis": [
-      "baelenys-targaryen"
-    ],
-    "allies": [
-      "visenor-targaryen",
-      "alester-dayne",
-      "lorenah-dayne"
-    ],
-    "flavorQuote": "I just need to sleep.",
-    "linkedCharacterId": "rhaella-targaryen"
-  },
-  {
-    "id": "maela-targaryen",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Maela Targaryen",
-    "subtitle": "The Twin",
-    "houseId": "targaryen",
-    "power": 4,
-    "influence": 6,
-    "keywords": [
-      "Dragonrider",
-      "Manipulative",
-      "Guarded",
-      "Unbothered"
-    ],
-    "abilities": [
-      {
-        "name": "Jadefyre's Rider",
-        "description": "Controls an inherited dragon; gains power proportional to how long she has held it."
-      },
-      {
-        "name": "Buried Secret",
-        "description": "A hidden threat. If revealed, deals influence damage to the ally who exposed her."
-      }
-    ],
-    "nemesis": [
-      "gaelor-targaryen"
-    ],
-    "allies": [
-      "jacaelon-targaryen",
-      "saera-targaryen"
-    ],
-    "flavorQuote": "You gave him a lesson he will not soon forget. Whether the realm realizes it or not, you won.",
-    "linkedCharacterId": "maela-targaryen"
-  },
-  {
-    "id": "vahaemon-targaryen",
-    "cardType": "character",
-    "tierId": "s",
-    "name": "Vahaemon Targaryen",
-    "subtitle": "The Exiled Viper",
-    "houseId": "targaryen",
-    "power": 8,
-    "influence": 7,
-    "keywords": [
-      "Exile",
-      "Dragonrider",
-      "Claimant",
-      "Traitor"
-    ],
-    "abilities": [
-      {
-        "name": "Dark Sister's Legacy",
-        "description": "Commands agents inside enemy territory; their actions cannot be traced back to him."
-      },
-      {
-        "name": "Unknown Dragon",
-        "description": "Deploys a dragon of unverified strength — power value hidden until combat begins."
-      }
-    ],
-    "nemesis": [
-      "baelenys-targaryen"
-    ],
-    "allies": [
-      "visenya-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "vahaemon-targaryen"
-  },
-  {
-    "id": "derrin-hightower",
-    "cardType": "character",
-    "tierId": "a",
-    "name": "Derrin Hightower",
-    "subtitle": "Former Hand of the King",
-    "houseId": "hightower",
-    "power": 3,
-    "influence": 9,
-    "keywords": [
-      "Traitor",
-      "Hand of the King",
-      "Idealist",
-      "Conspirator"
-    ],
-    "abilities": [
-      {
-        "name": "Love Alone Cannot Preserve a Dynasty",
-        "description": "May redirect punishment for a failed conspiracy onto a house ally, sparing himself."
-      },
-      {
-        "name": "The Confession",
-        "description": "When captured, reveals all allied conspirators — but grants one final act before death."
-      }
-    ],
-    "nemesis": [
-      "jacaelon-targaryen",
-      "baelenys-targaryen"
-    ],
-    "allies": [
-      "lorent-tyrell"
-    ],
-    "flavorQuote": "Love alone cannot preserve a dynasty.",
-    "linkedCharacterId": "derrin-hightower"
-  },
-  {
-    "id": "visenya-targaryen",
-    "cardType": "character",
-    "tierId": "a",
-    "name": "Visenya Targaryen",
-    "subtitle": "The Blindfolded Blade",
-    "houseId": "targaryen",
-    "power": 8,
-    "influence": 5,
-    "keywords": [
-      "Fugitive",
-      "Swordswoman",
-      "Infiltrator",
-      "Playing Her Own Game"
-    ],
-    "abilities": [
-      {
-        "name": "Not Blind",
-        "description": "Ignores concealment — sees through disguises and hidden positions."
-      },
-      {
-        "name": "Dark Sister at Your Throat",
-        "description": "May neutralize a target without killing them, leaving a message instead."
-      }
-    ],
-    "nemesis": [
-      "jacaelon-targaryen",
-      "gaelor-targaryen"
-    ],
-    "allies": [
-      "vahaemon-targaryen"
-    ],
-    "flavorQuote": "We finally meet, cousin.",
-    "linkedCharacterId": "visenya-targaryen"
-  },
-  {
-    "id": "lorenah-dayne",
-    "cardType": "character",
-    "tierId": "a",
-    "name": "Lorenah Dayne",
-    "subtitle": "Lady of Torrentine",
-    "houseId": "dayne",
-    "power": 3,
-    "influence": 8,
-    "keywords": [
-      "Dornish",
-      "Perceptive",
-      "Sanctuary",
-      "Unimpressed"
-    ],
-    "abilities": [
-      {
-        "name": "Starfall's Shadow",
-        "description": "An ally hidden under her protection cannot be found by pursuit unless she is defeated first."
-      },
-      {
-        "name": "We Breathe the Same Air",
-        "description": "Reduces hostility between two opposing factions by one tier."
-      }
-    ],
-    "nemesis": [],
-    "allies": [
-      "jacaelon-targaryen",
-      "alester-dayne",
-      "visenor-targaryen"
-    ],
-    "flavorQuote": "We breathe the same air. We stand beneath the same stars. Why must we always find reasons to hate one another?",
-    "linkedCharacterId": "lorenah-dayne"
   },
   {
     "id": "lorent-tyrell",
@@ -505,30 +797,27 @@
     "name": "Lorent Tyrell",
     "subtitle": "The Fallen Rose",
     "houseId": "tyrell",
-    "power": 3,
+    "cost": 5,
+    "strength": 2,
     "influence": 8,
-    "keywords": [
-      "Lord",
-      "Schemer",
-      "Conspirator",
-      "Condemned"
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue",
+      "schemer"
     ],
     "abilities": [
       {
-        "name": "Seeds of Treason",
-        "description": "Draws a trusted court ally into a conspiracy against the opposing ruler."
-      },
-      {
+        "id": "a-son-forewarned",
         "name": "A Son Forewarned",
-        "description": "When Lorent falls, Renrose gains influence and foreknowledge of the enemy ruler's next action."
+        "trigger": "fall",
+        "text": "Draw 1 card. If you control Renrose Tyrell, gain 2 Standing."
       }
     ],
-    "nemesis": [
-      "baelenys-targaryen"
-    ],
-    "allies": [
-      "derrin-hightower",
-      "renrose-tyrell"
+    "roles": [
+      "political",
+      "support",
+      "value"
     ],
     "flavorQuote": "The realm cannot survive another of his wars.",
     "linkedCharacterId": "lorent-tyrell"
@@ -540,479 +829,28 @@
     "name": "Renrose Tyrell",
     "subtitle": "Lord of Highgarden",
     "houseId": "tyrell",
-    "power": 4,
+    "cost": 5,
+    "strength": 3,
     "influence": 9,
-    "keywords": [
-      "Lord",
-      "Schemer",
-      "Kingmaker",
-      "Patient"
+    "health": 5,
+    "traits": [
+      "unique",
+      "confront"
     ],
     "abilities": [
       {
+        "id": "manders-pact",
         "name": "The Mander's Pact",
-        "description": "Binds an ally's claim to his own; both gain power equal to the other's influence score."
-      },
-      {
-        "name": "Eyes in Every Room",
-        "description": "Whenever an ally enters a new location, Renrose receives a copy of their intelligence."
+        "trigger": "arrival",
+        "text": "Choose another Character. It gains +2 Influence permanently. At the start of Renrose's Ruler's next turn, if that exact Character is still in play, draw 1 card."
       }
     ],
-    "nemesis": [
-      "baelenys-targaryen"
+    "roles": [
+      "political",
+      "support",
+      "value"
     ],
-    "allies": [
-      "visenor-targaryen",
-      "martyn-mullendore",
-      "leo-tyrell",
-      "lorent-tyrell"
-    ],
-    "flavorQuote": "My father loved these gardens dearly. Before your father had him executed, of course.",
     "linkedCharacterId": "renrose-tyrell"
-  },
-  {
-    "id": "naella-velaryon",
-    "cardType": "character",
-    "tierId": "a",
-    "name": "Naella Velaryon",
-    "subtitle": "Princess of Driftmark",
-    "houseId": "velaryon",
-    "power": 2,
-    "influence": 7,
-    "keywords": [
-      "Wife",
-      "Perceptive",
-      "Steady",
-      "Pregnant"
-    ],
-    "abilities": [
-      {
-        "name": "For Tonight, Only My Husband",
-        "description": "Removes one stress or rage token from Gaelor; he cannot act recklessly this round."
-      },
-      {
-        "name": "Your Seed Is Strong",
-        "description": "When her child is confirmed, Gaelor gains +1 power permanently."
-      }
-    ],
-    "nemesis": [
-      "jacaelon-targaryen"
-    ],
-    "allies": [
-      "gaelor-targaryen",
-      "baelenys-targaryen"
-    ],
-    "flavorQuote": "If you weren't nervous, I'd think you didn't understand what today means.",
-    "linkedCharacterId": "naella-velaryon"
-  },
-  {
-    "id": "berholt-caswell",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Berholt Caswell",
-    "subtitle": "High Septon",
-    "houseId": "-",
-    "power": 1,
-    "influence": 8,
-    "keywords": [
-      "High Septon",
-      "Pious",
-      "Principled",
-      "Aware of the Gap"
-    ],
-    "abilities": [
-      {
-        "name": "The Gods Will Judge",
-        "description": "May override a death sentence with a sentence of the Wall — once per game."
-      },
-      {
-        "name": "Quiet Conscience",
-        "description": "Costs no influence to align with, but grants no influence in return."
-      }
-    ],
-    "nemesis": [
-      "baelor-targaryen"
-    ],
-    "allies": [
-      "jacaelon-targaryen"
-    ],
-    "flavorQuote": "You know an innocent girl was butchered. Do you want to cross the gods?",
-    "linkedCharacterId": "berholt-caswell"
-  },
-  {
-    "id": "vhaemys-targaryen",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Vhaemys Targaryen",
-    "subtitle": "The King's Little Shadow",
-    "houseId": "targaryen",
-    "power": 1,
-    "influence": 4,
-    "keywords": [
-      "Child",
-      "Perceptive",
-      "In Need of Better Influences",
-      "Beloved"
-    ],
-    "abilities": [
-      {
-        "name": "Let's All Go for a Walk",
-        "description": "Once per game, her presence defuses an escalating confrontation before blood is drawn."
-      },
-      {
-        "name": "Trust Is More Important Than Love",
-        "description": "The ally she declares loyalty to gains +1 influence for the rest of the game."
-      }
-    ],
-    "nemesis": [],
-    "allies": [
-      "jacaelon-targaryen",
-      "alester-dayne",
-      "baelenys-targaryen"
-    ],
-    "flavorQuote": "Anyway, trust is more important than love.",
-    "linkedCharacterId": "vhaemys-targaryen"
-  },
-  {
-    "id": "saathos-maris",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Ser Saathos Maris",
-    "subtitle": "Gaelor's Sworn Sword",
-    "houseId": "-",
-    "power": 7,
-    "influence": 4,
-    "keywords": [
-      "Kingsguard",
-      "Loyal",
-      "Sardonic",
-      "Investigative"
-    ],
-    "abilities": [
-      {
-        "name": "Hold the Door",
-        "description": "Denies entry to a location; even a royal command requires overcoming him first."
-      },
-      {
-        "name": "The Blonde Knight",
-        "description": "May spend an action to investigate a death; gains one hidden clue token."
-      }
-    ],
-    "nemesis": [
-      "alester-dayne"
-    ],
-    "allies": [
-      "gaelor-targaryen"
-    ],
-    "flavorQuote": "Need me to hold it for you, my Prince?",
-    "linkedCharacterId": "saathos-maris"
-  },
-  {
-    "id": "steffon-baratheon",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Steffon Baratheon",
-    "subtitle": "The Young Stag",
-    "houseId": "baratheon",
-    "power": 8,
-    "influence": 5,
-    "keywords": [
-      "Lord",
-      "Knight",
-      "Tourney Champion",
-      "Politically Naive"
-    ],
-    "abilities": [
-      {
-        "name": "A Baratheon Kneels When He Feels Safe",
-        "description": "Cannot be compelled to show deference; ignores intimidation effects."
-      },
-      {
-        "name": "The Hollow Crown",
-        "description": "Won the tourney by default; gains the champion title but not the glory."
-      }
-    ],
-    "nemesis": [
-      "jacaelon-targaryen"
-    ],
-    "allies": [
-      "alester-dayne",
-      "naella-velaryon"
-    ],
-    "flavorQuote": "A Baratheon kneels when he feels safe.",
-    "linkedCharacterId": "steffon-baratheon"
-  },
-  {
-    "id": "brant-costayne",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Ser Brant Costayne",
-    "subtitle": "The Reckoning",
-    "houseId": "-",
-    "power": 7,
-    "influence": 3,
-    "keywords": [
-      "Knight",
-      "Grief-Driven",
-      "Came to Die",
-      "Survivor"
-    ],
-    "abilities": [
-      {
-        "name": "Knights of Oldtown",
-        "description": "When he falls, all Reach-aligned characters gain +1 power for the remainder of the game."
-      },
-      {
-        "name": "Trial by Combat",
-        "description": "May demand single combat in lieu of any verdict; forces the plaintiff to fight personally."
-      }
-    ],
-    "nemesis": [
-      "gaelor-targaryen"
-    ],
-    "allies": [
-      "timos-hightower"
-    ],
-    "flavorQuote": "I stopped trusting the justice of the Seven Kingdoms a long time ago.",
-    "linkedCharacterId": "brant-costayne"
-  },
-  {
-    "id": "melessa-hightower",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Melessa Hightower",
-    "subtitle": "The Last Hightower",
-    "houseId": "hightower",
-    "power": 2,
-    "influence": 6,
-    "keywords": [
-      "Survivor",
-      "Lady",
-      "Thirteen and Already Ruined",
-      "Last of Her Blood"
-    ],
-    "abilities": [
-      {
-        "name": "The Last Name Standing",
-        "description": "While she lives, House Hightower cannot be fully eliminated from the game."
-      },
-      {
-        "name": "Uneasy Sanctuary",
-        "description": "May shelter a fugitive, but doing so costs her 2 influence each round they remain."
-      }
-    ],
-    "nemesis": [
-      "gaelor-targaryen"
-    ],
-    "allies": [
-      "martyn-mullendore",
-      "almar-larchmont",
-      "visenor-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "melessa-hightower"
-  },
-  {
-    "id": "weylar-rocke",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Weylar Rocke",
-    "subtitle": "Master of Whisperers",
-    "houseId": "-",
-    "power": 1,
-    "influence": 7,
-    "keywords": [
-      "Spymaster",
-      "Fear-Driven Loyalty",
-      "Opportunistic",
-      "Resourceful"
-    ],
-    "abilities": [
-      {
-        "name": "Little Birds",
-        "description": "Once per round, reveals one hidden piece of information about any character on the board."
-      },
-      {
-        "name": "Pardon Bought in Terror",
-        "description": "Cannot betray Jacaelon while Jacaelon lives; loyalty is absolute and involuntary."
-      }
-    ],
-    "nemesis": [],
-    "allies": [
-      "jacaelon-targaryen"
-    ],
-    "flavorQuote": "My little birds have brought me a song, my Prince.",
-    "linkedCharacterId": "weylar-rocke"
-  },
-  {
-    "id": "godfrey-blackwood",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Godfrey Blackwood",
-    "subtitle": "Lord of Raventree Hall",
-    "houseId": "blackwood",
-    "power": 6,
-    "influence": 5,
-    "keywords": [
-      "Lord",
-      "Knight",
-      "Gracious",
-      "Unconventional"
-    ],
-    "abilities": [
-      {
-        "name": "Gracious in Defeat",
-        "description": "When eliminated from combat, deals 1 influence damage to his opponent regardless."
-      },
-      {
-        "name": "Tackled into the Mud",
-        "description": "Once per game, prevents an assassination attempt mid-action."
-      }
-    ],
-    "nemesis": [
-      "perric-bracken"
-    ],
-    "allies": [
-      "jacaelon-targaryen",
-      "gaelor-targaryen"
-    ],
-    "flavorQuote": "What a jolly day for the peasants.",
-    "linkedCharacterId": "godfrey-blackwood"
-  },
-  {
-    "id": "rickard-stark",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Rickard Stark",
-    "subtitle": "Lord of Winterfell",
-    "houseId": "stark",
-    "power": 5,
-    "influence": 6,
-    "keywords": [
-      "Lord",
-      "Northern",
-      "Honorable",
-      "Quietly Ambitious"
-    ],
-    "abilities": [
-      {
-        "name": "The North Remembers",
-        "description": "Cannot be intimidated by Targaryen influence; Northern loyalty runs deeper than dragons."
-      },
-      {
-        "name": "When People Look Up",
-        "description": "Grants +1 influence to a Targaryen ally if he openly supports them."
-      }
-    ],
-    "nemesis": [],
-    "allies": [
-      "saera-targaryen"
-    ],
-    "flavorQuote": "When people look up, they want to see someone like you.",
-    "linkedCharacterId": "rickard-stark"
-  },
-  {
-    "id": "timos-hightower",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Timos Hightower",
-    "subtitle": "Lord of Oldtown",
-    "houseId": "hightower",
-    "power": 2,
-    "influence": 4,
-    "keywords": [
-      "Lord",
-      "Young",
-      "Innocent",
-      "Condemned"
-    ],
-    "abilities": [
-      {
-        "name": "He Asked for Parley",
-        "description": "If killed without a fair trial, all Reach-aligned characters gain +2 power permanently."
-      },
-      {
-        "name": "Desperate Steel",
-        "description": "In his final action, may strike back against any foe regardless of power difference."
-      }
-    ],
-    "nemesis": [
-      "gaelor-targaryen"
-    ],
-    "allies": [
-      "brant-costayne",
-      "melessa-hightower"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "timos-hightower"
-  },
-  {
-    "id": "baran-strong",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Baran Strong",
-    "subtitle": "The Exiled Wall",
-    "houseId": "strong",
-    "power": 7,
-    "influence": 3,
-    "keywords": [
-      "Knight",
-      "Exiled",
-      "Formidable",
-      "Resentful"
-    ],
-    "abilities": [
-      {
-        "name": "Curtass Was Nothing Special",
-        "description": "Deals +2 power against any character who previously defeated or disgraced a Kingsguard."
-      },
-      {
-        "name": "Seven Feet of Grievance",
-        "description": "Once per game, forces any character who underestimates him to re-engage in combat at a disadvantage."
-      }
-    ],
-    "nemesis": [
-      "curtass-whent"
-    ],
-    "allies": [
-      "gaelor-targaryen",
-      "malaenar-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "baran-strong"
-  },
-  {
-    "id": "clarisse-flowers",
-    "cardType": "character",
-    "tierId": "b",
-    "name": "Clarisse Flowers",
-    "subtitle": "Sworn Sword of Oldtown",
-    "houseId": "hightower",
-    "power": 8,
-    "influence": 3,
-    "keywords": [
-      "Swordswoman",
-      "Bastard",
-      "Formidable",
-      "Raised as a Boy"
-    ],
-    "abilities": [
-      {
-        "name": "I Was Never Raised to Be a Lady",
-        "description": "Opponents who underestimate her based on gender or birth lose 1 power before combat begins."
-      },
-      {
-        "name": "Blade at Your Throat",
-        "description": "Once per game, pins a target and ends their action for the round without killing them."
-      }
-    ],
-    "nemesis": [],
-    "allies": [
-      "melessa-hightower",
-      "visenor-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "clarisse-flowers"
   },
   {
     "id": "cordin-poole",
@@ -1020,67 +858,760 @@
     "tierId": "c",
     "name": "Cordin Poole",
     "subtitle": "Maester",
-    "houseId": "-",
-    "power": 1,
-    "influence": 5,
-    "keywords": [
-      "Maester",
-      "Sycophantic",
-      "Long-Serving",
-      "Uncomfortable Truths"
+    "cost": 4,
+    "strength": 1,
+    "influence": 4,
+    "health": 3,
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
-        "name": "And Who Else's Would It Be?",
-        "description": "Flatters the most powerful character in play; gains 1 influence from them each round."
-      },
-      {
-        "name": "Sons Must Pay",
-        "description": "Once per game, silences one ongoing argument or challenge at the council table — the affected player loses their next action."
+        "id": "as-i-was-saying",
+        "name": "As I Was Saying",
+        "trigger": "start-of-turn",
+        "text": "Draw 1 card. If this ability successfully drew a card on Cordin's Ruler's previous turn, the card drawn by this ability this turn costs 1 less Command until the end of the turn."
       }
     ],
-    "nemesis": [
-      "jacaelon-targaryen",
-      "baelor-targaryen"
+    "roles": [
+      "support",
+      "value"
     ],
-    "allies": [
-      "gaelor-targaryen",
-      "baelenys-targaryen"
-    ],
-    "flavorQuote": "Sons must pay the price for their fathers' ambitions.",
     "linkedCharacterId": "cordin-poole"
+  },
+  {
+    "id": "saera-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Saera Targaryen",
+    "subtitle": "Cloud Eyes",
+    "houseId": "targaryen",
+    "cost": 5,
+    "strength": 5,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique",
+      "dragonrider"
+    ],
+    "abilities": [
+      {
+        "id": "veiled-sight",
+        "name": "Veiled Sight",
+        "trigger": "arrival",
+        "text": "After Saera enters play, reveal the opposing Ruler's hand. Choose one card. Until the start of Saera's Ruler's next turn, that exact card costs 2 more Command to play."
+      }
+    ],
+    "roles": [
+      "support",
+      "utility"
+    ],
+    "linkedCharacterId": "saera-targaryen"
+  },
+  {
+    "id": "baelenys-targaryen",
+    "cardType": "character",
+    "tierId": "s-plus",
+    "name": "Baelenys Targaryen",
+    "subtitle": "King of the Seven Kingdoms",
+    "houseId": "targaryen",
+    "cost": 8,
+    "strength": 8,
+    "influence": 9,
+    "health": 8,
+    "traits": [
+      "unique",
+      "dragonrider"
+    ],
+    "abilities": [
+      {
+        "id": "iron-wrath",
+        "name": "Iron Wrath",
+        "trigger": "arrival",
+        "text": "After Baelenys enters play, deal 3 damage to another Unit. If that Unit is destroyed this way, Baelenys's Ruler gains 3 Standing."
+      }
+    ],
+    "roles": [
+      "core",
+      "finisher",
+      "control"
+    ],
+    "linkedCharacterId": "baelenys-targaryen"
+  },
+  {
+    "id": "weylar-rocke",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Weylar Rocke",
+    "subtitle": "Master of Whisperers",
+    "cost": 4,
+    "strength": 2,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "price-of-loyalty",
+        "name": "The Price of Loyalty",
+        "trigger": "start-of-turn",
+        "text": "If Weylar has survived 3 of the same Ruler’s turns in play, draw 2 cards and gain 2 additional Command this turn."
+      }
+    ],
+    "roles": [
+      "control",
+      "value"
+    ],
+    "linkedCharacterId": "weylar-rocke"
+  },
+  {
+    "id": "visenor-targaryen",
+    "cardType": "character",
+    "tierId": "s-plus",
+    "name": "Visenor Targaryen",
+    "cost": 6,
+    "strength": 5,
+    "influence": 8,
+    "health": 6,
+    "traits": [
+      "unique",
+      "dragonrider",
+      "schemer"
+    ],
+    "abilities": [
+      {
+        "id": "hidden-claim",
+        "name": "Hidden Claim",
+        "trigger": "arrival",
+        "text": "Visenor's Ruler draws 1 card. If Visenor's Ruler controls no other Targaryen Character, the card drawn this way costs 1 less Command until the end of that turn."
+      }
+    ],
+    "roles": [
+      "core",
+      "political",
+      "value"
+    ],
+    "subtitle": "Crown Prince in Exile",
+    "houseId": "targaryen",
+    "linkedCharacterId": "visenor-targaryen"
+  },
+  {
+    "id": "jaery-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Jaery Targaryen",
+    "cost": 5,
+    "strength": 2,
+    "influence": 8,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "people-have-suffered-enough",
+        "name": "The People Have Suffered Enough",
+        "trigger": "arrival",
+        "text": "Restore 3 Standing."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Queen of the Seven Kingdoms",
+    "houseId": "targaryen",
+    "linkedCharacterId": "jaery-targaryen"
+  },
+  {
+    "id": "baelor-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Baelor Targaryen",
+    "cost": 5,
+    "strength": 2,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "argumentative-one",
+        "name": "The Argumentative One",
+        "trigger": "arrival",
+        "text": "The next Event the opposing Ruler plays costs 2 more Command."
+      }
+    ],
+    "roles": [
+      "political",
+      "control"
+    ],
+    "subtitle": "Grand Maester",
+    "houseId": "targaryen",
+    "linkedCharacterId": "baelor-targaryen"
+  },
+  {
+    "id": "rhaella-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Rhaella Targaryen",
+    "cost": 3,
+    "strength": 1,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "dangerous-name",
+        "name": "Dangerous Name",
+        "trigger": "passive",
+        "text": "While Rhaella is Ready, the first enemy Political Conflict against you each turn has -2 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "subtitle": "Princess in Hiding",
+    "houseId": "targaryen",
+    "linkedCharacterId": "rhaella-targaryen"
+  },
+  {
+    "id": "maela-targaryen",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Maela Targaryen",
+    "cost": 4,
+    "strength": 4,
+    "influence": 5,
+    "health": 5,
+    "traits": [
+      "unique",
+      "dragonrider"
+    ],
+    "abilities": [
+      {
+        "id": "buried-secret",
+        "name": "Buried Secret",
+        "trigger": "victory",
+        "text": "After Maela wins a Political Conflict against a Character, the opposing Ruler's next card costs 1 more Command."
+      }
+    ],
+    "roles": [
+      "hybrid",
+      "tempo"
+    ],
+    "subtitle": "The Twin",
+    "houseId": "targaryen",
+    "linkedCharacterId": "maela-targaryen"
+  },
+  {
+    "id": "vahaemon-targaryen",
+    "cardType": "character",
+    "tierId": "s",
+    "name": "Vahaemon Targaryen",
+    "cost": 7,
+    "strength": 7,
+    "influence": 6,
+    "health": 7,
+    "traits": [
+      "unique",
+      "dragonrider",
+      "challenge"
+    ],
+    "abilities": [
+      {
+        "id": "dark-sisters-legacy",
+        "name": "Dark Sister's Legacy",
+        "trigger": "arrival",
+        "text": "Choose an enemy Character. It cannot initiate a Political Conflict during that Character's Ruler's next turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "control"
+    ],
+    "subtitle": "The Exiled Viper",
+    "houseId": "targaryen",
+    "linkedCharacterId": "vahaemon-targaryen"
+  },
+  {
+    "id": "derrin-hightower",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Derrin Hightower",
+    "cost": 5,
+    "strength": 2,
+    "influence": 8,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "the-confession",
+        "name": "The Confession",
+        "trigger": "fall",
+        "text": "Derrin's Ruler draws 2 cards. The opposing Ruler draws 1 card."
+      }
+    ],
+    "roles": [
+      "political",
+      "value"
+    ],
+    "subtitle": "Former Hand of the King",
+    "houseId": "hightower",
+    "linkedCharacterId": "derrin-hightower"
+  },
+  {
+    "id": "visenya-targaryen",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Visenya Targaryen",
+    "cost": 6,
+    "strength": 8,
+    "influence": 5,
+    "health": 5,
+    "traits": [
+      "unique",
+      "challenge"
+    ],
+    "abilities": [
+      {
+        "id": "you-never-saw-me",
+        "name": "You Never Saw Me",
+        "trigger": "victory",
+        "text": "After Visenya wins a Military Conflict against a Character, if this is her first deployment this game, she cannot be targeted by enemy Characters, Events, or abilities until the start of her Ruler's next turn."
+      },
+      {
+        "id": "playing-her-own-game",
+        "name": "Playing Her Own Game",
+        "trigger": "end-of-turn",
+        "text": "At the end of her Ruler's 3rd turn with Visenya in play, if she is still in play, return her to her Ruler's hand. This ability can trigger only once per game."
+      }
+    ],
+    "roles": [
+      "military",
+      "tempo",
+      "evasive"
+    ],
+    "subtitle": "The Blindfolded Blade",
+    "houseId": "targaryen",
+    "linkedCharacterId": "visenya-targaryen",
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "lorenah-dayne",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Lorenah Dayne",
+    "cost": 4,
+    "strength": 2,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "starfalls-shadow",
+        "name": "Starfall's Shadow",
+        "trigger": "passive",
+        "text": "While Lorenah is in play, other Characters ruled by her Ruler cannot be targeted by enemy Events."
+      }
+    ],
+    "roles": [
+      "political",
+      "support",
+      "control"
+    ],
+    "subtitle": "Lady of Torrentine",
+    "houseId": "dayne",
+    "linkedCharacterId": "lorenah-dayne"
+  },
+  {
+    "id": "naella-velaryon",
+    "cardType": "character",
+    "tierId": "a",
+    "name": "Naella Velaryon",
+    "cost": 4,
+    "strength": 2,
+    "influence": 6,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "our-fleet-is-yours",
+        "name": "Our Fleet Is Yours",
+        "trigger": "arrival",
+        "text": "Summon two 1/0/1 Velaryon Sailors ruled by Naella's Ruler. While Driftmark is the active Location, Velaryon Sailors have +1 Strength."
+      }
+    ],
+    "roles": [
+      "support",
+      "tempo",
+      "swarm"
+    ],
+    "subtitle": "Princess of Driftmark",
+    "houseId": "velaryon",
+    "linkedCharacterId": "naella-velaryon"
+  },
+  {
+    "id": "berholt-caswell",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Berholt Caswell",
+    "cost": 4,
+    "strength": 1,
+    "influence": 7,
+    "health": 4,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "the-gods-will-judge",
+        "name": "The Gods Will Judge",
+        "trigger": "fall",
+        "text": "Restore 3 Standing."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "High Septon",
+    "linkedCharacterId": "berholt-caswell"
+  },
+  {
+    "id": "vhaemys-targaryen",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Vhaemys Targaryen",
+    "cost": 2,
+    "strength": 1,
+    "influence": 3,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "dreams-of-things-to-come",
+        "name": "Dreams of Things to Come",
+        "trigger": "arrival",
+        "text": "Look at the top 3 cards of the opposing Ruler's deck. Vhaemys's Ruler may put one of them on the bottom of that deck. Return the others in the same order."
+      }
+    ],
+    "roles": [
+      "support",
+      "information",
+      "tempo"
+    ],
+    "subtitle": "The King's Little Shadow",
+    "houseId": "targaryen",
+    "linkedCharacterId": "vhaemys-targaryen"
+  },
+  {
+    "id": "saathos-maris",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ser Saathos Maris",
+    "cost": 5,
+    "strength": 7,
+    "influence": 3,
+    "health": 6,
+    "traits": [
+      "unique",
+      "guard"
+    ],
+    "abilities": [
+      {
+        "id": "innkeeper-another",
+        "name": "Innkeeper! Another!",
+        "trigger": "passive",
+        "text": "Adjacent Characters have +1 Health while Saathos is in play."
+      }
+    ],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "subtitle": "Sworn Sword",
+    "linkedCharacterId": "saathos-maris"
+  },
+  {
+    "id": "steffon-baratheon",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Steffon Baratheon",
+    "cost": 5,
+    "strength": 7,
+    "influence": 4,
+    "health": 6,
+    "traits": [
+      "unique",
+      "challenge"
+    ],
+    "abilities": [
+      {
+        "id": "a-baratheon-kneels-when-he-feels-safe",
+        "name": "A Baratheon Kneels When He Feels Safe",
+        "trigger": "passive",
+        "text": "Steffon's Strength and Influence cannot be reduced by enemy effects."
+      }
+    ],
+    "roles": [
+      "military",
+      "midrange"
+    ],
+    "subtitle": "The Young Stag",
+    "houseId": "baratheon",
+    "linkedCharacterId": "steffon-baratheon"
+  },
+  {
+    "id": "brant-costayne",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ser Brant Costayne",
+    "cost": 5,
+    "strength": 7,
+    "influence": 2,
+    "health": 6,
+    "traits": [
+      "unique",
+      "challenge"
+    ],
+    "abilities": [
+      {
+        "id": "knights-of-oldtown",
+        "name": "Knights of Oldtown",
+        "trigger": "fall",
+        "text": "Other Characters ruled by Brant's Ruler gain +1 Strength until the end of Brant's Ruler's next turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "tempo"
+    ],
+    "subtitle": "Knight of Oldtown",
+    "houseId": "costayne",
+    "linkedCharacterId": "brant-costayne"
+  },
+  {
+    "id": "melessa-hightower",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Melessa Hightower",
+    "cost": 3,
+    "strength": 1,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique",
+      "intrigue"
+    ],
+    "abilities": [
+      {
+        "id": "the-last-name-standing",
+        "name": "The Last Name Standing",
+        "trigger": "passive",
+        "text": "Other Hightower Characters ruled by Melessa's Ruler have +1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "tribal",
+      "support"
+    ],
+    "subtitle": "The Last Hightower",
+    "houseId": "hightower",
+    "linkedCharacterId": "melessa-hightower"
+  },
+  {
+    "id": "godfrey-blackwood",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Godfrey Blackwood",
+    "cost": 4,
+    "strength": 5,
+    "influence": 4,
+    "health": 5,
+    "traits": [
+      "unique",
+      "guard"
+    ],
+    "abilities": [
+      {
+        "id": "gracious-in-defeat",
+        "name": "Gracious in Defeat",
+        "trigger": "fall",
+        "text": "Deal 2 damage to enemy Standing."
+      }
+    ],
+    "roles": [
+      "military",
+      "value"
+    ],
+    "subtitle": "Lord of Raventree Hall",
+    "houseId": "blackwood",
+    "linkedCharacterId": "godfrey-blackwood"
+  },
+  {
+    "id": "rickard-stark",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Rickard Stark",
+    "cost": 4,
+    "strength": 5,
+    "influence": 5,
+    "health": 5,
+    "traits": [
+      "unique",
+      "guard"
+    ],
+    "abilities": [
+      {
+        "id": "when-people-look-up",
+        "name": "When People Look Up",
+        "trigger": "passive",
+        "text": "Adjacent Characters have +1 Influence while Rickard is in play."
+      }
+    ],
+    "roles": [
+      "hybrid",
+      "support"
+    ],
+    "subtitle": "Lord of Winterfell",
+    "houseId": "stark",
+    "linkedCharacterId": "rickard-stark"
+  },
+  {
+    "id": "timos-hightower",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Timos Hightower",
+    "cost": 2,
+    "strength": 2,
+    "influence": 3,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "he-asked-for-parley",
+        "name": "He Asked for Parley",
+        "trigger": "fall",
+        "text": "Characters ruled by Timos's Ruler gain +1 Strength until the end of Timos's Ruler's next turn. If Timos was destroyed in a Military Conflict, they gain +2 Strength instead."
+      }
+    ],
+    "roles": [
+      "support",
+      "tempo"
+    ],
+    "subtitle": "Lord of Oldtown",
+    "houseId": "hightower",
+    "linkedCharacterId": "timos-hightower"
+  },
+  {
+    "id": "baran-strong",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Baran Strong",
+    "cost": 5,
+    "strength": 7,
+    "influence": 2,
+    "health": 7,
+    "traits": [
+      "unique",
+      "guard"
+    ],
+    "abilities": [
+      {
+        "id": "seven-feet-of-grievance",
+        "name": "Seven Feet of Grievance",
+        "trigger": "passive",
+        "text": "The first time Baran takes Military damage each turn, if he survives that damage, he gains +2 Strength until the end of the turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "durable"
+    ],
+    "subtitle": "Seven Feet of Grievance",
+    "houseId": "strong",
+    "linkedCharacterId": "baran-strong"
+  },
+  {
+    "id": "clarisse-flowers",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Clarisse Flowers",
+    "cost": 5,
+    "strength": 3,
+    "influence": 2,
+    "health": 5,
+    "traits": [
+      "unique",
+      "challenge"
+    ],
+    "abilities": [
+      {
+        "id": "im-no-knight-nor-lady",
+        "name": "I'm No Knight nor Lady",
+        "trigger": "passive",
+        "text": "The first time Clarisse survives damage from a Military Conflict each turn, she gains +1 Strength permanently."
+      }
+    ],
+    "roles": [
+      "military",
+      "scaling",
+      "durable"
+    ],
+    "subtitle": "No Knight nor Lady",
+    "linkedCharacterId": "clarisse-flowers"
   },
   {
     "id": "orwell-morrigen",
     "cardType": "character",
-    "tierId": "c",
+    "tierId": "a",
     "name": "Ser Orwell Morrigen",
-    "subtitle": "Lord Commander of the Kingsguard",
-    "houseId": "morrigen",
-    "power": 7,
-    "influence": 4,
-    "keywords": [
-      "Lord Commander",
-      "Kingsguard",
-      "Disciplined",
-      "Watching"
+    "cost": 5,
+    "strength": 7,
+    "influence": 3,
+    "health": 6,
+    "traits": [
+      "unique",
+      "guard"
     ],
     "abilities": [
       {
+        "id": "experience-triumphs",
         "name": "Experience Triumphs",
-        "description": "In combat against a younger character, gains +2 power."
-      },
-      {
-        "name": "Running Out of Patience",
-        "description": "Once per game, demands an accounting from any ally who has acted without orders."
+        "trigger": "passive",
+        "text": "While Orwell is in a Military Conflict against a Character deployed this turn, he has +2 Strength."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "baelenys-targaryen",
-      "alester-dayne"
+    "roles": [
+      "military",
+      "defensive"
     ],
-    "flavorQuote": "Experience triumphs over youth and speed. The men you truly must fear are the experienced ones.",
+    "subtitle": "Lord Commander of the Kingsguard",
+    "houseId": "morrigen",
     "linkedCharacterId": "orwell-morrigen"
   },
   {
@@ -1088,34 +1619,28 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Curtass Whent",
-    "subtitle": "Former Kingsguard",
-    "houseId": "whent",
-    "power": 8,
-    "influence": 2,
-    "keywords": [
-      "Mercenary",
-      "Brutal",
-      "Once-Legendary",
-      "Sadistic"
+    "cost": 5,
+    "strength": 8,
+    "influence": 1,
+    "health": 5,
+    "traits": [
+      "unique",
+      "challenge"
     ],
     "abilities": [
       {
-        "name": "Fixers Don't Make Songs",
-        "description": "Cannot be assigned honorable death; dies off-screen when defeated."
-      },
-      {
+        "id": "they-pass-over-real-men",
         "name": "They Pass Over Real Men",
-        "description": "Deals +2 power against Kingsguard characters specifically."
+        "trigger": "passive",
+        "text": "Curtass has +2 Strength while in a Military Conflict against a Character with Guard or Challenge."
       }
     ],
-    "nemesis": [
-      "alester-dayne",
-      "baran-strong"
+    "roles": [
+      "military",
+      "aggro"
     ],
-    "allies": [
-      "baelenys-targaryen"
-    ],
-    "flavorQuote": "You know what the problem with the Kingsguard is? They pass over fixers — real men like me.",
+    "subtitle": "Former Kingsguard",
+    "houseId": "whent",
     "linkedCharacterId": "curtass-whent"
   },
   {
@@ -1123,33 +1648,28 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Ser Brannyn Vance",
-    "subtitle": "Sworn Shield, Broken",
-    "houseId": "vance",
-    "power": 5,
-    "influence": 2,
-    "keywords": [
-      "Kingsguard",
-      "Broken Vows",
-      "Guilt-Ridden",
-      "The Secret That Walks"
+    "cost": 3,
+    "strength": 4,
+    "influence": 1,
+    "health": 3,
+    "traits": [
+      "unique",
+      "guard"
     ],
     "abilities": [
       {
+        "id": "royal-blood",
         "name": "I Cannot Draw Steel Against Royal Blood",
-        "description": "Cannot attack any Targaryen character. Takes full damage from them without retaliation."
-      },
-      {
-        "name": "When He Falls, Everything Falls",
-        "description": "When eliminated, deals 2 influence damage to every character currently holding a secret token. If any of those characters are Targaryen, they take 3 instead."
+        "trigger": "passive",
+        "text": "Ser Brannyn Vance cannot initiate a Military Conflict against a Targaryen Character. When defending against a Military Conflict initiated by a Targaryen Character, Ser Brannyn Vance deals no Military damage back."
       }
     ],
-    "nemesis": [
-      "gaelor-targaryen"
+    "roles": [
+      "military",
+      "defensive"
     ],
-    "allies": [
-      "maela-targaryen"
-    ],
-    "flavorQuote": "Of course I felt it. How could I not?",
+    "subtitle": "Sworn Shield, Broken",
+    "houseId": "vance",
     "linkedCharacterId": "brannyn-vance"
   },
   {
@@ -1157,32 +1677,28 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Malaenar Targaryen",
-    "subtitle": "Lord of Dragonstone",
-    "houseId": "targaryen",
-    "power": 2,
+    "cost": 3,
+    "strength": 2,
     "influence": 5,
-    "keywords": [
-      "Lord",
-      "Loyal",
-      "Steady",
-      "Overshadowed"
+    "health": 5,
+    "traits": [
+      "unique",
+      "guard"
     ],
     "abilities": [
       {
-        "name": "Renounced and Reliable",
-        "description": "Cannot be drawn into succession conflict; immune to kingmaking pressure."
-      },
-      {
+        "id": "dragonstones-quiet",
         "name": "Dragonstone's Quiet",
-        "description": "Holds a strategic location without requiring upkeep."
+        "trigger": "passive",
+        "text": "While Dragonstone is the active Location, Units ruled by Malaenar's current Ruler have +1 Health."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "baelenys-targaryen",
-      "baran-strong"
+    "roles": [
+      "support",
+      "defensive"
     ],
-    "flavorQuote": "Even though I never showed it, I always envied you. Especially for how you stood up to our father.",
+    "subtitle": "Lord of Dragonstone",
+    "houseId": "targaryen",
     "linkedCharacterId": "malaenar-targaryen"
   },
   {
@@ -1190,34 +1706,27 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Tansy Riverside",
-    "subtitle": "Paramour of Dragonstone",
-    "houseId": "-",
-    "power": 1,
+    "cost": 3,
+    "strength": 1,
     "influence": 5,
-    "keywords": [
-      "Lowborn",
-      "Ambitious",
-      "Calculating",
-      "Undeterred"
+    "health": 3,
+    "traits": [
+      "unique",
+      "intrigue"
     ],
     "abilities": [
       {
+        "id": "she-organized-the-whole-thing",
         "name": "She Organized the Whole Thing",
-        "description": "Once per game, triggers a social event without her ally's knowledge — all consequences fall on her instead of him."
-      },
-      {
-        "name": "She Held His Gaze",
-        "description": "Cannot be dismissed or removed from play by intimidation alone; requires an active political action."
+        "trigger": "arrival",
+        "text": "The next Event Tansy's Ruler plays this turn costs 1 less Command."
       }
     ],
-    "nemesis": [
-      "baelenys-targaryen",
-      "jaery-targaryen"
+    "roles": [
+      "political",
+      "tempo"
     ],
-    "allies": [
-      "malaenar-targaryen"
-    ],
-    "flavorQuote": "I am so deeply honored that you graced us with your presence today.",
+    "subtitle": "Paramour of Dragonstone",
     "linkedCharacterId": "tansy-riverside"
   },
   {
@@ -1225,28 +1734,27 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Naela Targaryen",
-    "subtitle": "Wife of the Exiled",
-    "houseId": "targaryen",
-    "power": 1,
+    "cost": 2,
+    "strength": 1,
     "influence": 3,
-    "keywords": [
-      "Exile",
-      "Unknown",
-      "Mother"
+    "health": 3,
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
+        "id": "whereabouts-unknown",
         "name": "Whereabouts Unknown",
-        "description": "Cannot be targeted by any player while her location remains hidden."
+        "trigger": "passive",
+        "text": "While Naela is Ready, she cannot be targeted by enemy Events."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "vahaemon-targaryen",
-      "rhaella-targaryen",
-      "visenya-targaryen"
+    "roles": [
+      "support",
+      "defensive"
     ],
-    "flavorQuote": "",
+    "subtitle": "Wife of the Exiled",
+    "houseId": "targaryen",
     "linkedCharacterId": "naela-targaryen"
   },
   {
@@ -1254,62 +1762,56 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Brandon Stark",
-    "subtitle": "Late Lord of Winterfell",
-    "houseId": "stark",
-    "power": 1,
+    "cost": 2,
+    "strength": 1,
     "influence": 3,
-    "keywords": [
-      "Dead",
-      "Northern",
-      "Honorable",
-      "The Reason She Went North"
+    "health": 3,
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
+        "id": "death-in-his-own-bed",
         "name": "Death in His Own Bed",
-        "description": "When played, immediately triggers one diplomatic event between Stark and Targaryen."
+        "trigger": "arrival",
+        "text": "Choose a Stark or Targaryen Character ruled by Brandon's Ruler. It gains +1 Influence permanently."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "rickard-stark"
+    "roles": [
+      "support",
+      "political"
     ],
-    "flavorQuote": "",
+    "subtitle": "Late Lord of Winterfell",
+    "houseId": "stark",
     "linkedCharacterId": "brandon-stark"
   },
   {
     "id": "tion-lannister",
     "cardType": "character",
-    "tierId": "c",
+    "tierId": "b",
     "name": "Tion Lannister",
-    "subtitle": "Master of Coin",
-    "houseId": "lannister",
-    "power": 1,
+    "cost": 4,
+    "strength": 1,
     "influence": 6,
-    "keywords": [
-      "Master of Coin",
-      "Practical",
-      "Rarely Heeded",
-      "Correct"
+    "health": 4,
+    "traits": [
+      "unique",
+      "intrigue"
     ],
     "abilities": [
       {
+        "id": "deal-with-the-money",
         "name": "Deal With the Money",
-        "description": "Reduces the cost of any decree or campaign by 1 resource — if anyone listens."
-      },
-      {
-        "name": "A War With No Clear End",
-        "description": "May delay a military campaign by one round by presenting financial projections."
+        "trigger": "passive",
+        "text": "The first Event or Location you play each turn costs 1 less Command."
       }
     ],
-    "nemesis": [
-      "baelenys-targaryen"
+    "roles": [
+      "political",
+      "value"
     ],
-    "allies": [
-      "jacaelon-targaryen",
-      "baelor-targaryen"
-    ],
-    "flavorQuote": "",
+    "subtitle": "Master of Coin",
+    "houseId": "lannister",
     "linkedCharacterId": "tion-lannister"
   },
   {
@@ -1317,32 +1819,28 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Martyn Mullendore",
-    "subtitle": "Knight of the Reach",
-    "houseId": "mullendore",
-    "power": 5,
+    "cost": 3,
+    "strength": 4,
     "influence": 3,
-    "keywords": [
-      "Knight",
-      "Loyal",
-      "Discreet",
-      "Perceptive"
+    "health": 4,
+    "traits": [
+      "unique",
+      "guard"
     ],
     "abilities": [
       {
-        "name": "I Have a Good Memory for Faces",
-        "description": "Cannot be fooled by disguise; automatically identifies hidden characters."
-      },
-      {
-        "name": "Loyalty to the Prince",
-        "description": "His allegiance runs to Visenor personally, not to the house that employs him."
+        "id": "safe-passage",
+        "name": "Safe Passage",
+        "trigger": "arrival",
+        "text": "Choose another Character ruled by Martyn's Ruler. Enemy Characters cannot initiate Conflicts against it until the start of Martyn's Ruler's next turn."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "visenor-targaryen",
-      "melessa-hightower"
+    "roles": [
+      "military",
+      "support"
     ],
-    "flavorQuote": "You are in the absolute last place in the realm you should be, my Prince.",
+    "subtitle": "Knight of the Reach",
+    "houseId": "mullendore",
     "linkedCharacterId": "martyn-mullendore"
   },
   {
@@ -1350,32 +1848,27 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Leo Tyrell",
-    "subtitle": "Son of Highgarden",
-    "houseId": "tyrell",
-    "power": 2,
-    "influence": 4,
-    "keywords": [
-      "Young",
-      "Haughty",
-      "His Father's Eyes",
-      "Learning"
+    "cost": 2,
+    "strength": 2,
+    "influence": 3,
+    "health": 3,
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
-        "name": "My Father Can Send—",
-        "description": "Attempts to summon Tyrell reinforcements; can be quietly shut down by any senior ally."
-      },
-      {
+        "id": "proud-of-his-name",
         "name": "Proud of His Name",
-        "description": "Gains +1 influence whenever a Tyrell character is mentioned in play."
+        "trigger": "passive",
+        "text": "Whenever you deploy Visenor Targaryen, another Tyrell Character, or a Hightower Character, Leo gains +1 Influence permanently."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "renrose-tyrell",
-      "martyn-mullendore"
+    "roles": [
+      "political",
+      "tribal"
     ],
-    "flavorQuote": "",
+    "subtitle": "Young Rose",
+    "houseId": "tyrell",
     "linkedCharacterId": "leo-tyrell"
   },
   {
@@ -1383,32 +1876,28 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Almar Larchmont",
-    "subtitle": "Maester of the Hightower",
-    "houseId": "-",
-    "power": 1,
+    "cost": 3,
+    "strength": 1,
     "influence": 4,
-    "keywords": [
-      "Maester",
-      "Discreet",
-      "Fiercely Loyal",
-      "Sharp"
+    "health": 4,
+    "traits": [
+      "unique",
+      "intrigue"
     ],
     "abilities": [
       {
-        "name": "He Is Maester Arthur",
-        "description": "Maintains a cover identity for one ally; costs 1 influence per round to sustain."
-      },
-      {
+        "id": "do-not-forget-it-my-lady",
         "name": "Do Not Forget It, My Lady",
-        "description": "Once per game, corrects a dangerous slip before it reaches hostile ears."
+        "trigger": "passive",
+        "text": "The first time another Character ruled by Almar's Ruler would receive a negative stat modifier each turn, prevent that modifier."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "melessa-hightower",
-      "visenor-targaryen"
+    "roles": [
+      "support",
+      "control"
     ],
-    "flavorQuote": "From this day forth, we shall not refer to our guest as a prince. He is Maester Arthur. Do not forget it, my lady.",
+    "subtitle": "Knight of the Reach",
+    "houseId": "larchmont",
     "linkedCharacterId": "almar-larchmont"
   },
   {
@@ -1416,33 +1905,27 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Edmyn Uller",
-    "subtitle": "Dornish Maester",
-    "houseId": "-",
-    "power": 1,
+    "cost": 2,
+    "strength": 1,
     "influence": 3,
-    "keywords": [
-      "Maester",
-      "Blunt",
-      "Foul-Mouthed",
-      "Refreshingly Honest"
+    "health": 3,
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
+        "id": "they-are-utterly-fucked",
         "name": "They Are Utterly Fucked",
-        "description": "Delivers the most accurate intelligence report in play, without diplomatic softening."
-      },
-      {
-        "name": "Confirmed the Pregnancy",
-        "description": "When played alongside Rhaella, triggers a permanent narrative event."
+        "trigger": "arrival",
+        "text": "Look at the top 3 cards of Edmyn's Ruler's deck. Put one into that Ruler's hand and put the rest on the bottom of that deck in any order."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "visenor-targaryen",
-      "rhaella-targaryen",
-      "lorenah-dayne"
+    "roles": [
+      "value",
+      "utility"
     ],
-    "flavorQuote": "",
+    "subtitle": "Dornish Healer",
+    "houseId": "uller",
     "linkedCharacterId": "edmyn-uller"
   },
   {
@@ -1450,34 +1933,27 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Alysanne Hightower",
-    "subtitle": "A Quiet Tragedy",
-    "houseId": "hightower",
-    "power": 1,
+    "cost": 2,
+    "strength": 1,
     "influence": 2,
-    "keywords": [
-      "Dead",
-      "Innocent",
-      "Silent Witness",
-      "The One They Did Not Mean to Kill"
+    "health": 3,
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
+        "id": "unintended",
         "name": "Unintended",
-        "description": "When eliminated, the character who caused it loses 3 influence permanently."
-      },
-      {
-        "name": "Watching from the Window",
-        "description": "When in play, all incoming threats are visible one round before they arrive."
+        "trigger": "fall",
+        "text": "The Character that destroyed Alysanne gets -2 Influence permanently."
       }
     ],
-    "nemesis": [
-      "gaelor-targaryen"
+    "roles": [
+      "political",
+      "punish"
     ],
-    "allies": [
-      "timos-hightower",
-      "melessa-hightower"
-    ],
-    "flavorQuote": "",
+    "subtitle": "A Quiet Tragedy",
+    "houseId": "hightower",
     "linkedCharacterId": "alysanne-hightower"
   },
   {
@@ -1485,33 +1961,28 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Perric Bracken",
-    "subtitle": "Lord of Stone Hedge",
-    "houseId": "bracken",
-    "power": 4,
-    "influence": 4,
-    "keywords": [
-      "Lord",
-      "Aggressive",
-      "Opportunistic",
-      "Ancient Feud"
+    "cost": 3,
+    "strength": 4,
+    "influence": 3,
+    "health": 4,
+    "traits": [
+      "unique",
+      "challenge"
     ],
     "abilities": [
       {
+        "id": "an-unfortunate-accident",
         "name": "An Unfortunate Accident",
-        "description": "When accused of an act, may claim plausible deniability — reduces evidence weight by 1 unless a witness token is present."
-      },
-      {
-        "name": "Tully Blood Now",
-        "description": "While allied with a Tully character, ignores one Crown challenge per round."
+        "trigger": "passive",
+        "text": "The first time Perric would take damage from an Event each turn, prevent 2 of that damage."
       }
     ],
-    "nemesis": [
-      "godfrey-blackwood"
+    "roles": [
+      "military",
+      "defensive"
     ],
-    "allies": [
-      "clover-tully"
-    ],
-    "flavorQuote": "",
+    "subtitle": "Lord of Stone Hedge",
+    "houseId": "bracken",
     "linkedCharacterId": "perric-bracken"
   },
   {
@@ -1519,225 +1990,1311 @@
     "cardType": "character",
     "tierId": "c",
     "name": "Clover Tully",
-    "subtitle": "Lord Paramount of the Trident",
-    "houseId": "tully",
-    "power": 2,
-    "influence": 6,
-    "keywords": [
-      "Lord Paramount",
-      "Passive",
-      "Conflict-Averse",
-      "Compromised"
+    "cost": 3,
+    "strength": 2,
+    "influence": 5,
+    "health": 5,
+    "traits": [
+      "unique",
+      "intrigue"
     ],
     "abilities": [
       {
+        "id": "a-drunken-mistake",
         "name": "A Drunken Mistake",
-        "description": "Once per game, dismisses a border dispute without consequence — but loses 1 influence from both sides permanently."
-      },
-      {
-        "name": "Tied to the Brackens",
-        "description": "Cannot oppose Bracken-allied characters while his house is bound by the current marriage pact."
+        "trigger": "arrival",
+        "text": "Restore 2 Standing to both Rulers. Then Clover's Ruler draws 1 card."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "perric-bracken",
-      "oscar-tully"
+    "roles": [
+      "political",
+      "value"
     ],
-    "flavorQuote": "",
+    "subtitle": "Lord Paramount of the Trident",
+    "houseId": "tully",
     "linkedCharacterId": "clover-tully"
   },
   {
-    "id": "maelwing",
-    "cardType": "dragon",
-    "tierId": "s-plus",
-    "name": "Maelwing",
-    "subtitle": "The King's Dragon",
-    "houseId": "-",
-    "power": 10,
-    "influence": 9,
-    "keywords": [
-      "Ancient",
-      "Royal Dragon",
-      "Battle-Scarred",
-      "Instrument of the Crown"
+    "id": "velaryon-sailor",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Velaryon Sailor",
+    "cost": 0,
+    "strength": 1,
+    "influence": 0,
+    "health": 1,
+    "traits": [
+      "token"
     ],
-    "abilities": [
-      {
-        "name": "The King's Shadow",
-        "description": "Where Maelwing appears, royal threats cease to be metaphor. His presence alone can turn defiance into submission."
-      },
-      {
-        "name": "Many a Sword to the Old Chair",
-        "description": "The victories won beneath his wings have fed both the Crown's power and the legend surrounding the Iron Throne."
-      }
+    "abilities": [],
+    "roles": [
+      "military",
+      "token",
+      "swarm"
     ],
-    "nemesis": [],
-    "allies": [
-      "baelenys-targaryen"
-    ],
-    "flavorQuote": "Many a sword has found its way to the old chair by their claws.",
-    "linkedCharacterId": "baelenys-targaryen"
+    "houseId": "velaryon",
+    "deckable": false,
+    "special": "token"
   },
   {
     "id": "jhagar",
     "cardType": "dragon",
     "tierId": "s",
     "name": "Jhagar",
-    "subtitle": "Jacaelon's Dragon",
-    "houseId": "-",
-    "power": 8,
-    "influence": 7,
-    "keywords": [
-      "Dragon",
-      "Bonded",
-      "Predatory",
-      "Omen of Death"
+    "houseId": "targaryen",
+    "cost": 8,
+    "strength": 8,
+    "health": 9,
+    "traits": [
+      "unique",
+      "dragon"
     ],
     "abilities": [
       {
-        "name": "Wings Before Death",
-        "description": "Those marked for Jacaelon's violence are said to see wings upon him before the end comes."
-      },
-      {
-        "name": "The Hand's Dragon",
-        "description": "Jhagar turns the Hand's threats into something no courtier can dismiss as mere politics."
+        "id": "bond-jacaelon",
+        "name": "Bond — Jacaelon",
+        "trigger": "bond",
+        "text": "If Jhagar's Ruler controls Jacaelon Targaryen, Jhagar costs 2 less to play."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "jacaelon-targaryen"
-    ],
-    "flavorQuote": "They say men see wings on him when they are about to meet their death.",
-    "linkedCharacterId": "jacaelon-targaryen"
+    "roles": [
+      "military",
+      "finisher"
+    ]
   },
   {
     "id": "cloudgazer",
     "cardType": "dragon",
     "tierId": "s",
     "name": "Cloudgazer",
-    "subtitle": "Saera's Dragon",
-    "houseId": "-",
-    "power": 7,
-    "influence": 7,
-    "keywords": [
-      "Dragon",
-      "Bonded",
-      "Watchful",
-      "Skyborne"
+    "houseId": "targaryen",
+    "cost": 7,
+    "strength": 6,
+    "health": 8,
+    "traits": [
+      "unique",
+      "dragon"
     ],
     "abilities": [
       {
-        "name": "Cloudgazer's Shadow",
-        "description": "Once committed to a pursuit, escape by road or concealment becomes far more difficult."
-      },
-      {
-        "name": "Eyes Above the Realm",
-        "description": "From the sky, distance becomes information; roads, camps, and movements reveal themselves beneath her."
+        "id": "bond-saera",
+        "name": "Bond — Saera",
+        "trigger": "bond",
+        "text": "If Cloudgazer's Ruler controls Saera Targaryen, Cloudgazer costs 2 less to play."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "saera-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "saera-targaryen"
+    "roles": [
+      "military",
+      "durable"
+    ]
   },
   {
-    "id": "bayle",
+    "id": "maelwing",
     "cardType": "dragon",
-    "tierId": "s",
-    "name": "Bayle",
-    "subtitle": "Gaelor's Dragon",
-    "houseId": "-",
-    "power": 8,
-    "influence": 6,
-    "keywords": [
-      "Dragon",
-      "Bonded",
-      "War Dragon",
-      "Housebreaker"
+    "tierId": "s-plus",
+    "name": "Maelwing",
+    "houseId": "targaryen",
+    "cost": 10,
+    "strength": 10,
+    "health": 11,
+    "traits": [
+      "unique",
+      "dragon"
     ],
     "abilities": [
       {
-        "name": "The Housebreaker's Mount",
-        "description": "Bayle is most terrifying when Gaelor has already chosen violence; dragon and rider make retreat feel impossible."
-      },
-      {
-        "name": "Fire Over Oldtown",
-        "description": "His reputation follows the bloodshed carried out in Gaelor's name, whether or not flame was needed."
+        "id": "bond-baelenys",
+        "name": "Bond — Baelenys",
+        "trigger": "bond",
+        "text": "If Maelwing's Ruler controls Baelenys Targaryen, Maelwing costs 2 less to play."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "gaelor-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "gaelor-targaryen"
+    "roles": [
+      "core",
+      "military",
+      "finisher"
+    ]
   },
   {
-    "id": "jadefyre",
-    "cardType": "dragon",
+    "id": "word-in-the-right-ear",
+    "cardType": "event",
+    "tierId": "c",
+    "name": "A Word in the Right Ear",
+    "cost": 1,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "word-in-the-right-ear",
+        "name": "A Word in the Right Ear",
+        "trigger": "event",
+        "text": "Choose a Character. It gains +1 Influence until the end of this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "utility"
+    ]
+  },
+  {
+    "id": "trial-by-combat",
+    "cardType": "event",
     "tierId": "b",
-    "name": "Jadefyre",
-    "subtitle": "The Sole Surviving Hatchling",
-    "houseId": "-",
-    "power": 3,
-    "influence": 5,
-    "keywords": [
-      "Young Dragon",
-      "Jade-Eyed",
-      "Hatchling",
-      "Inherited Bond"
-    ],
+    "name": "Trial by Combat",
+    "cost": 3,
+    "traits": [],
     "abilities": [
       {
-        "name": "The Last of Three",
-        "description": "Hatched in Visenor's clutch of three and survived where the other two did not."
-      },
-      {
-        "name": "Gifted by Royal Decree",
-        "description": "Named by Visenor before his flight, Jadefyre was later given to Maela by command of the Crown."
+        "id": "trial-by-combat",
+        "name": "Trial by Combat",
+        "trigger": "event",
+        "text": "Choose one Character ruled by you and one enemy Character. They immediately deal Military damage equal to their Strength to each other simultaneously."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "maela-targaryen",
-      "visenor-targaryen"
-    ],
-    "flavorQuote": "",
-    "linkedCharacterId": "maela-targaryen"
+    "roles": [
+      "military",
+      "removal"
+    ]
   },
   {
-    "id": "boneskin",
-    "cardType": "dragon",
+    "id": "oldtown-massacre",
+    "cardType": "event",
+    "tierId": "a",
+    "name": "Oldtown Massacre",
+    "cost": 6,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "oldtown-massacre",
+        "name": "Oldtown Massacre",
+        "trigger": "event",
+        "text": "Deal 2 damage to every Character on the board. Deal 2 damage to both Rulers' Standing."
+      }
+    ],
+    "roles": [
+      "control",
+      "board-clear"
+    ]
+  },
+  {
+    "id": "brothers-tilt",
+    "cardType": "event",
+    "tierId": "b",
+    "name": "The Brothers' Tilt",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "brothers-tilt",
+        "name": "The Brothers' Tilt",
+        "trigger": "event",
+        "text": "Choose a Character. It gains +1 Strength for each other Character in play with lower Strength than it, up to +3. Then Exhaust it."
+      }
+    ],
+    "roles": [
+      "military",
+      "tempo"
+    ]
+  },
+  {
+    "id": "blackfyre",
+    "cardType": "artifact",
     "tierId": "s",
-    "name": "Boneskin",
-    "subtitle": "The Wild Dragon of the Red Mountains",
-    "houseId": "-",
-    "power": 9,
-    "influence": 6,
-    "keywords": [
-      "Wild Dragon",
-      "Ancient",
-      "Untamed",
-      "Bond of Patience"
+    "name": "Blackfyre",
+    "subtitle": "Ancestral Valyrian Steel Sword",
+    "cost": 4,
+    "houseId": "targaryen",
+    "traits": [
+      "unique"
     ],
     "abilities": [
       {
-        "name": "Bond of Patience",
-        "description": "Visenor earned what could not be taken by force: the trust of a wild dragon through repeated patience and restraint."
-      },
-      {
-        "name": "First Ride",
-        "description": "The moment Visenor finally takes the sky changes exile from mere survival into something far more dangerous."
+        "id": "blackfyre",
+        "name": "Mark of the Heir",
+        "trigger": "passive",
+        "text": "Equipped Character gets +2 Strength and +1 Influence."
       }
     ],
-    "nemesis": [],
-    "allies": [
-      "visenor-targaryen"
+    "roles": [
+      "core",
+      "support"
+    ]
+  },
+  {
+    "id": "dark-sister",
+    "cardType": "artifact",
+    "tierId": "a",
+    "name": "Dark Sister",
+    "subtitle": "Ancestral Valyrian Steel Sword",
+    "cost": 3,
+    "houseId": "targaryen",
+    "traits": [
+      "unique"
     ],
-    "flavorQuote": "I am supposed to want my throne, but for the first time in my life, I am at peace.",
-    "linkedCharacterId": "visenor-targaryen"
+    "abilities": [
+      {
+        "id": "at-your-throat",
+        "name": "At Your Throat",
+        "trigger": "passive",
+        "text": "Equipped Character gets +2 Strength and gains Challenge."
+      }
+    ],
+    "roles": [
+      "military",
+      "control"
+    ]
+  },
+  {
+    "id": "dragonstone",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Dragonstone",
+    "cost": 5,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "dragonstone",
+        "name": "Dragonstone",
+        "trigger": "passive",
+        "text": "All Dragons cost 1 less."
+      }
+    ],
+    "roles": [
+      "support"
+    ]
+  },
+  {
+    "id": "kings-landing",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "King's Landing",
+    "cost": 5,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "kings-landing",
+        "name": "King's Landing",
+        "trigger": "passive",
+        "text": "All Characters have +1 Influence."
+      }
+    ],
+    "roles": [
+      "political"
+    ]
+  },
+  {
+    "id": "oldtown",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Oldtown",
+    "cost": 5,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "oldtown",
+        "name": "Oldtown",
+        "trigger": "passive",
+        "text": "The first normal Event each Ruler plays on their turn costs 1 less."
+      }
+    ],
+    "roles": [
+      "value",
+      "support"
+    ]
+  },
+  {
+    "id": "royal-favor",
+    "cardType": "event",
+    "tierId": "c",
+    "name": "Royal Favor",
+    "subtitle": "Second Player Boon",
+    "cost": 0,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "royal-favor",
+        "name": "Royal Favor",
+        "trigger": "event",
+        "text": "Gain 1 Command this turn."
+      }
+    ],
+    "roles": [
+      "utility",
+      "resource"
+    ],
+    "deckable": false,
+    "special": "royal-favor"
+  },
+  {
+    "id": "benjen-stark",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Benjen Stark",
+    "cost": 3,
+    "strength": 4,
+    "influence": 3,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "winter-s-welcome",
+        "name": "Winter's Welcome",
+        "trigger": "arrival",
+        "text": "When Benjen arrives, another Stark Character gains +1 Strength this turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Young Wolf",
+    "linkedCharacterId": "benjen-stark",
+    "houseId": "stark"
+  },
+  {
+    "id": "mother-marya",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Mother Marya",
+    "cost": 3,
+    "strength": 0,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-moment-of-sight",
+        "name": "A Moment of Sight",
+        "trigger": "arrival",
+        "text": "Look at the top 3 cards of your deck. Put one into your hand and the rest back in any order."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Keeper of the Glass Flower",
+    "linkedCharacterId": "mother-marya"
+  },
+  {
+    "id": "annara-celtigar",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Annara Celtigar",
+    "cost": 2,
+    "strength": 1,
+    "influence": 3,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-friend-summoned",
+        "name": "A Friend Summoned",
+        "trigger": "arrival",
+        "text": "If Vhaemys Targaryen is in play, both Characters gain +1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Dragonet's Friend",
+    "linkedCharacterId": "annara-celtigar",
+    "houseId": "celtigar"
+  },
+  {
+    "id": "daria-sand",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Daria Sand",
+    "cost": 3,
+    "strength": 2,
+    "influence": 5,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "seen-from-the-doorway",
+        "name": "Seen From the Doorway",
+        "trigger": "arrival",
+        "text": "Reveal one random card from an opponent's hand."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Quiet Observer",
+    "linkedCharacterId": "daria-sand"
+  },
+  {
+    "id": "myles-mooton",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Myles Mooton",
+    "cost": 3,
+    "strength": 4,
+    "influence": 2,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "pull-him-clear",
+        "name": "Pull Him Clear",
+        "trigger": "arrival",
+        "text": "Prevent 2 damage to another allied Character."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "The King's Companion",
+    "linkedCharacterId": "myles-mooton",
+    "houseId": "mooton"
+  },
+  {
+    "id": "grance-morrigen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Grance Morrigen",
+    "cost": 3,
+    "strength": 4,
+    "influence": 2,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "hold-fast",
+        "name": "Hold Fast",
+        "trigger": "arrival",
+        "text": "Grance gains +2 Health while defending."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Ashenmist Veteran",
+    "linkedCharacterId": "grance-morrigen",
+    "houseId": "morrigen"
+  },
+  {
+    "id": "drack-harlaw",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Drack Harlaw",
+    "cost": 4,
+    "strength": 6,
+    "influence": 1,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "pay-the-iron-price",
+        "name": "Pay the Iron Price",
+        "trigger": "arrival",
+        "text": "After Drack wins a Conflict, his Ruler gains 1 Command."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Ironborn Reaver",
+    "linkedCharacterId": "drack-harlaw",
+    "houseId": "harlaw"
+  },
+  {
+    "id": "zekar-alasyr",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Zekar Alasyr",
+    "cost": 3,
+    "strength": 2,
+    "influence": 5,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "read-the-crowd",
+        "name": "Read the Crowd",
+        "trigger": "arrival",
+        "text": "After an opponent plays an Event, Zekar gains +2 Influence this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Master of Improvisation",
+    "linkedCharacterId": "zekar-alasyr"
+  },
+  {
+    "id": "mydan-gerren",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Mydan Gerren",
+    "cost": 3,
+    "strength": 2,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-stage-remains",
+        "name": "The Stage Remains",
+        "trigger": "arrival",
+        "text": "When another allied Character falls, draw 1 card."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Last of the Motley Three",
+    "linkedCharacterId": "mydan-gerren"
+  },
+  {
+    "id": "merryn-whitespring",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Merryn Whitespring",
+    "cost": 3,
+    "strength": 2,
+    "influence": 5,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "perfect-timing",
+        "name": "Perfect Timing",
+        "trigger": "arrival",
+        "text": "The next Event played by Merryn's Ruler costs 1 less Command."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Master of Stagecraft",
+    "linkedCharacterId": "merryn-whitespring"
+  },
+  {
+    "id": "lucas-corbray",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ser Lucas Corbray",
+    "cost": 5,
+    "strength": 7,
+    "influence": 3,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "quiet-protection",
+        "name": "Quiet Protection",
+        "trigger": "arrival",
+        "text": "The weakest allied Character cannot be targeted by enemy abilities this turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "The Mustang",
+    "linkedCharacterId": "lucas-corbray",
+    "houseId": "corbray"
+  },
+  {
+    "id": "reyenald-reyne",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Reyenald Reyne",
+    "cost": 2,
+    "strength": 4,
+    "influence": 1,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "promising-blade",
+        "name": "Promising Blade",
+        "trigger": "arrival",
+        "text": "Whenever Reyenald survives a Conflict, he gains +1 Strength permanently."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Crimson Prodigy",
+    "linkedCharacterId": "reyenald-reyne",
+    "houseId": "reyne"
+  },
+  {
+    "id": "oswald-eagle",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ser Oswald Eagle",
+    "cost": 4,
+    "strength": 5,
+    "influence": 6,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "before-dawn",
+        "name": "Before Dawn",
+        "trigger": "arrival",
+        "text": "Exhaust an enemy Character involved in the last Conflict."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Commander of the City Watch",
+    "linkedCharacterId": "oswald-eagle"
+  },
+  {
+    "id": "nymos",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Nymos",
+    "cost": 2,
+    "strength": 1,
+    "influence": 4,
+    "health": 3,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "guarded-questions",
+        "name": "Guarded Questions",
+        "trigger": "arrival",
+        "text": "Look at one random card in an opponent's hand, then draw and discard a card."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Younger Maester",
+    "linkedCharacterId": "nymos"
+  },
+  {
+    "id": "liana-tyrell",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Liana Tyrell",
+    "cost": 4,
+    "strength": 1,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "know-when-enough-is-enough",
+        "name": "Know When Enough Is Enough",
+        "trigger": "arrival",
+        "text": "Prevent an allied Character from losing Influence this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Highgarden's Counsel",
+    "linkedCharacterId": "liana-tyrell",
+    "houseId": "tyrell"
+  },
+  {
+    "id": "elinor-tyrell",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Elinor Tyrell",
+    "cost": 3,
+    "strength": 1,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "golden-rose-brooch",
+        "name": "Golden Rose Brooch",
+        "trigger": "arrival",
+        "text": "Give another allied Character +2 Influence while Elinor remains in play."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Elinor Tyrell",
+    "linkedCharacterId": "elinor-tyrell",
+    "houseId": "tyrell"
+  },
+  {
+    "id": "darren-dayne",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Darren Dayne",
+    "cost": 4,
+    "strength": 4,
+    "influence": 6,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "starfall-s-shelter",
+        "name": "Starfall's Shelter",
+        "trigger": "arrival",
+        "text": "Prevent the first 2 damage dealt to another allied Character each turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lord of the Torrentine",
+    "linkedCharacterId": "darren-dayne",
+    "houseId": "dayne"
+  },
+  {
+    "id": "aenys-targaryen-ii",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Aenys Targaryen II",
+    "cost": 6,
+    "strength": 7,
+    "influence": 9,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-crown-of-command",
+        "name": "A Crown of Command",
+        "trigger": "arrival",
+        "text": "Other Targaryen Characters gain +1 Influence and cannot retreat voluntarily."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Severe King",
+    "linkedCharacterId": "aenys-targaryen-ii",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "queen-vhaemys-targaryen",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Vhaemys Targaryen",
+    "cost": 5,
+    "strength": 2,
+    "influence": 9,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "endure-the-crown",
+        "name": "Endure the Crown",
+        "trigger": "arrival",
+        "text": "Whenever another allied Character loses Influence, Vhaemys gains 1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Long-Suffering Queen",
+    "linkedCharacterId": "queen-vhaemys-targaryen",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "alysa-targaryen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Alysa Targaryen",
+    "cost": 4,
+    "strength": 2,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "dragonstone-household",
+        "name": "Dragonstone Household",
+        "trigger": "arrival",
+        "text": "The first Targaryen Character deployed after Alysa costs 1 less Command."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Dragonstone",
+    "linkedCharacterId": "alysa-targaryen",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "vaenarr-targaryen",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Vaenarr Targaryen",
+    "cost": 4,
+    "strength": 5,
+    "influence": 6,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "blood-of-the-crown",
+        "name": "Blood of the Crown",
+        "trigger": "arrival",
+        "text": "Vaenarr gains +1 Strength and Influence while another Targaryen is in play."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The King's Brother",
+    "linkedCharacterId": "vaenarr-targaryen",
+    "houseId": "targaryen"
+  },
+  {
+    "id": "tygett-lannister",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Tygett Lannister",
+    "cost": 6,
+    "strength": 7,
+    "influence": 8,
+    "health": 8,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-lion-s-levy",
+        "name": "The Lion's Levy",
+        "trigger": "arrival",
+        "text": "Gain 1 Command whenever a Location enters play under your control."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Warden of the West",
+    "linkedCharacterId": "tygett-lannister",
+    "houseId": "lannister"
+  },
+  {
+    "id": "ella-lannister",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Ella Lannister",
+    "cost": 4,
+    "strength": 2,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "western-court",
+        "name": "Western Court",
+        "trigger": "arrival",
+        "text": "Choose an allied Lannister Character to gain +2 Influence this turn."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Casterly Rock",
+    "linkedCharacterId": "ella-lannister",
+    "houseId": "lannister"
+  },
+  {
+    "id": "myrielle-marbrand",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Myrielle Marbrand",
+    "cost": 3,
+    "strength": 3,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "ember-of-ashemark",
+        "name": "Ember of Ashemark",
+        "trigger": "arrival",
+        "text": "Deal 1 damage to a Character that reduces Myrielle's Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Ashemark",
+    "linkedCharacterId": "myrielle-marbrand",
+    "houseId": "marbrand"
+  },
+  {
+    "id": "harrik-greyjoy",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Harrik Greyjoy",
+    "cost": 6,
+    "strength": 9,
+    "influence": 3,
+    "health": 8,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "ironborn-defiance",
+        "name": "Ironborn Defiance",
+        "trigger": "arrival",
+        "text": "After Harrik wins a Conflict, discard the top card of the defeated Ruler's deck."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "The Salt King",
+    "linkedCharacterId": "harrik-greyjoy",
+    "houseId": "greyjoy"
+  },
+  {
+    "id": "maron-dayne",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Maron Dayne",
+    "cost": 4,
+    "strength": 6,
+    "influence": 4,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-father-s-legacy",
+        "name": "A Father's Legacy",
+        "trigger": "arrival",
+        "text": "When Maron falls, another Dayne Character gains +2 Strength permanently."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Knight of Starfall",
+    "linkedCharacterId": "maron-dayne",
+    "houseId": "dayne"
+  },
+  {
+    "id": "lyarra-karstark",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Lyarra Karstark",
+    "cost": 4,
+    "strength": 4,
+    "influence": 6,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "north-and-dorne",
+        "name": "North and Dorne",
+        "trigger": "arrival",
+        "text": "Lyarra counts as both a Stark and Dayne ally for abilities."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Blood of Karhold",
+    "linkedCharacterId": "lyarra-karstark",
+    "houseId": "karstark"
+  },
+  {
+    "id": "elwood-tully",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Elwood Tully",
+    "cost": 3,
+    "strength": 3,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-next-lord",
+        "name": "The Next Lord",
+        "trigger": "arrival",
+        "text": "Whenever a Tully Location enters play, Elwood gains +1 Influence."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Heir to Riverrun",
+    "linkedCharacterId": "elwood-tully",
+    "houseId": "tully"
+  },
+  {
+    "id": "oscar-tully",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Oscar Tully",
+    "cost": 3,
+    "strength": 5,
+    "influence": 3,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "river-knight",
+        "name": "River Knight",
+        "trigger": "arrival",
+        "text": "Oscar gains +2 Strength while defending a Tully Character."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "subtitle": "Knight of House Tully",
+    "linkedCharacterId": "oscar-tully",
+    "houseId": "tully"
+  },
+  {
+    "id": "bethany-bracken",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Bethany Bracken",
+    "cost": 3,
+    "strength": 3,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "guard-the-household",
+        "name": "Guard the Household",
+        "trigger": "arrival",
+        "text": "Prevent an allied Bracken Character from being exhausted."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Stone Hedge",
+    "linkedCharacterId": "bethany-bracken",
+    "houseId": "bracken"
+  },
+  {
+    "id": "ronnel-arryn",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Ronnel Arryn",
+    "cost": 5,
+    "strength": 6,
+    "influence": 8,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "the-eyrie-s-pride",
+        "name": "The Eyrie's Pride",
+        "trigger": "arrival",
+        "text": "Enemy Characters with less Influence cannot challenge Ronnel directly."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Warden of the East",
+    "linkedCharacterId": "ronnel-arryn",
+    "houseId": "arryn"
+  },
+  {
+    "id": "edwyle-stark",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Edwyle Stark",
+    "cost": 5,
+    "strength": 6,
+    "influence": 8,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "a-debt-remembered",
+        "name": "A Debt Remembered",
+        "trigger": "arrival",
+        "text": "When Edwyle falls, draw 2 cards and restore 2 Standing."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "The Old Warden",
+    "linkedCharacterId": "edwyle-stark",
+    "houseId": "stark"
+  },
+  {
+    "id": "nymor-martell",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Nymor Martell",
+    "cost": 5,
+    "strength": 5,
+    "influence": 8,
+    "health": 7,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "dornish-patience",
+        "name": "Dornish Patience",
+        "trigger": "arrival",
+        "text": "The first hostile Event played against Nymor each round has no effect."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Prince of Dorne",
+    "linkedCharacterId": "nymor-martell",
+    "houseId": "martell"
+  },
+  {
+    "id": "meria-martell",
+    "cardType": "character",
+    "tierId": "b",
+    "name": "Meria Martell",
+    "cost": 5,
+    "strength": 4,
+    "influence": 9,
+    "health": 6,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "unbowed-counsel",
+        "name": "Unbowed Counsel",
+        "trigger": "arrival",
+        "text": "Allied Martell Characters cannot lose Influence during the round Meria arrives."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Princess of Dorne",
+    "linkedCharacterId": "meria-martell",
+    "houseId": "martell"
+  },
+  {
+    "id": "alyssa-velaryon",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Alyssa Velaryon",
+    "cost": 4,
+    "strength": 3,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "unique"
+    ],
+    "abilities": [
+      {
+        "id": "tides-of-court",
+        "name": "Tides of Court",
+        "trigger": "arrival",
+        "text": "Move 1 Influence from an enemy Character to an allied Velaryon Character."
+      }
+    ],
+    "roles": [
+      "political",
+      "support"
+    ],
+    "subtitle": "Lady of Driftmark",
+    "linkedCharacterId": "alyssa-velaryon",
+    "houseId": "velaryon"
   }
 ]

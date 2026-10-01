@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import rawCards from "@/data/the-great-game/cards.json";
 import { GameCardFace, GameCardModal } from "@/components/cards/GameCardFace";
+import { getAllGameCards } from "@/lib/the-great-game/cards";
 import type { GameCard } from "@/lib/the-great-game/types";
 import styles from "./decks.module.css";
 
@@ -12,7 +12,7 @@ type CardType = "character" | "dragon" | "event" | "artifact" | "location";
 type Card = GameCard & { balanceStatus?: string };
 type Deck = { id: string; name: string; cards: Record<string, number>; updatedAt: number };
 
-const ALL = rawCards as unknown as Card[];
+const ALL = getAllGameCards() as Card[];
 const STORAGE_KEY = "the-great-game:decks:v1";
 const MAX_DECK = 30;
 const MAX_COPIES = 2;

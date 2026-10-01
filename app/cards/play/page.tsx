@@ -27,8 +27,8 @@ import {
   createGame,
   DRAGON_BOARD_LIMIT,
   getEffectiveCost,
-  getEffectiveInfluence,
-  getEffectivePower,
+  getPoliticalPower,
+  getMilitaryPower,
   getMaximumHealth,
   getMilitaryCombatPreview,
   getMilitaryTargetOptions,
@@ -467,7 +467,7 @@ function modifierTitle(
 
   const onlyInfluence =
     Boolean(modifier.influence) &&
-    !modifier.power &&
+    !modifier.strength &&
     !modifier.health &&
     !modifier.cost;
 
@@ -491,7 +491,7 @@ function modifierTitle(
 
   if (
     modifier.permanent &&
-    Boolean(modifier.power) &&
+    Boolean(modifier.strength) &&
     !modifier.influence &&
     !modifier.health &&
     !modifier.cost
@@ -524,7 +524,7 @@ function modifierDescription(
     );
   };
 
-  addChange(modifier.power, "Power");
+  addChange(modifier.strength, "Strength");
   addChange(modifier.influence, "Influence");
   addChange(modifier.health, "Health");
   addChange(modifier.cost, "Command Cost");
@@ -3263,7 +3263,7 @@ export default function GreatGamePlayPage() {
       unit.ownerId !==
         currentGame.activePlayerId ||
       unit.exhausted ||
-      getEffectiveInfluence(
+      getPoliticalPower(
         currentGame,
         unit
       ) <= 0
@@ -4047,7 +4047,7 @@ export default function GreatGamePlayPage() {
       attackerDamageTaken: 0,
       defenderDamageTaken: 0,
       standingDamage:
-        getEffectivePower(
+        getMilitaryPower(
           currentGame,
           attacker
         ),
@@ -4063,19 +4063,19 @@ export default function GreatGamePlayPage() {
     attacker: UnitState,
     defender?: UnitState | null
   ): CombatPreviewState {
-    const attackerInfluence =
-      getEffectiveInfluence(
+    const attackerPoliticalPower =
+      getPoliticalPower(
         currentGame,
         attacker
       );
 
     const difference = defender
-      ? attackerInfluence -
-        getEffectiveInfluence(
+      ? attackerPoliticalPower -
+        getPoliticalPower(
           currentGame,
           defender
         )
-      : attackerInfluence;
+      : attackerPoliticalPower;
 
     return {
       kind: "political",
@@ -5405,7 +5405,8 @@ export default function GreatGamePlayPage() {
         !currentGame.pendingEffect
     );
 
-  const showRealmsPrompt = Boolean(prompt) && !showSelectedPreview && !inspectedUnit && !(inspectedHandCard && inspectedHandDefinition);
+  const veiledSightOpen = onlineCanAct && currentGame.pendingEffect?.abilityId === "veiled-sight";
+  const showRealmsPrompt = Boolean(prompt) && !veiledSightOpen && !showSelectedPreview && !inspectedUnit && !(inspectedHandCard && inspectedHandDefinition);
 
   const playerEndTurnDisabled =
     !onlineCanAct ||
@@ -5714,10 +5715,7 @@ export default function GreatGamePlayPage() {
           <button type="button" className={styles.dangerButton} onClick={() => setExitConfirm(true)}><span>Exit Game</span></button>
       </section>
 
-      {onlineCanAct &&
-        currentGame.pendingEffect
-          ?.abilityId ===
-          "veiled-sight" && (
+      {veiledSightOpen && (
         <div
           className={
             styles.revealedHandBackdrop
@@ -5778,6 +5776,10 @@ export default function GreatGamePlayPage() {
             )}
           </HorizontalHand>
           ))}
+          </div>
+          <div className={styles.revealedHandInstruction} role="status">
+            <span>{prompt}</span>
+            <button type="button" className={styles.endTurnButton} disabled>Must Resolve</button>
           </div>
         </section>
         </div>
@@ -6462,7 +6464,7 @@ function MainMenu({
       </h1>
 
       <p className={styles.menuSubtitle}>
-        Power wins battles. Influence wins realms.
+        Strength wins battles. Influence wins realms.
       </p>
 
       <div className={styles.menuActions}>
@@ -7823,14 +7825,14 @@ function BoardUnit({
     return null;
   }
 
-  const power =
-    getEffectivePower(
+  const strength =
+    getMilitaryPower(
       state,
       unit
     );
 
   const influence =
-    getEffectiveInfluence(
+    getPoliticalPower(
       state,
       unit
     );
@@ -8345,14 +8347,13 @@ function BoardUnit({
           unit.attachedArtifactId
         }
         runtimeStats={{
-          power,
+          strength,
           influence,
           health:
             unit.currentHealth,
           maxHealth,
         }}
-        baseStats={{
-          power: card.power,
+        baseStats={{ strength: card.strength,
           influence:
             card.cardType === "character"
               ? card.influence
@@ -8938,8 +8939,8 @@ function UnitDetailOverlay({
       >
         <div className={styles.detailExpandedInfo}>
           <CardInfoPanel card={card} activeTraits={activeTraits} artifactId={unit.attachedArtifactId}
-            runtimeStats={{ power: getEffectivePower(state, unit), influence: getEffectiveInfluence(state, unit), health: unit.currentHealth, maxHealth: getMaximumHealth(unit) }}
-            baseStats={{ power: card.power, influence: card.cardType === "character" ? card.influence : undefined, health: card.health }}
+            runtimeStats={{ strength: getMilitaryPower(state, unit), influence: getPoliticalPower(state, unit), health: unit.currentHealth, maxHealth: getMaximumHealth(unit) }}
+            baseStats={{ strength: card.strength, influence: card.cardType === "character" ? card.influence : undefined, health: card.health }}
             showTraitTooltips />
         </div>
 
@@ -8975,7 +8976,7 @@ function UnitDetailOverlay({
         {unit.modifiers.map(
           (modifier) => {
             const positive =
-              (modifier.power ?? 0) > 0 ||
+              (modifier.strength ?? 0) > 0 ||
               (modifier.influence ?? 0) > 0 ||
               (modifier.health ?? 0) > 0 ||
               (modifier.cost ?? 0) < 0;

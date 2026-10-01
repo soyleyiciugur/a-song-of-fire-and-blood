@@ -476,7 +476,7 @@
     "visenor-targaryen": [
       "Starfall",
       "The Red Mountains",
-      "The Dornish Coast"
+      "Starfall"
     ],
     "weylar-rocke": "King's Landing",
     "edmyn-uller": "Starfall",
@@ -974,11 +974,11 @@
     "rickard-stark": "Winterfell",
     "saera-targaryen": [
       "Winterfell",
-      "The North"
+      "Castle Black"
     ],
     "alester-dayne": [
       "Winterfell",
-      "The North"
+      "Castle Black"
     ],
     "brant-costayne": "King's Landing",
     "orwell-morrigen": "King's Landing",
@@ -1042,11 +1042,11 @@
     "rhaella-targaryen": "Dead",
     "rickard-stark": "Winterfell",
     "saera-targaryen": [
-      "The North",
+      "Castle Black",
       "King's Landing"
     ],
     "alester-dayne": [
-      "The North",
+      "Castle Black",
       "King's Landing"
     ],
     "brant-costayne": "King's Landing",
@@ -1061,18 +1061,18 @@
     "godfrey-blackwood": "Raventree Hall",
     "visenor-targaryen": [
       "Highgarden",
-      "The Reach"
+      "Oldtown"
     ],
     "lorent-tyrell": "Dead",
     "renrose-tyrell": "Highgarden",
     "martyn-mullendore": [
       "Highgarden",
-      "The Reach"
+      "Oldtown"
     ],
     "berholt-caswell": "King's Landing",
     "leo-tyrell": [
       "Highgarden",
-      "The Reach"
+      "Oldtown"
     ],
     "almar-larchmont": "Oldtown",
     "baran-strong": "Dragonstone",
@@ -1081,7 +1081,7 @@
     "clover-tully": "Riverrun",
     "clarisse-flowers": [
       "Highgarden",
-      "The Reach"
+      "Oldtown"
     ],
     "benjen-stark": "Winterfell",
     "mother-marya": "Winterfell",
@@ -1143,7 +1143,7 @@
     "renrose-tyrell": "Highgarden",
     "martyn-mullendore": [
       "Highgarden",
-      "The Reach"
+      "Oldtown"
     ],
     "berholt-caswell": "King's Landing",
     "leo-tyrell": "Oldtown",
@@ -1154,7 +1154,7 @@
     "clover-tully": "Riverrun",
     "clarisse-flowers": [
       "Highgarden",
-      "The Reach"
+      "Oldtown"
     ],
     "benjen-stark": "Winterfell",
     "mother-marya": "Winterfell",
@@ -1207,7 +1207,7 @@
     "visenor-targaryen": "Oldtown",
     "lorent-tyrell": "Dead",
     "renrose-tyrell": "Highgarden",
-    "martyn-mullendore": "The Reach",
+    "martyn-mullendore": "Oldtown",
     "berholt-caswell": "King's Landing",
     "leo-tyrell": "Oldtown",
     "almar-larchmont": "Oldtown",
@@ -1215,7 +1215,7 @@
     "tansy-riverside": "Dragonstone",
     "perric-bracken": "Stone Hedge",
     "clover-tully": "Riverrun",
-    "clarisse-flowers": "The Reach",
+    "clarisse-flowers": "Oldtown",
     "benjen-stark": "Winterfell",
     "mother-marya": "Winterfell",
     "naela-targaryen": "Tyrosh",

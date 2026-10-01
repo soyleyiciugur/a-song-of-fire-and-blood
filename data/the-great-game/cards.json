@@ -3,26 +3,27 @@
     "id": "castle-swordsman",
     "cardType": "character",
     "tierId": "c",
-    "name": "Castle Swordsman",
-    "cost": 1,
-    "power": 1,
+    "name": "Starfall Swordsman",
+    "cost": 4,
+    "strength": 3,
     "influence": 0,
-    "health": 2,
+    "health": 5,
     "traits": [],
     "abilities": [],
     "roles": [
       "vanilla",
       "military"
     ],
-    "generic": true
+    "generic": true,
+    "houseId": "dayne"
   },
   {
     "id": "court-page",
     "cardType": "character",
     "tierId": "c",
-    "name": "Court Page",
+    "name": "Oldtown Acolyte",
     "cost": 1,
-    "power": 0,
+    "strength": 0,
     "influence": 1,
     "health": 2,
     "traits": [],
@@ -31,7 +32,8 @@
       "vanilla",
       "political"
     ],
-    "generic": true
+    "generic": true,
+    "houseId": "hightower"
   },
   {
     "id": "northern-warrior",
@@ -40,7 +42,7 @@
     "name": "Northern Warrior",
     "houseId": "stark",
     "cost": 3,
-    "power": 3,
+    "strength": 3,
     "influence": 0,
     "health": 3,
     "traits": [],
@@ -55,10 +57,10 @@
     "id": "baratheon-man-at-arms",
     "cardType": "character",
     "tierId": "c",
-    "name": "Baratheon Man-at-Arms",
+    "name": "Stormlands Man-at-Arms",
     "houseId": "baratheon",
     "cost": 2,
-    "power": 3,
+    "strength": 3,
     "influence": 0,
     "health": 2,
     "traits": [],
@@ -76,7 +78,7 @@
     "name": "Dornish Sandshield",
     "houseId": "martell",
     "cost": 2,
-    "power": 2,
+    "strength": 2,
     "influence": 0,
     "health": 3,
     "traits": [],
@@ -91,12 +93,12 @@
     "id": "tully-river-guard",
     "cardType": "character",
     "tierId": "b",
-    "name": "Tully River Guard",
+    "name": "Riverlands Guard",
     "houseId": "tully",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 0,
-    "health": 2,
+    "health": 3,
     "traits": [
       "guard"
     ],
@@ -114,8 +116,8 @@
     "name": "Reach Courtier",
     "houseId": "tyrell",
     "cost": 3,
-    "power": 0,
-    "influence": 2,
+    "strength": 0,
+    "influence": 3,
     "health": 2,
     "traits": [
       "intrigue"
@@ -132,10 +134,10 @@
     "id": "lannister-red-cloak",
     "cardType": "character",
     "tierId": "c",
-    "name": "Lannister Red Cloak",
+    "name": "Westerlands Red Cloak",
     "houseId": "lannister",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 2,
     "health": 2,
     "traits": [],
@@ -151,15 +153,15 @@
     "tierId": "c",
     "name": "Vale Spearman",
     "houseId": "arryn",
-    "cost": 4,
-    "power": 3,
+    "cost": 1,
+    "strength": 1,
     "influence": 0,
-    "health": 4,
+    "health": 2,
     "traits": [],
     "abilities": [],
     "roles": [
       "vanilla",
-      "defensive"
+      "military"
     ],
     "generic": true
   },
@@ -170,7 +172,7 @@
     "name": "Ironborn Reaver",
     "houseId": "greyjoy",
     "cost": 2,
-    "power": 4,
+    "strength": 4,
     "influence": 0,
     "health": 1,
     "traits": [],
@@ -185,10 +187,10 @@
     "id": "dragonstone-swordsman",
     "cardType": "character",
     "tierId": "b",
-    "name": "Dragonstone Swordsman",
+    "name": "Dragonstone Soldier",
     "houseId": "targaryen",
     "cost": 4,
-    "power": 3,
+    "strength": 3,
     "influence": 2,
     "health": 3,
     "traits": [],
@@ -199,6 +201,503 @@
     "generic": true
   },
   {
+    "id": "dockside-runner",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Dockside Runner",
+    "cost": 1,
+    "strength": 1,
+    "influence": 0,
+    "health": 1,
+    "traits": [
+      "swift"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "little-bird",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Little Bird",
+    "cost": 1,
+    "strength": 0,
+    "influence": 1,
+    "health": 1,
+    "traits": [
+      "schemer"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "sept-initiate",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Sept Initiate",
+    "cost": 1,
+    "strength": 0,
+    "influence": 1,
+    "health": 1,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "gate-sentry",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Gate Sentry",
+    "cost": 1,
+    "strength": 0,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "harbor-cutthroat",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Harbor Cutthroat",
+    "cost": 2,
+    "strength": 2,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "swift"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "gatehouse-guard",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Gatehouse Guard",
+    "cost": 2,
+    "strength": 1,
+    "influence": 0,
+    "health": 3,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-whisperer",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Whisperer",
+    "cost": 2,
+    "strength": 0,
+    "influence": 2,
+    "health": 2,
+    "traits": [
+      "schemer"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "sept-whisperer",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Sept Whisperer",
+    "cost": 2,
+    "strength": 0,
+    "influence": 2,
+    "health": 2,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "tourneyman-squire",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Tourneyman Squire",
+    "cost": 2,
+    "strength": 2,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-provocateur",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Provocateur",
+    "cost": 3,
+    "strength": 1,
+    "influence": 3,
+    "health": 2,
+    "traits": [
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "veteran-spearman",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Veteran Spearman",
+    "cost": 3,
+    "strength": 3,
+    "influence": 0,
+    "health": 2,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-emissary",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Emissary",
+    "cost": 3,
+    "strength": 1,
+    "influence": 3,
+    "health": 2,
+    "traits": [
+      "schemer"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "tempo"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "castle-veteran",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Castle Veteran",
+    "cost": 4,
+    "strength": 5,
+    "influence": 1,
+    "health": 5,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "hedge-knight",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Hedge Knight",
+    "cost": 4,
+    "strength": 5,
+    "influence": 1,
+    "health": 4,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "noble-advocate",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Noble Advocate",
+    "cost": 4,
+    "strength": 1,
+    "influence": 5,
+    "health": 5,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "silver-tongued-diplomat",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Silver-Tongued Diplomat",
+    "cost": 4,
+    "strength": 1,
+    "influence": 5,
+    "health": 4,
+    "traits": [
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "city-watch-soldier",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "City Watch Soldier",
+    "cost": 5,
+    "strength": 6,
+    "influence": 1,
+    "health": 6,
+    "traits": [
+      "guard"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "veteran-captain",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Veteran Captain",
+    "cost": 5,
+    "strength": 6,
+    "influence": 2,
+    "health": 6,
+    "traits": [
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "midrange"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "crown-envoy",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Crown Envoy",
+    "cost": 5,
+    "strength": 1,
+    "influence": 7,
+    "health": 5,
+    "traits": [
+      "intrigue"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "defensive"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "court-manipulator",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Court Manipulator",
+    "cost": 5,
+    "strength": 1,
+    "influence": 7,
+    "health": 4,
+    "traits": [
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "aggro"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "kingsguard-knight",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Kingsguard Knight",
+    "cost": 6,
+    "strength": 7,
+    "influence": 2,
+    "health": 7,
+    "traits": [
+      "guard",
+      "challenge"
+    ],
+    "abilities": [],
+    "roles": [
+      "military",
+      "defensive",
+      "elite"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "royal-spymaster",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Royal Spymaster",
+    "cost": 6,
+    "strength": 2,
+    "influence": 8,
+    "health": 5,
+    "traits": [
+      "intrigue",
+      "confront"
+    ],
+    "abilities": [],
+    "roles": [
+      "political",
+      "control",
+      "elite"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "crownlands-champion",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Crownlands Champion",
+    "cost": 7,
+    "strength": 7,
+    "influence": 3,
+    "health": 7,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "rally-the-men",
+        "name": "Rally the Men",
+        "trigger": "passive",
+        "text": "Other allied Characters have +1 Strength and +1 Health."
+      }
+    ],
+    "roles": [
+      "military",
+      "support",
+      "finisher"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "grand-counselor",
+    "cardType": "character",
+    "tierId": "c",
+    "name": "Grand Counselor",
+    "cost": 7,
+    "strength": 3,
+    "influence": 7,
+    "health": 7,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "command-the-room",
+        "name": "Command the Room",
+        "trigger": "passive",
+        "text": "Other allied Characters have +1 Influence and +1 Health."
+      }
+    ],
+    "roles": [
+      "political",
+      "support",
+      "finisher"
+    ],
+    "generic": true,
+    "balanceStatus": "provisional"
+  },
+  {
     "id": "jacaelon-targaryen",
     "cardType": "character",
     "tierId": "s-plus",
@@ -206,7 +705,7 @@
     "subtitle": "Hand of the King",
     "houseId": "targaryen",
     "cost": 6,
-    "power": 6,
+    "strength": 6,
     "influence": 8,
     "health": 6,
     "traits": [
@@ -237,7 +736,7 @@
     "subtitle": "The Housebreaker",
     "houseId": "targaryen",
     "cost": 6,
-    "power": 8,
+    "strength": 8,
     "influence": 6,
     "health": 7,
     "traits": [
@@ -268,7 +767,7 @@
     "subtitle": "Kingsguard",
     "houseId": "dayne",
     "cost": 7,
-    "power": 9,
+    "strength": 9,
     "influence": 3,
     "health": 8,
     "traits": [
@@ -299,7 +798,7 @@
     "subtitle": "The Fallen Rose",
     "houseId": "tyrell",
     "cost": 5,
-    "power": 2,
+    "strength": 2,
     "influence": 8,
     "health": 5,
     "traits": [
@@ -331,7 +830,7 @@
     "subtitle": "Lord of Highgarden",
     "houseId": "tyrell",
     "cost": 5,
-    "power": 3,
+    "strength": 3,
     "influence": 9,
     "health": 5,
     "traits": [
@@ -360,7 +859,7 @@
     "name": "Cordin Poole",
     "subtitle": "Maester",
     "cost": 4,
-    "power": 1,
+    "strength": 1,
     "influence": 4,
     "health": 3,
     "traits": [
@@ -388,7 +887,7 @@
     "subtitle": "Cloud Eyes",
     "houseId": "targaryen",
     "cost": 5,
-    "power": 5,
+    "strength": 5,
     "influence": 7,
     "health": 5,
     "traits": [
@@ -417,7 +916,7 @@
     "subtitle": "King of the Seven Kingdoms",
     "houseId": "targaryen",
     "cost": 8,
-    "power": 8,
+    "strength": 8,
     "influence": 9,
     "health": 8,
     "traits": [
@@ -446,7 +945,7 @@
     "name": "Weylar Rocke",
     "subtitle": "Master of Whisperers",
     "cost": 4,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -473,7 +972,7 @@
     "tierId": "s-plus",
     "name": "Visenor Targaryen",
     "cost": 6,
-    "power": 5,
+    "strength": 5,
     "influence": 8,
     "health": 6,
     "traits": [
@@ -504,7 +1003,7 @@
     "tierId": "s",
     "name": "Jaery Targaryen",
     "cost": 5,
-    "power": 2,
+    "strength": 2,
     "influence": 8,
     "health": 5,
     "traits": [
@@ -533,7 +1032,7 @@
     "tierId": "s",
     "name": "Baelor Targaryen",
     "cost": 5,
-    "power": 2,
+    "strength": 2,
     "influence": 7,
     "health": 5,
     "traits": [
@@ -562,7 +1061,7 @@
     "tierId": "s",
     "name": "Rhaella Targaryen",
     "cost": 3,
-    "power": 1,
+    "strength": 1,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -590,7 +1089,7 @@
     "tierId": "b",
     "name": "Maela Targaryen",
     "cost": 4,
-    "power": 4,
+    "strength": 4,
     "influence": 5,
     "health": 5,
     "traits": [
@@ -619,7 +1118,7 @@
     "tierId": "s",
     "name": "Vahaemon Targaryen",
     "cost": 7,
-    "power": 7,
+    "strength": 7,
     "influence": 6,
     "health": 7,
     "traits": [
@@ -649,7 +1148,7 @@
     "tierId": "a",
     "name": "Derrin Hightower",
     "cost": 5,
-    "power": 2,
+    "strength": 2,
     "influence": 8,
     "health": 5,
     "traits": [
@@ -678,7 +1177,7 @@
     "tierId": "a",
     "name": "Visenya Targaryen",
     "cost": 6,
-    "power": 8,
+    "strength": 8,
     "influence": 5,
     "health": 5,
     "traits": [
@@ -715,7 +1214,7 @@
     "tierId": "a",
     "name": "Lorenah Dayne",
     "cost": 4,
-    "power": 2,
+    "strength": 2,
     "influence": 7,
     "health": 5,
     "traits": [
@@ -745,7 +1244,7 @@
     "tierId": "a",
     "name": "Naella Velaryon",
     "cost": 4,
-    "power": 2,
+    "strength": 2,
     "influence": 6,
     "health": 5,
     "traits": [
@@ -757,7 +1256,7 @@
         "id": "our-fleet-is-yours",
         "name": "Our Fleet Is Yours",
         "trigger": "arrival",
-        "text": "Summon two 1/0/1 Velaryon Sailors ruled by Naella's Ruler. While Driftmark is the active Location, Velaryon Sailors have +1 Power."
+        "text": "Summon two 1/0/1 Velaryon Sailors ruled by Naella's Ruler. While Driftmark is the active Location, Velaryon Sailors have +1 Strength."
       }
     ],
     "roles": [
@@ -775,7 +1274,7 @@
     "tierId": "b",
     "name": "Berholt Caswell",
     "cost": 4,
-    "power": 1,
+    "strength": 1,
     "influence": 7,
     "health": 4,
     "traits": [
@@ -803,7 +1302,7 @@
     "tierId": "b",
     "name": "Vhaemys Targaryen",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -832,7 +1331,7 @@
     "tierId": "b",
     "name": "Ser Saathos Maris",
     "cost": 5,
-    "power": 7,
+    "strength": 7,
     "influence": 3,
     "health": 6,
     "traits": [
@@ -860,7 +1359,7 @@
     "tierId": "b",
     "name": "Steffon Baratheon",
     "cost": 5,
-    "power": 7,
+    "strength": 7,
     "influence": 4,
     "health": 6,
     "traits": [
@@ -872,7 +1371,7 @@
         "id": "a-baratheon-kneels-when-he-feels-safe",
         "name": "A Baratheon Kneels When He Feels Safe",
         "trigger": "passive",
-        "text": "Steffon's Power and Influence cannot be reduced by enemy effects."
+        "text": "Steffon's Strength and Influence cannot be reduced by enemy effects."
       }
     ],
     "roles": [
@@ -889,7 +1388,7 @@
     "tierId": "b",
     "name": "Ser Brant Costayne",
     "cost": 5,
-    "power": 7,
+    "strength": 7,
     "influence": 2,
     "health": 6,
     "traits": [
@@ -901,7 +1400,7 @@
         "id": "knights-of-oldtown",
         "name": "Knights of Oldtown",
         "trigger": "fall",
-        "text": "Other Characters ruled by Brant's Ruler gain +1 Power until the end of Brant's Ruler's next turn."
+        "text": "Other Characters ruled by Brant's Ruler gain +1 Strength until the end of Brant's Ruler's next turn."
       }
     ],
     "roles": [
@@ -918,7 +1417,7 @@
     "tierId": "b",
     "name": "Melessa Hightower",
     "cost": 3,
-    "power": 1,
+    "strength": 1,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -948,7 +1447,7 @@
     "tierId": "b",
     "name": "Godfrey Blackwood",
     "cost": 4,
-    "power": 5,
+    "strength": 5,
     "influence": 4,
     "health": 5,
     "traits": [
@@ -977,7 +1476,7 @@
     "tierId": "b",
     "name": "Rickard Stark",
     "cost": 4,
-    "power": 5,
+    "strength": 5,
     "influence": 5,
     "health": 5,
     "traits": [
@@ -1006,7 +1505,7 @@
     "tierId": "b",
     "name": "Timos Hightower",
     "cost": 2,
-    "power": 2,
+    "strength": 2,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -1017,7 +1516,7 @@
         "id": "he-asked-for-parley",
         "name": "He Asked for Parley",
         "trigger": "fall",
-        "text": "Characters ruled by Timos's Ruler gain +1 Power until the end of Timos's Ruler's next turn. If Timos was destroyed in a Military Conflict, they gain +2 Power instead."
+        "text": "Characters ruled by Timos's Ruler gain +1 Strength until the end of Timos's Ruler's next turn. If Timos was destroyed in a Military Conflict, they gain +2 Strength instead."
       }
     ],
     "roles": [
@@ -1034,7 +1533,7 @@
     "tierId": "b",
     "name": "Baran Strong",
     "cost": 5,
-    "power": 7,
+    "strength": 7,
     "influence": 2,
     "health": 7,
     "traits": [
@@ -1046,7 +1545,7 @@
         "id": "seven-feet-of-grievance",
         "name": "Seven Feet of Grievance",
         "trigger": "passive",
-        "text": "The first time Baran takes Military damage each turn, if he survives that damage, he gains +2 Power until the end of the turn."
+        "text": "The first time Baran takes Military damage each turn, if he survives that damage, he gains +2 Strength until the end of the turn."
       }
     ],
     "roles": [
@@ -1063,7 +1562,7 @@
     "tierId": "b",
     "name": "Clarisse Flowers",
     "cost": 5,
-    "power": 3,
+    "strength": 3,
     "influence": 2,
     "health": 5,
     "traits": [
@@ -1075,7 +1574,7 @@
         "id": "im-no-knight-nor-lady",
         "name": "I'm No Knight nor Lady",
         "trigger": "passive",
-        "text": "The first time Clarisse survives damage from a Military Conflict each turn, she gains +1 Power permanently."
+        "text": "The first time Clarisse survives damage from a Military Conflict each turn, she gains +1 Strength permanently."
       }
     ],
     "roles": [
@@ -1092,7 +1591,7 @@
     "tierId": "a",
     "name": "Ser Orwell Morrigen",
     "cost": 5,
-    "power": 7,
+    "strength": 7,
     "influence": 3,
     "health": 6,
     "traits": [
@@ -1104,7 +1603,7 @@
         "id": "experience-triumphs",
         "name": "Experience Triumphs",
         "trigger": "passive",
-        "text": "While Orwell is in a Military Conflict against a Character deployed this turn, he has +2 Power."
+        "text": "While Orwell is in a Military Conflict against a Character deployed this turn, he has +2 Strength."
       }
     ],
     "roles": [
@@ -1121,7 +1620,7 @@
     "tierId": "c",
     "name": "Curtass Whent",
     "cost": 5,
-    "power": 8,
+    "strength": 8,
     "influence": 1,
     "health": 5,
     "traits": [
@@ -1133,7 +1632,7 @@
         "id": "they-pass-over-real-men",
         "name": "They Pass Over Real Men",
         "trigger": "passive",
-        "text": "Curtass has +2 Power while in a Military Conflict against a Character with Guard or Challenge."
+        "text": "Curtass has +2 Strength while in a Military Conflict against a Character with Guard or Challenge."
       }
     ],
     "roles": [
@@ -1150,7 +1649,7 @@
     "tierId": "c",
     "name": "Ser Brannyn Vance",
     "cost": 3,
-    "power": 4,
+    "strength": 4,
     "influence": 1,
     "health": 3,
     "traits": [
@@ -1179,7 +1678,7 @@
     "tierId": "c",
     "name": "Malaenar Targaryen",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 5,
     "traits": [
@@ -1208,7 +1707,7 @@
     "tierId": "c",
     "name": "Tansy Riverside",
     "cost": 3,
-    "power": 1,
+    "strength": 1,
     "influence": 5,
     "health": 3,
     "traits": [
@@ -1236,7 +1735,7 @@
     "tierId": "c",
     "name": "Naela Targaryen",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -1264,7 +1763,7 @@
     "tierId": "c",
     "name": "Brandon Stark",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -1292,7 +1791,7 @@
     "tierId": "b",
     "name": "Tion Lannister",
     "cost": 4,
-    "power": 1,
+    "strength": 1,
     "influence": 6,
     "health": 4,
     "traits": [
@@ -1321,7 +1820,7 @@
     "tierId": "c",
     "name": "Martyn Mullendore",
     "cost": 3,
-    "power": 4,
+    "strength": 4,
     "influence": 3,
     "health": 4,
     "traits": [
@@ -1350,7 +1849,7 @@
     "tierId": "c",
     "name": "Leo Tyrell",
     "cost": 2,
-    "power": 2,
+    "strength": 2,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -1378,7 +1877,7 @@
     "tierId": "c",
     "name": "Almar Larchmont",
     "cost": 3,
-    "power": 1,
+    "strength": 1,
     "influence": 4,
     "health": 4,
     "traits": [
@@ -1407,7 +1906,7 @@
     "tierId": "c",
     "name": "Edmyn Uller",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -1435,7 +1934,7 @@
     "tierId": "c",
     "name": "Alysanne Hightower",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 2,
     "health": 3,
     "traits": [
@@ -1463,7 +1962,7 @@
     "tierId": "c",
     "name": "Perric Bracken",
     "cost": 3,
-    "power": 4,
+    "strength": 4,
     "influence": 3,
     "health": 4,
     "traits": [
@@ -1492,7 +1991,7 @@
     "tierId": "c",
     "name": "Clover Tully",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 5,
     "traits": [
@@ -1521,7 +2020,7 @@
     "tierId": "c",
     "name": "Velaryon Sailor",
     "cost": 0,
-    "power": 1,
+    "strength": 1,
     "influence": 0,
     "health": 1,
     "traits": [
@@ -1544,7 +2043,7 @@
     "name": "Jhagar",
     "houseId": "targaryen",
     "cost": 8,
-    "power": 8,
+    "strength": 8,
     "health": 9,
     "traits": [
       "unique",
@@ -1570,7 +2069,7 @@
     "name": "Cloudgazer",
     "houseId": "targaryen",
     "cost": 7,
-    "power": 6,
+    "strength": 6,
     "health": 8,
     "traits": [
       "unique",
@@ -1596,7 +2095,7 @@
     "name": "Maelwing",
     "houseId": "targaryen",
     "cost": 10,
-    "power": 10,
+    "strength": 10,
     "health": 11,
     "traits": [
       "unique",
@@ -1648,7 +2147,7 @@
         "id": "trial-by-combat",
         "name": "Trial by Combat",
         "trigger": "event",
-        "text": "Choose one Character ruled by you and one enemy Character. They immediately deal Military damage equal to their Power to each other simultaneously."
+        "text": "Choose one Character ruled by you and one enemy Character. They immediately deal Military damage equal to their Strength to each other simultaneously."
       }
     ],
     "roles": [
@@ -1688,7 +2187,7 @@
         "id": "brothers-tilt",
         "name": "The Brothers' Tilt",
         "trigger": "event",
-        "text": "Choose a Character. It gains +1 Power for each other Character in play with lower Power than it, up to +3. Then Exhaust it."
+        "text": "Choose a Character. It gains +1 Strength for each other Character in play with lower Strength than it, up to +3. Then Exhaust it."
       }
     ],
     "roles": [
@@ -1712,7 +2211,7 @@
         "id": "blackfyre",
         "name": "Mark of the Heir",
         "trigger": "passive",
-        "text": "Equipped Character gets +2 Power and +1 Influence."
+        "text": "Equipped Character gets +2 Strength and +1 Influence."
       }
     ],
     "roles": [
@@ -1736,7 +2235,7 @@
         "id": "at-your-throat",
         "name": "At Your Throat",
         "trigger": "passive",
-        "text": "Equipped Character gets +2 Power and gains Challenge."
+        "text": "Equipped Character gets +2 Strength and gains Challenge."
       }
     ],
     "roles": [
@@ -1831,7 +2330,7 @@
     "tierId": "c",
     "name": "Benjen Stark",
     "cost": 3,
-    "power": 4,
+    "strength": 4,
     "influence": 3,
     "health": 4,
     "traits": [
@@ -1842,7 +2341,7 @@
         "id": "winter-s-welcome",
         "name": "Winter's Welcome",
         "trigger": "arrival",
-        "text": "When Benjen arrives, another Stark Character gains +1 Power this turn."
+        "text": "When Benjen arrives, another Stark Character gains +1 Strength this turn."
       }
     ],
     "roles": [
@@ -1859,7 +2358,7 @@
     "tierId": "c",
     "name": "Mother Marya",
     "cost": 3,
-    "power": 0,
+    "strength": 0,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -1886,7 +2385,7 @@
     "tierId": "c",
     "name": "Annara Celtigar",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 3,
     "health": 3,
     "traits": [
@@ -1914,7 +2413,7 @@
     "tierId": "c",
     "name": "Daria Sand",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 3,
     "traits": [
@@ -1941,7 +2440,7 @@
     "tierId": "c",
     "name": "Ser Myles Mooton",
     "cost": 3,
-    "power": 4,
+    "strength": 4,
     "influence": 2,
     "health": 5,
     "traits": [
@@ -1969,7 +2468,7 @@
     "tierId": "c",
     "name": "Ser Grance Morrigen",
     "cost": 3,
-    "power": 4,
+    "strength": 4,
     "influence": 2,
     "health": 5,
     "traits": [
@@ -1997,7 +2496,7 @@
     "tierId": "c",
     "name": "Drack Harlaw",
     "cost": 4,
-    "power": 6,
+    "strength": 6,
     "influence": 1,
     "health": 5,
     "traits": [
@@ -2025,7 +2524,7 @@
     "tierId": "c",
     "name": "Zekar Alasyr",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 3,
     "traits": [
@@ -2052,7 +2551,7 @@
     "tierId": "c",
     "name": "Mydan Gerren",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -2079,7 +2578,7 @@
     "tierId": "c",
     "name": "Merryn Whitespring",
     "cost": 3,
-    "power": 2,
+    "strength": 2,
     "influence": 5,
     "health": 3,
     "traits": [
@@ -2106,7 +2605,7 @@
     "tierId": "b",
     "name": "Ser Lucas Corbray",
     "cost": 5,
-    "power": 7,
+    "strength": 7,
     "influence": 3,
     "health": 7,
     "traits": [
@@ -2134,7 +2633,7 @@
     "tierId": "c",
     "name": "Reyenald Reyne",
     "cost": 2,
-    "power": 4,
+    "strength": 4,
     "influence": 1,
     "health": 3,
     "traits": [
@@ -2145,7 +2644,7 @@
         "id": "promising-blade",
         "name": "Promising Blade",
         "trigger": "arrival",
-        "text": "Whenever Reyenald survives a Conflict, he gains +1 Power permanently."
+        "text": "Whenever Reyenald survives a Conflict, he gains +1 Strength permanently."
       }
     ],
     "roles": [
@@ -2162,7 +2661,7 @@
     "tierId": "c",
     "name": "Ser Oswald Eagle",
     "cost": 4,
-    "power": 5,
+    "strength": 5,
     "influence": 6,
     "health": 6,
     "traits": [
@@ -2189,7 +2688,7 @@
     "tierId": "c",
     "name": "Nymos",
     "cost": 2,
-    "power": 1,
+    "strength": 1,
     "influence": 4,
     "health": 3,
     "traits": [
@@ -2216,7 +2715,7 @@
     "tierId": "c",
     "name": "Liana Tyrell",
     "cost": 4,
-    "power": 1,
+    "strength": 1,
     "influence": 7,
     "health": 5,
     "traits": [
@@ -2244,7 +2743,7 @@
     "tierId": "c",
     "name": "Elinor Tyrell",
     "cost": 3,
-    "power": 1,
+    "strength": 1,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -2272,7 +2771,7 @@
     "tierId": "c",
     "name": "Darren Dayne",
     "cost": 4,
-    "power": 4,
+    "strength": 4,
     "influence": 6,
     "health": 6,
     "traits": [
@@ -2300,7 +2799,7 @@
     "tierId": "b",
     "name": "Aenys Targaryen II",
     "cost": 6,
-    "power": 7,
+    "strength": 7,
     "influence": 9,
     "health": 7,
     "traits": [
@@ -2328,7 +2827,7 @@
     "tierId": "b",
     "name": "Vhaemys Targaryen",
     "cost": 5,
-    "power": 2,
+    "strength": 2,
     "influence": 9,
     "health": 7,
     "traits": [
@@ -2356,7 +2855,7 @@
     "tierId": "c",
     "name": "Alysa Targaryen",
     "cost": 4,
-    "power": 2,
+    "strength": 2,
     "influence": 7,
     "health": 5,
     "traits": [
@@ -2384,7 +2883,7 @@
     "tierId": "c",
     "name": "Vaenarr Targaryen",
     "cost": 4,
-    "power": 5,
+    "strength": 5,
     "influence": 6,
     "health": 5,
     "traits": [
@@ -2395,7 +2894,7 @@
         "id": "blood-of-the-crown",
         "name": "Blood of the Crown",
         "trigger": "arrival",
-        "text": "Vaenarr gains +1 Power and Influence while another Targaryen is in play."
+        "text": "Vaenarr gains +1 Strength and Influence while another Targaryen is in play."
       }
     ],
     "roles": [
@@ -2412,7 +2911,7 @@
     "tierId": "b",
     "name": "Tygett Lannister",
     "cost": 6,
-    "power": 7,
+    "strength": 7,
     "influence": 8,
     "health": 8,
     "traits": [
@@ -2440,7 +2939,7 @@
     "tierId": "c",
     "name": "Ella Lannister",
     "cost": 4,
-    "power": 2,
+    "strength": 2,
     "influence": 7,
     "health": 5,
     "traits": [
@@ -2468,7 +2967,7 @@
     "tierId": "c",
     "name": "Myrielle Marbrand",
     "cost": 3,
-    "power": 3,
+    "strength": 3,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -2496,7 +2995,7 @@
     "tierId": "b",
     "name": "Harrik Greyjoy",
     "cost": 6,
-    "power": 9,
+    "strength": 9,
     "influence": 3,
     "health": 8,
     "traits": [
@@ -2524,7 +3023,7 @@
     "tierId": "c",
     "name": "Maron Dayne",
     "cost": 4,
-    "power": 6,
+    "strength": 6,
     "influence": 4,
     "health": 6,
     "traits": [
@@ -2535,7 +3034,7 @@
         "id": "a-father-s-legacy",
         "name": "A Father's Legacy",
         "trigger": "arrival",
-        "text": "When Maron falls, another Dayne Character gains +2 Power permanently."
+        "text": "When Maron falls, another Dayne Character gains +2 Strength permanently."
       }
     ],
     "roles": [
@@ -2552,7 +3051,7 @@
     "tierId": "c",
     "name": "Lyarra Karstark",
     "cost": 4,
-    "power": 4,
+    "strength": 4,
     "influence": 6,
     "health": 5,
     "traits": [
@@ -2580,7 +3079,7 @@
     "tierId": "c",
     "name": "Elwood Tully",
     "cost": 3,
-    "power": 3,
+    "strength": 3,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -2608,7 +3107,7 @@
     "tierId": "c",
     "name": "Oscar Tully",
     "cost": 3,
-    "power": 5,
+    "strength": 5,
     "influence": 3,
     "health": 5,
     "traits": [
@@ -2619,7 +3118,7 @@
         "id": "river-knight",
         "name": "River Knight",
         "trigger": "arrival",
-        "text": "Oscar gains +2 Power while defending a Tully Character."
+        "text": "Oscar gains +2 Strength while defending a Tully Character."
       }
     ],
     "roles": [
@@ -2636,7 +3135,7 @@
     "tierId": "c",
     "name": "Bethany Bracken",
     "cost": 3,
-    "power": 3,
+    "strength": 3,
     "influence": 5,
     "health": 4,
     "traits": [
@@ -2664,7 +3163,7 @@
     "tierId": "b",
     "name": "Ronnel Arryn",
     "cost": 5,
-    "power": 6,
+    "strength": 6,
     "influence": 8,
     "health": 7,
     "traits": [
@@ -2692,7 +3191,7 @@
     "tierId": "b",
     "name": "Edwyle Stark",
     "cost": 5,
-    "power": 6,
+    "strength": 6,
     "influence": 8,
     "health": 7,
     "traits": [
@@ -2720,7 +3219,7 @@
     "tierId": "b",
     "name": "Nymor Martell",
     "cost": 5,
-    "power": 5,
+    "strength": 5,
     "influence": 8,
     "health": 7,
     "traits": [
@@ -2748,7 +3247,7 @@
     "tierId": "b",
     "name": "Meria Martell",
     "cost": 5,
-    "power": 4,
+    "strength": 4,
     "influence": 9,
     "health": 6,
     "traits": [
@@ -2776,7 +3275,7 @@
     "tierId": "c",
     "name": "Alyssa Velaryon",
     "cost": 4,
-    "power": 3,
+    "strength": 3,
     "influence": 7,
     "health": 5,
     "traits": [

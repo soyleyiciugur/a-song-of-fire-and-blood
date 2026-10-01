@@ -5,7 +5,6 @@ import { houses } from "@/data/houses";
 import events from "@/data/events.json";
 import locations from "@/data/map/locations.json";
 import { artifacts } from "@/data/artifacts";
-import cards from "@/data/the-great-game/cards.json";
 import gallery from "@/data/gallery.json";
 import quotes from "@/data/quotes.json";
 import scrolls from "@/data/scrolls.json";
@@ -16,6 +15,7 @@ import updateNotes from "@/data/update-notes.json";
 import { beastTypes } from "@/data/bestiary";
 import { FLAT_NAV_ITEMS } from "@/constants/navigation";
 import { isMapEventType } from "@/types/map";
+import { getAllGameCards } from "@/lib/the-great-game/cards";
 
 export type SearchResultType =
   | "character" | "chapter" | "house" | "dragon" | "event" | "location"
@@ -151,7 +151,7 @@ export function buildSearchIndex(): SearchResult[] {
     href: `/forum?thread=${encodeURIComponent(thread.id)}`, keywords: text(thread.title, thread.body, thread.category) });
   for (const beast of beastTypes) results.push({ type: "bestiary", id: beast.id, title: beast.name,
     subtitle: beast.description, href: `/bestiary/${beast.id}`, keywords: text(beast.name, beast.description) });
-  for (const card of cards.filter((entry) => entry.cardType !== "artifact")) results.push({ type: "card", id: card.id,
+  for (const card of getAllGameCards().filter((entry) => entry.cardType !== "artifact")) results.push({ type: "card", id: card.id,
     title: card.name, subtitle: `The Great Game · ${card.cardType}`,
     href: "/cards", keywords: text(card.name, card.cardType, card.traits, card.abilities, card.roles) });
   const destinations = [

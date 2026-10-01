@@ -1,7 +1,22 @@
 [
   {
+    "date": "2026-09-29",
+    "items": [
+      "Connected legacy card helpers and Decks collection loading to the live Great Game card dataset so card surfaces use one current source."
+    ]
+  },
+  {
     "date": "2026-09-28",
     "items": [
+      "Kept the deck stack above the adjacent hand-area shading so its outer edges remain visible.",
+      "Filled the original Political crown silhouette as a single-color vector with no interior lines or holes.",
+      "Confined changed-cost Command gem pulses to a sharp inner-stone cutout, removing the softened mask and keeping the metal frame steady.",
+      "Animated changed-cost Command gems with brightness-only pulses: discounted green gems brighten and increased red gems dim before returning to normal, preserving sharp artwork and numbers.",
+      "Drove inner-gem brightness and crisp Command-number colors from one shared animation clock to keep them synchronized without text glow shadows.",
+      "Separated active keyword glow into an animated background layer so icon artwork stays sharp, including Dragonrider.",
+      "Changed discounted Great Game card Command numbers from gold to green.",
+      "Moved the Veiled Sight card-choice instruction and mandatory-resolution button below the revealed cards, removing the overlapping board prompt.",
+      "Updated seven Great Game keyword icons with gold artwork, consistent card placement, and refined active-keyword glow.",
       "Matched the top-right Exit Game button to its confirmation button's typography, colors, and hover styling, with vertically centered text and compact sizing.",
       "Hide The Realms instruction and Cancel controls while a card panel is open, keeping cancellation inside the active card panel.",
       "Moved selection instructions and Cancel into The Realms divider, right-aligned instructions beside a stationary Cancel button with shared End Turn colors and highlight styling, and refined Command-number outlines to remove sharp protrusions and heavy shadows.",
