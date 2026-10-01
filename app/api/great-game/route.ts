@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 
 import { createGame, applyAction } from "@/lib/the-great-game/engine";
 import { createTestDeck, validateDeck } from "@/lib/the-great-game/deck";
@@ -9,6 +9,7 @@ import {
   projectGameStateForPlayer,
   type GreatGameOnlineMatchSummary,
   type GreatGameOnlineMatchView,
+  type GreatGameOnlineStatePatch,
   type GreatGameOnlinePlayer,
   type GreatGameMatchStatus,
 } from "@/lib/the-great-game/online";
@@ -40,6 +41,18 @@ type MatchRow = {
   updated_at: string;
   completed_at: string | null;
 };
+
+type ActionMatchRow = Pick<
+  MatchRow,
+  | "id"
+  | "host_id"
+  | "guest_id"
+  | "state"
+  | "status"
+  | "version"
+  | "updated_at"
+  | "completed_at"
+>;
 
 type ProfileRow = {
   id: string;
@@ -189,6 +202,20 @@ async function toMatchView(
   };
 }
 
+function toStatePatch(
+  match: Pick<MatchRow, "id" | "status" | "version" | "state" | "updated_at" | "completed_at">,
+  playerId: "player1" | "player2"
+): GreatGameOnlineStatePatch {
+  return {
+    id: match.id,
+    status: match.status,
+    version: match.version,
+    state: match.state ? projectGameStateForPlayer(match.state, playerId) : null,
+    updatedAt: match.updated_at,
+    completedAt: match.completed_at,
+  };
+}
+
 async function emitMatchEvent(
   admin: NonNullable<ReturnType<typeof createAdminClient>>,
   matchId: string,
@@ -213,8 +240,35 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const matchId = url.searchParams.get("match");
+  const stateOnly = url.searchParams.get("stateOnly") === "1";
 
   if (matchId) {
+    if (stateOnly) {
+      const stateReadStartedAt = performance.now();
+      const { data, error } = await admin
+        .from("great_game_matches")
+        .select("id,host_id,guest_id,state,status,version,updated_at,completed_at")
+        .eq("id", matchId)
+        .maybeSingle();
+      const stateReadFinishedAt = performance.now();
+
+      if (error) return jsonError(error.message, 500);
+      if (!data) return jsonError("That table no longer exists.", 404);
+
+      const match = data as ActionMatchRow;
+      const playerId = playerIdForUser(match, user.id);
+      if (!playerId) return jsonError("You are not seated at that table.", 403);
+
+      return NextResponse.json(
+        { statePatch: toStatePatch(match, playerId) },
+        {
+          headers: {
+            "Server-Timing": `db-state;dur=${(stateReadFinishedAt - stateReadStartedAt).toFixed(1)}`,
+          },
+        }
+      );
+    }
+
     const { data, error } = await admin
       .from("great_game_matches")
       .select("*")
@@ -224,9 +278,11 @@ export async function GET(request: Request) {
     if (error) return jsonError(error.message, 500);
     if (!data) return jsonError("That table no longer exists.", 404);
 
-    const view = await toMatchView(admin, data as MatchRow, user.id);
-    if (!view) return jsonError("You are not seated at that table.", 403);
+    const match = data as MatchRow;
+    const playerId = playerIdForUser(match, user.id);
+    if (!playerId) return jsonError("You are not seated at that table.", 403);
 
+    const view = await toMatchView(admin, match, user.id);
     return NextResponse.json({ match: view });
   }
 
@@ -267,7 +323,9 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const requestStartedAt = performance.now();
   const user = await getAuthenticatedUser();
+  const authFinishedAt = performance.now();
   if (!user) return jsonError("Sign in to play The Great Game online.", 401);
 
   const admin = createAdminClient();
@@ -386,7 +444,7 @@ export async function POST(request: Request) {
       if (joinError) return jsonError(joinError.message, 500);
       if (!joined) return jsonError("Another player reached that table first.", 409);
 
-      await emitMatchEvent(admin, match.id, nextVersion, "joined");
+      after(() => emitMatchEvent(admin, match.id, nextVersion, "joined"));
       const view = await toMatchView(admin, joined as MatchRow, user.id);
       return NextResponse.json({ match: view });
     }
@@ -401,16 +459,18 @@ export async function POST(request: Request) {
         return jsonError("Invalid match version.");
       }
 
+      const readStartedAt = performance.now();
       const { data, error } = await admin
         .from("great_game_matches")
-        .select("*")
+        .select("id,host_id,guest_id,state,status,version,updated_at,completed_at")
         .eq("id", matchId)
         .maybeSingle();
+      const readFinishedAt = performance.now();
 
       if (error) return jsonError(error.message, 500);
       if (!data) return jsonError("That table no longer exists.", 404);
 
-      const match = data as MatchRow;
+      const match = data as ActionMatchRow;
       const playerId = playerIdForUser(match, user.id);
       if (!playerId) return jsonError("You are not seated at that table.", 403);
       if (match.status !== "active" || !match.state) {
@@ -418,9 +478,11 @@ export async function POST(request: Request) {
       }
 
       if (match.version !== requestedVersion) {
-        const view = await toMatchView(admin, match, user.id);
         return NextResponse.json(
-          { error: "The table changed before that move arrived.", match: view },
+          {
+            error: "The table changed before that move arrived.",
+            statePatch: toStatePatch(match, playerId),
+          },
           { status: 409 }
         );
       }
@@ -436,7 +498,9 @@ export async function POST(request: Request) {
         ? new Set(match.state.players[playerId].board.map((unit) => unit.instanceId))
         : null;
 
+      const engineStartedAt = performance.now();
       const result = applyAction(match.state, action);
+      const engineFinishedAt = performance.now();
       if (!result.ok) return jsonError(result.error ?? "That move is not legal.", 422);
 
       const addedBoardUnit = beforeBoardIds
@@ -470,32 +534,74 @@ export async function POST(request: Request) {
         patch.winner_user_id = winnerUserId;
       }
 
+      const writeStartedAt = performance.now();
       const { data: updated, error: updateError } = await admin
         .from("great_game_matches")
         .update(patch)
         .eq("id", match.id)
         .eq("version", match.version)
         .eq("status", "active")
-        .select("*")
+        .select("id,status,version,updated_at,completed_at")
         .maybeSingle();
+      const writeFinishedAt = performance.now();
 
       if (updateError) return jsonError(updateError.message, 500);
       if (!updated) {
         const { data: latest } = await admin
           .from("great_game_matches")
-          .select("*")
+          .select("id,host_id,guest_id,state,status,version,updated_at,completed_at")
           .eq("id", match.id)
           .maybeSingle();
-        const view = latest ? await toMatchView(admin, latest as MatchRow, user.id) : null;
+        const latestMatch = latest as ActionMatchRow | null;
+        const latestPatch = latestMatch
+          ? toStatePatch(latestMatch, playerId)
+          : null;
         return NextResponse.json(
-          { error: "The table changed before that move arrived.", match: view },
+          { error: "The table changed before that move arrived.", statePatch: latestPatch },
           { status: 409 }
         );
       }
 
-      await emitMatchEvent(admin, match.id, nextVersion, "state", eventDetail);
-      const view = await toMatchView(admin, updated as MatchRow, user.id);
-      return NextResponse.json({ match: view });
+      // Realtime notification is not part of the actor's critical path. The
+      // authoritative match row is already committed; schedule the lightweight
+      // event insert after the response so the acting player does not wait for
+      // another Supabase round-trip.
+      after(() => emitMatchEvent(admin, match.id, nextVersion, "state", eventDetail));
+
+      const updatedMeta = updated as {
+        id: string;
+        status: GreatGameMatchStatus;
+        version: number;
+        updated_at: string;
+        completed_at: string | null;
+      };
+      const statePatch = toStatePatch(
+        {
+          id: updatedMeta.id,
+          status: updatedMeta.status,
+          version: updatedMeta.version,
+          state: result.state,
+          updated_at: updatedMeta.updated_at,
+          completed_at: updatedMeta.completed_at,
+        },
+        playerId
+      );
+
+      const responseFinishedAt = performance.now();
+      return NextResponse.json(
+        { statePatch },
+        {
+          headers: {
+            "Server-Timing": [
+              `auth;dur=${(authFinishedAt - requestStartedAt).toFixed(1)}`,
+              `db-read;dur=${(readFinishedAt - readStartedAt).toFixed(1)}`,
+              `engine;dur=${(engineFinishedAt - engineStartedAt).toFixed(1)}`,
+              `db-write;dur=${(writeFinishedAt - writeStartedAt).toFixed(1)}`,
+              `total;dur=${(responseFinishedAt - requestStartedAt).toFixed(1)}`,
+            ].join(", "),
+          },
+        }
+      );
     }
 
     if (op === "leave") {
@@ -536,7 +642,7 @@ export async function POST(request: Request) {
           .eq("version", match.version);
 
         if (leaveError) return jsonError(leaveError.message, 500);
-        await emitMatchEvent(admin, match.id, nextVersion, "left");
+        after(() => emitMatchEvent(admin, match.id, nextVersion, "left"));
       }
 
       return NextResponse.json({ ok: true });

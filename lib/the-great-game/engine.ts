@@ -23,6 +23,7 @@ import type {
   HandCostModifier,
   PlayerId,
   PlayerState,
+  RuntimeModifier,
   Trait,
   UnitState,
 } from "./types";
@@ -298,6 +299,14 @@ export function unitHasTrait(
     return true;
   }
 
+  if (
+    trait === "swift" &&
+    unit.flags["driftmark-swift"] &&
+    unit.deployedThisTurn
+  ) {
+    return true;
+  }
+
   return false;
 }
 
@@ -337,6 +346,14 @@ export function getMilitaryPower(
     "dark-sister"
   ) {
     strength += 2;
+  }
+
+  if (card.cardType === "character") {
+    strength += state.players[unit.ownerId].board.filter(
+      (ally) =>
+        ally.instanceId !== unit.instanceId &&
+        ally.cardId === "crownlands-champion"
+    ).length;
   }
 
   return Math.max(
@@ -388,39 +405,260 @@ export function getPoliticalPower(
     politicalPower += 1;
   }
 
+  politicalPower += state.players[unit.ownerId].board.filter(
+    (ally) =>
+      ally.instanceId !== unit.instanceId &&
+      ally.cardId === "grand-counselor"
+  ).length;
+
   return Math.max(
     0,
     politicalPower
   );
 }
 
-export function getMaximumHealth(
+export function getBaseMaximumHealth(
+  state: GameState,
   unit: UnitState
 ): number {
-  const card =
-    getGameCard(
-      unit.cardId
-    );
+  const card = getGameCard(unit.cardId);
 
   if (!isUnitCard(card)) {
     return 0;
   }
 
-  let health =
-    card.health;
+  let health = card.health;
 
-  for (
-    const modifier of
-    unit.modifiers
-  ) {
-    health +=
-      modifier.health ?? 0;
+  // Positive Health modifiers live in the bonus layer. Negative modifiers
+  // reduce the base layer so removing a bonus can never eat base Health.
+  for (const modifier of unit.modifiers) {
+    const amount = modifier.health ?? 0;
+    if (amount < 0) {
+      health += amount;
+    }
   }
 
+  return Math.max(1, health);
+}
+
+export function getBonusHealthCapacity(
+  state: GameState,
+  unit: UnitState
+): number {
+  const card = getGameCard(unit.cardId);
+
+  if (!isUnitCard(card)) {
+    return 0;
+  }
+
+  let bonus = 0;
+
+  for (const modifier of unit.modifiers) {
+    const amount = modifier.health ?? 0;
+    if (amount > 0) {
+      bonus += amount;
+    }
+  }
+
+  if (card.cardType === "character") {
+    bonus += state.players[unit.ownerId].board.filter(
+      (ally) =>
+        ally.instanceId !== unit.instanceId &&
+        (ally.cardId === "crownlands-champion" ||
+          ally.cardId === "grand-counselor")
+    ).length;
+
+    if (
+      state.activeLocation?.cardId === "castle-black" &&
+      unitHasTrait(state, unit, "guard")
+    ) {
+      bonus += 1;
+    }
+  }
+
+  return Math.max(0, bonus);
+}
+
+export function getMaximumHealth(
+  state: GameState,
+  unit: UnitState
+): number {
   return Math.max(
     1,
-    health
+    getBaseMaximumHealth(state, unit) +
+      getBonusHealthCapacity(state, unit)
   );
+}
+
+type HealthLayerSnapshot = {
+  baseMaximum: number;
+  bonusCapacity: number;
+};
+
+function normalizedBonusHealth(
+  state: GameState,
+  unit: UnitState,
+  bonusCapacity = getBonusHealthCapacity(state, unit),
+  baseMaximum = getBaseMaximumHealth(state, unit)
+): number {
+  if (typeof unit.bonusHealth === "number") {
+    return Math.max(0, Math.min(unit.bonusHealth, bonusCapacity, unit.currentHealth));
+  }
+
+  // Backwards-compatible migration for resumed games. Only Health above the
+  // base maximum is certainly bonus Health; choosing the conservative value
+  // ensures an old save never loses base Health merely because an aura ends.
+  return Math.max(
+    0,
+    Math.min(
+      bonusCapacity,
+      unit.currentHealth,
+      unit.currentHealth - Math.min(unit.currentHealth, baseMaximum)
+    )
+  );
+}
+
+function captureMaximumHealths(
+  state: GameState
+): Map<string, HealthLayerSnapshot> {
+  const result = new Map<string, HealthLayerSnapshot>();
+
+  for (const playerId of ["player1", "player2"] as PlayerId[]) {
+    for (const unit of state.players[playerId].board) {
+      const baseMaximum = getBaseMaximumHealth(state, unit);
+      const bonusCapacity = getBonusHealthCapacity(state, unit);
+      unit.bonusHealth = normalizedBonusHealth(
+        state,
+        unit,
+        bonusCapacity,
+        baseMaximum
+      );
+      result.set(unit.instanceId, { baseMaximum, bonusCapacity });
+    }
+  }
+
+  return result;
+}
+
+function reconcileHealthAfterAuraChange(
+  state: GameState,
+  before: Map<string, HealthLayerSnapshot>
+) {
+  for (const playerId of ["player1", "player2"] as PlayerId[]) {
+    for (const unit of state.players[playerId].board) {
+      const baseMaximum = getBaseMaximumHealth(state, unit);
+      const bonusCapacity = getBonusHealthCapacity(state, unit);
+      const previous = before.get(unit.instanceId);
+
+      if (!previous) {
+        unit.bonusHealth = bonusCapacity;
+        unit.currentHealth = baseMaximum + bonusCapacity;
+        continue;
+      }
+
+      const previousBonus = normalizedBonusHealth(
+        state,
+        unit,
+        previous.bonusCapacity,
+        previous.baseMaximum
+      );
+      const previousBaseCurrent = Math.max(0, unit.currentHealth - previousBonus);
+
+      let nextBonus = Math.min(previousBonus, bonusCapacity);
+      if (bonusCapacity > previous.bonusCapacity) {
+        nextBonus += bonusCapacity - previous.bonusCapacity;
+      }
+      nextBonus = Math.min(nextBonus, bonusCapacity);
+
+      const nextBaseCurrent = Math.min(previousBaseCurrent, baseMaximum);
+
+      unit.bonusHealth = nextBonus;
+      unit.currentHealth = Math.max(0, nextBaseCurrent + nextBonus);
+    }
+  }
+}
+
+function consumeHealthDamageMutable(
+  state: GameState,
+  unit: UnitState,
+  amount: number
+) {
+  const bonusCapacity = getBonusHealthCapacity(state, unit);
+  const baseMaximum = getBaseMaximumHealth(state, unit);
+  const bonusBefore = normalizedBonusHealth(
+    state,
+    unit,
+    bonusCapacity,
+    baseMaximum
+  );
+  const bonusDamage = Math.min(bonusBefore, amount);
+
+  unit.bonusHealth = bonusBefore - bonusDamage;
+  unit.currentHealth = Math.max(0, unit.currentHealth - amount);
+}
+
+function healUnitMutable(
+  state: GameState,
+  unit: UnitState,
+  amount: number
+): number {
+  if (amount <= 0) return 0;
+
+  const baseMaximum = getBaseMaximumHealth(state, unit);
+  const bonusCapacity = getBonusHealthCapacity(state, unit);
+  const bonusBefore = normalizedBonusHealth(
+    state,
+    unit,
+    bonusCapacity,
+    baseMaximum
+  );
+  const baseBefore = Math.max(0, unit.currentHealth - bonusBefore);
+
+  const baseMissing = Math.max(0, baseMaximum - baseBefore);
+  const baseHeal = Math.min(amount, baseMissing);
+  const remaining = amount - baseHeal;
+  const bonusMissing = Math.max(0, bonusCapacity - bonusBefore);
+  const bonusHeal = Math.min(remaining, bonusMissing);
+
+  unit.bonusHealth = bonusBefore + bonusHeal;
+  unit.currentHealth = baseBefore + baseHeal + unit.bonusHealth;
+
+  return baseHeal + bonusHeal;
+}
+
+function addCharacterModifierMutable(
+  state: GameState,
+  controllerId: PlayerId,
+  target: UnitState,
+  modifier: RuntimeModifier
+): RuntimeModifier {
+  const card = getGameCard(target.cardId);
+  const adjusted: RuntimeModifier = { ...modifier };
+
+  if (
+    card.cardType === "character" &&
+    state.activeLocation?.cardId === "oldtown" &&
+    !state.players[controllerId].oldtownModifierUsedThisTurn
+  ) {
+    const positiveStats = (["strength", "influence", "health"] as const).filter(
+      (key) => (adjusted[key] ?? 0) > 0
+    );
+
+    if (positiveStats.length > 0) {
+      for (const key of positiveStats) {
+        adjusted[key] = (adjusted[key] ?? 0) + 1;
+      }
+
+      state.players[controllerId].oldtownModifierUsedThisTurn = true;
+      logAbilityActivation(state, "oldtown", "oldtown", controllerId);
+    }
+  }
+
+  const healthBefore = captureMaximumHealths(state);
+  target.modifiers.push(adjusted);
+  reconcileHealthAfterAuraChange(state, healthBefore);
+
+  return adjusted;
 }
 
 export function getEffectiveCost(
@@ -495,19 +733,6 @@ export function getEffectiveCost(
     cost -= 2;
   }
 
-  if (
-    card.cardType ===
-      "event" &&
-    !card.special &&
-    state.activeLocation
-      ?.cardId ===
-      "oldtown" &&
-    state.players[playerId]
-      .eventsPlayedThisTurn ===
-      0
-  ) {
-    cost -= 1;
-  }
 
   return Math.max(
     0,
@@ -1010,6 +1235,8 @@ function destroyCharacterMutable(
   state: GameState,
   unit: UnitState
 ) {
+  const healthBefore = captureMaximumHealths(state);
+
   const owner =
     state.players[
       unit.ownerId
@@ -1059,6 +1286,12 @@ function destroyCharacterMutable(
     `${card.name} is destroyed.`,
     unit.ownerId
   );
+
+  if (state.activePlayerId !== unit.ownerId) {
+    owner.characterDestroyedDuringOpponentTurn = true;
+  }
+
+  reconcileHealthAfterAuraChange(state, healthBefore);
 
   if (
     card.id ===
@@ -1188,12 +1421,11 @@ function damageUnitMutable(
   const before =
     unit.currentHealth;
 
-  unit.currentHealth =
-    Math.max(
-      0,
-      before -
-        finalDamage
-    );
+  consumeHealthDamageMutable(
+    state,
+    unit,
+    finalDamage
+  );
 
   const prefix =
     source
@@ -1475,22 +1707,20 @@ function resolvePendingEffectMutable(
     "Only the active player may resolve this ability."
   );
 
-  const source =
-    findUnit(
-      state,
-      pending!
-        .sourceUnitInstanceId
-    );
+  const source = pending!.sourceUnitInstanceId
+    ? findUnit(state, pending!.sourceUnitInstanceId)
+    : undefined;
 
-  assertRule(
-    Boolean(source),
-    "The source of the pending ability is no longer in play."
-  );
-
-  const sourceCard =
-    getGameCard(
-      source!.cardId
+  if (pending!.abilityId !== "tyrosh") {
+    assertRule(
+      Boolean(source),
+      "The source of the pending ability is no longer in play."
     );
+  }
+
+  const sourceCard = source
+    ? getGameCard(source.cardId)
+    : null;
 
   switch (
     pending!.abilityId
@@ -1534,17 +1764,16 @@ function resolvePendingEffectMutable(
           target!
         );
 
-      target!.modifiers.push({
-        id:
-          nextRuntimeId(
-            state,
-            "manders-pact"
-          ),
-
-        influence: 2,
-
-        permanent: true,
-      });
+      addCharacterModifierMutable(
+        state,
+        pending!.controllerId,
+        target!,
+        {
+          id: nextRuntimeId(state, "manders-pact"),
+          influence: 2,
+          permanent: true,
+        }
+      );
 
       const after =
         getPoliticalPower(
@@ -1572,7 +1801,7 @@ function resolvePendingEffectMutable(
 
       addLog(
         state,
-        `ARRIVAL — ${sourceCard.name}: The Mander's Pact grants ${getGameCard(target!.cardId).name} +2 Influence. (${before} → ${after} Influence)`,
+        `ARRIVAL — ${sourceCard!.name}: The Mander's Pact grants ${getGameCard(target!.cardId).name} +${after - before} Influence. (${before} → ${after} Influence)`,
         pending!
           .controllerId
       );
@@ -1630,7 +1859,7 @@ function resolvePendingEffectMutable(
 
       addLog(
         state,
-        `ARRIVAL — ${sourceCard.name}: Veiled Sight marks ${getGameCard(target!.cardId).name}. It costs +2 Command until the start of ${playerName(pending!.controllerId)}'s next turn.`,
+        `ARRIVAL — ${sourceCard!.name}: Veiled Sight marks ${getGameCard(target!.cardId).name}. It costs +2 Command until the start of ${playerName(pending!.controllerId)}'s next turn.`,
         pending!
           .controllerId
       );
@@ -1694,6 +1923,62 @@ function resolvePendingEffectMutable(
         state
       );
 
+      return;
+    }
+
+    case "tyrosh": {
+      const playerId = pending!.controllerId;
+      const player = state.players[playerId];
+
+      if (action.decline) {
+        player.tyroshTradeUsedThisTurn = false;
+        state.pendingEffect = null;
+        addLog(state, "Tyroshi Trade is declined; the hand is kept.", playerId);
+        finishEndTurnMutable(state);
+        return;
+      }
+
+      assertRule(
+        Boolean(action.targetHandInstanceId),
+        "Tyroshi Trade requires a card to discard, or Keep All."
+      );
+
+      const handIndex = player.hand.findIndex(
+        (handCard) => handCard.instanceId === action.targetHandInstanceId
+      );
+
+      assertRule(handIndex !== -1, "That card is no longer in your hand.");
+
+      const [discarded] = player.hand.splice(handIndex, 1);
+      player.discard.push(discarded.cardId);
+      player.tyroshTradeUsedThisTurn = true;
+
+      addLog(
+        state,
+        `Tyroshi Trade discards ${getGameCard(discarded.cardId).name}.`,
+        playerId,
+        "owner"
+      );
+
+      const drawn = drawCardMutable(state, playerId, {
+        costModifier: {
+          amount: -1,
+          expiresAt: "while-in-hand",
+          expiresForPlayerId: playerId,
+        },
+      });
+
+      if (drawn.success && drawn.cardId) {
+        addLog(
+          state,
+          `Tyroshi Trade reduces ${getGameCard(drawn.cardId).name}'s cost by 1 Command while it remains in hand.`,
+          playerId,
+          "owner"
+        );
+      }
+
+      state.pendingEffect = null;
+      finishEndTurnMutable(state);
       return;
     }
   }
@@ -2265,20 +2550,17 @@ function resolveEventMutable(
         target
       );
 
-    target.modifiers.push({
-      id:
-        nextRuntimeId(
-          state,
-          "word-in-right-ear"
-        ),
-
-      influence: 1,
-
-      permanent: false,
-
-      expiresAt:
-        "end-of-current-turn",
-    });
+    addCharacterModifierMutable(
+      state,
+      playerId,
+      target,
+      {
+        id: nextRuntimeId(state, "word-in-right-ear"),
+        influence: 1,
+        permanent: false,
+        expiresAt: "end-of-current-turn",
+      }
+    );
 
     const after =
       getPoliticalPower(
@@ -2288,7 +2570,7 @@ function resolveEventMutable(
 
     addLog(
       state,
-      `${getGameCard(target.cardId).name} gains +1 Influence. (${before} → ${after} Influence)`,
+      `${getGameCard(target.cardId).name} gains +${after - before} Influence. (${before} → ${after} Influence)`,
       playerId
     );
 
@@ -2490,17 +2772,16 @@ function resolveEventMutable(
     if (
       bonus > 0
     ) {
-      target.modifiers.push({
-        id:
-          nextRuntimeId(
-            state,
-            "brothers-tilt"
-          ),
-
-        strength: bonus,
-
-        permanent: true,
-      });
+      addCharacterModifierMutable(
+        state,
+        playerId,
+        target,
+        {
+          id: nextRuntimeId(state, "brothers-tilt"),
+          strength: bonus,
+          permanent: true,
+        }
+      );
     }
 
     target.exhausted =
@@ -2514,7 +2795,7 @@ function resolveEventMutable(
 
     addLog(
       state,
-      `${getGameCard(target.cardId).name} gains +${bonus} Strength and becomes Exhausted. (${beforePower} → ${afterPower} Strength)`,
+      `${getGameCard(target.cardId).name} gains +${afterPower - beforePower} Strength and becomes Exhausted. (${beforePower} → ${afterPower} Strength)`,
       playerId
     );
   }
@@ -2676,15 +2957,6 @@ function playCardMutable(
       )
     );
 
-  const oldtownDiscount =
-    card.cardType ===
-      "event" &&
-    !card.special &&
-    state.activeLocation
-      ?.cardId ===
-      "oldtown" &&
-    player.eventsPlayedThisTurn ===
-      0;
 
   player.command -=
     cost;
@@ -2729,15 +3001,6 @@ function playCardMutable(
     }
   }
 
-  if (
-    oldtownDiscount
-  ) {
-    addLog(
-      state,
-      `PASSIVE — Oldtown reduces ${card.name}'s cost by 1 Command.`,
-      playerId
-    );
-  }
 
   if (
     card.special ===
@@ -2768,6 +3031,9 @@ function playCardMutable(
   }
 
   if (isUnitCard(card)) {
+    const healthBefore = captureMaximumHealths(state);
+    const characterDeploymentIndex = player.charactersDeployedThisTurn ?? 0;
+
     const unit: UnitState = {
       instanceId:
         nextRuntimeId(
@@ -2783,6 +3049,8 @@ function playCardMutable(
 
       currentHealth:
         card.health,
+
+      bonusHealth: 0,
 
       exhausted: false,
 
@@ -2821,6 +3089,20 @@ function playCardMutable(
       0,
       unit
     );
+
+    if (card.cardType === "character") {
+      if (
+        state.activeLocation?.cardId === "driftmark" &&
+        characterDeploymentIndex === 0
+      ) {
+        unit.flags["driftmark-swift"] = true;
+        logAbilityActivation(state, "driftmark", "driftmark", playerId);
+      }
+
+      player.charactersDeployedThisTurn = characterDeploymentIndex + 1;
+    }
+
+    reconcileHealthAfterAuraChange(state, healthBefore);
 
     addLog(
       state,
@@ -2919,11 +3201,17 @@ function playCardMutable(
     card.cardType ===
     "location"
   ) {
+    const healthBefore = captureMaximumHealths(state);
+
     if (
       state.activeLocation
     ) {
       const old =
         state.activeLocation;
+
+      if (old.cardId === "highgarden") {
+        resetHighgardenProgressMutable(state);
+      }
 
       state.players[
         old.playedBy
@@ -2945,6 +3233,8 @@ function playCardMutable(
         playerId,
     };
 
+    reconcileHealthAfterAuraChange(state, healthBefore);
+
     addLog(
       state,
       `${card.name} becomes the active Location.`,
@@ -2963,6 +3253,174 @@ function playCardMutable(
       );
     }
   }
+}
+
+// ─────────────────────────────────────────────
+// Conflict-scoped Location / passive helpers
+// ─────────────────────────────────────────────
+
+function beginConflictMutable(
+  state: GameState,
+  playerId: PlayerId,
+  attacker: UnitState,
+  kind: "military" | "political"
+): { strengthBonus: number; influenceBonus: number } {
+  const player = state.players[playerId];
+  const attackerCard = getGameCard(attacker.cardId);
+  const firstConflict = (player.conflictsInitiatedThisTurn ?? 0) === 0;
+  const firstStarfallCharacter =
+    attackerCard.cardType === "character" &&
+    !(player.starfallCharacterConflictUsedThisTurn ?? false);
+
+  let strengthBonus = 0;
+  let influenceBonus = 0;
+
+  if (
+    attackerCard.cardType === "character" &&
+    firstConflict &&
+    state.activeLocation?.cardId === "winterfell" &&
+    player.characterDestroyedDuringOpponentPreviousTurn
+  ) {
+    strengthBonus += 1;
+    influenceBonus += 1;
+    logAbilityActivation(
+      state,
+      "winterfell",
+      "winterfell",
+      playerId,
+      `${attackerCard.name} remembers the fallen and gains +1 Strength and +1 Influence for this Conflict.`
+    );
+  }
+
+  if (
+    kind === "military" &&
+    attackerCard.cardType === "character" &&
+    firstStarfallCharacter &&
+    state.activeLocation?.cardId === "starfall"
+  ) {
+    strengthBonus += 1;
+    logAbilityActivation(
+      state,
+      "starfall",
+      "starfall",
+      playerId,
+      `${attackerCard.name} gains +1 Strength for this Conflict.`
+    );
+  }
+
+  player.conflictsInitiatedThisTurn = (player.conflictsInitiatedThisTurn ?? 0) + 1;
+  if (kind === "military") {
+    player.militaryConflictsInitiatedThisTurn =
+      (player.militaryConflictsInitiatedThisTurn ?? 0) + 1;
+
+    if (attackerCard.cardType === "character") {
+      player.starfallCharacterConflictUsedThisTurn = true;
+    }
+  }
+
+  return { strengthBonus, influenceBonus };
+}
+
+function militaryDefensePower(
+  state: GameState,
+  defender: UnitState
+): number {
+  let power = getMilitaryPower(state, defender);
+  if (
+    state.activeLocation?.cardId === "riverrun" &&
+    getGameCard(defender.cardId).cardType === "character"
+  ) {
+    power += 1;
+  }
+  return power;
+}
+
+function politicalDefensePower(
+  state: GameState,
+  defender: UnitState
+): number {
+  let power = getPoliticalPower(state, defender);
+  if (
+    state.activeLocation?.cardId === "riverrun" &&
+    getGameCard(defender.cardId).cardType === "character"
+  ) {
+    power += 1;
+  }
+  return power;
+}
+
+function orwellStrengthBonus(
+  unit: UnitState,
+  opposingUnit: UnitState
+): number {
+  return unit.cardId === "orwell-morrigen" &&
+    getGameCard(opposingUnit.cardId).cardType === "character" &&
+    opposingUnit.deployedThisTurn
+    ? 2
+    : 0;
+}
+
+function registerMilitaryWinMutable(
+  state: GameState,
+  playerId: PlayerId
+) {
+  const player = state.players[playerId];
+  const winsBefore = player.militaryWinsThisTurn ?? 0;
+  player.militaryWinsThisTurn = winsBefore + 1;
+
+  if (
+    winsBefore === 0 &&
+    state.activeLocation?.cardId === "storms-end"
+  ) {
+    logAbilityActivation(state, "storms-end", "storms-end", playerId);
+    gainStandingMutable(state, playerId, 1, "The Stag's Hunt");
+  }
+}
+
+function maybeApplySunspearPoisonMutable(
+  state: GameState,
+  playerId: PlayerId,
+  target: UnitState,
+  damageDealt: number
+) {
+  const player = state.players[playerId];
+  if (
+    state.activeLocation?.cardId !== "sunspear" ||
+    player.sunspearPoisonAppliedThisTurn ||
+    damageDealt < 3 ||
+    getGameCard(target.cardId).cardType !== "character" ||
+    !findUnit(state, target.instanceId)
+  ) {
+    return;
+  }
+
+  player.sunspearPoisonAppliedThisTurn = true;
+
+  const alreadyPoisoned = state.delayedEffects.some(
+    (effect) =>
+      effect.type === "sunspear-poison" &&
+      effect.targetUnitInstanceId === target.instanceId
+  );
+
+  if (!alreadyPoisoned) {
+    state.delayedEffects.push({
+      id: nextRuntimeId(state, "poison"),
+      type: "sunspear-poison",
+      triggerPlayerId: playerId,
+      targetUnitInstanceId: target.instanceId,
+      remainingTriggers: 2,
+    });
+  }
+
+  logAbilityActivation(
+    state,
+    "sunspear",
+    "sunspear",
+    playerId,
+    alreadyPoisoned
+      ? `${getGameCard(target.cardId).name} is already poisoned.`
+      : `${getGameCard(target.cardId).name} is poisoned for the next 2 ${playerName(playerId)} turns.`
+  );
 }
 
 // ─────────────────────────────────────────────
@@ -3063,6 +3521,13 @@ function militaryAttackMutable(
       attacker!.cardId
     );
 
+  const conflictBonus = beginConflictMutable(
+    state,
+    playerId,
+    attacker!,
+    "military"
+  );
+
   if (
     action.targetPlayerId
   ) {
@@ -3084,7 +3549,7 @@ function militaryAttackMutable(
       getMilitaryPower(
         state,
         attacker!
-      );
+      ) + conflictBonus.strengthBonus;
 
     damageStandingMutable(
       state,
@@ -3095,6 +3560,10 @@ function militaryAttackMutable(
           `${attackerCard.name} — Military Attack`,
       }
     );
+
+    if (damage > 0) {
+      registerMilitaryWinMutable(state, playerId);
+    }
 
     return;
   }
@@ -3174,17 +3643,27 @@ function militaryAttackMutable(
     );
   }
 
+  const attackerOrwellBonus = orwellStrengthBonus(attacker!, target!);
+  const defenderOrwellBonus = orwellStrengthBonus(target!, attacker!);
+
+  if (attackerOrwellBonus > 0) {
+    logAbilityActivation(state, attacker!.cardId, "experience-triumphs", playerId);
+  }
+  if (defenderOrwellBonus > 0) {
+    logAbilityActivation(state, target!.cardId, "experience-triumphs", target!.ownerId);
+  }
+
   const attackerPower =
     getMilitaryPower(
       state,
       attacker!
-    );
+    ) + conflictBonus.strengthBonus + attackerOrwellBonus;
 
   const targetPower =
-    getMilitaryPower(
+    militaryDefensePower(
       state,
       target!
-    );
+    ) + defenderOrwellBonus;
 
   const targetWasGrounded =
     target!.grounded;
@@ -3206,6 +3685,13 @@ function militaryAttackMutable(
       `${attackerCard.name} — Military Conflict`
     );
 
+  maybeApplySunspearPoisonMutable(
+    state,
+    playerId,
+    target!,
+    targetResult.damageDealt
+  );
+
   if (
     !targetWasGrounded
   ) {
@@ -3216,6 +3702,15 @@ function militaryAttackMutable(
       "military",
       `${targetCard.name} — Military Defense`
     );
+  }
+
+  const survivingAttacker = findUnit(state, attacker!.instanceId);
+  if (
+    (targetResult.destroyed || targetResult.grounded) &&
+    survivingAttacker &&
+    !survivingAttacker.grounded
+  ) {
+    registerMilitaryWinMutable(state, playerId);
   }
 
   if (
@@ -3365,11 +3860,18 @@ function politicalAttackMutable(
       attacker!.instanceId
     );
 
+  const conflictBonus = beginConflictMutable(
+    state,
+    playerId,
+    attacker!,
+    "political"
+  );
+
   const attackerPoliticalPower =
     getPoliticalPower(
       state,
       attacker!
-    );
+    ) + conflictBonus.influenceBonus;
 
   assertRule(
     attackerPoliticalPower > 0,
@@ -3505,7 +4007,7 @@ function politicalAttackMutable(
   }
 
   const defenderPoliticalPower =
-    getPoliticalPower(
+    politicalDefensePower(
       state,
       defender!
     );
@@ -3720,6 +4222,7 @@ function processManderDelayedEffects(
     state.delayedEffects
   ) {
     if (
+      effect.type !== "manders-pact-draw" ||
       effect.triggerPlayerId !==
       playerId
     ) {
@@ -3758,6 +4261,51 @@ function processManderDelayedEffects(
 
   state.delayedEffects =
     remaining;
+}
+
+function processSunspearDelayedEffects(
+  state: GameState,
+  playerId: PlayerId
+) {
+  const remaining: DelayedEffect[] = [];
+
+  for (const effect of state.delayedEffects) {
+    if (
+      effect.type !== "sunspear-poison" ||
+      effect.triggerPlayerId !== playerId
+    ) {
+      remaining.push(effect);
+      continue;
+    }
+
+    const target = findUnit(state, effect.targetUnitInstanceId);
+    if (!target) {
+      continue;
+    }
+
+    logAbilityActivation(
+      state,
+      "sunspear",
+      "sunspear",
+      playerId,
+      `${getGameCard(target.cardId).name} takes 1 poison damage after the normal draw.`
+    );
+
+    damageUnitMutable(
+      state,
+      target.instanceId,
+      1,
+      "ability",
+      "The Viper's Kiss"
+    );
+
+    const triggersLeft = Math.max(0, (effect.remainingTriggers ?? 1) - 1);
+    if (triggersLeft > 0 && findUnit(state, target.instanceId)) {
+      remaining.push({ ...effect, remainingTriggers: triggersLeft });
+    }
+  }
+
+  state.delayedEffects = remaining;
 }
 
 // ─────────────────────────────────────────────
@@ -3876,17 +4424,18 @@ function recoverGroundedDragons(
 
     const maximum =
       getMaximumHealth(
+        state,
         unit
       );
 
     const before =
       unit.currentHealth;
 
-    unit.currentHealth =
-      Math.min(
-        maximum,
-        before + 1
-      );
+    healUnitMutable(
+      state,
+      unit,
+      1
+    );
 
     const threshold =
       Math.ceil(
@@ -4056,6 +4605,70 @@ function processWeylarStartOfTurn(
 }
 
 // ─────────────────────────────────────────────
+// Highgarden
+// ─────────────────────────────────────────────
+
+function resetHighgardenProgressMutable(
+  state: GameState
+) {
+  for (const playerId of ["player1", "player2"] as PlayerId[]) {
+    for (const unit of state.players[playerId].board) {
+      delete unit.counters["highgarden-retained-turns"];
+    }
+  }
+}
+
+function processHighgardenEndOfTurn(
+  state: GameState,
+  playerId: PlayerId
+) {
+  if (state.activeLocation?.cardId !== "highgarden") {
+    return;
+  }
+
+  for (const unit of state.players[playerId].board) {
+    if (getGameCard(unit.cardId).cardType !== "character") {
+      continue;
+    }
+
+    const turns = (unit.counters["highgarden-retained-turns"] ?? 0) + 1;
+    unit.counters["highgarden-retained-turns"] = turns;
+
+    if (![2, 4, 6].includes(turns)) {
+      continue;
+    }
+
+    const gains = unit.counters["highgarden-influence-gains"] ?? 0;
+    if (gains >= 3) {
+      continue;
+    }
+
+    const before = getPoliticalPower(state, unit);
+    addCharacterModifierMutable(
+      state,
+      playerId,
+      unit,
+      {
+        id: nextRuntimeId(state, "highgarden"),
+        influence: 1,
+        permanent: true,
+      }
+    );
+    unit.counters["highgarden-influence-gains"] = gains + 1;
+
+    const after = getPoliticalPower(state, unit);
+
+    logAbilityActivation(
+      state,
+      "highgarden",
+      "highgarden",
+      playerId,
+      `${getGameCard(unit.cardId).name} grows stronger and gains +${after - before} Influence permanently. (${turns}/6 retained turns)`
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
 // Start Turn
 // ─────────────────────────────────────────────
 
@@ -4073,8 +4686,18 @@ function startTurnMutable(
 
   player.turnsTaken += 1;
 
-  player.eventsPlayedThisTurn =
-    0;
+  player.eventsPlayedThisTurn = 0;
+  player.conflictsInitiatedThisTurn = 0;
+  player.militaryConflictsInitiatedThisTurn = 0;
+  player.starfallCharacterConflictUsedThisTurn = false;
+  player.militaryWinsThisTurn = 0;
+  player.charactersDeployedThisTurn = 0;
+  player.oldtownModifierUsedThisTurn = false;
+  player.sunspearPoisonAppliedThisTurn = false;
+  player.tyroshTradeUsedThisTurn = false;
+  player.characterDestroyedDuringOpponentPreviousTurn =
+    player.characterDestroyedDuringOpponentTurn ?? false;
+  player.characterDestroyedDuringOpponentTurn = false;
 
   resetPerTurnCounters(
     state
@@ -4121,31 +4744,30 @@ function startTurnMutable(
     playerId
   );
 
+  processSunspearDelayedEffects(state, playerId);
+
   player.maxCommand =
     Math.min(
       MAX_COMMAND,
       player.maxCommand + 1
     );
 
-  const bonus =
-    player.nextCommandBonus;
+  const bonus = player.nextCommandBonus;
+  const uncappedBonus = player.nextCommandBonusUncapped ?? 0;
 
   player.command =
     Math.min(
       MAX_COMMAND,
-      player.maxCommand +
-        bonus
-    );
+      player.maxCommand + bonus
+    ) + uncappedBonus;
 
-  player.nextCommandBonus =
-    0;
+  player.nextCommandBonus = 0;
+  player.nextCommandBonusUncapped = 0;
 
-  if (
-    bonus > 0
-  ) {
+  if (bonus > 0 || uncappedBonus > 0) {
     addLog(
       state,
-      `Command refills to ${player.command}. (${player.maxCommand} base + ${bonus} bonus)`,
+      `Command refills to ${player.command}. (${player.maxCommand} base${bonus > 0 ? ` + ${bonus} bonus` : ""}${uncappedBonus > 0 ? ` + ${uncappedBonus} Iron Bank` : ""})`,
       playerId
     );
   } else {
@@ -4182,69 +4804,93 @@ function readyAllUnitsMutable(
   }
 }
 
+function finishEndTurnMutable(
+  state: GameState
+) {
+  const playerId = state.activePlayerId;
+  const player = state.players[playerId];
+
+  addLog(
+    state,
+    `${playerName(playerId)} ends Turn ${player.turnsTaken}.`,
+    playerId
+  );
+
+  processWeylarEndOfTurnProgress(state, playerId);
+  processHighgardenEndOfTurn(state, playerId);
+
+  if (
+    state.activeLocation?.cardId === "braavos" &&
+    player.command >= 1
+  ) {
+    player.nextCommandBonusUncapped =
+      (player.nextCommandBonusUncapped ?? 0) + 1;
+    logAbilityActivation(
+      state,
+      "braavos",
+      "braavos",
+      playerId,
+      "At least 1 Command was left unspent; +1 Command is banked for the next turn."
+    );
+  }
+
+  player.tyroshTradeUsedPreviousOwnTurn =
+    player.tyroshTradeUsedThisTurn ?? false;
+
+  expireHandModifiersAtEnd(state, playerId);
+  expireUnitModifiersAtEnd(state, playerId);
+
+  for (const unit of player.board) {
+    unit.deployedThisTurn = false;
+    unit.flags["driftmark-swift"] = false;
+  }
+
+  readyAllUnitsMutable(state);
+
+  // Unspent Command does not carry into another player's turn. Braavos stores
+  // only its explicit +1 bonus via nextCommandBonusUncapped.
+  player.command = 0;
+
+  const nextPlayer = opponentOf(playerId);
+  state.turnNumber += 1;
+  startTurnMutable(state, nextPlayer);
+}
+
 function endTurnMutable(
   state: GameState
 ) {
-  const playerId =
-    state.activePlayerId;
+  const playerId = state.activePlayerId;
+  const player = state.players[playerId];
 
   assertRule(
     !state.pendingEffect,
     "Resolve the pending ability before ending the turn."
   );
 
-  addLog(
-    state,
-    `${playerName(playerId)} ends Turn ${state.players[playerId].turnsTaken}.`,
-    playerId
-  );
+  const tyroshEligible =
+    state.activeLocation?.cardId === "tyrosh" &&
+    !(player.tyroshTradeUsedPreviousOwnTurn ?? false) &&
+    player.hand.length > 0;
 
-  processWeylarEndOfTurnProgress(
-    state,
-    playerId
-  );
+  if (tyroshEligible) {
+    state.pendingEffect = {
+      id: nextRuntimeId(state, "pending"),
+      controllerId: playerId,
+      sourceUnitInstanceId: null,
+      abilityId: "tyrosh",
+    };
 
-  expireHandModifiersAtEnd(
-    state,
-    playerId
-  );
-
-  expireUnitModifiersAtEnd(
-    state,
-    playerId
-  );
-
-  for (
-    const unit of
-    state.players[
-      playerId
-    ].board
-  ) {
-    unit.deployedThisTurn =
-      false;
+    logAbilityActivation(
+      state,
+      "tyrosh",
+      "tyrosh",
+      playerId,
+      "Choose a card to trade, or keep the current hand."
+    );
+    return;
   }
 
-  readyAllUnitsMutable(
-    state
-  );
-
-  // Unspent Command does not carry into
-  // another player's turn.
-  state.players[
-    playerId
-  ].command = 0;
-
-  const nextPlayer =
-    opponentOf(
-      playerId
-    );
-
-  state.turnNumber += 1;
-
-  startTurnMutable(
-    state,
-    nextPlayer
-  );
+  finishEndTurnMutable(state);
 }
 
 // ─────────────────────────────────────────────
@@ -4268,6 +4914,19 @@ function createPlayer(
     command: 0,
 
     nextCommandBonus: 0,
+    nextCommandBonusUncapped: 0,
+
+    conflictsInitiatedThisTurn: 0,
+    militaryConflictsInitiatedThisTurn: 0,
+    starfallCharacterConflictUsedThisTurn: false,
+    militaryWinsThisTurn: 0,
+    charactersDeployedThisTurn: 0,
+    oldtownModifierUsedThisTurn: false,
+    sunspearPoisonAppliedThisTurn: false,
+    characterDestroyedDuringOpponentTurn: false,
+    characterDestroyedDuringOpponentPreviousTurn: false,
+    tyroshTradeUsedPreviousOwnTurn: false,
+    tyroshTradeUsedThisTurn: false,
 
     deck:
       shuffle(deck),

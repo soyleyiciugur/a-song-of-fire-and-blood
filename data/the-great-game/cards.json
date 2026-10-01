@@ -284,7 +284,7 @@
     "id": "harbor-cutthroat",
     "cardType": "character",
     "tierId": "c",
-    "name": "Harbor Cutthroat",
+    "name": "Hull Bladesman",
     "cost": 2,
     "strength": 2,
     "influence": 0,
@@ -299,7 +299,8 @@
       "tempo"
     ],
     "generic": true,
-    "balanceStatus": "provisional"
+    "balanceStatus": "provisional",
+    "houseId": "velaryon"
   },
   {
     "id": "gatehouse-guard",
@@ -2244,30 +2245,11 @@
     ]
   },
   {
-    "id": "dragonstone",
-    "cardType": "location",
-    "tierId": "a",
-    "name": "Dragonstone",
-    "cost": 5,
-    "traits": [],
-    "abilities": [
-      {
-        "id": "dragonstone",
-        "name": "Dragonstone",
-        "trigger": "passive",
-        "text": "All Dragons cost 1 less."
-      }
-    ],
-    "roles": [
-      "support"
-    ]
-  },
-  {
     "id": "kings-landing",
     "cardType": "location",
     "tierId": "a",
     "name": "King's Landing",
-    "cost": 5,
+    "cost": 2,
     "traits": [],
     "abilities": [
       {
@@ -2278,28 +2260,263 @@
       }
     ],
     "roles": [
-      "political"
-    ]
+      "political",
+      "support"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "dragonstone",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Dragonstone",
+    "cost": 2,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "dragonstone",
+        "name": "Dragonstone",
+        "trigger": "passive",
+        "text": "Dragons cost 1 less Command."
+      }
+    ],
+    "roles": [
+      "support",
+      "tempo"
+    ],
+    "balanceStatus": "provisional"
   },
   {
     "id": "oldtown",
     "cardType": "location",
     "tierId": "a",
     "name": "Oldtown",
-    "cost": 5,
+    "cost": 3,
     "traits": [],
     "abilities": [
       {
         "id": "oldtown",
-        "name": "Oldtown",
+        "name": "The Maester's Chain",
         "trigger": "passive",
-        "text": "The first normal Event each Ruler plays on their turn costs 1 less."
+        "text": "The first time each Ruler gives a Character a positive Strength, Influence, or Health modifier each turn, increase that modifier by 1."
       }
     ],
     "roles": [
       "value",
       "support"
-    ]
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "winterfell",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Winterfell",
+    "cost": 2,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "winterfell",
+        "name": "The North Remembers",
+        "trigger": "passive",
+        "text": "If one of a Ruler's Characters was destroyed during their opponent's previous turn, the first Character they use to initiate a Conflict this turn gets +1 Strength and +1 Influence for that Conflict."
+      }
+    ],
+    "roles": [
+      "military",
+      "support"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "starfall",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Starfall",
+    "cost": 2,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "starfall",
+        "name": "Starfall",
+        "trigger": "passive",
+        "text": "The first Character each Ruler uses to initiate a Military Conflict on their turn gets +1 Strength for that Conflict."
+      }
+    ],
+    "roles": [
+      "military",
+      "tempo"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "driftmark",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Driftmark",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "driftmark",
+        "name": "Lord of the Tides",
+        "trigger": "passive",
+        "text": "The first Character each Ruler deploys on their turn gains Swift until the end of that turn."
+      }
+    ],
+    "roles": [
+      "military",
+      "tempo"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "storms-end",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Storm's End",
+    "cost": 2,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "storms-end",
+        "name": "The Stag's Hunt",
+        "trigger": "passive",
+        "text": "The first time each Ruler wins a Military Conflict on their turn, restore 1 Standing."
+      }
+    ],
+    "roles": [
+      "military",
+      "value"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "highgarden",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Highgarden",
+    "cost": 4,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "highgarden",
+        "name": "Growing Stronger",
+        "trigger": "passive",
+        "text": "While Highgarden is active, a Character that remains in play for 2, 4, and 6 of its Ruler's turns permanently gains +1 Influence at each threshold, to a maximum of +3 Influence. If Highgarden leaves play, progress toward these thresholds resets; Influence already gained remains."
+      }
+    ],
+    "roles": [
+      "political",
+      "value",
+      "support"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "riverrun",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Riverrun",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "riverrun",
+        "name": "Riverrun",
+        "trigger": "passive",
+        "text": "Defending Characters have +1 Strength and +1 Influence during Conflicts."
+      }
+    ],
+    "roles": [
+      "defensive",
+      "support"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "sunspear",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Sunspear",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "sunspear",
+        "name": "The Viper's Kiss",
+        "trigger": "passive",
+        "text": "The first time each Ruler deals 3 or more Military damage to a Character in a single Conflict on their turn, poison that Character. After that Ruler's normal draw on each of their next 2 turns, the poisoned Character takes 1 damage."
+      }
+    ],
+    "roles": [
+      "military",
+      "control"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "castle-black",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Castle Black",
+    "cost": 2,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "castle-black",
+        "name": "Watcher on the Walls",
+        "trigger": "passive",
+        "text": "Characters with Guard have +1 Health."
+      }
+    ],
+    "roles": [
+      "defensive",
+      "support"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "braavos",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Braavos",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "braavos",
+        "name": "The Iron Bank",
+        "trigger": "passive",
+        "text": "If a Ruler ends their turn with at least 1 unspent Command, they gain +1 additional Command on their next turn. This bonus may exceed the normal Command maximum."
+      }
+    ],
+    "roles": [
+      "resource",
+      "value"
+    ],
+    "balanceStatus": "provisional"
+  },
+  {
+    "id": "tyrosh",
+    "cardType": "location",
+    "tierId": "a",
+    "name": "Tyrosh",
+    "cost": 3,
+    "traits": [],
+    "abilities": [
+      {
+        "id": "tyrosh",
+        "name": "Tyroshi Trade",
+        "trigger": "end-of-turn",
+        "text": "At the end of each Ruler's turn, if they did not use Tyroshi Trade during their previous own turn, they may discard a card. If they do, draw a card; the drawn card costs 1 less Command while it remains in hand."
+      }
+    ],
+    "roles": [
+      "value",
+      "utility"
+    ],
+    "balanceStatus": "provisional"
   },
   {
     "id": "royal-favor",
@@ -2514,7 +2731,7 @@
       "military",
       "support"
     ],
-    "subtitle": "Ironborn Reaver",
+    "subtitle": "Lord of Harlaw",
     "linkedCharacterId": "drack-harlaw",
     "houseId": "harlaw"
   },

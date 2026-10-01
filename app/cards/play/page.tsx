@@ -58,6 +58,7 @@ import type {
 import type {
   GreatGameOnlineMatchSummary,
   GreatGameOnlineMatchView,
+  GreatGameOnlineStatePatch,
 } from "@/lib/the-great-game/online";
 import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
@@ -818,6 +819,12 @@ export default function GreatGamePlayPage() {
     onlineMatch,
     setOnlineMatch,
   ] = useState<GreatGameOnlineMatchView | null>(null);
+
+  const onlineMatchRef = useRef<GreatGameOnlineMatchView | null>(null);
+
+  useEffect(() => {
+    onlineMatchRef.current = onlineMatch;
+  }, [onlineMatch]);
 
   const [
     onlineMatches,
@@ -1663,16 +1670,35 @@ export default function GreatGamePlayPage() {
     }
   }
 
+  function applyOnlineStatePatch(patch: GreatGameOnlineStatePatch) {
+    const current = onlineMatch;
+    if (!current || current.id !== patch.id) return;
+
+    const next: GreatGameOnlineMatchView = {
+      ...current,
+      status: patch.status,
+      version: patch.version,
+      state: patch.state,
+      updatedAt: patch.updatedAt,
+      completedAt: patch.completedAt,
+    };
+
+    applyOnlineMatchView(next);
+  }
+
   async function parseOnlineResponse(response: Response) {
     const payload = (await response.json().catch(() => ({}))) as {
       error?: string;
       match?: GreatGameOnlineMatchView | null;
+      statePatch?: GreatGameOnlineStatePatch | null;
       matches?: GreatGameOnlineMatchSummary[];
     };
 
     if (!response.ok) {
       if (payload.match) {
         applyOnlineMatchView(payload.match);
+      } else if (payload.statePatch) {
+        applyOnlineStatePatch(payload.statePatch);
       }
       throw new Error(payload.error ?? "Online play failed.");
     }
@@ -1694,17 +1720,22 @@ export default function GreatGamePlayPage() {
     }
   }
 
-  async function refreshOnlineMatch(matchId = onlineMatch?.id) {
+  async function refreshOnlineMatch(
+    matchId = onlineMatch?.id,
+    stateOnly = false
+  ) {
     if (!matchId) return;
 
     try {
       const response = await fetch(
-        `/api/great-game?match=${encodeURIComponent(matchId)}`,
+        `/api/great-game?match=${encodeURIComponent(matchId)}${stateOnly ? "&stateOnly=1" : ""}`,
         { cache: "no-store" }
       );
       const payload = await parseOnlineResponse(response);
       if (payload.match) {
         applyOnlineMatchView(payload.match);
+      } else if (payload.statePatch) {
+        applyOnlineStatePatch(payload.statePatch);
       }
     } catch (refreshError) {
       setError(
@@ -1853,6 +1884,18 @@ export default function GreatGamePlayPage() {
         applyOnlineMatchView(payload.match);
         return payload.match;
       }
+      if (payload.statePatch && onlineMatch) {
+        const next: GreatGameOnlineMatchView = {
+          ...onlineMatch,
+          status: payload.statePatch.status,
+          version: payload.statePatch.version,
+          state: payload.statePatch.state,
+          updatedAt: payload.statePatch.updatedAt,
+          completedAt: payload.statePatch.completedAt,
+        };
+        applyOnlineMatchView(next);
+        return next;
+      }
       return null;
     } catch (actionError) {
       setError(
@@ -1915,27 +1958,42 @@ export default function GreatGamePlayPage() {
           const detail = row.detail ?? {};
           const actorPlayerId = detail.actorPlayerId;
           const cardId = detail.cardId;
+          const eventVersion = Number(row.version ?? 0);
+          const currentMatch = onlineMatchRef.current;
+
+          // The actor normally already received this exact version in the POST
+          // response. Likewise, duplicate/replayed Realtime events should not
+          // cause another Supabase read. If the websocket beats the POST
+          // response, currentVersion is still behind and we safely refresh.
+          if (
+            currentMatch?.id === matchId &&
+            Number.isFinite(eventVersion) &&
+            eventVersion <= currentMatch.version
+          ) {
+            return;
+          }
+
           if (
             detail.kind === "play-card" &&
-            actorPlayerId !== onlineMatch?.playerId &&
+            actorPlayerId !== currentMatch?.playerId &&
             (actorPlayerId === "player1" || actorPlayerId === "player2") &&
             typeof cardId === "string"
           ) {
             setPendingOpponentPlay({
-              version: Number(row.version ?? 0),
+              version: eventVersion,
               actorPlayerId,
               cardId,
               boardInstanceId: typeof detail.boardInstanceId === "string" ? detail.boardInstanceId : null,
             });
           }
-          void refreshOnlineMatch(matchId);
+          void refreshOnlineMatch(matchId, true);
         }
       )
       .subscribe((status) => {
         // Re-fetch after the initial subscription and after a reconnect so a
         // missed websocket event cannot leave the table on a stale version.
         if (status === "SUBSCRIBED") {
-          void refreshOnlineMatch(matchId);
+          void refreshOnlineMatch(matchId, true);
         }
       });
 
@@ -3652,6 +3710,9 @@ export default function GreatGamePlayPage() {
 
         case "iron-wrath":
           return "ARRIVAL — Iron Wrath: choose another Unit.";
+
+        case "tyrosh":
+          return "Tyroshi Trade — discard one card to trade it, or Keep All.";
       }
     }
 
@@ -5406,7 +5467,8 @@ export default function GreatGamePlayPage() {
     );
 
   const veiledSightOpen = onlineCanAct && currentGame.pendingEffect?.abilityId === "veiled-sight";
-  const showRealmsPrompt = Boolean(prompt) && !veiledSightOpen && !showSelectedPreview && !inspectedUnit && !(inspectedHandCard && inspectedHandDefinition);
+  const tyroshTradeOpen = onlineCanAct && currentGame.pendingEffect?.abilityId === "tyrosh";
+  const showRealmsPrompt = Boolean(prompt) && !veiledSightOpen && !tyroshTradeOpen && !showSelectedPreview && !inspectedUnit && !(inspectedHandCard && inspectedHandDefinition);
 
   const playerEndTurnDisabled =
     !onlineCanAct ||
@@ -5782,6 +5844,63 @@ export default function GreatGamePlayPage() {
             <button type="button" className={styles.endTurnButton} disabled>Must Resolve</button>
           </div>
         </section>
+        </div>
+      )}
+
+      {tyroshTradeOpen && (
+        <div
+          className={styles.revealedHandBackdrop}
+          data-selection-ui="true"
+        >
+          <section
+            className={styles.revealedHandModal}
+            data-revealed-hand="true"
+            aria-label="Tyroshi Trade"
+          >
+            <div className={styles.revealedHandTitle}>
+              Tyroshi Trade — Your Hand
+            </div>
+
+            <div className={styles.revealedHandRows}>
+              {splitVeiledHand(viewPlayer.hand).map((row, rowIndex) => (
+                <HorizontalHand key={rowIndex}>
+                  {row.map((handCard) => {
+                    const card = getGameCard(handCard.cardId);
+                    return (
+                      <HandCardVisual
+                        key={handCard.instanceId}
+                        card={card}
+                        cost={getEffectiveCost(currentGame, viewPlayerId, handCard)}
+                        targetable
+                        onClick={() =>
+                          dispatch({
+                            type: "resolve-pending-effect",
+                            targetHandInstanceId: handCard.instanceId,
+                          })
+                        }
+                      />
+                    );
+                  })}
+                </HorizontalHand>
+              ))}
+            </div>
+
+            <div className={styles.revealedHandInstruction} role="status">
+              <span>Discard one card to draw a replacement at -1 Command while it remains in hand.</span>
+              <button
+                type="button"
+                className={styles.endTurnButton}
+                onClick={() =>
+                  dispatch({
+                    type: "resolve-pending-effect",
+                    decline: true,
+                  })
+                }
+              >
+                Keep All
+              </button>
+            </div>
+          </section>
         </div>
       )}
 
@@ -7839,6 +7958,7 @@ function BoardUnit({
 
   const maxHealth =
     getMaximumHealth(
+      state,
       unit
     );
 
@@ -8939,7 +9059,7 @@ function UnitDetailOverlay({
       >
         <div className={styles.detailExpandedInfo}>
           <CardInfoPanel card={card} activeTraits={activeTraits} artifactId={unit.attachedArtifactId}
-            runtimeStats={{ strength: getMilitaryPower(state, unit), influence: getPoliticalPower(state, unit), health: unit.currentHealth, maxHealth: getMaximumHealth(unit) }}
+            runtimeStats={{ strength: getMilitaryPower(state, unit), influence: getPoliticalPower(state, unit), health: unit.currentHealth, maxHealth: getMaximumHealth(state, unit) }}
             baseStats={{ strength: card.strength, influence: card.cardType === "character" ? card.influence : undefined, health: card.health }}
             showTraitTooltips />
         </div>

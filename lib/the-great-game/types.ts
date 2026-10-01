@@ -64,28 +64,112 @@ export type AbilityTrigger =
   | "bond";
 
 export type AbilityId =
-  | "a-son-forewarned"
+  | "rally-the-men"
+  | "command-the-room"
   | "silent-verdict"
   | "housebreaker"
   | "dawns-edge"
+  | "a-son-forewarned"
   | "manders-pact"
   | "as-i-was-saying"
   | "veiled-sight"
   | "iron-wrath"
   | "price-of-loyalty"
+  | "hidden-claim"
+  | "people-have-suffered-enough"
+  | "argumentative-one"
+  | "dangerous-name"
+  | "buried-secret"
+  | "dark-sisters-legacy"
+  | "the-confession"
+  | "you-never-saw-me"
+  | "playing-her-own-game"
+  | "starfalls-shadow"
+  | "our-fleet-is-yours"
+  | "the-gods-will-judge"
+  | "dreams-of-things-to-come"
+  | "innkeeper-another"
+  | "a-baratheon-kneels-when-he-feels-safe"
+  | "knights-of-oldtown"
+  | "the-last-name-standing"
+  | "gracious-in-defeat"
+  | "when-people-look-up"
+  | "he-asked-for-parley"
+  | "seven-feet-of-grievance"
+  | "im-no-knight-nor-lady"
+  | "experience-triumphs"
+  | "they-pass-over-real-men"
+  | "royal-blood"
+  | "dragonstones-quiet"
+  | "she-organized-the-whole-thing"
+  | "whereabouts-unknown"
+  | "death-in-his-own-bed"
+  | "deal-with-the-money"
+  | "safe-passage"
+  | "proud-of-his-name"
+  | "do-not-forget-it-my-lady"
+  | "they-are-utterly-fucked"
+  | "unintended"
+  | "an-unfortunate-accident"
+  | "a-drunken-mistake"
   | "bond-jacaelon"
   | "bond-saera"
   | "bond-baelenys"
+  | "word-in-the-right-ear"
   | "trial-by-combat"
   | "oldtown-massacre"
   | "brothers-tilt"
-  | "word-in-the-right-ear"
   | "blackfyre"
   | "at-your-throat"
-  | "dragonstone"
   | "kings-landing"
+  | "dragonstone"
   | "oldtown"
-  | "royal-favor";
+  | "winterfell"
+  | "starfall"
+  | "driftmark"
+  | "storms-end"
+  | "highgarden"
+  | "riverrun"
+  | "sunspear"
+  | "castle-black"
+  | "braavos"
+  | "tyrosh"
+  | "royal-favor"
+  | "winter-s-welcome"
+  | "a-moment-of-sight"
+  | "a-friend-summoned"
+  | "seen-from-the-doorway"
+  | "pull-him-clear"
+  | "hold-fast"
+  | "pay-the-iron-price"
+  | "read-the-crowd"
+  | "the-stage-remains"
+  | "perfect-timing"
+  | "quiet-protection"
+  | "promising-blade"
+  | "before-dawn"
+  | "guarded-questions"
+  | "know-when-enough-is-enough"
+  | "golden-rose-brooch"
+  | "starfall-s-shelter"
+  | "a-crown-of-command"
+  | "endure-the-crown"
+  | "dragonstone-household"
+  | "blood-of-the-crown"
+  | "the-lion-s-levy"
+  | "western-court"
+  | "ember-of-ashemark"
+  | "ironborn-defiance"
+  | "a-father-s-legacy"
+  | "north-and-dorne"
+  | "the-next-lord"
+  | "river-knight"
+  | "guard-the-household"
+  | "the-eyrie-s-pride"
+  | "a-debt-remembered"
+  | "dornish-patience"
+  | "unbowed-counsel"
+  | "tides-of-court";
 
 export type SpecialCardKind =
   | "royal-favor";
@@ -129,6 +213,8 @@ interface BaseCard {
   deckable?: boolean;
 
   special?: SpecialCardKind;
+
+  balanceStatus?: "provisional";
 }
 
 export interface CharacterCard
@@ -198,7 +284,8 @@ export interface RuntimeModifier {
 
 export type HandModifierExpiration =
   | "start-of-player-turn"
-  | "end-of-player-turn";
+  | "end-of-player-turn"
+  | "while-in-hand";
 
 export interface HandCostModifier {
   id: string;
@@ -230,6 +317,11 @@ export interface UnitState {
   ownerId: PlayerId;
 
   currentHealth: number;
+
+  // Remaining current Health that came from positive Health bonuses.
+  // Damage consumes this layer before base Health. Optional for backwards
+  // compatibility with saved games created before layered bonus Health.
+  bonusHealth?: number;
 
   exhausted: boolean;
 
@@ -268,6 +360,24 @@ export interface PlayerState {
 
   nextCommandBonus: number;
 
+  // Explicitly uncapped next-turn Command (currently used by Braavos).
+  nextCommandBonusUncapped?: number;
+
+  conflictsInitiatedThisTurn?: number;
+  militaryConflictsInitiatedThisTurn?: number;
+  starfallCharacterConflictUsedThisTurn?: boolean;
+  militaryWinsThisTurn?: number;
+  charactersDeployedThisTurn?: number;
+
+  oldtownModifierUsedThisTurn?: boolean;
+  sunspearPoisonAppliedThisTurn?: boolean;
+
+  characterDestroyedDuringOpponentTurn?: boolean;
+  characterDestroyedDuringOpponentPreviousTurn?: boolean;
+
+  tyroshTradeUsedPreviousOwnTurn?: boolean;
+  tyroshTradeUsedThisTurn?: boolean;
+
   deck: string[];
 
   hand: HandCardState[];
@@ -298,7 +408,8 @@ export interface ActiveLocationState {
 // ─────────────────────────────────────────────
 
 export type DelayedEffectType =
-  | "manders-pact-draw";
+  | "manders-pact-draw"
+  | "sunspear-poison";
 
 export interface DelayedEffect {
   id: string;
@@ -308,6 +419,8 @@ export interface DelayedEffect {
   triggerPlayerId: PlayerId;
 
   targetUnitInstanceId: string;
+
+  remainingTriggers?: number;
 }
 
 // ─────────────────────────────────────────────
@@ -319,12 +432,13 @@ export interface PendingEffectState {
 
   controllerId: PlayerId;
 
-  sourceUnitInstanceId: string;
+  sourceUnitInstanceId: string | null;
 
   abilityId:
     | "manders-pact"
     | "veiled-sight"
-    | "iron-wrath";
+    | "iron-wrath"
+    | "tyrosh";
 }
 
 // ─────────────────────────────────────────────
@@ -421,6 +535,8 @@ export interface ResolvePendingEffectAction {
   targetInstanceId?: string;
 
   targetHandInstanceId?: string;
+
+  decline?: boolean;
 }
 
 export interface MilitaryAttackAction {

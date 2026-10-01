@@ -32,6 +32,15 @@ export interface GreatGameOnlineMatchView {
   completedAt: string | null;
 }
 
+export interface GreatGameOnlineStatePatch {
+  id: string;
+  status: GreatGameMatchStatus;
+  version: number;
+  state: GameState | null;
+  updatedAt: string;
+  completedAt: string | null;
+}
+
 export interface GreatGameOnlineMatchSummary {
   id: string;
   code: string;

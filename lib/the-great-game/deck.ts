@@ -106,42 +106,68 @@ export function validateDeck(
 }
 
 export function createTestDeck(): string[] {
+  // Practice / feature-coverage mirror deck.
+  // Goals: a healthy early curve, examples of every core Character trait,
+  // Military + Political threats, late-game aura cards, Dragons, Events,
+  // Artifacts and two of the more interaction-heavy Locations.
   const deck: string[] = [
-    "jacaelon-targaryen",
-    "gaelor-targaryen",
-    "alester-dayne",
-    "renrose-tyrell",
-    "cordin-poole",
-    "saera-targaryen",
-    "baelenys-targaryen",
-    "weylar-rocke",
-    "jhagar",
+    // 1 Command — reliable opening plays and early trait coverage.
+    "dockside-runner",      // Swift
+    "little-bird",          // Schemer
+    "gate-sentry",          // Guard
+    "sept-initiate",        // Intrigue
+    "vale-spearman",        // vanilla baseline
+
+    // 2 Command — tempo, protection and glass-cannon pressure.
+    "harbor-cutthroat",     // Hull Bladesman; stable id kept for saved decks.
+    "court-whisperer",      // Schemer
+    "tourneyman-squire",    // Challenge
+    "gatehouse-guard",      // Guard
+    "ironborn-reaver",      // Greyjoy glass cannon
+
+    // 3 Command — Military / Political interaction.
+    "veteran-spearman",     // Challenge
+    "court-provocateur",    // Confront
+    "reach-courtier",       // Intrigue
+    "tully-river-guard",    // Guard
+
+    // Mid-game role coverage.
+    "silver-tongued-diplomat", // Confront
+    "orwell-morrigen",          // Guard + Experience Triumphs
+    "crown-envoy",              // Intrigue
+    "royal-spymaster",          // Intrigue + Confront
+
+    // Late-game passive and Dragon coverage.
+    "crownlands-champion",  // allied Strength / Health aura
+    "grand-counselor",      // allied Influence / Health aura
     "cloudgazer",
-    "maelwing",
-    "castle-swordsman",
-    "castle-swordsman",
-    "court-page",
-    "court-page",
-    "northern-warrior",
-    "baratheon-man-at-arms",
-    "dornish-sandshield",
-    "tully-river-guard",
-    "reach-courtier",
-    "lannister-red-cloak",
-    "vale-spearman",
+    "jhagar",
+
+    // Events — buffing, forced combat and board-wide damage.
     "word-in-the-right-ear",
     "trial-by-combat",
-    "oldtown-massacre",
     "brothers-tilt",
+    "oldtown-massacre",
+
+    // Artifacts.
     "blackfyre",
     "dark-sister",
-    "dragonstone",
+
+    // Locations — modifier amplification + delayed Military poison.
     "oldtown",
+    "sunspear",
   ];
 
   if (deck.length !== 30) {
     throw new Error(
       `Test deck construction error: expected 30 cards, got ${deck.length}.`
+    );
+  }
+
+  const validation = validateDeck(deck);
+  if (!validation.valid) {
+    throw new Error(
+      `Test deck validation error: ${validation.errors.join(" ")}`
     );
   }
 
