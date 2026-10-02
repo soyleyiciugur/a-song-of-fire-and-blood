@@ -25,6 +25,7 @@ import {
 } from "@/lib/adminDrafts";
 
 const ADMIN_NAV_ITEMS = [
+  { label: "Card Artwork", href: "/admin/card-artwork" },
   { label: "Chapters", href: "/admin/chapters" },
   { label: "Characters", href: "/admin/characters" }, // now also holds Family Tree as a tab
   { label: "Dragons", href: "/admin/dragons" },

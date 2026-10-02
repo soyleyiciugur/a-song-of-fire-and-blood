@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { GameCardFace, GameCardModal } from "@/components/cards/GameCardFace";
 import { getAllGameCards } from "@/lib/the-great-game/cards";
+import { DECK_STORAGE_KEY, readStoredDecks } from "@/lib/the-great-game/stored-decks";
 import type { GameCard } from "@/lib/the-great-game/types";
 import styles from "./decks.module.css";
 
@@ -13,7 +14,7 @@ type Card = GameCard & { balanceStatus?: string };
 type Deck = { id: string; name: string; cards: Record<string, number>; updatedAt: number };
 
 const ALL = getAllGameCards() as Card[];
-const STORAGE_KEY = "the-great-game:decks:v1";
+const STORAGE_KEY = DECK_STORAGE_KEY;
 const MAX_DECK = 30;
 const MAX_COPIES = 2;
 const LABEL: Record<CardType | "all", string> = {
@@ -217,15 +218,13 @@ export default function DecksPage() {
   const [availability, setAvailability] = useState<"deckable" | "non-deckable">("deckable");
   const [inspect, setInspect] = useState<string | null>(null);
   const [renaming, setRenaming] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]") as Deck[];
-      if (saved.length) { setDecks(saved); setSelectedId(saved[0].id); }
-      else { const d = makeDeck("First Deck"); setDecks([d]); setSelectedId(d.id); }
-    } catch {
-      const d = makeDeck("First Deck"); setDecks([d]); setSelectedId(d.id);
-    }
+    const saved = readStoredDecks();
+    setDecks(saved);
+    setSelectedId(saved[0].id);
+    setLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -236,9 +235,10 @@ export default function DecksPage() {
   }, []);
 
   useEffect(() => {
+    if (!loaded) return;
     if (decks.length) localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
     else localStorage.removeItem(STORAGE_KEY);
-  }, [decks]);
+  }, [decks, loaded]);
 
   const selected = decks.find(d => d.id === selectedId) ?? null;
   const total = countDeck(selected);

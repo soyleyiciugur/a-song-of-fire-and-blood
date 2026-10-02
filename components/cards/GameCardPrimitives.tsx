@@ -739,6 +739,8 @@ export function CardInfoPanel({
   activeTraits = [],
   artifactId,
   artifactBadgeDetailed = false,
+  artifactBadgeAbovePanel = false,
+  showArtifactBadge = true,
   runtimeStats,
   baseStats,
   actions,
@@ -751,6 +753,8 @@ export function CardInfoPanel({
   activeTraits?: Trait[];
   artifactId?: string | null;
   artifactBadgeDetailed?: boolean;
+  artifactBadgeAbovePanel?: boolean;
+  showArtifactBadge?: boolean;
   runtimeStats?: {
     strength: number;
     influence: number;
@@ -802,7 +806,14 @@ export function CardInfoPanel({
         .filter(Boolean)
         .join(" ")}
     >
-      <div className={`${styles.cardMetadata} ${artifactId ? styles.cardMetadataWithArtifact : ""}`}>
+      {artifactId && showArtifactBadge && artifactBadgeAbovePanel && (
+        <EquippedArtifactBadge
+          artifactId={artifactId}
+          detailed={artifactBadgeDetailed}
+        />
+      )}
+
+      <div className={`${styles.cardMetadata} ${artifactId && showArtifactBadge ? styles.cardMetadataWithArtifact : ""}`}>
       <div
         className={
           styles.cardIdentity
@@ -951,7 +962,7 @@ export function CardInfoPanel({
       </div>
 
 
-          {artifactId && (
+          {artifactId && showArtifactBadge && !artifactBadgeAbovePanel && (
             <EquippedArtifactBadge
               artifactId={artifactId}
               detailed={artifactBadgeDetailed}
@@ -1051,4 +1062,3 @@ function AbilityDisplay({
     </div>
   );
 }
-

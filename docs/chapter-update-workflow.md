@@ -70,6 +70,10 @@ A partial command must report which downstream stages remain pending.
    fields for newly established family members. Do not manufacture player-owned private beliefs merely to bring
    `data/character-inner-court.ts` or `character_inner_court` up to the latest
    chapter; update only thoughts established by the player or existing canon.
+   When age, death, portrait overrides, world date, or portrait assets change,
+   verify `/api/cards/portraits` and character artwork in TGG Cards, Decks, and
+   Play. Preserve manual framing in `data/the-great-game/artwork.json`; review
+   it visually when the selected age portrait changes.
 6. **Relationships** — update real changes reciprocally. Keep one-sided beliefs,
    manipulation, and misunderstandings in the correct character perspective.
 7. **Dragons** — update `data/dragons.json` and physical appearances separately.

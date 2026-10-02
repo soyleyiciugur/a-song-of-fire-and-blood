@@ -661,6 +661,26 @@
 @media (max-width: 650px) { .catalogModal { display: grid; grid-template-columns: minmax(0,1fr); max-height: 92dvh; overflow-y: auto; } }
 
 /* Four cards across on a normal desktop collection view. */
+.modalFrame { position: relative; width: min(800px, calc(100vw - 104px)); min-width: 0; }
+.modalFrame .catalogModal { width: 100%; }
+.modalArrow { position: absolute; top: 50%; z-index: 5; display: grid; place-items: center; width: 40px; height: 56px; padding: 0; transform: translateY(-50%); border: 1px solid #d6b86c70; border-radius: 0; background: #191419ee; color: #eed799; font: 36px/1 Georgia, serif; }
+.modalArrowPrev { left: -46px; }
+.modalArrowNext { right: -46px; }
+.modalArrow span { display:block; width:10px; height:10px; border-top:2px solid currentColor; border-right:2px solid currentColor; }
+.chevronPrev { transform:translateX(2px) rotate(-135deg); }
+.chevronNext { transform:translateX(-2px) rotate(45deg); }
+.modalArrow:hover, .modalArrow:focus-visible { background: #433028; color: #fff3d0; border-color: #e5c57b; outline: 1px solid #e5c57b; }
+.additionalAbility h3 { font-size: .9rem; line-height: 1.4; }
+.additionalAbility p { font-size: .95rem; line-height: 1.55; overflow-wrap: anywhere; }
+.catalogModal { background: #171317; }
+.page { background-color: #100d11; }
+.backdrop { opacity: .82; }
+@media (max-width: 650px) {
+  .modalFrame { width: calc(100vw - 72px); }
+  .modalArrow { width: 28px; height: 48px; }
+  .modalArrowPrev { left: -32px; }
+  .modalArrowNext { right: -32px; }
+}
 .cardGrid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: .85rem;

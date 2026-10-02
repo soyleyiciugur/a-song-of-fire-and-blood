@@ -67,6 +67,8 @@ import { CardArtwork } from "@/components/cards/CardArtwork";
 import { CardChrome, CardInfoPanel, CommandSigil, IndicatorIcon, tierStyle } from "@/components/cards/GameCardPrimitives";
 
 import { getTraitHighlights } from "@/lib/the-great-game/trait-highlights";
+import { readStoredDecks } from "@/lib/the-great-game/stored-decks";
+import { getPlacementPreview } from "@/lib/the-great-game/placement-preview";
 
 import styles from "./play.module.css";
 
@@ -81,8 +83,6 @@ type StoredDeck = {
   cards: Record<string, number>;
   updatedAt: number;
 };
-
-const GREAT_GAME_DECK_STORAGE_KEY = "the-great-game:decks:v1";
 
 function storedDeckCardIds(deck: StoredDeck | null): string[] | undefined {
   if (!deck) return undefined;
@@ -249,6 +249,7 @@ type CombatPreviewState = {
 };
 
 type ActionUnitPreview = {
+  influence?: number;
   damage?: number;
   heal?: number;
   dies?: boolean;
@@ -443,6 +444,12 @@ function humanizeModifierId(
 function modifierTitle(
   modifier: UnitModifier
 ): string {
+  if (
+    /^proud-of-his-name-\d+$/.test(modifier.id)
+  ) {
+    return "Proud of His Name";
+  }
+
   if (
     modifier.id.startsWith(
       "manders-pact-"
@@ -940,6 +947,8 @@ export default function GreatGamePlayPage() {
     useRef<PointerDragSession | null>(
       null
     );
+
+  const [placementIndex, setPlacementIndex] = useState<number | null>(null);
 
   const attackPointerRef =
     useRef<AttackPointerSession | null>(
@@ -1609,9 +1618,7 @@ export default function GreatGamePlayPage() {
   }
 
   const selectedStoredDeck =
-    onlineDeckId === "practice"
-      ? null
-      : storedDecks.find((deck) => deck.id === onlineDeckId) ?? null;
+    storedDecks.find((deck) => deck.id === onlineDeckId) ?? null;
 
   function applyOnlineMatchView(match: GreatGameOnlineMatchView) {
     const previousStateForMatch = onlineMatch?.id === match.id ? gameRef.current : null;
@@ -1912,9 +1919,7 @@ export default function GreatGamePlayPage() {
 
   useEffect(() => {
     try {
-      const parsed = JSON.parse(
-        localStorage.getItem(GREAT_GAME_DECK_STORAGE_KEY) ?? "[]"
-      ) as StoredDeck[];
+      const parsed = readStoredDecks();
       if (Array.isArray(parsed)) {
         // Hydrate browser-only deck storage after mount.
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -2006,6 +2011,15 @@ export default function GreatGamePlayPage() {
   }, [onlineMatch?.id, supabase]);
 
   function startNewGame() {
+    let nextGame: GameState;
+    try {
+      const practice = readStoredDecks().find(deck => deck.id === "practice") ?? null;
+      const cards = storedDeckCardIds(practice);
+      nextGame = createGame(cards, cards);
+    } catch (error) {
+      setOnlineMenuError(error instanceof Error ? error.message : "The practice deck is invalid.");
+      return;
+    }
     if (isMobileGameViewport()) {
       setTableEntryVisible(true);
       setTableEntryWaitingForLandscape(
@@ -2016,7 +2030,7 @@ export default function GreatGamePlayPage() {
 
     setOnlineMatch(null);
     setGame(
-      createGame()
+      nextGame
     );
 
     setMode(
@@ -2411,6 +2425,8 @@ export default function GreatGamePlayPage() {
     setDragCursor(null);
 
     setInspectedUnitId(null);
+    setActionPreview(null);
+    setCombatPreview(null);
 
     if (draws.length > 0) {
       startDrawSequence(
@@ -2817,7 +2833,7 @@ export default function GreatGamePlayPage() {
     });
   }
 
-  function confirmSelectedOnBoard() {
+  function confirmSelectedOnBoard(x?: number, y?: number) {
     if (
       !pendingPlay
     ) {
@@ -2833,13 +2849,16 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    const target = x !== undefined && y !== undefined ? getPointerDropTarget(x, y) : null;
     dispatch({
       type:
         "play-card",
 
       handInstanceId:
         pendingPlay.handInstanceId,
+      boardIndex: target?.kind === "board" ? target.boardIndex : placementIndex ?? undefined,
     });
+    setPlacementIndex(null);
   }
 
   function confirmSelectedPreview() {
@@ -2849,6 +2868,9 @@ export default function GreatGamePlayPage() {
 
     switch (pendingPlay.kind) {
       case "deploy":
+        setPlacementIndex(null);
+        setPendingPlay({ ...pendingPlay, hidePreview: true });
+        return;
       case "confirm":
         confirmSelectedOnBoard();
         return;
@@ -3906,7 +3928,8 @@ export default function GreatGamePlayPage() {
 
   function getPointerDropTarget(
     x: number,
-    y: number
+    y: number,
+    pointerCard?: HandCardState
   ): PointerDropTarget | null {
     const elements =
       document.elementsFromPoint(x, y);
@@ -3915,7 +3938,8 @@ export default function GreatGamePlayPage() {
       return null;
     }
 
-    const dragged = getDraggedHandCard();
+    const dragged = pointerCard ?? getDraggedHandCard() ?? (pendingPlay?.kind === "deploy" && pendingPlay.hidePreview
+      ? activePlayer.hand.find(card => card.instanceId === pendingPlay.handInstanceId) ?? null : null);
     const draggedCard = dragged
       ? getGameCard(dragged.cardId)
       : null;
@@ -4298,6 +4322,14 @@ export default function GreatGamePlayPage() {
       return;
     }
 
+    if (currentGame.pendingEffect?.abilityId === "manders-pact") {
+      setCombatPreview(null);
+      setActionPreview(isUnitTargetable(hoveredUnit) && onlineCanAct ? {
+        tone: "political", units: { [hoveredUnit.instanceId]: { influence: 2 } }, standing: {},
+      } : null);
+      return;
+    }
+
     if (
       currentGame.pendingEffect
         ?.abilityId ===
@@ -4307,12 +4339,7 @@ export default function GreatGamePlayPage() {
         currentGame.pendingEffect;
 
       if (
-        hoveredUnit.instanceId ===
-          effect.sourceUnitInstanceId ||
-        getGameCard(
-          hoveredUnit.cardId
-        ).cardType !==
-          "character"
+        hoveredUnit.instanceId === effect.sourceUnitInstanceId || !onlineCanAct
       ) {
         setActionPreview(null);
         return;
@@ -4896,7 +4923,7 @@ export default function GreatGamePlayPage() {
     y: number
   ) {
     const target =
-      getPointerDropTarget(x, y);
+      getPointerDropTarget(x, y, handCard);
 
     setDragCursor({
       x,
@@ -5441,8 +5468,7 @@ export default function GreatGamePlayPage() {
       : null;
 
   const canReceiveBoardPlay =
-    pendingPlay?.kind ===
-      "deploy" ||
+    (pendingPlay?.kind === "deploy" && pendingPlay.hidePreview) ||
     pendingPlay?.kind ===
       "confirm";
 
@@ -5459,6 +5485,18 @@ export default function GreatGamePlayPage() {
       draggedCardDefinition &&
         isUnitCard(draggedCardDefinition)
     );
+
+  const selectingPlacement = pendingPlay?.kind === "deploy" && pendingPlay.hidePreview;
+  const activePlacementIndex = draggingHandInstanceId && draggedCardIsPlaceableUnit && dragCursor?.canDrop
+    ? dragCursor.boardIndex ?? null : selectingPlacement ? placementIndex : null;
+  const placementHandId = draggingHandInstanceId ?? (selectingPlacement ? pendingPlay.handInstanceId : null);
+  const placementPreview = placementHandId && activePlacementIndex !== null
+    ? getPlacementPreview(currentGame, placementHandId, activePlacementIndex) : null;
+  const arrivalTargeting = currentGame.pendingEffect && onlineCanAct &&
+    ["iron-wrath", "manders-pact"].includes(currentGame.pendingEffect.abilityId);
+  const arrivalTargetId = arrivalTargeting ? Object.keys(actionPreview?.units ?? {})[0] : undefined;
+  const visibleHand = [...viewPlayer.hand].sort((a, b) =>
+    Number(getGameCard(b.cardId).special === "royal-favor") - Number(getGameCard(a.cardId).special === "royal-favor"));
 
   const canReceiveDraggedCard =
     draggedHandCard
@@ -5916,6 +5954,7 @@ export default function GreatGamePlayPage() {
 
       <Board
         className={styles.opponentBoardSection}
+        previewState={placementPreview}
         title="Opposing Realm"
         pointerDropBoard={Boolean(draggedHandCard && draggedCardDefinition && !isUnitCard(draggedCardDefinition) && canDropHandCardOnBoard(draggedHandCard))}
         units={
@@ -5979,6 +6018,12 @@ export default function GreatGamePlayPage() {
 
       <Board
         className={styles.playerBoardSection}
+        previewState={placementPreview}
+        onPlacementHover={selectingPlacement ? (x, y) => {
+          const target = getPointerDropTarget(x, y);
+          setPlacementIndex(target?.kind === "board" ? target.boardIndex ?? null : null);
+        } : undefined}
+        onPlacementLeave={selectingPlacement ? () => setPlacementIndex(null) : undefined}
         title="Your Realm"
         units={
           viewPlayer.board
@@ -5986,12 +6031,13 @@ export default function GreatGamePlayPage() {
         state={currentGame}
         highlightedTraits={highlightedTraits}
         targetable={
-          isUnitTargetable
+          unit => Boolean(selectingPlacement) || isUnitTargetable(unit)
         }
         onUnitClick={
-          handleUnitTarget
+          selectingPlacement ? () => confirmSelectedOnBoard() : handleUnitTarget
         }
         onInspectUnit={(unit) => {
+          if (selectingPlacement) { confirmSelectedOnBoard(); return; }
           if (
             !pendingPlay &&
             !pendingConflict &&
@@ -6016,13 +6062,7 @@ export default function GreatGamePlayPage() {
             : undefined
         }
         pointerDropBoard
-        dropIndex={
-          draggingHandInstanceId &&
-          draggedCardIsPlaceableUnit &&
-          dragCursor?.canDrop
-            ? dragCursor.boardIndex ?? null
-            : null
-        }
+        dropIndex={activePlacementIndex}
         canMilitaryAttack={(unit) =>
           !pendingPlay &&
           !pendingConflict &&
@@ -6159,6 +6199,11 @@ export default function GreatGamePlayPage() {
         />
       )}
 
+      {arrivalTargeting && currentGame.pendingEffect?.sourceUnitInstanceId && (
+        <ArrivalTargetOverlay sourceId={currentGame.pendingEffect.sourceUnitInstanceId}
+          targetId={arrivalTargetId} buff={currentGame.pendingEffect.abilityId === "manders-pact"} />
+      )}
+
       <section
         className={
           styles.handSection
@@ -6168,7 +6213,7 @@ export default function GreatGamePlayPage() {
           fanned
           active
         >
-          {viewPlayer.hand.map(
+          {visibleHand.map(
             (handCard, index) => (
               <HandCard
                 key={
@@ -6193,7 +6238,7 @@ export default function GreatGamePlayPage() {
                 }
                 fanIndex={index}
                 fanCount={
-                  viewPlayer.hand.length
+                  visibleHand.length
                 }
                 drawHidden={
                   hiddenDrawnIds.includes(
@@ -6612,6 +6657,7 @@ function MainMenu({
         </button>
       </div>
 
+      {!onlineOpen && onlineError && <div className={styles.onlineError} role="alert">{onlineError}</div>}
       {onlineOpen && (
         <section className={styles.onlinePanel} aria-label="Online game">
           <div className={styles.onlinePanelHeader}>
@@ -6629,7 +6675,7 @@ function MainMenu({
               onChange={(event) => onDeckChange(event.target.value)}
               disabled={onlineBusy}
             >
-              <option value="practice">Practice Deck</option>
+              {!decks.some(deck => deck.id === "practice") && <option value="practice">Practice Deck</option>}
               {decks.map((deck) => (
                 <option key={deck.id} value={deck.id}>
                   {deck.name}
@@ -7295,7 +7341,8 @@ function PlayerHeader({
 
         <HudStat
           label="Hand"
-          value={`${player.hand.length}/8`}
+          value={`${player.hand.filter(card => getGameCard(card.cardId).special !== "royal-favor").length}/8`}
+          royalFavor={player.hand.some(card => getGameCard(card.cardId).special === "royal-favor")}
           handAnchorPlayerId={
             playerId
           }
@@ -7384,6 +7431,7 @@ function HudStat({
   accent = false,
   deckAnchorPlayerId,
   handAnchorPlayerId,
+  royalFavor = false,
 }: {
   label: string;
   value:
@@ -7392,6 +7440,7 @@ function HudStat({
   accent?: boolean;
   deckAnchorPlayerId?: PlayerId;
   handAnchorPlayerId?: PlayerId;
+  royalFavor?: boolean;
 }) {
   return (
     <div
@@ -7411,8 +7460,9 @@ function HudStat({
         {label}
       </span>
 
-      <strong>
+      <strong className={styles.hudStatValue}>
         {value}
+        {royalFavor && <small className={styles.hudRoyalFavor} title="Royal Favor" aria-label="plus Royal Favor">+1</small>}
       </strong>
     </div>
   );
@@ -7529,6 +7579,9 @@ function CommandMeter({
 }
 
 function Board({
+  previewState,
+  onPlacementHover,
+  onPlacementLeave,
   className = "",
   title,
   units,
@@ -7556,6 +7609,9 @@ function Board({
   attackDrag,
   onUnitHover,
 }: {
+  previewState?: GameState | null;
+  onPlacementHover?: (x: number, y: number) => void;
+  onPlacementLeave?: () => void;
   className?: string;
   title: string;
   units: UnitState[];
@@ -7577,7 +7633,7 @@ function Board({
     unit: UnitState
   ) => ReactNode;
   canReceivePlay?: boolean;
-  onBoardClick?: () => void;
+  onBoardClick?: (x: number, y: number) => void;
   pointerDropBoard?: boolean;
   dropIndex?: number | null;
   attackStandingTarget?: boolean;
@@ -7643,6 +7699,10 @@ function Board({
 
       <div
         ref={boardRef}
+        data-selection-ui={canReceivePlay ? "true" : undefined}
+        onPointerDown={event => onPlacementHover?.(event.clientX, event.clientY)}
+        onPointerMove={event => onPlacementHover?.(event.clientX, event.clientY)}
+        onPointerLeave={onPlacementLeave}
         className={`${styles.board} ${
           units.length ? styles.populatedBoard : ""
         } ${
@@ -7652,7 +7712,7 @@ function Board({
         }`}
         onClick={
           canReceivePlay
-            ? onBoardClick
+            ? event => onBoardClick?.(event.clientX, event.clientY)
             : undefined
         }
         data-card-drop-board={
@@ -7704,6 +7764,7 @@ function Board({
               }
             >
             <BoardUnit
+              previewState={previewState}
               activeTraits={highlightedTraits(unit)}
               key={
                 unit.instanceId
@@ -7785,8 +7846,12 @@ function Board({
 
 function AttackDragOverlay({
   drag,
+  buff = false,
+  arrival = false,
 }: {
   drag: AttackDragState;
+  buff?: boolean;
+  arrival?: boolean;
 }) {
   const dx =
     drag.x -
@@ -7808,6 +7873,8 @@ function AttackDragOverlay({
     <div
       className={[
         styles.attackDragLayer,
+        arrival ? styles.arrivalTargetLayer : "",
+        buff ? styles.arrivalTargetBuff : "",
         drag.kind === "military"
           ? styles.attackDragMilitary
           : styles.attackDragPolitical,
@@ -7838,7 +7905,7 @@ function AttackDragOverlay({
         />
       </div>
 
-      <div
+      {!arrival && <div
         className={
           styles.attackDragBadge
         }
@@ -7862,13 +7929,48 @@ function AttackDragOverlay({
             ? "Military"
             : "Political"}
         </span>
-      </div>
+      </div>}
     </div>,
     document.body
   );
 }
 
+function ArrivalTargetOverlay({ sourceId, targetId, buff }: { sourceId: string; targetId?: string; buff: boolean }) {
+  const [drag, setDrag] = useState<AttackDragState | null>(null);
+  const pointer = useRef<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    let frame: number;
+    const move = (event: PointerEvent) => { pointer.current = { x: event.clientX, y: event.clientY }; };
+    const leave = () => { pointer.current = null; };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerdown", move);
+    document.documentElement.addEventListener("pointerleave", leave);
+    window.addEventListener("blur", leave);
+    const measure = () => {
+      const source = document.querySelector<HTMLElement>(`[data-unit-instance-id="${sourceId}"]`)?.getBoundingClientRect();
+      const point = pointer.current;
+      if (source && point) {
+        const next: AttackDragState = { attackerInstanceId: sourceId, kind: buff ? "political" : "military",
+          originX: source.left + source.width / 2, originY: source.top,
+          x: point.x, y: point.y, canDrop: Boolean(targetId), sourceHovered: false };
+        setDrag(previous => previous && previous.originX === next.originX && previous.originY === next.originY && previous.x === next.x && previous.y === next.y && previous.kind === next.kind && previous.canDrop === next.canDrop ? previous : next);
+      } else setDrag(null);
+      frame = requestAnimationFrame(measure);
+    };
+    frame = requestAnimationFrame(measure);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerdown", move);
+      document.documentElement.removeEventListener("pointerleave", leave);
+      window.removeEventListener("blur", leave);
+    };
+  }, [sourceId, targetId, buff]);
+  return drag ? <AttackDragOverlay drag={drag} buff={buff} arrival /> : null;
+}
+
 function BoardUnit({
+  previewState,
   unit,
   activeTraits,
   state,
@@ -7890,6 +7992,7 @@ function BoardUnit({
   onHover,
   actions,
 }: {
+  previewState?: GameState | null;
   unit: UnitState;
   activeTraits: Trait[];
   state: GameState;
@@ -7971,6 +8074,14 @@ function BoardUnit({
       state,
       unit
     );
+
+  const previewUnit = previewState?.players[unit.ownerId].board.find(candidate => candidate.instanceId === unit.instanceId);
+  const displayedStats = previewState && previewUnit ? {
+    strength: getMilitaryPower(previewState, previewUnit),
+    influence: getPoliticalPower(previewState, previewUnit),
+    health: previewUnit.currentHealth,
+    maxHealth: getMaximumHealth(previewState, previewUnit),
+  } : { strength, influence, health: unit.currentHealth, maxHealth };
 
   const weylarProgress =
     card.id ===
@@ -8286,6 +8397,9 @@ function BoardUnit({
             unit.instanceId
           ];
 
+        if (preview.influence) return <div className={`${styles.combatValuePreview} ${styles.combatValueBuff}`}><IndicatorIcon kind="political" />+{preview.influence}</div>;
+        if (state.pendingEffect?.abilityId === "iron-wrath" && preview.damage) return <div className={`${styles.combatValuePreview} ${styles.combatValueMilitary}`}><IndicatorIcon kind="military" />{preview.damage}</div>;
+
         if (preview.dies) {
           return (
             <div
@@ -8471,19 +8585,14 @@ function BoardUnit({
 
       <CardInfoPanel
         compact
+        artifactBadgeAbovePanel
         activeTraits={activeTraits}
         card={card}
         artifactId={
           unit.attachedArtifactId
         }
-        runtimeStats={{
-          strength,
-          influence,
-          health:
-            unit.currentHealth,
-          maxHealth,
-        }}
-        baseStats={{ strength: card.strength,
+        runtimeStats={displayedStats}
+        baseStats={previewState ? { strength, influence, health: maxHealth } : { strength: card.strength,
           influence:
             card.cardType === "character"
               ? card.influence
@@ -9068,7 +9177,7 @@ function UnitDetailOverlay({
         }
       >
         <div className={styles.detailExpandedInfo}>
-          <CardInfoPanel card={card} activeTraits={activeTraits} artifactId={unit.attachedArtifactId}
+          <CardInfoPanel card={card} activeTraits={activeTraits} artifactId={unit.attachedArtifactId} showArtifactBadge={false}
             runtimeStats={{ strength: getMilitaryPower(state, unit), influence: getPoliticalPower(state, unit), health: unit.currentHealth, maxHealth: getMaximumHealth(state, unit) }}
             baseStats={{ strength: card.strength, influence: card.cardType === "character" ? card.influence : undefined, health: card.health }}
             showTraitTooltips />

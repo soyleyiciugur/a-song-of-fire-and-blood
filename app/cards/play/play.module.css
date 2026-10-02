@@ -10,7 +10,10 @@
   font-family:
     var(--font-body),
     serif;
+}
 
+.game,
+.cardSurface {
   --realm-cursor:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 2.5 22 12l-7.2 2.1 4.2 8.1-3.6 1.8-4.1-8-5.6 5.3z' fill='%23c5a85a' stroke='%23110b08' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='m8.2 7.2 8.2 4.3-4.4 1.3z' fill='%23f5e6c8' opacity='.55'/%3E%3C/svg%3E") 3 3,
     auto;
@@ -22,6 +25,7 @@
   cursor: var(--realm-cursor);
 }
 
+.cardSurface button:not(:disabled),
 .game button:not(:disabled),
 .game [role="button"]:not([aria-disabled="true"]) {
   cursor: var(--realm-action-cursor);
@@ -7680,7 +7684,7 @@
 }
 /* Cosmetic realm artwork never changes the six deployment columns. */
 .boardGame .board {
-  background-image: linear-gradient(#09070a66, #09070a66), url('/images/cards/boards/targaryen-stark.webp');
+  background-image: linear-gradient(#09070a50, #09070a50), url('/images/cards/boards/targaryen-stark.webp');
   background-size: 100% 100%, 100% 200%;
   background-position: center, center bottom;
   border: 1px solid #756348;
@@ -7692,7 +7696,9 @@
 .boardGame .emptyBoard { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; pointer-events: none; }
 /* Compact table cards retain full text in their inspection views. */
 .boardGame .deckPile {
-  padding: 4px;
+  /* Reserve the eight-pixel stack offset inside its own grid column. */
+  padding: 4px 12px 12px 4px;
+  min-width: 0;
   /* Keep the offset stack edges above the adjacent hand shelf's background. */
   position: relative;
   z-index: 119;
@@ -7800,10 +7806,10 @@
 .skillProgressMeter, .skillProgress strong { flex-shrink: 0; }
 .boardGame .unitCard .unitActions button { padding-block: 1.5cqw; }
 .cardTypeRow { display: flex; align-items: center; justify-content: space-between; gap: 4px; min-width: 0; }
-.traitIcons { display: flex; align-items: center; justify-content: flex-end; gap: 3px; color: var(--tier-accent, #d4af37); }
-.traitIcons > span { display: inline-flex; align-items: center; justify-content: center; width: 11px; height: 11px; padding: 0; border: 0; background: transparent; }
+.traitIcons { --keyword-icon-scale: 1.5; display: flex; align-items: center; justify-content: flex-end; gap: 3px; color: var(--tier-accent, #d4af37); }
+.traitIcons > span { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: calc(11px * var(--keyword-icon-scale)); height: calc(11px * var(--keyword-icon-scale)); padding: 0; border: 0; background: transparent; }
 .traitIcons svg { display: block; width: 100%; height: 100%; }
-.selectedCardInner .traitIcons > span, .unitDetailCard .traitIcons > span { width: 15px; height: 15px; }
+.selectedCardInner .traitIcons > span, .unitDetailCard .traitIcons > span { width: calc(15px * var(--keyword-icon-scale)); height: calc(15px * var(--keyword-icon-scale)); }
 .traitTooltipPortal > strong { display: block; margin-bottom: 4px; color: #dfc07a; }
 .tierBadge, .selectedCardInner .tierBadge, .unitDetailCard .tierBadge,
 .boardGame :is(.handCard, .unitCard) .tierBadge { min-width: 1.3rem; height: .94rem; padding: .09rem .25rem 0; font-size: .5rem; border-radius: 0; }
@@ -7828,7 +7834,7 @@
   .boardGame .opponentStatusDock { padding-top: 2px; }
   .boardGame .opponentStatusIdentity { gap: 1px; }
   .boardGame .locationBar > div { gap: 1px; }
-  .traitIcons > span { width: 8px; height: 8px; }
+  .traitIcons > span { width: calc(15px * var(--keyword-icon-scale)); height: calc(15px * var(--keyword-icon-scale)); }
   .boardGame .unitCard .skillProgress { font-size: 4px; min-height: 7px; padding-block: 1px; gap: 1px; }
   .boardGame .unitCard .skillProgress strong { min-width: 10px; }
   .boardGame .unitCard .skillProgressMeter { gap: 1px; }
@@ -7924,7 +7930,7 @@
 .boardGame .handCard .cost { top: 3cqw; left: 3cqw; width: 18cqw; height: 18cqw; }
 .boardGame :is(.handCard, .unitCard) .cardInfoPanel { --trait-icon-size: 5.5cqw; }
 .boardGame :is(.handCard, .unitCard) .traitIcons { gap: 1.5cqw; }
-.boardGame :is(.handCard, .unitCard) .traitIcons > span { width: 5.5cqw; height: 5.5cqw; }
+.boardGame :is(.handCard, .unitCard) .traitIcons > span { width: calc(5.5cqw * var(--keyword-icon-scale)); height: calc(5.5cqw * var(--keyword-icon-scale)); }
 .boardGame :is(.handCard, .unitCard) .cardTypeRow { gap: 2cqw; }
 .boardGame :is(.handCard, .unitCard) .cardIdentity > strong { font-size: 5.5cqw; }
 .boardGame :is(.handCard, .unitCard) .cardIdentity > small { font-size: 3.5cqw; }
@@ -7978,7 +7984,7 @@
   min-height: 0;
   padding: 2.2cqw 3cqw;
   gap: 1cqw;
-  overflow: hidden;
+  overflow: visible;
   transition: min-height 260ms cubic-bezier(.2,.75,.2,1);
 }
 .boardGame .unitCard .cardInfoCompact .cardIdentity { grid-template-rows: auto auto; }
@@ -8038,7 +8044,7 @@
 .selectedCardInner .cardStats, .unitDetailCard .cardStats { font-size: 5cqw; }
 .selectedCardInner .cardStatIcon, .unitDetailCard .cardStatIcon { width: 5cqw; height: 5cqw; }
 .selectedCardInner .traitIcons, .unitDetailCard .traitIcons { gap: 1.5cqw; }
-.selectedCardInner .traitIcons > span, .unitDetailCard .traitIcons > span { width: 5.5cqw; height: 5.5cqw; }
+.selectedCardInner .traitIcons > span, .unitDetailCard .traitIcons > span { width: calc(5.5cqw * var(--keyword-icon-scale)); height: calc(5.5cqw * var(--keyword-icon-scale)); }
 .selectedCardInner .abilityDisplay p, .unitDetailCard .abilityDisplay p { font-size: 4.2cqw; }
 .selectedCardInner .uniqueMark, .unitDetailCard .uniqueMark { width: 8cqw; height: 8cqw; font-size: 6cqw; top: 2cqw; right: 2cqw; }
 .selectedCardInner .cost, .unitDetailCard .cost { width: 12cqw; height: 12cqw; top: 2cqw; left: 2cqw; }
@@ -8095,6 +8101,10 @@
 .boardGame .handCard .cardInfoPanel.cardInfoCompact, .revealedHandModal .handCard .cardInfoPanel.cardInfoCompact { height: auto; min-height: 0; padding: 2.2cqw 3cqw; gap: 1cqw; overflow: visible; transition: min-height 260ms cubic-bezier(.2,.75,.2,1); }
 .boardGame .handCard .cardInfoCompact .cardIdentity, .revealedHandModal .handCard .cardInfoCompact .cardIdentity { grid-template-rows: auto auto; }
 .boardGame .handCard .cardInfoCompact .cardStats, .revealedHandModal .handCard .cardInfoCompact .cardStats { margin-top: 1cqw; }
+.boardGame .handCard .cardInfoCompact .abilityHeading {
+  padding-block: .16em .08em;
+  line-height: 1.2;
+}
 .boardGame .handCard .cardInfoCompact .abilityDisplay, .boardGame .handCard .cardInfoCompact .cardFooter, .revealedHandModal .handCard .cardInfoCompact .abilityDisplay, .revealedHandModal .handCard .cardInfoCompact .cardFooter { display: none; }
 @media (hover: hover) and (pointer: fine) {
   .boardGame .handCardSlot:hover .handCard:has(.cardInfoCompact .abilityDisplay:not(.emptyAbility)) .cardInfoCompact { min-height: 60%; }
@@ -8151,7 +8161,7 @@
 .standaloneCard .cardStat { height: auto; gap: 1cqw; }
 .standaloneCard .cardStatIcon { display: inline-flex; width: 5cqw; height: 5cqw; flex: 0 0 5cqw; font-size: inherit; }
 .standaloneCard .traitIcons { gap: 1.5cqw; }
-.standaloneCard .traitIcons > span { width: 5.5cqw; height: 5.5cqw; }
+.standaloneCard .traitIcons > span { width: calc(5.5cqw * var(--keyword-icon-scale)); height: calc(5.5cqw * var(--keyword-icon-scale)); }
 .standaloneCard .tierBadge { min-width: 10cqw; height: 7.5cqw; padding: .7cqw 1.2cqw 0; font-size: 4cqw; top: -.7cqw; border-radius: 0; }
 .standaloneCard .cost { top: 3cqw; left: 3cqw; width: 18cqw; height: 18cqw; }
 .standaloneCard .uniqueMark { top: 2cqw; right: 2cqw; width: 8cqw; height: 8cqw; font-size: 6cqw; }
@@ -8328,3 +8338,100 @@
   .boardGame .unitCard .cardInfoPanel.cardInfoCompact,
   .selectedCardInner .cardInfoPanel.cardInfoCompact { transition: none; }
 }
+
+/* Detail text has its own readable scale, independent of the board pieces. */
+.unitDetailEffects {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  background-color: #211b20;
+  background-image: linear-gradient(180deg, #251e23, #171317);
+}
+.detailExpandedInfo .cardInfoPanel .cardIdentity > strong { font-size: 1.2rem; line-height: 1.3; white-space: normal; overflow: visible; display: block; }
+.detailExpandedInfo .cardIdentity { height: auto; grid-template-rows: auto auto; }
+.detailExpandedInfo .cardIdentity > small,
+.detailExpandedInfo .cardType { font-size: .8rem; line-height: 1.4; white-space: normal; }
+.detailExpandedInfo .cardTypeRow { flex-wrap: wrap; gap: .5rem; }
+.detailExpandedInfo .cardInfoPanel .abilityDisplay p { font-size: .95rem; line-height: 1.55; display: block; overflow: visible; }
+.detailExpandedInfo .abilityDisplay strong { font-size: .85rem; line-height: 1.4; white-space: normal; }
+.detailExpandedInfo .abilityHeading { flex-wrap: wrap; white-space: normal; overflow: visible; }
+.detailExpandedInfo .abilityHeading span { font-size: .65rem; }
+.detailExpandedInfo .abilityHeading strong { overflow: visible; text-overflow: clip; }
+.detailExpandedInfo .traitIcons { flex-wrap: wrap; }
+.detailExpandedInfo .traitIcons > span { width: calc(20px * var(--keyword-icon-scale)); height: calc(20px * var(--keyword-icon-scale)); }
+.detailExpandedInfo .cardStats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem; height: auto; margin-top: .8rem; font-size: 1.15rem; }
+.detailExpandedInfo .cardStat { display: grid; grid-template-columns: 1.15rem minmax(0, 3.5ch); justify-content: center; align-items: center; gap: .35rem; min-width: 0; height: auto; }
+.detailExpandedInfo .cardStatIcon { width: 1.15rem; height: 1.15rem; margin: 0; }
+.detailExpandedInfo .cardStat b { min-width: 0; text-align: center; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.unitDetailEffects .effectDetailRow > span { font-size: .7rem; letter-spacing: 0; }
+.unitDetailEffects .effectDetailRow > strong { font-size: .9rem; }
+.unitDetailEffects .effectDetailRow > p,
+.unitDetailEffects .noEffects { font-size: .95rem; line-height: 1.55; }
+.detailCornerClose { width: 24px; height: 24px; padding: 0; display: grid; place-items: center; }
+.detailCornerClose:hover,
+.detailCornerClose:focus-visible { color: #fff1c9; background: #493329; border-color: #d6b86c; outline: 1px solid #d6b86c; }
+.cardSurface .traitTooltipTrigger,
+.unitDetailOverlay .traitTooltipTrigger { cursor: var(--realm-action-cursor, pointer); }
+.cardSurface .traitTooltipTrigger:focus-visible,
+.unitDetailOverlay .traitTooltipTrigger:focus-visible { outline: 1px solid #d6b86c; outline-offset: 3px; }
+
+.unitCard,
+.handCard,
+.unitDetailCard,
+.mulliganCard,
+.boardGame .unitCard,
+.boardGame .handCard {
+  box-shadow: 0 8px 18px #0008, 0 0 3px 1px var(--tier-color), 0 0 12px 2px color-mix(in srgb, var(--tier-color) 95%, transparent), 0 0 28px color-mix(in srgb, var(--tier-color) 72%, transparent);
+}
+.boardGame .hudStat span,
+.boardGame .standingBox > span:first-child,
+.boardGame .standingBox > small { font-size: .65rem; line-height: 1.2; letter-spacing: 0; }
+.boardGame .hudStat strong { font-size: 1rem; line-height: 1.2; }
+.boardGame .standingBox > strong { font-size: 1.5rem; line-height: 1.1; }
+.boardGame .hudStat span { white-space: nowrap; }
+@media (max-height: 600px) {
+  .boardGame .opponentHud,
+  .boardGame .playerHud,
+  .boardGame.gameWithOnlineChat .activePlayerHeader { grid-template-rows: minmax(40px, 1fr) minmax(0, 4fr); }
+  .boardGame .hudStat span,
+  .boardGame .standingBox > span:first-child,
+  .boardGame .standingBox > small { font-size: 7px; line-height: 1.1; }
+  .boardGame .hudStat span { line-height: 1; }
+  .boardGame .hudStat strong { font-size: 11px; line-height: 1; margin-top: 0; }
+  .boardGame .standingBox > strong { font-size: 18px; margin: 0; }
+}
+
+.cardStats > .cardStat + .cardStat { border-left: 1px solid color-mix(in srgb, var(--tier-accent, #d4af37) 28%, transparent); padding-left: .45em; }
+.detailExpandedInfo .cardStats > .cardStat + .cardStat { padding-left: .4rem; }
+.boardGame .handCard:not(.unaffordableCard):not(.drawHiddenHandCard):not(.draggingHandCard) { opacity: 1; filter: none; }
+.boardGame .handCard.unaffordableCard { filter: saturate(.46) brightness(.48); }
+.boardGame .handCardSlot:hover .handCard.unaffordableCard,
+.boardGame .handCard.unaffordableCard:focus-visible { filter: none; }
+.arrivalTargetBuff.attackDragLayer,
+.arrivalTargetBuff .attackDragArrow { color: #e5bf4b; }
+.combatValueBuff { color: #e5bf4b; }
+
+.deckPile { position: relative; }
+.hudStatValue { position: relative; }
+.hudRoyalFavor { position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: 2px; color: #d4af37; font-size: .6em; line-height: 1; white-space: nowrap; }
+.cardMetadataWithArtifact .equippedArtifactBadge { width: 22%; height: auto; max-width: 22%; max-height: 100%; aspect-ratio: 1; bottom: 0; overflow: hidden; }
+.equippedArtifactBadge .equippedArtifactArtwork { position: absolute; inset: 0; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; }
+.boardGame .unitCard .cardMetadataWithArtifact .cardIdentity > small,
+.boardGame .unitCard .cardMetadataWithArtifact .cardStats { max-width: 100%; }
+.boardGame .unitCard .cardInfoPanel > .equippedArtifactBadge {
+  left: 4cqw;
+  right: auto;
+  top: auto;
+  bottom: calc(100% + 2cqw);
+  width: auto;
+  height: min(28cqw, max(0px, calc(140cqw - 100% - 24cqw)));
+  max-width: 20cqw;
+  max-height: none;
+  aspect-ratio: 5 / 7;
+  z-index: 12;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+.boardGame .unitCard .equippedArtifactBadge .equippedArtifactArtwork { object-fit: cover; }

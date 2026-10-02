@@ -2,6 +2,22 @@
   {
     "date": "2026-10-02",
     "items": [
+      "Enlarged keyword icons across all Great Game card surfaces, including board, hand, detailed views, collection, and decks.",
+      "Removed internal sequence numbers from Proud of His Name effect titles in The Great Game.",
+      "Removed the square hover outline around tier and keyword tooltip icons in The Great Game.",
+      "Placed equipped Artifacts above the board info panel, corrected clipping, and made their size adapt to the space beneath the gem as the panel rises.",
+      "Prevented Arrival, Victory, and other ability headings from clipping along their top edge on hand cards.",
+      "Unaffordable hand cards regain full clarity on hover or keyboard focus; deck-stack edges now stay within the deck area instead of overlapping the hand.",
+      "Restored dimming for unaffordable hand cards; Royal Favor stays leftmost in hand and appears as a small separate +1 beside the centered hand-limit counter.",
+      "Made Arrival damage and buff arrows follow the pointer; constrained equipped Artifact artwork and removed its duplicate detail image.",
+      "Improved age-suffixed character portrait discovery and retry handling for temporary loading failures.",
+      "Added live placement previews for neighboring stat bonuses, including the first touch movement, and click-to-deploy position selection.",
+      "Character cards now use character portraits; added Luck-only artwork framing with drag controls, zoom, live card preview, and publishing.",
+      "Sorted the card catalog by Command then name, added subtle stat separators, centered lightbox arrows, reduced the close-button frame, and strengthened tier colors.",
+      "Restored the realm stats panel's original framing while retaining larger text.",
+      "Improved Great Game detail text and stat alignment, enlarged realm-panel labels, strengthened tier glows, and slightly brightened the board and detail surfaces.",
+      "Replaced card-detail navigation buttons with side arrows and shared keyboard, cursor, and hover behavior.",
+      "Added an editable Practice Deck to Decks, with saved changes used by local games and the online deck selector.",
       "Added source-to-target Arrival arrows and hover outcome indicators for Baelenys Targaryen's damage and Renrose Tyrell's Influence buff."
     ]
   },

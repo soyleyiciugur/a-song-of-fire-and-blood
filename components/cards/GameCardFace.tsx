@@ -24,12 +24,19 @@ export function GameCardFace({ card, onSelect, actions }: { card: GameCard; onSe
 
 export function GameCardModal({ card, onClose, onPrev, onNext, action }: { card: GameCard; onClose: () => void; onPrev?: () => void; onNext?: () => void; action?: ReactNode }) {
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowLeft" && onPrev) { event.preventDefault(); onPrev(); }
+      if (event.key === "ArrowRight" && onNext) { event.preventDefault(); onNext(); }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, onPrev, onNext]);
   if (typeof document === "undefined") return null;
-  return createPortal(<div className={styles.modalBackdrop} onMouseDown={onClose}>
+  return createPortal(<div className={`${styles.modalBackdrop} ${play.cardSurface}`} onMouseDown={onClose}>
+    <div className={styles.modalFrame} onMouseDown={event => event.stopPropagation()}>
+      {onPrev && <button type="button" className={`${styles.modalArrow} ${styles.modalArrowPrev}`} onClick={onPrev} aria-label="Previous card" title="Previous card"><span aria-hidden className={styles.chevronPrev} /></button>}
+      {onNext && <button type="button" className={`${styles.modalArrow} ${styles.modalArrowNext}`} onClick={onNext} aria-label="Next card" title="Next card"><span aria-hidden className={styles.chevronNext} /></button>}
     <article className={`${styles.modal} ${styles.catalogModal}`} style={tierStyle(card)} role="dialog" aria-modal="true" aria-label={card.name} onMouseDown={event => event.stopPropagation()}>
       <button type="button" className={play.detailCornerClose} onClick={onClose} aria-label="Close card details">×</button>
       <div className={play.unitDetailCard}>
@@ -42,11 +49,8 @@ export function GameCardModal({ card, onClose, onPrev, onNext, action }: { card:
         {"balanceStatus" in card && card.balanceStatus === "provisional" && <div className={styles.provisional}>Balance values are provisional.</div>}
         {card.deckable === false && <div className={styles.provisional}>Non-deckable card</div>}
         {action}
-        {(onPrev || onNext) && <div className={styles.modalNavigation}>
-          <button type="button" onClick={onPrev} disabled={!onPrev}>Previous</button>
-          <button type="button" onClick={onNext} disabled={!onNext}>Next</button>
-        </div>}
       </div>
     </article>
+    </div>
   </div>, document.body);
 }

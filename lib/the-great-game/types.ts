@@ -558,6 +558,7 @@ export interface PoliticalAttackAction {
 }
 
 export interface PlayCardAction {
+  boardIndex?: number;
   type: "play-card";
 
   handInstanceId: string;

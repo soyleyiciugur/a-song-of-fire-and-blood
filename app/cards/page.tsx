@@ -4,7 +4,6 @@ import PageTitleIcon from "@/components/nav/PageTitleIcon";
 import Link from "next/link";
 import {
   useState,
-  useEffect,
   useCallback,
 } from "react";
 
@@ -27,7 +26,8 @@ export default function CardsPage() {
   ] =
     useState<string | null>(null);
 
-  const tierCards = getAllGameCards().filter((card) => activeTier === "all" || card.tierId === activeTier);
+  const tierCards = getAllGameCards().filter((card) => activeTier === "all" || card.tierId === activeTier)
+    .sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name, "en"));
 
   const selectedIndex =
     tierCards.findIndex(
@@ -66,49 +66,6 @@ export default function CardsPage() {
       selectedIndex,
       tierCards,
     ]);
-
-  useEffect(() => {
-    if (!selectedCardId) {
-      return;
-    }
-
-    function handleKey(
-      event: KeyboardEvent
-    ) {
-      if (
-        event.key === "ArrowLeft"
-      ) {
-        handlePrev();
-      }
-
-      if (
-        event.key === "ArrowRight"
-      ) {
-        handleNext();
-      }
-
-      if (
-        event.key === "Escape"
-      ) {
-        setSelectedCardId(null);
-      }
-    }
-
-    window.addEventListener(
-      "keydown",
-      handleKey
-    );
-
-    return () =>
-      window.removeEventListener(
-        "keydown",
-        handleKey
-      );
-  }, [
-    selectedCardId,
-    handlePrev,
-    handleNext,
-  ]);
 
   function handleTierChange(
     tierId: string
