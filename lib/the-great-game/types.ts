@@ -509,6 +509,27 @@ export interface GameLogEntry {
   visibility?: "public" | "owner";
 
   message: string;
+  turnOwnerId?: PlayerId;
+  chronicle?: {
+    actionId: number;
+    kind?: "play" | "conflict" | "effect";
+    sourceCardId?: string;
+    sourceInstanceId?: string;
+    targetCardId?: string;
+    targetInstanceId?: string;
+    conflict?: "Military" | "Political";
+    result?: "Victory" | "Repelled" | "Resolved";
+    changes?: ChronicleStatChange[];
+  };
+}
+
+export interface ChronicleStatChange {
+  cardId?: string;
+  instanceId?: string;
+  playerId: PlayerId;
+  stat: "Strength" | "Influence" | "Health" | "Max Health" | "Command" | "Standing";
+  before: number;
+  after: number;
 }
 
 // ─────────────────────────────────────────────

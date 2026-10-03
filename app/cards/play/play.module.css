@@ -7742,7 +7742,7 @@
     --game-stats-width: clamp(44px, 6vw, 70px);
     --game-rail-width: clamp(154px, 20vw, 210px);
     --game-hand-height: 28dvh;
-    --game-battle-line-height: clamp(14px, 3.6dvh, 24px);
+    --game-battle-line-height: 24px;
     --game-command-height: clamp(34px, 7.6dvh, 52px);
     --game-top-dock-height: var(--game-command-height);
     --game-control-button-width: calc((var(--game-rail-width) - 20px) * .45);
@@ -8289,7 +8289,7 @@
 .boardGame .handCardSlot:last-child { flex-shrink: 0; }
 
 .boardGame .battleLine[data-has-prompt="true"] {
-  z-index: 995;
+  z-index: 111;
   grid-template-columns: minmax(0, 1fr);
   padding: 1px 4px;
   gap: 0;
@@ -8297,6 +8297,7 @@
 .battleLine[data-has-prompt="true"]::before,
 .battleLine[data-has-prompt="true"]::after { content: none; }
 .boardGame .battleLine .prompt {
+  --table-speaker-size: calc(var(--game-battle-line-height) - 4px);
   justify-content: flex-end;
   width: 100%;
   height: 100%;
@@ -8314,6 +8315,25 @@
   text-transform: none;
   overflow: hidden;
 }
+.boardGame .battleLine .turnNotice {
+  --table-speaker-size: calc((var(--game-battle-line-height) - 4px) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: min(380px, calc(100% - 8px));
+  max-width: calc(100% - 8px);
+  min-height: calc((var(--game-battle-line-height) + 8px) * 2);
+  height: auto;
+  box-sizing: border-box;
+  padding: 8px 24px;
+}
+/* Let this temporary announcement outrank body-portaled game tooltips too. */
+.boardGame:has(.turnNotice) { isolation: auto; }
+.boardGame .battleLine:has(.turnNotice) { z-index: 2147483647; }
+.turnNoticeCopy { display: grid; gap: 4px; min-width: 0; text-align: center; overflow-wrap: anywhere; }
+.boardGame .turnNoticeCopy strong { font-size: clamp(28px, 2.6vw, 40px); line-height: 1.1; }
+.boardGame .turnNoticeCopy span { font-size: 16px; line-height: 1; }
 .boardGame .battleLine .prompt > span {
   text-align: right;
   min-width: 0;

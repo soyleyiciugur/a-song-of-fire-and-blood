@@ -1,0 +1,20 @@
+/* Replace the frame artwork here; its square footprint stays independent of copy. */
+.frame {
+  --mini-portrait-size: 100%;
+  width: var(--table-speaker-size, 28px);
+  height: var(--table-speaker-size, 28px);
+  flex: 0 0 var(--table-speaker-size, 28px);
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 2px solid #b59760;
+  border-radius: 50%;
+  background: #171116;
+  box-shadow: inset 0 0 0 1px #171116;
+  pointer-events: none;
+}
+
+.frame img {
+  display: block;
+  border: 0 !important;
+  border-radius: 50% !important;
+}

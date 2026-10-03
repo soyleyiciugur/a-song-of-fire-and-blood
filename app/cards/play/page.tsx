@@ -40,6 +40,7 @@ import {
 
 import {
   getGameCard,
+  findGameCard,
   isUnitCard,
 } from "@/lib/the-great-game/cards";
 
@@ -63,6 +64,9 @@ import type {
 import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import GreatGameChat from "@/components/the-great-game/GreatGameChat";
+import Chronicle from "@/components/the-great-game/Chronicle";
+import TableSpeaker from "@/components/the-great-game/TableSpeaker";
+import CombatStatusIcon from "@/components/cards/CombatStatusIcon";
 import { CardArtwork } from "@/components/cards/CardArtwork";
 import { CardChrome, CardInfoPanel, CommandSigil, IndicatorIcon, tierStyle } from "@/components/cards/GameCardPrimitives";
 
@@ -100,13 +104,6 @@ function gamePlayerName(playerId: PlayerId, match: GreatGameOnlineMatchView | nu
   if (!match) return playerName(playerId);
   const player = playerId === "player1" ? match.host : match.guest;
   return player?.username ? player.username : playerName(playerId);
-}
-
-function onlineLogMessage(message: string, match: GreatGameOnlineMatchView | null): string {
-  if (!match) return message;
-  return message
-    .replace(/\bPlayer 1\b/g, gamePlayerName("player1", match))
-    .replace(/\bPlayer 2\b/g, gamePlayerName("player2", match));
 }
 
 function isMobileGameViewport(): boolean {
@@ -5664,6 +5661,11 @@ export default function GreatGamePlayPage() {
           );
           if (!handCard) return null;
           const card = getGameCard(handCard.cardId);
+          const previewUnit = placementPreview?.players[activePlayerId].board.find(
+            (candidate) => !activePlayer.board.some(
+              (existing) => existing.instanceId === candidate.instanceId
+            ) && candidate.cardId === handCard.cardId
+          );
           const cost = getEffectiveCost(
             currentGame,
             activePlayerId,
@@ -5698,6 +5700,17 @@ export default function GreatGamePlayPage() {
                 <CardInfoPanel
                   card={card}
                   showDescription={false}
+                  baseStats={isUnitCard(card) ? {
+                    strength: card.strength,
+                    influence: card.cardType === "character" ? card.influence : undefined,
+                    health: card.health,
+                  } : undefined}
+                  runtimeStats={placementPreview && previewUnit ? {
+                    strength: getMilitaryPower(placementPreview, previewUnit),
+                    influence: getPoliticalPower(placementPreview, previewUnit),
+                    health: previewUnit.currentHealth,
+                    maxHealth: getMaximumHealth(placementPreview, previewUnit),
+                  } : undefined}
                 />
               </div>
             </div>,
@@ -5998,20 +6011,25 @@ export default function GreatGamePlayPage() {
       <div className={styles.battleLine} data-realms-divider="true" data-has-prompt={showRealmsPrompt}>
         {showRealmsPrompt ? (
           <div className={styles.prompt}>
+            <TableSpeaker key={prompt} />
             <span title={prompt ?? undefined} role="status">{prompt}</span>
             <button
               className={`${styles.endTurnButton} ${currentGame.pendingEffect ? "" : styles.endTurnReady}`}
               disabled={Boolean(currentGame.pendingEffect)}
               onClick={cancelSelection}
             >
-              {currentGame.pendingEffect ? "Must Resolve" : "Cancel"}
+              {currentGame.pendingEffect ? "Resolve this first" : "Cancel"}
             </button>
           </div>
         ) : <span>✦ The Realms ✦</span>}
-        {turnNotice && !showRealmsPrompt && (
+        {turnNotice && (
           <div className={styles.turnNotice} role="status" aria-live="polite">
-            <span>{turnNotice.subtitle}</span>
-            <strong>{turnNotice.title}</strong>
+            <TableSpeaker key={turnNotice.key}>
+              {(speaker) => <div className={styles.turnNoticeCopy}>
+              <span>{turnNotice.subtitle}</span>
+              <strong>{turnNotice.title === "Your Turn" ? (speaker === "aldren" ? "Your turn, my liege." : "Your turn.") : turnNotice.title}</strong>
+            </div>}
+            </TableSpeaker>
           </div>
         )}
       </div>
@@ -6311,74 +6329,9 @@ export default function GreatGamePlayPage() {
         </HorizontalHand>
       </section>
 
-      <section
-        className={
-          styles.logSection
-        }
-      >
-        <div
-          className={
-            styles.sectionTitle
-          }
-        >
-          Chronicle
-        </div>
-
-        <div
-          className={
-            styles.log
-          }
-        >
-          {[...currentGame.log]
-            .reverse()
-            .slice(0, 40)
-            .map(
-              (entry) => {
-                const isTurnStart =
-                  / begins Turn \d+\.$/.test(
-                    entry.message
-                  );
-
-                const isTurnEnd =
-                  / ends Turn \d+\.$/.test(
-                    entry.message
-                  );
-
-                return (
-                <div
-                  key={
-                    entry.id
-                  }
-                  className={[
-                    styles.logEntry,
-                    isTurnStart
-                      ? styles.logTurnStart
-                      : "",
-                    isTurnEnd
-                      ? styles.logTurnEnd
-                      : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  <span>
-                    T
-                    {
-                      entry.turn
-                    }
-                  </span>
-
-                  <p>
-                    {
-                      onlineLogMessage(entry.message, onlineMatch)
-                    }
-                  </p>
-                </div>
-                );
-              }
-            )}
-        </div>
-      </section>
+      <Chronicle key={viewPlayerId} state={currentGame} viewerId={viewPlayerId}
+        onInspectUnit={id => { setInspectedHandInstanceId(null); setInspectedUnitId(id); }}
+        onInspectHand={id => { setInspectedUnitId(null); setInspectedHandInstanceId(id); }} />
 
       <section
         className={styles.playerCommandDock}
@@ -7286,7 +7239,7 @@ function PlayerHeader({
               player.standing -
                 conflictPreview.standingDamage <=
                 0
-                ? "☠"
+                ? <CombatStatusIcon kind="death" />
                 : conflictPreview.noPoliticalDamage
                   ? "?"
                   : <><IndicatorIcon kind={conflictPreview.kind === "military" ? "military" : "political"} />{conflictPreview.standingDamage}</>}
@@ -7317,7 +7270,7 @@ function PlayerHeader({
               aria-hidden
             >
               {preview.dies
-                ? "☠"
+                ? <CombatStatusIcon kind="death" />
                 : preview.heal
                   ? <><IndicatorIcon kind="health" />{preview.heal}</>
                   : <><IndicatorIcon kind="military" />{preview.damage ?? 0}</>}
@@ -7341,8 +7294,8 @@ function PlayerHeader({
 
         <HudStat
           label="Hand"
-          value={`${player.hand.filter(card => getGameCard(card.cardId).special !== "royal-favor").length}/8`}
-          royalFavor={player.hand.some(card => getGameCard(card.cardId).special === "royal-favor")}
+          value={`${player.hand.filter(card => findGameCard(card.cardId)?.special !== "royal-favor").length}/8`}
+          royalFavor={player.hand.some(card => findGameCard(card.cardId)?.special === "royal-favor")}
           handAnchorPlayerId={
             playerId
           }
@@ -8408,7 +8361,7 @@ function BoardUnit({
               }
               aria-hidden
             >
-              ☠
+              <CombatStatusIcon kind="death" />
             </div>
           );
         }
@@ -8421,7 +8374,7 @@ function BoardUnit({
               }
               aria-hidden
             >
-              ☾ᶻ
+              <CombatStatusIcon kind="grounded" />
             </div>
           );
         }
@@ -8522,8 +8475,8 @@ function BoardUnit({
             aria-hidden
           >
             {combatPreview.attackerDies
-              ? "☠"
-              : "☾ᶻ"}
+              ? <CombatStatusIcon kind="death" />
+              : <CombatStatusIcon kind="grounded" />}
           </div>
         )}
 
@@ -8541,8 +8494,8 @@ function BoardUnit({
             aria-hidden
           >
             {combatPreview.defenderDies
-              ? "☠"
-              : "☾ᶻ"}
+              ? <CombatStatusIcon kind="death" />
+              : <CombatStatusIcon kind="grounded" />}
           </div>
         )}
 
@@ -8592,7 +8545,7 @@ function BoardUnit({
           unit.attachedArtifactId
         }
         runtimeStats={displayedStats}
-        baseStats={previewState ? { strength, influence, health: maxHealth } : { strength: card.strength,
+        baseStats={{ strength: card.strength,
           influence:
             card.cardType === "character"
               ? card.influence

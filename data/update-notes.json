@@ -1,7 +1,24 @@
 [
   {
+    "date": "2026-10-03",
+    "items": [
+      "Doubled the size of turn announcements and kept them above game overlays until they disappear.",
+      "Enlarged and centered Great Game turn announcements alongside their speaker portraits at the existing realm divider position.",
+      "Royal Favor is now public in online matches, so both players see the separate +1 hand bonus until it is used while ordinary opponent cards stay hidden.",
+      "Added increasing selection odds for the absent Great Game speaker and fixed an online hand-counter crash when opponent cards are hidden.",
+      "Great Game prompts and turn notices now randomly choose Mara or Aldren, keeping the speaker stable while each notice is displayed.",
+      "Added circular Mara and Aldren portraits to Great Game targeting prompts and turn notices, with compact frames and corrected layering beneath card details and tooltips.",
+      "Rewrote character profile biographies as general character introductions instead of recent chapter recaps.",
+      "Kept Command refills at the oldest end of each Chronicle turn with tighter text spacing; constrained live previews to the viewport and aligned combat icons with the board.",
+      "Classified Standing restoration, including Iron Wrath, as healing in Chronicle."
+    ]
+  },
+  {
     "date": "2026-10-02",
     "items": [
+      "Chronicle now shows newest turns and events first, uses consistent game-style SVG icons, and opens live card previews with current stats, effects, equipment, and hand costs.",
+      "Rebuilt The Great Game Chronicle with grouped turns, compact event hierarchy, card previews, expandable action results, recorded stat changes, and scroll-aware new-event alerts.",
+      "Dragged cards now preview their placement bonuses alongside board cards, with consistent stat colors before and after deployment.",
       "Enlarged keyword icons across all Great Game card surfaces, including board, hand, detailed views, collection, and decks.",
       "Removed internal sequence numbers from Proud of His Name effect titles in The Great Game.",
       "Removed the square hover outline around tier and keyword tooltip icons in The Great Game.",

@@ -10,6 +10,7 @@ import {
   createTestDeck,
   validateDeck,
 } from "./deck";
+import { recordChronicleAction } from "./chronicle-recorder";
 
 import type {
   ActionResult,
@@ -106,6 +107,7 @@ function addLog(
     playerId,
 
     visibility,
+    turnOwnerId: state.activePlayerId,
 
     message,
   });
@@ -4942,7 +4944,7 @@ function processHighgardenEndOfTurn(
       "highgarden",
       "highgarden",
       playerId,
-      `${getGameCard(unit.cardId).name} grows stronger and gains +${after - before} Influence permanently. (${turns}/6 retained turns)`
+      `${getGameCard(unit.cardId).name} gains +${after - before} Influence permanently. (${before} → ${after} Influence; ${turns}/6 retained turns)`
     );
   }
 }
@@ -5032,6 +5034,7 @@ function startTurnMutable(
     );
 
   const bonus = player.nextCommandBonus;
+  const commandBeforeRefill = player.command;
   const uncappedBonus = player.nextCommandBonusUncapped ?? 0;
 
   player.command =
@@ -5046,13 +5049,13 @@ function startTurnMutable(
   if (bonus > 0 || uncappedBonus > 0) {
     addLog(
       state,
-      `Command refills to ${player.command}. (${player.maxCommand} base${bonus > 0 ? ` + ${bonus} bonus` : ""}${uncappedBonus > 0 ? ` + ${uncappedBonus} Iron Bank` : ""})`,
+      `Command refills to ${player.command}. (${commandBeforeRefill} → ${player.command} Command; ${player.maxCommand} base${bonus > 0 ? ` + ${bonus} bonus` : ""}${uncappedBonus > 0 ? ` + ${uncappedBonus} Iron Bank` : ""})`,
       playerId
     );
   } else {
     addLog(
       state,
-      `Command refills to ${player.command}.`,
+      `Command refills to ${player.command}. (${commandBeforeRefill} → ${player.command} Command)`,
       playerId
     );
   }
@@ -5339,7 +5342,7 @@ export function createGame(
 // Public dispatcher
 // ─────────────────────────────────────────────
 
-export function applyAction(
+function applyActionResult(
   state: GameState,
   action: GameAction
 ): ActionResult {
@@ -5469,4 +5472,10 @@ export function applyAction(
           : "Unknown game engine error.",
     };
   }
+}
+
+export function applyAction(state: GameState, action: GameAction): ActionResult {
+  const result = applyActionResult(state, action);
+  if (result.ok) recordChronicleAction(state, result.state, action);
+  return result;
 }

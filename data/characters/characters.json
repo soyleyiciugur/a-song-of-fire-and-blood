@@ -176,7 +176,7 @@
         "latestDevelopment": "Her younger brother; she watched him die in the Great Hall moments before the chaos below claimed her too."
       }
     },
-    "summary": "Alysanne Hightower appeared only briefly, a silhouette in a high window watching Prince Gaelor's vanguard arrive at her family's gates. She and her sister were pinned to the floor as the Great Hall dissolved into violence, and in the blind panic that followed, a soldier's blade found her. Her death, unintended and unremarked upon by the men who caused it, is one of Oldtown's quietest tragedies.",
+    "summary": "Alysanne Hightower was a daughter of House Hightower and sister to Timos. Her life was cut short during the violence that engulfed Oldtown after Prince Gaelor arrived; she is remembered as one of the innocent members of the household caught in the conflict.",
     "quotes": [],
     "death": {
       "day": 26,
@@ -357,7 +357,7 @@
         "latestDevelopment": "That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
       }
     },
-    "summary": "On the Twentieth Day of the Eighth Moon, Baelenys learns that Naela's recurring journeys may be tied to blood-magic treatment and that former Kingsguard still serve Vahaemon. He publicly places the burden of succession on Jace and commands him to kill Visenya and Naela in Essos before Vahaemon's circle can find another dragon. The revelation that Vaenarr stands with Vahaemon reopens Baelenys's old distrust of Jaery; their private confrontation is overheard and misunderstood by Vhaemys.",
+    "summary": "King Baelenys Targaryen rules the Seven Kingdoms through force of will, hard political calculation and the authority of his dragon Maelwing. His family and the succession remain central to his reign, while old grievances and the threat posed by the exiled Targaryens test his trust in those closest to him.",
     "quotes": [],
     "reign": {
       "from": "Late 78 AC"
@@ -490,7 +490,7 @@
         "latestDevelopment": "His younger sister, who became queen to their brother Aenys II."
       }
     },
-    "summary": "Decades ago, before Jaehaerys I died and succession became immediate, Baelor Targaryen chose a quieter life of study at the Citadel. He was therefore not a claimant when his younger brother Aenys II inherited the Iron Throne. Known as 'the argumentative one' of his generation — a title the King now pointedly applies to his own son Jacaelon — Baelor was recalled to King's Landing amid the Tyrell-Hightower treason crisis. He arrived too late to stop Gaelor's bloody campaign in the Reach and rode for the Red Keep in open alarm. Named Grand Maester in Cordin's place, he has since thrown himself into the Vahaemon problem with characteristic thoroughness: engineering Vahaemon's expulsion from Braavos through economic pressure, and planning to repeat the tactic in Pentos before funneling his exiled nephew toward Tyrosh where the Crown can end the succession threat with dragonfire rather than diplomacy. Melessa Hightower invites him back to the Citadel in a conciliatory letter whose true guiding hand he questions. He considers returning, but agrees with Jace that the realm must first be settled. He explains the uncertain nature of dragon dreams and describes Ghost, an ancient white and pale-blue she-dragon recorded in flooded caverns west of Volantis and later near Myr. He believes her long dead, allows that she may have laid eggs, and treats estimates of her size as uncertain. Jace asks him to investigate quietly in connection with Visenya.",
+    "summary": "Baelor Targaryen, brother of the late King Aenys II, chose scholarship at the Citadel over a claim to the throne. Known for his argumentative mind and thorough research, he later returned to royal service as Grand Maester. He approaches dynastic threats through records, diplomacy and political pressure, and treats uncertain accounts of dragons with scholarly caution.",
     "quotes": [],
     "personalTimeline": [
       {
@@ -555,7 +555,7 @@
         "latestDevelopment": "Baelenys chose Saera because House Stark favored her and because Brandon's family still carried the weight of Edwyle's old service."
       }
     },
-    "summary": "Lord Brandon Stark inherited Winterfell and the wardenship of the North from his father, Edwyle Stark, in 87 AC. Unlike Edwyle, whose service to King Aenys earned lasting royal regard, Brandon never inspired much personal affection in King Baelenys. He nevertheless maintained the old relationship between Winterfell and the Crown until his quiet death in his own bed while the royal court drank and feasted at Driftmark on the Thirtieth Day of the Second Moon, 99 AC. Baelenys openly acknowledged that he had never cared much for Brandon, but the debt owed to Edwyle still mattered; he therefore sent Princess Saera north to formally offer the Crown's condolences. Brandon's death passed Winterfell and the wardenship to his elder son Rickard.",
+    "summary": "Brandon Stark inherited Winterfell and the wardenship of the North from his father Edwyle in 87 AC. Though he lacked Edwyle’s close standing with the Crown, he maintained the relationship between Winterfell and King’s Landing. He died in 99 AC, leaving his titles to his elder son Rickard.",
     "quotes": [],
     "death": {
       "day": 30,
@@ -634,7 +634,7 @@
         "latestDevelopment": "Plans to question him directly about the investigation into Curtass Whent's death after Gaelor identified Saathos as the source of the surviving blond-knight report."
       }
     },
-    "summary": "Maester Cordin Poole has responded to his demotion not by retreating, but by attaching himself more closely to Prince Gaelor. In a secret meeting he reminded Gaelor that he had helped raise him, gently encouraged the assumption that Visenor may be dead, and offered a private surveillance network capable of following Jace and his entire inner circle. He also agreed to pursue the possibility that Ser Alester Dayne was involved in Curtass Whent's death and advised Gaelor to ask the King for command of the City Watch. Gaelor promised him full protection. Beneath Cordin's familiar fawning now sits a far more consequential ambition: to become indispensable to the prince he expects may one day wear the crown.",
+    "summary": "Cordin Poole is a maester and former Grand Maester whose long service at court included helping to raise Prince Gaelor. Outwardly deferential, he is an ambitious political survivor with an interest in private intelligence and in securing a place beside the prince.",
     "quotes": [],
     "debutChapter": "the-weight-of-loyalty"
   },
@@ -691,7 +691,7 @@
         "latestDevelopment": "The knight's investigation confirmed the broad shape of the ambush and the presence of a surviving blond knight, but never established with certainty who killed Whent."
       }
     },
-    "summary": "Once a Kingsguard whose exploits were sung about before most knights would dare dream of it, Curtass Whent left the order under circumstances the realm no longer discusses openly. King Baelenys called him back for one purpose: find Visenor. He very nearly succeeded, cornering Ser Alester Dayne with five sellswords in the woods south of King's Landing. The fight cost him his life at the hooves of his own target's horse — killed not by a sword, but by a desperate, dying act of improvisation from the man he had just beaten half to death. His body was found alongside those of his five sellswords near a rural sept, and word of his death reached the King, who received it with cold indifference.",
+    "summary": "Curtass Whent was a celebrated Kingsguard knight whose departure from the order remains poorly explained. King Baelenys later recalled him to search for Visenor. His pursuit ended in a fatal confrontation with Ser Alester Dayne south of King’s Landing.",
     "quotes": [],
     "death": {
       "day": 15,
@@ -743,7 +743,7 @@
         "latestDevelopment": "A maester at Starfall who reports Darren's departure for Sunspear to Rhaella; their private dealings are not shown."
       }
     },
-    "summary": "The quiet Lord of Torrentine, Darren Dayne has stayed carefully out of King's Landing's politics for most of his life, content to let his daughter Lorenah manage House Dayne's more delicate affairs. Neither he nor his seat ever expected to become entangled in sheltering a fugitive Crown Prince, but that is precisely what his family's choices have made of them. Nymos reports on the fourteenth day of the eighth moon that Darren left Starfall for Sunspear four days earlier; the purpose of the visit is not revealed.",
+    "summary": "Lord Darren Dayne rules from Starfall and generally keeps his distance from the intrigues of King’s Landing. His daughter Lorenah handles much of the family’s delicate political work, while House Dayne’s protection of Visenor has drawn the family into the royal succession crisis.",
     "quotes": []
   },
   {
@@ -821,7 +821,7 @@
         "latestDevelopment": "His son, condemned and killed for a treason he never had any part in."
       }
     },
-    "summary": "For decades Derrin Hightower served as Baelenys' Hand and closest political adviser. After the poisoning attempt, he became the center of suspicion when the dying assassin allegedly whispered only two words: 'the Hand.' Confronted alone by Jacaelon at Driftmark, Derrin confessed everything: he had conspired with the Lord of Highgarden to poison the King, believing the realm could no longer survive Baelenys' wars and taxes, and that he acted for House Targaryen's future rather than against it. Jace executed him on the spot and disposed of his body at sea. To the realm, Derrin Hightower remains simply missing — his true fate known only to the King, his new Hand, and the sea.",
+    "summary": "Derrin Hightower served for decades as King Baelenys’s Hand and closest political adviser. Convinced that the king’s wars and taxes endangered the realm, he conspired with the Lord of Highgarden to poison him. Jacaelon discovered the plot and killed Derrin; his fate is concealed from the realm.",
     "quotes": [],
     "death": {
       "day": 30,
@@ -1003,7 +1003,7 @@
         "latestDevelopment": "Gaelor killed Zekar with Blackfyre on the Fourteenth Day of the Eighth Moon, 99 AC."
       }
     },
-    "summary": "Gaelor returns from Driftmark to King's Landing on the Twentieth Day of the Eighth Moon to answer Brant Costayne's trial by combat. The capital greets him with jeers and thrown food, but he defeats Brant before the Crown after suffering a deep wound to his left forearm, then beheads him and presents the victory as the gods' judgment. Baelenys permits him to remain one night but keeps him away from the capital. Gaelor now intends to return to Driftmark and then cross to Essos, hoping to take the Stepstones with Braavosi support and restore the honor he believes an heir should command.",
+    "summary": "Prince Gaelor Targaryen is a formidable fighter whose claim to honor and place in the succession are bound up with his rivalry with Jacaelon. His violent campaign in the Reach and his conduct in King’s Landing have damaged his standing at court and among the smallfolk, even as he continues to seek a role worthy of a royal heir.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1192,7 +1192,7 @@
         "latestDevelopment": "Lorenah has never heard of him, so Jace treats Nymos as a major lead in whatever happened near Starfall."
       }
     },
-    "summary": "Baelenys publicly treats Jace as the man expected to inherit and orders him to kill Visenya and Naela in Essos. Jace begins assembling a company around Orwell, Alester and Denlon, asks that Saathos be recalled for the dishonorable work ahead, and leaves Gaelor's participation undecided. He delays the planned journey to Dorne while awaiting news, then joins Saera and Vhaemys on Cloudgazer above King's Landing. There they physically encounter an enormous unidentified white dragon that focuses upon Vhaemys; Jace and Saera think of Meraxes, but neither the identity nor a bond is confirmed.",
+    "summary": "Jacaelon Targaryen, also known as Jace, is a royal prince whom King Baelenys increasingly treats as his intended successor. A dragonrider and political actor at court, he balances loyalty to his family with the dangerous work of defending the Crown. Those closest to him include Ser Alester Dayne, Princess Vhaemys and Lorenah Dayne.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1291,7 +1291,7 @@
         "latestDevelopment": "When Rhaella was twelve, Jaery told the former hostage that she loved her as a daughter, believed no one better suited to Visenor and hoped Rhaella would one day follow her as queen."
       }
     },
-    "summary": "News that her brother Vaenarr stands beside Vahaemon triggers a bitter confrontation with Baelenys. Jaery insists that she never returned Vaenarr's feelings and that Baelenys knowingly spared him despite understanding her love for the King. Their argument becomes another rupture in the royal marriage, while Vhaemys overhears fragments outside the chamber and draws the wrong conclusions about her mother.",
+    "summary": "Queen Jaery Targaryen is Baelenys’s wife and a central figure in the royal family. Her history with her brother Vaenarr and her strained marriage complicate the Crown’s struggle against the exiled branch of House Targaryen. She remains fiercely protective of her children amid those divisions.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1388,7 +1388,7 @@
         "latestDevelopment": "His disappearance with Rhaella makes him a central object of her investigation."
       }
     },
-    "summary": "Still troubled by the crisis at Starfall, Lorenah considers going south herself, but Jace refuses to support the risk and reminds her that she already gave Visenor and Rhaella more shelter than anyone could demand. She learns that Baelenys has ordered Jace to kill Visenya and Naela in Essos and calls the mission madness. Their own Dorne journey remains delayed while they wait for news.",
+    "summary": "Lorenah Dayne is a politically astute member of House Dayne and a close companion of Jacaelon Targaryen. She manages sensitive family and court affairs with a network of trusted attendants, while Starfall’s decision to shelter Visenor has placed her house in a dangerous position.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1470,7 +1470,7 @@
         "latestDevelopment": "Named his surviving hatchling Jadefyre before his flight; the dragon was gifted to her by royal decree after the other two died."
       }
     },
-    "summary": "Born only two minutes before Jace, Maela shares an unusually close bond with her twin. Clever, charismatic, and naturally manipulative, she was gifted Jadefyre after the other two hatchlings of Visenor's clutch died of grotesque birth defects. Pressured by her mother to consider suitors, she used a visit to Storm's End to entertain the earnest Steffon Baratheon while quietly seducing her own Kingsguard, Ser Brannyn Vance — then drank moon tea in secret to ensure the night left no trace. Gaelor found them, killed Vance in the black cells with Blackfyre, and kept the secret. Maela is still not certain which of those facts frightens her more.",
+    "summary": "Born two minutes before Jacaelon, Princess Maela shares an unusually close bond with her twin. Clever, charismatic and adept at shaping a conversation, she rides Jadefyre and navigates the expectations placed upon a royal daughter on her own terms.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1543,7 +1543,7 @@
         "latestDevelopment": "His mother, the late Queen Vhaemys Targaryen, whose suffering under Aenys remained one of the old wounds later reopened between Malaenar and Baelenys."
       }
     },
-    "summary": "The eldest of Aenys Targaryen II's three sons, Malaenar has long been remembered as the steady lord who renounced the throne because of his infirmity. Baelenys's nightmare reveals one of the deepest reasons the old family wounds never healed: at seventeen, Malaenar secretly obtained a small dragon, only for Aenys to force him to crawl across the Dragonpit floor and then order Sheepstealer to kill the beast before him. Malaenar begged young Baelenys to intervene, but his brother froze and fled.",
+    "summary": "Malaenar, eldest son of Aenys II, renounced the throne because of his infirmity and became known as a steady lord. His relationship with his father was scarred by cruelty, including the destruction of a young dragon he had secretly obtained. That history left lasting wounds within the royal family.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1613,7 +1613,7 @@
         "latestDevelopment": "She warned Gaelor that one enemy could become two once the pair marry."
       }
     },
-    "summary": "Naella Velaryon remains Gaelor's warmest private refuge, but pregnancy has not made her politically passive. She has become increasingly alarmed by Jace's power and by the appearance of Lorenah Dayne at his side, arguing that marriage could turn one dangerous rival into two. Naella urged Gaelor to have Jace and his circle followed and specifically identified Maester Cordin as a man who could be won over. Gaelor acted on that advice within hours. Her priority is no longer simply keeping peace between the brothers; it is ensuring that Gaelor survives the struggle she now believes is coming.",
+    "summary": "Naella Velaryon is Prince Gaelor’s wife and a perceptive political partner as well as his closest private refuge. With a child expected, she is especially alert to threats to his position and has urged him to build support and gather information within the court.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1711,7 +1711,7 @@
         "latestDevelopment": "Rhaella never lives to see what Vahaemon has built around him."
       }
     },
-    "summary": "Daughter of the exiled Vahaemon Targaryen and wife of Crown Prince Visenor, Rhaella lived in hiding near Starfall under House Dayne's protection while carrying Visenor's child. On the Fifteenth Day of the Eighth Moon, 99 AC, riders attacked her near Boneskin's cave. The dragon burned her assailants, but Rhaella had been grievously wounded. She blocked Boneskin's path and repeatedly commanded Dracarys until the dragon understood, dying with her unborn child in the fire. Visenor remains unaware of their deaths.",
+    "summary": "Rhaella Targaryen, daughter of the exiled Vahaemon, married Crown Prince Visenor and lived under House Dayne’s protection near Starfall while carrying his child. She died after an attack near the dragon Boneskin’s cave, choosing to die in the dragon’s fire rather than remain at the mercy of her assailants.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -1781,7 +1781,7 @@
         "latestDevelopment": "He prepared a white direwolf pup as a gift, and when Mother Marya briefly restored Saera's sight, she saw him kneeling with the pup before embracing him."
       }
     },
-    "summary": "Rickard Stark is no longer merely a grieving young Lord of Winterfell cautiously drawn to a visiting princess. He has decided what he wants. When Saera returned to Winterfell with Alester, Rickard spent nearly all of his available time with her and privately told the Kingsguard that he intends one day to offer Saera the whole North beside him. He believes Winterfell can give her the peace and dignity she cannot find in the Red Keep. His rivalry with Alester remains unspoken but obvious to both men. On the Fourteenth Day of the Eighth Moon, Rickard brought Saera a white direwolf pup. With Mother Marya's strange herbal aid, Saera saw clearly for several seconds and looked directly upon Rickard and his gift before embracing him in the snow.",
+    "summary": "Lord Rickard Stark inherited Winterfell and the wardenship of the North after his father Brandon’s death. He is drawn to Princess Saera and hopes to offer her a life in the North away from the pressures of the Red Keep. His regard for her has also sharpened an unspoken rivalry with Ser Alester Dayne.",
     "quotes": [],
     "debutChapter": "the-broken-knight"
   },
@@ -1886,7 +1886,7 @@
         "latestDevelopment": "Supported him during the Rhaella affair and helped shield the truth from their father as long as she could."
       }
     },
-    "summary": "On the Twenty-First Day of the Eighth Moon, Saera takes an exhausted and distressed Vhaemys into the storm on Cloudgazer, with Jace riding behind them. Above King's Landing they physically encounter an enormous unidentified white dragon. Cloudgazer panics and prepares flame before Saera calms her; the white dragon then turns its attention to Vhaemys. Saera and Jace both think of Meraxes, but neither speaks the name and the resemblance remains unconfirmed.",
+    "summary": "Princess Saera Targaryen is a daughter of King Baelenys and Queen Jaery and the rider of Cloudgazer. Her impaired sight has shaped her life at court without ending her independence. Her growing connection to Winterfell and Lord Rickard Stark has brought her a measure of freedom beyond the Red Keep.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2015,7 +2015,7 @@
         "latestDevelopment": "She slipped his grip, nearly cut him with a concealed dagger, and escaped into King's Landing before he and Jace could catch her."
       }
     },
-    "summary": "Back in King's Landing, Alester's misery over Saera finally breaks into the open. Jace provokes him into a hard sparring match that leaves Jace bloodied and draws Orwell Morrigen's intervention. Alester admits he believes Saera loves Rickard Stark, that she made the northern lord a promise, and that Queen Jaery's earlier conversation left him feeling like a mere household knight who had no right to speak. Jace rejects that resignation and promises to talk to Saera, leaving Alester to confront the fact that he never truly told her what he wanted.",
+    "summary": "Ser Alester Dayne is a Kingsguard knight with roots in both Dorne and the North through his parents, Maron Dayne and Lyarra Karstark. Loyal to Jacaelon and deeply attached to Princess Saera, he struggles to reconcile his white-cloak vows with feelings he has been reluctant to speak aloud.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2057,7 +2057,7 @@
         "latestDevelopment": "Did not fight back when Gaelor came for him."
       }
     },
-    "summary": "Ser Brannyn Vance served as Princess Maela's sworn shield long enough to become someone she trusted with more than her safety. He broke his Kingsguard vows in a single night in Storm's End and spent the journey home wracked with guilt, terrified of what came next. What came next was Prince Gaelor — through the door, across the room, and eventually down to the black cells. Vance died on Blackfyre's edge, castrated and then killed, having refused on principle to raise steel against royal blood. He is officially listed as a traitor. Only three people know the truth of what happened.",
+    "summary": "Ser Brannyn Vance served as Princess Maela’s sworn shield in the Kingsguard. Their closeness grew into a forbidden relationship that broke his vows. Prince Gaelor discovered the secret and killed him, leaving Maela to carry the consequences privately.",
     "quotes": [],
     "death": {
       "day": 3,
@@ -2121,7 +2121,7 @@
         "latestDevelopment": "Swore to defend him under oath and screamed for his revenge the moment the boy was executed; the grief has not dimmed."
       }
     },
-    "summary": "A hard-edged survivor of the Oldtown Massacre, Brant Costayne entered the King's Landing tourney in disguise and nearly killed Gaelor before being taken alive. He refused Jace's attempt to find another path and insisted upon the trial by combat he had demanded. On the Twentieth Day of the Eighth Moon, 99 AC, he fought Gaelor before the Crown and a hostile crowd, wounded the prince's left forearm badly, but was eventually cut down and beheaded. His death ended the long-delayed judgment he had sought in the name of Oldtown.",
+    "summary": "Brant Costayne survived the violence in Oldtown and pursued justice for those killed there. A capable fighter driven by anger at Prince Gaelor, he challenged the prince at King’s Landing and died in their trial by combat.",
     "quotes": [],
     "debutChapter": "fathers-and-their-sins",
     "death": {
@@ -2194,7 +2194,7 @@
         "latestDevelopment": "Reassures Oswald that he is not being judged for Gaelor's orders and helps the council discuss the Watch's conduct after the massacre."
       }
     },
-    "summary": "Lord Commander Orwell Morrigen has led the Kingsguard through decades of relative peace, none of which prepared him for a poisoning, a vanished heir, and one of his own sworn brothers quietly abandoning his post to smuggle that heir out of the capital. He says little, watches everything, and is running out of patience for secrets he is clearly not being told. He trained both Alester Dayne and Prince Jacaelon; the latter chose his sworn shield's sword over his Lord Commander's for the knighting ceremony, which Morrigen absorbed in silence and has not mentioned since. He privately trains thirteen-year-old Reyenald Reyne, warning him against arrogance, before Vhaemys interrupts. He welcomes Lucas Corbray back from the Vale and leaves the princess in his care.",
+    "summary": "Lord Commander Orwell Morrigen leads the Kingsguard and has spent years trying to keep royal duty above the rivalries of the family he protects. Experienced, stern and watchful, he trains younger fighters while carrying the strain of a court increasingly divided against itself.",
     "quotes": [],
     "debutChapter": "a-crown-of-thorns"
   },
@@ -2265,7 +2265,7 @@
         "latestDevelopment": "Their clearest direct clash came in the tourney, where Saathos shattered Jace's shield before Jace broke his arm and unhorsed him; the prince's immediate concern afterward tempered the humiliation."
       }
     },
-    "summary": "Ser Saathos Maris is the sworn knight of Prince Gaelor Targaryen. Disciplined, dependable, and unwavering in duty, he represents the military backbone of Gaelor's authority. During the poisoning crisis, he assisted in tracking the assassin and later defied political pressure by refusing the Hand entry into the dungeon. He rode at Gaelor's side through the bloody march on Oldtown and the massacre that followed. Sent south by Baelor Targaryen to investigate Curtass Whent's death, he returned with incomplete answers and a growing private suspicion about who the blonde knight at the sept really was — a suspicion he has not yet taken anywhere. On the Fourteenth Day of the Eighth Moon he accompanies Gaelor through the Watch barracks and Flea Bottom. He brings six gold cloaks into a mummers' tent at the prince's command. When Gaelor kills two actors and the audience stampedes, Saathos uses his shield and sword flat, refusing to use the edge. Eighteen smallfolk die in the ensuing crush and violence.",
+    "summary": "Ser Saathos Maris is Prince Gaelor’s sworn knight. Disciplined and dependable, he has served the prince through the growing rift in the royal family while trying to uphold the demands of knighthood and personal loyalty.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2327,7 +2327,7 @@
         "latestDevelopment": "Hosted her at Storm's End and fell for her completely, treating her with an awkward, earnest chivalry that charmed her even as she entertained his Kingsguard; offered to fetch her a dragon from Dragonstone without understanding why she laughed."
       }
     },
-    "summary": "Already famous in tourneys and duels despite his youth, Steffon Baratheon marched into the Red Keep demanding the Crown repay House Baratheon's old debts in blood and coin, only to be cut down before the court by Hand Jacaelon Targaryen. Weeks later he hosted Princess Maela at Storm's End, showing an earnest, almost childlike chivalry that charmed her without ever earning her heart. He won the King's Landing tourney by default when both princes collapsed in the lists — a hollow victory he was loudly furious about. His joust against Alester Dayne, however, was anything but hollow.",
+    "summary": "Steffon Baratheon is a young Stormlands noble already known for his skill in tourneys and duels. Earnest and proud, he pursued Princess Maela with open intentions, only to find the royal court less straightforward than the field of combat.",
     "quotes": [],
     "debutChapter": "the-broken-knight"
   },
@@ -2383,7 +2383,7 @@
         "latestDevelopment": "His younger sister; she survived the massacre in which he died."
       }
     },
-    "summary": "Thrust into Oldtown's lordship the moment his father vanished under suspicion, fifteen-year-old Timos Hightower tried desperately to comply with the Crown's demands. He asked Gaelor to enter with only a few men and speak. It was not enough. When the prince announced his execution, panic drove the boy to draw steel. He never had a chance to use it. His decapitated head rolled to a stop at Gaelor's boots. His death, and the massacre it triggered, will be remembered in the Reach for a hundred years.",
+    "summary": "Timos Hightower inherited Oldtown’s lordship while still a boy after his father Derrin vanished under suspicion. He must navigate the consequences of the Hightower crisis and the Crown’s distrust while trying to preserve his house.",
     "quotes": [],
     "death": {
       "day": 26,
@@ -2460,7 +2460,7 @@
         "latestDevelopment": "Promises the Crown will assist with the sept's delayed works, while explaining that the required sums cannot be found in a single afternoon."
       }
     },
-    "summary": "As Master of Coin, Tion Lannister spends most small council meetings being outvoted by princes eager for war and glory. He argued against pouring Highgarden's reparations straight into a campaign for the Stepstones, pointing out — correctly, and to no effect — that a war with no clear end is not an investment. He was the only voice at table to agree openly with Jace that executing a fifteen-year-old for his father's treason does not improve the Crown's reputation, a point the King ended by slamming his fist on the table. His counsel is sound and almost never followed.",
+    "summary": "Tion Lannister serves as Master of Coin and carries responsibility for the Crown’s finances amid costly royal ambitions. The son of Lord Tygett Lannister, he is married to Myrielle Marbrand and is often the practical voice in council debates over spending.",
     "quotes": [],
     "debutChapter": "fathers-and-their-sins"
   },
@@ -2565,7 +2565,7 @@
         "latestDevelopment": "His son, already known in Essos as the Young Dragon, rides the golden dragon Sunfyre and appears to be one of the central weapons in Vahaemon's long preparation for war."
       }
     },
-    "summary": "Vahaemon is no longer merely an exiled name whispered about in the Red Keep. The Crown's spies discover that he has spent years building a secret network in Essos, has been welcomed by Tyrosh and the Triarchy, has promised future council seats to influential Tyroshi men, and is involved with blood magic tied to a supposed curse upon the Targaryen bloodline. Vaenarr Targaryen now stands beside him, his son Aegor rides Sunfyre and at least three dragons are seen circling his camp. From a hill across the Narrow Sea, Vahaemon looks west toward the kingdom that cast him out.",
+    "summary": "Vahaemon Targaryen is an exiled member of the royal house whose claim and ambitions remain a threat to King Baelenys. He has gathered family and allies across the Narrow Sea, and the dragons associated with his circle make his cause more than a distant political grievance.",
     "quotes": [],
     "debutChapter": "judgment-by-blood"
   },
@@ -2663,7 +2663,7 @@
         "latestDevelopment": "When Jace discovers he helped her avoid the spirit of a kitchen-cleaning punishment, Vhaemys defends him fiercely and promises they will not repeat it."
       }
     },
-    "summary": "Vhaemys overhears Baelenys and Jaery quarrelling over Vaenarr and, through a frightened child's reasoning, concludes that her mother never loved her father and that the royal family is turning against him. After a night of nightmares she becomes convinced that something is calling her into the storm. She leads Saera, Jace and Cloudgazer to an enormous unidentified white dragon above King's Landing. The dragon fixes its attention on her and closes its eye as she commands it to obey, but the encounter does not yet confirm a claim or rider bond.",
+    "summary": "Princess Vhaemys Targaryen is a young member of the royal family whose curiosity and impulsive schemes regularly draw in the adults around her. She is especially close to her father Baelenys, her brother Jacaelon and her Kingsguard protector Ser Lucas Corbray. Annara Celtigar is her closest peer at the Red Keep. Vhaemys is growing up amid conflicts she does not yet fully understand.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2809,7 +2809,7 @@
         "latestDevelopment": "Notices Renrose's daughter watching him at Highgarden and wonders whether she knows who he really is."
       }
     },
-    "summary": "Visenor notices Leo's unease after Highgarden but accepts the boy's promise to speak when he understands his feelings. In the Proud Lantern they acknowledge how their fathers shaped them and how much their relationship has exceeded a simple arrangement between mentor and pupil. Visenor tells Leo about the reported dragon in Dorne, and they agree in principle to investigate it together. They have not yet left Oldtown, and Visenor remains unaware that Rhaella and their unborn child are dead.",
+    "summary": "Crown Prince Visenor Targaryen has lived in concealment while the royal family’s divisions place his future in doubt. His marriage to Rhaella and his ties to House Dayne anchor part of his life beyond the Red Keep. He seeks allies while learning whom he can trust.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2857,7 +2857,7 @@
         "latestDevelopment": "Jace gives Weylar a new secret assignment after the Starfall report: use his own contacts to investigate Rhaella and Nymos's disappearance, with the black cells waiting if the matter leaks."
       }
     },
-    "summary": "Jace's personal spymaster, and proof that terror makes for sturdier loyalty than trust ever could. Weylar once fed the Prince a hollow report and spent time in the black cells for it; the pardon bought Jace an informant who now bows low enough to scrape the floor. His network has paid off repeatedly: first bringing word of Gaelor's brothel visit days after the wedding, then relaying early confirmation of the Oldtown Massacre. He has since been tasked with finding a tutor for young Vhaemys, a task he approaches with the same mixture of eagerness and dread that characterizes everything he does for the Hand.",
+    "summary": "Weylar Rocke serves as Jacaelon’s personal spymaster. His methods rely on fear and close attention to the city’s less respectable circles, making him useful to the prince even when his behavior tests the patience of those around him.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2924,7 +2924,7 @@
         "latestDevelopment": "Their personal relationship and any direct exchange remain unshown."
       }
     },
-    "summary": "A Dornish maester dispatched by Lady Lorenah Dayne to attend Prince Visenor and Princess Rhaella at the scholars' retreat near Starfall. Unimpressed by titles and unusually direct in his delivery, he was the one who confirmed Rhaella's pregnancy and the one who briefed Visenor on the state of the realm — including the massacres, embargoes, and political collapses — with a vocabulary and frankness that made the Crown Prince laugh for the first time in weeks. His Dornish accent is heavy and his tongue is foul, which Visenor described privately as the most honest thing he had encountered since leaving King's Landing. By the fourteenth day of the eighth moon, he has been absent for days and Rhaella is increasingly alarmed. Nymos has no news of him. The unidentified body on the Dornish coast is not confirmed to be Edmyn.",
+    "summary": "Edmyn Uller is a Dornish maester sent by Lorenah Dayne to attend Visenor and Rhaella near Starfall. His absence during Rhaella’s later troubles has left questions about who was caring for her and what became of him.",
     "quotes": [],
     "debutChapter": "a-crown-of-thorns"
   },
@@ -3004,7 +3004,7 @@
         "latestDevelopment": "Their arrangement carries both personal and political weight, with Visenor regarding his service partly as repayment for what House Targaryen inflicted upon hers."
       }
     },
-    "summary": "Lady Melessa continues sheltering Visenor in Oldtown while trying to keep her weakened house out of another Reach war. She joins Visenor and Almar as a raven from Dorne reports burned men and a possible dragon near Starfall. The conversation reveals nothing of Visenor's private fear, and Melessa remains unaware that the news may concern Boneskin and Rhaella directly.",
+    "summary": "Lady Melessa Hightower is an influential member of the Oldtown household who seeks to protect her weakened house after the treason crisis. She has extended shelter to Visenor while trying to prevent another confrontation with the Crown.",
     "quotes": [],
     "debutChapter": "fathers-and-their-sins"
   },
@@ -3077,7 +3077,7 @@
         "latestDevelopment": "Her brother Aegor is revealed beside the same Essosi circle, already bonded to Sunfyre and known as the Young Dragon."
       }
     },
-    "summary": "After infiltrating King's Landing with Dark Sister and disappearing again, Visenya is revealed alive in Essos beside her father Vahaemon and uncle Vaenarr. The Crown's Master of Whisperers believes she likely has a dragon of her own, though its identity is unknown. Her brief visit to the capital now appears to have been one move inside a much larger preparation involving blood magic, Tyroshi support and several dragons gathered around Vahaemon.",
+    "summary": "Visenya Targaryen is a member of the exiled branch of the royal family and a bearer of Dark Sister. Her movements between Westeros and Essos have made her a dangerous and elusive figure in the struggle over the succession.",
     "quotes": [],
     "debutChapter": "the-viper-in-silk"
   },
@@ -3133,7 +3133,7 @@
         "latestDevelopment": "Her daughter, whose current location even Rhaella does not know."
       }
     },
-    "summary": "Naela Targaryen, wife of the exiled Vahaemon, is physically present with his circle across the Narrow Sea. She suffers from an unexplained recurring illness and undertakes dangerous journeys, usually north of Tyrosh, after which she returns stronger and healthier. Denlon suspects that the treatment may be entangled with blood magic, but this remains an intelligence assessment rather than confirmed fact.",
+    "summary": "Naela Targaryen is the wife of the exiled Vahaemon and part of the family gathered around his cause across the Narrow Sea. Her recurring journeys and possible connection to blood magic have become matters of concern to the Crown, though their purpose remains uncertain.",
     "quotes": []
   },
   {
@@ -3192,7 +3192,7 @@
         "latestDevelopment": "The dispute has become personal enough that Godfrey bypassed Lord Tully and carried his demand for justice to the Crown."
       }
     },
-    "summary": "A well-traveled lord from the Riverlands who arrived at the tourney with kind words for the Hand and a six-pass joust that lasted long enough to impress the stands before Jace's final lance throw sent him into the dirt. He congratulated Jace graciously, which cost him nothing; he then saved Gaelor Targaryen's life by tackling Brant Costayne mid-assassination, which cost him rather more. He makes no secret of his broader appetites, a fact Ser Alester noted with mild amusement from a roadside inn and relayed to Jace with more detail than was strictly necessary.",
+    "summary": "Lord Godfrey Blackwood is a well-traveled Riverlands noble and a capable swordsman. His house’s longstanding rivalry with House Bracken continues to draw wider attention as violence along their border unsettles the region.",
     "quotes": [],
     "debutChapter": "the-brothers-tilt"
   },
@@ -3241,7 +3241,7 @@
         "latestDevelopment": "His son and successor, twenty-five years his junior, who inherited Highgarden and the wardenship of the South after Lorent's execution."
       }
     },
-    "summary": "Lorent Tyrell was Lord of Highgarden and Warden of the South before his son Renrose. Convinced that the realm could not survive another of King Baelenys's wars, he drew Derrin Hightower into the conspiracy to poison the King. When the plot began to unravel, Lorent obeyed a royal summons and rode from Highgarden to King's Landing. On the Fifth Day of the Third Moon, five days after Derrin's secret death, Baelenys condemned Lorent for treason and ordered his execution in the capital. Renrose inherited Highgarden two moons before the Oldtown Massacre.",
+    "summary": "Lorent Tyrell was Lord of Highgarden and Warden of the South before his son Renrose succeeded him. His involvement in the conspiracy against King Baelenys left House Tyrell under suspicion and shaped the difficult inheritance passed to his son.",
     "quotes": [],
     "death": {
       "day": 5,
@@ -3325,7 +3325,7 @@
         "latestDevelopment": "His unnamed daughter, present beside him at the breakfast welcoming Visenor to Highgarden."
       }
     },
-    "summary": "Lord Renrose Tyrell receives Visenor at Highgarden and embraces the plan to frame House Gardener as Vahaemon's secret ally. His role is to invade and secure Gardener lands the moment the Crown declares their lord a traitor. Yet after Visenor places the scheme in his hands, Lady Liana warns Renrose not to mistake the prince's trust for permission to demand more. Renrose rejects her restraint and privately resolves that the only worthy course is one that places House Tyrell above every other family—including Visenor's.",
+    "summary": "Lord Renrose Tyrell rules Highgarden and places the advancement of House Tyrell above other loyalties. He has welcomed Visenor as a potential ally, while his appetite for power draws caution from his wife Liana and shapes his dealings with the Crown.",
     "quotes": [],
     "debutChapter": "the-manders-pact"
   },
@@ -3379,7 +3379,7 @@
         "latestDevelopment": "Recognised the disguised prince during the Oldtown street ambush and brought him to Melessa Hightower; has since ridden with him to Highgarden and now to Oldtown as part of his cover, making him one of the four people who know Visenor's true identity inside the Hightower."
       }
     },
-    "summary": "Ser Martyn Mullendore is a knight of the Reach who stumbled into Visenor's orbit by chance and chose loyalty over convenience. He led the City Watch patrol that intervened in the Oldtown alley ambush, recognised the disguised prince, and delivered him to Lady Melessa rather than to the authorities — a decision that has since drawn him fully into the conspiracy. He now rides as part of Visenor's cover retinue in Oldtown, one of only four people inside the Hightower who know Maester Arthur Sand is a prince of the blood. In Chapter XVII, the party reaches Highgarden after several days on the road during which Visenor drills Leo in swordplay, footwork and endurance, with Clarisse and Martyn often joining the lessons.",
+    "summary": "Ser Martyn Mullendore is a knight of the Reach who became a loyal companion to Visenor. He has helped the prince move through uncertain alliances and has joined in the training of the younger members of their party.",
     "quotes": [],
     "debutChapter": "the-manders-pact"
   },
@@ -3441,7 +3441,7 @@
         "latestDevelopment": "Accepts Tion's promise of financial assistance and gives the Crown time to provide it."
       }
     },
-    "summary": "High Septon Berholt Caswell is a man of genuine faith and genuine limits. After the Mummers' Blood, he answers Jace's request for the Faith to calm Flea Bottom by raising the sept works that Baelor had delayed. Berholt stops short of an ultimatum or Gaelor's excommunication; the Crown promises financial help, and he agrees to conduct rites for the dead and stand before the grieving city on the Crown's behalf.",
+    "summary": "High Septon Berholt Caswell is a man of sincere faith whose religious office places him amid the realm’s political and moral crises. The violence associated with the Mummers’ Blood has tested the limits of his authority and judgment.",
     "quotes": [],
     "debutChapter": "the-trial"
   },
@@ -3513,7 +3513,7 @@
         "latestDevelopment": "Joins swordplay and endurance lessons with Clarisse during the journey to Highgarden."
       }
     },
-    "summary": "Leo continues hiding what he learned and searched for after Highgarden, but admits to Visenor that divided loyalties and his father's control have left him unable to trust the people around him. In the Proud Lantern he recognizes their shared weariness with their fathers and accepts that their bond has become more than a simple mentor-pupil arrangement. Excited by the report of a dragon in Dorne, he agrees in principle to travel south with Visenor, though they have not yet departed Oldtown.",
+    "summary": "Leo Tyrell is a son of Lord Renrose and Lady Liana of Highgarden. He has spent time in Visenor’s company and trained with him and his companions. His divided loyalties reflect the uncertain place of House Tyrell in the royal struggle.",
     "quotes": [],
     "debutChapter": "the-trial"
   },
@@ -3572,7 +3572,7 @@
         "latestDevelopment": "His admiration for Visenor deepens as they complete the Gardener forgery together, though the Starfall report immediately opens a second and more dangerous problem involving Nymos."
       }
     },
-    "summary": "Almar helps Visenor complete the forged letter designed to make Lord Gardener appear allied with Vahaemon, including the invented claim that Vhagar has been found near Volantis. He warns that Lord Gardener may already be travelling toward King's Landing and urges the raven to fly at once. When Dorne reports a dragon and burned men near Starfall, Almar's private concern turns to Nymos and why their man has not returned. Unbeknownst to him, Leo Tyrell uses the distraction to search his private chambers.",
+    "summary": "Almar Larchmont is a political associate of Visenor who helps turn the prince’s plans into practical measures. His work in letters and intrigue places him close to the effort to build support against Vahaemon.",
     "quotes": [],
     "debutChapter": "fathers-and-their-sins"
   },
@@ -3632,7 +3632,7 @@
         "latestDevelopment": "Saathos helped draw Gaelor's attention toward Baran, while Baran immediately began probing the stories around Curtass Whent's death."
       }
     },
-    "summary": "A near-seven-foot wall of muscle and grievance, Baran Strong was once a Kingsguard whose career ended in a brawl with Curtass Whent inside the Red Keep itself. Stripped of his white cloak but judged the wronged party, he was exiled to Dragonstone rather than disgraced outright — a distinction he appreciates and resents in equal measure. Prince Malaenar calls him one of the finest knights in the Seven Kingdoms. Prince Gaelor, after a single evening's conversation at the stables, decided to find out if that was true.",
+    "summary": "Baran Strong is a physically imposing former Kingsguard knight whose service ended in disgrace. Resentment at the royal court remains a defining part of his character, alongside the formidable strength that once made him fit for the white cloak.",
     "quotes": [],
     "debutChapter": "the-reunion"
   },
@@ -3681,7 +3681,7 @@
         "latestDevelopment": "She organized the nameday feast that summoned the royal family to Dragonstone without telling him first, a move the family received with barely concealed contempt."
       }
     },
-    "summary": "A seventeen-year-old of no house and considerable ambition, Tansy has spent two years at Dragonstone as Malaenar Targaryen's companion. She organized his nameday feast and invited the royal family without asking him first — a gambit that put her at a high table with a king who called her a wench and a crown prince who looked at her the way men do when they are deciding not to. She showed no sign of finding either development discouraging.",
+    "summary": "Tansy Riverside is a young woman of no noble house who has made a place for herself at Dragonstone. Ambitious and observant, she seeks opportunities beyond the station into which she was born.",
     "quotes": [],
     "debutChapter": "the-reunion"
   },
@@ -3732,7 +3732,7 @@
         "latestDevelopment": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge."
       }
     },
-    "summary": "Lord Perric Bracken of Stone Hedge, whose men killed a Blackwood cousin near the border in circumstances that remain disputed. He called it an unfortunate accident during an altercation; Lord Godfrey Blackwood called it a deliberate provocation and brought the matter to the Hand of the King. Perric's niece Bethany is newly married to Oscar Tully, grandson of Lord Clover Tully, further complicating the Riverlands dispute.",
+    "summary": "Lord Perric Bracken rules Stone Hedge and stands on one side of the old Blackwood–Bracken feud. Border violence involving his men has renewed tension between the houses and complicated the wider politics of the Riverlands.",
     "quotes": []
   },
   {
@@ -3789,7 +3789,7 @@
         "latestDevelopment": "His bannerman and Lord of Stone Hedge; their houses are now tied by the marriage of Clover's grandson Oscar Tully to Perric's niece Bethany Bracken, a connection Godfrey Blackwood sees as compromising Clover's neutrality."
       }
     },
-    "summary": "Lord Clover Tully of Riverrun, Lord Paramount of the Trident. Notoriously passive and recently bound to House Bracken by the marriage of his grandson Oscar Tully to Lord Perric Bracken's niece Bethany, he refused to give Godfrey Blackwood the justice he demanded for his cousin's death — calling it a drunken mistake and urging peace. Godfrey took the matter to the Hand of the King instead.",
+    "summary": "Lord Clover Tully rules Riverrun as Lord Paramount of the Trident. His cautious approach to conflict has shaped the response to the Blackwood–Bracken dispute, while a marriage between his grandson Oscar and Bethany Bracken has drawn the families closer.",
     "quotes": []
   },
   {
@@ -4350,7 +4350,7 @@
         "latestDevelopment": "His elder brother, whose earlier choice of the Citadel meant he was not a claimant when Jaehaerys I died."
       }
     },
-    "summary": "The late King Aenys Targaryen II left wounds far deeper than succession politics. A memory from Baelenys's childhood reveals him humiliating his disabled seventeen-year-old son Malaenar beneath the Dragonpit, forcing the boy to crawl across the floor for the right to keep a small dragon before ordering Sheepstealer to kill it. Young Baelenys watched and failed to intervene. The cruelty of Aenys's household continues to shape both surviving sons decades after his death.",
+    "summary": "King Aenys Targaryen II was a father to Malaenar, Baelenys and Vahaemon. His reign and treatment of his sons left wounds within the dynasty that endured long after his death, especially around dragons and succession.",
     "quotes": [],
     "reign": {
       "from": "73 AC",
@@ -4529,7 +4529,7 @@
         "latestDevelopment": "He has joined Vahaemon in Essos and now stands openly beside him as the exile gathers dragons, blood magic and political support."
       }
     },
-    "summary": "Vaenarr remains beside Vahaemon across the Narrow Sea but refuses the offered office of Hand and rejects Dragonstone because it should pass to Aegor as Vahaemon's heir. When Vahaemon asks whether his return is still about Jaery, Vaenarr gives no answer. He believes their three dragons make the road to Westeros simple, while Vahaemon warns that Baelenys is more dangerous than Vaenarr allows.",
+    "summary": "Vaenarr Targaryen is a member of the exiled royal circle and a brother of Queen Jaery. His old feelings for her and his place beside Vahaemon continue to trouble the king’s trust. Vaenarr has resisted some of the formal power offered to him within the exile’s cause.",
     "quotes": []
   },
   {
@@ -4971,7 +4971,7 @@
         "latestDevelopment": "Helps train Leo alongside Visenor and Martyn on the road to Highgarden."
       }
     },
-    "summary": "Clarisse Flowers is a twenty-year-old bastard of Hightower blood, a short-haired, physically imposing swordswoman who was raised more like a son than a daughter and never prepared for the conventional life of a lady. Though neither a knight nor, by her own insistence, a lady, she has developed into an exceptional fighter and claims to have crossed swords with some of the realm's greatest knights while competing in disguise as a man. Among them was Lord Godfrey Blackwood, whom she says she left badly wounded. Lady Melessa Hightower values Clarisse highly and, on the Ninth Day of the Eighth Moon, 99 AC, assigned her to protect Visenor Targaryen throughout his concealed stay in Oldtown as Maester Arthur Sand. Visenor initially admitted surprise at being given a woman as his protector, prompting Clarisse to explain that she had never been raised as a conventional woman and could outfight many of the knights he had known at the Red Keep. When Visenor asked to test that claim, Clarisse proved it. After a hard spar that bloodied the prince's nose, she trapped him against a tree, evaded his counterattack, pinned his wooden sword beneath her boot and placed her own blade against his throat. Visenor accepted the defeat with good humor and told her there was clearly much he could learn from her. In Chapter XVII, the party reaches Highgarden after several days on the road during which Visenor drills Leo in swordplay, footwork and endurance, with Clarisse and Martyn often joining the lessons.",
+    "summary": "Clarisse Flowers is a young swordswoman of Hightower blood who was raised without the expectations usually placed on a noble daughter. Though neither a knight nor, by her own account, a lady, she is an exceptional fighter and has competed in disguise. Lady Melessa Hightower trusts her to protect Visenor during his stay in Oldtown.",
     "quotes": [],
     "debutChapter": "the-glass-flower"
   },
@@ -5030,7 +5030,7 @@
         "latestDevelopment": "Received her warmly when she returned to Winterfell; Saera greeted him with an immediate embrace before asking after Rickard."
       }
     },
-    "summary": "Benjen Stark is the fifteen-year-old younger brother of Lord Rickard Stark. Fine-boned and long-legged, with a cold, piercing gaze, he is already a skilled archer and rugged hunter and is rarely seen without a fine recurve bow. When Princess Saera returned to Winterfell with Ser Alester Dayne on the Thirteenth Day of the Eighth Moon, 99 AC, Benjen led the Northern party that received them while Rickard was away preparing a gift for the princess. Though young, he carried himself with formal courtesy and treated Alester not merely as a royal knight, but as a man returning to the lands of his mother.",
+    "summary": "Benjen Stark is Lord Rickard Stark’s younger brother, a skilled archer and rugged hunter often seen with a recurve bow. Though still young, he conducts himself with the formal courtesy expected of Winterfell’s household.",
     "quotes": [],
     "debutChapter": "the-glass-flower"
   },
@@ -5077,7 +5077,7 @@
         "latestDevelopment": "Used the steam of an herbal drink to clear Saera's clouded vision for a few miraculous seconds, allowing the princess to see Rickard and the white direwolf pup he had brought her."
       }
     },
-    "summary": "An elderly, blind servant of Winterfell known to most as Old Nan, though she introduces herself as Mother Marya. She tends a small patch of rare flowers and possesses knowledge that does not sit comfortably within ordinary household service. When Ser Alester Dayne encountered her during his first visit to the North, Marya showed intimate knowledge of a fragile, metallic-petaled flower that grows only rarely in Winterfell and beyond the Wall, using it to offer him a cryptic warning about beauty and thorns. The following night she stood beside Rickard Stark and Princess Saera with a steaming herbal drink; when Marya blew its vapor into Saera's face, the princess's clouded eyes cleared for several seconds and she saw perfectly for the first time in years. Whatever Marya truly knows, neither Alester nor Saera yet understands it.",
+    "summary": "Mother Marya, also known as Old Nan, is an elderly blind servant of Winterfell who tends rare flowers and speaks with unsettling insight. Her knowledge of plants and unusual remedies suggests a life and abilities that neither Ser Alester Dayne nor Princess Saera fully understands.",
     "quotes": [],
     "debutChapter": "the-glass-flower"
   },
@@ -5131,7 +5131,7 @@
         "latestDevelopment": "His elder grandson through Brandon Stark, who eventually inherited Winterfell and the wardenship after Brandon's death."
       }
     },
-    "summary": "Edwyle Stark was Lord of Winterfell and Warden of the North, father of Brandon Stark and grandfather of Rickard and Benjen Stark. Born in 28 AC, he belonged to the same broad political generation as King Aenys Targaryen II and became a significant ally of the Crown during Aenys' reign. Edwyle aided the King in ways that Baelenys still considered important many years later, though the precise nature of those services remains unknown. He died in 87 AC at the age of fifty-nine, after which Winterfell and the wardenship passed to his son Brandon. More than a decade after Edwyle's death, Baelenys openly admitted that although he had never cared much for Brandon personally, what Edwyle had done for Aenys still mattered enough for the Crown to honor the Stark family upon Brandon's death.",
+    "summary": "Edwyle Stark was Lord of Winterfell and Warden of the North before his son Brandon. An ally of King Aenys II, he earned lasting regard from the Crown through services whose details remain uncertain. His death in 87 AC passed Winterfell to Brandon.",
     "quotes": [],
     "death": {
       "day": 9,
@@ -5337,7 +5337,7 @@
         "latestDevelopment": "Lorenah instructed Daria to speak with him and make him stop drawing attention."
       }
     },
-    "summary": "Daria Sand is a twenty-three-year-old Dornish maid who came to King's Landing in Lorenah Dayne's household and serves as far more than a domestic attendant. She acts as Lorenah's eyes and ears among the servants and in the lower reaches of the city. Early in the sixteenth chapter, Daria reported Weylar Rocke's increasingly conspicuous drunken behavior in Flea Bottom, the emerging alliance between Prince Gaelor and Maester Cordin, and Naella Velaryon's efforts to push Gaelor into action against Jace. Lorenah treated the intelligence seriously but without panic and ordered Daria to deal with Weylar's public foolishness. Jacaelon later asks her to watch Vhaemys and ensure that she attends her lessons.",
+    "summary": "Daria Sand is a Dornish attendant in Lorenah Dayne’s household. More than a maid, she serves as Lorenah’s eyes and ears among servants and in the lower reaches of King’s Landing, gathering information and handling discreet tasks.",
     "quotes": []
   },
   {
@@ -5385,7 +5385,7 @@
         "latestDevelopment": "Alongside Ser Grance Morrigen, helped pull the terrified young prince away after Maelwing emerged from the clouds."
       }
     },
-    "summary": "Ser Myles Mooton was a thirty-five-year-old Riverlands knight on the Twelfth Day of the Second Moon, 56 AC. He rode with Prince Baelenys, Derrin Hightower, Ser Grance Morrigen and roughly thirty men toward Ashenmist Valley after Vahaemon's reckless attempt to approach Maelwing ended with more than twenty men burned to ash. When the dragon emerged, Myles and Grance advanced despite their fear and pulled Vahaemon back while Baelenys remained before the beast and ultimately claimed Maelwing.",
+    "summary": "Ser Myles Mooton was a Riverlands knight who accompanied Prince Baelenys to Ashenmist Valley when the prince claimed Maelwing. Despite the danger, Myles helped pull Vahaemon away from the dragon, showing courage in the crisis.",
     "quotes": []
   },
   {
@@ -5441,7 +5441,7 @@
         "latestDevelopment": "Alongside Ser Myles Mooton, took hold of the terrified young prince and pulled him away as Baelenys faced Maelwing."
       }
     },
-    "summary": "Ser Grance Morrigen was thirty-four years old on the Twelfth Day of the Second Moon, 56 AC, when he rode in Prince Baelenys's party to Ashenmist Valley. He was openly uneasy about the situation and muttered about what they had gotten themselves into as the party climbed into the clouds. After finding Vahaemon surrounded by the burned remains of his men and seeing Maelwing emerge, Grance nevertheless advanced with Ser Myles Mooton and helped drag the frightened young prince to safety while Baelenys stood his ground before the dragon.",
+    "summary": "Ser Grance Morrigen rode with Prince Baelenys to Ashenmist Valley during the claiming of Maelwing. Uneasy about the danger, he nevertheless joined Ser Myles Mooton in rescuing Vahaemon when the dragon appeared.",
     "quotes": []
   },
   {
@@ -5527,7 +5527,7 @@
         "latestDevelopment": "Satirized the royal family as part of the troupe's farce before Gaelor killed him during the massacre on the Fourteenth Day of the Eighth Moon, 99 AC."
       }
     },
-    "summary": "Zekar Alasyr was one of the two senior hands of the Motley Three, a celebrated troupe whose fame reached far beyond Flea Bottom. Natural charisma, an ever-mocking expression and a dangerous comic edge let him seize an audience with a glance. Alongside Merryn Whitespring he trained the younger Mydan Gerren in acting, improvisation, vocal and physical mimicry, crowd work and the judgment needed to test the limits of satire. By the troupe's final performance Mydan stood beside them as an equal. Their returns to Flea Bottom were acts of loyalty to the neighborhood and stages that made them, not signs of obscurity. That reputation made Gaelor's attack upon their royal farce a cultural and political outrage as well as a massacre.",
+    "summary": "Zekar Alasyr was one of the senior members of the Motley Three, a troupe renowned for satire and performance far beyond Flea Bottom. Charismatic and sharp-edged onstage, he helped train Mydan Gerren alongside Merryn Whitespring. He was killed during Prince Gaelor’s assault on a performance.",
     "quotes": []
   },
   {
@@ -5586,7 +5586,7 @@
         "latestDevelopment": "He refuses to become a Crown mouthpiece, but listens when Jace promises protection, restitution and help rebuilding the Motley Three's stage."
       }
     },
-    "summary": "The last surviving member of the Motley Three remains imprisoned after Gaelor killed Zekar Alasyr and Merryn Whitespring and the trapped audience stampeded. Jace visits him in the black cells, hears his testimony and promises that the Crown will help repair the troupe's property and protect any future performance. Mydan does not know whether he can ever act again, but Jace urges him not to let the site of his masters' deaths become the final meaning of their stage.",
+    "summary": "Mydan Gerren is an actor of the Motley Three, trained by Zekar Alasyr and Merryn Whitespring in satire, mimicry and the judgment needed to work a crowd. He survived Prince Gaelor’s attack on their performance, which killed his mentors and left the troupe’s future uncertain.",
     "quotes": []
   },
   {
@@ -5643,7 +5643,7 @@
         "latestDevelopment": "Helped perform the royal satire that Gaelor interrupted, and was killed during the massacre on the Fourteenth Day of the Eighth Moon, 99 AC."
       }
     },
-    "summary": "Merryn Whitespring was a relaxed, cunning and flamboyant master of the stage, one of the older two members of the Motley Three. He and Zekar Alasyr raised Mydan Gerren from pupil to peer, teaching him the full craft of performance and the perilous art of judging an audience. The three became renowned across the realm for crude farce, razor-edged satire and merciless impersonations of nobles and royals. They still returned to small Flea Bottom stages out of allegiance to the place where they began, despite possessing fame, technical mastery and social influence far beyond the district. Merryn was killed during Gaelor's assault on the Fourteenth Day of the Eighth Moon, 99 AC; the attack therefore struck at a recognized cultural institution, not an anonymous band of street fools.",
+    "summary": "Merryn Whitespring was a flamboyant and cunning performer of the Motley Three. Alongside Zekar Alasyr, he trained Mydan Gerren and helped make the troupe famous for farce, satire and impersonation. He died when Prince Gaelor attacked one of their performances.",
     "quotes": []
   },
   {
@@ -5684,7 +5684,7 @@
         "latestDevelopment": "Jace catches him covering for Vhaemys over the kitchen-cleaning punishment and warns that the Kingsguard oath comes before indulging the princess."
       }
     },
-    "summary": "Known as the Mustang, Lucas Corbray remains Vhaemys's indulgent Kingsguard protector. After allowing her to escape the spirit of Jace's kitchen-cleaning punishment, he is caught giving evasive answers and reminded that his white-cloak oath cannot be softened simply because he loves the princess. He continues to hover at Vhaemys's side as both bodyguard and accomplice in her smaller schemes.",
+    "summary": "Ser Lucas Corbray, known as the Mustang, is a Kingsguard knight and Princess Vhaemys’s indulgent protector. His affection for the child often makes him an accomplice in her smaller schemes, though his oath still demands discipline.",
     "quotes": [],
     "nameday": {
       "day": 24,
@@ -5725,7 +5725,7 @@
         "latestDevelopment": "Meets the princess after she interrupts his practice."
       }
     },
-    "summary": "A thirteen-year-old boy with striking crimson hair, Reyenald trains with wooden swords under Lord Commander Orwell Morrigen. Orwell praises his skill but warns that his arrogance could kill him. Their practice ends when Princess Vhaemys interrupts.",
+    "summary": "Reyenald Reyne is a young boy with striking crimson hair who trains with wooden swords under Lord Commander Orwell Morrigen. His skill is already evident, as is the arrogance his mentor fears may put him in danger.",
     "quotes": [],
     "nameday": {
       "day": 9,
@@ -5773,7 +5773,7 @@
         "latestDevelopment": "Morrigen assures him that the council has not summoned him to pronounce guilt and listens to his decision to remain in service."
       }
     },
-    "summary": "A seasoned commander in his late forties, Oswald remains in charge of the City Watch after Gaelor's promised appointment collapses with the Flea Bottom massacre. Before dawn he removes every gold cloak directly involved from duty and surrenders them for judgment. Though he considers resigning under the weight of the Watch's disgrace, he decides that abandoning the city would dishonor his years of service and accepts Jace's request to stay.",
+    "summary": "Ser Oswald Eagle is a seasoned commander of the City Watch. He holds to his duty despite the disgrace brought upon the Watch by gold cloaks involved in Prince Gaelor’s violence in Flea Bottom.",
     "quotes": [],
     "nameday": {
       "day": 12,
@@ -5826,7 +5826,7 @@
         "latestDevelopment": "His disappearance alongside Rhaella makes his identity itself suspicious to her."
       }
     },
-    "summary": "A younger maester who appeared at Starfall while Edmyn Uller was missing and attended Rhaella with unusual discretion. He knew of her pregnancy, answered her questions carefully and arranged provisions for her village walk. By the Eighteenth Day of the Eighth Moon, 99 AC, both he and Rhaella have failed to return for a full day. Lorenah Dayne has never heard his name, turning his unexplained presence and disappearance into one of the central mysteries surrounding Starfall.",
+    "summary": "Nymos is a young maester who attended Rhaella near Starfall while Edmyn Uller was absent. He knew of her pregnancy and treated her discreetly. His origin and the circumstances of his disappearance remain uncertain.",
     "quotes": []
   },
   {
@@ -5862,7 +5862,7 @@
         "latestDevelopment": "She urges her husband to preserve that advantage rather than exploit it without limit."
       }
     },
-    "summary": "Lady Liana is Renrose Tyrell's wife and closest confidante. She listens as Visenor and Renrose discuss their alliance at Highgarden. That evening she warns her husband that the prince's affection and trust can benefit their family if Renrose accepts their limits. She sees his appetite for greater power as a danger, but her warning does not dissuade him from placing House Tyrell above every other family. Her birth house and age have not been established.",
+    "summary": "Lady Liana Tyrell is Lord Renrose’s wife and closest confidante. Politically perceptive, she sees both the opportunity and the danger in his ambitions and urges him to recognize the limits of House Tyrell’s influence.",
     "quotes": []
   },
   {
@@ -5899,7 +5899,7 @@
         "latestDevelopment": "Visenor fastens it to his clothing at once, visibly delighting her."
       }
     },
-    "summary": "Elinor Tyrell is Lord Renrose's daughter and Leo's sister. After watching the visitor known as Maester Arthur Sand with fascination at Highgarden, she addresses him openly as her prince before his departure and presents him with a finely worked golden-rose brooch, which he immediately wears. Her exact age, knowledge and intentions remain unconfirmed.",
+    "summary": "Elinor Tyrell is the daughter of Lord Renrose and Lady Liana and sister of Leo. She has shown a particular interest in Visenor, though the extent of her knowledge and her intentions remain uncertain.",
     "quotes": [],
     "nameday": {
       "day": 7,
@@ -5966,7 +5966,7 @@
         "latestDevelopment": "His sister, already dead near Starfall by the time Aegor is revealed to the reader; whether he knows her fate is not established."
       }
     },
-    "summary": "Vahaemon Targaryen's son, revealed in Essos as a dragonrider already famous enough to have earned the name the Young Dragon. He is bonded to the golden dragon Sunfyre. On a hill overlooking the Narrow Sea, Aegor stands between Vahaemon, Vaenarr and Visenya as three dragons rise into the sky—making him the clearest living proof that the exiled branch of House Targaryen has become far more dangerous than the Crown believed.",
+    "summary": "Aegor Targaryen is Vahaemon’s son and a dragonrider known as the Young Dragon. Bonded to the golden Sunfyre, he is one of the clearest signs of the strength gathered by the exiled branch of House Targaryen.",
     "quotes": []
   },
   {

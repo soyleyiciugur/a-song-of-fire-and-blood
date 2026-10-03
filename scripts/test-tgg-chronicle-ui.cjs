@@ -1,0 +1,152 @@
+const {chromium, expect:baseExpect} = require('@playwright/test');
+const expect = baseExpect.configure({timeout:30000});
+const fs = require('node:fs');
+const url = process.env.TGG_TEST_URL || 'http://localhost:3000/cards/play';
+const logs = [];
+let id = 0;
+logs.push({id:++id,turn:0,message:'The Great Game begins.'});
+for (let turn=1;turn<=8;turn++) {
+  const playerId=turn%2?'player1':'player2';
+  logs.push({id:++id,turn,playerId,turnOwnerId:playerId,message:`Player ${turn%2?1:2} begins Turn ${Math.ceil(turn/2)}.`});
+  logs.push({id:++id,turn,playerId,turnOwnerId:playerId,message:`Command refills to ${turn}. (0 → ${turn} Command)`});
+  logs.push({id:++id,turn,playerId,turnOwnerId:playerId,message:'Played Crownlands Champion for 7 Command.'});
+}
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Drew The Brothers\' Tilt. (17 cards remain in deck)',visibility:'owner'});
+logs.push({id:++id,turn:8,playerId:'player2',turnOwnerId:'player2',message:'Drew Naela Targaryen. (17 cards remain in deck)',visibility:'owner'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Blackfyre is equipped to Leo Tyrell.'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Sunspear becomes the active Location.'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Maelwing is burned. (12 cards remain in deck)'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Maelwing recovers 1 Health while Grounded. (2 → 3 Health; threshold 4)'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Leo Tyrell loses 1 Influence.'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Leo Tyrell is destroyed.'});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Crownlands Champion challenges Leo Tyrell politically. (3 vs 2 Influence)',chronicle:{actionId:id,kind:'conflict',conflict:'Political',result:'Victory',sourceCardId:'crownlands-champion',sourceInstanceId:'champion',targetCardId:'leo-tyrell'}});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Crownlands Champion — Military Conflict: Leo Tyrell takes 7 Military damage.',chronicle:{actionId:id,kind:'conflict',conflict:'Military',result:'Victory',sourceCardId:'crownlands-champion',sourceInstanceId:'champion',targetCardId:'leo-tyrell'}});
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Played Crownlands Champion for 7 Command.',chronicle:{actionId:id,kind:'play',sourceCardId:'crownlands-champion',sourceInstanceId:'champion',changes:[{cardId:'leo-tyrell',instanceId:'leo',playerId:'player1',stat:'Strength',before:4,after:5},{cardId:'leo-tyrell',instanceId:'leo',playerId:'player1',stat:'Health',before:3,after:4},{playerId:'player1',stat:'Command',before:9,after:2}]}});
+const actionId=id;
+logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'PASSIVE — Crownlands Champion: Rally the Men activates.',chronicle:{actionId}});
+
+(async()=>{
+  fs.mkdirSync('.tmp',{recursive:true});
+  const browser=await chromium.launch({channel:'msedge',headless:true});
+  try {
+    const context=await browser.newContext({viewport:{width:1440,height:900}});
+    const page=await context.newPage(); const errors=[];
+    page.on('pageerror',error=>errors.push(error.message));
+    await page.goto(url);
+    await page.getByRole('button',{name:'Local Game',exact:true}).click();
+    await page.getByRole('button',{name:'Keep All',exact:true}).click();
+    await page.getByRole('button',{name:/Review .* Opening Hand/}).click();
+    await page.getByRole('button',{name:'Keep All',exact:true}).click();
+    if(await page.getByRole('button',{name:/Begin .* Turn/}).count()) await page.getByRole('button',{name:/Begin .* Turn/}).click();
+    await expect(page.locator('[class*="playerHud"]')).toBeVisible();
+    async function update(newLog,append=false,health=3) {
+      await page.evaluate(({newLog,append,health})=>{
+        const root=document.querySelector('main'); let fiber=root[Object.keys(root).find(key=>key.startsWith('__reactFiber$'))];
+        for(;fiber;fiber=fiber.return) for(let hook=fiber.memoizedState;hook;hook=hook.next) {
+          if(!hook.memoizedState?.players?.player1 || !hook.queue?.dispatch) continue;
+          const state=structuredClone(hook.memoizedState); state.phase='playing'; state.activePlayerId='player1';state.turnNumber=8;state.pendingEffect=null;state.activeLocation=null;
+          state.players.player1.board=[{instanceId:'champion',cardId:'crownlands-champion',ownerId:'player1',currentHealth:health,bonusHealth:0,exhausted:true,deployedThisTurn:false,grounded:false,attachedArtifactId:'blackfyre',modifiers:[{id:'buff',strength:2,permanent:true},{id:'debuff',influence:-2,permanent:true}],counters:{},flags:{}}];
+          state.players.player2.board=[];
+          state.log=append?[...state.log,...newLog]:newLog; hook.queue.dispatch(state); return;
+        }
+        throw Error('Game state fixture not found');
+      },{newLog,append,health});
+    }
+    await update(logs);
+    const panel=page.getByRole('region',{name:'Chronicle',exact:true});
+    const history=page.getByLabel('Match history', {exact:true});
+    await expect(panel).toBeVisible();
+    await expect(panel).not.toContainText('begins Turn');
+    await expect(panel).not.toContainText('Player 1');
+    await expect(panel).not.toContainText('Naela Targaryen');
+    const top=()=>history.evaluate(el=>el.scrollTop);
+    await expect.poll(top).toBeLessThan(2);
+    await expect(panel.locator('summary').first()).toContainText('Turn 8');
+    await expect(panel.locator('summary').last()).toContainText('Opening');
+    await expect(panel.locator('[data-chronicle-event]').first()).toHaveAttribute('data-chronicle-event',String(actionId));
+    await expect(panel.locator('[data-chronicle-event][class*="fresh"]')).toHaveCount(0);
+    await history.evaluate(el=>{el.scrollTop=500;el.dispatchEvent(new Event('scroll',{bubbles:true}));});
+    const anchor=await history.evaluate(el=>{const top=el.getBoundingClientRect().top;const row=[...el.querySelectorAll('[data-chronicle-event]')].find(row=>row.getBoundingClientRect().bottom>top);return{id:row.dataset.chronicleEvent,offset:row.getBoundingClientRect().top-top};});
+    await update([{id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Royal Favor grants 1 Command.'}],true);
+    await expect(panel.getByRole('button',{name:'↑ 1 new event',exact:true})).toBeVisible();
+    const fonts=await panel.evaluate(el=>({body:getComputedStyle(el).fontFamily,heading:getComputedStyle(el.querySelector('summary > span')).fontFamily,button:getComputedStyle([...el.querySelectorAll('button')].find(button=>button.textContent.includes('new event'))).fontFamily}));
+    expect(fonts.body).toContain('Crimson'); expect(fonts.heading).toContain('Cinzel'); expect(fonts.button).toBe(fonts.body);
+    await expect.poll(()=>history.evaluate((el,anchor)=>Math.abs(el.querySelector(`[data-chronicle-event="${anchor.id}"]`).getBoundingClientRect().top-el.getBoundingClientRect().top-anchor.offset),anchor)).toBeLessThan(2);
+    await panel.getByRole('button',{name:'↑ 1 new event',exact:true}).click();
+    await expect.poll(top).toBeLessThan(2);
+    await update([{id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'Command refills to 8. (3 → 8 Command)'}],true);
+    await expect.poll(top).toBeLessThan(2);
+    await expect(panel.getByRole('button',{name:/new event/})).toHaveCount(0);
+    await panel.locator('summary').filter({hasText:'1 unit affected'}).click();
+    await expect(panel).toContainText('4 → 5');
+    for(const kind of ['played','artifact','buff','debuff','command','location','draw','burned']) await expect(panel.locator(`svg[data-chronicle-icon="${kind}"]`).first()).toBeAttached();
+    await expect(panel.locator('[data-stat-icon="military"]').first()).toBeAttached();
+    await expect(panel.locator('[data-combat-status="death"] path').first()).toHaveAttribute('fill-rule','evenodd');
+    const currentTurn=panel.locator('details').first();
+    await expect(currentTurn.locator(':scope > article').last()).toContainText('Command');
+    const refillSpacing=await currentTurn.locator(':scope > article').last().evaluate(el=>{
+      const title=el.querySelector('[class*="eventHeading"] > span').getBoundingClientRect();
+      const detail=el.querySelector('[class*="description"]').getBoundingClientRect(); return detail.left-title.right;
+    });
+    expect(refillSpacing).toBeLessThan(12);
+    for(const kind of ['political','health']) await expect(panel.locator(`svg[data-stat-icon="${kind}"]`).first()).toHaveAttribute('fill','currentColor');
+    const champion=panel.locator('[data-entity-instance="champion"]').first();
+    await champion.hover();
+    const livePreview=page.getByLabel('Crownlands Champion preview',{exact:true});
+    await expect(livePreview).toBeVisible();
+    await expect(livePreview.locator('[class*="cardStat"] b')).toHaveText(['11','2','3/7']);
+    await expect(livePreview).toContainText('Exhausted');
+    await update([],true,2);
+    await expect(livePreview.locator('[class*="cardStat"] b')).toHaveText(['11','2','2/7']);
+    await page.screenshot({path:'.tmp/chronicle-live-preview.png'});
+    await champion.click();
+    const liveDialog=page.getByRole('dialog',{name:'Crownlands Champion details',exact:true});
+    await expect(liveDialog).toBeVisible();
+    await expect(liveDialog.locator('[class*="cardStat"] b')).toHaveText(['11','2','2/7']);
+    await expect(liveDialog).toContainText('Buff'); await expect(liveDialog).toContainText('Debuff');
+    await page.getByRole('button',{name:'Close card details',exact:true}).click();
+    for(const name of ['Blackfyre','Sunspear',"The Brothers' Tilt"]) {
+      const entity=panel.getByRole('button',{name:`Preview ${name}`,exact:true}).first();
+      await entity.scrollIntoViewIfNeeded(); await entity.hover();
+      await expect(page.getByLabel(`${name} preview`,{exact:true})).toBeVisible();
+      const bounds=await page.getByLabel(`${name} preview`,{exact:true}).boundingBox();
+      expect(bounds.x).toBeGreaterThanOrEqual(0); expect(bounds.y).toBeGreaterThanOrEqual(0);
+      expect(bounds.x+bounds.width).toBeLessThanOrEqual(1440); expect(bounds.y+bounds.height).toBeLessThanOrEqual(900);
+      await page.keyboard.press('Escape'); await expect(page.getByLabel(`${name} preview`,{exact:true})).toHaveCount(0);
+    }
+    await history.evaluate(el=>{el.scrollTop=0;el.dispatchEvent(new Event('scroll',{bubbles:true}));});
+    const firstTurn=panel.locator('details').first();
+    await firstTurn.locator('summary').first().click(); await expect(firstTurn).not.toHaveAttribute('open','');
+    await firstTurn.locator('summary').first().click(); await expect(firstTurn).toHaveAttribute('open','');
+    await history.evaluate(el=>{el.scrollTop=0;el.dispatchEvent(new Event('scroll',{bubbles:true}));});
+    await page.screenshot({path:'.tmp/chronicle-desktop.png'});
+    await page.setViewportSize({width:844,height:390});
+    const shortEntity=panel.locator('[data-entity-instance="champion"]').first();
+    await shortEntity.scrollIntoViewIfNeeded(); await shortEntity.hover();
+    const shortPreview=page.getByLabel('Crownlands Champion preview',{exact:true});
+    await expect(shortPreview).toBeVisible();
+    const shortBounds=await shortPreview.boundingBox();
+    expect(shortBounds.y).toBeGreaterThanOrEqual(0); expect(shortBounds.y+shortBounds.height).toBeLessThanOrEqual(390);
+    expect(shortBounds.x).toBeGreaterThanOrEqual(0); expect(shortBounds.x+shortBounds.width).toBeLessThanOrEqual(844);
+    await page.keyboard.press('Escape');
+    const cdp=await context.newCDPSession(page);
+    await cdp.send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:1});
+    const entity=panel.getByRole('button',{name:'Preview Sunspear',exact:true}).first();
+    await entity.scrollIntoViewIfNeeded(); const rect=await entity.boundingBox();
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:rect.x+rect.width/2,y:rect.y+rect.height/2,id:1}]});
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    await expect(page.getByRole('dialog',{name:'Sunspear',exact:true})).toBeVisible();
+    await page.getByRole('button',{name:'Close card details',exact:true}).click();
+    await expect.poll(()=>history.evaluate(el=>el.scrollWidth-el.clientWidth)).toBeLessThan(2);
+    const liveEntity=panel.locator('[data-entity-instance="champion"]').first();
+    await liveEntity.scrollIntoViewIfNeeded(); const liveRect=await liveEntity.boundingBox();
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:liveRect.x+liveRect.width/2,y:liveRect.y+liveRect.height/2,id:1}]});
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    await expect(liveDialog).toBeVisible();
+    await expect(liveDialog.locator('[class*="cardStat"] b')).toHaveText(['11','2','2/7']);
+    await page.getByRole('button',{name:'Close card details',exact:true}).click();
+    await page.screenshot({path:'.tmp/chronicle-touch.png'});
+    if(errors.length) throw Error(errors.join('\n'));
+    console.log('Chronicle desktop/touch: grouping, privacy, live append, pinned/unpinned scroll, unread jump, collapse, three entity previews, touch detail, and overflow passed.');
+  } finally { await browser.close(); }
+})().catch(error=>{console.error(error);process.exitCode=1;});

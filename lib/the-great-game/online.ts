@@ -66,6 +66,7 @@ const HIDDEN_CARD_ID = "__great_game_hidden_card__";
  * The database keeps the complete authoritative state. The browser receives
  * its own private zones plus public information. The opponent's deck and hand
  * retain only their lengths, so browser devtools cannot reveal hidden cards.
+ * Royal Favor is public and remains visible until it is used.
  * Veiled Sight is the deliberate exception while its mandatory effect is being
  * resolved by the viewer.
  */
@@ -85,7 +86,7 @@ export function projectGameStateForPlayer(
     projected.pendingEffect.controllerId === viewerId;
 
   if (!maySeeOpponentHand) {
-    opponent.hand = opponent.hand.map((_, index) => ({
+    opponent.hand = opponent.hand.map((card, index) => card.cardId === "royal-favor" ? card : ({
       instanceId: `hidden-hand-${opponentId}-${index}`,
       cardId: HIDDEN_CARD_ID,
       costModifiers: [],
