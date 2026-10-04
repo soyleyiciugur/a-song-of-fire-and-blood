@@ -152,44 +152,12 @@
   --bubble-index: 0;
   position: relative;
   margin-left: calc(var(--bubble-index) * 5px);
-  padding: 11px 13px 12px 15px;
-  border: 1px solid rgba(172, 126, 61, .58);
-  border-radius: 4px 10px 10px 4px;
-  background:
-    linear-gradient(90deg, rgba(122, 78, 37, .2), transparent 12%),
-    radial-gradient(circle at 14% 18%, rgba(96, 56, 30, .17), transparent 30%),
-    linear-gradient(145deg, rgba(42, 28, 23, .985), rgba(14, 10, 11, .99));
-  box-shadow:
-    inset 3px 0 rgba(176, 126, 56, .17),
-    inset 0 1px rgba(255,255,255,.03),
-    inset 0 -14px 22px rgba(0,0,0,.16),
-    0 10px 26px #000c;
-  color: #e1d0af;
+  padding: 16px 19px 18px;
+  background: url('/images/cards/chat-wheel/parchment.webp') center / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 12px #0009);
+  color: #382313;
   animation: emoteBubbleLifecycle 6600ms linear both;
   overflow: visible;
-}
-
-.bubble::before {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(213, 162, 78, .54) 20%, rgba(213, 162, 78, .24) 80%, transparent);
-}
-
-.bubble::after {
-  content: "";
-  position: absolute;
-  left: 13px;
-  bottom: -8px;
-  width: 14px;
-  height: 14px;
-  border-right: 1px solid rgba(172, 126, 61, .58);
-  border-bottom: 1px solid rgba(172, 126, 61, .58);
-  background: #110c0d;
-  transform: skewY(35deg) rotate(45deg);
 }
 
 .bubbleHeader {
@@ -199,11 +167,11 @@
   gap: 10px;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid rgba(180, 132, 64, .18);
+  border-bottom: 1px solid rgba(91, 53, 23, .28);
 }
 
 .bubbleHeader strong {
-  color: #cba363;
+  color: #65401f;
   font: 700 8px/1 var(--font-geist), sans-serif;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -215,24 +183,24 @@
   min-width: 19px;
   height: 19px;
   padding: 0 4px;
-  border: 1px solid rgba(181, 133, 62, .32);
+  border: 1px solid rgba(101, 64, 31, .35);
   border-radius: 999px;
-  background: rgba(12, 9, 10, .48);
-  color: #d5b779;
+  background: rgba(124, 79, 35, .1);
+  color: #65401f;
   font: 700 11px/1 Georgia, serif;
 }
 
 .bubbleText {
-  color: #e5d6bb;
+  color: #382313;
   font: 600 13px/1.38 var(--font-hotd), Georgia, serif;
   letter-spacing: .005em;
-  text-shadow: 0 1px 1px #000;
+  text-shadow: none;
 }
 
 .bubbleSalt {
   width: 94px;
   justify-self: start;
-  padding: 9px 11px 11px 14px;
+  padding: 14px 17px 16px;
 }
 
 .bubbleSalt .bubbleHeader { margin-bottom: 3px; padding-bottom: 4px; }

@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-10-05",
+    "items": [
+      "Added parchment artwork behind Mara's chat-wheel notifications with dark ink lettering for readability."
+    ]
+  },
+  {
     "date": "2026-10-04",
     "items": [
       "Removed the Thanks-specific softening so the corrected artwork uses the same styling as all other emote staves.",

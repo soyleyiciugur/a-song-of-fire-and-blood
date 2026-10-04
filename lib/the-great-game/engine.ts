@@ -1,5 +1,4 @@
 // lib/the-great-game/engine.ts
-import { assignSupporters } from "./supporters";
 
 import {
   getGameCard,
@@ -44,6 +43,8 @@ export const BOARD_LIMIT = 6;
 export const DRAGON_BOARD_LIMIT = 2;
 
 export const MAX_COMMAND = 10;
+
+export const FAMILIAR_GROUND_COST = 1;
 
 // ─────────────────────────────────────────────
 // General helpers
@@ -142,9 +143,37 @@ function shuffle<T>(
   return copy;
 }
 
+function randomItem<T>(items: T[]): T | undefined {
+  if (items.length === 0) return undefined;
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function activeLocationCounters(state: GameState): Record<string, number> | null {
+  if (!state.activeLocation) return null;
+  const location = state.activeLocation as typeof state.activeLocation & {
+    counters?: Record<string, number>;
+  };
+  location.counters ??= {};
+  return location.counters;
+}
+
 // ─────────────────────────────────────────────
 // Ability log helpers
 // ─────────────────────────────────────────────
+type EngineAbilityId =
+  | AbilityId
+  | "blackened-stones"
+  | "the-iron-price"
+  | "the-crown-was-never-mine"
+  | "lady-of-ashemark"
+  | "a-quiet-alliance"
+  | "a-secret-kept"
+  | "shelter-of-riverrun"
+  | "howl"
+  | "broken-vows"
+  | "north-of-tyrosh"
+  | "familiar-ground";
+
 
 function triggerLabel(
   trigger: AbilityTrigger
@@ -179,7 +208,7 @@ function triggerLabel(
 function logAbilityActivation(
   state: GameState,
   cardId: string,
-  abilityId: AbilityId,
+  abilityId: EngineAbilityId,
   playerId?: PlayerId,
   suffix?: string
 ) {
@@ -255,6 +284,162 @@ function getHandCard(
       card.instanceId ===
       handInstanceId
   );
+}
+
+/**
+ * Familiar Ground is a private, dynamic hand transformation.
+ *
+ * Matching Location cards are transformed in the owner's hand by replacing
+ * their runtime cardId with `familiar-ground`. The original Location id is
+ * stored only on that runtime hand-card object so the transformation can be
+ * reversed as soon as the active Location changes. No public log is emitted
+ * merely because the transformation exists.
+ */
+type FamiliarGroundHandCard = HandCardState & {
+  familiarGroundOriginalCardId?: string;
+};
+
+function originalHandCardId(
+  handCard: HandCardState
+): string {
+  const transformed =
+    handCard as FamiliarGroundHandCard;
+
+  return (
+    transformed.familiarGroundOriginalCardId ??
+    handCard.cardId
+  );
+}
+
+function refreshFamiliarGroundMutable(
+  state: GameState
+) {
+  const activeLocationId =
+    state.activeLocation?.cardId;
+
+  for (const playerId of [
+    "player1",
+    "player2",
+  ] as PlayerId[]) {
+    for (const handCard of
+      state.players[playerId].hand) {
+      const transformed =
+        handCard as FamiliarGroundHandCard;
+
+      const originalId =
+        originalHandCardId(handCard);
+
+      const originalCard =
+        getGameCard(originalId);
+
+      const shouldTransform =
+        Boolean(activeLocationId) &&
+        originalCard.cardType === "location" &&
+        originalCard.id === activeLocationId;
+
+      if (shouldTransform) {
+        transformed.familiarGroundOriginalCardId =
+          originalId;
+        handCard.cardId =
+          "familiar-ground";
+      } else if (
+        transformed.familiarGroundOriginalCardId
+      ) {
+        handCard.cardId =
+          transformed.familiarGroundOriginalCardId;
+        delete transformed.familiarGroundOriginalCardId;
+      }
+    }
+  }
+}
+
+export function isFamiliarGround(
+  state: GameState,
+  handCard: HandCardState
+): boolean {
+  if (!state.activeLocation) {
+    return false;
+  }
+
+  const originalId =
+    originalHandCardId(handCard);
+
+  const originalCard =
+    getGameCard(originalId);
+
+  return (
+    originalCard.cardType === "location" &&
+    originalId === state.activeLocation.cardId
+  );
+}
+
+export function getHandCardPresentationCardId(
+  state: GameState,
+  handCard: HandCardState
+): string {
+  return isFamiliarGround(
+    state,
+    handCard
+  )
+    ? "familiar-ground"
+    : originalHandCardId(handCard);
+}
+
+export function getHandCardPresentationCard(
+  state: GameState,
+  handCard: HandCardState
+): GameCard {
+  return getGameCard(
+    getHandCardPresentationCardId(
+      state,
+      handCard
+    )
+  );
+}
+
+/**
+ * Visuals never transform with Familiar Ground.
+ *
+ * Example: an Oldtown card may use Familiar Ground's name/cost/ability while
+ * Oldtown is already active, but its artwork must still be resolved from
+ * `oldtown`. This helper deliberately returns the original Location id even
+ * while the runtime hand card's cardId is `familiar-ground`.
+ */
+export function getHandCardVisualCardId(
+  handCard: HandCardState
+): string {
+  return originalHandCardId(handCard);
+}
+
+export type HandCardPresentation = {
+  card: GameCard;
+  rulesCardId: string;
+  visualCardId: string;
+  originalCardId: string;
+  isFamiliarGround: boolean;
+};
+
+/**
+ * Owner-facing presentation payload for hand UI. Rules/text come from the
+ * transformed Familiar Ground card; artwork comes from the original Location.
+ */
+export function getHandCardPresentation(
+  state: GameState,
+  handCard: HandCardState
+): HandCardPresentation {
+  const transformed = isFamiliarGround(state, handCard);
+  const originalCardId = originalHandCardId(handCard);
+  const rulesCardId = transformed
+    ? "familiar-ground"
+    : originalCardId;
+
+  return {
+    card: getGameCard(rulesCardId),
+    rulesCardId,
+    visualCardId: originalCardId,
+    originalCardId,
+    isFamiliarGround: transformed,
+  };
 }
 
 function playerControlsCard(
@@ -463,6 +648,29 @@ export function getPoliticalPower(
     unit,
     ["grand-counselor", "rickard-stark"]
   );
+
+  // Golden Rose Brooch: the chosen Character keeps +1 Influence only while
+  // the Elinor that chose it remains in play.
+  politicalPower += state.players[unit.ownerId].board.filter(
+    (source) =>
+      source.cardId === "elinor-tyrell" &&
+      source.flags[`golden-rose-target-${unit.instanceId}`]
+  ).length;
+
+  // The Motley Three share a contextual Influence bonus. Two members means
+  // +1 each; all three means +2 each (not +3).
+  if (["zekar-alasyr", "mydan-gerren", "merryn-whitespring"].includes(card.id)) {
+    const otherMembers = state.players[unit.ownerId].board.filter(
+      (candidate) =>
+        candidate.instanceId !== unit.instanceId &&
+        ["zekar-alasyr", "mydan-gerren", "merryn-whitespring"].includes(candidate.cardId)
+    ).length;
+    politicalPower += otherMembers >= 2 ? 2 : otherMembers === 1 ? 1 : 0;
+  }
+
+  if (card.id === "mydan-gerren" && unit.flags["the-stage-remains-active"]) {
+    politicalPower += 1;
+  }
 
   return Math.max(
     0,
@@ -693,6 +901,32 @@ function addCharacterModifierMutable(
 
   if (
     card.cardType === "character" &&
+    [adjusted.strength, adjusted.influence, adjusted.health].some(
+      (value) => (value ?? 0) < 0
+    )
+  ) {
+    const almar = state.players[target.ownerId].board.find(
+      (candidate) =>
+        candidate.cardId === "almar-larchmont" &&
+        candidate.instanceId !== target.instanceId &&
+        !(candidate.counters["almar-protection-used"] ?? 0)
+    );
+
+    if (almar) {
+      almar.counters["almar-protection-used"] = 1;
+      logAbilityActivation(
+        state,
+        almar.cardId,
+        "do-not-forget-it-my-lady",
+        almar.ownerId,
+        `${getGameCard(target.cardId).name} ignores the negative stat modifier.`
+      );
+      return adjusted;
+    }
+  }
+
+  if (
+    card.cardType === "character" &&
     state.activeLocation?.cardId === "oldtown" &&
     !state.players[controllerId].oldtownModifierUsedThisTurn
   ) {
@@ -724,8 +958,17 @@ export function getEffectiveCost(
 ): number {
   const card =
     getGameCard(
-      handCard.cardId
+      originalHandCardId(handCard)
     );
+
+  if (
+    isFamiliarGround(
+      state,
+      handCard
+    )
+  ) {
+    return FAMILIAR_GROUND_COST;
+  }
 
   let cost =
     card.cost;
@@ -751,6 +994,14 @@ export function getEffectiveCost(
     state.activeLocation
       ?.cardId ===
       "dragonstone"
+  ) {
+    cost -= 1;
+  }
+
+  if (
+    card.cardType === "event" &&
+    (state.players[playerId].eventsPlayedThisTurn ?? 0) === 0 &&
+    playerControlsCard(state, playerId, "tansy-riverside")
   ) {
     cost -= 1;
   }
@@ -840,7 +1091,7 @@ function handSizeForLimit(
   return player.hand.filter(
     (handCard) =>
       getGameCard(
-        handCard.cardId
+        originalHandCardId(handCard)
       ).special !==
       "royal-favor"
   ).length;
@@ -1289,7 +1540,8 @@ interface DamageResult {
 
 function destroyCharacterMutable(
   state: GameState,
-  unit: UnitState
+  unit: UnitState,
+  destroyedByInstanceId?: string
 ) {
   const healthBefore = captureMaximumHealths(state);
 
@@ -1349,6 +1601,90 @@ function destroyCharacterMutable(
 
   reconcileHealthAfterAuraChange(state, healthBefore);
 
+  if (card.id === "timos-hightower") {
+    const recipient = randomItem(
+      owner.board.filter((candidate) => getGameCard(candidate.cardId).cardType === "character")
+    );
+    if (recipient) {
+      addCharacterModifierMutable(state, unit.ownerId, recipient, {
+        id: nextRuntimeId(state, "he-asked-for-parley"),
+        strength: 1,
+        permanent: true,
+      });
+      logAbilityActivation(
+        state, card.id, "he-asked-for-parley", unit.ownerId,
+        `${getGameCard(recipient.cardId).name} gains +1 Strength permanently.`
+      );
+    }
+  }
+
+  if (card.id === "brandon-stark") {
+    const recipient = randomItem(
+      owner.board.filter((candidate) => getGameCard(candidate.cardId).cardType === "character")
+    );
+    if (recipient) {
+      addCharacterModifierMutable(state, unit.ownerId, recipient, {
+        id: nextRuntimeId(state, "death-in-his-own-bed"),
+        health: 1,
+        permanent: true,
+      });
+      logAbilityActivation(
+        state, card.id, "death-in-his-own-bed", unit.ownerId,
+        `${getGameCard(recipient.cardId).name} gains +1 Health permanently.`
+      );
+    }
+  }
+
+  if (card.id === "alysanne-hightower" && destroyedByInstanceId) {
+    const destroyer = findUnit(state, destroyedByInstanceId);
+    if (destroyer && getGameCard(destroyer.cardId).cardType === "character") {
+      addCharacterModifierMutable(state, unit.ownerId, destroyer, {
+        id: nextRuntimeId(state, "unintended"),
+        influence: -1,
+        permanent: true,
+      });
+      logAbilityActivation(
+        state, card.id, "unintended", unit.ownerId,
+        `${getGameCard(destroyer.cardId).name} loses 1 Influence permanently.`
+      );
+    }
+  }
+
+  for (const mydan of owner.board.filter((candidate) => candidate.cardId === "mydan-gerren")) {
+    if (!(mydan.counters["the-stage-remains-used"] ?? 0)) {
+      mydan.counters["the-stage-remains-used"] = 1;
+      mydan.flags["the-stage-remains-active"] = true;
+      mydan.counters["the-stage-remains-expires-after-turn"] = owner.turnsTaken + 1;
+      logAbilityActivation(
+        state, mydan.cardId, "the-stage-remains", mydan.ownerId,
+        "Mydan gains +1 Influence until the end of his Ruler's next turn."
+      );
+    }
+  }
+
+  // Harrenhal's Curse counter is stored on the active Location itself so it
+  // naturally disappears when the Location leaves play. The 0/0 simultaneous
+  // Standing edge case remains intentionally unresolved and is not executed
+  // here until that rule is decided.
+  if (state.activeLocation?.cardId === "harrenhal") {
+    const counters = activeLocationCounters(state)!;
+    counters["curse"] = Math.min(3, (counters["curse"] ?? 0) + 1);
+    logAbilityActivation(
+      state, "harrenhal", "blackened-stones", undefined,
+      `Harrenhal has ${counters["curse"]}/3 Curse.`
+    );
+    if (counters["curse"] >= 3) {
+      if (!(state.players.player1.standing <= 1 && state.players.player2.standing <= 1)) {
+        counters["curse"] = 0;
+        damageStandingMutable(state, "player1", 1, { source: "Blackened Stones", evaluate: false });
+        damageStandingMutable(state, "player2", 1, { source: "Blackened Stones", evaluate: false });
+        evaluateWinnerMutable(state);
+      } else {
+        addLog(state, "Blackened Stones is ready to resolve, but the simultaneous 0 Standing tie rule is still undecided.");
+      }
+    }
+  }
+
   if (
     card.id ===
     "lorent-tyrell"
@@ -1387,7 +1723,8 @@ function damageUnitMutable(
   instanceId: string,
   amount: number,
   kind: DamageKind,
-  source?: string
+  source?: string,
+  sourceUnitInstanceId?: string
 ): DamageResult {
   const unit =
     findUnit(
@@ -1419,28 +1756,26 @@ function damageUnitMutable(
   let finalDamage =
     amount;
 
-  if (
-    card.id === "perric-bracken" &&
-    kind === "event" &&
-    !(unit.counters["perric-event-prevention-used"] ?? 0)
-  ) {
-    const prevented =
-      Math.min(
-        2,
-        finalDamage
-      );
+  const protectingMyles = state.players[unit.ownerId].board.find(
+    (candidate) =>
+      candidate.cardId === "myles-mooton" &&
+      candidate.flags[`pull-him-clear-target-${unit.instanceId}`] &&
+      !(candidate.counters["pull-him-clear-used"] ?? 0)
+  );
+  if (protectingMyles && finalDamage > 0) {
+    finalDamage -= 1;
+    protectingMyles.counters["pull-him-clear-used"] = 1;
+    logAbilityActivation(
+      state, protectingMyles.cardId, "pull-him-clear", protectingMyles.ownerId,
+      `Prevents 1 damage to ${getGameCard(unit.cardId).name}.`
+    );
+  }
 
+  if (card.id === "grance-morrigen" && kind === "military" && unit.flags["military-defending"]) {
+    const prevented = Math.min(2, finalDamage);
     finalDamage -= prevented;
-    unit.counters["perric-event-prevention-used"] = 1;
-
     if (prevented > 0) {
-      logAbilityActivation(
-        state,
-        card.id,
-        "an-unfortunate-accident",
-        unit.ownerId,
-        `Prevents ${prevented} Event damage.`
-      );
+      logAbilityActivation(state, card.id, "hold-fast", unit.ownerId, `Absorbs ${prevented} damage while defending.`);
     }
   }
 
@@ -1561,7 +1896,8 @@ function damageUnitMutable(
   ) {
     destroyCharacterMutable(
       state,
-      unit
+      unit,
+      sourceUnitInstanceId
     );
 
     return {
@@ -1624,7 +1960,8 @@ function allCharacters(
 
 function resolveImmediateArrivalAbilitiesMutable(
   state: GameState,
-  unit: UnitState
+  unit: UnitState,
+  action?: Extract<GameAction, { type: "play-card" }>
 ) {
   const card = getGameCard(unit.cardId);
 
@@ -1636,22 +1973,124 @@ function resolveImmediateArrivalAbilitiesMutable(
       unit.ownerId
     );
 
-    gainStandingMutable(
-      state,
-      "player1",
-      2,
-      "A Drunken Mistake"
+    gainStandingMutable(state, "player1", 2, "A Drunken Mistake");
+    gainStandingMutable(state, "player2", 2, "A Drunken Mistake");
+    drawCardMutable(state, unit.ownerId);
+  }
+
+  if (card.id === "annara-celtigar") {
+    const vhaemys = [...state.players.player1.board, ...state.players.player2.board].find(
+      (candidate) => candidate.cardId === "vhaemys-targaryen"
     );
-    gainStandingMutable(
-      state,
-      "player2",
-      2,
-      "A Drunken Mistake"
+    if (vhaemys) {
+      addCharacterModifierMutable(state, unit.ownerId, unit, {
+        id: nextRuntimeId(state, "a-friend-summoned"), influence: 1, permanent: true,
+      });
+      addCharacterModifierMutable(state, vhaemys.ownerId, vhaemys, {
+        id: nextRuntimeId(state, "a-friend-summoned"), influence: 1, permanent: true,
+      });
+      logAbilityActivation(state, card.id, "a-friend-summoned", unit.ownerId);
+    }
+  }
+
+  if (card.id === "malaenar-targaryen") {
+    logAbilityActivation(state, card.id, "the-crown-was-never-mine", unit.ownerId);
+    gainStandingMutable(state, unit.ownerId, 2, "The Crown Was Never Mine");
+  }
+
+  if (card.id === "nymos") {
+    const enemyId = opponentOf(unit.ownerId);
+    const target = randomItem(state.players[enemyId].hand);
+    if (target) {
+      target.costModifiers.push({
+        id: nextRuntimeId(state, "guarded-questions"),
+        amount: 1,
+        expiresAt: "end-of-player-turn",
+        expiresForPlayerId: enemyId,
+      });
+      logAbilityActivation(
+        state, card.id, "guarded-questions", unit.ownerId,
+        `${getGameCard(target.cardId).name} is revealed and costs +1 Command during ${playerName(enemyId)}'s next turn.`
+      );
+    }
+  }
+
+  if (card.id === "daria-sand") {
+    const enemyId = opponentOf(unit.ownerId);
+    const target = randomItem(state.players[enemyId].hand);
+    if (target) {
+      logAbilityActivation(
+        state, card.id, "seen-from-the-doorway", unit.ownerId,
+        `${getGameCard(target.cardId).name} is revealed from ${playerName(enemyId)}'s hand.`
+      );
+    }
+  }
+
+  if (card.id === "myrielle-marbrand") {
+    const target = randomItem(
+      state.players[unit.ownerId].board.filter((candidate) => getGameCard(candidate.cardId).cardType === "character")
     );
-    drawCardMutable(
-      state,
-      unit.ownerId
+    if (target) {
+      addCharacterModifierMutable(state, unit.ownerId, target, {
+        id: nextRuntimeId(state, "lady-of-ashemark"),
+        influence: 1, permanent: false, expiresAt: "start-of-controller-next-turn",
+      });
+      logAbilityActivation(state, card.id, "lady-of-ashemark", unit.ownerId, `${getGameCard(target.cardId).name} gains +1 Influence.`);
+    }
+  }
+
+  if (card.id === "bethany-bracken") {
+    const target = randomItem(
+      state.players[unit.ownerId].board.filter((candidate) => getGameCard(candidate.cardId).cardType === "character")
     );
+    if (target) {
+      addCharacterModifierMutable(state, unit.ownerId, target, {
+        id: nextRuntimeId(state, "a-quiet-alliance"),
+        health: 1, permanent: false, expiresAt: "start-of-controller-next-turn",
+      });
+      logAbilityActivation(state, card.id, "a-quiet-alliance", unit.ownerId, `${getGameCard(target.cardId).name} gains +1 Health.`);
+    }
+  }
+
+  const selected = action?.targetInstanceId ? findUnit(state, action.targetInstanceId) : undefined;
+
+  if (card.id === "maela-targaryen" && selected) {
+    assertRule(selected.ownerId === unit.ownerId && selected.instanceId !== unit.instanceId, "Buried Secret must choose another allied Character.");
+    assertRule(getGameCard(selected.cardId).cardType === "character" && !selected.exhausted, "Buried Secret requires another Ready allied Character.");
+    selected.exhausted = true;
+    unit.flags["buried-secret-pending"] = true;
+    logAbilityActivation(state, card.id, "buried-secret", unit.ownerId, `${getGameCard(selected.cardId).name} is Exhausted.`);
+  }
+
+  if (card.id === "melessa-hightower" && selected) {
+    assertRule(selected.ownerId === unit.ownerId && selected.instanceId !== unit.instanceId && getGameCard(selected.cardId).cardType === "character", "A Secret Kept must choose another allied Character.");
+    unit.flags[`a-secret-kept-target-${selected.instanceId}`] = true;
+    logAbilityActivation(state, card.id, "a-secret-kept", unit.ownerId, `${getGameCard(selected.cardId).name} is protected.`);
+  }
+
+  if (card.id === "martyn-mullendore" && selected) {
+    assertRule(selected.ownerId === unit.ownerId && selected.instanceId !== unit.instanceId && getGameCard(selected.cardId).cardType === "character", "Safe Passage must choose another allied Character.");
+    selected.flags["safe-passage-active"] = true;
+    selected.counters["safe-passage-expires-at-turn"] = state.players[unit.ownerId].turnsTaken + 1;
+    logAbilityActivation(state, card.id, "safe-passage", unit.ownerId, `${getGameCard(selected.cardId).name} cannot be challenged by enemy Characters until the start of ${playerName(unit.ownerId)}'s next turn.`);
+  }
+
+  if (card.id === "elinor-tyrell" && selected) {
+    assertRule(selected.ownerId === unit.ownerId && selected.instanceId !== unit.instanceId && getGameCard(selected.cardId).cardType === "character", "Golden Rose Brooch must choose another allied Character.");
+    unit.flags[`golden-rose-target-${selected.instanceId}`] = true;
+    logAbilityActivation(state, card.id, "golden-rose-brooch", unit.ownerId, `${getGameCard(selected.cardId).name} has +1 Influence while Elinor remains in play.`);
+  }
+
+  if (card.id === "elwood-tully" && selected) {
+    assertRule(selected.ownerId === unit.ownerId && getGameCard(selected.cardId).cardType === "character", "Shelter of Riverrun must choose an allied Character.");
+    const healed = healUnitMutable(state, selected, 1);
+    logAbilityActivation(state, card.id, "shelter-of-riverrun", unit.ownerId, `${getGameCard(selected.cardId).name} heals ${healed} damage.`);
+  }
+
+  if (card.id === "myles-mooton" && selected) {
+    assertRule(selected.ownerId === unit.ownerId && selected.instanceId !== unit.instanceId && getGameCard(selected.cardId).cardType === "character", "Pull Him Clear must choose another allied Character.");
+    unit.flags[`pull-him-clear-target-${selected.instanceId}`] = true;
+    logAbilityActivation(state, card.id, "pull-him-clear", unit.ownerId, `${getGameCard(selected.cardId).name} is under Myles's protection.`);
   }
 }
 
@@ -2337,7 +2776,8 @@ export function getMilitaryTargetOptions(
       enemyId
     ].board.filter(
       (unit) =>
-        !unit.grounded
+        !unit.grounded &&
+        !protectedBySafePassageFrom(state, attacker.ownerId, unit)
     );
 
   const guards =
@@ -2448,7 +2888,8 @@ export function getPoliticalDefenseOptions(
         return (
           card.cardType ===
             "character" &&
-          !unit.exhausted
+          !unit.exhausted &&
+          !protectedBySafePassageFrom(state, attacker.ownerId, unit)
         );
       }
     );
@@ -2536,6 +2977,38 @@ export function getPoliticalDefenseOptions(
     selectionBy:
       "attacker",
   };
+}
+
+function consumeSecretKeptForEvent(
+  state: GameState,
+  eventPlayerId: PlayerId,
+  targets: Array<UnitState | undefined>
+): boolean {
+  for (const target of targets) {
+    if (!target || target.ownerId === eventPlayerId) continue;
+    const melessa = state.players[target.ownerId].board.find(
+      (candidate) =>
+        candidate.cardId === "melessa-hightower" &&
+        candidate.flags[`a-secret-kept-target-${target.instanceId}`]
+    );
+    if (melessa) {
+      delete melessa.flags[`a-secret-kept-target-${target.instanceId}`];
+      logAbilityActivation(
+        state, melessa.cardId, "a-secret-kept", melessa.ownerId,
+        `${getGameCard(target.cardId).name} causes the enemy Event to have no effect.`
+      );
+      return true;
+    }
+  }
+  return false;
+}
+
+function protectedBySafePassageFrom(
+  state: GameState,
+  attackerOwnerId: PlayerId,
+  target: UnitState
+): boolean {
+  return target.ownerId !== attackerOwnerId && Boolean(target.flags["safe-passage-active"]);
 }
 
 // ─────────────────────────────────────────────
@@ -2747,6 +3220,13 @@ function resolveEventMutable(
     }
   >
 ) {
+  const eventTargets = [
+    action.targetInstanceId ? findUnit(state, action.targetInstanceId) : undefined,
+    action.secondaryTargetInstanceId ? findUnit(state, action.secondaryTargetInstanceId) : undefined,
+  ];
+  if (consumeSecretKeptForEvent(state, playerId, eventTargets)) {
+    return;
+  }
   if (
     card.id ===
     "word-in-the-right-ear"
@@ -3039,9 +3519,24 @@ function playCardMutable(
       handIndex
     ];
 
+  const originalCardId =
+    originalHandCardId(handCard);
+
   const card =
     getGameCard(
-      handCard.cardId
+      originalCardId
+    );
+
+  const familiarGround =
+    isFamiliarGround(
+      state,
+      handCard
+    );
+
+  const presentationCard =
+    getHandCardPresentationCard(
+      state,
+      handCard
     );
 
   if (isUnitCard(card)) {
@@ -3120,7 +3615,7 @@ function playCardMutable(
   assertRule(
     player.command >=
       cost,
-    `Not enough Command. ${card.name} costs ${cost}.`
+    `Not enough Command. ${presentationCard.name} costs ${cost}.`
   );
 
   const dragonstoneDiscount =
@@ -3168,11 +3663,41 @@ function playCardMutable(
     1
   );
 
+  if (
+    familiarGround
+  ) {
+    player.discard.push(
+      originalCardId
+    );
+
+    addLog(
+      state,
+      `FAMILIAR GROUND — ${card.name} is discarded for ${FAMILIAR_GROUND_COST} Command to draw 1 card.`,
+      playerId,
+      "owner"
+    );
+
+    drawCardMutable(
+      state,
+      playerId
+    );
+
+    return;
+  }
+
   addLog(
     state,
     `Played ${card.name} for ${cost} Command.`,
     playerId
   );
+
+  if (
+    card.cardType === "event" &&
+    (player.eventsPlayedThisTurn ?? 0) === 0 &&
+    playerControlsCard(state, playerId, "tansy-riverside")
+  ) {
+    logAbilityActivation(state, "tansy-riverside", "she-organized-the-whole-thing", playerId);
+  }
 
   if (
     dragonstoneDiscount
@@ -3318,7 +3843,8 @@ function playCardMutable(
     ) {
       resolveImmediateArrivalAbilitiesMutable(
         state,
-        unit
+        unit,
+        action
       );
 
       triggerLeoDeploymentMutable(
@@ -3445,6 +3971,8 @@ function playCardMutable(
         playerId,
     };
 
+    activeLocationCounters(state);
+
     reconcileHealthAfterAuraChange(state, healthBefore);
 
     addLog(
@@ -3567,9 +4095,39 @@ function orwellStrengthBonus(
 ): number {
   return unit.cardId === "orwell-morrigen" &&
     getGameCard(opposingUnit.cardId).cardType === "character" &&
-    opposingUnit.deployedThisTurn
+    (opposingUnit.counters["military-conflicts-participated"] ?? 0) === 0
     ? 2
     : 0;
+}
+
+function markMilitaryParticipation(unit: UnitState | undefined) {
+  if (!unit || getGameCard(unit.cardId).cardType !== "character") return;
+  unit.counters["military-conflicts-participated"] =
+    (unit.counters["military-conflicts-participated"] ?? 0) + 1;
+}
+
+function rewardReyenaldSurvivalMutable(state: GameState, unit: UnitState | undefined) {
+  if (!unit || unit.cardId !== "reyenald-reyne" || !findUnit(state, unit.instanceId)) return;
+  addCharacterModifierMutable(state, unit.ownerId, unit, {
+    id: nextRuntimeId(state, "promising-blade"),
+    strength: 1,
+    permanent: true,
+  });
+  logAbilityActivation(state, unit.cardId, "promising-blade", unit.ownerId, "Reyenald survives and gains +1 Strength permanently.");
+}
+
+function registerPykeRaidMutable(state: GameState, playerId: PlayerId) {
+  if (state.activeLocation?.cardId !== "pyke") return;
+  const counters = activeLocationCounters(state)!;
+  const key = `raid-${playerId}`;
+  counters[key] = (counters[key] ?? 0) + 1;
+  if (counters[key] >= 3) {
+    counters[key] = 0;
+    state.players[playerId].nextCommandBonus += 1;
+    logAbilityActivation(state, "pyke", "the-iron-price", playerId, "3 Raid reset; +1 Command is gained next Ruler Turn.");
+  } else {
+    logAbilityActivation(state, "pyke", "the-iron-price", playerId, `${counters[key]}/3 Raid.`);
+  }
 }
 
 function registerMilitaryWinMutable(
@@ -3805,6 +4363,8 @@ function militaryAttackMutable(
       registerMilitaryWinMutable(state, playerId);
     }
 
+    markMilitaryParticipation(attacker!);
+    rewardReyenaldSurvivalMutable(state, findUnit(state, attacker!.instanceId));
     return;
   }
 
@@ -3883,6 +4443,23 @@ function militaryAttackMutable(
     );
   }
 
+  attacker!.exhausted = true;
+
+  if (attackerCard.id === "benjen-stark" && getGameCard(target!.cardId).cardType === "character") {
+    logAbilityActivation(state, attackerCard.id, "howl", playerId);
+    const howl = damageUnitMutable(
+      state, target!.instanceId, 1, "ability", "Howl", attacker!.instanceId
+    );
+    if (howl.destroyed) {
+      registerMilitaryWinMutable(state, playerId);
+      registerPykeRaidMutable(state, playerId);
+      markMilitaryParticipation(attacker!);
+      rewardReyenaldSurvivalMutable(state, findUnit(state, attacker!.instanceId));
+      evaluateWinnerMutable(state);
+      return;
+    }
+  }
+
   const attackerOrwellBonus = orwellStrengthBonus(attacker!, target!);
   const defenderOrwellBonus = orwellStrengthBonus(target!, attacker!);
 
@@ -3893,17 +4470,32 @@ function militaryAttackMutable(
     logAbilityActivation(state, target!.cardId, "experience-triumphs", target!.ownerId);
   }
 
+  const perricBonus =
+    attacker!.cardId === "perric-bracken" &&
+    getGameCard(target!.cardId).cardType === "character" &&
+    target!.currentHealth < getMaximumHealth(state, target!)
+      ? 1
+      : 0;
+  if (perricBonus) {
+    logAbilityActivation(state, attacker!.cardId, "an-unfortunate-accident", playerId);
+  }
+
   const attackerPower =
     getMilitaryPower(
       state,
       attacker!
-    ) + conflictBonus.strengthBonus + attackerOrwellBonus;
+    ) + conflictBonus.strengthBonus + attackerOrwellBonus + perricBonus;
+
+  const oscarBonus = target!.cardId === "oscar-tully" ? 1 : 0;
+  if (oscarBonus) {
+    logAbilityActivation(state, target!.cardId, "river-knight", target!.ownerId);
+  }
 
   const targetPower =
     militaryDefensePower(
       state,
       target!
-    ) + defenderOrwellBonus;
+    ) + defenderOrwellBonus + oscarBonus;
 
   const targetWasGrounded =
     target!.grounded;
@@ -3913,8 +4505,7 @@ function militaryAttackMutable(
       target!.cardId
     );
 
-  attacker!.exhausted =
-    true;
+  target!.flags["military-defending"] = true;
 
   const targetResult =
     damageUnitMutable(
@@ -3922,7 +4513,8 @@ function militaryAttackMutable(
       target!.instanceId,
       attackerPower,
       "military",
-      `${attackerCard.name} — Military Conflict`
+      `${attackerCard.name} — Military Conflict`,
+      attacker!.instanceId
     );
 
   maybeApplySunspearPoisonMutable(
@@ -3940,8 +4532,14 @@ function militaryAttackMutable(
       attacker!.instanceId,
       targetPower,
       "military",
-      `${targetCard.name} — Military Defense`
+      `${targetCard.name} — Military Defense`,
+      target!.instanceId
     );
+  }
+
+  const survivingTarget = findUnit(state, target!.instanceId);
+  if (survivingTarget) {
+    survivingTarget.flags["military-defending"] = false;
   }
 
   const survivingAttacker = findUnit(state, attacker!.instanceId);
@@ -3952,6 +4550,15 @@ function militaryAttackMutable(
   ) {
     registerMilitaryWinMutable(state, playerId);
   }
+
+  if (targetCard.cardType === "character" && targetResult.destroyed) {
+    registerPykeRaidMutable(state, playerId);
+  }
+
+  markMilitaryParticipation(survivingAttacker ?? attacker!);
+  markMilitaryParticipation(survivingTarget ?? target!);
+  rewardReyenaldSurvivalMutable(state, survivingAttacker);
+  rewardReyenaldSurvivalMutable(state, survivingTarget);
 
   if (
     attacker!.cardId ===
@@ -4072,6 +4679,11 @@ function politicalAttackMutable(
     "That Character is Exhausted."
   );
 
+  assertRule(
+    attacker!.cardId !== "malaenar-targaryen",
+    "The Crown Was Never Mine prevents Malaenar from initiating Political Conflicts."
+  );
+
   if (
     attacker!
       .deployedThisTurn
@@ -4107,11 +4719,16 @@ function politicalAttackMutable(
     "political"
   );
 
+  const zekarBonus = attacker!.cardId === "zekar-alasyr" ? 1 : 0;
+  if (zekarBonus) {
+    logAbilityActivation(state, attacker!.cardId, "read-the-crowd", playerId);
+  }
+
   let attackerPoliticalPower =
     getPoliticalPower(
       state,
       attacker!
-    ) + conflictBonus.influenceBonus;
+    ) + conflictBonus.influenceBonus + zekarBonus;
 
   assertRule(
     attackerPoliticalPower > 0,
@@ -4187,6 +4804,7 @@ function politicalAttackMutable(
       state
     );
 
+    rewardReyenaldSurvivalMutable(state, findUnit(state, attacker!.instanceId));
     return;
   }
 
@@ -4286,11 +4904,15 @@ function politicalAttackMutable(
     );
   }
 
+  const merrynBonus = defender!.cardId === "merryn-whitespring" ? 1 : 0;
+  if (merrynBonus) {
+    logAbilityActivation(state, defender!.cardId, "perfect-timing", defender!.ownerId);
+  }
   const defenderPoliticalPower =
     politicalDefensePower(
       state,
       defender!
-    );
+    ) + merrynBonus;
 
   if (
     attackerPoliticalPower >=
@@ -4337,6 +4959,9 @@ function politicalAttackMutable(
       defender!.ownerId
     );
   }
+
+  rewardReyenaldSurvivalMutable(state, findUnit(state, attacker!.instanceId));
+  rewardReyenaldSurvivalMutable(state, findUnit(state, defender!.instanceId));
 
   evaluateWinnerMutable(
     state
@@ -4766,8 +5391,10 @@ function resetPerTurnCounters(
       unit.counters[
         "dawns-edge-prevented"
       ] = 0;
-      unit.counters["perric-event-prevention-used"] = 0;
       unit.counters["dangerous-name-used"] = 0;
+      unit.counters["almar-protection-used"] = 0;
+      unit.counters["pull-him-clear-used"] = 0;
+      unit.counters["the-stage-remains-used"] = 0;
     }
   }
 }
@@ -4995,6 +5622,44 @@ function startTurnMutable(
     playerId
   );
 
+  for (const unit of player.board) {
+    if (
+      unit.flags["safe-passage-active"] &&
+      (unit.counters["safe-passage-expires-at-turn"] ?? Number.POSITIVE_INFINITY) <= player.turnsTaken
+    ) {
+      unit.flags["safe-passage-active"] = false;
+    }
+
+    if (unit.cardId === "brannyn-vance") {
+      addCharacterModifierMutable(state, playerId, unit, {
+        id: nextRuntimeId(state, "broken-vows"),
+        strength: -1,
+        permanent: true,
+      });
+      logAbilityActivation(state, unit.cardId, "broken-vows", playerId, "Brannyn loses 1 Strength permanently.");
+    }
+
+    if (unit.cardId === "naela-targaryen") {
+      const before = unit.currentHealth;
+      unit.bonusHealth = getBonusHealthCapacity(state, unit);
+      unit.currentHealth = getMaximumHealth(state, unit);
+      if (unit.currentHealth > before) {
+        logAbilityActivation(state, unit.cardId, "north-of-tyrosh", playerId, `Naela restores to full Health. (${before} → ${unit.currentHealth})`);
+      }
+    }
+
+    if (unit.cardId === "maela-targaryen" && unit.flags["buried-secret-pending"]) {
+      unit.flags["buried-secret-pending"] = false;
+      addCharacterModifierMutable(state, playerId, unit, {
+        id: nextRuntimeId(state, "buried-secret"),
+        influence: 2,
+        permanent: false,
+        expiresAt: "end-of-controller-turn",
+      });
+      logAbilityActivation(state, unit.cardId, "buried-secret", playerId, "Maela gains +2 Influence this turn.");
+    }
+  }
+
   addLog(
     state,
     `${playerName(playerId)} begins Turn ${player.turnsTaken}.`,
@@ -5119,6 +5784,23 @@ function finishEndTurnMutable(
 
   player.tyroshTradeUsedPreviousOwnTurn =
     player.tyroshTradeUsedThisTurn ?? false;
+
+  for (const unit of [...player.board]) {
+    if (unit.cardId === "naela-targaryen" && findUnit(state, unit.instanceId)) {
+      logAbilityActivation(state, unit.cardId, "north-of-tyrosh", playerId, "Naela takes 1 damage at the end of her Ruler's turn.");
+      damageUnitMutable(state, unit.instanceId, 1, "ability", "North of Tyrosh");
+    }
+  }
+
+  for (const unit of player.board) {
+    if (
+      unit.cardId === "mydan-gerren" &&
+      unit.flags["the-stage-remains-active"] &&
+      player.turnsTaken >= (unit.counters["the-stage-remains-expires-after-turn"] ?? Number.POSITIVE_INFINITY)
+    ) {
+      unit.flags["the-stage-remains-active"] = false;
+    }
+  }
 
   expireHandModifiersAtEnd(state, playerId);
   expireUnitModifiersAtEnd(state, playerId);
@@ -5263,7 +5945,6 @@ export function createGame(
   }
 
   const state: GameState = {
-    supporters: assignSupporters(),
     turnNumber: 0,
 
     activePlayerId:
@@ -5378,6 +6059,8 @@ function applyActionResult(
         action
       );
 
+      refreshFamiliarGroundMutable(draft);
+
       return {
         ok: true,
 
@@ -5404,6 +6087,8 @@ function applyActionResult(
         draft,
         action
       );
+
+      refreshFamiliarGroundMutable(draft);
 
       return {
         ok: true,
@@ -5456,6 +6141,8 @@ function applyActionResult(
         );
       }
     }
+
+    refreshFamiliarGroundMutable(draft);
 
     return {
       ok: true,
