@@ -8419,6 +8419,20 @@
 .boardGame .handCardSlot { flex: 0 1 var(--hand-card-width); min-width: 0; }
 .boardGame .handCardSlot:last-child { flex-shrink: 0; }
 
+/* With fewer than a full eight-card hand, center the entire fan only inside the
+   playable shelf between the innkeeper alcove and the right utility rail.
+   The full eight-card fan keeps its existing edge-to-edge geometry. */
+.boardGame .handSection .handFanTrackCentered {
+  box-sizing: border-box;
+  justify-content: center;
+  padding-left: calc(max(0px, var(--innkeeper-area-width) - var(--game-stats-width)) + 8px);
+  padding-right: 8px;
+}
+.boardGame .handSection .handFanTrackCentered > .handCardSlot {
+  flex: 0 0 var(--hand-card-width);
+  min-width: var(--hand-card-width);
+}
+
 .boardGame .battleLine[data-has-prompt="true"] {
   z-index: 111;
   grid-template-columns: minmax(0, 1fr);

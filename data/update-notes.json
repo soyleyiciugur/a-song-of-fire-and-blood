@@ -2,6 +2,12 @@
   {
     "date": "2026-10-04",
     "items": [
+      "Removed the Thanks-specific softening so the corrected artwork uses the same styling as all other emote staves.",
+      "Personalized emote cooldown captions for Mara and Aldren and reduced the caption and countdown lettering size.",
+      "Softened the Thanks emote artwork to match the other wooden fan staves.",
+      "Blocked emote interaction through the barrel base, matched Thanks artwork sizing to the other staves, and styled emote hints and cooldown lettering to match the tavern UI.",
+      "Made the emote fan smaller with separated, proportionally rendered wooden staves that slide gently outward on hover or keyboard focus.",
+      "Rebuilt the Great Game emote fan with seven illustrated wooden staves opening from a shared barrel base, responsive sizing, and highlighted hover and keyboard selections.",
       "Redrew the Table Whispers quill icon with a clean feather outline and a single flowing shaft.",
       "Doubled the mulligan card size cap and made opening hands horizontally scrollable on narrow portrait screens.",
       "Reduced opening-hand card size, aligned the selection count with the Great Game typeface, and gave Exit Game and Keep All solid button backgrounds.",
@@ -32,8 +38,9 @@
       "Added automatically discovered portrait and house frame artwork, a shared portrait-frame selection per match, and subtle image-only hover lighting beneath the frames.",
       "Replaced portrait hover filter animations with a subtle light overlay beneath the artwork frames.",
       "Replaced the temporary static Mara innkeeper image with chroma-keyed idle, tankard-cleaning, and ale-pouring video states, including a softened idle loop seam and rare randomized work animations.",
-      "Added a Hearthstone-style Mara emote wheel to the innkeeper: online opponents receive stacked Mara speech bubbles for Wow, Oops, Threaten, Thanks, Greetings, Well Played, and Salt; Salt alone triggers the mara_salt video with its own anti-spam cooldown, while rapid emotes are flood-limited after three sends.",
-      "Reduced oversized Great Game turn announcements so speaker portraits and turn copy stay compact within The Realms divider."
+      "Redesigned Mara's innkeeper emotes as a tavern-style barrel-stave fan with wood, brass, compact hover states, and a pivoted radial layout; opponent-facing Mara speech plaques now stay readable for about 6.6 seconds with a subtle lifecycle fade, while Salt still triggers mara_salt with its own anti-spam cooldown and rapid emotes remain flood-limited after three sends.",
+      "Reduced oversized Great Game turn announcements so speaker portraits and turn copy stay compact within The Realms divider.",
+      "Centered hands with fewer than eight cards within the playable shelf between the innkeeper alcove and the right utility rail, while preserving the existing full-hand bounds and preventing the last card from remaining pinned to the rail."
     ]
   },
   {

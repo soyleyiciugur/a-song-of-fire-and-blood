@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Fragment,
   useCallback,
   useEffect,
   useMemo,
@@ -12,7 +13,6 @@ import { createPortal } from "react-dom";
 
 import type { GreatGameOnlineMatchView } from "@/lib/the-great-game/online";
 import {
-  GREAT_GAME_EMOTES,
   GREAT_GAME_INNKEEPER_ACTION_EVENT,
   decodeGreatGameEmote,
   encodeGreatGameEmote,
@@ -37,33 +37,33 @@ type Bubble = {
   text: string;
 };
 
-type Point = { x: number; y: number };
+type FanStave = {
+  id: GreatGameEmoteId;
+  angle: number;
+  icon: string;
+};
 
 const FLOOD_WINDOW_MS = 8_000;
 const FLOOD_MAX = 3;
 const FLOOD_BLOCK_MS = 6_000;
-const BUBBLE_LIFETIME_MS = 4_800;
+const BUBBLE_LIFETIME_MS = 6_600;
 const SALT_VIDEO_COOLDOWN_MS = 12_000;
 
-const DESKTOP_POINTS: readonly Point[] = [
-  { x: -88, y: -72 },
-  { x: 0, y: -106 },
-  { x: 88, y: -72 },
-  { x: 111, y: 16 },
-  { x: 61, y: 91 },
-  { x: -61, y: 91 },
-  { x: -111, y: 16 },
-];
+// Positive emotes fan to the left, reactions / threat to the right, and WOW
+// sits at the crown. Salt keeps its special place at the outer edge.
+const FAN_STAVES: readonly FanStave[] = [
+  { id: "greetings", angle: -102, icon: "✋" },
+  { id: "thanks", angle: -68, icon: "♥" },
+  { id: "well-played", angle: -34, icon: "✓" },
+  { id: "wow", angle: 0, icon: "✦" },
+  { id: "oops", angle: 34, icon: "!" },
+  { id: "threaten", angle: 68, icon: "⚔" },
+  { id: "salt", angle: 102, icon: "🧂" },
+] as const;
 
-const COMPACT_POINTS: readonly Point[] = [
-  { x: -77, y: -63 },
-  { x: 0, y: -92 },
-  { x: 77, y: -63 },
-  { x: 97, y: 14 },
-  { x: 54, y: 79 },
-  { x: -54, y: 79 },
-  { x: -97, y: 14 },
-];
+const EMOTE_ICONS = Object.fromEntries(
+  FAN_STAVES.map((stave) => [stave.id, stave.icon])
+) as Record<GreatGameEmoteId, string>;
 
 function viewerUserId(match: GreatGameOnlineMatchView | null) {
   if (!match) return "";
@@ -246,20 +246,33 @@ export default function InnkeeperEmotes({
 
   const wheelStyle = useMemo<CSSProperties | undefined>(() => {
     if (!anchorRect) return undefined;
-    const size = compact ? 248 : 282;
-    const left = clamp(anchorRect.left + anchorRect.width * .5 - size * .5, 8, Math.max(8, window.innerWidth - size - 8));
-    const top = clamp(anchorRect.top - size * .68, 8, Math.max(8, window.innerHeight - size - 8));
-    return { left, top };
+    const scale = Math.min(compact ? .65 : .8, (window.innerWidth - 16) / 460, (window.innerHeight - 16) / 300);
+    const width = 460 * scale;
+    const height = 300 * scale;
+    const left = clamp(
+      anchorRect.left + Math.min(anchorRect.width * .05, 14),
+      8,
+      Math.max(8, window.innerWidth - width - 8)
+    );
+    const top = clamp(
+      anchorRect.top - height + (compact ? 60 : 74),
+      8,
+      Math.max(8, window.innerHeight - height - 8)
+    );
+    return { left, top, "--fan-scale": scale } as CSSProperties;
   }, [anchorRect, compact]);
 
   const bubbleStyle = useMemo<CSSProperties | undefined>(() => {
     if (!anchorRect) return undefined;
-    const left = clamp(anchorRect.left + Math.min(anchorRect.width * .58, 170), 8, Math.max(8, window.innerWidth - 286));
-    const bottom = Math.max(12, window.innerHeight - anchorRect.top + 8);
+    const left = clamp(
+      anchorRect.left + Math.min(anchorRect.width * .56, 166),
+      8,
+      Math.max(8, window.innerWidth - 304)
+    );
+    const bottom = Math.max(12, window.innerHeight - anchorRect.top + 6);
     return { left, bottom };
   }, [anchorRect]);
 
-  const points = compact ? COMPACT_POINTS : DESKTOP_POINTS;
   const remainingBlockSeconds = Math.max(0, Math.ceil((blockedUntil - now) / 1000));
 
   return (
@@ -289,51 +302,68 @@ export default function InnkeeperEmotes({
                 aria-label="Close emote menu"
                 onClick={() => setOpen(false)}
               />
-              <div className={styles.wheel} style={wheelStyle} role="menu" aria-label={`${label} emotes`}>
-              <div className={`${styles.center} ${blocked ? styles.centerBlocked : ""}`}>
-                {blocked ? <>ENOUGH<br />{remainingBlockSeconds}s</> : "MARA"}
-              </div>
 
-              {GREAT_GAME_EMOTES.map((emote, index) => {
-                const point = points[index];
-                const optionStyle = {
-                  "--emote-x": `${point.x}px`,
-                  "--emote-y": `${point.y}px`,
-                } as CSSProperties;
-                return (
-                  <button
-                    key={emote.id}
-                    type="button"
-                    role="menuitem"
-                    className={`${styles.option} ${emote.id === "salt" ? styles.optionSalt : ""}`}
-                    style={optionStyle}
-                    aria-label={emote.ariaLabel}
-                    disabled={blocked || sending}
-                    onClick={() => void sendEmote(emote.id)}
-                  >
-                    {emote.label}
-                  </button>
-                );
-              })}
+              <div className={styles.wheel} style={wheelStyle} role="group" aria-label={`${label} emotes`}>
+                <div className={styles.fanShadow} aria-hidden="true" />
 
-              {(sendError || blocked) && (
-                <div className={styles.status}>
-                  {sendError ?? `Emotes blocked for ${remainingBlockSeconds}s`}
+                {FAN_STAVES.map((stave, index) => {
+                  const emote = greatGameEmoteDefinition(stave.id);
+                  const optionStyle = {
+                    "--stave-angle": `${stave.angle}deg`,
+                    "--stave-art": `url("/images/cards/chat-wheel/wheel-${stave.id === "well-played" ? "wp" : stave.id}.webp")`,
+                    "--stave-index": index,
+                  } as CSSProperties;
+
+                  return (
+                    <Fragment key={stave.id}>
+                    <button
+                      type="button"
+                      className={styles.option}
+                      style={optionStyle}
+                      aria-label={emote.ariaLabel}
+                      disabled={blocked || sending}
+                      onClick={() => void sendEmote(stave.id)}
+                    >
+                      <span className={styles.optionArt} aria-hidden="true" />
+                    </button>
+                    <span className={styles.tooltip} aria-hidden="true">{emote.ariaLabel}</span>
+                    </Fragment>
+                  );
+                })}
+
+                <div className={`${styles.center} ${blocked ? styles.centerBlocked : ""}`}>
+                  {blocked ? (
+                    <>
+                      <span>{label === "Aldren" ? "A moment." : "Patience."}</span>
+                      <small>{remainingBlockSeconds}s</small>
+                    </>
+                  ) : null}
                 </div>
-              )}
+
+                {(sendError || blocked) && (
+                  <div className={styles.status}>
+                    {sendError ?? `Emotes blocked for ${remainingBlockSeconds}s`}
+                  </div>
+                )}
               </div>
             </>
           )}
 
           {bubbles.length > 0 && anchorRect && bubbleStyle && (
             <div className={styles.bubbles} style={bubbleStyle}>
-              {bubbles.map((bubble) => (
+              {bubbles.map((bubble, index) => (
                 <div
                   key={bubble.id}
                   className={`${styles.bubble} ${bubble.emoteId === "salt" ? styles.bubbleSalt : ""}`}
+                  style={{ "--bubble-index": index } as CSSProperties}
                 >
-                  <strong>Mara</strong>
-                  <span>{bubble.text}</span>
+                  <div className={styles.bubbleHeader}>
+                    <strong>Mara</strong>
+                    <span className={styles.bubbleEmote} aria-hidden="true">
+                      {EMOTE_ICONS[bubble.emoteId]}
+                    </span>
+                  </div>
+                  <div className={styles.bubbleText}>{bubble.text}</div>
                 </div>
               ))}
             </div>

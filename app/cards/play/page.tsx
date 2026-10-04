@@ -591,10 +591,12 @@ function HorizontalHand({
   children,
   fanned = false,
   active = false,
+  centerInPlayableHandArea = false,
 }: {
   children: ReactNode;
   fanned?: boolean;
   active?: boolean;
+  centerInPlayableHandArea?: boolean;
 }) {
   const handRef =
     useRef<HTMLDivElement | null>(
@@ -683,11 +685,12 @@ function HorizontalHand({
       }
     >
       <div
-        className={
-          fanned
-            ? styles.handFanTrack
-            : styles.handLinearTrack
-        }
+        className={[
+          fanned ? styles.handFanTrack : styles.handLinearTrack,
+          fanned && centerInPlayableHandArea ? styles.handFanTrackCentered : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         {children}
       </div>
@@ -6224,6 +6227,7 @@ export default function GreatGamePlayPage() {
         <HorizontalHand
           fanned
           active
+          centerInPlayableHandArea={visibleHand.length < 8}
         >
           {visibleHand.map(
             (handCard, index) => (
