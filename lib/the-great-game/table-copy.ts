@@ -73,11 +73,11 @@ export function tablePromptCopy(prompt: string | null, speaker: TableSpeakerId) 
 }
 
 export function tableTurnCopy(title: string, speaker: TableSpeakerId) {
-  if (title === "Opponent used Royal Favor!") {
-    return speaker === "mara" ? "Your opponent used Royal Favor. They have one more Command this turn." : "Your opponent has called upon Royal Favor, my liege. One more Command is theirs this turn.";
+  if (title === "Opponent used Royal Favor") {
+    return speaker === "mara" ? "They have one more Command this turn." : "One more Command is theirs this turn, my liege.";
   }
-  if (title === "Royal Favor used!") {
-    return speaker === "mara" ? "Royal Favor used. Make that extra Command count." : "Royal Favor used! One more Command at your service, my liege.";
+  if (title === "Royal Favor used") {
+    return speaker === "mara" ? "Make that extra Command count." : "One more Command at your service, my liege.";
   }
   if (title === "Your Turn") {
     return speaker === "mara" ? "Your turn. Make it count." : "The table is yours, my liege.";

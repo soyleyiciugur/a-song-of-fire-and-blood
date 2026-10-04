@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 import type { GreatGameOnlineMatchView } from "@/lib/the-great-game/online";
+import { decodeGreatGameEmote } from "@/lib/the-great-game/emotes";
 import { createClient } from "@/lib/supabase/client";
 
 import styles from "./great-game-chat.module.css";
@@ -41,14 +42,16 @@ function QuillIcon({ size = 20 }: { size?: number }) {
       aria-hidden="true"
     >
       <path
-        d="M19.5 3.8c-4.9.5-9.1 3.2-11.7 7.4-1.8 2.9-2.5 5.6-2.7 8.8 2.3-1.9 4.1-3.7 5.7-5.6m-3 1.1c2.6.1 4.8-.4 6.6-1.7 3.1-2.2 4.7-5.4 5.1-10Z"
+        d="M7 17C5.5 13 8 7.5 12.5 5C15 3.6 18 3 21 3C20.5 6.2 19.2 9.4 17 12L14 12.5L15 14C12.5 16.5 9.5 17.5 7 17Z"
+        fill="currentColor"
+        fillOpacity="0.08"
         stroke="currentColor"
         strokeWidth="1.45"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M4.5 20.2c2.7-3.1 5.7-6 9-8.8"
+        d="M3.5 21C7 16.5 11 12 16.5 7.5"
         stroke="currentColor"
         strokeWidth="1.45"
         strokeLinecap="round"
@@ -199,7 +202,7 @@ export default function GreatGameChat({
           setError("Table whispers could not be read.");
           setMessages([]);
         } else {
-          setMessages([...(data ?? [])].reverse() as ChatMessage[]);
+          setMessages(([...(data ?? [])].reverse() as ChatMessage[]).filter((message) => !decodeGreatGameEmote(message.body)));
         }
         setLoading(false);
         loadedRef.current = true;
@@ -217,6 +220,7 @@ export default function GreatGameChat({
         },
         (payload) => {
           const next = payload.new as ChatMessage;
+          if (decodeGreatGameEmote(next.body)) return;
           setMessages((current) => {
             if (current.some((item) => item.id === next.id)) return current;
             return [...current, next].slice(-100);

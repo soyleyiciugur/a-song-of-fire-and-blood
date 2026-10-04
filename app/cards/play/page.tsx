@@ -58,6 +58,7 @@ import type {
 
 import type {
   GreatGameOnlineMatchSummary,
+  GreatGameOnlinePlayer,
   GreatGameOnlineMatchView,
   GreatGameOnlineStatePatch,
 } from "@/lib/the-great-game/online";
@@ -65,9 +66,13 @@ import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import GreatGameChat from "@/components/the-great-game/GreatGameChat";
 import Chronicle from "@/components/the-great-game/Chronicle";
+import InnkeeperVideo from "@/components/the-great-game/InnkeeperVideo";
+import InnkeeperEmotes from "@/components/the-great-game/InnkeeperEmotes";
 import { playerSupporter } from "@/lib/the-great-game/supporters";
 import { SupporterContext } from "@/components/the-great-game/SupporterContext";
 import TableSpeaker from "@/components/the-great-game/TableSpeaker";
+import PlayerPortrait from "@/components/the-great-game/PlayerPortrait";
+import { usePortraitFrames, type PortraitFrames } from "@/components/the-great-game/usePortraitFrames";
 import { tablePromptCopy, tableTurnCopy, tableWarningCopy } from "@/lib/the-great-game/table-copy";
 import CombatStatusIcon from "@/components/cards/CombatStatusIcon";
 import { CardArtwork } from "@/components/cards/CardArtwork";
@@ -78,6 +83,12 @@ import { readStoredDecks } from "@/lib/the-great-game/stored-decks";
 import { getPlacementPreview } from "@/lib/the-great-game/placement-preview";
 
 import styles from "./play.module.css";
+
+const innkeeper = {
+  id: "mara-tapster",
+  name: "Mara Tapster",
+  interactionLabel: "Talk to Mara",
+};
 
 type PageMode =
   | "menu"
@@ -702,6 +713,7 @@ export default function GreatGamePlayPage() {
     );
 
   const gameRef = useRef<GameState | null>(null);
+  const [localFrameKey, setLocalFrameKey] = useState("");
 
   const [deckBackImages, setDeckBackImages] = useState<Record<PlayerId, string>>({
     player1: "",
@@ -829,6 +841,7 @@ export default function GreatGamePlayPage() {
   ] = useState<GreatGameOnlineMatchView | null>(null);
 
   const onlineMatchRef = useRef<GreatGameOnlineMatchView | null>(null);
+  const portraitFrames = usePortraitFrames(onlineMatch?.id ?? localFrameKey, mode === "game");
 
   useEffect(() => {
     onlineMatchRef.current = onlineMatch;
@@ -1219,7 +1232,7 @@ export default function GreatGamePlayPage() {
     const newlyUsed = usedFavor.split(",").find(id => !previous.used.split(",").includes(id));
     const opponentUsed = newlyUsed !== (onlineMatch?.playerId ?? game?.activePlayerId);
     const timer = setTimeout(() => {
-      setTurnNotice({ key: "favor:" + usedFavor, title: opponentUsed ? "Opponent used Royal Favor!" : "Royal Favor used!", subtitle: opponentUsed ? "Opponent +1 Command" : "+1 Command" });
+      setTurnNotice({ key: "favor:" + usedFavor, title: opponentUsed ? "Opponent used Royal Favor" : "Royal Favor used", subtitle: opponentUsed ? "Opponent +1 Command" : "+1 Command" });
       if (turnNoticeTimerRef.current) clearTimeout(turnNoticeTimerRef.current);
       turnNoticeTimerRef.current = setTimeout(() => setTurnNotice(null), 3000);
     }, 0);
@@ -2052,6 +2065,7 @@ export default function GreatGamePlayPage() {
     setGame(
       nextGame
     );
+    setLocalFrameKey(crypto.randomUUID());
 
     setMode(
       "game"
@@ -5721,6 +5735,9 @@ export default function GreatGamePlayPage() {
           viewEnemyPlayerId
         }
         playerLabel={gamePlayerName(viewEnemyPlayerId, onlineMatch)}
+        deckBackImage={deckBackImages[viewEnemyPlayerId]}
+        portraitFrames={portraitFrames}
+        profile={onlineMatch ? (viewEnemyPlayerId === "player1" ? onlineMatch.host : onlineMatch.guest) : null}
         state={currentGame}
         opponent
         standingTarget={
@@ -5770,9 +5787,18 @@ export default function GreatGamePlayPage() {
         showEndTurn={false}
       />
 
-      <div className={styles.deckPile} data-deck-anchor={viewPlayerId}
-        aria-label={`Your deck: ${viewPlayer.deck.length} cards remaining`}>
-        <div className={`${styles.deckBack} ${deckBackImages[viewPlayerId] ? styles.deckBackArtwork : ""}`} style={deckBackImages[viewPlayerId] ? { backgroundImage: `url("${deckBackImages[viewPlayerId]}")` } : undefined} aria-hidden="true" />
+      <div className={styles.innkeeperArea} data-innkeeper={innkeeper.id}>
+        {/* These decorative layers use their native aspect ratios without image optimization. */}
+        {/* eslint-disable @next/next/no-img-element */}
+        <img src="/images/cards/background/deckbg.webp" className={styles.innkeeperBackground} alt="" draggable={false} />
+        <InnkeeperVideo className={styles.innkeeperCharacter} label={innkeeper.name} />
+        <img src="/images/cards/background/deckbg-front.webp" className={styles.innkeeperForeground} alt="" draggable={false} />
+        {/* eslint-enable @next/next/no-img-element */}
+        <InnkeeperEmotes
+          match={onlineMatch ?? null}
+          buttonClassName={styles.innkeeperInteraction}
+          label={innkeeper.name}
+        />
       </div>
       <section
         className={styles.opponentCommandDock}
@@ -5986,8 +6012,13 @@ export default function GreatGamePlayPage() {
           <div className={styles.turnNotice} data-notice-kind={turnNotice.key.startsWith("favor:") ? "royal-favor" : "turn"} role="status" aria-live="polite">
             <TableSpeaker key={turnNotice.key}>
               {(speaker) => <div className={styles.turnNoticeCopy}>
-              <span>{turnNotice.subtitle}</span>
-              <strong>{tableTurnCopy(turnNotice.title, speaker)}</strong>
+              {turnNotice.key.startsWith("favor:") ? <>
+                <strong className={styles.royalFavorNoticeTitle}>{turnNotice.title}</strong>
+                <span className={styles.royalFavorNoticeDescription}>{tableTurnCopy(turnNotice.title, speaker)}</span>
+              </> : <>
+                <span>{turnNotice.subtitle}</span>
+                <strong>{tableTurnCopy(turnNotice.title, speaker)}</strong>
+              </>}
             </div>}
             </TableSpeaker>
           </div>
@@ -6158,6 +6189,9 @@ export default function GreatGamePlayPage() {
           viewPlayerId
         }
         playerLabel={gamePlayerName(viewPlayerId, onlineMatch)}
+        deckBackImage={deckBackImages[viewPlayerId]}
+        portraitFrames={portraitFrames}
+        profile={onlineMatch ? (viewPlayerId === "player1" ? onlineMatch.host : onlineMatch.guest) : null}
         state={currentGame}
         previewCommandCost={
           hoveredCommandCost
@@ -7047,6 +7081,9 @@ function PlayerHeader({
   className = "",
   playerId,
   playerLabel,
+  deckBackImage,
+  profile,
+  portraitFrames,
   state,
   opponent = false,
   standingTarget = false,
@@ -7067,6 +7104,9 @@ function PlayerHeader({
   className?: string;
   playerId: PlayerId;
   playerLabel?: string;
+  deckBackImage?: string;
+  profile?: GreatGameOnlinePlayer | null;
+  portraitFrames?: PortraitFrames;
   state: GameState;
   opponent?: boolean;
   standingTarget?: boolean;
@@ -7150,7 +7190,7 @@ function PlayerHeader({
           }
         }}
       >
-        <span>
+        <span className={styles.standingPlayerName} title={playerLabel ?? playerName(playerId)}>
           {playerLabel ?? playerName(
             playerId
           )}
@@ -7243,60 +7283,25 @@ function PlayerHeader({
         })()}
       </button>
 
-      <div
-        className={
-          styles.playerStats
-        }
-      >
-        <HudStat
-          label="Deck"
-          value={
-            player.deck.length
-          }
-          deckAnchorPlayerId={opponent ? playerId : undefined}
-        />
-
-        <HudStat
-          label="Hand"
-          value={`${player.hand.filter(card => findGameCard(card.cardId)?.special !== "royal-favor").length}/8`}
-          handAnchorPlayerId={
-            playerId
-          }
-        />
-
-        <HudStat
-          label="Discard"
-          value={
-            player.discard.length
-          }
-        />
-
-        <HudStat
-          label="Burned"
-          value={
-            player.burnedCards
-              .length
-          }
-        />
-
-        {showCommandMeter && (
-          <CommandMeter
-            command={
-              player.command
-            }
-            maxCommand={
-              player.maxCommand
-            }
-            nextCommandBonus={
-              player.nextCommandBonus
-            }
-            previewCost={
-              previewCommandCost
-            }
-            compact
-          />
-        )}
+      <PanelDeck
+        playerId={playerId}
+        playerLabel={playerLabel ?? playerName(playerId)}
+        player={player}
+        image={deckBackImage}
+      />
+      <div className={styles.playerPortraitSlot}>
+        <PlayerPortrait key={profile?.id ?? playerId} player={profile} label={playerLabel ?? playerName(playerId)} frames={portraitFrames} />
       </div>
+
+      {showCommandMeter && (
+        <CommandMeter
+          command={player.command}
+          maxCommand={player.maxCommand}
+          nextCommandBonus={player.nextCommandBonus}
+          previewCost={previewCommandCost}
+          compact
+        />
+      )}
 
       {showEndTurn && (onEndTurn ? (
         <button
@@ -7341,42 +7346,65 @@ function PlayerHeader({
   );
 }
 
-function HudStat({
-  label,
-  value,
-  accent = false,
-  deckAnchorPlayerId,
-  handAnchorPlayerId,
-}: {
-  label: string;
-  value:
-    | string
-    | number;
-  accent?: boolean;
-  deckAnchorPlayerId?: PlayerId;
-  handAnchorPlayerId?: PlayerId;
+function PanelDeck({ playerId, playerLabel, player, image }: {
+  playerId: PlayerId;
+  playerLabel: string;
+  player: GameState["players"][PlayerId];
+  image?: string;
 }) {
+  const [position, setPosition] = useState<{ left: number; top: number; width: number } | null>(null);
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const tooltipId = `deck-details-${playerId}`;
+  const showDetails = () => {
+    const rect = anchorRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const width = Math.min(232, window.innerWidth - 16);
+    setPosition({
+      left: Math.max(8, Math.min(rect.right + 12, window.innerWidth - width - 8)),
+      top: Math.max(8, Math.min(rect.top, window.innerHeight - 210)),
+      width,
+    });
+  };
+  useEffect(() => {
+    const close = () => setPosition(null);
+    window.addEventListener("resize", close);
+    window.addEventListener("scroll", close, true);
+    return () => {
+      window.removeEventListener("resize", close);
+      window.removeEventListener("scroll", close, true);
+    };
+  }, []);
   return (
-    <div
-      className={`${styles.hudStat} ${
-        accent
-          ? styles.hudStatAccent
-          : ""
-      }`}
-      data-deck-anchor={
-        deckAnchorPlayerId
-      }
-      data-hand-anchor={
-        handAnchorPlayerId
-      }
-    >
-      <span>
-        {label}
-      </span>
-
-      <strong className={styles.hudStatValue}>
-        {value}
-      </strong>
+    <div className={styles.panelDeckSlot} data-hand-anchor={playerId}>
+      <button
+        ref={anchorRef}
+        type="button"
+        className={styles.panelDeck}
+        data-deck-anchor={playerId}
+        data-empty={player.deck.length === 0}
+        aria-label={`${playerLabel}'s deck: ${player.deck.length} cards remaining`}
+        aria-describedby={position ? tooltipId : undefined}
+        onPointerEnter={showDetails}
+        onPointerLeave={() => setPosition(null)}
+        onFocus={showDetails}
+        onBlur={() => setPosition(null)}
+        onClick={showDetails}
+        onKeyDown={event => { if (event.key === "Escape") setPosition(null); }}
+      >
+        <span className={`${styles.deckBack} ${image ? styles.deckBackArtwork : ""}`} style={image ? { backgroundImage: `url("${image}")` } : undefined} aria-hidden="true" />
+      </button>
+      {position && createPortal(
+        <div id={tooltipId} role="tooltip" className={styles.panelDeckDetails} style={position}>
+          <strong>{playerLabel}&apos;s Deck</strong>
+          <dl>
+            <div><dt>Remaining</dt><dd>{player.deck.length}</dd></div>
+            <div><dt>Hand</dt><dd>{player.hand.filter(card => findGameCard(card.cardId)?.special !== "royal-favor").length}/8</dd></div>
+            <div><dt>Discard</dt><dd>{player.discard.length}</dd></div>
+            <div><dt>Burned</dt><dd>{player.burnedCards.length}</dd></div>
+          </dl>
+          <p>{player.deck.length ? "Cards are drawn from this stack. Undrawn cards remain hidden." : "Deck empty. No cards remain to draw."}</p>
+        </div>, document.body
+      )}
     </div>
   );
 }

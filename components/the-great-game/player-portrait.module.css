@@ -1,0 +1,66 @@
+.portrait {
+  --portrait-padding: clamp(1px, 5cqh, 5px);
+  position: relative;
+  width: min(88cqw, 88cqh, 106px);
+  aspect-ratio: 1;
+  padding: var(--portrait-padding);
+  border: 2px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+.portrait:is(:hover, :focus-visible) { outline: none; }
+.visual, .houseVisual { position: relative; display: block; width: 100%; height: 100%; isolation: isolate; }
+.visual[data-framed="false"], .houseVisual[data-framed="false"] { outline: 1px solid #947840; }
+.profileFrame, .houseFrame { position: absolute; z-index: 2; max-width: none; pointer-events: none; object-fit: fill; }
+/* The artwork's central opening surrounds the original, unchanged photo box. */
+.profileFrame { left: -25%; top: -29%; width: 150%; height: 155%; }
+/* Cloth and seal have differently positioned openings; retain the photo size. */
+.profileFrame[src*="/profile-frame-cloth."] { left: -30%; top: -20%; width: 160%; height: 150%; }
+.profileFrame[src*="/profile-frame-seal."] { left: -25%; top: -25%; width: 153%; height: 150%; }
+.houseFrame { left: -15%; top: -15%; width: 130%; height: 130%; }
+.photo, .houseImage { position: relative; z-index: 1; }
+/* Paint the highlight over the image, below the frame, without filtering or
+   animating the raster artwork (which can change its sampling during hover). */
+.photo::after, .houseImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: transparent;
+}
+.portrait:is(:hover, :focus-visible) .photo::after,
+.portrait:is(:hover, :focus-visible) .houseImage::after {
+  background: rgb(255 238 202 / 9%);
+}
+.photo { display: block; width: 100%; height: 100%; overflow: hidden; background: #191416; }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photo svg { width: 100%; height: 100%; fill: #76644d; }
+.house {
+  position: absolute;
+  z-index: 3;
+  right: -8px;
+  bottom: -8px;
+  width: clamp(14px, 38%, 36px);
+  aspect-ratio: 1;
+  padding: 1px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+.houseImage { display: block; width: 100%; height: 100%; overflow: hidden; background: #100d0b; }
+.houseImage img { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; }
+.details { position: fixed; z-index: 2400; box-sizing: border-box; max-height: calc(100dvh - 16px); overflow: hidden; padding: 12px; border: 1px solid #947840; background: linear-gradient(145deg, #211911, #100c0d); box-shadow: inset 0 0 0 3px #100c0d, 0 8px 24px #000a; color: #dccba6; pointer-events: none; }
+.details > small { display: block; color: #ac9d85; font: 10px/1.3 var(--font-body), serif; }
+.details > strong { display: block; margin-top: 4px; color: #d4af37; font: 600 13px/1.3 var(--font-hotd), serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.affinity { display: block; margin-top: 4px; font: 11px/1.3 var(--font-body), serif; }
+.details dl { display: grid; gap: 5px; margin: 10px 0 0; padding-top: 8px; border-top: 1px solid #94784055; font: 12px/1.3 var(--font-body), serif; }
+.details dl > div { display: flex; justify-content: space-between; gap: 12px; }
+.details dd { margin: 0; color: #f0e3c9; font-variant-numeric: tabular-nums; }
+.details p { margin: 10px 0 0; font: 12px/1.4 var(--font-body), serif; }
+.details[data-pinned="true"] { pointer-events: auto; overflow-y: auto; border-color: #d4af37; }

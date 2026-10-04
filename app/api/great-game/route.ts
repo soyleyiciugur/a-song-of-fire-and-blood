@@ -1,4 +1,5 @@
 import { after, NextResponse } from "next/server";
+import houses from "@/data/houses.json";
 
 import { createGame, applyAction } from "@/lib/the-great-game/engine";
 import { createTestDeck, validateDeck } from "@/lib/the-great-game/deck";
@@ -59,6 +60,7 @@ type ProfileRow = {
   username: string;
   display_name: string;
   avatar_url: string | null;
+  affinity?: Record<string, string> | null;
 };
 
 function jsonError(message: string, status = 400) {
@@ -139,19 +141,36 @@ async function getProfiles(
 ): Promise<Map<string, GreatGameOnlinePlayer>> {
   const uniqueIds = [...new Set(ids.filter(Boolean))];
   if (uniqueIds.length === 0) return new Map();
+  // Public stats views grant access to authenticated users, not the admin role.
+  const publicClient = await createClient();
 
-  const { data } = await admin
+  const [{ data }, { data: stats, error: statsError }] = await Promise.all([admin
     .from("profiles")
-    .select("id,username,display_name,avatar_url")
-    .in("id", uniqueIds);
+    .select("id,username,display_name,avatar_url,affinity")
+    .in("id", uniqueIds),
+    publicClient.from("great_game_player_stats")
+      .select("user_id,games_played,wins,losses,draws,win_rate,current_win_streak")
+      .in("user_id", uniqueIds),
+  ]);
 
   const map = new Map<string, GreatGameOnlinePlayer>();
   for (const raw of (data ?? []) as ProfileRow[]) {
+    const house = houses.find(house => house.id === raw.affinity?.house);
+    const record = stats?.find(record => record.user_id === raw.id);
     map.set(raw.id, {
       id: raw.id,
       username: raw.username,
       displayName: raw.display_name || raw.username || "Player",
       avatarUrl: raw.avatar_url,
+      favoriteHouse: house ? { name: house.name, image: house.sigilSrc } : null,
+      gameStats: statsError ? null : {
+        games: record?.games_played ?? 0,
+        wins: record?.wins ?? 0,
+        losses: record?.losses ?? 0,
+        draws: record?.draws ?? 0,
+        winRate: Number(record?.win_rate ?? 0),
+        streak: record?.current_win_streak ?? 0,
+      },
     });
   }
 
@@ -239,6 +258,12 @@ export async function GET(request: Request) {
   if (!admin) return jsonError("Online play is not configured on the server.", 503);
 
   const url = new URL(request.url);
+  const profileId = url.searchParams.get("player");
+  if (profileId) {
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(profileId)) return jsonError("Invalid player.");
+    const profiles = await getProfiles(admin, [profileId]);
+    return NextResponse.json({ player: profiles.get(profileId) }, { headers: { "Cache-Control": "private, no-store" } });
+  }
   const matchId = url.searchParams.get("match");
   const stateOnly = url.searchParams.get("stateOnly") === "1";
 

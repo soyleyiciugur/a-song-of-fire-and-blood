@@ -1,0 +1,19 @@
+ASOFAB 2026-10-04 delta
+
+Changed:
+- app/cards/play/page.tsx
+- app/cards/play/play.module.css
+- data/update-notes.json
+
+Added:
+- components/the-great-game/InnkeeperVideo.tsx
+- public/images/cards/innkeepers/mara_idle.mp4
+- public/images/cards/innkeepers/mara_tankard.mp4
+- public/images/cards/innkeepers/mara_ale.mp4
+
+Behavior:
+- Replaces the temporary mara-tapster-young.webp play-table image with chroma-keyed video rendering.
+- Idle runs by default; tankard-cleaning and ale-pouring interrupt rarely at random, then return to idle.
+- Idle seam uses a short fade to the static tavern and back to hide the generated clip's end/start mismatch.
+- Action changes use the same short fade so green-screen prop state changes do not hard-cut.
+- Great Game turn announcements in The Realms divider are substantially smaller.

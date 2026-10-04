@@ -15,6 +15,8 @@ export interface GreatGameOnlinePlayer {
   username: string;
   displayName: string;
   avatarUrl: string | null;
+  favoriteHouse?: { name: string; image: string } | null;
+  gameStats?: { games: number; wins: number; losses: number; draws: number; winRate: number; streak: number } | null;
 }
 
 export interface GreatGameOnlineMatchView {
