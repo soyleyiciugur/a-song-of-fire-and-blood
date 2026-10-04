@@ -7,6 +7,8 @@ import { getGameCard, isUnitCard } from "@/lib/the-great-game/cards";
 import type { AbilityTrigger, GameCard, TierId, Trait } from "@/lib/the-great-game/types";
 import { CardArtwork } from "./CardArtwork";
 import styles from "@/app/cards/play/play.module.css";
+import { pickTableSpeaker } from "@/lib/the-great-game/table-speaker";
+import { useSupporter } from "@/components/the-great-game/SupporterContext";
 
 const TIER_MAP = new Map<
   TierId,
@@ -130,11 +132,11 @@ const TRAIT_RULES_BY_VOICE: Record<
 
 const UNIQUE_RULES: Record<InnkeeperVoice, string> = {
   neutral:
-    "Unique — A Ruler cannot play another copy of this card while one is already in play under that Ruler.",
+    "Unique — Your deck may contain only one copy of this card.",
   courtly:
-    "Unique, my liege. One such presence is distinction enough; a Ruler cannot play another copy while one already stands beneath their rule.",
+    "Unique, my liege. Your deck may contain only one copy of this card. One such presence is distinction enough.",
   stoic:
-    "Unique. One copy per Ruler in play. Another cannot be played until it leaves.",
+    "Unique. One copy of this card per deck. One is enough.",
 };
 
 function traitRule(trait: Trait): string | undefined {
@@ -301,6 +303,7 @@ function UniqueDiamond({
 }: {
   detailed?: boolean;
 }) {
+  const supporter = useSupporter();
   const triggerRef =
     useRef<HTMLSpanElement | null>(
       null
@@ -471,10 +474,10 @@ function UniqueDiamond({
             }}
           >
             {detailed
-              ? uniqueRule()
+              ? supporter ? UNIQUE_RULES[supporter === "mara" ? "stoic" : "courtly"] : uniqueRule()
               : "Unique"}
           </span>,
-          document.body
+          document.querySelector("dialog[open]") ?? document.body
         )}
     </>
   );
@@ -593,17 +596,41 @@ function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }
   return withGlow(<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>);
 }
 
+const STATUS_RULES: Record<"Deployed" | "Exhausted" | "Grounded", [string, string]> = {
+  Deployed: [
+    "Just arrived this turn. No Military Conflict without Swift; no Political Conflict without Schemer. Give them a moment.",
+    "Newly arrived, my liege. This turn, initiating a Military Conflict requires Swift, and a Political Conflict requires Schemer.",
+  ],
+  Exhausted: [
+    "Spent for now. Cannot initiate another Conflict until readied. All Units ready when the turn ends.",
+    "Their efforts are spent, Your Grace. They cannot initiate a Conflict until readied. All Units ready when the turn ends.",
+  ],
+  Grounded: [
+    "The Dragon is down. Cannot initiate a Conflict. Recovers one Health at the start of its controller's turn; Grounded clears at half maximum Health, rounded up.",
+    "Your Dragon must recover, my liege. It cannot initiate a Conflict while Grounded. It regains one Health at the start of its controller's turn, recovering at half maximum Health, rounded up.",
+  ],
+};
+
 function TraitRuleTooltip({
   label,
   rule,
   icon,
   triggerClassName,
+  statusRules,
 }: {
   label: string;
   rule: string;
   icon?: ReactNode;
   triggerClassName?: string;
+  statusRules?: [string, string];
 }) {
+  const tooltipRef = useRef<HTMLSpanElement | null>(null);
+  const [statusRule, setStatusRule] = useState(rule);
+  const supporter = useSupporter();
+  const openTooltip = () => {
+    if (!open && statusRules) setStatusRule(statusRules[(supporter ?? pickTableSpeaker()) === "mara" ? 0 : 1]);
+    setOpen(true);
+  };
   const triggerRef =
     useRef<HTMLSpanElement | null>(
       null
@@ -636,7 +663,7 @@ function TraitRuleTooltip({
     const effects = unitId ? Array.from(document.querySelectorAll<HTMLElement>('[data-effects-for]')).find(node => node.dataset.effectsFor === unitId) : null;
     const effectRect = effects?.getBoundingClientRect();
     const next = effectRect
-      ? { left: effectRect.left, top: effectRect.bottom + 6, width: effectRect.width }
+      ? { left: effectRect.left, top: statusRules ? Math.max(8, effectRect.top - (tooltipRef.current?.getBoundingClientRect().height ?? 90) - 6) : effectRect.bottom + 6, width: effectRect.width }
       : { left: Math.max(8, Math.min(rect.right + 8, window.innerWidth - 226)), top: Math.max(8, Math.min(rect.top, window.innerHeight - 90)), width: 218 };
     setPosition(previous => previous?.left === next.left && previous?.top === next.top && previous?.width === next.width ? previous : next);
   };
@@ -661,15 +688,15 @@ function TraitRuleTooltip({
         tabIndex={0}
         aria-label={label}
         onPointerDown={event => event.stopPropagation()}
-        onClick={event => { event.stopPropagation(); setOpen(true); }}
+        onClick={event => { event.stopPropagation(); openTooltip(); }}
         onMouseEnter={() => {
-          setOpen(true);
+          openTooltip();
         }}
         onMouseLeave={() => {
           if (document.activeElement !== triggerRef.current) setOpen(false);
         }}
         onFocus={() => {
-          setOpen(true);
+          openTooltip();
         }}
         onBlur={() =>
           setOpen(false)
@@ -684,6 +711,7 @@ function TraitRuleTooltip({
           "undefined" &&
         createPortal(
           <span
+            ref={tooltipRef}
             className={
               styles.traitTooltipPortal
             }
@@ -697,9 +725,9 @@ function TraitRuleTooltip({
             }}
           >
             <strong>{label}</strong>
-            {rule}
+            {statusRules ? statusRule : supporter ? TRAIT_RULES_BY_VOICE[supporter === "mara" ? "stoic" : "courtly"][label.toLowerCase() as Trait] ?? rule : rule}
           </span>,
-          document.body
+          document.querySelector("dialog[open]") ?? document.body
         )}
     </>
   );
@@ -748,6 +776,8 @@ export function CardInfoPanel({
   showDescription = true,
   showTraitTooltips = false,
   compact = false,
+  statuses = [],
+  statusBadge,
 }: {
   card: GameCard;
   activeTraits?: Trait[];
@@ -771,6 +801,8 @@ export function CardInfoPanel({
   showDescription?: boolean;
   showTraitTooltips?: boolean;
   compact?: boolean;
+  statuses?: Array<"Deployed" | "Exhausted" | "Grounded">;
+  statusBadge?: ReactNode;
 }) {
   const traits =
     visibleTraits(
@@ -811,6 +843,15 @@ export function CardInfoPanel({
           artifactId={artifactId}
           detailed={artifactBadgeDetailed}
         />
+      )}
+
+      {(statuses.length > 0 || statusBadge) && (
+        <div className={styles.statusOverlay}>
+          {statusBadge}
+          {statuses.map(status => (
+            <TraitRuleTooltip key={status} label={status} rule={STATUS_RULES[status][0]} statusRules={STATUS_RULES[status]} />
+          ))}
+        </div>
       )}
 
       <div className={`${styles.cardMetadata} ${artifactId && showArtifactBadge ? styles.cardMetadataWithArtifact : ""}`}>

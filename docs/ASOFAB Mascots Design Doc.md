@@ -1167,3 +1167,15 @@ Mara strips the information down.
 Both remain completely inside the same Westerosi world.
 
 That contrast should remain recognizable across notifications, tooltips, The Great Game, Raven's Eye, Tavern activity, Guild Parley, and any future The Rookery 🐦‍⬛ social systems.
+
+Great Game: assigned supporters
+
+At the start of each new game, assign Mara and Aldren randomly to opposite Rulers. Persist the pair in the authoritative match state. A Ruler's supporter stays with that Ruler through mulligan, turns, prompts and rule explanations; opening another panel must not draw a new speaker. The viewer's supporter addresses the viewer even when announcing the opposing Ruler's turn.
+
+Opening-hand selection is a modal over the visible board. Show the assigned supporter's portrait and instructions, retain exact replacement limits, and keep cards and controls within the viewport. The waiting Ruler must not see the other's private opening hand.
+
+Online supporter records derive from saved assignments and completed match results. Preserve the existing win-rate convention (wins divided by wins, losses and draws; abandons shown separately). Do not invent assignments for historical results. Local hot-seat matches do not contribute to account statistics. Legacy active matches use a stable display voice only and remain excluded from supporter statistics.
+
+Mulligan presentation refinement: use a transparent, borderless full-viewport modal over a dark backdrop, with Exit Game at the upper right and a larger supporter portrait. Keep/Replace badges attach above the card information panel like combat statuses. Focus alone must not latch the information panel open. Reserve warning space independently of the card layout; never duplicate mulligan errors on the board. During play, show action warnings in The Realms strip in the assigned supporter's voice.
+
+After replacing cards, hold the opening-hand presentation until the new cards have flown from the deck one at a time. Keep new card faces hidden until their flight lands. Online authoritative state may advance during this presentation; the animation must never resubmit the action or change the result.

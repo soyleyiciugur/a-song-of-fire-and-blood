@@ -468,6 +468,7 @@ export type GameWinner =
   | null;
 
 export interface GameState {
+  supporters?: Record<PlayerId, "mara" | "aldren">;
   turnNumber: number;
 
   activePlayerId: PlayerId;

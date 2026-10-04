@@ -832,7 +832,6 @@
     );
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 231, 157, 0.08),
     inset 0 -8px 16px rgba(0, 0, 0, 0.23),
     0 7px 22px rgba(0, 0, 0, 0.28);
 }
@@ -7554,48 +7553,6 @@
   .tableEntryProgress > i { animation: none; width: 100%; opacity: .6; }
 }
 
-/* Opening-hand replacement is a pre-board screen. It must remain scrollable
-   even while the active Great Game session locks html/body for the arena. */
-.mulliganScreen {
-  height: calc(100dvh - var(--site-nav-height, 0px));
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: max(32px, var(--game-safe-bottom, env(safe-area-inset-bottom)));
-}
-
-@media (max-width: 700px) {
-  .mulliganScreen {
-    height: calc(100dvh - var(--site-nav-height, 0px));
-  }
-
-  .mulliganScreen .mulliganIntro {
-    margin: 1.15rem auto;
-    padding-inline: 14px;
-  }
-
-  .mulliganScreen .mulliganGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .7rem;
-    width: min(100%, 620px);
-    margin: 1rem auto;
-    padding-inline: 12px;
-    box-sizing: border-box;
-  }
-
-  .mulliganScreen .mulliganCard,
-  .mulliganScreen .mulliganCard:nth-child(4):nth-last-child(2) {
-    grid-column: span 1;
-  }
-
-  .mulliganScreen .mulliganFooter {
-    margin-inline: 12px;
-    padding-bottom: 18px;
-  }
-}
-
 /* v30 — mirrored command docks and square match controls. */
 .boardGame {
   --game-control-button-width: clamp(86px, 7vw, 112px);
@@ -7696,8 +7653,9 @@
 .boardGame .emptyBoard { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; pointer-events: none; }
 /* Compact table cards retain full text in their inspection views. */
 .boardGame .deckPile {
-  /* Reserve the eight-pixel stack offset inside its own grid column. */
-  padding: 4px 12px 12px 4px;
+  /* Keep eight pixels around the visible stack, including its shadow. */
+  padding: 8px 16px 16px 8px;
+  place-items: end start;
   min-width: 0;
   /* Keep the offset stack edges above the adjacent hand shelf's background. */
   position: relative;
@@ -7946,7 +7904,7 @@
 .boardGame .unitCard .skillProgress strong { min-width: 5cqw; }
 .boardGame .unitCard .skillProgressMeter { gap: 1.5cqw; }
 .boardGame .unitCard .skillProgressMeter i { width: 3cqw; height: 3cqw; }
-.boardGame .unitCard .statusOverlay { top: 3cqw; left: 20cqw; gap: 1.5cqw; }
+.boardGame .unitCard .statusOverlay { top: auto; bottom: calc(100% + 2cqw); left: auto; right: 4cqw; max-width: 64cqw; align-items: flex-end; gap: 1.5cqw; z-index: 12; }
 .boardGame .unitCard .statusOverlay span { font-size: 3.5cqw; padding: 1cqw 2cqw; }
 .boardGame .unitCard :is(.combatValuePreview, .combatDeathPreview, .combatGroundPreview) { font-size: 20cqw; max-width: 90%; }
 .boardGame .unitCard .combatDeathPreview { font-size: 25cqw; }
@@ -8090,7 +8048,7 @@
 .uniqueTooltipPortal { transform: none; z-index: 1400; }
 .game [data-game-hint] { position: relative; }
 .game [data-game-hint]:is(:hover, :focus-visible)::after { content: attr(data-game-hint); position: absolute; left: calc(100% + 8px); top: 0; z-index: 1400; width: max-content; max-width: min(220px, 70vw); padding: .45rem .55rem; border: 1px solid rgba(212,175,55,.48); background: linear-gradient(180deg, #241b18, #0c090b); color: #f5e6c8; box-shadow: 0 10px 25px #000b; font: .7rem/1.35 var(--font-body), serif; text-align: left; white-space: normal; pointer-events: none; }
-.game .commandMeter:has(.commandPip:hover)::after { content: none; }
+
 .equippedArtifactBadge { top: auto; bottom: 0; height: 68%; max-width: 24%; transform: none; pointer-events: auto; z-index: 5; cursor: var(--realm-action-cursor); }
 .equippedArtifactBadge.traitTooltipTrigger { display: block; }
 .cardMetadataWithArtifact { overflow: visible; }
@@ -8260,8 +8218,8 @@
   text-transform: none;
 }
 .standaloneCard .cardInfoCompact .abilityDisplay, .standaloneCard .cardInfoCompact .cardFooter { display: none; }
-.standaloneCard:focus-within:has(.abilityDisplay:not(.emptyAbility)) .cardInfoCompact { min-height: 62%; }
-.standaloneCard:focus-within .cardInfoCompact .abilityDisplay:not(.emptyAbility) { display: block; }
+.standaloneCard:not(.mulliganCard):focus-within:has(.abilityDisplay:not(.emptyAbility)) .cardInfoCompact { min-height: 62%; }
+.standaloneCard:not(.mulliganCard):focus-within .cardInfoCompact .abilityDisplay:not(.emptyAbility) { display: block; }
 @media (hover: hover) and (pointer: fine) {
   .standaloneCard:hover:has(.abilityDisplay:not(.emptyAbility)) .cardInfoCompact { min-height: 62%; }
   .standaloneCard:hover .cardInfoCompact .abilityDisplay:not(.emptyAbility) { display: block; }
@@ -8281,7 +8239,8 @@
 }
 .boardGame .handSection { border-top: 0; }
 .boardGame .handSection .handFanTrack {
-  align-items: flex-end;
+  align-items: flex-end;  
+  justify-content: flex-end;
   transform: none;
   padding: 0 calc(var(--hand-card-width) * .14 + 8px);
 }
@@ -8455,3 +8414,154 @@
   opacity: 1;
 }
 .boardGame .unitCard .equippedArtifactBadge .equippedArtifactArtwork { object-fit: cover; }
+/* Opening hands share the live board and stay within the viewport. */
+.mulliganDialog[open] {
+  position: fixed;
+  inset: 0;
+  width: min(1200px, calc(100vw - 32px));
+  max-width: none;
+  height: min(740px, calc(100dvh - 32px));
+  max-height: none;
+  min-height: 0;
+  margin: auto;
+  padding: clamp(10px, 2vw, 24px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid #8b7041;
+  background: linear-gradient(150deg, #21191ded, #0c090cf5);
+  color: #f5e6c8;
+  box-shadow: 0 24px 100px #000a;
+}
+.mulliganDialog::backdrop { background: #07050988; }
+.boardGame[data-mulligan="true"] .handSection { visibility: hidden; }
+.mulliganDialog .topbar { margin: 0; padding: 0; flex: 0 0 auto; }
+.mulliganDialog .title { font-size: clamp(18px, 2.5vw, 30px); margin: 0; }
+.mulliganDialog .mulliganIntro {
+  --table-speaker-size: clamp(38px, 6vh, 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 900px;
+  text-align: left;
+  flex: 0 0 auto;
+}
+.mulliganDialog .mulliganIntro h2 { font-size: clamp(14px, 1.8vw, 22px); margin: 3px 0; }
+.mulliganDialog .mulliganIntro p { font-size: clamp(11px, 1.2vw, 15px); margin: 0; line-height: 1.3; color: #c6bba8; }
+.mulliganDialog .mulliganIntro span { color: #c9ab6a; font-size: 12px; }
+.mulliganDialog .mulliganGrid {
+  container-type: size;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--opening-hand-count, 5), minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: clamp(6px, 1vw, 14px);
+  place-items: center;
+}
+.mulliganDialog .mulliganCard,
+.mulliganDialog .mulliganCard:nth-child(4):nth-last-child(2) {
+  grid-column: auto;
+  width: min(100%, calc(100cqh * 5 / 7));
+  height: auto;
+  max-height: 100%;
+  aspect-ratio: 5 / 7;
+  min-width: 0;
+  min-height: 0;
+  transform: none;
+}
+.mulliganDialog .mulliganFooter { flex: 0 0 auto; width: 100%; max-width: none; margin: 0; padding: 8px 0 0; }
+.mulliganDialog .mulliganFooter button { padding: 8px 16px; font-size: 13px; }
+.mulliganDialog .error { margin: 0; padding: 4px 8px; font-size: 12px; flex: 0 0 auto; }
+.mulliganWaiting { grid-column: 1 / -1; color: #b59760; font-size: 48px; }
+@media (max-height: 500px) {
+  .mulliganDialog[open] { gap: 6px; padding: 10px; height: calc(100dvh - 16px); }
+  .mulliganDialog .eyebrow { display: none; }
+  .mulliganDialog .mulliganFooter { padding-top: 4px; }
+}
+@media (orientation: portrait) and (max-width: 700px) {
+  .mulliganDialog .mulliganGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .mulliganDialog .mulliganCard { width: min(100%, calc((50cqh - 7px) * 5 / 7)); }
+}
+/* Mulligan is content over a darkened table, not a framed window. */
+.mulliganDialog[open] {
+  width: 100vw;
+  height: 100dvh;
+  max-width: 100vw;
+  margin: 0;
+  padding: max(16px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  font-family: var(--font-body), serif;
+}
+.mulliganDialog::backdrop { background: rgba(5, 4, 7, .86); }
+.mulliganDialog .topbar { border: 0; padding-right: 110px; min-height: 36px; }
+.mulliganDialog .topbar > button { position: absolute; top: max(16px, env(safe-area-inset-top)); right: max(20px, env(safe-area-inset-right)); }
+.mulliganDialog .mulliganIntro { --table-speaker-size: clamp(64px, 11vh, 112px); }
+.mulliganDialog .mulliganIntro > div > span { font-family: var(--font-hotd), serif; }
+.mulliganDialog .mulliganGrid { max-width: 1600px; margin-inline: auto; }
+.mulliganDialog .mulliganCard,
+.mulliganDialog .mulliganCard:nth-child(4):nth-last-child(2) { width: min(100%, 300px, calc(100cqh * 5 / 7)); }
+.mulliganDialog .mulliganFooter { margin-top: 20px; border: 0; font-family: var(--font-hotd), serif; }
+.mulliganDialog .mulliganFooter strong { font-variant-numeric: tabular-nums; }
+.mulliganDialog .topbar > button,
+.mulliganDialog .mulliganFooter button { background: #342725; border-color: #b69257; box-shadow: 0 3px 12px #0009; }
+.mulliganDialog .topbar > button:hover,
+.mulliganDialog .mulliganFooter button:not(:disabled):hover { background: #493629; }
+.mulliganWarning { position: absolute; left: 20px; right: 20px; bottom: 64px; min-height: 30px; display: grid; place-items: center; text-align: center; color: #e5b79b; font: 600 clamp(12px, 1.2vw, 16px)/1.25 var(--font-body), serif; pointer-events: none; }
+.mulliganDialog .mulliganCard .cardInfoCompact { overflow: visible; }
+.mulliganDialog .mulliganCard .statusOverlay { top: auto; bottom: calc(100% + 2cqw); left: auto; right: 4cqw; max-width: 64cqw; align-items: flex-end; z-index: 12; }
+.mulliganDialog .mulliganCard .statusOverlay span { font-size: 3.5cqw; padding: 1cqw 2cqw; color: #d4bf92; border-color: #a88a4f88; }
+.mulliganDialog .mulliganSelected .statusOverlay span { color: #e2a093; border-color: #d66f5c88; }
+.mulliganDialog .mulliganCard:disabled { opacity: 1; filter: none; cursor: default; }
+@media (max-height: 500px) {
+  .mulliganDialog[open] { padding: 8px 16px; gap: 5px; }
+  .mulliganDialog .mulliganIntro { --table-speaker-size: 64px; }
+  .mulliganDialog .mulliganFooter { margin-top: 28px; }
+  .mulliganDialog .topbar > button { top: 8px; right: 16px; }
+  .mulliganWarning { bottom: 48px; min-height: 26px; }
+}
+
+@media (orientation: portrait) and (max-width: 700px) {
+  .mulliganDialog .mulliganGrid { display: flex; justify-content: flex-start; overflow-x: auto; overflow-y: hidden; max-width: 100%; scrollbar-width: thin; }
+  .mulliganDialog .mulliganCard,
+  .mulliganDialog .mulliganCard:nth-child(4):nth-last-child(2) { flex: 0 0 auto; width: min(230px, calc(100cqh * 5 / 7)); }
+}
+
+.commandMeter[data-favor-state] { position: relative; }
+.commandMeter[data-favor-state] .commandMeterHeading { padding-right: 14px; }
+.royalFavorButton { position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; padding: 2px; border: 0; background: transparent; color: #75d9ff; cursor: pointer; transition: filter .18s, opacity .18s; }
+.royalFavorButton svg { display: block; width: 100%; height: 100%; }
+.royalFavorButton:not(:disabled):is(:hover, :focus-visible) { filter: drop-shadow(0 0 5px #75d9ff) brightness(1.4); }
+.royalFavorButton:focus-visible { outline: 1px solid #75d9ff; border-radius: 3px; }
+.royalFavorButton:disabled { cursor: default; }
+[data-favor-state="used"] .royalFavorButton { opacity: .25; filter: grayscale(.7); }
+.commandFavorBonus { color: #d4af37; font-size: .8em; white-space: nowrap; }
+
+.boardGame .battleLine .turnNotice[data-notice-kind="royal-favor"] {
+  --table-speaker-size: 28px;
+  min-width: 0;
+  width: min(420px, calc(100% - 8px));
+  max-width: calc(100% - 8px);
+  min-height: 0;
+  gap: 8px;
+  padding: 8px 12px;
+}
+.boardGame .turnNotice[data-notice-kind="royal-favor"] .turnNoticeCopy strong {
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.2;
+}
+.boardGame .turnNotice[data-notice-kind="royal-favor"] .turnNoticeCopy span {
+  font-size: 10px;
+}

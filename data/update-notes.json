@@ -1,7 +1,27 @@
 [
   {
+    "date": "2026-10-04",
+    "items": [
+      "Doubled the mulligan card size cap and made opening hands horizontally scrollable on narrow portrait screens.",
+      "Reduced opening-hand card size, aligned the selection count with the Great Game typeface, and gave Exit Game and Keep All solid button backgrounds.",
+      "Anchored the Great Game deck stack to the lower-left corner with equal edge spacing and left-aligned the hand beside it, leaving spare space on the right.",
+      "Moved Royal Favor from the hand to its owner's Command meter, with a glowing use button, an unused +1 indicator, a faded spent icon, and Mara or Aldren announcing its use.",
+      "Restored normal Command icon spacing, removed Command hover hints and the inset top border, and kept the smaller Royal Favor button fixed in the upper-right corner.",
+      "Made Royal Favor use announcements more compact with smaller text, portrait, and spacing.",
+      "Mara and Aldren now announce when the opponent uses Royal Favor and gains an extra Command.",
+      "Centered Royal Favor announcements over The Realms divider and widened them for easier reading.",
+      "Corrected local-game Royal Favor announcements to identify the active player as the one using it."
+    ]
+  },
+  {
     "date": "2026-10-03",
     "items": [
+      "Refined mulligan into a dark table overlay with larger supporter portraits, anchored Keep/Replace badges, sequential replacement draws, and fixed-position supporter warnings; board warnings now use The Realms strip.",
+      "Mara and Aldren now back opposite Rulers for the entire match, with supporter-specific win rates in profile match records for newly assigned online games.",
+      "Opening-hand selection now appears over the game board in a viewport-fitting lightbox, with the assigned supporter's portrait and instructions.",
+      "Corrected Unique card explanations to describe the one-copy-per-deck limit across card tooltips and deck building.",
+      "Moved board status badges above the lower-right info panel so they rise with it, with Mara and Aldren explanations displayed above Active Effects.",
+      "Gave Mara and Aldren distinct voices for targeting instructions, mandatory resolutions, and both players' turn announcements.",
       "Doubled the size of turn announcements and kept them above game overlays until they disappear.",
       "Enlarged and centered Great Game turn announcements alongside their speaker portraits at the existing realm divider position.",
       "Royal Favor is now public in online matches, so both players see the separate +1 hand bonus until it is used while ordinary opponent cards stay hidden.",

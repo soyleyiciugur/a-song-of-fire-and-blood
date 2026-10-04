@@ -1,4 +1,5 @@
 // lib/the-great-game/engine.ts
+import { assignSupporters } from "./supporters";
 
 import {
   getGameCard,
@@ -5262,6 +5263,7 @@ export function createGame(
   }
 
   const state: GameState = {
+    supporters: assignSupporters(),
     turnNumber: 0,
 
     activePlayerId:

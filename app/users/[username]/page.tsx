@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: Promise<{ username: str
   const { data: p } = await supabase.from("profiles").select("*").eq("username", username.toLowerCase()).single();
   if (!p) notFound();
 
-  const [{ count: threads }, { count: posts }, { count: raven }, { data: gameStats }, { data: deckStats }, { data: headToHead }, { data: matchHistory }, { data: leaderboardEntry }, viewer] = await Promise.all([
+  const [{ count: threads }, { count: posts }, { count: raven }, { data: gameStats }, { data: deckStats }, { data: headToHead }, { data: matchHistory }, { data: leaderboardEntry }, { data: supporterStats }, viewer] = await Promise.all([
     supabase.from("forum_threads").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
     supabase.from("forum_posts").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
     supabase.from("raven_comments").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
@@ -26,6 +26,7 @@ export default async function Page({ params }: { params: Promise<{ username: str
     supabase.from("great_game_head_to_head").select("*").eq("user_id", p.id).order("games_played", { ascending: false }).limit(5),
     supabase.from("great_game_match_history").select("*").eq("user_id", p.id).order("completed_at", { ascending: false }).limit(8),
     supabase.from("great_game_leaderboard").select("*").eq("user_id", p.id).maybeSingle(),
+    supabase.from("great_game_supporter_stats").select("*").eq("user_id", p.id),
     getCurrentUser(),
   ]);
 
@@ -73,6 +74,16 @@ export default async function Page({ params }: { params: Promise<{ username: str
             <div><dt>Avg. Match</dt><dd>{Math.round(gameStats.average_duration_seconds / 60)}m</dd></div>
             <div><dt>Avg. Turns</dt><dd>{Number(gameStats.average_turns).toLocaleString("en-GB", { maximumFractionDigits: 1 })}</dd></div>
           </dl>
+          {!!supporterStats?.length && <div className={styles.gameDetail}>
+            <h3>At Your Side</h3>
+            {(["mara", "aldren"] as const).map(supporter => {
+              const record = supporterStats.find(row => row.supporter === supporter);
+              return <div className={styles.gameRow} key={supporter}>
+                <span><strong>{supporter === "mara" ? "Mara" : "Aldren"}</strong><small>{record?.games_played ?? 0} games · {record?.wins ?? 0}W · {record?.losses ?? 0}L · {record?.draws ?? 0}D · {record?.abandons ?? 0}A</small></span>
+                <b>{record && record.wins + record.losses + record.draws > 0 ? `${Number(record.win_rate).toLocaleString("en-GB", { maximumFractionDigits: 1 })}% wins` : "—"}</b>
+              </div>;
+            })}
+          </div>}
           {(deckStats?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Deck &amp; Faction Record</h3>{deckStats!.map((deck, index) => <div className={styles.gameRow} key={`${deck.deck_name}:${deck.faction}`}><span><strong>{deck.deck_name}</strong><small>{index === 0 ? "Most used · " : ""}{deck.faction} · {deck.games_played} games</small></span><b>{deck.wins}W · {deck.losses}L · {deck.abandons}A</b></div>)}</div>}
           {(headToHead?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Head to Head</h3>{headToHead!.map(record => <div className={styles.gameRow} key={record.opponent_id}><Link href={`/users/${record.opponent_username}`}>{record.opponent_display_name}</Link><b>{record.wins}W · {record.losses}L · {record.abandons}A</b></div>)}</div>}
           {(matchHistory?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Recent Matches</h3>{matchHistory!.map(match => <div className={styles.gameRow} key={match.match_id}><span><strong className={styles[`result_${match.result}`]}>{match.result}</strong><small>vs. {match.opponent_display_name} · {match.deck_name} · {match.turns} turns</small></span><b>{match.rating_after - match.rating_before >= 0 ? "+" : ""}{match.rating_after - match.rating_before}</b></div>)}</div>}

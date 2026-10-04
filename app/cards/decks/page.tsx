@@ -33,7 +33,7 @@ const TRAIT_RULES: Record<string, string> = {
   confront: "This Character ignores Political defender restrictions: it may choose any Ready enemy Character or attack enemy Standing directly.",
 };
 
-const UNIQUE_RULE = "Unique — You cannot play another copy of this card while one is already in play under your control.";
+const UNIQUE_RULE = "Unique — Your deck may contain only one copy of this card.";
 
 function HoverTooltip({ label, text, detailed = true, className = "" }: { label: string; text: string; detailed?: boolean; className?: string }) {
   const ref = useRef<HTMLSpanElement | null>(null);

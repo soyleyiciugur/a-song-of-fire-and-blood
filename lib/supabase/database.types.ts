@@ -254,6 +254,7 @@ export interface Database {
       great_game_events: { Row: GreatGameEventRow; Insert: Omit<GreatGameEventRow, "id" | "created_at"> & Partial<Pick<GreatGameEventRow, "id" | "created_at">>; Update: never; Relationships: [] };
     };
     Views: {
+      great_game_supporter_stats: { Row: { user_id: string; supporter: "mara" | "aldren"; games_played: number; wins: number; losses: number; draws: number; abandons: number; win_rate: number }; Relationships: [] };
       great_game_player_stats: { Row: GreatGamePlayerStatsRow; Relationships: [] };
       great_game_deck_stats: { Row: GreatGameDeckStatsRow; Relationships: [] };
       great_game_head_to_head: { Row: GreatGameHeadToHeadRow; Relationships: [] };

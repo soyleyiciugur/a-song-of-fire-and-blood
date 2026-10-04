@@ -65,7 +65,10 @@ import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import GreatGameChat from "@/components/the-great-game/GreatGameChat";
 import Chronicle from "@/components/the-great-game/Chronicle";
+import { playerSupporter } from "@/lib/the-great-game/supporters";
+import { SupporterContext } from "@/components/the-great-game/SupporterContext";
 import TableSpeaker from "@/components/the-great-game/TableSpeaker";
+import { tablePromptCopy, tableTurnCopy, tableWarningCopy } from "@/lib/the-great-game/table-copy";
 import CombatStatusIcon from "@/components/cards/CombatStatusIcon";
 import { CardArtwork } from "@/components/cards/CardArtwork";
 import { CardChrome, CardInfoPanel, CommandSigil, IndicatorIcon, tierStyle } from "@/components/cards/GameCardPrimitives";
@@ -876,6 +879,8 @@ export default function GreatGamePlayPage() {
     setInviteCopied,
   ] = useState(false);
 
+  const [mulliganReveal, setMulliganReveal] = useState<{ game: GameState; playerId: PlayerId; drawIds: string[]; pending: boolean } | null>(null);
+  const finishMulliganReveal = useCallback(() => setMulliganReveal(null), []);
   const [turnNotice, setTurnNotice] = useState<{ key: string; title: string; subtitle: string } | null>(null);
   const lastTurnNoticeKeyRef = useRef<string | null>(null);
   const turnNoticeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -1203,6 +1208,23 @@ export default function GreatGamePlayPage() {
     game?.turnNumber,
   ]);
 
+
+  const favorHistoryRef = useRef<{ matchId: string | null; used: string } | null>(null);
+  const usedFavor = game ? (["player1", "player2"] as const).filter(id => game.players[id].removedFromGame.includes("royal-favor")).join(",") : "";
+  useEffect(() => {
+    const matchId = onlineMatch?.id ?? null;
+    const previous = favorHistoryRef.current;
+    favorHistoryRef.current = { matchId, used: usedFavor };
+    if (!previous || previous.matchId !== matchId || !usedFavor || previous.used === usedFavor) return;
+    const newlyUsed = usedFavor.split(",").find(id => !previous.used.split(",").includes(id));
+    const opponentUsed = newlyUsed !== (onlineMatch?.playerId ?? game?.activePlayerId);
+    const timer = setTimeout(() => {
+      setTurnNotice({ key: "favor:" + usedFavor, title: opponentUsed ? "Opponent used Royal Favor!" : "Royal Favor used!", subtitle: opponentUsed ? "Opponent +1 Command" : "+1 Command" });
+      if (turnNoticeTimerRef.current) clearTimeout(turnNoticeTimerRef.current);
+      turnNoticeTimerRef.current = setTimeout(() => setTurnNotice(null), 3000);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [usedFavor, onlineMatch?.id, onlineMatch?.playerId, game?.activePlayerId]);
 
   const turnNoticeMatchId = onlineMatch?.id ?? null;
   const turnNoticeStatus = onlineMatch?.status ?? null;
@@ -1977,7 +1999,7 @@ export default function GreatGamePlayPage() {
           }
 
           if (
-            detail.kind === "play-card" &&
+            detail.kind === "play-card" && cardId !== "royal-favor" &&
             actorPlayerId !== currentMatch?.playerId &&
             (actorPlayerId === "player1" || actorPlayerId === "player2") &&
             typeof cardId === "string"
@@ -2008,6 +2030,7 @@ export default function GreatGamePlayPage() {
   }, [onlineMatch?.id, supabase]);
 
   function startNewGame() {
+    setMulliganReveal(null);
     let nextGame: GameState;
     try {
       const practice = readStoredDecks().find(deck => deck.id === "practice") ?? null;
@@ -2066,6 +2089,7 @@ export default function GreatGamePlayPage() {
   }
 
   function exitToMenu() {
+    setMulliganReveal(null);
     setOnlineMatch(null);
     setGame(null);
 
@@ -2507,6 +2531,14 @@ export default function GreatGamePlayPage() {
   }
 
   function confirmMulligan() {
+    if (mulliganReveal) return;
+    const selectingPlayer = currentGame.activePlayerId;
+    const revealReplacements = (next: GameState) => {
+      if (!mulliganSelected.length) return;
+      const oldIds = new Set(currentGame.players[selectingPlayer].hand.map(card => card.instanceId));
+      const drawIds = next.players[selectingPlayer].hand.filter(card => !oldIds.has(card.instanceId) && card.cardId !== "royal-favor").map(card => card.instanceId);
+      setMulliganReveal(drawIds.length ? { game: next, playerId: selectingPlayer, drawIds, pending: false } : null);
+    };
     if (onlineMatch) {
       if (!onlineCanAct) {
         setError("Wait for your opening hand.");
@@ -2514,11 +2546,13 @@ export default function GreatGamePlayPage() {
       }
 
       void (async () => {
+        if (mulliganSelected.length) setMulliganReveal({ game: currentGame, playerId: selectingPlayer, drawIds: [], pending: true });
         const nextMatch = await sendOnlineAction({
           type: "mulligan",
           replaceHandInstanceIds: mulliganSelected,
         });
-        if (!nextMatch) return;
+        if (!nextMatch?.state) { setMulliganReveal(null); return; }
+        revealReplacements(nextMatch.state);
         setMulliganSelected([]);
         setError(null);
         setHandoff(false);
@@ -2558,6 +2592,7 @@ export default function GreatGamePlayPage() {
         );
     }
 
+    revealReplacements(result.state);
     setGame(
       result.state
     );
@@ -5294,10 +5329,8 @@ export default function GreatGamePlayPage() {
     );
   }
 
-  if (handoff) {
-    const mulliganHandoff =
-      currentGame.phase ===
-      "mulligan-player2";
+  if (handoff && currentGame.phase === "playing" && !mulliganReveal) {
+    const mulliganHandoff = false;
 
     return (
       <main
@@ -5356,77 +5389,8 @@ export default function GreatGamePlayPage() {
     );
   }
 
-  if (
-    onlineMatch &&
-    (currentGame.phase === "mulligan-player1" ||
-      currentGame.phase === "mulligan-player2") &&
-    currentGame.activePlayerId !== viewPlayerId
-  ) {
-    return (
-      <>
-        <OnlineTurnWaitScreen
-          match={onlineMatch}
-          eyebrow="Opening Hand"
-          title="The other player is choosing their hand"
-          text="Their mulligan is private. The table will open as soon as they are ready."
-          onLeave={() => setExitConfirm(true)}
-          exitConfirm={exitConfirm}
-          onCancelExit={() => setExitConfirm(false)}
-          onConfirmExit={() => void leaveOnlineMatch()}
-        />
-        {tableEntryVisible && (
-          <TableEntryOverlay waitingForLandscape={tableEntryWaitingForLandscape} />
-        )}
-      </>
-    );
-  }
-
-  if (
-    currentGame.phase ===
-      "mulligan-player1" ||
-    currentGame.phase ===
-      "mulligan-player2"
-  ) {
-    return (
-      <>
-        <MulliganScreen
-          game={currentGame}
-          playerLabel={gamePlayerName(currentGame.activePlayerId, onlineMatch)}
-          selectedIds={
-            mulliganSelected
-          }
-          onToggle={
-            toggleMulliganCard
-          }
-          onConfirm={
-            confirmMulligan
-          }
-          onExit={() =>
-            setExitConfirm(
-              true
-            )
-          }
-          error={error}
-          exitConfirm={
-            exitConfirm
-          }
-          onCancelExit={() =>
-            setExitConfirm(
-              false
-            )
-          }
-          onConfirmExit={
-            onlineMatch
-              ? () => void leaveOnlineMatch()
-              : exitToMenu
-          }
-        />
-        {tableEntryVisible && (
-          <TableEntryOverlay waitingForLandscape={tableEntryWaitingForLandscape} />
-        )}
-      </>
-    );
-  }
+  const isMulligan = Boolean(mulliganReveal) || currentGame.phase === "mulligan-player1" || currentGame.phase === "mulligan-player2";
+  const waitingForMulligan = Boolean(onlineMatch && currentGame.activePlayerId !== viewPlayerId);
 
   const prompt =
     onlineMatch && !onlineCanAct
@@ -5492,8 +5456,8 @@ export default function GreatGamePlayPage() {
   const arrivalTargeting = currentGame.pendingEffect && onlineCanAct &&
     ["iron-wrath", "manders-pact"].includes(currentGame.pendingEffect.abilityId);
   const arrivalTargetId = arrivalTargeting ? Object.keys(actionPreview?.units ?? {})[0] : undefined;
-  const visibleHand = [...viewPlayer.hand].sort((a, b) =>
-    Number(getGameCard(b.cardId).special === "royal-favor") - Number(getGameCard(a.cardId).special === "royal-favor"));
+  const royalFavor = viewPlayer.hand.find(card => card.cardId === "royal-favor");
+  const visibleHand = viewPlayer.hand.filter(card => card.cardId !== "royal-favor");
 
   const canReceiveDraggedCard =
     draggedHandCard
@@ -5513,7 +5477,7 @@ export default function GreatGamePlayPage() {
 
   const veiledSightOpen = onlineCanAct && currentGame.pendingEffect?.abilityId === "veiled-sight";
   const tyroshTradeOpen = onlineCanAct && currentGame.pendingEffect?.abilityId === "tyrosh";
-  const showRealmsPrompt = Boolean(prompt) && !veiledSightOpen && !tyroshTradeOpen && !showSelectedPreview && !inspectedUnit && !(inspectedHandCard && inspectedHandDefinition);
+  const showRealmsPrompt = !isMulligan && Boolean(prompt || error) && !veiledSightOpen && !tyroshTradeOpen && !showSelectedPreview && !inspectedUnit && !(inspectedHandCard && inspectedHandDefinition);
 
   const playerEndTurnDisabled =
     !onlineCanAct ||
@@ -5527,7 +5491,9 @@ export default function GreatGamePlayPage() {
     !currentGame.pendingEffect;
 
   return (
+    <SupporterContext.Provider value={playerSupporter(currentGame, mulliganReveal?.playerId ?? viewPlayerId)}>
     <main
+      data-mulligan={isMulligan}
       onPointerDownCapture={() => { suppressHandClickRef.current = false; }}
       onKeyDownCapture={event => {
         if (event.key === "Enter" || event.key === " ") suppressHandClickRef.current = false;
@@ -5749,16 +5715,6 @@ export default function GreatGamePlayPage() {
         </small>
       </section>
 
-      {error && (
-        <div
-          className={
-            styles.error
-          }
-        >
-          {error}
-        </div>
-      )}
-
       <PlayerHeader
         className={styles.opponentHud}
         playerId={
@@ -5823,6 +5779,7 @@ export default function GreatGamePlayPage() {
         aria-label={`${gamePlayerName(viewEnemyPlayerId, onlineMatch)} command`}
       >
         <CommandMeter
+          favorState={viewEnemyPlayer.hand.some(card => card.cardId === "royal-favor") ? "available" : viewEnemyPlayer.removedFromGame.includes("royal-favor") ? "used" : undefined}
           command={viewEnemyPlayer.command}
           maxCommand={viewEnemyPlayer.maxCommand}
           nextCommandBonus={viewEnemyPlayer.nextCommandBonus}
@@ -6011,23 +5968,26 @@ export default function GreatGamePlayPage() {
       <div className={styles.battleLine} data-realms-divider="true" data-has-prompt={showRealmsPrompt}>
         {showRealmsPrompt ? (
           <div className={styles.prompt}>
-            <TableSpeaker key={prompt} />
-            <span title={prompt ?? undefined} role="status">{prompt}</span>
+            <TableSpeaker key={prompt}>
+              {(speaker) => <>
+            <span title={error ? tableWarningCopy(error, speaker) : tablePromptCopy(prompt, speaker)} role={error ? "alert" : "status"}>{error ? tableWarningCopy(error, speaker) : tablePromptCopy(prompt, speaker)}</span>
             <button
               className={`${styles.endTurnButton} ${currentGame.pendingEffect ? "" : styles.endTurnReady}`}
-              disabled={Boolean(currentGame.pendingEffect)}
-              onClick={cancelSelection}
+              disabled={!error && Boolean(currentGame.pendingEffect)}
+              onClick={error ? () => setError(null) : cancelSelection}
             >
-              {currentGame.pendingEffect ? "Resolve this first" : "Cancel"}
+              {error ? "Dismiss" : currentGame.pendingEffect ? (speaker === "mara" ? "Finish this first" : "This first, my liege") : "Cancel"}
             </button>
+              </>}
+            </TableSpeaker>
           </div>
         ) : <span>✦ The Realms ✦</span>}
         {turnNotice && (
-          <div className={styles.turnNotice} role="status" aria-live="polite">
+          <div className={styles.turnNotice} data-notice-kind={turnNotice.key.startsWith("favor:") ? "royal-favor" : "turn"} role="status" aria-live="polite">
             <TableSpeaker key={turnNotice.key}>
               {(speaker) => <div className={styles.turnNoticeCopy}>
               <span>{turnNotice.subtitle}</span>
-              <strong>{turnNotice.title === "Your Turn" ? (speaker === "aldren" ? "Your turn, my liege." : "Your turn.") : turnNotice.title}</strong>
+              <strong>{tableTurnCopy(turnNotice.title, speaker)}</strong>
             </div>}
             </TableSpeaker>
           </div>
@@ -6338,6 +6298,8 @@ export default function GreatGamePlayPage() {
         aria-label="Your command and turn controls"
       >
         <CommandMeter
+          favorState={royalFavor ? "available" : viewPlayer.removedFromGame.includes("royal-favor") ? "used" : undefined}
+          onUseFavor={royalFavor && onlineCanAct && currentGame.phase === "playing" && !currentGame.pendingEffect && !drawAnimationActive && !onlineBusy ? () => dispatch({ type: "play-card", handInstanceId: royalFavor.instanceId }) : undefined}
           command={viewPlayer.command}
           maxCommand={viewPlayer.maxCommand}
           nextCommandBonus={viewPlayer.nextCommandBonus}
@@ -6459,7 +6421,7 @@ export default function GreatGamePlayPage() {
         />
       )}
 
-      {exitConfirm && (
+      {exitConfirm && !isMulligan && (
         <ConfirmOverlay
           title={onlineMatch ? "Leave Match?" : "Exit Game?"}
           text={
@@ -6480,7 +6442,26 @@ export default function GreatGamePlayPage() {
           }
         />
       )}
+      {isMulligan && <MulliganScreen
+        game={mulliganReveal?.game ?? currentGame}
+        drawIds={mulliganReveal?.drawIds}
+        revealing={Boolean(mulliganReveal)}
+        onRevealed={finishMulliganReveal}
+        playerId={mulliganReveal?.playerId ?? viewPlayerId}
+        playerLabel={gamePlayerName(mulliganReveal?.playerId ?? viewPlayerId, onlineMatch)}
+        waiting={!mulliganReveal && (waitingForMulligan || handoff)}
+        onReview={handoff && !onlineMatch ? beginHandoffTurn : undefined}
+        selectedIds={mulliganSelected}
+        onToggle={toggleMulliganCard}
+        onConfirm={confirmMulligan}
+        onExit={() => setExitConfirm(true)}
+        error={error}
+        exitConfirm={exitConfirm}
+        onCancelExit={() => setExitConfirm(false)}
+        onConfirmExit={onlineMatch ? () => void leaveOnlineMatch() : exitToMenu}
+      />}
     </main>
+    </SupporterContext.Provider>
   );
 }
 
@@ -6771,60 +6752,14 @@ function OnlineWaitingScreen({
   );
 }
 
-function OnlineTurnWaitScreen({
-  match,
-  eyebrow,
-  title,
-  text,
-  onLeave,
-  exitConfirm,
-  onCancelExit,
-  onConfirmExit,
-}: {
-  match: GreatGameOnlineMatchView;
-  eyebrow: string;
-  title: string;
-  text: string;
-  onLeave: () => void;
-  exitConfirm: boolean;
-  onCancelExit: () => void;
-  onConfirmExit: () => void;
-}) {
-  return (
-    <main className={`${styles.game} ${styles.handoffScreen}`}>
-      <div className={styles.pageBackground} aria-hidden />
-      <section className={`${styles.handoffCard} ${styles.onlineWaitingCard}`}>
-        <span className={styles.eyebrow}>{eyebrow}</span>
-        <h1>{title}</h1>
-        <p>{text}</p>
-        <div className={styles.onlineOpponentLine}>
-          <span>Across the table</span>
-          <strong>{onlineOpponentName(match)}</strong>
-        </div>
-        <button
-          type="button"
-          className={styles.secondaryButton}
-          onClick={onLeave}
-        >
-          Leave Match
-        </button>
-      </section>
-
-      {exitConfirm && (
-        <ConfirmOverlay
-          title="Leave Match?"
-          text="Leaving an active online match closes the table for both players."
-          confirmLabel="Leave Match"
-          onCancel={onCancelExit}
-          onConfirm={onConfirmExit}
-        />
-      )}
-    </main>
-  );
-}
-
 function MulliganScreen({
   game,
+  drawIds,
+  revealing = false,
+  onRevealed,
+  playerId,
+  waiting,
+  onReview,
   playerLabel,
   selectedIds,
   onToggle,
@@ -6836,6 +6771,12 @@ function MulliganScreen({
   onConfirmExit,
 }: {
   game: GameState;
+  drawIds?: string[];
+  revealing?: boolean;
+  onRevealed: () => void;
+  playerId: PlayerId;
+  waiting: boolean;
+  onReview?: () => void;
   playerLabel?: string;
   selectedIds: string[];
   onToggle: (
@@ -6848,8 +6789,41 @@ function MulliganScreen({
   onCancelExit: () => void;
   onConfirmExit: () => void;
 }) {
-  const playerId =
-    game.activePlayerId;
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    dialog?.showModal();
+    return () => dialog?.close();
+  }, []);
+  const supporter = playerSupporter(game, playerId);
+  const [landedIds, setLandedIds] = useState<string[]>([]);
+  const [replacementFlight, setReplacementFlight] = useState<(ActiveDrawAnimation & { width: number; height: number }) | null>(null);
+  useEffect(() => {
+    if (!drawIds?.length) return;
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+    const drawNext = (index: number) => {
+      if (cancelled) return;
+      if (index >= drawIds.length) { onRevealed(); return; }
+      const id = drawIds[index];
+      const target = dialogRef.current?.querySelector<HTMLElement>(`[data-mulligan-card="${id}"]`);
+      const rect = target?.getBoundingClientRect();
+      const source = document.querySelector(`[data-deck-anchor="${playerId}"]`)?.getBoundingClientRect();
+      const card = game.players[playerId].hand.find(item => item.instanceId === id);
+      if (!rect || !card) { onRevealed(); return; }
+      setReplacementFlight({ playerId, handInstanceId: id, cardId: card.cardId, cost: getGameCard(card.cardId).cost,
+        animationId: index + 1, startX: source?.left ?? 0, startY: source?.top ?? window.innerHeight,
+        middleX: rect.left, middleY: Math.max(8, rect.top - 24), endX: rect.left, endY: rect.top,
+        width: rect.width, height: rect.height });
+      timer = setTimeout(() => {
+        setLandedIds(drawIds.slice(0, index + 1));
+        setReplacementFlight(null);
+        timer = setTimeout(() => drawNext(index + 1), 250);
+      }, 800);
+    };
+    timer = setTimeout(() => { setLandedIds([]); drawNext(0); }, 50);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [drawIds, game, onRevealed, playerId]);
 
   const player =
     game.players[
@@ -6857,15 +6831,12 @@ function MulliganScreen({
     ];
 
   return (
-    <main
-      className={`${styles.game} ${styles.mulliganScreen}`}
+    <dialog
+      ref={dialogRef}
+      className={`${styles.game} ${styles.mulliganScreen} ${styles.mulliganDialog}`}
+      aria-labelledby="mulligan-title"
+      onCancel={event => { event.preventDefault(); onExit(); }}
     >
-      <div
-        className={
-          styles.pageBackground
-        }
-        aria-hidden
-      />
 
       <header
         className={
@@ -6882,6 +6853,7 @@ function MulliganScreen({
           </span>
 
           <h1
+            id="mulligan-title"
             className={
               styles.title
             }
@@ -6907,43 +6879,34 @@ function MulliganScreen({
           styles.mulliganIntro
         }
       >
+        <TableSpeaker speaker={supporter} size={112} />
+        <div>
         <span>
+          {supporter === "mara" ? "Mara backs " : "Aldren backs "}
           {playerLabel ?? playerName(
             playerId
           )}
         </span>
 
         <h2>
-          Choose up to three
-          cards to replace
+          {waiting
+            ? (onReview ? "Your seat awaits" : "The other Ruler is choosing")
+            : supporter === "mara" ? "Choose up to three cards to replace. Make them count." : "A finer hand, my liege? Choose up to three cards to replace."}
         </h2>
 
         <p>
-          Replaced cards are
-          temporarily set aside.
-          New cards are drawn,
-          then your replaced
-          cards are shuffled back
-          into the deck.
+          {waiting
+            ? (onReview ? "Pass the table to the next Ruler, then review your opening hand." : supporter === "mara" ? "Their hand. Their decision. We wait." : "A moment, my liege. Your rival is considering their opening hand.")
+            : supporter === "mara" ? "Set them aside. Draw replacements. The old cards go back into the deck and get shuffled. Or Keep All. Your choice." : "Your chosen cards will wait aside, Your Grace. Draw their replacements, then we shall shuffle the old cards back into your deck. You may also Keep All."}
         </p>
+        </div>
       </section>
 
-      {error && (
-        <div
-          className={
-            styles.error
-          }
-        >
-          {error}
-        </div>
-      )}
+      <div className={styles.mulliganWarning} role="alert">{error ? tableWarningCopy(error, supporter) : null}</div>
 
-      <div
-        className={
-          styles.mulliganGrid
-        }
-      >
-        {player.hand.map(
+      <div className={styles.mulliganGrid} data-waiting={waiting} style={{ "--opening-hand-count": player.hand.filter(card => card.cardId !== "royal-favor").length } as CSSProperties}>
+        {waiting ? <div className={styles.mulliganWaiting}>✦</div> : <>
+        {player.hand.filter(card => card.cardId !== "royal-favor").map(
           (handCard) => {
             const card =
               getGameCard(
@@ -6957,6 +6920,8 @@ function MulliganScreen({
 
             return (
               <button
+                data-mulligan-card={handCard.instanceId}
+                disabled={revealing}
                 key={
                   handCard.instanceId
                 }
@@ -6966,9 +6931,7 @@ function MulliganScreen({
                     : ""
                 }`}
                 style={
-                  tierStyle(
-                    card
-                  )
+                  { ...tierStyle(card), visibility: drawIds?.includes(handCard.instanceId) && !landedIds.includes(handCard.instanceId) ? "hidden" : undefined }
                 }
                 onClick={() =>
                   onToggle(
@@ -7001,17 +6964,8 @@ function MulliganScreen({
                   }
                   compact
                   showTraitTooltips
+                  statusBadge={<span>{selected && !revealing ? "Replace" : "Keep"}</span>}
                 />
-
-                <div
-                  className={
-                    styles.mulliganMark
-                  }
-                >
-                  {selected
-                    ? "Replace"
-                    : "Keep"}
-                </div>
 
                 {selected && (
                   <span
@@ -7027,6 +6981,7 @@ function MulliganScreen({
             );
           }
         )}
+        </>}
       </div>
 
       <div
@@ -7044,7 +6999,7 @@ function MulliganScreen({
               MAX_MULLIGAN_REPLACEMENTS
             }
           </strong>{" "}
-          selected
+          {waiting ? " awaiting the table" : " selected"}
         </div>
 
         <button
@@ -7052,15 +7007,24 @@ function MulliganScreen({
             styles.primaryButton
           }
           onClick={
-            onConfirm
+            waiting ? onReview : onConfirm
           }
+          disabled={revealing || (waiting && !onReview)}
         >
-          {selectedIds.length >
+          {revealing ? (supporter === "mara" ? "Your new cards. One at a time." : "Your new hand arrives, my liege.") : waiting ? (onReview ? `Review ${playerLabel ?? playerName(playerId)} Opening Hand` : "Waiting for the other Ruler") : selectedIds.length >
           0
             ? `Replace ${selectedIds.length}`
             : "Keep All"}
         </button>
       </div>
+
+      {replacementFlight && <div key={replacementFlight.handInstanceId} className={styles.drawCardFlight}
+        data-mulligan-flight={replacementFlight.handInstanceId}
+        style={{ ...drawFlightStyle(replacementFlight, getGameCard(replacementFlight.cardId)), position: "fixed", width: replacementFlight.width, height: replacementFlight.height }}>
+        <CardArtwork card={getGameCard(replacementFlight.cardId)} className={styles.fullCardArtwork} />
+        <CardChrome card={getGameCard(replacementFlight.cardId)} cost={replacementFlight.cost} />
+        <CardInfoPanel card={getGameCard(replacementFlight.cardId)} compact />
+      </div>}
 
       {exitConfirm && (
         <ConfirmOverlay
@@ -7075,7 +7039,7 @@ function MulliganScreen({
           }
         />
       )}
-    </main>
+    </dialog>
   );
 }
 
@@ -7295,7 +7259,6 @@ function PlayerHeader({
         <HudStat
           label="Hand"
           value={`${player.hand.filter(card => findGameCard(card.cardId)?.special !== "royal-favor").length}/8`}
-          royalFavor={player.hand.some(card => findGameCard(card.cardId)?.special === "royal-favor")}
           handAnchorPlayerId={
             playerId
           }
@@ -7384,7 +7347,6 @@ function HudStat({
   accent = false,
   deckAnchorPlayerId,
   handAnchorPlayerId,
-  royalFavor = false,
 }: {
   label: string;
   value:
@@ -7393,7 +7355,6 @@ function HudStat({
   accent?: boolean;
   deckAnchorPlayerId?: PlayerId;
   handAnchorPlayerId?: PlayerId;
-  royalFavor?: boolean;
 }) {
   return (
     <div
@@ -7415,7 +7376,6 @@ function HudStat({
 
       <strong className={styles.hudStatValue}>
         {value}
-        {royalFavor && <small className={styles.hudRoyalFavor} title="Royal Favor" aria-label="plus Royal Favor">+1</small>}
       </strong>
     </div>
   );
@@ -7427,7 +7387,11 @@ function CommandMeter({
   nextCommandBonus,
   previewCost = null,
   compact = false,
+  favorState,
+  onUseFavor,
 }: {
+  favorState?: "available" | "used";
+  onUseFavor?: () => void;
   command: number;
   maxCommand: number;
   nextCommandBonus: number;
@@ -7450,17 +7414,24 @@ function CommandMeter({
           ? styles.commandMeterCompact
           : ""
       }`}
-      data-game-hint={`${command} of ${maxCommand} Command available`}
+      data-favor-state={favorState}
+      aria-label={`${command} of ${maxCommand} Command available`}
     >
       <div
         className={
           styles.commandMeterHeading
         }
       >
+        {favorState && <button type="button" className={styles.royalFavorButton}
+          disabled={favorState === "used" || !onUseFavor} onClick={onUseFavor}
+          aria-label={favorState === "used" ? "Royal Favor used" : "Use Royal Favor"}
+          aria-description={favorState === "used" ? "Royal Favor has been spent" : "Gain 1 Command this turn"}>
+          <CommandSigil />
+        </button>}
         <span>Command</span>
 
         <strong>
-          {command}/{maxCommand}
+          {command}/{maxCommand}{favorState === "available" && <small className={styles.commandFavorBonus}> +1</small>}
         </strong>
 
         {nextCommandBonus > 0 && (
@@ -7514,13 +7485,7 @@ function CommandMeter({
               ]
                 .filter(Boolean)
                 .join(" ")}
-              data-game-hint={
-                available
-                  ? bonus
-                    ? "Bonus Command available"
-                    : "Command available"
-                  : "Command spent"
-              }
+              aria-label={available ? bonus ? "Bonus Command available" : "Command available" : "Command spent"}
             >
               <CommandSigil />
             </span>
@@ -8512,33 +8477,14 @@ function BoardUnit({
       />
 
 
-      <div
-        className={
-          styles.statusOverlay
-        }
-      >
-        {unit.deployedThisTurn && (
-          <span>
-            Deployed
-          </span>
-        )}
-
-        {unit.exhausted && (
-          <span>
-            Exhausted
-          </span>
-        )}
-
-        {unit.grounded && (
-          <span>
-            Grounded
-          </span>
-        )}
-      </div>
-
       <CardInfoPanel
         compact
         artifactBadgeAbovePanel
+        statuses={[
+          ...(unit.deployedThisTurn ? ["Deployed" as const] : []),
+          ...(unit.exhausted ? ["Exhausted" as const] : []),
+          ...(unit.grounded ? ["Grounded" as const] : []),
+        ]}
         activeTraits={activeTraits}
         card={card}
         artifactId={
