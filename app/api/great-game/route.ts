@@ -512,7 +512,7 @@ export async function POST(request: Request) {
         );
       }
 
-      if (match.state.activePlayerId !== playerId) {
+      if (action.type !== "mulligan" && match.state.activePlayerId !== playerId) {
         return jsonError("It is not your turn.", 409);
       }
 
@@ -524,7 +524,7 @@ export async function POST(request: Request) {
         : null;
 
       const engineStartedAt = performance.now();
-      const result = applyAction(match.state, action);
+      const result = applyAction(match.state, action.type === "mulligan" ? { ...action, actorPlayerId: playerId } : action);
       const engineFinishedAt = performance.now();
       if (!result.ok) return jsonError(result.error ?? "That move is not legal.", 422);
 

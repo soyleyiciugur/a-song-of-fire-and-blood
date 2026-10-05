@@ -547,6 +547,7 @@ export type ConflictType =
 
 export interface MulliganAction {
   type: "mulligan";
+  actorPlayerId?: PlayerId;
 
   replaceHandInstanceIds: string[];
 }

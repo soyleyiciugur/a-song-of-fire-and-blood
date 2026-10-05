@@ -68,6 +68,9 @@ import GreatGameChat from "@/components/the-great-game/GreatGameChat";
 import Chronicle from "@/components/the-great-game/Chronicle";
 import InnkeeperVideo from "@/components/the-great-game/InnkeeperVideo";
 import InnkeeperEmotes from "@/components/the-great-game/InnkeeperEmotes";
+import { useGameMusic } from "@/components/the-great-game/GameAudio";
+import { useCardsAudio } from "@/components/the-great-game/CardsAudioProvider";
+import GameAudioControls from "@/components/the-great-game/GameAudioControls";
 import { playerSupporter } from "@/lib/the-great-game/supporters";
 import { SupporterContext } from "@/components/the-great-game/SupporterContext";
 import TableSpeaker from "@/components/the-great-game/TableSpeaker";
@@ -714,6 +717,18 @@ export default function GreatGamePlayPage() {
     useState<GameState | null>(
       null
     );
+
+  const { ambienceVolume, musicVolume, setAmbienceVolume, setMusicVolume } = useCardsAudio();
+  useGameMusic(mode === "game", musicVolume);
+
+  const audioControls = (
+    <GameAudioControls
+      ambienceVolume={ambienceVolume}
+      musicVolume={musicVolume}
+      onAmbienceChange={setAmbienceVolume}
+      onMusicChange={setMusicVolume}
+    />
+  );
 
   const gameRef = useRef<GameState | null>(null);
   const [localFrameKey, setLocalFrameKey] = useState("");
@@ -1912,17 +1927,28 @@ export default function GreatGamePlayPage() {
 
     setOnlineActionPending(true);
     try {
-      const response = await fetch("/api/great-game", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          op: "action",
-          matchId: onlineMatch.id,
-          version: onlineMatch.version,
-          action,
-        }),
-      });
-      const payload = await parseOnlineResponse(response);
+      const submit = async (version: number) => {
+        const response = await fetch("/api/great-game", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ op: "action", matchId: onlineMatch.id, version, action }),
+        });
+        const payload = (await response.json().catch(() => ({}))) as {
+          error?: string;
+          match?: GreatGameOnlineMatchView | null;
+          statePatch?: GreatGameOnlineStatePatch | null;
+        };
+        return { response, payload };
+      };
+      let { response, payload } = await submit(onlineMatch.version);
+      if (action.type === "mulligan" && response.status === 409 && payload.statePatch?.state &&
+          !payload.statePatch.state.mulligan.completed[onlineMatch.playerId]) {
+        ({ response, payload } = await submit(payload.statePatch.version));
+      }
+      if (!response.ok) {
+        if (payload.statePatch) applyOnlineStatePatch(payload.statePatch);
+        throw new Error(payload.error ?? "Online play failed.");
+      }
       if (payload.match) {
         applyOnlineMatchView(payload.match);
         return payload.match;
@@ -2308,7 +2334,9 @@ export default function GreatGamePlayPage() {
   const onlineCanAct =
     !onlineMatch ||
     (onlineMatch.status === "active" &&
-      onlineMatch.playerId === activePlayerId &&
+      (currentGame.phase.startsWith("mulligan-")
+        ? !currentGame.mulligan.completed[onlineMatch.playerId]
+        : onlineMatch.playerId === activePlayerId) &&
       !onlineActionPending);
 
   const alliedCharacters =
@@ -2549,7 +2577,7 @@ export default function GreatGamePlayPage() {
 
   function confirmMulligan() {
     if (mulliganReveal) return;
-    const selectingPlayer = currentGame.activePlayerId;
+    const selectingPlayer = onlineMatch?.playerId ?? currentGame.activePlayerId;
     const revealReplacements = (next: GameState) => {
       if (!mulliganSelected.length) return;
       const oldIds = new Set(currentGame.players[selectingPlayer].hand.map(card => card.instanceId));
@@ -5277,6 +5305,7 @@ export default function GreatGamePlayPage() {
           styles.game
         }
       >
+        {audioControls}
         <div
           className={
             styles.pageBackground
@@ -5353,6 +5382,7 @@ export default function GreatGamePlayPage() {
       <main
         className={`${styles.game} ${styles.handoffScreen}`}
       >
+        {audioControls}
         <div
           className={
             styles.pageBackground
@@ -5407,7 +5437,7 @@ export default function GreatGamePlayPage() {
   }
 
   const isMulligan = Boolean(mulliganReveal) || currentGame.phase === "mulligan-player1" || currentGame.phase === "mulligan-player2";
-  const waitingForMulligan = Boolean(onlineMatch && currentGame.activePlayerId !== viewPlayerId);
+  const waitingForMulligan = Boolean(onlineMatch && currentGame.mulligan.completed[viewPlayerId]);
 
   const prompt =
     onlineMatch && !onlineCanAct
@@ -5527,6 +5557,7 @@ export default function GreatGamePlayPage() {
           : ""
       } ${styles.boardGame} ${onlineMatch ? styles.gameWithOnlineChat : ""}`}
     >
+      {audioControls}
       <div
         className={
           styles.pageBackground
@@ -5801,6 +5832,8 @@ export default function GreatGamePlayPage() {
           match={onlineMatch ?? null}
           buttonClassName={styles.innkeeperInteraction}
           label={innkeeper.name}
+          phase={mulliganReveal ? "mulligan-reveal" : currentGame.phase}
+          supporter={playerSupporter(currentGame, viewPlayerId)}
         />
       </div>
       <section

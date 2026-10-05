@@ -21,6 +21,8 @@ import {
 } from "@/lib/the-great-game/emotes";
 import { createClient } from "@/lib/supabase/client";
 
+import EmoteIcon from "./EmoteIcon";
+
 import styles from "./InnkeeperEmotes.module.css";
 
 type EmoteWireMessage = {
@@ -33,14 +35,14 @@ type EmoteWireMessage = {
 
 type Bubble = {
   id: string;
-  emoteId: GreatGameEmoteId;
+  emoteId?: GreatGameEmoteId;
   text: string;
+  speaker?: string;
 };
 
 type FanStave = {
   id: GreatGameEmoteId;
   angle: number;
-  icon: string;
 };
 
 const FLOOD_WINDOW_MS = 8_000;
@@ -52,18 +54,14 @@ const SALT_VIDEO_COOLDOWN_MS = 12_000;
 // Positive emotes fan to the left, reactions / threat to the right, and WOW
 // sits at the crown. Salt keeps its special place at the outer edge.
 const FAN_STAVES: readonly FanStave[] = [
-  { id: "greetings", angle: -102, icon: "✋" },
-  { id: "thanks", angle: -68, icon: "♥" },
-  { id: "well-played", angle: -34, icon: "✓" },
-  { id: "wow", angle: 0, icon: "✦" },
-  { id: "oops", angle: 34, icon: "!" },
-  { id: "threaten", angle: 68, icon: "⚔" },
-  { id: "salt", angle: 102, icon: "🧂" },
+  { id: "greetings", angle: -102 },
+  { id: "thanks", angle: -68 },
+  { id: "well-played", angle: -34 },
+  { id: "wow", angle: 0 },
+  { id: "oops", angle: 34 },
+  { id: "threaten", angle: 68 },
+  { id: "salt", angle: 102 },
 ] as const;
-
-const EMOTE_ICONS = Object.fromEntries(
-  FAN_STAVES.map((stave) => [stave.id, stave.icon])
-) as Record<GreatGameEmoteId, string>;
 
 function viewerUserId(match: GreatGameOnlineMatchView | null) {
   if (!match) return "";
@@ -78,16 +76,21 @@ export default function InnkeeperEmotes({
   match,
   buttonClassName,
   label,
+  phase,
+  supporter,
 }: {
   match: GreatGameOnlineMatchView | null;
   buttonClassName?: string;
   label: string;
+  phase: string;
+  supporter: "mara" | "aldren";
 }) {
   const supabase = useMemo(() => createClient(), []);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const sentAtRef = useRef<number[]>([]);
   const lastSaltVideoAtRef = useRef(0);
   const bubbleTimersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
+  const previousPhaseRef = useRef(phase);
   const [open, setOpen] = useState(false);
   const [anchorRect, setAnchorRect] = useState<DOMRect | null>(null);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
@@ -100,6 +103,26 @@ export default function InnkeeperEmotes({
   const viewerId = viewerUserId(match);
   const active = Boolean(match && match.status === "active" && match.opponent && viewerId);
   const blocked = blockedUntil > now;
+
+  const showBubble = useCallback((bubble: Bubble) => {
+    setBubbles((current) => [...current, bubble].slice(-3));
+    const timer = setTimeout(() => {
+      bubbleTimersRef.current.delete(bubble.id);
+      setBubbles((current) => current.filter((item) => item.id !== bubble.id));
+    }, BUBBLE_LIFETIME_MS);
+    bubbleTimersRef.current.set(bubble.id, timer);
+  }, []);
+
+  useEffect(() => {
+    const previous = previousPhaseRef.current;
+    previousPhaseRef.current = phase;
+    if (phase !== "playing" || !previous.startsWith("mulligan-")) return;
+    const text = supporter === "mara"
+      ? "Welcome to The Cupbearer. Good luck. Try not to lose all your coin; the place has bills to pay."
+      : "Welcome to The Cupbearer, my liege! May fortune favor your hand, and may your stay be most agreeable.";
+    const timer = setTimeout(() => showBubble({ id: `welcome:${Date.now()}`, speaker: supporter === "mara" ? "Mara" : "Aldren", text }), 0);
+    return () => clearTimeout(timer);
+  }, [phase, supporter, showBubble]);
 
   const refreshAnchor = useCallback(() => {
     const rect = anchorRef.current?.getBoundingClientRect();
@@ -175,12 +198,7 @@ export default function InnkeeperEmotes({
             text: definition.maraText,
           };
 
-          setBubbles((current) => [...current, bubble].slice(-3));
-          const timer = setTimeout(() => {
-            bubbleTimersRef.current.delete(message.id);
-            setBubbles((current) => current.filter((item) => item.id !== message.id));
-          }, BUBBLE_LIFETIME_MS);
-          bubbleTimersRef.current.set(message.id, timer);
+          showBubble(bubble);
 
           if (emoteId === "salt") {
             const currentTime = Date.now();
@@ -200,7 +218,7 @@ export default function InnkeeperEmotes({
     return () => {
       void supabase.removeChannel(channel);
     };
-  }, [match, refreshAnchor, supabase, viewerId]);
+  }, [match, refreshAnchor, showBubble, supabase, viewerId]);
 
   useEffect(() => () => {
     bubbleTimersRef.current.forEach((timer) => clearTimeout(timer));
@@ -233,6 +251,7 @@ export default function InnkeeperEmotes({
     if (error) {
       setSendError("Mara couldn't carry that across the table.");
     } else {
+      showBubble({ id: `sent:${Date.now()}`, emoteId, speaker: "Sent", text: `${greatGameEmoteDefinition(emoteId).label} reached your opponent.` });
       const nextRecent = [...recent, currentTime];
       sentAtRef.current = nextRecent;
       if (nextRecent.length >= FLOOD_MAX) {
@@ -242,7 +261,7 @@ export default function InnkeeperEmotes({
       setOpen(false);
     }
     setSending(false);
-  }, [active, blockedUntil, match, sending, supabase, viewerId]);
+  }, [active, blockedUntil, match, sending, showBubble, supabase, viewerId]);
 
   const wheelStyle = useMemo<CSSProperties | undefined>(() => {
     if (!anchorRect) return undefined;
@@ -358,12 +377,12 @@ export default function InnkeeperEmotes({
                   style={{ "--bubble-index": index } as CSSProperties}
                 >
                   <div className={styles.bubbleHeader}>
-                    <strong>Mara</strong>
-                    <span className={styles.bubbleEmote} aria-hidden="true">
-                      {EMOTE_ICONS[bubble.emoteId]}
-                    </span>
+                    <strong>{bubble.speaker ?? "Mara"}</strong>
+                    {bubble.emoteId && <span className={styles.bubbleEmote} aria-hidden="true">
+                      <EmoteIcon id={bubble.emoteId} />
+                    </span>}
                   </div>
-                  <div className={styles.bubbleText}>{bubble.text}</div>
+                  <div className={styles.bubbleText}>{bubble.emoteId === "salt" ? <span role="img" aria-label="Salt"><EmoteIcon id="salt" /></span> : bubble.text}</div>
                 </div>
               ))}
             </div>

@@ -2,6 +2,12 @@
   {
     "date": "2026-10-05",
     "items": [
+      "Kept the tavern ambience playing throughout The Great Game's Cards pages and stopped it when leaving Cards.",
+      "Added a compact sound settings button to The Great Game with separate, saved ambient and music volume sliders.",
+      "Added looping ambience and a randomized music playlist to The Great Game, beginning with The Cupbearer and discovering new tracks from the audio folder.",
+      "Allowed both online Great Game Rulers to choose their opening hands at the same time, with a waiting view after each choice.",
+      "Added confirmation when a chat-wheel emote reaches the opponent and a Mara or Aldren welcome to The Cupbearer when play begins.",
+      "Replaced Mara emote notification glyphs with unframed SVG counterparts of the wooden chat-wheel motifs.",
       "Added parchment artwork behind Mara's chat-wheel notifications with dark ink lettering for readability."
     ]
   },

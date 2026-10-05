@@ -1215,8 +1215,7 @@ function resolveMulliganMutable(
     }
   >
 ) {
-  const playerId =
-    state.activePlayerId;
+  const playerId = action.actorPlayerId ?? state.activePlayerId;
 
   const expectedPlayer =
     state.phase ===
@@ -1232,11 +1231,9 @@ function resolveMulliganMutable(
     "The opening mulligan has already ended."
   );
 
-  assertRule(
-    playerId ===
-      expectedPlayer,
-    "It is not this player's mulligan."
-  );
+  assertRule(!state.mulligan.completed[playerId], "This player has already chosen an opening hand.");
+  assertRule(playerId === expectedPlayer || action.actorPlayerId === playerId,
+    "It is not this player's mulligan.");
 
   const player =
     state.players[playerId];
@@ -1338,14 +1335,14 @@ function resolveMulliganMutable(
     playerId
   );
 
-  if (
-    playerId === "player1"
-  ) {
+  if (!state.mulligan.completed.player1 || !state.mulligan.completed.player2) {
+    if (state.mulligan.completed.player1) {
     state.phase =
       "mulligan-player2";
 
     state.activePlayerId =
       "player2";
+    }
 
     return;
   }
