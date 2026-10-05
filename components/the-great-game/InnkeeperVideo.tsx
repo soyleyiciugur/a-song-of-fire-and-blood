@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { GREAT_GAME_INNKEEPER_ACTION_EVENT } from "@/lib/the-great-game/emotes";
 
-type InnkeeperClip = "idle" | "tankard" | "ale" | "salt";
+type InnkeeperClip = "idle" | "tankard" | "ale" | "salt" | "coin1" | "coin2";
 type SlotIndex = 0 | 1;
 type TransitionReason = "idle-loop" | "action" | "external" | "return-to-idle";
 
@@ -27,11 +27,16 @@ type TransitionState = {
   startedAt: number;
 };
 
-const CLIPS: Record<InnkeeperClip, string> = {
+const MARA_CLIPS: Record<"idle", string> & Partial<Record<InnkeeperClip, string>> = {
   idle: "/images/cards/innkeepers/mara_idle.mp4",
   tankard: "/images/cards/innkeepers/mara_tankard.mp4",
   ale: "/images/cards/innkeepers/mara_ale.mp4",
   salt: "/images/cards/innkeepers/mara_salt.mp4",
+};
+const ALDREN_CLIPS: Record<"idle", string> & Partial<Record<InnkeeperClip, string>> = {
+  idle: "/images/cards/innkeepers/aldren_idle.mp4",
+  coin1: "/images/cards/innkeepers/aldren_coin1.mp4",
+  coin2: "/images/cards/innkeepers/aldren_coin2.mp4",
 };
 
 const CANVAS_WIDTH = 640;
@@ -284,10 +289,13 @@ function seekToStart(video: HTMLVideoElement) {
 export default function InnkeeperVideo({
   className,
   label,
+  supporter,
 }: {
   className?: string;
   label: string;
+  supporter: "mara" | "aldren";
 }) {
+  const clips = supporter === "mara" ? MARA_CLIPS : ALDREN_CLIPS;
   const videoRefs = useRef<[FrameVideo | null, FrameVideo | null]>([null, null]);
   const sourceCanvasRefs = useRef<[HTMLCanvasElement | null, HTMLCanvasElement | null]>([null, null]);
   const outputCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -347,16 +355,17 @@ export default function InnkeeperVideo({
     video.pause();
     slotClipRef.current[slot] = clip;
 
-    const requestedSrc = new URL(CLIPS[clip], window.location.origin).href;
+    const source = clips[clip] ?? clips.idle;
+    const requestedSrc = new URL(source, window.location.origin).href;
     if (video.src !== requestedSrc) {
-      video.src = CLIPS[clip];
+      video.src = source;
       video.load();
     }
 
     await waitForLoadedData(video);
     await seekToStart(video);
     drawChromaFrame(video, getSourceCanvas(slot));
-  }, [getSourceCanvas]);
+  }, [clips, getSourceCanvas]);
 
   const crossfadeTo = useCallback(async (nextClip: InnkeeperClip, reason: TransitionReason) => {
     if (!mountedRef.current || reducedMotionRef.current || transitioningRef.current) return;
@@ -459,12 +468,15 @@ export default function InnkeeperVideo({
           return;
         }
 
-        transitionFnRef.current?.(Math.random() < 0.62 ? "tankard" : "ale", "action");
+        const action = supporter === "aldren"
+          ? (Math.random() < 0.5 ? "coin1" : "coin2")
+          : (Math.random() < 0.62 ? "tankard" : "ale");
+        transitionFnRef.current?.(action, "action");
       };
 
       actionTimerRef.current = setTimeout(tryAction, delay);
     };
-  }, [clearActionTimer]);
+  }, [clearActionTimer, supporter]);
 
   useEffect(() => {
     const tryExternalClip = () => {
@@ -485,7 +497,7 @@ export default function InnkeeperVideo({
 
     const onExternalAction = (event: Event) => {
       const detail = (event as CustomEvent<{ clip?: string }>).detail;
-      if (detail?.clip !== "salt") return;
+      if (detail?.clip !== "salt" || supporter === "aldren") return;
       pendingExternalClipRef.current = "salt";
       tryExternalClip();
     };
@@ -497,7 +509,7 @@ export default function InnkeeperVideo({
       externalRetryRef.current = null;
       pendingExternalClipRef.current = null;
     };
-  }, [clearActionTimer]);
+  }, [clearActionTimer, supporter]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -518,12 +530,15 @@ export default function InnkeeperVideo({
     getSourceCanvas(0);
     getSourceCanvas(1);
 
-    const preloaders = (["tankard", "ale", "salt"] as const).map((clip) => {
+    const preloadClips: InnkeeperClip[] = supporter === "mara"
+      ? ["tankard", "ale", "salt"]
+      : ["coin1", "coin2"];
+    const preloaders = preloadClips.map((clip) => {
       const video = document.createElement("video");
       video.preload = "auto";
       video.muted = true;
       video.playsInline = true;
-      video.src = CLIPS[clip];
+      video.src = clips[clip] ?? clips.idle;
       video.load();
       return video;
     });
@@ -562,7 +577,7 @@ export default function InnkeeperVideo({
       });
       preloaderRef.current = [];
     };
-  }, [clearActionTimer, getSourceCanvas, prepareSlot, renderActiveFrame, stopTransitionAnimation]);
+  }, [clearActionTimer, clips, getSourceCanvas, prepareSlot, renderActiveFrame, stopTransitionAnimation, supporter]);
 
   useEffect(() => {
     const videos = videoRefs.current;

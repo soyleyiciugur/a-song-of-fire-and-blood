@@ -87,12 +87,6 @@ import { getPlacementPreview } from "@/lib/the-great-game/placement-preview";
 
 import styles from "./play.module.css";
 
-const innkeeper = {
-  id: "mara-tapster",
-  name: "Mara Tapster",
-  interactionLabel: "Talk to Mara",
-};
-
 type PageMode =
   | "menu"
   | "online-waiting"
@@ -5537,6 +5531,11 @@ export default function GreatGamePlayPage() {
     turnDrawPending &&
     !currentGame.pendingEffect;
 
+  const visibleSupporter = playerSupporter(currentGame, viewPlayerId);
+  const innkeeper = visibleSupporter === "mara"
+    ? { id: "mara-tapster", name: "Mara Tapster" }
+    : { id: "aldren-innkeeper", name: "Aldren" };
+
   return (
     <SupporterContext.Provider value={playerSupporter(currentGame, mulliganReveal?.playerId ?? viewPlayerId)}>
     <main
@@ -5825,7 +5824,7 @@ export default function GreatGamePlayPage() {
         {/* These decorative layers use their native aspect ratios without image optimization. */}
         {/* eslint-disable @next/next/no-img-element */}
         <img src="/images/cards/background/deckbg.webp" className={styles.innkeeperBackground} alt="" draggable={false} />
-        <InnkeeperVideo className={styles.innkeeperCharacter} label={innkeeper.name} />
+        <InnkeeperVideo key={visibleSupporter} className={styles.innkeeperCharacter} label={innkeeper.name} supporter={visibleSupporter} />
         <img src="/images/cards/background/deckbg-front.webp" className={styles.innkeeperForeground} alt="" draggable={false} />
         {/* eslint-enable @next/next/no-img-element */}
         <InnkeeperEmotes
@@ -5833,7 +5832,7 @@ export default function GreatGamePlayPage() {
           buttonClassName={styles.innkeeperInteraction}
           label={innkeeper.name}
           phase={mulliganReveal ? "mulligan-reveal" : currentGame.phase}
-          supporter={playerSupporter(currentGame, viewPlayerId)}
+          supporter={visibleSupporter}
         />
       </div>
       <section
