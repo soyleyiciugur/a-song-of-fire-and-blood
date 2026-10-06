@@ -15,6 +15,10 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
+function trackGroup(track: string): string {
+  return decodeURIComponent(track).replace(/-\d+(?=\.mp3$)/i, "");
+}
+
 export function useGameMusic(activeGame: boolean, musicVolume: number) {
   const musicRef = useRef<HTMLAudioElement | null>(null);
   const musicVolumeRef = useRef(musicVolume);
@@ -30,9 +34,11 @@ export function useGameMusic(activeGame: boolean, musicVolume: number) {
     musicRef.current = music;
     music.volume = musicVolumeRef.current;
     let active = true;
-    let tracks: string[] = [];
+    let groups = new Map<string, string[]>();
+    let variantIndex = new Map<string, number>();
     let queue: string[] = [];
-    let lastTrack = "";
+    let lastGroup = "";
+    let firstRound = true;
 
     const play = () => {
       if (!active) return;
@@ -40,16 +46,23 @@ export function useGameMusic(activeGame: boolean, musicVolume: number) {
     };
 
     const nextTrack = () => {
-      if (!active || tracks.length === 0) return;
+      if (!active || groups.size === 0) return;
       if (queue.length === 0) {
-        queue = shuffle(tracks);
-        if (queue.length > 1 && queue[0] === lastTrack) {
+        queue = shuffle([...groups.keys()]);
+        const cupbearer = [...groups.keys()].find((group) => group.endsWith("/the-cupbearer.mp3"));
+        if (firstRound && cupbearer) {
+          queue = [cupbearer, ...queue.filter((group) => group !== cupbearer)];
+        } else if (queue.length > 1 && queue[0] === lastGroup) {
           [queue[0], queue[1]] = [queue[1], queue[0]];
         }
+        firstRound = false;
       }
-      const next = queue.shift()!;
-      lastTrack = next;
-      music.src = next;
+      const group = queue.shift()!;
+      const variants = groups.get(group)!;
+      const index = variantIndex.get(group) ?? 0;
+      variantIndex.set(group, (index + 1) % variants.length);
+      lastGroup = group;
+      music.src = variants[index];
       music.load();
       play();
     };
@@ -67,10 +80,14 @@ export function useGameMusic(activeGame: boolean, musicVolume: number) {
       })
       .then((data) => {
         if (!active) return;
-        tracks = data.tracks;
-        const first = tracks.find((track) => decodeURIComponent(track).endsWith("/the-cupbearer.mp3"));
-        queue = shuffle(tracks.filter((track) => track !== first));
-        if (first) queue.unshift(first);
+        groups = new Map();
+        for (const track of data.tracks) {
+          const group = trackGroup(track);
+          groups.set(group, [...(groups.get(group) ?? []), track]);
+        }
+        for (const [group, variants] of groups) {
+          groups.set(group, shuffle(variants));
+        }
         nextTrack();
       })
       .catch(() => {});
