@@ -35,6 +35,8 @@ const MARA_CLIPS: Record<"idle", string> & Partial<Record<InnkeeperClip, string>
 };
 const ALDREN_CLIPS: Record<"idle", string> & Partial<Record<InnkeeperClip, string>> = {
   idle: "/images/cards/innkeepers/aldren_idle.mp4",
+  ale: "/images/cards/innkeepers/aldren_ale.mp4",
+  salt: "/images/cards/innkeepers/aldren_salt.mp4",
   coin1: "/images/cards/innkeepers/aldren_coin1.mp4",
   coin2: "/images/cards/innkeepers/aldren_coin2.mp4",
 };
@@ -469,7 +471,7 @@ export default function InnkeeperVideo({
         }
 
         const action = supporter === "aldren"
-          ? (Math.random() < 0.5 ? "coin1" : "coin2")
+          ? (["ale", "salt", "coin1", "coin2"] as const)[Math.floor(Math.random() * 4)]
           : (Math.random() < 0.62 ? "tankard" : "ale");
         transitionFnRef.current?.(action, "action");
       };
@@ -532,7 +534,7 @@ export default function InnkeeperVideo({
 
     const preloadClips: InnkeeperClip[] = supporter === "mara"
       ? ["tankard", "ale", "salt"]
-      : ["coin1", "coin2"];
+      : ["ale", "salt", "coin1", "coin2"];
     const preloaders = preloadClips.map((clip) => {
       const video = document.createElement("video");
       video.preload = "auto";

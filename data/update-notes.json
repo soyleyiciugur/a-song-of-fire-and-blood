@@ -3,7 +3,8 @@
     "date": "2026-10-06",
     "items": [
       "Showed each player's assigned Mara or Aldren in The Great Game innkeeper window, with Aldren's idle video and matching emote identity.",
-      "Added Aldren's two coin videos as randomized innkeeper actions that return to his idle animation."
+      "Added Aldren's two coin videos as randomized innkeeper actions that return to his idle animation.",
+      "Added Aldren's ale and salt videos to the randomized innkeeper action pool."
     ]
   },
   {
