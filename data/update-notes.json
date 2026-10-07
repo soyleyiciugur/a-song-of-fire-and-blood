@@ -1,5 +1,36 @@
 [
   {
+    "date": "2026-10-08",
+    "items": [
+      "Unified the global and Great Game navigation behavior across Play, Decks, Ranks, Social and Store, with Store now living as the fifth Great Game tab.",
+      "Moved The Cupbearer store into Cards and hung its sign from the Great Game navigation frame like the Play hub.",
+      "Expanded Social into a page-scrolling tavern feed, restyled Like and Reply actions, replaced match scores with in-world result copy, and surfaced final Standing margin when available.",
+      "Kept every ranked player visible in the Ranks ledger even when the whole field also fits at the high table.",
+      "Centered the Mara and Aldren confirmation seal mark inside its simplified tavern note treatment.",
+      "Reworked Social streaks into one live run per player with both overall and head-to-head streaks, and showed both players prominently on each match entry.",
+      "Applied dedicated Ranks, Social and Store table backgrounds and restored the Store's large centered Cupbearer sign without the hanging chains.",
+      "Added rating tiers to Great Game player ranks using the card Command gem set, including the same highlighted hover treatment from S+ through C."
+    ]
+  },
+  {
+    "date": "2026-10-07",
+    "items": [
+      "Made the Deck Workshop scroll with the page, simplified its filter menus and removed the Take a seat shortcut.",
+      "Rebuilt the Deck Workshop on the Cupbearer deck table, with shared hub navigation, themed controls, a Command curve and compact collection/deck views on mobile.",
+      "Removed the separate Cards tab; all cards are browsable in Decks, and older collection links open the corresponding card in the workshop.",
+      "Enforced the one-copy rule for Unique cards in the Deck Workshop and added an inline confirmation before removing a saved deck.",
+      "Kept the global navigation menus and collapse control above The Great Game Play hub, and lowered The Cupbearer sign slightly.",
+      "Aligned The Cupbearer sign with The Great Game navigation, kept its toggle above the hub, and fitted table windows below the navigation.",
+      "Matched friend invitations to the Challenge icon, used the Great Game card crest on private tables, and replaced parchment treatments with dark tavern panels.",
+      "Redesigned The Great Game Play hub around The Cupbearer tavern, with dedicated navigation, private-table controls and a friends panel; the hub now opens on Play.",
+      "Fitted The Great Game hub to the viewport independently of the site navigation, with a player profile chip and last-match recap.",
+      "Added site-wide online indicators, private-game invitations with attached notes through Direct Raven, and an in-hub Raven conversation window.",
+      "Added friend spectating with both hands and decks kept private, plus styled table windows and a new waiting-room background.",
+      "Added The Cupbearer sign, compact Raven chat, responsive hub navigation and randomized Mara and Aldren greetings and recap lines.",
+      "Restyled victory, defeat and draw screens with Mara and Aldren commentary and match Chronicle review, and added the Summon keyword icon."
+    ]
+  },
+  {
     "date": "2026-10-06",
     "items": [
       "Showed each player's assigned Mara or Aldren in The Great Game innkeeper window, with Aldren's idle video and matching emote identity.",

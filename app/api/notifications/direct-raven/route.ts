@@ -58,11 +58,13 @@ export async function POST(request: Request) {
     }
   }
   const attachedText = message.body
+    .replace(/\[\[game:[A-Z0-9]{6}\]\]/gi, " ")
     .replace(/\[\[(?:portrait|reel):[a-z0-9-]+\]\]/gi, " ")
     .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
   const cleanText = message.body
+    .replace(/\[\[game:[A-Z0-9]{6}\]\]/gi, " The Great Game invitation ")
     .replace(/\[\[portrait:[a-z0-9-]+\]\]/gi, " mini portrait ")
     .replace(/\[\[reel:[a-z0-9-]+\]\]/gi, ` ${reelLabel} `)
     .replace(/\[\[page:[A-Za-z0-9_-]+\]\]/gi, ` ${pageLabel} `)

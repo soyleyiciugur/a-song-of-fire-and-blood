@@ -35,25 +35,25 @@ export default function Navbar() {
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
   const [openMobileSubgroup, setOpenMobileSubgroup] = useState<string | null>(null);
   const pathname = usePathname();
-  const isGreatGameBoard = pathname === "/cards/play";
-  const [navExpanded, setNavExpanded] = useState(() => !isGreatGameBoard);
+  const isGreatGameSection = pathname === "/cards" || pathname.startsWith("/cards/");
+  const [navExpanded, setNavExpanded] = useState(() => !isGreatGameSection);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 1150px)");
     const restoreMobileNav = () => {
-      if (media.matches && !isGreatGameBoard) setNavExpanded(true);
+      if (media.matches && !isGreatGameSection) setNavExpanded(true);
     };
     media.addEventListener("change", restoreMobileNav);
     return () => media.removeEventListener("change", restoreMobileNav);
-  }, [isGreatGameBoard]);
+  }, [isGreatGameSection]);
 
   useEffect(() => {
     setMenuOpen(false);
     setOpenGroup(null);
     setHoveredGroup(null);
     setOpenMobileSubgroup(null);
-    setNavExpanded(!isGreatGameBoard);
-  }, [isGreatGameBoard, pathname]);
+    setNavExpanded(!isGreatGameSection);
+  }, [isGreatGameSection, pathname]);
 
   useEffect(() => {
     if (!openGroup && !hoveredGroup) return;
@@ -89,7 +89,7 @@ export default function Navbar() {
       className={[
         styles.banner,
         styles.playBanner,
-        isGreatGameBoard ? styles.playBoardBanner : "",
+        isGreatGameSection ? styles.playBoardBanner : "",
         menuOpen ? styles.drawerOpen : "",
         !navExpanded
           ? styles.playBannerCollapsed

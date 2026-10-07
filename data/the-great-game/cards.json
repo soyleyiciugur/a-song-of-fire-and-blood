@@ -2036,17 +2036,17 @@
     "influence": 0,
     "health": 1,
     "traits": [
-      "token"
+      "summon"
     ],
     "abilities": [],
     "roles": [
       "military",
-      "token",
+      "summon",
       "swarm"
     ],
     "houseId": "velaryon",
     "deckable": false,
-    "special": "token",
+    "special": "summon",
     "balanceStatus": "provisional"
   },
   {

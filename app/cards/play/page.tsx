@@ -86,6 +86,9 @@ import { readStoredDecks } from "@/lib/the-great-game/stored-decks";
 import { getPlacementPreview } from "@/lib/the-great-game/placement-preview";
 
 import styles from "./play.module.css";
+import PlayHub from "@/components/the-great-game/PlayHub";
+import TableWaiting from "@/components/the-great-game/TableWaiting";
+import MatchResult from "@/components/the-great-game/MatchResult";
 
 type PageMode =
   | "menu"
@@ -1887,20 +1890,27 @@ export default function GreatGamePlayPage() {
     if (!matchId) return;
 
     setOnlineBusy(true);
+    setOnlineMenuError(null);
     try {
-      await fetch("/api/great-game", {
+      const response = await fetch("/api/great-game", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ op: "leave", matchId }),
       });
-    } finally {
-      setOnlineBusy(false);
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.error || "The table could not be closed. Please try again.");
+      }
       setOnlineMatch(null);
       setGame(null);
       setMode("menu");
       setOnlinePanelOpen(true);
       setExitConfirm(false);
       void loadOnlineMatches();
+    } catch (leaveError) {
+      setOnlineMenuError(leaveError instanceof Error ? leaveError.message : "The table could not be closed.");
+    } finally {
+      setOnlineBusy(false);
     }
   }
 
@@ -1982,14 +1992,6 @@ export default function GreatGamePlayPage() {
       }
     } catch {
       setStoredDecks([]);
-    }
-
-    const joinCode = normalizeMatchCode(
-      new URLSearchParams(window.location.search).get("join") ?? ""
-    );
-    if (joinCode) {
-      setOnlineCode(joinCode);
-      setOnlinePanelOpen(true);
     }
 
     void loadOnlineMatches();
@@ -2251,9 +2253,10 @@ export default function GreatGamePlayPage() {
     onlineMatch
   ) {
     return (
-      <OnlineWaitingScreen
+      <TableWaiting
         match={onlineMatch}
         busy={onlineBusy}
+        error={onlineMenuError}
         inviteCopied={inviteCopied}
         onCopyInvite={() => void copyInviteLink()}
         onLeave={() => void leaveOnlineMatch()}
@@ -2265,7 +2268,7 @@ export default function GreatGamePlayPage() {
     mode === "menu"
   ) {
     return (
-      <MainMenu
+      <PlayHub
         onNewGame={
           startNewGame
         }
@@ -2285,6 +2288,7 @@ export default function GreatGamePlayPage() {
         onCreateOnline={() => void createOnlineMatch()}
         onJoinOnline={() => void joinOnlineMatch()}
         onResumeOnline={(matchId) => void resumeOnlineMatch(matchId)}
+        onInvited={applyOnlineMatchView}
       />
     );
   }
@@ -5290,83 +5294,10 @@ export default function GreatGamePlayPage() {
     // Keep the compatibility click suppressed until a fresh pointer gesture.
   }
 
-  if (
-    currentGame.winner
-  ) {
-    return (
-      <main
-        className={
-          styles.game
-        }
-      >
-        {audioControls}
-        <div
-          className={
-            styles.pageBackground
-          }
-          aria-hidden
-        />
-
-        <div
-          className={
-            styles.winner
-          }
-        >
-          <span
-            className={
-              styles.eyebrow
-            }
-          >
-            The Realm&apos;s
-            Reckoning
-          </span>
-
-          <h1>
-            {currentGame.winner ===
-            "draw"
-              ? "The Realm Lies Broken"
-              : `${gamePlayerName(currentGame.winner, onlineMatch)} Prevails`}
-          </h1>
-
-          <p>
-            {currentGame.winner ===
-            "draw"
-              ? "Neither claimant remains standing."
-              : currentGame.winner === viewPlayerId
-                ? "The opposing claimant has lost all Standing."
-                : "Your claimant has lost all Standing."}
-          </p>
-
-          <div
-            className={
-              styles.menuActions
-            }
-          >
-            <button
-              className={
-                styles.primaryButton
-              }
-              onClick={
-                startNewGame
-              }
-            >
-              Play Again
-            </button>
-
-            <button
-              className={
-                styles.secondaryButton
-              }
-              onClick={
-                exitToMenu
-              }
-            >
-              Main Menu
-            </button>
-          </div>
-        </div>
-      </main>
-    );
+  if (currentGame.winner) {
+    return <><MatchResult state={currentGame} viewerId={viewPlayerId}
+      winnerName={currentGame.winner === "draw" ? "Neither claimant" : gamePlayerName(currentGame.winner, onlineMatch)}
+      onPlayAgain={() => { if (onlineMatch) { exitToMenu(); setOnlinePanelOpen(true); } else startNewGame(); }} onExit={exitToMenu} />{audioControls}</>;
   }
 
   if (handoff && currentGame.phase === "playing" && !mulliganReveal) {
@@ -6578,247 +6509,6 @@ function TableEntryOverlay({
         </span>
       </div>
     </div>
-  );
-}
-
-function MainMenu({
-  onNewGame,
-  onlineOpen,
-  onToggleOnline,
-  decks,
-  deckId,
-  onDeckChange,
-  code,
-  onCodeChange,
-  onlineBusy,
-  onlineError,
-  matches,
-  onCreateOnline,
-  onJoinOnline,
-  onResumeOnline,
-}: {
-  onNewGame: () => void;
-  onlineOpen: boolean;
-  onToggleOnline: () => void;
-  decks: StoredDeck[];
-  deckId: string;
-  onDeckChange: (value: string) => void;
-  code: string;
-  onCodeChange: (value: string) => void;
-  onlineBusy: boolean;
-  onlineError: string | null;
-  matches: GreatGameOnlineMatchSummary[];
-  onCreateOnline: () => void;
-  onJoinOnline: () => void;
-  onResumeOnline: (matchId: string) => void;
-}) {
-  return (
-    <main
-      className={`${styles.game} ${styles.mainMenu}`}
-    >
-      <div
-        className={styles.pageBackground}
-        aria-hidden
-      />
-
-      <nav
-        className="greatGameNav greatGameNavMenu"
-        aria-label="The Great Game"
-      >
-        <Link href="/cards">Cards</Link>
-        <Link href="/cards/decks">Decks</Link>
-        <Link href="/cards/play" className="greatGameNavActive">Play</Link>
-        <Link href="/cards/leaderboard">Ranks</Link>
-      </nav>
-
-      <div className={styles.menuCrest}>✦</div>
-
-      <span className={styles.eyebrow}>
-        The Realm&apos;s Reckoning
-      </span>
-
-      <h1 className={styles.menuTitle}>
-        The Great Game
-      </h1>
-
-      <p className={styles.menuSubtitle}>
-        Strength wins battles. Influence wins realms.
-      </p>
-
-      <div className={styles.menuActions}>
-        <button
-          className={styles.primaryButton}
-          onClick={onNewGame}
-        >
-          Local Game
-        </button>
-        <button
-          className={styles.secondaryButton}
-          onClick={onToggleOnline}
-          aria-expanded={onlineOpen}
-        >
-          Online Game
-        </button>
-      </div>
-
-      {!onlineOpen && onlineError && <div className={styles.onlineError} role="alert">{onlineError}</div>}
-      {onlineOpen && (
-        <section className={styles.onlinePanel} aria-label="Online game">
-          <div className={styles.onlinePanelHeader}>
-            <span>Private Table</span>
-            <h2>Play across the realm</h2>
-            <p>
-              Open a table and send its six-character code, or enter a code you were given.
-            </p>
-          </div>
-
-          <label className={styles.onlineField}>
-            <span>Deck</span>
-            <select
-              value={deckId}
-              onChange={(event) => onDeckChange(event.target.value)}
-              disabled={onlineBusy}
-            >
-              {!decks.some(deck => deck.id === "practice") && <option value="practice">Practice Deck</option>}
-              {decks.map((deck) => (
-                <option key={deck.id} value={deck.id}>
-                  {deck.name}
-                </option>
-              ))}
-            </select>
-            <small>
-              Saved decks are checked against the current thirty-card rules when the table opens.
-            </small>
-          </label>
-
-          <div className={styles.onlineCreateRow}>
-            <button
-              type="button"
-              className={styles.primaryButton}
-              onClick={onCreateOnline}
-              disabled={onlineBusy}
-            >
-              {onlineBusy ? "Opening…" : "Open a Table"}
-            </button>
-          </div>
-
-          <div className={styles.onlineDivider}>
-            <span>Join a table</span>
-          </div>
-
-          <div className={styles.onlineJoinRow}>
-            <input
-              value={code}
-              onChange={(event) => onCodeChange(event.target.value)}
-              placeholder="TABLE CODE"
-              maxLength={6}
-              autoCapitalize="characters"
-              autoComplete="off"
-              spellCheck={false}
-              aria-label="Table code"
-              disabled={onlineBusy}
-            />
-            <button
-              type="button"
-              className={styles.secondaryButton}
-              onClick={onJoinOnline}
-              disabled={onlineBusy || code.length !== 6}
-            >
-              Join
-            </button>
-          </div>
-
-          {onlineError && (
-            <div className={styles.onlineError} role="alert">
-              <span>{onlineError}</span>
-              {onlineError.toLowerCase().includes("sign in") && (
-                <Link href="/login">Sign in</Link>
-              )}
-            </div>
-          )}
-
-          {matches.length > 0 && (
-            <div className={styles.onlineResumeList}>
-              <span className={styles.onlineResumeLabel}>Open Tables</span>
-              {matches.map((match) => (
-                <button
-                  type="button"
-                  key={match.id}
-                  className={styles.onlineResumeButton}
-                  onClick={() => onResumeOnline(match.id)}
-                  disabled={onlineBusy}
-                >
-                  <span>
-                    {match.status === "waiting"
-                      ? "Waiting for a player"
-                      : `vs. ${match.opponent?.username ? match.opponent.username : "Opponent"}`}
-                  </span>
-                  <strong>{match.code}</strong>
-                </button>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-
-      <div className={styles.menuFootnote}>
-        Local Hot-Seat · Private Online Tables · Two Players
-      </div>
-    </main>
-  );
-}
-
-function OnlineWaitingScreen({
-  match,
-  busy,
-  inviteCopied,
-  onCopyInvite,
-  onLeave,
-}: {
-  match: GreatGameOnlineMatchView;
-  busy: boolean;
-  inviteCopied: boolean;
-  onCopyInvite: () => void;
-  onLeave: () => void;
-}) {
-  return (
-    <main className={`${styles.game} ${styles.handoffScreen}`}>
-      <div className={styles.pageBackground} aria-hidden />
-      <section className={`${styles.handoffCard} ${styles.onlineWaitingCard}`}>
-        <span className={styles.eyebrow}>Private Online Table</span>
-        <h1>Waiting for an opponent</h1>
-        <p>
-          Share this code with the player you want across the table. The game begins automatically when they join.
-        </p>
-
-        <div className={styles.onlineTableCode} aria-label={`Table code ${match.code}`}>
-          {match.code}
-        </div>
-
-        <div className={styles.onlineWaitingActions}>
-          <button
-            type="button"
-            className={styles.primaryButton}
-            onClick={onCopyInvite}
-            disabled={busy}
-          >
-            {inviteCopied ? "Invite Copied" : "Copy Invite Link"}
-          </button>
-          <button
-            type="button"
-            className={styles.secondaryButton}
-            onClick={onLeave}
-            disabled={busy}
-          >
-            Close Table
-          </button>
-        </div>
-
-        <small className={styles.onlineWaitingNote}>
-          Your deck remains private while the table is open.
-        </small>
-      </section>
-    </main>
   );
 }
 

@@ -1255,3 +1255,17 @@
     bottom: -24px;
   }
 }
+
+/* Keep site navigation above Great Game hub windows. */
+.playBoardBanner { z-index: 1000; }
+.playBoardBanner .playNavToggle,
+.playBoardBanner.playBannerCollapsed .playNavToggle { z-index: 2000 !important; }
+
+/* The fixed Play hub covers the viewport; its site navigation must be fixed above it. */
+:global(body):has([data-great-game-hub]) .playBoardBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3000 !important;
+}

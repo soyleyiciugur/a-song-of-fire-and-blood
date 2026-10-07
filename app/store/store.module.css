@@ -1,0 +1,14 @@
+.page { position: fixed; inset: 0; z-index: 20; isolation: isolate; display: flex; flex-direction: column; box-sizing: border-box; height: 100dvh; padding: calc(var(--site-nav-height, 60px) + 16px) clamp(14px, 3vw, 54px) 20px; overflow: hidden; color: #ead7b7; background: #1b100a url('/images/cards/hub/table-hearth-bg.webp') center / cover no-repeat; font-family: var(--font-body), Georgia, serif; }
+:global(body):has(.page), :global(html):has(.page) { overflow: hidden; }
+.backdrop { position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at 50% 52%, #4c2d1740, transparent 30rem), linear-gradient(90deg, #100906df, #10090699, #100906df); }
+.page .hubNav { transform: none; flex: none; min-height: 58px; }
+.card { display: flex; flex: 1; min-height: 0; width: min(680px, 100%); margin: auto; flex-direction: column; align-items: center; justify-content: center; text-align: center; text-shadow: 0 2px 14px #000; }
+.sign { width: min(420px, 76vw); height: auto; margin-bottom: 12px; filter: drop-shadow(0 10px 12px #0009); }
+.eyebrow { color: #c5a478; font: 700 9px var(--font-hotd), Georgia, serif; letter-spacing: .19em; text-transform: uppercase; }
+.card h1 { margin: 10px 0 16px; color: #f1ddbb; font: 400 clamp(34px, 5vw, 58px)/1.05 var(--font-hotd), Georgia, serif; }
+.card p { max-width: 48ch; margin: 0; color: #d4c0a0; font-size: clamp(14px, 1.4vw, 17px); line-height: 1.6; font-style: italic; }
+.card small { margin-top: 7px; color: #c4a16f; font-size: 12px; }
+.card a { margin-top: 24px; min-width: 180px; padding: 11px 16px; border: 1px solid #a67a43; color: #efd3a2; background: linear-gradient(#69271bdc, #35130fef); text-decoration: none; font-size: 13px; box-shadow: 0 6px 18px #0005; transition: filter 160ms, transform 160ms; }
+.card a:hover { filter: brightness(1.16); transform: translateY(-1px); }
+.card a:active { transform: translateY(1px); }
+@media (max-width: 640px) { .page { padding-inline: 10px; } .sign { width: min(330px, 80vw); } }

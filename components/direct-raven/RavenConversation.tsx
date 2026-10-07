@@ -83,7 +83,7 @@ const sharedCategoryDetails: Record<SharedCategory, { label: string }> = {
 function isInSharedCategory(message: DirectRavenMessage, category: SharedCategory) {
   if (category === "images") return Boolean(message.attachment_path || message.gif || /\[\[media:/i.test(message.body));
   if (category === "reels") return /\[\[reel:/i.test(message.body);
-  return /\[\[(?:page|comment):/i.test(message.body);
+  return /\[\[(?:page|comment|game):/i.test(message.body);
 }
 
 function hasSharedContent(message: DirectRavenMessage) {
@@ -91,6 +91,8 @@ function hasSharedContent(message: DirectRavenMessage) {
 }
 
 type Props = {
+  embedded?: boolean;
+  onClose?: () => void;
   conversationId: string;
   conversation?: DirectRavenConversation;
   userId: string;
@@ -107,6 +109,8 @@ type Props = {
 };
 
 export default function RavenConversation({
+  embedded = false,
+  onClose,
   conversationId,
   conversation,
   userId,
@@ -1065,9 +1069,9 @@ export default function RavenConversation({
   const seenPanelRows = seenPanelMessage ? seenFor(seenPanelMessage) : [];
 
   return (
-    <section className={styles.thread} aria-label={isGuild ? `Guild Parley: ${threadTitle}` : `Conversation with ${threadTitle}`}>
+    <section className={`${styles.thread} ${embedded ? styles.embeddedThread : ""}`} aria-label={isGuild ? `Guild Parley: ${threadTitle}` : `Conversation with ${threadTitle}`}>
       <header className={styles.threadHeader}>
-        <Link href="/messages" className={styles.backInbox} aria-label="Back to inbox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>
+        {!embedded && <Link href="/messages" className={styles.backInbox} aria-label="Back to inbox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6-6 6 6 6M4 12h16" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}
         {isGuild ? (
           <button type="button" className={`${styles.partnerIdentity} ${styles.guildIdentityButton}`} onClick={() => setGuildInfoOpen(true)}>
             <GuildAvatar path={activeConversation.avatar_path} name={threadTitle} />
@@ -1080,6 +1084,7 @@ export default function RavenConversation({
           </Link>
         ) : null}
         <div className={styles.threadActions} aria-label="Conversation actions">
+          {embedded && <button type="button" className={styles.threadActionButton} onClick={onClose} aria-label="Close quick message" title="Close quick message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>}
           <button type="button" className={styles.threadActionButton} onClick={() => openConversationView("search")} aria-label="Search in conversation" title="Search in conversation"><UtilityIcon name="search" size={18} /></button>
           <button type="button" className={styles.threadActionButton} onClick={() => openConversationView("shared")} aria-label="Shared in this conversation" title="Shared in this conversation"><UtilityIcon name="shared" size={18} /></button>
           {isGuild && <button type="button" className={styles.threadActionButton} onClick={() => setGuildInfoOpen(true)} aria-label="Guild info" title="Guild info"><UtilityIcon name="info" size={18} /></button>}

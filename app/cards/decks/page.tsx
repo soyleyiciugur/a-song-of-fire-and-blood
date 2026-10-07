@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import Link from "next/link";
+import { Suspense, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import HubNavFrame from "@/components/the-great-game/HubNavFrame";
+import { useHubData } from "@/components/the-great-game/useHubData";
+import UtilityIcon from "@/components/nav/UtilityIcon";
 import { GameCardFace, GameCardModal } from "@/components/cards/GameCardFace";
-import { getAllGameCards } from "@/lib/the-great-game/cards";
+import { getAllGameCards, isUnique } from "@/lib/the-great-game/cards";
 import { DECK_STORAGE_KEY, readStoredDecks } from "@/lib/the-great-game/stored-decks";
 import type { GameCard } from "@/lib/the-great-game/types";
 import styles from "./decks.module.css";
@@ -23,88 +25,6 @@ const LABEL: Record<CardType | "all", string> = {
 };
 const TIER_RANK: Record<string, number> = { "s-plus": 0, s: 1, a: 2, b: 3, c: 4 };
 
-const TRAIT_RULES: Record<string, string> = {
-  dragonrider: "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is under your control.",
-  guard: "Enemy units must face Guard units before attacking other Military targets or Standing.",
-  intrigue: "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
-  swift: "This unit may initiate a Military Conflict on the turn it is deployed.",
-  schemer: "This Character may initiate a Political Conflict on the turn it is deployed.",
-  challenge: "This Unit ignores Guard restrictions: it may choose any Military target or attack enemy Standing directly.",
-  confront: "This Character ignores Political defender restrictions: it may choose any Ready enemy Character or attack enemy Standing directly.",
-};
-
-const UNIQUE_RULE = "Unique — Your deck may contain only one copy of this card.";
-
-function HoverTooltip({ label, text, detailed = true, className = "" }: { label: string; text: string; detailed?: boolean; className?: string }) {
-  const ref = useRef<HTMLSpanElement | null>(null);
-  const [open, setOpen] = useState(false);
-  const [pos, setPos] = useState<{left:number;top:number}|null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const place = () => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    setPos({ left: r.left + r.width / 2, top: r.top - 8 });
-  };
-  const show = () => {
-    place();
-    timer.current = setTimeout(() => setOpen(true), detailed ? 0 : 420);
-  };
-  const hide = () => {
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = null;
-    setOpen(false);
-  };
-
-  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
-
-  return <>
-    <span ref={ref} className={className} tabIndex={0} onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>{label}</span>
-    {open && pos && typeof document !== "undefined" && createPortal(
-      <span className={styles.ruleTooltipPortal} role="tooltip" style={{left:pos.left,top:pos.top}}>{text}</span>,
-      document.body
-    )}
-  </>;
-}
-
-function UniqueDiamond({ detailed = false }: { detailed?: boolean }) {
-  return <HoverTooltip label="◆" text={detailed ? UNIQUE_RULE : "Unique"} detailed={detailed} className={styles.uniqueMark} />;
-}
-
-const TIER_MAP: Record<string, { label: string; color: string; accent: string }> = {
-  "s-plus": { label: "S+", color: "#8b1e2b", accent: "#d4af37" },
-  s: { label: "S", color: "#4b2e6f", accent: "#c0c0c0" },
-  a: { label: "A", color: "#2f4a3e", accent: "#a97142" },
-  b: { label: "B", color: "#3d3d3d", accent: "#8c8c8c" },
-  c: { label: "C", color: "#5c4a3a", accent: "#7a6a58" },
-};
-
-function tierStyle(card: Card) {
-  const tier = TIER_MAP[card.tierId];
-  return {
-    "--tier-color": tier?.color ?? "#d4af37",
-    "--tier-accent": tier?.accent ?? "#d4af37",
-  } as React.CSSProperties;
-}
-
-function tierLabel(card: Card) {
-  return TIER_MAP[card.tierId]?.label ?? card.tierId.toUpperCase();
-}
-
-function CommandSigil({ value }: { value: number }) {
-  return (
-    <svg viewBox="0 0 44 44" aria-hidden>
-      <path d="M13 2h18l11 11v18L31 42H13L2 31V13Z" className={styles.commandBadgePlate} />
-      <path d="M15 6h14l9 9v14l-9 9H15l-9-9V15Z" className={styles.commandBadgeInset} />
-      <path d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z" className={styles.commandBadgeRune} />
-      <text x="22" y="21.6" textAnchor="middle" dominantBaseline="central" className={styles.commandCostText}>{value}</text>
-    </svg>
-  );
-}
-
-
-
 type FilterOption = { value: string; label: string };
 
 function FilterMenu({
@@ -120,6 +40,8 @@ function FilterMenu({
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const listId = useId();
   const selected = options.find(option => option.value === value) ?? options[0];
 
   useEffect(() => {
@@ -128,33 +50,44 @@ function FilterMenu({
     const handlePointerDown = (event: PointerEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     };
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
+    const frame = requestAnimationFrame(() => {
+      const options = rootRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]');
+      (rootRef.current?.querySelector<HTMLButtonElement>('[aria-selected="true"]') ?? options?.[0])?.focus();
+    });
 
     document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
     return () => {
+      cancelAnimationFrame(frame);
       document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
 
   return (
-    <div ref={rootRef} className={`${styles.filterMenu} ${open ? styles.filterMenuOpen : ""}`}>
+    <div ref={rootRef} className={`${styles.filterMenu} ${open ? styles.filterMenuOpen : ""}`} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={event => {
+      if (event.key === "Escape") { event.preventDefault(); setOpen(false); triggerRef.current?.focus(); return; }
+      if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      if (!open) { setOpen(true); return; }
+      const items = Array.from(rootRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]') ?? []);
+      const current = items.indexOf(document.activeElement as HTMLButtonElement);
+      const next = event.key === "Home" ? 0 : event.key === "End" ? items.length - 1 : (current + (event.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+      items[next]?.focus();
+    }}>
       <button
+        ref={triggerRef}
         type="button"
         className={styles.filterTrigger}
         aria-label={ariaLabel}
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-controls={open ? listId : undefined}
         onClick={() => setOpen(current => !current)}
       >
         <span>{selected?.label ?? value}</span>
-        <i aria-hidden>⌄</i>
+        <svg className={styles.filterChevron} width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 8 5 5 5-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
       {open && (
-        <div className={styles.filterOptions} role="listbox" aria-label={ariaLabel}>
+        <div id={listId} className={styles.filterOptions} role="listbox" aria-label={ariaLabel}>
           {options.map(option => (
             <button
               type="button"
@@ -165,10 +98,11 @@ function FilterMenu({
               onClick={() => {
                 onChange(option.value);
                 setOpen(false);
+                triggerRef.current?.focus();
               }}
             >
               <span>{option.label}</span>
-              {option.value === value && <b aria-hidden>◆</b>}
+              {option.value === value && <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </button>
           ))}
         </div>
@@ -186,28 +120,12 @@ function makeDeck(name = "New Deck"): Deck {
 function countDeck(deck: Deck | null) {
   return deck ? Object.values(deck.cards).reduce((a, b) => a + b, 0) : 0;
 }
-function artCandidates(card: Card) {
-  const exts = ["webp", "png", "jpg", "jpeg"];
-  const result: string[] = [];
-  if (card.cardType === "character") {
-    const id = card.linkedCharacterId ?? card.id;
-    exts.forEach(ext => result.push(`/images/characters/${id}.${ext}`));
-  }
-  if (card.cardType === "dragon") {
-    exts.forEach(ext => result.push(`/images/dragons/${card.id}.${ext}`));
-  }
-  exts.forEach(ext => result.push(`/images/cards/${card.id}.${ext}`));
-  return result;
-}
-function CardArt({ card, className }: { card: Card; className?: string }) {
-  const candidates = useMemo(() => artCandidates(card), [card]);
-  const [index, setIndex] = useState(0);
-  useEffect(() => setIndex(0), [card.id]);
-  if (index >= candidates.length) return <div className={`${styles.artFallback} ${className ?? ""}`}>✦</div>;
-  return <img src={candidates[index]} alt="" className={className} draggable={false} onError={() => setIndex(i => i + 1)} />;
-}
-
-export default function DecksPage() {
+function DeckWorkshop() {
+  const cardId = useSearchParams().get("card");
+  const { data, guest } = useHubData();
+  const [mobilePanel, setMobilePanel] = useState<"collection" | "builder">("collection");
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [decks, setDecks] = useState<Deck[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -221,23 +139,30 @@ export default function DecksPage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = readStoredDecks();
-    setDecks(saved);
-    setSelectedId(saved[0].id);
-    setLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    const cardId = new URLSearchParams(window.location.search).get("card");
-    if (!cardId || !ALL.some((card) => card.id === cardId)) return;
-    const timer = window.setTimeout(() => setInspect(cardId), 0);
+    const timer = window.setTimeout(() => {
+      const saved = readStoredDecks();
+      setDecks(saved);
+      setSelectedId(saved[0]?.id ?? null);
+      setLoaded(true);
+    }, 0);
     return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
+    if (!cardId || !ALL.some((card) => card.id === cardId)) return;
+    const timer = window.setTimeout(() => setInspect(cardId), 0);
+    return () => window.clearTimeout(timer);
+  }, [cardId]);
+
+  useEffect(() => {
     if (!loaded) return;
-    if (decks.length) localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
-    else localStorage.removeItem(STORAGE_KEY);
+    let message = "";
+    try {
+      if (decks.length) localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+      else localStorage.removeItem(STORAGE_KEY);
+    } catch { message = "Your browser could not save this deck. Keep this page open and make space in browser storage."; }
+    const timer = window.setTimeout(() => setSaveError(message), 0);
+    return () => window.clearTimeout(timer);
   }, [decks, loaded]);
 
   const selected = decks.find(d => d.id === selectedId) ?? null;
@@ -275,9 +200,9 @@ export default function DecksPage() {
     setDecks(ds => ds.map(d => d.id === selectedId ? { ...fn(d), updatedAt: Date.now() } : d));
   }
   function addCard(card: Card) {
-    if (!selected || total >= MAX_DECK) return;
+    if (!selected || card.deckable === false || total >= MAX_DECK) return;
     const copies = selected.cards[card.id] ?? 0;
-    if (copies >= MAX_COPIES) return;
+    if (copies >= (isUnique(card) ? 1 : MAX_COPIES)) return;
     updateSelected(d => ({ ...d, cards: { ...d.cards, [card.id]: copies + 1 } }));
   }
   function removeCard(id: string) {
@@ -291,12 +216,12 @@ export default function DecksPage() {
   }
   function newDeck() {
     const d = makeDeck(`Deck ${decks.length + 1}`);
-    setDecks(ds => [...ds, d]); setSelectedId(d.id); setRenaming(true);
+    setDecks(ds => [...ds, d]); setSelectedId(d.id); setRenaming(true); setConfirmDelete(false); setMobilePanel("builder");
   }
   function deleteDeck() {
     if (!selectedId) return;
     const next = decks.filter(d => d.id !== selectedId);
-    setDecks(next); setSelectedId(next[0]?.id ?? null); setRenaming(false);
+    setDecks(next); setSelectedId(next[0]?.id ?? null); setRenaming(false); setConfirmDelete(false);
   }
   function duplicateDeck() {
     if (!selected) return;
@@ -307,43 +232,38 @@ export default function DecksPage() {
   return (
     <main className={styles.page}>
       <div className={styles.backdrop} aria-hidden />
+      <HubNavFrame active="decks" data={data} guest={guest} className={styles.navDock} />
       <header className={styles.hero}>
-        <div>
-          <span className={styles.eyebrow}>The Great Game</span>
-          <h1>Deck Workshop</h1>
-          <p>Study every card in the realm, assemble thirty-card decks, and keep each list ready for the wars to come.</p>
-        </div>
-        <nav className="greatGameNav greatGameNavPageCenter" aria-label="The Great Game">
-          <Link href="/cards">Cards</Link>
-          <Link href="/cards/decks" className="greatGameNavActive">Decks</Link>
-          <Link href="/cards/play">Play</Link>
-          <Link href="/cards/leaderboard">Ranks</Link>
-        </nav>
+        <div><span className={styles.eyebrow}>The Cupbearer · Deck workshop</span><h1>Prepare your hand.</h1></div>
+        <p>“Thirty cards. Make every one earn its place.”<small>— Mara</small></p>
       </header>
-
-      <section className={styles.workspace}>
+      <div className={styles.mobileTabs} role="tablist" aria-label="Deck workshop view">
+        <button role="tab" aria-selected={mobilePanel === "collection"} onClick={() => setMobilePanel("collection")}>Cards</button>
+        <button role="tab" aria-selected={mobilePanel === "builder"} onClick={() => setMobilePanel("builder")}>Your deck <span>{total}/30</span></button>
+      </div>
+      <section className={styles.workspace} data-panel={mobilePanel} aria-label="Deck workshop">
         <aside className={styles.deckRail}>
-          <div className={styles.railHeader}><div><span>Your Decks</span><strong>{decks.length}</strong></div><button onClick={newDeck}>+ New</button></div>
+          <div className={styles.railHeader}><div><span>Your decks</span><strong>{decks.length} in the satchel</strong></div><button onClick={newDeck} aria-label="Create new deck">+ New</button></div>
           <div className={styles.deckList}>
             {decks.map(deck => (
-              <button key={deck.id} onClick={() => { setSelectedId(deck.id); setRenaming(false); }} className={`${styles.deckListItem} ${deck.id === selectedId ? styles.deckListItemActive : ""}`}>
-                <span>{deck.name}</span><small>{countDeck(deck)}/{MAX_DECK}</small>
+              <button key={deck.id} onClick={() => { setSelectedId(deck.id); setRenaming(false); setConfirmDelete(false); }} aria-pressed={deck.id === selectedId} className={`${styles.deckListItem} ${deck.id === selectedId ? styles.deckListItemActive : ""}`}>
+                <UtilityIcon name="cards" size={24} /><span>{deck.name}<small>{countDeck(deck)}/{MAX_DECK} cards</small></span>
               </button>
             ))}
             {!decks.length && <button className={styles.emptyDeckPrompt} onClick={newDeck}>Create your first deck</button>}
           </div>
         </aside>
 
-        <section className={styles.collection}>
+        <section className={styles.collection} aria-label="Card catalogue workbench">
           <div className={styles.collectionHeader}>
             <div>
-              <span className={styles.kicker}>The Collection</span>
+              <span className={styles.kicker}>Card catalogue</span>
               <h2>{availability === "non-deckable" ? "Non-Deckable Cards" : "Deckable Cards"}</h2>
               <small>{filtered.length} shown · {availability === "non-deckable" ? ALL.filter(c => c.deckable === false).length : ALL.filter(c => c.deckable !== false).length} total</small>
             </div>
-            <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search cards, abilities, houses..." />
+            <input type="search" aria-label="Search cards, abilities and houses" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search cards, abilities, houses..." />
           </div>
-          <div className={styles.collectionTabs} role="tablist" aria-label="Collection availability">
+          <div className={styles.collectionTabs} role="tablist" aria-label="Card availability">
             <button type="button" role="tab" aria-selected={availability === "deckable"} className={availability === "deckable" ? styles.collectionTabActive : undefined} onClick={() => setAvailability("deckable")}>Deckable</button>
             <button type="button" role="tab" aria-selected={availability === "non-deckable"} className={availability === "non-deckable" ? styles.collectionTabActive : undefined} onClick={() => setAvailability("non-deckable")}>Non-Deckable</button>
           </div>
@@ -389,15 +309,17 @@ export default function DecksPage() {
             />
           </div>
 
-          <div className={styles.cardGrid}>
+          <div className={styles.cardGrid} aria-label="Card collection">
+            {!filtered.length && <div className={styles.emptyResults}><UtilityIcon name="cards" size={38} /><h3>No cards on this table.</h3><p>Try another search or loosen your filters.</p><button onClick={() => { setQuery(""); setType("all"); setTier("all"); setHouse("all"); }}>Clear filters</button></div>}
             {filtered.map(card => {
               const copies = selected?.cards[card.id] ?? 0;
+              const copyLimit = isUnique(card) ? 1 : MAX_COPIES;
               return <GameCardFace key={card.id} card={card} onSelect={setInspect} actions={card.deckable === false ? (
                   <div className={`${styles.cardActions} ${styles.nonDeckableActions}`}><span>NON-DECKABLE</span></div>
                 ) : (
                   <div className={styles.cardActions}>
-                    <button disabled={!copies} onClick={() => removeCard(card.id)}>−</button><span>{copies}/{MAX_COPIES}</span>
-                    <button disabled={!selected || total >= MAX_DECK || copies >= MAX_COPIES} onClick={() => addCard(card)}>+</button>
+                    <button aria-label={`Remove ${card.name} from deck`} disabled={!copies} onClick={() => removeCard(card.id)}>−</button><span>{copies}/{copyLimit}</span>
+                    <button aria-label={`Add ${card.name} to deck`} disabled={!selected || total >= MAX_DECK || copies >= copyLimit} onClick={() => addCard(card)}>+</button>
                   </div>
                 )} />;
             })}
@@ -407,25 +329,31 @@ export default function DecksPage() {
         <aside className={styles.builder}>
           {selected ? <>
             <div className={styles.builderHeader}>
-              <span className={styles.kicker}>Deck Workshop</span>
-              {renaming ? <input className={styles.nameInput} autoFocus value={selected.name} onChange={e => updateSelected(d => ({...d, name:e.target.value.slice(0,48)}))} onBlur={() => setRenaming(false)} onKeyDown={e => e.key === "Enter" && setRenaming(false)} /> :
-                <button className={styles.nameButton} onClick={() => setRenaming(true)}>{selected.name} <span>✎</span></button>}
+              <span className={styles.kicker}>On your table</span>
+              {renaming ? <input aria-label="Deck name" className={styles.nameInput} autoFocus value={selected.name} onChange={e => updateSelected(d => ({...d, name:e.target.value.slice(0,48)}))} onBlur={() => setRenaming(false)} onKeyDown={e => e.key === "Enter" && setRenaming(false)} /> :
+                <button aria-label="Rename deck" className={styles.nameButton} onClick={() => setRenaming(true)}>{selected.name} <span>✎</span></button>}
               <div className={styles.deckMeta}><strong className={total === MAX_DECK ? styles.complete : ""}>{total}/{MAX_DECK}</strong><span>cards</span></div>
             </div>
-            <div className={styles.curve}>{curve.map((n,i) => <div className={styles.curveCol} key={i}><div><i style={{height:`${n/curveMax*100}%`}} /></div><span>{i===10?"10+":i}</span><small>{n}</small></div>)}</div>
+            <div className={styles.curveHeading}><span>Command curve</span><small>Plan your opening hand</small></div>
+            <div className={styles.curve} aria-label="Cards by Command cost">{curve.map((n,i) => <div className={styles.curveCol} key={i} aria-label={`${i === 10 ? "10 or more" : i} Command: ${n} cards`}><div><i style={{height:`${n/curveMax*100}%`}} /></div><span>{i===10?"10+":i}</span><small>{n}</small></div>)}</div>
             <div className={styles.deckEntries}>
               {Object.entries(selected.cards).map(([id,copies]) => ({card:ALL.find(c=>c.id===id),copies})).filter(x=>x.card).sort((a,b)=>(a.card!.cost-b.card!.cost)||a.card!.name.localeCompare(b.card!.name)).map(({card,copies}) => <div className={styles.deckEntry} key={card!.id}>
                 <button className={styles.deckEntryMain} onClick={() => setInspect(card!.id)}><span>{card!.cost}</span><b>{card!.name}</b><em>×{copies}</em></button>
-                <button onClick={() => removeCard(card!.id)}>−</button>
+                <button aria-label={`Remove ${card!.name} from deck`} onClick={() => removeCard(card!.id)}>−</button>
               </div>)}
-              {!total && <div className={styles.emptyBuilder}><span>✦</span><strong>An empty council table.</strong><p>Add cards from the collection to begin.</p></div>}
+              {!total && <div className={styles.emptyBuilder}><span>✦</span><strong>An empty council table.</strong><p>Add cards from the catalogue to begin.</p></div>}
             </div>
-            <div className={styles.builderFooter}><button onClick={duplicateDeck}>Duplicate</button><button className={styles.deleteButton} onClick={deleteDeck}>Delete</button></div>
+            <div className={styles.saveStatus} role="status">{saveError || (loaded ? "Saved in this browser" : "Opening your satchel…")}</div>
+            <div className={styles.builderFooter}>{confirmDelete ? <div className={styles.deleteConfirm} role="group" aria-label="Confirm deck deletion"><p>Remove “{selected.name}” from your satchel?</p><button onClick={() => setConfirmDelete(false)}>Keep deck</button><button className={styles.deleteButton} onClick={deleteDeck}>Remove deck</button></div> : <><button onClick={duplicateDeck}>Duplicate</button><button className={styles.deleteButton} onClick={() => setConfirmDelete(true)}>Delete</button></>}</div>
           </> : <div className={styles.noDeck}><span>✦</span><h2>No deck selected</h2><button onClick={newDeck}>Create Deck</button></div>}
         </aside>
       </section>
 
-      {inspected && <GameCardModal card={inspected} onClose={() => setInspect(null)} action={<button className={styles.modalAdd} disabled={inspected.deckable === false || !selected || total>=MAX_DECK || (selected.cards[inspected.id]??0)>=MAX_COPIES} onClick={()=>addCard(inspected)}>{inspected.deckable === false ? "Non-deckable" : `Add to ${selected?.name ?? "Deck"}`}</button>} />}
+      {inspected && <GameCardModal card={inspected} onClose={() => setInspect(null)} action={<button className={styles.modalAdd} disabled={inspected.deckable === false || !selected || total>=MAX_DECK || (selected.cards[inspected.id]??0)>=(isUnique(inspected) ? 1 : MAX_COPIES)} onClick={()=>addCard(inspected)}>{inspected.deckable === false ? "Non-deckable" : `Add to ${selected?.name ?? "Deck"}`}</button>} />}
     </main>
   );
+}
+
+export default function DecksPage() {
+  return <Suspense fallback={<main className={styles.page}><p className={styles.saveStatus}>Opening your satchel…</p></main>}><DeckWorkshop /></Suspense>;
 }

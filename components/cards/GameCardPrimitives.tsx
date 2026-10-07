@@ -81,6 +81,7 @@ const TRAIT_RULES_BY_VOICE: Record<
   Partial<Record<Trait, string>>
 > = {
   neutral: {
+    summon: "Created by an ability. Summons cannot be included in a deck.",
     dragonrider:
       "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is ruled by the same Ruler.",
     guard:
@@ -97,6 +98,7 @@ const TRAIT_RULES_BY_VOICE: Record<
       "This Character ignores Political defender restrictions and may choose any Ready enemy Character or attack enemy Standing directly.",
   },
   courtly: {
+    summon: "A Summon at your service, my liege. Summons are created by abilities and never included in your deck.",
     dragonrider:
       "A rare bond, my liege. Keep rider and Dragon beneath the same Ruler, and the Dragon's Bond discount is honored.",
     guard:
@@ -113,6 +115,7 @@ const TRAIT_RULES_BY_VOICE: Record<
       "Direct and most useful, my liege. Confront ignores Political defender restrictions: choose any Ready enemy Character or strike enemy Standing directly.",
   },
   stoic: {
+    summon: "An ability brought this Summon to the table. Summons do not go in your deck.",
     dragonrider:
       "Rider and Dragon share a bond. Same Ruler, Bond discount applies. Simple.",
     guard:
@@ -583,6 +586,7 @@ function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }
     />);
   }
   const paths: Record<Trait, string> = {
+    summon: "M10 2 18 7v8l-8 4-8-4V7ZM10 6v8M6 10h8",
     unique: "M10 2 18 10 10 18 2 10Z",
     dragon: "M3 15 6 6 10 10 15 3 17 12 12 10 9 16Z",
     dragonrider: "M2 16Q8 19 11 13L10 10 5 12 7 4 12 8 14 5 14 2 16 4 18 5 17 8 14 9Q17 16 10 17M7 4 8 10M14 12 17 14",

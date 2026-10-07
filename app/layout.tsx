@@ -10,6 +10,7 @@ import Navbar from "@/components/nav/Navbar";
 import PwaBoot from "@/components/pwa/PwaBoot";
 import PageRavenShare from "@/components/direct-raven/PageRavenShare";
 import ReadingProgressProvider from "@/components/reading/ReadingProgressProvider";
+import SitePresence from "@/components/community/SitePresence";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -99,12 +100,12 @@ export default function RootLayout({
       <body
         className={`${geist.variable} ${cinzel.variable} ${crimsonText.variable}`}
       >
-        <ReadingProgressProvider>
+        <SitePresence><ReadingProgressProvider>
           <PwaBoot />
           <Navbar />
           {children}
           <PageRavenShare />
-        </ReadingProgressProvider>
+        </ReadingProgressProvider></SitePresence>
         <Analytics />
       </body>
     </html>

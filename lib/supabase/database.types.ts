@@ -226,8 +226,11 @@ export interface GreatGamePlayerStatsRow {
 
 export interface GreatGameDeckStatsRow { user_id:string; deck_name:string; faction:string; games_played:number; wins:number; losses:number; abandons:number; win_rate:number }
 export interface GreatGameHeadToHeadRow { user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; games_played:number; wins:number; losses:number; abandons:number; last_played_at:string }
-export interface GreatGameHistoryRow { match_id:string; user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; opponent_avatar_url:string|null; result:"win"|"loss"|"draw"|"abandon"; deck_name:string; faction:string; duration_seconds:number; turns:number; rating_before:number; rating_after:number; completed_at:string }
+export interface GreatGameHistoryRow { match_id:string; user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; opponent_avatar_url:string|null; result:"win"|"loss"|"draw"|"abandon"; deck_name:string; faction:string; duration_seconds:number; turns:number; rating_before:number; rating_after:number; completed_at:string; standing_after:number|null; opponent_standing_after:number|null }
 export interface GreatGameLeaderboardRow { rank:number; user_id:string; username:string; display_name:string; avatar_url:string|null; rating:number; peak_rating:number; rated_games:number; games_played:number; wins:number; losses:number; abandons:number; win_rate:number; current_win_streak:number }
+
+export interface GreatGameSocialReactionRow { match_id:string; user_id:string; created_at:string }
+export interface GreatGameSocialReplyRow { id:string; match_id:string; user_id:string; body:string; created_at:string; updated_at:string }
 
 export interface Database {
   public: {
@@ -252,6 +255,8 @@ export interface Database {
       private_ledger_entries: { Row: PrivateLedgerEntry; Insert: Omit<PrivateLedgerEntry, "id" | "created_at" | "updated_at"> & Partial<Pick<PrivateLedgerEntry, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<PrivateLedgerEntry, "heading" | "matter" | "checklist" | "pinned" | "status" | "archived" | "character_ids" | "chapter_slug" | "updated_at">>; Relationships: [] };
       great_game_matches: { Row: GreatGameMatchRow; Insert: Partial<GreatGameMatchRow> & Pick<GreatGameMatchRow, "code" | "host_id" | "host_deck">; Update: Partial<GreatGameMatchRow>; Relationships: [] };
       great_game_events: { Row: GreatGameEventRow; Insert: Omit<GreatGameEventRow, "id" | "created_at"> & Partial<Pick<GreatGameEventRow, "id" | "created_at">>; Update: never; Relationships: [] };
+      great_game_social_reactions: { Row: GreatGameSocialReactionRow; Insert: Pick<GreatGameSocialReactionRow, "match_id" | "user_id"> & Partial<Pick<GreatGameSocialReactionRow, "created_at">>; Update: never; Relationships: [] };
+      great_game_social_replies: { Row: GreatGameSocialReplyRow; Insert: Pick<GreatGameSocialReplyRow, "match_id" | "user_id" | "body"> & Partial<Pick<GreatGameSocialReplyRow, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<GreatGameSocialReplyRow, "body" | "updated_at">>; Relationships: [] };
     };
     Views: {
       great_game_supporter_stats: { Row: { user_id: string; supporter: "mara" | "aldren"; games_played: number; wins: number; losses: number; draws: number; abandons: number; win_rate: number }; Relationships: [] };

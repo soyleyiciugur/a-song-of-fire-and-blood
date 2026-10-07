@@ -5,9 +5,10 @@ import MiniPortrait from "@/components/MiniPortrait";
 import charactersData from "@/data/characters/characters.json";
 import galleryData from "@/data/gallery.json";
 import styles from "./direct-raven.module.css";
+import GameInvitation from "./GameInvitation";
 
 const PORTRAIT_TOKEN = /\[\[portrait:([a-z0-9-]+)\]\]/gi;
-const CONTENT_TOKEN = /(\[\[(?:portrait|reel|media):[a-z0-9-]+\]\]|\[\[(?:page|comment):[A-Za-z0-9_-]+\]\])/gi;
+const CONTENT_TOKEN = /(\[\[(?:portrait|reel|media):[a-z0-9-]+\]\]|\[\[(?:page|comment):[A-Za-z0-9_-]+\]\]|\[\[game:[A-Z0-9]{6}\]\])/gi;
 
 type CharacterRecord = {
   id: string;
@@ -102,6 +103,7 @@ export function encodeRavenBody(text: string, portraitIds: string[], preserveWhi
 }
 
 export function ravenBodySummary(value: string) {
+  if (/\[\[game:[A-Z0-9]{6}\]\]/i.test(value)) return "The Great Game invitation";
   const reelMatch = /\[\[reel:([a-z0-9-]+)\]\]/i.exec(value);
   const mediaMatch = /\[\[media:([a-z0-9-]+)\]\]/i.exec(value);
   const pageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(value);
@@ -125,6 +127,7 @@ export function ravenBodySummary(value: string) {
 }
 
 export function RavenMessagePreview({ body }: { body: string }) {
+  if (/\[\[game:[A-Z0-9]{6}\]\]/i.test(body)) return <>The Great Game invitation</>;
   const sharedCommentMatch = /\[\[comment:([A-Za-z0-9_-]+)\]\]/i.exec(body);
   if (sharedCommentMatch) { const comment=decodeCommentToken(sharedCommentMatch[1]); const message=body.replace(sharedCommentMatch[0]," ").replace(/\s+/g," ").trim(); return <>{message ? <>{message} · </> : null}<span className={styles.previewPageName}>{comment ? `Comment · ${comment.author}` : "Shared comment"}</span></>; }
   const sharedPageMatch = /\[\[page:([A-Za-z0-9_-]+)\]\]/i.exec(body);
@@ -159,6 +162,8 @@ export function RavenMessagePreview({ body }: { body: string }) {
 
 export default function RavenMessageContent({ body, returnTo }: { body: string; returnTo?: string }) {
   return <p>{body.split(CONTENT_TOKEN).map((part, index) => {
+    const gameMatch = /^\[\[game:([A-Z0-9]{6})\]\]$/i.exec(part);
+    if (gameMatch) return <GameInvitation key={index} code={gameMatch[1].toUpperCase()} />;
     const portraitMatch = /^\[\[portrait:([a-z0-9-]+)\]\]$/i.exec(part);
     if (portraitMatch && characterNames.has(portraitMatch[1].toLowerCase())) {
       const id = portraitMatch[1].toLowerCase();

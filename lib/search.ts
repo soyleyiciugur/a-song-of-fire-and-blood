@@ -153,7 +153,7 @@ export function buildSearchIndex(): SearchResult[] {
     subtitle: beast.description, href: `/bestiary/${beast.id}`, keywords: text(beast.name, beast.description) });
   for (const card of getAllGameCards().filter((entry) => entry.cardType !== "artifact")) results.push({ type: "card", id: card.id,
     title: card.name, subtitle: `The Great Game · ${card.cardType}`,
-    href: "/cards", keywords: text(card.name, card.cardType, card.traits, card.abilities, card.roles) });
+    href: `/cards/decks?card=${encodeURIComponent(card.id)}`, keywords: text(card.name, card.cardType, card.traits, card.abilities, card.roles) });
   const destinations = [
     ...FLAT_NAV_ITEMS,
     { label: "The Raven's Eye", href: "/ravens-eye" }, { label: "Taverns", href: "/forum" },

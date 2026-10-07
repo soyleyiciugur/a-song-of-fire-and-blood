@@ -23,6 +23,7 @@ export type TierId =
   | "c";
 
 export type Trait =
+  | "summon"
   | "unique"
   | "dragon"
   | "dragonrider"
@@ -51,7 +52,8 @@ export type InternalRole =
   | "hybrid-vanilla"
   | "removal"
   | "board-clear"
-  | "resource";
+  | "resource"
+  | "summon";
 
 export type AbilityTrigger =
   | "arrival"
@@ -172,6 +174,7 @@ export type AbilityId =
   | "tides-of-court";
 
 export type SpecialCardKind =
+  | "summon"
   | "royal-favor";
 
 // ─────────────────────────────────────────────

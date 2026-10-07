@@ -1,0 +1,45 @@
+.gem {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  isolation: isolate;
+  filter: drop-shadow(0 3px 5px #0008);
+}
+.small { width: 34px; height: 34px; }
+.medium { width: 44px; height: 44px; }
+.large { width: 58px; height: 58px; }
+.gem img {
+  object-fit: contain;
+  transition: opacity 140ms ease, filter 140ms ease;
+}
+.gem [data-gem-normal] { opacity: 1; }
+.gem [data-gem-highlighted] { opacity: 0; }
+.label {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 42%;
+  height: 42%;
+  color: #f6e1b7;
+  font-family: var(--font-hotd), Georgia, serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 1px 3px #000, 0 0 5px #000;
+  pointer-events: none;
+}
+.small .label { font-size: 8px; }
+.large .label { font-size: 12px; }
+.gem:is(:hover, :focus-visible) [data-gem-normal],
+:global([data-tier-gem-hover]):is(:hover, :focus-visible) [data-player-tier-gem] [data-gem-normal] { opacity: 0; }
+.gem:is(:hover, :focus-visible) [data-gem-highlighted],
+:global([data-tier-gem-hover]):is(:hover, :focus-visible) [data-player-tier-gem] [data-gem-highlighted] { opacity: 1; }
+.gem:is(:hover, :focus-visible),
+:global([data-tier-gem-hover]):is(:hover, :focus-visible) [data-player-tier-gem] {
+  filter: drop-shadow(0 3px 6px #0009) drop-shadow(0 0 7px #d5ad7144);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gem img { transition: none; }
+}
