@@ -2,6 +2,8 @@
   {
     "date": "2026-10-08",
     "items": [
+      "Raised right-side played-card previews above The Realms divider, including during Royal Favor announcements, refined spectator controls with brief viewpoint notices, and resolved spectator chat names and labels when live messages arrive.",
+      "Rebuilt Spectate on the live game board with inspectable hands, manual side switching, an automatic turn-following director, and shared chat with Spectator labels; spectators cannot make game moves.",
       "Polished mobile and landscape Great Game layouts: scrollable complete Play and Ranks panels, a compact Store sign, wrapping player names and friend actions, and responsive deck controls.",
       "Extended Friends at the Inn down the Play hub's right column and moved Last Match to the center, hiding it while the Challenge a Friend form is open.",
       "Added individual Mara and Aldren acknowledgements for all seven emotes, replaced notification symbols with ready-made SVG artwork, and tightened confirmation seal centering.",
@@ -15,7 +17,10 @@
       "Reworked Social streaks into one live run per player with both overall and head-to-head streaks, and showed both players prominently on each match entry.",
       "Applied dedicated Ranks, Social and Store table backgrounds and restored the Store's large centered Cupbearer sign without the hanging chains.",
       "Added rating tiers to Great Game player ranks using the card Command gem set, including the same highlighted hover treatment from S+ through C.",
-      "Queued Great Game innkeeper action clips so each random clip moves to the back and cannot repeat before the other clips play."
+      "Queued Great Game innkeeper action clips so each random clip moves to the back and cannot repeat before the other clips play.",
+      "Vertically centered the Leave label in the spectator controls.",
+      "Ended spectating with a match-result screen and stopped live updates when the watched match finishes or is abandoned.",
+      "Matched Great Game Social reactions and replies to the Taverns, sharing the Favor arrow and community button styles."
     ]
   },
   {

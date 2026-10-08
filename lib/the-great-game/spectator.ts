@@ -1,21 +1,11 @@
 import type { GameState } from "./types";
-import { projectGameStateForPlayer } from "./online";
-
-/** Public table only. Never serialize either hand, deck, pending choice or private log. */
-export function spectatorSnapshot(state: GameState) {
-  const publicState = { ...state, pendingEffect: null };
-  const hostLog = new Set(projectGameStateForPlayer(publicState, "player1").log.map(entry => entry.id));
-  const log = projectGameStateForPlayer(publicState, "player2").log.filter(entry => hostLog.has(entry.id));
-  const player = (id: "player1" | "player2") => ({
-    standing: state.players[id].standing, command: state.players[id].command,
-    maxCommand: state.players[id].maxCommand, board: structuredClone(state.players[id].board),
-    handCount: state.players[id].hand.length, deckCount: state.players[id].deck.length,
-  });
-  return { turnNumber: state.turnNumber, activePlayerId: state.activePlayerId, phase: state.phase,
-    winner: state.winner, activeLocation: state.activeLocation, players: { player1: player("player1"), player2: player("player2") }, log };
+import type { GreatGameOnlineMatchView, GreatGameOnlinePlayer } from "./online";
+/** God-mode viewers can inspect either hand, but never receive future deck order. */
+export function spectatorSnapshot(state: GameState): GameState {
+  const result = structuredClone(state);
+  for (const id of ["player1", "player2"] as const) result.players[id].deck = result.players[id].deck.map(() => "__great_game_hidden_card__");
+  result.pendingEffect = null;
+  result.log = result.log.filter(entry => entry.visibility !== "owner");
+  return result;
 }
-export type SpectatorView = {
-  id: string; status: string; version: number;
-  host: string; guest: string;
-  state: ReturnType<typeof spectatorSnapshot>;
-};
+export type SpectatorView = { match: GreatGameOnlineMatchView; viewer: GreatGameOnlinePlayer };

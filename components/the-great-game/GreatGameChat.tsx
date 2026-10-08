@@ -14,6 +14,8 @@ type ChatMessage = {
   user_id: string;
   body: string;
   created_at: string;
+  spectator?: boolean;
+  sender?: {username:string;display_name:string;avatar_url:string|null};
 };
 
 type PlayerIdentity = {
@@ -127,10 +129,12 @@ export default function GreatGameChat({
   match,
   status,
   embedded = false,
+  spectatorViewer,
 }: {
   match: GreatGameOnlineMatchView;
   status?: GreatGameChatStatus;
   embedded?: boolean;
+  spectatorViewer?: import("@/lib/the-great-game/online").GreatGameOnlinePlayer;
 }) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -149,10 +153,11 @@ export default function GreatGameChat({
   const desktopCollapsedRef = useRef(false);
   const isCompactRef = useRef(false);
   const loadedRef = useRef(false);
+  const seenMessageIds = useRef(new Set<string>());
 
   const viewer = match.playerId === "player1" ? match.host : match.guest;
   const opponent = match.opponent;
-  const viewerId = viewer?.id ?? "";
+  const viewerId = spectatorViewer?.id ?? viewer?.id ?? "";
 
   const players = useMemo(() => {
     const result = new Map<string, PlayerIdentity>();
@@ -163,12 +168,12 @@ export default function GreatGameChat({
 
   useEffect(() => {
     mobileOpenRef.current = mobileOpen;
-    if (mobileOpen) setUnread(0);
+
   }, [mobileOpen]);
 
   useEffect(() => {
     desktopCollapsedRef.current = desktopCollapsed;
-    if (!desktopCollapsed) setUnread(0);
+
   }, [desktopCollapsed]);
 
   useEffect(() => {
@@ -186,27 +191,33 @@ export default function GreatGameChat({
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
     loadedRef.current = false;
+    seenMessageIds.current.clear();
 
-    void supabase
-      .from("great_game_chat_messages")
-      .select("id,match_id,user_id,body,created_at")
-      .eq("match_id", match.id)
-      .order("created_at", { ascending: false })
-      .limit(80)
-      .then(({ data, error: loadError }) => {
+    const controller = new AbortController();
+    let timer: ReturnType<typeof setTimeout>;
+    let refreshing = false;
+    async function refresh() {
+      if (refreshing || cancelled) return;
+      refreshing = true;
+      clearTimeout(timer);
+      try {
+        const response = await fetch('/api/great-game/chat?match=' + encodeURIComponent(match.id), {signal:controller.signal,cache:'no-store'});
+        const payload = await response.json();
+        if (!response.ok) throw Error(payload.error || 'Table whispers could not be read.');
         if (cancelled) return;
-        if (loadError) {
-          setError("Table whispers could not be read.");
-          setMessages([]);
-        } else {
-          setMessages(([...(data ?? [])].reverse() as ChatMessage[]).filter((message) => !decodeGreatGameEmote(message.body)));
+        const incoming = payload.messages as ChatMessage[];
+        if (loadedRef.current && ((isCompactRef.current && !mobileOpenRef.current) || (!isCompactRef.current && desktopCollapsedRef.current))) {
+          const unreadCount = incoming.filter(message => message.user_id !== viewerId && !seenMessageIds.current.has(message.id)).length;
+          if (unreadCount) setUnread(current => Math.min(99, current + unreadCount));
         }
-        setLoading(false);
-        loadedRef.current = true;
-      });
+        seenMessageIds.current = new Set(incoming.map(message => message.id));
+        setMessages(incoming); setError(null); setLoading(false); loadedRef.current = true;
+      } catch (e) { if (!cancelled) {setError(e instanceof Error ? e.message : 'Could not read chat.');setLoading(false);} }
+      refreshing = false;
+      if (!cancelled) timer = setTimeout(refresh, document.hidden ? 8000 : 2500);
+    }
+    void refresh();
 
     const channel = supabase
       .channel(`great-game-chat:${match.id}`)
@@ -221,13 +232,20 @@ export default function GreatGameChat({
         (payload) => {
           const next = payload.new as ChatMessage;
           if (decodeGreatGameEmote(next.body)) return;
+          // Realtime rows contain only IDs. Resolve gallery authors before rendering.
+          if (next.user_id !== match.host.id && next.user_id !== match.guest?.id) {
+            void refresh();
+            return;
+          }
+          const alreadySeen = seenMessageIds.current.has(next.id);
+          seenMessageIds.current.add(next.id);
           setMessages((current) => {
             if (current.some((item) => item.id === next.id)) return current;
             return [...current, next].slice(-100);
           });
 
           if (
-            loadedRef.current &&
+            !alreadySeen && loadedRef.current &&
             next.user_id !== viewerId &&
             ((isCompactRef.current && !mobileOpenRef.current) ||
               (!isCompactRef.current && desktopCollapsedRef.current))
@@ -240,9 +258,10 @@ export default function GreatGameChat({
 
     return () => {
       cancelled = true;
+      controller.abort(); clearTimeout(timer);
       void supabase.removeChannel(channel);
     };
-  }, [match.id, supabase, viewerId]);
+  }, [match.id, match.host.id, match.guest?.id, supabase, viewerId]);
 
   useEffect(() => {
     if (loading) return;
@@ -263,15 +282,13 @@ export default function GreatGameChat({
 
     setSending(true);
     setError(null);
-    const { data, error: sendError } = await supabase
-      .from("great_game_chat_messages")
-      .insert({
-        match_id: match.id,
-        user_id: viewerId,
-        body: body.slice(0, MAX_CHAT_LENGTH),
-      })
-      .select("id,match_id,user_id,body,created_at")
-      .single();
+    let data: ChatMessage | null = null;
+    let sendError = false;
+    try {
+      const response = await fetch('/api/great-game/chat', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({matchId:match.id,body:body.slice(0,MAX_CHAT_LENGTH)})});
+      if (!response.ok) sendError = true;
+      else data = await response.json();
+    } catch {sendError = true;}
 
     if (sendError) {
       setError("That whisper did not cross the table.");
@@ -299,7 +316,7 @@ export default function GreatGameChat({
       <button
         type="button"
         className={`${styles.mobileToggle} ${embedded ? styles.mobileToggleEmbedded : ""}`}
-        onClick={() => setMobileOpen((current) => !current)}
+        onClick={() => { if (!mobileOpen) setUnread(0); setMobileOpen(current => !current); }}
         aria-label={mobileOpen ? "Close match chat" : "Open match chat"}
         aria-expanded={mobileOpen}
         data-selection-ui="true"
@@ -322,7 +339,7 @@ export default function GreatGameChat({
             <button
               type="button"
               className={styles.desktopCollapse}
-              onClick={() => setDesktopCollapsed((current) => !current)}
+              onClick={() => { if (desktopCollapsed) setUnread(0); setDesktopCollapsed(current => !current); }}
               aria-label={desktopCollapsed ? "Expand table chat" : "Collapse table chat"}
               aria-expanded={!desktopCollapsed}
             >
@@ -335,7 +352,7 @@ export default function GreatGameChat({
           <div className={styles.heading}>
             <span className={styles.tableCode}><i aria-hidden="true" />Table {match.code}</span>
             <strong>Table Whispers</strong>
-            <small>vs. {opponent?.username ?? "Opponent"}</small>
+            <small>{spectatorViewer ? "Spectator gallery" : `vs. ${opponent?.username ?? "Opponent"}`}</small>
           </div>
 
           {status && !embedded && (
@@ -368,8 +385,9 @@ export default function GreatGameChat({
           {messages.map((message, index) => {
             const own = message.user_id === viewerId;
             const sender = players.get(message.user_id);
-            const username = sender?.username ?? "player";
-            const grouped = index > 0 && messages[index - 1]?.user_id === message.user_id;
+            const username = sender?.displayName || sender?.username || message.sender?.display_name || message.sender?.username || "Spectator";
+            const isSpectator = message.spectator ?? !players.has(message.user_id);
+            const grouped = !isSpectator && index > 0 && messages[index - 1]?.user_id === message.user_id;
 
             return (
               <article
@@ -396,6 +414,7 @@ export default function GreatGameChat({
                   {!grouped && (
                     <span className={styles.meta}>
                       <strong>{own ? "You" : username}</strong>
+                      {isSpectator && <span className={styles.spectatorTag}>Spectator</span>}
                       <time dateTime={message.created_at}>{messageTime(message.created_at)}</time>
                     </span>
                   )}

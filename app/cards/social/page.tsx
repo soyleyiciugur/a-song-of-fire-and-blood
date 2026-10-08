@@ -1,4 +1,6 @@
 "use client";
+import FavorIcon from "@/components/community/FavorIcon";
+import communityStyles from "@/components/community/composer.module.css";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -58,18 +60,6 @@ function PersonAvatar({ person, small = false }: { person: Person; small?: boole
   return <span className={`${styles.avatar} ${small ? styles.avatarSmall : ""}`}>
     {person.avatarUrl ? <Image src={person.avatarUrl} alt="" width={small ? 28 : 44} height={small ? 28 : 44} unoptimized /> : <span>{initials}</span>}
   </span>;
-}
-
-function SocialActionIcon({ kind, active = false }: { kind: "like" | "reply"; active?: boolean }) {
-  if (kind === "like") {
-    return <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.actionIcon} data-active={active || undefined}>
-      <path d="M12 20.1 4.5 13a4.9 4.9 0 0 1-.2-6.9 4.5 4.5 0 0 1 6.5.2L12 7.6l1.2-1.3a4.5 4.5 0 0 1 6.5-.2 4.9 4.9 0 0 1-.2 6.9L12 20.1Z" />
-    </svg>;
-  }
-  return <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.actionIcon}>
-    <path d="M9.2 7.1 4 12l5.2 4.9" />
-    <path d="M4.5 12h7.8c4.6 0 7.2 2.1 7.7 6.1-.5-6.7-3.1-10.9-8.1-10.9H9.2" />
-  </svg>;
 }
 
 function MatchPlayer({ person, losing = false }: { person: Person; losing?: boolean }) {
@@ -176,30 +166,31 @@ export default function GreatGameSocialPage() {
           </div>
 
           <div className={styles.actions}>
+            <span className={communityStyles.likeWrap}>
             <button
               type="button"
-              className={styles.actionButton}
+              className={`${communityStyles.reactionButton} ${communityStyles.favorButton}` }
               aria-label={post.liked ? `Unlike this match${post.likes ? `, ${post.likes} likes` : ""}` : `Like this match${post.likes ? `, ${post.likes} likes` : ""}`}
               aria-pressed={post.liked}
-              data-active={post.liked || undefined}
+              data-tooltip={post.liked ? "Remove Favor" : "Grant Favor"}
               disabled={!payload.interactionsReady || pending === `like:${post.matchId}`}
               onClick={() => void act(post.matchId, "like")}
             >
-              <SocialActionIcon kind="like" active={post.liked} />
-              <span>{post.liked ? "Liked" : "Like"}</span>
-              {post.likes > 0 && <b>{post.likes}</b>}
+              <FavorIcon />
             </button>
+            <span className={communityStyles.reactionCount}>{post.likes}</span>
+            </span>
+            <span className={`${communityStyles.wrap} ${communityStyles.replyComposer}`}>
             <button
               type="button"
-              className={styles.actionButton}
               aria-expanded={replying === post.matchId}
               disabled={!payload.interactionsReady}
               onClick={() => setReplying(current => current === post.matchId ? null : post.matchId)}
             >
-              <SocialActionIcon kind="reply" />
               <span>Reply</span>
-              {post.replyCount > 0 && <b>{post.replyCount}</b>}
+              {post.replyCount > 0 && <span> {post.replyCount}</span>}
             </button>
+            </span>
           </div>
 
           {!!post.replies.length && <div className={styles.replies}>{post.replies.map(reply => <div className={styles.reply} key={reply.id}>

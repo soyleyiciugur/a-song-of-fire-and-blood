@@ -277,3 +277,4 @@ span.rankMark[data-player-tier-gem] { width: 42px; height: 42px; margin-left: 8p
   .joinRow { grid-template-columns: minmax(0, 1fr); }
   .navLinks a { padding-inline: 4px; }
 }
+.spectatorConnection { position: fixed; z-index: 200; bottom: 12px; left: 50%; transform: translateX(-50%); padding: 8px 12px; background: #23170f; color: #ead8b7; }

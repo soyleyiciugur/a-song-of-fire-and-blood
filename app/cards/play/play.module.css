@@ -8475,7 +8475,7 @@
 }
 /* Let this temporary announcement outrank body-portaled game tooltips too. */
 .boardGame:has(.turnNotice) { isolation: auto; }
-.boardGame .battleLine:has(.turnNotice) { z-index: 2147483647; }
+.boardGame .battleLine:has(.turnNotice) { z-index: 2147483646; }
 .turnNoticeCopy { display: grid; gap: 2px; min-width: 0; text-align: center; overflow-wrap: anywhere; }
 .boardGame .turnNoticeCopy strong { font-size: clamp(13px, 1.1vw, 17px); line-height: 1.05; }
 .boardGame .turnNoticeCopy span { font-size: 8px; line-height: 1; }
@@ -8768,3 +8768,24 @@
 .boardGame .innkeeperInteraction:disabled {
   cursor: default;
 }
+.spectatorControls { position: fixed; z-index: 160; top: max(6px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 5px; max-width: calc(100vw - 100px); width: max-content; padding: 6px 9px; border: 1px solid #89623d; background: #160f0bf2; color: #ead8b7; font: 12px var(--font-body), serif; }
+.spectatorControls button, .spectatorControls a { display: inline-flex; align-items: center; justify-content: center; min-height: 30px; max-width: 160px; overflow-wrap: anywhere; padding: 4px 8px; border: 1px solid #89623d; background: transparent; color: inherit; font: inherit; text-decoration: none; cursor: pointer; }
+.spectatorControls button[aria-pressed='true'] { background: #704821; color: #ffe4b2; }
+@media(max-height:550px) { .spectatorControls { font-size: 10px; padding: 3px; gap: 3px; } .spectatorControls button, .spectatorControls a { min-height: 26px; } }
+.spectatorControls { gap: 8px; padding: 7px 10px; border-color: #8c6b3d80; border-radius: 4px; background: linear-gradient(145deg,#241a12f5,#100c09f5); box-shadow: 0 5px 20px #0006,inset 0 1px #f5dbac0a; letter-spacing: 0; }
+.spectatorIdentity { display: grid; gap: 2px; min-width: 0; max-width: 190px; padding-right: 8px; border-right: 1px solid #8c6b3d44; }
+.spectatorIdentity small { color: #a78a60; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+.spectatorIdentity strong { font-weight: 400; overflow-wrap: anywhere; }
+.spectatorSides { display: flex; min-width: 0; gap: 2px; padding: 2px; background: #08060480; border: 1px solid #8c6b3d44; border-radius: 3px; }
+.spectatorControls button, .spectatorControls a { border-color: transparent; border-radius: 2px; color: #c3ac88; transition: background 160ms,color 160ms; }
+.spectatorControls button:hover, .spectatorControls a:hover { background: #ac80351c; color: #ffe4b2; }
+.spectatorControls button[aria-pressed='true'] { background: linear-gradient(#71512755,#38251466); box-shadow: inset 0 -1px #bc9559; color: #ffe0a5; }
+.spectatorControls .spectatorDirector { border: 1px solid #8c6b3d55; }
+.spectatorControls :is(button,a):focus-visible { outline: 1px solid #dbba7c; outline-offset: 2px; }
+.watchingNotice { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: max-content; max-width: 90vw; padding: 8px 16px; border: 1px solid #ab854950; background: #160f0bf2; box-shadow: 0 5px 18px #0006; color: #e7cf9e; font: 14px var(--font-hotd),serif; text-align: center; pointer-events: none; animation: watchingFade 2s ease both; }
+@keyframes watchingFade { 0%,100% { opacity: 0; } 12%,85% { opacity: 1; } }
+@media(max-height:550px) { .spectatorControls { padding: 3px 6px; gap: 4px; } .spectatorIdentity { max-width: 120px; } .watchingNotice { font-size: 11px; padding: 5px 12px; top: calc(100% + 5px); } }
+@media(prefers-reduced-motion:reduce) { .watchingNotice { animation:none; } }
+
+/* Played-card previews stay above the divider even while it carries a notice. */
+.boardGame .opponentSpellReveal { z-index: 2147483647; }
