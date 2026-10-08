@@ -314,6 +314,7 @@ export default function InnkeeperVideo({
   const watchdogRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const externalRetryRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingExternalClipRef = useRef<InnkeeperClip | null>(null);
+  const actionQueueRef = useRef<InnkeeperClip[]>([]);
 
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -455,6 +456,15 @@ export default function InnkeeperVideo({
   }, [crossfadeTo]);
 
   useEffect(() => {
+    const actionPool: InnkeeperClip[] = supporter === "aldren"
+      ? ["ale", "salt", "coin1", "coin2"]
+      : ["tankard", "ale"];
+
+    // Shuffle once, then move each played clip to the back. This keeps the
+    // random feel while guaranteeing that a clip cannot repeat until the
+    // rest of this innkeeper's action pool has had a turn.
+    actionQueueRef.current = [...actionPool].sort(() => Math.random() - 0.5);
+
     scheduleNextActionRef.current = () => {
       clearActionTimer();
       if (!mountedRef.current || reducedMotionRef.current) return;
@@ -470,9 +480,9 @@ export default function InnkeeperVideo({
           return;
         }
 
-        const action = supporter === "aldren"
-          ? (["ale", "salt", "coin1", "coin2"] as const)[Math.floor(Math.random() * 4)]
-          : (Math.random() < 0.62 ? "tankard" : "ale");
+        const action = actionQueueRef.current.shift();
+        if (!action) return;
+        actionQueueRef.current.push(action);
         transitionFnRef.current?.(action, "action");
       };
 

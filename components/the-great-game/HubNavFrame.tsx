@@ -24,7 +24,7 @@ export default function HubNavFrame({
       {showSign && (
         <div className={styles.innSign}>
           <Image
-            src="/images/cards/hub/cupbearer-sign.png"
+            src="/images/cards/hub/cupbearer-sign.webp"
             alt="The Cupbearer — a hand offering a golden cup"
             width={700}
             height={300}

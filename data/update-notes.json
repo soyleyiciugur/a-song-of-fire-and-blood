@@ -9,7 +9,8 @@
       "Centered the Mara and Aldren confirmation seal mark inside its simplified tavern note treatment.",
       "Reworked Social streaks into one live run per player with both overall and head-to-head streaks, and showed both players prominently on each match entry.",
       "Applied dedicated Ranks, Social and Store table backgrounds and restored the Store's large centered Cupbearer sign without the hanging chains.",
-      "Added rating tiers to Great Game player ranks using the card Command gem set, including the same highlighted hover treatment from S+ through C."
+      "Added rating tiers to Great Game player ranks using the card Command gem set, including the same highlighted hover treatment from S+ through C.",
+      "Queued Great Game innkeeper action clips so each random clip moves to the back and cannot repeat before the other clips play."
     ]
   },
   {
