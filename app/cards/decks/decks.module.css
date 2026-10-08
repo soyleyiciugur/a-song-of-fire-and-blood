@@ -896,3 +896,14 @@
   .deckListItem { width: 145px; min-width: 0; }
   .workspace { grid-template-rows: auto auto; }
 }
+
+@media (max-width: 900px) {
+  .collectionHeader { flex-wrap: wrap; gap: 10px; }
+  .collectionHeader input { flex: 1 1 180px; min-width: 0; }
+  .deckListItem { max-width: 100%; }
+  .nameButton { overflow-wrap: anywhere; text-align: left; }
+}
+@media (max-width: 360px) {
+  .deckRail { flex-direction: column; }
+  .railHeader { border-right: 0; border-bottom: 1px solid #a6794033; }
+}

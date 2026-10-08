@@ -1,3 +1,4 @@
+import { randomInt } from "node:crypto";
 import { after, NextResponse } from "next/server";
 import houses from "@/data/houses.json";
 
@@ -442,17 +443,27 @@ export async function POST(request: Request) {
         return jsonError("You cannot take both seats at your own table.");
       }
 
-      const state = createGame(match.host_deck, deck);
+      // Active host/guest fields represent player1/player2 seats. Move all
+      // participant metadata together in the same atomic join update.
+      const creatorFirst = randomInt(2) === 0;
+      const seats = {
+        host_id: creatorFirst ? match.host_id : user.id,
+        guest_id: creatorFirst ? user.id : match.host_id,
+        host_deck: creatorFirst ? match.host_deck : deck,
+        guest_deck: creatorFirst ? deck : match.host_deck,
+        host_deck_name: creatorFirst ? match.host_deck_name : deckName,
+        guest_deck_name: creatorFirst ? deckName : match.host_deck_name,
+        host_faction: creatorFirst ? match.host_faction : deckFaction(deck),
+        guest_faction: creatorFirst ? deckFaction(deck) : match.host_faction,
+      };
+      const state = createGame(seats.host_deck, seats.guest_deck);
       const nextVersion = match.version + 1;
       const now = new Date().toISOString();
 
       const { data: joined, error: joinError } = await admin
         .from("great_game_matches")
         .update({
-          guest_id: user.id,
-          guest_deck: deck,
-          guest_deck_name: deckName,
-          guest_faction: deckFaction(deck),
+          ...seats,
           started_at: now,
           state,
           status: "active",

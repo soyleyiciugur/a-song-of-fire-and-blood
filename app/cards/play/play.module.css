@@ -6301,7 +6301,7 @@
 }
 
 .opponentSpellReveal{position:fixed;left:18px;top:50%;z-index:304;display:grid;gap:7px;transform:translateY(-50%);pointer-events:none;animation:opponentSpellReveal 3s ease both}
-.opponentSpellEyebrow{justify-self:center;padding:4px 9px;border:1px solid rgba(190,146,78,.34);border-radius:999px;background:rgba(13,10,12,.92);color:#b79a70;font:700 8px/1 var(--font-geist);letter-spacing:.13em;text-transform:uppercase;box-shadow:0 10px 28px #0008}
+.opponentSpellEyebrow{position:absolute;bottom:calc(100% + 7px);justify-self:center;white-space:nowrap;padding:4px 9px;border:1px solid rgba(190,146,78,.34);border-radius:999px;background:rgba(13,10,12,.92);color:#b79a70;font:700 8px/1 var(--font-geist);letter-spacing:.13em;text-transform:uppercase;box-shadow:0 10px 28px #0008}
 .opponentSpellCard{position:relative;width:clamp(150px,12.5vw,188px);aspect-ratio:5/7;overflow:hidden;border:2px solid var(--tier-color,#8b1e2b);border-radius:10px;background:#0e0b0e;box-shadow:0 24px 70px #000c,0 0 26px color-mix(in srgb,var(--tier-accent,#d4af37) 30%,transparent);isolation:isolate}
 @keyframes opponentSpellReveal{0%{opacity:0;transform:translate(-18px,-50%) scale(.96)}10%,78%{opacity:1;transform:translate(0,-50%) scale(1)}100%{opacity:0;transform:translate(-8px,-50%) scale(.98)}}
 

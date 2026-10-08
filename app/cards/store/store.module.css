@@ -71,3 +71,9 @@
   .card h1 { font-size: 34px; margin-block: 6px 10px; }
   .card p { font-size: 13px; }
 }
+
+@media (max-height: 680px) {
+  .page { overflow-y: auto; scrollbar-width: thin; }
+  .storeSign { width: min(440px, 65vw); max-height: 34dvh; margin-block: 0; }
+  .card { flex: 0 0 auto; min-height: min-content; padding-block: 12px 24px; }
+}

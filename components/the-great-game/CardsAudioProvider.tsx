@@ -1,13 +1,15 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { DEFAULT_AMBIENCE_VOLUME, DEFAULT_MUSIC_VOLUME } from "./GameAudio";
+import { DEFAULT_AMBIENCE_VOLUME, DEFAULT_MUSIC_VOLUME, DEFAULT_EMOTE_VOLUME } from "./GameAudio";
 
 type CardsAudioSettings = {
   ambienceVolume: number;
   musicVolume: number;
+  emoteVolume: number;
   setAmbienceVolume: (value: number) => void;
   setMusicVolume: (value: number) => void;
+  setEmoteVolume: (value: number) => void;
 };
 
 const CardsAudioContext = createContext<CardsAudioSettings | null>(null);
@@ -28,6 +30,7 @@ export function CardsAudioProvider({ children }: { children: ReactNode }) {
   const ambienceRef = useRef<HTMLAudioElement>(null);
   const [ambienceVolume, updateAmbienceVolume] = useState(() => storedVolume("asofab:great-game:ambience-volume", DEFAULT_AMBIENCE_VOLUME));
   const [musicVolume, updateMusicVolume] = useState(() => storedVolume("asofab:great-game:music-volume", DEFAULT_MUSIC_VOLUME));
+  const [emoteVolume, updateEmoteVolume] = useState(() => storedVolume("asofab:great-game:emote-volume", DEFAULT_EMOTE_VOLUME));
 
   useEffect(() => {
     const audio = ambienceRef.current;
@@ -57,8 +60,13 @@ export function CardsAudioProvider({ children }: { children: ReactNode }) {
     try { window.localStorage.setItem("asofab:great-game:music-volume", String(value)); } catch { /* Storage can be unavailable. */ }
   };
 
+  const setEmoteVolume = (value: number) => {
+    updateEmoteVolume(value);
+    try { window.localStorage.setItem("asofab:great-game:emote-volume", String(value)); } catch { /* Storage can be unavailable. */ }
+  };
+
   return (
-    <CardsAudioContext.Provider value={{ ambienceVolume, musicVolume, setAmbienceVolume, setMusicVolume }}>
+    <CardsAudioContext.Provider value={{ ambienceVolume, musicVolume, emoteVolume, setAmbienceVolume, setMusicVolume, setEmoteVolume }}>
       <audio ref={ambienceRef} src="/images/cards/audio/ambience.mp3" loop preload="auto" aria-hidden="true" />
       {children}
     </CardsAudioContext.Provider>

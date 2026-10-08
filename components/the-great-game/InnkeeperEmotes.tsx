@@ -17,11 +17,14 @@ import {
   decodeGreatGameEmote,
   encodeGreatGameEmote,
   greatGameEmoteDefinition,
+  greatGameEmoteCopy,
   type GreatGameEmoteId,
 } from "@/lib/the-great-game/emotes";
 import { createClient } from "@/lib/supabase/client";
 
 import EmoteIcon from "./EmoteIcon";
+import { useCardsAudio } from "./CardsAudioProvider";
+import { useEmotePop } from "./useEmotePop";
 
 import styles from "./InnkeeperEmotes.module.css";
 
@@ -37,7 +40,6 @@ type Bubble = {
   id: string;
   emoteId?: GreatGameEmoteId;
   text: string;
-  speaker?: string;
 };
 
 type FanStave = {
@@ -86,8 +88,13 @@ export default function InnkeeperEmotes({
   supporter: "mara" | "aldren";
 }) {
   const supabase = useMemo(() => createClient(), []);
+  const { emoteVolume } = useCardsAudio();
+  const playPop = useEmotePop(emoteVolume, match?.status === "active");
   const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const anchorViewportRef = useRef({ width: 0, height: 0 });
   const sentAtRef = useRef<number[]>([]);
+  const sendingRef = useRef(false);
+  const receivedIdsRef = useRef(new Set<string>());
   const lastSaltVideoAtRef = useRef(0);
   const bubbleTimersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
   const previousPhaseRef = useRef(phase);
@@ -101,17 +108,36 @@ export default function InnkeeperEmotes({
   const [compact, setCompact] = useState(false);
 
   const viewerId = viewerUserId(match);
+  const matchId = match?.id;
+  const speakerName = supporter === "mara" ? "Mara" : "Aldren";
   const active = Boolean(match && match.status === "active" && match.opponent && viewerId);
   const blocked = blockedUntil > now;
 
+  const refreshAnchor = useCallback(() => {
+    const rect = anchorRef.current?.getBoundingClientRect();
+    const viewportChanged = anchorViewportRef.current.width !== window.innerWidth || anchorViewportRef.current.height !== window.innerHeight;
+    anchorViewportRef.current = { width: window.innerWidth, height: window.innerHeight };
+    if (rect) setAnchorRect(current => !viewportChanged && current && current.x === rect.x && current.y === rect.y && current.width === rect.width && current.height === rect.height ? current : rect);
+  }, []);
+
   const showBubble = useCallback((bubble: Bubble) => {
-    setBubbles((current) => [...current, bubble].slice(-3));
+    refreshAnchor();
+    // At most two notices are visible; retire timers for notices already evicted.
+    const timers = bubbleTimersRef.current;
+    if (timers.has(bubble.id)) return;
+    if (timers.size >= 2) {
+      const oldest = timers.keys().next().value!;
+      clearTimeout(timers.get(oldest));
+      timers.delete(oldest);
+    }
+    setBubbles((current) => [...current, bubble].slice(-2));
+    if (bubble.emoteId) playPop();
     const timer = setTimeout(() => {
       bubbleTimersRef.current.delete(bubble.id);
       setBubbles((current) => current.filter((item) => item.id !== bubble.id));
     }, BUBBLE_LIFETIME_MS);
     bubbleTimersRef.current.set(bubble.id, timer);
-  }, []);
+  }, [playPop, refreshAnchor]);
 
   useEffect(() => {
     const previous = previousPhaseRef.current;
@@ -120,14 +146,9 @@ export default function InnkeeperEmotes({
     const text = supporter === "mara"
       ? "Welcome to The Cupbearer. Good luck. Try not to lose all your coin; the place has bills to pay."
       : "Welcome to The Cupbearer, my liege! May fortune favor your hand, and may your stay be most agreeable.";
-    const timer = setTimeout(() => showBubble({ id: `welcome:${Date.now()}`, speaker: supporter === "mara" ? "Mara" : "Aldren", text }), 0);
+    const timer = setTimeout(() => showBubble({ id: `welcome:${Date.now()}`, text }), 0);
     return () => clearTimeout(timer);
   }, [phase, supporter, showBubble]);
-
-  const refreshAnchor = useCallback(() => {
-    const rect = anchorRef.current?.getBoundingClientRect();
-    if (rect) setAnchorRect(rect);
-  }, []);
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 700px), (max-height: 620px)");
@@ -155,47 +176,43 @@ export default function InnkeeperEmotes({
   }, [open, refreshAnchor]);
 
   useEffect(() => {
-    if (!active) {
-      setOpen(false);
-      return;
-    }
-    refreshAnchor();
-    const onMove = () => refreshAnchor();
-    window.addEventListener("resize", onMove);
-    return () => window.removeEventListener("resize", onMove);
-  }, [active, refreshAnchor]);
+    // Open wheels already have a resize listener; bubbles need one only while visible.
+    if (open || bubbles.length === 0) return;
+    window.addEventListener("resize", refreshAnchor);
+    return () => window.removeEventListener("resize", refreshAnchor);
+  }, [open, bubbles.length, refreshAnchor]);
 
   useEffect(() => {
     if (!blocked) return;
-    const timer = window.setInterval(() => setNow(Date.now()), 250);
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(timer);
   }, [blocked]);
 
   useEffect(() => {
-    if (!match || match.status !== "active" || !viewerId) return;
+    if (!matchId || !active || !viewerId) return;
 
     const channel = supabase
-      .channel(`great-game-emotes:${match.id}`)
+      .channel(`great-game-emotes:${matchId}`)
       .on(
         "postgres_changes",
         {
           event: "INSERT",
           schema: "public",
           table: "great_game_chat_messages",
-          filter: `match_id=eq.${match.id}`,
+          filter: `match_id=eq.${matchId}`,
         },
         (payload) => {
           const message = payload.new as EmoteWireMessage;
-          if (message.user_id === viewerId) return;
+          if (message.user_id === viewerId || receivedIdsRef.current.has(message.id)) return;
           const emoteId = decodeGreatGameEmote(message.body);
           if (!emoteId) return;
 
-          refreshAnchor();
-          const definition = greatGameEmoteDefinition(emoteId);
+          receivedIdsRef.current.add(message.id);
+          if (receivedIdsRef.current.size > 100) receivedIdsRef.current.delete(receivedIdsRef.current.values().next().value!);
           const bubble: Bubble = {
             id: message.id,
             emoteId,
-            text: definition.maraText,
+            text: greatGameEmoteCopy(emoteId, supporter),
           };
 
           showBubble(bubble);
@@ -218,7 +235,7 @@ export default function InnkeeperEmotes({
     return () => {
       void supabase.removeChannel(channel);
     };
-  }, [match, refreshAnchor, showBubble, supabase, viewerId]);
+  }, [matchId, active, showBubble, supabase, viewerId, supporter]);
 
   useEffect(() => () => {
     bubbleTimersRef.current.forEach((timer) => clearTimeout(timer));
@@ -226,7 +243,7 @@ export default function InnkeeperEmotes({
   }, []);
 
   const sendEmote = useCallback(async (emoteId: GreatGameEmoteId) => {
-    if (!match || !viewerId || !active || sending) return;
+    if (!matchId || !viewerId || !active || sendingRef.current) return;
 
     const currentTime = Date.now();
     setNow(currentTime);
@@ -240,18 +257,17 @@ export default function InnkeeperEmotes({
       return;
     }
 
+    sendingRef.current = true;
     setSending(true);
     setSendError(null);
-    const { error } = await supabase.from("great_game_chat_messages").insert({
-      match_id: match.id,
-      user_id: viewerId,
-      body: encodeGreatGameEmote(emoteId),
-    });
-
-    if (error) {
-      setSendError("Mara couldn't carry that across the table.");
-    } else {
-      showBubble({ id: `sent:${Date.now()}`, emoteId, speaker: "Sent", text: `${greatGameEmoteDefinition(emoteId).label} reached your opponent.` });
+    try {
+      const { error } = await supabase.from("great_game_chat_messages").insert({
+        match_id: matchId,
+        user_id: viewerId,
+        body: encodeGreatGameEmote(emoteId),
+      });
+      if (error) throw error;
+      showBubble({ id: `sent:${currentTime}`, emoteId, text: greatGameEmoteCopy(emoteId, supporter, true) });
       const nextRecent = [...recent, currentTime];
       sentAtRef.current = nextRecent;
       if (nextRecent.length >= FLOOD_MAX) {
@@ -259,9 +275,13 @@ export default function InnkeeperEmotes({
         setBlockedUntil(currentTime + FLOOD_BLOCK_MS);
       }
       setOpen(false);
+    } catch {
+      setSendError(supporter === "mara" ? "That didn't reach them. Try again." : "My apologies, my liege. May I try again?");
+    } finally {
+      sendingRef.current = false;
+      setSending(false);
     }
-    setSending(false);
-  }, [active, blockedUntil, match, sending, showBubble, supabase, viewerId]);
+  }, [active, blockedUntil, matchId, showBubble, supabase, viewerId, supporter]);
 
   const wheelStyle = useMemo<CSSProperties | undefined>(() => {
     if (!anchorRect) return undefined;
@@ -286,16 +306,19 @@ export default function InnkeeperEmotes({
     const left = clamp(
       anchorRect.left + Math.min(anchorRect.width * .56, 166),
       8,
-      Math.max(8, window.innerWidth - 304)
+      Math.max(8, window.innerWidth - (compact ? 228 : 246))
     );
     const bottom = Math.max(12, window.innerHeight - anchorRect.top + 6);
     return { left, bottom };
-  }, [anchorRect]);
+  }, [anchorRect, compact]);
 
   const remainingBlockSeconds = Math.max(0, Math.ceil((blockedUntil - now) / 1000));
 
   return (
     <>
+      {active && FAN_STAVES.map(({ id }) => (
+        <link key={id} rel="preload" as="image" type="image/svg+xml" href={`/images/cards/emotes/${id}.svg`} />
+      ))}
       <button
         ref={anchorRef}
         type="button"
@@ -313,7 +336,7 @@ export default function InnkeeperEmotes({
 
       {typeof document !== "undefined" && createPortal(
         <div className={styles.layer} aria-live="polite">
-          {open && anchorRect && wheelStyle && (
+          {active && open && anchorRect && wheelStyle && (
             <>
               <button
                 type="button"
@@ -377,12 +400,12 @@ export default function InnkeeperEmotes({
                   style={{ "--bubble-index": index } as CSSProperties}
                 >
                   <div className={styles.bubbleHeader}>
-                    <strong>{bubble.speaker ?? "Mara"}</strong>
+                    <strong>{speakerName}</strong>
                     {bubble.emoteId && <span className={styles.bubbleEmote} aria-hidden="true">
                       <EmoteIcon id={bubble.emoteId} />
                     </span>}
                   </div>
-                  <div className={styles.bubbleText}>{bubble.emoteId === "salt" ? <span role="img" aria-label="Salt"><EmoteIcon id="salt" /></span> : bubble.text}</div>
+                  <div className={styles.bubbleText}>{bubble.text}</div>
                 </div>
               ))}
             </div>

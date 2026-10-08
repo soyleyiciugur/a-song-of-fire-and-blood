@@ -240,3 +240,12 @@
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before, .page *::after { transition: none !important; animation: none !important; }
 }
+
+@media (max-width: 900px) {
+  .matchup { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+  .matchPlayer strong { white-space: normal; overflow-wrap: anywhere; }
+  .postTop, .actions, .composer > div { flex-wrap: wrap; }
+}
+@media (max-width: 400px) {
+  .matchPlayer, .matchPlayer:last-child { flex-direction: column; align-items: center; text-align: center; }
+}

@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 // Change these defaults (0 = silent, 1 = full volume) for first-time visitors.
 export const DEFAULT_AMBIENCE_VOLUME = 0.15;
 export const DEFAULT_MUSIC_VOLUME = 0.15;
+export const DEFAULT_EMOTE_VOLUME = 0.15;
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];

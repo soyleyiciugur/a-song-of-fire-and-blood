@@ -2,6 +2,11 @@
   {
     "date": "2026-10-08",
     "items": [
+      "Polished mobile and landscape Great Game layouts: scrollable complete Play and Ranks panels, a compact Store sign, wrapping player names and friend actions, and responsive deck controls.",
+      "Extended Friends at the Inn down the Play hub's right column and moved Last Match to the center, hiding it while the Challenge a Friend form is open.",
+      "Added individual Mara and Aldren acknowledgements for all seven emotes, replaced notification symbols with ready-made SVG artwork, and tightened confirmation seal centering.",
+      "Kept Invite available beside Spectate, fixed emotes after joining a fresh table, and gave Mara and Aldren distinct emote replies with a soft, adjustable pop sound.",
+      "Randomized player seats when an online Great Game table fills, compacted innkeeper emote notices, and added right-side previews for every played card centered on The Realms.",
       "Unified the global and Great Game navigation behavior across Play, Decks, Ranks, Social and Store, with Store now living as the fifth Great Game tab.",
       "Moved The Cupbearer store into Cards and hung its sign from the Great Game navigation frame like the Play hub.",
       "Expanded Social into a page-scrolling tavern feed, restyled Like and Reply actions, replaced match scores with in-world result copy, and surfaced final Standing margin when available.",

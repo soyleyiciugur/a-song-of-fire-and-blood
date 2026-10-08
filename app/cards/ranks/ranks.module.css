@@ -129,3 +129,28 @@
   .avatarLarge { width: 42px; height: 42px; margin-block: 3px 6px; }
   .podiumMeta { display: none; }
 }
+
+/* Rankings flow with the page on compact screens, including landscape phones. */
+@media (max-width: 1080px), (max-height: 700px) {
+  .page { position: relative; height: auto; min-height: 100dvh; margin-top: calc(-1 * var(--site-nav-height, 0px)); overflow: visible; padding-bottom: max(28px, env(safe-area-inset-bottom)); background-attachment: fixed; }
+  :global(html):has(.page), :global(body):has(.page) { overflow: visible; scrollbar-gutter: auto; }
+  .backdrop { position: fixed; }
+  .content { flex: none; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
+  .highTable, .ledger { min-width: 0; }
+  .podium { flex: none; }
+  .podiumCard, .podiumCard[data-rank='1'] { min-height: 0; padding-top: 44px; }
+  .rows { flex: none; overflow: visible; }
+  .labels, .row { grid-template-columns: 76px minmax(0, 1fr) 75px 130px 65px; gap: 8px; }
+  .podiumCard strong, .identity b { white-space: normal; overflow-wrap: anywhere; }
+}
+@media (max-width: 720px) {
+  .row { grid-template-columns: 60px minmax(0, 1fr) 62px; }
+  .identity { gap: 6px; }
+  .identity .avatar { width: 30px; height: 30px; }
+  .rating { flex-wrap: wrap; justify-content: center; gap: 2px 5px; }
+  .sectionHeading { flex-wrap: wrap; gap: 5px; }
+}
+@media (max-width: 720px) {
+  .podiumCard, .podiumCard[data-rank='1'] { padding-top: 62px; }
+  .podiumTier { right: 3px; }
+}

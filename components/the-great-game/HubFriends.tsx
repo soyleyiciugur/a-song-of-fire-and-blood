@@ -28,7 +28,8 @@ export default function HubFriends({ data, guest, error, decks, deckId, onDeckCh
             <span><strong>{friend.display_name || friend.username}</strong><small><i data-online={presence.ready && presence.ids.has(friend.id)} />{!presence.ready ? "Status unavailable" : presence.ids.has(friend.id) ? friend.matchId ? "Online · In a match" : "Online" : "Offline"}</small></span>
           </Link>
           <div className={styles.friendActions}>
-          {friend.matchId ? <Link href={`/cards/spectate/${friend.matchId}`} aria-label={`Spectate ${friend.display_name}`} title="Watch this table">Spectate</Link> : <button type="button" onClick={() => { setMessage(null); setInvite(friend); }} aria-label={`Invite ${friend.display_name}`} title="Invite to a private table"><span className={styles.challengeIcon} aria-hidden="true">⚔</span><span>Invite</span></button>}
+          {friend.matchId && <Link href={`/cards/spectate/${friend.matchId}`} aria-label={`Spectate ${friend.display_name}`} title="Watch this table">Spectate</Link>}
+            <button type="button" onClick={() => { setMessage(null); setInvite(friend); }} aria-label={`Invite ${friend.display_name}`} title="Invite to a private table"><span>Invite</span></button>
             <button type="button" onClick={() => { setInvite(null); setMessage(current => current === friend.username ? null : friend.username); }} aria-label={`Message ${friend.display_name}`} aria-expanded={message === friend.username} title="Quick message"><RavenIcon size={17} /></button>
           </div>
         </div>)}

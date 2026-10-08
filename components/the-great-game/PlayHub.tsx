@@ -27,19 +27,19 @@ export default function PlayHub(props: {
   return <main className={styles.hub} data-great-game-hub>
     <Suspense fallback={null}><JoinInvitation onCode={props.onCodeChange} onOpen={props.onToggleOnline} open={props.onlineOpen} /></Suspense>
     <HubNavFrame active="play" data={data} guest={guest} showSign />
-    <div className={styles.content}>
+    <div className={`${styles.content} ${styles.playContent}`}>
       <section className={styles.intro} aria-labelledby="play-heading">
         <span className={styles.eyebrow}>The Great Game</span><h1 className={styles.title} id="play-heading">Play</h1>
         <h2>A table always awaits</h2><InnQuote kind="welcome" className={styles.description} />
         <div className={styles.actions}><button type="button" onClick={props.onToggleOnline} aria-expanded={props.onlineOpen}>Challenge a Friend <span aria-hidden="true">⚔</span></button><button type="button" onClick={props.onNewGame}>Local Game <span aria-hidden="true">›</span></button></div>
         {!props.onlineOpen && props.onlineError && <p role="alert">{props.onlineError}</p>}
       </section>
+      <section className={styles.recap} hidden={props.onlineOpen} aria-label="Last match recap"><div className={styles.panelHeading}><h2>Last match</h2><CupIcon /></div>
+        {last ? <div className={styles.recapBody}><strong data-result={last.result}>{last.result === "win" ? "Victory" : last.result === "draw" ? "Draw" : "Defeat"}</strong><p>Against {last.opponent_display_name || last.opponent_username}</p><small>{last.turns} turns · {Math.floor(last.duration_seconds / 60)}m {last.duration_seconds % 60}s · {last.rating_after - last.rating_before >= 0 ? "+" : ""}{last.rating_after - last.rating_before} rating</small><InnQuote kind={last.result === "abandon" ? "loss" : last.result} className={styles.voice} /></div>
+          : error ? <p className={styles.empty}>The last match could not be loaded.</p> : <InnQuote kind="empty" className={styles.empty} />}
+      </section>
       <div className={styles.socialColumn}>
         <HubFriends data={data} guest={guest} error={error} decks={props.decks} deckId={props.deckId} onDeckChange={props.onDeckChange} onInvited={props.onInvited} />
-        <section className={styles.recap} aria-label="Last match recap"><div className={styles.panelHeading}><h2>Last match</h2><CupIcon /></div>
-          {last ? <div className={styles.recapBody}><strong data-result={last.result}>{last.result === "win" ? "Victory" : last.result === "draw" ? "Draw" : "Defeat"}</strong><p>Against {last.opponent_display_name || last.opponent_username}</p><small>{last.turns} turns · {Math.floor(last.duration_seconds / 60)}m {last.duration_seconds % 60}s · {last.rating_after - last.rating_before >= 0 ? "+" : ""}{last.rating_after - last.rating_before} rating</small><InnQuote kind={last.result === "abandon" ? "loss" : last.result} className={styles.voice} /></div>
-            : error ? <p className={styles.empty}>The last match could not be loaded.</p> : <InnQuote kind="empty" className={styles.empty} />}
-        </section>
       </div>
     </div>
     <footer className={styles.footer}><span>Strength wins battles. Influence wins realms.</span></footer>

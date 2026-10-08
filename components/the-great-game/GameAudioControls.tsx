@@ -6,11 +6,13 @@ import styles from "./GameAudioControls.module.css";
 type Props = {
   ambienceVolume: number;
   musicVolume: number;
+  emoteVolume: number;
   onAmbienceChange: (value: number) => void;
   onMusicChange: (value: number) => void;
+  onEmoteChange: (value: number) => void;
 };
 
-export default function GameAudioControls({ ambienceVolume, musicVolume, onAmbienceChange, onMusicChange }: Props) {
+export default function GameAudioControls({ ambienceVolume, musicVolume, emoteVolume, onAmbienceChange, onMusicChange, onEmoteChange }: Props) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +37,10 @@ export default function GameAudioControls({ ambienceVolume, musicVolume, onAmbie
       {open && (
         <div className={styles.panel} id="great-game-audio-settings">
           <div className={styles.heading}>Sound</div>
+          <label className={styles.setting}>
+            <span>Emote volume <output>{Math.round(emoteVolume * 100)}%</output></span>
+            <input aria-label="Emote volume" type="range" min="0" max="100" value={Math.round(emoteVolume * 100)} onChange={(event) => onEmoteChange(Number(event.target.value) / 100)} style={{ "--fill": `${emoteVolume * 100}%` } as React.CSSProperties} />
+          </label>
           <label className={styles.setting}>
             <span>Ambient volume <output>{Math.round(ambienceVolume * 100)}%</output></span>
             <input aria-label="Ambient volume" type="range" min="0" max="100" value={Math.round(ambienceVolume * 100)} onChange={(event) => onAmbienceChange(Number(event.target.value) / 100)} style={{ "--fill": `${ambienceVolume * 100}%` } as React.CSSProperties} />

@@ -715,11 +715,13 @@ export default function GreatGamePlayPage() {
       null
     );
 
-  const { ambienceVolume, musicVolume, setAmbienceVolume, setMusicVolume } = useCardsAudio();
+  const { ambienceVolume, musicVolume, emoteVolume, setAmbienceVolume, setMusicVolume, setEmoteVolume } = useCardsAudio();
   useGameMusic(mode === "game", musicVolume);
 
   const audioControls = (
     <GameAudioControls
+      emoteVolume={emoteVolume}
+      onEmoteChange={setEmoteVolume}
       ambienceVolume={ambienceVolume}
       musicVolume={musicVolume}
       onAmbienceChange={setAmbienceVolume}
@@ -1114,13 +1116,49 @@ export default function GreatGamePlayPage() {
     setOpponentPlayFlight,
   ] = useState<ActiveOpponentPlayAnimation | null>(null);
 
-  const [
-    opponentSpellReveal,
-    setOpponentSpellReveal,
-  ] = useState<{ key: number; cardId: string } | null>(null);
-
+  const [playedCardQueue, setPlayedCardQueue] = useState<{ key: number; cardId: string }[]>([]);
+  const opponentSpellReveal = playedCardQueue[0] ?? null;
+  const seenPlayLogRef = useRef<Set<number> | null>(null);
+  const [playedCardTop, setPlayedCardTop] = useState<number>();
   const opponentPlayAnimationIdRef = useRef(0);
-  const opponentSpellTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Public play records cover both players, all card types, and polling recovery.
+  useEffect(() => {
+    if (!game) {
+      seenPlayLogRef.current = null;
+      queueMicrotask(() => setPlayedCardQueue([]));
+      return;
+    }
+    const seen = seenPlayLogRef.current;
+    seenPlayLogRef.current = new Set(game.log.map(entry => entry.id));
+    if (!seen) return; // Do not replay history when opening/resuming a table.
+    const plays = game.log.filter(entry => !seen.has(entry.id) && entry.chronicle?.kind === "play" && entry.chronicle.sourceCardId)
+      .sort((a, b) => a.id - b.id)
+      .map(entry => ({ key: entry.id, cardId: entry.chronicle!.sourceCardId! }));
+    if (!plays.length) return;
+    queueMicrotask(() => setPlayedCardQueue(queue => [...queue, ...plays]));
+  }, [game]);
+
+  useEffect(() => {
+    if (!opponentSpellReveal) return;
+    const timer = setTimeout(() => setPlayedCardQueue(queue => queue.slice(1)), 3000);
+    const align = () => {
+      const rect = document.querySelector('[data-realms-divider="true"]')?.getBoundingClientRect();
+      if (rect) setPlayedCardTop(rect.top + rect.height / 2);
+    };
+    align();
+    const observer = new ResizeObserver(align);
+    const board = document.querySelector('[data-realms-divider="true"]')?.parentElement;
+    if (board) observer.observe(board);
+    window.addEventListener("resize", align);
+    window.addEventListener("scroll", align, true);
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+      window.removeEventListener("resize", align);
+      window.removeEventListener("scroll", align, true);
+    };
+  }, [opponentSpellReveal]);
 
   const [
     hiddenDrawnIds,
@@ -1458,18 +1496,9 @@ export default function GreatGamePlayPage() {
     if (!pendingOpponentPlay) return;
 
     if (!pendingOpponentPlay.boardInstanceId) {
-      const reveal = { key: pendingOpponentPlay.version, cardId: pendingOpponentPlay.cardId };
       const pendingVersion = pendingOpponentPlay.version;
       const startTimer = setTimeout(() => {
-        setOpponentSpellReveal(reveal);
-        setPendingOpponentPlay((current) =>
-          current?.version === pendingVersion ? null : current,
-        );
-        if (opponentSpellTimerRef.current) clearTimeout(opponentSpellTimerRef.current);
-        opponentSpellTimerRef.current = setTimeout(() => {
-          setOpponentSpellReveal(null);
-          opponentSpellTimerRef.current = null;
-        }, 3000);
+        setPendingOpponentPlay(current => current?.version === pendingVersion ? null : current);
       }, 0);
       return () => clearTimeout(startTimer);
     }
@@ -1525,10 +1554,6 @@ export default function GreatGamePlayPage() {
       if (timer) clearTimeout(timer);
     };
   }, [pendingOpponentPlay, game?.turnNumber, game?.log.length]);
-
-  useEffect(() => () => {
-    if (opponentSpellTimerRef.current) clearTimeout(opponentSpellTimerRef.current);
-  }, []);
 
   function collectNewDraws(
     before: GameState,
@@ -1668,7 +1693,12 @@ export default function GreatGamePlayPage() {
     storedDecks.find((deck) => deck.id === onlineDeckId) ?? null;
 
   function applyOnlineMatchView(match: GreatGameOnlineMatchView) {
-    const previousStateForMatch = onlineMatch?.id === match.id ? gameRef.current : null;
+    const current = onlineMatchRef.current;
+    // Realtime callbacks outlive the render that subscribed. Never restore a
+    // waiting-room identity or let a slower response overwrite newer state.
+    if (current?.id === match.id && (match.version < current.version || (match.version === current.version && current.state))) return;
+    const previousStateForMatch = current?.id === match.id ? gameRef.current : null;
+    onlineMatchRef.current = match;
     setOnlineMatch(match);
     setInviteCopied(false);
     setOnlineMenuError(null);
@@ -1688,12 +1718,15 @@ export default function GreatGamePlayPage() {
     setHoveredCommandCost(null);
 
     if (match.status === "waiting") {
+      gameRef.current = null;
       setGame(null);
       setMode("online-waiting");
       return;
     }
 
     if (match.status === "abandoned") {
+      onlineMatchRef.current = null;
+      gameRef.current = null;
       setGame(null);
       setMode("menu");
       setOnlineMatch(null);
@@ -1708,7 +1741,7 @@ export default function GreatGamePlayPage() {
         ? collectNewDraws(previousState, match.state, match.playerId)
         : [];
 
-      if (mode !== "game" && isMobileGameViewport()) {
+      if (!previousState && isMobileGameViewport()) {
         setTableEntryVisible(true);
         setTableEntryWaitingForLandscape(
           window.matchMedia("(orientation: portrait)").matches
@@ -1726,8 +1759,13 @@ export default function GreatGamePlayPage() {
   }
 
   function applyOnlineStatePatch(patch: GreatGameOnlineStatePatch) {
-    const current = onlineMatch;
-    if (!current || current.id !== patch.id) return;
+    const current = onlineMatchRef.current;
+    if (!current || current.id !== patch.id) return null;
+    if (patch.version <= current.version) return current;
+    if (current.status === "waiting" && patch.status !== "waiting") {
+      void refreshOnlineMatch(current.id);
+      return null;
+    }
 
     const next: GreatGameOnlineMatchView = {
       ...current,
@@ -1739,6 +1777,7 @@ export default function GreatGamePlayPage() {
     };
 
     applyOnlineMatchView(next);
+    return next;
   }
 
   async function parseOnlineResponse(response: Response) {
@@ -1781,11 +1820,16 @@ export default function GreatGamePlayPage() {
   ) {
     if (!matchId) return;
 
+    // Joining may randomize both seats; waiting clients need the full identity
+    // mapping before they can consume projected state-only updates.
+    stateOnly = stateOnly && onlineMatchRef.current?.status !== "waiting";
+
     try {
       const response = await fetch(
         `/api/great-game?match=${encodeURIComponent(matchId)}${stateOnly ? "&stateOnly=1" : ""}`,
         { cache: "no-store" }
       );
+      if (onlineMatchRef.current?.id !== matchId) return;
       const payload = await parseOnlineResponse(response);
       if (payload.match) {
         applyOnlineMatchView(payload.match);
@@ -1957,17 +2001,8 @@ export default function GreatGamePlayPage() {
         applyOnlineMatchView(payload.match);
         return payload.match;
       }
-      if (payload.statePatch && onlineMatch) {
-        const next: GreatGameOnlineMatchView = {
-          ...onlineMatch,
-          status: payload.statePatch.status,
-          version: payload.statePatch.version,
-          state: payload.statePatch.state,
-          updatedAt: payload.statePatch.updatedAt,
-          completedAt: payload.statePatch.completedAt,
-        };
-        applyOnlineMatchView(next);
-        return next;
+      if (payload.statePatch) {
+        return applyOnlineStatePatch(payload.statePatch);
       }
       return null;
     } catch (actionError) {
@@ -5585,8 +5620,8 @@ export default function GreatGamePlayPage() {
       {opponentSpellReveal && (() => {
         const playedCard = getGameCard(opponentSpellReveal.cardId);
         return (
-          <aside key={opponentSpellReveal.key} className={styles.opponentSpellReveal} aria-live="polite">
-            <span className={styles.opponentSpellEyebrow}>Opponent Played</span>
+          <aside key={opponentSpellReveal.key} className={styles.opponentSpellReveal} style={{ top: playedCardTop }} data-card-id={playedCard.id} aria-live="polite">
+            <span className={styles.opponentSpellEyebrow}>Card Played</span>
             <div className={styles.opponentSpellCard} style={tierStyle(playedCard)} data-game-card="true">
               <CardArtwork card={playedCard} className={styles.fullCardArtwork} />
               <CardChrome card={playedCard} cost={playedCard.cost} detailed />
@@ -5759,6 +5794,7 @@ export default function GreatGamePlayPage() {
         <img src="/images/cards/background/deckbg-front.webp" className={styles.innkeeperForeground} alt="" draggable={false} />
         {/* eslint-enable @next/next/no-img-element */}
         <InnkeeperEmotes
+          key={`${onlineMatch?.id ?? localFrameKey}:${visibleSupporter}`}
           match={onlineMatch ?? null}
           buttonClassName={styles.innkeeperInteraction}
           label={innkeeper.name}
