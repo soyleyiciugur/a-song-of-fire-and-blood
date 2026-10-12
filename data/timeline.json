@@ -1289,11 +1289,12 @@
     "events": [
       {
         "title": "Bloodshed on the Blackwood–Bracken border",
-        "description": "Godfrey and Royce Blackwood inspect a clash that has killed Perric Bracken's brother and men of both houses. Godfrey denies premeditation, orders stronger border security and expects Stark support; Royce warns that intervention could unite the Riverlords behind Tully. Neither intent nor a new Stark pledge is established.",
+        "description": "Godfrey and Royce Blackwood inspect a clash that has killed Perric Bracken's younger brother Hendry and men of both houses. Godfrey denies premeditation, orders stronger border security and expects Stark support; Royce warns that intervention could unite the Riverlords behind Tully. Neither intent nor a new Stark pledge is established.",
         "date": "21st of the 8th Moon",
         "characters": [
           "godfrey-blackwood",
-          "royce-blackwood"
+          "royce-blackwood",
+          "hendry-bracken"
         ],
         "kind": "conflict",
         "location": "Blackwood–Bracken border"

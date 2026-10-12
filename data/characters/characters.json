@@ -2091,10 +2091,6 @@
     "house": "-",
     "title": "Knight of the Reach",
     "status": "Dead",
-    "secret": {
-      "status": "Alive",
-      "note": "Imprisoned in the black cells of the Red Keep following his assassination attempt on Prince Gaelor in the tourney lists. Gaelor has claimed him personally."
-    },
     "nameday": {
       "day": 23,
       "moon": 3,
@@ -3731,7 +3727,9 @@
     "father": "-",
     "mother": "-",
     "spouse": "-",
-    "siblings": [],
+    "siblings": [
+      "hendry-bracken"
+    ],
     "children": [],
     "mentor": "-",
     "dragon": "-",
@@ -3759,10 +3757,49 @@
       "jacaelon-targaryen": {
         "overview": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge.",
         "latestDevelopment": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge."
+      },
+      "hendry-bracken": {
+        "overview": "His younger brother, two years his junior.",
+        "latestDevelopment": "Hendry was killed in the renewed Blackwood–Bracken border clash on the Twenty-First Day of the Eighth Moon, ninety-nine AC."
       }
     },
     "summary": "Lord Perric Bracken rules Stone Hedge and stands on one side of the old Blackwood–Bracken feud. Border violence involving his men has renewed tension between the houses and complicated the wider politics of the Riverlands.",
     "quotes": []
+  },
+  {
+    "id": "hendry-bracken",
+    "name": "Hendry Bracken",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Bracken",
+    "title": "Brother of Lord Perric Bracken",
+    "status": "Dead",
+    "age": 37,
+    "height": "-",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [
+      "perric-bracken"
+    ],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {
+      "perric-bracken": {
+        "overview": "His elder brother and Lord of Stone Hedge, two years his senior.",
+        "latestDevelopment": "Hendry's death in the border clash deepens the feud between House Bracken and House Blackwood."
+      }
+    },
+    "summary": "Hendry Bracken was Lord Perric Bracken's younger brother, two years his junior. He was killed in renewed fighting on the Blackwood–Bracken border. Godfrey and Royce Blackwood found his body among the fallen, with an arrow through his throat. Whether his death had been intended remains unresolved.",
+    "quotes": [],
+    "death": {
+      "day": 21,
+      "moon": 8,
+      "year": 99
+    }
   },
   {
     "id": "clover-tully",

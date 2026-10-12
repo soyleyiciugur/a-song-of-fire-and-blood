@@ -7,6 +7,10 @@ import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider
 import ContinueReadingLink from "@/components/reading/ContinueReadingLink";
 import { createClient } from "@/lib/supabase/client";
 import styles from "@/app/characters/[id]/thoughts/innerCourt.module.css";
+import { CharacterPicker, PrivacyFields } from "./InnerCourtFields";
+import { getCharacters } from "@/lib/characters";
+
+const characterNames = new Map<string, string>(getCharacters().map((c) => [c.id, c.name]));
 
 const chapters = getAllChapters();
 const kindLabels: Record<InnerCourtKind, string> = { thought: "Thought", suspicion: "Suspicion", preference: "Like or dislike", belief: "Belief", theory: "Theory", question: "Unresolved question" };
@@ -14,13 +18,23 @@ const statusLabels: Record<InnerCourtEntry["status"], string> = { active: "Activ
 type SortMode = "manual" | "chapter-asc" | "chapter-desc" | "created-asc" | "created-desc";
 type DropTarget = { id: string; edge: "before" | "after" } | null;
 const sortLabels: Record<SortMode, string> = { manual: "Manual order", "chapter-asc": "Chapter · oldest", "chapter-desc": "Chapter · latest", "created-asc": "Added · oldest", "created-desc": "Added · latest" };
-type Draft = Pick<InnerCourtEntry, "chapterSlug" | "kind" | "subject" | "body" | "status">;
-const blankDraft = (): Draft => ({ chapterSlug: chapters[0]?.slug ?? "", kind: "thought", subject: "", body: "", status: "active" });
+type Draft = Pick<InnerCourtEntry, "chapterSlug" | "kind" | "subject" | "body" | "status" | "characterIds" | "isPrivate" | "hideFromGm">;
+const blankDraft = (): Draft => ({ chapterSlug: chapters[chapters.length - 1]?.slug ?? "", kind: "thought", subject: "", body: "", status: "active", characterIds: [], isPrivate: false, hideFromGm: false });
 
 function CourtSelect({ label, value, options, onChange }: { label: string; value: string; options: Array<{ value: string; label: string }>; onChange: (value: string) => void }) {
   const [open, setOpen] = useState(false);
   const selected = options.find((option) => option.value === value)?.label ?? options[0]?.label;
-  return <div className={styles.selectField}>
+  return <div className={styles.selectField} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false); }} onKeyDown={(event) => {
+    if (event.key === "Escape") { setOpen(false); event.currentTarget.querySelector<HTMLButtonElement>("button")?.focus(); }
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      if (!open) { setOpen(true); return; }
+      const buttons = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="option"]'));
+      const active = buttons.indexOf(document.activeElement as HTMLButtonElement);
+      const next = active < 0 ? (event.key === "ArrowDown" ? 0 : buttons.length - 1) : (active + (event.key === "ArrowDown" ? 1 : -1) + buttons.length) % buttons.length;
+      buttons[next]?.focus();
+    }
+  }}>
     <span>{label}</span>
     <div className={styles.courtSelect}>
       <button type="button" aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((current) => !current)}><span>{selected}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg></button>
@@ -29,15 +43,17 @@ function CourtSelect({ label, value, options, onChange }: { label: string; value
   </div>;
 }
 
-function EntryForm({ draft, busy, onChange, onCancel, onSave }: { draft: Draft; busy: boolean; onChange: (draft: Draft) => void; onCancel: () => void; onSave: () => void }) {
+function EntryForm({ draft, busy, onChange, onCancel, onSave, gm }: { draft: Draft; busy: boolean; onChange: (draft: Draft) => void; onCancel: () => void; onSave: () => void; gm: boolean }) {
   return <div className={styles.editor}>
     <div className={styles.editorGrid}>
       <CourtSelect label="Chapter" value={draft.chapterSlug} options={chapters.map((chapter) => ({ value: chapter.slug, label: chapter.title }))} onChange={(value) => onChange({ ...draft, chapterSlug: value })} />
       <CourtSelect label="Kind" value={draft.kind} options={Object.entries(kindLabels).map(([value, label]) => ({ value, label }))} onChange={(value) => onChange({ ...draft, kind: value as InnerCourtKind })} />
       <CourtSelect label="Status" value={draft.status} options={Object.entries(statusLabels).map(([value, label]) => ({ value, label }))} onChange={(value) => onChange({ ...draft, status: value as Draft["status"] })} />
     </div>
-    <label className={styles.field}><span>Character or subject</span><input maxLength={160} value={draft.subject ?? ""} onChange={(event) => onChange({ ...draft, subject: event.target.value })} placeholder="Who or what occupies this thought?" /></label>
+    <CharacterPicker selected={draft.characterIds ?? []} onChange={(characterIds) => onChange({ ...draft, characterIds })}/>
+    <label className={styles.field}><span>Subject or title</span><input maxLength={160} value={draft.subject ?? ""} onChange={(event) => onChange({ ...draft, subject: event.target.value })} placeholder="What occupies this thought?" /></label>
     <label className={styles.field}><span>Canonical internal state</span><textarea maxLength={4000} required value={draft.body} onChange={(event) => onChange({ ...draft, body: event.target.value })} placeholder="Write what the character currently thinks, suspects, believes or questions." /></label>
+    <PrivacyFields gm={gm} isPrivate={Boolean(draft.isPrivate || gm)} hideFromGm={Boolean(draft.hideFromGm)} onChange={(isPrivate, hideFromGm) => onChange({ ...draft, isPrivate, hideFromGm })}/>
     <div className={styles.editorFooter}><span>{draft.body.length}/4000</span><div><button type="button" onClick={onCancel}>Cancel</button><button type="button" className={styles.primaryButton} disabled={busy || !draft.body.trim() || !draft.chapterSlug} onClick={onSave}>{busy ? "Sealing…" : "Seal entry"}</button></div></div>
   </div>;
 }
@@ -52,7 +68,7 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [sortMode, setSortMode] = useState<SortMode>("manual");
+  const [sortMode, setSortMode] = useState<SortMode>("chapter-asc");
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<DropTarget>(null);
   const [settling, setSettling] = useState(false);
@@ -73,25 +89,25 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
 
   function edit(entry: InnerCourtEntry) {
     setEditingId(entry.id); setDeleteId(null); setMessage("");
-    setDraft({ chapterSlug: entry.chapterSlug, kind: entry.kind, subject: entry.subject ?? "", body: entry.body, status: entry.status });
+    setDraft({ chapterSlug: entry.chapterSlug, kind: entry.kind, subject: entry.subject ?? "", body: entry.body, status: entry.status, characterIds: entry.characterIds ?? [], isPrivate: entry.isPrivate, hideFromGm: entry.hideFromGm });
   }
 
   async function save() {
     if (!canEdit || !userId || !draft.body.trim()) return;
     setBusy(true); setMessage("");
-    const payload = { chapter_slug: draft.chapterSlug, kind: draft.kind, subject: draft.subject?.trim() || null, body: draft.body.trim(), status: draft.status, updated_at: new Date().toISOString() };
+    const payload = { chapter_slug: draft.chapterSlug, kind: draft.kind, subject: draft.subject?.trim() || null, body: draft.body.trim(), status: draft.status, character_ids: draft.characterIds ?? [], is_private: characterId === "hrrm" || Boolean(draft.isPrivate), hide_from_gm: Boolean(draft.isPrivate && draft.hideFromGm), updated_at: new Date().toISOString() };
     if (editingId === "new") {
       const { data, error } = await supabase.from("character_inner_court").insert({ ...payload, character_id: characterId, created_by: userId }).select("*").single();
       if (error || !data) setMessage("The new thought could not be sealed.");
       else {
-        setEntries((current) => [...current, { id: data.id, chapterSlug: data.chapter_slug, kind: data.kind, subject: data.subject ?? undefined, body: data.body, status: data.status, supersedes: data.supersedes ?? undefined, createdAt: data.created_at, updatedAt: data.updated_at, sortOrder: data.sort_order }]);
+        setEntries((current) => [...current, { id: data.id, chapterSlug: data.chapter_slug, kind: data.kind, subject: data.subject ?? undefined, body: data.body, status: data.status, supersedes: data.supersedes ?? undefined, createdAt: data.created_at, updatedAt: data.updated_at, sortOrder: data.sort_order, characterIds: data.character_ids, isPrivate: data.is_private, hideFromGm: data.hide_from_gm, surveyKey: data.survey_key ?? undefined }]);
         setEditingId(null); setDraft(blankDraft()); setMessage("Entry sealed.");
       }
     } else if (editingId) {
       const { data, error } = await supabase.from("character_inner_court").update(payload).eq("id", editingId).eq("character_id", characterId).select("*").single();
       if (error || !data) setMessage("The change could not be sealed.");
       else {
-        setEntries((current) => current.map((entry) => entry.id === editingId ? { ...entry, chapterSlug: data.chapter_slug, kind: data.kind, subject: data.subject ?? undefined, body: data.body, status: data.status, updatedAt: data.updated_at } : entry));
+        setEntries((current) => current.map((entry) => entry.id === editingId ? { ...entry, chapterSlug: data.chapter_slug, kind: data.kind, subject: data.subject ?? undefined, body: data.body, status: data.status, updatedAt: data.updated_at, characterIds: data.character_ids, isPrivate: data.is_private, hideFromGm: data.hide_from_gm } : entry));
         setEditingId(null); setMessage("Changes sealed.");
       }
     }
@@ -125,11 +141,11 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
   return <div className={styles.entries}>
     <div className={styles.editBar}><div><strong>{canEdit ? "Your character's Inner Court" : "Inner Court records"}</strong><span>{canEdit ? "Only you can alter this canonical record." : "Arrange the record by chapter or the date it was added."}</span></div><div className={styles.barActions}><CourtSelect label="Sort" value={sortMode} options={Object.entries(sortLabels).map(([value, label]) => ({ value, label }))} onChange={(value) => setSortMode(value as SortMode)} />{canEdit && <button type="button" disabled={editingId !== null} onClick={() => { setEditingId("new"); setDraft(blankDraft()); setMessage(""); }}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>New entry</button>}</div></div>
     {message && <p className={styles.saveMessage} role="status">{message}</p>}
-    {editingId === "new" && <EntryForm draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} />}
-    {visibleSorted.map((entry) => editingId === entry.id ? <EntryForm key={entry.id} draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} /> : <article className={`${styles.entry} ${draggedId === entry.id ? styles.dragging : ""} ${dropTarget?.id === entry.id ? (dropTarget.edge === "before" ? styles.dropBefore : styles.dropAfter) : ""} ${settling ? styles.settling : ""}`} key={entry.id} onDragOver={(event) => { if (!canEdit || sortMode !== "manual" || draggedId === entry.id) return; event.preventDefault(); event.dataTransfer.dropEffect = "move"; const rect = event.currentTarget.getBoundingClientRect(); const edge = event.clientY < rect.top + rect.height / 2 ? "before" : "after"; if (dropTarget?.id !== entry.id || dropTarget.edge !== edge) setDropTarget({ id: entry.id, edge }); }} onDragLeave={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setDropTarget((current) => current?.id === entry.id ? null : current); }} onDrop={(event) => { event.preventDefault(); void moveEntry(entry.id, dropTarget?.id === entry.id ? dropTarget.edge : "before"); }}>
+    {editingId === "new" && <EntryForm gm={characterId === "hrrm"} draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} />}
+    {visibleSorted.map((entry) => editingId === entry.id ? <EntryForm gm={characterId === "hrrm"} key={entry.id} draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} /> : <article className={`${styles.entry} ${draggedId === entry.id ? styles.dragging : ""} ${dropTarget?.id === entry.id ? (dropTarget.edge === "before" ? styles.dropBefore : styles.dropAfter) : ""} ${settling ? styles.settling : ""}`} key={entry.id} onDragOver={(event) => { if (!canEdit || sortMode !== "manual" || draggedId === entry.id) return; event.preventDefault(); event.dataTransfer.dropEffect = "move"; const rect = event.currentTarget.getBoundingClientRect(); const edge = event.clientY < rect.top + rect.height / 2 ? "before" : "after"; if (dropTarget?.id !== entry.id || dropTarget.edge !== edge) setDropTarget({ id: entry.id, edge }); }} onDragLeave={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setDropTarget((current) => current?.id === entry.id ? null : current); }} onDrop={(event) => { event.preventDefault(); void moveEntry(entry.id, dropTarget?.id === entry.id ? dropTarget.edge : "before"); }}>
       {canEdit && <button className={styles.dragHandle} type="button" draggable={sortMode === "manual"} disabled={sortMode !== "manual"} aria-label="Drag to reorder entry" title={sortMode === "manual" ? "Drag to reorder" : "Choose Manual order to rearrange"} onDragStart={(event) => { setDraggedId(entry.id); setDropTarget(null); event.dataTransfer.effectAllowed = "move"; event.dataTransfer.setData("text/plain", entry.id); }} onDragEnd={() => { setDraggedId(null); setDropTarget(null); }}><svg viewBox="0 0 20 24" aria-hidden="true"><circle cx="7" cy="7" r="1"/><circle cx="13" cy="7" r="1"/><circle cx="7" cy="12" r="1"/><circle cx="13" cy="12" r="1"/><circle cx="7" cy="17" r="1"/><circle cx="13" cy="17" r="1"/></svg></button>}
       <div className={styles.entryMeta}><span>{kindLabels[entry.kind]}</span><span>{chapterTitles.get(entry.chapterSlug)}</span></div>
-      {entry.subject && <h2>{entry.subject}</h2>}<p>{entry.body}</p>
+      {entry.isPrivate && <small>{entry.hideFromGm ? "Private ? only you" : "Private ? owner and GM"}</small>}<div className={styles.characterChips}>{entry.characterIds?.map((id) => <span key={id}>{characterNames.get(id) ?? id}</span>)}</div>{entry.subject && <h2>{entry.subject}</h2>}<p>{entry.body}</p>
       <div className={styles.entryBottom}>{entry.status !== "active" ? <small>{statusLabels[entry.status]}</small> : <span />}{canEdit && <div className={styles.entryActions}><button type="button" onClick={() => edit(entry)}>Edit</button><button type="button" onClick={() => setDeleteId(entry.id)}>Remove</button></div>}</div>
       {deleteId === entry.id && <div className={styles.deleteConfirm}><span>Remove this entry permanently?</span><div><button type="button" onClick={() => setDeleteId(null)}>Keep</button><button type="button" disabled={busy} onClick={() => void remove(entry.id)}>Remove</button></div></div>}
     </article>)}

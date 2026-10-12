@@ -17,6 +17,10 @@ export type InnerCourtEntry = {
   createdAt?: string;
   updatedAt?: string;
   sortOrder?: number;
+  characterIds?: string[];
+  isPrivate?: boolean;
+  hideFromGm?: boolean;
+  surveyKey?: string;
 };
 
 export type PlayedCharacterAssignment = {

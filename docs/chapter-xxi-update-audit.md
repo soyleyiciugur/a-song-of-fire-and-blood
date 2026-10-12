@@ -8,7 +8,7 @@ Source: the complete EN and TR arrays of `of-ravens-and-bitter-blood` in
 
 | Scene | Date, eighth moon, ninety-nine AC | Confirmed state | Boundary |
 | --- | --- | --- | --- |
-| Border aftermath | Twenty-first | Godfrey and Royce inspect dead men, including Perric's unnamed brother; Godfrey orders stronger defenses. | Exact toll and premeditation are uncertain. Stark support is Godfrey's expectation, not Rickard's new pledge. |
+| Border aftermath | Twenty-first | Godfrey and Royce inspect dead men, including Hendry Bracken, Perric's younger brother; Godfrey orders stronger defenses. | Exact toll and premeditation are uncertain. Stark support is Godfrey's expectation, not Rickard's new pledge. |
 | Return through the storm | Twenty-first | Cloudgazer and the white dragon reach the Dragonpit; Vhaemys touches its muzzle. | The user explicitly confirmed Vhaemys as rider on 12 October. Identity remains unknown. |
 | Lorenah's chambers | Twenty-first | Daria hears the dragon account, then leaves. Lorenah advises Jace about the mission and asks about Starfall. | Daria is not assigned knowledge of the subsequent private mission discussion. Gaelor remains undecided; Saathos has not replied; the Starfall visit is not arranged. |
 | Jace and Lorenah alone | Twenty-first | Their intimacy continues. | Jace's theory about his endurance does not establish a medical diagnosis. No intimate material is added to community discussion. |
@@ -39,8 +39,12 @@ Source: the complete EN and TR arrays of `of-ravens-and-bitter-blood` in
   they might do when she comes. Explicit debut is now stored as Chapter XXI.
 - Godfrey, Jace, Saera, Vhaemys, Lorenah, Daria, Visenor, Leo, Baelenys,
   Jaery, Baelor and Weylar already have earlier confirmed debut records.
-- Perric's unnamed dead brother is recorded in the clash account without
-  inventing a name, age, parentage or separate named character identity.
+- **Hendry Bracken:** the user identified Perric's dead younger brother on
+  12 October and confirmed a two-year age gap. His profile records age
+  thirty-seven, death on the twenty-first of the eighth moon, ninety-nine AC,
+  and reciprocal sibling links with Perric. No nameday or parentage is invented.
+  Only his corpse appears in Chapter XXI; a living physical debut remains
+  unconfirmed, so `debutChapter` is left unset.
   The unnamed patrolmen, dragonkeepers and servants receive no speculative
   identity records. Edmyn and Nymos do not physically appear in this chapter.
 - Rickard's reported Blackwood maternal kinship does not identify a named

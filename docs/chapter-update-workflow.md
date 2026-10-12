@@ -70,6 +70,14 @@ A partial command must report which downstream stages remain pending.
    fields for newly established family members. Do not manufacture player-owned private beliefs merely to bring
    `data/character-inner-court.ts` or `character_inner_court` up to the latest
    chapter; update only thoughts established by the player or existing canon.
+   Audit `data/inner-court-survey.ts` for character-specific knowledge boundaries
+   and `data/inner-court-chapter-surveys.ts` for explicit scene groups, stable
+   event IDs, canonical timeline source titles and player-specific viewpoints.
+   Add relevant new prompts. Preserve existing question IDs and the chapter
+   context of historical answers. Never auto-answer or publish survey drafts;
+   keep private and GM-hidden records private during all derived-data work.
+   Run `node scripts/test-inner-court-survey.mjs` to validate chapter coverage,
+   question references, knowledge boundaries and independent survey storage.
    When age, death, portrait overrides, world date, or portrait assets change,
    verify `/api/cards/portraits` and character artwork in TGG Cards, Decks, and
    Play. Preserve manual framing in `data/the-great-game/artwork.json`; review

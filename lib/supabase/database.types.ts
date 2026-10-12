@@ -37,6 +37,16 @@ export interface CharacterInnerCourtRow {
   created_at: string;
   updated_at: string;
   sort_order: number;
+  character_ids: string[];
+  is_private: boolean;
+  hide_from_gm: boolean;
+  survey_key: string | null;
+}
+
+export interface InnerCourtSurveyRow {
+  character_id: string; owner_id: string; survey_version: string;
+  answers: import("@/data/inner-court-survey").SurveyAnswers;
+  step: number; revision: number; completed_at: string | null; updated_at: string;
 }
 
 export interface CharacterPlayerAssignmentRow {
@@ -240,7 +250,8 @@ export interface Database {
       great_game_seasons:{Row:import("@/lib/the-great-game/seasons").Season;Insert:never;Update:never;Relationships:[]};
       great_game_collection: { Row: {user_id:string;card_id:string;quantity:number;updated_at:string}; Insert:never; Update:never; Relationships:[] };
       profiles: { Row: Profile; Insert: Omit<Profile, "created_at" | "updated_at" | "role"> & Partial<Pick<Profile, "created_at" | "updated_at" | "role">>; Update: Partial<Pick<Profile, "affinity" | "profile_theme" | "display_name" | "avatar_url" | "banner_url" | "bio" | "notification_last_seen_at" | "played_character_id" | "updated_at">>; Relationships: [] };
-      character_inner_court: { Row: CharacterInnerCourtRow; Insert: Pick<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body"> & Partial<Omit<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body">>; Update: Partial<Pick<CharacterInnerCourtRow, "chapter_slug" | "kind" | "subject" | "body" | "status" | "supersedes" | "sort_order" | "updated_at">>; Relationships: [] };
+      character_inner_court: { Row: CharacterInnerCourtRow; Insert: Pick<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body"> & Partial<Omit<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body">>; Update: Partial<Pick<CharacterInnerCourtRow, "chapter_slug" | "kind" | "subject" | "body" | "status" | "supersedes" | "sort_order" | "updated_at" | "character_ids" | "is_private" | "hide_from_gm">>; Relationships: [] };
+      inner_court_surveys: { Row: InnerCourtSurveyRow; Insert: never; Update: never; Relationships: [] };
       character_player_assignments: { Row: CharacterPlayerAssignmentRow; Insert: Pick<CharacterPlayerAssignmentRow, "character_id" | "player_username"> & Partial<Pick<CharacterPlayerAssignmentRow, "updated_at">>; Update: Partial<Pick<CharacterPlayerAssignmentRow, "player_username" | "updated_at">>; Relationships: [] };
       forum_threads: { Row: { id:string; title:string; body:string; category:string; chapter_slug:string|null; spoiler_through:string|null; author_type:AuthorType; user_author_id:string|null; character_id:string|null; legacy_author_id:string|null; is_locked:boolean; is_pinned:boolean; is_visible:boolean; created_at:string; updated_at:string }; Insert: { id?:string; title:string; body:string; category?:string; chapter_slug?:string|null; spoiler_through?:string|null; author_type?:AuthorType; user_author_id?:string|null; character_id?:string|null; legacy_author_id?:string|null; is_locked?:boolean; is_pinned?:boolean; is_visible?:boolean; created_at?:string; updated_at?:string }; Update: Partial<Database["public"]["Tables"]["forum_threads"]["Insert"]>; Relationships: [] };
       forum_posts: { Row: { id:string; thread_id:string; parent_id:string|null; body:string; author_type:AuthorType; user_author_id:string|null; character_id:string|null; legacy_author_id:string|null; is_visible:boolean; created_at:string; updated_at:string }; Insert: { id?:string; thread_id:string; parent_id?:string|null; body:string; author_type?:AuthorType; user_author_id?:string|null; character_id?:string|null; legacy_author_id?:string|null; is_visible?:boolean; created_at?:string; updated_at?:string }; Update: Partial<Database["public"]["Tables"]["forum_posts"]["Insert"]>; Relationships: [] };
@@ -273,6 +284,7 @@ export interface Database {
       great_game_leaderboard: { Row: GreatGameLeaderboardRow; Relationships: [] };
     };
     Functions: {
+      save_inner_court_survey: { Args: { target_character: string; version_key: string; draft_answers: import("@/data/inner-court-survey").SurveyAnswers; draft_step: number; expected_revision: number; seal: boolean; complete: boolean; sealed_entries: unknown }; Returns: InnerCourtSurveyRow };
       ensure_own_profile: { Args: Record<string, never>; Returns: Profile };
       replace_private_ledger_entries: { Args: { replacement: PrivateLedgerReplacement[] }; Returns: number };
       start_direct_raven: { Args: { target_username: string }; Returns: string };

@@ -20,6 +20,7 @@ import * as handler17 from "@/lib/server-api/direct-raven/share-page/handler";
 import * as handler18 from "@/lib/server-api/direct-raven/share-reel/handler";
 import * as handler19 from "@/lib/server-api/giphy/search/handler";
 import * as handler20 from "@/lib/server-api/great-game/chat/handler";
+import * as innerCourtSurvey from "@/lib/server-api/inner-court/survey/handler";
 import * as handler21 from "@/lib/server-api/great-game/collection/handler";
 import * as handler22 from "@/lib/server-api/great-game/deck-stats/handler";
 import * as handler23 from "@/lib/server-api/great-game/hub/handler";
@@ -62,6 +63,7 @@ const handlers: Record<string, Partial<Record<string, Handler>>> = {
   "direct-raven/share-reel": handler18,
   "giphy/search": handler19,
   "great-game/chat": handler20,
+  "inner-court/survey": innerCourtSurvey,
   "great-game/collection": handler21,
   "great-game/deck-stats": handler22,
   "great-game/hub": handler23,

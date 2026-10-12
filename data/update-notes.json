@@ -2,6 +2,10 @@
   {
     "date": "2026-10-12",
     "items": [
+      "Added short character-specific chapter surveys with separate saved progress, a completion-screen link to the chapter catalogue, and chapter-chronological Inner Court ordering.",
+      "Added character-owned Unspoken Counsel surveys with multiple-choice answers, notes, autosaved drafts, partial transfers to Inner Court and revisitable completed answers, plus a separate private GM survey.",
+      "Expanded Inner Court entries with searchable multiple-character links and private thoughts that can also be hidden from GM HRRM.",
+      "Corrected Brant Costayne's stale hidden living status and added Hendry Bracken's profile, death record and sibling links with Perric.",
       "Preserved existing API addresses while consolidating server endpoints and selecting Vercel's grouped-function build pipeline for Hobby-plan deployments.",
       "Added selective institutional, Aldren and Mara replies to four recent Tavern discussions, with Mara managing the Cupbearer account in Aldren's courtly house style.",
       "Added verified fictional Iron Bank, King?s Landing harbour, Faith and Lannisport coin-exchange accounts with distinct community voices.",
