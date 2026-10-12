@@ -64,7 +64,9 @@ Source: the complete EN and TR arrays of `of-ravens-and-bitter-blood` in
 - Dragon appearance anchors point to actual Cloudgazer and white-dragon text.
   Boneskin receives no Chapter XXI appearance. Existing card framing is preserved;
   the two-day world-date change crosses no recorded nameday or age threshold.
-- Quotes remain unchanged by explicit user choice. No major Kingsguard deed,
+- Quotes were initially left unchanged by explicit user choice. A subsequent
+  manual selection added thirteen Chapter XXI quotations; canonical speaker
+  and chapter references pass current data validation. No major Kingsguard deed,
   publishable Scroll, artifact change, new union, succession investiture or
   gallery upload is established. The chapter cover is not duplicated in Gallery.
 - Inner Court receives no invented player-owned beliefs.
@@ -140,11 +142,23 @@ Source: the complete EN and TR arrays of `of-ravens-and-bitter-blood` in
   Vhaemys's social-AU continuity note were updated; no deployment was performed.
 - Scoped `git diff --check` passed. The full worktree check reports existing
   trailing whitespace in `lib/the-great-game/cards.ts`, outside this task.
-- The dedicated `/images/chapters/of-ravens-and-bitter-blood.webp` file is
-  absent. The existing reader fallback renders the homepage artwork correctly;
-  no image is invented or copied into Gallery. Dedicated chapter art remains
-  an asset gap, not a broken reader view.
+- Final asset refresh on 12 October: the dedicated
+  `/images/chapters/of-ravens-and-bitter-blood.webp` now exists, together with
+  Edric's and Royce's character/mini portraits. Supplied Celtigar artwork was
+  named `baltimor-celtigar`; identical copies at the canonical `lord-celtigar`
+  character and mini-portrait paths now connect it to his existing record.
+  Original supplied assets and the stable character ID are preserved. No
+  chapter cover is duplicated into Gallery.
 - No Git commit, push, deployment or live chapter publication was performed.
   Live chapter/discussion URLs and new-chapter notification delivery therefore
-  remain post-publication checks. Quotes are intentionally unchanged by the
-  user's selection; there is no outstanding quotation decision.
+  remain post-publication checks. The later manual quotation selection is
+  already stored; there is no outstanding quotation decision.
+- Final readiness recheck on 12 October passed canonical-data validation,
+  forum/comment validation, reaction-target coverage, notification target
+  routing, community publication tests, TypeScript, character portrait resolver
+  tests and a complete production build (167 generated pages). Direct checks
+  confirm all four explicit debuts, family reciprocity, chapter/dragon anchors,
+  world date and journey continuity. Supabase reports all local migrations
+  applied remotely. Celtigar's canonical portrait copies are byte-identical to
+  the supplied assets. Local VAPID public/private keys remain absent; browser
+  push setup and post-deployment live checks are the remaining delivery items.
