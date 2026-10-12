@@ -12,7 +12,7 @@ for(let round=1;round<=25;round++){
 const chronicle=fs.readFileSync('components/the-great-game/Chronicle.tsx','utf8');
 assert.match(chronicle,/const rounds = useMemo/);
 assert.match(chronicle,/parts\.map\(\(\{turn,events:turnEvents\}\)/);
-const api=fs.readFileSync('app/api/great-game/rank-history/route.ts','utf8');
+const api=fs.readFileSync('lib/server-api/great-game/rank-history/handler.ts','utf8');
 assert.match(api,/\.eq\("match_type","ranked"\)/);
 const ui=fs.readFileSync('components/the-great-game/GreatGameTable.tsx','utf8');
 assert.match(ui,/Card Burned/);

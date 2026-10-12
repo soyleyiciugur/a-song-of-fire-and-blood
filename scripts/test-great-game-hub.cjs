@@ -59,8 +59,8 @@ Module._load = function(request, parent, isMain) {
   if(request==='@/lib/supabase/admin')return {createAdminClient:()=>admin};
   return load.call(this,request,parent,isMain);
 };
-const spectate = require('../app/api/great-game/spectate/route.ts');
-const invite = require('../app/api/great-game/invite/route.ts');
+const spectate = require('../lib/server-api/great-game/spectate/handler.ts');
+const invite = require('../lib/server-api/great-game/invite/handler.ts');
 (async()=>{
   const request = new Request(`http://localhost/api/great-game/spectate?match=${matchId}`);
   let response=await spectate.GET(request); assert.equal(response.status,200); assert(!(JSON.stringify(await response.json()).includes('private-')));

@@ -19,7 +19,7 @@ function query(name){let payload=null,operation='read',single=false,range=[0,499
 const client={auth:{getUser:async()=>({data:{user:signedIn?user:null}})},from:query};
 const originalLoad=Module._load;
 Module._load=function(request,...args){if(request==='@/lib/supabase/server')return{createClient:async()=>client};if(request==='@/lib/supabase/admin')return{createAdminClient:()=>client};if(request==='next/server'){const next=originalLoad.call(this,request,...args);return{...next,after:()=>{}};}return originalLoad.call(this,request,...args)};
-const {POST,GET}=require('../app/api/great-game/route.ts');const {GET:collection}=require('../app/api/great-game/collection/route.ts');
+const {POST,GET}=require('../lib/server-api/great-game/handler.ts');const {GET:collection}=require('../lib/server-api/great-game/collection/handler.ts');
 const post=body=>POST(new Request('http://localhost/api/great-game',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}));
 (async()=>{
  for(const type of['custom','ranked',undefined]){
