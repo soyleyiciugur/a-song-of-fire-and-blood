@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { getAllChapters } from "@/data/chapters";
 import type { InnerCourtEntry, InnerCourtKind } from "@/data/character-inner-court";
 import { useSpoilerBoundary } from "@/components/reading/ReadingProgressProvider";
@@ -9,6 +9,8 @@ import { createClient } from "@/lib/supabase/client";
 import styles from "@/app/characters/[id]/thoughts/innerCourt.module.css";
 import { CharacterPicker, PrivacyFields } from "./InnerCourtFields";
 import { getCharacters } from "@/lib/characters";
+
+import { hasManualInnerCourtOrder, presentInnerCourtEntry } from "@/lib/inner-court-presentation";
 
 const characterNames = new Map<string, string>(getCharacters().map((c) => [c.id, c.name]));
 
@@ -68,7 +70,7 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [sortMode, setSortMode] = useState<SortMode>("chapter-asc");
+  const [sortMode, setSortMode] = useState<SortMode>(() => hasManualInnerCourtOrder(initialEntries) ? "manual" : "chapter-desc");
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<DropTarget>(null);
   const [settling, setSettling] = useState(false);
@@ -89,7 +91,7 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
 
   function edit(entry: InnerCourtEntry) {
     setEditingId(entry.id); setDeleteId(null); setMessage("");
-    setDraft({ chapterSlug: entry.chapterSlug, kind: entry.kind, subject: entry.subject ?? "", body: entry.body, status: entry.status, characterIds: entry.characterIds ?? [], isPrivate: entry.isPrivate, hideFromGm: entry.hideFromGm });
+    setDraft({ chapterSlug: entry.chapterSlug, kind: entry.kind, subject: presentInnerCourtEntry(characterId, entry).subject ?? "", body: entry.body, status: entry.status, characterIds: entry.characterIds ?? [], isPrivate: entry.isPrivate, hideFromGm: entry.hideFromGm });
   }
 
   async function save() {
@@ -131,7 +133,7 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
     const target = ordered.findIndex((entry) => entry.id === targetId);
     if (target < 0) { setDropTarget(null); return; }
     ordered.splice(edge === "after" ? target + 1 : target, 0, moved);
-    const reordered = ordered.map((entry, index) => ({ ...entry, sortOrder: index }));
+    const reordered = ordered.map((entry, index) => ({ ...entry, sortOrder: index - ordered.length }));
     setEntries(reordered); setDraggedId(null); setDropTarget(null); setSettling(true); setMessage("Saving order…");
     window.setTimeout(() => setSettling(false), 320);
     const results = await Promise.all(reordered.map((entry) => supabase.from("character_inner_court").update({ sort_order: entry.sortOrder }).eq("id", entry.id).eq("character_id", characterId)));
@@ -142,13 +144,19 @@ export default function InnerCourtContent({ characterId, initialEntries, canEdit
     <div className={styles.editBar}><div><strong>{canEdit ? "Your character's Inner Court" : "Inner Court records"}</strong><span>{canEdit ? "Only you can alter this canonical record." : "Arrange the record by chapter or the date it was added."}</span></div><div className={styles.barActions}><CourtSelect label="Sort" value={sortMode} options={Object.entries(sortLabels).map(([value, label]) => ({ value, label }))} onChange={(value) => setSortMode(value as SortMode)} />{canEdit && <button type="button" disabled={editingId !== null} onClick={() => { setEditingId("new"); setDraft(blankDraft()); setMessage(""); }}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>New entry</button>}</div></div>
     {message && <p className={styles.saveMessage} role="status">{message}</p>}
     {editingId === "new" && <EntryForm gm={characterId === "hrrm"} draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} />}
-    {visibleSorted.map((entry) => editingId === entry.id ? <EntryForm gm={characterId === "hrrm"} key={entry.id} draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} /> : <article className={`${styles.entry} ${draggedId === entry.id ? styles.dragging : ""} ${dropTarget?.id === entry.id ? (dropTarget.edge === "before" ? styles.dropBefore : styles.dropAfter) : ""} ${settling ? styles.settling : ""}`} key={entry.id} onDragOver={(event) => { if (!canEdit || sortMode !== "manual" || draggedId === entry.id) return; event.preventDefault(); event.dataTransfer.dropEffect = "move"; const rect = event.currentTarget.getBoundingClientRect(); const edge = event.clientY < rect.top + rect.height / 2 ? "before" : "after"; if (dropTarget?.id !== entry.id || dropTarget.edge !== edge) setDropTarget({ id: entry.id, edge }); }} onDragLeave={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setDropTarget((current) => current?.id === entry.id ? null : current); }} onDrop={(event) => { event.preventDefault(); void moveEntry(entry.id, dropTarget?.id === entry.id ? dropTarget.edge : "before"); }}>
+    {visibleSorted.map((entry, index) => {
+      const presentation = presentInnerCourtEntry(characterId, entry);
+      const startsChapter = (sortMode === "chapter-asc" || sortMode === "chapter-desc") && (index === 0 || visibleSorted[index - 1].chapterSlug !== entry.chapterSlug);
+      return <Fragment key={entry.id}>
+      {startsChapter && <div className={styles.chapterSeparator} role="separator" aria-label={chapterTitles.get(entry.chapterSlug)}><span>{chapterTitles.get(entry.chapterSlug)}</span></div>}
+      {editingId === entry.id ? <EntryForm gm={characterId === "hrrm"} key={entry.id} draft={draft} busy={busy} onChange={setDraft} onCancel={() => setEditingId(null)} onSave={() => void save()} /> : <article className={`${styles.entry} ${draggedId === entry.id ? styles.dragging : ""} ${dropTarget?.id === entry.id ? (dropTarget.edge === "before" ? styles.dropBefore : styles.dropAfter) : ""} ${settling ? styles.settling : ""}`} key={entry.id} onDragOver={(event) => { if (!canEdit || sortMode !== "manual" || draggedId === entry.id) return; event.preventDefault(); event.dataTransfer.dropEffect = "move"; const rect = event.currentTarget.getBoundingClientRect(); const edge = event.clientY < rect.top + rect.height / 2 ? "before" : "after"; if (dropTarget?.id !== entry.id || dropTarget.edge !== edge) setDropTarget({ id: entry.id, edge }); }} onDragLeave={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setDropTarget((current) => current?.id === entry.id ? null : current); }} onDrop={(event) => { event.preventDefault(); void moveEntry(entry.id, dropTarget?.id === entry.id ? dropTarget.edge : "before"); }}>
       {canEdit && <button className={styles.dragHandle} type="button" draggable={sortMode === "manual"} disabled={sortMode !== "manual"} aria-label="Drag to reorder entry" title={sortMode === "manual" ? "Drag to reorder" : "Choose Manual order to rearrange"} onDragStart={(event) => { setDraggedId(entry.id); setDropTarget(null); event.dataTransfer.effectAllowed = "move"; event.dataTransfer.setData("text/plain", entry.id); }} onDragEnd={() => { setDraggedId(null); setDropTarget(null); }}><svg viewBox="0 0 20 24" aria-hidden="true"><circle cx="7" cy="7" r="1"/><circle cx="13" cy="7" r="1"/><circle cx="7" cy="12" r="1"/><circle cx="13" cy="12" r="1"/><circle cx="7" cy="17" r="1"/><circle cx="13" cy="17" r="1"/></svg></button>}
       <div className={styles.entryMeta}><span>{kindLabels[entry.kind]}</span><span>{chapterTitles.get(entry.chapterSlug)}</span></div>
-      {entry.isPrivate && <small>{entry.hideFromGm ? "Private ? only you" : "Private ? owner and GM"}</small>}<div className={styles.characterChips}>{entry.characterIds?.map((id) => <span key={id}>{characterNames.get(id) ?? id}</span>)}</div>{entry.subject && <h2>{entry.subject}</h2>}<p>{entry.body}</p>
+      {entry.isPrivate && <small>{entry.hideFromGm ? "Private ? only you" : "Private ? owner and GM"}</small>}<div className={styles.characterChips}>{entry.characterIds?.map((id) => <span key={id}>{characterNames.get(id) ?? id}</span>)}</div>{presentation.subject && <h2>{presentation.subject}</h2>}{presentation.selections.length > 0 && <ul className={styles.answerList}>{presentation.selections.map((selection) => <li key={selection}>{selection}</li>)}</ul>}{presentation.body && <p className={styles.entryBody}>{presentation.body}</p>}
       <div className={styles.entryBottom}>{entry.status !== "active" ? <small>{statusLabels[entry.status]}</small> : <span />}{canEdit && <div className={styles.entryActions}><button type="button" onClick={() => edit(entry)}>Edit</button><button type="button" onClick={() => setDeleteId(entry.id)}>Remove</button></div>}</div>
       {deleteId === entry.id && <div className={styles.deleteConfirm}><span>Remove this entry permanently?</span><div><button type="button" onClick={() => setDeleteId(null)}>Keep</button><button type="button" disabled={busy} onClick={() => void remove(entry.id)}>Remove</button></div></div>}
-    </article>)}
+    </article>}</Fragment>;
+    })}
     {locked && <div className={styles.locked}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 10V7.5a4.5 4.5 0 0 1 9 0V10M6 10h12v10H6z" /></svg><div><strong>Later thoughts remain sealed</strong><span>Your reading boundary protects every detail of what changes next.</span><ContinueReadingLink /></div></div>}
   </div>;
 }

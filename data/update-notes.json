@@ -2,6 +2,7 @@
   {
     "date": "2026-10-12",
     "items": [
+      "Improved Inner Court survey records with bulleted answers, clearer question headings, chapter dividers and latest-chapter sorting that remembers saved manual orders; removed four introductory example thoughts.",
       "Added short character-specific chapter surveys with separate saved progress, a completion-screen link to the chapter catalogue, and chapter-chronological Inner Court ordering.",
       "Added character-owned Unspoken Counsel surveys with multiple-choice answers, notes, autosaved drafts, partial transfers to Inner Court and revisitable completed answers, plus a separate private GM survey.",
       "Expanded Inner Court entries with searchable multiple-character links and private thoughts that can also be hidden from GM HRRM.",

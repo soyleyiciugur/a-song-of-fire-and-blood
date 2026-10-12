@@ -18,6 +18,7 @@ for (const character of ['jacaelon-targaryen', 'visenor-targaryen', 'gaelor-targ
     q.characters.forEach(id => assert.ok(characterIds.has(id), `${character}/${q.id}: unknown character ${id}`));
     assert.equal(answerBody(q, { choices: [abstentions[0]], note: '' }), null, 'abstentions must not invent thoughts');
     assert.equal(answerBody(q, { choices: [], note: ' My own thought. ' }), 'My own thought.');
+    assert.equal(q.subject, q.prompt, 'onboarding titles retain the question context');
   }
 }
 assert.deepEqual(getSurveyQuestions('unassigned-character'), []);
@@ -28,6 +29,19 @@ const timeline = JSON.parse(readFileSync('data/timeline.json', 'utf8'));
 const chapterCompiled = ts.transpileModule(readFileSync('data/inner-court-chapter-surveys.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
 new Function('exports', 'require', chapterCompiled)(chapterModule.exports, (path) => path === './timeline.json' ? { default: timeline } : path === './inner-court-survey' ? surveyModule.exports : { getAllChapters: () => chapterData });
 const { getChapterSurveyQuestions, chapterSurveyEvents, chapterSurveyScope } = chapterModule.exports;
+const presentationModule = {exports:{}};
+const presentationCode = ts.transpileModule(readFileSync('lib/inner-court-presentation.ts','utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
+new Function('exports','require',presentationCode)(presentationModule.exports, path => path.endsWith('inner-court-survey') ? surveyModule.exports : chapterModule.exports);
+const {presentInnerCourtEntry,hasManualInnerCourtOrder} = presentationModule.exports;
+const compass = getSurveyQuestions('jacaelon-targaryen')[0];
+const example = {id:'example',chapterSlug:compass.chapter,subject:compass.legacySubject,surveyKey:`${surveyModule.exports.SURVEY_VERSION}:${compass.id}`,body:compass.options.slice(0,4).join('\n\n')+'\n\nA personal note.'};
+const expectedPresentation = {subject:compass.prompt,selections:compass.options.slice(0,4),body:'A personal note.'};
+assert.deepEqual(presentInnerCourtEntry('jacaelon-targaryen',example),expectedPresentation);
+assert.deepEqual(presentInnerCourtEntry('jacaelon-targaryen',{...example,body:answerBody(compass,{choices:compass.options.slice(0,4),note:'A personal note.'})}),expectedPresentation);
+assert.equal(presentInnerCourtEntry('jacaelon-targaryen',{...example,subject:'My own title'}).subject,'My own title');
+assert.equal(hasManualInnerCourtOrder([{id:'new',sortOrder:0},{id:'10000000-0000-4000-8000-000000000002',sortOrder:1}]),false);
+assert.equal(hasManualInnerCourtOrder([{id:'example',sortOrder:-1}]),true);
+assert.equal(hasManualInnerCourtOrder([{id:'example',sortOrder:1}]),true,'legacy owner orders are preserved');
 assert.equal(Object.keys(chapterSurveyEvents).length, chapterData.length, 'every published chapter has an editorial inventory');
 for (const chapter of chapterData) {
   const events = chapterSurveyEvents[chapter.slug];

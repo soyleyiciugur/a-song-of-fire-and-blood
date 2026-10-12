@@ -64,6 +64,15 @@ Implementation date: 2026-10-12 (Europe/Istanbul).
 
 ## Delivery and validation
 
+Survey selections render as individual bullets, including answers saved in the
+original paragraph format. Onboarding entry headings use the actual question;
+custom titles remain intact. Chapter sorting defaults to latest and groups
+chapters with dividers. An owner-saved manual order uses negative `sort_order`
+positions to distinguish it from the original non-negative seed positions,
+without changing the schema. The four retired Visenor/Gaelor examples were
+deleted directly by their exact seed UUIDs; the idempotent cleanup migration
+`20261012170000_remove_inner_court_examples.sql` also removes them on new installs.
+
 The required schema changes are
 `supabase/migrations/20261012150000_inner_court_survey_privacy.sql` and
 `supabase/migrations/20261012160000_inner_court_chapter_surveys.sql`.

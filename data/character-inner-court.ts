@@ -56,42 +56,8 @@ export const innerCourtEntries: Record<string, InnerCourtEntry[]> = {
       status: "active",
     },
   ],
-  "visenor-targaryen": [
-    {
-      id: "visenor-family-doubt",
-      chapterSlug: "the-poison-beneath-the-crown",
-      kind: "question",
-      subject: "His siblings",
-      body: "If poison can reach the king's own table, which bonds within the royal family can still be trusted without reservation?",
-      status: "active",
-    },
-    {
-      id: "visenor-starfall-fear",
-      chapterSlug: "judgment-by-blood",
-      kind: "suspicion",
-      subject: "Starfall",
-      body: "The report of burned men and a loose dragon points toward Boneskin. If the dragon has left the mountains, Rhaella may be caught in whatever happened there.",
-      status: "active",
-    },
-  ],
-  "gaelor-targaryen": [
-    {
-      id: "gaelor-dead-witness",
-      chapterSlug: "the-poison-beneath-the-crown",
-      kind: "question",
-      subject: "The assassin",
-      body: "The dying man's accusation named the Hand, but killing him ended any chance to learn whether it was truth, a lie, or bait.",
-      status: "active",
-    },
-    {
-      id: "gaelor-stepstones",
-      chapterSlug: "judgment-by-blood",
-      kind: "theory",
-      subject: "The Stepstones",
-      body: "A victory in the Stepstones, won with Braavosi support, could restore the authority and honour expected of an heir more decisively than another season at court.",
-      status: "active",
-    },
-  ],
+  "visenor-targaryen": [],
+  "gaelor-targaryen": [],
 };
 
 export function getPlayedCharacterAssignment(characterId: string) {

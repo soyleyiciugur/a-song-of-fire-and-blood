@@ -3,12 +3,12 @@ import type { InnerCourtKind } from "./character-inner-court";
 export const SURVEY_VERSION = "unspoken-counsel-v1";
 export type SurveyAnswer = { choices: string[]; note: string; private: boolean; hideFromGm: boolean };
 export type SurveyAnswers = Record<string, SurveyAnswer>;
-export type SurveyQuestion = { id: string; section: string; chapter: string; subject: string; characters: string[]; kind: InnerCourtKind; prompt: string; options: string[] };
+export type SurveyQuestion = { id: string; section: string; chapter: string; subject: string; legacySubject?: string; characters: string[]; kind: InnerCourtKind; prompt: string; options: string[] };
 const first = "the-poison-beneath-the-crown";
 const recent = "of-ravens-and-bitter-blood";
 const judgment = "judgment-by-blood";
 export const abstentions = ["This is not relevant to my character", "I have no thoughts on this yet", "I would rather leave this unanswered"];
-const q = (id: string, section: string, chapter: string, subject: string, characters: string[], prompt: string, options: string[], kind: InnerCourtKind = "thought"): SurveyQuestion => ({ id, section, chapter, subject, characters, prompt, options, kind });
+const q = (id: string, section: string, chapter: string, legacySubject: string, characters: string[], prompt: string, options: string[], kind: InnerCourtKind = "thought"): SurveyQuestion => ({ id, section, chapter, subject: prompt, legacySubject, characters, prompt, options, kind });
 const general = (gm: boolean): SurveyQuestion[] => gm ? [] : [
   q("compass", "The person within", first, "My guiding principle", [], "What does your character most want to protect?", ["The people I love", "My house and its future", "My freedom to choose", "The realm, even at a personal cost", "My honour and the person I want to become"]),
   q("trust", "The person within", first, "Trust", [], "What allows someone to earn your character's trust?", ["Loyalty when it costs them something", "Honesty, including uncomfortable truths", "Shared interests and clear terms", "Time and consistent actions", "Understanding me without trying to control me"]),
@@ -69,5 +69,5 @@ export function getSurveyQuestions(characterId: string): SurveyQuestion[] {
 export function answerBody(question: SurveyQuestion, answer: SurveyAnswer): string | null {
   const selections = answer.choices.filter((choice) => question.options.includes(choice));
   const note = answer.note.trim();
-  return selections.length || note ? [...selections, note].filter(Boolean).join("\n\n") : null;
+  return selections.length || note ? [selections.map((selection) => `- ${selection}`).join("\n"), note].filter(Boolean).join("\n\n") : null;
 }
