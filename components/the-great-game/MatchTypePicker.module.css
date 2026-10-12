@@ -1,0 +1,10 @@
+.picker{border:0;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;min-width:0}
+.picker legend{margin-bottom:7px;color:#bda17d;font:12px/1.2 var(--font-body),Georgia,serif}
+.picker label{position:relative;display:flex!important;align-items:flex-start;gap:9px;padding:10px;border:1px solid #96704466;background:linear-gradient(#24190f,#150f0b);color:#e7cda4;cursor:pointer;min-width:0;transition:background .15s,border-color .15s}
+.picker label[data-selected=true]{border-color:#d0a368;background:linear-gradient(#44301c,#27170f);box-shadow:inset 0 0 0 1px #ad865331}
+.nativeRadio{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
+.picker label:focus-within{outline:2px solid #e1b573;outline-offset:2px}
+.seal{display:grid;place-items:center;flex:none;width:17px;height:17px;margin-top:2px;border:1px solid #997348;border-radius:50%;background:#110c0a;box-shadow:inset 0 0 0 3px #18110d}
+label[data-selected=true] .seal{border-color:#e3c18d;background:radial-gradient(circle,#e5b975 0 40%,#59361d 43% 64%,#18110d 67%)}
+.picker label>span{display:grid;gap:3px;min-width:0}.picker strong{font:14px/1.2 var(--font-hotd),Georgia,serif}.picker small{color:#d7b383;font-size:11px}.picker span span{font-size:11px;line-height:1.35}.picker:disabled{opacity:.65}
+@media(max-width:460px){.picker{grid-template-columns:1fr}}

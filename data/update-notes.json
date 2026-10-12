@@ -1,5 +1,113 @@
 [
   {
+    "date": "2026-10-12",
+    "items": [
+      "Added selective institutional, Aldren and Mara replies to four recent Tavern discussions, with Mara managing the Cupbearer account in Aldren's courtly house style.",
+      "Added verified fictional Iron Bank, King?s Landing harbour, Faith and Lannisport coin-exchange accounts with distinct community voices.",
+      "Added a verified Cupbearer institution account and separate Aldren and Mara character accounts with distinct tavern voices.",
+      "Added thirteen selected character quotations from Chapter XXI: Of Ravens and Bitter Blood.",
+      "Added italic, bold, bold italic, strikethrough, inline code and underlined chapter text in both reader views, preserving formatting across page breaks.",
+      "Added Chapter XXI's timeline, Starfall journey, new character and family records, white-dragon rider and appearance records, border-clash archive, and Taverns discussion with scheduled follow-ups.",
+      "Identified Annara's father, Lord Celtigar, as Bartimos Celtigar in character records.",
+      "Added confirmed ages and heights for Edric Dayne, Bartimos Celtigar and Royce Blackwood, and corrected Maron Dayne's character and card descriptions to identify him as a diplomat.",
+      "Restored the correct character links for four existing quotations.",
+      "Expanded Chapter XXI's main Taverns discussion and added focused dragon-care, Starfall-clue and food-supply conversations with replies scheduled across the following week.",
+      "Added four Chapter XXI Tavern games and meme threads, with varied conversations and follow-up replies across the week.",
+      "Show verified account badges beside Tavern topic authors, including gold badges for fictional institutions."
+    ]
+  },
+  {
+    "date": "2026-10-11",
+    "items": [
+      "Removed the frame around the Ready for the table checkmark.",
+      "Excluded luck versus luck_ii playtest matches from match history, ratings, season standings and player statistics.",
+      "Kept Ranks Ledger and podium profile photos inside their circular frames.",
+      "Updated the Satchel navigation icon to the original-quality satchel artwork, with frameless hover and press feedback and a matching active-tab indicator.",
+      "Added matching press feedback to all Great Game navigation tabs.",
+      "Added dedicated Unique, Grounded, Fall, Exhausted, Deployed, Arrival and Event artwork to the Encyclopedia rules.",
+      "Capitalized trait names in the Encyclopedia card-trait rules and related-card links.",
+      "Displayed the Guard and Challenge icons with an x separator in the Encyclopedia context rules.",
+      "Standardized Exchange terminology across game labels, Chronicle, match results, Encyclopedia rules and card abilities.",
+      "Updated the Encyclopedia Command icon to use the dedicated Command artwork.",
+      "Added an Ability Types reference below Card traits, listed Event card effects as Effect and used Lorenah Dayne to illustrate Event targeting and moved Unit states above Card traits in the Encyclopedia.",
+      "Added Exchange and Turn icons to the Encyclopedia and combined the ruler-turn explanations.",
+      "Arranged paired Encyclopedia icons horizontally, enlarged reference icons to 40px and reduced left padding while keeping rule labels aligned and row content vertically centered.",
+      "Added Intrigue and Confront plus Swift and Schemer explanations with linked example cards to the Encyclopedia and refreshed Dragonrider artwork across card surfaces."
+    ]
+  },
+  {
+    "date": "2026-10-10",
+    "items": [
+      "Online tables now use code-based URLs such as /cards/play?=ABC123 and reopen the selected table after a refresh.",
+      "Refined table tabs, aligned deck readiness with deck names, and standardized Friendly and Crown match labels.",
+      "Clarified Chronicle round and ruler-turn headings, simplified table status, and refined innkeeper departure prompts.",
+      "Compacted deck filters, contained right-aligned tavern quotations, restored rating-proportional podium columns and full-page ranking scroll.",
+      "Added scattering ash particles to the final stage of burned-card reveals.",
+      "Added a Satchel bag tab beside the game profile and removed redundant collection navigation buttons.",
+      "Added reverse sorting to Decks, unified deck readiness seals, and tightened table spacing and quotation placement.",
+      "Open Tables now includes ongoing games available to signed-in spectators, while respecting player blocks and hiding invitation codes and private card zones.",
+      "Anchored Host and Join controls to the bottom of the table panel and unified game-page heading positions, typography and content widths.",
+      "Smoothed burned-card reveals with an organic dissolving edge and fine drifting ash, replacing the tiled mosaic effect.",
+      "Corrected burn-mask scaling so cards start fully visible and dissolve upward without filling back in.",
+      "Delayed burned-card reveal dismissal until the full burn and drifting ash have completed.",
+      "Burned cards and their caption now break into individually timed pixels with stronger rightward ash at a steady pace, without row-based strips.",
+      "Innkeepers now play the Salt clip only in response to an opponent's Salt emote, never as a random idle action.",
+      "Rebuilt burned-card dust from the actual card and caption pixels across canvas layers, with linear rightward drift and completion-based dismissal.",
+      "Prepared burned-card textures before revealing them for a seamless start, and preserved distinct Command gem images during capture.",
+      "Royal Favor can now grant 11/10 temporary Command; right-side card reveals use closed information panels, and burned-card animations start sooner and finish faster.",
+      "Restored right-side reveal card dimensions after compact card styling caused the reveal to collapse.",
+      "Restored Cancel on card-play confirmation while retaining Stay on the leave-game prompt.",
+      "Burned cards now begin with an intact, fully opaque image that gradually fades into drifting dust.",
+      "Restored the played-card entrance before burning and included the Card Burned caption inside the captured reveal.",
+      "Reduced burned-card animation overhead with fewer canvas layers, compositor-only motion, and lower-allocation pixel preparation while preserving timing.",
+      "Updated Command meter, Royal Favor and Chronicle icons to fitted Command artwork, using the painted highlighted variant for active states and a restrained glow behind Command spend previews and Royal Favor on hover or keyboard focus, with immediate glow activation.",
+      "Royal Favor bonus Command now remains in its upper-right icon with a slow glow until spent, without adding a regular meter icon.",
+      "Right-aligned Royal Favor closer to the Command panel edge and enlarged meter icons by reducing gaps within the existing meter width.",
+      "Preserved the Command cost number on burned-card captures so it remains visible and dissolves with the gem.",
+      "Removed redundant image decoding and bounded font preparation to keep burned-card captures from stalling before the ash animation.",
+      "Preserved transparent tier-gem backgrounds in burned-card captures by rasterizing the original gems before snapshotting.",
+      "Retry a failed first-load burn capture once before falling back, and verified public burn events reach both players for either card owner.",
+      "Added the Dragon artwork to dragon-card trait rows and increased trait icon source resolution for sharper small displays."
+    ]
+  },
+  {
+    "date": "2026-10-09",
+    "items": [
+      "Added shared deck legality feedback in the workshop and pre-match flows, blocking invalid rosters before opening, joining or inviting to a table.",
+      "Added personal deck records for completed online matches, grouped by exact card roster with wins, losses, draws, abandons and win rate.",
+      "Reduced the Social Reply icon to match the upvote icon size.",
+      "Distinguished game turns from each ruler's own turns in Chronicle and turn notices, including explicit engine counters and support for older match logs.",
+      "Added a two-player match-result breakdown with final Standing, ruler turns, cards played by type, conflicts initiated and remaining cards; spectators also receive the breakdown and abandoned tables retain their final state.",
+      "Unified card-play feedback and legal target highlights with engine validation, including protected Characters and two-target Events; unavailable cards explain their restrictions before a play is submitted.",
+      "Added online ruler-turn timers with 60- and 90-second reminders and no automatic penalty, pausing during mandatory effects, plus debounced away/return notices and a manual Step away control.",
+      "Added personal rating and tier history to Ranks with older-match pagination, plus season standings calculated from ranked-only net rating changes. The opening Alpha season includes earlier ranked matches without resetting ratings.",
+      "Removed Naela's obsolete Ready-state Event immunity to match North of Tyrosh: she takes 1 damage at the end of her ruler's turn and heals to full at its start.",
+      "Added a searchable Card Encyclopedia linked from the Deck Workshop, including summons, current ability text, keyword filters and a shared keyword/status glossary with links to matching cards.",
+      "Added Encyclopedia beside Decks in the game navigation, unified Encyclopedia and Ranks controls, displayed every card without pagination, and organized illustrated keyword rules with corrected game-turn and ruler-turn explanations.",
+      "Unified Cards dropdowns, including expanded menus, with keyboard navigation and viewport-aware placement. Card details now open regardless of Command; play warnings appear only on action confirmation or dragging. Encyclopedia Command uses the actual card gem.",
+      "Capitalized Encyclopedia card-type and keyword dropdown labels consistently.",
+      "Separated the Encyclopedia backdrop from scrolling content to reduce repaint work while browsing Keywords & Rules.",
+      "Added clearly separated Custom and Ranked friend tables, with server-enforced ranked-only rating and season progression and match-type labels in history, results and Social.",
+      "Added Total, Custom and Ranked records for player profiles and personal deck statistics while retaining historical online matches as Ranked.",
+      "Added the personal Backpack with owned quantities and Owned, All and Unowned card filters shared across card browsers; all existing deck-building access remains available while the Store is closed.",
+      "Prepared extensible archetype and meta-role metadata with shared filters and badges; no existing cards or decks have been assigned labels.",
+      "Restored persisted opposite Mara/Aldren assignments when starting new games, keeping the assigned innkeeper stable through actions and reloads.",
+      "Established the explicitly managed Alpha Season — The First Embers, with Beta — The Gathering Storm prepared but inactive; season membership is stored with ranked tables and results without changing match outcomes or rating history.",
+      "Displayed the active season in Ranks and Play, preserved season attribution in match history, and separated Custom Games from season standings.",
+      "Clarified Game Turn versus Ruler Turn on the board and match breakdown; added concise state-based feedback for active actions, mandatory effects, target selection and waiting.",
+      "Added compact deck card-type, missing-card and printed Command-curve diagnostics using existing saved-deck validation.",
+      "Expanded the Encyclopedia with engine-grounded mechanic interactions and linked card examples, while clearly flagging unimplemented Traps and unresolved rules for review.",
+      "Refined table presence messaging to distinguish temporary absence or missing presence from actual timeouts, retaining warning-only clocks and no automatic penalties.",
+      "Unified the Great Game UI terminology to Round (two ruler turns) and Turn (one ruler), grouped Chronicle entries by Round and kept engine log counters unchanged.",
+      "Compressed in-game Round/active-player status, replaced the Exit Game label with a compact leave icon and rewrote its confirmation in Mara/Aldren tavern voice.",
+      "Added burned-card previews in the board-right played-card lane, with a brief ember-to-ash disappearance animation.",
+      "Standardized Satchel naming, aligned its Encyclopedia link with Cards/Keywords tabs, and kept deck and rankings quotes on one line when space permits.",
+      "Stylized table-match choices and deck-ready indicators, replaced verbose invalid notices with a details disclosure, and split private table creation, joining and open tables into no-scroll tabs.",
+      "Simplified Ranks tabs, made podium height responsive to relative player ratings, widened season selectors and limited rank history exclusively to Ranked matches.",
+      "Used an integrated All/Owned/Not owned collection selector and added an explicit Save filters as default preference stored in the browser."
+    ]
+  },
+  {
     "date": "2026-10-08",
     "items": [
       "Raised right-side played-card previews above The Realms divider, including during Royal Favor announcements, refined spectator controls with brief viewpoint notices, and resolved spectator chat names and labels when live messages arrive.",
@@ -20,7 +128,8 @@
       "Queued Great Game innkeeper action clips so each random clip moves to the back and cannot repeat before the other clips play.",
       "Vertically centered the Leave label in the spectator controls.",
       "Ended spectating with a match-result screen and stopped live updates when the watched match finishes or is abandoned.",
-      "Matched Great Game Social reactions and replies to the Taverns, sharing the Favor arrow and community button styles."
+      "Matched Great Game Social reactions and replies to the Taverns, sharing the Favor arrow and community button styles.",
+      "Added a bent-arrow Reply icon to Great Game Social in the existing warm gold palette."
     ]
   },
   {

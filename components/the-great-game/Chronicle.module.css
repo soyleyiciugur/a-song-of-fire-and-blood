@@ -1,11 +1,11 @@
 .panel { isolation: isolate; font-family: var(--font-body), serif; }
 .scroll { scrollbar-width: thin; scrollbar-color: #665433 transparent; overflow-anchor: none; }
 .turn { color: rgba(237, 222, 193, .65); }
-.turnHeading { position: sticky; top: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 6px 8px; background: #121015; border-block: 1px solid rgba(190, 152, 77, .2); cursor: pointer; list-style: none; }
+.turnHeading { position: sticky; top: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 42px; padding: 7px 8px; background: linear-gradient(180deg,#171318,#110e12); border-block: 1px solid rgba(190, 152, 77, .26); cursor: pointer; list-style: none; }
 .turnHeading::-webkit-details-marker { display: none; }
-.turnHeading > span { display: flex; align-items: center; gap: 8px; width: 100%; color: #c0ab84; font-family: var(--font-hotd), serif; font-size: .78rem; }
+.turnHeading > span { display: flex; align-items: center; gap: 8px; width: 100%; color: #e1c38f; font-family: var(--font-hotd), serif; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
 .turnHeading > span::before, .turnHeading > span::after { content: ""; flex: 1; height: 1px; background: rgba(190, 152, 77, .22); }
-.turnHeading small { font-size: .48rem; letter-spacing: .08em; color: #8b8172; }
+.turnHeading small { font-size: .5rem; letter-spacing: .12em; color: #998771; text-transform: uppercase; }
 .turn:not([open]) .turnHeading > span::after { content: "▸"; height: auto; background: none; }
 .current .turnHeading { background: #1b1716; border-color: rgba(212, 175, 55, .35); }
 .current .turnHeading > span { color: #ead4a5; }
@@ -55,3 +55,10 @@
 @keyframes arrive { 0% { transform: translateY(4px); background: #b48a3629; opacity: .35; } 25% { opacity: 1; } 100% { transform: none; background: transparent; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .fresh { animation: none; } }
 @media (max-height: 500px) { .event { font-size: .56rem; padding: 6px; gap: 4px; } .major { padding-block: 8px; } .turnHeading { padding: 6px; } .turnHeading > span { font-size: .68rem; } }
+
+.rulerTurnGroup+.rulerTurnGroup{border-top:1px solid #866c483d}
+.rulerTurnTitle{position:relative;margin:0;padding:7px 10px;color:#e0c08f;background:linear-gradient(90deg,#2a2019,#1a1411);text-align:left;font:700 .66rem/1.2 var(--font-hotd),Georgia,serif;letter-spacing:.06em;text-transform:uppercase}
+
+
+.turnHeading{min-height:28px;padding:4px 8px;box-sizing:border-box}
+.rulerTurnTitle{display:flex;align-items:center;justify-content:center;min-height:30px;margin:8px 0 0;padding:5px 8px;border-block:1px solid #b58a4755;background:linear-gradient(90deg,#201710,#3b2c1e,#201710);color:#efcf99;font-size:.75rem;text-align:center}

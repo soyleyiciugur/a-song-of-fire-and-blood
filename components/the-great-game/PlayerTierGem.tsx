@@ -3,6 +3,8 @@
 import Image from "next/image";
 import type { TierId } from "@/lib/the-great-game/types";
 import styles from "./PlayerTierGem.module.css";
+import { playerTierForRating } from "@/lib/the-great-game/rank-progression";
+export { playerTierForRating, playerTierLabel } from "@/lib/the-great-game/rank-progression";
 
 const TIER_LABELS: Record<TierId, string> = {
   "s-plus": "S+",
@@ -11,18 +13,6 @@ const TIER_LABELS: Record<TierId, string> = {
   b: "B",
   c: "C",
 };
-
-export function playerTierForRating(rating: number): TierId {
-  if (rating >= 1500) return "s-plus";
-  if (rating >= 1350) return "s";
-  if (rating >= 1200) return "a";
-  if (rating >= 1100) return "b";
-  return "c";
-}
-
-export function playerTierLabel(rating: number) {
-  return TIER_LABELS[playerTierForRating(rating)];
-}
 
 export default function PlayerTierGem({
   rating,
@@ -45,8 +35,8 @@ export default function PlayerTierGem({
       title={`${label} Tier · ${rating} rating`}
       aria-label={`${label} Tier, ${rating} rating`}
     >
-      <Image src={`${src}.png`} alt="" fill sizes="72px" draggable={false} data-gem-normal />
-      <Image src={`${src}-highlighted.png`} alt="" fill sizes="72px" draggable={false} data-gem-highlighted />
+      <Image src={`${src}.webp`} alt="" unoptimized fill sizes="72px" draggable={false} data-gem-normal />
+      <Image src={`${src}-highlighted.webp`} alt="" unoptimized fill sizes="72px" draggable={false} data-gem-highlighted />
     </span>
   );
 }

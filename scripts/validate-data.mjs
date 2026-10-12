@@ -99,23 +99,23 @@ function slugifyHouse(house) {
     .replace(/(^-+|-+$)/g, "");
 }
 
-const { characters } = loadModule(path.join(rootDir, "data/characters/index.ts"));
-const { chapterList } = loadModule(path.join(rootDir, "data/chapters/index.ts"));
-const { chapters } = loadModule(path.join(rootDir, "data/chapters/index.ts"));
-const { dragons } = loadModule(path.join(rootDir, "data/dragons.ts"));
-const { houses } = loadModule(path.join(rootDir, "data/houses.ts"));
-const { quotes } = loadModule(path.join(rootDir, "data/quotes.ts"));
-const { MAP_LOCATIONS } = loadModule(path.join(rootDir, "data/map/locations.ts"));
-const { MAP_EVENTS } = loadModule(path.join(rootDir, "data/map/events.ts"));
-const { timeline } = loadModule(path.join(rootDir, "data/timeline.ts"));
+const readData = (file) => JSON.parse(fs.readFileSync(path.join(rootDir, "data", file), "utf8").replace(/^\uFEFF/, ""));
+const characters = readData("characters/characters.json");
+const chapterList = readData("chapters.json");
+const dragons = readData("dragons.json");
+const houses = readData("houses.json");
+const quotes = readData("quotes.json");
+const MAP_LOCATIONS = readData("map/locations.json");
+const MAP_EVENTS = readData("events.json").filter((event) => event.location && event.chapterSlug);
+const timeline = readData("timeline.json");
 const {
-  CharacterRecordSchema,
-  ChapterRecordSchema,
+  CharacterListSchema,
+  ChapterListSchema,
   DragonListSchema,
   HouseListSchema,
   MapEventListSchema,
   MapLocationListSchema,
-  TimelineSchema,
+  TimelineListSchema,
 } = loadModule(path.join(rootDir, "schemas/index.ts"));
 
 const errors = [];
@@ -130,16 +130,17 @@ function addSchemaErrors(label, schema, value) {
   }
 }
 
-addSchemaErrors("characters", CharacterRecordSchema, characters);
-addSchemaErrors("chapters", ChapterRecordSchema, chapters);
+addSchemaErrors("characters", CharacterListSchema, characters);
+addSchemaErrors("chapters", ChapterListSchema, chapterList);
 addSchemaErrors("dragons", DragonListSchema, dragons);
 addSchemaErrors("houses", HouseListSchema, houses);
 addSchemaErrors("map.locations", MapLocationListSchema, MAP_LOCATIONS);
 addSchemaErrors("map.events", MapEventListSchema, MAP_EVENTS);
-addSchemaErrors("timeline", TimelineSchema, timeline);
+addSchemaErrors("timeline", TimelineListSchema, timeline);
 
 const characterList = Object.values(characters);
 const characterIds = new Set(characterList.map((character) => character.id));
+const dragonIds = new Set(dragons.map((dragon) => dragon.id));
 
 if (characterIds.size !== characterList.length) {
   errors.push("Duplicate character IDs detected.");
@@ -152,7 +153,7 @@ for (const character of characterList) {
   }
 
   for (const relatedId of Object.keys(character.relationships ?? {})) {
-    if (!characterIds.has(relatedId)) {
+    if (!characterIds.has(relatedId) && !dragonIds.has(relatedId)) {
       errors.push(`Character ${character.id} has relationship to missing character: ${relatedId}`);
     }
   }

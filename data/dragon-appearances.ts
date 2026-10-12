@@ -19,6 +19,7 @@ const APPEARANCE_REFS: Record<string, AppearanceRef[]> = {
     { chapterSlug: "the-children-pay", anchor: "Cloudgazer crouched beneath the pale morning sky", label: "Departure from Winterfell" },
     { chapterSlug: "until-the-last-breath", anchor: "Cloudgazer settled heavily upon the ground", label: "Return to King's Landing" },
     { chapterSlug: "the-eye-in-the-storm", anchor: "The dragon spread her wings", label: "Into the storm" },
+    { chapterSlug: "of-ravens-and-bitter-blood", anchor: "Cloudgazer circled as the white dragon descended", label: "Return to the Dragonpit" },
   ],
   jadefyre: [
     { chapterSlug: "the-poison-beneath-the-crown", anchor: "the dragon eggs began to crack", label: "Three hatchlings" },
@@ -35,7 +36,10 @@ const APPEARANCE_REFS: Record<string, AppearanceRef[]> = {
   palefyre: [{ chapterSlug: "the-poison-beneath-the-crown", anchor: "the dragon eggs began to crack", label: "Three hatchlings" }],
   sheepstealer: [{ chapterSlug: "judgment-by-blood", anchor: "Angos, Sheepstealer", label: "Beneath the Dragonpit" }],
   sunfyre: [{ chapterSlug: "judgment-by-blood", anchor: "Golden wings caught the light", label: "The dragons beyond the Narrow Sea" }],
-  "unknown-white-dragon": [{ chapterSlug: "the-eye-in-the-storm", anchor: "A dragon emerged through the storm", label: "The eye in the storm" }],
+  "unknown-white-dragon": [
+    { chapterSlug: "the-eye-in-the-storm", anchor: "A dragon emerged through the storm", label: "The eye in the storm" },
+    { chapterSlug: "of-ravens-and-bitter-blood", anchor: "The white dragon lowered its head", label: "Vhaemys and the white dragon at the Dragonpit" },
+  ],
 };
 
 type ChapterRow = { slug: string; title: string; content: string[] };

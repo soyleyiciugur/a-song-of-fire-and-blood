@@ -1,0 +1,11 @@
+﻿.tempo { flex: 0 0 auto; padding: 7px 8px; border-bottom: 1px solid #b899572e; color: #c6b590; background: #151213; font: 11px/1.4 var(--font-body), serif; overflow-wrap: anywhere; }
+.row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; }
+.clock { font-variant-numeric: tabular-nums; color: #e4cd93; }
+.clock small { color: #a69a84; font-size: .85em; }
+.row button { border: 1px solid #b8995755; background: #282016; color: #dfc798; padding: 4px 7px; font: inherit; cursor: pointer; }
+.row button:hover, .row button[aria-pressed="true"] { background: #3a2c1b; border-color: #c7a663; }
+.row button:focus-visible { outline: 2px solid #dfc798; outline-offset: 2px; }
+.presence, .warning { margin: 5px 0 0; }
+.presence { color: #a99b83; }
+.warning, .clock[data-warning="90"] { color: #e0ae78; }
+@media (max-height: 600px) and (orientation: landscape) { .tempo { padding: 4px 5px; font-size: 9px; } .row { gap: 3px; } .row button { padding: 3px 5px; } }

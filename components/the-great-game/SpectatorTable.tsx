@@ -1,7 +1,9 @@
 "use client";
+import {matchTypeLabel} from "@/lib/the-great-game/match-types";
 import Link from "next/link";
 import {useEffect,useState} from "react";
 import type {SpectatorView} from "@/lib/the-great-game/spectator";
+import MatchBreakdown from "./MatchBreakdown";
 import GreatGameTable from "./GreatGameTable";
 import styles from "./play-hub.module.css";
 export default function SpectatorTable({matchId}:{matchId:string}) {
@@ -26,9 +28,10 @@ export default function SpectatorTable({matchId}:{matchId:string}) {
     const winner = view.match.state?.winner;
     const winnerName = winner === "player1" ? view.match.host.displayName : view.match.guest?.displayName;
     return <main className={styles.hub + " " + styles.resultScreen}><section className={styles.resultCard}>
-      <span className={styles.eyebrow}>Spectating ended</span>
+      <span className={styles.eyebrow}>Spectating ended · {matchTypeLabel(view.match.matchType)}</span>
       <h1>{winner === "draw" ? "Draw" : "Match ended"}</h1>
       <p>{winner && winner !== "draw" ? winnerName + " prevails." : winner === "draw" ? "The table ends in a draw." : "The players have left the table."}</p>
+      {view.match.state && <MatchBreakdown state={view.match.state} names={{player1:view.match.host.displayName,player2:view.match.guest?.displayName || "Player 2"}} />}
       <Link className={styles.primary} href="/cards/play">Back to the inn</Link>
     </section></main>;
   }

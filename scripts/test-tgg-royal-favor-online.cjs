@@ -23,8 +23,35 @@ for(const viewer of ['player1','player2']){
 }
 assert.equal(JSON.stringify(state),snapshot);
 const ended=applyAction(state,{type:'end-turn'});assert(ended.ok,ended.error);
+const capped=structuredClone(ended.state);
+capped.players.player2.command=10;capped.players.player2.maxCommand=10;
+const overflow=applyAction(capped,{type:'play-card',handInstanceId:favor.instanceId});assert(overflow.ok,overflow.error);
+assert.equal(overflow.state.players.player2.command,11);
+assert.equal(overflow.state.players.player2.maxCommand,10);
+assert.equal(overflow.state.players.player2.royalFavorCommand,1);
+const spendState=structuredClone(overflow.state);
+spendState.players.player2.hand.push({instanceId:'favor-spend-check',cardId:'crownlands-champion',costModifiers:[]});
+const spent=applyAction(spendState,{type:'play-card',handInstanceId:'favor-spend-check'});assert(spent.ok,spent.error);
+assert.equal(spent.state.players.player2.royalFavorCommand,0);
+assert(spent.state.players.player2.command<11);
+assert(overflow.state.players.player2.removedFromGame.includes('royal-favor'));
+const nextRuler=applyAction(overflow.state,{type:'end-turn'});assert(nextRuler.ok,nextRuler.error);
+assert.equal(nextRuler.state.players.player2.royalFavorCommand,0);
+const refill=applyAction(nextRuler.state,{type:'end-turn'});assert(refill.ok,refill.error);
+assert.equal(refill.state.players.player2.command,10);
 const used=applyAction(ended.state,{type:'play-card',handInstanceId:favor.instanceId});assert(used.ok,used.error);
 for(const viewer of ['player1','player2'])assert(!projectGameStateForPlayer(used.state,viewer).players.player2.hand.some(c=>c.cardId==='royal-favor'));
 const revealed=structuredClone(state);revealed.pendingEffect={id:'sight',controllerId:'player1',sourceUnitInstanceId:null,abilityId:'veiled-sight'};
 assert.deepEqual(projectGameStateForPlayer(revealed,'player1').players.player2.hand,revealed.players.player2.hand);
 console.log('Royal Favor: public for both viewers, private cards hidden, owner hand intact, bonus removed after play, Veiled Sight preserved.');
+for (const owner of ['player1','player2']) {
+ const full=structuredClone(state);
+ full.activePlayerId=owner==='player1'?'player2':'player1';
+ full.players[owner].hand=Array.from({length:8},(_,i)=>({instanceId:`full-${owner}-${i}`,cardId:'crownlands-champion',costModifiers:[]}));
+ full.players[owner].deck.unshift('crownlands-champion');
+ const burned=applyAction(full,{type:'end-turn'});assert(burned.ok,burned.error);
+ const entry=burned.state.log.find(e=>e.playerId===owner&&e.message.startsWith('Crownlands Champion is burned.'));
+ assert(entry);assert.equal(entry.visibility,'public');
+ for(const viewer of ['player1','player2'])assert(projectGameStateForPlayer(burned.state,viewer).log.some(e=>e.id===entry.id&&e.message===entry.message));
+}
+console.log('PASS both players receive public burns for either card owner.');

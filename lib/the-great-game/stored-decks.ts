@@ -1,6 +1,8 @@
+import type {CardMetadata} from "./card-metadata";
 import { createTestDeck } from "./deck";
 
 export type StoredDeck = {
+  metadata?: CardMetadata;
   id: string;
   name: string;
   cards: Record<string, number>;

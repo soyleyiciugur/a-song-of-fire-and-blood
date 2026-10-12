@@ -112,7 +112,7 @@ export function createTestDeck(): string[] {
   // abilities so early, mid and late gameplay can all be exercised.
   const deck: string[] = [
     // 2 Command — named early plays with working passive abilities.
-    "naela-targaryen",       // Ready: cannot be targeted by enemy Events.
+    "naela-targaryen",       // North of Tyrosh: own-turn end damage, own-turn start full heal.
     "leo-tyrell",            // Grows when Visenor / Tyrell / Hightower arrives.
 
     // 3 Command — early Political / damage / Standing interactions.

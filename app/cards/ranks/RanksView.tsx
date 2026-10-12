@@ -1,5 +1,10 @@
 "use client";
 
+import {seasonDisplayName,type Season} from "@/lib/the-great-game/seasons";
+import { useState, type CSSProperties } from "react";
+import controls from "@/components/the-great-game/CardsControls.module.css";
+import Seasons from "./Seasons";
+import RankHistory from "./RankHistory";
 import Image from "next/image";
 import Link from "next/link";
 import HubNavFrame from "@/components/the-great-game/HubNavFrame";
@@ -19,28 +24,36 @@ function PlayerAvatar({ player, large = false }: { player: GreatGameLeaderboardR
   </span>;
 }
 
-export default function RanksView({ leaders }: { leaders: GreatGameLeaderboardRow[] }) {
+export default function RanksView({ leaders,season }: { leaders: GreatGameLeaderboardRow[];season?:Season|null }) {
+  const [view, setView] = useState<"overall" | "history" | "seasons">("overall");
   const { data, guest } = useHubData();
   const podium = leaders.slice(0, 3);
+  const highestPodiumRating=Math.max(1,...podium.map(player=>player.rating));
 
-  return <main className={styles.page}>
+  return <main className={`${styles.page} great-game-page`}>
     <div className={styles.backdrop} aria-hidden="true" />
     <HubNavFrame active="ranks" data={data} guest={guest} />
 
-    <header className={styles.hero}>
+    <header className={styles.hero} data-great-game-heading>
       <div>
         <span className={styles.eyebrow}>The Cupbearer · Realm rankings</span>
-        <h1>Ranks</h1>
+        <h1>Ranks</h1>{season&&<p className={styles.seasonBanner}>{seasonDisplayName(season)}<small>Crown competition · No scheduled reset</small></p>}
       </div>
-      <blockquote>“A title is wind. A record, however, can be checked.”<small>— Aldren</small></blockquote>
+
     </header>
 
-    <section className={styles.content} aria-label="The Great Game rankings">
+    <nav className={controls.tabs} aria-label="Ranking views">
+      <button type="button" aria-pressed={view === "overall"} onClick={() => setView("overall")}>Overall</button>
+      <button type="button" aria-pressed={view === "seasons"} onClick={() => setView("seasons")}>Seasons</button>
+      <button type="button" aria-pressed={view === "history"} onClick={() => setView("history")}>History</button>
+    </nav>
+      <blockquote className={styles.panelQuote}>“A title is wind. A record, however, can be checked.” <small>— Aldren</small></blockquote>
+    {view === "history" ? <RankHistory /> : view === "seasons" ? <Seasons /> : <section className={styles.content} aria-label="The Great Game rankings">
       <section className={styles.highTable} aria-labelledby="high-table-heading">
         <div className={styles.sectionHeading}><span>At the high table</span><small>Top rated Rulers</small></div>
         <h2 id="high-table-heading" className={styles.srOnly}>Top three ranked players</h2>
         {podium.length ? <div className={styles.podium}>
-          {podium.map(player => <Link href={`/users/${player.username}`} className={styles.podiumCard} data-rank={player.rank} data-tier-gem-hover key={player.user_id}>
+          {podium.map(player => <Link href={`/users/${player.username}`} className={styles.podiumCard} data-rank={player.rank} style={{ "--rating-column-height": `${Math.max(54,Math.round(98*Math.max(0,player.rating)/highestPodiumRating))}%` } as CSSProperties} data-tier-gem-hover key={player.user_id}>
             <span className={styles.rank}>#{player.rank}</span>
             <PlayerTierGem rating={player.rating} size="large" className={styles.podiumTier} />
             <PlayerAvatar player={player} large />
@@ -65,6 +78,6 @@ export default function RanksView({ leaders }: { leaders: GreatGameLeaderboardRo
           </Link>)}
         </div>
       </section>
-    </section>
+    </section>}
   </main>;
 }

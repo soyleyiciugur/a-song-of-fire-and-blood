@@ -61,7 +61,9 @@ logs.push({id:++id,turn:8,playerId:'player1',turnOwnerId:'player2',message:'PASS
     await expect(panel).not.toContainText('Naela Targaryen');
     const top=()=>history.evaluate(el=>el.scrollTop);
     await expect.poll(top).toBeLessThan(2);
-    await expect(panel.locator('summary').first()).toContainText('Turn 8');
+    await expect(panel.locator('summary').first()).toContainText('Exchange 4');
+    await expect(panel.locator('summary').first()).toContainText('turns');
+    await expect(panel.locator('section[aria-label*="turn"]').first()).toBeAttached();
     await expect(panel.locator('summary').last()).toContainText('Opening');
     await expect(panel.locator('[data-chronicle-event]').first()).toHaveAttribute('data-chronicle-event',String(actionId));
     await expect(panel.locator('[data-chronicle-event][class*="fresh"]')).toHaveCount(0);

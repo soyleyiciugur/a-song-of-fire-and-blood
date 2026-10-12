@@ -130,5 +130,16 @@
     "moon": 8,
     "year": 99,
     "description": "Gaelor returns from Driftmark to face Brant Costayne before the Crown. Brant wounds the prince badly, but Gaelor kills and beheads him, ending the delayed judgment demanded after the tourney."
+  },
+  {
+    "id": "blackwood-bracken-border-clash",
+    "title": "The Blackwood–Bracken Border Clash",
+    "type": "battle",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "day": 21,
+    "moon": 8,
+    "year": 99,
+    "description": "Renewed fighting on the wooded Blackwood–Bracken border kills Perric Bracken's brother and men of both houses. Godfrey reinforces the border, while Royce fears a wider feud. The exact site and intent behind the killing remain unconfirmed.",
+    "location": "Blackwood–Bracken border"
   }
 ]

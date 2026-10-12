@@ -125,3 +125,30 @@ Removing a gallery entry also requires explicitly removing its thread, or migrat
 ## Running jokes and current context
 
 Read [the continuity ledger](community-running-jokes.md) alongside account profiles and the live inbox before extending recurring memes or recruitment banter. Scheduled callbacks are not established public interactions until their publication timestamps.
+
+
+### The Cupbearer, Aldren and Mara
+
+Added on 2026-10-12. `TheCupbearer` represents the tavern institution and receives the gold institution badge. `AldrenAtTheHearth` and `mara.on.tap` represent the existing hidden characters `aldren-innkeeper` and `mara-tapster`, with character verification, portraits and the established character-thread pinning behaviour. Their social-AU voices do not change story canon or their game dialogue.
+
+Mara manages the house account because Aldren does not understand social media. Aldren insists on courtly institutional hospitality; Mara tries to comply, with occasional dry impatience slipping through. Her personal account remains separate. The house account is never a compulsory advertisement. Aldren retains his ceremonious warmth with boomer greetings, literal questions and occasional sign-offs. Mara retains her competence and dry observations with concise Westerosified Gen Z/Gen Alpha slang; this is a speech style, not an age change. Both can participate outside game discussions.
+
+Aldren and Martin (`StannisOnFacebook`) are a prospective compatible pair, not already recorded friends. Build their rapport through actual conversations about food, manners and familiar patrons before adding dated friendship history. No introductory comments or relationship events were published with registration. The later 12 October discussion pass introduces selective replies; no friendship history is established.
+
+Illustrative voice samples for future authoring, not published comments:
+
+- House: ?The hearth is warm. The table has opinions.?
+- Aldren: ?A fine supper, Martin. My compliments to the cook. Kind regards, Aldren.?
+- Mara: ?all that crown aura and still cannot return a tankard.?
+
+
+### Banking, harbour and Faith desks
+
+Added on 2026-10-12 as explicitly fictional social-AU institutions, all using institution metadata and gold verification. No introductory comments or friendships were published with registration.
+
+- `IronBankClientDesk`: polished, patient banking correspondence and dry repayment humour.
+- `KLHarbourDesk`: practical harbour logistics and overworked workplace humour; distinct from City Watch policing.
+- `FaithHelpDesk`: patient reception, everyday kindness and administrative fatigue; not a named religious authority.
+- `LannisportExchange`: coin-counter and trading-floor humour using dragons, stags and stars; the exchange is invented social-AU infrastructure, not a canonical stock market. Keep it distinct from Iron Bank?s lending voice. No fabricated live rates or canon market events.
+
+Let all four occasionally react outside their specialties. Proposed conversational compatibility does not establish friendship history. Their private profile continuity records the limits and individual voices.

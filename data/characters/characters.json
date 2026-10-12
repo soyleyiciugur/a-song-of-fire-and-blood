@@ -282,11 +282,11 @@
       },
       "jacaelon-targaryen": {
         "overview": "Entrusts Jace with the secret of Aegon's dream, declares that Gaelor will not inherit and intends to name Jace heir once the present troubles are settled.",
-        "latestDevelopment": "He calls the succession a cruelty rather than a reward."
+        "latestDevelopment": "He leaves Gaelor's inclusion in the Essos company to Jace, while expressing a conditional preference for another able fighter. He tells his heir to make such decisions for himself and to look after Vhaemys."
       },
       "jaery-targaryen": {
         "overview": "Trusts her more than most, but rarely lets her influence his decisions; struck her in a moment of drunken fury and has not acknowledged it since.",
-        "latestDevelopment": "Trusts her more than most, but rarely lets her influence his decisions; struck her in a moment of drunken fury and has not acknowledged it since."
+        "latestDevelopment": "He silences her over breakfast, dismisses her objections to sending both sons to Essos and humiliates her with an accusation about an old lover in Tyrosh. Jace does not understand the history behind it."
       },
       "maela-targaryen": {
         "overview": "His daughter and Jace's twin.",
@@ -346,7 +346,7 @@
       },
       "vhaemys-targaryen": {
         "overview": "Comforts Vhaemys after her terrifying dream and later agrees with Jace that her repeating visions may mark her as a Dreamer.",
-        "latestDevelopment": "He calls her the most precious thing the family possesses and orders Jace to stay close to her."
+        "latestDevelopment": "After seeing her enormous white dragon, he calls Vhaemys a dreamer and urges Jace to take greater responsibility for her happiness and safety."
       },
       "queen-vhaemys-targaryen": {
         "overview": "His mother, the late Queen Vhaemys Targaryen.",
@@ -355,6 +355,10 @@
       "visenor-targaryen": {
         "overview": "Formerly his most trusted heir.",
         "latestDevelopment": "That trust has been shattered, and Visenor now faces exile or the Wall should he ever return."
+      },
+      "lord-celtigar": {
+        "overview": "He receives his old friend with Annara's visit, then refuses to discuss Celtigar's proposed marriage at that time; no match is agreed.",
+        "latestDevelopment": "He receives his old friend with Annara's visit, then refuses to discuss Celtigar's proposed marriage at that time; no match is agreed."
       }
     },
     "summary": "King Baelenys Targaryen rules the Seven Kingdoms through force of will, hard political calculation and the authority of his dragon Maelwing. His family and the succession remain central to his reign, while old grievances and the threat posed by the exiled Targaryens test his trust in those closest to him.",
@@ -451,7 +455,7 @@
       },
       "jacaelon-targaryen": {
         "overview": "The King himself compares the two as kindred spirits — scholars and dissenters born into a family of warriors.",
-        "latestDevelopment": "Baelor embraced him warmly upon arrival and found, to his relief, the sharpest mind at the council table."
+        "latestDevelopment": "Jace brings him concern about Baelenys's cough. He reassures the prince and agrees to visit the King, without diagnosing an illness."
       },
       "jaery-targaryen": {
         "overview": "He became one of Jaery's steadier supports during the worst of the royal family's fracturing.",
@@ -717,7 +721,9 @@
     "father": "-",
     "mother": "-",
     "spouse": "-",
-    "siblings": [],
+    "siblings": [
+      "edric-dayne"
+    ],
     "children": [
       "lorenah-dayne"
     ],
@@ -741,6 +747,10 @@
       "nymos": {
         "overview": "A maester at Starfall who reports Darren's departure for Sunspear to Rhaella; their private dealings are not shown.",
         "latestDevelopment": "A maester at Starfall who reports Darren's departure for Sunspear to Rhaella; their private dealings are not shown."
+      },
+      "edric-dayne": {
+        "overview": "His brother Edric questions Visenor at Starfall and agrees to widen the search for Rhaella; Edric says Darren had not been informed of the prince's earlier refuge.",
+        "latestDevelopment": "His brother Edric questions Visenor at Starfall and agrees to widen the search for Rhaella; Edric says Darren had not been informed of the prince's earlier refuge."
       }
     },
     "summary": "Lord Darren Dayne rules from Starfall and generally keeps his distance from the intrigues of King’s Landing. His daughter Lorenah handles much of the family’s delicate political work, while House Dayne’s protection of Visenor has drawn the family into the royal succession crisis.",
@@ -1050,17 +1060,16 @@
       "Protect House Targaryen, whatever the cost",
       "Consolidate his power as Hand of the King",
       "Build a powerful spy network",
-      "Identify what Visenya is doing in King's Landing and whose orders she follows",
       "Marry Lorenah Dayne and protect the future they have chosen together",
-      "Travel to Dorne after the proposal",
       "Keep Gaelor from turning their rivalry into open civil conflict",
       "Carry Aegon's dream in secret and prepare the realm for the prince that was promised",
-      "Prove worthy of being named Baelenys' heir",
-      "Learn whether Vhaemys is a Dreamer and identify the great white dragon in her visions",
       "Help Mydan Gerren and Flea Bottom recover from the Mummers' Blood",
       "Investigate Rhaella and Nymos disappearing near Starfall without revealing the Crown’s private interest",
       "Travel to Starfall with Lorenah once the immediate court business is settled",
-      "Understand the scale of Vahaemon’s dragon network and the blood-magic threat in Essos"
+      "Understand the scale of Vahaemon’s dragon network and the blood-magic threat in Essos",
+      "Choose a discreet Essos company and decide whether Gaelor can be trusted under command",
+      "Identify the white dragon claimed by Vhaemys and protect his youngest sister",
+      "Explore obtaining Reach grain and provisions against House Tyrell's debt to the Crown"
     ],
     "relationships": {
       "alester-dayne": {
@@ -1069,11 +1078,11 @@
       },
       "baelenys-targaryen": {
         "overview": "Baelenys entrusts Jace with Aegon's dream, tells him Gaelor will not sit the Iron Throne and intends to name Jace heir once the present troubles are settled.",
-        "latestDevelopment": "Jace accepts the burden and promises to make him proud."
+        "latestDevelopment": "Baelenys prefers Gaelor to accompany the mission if Jace's chosen companions agree, but leaves the decision to Jace. After a harsh cough, Jace asks Baelor to examine his father; no illness is diagnosed."
       },
       "baelor-targaryen": {
         "overview": "Embraced him warmly on arrival and considers him the one voice at council that matches his own measured counsel.",
-        "latestDevelopment": "Embraced him warmly on arrival and considers him the one voice at council that matches his own measured counsel."
+        "latestDevelopment": "He asks Baelor to visit Baelenys after the King coughs harshly. Baelor reassures him that a single cough is not proof of a fatal illness and promises a visit."
       },
       "baran-strong": {
         "overview": "He received Baran respectfully as a capable knight but made clear that Gaelor could not unilaterally decide appointments around the Red Keep.",
@@ -1117,7 +1126,7 @@
       },
       "lorenah-dayne": {
         "overview": "No longer merely a courtship. In the secluded Cloudpass valley Jace proposed with a necklace crafted from Cloudgazer's shed horn-scales, and Lorenah accepted, saying the honor was not becoming a princess but spending her life beside him. They are now betrothed.",
-        "latestDevelopment": "Before the Chapter XVII council, Lorenah passes on Daria's discovery that Cordin is watching Jace for Gaelor."
+        "latestDevelopment": "He tells her of Vhaemys's dragon and seeks advice about taking Gaelor to Essos. She opposes the idea, defers to the knights' expertise and urges him to consult his father. They also discuss a possible Starfall visit, which remains unarranged."
       },
       "lucas-corbray": {
         "overview": "Jace catches Lucas protecting Vhaemys from the consequences of her kitchen punishment and reminds him that a Kingsguard oath cannot be bent simply because the princess is his friend.",
@@ -1177,7 +1186,7 @@
       },
       "weylar-rocke": {
         "overview": "Jace summons Weylar after learning Rhaella may have been seen in Dorne, tells him to investigate Starfall through his own contacts and makes clear that the assignment must remain secret under threat of the black cells.",
-        "latestDevelopment": "Jace summons Weylar after learning Rhaella may have been seen in Dorne, tells him to investigate Starfall through his own contacts and makes clear that the assignment must remain secret under threat of the black cells."
+        "latestDevelopment": "He receives Weylar's report of hunger and hostility toward the Watch, considers seeking Reach provisions against Tyrell debts, and criticizes the lack of useful news about Visenya and Starfall. The missing woman's possible pregnancy is only his hypothesis."
       },
       "oswald-eagle": {
         "overview": "Recognizes that Oswald neither attended nor ordered the massacre.",
@@ -1244,7 +1253,7 @@
       },
       "baelenys-targaryen": {
         "overview": "Often the last voice able to temper the King's fury, though even she has limits; he struck her in a drunken rage and she withdrew from his bed for three days before Baelor persuaded her to return.",
-        "latestDevelopment": "Often the last voice able to temper the King's fury, though even she has limits; he struck her in a drunken rage and she withdrew from his bed for three days before Baelor persuaded her to return."
+        "latestDevelopment": "She opposes risking both remaining sons on the Essos mission; Baelenys dismisses and humiliates her with an accusation about an old lover in Tyrosh, and she leaves in anger."
       },
       "baelor-targaryen": {
         "overview": "Leaned on him during the worst of the family's fracturing; Baelor urged her gently to return to the King's side, and she listened.",
@@ -1357,7 +1366,7 @@
       },
       "jacaelon-targaryen": {
         "overview": "Their relationship has become a betrothal. In the Cloudpass valley Jace proposed with a necklace made from Cloudgazer's shed horn-scales, and Lorenah accepted through tears, telling him that her happiness came from spending her life beside him rather than from becoming a princess.",
-        "latestDevelopment": "Tells him what Daria learned about Cordin's surveillance and Gaelor's coming Watch appointment during their evening together."
+        "latestDevelopment": "She advises Jace against taking Gaelor on the secret mission and asks when they can visit Starfall. He promises to explore arrangements with Saera and Alester, without confirming a journey."
       },
       "jaery-targaryen": {
         "overview": "She knows Jaery as both Jace's mother and the queen whose judgment will matter to any future marriage.",
@@ -1386,6 +1395,10 @@
       "nymos": {
         "overview": "The younger maester's name alarms Lorenah because she has never heard of him despite his supposed service at Starfall.",
         "latestDevelopment": "His disappearance with Rhaella makes him a central object of her investigation."
+      },
+      "edric-dayne": {
+        "overview": "Her uncle remains at Starfall while she seeks a return visit. Separately, Edric criticizes her secret hospitality to Visenor; she has not heard that conversation.",
+        "latestDevelopment": "Her uncle remains at Starfall while she seeks a return visit. Separately, Edric criticizes her secret hospitality to Visenor; she has not heard that conversation."
       }
     },
     "summary": "Lorenah Dayne is a politically astute member of House Dayne and a close companion of Jacaelon Targaryen. She manages sensitive family and court affairs with a network of trusted attendants, while Starfall’s decision to shelter Visenor has placed her house in a dangerous position.",
@@ -1779,6 +1792,10 @@
       "saera-targaryen": {
         "overview": "His feelings are now unmistakable. Rickard told Alester that he intends, when the time comes, to offer Saera the entire North beside him.",
         "latestDevelopment": "He prepared a white direwolf pup as a gift, and when Mother Marya briefly restored Saera's sight, she saw him kneeling with the pup before embracing him."
+      },
+      "godfrey-blackwood": {
+        "overview": "Godfrey looks to their Blackwood kinship for protection after renewed border bloodshed. This is Godfrey's expectation, not a newly confirmed pledge by Rickard.",
+        "latestDevelopment": "Godfrey looks to their Blackwood kinship for protection after renewed border bloodshed. This is Godfrey's expectation, not a newly confirmed pledge by Rickard."
       }
     },
     "summary": "Lord Rickard Stark inherited Winterfell and the wardenship of the North after his father Brandon’s death. He is drawn to Princess Saera and hopes to offer her a life in the North away from the pressures of the Red Keep. His regard for her has also sharpened an unspoken rivalry with Ser Alester Dayne.",
@@ -2595,7 +2612,7 @@
     ],
     "children": [],
     "mentor": "-",
-    "dragon": "-",
+    "dragon": "Unknown White Dragon",
     "traits": [
       "Innocent",
       "Curious",
@@ -2616,7 +2633,7 @@
       },
       "baelenys-targaryen": {
         "overview": "After a nightmare convinces her Baelenys has died, she must see him alive before she can calm down.",
-        "latestDevelopment": "Baelenys comforts her and later calls her the family's most precious treasure."
+        "latestDevelopment": "Her father visits the white dragon at the Dragonpit and expresses delight in it; he charges Jace with greater responsibility for her wellbeing."
       },
       "daria-sand": {
         "overview": "The maid Jace quietly tasked with watching Vhaemys and making certain she attended her lessons after the chaos in the royal kitchens.",
@@ -2663,7 +2680,7 @@
         "latestDevelopment": "When Jace discovers he helped her avoid the spirit of a kitchen-cleaning punishment, Vhaemys defends him fiercely and promises they will not repeat it."
       }
     },
-    "summary": "Princess Vhaemys Targaryen is a young member of the royal family whose curiosity and impulsive schemes regularly draw in the adults around her. She is especially close to her father Baelenys, her brother Jacaelon and her Kingsguard protector Ser Lucas Corbray. Annara Celtigar is her closest peer at the Red Keep. Vhaemys is growing up amid conflicts she does not yet fully understand.",
+    "summary": "Princess Vhaemys Targaryen is a young member of the royal family whose curiosity and impulsive schemes regularly draw in the adults around her. She is especially close to her father Baelenys, her brother Jacaelon and her Kingsguard protector Ser Lucas Corbray. Annara Celtigar is her closest peer at the Red Keep. Vhaemys is growing up amid conflicts she does not yet fully understand. After following her dreams into a storm above King's Landing, she claims an enormous white dragon, whose identity remains unknown. The creature is brought to the Dragonpit.",
     "quotes": [],
     "debutChapter": "the-poison-beneath-the-crown"
   },
@@ -2679,7 +2696,7 @@
     "status": "Missing",
     "secret": {
       "status": "Alive",
-      "note": "At Highgarden under the identity of Maester Arthur Sand after traveling from Oldtown with Leo Tyrell, Clarisse Flowers and Martyn Mullendore. His identity remains concealed from the Crown. He does not know that Rhaella and their unborn child have died near Starfall. Boneskin's existence remains unknown to the Crown."
+      "note": "At Starfall after sailing from Oldtown with Leo Tyrell. He reveals himself to Dayne patrolmen and Edric Dayne, while his whereabouts remain concealed from the Crown. The servants report Rhaella, Edmyn and Nymos missing; Visenor does not know that Rhaella and their unborn child are dead. He refuses to leave until she is found. Boneskin's existence remains unknown to the Crown."
     },
     "nameday": {
       "day": 19,
@@ -2709,15 +2726,13 @@
       "Devoted"
     ],
     "goals": [
-      "Maintain the identity of Maester Arthur Sand in Oldtown",
       "Keep House Hightower and House Tyrell from collapsing into a Reach civil war",
       "Prevent House Gardener from winning King Baelenys' support",
-      "Complete the forged letter linking Lord Gardener to Vahaemon and the supposed discovery of Vhagar",
       "Build support without becoming dependent on House Tyrell",
       "Return home a king worth trusting",
       "Deepen his bond with Boneskin",
-      "Maintain secret contact with Rhaella",
-      "Learn what happened to Rhaella and Boneskin near Starfall"
+      "Learn what happened to Rhaella and Boneskin near Starfall",
+      "Remain at Starfall and widen the search for Rhaella"
     ],
     "relationships": {
       "alester-dayne": {
@@ -2746,7 +2761,7 @@
       },
       "edmyn-uller": {
         "overview": "The blunt Dornish maester who tended to him and Rhaella at the scholars' retreat and briefed him on events in the realm with startling frankness.",
-        "latestDevelopment": "Visenor found his honesty unexpectedly refreshing."
+        "latestDevelopment": "The retreat's servants tell him Edmyn left and never returned before Rhaella disappeared. Visenor does not learn the maester's confirmed fate."
       },
       "gaelor-targaryen": {
         "overview": "Often disagrees with his methods, though it was Gaelor who first argued Visenor should never split his clutch of dragons among the family.",
@@ -2762,7 +2777,7 @@
       },
       "leo-tyrell": {
         "overview": "Leo travels with Visenor to Oldtown but no longer trusts the alliance around him.",
-        "latestDevelopment": "While Visenor and Almar are distracted by a raven, Leo slips into Almar's private chambers and begins searching his papers."
+        "latestDevelopment": "Leo accompanies him by sea from Oldtown to Starfall, suggests plain clothes and fears a trap when Visenor reveals himself to Dayne patrolmen. Leo tends the horses outside during the servants' account."
       },
       "lorenah-dayne": {
         "overview": "Granted him and Rhaella sanctuary despite the danger it posed to her own house.",
@@ -2786,7 +2801,7 @@
       },
       "rhaella-targaryen": {
         "overview": "A report of burned men and a dragon near Starfall immediately makes him fear that Boneskin has escaped and that Rhaella may be involved.",
-        "latestDevelopment": "He begins thinking about returning south, still unaware that she and their unborn child are dead."
+        "latestDevelopment": "At the retreat he learns she disappeared a little over a week earlier, searches her room and refuses to leave Starfall until she is found. He still does not know that she and their unborn child are dead."
       },
       "saera-targaryen": {
         "overview": "One of the siblings he trusts most.",
@@ -2807,6 +2822,10 @@
       "elinor-tyrell": {
         "overview": "Notices Renrose's daughter watching him at Highgarden and wonders whether she knows who he really is.",
         "latestDevelopment": "Notices Renrose's daughter watching him at Highgarden and wonders whether she knows who he really is."
+      },
+      "edric-dayne": {
+        "overview": "He reveals his identity to Dayne patrolmen and accepts Edric's escort to the retreat, where he presses for an immediate wider search for Rhaella.",
+        "latestDevelopment": "He reveals his identity to Dayne patrolmen and accepts Edric's escort to the retreat, where he presses for an immediate wider search for Rhaella."
       }
     },
     "summary": "Crown Prince Visenor Targaryen has lived in concealment while the royal family’s divisions place his future in doubt. His marriage to Rhaella and his ties to House Dayne anchor part of his life beyond the Red Keep. He seeks allies while learning whom he can trust.",
@@ -2854,7 +2873,7 @@
       },
       "jacaelon-targaryen": {
         "overview": "Jace gives Weylar a new secret assignment after the Starfall report: use his own contacts to investigate Rhaella and Nymos's disappearance, with the black cells waiting if the matter leaks.",
-        "latestDevelopment": "Jace gives Weylar a new secret assignment after the Starfall report: use his own contacts to investigate Rhaella and Nymos's disappearance, with the black cells waiting if the matter leaks."
+        "latestDevelopment": "He reports worsening Flea Bottom resentment, withdrawn Watch patrols and two former workplaces of Gaelor's missing companion, but has no useful Starfall intelligence. He promises better news within a week without evidence of success."
       }
     },
     "summary": "Weylar Rocke serves as Jacaelon’s personal spymaster. His methods rely on fear and close attention to the city’s less respectable circles, making him useful to the prince even when his behavior tests the patience of those around him.",
@@ -3153,7 +3172,9 @@
     "father": "-",
     "mother": "-",
     "spouse": "-",
-    "siblings": [],
+    "siblings": [
+      "royce-blackwood"
+    ],
     "children": [],
     "mentor": "-",
     "dragon": "-",
@@ -3189,7 +3210,15 @@
       },
       "perric-bracken": {
         "overview": "He holds Perric responsible for the border killing of his cousin, rejecting the Bracken claim that it was merely a drunken accident.",
-        "latestDevelopment": "The dispute has become personal enough that Godfrey bypassed Lord Tully and carried his demand for justice to the Crown."
+        "latestDevelopment": "Perric's brother lies dead after a renewed border clash. Godfrey denies that the fighting was planned and reinforces the border; whether the nobleman's death was intended remains unresolved."
+      },
+      "royce-blackwood": {
+        "overview": "His younger brother challenges his confidence in Stark support after Perric Bracken's brother dies in the border clash; Godfrey orders stronger border security.",
+        "latestDevelopment": "His younger brother challenges his confidence in Stark support after Perric Bracken's brother dies in the border clash; Godfrey orders stronger border security."
+      },
+      "rickard-stark": {
+        "overview": "Godfrey invokes Rickard's Blackwood maternal kinship and expects his support if the feud escalates; Rickard has not made a new commitment in response to this clash.",
+        "latestDevelopment": "Godfrey invokes Rickard's Blackwood maternal kinship and expects his support if the feud escalates; Rickard has not made a new commitment in response to this clash."
       }
     },
     "summary": "Lord Godfrey Blackwood is a well-traveled Riverlands noble and a capable swordsman. His house’s longstanding rivalry with House Bracken continues to draw wider attention as violence along their border unsettles the region.",
@@ -3502,7 +3531,7 @@
       },
       "visenor-targaryen": {
         "overview": "Leo remains beside Visenor but his trust has cracked.",
-        "latestDevelopment": "In Oldtown he secretly investigates Almar while Visenor continues speaking as though the Tyrell alliance is secure."
+        "latestDevelopment": "He travels south with Visenor as his squire, helps with their disguise and questions the decision to reveal the prince's identity. Visenor defers his question about Rhaella, and Leo remains outside during the household's account."
       },
       "elinor-tyrell": {
         "overview": "His unnamed sister is present at Highgarden when the traveling party returns.",
@@ -3725,7 +3754,7 @@
       },
       "godfrey-blackwood": {
         "overview": "Ancient rivals; his men killed Godfrey's cousin near the border under circumstances he characterized as an accident and Godfrey characterized as murder.",
-        "latestDevelopment": "The Hand has offered him a trial by combat if he refuses to negotiate."
+        "latestDevelopment": "His brother dies in renewed fighting on the Blackwood–Bracken border. Godfrey orders stronger defenses, while the circumstances and intent behind the killing remain unresolved."
       },
       "jacaelon-targaryen": {
         "overview": "Has not yet responded to the Crown's envoy or the trial-by-combat challenge.",
@@ -4685,7 +4714,7 @@
     "nickname": "-",
     "aliases": [],
     "house": "House Dayne",
-    "title": "Ser Maron Dayne of Starfall",
+    "title": "Diplomat of House Dayne",
     "status": "Dead",
     "nameday": {
       "day": 2,
@@ -4714,7 +4743,7 @@
         "latestDevelopment": "Their marriage began as a purely political match, though Alester's recollections suggest that it eventually became something more genuine."
       }
     },
-    "summary": "Ser Maron Dayne was the father of Ser Alester Dayne and husband of Lyarra Karstark. His marriage to the Northern lady began as a political arrangement, though their son would later imply that affection grew between them. Maron was killed by Dornishmen early in 91 AC at the age of thirty-two. The exact circumstances of his death remain unresolved. Alester was still a boy when his father died, and the survival of Maron's son became inseparably tied in Alester's memory to King Baelenys.",
+    "summary": "Maron Dayne was a diplomat of House Dayne, the father of Ser Alester Dayne and husband of Lyarra Karstark. His marriage to the Northern lady began as a political arrangement, though their son would later imply that affection grew between them. Maron was killed by Dornishmen early in 91 AC at the age of thirty-two. The exact circumstances of his death remain unresolved. Alester was still a boy when his father died, and the survival of Maron's son became inseparably tied in Alester's memory to King Baelenys.",
     "quotes": [],
     "death": {
       "day": 5,
@@ -4757,7 +4786,7 @@
         "latestDevelopment": "Their marriage began as a political match between a Dornish house and a Northern one, though Alester's account suggests it eventually grew into genuine affection."
       }
     },
-    "summary": "Lyarra Karstark was a highborn woman of the North, wife of Ser Maron Dayne and mother of Ser Alester Dayne. Her marriage to Maron began as a political arrangement, though Alester's recollections imply that the relationship eventually became more than duty. After Maron's death early in 91 AC, Lyarra survived him for nearly two years. She died toward the end of 92 AC at the age of thirty-five, leaving the young Alester without either parent.",
+    "summary": "Lyarra Karstark was a highborn woman of the North, wife of Maron Dayne and mother of Ser Alester Dayne. Her marriage to Maron began as a political arrangement, though Alester's recollections imply that the relationship eventually became more than duty. After Maron's death early in 91 AC, Lyarra survived him for nearly two years. She died toward the end of 92 AC at the age of thirty-five, leaving the young Alester without either parent.",
     "quotes": [],
     "death": {
       "day": 24,
@@ -5257,7 +5286,7 @@
       "year": 90
     },
     "height": "-",
-    "father": "-",
+    "father": "lord-celtigar",
     "mother": "-",
     "spouse": "-",
     "siblings": [],
@@ -5270,10 +5299,15 @@
       "vhaemys-targaryen": {
         "overview": "Her closest friend at the Red Keep.",
         "latestDevelopment": "Annara, a Celtigar girl of the same general age, remains at court and is one of Vhaemys's most constant companions."
+      },
+      "lord-celtigar": {
+        "overview": "Her father brings her to King's Landing to visit Vhaemys and separately attempts to discuss a marriage with the King; the proposed match is not identified.",
+        "latestDevelopment": "Her father brings her to King's Landing to visit Vhaemys and separately attempts to discuss a marriage with the King; the proposed match is not identified."
       }
     },
-    "summary": "Annara Celtigar is a nine-year-old girl of House Celtigar who resides at the Red Keep and is Princess Vhaemys Targaryen's closest friend there.",
-    "quotes": []
+    "summary": "Annara Celtigar is the daughter of Lord Bartimos Celtigar and Princess Vhaemys Targaryen's closest peer. She comes to King's Landing with her father after receiving Vhaemys's invitation and hurries to join her friend, who wants to show her the newly arrived white dragon.",
+    "quotes": [],
+    "debutChapter": "of-ravens-and-bitter-blood"
   },
   {
     "id": "daria-sand",
@@ -5996,5 +6030,115 @@
     "relationships": {},
     "summary": "Denlon Wickfen is the realm's Master of Whisperers.",
     "quotes": []
+  },
+  {
+    "id": "royce-blackwood",
+    "name": "Royce Blackwood",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Blackwood",
+    "title": "Brother of Lord Godfrey Blackwood",
+    "status": "Alive",
+    "height": "172 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [
+      "godfrey-blackwood"
+    ],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [
+      "Cautious",
+      "Politically Aware"
+    ],
+    "goals": [],
+    "relationships": {
+      "godfrey-blackwood": {
+        "overview": "He warns his elder brother that relying on Rickard Stark may unite the Riverlords behind Clover Tully rather than shield their house from the renewed border feud.",
+        "latestDevelopment": "He warns his elder brother that relying on Rickard Stark may unite the Riverlords behind Clover Tully rather than shield their house from the renewed border feud."
+      }
+    },
+    "summary": "Royce Blackwood is Lord Godfrey's younger brother. He questions Godfrey's confidence that Stark kinship will protect their house from the consequences of renewed bloodshed along the Bracken border.",
+    "quotes": [],
+    "debutChapter": "of-ravens-and-bitter-blood",
+    "age": 16
+  },
+  {
+    "id": "edric-dayne",
+    "name": "Edric Dayne",
+    "nickname": "-",
+    "aliases": [],
+    "house": "House Dayne",
+    "title": "Lord Edric Dayne",
+    "status": "Alive",
+    "height": "177 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [
+      "darren-dayne"
+    ],
+    "children": [],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {
+      "darren-dayne": {
+        "overview": "Darren's brother Edric handles Visenor's return near Starfall and objects that the prince's earlier refuge was arranged without consulting either of them.",
+        "latestDevelopment": "Darren's brother Edric handles Visenor's return near Starfall and objects that the prince's earlier refuge was arranged without consulting either of them."
+      },
+      "lorenah-dayne": {
+        "overview": "He criticizes his niece's decision to shelter Visenor and Rhaella without involving those responsible for Starfall's security.",
+        "latestDevelopment": "He criticizes his niece's decision to shelter Visenor and Rhaella without involving those responsible for Starfall's security."
+      },
+      "visenor-targaryen": {
+        "overview": "He receives Visenor after the prince reveals himself to Dayne patrolmen, questions his prior stay and promises more riders and a wider search for Rhaella without promising a result.",
+        "latestDevelopment": "He receives Visenor after the prince reveals himself to Dayne patrolmen, questions his prior stay and promises more riders and a wider search for Rhaella without promising a result."
+      }
+    },
+    "summary": "Edric Dayne is Lord Darren Dayne's brother and Lorenah's uncle. He oversees men searching near Starfall and receives Visenor on his return, questioning the secrecy surrounding the prince's earlier refuge while agreeing to widen the search for Rhaella.",
+    "quotes": [],
+    "debutChapter": "of-ravens-and-bitter-blood",
+    "age": 32
+  },
+  {
+    "id": "lord-celtigar",
+    "name": "Bartimos Celtigar",
+    "nickname": "-",
+    "aliases": [
+      "Lord Celtigar"
+    ],
+    "house": "House Celtigar",
+    "title": "Lord of Claw Isle",
+    "status": "Alive",
+    "height": "175 cm",
+    "father": "-",
+    "mother": "-",
+    "spouse": "-",
+    "siblings": [],
+    "children": [
+      "annara-celtigar"
+    ],
+    "mentor": "-",
+    "dragon": "-",
+    "traits": [],
+    "goals": [],
+    "relationships": {
+      "annara-celtigar": {
+        "overview": "He accompanies his daughter to King's Landing after Vhaemys invites her; Annara hurries to join the princess.",
+        "latestDevelopment": "He accompanies his daughter to King's Landing after Vhaemys invites her; Annara hurries to join the princess."
+      },
+      "baelenys-targaryen": {
+        "overview": "His old friend receives him at court but sharply defers the marriage question he tries to raise.",
+        "latestDevelopment": "His old friend receives him at court but sharply defers the marriage question he tries to raise."
+      }
+    },
+    "summary": "Lord Bartimos Celtigar is Annara's father and an old friend of King Baelenys. He accompanies his daughter to King's Landing and attempts to raise a marriage proposal, but the King postpones the conversation before its terms are stated.",
+    "quotes": [],
+    "debutChapter": "of-ravens-and-bitter-blood",
+    "age": 45
   }
 ]

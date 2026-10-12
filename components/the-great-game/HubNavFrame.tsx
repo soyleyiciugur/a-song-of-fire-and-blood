@@ -19,7 +19,7 @@ export default function HubNavFrame({
   className?: string;
 }) {
   return (
-    <div className={`${styles.navGroup} ${className ?? ""}`}>
+    <div data-great-game-nav-frame className={`${styles.navGroup} ${className ?? ""}`}>
       <HubNav active={active} data={data} guest={guest} />
       {showSign && (
         <div className={styles.innSign}>

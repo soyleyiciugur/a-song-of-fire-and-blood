@@ -39,6 +39,11 @@
         "minimumPublishedParticipants": 30,
         "minimumScheduledParticipants": 20,
         "scheduledParticipantsMustBeNew": true
+      },
+      "of-ravens-and-bitter-blood": {
+        "minimumParticipants": 55,
+        "minimumComments": 200,
+        "minimumPublishedParticipants": 45
       }
     }
   }

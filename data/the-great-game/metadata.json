@@ -1,0 +1,31 @@
+{
+  "groups": [
+    {
+      "id": "archetype",
+      "label": "Archetype",
+      "options": [
+        {
+          "id": "aggro",
+          "label": "Aggro"
+        },
+        {
+          "id": "control",
+          "label": "Control"
+        },
+        {
+          "id": "midrange",
+          "label": "Midrange"
+        },
+        {
+          "id": "combo",
+          "label": "Combo"
+        }
+      ]
+    },
+    {
+      "id": "meta-role",
+      "label": "Meta-role",
+      "options": []
+    }
+  ]
+}

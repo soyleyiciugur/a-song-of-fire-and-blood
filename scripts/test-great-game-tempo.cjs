@@ -1,0 +1,15 @@
+﻿require('./test-great-game-decks.cjs');
+const assert=require('node:assert/strict');
+const {createGame,applyAction}=require('../lib/the-great-game/engine.ts');
+const {advanceTurnClock,turnElapsedMs,turnWarning,seatPresence}=require('../lib/the-great-game/table-tempo.ts');
+let state=createGame();const start=Date.parse('2026-10-09T10:00:00Z');
+let next=applyAction(state,{type:'mulligan',replaceHandInstanceIds:[]}).state;assert.equal(advanceTurnClock(state,next,start),undefined);state=next;
+next=applyAction(state,{type:'mulligan',replaceHandInstanceIds:[]}).state;next.turnClock=advanceTurnClock(state,next,start);state=next;
+assert.equal(turnElapsedMs(state.turnClock,start+61000),61000);assert.equal(turnWarning(59999),0);assert.equal(turnWarning(60000),60);assert.equal(turnWarning(89999),60);assert.equal(turnWarning(90000),90);
+next=structuredClone(state);next.pendingEffect={abilityId:'iron-wrath'};next.turnClock=advanceTurnClock(state,next,start+20000);assert.equal(next.turnClock.runningSince,null);assert.equal(turnElapsedMs(next.turnClock,start+90000),20000);
+state=next;next=structuredClone(state);next.pendingEffect=null;next.turnClock=advanceTurnClock(state,next,start+90000);assert.equal(turnElapsedMs(next.turnClock,start+100000),30000);
+state=next;next=applyAction(state,{type:'end-turn'}).state;next.turnClock=advanceTurnClock(state,next,start+100000);assert.equal(turnElapsedMs(next.turnClock,start+101000),1000);
+state=next;next=structuredClone(state);next.winner='draw';next.phase='finished';next.turnClock=advanceTurnClock(state,next,start+110000);assert.equal(turnElapsedMs(next.turnClock,start+200000),10000);
+const legacy=structuredClone(state);delete legacy.turnClock;assert.equal(advanceTurnClock(legacy,state,start).elapsedMs,0);
+assert.equal(seatPresence([]),'missing');assert.equal(seatPresence([{away:true}]),'away');assert.equal(seatPresence([{away:true},{away:false}]),'here');
+assert.equal(state.winner,null);console.log('PASS server clock mulligan, running, pause/resume, turn reset, finished/legacy states, 60/90 thresholds and multi-tab presence');

@@ -4,6 +4,10 @@ import galleryData from "@/data/gallery.json";
 import type { Character } from "@/types/character";
 
 const characters = charactersData as Character[];
+const charactersById = new Map<string, Character>();
+for (const character of characters) {
+  if (!charactersById.has(character.id)) charactersById.set(character.id, character);
+}
 
 /**
  * Public/discoverable characters only.
@@ -20,7 +24,7 @@ export function getAllCharacters(): Character[] {
 }
 
 export function getCharacter(id: string) {
-  return characters.find((char) => char.id === id);
+  return charactersById.get(id);
 }
 
 export function getRandomQuote() {
@@ -40,7 +44,7 @@ function isVideo(src: string) {
 }
 
 export function getRandomSeriousGalleryItem() {
-  const serious = (galleryData as any[]).filter(
+  const serious = galleryData.filter(
     (item) => item.category === "raven" && !isVideo(item.src)
   );
 

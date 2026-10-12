@@ -36,7 +36,7 @@ export default function RavenEyeCardClient({ id, src, caption }: RavenEyeCardCli
     >
       <span className="home-quote-label">From the Raven&apos;s Eye</span>
       <div className={styles.imageWrap}>
-        <Image src={src} alt={caption || "Raven's Eye"} fill className={styles.image} />
+        <Image src={src} alt={caption || "Raven's Eye"} fill sizes="(max-width: 860px) 100vw, 50vw" className={styles.image} />
       </div>
       {caption && <p className={styles.caption}>{caption}</p>}
     </Link>

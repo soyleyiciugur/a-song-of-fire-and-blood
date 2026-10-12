@@ -441,7 +441,7 @@
   },
   {
     "text": "He knows how to end a war before the banners are even called.",
-    "speakerId": "maester-cordin",
+    "speakerId": "cordin-poole",
     "speakerName": "Maester Cordin",
     "chapterSlug": "the-viper-in-silk",
     "chapterTitle": "Chapter VIII: The Viper in Silk",
@@ -1281,7 +1281,7 @@
   },
   {
     "text": "Do something, you pathetic wretch. Do something.",
-    "speakerId": "ser-alester-dayne",
+    "speakerId": "alester-dayne",
     "speakerName": "Ser Alester Dayne",
     "chapterSlug": "the-glass-flower",
     "chapterTitle": "Chapter XV: The Glass Flower",
@@ -1927,7 +1927,7 @@
   },
   {
     "text": "How can you have a dragon when there is nothing of the dragon in you?",
-    "speakerId": "aenys-ii-targaryen",
+    "speakerId": "aenys-targaryen-ii",
     "speakerName": "Aenys II Targaryen",
     "chapterSlug": "judgment-by-blood",
     "chapterTitle": "Chapter XIX: Judgment by Blood",
@@ -1935,7 +1935,7 @@
   },
   {
     "text": "A boy who cannot even rise to his feet has no need of a dragon.",
-    "speakerId": "aenys-ii-targaryen",
+    "speakerId": "aenys-targaryen-ii",
     "speakerName": "Aenys II Targaryen",
     "chapterSlug": "judgment-by-blood",
     "chapterTitle": "Chapter XIX: Judgment by Blood",
@@ -2172,5 +2172,109 @@
     "chapterSlug": "the-eye-in-the-storm",
     "chapterTitle": "Chapter XX: The Eye in the Storm",
     "note": "to Visenor at the Proud Lantern after realizing how much the two of them have in common"
+  },
+  {
+    "text": "You stand before two dragons even now, my lord.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Lord Celtigar, who worries about Annara visiting Vhaemys's new dragon"
+  },
+  {
+    "text": "It is my misfortune to serve Prince Jacaelon. You learn everything before I do.",
+    "speakerId": "weylar-rocke",
+    "speakerName": "Weylar Rocke",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace after reporting that Visenya has left Westeros, only to learn that the prince already knows"
+  },
+  {
+    "text": "Quietly. And look what has happened.",
+    "speakerId": "edric-dayne",
+    "speakerName": "Edric Dayne",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Visenor after he says that he came to Starfall to live quietly"
+  },
+  {
+    "text": "He is not the brightest of my sons. One cannot sell him, and one cannot cast him away. Sooner or later he will strike a stone hard enough to teach him a lesson.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace while discussing whether Gaelor should accompany the mission to Essos"
+  },
+  {
+    "text": "I can sleep here.",
+    "speakerId": "vhaemys-targaryen",
+    "speakerName": "Vhaemys Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace while refusing to leave her newly claimed white dragon at the Dragonpit"
+  },
+  {
+    "text": "He can find the bottom of the Narrow Sea.",
+    "speakerId": "jacaelon-targaryen",
+    "speakerName": "Jacaelon Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Lorenah when she asks what he will do if Gaelor refuses his orders on the mission"
+  },
+  {
+    "text": "Is this partly about satisfying your ego?",
+    "speakerId": "lorenah-dayne",
+    "speakerName": "Lorenah Dayne",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace after he admits that he likes the prospect of Gaelor having to obey his orders"
+  },
+  {
+    "text": "Better they hear it from me than learn it elsewhere.",
+    "speakerId": "visenor-targaryen",
+    "speakerName": "Visenor Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Leo after revealing his identity to the Dayne patrol near Starfall"
+  },
+  {
+    "text": "They no longer speak only of being hungry. They speak of the food served in the Red Keep while their own tables stand empty.",
+    "speakerId": "weylar-rocke",
+    "speakerName": "Weylar Rocke",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace while reporting how hunger in Flea Bottom is turning into resentment toward the court"
+  },
+  {
+    "text": "There is something in Vhaemys that neither you nor I, nor anyone else in our family, possesses.",
+    "speakerId": "baelenys-targaryen",
+    "speakerName": "Baelenys Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace while urging him to take greater responsibility for Vhaemys after she claims the white dragon"
+  },
+  {
+    "text": "Clover Tully is a clever man, even if the realm sometimes mistakes his caution for weakness.",
+    "speakerId": "royce-blackwood",
+    "speakerName": "Royce Blackwood",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Godfrey while warning that Stark support could rally the other riverlords behind Tully"
+  },
+  {
+    "text": "It was not planned. Things happened as they happened.",
+    "speakerId": "godfrey-blackwood",
+    "speakerName": "Godfrey Blackwood",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Royce among the dead after the border clash that killed Perric Bracken's brother"
+  },
+  {
+    "text": "Did he cough once?",
+    "speakerId": "baelor-targaryen",
+    "speakerName": "Baelor Targaryen",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "note": "to Jace after the prince asks him to examine Baelenys because of a terrible cough"
   }
 ]

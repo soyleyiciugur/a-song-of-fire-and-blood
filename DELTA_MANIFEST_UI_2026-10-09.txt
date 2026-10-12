@@ -1,0 +1,42 @@
+The Great Game — UI / Round patch (2026-10-09)
+Base: ASOFAB_The_Great_Game_Alpha_Completed_2026-10-09.zip
+
+Changed or added files:
+app/api/great-game/rank-history/route.ts
+app/cards/decks/decks.module.css
+app/cards/decks/page.tsx
+app/cards/encyclopedia/encyclopedia.module.css
+app/cards/encyclopedia/page.tsx
+app/cards/play/play.module.css
+app/cards/ranks/RankHistory.tsx
+app/cards/ranks/RanksView.tsx
+app/cards/ranks/Seasons.tsx
+app/cards/ranks/ranks.module.css
+components/the-great-game/CardCollection.tsx
+components/the-great-game/CardsControls.module.css
+components/the-great-game/Chronicle.module.css
+components/the-great-game/Chronicle.tsx
+components/the-great-game/DeckValidationNotice.module.css
+components/the-great-game/DeckValidationNotice.tsx
+components/the-great-game/GreatGameChat.tsx
+components/the-great-game/GreatGameTable.tsx
+components/the-great-game/MatchBreakdown.tsx
+components/the-great-game/MatchResult.tsx
+components/the-great-game/MatchTypePicker.module.css
+components/the-great-game/MatchTypePicker.tsx
+components/the-great-game/OwnershipFilter.tsx
+components/the-great-game/ParchmentDialog.tsx
+components/the-great-game/PlayHub.tsx
+components/the-great-game/TableTempo.tsx
+components/the-great-game/TableWaiting.tsx
+components/the-great-game/play-hub.module.css
+data/update-notes.json
+docs/the-great-game-2026-10-09-ui-polish.md
+lib/the-great-game/contextual-rules.ts
+lib/the-great-game/turn-labels.ts
+scripts/test-great-game-alpha-improvements.cjs
+scripts/test-great-game-match-records.cjs
+scripts/test-great-game-round-presentation.cjs
+scripts/test-tgg-chronicle-ui.cjs
+app/api/great-game/collection/route.ts
+components/the-great-game/useCardCollection.ts

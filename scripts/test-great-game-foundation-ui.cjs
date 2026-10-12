@@ -1,0 +1,48 @@
+﻿process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY='1';
+const {chromium,expect:baseExpect}=require('@playwright/test'),assert=require('node:assert/strict');
+const expect=baseExpect.configure({timeout:30000});
+const cards=require('../data/the-great-game/cards.json');const deckable=cards.filter(card=>card.deckable!==false);const owned=deckable.slice(0,2);
+(async()=>{const browser=await chromium.launch({channel:'msedge'});try{
+ const p=await browser.newPage({viewport:{width:1440,height:900}});const errors=[];p.on('pageerror',e=>errors.push(e.message));
+ let quantities=Object.fromEntries(owned.map((card,i)=>[card.id,i+1])),signedIn=true,collectionFail=false,created=[],invites=[];
+ const profile={id:'00000000-0000-4000-8000-000000000001',username:'host',display_name:'Host'};
+ const empty={signature:'[]',games:3,wins:2,losses:1,draws:0,abandons:0,winRate:66.7};
+ const history=[{match_id:'ranked',match_type:'ranked',opponent_username:'rival',opponent_display_name:'Rival',result:'win',rating_before:1000,rating_after:1016,completed_at:'2026-10-09T12:00:00Z'},{match_id:'custom',match_type:'custom',opponent_username:'rival',opponent_display_name:'Rival',result:'loss',rating_before:1016,rating_after:1016,completed_at:'2026-10-09T13:00:00Z'}];
+ const table=()=>({id:profile.id,code:'ABCDEF',matchType:created.at(-1)?.matchType??'custom',status:'waiting',version:0,host:{id:profile.id,username:'host',displayName:'Host',avatarUrl:null},guest:null,opponent:null,playerId:'player1',state:null,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),completedAt:null});
+ await p.addInitScript(()=>localStorage.setItem('the-great-game:decks:v1',JSON.stringify([{id:'empty',name:'Empty test deck',cards:{},updatedAt:1}])));
+ await p.route('**/api/great-game**',async r=>{const u=new URL(r.request().url());
+  if(u.pathname.endsWith('/hub'))return r.fulfill({status:signedIn?200:401,json:signedIn?{profile,friends:[{id:"rival-id",username:"rival",display_name:"Rival",avatar_url:null,matchId:null}],ranking:null,lastMatch:null}:{error:'Sign in'}});
+  if(u.pathname.endsWith('/invite')){invites.push(r.request().postDataJSON());return r.fulfill({json:{messageId:'test-message',conversationId:'test-conversation'}});}
+  if(u.pathname.endsWith('/collection'))return r.fulfill({status:collectionFail?503:200,json:collectionFail?{error:'Collection temporarily unavailable.'}:{userId:profile.id,quantities}});
+  if(u.pathname.endsWith('/deck-stats'))return r.fulfill({json:{records:[empty],byType:{custom:[{...empty,games:1,wins:0,losses:1,winRate:0}],ranked:[{...empty,games:2,wins:2,losses:0,winRate:100}]},unlinkedGames:0}});
+  if(u.pathname.endsWith('/rank-history'))return r.fulfill({json:{rows:history.filter(row=>!u.searchParams.get('type')||u.searchParams.get('type')==='total'||row.match_type===u.searchParams.get('type')),next:null}});
+  if(u.searchParams.has('code'))return r.fulfill({json:{matchType:'ranked'}});
+  if(r.request().method()==='POST'){created.push(r.request().postDataJSON());return r.fulfill({json:{match:table()}});}
+  return r.fulfill({json:u.searchParams.has('match')?{match:table()}:{matches:[]}});
+ });
+ await p.route('**/api/notifications/direct-raven',r=>r.fulfill({json:{ok:true}}));
+ async function go(path){await p.goto('http://localhost:3000'+path,{waitUntil:'domcontentloaded'});await expect(p.getByText(signedIn?'Host':'Take a seat',{exact:true})).toBeVisible();}
+ async function choose(label,option){await p.getByRole('button',{name:label,exact:true}).click();const list=p.getByRole('listbox',{name:label,exact:true});await expect(list).toBeVisible();const box=await list.boundingBox(),v=p.viewportSize();assert(box.x>=0&&box.y>=0&&box.x+box.width<=v.width+1&&box.y+box.height<=v.height+1,'menu bounds');await list.getByRole('option',{name:option,exact:true}).click();}
+ const cardButtons=()=>p.getByRole('button',{name:/^View .+ card$/});
+ for(const [width,height]of[[1440,900],[390,844],[844,390]]){
+  await p.setViewportSize({width,height});await go('/cards/collection');await expect(cardButtons()).toHaveCount(2);await expect(p.getByText('Owned × 2',{exact:false})).toBeVisible();
+  await choose('Collection','All Cards');await expect(cardButtons()).toHaveCount(cards.length);await choose('Collection','Unowned Cards');await expect(cardButtons()).toHaveCount(cards.length-2);
+  await choose('Collection','Owned Cards');await p.getByRole('searchbox').fill(owned[0].name);await expect(cardButtons()).toHaveCount(1);await cardButtons().first().click();await expect(p.getByRole('button',{name:'Close card details',exact:true})).toBeVisible();await p.getByRole('button',{name:'Close card details',exact:true}).click();
+  assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'collection overflow');await p.screenshot({path:'.tmp/backpack-'+width+'.png',timeout:10000});
+  await go('/cards/decks');await expect(cardButtons()).toHaveCount(deckable.length);await choose('Collection','Owned Cards');await expect(cardButtons()).toHaveCount(2);await choose('Collection','All Cards');
+  await p.getByRole('button',{name:/Empty test deck/}).click();if(width<=760)await p.getByRole('tab',{name:/Your deck/}).click();const stats=p.getByRole('region',{name:'Personal deck statistics'});await stats.getByRole('button',{name:'Custom',exact:true}).click();await expect(stats.locator('dl').first()).toContainText('Matches1');await stats.getByRole('button',{name:'Ranked',exact:true}).click();await expect(stats.locator('dl').first()).toContainText('Matches2');
+  if(width<=760)await p.getByRole('tab',{name:'Cards',exact:true}).click();await p.getByRole('button',{name:'Add '+deckable[2].name+' to deck',exact:true}).click();assert(!Object.keys(quantities).includes(deckable[2].id));assert(await p.evaluate(id=>JSON.parse(localStorage.getItem('the-great-game:decks:v1')).find(d=>d.id==='empty').cards[id]===1,deckable[2].id),'Unowned cards remain usable');
+  assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'deck overflow');
+  await go('/cards/play');await p.getByRole('button',{name:/Challenge a Friend/}).click();await expect(p.getByRole('radio',{name:/Custom Game/})).toBeChecked();await p.getByRole('radio',{name:/Ranked Game/}).check();await p.getByRole('button',{name:'Open a Table',exact:true}).click();await expect(p.getByRole('heading',{name:'Waiting for a worthy rival'})).toBeVisible();await expect(p.getByText('Ranked Game · Counts toward rating and Ranks',{exact:true})).toBeVisible();assert.equal(created.at(-1).matchType,'ranked');
+  await go('/cards/play');await p.getByRole('button',{name:/Challenge a Friend/}).click();await p.getByRole('textbox',{name:'Table code'}).fill('ABCDEF');await expect(p.getByRole('button',{name:'Join Ranked',exact:true})).toBeEnabled();await p.screenshot({path:'.tmp/match-types-'+width+'.png',timeout:10000});
+  await choose('Your deck','Empty test deck');await expect(p.getByRole('button',{name:'Open a Table',exact:true})).toBeDisabled();await expect(p.getByRole('button',{name:'Join Ranked',exact:true})).toBeDisabled();
+ }
+ await p.setViewportSize({width:1440,height:900});await go('/cards/play');await p.getByRole('button',{name:/Challenge a Friend/}).click();await p.getByRole('button',{name:'Open a Table',exact:true}).click();assert.equal(created.at(-1).matchType,'custom');await expect(p.getByText('Custom Game · No rating changes',{exact:true})).toBeVisible();
+ await go('/cards/play');await p.getByRole('button',{name:'Invite Rival',exact:true}).click();await expect(p.getByRole('radio',{name:/Custom Game/})).toBeChecked();await p.getByRole('radio',{name:/Ranked Game/}).check();await p.getByRole('button',{name:'Send invitation',exact:true}).click();await expect(p.getByRole('heading',{name:'Waiting for a worthy rival'})).toBeVisible();assert.equal(created.at(-1).matchType,'ranked');assert.equal(invites.at(-1).username,'rival');
+ quantities={};await go('/cards/collection');await expect(p.getByText(/Your backpack is empty/)).toBeVisible();await expect(cardButtons()).toHaveCount(0);await p.getByRole('button',{name:'Browse all cards'}).click();await expect(cardButtons()).toHaveCount(cards.length);
+ collectionFail=true;await go('/cards/collection');await expect(p.getByText(/Collection temporarily unavailable/)).toBeVisible();await expect(cardButtons()).toHaveCount(0);collectionFail=false;await p.getByRole('button',{name:'Retry',exact:true}).click();await expect(p.getByText(/Your backpack is empty/)).toBeVisible();
+ signedIn=false;await go('/cards/collection');await expect(p.getByRole('link',{name:'Sign in to see your owned cards.'})).toBeVisible();await choose('Collection','All Cards');await expect(cardButtons()).toHaveCount(cards.length);signedIn=true;
+ await go('/cards/collection?card='+encodeURIComponent(deckable[0].id));await expect(p.getByRole('button',{name:'Close card details',exact:true})).toBeVisible();
+ await go('/cards/ranks');await p.getByRole('button',{name:'Your rank history',exact:true}).click();await expect(p.getByText('Unranked · No rating change',{exact:true})).toBeVisible();await choose('History match type','Ranked Games');await expect(p.getByText('Unranked · No rating change',{exact:true})).toHaveCount(0);await expect(p.getByText('+16 rating',{exact:true})).toBeVisible();await choose('History match type','Custom Games');await expect(p.getByText('+16 rating',{exact:true})).toHaveCount(0);
+ assert.deepEqual(errors,[]);console.log('PASS desktop/portrait/landscape collection, quantities/search/ownership, empty/error/guest/deep links, unowned deck access, scoped deck records, Custom/Ranked create/join and filtered history.');
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

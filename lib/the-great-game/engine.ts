@@ -10,6 +10,7 @@ import {
   createTestDeck,
   validateDeck,
 } from "./deck";
+import { assignSupporters } from "./supporters";
 import { recordChronicleAction } from "./chronicle-recorder";
 
 import type {
@@ -110,6 +111,7 @@ function addLog(
 
     visibility,
     turnOwnerId: state.activePlayerId,
+    rulerTurn: state.players[state.activePlayerId].turnsTaken,
 
     message,
   });
@@ -3012,22 +3014,6 @@ function protectedBySafePassageFrom(
 // Normal targeted card validation
 // ─────────────────────────────────────────────
 
-function assertEventMayTargetCharacter(
-  playerId: PlayerId,
-  target: UnitState
-) {
-  if (
-    target.ownerId !== playerId &&
-    target.cardId === "naela-targaryen" &&
-    !target.exhausted
-  ) {
-    assertRule(
-      false,
-      "Whereabouts Unknown prevents enemy Events from targeting Naela Targaryen while she is Ready."
-    );
-  }
-}
-
 function validatePlayTargets(
   state: GameState,
   playerId: PlayerId,
@@ -3109,10 +3095,6 @@ function validatePlayTargets(
       "A Word in the Right Ear must target a Character."
     );
 
-    assertEventMayTargetCharacter(
-      playerId,
-      target!
-    );
   }
 
   if (
@@ -3163,10 +3145,6 @@ function validatePlayTargets(
       "Trial by Combat's second target must be an enemy Character."
     );
 
-    assertEventMayTargetCharacter(
-      playerId,
-      enemy!
-    );
   }
 
   if (
@@ -3195,10 +3173,6 @@ function validatePlayTargets(
       "The Brothers' Tilt must target a Character."
     );
 
-    assertEventMayTargetCharacter(
-      playerId,
-      target!
-    );
   }
 }
 
@@ -3484,7 +3458,7 @@ function resolveEventMutable(
 // Play card
 // ─────────────────────────────────────────────
 
-function playCardMutable(
+function validateCardPlay(
   state: GameState,
   action: Extract<
     GameAction,
@@ -3615,6 +3589,36 @@ function playCardMutable(
     `Not enough Command. ${presentationCard.name} costs ${cost}.`
   );
 
+  return { playerId, player, handIndex, handCard, originalCardId, card, familiarGround, presentationCard, cost };
+}
+
+/** Read-only legality feedback, using the same validation as committed plays. */
+export function getCardPlayFeedback(state: GameState, playerId: PlayerId, handInstanceId: string) {
+  const unavailable = (reason: string) => ({ reason, targets: [] as { targetInstanceId?: string; secondaryTargetInstanceId?: string }[] });
+  if (state.winner) return unavailable("The match has ended.");
+  if (state.phase !== "playing") return unavailable("Finish the mulligan first.");
+  if (state.activePlayerId !== playerId) return unavailable("Wait for your ruler turn.");
+  if (state.pendingEffect) return unavailable("Resolve the current effect first.");
+  const handCard = state.players[playerId].hand.find(card => card.instanceId === handInstanceId);
+  if (!handCard) return unavailable("That card is not in your hand.");
+  const card = getGameCard(originalHandCardId(handCard));
+  const cost = getEffectiveCost(state, playerId, handCard);
+  if (cost > state.players[playerId].command) return unavailable("Not enough Command. Requires " + cost + "; you have " + state.players[playerId].command + ".");
+  const characters = Object.values(state.players).flatMap(player => player.board).filter(unit => getGameCard(unit.cardId).cardType === "character");
+  const targeted = card.cardType === "artifact" || ["word-in-the-right-ear", "brothers-tilt", "trial-by-combat"].includes(card.id);
+  const candidates: { targetInstanceId?: string; secondaryTargetInstanceId?: string }[] = card.id === "trial-by-combat"
+    ? characters.filter(unit => unit.ownerId === playerId).flatMap(ally => characters.filter(unit => unit.ownerId !== playerId).map(enemy => ({ targetInstanceId: ally.instanceId, secondaryTargetInstanceId: enemy.instanceId })))
+    : targeted ? characters.map(unit => ({ targetInstanceId: unit.instanceId })) : [{}];
+  let reason = targeted ? "No legal Character targets are available." : "This card cannot be played.";
+  const targets = candidates.filter(target => {
+    try { validateCardPlay(state, { type: "play-card", handInstanceId, ...target }); return true; }
+    catch (error) { if (error instanceof Error) reason = error.message; return false; }
+  });
+  return { reason: targets.length ? null : reason, targets };
+}
+
+function playCardMutable(state: GameState, action: Extract<GameAction, {type: "play-card"}>) {
+  const { playerId, player, handIndex, originalCardId, card, familiarGround, cost } = validateCardPlay(state, action);
   const dragonstoneDiscount =
     card.cardType ===
       "dragon" &&
@@ -3654,6 +3658,7 @@ function playCardMutable(
 
   player.command -=
     cost;
+  player.royalFavorCommand = Math.max(0, (player.royalFavorCommand ?? 0) - cost);
 
   player.hand.splice(
     handIndex,
@@ -3733,11 +3738,9 @@ function playCardMutable(
     const before =
       player.command;
 
-    player.command =
-      Math.min(
-        MAX_COMMAND,
-        player.command + 1
-      );
+    // Royal Favor grants temporary Command above the normal refill cap.
+    player.command += 1;
+    player.royalFavorCommand = 1;
 
     player.removedFromGame.push(
       card.id
@@ -5707,6 +5710,7 @@ function startTurnMutable(
     ) + uncappedBonus;
 
   player.nextCommandBonus = 0;
+  player.royalFavorCommand = 0;
   player.nextCommandBonusUncapped = 0;
 
   if (bonus > 0 || uncappedBonus > 0) {
@@ -5812,6 +5816,7 @@ function finishEndTurnMutable(
   // Unspent Command does not carry into another player's turn. Braavos stores
   // only its explicit +1 bonus via nextCommandBonusUncapped.
   player.command = 0;
+  player.royalFavorCommand = 0;
 
   const nextPlayer = opponentOf(playerId);
   state.turnNumber += 1;
@@ -5942,6 +5947,7 @@ export function createGame(
   }
 
   const state: GameState = {
+    supporters: assignSupporters(),
     turnNumber: 0,
 
     activePlayerId:

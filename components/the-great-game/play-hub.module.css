@@ -10,6 +10,12 @@
 .navLinks a { display: flex; align-items: center; padding: 0 clamp(10px, 1.6vw, 25px); color: #bca17d; text-decoration: none; font-family: var(--font-hotd), Georgia, serif; font-size: 13px; position: relative; }
 .navLinks a:hover, .navLinks a[aria-current] { color: #ffe4b2; background: radial-gradient(ellipse at bottom, #7c271944, transparent 75%); }
 .navLinks a[aria-current]::after { content: ''; position: absolute; bottom: 0; left: 15%; right: 15%; height: 2px; background: linear-gradient(90deg, transparent, #d5a45d, transparent); }
+.navLinks a { transition: transform .16s ease, filter .16s ease; }
+.navLinks a:active { transform: translateY(1px); filter: brightness(.95); }
+@media (prefers-reduced-motion: reduce) {
+  .navLinks a { transition: none; }
+  .navLinks a:active { transform: none; }
+}
 .profileChip { margin-left: auto; display: flex; align-items: center; gap: 10px; min-width: 0; max-width: 270px; border: 0; border-radius: 3px; padding: 5px 12px 5px 5px; transition: color 180ms ease, background 180ms ease; color: #ead8b7; text-decoration: none; background: transparent; }
 .profileChip > span:nth-child(2) { min-width: 0; }
 .profileChip strong, .profileChip small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -82,7 +88,9 @@ span.rankMark[data-player-tier-gem] { width: 42px; height: 42px; margin-left: 8p
 .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #8d6a3a55; }
 .resumeList { display: grid; gap: 6px; }
 .resumeList > span { font-size: 12px; text-transform: uppercase; }
-.resumeList button { display: flex; justify-content: space-between; gap: 12px; padding: 10px; color: #e4c89a; background: #cda66b14; border: 1px solid #ac875366; font: inherit; cursor: pointer; }
+.resumeList button { display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%; padding:10px 12px; border:1px solid #8f683f; border-radius:0; color:#e4c89a; background:linear-gradient(180deg,#1d140f,#120d0a); font:inherit; cursor:pointer; text-align:left; box-shadow:none; }
+.resumeList button:hover{border-color:#b88c56;background:linear-gradient(180deg,#2a1c13,#17100c)}
+.resumeList button b{font-family:var(--font-hotd),Georgia,serif;font-weight:400;color:#d6b27b}
 .parchmentNote { position: relative; margin: 0 0 22px; padding: 20px 44px 20px 22px; }
 .parchmentNote p { margin: 0; font-style: italic; line-height: 1.4; }
 .parchmentNote small { display: block; font-size: 12px; margin-top: 6px; }
@@ -278,3 +286,81 @@ span.rankMark[data-player-tier-gem] { width: 42px; height: 42px; margin-left: 8p
   .navLinks a { padding-inline: 4px; }
 }
 .spectatorConnection { position: fixed; z-index: 200; bottom: 12px; left: 50%; transform: translateX(-50%); padding: 8px 12px; background: #23170f; color: #ead8b7; }
+.matchBreakdown { margin: 16px 0; text-align: left; }
+.matchBreakdown table { width: 100%; table-layout: fixed; border-collapse: collapse; font: 12px/1.4 var(--font-body),serif; }
+.matchBreakdown caption { color: #ddbe86; text-align: left; margin-bottom: 10px; }
+.matchBreakdown th, .matchBreakdown td { padding: 7px 6px; border-bottom: 1px solid #89623d44; overflow-wrap: anywhere; }
+.matchBreakdown th { font-weight: 400; color: #bda88a; }
+.matchBreakdown th:first-child { width: 46%; }
+.matchBreakdown td, .matchBreakdown thead th:not(:first-child) { text-align: center; color: #ead4b0; }
+.matchBreakdown small, .matchBreakdown p { display: block; color: #a99478; font: 11px/1.5 var(--font-body),serif; margin-top: 10px; }
+@media(max-width:420px) { .matchBreakdown table { font-size: 11px; } .matchBreakdown th,.matchBreakdown td { padding: 6px 3px; } }
+/* Keep all six hub destinations visible on compact screens. */
+@media(max-width:760px){.navLinks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}.navLinks a{justify-content:center;padding:7px 2px;font-size:clamp(8px,1.7vw,11px)}}
+@media(max-width:480px){.navLinks{grid-template-columns:repeat(3,minmax(0,1fr))}.navLinks a{min-height:28px;font-size:10px;padding:3px 5px}}
+
+.seasonReference{display:inline-block;color:#bfa16d;font-size:12px;line-height:1.5;margin-block:6px;text-decoration:none}.seasonReference:hover{text-decoration:underline}
+
+/* The private-table window is never independently scrollable; its three compact tabs isolate tasks. */
+.noScrollDialog{overflow:visible!important;max-height:none;height:auto;min-height:430px;max-width:calc(100vw - 20px);bottom:auto;top:50%;transform:translate(-50%,-50%);animation:none}
+.noScrollDialog .dialogBody{overflow:visible;padding:14px 18px 19px}
+.noScrollDialog .inviteForm{display:grid;align-content:start;gap:10px;min-height:300px}
+.noScrollDialog .inviteForm>label{gap:4px}
+.noScrollDialog .inviteForm .primary{min-height:40px}
+.tableTabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:0;background:#100c09;border:1px solid #8a613e}
+.tableTabs button{min-width:0;min-height:37px;border:0;color:#c5a780;background:transparent;font:12px/1.25 var(--font-body),Georgia,serif;cursor:pointer;padding:6px 3px;box-shadow:none}
+.tableTabs button[aria-current="page"]{color:#f5dfb4;background:linear-gradient(#51351f,#271910);box-shadow:inset 0 -1px 0 #d2a868, inset 0 1px 0 #735136}
+.tableTabs button:hover{color:#ffdfac}
+.tableTabs button:focus-visible{outline:2px solid #deb478;outline-offset:2px}
+.noScrollDialog .resumeList{max-height:none;overflow:visible}
+.noScrollDialog .resumeList button{font-size:12px}
+.dialogActions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
+@media(max-height:580px){.noScrollDialog .dialogHeader{padding-block:6px}.noScrollDialog .dialogBody{padding-block:7px}.noScrollDialog .inviteForm{gap:6px}.noScrollDialog .tableTabs button{min-height:28px}.noScrollDialog .picker{gap:4px}}
+@media(max-width:450px){.noScrollDialog{width:calc(100vw - 16px)}.noScrollDialog .dialogBody{padding:9px 11px 12px}.noScrollDialog .tableTabs button{font-size:10px}}
+
+
+.openTablePager{display:flex;align-items:center;justify-content:space-between;gap:9px;color:#c7a777;font:12px var(--font-body),Georgia,serif}
+.openTablePager button{min-height:30px;padding:5px 12px;border:1px solid #8c6841;background:linear-gradient(#342318,#170f0b);color:#ead0a5;font:inherit;cursor:pointer}
+.openTablePager button:disabled{opacity:.35;cursor:default}
+@media(max-height:490px){.noScrollDialog .dialogHeader{padding-block:4px}.noScrollDialog .dialogBody{padding:5px 12px}.noScrollDialog .inviteForm{gap:4px}.noScrollDialog fieldset label{padding:4px}.noScrollDialog fieldset label span span{display:none}.noScrollDialog .tableTabs button{min-height:24px}.noScrollDialog .inviteForm>label button{min-height:30px}.noScrollDialog .inviteForm .primary{min-height:30px}}
+
+
+/* Stable table panel geometry and angular controls. */
+.noScrollDialog{height:470px;min-height:470px;box-sizing:border-box}
+.noScrollDialog .dialogBody{box-sizing:border-box;min-height:0}
+.tableTabs button[aria-current="page"]{box-shadow:none;border:0;outline:0}
+.noScrollDialog .resumeList button,.openTablePager button{border-radius:0}
+.deckChoice{display:flex;align-items:flex-end;gap:10px;min-width:0}
+.deckChoice>label{display:grid;gap:4px;flex:1;min-width:0}
+.deckChoice>div{flex:none;margin-bottom:5px}
+@media(max-height:580px){.noScrollDialog{height:400px;min-height:400px}}
+@media(max-height:490px){.noScrollDialog{height:340px;min-height:340px}}
+
+.tableTabs{padding:0;overflow:hidden;border-radius:0}
+.tableTabs button,.tableTabs button[aria-current="page"]{border-radius:0;margin:0;align-self:stretch}
+.noScrollDialog .inviteForm{padding-top:16px}
+.satchelTab{position:relative;display:flex;align-items:center;justify-content:center;flex:none;width:38px;height:38px;margin-left:auto;color:#c9aa77;text-decoration:none;border:0;background:none}
+.satchelTab img{display:block;transition:transform .16s ease,filter .16s ease}
+.satchelTab:hover img,.satchelTab:focus-visible img,.satchelTab[aria-current="page"] img{filter:brightness(1.12) drop-shadow(0 0 4px #d5a45d66)}
+.satchelTab:hover img{transform:translateY(-1px)}
+.satchelTab:active img{transform:translateY(1px);filter:brightness(.95)}
+.satchelTab:focus-visible{outline:2px solid #d49c45;outline-offset:3px}
+.satchelTab[aria-current="page"]::after{content:'';position:absolute;bottom:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,#d5a45d,transparent)}
+@media(prefers-reduced-motion:reduce){.satchelTab img{transition:none}.satchelTab:hover img,.satchelTab:active img{transform:none}}
+.nav .profileChip{margin-left:0}
+@media(max-width:760px){.nav{grid-template-columns:24px 38px minmax(0,1fr)}.satchelTab{grid-column:2;grid-row:1;margin-left:0;width:32px;height:32px}.nav .profileChip{grid-column:3;grid-row:1}.nav .navLinks{grid-column:1/-1}}
+
+.noScrollDialog .resumeList{display:grid;gap:8px;margin-top:0}
+.noScrollDialog .resumeList button,.openTableLink{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:9px 12px;border:1px solid #89613b66;border-radius:0;color:#ead0a5;background:linear-gradient(#2b1d13,#160f0b);font:12px/1.3 var(--font-body),Georgia,serif;text-decoration:none}
+.openTableLink b{font-weight:400;color:#bda078;font-size:11px}
+.openTableLink:hover{border-color:#c39a5b}
+
+.noScrollDialog{display:flex;flex-direction:column}
+.noScrollDialog .dialogHeader{flex:none}
+.noScrollDialog .dialogBody{display:flex;flex:1;flex-direction:column;min-height:0}
+.noScrollDialog .tableTabs{flex:none}
+.noScrollDialog .inviteForm{display:flex;flex:1;flex-direction:column;min-height:0;align-content:normal}
+.tableBottomActions{display:grid;gap:10px;margin-top:auto;flex:none}
+.tableBottomActions .primary{width:100%}
+.noScrollDialog .inviteForm>p[role="alert"]{flex:none;margin:0;font-size:12px}
+@media(max-height:580px){.tableBottomActions{gap:6px}}

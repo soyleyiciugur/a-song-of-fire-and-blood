@@ -1,3 +1,4 @@
+import type {CardMetadata} from "./card-metadata";
 // lib/the-great-game/types.ts
 
 // ─────────────────────────────────────────────
@@ -189,6 +190,7 @@ export interface CardAbility {
 }
 
 interface BaseCard {
+  metadata?: CardMetadata;
   id: string;
 
   cardType: CardType;
@@ -360,6 +362,7 @@ export interface PlayerState {
 
   maxCommand: number;
   command: number;
+  royalFavorCommand?: number;
 
   nextCommandBonus: number;
 
@@ -471,6 +474,7 @@ export type GameWinner =
   | null;
 
 export interface GameState {
+  turnClock?: import("./table-tempo").TurnClock;
   supporters?: Record<PlayerId, "mara" | "aldren">;
   turnNumber: number;
 
@@ -514,6 +518,8 @@ export interface GameLogEntry {
 
   message: string;
   turnOwnerId?: PlayerId;
+  /** Active ruler turnsTaken at the time of this log entry. */
+  rulerTurn?: number;
   chronicle?: {
     actionId: number;
     kind?: "play" | "conflict" | "effect";

@@ -6,7 +6,7 @@ export const TimelineEventSchema = z.object({
   description: z.string(),
   date: z.string().optional(),
   characters: z.array(z.string()).optional(),
-  kind: z.enum(["conflict", "death", "politics", "family", "travel", "revelation", "other"]).optional(),
+  kind: z.enum(["conflict", "death", "politics", "family", "travel", "revelation", "other", "memory", "aftermath"]).optional(),
   location: z.string().optional(),
   cause: z.string().optional(),
   consequence: z.string().optional(),

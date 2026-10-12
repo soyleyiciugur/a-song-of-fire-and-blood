@@ -1,4 +1,7 @@
 "use client";
+import {matchTypeLabel,type MatchType} from "@/lib/the-great-game/match-types";
+import MatchBreakdown from "./MatchBreakdown";
+import { chronicleTurns, gameTurnNumber, gameTurnLabel, rulerTurnLabel } from "@/lib/the-great-game/turn-labels";
 import { useState } from "react";
 import type { GameState, PlayerId } from "@/lib/the-great-game/types";
 import { playerSupporter } from "@/lib/the-great-game/supporters";
@@ -6,9 +9,10 @@ import { buildChronicle } from "@/lib/the-great-game/chronicle";
 import ParchmentDialog, { ParchmentNote } from "./ParchmentDialog";
 import styles from "./play-hub.module.css";
 
-export default function MatchResult({ state, viewerId, winnerName, onPlayAgain, onExit }: { state: GameState; viewerId: PlayerId; winnerName: string; onPlayAgain: () => void; onExit: () => void }) {
+export default function MatchResult({ matchType, state, viewerId, winnerName, onPlayAgain, onExit, playerNames, endedEarly = false }: { matchType?:MatchType; state: GameState; viewerId: PlayerId; winnerName: string; onPlayAgain: () => void; onExit: () => void; playerNames?: Record<PlayerId,string>; endedEarly?: boolean }) {
   const [review, setReview] = useState(false);
-  const result = state.winner === "draw" ? "Draw" : state.winner === viewerId ? "Victory" : "Defeat";
+  const turns = chronicleTurns(state);
+  const result = endedEarly ? "Match ended" : state.winner === "draw" ? "Draw" : state.winner === viewerId ? "Victory" : "Defeat";
   const speaker = playerSupporter(state, viewerId);
   const copy = speaker === "mara"
     ? result === "Victory" ? "Well played. The next round of boasting is yours." : result === "Defeat" ? "A hard table. Catch your breath. There is another game in you." : "Neither of you would yield. Call it even; the fire is still warm."
@@ -25,13 +29,14 @@ export default function MatchResult({ state, viewerId, winnerName, onPlayAgain, 
         <path d="M48 31H39v8c0 8 5 12 12 12m21-20h9v8c0 8-5 12-12 12M60 59v16m-12 7h24l-8-7h-8Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
         <path d="m60 92 4 5-4 5-4-5Z" fill="currentColor" />
       </svg></div>
-      <span className={styles.eyebrow}>The Great Game</span><h1>{result}</h1>
-      <p>{state.winner === "draw" ? "Neither claimant remains standing." : `${winnerName} prevails`}</p>
-      <ParchmentNote speaker={speaker}>{copy}</ParchmentNote>
-      <div className={styles.resultStats}><span><strong>{state.turnNumber}</strong>Turns</span><span><strong>{state.players[viewerId].standing}</strong>Your Standing</span></div>
+      <span className={styles.eyebrow}>The Great Game</span><h1>{result}</h1><p>{matchType ? matchTypeLabel(matchType) : "Local Game"}{matchType === "custom" ? " · No rating changes" : ""}</p>
+      <p>{endedEarly ? "A player left the table before the game concluded." : state.winner === "draw" ? "The match ends in a draw." : `${winnerName} prevails`}</p>
+      {!endedEarly && <ParchmentNote speaker={speaker}>{copy}</ParchmentNote>}
+      <div className={styles.resultStats}><span><strong>{gameTurnNumber(state.turnNumber)}</strong>Exchanges</span><span><strong>{state.players[viewerId].standing}</strong>Your Standing</span></div>
+      <MatchBreakdown state={state} names={playerNames} />
       <div className={styles.resultActions}><button className={styles.secondary} onClick={() => setReview(true)}>View Chronicle</button><button className={styles.primary} onClick={onPlayAgain}>Play Again</button></div>
       <button className={styles.textButton} onClick={onExit}>Back to the inn</button>
     </section>
-    {review && <ParchmentDialog title="The match chronicle" onClose={() => setReview(false)} wide><ol className={styles.resultChronicle}>{buildChronicle(state.log, viewerId).map(event => <li key={event.id}><small>Turn {event.turn}</small><strong>{event.title}</strong><span>{event.detail}</span></li>)}</ol></ParchmentDialog>}
+    {review && <ParchmentDialog title="The match chronicle" onClose={() => setReview(false)} wide><ol className={styles.resultChronicle}>{buildChronicle(state.log, viewerId).map(event => <li key={event.id}><small>{gameTurnLabel(event.turn)} · {rulerTurnLabel(turns.get(event.turn),viewerId)}</small><strong>{event.title}</strong><span>{event.detail}</span></li>)}</ol></ParchmentDialog>}
   </main>;
 }

@@ -1,13 +1,17 @@
 import fs from "node:fs";
+import assert from "node:assert/strict";
+import ts from "typescript";
 const source = fs.readFileSync(new URL("../lib/notifications/target.ts", import.meta.url), "utf8");
-for (const needle of [
-  'notification.kind === "direct_raven"',
-  '`/messages/${encodeURIComponent(conversationId)}`',
-  'notification.kind === "tavern_answer"',
-  'notification.kind === "ravens_eye_answer"',
-]) {
-  if (!source.includes(needle)) throw new Error(`Notification target resolver is missing: ${needle}`);
-}
+const javascript = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 } }).outputText;
+const { notificationTargetHref } = await import(`data:text/javascript;base64,${Buffer.from(javascript).toString("base64")}`);
+const target = (kind, context, href = "/notifications") => notificationTargetHref({ kind, context, href });
+assert.equal(target("direct_raven", { conversationId: "raven / one" }), "/messages/raven%20%2F%20one?unread=1");
+assert.equal(target("guild_parley", { conversationId: "guild" }), "/messages/guild?unread=1");
+assert.equal(target("direct_raven", {}, "/messages/legacy"), "/messages/legacy");
+assert.equal(target("tavern_answer", { threadId: "chapter-xxi", commentId: "reply-1" }), "/forum?thread=chapter-xxi&comment=reply-1#comment-reply-1");
+assert.equal(target("ravens_eye_answer", { entryId: "reel", commentId: "reply" }, "/ravens-eye/reels?item=reel&comment=reply#comment-reply"), "/ravens-eye/reels?item=reel&comment=reply#comment-reply");
+assert.equal(target("new_chapter", {}, "/chapters/of-ravens-and-bitter-blood"), "/chapters/of-ravens-and-bitter-blood");
+assert.equal(target("new_chapter", {}, "/incorrect"), "/chapters");
 const page = fs.readFileSync(new URL("../app/notifications/page.tsx", import.meta.url), "utf8");
 if (!page.includes("notificationTargetHref(activeNotification)")) throw new Error("Rookery lightbox is not using the target resolver.");
 console.log("Notification target routing checks passed.");

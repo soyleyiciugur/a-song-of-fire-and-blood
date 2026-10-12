@@ -20,6 +20,7 @@ type SocialRun = {
 };
 type SocialPost = {
   matchId: string;
+  matchType?: "custom" | "ranked";
   completedAt: string;
   result: "win" | "draw";
   actor: Person;
@@ -124,11 +125,11 @@ export default function GreatGameSocialPage() {
     }
   }
 
-  return <main className={styles.page}>
+  return <main className={`${styles.page} great-game-page`}>
     <div className={styles.backdrop} aria-hidden="true" />
     <HubNavFrame active="social" data={data} guest={guest} className={styles.navDock} />
 
-    <header className={styles.hero}>
+    <header className={styles.hero} data-great-game-heading>
       <div><span className={styles.eyebrow}>The Cupbearer · Table talk</span><h1>Social</h1></div>
       <blockquote>“Win quietly if you like. The room will notice anyway.”<small>— Mara</small></blockquote>
     </header>
@@ -147,9 +148,9 @@ export default function GreatGameSocialPage() {
       </aside>
 
       <section className={styles.feed} aria-label="The Great Game social feed">
-        <div className={styles.feedHeading}><div><span>From the tables</span><small>Recent rated matches</small></div>{error && <p role="alert">{error}</p>}</div>
+        <div className={styles.feedHeading}><div><span>From the tables</span><small>Recent Friendly & Crown matches</small></div>{error && <p role="alert">{error}</p>}</div>
         {loading ? <div className={styles.state}>Opening the room ledger…</div> : !payload.posts.length ? <div className={styles.state}>No finished matches yet. The room is waiting for its first story.</div> : payload.posts.map(post => <article className={styles.post} key={post.matchId}>
-          <div className={styles.postTop}><span>Rated table</span><time dateTime={post.completedAt}>{ago(post.completedAt)}</time></div>
+          <div className={styles.postTop}><span>{post.matchType === "custom" ? "Friendly" : "Crown"}</span><time dateTime={post.completedAt}>{ago(post.completedAt)}</time></div>
 
           <div className={styles.matchup}>
             <MatchPlayer person={post.actor} />
@@ -183,10 +184,12 @@ export default function GreatGameSocialPage() {
             <span className={`${communityStyles.wrap} ${communityStyles.replyComposer}`}>
             <button
               type="button"
+              className={styles.replyAction}
               aria-expanded={replying === post.matchId}
               disabled={!payload.interactionsReady}
               onClick={() => setReplying(current => current === post.matchId ? null : post.matchId)}
             >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="m9 5-6 6 6 6M3 11h12a6 6 0 0 1 6 6v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="butt" strokeLinejoin="miter" /></svg>
               <span>Reply</span>
               {post.replyCount > 0 && <span> {post.replyCount}</span>}
             </button>

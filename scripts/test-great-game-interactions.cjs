@@ -1,0 +1,17 @@
+﻿require('./test-great-game-decks.cjs');
+const assert=require('node:assert/strict');
+const {createGame,applyAction,getCardPlayFeedback}=require('../lib/the-great-game/engine.ts');
+let state=createGame();for(let i=0;i<2;i++)state=applyAction(state,{type:'mulligan',replaceHandInstanceIds:[]}).state;
+state.players.player1.command=10;state.players.player1.hand=[{instanceId:'naela',cardId:'naela-targaryen',costModifiers:[]}];
+let result=applyAction(state,{type:'play-card',handInstanceId:'naela'});assert(result.ok,result.error);state=result.state;
+const naela=state.players.player1.board[0];naela.ownerId='player2';naela.exhausted=false;state.players.player2.board=[naela];state.players.player1.board=[];
+state.players.player1.command=10;state.players.player1.hand=[{instanceId:'word',cardId:'word-in-the-right-ear',costModifiers:[]}];
+const before=JSON.stringify(state);let feedback=getCardPlayFeedback(state,'player1','word');assert.equal(feedback.reason,null);assert.equal(feedback.targets.length,1);assert(applyAction(state,{type:'play-card',handInstanceId:'word',...feedback.targets[0]}).ok);assert.equal(JSON.stringify(state),before);
+naela.exhausted=true;feedback=getCardPlayFeedback(state,'player1','word');assert.equal(feedback.reason,null);assert.equal(feedback.targets[0].targetInstanceId,naela.instanceId);assert(applyAction(state,{type:'play-card',handInstanceId:'word',...feedback.targets[0]}).ok);
+state.players.player1.command=0;assert.match(getCardPlayFeedback(state,'player1','word').reason,/Command/);assert.match(getCardPlayFeedback(state,'player2','word').reason,/ruler turn/);
+state.players.player1.command=10;state.players.player1.hand=[{instanceId:'trial',cardId:'trial-by-combat',costModifiers:[]}];assert(getCardPlayFeedback(state,'player1','trial').reason);
+naela.exhausted=false;const ally=structuredClone(naela);ally.ownerId='player1';ally.instanceId='ally';state.players.player1.board=[ally];feedback=getCardPlayFeedback(state,'player1','trial');assert.equal(feedback.reason,null);assert.equal(feedback.targets[0].targetInstanceId,'ally');assert(applyAction(state,{type:'play-card',handInstanceId:'trial',...feedback.targets[0]}).ok);
+state.players.player1.hand=[{instanceId:'duplicate',cardId:'naela-targaryen',costModifiers:[]}];assert.match(getCardPlayFeedback(state,'player1','duplicate').reason,/Unique/);
+state.players.player1.board=Array.from({length:6},(_,i)=>({...structuredClone(ally),instanceId:'full'+i}));assert.match(getCardPlayFeedback(state,'player1','duplicate').reason,/full/);
+state.winner='draw';assert.match(getCardPlayFeedback(state,'player1','duplicate').reason,/ended/);
+console.log('PASS immutable engine feedback, Command, Unique, board capacity, Ready Naela Event targeting, legal two-target events and turn/end guards');

@@ -1,3 +1,6 @@
+import DeckTypeRecords from "@/components/the-great-game/DeckTypeRecords";
+import MatchTypeStats from "@/components/the-great-game/MatchTypeStats";
+import {matchTypeLabel} from "@/lib/the-great-game/match-types";
 import ProfileGuestbook from "@/components/community/ProfileGuestbook";
 import ProfileAffinity from "@/components/community/ProfileAffinity";
 import { affinityCatalog } from "@/lib/profileAffinity";
@@ -17,16 +20,17 @@ export default async function Page({ params }: { params: Promise<{ username: str
   const { data: p } = await supabase.from("profiles").select("*").eq("username", username.toLowerCase()).single();
   if (!p) notFound();
 
-  const [{ count: threads }, { count: posts }, { count: raven }, { data: gameStats }, { data: deckStats }, { data: headToHead }, { data: matchHistory }, { data: leaderboardEntry }, { data: supporterStats }, viewer] = await Promise.all([
+  const [{ count: threads }, { count: posts }, { count: raven }, { data: gameStats }, { data: deckStats }, { data: headToHead }, { data: matchHistory }, { data: leaderboardEntry }, { data: supporterStats }, {data:typeStats}, viewer] = await Promise.all([
     supabase.from("forum_threads").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
     supabase.from("forum_posts").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
     supabase.from("raven_comments").select("*", { count: "exact", head: true }).eq("user_author_id", p.id).eq("is_visible", true),
     supabase.from("great_game_player_stats").select("*").eq("user_id", p.id).maybeSingle(),
-    supabase.from("great_game_deck_stats").select("*").eq("user_id", p.id).order("games_played", { ascending: false }).limit(6),
+    supabase.from("great_game_deck_type_stats").select("*").eq("user_id", p.id),
     supabase.from("great_game_head_to_head").select("*").eq("user_id", p.id).order("games_played", { ascending: false }).limit(5),
     supabase.from("great_game_match_history").select("*").eq("user_id", p.id).order("completed_at", { ascending: false }).limit(8),
     supabase.from("great_game_leaderboard").select("*").eq("user_id", p.id).maybeSingle(),
     supabase.from("great_game_supporter_stats").select("*").eq("user_id", p.id),
+    supabase.from("great_game_type_stats").select("*").eq("user_id",p.id),
     getCurrentUser(),
   ]);
 
@@ -62,13 +66,8 @@ export default async function Page({ params }: { params: Promise<{ username: str
             <div><span>The Great Game</span><h2 id="great-game-record-heading">Match Record</h2></div>
             <Link href="/cards/play">Enter the table</Link>
           </div>
-          <dl className={styles.gameStats}>
-            <div><dt>Played</dt><dd>{gameStats.games_played}</dd></div>
-            <div><dt>Wins</dt><dd>{gameStats.wins}</dd></div>
-            <div><dt>Losses</dt><dd>{gameStats.losses}</dd></div>
-            <div><dt>Abandons</dt><dd>{gameStats.abandons}</dd></div>
-            <div><dt>Win Rate</dt><dd>{Number(gameStats.win_rate).toLocaleString("en-GB", { maximumFractionDigits: 1 })}%</dd></div>
-            <div><dt>Win Streak</dt><dd>{gameStats.current_win_streak}</dd></div>
+          {typeStats && <MatchTypeStats rows={typeStats} />}<dl className={styles.gameStats}>
+            <div><dt>Total Win Streak</dt><dd>{gameStats.current_win_streak}</dd></div>
             <div><dt>Best Streak</dt><dd>{gameStats.longest_win_streak}</dd></div>
             <div><dt>Rating</dt><dd>{leaderboardEntry?.rating ?? 1000}</dd></div>
             <div><dt>Avg. Match</dt><dd>{Math.round(gameStats.average_duration_seconds / 60)}m</dd></div>
@@ -84,9 +83,9 @@ export default async function Page({ params }: { params: Promise<{ username: str
               </div>;
             })}
           </div>}
-          {(deckStats?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Deck &amp; Faction Record</h3>{deckStats!.map((deck, index) => <div className={styles.gameRow} key={`${deck.deck_name}:${deck.faction}`}><span><strong>{deck.deck_name}</strong><small>{index === 0 ? "Most used · " : ""}{deck.faction} · {deck.games_played} games</small></span><b>{deck.wins}W · {deck.losses}L · {deck.abandons}A</b></div>)}</div>}
+          {!!deckStats?.length && <DeckTypeRecords rows={deckStats} />}
           {(headToHead?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Head to Head</h3>{headToHead!.map(record => <div className={styles.gameRow} key={record.opponent_id}><Link href={`/users/${record.opponent_username}`}>{record.opponent_display_name}</Link><b>{record.wins}W · {record.losses}L · {record.abandons}A</b></div>)}</div>}
-          {(matchHistory?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Recent Matches</h3>{matchHistory!.map(match => <div className={styles.gameRow} key={match.match_id}><span><strong className={styles[`result_${match.result}`]}>{match.result}</strong><small>vs. {match.opponent_display_name} · {match.deck_name} · {match.turns} turns</small></span><b>{match.rating_after - match.rating_before >= 0 ? "+" : ""}{match.rating_after - match.rating_before}</b></div>)}</div>}
+          {(matchHistory?.length ?? 0) > 0 && <div className={styles.gameDetail}><h3>Recent Matches</h3>{matchHistory!.map(match => <div className={styles.gameRow} key={match.match_id}><span><strong className={styles[`result_${match.result}`]}>{match.result}</strong><small>{matchTypeLabel(match.match_type)} · vs. {match.opponent_display_name} · {match.deck_name} · {match.turns} turns</small></span><b>{match.match_type === "custom" ? "Unranked" : `${match.rating_after-match.rating_before>=0?"+":""}${match.rating_after-match.rating_before}`}</b></div>)}</div>}
         </section>
       )}
       {playedCharacterId && <PlayedCharacterCard characterId={playedCharacterId} isGameMaster={isHrrm} />}

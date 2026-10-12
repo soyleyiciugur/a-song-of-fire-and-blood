@@ -2,24 +2,22 @@
   --gold: #d5ad71;
   --paper: #ead7b7;
   --muted: #b79f80;
-  position: fixed;
-  inset: 0;
+  position: relative;
   z-index: 20;
   isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  min-height: 0;
-  height: 100dvh;
+  display:flex;
+  flex-direction:column;
+  box-sizing:border-box;
+  min-height:100dvh;
   --tgg-nav-anchor: 76px;
   padding: var(--tgg-nav-anchor) clamp(14px, 2.8vw, 50px) 20px;
-  overflow: hidden;
+  overflow: visible;
   color: var(--paper);
   background: #1a1009 url('/images/cards/hub/ranks-bg.webp') center / cover no-repeat;
   font-family: var(--font-body), Georgia, serif;
 }
 
-:global(body):has(.page), :global(html):has(.page) { overflow: hidden; }
+:global(body):has(.page), :global(html):has(.page) { overflow: visible; }
 
 .backdrop {
   position: absolute;
@@ -54,24 +52,24 @@
 .hero blockquote { max-width: 38ch; margin: 0; color: #dbc5a4; font-size: 15px; line-height: 1.5; font-style: italic; text-align: right; }
 .hero blockquote small { display: block; margin-top: 4px; color: #c5a272; font-size: 12px; }
 
-.content { display: grid; grid-template-columns: minmax(330px, .78fr) minmax(520px, 1.35fr); flex: 1; min-height: 0; gap: 18px; }
+.content { display:grid; grid-template-columns:minmax(330px,.78fr) minmax(520px,1.35fr); flex:none; gap:18px; }
 .highTable, .ledger { min-height: 0; border: 1px solid #89613b; outline: 1px solid #452d1b; outline-offset: 3px; background: linear-gradient(145deg, rgba(36, 24, 15, .94), rgba(14, 10, 7, .97)); box-shadow: 0 18px 45px #0007, inset 0 0 32px #0003; }
 .highTable { display: flex; flex-direction: column; padding: 16px; }
-.ledger { display: flex; flex-direction: column; overflow: hidden; }
+.ledger { display: flex; flex-direction: column; overflow: visible; }
 .sectionHeading { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 15px; min-height: 32px; }
 .sectionHeading small { color: #9f886a; font-size: 11px; }
 .ledger .sectionHeading { padding: 15px 17px 12px; border-bottom: 1px solid #98703a33; }
 
 .podium { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; flex: 1; min-height: 0; gap: 10px; padding-top: 16px; }
 .podiumCard { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; min-height: 72%; padding: 18px 10px 14px; border: 1px solid #8e643e88; color: #ead6b4; background: linear-gradient(180deg, #3b2818d9, #16100bed); text-decoration: none; text-align: center; transition: transform 160ms, border-color 160ms, background 160ms; }
-.podiumCard[data-rank='1'] { order: 2; min-height: 88%; border-color: #c79a50; background: linear-gradient(180deg, #5a3b1fe3, #20130deb); box-shadow: inset 0 2px #e6bd7444, 0 15px 28px #0005; }
+.podiumCard[data-rank='1'] { order: 2; border-color: #c79a50; background: linear-gradient(180deg, #5a3b1fe3, #20130deb); box-shadow: inset 0 2px #e6bd7444, 0 15px 28px #0005; }
 .podiumCard[data-rank='2'] { order: 1; }
 .podiumCard[data-rank='3'] { order: 3; }
 .podiumCard:hover { transform: translateY(-3px); border-color: #d2a45d; background: linear-gradient(180deg, #52351fe3, #1b120ced); }
 .rank { position: absolute; top: 9px; left: 10px; z-index: 3; color: #d4ab6b; font: 600 17px var(--font-hotd), Georgia, serif; }
 .podiumTier { position: absolute !important; top: 5px; right: 5px; z-index: 2; }
 .avatar { display: grid; place-items: center; flex: none; width: 42px; height: 42px; overflow: hidden; border: 1px solid #9b7449; border-radius: 50%; color: #e4c38c; background: #3c291a; font: 700 11px var(--font-hotd), Georgia, serif; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .avatarLarge { width: 64px; height: 64px; margin: 8px 0 12px; font-size: 15px; }
 .podiumCard strong { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 15px var(--font-hotd), Georgia, serif; }
 .podiumCard > small { max-width: 100%; margin-top: 3px; overflow: hidden; color: #9d8a70; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
@@ -82,7 +80,7 @@
 
 .labels, .row { display: grid; grid-template-columns: 92px minmax(190px, 1fr) 95px 155px 82px; align-items: center; gap: 12px; }
 .labels { flex: none; padding: 9px 16px; color: #8f7c67; background: #110c08a6; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
-.rows { flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #8b643a #100b07; }
+.rows { flex:none; min-height:0; overflow:visible; }
 .row { min-height: 64px; padding: 9px 16px; border-top: 1px solid #7c5a3433; color: #dfcbaa; text-decoration: none; transition: background 150ms, border-color 150ms; }
 .row:hover { border-color: #9d7446aa; background: linear-gradient(90deg, #69412133, #2a1c1255); }
 .rankCell { display: flex; align-items: center; gap: 6px; min-width: 0; }
@@ -154,3 +152,55 @@
   .podiumCard, .podiumCard[data-rank='1'] { padding-top: 62px; }
   .podiumTier { right: 3px; }
 }
+.historyPanel { flex:none; min-height:0; overflow:visible; padding: clamp(12px, 2vw, 24px); border: 1px solid #89613b; background: #160f0aed; }
+.historyPanel h2 { margin: 0 0 8px; font-family: var(--font-hotd), serif; color: var(--gold); }
+.historyPanel > p { color: var(--muted); line-height: 1.6; }
+.historyList { list-style: none; margin: 18px 0; padding: 0; }
+.historyList li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid #89613b55; }
+.historyList li > div { display: grid; gap: 5px; min-width: 0; overflow-wrap: anywhere; }
+.historyList time, .historyNote, .historyRating small { font-size: 12px; color: var(--muted); }
+.historyRating { text-align: right; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.historyRating [data-gain="true"] { color: #b6c898; }
+.historyRating [data-loss="true"] { color: #dca198; }
+@media (max-width: 1080px), (max-height: 700px) { .historyPanel { flex: none; overflow: visible; } }
+@media (max-width: 420px) { .historyList li { flex-wrap: wrap; } .historyRating { text-align: left; } .viewPicker button { flex: 1; padding-inline: 8px; } }
+.seasonPicker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.seasonPicker select { max-width: 100%; padding: 8px 12px; color: var(--paper); background: #24180e; border: 1px solid var(--gold); font: inherit; }
+/* Lists use the same restrained table treatment as the card reference. */
+.historyPanel { border-color: #89613b55; background: #15100bed; box-shadow: inset 0 1px #e0ba7510; }
+.historyPanel > h2 { font-size: 22px; font-weight: 400; }
+.historyPanel > p { font-size: 13px; max-width: 80ch; }
+.historyList li { padding: 15px 12px; border-color: #89613b30; }
+.historyList li:nth-child(odd) { background: #b88c4905; }
+.historyList li:hover { background: #b88c490b; }
+.historyList a { color: #dfc497; text-decoration-color: #cba56b50; text-underline-offset: 3px; }
+.historyRating strong { color: #ead2a9; font-weight: 500; }
+.historyPanel > label { max-width: 280px; margin-block: 18px; }
+
+.seasonBanner{color:#d5b77e;font-size:clamp(14px,2vw,19px);line-height:1.5;margin:8px 0}.seasonBanner small{display:block;font-size:12px;color:#b79f80}
+
+/* The ledger's canonical typographic system, including the author credit. */
+.hero blockquote { margin-left:auto; max-width:34rem; white-space:normal; text-align:right; font-family:var(--font-body),Georgia,serif; overflow-wrap:anywhere; }
+.hero blockquote small { display:inline; margin:0; color:#c5a272; font-size:12px; white-space:nowrap; }
+.podiumCard[data-rank] { min-height:var(--podium-min-height,56%); }
+.seasonChooser { width:min(100%,430px); }
+.seasonChooser > button { white-space:nowrap; }
+@media(max-width:980px){.hero blockquote{white-space:normal}.hero blockquote small{white-space:nowrap}}
+
+
+.podium .podiumCard[data-rank]{min-height:var(--rating-column-height,72%)}
+
+
+.hero>div{min-width:0;flex:1}
+.hero blockquote{flex:0 1 34rem;min-width:0;max-width:100%;margin-left:auto;box-sizing:border-box;text-align:right}
+.podium{height:340px;min-height:340px;flex:none;box-sizing:border-box}
+.podium .podiumCard[data-rank]{height:var(--rating-column-height,72%);min-height:0;box-sizing:border-box}
+.page{height:auto;max-height:none;overflow:visible}
+.historyPanel,.ledger,.rows{height:auto;max-height:none;overflow:visible;flex:none}
+@media(max-width:640px){.podium{height:300px;min-height:300px}.hero blockquote{flex:none;width:100%}}
+
+.hero{align-items:flex-end;padding-bottom:10px}
+.hero blockquote{align-self:flex-end;margin-bottom:0}
+
+.panelQuote{align-self:flex-end;max-width:100%;margin:0 0 10px auto;color:#dbc5a4;text-align:right;font:italic 15px/1.5 var(--font-body),Georgia,serif;overflow-wrap:anywhere}
+.panelQuote small{white-space:nowrap;color:#c5a272;font-size:12px}

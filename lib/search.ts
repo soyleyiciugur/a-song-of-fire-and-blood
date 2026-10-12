@@ -171,10 +171,9 @@ export function buildSearchIndex(): SearchResult[] {
   return results;
 }
 
-function scoreResult(item: SearchResult, query: string) {
-  const title = normalize(item.title);
-  const tokens = query.split(/\s+/).filter(Boolean);
+function scoreResult(item: SearchResult, query: string, tokens: string[]) {
   if (!tokens.every((token) => item.keywords.includes(token))) return 0;
+  const title = normalize(item.title);
   if (title === query) return 120;
   if (title.startsWith(query)) return 105;
   if (item.keywords.startsWith(query)) return 90;
@@ -186,8 +185,9 @@ function scoreResult(item: SearchResult, query: string) {
 export function searchIndex(query: string, limit = Number.POSITIVE_INFINITY, type?: SearchResultType): SearchResult[] {
   const q = normalize(query.trim());
   if (!q) return [];
+  const tokens = q.split(/\s+/).filter(Boolean);
   return buildSearchIndex().filter((item) => !type || item.type === type)
-    .map((item, position) => ({ item, position, score: scoreResult(item, q) }))
+    .map((item, position) => ({ item, position, score: scoreResult(item, q, tokens) }))
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score || a.position - b.position)
     .slice(0, limit).map((entry) => entry.item);
@@ -196,7 +196,11 @@ export function searchIndex(query: string, limit = Number.POSITIVE_INFINITY, typ
 export function balancedSearchIndex(query: string, limit = 12): SearchResult[] {
   const matches = searchIndex(query);
   const buckets = new Map<SearchResultType, SearchResult[]>();
-  for (const match of matches) buckets.set(match.type, [...(buckets.get(match.type) ?? []), match]);
+  for (const match of matches) {
+    const bucket = buckets.get(match.type);
+    if (bucket) bucket.push(match);
+    else buckets.set(match.type, [match]);
+  }
   const balanced: SearchResult[] = [];
   while (balanced.length < limit) {
     let added = false;

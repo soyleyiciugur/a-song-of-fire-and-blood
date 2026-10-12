@@ -1,7 +1,16 @@
 "use client";
 
-import { Suspense, useEffect, useId, useMemo, useRef, useState } from "react";
+import MetadataFilters, {MetadataBadges} from '@/components/the-great-game/MetadataFilters';
+import {CollectionNotice} from '@/components/the-great-game/OwnershipFilter';
+import {useCardCollection} from '@/components/the-great-game/useCardCollection';
+import {matchesMetadata,matchesOwnership,type MetadataSelection,type OwnershipFilter as Ownership} from '@/lib/the-great-game/card-metadata';
+import FilterMenu from "@/components/the-great-game/CardsSelect";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import {deckHealth} from "@/lib/the-great-game/deck-health";
+import PersonalDeckRecord from "@/components/the-great-game/PersonalDeckRecord";
+import DeckValidationNotice from "@/components/the-great-game/DeckValidationNotice";
+import { validateStoredDeck } from "@/lib/the-great-game/deck-records";
 import HubNavFrame from "@/components/the-great-game/HubNavFrame";
 import { useHubData } from "@/components/the-great-game/useHubData";
 import UtilityIcon from "@/components/nav/UtilityIcon";
@@ -13,103 +22,17 @@ import styles from "./decks.module.css";
 
 type CardType = "character" | "dragon" | "event" | "artifact" | "location";
 type Card = GameCard & { balanceStatus?: string };
-type Deck = { id: string; name: string; cards: Record<string, number>; updatedAt: number };
+type Deck = import("@/lib/the-great-game/stored-decks").StoredDeck;
 
 const ALL = getAllGameCards() as Card[];
 const STORAGE_KEY = DECK_STORAGE_KEY;
 const MAX_DECK = 30;
 const MAX_COPIES = 2;
 const LABEL: Record<CardType | "all", string> = {
-  all: "All Cards", character: "Characters", dragon: "Dragons",
+  all: "All Types", character: "Characters", dragon: "Dragons",
   event: "Events", artifact: "Artifacts", location: "Locations",
 };
 const TIER_RANK: Record<string, number> = { "s-plus": 0, s: 1, a: 2, b: 3, c: 4 };
-
-type FilterOption = { value: string; label: string };
-
-function FilterMenu({
-  value,
-  options,
-  onChange,
-  ariaLabel,
-}: {
-  value: string;
-  options: FilterOption[];
-  onChange: (value: string) => void;
-  ariaLabel: string;
-}) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const listId = useId();
-  const selected = options.find(option => option.value === value) ?? options[0];
-
-  useEffect(() => {
-    if (!open) return;
-
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const frame = requestAnimationFrame(() => {
-      const options = rootRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]');
-      (rootRef.current?.querySelector<HTMLButtonElement>('[aria-selected="true"]') ?? options?.[0])?.focus();
-    });
-
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => {
-      cancelAnimationFrame(frame);
-      document.removeEventListener("pointerdown", handlePointerDown);
-    };
-  }, [open]);
-
-  return (
-    <div ref={rootRef} className={`${styles.filterMenu} ${open ? styles.filterMenuOpen : ""}`} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={event => {
-      if (event.key === "Escape") { event.preventDefault(); setOpen(false); triggerRef.current?.focus(); return; }
-      if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
-      event.preventDefault();
-      if (!open) { setOpen(true); return; }
-      const items = Array.from(rootRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]') ?? []);
-      const current = items.indexOf(document.activeElement as HTMLButtonElement);
-      const next = event.key === "Home" ? 0 : event.key === "End" ? items.length - 1 : (current + (event.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
-      items[next]?.focus();
-    }}>
-      <button
-        ref={triggerRef}
-        type="button"
-        className={styles.filterTrigger}
-        aria-label={ariaLabel}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={open ? listId : undefined}
-        onClick={() => setOpen(current => !current)}
-      >
-        <span>{selected?.label ?? value}</span>
-        <svg className={styles.filterChevron} width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 8 5 5 5-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-      </button>
-      {open && (
-        <div id={listId} className={styles.filterOptions} role="listbox" aria-label={ariaLabel}>
-          {options.map(option => (
-            <button
-              type="button"
-              role="option"
-              aria-selected={option.value === value}
-              className={option.value === value ? styles.filterOptionActive : undefined}
-              key={option.value}
-              onClick={() => {
-                onChange(option.value);
-                setOpen(false);
-                triggerRef.current?.focus();
-              }}
-            >
-              <span>{option.label}</span>
-              {option.value === value && <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 function titleCase(value: string) {
   return value.split("-").filter(Boolean).map(x => x[0].toLocaleUpperCase("tr-TR") + x.slice(1)).join(" ");
@@ -118,11 +41,15 @@ function makeDeck(name = "New Deck"): Deck {
   return { id: `deck-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, name, cards: {}, updatedAt: Date.now() };
 }
 function countDeck(deck: Deck | null) {
-  return deck ? Object.values(deck.cards).reduce((a, b) => a + b, 0) : 0;
+  return deck ? Object.values(deck.cards).reduce((a, b) => a + (Number.isSafeInteger(b) && b >= 0 ? b : 0), 0) : 0;
 }
 function DeckWorkshop() {
   const cardId = useSearchParams().get("card");
   const { data, guest } = useHubData();
+  const collection=useCardCollection(guest?null:data?.profile.id);
+  const [metadata,setMetadata]=useState<MetadataSelection>({});
+  const [deckMetadata,setDeckMetadata]=useState<MetadataSelection>({});
+  const [ownership,setOwnership]=useState<Ownership>('all');
   const [mobilePanel, setMobilePanel] = useState<"collection" | "builder">("collection");
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [saveError, setSaveError] = useState("");
@@ -133,6 +60,7 @@ function DeckWorkshop() {
   const [tier, setTier] = useState("all");
   const [house, setHouse] = useState("all");
   const [sort, setSort] = useState("cost");
+  const [sortDescending, setSortDescending] = useState(false);
   const [availability, setAvailability] = useState<"deckable" | "non-deckable">("deckable");
   const [inspect, setInspect] = useState<string | null>(null);
   const [renaming, setRenaming] = useState(false);
@@ -167,11 +95,14 @@ function DeckWorkshop() {
 
   const selected = decks.find(d => d.id === selectedId) ?? null;
   const total = countDeck(selected);
+  const health = useMemo(()=>selected?deckHealth(selected):null,[selected]);
+  const validation = health?.validation ?? validateStoredDeck(selected);
   const houses = useMemo(() => Array.from(new Set(ALL.map(c => c.houseId).filter((house): house is string => Boolean(house) && house !== "-"))).sort(), []);
-  const filtered = useMemo(() => {
+  const sortedCards = useMemo(() => {
     const q = query.trim().toLowerCase();
     return ALL
       .filter(c => availability === "non-deckable" ? c.deckable === false : c.deckable !== false)
+      .filter(c => matchesMetadata(c,metadata) && (ownership==="all" || collection.status==="ready") && matchesOwnership(c.id,ownership,collection.quantities))
       .filter(c => type === "all" || c.cardType === type)
       .filter(c => tier === "all" || c.tierId === tier)
       .filter(c => house === "all" || c.houseId === house)
@@ -182,17 +113,11 @@ function DeckWorkshop() {
         if (sort === "type") return a.cardType.localeCompare(b.cardType) || a.name.localeCompare(b.name);
         return a.cost - b.cost || a.name.localeCompare(b.name);
       });
-  }, [query, type, tier, house, sort, availability]);
+  }, [query, type, tier, house, sort, availability, metadata, ownership, collection.status,collection.quantities]);
 
+  const filtered = sortDescending ? [...sortedCards].reverse() : sortedCards;
   const inspected = ALL.find(c => c.id === inspect) ?? null;
-  const curve = useMemo(() => {
-    const values = Array(11).fill(0) as number[];
-    if (selected) Object.entries(selected.cards).forEach(([id, copies]) => {
-      const card = ALL.find(c => c.id === id);
-      if (card) values[Math.min(10, card.cost)] += copies;
-    });
-    return values;
-  }, [selected]);
+  const curve = health?.curve ?? Array<number>(11).fill(0);
   const curveMax = Math.max(1, ...curve);
 
   function updateSelected(fn: (d: Deck) => Deck) {
@@ -230,12 +155,12 @@ function DeckWorkshop() {
   }
 
   return (
-    <main className={styles.page}>
+    <main className={`${styles.page} great-game-page`}>
       <div className={styles.backdrop} aria-hidden />
       <HubNavFrame active="decks" data={data} guest={guest} className={styles.navDock} />
-      <header className={styles.hero}>
+      <header className={styles.hero} data-great-game-heading>
         <div><span className={styles.eyebrow}>The Cupbearer · Deck workshop</span><h1>Prepare your hand.</h1></div>
-        <p>“Thirty cards. Make every one earn its place.”<small>— Mara</small></p>
+        <p className={styles.heroQuote}>“Thirty cards. Make every one earn its place.” <small>— Mara</small></p>
       </header>
       <div className={styles.mobileTabs} role="tablist" aria-label="Deck workshop view">
         <button role="tab" aria-selected={mobilePanel === "collection"} onClick={() => setMobilePanel("collection")}>Cards</button>
@@ -244,10 +169,10 @@ function DeckWorkshop() {
       <section className={styles.workspace} data-panel={mobilePanel} aria-label="Deck workshop">
         <aside className={styles.deckRail}>
           <div className={styles.railHeader}><div><span>Your decks</span><strong>{decks.length} in the satchel</strong></div><button onClick={newDeck} aria-label="Create new deck">+ New</button></div>
-          <div className={styles.deckList}>
-            {decks.map(deck => (
+          <MetadataFilters items={decks} value={deckMetadata} onChange={setDeckMetadata}/><div className={styles.deckList}>
+            {decks.filter(deck=>matchesMetadata(deck,deckMetadata)).map(deck => (
               <button key={deck.id} onClick={() => { setSelectedId(deck.id); setRenaming(false); setConfirmDelete(false); }} aria-pressed={deck.id === selectedId} className={`${styles.deckListItem} ${deck.id === selectedId ? styles.deckListItemActive : ""}`}>
-                <UtilityIcon name="cards" size={24} /><span>{deck.name}<small>{countDeck(deck)}/{MAX_DECK} cards</small></span>
+                <UtilityIcon name="cards" size={24} /><span>{deck.name}<small>{countDeck(deck)}/{MAX_DECK} cards</small><MetadataBadges item={deck}/></span>
               </button>
             ))}
             {!decks.length && <button className={styles.emptyDeckPrompt} onClick={newDeck}>Create your first deck</button>}
@@ -267,7 +192,7 @@ function DeckWorkshop() {
             <button type="button" role="tab" aria-selected={availability === "deckable"} className={availability === "deckable" ? styles.collectionTabActive : undefined} onClick={() => setAvailability("deckable")}>Deckable</button>
             <button type="button" role="tab" aria-selected={availability === "non-deckable"} className={availability === "non-deckable" ? styles.collectionTabActive : undefined} onClick={() => setAvailability("non-deckable")}>Non-Deckable</button>
           </div>
-          <div className={styles.filters}>
+          <div className={styles.filters}><FilterMenu value={ownership} ariaLabel="Filter by ownership" onChange={value => setOwnership(value as Ownership)} options={[{ value: "all", label: "All Cards" }, { value: "owned", label: "Owned" }, { value: "unowned", label: "Not Owned" }]} /><MetadataFilters items={ALL} value={metadata} onChange={setMetadata}/>
             <FilterMenu
               value={type}
               ariaLabel="Filter by card type"
@@ -296,7 +221,7 @@ function DeckWorkshop() {
                 ...houses.map(value => ({ value, label: titleCase(value) })),
               ]}
             />
-            <FilterMenu
+            <div className={styles.sortControls}><FilterMenu
               value={sort}
               ariaLabel="Sort cards"
               onChange={setSort}
@@ -306,11 +231,11 @@ function DeckWorkshop() {
                 { value: "tier", label: "Sort: Tier" },
                 { value: "type", label: "Sort: Type" },
               ]}
-            />
+            /><button type="button" className={styles.sortReverse} aria-label={`Sort ${sortDescending ? "descending" : "ascending"}. Change direction`} title="Reverse sort order" onClick={() => setSortDescending(value => !value)}><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={sortDescending ? "M8 3v10m-3.5-3.5L8 13l3.5-3.5" : "M8 13V3M4.5 6.5 8 3l3.5 3.5"}/></svg></button></div>
           </div>
 
-          <div className={styles.cardGrid} aria-label="Card collection">
-            {!filtered.length && <div className={styles.emptyResults}><UtilityIcon name="cards" size={38} /><h3>No cards on this table.</h3><p>Try another search or loosen your filters.</p><button onClick={() => { setQuery(""); setType("all"); setTier("all"); setHouse("all"); }}>Clear filters</button></div>}
+          {ownership!=="all"&&<CollectionNotice collection={collection} retry={collection.retry}/>}<div className={styles.cardGrid} aria-label="Card collection">
+            {!filtered.length && <div className={styles.emptyResults}><UtilityIcon name="cards" size={38} /><h3>No cards on this table.</h3><p>Try another search or loosen your filters.</p><button onClick={() => { setQuery(""); setType("all"); setTier("all"); setHouse("all"); setOwnership("all"); setMetadata({}); }}>Clear filters</button></div>}
             {filtered.map(card => {
               const copies = selected?.cards[card.id] ?? 0;
               const copyLimit = isUnique(card) ? 1 : MAX_COPIES;
@@ -330,13 +255,17 @@ function DeckWorkshop() {
           {selected ? <>
             <div className={styles.builderHeader}>
               <span className={styles.kicker}>On your table</span>
-              {renaming ? <input aria-label="Deck name" className={styles.nameInput} autoFocus value={selected.name} onChange={e => updateSelected(d => ({...d, name:e.target.value.slice(0,48)}))} onBlur={() => setRenaming(false)} onKeyDown={e => e.key === "Enter" && setRenaming(false)} /> :
+              <div className={styles.titleRow}>{renaming ? <input aria-label="Deck name" className={styles.nameInput} autoFocus value={selected.name} onChange={e => updateSelected(d => ({...d, name:e.target.value.slice(0,48)}))} onBlur={() => setRenaming(false)} onKeyDown={e => e.key === "Enter" && setRenaming(false)} /> :
                 <button aria-label="Rename deck" className={styles.nameButton} onClick={() => setRenaming(true)}>{selected.name} <span>✎</span></button>}
-              <div className={styles.deckMeta}><strong className={total === MAX_DECK ? styles.complete : ""}>{total}/{MAX_DECK}</strong><span>cards</span></div>
+              <DeckValidationNotice validation={validation} /></div>
+              <MetadataBadges item={selected}/><PersonalDeckRecord deck={selected} />
+              <div className={styles.deckMeta}><strong className={validation.valid ? styles.complete : ""}>{total}/{MAX_DECK}</strong><span>cards</span></div>
             </div>
+            {health&&<section className={styles.deckHealth} aria-label="Deck health"><p>{health.invalidEntries>0?health.invalidEntries+' invalid quantity '+(health.invalidEntries===1?'entry':'entries'):health.missing>0?health.missing+' cards needed to reach 30':health.count>30?(health.count-30)+' cards over the limit':'Full roster'}{health.unknown>0?' · '+health.unknown+' unknown card entries':''}</p><dl>{Object.entries(health.types).map(([type,count])=><div key={type}><dt>{type.charAt(0).toUpperCase()+type.slice(1)}</dt><dd>{count}</dd></div>)}</dl><small>Average printed Command: {health.averageCommand.toFixed(1)}. In-game discounts and bonuses are not included.</small></section>}
             <div className={styles.curveHeading}><span>Command curve</span><small>Plan your opening hand</small></div>
             <div className={styles.curve} aria-label="Cards by Command cost">{curve.map((n,i) => <div className={styles.curveCol} key={i} aria-label={`${i === 10 ? "10 or more" : i} Command: ${n} cards`}><div><i style={{height:`${n/curveMax*100}%`}} /></div><span>{i===10?"10+":i}</span><small>{n}</small></div>)}</div>
             <div className={styles.deckEntries}>
+              {Object.entries(selected.cards).filter(([id,count]) => !ALL.some(card=>card.id===id) || !Number.isSafeInteger(count) || count < 0 || count > 30).map(([id]) => <div className={styles.deckEntry} key={id}><span>{id}: invalid saved entry</span><button aria-label={`Remove invalid entry ${id}`} onClick={()=>updateSelected(deck=>({...deck,cards:Object.fromEntries(Object.entries(deck.cards).filter(([cardId])=>cardId!==id))}))}>Remove</button></div>)}
               {Object.entries(selected.cards).map(([id,copies]) => ({card:ALL.find(c=>c.id===id),copies})).filter(x=>x.card).sort((a,b)=>(a.card!.cost-b.card!.cost)||a.card!.name.localeCompare(b.card!.name)).map(({card,copies}) => <div className={styles.deckEntry} key={card!.id}>
                 <button className={styles.deckEntryMain} onClick={() => setInspect(card!.id)}><span>{card!.cost}</span><b>{card!.name}</b><em>×{copies}</em></button>
                 <button aria-label={`Remove ${card!.name} from deck`} onClick={() => removeCard(card!.id)}>−</button>

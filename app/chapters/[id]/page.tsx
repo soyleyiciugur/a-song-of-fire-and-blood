@@ -51,6 +51,8 @@ import {
 } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import { createElement, type ReactNode } from "react";
+import { chapterTextParts, sliceChapterText } from "@/lib/chapter-formatting";
 import ChapterCover from "@/components/ChapterCover";
 import { getAllChapters } from "@/data/chapters";
 import styles from "./chapter-reader.module.css";
@@ -108,6 +110,18 @@ const DIVIDER_MARKER = "✧ ✦ ✧";
 // spread (left + right), except for the fixed first spread (bug #11),
 // which never holds body text.
 
+function renderChapterText(text: string, dropCapClass?: string) {
+  let firstCharacter = Boolean(dropCapClass);
+  return chapterTextParts(text).map((part, index) => {
+    const content = firstCharacter ? (
+      <><span className={dropCapClass}>{part.text.charAt(0)}</span>{part.text.slice(1)}</>
+    ) : part.text;
+    firstCharacter = false;
+    const formatted = part.styles.reduceRight<ReactNode>((child, tag) => createElement(tag, null, child), content);
+    return <span key={index}>{formatted}</span>;
+  });
+}
+
 function paginateContent(
   blocks: string[],
   columnHeightPx: number,
@@ -141,7 +155,15 @@ function paginateContent(
       el.style.textAlign = "center";
       el.textContent = block;
     } else {
-      el.textContent = block;
+      for (const part of chapterTextParts(block)) {
+        let node: Node = document.createTextNode(part.text);
+        for (const tag of [...part.styles].reverse()) {
+          const wrapper = document.createElement(tag);
+          wrapper.appendChild(node);
+          node = wrapper;
+        }
+        el.appendChild(node);
+      }
     }
 
     rulerEl.appendChild(el);
@@ -156,15 +178,23 @@ function paginateContent(
   };
 
   const splitOversizedParagraph = (block: string) => {
-    let words = block.split(/\s+/).filter(Boolean);
-    while (words.length) {
+    const parts = chapterTextParts(block);
+    const visible = parts.map((part) => part.text).join("");
+    const words = [...visible.matchAll(/\S+/g)];
+    let wordOffset = 0;
+    const chunkText = (count: number) => {
+      const first = words[wordOffset];
+      const last = words[wordOffset + count - 1];
+      return sliceChapterText(parts, first.index!, last.index! + last[0].length);
+    };
+    while (wordOffset < words.length) {
       let low = 1;
-      let high = words.length;
+      let high = words.length - wordOffset;
       let fit = 0;
 
       while (low <= high) {
         const mid = Math.floor((low + high) / 2);
-        const candidate = words.slice(0, mid).join(" ");
+        const candidate = chunkText(mid);
         if (measure(candidate) <= columnHeightPx) {
           fit = mid;
           low = mid + 1;
@@ -175,11 +205,11 @@ function paginateContent(
 
       // Extremely long unbroken tokens still need to make progress.
       if (fit === 0) fit = 1;
-      const chunk = words.slice(0, fit).join(" ");
+      const chunk = chunkText(fit);
       current.push(chunk);
       usedHeight = measure(chunk);
-      words = words.slice(fit);
-      if (words.length) pushPage();
+      wordOffset += fit;
+      if (wordOffset < words.length) pushPage();
     }
   };
 
@@ -238,7 +268,7 @@ function renderBlocks(blocks: Block[]) {
     }
     return (
       <p key={i} className={styles.paragraph}>
-        {block.text}
+        {renderChapterText(block.text)}
       </p>
     );
   });
@@ -270,18 +300,15 @@ function renderFullChapterBlocks(blocks: Block[]) {
     if (!usedDropCap && block.text.trim().length > 0) {
       usedDropCap = true;
       const first = block.text.trim();
-      const dropChar = first.charAt(0);
-      const rest = first.slice(1);
       return (
         <p key={i} className={fc.fcParagraph}>
-          <span className={fc.fcDropCap}>{dropChar}</span>
-          {rest}
+          {renderChapterText(first, fc.fcDropCap)}
         </p>
       );
     }
     return (
       <p key={i} className={fc.fcParagraph}>
-        {block.text}
+        {renderChapterText(block.text)}
       </p>
     );
   });

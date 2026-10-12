@@ -1216,7 +1216,16 @@
         "title": "Baelenys sends Jace after Visenya and Naela",
         "description": "After Denlon reports Naela's recurring treatment journeys north of Tyrosh, Baelenys publicly treats Jace as the man expected to inherit and commands him to kill Visenya and Naela in Essos. Orwell volunteers to accompany him; Jace begins assembling a discreet company and considers recalling Saathos, while Gaelor remains only a possibility.",
         "date": "20th of the 8th Moon",
-        "characters": ["baelenys-targaryen", "jacaelon-targaryen", "denlon-wickfen", "orwell-morrigen", "visenya-targaryen", "naela-targaryen", "saathos-maris", "gaelor-targaryen"],
+        "characters": [
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "denlon-wickfen",
+          "orwell-morrigen",
+          "visenya-targaryen",
+          "naela-targaryen",
+          "saathos-maris",
+          "gaelor-targaryen"
+        ],
         "kind": "politics",
         "location": "King's Landing"
       },
@@ -1224,7 +1233,14 @@
         "title": "Vahaemon offers Vaenarr a place in his future reign",
         "description": "Across the Narrow Sea, Vahaemon offers to name Vaenarr Hand and then to grant him Dragonstone. Vaenarr refuses both, points to Vahaemon's existing promises and remains silent when asked whether his return is still about Jaery.",
         "date": "20th of the 8th Moon",
-        "characters": ["vahaemon-targaryen", "vaenarr-targaryen", "jaery-targaryen", "aegor-targaryen", "visenya-targaryen", "naela-targaryen"],
+        "characters": [
+          "vahaemon-targaryen",
+          "vaenarr-targaryen",
+          "jaery-targaryen",
+          "aegor-targaryen",
+          "visenya-targaryen",
+          "naela-targaryen"
+        ],
         "kind": "politics",
         "location": "Tyrosh"
       },
@@ -1232,7 +1248,12 @@
         "title": "Vhaemys overhears the royal marriage fracture",
         "description": "Baelenys confronts Jaery over Vaenarr and old questions of trust. Listening outside their chamber, Vhaemys misunderstands the quarrel as proof that her mother never loved her father and that the family is turning against him.",
         "date": "20th of the 8th Moon",
-        "characters": ["baelenys-targaryen", "jaery-targaryen", "vhaemys-targaryen", "vaenarr-targaryen"],
+        "characters": [
+          "baelenys-targaryen",
+          "jaery-targaryen",
+          "vhaemys-targaryen",
+          "vaenarr-targaryen"
+        ],
         "kind": "family",
         "location": "King's Landing"
       },
@@ -1240,7 +1261,10 @@
         "title": "Visenor and Leo agree to seek the Dornish dragon",
         "description": "Visenor recognizes Leo's unease but accepts his request for time. The next day, speaking privately in the Proud Lantern, they acknowledge how their fathers shaped them and agree in principle to travel south to investigate the reported dragon in Dorne; they have not yet departed Oldtown.",
         "date": "20th–21st of the 8th Moon",
-        "characters": ["visenor-targaryen", "leo-tyrell"],
+        "characters": [
+          "visenor-targaryen",
+          "leo-tyrell"
+        ],
         "kind": "revelation",
         "location": "Oldtown"
       },
@@ -1248,9 +1272,116 @@
         "title": "A white dragon meets Vhaemys in the storm",
         "description": "Compelled by a call only she understands, Vhaemys leads Saera, Jace and Cloudgazer into the storm above King's Landing. An enormous unidentified white dragon confronts them, ignores Jace's calming commands and fixes its attention on Vhaemys before closing its eye as she orders it to obey. Its identity and any bond with Vhaemys remain unconfirmed.",
         "date": "21st of the 8th Moon",
-        "characters": ["vhaemys-targaryen", "saera-targaryen", "jacaelon-targaryen"],
+        "characters": [
+          "vhaemys-targaryen",
+          "saera-targaryen",
+          "jacaelon-targaryen"
+        ],
         "kind": "revelation",
         "location": "King's Landing"
+      }
+    ]
+  },
+  {
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "chapterTitle": "Chapter XXI: Of Ravens and Bitter Blood",
+    "date": "21st–23rd of the 8th Moon, 99 AC",
+    "events": [
+      {
+        "title": "Bloodshed on the Blackwood–Bracken border",
+        "description": "Godfrey and Royce Blackwood inspect a clash that has killed Perric Bracken's brother and men of both houses. Godfrey denies premeditation, orders stronger border security and expects Stark support; Royce warns that intervention could unite the Riverlords behind Tully. Neither intent nor a new Stark pledge is established.",
+        "date": "21st of the 8th Moon",
+        "characters": [
+          "godfrey-blackwood",
+          "royce-blackwood"
+        ],
+        "kind": "conflict",
+        "location": "Blackwood–Bracken border"
+      },
+      {
+        "title": "The white dragon is brought to the Dragonpit",
+        "description": "Jace, Saera and Vhaemys return through the storm with Cloudgazer and the enormous white dragon. Vhaemys touches the creature's muzzle before reluctantly leaving it with the dragonkeepers. Her claim is confirmed; the dragon's identity remains unknown.",
+        "date": "21st of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "saera-targaryen",
+          "vhaemys-targaryen"
+        ],
+        "kind": "revelation",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Lorenah counsels Jace on the Essos company",
+        "description": "With Daria present, Jace recounts Vhaemys's dragon encounter. After Daria leaves, Lorenah opposes taking Gaelor on the mission and urges Jace to consult the knights and his father. Alester and Orwell are chosen, Saathos's answer is awaited, and Gaelor remains undecided. A possible visit to Starfall is not yet arranged.",
+        "date": "21st of the 8th Moon",
+        "characters": [
+          "jacaelon-targaryen",
+          "lorenah-dayne",
+          "daria-sand"
+        ],
+        "kind": "politics",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Visenor and Leo sail south",
+        "description": "Visenor and Leo leave Oldtown quietly by sea, adopting ordinary clothes for their arrival near Starfall. Visenor remains uneasy about being watched, without proof that someone is following them.",
+        "date": "21st–23rd of the 8th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "leo-tyrell"
+        ],
+        "kind": "travel",
+        "location": "Starfall"
+      },
+      {
+        "title": "Celtigar visits the royal court",
+        "description": "Lord Celtigar brings Annara to King's Landing after Vhaemys invites her. Annara hurries to join her friend, while her father tries to raise a marriage proposal with Baelenys. The King postpones the subject before any proposed match is identified.",
+        "date": "22nd of the 8th Moon",
+        "characters": [
+          "lord-celtigar",
+          "annara-celtigar",
+          "vhaemys-targaryen",
+          "baelenys-targaryen",
+          "jacaelon-targaryen"
+        ],
+        "kind": "family",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Baelenys leaves the mission decision to his heir",
+        "description": "Baelenys delights in Vhaemys's dragon but humiliates Jaery when she objects to risking both sons in Essos. He favors Gaelor's inclusion only if the chosen companions agree and leaves the decision to Jace. After a harsh cough, Jace seeks Baelor's help; no disease is diagnosed.",
+        "date": "22nd of the 8th Moon",
+        "characters": [
+          "baelenys-targaryen",
+          "jacaelon-targaryen",
+          "jaery-targaryen",
+          "baelor-targaryen"
+        ],
+        "kind": "family",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Weylar reports hunger turning to anger",
+        "description": "Weylar reports that the Watch has withdrawn from some Flea Bottom streets after stones were thrown at Oswald's patrol, with no serious Gold Cloak injuries reported. Jace considers seeking grain and provisions against House Tyrell's debt. The missing woman's pregnancy remains a hypothesis, and Weylar has no useful Starfall news.",
+        "date": "22nd of the 8th Moon",
+        "characters": [
+          "weylar-rocke",
+          "jacaelon-targaryen"
+        ],
+        "kind": "politics",
+        "location": "King's Landing"
+      },
+      {
+        "title": "Visenor returns to an empty refuge",
+        "description": "Visenor reveals himself to Dayne patrolmen and is escorted by Edric to the retreat. With Leo outside tending horses, he hears that Rhaella, Edmyn and the self-described replacement Nymos are missing. Her writings explain nothing; interception of his ravens is only a suspicion. Edric widens the search and Visenor refuses to leave, still unaware of his wife's death.",
+        "date": "23rd of the 8th Moon",
+        "characters": [
+          "visenor-targaryen",
+          "leo-tyrell",
+          "edric-dayne"
+        ],
+        "kind": "revelation",
+        "location": "Starfall"
       }
     ]
   }

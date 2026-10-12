@@ -168,14 +168,14 @@
   {
     "id": "unknown-white-dragon",
     "name": "Unknown White Dragon",
-    "status": "Unknown",
+    "status": "Alive",
     "image": "/images/dragons/default.webp",
     "traits": [
       "White Scales",
       "Enormous",
-      "Identity Unconfirmed",
-      "Rider Bond Unconfirmed"
+      "Identity Unconfirmed"
     ],
-    "description": "An enormous white dragon encountered by Cloudgazer above King's Landing during a summer storm on the Twenty-First Day of the Eighth Moon, 99 AC. Jace and Saera privately think of Meraxes when they recognize the pale head and ancient horn structure, but the resemblance does not establish the dragon's identity. The beast focuses on Vhaemys and closes its eye as she commands it to obey; no rider or claim is confirmed."
+    "description": "An enormous white dragon encountered above King's Landing during a summer storm on the Twenty-First Day of the Eighth Moon, Ninety-Nine AC. It follows Vhaemys back to the city and is housed in the Dragonpit, where it permits her touch. Vhaemys is its confirmed rider, but the beast's identity remains unknown; Jace and Saera's earlier comparison with Meraxes does not establish that it is Meraxes.",
+    "riderId": "vhaemys-targaryen"
   }
 ]

@@ -48,7 +48,7 @@ export const CharacterSchema = z
       .object({
         day: z.number().int().min(1).max(30),
         moon: z.number().int().min(1).max(12),
-        year: z.number().int().min(1),
+        year: z.number().int(),
       })
       .nullable()
       .optional(),
@@ -56,26 +56,37 @@ export const CharacterSchema = z
       .object({
         day: z.number().int().min(1).max(30),
         moon: z.number().int().min(1).max(12),
-        year: z.number().int().min(1),
+        year: z.number().int(),
       })
       .optional(),
     portraitAgeState: CharacterAgeStateSchema.optional(),
     height: z.string().optional().default("-"),
     father: z.string().default("-"),
     mother: z.string().default("-"),
-    spouse: z.string().optional().default("-"),
+    spouse: z.union([z.string(), z.array(z.string())]).optional().default("-"),
     siblings: z.array(z.string()).default([]),
     children: z.array(z.string()).optional().default([]),
     mentor: z.union([z.string(), z.array(z.string())]).optional().default("-"),
     dragon: z.string().optional().default("-"),
     traits: z.array(z.string()).default([]),
     goals: z.array(z.string()).default([]),
-    relationships: z.record(z.string(), z.string()).default({}),
+    relationships: z.record(z.string(), z.object({
+      overview: z.string(),
+      latestDevelopment: z.string(),
+    }).strict()).default({}),
     summary: z.string().default("No summary."),
     quote: CharacterQuoteSchema.optional(),
     quotes: z.array(CharacterQuoteSchema).optional().default([]),
     portrait: z.string().optional(),
     miniPortrait: z.string().optional(),
+    reign: z.object({ from: z.string(), to: z.string().optional() }).strict().optional(),
+    personalTimeline: z.array(z.object({
+      title: z.string(),
+      date: z.string(),
+      description: z.string().optional(),
+      order: z.number(),
+      chapterSlug: z.string().optional(),
+    }).strict()).optional(),
   })
   .strict();
 

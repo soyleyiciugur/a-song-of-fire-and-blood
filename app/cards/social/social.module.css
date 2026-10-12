@@ -49,8 +49,8 @@
   text-transform: uppercase;
 }
 .hero h1 { margin: 6px 0 0; color: #f1ddbb; font: 400 clamp(32px, 4vw, 54px)/1.05 var(--font-hotd), Georgia, serif; }
-.hero blockquote { max-width: 38ch; margin: 0; color: #dbc5a4; font-size: 15px; line-height: 1.5; font-style: italic; text-align: right; }
-.hero blockquote small { display: block; margin-top: 4px; color: #c5a272; font-size: 12px; }
+.hero blockquote { margin-left:auto; max-width:34rem; color:#dbc5a4; font-size:15px; line-height:1.5; font-style:italic; text-align:right; overflow-wrap:anywhere; }
+.hero blockquote small { display:inline; margin-top:0; margin-left:4px; color:#c5a272; font-size:12px; white-space:nowrap; }
 
 .layout {
   display: grid;
@@ -174,7 +174,7 @@
   font: 10px var(--font-hotd), Georgia, serif;
   letter-spacing: .045em;
   text-transform: uppercase;
-  transition: color 150ms ease, text-shadow 150ms ease;
+  transition: color 50ms ease, text-shadow 50ms ease;
 }
 .actionButton + .actionButton { margin-left: 13px; padding-left: 15px; }
 .actionButton + .actionButton::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: #75533455; }
@@ -249,3 +249,10 @@
 @media (max-width: 400px) {
   .matchPlayer, .matchPlayer:last-child { flex-direction: column; align-items: center; text-align: center; }
 }
+
+.actions .replyAction { display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: #b9a48a; transition: color 50ms ease; }
+.actions .replyAction svg { flex: none; width: 14}
+.actions .replyAction:hover:not(:disabled), .actions .replyAction[aria-expanded="true"] { color: #efd7b5; }
+.actions .replyAction:focus-visible { outline: 3px solid #cba669; outline-offset: 1px; }
+
+.layout{width:100%;max-width:none;margin-inline:0}

@@ -4,7 +4,7 @@ import { z } from "zod";
 export const DragonSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
-  status: z.enum(["Alive", "Dead"]),
+  status: z.enum(["Alive", "Dead", "Unknown"]),
   riderId: z.string().optional(),
   previousRiderId: z.string().optional(),
   image: z.string(),

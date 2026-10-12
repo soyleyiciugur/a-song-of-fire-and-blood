@@ -1,3 +1,5 @@
+import {parseMatchType} from "@/lib/the-great-game/match-types";
+import { advanceTurnClock } from "@/lib/the-great-game/table-tempo";
 import { randomInt } from "node:crypto";
 import { after, NextResponse } from "next/server";
 import houses from "@/data/houses.json";
@@ -23,6 +25,7 @@ const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const OPEN_STATUSES: GreatGameMatchStatus[] = ["waiting", "active"];
 
 type MatchRow = {
+  match_type: "custom" | "ranked";
   id: string;
   code: string;
   host_id: string;
@@ -209,6 +212,7 @@ async function toMatchView(
   return {
     id: match.id,
     code: match.code,
+    matchType: match.match_type,
     status: match.status,
     version: match.version,
     playerId,
@@ -218,6 +222,7 @@ async function toMatchView(
     state: match.state ? projectGameStateForPlayer(match.state, playerId) : null,
     createdAt: match.created_at,
     updatedAt: match.updated_at,
+    serverNow: new Date().toISOString(),
     completedAt: match.completed_at,
   };
 }
@@ -232,6 +237,7 @@ function toStatePatch(
     version: match.version,
     state: match.state ? projectGameStateForPlayer(match.state, playerId) : null,
     updatedAt: match.updated_at,
+    serverNow: new Date().toISOString(),
     completedAt: match.completed_at,
   };
 }
@@ -259,6 +265,14 @@ export async function GET(request: Request) {
   if (!admin) return jsonError("Online play is not configured on the server.", 503);
 
   const url = new URL(request.url);
+  const previewCode = url.searchParams.get("code");
+  if (previewCode) {
+    if (!/^[A-Z0-9]{6}$/.test(previewCode)) return jsonError("Invalid table code.");
+    const {data,error}=await admin.from("great_game_matches").select("match_type,status").eq("code",previewCode).maybeSingle();
+    if(error) return jsonError("The invitation could not be checked.",503);
+    if(!data || data.status!=="waiting") return jsonError("This table is no longer waiting for a guest.",404);
+    return NextResponse.json({matchType:data.match_type},{headers:{"Cache-Control":"private, no-store"}});
+  }
   const profileId = url.searchParams.get("player");
   if (profileId) {
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(profileId)) return jsonError("Invalid player.");
@@ -266,6 +280,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ player: profiles.get(profileId) }, { headers: { "Cache-Control": "private, no-store" } });
   }
   const matchId = url.searchParams.get("match");
+  const matchIsCode = matchId !== null && /^[A-Z0-9]{6}$/.test(matchId);
   const stateOnly = url.searchParams.get("stateOnly") === "1";
 
   if (matchId) {
@@ -274,7 +289,7 @@ export async function GET(request: Request) {
       const { data, error } = await admin
         .from("great_game_matches")
         .select("id,host_id,guest_id,state,status,version,updated_at,completed_at")
-        .eq("id", matchId)
+        .eq(matchIsCode ? "code" : "id", matchId)
         .maybeSingle();
       const stateReadFinishedAt = performance.now();
 
@@ -298,7 +313,7 @@ export async function GET(request: Request) {
     const { data, error } = await admin
       .from("great_game_matches")
       .select("*")
-      .eq("id", matchId)
+      .eq(matchIsCode ? "code" : "id", matchId)
       .maybeSingle();
 
     if (error) return jsonError(error.message, 500);
@@ -336,6 +351,7 @@ export async function GET(request: Request) {
       {
         id: row.id,
         code: row.code,
+        matchType: row.match_type,
         status: row.status,
         version: row.version,
         playerId,
@@ -364,10 +380,12 @@ export async function POST(request: Request) {
     return jsonError("Invalid request.");
   }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) return jsonError("Invalid request.");
   const op = body.op;
 
   try {
     if (op === "create") {
+      const matchType = parseMatchType(body.matchType);
       const deck = asDeck(body.deck);
       const deckName = asDeckName(body.deckName);
 
@@ -391,6 +409,7 @@ export async function POST(request: Request) {
           .from("great_game_matches")
           .insert({
             code,
+            match_type: matchType,
             host_id: user.id,
             host_deck: deck,
             host_deck_name: deckName,
@@ -538,6 +557,8 @@ export async function POST(request: Request) {
       const result = applyAction(match.state, action.type === "mulligan" ? { ...action, actorPlayerId: playerId } : action);
       const engineFinishedAt = performance.now();
       if (!result.ok) return jsonError(result.error ?? "That move is not legal.", 422);
+
+      result.state.turnClock = advanceTurnClock(match.state, result.state, Date.now());
 
       const addedBoardUnit = beforeBoardIds
         ? result.state.players[playerId].board.find((unit) => !beforeBoardIds.has(unit.instanceId)) ?? null

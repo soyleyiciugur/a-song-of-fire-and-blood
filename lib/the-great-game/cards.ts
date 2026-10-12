@@ -12,6 +12,11 @@ import type {
 const CARDS =
   cardsData as unknown as GameCard[];
 
+const cardsById = new Map<string, GameCard>();
+for (const card of CARDS) {
+  if (!cardsById.has(card.id)) cardsById.set(card.id, card);
+}
+
 export function getAllGameCards(): GameCard[] {
   return CARDS;
 }
@@ -26,10 +31,7 @@ export function getAllDeckableGameCards(): GameCard[] {
 export function getGameCard(
   cardId: string
 ): GameCard {
-  const card = CARDS.find(
-    (candidate) =>
-      candidate.id === cardId
-  );
+  const card = cardsById.get(cardId);
 
   if (!card) {
     throw new Error(
@@ -43,10 +45,7 @@ export function getGameCard(
 export function findGameCard(
   cardId: string
 ): GameCard | undefined {
-  return CARDS.find(
-    (card) =>
-      card.id === cardId
-  );
+  return cardsById.get(cardId);
 }
 
 export function getCharacterCard(

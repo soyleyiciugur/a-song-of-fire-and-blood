@@ -13,5 +13,30 @@
     "id": "oldtown-visitor-centre",
     "name": "Oldtown Visitor Centre",
     "description": "Fictional Oldtown tourism desk; its public-facing admin is a social-AU comedy invention, not a real organization or a source of new canon policy."
+  },
+  {
+    "id": "the-cupbearer",
+    "name": "The Cupbearer",
+    "description": "Fictional social-AU house account for The Great Game tavern; separate from Aldren and Mara, not a real business or a source of new story canon."
+  },
+  {
+    "id": "iron-bank",
+    "name": "Iron Bank ? Client desk",
+    "description": "The Iron Bank is established setting lore; this client desk and its staff are social-AU inventions. No invented canon loans, account balances, interest rates, confidential customers or real financial advice."
+  },
+  {
+    "id": "kings-landing-harbour",
+    "name": "King?s Landing ? Harbour desk",
+    "description": "Distinct from City Watch: berths and cargo logistics, not policing. This desk is a social-AU invention; never invent canon ship movements, taxes, regulations or incidents."
+  },
+  {
+    "id": "faith-help-desk",
+    "name": "Faith ? Help desk",
+    "description": "The Faith is established setting lore; this help desk is invented social-AU comedy. No invented doctrine, canon religious rulings, absolution services or confidential confessions."
+  },
+  {
+    "id": "lannisport-exchange",
+    "name": "Lannisport ? Coin exchange",
+    "description": "The exchange is a social-AU invention, not a newly established canon stock market. Never invent canonical exchange rates, price feeds, listed companies, market outcomes or confidential trades; no real investment tips."
   }
 ]

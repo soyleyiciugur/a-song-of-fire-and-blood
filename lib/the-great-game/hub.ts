@@ -2,6 +2,7 @@ import type { Profile, GreatGameHistoryRow, GreatGameLeaderboardRow } from "@/li
 
 export type HubFriend = Pick<Profile, "id" | "username" | "display_name" | "avatar_url"> & { matchId: string | null };
 export type HubData = {
+  season?: import("./seasons").Season|null;
   profile: Pick<Profile, "id" | "username" | "display_name" | "avatar_url">;
   ranking: GreatGameLeaderboardRow | null;
   friends: HubFriend[];

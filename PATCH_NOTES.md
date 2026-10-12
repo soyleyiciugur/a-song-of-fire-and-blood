@@ -21,7 +21,7 @@
 - Social shows public match outcomes, streaks, likes and replies without exposing private deck contents or deck create/update activity.
 - Social uses final Standing margin rather than Elo change as match context when the Standing migration is available.
 - Store lives at `/cards/store` rather than as a standalone `/store` page.
-- Token terminology is renamed to the noun **Summon** and `summon.png` is used as its keyword icon.
+- Token terminology is renamed to the noun **Summon** and `summon.webp` is used as its keyword icon.
 
 ## Supabase
 For a fresh target, apply both migrations in order:

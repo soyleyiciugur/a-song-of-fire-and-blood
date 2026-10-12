@@ -3298,7 +3298,7 @@
       "military",
       "support"
     ],
-    "subtitle": "Knight of Starfall",
+    "subtitle": "Diplomat of House Dayne",
     "linkedCharacterId": "maron-dayne",
     "houseId": "dayne",
     "balanceStatus": "provisional"
@@ -3492,7 +3492,7 @@
         "id": "dornish-patience",
         "name": "Dornish Patience",
         "trigger": "arrival",
-        "text": "The first hostile Event played against Nymor each round has no effect."
+        "text": "The first hostile Event played against Nymor each exchange has no effect."
       }
     ],
     "roles": [
@@ -3521,7 +3521,7 @@
         "id": "unbowed-counsel",
         "name": "Unbowed Counsel",
         "trigger": "arrival",
-        "text": "Allied Martell Characters cannot lose Influence during the round Meria arrives."
+        "text": "Allied Martell Characters cannot lose Influence during the exchange Meria arrives."
       }
     ],
     "roles": [

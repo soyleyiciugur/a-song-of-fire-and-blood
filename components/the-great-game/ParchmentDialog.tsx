@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import styles from "./play-hub.module.css";
 
-export default function ParchmentDialog({ title, children, onClose, wide = false }: { title: string; children: ReactNode; onClose: () => void; wide?: boolean }) {
+export default function ParchmentDialog({ title, children, onClose, wide = false, noScroll = false }: { title: string; children: ReactNode; onClose: () => void; wide?: boolean; noScroll?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const id = useId();
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function ParchmentDialog({ title, children, onClose, wide = false
     ref.current?.focus({ preventScroll: true });
     return () => { if (previous?.isConnected) previous.focus({ preventScroll: true }); };
   }, []);
-  return <section ref={ref} tabIndex={-1} role="region" className={`${styles.dialog} ${wide ? styles.wideDialog : ""}`} aria-labelledby={id} onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); onClose(); } }}>
+  return <section ref={ref} tabIndex={-1} role="region" className={`${styles.dialog} ${wide ? styles.wideDialog : ""} ${noScroll ? styles.noScrollDialog : ""}`} aria-labelledby={id} onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); onClose(); } }}>
     <header className={styles.dialogHeader}><h2 id={id}>{title}</h2><button type="button" onClick={onClose} aria-label="Back">&larr; Back</button></header>
     <div className={styles.dialogBody}>{children}</div>
   </section>;

@@ -1,3 +1,4 @@
+import type { MatchType } from "./match-types";
 import type {
   GameAction,
   GameState,
@@ -20,8 +21,10 @@ export interface GreatGameOnlinePlayer {
 }
 
 export interface GreatGameOnlineMatchView {
+  serverNow?: string;
   id: string;
   code: string;
+  matchType?: MatchType;
   status: GreatGameMatchStatus;
   version: number;
   playerId: PlayerId;
@@ -35,6 +38,7 @@ export interface GreatGameOnlineMatchView {
 }
 
 export interface GreatGameOnlineStatePatch {
+  serverNow?: string;
   id: string;
   status: GreatGameMatchStatus;
   version: number;
@@ -46,6 +50,7 @@ export interface GreatGameOnlineStatePatch {
 export interface GreatGameOnlineMatchSummary {
   id: string;
   code: string;
+  matchType?: MatchType;
   status: GreatGameMatchStatus;
   version: number;
   playerId: PlayerId;

@@ -7,6 +7,7 @@ import { buildChronicle, formatChronicleEntry, type ChronicleEvent } from "@/lib
 import type { GameState, PlayerId } from "@/lib/the-great-game/types";
 import { chronicleUnitStats, resolveChronicleEntity, type ChronicleEntityRef } from "@/lib/the-great-game/chronicle-entity";
 import { getTraitHighlights } from "@/lib/the-great-game/trait-highlights";
+import { chronicleTurns, gameTurnNumber } from "@/lib/the-great-game/turn-labels";
 import ChronicleIcon from "./ChronicleIcon";
 import { CardArtwork } from "@/components/cards/CardArtwork";
 import { CardChrome, CardInfoPanel, tierStyle } from "@/components/cards/GameCardPrimitives";
@@ -18,8 +19,9 @@ const entities = [...getAllGameCards()].sort((a, b) => b.name.length - a.name.le
 const entityPattern = new RegExp(`(${entities.map(card => card.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")}|\\bPlayer [12]\\b|[+−-]?\\d+(?:\\s*→\\s*-?\\d+)?(?: Command| Health| Strength| Influence| Standing)?)`, "g");
 const byName = new Map(entities.map(card => [card.name, card]));
 
-export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHand }: {
-  state: GameState; viewerId: PlayerId;
+export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHand, tableStatus, playerLabels }: {
+  state: GameState; viewerId: PlayerId; tableStatus?: ReactNode;
+  playerLabels?: Partial<Record<PlayerId, string>>;
   onInspectUnit: (instanceId: string) => void;
   onInspectHand: (instanceId: string) => void;
 }) {
@@ -31,6 +33,16 @@ export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHan
     return [...groups.entries()].sort(([a], [b]) => b - a).map(([turn, items]) => [turn,
       [...items].reverse().sort((a, b) => Number(!!a.commandRefill) - Number(!!b.commandRefill))] as const);
   }, [events, state.turnNumber]);
+  const rounds = useMemo(() => {
+    const groups = new Map<number, {turn:number; events:ChronicleEvent[]}[]>();
+    for (const [turn, turnEvents] of turns) {
+      const round=gameTurnNumber(turn);
+      const list=groups.get(round)??[];
+      list.push({turn,events:turnEvents});groups.set(round,list);
+    }
+    return [...groups.entries()].sort(([a],[b])=>b-a);
+  },[turns]);
+  const turnContexts = useMemo(() => chronicleTurns(state), [state]);
   const scroll = useRef<HTMLDivElement>(null);
   const pinned = useRef(true);
   const anchor = useRef<{ id: string; offset: number } | null>(null);
@@ -42,7 +54,8 @@ export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHan
   const previewElement = useRef<HTMLElement>(null);
   const [modal, setModal] = useState<ChronicleEntityRef | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const label = (id: PlayerId) => id === viewerId ? "YOU" : "OPPONENT";
+  const label = (id: PlayerId) => playerLabels?.[id] || (id === "player1" ? "Player 1" : "Player 2");
+  const turnOwner = (id?: PlayerId) => id ? `${label(id)}'s Turn` : "Turn";
 
   useLayoutEffect(() => {
     const element = previewElement.current;
@@ -160,7 +173,7 @@ export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHan
     return <article key={event.id} data-chronicle-event={event.id} className={`${styles.event} ${styles[event.level]} ${fresh.has(event.id) ? styles.fresh : ""}`}>
       <span className={styles.icon} aria-hidden="true"><ChronicleIcon kind={event.icon} /></span>
       <div className={styles.body}>
-        <div className={styles.eventHeading}><span>{rich(event.title, event)}</span>{event.playerId && <small className={styles.actor}>{label(event.playerId)}</small>}</div>
+        <div className={styles.eventHeading}><span>{rich(event.title, event)}</span></div>
         {event.detail && <div className={styles.description}>{rich(event.detail, event)}</div>}
         {changes(event, highlighted)}
         {children.filter(child => child.icon === "death" || child.icon === "location" && /active Location/.test(child.detail) || child.icon === "artifact" && /^Equipped/.test(child.detail)).map(child => <div key={`outcome-${child.id}`} className={styles.outcome}><span className={styles.icon}><ChronicleIcon kind={child.icon} /></span> {rich(child.title, event)} · {rich(child.detail, event)}</div>)}
@@ -172,8 +185,9 @@ export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHan
       </div>
     </article>;
   }
-  return <section className={`${play.logSection} ${styles.panel}`} aria-label="Chronicle">
+  return <section className={`${play.logSection} ${styles.panel}`} aria-label="Chronicle" style={tableStatus ? { gridTemplateRows: "auto auto minmax(0, 1fr)" } : undefined}>
     <div className={play.sectionTitle}>Chronicle</div>
+    {tableStatus}
     <div ref={scroll} className={`${play.log} ${styles.scroll}`} tabIndex={0} aria-label="Match history"
       onScroll={() => {
         const element = scroll.current;
@@ -185,10 +199,13 @@ export default function Chronicle({ state, viewerId, onInspectUnit, onInspectHan
         if (pinned.current) setUnread(0);
         setPreview(null);
       }}>
-      {turns.map(([turn, turnEvents]) => <details key={turn} className={`${styles.turn} ${turn === state.turnNumber ? styles.current : ""}`} open>
-        <summary className={styles.turnHeading}><span>{turn === 0 ? "Opening" : `Turn ${turn}`}</span><small>{(turnEvents[0]?.turnOwnerId ?? (turn === state.turnNumber ? state.activePlayerId : undefined)) === viewerId ? "YOUR TURN" : (turnEvents[0]?.turnOwnerId ?? (turn === state.turnNumber ? state.activePlayerId : undefined)) ? "OPPONENT TURN" : "PREPARATION"} · {turnEvents.length} events</small></summary>
-        {turnEvents.map(row)}
-        {!turnEvents.length && <p className={styles.empty}>Awaiting the next move.</p>}
+      {rounds.map(([round, parts]) => <details key={round} className={`${styles.turn} ${gameTurnNumber(state.turnNumber)===round ? styles.current : ""}`} open>
+        <summary className={styles.turnHeading}><span>{round===0?"Opening":`Exchange ${round}`}</span></summary>
+        {parts.map(({turn,events:turnEvents})=><section key={turn} className={styles.rulerTurnGroup} aria-label={turn===0?"Opening":turnOwner(turnContexts.get(turn)?.owner)}>
+          {turn!==0&&<h3 className={styles.rulerTurnTitle}>{turnOwner(turnContexts.get(turn)?.owner)}</h3>}
+          {turnEvents.map(row)}
+          {!turnEvents.length && <p className={styles.empty}>Awaiting the next move.</p>}
+        </section>)}
       </details>)}
     </div>
     {unread > 0 && <button type="button" className={styles.unread} onClick={() => {

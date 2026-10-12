@@ -13,6 +13,18 @@ const loadedSources = new Map<string, Promise<boolean>>();
 const artworkRequests = new Map<string, Promise<string | null>>();
 const resolvedArtwork = new Map<string, string | null>();
 let characterPortraits: Promise<Record<string, string>> | null = null;
+let availableArtwork: Promise<Set<string>> | null = null;
+
+function loadAvailableArtwork() {
+  availableArtwork ??= fetch("/api/cards/artwork", { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error("Artwork unavailable");
+      return response.json() as Promise<string[]>;
+    })
+    .then(sources => new Set(sources))
+    .catch(error => { availableArtwork = null; throw error; });
+  return availableArtwork;
+}
 
 function loadCharacterPortraits() {
   if (!characterPortraits) characterPortraits = fetch("/api/cards/portraits", { cache: "no-store" })
@@ -39,8 +51,12 @@ function resolveArtwork(key: string, cardId: string, cardType: GameCard["cardTyp
   let request = artworkRequests.get(key);
   if (!request) {
     request = (async () => {
+      const [available, portraits] = await Promise.all([
+        loadAvailableArtwork(),
+        cardType === "character" ? loadCharacterPortraits() : Promise.resolve(null),
+      ]);
       if (cardType === "character") {
-        const portrait = (await loadCharacterPortraits())[portraitId];
+        const portrait = portraits?.[portraitId];
         if (portrait && await preload(portrait)) return portrait;
       }
       const bases = cardType === "character"
@@ -50,7 +66,7 @@ function resolveArtwork(key: string, cardId: string, cardType: GameCard["cardTyp
       for (const base of bases) {
         for (const extension of extensions) {
           const source = `${base}.${extension}`;
-          if (await preload(source)) return source;
+          if (available.has(source) && await preload(source)) return source;
         }
       }
       const front = await loadDeckFront();

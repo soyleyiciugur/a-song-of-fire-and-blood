@@ -1,4 +1,6 @@
 "use client";
+import { KEYWORD_RULES, STATUS_RULES } from "@/lib/the-great-game/glossary";
+
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
@@ -80,23 +82,7 @@ const TRAIT_RULES_BY_VOICE: Record<
   InnkeeperVoice,
   Partial<Record<Trait, string>>
 > = {
-  neutral: {
-    summon: "Created by an ability. Summons cannot be included in a deck.",
-    dragonrider:
-      "This Character is bonded to a specific Dragon. That Dragon's Bond discount applies while its rider is ruled by the same Ruler.",
-    guard:
-      "Enemy Units must face Guard Units before attacking other legal Military targets or Standing.",
-    intrigue:
-      "While this Character is Ready, normal Political attackers must choose a Ready Intrigue Character as the defender.",
-    swift:
-      "This Unit may initiate a Military Conflict on the turn it is deployed.",
-    schemer:
-      "This Character may initiate a Political Conflict on the turn it is deployed.",
-    challenge:
-      "This Unit ignores Guard restrictions and may choose any Military target or attack enemy Standing directly.",
-    confront:
-      "This Character ignores Political defender restrictions and may choose any Ready enemy Character or attack enemy Standing directly.",
-  },
+  neutral: KEYWORD_RULES,
   courtly: {
     summon: "A Summon at your service, my liege. Summons are created by abilities and never included in your deck.",
     dragonrider:
@@ -231,18 +217,13 @@ function abilityNameLabel(
 function visibleTraits(
   card: GameCard
 ) {
-  return card.traits.filter(
+  const traits: Trait[] = card.cardType === "dragon"
+    ? Array.from(new Set<Trait>(["dragon", ...card.traits]))
+    : card.traits;
+  return traits.filter(
     (trait) => {
       if (
         trait === "unique"
-      ) {
-        return false;
-      }
-
-      if (
-        card.cardType ===
-          "dragon" &&
-        trait === "dragon"
       ) {
         return false;
       }
@@ -262,26 +243,8 @@ export function CommandSigil({
       viewBox="0 0 44 44"
       aria-hidden
     >
-      <path
-        d="M13 2h18l11 11v18L31 42H13L2 31V13Z"
-        className={
-          styles.commandBadgePlate
-        }
-      />
-
-      <path
-        d="M15 6h14l9 9v14l-9 9H15l-9-9V15Z"
-        className={
-          styles.commandBadgeInset
-        }
-      />
-
-      <path
-        d="M22 10.5 26.2 18 33.5 22l-7.3 4L22 33.5 17.8 26 10.5 22l7.3-4Z"
-        className={
-          styles.commandBadgeRune
-        }
-      />
+      <image className={styles.commandSigilNormal} href="/images/cards/command-gems/command.webp" x="0" y="0" width="44" height="44" preserveAspectRatio="xMidYMid meet" />
+      <image className={styles.commandSigilHighlighted} href="/images/cards/command-gems/command-highlighted.webp" x="0" y="0" width="44" height="44" preserveAspectRatio="xMidYMid meet" />
 
       {typeof value ===
         "number" && (
@@ -486,19 +449,19 @@ function UniqueDiamond({
   );
 }
 
-function CommandGem({ tierId, value }: { tierId: TierId; value: number }) {
+export function CommandGem({ tierId, value, snapshotSafe = false }: { tierId: TierId; value?: number; snapshotSafe?: boolean }) {
   const src = `/images/cards/command-gems/${tierId}`;
   return (
     <span className={styles.commandGem} aria-hidden="true">
-      <Image src={`${src}.png`} alt="" fill sizes="96px" className={styles.commandGemNormal} draggable={false} />
-      <Image src={`${src}-highlighted.png`} alt="" fill sizes="96px" className={styles.commandGemHighlighted} draggable={false} />
+      <Image src={`${src}.webp`} alt="" unoptimized fill sizes="96px" className={styles.commandGemNormal} draggable={false} />
+      <Image src={`${src}-highlighted.webp`} alt="" unoptimized fill sizes="96px" className={styles.commandGemHighlighted} draggable={false} />
       <span className={styles.commandGemInterior}>
-        <Image src={`${src}.png`} alt="" fill sizes="96px" className={styles.commandGemNormal} draggable={false} />
-        <Image src={`${src}-highlighted.png`} alt="" fill sizes="96px" className={styles.commandGemHighlighted} draggable={false} />
+        <Image src={`${src}.webp`} alt="" unoptimized fill sizes="96px" className={styles.commandGemNormal} draggable={false} />
+        <Image src={`${src}-highlighted.webp`} alt="" unoptimized fill sizes="96px" className={styles.commandGemHighlighted} draggable={false} />
       </span>
-      <svg viewBox="0 0 100 100" className={styles.commandGemNumber}>
+      {snapshotSafe ? <span className={styles.commandGemSnapshotNumber}>{value}</span> : <svg viewBox="0 0 100 100" className={styles.commandGemNumber}>
         <text x="50" y="50" textAnchor="middle" dominantBaseline="central" className={styles.commandCostText}>{value}</text>
-      </svg>
+      </svg>}
     </span>
   );
 }
@@ -508,11 +471,13 @@ export function CardChrome({
   cost,
   detailed = false,
   board = false,
+  snapshotSafe = false,
 }: {
   card: GameCard;
   cost?: number;
   detailed?: boolean;
   board?: boolean;
+  snapshotSafe?: boolean;
 }) {
   const command = cost ?? card.cost;
   return (
@@ -533,7 +498,7 @@ export function CardChrome({
             .join(" ")}
           label={`${tierLabel(card)} Tier`}
           rule={command === card.cost ? `${command} Command` : `${command} Command (base ${card.cost})`}
-          icon={<CommandGem tierId={card.tierId} value={command} />}
+          icon={<CommandGem tierId={card.tierId} value={command} snapshotSafe={snapshotSafe} />}
         />
 
       {card.traits.includes(
@@ -567,20 +532,21 @@ export function IndicatorIcon({ kind }: { kind: "military" | "political" | "heal
   return <i className={styles.indicatorIcon}><StatIcon kind={kind} /></i>;
 }
 
-function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }) {
+export function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }) {
   const withGlow = (artwork: ReactNode) => active ? (
     <span className={styles.traitIconActive} data-trait-active="true" aria-hidden="true">
       <span className={styles.traitIconGlow}>{artwork}</span>
       {artwork}
     </span>
   ) : artwork;
-  if (trait !== "unique" && trait !== "dragon") {
+  if (trait !== "unique") {
     return withGlow(<Image
       className={styles.traitIconArtwork}
-      src={`/images/cards/keywords/${trait}.png`}
+      src={`/images/cards/keywords/${trait}.webp${trait === "dragonrider" ? "?v=7563b36c601c" : ""}`}
+      unoptimized={trait === "dragonrider"}
       width={64}
       height={64}
-      sizes="32px"
+      sizes="64px"
       alt=""
       aria-hidden="true"
     />);
@@ -600,20 +566,6 @@ function TraitIcon({ trait, active = false }: { trait: Trait; active?: boolean }
   return withGlow(<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={paths[trait]} /></svg>);
 }
 
-const STATUS_RULES: Record<"Deployed" | "Exhausted" | "Grounded", [string, string]> = {
-  Deployed: [
-    "Just arrived this turn. No Military Conflict without Swift; no Political Conflict without Schemer. Give them a moment.",
-    "Newly arrived, my liege. This turn, initiating a Military Conflict requires Swift, and a Political Conflict requires Schemer.",
-  ],
-  Exhausted: [
-    "Spent for now. Cannot initiate another Conflict until readied. All Units ready when the turn ends.",
-    "Their efforts are spent, Your Grace. They cannot initiate a Conflict until readied. All Units ready when the turn ends.",
-  ],
-  Grounded: [
-    "The Dragon is down. Cannot initiate a Conflict. Recovers one Health at the start of its controller's turn; Grounded clears at half maximum Health, rounded up.",
-    "Your Dragon must recover, my liege. It cannot initiate a Conflict while Grounded. It regains one Health at the start of its controller's turn, recovering at half maximum Health, rounded up.",
-  ],
-};
 
 function TraitRuleTooltip({
   label,

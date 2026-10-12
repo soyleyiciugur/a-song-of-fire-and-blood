@@ -20,12 +20,16 @@ import { Select } from '@/app/_components/Select';
 import { buildCommentTree, countDescendants, type CommentTreeNode } from '@/lib/commentThreads';
 
 const dateLabel=(date:string)=>new Intl.DateTimeFormat('en-GB',{dateStyle:'medium',timeStyle:'short',timeZone:'Europe/Istanbul'}).format(new Date(date));
+function VerifiedBadge({user}:{user:GutterUser|undefined}) {
+  const identity=user?getGutterIdentity(user):null;
+  return identity&&<span className={`${styles.verified} ${identity.type==='institution'?styles.institution:''}`} role="img" title={`Verified ${identity.type} account · fictional`} aria-label={`Verified ${identity.type} account`}>✓</span>;
+}
 function Account({user}:{user:GutterUser}) {
   const identity=getGutterIdentity(user);
   const stats=getGutterUserStats(user.id);
   return <details className={styles.account}><summary>
     {user.account?.type==='character'?<MiniPortrait id={user.account.characterId} alt={identity?.name??user.username} size={28}/>:user.avatarUrl?<img className={styles.avatar} src={user.avatarUrl} alt=""/>:<span className={styles.avatar} style={{backgroundColor:user.color}} aria-hidden="true">{user.avatar}</span>}
-    <span>@{user.username}</span>{identity&&<span className={`${styles.verified} ${identity.type==='institution'?styles.institution:''}`} role="img" title={`Verified ${identity.type} account · fictional`} aria-label={`Verified ${identity.type} account`}>✓</span>}
+    <span>@{user.username}</span><VerifiedBadge user={user}/>
     {user.id==='cast-jacaelon-targaryen'&&<span className={styles.mod}>MOD</span>}
   </summary><div className={styles.profile}>
     <strong>{user.displayName??user.username}</strong><span className={styles.muted}> · {user.kind==='fictional'?'Fictional account':'Community member'}</span>
@@ -110,7 +114,7 @@ function Forum() {
       <div className={styles.filters} aria-label="Thread categories">{[['all','All tables'],['chapters','Chapter discussions'],['other','Theory & community']].map(([value,label])=><button key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)}>{label}</button>)}</div>
       <ol className={styles.threads}>{sorted.map(t=>{
         const replies=data.comments.filter(c=>c.surface==='forum'&&c.entryId===t.id);
-        return <li key={t.id}><Link href={`/forum?thread=${encodeURIComponent(t.id)}`} className={styles.threadCard}><span className={styles.category}>{t.category}</span><h2>{t.title}</h2><p>{t.body.split('\n')[0]}</p><div className={styles.meta}><span>@{users.get(t.authorId)?.username}</span><span>{replies.length} comments</span><span>{new Set(replies.map(c=>c.authorId)).size} participants</span></div></Link></li>;
+        return <li key={t.id}><Link href={`/forum?thread=${encodeURIComponent(t.id)}`} className={styles.threadCard}><span className={styles.category}>{t.category}</span><h2>{t.title}</h2><p>{t.body.split('\n')[0]}</p><div className={styles.meta}><span>@{users.get(t.authorId)?.username} <VerifiedBadge user={users.get(t.authorId)}/></span><span>{replies.length} comments</span><span>{new Set(replies.map(c=>c.authorId)).size} participants</span></div></Link></li>;
       })}</ol>
       <Composer kind="thread"/>
     </>}

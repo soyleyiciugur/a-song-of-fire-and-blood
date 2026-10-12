@@ -47,7 +47,7 @@
     "sigilSrc": "/images/houses/dayne.webp",
     "color": "#DDA0DD",
     "secondaryColor": "#E6E6FA",
-    "description": "House Dayne is pulled into a new mystery around Starfall. Rhaella and the younger maester Nymos are both reported missing, burned bodies lie along the coast and an unburned basket matching Rhaella's has been found nearby. Lord Darren remains in Sunspear while Lorenah quietly mobilizes her father's men from King's Landing. Alester, meanwhile, returns from Winterfell and finally admits to Jace how deeply Saera's promise to Rickard Stark has affected him."
+    "description": "House Dayne is pulled into a new mystery around Starfall. Rhaella and the younger maester Nymos are both reported missing, burned bodies lie along the coast and an unburned basket matching Rhaella's has been found nearby. Lord Darren remains in Sunspear while Lorenah quietly mobilizes her father's men from King's Landing. Alester, meanwhile, returns from Winterfell and finally admits to Jace how deeply Saera's promise to Rickard Stark has affected him. Visenor later returns by sea with Leo Tyrell and reveals himself to Dayne patrolmen. Darren's brother Edric escorts him to the retreat and agrees to widen the search for Rhaella, criticizing the secrecy of Lorenah's earlier hospitality. Visenor remains at Starfall without learning his wife's fate."
   },
   {
     "id": "velaryon",
@@ -107,7 +107,7 @@
     "sigilSrc": "/images/houses/blackwood.webp",
     "color": "#2F2F2F",
     "secondaryColor": "#8B0000",
-    "description": "A Riverlands house represented at the grand tourney by Lord Godfrey Blackwood, whose easy charm and open unconventionality made him as memorable off the lists as on them. His quarter-final loss to Jacaelon cost him nothing but pride; his instincts in the semi-finals, when he tackled Brant Costayne mid-assassination, likely saved Prince Gaelor's life."
+    "description": "A Riverlands house represented at the grand tourney by Lord Godfrey Blackwood, whose easy charm and open unconventionality made him as memorable off the lists as on them. His quarter-final loss to Jacaelon cost him nothing but pride; his instincts in the semi-finals, when he tackled Brant Costayne mid-assassination, likely saved Prince Gaelor's life. Renewed fighting on the Bracken border leaves Perric Bracken's brother dead. Godfrey strengthens his defenses and expects aid through Rickard Stark's Blackwood kinship, while his younger brother Royce warns that such intervention could unite the Riverlands against them. The intent behind the killing remains unresolved."
   },
   {
     "id": "mullendore",
@@ -147,7 +147,7 @@
     "sigilSrc": "/images/houses/bracken.webp",
     "color": "#75502B",
     "secondaryColor": "#C79A32",
-    "description": "An ancient Riverlands house and bitter rival of House Blackwood. In 99 AC, men sworn to Lord Perric Bracken killed a Blackwood cousin near the disputed border, reopening a feud old enough that few remember its beginning. The bloodshed has since grown into a matter for the Hand of the King, with neither house inclined to yield."
+    "description": "An ancient Riverlands house and bitter rival of House Blackwood. In 99 AC, men sworn to Lord Perric Bracken killed a Blackwood cousin near the disputed border, reopening a feud old enough that few remember its beginning. The bloodshed has since grown into a matter for the Hand of the King, with neither house inclined to yield. Perric's unnamed brother is subsequently killed in renewed border fighting, alongside other Bracken men and casualties on the Blackwood side. The clash threatens wider conflict, but its premeditation and the response of the great lords are not established."
   },
   {
     "id": "tully",
@@ -237,7 +237,7 @@
     "sigilSrc": "/images/houses/celtigar.webp",
     "color": "#C62828",
     "secondaryColor": "#F2F2F2",
-    "description": "An ancient Valyrian house of Claw Isle, House Celtigar shares with the Targaryens and Velaryons a lineage reaching back to the Freehold. Wealthy by the standards of the Crownlands and traditionally bound to Dragonstone and the Iron Throne, the Celtigars remain one of the realm's surviving houses of Valyrian blood."
+    "description": "An ancient Valyrian house of Claw Isle, House Celtigar shares with the Targaryens and Velaryons a lineage reaching back to the Freehold. Wealthy by the standards of the Crownlands and traditionally bound to Dragonstone and the Iron Throne, the Celtigars remain one of the realm's surviving houses of Valyrian blood. Lord Celtigar, an old friend of Baelenys and father of Annara, visits King's Landing with his daughter after Vhaemys invites her. He raises a marriage question with the King, who postpones it before any match is identified."
   },
   {
     "id": "corbray",

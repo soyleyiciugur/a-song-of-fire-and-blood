@@ -128,5 +128,26 @@
     "summary": "Prince Gaelor Targaryen and Ser Brant Costayne fight before the Crown in the Red Keep's outer yard. Brant badly wounds Gaelor's left forearm, but Gaelor eventually cuts through his face, kills him and raises his severed head before the crowd.",
     "cause": "Brant rejected the sentence of the Wall and demanded trial by combat over his attack on Gaelor and the unresolved bloodshed of Oldtown.",
     "consequence": "Brant dies, Gaelor is declared the gods' victor by the logic of the trial, and some of the crowd that entered hoping to see the prince die accepts the verdict. Gaelor remains wounded and is still expected to leave the capital again."
+  },
+  {
+    "id": "blackwood-bracken-border-clash",
+    "title": "The Blackwood–Bracken Border Clash",
+    "kind": "battle",
+    "day": 21,
+    "moon": 8,
+    "year": 99,
+    "location": "Blackwood–Bracken border",
+    "chapterSlug": "of-ravens-and-bitter-blood",
+    "participants": [
+      "godfrey-blackwood",
+      "royce-blackwood"
+    ],
+    "houses": [
+      "blackwood",
+      "bracken"
+    ],
+    "summary": "Godfrey and Royce Blackwood inspect the aftermath of renewed fighting on the wooded border. Perric Bracken's unnamed brother lies dead with an arrow in his throat, among seven or eight Bracken bodies; three or four Blackwood deaths are also suggested. The precise toll remains uncertain.",
+    "cause": "The longstanding border feud has renewed in violence despite the Crown's attempted mediation. Godfrey says the clash was unplanned, but the circumstances and intent behind the nobleman's death are not established.",
+    "consequence": "Godfrey orders stronger border security and looks to Rickard Stark's kinship for protection. Royce warns that the clash may draw Clover Tully and the wider Riverlands into the quarrel; no wider war or new Stark commitment has yet occurred."
   }
 ]

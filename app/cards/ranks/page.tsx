@@ -10,5 +10,6 @@ export default async function GreatGameRanksPage() {
     .order("rank", { ascending: true })
     .limit(100);
 
-  return <RanksView leaders={(data ?? []) as GreatGameLeaderboardRow[]} />;
+  const {data:season}=await supabase.from("great_game_seasons").select("*").eq("status","active").maybeSingle();
+  return <RanksView season={season} leaders={(data ?? []) as GreatGameLeaderboardRow[]} />;
 }

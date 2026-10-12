@@ -98,3 +98,103 @@ Keep the forged letter's Vhagar claim separate from the final Sunfyre reveal; th
 The Chapter XX discussion begins with thirty distinct published participants and has twenty additional, entirely new participants scheduled across the following days. Preserve the distinction between the unidentified white dragon, the reported Dragonstone silhouette and any reader association; neither identity nor rider bond is confirmed. The new branches establish a Brotherhood server incident, an exhausted royal spreadsheet, and Gaelor diplomacy as a feature still in beta. These are community metaphors, not story facts.
 
 Four broader threads establish the intended Taverns mix: readers compare existing site features, choose undesirable realm jobs, build a clue-versus-irresponsible-theory board, and guess characters from patch notes. The Toy Harbour zoning joke receives a brief Vhaemys cameo, the Kitchen Workers' Union gains a recruitment callback, and “Where is Nymos?” survives the louder dragon mystery. Reuse these only where the topic supports them; broader subject variety and new meme formats are preferable to repeating this batch mechanically.
+
+## 12 October: Chapter XXI
+
+`ch21-39` lets gaelord_apologist acknowledge Jace's concern about Gaelor obeying
+orders; `ch21-40` accepts that specific concession without declaring a faction
+transfer or awarding an HQ office. `ch21-follow-23` is a scheduled return to
+that point. `ch21-27` and `ch21-32` continue crown_enjoyer's distinction between
+liking the monarchy and excusing food shortages or cruelty toward Jaery.
+`ch21-11` through `ch21-14` let the critic and defender clarify a disagreement
+about attention to the border deaths without making them acquire the same taste.
+
+The chapter discussion is immediate-first. The finite `chapter-xxi-2026-10-12`
+batch supplies twenty-four hourly follow-ups, mostly in the two broader threads
+about ordinary jobs and harmless excuses. Scheduled exchanges remain planned
+until their stored timestamps. Vhaemys's short bedtime exchange is social AU,
+not a newly authored canonical dragon scene. No new member inbox items were
+available at authoring time; do not invent live replies to fill that gap.
+
+### Chapter XXI: focused week extension, 12 October
+
+The user requested an extension limited to the new chapter. The earlier jobs
+and harmless-excuses threads, gallery archive, comments and publication times
+are preserved. The refreshed public inbox contained no new activity. There is
+still one canonical Chapter XXI discussion: 208 authored comments from 64
+accounts, including 88 immediate comments and 120 persisted follow-ups. Three
+focused side conversations cover Dragonpit shelter, Starfall evidence and food
+supplies; the latter two open later in the week rather than all at launch.
+
+The finite `chapter-xxi-week-2026-10-12-day-1` through `-day-7` batches contain
+168 explicit hourly comments, from 12 October at 15:05 through 19 October at
+14:24 Istanbul time. Sixteen windows per day belong to the main discussion;
+eight belong to the focused side conversation. These are authored plans, not
+autonomous NPC behavior. Re-read any intervening member activity before adding
+to or revising these branches. Scheduled content remains unpublished until its
+stored timestamp; the previous twenty-four-hour batch remains intact.
+
+- Vhaemys has 26 comments across the main discussion and Dragonpit thread,
+  including her two earlier comments. The little door, wet-coat peg, place for
+  Annara and attempts to postpone washing are social-AU pretend play, not new
+  canonical construction or dragon-care facts. `ch21-week-w073` through `-w080`
+  and `-w137` through `-w144` give her actual exchanges with Saera, Jace and
+  regulars; `-w165` through `-w168` let her return once more. Her scheduled
+  comments fall during waking hours, not in the overnight windows.
+- `ch21-week-w043` through `-w045`, then `-w093` through `-w094` and `-w159`
+  through `-w160`, continue crown_enjoyer's specific agreement with breadpilled
+  about cruelty and hunger. Neither changes faction or declares a new truce;
+  their existing affection and political disagreement both survive.
+- `ch21-week-w002`, `-w066` and `-w161` keep gaelord_apologist's concession
+  narrow: obedience matters, Gaelor has not accepted conditions, and the HQ
+  invitation remains on hold. jacejpeg accepts accurate corrections without
+  issuing an office key or pretending the mission roster is settled.
+- `ch21-week-w061` through `-w063`, followed by `-w085` through `-w086`, let
+  milk_before_bowl retain a theory while admitting its unproven step. margin_notes
+  applies the same standard to their own suspicion. Nymos's location, employer
+  and interception of the letters remain unresolved.
+- `ch21-week-a35` through `-a38`, `-w020` through `-w021`, and `-w097` through
+  `-w100` preserve the critic/defender disagreement over the border scene's pace.
+  Better understanding of the complaint does not turn into identical tastes.
+
+The seven-day plans contain no new gallery activity or replies to invented live
+members. Chapter XXI's spoiler boundary applies to all three side threads.
+
+### Chapter XXI: games and meme conversations, 12 October
+
+The user's follow-up asks for more fun threads with organic writing. Four
+additional Chapter XXI prompts contain 97 individually authored comments:
+an uninvited northern group chat (22), absurd location reviews (25), a packing
+game (31), and bad loading-screen advice (19). Each has at least ten regular
+participants; totals, cast overlap, branch lengths and return times differ.
+The main chapter discussion remains the largest conversation, unchanged.
+
+The group chat and reviews have fifteen already-due opening comments combined.
+Their other branches arrive in short clusters and later return visits. The
+packing game opens on 13 October at 16:17 Istanbul time; loading-screen tips
+open on 15 October at 19:43. Eighty-two comments are scheduled through 18 October.
+These supplementary slots preserve every pre-existing weekly slot and timestamp;
+they do not restart or reroll the seven daily batches. The refreshed public inbox
+again contained zero new items. No invented member reply is used.
+
+Vhaemys adds ten comments, bringing her Chapter XXI conversations to thirty-six
+including earlier content. `ch21-fun-r05` through `-r08` and `-r19` through `-r21`
+continue her objections to bedtime as unreasonable customer reviews. In the
+packing game, `ch21-fun-p07` through `-p14` introduce a smooth-and-pointy pretend
+rock and a gentle Jace exchange; `-p26` through `-p28` let her return to explain
+its use as a paperweight. These are social-AU games, not new possessions or a
+claim she will travel to Essos. Cast accounts do not reveal private information.
+
+The northern shirts, sea-manager complaint and terrible game tips are local
+thread jokes. Do not turn them into mandatory callbacks in unrelated serious
+conversations. No new friendship or faction transition is implied by joining
+a game, and nobody has to earn permission to enjoy a joke by adding a canon
+correction. The games avoid making the missing people or border dead into
+punchlines.
+
+
+### Cupbearer house voice and first replies, 12 October
+
+User-established social-AU premise: Mara runs TheCupbearer because Aldren does not understand social media; he requires courtly hospitality in its wording. Her personal account remains independent. House replies should vary between genuine graciousness and restrained dry impatience, without making every comment an Aldren gag or having Mara manufacture exchanges with herself.
+
+`ch21-house-a01` through `-a11` add eleven already-due replies across four recent discussions: ordinary jobs, harmless excuses, location reviews and Dragonpit shelter. Aldren and Martin first exchange kitchen-label advice (`-a01`, `-a02`); compatibility is demonstrated, but no friendship event is recorded. Cupbearer joins the shift-ending and oversized-luggage branches. Mara personally joins abandoned-tankard and bed-review jokes. Harbour, Citadel, Faith and Oldtown accounts each have one relevant reply. No banking account is forced into these conversations, and no scheduled branches or existing publication times are changed. Inbox review found zero new public member items.

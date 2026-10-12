@@ -184,6 +184,8 @@ export interface DirectRavenBlock {
 }
 
 export interface GreatGameMatchRow {
+  season_id:string|null;
+  match_type: "custom" | "ranked";
   id: string;
   code: string;
   host_id: string;
@@ -226,7 +228,7 @@ export interface GreatGamePlayerStatsRow {
 
 export interface GreatGameDeckStatsRow { user_id:string; deck_name:string; faction:string; games_played:number; wins:number; losses:number; abandons:number; win_rate:number }
 export interface GreatGameHeadToHeadRow { user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; games_played:number; wins:number; losses:number; abandons:number; last_played_at:string }
-export interface GreatGameHistoryRow { match_id:string; user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; opponent_avatar_url:string|null; result:"win"|"loss"|"draw"|"abandon"; deck_name:string; faction:string; duration_seconds:number; turns:number; rating_before:number; rating_after:number; completed_at:string; standing_after:number|null; opponent_standing_after:number|null }
+export interface GreatGameHistoryRow { season_id:string|null;season_display_name:string|null; match_type:"custom"|"ranked"; match_id:string; user_id:string; opponent_id:string; opponent_username:string; opponent_display_name:string; opponent_avatar_url:string|null; result:"win"|"loss"|"draw"|"abandon"; deck_name:string; faction:string; duration_seconds:number; turns:number; rating_before:number; rating_after:number; completed_at:string; standing_after:number|null; opponent_standing_after:number|null }
 export interface GreatGameLeaderboardRow { rank:number; user_id:string; username:string; display_name:string; avatar_url:string|null; rating:number; peak_rating:number; rated_games:number; games_played:number; wins:number; losses:number; abandons:number; win_rate:number; current_win_streak:number }
 
 export interface GreatGameSocialReactionRow { match_id:string; user_id:string; created_at:string }
@@ -235,6 +237,8 @@ export interface GreatGameSocialReplyRow { id:string; match_id:string; user_id:s
 export interface Database {
   public: {
     Tables: {
+      great_game_seasons:{Row:import("@/lib/the-great-game/seasons").Season;Insert:never;Update:never;Relationships:[]};
+      great_game_collection: { Row: {user_id:string;card_id:string;quantity:number;updated_at:string}; Insert:never; Update:never; Relationships:[] };
       profiles: { Row: Profile; Insert: Omit<Profile, "created_at" | "updated_at" | "role"> & Partial<Pick<Profile, "created_at" | "updated_at" | "role">>; Update: Partial<Pick<Profile, "affinity" | "profile_theme" | "display_name" | "avatar_url" | "banner_url" | "bio" | "notification_last_seen_at" | "played_character_id" | "updated_at">>; Relationships: [] };
       character_inner_court: { Row: CharacterInnerCourtRow; Insert: Pick<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body"> & Partial<Omit<CharacterInnerCourtRow, "character_id" | "chapter_slug" | "kind" | "body">>; Update: Partial<Pick<CharacterInnerCourtRow, "chapter_slug" | "kind" | "subject" | "body" | "status" | "supersedes" | "sort_order" | "updated_at">>; Relationships: [] };
       character_player_assignments: { Row: CharacterPlayerAssignmentRow; Insert: Pick<CharacterPlayerAssignmentRow, "character_id" | "player_username"> & Partial<Pick<CharacterPlayerAssignmentRow, "updated_at">>; Update: Partial<Pick<CharacterPlayerAssignmentRow, "player_username" | "updated_at">>; Relationships: [] };
@@ -259,6 +263,8 @@ export interface Database {
       great_game_social_replies: { Row: GreatGameSocialReplyRow; Insert: Pick<GreatGameSocialReplyRow, "match_id" | "user_id" | "body"> & Partial<Pick<GreatGameSocialReplyRow, "id" | "created_at" | "updated_at">>; Update: Partial<Pick<GreatGameSocialReplyRow, "body" | "updated_at">>; Relationships: [] };
     };
     Views: {
+      great_game_deck_type_stats: {Row:GreatGameDeckStatsRow & {match_type:"total"|"custom"|"ranked";draws:number};Relationships:[]};
+      great_game_type_stats: {Row:{user_id:string;match_type:"total"|"custom"|"ranked";games_played:number;wins:number;losses:number;draws:number;abandons:number;win_rate:number};Relationships:[]};
       great_game_supporter_stats: { Row: { user_id: string; supporter: "mara" | "aldren"; games_played: number; wins: number; losses: number; draws: number; abandons: number; win_rate: number }; Relationships: [] };
       great_game_player_stats: { Row: GreatGamePlayerStatsRow; Relationships: [] };
       great_game_deck_stats: { Row: GreatGameDeckStatsRow; Relationships: [] };

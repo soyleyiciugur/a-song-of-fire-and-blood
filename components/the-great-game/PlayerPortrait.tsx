@@ -108,7 +108,7 @@ export default function PlayerPortrait({ player, label, frames }: { player?: Gre
       <small>The Great Game</small><strong>{profile?.displayName || label}</strong>
       {house && <span className={styles.affinity}>{house.name}</span>}
       {stats ? <dl>
-        <div><dt>Matches</dt><dd>{stats.games}</dd></div>
+        <div><dt>Total matches</dt><dd>{stats.games}</dd></div>
         <div><dt>Wins</dt><dd>{stats.wins}</dd></div>
         <div><dt>Losses</dt><dd>{stats.losses}</dd></div>
         <div><dt>Draws</dt><dd>{stats.draws}</dd></div>

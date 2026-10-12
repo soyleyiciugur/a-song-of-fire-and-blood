@@ -1,0 +1,47 @@
+.page { min-height: 100dvh; box-sizing: border-box; padding: 76px clamp(14px,3vw,50px) 48px; position: relative; isolation: isolate; background: #160f0b; color: #ead7b7; font-family: var(--font-body),Georgia,serif; }
+.hero { margin-bottom: 24px; padding-top: 25px; }
+.eyebrow { color: #ac8d61; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.hero h1 { margin: 8px 0; color: #ead7b7; font: 400 clamp(26px,3vw,42px)/1.2 var(--font-hotd),Georgia,serif; }
+.hero p { margin: 0; color: #b79f80; font-size: 14px; line-height: 1.6; }
+.search { flex: 1 1 260px; }
+.resultCount { font-size: 12px; color: #ad9779; margin-block: 18px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 20px; margin-block: 22px; }
+.cardLabel { display: block; padding: 8px; text-align: center; font-size: 12px; overflow-wrap: anywhere; }
+.rules { display: grid; gap: 24px; margin-top: 22px; }
+.ruleGroup { border: 1px solid #89613b55; background: #15100bd9; }
+.ruleGroup h2 { margin: 0; padding: 14px 18px 14px 10px; border-bottom: 1px solid #89613b55; color: #cfad76; font: 400 18px/1.3 var(--font-hotd),Georgia,serif; }
+.ruleGroup dl { margin: 0; }
+.ruleRow { display: grid; grid-template-columns: minmax(0,260px) minmax(0,1fr); align-items: center; gap: 20px; padding: 16px 18px 16px 10px; border-bottom: 1px solid #89613b25; }
+.ruleRow:last-child { border-bottom: 0; }
+.ruleRow dt { display: flex; align-items: center; gap: 10px; align-self: center; min-height: 40px; text-transform: capitalize; color: #e4caa1; font-size: 14px; }
+.ruleRow dd { margin: 0; color: #b8a58a; font-size: 14px; line-height: 1.65; }
+.ruleRow p { margin: 0; }
+.ruleIcon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 40px; width: 40px; height: 40px; color: #d5ad71; }
+.ruleIcon :is(img,svg) { width: 100%; height: 100%; object-fit: contain; transform: none; }
+.relatedCards { margin-top: 7px; padding: 2px 0; border: 0; background: transparent; color: #c9a16a; font: 12px/1.5 var(--font-body),Georgia,serif; cursor: pointer; }
+.relatedCards:hover { color: #ffe0aa; text-decoration: underline; text-underline-offset: 3px; }
+.relatedCards:focus-visible { outline: 2px solid #d5ad71; outline-offset: 4px; }
+@media(max-width:600px){.page{padding-top:76px}.ruleRow{grid-template-columns:1fr;gap:7px;padding:14px 14px 14px 8px}.ruleGroup h2{padding-inline:8px 14px}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.search{flex-basis:100%}}
+@media(max-height:550px) and (orientation:landscape){.page{padding-top:76px}.hero{margin-bottom:18px}}
+
+/* Keep the backdrop independent of the long scrolling reference content. */
+.page::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(145deg,#20160ef5,#110c09fa),url("/images/cards/hub/ranks-bg.webp") center/cover no-repeat; transform: translateZ(0); }
+
+.example{margin-top:8px!important;color:#c4ac88}.references{display:flex;flex-wrap:wrap;gap:4px 18px}.reviewLabel{display:block;margin-bottom:5px;color:#d0a477;font-size:12px;font-weight:400}
+
+/* Keep the Satchel on the same visual baseline as Encyclopedia tabs. */
+.satchelLink { margin-left:auto;white-space:nowrap;min-height:38px; }
+.hero :is(h1,p){font-family:var(--font-body),Georgia,serif}
+@media(max-width:420px){.satchelLink{padding-inline:9px;font-size:12px}}
+
+
+.filterSave{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-left:auto;min-width:0}
+.filterSave small{font:11px/1.3 var(--font-body),Georgia,serif;color:#cbb083}
+
+
+.encyclopediaTabs{width:100%;box-sizing:border-box}.encyclopediaTabs .satchelLink{margin-left:auto}
+
+.ruleIconPair { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; text-transform: none; }
+
+.ruleIconSlot { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 100px; min-height: 40px; }
+.ruleRow dt > span:last-child { min-width: 0; overflow-wrap: anywhere; }

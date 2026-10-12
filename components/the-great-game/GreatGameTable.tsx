@@ -1,6 +1,8 @@
 "use client";
 
+import { deckCards, validateStoredDeck } from "@/lib/the-great-game/deck-records";
 import Link from "next/link";
+import BurnSurface, { prepareBurnFonts } from "./BurnSurface";
 
 import {
   Fragment,
@@ -23,9 +25,9 @@ import type {
 
 import {
   applyAction,
+  getCardPlayFeedback,
   BOARD_LIMIT,
   createGame,
-  DRAGON_BOARD_LIMIT,
   getEffectiveCost,
   getPoliticalPower,
   getMilitaryPower,
@@ -41,6 +43,7 @@ import {
 import {
   getGameCard,
   findGameCard,
+  getAllGameCards,
   isUnitCard,
 } from "@/lib/the-great-game/cards";
 
@@ -66,6 +69,7 @@ import { normalizeMatchCode } from "@/lib/the-great-game/online";
 import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import SpectatorControls from "./SpectatorControls";
 import GreatGameChat from "@/components/the-great-game/GreatGameChat";
+import TableTempo from "./TableTempo";
 import Chronicle from "@/components/the-great-game/Chronicle";
 import InnkeeperVideo from "@/components/the-great-game/InnkeeperVideo";
 import InnkeeperEmotes from "@/components/the-great-game/InnkeeperEmotes";
@@ -89,6 +93,8 @@ import { getPlacementPreview } from "@/lib/the-great-game/placement-preview";
 import styles from "@/app/cards/play/play.module.css";
 import PlayHub from "@/components/the-great-game/PlayHub";
 import TableWaiting from "@/components/the-great-game/TableWaiting";
+import {tableActionStatus} from "@/lib/the-great-game/action-status";
+import {gameTurnLabel} from "@/lib/the-great-game/turn-labels";
 import MatchResult from "@/components/the-great-game/MatchResult";
 
 type PageMode =
@@ -103,13 +109,7 @@ type StoredDeck = {
   updatedAt: number;
 };
 
-function storedDeckCardIds(deck: StoredDeck | null): string[] | undefined {
-  if (!deck) return undefined;
-
-  return Object.entries(deck.cards).flatMap(([cardId, count]) =>
-    Array.from({ length: Math.max(0, count) }, () => cardId)
-  );
-}
+function storedDeckCardIds(deck: StoredDeck | null): string[] { return deckCards(deck); }
 
 function onlineOpponentName(match: GreatGameOnlineMatchView | null): string {
   return match?.opponent?.username ? match.opponent.username : "Opponent";
@@ -563,20 +563,6 @@ function modifierDescription(
   return `${changes.join(", ") || "Ongoing effect"} · ${duration}`;
 }
 
-function CardSparkles() {
-  return (
-    <span
-      className={styles.cardSparkles}
-      aria-hidden
-    >
-      <i />
-      <i />
-      <i />
-      <i />
-    </span>
-  );
-}
-
 function splitVeiledHand<T>(cards: T[]): T[][] {
   if (cards.length <= 4) return [cards];
   if (cards.length <= 8) {
@@ -700,6 +686,7 @@ function HorizontalHand({
 }
 
 export default function GreatGameTable({ spectator }: { spectator?: import("@/lib/the-great-game/spectator").SpectatorView }) {
+  useEffect(() => { void prepareBurnFonts(document.body); }, []);
   const [spectatorSide, setSpectatorSide] = useState<PlayerId | "director">("director");
   const [
     mode,
@@ -1120,8 +1107,9 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     setOpponentPlayFlight,
   ] = useState<ActiveOpponentPlayAnimation | null>(null);
 
-  const [playedCardQueue, setPlayedCardQueue] = useState<{ key: number; cardId: string }[]>([]);
+  const [playedCardQueue, setPlayedCardQueue] = useState<{ key: number; cardId: string; burned?: boolean }[]>([]);
   const opponentSpellReveal = playedCardQueue[0] ?? null;
+  const finishBurnReveal = useCallback(() => setPlayedCardQueue(queue => queue.slice(1)), []);
   const seenPlayLogRef = useRef<Set<number> | null>(null);
   const [playedCardTop, setPlayedCardTop] = useState<number>();
   const opponentPlayAnimationIdRef = useRef(0);
@@ -1136,16 +1124,23 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     const seen = seenPlayLogRef.current;
     seenPlayLogRef.current = new Set(game.log.map(entry => entry.id));
     if (!seen) return; // Do not replay history when opening/resuming a table.
-    const plays = game.log.filter(entry => !seen.has(entry.id) && entry.chronicle?.kind === "play" && entry.chronicle.sourceCardId)
-      .sort((a, b) => a.id - b.id)
-      .map(entry => ({ key: entry.id, cardId: entry.chronicle!.sourceCardId! }));
+    const burnedIds = new Map(getAllGameCards().map(card => [card.name,card.id]));
+    const plays = game.log.filter(entry => !seen.has(entry.id) && (
+      (entry.chronicle?.kind === "play" && entry.chronicle.sourceCardId) ||
+      (entry.visibility !== "owner" && /^.+ is burned\. \(\d+ cards remain in deck\)$/.test(entry.message))
+    )).sort((a,b)=>a.id-b.id).flatMap(entry=>{
+      if(entry.chronicle?.kind==="play"&&entry.chronicle.sourceCardId)return [{key:entry.id,cardId:entry.chronicle.sourceCardId}];
+      const cardName=entry.message.match(/^(.+) is burned\. \(\d+ cards remain in deck\)$/)?.[1];
+      const cardId=cardName&&burnedIds.get(cardName);
+      return cardId?[{key:entry.id,cardId,burned:true}]:[];
+    });
     if (!plays.length) return;
     queueMicrotask(() => setPlayedCardQueue(queue => [...queue, ...plays]));
   }, [game]);
 
   useEffect(() => {
     if (!opponentSpellReveal) return;
-    const timer = setTimeout(() => setPlayedCardQueue(queue => queue.slice(1)), 3000);
+    const timer = opponentSpellReveal.burned ? undefined : setTimeout(() => setPlayedCardQueue(queue => queue.slice(1)), 3000);
     const align = () => {
       const rect = document.querySelector('[data-realms-divider="true"]')?.getBoundingClientRect();
       if (rect) setPlayedCardTop(rect.top + rect.height / 2);
@@ -1330,7 +1325,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       : turnNoticeActiveUsername
         ? `${turnNoticeActiveUsername}'s Turn`
         : "Opponent's Turn";
-    const subtitle = `Turn ${turnNoticeTurnsTaken ?? turnNoticeNumber}`;
+    const subtitle = `${gameTurnLabel(turnNoticeNumber)} · Turn ${turnNoticeTurnsTaken ?? "?"}`;
 
     const showTimer = setTimeout(() => {
       setTurnNotice({ key, title, subtitle });
@@ -1696,6 +1691,15 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
   const selectedStoredDeck =
     storedDecks.find((deck) => deck.id === onlineDeckId) ?? null;
 
+  function updateTableUrl(code: string | null) {
+    if (spectator) return;
+    const url = new URL(window.location.href);
+    if (code) url.searchParams.set("", code);
+    else url.searchParams.delete("");
+    url.searchParams.delete("join");
+    if (url.href !== window.location.href) window.history.pushState(null, "", url.pathname + url.search);
+  }
+
   function applyOnlineMatchView(match: GreatGameOnlineMatchView) {
     const current = onlineMatchRef.current;
     // Realtime callbacks outlive the render that subscribed. Never restore a
@@ -1703,6 +1707,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     if (current?.id === match.id && (match.version < current.version || (match.version === current.version && current.state))) return;
     const previousStateForMatch = current?.id === match.id ? gameRef.current : null;
     onlineMatchRef.current = match;
+    updateTableUrl(match.code);
     setOnlineMatch(match);
     setInviteCopied(false);
     setOnlineMenuError(null);
@@ -1728,12 +1733,19 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       return;
     }
 
+    if (match.status === "abandoned" && match.state) {
+      gameRef.current = match.state;
+      setGame(match.state);
+      setMode("game");
+      return;
+    }
     if (match.status === "abandoned") {
       onlineMatchRef.current = null;
       gameRef.current = null;
       setGame(null);
       setMode("menu");
       setOnlineMatch(null);
+      updateTableUrl(null);
       setOnlinePanelOpen(true);
       setOnlineMenuError("The other player has left that table.");
       return;
@@ -1777,6 +1789,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       version: patch.version,
       state: patch.state,
       updatedAt: patch.updatedAt,
+      serverNow: patch.serverNow,
       completedAt: patch.completedAt,
     };
 
@@ -1849,7 +1862,17 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     }
   }
 
-  async function createOnlineMatch() {
+  useEffect(() => {
+    if (spectator) return;
+    // Reset transient state and subscriptions when history selects a table.
+    const restoreTable = () => window.location.reload();
+    window.addEventListener("popstate", restoreTable);
+    return () => window.removeEventListener("popstate", restoreTable);
+  }, [spectator]);
+
+  async function createOnlineMatch(matchType: "custom" | "ranked") {
+    const validation = validateStoredDeck(selectedStoredDeck);
+    if (!validation.valid) { setOnlineMenuError(validation.errors.join(" ")); return; }
     setOnlineBusy(true);
     setOnlineMenuError(null);
 
@@ -1859,6 +1882,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           op: "create",
+          matchType,
           deck: storedDeckCardIds(selectedStoredDeck),
           deckName: selectedStoredDeck?.name ?? "Practice Deck",
         }),
@@ -1879,6 +1903,8 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
   }
 
   async function joinOnlineMatch(code = onlineCode) {
+    const validation = validateStoredDeck(selectedStoredDeck);
+    if (!validation.valid) { setOnlineMenuError(validation.errors.join(" ")); return; }
     const normalizedCode = normalizeMatchCode(code);
     setOnlineCode(normalizedCode);
     setOnlineBusy(true);
@@ -1953,6 +1979,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       setOnlineMatch(null);
       setGame(null);
       setMode("menu");
+      updateTableUrl(null);
       setOnlinePanelOpen(true);
       setExitConfirm(false);
       void loadOnlineMatches();
@@ -2034,7 +2061,11 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       setStoredDecks([]);
     }
 
-    if (!spectator) void loadOnlineMatches();
+    if (!spectator) {
+      const tableCode = new URL(window.location.href).searchParams.get("");
+      if (tableCode) void resumeOnlineMatch(tableCode);
+      else void loadOnlineMatches();
+    }
     // Initial menu hydration only.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -2168,6 +2199,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
   }
 
   function exitToMenu() {
+    updateTableUrl(null);
     setMulliganReveal(null);
     setOnlineMatch(null);
     setGame(null);
@@ -2325,7 +2357,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         onlineBusy={onlineBusy}
         onlineError={onlineMenuError}
         matches={onlineMatches}
-        onCreateOnline={() => void createOnlineMatch()}
+        onCreateOnline={type => void createOnlineMatch(type)}
         onJoinOnline={() => void joinOnlineMatch()}
         onResumeOnline={(matchId) => void resumeOnlineMatch(matchId)}
         onInvited={applyOnlineMatchView}
@@ -2797,156 +2829,17 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     }
   }
 
-  function beginPlayCard(
-    handCard: HandCardState
-  ) {
-    if (
-      currentGame.pendingEffect
-    ) {
-      return;
-    }
-
+  function beginPlayCard(handCard: HandCardState) {
+    if (currentGame.pendingEffect) return;
     setError(null);
-
-    setPendingConflict(
-      null
-    );
-
-    const card =
-      getGameCard(
-        handCard.cardId
-      );
-
-    if (
-      isUnitCard(card)
-    ) {
-      setPendingPlay({
-        kind: "deploy",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
-
-      return;
-    }
-
-    if (
-      card.cardType ===
-      "artifact"
-    ) {
-      const targets =
-        allCharacters.filter(
-          (unit) =>
-            !unit.attachedArtifactId
-        );
-
-      if (
-        targets.length === 0
-      ) {
-        setError(
-          "There is no Character who can equip this Artifact."
-        );
-
-        return;
-      }
-
-      setPendingPlay({
-        kind:
-          "artifact",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
-
-      return;
-    }
-
-    if (
-      card.id ===
-      "word-in-the-right-ear"
-    ) {
-      if (
-        allCharacters.length ===
-        0
-      ) {
-        setError(
-          "A Word in the Right Ear requires a Character in play."
-        );
-
-        return;
-      }
-
-      setPendingPlay({
-        kind:
-          "word-in-right-ear",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
-
-      return;
-    }
-
-    if (
-      card.id ===
-      "trial-by-combat"
-    ) {
-      if (
-        alliedCharacters.length ===
-          0 ||
-        enemyCharacters.length ===
-          0
-      ) {
-        setError(
-          "Trial by Combat requires an allied Character and an enemy Character."
-        );
-
-        return;
-      }
-
-      setPendingPlay({
-        kind:
-          "trial-by-combat",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
-
-      return;
-    }
-
-    if (
-      card.id ===
-      "brothers-tilt"
-    ) {
-      if (
-        allCharacters.length ===
-        0
-      ) {
-        setError(
-          "The Brothers' Tilt requires a Character in play."
-        );
-
-        return;
-      }
-
-      setPendingPlay({
-        kind:
-          "brothers-tilt",
-
-        handInstanceId:
-          handCard.instanceId,
-      });
-
-      return;
-    }
-
-    setPendingPlay({
-      kind: "confirm",
-
-      handInstanceId:
-        handCard.instanceId,
-    });
+    setPendingConflict(null);
+    const card = getGameCard(handCard.cardId);
+    const kind: PendingPlay["kind"] = isUnitCard(card) ? "deploy"
+      : card.cardType === "artifact" ? "artifact"
+      : card.id === "word-in-the-right-ear" ? "word-in-right-ear"
+      : card.id === "brothers-tilt" ? "brothers-tilt"
+      : card.id === "trial-by-combat" ? "trial-by-combat" : "confirm";
+    setPendingPlay({ kind, handInstanceId: handCard.instanceId });
   }
 
   function confirmSelectedOnBoard(x?: number, y?: number) {
@@ -2981,6 +2874,9 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     if (!pendingPlay) {
       return;
     }
+
+    const feedback = getCardPlayFeedback(currentGame, activePlayerId, pendingPlay.handInstanceId);
+    if (feedback.reason) { setPendingPlay(null); setError(feedback.reason); return; }
 
     switch (pendingPlay.kind) {
       case "deploy":
@@ -3491,128 +3387,22 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
    * still has at least one legal card play,
    * Military Conflict or Political Conflict.
    */
-  function canPlayHandCard(
-    handCard: HandCardState
-  ): boolean {
-    const card =
-      getGameCard(
-        handCard.cardId
-      );
+  const playFeedbackCache = new Map<string, ReturnType<typeof getCardPlayFeedback>>();
+  function cardFeedback(handInstanceId: string) {
+    let feedback = playFeedbackCache.get(handInstanceId);
+    if (!feedback) { feedback = getCardPlayFeedback(currentGame, activePlayerId, handInstanceId); playFeedbackCache.set(handInstanceId, feedback); }
+    return feedback;
+  }
 
-    const cost =
-      getEffectiveCost(
-        currentGame,
-        activePlayerId,
-        handCard
-      );
+  function canPlayHandCard(handCard: HandCardState): boolean {
+    return !cardFeedback(handCard.instanceId).reason;
+  }
 
-    if (
-      cost >
-      activePlayer.command
-    ) {
-      return false;
-    }
-
-    const uniqueAlreadyInPlay =
-      card.traits.includes(
-        "unique"
-      ) &&
-      (
-        activePlayer.board.some(
-          (unit) =>
-            unit.cardId ===
-            card.id
-        ) ||
-        activePlayer.board.some(
-          (unit) =>
-            unit.attachedArtifactId ===
-            card.id
-        )
-      );
-
-    if (
-      uniqueAlreadyInPlay
-    ) {
-      return false;
-    }
-
-    if (
-      isUnitCard(card)
-    ) {
-      if (
-        activePlayer.board.length >=
-        BOARD_LIMIT
-      ) {
-        return false;
-      }
-
-      if (
-        card.cardType ===
-        "dragon"
-      ) {
-        const dragons =
-          activePlayer.board.filter(
-            (unit) =>
-              getGameCard(
-                unit.cardId
-              ).cardType ===
-              "dragon"
-          ).length;
-
-        if (
-          dragons >=
-          DRAGON_BOARD_LIMIT
-        ) {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    if (
-      card.cardType ===
-      "artifact"
-    ) {
-      return allCharacters.some(
-        (unit) =>
-          !unit.attachedArtifactId
-      );
-    }
-
-    if (
-      card.id ===
-      "word-in-the-right-ear"
-    ) {
-      return (
-        allCharacters.length >
-        0
-      );
-    }
-
-    if (
-      card.id ===
-      "trial-by-combat"
-    ) {
-      return (
-        alliedCharacters.length >
-          0 &&
-        enemyCharacters.length >
-          0
-      );
-    }
-
-    if (
-      card.id ===
-      "brothers-tilt"
-    ) {
-      return (
-        allCharacters.length >
-        0
-      );
-    }
-
-    return true;
+  function legalPlayTarget(handInstanceId: string, unit: UnitState, firstTarget?: string): boolean {
+    return cardFeedback(handInstanceId).targets.some(target => {
+      const ids = [target.targetInstanceId, target.secondaryTargetInstanceId];
+      return ids.includes(unit.instanceId) && (!firstTarget || (unit.instanceId !== firstTarget && ids.includes(firstTarget)));
+    });
   }
 
   function playerHasLegalAction(): boolean {
@@ -3746,69 +3536,8 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     }
 
     if (pendingPlay) {
-      switch (
-        pendingPlay.kind
-      ) {
-        case "artifact":
-          return (
-            getGameCard(
-              unit.cardId
-            ).cardType ===
-              "character" &&
-            !unit.attachedArtifactId
-          );
-
-        case "word-in-right-ear":
-          return (
-            getGameCard(
-              unit.cardId
-            ).cardType ===
-            "character"
-          );
-
-        case "brothers-tilt":
-          return (
-            getGameCard(
-              unit.cardId
-            ).cardType ===
-              "character"
-          );
-
-        case "trial-by-combat": {
-          if (
-            getGameCard(
-              unit.cardId
-            ).cardType !==
-              "character"
-          ) {
-            return false;
-          }
-
-          if (
-            !pendingPlay
-              .firstTargetInstanceId
-          ) {
-            return true;
-          }
-
-          const firstTarget =
-            allUnits.find(
-              (candidate) =>
-                candidate.instanceId ===
-                pendingPlay.firstTargetInstanceId
-            );
-
-          return Boolean(
-            firstTarget &&
-            unit.ownerId !==
-              firstTarget.ownerId
-          );
-        }
-
-        case "deploy":
-        case "confirm":
-          return false;
-      }
+      if (pendingPlay.kind === "deploy" || pendingPlay.kind === "confirm") return false;
+      return legalPlayTarget(pendingPlay.handInstanceId, unit, pendingPlay.kind === "trial-by-combat" ? pendingPlay.firstTargetInstanceId : undefined);
     }
 
     if (
@@ -3964,64 +3693,8 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         handCard.cardId
       );
 
-    const targetCard =
-      getGameCard(
-        unit.cardId
-      );
-
-    if (
-      canDropHandCardOnBoard(
-        handCard
-      )
-    ) {
-      return (
-        unit.ownerId ===
-        currentGame.activePlayerId
-      );
-    }
-
-    if (
-      card.cardType ===
-      "artifact"
-    ) {
-      return (
-        targetCard.cardType ===
-          "character" &&
-        !unit.attachedArtifactId
-      );
-    }
-
-    if (
-      card.id ===
-      "word-in-the-right-ear"
-    ) {
-      return (
-        targetCard.cardType ===
-        "character"
-      );
-    }
-
-    if (
-      card.id ===
-        "brothers-tilt"
-    ) {
-      return (
-        targetCard.cardType ===
-        "character"
-      );
-    }
-
-    if (
-      card.id ===
-        "trial-by-combat"
-    ) {
-      return (
-        targetCard.cardType ===
-          "character"
-      );
-    }
-
-    return false;
+    if (canDropHandCardOnBoard(handCard)) return unit.ownerId === currentGame.activePlayerId;
+    return legalPlayTarget(handCard.instanceId, unit);
   }
 
   function getDraggedHandCard():
@@ -5067,8 +4740,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     if (
       event.button !== 0 ||
       currentGame.pendingEffect ||
-      pendingConflict ||
-      !canPlayHandCard(handCard)
+      pendingConflict
     ) {
       return;
     }
@@ -5120,6 +4792,14 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         return;
       }
 
+      const feedback = getCardPlayFeedback(currentGame, activePlayerId, handCard.instanceId);
+      if (feedback.reason) {
+        suppressHandClickRef.current = true;
+        pointerDragRef.current = null;
+        setPendingPlay(null);
+        setError(feedback.reason);
+        return;
+      }
       session.dragging = true;
       suppressHandClickRef.current =
         true;
@@ -5335,9 +5015,10 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     // Keep the compatibility click suppressed until a fresh pointer gesture.
   }
 
-  if (currentGame.winner && !spectator) {
-    return <><MatchResult state={currentGame} viewerId={viewPlayerId}
-      winnerName={currentGame.winner === "draw" ? "Neither claimant" : gamePlayerName(currentGame.winner, onlineMatch)}
+  if ((currentGame.winner || onlineMatch?.status === "abandoned") && !spectator) {
+    return <><MatchResult matchType={onlineMatch ? (onlineMatch.matchType ?? "ranked") : undefined} state={currentGame} viewerId={viewPlayerId} endedEarly={onlineMatch?.status === "abandoned"}
+      playerNames={{player1:gamePlayerName("player1",onlineMatch),player2:gamePlayerName("player2",onlineMatch)}}
+      winnerName={currentGame.winner && currentGame.winner !== "draw" ? gamePlayerName(currentGame.winner, onlineMatch) : "Neither claimant"}
       onPlayAgain={() => { if (onlineMatch) { exitToMenu(); setOnlinePanelOpen(true); } else startNewGame(); }} onExit={exitToMenu} />{audioControls}</>;
   }
 
@@ -5368,7 +5049,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
           >
             {mulliganHandoff
               ? "Opening Hand"
-              : `Turn ${currentGame.players[currentGame.activePlayerId].turnsTaken}`}
+              : `${gameTurnLabel(currentGame.turnNumber)} · Turn ${currentGame.players[currentGame.activePlayerId].turnsTaken}`}
           </span>
 
           <h1>
@@ -5409,6 +5090,8 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
     onlineMatch && !onlineCanAct
       ? null
       : getPrompt();
+
+  const actionStatus = tableActionStatus(currentGame,viewPlayerId,{spectator:!!spectator,sending:onlineActionPending,drawing:turnDrawPending,selection:!!(pendingPlay||pendingConflict)});
 
   const activeLocation =
     currentGame.activeLocation
@@ -5627,13 +5310,18 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       {opponentSpellReveal && (() => {
         const playedCard = getGameCard(opponentSpellReveal.cardId);
         return (
-          <aside key={opponentSpellReveal.key} className={styles.opponentSpellReveal} style={{ top: playedCardTop }} data-card-id={playedCard.id} aria-live="polite">
-            <span className={styles.opponentSpellEyebrow}>Card Played</span>
-            <div className={styles.opponentSpellCard} style={tierStyle(playedCard)} data-game-card="true">
-              <CardArtwork card={playedCard} className={styles.fullCardArtwork} />
-              <CardChrome card={playedCard} cost={playedCard.cost} detailed />
-              <CardInfoPanel card={playedCard} showTraitTooltips />
-            </div>
+          <aside key={opponentSpellReveal.key} className={`${styles.opponentSpellReveal} ${opponentSpellReveal.burned ? styles.burningCardReveal : ""}`} style={{ top: playedCardTop }} data-card-id={playedCard.id} aria-live="polite" aria-label={`${playedCard.name} ${opponentSpellReveal.burned ? "burned" : "played"}`}>
+            <BurnSurface burning={Boolean(opponentSpellReveal.burned)} onComplete={finishBurnReveal}>
+              <span className={styles.opponentSpellEyebrow}>{opponentSpellReveal.burned ? "Card Burned" : "Card Played"}</span>
+              <div className={styles.revealCardShell}>
+                <div className={`${styles.opponentSpellCard} ${styles.standaloneCard}`} style={tierStyle(playedCard)} data-game-card="true">
+                  <CardArtwork card={playedCard} className={styles.fullCardArtwork} />
+                  <CardChrome card={playedCard} cost={playedCard.cost} snapshotSafe={Boolean(opponentSpellReveal.burned)} />
+                  <CardInfoPanel card={playedCard} compact />
+                </div>
+              </div>
+            </BurnSurface>
+
           </aside>
         );
       })()}
@@ -5709,7 +5397,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         className={
           styles.locationBar
         }
-        style={{ "--location-art": `url("/images/cards/locations/${activeLocation?.id ?? "default"}.webp")` } as CSSProperties}
+        style={{ "--location-art": activeLocation ? `url("/images/cards/locations/${activeLocation.id}.webp")` : "none" } as CSSProperties}
       >
         <div>
           <span
@@ -5814,7 +5502,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         aria-label={`${gamePlayerName(viewEnemyPlayerId, onlineMatch)} command`}
       >
         <CommandMeter
-          favorState={viewEnemyPlayer.hand.some(card => card.cardId === "royal-favor") ? "available" : viewEnemyPlayer.removedFromGame.includes("royal-favor") ? "used" : undefined}
+          favorState={viewEnemyPlayer.royalFavorCommand ? "active" : viewEnemyPlayer.hand.some(card => card.cardId === "royal-favor") ? "available" : viewEnemyPlayer.removedFromGame.includes("royal-favor") ? "used" : undefined}
           command={viewEnemyPlayer.command}
           maxCommand={viewEnemyPlayer.maxCommand}
           nextCommandBonus={viewEnemyPlayer.nextCommandBonus}
@@ -5823,11 +5511,12 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       </section>
 
       <section className={styles.opponentStatusDock} aria-label="Match status">
-          <div className={styles.opponentStatusIdentity}>
-            <strong>Turn {activePlayer.turnsTaken}</strong>
-            <small>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}&apos;s turn</small>
+          <div className={styles.opponentStatusIdentity} aria-label={`${gameTurnLabel(currentGame.turnNumber)}. ${gamePlayerName(currentGame.activePlayerId, onlineMatch)}'s Turn.`}>
+            <strong>{gameTurnLabel(currentGame.turnNumber)}</strong>
+            <small className={styles.turnOwnerLine}>{gamePlayerName(currentGame.activePlayerId, onlineMatch)}&apos;s Turn</small>
+
           </div>
-          <button type="button" className={styles.dangerButton} onClick={() => spectator ? window.location.assign("/cards/play") : setExitConfirm(true)}><span>{spectator ? "Leave Spectate" : "Exit Game"}</span></button>
+          <button type="button" className={`${styles.dangerButton} ${styles.leaveIconButton}`} data-tooltip={spectator ? "Leave spectating" : "Leave the table"} aria-label={spectator ? "Leave spectating" : "Leave the table"} onClick={() => spectator ? window.location.assign("/cards/play") : setExitConfirm(true)}><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5M14 8l4 4-4 4M8 12h10"/></svg></button>
       </section>
 
       {veiledSightOpen && (
@@ -6017,7 +5706,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
             </TableSpeaker>
           </div>
         ) : <span>✦ The Realms ✦</span>}
-        {turnNotice && (
+        {turnNotice && !showRealmsPrompt && (
           <div className={styles.turnNotice} data-notice-kind={turnNotice.key.startsWith("favor:") ? "royal-favor" : "turn"} role="status" aria-live="polite">
             <TableSpeaker key={turnNotice.key}>
               {(speaker) => <div className={styles.turnNoticeCopy}>
@@ -6334,6 +6023,8 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
       </section>
 
       <Chronicle key={viewPlayerId} state={currentGame} viewerId={viewPlayerId}
+        tableStatus={onlineMatch && <TableTempo key={onlineMatch.id} match={onlineMatch} spectator={Boolean(spectator)} />}
+        playerLabels={{ player1: gamePlayerName("player1", onlineMatch), player2: gamePlayerName("player2", onlineMatch) }}
         onInspectUnit={id => { setInspectedHandInstanceId(null); setInspectedUnitId(id); }}
         onInspectHand={id => { setInspectedUnitId(null); setInspectedHandInstanceId(id); }} />
 
@@ -6342,7 +6033,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
         aria-label="Your command and turn controls"
       >
         <CommandMeter
-          favorState={royalFavor ? "available" : viewPlayer.removedFromGame.includes("royal-favor") ? "used" : undefined}
+          favorState={viewPlayer.royalFavorCommand ? "active" : royalFavor ? "available" : viewPlayer.removedFromGame.includes("royal-favor") ? "used" : undefined}
           onUseFavor={royalFavor && onlineCanAct && currentGame.phase === "playing" && !currentGame.pendingEffect && !drawAnimationActive && !onlineBusy ? () => dispatch({ type: "play-card", handInstanceId: royalFavor.instanceId }) : undefined}
           command={viewPlayer.command}
           maxCommand={viewPlayer.maxCommand}
@@ -6366,6 +6057,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
             .filter(Boolean)
             .join(" ")}
           disabled={playerEndTurnDisabled}
+          title={playerEndTurnDisabled ? actionStatus.reason : "End your ruler turn"}
           onClick={endTurn}
           data-game-hint={
             !onlineCanAct
@@ -6457,11 +6149,7 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
           status={{
             activePlayerName: gamePlayerName(currentGame.activePlayerId, onlineMatch),
             turnNumber: activePlayer.turnsTaken,
-            statusText: spectator ? `${gamePlayerName(activePlayerId, onlineMatch)} is playing` : onlineActionPending
-              ? "Sending move…"
-              : onlineCanAct
-                ? "Your turn"
-                : `${onlineOpponentName(onlineMatch)} is playing`,
+            statusText: `${gameTurnLabel(currentGame.turnNumber)} · ${gamePlayerName(currentGame.activePlayerId, onlineMatch)}'s Turn`,
             canAct: onlineCanAct,
             onExit: () => spectator ? window.location.assign("/cards/play") : setExitConfirm(true),
           }}
@@ -6470,13 +6158,16 @@ export default function GreatGameTable({ spectator }: { spectator?: import("@/li
 
       {exitConfirm && !isMulligan && (
         <ConfirmOverlay
-          title={onlineMatch ? "Leave Match?" : "Exit Game?"}
-          text={
-            onlineMatch
-              ? "Leaving an active online match closes the table for both players."
-              : "The current local game will be lost."
-          }
-          confirmLabel={onlineMatch ? "Leave Match" : "Exit Game"}
+          title="Leave the table?"
+          text={visibleSupporter === "mara"
+            ? (onlineMatch
+              ? "Leaving already? This table closes for both of you, and the result stands. Say the word and I'll clear your seat."
+              : "Walk away now and this table is gone for good. If you're done, I'll clear it.")
+            : (onlineMatch
+              ? "Your Grace, an early departure closes the table for both rulers, and the result will stand. Shall I have your cards collected?"
+              : "If Your Grace leaves now, this unfinished table cannot be restored. Shall I put the cards away?" )}
+          confirmLabel="Leave"
+          speaker={visibleSupporter === "mara" ? "Mara" : "Aldren"}
           onCancel={() =>
             setExitConfirm(
               false
@@ -6834,9 +6525,10 @@ function MulliganScreen({
 
       {exitConfirm && (
         <ConfirmOverlay
-          title="Exit Game?"
-          text="Return to the main menu?"
-          confirmLabel="Exit Game"
+          title="Leave the table?"
+          text="One more hand, or shall I put the cards away? This opening game will be lost."
+          confirmLabel="Leave"
+          speaker="Aldren"
           onCancel={
             onCancelExit
           }
@@ -7190,7 +6882,7 @@ function CommandMeter({
   favorState,
   onUseFavor,
 }: {
-  favorState?: "available" | "used";
+  favorState?: "available" | "active" | "used";
   onUseFavor?: () => void;
   command: number;
   maxCommand: number;
@@ -7198,14 +6890,9 @@ function CommandMeter({
   previewCost?: number | null;
   compact?: boolean;
 }) {
-  const slotCount =
-    Math.min(
-      10,
-      Math.max(
-        command,
-        maxCommand
-      )
-    );
+  const normalCommand = command - (favorState === "active" ? 1 : 0);
+  const slotCount = Math.max(normalCommand, maxCommand);
+  const normalPreviewCost = previewCost ? Math.max(0, previewCost - (favorState === "active" ? 1 : 0)) : 0;
 
   return (
     <div
@@ -7223,9 +6910,9 @@ function CommandMeter({
         }
       >
         {favorState && <button type="button" className={styles.royalFavorButton}
-          disabled={favorState === "used" || !onUseFavor} onClick={onUseFavor}
-          aria-label={favorState === "used" ? "Royal Favor used" : "Use Royal Favor"}
-          aria-description={favorState === "used" ? "Royal Favor has been spent" : "Gain 1 Command this turn"}>
+          disabled={favorState !== "available" || !onUseFavor} onClick={onUseFavor}
+          aria-label={favorState === "active" ? "Royal Favor Command available" : favorState === "used" ? "Royal Favor used" : "Use Royal Favor"}
+          aria-description={favorState === "active" ? "1 bonus Command available until spent this turn" : favorState === "used" ? "Royal Favor has been spent" : "Gain 1 Command this turn"}>
           <CommandSigil />
         </button>}
         <span>Command</span>
@@ -7245,27 +6932,25 @@ function CommandMeter({
         className={
           styles.commandPips
         }
-        aria-label={`${command} Command available`}
+        style={{ "--command-slot-count": Math.max(10, slotCount) } as CSSProperties}
+        aria-label={`${normalCommand} regular Command available`}
       >
         {Array.from({
           length: slotCount,
         }).map((_, index) => {
           const available =
-            index < command;
-
-          const bonus =
-            index >= maxCommand;
+            index < normalCommand;
 
           const previewSpend =
             Boolean(
-              previewCost &&
-                previewCost > 0 &&
+              normalPreviewCost > 0 &&
+                previewCost &&
                 previewCost <= command &&
                 available &&
                 index >=
-                  command -
-                    previewCost &&
-                index < command
+                  normalCommand -
+                    normalPreviewCost &&
+                index < normalCommand
             );
 
           return (
@@ -7276,16 +6961,13 @@ function CommandMeter({
                 available
                   ? styles.commandPipLit
                   : styles.commandPipSpent,
-                bonus
-                  ? styles.commandPipBonus
-                  : "",
                 previewSpend
                   ? styles.commandPipPreviewSpend
                   : "",
               ]
                 .filter(Boolean)
                 .join(" ")}
-              aria-label={available ? bonus ? "Bonus Command available" : "Command available" : "Command spent"}
+              aria-label={available ? "Command available" : "Command spent"}
             >
               <CommandSigil />
             </span>
@@ -7984,6 +7666,7 @@ function BoardUnit({
       style={
         tierStyle(card)
       }
+      data-valid-target={targetable || undefined}
       data-unit-instance-id={
         unit.instanceId
       }
@@ -8427,6 +8110,8 @@ function HandCard({
       handCard
     );
 
+  const playReason = useMemo(() => inspectOnly ? null : getCardPlayFeedback(state, playerId, handCard.instanceId).reason, [state, playerId, handCard.instanceId, inspectOnly]);
+
   const affordable =
     state.players[
       playerId
@@ -8463,6 +8148,9 @@ function HandCard({
       onPointerCancel={(event) => { clearHold(); if (!inspectOnly) onPointerCancel(event); }}
     >
     <button
+      title="View card details"
+      aria-label={`View ${card.name} details`}
+      data-play-blocked={Boolean(playReason)}
       data-game-card="true"
       className={[
         styles.handCard,
@@ -8957,12 +8645,14 @@ function ConfirmOverlay({
   title,
   text,
   confirmLabel,
+  speaker = "Aldren",
   onCancel,
   onConfirm,
 }: {
   title: string;
   text: string;
   confirmLabel: string;
+  speaker?: "Mara" | "Aldren";
   onCancel: () => void;
   onConfirm: () => void;
 }) {
@@ -8984,6 +8674,7 @@ function ConfirmOverlay({
         <p>
           {text}
         </p>
+        <small className={styles.confirmSpeaker}>— {speaker}</small>
 
         <div
           className={
@@ -8998,7 +8689,7 @@ function ConfirmOverlay({
               onCancel
             }
           >
-            Cancel
+            Stay
           </button>
 
           <button

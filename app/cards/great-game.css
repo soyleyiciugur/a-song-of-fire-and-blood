@@ -93,3 +93,16 @@
 .greatGameNavMenu {
   margin-bottom: 2.15rem;
 }
+
+/* One shared page frame keeps every hub destination on the same baseline. */
+.great-game-shell .great-game-page{box-sizing:border-box;padding-top:calc(var(--site-nav-height,0px) + 16px);padding-inline:clamp(14px,2.8vw,50px);margin-top:calc(-1 * var(--site-nav-height,0px))}
+.great-game-shell .great-game-page[data-great-game-viewport]{margin-top:0}
+.great-game-shell .great-game-page > [data-great-game-nav-frame]{position:relative;top:auto;transform:none;margin:0;transition:none}
+.great-game-shell .great-game-page [data-great-game-heading]{box-sizing:border-box;width:100%;max-width:none;min-width:0;margin:0;padding:25px 2px 20px;align-items:flex-start;text-shadow:0 2px 16px #000}
+.great-game-shell .great-game-page [data-great-game-heading] > span:first-child,
+.great-game-shell .great-game-page [data-great-game-heading] > div > span:first-child{display:block;color:#c5a478;font:700 9px/12px var(--font-hotd),Georgia,serif;letter-spacing:.18em;text-transform:uppercase}
+.great-game-shell .great-game-page [data-great-game-heading] h1{margin:6px 0 0;color:#f1ddbb;font:400 clamp(32px,4vw,54px)/1.05 var(--font-hotd),Georgia,serif;letter-spacing:normal}
+.great-game-shell .great-game-page [data-great-game-heading] p{font-family:var(--font-body),Georgia,serif}
+.great-game-shell .great-game-page [data-great-game-play-content]{padding-top:25px}
+.great-game-shell .great-game-page [data-great-game-play-content] [data-great-game-heading]{padding:0 2px 20px}
+@media(max-width:760px){.great-game-shell .great-game-page{padding-inline:14px}.great-game-shell .great-game-page [data-great-game-heading]{padding-top:22px}.great-game-shell .great-game-page [data-great-game-play-content]{padding-top:22px}}

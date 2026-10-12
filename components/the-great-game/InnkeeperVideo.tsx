@@ -457,7 +457,7 @@ export default function InnkeeperVideo({
 
   useEffect(() => {
     const actionPool: InnkeeperClip[] = supporter === "aldren"
-      ? ["ale", "salt", "coin1", "coin2"]
+      ? ["ale", "coin1", "coin2"]
       : ["tankard", "ale"];
 
     // Shuffle once, then move each played clip to the back. This keeps the
@@ -509,7 +509,7 @@ export default function InnkeeperVideo({
 
     const onExternalAction = (event: Event) => {
       const detail = (event as CustomEvent<{ clip?: string }>).detail;
-      if (detail?.clip !== "salt" || supporter === "aldren") return;
+      if (detail?.clip !== "salt") return;
       pendingExternalClipRef.current = "salt";
       tryExternalClip();
     };

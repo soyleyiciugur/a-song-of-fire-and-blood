@@ -18,7 +18,7 @@ type SocialReaction = {
 type PublicProfile = Pick<Profile, "id" | "username" | "display_name" | "avatar_url">;
 type SocialHistoryRow = Pick<GreatGameHistoryRow,
   "match_id" | "user_id" | "opponent_id" | "opponent_username" | "opponent_display_name" | "opponent_avatar_url" |
-  "result" | "duration_seconds" | "turns" | "completed_at" | "standing_after" | "opponent_standing_after"
+  "match_type" | "result" | "duration_seconds" | "turns" | "completed_at" | "standing_after" | "opponent_standing_after"
 >;
 
 type SocialPerson = {
@@ -62,7 +62,7 @@ export async function GET() {
 
   const historyWithStanding = await supabase
     .from("great_game_match_history")
-    .select("match_id,user_id,opponent_id,opponent_username,opponent_display_name,opponent_avatar_url,result,duration_seconds,turns,completed_at,standing_after,opponent_standing_after")
+    .select("match_type,match_id,user_id,opponent_id,opponent_username,opponent_display_name,opponent_avatar_url,result,duration_seconds,turns,completed_at,standing_after,opponent_standing_after")
     .order("completed_at", { ascending: false })
     .limit(240);
 
@@ -157,6 +157,7 @@ export async function GET() {
       const streak = streakAtResult.get(`${canonical.match_id}:${canonical.user_id}`) ?? { streak: 0, versus: 0 };
       return {
         matchId: canonical.match_id,
+        matchType: canonical.match_type,
         completedAt: canonical.completed_at,
         result: canonical.result === "draw" ? "draw" as const : "win" as const,
         actor: personFromRow(canonical, profiles, "user"),
