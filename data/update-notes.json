@@ -2,7 +2,7 @@
   {
     "date": "2026-10-12",
     "items": [
-      "Preserved existing API addresses while consolidating server endpoints for Hobby-plan deployments.",
+      "Preserved existing API addresses while consolidating server endpoints and selecting Vercel's grouped-function build pipeline for Hobby-plan deployments.",
       "Added selective institutional, Aldren and Mara replies to four recent Tavern discussions, with Mara managing the Cupbearer account in Aldren's courtly house style.",
       "Added verified fictional Iron Bank, King?s Landing harbour, Faith and Lannisport coin-exchange accounts with distinct community voices.",
       "Added a verified Cupbearer institution account and separate Aldren and Mara character accounts with distinct tavern voices.",

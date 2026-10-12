@@ -1,3 +1,8 @@
 {
+  "build": {
+    "env": {
+      "NEXT_ENABLE_ADAPTER": "0"
+    }
+  },
   "crons": [{ "path": "/api/app-shell/publish", "schedule": "0 6 * * *" }]
 }
